@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bjhaw4bt71kn6"]
+
+[ext_resource type="Script" uid="uid://chfbvpp3ag770" path="res://commons/maps/catalog/VoxelBuilderDesktop3D.gd" id="1"]
+
+[node name="VoxelBuilderDesktop3D" type="Node3D" unique_id=570093766]
+script = ExtResource("1")

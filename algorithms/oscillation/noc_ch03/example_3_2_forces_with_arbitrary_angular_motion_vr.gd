@@ -19,6 +19,7 @@
 
 class_name ArbitraryAngularMotionVR
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_ATTRACTOR := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_accent.tres")
@@ -37,6 +38,7 @@ var _controller_root: Node3D
 func _ready() -> void:
 	_setup_environment()
 	_spawn_scene()
+	call_deferred("_apply_standard_presentation")
 	set_process(true)
 
 func _setup_environment() -> void:
@@ -84,7 +86,7 @@ func _spawn_scene() -> void:
 	_attractor = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.06
-	sphere.height = 0.12
+	sphere.height = sphere.radius * 2.0
 	_attractor.mesh = sphere
 	_attractor.material_override = MAT_ATTRACTOR
 	_attractor.position = Vector3(0, 0.5, 0)
@@ -117,6 +119,11 @@ func _process(delta: float) -> void:
 		mover.wrap_bounds()
 
 	_status_label.text = "Angular + Forces | %d movers" % _movers.size()
+
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
 
 func _exit_tree() -> void:
 	for m in _movers:

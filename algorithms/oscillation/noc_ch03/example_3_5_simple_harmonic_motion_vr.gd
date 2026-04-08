@@ -13,6 +13,7 @@
 # ===========================================================================
 
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
 const SLIDER_HORIZONTAL := preload("res://commons/interactables/slider_horizontal.tscn")
 const PUSH_BUTTON := preload("res://commons/interactables/push_button.tscn")
@@ -74,6 +75,7 @@ func _ready() -> void:
 	_setup_labels()
 	_setup_vr_controls()
 	_reset_oscillators()
+	call_deferred("_apply_standard_presentation")
 	set_process(true)
 
 
@@ -105,7 +107,7 @@ func _setup_scene() -> void:
 	_bob_a = MeshInstance3D.new()
 	var sphere_a := SphereMesh.new()
 	sphere_a.radius = 0.04
-	sphere_a.height = 0.08
+	sphere_a.height = sphere_a.radius * 2.0
 	_bob_a.mesh = sphere_a
 	_bob_a.material_override = _mat_bob_a
 	_sim_root.add_child(_bob_a)
@@ -114,7 +116,7 @@ func _setup_scene() -> void:
 	_bob_b = MeshInstance3D.new()
 	var sphere_b := SphereMesh.new()
 	sphere_b.radius = 0.035
-	sphere_b.height = 0.07
+	sphere_b.height = sphere_b.radius * 2.0
 	_bob_b.mesh = sphere_b
 	_bob_b.material_override = _mat_bob_b
 	_sim_root.add_child(_bob_b)
@@ -483,6 +485,11 @@ func _update_labels_text() -> void:
 	_energy_label.text = "KE %.3f  PE %.3f" % [ke, pe]
 
 
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
+
 func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
@@ -510,3 +517,5 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		show_coupled = bool(config_data["show_coupled"])
 
 	_reset_oscillators()
+
+

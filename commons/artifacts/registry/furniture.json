@@ -110,6 +110,11 @@
 				"environment",
 				"music"
 			],
+			"footprint": [
+				2,
+				2,
+				1
+			],
 			"include_in_map_data": true,
 			"lookup_name": "audio_catalog_tablet",
 			"map_ready": true,
@@ -119,14 +124,15 @@
 			"name": "Audio Catalog Tablet",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					1.0
+					2,
+					2,
+					1
 				],
-				"size_group": "compact"
+				"size_group": "standard"
 			},
 			"scene": "res://commons/audio/catalog/AudioCatalogTablet3D.tscn",
 			"sequence": "wavefunctions",
+			"size_group": "standard",
 			"tags": [
 				"audio",
 				"sound",
@@ -134,6 +140,7 @@
 			]
 		},
 		"balance_puzzle": {
+			"capacity": "JUDGE which translations and rotations preserve stability in a stacked structure.",
 			"category": "puzzles",
 			"complexity": "intermediate",
 			"description": "Stack pieces until the system stops moving. Each drop translates and reorients a block, but the goal is not motion for its own sake: it is finding a configuration whose center of mass and support relations hold long enough to trigger the creature reward. The puzzle turns balance into a lived lesson about which transformations preserve stability and which topple it. It frames transformation as a negotiation with gravity.",
@@ -141,15 +148,30 @@
 				"decoration",
 				"environment"
 			],
+			"gamwell_reference": "",
 			"include_in_map_data": true,
+			"interactions": [
+				"grab and drop pieces into a taller stack",
+				"raise the structure past the height threshold",
+				"hold the arrangement stable until the timer completes",
+				"watch the reward creature emerge from a successful configuration"
+			],
 			"lookup_name": "balance_puzzle",
 			"map_ready": true,
 			"map_sequences": [
 				"transformation"
 			],
 			"name": "Balance Puzzle",
+			"qfep_connection": "Transformation changes S while stability acts as the invariant. The stack only counts as coherent when many local moves preserve a global equilibrium.",
 			"scene": "res://commons/primitives/balance/balance_puzzle.tscn",
 			"sequence": "transformation",
+			"signals": [
+				"height_changed",
+				"stability_progress",
+				"transformation_complete",
+				"transformation_started",
+				"walker_created"
+			],
 			"tags": [
 				"transformation",
 				"balance",
@@ -158,22 +180,6 @@
 				"stability",
 				"physics",
 				"puzzles"
-			],
-			"qfep_connection": "Transformation changes S while stability acts as the invariant. The stack only counts as coherent when many local moves preserve a global equilibrium.",
-			"gamwell_reference": "",
-			"capacity": "JUDGE which translations and rotations preserve stability in a stacked structure.",
-			"interactions": [
-				"grab and drop pieces into a taller stack",
-				"raise the structure past the height threshold",
-				"hold the arrangement stable until the timer completes",
-				"watch the reward creature emerge from a successful configuration"
-			],
-			"signals": [
-				"height_changed",
-				"stability_progress",
-				"transformation_complete",
-				"transformation_started",
-				"walker_created"
 			]
 		},
 		"biederman_relief": {
@@ -195,6 +201,7 @@
 			]
 		},
 		"chair_assembly_puzzle": {
+			"capacity": "ASSEMBLE furniture by combining translation, rotation, and scale on repeated cube primitives.",
 			"category": "puzzles",
 			"complexity": "beginner",
 			"description": "Assemble furniture by moving, rotating, and scaling cube-based parts into ghost guides. The puzzle shows that a chair is not a special primitive but a relationship between transformed rectangles. Snapping and growth feedback make the composition legible as soon as the pieces align. It turns affine transformation into constructive form.",
@@ -202,7 +209,14 @@
 				"decoration",
 				"environment"
 			],
+			"gamwell_reference": "",
 			"include_in_map_data": true,
+			"interactions": [
+				"grab and scale pieces into place",
+				"snap parts onto holographic ghost guides",
+				"switch furniture_type to compare chair, stool, table, or shelf targets",
+				"complete the assembly to trigger the growth animation"
+			],
 			"lookup_name": "chair_assembly_puzzle",
 			"map_ready": true,
 			"map_sequences": [
@@ -210,8 +224,13 @@
 				"transformation"
 			],
 			"name": "Chair Assembly Puzzle",
+			"qfep_connection": "Transformation modifies S while the cube remains the invariant unit. Furniture appears when repeated primitives preserve coherence under translation, rotation, and scale.",
 			"scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn",
 			"sequence": "transformation",
+			"signals": [
+				"furniture_assembled",
+				"furniture_grown"
+			],
 			"tags": [
 				"transformation",
 				"assembly",
@@ -220,19 +239,6 @@
 				"rotation",
 				"furniture",
 				"puzzles"
-			],
-			"qfep_connection": "Transformation modifies S while the cube remains the invariant unit. Furniture appears when repeated primitives preserve coherence under translation, rotation, and scale.",
-			"gamwell_reference": "",
-			"capacity": "ASSEMBLE furniture by combining translation, rotation, and scale on repeated cube primitives.",
-			"interactions": [
-				"grab and scale pieces into place",
-				"snap parts onto holographic ghost guides",
-				"switch furniture_type to compare chair, stool, table, or shelf targets",
-				"complete the assembly to trigger the growth animation"
-			],
-			"signals": [
-				"furniture_assembled",
-				"furniture_grown"
 			]
 		},
 		"configurable_portal": {
@@ -244,9 +250,9 @@
 				"environment"
 			],
 			"footprint": [
-				2,
-				3,
-				1
+				2.0,
+				3.0,
+				1.0
 			],
 			"include_in_map_data": true,
 			"lookup_name": "configurable_portal",
@@ -268,9 +274,9 @@
 				"dest_z": "float - destination Z in current map",
 				"energy": "float - glow energy",
 				"footprint": [
-					2,
-					3,
-					1
+					2.0,
+					3.0,
+					1.0
 				],
 				"frame": "bool - show frame (default true)",
 				"height": "float - portal height (default 2.5)",

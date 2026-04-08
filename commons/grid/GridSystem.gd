@@ -565,6 +565,12 @@ func _on_spawn_complete(spawn_position: Vector3):
 	# Start ambient audio after everything is set up
 	call_deferred("_handle_audio_start")
 
+	# Generate biome ring around grid (natural landscape surrounding the map)
+	call_deferred("_handle_biome_ring")
+
+	# Notify NatureRenderer of per-map environment overrides
+	call_deferred("_notify_nature_renderer")
+
 	generation_in_progress = false
 	print("GridSystem: ✅ Grid generation completed successfully")
 	emit_signal("map_generation_complete")
@@ -617,6 +623,59 @@ func _handle_ecosystem_spawn():
 func _handle_audio_start():
 	print("GridSystem: Starting ambient audio...")
 	audio_component.start_ambient()
+
+
+# ═══════════════════════════════════════════════════════════════
+# BIO SYSTEMS — Biome ring + NatureRenderer wiring
+# ═══════════════════════════════════════════════════════════════
+
+## Generate a biome ring around the grid if vegetation density > 0.
+func _handle_biome_ring():
+	var eco = get_node_or_null("/root/EcosystemManager")
+	if not eco:
+		return
+	if not eco.has_method("get_vegetation_density"):
+		return
+
+	var density: float = eco.get_vegetation_density()
+	if density < 0.05:
+		return  # No ring for barren maps
+
+	# Remove old ring if reloading
+	var old_ring = get_node_or_null("BiomeRing")
+	if old_ring:
+		old_ring.queue_free()
+
+	var ring := BiomeRingComponent.new()
+	ring.name = "BiomeRing"
+	add_child(ring)
+	ring.generate(
+		data_component.get_grid_dimensions(),
+		cube_size,
+		eco.get_terrain_mode() if eco.has_method("get_terrain_mode") else "flat",
+		eco.get_allowed_kingdoms() if eco.has_method("get_allowed_kingdoms") else [],
+		density
+	)
+	print("GridSystem: 🌿 Biome ring generated (density=%.2f)" % density)
+
+
+## Notify NatureRenderer of per-map environment overrides + trigger living ground.
+func _notify_nature_renderer():
+	var nr = get_node_or_null("/root/NatureRenderer")
+	if not nr:
+		return
+
+	# Load per-map overrides from map_data.json "environment" block
+	if nr.has_method("load_map_overrides"):
+		var overrides: Dictionary = data_component.get_environment_overrides()
+		nr.load_map_overrides(overrides)
+		if not overrides.is_empty():
+			print("GridSystem: 🌍 Loaded %d environment overrides" % overrides.size())
+
+	# Trigger living ground activation check
+	if nr.has_method("apply_grid_config"):
+		nr.apply_grid_config({})
+
 
 # Audio component signal handlers
 func _on_audio_initialized():

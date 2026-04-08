@@ -113,8 +113,8 @@ func _setup_curve_display() -> void:
 		for i in 32:
 			var t := float(i) / 31.0
 			var size_val := _size_curve(t, pi)
-			var x := profile["offset"].x + (t - 0.5) * 2.0
-			var y := 5.0 + size_val * 1.5
+			var x: float = profile["offset"].x + (t - 0.5) * 2.0
+			var y: float = 5.0 + size_val * 1.5
 			line.surface_add_vertex(Vector3(x, y, -1.0))
 		line.surface_end()
 		add_child(inst)

@@ -8,6 +8,7 @@
 # ===========================================================================
 
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_MOVER := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
@@ -24,6 +25,7 @@ var _controller_root: Node3D
 func _ready() -> void:
 	_setup_environment()
 	_spawn_scene()
+	call_deferred("_apply_standard_presentation")
 	set_process(true)
 
 func _setup_environment() -> void:
@@ -62,7 +64,7 @@ func _spawn_scene() -> void:
 	_target = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.05
-	sphere.height = 0.1
+	sphere.height = sphere.radius * 2.0
 	_target.mesh = sphere
 	_target.material_override = MAT_TARGET
 	_target.position = Vector3(0.2, 0.6, 0)
@@ -115,7 +117,7 @@ class AccelMover:
 		body = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = 0.04
-		sphere.height = 0.08
+		sphere.height = sphere.radius * 2.0
 		body.mesh = sphere
 		body.material_override = mat
 		root.add_child(body)
@@ -148,6 +150,11 @@ class AccelMover:
 	func queue_free() -> void:
 		if is_instance_valid(root):
 			root.queue_free()
+
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
 
 func _exit_tree() -> void:
 	for child in get_children():

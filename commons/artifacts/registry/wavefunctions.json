@@ -1,1850 +1,1293 @@
 {
 	"artifacts": {
-		"WavePaintings": {
-			"name": "Wave Paintings",
-			"lookup_name": "WavePaintings",
-			"description": "Three pendulum-painting stations—grab the bob to swing it, watch oscillation become visible trace. Each pendulum paints on a wet canvas below, translating harmonic motion into color trails. The physics of swinging becomes the brush; chaos becomes art.",
-			"qfep_connection": "Oscillation as the fundamental pattern of non-rest — perpetual movement between poles. The simplest E(S) that isn't random: structured, predictable, yet never still. Painting makes the wave's F-structure visible as trace.",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/WavePaintings.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "advanced",
-			"tags": [
-				"2d",
-				"animation",
-				"chaos",
-				"color",
-				"interactive",
-				"visualization",
-				"vr",
-				"wave"
-			],
-			"dev_themes": [
-				"art",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"foucault_pendulum": {
-			"name": "Foucault Pendulum",
-			"lookup_name": "foucault_pendulum",
-			"description": "A brass pendulum swings from high above, drawing rosette patterns on a cream canvas below. The swing plane slowly precesses—Foucault's elegant proof that Earth rotates beneath us. Dark ink traces accumulate into intricate spirograph-like figures over time.",
-			"qfep_connection": "The pendulum maintains its F (swing plane) while the frame rotates beneath it. Inertia as F-preservation — the system resists external perturbation, holding its internal model constant against a changing reference frame.",
-			"scene": "res://commons/artifacts/foucault_pendulum/foucault_pendulum.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					6,
-					8,
-					6
-				],
-				"size_group": "environment"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"2d",
-				"math",
-				"pendulum",
-				"visualization",
-				"wave"
-			],
-			"dev_themes": [
-				"art",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"VitruvianMan": {
-			"name": "Vitruvian Man",
-			"lookup_name": "VitruvianMan",
-			"description": "Da Vinci's proportional man reinterpreted—the human body inscribed in circle and square, demonstrating that anatomy is geometry, that limbs sweep arcs, that the body itself is a measurement system oscillating between ideal forms.",
-			"scene": "res://algorithms/wavefunctions/vitruvian_man/VitruvianMan.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					3,
-					1,
-					5
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"simulation",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"SoundBoxLong": {
-			"name": "Sound Box (Long)",
-			"lookup_name": "SoundBoxLong",
-			"description": "Extended resonant chamber—a longer tube means lower fundamental frequency. This is why cellos are larger than violins: wavelength determines pitch, and pitch determines the physical size of instruments.",
-			"scene": "res://algorithms/wavefunctions/sound_box/SoundBoxLong.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"sound",
-				"waves"
-			],
-			"dev_themes": [
-				"biology",
-				"music",
-				"oscillation",
-				"physics"
-			]
-		},
-		"SoundBoxShort": {
-			"name": "Sound Box (Short)",
-			"lookup_name": "SoundBoxShort",
-			"description": "Compact resonant chamber—a shorter tube means higher fundamental frequency. The relationship between length and pitch is the physical basis of all wind and string instruments.",
-			"scene": "res://algorithms/wavefunctions/sound_box/SoundBoxShort.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"linear_algebra",
-				"sound",
-				"string",
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"seismograph": {
-			"name": "seismograph",
-			"lookup_name": "seismograph",
-			"description": "seismograph",
-			"scene": "res://commons/lab/seismograph/seismograph.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"spectral_analyzer": {
-			"name": "Spectral Analyzer",
-			"lookup_name": "spectral_analyzer",
-			"description": "Real-time audio frequency spectrum visualization",
-			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_analyzer.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					1,
-					2,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"animation",
-				"sound",
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"spectrum_display": {
-			"name": "Frequency Spectrum Analyzer",
-			"lookup_name": "spectrum_display",
-			"description": "Displays frequency spectrum as vertical bars showing audio content from 0-8kHz",
-			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectrum_display.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"devexamples",
-				"structure"
-			],
-			"sequence": "devexamples",
-			"complexity": "beginner",
-			"tags": [
-				"sound",
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"spectral_sine_wave": {
-			"name": "Spectral Sine Wave",
-			"lookup_name": "spectral_sine_wave",
-			"description": "Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time",
-			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_sine_wave.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					1,
-					2,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"sound",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"walkable_sine_bridge": {
-			"name": "walkable_sine_bridge",
-			"lookup_name": "walkable_sine_bridge",
-			"description": "Extrudes a walkable ribbon along a sine wave, adds supports, and spawns a player on the path.",
-			"scene": "res://algorithms/wavefunctions/unit_circle/walkable_sine_bridge.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"DancingBody": {
-			"name": "Dancing Body",
-			"lookup_name": "DancingBody",
-			"description": "Kinematic waves—sine functions propagated through a skeletal hierarchy create procedural dance. The body becomes an instrument played by oscillation; movement emerges from phase lag down the bone chain.",
-			"scene": "res://algorithms/wavefunctions/dancing_body/DancingBody.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"animation",
-				"procedural",
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"OscillatingWave": {
-			"name": "Oscillating Wave",
-			"lookup_name": "OscillatingWave",
-			"description": "The fundamental wave made visible—a 3D sine wave oscillating in real-time. Adjust amplitude, frequency, and phase to feel how these parameters shape the perpetual motion between poles.",
-			"qfep_connection": "The pure sine wave is the atom of periodic E(S) — the simplest non-trivial dynamics. Amplitude, frequency, and phase are the three parameters that fully describe it: maximum F-compression of oscillatory behavior.",
-			"scene": "res://algorithms/wavefunctions/oscillating_wave/OscillatingWave.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					7,
-					8,
-					9
-				],
-				"size_group": "environment"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"3d",
-				"animation",
-				"sound",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"HarmonicBuilder": {
-			"name": "Harmonic Builder",
-			"lookup_name": "HarmonicBuilder",
-			"description": "Fourier synthesis in action—stack sine waves of different frequencies to build complex shapes. Any waveform is a sum of simple oscillations; this tool lets you construct them one harmonic at a time.",
-			"qfep_connection": "Fourier synthesis as F-construction — building complex waveforms from simple components. Each harmonic adds E(S); the sum approaches any target shape. Complexity from simplicity, order from the accumulation of periodic structures.",
-			"scene": "res://algorithms/wavefunctions/harmonic_builder/HarmonicBuilder.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					6,
-					2,
-					1
-				],
-				"size_group": "environment"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
 		"BeatFrequencies": {
-			"name": "Beat Frequencies",
-			"lookup_name": "BeatFrequencies",
-			"description": "When two waves of slightly different frequency combine, they create a pulsing envelope—the 'beat'. This is how piano tuners work, how interference patterns form, how waves negotiate difference.",
-			"qfep_connection": "Two nearly-identical F-models interfering — the beat frequency emerges from their difference. Small λ-deviation produces slow pulsing; large deviation produces rapid oscillation. Difference itself becomes a wave.",
-			"scene": "res://algorithms/wavefunctions/beat_frequencies/BeatFrequencies.tscn",
 			"category": "waves",
+			"complexity": "advanced",
+			"description": "When two waves of slightly different frequency combine, they create a pulsing envelope—the 'beat'. This is how piano tuners work, how interference patterns form, how waves negotiate difference.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
 			"include_in_map_data": true,
+			"lookup_name": "BeatFrequencies",
 			"map_ready": true,
 			"map_sequences": [],
+			"name": "Beat Frequencies",
 			"parameters": {
 				"footprint": [
-					3,
-					1,
-					1
+					3.0,
+					1.0,
+					1.0
 				],
 				"size_group": "room_scale"
 			},
-			"complexity": "advanced",
+			"qfep_connection": "Two nearly-identical F-models interfering — the beat frequency emerges from their difference. Small λ-deviation produces slow pulsing; large deviation produces rapid oscillation. Difference itself becomes a wave.",
+			"scene": "res://algorithms/wavefunctions/beat_frequencies/BeatFrequencies.tscn",
 			"tags": [
 				"sound",
 				"waves"
-			],
+			]
+		},
+		"BigPipe": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Large drain pipe system with segments. Turtle commands: f,l,r,u,d,s(s-bend). Use BigPipe#path:f,f,l,f,u,f",
 			"dev_themes": [
 				"oscillation",
+				"physics",
+				"waves"
+			],
+			"footprint": [
+				2.0,
+				1.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "BigPipe",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "BigPipe",
+			"parameters": {
+				"footprint": [
+					2.0,
+					1.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/BigPipeSystem.tscn",
+			"size_group": "compact",
+			"tags": [
+				"simulation"
+			]
+		},
+		"BigPipeSystem": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Industrial drain pipe network built from modular segments — straights, corners, T-junctions, crosses, vertical bends. Pipes as frozen flow: the physical infrastructure that channels movement. WFC-adjacent: each segment constrains its neighbors.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "BigPipeSystem",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Big Pipe System",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/BigPipeSystem.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"animation",
+				"graph",
+				"simulation",
+				"waves"
+			]
+		},
+		"BigPipe_CrossManifold": {
+			"category": "waves",
+			"complexity": "expert",
+			"description": "Central cross junction with four capped branches — distribution hub.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "BigPipe_CrossManifold",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Big Pipe: Cross Manifold",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/cross_manifold.tscn",
+			"tags": [
+				"geometry",
+				"topology",
+				"waves"
+			]
+		},
+		"BigPipe_IndustrialBranch": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Full demo of all pipe segments: S-bend, T-junction, cross, vertical up/down, end cap.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "BigPipe_IndustrialBranch",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Big Pipe: Industrial Branch",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/industrial_branch.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"BigPipe_LBend": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Right-angle corner routing with straight runs on each side.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "BigPipe_LBend",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Big Pipe: L-Bend",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/l_bend.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"BigPipe_Serpentine": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Back-and-forth pipe runs for cooling or heating pattern.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "BigPipe_Serpentine",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Big Pipe: Serpentine",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/serpentine.tscn",
+			"tags": [
+				"pattern",
+				"waves"
+			]
+		},
+		"BigPipe_StraightRun": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Capped pipeline — simple industrial backbone.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "BigPipe_StraightRun",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Big Pipe: Straight Run",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/straight_run.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"BigPipe_TDistribution": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Main line splits into two branches via T-junction.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "BigPipe_TDistribution",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Big Pipe: T-Distribution",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/t_distribution.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"BigPipe_VerticalBypass": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Main line with vertical up-and-over bypass loop.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "BigPipe_VerticalBypass",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Big Pipe: Vertical Bypass",
+			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/vertical_bypass.tscn",
+			"tags": [
+				"animation",
+				"waves"
+			]
+		},
+		"CircleSpiral": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Rotation extended through time becomes spiral—a circle that doesn't close but climbs. This is what happens when circular motion gains a third dimension: the helix, the spring, the DNA strand.",
+			"dev_themes": [
+				"biology",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "CircleSpiral",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Circle Spiral",
+			"parameters": {
+				"footprint": [
+					5.0,
+					3.0,
+					5.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/CircleSpiral.tscn",
+			"tags": [
+				"animation",
 				"physics",
 				"waves"
 			]
 		},
 		"ColoredLinesVR": {
-			"name": "ColoredLinesVR",
-			"lookup_name": "ColoredLinesVR",
+			"category": "waves",
+			"complexity": "intermediate",
 			"description": "Builds a VR hallway filled with glowing sine-wave tubes rendered from procedural meshes.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ColoredLinesVR",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "ColoredLinesVR",
 			"scene": "res://algorithms/wavefunctions/hallway_lines/ColoredLinesVR.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
 			"tags": [
 				"procedural",
 				"vr",
 				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
 			]
 		},
-		"StaticCables": {
-			"name": "StaticCables",
-			"lookup_name": "StaticCables",
-			"description": "Creates suspended cable bundles with configurable sag, wave, or spiral patterns and foggy lighting.",
-			"scene": "res://algorithms/wavefunctions/static_cables/StaticCables.tscn",
+		"DancingBody": {
 			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					1,
-					3,
-					16
-				],
-				"size_group": "world_scale"
-			},
 			"complexity": "intermediate",
-			"tags": [
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"pylon_cables": {
-			"name": "Electric Pylon Cables",
-			"lookup_name": "pylon_cables",
-			"description": "Four electric pylons with swinging cables between them. Cables sway in the wind. Final cable drops to a transformer box on the ground. Lattice tower construction with insulators.",
-			"scene": "res://algorithms/wavefunctions/line_builder_3d/pylon_cables.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "advanced",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"doublehelix": {
-			"name": "doublehelix",
-			"lookup_name": "doublehelix",
-			"description": "Procedurally models an adjustable DNA-style double helix with strands, rungs, and rebuild-on-change controls.",
-			"scene": "res://algorithms/wavefunctions/doublehelix/doublehelix.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"biology",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"dual_display_test": {
-			"name": "dual_display_test",
-			"lookup_name": "dual_display_test",
-			"description": "Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time",
-			"scene": "res://algorithms/wavefunctions/spectralanalysis/dual_display_test.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					5,
-					3,
-					5
-				],
-				"size_group": "environment"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"sound",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"fourier_transform": {
-			"name": "Fourier Transform",
-			"lookup_name": "fourier_transform",
-			"description": "Frequency domain analysis and signal processing",
-			"qfep_connection": "The Fourier transform IS a change of F-basis — decomposing a complex signal into its frequency components. Time-domain complexity becomes frequency-domain order. The ultimate F-minimization: any signal reduced to amplitudes and phases.",
-			"scene": "res://algorithms/wavefunctions/fouriertransform/fouriertransform.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"devexamples",
-				"structure"
-			],
-			"sequence": "devexamples",
-			"parameters": {
-				"footprint": [
-					17,
-					21,
-					16
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "expert",
-			"tags": [
-				"sound",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"resonance_frequencies_visualizer": {
-			"name": "Resonance Frequencies Visualizer",
-			"lookup_name": "resonance_frequencies_visualizer",
-			"description": "Every object has frequencies at which it wants to vibrate—its resonant modes. This visualizer reveals those hidden harmonics, showing how systems amplify certain frequencies while damping others. Resonance is selective listening.",
-			"qfep_connection": "Resonance as F-alignment — the system's natural modes are where external energy couples most efficiently. At resonance, minimal input produces maximal response because the drive matches the system's internal F-model.",
-			"scene": "res://algorithms/wavefunctions/resonancefrequencies/resonance_frequencies_visualizer.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "advanced",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"unit_circle": {
-			"name": "Unit Circle",
-			"lookup_name": "unit_circle",
-			"description": "Trigonometric functions visualization on unit circle",
-			"qfep_connection": "The unit circle is the F-generator for all periodic motion — sin and cos as the fundamental basis functions. Rotation on the circle maps to oscillation on the line; phase space geometry produces temporal dynamics.",
-			"scene": "res://algorithms/wavefunctions/unit_circle/unit_circle.tscn",
-			"category": "waves",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": [
-				"devexamples",
-				"structure"
-			],
-			"sequence": "devexamples",
-			"parameters": {
-				"footprint": [
-					1,
-					8,
-					6
-				],
-				"size_group": "environment"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"tech_noir_audio": {
-			"name": "Tech Noir Audio",
-			"lookup_name": "tech_noir_audio",
-			"description": "John Cage inspired algorithmic audio composition",
-			"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"sound",
-				"waves"
-			],
+			"description": "Kinematic waves—sine functions propagated through a skeletal hierarchy create procedural dance. The body becomes an instrument played by oscillation; movement emerges from phase lag down the bone chain.",
 			"dev_themes": [
 				"music",
 				"oscillation",
 				"physics",
 				"waves"
-			]
-		},
-		"liturgicalambientgen": {
-			"name": "liturgicalambientgenera",
-			"lookup_name": "liturgicalambientgen",
-			"description": "Threaded ambient generator that layers choral drones, organ swells, and cathedral effects with progress visualization.",
-			"scene": "res://algorithms/wavefunctions/liturgicalambientgenerator/liturgicalambientgenerator.tscn",
-			"category": "waves",
+			],
 			"include_in_map_data": true,
+			"lookup_name": "DancingBody",
 			"map_ready": true,
 			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					1,
-					2,
-					3
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"resonance_frequencies": {
-			"name": "Resonance Frequencies",
-			"lookup_name": "resonance_frequencies",
-			"description": "Visualization of resonant frequency patterns",
-			"scene": "res://algorithms/wavefunctions/resonancefrequencies/resonance_frequencies_visualizer_setup.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "advanced",
-			"tags": [
-				"sound",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"noir_sequencer": {
-			"name": "Noir Sequencer",
-			"lookup_name": "noir_sequencer",
-			"description": "Film noir style algorithmic music sequencer",
-			"scene": "res://algorithms/wavefunctions/noirsequencer/noir_sequencer.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"sound",
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"SphericalHarmonics": {
-			"name": "Spherical Harmonics",
-			"lookup_name": "SphericalHarmonics",
-			"description": "Waves on a sphere—the mathematical functions that describe electron orbitals, planetary magnetic fields, and 3D audio spatialization. These are the 3D cousins of sine waves, oscillating across spherical surfaces.",
-			"qfep_connection": "Spherical harmonics are the F-basis for any function on a sphere — the most compressed representation of spherical complexity. Electron orbitals, planetary fields, and audio all share these same fundamental modes of order.",
-			"scene": "res://algorithms/wavefunctions/spherical_harmonics/SphericalHarmonics.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					5,
-					6,
-					9
-				],
-				"size_group": "environment"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"3d",
-				"geometry",
-				"sound",
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"kusama_sine": {
-			"name": "Kusama Sine",
-			"lookup_name": "kusama_sine",
-			"description": "Yayoi Kusama inspired sine wave patterns",
-			"scene": "res://algorithms/wavefunctions/kusamasine/kusama_sine.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"john_cage_tech_noir": {
-			"name": "john_cage_tech_noir",
-			"lookup_name": "john_cage_tech_noir",
-			"description": "Procedurally composes endless techno-noir ambience with city drones, random effects, and a loading-bar visualizer.",
-			"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"probability",
-				"procedural",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"mario_test_sound_ui": {
-			"name": "mario_test_sound_ui",
-			"lookup_name": "mario_test_sound_ui",
-			"description": "Sci-fi kiosk hosting a VR map-loader station UI with sequence and algorithm filters.",
-			"scene": "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "beginner",
-			"tags": [
-				"vr",
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"vr_map_loader_kiosk": {
-			"name": "VR Map Loader Kiosk",
-			"lookup_name": "vr_map_loader_kiosk",
-			"description": "VR loading station for maps. Filter by sequence and algorithm, then load one map at a time from the kiosk screen.",
-			"scene": "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"vr",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"MarioSoundController": {
-			"name": "MarioSoundController",
-			"lookup_name": "MarioSoundController",
-			"description": "MarioSoundController.",
-			"scene": "res://algorithms/wavefunctions/mariocontrol/MarioSoundController.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "beginner",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"DualBallFMController": {
-			"name": "Dual Ball FM Synth",
-			"lookup_name": "DualBallFMController",
-			"description": "Two-handed FM synthesis controller using ValueMapper3D balls. Blue ball controls carrier (frequency, attack, decay); orange ball controls modulator (ratio, index, decay). Classic FM synthesis—one oscillator modulating another's phase to create bells, metallic textures, electric pianos, brass. Presets for common FM patches.",
-			"scene": "res://algorithms/wavefunctions/mariocontrol/DualBallFMController.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					2,
-					3,
-					1
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"hazard",
-				"sound",
-				"vr",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"coshlea": {
-			"name": "coshlea",
-			"lookup_name": "coshlea",
-			"description": "Creates a hyperbolic cosine helicoid surface with adjustable domain sampling.",
-			"scene": "res://algorithms/wavefunctions/coshlea/coshlea.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					5,
-					13,
-					19
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"geometry",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"sine_cylinder_staircase": {
-			"name": "sine_cylinder_staircase",
-			"lookup_name": "sine_cylinder_staircase",
-			"description": "Builds a helical staircase around a central column, modulating tread radius with a sine wave.",
-			"scene": "res://algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					3,
-					9,
-					6
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"sine_wall_static": {
-			"name": "Sine Wall (Static)",
-			"lookup_name": "sine_wall_static",
-			"description": "Architecture frozen mid-oscillation—a wall whose surface undulates in a sine pattern. This is what waves look like when time stops: pure spatial frequency without temporal change.",
-			"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_static.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					1,
-					5,
-					10
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"pattern",
-				"sound",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"sine_art_monitor": {
-			"name": "Sine Art Monitor",
-			"lookup_name": "sine_art_monitor",
-			"description": "Wave as artwork—a display showing sine functions rendered as visual compositions. The same mathematics that describes sound and light becomes aesthetic object.",
-			"scene": "res://algorithms/wavefunctions/sine_work/sine_art_monitor.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					14,
-					7,
-					9
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"sound",
-				"visualization",
-				"wave"
-			],
-			"dev_themes": [
-				"art",
-				"music",
-				"oscillation",
-				"physics"
-			]
-		},
-		"sine_wall_corridor": {
-			"name": "Sine Wall Corridor",
-			"lookup_name": "sine_wall_corridor",
-			"description": "A passageway bounded by undulating walls—walking through is walking through a frozen wave. The body experiences wavelength as architectural scale.",
-			"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_corridor.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					11,
-					8,
-					14
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"SplineCables": {
-			"name": "Spline Cables",
-			"lookup_name": "SplineCables",
-			"description": "Smooth curves connecting points—cables that hang in catenary arcs, the natural shape a flexible line takes under gravity. Infrastructure as frozen wave.",
-			"scene": "res://algorithms/wavefunctions/static_cables/SplineCables.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					9,
-					6,
-					16
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"physics",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"spring_network": {
-			"name": "SpringNetwork",
-			"lookup_name": "spring_network",
-			"description": "10×10 grid of coupled springs",
-			"scene": "res://algorithms/wavefunctions/spring_network/spring_network.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"2d",
-				"spring",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"lissajous_curves": {
-			"name": "LissajousCurves",
-			"lookup_name": "lissajous_curves",
-			"description": "Parametric curves with particle tracer",
-			"qfep_connection": "Two orthogonal oscillations creating complex figures — the ratio of frequencies determines the pattern. Rational ratios produce closed curves (low F), irrational ratios produce space-filling chaos (high E(S)). Commensurability as order.",
-			"scene": "res://algorithms/wavefunctions/lissajous_curves/lissajous_curves.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "advanced",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"coupled_oscillator_lattice": {
-			"name": "CoupledOscillatorLattice",
-			"lookup_name": "coupled_oscillator_lattice",
-			"description": "12×12 oscillator grid",
-			"qfep_connection": "Coupled oscillators demonstrate how local F-interactions propagate into global wave patterns. Each oscillator only knows its neighbors, yet collective modes emerge — local order generating distributed E(S) dynamics.",
-			"scene": "res://algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "advanced",
-			"tags": [
-				"2d",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"parametric_pendulum_waves": {
-			"name": "ParametricPendulumWaves",
-			"lookup_name": "parametric_pendulum_waves",
-			"description": "Parametric pendulum waves",
-			"scene": "res://algorithms/wavefunctions/parametric_pendulum_waves/parametric_pendulum_waves.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"pendulum",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"rainbow_hallway": {
-			"name": "rainbow_hallway",
-			"lookup_name": "rainbow_hallway",
-			"description": "CSG hallway coated with animated rainbow shader controls and glow-rich lighting.",
-			"scene": "res://algorithms/wavefunctions/rainbow_hallway/rainbow_hallway.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"color"
-			],
-			"sequence": "color",
-			"parameters": {
-				"footprint": [
-					1,
-					8,
-					13
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"hallway_scene": {
-			"name": "hallway_scene",
-			"lookup_name": "hallway_scene",
-			"description": "Populates a tunnel with sine-driven cylinder tubes and animates them through time.",
-			"scene": "res://algorithms/wavefunctions/sine_hallway/hallway_scene.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					1,
-					6,
-					26
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"segment_slide": {
-			"name": "Segment Slide",
-			"lookup_name": "segment_slide",
-			"description": "A ride segment following wave contours—slide down a sine curve, feel acceleration as slope changes. The body learns wave mathematics through gravity and motion.",
-			"scene": "res://algorithms/wavefunctions/water_land_ride/segment_slide.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
+			"name": "Dancing Body",
+			"scene": "res://algorithms/wavefunctions/dancing_body/DancingBody.tscn",
 			"tags": [
 				"animation",
-				"physics",
-				"wave"
-			],
-			"dev_themes": [
-				"education",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"resonating_metallophone": {
-			"name": "Resonating Metallophone",
-			"lookup_name": "resonating_metallophone",
-			"description": "Metal bars that ring—each bar's length determines its pitch, shorter bars vibrate faster. Strike them to hear wavelength become sound, to feel the relationship between physical size and frequency.",
-			"scene": "res://algorithms/wavefunctions/resonance/resonating_metallophone.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"sound",
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"bernini_columns": {
-			"name": "Bernini Columns",
-			"lookup_name": "bernini_columns",
-			"description": "Baroque architectural wave patterns",
-			"scene": "res://algorithms/wavefunctions/berninicolumns/BerniniScene.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"line_builder_3d": {
-			"name": "Line Builder 3D",
-			"lookup_name": "line_builder_3d",
-			"description": "Draw curves in space—each line segment becomes a building block for wave forms. Connect points to see how discrete positions approximate continuous curves.",
-			"scene": "res://algorithms/wavefunctions/line_builder_3d/line_builder_3d.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"primitives"
-			],
-			"sequence": "primitives",
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"graph",
-				"visualization",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			],
-			"parameters": {
-				"footprint": [
-					3,
-					1,
-					1
-				],
-				"reading_light": {
-					"type": "omni",
-					"direction": "+z",
-					"cone": 360,
-					"radius": 3
-				}
-			}
-		},
-		"cable_builder": {
-			"name": "Cable Builder",
-			"lookup_name": "cable_builder",
-			"description": "Construct hanging cables between anchor points—watch them sag into catenaries, the natural curve of flexible lines under gravity. Engineering meets wave mathematics.",
-			"scene": "res://algorithms/wavefunctions/line_builder_3d/cable_builder.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"physics",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"fourier_transform_advanced": {
-			"name": "Advanced Fourier Transform",
-			"lookup_name": "fourier_transform_advanced",
-			"description": "Enhanced frequency domain signal analysis",
-			"scene": "res://algorithms/wavefunctions/fourier_transform/fourier_transform.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					17,
-					25,
-					16
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "expert",
-			"tags": [
-				"sound",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"parametric_shapes": {
-			"name": "Parametric Shapes",
-			"lookup_name": "parametric_shapes",
-			"description": "Mathematical curve and surface generation",
-			"scene": "res://algorithms/wavefunctions/parametric_shapes/parametric_shapes.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					17,
-					23,
-					11
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
+				"procedural",
 				"waves"
 			]
 		},
 		"DoublePendulum": {
-			"name": "Double Pendulum",
-			"lookup_name": "DoublePendulum",
-			"description": "Deterministic chaos—two connected pendulums create wildly unpredictable motion from simple physics. This is where periodic oscillation breaks down; tiny differences in starting conditions lead to radically different trajectories.",
-			"qfep_connection": "The double pendulum is where simple F breaks — two connected oscillators produce chaotic trajectories with positive Lyapunov exponents. The system is deterministic but unpredictable: the φΔE(S,t) term dominates as sensitivity to initial conditions.",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/DoublePendulum.tscn",
 			"category": "waves",
+			"complexity": "advanced",
+			"description": "Deterministic chaos—two connected pendulums create wildly unpredictable motion from simple physics. This is where periodic oscillation breaks down; tiny differences in starting conditions lead to radically different trajectories.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
 			"include_in_map_data": true,
+			"lookup_name": "DoublePendulum",
 			"map_ready": true,
 			"map_sequences": [
 				"joints"
 			],
-			"sequence": "joints",
+			"name": "Double Pendulum",
 			"parameters": {
 				"footprint": [
-					6,
-					7,
-					16
+					6.0,
+					7.0,
+					16.0
 				],
 				"size_group": "world_scale"
 			},
-			"complexity": "advanced",
+			"qfep_connection": "The double pendulum is where simple F breaks — two connected oscillators produce chaotic trajectories with positive Lyapunov exponents. The system is deterministic but unpredictable: the φΔE(S,t) term dominates as sensitivity to initial conditions.",
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/DoublePendulum.tscn",
+			"sequence": "joints",
 			"tags": [
 				"animation",
 				"chaos",
 				"topology",
 				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
 			]
 		},
-		"PendulumGrid3x3": {
-			"name": "Pendulum Grid 3x3",
-			"lookup_name": "PendulumGrid3x3",
-			"description": "Nine pendulums in a grid—each swinging independently but visible together. Watch for emergent patterns: when do they synchronize? When do they diverge? Collective oscillation reveals hidden coupling.",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumGrid3x3.tscn",
+		"DualBallFMController": {
 			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					11,
-					9,
-					19
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"2d",
-				"swarm",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"math_objects": {
-			"name": "Mathematical Objects",
-			"lookup_name": "math_objects",
-			"description": "A collection of parametric surfaces and curves—the geometric zoo of mathematical forms. Tori, helicoids, Möbius strips: shapes defined by equations rather than construction.",
-			"scene": "res://commons/primitives/parametric/math_objects.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"CircleSpiral": {
-			"name": "Circle Spiral",
-			"lookup_name": "CircleSpiral",
-			"description": "Rotation extended through time becomes spiral—a circle that doesn't close but climbs. This is what happens when circular motion gains a third dimension: the helix, the spring, the DNA strand.",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/CircleSpiral.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					5,
-					3,
-					5
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"animation",
-				"physics",
-				"waves"
-			],
-			"dev_themes": [
-				"biology",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"standing_waves": {
-			"name": "Standing Waves",
-			"lookup_name": "standing_waves",
-			"description": "Stationary wave pattern visualization",
-			"qfep_connection": "Standing waves are where two opposing wave-flows reach equilibrium — nodes of zero motion amid maximum oscillation. The system finds stable F-patterns within dynamic E(S): stillness emerging from movement.",
-			"scene": "res://algorithms/wavefunctions/standing_waves/standing_waves.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					13,
-					19,
-					13
-				],
-				"size_group": "world_scale"
-			},
 			"complexity": "advanced",
-			"tags": [
-				"pattern",
-				"wave"
-			],
+			"description": "Two-handed FM synthesis controller using ValueMapper3D balls. Blue ball controls carrier (frequency, attack, decay); orange ball controls modulator (ratio, index, decay). Classic FM synthesis—one oscillator modulating another's phase to create bells, metallic textures, electric pianos, brass. Presets for common FM patches.",
 			"dev_themes": [
 				"oscillation",
 				"physics",
 				"waves"
-			]
-		},
-		"unit_circle_advanced": {
-			"name": "Advanced Unit Circle",
-			"lookup_name": "unit_circle_advanced",
-			"description": "Enhanced trigonometric visualization",
-			"scene": "res://algorithms/wavefunctions/unit_circle/unit_circle.tscn",
-			"category": "waves",
+			],
+			"footprint": [
+				1,
+				2,
+				1
+			],
 			"include_in_map_data": true,
+			"lookup_name": "DualBallFMController",
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions",
+			"name": "Dual Ball FM Synth",
 			"parameters": {
 				"footprint": [
 					1,
-					8,
-					6
+					2,
+					1
 				],
-				"size_group": "environment"
+				"size_group": "compact"
 			},
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"SimpleOscillatingBridge": {
-			"name": "Simple Oscillating Bridge",
-			"lookup_name": "SimpleOscillatingBridge",
-			"description": "A walkable surface that breathes—rising and falling in sine wave motion. Cross it to feel oscillation in your body, the ground itself becoming unstable in a predictable rhythm.",
-			"scene": "res://algorithms/wavefunctions/unit_circle/SimpleOscillatingBridge.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
+			"scene": "res://algorithms/wavefunctions/mariocontrol/DualBallFMController.tscn",
 			"sequence": "wavefunctions",
-			"complexity": "intermediate",
+			"size_group": "compact",
 			"tags": [
-				"3d",
-				"animation",
-				"wave"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"SystemsMusicTest": {
-			"name": "Systems Music Test",
-			"lookup_name": "SystemsMusicTest",
-			"description": "Music as system—notes triggered by spatial position, harmony emerging from movement through space. Steve Reich meets VR: phase relationships create texture.",
-			"scene": "res://commons/audio/systems/air_points/SystemsMusicTest.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					1,
-					3,
-					6
-				],
-				"size_group": "environment"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"animation",
-				"simulation",
+				"hazard",
 				"sound",
 				"vr",
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"ruth_asawa_sculpture": {
-			"name": "Ruth Asawa Sculpture",
-			"lookup_name": "ruth_asawa_sculpture",
-			"description": "Wire forms inspired by Ruth Asawa's crocheted metal sculptures—nested surfaces that oscillate between inside and outside, solid and void. Topology as frozen wave, material as line drawing in space.",
-			"scene": "res://algorithms/wavefunctions/ruth_asawa/ruth_asawa_sculpture.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					1,
-					7,
-					7
-				],
-				"size_group": "environment"
-			},
-			"complexity": "expert",
-			"tags": [
-				"wave"
-			],
-			"dev_themes": [
-				"art",
-				"oscillation",
-				"physics",
 				"waves"
 			]
 		},
 		"ElphabaDemo": {
-			"name": "Elphaba Demo",
-			"lookup_name": "ElphabaDemo",
-			"description": "Character animation driven by oscillation—the Wicked witch moves through wave functions. Procedural performance where sine waves become gesture, mathematics becomes drama.",
-			"scene": "res://algorithms/wavefunctions/dancing_body/ElphabaDemo.tscn",
 			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Character animation driven by oscillation—the Wicked witch moves through wave functions. Procedural performance where sine waves become gesture, mathematics becomes drama.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
 			"include_in_map_data": true,
+			"lookup_name": "ElphabaDemo",
 			"map_ready": true,
 			"map_sequences": [],
+			"name": "Elphaba Demo",
 			"parameters": {
 				"footprint": [
-					1,
-					1,
-					4
+					1.0,
+					1.0,
+					4.0
 				],
 				"size_group": "room_scale"
 			},
-			"complexity": "intermediate",
+			"scene": "res://algorithms/wavefunctions/dancing_body/ElphabaDemo.tscn",
 			"tags": [
 				"procedural",
 				"string",
 				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
 			]
 		},
 		"ElphabaDress": {
-			"name": "Elphaba Dress",
-			"lookup_name": "ElphabaDress",
-			"description": "Cloth simulation as wave—fabric responds to movement with ripples propagating outward. The dress becomes a visible record of motion, trailing oscillations behind every gesture.",
-			"scene": "res://algorithms/wavefunctions/dancing_body/ElphabaDress.tscn",
 			"category": "waves",
+			"complexity": "advanced",
+			"description": "Cloth simulation as wave—fabric responds to movement with ripples propagating outward. The dress becomes a visible record of motion, trailing oscillations behind every gesture.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
 			"include_in_map_data": true,
+			"lookup_name": "ElphabaDress",
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
 			],
+			"name": "Elphaba Dress",
+			"scene": "res://algorithms/wavefunctions/dancing_body/ElphabaDress.tscn",
 			"sequence": "wavefunctions",
-			"complexity": "advanced",
 			"tags": [
 				"animation",
 				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
 			]
 		},
-		"wave_interference": {
-			"name": "Wave Interference",
-			"lookup_name": "wave_interference",
-			"description": "Superposition and interference patterns",
-			"qfep_connection": "Superposition as entropy interaction — two ordered waves combine to create complex interference. Constructive = F-alignment (waves reinforce), destructive = F-cancellation (waves annihilate). The linearity principle in action.",
-			"scene": "res://algorithms/wavefunctions/wave_interference/wave_interference.tscn",
+		"GlassRack": {
 			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					11,
-					23,
-					16
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"fouriertransformshape": {
-			"name": "fouriertransformshape",
-			"lookup_name": "fouriertransformshape",
-			"description": "Shows nested rotating circles that trace a Fourier drawing with emissive connections.",
-			"scene": "res://algorithms/wavefunctions/fouriertransformshape/fouriertransformshape.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					1,
-					3,
-					9
-				],
-				"size_group": "environment"
-			},
 			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
+			"description": "Modular laboratory glassware system. Configurable spiral condensers, wobbly tubes, flasks, junctions. Use #config:spiral_tube, #config:spiral_condenser, #config:distillation_rack, or #config:simple_tube. Turtle path commands: f,l,r,u,d,spiral,wobbly,flask,junction.",
 			"dev_themes": [
 				"oscillation",
 				"physics",
 				"waves"
-			]
-		},
-		"wave_propagation_3d": {
-			"name": "3D Wave Propagation",
-			"lookup_name": "wave_propagation_3d",
-			"description": "Three-dimensional wave dynamics simulation",
-			"qfep_connection": "Waves propagating through 3D space — energy spreading from a source, dissipating as it expands. The inverse-square law as entropy increase: concentrated E(S) becoming diffuse, order radiating into the surrounding volume.",
-			"scene": "res://algorithms/wavefunctions/wave_propagation_3d/wave_propagation_3d.tscn",
-			"category": "waves",
+			],
 			"include_in_map_data": true,
+			"interaction": "observe",
+			"interactions": [
+				"observe"
+			],
+			"lookup_name": "GlassRack",
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
 			],
-			"sequence": "wavefunctions",
+			"name": "Glass Rack",
 			"parameters": {
 				"footprint": [
-					14,
-					24,
-					11
+					1.0,
+					1.0,
+					1.0
 				],
-				"size_group": "world_scale"
+				"size_group": "compact"
 			},
-			"complexity": "advanced",
+			"scene": "res://commons/glass_rack/GlassRack.tscn",
+			"sequence": "wavefunctions",
 			"tags": [
-				"3d",
-				"wave"
-			],
+				"glass",
+				"lab",
+				"condenser",
+				"spiral",
+				"chemistry",
+				"apparatus",
+				"modular"
+			]
+		},
+		"GlassRack_BranchingCondenser": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Y-pipe splits flow into two parallel spiral condensers, then recombines.",
 			"dev_themes": [
 				"oscillation",
 				"physics",
 				"waves"
-			]
-		},
-		"MelodySoundBoard": {
-			"name": "MelodySoundBoard",
-			"lookup_name": "MelodySoundBoard",
-			"description": "Spatial musical instrument where notes are positioned in 3D space and melodies play by moving through them",
-			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodySoundBoard.tscn",
-			"category": "waves",
+			],
 			"include_in_map_data": true,
+			"lookup_name": "GlassRack_BranchingCondenser",
 			"map_ready": true,
 			"map_sequences": [],
+			"name": "Glass Rack: Branching Condenser",
+			"scene": "res://commons/glass_rack/presets/branching_condenser.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"GlassRack_BreakingBadCoffee": {
+			"category": "waves",
 			"complexity": "intermediate",
+			"description": "Multi-level cold drip coffee / distillation apparatus with metal frame.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "GlassRack_BreakingBadCoffee",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Glass Rack: Breaking Bad Coffee",
+			"scene": "res://commons/glass_rack/presets/breaking_bad_coffee.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"GlassRack_ComplexApparatus": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Complete reflux apparatus with boiling flask, condenser, collection vessel, and branching tubes.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "GlassRack_ComplexApparatus",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Glass Rack: Complex Apparatus",
+			"scene": "res://commons/glass_rack/presets/complex_apparatus.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"GlassRack_DistillationRack": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Classic distillation setup with flask, spiral condenser, and collection vessel.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "GlassRack_DistillationRack",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Glass Rack: Distillation Rack",
+			"scene": "res://commons/glass_rack/presets/distillation_rack.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"GlassRack_DistillationY": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Simple Y-branch with two spiral condensers feeding into beakers.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "GlassRack_DistillationY",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Glass Rack: Y-Branch Distillation",
+			"scene": "res://commons/glass_rack/presets/distillation_y.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"GlassRack_FractionalDistillation": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Multi-stage distillation with reducers and collection points.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "GlassRack_FractionalDistillation",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Glass Rack: Fractional Distillation",
+			"scene": "res://commons/glass_rack/presets/fractional_distillation.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"GlassRack_RefluxApparatus": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Flask with condenser and U-bend return for continuous reflux.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "GlassRack_RefluxApparatus",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Glass Rack: Reflux Apparatus",
+			"scene": "res://commons/glass_rack/presets/reflux_apparatus.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"GlassRack_SbendManifold": {
+			"category": "waves",
+			"complexity": "expert",
+			"description": "Multiple S-bends creating an offset distribution manifold.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "GlassRack_SbendManifold",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Glass Rack: S-Bend Manifold",
+			"scene": "res://commons/glass_rack/presets/sbend_manifold.tscn",
+			"tags": [
+				"geometry",
+				"topology",
+				"waves"
+			]
+		},
+		"GlassRack_SimpleTube": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Basic straight tube with a bend.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "GlassRack_SimpleTube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Glass Rack: Simple Tube",
+			"scene": "res://commons/glass_rack/presets/simple_tube.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"GlassRack_SpiralCondenser": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Standalone spiral condenser with inlet and outlet tubes.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "GlassRack_SpiralCondenser",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Glass Rack: Spiral Condenser",
+			"scene": "res://commons/glass_rack/presets/spiral_condenser.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"GlassRack_SpiralTube": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Simple spiral glass tube — classic lab condenser coil.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "GlassRack_SpiralTube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Glass Rack: Spiral Tube",
+			"scene": "res://commons/glass_rack/presets/spiral_tube.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"HarmonicBuilder": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Fourier synthesis in action—stack sine waves of different frequencies to build complex shapes. Any waveform is a sum of simple oscillations; this tool lets you construct them one harmonic at a time.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "HarmonicBuilder",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Harmonic Builder",
+			"parameters": {
+				"footprint": [
+					6.0,
+					2.0,
+					1.0
+				],
+				"size_group": "environment"
+			},
+			"qfep_connection": "Fourier synthesis as F-construction — building complex waveforms from simple components. Each harmonic adds E(S); the sum approaches any target shape. Complexity from simplicity, order from the accumulation of periodic structures.",
+			"scene": "res://algorithms/wavefunctions/harmonic_builder/HarmonicBuilder.tscn",
+			"tags": [
+				"wave"
+			]
+		},
+		"Lissajous3D": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "3D Lissajous knot",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "Lissajous3D",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Lissajous3D",
+			"parameters": {
+				"footprint": [
+					6.0,
+					2.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/Lissajous3D.tscn",
 			"tags": [
 				"3d",
 				"waves"
-			],
+			]
+		},
+		"MarioSoundController": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "MarioSoundController.",
 			"dev_themes": [
 				"music",
 				"oscillation",
 				"physics",
 				"waves"
-			]
-		},
-		"MelodyChaser3D": {
-			"name": "MelodyChaser3D",
-			"lookup_name": "MelodyChaser3D",
-			"description": "Follow-the-leader musical instrument - a glowing point traces a helix pattern through pitch space, play notes by following it with your hand",
-			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodyChaser3D.tscn",
-			"category": "waves",
+			],
 			"include_in_map_data": true,
+			"lookup_name": "MarioSoundController",
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
 			],
+			"name": "MarioSoundController",
+			"scene": "res://algorithms/wavefunctions/mariocontrol/MarioSoundController.tscn",
 			"sequence": "wavefunctions",
+			"tags": [
+				"waves"
+			]
+		},
+		"MelodyChaser3D": {
+			"category": "waves",
 			"complexity": "intermediate",
+			"description": "Follow-the-leader musical instrument - a glowing point traces a helix pattern through pitch space, play notes by following it with your hand",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "MelodyChaser3D",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "MelodyChaser3D",
+			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodyChaser3D.tscn",
+			"sequence": "wavefunctions",
 			"tags": [
 				"pattern",
 				"sound",
 				"vr",
 				"waves"
-			],
+			]
+		},
+		"MelodySoundBoard": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Spatial musical instrument where notes are positioned in 3D space and melodies play by moving through them",
 			"dev_themes": [
 				"music",
 				"oscillation",
 				"physics",
 				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "MelodySoundBoard",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "MelodySoundBoard",
+			"scene": "res://algorithms/wavefunctions/mariocontrol/MelodySoundBoard.tscn",
+			"tags": [
+				"3d",
+				"waves"
 			]
 		},
-		"SoundscapeRadioRack": {
-			"name": "SoundscapeRadioRack",
-			"lookup_name": "SoundscapeRadioRack",
-			"description": "Turn a physical wheel in VR to tune between soundscape radio stations. Station index maps from wheel angle, clarity from proximity to center — analog radio metaphor. Static noise between stations, clean signal at center. Every frequency band is a station; tuning is selecting which resonance to amplify.",
-			"qfep_connection": "Lambda as tuning — the wheel angle IS lambda, sweeping through a spectrum of possible sounds. Between stations is noise (high E). At station center is signal (high F). The threshold parameter controls how sharp the transition is.",
-			"gamwell_reference": "Fourier analysis, signal processing, wave interference",
-			"capacity": "TUNE between soundscape stations by turning a VR wheel — feeling the analog transition from signal to noise",
-			"interactions": ["turn VR hinge wheel to tune stations", "adjust volume wheel", "listen for static between stations"],
-			"scene": "res://commons/audio/rack_configs/SoundscapeRadioRack.tscn",
+		"OscillatingWave": {
 			"category": "waves",
+			"complexity": "advanced",
+			"description": "The fundamental wave made visible—a 3D sine wave oscillating in real-time. Adjust amplitude, frequency, and phase to feel how these parameters shape the perpetual motion between poles.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
 			"include_in_map_data": true,
+			"lookup_name": "OscillatingWave",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Oscillating Wave",
+			"parameters": {
+				"footprint": [
+					7.0,
+					8.0,
+					9.0
+				],
+				"size_group": "environment"
+			},
+			"qfep_connection": "The pure sine wave is the atom of periodic E(S) — the simplest non-trivial dynamics. Amplitude, frequency, and phase are the three parameters that fully describe it: maximum F-compression of oscillatory behavior.",
+			"scene": "res://algorithms/wavefunctions/oscillating_wave/OscillatingWave.tscn",
+			"tags": [
+				"3d",
+				"animation",
+				"sound",
+				"wave"
+			]
+		},
+		"OscillationCurve": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Visualizing oscillation over time",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "OscillationCurve",
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
 			],
+			"name": "OscillationCurve",
+			"parameters": {
+				"footprint": [
+					6.0,
+					8.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/OscillationCurve.tscn",
 			"sequence": "wavefunctions",
+			"tags": [
+				"waves"
+			]
+		},
+		"OscillationDriver": {
+			"category": "waves",
 			"complexity": "beginner",
+			"description": "Basic oscillation driving a property",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "OscillationDriver",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "OscillationDriver",
+			"parameters": {
+				"footprint": [
+					6.0,
+					7.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/OscillationDriver.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"PendulumCircle": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Compound motion of pendulum and circle",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "PendulumCircle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "PendulumCircle",
+			"parameters": {
+				"footprint": [
+					6.0,
+					8.0,
+					16.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumCircle.tscn",
+			"tags": [
+				"animation",
+				"wave"
+			]
+		},
+		"PendulumGrid3x3": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Nine pendulums in a grid—each swinging independently but visible together. Watch for emergent patterns: when do they synchronize? When do they diverge? Collective oscillation reveals hidden coupling.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "PendulumGrid3x3",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Pendulum Grid 3x3",
+			"parameters": {
+				"footprint": [
+					11.0,
+					9.0,
+					19.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumGrid3x3.tscn",
+			"tags": [
+				"2d",
+				"swarm",
+				"wave"
+			]
+		},
+		"PendulumWave": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Pendulum generating a sine wave",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "PendulumWave",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "PendulumWave",
+			"parameters": {
+				"footprint": [
+					6.0,
+					9.0,
+					8.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumWave.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"wave"
+			]
+		},
+		"PhonemeCloud": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "PhonemeCloud",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "PhonemeCloud",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "PhonemeCloud",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/speech/phoneme_cloud/PhonemeCloud.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"Rack303Acid": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Roland TB-303 style acid bass synthesizer with cutoff and resonance knobs. The squelchy sound that defined acid house—filter sweeps turning simple waveforms into liquid screams. Resonance creates feedback peaks at the cutoff frequency.",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "Rack303Acid",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "303 Acid Rack",
+			"scene": "res://commons/audio/rack_presets/rack_303_acid.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"sound",
+				"waves"
+			]
+		},
+		"Rack808Drums": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Deep 808 kick drum synthesizer with decay control and VU meter. The foundation of hip-hop and electronic music—sub-bass that you feel more than hear. Sine wave with pitch envelope creates that iconic 'boom'.",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "Rack808Drums",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "808 Kick Rack",
+			"scene": "res://commons/audio/rack_presets/rack_808_drums.tscn",
+			"tags": [
+				"sound",
+				"wave"
+			]
+		},
+		"RackAmbientDrone": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Atmospheric ambient drone synthesizer with lissajous phase display. Slowly evolving textures—sound as environment rather than event. Multiple detuned oscillators create beating patterns; the lissajous shows phase relationships between channels.",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "RackAmbientDrone",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Ambient Drone Rack",
+			"scene": "res://commons/audio/rack_presets/rack_ambient_drone.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"sound",
+				"visualization",
+				"waves"
+			]
+		},
+		"RackDX7Piano": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Yamaha DX7 FM electric piano synthesizer with attack and release envelope controls. The sound of the 80s—FM synthesis creating bell-like tones impossible with analog. Frequency modulation: one oscillator modulating another's frequency.",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "RackDX7Piano",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "DX7 Piano Rack",
+			"scene": "res://commons/audio/rack_presets/rack_dx7_piano.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"hazard",
+				"sound",
+				"waves"
+			]
+		},
+		"RackMario": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Mario-style pickup sound synthesizer with start/end frequency sweep controls. The iconic coin sound—a rapid frequency chirp that triggers dopamine. Demonstrates how frequency modulation over time creates recognizable timbres.",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "RackMario",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Mario Pickup Rack",
+			"scene": "res://commons/audio/rack_presets/rack_mario.tscn",
+			"tags": [
+				"sound",
+				"waves"
+			]
+		},
+		"RackMoogBass": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Classic Moog-style bass/lead synthesizer with ladder filter cutoff and resonance. The fat analog sound—oscillators through the famous 4-pole filter. Cutoff frequency determines which harmonics pass; resonance emphasizes the cutoff point.",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "RackMoogBass",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Moog Bass Rack",
+			"scene": "res://commons/audio/rack_presets/rack_moog_bass.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"sound",
+				"waves"
+			]
+		},
+		"RackSineBasic": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Basic sine wave synthesizer rack with frequency, amplitude, and duration controls. Includes waveform display. The purest sound—a single frequency oscillating smoothly. Grab sliders in VR to shape the wave, hear mathematics become music.",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "RackSineBasic",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Sine Wave Rack",
+			"parameters": {
+				"footprint": [
+					2.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/audio/rack_presets/rack_sine_basic.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"interactive",
+				"sound",
+				"visualization",
+				"vr",
+				"wave"
+			]
+		},
+		"SimpleOscillatingBridge": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "A walkable surface that breathes—rising and falling in sine wave motion. Cross it to feel oscillation in your body, the ground itself becoming unstable in a predictable rhythm.",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "SimpleOscillatingBridge",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Simple Oscillating Bridge",
+			"scene": "res://algorithms/wavefunctions/unit_circle/SimpleOscillatingBridge.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"3d",
+				"animation",
+				"wave"
+			]
+		},
+		"SoundBoxLong": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Extended resonant chamber—a longer tube means lower fundamental frequency. This is why cellos are larger than violins: wavelength determines pitch, and pitch determines the physical size of instruments.",
+			"dev_themes": [
+				"biology",
+				"music",
+				"oscillation",
+				"physics"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "SoundBoxLong",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Sound Box (Long)",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/wavefunctions/sound_box/SoundBoxLong.tscn",
+			"tags": [
+				"sound",
+				"waves"
+			]
+		},
+		"SoundBoxShort": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Compact resonant chamber—a shorter tube means higher fundamental frequency. The relationship between length and pitch is the physical basis of all wind and string instruments.",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "SoundBoxShort",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Sound Box (Short)",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/wavefunctions/sound_box/SoundBoxShort.tscn",
+			"tags": [
+				"linear_algebra",
+				"sound",
+				"string",
+				"waves"
+			]
+		},
+		"SoundscapeRadioRack": {
+			"capacity": "TUNE between soundscape stations by turning a VR wheel — feeling the analog transition from signal to noise",
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Turn a physical wheel in VR to tune between soundscape radio stations. Station index maps from wheel angle, clarity from proximity to center — analog radio metaphor. Static noise between stations, clean signal at center. Every frequency band is a station; tuning is selecting which resonance to amplify.",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"gamwell_reference": "Fourier analysis, signal processing, wave interference",
+			"include_in_map_data": true,
+			"interactions": [
+				"turn VR hinge wheel to tune stations",
+				"adjust volume wheel",
+				"listen for static between stations"
+			],
+			"lookup_name": "SoundscapeRadioRack",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "SoundscapeRadioRack",
+			"qfep_connection": "Lambda as tuning — the wheel angle IS lambda, sweeping through a spectrum of possible sounds. Between stations is noise (high E). At station center is signal (high F). The threshold parameter controls how sharp the transition is.",
+			"scene": "res://commons/audio/rack_configs/SoundscapeRadioRack.tscn",
+			"sequence": "wavefunctions",
 			"tags": [
 				"audio",
 				"radio",
@@ -1854,421 +1297,498 @@
 				"interactive",
 				"frequency",
 				"analog"
-			],
+			]
+		},
+		"SphericalHarmonics": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Waves on a sphere—the mathematical functions that describe electron orbitals, planetary magnetic fields, and 3D audio spatialization. These are the 3D cousins of sine waves, oscillating across spherical surfaces.",
 			"dev_themes": [
 				"music",
 				"oscillation",
 				"physics",
 				"waves"
+			],
+			"footprint": [
+				2,
+				4,
+				2
+			],
+			"include_in_map_data": true,
+			"lookup_name": "SphericalHarmonics",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Spherical Harmonics",
+			"parameters": {
+				"footprint": [
+					2,
+					4,
+					2
+				],
+				"size_group": "standard"
+			},
+			"qfep_connection": "Spherical harmonics are the F-basis for any function on a sphere — the most compressed representation of spherical complexity. Electron orbitals, planetary fields, and audio all share these same fundamental modes of order.",
+			"scene": "res://algorithms/wavefunctions/spherical_harmonics/SphericalHarmonics.tscn",
+			"sequence": "wavefunctions",
+			"size_group": "standard",
+			"tags": [
+				"3d",
+				"geometry",
+				"sound",
+				"waves"
 			]
 		},
-		"water_land_ride": {
-			"name": "water_land_ride",
-			"lookup_name": "water_land_ride",
-			"description": "water_land_ride",
-			"scene": "res://algorithms/wavefunctions/water_land_ride/water_land_ride.tscn",
+		"SplineCables": {
 			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Smooth curves connecting points—cables that hang in catenary arcs, the natural shape a flexible line takes under gravity. Infrastructure as frozen wave.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
 			"include_in_map_data": true,
+			"lookup_name": "SplineCables",
 			"map_ready": true,
 			"map_sequences": [],
-			"complexity": "beginner",
+			"name": "Spline Cables",
+			"parameters": {
+				"footprint": [
+					9.0,
+					6.0,
+					16.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/wavefunctions/static_cables/SplineCables.tscn",
 			"tags": [
-				"waves"
-			],
+				"physics",
+				"wave"
+			]
+		},
+		"StaticCables": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Creates suspended cable bundles with configurable sag, wave, or spiral patterns and foggy lighting.",
 			"dev_themes": [
 				"oscillation",
 				"physics",
 				"waves"
-			]
-		},
-		"OscillationDriver": {
-			"name": "OscillationDriver",
-			"lookup_name": "OscillationDriver",
-			"description": "Basic oscillation driving a property",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/OscillationDriver.tscn",
-			"category": "waves",
+			],
 			"include_in_map_data": true,
+			"lookup_name": "StaticCables",
 			"map_ready": true,
 			"map_sequences": [],
+			"name": "StaticCables",
 			"parameters": {
 				"footprint": [
-					6,
-					7,
-					6
+					1.0,
+					3.0,
+					16.0
 				],
-				"size_group": "environment"
+				"size_group": "world_scale"
 			},
-			"complexity": "beginner",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"double_helix_scene": {
-			"name": "double_helix_scene",
-			"lookup_name": "double_helix_scene",
-			"description": "double_helix_scene",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/double_helix_scene.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					1,
-					7,
-					1
-				],
-				"size_group": "environment"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"circle_spiral_scene": {
-			"name": "circle_spiral_scene",
-			"lookup_name": "circle_spiral_scene",
-			"description": "circle_spiral_scene",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/circle_spiral_scene.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "beginner",
-			"tags": [
-				"spiral",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"OscillationCurve": {
-			"name": "OscillationCurve",
-			"lookup_name": "OscillationCurve",
-			"description": "Visualizing oscillation over time",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/OscillationCurve.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					6,
-					8,
-					6
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"UnitCircleTrig": {
-			"name": "UnitCircleTrig",
-			"lookup_name": "UnitCircleTrig",
-			"description": "Unit circle generating Sine and Cosine",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/UnitCircleTrig.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					6,
-					6,
-					8
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"PendulumWave": {
-			"name": "PendulumWave",
-			"lookup_name": "PendulumWave",
-			"description": "Pendulum generating a sine wave",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumWave.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					6,
-					9,
-					8
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
+			"scene": "res://algorithms/wavefunctions/static_cables/StaticCables.tscn",
 			"tags": [
 				"wave"
-			],
+			]
+		},
+		"SystemsMusicTest": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Music as system—notes triggered by spatial position, harmony emerging from movement through space. Steve Reich meets VR: phase relationships create texture.",
 			"dev_themes": [
+				"music",
 				"oscillation",
 				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "SystemsMusicTest",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Systems Music Test",
+			"parameters": {
+				"footprint": [
+					1.0,
+					3.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://commons/audio/systems/air_points/SystemsMusicTest.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"animation",
+				"simulation",
+				"sound",
+				"vr",
 				"waves"
 			]
 		},
 		"TrigWalkingPath": {
-			"name": "TrigWalkingPath",
-			"lookup_name": "TrigWalkingPath",
-			"description": "Walkable path generated by trig functions",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/TrigWalkingPath.tscn",
 			"category": "waves",
+			"complexity": "beginner",
+			"description": "Walkable path generated by trig functions",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
 			"include_in_map_data": true,
+			"lookup_name": "TrigWalkingPath",
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
 			],
+			"name": "TrigWalkingPath",
+			"parameters": {
+				"footprint": [
+					6.0,
+					11.0,
+					26.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/TrigWalkingPath.tscn",
 			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					6,
-					11,
-					26
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
 			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
 				"waves"
 			]
 		},
-		"double_helix_oscillator": {
-			"name": "Double Helix Oscillator",
-			"lookup_name": "double_helix_oscillator",
-			"description": "DNA-like double helix structure (oscillation-driven variant)",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/DoubleHelix.tscn",
+		"UnitCircleTrig": {
 			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					7,
-					6,
-					6
-				],
-				"size_group": "environment"
-			},
 			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
+			"description": "Unit circle generating Sine and Cosine",
 			"dev_themes": [
-				"biology",
 				"oscillation",
 				"physics",
 				"waves"
-			]
-		},
-		"Lissajous3D": {
-			"name": "Lissajous3D",
-			"lookup_name": "Lissajous3D",
-			"description": "3D Lissajous knot",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/Lissajous3D.tscn",
-			"category": "waves",
+			],
 			"include_in_map_data": true,
+			"lookup_name": "UnitCircleTrig",
 			"map_ready": true,
-			"map_sequences": [],
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "UnitCircleTrig",
 			"parameters": {
 				"footprint": [
-					6,
-					2,
-					6
+					6.0,
+					6.0,
+					8.0
 				],
 				"size_group": "environment"
 			},
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/UnitCircleTrig.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"waves"
+			]
+		},
+		"VRAudioMonitor": {
+			"category": "waves",
 			"complexity": "beginner",
-			"tags": [
-				"3d",
-				"waves"
-			],
+			"description": "Standalone audio monitor display showing waveform and spectrum analysis. Place near any audio source to visualize sound. The waveform shows amplitude over time; the spectrum shows frequency content—two complementary views of the same signal.",
 			"dev_themes": [
+				"music",
 				"oscillation",
 				"physics",
 				"waves"
-			]
-		},
-		"PendulumCircle": {
-			"name": "PendulumCircle",
-			"lookup_name": "PendulumCircle",
-			"description": "Compound motion of pendulum and circle",
-			"scene": "res://algorithms/wavefunctions/oscillation_driver/PendulumCircle.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					6,
-					8,
-					16
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"animation",
-				"wave"
 			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"WaveRideScene": {
-			"name": "WaveRideScene",
-			"lookup_name": "WaveRideScene",
-			"description": "WaveRideScene",
-			"scene": "res://algorithms/wavefunctions/wave_function_ride/WaveRideScene.tscn",
-			"category": "waves",
 			"include_in_map_data": true,
+			"lookup_name": "VRAudioMonitor",
 			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					1,
-					9,
-					1
-				],
-				"size_group": "environment"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"waves"
+			"map_sequences": [
+				"wavefunctions"
 			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"PhonemeCloud": {
-			"name": "PhonemeCloud",
-			"lookup_name": "PhonemeCloud",
-			"description": "PhonemeCloud",
-			"scene": "res://algorithms/speech/phoneme_cloud/PhonemeCloud.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
+			"name": "VR Audio Monitor",
 			"parameters": {
 				"footprint": [
-					1,
-					2,
-					1
+					1.0,
+					1.0,
+					1.0
 				],
 				"size_group": "compact"
 			},
-			"complexity": "beginner",
+			"scene": "res://commons/audio/interfaces/VRAudioMonitor.tscn",
+			"sequence": "wavefunctions",
 			"tags": [
-				"waves"
-			],
+				"sound",
+				"visualization",
+				"vr",
+				"wave"
+			]
+		},
+		"VitruvianMan": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Da Vinci's proportional man reinterpreted—the human body inscribed in circle and square, demonstrating that anatomy is geometry, that limbs sweep arcs, that the body itself is a measurement system oscillating between ideal forms.",
 			"dev_themes": [
 				"oscillation",
 				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VitruvianMan",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Vitruvian Man",
+			"parameters": {
+				"footprint": [
+					3.0,
+					1.0,
+					5.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/wavefunctions/vitruvian_man/VitruvianMan.tscn",
+			"tags": [
+				"simulation",
+				"waves"
+			]
+		},
+		"WavePaintings": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Three pendulum-painting stations—grab the bob to swing it, watch oscillation become visible trace. Each pendulum paints on a wet canvas below, translating harmonic motion into color trails. The physics of swinging becomes the brush; chaos becomes art.",
+			"dev_themes": [
+				"art",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"footprint": [
+				5,
+				5,
+				3
+			],
+			"include_in_map_data": true,
+			"lookup_name": "WavePaintings",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Wave Paintings",
+			"qfep_connection": "Oscillation as the fundamental pattern of non-rest — perpetual movement between poles. The simplest E(S) that isn't random: structured, predictable, yet never still. Painting makes the wave's F-structure visible as trace.",
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/WavePaintings.tscn",
+			"sequence": "wavefunctions",
+			"size_group": "xlarge",
+			"tags": [
+				"2d",
+				"animation",
+				"chaos",
+				"color",
+				"interactive",
+				"visualization",
+				"vr",
+				"wave"
+			]
+		},
+		"WaveRideScene": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "WaveRideScene",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "WaveRideScene",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "WaveRideScene",
+			"parameters": {
+				"footprint": [
+					1.0,
+					9.0,
+					1.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/wavefunctions/wave_function_ride/WaveRideScene.tscn",
+			"tags": [
 				"waves"
 			]
 		},
 		"air_music_display_case": {
-			"name": "Air Music Display Case",
-			"lookup_name": "air_music_display_case",
-			"description": "A 1m glass museum display case with dark walnut wood frame, containing the Air Music spatial audio system. Minimalist Scandinavian design inspired by Ferm Living. Sound is subtle and ambient—notes triggered by movement through space, phasing loops creating evolving texture.",
-			"scene": "res://commons/artifacts/air_music_display_case/air_music_display_case.tscn",
 			"category": "waves",
+			"complexity": "beginner",
+			"description": "A 1m glass museum display case with dark walnut wood frame, containing the Air Music spatial audio system. Minimalist Scandinavian design inspired by Ferm Living. Sound is subtle and ambient—notes triggered by movement through space, phasing loops creating evolving texture.",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
 			"include_in_map_data": true,
+			"lookup_name": "air_music_display_case",
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
 			],
+			"name": "Air Music Display Case",
+			"scene": "res://commons/artifacts/air_music_display_case/air_music_display_case.tscn",
 			"sequence": "wavefunctions",
-			"complexity": "beginner",
 			"tags": [
 				"animation",
 				"simulation",
 				"sound",
 				"visualization",
 				"waves"
+			]
+		},
+		"atmosphericmonitoring": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Three analog gauges at different frequencies: pressure (0.05 Hz slow drift), temperature (0.02 Hz), humidity (0.03 Hz). Demonstrates how multiple independent oscillations create complex patterns. Status lights indicate normal ranges. Real atmospheric data oscillates similarly.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
 			],
+			"include_in_map_data": true,
+			"lookup_name": "atmosphericmonitoring",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Atmospheric Monitoring Station",
+			"scene": "res://commons/lab/atmosphericmonitoring/atmosphericmonitoring.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"probability",
+				"waves"
+			]
+		},
+		"bernini_columns": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Baroque architectural wave patterns",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "bernini_columns",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Bernini Columns",
+			"scene": "res://algorithms/wavefunctions/berninicolumns/BerniniScene.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"wave"
+			]
+		},
+		"biomagneticresonator": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Demonstrates standing waves with harmonic superposition. Core pulses at fundamental frequency while field rings show Σ(1/h)*sin(h*ω*t + φ)—each ring receives the sum of fundamental plus overtones. Adjustable harmonic count (1-8). Energy beams rotate with phase offsets.",
 			"dev_themes": [
 				"music",
 				"oscillation",
 				"physics",
 				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "biomagneticresonator",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Biomagnetic Resonator",
+			"scene": "res://commons/lab/biomagneticresonator/biomagneticresonator.tscn",
+			"tags": [
+				"sound",
+				"visualization",
+				"wave"
 			]
 		},
-		"chladni_plate": {
-			"name": "Chladni Plate",
-			"lookup_name": "chladni_plate",
-			"description": "Vibrating metal plate with sand particles that migrate to nodal lines, forming standing wave patterns. Auto-cycles through modes showing different resonant geometries. Ernst Chladni's classic 18th-century experiment demonstrating that sound creates visible form.",
-			"qfep_connection": "Matter self-organizing into F-minimal patterns under vibrational forcing. Sand finds the nodes — the zero-entropy positions where the plate doesn't vibrate. Particles seek stillness within motion: F-minimization in physical space.",
-			"scene": "res://commons/artifacts/chladni_plate/chladni_plate.tscn",
+		"cable_builder": {
 			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Construct hanging cables between anchor points—watch them sag into catenaries, the natural curve of flexible lines under gravity. Engineering meets wave mathematics.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
 			"include_in_map_data": true,
+			"lookup_name": "cable_builder",
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
 			],
+			"name": "Cable Builder",
+			"scene": "res://algorithms/wavefunctions/line_builder_3d/cable_builder.tscn",
 			"sequence": "wavefunctions",
+			"tags": [
+				"physics",
+				"wave"
+			]
+		},
+		"chemicalapparatus": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Chemistry station with bubbling liquids using sine-based animation. Flask and beaker liquids oscillate with phase offsets demonstrating wave relationships. Test tubes show wave propagation. Bunsen burner flame flickers using multi-frequency sine superposition for natural randomness.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "chemicalapparatus",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Chemical Apparatus",
+			"scene": "res://commons/lab/chemicalapparatus/chemicalapparatus.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"sound",
+				"visualization",
+				"wave"
+			]
+		},
+		"chladni_plate": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Vibrating metal plate with sand particles that migrate to nodal lines, forming standing wave patterns. Auto-cycles through modes showing different resonant geometries. Ernst Chladni's classic 18th-century experiment demonstrating that sound creates visible form.",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"interaction": "observe",
 			"interactions": [
 				"observe"
 			],
+			"lookup_name": "chladni_plate",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Chladni Plate",
 			"parameters": {
 				"footprint": [
-					1,
-					1,
-					1
+					1.0,
+					1.0,
+					1.0
 				],
 				"size_group": "compact"
 			},
-			"interaction": "observe",
-			"complexity": "intermediate",
+			"qfep_connection": "Matter self-organizing into F-minimal patterns under vibrational forcing. Sand finds the nodes — the zero-entropy positions where the plate doesn't vibrate. Particles seek stillness within motion: F-minimization in physical space.",
+			"scene": "res://commons/artifacts/chladni_plate/chladni_plate.tscn",
+			"sequence": "wavefunctions",
 			"tags": [
 				"chladni",
 				"vibration",
@@ -2277,1096 +1797,27 @@
 				"resonance",
 				"sand",
 				"patterns"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"GlassRack": {
-			"name": "Glass Rack",
-			"lookup_name": "GlassRack",
-			"description": "Modular laboratory glassware system. Configurable spiral condensers, wobbly tubes, flasks, junctions. Use #config:spiral_tube, #config:spiral_condenser, #config:distillation_rack, or #config:simple_tube. Turtle path commands: f,l,r,u,d,spiral,wobbly,flask,junction.",
-			"scene": "res://commons/glass_rack/GlassRack.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"interactions": [
-				"observe"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"interaction": "observe",
-			"complexity": "intermediate",
-			"tags": [
-				"glass",
-				"lab",
-				"condenser",
-				"spiral",
-				"chemistry",
-				"apparatus",
-				"modular"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"multimeter": {
-			"name": "Multimeter",
-			"lookup_name": "multimeter",
-			"description": "Digital multimeter with analog-style oscillating needle. Demonstrates AC voltage waveforms—the needle deflects following sin(t * frequency), showing how alternating current oscillates between positive and negative. Modes: AC voltage, DC voltage, resistance, frequency.",
-			"scene": "res://commons/lab/multimeter/multimeter.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"sound",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"chemicalapparatus": {
-			"name": "Chemical Apparatus",
-			"lookup_name": "chemicalapparatus",
-			"description": "Chemistry station with bubbling liquids using sine-based animation. Flask and beaker liquids oscillate with phase offsets demonstrating wave relationships. Test tubes show wave propagation. Bunsen burner flame flickers using multi-frequency sine superposition for natural randomness.",
-			"scene": "res://commons/lab/chemicalapparatus/chemicalapparatus.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "advanced",
-			"tags": [
-				"sound",
-				"visualization",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"samplevialrack": {
-			"name": "Sample Vial Rack",
-			"lookup_name": "samplevialrack",
-			"description": "Six sample vials demonstrating phase relationships. Each vial glows with a sine wave offset by TAU/6 from its neighbor, creating a visible wave propagation effect. Modes: linear wave travel, radial expansion from center, random phases. Classic wave interference visualization.",
-			"scene": "res://commons/lab/samplevialrack/samplevialrack.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "advanced",
-			"tags": [
-				"linear_algebra",
-				"probability",
-				"procedural",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"electronicscales": {
-			"name": "Electronic Scales",
-			"lookup_name": "electronicscales",
-			"description": "Laboratory scales demonstrating damped harmonic oscillation. When weighing, the display settles using e^(-bt) * sin(ωt)—exponential decay multiplied by sine. Adjustable damping factor and frequency. Shows how real oscillating systems lose energy over time.",
-			"scene": "res://commons/lab/electronicscales/electronicscales.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"sound",
-				"visualization",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"microscope": {
-			"name": "Microscope",
-			"lookup_name": "microscope",
-			"description": "Laboratory microscope with pulsing illumination. Stage light breathes with slow sine wave, objective lens glows in quadrature phase. Auto-focus mode oscillates the stage height. Focus knob rotates to show mechanical-wave coupling. Three color-coded objectives.",
-			"scene": "res://commons/lab/microscope/microscope.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"color",
-				"visualization",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"atmosphericmonitoring": {
-			"name": "Atmospheric Monitoring Station",
-			"lookup_name": "atmosphericmonitoring",
-			"description": "Three analog gauges at different frequencies: pressure (0.05 Hz slow drift), temperature (0.02 Hz), humidity (0.03 Hz). Demonstrates how multiple independent oscillations create complex patterns. Status lights indicate normal ranges. Real atmospheric data oscillates similarly.",
-			"scene": "res://commons/lab/atmosphericmonitoring/atmosphericmonitoring.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"probability",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"holographicdisplay": {
-			"name": "Holographic Display",
-			"lookup_name": "holographicdisplay",
-			"description": "Holographic projector with sine-based effects. Scan line sweeps vertically using sin(t), content rotates and bobs, flicker effect at 15Hz creates subtle instability. Wireframe cube demonstrates 3D rotation. Projector lights pulse with phase offsets around the ring.",
-			"scene": "res://commons/lab/holographicdisplay/holographicdisplay.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"visualization",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"biomagneticresonator": {
-			"name": "Biomagnetic Resonator",
-			"lookup_name": "biomagneticresonator",
-			"description": "Demonstrates standing waves with harmonic superposition. Core pulses at fundamental frequency while field rings show Σ(1/h)*sin(h*ω*t + φ)—each ring receives the sum of fundamental plus overtones. Adjustable harmonic count (1-8). Energy beams rotate with phase offsets.",
-			"scene": "res://commons/lab/biomagneticresonator/biomagneticresonator.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "advanced",
-			"tags": [
-				"sound",
-				"visualization",
-				"wave"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"static_reference_cube": {
-			"name": "Static Reference Cube",
-			"lookup_name": "static_reference_cube",
-			"description": "Stage 1 of oscillation progression: A motionless cube establishing the baseline for comparison. Without stillness, we cannot perceive motion. The constant against which all oscillation is measured. Position = constant, y = 0.",
-			"scene": "res://commons/artifacts/static_reference_cube/static_reference_cube.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"animation",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"rotating_cube_demo": {
-			"name": "Rotating Cube Demo",
-			"lookup_name": "rotating_cube_demo",
-			"description": "Continuous rotation demonstration: θ += ω·dt. The simplest rotational motion—angle increases by angular velocity times delta time each frame. Ground arc shows the rotation path, direction arrow tracks the current angle. Constant spin, no oscillation.",
-			"scene": "res://commons/artifacts/rotating_cube_demo/rotating_cube_demo.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"animation",
-				"physics",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"y_oscillation_cube": {
-			"name": "Y-Oscillation Cube",
-			"lookup_name": "y_oscillation_cube",
-			"description": "Stage 2 of oscillation progression: Core concept of y = A·sin(ωt). A cube oscillates vertically along a rail, demonstrating how sine function maps time to position. Trail ghosts show motion path, real-time labels display t, sin(t), and y values. The fundamental oscillation.",
-			"scene": "res://commons/artifacts/y_oscillation_cube/y_oscillation_cube.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"animation",
-				"visualization",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"rotation_oscillation_cube": {
-			"name": "Rotation Oscillation Cube",
-			"lookup_name": "rotation_oscillation_cube",
-			"description": "Stage 3 of oscillation progression: θ = A·sin(ωt) applied to rotation instead of position. Same mathematics, different output mapping. Arc indicator shows rotation range, direction arrow on cube face. Toggle between oscillating mode (pendulum-like) and continuous rotation (θ += ω·dt).",
-			"scene": "res://commons/artifacts/rotation_oscillation_cube/rotation_oscillation_cube.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"interactive",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"oscillation_controlled_cube": {
-			"name": "Oscillation Controlled Cube",
-			"lookup_name": "oscillation_controlled_cube",
-			"description": "Stage 4 of oscillation progression: The 'mario cube' responding to pendulum control. Three simultaneous mappings: y_offset → Y position, angular_velocity → rotation speed, amplitude → scale pulse. Visual guides show vertical rail, rotation arc, and real-time parameter breakdown. QFEP: One input, many outputs—oscillation as control signal.",
-			"scene": "res://commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"animation",
-				"qfep",
-				"visualization",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"qfep",
-				"waves"
-			]
-		},
-		"sine_wall_explanation": {
-			"name": "Sine Wall Explanation",
-			"lookup_name": "sine_wall_explanation",
-			"description": "1m display case showing how sine function shapes corridor walls. Animated mini-corridor demonstrates x = A·sin(f·z)—the wave displacement that creates the sine_wall_corridor effect. Shows amplitude, frequency parameters with live wave propagation.",
-			"scene": "res://commons/artifacts/sine_wall_explanation/sine_wall_explanation.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "beginner",
-			"tags": [
-				"sound",
-				"visualization",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"sine_space_explanation": {
-			"name": "Sine Space Explanation",
-			"lookup_name": "sine_space_explanation",
-			"description": "1m display case showing how sine waves modulate 3D space. An 8×8 grid of points demonstrates y = A·sin(x)·sin(z)—the product of two sine functions creating a wave surface. Points rise and fall showing phase relationships across X and Z axes.",
-			"scene": "res://commons/artifacts/sine_space_explanation/sine_space_explanation.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "beginner",
-			"tags": [
-				"2d",
-				"3d",
-				"visualization",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"RackSineBasic": {
-			"name": "Sine Wave Rack",
-			"lookup_name": "RackSineBasic",
-			"description": "Basic sine wave synthesizer rack with frequency, amplitude, and duration controls. Includes waveform display. The purest sound—a single frequency oscillating smoothly. Grab sliders in VR to shape the wave, hear mathematics become music.",
-			"scene": "res://commons/audio/rack_presets/rack_sine_basic.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					2,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"interactive",
-				"sound",
-				"visualization",
-				"vr",
-				"wave"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"Rack303Acid": {
-			"name": "303 Acid Rack",
-			"lookup_name": "Rack303Acid",
-			"description": "Roland TB-303 style acid bass synthesizer with cutoff and resonance knobs. The squelchy sound that defined acid house—filter sweeps turning simple waveforms into liquid screams. Resonance creates feedback peaks at the cutoff frequency.",
-			"scene": "res://commons/audio/rack_presets/rack_303_acid.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "beginner",
-			"tags": [
-				"sound",
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"Rack808Drums": {
-			"name": "808 Kick Rack",
-			"lookup_name": "Rack808Drums",
-			"description": "Deep 808 kick drum synthesizer with decay control and VU meter. The foundation of hip-hop and electronic music—sub-bass that you feel more than hear. Sine wave with pitch envelope creates that iconic 'boom'.",
-			"scene": "res://commons/audio/rack_presets/rack_808_drums.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"sound",
-				"wave"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"RackMario": {
-			"name": "Mario Pickup Rack",
-			"lookup_name": "RackMario",
-			"description": "Mario-style pickup sound synthesizer with start/end frequency sweep controls. The iconic coin sound—a rapid frequency chirp that triggers dopamine. Demonstrates how frequency modulation over time creates recognizable timbres.",
-			"scene": "res://commons/audio/rack_presets/rack_mario.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "beginner",
-			"tags": [
-				"sound",
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"RackDX7Piano": {
-			"name": "DX7 Piano Rack",
-			"lookup_name": "RackDX7Piano",
-			"description": "Yamaha DX7 FM electric piano synthesizer with attack and release envelope controls. The sound of the 80s—FM synthesis creating bell-like tones impossible with analog. Frequency modulation: one oscillator modulating another's frequency.",
-			"scene": "res://commons/audio/rack_presets/rack_dx7_piano.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"hazard",
-				"sound",
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"RackMoogBass": {
-			"name": "Moog Bass Rack",
-			"lookup_name": "RackMoogBass",
-			"description": "Classic Moog-style bass/lead synthesizer with ladder filter cutoff and resonance. The fat analog sound—oscillators through the famous 4-pole filter. Cutoff frequency determines which harmonics pass; resonance emphasizes the cutoff point.",
-			"scene": "res://commons/audio/rack_presets/rack_moog_bass.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "advanced",
-			"tags": [
-				"sound",
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"RackAmbientDrone": {
-			"name": "Ambient Drone Rack",
-			"lookup_name": "RackAmbientDrone",
-			"description": "Atmospheric ambient drone synthesizer with lissajous phase display. Slowly evolving textures—sound as environment rather than event. Multiple detuned oscillators create beating patterns; the lissajous shows phase relationships between channels.",
-			"scene": "res://commons/audio/rack_presets/rack_ambient_drone.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"sound",
-				"visualization",
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"VRAudioMonitor": {
-			"name": "VR Audio Monitor",
-			"lookup_name": "VRAudioMonitor",
-			"description": "Standalone audio monitor display showing waveform and spectrum analysis. Place near any audio source to visualize sound. The waveform shows amplitude over time; the spectrum shows frequency content—two complementary views of the same signal.",
-			"scene": "res://commons/audio/interfaces/VRAudioMonitor.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"sound",
-				"visualization",
-				"vr",
-				"wave"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"harmonic_distance_table": {
-			"name": "Harmonic Distance Table",
-			"lookup_name": "harmonic_distance_table",
-			"description": "Tabletop artifact with 12 chromatic pitch nodes in circle-of-fifths layout. Grab nodes to hear intervals; spatial distance corresponds to harmonic consonance. Activate a node as tonal center to see all others recolor by harmonic function (tonic=green, dominant=blue, subdominant=yellow). Glowing overtone connection lines show shared harmonics between pitches. Cognitive compression: harmonic distance becomes a felt spatial relationship.",
-			"scene": "res://commons/artifacts/harmonic_distance_table/harmonic_distance_table.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"testmaps",
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "advanced",
-			"tags": [
-				"graph",
-				"interactive",
-				"sound",
-				"visualization",
-				"vr",
-				"wave"
-			],
-			"dev_themes": [
-				"art",
-				"music",
-				"oscillation",
-				"physics"
-			]
-		},
-		"timbre_sculptor": {
-			"name": "Timbre Sculptor",
-			"lookup_name": "timbre_sculptor",
-			"description": "VR rack panel with 8 vertical sliders controlling harmonic amplitudes for real-time additive synthesis. Waveform and spectrum displays show the result. Preset buttons morph to known timbres: sine, square, sawtooth, triangle, and vowel approximations (A, E, I, O, U). Cognitive compression: timbre IS harmonic recipe — the slider heights ARE the spectrum. Build Fourier transforms with your hands.",
-			"scene": "res://commons/artifacts/timbre_sculptor/timbre_sculptor.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "expert",
-			"tags": [
-				"animation",
-				"interactive",
-				"visualization",
-				"vr",
-				"wave"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"GlassRack_BranchingCondenser": {
-			"name": "Glass Rack: Branching Condenser",
-			"lookup_name": "GlassRack_BranchingCondenser",
-			"description": "Y-pipe splits flow into two parallel spiral condensers, then recombines.",
-			"scene": "res://commons/glass_rack/presets/branching_condenser.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"GlassRack_BreakingBadCoffee": {
-			"name": "Glass Rack: Breaking Bad Coffee",
-			"lookup_name": "GlassRack_BreakingBadCoffee",
-			"description": "Multi-level cold drip coffee / distillation apparatus with metal frame.",
-			"scene": "res://commons/glass_rack/presets/breaking_bad_coffee.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"GlassRack_ComplexApparatus": {
-			"name": "Glass Rack: Complex Apparatus",
-			"lookup_name": "GlassRack_ComplexApparatus",
-			"description": "Complete reflux apparatus with boiling flask, condenser, collection vessel, and branching tubes.",
-			"scene": "res://commons/glass_rack/presets/complex_apparatus.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"GlassRack_DistillationRack": {
-			"name": "Glass Rack: Distillation Rack",
-			"lookup_name": "GlassRack_DistillationRack",
-			"description": "Classic distillation setup with flask, spiral condenser, and collection vessel.",
-			"scene": "res://commons/glass_rack/presets/distillation_rack.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"GlassRack_DistillationY": {
-			"name": "Glass Rack: Y-Branch Distillation",
-			"lookup_name": "GlassRack_DistillationY",
-			"description": "Simple Y-branch with two spiral condensers feeding into beakers.",
-			"scene": "res://commons/glass_rack/presets/distillation_y.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "beginner",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"GlassRack_FractionalDistillation": {
-			"name": "Glass Rack: Fractional Distillation",
-			"lookup_name": "GlassRack_FractionalDistillation",
-			"description": "Multi-stage distillation with reducers and collection points.",
-			"scene": "res://commons/glass_rack/presets/fractional_distillation.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"GlassRack_RefluxApparatus": {
-			"name": "Glass Rack: Reflux Apparatus",
-			"lookup_name": "GlassRack_RefluxApparatus",
-			"description": "Flask with condenser and U-bend return for continuous reflux.",
-			"scene": "res://commons/glass_rack/presets/reflux_apparatus.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"GlassRack_SbendManifold": {
-			"name": "Glass Rack: S-Bend Manifold",
-			"lookup_name": "GlassRack_SbendManifold",
-			"description": "Multiple S-bends creating an offset distribution manifold.",
-			"scene": "res://commons/glass_rack/presets/sbend_manifold.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "expert",
-			"tags": [
-				"geometry",
-				"topology",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"GlassRack_SimpleTube": {
-			"name": "Glass Rack: Simple Tube",
-			"lookup_name": "GlassRack_SimpleTube",
-			"description": "Basic straight tube with a bend.",
-			"scene": "res://commons/glass_rack/presets/simple_tube.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "beginner",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"GlassRack_SpiralCondenser": {
-			"name": "Glass Rack: Spiral Condenser",
-			"lookup_name": "GlassRack_SpiralCondenser",
-			"description": "Standalone spiral condenser with inlet and outlet tubes.",
-			"scene": "res://commons/glass_rack/presets/spiral_condenser.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"GlassRack_SpiralTube": {
-			"name": "Glass Rack: Spiral Tube",
-			"lookup_name": "GlassRack_SpiralTube",
-			"description": "Simple spiral glass tube — classic lab condenser coil.",
-			"scene": "res://commons/glass_rack/presets/spiral_tube.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "beginner",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"BigPipe_StraightRun": {
-			"name": "Big Pipe: Straight Run",
-			"lookup_name": "BigPipe_StraightRun",
-			"description": "Capped pipeline — simple industrial backbone.",
-			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/straight_run.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "beginner",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"BigPipe_LBend": {
-			"name": "Big Pipe: L-Bend",
-			"lookup_name": "BigPipe_LBend",
-			"description": "Right-angle corner routing with straight runs on each side.",
-			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/l_bend.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"BigPipe_TDistribution": {
-			"name": "Big Pipe: T-Distribution",
-			"lookup_name": "BigPipe_TDistribution",
-			"description": "Main line splits into two branches via T-junction.",
-			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/t_distribution.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"BigPipe_Serpentine": {
-			"name": "Big Pipe: Serpentine",
-			"lookup_name": "BigPipe_Serpentine",
-			"description": "Back-and-forth pipe runs for cooling or heating pattern.",
-			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/serpentine.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"pattern",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"BigPipe_VerticalBypass": {
-			"name": "Big Pipe: Vertical Bypass",
-			"lookup_name": "BigPipe_VerticalBypass",
-			"description": "Main line with vertical up-and-over bypass loop.",
-			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/vertical_bypass.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "beginner",
-			"tags": [
-				"animation",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"BigPipe_CrossManifold": {
-			"name": "Big Pipe: Cross Manifold",
-			"lookup_name": "BigPipe_CrossManifold",
-			"description": "Central cross junction with four capped branches — distribution hub.",
-			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/cross_manifold.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "expert",
-			"tags": [
-				"geometry",
-				"topology",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"BigPipe_IndustrialBranch": {
-			"name": "Big Pipe: Industrial Branch",
-			"lookup_name": "BigPipe_IndustrialBranch",
-			"description": "Full demo of all pipe segments: S-bend, T-junction, cross, vertical up/down, end cap.",
-			"scene": "res://algorithms/wavefunctions/big_pipe_system/presets/industrial_branch.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "beginner",
-			"tags": [
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"BigPipeSystem": {
-			"name": "Big Pipe System",
-			"lookup_name": "BigPipeSystem",
-			"description": "Industrial drain pipe network built from modular segments — straights, corners, T-junctions, crosses, vertical bends. Pipes as frozen flow: the physical infrastructure that channels movement. WFC-adjacent: each segment constrains its neighbors.",
-			"scene": "res://algorithms/wavefunctions/big_pipe_system/BigPipeSystem.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"animation",
-				"graph",
-				"simulation",
-				"waves"
-			],
-			"dev_themes": [
-				"oscillation",
-				"physics",
-				"waves"
-			]
-		},
-		"lab_table": {
-			"name": "Lab Table",
-			"lookup_name": "lab_table",
-			"description": "Procedural wooden lab table with legs and support frame. Surface for placing instruments and apparatus. The workbench where oscillation becomes experiment.",
-			"scene": "res://commons/lab/table/table.tscn",
-			"category": "waves",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions",
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"procedural",
-				"waves"
-			],
-			"dev_themes": [
-				"music",
-				"oscillation",
-				"physics",
-				"waves"
 			]
 		},
 		"chord_tension_spring": {
-			"name": "Chord Tension Spring",
-			"lookup_name": "chord_tension_spring",
-			"description": "Four pitch nodes connected by visible springs. Consonant chord = springs relax, nodes settle. Dissonant chord = springs vibrate, nodes jitter. Drag nodes to change pitch and feel tension physically. Preset buttons for major, minor, dom7, dim, aug, sus4, tritone. Resolution IS relaxation.",
-			"scene": "res://commons/artifacts/chord_tension_spring/chord_tension_spring.tscn",
 			"category": "audio",
+			"complexity": "intermediate",
+			"description": "Four pitch nodes connected by visible springs. Consonant chord = springs relax, nodes settle. Dissonant chord = springs vibrate, nodes jitter. Drag nodes to change pitch and feel tension physically. Preset buttons for major, minor, dom7, dim, aug, sus4, tritone. Resolution IS relaxation.",
 			"dev_themes": [
 				"audio",
 				"music_theory",
 				"physics"
 			],
-			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"lookup_name": "chord_tension_spring",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps",
+				"wavefunctions"
+			],
+			"name": "Chord Tension Spring",
+			"scene": "res://commons/artifacts/chord_tension_spring/chord_tension_spring.tscn",
+			"sequence": "wavefunctions",
 			"tags": [
 				"chord",
 				"tension",
@@ -3375,117 +1826,1730 @@
 				"spring",
 				"harmony",
 				"cognitive_compression"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"testmaps",
-				"wavefunctions"
-			],
-			"sequence": "wavefunctions"
+			]
 		},
-		"modulor_man_demo": {
-			"lookup_name": "modulor_man_demo",
-			"name": "modulor_man_demo",
-			"description": "modulor_man_demo.",
-			"scene": "res://algorithms/wavefunctions/line_builder_3d/modulor_man_demo.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"primitives"
-			],
-			"footprint": [
-				3,
-				4,
-				1
-			],
-			"size_group": "room_scale",
-			"parameters": {
-				"footprint": [
-					3,
-					4,
-					1
-				],
-				"size_group": "room_scale"
-			},
+		"circle_spiral_scene": {
+			"category": "waves",
 			"complexity": "beginner",
+			"description": "circle_spiral_scene",
 			"dev_themes": [
 				"oscillation",
 				"physics",
 				"waves"
 			],
-			"tags": [
-				"wave"
-			]
-		},
-		"BigPipe": {
-			"lookup_name": "BigPipe",
-			"name": "BigPipe",
-			"description": "Large drain pipe system with segments. Turtle commands: f,l,r,u,d,s(s-bend). Use BigPipe#path:f,f,l,f,u,f",
-			"scene": "res://algorithms/wavefunctions/big_pipe_system/BigPipeSystem.tscn",
-			"category": "unknown",
 			"include_in_map_data": true,
+			"lookup_name": "circle_spiral_scene",
 			"map_ready": true,
 			"map_sequences": [],
-			"footprint": [
-				2,
-				1,
-				2
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					2,
-					1,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
+			"name": "circle_spiral_scene",
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/circle_spiral_scene.tscn",
 			"tags": [
-				"simulation"
-			],
+				"spiral",
+				"waves"
+			]
+		},
+		"coshlea": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Creates a hyperbolic cosine helicoid surface with adjustable domain sampling.",
 			"dev_themes": [
 				"oscillation",
 				"physics",
 				"waves"
-			]
-		},
-		"soundboxes": {
-			"lookup_name": "soundboxes",
-			"name": "Dynamic Sound Box",
-			"description": "SoundBox: Procedural Sound Gallery. Use #collections:synthetic, retro, legends, drums, body, machine, synth, sacred, noir, weather, game for presets.",
-			"scene": "res://algorithms/wavefunctions/sound_box/SoundBox.tscn",
-			"category": "unknown",
+			],
 			"include_in_map_data": true,
+			"lookup_name": "coshlea",
 			"map_ready": true,
 			"map_sequences": [],
-			"footprint": [
-				10,
-				10,
-				10
-			],
-			"size_group": "environment",
+			"name": "coshlea",
 			"parameters": {
 				"footprint": [
-					10,
-					10,
-					10
+					5.0,
+					13.0,
+					19.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/wavefunctions/coshlea/coshlea.tscn",
+			"tags": [
+				"3d",
+				"geometry",
+				"waves"
+			]
+		},
+		"coupled_oscillator_lattice": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "12×12 oscillator grid",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "coupled_oscillator_lattice",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "CoupledOscillatorLattice",
+			"qfep_connection": "Coupled oscillators demonstrate how local F-interactions propagate into global wave patterns. Each oscillator only knows its neighbors, yet collective modes emerge — local order generating distributed E(S) dynamics.",
+			"scene": "res://algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.tscn",
+			"tags": [
+				"2d",
+				"waves"
+			]
+		},
+		"double_helix_oscillator": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "DNA-like double helix structure (oscillation-driven variant)",
+			"dev_themes": [
+				"biology",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "double_helix_oscillator",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Double Helix Oscillator",
+			"parameters": {
+				"footprint": [
+					7.0,
+					6.0,
+					6.0
 				],
 				"size_group": "environment"
 			},
-			"complexity": "intermediate",
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/DoubleHelix.tscn",
 			"tags": [
-				"animation",
-				"procedural",
-				"sound"
+				"waves"
+			]
+		},
+		"double_helix_scene": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "double_helix_scene",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
 			],
+			"include_in_map_data": true,
+			"lookup_name": "double_helix_scene",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "double_helix_scene",
+			"parameters": {
+				"footprint": [
+					1.0,
+					7.0,
+					1.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/wavefunctions/oscillation_driver/double_helix_scene.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"waves"
+			]
+		},
+		"doublehelix": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Procedurally models an adjustable DNA-style double helix with strands, rungs, and rebuild-on-change controls.",
+			"dev_themes": [
+				"biology",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "doublehelix",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "doublehelix",
+			"scene": "res://algorithms/wavefunctions/doublehelix/doublehelix.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"dual_display_test": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"footprint": [
+				3,
+				3,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "dual_display_test",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "dual_display_test",
+			"parameters": {
+				"footprint": [
+					3,
+					3,
+					1
+				],
+				"size_group": "standard"
+			},
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/dual_display_test.tscn",
+			"sequence": "wavefunctions",
+			"size_group": "standard",
+			"tags": [
+				"sound",
+				"wave"
+			]
+		},
+		"electronicscales": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Laboratory scales demonstrating damped harmonic oscillation. When weighing, the display settles using e^(-bt) * sin(ωt)—exponential decay multiplied by sine. Adjustable damping factor and frequency. Shows how real oscillating systems lose energy over time.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "electronicscales",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Electronic Scales",
+			"scene": "res://commons/lab/electronicscales/electronicscales.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"sound",
+				"visualization",
+				"wave"
+			]
+		},
+		"foucault_pendulum": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "A brass pendulum swings from high above, drawing rosette patterns on a cream canvas below. The swing plane slowly precesses—Foucault's elegant proof that Earth rotates beneath us. Dark ink traces accumulate into intricate spirograph-like figures over time.",
+			"dev_themes": [
+				"art",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"footprint": [
+				8,
+				16,
+				8
+			],
+			"include_in_map_data": true,
+			"lookup_name": "foucault_pendulum",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Foucault Pendulum",
+			"parameters": {
+				"footprint": [
+					8,
+					16,
+					8
+				],
+				"size_group": "xlarge"
+			},
+			"qfep_connection": "The pendulum maintains its F (swing plane) while the frame rotates beneath it. Inertia as F-preservation — the system resists external perturbation, holding its internal model constant against a changing reference frame.",
+			"scene": "res://commons/artifacts/foucault_pendulum/foucault_pendulum.tscn",
+			"sequence": "wavefunctions",
+			"size_group": "xlarge",
+			"tags": [
+				"2d",
+				"math",
+				"pendulum",
+				"visualization",
+				"wave"
+			]
+		},
+		"fourier_transform": {
+			"category": "waves",
+			"complexity": "expert",
+			"description": "Frequency domain analysis and signal processing",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fourier_transform",
+			"map_ready": true,
+			"map_sequences": [
+				"devexamples",
+				"structure"
+			],
+			"name": "Fourier Transform",
+			"parameters": {
+				"footprint": [
+					17.0,
+					21.0,
+					16.0
+				],
+				"size_group": "world_scale"
+			},
+			"qfep_connection": "The Fourier transform IS a change of F-basis — decomposing a complex signal into its frequency components. Time-domain complexity becomes frequency-domain order. The ultimate F-minimization: any signal reduced to amplitudes and phases.",
+			"scene": "res://algorithms/wavefunctions/fouriertransform/fouriertransform.tscn",
+			"sequence": "devexamples",
+			"tags": [
+				"sound",
+				"waves"
+			]
+		},
+		"fourier_transform_advanced": {
+			"category": "waves",
+			"complexity": "expert",
+			"description": "Enhanced frequency domain signal analysis",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fourier_transform_advanced",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Advanced Fourier Transform",
+			"parameters": {
+				"footprint": [
+					17.0,
+					25.0,
+					16.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/wavefunctions/fourier_transform/fourier_transform.tscn",
+			"tags": [
+				"sound",
+				"waves"
+			]
+		},
+		"fouriertransformshape": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Shows nested rotating circles that trace a Fourier drawing with emissive connections.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fouriertransformshape",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "fouriertransformshape",
+			"parameters": {
+				"footprint": [
+					1.0,
+					3.0,
+					9.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/wavefunctions/fouriertransformshape/fouriertransformshape.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"hallway_scene": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Populates a tunnel with sine-driven cylinder tubes and animates them through time.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "hallway_scene",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "hallway_scene",
+			"parameters": {
+				"footprint": [
+					1.0,
+					6.0,
+					26.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/wavefunctions/sine_hallway/hallway_scene.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"waves"
+			]
+		},
+		"harmonic_distance_table": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Tabletop artifact with 12 chromatic pitch nodes in circle-of-fifths layout. Grab nodes to hear intervals; spatial distance corresponds to harmonic consonance. Activate a node as tonal center to see all others recolor by harmonic function (tonic=green, dominant=blue, subdominant=yellow). Glowing overtone connection lines show shared harmonics between pitches. Cognitive compression: harmonic distance becomes a felt spatial relationship.",
 			"dev_themes": [
 				"art",
 				"music",
 				"oscillation",
 				"physics"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "harmonic_distance_table",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps",
+				"wavefunctions"
+			],
+			"name": "Harmonic Distance Table",
+			"scene": "res://commons/artifacts/harmonic_distance_table/harmonic_distance_table.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"graph",
+				"interactive",
+				"sound",
+				"visualization",
+				"vr",
+				"wave"
+			]
+		},
+		"holographicdisplay": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Holographic projector with sine-based effects. Scan line sweeps vertically using sin(t), content rotates and bobs, flicker effect at 15Hz creates subtle instability. Wireframe cube demonstrates 3D rotation. Projector lights pulse with phase offsets around the ring.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "holographicdisplay",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Holographic Display",
+			"scene": "res://commons/lab/holographicdisplay/holographicdisplay.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"3d",
+				"visualization",
+				"waves"
+			]
+		},
+		"john_cage_tech_noir": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Procedurally composes endless techno-noir ambience with city drones, random effects, and a loading-bar visualizer.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"footprint": [
+				15,
+				5,
+				14
+			],
+			"include_in_map_data": true,
+			"lookup_name": "john_cage_tech_noir",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "john_cage_tech_noir",
+			"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
+			"sequence": "wavefunctions",
+			"size_group": "xlarge",
+			"tags": [
+				"probability",
+				"procedural",
+				"waves"
+			]
+		},
+		"kusama_sine": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Yayoi Kusama inspired sine wave patterns",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"footprint": [
+				9,
+				3,
+				9
+			],
+			"include_in_map_data": true,
+			"lookup_name": "kusama_sine",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Kusama Sine",
+			"scene": "res://algorithms/wavefunctions/kusamasine/kusama_sine.tscn",
+			"sequence": "wavefunctions",
+			"size_group": "xlarge",
+			"tags": [
+				"wave"
+			]
+		},
+		"lab_table": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Procedural wooden lab table with legs and support frame. Surface for placing instruments and apparatus. The workbench where oscillation becomes experiment.",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "lab_table",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Lab Table",
+			"scene": "res://commons/lab/table/table.tscn",
+			"sequence": "wavefunctions",
+			"size_group": "standard",
+			"tags": [
+				"3d",
+				"procedural",
+				"waves"
+			]
+		},
+		"line_builder_3d": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Draw curves in space—each line segment becomes a building block for wave forms. Connect points to see how discrete positions approximate continuous curves.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "line_builder_3d",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Line Builder 3D",
+			"parameters": {
+				"footprint": [
+					3.0,
+					1.0,
+					1.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 3.0,
+					"type": "omni"
+				}
+			},
+			"scene": "res://algorithms/wavefunctions/line_builder_3d/line_builder_3d.tscn",
+			"sequence": "primitives",
+			"tags": [
+				"3d",
+				"graph",
+				"visualization",
+				"wave"
+			]
+		},
+		"lissajous_curves": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Parametric curves with particle tracer",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "lissajous_curves",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "LissajousCurves",
+			"qfep_connection": "Two orthogonal oscillations creating complex figures — the ratio of frequencies determines the pattern. Rational ratios produce closed curves (low F), irrational ratios produce space-filling chaos (high E(S)). Commensurability as order.",
+			"scene": "res://algorithms/wavefunctions/lissajous_curves/lissajous_curves.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"waves"
+			]
+		},
+		"liturgicalambientgen": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Threaded ambient generator that layers choral drones, organ swells, and cathedral effects with progress visualization.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "liturgicalambientgen",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "liturgicalambientgenera",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					3.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/wavefunctions/liturgicalambientgenerator/liturgicalambientgenerator.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"mario_test_sound_ui": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Sci-fi kiosk hosting a VR map-loader station UI with sequence and algorithm filters.",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "mario_test_sound_ui",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "mario_test_sound_ui",
+			"scene": "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"vr",
+				"waves"
+			]
+		},
+		"math_objects": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "A collection of parametric surfaces and curves—the geometric zoo of mathematical forms. Tori, helicoids, Möbius strips: shapes defined by equations rather than construction.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "math_objects",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Mathematical Objects",
+			"scene": "res://commons/primitives/parametric/math_objects.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"waves"
+			]
+		},
+		"microscope": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Laboratory microscope with pulsing illumination. Stage light breathes with slow sine wave, objective lens glows in quadrature phase. Auto-focus mode oscillates the stage height. Focus knob rotates to show mechanical-wave coupling. Three color-coded objectives.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "microscope",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Microscope",
+			"scene": "res://commons/lab/microscope/microscope.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"color",
+				"visualization",
+				"wave"
+			]
+		},
+		"modulor_man_demo": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "modulor_man_demo.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"footprint": [
+				3.0,
+				4.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "modulor_man_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "modulor_man_demo",
+			"parameters": {
+				"footprint": [
+					3.0,
+					4.0,
+					1.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/wavefunctions/line_builder_3d/modulor_man_demo.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"wave"
+			]
+		},
+		"multimeter": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Digital multimeter with analog-style oscillating needle. Demonstrates AC voltage waveforms—the needle deflects following sin(t * frequency), showing how alternating current oscillates between positive and negative. Modes: AC voltage, DC voltage, resistance, frequency.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "multimeter",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Multimeter",
+			"scene": "res://commons/lab/multimeter/multimeter.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"sound",
+				"waves"
+			]
+		},
+		"noir_sequencer": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Film noir style algorithmic music sequencer",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "noir_sequencer",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Noir Sequencer",
+			"scene": "res://algorithms/wavefunctions/noirsequencer/noir_sequencer.tscn",
+			"tags": [
+				"sound",
+				"waves"
+			]
+		},
+		"oscillation_controlled_cube": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Stage 4 of oscillation progression: The 'mario cube' responding to pendulum control. Three simultaneous mappings: y_offset → Y position, angular_velocity → rotation speed, amplitude → scale pulse. Visual guides show vertical rail, rotation arc, and real-time parameter breakdown. QFEP: One input, many outputs—oscillation as control signal.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"qfep",
+				"waves"
+			],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "oscillation_controlled_cube",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Oscillation Controlled Cube",
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.tscn",
+			"sequence": "wavefunctions",
+			"size_group": "compact",
+			"tags": [
+				"animation",
+				"qfep",
+				"visualization",
+				"wave"
+			]
+		},
+		"parametric_pendulum_waves": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Parametric pendulum waves",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "parametric_pendulum_waves",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "ParametricPendulumWaves",
+			"scene": "res://algorithms/wavefunctions/parametric_pendulum_waves/parametric_pendulum_waves.tscn",
+			"tags": [
+				"pendulum",
+				"wave"
+			]
+		},
+		"parametric_shapes": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Mathematical curve and surface generation",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "parametric_shapes",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Parametric Shapes",
+			"parameters": {
+				"footprint": [
+					17.0,
+					23.0,
+					11.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/wavefunctions/parametric_shapes/parametric_shapes.tscn",
+			"tags": [
+				"3d",
+				"waves"
+			]
+		},
+		"pylon_cables": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Four electric pylons with swinging cables between them. Cables sway in the wind. Final cable drops to a transformer box on the ground. Lattice tower construction with insulators.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pylon_cables",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Electric Pylon Cables",
+			"scene": "res://algorithms/wavefunctions/line_builder_3d/pylon_cables.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"rainbow_hallway": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "CSG hallway coated with animated rainbow shader controls and glow-rich lighting.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rainbow_hallway",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "rainbow_hallway",
+			"parameters": {
+				"footprint": [
+					1.0,
+					8.0,
+					13.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/wavefunctions/rainbow_hallway/rainbow_hallway.tscn",
+			"sequence": "color",
+			"tags": [
+				"waves"
+			]
+		},
+		"resonance_frequencies": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Visualization of resonant frequency patterns",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "resonance_frequencies",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Resonance Frequencies",
+			"scene": "res://algorithms/wavefunctions/resonancefrequencies/resonance_frequencies_visualizer_setup.tscn",
+			"tags": [
+				"sound",
+				"waves"
+			]
+		},
+		"resonance_frequencies_visualizer": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Every object has frequencies at which it wants to vibrate—its resonant modes. This visualizer reveals those hidden harmonics, showing how systems amplify certain frequencies while damping others. Resonance is selective listening.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "resonance_frequencies_visualizer",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Resonance Frequencies Visualizer",
+			"qfep_connection": "Resonance as F-alignment — the system's natural modes are where external energy couples most efficiently. At resonance, minimal input produces maximal response because the drive matches the system's internal F-model.",
+			"scene": "res://algorithms/wavefunctions/resonancefrequencies/resonance_frequencies_visualizer.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"resonating_metallophone": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Metal bars that ring—each bar's length determines its pitch, shorter bars vibrate faster. Strike them to hear wavelength become sound, to feel the relationship between physical size and frequency.",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "resonating_metallophone",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Resonating Metallophone",
+			"scene": "res://algorithms/wavefunctions/resonance/resonating_metallophone.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"sound",
+				"waves"
+			]
+		},
+		"rotating_cube_demo": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Continuous rotation demonstration: θ += ω·dt. The simplest rotational motion—angle increases by angular velocity times delta time each frame. Ground arc shows the rotation path, direction arrow tracks the current angle. Constant spin, no oscillation.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rotating_cube_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Rotating Cube Demo",
+			"scene": "res://commons/artifacts/rotating_cube_demo/rotating_cube_demo.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"animation",
+				"physics",
+				"waves"
+			]
+		},
+		"rotation_oscillation_cube": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Stage 3 of oscillation progression: θ = A·sin(ωt) applied to rotation instead of position. Same mathematics, different output mapping. Arc indicator shows rotation range, direction arrow on cube face. Toggle between oscillating mode (pendulum-like) and continuous rotation (θ += ω·dt).",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rotation_oscillation_cube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Rotation Oscillation Cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/artifacts/rotation_oscillation_cube/rotation_oscillation_cube.tscn",
+			"tags": [
+				"interactive",
+				"wave"
+			]
+		},
+		"ruth_asawa_sculpture": {
+			"category": "waves",
+			"complexity": "expert",
+			"description": "Wire forms inspired by Ruth Asawa's crocheted metal sculptures—nested surfaces that oscillate between inside and outside, solid and void. Topology as frozen wave, material as line drawing in space.",
+			"dev_themes": [
+				"art",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ruth_asawa_sculpture",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Ruth Asawa Sculpture",
+			"parameters": {
+				"footprint": [
+					1.0,
+					7.0,
+					7.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/wavefunctions/ruth_asawa/ruth_asawa_sculpture.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"wave"
+			]
+		},
+		"samplevialrack": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Six sample vials demonstrating phase relationships. Each vial glows with a sine wave offset by TAU/6 from its neighbor, creating a visible wave propagation effect. Modes: linear wave travel, radial expansion from center, random phases. Classic wave interference visualization.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "samplevialrack",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Sample Vial Rack",
+			"scene": "res://commons/lab/samplevialrack/samplevialrack.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"linear_algebra",
+				"probability",
+				"procedural",
+				"wave"
+			]
+		},
+		"segment_slide": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "A ride segment following wave contours—slide down a sine curve, feel acceleration as slope changes. The body learns wave mathematics through gravity and motion.",
+			"dev_themes": [
+				"education",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "segment_slide",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Segment Slide",
+			"scene": "res://algorithms/wavefunctions/water_land_ride/segment_slide.tscn",
+			"tags": [
+				"animation",
+				"physics",
+				"wave"
+			]
+		},
+		"seismograph": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "seismograph",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"footprint": [
+				2,
+				2,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "seismograph",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "seismograph",
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "standard"
+			},
+			"scene": "res://commons/lab/seismograph/seismograph.tscn",
+			"sequence": "wavefunctions",
+			"size_group": "standard",
+			"tags": [
+				"waves"
+			]
+		},
+		"sine_art_monitor": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Wave as artwork—a display showing sine functions rendered as visual compositions. The same mathematics that describes sound and light becomes aesthetic object.",
+			"dev_themes": [
+				"art",
+				"music",
+				"oscillation",
+				"physics"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sine_art_monitor",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Sine Art Monitor",
+			"parameters": {
+				"footprint": [
+					14.0,
+					7.0,
+					9.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/wavefunctions/sine_work/sine_art_monitor.tscn",
+			"tags": [
+				"sound",
+				"visualization",
+				"wave"
+			]
+		},
+		"sine_cylinder_staircase": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Builds a helical staircase around a central column, modulating tread radius with a sine wave.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sine_cylinder_staircase",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "sine_cylinder_staircase",
+			"parameters": {
+				"footprint": [
+					3.0,
+					9.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"wave"
+			]
+		},
+		"sine_space_explanation": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "1m display case showing how sine waves modulate 3D space. An 8×8 grid of points demonstrates y = A·sin(x)·sin(z)—the product of two sine functions creating a wave surface. Points rise and fall showing phase relationships across X and Z axes.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sine_space_explanation",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Sine Space Explanation",
+			"scene": "res://commons/artifacts/sine_space_explanation/sine_space_explanation.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"2d",
+				"3d",
+				"visualization",
+				"wave"
+			]
+		},
+		"sine_wall_corridor": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "A passageway bounded by undulating walls—walking through is walking through a frozen wave. The body experiences wavelength as architectural scale.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sine_wall_corridor",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Sine Wall Corridor",
+			"parameters": {
+				"footprint": [
+					11.0,
+					8.0,
+					14.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_corridor.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"wave"
+			]
+		},
+		"sine_wall_explanation": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "1m display case showing how sine function shapes corridor walls. Animated mini-corridor demonstrates x = A·sin(f·z)—the wave displacement that creates the sine_wall_corridor effect. Shows amplitude, frequency parameters with live wave propagation.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sine_wall_explanation",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Sine Wall Explanation",
+			"scene": "res://commons/artifacts/sine_wall_explanation/sine_wall_explanation.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"sound",
+				"visualization",
+				"wave"
+			]
+		},
+		"sine_wall_static": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Architecture frozen mid-oscillation—a wall whose surface undulates in a sine pattern. This is what waves look like when time stops: pure spatial frequency without temporal change.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sine_wall_static",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Sine Wall (Static)",
+			"parameters": {
+				"footprint": [
+					1.0,
+					5.0,
+					10.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/wavefunctions/sine_wall/sine_wall_static.tscn",
+			"tags": [
+				"3d",
+				"pattern",
+				"sound",
+				"waves"
+			]
+		},
+		"soundboxes": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "SoundBox: Procedural Sound Gallery. Use #collections:synthetic, retro, legends, drums, body, machine, synth, sacred, noir, weather, game for presets.",
+			"dev_themes": [
+				"art",
+				"music",
+				"oscillation",
+				"physics"
+			],
+			"footprint": [
+				10.0,
+				10.0,
+				10.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "soundboxes",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Dynamic Sound Box",
+			"parameters": {
+				"footprint": [
+					10.0,
+					10.0,
+					10.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/wavefunctions/sound_box/SoundBox.tscn",
+			"size_group": "environment",
+			"tags": [
+				"animation",
+				"procedural",
+				"sound"
+			]
+		},
+		"spectral_analyzer": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Real-time audio frequency spectrum visualization",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "spectral_analyzer",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Spectral Analyzer",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_analyzer.tscn",
+			"tags": [
+				"animation",
+				"sound",
+				"waves"
+			]
+		},
+		"spectral_sine_wave": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Visualizes frequency spectrum as a sine wave where amplitude is modulated by spectral content over time",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "spectral_sine_wave",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Spectral Sine Wave",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectral_sine_wave.tscn",
+			"tags": [
+				"sound",
+				"wave"
+			]
+		},
+		"spectrum_display": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Displays frequency spectrum as vertical bars showing audio content from 0-8kHz",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "spectrum_display",
+			"map_ready": true,
+			"map_sequences": [
+				"devexamples",
+				"structure"
+			],
+			"name": "Frequency Spectrum Analyzer",
+			"scene": "res://algorithms/wavefunctions/spectralanalysis/spectrum_display.tscn",
+			"sequence": "devexamples",
+			"tags": [
+				"sound",
+				"waves"
+			]
+		},
+		"spring_network": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "10×10 grid of coupled springs",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "spring_network",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "SpringNetwork",
+			"scene": "res://algorithms/wavefunctions/spring_network/spring_network.tscn",
+			"tags": [
+				"2d",
+				"spring",
+				"waves"
+			]
+		},
+		"standing_waves": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Stationary wave pattern visualization",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "standing_waves",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Standing Waves",
+			"parameters": {
+				"footprint": [
+					13.0,
+					19.0,
+					13.0
+				],
+				"size_group": "world_scale"
+			},
+			"qfep_connection": "Standing waves are where two opposing wave-flows reach equilibrium — nodes of zero motion amid maximum oscillation. The system finds stable F-patterns within dynamic E(S): stillness emerging from movement.",
+			"scene": "res://algorithms/wavefunctions/standing_waves/standing_waves.tscn",
+			"tags": [
+				"pattern",
+				"wave"
+			]
+		},
+		"static_reference_cube": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Stage 1 of oscillation progression: A motionless cube establishing the baseline for comparison. Without stillness, we cannot perceive motion. The constant against which all oscillation is measured. Position = constant, y = 0.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "static_reference_cube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Static Reference Cube",
+			"scene": "res://commons/artifacts/static_reference_cube/static_reference_cube.tscn",
+			"tags": [
+				"animation",
+				"waves"
+			]
+		},
+		"tech_noir_audio": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "John Cage inspired algorithmic audio composition",
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "tech_noir_audio",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Tech Noir Audio",
+			"scene": "res://algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
+			"tags": [
+				"sound",
+				"waves"
+			]
+		},
+		"timbre_sculptor": {
+			"category": "waves",
+			"complexity": "expert",
+			"description": "VR rack panel with 8 vertical sliders controlling harmonic amplitudes for real-time additive synthesis. Waveform and spectrum displays show the result. Preset buttons morph to known timbres: sine, square, sawtooth, triangle, and vowel approximations (A, E, I, O, U). Cognitive compression: timbre IS harmonic recipe — the slider heights ARE the spectrum. Build Fourier transforms with your hands.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "timbre_sculptor",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Timbre Sculptor",
+			"scene": "res://commons/artifacts/timbre_sculptor/timbre_sculptor.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"animation",
+				"interactive",
+				"visualization",
+				"vr",
+				"wave"
+			]
+		},
+		"unit_circle": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Trigonometric functions visualization on unit circle",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": false,
+			"lookup_name": "unit_circle",
+			"map_ready": false,
+			"map_sequences": [
+				"devexamples",
+				"structure"
+			],
+			"name": "Unit Circle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					8.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"qfep_connection": "The unit circle is the F-generator for all periodic motion — sin and cos as the fundamental basis functions. Rotation on the circle maps to oscillation on the line; phase space geometry produces temporal dynamics.",
+			"scene": "res://algorithms/wavefunctions/unit_circle/unit_circle.tscn",
+			"sequence": "devexamples",
+			"tags": [
+				"waves"
+			]
+		},
+		"unit_circle_advanced": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Enhanced trigonometric visualization",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "unit_circle_advanced",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Advanced Unit Circle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					8.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/wavefunctions/unit_circle/unit_circle.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"waves"
+			]
+		},
+		"vr_map_loader_kiosk": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "VR loading station for maps. Filter by sequence and algorithm, then load one map at a time from the kiosk screen.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vr_map_loader_kiosk",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "VR Map Loader Kiosk",
+			"scene": "res://algorithms/wavefunctions/mariocontrol/kiosk.tscn",
+			"tags": [
+				"vr",
+				"waves"
+			]
+		},
+		"walkable_sine_bridge": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Extrudes a walkable ribbon along a sine wave, adds supports, and spawns a player on the path.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "walkable_sine_bridge",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "walkable_sine_bridge",
+			"scene": "res://algorithms/wavefunctions/unit_circle/walkable_sine_bridge.tscn",
+			"tags": [
+				"wave"
+			]
+		},
+		"water_land_ride": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "water_land_ride",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "water_land_ride",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "water_land_ride",
+			"scene": "res://algorithms/wavefunctions/water_land_ride/water_land_ride.tscn",
+			"tags": [
+				"waves"
+			]
+		},
+		"wave_interference": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Superposition and interference patterns",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "wave_interference",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Wave Interference",
+			"parameters": {
+				"footprint": [
+					11.0,
+					23.0,
+					16.0
+				],
+				"size_group": "world_scale"
+			},
+			"qfep_connection": "Superposition as entropy interaction — two ordered waves combine to create complex interference. Constructive = F-alignment (waves reinforce), destructive = F-cancellation (waves annihilate). The linearity principle in action.",
+			"scene": "res://algorithms/wavefunctions/wave_interference/wave_interference.tscn",
+			"tags": [
+				"wave"
+			]
+		},
+		"wave_propagation_3d": {
+			"category": "waves",
+			"complexity": "advanced",
+			"description": "Three-dimensional wave dynamics simulation",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "wave_propagation_3d",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "3D Wave Propagation",
+			"parameters": {
+				"footprint": [
+					14.0,
+					24.0,
+					11.0
+				],
+				"size_group": "world_scale"
+			},
+			"qfep_connection": "Waves propagating through 3D space — energy spreading from a source, dissipating as it expands. The inverse-square law as entropy increase: concentrated E(S) becoming diffuse, order radiating into the surrounding volume.",
+			"scene": "res://algorithms/wavefunctions/wave_propagation_3d/wave_propagation_3d.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"3d",
+				"wave"
+			]
+		},
+		"y_oscillation_cube": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Stage 2 of oscillation progression: Core concept of y = A·sin(ωt). A cube oscillates vertically along a rail, demonstrating how sine function maps time to position. Trail ghosts show motion path, real-time labels display t, sin(t), and y values. The fundamental oscillation.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "y_oscillation_cube",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Y-Oscillation Cube",
+			"scene": "res://commons/artifacts/y_oscillation_cube/y_oscillation_cube.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"animation",
+				"visualization",
+				"waves"
 			]
 		}
 	}

@@ -153,6 +153,37 @@ func get_lighting_settings() -> Dictionary:
 		return json_loader.get_lighting_settings()
 	return {}
 
+# Get per-map environment overrides (from map_data.json "environment" block)
+func get_environment_overrides() -> Dictionary:
+	if json_loader:
+		return json_loader.get_environment_overrides()
+	return {}
+
+# Get the resolved environment config for this map.
+# Merges: soft_stages defaults (from sequence) + per-map overrides.
+# Returns: { terrain_mode, vegetation_density, ambient_energy, fog_density, ... }
+func get_environment_config() -> Dictionary:
+	# Stage defaults come from EcosystemManager (reads soft_stages.json)
+	var eco = Engine.get_singleton("EcosystemManager") if Engine.has_singleton("EcosystemManager") else null
+	var defaults: Dictionary = {}
+	if eco and eco.has_method("get_current_ecosystem_config"):
+		defaults = eco.get_current_ecosystem_config()
+	else:
+		# Fallback defaults when EcosystemManager isn't available
+		defaults = {
+			"terrain_mode": "flat",
+			"vegetation_density": 0.0,
+			"nature_kingdoms": [],
+			"ambient_preset": "empty_lab",
+		}
+
+	# Merge per-map overrides on top of defaults
+	var overrides: Dictionary = get_environment_overrides()
+	for key in overrides:
+		defaults[key] = overrides[key]
+
+	return defaults
+
 # Get current map metadata
 func get_map_metadata() -> Dictionary:
 	if json_loader:

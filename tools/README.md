@@ -6,6 +6,7 @@ Developer tools for analysis, capture, validation, and AI-assisted workflows. Ru
 
 | Script | Command | Purpose |
 |--------|---------|---------|
+| `dev_start.py` | `python tools/dev_start.py grid --write` | Build, save, list, categorize, and refresh intent-driven development starter packs from repo docs, handoffs, encyclopedia links, and optional grounded chat cache |
 | `map_pathfinder.py` | `python tools/map_pathfinder.py check <Name> --verbose` | Map reachability and rule validation |
 | `spine_map_workbench.py` | `python tools/spine_map_workbench.py status` | Sequence contracts and scaffolding |
 | `run_release_gates.py` | `python tools/run_release_gates.py --max-grade-c -1` | Launch-quality gate checks |

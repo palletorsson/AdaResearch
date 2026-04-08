@@ -204,6 +204,11 @@
 				"mixed",
 				"waves"
 			],
+			"footprint": [
+				3,
+				1,
+				1
+			],
 			"include_in_map_data": true,
 			"interaction": "grab",
 			"interactions": [
@@ -218,14 +223,15 @@
 			"name": "Additive Wave Demo",
 			"parameters": {
 				"footprint": [
-					3.0,
-					1.0,
-					1.0
+					3,
+					1,
+					1
 				],
-				"size_group": "room_scale"
+				"size_group": "standard"
 			},
 			"scene": "res://commons/artifacts/additive_wave_demo/additive_wave_demo.tscn",
 			"sequence": "wavefunctions",
+			"size_group": "standard",
 			"tags": [
 				"waves",
 				"fourier",
@@ -888,6 +894,7 @@
 			]
 		},
 		"clipboard": {
+			"capacity": "NAVIGATE paged tutorial content as a stateful object in the world.",
 			"category": "unknown",
 			"complexity": "beginner",
 			"description": "A world-space document you have to hold in order to read. Pages, code snippets, and tutorial fragments stay coherent while the object flips between states, positions, and content sets. Because it is grabbable, reading becomes an embodied interaction rather than a detached overlay. It is the sequence's stable carrier for changing information.",
@@ -900,7 +907,14 @@
 				1.0,
 				1.0
 			],
+			"gamwell_reference": "",
 			"include_in_map_data": true,
+			"interactions": [
+				"grab the clipboard to reveal it as a held document",
+				"flip pages with VR trigger or grip input",
+				"swap content via apply_grid_config page keys or tutorial IDs",
+				"drop the clipboard to finish the reading interaction"
+			],
 			"lookup_name": "clipboard",
 			"map_ready": true,
 			"map_sequences": [
@@ -915,6 +929,7 @@
 				],
 				"size_group": "compact"
 			},
+			"qfep_connection": "Transformation changes the clipboard's state, page, and content while preserving a continuous reading object. It is S as interface transition rather than geometric motion.",
 			"scene": "res://commons/context/clipboard/clipboard.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -925,15 +940,6 @@
 				"grabbable",
 				"vr",
 				"commons"
-			],
-			"qfep_connection": "Transformation changes the clipboard's state, page, and content while preserving a continuous reading object. It is S as interface transition rather than geometric motion.",
-			"gamwell_reference": "",
-			"capacity": "NAVIGATE paged tutorial content as a stateful object in the world.",
-			"interactions": [
-				"grab the clipboard to reveal it as a held document",
-				"flip pages with VR trigger or grip input",
-				"swap content via apply_grid_config page keys or tutorial IDs",
-				"drop the clipboard to finish the reading interaction"
 			]
 		},
 		"clipboard_large": {
@@ -2687,9 +2693,9 @@
 				"mixed"
 			],
 			"footprint": [
-				2.0,
-				3.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "interactable_demo",
@@ -2701,14 +2707,14 @@
 			"name": "interactable_demo",
 			"parameters": {
 				"footprint": [
-					2.0,
-					3.0,
-					1.0
+					1,
+					1,
+					1
 				],
-				"size_group": "room_scale"
+				"size_group": "compact"
 			},
 			"scene": "res://commons/interactables/interactable_demo.tscn",
-			"size_group": "room_scale",
+			"size_group": "compact",
 			"tags": [
 				"commons"
 			]
@@ -3470,9 +3476,9 @@
 				"mixed"
 			],
 			"footprint": [
-				2.0,
-				2.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"interaction": "grab",
@@ -3488,9 +3494,9 @@
 			"name": "Oscilloscope",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3661,6 +3667,7 @@
 			]
 		},
 		"pick_up_cube": {
+			"capacity": "MOVE an object through space and understand translation as carried displacement.",
 			"category": "unknown",
 			"complexity": "intermediate",
 			"description": "A grab-and-carry cube that turns translation into a bodily action. The object does not change shape or orientation much; what matters is that its position is rewritten by the player's movement through space. In puzzle contexts that simple displacement becomes rule-bearing and consequential. It is translation reduced to a portable primitive.",
@@ -3669,11 +3676,18 @@
 				"mixed"
 			],
 			"footprint": [
-				1,
-				1,
-				1
+				1.0,
+				1.0,
+				1.0
 			],
+			"gamwell_reference": "",
 			"include_in_map_data": true,
+			"interactions": [
+				"grab the cube and carry it through the map",
+				"drop it onto targets or through gates",
+				"change point or value settings through map config",
+				"compare object movement against static reference geometry"
+			],
 			"lookup_name": "pick_up_cube",
 			"map_ready": true,
 			"map_sequences": [
@@ -3687,12 +3701,13 @@
 			"name": "Pick Up Cube",
 			"parameters": {
 				"footprint": [
-					1,
-					1,
-					1
+					1.0,
+					1.0,
+					1.0
 				],
 				"size_group": "compact"
 			},
+			"qfep_connection": "Pure S as carried displacement: the cube stays itself while its coordinates change. The artifact isolates translation as the simplest embodied state update.",
 			"scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -3703,15 +3718,6 @@
 				"puzzle",
 				"interaction",
 				"simulation"
-			],
-			"qfep_connection": "Pure S as carried displacement: the cube stays itself while its coordinates change. The artifact isolates translation as the simplest embodied state update.",
-			"gamwell_reference": "",
-			"capacity": "MOVE an object through space and understand translation as carried displacement.",
-			"interactions": [
-				"grab the cube and carry it through the map",
-				"drop it onto targets or through gates",
-				"change point or value settings through map config",
-				"compare object movement against static reference geometry"
 			]
 		},
 		"pickable_showcase": {
@@ -3747,6 +3753,7 @@
 			]
 		},
 		"pickup_gate": {
+			"capacity": "REASON about threshold state change: when enough objects move through, the gate transforms from closed to open.",
 			"category": "unknown",
 			"complexity": "beginner",
 			"description": "A blocking gate whose state depends on how many pickup cubes have crossed the threshold. Its geometry is simple, but its logic makes transformation legible as a rule: the gate is closed, then open, because enough translated objects changed the count. That turns motion into conditional infrastructure. It teaches that state change can be triggered by accumulated displacement.",
@@ -3755,23 +3762,31 @@
 				"mixed"
 			],
 			"footprint": [
-				1,
-				1,
-				1
+				1.0,
+				1.0,
+				1.0
 			],
+			"gamwell_reference": "",
 			"include_in_map_data": true,
+			"interactions": [
+				"carry pickup cubes into the gate zone",
+				"configure how many pickups are required through map tokens",
+				"watch the gate open once the threshold is met",
+				"use gate color or count settings to stage different collection puzzles"
+			],
 			"lookup_name": "pickup_gate",
 			"map_ready": true,
 			"map_sequences": [],
 			"name": "Pickup Gate",
 			"parameters": {
 				"footprint": [
-					1,
-					1,
-					1
+					1.0,
+					1.0,
+					1.0
 				],
 				"size_group": "compact"
 			},
+			"qfep_connection": "Transformation here is thresholded state change. Repeated object translations alter the count until the gate preserves a new open identity.",
 			"scene": "res://commons/portals/pickup_gate.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -3782,15 +3797,6 @@
 				"state_change",
 				"puzzle",
 				"color"
-			],
-			"qfep_connection": "Transformation here is thresholded state change. Repeated object translations alter the count until the gate preserves a new open identity.",
-			"gamwell_reference": "",
-			"capacity": "REASON about threshold state change: when enough objects move through, the gate transforms from closed to open.",
-			"interactions": [
-				"carry pickup cubes into the gate zone",
-				"configure how many pickups are required through map tokens",
-				"watch the gate open once the threshold is met",
-				"use gate color or count settings to stage different collection puzzles"
 			]
 		},
 		"player_position": {
@@ -4721,6 +4727,11 @@
 				"mixed",
 				"physics"
 			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
 			"include_in_map_data": true,
 			"interaction": "grab",
 			"interactions": [
@@ -4734,14 +4745,15 @@
 			"name": "Spring Demo",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
 			"scene": "res://commons/artifacts/spring_demo/spring_demo.tscn",
 			"sequence": "wavefunctions",
+			"size_group": "compact",
 			"tags": [
 				"spring",
 				"hookes_law",

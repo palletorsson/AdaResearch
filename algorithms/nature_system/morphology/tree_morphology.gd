@@ -461,8 +461,8 @@ static func _add_branch_segment(dna: CritterDNA, root: Node3D, mapper: CritterTr
 	mesh_inst.name = "Branch_%d" % seed_val
 	mesh_inst.mesh = mesh
 
-	# Material: bark color (secondary), rougher at depth 0, smoother at tips
-	var mat := mapper.create_material_from_dna(dna, seed_val)
+	# Material: bark surface — rougher at depth 0, smoother at tips
+	var mat := mapper.create_part_material(dna, CritterTraitMapper.PartType.TRUNK, seed_val)
 	# Bark uses secondary color as base
 	mat.set_shader_parameter("primary_color", dna.secondary_color.darkened(depth * 0.05))
 	mat.set_shader_parameter("secondary_color", dna.secondary_color.darkened(0.2 + depth * 0.05))
@@ -575,8 +575,8 @@ static func _build_leaf_multimesh(dna: CritterDNA, root: Node3D, mapper: Critter
 	mmi.name = "Leaves"
 	mmi.multimesh = mm
 
-	# Shared leaf material: primary color (foliage)
-	var mat: ShaderMaterial = mapper.create_material_from_dna(dna, base_seed + 80000)
+	# Shared leaf material: foliage surface (iridescent, organic patterns)
+	var mat: ShaderMaterial = mapper.create_part_material(dna, CritterTraitMapper.PartType.FOLIAGE, base_seed + 80000)
 	mat.set_shader_parameter("primary_color", dna.primary_color)
 	mat.set_shader_parameter("secondary_color", dna.primary_color.darkened(0.15))
 	mat.set_shader_parameter("roughness", clampf(dna.roughness - 0.2, 0.05, 0.6))
@@ -687,8 +687,8 @@ static func _add_tip_cluster(dna: CritterDNA, root: Node3D, mapper: CritterTrait
 			rng.randf_range(-cluster_size, cluster_size)
 		)
 
-		# Fruit/flower uses tertiary color (accent)
-		var mat := mapper.create_material_from_dna(dna, seed_val + i * 200)
+		# Fruit/flower — foliage surface
+		var mat := mapper.create_part_material(dna, CritterTraitMapper.PartType.FOLIAGE, seed_val + i * 200)
 		mat.set_shader_parameter("primary_color", dna.tertiary_color)
 		mat.set_shader_parameter("secondary_color", dna.tertiary_color.lightened(0.15))
 		mat.set_shader_parameter("roughness", 0.3)
@@ -739,5 +739,14 @@ static func _build_roots(dna: CritterDNA, root: Node3D, mapper: CritterTraitMapp
 		_add_branch_segment(dna, root, mapper, base_seed + i + 1000,
 			mid_pos, end_pos, root_radius * 0.8, root_radius * 0.3,
 			tube_sides, 1)
+
+		# Tag tip segment for TreeWalker — stores root index, angle, and positions
+		var tip_mesh: Node = root.get_child(root.get_child_count() - 1)
+		if tip_mesh:
+			tip_mesh.set_meta("root_tip", true)
+			tip_mesh.set_meta("root_index", i)
+			tip_mesh.set_meta("root_angle", angle)
+			tip_mesh.set_meta("root_base", mid_pos)
+			tip_mesh.set_meta("root_end", end_pos)
 
 

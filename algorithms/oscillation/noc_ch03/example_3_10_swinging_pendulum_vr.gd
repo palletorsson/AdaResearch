@@ -1,13 +1,14 @@
-﻿# ===========================================================================
+# ===========================================================================
 # NOC Example 3.10: Swinging Pendulum
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing â†’ GDScript, 2025
+# Translation: AI-assisted Processing → GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
 # ===========================================================================
 
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_ROD := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_secondary.tres")
@@ -29,6 +30,7 @@ var _angular_acceleration: float = 0.0
 func _ready() -> void:
 	_setup_environment()
 	_spawn_pendulum()
+	call_deferred("_apply_standard_presentation")
 	set_process(true)
 
 func _setup_environment() -> void:
@@ -76,7 +78,7 @@ func _spawn_pendulum() -> void:
 	_bob = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.04
-	sphere.height = 0.08
+	sphere.height = sphere.radius * 2.0
 	_bob.mesh = sphere
 	_bob.material_override = MAT_BOB
 	_anchor.add_child(_bob)
@@ -91,7 +93,12 @@ func _process(_delta: float) -> void:
 	_rod.position = Vector3(0, -arm_length / 2, 0)
 	_bob.position = Vector3(0, -arm_length, 0)
 
-	_status_label.text = "Pendulum | %.1fÂ°" % rad_to_deg(_angle)
+	_status_label.text = "Pendulum | %.1f°" % rad_to_deg(_angle)
+
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
 
 func _exit_tree() -> void:
 	for child in get_children():
@@ -101,3 +108,5 @@ func _exit_tree() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass
+
+

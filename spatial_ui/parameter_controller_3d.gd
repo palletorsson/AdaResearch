@@ -1,104 +1,87 @@
 class_name ParameterController3D
 extends Node3D
 
-## 3D Parameter Controller - Grabbable slider/dial for VR interaction
-## Based on line.tscn primitive. Uses commons/ui material palette.
+## Compatibility wrapper for legacy parameter controllers.
+## Uses the working commons/interactables horizontal slider so older
+## artifacts keep their existing API but get real XR interaction.
 
 signal value_changed(new_value: float)
 
-const TRACK_MATERIAL: StandardMaterial3D = preload("res://commons/ui/materials/track_groove.tres")
-const HANDLE_MATERIAL: StandardMaterial3D = preload("res://commons/ui/materials/handle_glow.tres")
-const LABEL_TINT: Color = Color(0.92, 0.92, 0.94, 1.0)
-const LABEL_OUTLINE: Color = Color(0.05, 0.06, 0.09, 0.95)
-const TRACK_LENGTH: float = 0.3
+const SLIDER_SCENE := preload("res://commons/interactables/slider_horizontal.tscn")
 
 @export var parameter_name: String = "Parameter"
 @export var min_value: float = 0.0
 @export var max_value: float = 1.0
 @export var default_value: float = 0.5
 @export var step_size: float = 0.01
+@export var slider_scale: Vector3 = Vector3(0.65, 0.65, 0.65)
 
 var current_value: float = 0.5
 
-var slider_track: MeshInstance3D
-var handle: MeshInstance3D
-var label: Label3D
+var _slider: Node3D
+var _suppress_emit: bool = false
 
-var is_grabbed: bool = false
-var grab_offset: Vector3 = Vector3.ZERO
-
-func _ready():
+func _ready() -> void:
 	current_value = clamp(default_value, min_value, max_value)
-	create_slider_geometry()
-	create_label()
-	update_handle_position()
-	update_label_text()
+	_ensure_slider()
+	_sync_slider_from_value()
 
-func create_slider_geometry() -> void:
-	"""Create slider visuals using the shared commons/ui palette."""
-	slider_track = MeshInstance3D.new()
-	var track_mesh := BoxMesh.new()
-	track_mesh.size = Vector3(TRACK_LENGTH, 0.02, 0.02)
-	slider_track.mesh = track_mesh
-	slider_track.material_override = TRACK_MATERIAL.duplicate()
-	add_child(slider_track)
+func _ensure_slider() -> void:
+	if is_instance_valid(_slider):
+		return
 
-	handle = MeshInstance3D.new()
-	var handle_mesh := SphereMesh.new()
-	handle_mesh.radius = 0.03
-	handle_mesh.height = 0.06
-	handle.mesh = handle_mesh
-	handle.material_override = HANDLE_MATERIAL.duplicate()
-	add_child(handle)
+	_slider = SLIDER_SCENE.instantiate()
+	_slider.name = "InteractableSliderCompat"
+	_slider.scale = slider_scale
+	add_child(_slider)
 
-func create_label() -> void:
-	label = Label3D.new()
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.font_size = 24
-	label.outline_size = 4
-	label.outline_modulate = LABEL_OUTLINE
-	label.modulate = LABEL_TINT
-	label.position = Vector3(0, 0.08, 0)
-	add_child(label)
+	if _slider.has_method("set_param_name"):
+		_slider.call("set_param_name", parameter_name)
+	if _slider.has_method("set_range"):
+		_slider.call("set_range", min_value, max_value)
+	if _slider.has_signal("slider_moved") and not _slider.is_connected("slider_moved", Callable(self, "_on_slider_moved")):
+		_slider.connect("slider_moved", Callable(self, "_on_slider_moved"))
 
-func update_label_text() -> void:
-	if label:
-		var value_text: String = "%s: %.2f" % [parameter_name, current_value]
-		if label.text != value_text:
-			label.text = value_text
+func _on_slider_moved(_value: Variant) -> void:
+	if not is_instance_valid(_slider):
+		return
+	current_value = _slider.call("get_normalized_value")
+	current_value = lerp(min_value, max_value, current_value)
+	if step_size > 0.0:
+		current_value = round(current_value / step_size) * step_size
+		_sync_slider_from_value(true)
+	if not _suppress_emit:
+		value_changed.emit(current_value)
 
-func update_handle_position() -> void:
-	if handle:
-		var t: float = inverse_lerp(min_value, max_value, current_value)
-		var x_pos: float = lerp(-TRACK_LENGTH / 2.0, TRACK_LENGTH / 2.0, t)
-		handle.position = Vector3(x_pos, 0, 0)
+func _sync_slider_from_value(skip_emit: bool = false) -> void:
+	if not is_instance_valid(_slider):
+		return
+
+	if _slider.has_method("set_param_name"):
+		_slider.call("set_param_name", parameter_name)
+	if _slider.has_method("set_range"):
+		_slider.call("set_range", min_value, max_value)
+
+	var normalized := inverse_lerp(min_value, max_value, clamp(current_value, min_value, max_value))
+	_suppress_emit = skip_emit
+	_slider.call("set_normalized_value", normalized)
+	_suppress_emit = false
 
 func set_value(new_value: float) -> void:
 	current_value = clamp(new_value, min_value, max_value)
-	update_handle_position()
-	update_label_text()
+	if step_size > 0.0:
+		current_value = round(current_value / step_size) * step_size
+	_sync_slider_from_value(true)
 	value_changed.emit(current_value)
 
 func get_value() -> float:
 	return current_value
 
-func on_grab_start(controller_position: Vector3) -> void:
-	is_grabbed = true
-	grab_offset = handle.global_position - controller_position
+func on_grab_start(_controller_position: Vector3) -> void:
+	pass
 
-func on_grab_update(controller_position: Vector3) -> void:
-	if not is_grabbed:
-		return
-
-	var local_pos: Vector3 = to_local(controller_position + grab_offset)
-	var x_clamped: float = clamp(local_pos.x, -TRACK_LENGTH / 2.0, TRACK_LENGTH / 2.0)
-	var t: float = inverse_lerp(-TRACK_LENGTH / 2.0, TRACK_LENGTH / 2.0, x_clamped)
-	var new_value: float = lerp(min_value, max_value, t)
-
-	if step_size > 0.0:
-		new_value = round(new_value / step_size) * step_size
-
-	set_value(new_value)
+func on_grab_update(_controller_position: Vector3) -> void:
+	pass
 
 func on_grab_end() -> void:
-	is_grabbed = false
+	pass

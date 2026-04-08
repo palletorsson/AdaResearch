@@ -1,4 +1,5 @@
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
 # @identity
 # essence: energy(t+1) = energy(t) - metabolism(gene) + food; reproduce when energy > threshold
@@ -45,6 +46,7 @@ func _ready() -> void:
 	randomize()
 	_setup_environment()
 	_spawn_initial_population()
+	call_deferred("_apply_standard_presentation")
 	set_physics_process(true)
 
 func _setup_environment() -> void:
@@ -194,7 +196,7 @@ class Bloop:
 		body = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = 0.05
-		sphere.height = 0.1
+		sphere.height = sphere.radius * 2.0
 		body.mesh = sphere
 		var mat := StandardMaterial3D.new()
 		mat.albedo_color = Color(1.0, 0.6, 0.9, 0.8)
@@ -209,7 +211,9 @@ class Bloop:
 		radius = lerp(0.03, 0.12, dna.gene)
 		max_speed = lerp(0.6, 0.2, dna.gene)
 		if body.mesh is SphereMesh:
-			(body.mesh as SphereMesh).radius = radius
+			var body_sphere := body.mesh as SphereMesh
+			body_sphere.radius = radius
+			body_sphere.height = body_sphere.radius * 2.0
 
 	func update(delta: float) -> void:
 		var vx: float = lerp(-max_speed, max_speed, _noise(noise_offset.x))
@@ -284,7 +288,7 @@ class FoodItem:
 		mesh = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = radius
-		sphere.height = radius * 2.0
+		sphere.height = sphere.radius * 2.0
 		mesh.mesh = sphere
 		# Glowing green food particles
 		var food_mat := StandardMaterial3D.new()
@@ -308,6 +312,11 @@ class FoodItem:
 	func queue_free() -> void:
 		if is_instance_valid(root):
 			root.queue_free()
+
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
 
 func _exit_tree() -> void:
 	for child in get_children():

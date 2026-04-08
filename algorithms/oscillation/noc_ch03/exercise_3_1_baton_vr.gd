@@ -1,4 +1,5 @@
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_BAR := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
@@ -22,6 +23,7 @@ var _angle: float = 0.0
 func _ready() -> void:
 	_setup_environment()
 	_spawn_baton()
+	call_deferred("_apply_standard_presentation")
 	set_process(true)
 
 func _setup_environment() -> void:
@@ -67,7 +69,7 @@ func _spawn_baton() -> void:
 	_end_a = MeshInstance3D.new()
 	var sphere_a := SphereMesh.new()
 	sphere_a.radius = 0.025
-	sphere_a.height = 0.05
+	sphere_a.height = sphere_a.radius * 2.0
 	_end_a.mesh = sphere_a
 	_end_a.material_override = MAT_END
 	_end_a.position = Vector3(-baton_length / 2, 0, 0)
@@ -76,7 +78,7 @@ func _spawn_baton() -> void:
 	_end_b = MeshInstance3D.new()
 	var sphere_b := SphereMesh.new()
 	sphere_b.radius = 0.025
-	sphere_b.height = 0.05
+	sphere_b.height = sphere_b.radius * 2.0
 	_end_b.mesh = sphere_b
 	_end_b.material_override = MAT_END
 	_end_b.position = Vector3(baton_length / 2, 0, 0)
@@ -122,6 +124,11 @@ func _update_trails() -> void:
 
 	_trail_mesh.mesh = mesh
 
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
+
 func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
@@ -130,3 +137,5 @@ func _exit_tree() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass
+
+

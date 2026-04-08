@@ -1,4 +1,5 @@
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_ROD := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_secondary.tres")
@@ -32,6 +33,7 @@ var _mass2: float = 1.0
 func _ready() -> void:
 	_setup_environment()
 	_spawn_pendulum()
+	call_deferred("_apply_standard_presentation")
 	set_process(true)
 
 func _setup_environment() -> void:
@@ -79,7 +81,7 @@ func _spawn_pendulum() -> void:
 	_bob1 = MeshInstance3D.new()
 	var sphere1 := SphereMesh.new()
 	sphere1.radius = 0.03
-	sphere1.height = 0.06
+	sphere1.height = sphere1.radius * 2.0
 	_bob1.mesh = sphere1
 	_bob1.material_override = MAT_BOB
 	_anchor.add_child(_bob1)
@@ -99,7 +101,7 @@ func _spawn_pendulum() -> void:
 	_bob2 = MeshInstance3D.new()
 	var sphere2 := SphereMesh.new()
 	sphere2.radius = 0.03
-	sphere2.height = 0.06
+	sphere2.height = sphere2.radius * 2.0
 	_bob2.mesh = sphere2
 	_bob2.material_override = MAT_BOB
 	_pivot2.add_child(_bob2)
@@ -161,6 +163,11 @@ func _update_trail() -> void:
 	mesh.surface_end()
 	_trail.mesh = mesh
 
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
+
 func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
@@ -169,3 +176,5 @@ func _exit_tree() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass
+
+

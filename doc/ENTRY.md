@@ -177,6 +177,35 @@ Run: commons/scenes/desktop_map_tester.tscn
 Or:  commons/dev_tools/ContentValidatorDesktop.tscn
 ```
 
+### To get a development starting point from intent:
+```
+python tools/dev_start.py grid
+python tools/dev_start.py "nature system"
+python tools/dev_start.py flowers
+python tools/dev_start.py folding
+python tools/dev_start.py "interactive button"
+python tools/dev_start.py grid --write
+python tools/dev_start.py --saved
+python tools/dev_start.py --refresh-saved grid
+python tools/dev_start.py --refresh-all-saved
+python tools/dev_start.py --refresh-curated
+```
+
+Use this when you know the kind of change you want to make, but not yet the
+full set of relevant files, docs, encyclopedia surfaces, and prior handoffs.
+It complements `tools/lod_query.py`, which works best when you already know
+the sequence, map, or artifact name.
+If `grounded_wiki_engine` has been built locally for this repo, the starter
+pack also pulls in grounded chat-derived claims and turn snippets.
+Saved packs live in `doc/startpacks/` as both Markdown and JSON so they can be
+updated over time instead of regenerated ad hoc.
+Use `--write` to create or overwrite a saved pack, `--saved` to inspect the
+manifest, `--refresh-saved <slug>` to update one saved pack from its stored
+query, and `--refresh-all-saved` to rebuild the full saved manifest.
+Curated packs are now categorized and tagged, so the encyclopedia `/startpacks`
+surface can filter them by area such as `systems`, `nature`, `interaction`,
+`visualization`, `content`, `curriculum`, and `experimental`.
+
 ---
 
 ## What Makes This Project Different
@@ -220,6 +249,7 @@ Or:  commons/dev_tools/ContentValidatorDesktop.tscn
 - "Check what maps exist" -> Count map_data.json files
 - "Understand curriculum" -> curriculum_spine.json
 - "See what's broken" -> Run ContentValidatorDesktop
+- "I want to work on X but need the right starting point" -> `python tools/dev_start.py <intent>`
 
 ---
 

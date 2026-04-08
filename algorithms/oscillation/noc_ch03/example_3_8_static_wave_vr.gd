@@ -14,6 +14,7 @@
 # ===========================================================================
 
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
 const SLIDER_HORIZONTAL := preload("res://commons/interactables/slider_horizontal.tscn")
 const PUSH_BUTTON := preload("res://commons/interactables/push_button.tscn")
@@ -76,6 +77,7 @@ func _ready() -> void:
 	_setup_labels()
 	_setup_vr_controls()
 	_init_membrane()
+	call_deferred("_apply_standard_presentation")
 	set_process(true)
 
 
@@ -535,6 +537,11 @@ func _update_labels() -> void:
 	_mode_label.text = "2D WAVE  %dx%d  |  peak=%.3f  damp=%.4f" % [grid_res, grid_res, max_u, damping]
 
 
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
+
 func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
@@ -564,3 +571,5 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		membrane_size = float(config_data["membrane_size"])
 
 	_reset_all()
+
+

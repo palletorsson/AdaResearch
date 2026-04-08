@@ -24,6 +24,12 @@ var camera_rotation: Vector2 = Vector2.ZERO
 # Interaction
 var current_interactable: Node = null
 
+# Voxel editing mode
+var voxel_edit_mode: bool = false
+var _voxel_controller: VoxelEditController = null
+var _voxel_structure: GridStructureComponent = null
+var _voxel_map_name: String = ""
+
 func _ready():
 	# Capture mouse
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -50,14 +56,41 @@ func _input(event):
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-	# Interaction with left click or E key
+	# E key toggles voxel edit mode
+	if event is InputEventKey and event.pressed and not event.echo:
+		var keycode: int = (event as InputEventKey).keycode
+		if keycode == KEY_E and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			_toggle_voxel_mode()
+			return
+		# Ctrl+S save in voxel mode
+		if voxel_edit_mode and (event as InputEventKey).ctrl_pressed:
+			if keycode == KEY_S:
+				_voxel_save()
+				return
+			if keycode == KEY_Z:
+				if _voxel_controller:
+					_voxel_controller.undo()
+				return
+			if keycode == KEY_Y:
+				if _voxel_controller:
+					_voxel_controller.redo()
+				return
+
+	# Mouse clicks
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			print("DesktopPlayer: Left click detected!")
-			_try_interact()
-		elif event.is_action_pressed("ui_accept"):  # E key or Enter
-			print("DesktopPlayer: Enter/Accept key pressed!")
-			_try_interact()
+		if event is InputEventMouseButton and event.pressed:
+			if voxel_edit_mode:
+				# Voxel mode: left-click add, right-click remove
+				if event.button_index == MOUSE_BUTTON_LEFT:
+					if _voxel_controller:
+						_voxel_controller.try_add()
+				elif event.button_index == MOUSE_BUTTON_RIGHT:
+					if _voxel_controller:
+						_voxel_controller.try_remove()
+			else:
+				# Normal mode: left-click interacts (teleport, artifacts)
+				if event.button_index == MOUSE_BUTTON_LEFT:
+					_try_interact()
 
 func _physics_process(delta: float) -> void:
 	# Apply mouse look
@@ -114,6 +147,13 @@ func _apply_camera_rotation(_delta: float):
 
 func _process(_delta: float):
 	_check_for_interactable()
+
+	# Update voxel edit controller raycast from camera center
+	if voxel_edit_mode and _voxel_controller and camera:
+		var center := get_viewport().get_visible_rect().size * 0.5
+		var origin := camera.project_ray_origin(center)
+		var dir := camera.project_ray_normal(center)
+		_voxel_controller.update_target_from_ray(origin, dir)
 
 func _check_for_interactable():
 	"""Check if looking at an interactable object"""
@@ -257,3 +297,64 @@ func _try_interact():
 		# Try to get artifact ID from metadata
 		var artifact_id = target.get_meta("artifact_id", target.name)
 		print("DesktopPlayer: Activated artifact: %s" % artifact_id)
+
+
+# ═══════════════════════════════════════════════════════════════
+# VOXEL EDITING MODE — press V to toggle, L-click add, R-click remove
+# ═══════════════════════════════════════════════════════════════
+
+func _toggle_voxel_mode() -> void:
+	voxel_edit_mode = not voxel_edit_mode
+
+	if voxel_edit_mode:
+		# Find GridStructureComponent in the scene
+		_voxel_structure = _find_in_tree(get_tree().root, "GridStructureComponent") as GridStructureComponent
+		if not _voxel_structure:
+			print("DesktopPlayer: No GridStructureComponent found — voxel mode disabled")
+			voxel_edit_mode = false
+			return
+
+		# Find map name from GridDataComponent
+		var data_comp = _find_in_tree(get_tree().root, "GridDataComponent")
+		if data_comp and data_comp.has_method("get_current_map_name"):
+			_voxel_map_name = data_comp.get_current_map_name()
+		if data_comp and data_comp.has_method("get_structure_data"):
+			_voxel_structure.enable_editing(data_comp.get_structure_data())
+
+		# Create edit controller
+		if not _voxel_controller:
+			_voxel_controller = VoxelEditController.new()
+			_voxel_controller.name = "VoxelEditController"
+			_voxel_controller.structure_component = _voxel_structure
+			_voxel_controller.cube_size = _voxel_structure.cube_size
+			add_child(_voxel_controller)
+
+		print("DesktopPlayer: 🔨 VOXEL EDIT MODE ON — L-click=add R-click=remove Ctrl+S=save")
+	else:
+		print("DesktopPlayer: 🔨 Voxel edit mode OFF")
+
+	# Update crosshair color
+	if crosshair:
+		crosshair.color = Color(0.3, 0.7, 1.0, 0.8) if voxel_edit_mode else Color(1, 1, 1, 0.5)
+
+
+func _voxel_save() -> void:
+	if not _voxel_structure or _voxel_map_name.is_empty():
+		print("DesktopPlayer: Cannot save — no map loaded")
+		return
+	var ok := VoxelSaveManager.save(_voxel_map_name, _voxel_structure)
+	if ok:
+		print("DesktopPlayer: 💾 SAVED map: %s" % _voxel_map_name)
+
+
+func _find_in_tree(node: Node, class_name_str: String) -> Node:
+	if node.get_class() == class_name_str or (node is GridStructureComponent and class_name_str == "GridStructureComponent"):
+		return node
+	# Also check node name
+	if node.name == class_name_str:
+		return node
+	for child in node.get_children():
+		var found := _find_in_tree(child, class_name_str)
+		if found:
+			return found
+	return null

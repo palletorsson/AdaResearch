@@ -8,6 +8,7 @@
 # ===========================================================================
 
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_BOB := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
@@ -29,6 +30,7 @@ var _time: float = 0.0
 func _ready() -> void:
 	_setup_environment()
 	_spawn_scene()
+	call_deferred("_apply_standard_presentation")
 	set_process(true)
 
 func _setup_environment() -> void:
@@ -92,7 +94,7 @@ func _spawn_scene() -> void:
 	_bob = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = 0.04
-	sphere.height = 0.08
+	sphere.height = sphere.radius * 2.0
 	_bob.mesh = sphere
 	_bob.material_override = MAT_BOB
 	_sim_root.add_child(_bob)
@@ -132,6 +134,11 @@ func _update_trail() -> void:
 	mesh.surface_end()
 	_trail.mesh = mesh
 
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
+
 func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
@@ -140,3 +147,5 @@ func _exit_tree() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass
+
+

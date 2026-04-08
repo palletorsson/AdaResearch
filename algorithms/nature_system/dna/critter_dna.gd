@@ -341,6 +341,134 @@ func get_hybridity() -> float:
 
 
 # ═══════════════════════════════════════════════════════════════
+# SERIALIZATION HELPERS (for Pokemon Studio / web editor)
+# ═══════════════════════════════════════════════════════════════
+
+## Serialize entire DNA (including lineage) to a JSON string.
+func to_json() -> String:
+	var data: Dictionary = to_dict()
+	# Convert Colors to hex strings for JSON compatibility
+	for key in data:
+		if data[key] is Color:
+			data[key] = (data[key] as Color).to_html(false)
+	data["generation"] = generation
+	data["parent_a_id"] = parent_a_id
+	data["parent_b_id"] = parent_b_id
+	data["mutations"] = mutations.duplicate()
+	return JSON.stringify(data, "\t")
+
+
+## Load entire DNA (including lineage) from a JSON string.
+static func from_json(json_str: String) -> CritterDNA:
+	var parsed = JSON.parse_string(json_str)
+	if not parsed is Dictionary:
+		push_error("[CritterDNA] from_json: invalid JSON")
+		return CritterDNA.new()
+
+	var data: Dictionary = parsed as Dictionary
+	var dna := CritterDNA.new()
+	var color_keys: Array[String] = ["primary_color", "secondary_color", "tertiary_color"]
+
+	for key in data:
+		if key in ["generation", "parent_a_id", "parent_b_id", "mutations"]:
+			continue
+		var val = data[key]
+		if key in color_keys and val is String:
+			dna.set(key, Color.html(val as String))
+		elif val is float or val is int:
+			dna.set(key, float(val))
+
+	dna.generation = int(data.get("generation", 0))
+	dna.parent_a_id = str(data.get("parent_a_id", ""))
+	dna.parent_b_id = str(data.get("parent_b_id", ""))
+	if "mutations" in data and data["mutations"] is Array:
+		for m in data["mutations"]:
+			dna.mutations.append(str(m))
+
+	return dna
+
+
+## Get names of all heritable gene properties (excludes lineage metadata).
+static func get_gene_names() -> Array[String]:
+	var names: Array[String] = []
+	for prop in _get_gene_properties():
+		names.append(prop.name as String)
+	return names
+
+
+## Get display info for a gene: { name, min, max, current, normalized, category, type }.
+## Useful for UI sliders and inspector panels.
+func get_gene_display_info(gene_name: String) -> Dictionary:
+	var val = get(gene_name)
+	if val == null:
+		return {}
+
+	for prop in _get_gene_properties():
+		if prop.name != gene_name:
+			continue
+
+		var info: Dictionary = {"name": gene_name}
+
+		if val is float:
+			var range_min := _get_hint_range_min(prop)
+			var range_max := _get_hint_range_max(prop)
+			info["min"] = range_min
+			info["max"] = range_max
+			info["current"] = val
+			info["normalized"] = get_normalized(gene_name)
+			info["type"] = "float"
+		elif val is Color:
+			info["current"] = (val as Color).to_html(false)
+			info["min"] = 0.0
+			info["max"] = 1.0
+			info["normalized"] = 0.5
+			info["type"] = "color"
+
+		# Categorize
+		info["category"] = _categorize_gene(gene_name)
+		return info
+
+	return {}
+
+
+## Get display info for ALL genes at once (for building a full inspector).
+func get_all_gene_info() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for prop in _get_gene_properties():
+		var info: Dictionary = get_gene_display_info(prop.name as String)
+		if not info.is_empty():
+			result.append(info)
+	return result
+
+
+## Categorize a gene name into its group.
+static func _categorize_gene(gene_name: String) -> String:
+	match gene_name:
+		"primary_color", "secondary_color", "tertiary_color":
+			return "phenotype"
+		"body_type", "segments", "symmetry", "scale", "pattern_type", "pattern_density", "pattern_scale":
+			return "morphology"
+		"roughness", "metallic", "iridescence", "transparency", "cracking":
+			return "material"
+		"mobility", "aggression", "sociality", "curiosity":
+			return "behavior"
+		"energy_source", "efficiency", "growth_speed", "fertility":
+			return "metabolism"
+		"branch_angle", "branch_decay", "leaf_density":
+			return "kingdom"
+		"part_length", "part_width", "part_curve", "part_taper", "part_twist", "part_tilt":
+			return "geometry"
+		"phyllotaxis", "edge_type", "base_shape", "inflorescence", "root_type":
+			return "detail"
+		"scent_strength", "nectar_quality":
+			return "ecology"
+		"affinity", "volatility", "latent_ability":
+			return "potential"
+		_:
+			return "other"
+
+
+# ═══════════════════════════════════════════════════════════════
 # INTERNAL — Property range extraction
 # ═══════════════════════════════════════════════════════════════
 

@@ -1,0 +1,184 @@
+{
+  "query": "Content Delivery and Text Systems",
+  "matched_topic": "generic",
+  "pack_slug": "text-systems",
+  "title": "Generic development start for: Content Delivery and Text Systems",
+  "category": "exploration",
+  "tags": [
+    "content",
+    "delivery",
+    "and",
+    "text",
+    "systems"
+  ],
+  "overview": "No curated starter pack matched exactly. This pack is assembled from document hits and repo path matches, so it is useful for discovery but less trustworthy than a curated topic profile.",
+  "read_first": [],
+  "principles": [],
+  "constraints": [],
+  "first_moves": [
+    "Refine the intent into a system noun if possible, then rerun this tool.",
+    "Use tools/lod_query.py when you know the sequence, map, or artifact name."
+  ],
+  "deepwiki_url": "https://deepwiki.com/palletorsson/AdaResearch",
+  "deepwiki_topics": [
+    "Overview"
+  ],
+  "encyclopedia": [],
+  "history_hits": [
+    {
+      "path": "doc/sessions/2026-03-19-garden-session-summary.md",
+      "snippet": "Single session spanning ~14 hours. Started with renaming map folders, ended with 363 algorithms having identity, desire, and truth.",
+      "score": "3"
+    },
+    {
+      "path": "doc/sessions/2026-03-23-continued-session.md",
+      "snippet": "Single session spanning ~14 hours. Started with renaming map folders, ended with 363 algorithms having identity, desire, and truth.",
+      "score": "3"
+    },
+    {
+      "path": "doc/SESSION_HANDOFF_2026-03-28.md",
+      "snippet": "# Session Handoff: March 23-28, 2026",
+      "score": "2"
+    }
+  ],
+  "doc_hits": [
+    {
+      "path": "doc/AlgorithmsList.md",
+      "snippet": "- Tron Grid Navigation - Spatial reference and coordinate systems",
+      "score": "4"
+    },
+    {
+      "path": "doc/ARCHITECTURE.md",
+      "snippet": "> Technical reference for system design and data flow",
+      "score": "4"
+    },
+    {
+      "path": "doc/ARTIFACT_DEVELOPMENT_PLAN.md",
+      "snippet": "**Tracks:** Grant WP alignment, QFEP coverage, ContentValidator completeness",
+      "score": "4"
+    },
+    {
+      "path": "doc/ARTIFACT_ORGANIZATION_PROPOSAL.md",
+      "snippet": "- Mixes primitives, algorithms, tools, and content",
+      "score": "4"
+    },
+    {
+      "path": "doc/CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md",
+      "snippet": "This guide explains how to navigate and experience the Ada Research VR educational system by reading its source files.",
+      "score": "4"
+    },
+    {
+      "path": "doc/CLAUDE_PROJECT_NAVIGATOR.md",
+      "snippet": "**Ada Research** is named after Ada Lovelace, who wrote about the relationship between computers and generative art in 1842. The project is a VR meta-quest exploring how algorithms create \"invisible fences\" - how digital",
+      "score": "4"
+    }
+  ],
+  "repo_hits": [
+    "algorithms/lsystems/ContextSensitive/ContextSensitiveTree.gd",
+    "algorithms/lsystems/ContextSensitive/ContextSensitiveTree.gd.uid",
+    "algorithms/lsystems/ContextSensitive/ContextSensitiveTree.tscn",
+    "algorithms/lsystems/ContextSensitive/README.md",
+    "algorithms/lsystems/context_free_grammars/CFG_UI.gd",
+    "algorithms/lsystems/context_free_grammars/CFG_UI.gd.uid",
+    "algorithms/lsystems/context_free_grammars/ContextFreeGrammars.gd",
+    "algorithms/lsystems/context_free_grammars/ContextFreeGrammars.gd.uid"
+  ],
+  "grounded_wiki": {
+    "project_slug": "adaresearch-case-study",
+    "points": [
+      {
+        "point_type": "principle",
+        "title": "The Artifact Registry is AdaResearch's identity layer for content. It is wher...",
+        "statement": "The Artifact Registry is AdaResearch's identity layer for content. It is where maps, sequences, and runtime loaders agree on what an artifact is called and where it resolves.",
+        "support_count": 2,
+        "confidence": 0.76
+      },
+      {
+        "point_type": "decision",
+        "title": "I'll start by exploring both registry systems to understand their structure a...",
+        "statement": "I'll start by exploring both registry systems to understand their structure and overlap. Good overview.",
+        "support_count": 1,
+        "confidence": 0.71
+      },
+      {
+        "point_type": "fact",
+        "title": "Bridge: Map authors work in JSON and web tooling, while the Grid System turns...",
+        "statement": "Bridge: Map authors work in JSON and web tooling, while the Grid System turns the same data into walls, utilities, artifacts, spawn logic, and scene flow in VR.",
+        "support_count": 3,
+        "confidence": 0.81
+      },
+      {
+        "point_type": "fact",
+        "title": "Bridge: Maps and sequences refer to stable `lookup_name` identifiers, while r...",
+        "statement": "Bridge: Maps and sequences refer to stable `lookup_name` identifiers, while registry metadata carries the bridge back to scenes, categories, tags, and sequence ownership.",
+        "support_count": 3,
+        "confidence": 0.81
+      }
+    ],
+    "claims": [
+      {
+        "claim_type": "principle",
+        "statement": "The Artifact Registry is AdaResearch's identity layer for content. It is where maps, sequences, and runtime loaders agree on what an artifact is called and where it resolves.",
+        "support_count": 1,
+        "confidence": 0.78,
+        "status": "inferred"
+      },
+      {
+        "claim_type": "principle",
+        "statement": "The Artifact Registry is AdaResearch's identity layer for content. It is where maps, sequences, and runtime loaders agree on what an artifact is called and where it resolves.",
+        "support_count": 1,
+        "confidence": 0.74,
+        "status": "grounded"
+      },
+      {
+        "claim_type": "decision",
+        "statement": "I'll start by exploring both registry systems to understand their structure and overlap. Good overview.",
+        "support_count": 1,
+        "confidence": 0.71,
+        "status": "verified"
+      },
+      {
+        "claim_type": "principle",
+        "statement": "Repo and chat-grounded overview for AdaResearch 46.",
+        "support_count": 1,
+        "confidence": 0.82,
+        "status": "grounded"
+      }
+    ],
+    "turns": [
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 448,
+        "role": "user",
+        "text": "{ \"sequence\": \"lsystems\", \"capturedAt\": \"2026-03-05T16:00:00Z\", \"notes\": \"First batch audit of the L-Systems sequence. 6 maps captured (4 angles each), 10 artifacts captured (4 angles each). 5 artifacts could not be found in the registry: lsystem_tree, fractal_lsystem_string, dark_sphere, lsystem_dungeon, genetic_tree_..."
+      },
+      {
+        "session_id": "369f8742-09bd-440c-989f-dbc992996f1f",
+        "turn_index": 102,
+        "role": "user",
+        "text": "...Like a Person, Not a Model You are a writing editor for the Ada Research project. Your job is to identify and remove AI-generated writing patterns, and to ensure every text has genuine voice, personality, and intellectual honesty. This skill is based on Wikipedia's \"Signs of AI writing\" guide, adapted for the specific ..."
+      },
+      {
+        "session_id": "66df209d-b3a1-4657-9cf6-522c844b3022",
+        "turn_index": 1,
+        "role": "user",
+        "text": "You are working on the \"Ada Research Zero One\" project. Take your time and do excellent work. **Task:** Merge dual registry systems **Task ID:** -untEV4J34eFwsR4F_anQ **Priority:** medium **Description:** Two parallel registry systems coexist with significant overlap: - Legacy: commons/artifacts/grid_artifacts.json (~1..."
+      },
+      {
+        "session_id": "c5c4c59b-9852-43e3-acf6-0d49b1df6811",
+        "turn_index": 742,
+        "role": "user",
+        "text": "... code on GitHub here but that's not the fun part Let's dive deep into what's in it, how the leak happened and most importantly, the things we now know that were never meant to be public. How Did This Even Happen? This is the part that honestly made me go \"...really?\" When you publish a JavaScript/TypeScript package to ..."
+      }
+    ]
+  },
+  "trust_order": [
+    "repo files",
+    "doc/ and docs/ contracts",
+    "session handoffs and session summaries",
+    "grounded wiki chat points and turns",
+    "encyclopedia routes and source files",
+    "DeepWiki overview"
+  ],
+  "generated_at": "2026-04-04T12:22:34+00:00"
+}

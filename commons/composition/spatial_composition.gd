@@ -140,7 +140,7 @@ class Zone:
 func _init(p_width: int = 20, p_height: int = 20) -> void:
 	width = p_width; height = p_height
 
-func add_zone(id: String, region: Region, properties: Dictionary = {}, priority: int = -1) -> Zone:
+func add_zone(id: String, region, properties: Dictionary = {}, priority: int = -1) -> Zone:
 	if priority < 0: priority = zones.size()
 	var z := Zone.new()
 	z.id = id; z.region = region; z.properties = properties; z.priority = priority

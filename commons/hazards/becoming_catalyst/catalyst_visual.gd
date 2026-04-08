@@ -19,6 +19,7 @@ extends RefCounted
 
 # Mode colors for visual identity (used by bracelet gems, labels, etc.)
 const MODE_COLORS := {
+	"voxel_editor":   Color(0.3, 0.7, 1.0),
 	"primitives":     Color(0.85, 0.85, 0.9),
 	"transformation": Color(0.7, 0.3, 0.85),
 	"chromatic":      Color(1.0, 0.4, 0.4),
@@ -33,6 +34,7 @@ const MODE_COLORS := {
 
 # Mode order values for determining the highest unlocked mode
 const MODE_ORDER := {
+	"voxel_editor": 0,
 	"primitives": 1,
 	"transformation": 2,
 	"chromatic": 3,

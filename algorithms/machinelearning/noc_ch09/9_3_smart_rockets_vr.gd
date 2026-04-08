@@ -1,4 +1,5 @@
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
 # @identity
 # essence: fitness(x) = 1/d(x, target)^2; DNA = [thrust_vectors]; select → crossover → mutate
@@ -50,6 +51,7 @@ func _ready() -> void:
 	_spawn_population()
 	_record_time = lifespan
 	_update_status(0.0)
+	call_deferred("_apply_standard_presentation")
 	set_physics_process(true)
 
 func _setup_environment() -> void:
@@ -342,7 +344,7 @@ class RocketTarget:
 		mesh = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = rad
-		sphere.height = rad * 2.0
+		sphere.height = sphere.radius * 2.0
 		mesh.mesh = sphere
 		# Glowing gold target material
 		var target_mat := StandardMaterial3D.new()
@@ -390,6 +392,11 @@ class RocketObstacle:
 		if is_instance_valid(root):
 			root.queue_free()
 
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
+
 func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:
@@ -398,3 +405,5 @@ func _exit_tree() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass
+
+

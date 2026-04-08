@@ -148,16 +148,30 @@ func spawn_bracelet_on_controller(controller: XRController3D) -> void:
 	if bracelet_modes.is_empty():
 		bracelet_modes = _catalyst_modes.duplicate()
 
-	# Last resort: ensure at least "primitives"
+	# Last resort: ensure at least voxel_editor
 	if bracelet_modes.is_empty():
-		print("[BraceletMgr] WARNING: no modes found, adding 'primitives' fallback")
-		bracelet_modes.append("primitives")
+		print("[BraceletMgr] WARNING: no modes found, adding 'voxel_editor' fallback")
+		bracelet_modes.append("voxel_editor")
 
 	print("[BraceletMgr] Activating bracelet with %d modes: %s" % [bracelet_modes.size(), bracelet_modes])
 
-	# Activate with the current catalyst's modes
+	# Get all mode IDs for display (all 11 stones shown, locked ones dimmed)
+	var all_display: Array = []
+	for cat in catalysts:
+		if "all_mode_ids" in cat:
+			all_display = cat.all_mode_ids.duplicate()
+			break
+	if all_display.is_empty():
+		# Fallback: build from MODE_DEFS
+		for cat in catalysts:
+			if "MODE_DEFS" in cat:
+				for def in cat.MODE_DEFS:
+					all_display.append(def["id"])
+				break
+
+	# Activate with unlocked modes + all display modes
 	if _bracelet.has_method("activate"):
-		_bracelet.activate(bracelet_modes, controller, true)
+		_bracelet.activate(bracelet_modes, controller, true, all_display)
 	else:
 		push_error("[BraceletMgr] Bracelet has NO activate() method — script not attached?")
 

@@ -104,6 +104,10 @@ func get_default_spawn_point() -> Dictionary:
 func get_lighting_settings() -> Dictionary:
 	return map_data.get("lighting", {})
 
+# Get per-map environment overrides (optional block in map_data.json)
+func get_environment_overrides() -> Dictionary:
+	return map_data.get("environment", {})
+
 # Get general settings
 func get_settings() -> Dictionary:
 	return map_data.get("settings", {})

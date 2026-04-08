@@ -25,6 +25,7 @@ class_name BecomingCatalyst
 # ── Mode Definitions ──────────────────────────────────────────────────────
 # Each entry maps a mode_id to its metadata and factory script.
 const MODE_DEFS: Array[Dictionary] = [
+	{"id": "voxel_editor",   "order": 0,  "name": "Voxel Editor",   "sequence": "",                   "script": "res://commons/hazards/becoming_catalyst/modes/mode_voxel_editor.gd"},
 	{"id": "primitives",     "order": 1,  "name": "Primitives",     "sequence": "primitives",         "script": "res://commons/hazards/becoming_catalyst/modes/mode_primitives.gd"},
 	{"id": "transformation", "order": 2,  "name": "Transformation", "sequence": "transformation",     "script": "res://commons/hazards/becoming_catalyst/modes/mode_transformation.gd"},
 	{"id": "chromatic",      "order": 3,  "name": "Chromatic",      "sequence": "color",              "script": "res://commons/hazards/becoming_catalyst/modes/mode_chromatic.gd"},
@@ -38,8 +39,12 @@ const MODE_DEFS: Array[Dictionary] = [
 ]
 
 # ── State ─────────────────────────────────────────────────────────────────
-var unlocked_modes: Array[String] = ["primitives"]
+## All modes are always VISIBLE on the bracelet. Only unlocked ones are USABLE.
+var unlocked_modes: Array[String] = ["voxel_editor"]
 var current_mode_index: int = 0
+
+## All mode IDs in display order (always all 11 shown on bracelet)
+var all_mode_ids: Array[String] = []
 var fire_cooldown: float = 0.0
 var is_held: bool = false
 var _absorbed: bool = false
@@ -49,7 +54,13 @@ var _pickup_controller_name: String = ""  # Remember which controller picked us 
 # Mode switching debounce
 var _stick_debounce: float = 0.0
 const STICK_THRESHOLD := 0.7
-const STICK_COOLDOWN := 0.8
+const STICK_COOLDOWN := 0.5  # Short cooldown — smooth lerp handles the visual transition
+
+# Voxel editing (tool mode)
+var _voxel_controller: VoxelEditController = null
+var _voxel_active: bool = false
+var _last_fire_time: int = 0  # msec timestamp of last fire press
+const DOUBLE_CLICK_MS := 350   # Max gap between clicks for double-click
 
 # Tip marker — where projectiles spawn
 var _tip: Marker3D = null
@@ -76,6 +87,10 @@ func _ready() -> void:
 	_setup_physics()
 	_build_tip()
 	_build_mode_label()
+	# Build the full mode ID list (all 11 always shown)
+	all_mode_ids.clear()
+	for def in MODE_DEFS:
+		all_mode_ids.append(def["id"])
 	_load_unlocked_modes()
 
 	add_to_group("catalyst")
@@ -106,16 +121,27 @@ func _physics_process(delta: float) -> void:
 	fire_cooldown = maxf(0.0, fire_cooldown - delta)
 	_stick_debounce = maxf(0.0, _stick_debounce - delta)
 
-	# Mode label fade
-	if _mode_label_timer > 0.0:
-		_mode_label_timer -= delta
-		if _mode_label_timer <= 0.0 and _mode_label:
-			_mode_label.visible = false
+	# Mode label — always visible when held, shows current mode + index
+	if is_held and _mode_label:
+		if _mode_label_timer > 0.0:
+			_mode_label_timer -= delta
+			# After the flash period, show a dimmer persistent label
+			if _mode_label_timer <= 0.0:
+				var mode_def := _get_current_mode_def()
+				_mode_label.text = mode_def.get("name", "")
+				_mode_label.modulate = CatalystVisual.get_mode_color(mode_def.get("id", "")).darkened(0.3)
+				_mode_label.modulate.a = 0.6  # Dimmer but still visible
+		_mode_label.visible = true
+	elif _mode_label:
+		_mode_label.visible = false
 
 	# Hand glow pulse — the absorbed power breathes
 	if is_held and _held_glow:
 		var pulse := 1.5 + sin(Time.get_ticks_msec() / 400.0) * 0.5
 		_held_glow.light_energy = pulse
+
+	# Update voxel raycast when in voxel mode
+	_update_voxel_raycast()
 
 	# Mode switching disabled on controller thumbstick — use the bracelet instead
 
@@ -129,14 +155,49 @@ func _physics_process(delta: float) -> void:
 func action() -> void:
 	super()
 
-## Direct controller button handler — fires on A/X face button (ax_button).
-## Trigger is reserved for XRTools interactions (grab, poke, etc.).
+## Controller button handler.
+## Mode switching is done by the OTHER hand grabbing and rotating the bracelet hinge.
+## This handler only deals with firing/voxel actions on the catalyst hand.
+##
+## A/X = fire projectile OR add cube (voxel mode)
+## B/Y = remove cube (voxel mode only)
+## Trigger = add cube (voxel mode) — in other modes trigger is XRTools grab
+## Grip = NOT used here — grip is for the OTHER hand grabbing the bracelet
+##
 func _on_controller_button(button_name: String) -> void:
-	if button_name == "ax_button":
-		# Don't fire while the hand is busy holding/picking up another object
-		if _is_hand_busy():
-			return
-		_fire()
+	var mode_def := _get_current_mode_def()
+	var is_voxel: bool = not mode_def.is_empty() and mode_def["id"] == "voxel_editor"
+
+	match button_name:
+		"ax_button", "trigger_click":
+			if is_voxel:
+				_handle_voxel_fire()
+			else:
+				if not _is_hand_busy():
+					_fire()
+
+
+## In voxel mode: single click = ADD cube, double click = REMOVE cube.
+func _handle_voxel_fire() -> void:
+	if not _voxel_controller:
+		return
+
+	var now: int = Time.get_ticks_msec()
+	var gap: int = now - _last_fire_time
+	_last_fire_time = now
+
+	if gap < DOUBLE_CLICK_MS:
+		# DOUBLE CLICK → remove cube
+		_voxel_controller.try_remove()
+		if controller:
+			controller.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.3, 0.0)
+		_last_fire_time = 0  # Reset so triple click doesn't count as another double
+	else:
+		# SINGLE CLICK → add cube
+		_voxel_controller.try_add()
+		fire_cooldown = 0.15
+		if controller:
+			controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.2, 0.0)
 
 ## Check if FunctionPickup on this controller is currently holding a pickable.
 func _is_hand_busy() -> bool:
@@ -156,6 +217,16 @@ func _fire() -> void:
 	if mode_def.is_empty():
 		return
 
+	# ── Voxel editor mode: add cube instead of firing projectile ──
+	if mode_def["id"] == "voxel_editor":
+		if _voxel_controller:
+			_voxel_controller.try_add()
+			fire_cooldown = 0.15
+			if controller:
+				controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.2, 0.0)
+		return
+
+	# ── Standard projectile modes ──
 	# Fire where the controller points (local -Z, same axis as FunctionPointer ray)
 	var spawn_pos: Vector3
 	var fire_dir: Vector3
@@ -190,19 +261,76 @@ func _fire() -> void:
 # MODE SWITCHING
 # ═════════════════════════════════════════════════════════════════════════
 
-func _check_mode_switch() -> void:
-	if not controller or _stick_debounce > 0.0:
-		return
-	if unlocked_modes.size() <= 1:
-		return
+# ═════════════════════════════════════════════════════════════════════════
+# VOXEL EDITING — Tool mode for adding/removing grid cubes
+# ═════════════════════════════════════════════════════════════════════════
 
-	var stick := controller.get_vector2("primary")
-	if stick.x > STICK_THRESHOLD:
-		_switch_mode(1)
-		_stick_debounce = STICK_COOLDOWN
-	elif stick.x < -STICK_THRESHOLD:
-		_switch_mode(-1)
-		_stick_debounce = STICK_COOLDOWN
+func _activate_voxel_mode() -> void:
+	if _voxel_active:
+		return
+	# Find GridStructureComponent in scene
+	var structure := _find_node_by_name(get_tree().root, "GridStructureComponent")
+	if not structure or not (structure is GridStructureComponent):
+		print("[Catalyst] No GridStructureComponent found — voxel mode unavailable")
+		return
+	var data := _find_node_by_name(get_tree().root, "GridDataComponent")
+	if data and data.has_method("get_structure_data"):
+		(structure as GridStructureComponent).enable_editing(data.get_structure_data())
+	_voxel_controller = VoxelEditController.new()
+	_voxel_controller.name = "CatalystVoxelEdit"
+	_voxel_controller.structure_component = structure as GridStructureComponent
+	_voxel_controller.cube_size = (structure as GridStructureComponent).cube_size
+	add_child(_voxel_controller)
+	_voxel_active = true
+	print("[Catalyst] 🔨 Voxel editor activated")
+
+
+func _deactivate_voxel_mode() -> void:
+	if not _voxel_active:
+		return
+	if _voxel_controller and is_instance_valid(_voxel_controller):
+		_voxel_controller.queue_free()
+	_voxel_controller = null
+	_voxel_active = false
+
+
+func _update_voxel_raycast() -> void:
+	if not _voxel_active or not _voxel_controller or not controller:
+		return
+	var origin: Vector3 = controller.global_position
+	var forward: Vector3 = -controller.global_transform.basis.z
+	_voxel_controller.update_target_from_ray(origin, forward)
+
+
+func _voxel_save() -> void:
+	if not _voxel_controller or not _voxel_controller.structure_component:
+		return
+	var data := _find_node_by_name(get_tree().root, "GridDataComponent")
+	var map_name: String = ""
+	if data and data.has_method("get_current_map_name"):
+		map_name = data.get_current_map_name()
+	if map_name.is_empty():
+		return
+	VoxelSaveManager.save(map_name, _voxel_controller.structure_component)
+	print("[Catalyst] 💾 Saved: %s" % map_name)
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.15, 0.5, 0.0)
+
+
+func _find_node_by_name(node: Node, target_name: String) -> Node:
+	if node.name == target_name:
+		return node
+	for child in node.get_children():
+		var found := _find_node_by_name(child, target_name)
+		if found:
+			return found
+	return null
+
+
+func _check_mode_switch() -> void:
+	# Mode switching is done by the OTHER hand rotating the bracelet hinge.
+	# No thumbstick or grip-click mode switching on the catalyst hand.
+	pass
 
 func _switch_mode(direction: int) -> void:
 	var new_index := (current_mode_index + direction) % unlocked_modes.size()
@@ -216,6 +344,12 @@ func _switch_mode(direction: int) -> void:
 
 	_show_mode_label()
 	mode_changed.emit(mode_id)
+
+	# Activate/deactivate voxel editing based on mode
+	if mode_id == "voxel_editor":
+		_activate_voxel_mode()
+	else:
+		_deactivate_voxel_mode()
 
 	# Keep bracelet in sync with thumbstick switching
 	var cap_mgr = get_node_or_null("/root/CatalystCapabilityManager")
@@ -239,6 +373,13 @@ func set_mode_index(index: int) -> void:
 	_show_mode_label()
 	_rebuild_visual()
 	mode_changed.emit(mode_id)
+
+	# Activate/deactivate voxel editing
+	if mode_id == "voxel_editor":
+		_activate_voxel_mode()
+	else:
+		_deactivate_voxel_mode()
+
 	# Don't call bracelet.sync_to_mode here — the bracelet initiated this change
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.15, 0.0)
@@ -248,10 +389,12 @@ func _show_mode_label() -> void:
 	if not _mode_label:
 		return
 	var mode_def := _get_current_mode_def()
-	_mode_label.text = mode_def.get("name", "???")
+	var mode_name: String = mode_def.get("name", "???")
+	var index_display: String = "%d/%d" % [current_mode_index + 1, unlocked_modes.size()]
+	_mode_label.text = "%s  %s" % [index_display, mode_name]
 	_mode_label.modulate = CatalystVisual.get_mode_color(mode_def.get("id", ""))
 	_mode_label.visible = true
-	_mode_label_timer = 2.0
+	_mode_label_timer = 4.0  # Visible longer so player can read it
 
 func _get_current_mode_def() -> Dictionary:
 	if current_mode_index < 0 or current_mode_index >= unlocked_modes.size():
@@ -345,8 +488,12 @@ func _save_unlocked_modes() -> void:
 		file.close()
 
 func _load_unlocked_modes() -> void:
+	# Start clean — only load from save file, always ensure voxel_editor is first
 	if not FileAccess.file_exists(SAVE_PATH):
+		# No save = fresh start with just voxel_editor
+		current_mode_index = 0
 		return
+
 	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
 	if not file:
 		return
@@ -355,16 +502,26 @@ func _load_unlocked_modes() -> void:
 	var data = JSON.parse_string(text)
 	if data is Dictionary and data.has("unlocked"):
 		unlocked_modes.clear()
+		unlocked_modes.append("voxel_editor")
 		for mode_id in data["unlocked"]:
-			unlocked_modes.append(str(mode_id))
-		# Ensure primitives always present
-		if "primitives" not in unlocked_modes:
-			unlocked_modes.insert(0, "primitives")
+			var mid: String = str(mode_id)
+			# Only add modes that exist in MODE_DEFS
+			var valid: bool = false
+			for def in MODE_DEFS:
+				if def["id"] == mid:
+					valid = true
+					break
+			if valid and mid != "voxel_editor" and mid not in unlocked_modes:
+				unlocked_modes.append(mid)
 		# Restore last mode
 		if data.has("last_mode"):
 			var idx := unlocked_modes.find(str(data["last_mode"]))
 			if idx >= 0:
 				current_mode_index = idx
+			else:
+				current_mode_index = 0
+	else:
+		current_mode_index = 0
 
 # ═════════════════════════════════════════════════════════════════════════
 # VISUAL CONSTRUCTION
@@ -522,6 +679,10 @@ func _absorb_into_hand() -> void:
 		var mode_color := CatalystVisual.get_mode_color(unlocked_modes[current_mode_index])
 		_held_glow.light_color = mode_color
 		_held_glow.light_energy = 1.5
+
+	# Activate voxel mode if it's the current mode (default on start)
+	if unlocked_modes[current_mode_index] == "voxel_editor":
+		call_deferred("_activate_voxel_mode")
 
 ## Auto-absorb onto a controller without pickup animation.
 ## Used by CatalystCapabilityManager to restore catalyst after scene transitions.

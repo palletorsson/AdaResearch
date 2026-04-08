@@ -1,0 +1,133 @@
+{
+  "_meta": {
+    "description": "Nature layer auto-generated from soft_stages.json",
+    "version": "1.0",
+    "generator": "generate_nature_layers.py",
+    "terrain_mode": "stone_floor",
+    "density": 0.6,
+    "kingdoms": [
+      "flower",
+      "tree",
+      "fungus"
+    ]
+  },
+  "map_name": "Mosaic_Pattern_Maker",
+  "dimensions": {
+    "width": 5,
+    "depth": 5
+  },
+  "layers": {
+    "ground": [
+      [
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "mushrooms",
+          "intensity": 0.13
+        },
+        {
+          "type": "grass",
+          "intensity": 0.26
+        },
+        {
+          "type": "moss",
+          "intensity": 0.27
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "type": "soil",
+          "intensity": 0.19
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "moss",
+          "intensity": 0.77
+        },
+        {
+          "type": "flowers",
+          "intensity": 0.6
+        },
+        {
+          "type": "flowers",
+          "intensity": 0.16
+        }
+      ],
+      [
+        {
+          "type": "bush",
+          "intensity": 0.19
+        },
+        {
+          "type": "moss",
+          "intensity": 0.57
+        },
+        {
+          "type": "soil",
+          "intensity": 0.17
+        },
+        {
+          "type": "grass",
+          "intensity": 0.39
+        },
+        {
+          "type": "flowers",
+          "intensity": 0.25
+        }
+      ],
+      [
+        {
+          "type": "moss",
+          "intensity": 0.27
+        },
+        {
+          "type": "soil",
+          "intensity": 0.02
+        },
+        {
+          "type": "bush",
+          "intensity": 0.46
+        },
+        {
+          "type": "bush",
+          "intensity": 0.61
+        },
+        {
+          "type": "soil",
+          "intensity": 0.12
+        }
+      ],
+      [
+        {
+          "type": "soil",
+          "intensity": 0.05
+        },
+        {
+          "type": "bush",
+          "intensity": 0.17
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        },
+        {
+          "type": "soil",
+          "intensity": 0.25
+        },
+        {
+          "type": "none",
+          "intensity": 0.0
+        }
+      ]
+    ]
+  }
+}
