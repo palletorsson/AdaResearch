@@ -1,429 +1,440 @@
 {
-	"registry_info": {
-		"name": "physics_simulation",
-		"description": "Physics simulation artifacts — from Newton's laws and numerical integration through rigid bodies, spring systems, fluid dynamics, and beyond. A comprehensive tour of classical mechanics rendered interactive.",
-		"category": "physics",
-		"theoretical_grounding": "Classical mechanics, Newtonian dynamics, numerical methods (Euler/Verlet/RK4), continuum mechanics, Lagrangian and Hamiltonian frameworks, computational physics"
-	},
 	"artifacts": {
-		"newtons_laws": {
-			"lookup_name": "newtons_laws",
-			"scene": "res://algorithms/physicssimulation/newtonslaws/newtonslaws.tscn",
-			"name": "Newton's Laws",
-			"description": "Interactive visualization of Newton's three laws of motion: inertia (an object at rest stays at rest), F=ma (force produces acceleration proportional to mass), and action-reaction (every force has an equal opposite). Objects of varying mass respond to applied forces, making the relationship between force, mass, and acceleration viscerally tangible.",
-			"qfep_connection": "Newton's laws as the foundational grammar of physical order — F=ma is the simplest lambda mapping force to motion, the irreducible rule from which all mechanical complexity emerges.",
-			"category": "physics",
+		"ChainSwing": {
+			"category": "unknown",
 			"complexity": "beginner",
+			"description": "ChainSwing",
 			"dev_themes": [
-				"classical_mechanics",
-				"foundations",
-				"force",
-				"acceleration"
+				"physics",
+				"simulation"
 			],
-			"dev_category": "physics_foundations",
-			"tags": [
-				"newton",
-				"force",
-				"mass",
-				"acceleration",
-				"inertia",
-				"action_reaction",
-				"f_equals_ma",
-				"classical_mechanics",
-				"beginner",
-				"foundations"
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
 			],
 			"include_in_map_data": true,
+			"lookup_name": "ChainSwing",
 			"map_ready": true,
 			"map_sequences": [
-				"physicssimulation"
+				"joints"
 			],
-			"sequence": "forces",
+			"name": "ChainSwing",
 			"parameters": {
 				"footprint": [
-					10,
-					1,
-					10
-				],
-				"size_group": "environment"
-			}
-		},
-		"numerical_integration": {
-			"lookup_name": "numerical_integration",
-			"scene": "res://algorithms/physicssimulation/numericalintegration/numericalintegration.tscn",
-			"name": "Numerical Integration Methods",
-			"description": "Side-by-side comparison of numerical integration schemes: forward Euler (simple but drifty), symplectic Euler (energy-preserving), and RK4 (fourth-order accuracy). Watch identical initial conditions diverge as each method accumulates different error profiles over time. The gap between the curves is the price of computational shortcuts.",
-			"qfep_connection": "Integration methods as different lambda functions approximating the same continuous truth — discretization introduces entropy (numerical error), and the choice of method determines how much order is preserved across time steps.",
-			"category": "physics",
-			"complexity": "intermediate",
-			"dev_themes": [
-				"numerical_methods",
-				"integration",
-				"accuracy",
-				"stability"
-			],
-			"dev_category": "physics_foundations",
-			"tags": [
-				"euler",
-				"rk4",
-				"symplectic",
-				"integration",
-				"numerical_methods",
-				"time_stepping",
-				"error",
-				"stability",
-				"comparison"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation"
-			],
-			"sequence": "physicssimulation",
-			"parameters": {
-				"footprint": [
-					10,
-					1,
-					6
-				],
-				"size_group": "environment"
-			}
-		},
-		"verlet_integration": {
-			"lookup_name": "verlet_integration",
-			"scene": "res://algorithms/physicssimulation/verletintegration/verlet_integration.tscn",
-			"name": "Verlet Integration",
-			"description": "Position-based Verlet integration — the workhorse of game physics and molecular dynamics. Instead of tracking velocity explicitly, it infers motion from the difference between current and previous positions. This makes it naturally stable, time-reversible, and beautifully simple: x_new = 2x_current - x_old + a·dt².",
-			"qfep_connection": "Verlet as elegant order-preservation — by encoding velocity implicitly in position history, it sidesteps the entropy accumulation that plagues explicit velocity methods. Simplicity as a route to stability.",
-			"category": "physics",
-			"complexity": "intermediate",
-			"dev_themes": [
-				"numerical_methods",
-				"verlet",
-				"position_based",
-				"stability"
-			],
-			"dev_category": "physics_foundations",
-			"tags": [
-				"verlet",
-				"integration",
-				"position_based",
-				"stable",
-				"time_reversible",
-				"molecular_dynamics",
-				"game_physics"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation"
-			],
-			"sequence": "physicssimulation"
-		},
-		"rigid_body": {
-			"lookup_name": "rigid_body",
-			"scene": "res://algorithms/physicssimulation/rigidbody/rigidbody.tscn",
-			"name": "Rigid Body Dynamics",
-			"description": "Full rigid body simulation with linear and angular motion. Watch objects translate, rotate, and tumble under applied forces and torques. Demonstrates moment of inertia tensors, angular momentum conservation, and the coupling between linear and rotational dynamics that makes a thrown wrench wobble differently than a thrown ball.",
-			"qfep_connection": "Rigid bodies as the emergence of rotational complexity from simple force rules — angular momentum conservation as a deep symmetry (Noether's theorem), where rotational order persists even as translational chaos increases.",
-			"category": "physics",
-			"complexity": "intermediate",
-			"dev_themes": [
-				"rigid_body",
-				"rotation",
-				"angular_momentum",
-				"torque"
-			],
-			"dev_category": "physics_bodies",
-			"tags": [
-				"rigid_body",
-				"rotation",
-				"angular_momentum",
-				"torque",
-				"inertia_tensor",
-				"dynamics",
-				"tumbling"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation"
-			],
-			"sequence": "physicssimulation",
-			"parameters": {
-				"footprint": [
-					20,
-					1,
-					20
-				],
-				"size_group": "world_scale"
-			}
-		},
-		"collision_detection": {
-			"lookup_name": "collision_detection",
-			"scene": "res://algorithms/physicssimulation/collisiondetection/collisiondetection.tscn",
-			"name": "Collision Detection",
-			"description": "Two-phase collision detection pipeline: broad phase (spatial hashing, bounding boxes) rapidly culls impossible pairs, then narrow phase (GJK/SAT algorithms) computes exact contact points, penetration depth, and collision normals. Visualizes the acceleration structures that make real-time physics possible — without them, checking every pair is O(n²) death.",
-			"qfep_connection": "Collision detection as the boundary between order and disorder — the moment two objects meet is a phase transition where kinetic energy redistributes. The algorithm itself is a lambda that converts spatial proximity into contact events.",
-			"category": "physics",
-			"complexity": "advanced",
-			"dev_themes": [
-				"collision",
-				"gjk",
-				"sat",
-				"broad_phase",
-				"narrow_phase"
-			],
-			"dev_category": "physics_bodies",
-			"tags": [
-				"collision",
-				"detection",
-				"gjk",
-				"sat",
-				"broad_phase",
-				"narrow_phase",
-				"contact_points",
-				"spatial_hashing",
-				"bounding_box",
-				"optimization"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation"
-			],
-			"sequence": "physicssimulation",
-			"parameters": {
-				"footprint": [
-					8,
-					1,
-					8
-				],
-				"size_group": "environment"
-			}
-		},
-		"constraints": {
-			"lookup_name": "constraints",
-			"scene": "res://algorithms/physicssimulation/constraints/constraints.tscn",
-			"name": "Constraints & Joints",
-			"description": "Joint constraints that restrict rigid body degrees of freedom: hinges (1 rotational DOF), sliders (1 translational DOF), ball-and-socket (3 rotational DOF), and fixed joints. Watch how iterative constraint solvers project invalid states back onto the constraint manifold, enforcing physical laws as geometric relationships.",
-			"qfep_connection": "Constraints as imposed order — reducing the phase space of possible configurations. Each joint is a lambda that maps free motion onto a restricted manifold, and the solver's iterations are entropy reduction in action.",
-			"category": "physics",
-			"complexity": "advanced",
-			"dev_themes": [
-				"constraints",
-				"joints",
-				"degrees_of_freedom",
-				"solver"
-			],
-			"dev_category": "physics_bodies",
-			"tags": [
-				"constraints",
-				"joints",
-				"hinge",
-				"slider",
-				"ball_socket",
-				"degrees_of_freedom",
-				"solver",
-				"iterative",
-				"manifold"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation"
-			],
-			"sequence": "physicssimulation",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
+					1.0,
+					1.0,
+					1.0
 				],
 				"size_group": "compact"
-			}
+			},
+			"scene": "res://algorithms/joint/07_chain_swing/ChainSwing.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"CharacterRagdoll": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "CharacterRagdoll",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "CharacterRagdoll",
+			"map_ready": true,
+			"map_sequences": [
+				"joints"
+			],
+			"name": "CharacterRagdoll",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/joint/08_character_ragdoll/CharacterRagdoll.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"ConeTwistBag": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "ConeTwistBag",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ConeTwistBag",
+			"map_ready": true,
+			"map_sequences": [
+				"joints"
+			],
+			"name": "ConeTwistBag",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/joint/06_cone_twist_bag/ConeTwistBag.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"DrawbridgeHinge": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "DrawbridgeHinge",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "DrawbridgeHinge",
+			"map_ready": true,
+			"map_sequences": [
+				"joints"
+			],
+			"name": "DrawbridgeHinge",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/joint/09_drawbridge_hinge/DrawbridgeHinge.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"GimbalStabilizer": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "GimbalStabilizer",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "GimbalStabilizer",
+			"map_ready": true,
+			"map_sequences": [
+				"joints"
+			],
+			"name": "GimbalStabilizer",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/joint/10_gimbal_stabilizer/GimbalStabilizer.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"HingeCrank": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "HingeCrank",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "HingeCrank",
+			"map_ready": true,
+			"map_sequences": [
+				"joints"
+			],
+			"name": "HingeCrank",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/joint/03_hinge_crank/HingeCrank.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"IKArm": {
+			"description": "FABRIK inverse kinematics on a 4-segment arm — target orbits, arm solves backward and forward",
+			"scene_path": "res://algorithms/joint/11_ik_arm/IKArm.tscn",
+			"tags": [
+				"physics",
+				"joints",
+				"inverse-kinematics"
+			]
+		},
+		"PendulumPin": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "PendulumPin",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "PendulumPin",
+			"map_ready": true,
+			"map_sequences": [
+				"joints"
+			],
+			"name": "PendulumPin",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/joint/01_pendulum_pin/PendulumPin.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"SliderPress": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Linear slider joint — piston/rail motion along one axis",
+			"dev_themes": [
+				"physics",
+				"joints"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "SliderPress",
+			"map_ready": true,
+			"map_sequences": [
+				"joints"
+			],
+			"name": "SliderPress",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/joint/04_slider_press/SliderPress.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics",
+				"joints"
+			]
+		},
+		"SpringSuspension": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "SpringSuspension",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "SpringSuspension",
+			"map_ready": true,
+			"map_sequences": [
+				"joints"
+			],
+			"name": "SpringSuspension",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/joint/05_spring_suspension/SpringSuspension.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"algo_gun": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Evolved gravity gun that captures and directs Grid Agents. Use GRIP button to capture agents, then aim and GRIP again to direct them to modify grid structures.",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "algo_gun",
+			"map_ready": true,
+			"map_sequences": [
+				"devexamples",
+				"testmaps"
+			],
+			"name": "Algo-Gun",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/forces/algo_gun.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d",
+				"interactive",
+				"physics"
+			]
 		},
 		"bouncing_ball": {
-			"lookup_name": "bouncing_ball",
-			"scene": "res://algorithms/physicssimulation/bouncingball/bouncingball.tscn",
-			"name": "Bouncing Ball",
-			"description": "The quintessential physics demo: a ball bouncing under gravity with configurable coefficient of restitution. At e=1.0, perfectly elastic — energy conserved, bounces forever. Below 1.0, each impact dissipates energy as heat and sound, and the ball gradually dies. A complete parabolic trajectory with collision response in the simplest possible package.",
-			"qfep_connection": "The coefficient of restitution as a direct entropy dial — e=1 preserves all kinetic order, e<1 irreversibly converts ordered motion into thermal disorder. Each bounce is a measurement of how much structure survives impact.",
+			"capacity": "SEE that the bounce coefficient controls how much chaos (energy) survives each collision",
 			"category": "physics",
 			"complexity": "beginner",
+			"description": "The quintessential physics demo: a ball bouncing under gravity with configurable coefficient of restitution. At e=1.0, perfectly elastic — energy conserved, bounces forever. Below 1.0, each impact dissipates energy as heat and sound, and the ball gradually dies. A complete parabolic trajectory with collision response in the simplest possible package.",
+			"dev_category": "physics_bodies",
 			"dev_themes": [
 				"collision",
 				"restitution",
 				"energy",
 				"gravity"
 			],
-			"dev_category": "physics_bodies",
+			"footprint": [
+				9,
+				7,
+				9
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, numerical methods",
+			"include_in_map_data": true,
+			"interactions": [
+				"watch ball bounce with gravity",
+				"adjust bounce coefficient",
+				"observe energy decay"
+			],
+			"lookup_name": "bouncing_ball",
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"name": "Bouncing Ball",
+			"parameters": {
+				"footprint": [
+					9,
+					7,
+					9
+				],
+				"size_group": "xlarge"
+			},
+			"qfep_connection": "Pure F — gravity pulls, floor reflects. The simplest possible physics: one force, one constraint. The bounce coefficient IS lambda: 1.0 = perfect (no energy loss), 0.0 = dead stop.",
+			"scene": "res://algorithms/physicssimulation/bouncingball/bouncingball.tscn",
+			"sequence": "forces",
+			"size_group": "xlarge",
 			"tags": [
 				"bouncing",
 				"ball",
 				"gravity",
-				"restitution",
-				"elastic",
-				"inelastic",
+				"collision",
 				"energy",
-				"parabolic",
-				"collision_response",
-				"beginner"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation"
-			],
-			"sequence": "forces",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"mass_spring_damper": {
-			"lookup_name": "mass_spring_damper",
-			"scene": "res://algorithms/physicssimulation/massspringdamper/massspringdamper.tscn",
-			"name": "Mass-Spring-Damper",
-			"description": "The canonical second-order system: a mass on a spring with viscous damping. Hooke's law (F = -kx) provides the restoring force, damping (F = -cv) dissipates energy. Explore underdamped oscillation, critical damping, and overdamped decay by tweaking spring stiffness k and damping coefficient c. The foundation of every vibration analysis ever performed.",
-			"qfep_connection": "The mass-spring-damper as the archetype of order-entropy interplay — the spring stores and restores order (potential energy), the damper converts it to entropy (heat). Critical damping is the lambda that optimally balances both.",
-			"category": "physics",
-			"complexity": "beginner",
-			"dev_themes": [
-				"springs",
-				"damping",
-				"oscillation",
-				"hookes_law"
-			],
-			"dev_category": "physics_springs",
-			"tags": [
-				"spring",
-				"damper",
-				"mass",
-				"hookes_law",
-				"oscillation",
-				"underdamped",
-				"critical_damping",
-				"overdamped",
-				"harmonic_oscillator"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces",
-				"physicssimulation"
-			],
-			"sequence": "forces",
-			"parameters": {
-				"footprint": [
-					7,
-					6,
-					3
-				],
-				"size_group": "environment"
-			}
-		},
-		"spring_mass_system": {
-			"lookup_name": "spring_mass_system",
-			"scene": "res://algorithms/physicssimulation/springmass/springmass.tscn",
-			"name": "Spring-Mass Network",
-			"description": "A network of point masses connected by springs, forming a deformable mesh. Energy propagates as waves through the lattice — pluck one node and watch the disturbance ripple outward. The discrete analog of a continuous elastic medium, and the building block for cloth, soft bodies, and lattice dynamics.",
-			"qfep_connection": "Emergence of wave behavior from purely local spring interactions — no node knows about the global pattern, yet coherent waves arise. Individual springs are simple lambdas; their network produces emergent order.",
-			"category": "physics",
-			"complexity": "intermediate",
-			"dev_themes": [
-				"springs",
-				"network",
-				"waves",
-				"lattice"
-			],
-			"dev_category": "physics_springs",
-			"tags": [
-				"spring",
-				"mass",
-				"network",
-				"mesh",
-				"waves",
-				"lattice",
-				"elastic",
-				"deformable",
-				"propagation"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation"
-			],
-			"sequence": "physicssimulation",
-			"parameters": {
-				"footprint": [
-					3,
-					1,
-					3
-				],
-				"size_group": "room_scale"
-			}
-		},
-		"spring_system": {
-			"lookup_name": "spring_system",
-			"scene": "res://algorithms/physicssimulation/springsystem/spring_system.tscn",
-			"name": "Spring System",
-			"description": "System-level spring behavior exploring coupled oscillators, resonance, and energy transfer between connected springs. When natural frequencies align, energy sloshes back and forth between modes in beautiful beat patterns. Demonstrates normal modes and the spectral decomposition of complex vibrations into simple harmonic components.",
-			"qfep_connection": "Normal modes as the eigenstates of mechanical order — the system's natural basis of vibration. Resonance is what happens when external forcing aligns with internal structure, a lambda-to-lambda coupling that amplifies coherence.",
-			"category": "physics",
-			"complexity": "intermediate",
-			"dev_themes": [
-				"springs",
-				"coupled_oscillators",
-				"resonance",
-				"normal_modes"
-			],
-			"dev_category": "physics_springs",
-			"tags": [
-				"spring",
-				"system",
-				"coupled",
-				"resonance",
-				"normal_modes",
-				"beats",
-				"energy_transfer",
-				"spectral"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces",
-				"physicssimulation"
-			],
-			"sequence": "forces",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
+				"physics",
+				"beginner",
+				"forces"
+			]
 		},
 		"cloth_simulation": {
-			"lookup_name": "cloth_simulation",
-			"scene": "res://algorithms/physicssimulation/clothsimulation/clothsimulation.tscn",
-			"name": "Cloth Simulation",
-			"description": "A grid of particles connected by structural, shear, and bend springs forming a deformable cloth surface. Responds to gravity, wind forces, and collisions. Pin corners and watch it drape; release and watch it fall. The interplay of thousands of tiny spring forces creating fluid, fabric-like motion from purely mechanical rules.",
-			"qfep_connection": "Cloth as emergent softness — rigid spring rules at the micro level produce flowing, organic behavior at the macro level. The visual gap between the grid topology and the draped result is emergence made visible.",
 			"category": "physics",
 			"complexity": "advanced",
+			"description": "A grid of particles connected by structural, shear, and bend springs forming a deformable cloth surface. Responds to gravity, wind forces, and collisions. Pin corners and watch it drape; release and watch it fall. The interplay of thousands of tiny spring forces creating fluid, fabric-like motion from purely mechanical rules.",
+			"dev_category": "physics_springs",
 			"dev_themes": [
 				"cloth",
 				"springs",
 				"particles",
 				"deformation"
 			],
-			"dev_category": "physics_springs",
+			"include_in_map_data": true,
+			"lookup_name": "cloth_simulation",
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"name": "Cloth Simulation",
+			"parameters": {
+				"footprint": [
+					8.0,
+					12.0,
+					10.0
+				],
+				"size_group": "world_scale"
+			},
+			"qfep_connection": "Cloth as emergent softness — rigid spring rules at the micro level produce flowing, organic behavior at the macro level. The visual gap between the grid topology and the draped result is emergence made visible.",
+			"scene": "res://algorithms/physicssimulation/clothsimulation/clothsimulation.tscn",
+			"sequence": "physicssimulation",
 			"tags": [
 				"cloth",
 				"fabric",
@@ -436,243 +447,1671 @@
 				"wind",
 				"deformable",
 				"grid"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation"
-			],
-			"sequence": "physicssimulation",
-			"parameters": {
-				"footprint": [
-					8,
-					12,
-					10
-				],
-				"size_group": "world_scale"
-			}
+			]
 		},
-		"force_fields": {
-			"lookup_name": "force_fields",
-			"scene": "res://algorithms/physicssimulation/forcefields/forcefields.tscn",
-			"scene_path": "res://algorithms/physicssimulation/forcefields/forcefields.tscn",
-			"name": "Force Fields",
-			"description": "Configurable force fields — uniform gravity, directional wind, radial attraction/repulsion, and vortex fields — applied to populations of particles. Combine multiple fields to create complex flow patterns. Each field type is a spatial function mapping position to force: F(x) defines the landscape that particles navigate.",
-			"qfep_connection": "Force fields as the lambda landscape — spatial functions that shape particle trajectories. Particles flowing through a field are entropy exploring the contours of imposed order. Superposition of fields creates emergent complexity from simple additive rules.",
+		"collision_detection": {
 			"category": "physics",
-			"complexity": "intermediate",
+			"complexity": "advanced",
+			"description": "Two-phase collision detection pipeline: broad phase (spatial hashing, bounding boxes) rapidly culls impossible pairs, then narrow phase (GJK/SAT algorithms) computes exact contact points, penetration depth, and collision normals. Visualizes the acceleration structures that make real-time physics possible — without them, checking every pair is O(n²) death.",
+			"dev_category": "physics_bodies",
 			"dev_themes": [
-				"fields",
-				"gravity",
-				"wind",
-				"forces"
-			],
-			"dev_category": "physics_fields",
-			"tags": [
-				"force_field",
-				"gravity",
-				"wind",
-				"radial",
-				"vortex",
-				"particles",
-				"spatial",
-				"superposition",
-				"flow"
+				"collision",
+				"gjk",
+				"sat",
+				"broad_phase",
+				"narrow_phase"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "collision_detection",
 			"map_ready": true,
 			"map_sequences": [
-				"forces",
 				"physicssimulation"
 			],
-			"sequence": "forces",
+			"name": "Collision Detection",
 			"parameters": {
 				"footprint": [
-					2,
-					2,
+					8.0,
+					1.0,
+					8.0
+				],
+				"size_group": "environment"
+			},
+			"qfep_connection": "Collision detection as the boundary between order and disorder — the moment two objects meet is a phase transition where kinetic energy redistributes. The algorithm itself is a lambda that converts spatial proximity into contact events.",
+			"scene": "res://algorithms/physicssimulation/collisiondetection/collisiondetection.tscn",
+			"sequence": "physicssimulation",
+			"tags": [
+				"collision",
+				"detection",
+				"gjk",
+				"sat",
+				"broad_phase",
+				"narrow_phase",
+				"contact_points",
+				"spatial_hashing",
+				"bounding_box",
+				"optimization"
+			]
+		},
+		"constraints": {
+			"capacity": "SEE that each constraint removes a degree of freedom — freedom is defined by what is forbidden",
+			"category": "physics",
+			"complexity": "advanced",
+			"description": "Joint constraints that restrict rigid body degrees of freedom: hinges (1 rotational DOF), sliders (1 translational DOF), ball-and-socket (3 rotational DOF), and fixed joints. Watch how iterative constraint solvers project invalid states back onto the constraint manifold, enforcing physical laws as geometric relationships.",
+			"dev_category": "physics_bodies",
+			"dev_themes": [
+				"constraints",
+				"joints",
+				"degrees_of_freedom",
+				"solver"
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, numerical methods",
+			"include_in_map_data": true,
+			"interactions": [
+				"observe different joint types",
+				"watch constrained motion",
+				"compare hinge vs slider vs ball"
+			],
+			"lookup_name": "constraints",
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"name": "Constraints & Joints",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "F-limitation — joints restrict degrees of freedom. Each constraint removes a possibility. A hinge allows rotation but forbids translation. Freedom is defined by what is forbidden.",
+			"scene": "res://algorithms/physicssimulation/constraints/constraints.tscn",
+			"sequence": "physicssimulation",
+			"tags": [
+				"constraints",
+				"joints",
+				"hinge",
+				"slider",
+				"ball_socket",
+				"degrees_of_freedom",
+				"solver",
+				"iterative",
+				"manifold"
+			]
+		},
+		"example_1_10_accelerating_towards_the_mouse_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Accelerating towards the mouse demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_10_accelerating_towards_the_mouse_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "example_1_10_accelerating_towards_the_mouse_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/example_1_10_accelerating_towards_the_mouse_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"example_2_2_forces_mass_variation_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Forces with mass variation demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_2_2_forces_mass_variation_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "example_2_2_forces_mass_variation_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/forces/example_2_2_forces_mass_variation_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"example_2_3_gravity_scaled_by_mass_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Gravity scaled by mass demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_2_3_gravity_scaled_by_mass_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "example_2_3_gravity_scaled_by_mass_vr",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
 					2
 				],
-				"size_group": "compact"
-			}
+				"size_group": "standard"
+			},
+			"scene": "res://algorithms/forces/example_2_3_gravity_scaled_by_mass_vr.tscn",
+			"size_group": "standard",
+			"tags": [
+				"physics"
+			]
 		},
-		"vector_fields": {
-			"lookup_name": "vector_fields",
-			"scene": "res://algorithms/physicssimulation/vectorfields/vectorfields.tscn",
-			"name": "Vector Fields",
-			"description": "3D vector field visualization with arrow glyphs showing direction and magnitude at grid points. Particles advected through the field trace streamlines, revealing the flow structure — sources, sinks, saddle points, and vortices. Includes curl, divergence, and gradient field types with real-time parameter control.",
-			"qfep_connection": "Vector fields as the topology of flow — divergence measures local entropy production (sources spread, sinks concentrate), curl measures local rotation (persistent order). The field itself is a continuous lambda assigning motion to every point in space.",
+		"example_2_4_friction_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Friction forces demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_2_4_friction_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "example_2_4_friction_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/forces/example_2_4_friction_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"example_2_5_fluid_resistance_vr": {
+			"capacity": "FEEL that drag is the medium's memory of your velocity — the faster you move, the harder the world pushes back",
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Drag opposes motion and scales with speed squared. Heavier objects fall faster through the same fluid. F_drag = -C * |v|^2 * v-hat. The faster you move, the harder the world pushes back.",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, numerical methods",
+			"include_in_map_data": true,
+			"interactions": [
+				"observe objects falling through fluid",
+				"compare different masses",
+				"watch terminal velocity emerge"
+			],
+			"lookup_name": "example_2_5_fluid_resistance_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "example_2_5_fluid_resistance_vr",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "standard"
+			},
+			"qfep_connection": "F-resistance — drag is the medium's memory of your velocity. A feedback loop: speed creates resistance, resistance limits speed. Equilibrium is negotiation.",
+			"scene": "res://algorithms/forces/example_2_5_fluid_resistance_vr.tscn",
+			"size_group": "standard",
+			"tags": [
+				"drag",
+				"fluid",
+				"resistance",
+				"velocity",
+				"terminal_velocity",
+				"physics",
+				"forces",
+				"nature_of_code"
+			]
+		},
+		"example_2_6_single_attractor_vr": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Single attractor force demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_2_6_single_attractor_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "example_2_6_single_attractor_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/forces/example_2_6_single_attractor_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chaos",
+				"physics"
+			]
+		},
+		"example_2_7_multiple_attractors_vr": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Multiple attractors force demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_2_7_multiple_attractors_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "example_2_7_multiple_attractors_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/forces/example_2_7_multiple_attractors_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"example_2_8_two_body_attraction_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Two body attraction demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_2_8_two_body_attraction_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "example_2_8_two_body_attraction_vr",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "standard"
+			},
+			"scene": "res://algorithms/forces/example_2_8_two_body_attraction_vr.tscn",
+			"size_group": "standard",
+			"tags": [
+				"physics"
+			]
+		},
+		"example_2_9_n_body_attraction_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "N-body attraction demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1,
+				1,
+				2
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_2_9_n_body_attraction_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "example_2_9_n_body_attraction_vr",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "standard"
+			},
+			"scene": "res://algorithms/forces/example_2_9_n_body_attraction_vr.tscn",
+			"size_group": "standard",
+			"tags": [
+				"physics"
+			]
+		},
+		"example_3_10_swinging_pendulum_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Swinging pendulum demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_3_10_swinging_pendulum_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "example_3_10_swinging_pendulum_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/example_3_10_swinging_pendulum_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"pendulum",
+				"wave"
+			]
+		},
+		"example_3_11_a_spring_connection_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Spring connection demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_3_11_a_spring_connection_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "example_3_11_a_spring_connection_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/example_3_11_a_spring_connection_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics",
+				"spring"
+			]
+		},
+		"example_3_1_angular_motion_using_rotate_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Angular motion using rotate demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_3_1_angular_motion_using_rotate_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "example_3_1_angular_motion_using_rotate_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/example_3_1_angular_motion_using_rotate_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"animation"
+			]
+		},
+		"example_3_2_forces_with_arbitrary_angular_motion_vr": {
+			"capacity": "SEE that rotation and translation are independent stories told by the same body",
 			"category": "physics",
 			"complexity": "intermediate",
+			"description": "Eight boxes orbit an attractor while spinning at their own rate — rotation and translation coexisting as independent freedoms. Linear attraction pulls them inward while random angular impulses accumulate, making each box spin differently. Movers wrap at boundaries creating toroidal space. Rotation does not need a force — it needs a torque, or random impulses.",
 			"dev_themes": [
-				"fields",
-				"vectors",
-				"flow",
-				"visualization"
+				"physics",
+				"simulation"
 			],
-			"dev_category": "physics_fields",
-			"tags": [
-				"vector_field",
-				"streamlines",
-				"curl",
-				"divergence",
-				"gradient",
-				"flow",
-				"visualization",
-				"3d",
-				"advection",
-				"topology"
+			"footprint": [
+				2,
+				1,
+				1
 			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, Nature of Code",
 			"include_in_map_data": true,
+			"interactions": [
+				"watch 8 movers orbit attractor",
+				"adjust attractor strength via VR slider",
+				"adjust angular damping",
+				"observe toroidal wrapping"
+			],
+			"lookup_name": "example_3_2_forces_with_arbitrary_angular_motion_vr",
 			"map_ready": true,
 			"map_sequences": [
-				"forces",
-				"physicssimulation"
+				"forces"
 			],
-			"sequence": "forces"
+			"name": "Arbitrary Angular Motion",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "standard"
+			},
+			"qfep_connection": "Two independent F channels — linear attraction is one deterministic force, angular impulses are another. Lambda is the angular damping: high damping kills spin (pure orbital F), low damping lets chaos into rotation while translation stays ordered.",
+			"scene": "res://algorithms/oscillation/noc_ch03/example_3_2_forces_with_arbitrary_angular_motion_vr.tscn",
+			"size_group": "standard",
+			"tags": [
+				"angular_motion",
+				"rotation",
+				"torque",
+				"attractor",
+				"oscillation",
+				"forces",
+				"nature_of_code",
+				"vr"
+			]
 		},
-		"particle_systems": {
-			"lookup_name": "particle_systems",
-			"scene": "res://algorithms/physicssimulation/particlesystems/particlesystems.tscn",
-			"scene_path": "res://algorithms/physicssimulation/particlesystems/particlesystems.tscn",
-			"name": "Particle Systems",
-			"description": "Particle emitters spawning thousands of particles with configurable lifetimes, initial velocities, forces, and visual properties. Particles are born, live under physics, and die — creating fire, smoke, sparks, and rain from simple statistical rules. Each particle is independent, yet the ensemble produces coherent visual phenomena.",
-			"qfep_connection": "Particle systems as statistical emergence — each particle follows trivial rules (birth, force, death), but the ensemble produces recognizable macroscopic patterns. Order from quantity: the thermodynamic limit where individual randomness becomes collective structure.",
+		"example_3_3_pointing_in_the_direction_of_motion_vr": {
+			"capacity": "FEEL that heading is not chosen but inherited from motion — direction of motion IS orientation",
 			"category": "physics",
 			"complexity": "intermediate",
+			"description": "A cone that always points where it is going — orientation derived from velocity, not set independently. Sinusoidal thrust drives the mover in Lissajous-like 3D curves. The cone's nose traces the velocity vector, making heading a consequence of movement. A thing that points where it moves has surrendered its identity to its velocity.",
 			"dev_themes": [
-				"particles",
-				"emitters",
-				"lifetime",
-				"effects"
+				"physics",
+				"simulation"
 			],
-			"dev_category": "physics_fields",
-			"tags": [
-				"particles",
-				"emitter",
-				"lifetime",
-				"force",
-				"fire",
-				"smoke",
-				"sparks",
-				"statistical",
-				"ensemble",
-				"effects"
+			"footprint": [
+				2,
+				1,
+				1
 			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, Nature of Code",
 			"include_in_map_data": true,
+			"interactions": [
+				"watch cone follow velocity vector",
+				"adjust thrust magnitude via VR slider",
+				"observe Lissajous-like 3D curves",
+				"see orientation lag during direction changes"
+			],
+			"lookup_name": "example_3_3_pointing_in_the_direction_of_motion_vr",
 			"map_ready": true,
 			"map_sequences": [
-				"forces",
-				"physicssimulation"
+				"forces"
 			],
-			"sequence": "forces",
+			"name": "Pointing in Direction of Motion",
 			"parameters": {
 				"footprint": [
-					1,
+					2,
 					1,
 					1
 				],
-				"size_group": "compact"
-			}
+				"size_group": "standard"
+			},
+			"qfep_connection": "F-alignment — the cone's orientation IS its velocity direction. No independent rotation. Identity (heading) is fully determined by dynamics (velocity). Pure F: given the state, the orientation is computable.",
+			"scene": "res://algorithms/oscillation/noc_ch03/example_3_3_pointing_in_the_direction_of_motion_vr.tscn",
+			"size_group": "standard",
+			"tags": [
+				"steering",
+				"velocity",
+				"orientation",
+				"heading",
+				"lissajous",
+				"oscillation",
+				"nature_of_code",
+				"vr"
+			]
 		},
-		"nbody_simulation": {
-			"lookup_name": "nbody_simulation",
-			"scene": "res://algorithms/physicssimulation/nbodysimulation/nbody_problem.tscn",
-			"name": "N-Body Gravitational Simulation",
-			"description": "N-body gravitational simulation where every mass attracts every other mass via Newton's law of gravitation (F = Gm₁m₂/r²). Watch galaxies form, binary stars orbit, and clusters scatter. The O(n²) pairwise force computation is the computational bottleneck that drove the invention of Barnes-Hut trees and fast multipole methods.",
-			"qfep_connection": "N-body gravity as the ultimate emergence engine — simple 1/r² attraction between pairs produces spiral galaxies, binary orbits, gravitational slingshots, and chaotic scattering. The richness of gravitational structure from the simplest possible force law.",
+		"example_3_4_polar_to_cartesian_vr": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Polar to cartesian coordinate conversion demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_3_4_polar_to_cartesian_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "example_3_4_polar_to_cartesian_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/example_3_4_polar_to_cartesian_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"example_3_5_simple_harmonic_motion_vr": {
+			"category": "oscillation",
+			"complexity": "intermediate",
+			"description": "Damped harmonic motion with coupled oscillators, beats/resonance detection, energy bars (KE/PE/total), decay envelope, and VR slider controls",
+			"dev_themes": [
+				"physics",
+				"simulation",
+				"oscillation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_3_5_simple_harmonic_motion_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "example_3_5_simple_harmonic_motion_vr",
+			"parameters": {
+				"amplitude": 0.2,
+				"coupling": 0.3,
+				"damping": 0.15,
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"frequency_a": 1.5,
+				"frequency_b": 1.8,
+				"show_coupled": true,
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/example_3_5_simple_harmonic_motion_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"animation",
+				"wave",
+				"damping",
+				"coupled-oscillators",
+				"energy",
+				"resonance"
+			]
+		},
+		"example_3_6_simple_harmonic_motion_ii_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Simple harmonic motion part II demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_3_6_simple_harmonic_motion_ii_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "example_3_6_simple_harmonic_motion_ii_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/example_3_6_simple_harmonic_motion_ii_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"animation",
+				"wave"
+			]
+		},
+		"example_3_7_oscillator_objects_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Oscillator objects demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_3_7_oscillator_objects_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "example_3_7_oscillator_objects_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/example_3_7_oscillator_objects_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"example_3_8_static_wave_vr": {
+			"category": "oscillation",
+			"complexity": "intermediate",
+			"description": "Wave superposition with two traveling waves, constructive/destructive interference coloring, and 2D wave equation membrane (finite difference PDE with boundary reflection)",
+			"dev_themes": [
+				"physics",
+				"simulation",
+				"wave-equation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_3_8_static_wave_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "example_3_8_static_wave_vr",
+			"parameters": {
+				"amplitude_a": 0.08,
+				"amplitude_b": 0.06,
+				"damping": 0.003,
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"grid_res": 40.0,
+				"membrane_size": 0.55,
+				"size_group": "compact",
+				"wave_speed": 0.3,
+				"wavelength_a": 0.12,
+				"wavelength_b": 0.18
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/example_3_8_static_wave_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"wave",
+				"superposition",
+				"interference",
+				"pde",
+				"membrane"
+			]
+		},
+		"example_3_9_the_wave_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "The wave demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				22.0,
+				22.0,
+				22.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_3_9_the_wave_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "example_3_9_the_wave_vr",
+			"parameters": {
+				"footprint": [
+					22.0,
+					22.0,
+					22.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/example_3_9_the_wave_vr.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"wave"
+			]
+		},
+		"example_4_1_single_particle_vr": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Single particle system demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_4_1_single_particle_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"particles"
+			],
+			"name": "Single Particle VR",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/particles/example_4_1_single_particle_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"particle",
+				"simulation",
+				"vr"
+			]
+		},
+		"example_4_2_array_particles_vr": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Particle array system demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				5.0,
+				5.0,
+				5.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_4_2_array_particles_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"particles"
+			],
+			"name": "Array Particles VR",
+			"parameters": {
+				"footprint": [
+					5.0,
+					5.0,
+					5.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/particles/example_4_2_array_particles_vr.tscn",
+			"size_group": "environment",
+			"tags": [
+				"array",
+				"simulation",
+				"vr"
+			]
+		},
+		"example_4_3_particle_emitter_vr": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Particle emitter system demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_4_3_particle_emitter_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"particles"
+			],
+			"name": "Particle Emitter VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/particles/example_4_3_particle_emitter_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"particle",
+				"simulation",
+				"vr"
+			]
+		},
+		"example_4_4_multiple_emitters_vr": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Multiple particle emitters demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_4_4_multiple_emitters_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"particles"
+			],
+			"name": "Multiple Emitters VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/particles/example_4_4_multiple_emitters_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vr"
+			]
+		},
+		"example_4_5_inheritance_polymorphism_vr": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Particle inheritance and polymorphism demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				5.0,
+				5.0,
+				5.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_4_5_inheritance_polymorphism_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"particles"
+			],
+			"name": "Inheritance Polymorphism VR",
+			"parameters": {
+				"footprint": [
+					5.0,
+					5.0,
+					5.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/particles/example_4_5_inheritance_polymorphism_vr.tscn",
+			"size_group": "environment",
+			"tags": [
+				"vr"
+			]
+		},
+		"example_4_6_particle_repeller_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Particle repeller system demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_4_6_particle_repeller_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"particles"
+			],
+			"name": "Particle Repeller VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/particles/example_4_6_particle_repeller_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"particle",
+				"simulation",
+				"vr"
+			]
+		},
+		"example_6_1_basic_rigidbody_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Basic rigidbody physics demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_6_1_basic_rigidbody_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Basic Rigidbody VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/physics/example_6_1_basic_rigidbody_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vr"
+			]
+		},
+		"example_6_2_falling_boxes_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Falling boxes physics demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_6_2_falling_boxes_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Falling Boxes VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/physics/example_6_2_falling_boxes_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vr"
+			]
+		},
+		"example_6_3_compound_bodies_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Compound rigidbody physics demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_6_3_compound_bodies_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Compound Bodies VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/physics/example_6_3_compound_bodies_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vr"
+			]
+		},
+		"example_6_4_windmill_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Windmill physics demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_6_4_windmill_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Windmill VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/physics/example_6_4_windmill_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vr"
+			]
+		},
+		"example_6_5_chain_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Chain physics demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_6_5_chain_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Chain VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/physics/example_6_5_chain_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vr"
+			]
+		},
+		"example_6_6_grab_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Grab physics demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_6_6_grab_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Grab VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/physics/example_6_6_grab_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"interactive",
+				"vr"
+			]
+		},
+		"example_6_7_bridge_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Bridge physics demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_6_7_bridge_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Bridge VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/physics/example_6_7_bridge_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vr"
+			]
+		},
+		"example_6_8_collision_layers_vr": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Collision layers physics demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_6_8_collision_layers_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Collision Layers VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/physics/example_6_8_collision_layers_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics",
+				"vr"
+			]
+		},
+		"example_particle_body": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "example_particle_body",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				4.0,
+				3.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_particle_body",
+			"map_ready": true,
+			"map_sequences": [
+				"particles"
+			],
+			"name": "example_particle_body",
+			"parameters": {
+				"footprint": [
+					1.0,
+					4.0,
+					3.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/particles/example_particle_body.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"particle"
+			]
+		},
+		"exercise_3_11_oop_wave_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Object-oriented programming wave exercise",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				22.0,
+				22.0,
+				22.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "exercise_3_11_oop_wave_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "exercise_3_11_oop_wave_vr",
+			"parameters": {
+				"footprint": [
+					22.0,
+					22.0,
+					22.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_11_oop_wave_vr.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"wave"
+			]
+		},
+		"exercise_3_12_additive_wave_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Additive wave exercise demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				22.0,
+				22.0,
+				22.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "exercise_3_12_additive_wave_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "exercise_3_12_additive_wave_vr",
+			"parameters": {
+				"footprint": [
+					22.0,
+					22.0,
+					22.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_12_additive_wave_vr.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"wave"
+			]
+		},
+		"exercise_3_15_double_pendulum_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Double pendulum exercise demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "exercise_3_15_double_pendulum_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "exercise_3_15_double_pendulum_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_15_double_pendulum_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"pendulum",
+				"wave"
+			]
+		},
+		"exercise_3_1_baton_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Baton exercise demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "exercise_3_1_baton_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "exercise_3_1_baton_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_1_baton_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"exercise_3_5_spiral_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Spiral exercise demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "exercise_3_5_spiral_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "exercise_3_5_spiral_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_5_spiral_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"spiral"
+			]
+		},
+		"exercise_3_6_asteroids_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Asteroids exercise demonstration",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "exercise_3_6_asteroids_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "exercise_3_6_asteroids_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_6_asteroids_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"fem_simulation": {
 			"category": "physics",
 			"complexity": "advanced",
+			"description": "Finite Element Method (FEM) for deformable solid mechanics. A continuous body is discretized into tetrahedral or hexahedral elements, each computing stress and strain from local deformation gradients. Assemble the global stiffness matrix, solve the linear system, and watch beams bend, bridges sag, and materials yield under load — engineering simulation made visible.",
+			"dev_category": "physics_continuum",
 			"dev_themes": [
-				"gravity",
-				"nbody",
-				"orbital_mechanics",
-				"computational"
-			],
-			"dev_category": "physics_fields",
-			"tags": [
-				"nbody",
-				"gravity",
-				"gravitational",
-				"orbital",
-				"galaxy",
-				"binary_star",
-				"pairwise",
-				"computational",
-				"barnes_hut"
+				"fem",
+				"deformation",
+				"stress",
+				"strain",
+				"engineering"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "fem_simulation",
 			"map_ready": true,
 			"map_sequences": [
-				"forces",
 				"physicssimulation"
 			],
-			"sequence": "forces",
+			"name": "Finite Element Method",
 			"parameters": {
 				"footprint": [
-					1,
-					1,
-					1
+					6.0,
+					1.0,
+					6.0
 				],
-				"size_group": "compact"
-			}
+				"size_group": "environment"
+			},
+			"qfep_connection": "FEM as discretized order — the continuous stress field (infinite-dimensional) projected onto a finite basis of shape functions. Each element is a local lambda mapping displacement to force; the assembled system is emergent global behavior from local constitutive laws.",
+			"scene": "res://algorithms/physicssimulation/fem/fem.tscn",
+			"sequence": "physicssimulation",
+			"tags": [
+				"fem",
+				"finite_element",
+				"deformable",
+				"stress",
+				"strain",
+				"stiffness_matrix",
+				"tetrahedral",
+				"engineering",
+				"solid_mechanics"
+			]
 		},
-		"three_body_problem": {
-			"lookup_name": "three_body_problem",
-			"scene": "res://algorithms/physicssimulation/threebodyproblem/threebodyproblem.tscn",
-			"name": "Three-Body Problem",
-			"description": "The infamous three-body problem: three gravitationally interacting masses with no closed-form solution. Tiny changes in initial conditions lead to wildly divergent trajectories — the original exemplar of deterministic chaos. Explore stable figure-eight orbits, Lagrange points, and the chaotic regime where prediction becomes impossible.",
-			"qfep_connection": "The three-body problem as the boundary where Newtonian order meets chaos — deterministic rules (pure lambda) producing unpredictable outcomes (maximal entropy in prediction space). The simplest system where emergence defeats reductionism.",
+		"firework_launcher": {
+			"capacity": "SEE that a firework is a population explosion — one event becomes many independent paths, each obeying the same law",
 			"category": "physics",
-			"complexity": "advanced",
+			"complexity": "intermediate",
+			"description": "Launch rockets that climb, then explode into showers of glowing particles — each one a tiny body under gravity, drag, and fading lifetime. Four color presets (classic, ocean, garden, ring pattern) create distinct particle distributions. Shows particle emission, statistical spread, force application to many bodies, and emergent visual patterns from simple rules.",
+			"dev_category": "physics_particles",
 			"dev_themes": [
-				"chaos",
-				"gravity",
-				"three_body",
-				"sensitivity"
+				"particles",
+				"emission",
+				"lifetime",
+				"forces_on_many"
 			],
-			"dev_category": "physics_fields",
-			"tags": [
-				"three_body",
-				"chaos",
-				"gravitational",
-				"sensitivity",
-				"deterministic",
-				"unpredictable",
-				"lagrange_points",
-				"figure_eight",
-				"initial_conditions"
-			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, numerical methods",
 			"include_in_map_data": true,
+			"interactions": [
+				"launch rockets",
+				"watch explosion particle spread",
+				"observe drag and gravity on each particle"
+			],
+			"lookup_name": "firework_launcher",
 			"map_ready": true,
 			"map_sequences": [
-				"forces",
-				"physicssimulation"
+				"forces"
 			],
+			"name": "Firework Launcher",
+			"qfep_connection": "phi-dE — one launch event becomes sixty independent trajectories. The explosion is a burst of dE, each particle's drag coefficient is phi damping the change. One cause, many effects.",
+			"scene": "res://algorithms/physicssimulation/fireworklauncher/fireworklauncher.tscn",
 			"sequence": "forces",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
+			"tags": [
+				"firework",
+				"particles",
+				"emission",
+				"gravity",
+				"drag",
+				"lifetime",
+				"explosion",
+				"color",
+				"statistical"
+			]
 		},
 		"fluid_simulation": {
-			"lookup_name": "fluid_simulation",
-			"scene": "res://algorithms/physicssimulation/fluidsimulation/fluidsimulation.tscn",
-			"name": "Fluid Simulation (SPH)",
-			"description": "Smoothed Particle Hydrodynamics (SPH) fluid simulation — the Navier-Stokes equations approximated by a cloud of particles carrying mass, velocity, and pressure. Kernel functions smooth physical quantities over neighbor particles, producing viscous flow, surface tension, and splashing. The Lagrangian approach to fluid dynamics where the fluid carries its own computational grid.",
-			"qfep_connection": "Fluid as the continuum limit of particle interactions — pressure enforces incompressibility (order), viscosity dissipates vortices (entropy), and turbulence is the perpetual negotiation between them. SPH kernels are the lambda functions that interpolate local physics.",
 			"category": "physics",
 			"complexity": "advanced",
+			"description": "Smoothed Particle Hydrodynamics (SPH) fluid simulation — the Navier-Stokes equations approximated by a cloud of particles carrying mass, velocity, and pressure. Kernel functions smooth physical quantities over neighbor particles, producing viscous flow, surface tension, and splashing. The Lagrangian approach to fluid dynamics where the fluid carries its own computational grid.",
+			"dev_category": "physics_continuum",
 			"dev_themes": [
 				"fluid",
 				"sph",
 				"navier_stokes",
 				"continuum"
 			],
-			"dev_category": "physics_continuum",
+			"include_in_map_data": true,
+			"lookup_name": "fluid_simulation",
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"name": "Fluid Simulation (SPH)",
+			"parameters": {
+				"footprint": [
+					16.0,
+					1.0,
+					16.0
+				],
+				"size_group": "world_scale"
+			},
+			"qfep_connection": "Fluid as the continuum limit of particle interactions — pressure enforces incompressibility (order), viscosity dissipates vortices (entropy), and turbulence is the perpetual negotiation between them. SPH kernels are the lambda functions that interpolate local physics.",
+			"scene": "res://algorithms/physicssimulation/fluidsimulation/fluidsimulation.tscn",
+			"sequence": "physicssimulation",
 			"tags": [
 				"fluid",
 				"sph",
@@ -684,120 +2123,182 @@
 				"lagrangian",
 				"particles",
 				"continuum"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation"
-			],
-			"sequence": "physicssimulation",
-			"parameters": {
-				"footprint": [
-					16,
-					1,
-					16
-				],
-				"size_group": "world_scale"
-			}
+			]
 		},
-		"fem_simulation": {
-			"lookup_name": "fem_simulation",
-			"scene": "res://algorithms/physicssimulation/fem/fem.tscn",
-			"name": "Finite Element Method",
-			"description": "Finite Element Method (FEM) for deformable solid mechanics. A continuous body is discretized into tetrahedral or hexahedral elements, each computing stress and strain from local deformation gradients. Assemble the global stiffness matrix, solve the linear system, and watch beams bend, bridges sag, and materials yield under load — engineering simulation made visible.",
-			"qfep_connection": "FEM as discretized order — the continuous stress field (infinite-dimensional) projected onto a finite basis of shape functions. Each element is a local lambda mapping displacement to force; the assembled system is emergent global behavior from local constitutive laws.",
+		"force_fields": {
+			"capacity": "FEEL that a force field is a region with different rules — cross the boundary and the laws change",
 			"category": "physics",
-			"complexity": "advanced",
+			"complexity": "intermediate",
+			"description": "Configurable force fields — uniform gravity, directional wind, radial attraction/repulsion, and vortex fields — applied to populations of particles. Combine multiple fields to create complex flow patterns. Each field type is a spatial function mapping position to force: F(x) defines the landscape that particles navigate.",
+			"dev_category": "physics_fields",
 			"dev_themes": [
-				"fem",
-				"deformation",
-				"stress",
-				"strain",
-				"engineering"
+				"fields",
+				"gravity",
+				"wind",
+				"forces"
 			],
-			"dev_category": "physics_continuum",
-			"tags": [
-				"fem",
-				"finite_element",
-				"deformable",
-				"stress",
-				"strain",
-				"stiffness_matrix",
-				"tetrahedral",
-				"engineering",
-				"solid_mechanics"
+			"footprint": [
+				4,
+				4,
+				4
 			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, numerical methods",
 			"include_in_map_data": true,
+			"interactions": [
+				"observe balls entering different force zones",
+				"watch directional push vs radial pull vs viscous drag"
+			],
+			"lookup_name": "force_fields",
 			"map_ready": true,
 			"map_sequences": [
+				"forces",
 				"physicssimulation"
 			],
-			"sequence": "physicssimulation",
+			"name": "Force Fields",
 			"parameters": {
 				"footprint": [
-					6,
-					1,
-					6
+					4,
+					4,
+					4
 				],
-				"size_group": "environment"
-			}
+				"size_group": "xlarge"
+			},
+			"qfep_connection": "Regional F — three zones with three different force laws. Cross a boundary and physics changes. Lambda is spatial: the same object experiences different forces depending on where it is.",
+			"scene": "res://algorithms/physicssimulation/forcefields/forcefields.tscn",
+			"scene_path": "res://algorithms/physicssimulation/forcefields/forcefields.tscn",
+			"sequence": "forces",
+			"size_group": "xlarge",
+			"tags": [
+				"force_field",
+				"gravity",
+				"wind",
+				"radial",
+				"vortex",
+				"particles",
+				"spatial",
+				"superposition",
+				"flow"
+			]
 		},
-		"soft_bodies": {
-			"lookup_name": "soft_bodies",
-			"scene": "res://algorithms/physicssimulation/softbodies/softbodies.tscn",
-			"name": "Soft Body Physics",
-			"description": "Soft body deformation using pressure-volume models and shape matching. Objects squish, stretch, and jiggle while maintaining approximate volume — like jelly, rubber, or biological tissue. Combines ideas from spring networks, FEM, and position-based dynamics into satisfying, tactile deformation that you want to poke.",
-			"qfep_connection": "Soft bodies as elastic memory — deformed states always remember and seek their rest shape (order), while external forces and collisions continuously perturb them (entropy). The wobble is the visible oscillation between imposed disorder and intrinsic structure.",
+		"friction_ramp": {
+			"capacity": "FEEL how friction coefficient controls the balance between motion and resistance on an inclined plane",
 			"category": "physics",
-			"complexity": "advanced",
+			"complexity": "beginner",
+			"description": "Inclined plane with adjustable friction coefficient and slope angle. A block slides or sticks based on whether mg·sin(θ) exceeds μ·mg·cos(θ). Force arrows show gravity, normal force, and friction in real time. VR sliders control μ (0–1.5) and angle (5°–60°).",
+			"dev_category": "physics_foundations",
 			"dev_themes": [
-				"soft_body",
-				"deformation",
-				"pressure",
-				"shape_matching"
+				"friction",
+				"inclined_plane",
+				"static_vs_kinetic",
+				"force_balance"
 			],
-			"dev_category": "physics_continuum",
-			"tags": [
-				"soft_body",
-				"deformable",
-				"jelly",
-				"pressure",
-				"volume",
-				"shape_matching",
-				"squish",
-				"jiggle",
-				"position_based"
-			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, numerical methods",
 			"include_in_map_data": true,
+			"interactions": [
+				"adjust friction coefficient",
+				"change ramp angle",
+				"observe sliding vs sticking threshold"
+			],
+			"lookup_name": "friction_ramp",
 			"map_ready": true,
 			"map_sequences": [
-				"physicssimulation"
+				"forces"
 			],
-			"sequence": "physicssimulation",
-			"parameters": {
-				"footprint": [
-					8,
-					1,
-					6
-				],
-				"size_group": "environment"
-			}
+			"name": "Friction Ramp",
+			"qfep_connection": "F-resistance on a surface — friction converts kinetic energy to heat. The coefficient of friction is lambda: zero means frictionless (pure F), high means the surface dominates.",
+			"scene": "res://commons/artifacts/friction_ramp/friction_ramp.tscn",
+			"sequence": "forces",
+			"tags": [
+				"friction",
+				"ramp",
+				"inclined_plane",
+				"normal_force",
+				"gravity",
+				"mu",
+				"coefficient",
+				"sliding",
+				"static",
+				"force_diagram",
+				"beginner"
+			]
+		},
+		"gravity_well": {
+			"capacity": "FEEL that gravity is not a force but a curvature — objects follow the shape of warped space",
+			"category": "physics",
+			"complexity": "intermediate",
+			"description": "The rubber-sheet metaphor made real: a deformable grid mesh warps around a movable mass, creating a visible gravitational well. Colored test particles roll along the curved surface, orbiting, spiraling inward, or escaping depending on their velocity. Adjustable mass strength deepens or flattens the well in real time.",
+			"dev_category": "physics_fields",
+			"dev_themes": [
+				"gravity",
+				"general_relativity_metaphor",
+				"attraction",
+				"fields"
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, numerical methods",
+			"include_in_map_data": true,
+			"interactions": [
+				"roll balls on deformed surface",
+				"observe orbital capture",
+				"watch escape trajectories"
+			],
+			"lookup_name": "gravity_well",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Gravity Well",
+			"qfep_connection": "F as geometry — the rubber sheet metaphor. Mass warps space, and objects follow the curvature. Force is not a push — it is the shape of the world.",
+			"scene": "res://algorithms/physicssimulation/gravitywell/gravitywell.tscn",
+			"sequence": "forces",
+			"tags": [
+				"gravity",
+				"well",
+				"rubber_sheet",
+				"curvature",
+				"attraction",
+				"orbit",
+				"field",
+				"general_relativity"
+			]
+		},
+		"lifetime_curves": {
+			"description": "Three emitters demonstrating color, size, and opacity curves over particle lifetime",
+			"scene_path": "res://algorithms/particles/lifetime_curves/lifetime_curves.tscn",
+			"tags": [
+				"particles",
+				"lifetime",
+				"curves"
+			]
 		},
 		"magnetic_simulation": {
-			"lookup_name": "magnetic_simulation",
-			"scene": "res://algorithms/physicssimulation/magneticsimulation/magnetic_simulation.tscn",
-			"name": "Magnetic Field Simulation",
-			"description": "Magnetic field simulation with dipoles, field line visualization, and Lorentz force on charged particles. Watch iron filings align along field lines, see how bar magnets attract and repel, and observe charged particles spiraling in helical paths through uniform fields. Maxwell's equations made tangible through interactive electromagnetic landscapes.",
-			"qfep_connection": "Magnetism as invisible order — field lines are the hidden structure that organizes matter at a distance. The Lorentz force is the lambda coupling charge velocity to magnetic field, producing the perpendicular deflection that makes electric motors and particle accelerators possible.",
 			"category": "physics",
 			"complexity": "advanced",
+			"description": "Magnetic field simulation with dipoles, field line visualization, and Lorentz force on charged particles. Watch iron filings align along field lines, see how bar magnets attract and repel, and observe charged particles spiraling in helical paths through uniform fields. Maxwell's equations made tangible through interactive electromagnetic landscapes.",
+			"dev_category": "physics_special",
 			"dev_themes": [
 				"magnetism",
 				"electromagnetic",
 				"field_lines",
 				"lorentz"
 			],
-			"dev_category": "physics_special",
+			"include_in_map_data": true,
+			"lookup_name": "magnetic_simulation",
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"name": "Magnetic Field Simulation",
+			"parameters": {
+				"footprint": [
+					6.0,
+					1.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"qfep_connection": "Magnetism as invisible order — field lines are the hidden structure that organizes matter at a distance. The Lorentz force is the lambda coupling charge velocity to magnetic field, producing the perpendicular deflection that makes electric motors and particle accelerators possible.",
+			"scene": "res://algorithms/physicssimulation/magneticsimulation/magnetic_simulation.tscn",
+			"sequence": "physicssimulation",
 			"tags": [
 				"magnetic",
 				"electromagnetic",
@@ -808,37 +2309,673 @@
 				"maxwell",
 				"helical",
 				"iron_filings"
+			]
+		},
+		"mass_spring_damper": {
+			"capacity": "UNDERSTAND that every vibrating system is a mass-spring-damper in disguise — the damping ratio is the system's temperament",
+			"category": "physics",
+			"complexity": "beginner",
+			"description": "The canonical second-order system: a mass on a spring with viscous damping. Hooke's law (F = -kx) provides the restoring force, damping (F = -cv) dissipates energy. Explore underdamped oscillation, critical damping, and overdamped decay by tweaking spring stiffness k and damping coefficient c. The foundation of every vibration analysis ever performed.",
+			"dev_category": "physics_springs",
+			"dev_themes": [
+				"springs",
+				"damping",
+				"oscillation",
+				"hookes_law"
+			],
+			"footprint": [
+				6,
+				6,
+				3
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, numerical methods",
+			"include_in_map_data": true,
+			"interactions": [
+				"adjust spring constant k",
+				"adjust damping coefficient c",
+				"observe three damping regimes",
+				"grab and release mass"
+			],
+			"lookup_name": "mass_spring_damper",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"name": "Mass-Spring-Damper",
+			"parameters": {
+				"footprint": [
+					6,
+					6,
+					3
+				],
+				"size_group": "xlarge"
+			},
+			"qfep_connection": "Classical F with damping — the spring IS F (restoring order), the damper IS lambda (how fast chaos dissipates). Three regimes at three damping ratios: underdamped, critical, overdamped.",
+			"scene": "res://algorithms/physicssimulation/massspringdamper/massspringdamper.tscn",
+			"sequence": "forces",
+			"size_group": "xlarge",
+			"tags": [
+				"spring",
+				"damper",
+				"mass",
+				"hookes_law",
+				"oscillation",
+				"underdamped",
+				"critical_damping",
+				"overdamped",
+				"harmonic_oscillator"
+			]
+		},
+		"momentum_collision": {
+			"description": "Elastic and inelastic collisions on a rail — conservation of momentum and kinetic energy",
+			"scene_path": "res://algorithms/physicssimulation/momentum_collision/momentum_collision.tscn",
+			"tags": [
+				"physics",
+				"momentum",
+				"collision",
+				"conservation"
+			]
+		},
+		"nbody_simulation": {
+			"capacity": "WATCH emergent orbital structure arise from nothing but pairwise gravity",
+			"category": "physics",
+			"complexity": "advanced",
+			"description": "N-body gravitational simulation where every mass attracts every other mass via Newton's law of gravitation (F = Gm₁m₂/r²). Watch galaxies form, binary stars orbit, and clusters scatter. The O(n²) pairwise force computation is the computational bottleneck that drove the invention of Barnes-Hut trees and fast multipole methods.",
+			"dev_category": "physics_fields",
+			"dev_themes": [
+				"gravity",
+				"nbody",
+				"orbital_mechanics",
+				"computational"
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, numerical methods",
+			"include_in_map_data": true,
+			"interactions": [
+				"adjust number of bodies",
+				"observe cluster formation",
+				"watch ejection events"
+			],
+			"lookup_name": "nbody_simulation",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"name": "N-Body Gravitational Simulation",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "N-body F scaling — as N grows, pairwise interactions create emergent structure (orbits, clusters, ejections) that no single force law predicts. Complexity from simple rules.",
+			"scene": "res://algorithms/physicssimulation/nbodysimulation/nbody_problem.tscn",
+			"sequence": "forces",
+			"tags": [
+				"nbody",
+				"gravity",
+				"gravitational",
+				"orbital",
+				"galaxy",
+				"binary_star",
+				"pairwise",
+				"computational",
+				"barnes_hut"
+			]
+		},
+		"newton_cradle": {
+			"capacity": "SEE that momentum transfers through a chain — the middle balls are messengers, not movers",
+			"category": "physics",
+			"complexity": "beginner",
+			"description": "The iconic desktop physics demo: 5 pendulum balls suspended from a frame. Pull one back and release — momentum transfers through elastic collisions, ball-by-ball. Shows conservation of momentum and energy, elastic collision mechanics, and the satisfying click-clack of F=ma made tangible.",
+			"dev_category": "physics_foundations",
+			"dev_themes": [
+				"classical_mechanics",
+				"momentum",
+				"collisions",
+				"pendulum"
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, numerical methods",
+			"include_in_map_data": true,
+			"interactions": [
+				"pull and release end balls",
+				"observe momentum transfer",
+				"count oscillation cycles"
+			],
+			"lookup_name": "newton_cradle",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Newton's Cradle",
+			"qfep_connection": "F-conservation — momentum and energy transfer through a chain of collisions. What enters on one side exits on the other. The middle balls appear still but carry the signal.",
+			"scene": "res://algorithms/physicssimulation/newtoncradle/newtoncradle.tscn",
+			"sequence": "forces",
+			"tags": [
+				"newton",
+				"cradle",
+				"pendulum",
+				"momentum",
+				"elastic_collision",
+				"energy_conservation",
+				"F=ma"
+			]
+		},
+		"newtons_laws": {
+			"category": "physics",
+			"complexity": "beginner",
+			"description": "Interactive visualization of Newton's three laws of motion: inertia (an object at rest stays at rest), F=ma (force produces acceleration proportional to mass), and action-reaction (every force has an equal opposite). Objects of varying mass respond to applied forces, making the relationship between force, mass, and acceleration viscerally tangible.",
+			"dev_category": "physics_foundations",
+			"dev_themes": [
+				"classical_mechanics",
+				"foundations",
+				"force",
+				"acceleration"
+			],
+			"footprint": [
+				1,
+				2,
+				1
 			],
 			"include_in_map_data": true,
+			"lookup_name": "newtons_laws",
 			"map_ready": true,
 			"map_sequences": [
 				"physicssimulation"
 			],
-			"sequence": "physicssimulation",
+			"name": "Newton's Laws",
 			"parameters": {
 				"footprint": [
-					6,
 					1,
-					6
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Newton's laws as the foundational grammar of physical order — F=ma is the simplest lambda mapping force to motion, the irreducible rule from which all mechanical complexity emerges.",
+			"scene": "res://algorithms/physicssimulation/newtonslaws/newtonslaws.tscn",
+			"sequence": "forces",
+			"size_group": "compact",
+			"tags": [
+				"newton",
+				"force",
+				"mass",
+				"acceleration",
+				"inertia",
+				"action_reaction",
+				"f_equals_ma",
+				"classical_mechanics",
+				"beginner",
+				"foundations"
+			]
+		},
+		"numerical_integration": {
+			"category": "physics",
+			"complexity": "intermediate",
+			"description": "Side-by-side comparison of numerical integration schemes: forward Euler (simple but drifty), symplectic Euler (energy-preserving), and RK4 (fourth-order accuracy). Watch identical initial conditions diverge as each method accumulates different error profiles over time. The gap between the curves is the price of computational shortcuts.",
+			"dev_category": "physics_foundations",
+			"dev_themes": [
+				"numerical_methods",
+				"integration",
+				"accuracy",
+				"stability"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "numerical_integration",
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"name": "Numerical Integration Methods",
+			"parameters": {
+				"footprint": [
+					10.0,
+					1.0,
+					6.0
 				],
 				"size_group": "environment"
-			}
+			},
+			"qfep_connection": "Integration methods as different lambda functions approximating the same continuous truth — discretization introduces entropy (numerical error), and the choice of method determines how much order is preserved across time steps.",
+			"scene": "res://algorithms/physicssimulation/numericalintegration/numericalintegration.tscn",
+			"sequence": "physicssimulation",
+			"tags": [
+				"euler",
+				"rk4",
+				"symplectic",
+				"integration",
+				"numerical_methods",
+				"time_stepping",
+				"error",
+				"stability",
+				"comparison"
+			]
 		},
-		"surreal_kinetic_sculpture": {
-			"lookup_name": "surreal_kinetic_sculpture",
-			"scene": "res://algorithms/physicssimulation/surrealkineticsculpture/SurrealKineticSculpture.tscn",
-			"name": "Surreal Kinetic Sculpture",
-			"description": "An art installation that weaves together multiple physics systems — springs, rigid bodies, constraints, particles, and forces — into a mesmerizing, perpetually-moving kinetic sculpture. Gears drive pendulums that scatter particles through force fields while cloth banners ripple in simulated wind. Not a tutorial but a celebration: physics as aesthetic experience, computation as art.",
-			"qfep_connection": "The sculpture as physics made beautiful — all the individual simulation techniques unified into a single emergent artwork. Each subsystem contributes its lambda; the whole is irreducible to its parts. The QFEP synthesis: order (structure), entropy (motion), lambda (physics rules), emergence (art).",
+		"particle_campfire": {
+			"description": "Synthesis campfire combining fire, embers, and smoke particle systems",
+			"scene_path": "res://algorithms/particles/particle_campfire/particle_campfire.tscn",
+			"tags": [
+				"particles",
+				"synthesis",
+				"campfire",
+				"fire"
+			]
+		},
+		"particle_systems": {
+			"capacity": "SEE how thousands of deterministic particles produce statistical, entropic behavior",
+			"category": "physics",
+			"complexity": "intermediate",
+			"description": "Particle emitters spawning thousands of particles with configurable lifetimes, initial velocities, forces, and visual properties. Particles are born, live under physics, and die — creating fire, smoke, sparks, and rain from simple statistical rules. Each particle is independent, yet the ensemble produces coherent visual phenomena.",
+			"dev_category": "physics_fields",
+			"dev_themes": [
+				"particles",
+				"emitters",
+				"lifetime",
+				"effects"
+			],
+			"footprint": [
+				12,
+				9,
+				11
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, numerical methods",
+			"include_in_map_data": true,
+			"interactions": [
+				"adjust emission rate",
+				"change force parameters",
+				"observe particle lifetime and decay"
+			],
+			"lookup_name": "particle_systems",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"name": "Particle Systems",
+			"parameters": {
+				"footprint": [
+					12,
+					9,
+					11
+				],
+				"size_group": "xlarge"
+			},
+			"qfep_connection": "E(S) from F — each particle obeys deterministic forces, but thousands of them produce statistical behavior. Individual determinism creates collective entropy.",
+			"scene": "res://algorithms/physicssimulation/particlesystems/particlesystems.tscn",
+			"scene_path": "res://algorithms/physicssimulation/particlesystems/particlesystems.tscn",
+			"sequence": "forces",
+			"size_group": "xlarge",
+			"tags": [
+				"particles",
+				"emitter",
+				"lifetime",
+				"force",
+				"fire",
+				"smoke",
+				"sparks",
+				"statistical",
+				"ensemble",
+				"effects"
+			]
+		},
+		"raycastingpoints": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Interactive raycasting algorithm visualization with point-based collision detection",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				16.0,
+				1.0,
+				16.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "raycastingpoints",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Raycasting Points",
+			"parameters": {
+				"footprint": [
+					16.0,
+					1.0,
+					16.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/physicssimulation/raycasting/raycastingpoints.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"physics"
+			]
+		},
+		"rigid_body": {
+			"category": "physics",
+			"complexity": "intermediate",
+			"description": "Full rigid body simulation with linear and angular motion. Watch objects translate, rotate, and tumble under applied forces and torques. Demonstrates moment of inertia tensors, angular momentum conservation, and the coupling between linear and rotational dynamics that makes a thrown wrench wobble differently than a thrown ball.",
+			"dev_category": "physics_bodies",
+			"dev_themes": [
+				"rigid_body",
+				"rotation",
+				"angular_momentum",
+				"torque"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rigid_body",
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"name": "Rigid Body Dynamics",
+			"parameters": {
+				"footprint": [
+					20.0,
+					1.0,
+					20.0
+				],
+				"size_group": "world_scale"
+			},
+			"qfep_connection": "Rigid bodies as the emergence of rotational complexity from simple force rules — angular momentum conservation as a deep symmetry (Noether's theorem), where rotational order persists even as translational chaos increases.",
+			"scene": "res://algorithms/physicssimulation/rigidbody/rigidbody.tscn",
+			"sequence": "physicssimulation",
+			"tags": [
+				"rigid_body",
+				"rotation",
+				"angular_momentum",
+				"torque",
+				"inertia_tensor",
+				"dynamics",
+				"tumbling"
+			]
+		},
+		"simulation_instability": {
+			"description": "Spring system with ramping timestep — watch stable oscillation drift, then explode as dt grows too large",
+			"scene_path": "res://algorithms/physicssimulation/simulation_instability/simulation_instability.tscn",
+			"tags": [
+				"physics",
+				"instability",
+				"timestep",
+				"numerical"
+			]
+		},
+		"slingshot_launcher": {
+			"category": "physics",
+			"complexity": "intermediate",
+			"description": "Step onto the platform and get catapulted! A charging catapult mechanism detects the player, builds power, then fires you (and demo balls) along a parabolic trajectory. Adjustable launch angle and power with a visible trajectory preview. Shows impulse, projectile motion, and the visceral thrill of Newton's third law.",
+			"dev_category": "physics_interactive",
+			"dev_themes": [
+				"impulse",
+				"projectile_motion",
+				"interaction",
+				"catapult"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "slingshot_launcher",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Slingshot Launcher",
+			"qfep_connection": "Impulse — a short burst of force that changes everything. The launcher is a delta function: infinite force for zero time, producing finite momentum.",
+			"scene": "res://algorithms/physicssimulation/slingshotlauncher/slingshotlauncher.tscn",
+			"sequence": "forces",
+			"tags": [
+				"slingshot",
+				"catapult",
+				"launch",
+				"projectile",
+				"impulse",
+				"trajectory",
+				"parabola",
+				"player_interaction",
+				"VR"
+			]
+		},
+		"soft_bodies": {
 			"category": "physics",
 			"complexity": "advanced",
+			"description": "Soft body deformation using pressure-volume models and shape matching. Objects squish, stretch, and jiggle while maintaining approximate volume — like jelly, rubber, or biological tissue. Combines ideas from spring networks, FEM, and position-based dynamics into satisfying, tactile deformation that you want to poke.",
+			"dev_category": "physics_continuum",
+			"dev_themes": [
+				"soft_body",
+				"deformation",
+				"pressure",
+				"shape_matching"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "soft_bodies",
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"name": "Soft Body Physics",
+			"parameters": {
+				"footprint": [
+					8.0,
+					1.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"qfep_connection": "Soft bodies as elastic memory — deformed states always remember and seek their rest shape (order), while external forces and collisions continuously perturb them (entropy). The wobble is the visible oscillation between imposed disorder and intrinsic structure.",
+			"scene": "res://algorithms/physicssimulation/softbodies/softbodies.tscn",
+			"sequence": "physicssimulation",
+			"tags": [
+				"soft_body",
+				"deformable",
+				"jelly",
+				"pressure",
+				"volume",
+				"shape_matching",
+				"squish",
+				"jiggle",
+				"position_based"
+			]
+		},
+		"softmill": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Deformable soft body physics simulation",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				5.0,
+				1.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "softmill",
+			"map_ready": true,
+			"map_sequences": [
+				"softbodies"
+			],
+			"name": "softmill",
+			"parameters": {
+				"footprint": [
+					5.0,
+					1.0,
+					2.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/physicssimulation/softbodies/softmill/softmill.tscn",
+			"size_group": "environment",
+			"tags": [
+				"physics"
+			]
+		},
+		"softstopscene": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Deformable soft body physics simulation",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "softstopscene",
+			"map_ready": true,
+			"map_sequences": [
+				"softbodies"
+			],
+			"name": "softstopscene",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"spring_mass_system": {
+			"category": "physics",
+			"complexity": "intermediate",
+			"description": "A network of point masses connected by springs, forming a deformable mesh. Energy propagates as waves through the lattice — pluck one node and watch the disturbance ripple outward. The discrete analog of a continuous elastic medium, and the building block for cloth, soft bodies, and lattice dynamics.",
+			"dev_category": "physics_springs",
+			"dev_themes": [
+				"springs",
+				"network",
+				"waves",
+				"lattice"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "spring_mass_system",
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"name": "Spring-Mass Network",
+			"parameters": {
+				"footprint": [
+					3.0,
+					1.0,
+					3.0
+				],
+				"size_group": "room_scale"
+			},
+			"qfep_connection": "Emergence of wave behavior from purely local spring interactions — no node knows about the global pattern, yet coherent waves arise. Individual springs are simple lambdas; their network produces emergent order.",
+			"scene": "res://algorithms/physicssimulation/springmass/springmass.tscn",
+			"sequence": "physicssimulation",
+			"tags": [
+				"spring",
+				"mass",
+				"network",
+				"mesh",
+				"waves",
+				"lattice",
+				"elastic",
+				"deformable",
+				"propagation"
+			]
+		},
+		"spring_system": {
+			"capacity": "SEE that a spring network is a medium — perturbation at one point travels through connections",
+			"category": "physics",
+			"complexity": "intermediate",
+			"description": "System-level spring behavior exploring coupled oscillators, resonance, and energy transfer between connected springs. When natural frequencies align, energy sloshes back and forth between modes in beautiful beat patterns. Demonstrates normal modes and the spectral decomposition of complex vibrations into simple harmonic components.",
+			"dev_category": "physics_springs",
+			"dev_themes": [
+				"springs",
+				"coupled_oscillators",
+				"resonance",
+				"normal_modes"
+			],
+			"footprint": [
+				8,
+				3,
+				9
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, numerical methods",
+			"include_in_map_data": true,
+			"interactions": [
+				"perturb one mass and watch wave propagate",
+				"adjust spring stiffness",
+				"observe coupled oscillation modes"
+			],
+			"lookup_name": "spring_system",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"name": "Spring System",
+			"parameters": {
+				"footprint": [
+					8,
+					3,
+					9
+				],
+				"size_group": "xlarge"
+			},
+			"qfep_connection": "F as network — each spring enforces Hooke's law locally, but the network produces wave propagation globally. Structure creates communication.",
+			"scene": "res://algorithms/physicssimulation/springsystem/spring_system.tscn",
+			"sequence": "forces",
+			"size_group": "xlarge",
+			"tags": [
+				"spring",
+				"system",
+				"coupled",
+				"resonance",
+				"normal_modes",
+				"beats",
+				"energy_transfer",
+				"spectral"
+			]
+		},
+		"sub_emitters": {
+			"description": "Firework mortar launching projectiles that spawn burst particles on death",
+			"scene_path": "res://algorithms/particles/sub_emitters/sub_emitters.tscn",
+			"tags": [
+				"particles",
+				"sub-emitters",
+				"fireworks"
+			]
+		},
+		"surreal_kinetic_sculpture": {
+			"category": "physics",
+			"complexity": "advanced",
+			"description": "An art installation that weaves together multiple physics systems — springs, rigid bodies, constraints, particles, and forces — into a mesmerizing, perpetually-moving kinetic sculpture. Gears drive pendulums that scatter particles through force fields while cloth banners ripple in simulated wind. Not a tutorial but a celebration: physics as aesthetic experience, computation as art.",
+			"dev_category": "physics_special",
 			"dev_themes": [
 				"art",
 				"kinetic",
 				"combined_systems",
 				"aesthetic"
 			],
-			"dev_category": "physics_special",
+			"include_in_map_data": true,
+			"lookup_name": "surreal_kinetic_sculpture",
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"name": "Surreal Kinetic Sculpture",
+			"parameters": {
+				"footprint": [
+					13.0,
+					10.0,
+					18.0
+				],
+				"size_group": "world_scale"
+			},
+			"qfep_connection": "The sculpture as physics made beautiful — all the individual simulation techniques unified into a single emergent artwork. Each subsystem contributes its lambda; the whole is irreducible to its parts. The QFEP synthesis: order (structure), entropy (motion), lambda (physics rules), emergence (art).",
+			"scene": "res://algorithms/physicssimulation/surrealkineticsculpture/SurrealKineticSculpture.tscn",
+			"sequence": "physicssimulation",
 			"tags": [
 				"kinetic_sculpture",
 				"art",
@@ -852,68 +2989,204 @@
 				"aesthetic",
 				"surreal",
 				"perpetual_motion"
+			]
+		},
+		"three_body_problem": {
+			"capacity": "WITNESS that three bodies under gravity have no formula — determinism and predictability are not the same thing",
+			"category": "physics",
+			"complexity": "advanced",
+			"description": "The infamous three-body problem: three gravitationally interacting masses with no closed-form solution. Tiny changes in initial conditions lead to wildly divergent trajectories — the original exemplar of deterministic chaos. Explore stable figure-eight orbits, Lagrange points, and the chaotic regime where prediction becomes impossible.",
+			"dev_category": "physics_fields",
+			"dev_themes": [
+				"chaos",
+				"gravity",
+				"three_body",
+				"sensitivity"
+			],
+			"footprint": [
+				184,
+				182,
+				195
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, numerical methods",
+			"include_in_map_data": true,
+			"interactions": [
+				"set initial positions and velocities",
+				"watch trajectories diverge",
+				"observe chaotic vs periodic orbits"
+			],
+			"lookup_name": "three_body_problem",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"name": "Three-Body Problem",
+			"parameters": {
+				"footprint": [
+					184,
+					182,
+					195
+				],
+				"size_group": "xlarge"
+			},
+			"qfep_connection": "Deterministic chaos — pure F (gravity), no randomness, yet unpredictable. Lambda emerges from sensitivity to initial conditions. Three bodies prove that determinism and predictability are not the same.",
+			"scene": "res://algorithms/physicssimulation/threebodyproblem/threebodyproblem.tscn",
+			"sequence": "forces",
+			"size_group": "xlarge",
+			"tags": [
+				"three_body",
+				"chaos",
+				"gravitational",
+				"sensitivity",
+				"deterministic",
+				"unpredictable",
+				"lagrange_points",
+				"figure_eight",
+				"initial_conditions"
+			]
+		},
+		"tscn_joint": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "tscn_joint",
+			"dev_themes": [
+				"physics",
+				"simulation"
+			],
+			"footprint": [
+				3.0,
+				1.0,
+				3.0
 			],
 			"include_in_map_data": true,
+			"lookup_name": "tscn_joint",
+			"map_ready": true,
+			"map_sequences": [
+				"joints"
+			],
+			"name": "tscn_joint",
+			"parameters": {
+				"footprint": [
+					3.0,
+					1.0,
+					3.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/joint/shared/static_exemple.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"physics"
+			]
+		},
+		"vector_fields": {
+			"capacity": "SEE the force before the object arrives — the field exists everywhere, waiting",
+			"category": "physics",
+			"complexity": "intermediate",
+			"description": "3D vector field visualization with arrow glyphs showing direction and magnitude at grid points. Particles advected through the field trace streamlines, revealing the flow structure — sources, sinks, saddle points, and vortices. Includes curl, divergence, and gradient field types with real-time parameter control.",
+			"dev_category": "physics_fields",
+			"dev_themes": [
+				"fields",
+				"vectors",
+				"flow",
+				"visualization"
+			],
+			"footprint": [
+				4,
+				5,
+				4
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, numerical methods",
+			"include_in_map_data": true,
+			"interactions": [
+				"observe 3D arrow glyphs",
+				"switch between field types",
+				"watch field lines and flow patterns"
+			],
+			"lookup_name": "vector_fields",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"physicssimulation"
+			],
+			"name": "Vector Fields",
+			"qfep_connection": "F made visible — every point in space has an arrow. The field IS the force before any object arrives to feel it. Potential becomes actual only at the point of contact.",
+			"scene": "res://algorithms/physicssimulation/vectorfields/vectorfields.tscn",
+			"sequence": "forces",
+			"size_group": "xlarge",
+			"tags": [
+				"vector_field",
+				"streamlines",
+				"curl",
+				"divergence",
+				"gradient",
+				"flow",
+				"visualization",
+				"3d",
+				"advection",
+				"topology"
+			]
+		},
+		"verlet_integration": {
+			"capacity": "UNDERSTAND that the most stable integration method forgot to track velocity — positions remember",
+			"category": "physics",
+			"complexity": "intermediate",
+			"description": "Position-based Verlet integration — the workhorse of game physics and molecular dynamics. Instead of tracking velocity explicitly, it infers motion from the difference between current and previous positions. This makes it naturally stable, time-reversible, and beautifully simple: x_new = 2x_current - x_old + a·dt².",
+			"dev_category": "physics_foundations",
+			"dev_themes": [
+				"numerical_methods",
+				"verlet",
+				"position_based",
+				"stability"
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, numerical methods",
+			"include_in_map_data": true,
+			"interactions": [
+				"compare Verlet vs Euler stability",
+				"adjust timestep",
+				"observe energy conservation"
+			],
+			"lookup_name": "verlet_integration",
 			"map_ready": true,
 			"map_sequences": [
 				"physicssimulation"
 			],
+			"name": "Verlet Integration",
+			"qfep_connection": "F-computation — the most stable integration method works by forgetting velocity. Position history encodes all the information. Simpler representation, better stability.",
+			"scene": "res://algorithms/physicssimulation/verletintegration/verlet_integration.tscn",
 			"sequence": "physicssimulation",
-			"parameters": {
-				"footprint": [
-					13,
-					10,
-					18
-				],
-				"size_group": "world_scale"
-			}
-		},
-		"newton_cradle": {
-			"lookup_name": "newton_cradle",
-			"scene": "res://algorithms/physicssimulation/newtoncradle/newtoncradle.tscn",
-			"name": "Newton's Cradle",
-			"description": "The iconic desktop physics demo: 5 pendulum balls suspended from a frame. Pull one back and release — momentum transfers through elastic collisions, ball-by-ball. Shows conservation of momentum and energy, elastic collision mechanics, and the satisfying click-clack of F=ma made tangible.",
-			"qfep_connection": "Momentum as conserved quantity — what enters must exit. The cradle is a perfect lambda: input maps to output through invariant rules.",
-			"category": "physics",
-			"complexity": "beginner",
-			"dev_themes": [
-				"classical_mechanics",
-				"momentum",
-				"collisions",
-				"pendulum"
-			],
-			"dev_category": "physics_foundations",
 			"tags": [
-				"newton",
-				"cradle",
-				"pendulum",
-				"momentum",
-				"elastic_collision",
-				"energy_conservation",
-				"F=ma"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
-			],
-			"sequence": "forces"
+				"verlet",
+				"integration",
+				"position_based",
+				"stable",
+				"time_reversible",
+				"molecular_dynamics",
+				"game_physics"
+			]
 		},
 		"viscosity_layers": {
-			"lookup_name": "viscosity_layers",
-			"scene": "res://algorithms/physicssimulation/viscositylayers/viscositylayers.tscn",
-			"name": "Viscosity Layers",
-			"description": "Three transparent columns side by side — air, water, and honey. Drop identical balls into all three simultaneously and watch them descend at wildly different rates. Quadratic drag makes the honey ball crawl while the air ball plummets. Real-time speed readouts let you compare terminal velocities directly.",
-			"qfep_connection": "Resistance as information — the medium tells you what it's made of. Drag is the environment's signature, entropy in the friction between motion and medium.",
 			"category": "physics",
 			"complexity": "beginner",
+			"description": "Three transparent columns side by side — air, water, and honey. Drop identical balls into all three simultaneously and watch them descend at wildly different rates. Quadratic drag makes the honey ball crawl while the air ball plummets. Real-time speed readouts let you compare terminal velocities directly.",
+			"dev_category": "physics_foundations",
 			"dev_themes": [
 				"drag",
 				"viscosity",
 				"fluid_resistance",
 				"terminal_velocity"
 			],
-			"dev_category": "physics_foundations",
+			"include_in_map_data": true,
+			"lookup_name": "viscosity_layers",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Viscosity Layers",
+			"qfep_connection": "Resistance as information — the medium tells you what it's made of. Drag is the environment's signature, entropy in the friction between motion and medium.",
+			"scene": "res://algorithms/physicssimulation/viscositylayers/viscositylayers.tscn",
+			"sequence": "forces",
 			"tags": [
 				"viscosity",
 				"drag",
@@ -924,2203 +3197,83 @@
 				"air",
 				"water",
 				"honey"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
-			],
-			"sequence": "forces"
-		},
-		"gravity_well": {
-			"lookup_name": "gravity_well",
-			"scene": "res://algorithms/physicssimulation/gravitywell/gravitywell.tscn",
-			"name": "Gravity Well",
-			"description": "The rubber-sheet metaphor made real: a deformable grid mesh warps around a movable mass, creating a visible gravitational well. Colored test particles roll along the curved surface, orbiting, spiraling inward, or escaping depending on their velocity. Adjustable mass strength deepens or flattens the well in real time.",
-			"qfep_connection": "Geometry IS gravity — mass tells space how to curve. The well is the invisible made visible, the field rendered as landscape.",
-			"category": "physics",
-			"complexity": "intermediate",
-			"dev_themes": [
-				"gravity",
-				"general_relativity_metaphor",
-				"attraction",
-				"fields"
-			],
-			"dev_category": "physics_fields",
-			"tags": [
-				"gravity",
-				"well",
-				"rubber_sheet",
-				"curvature",
-				"attraction",
-				"orbit",
-				"field",
-				"general_relativity"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
-			],
-			"sequence": "forces"
-		},
-		"slingshot_launcher": {
-			"lookup_name": "slingshot_launcher",
-			"scene": "res://algorithms/physicssimulation/slingshotlauncher/slingshotlauncher.tscn",
-			"name": "Slingshot Launcher",
-			"description": "Step onto the platform and get catapulted! A charging catapult mechanism detects the player, builds power, then fires you (and demo balls) along a parabolic trajectory. Adjustable launch angle and power with a visible trajectory preview. Shows impulse, projectile motion, and the visceral thrill of Newton's third law.",
-			"qfep_connection": "Impulse — a short burst of force that changes everything. The launcher is a delta function: infinite force for zero time, producing finite momentum.",
-			"category": "physics",
-			"complexity": "intermediate",
-			"dev_themes": [
-				"impulse",
-				"projectile_motion",
-				"interaction",
-				"catapult"
-			],
-			"dev_category": "physics_interactive",
-			"tags": [
-				"slingshot",
-				"catapult",
-				"launch",
-				"projectile",
-				"impulse",
-				"trajectory",
-				"parabola",
-				"player_interaction",
-				"VR"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
-			],
-			"sequence": "forces"
-		},
-		"firework_launcher": {
-			"lookup_name": "firework_launcher",
-			"scene": "res://algorithms/physicssimulation/fireworklauncher/fireworklauncher.tscn",
-			"name": "Firework Launcher",
-			"description": "Launch rockets that climb, then explode into showers of glowing particles — each one a tiny body under gravity, drag, and fading lifetime. Four color presets (classic, ocean, garden, ring pattern) create distinct particle distributions. Shows particle emission, statistical spread, force application to many bodies, and emergent visual patterns from simple rules.",
-			"qfep_connection": "Many from one — a single event creates a statistical population. Each particle follows deterministic rules; the beauty is emergent, irreducible to any single trajectory.",
-			"category": "physics",
-			"complexity": "intermediate",
-			"dev_themes": [
-				"particles",
-				"emission",
-				"lifetime",
-				"forces_on_many"
-			],
-			"dev_category": "physics_particles",
-			"tags": [
-				"firework",
-				"particles",
-				"emission",
-				"gravity",
-				"drag",
-				"lifetime",
-				"explosion",
-				"color",
-				"statistical"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
-			],
-			"sequence": "forces"
-		},
-		"friction_ramp": {
-			"lookup_name": "friction_ramp",
-			"scene": "res://commons/artifacts/friction_ramp/friction_ramp.tscn",
-			"name": "Friction Ramp",
-			"description": "Inclined plane with adjustable friction coefficient and slope angle. A block slides or sticks based on whether mg·sin(θ) exceeds μ·mg·cos(θ). Force arrows show gravity, normal force, and friction in real time. VR sliders control μ (0–1.5) and angle (5°–60°).",
-			"qfep_connection": "Friction as the threshold between stasis and motion — a phase transition governed by a single inequality. The coefficient μ is the lambda that partitions all possible angles into two regimes: order (static) and entropy (sliding).",
-			"category": "physics",
-			"complexity": "beginner",
-			"dev_themes": [
-				"friction",
-				"inclined_plane",
-				"static_vs_kinetic",
-				"force_balance"
-			],
-			"dev_category": "physics_foundations",
-			"tags": [
-				"friction",
-				"ramp",
-				"inclined_plane",
-				"normal_force",
-				"gravity",
-				"mu",
-				"coefficient",
-				"sliding",
-				"static",
-				"force_diagram",
-				"beginner"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
-			],
-			"sequence": "forces"
-		},
-		"softmill": {
-			"lookup_name": "softmill",
-			"name": "softmill",
-			"description": "Deformable soft body physics simulation",
-			"scene": "res://algorithms/physicssimulation/softbodies/softmill/softmill.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			],
-			"footprint": [
-				5,
-				1,
-				2
-			],
-			"size_group": "environment",
-			"parameters": {
-				"footprint": [
-					5,
-					1,
-					2
-				],
-				"size_group": "environment"
-			},
-			"complexity": "advanced",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"softstopscene": {
-			"lookup_name": "softstopscene",
-			"name": "softstopscene",
-			"description": "Deformable soft body physics simulation",
-			"scene": "res://algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"PendulumPin": {
-			"lookup_name": "PendulumPin",
-			"name": "PendulumPin",
-			"description": "PendulumPin",
-			"scene": "res://algorithms/joint/01_pendulum_pin/PendulumPin.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"joints"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"HingeCrank": {
-			"lookup_name": "HingeCrank",
-			"name": "HingeCrank",
-			"description": "HingeCrank",
-			"scene": "res://algorithms/joint/03_hinge_crank/HingeCrank.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"joints"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"CharacterRagdoll": {
-			"lookup_name": "CharacterRagdoll",
-			"name": "CharacterRagdoll",
-			"description": "CharacterRagdoll",
-			"scene": "res://algorithms/joint/08_character_ragdoll/CharacterRagdoll.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"joints"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"SliderPress": {
-			"lookup_name": "SliderPress",
-			"name": "SliderPress",
-			"description": "Linear slider joint — piston/rail motion along one axis",
-			"scene": "res://algorithms/joint/04_slider_press/SliderPress.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"joints"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"physics",
-				"joints"
-			],
-			"tags": [
-				"physics",
-				"joints"
-			]
-		},
-		"SpringSuspension": {
-			"lookup_name": "SpringSuspension",
-			"name": "SpringSuspension",
-			"description": "SpringSuspension",
-			"scene": "res://algorithms/joint/05_spring_suspension/SpringSuspension.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"joints"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"ConeTwistBag": {
-			"lookup_name": "ConeTwistBag",
-			"name": "ConeTwistBag",
-			"description": "ConeTwistBag",
-			"scene": "res://algorithms/joint/06_cone_twist_bag/ConeTwistBag.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"joints"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"ChainSwing": {
-			"lookup_name": "ChainSwing",
-			"name": "ChainSwing",
-			"description": "ChainSwing",
-			"scene": "res://algorithms/joint/07_chain_swing/ChainSwing.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"joints"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"DrawbridgeHinge": {
-			"lookup_name": "DrawbridgeHinge",
-			"name": "DrawbridgeHinge",
-			"description": "DrawbridgeHinge",
-			"scene": "res://algorithms/joint/09_drawbridge_hinge/DrawbridgeHinge.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"joints"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"GimbalStabilizer": {
-			"lookup_name": "GimbalStabilizer",
-			"name": "GimbalStabilizer",
-			"description": "GimbalStabilizer",
-			"scene": "res://algorithms/joint/10_gimbal_stabilizer/GimbalStabilizer.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"joints"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"tscn_joint": {
-			"lookup_name": "tscn_joint",
-			"name": "tscn_joint",
-			"description": "tscn_joint",
-			"scene": "res://algorithms/joint/shared/static_exemple.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"joints"
-			],
-			"footprint": [
-				3,
-				1,
-				3
-			],
-			"size_group": "room_scale",
-			"parameters": {
-				"footprint": [
-					3,
-					1,
-					3
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"raycastingpoints": {
-			"lookup_name": "raycastingpoints",
-			"name": "Raycasting Points",
-			"description": "Interactive raycasting algorithm visualization with point-based collision detection",
-			"scene": "res://algorithms/physicssimulation/raycasting/raycastingpoints.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				16,
-				1,
-				16
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					16,
-					1,
-					16
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"physics"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"waterone": {
-			"lookup_name": "waterone",
-			"name": "Water One",
-			"description": "Advanced water simulation algorithm with realistic fluid dynamics and surface tension",
-			"scene": "res://algorithms/physicssimulation/water_one/waterone.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				3,
-				1,
-				3
-			],
-			"size_group": "room_scale",
-			"parameters": {
-				"footprint": [
-					3,
-					1,
-					3
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"3d"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
 			]
 		},
 		"waterflowers": {
-			"lookup_name": "waterflowers",
-			"name": "Water Flowers",
-			"description": "Artistic water simulation with flower-like patterns and organic fluid behavior",
-			"scene": "res://algorithms/physicssimulation/waterflowers/waterflowers.tscn",
 			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
 			"complexity": "advanced",
+			"description": "Artistic water simulation with flower-like patterns and organic fluid behavior",
 			"dev_themes": [
 				"art",
 				"physics",
 				"simulation"
 			],
-			"tags": [
-				"physics"
-			]
-		},
-		"example_2_2_forces_mass_variation_vr": {
-			"lookup_name": "example_2_2_forces_mass_variation_vr",
-			"name": "example_2_2_forces_mass_variation_vr",
-			"description": "Forces with mass variation demonstration",
-			"scene": "res://algorithms/forces/example_2_2_forces_mass_variation_vr.tscn",
-			"category": "unknown",
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
 			"include_in_map_data": true,
+			"lookup_name": "waterflowers",
 			"map_ready": true,
 			"map_sequences": [
-				"transformation"
+				"unused"
 			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
+			"name": "Water Flowers",
 			"parameters": {
 				"footprint": [
-					1,
-					1,
-					1
+					1.0,
+					1.0,
+					1.0
 				],
 				"size_group": "compact"
 			},
-			"complexity": "beginner",
-			"tags": [
-				"physics"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_2_3_gravity_scaled_by_mass_vr": {
-			"lookup_name": "example_2_3_gravity_scaled_by_mass_vr",
-			"name": "example_2_3_gravity_scaled_by_mass_vr",
-			"description": "Gravity scaled by mass demonstration",
-			"scene": "res://algorithms/forces/example_2_3_gravity_scaled_by_mass_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"transformation"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
+			"scene": "res://algorithms/physicssimulation/waterflowers/waterflowers.tscn",
 			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"physics"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_2_4_friction_vr": {
-			"lookup_name": "example_2_4_friction_vr",
-			"name": "example_2_4_friction_vr",
-			"description": "Friction forces demonstration",
-			"scene": "res://algorithms/forces/example_2_4_friction_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
 			"tags": [
 				"physics"
 			]
 		},
-		"example_2_5_fluid_resistance_vr": {
-			"lookup_name": "example_2_5_fluid_resistance_vr",
-			"name": "example_2_5_fluid_resistance_vr",
-			"description": "Fluid resistance forces demonstration",
-			"scene": "res://algorithms/forces/example_2_5_fluid_resistance_vr.tscn",
+		"waterone": {
 			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"transformation"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"example_2_6_single_attractor_vr": {
-			"lookup_name": "example_2_6_single_attractor_vr",
-			"name": "example_2_6_single_attractor_vr",
-			"description": "Single attractor force demonstration",
-			"scene": "res://algorithms/forces/example_2_6_single_attractor_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"transformation"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
 			"complexity": "advanced",
-			"tags": [
-				"chaos",
-				"physics"
-			],
+			"description": "Advanced water simulation algorithm with realistic fluid dynamics and surface tension",
 			"dev_themes": [
 				"physics",
 				"simulation"
-			]
-		},
-		"example_2_7_multiple_attractors_vr": {
-			"lookup_name": "example_2_7_multiple_attractors_vr",
-			"name": "example_2_7_multiple_attractors_vr",
-			"description": "Multiple attractors force demonstration",
-			"scene": "res://algorithms/forces/example_2_7_multiple_attractors_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"transformation"
 			],
 			"footprint": [
-				1,
-				1,
-				1
+				3.0,
+				1.0,
+				3.0
 			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"physics"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_2_8_two_body_attraction_vr": {
-			"lookup_name": "example_2_8_two_body_attraction_vr",
-			"name": "example_2_8_two_body_attraction_vr",
-			"description": "Two body attraction demonstration",
-			"scene": "res://algorithms/forces/example_2_8_two_body_attraction_vr.tscn",
-			"category": "unknown",
 			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces",
-				"transformation"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"example_2_9_n_body_attraction_vr": {
-			"lookup_name": "example_2_9_n_body_attraction_vr",
-			"name": "example_2_9_n_body_attraction_vr",
-			"description": "N-body attraction demonstration",
-			"scene": "res://algorithms/forces/example_2_9_n_body_attraction_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces",
-				"transformation"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"example_1_10_accelerating_towards_the_mouse_vr": {
-			"lookup_name": "example_1_10_accelerating_towards_the_mouse_vr",
-			"name": "example_1_10_accelerating_towards_the_mouse_vr",
-			"description": "Accelerating towards the mouse demonstration",
-			"scene": "res://algorithms/oscillation/noc_ch03/example_1_10_accelerating_towards_the_mouse_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
+			"lookup_name": "waterone",
 			"map_ready": true,
 			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
+			"name": "Water One",
 			"parameters": {
 				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"example_3_1_angular_motion_using_rotate_vr": {
-			"lookup_name": "example_3_1_angular_motion_using_rotate_vr",
-			"name": "example_3_1_angular_motion_using_rotate_vr",
-			"description": "Angular motion using rotate demonstration",
-			"scene": "res://algorithms/oscillation/noc_ch03/example_3_1_angular_motion_using_rotate_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"animation"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_3_10_swinging_pendulum_vr": {
-			"lookup_name": "example_3_10_swinging_pendulum_vr",
-			"name": "example_3_10_swinging_pendulum_vr",
-			"description": "Swinging pendulum demonstration",
-			"scene": "res://algorithms/oscillation/noc_ch03/example_3_10_swinging_pendulum_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"pendulum",
-				"wave"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_3_11_a_spring_connection_vr": {
-			"lookup_name": "example_3_11_a_spring_connection_vr",
-			"name": "example_3_11_a_spring_connection_vr",
-			"description": "Spring connection demonstration",
-			"scene": "res://algorithms/oscillation/noc_ch03/example_3_11_a_spring_connection_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"physics",
-				"spring"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_3_2_forces_with_arbitrary_angular_motion_vr": {
-			"lookup_name": "example_3_2_forces_with_arbitrary_angular_motion_vr",
-			"name": "example_3_2_forces_with_arbitrary_angular_motion_vr",
-			"description": "Forces with arbitrary angular motion demonstration",
-			"scene": "res://algorithms/oscillation/noc_ch03/example_3_2_forces_with_arbitrary_angular_motion_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"animation"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_3_3_pointing_in_the_direction_of_motion_vr": {
-			"lookup_name": "example_3_3_pointing_in_the_direction_of_motion_vr",
-			"name": "example_3_3_pointing_in_the_direction_of_motion_vr",
-			"description": "Pointing in the direction of motion demonstration",
-			"scene": "res://algorithms/oscillation/noc_ch03/example_3_3_pointing_in_the_direction_of_motion_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"animation"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_3_4_polar_to_cartesian_vr": {
-			"lookup_name": "example_3_4_polar_to_cartesian_vr",
-			"name": "example_3_4_polar_to_cartesian_vr",
-			"description": "Polar to cartesian coordinate conversion demonstration",
-			"scene": "res://algorithms/oscillation/noc_ch03/example_3_4_polar_to_cartesian_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"example_3_5_simple_harmonic_motion_vr": {
-			"lookup_name": "example_3_5_simple_harmonic_motion_vr",
-			"name": "example_3_5_simple_harmonic_motion_vr",
-			"description": "Damped harmonic motion with coupled oscillators, beats/resonance detection, energy bars (KE/PE/total), decay envelope, and VR slider controls",
-			"scene": "res://algorithms/oscillation/noc_ch03/example_3_5_simple_harmonic_motion_vr.tscn",
-			"category": "oscillation",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact",
-				"amplitude": 0.2,
-				"frequency_a": 1.5,
-				"frequency_b": 1.8,
-				"damping": 0.15,
-				"coupling": 0.3,
-				"show_coupled": true
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"animation",
-				"wave",
-				"damping",
-				"coupled-oscillators",
-				"energy",
-				"resonance"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation",
-				"oscillation"
-			]
-		},
-		"example_3_6_simple_harmonic_motion_ii_vr": {
-			"lookup_name": "example_3_6_simple_harmonic_motion_ii_vr",
-			"name": "example_3_6_simple_harmonic_motion_ii_vr",
-			"description": "Simple harmonic motion part II demonstration",
-			"scene": "res://algorithms/oscillation/noc_ch03/example_3_6_simple_harmonic_motion_ii_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"animation",
-				"wave"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_3_7_oscillator_objects_vr": {
-			"lookup_name": "example_3_7_oscillator_objects_vr",
-			"name": "example_3_7_oscillator_objects_vr",
-			"description": "Oscillator objects demonstration",
-			"scene": "res://algorithms/oscillation/noc_ch03/example_3_7_oscillator_objects_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"example_3_8_static_wave_vr": {
-			"lookup_name": "example_3_8_static_wave_vr",
-			"name": "example_3_8_static_wave_vr",
-			"description": "Wave superposition with two traveling waves, constructive/destructive interference coloring, and 2D wave equation membrane (finite difference PDE with boundary reflection)",
-			"scene": "res://algorithms/oscillation/noc_ch03/example_3_8_static_wave_vr.tscn",
-			"category": "oscillation",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact",
-				"wavelength_a": 0.12,
-				"wavelength_b": 0.18,
-				"amplitude_a": 0.08,
-				"amplitude_b": 0.06,
-				"wave_speed": 0.3,
-				"damping": 0.003,
-				"grid_res": 40,
-				"membrane_size": 0.55
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"wave",
-				"superposition",
-				"interference",
-				"pde",
-				"membrane"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation",
-				"wave-equation"
-			]
-		},
-		"example_3_9_the_wave_vr": {
-			"lookup_name": "example_3_9_the_wave_vr",
-			"name": "example_3_9_the_wave_vr",
-			"description": "The wave demonstration",
-			"scene": "res://algorithms/oscillation/noc_ch03/example_3_9_the_wave_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				22,
-				22,
-				22
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					22,
-					22,
-					22
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"wave"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"exercise_3_1_baton_vr": {
-			"lookup_name": "exercise_3_1_baton_vr",
-			"name": "exercise_3_1_baton_vr",
-			"description": "Baton exercise demonstration",
-			"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_1_baton_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"exercise_3_11_oop_wave_vr": {
-			"lookup_name": "exercise_3_11_oop_wave_vr",
-			"name": "exercise_3_11_oop_wave_vr",
-			"description": "Object-oriented programming wave exercise",
-			"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_11_oop_wave_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				22,
-				22,
-				22
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					22,
-					22,
-					22
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"wave"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"exercise_3_12_additive_wave_vr": {
-			"lookup_name": "exercise_3_12_additive_wave_vr",
-			"name": "exercise_3_12_additive_wave_vr",
-			"description": "Additive wave exercise demonstration",
-			"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_12_additive_wave_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				22,
-				22,
-				22
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					22,
-					22,
-					22
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"wave"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"exercise_3_15_double_pendulum_vr": {
-			"lookup_name": "exercise_3_15_double_pendulum_vr",
-			"name": "exercise_3_15_double_pendulum_vr",
-			"description": "Double pendulum exercise demonstration",
-			"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_15_double_pendulum_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"pendulum",
-				"wave"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"exercise_3_5_spiral_vr": {
-			"lookup_name": "exercise_3_5_spiral_vr",
-			"name": "exercise_3_5_spiral_vr",
-			"description": "Spiral exercise demonstration",
-			"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_5_spiral_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"spiral"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"exercise_3_6_asteroids_vr": {
-			"lookup_name": "exercise_3_6_asteroids_vr",
-			"name": "exercise_3_6_asteroids_vr",
-			"description": "Asteroids exercise demonstration",
-			"scene": "res://algorithms/oscillation/noc_ch03/exercise_3_6_asteroids_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"physics",
-				"simulation"
-			],
-			"tags": [
-				"physics"
-			]
-		},
-		"example_4_1_single_particle_vr": {
-			"lookup_name": "example_4_1_single_particle_vr",
-			"name": "Single Particle VR",
-			"description": "Single particle system demonstration",
-			"scene": "res://algorithms/particles/example_4_1_single_particle_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"particles"
-			],
-			"footprint": [
-				2,
-				2,
-				2
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"particle",
-				"simulation",
-				"vr"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_4_2_array_particles_vr": {
-			"lookup_name": "example_4_2_array_particles_vr",
-			"name": "Array Particles VR",
-			"description": "Particle array system demonstration",
-			"scene": "res://algorithms/particles/example_4_2_array_particles_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"particles"
-			],
-			"footprint": [
-				5,
-				5,
-				5
-			],
-			"size_group": "environment",
-			"parameters": {
-				"footprint": [
-					5,
-					5,
-					5
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"array",
-				"simulation",
-				"vr"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_4_3_particle_emitter_vr": {
-			"lookup_name": "example_4_3_particle_emitter_vr",
-			"name": "Particle Emitter VR",
-			"description": "Particle emitter system demonstration",
-			"scene": "res://algorithms/particles/example_4_3_particle_emitter_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"particles"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"particle",
-				"simulation",
-				"vr"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_4_4_multiple_emitters_vr": {
-			"lookup_name": "example_4_4_multiple_emitters_vr",
-			"name": "Multiple Emitters VR",
-			"description": "Multiple particle emitters demonstration",
-			"scene": "res://algorithms/particles/example_4_4_multiple_emitters_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"particles"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"vr"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_4_5_inheritance_polymorphism_vr": {
-			"lookup_name": "example_4_5_inheritance_polymorphism_vr",
-			"name": "Inheritance Polymorphism VR",
-			"description": "Particle inheritance and polymorphism demonstration",
-			"scene": "res://algorithms/particles/example_4_5_inheritance_polymorphism_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"particles"
-			],
-			"footprint": [
-				5,
-				5,
-				5
-			],
-			"size_group": "environment",
-			"parameters": {
-				"footprint": [
-					5,
-					5,
-					5
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"vr"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_4_6_particle_repeller_vr": {
-			"lookup_name": "example_4_6_particle_repeller_vr",
-			"name": "Particle Repeller VR",
-			"description": "Particle repeller system demonstration",
-			"scene": "res://algorithms/particles/example_4_6_particle_repeller_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"particles"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"particle",
-				"simulation",
-				"vr"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_particle_body": {
-			"lookup_name": "example_particle_body",
-			"name": "example_particle_body",
-			"description": "example_particle_body",
-			"scene": "res://algorithms/particles/example_particle_body.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"particles"
-			],
-			"footprint": [
-				1,
-				4,
-				3
-			],
-			"size_group": "room_scale",
-			"parameters": {
-				"footprint": [
-					1,
-					4,
-					3
+					3.0,
+					1.0,
+					3.0
 				],
 				"size_group": "room_scale"
 			},
-			"complexity": "intermediate",
+			"scene": "res://algorithms/physicssimulation/water_one/waterone.tscn",
+			"size_group": "room_scale",
 			"tags": [
-				"particle"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_6_1_basic_rigidbody_vr": {
-			"lookup_name": "example_6_1_basic_rigidbody_vr",
-			"name": "Basic Rigidbody VR",
-			"description": "Basic rigidbody physics demonstration",
-			"scene": "res://algorithms/physics/example_6_1_basic_rigidbody_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"vr"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_6_2_falling_boxes_vr": {
-			"lookup_name": "example_6_2_falling_boxes_vr",
-			"name": "Falling Boxes VR",
-			"description": "Falling boxes physics demonstration",
-			"scene": "res://algorithms/physics/example_6_2_falling_boxes_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"vr"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_6_3_compound_bodies_vr": {
-			"lookup_name": "example_6_3_compound_bodies_vr",
-			"name": "Compound Bodies VR",
-			"description": "Compound rigidbody physics demonstration",
-			"scene": "res://algorithms/physics/example_6_3_compound_bodies_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"vr"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_6_4_windmill_vr": {
-			"lookup_name": "example_6_4_windmill_vr",
-			"name": "Windmill VR",
-			"description": "Windmill physics demonstration",
-			"scene": "res://algorithms/physics/example_6_4_windmill_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"vr"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_6_5_chain_vr": {
-			"lookup_name": "example_6_5_chain_vr",
-			"name": "Chain VR",
-			"description": "Chain physics demonstration",
-			"scene": "res://algorithms/physics/example_6_5_chain_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"vr"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_6_6_grab_vr": {
-			"lookup_name": "example_6_6_grab_vr",
-			"name": "Grab VR",
-			"description": "Grab physics demonstration",
-			"scene": "res://algorithms/physics/example_6_6_grab_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"interactive",
-				"vr"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_6_7_bridge_vr": {
-			"lookup_name": "example_6_7_bridge_vr",
-			"name": "Bridge VR",
-			"description": "Bridge physics demonstration",
-			"scene": "res://algorithms/physics/example_6_7_bridge_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"vr"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"example_6_8_collision_layers_vr": {
-			"lookup_name": "example_6_8_collision_layers_vr",
-			"name": "Collision Layers VR",
-			"description": "Collision layers physics demonstration",
-			"scene": "res://algorithms/physics/example_6_8_collision_layers_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"physics",
-				"vr"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"algo_gun": {
-			"lookup_name": "algo_gun",
-			"name": "Algo-Gun",
-			"description": "Evolved gravity gun that captures and directs Grid Agents. Use GRIP button to capture agents, then aim and GRIP again to direct them to modify grid structures.",
-			"scene": "res://algorithms/forces/algo_gun.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"devexamples",
-				"testmaps"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"2d",
-				"interactive",
-				"physics"
-			],
-			"dev_themes": [
-				"physics",
-				"simulation"
-			]
-		},
-		"IKArm": {
-			"scene_path": "res://algorithms/joint/11_ik_arm/IKArm.tscn",
-			"description": "FABRIK inverse kinematics on a 4-segment arm — target orbits, arm solves backward and forward",
-			"tags": [
-				"physics",
-				"joints",
-				"inverse-kinematics"
-			]
-		},
-		"lifetime_curves": {
-			"scene_path": "res://algorithms/particles/lifetime_curves/lifetime_curves.tscn",
-			"description": "Three emitters demonstrating color, size, and opacity curves over particle lifetime",
-			"tags": [
-				"particles",
-				"lifetime",
-				"curves"
-			]
-		},
-		"sub_emitters": {
-			"scene_path": "res://algorithms/particles/sub_emitters/sub_emitters.tscn",
-			"description": "Firework mortar launching projectiles that spawn burst particles on death",
-			"tags": [
-				"particles",
-				"sub-emitters",
-				"fireworks"
-			]
-		},
-		"particle_campfire": {
-			"scene_path": "res://algorithms/particles/particle_campfire/particle_campfire.tscn",
-			"description": "Synthesis campfire combining fire, embers, and smoke particle systems",
-			"tags": [
-				"particles",
-				"synthesis",
-				"campfire",
-				"fire"
-			]
-		},
-		"momentum_collision": {
-			"scene_path": "res://algorithms/physicssimulation/momentum_collision/momentum_collision.tscn",
-			"description": "Elastic and inelastic collisions on a rail — conservation of momentum and kinetic energy",
-			"tags": [
-				"physics",
-				"momentum",
-				"collision",
-				"conservation"
-			]
-		},
-		"simulation_instability": {
-			"scene_path": "res://algorithms/physicssimulation/simulation_instability/simulation_instability.tscn",
-			"description": "Spring system with ramping timestep — watch stable oscillation drift, then explode as dt grows too large",
-			"tags": [
-				"physics",
-				"instability",
-				"timestep",
-				"numerical"
+				"3d"
 			]
 		}
 	},
+	"registry_info": {
+		"category": "physics",
+		"description": "Physics simulation artifacts — from Newton's laws and numerical integration through rigid bodies, spring systems, fluid dynamics, and beyond. A comprehensive tour of classical mechanics rendered interactive.",
+		"name": "physics_simulation",
+		"theoretical_grounding": "Classical mechanics, Newtonian dynamics, numerical methods (Euler/Verlet/RK4), continuum mechanics, Lagrangian and Hamiltonian frameworks, computational physics"
+	},
 	"sequence_mapping": {
-		"foundations": [
-			"newtons_laws",
-			"numerical_integration",
-			"verlet_integration",
-			"newton_cradle",
-			"viscosity_layers"
-		],
-		"bodies": [
-			"rigid_body",
-			"collision_detection",
-			"constraints",
-			"bouncing_ball",
-			"slingshot_launcher"
-		],
-		"springs": [
-			"mass_spring_damper",
-			"spring_mass_system",
-			"spring_system",
-			"cloth_simulation"
-		],
-		"fields": [
-			"force_fields",
-			"vector_fields",
-			"particle_systems",
-			"nbody_simulation",
-			"three_body_problem",
-			"gravity_well",
-			"firework_launcher"
-		],
-		"continuum": [
-			"fluid_simulation",
-			"fem_simulation",
-			"soft_bodies"
-		],
-		"special": [
-			"magnetic_simulation",
-			"surreal_kinetic_sculpture"
-		],
 		"all_physics": [
 			"newtons_laws",
 			"numerical_integration",
@@ -3148,25 +3301,54 @@
 			"gravity_well",
 			"slingshot_launcher",
 			"firework_launcher"
+		],
+		"bodies": [
+			"rigid_body",
+			"collision_detection",
+			"constraints",
+			"bouncing_ball",
+			"slingshot_launcher"
+		],
+		"continuum": [
+			"fluid_simulation",
+			"fem_simulation",
+			"soft_bodies"
+		],
+		"fields": [
+			"force_fields",
+			"vector_fields",
+			"particle_systems",
+			"nbody_simulation",
+			"three_body_problem",
+			"gravity_well",
+			"firework_launcher"
+		],
+		"foundations": [
+			"newtons_laws",
+			"numerical_integration",
+			"verlet_integration",
+			"newton_cradle",
+			"viscosity_layers"
+		],
+		"special": [
+			"magnetic_simulation",
+			"surreal_kinetic_sculpture"
+		],
+		"springs": [
+			"mass_spring_damper",
+			"spring_mass_system",
+			"spring_system",
+			"cloth_simulation"
 		]
 	},
 	"theoretical_connections": {
-		"newtonian_mechanics": [
-			"newtons_laws",
+		"chaos_theory": [
+			"three_body_problem"
+		],
+		"constraint_based": [
+			"constraints",
 			"rigid_body",
-			"bouncing_ball",
-			"collision_detection",
-			"newton_cradle",
-			"slingshot_launcher"
-		],
-		"numerical_methods": [
-			"numerical_integration",
-			"verlet_integration"
-		],
-		"harmonic_motion": [
-			"mass_spring_damper",
-			"spring_mass_system",
-			"spring_system"
+			"cloth_simulation"
 		],
 		"deformable_bodies": [
 			"cloth_simulation",
@@ -3179,26 +3361,35 @@
 			"vector_fields",
 			"magnetic_simulation"
 		],
+		"fluid_mechanics": [
+			"fluid_simulation",
+			"viscosity_layers"
+		],
 		"gravitational_dynamics": [
 			"nbody_simulation",
 			"three_body_problem",
 			"gravity_well"
 		],
-		"chaos_theory": [
-			"three_body_problem"
+		"harmonic_motion": [
+			"mass_spring_damper",
+			"spring_mass_system",
+			"spring_system"
 		],
-		"fluid_mechanics": [
-			"fluid_simulation",
-			"viscosity_layers"
+		"newtonian_mechanics": [
+			"newtons_laws",
+			"rigid_body",
+			"bouncing_ball",
+			"collision_detection",
+			"newton_cradle",
+			"slingshot_launcher"
+		],
+		"numerical_methods": [
+			"numerical_integration",
+			"verlet_integration"
 		],
 		"particle_dynamics": [
 			"particle_systems",
 			"firework_launcher"
-		],
-		"constraint_based": [
-			"constraints",
-			"rigid_body",
-			"cloth_simulation"
 		]
 	}
 }

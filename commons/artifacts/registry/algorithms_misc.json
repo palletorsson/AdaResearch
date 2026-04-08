@@ -1,18 +1,326 @@
 {
-	"registry_info": {
-		"name": "algorithms_misc",
-		"description": "Standalone algorithm artifacts spanning graph theory, search/pathfinding, string algorithms, numerical methods, optimization, cryptography, and critical theory. Algorithms that don't yet have their own registry family.",
-		"category": "algorithms",
-		"theoretical_grounding": "Graph theory, search algorithms, string processing, numerical analysis, optimization theory, critical algorithm studies"
-	},
 	"artifacts": {
+		"ChengSimulationScaled": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "ChengSimulationScaled",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				3.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ChengSimulationScaled",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"name": "ChengSimulationScaled",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					3.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/computationalgeometry/chengsimulation/ChengSimulationScaled.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"FlowFieldMain": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "FlowFieldMain",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				11.0,
+				36.0,
+				16.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "FlowFieldMain",
+			"map_ready": true,
+			"map_sequences": [
+				"swarmintelligence"
+			],
+			"name": "FlowFieldMain",
+			"parameters": {
+				"footprint": [
+					11.0,
+					36.0,
+					16.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/pathfinding/flow_field/FlowFieldMain.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"KonigsbergBridge": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "KonigsbergBridge",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				26.0,
+				1.0,
+				31.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "KonigsbergBridge",
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory",
+				"testmaps"
+			],
+			"name": "KonigsbergBridge",
+			"parameters": {
+				"footprint": [
+					26.0,
+					1.0,
+					31.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/graphtheory/graphspace3d/konigsberg3d.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"additive_synthesis": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "additive_synthesis",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				17.0,
+				19.0,
+				9.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "additive_synthesis",
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralaudio"
+			],
+			"name": "additive_synthesis",
+			"parameters": {
+				"footprint": [
+					17.0,
+					19.0,
+					9.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/proceduralaudio/additive_synthesis/additive_synthesis.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"affect_theory_visualization": {
+			"category": "critical",
+			"complexity": "intermediate",
+			"description": "Physics simulation meets affect theory — forces as emotional intensities, bodies as sites of felt experience. Where Deleuze meets Newton.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "affect_theory_visualization",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Affect Theory Visualization",
+			"parameters": {
+				"footprint": [
+					17.0,
+					24.0,
+					21.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/physicssimulation/affect_theory_visualization/affect_theory_visualization.tscn",
+			"tags": [
+				"affect_theory",
+				"deleuze",
+				"physics",
+				"emotion",
+				"intensity",
+				"critical_theory"
+			]
+		},
+		"albers_wall_gallery": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "White gallery wall with 98 Josef Albers-inspired canvases and spotlights.",
+			"dev_themes": [
+				"algorithms",
+				"art",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "albers_wall_gallery",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "albers_wall_gallery",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/primitives/homagetothesquare/albers_wall_gallery.tscn",
+			"size_group": "compact",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"algorithm_overview": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Interactive 2D flowchart visualization showing the complete learning progression through various algorithm categories and their relationships",
+			"dev_themes": [
+				"algorithms",
+				"education",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "algorithm_overview",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "Algorithm Learning Overview",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/misc/maps_overview_in_3d.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d"
+			]
+		},
+		"algorithmic_bias": {
+			"category": "critical",
+			"complexity": "intermediate",
+			"description": "Visualization of how algorithms encode and amplify social biases. Training data reflects existing inequalities, models learn to reproduce them — making structural discrimination computational.",
+			"dev_themes": [
+				"algorithms",
+				"education",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "algorithmic_bias",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Algorithmic Bias",
+			"parameters": {
+				"footprint": [
+					17.0,
+					19.0,
+					9.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/criticalalgorithms/algorithmic_bias/algorithmic_bias.tscn",
+			"tags": [
+				"algorithmic_bias",
+				"fairness",
+				"ethics",
+				"critical_algorithms",
+				"discrimination"
+			]
+		},
+		"algorithmic_bias_visualization": {
+			"category": "critical",
+			"complexity": "intermediate",
+			"description": "Extended algorithmic bias exploration with interactive parameters. Adjust training data distributions, observe how bias propagates through model predictions, and see debiasing strategies in action.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "algorithmic_bias_visualization",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Algorithmic Bias Visualization",
+			"parameters": {
+				"footprint": [
+					17.0,
+					21.0,
+					16.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/criticalalgorithms/algorithmic_bias_visualization/algorithmic_bias_visualization.tscn",
+			"tags": [
+				"algorithmic_bias",
+				"visualization",
+				"debiasing",
+				"fairness",
+				"critical_algorithms"
+			]
+		},
 		"astar": {
-			"lookup_name": "astar",
-			"scene": "res://algorithms/searchpathfinding/astar/astar.tscn",
-			"name": "A* Pathfinding",
-			"description": "Advanced pathfinding comparison — Jump Point Search (pruned A* with symmetry breaking), Theta* (any-angle line-of-sight paths), and side-by-side algorithm comparison on the same randomized grid. ImmediateMesh visualization of open/closed sets, jump points, line-of-sight checks, and final paths with per-algorithm statistics.",
 			"category": "algorithms",
 			"complexity": "intermediate",
+			"description": "Advanced pathfinding comparison — Jump Point Search (pruned A* with symmetry breaking), Theta* (any-angle line-of-sight paths), and side-by-side algorithm comparison on the same randomized grid. ImmediateMesh visualization of open/closed sets, jump points, line-of-sight checks, and final paths with per-algorithm statistics.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "astar",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "A* Pathfinding",
+			"parameters": {
+				"footprint": [
+					1.0,
+					6.0,
+					21.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/searchpathfinding/astar/astar.tscn",
 			"tags": [
 				"astar",
 				"pathfinding",
@@ -24,30 +332,437 @@
 				"theta_star",
 				"jump_point_search",
 				"any_angle"
+			]
+		},
+		"audio_effects": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "audio_effects",
+			"dev_themes": [
+				"algorithms",
+				"misc",
+				"music"
+			],
+			"footprint": [
+				22.0,
+				24.0,
+				21.0
 			],
 			"include_in_map_data": true,
+			"lookup_name": "audio_effects",
 			"map_ready": true,
 			"map_sequences": [],
+			"name": "audio_effects",
 			"parameters": {
 				"footprint": [
-					1,
-					6,
-					21
+					22.0,
+					24.0,
+					21.0
 				],
 				"size_group": "world_scale"
 			},
+			"scene": "res://algorithms/proceduralaudio/audio_effects/audio_effects.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"bias_from_inside": {
+			"category": "critical",
+			"complexity": "intermediate",
+			"description": "Visualizes a word embedding space from the perspective of a marginalized term. Instead of the usual god's-eye view, this artifact places you INSIDE the compressed region. A slider shifts between default perspective (everything looks evenly distributed) and compressed perspective (reveals how uneven the space really is).",
+			"dev_themes": [
+				"algorithms",
+				"education",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"interaction": "interact",
+			"lookup_name": "bias_from_inside",
+			"map_ready": true,
+			"map_sequences": [
+				"criticalalgorithms"
+			],
+			"name": "Bias From Inside",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/artifacts/bias_from_inside/bias_from_inside.tscn",
+			"sequence": "criticalalgorithms",
+			"tags": [
+				"algorithmic_bias",
+				"embedding",
+				"perspective",
+				"critical_algorithms",
+				"compression",
+				"word_vectors"
+			]
+		},
+		"boid_flocking": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Emergent flocking behavior simulation using Craig Reynolds' boids algorithm",
 			"dev_themes": [
 				"algorithms",
 				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "boid_flocking",
+			"map_ready": true,
+			"map_sequences": [
+				"swarmintelligence"
+			],
+			"name": "Boid Flocking",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/emergentsystems/boidflocking/boids_explained.tscn",
+			"size_group": "compact",
+			"tags": [
+				"boid",
+				"swarm"
+			]
+		},
+		"boid_manager": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "boid_manager",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				20.0,
+				10.0,
+				20.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "boid_manager",
+			"map_ready": true,
+			"map_sequences": [
+				"swarmintelligence"
+			],
+			"name": "boid_manager",
+			"parameters": {
+				"footprint": [
+					20.0,
+					10.0,
+					20.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/emergentsystems/boidflocking/boid_manager.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"boid"
+			]
+		},
+		"boids_2d_in_3d": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "boids_2d_in_3d",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				3.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "boids_2d_in_3d",
+			"map_ready": true,
+			"map_sequences": [
+				"swarmintelligence"
+			],
+			"name": "boids_2d_in_3d",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					3.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/emergentsystems/boidflocking/boids_2d_in_3d.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"booleans": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "booleans",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				11.0,
+				10.0,
+				13.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "booleans",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "booleans",
+			"parameters": {
+				"footprint": [
+					11.0,
+					10.0,
+					13.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/primitives/booleans/booleans.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"booleanvariations": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "booleanvariations",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				11.0,
+				19.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "booleanvariations",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "booleanvariations",
+			"parameters": {
+				"footprint": [
+					1.0,
+					11.0,
+					19.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/primitives/booleans/booleanvariations.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"boyer_moore": {
+			"category": "algorithms",
+			"complexity": "intermediate",
+			"description": "Boyer-Moore string search — the algorithm that searches backwards, skipping ahead when mismatches reveal the pattern can't possibly match. Sublinear average time for text search.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "boyer_moore",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Boyer-Moore Pattern Matching",
+			"scene": "res://algorithms/stringalgorithms/patternmatching/boyer_moore_visualization.tscn",
+			"tags": [
+				"boyer_moore",
+				"pattern_matching",
+				"string_search",
+				"skip",
+				"text"
+			]
+		},
+		"cave_system": {
+			"category": "randomness",
+			"complexity": "intermediate",
+			"description": "Procedural cave generation using noise-based geometry. Random seeds produce unique underground networks — exploration of how controlled randomness creates believable natural spaces.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cave_system",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Cave System Generator",
+			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/cavesystem/caveSystem.tscn",
+			"tags": [
+				"cave",
+				"procedural",
+				"noise",
+				"geometry",
+				"generation",
+				"randomness"
+			]
+		},
+		"closest_pair": {
+			"category": "algorithms",
+			"complexity": "intermediate",
+			"description": "Closest pair algorithms with divide-and-conquer vs sweep line comparison, dynamic point maintenance, and empirical performance graph",
+			"dev_themes": [
+				"algorithms",
+				"computational_geometry"
+			],
+			"footprint": [
+				17.0,
+				20.0,
+				13.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "closest_pair",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"name": "Closest Pair of Points",
+			"parameters": {
+				"configurable": [
+					"point_count",
+					"field_width",
+					"field_height",
+					"step_speed",
+					"show_grid",
+					"show_performance",
+					"mode"
+				],
+				"footprint": [
+					17.0,
+					20.0,
+					13.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/computationalgeometry/closest_pair/closest_pair.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm",
+				"computational_geometry",
+				"divide_and_conquer",
+				"sweep_line",
+				"closest_pair"
+			]
+		},
+		"context_free_grammars": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "L-system context-free grammar generation and visualization",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "context_free_grammars",
+			"map_ready": true,
+			"map_sequences": [
+				"lsystems",
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"name": "Context-Free Grammars",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/recursiveemergence/lsystems/context_free_grammars/context_free_grammars.tscn",
+			"size_group": "compact",
+			"tags": [
+				"l_system",
+				"simulation"
+			]
+		},
+		"diamondtoruscollection": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Torus reference ring with hanging cylinders and colored diamonds.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "diamondtoruscollection",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "diamondtoruscollection",
+			"parameters": {
+				"footprint": [
+					5.0,
+					1.0,
+					5.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 5.0,
+					"type": "omni"
+				},
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/primitives/diamondtoruscollection/diamondtoruscollection.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry"
 			]
 		},
 		"dijkstra_algorithm": {
-			"lookup_name": "dijkstra_algorithm",
-			"scene": "res://algorithms/searchpathfinding/dijkstra_algorithm/dijkstra_algorithm.tscn",
-			"name": "Dijkstra's Algorithm",
-			"description": "Dijkstra's shortest path algorithm — greedy exploration from source, relaxing edges, building the shortest path tree. The foundation of GPS routing and network packet delivery.",
 			"category": "algorithms",
 			"complexity": "intermediate",
+			"description": "Dijkstra's shortest path algorithm — greedy exploration from source, relaxing edges, building the shortest path tree. The foundation of GPS routing and network packet delivery.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "dijkstra_algorithm",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"name": "Dijkstra's Algorithm",
+			"parameters": {
+				"footprint": [
+					17.0,
+					19.0,
+					9.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/searchpathfinding/dijkstra_algorithm/dijkstra_algorithm.tscn",
 			"tags": [
 				"dijkstra",
 				"shortest_path",
@@ -55,32 +770,756 @@
 				"greedy",
 				"routing",
 				"search"
+			]
+		},
+		"distance_fields_sdf": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "distance_fields_sdf",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				17.0,
+				19.0,
+				9.0
 			],
 			"include_in_map_data": true,
+			"lookup_name": "distance_fields_sdf",
 			"map_ready": true,
 			"map_sequences": [
 				"testmaps"
 			],
+			"name": "distance_fields_sdf",
 			"parameters": {
 				"footprint": [
-					17,
-					19,
-					9
+					17.0,
+					19.0,
+					9.0
 				],
 				"size_group": "world_scale"
 			},
+			"scene": "res://algorithms/computationalgeometry/distance_fields_sdf/distance_fields_sdf.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"ecosystem_simulation": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Predator-prey ecosystem dynamics with emergent population behaviors",
 			"dev_themes": [
 				"algorithms",
 				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ecosystem_simulation",
+			"map_ready": true,
+			"map_sequences": [
+				"swarmintelligence"
+			],
+			"name": "Ecosystem Simulation",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/emergentsystems/ecosystemsimulation/ecosystem.tscn",
+			"size_group": "compact",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"ecosystem_simulation_2": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Complex ecosystem with morphology generation, resource systems, and relationship networks",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ecosystem_simulation_2",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Advanced Ecosystem Simulation",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/emergentsystems/ecosystemsimulation2/main.tscn",
+			"size_group": "compact",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"edmonds_algorithm": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Blossom-based algorithm for maximum matching in general graphs",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				6.0,
+				1.0,
+				6.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "edmonds_algorithm",
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			],
+			"name": "Edmonds' Algorithm",
+			"parameters": {
+				"footprint": [
+					6.0,
+					1.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.tscn",
+			"size_group": "environment",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"entropy_axiom": {
+			"category": "randomness",
+			"complexity": "intermediate",
+			"description": "Shannon entropy as foundational axiom — information content measured by surprise. The mathematical bedrock of information theory: uncertainty is quantifiable.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "entropy_axiom",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness",
+				"testmaps"
+			],
+			"name": "Entropy Axiom",
+			"scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom.tscn",
+			"tags": [
+				"entropy",
+				"shannon",
+				"information_theory",
+				"axiom",
+				"uncertainty",
+				"randomness"
+			]
+		},
+		"fetishtorus": {
+			"category": "primitives",
+			"complexity": "intermediate",
+			"description": "Parametric dual-torus with fluid shader-driven color cycling and mirror-black contrast. Config: major_radius, minor_radius, ring_count, segment_count, rotation_speed, inner_color_speed, outer_color_speed, gradient_spread, surface_metallic, surface_roughness, dual_torus, second_torus_tilt",
+			"dev_themes": [
+				"geometry",
+				"shaders",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fetishtorus",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Fetish Torus",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/primitives/fetishtorus/fetishtorus.tscn",
+			"size_group": "compact",
+			"tags": [
+				"procedural",
+				"shader",
+				"animation"
+			]
+		},
+		"fibonacci_sequences": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Recursive mathematical sequences and spiral visualizations",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fibonacci_sequences",
+			"map_ready": true,
+			"map_sequences": [
+				"computationalgeometry",
+				"fractals",
+				"proceduralgeneration",
+				"proceduralgeneration_all",
+				"recursiveemergence"
+			],
+			"name": "Fibonacci Sequences",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/recursiveemergence/fibonacci_sequences/fibonacci_sequences.tscn",
+			"size_group": "compact",
+			"tags": [
+				"recursion"
+			]
+		},
+		"fluid_simulation": {
+			"category": "physics",
+			"complexity": "advanced",
+			"description": "Navier-Stokes fluid dynamics visualization — velocity fields, pressure, viscosity, and vorticity. The equations that describe everything from ocean currents to blood flow.",
+			"dev_themes": [
+				"algorithms",
+				"misc",
+				"physics"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fluid_simulation",
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"name": "Fluid Simulation",
+			"parameters": {
+				"footprint": [
+					16.0,
+					1.0,
+					16.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/physicssimulation/fluidsimulation/fluid_simulation.tscn",
+			"tags": [
+				"fluid",
+				"navier_stokes",
+				"simulation",
+				"velocity_field",
+				"viscosity",
+				"physics"
+			]
+		},
+		"fm_synthesis": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "fm_synthesis",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				15.0,
+				19.0,
+				9.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fm_synthesis",
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralaudio"
+			],
+			"name": "fm_synthesis",
+			"parameters": {
+				"footprint": [
+					15.0,
+					19.0,
+					9.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/proceduralaudio/fm_synthesis/fm_synthesis.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"force_directed_layout": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "force_directed_layout",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				17.0,
+				19.0,
+				9.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "force_directed_layout",
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			],
+			"name": "force_directed_layout",
+			"parameters": {
+				"footprint": [
+					17.0,
+					19.0,
+					9.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/graphtheory/force_directed_layout/force_directed_layout.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"forcedirected3d": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "forcedirected3d",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				21,
+				24,
+				23
+			],
+			"include_in_map_data": true,
+			"lookup_name": "forcedirected3d",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "forcedirected3d",
+			"parameters": {
+				"footprint": [
+					21,
+					24,
+					23
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/graphtheory/forcedirected3d/forcedirected3d.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"generative_music": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "generative_music",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				17.0,
+				16.0,
+				21.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "generative_music",
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralaudio"
+			],
+			"name": "generative_music",
+			"parameters": {
+				"footprint": [
+					17.0,
+					16.0,
+					21.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/proceduralaudio/generative_music/generative_music.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"geometric_transformations": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Animates point, line, plane, and cube primitives through rotation, scale, translation, and shear stages.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				13.0,
+				16.0,
+				11.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "geometric_transformations",
+			"map_ready": true,
+			"map_sequences": [
+				"meshes",
+				"unused"
+			],
+			"name": "geometric_transformations",
+			"parameters": {
+				"footprint": [
+					13.0,
+					16.0,
+					11.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/primitives/geometric_transformations/geometric_transformations.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"gradient_descent_visualization": {
+			"category": "algorithms",
+			"complexity": "intermediate",
+			"description": "Gradient descent optimization on a loss landscape — watch the optimizer slide downhill following the steepest direction. The engine behind all neural network training, with learning rate and momentum visible.",
+			"dev_themes": [
+				"algorithms",
+				"education",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "gradient_descent_visualization",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning",
+				"testmaps"
+			],
+			"name": "Gradient Descent",
+			"parameters": {
+				"footprint": [
+					7.0,
+					7.0,
+					21.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.tscn",
+			"tags": [
+				"gradient_descent",
+				"optimization",
+				"loss_landscape",
+				"learning_rate",
+				"numerical_methods"
+			]
+		},
+		"granular_synthesis": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "granular_synthesis",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				17.0,
+				24.0,
+				21.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "granular_synthesis",
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralaudio"
+			],
+			"name": "granular_synthesis",
+			"parameters": {
+				"footprint": [
+					17.0,
+					24.0,
+					21.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/proceduralaudio/granular_synthesis/granular_synthesis.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"graph_coloring": {
+			"category": "algorithms",
+			"complexity": "intermediate",
+			"description": "Greedy chromatic number exploration on a Petersen graph — 10 nodes colored step-by-step with the lowest available color not used by any neighbor. The four color theorem made visible.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "graph_coloring",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Graph Coloring",
+			"scene": "res://commons/artifacts/graph_coloring/graph_coloring.tscn",
+			"tags": [
+				"graph_coloring",
+				"chromatic_number",
+				"greedy",
+				"petersen_graph",
+				"graph_theory",
+				"four_color"
+			]
+		},
+		"graphspace": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "graphspace",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "graphspace",
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory",
+				"testmaps"
+			],
+			"name": "graphspace",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/graphtheory/graphspace/graphspace.tscn",
+			"size_group": "compact",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"graphspace3d": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "graphspace3d",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				16.0,
+				11.0,
+				36.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "graphspace3d",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"name": "graphspace3d",
+			"parameters": {
+				"footprint": [
+					16.0,
+					11.0,
+					36.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/graphtheory/graphspace3d/graphspace3d.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"homagetothesquare": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Procedurally layers Albers-inspired colored squares on a plane mesh.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				3.0,
+				9.0,
+				4.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "homagetothesquare",
+			"map_ready": true,
+			"map_sequences": [
+				"devexamples",
+				"structure"
+			],
+			"name": "homagetothesquare",
+			"parameters": {
+				"footprint": [
+					3.0,
+					9.0,
+					4.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/primitives/homagetothesquare/homagetothesquare.tscn",
+			"size_group": "environment",
+			"tags": [
+				"3d"
+			]
+		},
+		"karger_algorithm": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Randomized algorithm for finding minimum cut in undirected graphs",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				4.0,
+				1.0,
+				4.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "karger_algorithm",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Karger's Algorithm",
+			"parameters": {
+				"footprint": [
+					4.0,
+					1.0,
+					4.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/graphtheory/karger_algorithm/karger_algorithm.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"kitbashing": {
+			"category": "randomness",
+			"complexity": "intermediate",
+			"description": "Procedural kitbashing — assembling complex forms from randomized geometric primitives. The digital equivalent of the model-making technique used in Star Wars and Blade Runner.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "kitbashing",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Kitbashing",
+			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/kitbashing/kitbashing.tscn",
+			"tags": [
+				"kitbashing",
+				"procedural",
+				"assembly",
+				"geometry",
+				"randomness",
+				"design"
+			]
+		},
+		"koch_curve": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Classic Koch snowflake fractal curve generation",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "koch_curve",
+			"map_ready": true,
+			"map_sequences": [
+				"fractals",
+				"patterngeneration",
+				"recursiveemergence"
+			],
+			"name": "Koch Curve",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/recursiveemergence/koch_curve/koch_curve.tscn",
+			"size_group": "compact",
+			"tags": [
+				"fractal"
 			]
 		},
 		"konigsberg_bridge": {
-			"lookup_name": "konigsberg_bridge",
-			"scene": "res://algorithms/graphtheory/graphspace/KonigsbergBridge.tscn",
-			"name": "Königsberg Bridge Problem",
-			"description": "Euler's Königsberg bridge problem — can you cross every bridge exactly once? The question that birthed graph theory, proving that some problems are about structure, not calculation.",
 			"category": "algorithms",
 			"complexity": "beginner",
+			"description": "Euler's Königsberg bridge problem — can you cross every bridge exactly once? The question that birthed graph theory, proving that some problems are about structure, not calculation.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "konigsberg_bridge",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"name": "Königsberg Bridge Problem",
+			"parameters": {
+				"footprint": [
+					21.0,
+					4.0,
+					21.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/graphtheory/graphspace/KonigsbergBridge.tscn",
 			"tags": [
 				"graph_theory",
 				"euler",
@@ -88,32 +1527,158 @@
 				"eulerian_path",
 				"topology",
 				"history"
+			]
+		},
+		"kosaraju_algorithm": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Two-pass algorithm for finding strongly connected components",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				4.0,
+				1.0,
+				4.0
 			],
 			"include_in_map_data": true,
+			"lookup_name": "kosaraju_algorithm",
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			],
+			"name": "Kosaraju's Algorithm",
+			"parameters": {
+				"footprint": [
+					4.0,
+					1.0,
+					4.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/graphtheory/kosaraju_algorithm/kosaraju_algorithm.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"topology"
+			]
+		},
+		"levenshtein_distance": {
+			"category": "algorithms",
+			"complexity": "intermediate",
+			"description": "Edit distance visualization — minimum insertions, deletions, and substitutions to transform one string into another. The dynamic programming matrix that powers spell checkers and DNA sequence alignment.",
+			"dev_themes": [
+				"algorithms",
+				"biology",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "levenshtein_distance",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Levenshtein Distance",
+			"scene": "res://algorithms/stringalgorithms/editdistance/levenshtein_distance_visualization.tscn",
+			"tags": [
+				"edit_distance",
+				"levenshtein",
+				"dynamic_programming",
+				"string",
+				"alignment"
+			]
+		},
+		"mst_visualization": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "mst_visualization",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				11.0,
+				23.0,
+				13.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "mst_visualization",
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			],
+			"name": "mst_visualization",
+			"parameters": {
+				"footprint": [
+					11.0,
+					23.0,
+					13.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/graphtheory/minimumspanningtree/mst_visualization.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"network_analysis": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "network_analysis",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				17.0,
+				21.0,
+				16.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "network_analysis",
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory",
+				"testmaps"
+			],
+			"name": "network_analysis",
+			"parameters": {
+				"footprint": [
+					17.0,
+					21.0,
+					16.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/graphtheory/network_analysis/network_analysis.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"network_flow_visualization": {
+			"category": "algorithms",
+			"complexity": "advanced",
+			"description": "Max-flow/min-cut visualization — capacity constraints, augmenting paths, and the duality between maximum flow and minimum cut. The algorithm behind airline scheduling and internet routing.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "network_flow_visualization",
 			"map_ready": true,
 			"map_sequences": [
 				"testmaps"
 			],
+			"name": "Network Flow",
 			"parameters": {
 				"footprint": [
-					21,
-					4,
-					21
+					17.0,
+					19.0,
+					17.0
 				],
 				"size_group": "world_scale"
 			},
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"network_flow_visualization": {
-			"lookup_name": "network_flow_visualization",
 			"scene": "res://algorithms/graphtheory/networkflow/network_flow_visualization.tscn",
-			"name": "Network Flow",
-			"description": "Max-flow/min-cut visualization — capacity constraints, augmenting paths, and the duality between maximum flow and minimum cut. The algorithm behind airline scheduling and internet routing.",
-			"category": "algorithms",
-			"complexity": "advanced",
 			"tags": [
 				"network_flow",
 				"max_flow",
@@ -121,111 +1686,56 @@
 				"graph",
 				"capacity",
 				"optimization"
+			]
+		},
+		"networkflow3d": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "networkflow3d",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
 			],
 			"include_in_map_data": true,
+			"lookup_name": "networkflow3d",
 			"map_ready": true,
 			"map_sequences": [
-				"testmaps"
+				"graphtheory"
 			],
+			"name": "networkflow3d",
 			"parameters": {
 				"footprint": [
-					17,
-					19,
-					17
+					1.0,
+					1.0,
+					1.0
 				],
-				"size_group": "world_scale"
+				"size_group": "compact"
 			},
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"levenshtein_distance": {
-			"lookup_name": "levenshtein_distance",
-			"scene": "res://algorithms/stringalgorithms/editdistance/levenshtein_distance_visualization.tscn",
-			"name": "Levenshtein Distance",
-			"description": "Edit distance visualization — minimum insertions, deletions, and substitutions to transform one string into another. The dynamic programming matrix that powers spell checkers and DNA sequence alignment.",
-			"category": "algorithms",
-			"complexity": "intermediate",
+			"scene": "res://algorithms/graphtheory/networkflow3d/networkflow3d.tscn",
+			"size_group": "compact",
 			"tags": [
-				"edit_distance",
-				"levenshtein",
-				"dynamic_programming",
-				"string",
-				"alignment"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"dev_themes": [
-				"algorithms",
-				"biology",
-				"misc"
-			]
-		},
-		"boyer_moore": {
-			"lookup_name": "boyer_moore",
-			"scene": "res://algorithms/stringalgorithms/patternmatching/boyer_moore_visualization.tscn",
-			"name": "Boyer-Moore Pattern Matching",
-			"description": "Boyer-Moore string search — the algorithm that searches backwards, skipping ahead when mismatches reveal the pattern can't possibly match. Sublinear average time for text search.",
-			"category": "algorithms",
-			"complexity": "intermediate",
-			"tags": [
-				"boyer_moore",
-				"pattern_matching",
-				"string_search",
-				"skip",
-				"text"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"gradient_descent_visualization": {
-			"lookup_name": "gradient_descent_visualization",
-			"scene": "res://algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.tscn",
-			"name": "Gradient Descent",
-			"description": "Gradient descent optimization on a loss landscape — watch the optimizer slide downhill following the steepest direction. The engine behind all neural network training, with learning rate and momentum visible.",
-			"category": "algorithms",
-			"complexity": "intermediate",
-			"tags": [
-				"gradient_descent",
-				"optimization",
-				"loss_landscape",
-				"learning_rate",
-				"numerical_methods"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"machinelearning",
-				"testmaps"
-			],
-			"parameters": {
-				"footprint": [
-					7,
-					7,
-					21
-				],
-				"size_group": "world_scale"
-			},
-			"dev_themes": [
-				"algorithms",
-				"education",
-				"misc"
+				"algorithm"
 			]
 		},
 		"newton_raphson_visualization": {
-			"lookup_name": "newton_raphson_visualization",
-			"scene": "res://algorithms/numericalmethods/newtonraphson/newton_raphson_visualization.tscn",
-			"name": "Newton-Raphson Method",
-			"description": "Root-finding by tangent line iteration — each step uses the derivative to leap closer to where the function crosses zero. Quadratic convergence when it works, spectacular chaos when it doesn't.",
 			"category": "algorithms",
 			"complexity": "intermediate",
+			"description": "Root-finding by tangent line iteration — each step uses the derivative to leap closer to where the function crosses zero. Quadratic convergence when it works, spectacular chaos when it doesn't.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "newton_raphson_visualization",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Newton-Raphson Method",
+			"scene": "res://algorithms/numericalmethods/newtonraphson/newton_raphson_visualization.tscn",
 			"tags": [
 				"newton_raphson",
 				"root_finding",
@@ -233,42 +1743,511 @@
 				"iteration",
 				"convergence",
 				"numerical_methods"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
+			]
+		},
+		"pathfinding3d": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "pathfinding3d",
 			"dev_themes": [
 				"algorithms",
 				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pathfinding3d",
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory",
+				"testmaps"
+			],
+			"name": "pathfinding3d",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/graphtheory/pathfinding3d/pathfinding3d.tscn",
+			"size_group": "compact",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"pathfinding_visualization": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "pathfinding_visualization",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pathfinding_visualization",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"name": "pathfinding_visualization",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/graphtheory/pathfinding/pathfinding_visualization.tscn",
+			"size_group": "compact",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"platonicsolids": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Lays out pride-themed platonic solids amid rainbow flooring, banners, and colorful lighting.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				21.0,
+				16.0,
+				16.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "platonicsolids",
+			"map_ready": true,
+			"map_sequences": [
+				"devexamples",
+				"structure",
+				"unused"
+			],
+			"name": "platonicsolids",
+			"parameters": {
+				"footprint": [
+					21.0,
+					16.0,
+					16.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/primitives/platonicsolids/platonicsolids.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"playground_of_joy": {
+			"category": "physics",
+			"complexity": "beginner",
+			"description": "Playful physics sandbox — interact with bouncy, joyful objects. Physics as play, simulation as delight.",
+			"dev_themes": [
+				"algorithms",
+				"misc",
+				"physics"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "playground_of_joy",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Playground of Joy",
+			"parameters": {
+				"footprint": [
+					17.0,
+					16.0,
+					21.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/physicssimulation/playground_of_joy/playground_of_joy.tscn",
+			"tags": [
+				"physics",
+				"playground",
+				"joy",
+				"interactive",
+				"playful",
+				"sandbox"
+			]
+		},
+		"pokemon_studio": {
+			"category": "nature_system",
+			"compute_weight": "high",
+			"default_rotation": 0.0,
+			"default_y_offset": 0.0,
+			"dependencies": [],
+			"description": "Breeding, growth, and evolution laboratory — grow life from DNA, cross-breed across kingdoms, release into a shared ecosystem",
+			"dev_themes": [
+				"algorithms",
+				"nature",
+				"ecosystem"
+			],
+			"include_in_map_data": true,
+			"interactable": true,
+			"lookup_name": "pokemon_studio",
+			"min_cell_footprint": [
+				12.0,
+				12.0
+			],
+			"name": "Pokemon Studio",
+			"pedagogical_role": "sandbox",
+			"placement_type": "environment",
+			"scene": "res://algorithms/nature_system/studio/pokemon_studio.tscn",
+			"size_class": "world_scale",
+			"tags": [
+				"algorithm",
+				"nature",
+				"evolution",
+				"breeding",
+				"ecosystem",
+				"genetics"
+			]
+		},
+		"psychoacoustics": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "psychoacoustics",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				17.0,
+				24.0,
+				21.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "psychoacoustics",
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralaudio"
+			],
+			"name": "psychoacoustics",
+			"parameters": {
+				"footprint": [
+					17.0,
+					24.0,
+					21.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/proceduralaudio/psychoacoustics/psychoacoustics.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"push_relabel_algorithm": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Maximum flow algorithm using preflow and relabel operations",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				4.0,
+				1.0,
+				4.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "push_relabel_algorithm",
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			],
+			"name": "Push-Relabel Algorithm",
+			"parameters": {
+				"footprint": [
+					4.0,
+					1.0,
+					4.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/graphtheory/push_relabel/push_relabel.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"rainbow": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Creates double rainbow arcs with atmospheric bloom and layered color bands.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				21.0,
+				50.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rainbow",
+			"map_ready": true,
+			"map_sequences": [
+				"color",
+				"devexamples",
+				"lab",
+				"structure"
+			],
+			"name": "rainbow",
+			"parameters": {
+				"footprint": [
+					1.0,
+					21.0,
+					50.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/primitives/rainbow/rainbow.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"color"
+			]
+		},
+		"remains_to_be_seen": {
+			"category": "critical",
+			"complexity": "intermediate",
+			"description": "Critical theory artifact exploring visibility, erasure, and what computation makes invisible. What the algorithm chooses not to show is as important as what it reveals.",
+			"dev_themes": [
+				"algorithms",
+				"art",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "remains_to_be_seen",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Remains To Be Seen",
+			"scene": "res://algorithms/criticaltheory/remainstobeseen/remains_to_be_seen.tscn",
+			"tags": [
+				"critical_theory",
+				"visibility",
+				"erasure",
+				"representation",
+				"queer_theory"
+			]
+		},
+		"rorschach_monitor": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Medical monitor displaying animated Rorschach brain scan layers",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rorschach_monitor",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Rorschach Monitor",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/visualization/rorschach_scan/rorschach_monitor.tscn",
+			"size_group": "compact",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"rorschach_scan": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Animated mirrored inkblot pattern like a brain CT scan",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rorschach_scan",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Rorschach Brain Scan",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/visualization/rorschach_scan/rorschach_scan.tscn",
+			"size_group": "compact",
+			"tags": [
+				"pattern"
+			]
+		},
+		"rsa_visualization": {
+			"category": "algorithms",
+			"complexity": "advanced",
+			"description": "RSA public-key cryptography visualization — prime factorization, modular exponentiation, and the one-way trapdoor that makes secure communication possible. Easy to multiply primes, nearly impossible to factor back.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rsa_visualization",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "RSA Encryption",
+			"parameters": {
+				"footprint": [
+					1.0,
+					12.0,
+					13.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/cryptography/rsa/rsa_visualization.tscn",
+			"tags": [
+				"rsa",
+				"cryptography",
+				"encryption",
+				"prime",
+				"modular_arithmetic",
+				"public_key"
+			]
+		},
+		"running_text_display": {
+			"category": "critical",
+			"complexity": "beginner",
+			"description": "Scrolling text display for critical theory — words flowing through space, text as material, reading as embodied spatial practice.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "running_text_display",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Running Text Display",
+			"scene": "res://algorithms/criticaltheory/runningtextdisplay/RunningTextDisplay.tscn",
+			"tags": [
+				"text",
+				"display",
+				"critical_theory",
+				"spatial_text",
+				"reading"
+			]
+		},
+		"scale_me": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "scale_me",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "scale_me",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "scale_me",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/primitives/scaleme/scale_me.tscn",
+			"size_group": "compact",
+			"tags": [
+				"algorithm"
+			]
+		},
+		"self_organizing_patterns": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Stigmergy, phase transitions, and attractor basin visualization — 3 modes: stigmergy field with deposit/evaporation heatmap, Ising-like phase transition with order parameter sweep, Voronoi-colored attractor basins with flow field arrows",
+			"dev_themes": [
+				"algorithms",
+				"emergent_systems"
+			],
+			"footprint": [
+				16.0,
+				16.0,
+				16.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "self_organizing_patterns",
+			"map_ready": true,
+			"map_sequences": [
+				"patterngeneration",
+				"swarmintelligence",
+				"emergentsystems"
+			],
+			"name": "Self-Organizing Patterns",
+			"parameters": {
+				"footprint": [
+					16.0,
+					16.0,
+					16.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/emergentsystems/selforganizingpatterns/self_organization_principles.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"emergence",
+				"self_organization",
+				"stigmergy",
+				"phase_transition",
+				"attractor"
 			]
 		},
 		"simulated_annealing": {
-			"lookup_name": "simulated_annealing",
-			"scene": "res://algorithms/optimization/simulatedannealing/simulated_annealing_visualization.tscn",
-			"name": "Simulated Annealing",
-			"description": "Adaptive thermal optimization with basin-hopping — ImmediateMesh energy landscape, acceptance probability distribution, adaptive cooling rate targeting optimal acceptance, and basin-hopping to escape local minima.",
 			"category": "algorithms",
 			"complexity": "intermediate",
-			"tags": [
-				"simulated_annealing",
-				"optimization",
-				"temperature",
-				"metaheuristic",
-				"local_minimum",
-				"adaptive_cooling",
-				"basin_hopping",
-				"acceptance_probability"
+			"description": "Adaptive thermal optimization with basin-hopping — ImmediateMesh energy landscape, acceptance probability distribution, adaptive cooling rate targeting optimal acceptance, and basin-hopping to escape local minima.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "simulated_annealing",
 			"map_ready": true,
 			"map_sequences": [],
+			"name": "Simulated Annealing",
 			"parameters": {
-				"footprint": [
-					1,
-					18,
-					13
-				],
-				"size_group": "world_scale",
 				"configurable": [
 					"initial_temperature",
 					"cooling_rate",
@@ -279,349 +2258,42 @@
 					"basin_hop_enabled",
 					"hop_strength",
 					"step_interval"
-				]
-			},
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"rsa_visualization": {
-			"lookup_name": "rsa_visualization",
-			"scene": "res://algorithms/cryptography/rsa/rsa_visualization.tscn",
-			"name": "RSA Encryption",
-			"description": "RSA public-key cryptography visualization — prime factorization, modular exponentiation, and the one-way trapdoor that makes secure communication possible. Easy to multiply primes, nearly impossible to factor back.",
-			"category": "algorithms",
-			"complexity": "advanced",
-			"tags": [
-				"rsa",
-				"cryptography",
-				"encryption",
-				"prime",
-				"modular_arithmetic",
-				"public_key"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
+				],
 				"footprint": [
-					1,
-					12,
-					13
+					1.0,
+					18.0,
+					13.0
 				],
 				"size_group": "world_scale"
 			},
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"algorithmic_bias": {
-			"lookup_name": "algorithmic_bias",
-			"scene": "res://algorithms/criticalalgorithms/algorithmic_bias/algorithmic_bias.tscn",
-			"name": "Algorithmic Bias",
-			"description": "Visualization of how algorithms encode and amplify social biases. Training data reflects existing inequalities, models learn to reproduce them — making structural discrimination computational.",
-			"category": "critical",
-			"complexity": "intermediate",
+			"scene": "res://algorithms/optimization/simulatedannealing/simulated_annealing_visualization.tscn",
 			"tags": [
-				"algorithmic_bias",
-				"fairness",
-				"ethics",
-				"critical_algorithms",
-				"discrimination"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					17,
-					19,
-					9
-				],
-				"size_group": "world_scale"
-			},
-			"dev_themes": [
-				"algorithms",
-				"education",
-				"misc"
-			]
-		},
-		"algorithmic_bias_visualization": {
-			"lookup_name": "algorithmic_bias_visualization",
-			"scene": "res://algorithms/criticalalgorithms/algorithmic_bias_visualization/algorithmic_bias_visualization.tscn",
-			"name": "Algorithmic Bias Visualization",
-			"description": "Extended algorithmic bias exploration with interactive parameters. Adjust training data distributions, observe how bias propagates through model predictions, and see debiasing strategies in action.",
-			"category": "critical",
-			"complexity": "intermediate",
-			"tags": [
-				"algorithmic_bias",
-				"visualization",
-				"debiasing",
-				"fairness",
-				"critical_algorithms"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					17,
-					21,
-					16
-				],
-				"size_group": "world_scale"
-			},
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"remains_to_be_seen": {
-			"lookup_name": "remains_to_be_seen",
-			"scene": "res://algorithms/criticaltheory/remainstobeseen/remains_to_be_seen.tscn",
-			"name": "Remains To Be Seen",
-			"description": "Critical theory artifact exploring visibility, erasure, and what computation makes invisible. What the algorithm chooses not to show is as important as what it reveals.",
-			"category": "critical",
-			"complexity": "intermediate",
-			"tags": [
-				"critical_theory",
-				"visibility",
-				"erasure",
-				"representation",
-				"queer_theory"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"dev_themes": [
-				"algorithms",
-				"art",
-				"misc"
-			]
-		},
-		"running_text_display": {
-			"lookup_name": "running_text_display",
-			"scene": "res://algorithms/criticaltheory/runningtextdisplay/RunningTextDisplay.tscn",
-			"name": "Running Text Display",
-			"description": "Scrolling text display for critical theory — words flowing through space, text as material, reading as embodied spatial practice.",
-			"category": "critical",
-			"complexity": "beginner",
-			"tags": [
-				"text",
-				"display",
-				"critical_theory",
-				"spatial_text",
-				"reading"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"fluid_simulation": {
-			"lookup_name": "fluid_simulation",
-			"scene": "res://algorithms/physicssimulation/fluidsimulation/fluid_simulation.tscn",
-			"name": "Fluid Simulation",
-			"description": "Navier-Stokes fluid dynamics visualization — velocity fields, pressure, viscosity, and vorticity. The equations that describe everything from ocean currents to blood flow.",
-			"category": "physics",
-			"complexity": "advanced",
-			"tags": [
-				"fluid",
-				"navier_stokes",
-				"simulation",
-				"velocity_field",
-				"viscosity",
-				"physics"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation"
-			],
-			"parameters": {
-				"footprint": [
-					16,
-					1,
-					16
-				],
-				"size_group": "world_scale"
-			},
-			"dev_themes": [
-				"algorithms",
-				"misc",
-				"physics"
-			]
-		},
-		"affect_theory_visualization": {
-			"lookup_name": "affect_theory_visualization",
-			"scene": "res://algorithms/physicssimulation/affect_theory_visualization/affect_theory_visualization.tscn",
-			"name": "Affect Theory Visualization",
-			"description": "Physics simulation meets affect theory — forces as emotional intensities, bodies as sites of felt experience. Where Deleuze meets Newton.",
-			"category": "critical",
-			"complexity": "intermediate",
-			"tags": [
-				"affect_theory",
-				"deleuze",
-				"physics",
-				"emotion",
-				"intensity",
-				"critical_theory"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					17,
-					24,
-					21
-				],
-				"size_group": "world_scale"
-			},
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"playground_of_joy": {
-			"lookup_name": "playground_of_joy",
-			"scene": "res://algorithms/physicssimulation/playground_of_joy/playground_of_joy.tscn",
-			"name": "Playground of Joy",
-			"description": "Playful physics sandbox — interact with bouncy, joyful objects. Physics as play, simulation as delight.",
-			"category": "physics",
-			"complexity": "beginner",
-			"tags": [
-				"physics",
-				"playground",
-				"joy",
-				"interactive",
-				"playful",
-				"sandbox"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					17,
-					16,
-					21
-				],
-				"size_group": "world_scale"
-			},
-			"dev_themes": [
-				"algorithms",
-				"misc",
-				"physics"
-			]
-		},
-		"entropy_axiom": {
-			"lookup_name": "entropy_axiom",
-			"scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom.tscn",
-			"name": "Entropy Axiom",
-			"description": "Shannon entropy as foundational axiom — information content measured by surprise. The mathematical bedrock of information theory: uncertainty is quantifiable.",
-			"category": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"entropy",
-				"shannon",
-				"information_theory",
-				"axiom",
-				"uncertainty",
-				"randomness"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness",
-				"testmaps"
-			],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"cave_system": {
-			"lookup_name": "cave_system",
-			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/cavesystem/caveSystem.tscn",
-			"name": "Cave System Generator",
-			"description": "Procedural cave generation using noise-based geometry. Random seeds produce unique underground networks — exploration of how controlled randomness creates believable natural spaces.",
-			"category": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"cave",
-				"procedural",
-				"noise",
-				"geometry",
-				"generation",
-				"randomness"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"kitbashing": {
-			"lookup_name": "kitbashing",
-			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/kitbashing/kitbashing.tscn",
-			"name": "Kitbashing",
-			"description": "Procedural kitbashing — assembling complex forms from randomized geometric primitives. The digital equivalent of the model-making technique used in Star Wars and Blade Runner.",
-			"category": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"kitbashing",
-				"procedural",
-				"assembly",
-				"geometry",
-				"randomness",
-				"design"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"graph_coloring": {
-			"lookup_name": "graph_coloring",
-			"scene": "res://commons/artifacts/graph_coloring/graph_coloring.tscn",
-			"name": "Graph Coloring",
-			"description": "Greedy chromatic number exploration on a Petersen graph — 10 nodes colored step-by-step with the lowest available color not used by any neighbor. The four color theorem made visible.",
-			"category": "algorithms",
-			"complexity": "intermediate",
-			"tags": [
-				"graph_coloring",
-				"chromatic_number",
-				"greedy",
-				"petersen_graph",
-				"graph_theory",
-				"four_color"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"dev_themes": [
-				"algorithms",
-				"misc"
+				"simulated_annealing",
+				"optimization",
+				"temperature",
+				"metaheuristic",
+				"local_minimum",
+				"adaptive_cooling",
+				"basin_hopping",
+				"acceptance_probability"
 			]
 		},
 		"small_world_network": {
-			"lookup_name": "small_world_network",
-			"scene": "res://commons/artifacts/small_world_network/small_world_network.tscn",
-			"name": "Small World Network",
-			"description": "Watts-Strogatz small-world model — 20 nodes in a ring lattice with k=4 neighbors. VR slider controls rewiring probability p: regular lattice at p=0, random graph at p=1. Watch how random shortcuts collapse average path length while clustering stays high. Gray edges are original, yellow edges are rewired shortcuts.",
 			"category": "algorithms",
 			"complexity": "intermediate",
+			"description": "Watts-Strogatz small-world model — 20 nodes in a ring lattice with k=4 neighbors. VR slider controls rewiring probability p: regular lattice at p=0, random graph at p=1. Watch how random shortcuts collapse average path length while clustering stays high. Gray edges are original, yellow edges are rewired shortcuts.",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "small_world_network",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"name": "Small World Network",
+			"scene": "res://commons/artifacts/small_world_network/small_world_network.tscn",
 			"tags": [
 				"small_world",
 				"watts_strogatz",
@@ -630,1850 +2302,217 @@
 				"rewiring",
 				"clustering",
 				"path_length"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"testmaps"
-			],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"diamondtoruscollection": {
-			"lookup_name": "diamondtoruscollection",
-			"name": "diamondtoruscollection",
-			"description": "Torus reference ring with hanging cylinders and colored diamonds.",
-			"scene": "res://algorithms/primitives/diamondtoruscollection/diamondtoruscollection.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"primitives"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"geometry"
-			],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"geometric_transformations": {
-			"lookup_name": "geometric_transformations",
-			"name": "geometric_transformations",
-			"description": "Animates point, line, plane, and cube primitives through rotation, scale, translation, and shear stages.",
-			"scene": "res://algorithms/primitives/geometric_transformations/geometric_transformations.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"meshes",
-				"unused"
-			],
-			"footprint": [
-				13,
-				16,
-				11
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					13,
-					16,
-					11
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"scale_me": {
-			"lookup_name": "scale_me",
-			"name": "scale_me",
-			"description": "scale_me",
-			"scene": "res://algorithms/primitives/scaleme/scale_me.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"transformation"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"rorschach_scan": {
-			"lookup_name": "rorschach_scan",
-			"name": "Rorschach Brain Scan",
-			"description": "Animated mirrored inkblot pattern like a brain CT scan",
-			"scene": "res://algorithms/visualization/rorschach_scan/rorschach_scan.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"pattern"
-			],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"rorschach_monitor": {
-			"lookup_name": "rorschach_monitor",
-			"name": "Rorschach Monitor",
-			"description": "Medical monitor displaying animated Rorschach brain scan layers",
-			"scene": "res://algorithms/visualization/rorschach_scan/rorschach_monitor.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"tartan_demo": {
-			"lookup_name": "tartan_demo",
-			"name": "tartan_demo",
-			"description": "Loads the tartan boxes showcase with bright shader-driven crates under studio lighting.",
-			"scene": "res://algorithms/misc/tartan_boxes_demo.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"rainbow": {
-			"lookup_name": "rainbow",
-			"name": "rainbow",
-			"description": "Creates double rainbow arcs with atmospheric bloom and layered color bands.",
-			"scene": "res://algorithms/primitives/rainbow/rainbow.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"color",
-				"devexamples",
-				"lab",
-				"structure"
-			],
-			"footprint": [
-				1,
-				21,
-				50
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					1,
-					21,
-					50
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"color"
-			],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"homagetothesquare": {
-			"lookup_name": "homagetothesquare",
-			"name": "homagetothesquare",
-			"description": "Procedurally layers Albers-inspired colored squares on a plane mesh.",
-			"scene": "res://algorithms/primitives/homagetothesquare/homagetothesquare.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"devexamples",
-				"structure"
-			],
-			"footprint": [
-				3,
-				9,
-				4
-			],
-			"size_group": "environment",
-			"parameters": {
-				"footprint": [
-					3,
-					9,
-					4
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"3d"
-			],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"albers_wall_gallery": {
-			"lookup_name": "albers_wall_gallery",
-			"name": "albers_wall_gallery",
-			"description": "White gallery wall with 98 Josef Albers-inspired canvases and spotlights.",
-			"scene": "res://algorithms/primitives/homagetothesquare/albers_wall_gallery.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"color"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"art",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"platonicsolids": {
-			"lookup_name": "platonicsolids",
-			"name": "platonicsolids",
-			"description": "Lays out pride-themed platonic solids amid rainbow flooring, banners, and colorful lighting.",
-			"scene": "res://algorithms/primitives/platonicsolids/platonicsolids.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"devexamples",
-				"structure",
-				"unused"
-			],
-			"footprint": [
-				21,
-				16,
-				16
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					21,
-					16,
-					16
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"additive_synthesis": {
-			"lookup_name": "additive_synthesis",
-			"name": "additive_synthesis",
-			"description": "additive_synthesis",
-			"scene": "res://algorithms/proceduralaudio/additive_synthesis/additive_synthesis.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"proceduralaudio"
-			],
-			"footprint": [
-				17,
-				19,
-				9
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					17,
-					19,
-					9
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"audio_effects": {
-			"lookup_name": "audio_effects",
-			"name": "audio_effects",
-			"description": "audio_effects",
-			"scene": "res://algorithms/proceduralaudio/audio_effects/audio_effects.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				22,
-				24,
-				21
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					22,
-					24,
-					21
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc",
-				"music"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"fm_synthesis": {
-			"lookup_name": "fm_synthesis",
-			"name": "fm_synthesis",
-			"description": "fm_synthesis",
-			"scene": "res://algorithms/proceduralaudio/fm_synthesis/fm_synthesis.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"proceduralaudio"
-			],
-			"footprint": [
-				15,
-				19,
-				9
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					15,
-					19,
-					9
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"generative_music": {
-			"lookup_name": "generative_music",
-			"name": "generative_music",
-			"description": "generative_music",
-			"scene": "res://algorithms/proceduralaudio/generative_music/generative_music.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"proceduralaudio"
-			],
-			"footprint": [
-				17,
-				16,
-				21
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					17,
-					16,
-					21
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"granular_synthesis": {
-			"lookup_name": "granular_synthesis",
-			"name": "granular_synthesis",
-			"description": "granular_synthesis",
-			"scene": "res://algorithms/proceduralaudio/granular_synthesis/granular_synthesis.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"proceduralaudio"
-			],
-			"footprint": [
-				17,
-				24,
-				21
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					17,
-					24,
-					21
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"psychoacoustics": {
-			"lookup_name": "psychoacoustics",
-			"name": "psychoacoustics",
-			"description": "psychoacoustics",
-			"scene": "res://algorithms/proceduralaudio/psychoacoustics/psychoacoustics.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"proceduralaudio"
-			],
-			"footprint": [
-				17,
-				24,
-				21
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					17,
-					24,
-					21
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
 			]
 		},
 		"subtractive_synthesis": {
-			"lookup_name": "subtractive_synthesis",
-			"name": "subtractive_synthesis",
-			"description": "subtractive_synthesis",
-			"scene": "res://algorithms/proceduralaudio/subtractive_synthesis/subtractive_synthesis.tscn",
 			"category": "unknown",
+			"complexity": "beginner",
+			"description": "subtractive_synthesis",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				17.0,
+				19.0,
+				9.0
+			],
 			"include_in_map_data": true,
+			"lookup_name": "subtractive_synthesis",
 			"map_ready": true,
 			"map_sequences": [
 				"proceduralaudio"
 			],
-			"footprint": [
-				17,
-				19,
-				9
-			],
-			"size_group": "world_scale",
+			"name": "subtractive_synthesis",
 			"parameters": {
 				"footprint": [
-					17,
-					19,
-					9
+					17.0,
+					19.0,
+					9.0
 				],
 				"size_group": "world_scale"
 			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"boid_flocking": {
-			"lookup_name": "boid_flocking",
-			"name": "Boid Flocking",
-			"description": "Emergent flocking behavior simulation using Craig Reynolds' boids algorithm",
-			"scene": "res://algorithms/emergentsystems/boidflocking/boids_explained.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"swarmintelligence"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"boid",
-				"swarm"
-			],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"ecosystem_simulation": {
-			"lookup_name": "ecosystem_simulation",
-			"name": "Ecosystem Simulation",
-			"description": "Predator-prey ecosystem dynamics with emergent population behaviors",
-			"scene": "res://algorithms/emergentsystems/ecosystemsimulation/ecosystem.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"swarmintelligence"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"ecosystem_simulation_2": {
-			"lookup_name": "ecosystem_simulation_2",
-			"name": "Advanced Ecosystem Simulation",
-			"description": "Complex ecosystem with morphology generation, resource systems, and relationship networks",
-			"scene": "res://algorithms/emergentsystems/ecosystemsimulation2/main.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"FlowFieldMain": {
-			"lookup_name": "FlowFieldMain",
-			"name": "FlowFieldMain",
-			"description": "FlowFieldMain",
-			"scene": "res://algorithms/pathfinding/flow_field/FlowFieldMain.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"swarmintelligence"
-			],
-			"footprint": [
-				11,
-				36,
-				16
-			],
+			"scene": "res://algorithms/proceduralaudio/subtractive_synthesis/subtractive_synthesis.tscn",
 			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					11,
-					36,
-					16
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"self_organizing_patterns": {
-			"lookup_name": "self_organizing_patterns",
-			"name": "Self-Organizing Patterns",
-			"description": "Stigmergy, phase transitions, and attractor basin visualization — 3 modes: stigmergy field with deposit/evaporation heatmap, Ising-like phase transition with order parameter sweep, Voronoi-colored attractor basins with flow field arrows",
-			"scene": "res://algorithms/emergentsystems/selforganizingpatterns/self_organization_principles.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"patterngeneration",
-				"swarmintelligence",
-				"emergentsystems"
-			],
-			"footprint": [
-				16,
-				16,
-				16
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					16,
-					16,
-					16
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"emergence",
-				"self_organization",
-				"stigmergy",
-				"phase_transition",
-				"attractor"
-			],
-			"dev_themes": [
-				"algorithms",
-				"emergent_systems"
-			]
-		},
-		"fibonacci_sequences": {
-			"lookup_name": "fibonacci_sequences",
-			"name": "Fibonacci Sequences",
-			"description": "Recursive mathematical sequences and spiral visualizations",
-			"scene": "res://algorithms/recursiveemergence/fibonacci_sequences/fibonacci_sequences.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"computationalgeometry",
-				"fractals",
-				"proceduralgeneration",
-				"proceduralgeneration_all",
-				"recursiveemergence"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"recursion"
-			],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"koch_curve": {
-			"lookup_name": "koch_curve",
-			"name": "Koch Curve",
-			"description": "Classic Koch snowflake fractal curve generation",
-			"scene": "res://algorithms/recursiveemergence/koch_curve/koch_curve.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals",
-				"patterngeneration",
-				"recursiveemergence"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"fractal"
-			],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"context_free_grammars": {
-			"lookup_name": "context_free_grammars",
-			"name": "Context-Free Grammars",
-			"description": "L-system context-free grammar generation and visualization",
-			"scene": "res://algorithms/recursiveemergence/lsystems/context_free_grammars/context_free_grammars.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"lsystems",
-				"proceduralgeneration",
-				"proceduralgeneration_all"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"l_system",
-				"simulation"
-			],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"tree_generation": {
-			"lookup_name": "tree_generation",
-			"name": "Tree Generation",
-			"description": "Procedural tree generation using L-system algorithms",
-			"scene": "res://algorithms/recursiveemergence/lsystems/tree_generation/tree_generation.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"lsystems"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"l_system",
-				"procedural",
-				"simulation",
-				"tree"
-			],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"force_directed_layout": {
-			"lookup_name": "force_directed_layout",
-			"name": "force_directed_layout",
-			"description": "force_directed_layout",
-			"scene": "res://algorithms/graphtheory/force_directed_layout/force_directed_layout.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"graphtheory"
-			],
-			"footprint": [
-				17,
-				19,
-				9
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					17,
-					19,
-					9
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"graphspace": {
-			"lookup_name": "graphspace",
-			"name": "graphspace",
-			"description": "graphspace",
-			"scene": "res://algorithms/graphtheory/graphspace/graphspace.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"graphtheory",
-				"testmaps"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"KonigsbergBridge": {
-			"lookup_name": "KonigsbergBridge",
-			"name": "KonigsbergBridge",
-			"description": "KonigsbergBridge",
-			"scene": "res://algorithms/graphtheory/graphspace3d/konigsberg3d.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"graphtheory",
-				"testmaps"
-			],
-			"footprint": [
-				26,
-				1,
-				31
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					26,
-					1,
-					31
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"graphspace3d": {
-			"lookup_name": "graphspace3d",
-			"name": "graphspace3d",
-			"description": "graphspace3d",
-			"scene": "res://algorithms/graphtheory/graphspace3d/graphspace3d.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"testmaps"
-			],
-			"footprint": [
-				16,
-				11,
-				36
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					16,
-					11,
-					36
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"mst_visualization": {
-			"lookup_name": "mst_visualization",
-			"name": "mst_visualization",
-			"description": "mst_visualization",
-			"scene": "res://algorithms/graphtheory/minimumspanningtree/mst_visualization.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"graphtheory"
-			],
-			"footprint": [
-				11,
-				23,
-				13
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					11,
-					23,
-					13
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"pathfinding_visualization": {
-			"lookup_name": "pathfinding_visualization",
-			"name": "pathfinding_visualization",
-			"description": "pathfinding_visualization",
-			"scene": "res://algorithms/graphtheory/pathfinding/pathfinding_visualization.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"testmaps"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"pathfinding3d": {
-			"lookup_name": "pathfinding3d",
-			"name": "pathfinding3d",
-			"description": "pathfinding3d",
-			"scene": "res://algorithms/graphtheory/pathfinding3d/pathfinding3d.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"graphtheory",
-				"testmaps"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"network_analysis": {
-			"lookup_name": "network_analysis",
-			"name": "network_analysis",
-			"description": "network_analysis",
-			"scene": "res://algorithms/graphtheory/network_analysis/network_analysis.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"graphtheory",
-				"testmaps"
-			],
-			"footprint": [
-				17,
-				21,
-				16
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					17,
-					21,
-					16
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"fetishtorus": {
-			"lookup_name": "fetishtorus",
-			"name": "Fetish Torus",
-			"description": "Parametric dual-torus with fluid shader-driven color cycling and mirror-black contrast. Config: major_radius, minor_radius, ring_count, segment_count, rotation_speed, inner_color_speed, outer_color_speed, gradient_spread, surface_metallic, surface_roughness, dual_torus, second_torus_tilt",
-			"scene": "res://algorithms/primitives/fetishtorus/fetishtorus.tscn",
-			"category": "primitives",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				2,
-				2,
-				2
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"geometry",
-				"shaders",
-				"primitives"
-			],
-			"tags": [
-				"procedural",
-				"shader",
-				"animation"
-			]
-		},
-		"booleans": {
-			"lookup_name": "booleans",
-			"name": "booleans",
-			"description": "booleans",
-			"scene": "res://algorithms/primitives/booleans/booleans.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				11,
-				10,
-				13
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					11,
-					10,
-					13
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"booleanvariations": {
-			"lookup_name": "booleanvariations",
-			"name": "booleanvariations",
-			"description": "booleanvariations",
-			"scene": "res://algorithms/primitives/booleans/booleanvariations.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				11,
-				19
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					1,
-					11,
-					19
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"algorithm_overview": {
-			"lookup_name": "algorithm_overview",
-			"name": "Algorithm Learning Overview",
-			"description": "Interactive 2D flowchart visualization showing the complete learning progression through various algorithm categories and their relationships",
-			"scene": "res://algorithms/misc/maps_overview_in_3d.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"2d"
-			],
-			"dev_themes": [
-				"algorithms",
-				"education",
-				"misc"
-			]
-		},
-		"ChengSimulationScaled": {
-			"lookup_name": "ChengSimulationScaled",
-			"name": "ChengSimulationScaled",
-			"description": "ChengSimulationScaled",
-			"scene": "res://algorithms/computationalgeometry/chengsimulation/ChengSimulationScaled.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"testmaps"
-			],
-			"footprint": [
-				1,
-				2,
-				3
-			],
-			"size_group": "room_scale",
-			"parameters": {
-				"footprint": [
-					1,
-					2,
-					3
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"closest_pair": {
-			"lookup_name": "closest_pair",
-			"name": "Closest Pair of Points",
-			"description": "Closest pair algorithms with divide-and-conquer vs sweep line comparison, dynamic point maintenance, and empirical performance graph",
-			"scene": "res://algorithms/computationalgeometry/closest_pair/closest_pair.tscn",
-			"category": "algorithms",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"testmaps"
-			],
-			"footprint": [
-				17,
-				20,
-				13
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					17,
-					20,
-					13
-				],
-				"size_group": "world_scale",
-				"configurable": [
-					"point_count",
-					"field_width",
-					"field_height",
-					"step_speed",
-					"show_grid",
-					"show_performance",
-					"mode"
-				]
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"algorithms",
-				"computational_geometry"
-			],
-			"tags": [
-				"algorithm",
-				"computational_geometry",
-				"divide_and_conquer",
-				"sweep_line",
-				"closest_pair"
-			]
-		},
-		"distance_fields_sdf": {
-			"lookup_name": "distance_fields_sdf",
-			"name": "distance_fields_sdf",
-			"description": "distance_fields_sdf",
-			"scene": "res://algorithms/computationalgeometry/distance_fields_sdf/distance_fields_sdf.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"testmaps"
-			],
-			"footprint": [
-				17,
-				19,
-				9
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					17,
-					19,
-					9
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"voronoi_visualization": {
-			"lookup_name": "voronoi_visualization",
-			"name": "voronoi_visualization",
-			"description": "voronoi_visualization",
-			"scene": "res://algorithms/computationalgeometry/voronoi/voronoi_visualization.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				6,
-				6
-			],
-			"size_group": "environment",
-			"parameters": {
-				"footprint": [
-					1,
-					6,
-					6
-				],
-				"size_group": "environment"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"boids_2d_in_3d": {
-			"lookup_name": "boids_2d_in_3d",
-			"name": "boids_2d_in_3d",
-			"description": "boids_2d_in_3d",
-			"scene": "res://algorithms/emergentsystems/boidflocking/boids_2d_in_3d.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"swarmintelligence"
-			],
-			"footprint": [
-				1,
-				1,
-				3
-			],
-			"size_group": "room_scale",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					3
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"boid_manager": {
-			"lookup_name": "boid_manager",
-			"name": "boid_manager",
-			"description": "boid_manager",
-			"scene": "res://algorithms/emergentsystems/boidflocking/boid_manager.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"swarmintelligence"
-			],
-			"footprint": [
-				20,
-				10,
-				20
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					20,
-					10,
-					20
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"boid"
-			],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"edmonds_algorithm": {
-			"lookup_name": "edmonds_algorithm",
-			"name": "Edmonds' Algorithm",
-			"description": "Blossom-based algorithm for maximum matching in general graphs",
-			"scene": "res://algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"graphtheory"
-			],
-			"footprint": [
-				6,
-				1,
-				6
-			],
-			"size_group": "environment",
-			"parameters": {
-				"footprint": [
-					6,
-					1,
-					6
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"karger_algorithm": {
-			"lookup_name": "karger_algorithm",
-			"name": "Karger's Algorithm",
-			"description": "Randomized algorithm for finding minimum cut in undirected graphs",
-			"scene": "res://algorithms/graphtheory/karger_algorithm/karger_algorithm.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				4,
-				1,
-				4
-			],
-			"size_group": "room_scale",
-			"parameters": {
-				"footprint": [
-					4,
-					1,
-					4
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"kosaraju_algorithm": {
-			"lookup_name": "kosaraju_algorithm",
-			"name": "Kosaraju's Algorithm",
-			"description": "Two-pass algorithm for finding strongly connected components",
-			"scene": "res://algorithms/graphtheory/kosaraju_algorithm/kosaraju_algorithm.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"graphtheory"
-			],
-			"footprint": [
-				4,
-				1,
-				4
-			],
-			"size_group": "room_scale",
-			"parameters": {
-				"footprint": [
-					4,
-					1,
-					4
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"topology"
-			],
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			]
-		},
-		"push_relabel_algorithm": {
-			"lookup_name": "push_relabel_algorithm",
-			"name": "Push-Relabel Algorithm",
-			"description": "Maximum flow algorithm using preflow and relabel operations",
-			"scene": "res://algorithms/graphtheory/push_relabel/push_relabel.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"graphtheory"
-			],
-			"footprint": [
-				4,
-				1,
-				4
-			],
-			"size_group": "room_scale",
-			"parameters": {
-				"footprint": [
-					4,
-					1,
-					4
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
 			"tags": [
 				"algorithm"
 			]
 		},
 		"tarjan_algorithm": {
-			"lookup_name": "tarjan_algorithm",
-			"name": "Tarjan's Algorithm",
-			"description": "DFS-based algorithm for finding strongly connected components",
-			"scene": "res://algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.tscn",
 			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "DFS-based algorithm for finding strongly connected components",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				6.0,
+				1.0,
+				6.0
+			],
 			"include_in_map_data": true,
+			"lookup_name": "tarjan_algorithm",
 			"map_ready": true,
 			"map_sequences": [
 				"graphtheory"
 			],
-			"footprint": [
-				6,
-				1,
-				6
-			],
-			"size_group": "environment",
+			"name": "Tarjan's Algorithm",
 			"parameters": {
 				"footprint": [
-					6,
-					1,
-					6
+					6.0,
+					1.0,
+					6.0
 				],
 				"size_group": "environment"
 			},
-			"complexity": "intermediate",
+			"scene": "res://algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.tscn",
+			"size_group": "environment",
 			"tags": [
 				"topology"
-			],
+			]
+		},
+		"tartan_demo": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Loads the tartan boxes showcase with bright shader-driven crates under studio lighting.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "tartan_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "tartan_demo",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/misc/tartan_boxes_demo.tscn",
+			"size_group": "compact",
+			"tags": [
+				"algorithm"
 			]
 		},
 		"topological_sort_algorithm": {
-			"lookup_name": "topological_sort_algorithm",
-			"name": "Topological Sort",
-			"description": "Algorithm for ordering vertices in directed acyclic graphs",
-			"scene": "res://algorithms/graphtheory/topological_sort/topological_sort.tscn",
 			"category": "unknown",
+			"complexity": "expert",
+			"description": "Algorithm for ordering vertices in directed acyclic graphs",
+			"dev_themes": [
+				"algorithms",
+				"misc"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				1.0
+			],
 			"include_in_map_data": true,
+			"lookup_name": "topological_sort_algorithm",
 			"map_ready": true,
 			"map_sequences": [],
-			"footprint": [
-				1,
-				2,
-				1
-			],
-			"size_group": "compact",
+			"name": "Topological Sort",
 			"parameters": {
 				"footprint": [
-					1,
-					2,
-					1
+					1.0,
+					2.0,
+					1.0
 				],
 				"size_group": "compact"
 			},
-			"complexity": "expert",
+			"scene": "res://algorithms/graphtheory/topological_sort/topological_sort.tscn",
+			"size_group": "compact",
 			"tags": [
 				"sort",
 				"sorting"
-			],
+			]
+		},
+		"tree_generation": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Procedural tree generation using L-system algorithms",
 			"dev_themes": [
 				"algorithms",
 				"misc"
-			]
-		},
-		"forcedirected3d": {
-			"lookup_name": "forcedirected3d",
-			"name": "forcedirected3d",
-			"description": "forcedirected3d",
-			"scene": "res://algorithms/graphtheory/forcedirected3d/forcedirected3d.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
 			],
 			"footprint": [
-				1,
-				1,
-				1
+				1.0,
+				1.0,
+				1.0
 			],
-			"size_group": "compact",
+			"include_in_map_data": true,
+			"lookup_name": "tree_generation",
+			"map_ready": true,
+			"map_sequences": [
+				"lsystems"
+			],
+			"name": "Tree Generation",
 			"parameters": {
 				"footprint": [
-					1,
-					1,
-					1
+					1.0,
+					1.0,
+					1.0
 				],
 				"size_group": "compact"
 			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"algorithms",
-				"misc"
-			],
+			"scene": "res://algorithms/recursiveemergence/lsystems/tree_generation/tree_generation.tscn",
+			"size_group": "compact",
 			"tags": [
-				"algorithm"
+				"l_system",
+				"procedural",
+				"simulation",
+				"tree"
 			]
 		},
-		"networkflow3d": {
-			"lookup_name": "networkflow3d",
-			"name": "networkflow3d",
-			"description": "networkflow3d",
-			"scene": "res://algorithms/graphtheory/networkflow3d/networkflow3d.tscn",
+		"voronoi_visualization": {
 			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"graphtheory"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
 			"complexity": "beginner",
+			"description": "voronoi_visualization",
 			"dev_themes": [
 				"algorithms",
 				"misc"
 			],
-			"tags": [
-				"algorithm"
-			]
-		},
-		"bias_from_inside": {
-			"lookup_name": "bias_from_inside",
-			"name": "Bias From Inside",
-			"description": "Visualizes a word embedding space from the perspective of a marginalized term. Instead of the usual god's-eye view, this artifact places you INSIDE the compressed region. A slider shifts between default perspective (everything looks evenly distributed) and compressed perspective (reveals how uneven the space really is).",
-			"scene": "res://commons/artifacts/bias_from_inside/bias_from_inside.tscn",
-			"category": "critical",
-			"complexity": "intermediate",
-			"tags": [
-				"algorithmic_bias",
-				"embedding",
-				"perspective",
-				"critical_algorithms",
-				"compression",
-				"word_vectors"
+			"footprint": [
+				1.0,
+				6.0,
+				6.0
 			],
 			"include_in_map_data": true,
+			"lookup_name": "voronoi_visualization",
 			"map_ready": true,
-			"map_sequences": [
-				"criticalalgorithms"
-			],
-			"sequence": "criticalalgorithms",
-			"interaction": "interact",
+			"map_sequences": [],
+			"name": "voronoi_visualization",
 			"parameters": {
 				"footprint": [
-					2,
-					2,
-					2
+					1.0,
+					6.0,
+					6.0
 				],
-				"size_group": "compact"
+				"size_group": "environment"
 			},
-			"dev_themes": [
-				"algorithms",
-				"education",
-				"misc"
+			"scene": "res://algorithms/computationalgeometry/voronoi/voronoi_visualization.tscn",
+			"size_group": "environment",
+			"tags": [
+				"algorithm"
 			]
 		}
+	},
+	"registry_info": {
+		"category": "algorithms",
+		"description": "Standalone algorithm artifacts spanning graph theory, search/pathfinding, string algorithms, numerical methods, optimization, cryptography, and critical theory. Algorithms that don't yet have their own registry family.",
+		"name": "algorithms_misc",
+		"theoretical_grounding": "Graph theory, search algorithms, string processing, numerical analysis, optimization theory, critical algorithm studies"
 	}
 }

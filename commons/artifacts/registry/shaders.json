@@ -1,300 +1,731 @@
 {
 	"artifacts": {
-		"buffer_geometry_particles": {
-			"name": "Buffer Geometry Particles",
-			"lookup_name": "buffer_geometry_particles",
-			"description": "Particle system using buffer geometry for GPU-driven particle effects.",
-			"scene": "res://algorithms/shaders/buffer/buffergeometryparticles.tscn",
+		"Shader_Gallery": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Shader_Gallery",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			],
+			"footprint": [
+				8.0,
+				6.0,
+				6.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "Shader_Gallery",
+			"map_ready": true,
+			"map_sequences": [
+				"patterngeneration"
+			],
+			"name": "Shader_Gallery",
+			"parameters": {
+				"footprint": [
+					8.0,
+					6.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/shaders/Shader_Gallery.tscn",
+			"size_group": "environment",
+			"tags": [
+				"shader"
+			]
+		},
+		"alphahash": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Post-processing alpha hash algorithm for transparent texture generation and anti-aliasing",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "alphahash",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "Alpha Hash",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/postprocessing/alfahash/alphahash.tscn",
+			"size_group": "compact",
+			"tags": [
+				"cryptography"
+			]
+		},
+		"art_history_gallery": {
 			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Walk-through exhibition of 20 art history composition presets. Persian carpet, Islamic geometric, Roman mosaic, Art Deco, De Stijl, Bauhaus, Celtic knot, Sashiko, Byzantine, Navajo, Chinese lattice, Gothic rose, Kente, Zellige, Aztec, Victorian, Log cabin quilt, Mud cloth, Palazzo, Pixel quilt.",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "art_history_gallery",
+			"map_ready": true,
+			"map_sequences": [
+				"patterngeneration"
+			],
+			"name": "Art History Gallery",
+			"scene": "res://commons/artifacts/art_history_gallery/art_history_gallery.tscn",
+			"sequence": "patterngeneration",
+			"tags": [
+				"gallery",
+				"art_history",
+				"composition",
+				"stress_test",
+				"wallpaper_groups",
+				"installation",
+				"20_presets"
+			]
+		},
+		"buffer_geometry_particles": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Particle system using buffer geometry for GPU-driven particle effects.",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "buffer_geometry_particles",
+			"map_ready": false,
+			"map_sequences": [],
+			"name": "Buffer Geometry Particles",
+			"scene": "res://algorithms/shaders/buffer/buffergeometryparticles.tscn",
+			"sequence": "shaders",
 			"tags": [
 				"particles",
 				"buffer",
 				"gpu",
 				"shaders"
+			]
+		},
+		"buffergeometryparticles": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "High-performance particle system using buffer geometry for efficient rendering and animation",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
 			],
 			"include_in_map_data": true,
-			"map_ready": false,
-			"map_sequences": [],
-			"sequence": "shaders",
+			"lookup_name": "buffergeometryparticles",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "Buffer Geometry Particles",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/shaders/buffer/buffergeometryparticles.tscn",
+			"size_group": "compact",
+			"tags": [
+				"simulation"
+			]
+		},
+		"carpet_cove_gallery": {
+			"category": "shaders",
+			"complexity": "intermediate",
+			"description": "Grid-based gallery of 24 cyclorama cove displays with wallpaper patterns. Coves in facing rows with 3m aisle, each showing a unique pattern on curved surfaces.",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "carpet_cove_gallery",
+			"map_ready": true,
+			"map_sequences": [
+				"patterngeneration"
+			],
+			"name": "Carpet Cove Gallery",
+			"scene": "res://algorithms/shaders/carpet_cove_gallery/carpet_cove_gallery.tscn",
+			"sequence": "patterngeneration",
+			"tags": [
+				"gallery",
+				"cove",
+				"cyclorama",
+				"wallpaper_groups",
+				"installation",
+				"grid_aligned"
+			]
+		},
+		"clippingplanes": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Interactive clipping plane algorithms for geometric visualization and spatial cutting",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "clippingplanes",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "Clipping Planes",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/effects/clipping/clippingplanes.tscn",
+			"size_group": "compact",
+			"tags": [
+				"shader"
+			]
+		},
+		"cove_display": {
+			"category": "shaders",
 			"complexity": "advanced",
+			"description": "Cyclorama/infinity cove surface — curved floor-to-wall form built with SurfaceTool. Accepts any shader via grid config. Continuous UV mapping for seamless tiling.",
 			"dev_themes": [
 				"shaders",
 				"visual"
-			]
-		},
-		"dynamic_cubemap": {
-			"name": "Dynamic Cubemap",
-			"lookup_name": "dynamic_cubemap",
-			"description": "Real-time dynamic cubemap rendering for reflections and environment mapping.",
-			"scene": "res://algorithms/shaders/dynamicubemap/dynamiccubemap.tscn",
-			"category": "shaders",
-			"tags": [
-				"cubemap",
-				"reflections",
-				"environment",
-				"shaders"
 			],
 			"include_in_map_data": true,
-			"map_ready": false,
-			"map_sequences": [],
-			"sequence": "shaders",
+			"lookup_name": "cove_display",
+			"map_ready": true,
+			"map_sequences": [
+				"patterngeneration",
+				"mosaicanalysis"
+			],
+			"name": "Cove Display",
+			"scene": "res://commons/artifacts/cove_display/cove_display.tscn",
+			"sequence": "patterngeneration",
+			"tags": [
+				"cove",
+				"cyclorama",
+				"surface_tool",
+				"display",
+				"shader",
+				"configurable",
+				"pattern"
+			]
+		},
+		"degrading_shader_demo": {
+			"category": "shaders",
 			"complexity": "beginner",
+			"description": "Demonstrates shader degradation effects over time or with parameters.",
 			"dev_themes": [
 				"shaders",
 				"visual"
-			]
-		},
-		"materials_transmission": {
-			"name": "Materials Transmission",
-			"lookup_name": "materials_transmission",
-			"description": "Demonstrates material transmission and translucency shader effects.",
-			"scene": "res://algorithms/shaders/materialtransmission/materialstransmission.tscn",
-			"category": "shaders",
-			"tags": [
-				"materials",
-				"transmission",
-				"translucency",
-				"shaders"
 			],
 			"include_in_map_data": true,
-			"map_ready": false,
-			"map_sequences": [],
-			"sequence": "shaders",
-			"complexity": "beginner",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"tiles_explained": {
-			"name": "Tiles Explained",
-			"lookup_name": "tiles_explained",
-			"description": "Visual explanation of tile-based shader patterns and tiling techniques.",
-			"scene": "res://algorithms/shaders/tilesexplained/tiles_explained.tscn",
-			"category": "shaders",
-			"tags": [
-				"tiles",
-				"patterns",
-				"tiling",
-				"shaders"
-			],
-			"include_in_map_data": true,
+			"lookup_name": "degrading_shader_demo",
 			"map_ready": false,
 			"map_sequences": [
 				"unused"
 			],
-			"sequence": "shaders",
+			"name": "Degrading Shader Demo",
 			"parameters": {
 				"footprint": [
-					4,
-					1,
-					4
+					1.0,
+					5.0,
+					5.0
 				],
-				"size_group": "room_scale"
+				"size_group": "environment"
 			},
-			"complexity": "advanced",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"degrading_shader_demo": {
-			"name": "Degrading Shader Demo",
-			"lookup_name": "degrading_shader_demo",
-			"description": "Demonstrates shader degradation effects over time or with parameters.",
 			"scene": "res://algorithms/shaders/degrading_shader/degrading_shader_demo.tscn",
-			"category": "shaders",
+			"sequence": "shaders",
 			"tags": [
 				"degradation",
 				"decay",
 				"time",
 				"shaders"
-			],
-			"include_in_map_data": true,
-			"map_ready": false,
-			"map_sequences": [
-				"unused"
-			],
-			"sequence": "shaders",
-			"parameters": {
-				"footprint": [
-					1,
-					5,
-					5
-				],
-				"size_group": "environment"
-			},
+			]
+		},
+		"dynamic_cubemap": {
+			"category": "shaders",
 			"complexity": "beginner",
+			"description": "Real-time dynamic cubemap rendering for reflections and environment mapping.",
 			"dev_themes": [
 				"shaders",
 				"visual"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "dynamic_cubemap",
+			"map_ready": false,
+			"map_sequences": [],
+			"name": "Dynamic Cubemap",
+			"scene": "res://algorithms/shaders/dynamicubemap/dynamiccubemap.tscn",
+			"sequence": "shaders",
+			"tags": [
+				"cubemap",
+				"reflections",
+				"environment",
+				"shaders"
+			]
+		},
+		"dynamiccubemap": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Real-time dynamic cube map generation for environmental reflections and lighting",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"footprint": [
+				4.0,
+				4.0,
+				4.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "dynamiccubemap",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Dynamic Cube Map",
+			"parameters": {
+				"footprint": [
+					4.0,
+					4.0,
+					4.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/shaders/dynamicubemap/dynamiccubemap.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"animation"
+			]
+		},
+		"filter_screen": {
+			"category": "shaders",
+			"complexity": "intermediate",
+			"description": "A 3D-to-2D projection surface using a real Camera3D inside a SubViewport. Unlike the ScienceScreen (grid data), the FilterScreen projects the live 3D scene onto a flat monitor — teaching projection itself as a primitive. Filter modes: normal, wireframe, depth, normals, silhouette, grid overlay. Points foreshorten, lines lose depth, triangles change area based on viewing angle.",
+			"dev_themes": [
+				"shaders",
+				"visual",
+				"projection"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "filter_screen",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Filter Screen",
+			"parameters": {
+				"footprint": [
+					3.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/artifacts/filter_screen/filter_screen.tscn",
+			"sequence": "patterngeneration",
+			"tags": [
+				"display",
+				"screen",
+				"viewport",
+				"projection",
+				"camera",
+				"3d-to-2d",
+				"filter",
+				"configurable"
+			]
+		},
+		"flashlight_demo": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "flashlight_demog",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "flashlight_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "flashlight_demo",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/light/flashlight_demo/flashlight_demo.tscn",
+			"size_group": "compact",
+			"tags": [
+				"shader"
+			]
+		},
+		"materials_transmission": {
+			"category": "shaders",
+			"complexity": "beginner",
+			"description": "Demonstrates material transmission and translucency shader effects.",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "materials_transmission",
+			"map_ready": false,
+			"map_sequences": [],
+			"name": "Materials Transmission",
+			"scene": "res://algorithms/shaders/materialtransmission/materialstransmission.tscn",
+			"sequence": "shaders",
+			"tags": [
+				"materials",
+				"transmission",
+				"translucency",
+				"shaders"
+			]
+		},
+		"materialstransmission": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Advanced material transmission and refraction algorithms for realistic glass and transparent effects",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "materialstransmission",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Materials Transmission",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/shaders/materialtransmission/materialstransmission.tscn",
+			"size_group": "compact",
+			"tags": [
+				"shader"
+			]
+		},
+		"pattern_compositor": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Zone-based pattern composition using the SpatialComposition library. Presets: carpet (border/field/medallion), facade (base/columns/windows/cornice), mosaic, quilt, tunnel. Each zone gets a different wallpaper group shader.",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pattern_compositor",
+			"map_ready": true,
+			"map_sequences": [
+				"patterngeneration"
+			],
+			"name": "Pattern Compositor",
+			"scene": "res://commons/artifacts/pattern_compositor/pattern_compositor.tscn",
+			"sequence": "patterngeneration",
+			"tags": [
+				"compositor",
+				"pattern",
+				"zones",
+				"carpet",
+				"facade",
+				"wallpaper_groups",
+				"composition",
+				"reusable"
+			]
+		},
+		"pixel_carpet_gallery": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "30m corridor with 69 procedural carpet panels on floor, walls, and ceiling. Art to Eat-inspired installation using wallpaper_tile shader with 17 groups and 10 neon palettes.",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pixel_carpet_gallery",
+			"map_ready": true,
+			"map_sequences": [
+				"patterngeneration"
+			],
+			"name": "Pixel Carpet Gallery",
+			"scene": "res://algorithms/shaders/pixel_carpet_gallery/pixel_carpet_gallery.tscn",
+			"sequence": "patterngeneration",
+			"tags": [
+				"gallery",
+				"carpet",
+				"wallpaper_groups",
+				"installation",
+				"art_to_eat",
+				"corridor"
+			]
+		},
+		"postprocessing_bloom": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Advanced bloom post-processing effect with configurable intensity and threshold parameters",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "postprocessing_bloom",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "Post-Processing Bloom",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/postprocessing/bloom/postprocessing_bloom.tscn",
+			"size_group": "compact",
+			"tags": [
+				"shader"
 			]
 		},
 		"queer_collection_gallery_a": {
-			"name": "Queer Collection Gallery A",
-			"lookup_name": "queer_collection_gallery_a",
-			"description": "Gallery display of queer-themed shader collection artworks.",
-			"scene": "res://algorithms/shaders/queer_collection_2/Collection_Gallery_A.tscn",
 			"category": "shaders",
+			"complexity": "beginner",
+			"description": "Gallery display of queer-themed shader collection artworks.",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "queer_collection_gallery_a",
+			"map_ready": false,
+			"map_sequences": [],
+			"name": "Queer Collection Gallery A",
+			"parameters": {
+				"footprint": [
+					9.0,
+					6.0,
+					7.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/shaders/queer_collection_2/Collection_Gallery_A.tscn",
+			"sequence": "shaders",
 			"tags": [
 				"gallery",
 				"queer",
 				"collection",
 				"art",
 				"shaders"
-			],
-			"include_in_map_data": true,
-			"map_ready": false,
-			"map_sequences": [],
-			"sequence": "shaders",
-			"parameters": {
-				"footprint": [
-					9,
-					6,
-					7
-				],
-				"size_group": "environment"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"art",
-				"shaders",
-				"visual"
 			]
 		},
-		"shader_gallery": {
-			"name": "Shader Gallery",
-			"lookup_name": "shader_gallery",
-			"description": "Main gallery showcasing various shader techniques and effects.",
-			"scene": "res://algorithms/shaders/Shader_Gallery.tscn",
+		"science_screen": {
 			"category": "shaders",
-			"tags": [
-				"gallery",
-				"showcase",
-				"shaders"
-			],
-			"include_in_map_data": true,
-			"map_ready": false,
-			"map_sequences": [],
-			"sequence": "shaders",
-			"parameters": {
-				"footprint": [
-					8,
-					6,
-					6
-				],
-				"size_group": "environment"
-			},
-			"complexity": "advanced",
+			"complexity": "intermediate",
+			"description": "Large VR display showing 2D abstractions of nearby 3D artifacts. Detects grid-aware artifacts and renders simplified pixel-grid views with algorithm name, dimensions, and cell stats. The meeting point of 2D and 3D — split consciousness between body experience and visual understanding.",
 			"dev_themes": [
-				"art",
 				"shaders",
 				"visual"
+			],
+			"footprint": [
+				4,
+				3,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "science_screen",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Science Screen",
+			"parameters": {
+				"footprint": [
+					4,
+					3,
+					1
+				],
+				"size_group": "standard"
+			},
+			"scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+			"sequence": "patterngeneration",
+			"size_group": "standard",
+			"tags": [
+				"display",
+				"screen",
+				"viewport",
+				"2d",
+				"abstraction",
+				"reflection",
+				"grid",
+				"configurable"
 			]
 		},
 		"shader_01_shaping": {
-			"name": "Shader 01 — Shaping Functions",
-			"lookup_name": "shader_01_shaping",
-			"description": "Book of Shaders chapter on shaping functions and mathematical curves.",
-			"scene": "res://algorithms/shaders/book_of_shaders/shader_01_shaping.tscn",
 			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Book of Shaders chapter on shaping functions and mathematical curves.",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "shader_01_shaping",
+			"map_ready": false,
+			"map_sequences": [
+				"patterngeneration"
+			],
+			"name": "Shader 01 — Shaping Functions",
+			"scene": "res://algorithms/shaders/book_of_shaders/shader_01_shaping.tscn",
+			"sequence": "shaders",
 			"tags": [
 				"book_of_shaders",
 				"shaping",
 				"math",
 				"curves",
 				"shaders"
+			]
+		},
+		"shader_02_colors": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Book of Shaders chapter on color mixing and color spaces.",
+			"dev_themes": [
+				"shaders",
+				"visual"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "shader_02_colors",
 			"map_ready": false,
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders",
-			"complexity": "advanced",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"shader_02_colors": {
 			"name": "Shader 02 — Colors",
-			"lookup_name": "shader_02_colors",
-			"description": "Book of Shaders chapter on color mixing and color spaces.",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_02_colors.tscn",
-			"category": "shaders",
+			"sequence": "shaders",
 			"tags": [
 				"book_of_shaders",
 				"colors",
 				"mixing",
 				"shaders"
+			]
+		},
+		"shader_03_shapes": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Book of Shaders chapter on drawing shapes with distance fields.",
+			"dev_themes": [
+				"shaders",
+				"visual"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "shader_03_shapes",
 			"map_ready": false,
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders",
-			"complexity": "advanced",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"shader_03_shapes": {
 			"name": "Shader 03 — Shapes",
-			"lookup_name": "shader_03_shapes",
-			"description": "Book of Shaders chapter on drawing shapes with distance fields.",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_03_shapes.tscn",
-			"category": "shaders",
+			"sequence": "shaders",
 			"tags": [
 				"book_of_shaders",
 				"shapes",
 				"distance_fields",
 				"shaders"
+			]
+		},
+		"shader_04_matrices": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Book of Shaders chapter on matrix transformations in 2D.",
+			"dev_themes": [
+				"shaders",
+				"visual"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "shader_04_matrices",
 			"map_ready": false,
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders",
-			"complexity": "advanced",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"shader_04_matrices": {
 			"name": "Shader 04 — Matrices",
-			"lookup_name": "shader_04_matrices",
-			"description": "Book of Shaders chapter on matrix transformations in 2D.",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_04_matrices.tscn",
-			"category": "shaders",
+			"sequence": "shaders",
 			"tags": [
 				"book_of_shaders",
 				"matrices",
 				"transformations",
 				"shaders"
+			]
+		},
+		"shader_05_patterns": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Book of Shaders patterns — 3 modes: classic tiling/truchet/brick, Wang tiles + Voronoi texture generation, procedural noise synthesis (simplex FBM, Worley cells, domain warp). VR slider controls per shader.",
+			"dev_themes": [
+				"shaders",
+				"visual"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "shader_05_patterns",
 			"map_ready": false,
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders",
-			"complexity": "advanced",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"shader_05_patterns": {
 			"name": "Shader 05 — Patterns",
-			"lookup_name": "shader_05_patterns",
-			"description": "Book of Shaders patterns — 3 modes: classic tiling/truchet/brick, Wang tiles + Voronoi texture generation, procedural noise synthesis (simplex FBM, Worley cells, domain warp). VR slider controls per shader.",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_05_patterns.tscn",
-			"category": "shaders",
+			"sequence": "shaders",
 			"tags": [
 				"book_of_shaders",
 				"patterns",
@@ -306,279 +737,324 @@
 				"worley",
 				"aperiodic",
 				"shaders"
+			]
+		},
+		"shader_06_random": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Book of Shaders chapter on randomness and hash functions in shaders.",
+			"dev_themes": [
+				"shaders",
+				"visual"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "shader_06_random",
 			"map_ready": false,
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders",
-			"complexity": "advanced",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"shader_06_random": {
 			"name": "Shader 06 — Random",
-			"lookup_name": "shader_06_random",
-			"description": "Book of Shaders chapter on randomness and hash functions in shaders.",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_06_random.tscn",
-			"category": "shaders",
+			"sequence": "shaders",
 			"tags": [
 				"book_of_shaders",
 				"random",
 				"hash",
 				"shaders"
+			]
+		},
+		"shader_07_noise": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Book of Shaders chapter on Perlin noise and gradient noise.",
+			"dev_themes": [
+				"shaders",
+				"visual"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "shader_07_noise",
 			"map_ready": false,
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders",
-			"complexity": "advanced",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"shader_07_noise": {
 			"name": "Shader 07 — Noise",
-			"lookup_name": "shader_07_noise",
-			"description": "Book of Shaders chapter on Perlin noise and gradient noise.",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_07_noise.tscn",
-			"category": "shaders",
+			"sequence": "shaders",
 			"tags": [
 				"book_of_shaders",
 				"noise",
 				"perlin",
 				"shaders"
+			]
+		},
+		"shader_08_cellularnoise": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Book of Shaders chapter on Voronoi and cellular noise patterns.",
+			"dev_themes": [
+				"biology",
+				"shaders",
+				"visual"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "shader_08_cellularnoise",
 			"map_ready": false,
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders",
-			"complexity": "advanced",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"shader_08_cellularnoise": {
 			"name": "Shader 08 — Cellular Noise",
-			"lookup_name": "shader_08_cellularnoise",
-			"description": "Book of Shaders chapter on Voronoi and cellular noise patterns.",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_08_cellularnoise.tscn",
-			"category": "shaders",
+			"sequence": "shaders",
 			"tags": [
 				"book_of_shaders",
 				"cellular_noise",
 				"voronoi",
 				"shaders"
+			]
+		},
+		"shader_09_fbm": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Book of Shaders chapter on fractal Brownian motion and layered noise.",
+			"dev_themes": [
+				"shaders",
+				"visual"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "shader_09_fbm",
 			"map_ready": false,
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders",
-			"complexity": "advanced",
-			"dev_themes": [
-				"biology",
-				"shaders",
-				"visual"
-			]
-		},
-		"shader_09_fbm": {
 			"name": "Shader 09 — Fractal Brownian Motion",
-			"lookup_name": "shader_09_fbm",
-			"description": "Book of Shaders chapter on fractal Brownian motion and layered noise.",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_09_fbm.tscn",
-			"category": "shaders",
+			"sequence": "shaders",
 			"tags": [
 				"book_of_shaders",
 				"fbm",
 				"fractal",
 				"noise",
 				"shaders"
+			]
+		},
+		"shader_10_reactiondiffusion": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Book of Shaders chapter on reaction-diffusion systems and Turing patterns.",
+			"dev_themes": [
+				"shaders",
+				"visual"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "shader_10_reactiondiffusion",
 			"map_ready": false,
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders",
-			"complexity": "advanced",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"shader_10_reactiondiffusion": {
 			"name": "Shader 10 — Reaction Diffusion",
-			"lookup_name": "shader_10_reactiondiffusion",
-			"description": "Book of Shaders chapter on reaction-diffusion systems and Turing patterns.",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_10_reactiondiffusion.tscn",
-			"category": "shaders",
+			"sequence": "shaders",
 			"tags": [
 				"book_of_shaders",
 				"reaction_diffusion",
 				"turing",
 				"shaders"
+			]
+		},
+		"shader_11_queerrubber": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Book of Shaders chapter exploring queer rubber material aesthetics.",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "shader_11_queerrubber",
 			"map_ready": false,
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders",
-			"complexity": "advanced",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"shader_11_queerrubber": {
 			"name": "Shader 11 — Queer Rubber",
-			"lookup_name": "shader_11_queerrubber",
-			"description": "Book of Shaders chapter exploring queer rubber material aesthetics.",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_11_queerrubber.tscn",
-			"category": "shaders",
+			"sequence": "shaders",
 			"tags": [
 				"book_of_shaders",
 				"queer",
 				"rubber",
 				"material",
 				"shaders"
+			]
+		},
+		"shader_12_pinkextravaganza": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Book of Shaders chapter with vibrant pink shader extravaganza effects.",
+			"dev_themes": [
+				"shaders",
+				"visual"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "shader_12_pinkextravaganza",
 			"map_ready": false,
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"sequence": "shaders",
-			"complexity": "advanced",
-			"dev_themes": [
-				"art",
-				"shaders",
-				"visual"
-			]
-		},
-		"shader_12_pinkextravaganza": {
 			"name": "Shader 12 — Pink Extravaganza",
-			"lookup_name": "shader_12_pinkextravaganza",
-			"description": "Book of Shaders chapter with vibrant pink shader extravaganza effects.",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_12_pinkextravaganza.tscn",
-			"category": "shaders",
+			"sequence": "shaders",
 			"tags": [
 				"book_of_shaders",
 				"pink",
 				"extravaganza",
 				"shaders"
+			]
+		},
+		"shader_arch_gallery": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "A barrel-vault arch tunnel where each section has a different GPU shader. Walk through to see 20 shaders on curved walls, ceiling, and floor.",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "shader_arch_gallery",
+			"map_ready": true,
+			"map_sequences": [
+				"patterngeneration"
+			],
+			"name": "Shader Arch Gallery",
+			"scene": "res://commons/artifacts/shader_arch_gallery/shader_arch_gallery.tscn",
+			"sequence": "patterngeneration",
+			"tags": [
+				"shader",
+				"gallery",
+				"arch",
+				"tunnel",
+				"surfacetool",
+				"showcase"
+			]
+		},
+		"shader_bibliotek": {
+			"category": "shaders",
+			"complexity": "intermediate",
+			"description": "Freestanding wall of cubes — each cube showcases a different shader from across the project. A physical library catalog of computational substrates.",
+			"dev_themes": [
+				"shaders",
+				"visual",
+				"substrate",
+				"library"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "shader_bibliotek",
+			"map_ready": true,
+			"map_sequences": [
+				"shaders"
+			],
+			"name": "Substrate Bibliotek",
+			"scene": "res://commons/artifacts/shader_bibliotek/shader_bibliotek.tscn",
+			"sequence": "shaders",
+			"spatial_footprint": {
+				"grid_cells": [
+					4.0,
+					1.0,
+					3.0
+				],
+				"size_group": "medium"
+			},
+			"tags": [
+				"shaders",
+				"substrate",
+				"library",
+				"showcase",
+				"wall",
+				"catalog"
+			]
+		},
+		"shader_gallery": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Main gallery showcasing various shader techniques and effects.",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "shader_gallery",
+			"map_ready": false,
+			"map_sequences": [],
+			"name": "Shader Gallery",
+			"parameters": {
+				"footprint": [
+					8.0,
+					6.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/shaders/Shader_Gallery.tscn",
+			"sequence": "shaders",
+			"tags": [
+				"gallery",
+				"showcase",
+				"shaders"
+			]
+		},
+		"tiles_explained": {
+			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Visual explanation of tile-based shader patterns and tiling techniques.",
+			"dev_themes": [
+				"shaders",
+				"visual"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "tiles_explained",
 			"map_ready": false,
 			"map_sequences": [
-				"patterngeneration"
+				"unused"
 			],
+			"name": "Tiles Explained",
+			"parameters": {
+				"footprint": [
+					4.0,
+					1.0,
+					4.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/shaders/tilesexplained/tiles_explained.tscn",
 			"sequence": "shaders",
-			"complexity": "advanced",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"cove_display": {
-			"name": "Cove Display",
-			"lookup_name": "cove_display",
-			"description": "Cyclorama/infinity cove surface — curved floor-to-wall form built with SurfaceTool. Accepts any shader via grid config. Continuous UV mapping for seamless tiling.",
-			"scene": "res://commons/artifacts/cove_display/cove_display.tscn",
-			"category": "shaders",
 			"tags": [
-				"cove",
-				"cyclorama",
-				"surface_tool",
-				"display",
-				"shader",
-				"configurable",
-				"pattern"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"patterngeneration",
-				"mosaicanalysis"
-			],
-			"sequence": "patterngeneration",
-			"complexity": "advanced",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"pixel_carpet_gallery": {
-			"name": "Pixel Carpet Gallery",
-			"lookup_name": "pixel_carpet_gallery",
-			"description": "30m corridor with 69 procedural carpet panels on floor, walls, and ceiling. Art to Eat-inspired installation using wallpaper_tile shader with 17 groups and 10 neon palettes.",
-			"scene": "res://algorithms/shaders/pixel_carpet_gallery/pixel_carpet_gallery.tscn",
-			"category": "shaders",
-			"tags": [
-				"gallery",
-				"carpet",
-				"wallpaper_groups",
-				"installation",
-				"art_to_eat",
-				"corridor"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"patterngeneration"
-			],
-			"sequence": "patterngeneration",
-			"complexity": "advanced",
-			"dev_themes": [
-				"art",
-				"shaders",
-				"visual"
-			]
-		},
-		"carpet_cove_gallery": {
-			"name": "Carpet Cove Gallery",
-			"lookup_name": "carpet_cove_gallery",
-			"description": "Grid-based gallery of 24 cyclorama cove displays with wallpaper patterns. Coves in facing rows with 3m aisle, each showing a unique pattern on curved surfaces.",
-			"scene": "res://algorithms/shaders/carpet_cove_gallery/carpet_cove_gallery.tscn",
-			"category": "shaders",
-			"tags": [
-				"gallery",
-				"cove",
-				"cyclorama",
-				"wallpaper_groups",
-				"installation",
-				"grid_aligned"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"patterngeneration"
-			],
-			"sequence": "patterngeneration",
-			"complexity": "intermediate",
-			"dev_themes": [
-				"art",
-				"shaders",
-				"visual"
+				"tiles",
+				"patterns",
+				"tiling",
+				"shaders"
 			]
 		},
 		"wall_cove": {
-			"name": "Wall Cove",
-			"lookup_name": "wall_cove",
-			"description": "Half-cove slope artifact — curved floor-to-wall transition built with SurfaceTool. High-res quarter-circle curve with continuous UVs for shader tiling. Place at wall base for smooth architectural transition.",
-			"scene": "res://commons/artifacts/wall_cove/wall_cove.tscn",
 			"category": "shaders",
+			"complexity": "advanced",
+			"description": "Half-cove slope artifact — curved floor-to-wall transition built with SurfaceTool. High-res quarter-circle curve with continuous UVs for shader tiling. Place at wall base for smooth architectural transition.",
+			"dev_themes": [
+				"art",
+				"shaders",
+				"visual"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "wall_cove",
+			"map_ready": true,
+			"map_sequences": [
+				"patterngeneration",
+				"array_tutorial"
+			],
+			"name": "Wall Cove",
+			"scene": "res://commons/artifacts/wall_cove/wall_cove.tscn",
+			"sequence": "patterngeneration",
 			"tags": [
 				"cove",
 				"slope",
@@ -588,27 +1064,26 @@
 				"wall",
 				"transition",
 				"architectural"
+			]
+		},
+		"wall_pattern_colorizer": {
+			"category": "shaders",
+			"complexity": "intermediate",
+			"description": "Colors wall cubes in the GridSystem MultiMesh using wallpaper group tiling math. Each wall cube becomes a pixel in the pattern. Uses per-instance colors like GridColorizer.",
+			"dev_themes": [
+				"shaders",
+				"visual"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "wall_pattern_colorizer",
 			"map_ready": true,
 			"map_sequences": [
 				"patterngeneration",
 				"array_tutorial"
 			],
-			"sequence": "patterngeneration",
-			"complexity": "advanced",
-			"dev_themes": [
-				"art",
-				"shaders",
-				"visual"
-			]
-		},
-		"wall_pattern_colorizer": {
 			"name": "Wall Pattern Colorizer",
-			"lookup_name": "wall_pattern_colorizer",
-			"description": "Colors wall cubes in the GridSystem MultiMesh using wallpaper group tiling math. Each wall cube becomes a pixel in the pattern. Uses per-instance colors like GridColorizer.",
 			"scene": "res://commons/artifacts/wall_pattern_colorizer/wall_pattern_colorizer.tscn",
-			"category": "shaders",
+			"sequence": "patterngeneration",
 			"tags": [
 				"colorizer",
 				"wallpaper_groups",
@@ -616,79 +1091,26 @@
 				"wall",
 				"pattern",
 				"configurable"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"patterngeneration",
-				"array_tutorial"
-			],
-			"sequence": "patterngeneration",
-			"complexity": "intermediate",
-			"dev_themes": [
-				"shaders",
-				"visual"
 			]
 		},
-		"wall_shader_showcase": {
-			"name": "Wall Shader Showcase",
-			"lookup_name": "wall_shader_showcase",
-			"description": "Replaces GridMultiMesh material with GPU shaders from the shader library. Cycles through different shaders on wall cubes — voronoi, tartan, rothko, truchet, etc.",
-			"scene": "res://commons/artifacts/wall_shader_showcase/wall_shader_showcase.tscn",
+		"wall_pattern_gallery": {
 			"category": "shaders",
-			"tags": [
-				"shader",
-				"showcase",
-				"multimesh",
-				"wall",
-				"configurable",
-				"cycling"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"patterngeneration"
-			],
-			"sequence": "patterngeneration",
 			"complexity": "advanced",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"shader_arch_gallery": {
-			"name": "Shader Arch Gallery",
-			"lookup_name": "shader_arch_gallery",
-			"description": "A barrel-vault arch tunnel where each section has a different GPU shader. Walk through to see 20 shaders on curved walls, ceiling, and floor.",
-			"scene": "res://commons/artifacts/shader_arch_gallery/shader_arch_gallery.tscn",
-			"category": "shaders",
-			"tags": [
-				"shader",
-				"gallery",
-				"arch",
-				"tunnel",
-				"surfacetool",
-				"showcase"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"patterngeneration"
-			],
-			"sequence": "patterngeneration",
-			"complexity": "advanced",
+			"description": "Overlays wallpaper group shader patterns on grid wall cubes in clusters. Like the catalyst chromatic mode but with all 17 wallpaper groups as GPU shaders.",
 			"dev_themes": [
 				"art",
 				"shaders",
 				"visual"
-			]
-		},
-		"wall_pattern_gallery": {
-			"name": "Wall Pattern Gallery",
+			],
+			"include_in_map_data": true,
 			"lookup_name": "wall_pattern_gallery",
-			"description": "Overlays wallpaper group shader patterns on grid wall cubes in clusters. Like the catalyst chromatic mode but with all 17 wallpaper groups as GPU shaders.",
+			"map_ready": true,
+			"map_sequences": [
+				"patterngeneration"
+			],
+			"name": "Wall Pattern Gallery",
 			"scene": "res://commons/artifacts/wall_pattern_gallery/wall_pattern_gallery.tscn",
-			"category": "shaders",
+			"sequence": "patterngeneration",
 			"tags": [
 				"shader",
 				"wallpaper",
@@ -696,442 +1118,32 @@
 				"gallery",
 				"grid",
 				"catalyst"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"patterngeneration"
-			],
-			"sequence": "patterngeneration",
+			]
+		},
+		"wall_shader_showcase": {
+			"category": "shaders",
 			"complexity": "advanced",
+			"description": "Replaces GridMultiMesh material with GPU shaders from the shader library. Cycles through different shaders on wall cubes — voronoi, tartan, rothko, truchet, etc.",
 			"dev_themes": [
-				"art",
 				"shaders",
 				"visual"
-			]
-		},
-		"pattern_compositor": {
-			"name": "Pattern Compositor",
-			"lookup_name": "pattern_compositor",
-			"description": "Zone-based pattern composition using the SpatialComposition library. Presets: carpet (border/field/medallion), facade (base/columns/windows/cornice), mosaic, quilt, tunnel. Each zone gets a different wallpaper group shader.",
-			"scene": "res://commons/artifacts/pattern_compositor/pattern_compositor.tscn",
-			"category": "shaders",
-			"tags": [
-				"compositor",
-				"pattern",
-				"zones",
-				"carpet",
-				"facade",
-				"wallpaper_groups",
-				"composition",
-				"reusable"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "wall_shader_showcase",
 			"map_ready": true,
 			"map_sequences": [
 				"patterngeneration"
 			],
+			"name": "Wall Shader Showcase",
+			"scene": "res://commons/artifacts/wall_shader_showcase/wall_shader_showcase.tscn",
 			"sequence": "patterngeneration",
-			"complexity": "advanced",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"art_history_gallery": {
-			"name": "Art History Gallery",
-			"lookup_name": "art_history_gallery",
-			"description": "Walk-through exhibition of 20 art history composition presets. Persian carpet, Islamic geometric, Roman mosaic, Art Deco, De Stijl, Bauhaus, Celtic knot, Sashiko, Byzantine, Navajo, Chinese lattice, Gothic rose, Kente, Zellige, Aztec, Victorian, Log cabin quilt, Mud cloth, Palazzo, Pixel quilt.",
-			"scene": "res://commons/artifacts/art_history_gallery/art_history_gallery.tscn",
-			"category": "shaders",
 			"tags": [
-				"gallery",
-				"art_history",
-				"composition",
-				"stress_test",
-				"wallpaper_groups",
-				"installation",
-				"20_presets"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"patterngeneration"
-			],
-			"sequence": "patterngeneration",
-			"complexity": "advanced",
-			"dev_themes": [
-				"art",
-				"shaders",
-				"visual"
-			]
-		},
-		"Shader_Gallery": {
-			"lookup_name": "Shader_Gallery",
-			"name": "Shader_Gallery",
-			"description": "Shader_Gallery",
-			"scene": "res://algorithms/shaders/Shader_Gallery.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"patterngeneration"
-			],
-			"footprint": [
-				8,
-				6,
-				6
-			],
-			"size_group": "environment",
-			"parameters": {
-				"footprint": [
-					8,
-					6,
-					6
-				],
-				"size_group": "environment"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"shader"
-			],
-			"dev_themes": [
-				"art",
-				"shaders",
-				"visual"
-			]
-		},
-		"flashlight_demo": {
-			"lookup_name": "flashlight_demo",
-			"name": "flashlight_demo",
-			"description": "flashlight_demog",
-			"scene": "res://algorithms/light/flashlight_demo/flashlight_demo.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"color"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			],
-			"tags": [
-				"shader"
-			]
-		},
-		"clippingplanes": {
-			"lookup_name": "clippingplanes",
-			"name": "Clipping Planes",
-			"description": "Interactive clipping plane algorithms for geometric visualization and spatial cutting",
-			"scene": "res://algorithms/effects/clipping/clippingplanes.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			],
-			"tags": [
-				"shader"
-			]
-		},
-		"alphahash": {
-			"lookup_name": "alphahash",
-			"name": "Alpha Hash",
-			"description": "Post-processing alpha hash algorithm for transparent texture generation and anti-aliasing",
-			"scene": "res://algorithms/postprocessing/alfahash/alphahash.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				2,
-				2,
-				2
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"cryptography"
-			],
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"postprocessing_bloom": {
-			"lookup_name": "postprocessing_bloom",
-			"name": "Post-Processing Bloom",
-			"description": "Advanced bloom post-processing effect with configurable intensity and threshold parameters",
-			"scene": "res://algorithms/postprocessing/bloom/postprocessing_bloom.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				2,
-				2,
-				2
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			],
-			"tags": [
-				"shader"
-			]
-		},
-		"buffergeometryparticles": {
-			"lookup_name": "buffergeometryparticles",
-			"name": "Buffer Geometry Particles",
-			"description": "High-performance particle system using buffer geometry for efficient rendering and animation",
-			"scene": "res://algorithms/shaders/buffer/buffergeometryparticles.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"simulation"
-			],
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"dynamiccubemap": {
-			"lookup_name": "dynamiccubemap",
-			"name": "Dynamic Cube Map",
-			"description": "Real-time dynamic cube map generation for environmental reflections and lighting",
-			"scene": "res://algorithms/shaders/dynamicubemap/dynamiccubemap.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				4,
-				4,
-				4
-			],
-			"size_group": "room_scale",
-			"parameters": {
-				"footprint": [
-					4,
-					4,
-					4
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"animation"
-			],
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"materialstransmission": {
-			"lookup_name": "materialstransmission",
-			"name": "Materials Transmission",
-			"description": "Advanced material transmission and refraction algorithms for realistic glass and transparent effects",
-			"scene": "res://algorithms/shaders/materialtransmission/materialstransmission.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				2,
-				2,
-				2
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			],
-			"tags": [
-				"shader"
-			]
-		},
-		"science_screen": {
-			"name": "Science Screen",
-			"lookup_name": "science_screen",
-			"description": "Large VR display showing 2D abstractions of nearby 3D artifacts. Detects grid-aware artifacts and renders simplified pixel-grid views with algorithm name, dimensions, and cell stats. The meeting point of 2D and 3D — split consciousness between body experience and visual understanding.",
-			"scene": "res://commons/artifacts/science_screen/science_screen.tscn",
-			"category": "shaders",
-			"tags": [
-				"display",
-				"screen",
-				"viewport",
-				"2d",
-				"abstraction",
-				"reflection",
-				"grid",
-				"configurable"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"sequence": "patterngeneration",
-			"parameters": {
-				"footprint": [
-					3,
-					2,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"shaders",
-				"visual"
-			]
-		},
-		"filter_screen": {
-			"name": "Filter Screen",
-			"lookup_name": "filter_screen",
-			"description": "A 3D-to-2D projection surface using a real Camera3D inside a SubViewport. Unlike the ScienceScreen (grid data), the FilterScreen projects the live 3D scene onto a flat monitor — teaching projection itself as a primitive. Filter modes: normal, wireframe, depth, normals, silhouette, grid overlay. Points foreshorten, lines lose depth, triangles change area based on viewing angle.",
-			"scene": "res://commons/artifacts/filter_screen/filter_screen.tscn",
-			"category": "shaders",
-			"tags": [
-				"display",
-				"screen",
-				"viewport",
-				"projection",
-				"camera",
-				"3d-to-2d",
-				"filter",
-				"configurable"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"sequence": "patterngeneration",
-			"parameters": {
-				"footprint": [
-					3,
-					2,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"shaders",
-				"visual",
-				"projection"
-			]
-		},
-		"shader_bibliotek": {
-			"name": "Substrate Bibliotek",
-			"lookup_name": "shader_bibliotek",
-			"description": "Freestanding wall of cubes — each cube showcases a different shader from across the project. A physical library catalog of computational substrates.",
-			"scene": "res://commons/artifacts/shader_bibliotek/shader_bibliotek.tscn",
-			"category": "shaders",
-			"tags": [
-				"shaders",
-				"substrate",
-				"library",
+				"shader",
 				"showcase",
+				"multimesh",
 				"wall",
-				"catalog"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": ["shaders"],
-			"sequence": "shaders",
-			"spatial_footprint": {
-				"grid_cells": [4, 1, 3],
-				"size_group": "medium"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"shaders",
-				"visual",
-				"substrate",
-				"library"
+				"configurable",
+				"cycling"
 			]
 		}
 	}

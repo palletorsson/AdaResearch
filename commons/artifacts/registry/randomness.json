@@ -1,90 +1,726 @@
 {
 	"artifacts": {
-		"RotateGridCubes": {
-			"name": "Slope Gradient Cubes",
-			"lookup_name": "RotateGridCubes",
-			"description": "Gradient slope test with animated rotation for walkability check.",
-			"scene": "res://algorithms/randomness/SlopeGradientCubes.tscn",
+		"2d_in_3d_randomness_vis": {
 			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
 			"complexity": "beginner",
-			"tags": [
-				"procedural"
-			],
+			"description": "An infoboard displaying 2D randomness algorithms rendered in 3D space, bridging flat visualizations with spatial understanding.",
 			"dev_themes": [
 				"probability",
 				"procedural",
 				"randomness"
-			]
-		},
-		"rotate_grid_cubes": {
-			"name": "Rotate Grid Cubes",
-			"lookup_name": "rotate_grid_cubes",
-			"description": "Rotates grid cubes with configurable patterns including alternating directions and phase offsets for passable slopes.",
-			"scene": "res://algorithms/randomness/RotateGridCubes.tscn",
-			"category": "procedural",
+			],
 			"include_in_map_data": true,
+			"lookup_name": "2d_in_3d_randomness_vis",
 			"map_ready": true,
 			"map_sequences": [
-				"transformation"
+				"randomness"
 			],
+			"name": "2D in 3D Randomness Visualization",
+			"parameters": {
+				"footprint": [
+					4.0,
+					3.0,
+					1.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/infoboards_3d/boards/Randomness/2d_in_3d_randomness_vis.tscn",
 			"sequence": "randomness",
-			"complexity": "intermediate",
 			"tags": [
 				"2d",
-				"grid",
+				"3d",
 				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
 			]
 		},
-		"random_edge_profile": {
-			"name": "Random Edge Profile",
-			"lookup_name": "random_edge_profile",
-			"description": "A planar surface that generates random edge profiles and patterns",
-			"scene": "res://algorithms/randomness/profile_random.tscn",
-			"category": "procedural",
+		"GaussianBlurCircle": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Demonstrates Gaussian blur applied to a circular region, showing how the bell curve kernel creates smooth, natural edge falloff.",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
 			"include_in_map_data": true,
+			"lookup_name": "GaussianBlurCircle",
 			"map_ready": true,
 			"map_sequences": [
 				"randomness"
 			],
+			"name": "Gaussian Blur Circle",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianBlurCircle.tscn",
 			"sequence": "randomness",
+			"tags": [
+				"emergence",
+				"graph",
+				"probability"
+			]
+		},
+		"GaussianBlurShader": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "GPU-accelerated Gaussian blur using a fragment shader. Real-time demonstration of the convolution kernel derived from the normal distribution.",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"footprint": [
+				3.0,
+				3.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "GaussianBlurShader",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Gaussian Blur Shader",
+			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianBlurShader.tscn",
+			"sequence": "randomness",
+			"size_group": "standard",
+			"tags": [
+				"animation",
+				"emergence",
+				"probability"
+			]
+		},
+		"GaussianPaintSplatter": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Generates paint splatter patterns using Gaussian distribution, creating natural clustering around a center point with density falling off like a bell curve.",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"footprint": [
+				4.0,
+				3.0,
+				4.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "GaussianPaintSplatter",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Gaussian Paint Splatter",
+			"parameters": {
+				"footprint": [
+					4.0,
+					3.0,
+					4.0
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianPaintSplatter.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
+			"tags": [
+				"emergence",
+				"probability",
+				"visualization"
+			]
+		},
+		"MeltingBerniniScene": {
+			"category": "procedural",
 			"complexity": "intermediate",
+			"description": "Noise-based vertex displacement applied to classical column geometry. Bernini's baroque forms dissolve under procedural noise fields.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				4,
+				9,
+				3
+			],
+			"include_in_map_data": true,
+			"lookup_name": "MeltingBerniniScene",
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"name": "Melting Bernini Columns",
+			"parameters": {
+				"footprint": [
+					4,
+					9,
+					3
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniScene.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
 			"tags": [
 				"3d",
 				"graph",
-				"probability",
 				"procedural"
-			],
+			]
+		},
+		"NoiseColors3D": {
+			"category": "procedural",
+			"complexity": "advanced",
+			"description": "Compares different noise 'colors' (white, pink, brown, blue) in 3D space, visualizing their distinct frequency distributions and correlation properties.",
 			"dev_themes": [
 				"probability",
 				"procedural",
 				"randomness"
+			],
+			"footprint": [
+				10,
+				7,
+				9
+			],
+			"include_in_map_data": true,
+			"lookup_name": "NoiseColors3D",
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"name": "Noise Colors 3D",
+			"parameters": {
+				"footprint": [
+					10,
+					7,
+					9
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/randomness/whitenoise/NoiseColors3D.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
+			"tags": [
+				"3d",
+				"procedural",
+				"sound"
+			]
+		},
+		"RandomGaussianTexture": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Generates textures with pixel values sampled from a Gaussian distribution, creating soft, natural-looking noise patterns.",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "RandomGaussianTexture",
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			],
+			"name": "Random Gaussian Texture",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/randomness/distributions/gaussian/RandomGaussianTexture.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"2d",
+				"emergence",
+				"probability",
+				"procedural"
+			]
+		},
+		"Random_Rotate_Random_XYZ": {
+			"category": "primitives",
+			"complexity": "intermediate",
+			"description": "Applies random rotation on all three axes (X, Y, Z), creating fully randomized orientations for chaotic arrangements.",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "Random_Rotate_Random_XYZ",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Rotate XYZ",
+			"scene": "res://algorithms/randomness/RandomRotateRandomXYZ/Random_Rotate_Random_XYZ.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"primitives",
+				"probability",
+				"procedural"
+			]
+		},
+		"RotateGridCubes": {
+			"category": "procedural",
+			"complexity": "beginner",
+			"description": "Gradient slope test with animated rotation for walkability check.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "RotateGridCubes",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Slope Gradient Cubes",
+			"scene": "res://algorithms/randomness/SlopeGradientCubes.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"procedural"
+			]
+		},
+		"VoxelNoiseROIs": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Voxel noise with regions of interest (ROIs) — isolated volumes where different noise parameters or thresholds apply, useful for terrain biomes.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VoxelNoiseROIs",
+			"map_ready": true,
+			"map_sequences": [
+				"grammar_systems",
+				"noise"
+			],
+			"name": "Voxel Noise ROIs",
+			"parameters": {
+				"footprint": [
+					25.0,
+					25.0,
+					25.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/randomness/voxelnoise/VoxelNoiseROIs.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"procedural",
+				"terrain"
+			]
+		},
+		"WhiteNoiseGallery": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "A gallery showcasing pure white noise — uniform random values with no correlation between samples. The baseline for understanding structured noise types.",
+			"dev_themes": [
+				"art",
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				20,
+				4,
+				20
+			],
+			"include_in_map_data": true,
+			"lookup_name": "WhiteNoiseGallery",
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"name": "White Noise Gallery",
+			"parameters": {
+				"footprint": [
+					20,
+					4,
+					20
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/randomness/whitenoise/WhiteNoiseGallery.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
+			"tags": [
+				"probability",
+				"procedural"
+			]
+		},
+		"bell_alley": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Constructs a corridor of cubes along Z that widens according to a Gaussian bell curve, creating a passage that narrows at the center and expands at the edges.",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "bell_alley",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Bell Curve Alley",
+			"scene": "res://algorithms/randomness/bell_alley/bell_alley.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"emergence",
+				"probability"
+			]
+		},
+		"blue_noise": {
+			"category": "procedural",
+			"complexity": "advanced",
+			"description": "Interactive blue noise generation for high-quality random sampling and distribution",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "blue_noise",
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"name": "Blue Noise",
+			"parameters": {
+				"footprint": [
+					21.0,
+					21.0,
+					1.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/randomness/blue_noise/blue_noise.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"noise",
+				"probability",
+				"procedural"
+			]
+		},
+		"bubble_particles": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Movement-based procedural bubble system — bubbles spawn in a configurable area, rise with randomized speeds and sizes, fade over time, and pop with synthesized audio. Concurrent sound limiting and pitch variation create an organic underwater soundscape.",
+			"dev_themes": [
+				"music",
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "bubble_particles",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Bubble Particles",
+			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/bubbleparticles/bubble_particles.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"animation",
+				"procedural",
+				"simulation",
+				"sorting",
+				"sound"
+			]
+		},
+		"bubbles_random": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "A particle system that generates random bubble effects with dynamic spawning",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				7.0,
+				2.0,
+				7.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "bubbles_random",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Bubbles",
+			"parameters": {
+				"footprint": [
+					7.0,
+					2.0,
+					7.0
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/randomness/random_bubbles/bubbles_random.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
+			"tags": [
+				"animation",
+				"probability",
+				"procedural",
+				"simulation",
+				"sorting"
+			]
+		},
+		"cloudvolume": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "3D volumetric cloud generation using noise algorithms for atmospheric and sky effects",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cloudvolume",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "Cloud Volume",
+			"parameters": {
+				"footprint": [
+					5.0,
+					5.0,
+					5.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/randomness/noise/cloudvolume/cloudvolume.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"3d",
+				"procedural"
+			]
+		},
+		"coin_toss": {
+			"category": "randomness",
+			"complexity": "beginner",
+			"description": "The simplest random experiment. Grab coins from a tray and toss them. A counter tracks the heads/tails ratio converging to 0.5 over many flips. Gold side = heads, silver side = tails.",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"lookup_name": "coin_toss",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Coin Toss",
+			"qfep_connection": "Bernoulli trial — the atom of probability. p = 0.5 as perfect symmetry.",
+			"scene": "res://algorithms/randomness/coin_toss/coin_toss.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"coin",
+				"bernoulli",
+				"binary",
+				"probability",
+				"convergence",
+				"interactive",
+				"grab"
+			]
+		},
+		"crystal_random_walk_demo": {
+			"category": "procedural",
+			"complexity": "advanced",
+			"description": "Random walk constrained to a crystal lattice structure, demonstrating how geometric constraints shape stochastic paths into crystalline forms.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "crystal_random_walk_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration_all"
+			],
+			"name": "Crystal Random Walk Demo",
+			"parameters": {
+				"footprint": [
+					7.0,
+					7.0,
+					7.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/randomness/randomwalk/scenes/crystal_random_walk_demo.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"probability",
+				"procedural"
+			]
+		},
+		"curl_noise_particles": {
+			"category": "procedural",
+			"complexity": "advanced",
+			"description": "Divergence-free curl noise driving 300 particles in smooth swirling ribbons. Cross product of two noise gradients guarantees incompressible flow. Particles color-shift from deep blue (slow) through cyan to white (fast), with trailing flow lines for visualization.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "curl_noise_particles",
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			],
+			"name": "Curl Noise Particles",
+			"scene": "res://commons/artifacts/curl_noise_particles/curl_noise_particles.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"curl_noise",
+				"divergence_free",
+				"particles",
+				"flow",
+				"noise",
+				"incompressible",
+				"multimesh",
+				"3d_display"
+			]
+		},
+		"dice_throw": {
+			"category": "randomness",
+			"complexity": "beginner",
+			"description": "A VR dice on a felt table. Grab and throw the dice — roll a 6 and 100 balls rain from the sky, roll a 1 and just 1 ball falls. Tracks roll statistics showing convergence to discrete uniform distribution with expected value 3.5.",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"lookup_name": "dice_throw",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Dice Throw",
+			"qfep_connection": "Equiprobability — each face equally likely. Fairness as geometric symmetry.",
+			"scene": "res://algorithms/randomness/dice_throw/dice_throw.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"dice",
+				"uniform_distribution",
+				"expected_value",
+				"probability",
+				"physics",
+				"interactive",
+				"grab"
+			]
+		},
+		"digital_materiality_glitch": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive exploration of digital materiality through glitch aesthetics and algorithmic artifacts",
+			"dev_themes": [
+				"art",
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				11.0,
+				10007.0,
+				7.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "digital_materiality_glitch",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Digital Materiality Glitch",
+			"parameters": {
+				"footprint": [
+					11.0,
+					10007.0,
+					7.0
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/randomness/digital_materiality_glitch/digital_materiality_glitch.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
+			"tags": [
+				"procedural"
+			]
+		},
+		"distribution_visualization": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Interactive visualization of statistical distributions and probability patterns",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "distribution_visualization",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Distribution Visualization",
+			"parameters": {
+				"footprint": [
+					7.0,
+					4.0,
+					2.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/randomness/distribution_visualization/distribution_visualization.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"emergence"
 			]
 		},
 		"entropy_axiom": {
-			"name": "Entropy Axiom",
-			"lookup_name": "entropy_axiom",
-			"description": "Visualizes the gradient from order to chaos using a 10x10x40 MultiMesh grid (4000 instances). Points transition from structured alignment to random displacement along the Z-axis.",
-			"scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn",
 			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Visualizes the gradient from order to chaos using a 10x10x40 MultiMesh grid (4000 instances). Points transition from structured alignment to random displacement along the Z-axis.",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"footprint": [
+				3.0,
+				3.0,
+				8.0
+			],
 			"include_in_map_data": true,
+			"lookup_name": "entropy_axiom",
 			"map_ready": true,
 			"map_sequences": [
 				"randomness",
 				"testmaps"
 			],
+			"name": "Entropy Axiom",
+			"scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn",
 			"sequence": "randomness",
-			"complexity": "advanced",
+			"size_group": "xlarge",
 			"tags": [
 				"2d",
 				"chaos",
@@ -93,1029 +729,55 @@
 				"l_system",
 				"probability",
 				"procedural"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
 			]
 		},
-		"plane_manipulator": {
-			"name": "plane_manipulator",
-			"lookup_name": "plane_manipulator",
-			"description": "This script animates a random walk on a 3D plane. It simulates walkers that move across the plane's surface, raising the ground to create trails in real-time.",
-			"scene": "res://algorithms/randomness/plane_effects/plane_manipulator.tscn",
-			"category": "procedural",
-			"dev_themes": [
-				"procedural",
-				"emergence"
-			],
-			"dev_category": "procedural_terrain",
-			"complexity": "intermediate",
-			"tags": [
-				"random_walk",
-				"terrain",
-				"realtime",
-				"trails",
-				"3d"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness"
-		},
-		"pheromone_terrain": {
-			"name": "Pheromone Terrain",
-			"lookup_name": "pheromone_terrain",
-			"description": "Swarm-based terrain generation where agents deposit pheromone trails that shape the landscape. Demonstrates emergent self-organization from simple local rules.",
-			"scene": "res://algorithms/randomness/pheromone_terrain/pheromone_terrain.tscn",
-			"category": "emergence",
-			"dev_themes": [
-				"procedural",
-				"emergence"
-			],
-			"dev_category": "procedural_terrain",
-			"complexity": "advanced",
-			"tags": [
-				"pheromone",
-				"swarm",
-				"terrain",
-				"self_organization"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness"
-		},
-		"randomup": {
-			"name": "Random Up",
-			"lookup_name": "randomup",
-			"description": "Randomly elevates objects upward with varying heights, demonstrating basic vertical displacement using uniform randomness.",
-			"scene": "res://algorithms/randomness/randomup/randomup.tscn",
-			"category": "primitives",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
+		"entropy_jar": {
+			"category": "randomness",
 			"complexity": "beginner",
-			"tags": [
-				"primitives",
-				"probability",
-				"procedural"
-			],
+			"description": "A glass jar of red and blue particles on a pedestal. Grab and shake to mix them — they never unmix. Live Shannon entropy readout tracks disorder. The second law of thermodynamics felt physically through VR interaction.",
 			"dev_themes": [
 				"probability",
 				"randomness"
-			]
-		},
-		"randompoints": {
-			"name": "randompoints",
-			"lookup_name": "randompoints",
-			"description": "Spawns labeled grab points distributed by 3D Gaussian noise inside a configurable volume.",
-			"scene": "res://algorithms/randomness/randompoints/randompoints.tscn",
-			"category": "emergence",
+			],
 			"include_in_map_data": true,
+			"interaction": "grab",
+			"lookup_name": "entropy_jar",
 			"map_ready": true,
 			"map_sequences": [
-				"noise"
+				"randomness"
 			],
+			"name": "Entropy Jar",
+			"qfep_connection": "Irreversibility — mixing is easy, unmixing is impossible. The arrow of time made tangible through embodied interaction.",
+			"scene": "res://algorithms/randomness/entropy_jar/entropy_jar.tscn",
 			"sequence": "randomness",
-			"complexity": "beginner",
 			"tags": [
-				"3d",
-				"emergence",
+				"entropy",
+				"thermodynamics",
+				"irreversibility",
+				"mixing",
+				"shannon",
+				"second_law",
+				"physics",
 				"interactive",
-				"probability",
-				"procedural",
-				"vr"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"randompoints_gaussian": {
-			"name": "randompoints_gaussian",
-			"lookup_name": "randompoints_gaussian",
-			"description": "Variant of the grab-point scatter preconfigured to sample from a 3D Gaussian cloud with labeled spheres.",
-			"scene": "res://algorithms/randomness/randompoints/randompoints_gaussian.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "beginner",
-			"tags": [
-				"3d",
-				"emergence",
-				"interactive",
-				"probability",
-				"vr"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"randompoints_uniform": {
-			"name": "randompoints_uniform",
-			"lookup_name": "randompoints_uniform",
-			"description": "Scatters grab spheres uniformly through a bounding box and labels each point.",
-			"scene": "res://algorithms/randomness/randompoints/randompoints_uniform.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "beginner",
-			"tags": [
-				"emergence",
-				"interactive",
-				"vr"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"pixel_cloud": {
-			"name": "pixel_cloud",
-			"lookup_name": "pixel_cloud",
-			"description": "Builds an upward-biased self-avoiding random walk and places cubes along the path to form a pixel cloud sculpture.",
-			"scene": "res://algorithms/randomness/pixelcloud/pixel_cloud.tscn",
-			"category": "procedural",
-			"dev_themes": [
-				"procedural",
-				"emergence"
-			],
-			"dev_category": "procedural_sculpture",
-			"complexity": "intermediate",
-			"tags": [
-				"random_walk",
-				"self_avoiding",
-				"sculpture",
-				"voxel",
-				"3d"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					5,
-					8,
-					5
-				],
-				"size_group": "environment"
-			}
-		},
-		"randompoint": {
-			"name": "randompoint",
-			"lookup_name": "randompoint",
-			"description": "Drops a single draggable point inside an XY bounds and keeps its billboarded coordinate label in range.",
-			"scene": "res://algorithms/randomness/randompoint/randompoint.tscn",
-			"category": "primitives",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"primitives"
-			],
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"randomlines": {
-			"name": "Random Lines",
-			"lookup_name": "randomlines",
-			"description": "ImmediateMesh random line segments with 3 distributions (uniform/Gaussian/clustered), 3 color modes (solid/golden-ratio/length-gradient), optional drift animation and bounding box. Config: num_lines, area_size_x/y/z, distribution, cluster_count, cluster_spread, color_mode, animate, drift_speed, show_bounding_box",
-			"scene": "res://algorithms/randomness/randomlines/randomlines.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"footprint": [
-				2,
-				2,
-				2
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"3d",
-				"procedural",
-				"probability",
-				"visualization"
-			],
-			"dev_themes": [
-				"probability",
-				"randomness",
-				"statistics"
-			]
-		},
-		"bubbles_random": {
-			"name": "Random Bubbles",
-			"lookup_name": "bubbles_random",
-			"description": "A particle system that generates random bubble effects with dynamic spawning",
-			"scene": "res://algorithms/randomness/random_bubbles/bubbles_random.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					7,
-					6,
-					7
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"animation",
-				"probability",
-				"procedural",
-				"simulation",
-				"sorting"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"random_walk_128": {
-			"name": "Random Walk 128x128",
-			"lookup_name": "random_walk_128",
-			"description": "Fine-grained random walk on 128x128 grid using tiny cubes",
-			"scene": "res://algorithms/randomness/random_walk_128.tscn",
-			"category": "primitives",
-			"dev_themes": [
-				"procedural",
-				"primitives"
-			],
-			"dev_category": "random_walk_algorithm",
-			"complexity": "beginner",
-			"tags": [
-				"random_walk",
-				"grid",
-				"voxel",
-				"2d",
-				"visualization"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness"
-		},
-		"ten_print_maze_3d": {
-			"name": "ten_print_maze_3d",
-			"lookup_name": "ten_print_maze_3d",
-			"description": "Extrudes the classic 10 PRINT pattern into a standing maze and animates an ant pathfinder through it.",
-			"scene": "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
-			"category": "procedural",
-			"dev_themes": [
-				"procedural",
-				"emergence"
-			],
-			"dev_category": "procedural_maze",
-			"complexity": "intermediate",
-			"tags": [
-				"10print",
-				"maze",
-				"pathfinding",
-				"generative",
-				"3d",
-				"classic"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness"
-		},
-		"digital_materiality_glitch": {
-			"name": "Digital Materiality Glitch",
-			"lookup_name": "digital_materiality_glitch",
-			"description": "Interactive exploration of digital materiality through glitch aesthetics and algorithmic artifacts",
-			"scene": "res://algorithms/randomness/digital_materiality_glitch/digital_materiality_glitch.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					17,
-					24,
-					21
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"procedural"
-			],
-			"dev_themes": [
-				"art",
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"distribution_visualization": {
-			"name": "Distribution Visualization",
-			"lookup_name": "distribution_visualization",
-			"description": "Interactive visualization of statistical distributions and probability patterns",
-			"scene": "res://algorithms/randomness/distribution_visualization/distribution_visualization.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					7,
-					4,
-					2
-				],
-				"size_group": "environment"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"emergence"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"pickup_cube_placer": {
-			"name": "pickup_cube_placer",
-			"lookup_name": "pickup_cube_placer",
-			"description": "Finds the active grid system and populates pickup cubes using randomized or patterned placement modes.",
-			"scene": "res://algorithms/randomness/pickup_cube_placer.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"2d",
-				"procedural",
-				"simulation"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"walk_random": {
-			"name": "Random Walker",
-			"lookup_name": "walk_random",
-			"description": "An algorithmic walker that creates trails through the grid space",
-			"scene": "res://algorithms/randomness/walk_random.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"2d",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"rotate_random_y": {
-			"name": "Rotate Random Y",
-			"lookup_name": "rotate_random_y",
-			"description": "Applies random Y-axis rotation to objects, creating varied orientations while maintaining vertical alignment.",
-			"scene": "res://algorithms/randomness/RotateRandomY/rotate_random_y.tscn",
-			"category": "primitives",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"primitives",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"Random_Rotate_Random_XYZ": {
-			"name": "Random Rotate XYZ",
-			"lookup_name": "Random_Rotate_Random_XYZ",
-			"description": "Applies random rotation on all three axes (X, Y, Z), creating fully randomized orientations for chaotic arrangements.",
-			"scene": "res://algorithms/randomness/RandomRotateRandomXYZ/Random_Rotate_Random_XYZ.tscn",
-			"category": "primitives",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"primitives",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"randomize_cubes_over_Z": {
-			"name": "Randomize Cubes Over Z",
-			"lookup_name": "randomize_cubes_over_Z",
-			"description": "Distributes cubes with increasing randomness along the Z-axis, visualizing a gradient from order to disorder.",
-			"scene": "res://algorithms/randomness/RandomizeCubesOverZ/randomize_cubes_over_Z.tscn",
-			"category": "primitives",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "beginner",
-			"tags": [
-				"primitives"
-			],
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"plane_random": {
-			"name": "Plane Random",
-			"lookup_name": "plane_random",
-			"description": "Generates a planar surface with random vertex displacement, creating organic undulating terrain from flat geometry.",
-			"scene": "res://algorithms/randomness/PlaneRandom/plane_random.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"graph",
-				"probability",
-				"procedural",
-				"terrain"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"random_bell_curve": {
-			"name": "Random Bell Curve Terrain",
-			"lookup_name": "random_bell_curve",
-			"description": "Builds a 20x20 quad grid shaped into a 3D Gaussian bell curve with HeightMapShape3D collisions. Optional surface noise adds organic variation.",
-			"scene": "res://algorithms/randomness/randombellcurve/random_bell_curve.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"2d",
-				"3d",
-				"emergence",
-				"probability",
-				"procedural",
-				"terrain"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"pipe_dream": {
-			"name": "Pipe Dream",
-			"lookup_name": "pipe_dream",
-			"description": "A 3D recreation of the classic Windows Pipes screensaver. Grows a colored pipe that randomly changes direction, building an intricate network over 100 segments.",
-			"scene": "res://algorithms/randomness/pipedream/pipe_dream.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"graph",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"bell_alley": {
-			"name": "Bell Curve Alley",
-			"lookup_name": "bell_alley",
-			"description": "Constructs a corridor of cubes along Z that widens according to a Gaussian bell curve, creating a passage that narrows at the center and expands at the edges.",
-			"scene": "res://algorithms/randomness/bell_alley/bell_alley.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"emergence",
-				"probability"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"remove_random": {
-			"name": "Random Destructor",
-			"lookup_name": "remove_random",
-			"description": "A demolition algorithm that randomly removes cubes from the grid",
-			"scene": "res://algorithms/randomness/remove_random.tscn",
-			"category": "primitives",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "beginner",
-			"tags": [
-				"2d",
-				"primitives",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"height_random": {
-			"name": "Height Distributor",
-			"lookup_name": "height_random",
-			"description": "An elevation algorithm that randomly raises cubes to create landscapes",
-			"scene": "res://algorithms/randomness/height_random.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"gaussian_random": {
-			"name": "Gaussian Generator",
-			"lookup_name": "gaussian_random",
-			"description": "A bell curve algorithm that creates natural-looking height distributions",
-			"scene": "res://algorithms/randomness/gaussian_random.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "advanced",
-			"tags": [
-				"emergence",
-				"probability"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"GaussianPaintSplatter": {
-			"name": "Gaussian Paint Splatter",
-			"lookup_name": "GaussianPaintSplatter",
-			"description": "Generates paint splatter patterns using Gaussian distribution, creating natural clustering around a center point with density falling off like a bell curve.",
-			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianPaintSplatter.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					3,
-					2,
-					1
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"emergence",
-				"probability",
-				"visualization"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"RandomGaussianTexture": {
-			"name": "Random Gaussian Texture",
-			"lookup_name": "RandomGaussianTexture",
-			"description": "Generates textures with pixel values sampled from a Gaussian distribution, creating soft, natural-looking noise patterns.",
-			"scene": "res://algorithms/randomness/distributions/gaussian/RandomGaussianTexture.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise",
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"2d",
-				"emergence",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"GaussianBlurCircle": {
-			"name": "Gaussian Blur Circle",
-			"lookup_name": "GaussianBlurCircle",
-			"description": "Demonstrates Gaussian blur applied to a circular region, showing how the bell curve kernel creates smooth, natural edge falloff.",
-			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianBlurCircle.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"emergence",
-				"graph",
-				"probability"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"GaussianBlurShader": {
-			"name": "Gaussian Blur Shader",
-			"lookup_name": "GaussianBlurShader",
-			"description": "GPU-accelerated Gaussian blur using a fragment shader. Real-time demonstration of the convolution kernel derived from the normal distribution.",
-			"scene": "res://algorithms/randomness/distributions/gaussian/GaussianBlurShader.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "advanced",
-			"tags": [
-				"animation",
-				"emergence",
-				"probability"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"WhiteNoiseGallery": {
-			"name": "White Noise Gallery",
-			"lookup_name": "WhiteNoiseGallery",
-			"description": "A gallery showcasing pure white noise — uniform random values with no correlation between samples. The baseline for understanding structured noise types.",
-			"scene": "res://algorithms/randomness/whitenoise/WhiteNoiseGallery.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					11,
-					3,
-					11
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"art",
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"NoiseColors3D": {
-			"name": "Noise Colors 3D",
-			"lookup_name": "NoiseColors3D",
-			"description": "Compares different noise 'colors' (white, pink, brown, blue) in 3D space, visualizing their distinct frequency distributions and correlation properties.",
-			"scene": "res://algorithms/randomness/whitenoise/NoiseColors3D.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					11,
-					6,
-					7
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"3d",
-				"procedural",
-				"sound"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"blue_noise": {
-			"name": "Blue Noise",
-			"lookup_name": "blue_noise",
-			"description": "Interactive blue noise generation for high-quality random sampling and distribution",
-			"scene": "res://algorithms/randomness/blue_noise/blue_noise.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					21,
-					21,
-					1
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"noise",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"noisetorus": {
-			"name": "noisetorus",
-			"lookup_name": "noisetorus",
-			"description": "Shader-driven torus whose surface ripples with animated noise and hue shifting.",
-			"scene": "res://algorithms/randomness/noisetorus/noisetorus.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"devexamples",
-				"noise",
-				"structure"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					6,
-					9,
-					6
-				],
-				"size_group": "environment"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"3d",
-				"color",
-				"geometry",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"noisetext": {
-			"name": "noisetext",
-			"lookup_name": "noisetext",
-			"description": "Applies the noise planet shader to 3D text and a plinth for animated logo signage.",
-			"scene": "res://algorithms/randomness/noisetext/noisetext.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise",
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"3d",
-				"procedural",
-				"string"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"noisesphere": {
-			"name": "noisesphere",
-			"lookup_name": "noisesphere",
-			"description": "Noise-deformed hemisphere rendered with the planet shader for atmospheric dome effects.",
-			"scene": "res://algorithms/randomness/noisesphere/noisesphere.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"meshes",
-				"noise"
-			],
-			"sequence": "randomness",
-			"complexity": "advanced",
-			"tags": [
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"sculpt_one": {
-			"name": "Sculpt One",
-			"lookup_name": "sculpt_one",
-			"description": "An artistic sculpting algorithm that randomly modifies and shapes geometric forms",
-			"scene": "res://algorithms/randomness/sculpt_one.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"procedural"
-			],
-			"dev_themes": [
-				"art",
-				"probability",
-				"procedural",
-				"randomness"
+				"grab"
 			]
 		},
 		"env_one": {
-			"name": "Environment One",
-			"lookup_name": "env_one",
-			"description": "A procedural environment generation algorithm using randomness for kitbashing",
-			"scene": "res://algorithms/randomness/env_one.tscn",
 			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "A procedural environment generation algorithm using randomness for kitbashing",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				58.0,
+				31.0,
+				59.0
+			],
 			"include_in_map_data": true,
+			"lookup_name": "env_one",
 			"map_ready": true,
 			"map_sequences": [
 				"computationalgeometry",
@@ -1127,1506 +789,82 @@
 				"proceduralaudio",
 				"randomness"
 			],
+			"name": "Environment One",
+			"scene": "res://algorithms/randomness/env_one.tscn",
 			"sequence": "randomness",
-			"complexity": "intermediate",
+			"size_group": "xlarge",
 			"tags": [
 				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"random_transformations_geometric": {
-			"name": "Random Transformations - Geometric",
-			"lookup_name": "random_transformations_geometric",
-			"description": "Random geometric transform visualization",
-			"scene": "res://algorithms/randomness/random_transformations/geometric_transforms/geometric_transforms.tscn",
-			"category": "primitives",
-			"interaction": "look",
-			"sequence": "randomness",
-			"artifact_type": "interactive_algorithm",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"parameters": {
-				"footprint": [
-					11,
-					5,
-					11
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"primitives",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"random_transformations_stochastic": {
-			"name": "Random Transformations - Stochastic",
-			"lookup_name": "random_transformations_stochastic",
-			"description": "Stochastic distribution demonstrations",
-			"scene": "res://algorithms/randomness/random_transformations/stochastic_operations/stochastic_operations.tscn",
-			"category": "emergence",
-			"interaction": "look",
-			"sequence": "randomness",
-			"artifact_type": "interactive_algorithm",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"parameters": {
-				"footprint": [
-					11,
-					13,
-					11
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"emergence",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"random_transformations_matrices": {
-			"name": "Random Transformations - Matrices",
-			"lookup_name": "random_transformations_matrices",
-			"description": "Random matrix visualization",
-			"scene": "res://algorithms/randomness/random_transformations/random_matrices/random_matrices.tscn",
-			"category": "primitives",
-			"interaction": "look",
-			"sequence": "randomness",
-			"artifact_type": "interactive_algorithm",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"parameters": {
-				"footprint": [
-					11,
-					13,
-					11
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"linear_algebra",
-				"primitives",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"random_transformations_noise": {
-			"name": "Random Transformations - Noise",
-			"lookup_name": "random_transformations_noise",
-			"description": "Noise-based distortion grid",
-			"scene": "res://algorithms/randomness/random_transformations/noise_based_distortion/noise_based_distortion.tscn",
-			"category": "procedural",
-			"interaction": "look",
-			"sequence": "randomness",
-			"artifact_type": "interactive_algorithm",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise",
-				"randomness"
-			],
-			"parameters": {
-				"footprint": [
-					11,
-					5,
-					11
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"2d",
-				"noise",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"particle_randomness_pure": {
-			"name": "Particle Randomness - Pure",
-			"lookup_name": "particle_randomness_pure",
-			"description": "Pure random particle movement",
-			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/pure_randomness/pure_randomness.tscn",
-			"category": "primitives",
-			"interaction": "touch_to_activate",
-			"sequence": "randomness",
-			"artifact_type": "interactive_algorithm",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"complexity": "intermediate",
-			"tags": [
-				"animation",
-				"particle",
-				"primitives",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"particle_randomness_perlin": {
-			"name": "Particle Randomness - Perlin",
-			"lookup_name": "particle_randomness_perlin",
-			"description": "Perlin-noise-driven particles",
-			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/perlin_noise/perlin_noise.tscn",
-			"category": "procedural",
-			"interaction": "touch_to_activate",
-			"sequence": "randomness",
-			"artifact_type": "interactive_algorithm",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise",
-				"randomness"
-			],
-			"complexity": "intermediate",
-			"tags": [
-				"particle",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"particle_randomness_patterns": {
-			"name": "Particle Randomness - Patterns",
-			"lookup_name": "particle_randomness_patterns",
-			"description": "Procedural pattern particles",
-			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/procedural_patterns/procedural_patterns.tscn",
-			"category": "procedural",
-			"interaction": "touch_to_activate",
-			"sequence": "randomness",
-			"artifact_type": "interactive_algorithm",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"complexity": "intermediate",
-			"tags": [
-				"particle",
-				"pattern",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"particle_randomness_emergent": {
-			"name": "Particle Randomness - Emergent",
-			"lookup_name": "particle_randomness_emergent",
-			"description": "Emergent behavior particle system",
-			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/emergent_behavior/emergent_behavior.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"emergence",
-				"particle",
-				"simulation"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"particle_randomness_evolutionary": {
-			"name": "Particle Randomness - Evolutionary",
-			"lookup_name": "particle_randomness_evolutionary",
-			"description": "Evolutionary algorithm particles",
-			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "advanced",
-			"tags": [
-				"emergence",
-				"particle"
-			],
-			"dev_themes": [
-				"biology",
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"noiselayers": {
-			"name": "Noise Layers",
-			"lookup_name": "noiselayers",
-			"description": "Demonstrates octave layering (fractal Brownian motion) by stacking multiple noise frequencies. Shows how combining scales creates natural complexity.",
-			"scene": "res://algorithms/randomness/noiselayers/noiselayers.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					50,
-					13,
-					50
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"animation",
-				"fractal",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"2d_in_3d_randomness_vis": {
-			"name": "2D in 3D Randomness Visualization",
-			"lookup_name": "2d_in_3d_randomness_vis",
-			"description": "An infoboard displaying 2D randomness algorithms rendered in 3D space, bridging flat visualizations with spatial understanding.",
-			"scene": "res://commons/infoboards_3d/boards/Randomness/2d_in_3d_randomness_vis.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					4,
-					3,
-					1
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"2d",
-				"3d",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"walkingsphere": {
-			"name": "walkingsphere",
-			"lookup_name": "walkingsphere",
-			"description": "Spike, Random walk, Cellular automata  sphere",
-			"scene": "res://algorithms/randomness/walkingsphere/walkingsphere.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"geometry",
-				"hazard",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"biology",
-				"emergence",
-				"probability",
-				"randomness"
 			]
 		},
 		"evolutionary_algorithms": {
-			"name": "Evolutionary Algorithms",
-			"lookup_name": "evolutionary_algorithms",
-			"description": "Particle system demonstrating selection, mutation, and crossover. Populations evolve toward fitness goals through randomized genetic operations.",
-			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn",
 			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Particle system demonstrating selection, mutation, and crossover. Populations evolve toward fitness goals through randomized genetic operations.",
+			"dev_themes": [
+				"biology",
+				"emergence",
+				"probability",
+				"randomness"
+			],
 			"include_in_map_data": true,
+			"lookup_name": "evolutionary_algorithms",
 			"map_ready": true,
 			"map_sequences": [
 				"fractals",
 				"particles",
 				"recursiveemergence"
 			],
+			"name": "Evolutionary Algorithms",
+			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn",
 			"sequence": "randomness",
-			"complexity": "advanced",
 			"tags": [
 				"emergence",
 				"simulation",
 				"sorting"
-			],
-			"dev_themes": [
-				"biology",
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"random_walk_collection": {
-			"name": "Random Walk Grab Paper",
-			"lookup_name": "random_walk_collection",
-			"description": "Interactive paper that demonstrates random walk algorithms with grab and manipulation capabilities",
-			"scene": "res://algorithms/randomness/randomwalk/scenes/random_walk_collection.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"interactive",
-				"origami",
-				"probability",
-				"procedural",
-				"vr"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"random_walk_grab_paper": {
-			"name": "Random Walk Grab Paper",
-			"lookup_name": "random_walk_grab_paper",
-			"description": "Interactive paper that demonstrates random walk algorithms with grab and manipulation capabilities",
-			"scene": "res://algorithms/randomness/randomwalk/scenes/random_walk_grab_paper.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"interactive",
-				"origami",
-				"probability",
-				"procedural",
-				"vr"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"crystal_random_walk_demo": {
-			"name": "Crystal Random Walk Demo",
-			"lookup_name": "crystal_random_walk_demo",
-			"description": "Random walk constrained to a crystal lattice structure, demonstrating how geometric constraints shape stochastic paths into crystalline forms.",
-			"scene": "res://algorithms/randomness/randomwalk/scenes/crystal_random_walk_demo.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"proceduralgeneration_all"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					7,
-					7,
-					7
-				],
-				"size_group": "environment"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"tessellation_lattice_demo": {
-			"name": "Tessellation Lattice Demo",
-			"lookup_name": "tessellation_lattice_demo",
-			"description": "Random walk on tessellated lattice structures (triangular, hexagonal, square), showing how tiling geometry affects diffusion patterns.",
-			"scene": "res://algorithms/randomness/randomwalk/scenes/tessellation_lattice_demo.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"mosaicanalysis"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					17,
-					17,
-					17
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"pattern",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"random_gaussian_texture": {
-			"name": "Random Gaussian Texture",
-			"lookup_name": "random_gaussian_texture",
-			"description": "Interactive Gaussian distribution texture generation for natural random patterns",
-			"scene": "res://algorithms/randomness/distributions/gaussian/RandomGaussianTexture.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"emergence",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"probability_distributions_3d": {
-			"name": "Probability Distributions 3D",
-			"lookup_name": "probability_distributions_3d",
-			"description": "Interactive 3D visualization of various probability distributions and statistical patterns",
-			"scene": "res://algorithms/randomness/distributions/ProbabilityDistributions3D.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "advanced",
-			"tags": [
-				"3d",
-				"emergence"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"pool_hole_noise": {
-			"name": "Pool Hole Noise",
-			"lookup_name": "pool_hole_noise",
-			"description": "Interactive cellular noise generation with pool hole pattern visualization",
-			"scene": "res://algorithms/randomness/noise/cellularnoise/scenes/pool_hole_noise.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise",
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					2,
-					1,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"noise",
-				"pattern",
-				"procedural"
-			],
-			"dev_themes": [
-				"biology",
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"neon_wave_grid": {
-			"name": "Neon Wave Grid",
-			"lookup_name": "neon_wave_grid",
-			"description": "Interactive Perlin noise-based neon wave grid with dynamic lighting effects",
-			"scene": "res://algorithms/randomness/noise/perlinnoise/scenes/NeonWaveGrid.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise",
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"2d",
-				"animation",
-				"grid",
-				"procedural",
-				"wave"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"perlin_noise_terrain": {
-			"name": "Perlin Noise Terrain",
-			"lookup_name": "perlin_noise_terrain",
-			"description": "Interactive 3D terrain generation using Perlin noise algorithms",
-			"scene": "res://algorithms/randomness/noise/perlinnoise/scenes/perlin_noise_terrain.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"noise",
-				"procedural",
-				"terrain"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"perlin_noise": {
-			"name": "Perlin Noise",
-			"lookup_name": "perlin_noise",
-			"description": "Interactive Perlin noise generation and visualization",
-			"scene": "res://algorithms/randomness/perlinnoise/perlinnoise.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					11,
-					6,
-					11
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"noise",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"pollock_painting_in_3d": {
-			"name": "Pollock Painting in 3D",
-			"lookup_name": "pollock_painting_in_3d",
-			"description": "Interactive 3D Jackson Pollock-inspired painting using movement-based procedural randomness",
-			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/PollockPaintingIn3d.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"animation",
-				"procedural"
-			],
-			"dev_themes": [
-				"art",
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"spawn_randomcubes": {
-			"name": "spawn_randomcubes",
-			"lookup_name": "spawn_randomcubes",
-			"description": "Interactive 3D Jackson Pollock-inspired painting using movement-based procedural randomness",
-			"scene": "res://algorithms/randomness/proceduralrandomness/objecttransforms/scenes/spawn_randomcubes.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					21,
-					6,
-					50
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"3d",
-				"animation",
-				"procedural"
-			],
-			"dev_themes": [
-				"art",
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"pollock_3d": {
-			"name": "Pollock 3D",
-			"lookup_name": "pollock_3d",
-			"description": "Interactive 3D Jackson Pollock-inspired art using movement-based procedural randomness",
-			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock3d/pollock_3d.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"animation",
-				"procedural"
-			],
-			"dev_themes": [
-				"art",
-				"probability",
-				"procedural",
-				"randomness"
 			]
 		},
 		"extreme_randomness": {
-			"name": "Extreme Randomness",
-			"lookup_name": "extreme_randomness",
+			"category": "procedural",
+			"complexity": "intermediate",
 			"description": "Interactive particle-based extreme randomness generation and visualization",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "extreme_randomness",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Extreme Randomness",
 			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
 			"sequence": "randomness",
-			"complexity": "intermediate",
 			"tags": [
 				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"random_decay_objects": {
-			"name": "Random Decay Objects",
-			"lookup_name": "random_decay_objects",
-			"description": "Interactive visualization of random decay processes and object degradation",
-			"scene": "res://algorithms/randomness/randomdecay/scenes/random_decay_objects.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"emergence",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"random_decay_multimesh": {
-			"name": "Random Decay MultiMesh",
-			"lookup_name": "random_decay_multimesh",
-			"description": "Two standing 2D decay stacks rendered with MultiMesh: 1m cubes and 1dm prisms that gradually drift, rotate, sink, and darken.",
-			"scene": "res://algorithms/randomness/randomdecay/scenes/random_decay_multimesh.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					6,
-					5,
-					2
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"2d",
-				"emergence",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"random_color_book_page_collection": {
-			"name": "Random Color Book Page Collection",
-			"lookup_name": "random_color_book_page_collection",
-			"description": "Interactive collection of randomly generated colored book pages using procedural algorithms",
-			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_color_book_page_collection.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"testmaps"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					9,
-					5,
-					2
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"color",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"random_number_book_page_collection": {
-			"name": "Random Number Book — Live Cascade",
-			"lookup_name": "random_number_book_page_collection",
-			"description": "RAND Corporation 1955 random digit table brought to life. Numbers cascade top-to-bottom like a stock ticker. Touch any number in VR to freeze it — frozen numbers glow amber while the rest keep flowing. Demonstrates that randomness is a process, not a snapshot.",
-			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_collection.tscn",
-			"category": "procedural",
-			"interaction": "touch",
-			"complexity": "beginner",
-			"qfep_connection": "Randomness as flow — freezing a number is an act of observation that collapses possibility into fixed value.",
-			"tags": [
-				"random_digits",
-				"cascade",
-				"interactive",
-				"touch",
-				"RAND_corporation",
-				"stock_ticker",
-				"freeze"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"random_transformations": {
-			"name": "Random Transformations",
-			"lookup_name": "random_transformations",
-			"description": "Interactive visualization of random geometric transformations and spatial manipulations",
-			"scene": "res://algorithms/randomness/random_transformations/random_transformations.tscn",
-			"category": "primitives",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					17,
-					24,
-					21
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"primitives",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"simplex_noise": {
-			"name": "Simplex Noise",
-			"lookup_name": "simplex_noise",
-			"description": "Interactive Simplex noise generation and visualization for high-quality procedural content",
-			"scene": "res://algorithms/randomness/simplexnoise/simplexnoise.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					11,
-					6,
-					11
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"noise",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"ten_print": {
-			"name": "10 PRINT",
-			"lookup_name": "ten_print",
-			"description": "Interactive recreation of the classic Commodore 64 10 PRINT maze generation algorithm",
-			"scene": "res://algorithms/randomness/ten_print/ten_print.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					11,
-					3,
-					11
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"trng_vs_prng": {
-			"name": "TRNG vs PRNG",
-			"lookup_name": "trng_vs_prng",
-			"description": "Interactive comparison between True Random Number Generators and Pseudo-Random Number Generators",
-			"scene": "res://algorithms/randomness/trng_vs_prng/trng_vs_prng.tscn",
-			"category": "primitives",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					17,
-					24,
-					21
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"primitives",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"value_noise": {
-			"name": "Value Noise",
-			"lookup_name": "value_noise",
-			"description": "Interactive Value noise generation and visualization for procedural texture creation",
-			"scene": "res://algorithms/randomness/valuenoise/valuenoise.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise",
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					11,
-					6,
-					11
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"noise",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"random_number_book_page_1955": {
-			"name": "Random Number Book Page 1955",
-			"lookup_name": "random_number_book_page_1955",
-			"description": "A single page from the RAND Corporation 1955 random digit table. Numbers cascade live top-to-bottom. Touch any 5-digit number to freeze it in amber — the rest keep flowing.",
-			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn",
-			"category": "procedural",
-			"interaction": "touch",
-			"tags": [
-				"random_digits",
-				"cascade",
-				"interactive",
-				"touch",
-				"RAND_corporation"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					2,
-					5,
-					1
-				],
-				"size_group": "environment"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"random_butterflies": {
-			"name": "Random Butterflies",
-			"lookup_name": "random_butterflies",
-			"description": "Entropy-seeking butterfly swarm: wander randomly then land on entropy_axiom grid points, wings tinting blue-to-red along the order-chaos gradient. Grab and release to send to a new entropy point.",
-			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.tscn",
-			"category": "emergence",
-			"interaction": "interactive",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "advanced",
-			"tags": [
-				"2d",
-				"chaos",
-				"compression",
-				"emergence",
-				"interactive",
-				"probability",
-				"procedural",
-				"swarm",
-				"vr"
-			],
-			"dev_themes": [
-				"emergence",
-				"probability",
-				"randomness"
-			]
-		},
-		"random_edge_profile_collection": {
-			"name": "Random Edge Profile Collection",
-			"lookup_name": "random_edge_profile_collection",
-			"description": "Interactive collection of random edge profiles for procedural geometry generation",
-			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/scenes/random_edge_profile_collection.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"graph",
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"random_plants": {
-			"name": "Random Plants",
-			"lookup_name": "random_plants",
-			"description": "Interactive procedural plant generation with random growth patterns and organic forms",
-			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/randomplants/random_plants.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"testmaps"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"probability",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"omoss": {
-			"name": "Omoss",
-			"lookup_name": "omoss",
-			"description": "Interactive Omoss algorithm for procedural organic growth and pattern generation",
-			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/omoss/omoss.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"pattern",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"shader_noise_space": {
-			"name": "Shader Noise Space",
-			"lookup_name": "shader_noise_space",
-			"description": "Interactive shader-based noise space exploration with procedural textures and patterns",
-			"scene": "res://algorithms/randomness/shadernoisespace/noiseroom.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					15,
-					4,
-					11
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"noise",
-				"procedural",
-				"shader"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"voxelnoise": {
-			"name": "Voxel Noise",
-			"lookup_name": "voxelnoise",
-			"description": "3D noise visualized as voxels — cubes appear or disappear based on noise threshold, revealing the underlying scalar field as solid geometry.",
-			"scene": "res://algorithms/randomness/voxelnoise/voxelnoise.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"grammar_systems",
-				"noise"
-			],
-			"sequence": "randomness",
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"VoxelNoiseROIs": {
-			"name": "Voxel Noise ROIs",
-			"lookup_name": "VoxelNoiseROIs",
-			"description": "Voxel noise with regions of interest (ROIs) — isolated volumes where different noise parameters or thresholds apply, useful for terrain biomes.",
-			"scene": "res://algorithms/randomness/voxelnoise/VoxelNoiseROIs.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"grammar_systems",
-				"noise"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					25,
-					25,
-					25
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"procedural",
-				"terrain"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"noise_terrain": {
-			"name": "Noise Terrain",
-			"lookup_name": "noise_terrain",
-			"description": "Interactive procedural terrain generation using various noise algorithms and height mapping",
-			"scene": "res://algorithms/randomness/noiseterrain/noiseterrain.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					50,
-					6,
-					50
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"noise",
-				"procedural",
-				"terrain"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"perlin_noise_clouds": {
-			"name": "Perlin Noise Clouds",
-			"lookup_name": "perlin_noise_clouds",
-			"description": "Interactive 3D volumetric cloud generation using Perlin noise for atmospheric and procedural sky effects",
-			"scene": "res://algorithms/randomness/perlinnoiseclouds/perlinnoiseclouds.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise",
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					50,
-					21,
-					50
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"noise",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"noise_terrain_with_blobs": {
-			"name": "Noise Terrain with Animated Blobs",
-			"lookup_name": "noise_terrain_with_blobs",
-			"description": "Advanced noise terrain generator with animated blob particles that move across the landscape using spatial shaders and dynamic positioning",
-			"scene": "res://algorithms/randomness/noiseterrain/noise_terrain_with_blobs_demo.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise",
-				"randomness"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					50,
-					25,
-					50
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"animation",
-				"noise",
-				"procedural",
-				"terrain"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"cloudvolume": {
-			"name": "Cloud Volume",
-			"lookup_name": "cloudvolume",
-			"description": "3D volumetric cloud generation using noise algorithms for atmospheric and sky effects",
-			"scene": "res://algorithms/randomness/noise/cloudvolume/cloudvolume.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					5,
-					5,
-					5
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"perlinvolume": {
-			"name": "Perlin Volume",
-			"lookup_name": "perlinvolume",
-			"description": "3D Perlin noise volume generation for procedural content creation and spatial algorithms",
-			"scene": "res://algorithms/randomness/noise/perlinvolume/perlinvolume.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"sequence": "randomness",
-			"parameters": {
-				"footprint": [
-					5,
-					5,
-					5
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
-			]
-		},
-		"instancingscatter": {
-			"name": "Instancing Scatter",
-			"lookup_name": "instancingscatter",
-			"description": "High-performance instance scattering algorithm for procedural object placement and distribution",
-			"scene": "res://algorithms/randomness/noise/scatter/instancingscatter.tscn",
-			"category": "procedural",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"unused"
-			],
-			"sequence": "randomness",
-			"complexity": "advanced",
-			"tags": [
-				"procedural"
-			],
-			"dev_themes": [
-				"probability",
-				"procedural",
-				"randomness"
 			]
 		},
 		"galton_board": {
-			"name": "Galton Board",
-			"lookup_name": "galton_board",
-			"description": "Balls drop through a triangular peg array. Each peg deflects left or right with equal probability. After many rows, the bin counts form a binomial distribution converging to a Gaussian bell curve. VR buttons: DROP, AUTO, RESET, SPEED.",
-			"scene": "res://algorithms/randomness/galton_board/galton_board.tscn",
 			"category": "randomness",
-			"interaction": "button",
 			"complexity": "intermediate",
+			"description": "Balls drop through a triangular peg array. Each peg deflects left or right with equal probability. After many rows, the bin counts form a binomial distribution converging to a Gaussian bell curve. VR buttons: DROP, AUTO, RESET, SPEED.",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "button",
+			"lookup_name": "galton_board",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Galton Board",
 			"qfep_connection": "CLT as convergence — many independent binary choices accumulate into Gaussian structure. Order from repetition.",
+			"scene": "res://algorithms/randomness/galton_board/galton_board.tscn",
+			"sequence": "randomness",
 			"tags": [
 				"galton",
 				"binomial",
@@ -2636,172 +874,56 @@
 				"probability",
 				"physics",
 				"interactive"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"dev_themes": [
-				"probability",
-				"randomness"
 			]
 		},
-		"dice_throw": {
-			"name": "Dice Throw",
-			"lookup_name": "dice_throw",
-			"description": "A VR dice on a felt table. Grab and throw the dice — roll a 6 and 100 balls rain from the sky, roll a 1 and just 1 ball falls. Tracks roll statistics showing convergence to discrete uniform distribution with expected value 3.5.",
-			"scene": "res://algorithms/randomness/dice_throw/dice_throw.tscn",
-			"category": "randomness",
-			"interaction": "grab",
-			"complexity": "beginner",
-			"qfep_connection": "Equiprobability — each face equally likely. Fairness as geometric symmetry.",
-			"tags": [
-				"dice",
-				"uniform_distribution",
-				"expected_value",
+		"gaussian_random": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "A bell curve algorithm that creates natural-looking height distributions",
+			"dev_themes": [
+				"emergence",
 				"probability",
-				"physics",
-				"interactive",
-				"grab"
+				"randomness"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "gaussian_random",
 			"map_ready": true,
 			"map_sequences": [
 				"randomness"
 			],
+			"name": "Gaussian Generator",
+			"scene": "res://algorithms/randomness/gaussian_random.tscn",
 			"sequence": "randomness",
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"entropy_jar": {
-			"name": "Entropy Jar",
-			"lookup_name": "entropy_jar",
-			"description": "A glass jar of red and blue particles on a pedestal. Grab and shake to mix them — they never unmix. Live Shannon entropy readout tracks disorder. The second law of thermodynamics felt physically through VR interaction.",
-			"scene": "res://algorithms/randomness/entropy_jar/entropy_jar.tscn",
-			"category": "randomness",
-			"interaction": "grab",
-			"complexity": "beginner",
-			"qfep_connection": "Irreversibility — mixing is easy, unmixing is impossible. The arrow of time made tangible through embodied interaction.",
 			"tags": [
-				"entropy",
-				"thermodynamics",
-				"irreversibility",
-				"mixing",
-				"shannon",
-				"second_law",
-				"physics",
-				"interactive",
-				"grab"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"coin_toss": {
-			"name": "Coin Toss",
-			"lookup_name": "coin_toss",
-			"description": "The simplest random experiment. Grab coins from a tray and toss them. A counter tracks the heads/tails ratio converging to 0.5 over many flips. Gold side = heads, silver side = tails.",
-			"scene": "res://algorithms/randomness/coin_toss/coin_toss.tscn",
-			"category": "randomness",
-			"interaction": "grab",
-			"complexity": "beginner",
-			"qfep_connection": "Bernoulli trial — the atom of probability. p = 0.5 as perfect symmetry.",
-			"tags": [
-				"coin",
-				"bernoulli",
-				"binary",
-				"probability",
-				"convergence",
-				"interactive",
-				"grab"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"prng_crank_machine": {
-			"name": "PRNG Crank Machine",
-			"lookup_name": "prng_crank_machine",
-			"description": "A physical pseudo-random number generator machine. Press CRANK to step the LCG formula: state = (state * 1664525 + 1013904223) mod 2^32. Each step animates multiply, add, mod phases. Shows deterministic sequence, normalized 0-1 output, and full history.",
-			"scene": "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.tscn",
-			"category": "randomness",
-			"interaction": "button",
-			"complexity": "intermediate",
-			"qfep_connection": "Determinism masquerading as randomness — structure hidden in apparent chaos.",
-			"tags": [
-				"prng",
-				"lcg",
-				"deterministic",
-				"seed",
-				"algorithm",
-				"interactive"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"monte_carlo_dartboard": {
-			"name": "Monte Carlo Dart Board",
-			"lookup_name": "monte_carlo_dartboard",
-			"description": "Throw darts at a square with an inscribed circle. The ratio of inside/outside hits converges to pi/4. Live counter shows estimate of pi improving with each dart. Green dots inside circle, red dots outside.",
-			"scene": "res://algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn",
-			"category": "randomness",
-			"interaction": "button",
-			"complexity": "intermediate",
-			"qfep_connection": "Computation through accumulation — random sampling converges to mathematical truth.",
-			"tags": [
-				"monte_carlo",
-				"pi",
-				"estimation",
-				"sampling",
-				"convergence",
-				"interactive"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"dev_themes": [
-				"probability",
-				"randomness"
+				"emergence",
+				"probability"
 			]
 		},
 		"hardware_entropy_decay": {
-			"name": "Hardware Entropy Decay",
-			"lookup_name": "hardware_entropy_decay",
-			"description": "Your VR movements become entropy. Controller velocity drives scratches, grip pressure accumulates grime, head rotation feeds weathering rate. Three display surfaces (cube, sphere, cylinder) decay in real-time from your hardware inputs via a custom procedural shader.",
-			"scene": "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn",
 			"category": "randomness",
-			"interaction": "immersive",
 			"complexity": "advanced",
+			"description": "Your VR movements become entropy. Controller velocity drives scratches, grip pressure accumulates grime, head rotation feeds weathering rate. Three display surfaces (cube, sphere, cylinder) decay in real-time from your hardware inputs via a custom procedural shader.",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"footprint": [
+				6.0,
+				2.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"interaction": "immersive",
+			"lookup_name": "hardware_entropy_decay",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Hardware Entropy Decay",
 			"qfep_connection": "Entropy from embodiment — the observer's physical presence is the source of randomness that degrades order.",
+			"scene": "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
 			"tags": [
 				"decay",
 				"shader",
@@ -2815,197 +937,161 @@
 				"weathering",
 				"interactive",
 				"immersive"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"dev_themes": [
-				"probability",
-				"randomness"
 			]
 		},
-		"slot_machine": {
-			"name": "Slot Machine",
-			"lookup_name": "slot_machine",
-			"description": "A classic slot machine with 3 spinning reels. Pull the VR lever to spin — reels stop one by one, left to right. Tracks a histogram of symbol frequencies showing convergence to uniform distribution. Triple matches flash gold. AUTO mode for rapid sampling.",
-			"scene": "res://algorithms/randomness/slot_machine/slot_machine.tscn",
-			"category": "randomness",
-			"interaction": "button",
-			"complexity": "beginner",
-			"qfep_connection": "Independence — each reel is an independent uniform trial. The combination space grows multiplicatively (6^3 = 216 outcomes).",
-			"tags": [
-				"slot_machine",
-				"uniform_distribution",
-				"independence",
-				"combinatorics",
-				"probability",
-				"histogram",
-				"interactive"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"random_walk_leash": {
-			"name": "Random Walk Leash",
-			"lookup_name": "random_walk_leash",
-			"description": "A glowing orb on a leash that tugs in random directions. Grab it in VR and feel the random walk through your hand. The orb pulses with each impulse. A trail traces the walk path. Stats track drift vs sqrt(N) theoretical scaling.",
-			"scene": "res://algorithms/randomness/random_walk_leash/random_walk_leash.tscn",
-			"category": "randomness",
-			"interaction": "grab",
-			"complexity": "beginner",
-			"qfep_connection": "Embodied randomness — the walk isn't watched, it's felt. Your arm becomes the accumulator of stochastic impulses.",
-			"tags": [
-				"random_walk",
-				"embodied",
-				"haptic",
-				"drift",
-				"sqrt_n",
-				"physics",
-				"interactive",
-				"grab"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"shannon_entropy_meter": {
-			"name": "Shannon Entropy Meter",
-			"lookup_name": "shannon_entropy_meter",
-			"description": "Wall-mounted Shannon entropy gauge — generates a random sequence, computes symbol frequencies, and displays H = -Σ p(x) log₂ p(x). Bar gauge fills from 0 to max entropy (~3.32 bits for 10 symbols). Frequency histogram shows symbol distribution.",
-			"scene": "res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn",
-			"category": "randomness",
-			"interaction": "observe",
-			"complexity": "beginner",
-			"tags": [
-				"entropy",
-				"shannon",
-				"information_theory",
-				"measurement",
-				"probability",
-				"wall_display"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness",
-			"dev_themes": [
-				"probability",
-				"randomness"
-			]
-		},
-		"worley_noise": {
-			"name": "Worley Noise",
-			"lookup_name": "worley_noise",
-			"description": "Voronoi/cellular noise texture on a floor quad. Scatters random seed points and computes F2-F1 (second-nearest minus nearest distance) for the classic cell boundary look. Complement to Perlin/Simplex noise.",
-			"scene": "res://commons/artifacts/worley_noise/worley_noise.tscn",
+		"height_random": {
 			"category": "procedural",
-			"complexity": "beginner",
-			"tags": [
-				"worley",
-				"voronoi",
-				"cellular",
-				"noise",
-				"distance_field",
-				"floor_display"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise",
-				"randomness"
-			],
-			"sequence": "randomness",
+			"complexity": "intermediate",
+			"description": "An elevation algorithm that randomly raises cubes to create landscapes",
 			"dev_themes": [
-				"biology",
 				"probability",
 				"procedural",
 				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "height_random",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Height Distributor",
+			"scene": "res://algorithms/randomness/height_random.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"procedural"
 			]
 		},
-		"curl_noise_particles": {
-			"name": "Curl Noise Particles",
-			"lookup_name": "curl_noise_particles",
-			"description": "Divergence-free curl noise driving 300 particles in smooth swirling ribbons. Cross product of two noise gradients guarantees incompressible flow. Particles color-shift from deep blue (slow) through cyan to white (fast), with trailing flow lines for visualization.",
-			"scene": "res://commons/artifacts/curl_noise_particles/curl_noise_particles.tscn",
+		"instancingscatter": {
 			"category": "procedural",
 			"complexity": "advanced",
-			"tags": [
-				"curl_noise",
-				"divergence_free",
-				"particles",
-				"flow",
-				"noise",
-				"incompressible",
-				"multimesh",
-				"3d_display"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise",
-				"randomness"
-			],
-			"sequence": "randomness",
+			"description": "High-performance instance scattering algorithm for procedural object placement and distribution",
 			"dev_themes": [
 				"probability",
 				"procedural",
 				"randomness"
-			]
-		},
-		"rejection_sampling_demo": {
-			"name": "Rejection Sampling Demo",
-			"lookup_name": "rejection_sampling_demo",
-			"description": "Visual scatter plot of the accept/reject method for sampling arbitrary distributions. 2000 uniform random points plotted against a Gaussian target curve — green dots accepted (below curve), red dots rejected (above). Shows acceptance ratio.",
-			"scene": "res://commons/artifacts/rejection_sampling_demo/rejection_sampling_demo.tscn",
-			"category": "randomness",
-			"complexity": "beginner",
-			"tags": [
-				"rejection_sampling",
-				"accept_reject",
-				"gaussian",
-				"distribution",
-				"monte_carlo",
-				"scatter_plot",
-				"floor_display"
 			],
 			"include_in_map_data": true,
+			"lookup_name": "instancingscatter",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "Instancing Scatter",
+			"scene": "res://algorithms/randomness/noise/scatter/instancingscatter.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"procedural"
+			]
+		},
+		"marchingcubes_voxel_noise_demo": {
+			"category": "procedural",
+			"complexity": "advanced",
+			"description": "Marching cubes algorithm applied to a 3D noise field. Generates smooth isosurface mesh from voxel density values.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "marchingcubes_voxel_noise_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"isosurfaces",
+				"proceduralgeneration_all"
+			],
+			"name": "Marching Cubes Voxel Noise",
+			"parameters": {
+				"footprint": [
+					33.0,
+					33.0,
+					33.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/spacetopology/marchingcubes/voxel_noise_demo.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"3d",
+				"noise",
+				"procedural",
+				"voxel"
+			]
+		},
+		"monte_carlo_dartboard": {
+			"category": "randomness",
+			"complexity": "intermediate",
+			"description": "Throw darts at a square with an inscribed circle. The ratio of inside/outside hits converges to pi/4. Live counter shows estimate of pi improving with each dart. Green dots inside circle, red dots outside.",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "button",
+			"lookup_name": "monte_carlo_dartboard",
 			"map_ready": true,
 			"map_sequences": [
 				"randomness"
 			],
+			"name": "Monte Carlo Dart Board",
+			"qfep_connection": "Computation through accumulation — random sampling converges to mathematical truth.",
+			"scene": "res://algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn",
 			"sequence": "randomness",
+			"tags": [
+				"monte_carlo",
+				"pi",
+				"estimation",
+				"sampling",
+				"convergence",
+				"interactive"
+			]
+		},
+		"neon_wave_grid": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive Perlin noise-based neon wave grid with dynamic lighting effects",
 			"dev_themes": [
 				"probability",
+				"procedural",
 				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "neon_wave_grid",
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			],
+			"name": "Neon Wave Grid",
+			"scene": "res://algorithms/randomness/noise/perlinnoise/scenes/NeonWaveGrid.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"2d",
+				"animation",
+				"grid",
+				"procedural",
+				"wave"
 			]
 		},
 		"noise_mixer": {
-			"name": "Noise Mixer",
-			"lookup_name": "noise_mixer",
-			"description": "Fractal Brownian Motion noise mixer — layers multiple sin-based noise octaves with controllable lacunarity and persistence. 128x128 floor texture with earth-tone color ramp. VR sliders adjust octaves (1–8), lacunarity (1.5–3.0), and persistence (0.3–0.7) to explore how complexity emerges from layered simple functions.",
-			"scene": "res://commons/artifacts/noise_mixer/noise_mixer.tscn",
 			"category": "procedural",
 			"complexity": "intermediate",
+			"description": "Fractal Brownian Motion noise mixer — layers multiple sin-based noise octaves with controllable lacunarity and persistence. 128x128 floor texture with earth-tone color ramp. VR sliders adjust octaves (1–8), lacunarity (1.5–3.0), and persistence (0.3–0.7) to explore how complexity emerges from layered simple functions.",
+			"dev_themes": [
+				"music",
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "noise_mixer",
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			],
+			"name": "Noise Mixer",
+			"scene": "res://commons/artifacts/noise_mixer/noise_mixer.tscn",
+			"sequence": "randomness",
 			"tags": [
 				"noise",
 				"fbm",
@@ -3015,193 +1101,2305 @@
 				"persistence",
 				"procedural",
 				"floor_display"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"noise",
-				"randomness"
-			],
-			"sequence": "randomness",
-			"dev_themes": [
-				"music",
-				"probability",
-				"procedural",
-				"randomness"
 			]
 		},
 		"noise_space": {
-			"name": "Noise Space Explorer",
-			"lookup_name": "noise_space",
-			"description": "Interactive 3D noise exploration space. Walk through a procedurally generated environment driven by configurable noise parameters.",
-			"scene": "res://commons/context/walkgrids/noise_space.tscn",
 			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive 3D noise exploration space. Walk through a procedurally generated environment driven by configurable noise parameters.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				10,
+				4,
+				10
+			],
 			"include_in_map_data": true,
+			"lookup_name": "noise_space",
 			"map_ready": true,
 			"map_sequences": [
 				"noise"
 			],
-			"sequence": "randomness",
+			"name": "Noise Space Explorer",
 			"parameters": {
 				"footprint": [
-					20,
-					5,
-					20
+					10,
+					4,
+					10
 				],
-				"size_group": "world_scale"
+				"size_group": "xlarge"
 			},
-			"complexity": "intermediate",
+			"scene": "res://commons/context/walkgrids/noise_space.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
 			"tags": [
 				"3d",
 				"noise",
 				"procedural"
-			],
+			]
+		},
+		"noise_terrain": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive procedural terrain generation using various noise algorithms and height mapping",
 			"dev_themes": [
 				"probability",
 				"procedural",
 				"randomness"
-			]
-		},
-		"shader_07_noise": {
-			"name": "Shader Noise Functions",
-			"lookup_name": "shader_07_noise",
-			"description": "Book of Shaders chapter 7 — value noise, gradient noise, simplex noise implemented as GPU shaders on a quad display.",
-			"scene": "res://algorithms/shaders/book_of_shaders/shader_07_noise.tscn",
-			"category": "procedural",
+			],
+			"footprint": [
+				100,
+				10,
+				100
+			],
 			"include_in_map_data": true,
+			"lookup_name": "noise_terrain",
 			"map_ready": true,
 			"map_sequences": [
-				"patterngeneration"
+				"noise"
 			],
+			"name": "Noise Terrain",
+			"parameters": {
+				"footprint": [
+					100,
+					10,
+					100
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/randomness/noiseterrain/noiseterrain.tscn",
 			"sequence": "randomness",
-			"complexity": "advanced",
+			"size_group": "xlarge",
 			"tags": [
 				"noise",
 				"procedural",
-				"shader",
-				"visualization"
-			],
+				"terrain"
+			]
+		},
+		"noise_terrain_with_blobs": {
+			"category": "procedural",
+			"complexity": "advanced",
+			"description": "Advanced noise terrain generator with animated blob particles that move across the landscape using spatial shaders and dynamic positioning",
 			"dev_themes": [
 				"probability",
 				"procedural",
 				"randomness"
-			]
-		},
-		"shader_08_cellularnoise": {
-			"name": "Cellular Noise Shader",
-			"lookup_name": "shader_08_cellularnoise",
-			"description": "Book of Shaders chapter 8 — Voronoi and Worley noise patterns rendered as GPU shaders. Shows distance fields and cell boundaries.",
-			"scene": "res://algorithms/shaders/book_of_shaders/shader_08_cellularnoise.tscn",
-			"category": "procedural",
+			],
 			"include_in_map_data": true,
+			"lookup_name": "noise_terrain_with_blobs",
 			"map_ready": true,
 			"map_sequences": [
-				"patterngeneration"
+				"noise",
+				"randomness"
 			],
+			"name": "Noise Terrain with Animated Blobs",
+			"parameters": {
+				"footprint": [
+					50.0,
+					25.0,
+					50.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/randomness/noiseterrain/noise_terrain_with_blobs_demo.tscn",
 			"sequence": "randomness",
-			"complexity": "advanced",
 			"tags": [
+				"animation",
+				"noise",
 				"procedural",
-				"shader"
+				"terrain"
+			]
+		},
+		"noiselayers": {
+			"category": "procedural",
+			"complexity": "advanced",
+			"description": "Demonstrates octave layering (fractal Brownian motion) by stacking multiple noise frequencies. Shows how combining scales creates natural complexity.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
 			],
+			"footprint": [
+				220,
+				83,
+				200
+			],
+			"include_in_map_data": true,
+			"lookup_name": "noiselayers",
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"name": "Noise Layers",
+			"parameters": {
+				"footprint": [
+					220,
+					83,
+					200
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/randomness/noiselayers/noiselayers.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
+			"tags": [
+				"animation",
+				"fractal",
+				"procedural"
+			]
+		},
+		"noisesphere": {
+			"category": "procedural",
+			"complexity": "advanced",
+			"description": "Noise-deformed hemisphere rendered with the planet shader for atmospheric dome effects.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				32,
+				32,
+				30
+			],
+			"include_in_map_data": true,
+			"lookup_name": "noisesphere",
+			"map_ready": true,
+			"map_sequences": [
+				"meshes",
+				"noise"
+			],
+			"name": "noisesphere",
+			"scene": "res://algorithms/randomness/noisesphere/noisesphere.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
+			"tags": [
+				"procedural"
+			]
+		},
+		"noisetext": {
+			"category": "procedural",
+			"complexity": "advanced",
+			"description": "Applies the noise planet shader to 3D text and a plinth for animated logo signage.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "noisetext",
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			],
+			"name": "noisetext",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/randomness/noisetext/noisetext.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"3d",
+				"procedural",
+				"string"
+			]
+		},
+		"noisetorus": {
+			"category": "procedural",
+			"complexity": "advanced",
+			"description": "Shader-driven torus whose surface ripples with animated noise and hue shifting.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				5,
+				8,
+				5
+			],
+			"include_in_map_data": true,
+			"lookup_name": "noisetorus",
+			"map_ready": true,
+			"map_sequences": [
+				"devexamples",
+				"noise",
+				"structure"
+			],
+			"name": "noisetorus",
+			"parameters": {
+				"footprint": [
+					5,
+					8,
+					5
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/randomness/noisetorus/noisetorus.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
+			"tags": [
+				"3d",
+				"color",
+				"geometry",
+				"procedural"
+			]
+		},
+		"omoss": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive Omoss algorithm for procedural organic growth and pattern generation",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "omoss",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Omoss",
+			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/omoss/omoss.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"pattern",
+				"procedural"
+			]
+		},
+		"particle_randomness_emergent": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Emergent behavior particle system",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "particle_randomness_emergent",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Particle Randomness - Emergent",
+			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/emergent_behavior/emergent_behavior.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"emergence",
+				"particle",
+				"simulation"
+			]
+		},
+		"particle_randomness_evolutionary": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Evolutionary algorithm particles",
+			"dev_themes": [
+				"biology",
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "particle_randomness_evolutionary",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Particle Randomness - Evolutionary",
+			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/evolutionary_algorithms/evolutionary_algorithms.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"emergence",
+				"particle"
+			]
+		},
+		"particle_randomness_patterns": {
+			"artifact_type": "interactive_algorithm",
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Procedural pattern particles",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "touch_to_activate",
+			"lookup_name": "particle_randomness_patterns",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Particle Randomness - Patterns",
+			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/procedural_patterns/procedural_patterns.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"particle",
+				"pattern",
+				"procedural"
+			]
+		},
+		"particle_randomness_perlin": {
+			"artifact_type": "interactive_algorithm",
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Perlin-noise-driven particles",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "touch_to_activate",
+			"lookup_name": "particle_randomness_perlin",
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			],
+			"name": "Particle Randomness - Perlin",
+			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/perlin_noise/perlin_noise.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"particle",
+				"procedural"
+			]
+		},
+		"particle_randomness_pure": {
+			"artifact_type": "interactive_algorithm",
+			"category": "primitives",
+			"complexity": "intermediate",
+			"description": "Pure random particle movement",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "touch_to_activate",
+			"lookup_name": "particle_randomness_pure",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Particle Randomness - Pure",
+			"scene": "res://algorithms/randomness/proceduralrandomness/particlerandomness/pure_randomness/pure_randomness.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"animation",
+				"particle",
+				"primitives",
+				"probability",
+				"procedural"
+			]
+		},
+		"perlin_noise": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive Perlin noise generation and visualization",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				10,
+				3,
+				10
+			],
+			"include_in_map_data": true,
+			"lookup_name": "perlin_noise",
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"name": "Perlin Noise",
+			"parameters": {
+				"footprint": [
+					10,
+					3,
+					10
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/randomness/perlinnoise/perlinnoise.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
+			"tags": [
+				"noise",
+				"procedural"
+			]
+		},
+		"perlin_noise_clouds": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive 3D volumetric cloud generation using Perlin noise for atmospheric and procedural sky effects",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "perlin_noise_clouds",
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			],
+			"name": "Perlin Noise Clouds",
+			"parameters": {
+				"footprint": [
+					50.0,
+					21.0,
+					50.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/randomness/perlinnoiseclouds/perlinnoiseclouds.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"3d",
+				"noise",
+				"procedural"
+			]
+		},
+		"perlin_noise_terrain": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive 3D terrain generation using Perlin noise algorithms",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				2,
+				1,
+				2
+			],
+			"include_in_map_data": true,
+			"lookup_name": "perlin_noise_terrain",
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"name": "Perlin Noise Terrain",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "standard"
+			},
+			"scene": "res://algorithms/randomness/noise/perlinnoise/scenes/perlin_noise_terrain.tscn",
+			"sequence": "randomness",
+			"size_group": "standard",
+			"tags": [
+				"3d",
+				"noise",
+				"procedural",
+				"terrain"
+			]
+		},
+		"perlinvolume": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "3D Perlin noise volume generation for procedural content creation and spatial algorithms",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "perlinvolume",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "Perlin Volume",
+			"parameters": {
+				"footprint": [
+					5.0,
+					5.0,
+					5.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/randomness/noise/perlinvolume/perlinvolume.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"3d",
+				"procedural"
+			]
+		},
+		"pheromone_terrain": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Swarm-based terrain generation where agents deposit pheromone trails that shape the landscape. Demonstrates emergent self-organization from simple local rules.",
+			"dev_category": "procedural_terrain",
+			"dev_themes": [
+				"procedural",
+				"emergence"
+			],
+			"footprint": [
+				20.0,
+				1.0,
+				20.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pheromone_terrain",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Pheromone Terrain",
+			"scene": "res://algorithms/randomness/pheromone_terrain/pheromone_terrain.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
+			"tags": [
+				"pheromone",
+				"swarm",
+				"terrain",
+				"self_organization"
+			]
+		},
+		"pickup_cube_placer": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Finds the active grid system and populates pickup cubes using randomized or patterned placement modes.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pickup_cube_placer",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "pickup_cube_placer",
+			"scene": "res://algorithms/randomness/pickup_cube_placer.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"2d",
+				"procedural",
+				"simulation"
+			]
+		},
+		"pipe_dream": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "A 3D recreation of the classic Windows Pipes screensaver. Grows a colored pipe that randomly changes direction, building an intricate network over 100 segments.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				3.0,
+				1.0,
+				5.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pipe_dream",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Pipe Dream",
+			"scene": "res://algorithms/randomness/pipedream/pipe_dream.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
+			"tags": [
+				"3d",
+				"graph",
+				"procedural"
+			]
+		},
+		"pixel_cloud": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Builds an upward-biased self-avoiding random walk and places cubes along the path to form a pixel cloud sculpture.",
+			"dev_category": "procedural_sculpture",
+			"dev_themes": [
+				"procedural",
+				"emergence"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pixel_cloud",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "pixel_cloud",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/randomness/pixelcloud/pixel_cloud.tscn",
+			"sequence": "randomness",
+			"size_group": "compact",
+			"tags": [
+				"random_walk",
+				"self_avoiding",
+				"sculpture",
+				"voxel",
+				"3d"
+			]
+		},
+		"plane_manipulator": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "This script animates a random walk on a 3D plane. It simulates walkers that move across the plane's surface, raising the ground to create trails in real-time.",
+			"dev_category": "procedural_terrain",
+			"dev_themes": [
+				"procedural",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "plane_manipulator",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "plane_manipulator",
+			"scene": "res://algorithms/randomness/plane_effects/plane_manipulator.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"random_walk",
+				"terrain",
+				"realtime",
+				"trails",
+				"3d"
+			]
+		},
+		"plane_random": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Generates a planar surface with random vertex displacement, creating organic undulating terrain from flat geometry.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "plane_random",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Plane Random",
+			"scene": "res://algorithms/randomness/PlaneRandom/plane_random.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"3d",
+				"graph",
+				"probability",
+				"procedural",
+				"terrain"
+			]
+		},
+		"pollock_3d": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive 3D Jackson Pollock-inspired art using movement-based procedural randomness",
+			"dev_themes": [
+				"art",
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pollock_3d",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Pollock 3D",
+			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock3d/pollock_3d.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"3d",
+				"animation",
+				"procedural"
+			]
+		},
+		"pollock_painting_in_3d": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive 3D Jackson Pollock-inspired painting using movement-based procedural randomness",
+			"dev_themes": [
+				"art",
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pollock_painting_in_3d",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Pollock Painting in 3D",
+			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/pollock2d/PollockPaintingIn3d.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"3d",
+				"animation",
+				"procedural"
+			]
+		},
+		"pool_hole_noise": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive cellular noise generation with pool hole pattern visualization",
 			"dev_themes": [
 				"biology",
 				"probability",
 				"procedural",
 				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pool_hole_noise",
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			],
+			"name": "Pool Hole Noise",
+			"parameters": {
+				"footprint": [
+					2.0,
+					1.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/randomness/noise/cellularnoise/scenes/pool_hole_noise.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"noise",
+				"pattern",
+				"procedural"
 			]
 		},
-		"MeltingBerniniScene": {
-			"name": "Melting Bernini Columns",
-			"lookup_name": "MeltingBerniniScene",
-			"description": "Noise-based vertex displacement applied to classical column geometry. Bernini's baroque forms dissolve under procedural noise fields.",
-			"scene": "res://algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniScene.tscn",
-			"category": "procedural",
+		"prng_crank_machine": {
+			"category": "randomness",
+			"complexity": "intermediate",
+			"description": "A physical pseudo-random number generator machine. Press CRANK to step the LCG formula: state = (state * 1664525 + 1013904223) mod 2^32. Each step animates multiply, add, mod phases. Shows deterministic sequence, normalized 0-1 output, and full history.",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
 			"include_in_map_data": true,
+			"interaction": "button",
+			"lookup_name": "prng_crank_machine",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "PRNG Crank Machine",
+			"qfep_connection": "Determinism masquerading as randomness — structure hidden in apparent chaos.",
+			"scene": "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"prng",
+				"lcg",
+				"deterministic",
+				"seed",
+				"algorithm",
+				"interactive"
+			]
+		},
+		"probability_distributions_3d": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Interactive 3D visualization of various probability distributions and statistical patterns",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "probability_distributions_3d",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Probability Distributions 3D",
+			"scene": "res://algorithms/randomness/distributions/ProbabilityDistributions3D.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"3d",
+				"emergence"
+			]
+		},
+		"random_bell_curve": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Builds a 20x20 quad grid shaped into a 3D Gaussian bell curve with HeightMapShape3D collisions. Optional surface noise adds organic variation.",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"footprint": [
+				20.0,
+				5.0,
+				21.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "random_bell_curve",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Bell Curve Terrain",
+			"scene": "res://algorithms/randomness/randombellcurve/random_bell_curve.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
+			"tags": [
+				"2d",
+				"3d",
+				"emergence",
+				"probability",
+				"procedural",
+				"terrain"
+			]
+		},
+		"random_butterflies": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Entropy-seeking butterfly swarm: wander randomly then land on entropy_axiom grid points, wings tinting blue-to-red along the order-chaos gradient. Grab and release to send to a new entropy point.",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "interactive",
+			"lookup_name": "random_butterflies",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Butterflies",
+			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"2d",
+				"chaos",
+				"compression",
+				"emergence",
+				"interactive",
+				"probability",
+				"procedural",
+				"swarm",
+				"vr"
+			]
+		},
+		"random_color_book_page_collection": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive collection of randomly generated colored book pages using procedural algorithms",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "random_color_book_page_collection",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"name": "Random Color Book Page Collection",
+			"parameters": {
+				"footprint": [
+					9.0,
+					5.0,
+					2.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_color_book_page_collection.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"color",
+				"probability",
+				"procedural"
+			]
+		},
+		"random_decay_multimesh": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Two standing 2D decay stacks rendered with MultiMesh: 1m cubes and 1dm prisms that gradually drift, rotate, sink, and darken.",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "random_decay_multimesh",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Decay MultiMesh",
+			"parameters": {
+				"footprint": [
+					6.0,
+					5.0,
+					2.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/randomness/randomdecay/scenes/random_decay_multimesh.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"2d",
+				"emergence",
+				"probability",
+				"procedural"
+			]
+		},
+		"random_decay_objects": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Interactive visualization of random decay processes and object degradation",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "random_decay_objects",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Decay Objects",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/randomness/randomdecay/scenes/random_decay_objects.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"emergence",
+				"probability",
+				"procedural"
+			]
+		},
+		"random_edge_profile": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "A planar surface that generates random edge profiles and patterns",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "random_edge_profile",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Edge Profile",
+			"scene": "res://algorithms/randomness/profile_random.tscn",
+			"sequence": "randomness",
+			"size_group": "compact",
+			"tags": [
+				"3d",
+				"graph",
+				"probability",
+				"procedural"
+			]
+		},
+		"random_edge_profile_collection": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive collection of random edge profiles for procedural geometry generation",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "random_edge_profile_collection",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Edge Profile Collection",
+			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/scenes/random_edge_profile_collection.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"graph",
+				"probability",
+				"procedural"
+			]
+		},
+		"random_gaussian_texture": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Interactive Gaussian distribution texture generation for natural random patterns",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "random_gaussian_texture",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Gaussian Texture",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/randomness/distributions/gaussian/RandomGaussianTexture.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"emergence",
+				"probability",
+				"procedural"
+			]
+		},
+		"random_number_book_page_1955": {
+			"category": "procedural",
+			"complexity": "beginner",
+			"description": "A single page from the RAND Corporation 1955 random digit table. Numbers cascade live top-to-bottom. Touch any 5-digit number to freeze it in amber — the rest keep flowing.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "touch",
+			"lookup_name": "random_number_book_page_1955",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Number Book Page 1955",
+			"parameters": {
+				"footprint": [
+					2.0,
+					5.0,
+					1.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"random_digits",
+				"cascade",
+				"interactive",
+				"touch",
+				"RAND_corporation"
+			]
+		},
+		"random_number_book_page_collection": {
+			"category": "procedural",
+			"complexity": "beginner",
+			"description": "RAND Corporation 1955 random digit table brought to life. Numbers cascade top-to-bottom like a stock ticker. Touch any number in VR to freeze it — frozen numbers glow amber while the rest keep flowing. Demonstrates that randomness is a process, not a snapshot.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "touch",
+			"lookup_name": "random_number_book_page_collection",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Number Book — Live Cascade",
+			"qfep_connection": "Randomness as flow — freezing a number is an act of observation that collapses possibility into fixed value.",
+			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_collection.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"random_digits",
+				"cascade",
+				"interactive",
+				"touch",
+				"RAND_corporation",
+				"stock_ticker",
+				"freeze"
+			]
+		},
+		"random_plants": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive procedural plant generation with random growth patterns and organic forms",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "random_plants",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"name": "Random Plants",
+			"scene": "res://algorithms/randomness/proceduralrandomness/geometrybased/randomplants/random_plants.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"probability",
+				"procedural"
+			]
+		},
+		"random_transformations": {
+			"category": "primitives",
+			"complexity": "intermediate",
+			"description": "Interactive visualization of random geometric transformations and spatial manipulations",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "random_transformations",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Transformations",
+			"parameters": {
+				"footprint": [
+					17.0,
+					24.0,
+					21.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/randomness/random_transformations/random_transformations.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"primitives",
+				"probability",
+				"procedural"
+			]
+		},
+		"random_transformations_geometric": {
+			"artifact_type": "interactive_algorithm",
+			"category": "primitives",
+			"complexity": "intermediate",
+			"description": "Random geometric transform visualization",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "look",
+			"lookup_name": "random_transformations_geometric",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Transformations - Geometric",
+			"parameters": {
+				"footprint": [
+					11.0,
+					5.0,
+					11.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/randomness/random_transformations/geometric_transforms/geometric_transforms.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"primitives",
+				"probability",
+				"procedural"
+			]
+		},
+		"random_transformations_matrices": {
+			"artifact_type": "interactive_algorithm",
+			"category": "primitives",
+			"complexity": "intermediate",
+			"description": "Random matrix visualization",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "look",
+			"lookup_name": "random_transformations_matrices",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Transformations - Matrices",
+			"parameters": {
+				"footprint": [
+					11.0,
+					13.0,
+					11.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/randomness/random_transformations/random_matrices/random_matrices.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"linear_algebra",
+				"primitives",
+				"probability",
+				"procedural"
+			]
+		},
+		"random_transformations_noise": {
+			"artifact_type": "interactive_algorithm",
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Noise-based distortion grid",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "look",
+			"lookup_name": "random_transformations_noise",
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			],
+			"name": "Random Transformations - Noise",
+			"parameters": {
+				"footprint": [
+					11.0,
+					5.0,
+					11.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/randomness/random_transformations/noise_based_distortion/noise_based_distortion.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"2d",
+				"noise",
+				"probability",
+				"procedural"
+			]
+		},
+		"random_transformations_stochastic": {
+			"artifact_type": "interactive_algorithm",
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Stochastic distribution demonstrations",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "look",
+			"lookup_name": "random_transformations_stochastic",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Transformations - Stochastic",
+			"parameters": {
+				"footprint": [
+					11.0,
+					13.0,
+					11.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/randomness/random_transformations/stochastic_operations/stochastic_operations.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"emergence",
+				"probability",
+				"procedural"
+			]
+		},
+		"random_walk_128": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "Fine-grained random walk on 128x128 grid using tiny cubes",
+			"dev_category": "random_walk_algorithm",
+			"dev_themes": [
+				"procedural",
+				"primitives"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "random_walk_128",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Walk 128x128",
+			"scene": "res://algorithms/randomness/random_walk_128.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"random_walk",
+				"grid",
+				"voxel",
+				"2d",
+				"visualization"
+			]
+		},
+		"random_walk_collection": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive paper that demonstrates random walk algorithms with grab and manipulation capabilities",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				6.0,
+				6.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "random_walk_collection",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Walk Grab Paper",
+			"parameters": {
+				"footprint": [
+					6.0,
+					6.0,
+					1.0
+				],
+				"size_group": "large"
+			},
+			"scene": "res://algorithms/randomness/randomwalk/scenes/random_walk_collection.tscn",
+			"sequence": "randomness",
+			"size_group": "large",
+			"tags": [
+				"interactive",
+				"origami",
+				"probability",
+				"procedural",
+				"vr"
+			]
+		},
+		"random_walk_grab_paper": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive paper that demonstrates random walk algorithms with grab and manipulation capabilities",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "random_walk_grab_paper",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Walk Grab Paper",
+			"scene": "res://algorithms/randomness/randomwalk/scenes/random_walk_grab_paper.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"interactive",
+				"origami",
+				"probability",
+				"procedural",
+				"vr"
+			]
+		},
+		"random_walk_leash": {
+			"category": "randomness",
+			"complexity": "beginner",
+			"description": "A glowing orb on a leash that tugs in random directions. Grab it in VR and feel the random walk through your hand. The orb pulses with each impulse. A trail traces the walk path. Stats track drift vs sqrt(N) theoretical scaling.",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"lookup_name": "random_walk_leash",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Walk Leash",
+			"qfep_connection": "Embodied randomness — the walk isn't watched, it's felt. Your arm becomes the accumulator of stochastic impulses.",
+			"scene": "res://algorithms/randomness/random_walk_leash/random_walk_leash.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"random_walk",
+				"embodied",
+				"haptic",
+				"drift",
+				"sqrt_n",
+				"physics",
+				"interactive",
+				"grab"
+			]
+		},
+		"randomize_cubes_over_Z": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "Distributes cubes with increasing randomness along the Z-axis, visualizing a gradient from order to disorder.",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "randomize_cubes_over_Z",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Randomize Cubes Over Z",
+			"scene": "res://algorithms/randomness/RandomizeCubesOverZ/randomize_cubes_over_Z.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"primitives"
+			]
+		},
+		"randomlines": {
+			"category": "procedural",
+			"complexity": "beginner",
+			"description": "ImmediateMesh random line segments with 3 distributions (uniform/Gaussian/clustered), 3 color modes (solid/golden-ratio/length-gradient), optional drift animation and bounding box. Config: num_lines, area_size_x/y/z, distribution, cluster_count, cluster_spread, color_mode, animate, drift_speed, show_bounding_box",
+			"dev_themes": [
+				"probability",
+				"randomness",
+				"statistics"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "randomlines",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Lines",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/randomness/randomlines/randomlines.tscn",
+			"sequence": "randomness",
+			"size_group": "compact",
+			"tags": [
+				"3d",
+				"procedural",
+				"probability",
+				"visualization"
+			]
+		},
+		"randompoint": {
+			"category": "primitives",
+			"complexity": "intermediate",
+			"description": "Drops a single draggable point inside an XY bounds and keeps its billboarded coordinate label in range.",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "randompoint",
 			"map_ready": true,
 			"map_sequences": [
 				"noise"
 			],
+			"name": "randompoint",
+			"scene": "res://algorithms/randomness/randompoint/randompoint.tscn",
 			"sequence": "randomness",
+			"size_group": "standard",
+			"tags": [
+				"primitives"
+			]
+		},
+		"randompoints": {
+			"capacity": "DISTINGUISH structured randomness from uniform randomness by seeing how a single constraint (minimum distance) transforms a point cloud from chaos to jazz",
+			"category": "emergence",
+			"complexity": "beginner",
+			"description": "Three distributions reveal three relationships with space. Uniform scatters without memory — each point ignores every other. Gaussian clusters around a center — proximity is destiny. Blue noise enforces minimum distance via dart-throwing rejection, structured randomness where emptiness is forbidden. The critical parameter is blue_noise_min_dist: the exclusion radius that converts white noise into jazz. Contrasts with randompoint (single white noise); prepares for Perlin noise (structured randomness with continuity).",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"gamwell_reference": "Chapter 7: Probability and Randomness",
+			"include_in_map_data": true,
+			"interactions": [
+				"switch distribution type (export)",
+				"grab individual points",
+				"observe packing limit in blue noise mode"
+			],
+			"lookup_name": "randompoints",
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"name": "randompoints",
+			"parameters": {
+				"area_size": "Volume dimensions (default: 1x1x1)",
+				"blue_noise_min_dist": "Minimum distance for blue noise rejection (default: 0.25)",
+				"distribution_type": "UNIFORM | GAUSSIAN | BLUE_NOISE",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"num_points": "Number of points to spawn (default: 30)",
+				"size_group": "compact"
+			},
+			"qfep_connection": "Pure E(S) — three distributions at three lambda values. Uniform is maximum entropy (lambda=0). Gaussian introduces spatial bias (lambda rising). Blue noise enforces a minimum-distance constraint that converts raw entropy into structured randomness — lambda at full strength, where constraint produces beauty, not order.",
+			"scene": "res://algorithms/randomness/randompoints/randompoints.tscn",
+			"sequence": "randomness",
+			"size_group": "compact",
+			"tags": [
+				"3d",
+				"emergence",
+				"interactive",
+				"probability",
+				"procedural",
+				"vr",
+				"blue_noise",
+				"gaussian",
+				"distribution",
+				"dart_throwing"
+			]
+		},
+		"randompoints_gaussian": {
+			"category": "emergence",
+			"complexity": "beginner",
+			"description": "Variant of the grab-point scatter preconfigured to sample from a 3D Gaussian cloud with labeled spheres.",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "randompoints_gaussian",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "randompoints_gaussian",
+			"scene": "res://algorithms/randomness/randompoints/randompoints_gaussian.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"3d",
+				"emergence",
+				"interactive",
+				"probability",
+				"vr"
+			]
+		},
+		"randompoints_uniform": {
+			"category": "emergence",
+			"complexity": "beginner",
+			"description": "Scatters grab spheres uniformly through a bounding box and labels each point.",
+			"dev_themes": [
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "randompoints_uniform",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "randompoints_uniform",
+			"scene": "res://algorithms/randomness/randompoints/randompoints_uniform.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"emergence",
+				"interactive",
+				"vr"
+			]
+		},
+		"randomup": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "Randomly elevates objects upward with varying heights, demonstrating basic vertical displacement using uniform randomness.",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "randomup",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Up",
+			"scene": "res://algorithms/randomness/randomup/randomup.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"primitives",
+				"probability",
+				"procedural"
+			]
+		},
+		"rejection_sampling_demo": {
+			"category": "randomness",
+			"complexity": "beginner",
+			"description": "Visual scatter plot of the accept/reject method for sampling arbitrary distributions. 2000 uniform random points plotted against a Gaussian target curve — green dots accepted (below curve), red dots rejected (above). Shows acceptance ratio.",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rejection_sampling_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Rejection Sampling Demo",
+			"scene": "res://commons/artifacts/rejection_sampling_demo/rejection_sampling_demo.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"rejection_sampling",
+				"accept_reject",
+				"gaussian",
+				"distribution",
+				"monte_carlo",
+				"scatter_plot",
+				"floor_display"
+			]
+		},
+		"remove_random": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A demolition algorithm that randomly removes cubes from the grid",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "remove_random",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Destructor",
+			"scene": "res://algorithms/randomness/remove_random.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"2d",
+				"primitives",
+				"probability",
+				"procedural"
+			]
+		},
+		"rotate_grid_cubes": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Rotates grid cubes with configurable patterns including alternating directions and phase offsets for passable slopes.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rotate_grid_cubes",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Rotate Grid Cubes",
+			"scene": "res://algorithms/randomness/RotateGridCubes.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"2d",
+				"grid",
+				"procedural"
+			]
+		},
+		"rotate_random_y": {
+			"category": "primitives",
+			"complexity": "intermediate",
+			"description": "Applies random Y-axis rotation to objects, creating varied orientations while maintaining vertical alignment.",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rotate_random_y",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Rotate Random Y",
+			"scene": "res://algorithms/randomness/RotateRandomY/rotate_random_y.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"primitives",
+				"probability",
+				"procedural"
+			]
+		},
+		"sculpt_one": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "An artistic sculpting algorithm that randomly modifies and shapes geometric forms",
+			"dev_themes": [
+				"art",
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sculpt_one",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Sculpt One",
+			"scene": "res://algorithms/randomness/sculpt_one.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"procedural"
+			]
+		},
+		"shader_07_noise": {
+			"category": "procedural",
+			"complexity": "advanced",
+			"description": "Book of Shaders chapter 7 — value noise, gradient noise, simplex noise implemented as GPU shaders on a quad display.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "shader_07_noise",
+			"map_ready": true,
+			"map_sequences": [
+				"patterngeneration"
+			],
+			"name": "Shader Noise Functions",
+			"scene": "res://algorithms/shaders/book_of_shaders/shader_07_noise.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"noise",
+				"procedural",
+				"shader",
+				"visualization"
+			]
+		},
+		"shader_08_cellularnoise": {
+			"category": "procedural",
+			"complexity": "advanced",
+			"description": "Book of Shaders chapter 8 — Voronoi and Worley noise patterns rendered as GPU shaders. Shows distance fields and cell boundaries.",
+			"dev_themes": [
+				"biology",
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "shader_08_cellularnoise",
+			"map_ready": true,
+			"map_sequences": [
+				"patterngeneration"
+			],
+			"name": "Cellular Noise Shader",
+			"scene": "res://algorithms/shaders/book_of_shaders/shader_08_cellularnoise.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"procedural",
+				"shader"
+			]
+		},
+		"shader_noise_space": {
+			"category": "procedural",
+			"complexity": "advanced",
+			"description": "Interactive shader-based noise space exploration with procedural textures and patterns",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				19,
+				14,
+				28
+			],
+			"include_in_map_data": true,
+			"lookup_name": "shader_noise_space",
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"name": "Shader Noise Space",
+			"parameters": {
+				"footprint": [
+					19,
+					14,
+					28
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/randomness/shadernoisespace/noiseroom.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
+			"tags": [
+				"noise",
+				"procedural",
+				"shader"
+			]
+		},
+		"shannon_entropy_meter": {
+			"category": "randomness",
+			"complexity": "beginner",
+			"description": "Wall-mounted Shannon entropy gauge — generates a random sequence, computes symbol frequencies, and displays H = -Σ p(x) log₂ p(x). Bar gauge fills from 0 to max entropy (~3.32 bits for 10 symbols). Frequency histogram shows symbol distribution.",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "shannon_entropy_meter",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Shannon Entropy Meter",
+			"scene": "res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"entropy",
+				"shannon",
+				"information_theory",
+				"measurement",
+				"probability",
+				"wall_display"
+			]
+		},
+		"simplex_noise": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive Simplex noise generation and visualization for high-quality procedural content",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				10,
+				3,
+				10
+			],
+			"include_in_map_data": true,
+			"lookup_name": "simplex_noise",
+			"map_ready": true,
+			"map_sequences": [
+				"noise"
+			],
+			"name": "Simplex Noise",
 			"parameters": {
 				"footprint": [
 					10,
-					1,
+					3,
 					10
 				],
-				"size_group": "environment"
+				"size_group": "xlarge"
 			},
-			"complexity": "intermediate",
+			"scene": "res://algorithms/randomness/simplexnoise/simplexnoise.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
 			"tags": [
-				"3d",
-				"graph",
+				"noise",
 				"procedural"
-			],
+			]
+		},
+		"slot_machine": {
+			"category": "randomness",
+			"complexity": "beginner",
+			"description": "A classic slot machine with 3 spinning reels. Pull the VR lever to spin — reels stop one by one, left to right. Tracks a histogram of symbol frequencies showing convergence to uniform distribution. Triple matches flash gold. AUTO mode for rapid sampling.",
 			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"interaction": "button",
+			"lookup_name": "slot_machine",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Slot Machine",
+			"qfep_connection": "Independence — each reel is an independent uniform trial. The combination space grows multiplicatively (6^3 = 216 outcomes).",
+			"scene": "res://algorithms/randomness/slot_machine/slot_machine.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"slot_machine",
+				"uniform_distribution",
+				"independence",
+				"combinatorics",
+				"probability",
+				"histogram",
+				"interactive"
+			]
+		},
+		"spawn_randomcubes": {
+			"category": "procedural",
+			"complexity": "beginner",
+			"description": "Interactive 3D Jackson Pollock-inspired painting using movement-based procedural randomness",
+			"dev_themes": [
+				"art",
 				"probability",
 				"procedural",
 				"randomness"
-			]
-		},
-		"marchingcubes_voxel_noise_demo": {
-			"name": "Marching Cubes Voxel Noise",
-			"lookup_name": "marchingcubes_voxel_noise_demo",
-			"description": "Marching cubes algorithm applied to a 3D noise field. Generates smooth isosurface mesh from voxel density values.",
-			"scene": "res://algorithms/spacetopology/marchingcubes/voxel_noise_demo.tscn",
-			"category": "procedural",
+			],
 			"include_in_map_data": true,
+			"lookup_name": "spawn_randomcubes",
 			"map_ready": true,
 			"map_sequences": [
-				"isosurfaces",
-				"proceduralgeneration_all"
+				"randomness"
 			],
-			"sequence": "randomness",
+			"name": "spawn_randomcubes",
 			"parameters": {
 				"footprint": [
-					33,
-					33,
-					33
+					21.0,
+					6.0,
+					50.0
 				],
 				"size_group": "world_scale"
 			},
-			"complexity": "advanced",
+			"scene": "res://algorithms/randomness/proceduralrandomness/objecttransforms/scenes/spawn_randomcubes.tscn",
+			"sequence": "randomness",
 			"tags": [
 				"3d",
-				"noise",
-				"procedural",
-				"voxel"
-			],
+				"animation",
+				"procedural"
+			]
+		},
+		"ten_print": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive recreation of the classic Commodore 64 10 PRINT maze generation algorithm",
 			"dev_themes": [
 				"probability",
 				"procedural",
 				"randomness"
-			]
-		},
-		"bubble_particles": {
-			"name": "Bubble Particles",
-			"lookup_name": "bubble_particles",
-			"description": "Movement-based procedural bubble system — bubbles spawn in a configurable area, rise with randomized speeds and sizes, fade over time, and pop with synthesized audio. Concurrent sound limiting and pitch variation create an organic underwater soundscape.",
-			"scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/bubbleparticles/bubble_particles.tscn",
-			"category": "procedural",
+			],
 			"include_in_map_data": true,
+			"lookup_name": "ten_print",
 			"map_ready": true,
 			"map_sequences": [
 				"randomness"
 			],
+			"name": "10 PRINT",
+			"parameters": {
+				"footprint": [
+					11.0,
+					3.0,
+					11.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/randomness/ten_print/ten_print.tscn",
 			"sequence": "randomness",
-			"complexity": "intermediate",
 			"tags": [
-				"animation",
-				"procedural",
-				"simulation",
-				"sorting",
-				"sound"
-			],
+				"procedural"
+			]
+		},
+		"ten_print_maze_3d": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Extrudes the classic 10 PRINT pattern into a standing maze and animates an ant pathfinder through it.",
+			"dev_category": "procedural_maze",
 			"dev_themes": [
-				"music",
+				"procedural",
+				"emergence"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ten_print_maze_3d",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "ten_print_maze_3d",
+			"scene": "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
+			"sequence": "randomness",
+			"size_group": "standard",
+			"tags": [
+				"10print",
+				"maze",
+				"pathfinding",
+				"generative",
+				"3d",
+				"classic"
+			]
+		},
+		"tessellation_lattice_demo": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Random walk on tessellated lattice structures (triangular, hexagonal, square), showing how tiling geometry affects diffusion patterns.",
+			"dev_themes": [
 				"probability",
 				"procedural",
 				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "tessellation_lattice_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"name": "Tessellation Lattice Demo",
+			"parameters": {
+				"footprint": [
+					17.0,
+					17.0,
+					17.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/randomness/randomwalk/scenes/tessellation_lattice_demo.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"pattern",
+				"probability",
+				"procedural"
+			]
+		},
+		"trng_vs_prng": {
+			"category": "primitives",
+			"complexity": "intermediate",
+			"description": "Interactive comparison between True Random Number Generators and Pseudo-Random Number Generators",
+			"dev_themes": [
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "trng_vs_prng",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "TRNG vs PRNG",
+			"parameters": {
+				"footprint": [
+					17.0,
+					24.0,
+					21.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/randomness/trng_vs_prng/trng_vs_prng.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"primitives",
+				"probability",
+				"procedural"
+			]
+		},
+		"value_noise": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "Interactive Value noise generation and visualization for procedural texture creation",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "value_noise",
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			],
+			"name": "Value Noise",
+			"parameters": {
+				"footprint": [
+					11.0,
+					6.0,
+					11.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/randomness/valuenoise/valuenoise.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"noise",
+				"procedural"
+			]
+		},
+		"voxelnoise": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "3D noise visualized as voxels — cubes appear or disappear based on noise threshold, revealing the underlying scalar field as solid geometry.",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"footprint": [
+				32,
+				32,
+				32
+			],
+			"include_in_map_data": true,
+			"lookup_name": "voxelnoise",
+			"map_ready": true,
+			"map_sequences": [
+				"grammar_systems",
+				"noise"
+			],
+			"name": "Voxel Noise",
+			"scene": "res://algorithms/randomness/voxelnoise/voxelnoise.tscn",
+			"sequence": "randomness",
+			"size_group": "xlarge",
+			"tags": [
+				"3d",
+				"procedural"
+			]
+		},
+		"walk_random": {
+			"category": "procedural",
+			"complexity": "intermediate",
+			"description": "An algorithmic walker that creates trails through the grid space",
+			"dev_themes": [
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "walk_random",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Walker",
+			"scene": "res://algorithms/randomness/walk_random.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"2d",
+				"probability",
+				"procedural"
+			]
+		},
+		"walkingsphere": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Spike, Random walk, Cellular automata  sphere",
+			"dev_themes": [
+				"biology",
+				"emergence",
+				"probability",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "walkingsphere",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "walkingsphere",
+			"scene": "res://algorithms/randomness/walkingsphere/walkingsphere.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"geometry",
+				"hazard",
+				"probability",
+				"procedural"
+			]
+		},
+		"worley_noise": {
+			"category": "procedural",
+			"complexity": "beginner",
+			"description": "Voronoi/cellular noise texture on a floor quad. Scatters random seed points and computes F2-F1 (second-nearest minus nearest distance) for the classic cell boundary look. Complement to Perlin/Simplex noise.",
+			"dev_themes": [
+				"biology",
+				"probability",
+				"procedural",
+				"randomness"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "worley_noise",
+			"map_ready": true,
+			"map_sequences": [
+				"noise",
+				"randomness"
+			],
+			"name": "Worley Noise",
+			"scene": "res://commons/artifacts/worley_noise/worley_noise.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"worley",
+				"voronoi",
+				"cellular",
+				"noise",
+				"distance_field",
+				"floor_display"
 			]
 		}
 	}

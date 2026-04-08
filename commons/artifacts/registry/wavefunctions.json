@@ -1283,7 +1283,20 @@
 				"oscillation",
 				"physics",
 				"waves"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					1
+				],
+				"reading_light": {
+					"type": "omni",
+					"direction": "+z",
+					"cone": 360,
+					"radius": 3
+				}
+			}
 		},
 		"cable_builder": {
 			"name": "Cable Builder",
@@ -1818,7 +1831,11 @@
 		"SoundscapeRadioRack": {
 			"name": "SoundscapeRadioRack",
 			"lookup_name": "SoundscapeRadioRack",
-			"description": "SoundscapeRadioRack",
+			"description": "Turn a physical wheel in VR to tune between soundscape radio stations. Station index maps from wheel angle, clarity from proximity to center — analog radio metaphor. Static noise between stations, clean signal at center. Every frequency band is a station; tuning is selecting which resonance to amplify.",
+			"qfep_connection": "Lambda as tuning — the wheel angle IS lambda, sweeping through a spectrum of possible sounds. Between stations is noise (high E). At station center is signal (high F). The threshold parameter controls how sharp the transition is.",
+			"gamwell_reference": "Fourier analysis, signal processing, wave interference",
+			"capacity": "TUNE between soundscape stations by turning a VR wheel — feeling the analog transition from signal to noise",
+			"interactions": ["turn VR hinge wheel to tune stations", "adjust volume wheel", "listen for static between stations"],
 			"scene": "res://commons/audio/rack_configs/SoundscapeRadioRack.tscn",
 			"category": "waves",
 			"include_in_map_data": true,
@@ -1829,7 +1846,14 @@
 			"sequence": "wavefunctions",
 			"complexity": "beginner",
 			"tags": [
-				"waves"
+				"audio",
+				"radio",
+				"tuning",
+				"soundscape",
+				"vr",
+				"interactive",
+				"frequency",
+				"analog"
 			],
 			"dev_themes": [
 				"music",

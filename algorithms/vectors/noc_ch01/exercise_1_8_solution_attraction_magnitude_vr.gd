@@ -17,6 +17,7 @@
 # relationships: Extends bouncing_ball (adds attraction). Feeds into three_body_problem and nbody_simulation (many attractors). Gateway to gravitational dynamics.
 # truth: An orbit is a perpetual fall that always misses the ground. Attraction creates structure from nothing but distance and direction.
 
+class_name AttractionMagnitudeVR
 extends Node3D
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
@@ -36,6 +37,10 @@ var _attractor_position: Vector3 = Vector3(0, 0.5, 0)
 var _ball_radius: float = 0.03
 var _line_mesh: ImmediateMesh
 var _line_instance: MeshInstance3D
+var _trail_mesh: ImmediateMesh
+var _trail_instance: MeshInstance3D
+var _trail_points: Array[Vector3] = []
+var _max_trail_length: int = 300
 var _status_label: Label3D
 var _controller_root: Node3D
 
@@ -97,6 +102,17 @@ func _setup_line() -> void:
 	_line_instance.material_override = MAT_LINE
 	_sim_root.add_child(_line_instance)
 
+	# Orbit trail — shows the path history
+	_trail_mesh = ImmediateMesh.new()
+	_trail_instance = MeshInstance3D.new()
+	_trail_instance.mesh = _trail_mesh
+	var trail_mat := StandardMaterial3D.new()
+	trail_mat.albedo_color = Color(1.0, 0.4, 0.7, 0.35)
+	trail_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	trail_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_trail_instance.material_override = trail_mat
+	_sim_root.add_child(_trail_instance)
+
 func _process(_delta: float) -> void:
 	# Track attractor position from the grabbable sphere (local to sim_root)
 	if _attractor_grab:
@@ -119,6 +135,17 @@ func _process(_delta: float) -> void:
 	_line_mesh.surface_add_vertex(_position)
 	_line_mesh.surface_add_vertex(_attractor_position)
 	_line_mesh.surface_end()
+
+	# Orbit trail
+	_trail_points.append(_position)
+	if _trail_points.size() > _max_trail_length:
+		_trail_points.remove_at(0)
+	_trail_mesh.clear_surfaces()
+	if _trail_points.size() >= 2:
+		_trail_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+		for p in _trail_points:
+			_trail_mesh.surface_add_vertex(p)
+		_trail_mesh.surface_end()
 
 	_status_label.text = "Attraction | dist: %.3f, force: %.4f" % [distance, force.length()]
 

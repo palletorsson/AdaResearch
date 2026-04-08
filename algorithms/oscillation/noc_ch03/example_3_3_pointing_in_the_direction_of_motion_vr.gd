@@ -17,6 +17,7 @@
 # relationships: Companion to example_3_2 (arbitrary angular motion vs velocity-aligned orientation). Used by vector_drone (enemy AI points toward player). Core concept for steering behaviors.
 # truth: A thing that points where it moves has surrendered its identity to its velocity. Heading is not chosen; it is inherited from motion.
 
+class_name PointingInDirectionOfMotionVR
 extends Node3D
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")

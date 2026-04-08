@@ -17,6 +17,7 @@
 # relationships: Extends torque_demo concepts to many bodies. Lives in ForcesSystems. Bridges linear forces (attraction) with angular dynamics (spin).
 # truth: Rotation does not need a force. It needs a torque — or random impulses. Translation and rotation are independent stories told by the same body.
 
+class_name ArbitraryAngularMotionVR
 extends Node3D
 
 const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")

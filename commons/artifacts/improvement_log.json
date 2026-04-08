@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "description": "Tracks artifact registry improvements made by /ada-artifact-improver",
+  "improvements": [
+    {
+      "lookup_name": "randompoints",
+      "registry_file": "randomness.json",
+      "timestamp": "2026-04-08",
+      "before_score": "2/8",
+      "after_score": "7/8",
+      "fields_added": ["qfep_connection", "gamwell_reference", "capacity", "interactions", "footprint", "size_group", "parameters"],
+      "fields_updated": ["description", "tags"],
+      "gdscript_changed": false,
+      "identity_source": true,
+      "verified": true
+    },
+    {
+      "lookup_name": "bulging_tunnel",
+      "registry_file": "alternative_geometries.json",
+      "timestamp": "2026-04-08",
+      "before_score": "2/8",
+      "after_score": "7/8",
+      "fields_added": ["qfep_connection", "gamwell_reference", "capacity", "interactions", "footprint", "size_group", "parameters"],
+      "fields_updated": ["description", "tags"],
+      "gdscript_changed": true,
+      "gdscript_additions": ["class_name BulgingTunnel", "@identity block (AI-drafted)"],
+      "screenshot_captured": true,
+      "identity_source": false,
+      "verified": true
+    }
+  ]
+}

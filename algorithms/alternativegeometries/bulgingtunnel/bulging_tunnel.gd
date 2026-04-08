@@ -1,4 +1,15 @@
+class_name BulgingTunnel
 extends Node3D
+
+# @identity
+# essence: a cylinder that refuses regularity — CSG spheres bulge the walls at intervals, making geometry breathe
+# desire: to feel depth warp — the tunnel contracts and expands, confusing distance perception
+# critical_parameter: num_bulges — controls the lambda between hallway (F=order) and cave (E=chaos)
+# triggers: changing num_bulges or bulge_max_radius rebuilds the entire tunnel with new distortion profile
+# emerges: at high bulge counts the tunnel becomes organic, more cave than corridor — geometry becomes landscape
+# needs: hollow mode not called by default — could be a toggle; complex_tunnel mode exists but unused
+# relationships: contrasts with mobius_strip_altgeo (twisted surface); pairs with klein_bottle (closed manifold); prepares for hyperbolic_plane (constant negative curvature)
+# truth: a corridor is just a cave with its chaos removed
 
 # Parameters for tunnel
 @export var tunnel_length := 10.0

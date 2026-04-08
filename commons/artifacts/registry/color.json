@@ -749,7 +749,11 @@
 		"SpectrumVisualizer": {
 			"lookup_name": "SpectrumVisualizer",
 			"name": "SpectrumVisualizer",
-			"description": "SpectrumVisualizer",
+			"description": "The visible spectrum bends from a line into a circle. Wavelength-to-color animation phases between linear layout (physics) and circular layout (perception). Magenta dots fill the gap that physics leaves empty — magenta is not a spectral color, it is the brain's invention to close the loop. The color wheel is a lie the brain tells to make the spectrum feel complete.",
+			"qfep_connection": "Lambda between physics and perception — the linear spectrum is pure F (physics, ordered by wavelength). The circular wheel is F + E (perception, with magenta invented to fill the gap). The animation IS the lambda sweep from one to the other.",
+			"gamwell_reference": "Color spaces (RGB, HSV, Lab), perceptual color science",
+			"capacity": "SEE that the color wheel is a perceptual invention — magenta is the seam where the brain closes what physics leaves open",
+			"interactions": ["watch auto-animation (linear to circular phase)", "observe magenta dots appearing in the gap"],
 			"scene": "res://algorithms/color/spectrum_visualizer/SpectrumVisualizer.tscn",
 			"category": "unknown",
 			"include_in_map_data": true,
@@ -777,7 +781,14 @@
 				"perception"
 			],
 			"tags": [
-				"color"
+				"spectrum",
+				"color_wheel",
+				"magenta",
+				"wavelength",
+				"perception",
+				"animation",
+				"color",
+				"physics"
 			]
 		},
 		"grabcolorcollection": {

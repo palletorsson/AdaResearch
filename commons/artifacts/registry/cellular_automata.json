@@ -1,1229 +1,192 @@
 {
 	"artifacts": {
-		"ca_showcase": {
-			"name": "CA Showcase",
-			"lookup_name": "ca_showcase",
-			"description": "A collection of various cellular automata demonstrations.",
-			"qfep_connection": "Survey of CA behavior classes — each class maps to a λ value. Class I (death) = λ=0, Class II (static) = low λ, Class IV (complex) = λ≈0.4, Class III (chaotic) = λ→1. The full spectrum rendered.",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/ca_showcase.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					7,
-					7,
-					7
-				],
-				"size_group": "environment"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"persian_rug": {
-			"name": "Persian Rug",
-			"lookup_name": "persian_rug",
-			"description": "Persian Rug Cellular Automata.",
-			"scene": "res://algorithms/cellularautomata/persian_rug/persian_rug.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata",
-				"testmaps"
-			],
-			"sequence": "cellularautomata",
-			"parameters": {
-				"footprint": [
-					1,
-					4,
-					3
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"2d",
-				"cellular_automata",
-				"emergence"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"ca_columns": {
-			"name": "CA Columns",
-			"lookup_name": "ca_columns",
-			"description": "Cellular Automata Columns Sculpture.",
-			"scene": "res://algorithms/cellularautomata/ca_columns/ca_columns.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"parameters": {
-				"footprint": [
-					8,
-					16,
-					8
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"dev_themes": [
-				"art",
-				"biology",
-				"cellular_automata",
-				"computation"
-			]
-		},
-		"ca_bridge": {
-			"name": "CA Bridge",
-			"lookup_name": "ca_bridge",
-			"description": "Cellular Automata Bridge.",
-			"scene": "res://algorithms/cellularautomata/ca_bridge/ca_bridge.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata",
-				"testmaps"
-			],
-			"sequence": "cellularautomata",
-			"parameters": {
-				"footprint": [
-					16,
-					1,
-					50
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"ca_screen": {
-			"name": "CA Screen",
-			"lookup_name": "ca_screen",
-			"description": "Cellular Automata Screen.",
-			"scene": "res://algorithms/cellularautomata/ca_screen/ca_screen.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"complexity": "intermediate",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"crack_propagation_ca": {
-			"name": "Crack Propagation CA",
-			"lookup_name": "crack_propagation_ca",
-			"description": "Simulation of crack propagation in materials.",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/crack_propagation_ca.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "beginner",
-			"tags": [
-				"emergence"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"dendrite_growth_ca": {
-			"name": "Dendrite Growth CA",
-			"lookup_name": "dendrite_growth_ca",
-			"description": "Simulation of crystal dendrite growth.",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/dendrite_growth_ca.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "beginner",
-			"tags": [
-				"emergence"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"ca_growth_network": {
-			"name": "CA Growth Network",
-			"lookup_name": "ca_growth_network",
-			"description": "Network structure that grows using cellular automata rules, forming organic branching patterns through local neighbor interactions.",
-			"scene": "res://algorithms/cellularautomata/ca_growth_network/ca_growth_network.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"complexity": "intermediate",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"graph"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"disease_spread_ca": {
-			"name": "Disease Spread CA",
-			"lookup_name": "disease_spread_ca",
-			"description": "SIR model simulation of disease spread.",
-			"qfep_connection": "SIR epidemic dynamics as entropy propagation — infection spreads E(S) through a network, recovery restores local F. The transmission rate IS λ: how fast disorder propagates through structure.",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/disease_spread_ca.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"complexity": "advanced",
-			"tags": [
-				"emergence",
-				"simulation"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"ecosystem_ca": {
-			"name": "Ecosystem CA",
-			"lookup_name": "ecosystem_ca",
-			"description": "Predator-prey ecosystem simulation.",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/ecosystem_ca.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "beginner",
-			"tags": [
-				"emergence"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"percolation_ca": {
-			"name": "Percolation CA",
-			"lookup_name": "percolation_ca",
-			"description": "Fluid percolation through porous media.",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/percolation_ca.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "beginner",
-			"tags": [
-				"emergence"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"recrystallization_ca": {
-			"name": "Recrystallization CA",
-			"lookup_name": "recrystallization_ca",
-			"description": "Simulation of metal recrystallization.",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/recrystallization_ca.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "beginner",
-			"tags": [
-				"emergence"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"self_organization_ca": {
-			"name": "Self Organization CA",
-			"lookup_name": "self_organization_ca",
-			"description": "Self-organizing patterns simulation.",
-			"qfep_connection": "Self-organization IS F-minimization made visible — local interactions spontaneously produce global order. The system finds its own low-F configuration without external instruction.",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/self_organization_ca.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"complexity": "advanced",
-			"tags": [
-				"emergence"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"elementary_ca_vr": {
-			"name": "Elementary CA VR",
-			"lookup_name": "elementary_ca_vr",
-			"description": "1D Elementary Cellular Automata in VR (Rule 30, etc).",
-			"qfep_connection": "Wolfram's 256 rules as a complete λ-spectrum. Rule 30 produces chaos from order, Rule 110 is Turing-complete at the edge of chaos — the simplest system that can compute anything.",
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_1_elementary_ca_vr.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					20
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"vr"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"game_of_life_vr": {
-			"name": "Game of Life VR",
-			"lookup_name": "game_of_life_vr",
-			"description": "Conway's Game of Life in VR.",
-			"qfep_connection": "Emergent gliders and oscillators are persistent low-F structures surviving in high-E(S) space. Life exists at Langton's λ ≈ 0.27 — just below the edge of chaos, where complex computation emerges from two rules.",
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_2_game_of_life_vr.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "advanced",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"vr"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"game_of_life_oop_vr": {
-			"name": "Game of Life OOP VR",
-			"lookup_name": "game_of_life_oop_vr",
-			"description": "Object-Oriented Game of Life in VR.",
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_3_game_of_life_oop_vr.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"vr"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"hexagon_ca_vr": {
-			"name": "Hexagon CA VR",
-			"lookup_name": "hexagon_ca_vr",
-			"description": "Cellular Automata on a hexagonal grid.",
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"complexity": "intermediate",
-			"tags": [
-				"2d",
-				"cellular_automata",
-				"emergence",
-				"vr"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"hexagon_cave_vr": {
-			"name": "Hexagon Cave VR",
-			"lookup_name": "hexagon_cave_vr",
-			"description": "Hexagonal CA generating a cave-like structure with varying radius.",
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_9_hexagon_cave_vr.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"vr"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"cellular_automata_3d": {
-			"name": "Cellular Automata 3D",
-			"lookup_name": "cellular_automata_3d",
-			"description": "General 3D Cellular Automata.",
-			"scene": "res://algorithms/cellularautomata/cellular_automata_3d/cellular_automata_3d.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation",
-				"recursiveemergence"
-			],
-			"sequence": "physicssimulation",
-			"parameters": {
-				"footprint": [
-					12,
-					12,
-					12
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"cellular_automata",
-				"emergence"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"mold_network": {
-			"name": "Mold Network",
-			"lookup_name": "mold_network",
-			"description": "Slime mold network generation.",
-			"scene": "res://algorithms/cellularautomata/cellular_automata_3d/MoldNetwork.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"complexity": "intermediate",
-			"tags": [
-				"emergence",
-				"graph"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"structure_growth": {
-			"name": "Structure Growth",
-			"lookup_name": "structure_growth",
-			"description": "3D structure growth simulation.",
-			"scene": "res://algorithms/cellularautomata/cellular_automata_3d/StructureGrowth.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					16
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"3d",
-				"emergence"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"cellular_automata_3d_tree": {
-			"name": "Cellular Automata 3D Tree",
-			"lookup_name": "cellular_automata_3d_tree",
-			"description": "Tree-like structure growth using 3D CA.",
-			"scene": "res://algorithms/cellularautomata/cellular_automata_3d_tree/CellularAutomata3DTree.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata",
-				"grammar_systems"
-			],
-			"sequence": "cellularautomata",
-			"parameters": {
-				"footprint": [
-					1,
-					6,
-					11
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"cellular_automata",
-				"emergence",
-				"tree"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"crossway_ca": {
-			"name": "Crossway CA",
-			"lookup_name": "crossway_ca",
-			"description": "Crossway Cellular Automata.",
-			"scene": "res://algorithms/cellularautomata/crossway_ca/CrosswayCA.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"parameters": {
-				"footprint": [
-					10,
-					16,
-					1
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"lattice_gas_automata": {
-			"name": "Lattice Gas Automata",
-			"lookup_name": "lattice_gas_automata",
-			"description": "Fluid dynamics simulation using Lattice Gas Automata.",
-			"qfep_connection": "Discrete particles on a lattice reproducing continuous fluid dynamics — microscopic F (collision rules) generates macroscopic E(S) (turbulence, flow). The Navier-Stokes equations emerge from local interactions.",
-			"scene": "res://algorithms/cellularautomata/lattice_gas_automata/lattice_gas_automata.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation",
-				"recursiveemergence"
-			],
-			"sequence": "physicssimulation",
-			"parameters": {
-				"footprint": [
-					9,
-					24,
-					21
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"emergence"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"rule_30_110": {
-			"name": "Rule 30/110",
-			"lookup_name": "rule_30_110",
-			"description": "Visualization of Rule 30 and Rule 110.",
-			"qfep_connection": "Rule 30: deterministic chaos (high λ, unpredictable from initial conditions). Rule 110: Turing-complete at λ≈0.4, the exact edge where F-minimization and E(S)-generation balance.",
-			"scene": "res://algorithms/cellularautomata/rule_30_110/rule_30_110.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"proceduralgeneration",
-				"proceduralgeneration_all"
-			],
-			"sequence": "proceduralgeneration_all",
-			"parameters": {
-				"footprint": [
-					13,
-					24,
-					21
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"rule_30_110_gravity": {
-			"name": "Rule 30/110 Gravity",
-			"lookup_name": "rule_30_110_gravity",
-			"description": "Rule 30/110 with gravity effects.",
-			"scene": "res://algorithms/cellularautomata/rule_30_110/rule_30_110_gravity.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata",
-				"recursiveemergence"
-			],
-			"sequence": "cellularautomata",
-			"parameters": {
-				"footprint": [
-					1,
-					24,
-					29
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"physics"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"ca_sphere": {
-			"name": "CA Sphere",
-			"lookup_name": "ca_sphere",
-			"description": "Cellular Automata on a sphere surface.",
-			"scene": "res://algorithms/cellularautomata/CA_sphere/CA_sphere.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"complexity": "beginner",
-			"tags": [
-				"3d",
-				"cellular_automata",
-				"emergence",
-				"geometry"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"ca_chair_test": {
-			"name": "CA Chair Test",
-			"lookup_name": "ca_chair_test",
-			"description": "Cellular Automata Chair Test.",
-			"scene": "res://algorithms/cellularautomata/CAchairtests/Main.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"parameters": {
-				"footprint": [
-					11,
-					1,
-					31
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"cellular_automata_1d": {
-			"name": "Cellular Automata 1D",
-			"lookup_name": "cellular_automata_1d",
-			"description": "1D Cellular Automata.",
-			"scene": "res://algorithms/cellularautomata/cellular_automata_1d/cellular_automata_1d.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation"
-			],
-			"sequence": "physicssimulation",
-			"parameters": {
-				"footprint": [
-					11,
-					11,
-					9
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"cellular_automata_2d": {
-			"name": "Cellular Automata 2D",
-			"lookup_name": "cellular_automata_2d",
-			"description": "2D Cellular Automata.",
-			"scene": "res://algorithms/cellularautomata/cellular_automata_2d/cellular_automata_2D.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"recursiveemergence"
-			],
-			"sequence": "recursiveemergence",
-			"parameters": {
-				"footprint": [
-					17,
-					21,
-					16
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"2d",
-				"cellular_automata",
-				"emergence"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"cellular_automata_3d_stacked": {
-			"name": "Cellular Automata 3D Stacked",
-			"lookup_name": "cellular_automata_3d_stacked",
-			"description": "Stacked 3D Cellular Automata.",
-			"scene": "res://algorithms/cellularautomata/cellular_automata_3d_stacked/CellularAutomata3DStacked.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"fractals",
-				"recursiveemergence"
-			],
-			"sequence": "fractals",
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"cellular_automata",
-				"emergence"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"cellular_automata_basic": {
-			"name": "Cellular Automata Basic",
-			"lookup_name": "cellular_automata_basic",
-			"description": "Basic Cellular Automata.",
-			"scene": "res://algorithms/cellularautomata/cellularautomata/scenes/cellular_automata.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "beginner",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"cellular_automata_grabable": {
-			"name": "Cellular Automata Grabable",
-			"lookup_name": "cellular_automata_grabable",
-			"description": "Grabable Cellular Automata.",
-			"scene": "res://algorithms/cellularautomata/cellularautomata/scenes/cellular_automata_grabable.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"recursiveemergence"
-			],
-			"sequence": "recursiveemergence",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"mirrored_cellular_automata": {
-			"name": "Mirrored Cellular Automata",
-			"lookup_name": "mirrored_cellular_automata",
-			"description": "Symmetric cellular automata pattern generator.",
-			"scene": "res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"parameters": {
-				"footprint": [
-					1,
-					2,
-					6
-				],
-				"size_group": "environment"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"pattern"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"decaying_bridge": {
-			"name": "Decaying Bridge",
-			"lookup_name": "decaying_bridge",
-			"description": "A bridge that decays when stepped on.",
-			"scene": "res://algorithms/cellularautomata/living_architecture/decaying_bridge.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"complexity": "beginner",
-			"tags": [
-				"emergence"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"volumetric_fog_ca": {
-			"name": "Volumetric Fog CA",
-			"lookup_name": "volumetric_fog_ca",
-			"description": "3D Cellular Automata driving a volumetric fog.",
-			"scene": "res://algorithms/cellularautomata/volumetric_fog/volumetric_fog_ca.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"cellular_automata",
-				"emergence"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"line_network_ca": {
-			"name": "Line Network CA",
-			"lookup_name": "line_network_ca",
-			"description": "Base class visualization for line-based cellular automata.",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/LineNetworkCA.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"complexity": "intermediate",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"graph"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"pulsing_ca": {
-			"name": "Pulsing CA",
-			"lookup_name": "pulsing_ca",
-			"description": "Base class visualization for pulsing sphere cellular automata.",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/PulsingCA.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"complexity": "intermediate",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"geometry"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"sierpinski_pyramid": {
-			"name": "Sierpinski Pyramid",
-			"lookup_name": "sierpinski_pyramid",
-			"description": "Recursive Sierpinski Pyramid construction using cubes.",
-			"qfep_connection": "Fractal self-similarity as infinite F-compression — the same pattern at every scale. Sierpinski's triangle emerges from Rule 90 (a CA), showing how recursive structure achieves maximum order with minimum description length.",
-			"scene": "res://algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata",
-				"fractals",
-				"recursiveemergence"
-			],
-			"sequence": "cellularautomata",
-			"parameters": {
-				"footprint": [
-					1,
-					6,
-					21
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"emergence"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"wireworld_circuit": {
-			"name": "Wireworld Circuit",
-			"lookup_name": "wireworld_circuit",
-			"description": "Wireworld cellular automaton — 4-state CA for logic gates and signal routing. Displays an OR gate with clock inputs on a floor display, demonstrating how simple state-transition rules produce computational behavior.",
-			"qfep_connection": "Computation as signal propagation through constraint — pure F-minimization in a cellular medium. Electrons flow through wire topology; the circuit IS the F-model that channels E(S).",
-			"scene": "res://commons/artifacts/wireworld_circuit/wireworld_circuit.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"complexity": "advanced",
-			"tags": [
-				"2d",
-				"cellular_automata",
-				"emergence",
-				"visualization"
-			],
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			]
-		},
-		"lenia_continuous": {
-			"name": "Lenia Continuous",
-			"lookup_name": "lenia_continuous",
-			"description": "Continuous cellular automaton (Lenia) — smooth lifelike organisms emerge from a ring-shaped kernel, bell-curve growth function, and continuous [0,1] states. The 'wow' artifact for cellular automata: watch amorphous blobs self-organize into gliding, pulsing creatures on a glowing floor display.",
-			"qfep_connection": "Continuous CA with smooth λ-variation. Creatures self-maintain through continuous F-minimization — they persist by predicting their own next state. Lenia lives at the edge of chaos in continuous space.",
-			"scene": "res://commons/artifacts/lenia_continuous/lenia_continuous.tscn",
-			"category": "emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"sequence": "cellularautomata",
-			"complexity": "advanced",
-			"tags": [
-				"2d",
-				"cellular_automata",
-				"emergence",
-				"visualization"
-			],
-			"dev_themes": [
-				"art",
-				"biology",
-				"cellular_automata",
-				"computation"
-			]
-		},
-		"CrosswayCA": {
-			"lookup_name": "CrosswayCA",
-			"name": "CrosswayCA",
-			"description": "CrosswayCA",
-			"scene": "res://algorithms/cellularautomata/crossway_ca/CrosswayCA.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"tags": [
-				"cellular_automata"
-			]
-		},
 		"7_1_elementary_ca_vr": {
-			"lookup_name": "7_1_elementary_ca_vr",
-			"name": "7_1_elementary_ca_vr",
-			"description": "7_1_elementary_ca_vr",
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_1_elementary_ca_vr.tscn",
 			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				21
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					21
-				],
-				"size_group": "world_scale"
-			},
 			"complexity": "beginner",
+			"description": "7_1_elementary_ca_vr",
 			"dev_themes": [
 				"cellular_automata",
 				"computation",
 				"emergence"
 			],
+			"footprint": [
+				1.0,
+				1.0,
+				21.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "7_1_elementary_ca_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "7_1_elementary_ca_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					21.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/cellularautomata/noc_ch07/7_1_elementary_ca_vr.tscn",
+			"size_group": "world_scale",
 			"tags": [
 				"cellular_automata"
 			]
 		},
 		"7_2_game_of_life_vr": {
-			"lookup_name": "7_2_game_of_life_vr",
-			"name": "7_2_game_of_life_vr",
-			"description": "7_2_game_of_life_vr",
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_2_game_of_life_vr.tscn",
 			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				22,
-				22,
-				22
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					22,
-					22,
-					22
-				],
-				"size_group": "world_scale"
-			},
 			"complexity": "beginner",
+			"description": "7_2_game_of_life_vr",
 			"dev_themes": [
 				"cellular_automata",
 				"computation",
 				"emergence"
 			],
+			"footprint": [
+				22.0,
+				22.0,
+				22.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "7_2_game_of_life_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "7_2_game_of_life_vr",
+			"parameters": {
+				"footprint": [
+					22.0,
+					22.0,
+					22.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/cellularautomata/noc_ch07/7_2_game_of_life_vr.tscn",
+			"size_group": "world_scale",
 			"tags": [
 				"cellular_automata"
 			]
 		},
 		"7_3_game_of_life_oop_vr": {
-			"lookup_name": "7_3_game_of_life_oop_vr",
-			"name": "7_3_game_of_life_oop_vr",
-			"description": "7_3_game_of_life_oop_vr",
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_3_game_of_life_oop_vr.tscn",
 			"category": "unknown",
+			"complexity": "beginner",
+			"description": "7_3_game_of_life_oop_vr",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
 			"include_in_map_data": true,
+			"lookup_name": "7_3_game_of_life_oop_vr",
 			"map_ready": true,
 			"map_sequences": [],
+			"name": "7_3_game_of_life_oop_vr",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/cellularautomata/noc_ch07/7_3_game_of_life_oop_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"cellular_automata"
+			]
+		},
+		"7_8_hexagon_ca_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "7_8_hexagon_ca_vr",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				32.0,
+				32.0,
+				32.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "7_8_hexagon_ca_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "7_8_hexagon_ca_vr",
+			"parameters": {
+				"footprint": [
+					32.0,
+					32.0,
+					32.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"cellular_automata"
+			]
+		},
+		"CA_sphere": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "CA_sphere",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "CA_sphere",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "CA_sphere",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/cellularautomata/CA_sphere/CA_sphere.tscn",
+			"size_group": "compact",
+			"tags": [
+				"cellular_automata"
+			]
+		},
+		"CellularAutomata3DStacked": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "CellularAutomata3DStacked",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
 			"footprint": [
 				1,
 				1,
 				1
 			],
-			"size_group": "compact",
+			"include_in_map_data": true,
+			"lookup_name": "CellularAutomata3DStacked",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "CellularAutomata3DStacked",
 			"parameters": {
 				"footprint": [
 					1,
@@ -1232,150 +195,1298 @@
 				],
 				"size_group": "compact"
 			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"tags": [
-				"cellular_automata"
-			]
-		},
-		"7_8_hexagon_ca_vr": {
-			"lookup_name": "7_8_hexagon_ca_vr",
-			"name": "7_8_hexagon_ca_vr",
-			"description": "7_8_hexagon_ca_vr",
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				32,
-				32,
-				32
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					32,
-					32,
-					32
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"tags": [
-				"cellular_automata"
-			]
-		},
-		"CellularAutomata3DStacked": {
-			"lookup_name": "CellularAutomata3DStacked",
-			"name": "CellularAutomata3DStacked",
-			"description": "CellularAutomata3DStacked",
 			"scene": "res://algorithms/cellularautomata/cellular_automata_3d_stacked/CellularAutomata3DStacked.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"footprint": [
-				20,
-				1,
-				20
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					20,
-					1,
-					20
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
+			"size_group": "compact",
 			"tags": [
 				"cellular_automata"
 			]
 		},
 		"CellularAutomata3DTree": {
-			"lookup_name": "CellularAutomata3DTree",
-			"name": "CellularAutomata3DTree",
-			"description": "CellularAutomata3DTree",
-			"scene": "res://algorithms/cellularautomata/cellular_automata_3d_tree/CellularAutomata3DTree.tscn",
 			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				6,
-				11
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					1,
-					6,
-					11
-				],
-				"size_group": "world_scale"
-			},
 			"complexity": "intermediate",
+			"description": "CellularAutomata3DTree",
 			"dev_themes": [
 				"biology",
 				"cellular_automata",
 				"computation",
 				"emergence"
 			],
+			"footprint": [
+				1.0,
+				6.0,
+				11.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "CellularAutomata3DTree",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "CellularAutomata3DTree",
+			"parameters": {
+				"footprint": [
+					1.0,
+					6.0,
+					11.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/cellularautomata/cellular_automata_3d_tree/CellularAutomata3DTree.tscn",
+			"size_group": "world_scale",
 			"tags": [
 				"cellular_automata"
 			]
 		},
-		"CA_sphere": {
-			"lookup_name": "CA_sphere",
-			"name": "CA_sphere",
-			"description": "CA_sphere",
-			"scene": "res://algorithms/cellularautomata/CA_sphere/CA_sphere.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				2,
-				2,
-				2
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
+		"CrosswayCA": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Each row obeys a different Wolfram rule number. Where rule regimes collide at row boundaries, interference patterns emerge — moire-like zones of order in the chaos. Every 10 turns all rules re-randomize and the entire pattern language shifts. A crossroads of computational grammars where the boundaries become the most interesting places.",
+			"qfep_connection": "Critical lambda — each row is a different lambda value (rule number). The boundaries between rows are the edges of chaos, where different computational regimes interfere and produce emergent structure.",
+			"gamwell_reference": "Cellular automata, Wolfram classification, emergence",
+			"capacity": "SEE that when different rules collide, the boundaries between them produce more complexity than either rule alone",
+			"interactions": ["observe rule collisions at row boundaries", "watch re-randomization every 10 turns", "toggle collision walkability"],
 			"dev_themes": [
 				"cellular_automata",
 				"computation",
 				"emergence"
 			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "CrosswayCA",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "CrosswayCA",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/cellularautomata/crossway_ca/CrosswayCA.tscn",
+			"size_group": "compact",
 			"tags": [
-				"cellular_automata"
+				"cellular_automata",
+				"wolfram",
+				"multi_rule",
+				"interference",
+				"emergence",
+				"boundary"
+			]
+		},
+		"ca_bridge": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Cellular Automata Bridge.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ca_bridge",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata",
+				"testmaps"
+			],
+			"name": "CA Bridge",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/cellularautomata/ca_bridge/ca_bridge.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "compact",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			]
+		},
+		"ca_chair_test": {
+			"category": "emergence",
+			"complexity": "beginner",
+			"description": "Cellular Automata Chair Test.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ca_chair_test",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "CA Chair Test",
+			"parameters": {
+				"footprint": [
+					11.0,
+					1.0,
+					31.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/cellularautomata/CAchairtests/Main.tscn",
+			"sequence": "cellularautomata",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			]
+		},
+		"ca_columns": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Cellular Automata Columns Sculpture.",
+			"dev_themes": [
+				"art",
+				"biology",
+				"cellular_automata",
+				"computation"
+			],
+			"footprint": [
+				9,
+				1,
+				9
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ca_columns",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "CA Columns",
+			"parameters": {
+				"footprint": [
+					9,
+					1,
+					9
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/cellularautomata/ca_columns/ca_columns.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "xlarge",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			]
+		},
+		"ca_growth_network": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Network structure that grows using cellular automata rules, forming organic branching patterns through local neighbor interactions.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				2,
+				2,
+				2
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ca_growth_network",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "CA Growth Network",
+			"scene": "res://algorithms/cellularautomata/ca_growth_network/ca_growth_network.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "standard",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"graph"
+			]
+		},
+		"ca_screen": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Cellular Automata Screen.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ca_screen",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "CA Screen",
+			"scene": "res://algorithms/cellularautomata/ca_screen/ca_screen.tscn",
+			"sequence": "cellularautomata",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			]
+		},
+		"ca_showcase": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "A collection of various cellular automata demonstrations.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ca_showcase",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "CA Showcase",
+			"parameters": {
+				"footprint": [
+					7.0,
+					7.0,
+					7.0
+				],
+				"size_group": "environment"
+			},
+			"qfep_connection": "Survey of CA behavior classes — each class maps to a λ value. Class I (death) = λ=0, Class II (static) = low λ, Class IV (complex) = λ≈0.4, Class III (chaotic) = λ→1. The full spectrum rendered.",
+			"scene": "res://algorithms/cellularautomata/ca_showcase/ca_showcase.tscn",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			]
+		},
+		"ca_sphere": {
+			"category": "emergence",
+			"complexity": "beginner",
+			"description": "Cellular Automata on a sphere surface.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				2,
+				2,
+				2
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ca_sphere",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "CA Sphere",
+			"scene": "res://algorithms/cellularautomata/CA_sphere/CA_sphere.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "standard",
+			"tags": [
+				"3d",
+				"cellular_automata",
+				"emergence",
+				"geometry"
+			]
+		},
+		"cellular_automata_1d": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "1D Cellular Automata.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cellular_automata_1d",
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation"
+			],
+			"name": "Cellular Automata 1D",
+			"parameters": {
+				"footprint": [
+					11.0,
+					11.0,
+					9.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/cellularautomata/cellular_automata_1d/cellular_automata_1d.tscn",
+			"sequence": "physicssimulation",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			]
+		},
+		"cellular_automata_2d": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "2D Cellular Automata.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cellular_automata_2d",
+			"map_ready": true,
+			"map_sequences": [
+				"recursiveemergence"
+			],
+			"name": "Cellular Automata 2D",
+			"parameters": {
+				"footprint": [
+					17.0,
+					21.0,
+					16.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/cellularautomata/cellular_automata_2d/cellular_automata_2D.tscn",
+			"sequence": "recursiveemergence",
+			"tags": [
+				"2d",
+				"cellular_automata",
+				"emergence"
+			]
+		},
+		"cellular_automata_3d": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "General 3D Cellular Automata.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cellular_automata_3d",
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation",
+				"recursiveemergence"
+			],
+			"name": "Cellular Automata 3D",
+			"parameters": {
+				"footprint": [
+					12.0,
+					12.0,
+					12.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/cellularautomata/cellular_automata_3d/cellular_automata_3d.tscn",
+			"sequence": "physicssimulation",
+			"tags": [
+				"3d",
+				"cellular_automata",
+				"emergence"
+			]
+		},
+		"cellular_automata_3d_stacked": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Stacked 3D Cellular Automata.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cellular_automata_3d_stacked",
+			"map_ready": true,
+			"map_sequences": [
+				"fractals",
+				"recursiveemergence"
+			],
+			"name": "Cellular Automata 3D Stacked",
+			"scene": "res://algorithms/cellularautomata/cellular_automata_3d_stacked/CellularAutomata3DStacked.tscn",
+			"sequence": "fractals",
+			"tags": [
+				"3d",
+				"cellular_automata",
+				"emergence"
+			]
+		},
+		"cellular_automata_3d_tree": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Tree-like structure growth using 3D CA.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				4,
+				7,
+				4
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cellular_automata_3d_tree",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata",
+				"grammar_systems"
+			],
+			"name": "Cellular Automata 3D Tree",
+			"parameters": {
+				"footprint": [
+					4,
+					7,
+					4
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/cellularautomata/cellular_automata_3d_tree/CellularAutomata3DTree.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "xlarge",
+			"tags": [
+				"3d",
+				"cellular_automata",
+				"emergence",
+				"tree"
+			]
+		},
+		"cellular_automata_basic": {
+			"category": "emergence",
+			"complexity": "beginner",
+			"description": "Basic Cellular Automata.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cellular_automata_basic",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Cellular Automata Basic",
+			"scene": "res://algorithms/cellularautomata/cellularautomata/scenes/cellular_automata.tscn",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			]
+		},
+		"cellular_automata_grabable": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Grabable Cellular Automata.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cellular_automata_grabable",
+			"map_ready": true,
+			"map_sequences": [
+				"recursiveemergence"
+			],
+			"name": "Cellular Automata Grabable",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/cellularautomata/cellularautomata/scenes/cellular_automata_grabable.tscn",
+			"sequence": "recursiveemergence",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			]
+		},
+		"crack_propagation_ca": {
+			"category": "emergence",
+			"complexity": "beginner",
+			"description": "Simulation of crack propagation in materials.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "crack_propagation_ca",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Crack Propagation CA",
+			"scene": "res://algorithms/cellularautomata/ca_showcase/crack_propagation_ca.tscn",
+			"tags": [
+				"emergence"
+			]
+		},
+		"crossway_ca": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Crossway Cellular Automata.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "crossway_ca",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "Crossway CA",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/cellularautomata/crossway_ca/CrosswayCA.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "compact",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			]
+		},
+		"decaying_bridge": {
+			"category": "emergence",
+			"complexity": "beginner",
+			"description": "A bridge that decays when stepped on.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				5,
+				1,
+				30
+			],
+			"include_in_map_data": true,
+			"lookup_name": "decaying_bridge",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "Decaying Bridge",
+			"scene": "res://algorithms/cellularautomata/living_architecture/decaying_bridge.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "xlarge",
+			"tags": [
+				"emergence"
+			]
+		},
+		"dendrite_growth_ca": {
+			"category": "emergence",
+			"complexity": "beginner",
+			"description": "Simulation of crystal dendrite growth.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "dendrite_growth_ca",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Dendrite Growth CA",
+			"scene": "res://algorithms/cellularautomata/ca_showcase/dendrite_growth_ca.tscn",
+			"tags": [
+				"emergence"
+			]
+		},
+		"disease_spread_ca": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "SIR model simulation of disease spread.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				25,
+				20,
+				20
+			],
+			"include_in_map_data": true,
+			"lookup_name": "disease_spread_ca",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "Disease Spread CA",
+			"qfep_connection": "SIR epidemic dynamics as entropy propagation — infection spreads E(S) through a network, recovery restores local F. The transmission rate IS λ: how fast disorder propagates through structure.",
+			"scene": "res://algorithms/cellularautomata/ca_showcase/disease_spread_ca.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "xlarge",
+			"tags": [
+				"emergence",
+				"simulation"
+			]
+		},
+		"ecosystem_ca": {
+			"category": "emergence",
+			"complexity": "beginner",
+			"description": "Predator-prey ecosystem simulation.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ecosystem_ca",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Ecosystem CA",
+			"scene": "res://algorithms/cellularautomata/ca_showcase/ecosystem_ca.tscn",
+			"tags": [
+				"emergence"
+			]
+		},
+		"elementary_ca_vr": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "1D Elementary Cellular Automata in VR (Rule 30, etc).",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "elementary_ca_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Elementary CA VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					20.0
+				],
+				"size_group": "world_scale"
+			},
+			"qfep_connection": "Wolfram's 256 rules as a complete λ-spectrum. Rule 30 produces chaos from order, Rule 110 is Turing-complete at the edge of chaos — the simplest system that can compute anything.",
+			"scene": "res://algorithms/cellularautomata/noc_ch07/7_1_elementary_ca_vr.tscn",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"vr"
+			]
+		},
+		"game_of_life_oop_vr": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Object-Oriented Game of Life in VR.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "game_of_life_oop_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Game of Life OOP VR",
+			"scene": "res://algorithms/cellularautomata/noc_ch07/7_3_game_of_life_oop_vr.tscn",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"vr"
+			]
+		},
+		"game_of_life_vr": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Conway's Game of Life in VR.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "game_of_life_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Game of Life VR",
+			"qfep_connection": "Emergent gliders and oscillators are persistent low-F structures surviving in high-E(S) space. Life exists at Langton's λ ≈ 0.27 — just below the edge of chaos, where complex computation emerges from two rules.",
+			"scene": "res://algorithms/cellularautomata/noc_ch07/7_2_game_of_life_vr.tscn",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"vr"
+			]
+		},
+		"hexagon_ca_vr": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Cellular Automata on a hexagonal grid.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				36,
+				3,
+				31
+			],
+			"include_in_map_data": true,
+			"lookup_name": "hexagon_ca_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "Hexagon CA VR",
+			"scene": "res://algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "xlarge",
+			"tags": [
+				"2d",
+				"cellular_automata",
+				"emergence",
+				"vr"
+			]
+		},
+		"hexagon_cave_vr": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Hexagonal CA generating a cave-like structure with varying radius.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "hexagon_cave_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Hexagon Cave VR",
+			"scene": "res://algorithms/cellularautomata/noc_ch07/7_9_hexagon_cave_vr.tscn",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"vr"
+			]
+		},
+		"lattice_gas_automata": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Fluid dynamics simulation using Lattice Gas Automata.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "lattice_gas_automata",
+			"map_ready": true,
+			"map_sequences": [
+				"physicssimulation",
+				"recursiveemergence"
+			],
+			"name": "Lattice Gas Automata",
+			"parameters": {
+				"footprint": [
+					9.0,
+					24.0,
+					21.0
+				],
+				"size_group": "world_scale"
+			},
+			"qfep_connection": "Discrete particles on a lattice reproducing continuous fluid dynamics — microscopic F (collision rules) generates macroscopic E(S) (turbulence, flow). The Navier-Stokes equations emerge from local interactions.",
+			"scene": "res://algorithms/cellularautomata/lattice_gas_automata/lattice_gas_automata.tscn",
+			"sequence": "physicssimulation",
+			"tags": [
+				"emergence"
+			]
+		},
+		"lenia_continuous": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Continuous cellular automaton (Lenia) — smooth lifelike organisms emerge from a ring-shaped kernel, bell-curve growth function, and continuous [0,1] states. The 'wow' artifact for cellular automata: watch amorphous blobs self-organize into gliding, pulsing creatures on a glowing floor display.",
+			"dev_themes": [
+				"art",
+				"biology",
+				"cellular_automata",
+				"computation"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "lenia_continuous",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "Lenia Continuous",
+			"qfep_connection": "Continuous CA with smooth λ-variation. Creatures self-maintain through continuous F-minimization — they persist by predicting their own next state. Lenia lives at the edge of chaos in continuous space.",
+			"scene": "res://commons/artifacts/lenia_continuous/lenia_continuous.tscn",
+			"sequence": "cellularautomata",
+			"tags": [
+				"2d",
+				"cellular_automata",
+				"emergence",
+				"visualization"
+			]
+		},
+		"line_network_ca": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Base class visualization for line-based cellular automata.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				8,
+				6,
+				6
+			],
+			"include_in_map_data": true,
+			"lookup_name": "line_network_ca",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "Line Network CA",
+			"scene": "res://algorithms/cellularautomata/ca_showcase/LineNetworkCA.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "xlarge",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"graph"
+			]
+		},
+		"mirrored_cellular_automata": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Symmetric cellular automata pattern generator.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				4,
+				1,
+				4
+			],
+			"include_in_map_data": true,
+			"lookup_name": "mirrored_cellular_automata",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "Mirrored Cellular Automata",
+			"parameters": {
+				"footprint": [
+					4,
+					1,
+					4
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "xlarge",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"pattern"
+			]
+		},
+		"mold_network": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Slime mold network generation.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				3,
+				4,
+				3
+			],
+			"include_in_map_data": true,
+			"lookup_name": "mold_network",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "Mold Network",
+			"scene": "res://algorithms/cellularautomata/cellular_automata_3d/MoldNetwork.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "large",
+			"tags": [
+				"emergence",
+				"graph"
+			]
+		},
+		"percolation_ca": {
+			"category": "emergence",
+			"complexity": "beginner",
+			"description": "Fluid percolation through porous media.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "percolation_ca",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Percolation CA",
+			"scene": "res://algorithms/cellularautomata/ca_showcase/percolation_ca.tscn",
+			"tags": [
+				"emergence"
+			]
+		},
+		"persian_rug": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Persian Rug Cellular Automata.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				3,
+				1,
+				4
+			],
+			"include_in_map_data": true,
+			"lookup_name": "persian_rug",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata",
+				"testmaps"
+			],
+			"name": "Persian Rug",
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					4
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/cellularautomata/persian_rug/persian_rug.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "xlarge",
+			"tags": [
+				"2d",
+				"cellular_automata",
+				"emergence"
+			]
+		},
+		"pulsing_ca": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Base class visualization for pulsing sphere cellular automata.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pulsing_ca",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Pulsing CA",
+			"scene": "res://algorithms/cellularautomata/ca_showcase/PulsingCA.tscn",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"geometry"
+			]
+		},
+		"recrystallization_ca": {
+			"category": "emergence",
+			"complexity": "beginner",
+			"description": "Simulation of metal recrystallization.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "recrystallization_ca",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Recrystallization CA",
+			"scene": "res://algorithms/cellularautomata/ca_showcase/recrystallization_ca.tscn",
+			"tags": [
+				"emergence"
+			]
+		},
+		"rule_30_110": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Visualization of Rule 30 and Rule 110.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rule_30_110",
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"name": "Rule 30/110",
+			"parameters": {
+				"footprint": [
+					13.0,
+					24.0,
+					21.0
+				],
+				"size_group": "world_scale"
+			},
+			"qfep_connection": "Rule 30: deterministic chaos (high λ, unpredictable from initial conditions). Rule 110: Turing-complete at λ≈0.4, the exact edge where F-minimization and E(S)-generation balance.",
+			"scene": "res://algorithms/cellularautomata/rule_30_110/rule_30_110.tscn",
+			"sequence": "proceduralgeneration_all",
+			"tags": [
+				"cellular_automata",
+				"emergence"
+			]
+		},
+		"rule_30_110_gravity": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "Rule 30/110 with gravity effects.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rule_30_110_gravity",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata",
+				"recursiveemergence"
+			],
+			"name": "Rule 30/110 Gravity",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/cellularautomata/rule_30_110/rule_30_110_gravity.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "compact",
+			"tags": [
+				"cellular_automata",
+				"emergence",
+				"physics"
+			]
+		},
+		"self_organization_ca": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Self-organizing patterns simulation.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				7,
+				1004,
+				7
+			],
+			"include_in_map_data": true,
+			"lookup_name": "self_organization_ca",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "Self Organization CA",
+			"qfep_connection": "Self-organization IS F-minimization made visible — local interactions spontaneously produce global order. The system finds its own low-F configuration without external instruction.",
+			"scene": "res://algorithms/cellularautomata/ca_showcase/self_organization_ca.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "xlarge",
+			"tags": [
+				"emergence"
+			]
+		},
+		"sierpinski_pyramid": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Recursive Sierpinski Pyramid construction using cubes.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sierpinski_pyramid",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata",
+				"fractals",
+				"recursiveemergence"
+			],
+			"name": "Sierpinski Pyramid",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Fractal self-similarity as infinite F-compression — the same pattern at every scale. Sierpinski's triangle emerges from Rule 90 (a CA), showing how recursive structure achieves maximum order with minimum description length.",
+			"scene": "res://algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "compact",
+			"tags": [
+				"emergence"
+			]
+		},
+		"structure_growth": {
+			"category": "emergence",
+			"complexity": "beginner",
+			"description": "3D structure growth simulation.",
+			"dev_themes": [
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"footprint": [
+				8,
+				8,
+				7
+			],
+			"include_in_map_data": true,
+			"lookup_name": "structure_growth",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "Structure Growth",
+			"parameters": {
+				"footprint": [
+					8,
+					8,
+					7
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/cellularautomata/cellular_automata_3d/StructureGrowth.tscn",
+			"sequence": "cellularautomata",
+			"size_group": "xlarge",
+			"tags": [
+				"3d",
+				"emergence"
+			]
+		},
+		"volumetric_fog_ca": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "3D Cellular Automata driving a volumetric fog.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "volumetric_fog_ca",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "Volumetric Fog CA",
+			"scene": "res://algorithms/cellularautomata/volumetric_fog/volumetric_fog_ca.tscn",
+			"sequence": "cellularautomata",
+			"tags": [
+				"3d",
+				"cellular_automata",
+				"emergence"
+			]
+		},
+		"wireworld_circuit": {
+			"category": "emergence",
+			"complexity": "advanced",
+			"description": "Wireworld cellular automaton — 4-state CA for logic gates and signal routing. Displays an OR gate with clock inputs on a floor display, demonstrating how simple state-transition rules produce computational behavior.",
+			"dev_themes": [
+				"biology",
+				"cellular_automata",
+				"computation",
+				"emergence"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "wireworld_circuit",
+			"map_ready": true,
+			"map_sequences": [
+				"cellularautomata"
+			],
+			"name": "Wireworld Circuit",
+			"qfep_connection": "Computation as signal propagation through constraint — pure F-minimization in a cellular medium. Electrons flow through wire topology; the circuit IS the F-model that channels E(S).",
+			"scene": "res://commons/artifacts/wireworld_circuit/wireworld_circuit.tscn",
+			"sequence": "cellularautomata",
+			"tags": [
+				"2d",
+				"cellular_automata",
+				"emergence",
+				"visualization"
 			]
 		}
 	}

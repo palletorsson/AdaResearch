@@ -1,14 +1,72 @@
 {
 	"artifacts": {
-		"nature_system_demo": {
-			"name": "Nature System Demo",
-			"lookup_name": "nature_system_demo",
-			"description": "Visual test scene for the Q-FEP Nature System. Spawns critters from all 4 kingdoms (tree, creature, flower, fungus) in a grid. Keyboard controls: 1-4 spawn by kingdom, R randomize DNA, E evolve, L cycle LOD, H toggle hybrids, SPACE reset grid.",
-			"scene": "res://algorithms/nature_system/demo/nature_system_demo.tscn",
+		"critter_placer": {
 			"category": "nature_system",
-			"interaction": "immersive",
+			"complexity": "beginner",
+			"default_rotation": 0.0,
+			"default_y_offset": 0.0,
+			"description": "Grid-placeable DNA organism. Bridges the grid system and nature system. Place in interactables layer with config to spawn a specific organism at a grid cell. Supports presets (lsystem_tree, fibonacci_flower, turing_fungus, etc.) and custom DNA gene overrides.",
+			"dev_themes": [
+				"biology",
+				"nature",
+				"teaching",
+				"grid"
+			],
+			"include_in_map_data": true,
+			"interaction": "passive",
+			"lookup_name": "critter_placer",
+			"map_ready": true,
+			"name": "Critter Placer",
+			"placement_type": "environment",
+			"scene": "res://commons/artifacts/critter_placer/critter_placer.tscn",
+			"size_class": "compact_only",
+			"tags": [
+				"nature_system",
+				"critter_dna",
+				"grid_placeable",
+				"tree",
+				"flower",
+				"fungus",
+				"creature",
+				"hybrid",
+				"teaching"
+			]
+		},
+		"nature_system_demo": {
+			"category": "nature_system",
 			"complexity": "advanced",
+			"description": "Visual test scene for the Q-FEP Nature System. Spawns critters from all 4 kingdoms (tree, creature, flower, fungus) in a grid. Keyboard controls: 1-4 spawn by kingdom, R randomize DNA, E evolve, L cycle LOD, H toggle hybrids, SPACE reset grid.",
+			"dev_themes": [
+				"biology",
+				"nature",
+				"qfep",
+				"simulation"
+			],
+			"footprint": [
+				3,
+				7,
+				14
+			],
+			"include_in_map_data": true,
+			"interaction": "immersive",
+			"lookup_name": "nature_system_demo",
+			"map_ready": false,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Nature System Demo",
+			"parameters": {
+				"footprint": [
+					3,
+					7,
+					14
+				],
+				"size_group": "xlarge"
+			},
 			"qfep_connection": "Transmutation as free energy minimization — every critter is an algorithm exploring possibility space under constraints. Bonding with a critter changes the relationship, not the critter. The poison was always medicine. Donna Haraway meets Q-FEP.",
+			"scene": "res://algorithms/nature_system/demo/nature_system_demo.tscn",
+			"sequence": "nature_system",
+			"size_group": "xlarge",
 			"tags": [
 				"nature_system",
 				"critter_dna",
@@ -25,26 +83,6 @@
 				"hybrid",
 				"cross_kingdom",
 				"interactive"
-			],
-			"include_in_map_data": true,
-			"map_ready": false,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "nature_system",
-			"parameters": {
-				"footprint": [
-					19,
-					18,
-					41
-				],
-				"size_group": "world_scale"
-			},
-			"dev_themes": [
-				"biology",
-				"nature",
-				"qfep",
-				"simulation"
 			]
 		}
 	}

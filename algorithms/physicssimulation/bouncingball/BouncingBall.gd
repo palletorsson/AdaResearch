@@ -144,19 +144,25 @@ func _add_edge(a: Vector3, b: Vector3, mat: StandardMaterial3D, idx: int) -> voi
 	cylinder.top_radius = edge_thickness
 	cylinder.bottom_radius = edge_thickness
 	cylinder.height = length
+	cylinder.radial_segments = 4
 	edge.mesh = cylinder
 	edge.material_override = mat
 
 	# Position at midpoint
-	var midpoint := (a + b) / 2.0
-	edge.position = midpoint
+	edge.position = (a + b) / 2.0
 
-	# Orient along the edge direction
+	# Orient cylinder along edge direction using Basis (same as cube_lines / line_static)
 	var direction := (b - a).normalized()
-	if abs(direction.dot(Vector3.UP)) < 0.999:
-		edge.look_at(edge.position + direction, Vector3.UP)
-		edge.rotate_object_local(Vector3.RIGHT, PI / 2.0)
-	# else: vertical edge, default cylinder orientation is fine
+	if direction.length() > 0.001:
+		var up := Vector3.UP
+		var right := direction.cross(up).normalized()
+		if right.length() < 0.001:
+			# Direction is parallel to UP — use a different reference
+			right = Vector3.RIGHT
+			up = right.cross(direction).normalized()
+		else:
+			up = right.cross(direction).normalized()
+		edge.transform.basis = Basis(right, direction, up)
 
 	add_child(edge)
 
