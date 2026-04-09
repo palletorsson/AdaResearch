@@ -18,41 +18,32 @@ func _ready() -> void:
 	_build_presentation_area()
 
 func _build_kiosk() -> void:
-	# Kiosk positioned in front of the artifact (player stands behind kiosk, facing artifact)
-	var kiosk_z := 2.5  # In front of center
-
-	# Panel stand (shorter so it doesn't poke through the screen)
-	var stand := CSGCylinder3D.new()
-	stand.radius = 0.04
-	stand.height = 1.1
-	stand.position = Vector3(0, 0.55, kiosk_z)
-	var stand_mat := StandardMaterial3D.new()
-	stand_mat.albedo_color = Color(0.15, 0.15, 0.18)
-	stand_mat.metallic = 0.5
-	stand_mat.roughness = 0.3
-	stand.material = stand_mat
-	add_child(stand)
+	# Kiosk positioned in front of the artifact — no stand, just a floating panel at waist height
+	var kiosk_z := 2.5
+	var panel_y := 0.85  # Waist/hip height — easy to glance down at
 
 	# Screen backing
 	var screen := MeshInstance3D.new()
 	var box := BoxMesh.new()
-	box.size = Vector3(0.65, 0.55, 0.02)
+	box.size = Vector3(0.65, 0.55, 0.015)
 	screen.mesh = box
 	var screen_mat := StandardMaterial3D.new()
-	screen_mat.albedo_color = Color(0.08, 0.08, 0.12)
+	screen_mat.albedo_color = Color(0.06, 0.06, 0.1)
+	screen_mat.emission_enabled = true
+	screen_mat.emission = Color(0.03, 0.03, 0.06)
+	screen_mat.emission_energy_multiplier = 0.3
 	screen.material_override = screen_mat
-	# Tilt screen toward player (angled back)
 	screen.transform = Transform3D(
-		Basis(Vector3.RIGHT, deg_to_rad(-25)),
-		Vector3(0, 1.45, kiosk_z)
+		Basis(Vector3.RIGHT, deg_to_rad(-35)),
+		Vector3(0, panel_y, kiosk_z)
 	)
 	add_child(screen)
 
 	# Viewport2Din3D — renders the 2D UI onto the screen
 	var viewport := VIEWPORT_2D_3D.instantiate()
 	viewport.transform = Transform3D(
-		Basis(Vector3.RIGHT, deg_to_rad(-25)),
-		Vector3(0, 1.45, kiosk_z + 0.015)
+		Basis(Vector3.RIGHT, deg_to_rad(-35)),
+		Vector3(0, panel_y, kiosk_z + 0.01)
 	)
 	viewport.screen_size = Vector2(0.6, 0.5)
 	viewport.scene = UI_SCENE
@@ -63,8 +54,8 @@ func _build_kiosk() -> void:
 	if ResourceLoader.exists("res://addons/godot-xr-tools/objects/hand_pose_area.tscn"):
 		var hand_area := HAND_POSE_AREA.instantiate()
 		hand_area.transform = Transform3D(
-			Basis(Vector3.RIGHT, deg_to_rad(-25)),
-			Vector3(0, 1.45, kiosk_z)
+			Basis(Vector3.RIGHT, deg_to_rad(-35)),
+			Vector3(0, panel_y, kiosk_z)
 		)
 		if ResourceLoader.exists("res://addons/godot-xr-tools/hands/poses/pose_point_left.tres"):
 			hand_area.left_pose = load("res://addons/godot-xr-tools/hands/poses/pose_point_left.tres")
