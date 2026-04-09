@@ -1,407 +1,155 @@
 {
   "artifact_definitions": {
-	"algo_gun": {
-	  "description": "Capture and direct Grid Agents",
-	  "name": "Algo-Gun",
-	  "scale": 1.0,
-	  "scene": "res://algorithms/forces/algo_gun.tscn"
-	}
+    "algo_gun": {
+      "description": "Capture and direct Grid Agents",
+      "name": "Algo-Gun",
+      "scale": 1.0,
+      "scene": "res://algorithms/forces/algo_gun.tscn"
+    }
   },
   "documentation": {
-	"key_elements": [
-	  "`la:point` annotation at (1,3)",
-	  "`interactive_point_origin` at (1,3)",
-	  "`static_point` at (4,0) on isolated cube - fixed reference point",
-	  "`script_runner#point` at (0,1) - live code demo showing Vector3 as point",
-	  "`dark_sphere` ambient enclosure at (3,2)",
-	  "Teleporter `t` at (1,5)",
+    "key_elements": [
+      "`la:point` annotation at (1,3)",
+      "`interactive_point_origin` at (1,3)",
+      "`static_point` at (4,0) on isolated cube - fixed reference point",
+      "`script_runner#point` at (0,1) - live code demo showing Vector3 as point",
+      "`dark_sphere` ambient enclosure at (3,2)",
+      "Teleporter `t` at (1,5)",
       "Floating text: that_which_has_no_part"
-	],
-	"layout": "7x10 grid with isolated block at (4,0); continuous platform on west columns.",
-	"objective": "Introduce discrete point beyond zero reference by contrasting fixed and grabbable points.",
-	"summary": "Point_One - Individuation Lab"
+    ],
+    "layout": "7x10 grid with isolated block at (4,0); continuous platform on west columns.",
+    "objective": "Introduce discrete point beyond zero reference by contrasting fixed and grabbable points.",
+    "summary": "Point_One - Individuation Lab"
   },
   "layers": {
-	"interactables": [
-	  [
-		"origin:180:-0.5",
-		"folding_past:0:1:0.5",
-		" ",
-		" ",
-		"static_point:0:1",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		"interactive_point_origin:0:1",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		"science_screen:180:0.5#mode:point",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		"",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		"frame_counter_display:180",
-		" ",
-		" ",
-		" ",
-		"script_runner#point:90:1",
-		" ",
-        ""
-	  ]
-	],
-	"structure": [
-	  [
-		"0",
-		"1",
-		"1",
-		"0",
-		"1",
-		"0",
-        "0"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"0",
-		"0",
-		"0",
-        "0"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"0",
-		"0",
-		"0",
-        "0"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"0",
-		"0",
-		"0",
-        "0"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"0",
-		"0",
-		"0",
-        "0"
-	  ],
-	  [
-		"1",
-		"1",
-		"2",
-		"0",
-		"0",
-		"0",
-        "0"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"0",
-		"0",
-		"0",
-        "0"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"0",
-		"0",
-		"0",
-        "0"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"0",
-		"0",
-		"0",
-        "0"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"0",
-		"0",
-		"0",
-        "0"
-	  ],
-	  [
-		"1",
-		"0",
-		"1",
-		"0",
-		"0",
-		"0",
-        "0"
-	  ],
-	  [
-		"1",
-		"1",
-		"1",
-		"0",
-		"0",
-		"0",
-        "0"
-	  ]
-	],
-	"utilities": [
-	  [
-		"m:0:3:-0.5:0.1",
-		" ",
-		" ",
-		" ",
-		"an:-90",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		"sub:point_zero",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		"3t:that_which_has_no_part",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ],
-	  [
-		" ",
-		"t",
-		" ",
-		" ",
-		" ",
-		" ",
-        " "
-	  ]
-	]
+    "interactables": [
+      ["origin:180:-0.5", "folding_past:0:1:0.5", " ", " ", "static_point:0:1", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", "interactive_point_origin:0:1", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", "science_screen:180:0.5#mode:point", " ", " ", " ", " ", " "],
+      [" ", "", " ", " ", " ", " ", " "],
+      ["frame_counter_display:180", " ", " ", " ", "script_runner#point:90:1", " ", ""],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "]
+    ],
+    "structure": [
+      ["0", "1", "1", "0", "1", "0", "0"],
+      ["1", "1", "1", "0", "0", "0", "0"],
+      ["1", "1", "1", "0", "0", "0", "0"],
+      ["1", "1", "1", "0", "0", "0", "0"],
+      ["1", "1", "1", "0", "0", "0", "0"],
+      ["1", "1", "2", "0", "0", "0", "0"],
+      ["1", "1", "1", "0", "0", "0", "0"],
+      ["1", "1", "1", "0", "0", "0", "0"],
+      ["1", "1", "1", "0", "0", "0", "0"],
+      ["1", "1", "1", "0", "0", "0", "0"],
+      ["1", "0", "1", "0", "0", "0", "0"],
+      ["1", "1", "1", "0", "0", "0", "0"]
+    ],
+    "utilities": [
+      ["m:0:3:-0.5:0.1", " ", " ", " ", "an:-90", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", "sub:point_zero", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", "3t:that_which_has_no_part", " ", " ", " ", " ", " "],
+      [" ", "t", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " "]
+    ]
   },
   "lighting": {
-	"ambient_color": [
-	  0.4,
-	  0.4,
-	  0.5
-	],
-	"ambient_energy": 0.6,
-	"directional_light": {
-	  "color": [
-		1.0,
-		0.9,
-		0.8
-	  ],
-	  "direction": [
-		-0.4,
-		-0.7,
-		-0.4
-	  ],
-	  "enabled": true,
-	  "energy": 1.2
-	}
+    "ambient_color": [
+      0.4,
+      0.4,
+      0.5
+    ],
+    "ambient_energy": 0.6,
+    "directional_light": {
+      "color": [
+        1.0,
+        0.9,
+        0.8
+      ],
+      "direction": [
+        -0.4,
+        -0.7,
+        -0.4
+      ],
+      "enabled": true,
+      "energy": 1.2
+    }
   },
   "map_info": {
-	"description": "A single instantiated point beyond the zero reference. This map isolates the minimal act of individuation within an infrastructural field. It reveals how a point only exists as a callable, indexed abstraction within a larger system, not as a native entity of space.",
-	"description_2": "The Point introduces discreteness and memory into space. By allowing the player to place or encounter isolated points, the map demonstrates how continuous space is discretized into countable, nameable units. A point here is not yet measurement, but a declaration: a moment where position stabilizes into memory. The map explores how abstraction begins by freezing motion and how every point carries the trace of the body that instantiated it.",
-	"dimensions": {
-	  "depth": 10.0,
-	  "max_height": 2.0,
-	  "width": 7.0
-	},
-	"format": "json",
-	"lookup_name": "Point_One",
-	"metadata": {
-	  "category": "tutorial",
-	  "difficulty": "beginner",
-	  "estimated_time": "3-4 minutes",
-	  "learning_objectives": [
+    "description": "A single instantiated point beyond the zero reference. This map isolates the minimal act of individuation within an infrastructural field. It reveals how a point only exists as a callable, indexed abstraction within a larger system, not as a native entity of space.",
+    "description_2": "The Point introduces discreteness and memory into space. By allowing the player to place or encounter isolated points, the map demonstrates how continuous space is discretized into countable, nameable units. A point here is not yet measurement, but a declaration: a moment where position stabilizes into memory. The map explores how abstraction begins by freezing motion and how every point carries the trace of the body that instantiated it.",
+    "dimensions": {
+      "depth": 12.0,
+      "max_height": 2.0,
+      "width": 7.0
+    },
+    "format": "json",
+    "lookup_name": "Point_One",
+    "metadata": {
+      "category": "tutorial",
+      "difficulty": "beginner",
+      "estimated_time": "3-4 minutes",
+      "learning_objectives": [
         "The Atom of Space"
-	  ]
-	},
-	"name": "Point One",
-	"title": "Position Without Extension",
-	"version": "1.0"
+      ]
+    },
+    "name": "Point One",
+    "title": "Position Without Extension",
+    "version": "1.0"
   },
   "settings": {
-	"auto_reveal_on_entry": false,
-	"background": {
-	  "color": [
-		0.2,
-		0.3,
-		0.7
-	  ],
-	  "type": "sky"
-	},
-	"cube_size": 1.0,
-	"enable_physics": true,
-	"enter_type": "I",
-	"grid_animation": {
-	  "delay_between": 0.03,
-	  "duration": 0.15,
-	  "easing": "ease_out",
-	  "enabled": true,
-	  "order": "wave_z",
-	  "type": "wave"
-	},
-	"gutter": 0.0,
-	"initial_tile_visibility": "hidden_except_corners",
-	"show_grid": true
+    "auto_reveal_on_entry": false,
+    "background": {
+      "color": [
+        0.2,
+        0.3,
+        0.7
+      ],
+      "type": "sky"
+    },
+    "cube_size": 1.0,
+    "enable_physics": true,
+    "enter_type": "I",
+    "grid_animation": {
+      "delay_between": 0.03,
+      "duration": 0.15,
+      "easing": "ease_out",
+      "enabled": true,
+      "order": "wave_z",
+      "type": "wave"
+    },
+    "gutter": 0.0,
+    "initial_tile_visibility": "hidden_except_corners",
+    "show_grid": true
   },
   "subtitles": {
-	"point_zero": "Point Zero? Point One."
+    "point_zero": "Point Zero? Point One."
   },
   "utility_definitions": {
-	"s": {
-	  "properties": {
-		"height": 5.5
-	  }
-	},
-	"t": {
-	  "description": "Continue to next step",
-	  "name": "Next",
-	  "properties": {
-		"action": "next_in_sequence"
-	  },
-	  "type": "teleporter"
-	}
+    "s": {
+      "properties": {
+        "height": 5.5
+      }
+    },
+    "t": {
+      "description": "Continue to next step",
+      "name": "Next",
+      "properties": {
+        "action": "next_in_sequence"
+      },
+      "type": "teleporter"
+    }
   }
 }
