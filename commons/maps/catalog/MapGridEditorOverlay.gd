@@ -166,7 +166,7 @@ func _build_palette() -> void:
 				var btn := Button.new()
 				btn.text = code if code != " " else "x"
 				btn.custom_minimum_size = Vector2(30, 22)
-				var c := code
+				var c: String = code
 				btn.pressed.connect(func(): paint_value = c)
 				_palette.add_child(btn)
 			paint_value = "sp"
