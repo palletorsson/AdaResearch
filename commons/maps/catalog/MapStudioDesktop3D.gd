@@ -68,6 +68,7 @@ func _ready() -> void:
 	canvas.gui_input.connect(_on_canvas_input)
 	canvas.draw.connect(_on_canvas_draw)
 	art_input.text_submitted.connect(_on_art_submit)
+	art_input.text_changed.connect(_on_art_changed)
 	view3d.gui_input.connect(_on_3d_input)
 
 	_scan()
@@ -365,26 +366,64 @@ func _drag_drop(pos: Vector2) -> void:
 	_build_3d()
 
 func _on_art_submit(t: String) -> void:
-	if sel.x < 0: return
+	_apply_art_text(t)
+
+func _on_art_changed(t: String) -> void:
+	_apply_art_text(t)
+
+func _apply_art_text(t: String) -> void:
+	if sel.x < 0 or sel.y < 0: return
 	il[sel.y][sel.x] = t if t != "" else " "
 	canvas.queue_redraw()
 	_build_3d()
-	_update_insp()
+	_update_insp_detail()
 
 func _update_insp() -> void:
 	if sel.x < 0:
-		cell_label.text = "No cell"
+		cell_label.text = "No cell selected"
 		detail.text = ""
 		art_input.text = ""
 		return
-	cell_label.text = "[%d, %d]" % [sel.x, sel.y]
-	var h: String = str(sl[sel.y][sel.x])
-	var u: String = str(ul[sel.y][sel.x]).strip_edges()
+	cell_label.text = "Cell [%d, %d]" % [sel.x, sel.y]
 	var a: String = str(il[sel.y][sel.x]).strip_edges()
 	art_input.text = a if a != " " else ""
-	var t := "Height: %s" % h
-	if u != "" and u != " ": t += "\nUtility: %s" % u
-	if a != "" and a != " ": t += "\nArtifact: %s" % a
+	_update_insp_detail()
+
+func _update_insp_detail() -> void:
+	if sel.x < 0: return
+	var x := sel.x
+	var z := sel.y
+	var h: String = str(sl[z][x])
+	var u: String = str(ul[z][x]).strip_edges()
+	var a: String = str(il[z][x]).strip_edges()
+
+	var t := "[b]Structure:[/b] height %s\n" % h
+	if u != "" and u != " ":
+		t += "[b]Utility:[/b] %s\n" % u
+	if a != "" and a != " ":
+		var lookup: String = a.split(":")[0]
+		t += "[b]Artifact:[/b] %s\n" % a
+		# Look up artifact info
+		var art_data: Dictionary = ArtifactCatalogDataProvider.get_artifact_by_lookup_name(lookup)
+		if not art_data.is_empty():
+			var name_str: String = str(art_data.get("name", ""))
+			var desc: String = str(art_data.get("description", ""))
+			var seqs = art_data.get("map_sequences", [])
+			var seq_str: String = ", ".join(seqs) if seqs is Array else str(seqs)
+			if name_str != "" and name_str != lookup:
+				t += "[color=cyan]%s[/color]\n" % name_str
+			if seq_str != "":
+				t += "[color=gray]Sequences: %s[/color]\n" % seq_str
+			if desc.length() > 0:
+				if desc.length() > 150:
+					desc = desc.substr(0, 147) + "..."
+				t += "[color=gray]%s[/color]\n" % desc
+		else:
+			t += "[color=red]Not in registry[/color]\n"
+	else:
+		t += "[color=gray]No artifact — select from Artifacts tab or type name above[/color]\n"
+
+	t += "\n[color=gray]Left-click: paint | Right-drag: move | Ctrl+S: save[/color]"
 	detail.text = t
 
 # 3D PREVIEW
