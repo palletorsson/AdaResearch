@@ -150,6 +150,20 @@ var _art_search: LineEdit
 var _art_list: ItemList
 var _all_artifact_names: Array[String] = []
 
+const UTIL_DEFS := {
+	"sp": "Spawn point",
+	"t": "Teleporter",
+	"r": "Ramp",
+	"wp": "Wall path / ramp",
+	"tc": "Transport cube",
+	"m": "Music trigger",
+	"ds": "Danger / slow zone",
+	"sub": "Subtitle annotation",
+	"3t": "3-way teleporter",
+	"an": "Annotation label",
+	" ": "Clear cell",
+}
+
 func _build_palette() -> void:
 	for c in palette.get_children(): c.queue_free()
 	match layer:
@@ -165,18 +179,26 @@ func _build_palette() -> void:
 				row.add_child(b)
 			paint = "1"
 		1:
-			var row := HFlowContainer.new()
-			palette.add_child(row)
-			for code in ["sp", "t", "r", "wp", "tc", "m", "ds", "sub", " "]:
-				var b := Button.new()
-				b.text = code if code != " " else "x"
-				b.custom_minimum_size = Vector2(32, 24)
-				var v: String = code
-				b.pressed.connect(func(): paint = v)
-				row.add_child(b)
-			paint = "sp"
+			_build_utility_list()
 		2:
 			_build_artifact_palette()
+
+func _build_utility_list() -> void:
+	var util_list := ItemList.new()
+	util_list.size_flags_vertical = SIZE_EXPAND_FILL
+	util_list.item_selected.connect(func(idx: int):
+		paint = util_list.get_item_metadata(idx)
+	)
+	palette.add_child(util_list)
+
+	for code in UTIL_DEFS:
+		var label: String = code if code != " " else "x"
+		var desc: String = UTIL_DEFS[code]
+		util_list.add_item("%s  —  %s" % [label, desc])
+		util_list.set_item_metadata(util_list.item_count - 1, code)
+		if code in U_COLORS:
+			util_list.set_item_custom_fg_color(util_list.item_count - 1, U_COLORS[code])
+	paint = "sp"
 
 func _build_artifact_palette() -> void:
 	# Load all artifact names once
@@ -211,11 +233,11 @@ func _build_artifact_palette() -> void:
 
 	_art_list = ItemList.new()
 	_art_list.size_flags_vertical = SIZE_EXPAND_FILL
-	_art_list.max_columns = 2
 	_art_list.item_selected.connect(_on_art_picked)
 	palette.add_child(_art_list)
 
 	_filter_art_list("")
+	_art_search.grab_focus()
 
 func _on_art_filter(t: String) -> void:
 	_filter_art_list(t)
