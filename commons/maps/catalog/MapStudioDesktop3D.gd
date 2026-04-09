@@ -145,6 +145,10 @@ func _on_tab(i: int) -> void:
 	_build_palette()
 	canvas.queue_redraw()
 
+var _art_search: LineEdit
+var _art_list: ItemList
+var _all_artifact_names: Array[String] = []
+
 func _build_palette() -> void:
 	for c in palette.get_children(): c.queue_free()
 	match layer:
@@ -167,9 +171,72 @@ func _build_palette() -> void:
 				palette.add_child(b)
 			paint = "sp"
 		2:
-			var l := Label.new()
-			l.text = "Select cell, type in inspector"
-			palette.add_child(l)
+			_build_artifact_palette()
+
+func _build_artifact_palette() -> void:
+	# Load all artifact names once
+	if _all_artifact_names.is_empty():
+		var all := ArtifactCatalogDataProvider.get_all_artifacts()
+		for a in all:
+			var n: String = str(a.get("lookup_name", ""))
+			if n != "":
+				_all_artifact_names.append(n)
+		_all_artifact_names.sort()
+
+	var vbox := VBoxContainer.new()
+	vbox.size_flags_horizontal = SIZE_EXPAND_FILL
+	palette.add_child(vbox)
+
+	var row := HBoxContainer.new()
+	vbox.add_child(row)
+
+	_art_search = LineEdit.new()
+	_art_search.placeholder_text = "Search artifact..."
+	_art_search.size_flags_horizontal = SIZE_EXPAND_FILL
+	_art_search.text_changed.connect(_on_art_filter)
+	row.add_child(_art_search)
+
+	var clear_btn := Button.new()
+	clear_btn.text = "x"
+	clear_btn.custom_minimum_size = Vector2(28, 0)
+	clear_btn.pressed.connect(func():
+		if sel.x >= 0:
+			il[sel.y][sel.x] = " "
+			canvas.queue_redraw()
+			_build_3d()
+			_update_insp()
+	)
+	row.add_child(clear_btn)
+
+	_art_list = ItemList.new()
+	_art_list.custom_minimum_size = Vector2(0, 80)
+	_art_list.max_columns = 3
+	_art_list.item_selected.connect(_on_art_picked)
+	vbox.add_child(_art_list)
+
+	_filter_art_list("")
+
+func _on_art_filter(t: String) -> void:
+	_filter_art_list(t)
+
+func _filter_art_list(t: String) -> void:
+	if not _art_list: return
+	_art_list.clear()
+	var q := t.to_lower()
+	for n in _all_artifact_names:
+		if q == "" or q in n.to_lower():
+			_art_list.add_item(n)
+
+func _on_art_picked(idx: int) -> void:
+	var name_str: String = _art_list.get_item_text(idx)
+	paint = name_str
+	# If a cell is selected, place immediately
+	if sel.x >= 0:
+		il[sel.y][sel.x] = name_str
+		canvas.queue_redraw()
+		_build_3d()
+		_update_insp()
+		art_input.text = name_str
 
 func _on_canvas_draw() -> void:
 	if sl.is_empty(): return
@@ -214,6 +281,10 @@ func _cell(pos: Vector2) -> void:
 	match layer:
 		0: sl[z][x] = paint
 		1: ul[z][x] = paint
+		2:
+			if paint != "" and paint != " ":
+				il[z][x] = paint
+				art_input.text = paint
 	canvas.queue_redraw()
 	_update_insp()
 	_build_3d()
