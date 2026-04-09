@@ -73,30 +73,122 @@ func _ready() -> void:
 	_scan()
 	_build_palette()
 
+var _seq_maps: Dictionary = {}  # sequence_name -> Array of map folder names
+var _all_map_names: Array[String] = []
+
 func _scan() -> void:
 	list.clear()
 	paths.clear()
-	var dir := DirAccess.open("res://commons/maps/")
-	if not dir: return
-	dir.list_dir_begin()
-	while true:
-		var f := dir.get_next()
-		if f == "": break
-		if dir.current_is_dir() and not f.begins_with(".") and f != "catalog":
-			var p := "res://commons/maps/" + f + "/map_data.json"
-			if FileAccess.file_exists(p):
-				list.add_item(f)
-				paths.append(p)
-	dir.list_dir_end()
-	status.text = "%d maps" % paths.size()
+	_seq_maps.clear()
+	_all_map_names.clear()
+
+	# Load sequences
+	var seq_dir := DirAccess.open("res://commons/maps/sequences/")
+	if seq_dir:
+		seq_dir.list_dir_begin()
+		while true:
+			var fname := seq_dir.get_next()
+			if fname == "": break
+			if fname.ends_with(".json"):
+				var sf := FileAccess.open("res://commons/maps/sequences/" + fname, FileAccess.READ)
+				if sf:
+					var sj := JSON.new()
+					if sj.parse(sf.get_as_text()) == OK:
+						var sd: Dictionary = sj.data
+						var seq_name: String = str(sd.get("name", fname.replace(".json", "")))
+						var maps_arr: Array = sd.get("maps", [])
+						var map_names: Array[String] = []
+						for m in maps_arr:
+							if m is Dictionary:
+								map_names.append(str(m.get("name", "")))
+							elif m is String:
+								map_names.append(m)
+						if map_names.size() > 0:
+							_seq_maps[seq_name] = map_names
+					sf.close()
+		seq_dir.list_dir_end()
+
+	# Build path index
+	var map_path_lookup: Dictionary = {}
+	var maps_dir := DirAccess.open("res://commons/maps/")
+	if maps_dir:
+		maps_dir.list_dir_begin()
+		while true:
+			var f := maps_dir.get_next()
+			if f == "": break
+			if maps_dir.current_is_dir() and not f.begins_with(".") and f != "catalog":
+				var p := "res://commons/maps/" + f + "/map_data.json"
+				if FileAccess.file_exists(p):
+					map_path_lookup[f] = p
+					_all_map_names.append(f)
+		maps_dir.list_dir_end()
+
+	# Populate list grouped by sequence
+	var added: Dictionary = {}
+
+	# Spine order first
+	const SPINE := [
+		"primitives", "transformation", "color", "forces", "array_tutorial",
+		"wavefunctions", "randomness", "noise", "cellularautomata", "fractals",
+		"lsystems", "proceduralgeneration", "softbodies", "swarmintelligence",
+		"machinelearning", "foundationscrisis", "qfeplaboratory",
+		"postfoundationscrisis", "graphtheory"
+	]
+
+	for seq_name in SPINE:
+		if seq_name not in _seq_maps: continue
+		list.add_item("── %s ──" % seq_name)
+		list.set_item_disabled(list.item_count - 1, true)
+		list.set_item_custom_fg_color(list.item_count - 1, Color(0.5, 0.7, 1.0))
+		paths.append("")
+
+		for map_name in _seq_maps[seq_name]:
+			if map_name in map_path_lookup:
+				list.add_item("  %s" % map_name)
+				paths.append(map_path_lookup[map_name])
+				added[map_name] = true
+
+	# Non-spine sequences
+	for seq_name in _seq_maps:
+		if seq_name in SPINE: continue
+		list.add_item("── %s ──" % seq_name)
+		list.set_item_disabled(list.item_count - 1, true)
+		list.set_item_custom_fg_color(list.item_count - 1, Color(0.7, 0.5, 0.3))
+		paths.append("")
+		for map_name in _seq_maps[seq_name]:
+			if map_name in map_path_lookup and map_name not in added:
+				list.add_item("  %s" % map_name)
+				paths.append(map_path_lookup[map_name])
+				added[map_name] = true
+
+	# Ungrouped maps
+	var ungrouped: Array[String] = []
+	for m in _all_map_names:
+		if m not in added:
+			ungrouped.append(m)
+	if ungrouped.size() > 0:
+		ungrouped.sort()
+		list.add_item("── other ──")
+		list.set_item_disabled(list.item_count - 1, true)
+		list.set_item_custom_fg_color(list.item_count - 1, Color(0.5, 0.5, 0.5))
+		paths.append("")
+		for m in ungrouped:
+			list.add_item("  %s" % m)
+			paths.append(map_path_lookup[m])
+
+	status.text = "%d maps" % _all_map_names.size()
 
 func _on_filter(t: String) -> void:
+	if t == "":
+		_scan()
+		return
 	var q := t.to_lower()
 	list.clear()
-	for p in paths:
-		var n := p.get_base_dir().get_file()
-		if q == "" or q in n.to_lower():
-			list.add_item(n)
+	paths.clear()
+	for m in _all_map_names:
+		if q in m.to_lower():
+			list.add_item(m)
+			paths.append("res://commons/maps/" + m + "/map_data.json")
 
 func _on_list(idx: int) -> void:
 	var n := list.get_item_text(idx)
