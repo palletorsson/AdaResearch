@@ -270,12 +270,27 @@ func _on_canvas_draw() -> void:
 			if Vector2i(x, z) == sel:
 				canvas.draw_rect(r.grow(-1), Color(1, 1, 0.3, 0.7), false, 2.0)
 
+var _dragging := false
+var _drag_from := Vector2i(-1, -1)
+var _drag_value := ""
+var _drag_layer := -1
+
 func _on_canvas_input(ev: InputEvent) -> void:
-	if ev is InputEventMouseButton and ev.button_index == MOUSE_BUTTON_LEFT:
-		painting = ev.pressed
-		if ev.pressed: _cell(ev.position)
-	elif ev is InputEventMouseMotion and painting:
-		_cell(ev.position)
+	if ev is InputEventMouseButton:
+		if ev.button_index == MOUSE_BUTTON_LEFT:
+			if ev.pressed:
+				painting = true
+				_cell(ev.position)
+			else:
+				painting = false
+		elif ev.button_index == MOUSE_BUTTON_RIGHT:
+			if ev.pressed:
+				_drag_start(ev.position)
+			else:
+				_drag_drop(ev.position)
+	elif ev is InputEventMouseMotion:
+		if painting:
+			_cell(ev.position)
 
 func _cell(pos: Vector2) -> void:
 	var x := int(pos.x / CELL)
@@ -291,6 +306,66 @@ func _cell(pos: Vector2) -> void:
 				art_input.text = paint
 	canvas.queue_redraw()
 	_update_insp()
+	_build_3d()
+
+func _drag_start(pos: Vector2) -> void:
+	var x := int(pos.x / CELL)
+	var z := int(pos.y / CELL)
+	if x < 0 or x >= gw or z < 0 or z >= gd_val: return
+	_drag_from = Vector2i(x, z)
+
+	# Pick up from the active layer (or auto-detect which layer has content)
+	var u: String = str(ul[z][x]).strip_edges()
+	var a: String = str(il[z][x]).strip_edges()
+
+	if layer == 2 and a != "" and a != " ":
+		_drag_value = a
+		_drag_layer = 2
+		il[z][x] = " "
+	elif layer == 1 and u != "" and u != " ":
+		_drag_value = u
+		_drag_layer = 1
+		ul[z][x] = " "
+	elif a != "" and a != " ":
+		_drag_value = a
+		_drag_layer = 2
+		il[z][x] = " "
+	elif u != "" and u != " ":
+		_drag_value = u
+		_drag_layer = 1
+		ul[z][x] = " "
+	else:
+		_drag_value = ""
+		_drag_layer = -1
+		return
+
+	_dragging = true
+	canvas.queue_redraw()
+
+func _drag_drop(pos: Vector2) -> void:
+	if not _dragging:
+		return
+	_dragging = false
+	var x := int(pos.x / CELL)
+	var z := int(pos.y / CELL)
+	if x < 0 or x >= gw or z < 0 or z >= gd_val:
+		# Dropped outside — put it back
+		if _drag_layer == 2:
+			il[_drag_from.y][_drag_from.x] = _drag_value
+		elif _drag_layer == 1:
+			ul[_drag_from.y][_drag_from.x] = _drag_value
+	else:
+		# Place at new position
+		if _drag_layer == 2:
+			il[z][x] = _drag_value
+		elif _drag_layer == 1:
+			ul[z][x] = _drag_value
+		sel = Vector2i(x, z)
+		_update_insp()
+
+	_drag_value = ""
+	_drag_layer = -1
+	canvas.queue_redraw()
 	_build_3d()
 
 func _on_art_submit(t: String) -> void:
