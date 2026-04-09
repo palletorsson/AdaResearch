@@ -97,9 +97,19 @@ func _scan() -> void:
 					var sj := JSON.new()
 					if sj.parse(sf.get_as_text()) == OK:
 						var sd: Dictionary = sj.data
-						var seqs_dict: Dictionary = sd.get("sequences", {})
-						for seq_name in seqs_dict:
-							var seq_data: Dictionary = seqs_dict[seq_name]
+						var seqs_raw = sd.get("sequences", {})
+						var seq_entries: Dictionary = {}
+						if seqs_raw is Dictionary:
+							seq_entries = seqs_raw
+						elif seqs_raw is Array:
+							# Some files have sequences as array of dicts with "name"
+							for entry in seqs_raw:
+								if entry is Dictionary and entry.has("name"):
+									seq_entries[str(entry["name"])] = entry
+						for seq_name in seq_entries:
+							var seq_data = seq_entries[seq_name]
+							if seq_data is not Dictionary:
+								continue
 							var maps_arr: Array = seq_data.get("maps", [])
 							var map_names: Array[String] = []
 							for m in maps_arr:
