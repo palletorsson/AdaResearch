@@ -1,0 +1,95 @@
+{
+  "id": "identity-writing",
+  "title": "Write @identity Blocks",
+  "description": "How to write the 8-field identity block for an artifact. The poetic truth is the hardest part — it's what the algorithm MEANS, not what it does.",
+  "triggers": [
+    "write identity",
+    "add @identity",
+    "artifact identity",
+    "write truth"
+  ],
+  "granularity": "meso",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "13 identity blocks written for joints + biological_growth",
+  "nodes": [
+    {
+      "id": "read",
+      "type": "action",
+      "label": "Read the full GDScript",
+      "detail": "Understand what _ready() builds and _process() animates. Note exports, signals, base class."
+    },
+    {
+      "id": "essence",
+      "type": "action",
+      "label": "Write essence (1 line)",
+      "detail": "The mathematical core in one line. 'p += v; v += g; if(wall) v *= -e' or 'anchor + pin + bob. One constraint, one body.'"
+    },
+    {
+      "id": "desire",
+      "type": "action",
+      "label": "Write desire (1 line)",
+      "detail": "What does this artifact WANT the learner to experience? Not what it does — what it wants."
+    },
+    {
+      "id": "critical",
+      "type": "action",
+      "label": "Write critical_parameter",
+      "detail": "The ONE number that changes everything. 'elasticity (0.9)' or 'CRACK_THRESHOLD (0.30)'."
+    },
+    {
+      "id": "rest",
+      "type": "action",
+      "label": "Write triggers, emerges, needs, relationships",
+      "detail": "triggers: what starts it. emerges: what you see that isn't coded. needs: [has] and [missing]. relationships: connects to what."
+    },
+    {
+      "id": "truth",
+      "type": "action",
+      "label": "Write truth (the hard part)",
+      "detail": "The poetic insight. NOT a description. 'A pendulum is a clock that runs down.' 'The forest does not exist — it is generated around you.' This is what makes the identity block worth reading."
+    },
+    {
+      "id": "place",
+      "type": "action",
+      "label": "Place before extends line",
+      "detail": "The @identity block goes at the top of the file, before the extends line. 8 comment lines starting with # @identity."
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Identity written"
+    }
+  ],
+  "edges": [
+    {
+      "from": "read",
+      "to": "essence"
+    },
+    {
+      "from": "essence",
+      "to": "desire"
+    },
+    {
+      "from": "desire",
+      "to": "critical"
+    },
+    {
+      "from": "critical",
+      "to": "rest"
+    },
+    {
+      "from": "rest",
+      "to": "truth"
+    },
+    {
+      "from": "truth",
+      "to": "place"
+    },
+    {
+      "from": "place",
+      "to": "done"
+    }
+  ]
+}

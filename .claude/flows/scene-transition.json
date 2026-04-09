@@ -1,0 +1,93 @@
+{
+  "id": "scene-transition",
+  "title": "Scene Transition Flow",
+  "description": "How VR scene loading works: AdaSceneManager → VRStaging → GridSystem. Critical timing: wait 3 frames after instantiation.",
+  "triggers": [
+    "scene loading",
+    "transition",
+    "load scene",
+    "scene not loading",
+    "black screen"
+  ],
+  "granularity": "meso",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "DeepWiki: VR Staging Scene Loading Choreography",
+  "nodes": [
+    {
+      "id": "trigger",
+      "type": "start",
+      "label": "Scene transition triggered",
+      "detail": "AdaSceneManager calls load_scene(path, user_data)"
+    },
+    {
+      "id": "fade",
+      "type": "action",
+      "label": "XRToolsStaging fades out current scene"
+    },
+    {
+      "id": "instantiate",
+      "type": "action",
+      "label": "New scene instantiated"
+    },
+    {
+      "id": "metadata",
+      "type": "action",
+      "label": "Pass user_data to scene",
+      "detail": "Try scene.set_scene_user_data(data), fallback to set_meta('scene_user_data', data)"
+    },
+    {
+      "id": "wait",
+      "type": "action",
+      "label": "Wait 3 process frames",
+      "detail": "CRITICAL: await get_tree().process_frame x3. All _ready() must complete before grid operations."
+    },
+    {
+      "id": "grid",
+      "type": "action",
+      "label": "GridSystem.load_map(map_name)",
+      "detail": "Reads map_data.json, instantiates structure + utilities + artifacts"
+    },
+    {
+      "id": "visible",
+      "type": "action",
+      "label": "Emit scene_visible signal"
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Player can interact"
+    }
+  ],
+  "edges": [
+    {
+      "from": "trigger",
+      "to": "fade"
+    },
+    {
+      "from": "fade",
+      "to": "instantiate"
+    },
+    {
+      "from": "instantiate",
+      "to": "metadata"
+    },
+    {
+      "from": "metadata",
+      "to": "wait"
+    },
+    {
+      "from": "wait",
+      "to": "grid"
+    },
+    {
+      "from": "grid",
+      "to": "visible"
+    },
+    {
+      "from": "visible",
+      "to": "done"
+    }
+  ]
+}

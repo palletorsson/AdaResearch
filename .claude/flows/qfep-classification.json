@@ -1,0 +1,129 @@
+{
+  "id": "qfep-classification",
+  "title": "QFEP Classification",
+  "description": "Map an artifact to its position in E = F + lambda * phi * dE. Category determines the QFEP connection string.",
+  "triggers": [
+    "qfep connection",
+    "classify artifact qfep",
+    "which term",
+    "E = F"
+  ],
+  "granularity": "micro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "artifact-improver skill QFEP mapping table",
+  "nodes": [
+    {
+      "id": "read",
+      "type": "action",
+      "label": "Read the artifact category and algorithm type"
+    },
+    {
+      "id": "decide",
+      "type": "decision",
+      "label": "Which QFEP term?"
+    },
+    {
+      "id": "f_pure",
+      "type": "action",
+      "label": "Pure F — predictable, structured",
+      "detail": "primitives, transforms, geometry. Form that yields behavior."
+    },
+    {
+      "id": "f_classical",
+      "type": "action",
+      "label": "Classical F — force as law",
+      "detail": "forces, physics, joints. Constraint rules producing motion."
+    },
+    {
+      "id": "es",
+      "type": "action",
+      "label": "E(S) — entropy as source",
+      "detail": "randomness, noise. Raw disorder filtered through structure."
+    },
+    {
+      "id": "lambda",
+      "type": "action",
+      "label": "Lambda — tuning between order and chaos",
+      "detail": "fractals, L-systems. The parameter that controls complexity."
+    },
+    {
+      "id": "phi",
+      "type": "action",
+      "label": "Phi*dE — rate of change",
+      "detail": "morphogenesis, swarm, growth. How systems evolve over time."
+    },
+    {
+      "id": "edge",
+      "type": "action",
+      "label": "Edge of chaos — critical lambda",
+      "detail": "cellular automata, emergence. The phase transition between order and disorder."
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Write qfep_connection string"
+    }
+  ],
+  "edges": [
+    {
+      "from": "read",
+      "to": "decide"
+    },
+    {
+      "from": "decide",
+      "to": "f_pure",
+      "label": "primitives/transforms"
+    },
+    {
+      "from": "decide",
+      "to": "f_classical",
+      "label": "forces/physics/joints"
+    },
+    {
+      "from": "decide",
+      "to": "es",
+      "label": "randomness/noise"
+    },
+    {
+      "from": "decide",
+      "to": "lambda",
+      "label": "fractals/lsystems"
+    },
+    {
+      "from": "decide",
+      "to": "phi",
+      "label": "morphogenesis/swarm"
+    },
+    {
+      "from": "decide",
+      "to": "edge",
+      "label": "cellular automata"
+    },
+    {
+      "from": "f_pure",
+      "to": "done"
+    },
+    {
+      "from": "f_classical",
+      "to": "done"
+    },
+    {
+      "from": "es",
+      "to": "done"
+    },
+    {
+      "from": "lambda",
+      "to": "done"
+    },
+    {
+      "from": "phi",
+      "to": "done"
+    },
+    {
+      "from": "edge",
+      "to": "done"
+    }
+  ]
+}

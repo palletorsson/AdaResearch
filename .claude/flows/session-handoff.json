@@ -1,0 +1,91 @@
+{
+  "id": "session-handoff",
+  "title": "Session Handoff",
+  "description": "Prepare for the next session or model. Commit, score, document what was learned, update flows.",
+  "triggers": [
+    "end session",
+    "handoff",
+    "prepare for next session",
+    "wrap up"
+  ],
+  "granularity": "meso",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "multiple session handoffs, ARTIFACT_IMPROVEMENT_HANDOVER.md pattern",
+  "nodes": [
+    {
+      "id": "commit",
+      "type": "action",
+      "label": "Commit all work with descriptive message",
+      "detail": "Include before/after scores in commit message. Separate commits for different concerns."
+    },
+    {
+      "id": "score",
+      "type": "action",
+      "label": "Run baseline scoring",
+      "detail": "Save to doc/reports/baseline_scores_YYYY-MM-DD.json. This is the proof of progress."
+    },
+    {
+      "id": "flows",
+      "type": "decision",
+      "label": "Did you discover new thinking paths?",
+      "detail": "Any debugging pattern, workflow optimization, or decision tree you built during the session."
+    },
+    {
+      "id": "save_flow",
+      "type": "action",
+      "label": "Save new flows to .claude/flows/",
+      "detail": "POST /api/flows with the new flow JSON. Update INDEX.md."
+    },
+    {
+      "id": "handover",
+      "type": "action",
+      "label": "Update handover doc",
+      "detail": "doc/VISUAL_IMPROVEMENT_HANDOVER.md or doc/ARTIFACT_IMPROVEMENT_HANDOVER.md. What's done, what's next, what was learned."
+    },
+    {
+      "id": "memory",
+      "type": "action",
+      "label": "Update memory if needed",
+      "detail": "Save to .claude/projects/*/memory/ if there are persistent facts the next session needs."
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Session complete — next model can pick up"
+    }
+  ],
+  "edges": [
+    {
+      "from": "commit",
+      "to": "score"
+    },
+    {
+      "from": "score",
+      "to": "flows"
+    },
+    {
+      "from": "flows",
+      "to": "save_flow",
+      "label": "yes"
+    },
+    {
+      "from": "flows",
+      "to": "handover",
+      "label": "no"
+    },
+    {
+      "from": "save_flow",
+      "to": "handover"
+    },
+    {
+      "from": "handover",
+      "to": "memory"
+    },
+    {
+      "from": "memory",
+      "to": "done"
+    }
+  ]
+}

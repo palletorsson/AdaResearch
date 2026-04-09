@@ -1,0 +1,100 @@
+{
+  "id": "hidden-dependencies",
+  "title": "Hidden Dependencies Debugging",
+  "description": "When VR behavior is wrong, check these hidden coupling points. System A and B modify the same resource without knowing about each other.",
+  "triggers": [
+    "weird behavior",
+    "hidden dependency",
+    "why does this break",
+    "systems conflict",
+    "vr bug"
+  ],
+  "granularity": "meso",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "Memory: clause_hidden_dependencies.md",
+  "nodes": [
+    {
+      "id": "symptom",
+      "type": "start",
+      "label": "Unexpected VR behavior"
+    },
+    {
+      "id": "check",
+      "type": "decision",
+      "label": "What's affected?"
+    },
+    {
+      "id": "input",
+      "type": "action",
+      "label": "Check input conflicts",
+      "detail": "AX=flight, BY=voice(disabled), trigger=grab, grip=close, stick=walk. MovementCapabilityGate may silently disable flight/climb."
+    },
+    {
+      "id": "env",
+      "type": "action",
+      "label": "Check WorldEnvironment conflicts",
+      "detail": "Multiple WorldEnvironments conflict — only one should be active. Scene + capture script both add one."
+    },
+    {
+      "id": "gaze",
+      "type": "action",
+      "label": "Check gaze pointer side effects",
+      "detail": "Gaze pointer has side effects even when invisible — disable it completely if not needed."
+    },
+    {
+      "id": "camera",
+      "type": "action",
+      "label": "Check camera override",
+      "detail": "Multiple Camera3D with current=true — last one wins. Artifact cameras override capture cameras."
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Hidden dependency identified — fix the coupling"
+    }
+  ],
+  "edges": [
+    {
+      "from": "symptom",
+      "to": "check"
+    },
+    {
+      "from": "check",
+      "to": "input",
+      "label": "input not working"
+    },
+    {
+      "from": "check",
+      "to": "env",
+      "label": "lighting/background wrong"
+    },
+    {
+      "from": "check",
+      "to": "gaze",
+      "label": "phantom clicks"
+    },
+    {
+      "from": "check",
+      "to": "camera",
+      "label": "wrong camera angle"
+    },
+    {
+      "from": "input",
+      "to": "done"
+    },
+    {
+      "from": "env",
+      "to": "done"
+    },
+    {
+      "from": "gaze",
+      "to": "done"
+    },
+    {
+      "from": "camera",
+      "to": "done"
+    }
+  ]
+}

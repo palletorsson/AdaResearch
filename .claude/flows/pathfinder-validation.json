@@ -1,0 +1,110 @@
+{
+  "id": "pathfinder-validation",
+  "title": "Map Pathfinder Validation",
+  "description": "Validate map reachability rules. Every map must have reachable spawn, reachable teleporter, reachable artifacts.",
+  "triggers": [
+    "validate map",
+    "pathfinder check",
+    "map rules",
+    "reachability"
+  ],
+  "granularity": "micro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "doc/MAP_EDITING_PIPELINE.md, map_pathfinder.py",
+  "nodes": [
+    {
+      "id": "run",
+      "type": "action",
+      "label": "Run pathfinder",
+      "code": "python tools/map_pathfinder.py check <MapName> --verbose"
+    },
+    {
+      "id": "pass",
+      "type": "decision",
+      "label": "All rules pass?"
+    },
+    {
+      "id": "diagnose",
+      "type": "action",
+      "label": "Read violation details",
+      "detail": "Common: spawn missing, teleporter unreachable, artifact on island, teleporter not on void."
+    },
+    {
+      "id": "fix_spawn",
+      "type": "action",
+      "label": "Fix: add spawn point (sp)",
+      "detail": "Place 'sp' in utilities layer at a floor cell."
+    },
+    {
+      "id": "fix_reach",
+      "type": "action",
+      "label": "Fix: add ramp or transport cube",
+      "detail": "Connect unreachable area with 'r' (ramp) or 'tc' (transport cube) in utilities."
+    },
+    {
+      "id": "fix_tp",
+      "type": "action",
+      "label": "Fix: teleporter placement",
+      "detail": "Teleporter must stand on void (height 0) with floor behind it in +z direction."
+    },
+    {
+      "id": "rerun",
+      "type": "action",
+      "label": "Re-run pathfinder"
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Map valid"
+    }
+  ],
+  "edges": [
+    {
+      "from": "run",
+      "to": "pass"
+    },
+    {
+      "from": "pass",
+      "to": "done",
+      "label": "yes"
+    },
+    {
+      "from": "pass",
+      "to": "diagnose",
+      "label": "no"
+    },
+    {
+      "from": "diagnose",
+      "to": "fix_spawn",
+      "label": "no spawn"
+    },
+    {
+      "from": "diagnose",
+      "to": "fix_reach",
+      "label": "unreachable"
+    },
+    {
+      "from": "diagnose",
+      "to": "fix_tp",
+      "label": "teleporter wrong"
+    },
+    {
+      "from": "fix_spawn",
+      "to": "rerun"
+    },
+    {
+      "from": "fix_reach",
+      "to": "rerun"
+    },
+    {
+      "from": "fix_tp",
+      "to": "rerun"
+    },
+    {
+      "from": "rerun",
+      "to": "pass"
+    }
+  ]
+}

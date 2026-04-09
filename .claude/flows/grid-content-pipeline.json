@@ -1,0 +1,75 @@
+{
+  "id": "grid-content-pipeline",
+  "title": "Grid System Content Pipeline",
+  "description": "How map_data.json becomes a 3D scene: JsonMapLoader → GridSystem → Components → Instantiation.",
+  "triggers": [
+    "grid system",
+    "how maps load",
+    "artifact instantiation",
+    "GridSystem",
+    "map_data.json"
+  ],
+  "granularity": "meso",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "DeepWiki: Grid System Architecture",
+  "nodes": [
+    {
+      "id": "load",
+      "type": "start",
+      "label": "JsonMapLoader.load_map(name)"
+    },
+    {
+      "id": "parse",
+      "type": "action",
+      "label": "Parse map_data.json",
+      "detail": "3 layers: structure (heights 0-5), utilities (sp/t/r/tc/m), interactables (artifact:rotation:y_offset)"
+    },
+    {
+      "id": "structure",
+      "type": "action",
+      "label": "GridStructureComponent builds geometry",
+      "detail": "Floors, walls, heights from structure layer. cube_size and gutter from config."
+    },
+    {
+      "id": "utilities",
+      "type": "action",
+      "label": "GridUtilitiesComponent places utilities",
+      "detail": "Spawn points, teleporters, ramps, transport cubes, labels from utilities layer."
+    },
+    {
+      "id": "artifacts",
+      "type": "action",
+      "label": "ArtifactRegistry instantiates artifacts",
+      "detail": "lookup_name → scene path → load(path).instantiate() → position on grid → apply_grid_config()"
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Grid fully populated"
+    }
+  ],
+  "edges": [
+    {
+      "from": "load",
+      "to": "parse"
+    },
+    {
+      "from": "parse",
+      "to": "structure"
+    },
+    {
+      "from": "structure",
+      "to": "utilities"
+    },
+    {
+      "from": "utilities",
+      "to": "artifacts"
+    },
+    {
+      "from": "artifacts",
+      "to": "done"
+    }
+  ]
+}

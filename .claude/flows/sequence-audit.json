@@ -1,0 +1,83 @@
+{
+  "id": "sequence-audit",
+  "title": "Sequence Audit Playbook",
+  "description": "Horizontal audit across sequences then vertical deep-dive on artifacts. Finds gaps, duplicates, and quality issues.",
+  "triggers": [
+    "audit sequence",
+    "check sequence quality",
+    "find gaps",
+    "sequence health"
+  ],
+  "granularity": "macro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "blog: sequence-audit-playbook, garden session",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "label": "Begin audit"
+    },
+    {
+      "id": "horizontal",
+      "type": "action",
+      "label": "HORIZONTAL: Score all sequences",
+      "detail": "Run scoring one-liner. Sort by avg. Identify worst sequences and biggest gaps."
+    },
+    {
+      "id": "pick",
+      "type": "decision",
+      "label": "Pick sequence to audit"
+    },
+    {
+      "id": "vertical",
+      "type": "action",
+      "label": "VERTICAL: Deep dive on artifacts",
+      "detail": "Read every .gd file. Check @identity, class_name, apply_grid_config. Assess 7 layers: essence, code, expression, interaction, feedback, edge cases, performance."
+    },
+    {
+      "id": "classify",
+      "type": "action",
+      "label": "Classify each artifact",
+      "detail": "DORMANT (no identity), SCATTERED (identity but no code), REACHING (code but missing controls), GROWING (testing), LIVING (VR-verified)"
+    },
+    {
+      "id": "report",
+      "type": "action",
+      "label": "Generate health report",
+      "detail": "python tools/garden_listener.py --diagnosis. Shows percentages by state."
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Audit complete — triage queue ready"
+    }
+  ],
+  "edges": [
+    {
+      "from": "start",
+      "to": "horizontal"
+    },
+    {
+      "from": "horizontal",
+      "to": "pick"
+    },
+    {
+      "from": "pick",
+      "to": "vertical"
+    },
+    {
+      "from": "vertical",
+      "to": "classify"
+    },
+    {
+      "from": "classify",
+      "to": "report"
+    },
+    {
+      "from": "report",
+      "to": "done"
+    }
+  ]
+}

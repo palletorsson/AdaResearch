@@ -1,0 +1,100 @@
+{
+  "id": "error-recovery",
+  "title": "Error Recovery Chain",
+  "description": "Godot's fallback chain: missing assets skip silently, missing maps create empty grids, only VR staging failure crashes.",
+  "triggers": [
+    "error",
+    "crash",
+    "missing asset",
+    "scene won't load",
+    "artifact missing"
+  ],
+  "granularity": "meso",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "DeepWiki: Error Recovery & Fallback Chain",
+  "nodes": [
+    {
+      "id": "error",
+      "type": "start",
+      "label": "Error encountered"
+    },
+    {
+      "id": "what",
+      "type": "decision",
+      "label": "What failed?"
+    },
+    {
+      "id": "scene_fail",
+      "type": "action",
+      "label": "Scene load failed",
+      "detail": "Try fallback path → try main_scene → if all fail: black screen + error text."
+    },
+    {
+      "id": "map_fail",
+      "type": "action",
+      "label": "map_data.json missing",
+      "detail": "Log warning, create empty grid (0 artifacts). Scene loads but empty."
+    },
+    {
+      "id": "artifact_fail",
+      "type": "action",
+      "label": "Artifact lookup_name not in registry",
+      "detail": "Log warning, skip instantiation. Visual gap but no crash."
+    },
+    {
+      "id": "sequence_fail",
+      "type": "action",
+      "label": "Sequence has broken map references",
+      "detail": "Log on startup, skip sequence. UI hides it."
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Error handled — check logs"
+    }
+  ],
+  "edges": [
+    {
+      "from": "error",
+      "to": "what"
+    },
+    {
+      "from": "what",
+      "to": "scene_fail",
+      "label": "scene path"
+    },
+    {
+      "from": "what",
+      "to": "map_fail",
+      "label": "map data"
+    },
+    {
+      "from": "what",
+      "to": "artifact_fail",
+      "label": "artifact"
+    },
+    {
+      "from": "what",
+      "to": "sequence_fail",
+      "label": "sequence"
+    },
+    {
+      "from": "scene_fail",
+      "to": "done"
+    },
+    {
+      "from": "map_fail",
+      "to": "done"
+    },
+    {
+      "from": "artifact_fail",
+      "to": "done"
+    },
+    {
+      "from": "sequence_fail",
+      "to": "done"
+    }
+  ]
+}

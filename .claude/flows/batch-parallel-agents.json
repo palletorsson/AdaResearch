@@ -1,0 +1,65 @@
+{
+  "id": "batch-parallel-agents",
+  "title": "Batch Processing with Parallel Agents",
+  "description": "When N similar artifacts need the same treatment, do one by hand then send agents for the rest.",
+  "triggers": [
+    "batch process",
+    "parallel agents",
+    "many artifacts same fix",
+    "scale up"
+  ],
+  "granularity": "micro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "5 joint demo agents ran in parallel, each got the pattern from ChainSwing",
+  "nodes": [
+    {
+      "id": "prototype",
+      "type": "action",
+      "label": "Do one artifact by hand",
+      "detail": "Full treatment: read, identity, materials, trail, markers, capture. This establishes the pattern."
+    },
+    {
+      "id": "extract",
+      "type": "action",
+      "label": "Extract the reusable pattern",
+      "detail": "What's the base class? What code is shared? What varies per artifact?"
+    },
+    {
+      "id": "spawn",
+      "type": "action",
+      "label": "Spawn 4-5 agents in parallel",
+      "detail": "Each agent gets: the pattern (from prototype), the specific file path, and clear instructions to Write the complete file."
+    },
+    {
+      "id": "verify",
+      "type": "action",
+      "label": "Verify all agents succeeded",
+      "detail": "Run Godot capture on each. Check for parse errors. Fix any that failed."
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Batch complete"
+    }
+  ],
+  "edges": [
+    {
+      "from": "prototype",
+      "to": "extract"
+    },
+    {
+      "from": "extract",
+      "to": "spawn"
+    },
+    {
+      "from": "spawn",
+      "to": "verify"
+    },
+    {
+      "from": "verify",
+      "to": "done"
+    }
+  ]
+}

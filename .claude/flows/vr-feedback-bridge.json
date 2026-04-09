@@ -1,0 +1,80 @@
+{
+  "id": "vr-feedback-bridge",
+  "title": "VR Feedback Bridge",
+  "description": "Read player feedback from VR desktop overlay. Comments are written to ada_run/ during gameplay.",
+  "triggers": [
+    "vr feedback",
+    "bridge listener",
+    "desktop feedback",
+    "player comments"
+  ],
+  "granularity": "micro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "ada-bridge-listener skill, DesktopMapSwitcherOverlay.gd",
+  "nodes": [
+    {
+      "id": "check",
+      "type": "action",
+      "label": "Read ada_run/desktop_feedback.md",
+      "detail": "Timestamped entries with map, sequence, artifact context + user comment."
+    },
+    {
+      "id": "has_new",
+      "type": "decision",
+      "label": "New feedback since last check?"
+    },
+    {
+      "id": "parse",
+      "type": "action",
+      "label": "Parse feedback entries",
+      "detail": "Each entry has: timestamp, map name, sequence, artifact list, comment text."
+    },
+    {
+      "id": "classify",
+      "type": "decision",
+      "label": "What kind of feedback?",
+      "detail": "Bug report, feature request, visual issue, or general comment."
+    },
+    {
+      "id": "act",
+      "type": "action",
+      "label": "Create task or fix directly",
+      "detail": "Bug: fix now. Feature: add to backlog. Visual: load artifact-visual-upgrade flow."
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Feedback processed"
+    }
+  ],
+  "edges": [
+    {
+      "from": "check",
+      "to": "has_new"
+    },
+    {
+      "from": "has_new",
+      "to": "parse",
+      "label": "yes"
+    },
+    {
+      "from": "has_new",
+      "to": "done",
+      "label": "no"
+    },
+    {
+      "from": "parse",
+      "to": "classify"
+    },
+    {
+      "from": "classify",
+      "to": "act"
+    },
+    {
+      "from": "act",
+      "to": "done"
+    }
+  ]
+}
