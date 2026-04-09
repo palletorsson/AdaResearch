@@ -120,10 +120,12 @@ func _build_ui_overlays() -> void:
 	add_child(left_layer)
 
 	var left_panel := PanelContainer.new()
-	left_panel.set_anchors_and_offsets_preset(Control.PRESET_LEFT_WIDE)
-	left_panel.offset_right = 180
-	left_panel.offset_top = 0
-	left_panel.offset_bottom = 0
+	left_panel.anchor_left = 0.0
+	left_panel.anchor_top = 0.0
+	left_panel.anchor_right = 0.0
+	left_panel.anchor_bottom = 1.0
+	left_panel.offset_right = 185
+	left_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	left_layer.add_child(left_panel)
 
 	var left_vbox := VBoxContainer.new()
@@ -157,15 +159,11 @@ func _build_ui_overlays() -> void:
 	add_child(grid_layer)
 
 	var grid_panel := PanelContainer.new()
-	grid_panel.set_anchors_preset(Control.PRESET_TOP_RIGHT)
 	grid_panel.anchor_left = 0.55
 	grid_panel.anchor_right = 1.0
 	grid_panel.anchor_top = 0.0
 	grid_panel.anchor_bottom = 0.55
-	grid_panel.offset_left = 0
-	grid_panel.offset_right = 0
-	grid_panel.offset_top = 0
-	grid_panel.offset_bottom = 0
+	grid_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	grid_layer.add_child(grid_panel)
 
 	var grid_vbox := VBoxContainer.new()
@@ -206,11 +204,11 @@ func _build_ui_overlays() -> void:
 	add_child(insp_layer)
 
 	var insp_panel := PanelContainer.new()
-	insp_panel.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
 	insp_panel.anchor_left = 0.55
 	insp_panel.anchor_right = 1.0
 	insp_panel.anchor_top = 0.55
 	insp_panel.anchor_bottom = 1.0
+	insp_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	insp_layer.add_child(insp_panel)
 
 	var insp_vbox := VBoxContainer.new()
