@@ -1,0 +1,112 @@
+{
+  "id": "artifact-visual-upgrade",
+  "title": "Make a Dead Artifact Alive",
+  "description": "The complete thinking path for visually upgrading an artifact. Not a checklist — a decision flow where each step informs the next.",
+  "triggers": [
+    "visually upgrade artifact",
+    "make artifact alive",
+    "artifact looks dead",
+    "gray boxes no glow"
+  ],
+  "granularity": "macro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "9 joint demos upgraded, crack propagation CA, V1→V2→V3 spec evolution",
+  "nodes": [
+    {
+      "id": "read",
+      "type": "action",
+      "label": "Read the code",
+      "detail": "Read the full .gd file. Understand what _ready() builds and what _process() animates. Note the base class."
+    },
+    {
+      "id": "identity",
+      "type": "decision",
+      "label": "Has @identity block?",
+      "detail": "Check first 15 lines for # @identity comment block with 8 fields: essence, desire, critical_parameter, triggers, emerges, needs, relationships, truth"
+    },
+    {
+      "id": "write_identity",
+      "type": "action",
+      "label": "Write @identity block",
+      "detail": "Read the algorithm, understand its essence, write the 8 fields. The 'truth' line should be poetic — what this algorithm MEANS, not what it does."
+    },
+    {
+      "id": "find_story",
+      "type": "action",
+      "label": "What is the story?",
+      "detail": "From @identity, answer: What moves? What holds? What connects? Where has it been? What's the critical number? This determines all visual choices."
+    },
+    {
+      "id": "class_name",
+      "type": "action",
+      "label": "Add class_name if missing",
+      "detail": "class_name PascalCaseDemo — after the extends line. Needed for registry and type safety."
+    },
+    {
+      "id": "materials",
+      "type": "action",
+      "label": "Replace flat materials with emissive",
+      "detail": "Use _make_emissive(color, energy) helper. Energy scale: frame=0.5, bodies=1.0-1.5, protagonist=2.0, markers=2.5+. Override via get_child(1) on created bodies.",
+      "code": "func _make_emissive(color: Color, energy: float = 1.5) -> StandardMaterial3D:\n  var mat := StandardMaterial3D.new()\n  mat.albedo_color = color\n  mat.emission_enabled = true\n  mat.emission = color * 0.4\n  mat.emission_energy_multiplier = energy\n  mat.metallic = 0.3\n  mat.roughness = 0.4\n  return mat"
+    },
+    {
+      "id": "trail",
+      "type": "action",
+      "label": "Add trail on the most expressive position",
+      "detail": "ImmediateMesh + PRIMITIVE_LINE_STRIP, 200 points. Trail the foot of the ragdoll, the seat of the swing, the tip of the rod — not the center of mass. Use mover color at 30% alpha, unshaded."
+    },
+    {
+      "id": "markers",
+      "type": "action",
+      "label": "Add glowing markers at invisible constraints",
+      "detail": "SphereMesh r=0.12 with orange emissive (energy 2.5) at every joint/anchor/constraint position. These make the invisible visible."
+    },
+    {
+      "id": "readout",
+      "type": "action",
+      "label": "Add Label3D showing critical number",
+      "detail": "Billboard Label3D updating in _process(). Show the ONE number from @identity critical_parameter that explains what you see. font_size=16, modulate=white 0.8 alpha."
+    },
+    {
+      "id": "capture",
+      "type": "action",
+      "label": "Capture and evaluate",
+      "detail": "Run capture_multi_angle.gd. Check 3 zoom levels. Does the screenshot tell the story? Can you see the protagonist, the structure, the constraints, the trail, the number?"
+    },
+    {
+      "id": "evaluate",
+      "type": "decision",
+      "label": "Does the screenshot tell the story?",
+      "detail": "If empty → load capture-debug flow. If visible but unclear → iterate on colors/trail/markers. If clear → done."
+    },
+    {
+      "id": "iterate",
+      "type": "action",
+      "label": "Fix what's missing and recapture",
+      "detail": "Usually: trail not visible (needs more _process frames, add pre-run), markers too small, emission too low, or camera override."
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Artifact is alive"
+    }
+  ],
+  "edges": [
+    { "from": "read", "to": "identity" },
+    { "from": "identity", "to": "write_identity", "label": "no @identity" },
+    { "from": "identity", "to": "find_story", "label": "has @identity" },
+    { "from": "write_identity", "to": "find_story" },
+    { "from": "find_story", "to": "class_name" },
+    { "from": "class_name", "to": "materials" },
+    { "from": "materials", "to": "trail" },
+    { "from": "trail", "to": "markers" },
+    { "from": "markers", "to": "readout" },
+    { "from": "readout", "to": "capture" },
+    { "from": "capture", "to": "evaluate" },
+    { "from": "evaluate", "to": "done", "label": "yes — tells the story" },
+    { "from": "evaluate", "to": "iterate", "label": "no — missing something" },
+    { "from": "iterate", "to": "capture" }
+  ]
+}

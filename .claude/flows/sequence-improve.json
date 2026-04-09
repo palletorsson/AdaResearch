@@ -1,0 +1,113 @@
+{
+  "id": "sequence-improve",
+  "title": "Improve a Whole Sequence",
+  "description": "The horizontal+vertical flow for raising a sequence's score. Start wide (score all), go deep (fix each), surface back (re-score). Prevents tunnel vision.",
+  "triggers": [
+    "improve sequence",
+    "raise sequence score",
+    "batch improve artifacts",
+    "work on worst sequence"
+  ],
+  "granularity": "macro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "joints 0.5→7.0, biological_growth 1.0→6.7 in one session",
+  "nodes": [
+    {
+      "id": "score_all",
+      "type": "action",
+      "label": "HORIZONTAL: Score all sequences",
+      "detail": "Run the scoring one-liner across all registries. Sort by avg score. This takes 2 seconds and shapes the whole session.",
+      "code": "python -c \"import json, glob, os\\n...\" # see baseline scoring script"
+    },
+    {
+      "id": "pick",
+      "type": "decision",
+      "label": "Which sequence to improve?",
+      "detail": "Smallest artifact count × lowest score = quickest win. joints(11, 0.5) > arrays(4, 1.0) > biological_growth(3, 1.0). Don't start with wavefunctions(102) or randomness(114)."
+    },
+    {
+      "id": "find_artifacts",
+      "type": "action",
+      "label": "List all artifacts in sequence with per-field scores",
+      "detail": "Show which fields are missing for each artifact. Group by registry file. Note which already have @identity in code."
+    },
+    {
+      "id": "read_all_code",
+      "type": "action",
+      "label": "VERTICAL: Read all GDScript files",
+      "detail": "Use an Explore agent to read every .gd file for the sequence. Extract @identity, class_name, signals, joint types, key parameters. This is the deep dive."
+    },
+    {
+      "id": "batch_metadata",
+      "type": "action",
+      "label": "Write Python script to batch-update registry",
+      "detail": "One script that updates all artifacts in the sequence. Include description, qfep_connection, gamwell_reference, interactions, capacity, tags. Write to file, run, verify JSON valid."
+    },
+    {
+      "id": "batch_identity",
+      "type": "action",
+      "label": "Add @identity blocks to code files missing them",
+      "detail": "Use Edit tool on each .gd file. Add 8-line identity block before extends line. Add class_name."
+    },
+    {
+      "id": "capture_footprints",
+      "type": "action",
+      "label": "Batch capture AABB footprints",
+      "detail": "Run capture_multi_angle for each artifact. Parse AABB output. Update registry footprint and size_group.",
+      "code": "for art in ART1 ART2 ART3; do\n  godot --path . --xr-mode off --no-window --script res://commons/testing/capture_multi_angle.gd -- --mode=artifact --target=$art 2>&1 | grep AABB\ndone"
+    },
+    {
+      "id": "visual_needed",
+      "type": "decision",
+      "label": "Do artifacts need visual upgrades?",
+      "detail": "Check screenshots. If gray boxes with no glow/trail/markers → yes, load artifact-visual-upgrade flow for each."
+    },
+    {
+      "id": "visual_batch",
+      "type": "action",
+      "label": "Visual upgrade batch (parallel agents)",
+      "detail": "If artifacts share a base class, upgrade one by hand, then send 4-5 agents in parallel to do the rest. Each agent gets the pattern + the specific file."
+    },
+    {
+      "id": "rescore",
+      "type": "action",
+      "label": "HORIZONTAL: Re-score sequence",
+      "detail": "Run the same scoring query. Compare before/after. Print the delta. This is the proof."
+    },
+    {
+      "id": "checkpoint",
+      "type": "decision",
+      "label": "Avg >= 7.0?",
+      "detail": "If yes → commit and move to next sequence. If no → identify remaining gaps and iterate."
+    },
+    {
+      "id": "commit",
+      "type": "action",
+      "label": "Commit with delta in message",
+      "detail": "feat: improve {sequence} artifacts — docs, code, screenshots\\n\\nSequence avg: {before} → {after}/8"
+    },
+    {
+      "id": "next",
+      "type": "end",
+      "label": "Pick next worst sequence → restart"
+    }
+  ],
+  "edges": [
+    { "from": "score_all", "to": "pick" },
+    { "from": "pick", "to": "find_artifacts" },
+    { "from": "find_artifacts", "to": "read_all_code" },
+    { "from": "read_all_code", "to": "batch_metadata" },
+    { "from": "batch_metadata", "to": "batch_identity" },
+    { "from": "batch_identity", "to": "capture_footprints" },
+    { "from": "capture_footprints", "to": "visual_needed" },
+    { "from": "visual_needed", "to": "visual_batch", "label": "yes" },
+    { "from": "visual_needed", "to": "rescore", "label": "no — already alive" },
+    { "from": "visual_batch", "to": "rescore" },
+    { "from": "rescore", "to": "checkpoint" },
+    { "from": "checkpoint", "to": "commit", "label": ">= 7.0" },
+    { "from": "checkpoint", "to": "find_artifacts", "label": "< 7.0 — iterate" },
+    { "from": "commit", "to": "next" }
+  ]
+}

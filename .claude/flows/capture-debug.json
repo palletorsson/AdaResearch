@@ -1,0 +1,109 @@
+{
+  "id": "capture-debug",
+  "title": "Debug Empty Screenshot",
+  "description": "When a Godot capture comes back showing only background or the artifact is tiny/invisible, follow this decision tree to find and fix the problem.",
+  "triggers": [
+    "screenshot empty",
+    "capture shows only background",
+    "artifact not visible in capture",
+    "artifact too small in screenshot"
+  ],
+  "granularity": "meso",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "joints visual upgrade — GimbalStabilizer was tiny because JointDemoBase Camera3D overrode capture camera",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "label": "Screenshot empty or artifact tiny",
+      "detail": "Capture ran but the image shows only background or a tiny speck"
+    },
+    {
+      "id": "check_camera",
+      "type": "decision",
+      "label": "Does artifact create its own Camera3D?",
+      "detail": "Search the .gd for Camera3D.new() or check if base class (like JointDemoBase) creates one with current=true"
+    },
+    {
+      "id": "disable_cameras",
+      "type": "action",
+      "label": "Disable artifact cameras recursively",
+      "detail": "Walk all children, if child is Camera3D set current=false. Then set capture camera current=true.",
+      "code": "func _disable_cameras_recursive(node: Node):\n  if node is Camera3D:\n    (node as Camera3D).current = false\n  for child in node.get_children():\n    _disable_cameras_recursive(child)"
+    },
+    {
+      "id": "check_env",
+      "type": "decision",
+      "label": "Does artifact create its own WorldEnvironment?",
+      "detail": "If yes, it provides its own background — skip adding ground plane (it will z-fight or look wrong)"
+    },
+    {
+      "id": "skip_ground",
+      "type": "action",
+      "label": "Skip ground plane for self-lit scenes",
+      "detail": "Don't add the capture script's ground plane. The scene's own dark background is better."
+    },
+    {
+      "id": "check_aabb",
+      "type": "decision",
+      "label": "Is AABB height > 0.01?",
+      "detail": "If AABB height is near zero, the mesh isn't generating geometry. If it has height, the mesh exists but is invisible."
+    },
+    {
+      "id": "check_process",
+      "type": "action",
+      "label": "Check if _process() runs during capture",
+      "detail": "The capture script's await timer may not tick the scene's _process. Pre-run the simulation in _ready() instead: for i in range(N): _step_sim()"
+    },
+    {
+      "id": "check_material",
+      "type": "decision",
+      "label": "Is mesh using custom ArrayMesh with flat quads?",
+      "detail": "Custom ArrayMesh quads can have wrong triangle winding. Normals point UP but vertices wind clockwise → back-face culled."
+    },
+    {
+      "id": "fix_cull",
+      "type": "action",
+      "label": "Set CULL_DISABLED on the material",
+      "detail": "crack_material.cull_mode = BaseMaterial3D.CULL_DISABLED — fixes back-face culled custom meshes",
+      "code": "material.cull_mode = BaseMaterial3D.CULL_DISABLED"
+    },
+    {
+      "id": "check_distance",
+      "type": "decision",
+      "label": "Is camera distance >> artifact size?",
+      "detail": "If base_distance is 20+ but artifact visible geometry is 2m, the AABB includes invisible physics bodies or labels inflating the bounds."
+    },
+    {
+      "id": "fix_distance",
+      "type": "action",
+      "label": "Override distance multiplier or use manual --distance",
+      "detail": "Current multiplier is max_dim * 1.0. For flat artifacts (AABB height near 0), max_dim is the width, so distance scales with the floor not the content."
+    },
+    {
+      "id": "resolved",
+      "type": "end",
+      "label": "Artifact visible — recapture"
+    }
+  ],
+  "edges": [
+    { "from": "start", "to": "check_camera" },
+    { "from": "check_camera", "to": "disable_cameras", "label": "yes" },
+    { "from": "check_camera", "to": "check_env", "label": "no" },
+    { "from": "disable_cameras", "to": "check_env" },
+    { "from": "check_env", "to": "skip_ground", "label": "yes" },
+    { "from": "check_env", "to": "check_aabb", "label": "no" },
+    { "from": "skip_ground", "to": "check_aabb" },
+    { "from": "check_aabb", "to": "check_process", "label": "< 0.01 — no mesh" },
+    { "from": "check_aabb", "to": "check_material", "label": "> 0.01 — mesh exists" },
+    { "from": "check_process", "to": "resolved" },
+    { "from": "check_material", "to": "fix_cull", "label": "yes — custom quads" },
+    { "from": "check_material", "to": "check_distance", "label": "no — standard mesh" },
+    { "from": "fix_cull", "to": "resolved" },
+    { "from": "check_distance", "to": "fix_distance", "label": "yes — too far" },
+    { "from": "check_distance", "to": "resolved", "label": "distance OK" },
+    { "from": "fix_distance", "to": "resolved" }
+  ]
+}
