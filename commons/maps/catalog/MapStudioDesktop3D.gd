@@ -415,6 +415,7 @@ func _cell(pos: Vector2) -> void:
 	canvas.queue_redraw()
 	_update_insp()
 	_build_3d()
+	_auto_save()
 
 func _erase_cell(pos: Vector2) -> void:
 	var x := int(pos.x / CELL)
@@ -426,6 +427,7 @@ func _erase_cell(pos: Vector2) -> void:
 	canvas.queue_redraw()
 	_update_insp()
 	_build_3d()
+	_auto_save()
 
 func _drag_start(pos: Vector2) -> void:
 	var x := int(pos.x / CELL)
@@ -486,6 +488,7 @@ func _drag_drop(pos: Vector2) -> void:
 	_drag_layer = -1
 	canvas.queue_redraw()
 	_build_3d()
+	_auto_save()
 
 func _on_art_submit(t: String) -> void:
 	_apply_art_text(t)
@@ -499,6 +502,7 @@ func _apply_art_text(t: String) -> void:
 	canvas.queue_redraw()
 	_build_3d()
 	_update_insp_detail()
+	_auto_save()
 
 func _update_insp() -> void:
 	if sel.x < 0:
@@ -644,6 +648,10 @@ func _update_cam() -> void:
 	cam.look_at(orbit_focus, Vector3.UP)
 
 # SAVE
+func _auto_save() -> void:
+	_save()
+	status.text = "Auto-saved"
+
 func _save() -> void:
 	if map_path == "": return
 	if "layers" not in map_data: map_data["layers"] = {}
