@@ -216,6 +216,7 @@ func _cell(pos: Vector2) -> void:
 		1: ul[z][x] = paint
 	canvas.queue_redraw()
 	_update_insp()
+	_build_3d()
 
 func _on_art_submit(t: String) -> void:
 	if sel.x < 0: return
