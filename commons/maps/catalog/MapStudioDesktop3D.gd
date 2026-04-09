@@ -7,6 +7,7 @@ var _current_map_path: String = ""
 
 func _ready() -> void:
 	super._ready()
+	_camera_mode = CameraMode.STATIC
 	_grid_editor = get_node_or_null("MapGridEditorOverlay") as MapGridEditorOverlay
 	if _grid_editor:
 		_grid_editor.cell_painted.connect(_on_grid_painted)
