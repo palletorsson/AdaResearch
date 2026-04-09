@@ -1,61 +1,79 @@
-extends "res://commons/maps/catalog/MapCatalogDesktop3D.gd"
+extends Node3D
 
-var _grid_editor: MapGridEditorOverlay
-var _current_map_name: String = ""
-var _current_map_data: Dictionary = {}
-var _current_map_path: String = ""
+## Map Studio — standalone map editor, no dependency on MapCatalogDesktop3D
+## Overlays handle UI. This script handles camera + grid system.
+
+const GRID_SYSTEM_SCENE_PATH := "res://commons/grid/grid_system.tscn"
+const CLEAN_KEEP_GROUP := "map_studio_keep"
+
+@onready var _camera: Camera3D = $PreviewCamera
+@onready var _overlay: DesktopMapSwitcherOverlay = $DesktopMapSwitcherOverlay
+@onready var _grid_editor: MapGridEditorOverlay = $MapGridEditorOverlay
+
+var _grid_system: Node3D = null
+var _fly_yaw: float = 0.0
+var _fly_pitch: float = -0.26
+var _is_fly_mode: bool = false
+var _is_mouse_look: bool = false
 
 func _ready() -> void:
-	super._ready()
-	_camera_mode = CameraMode.STATIC
-	_grid_editor = get_node_or_null("MapGridEditorOverlay") as MapGridEditorOverlay
-	if _grid_editor:
-		_grid_editor.cell_painted.connect(_on_grid_painted)
-		_grid_editor.artifact_placed.connect(_on_grid_artifact_placed)
+	if _camera:
+		_fly_yaw = _camera.rotation.y
+		_fly_pitch = _camera.rotation.x
 
-func _on_map_selected(map_name: String) -> void:
-	super._on_map_selected(map_name)
-	_current_map_name = map_name
-	_feed_grid_editor(map_name)
+	_mark_keep($PreviewCamera)
+	_mark_keep($WorldEnvironment)
+	_mark_keep($KeyLight)
+	_mark_keep($FillLight)
+	_mark_keep($Floor)
+	_mark_keep($StatusLabel)
 
-func _feed_grid_editor(map_name: String) -> void:
-	if not _grid_editor: return
-	_current_map_path = "res://commons/maps/" + map_name + "/map_data.json"
-	var file := FileAccess.open(_current_map_path, FileAccess.READ)
-	if not file: return
-	var json := JSON.new()
-	if json.parse(file.get_as_text()) != OK:
-		file.close()
-		return
-	file.close()
-	_current_map_data = json.data
-	var layers: Dictionary = _current_map_data.get("layers", {})
-	var structure: Array = layers.get("structure", [])
-	var utilities: Array = layers.get("utilities", [])
-	var interactables: Array = layers.get("interactables", [])
-	var depth: int = structure.size()
-	var width: int = structure[0].size() if depth > 0 else 0
-	_grid_editor.load_layers(structure, utilities, interactables, width, depth)
+	if _overlay and _overlay.has_signal("map_loaded"):
+		_overlay.map_loaded.connect(_on_map_loaded)
 
-func _on_grid_painted(_layer_idx: int, _x: int, _z: int, _value: String) -> void:
-	_save_current_map()
+func _mark_keep(node: Node) -> void:
+	if node:
+		node.add_to_group(CLEAN_KEEP_GROUP)
 
-func _on_grid_artifact_placed(_x: int, _z: int, _value: String) -> void:
-	_save_current_map()
-
-func _save_current_map() -> void:
-	if _current_map_path == "" or not _grid_editor: return
-	if "layers" not in _current_map_data: _current_map_data["layers"] = {}
-	_current_map_data["layers"]["structure"] = _grid_editor.structure_layer
-	_current_map_data["layers"]["utilities"] = _grid_editor.utilities_layer
-	_current_map_data["layers"]["interactables"] = _grid_editor.interactables_layer
-	var file := FileAccess.open(_current_map_path, FileAccess.WRITE)
-	if file:
-		file.store_string(JSON.stringify(_current_map_data, "  "))
-		file.close()
+func _on_map_loaded(map_name: String) -> void:
+	$StatusLabel.text = map_name
 
 func _unhandled_input(event: InputEvent) -> void:
-	super._unhandled_input(event)
-	if event is InputEventKey and event.pressed and event.ctrl_pressed and event.keycode == KEY_S:
-		_save_current_map()
-		_set_status("Saved: " + _current_map_name)
+	if event is InputEventKey and event.pressed:
+		match event.keycode:
+			KEY_F:
+				_is_fly_mode = not _is_fly_mode
+			KEY_ESCAPE:
+				_is_fly_mode = false
+				_is_mouse_look = false
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			_is_mouse_look = event.pressed
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if _is_mouse_look else Input.MOUSE_MODE_VISIBLE
+		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			_camera.position += _camera.basis.z * -1.0
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			_camera.position += _camera.basis.z * 1.0
+
+	if event is InputEventMouseMotion and _is_mouse_look:
+		_fly_yaw -= event.relative.x * 0.003
+		_fly_pitch = clampf(_fly_pitch - event.relative.y * 0.003, -1.4, 1.4)
+		_camera.rotation = Vector3(_fly_pitch, _fly_yaw, 0)
+
+func _process(delta: float) -> void:
+	if not _is_fly_mode or not _camera:
+		return
+	var speed := 4.0
+	if Input.is_key_pressed(KEY_SHIFT):
+		speed *= 2.5
+	var dir := Vector3.ZERO
+	if Input.is_key_pressed(KEY_W): dir -= _camera.basis.z
+	if Input.is_key_pressed(KEY_S): dir += _camera.basis.z
+	if Input.is_key_pressed(KEY_A): dir -= _camera.basis.x
+	if Input.is_key_pressed(KEY_D): dir += _camera.basis.x
+	if Input.is_key_pressed(KEY_E): dir += Vector3.UP
+	if Input.is_key_pressed(KEY_Q): dir -= Vector3.UP
+	if dir.length() > 0:
+		_camera.position += dir.normalized() * speed * delta

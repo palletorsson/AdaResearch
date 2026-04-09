@@ -1,12 +1,10 @@
 [gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://commons/maps/catalog/MapStudioDesktop3D.gd" id="1_script"]
-[ext_resource type="PackedScene" path="res://commons/scenes/main_menu/components/MapBrowser3D.tscn" id="2_browser"]
-[ext_resource type="Script" path="res://commons/maps/catalog/DesktopMapSwitcherOverlay.gd" id="3_overlay"]
-[ext_resource type="Script" path="res://commons/maps/catalog/MapDataEditorOverlay.gd" id="4_editor"]
-[ext_resource type="Script" path="res://commons/maps/catalog/MapLayerEditorOverlay.gd" id="5_layer_editor"]
-[ext_resource type="Script" path="res://commons/maps/catalog/ProjectDashboardOverlay.gd" id="6_dashboard"]
-[ext_resource type="Script" path="res://commons/maps/catalog/MapGridEditorOverlay.gd" id="7_grid_editor"]
+[ext_resource type="Script" path="res://commons/maps/catalog/DesktopMapSwitcherOverlay.gd" id="2_overlay"]
+[ext_resource type="Script" path="res://commons/maps/catalog/MapDataEditorOverlay.gd" id="3_editor"]
+[ext_resource type="Script" path="res://commons/maps/catalog/MapLayerEditorOverlay.gd" id="4_layer_editor"]
+[ext_resource type="Script" path="res://commons/maps/catalog/MapGridEditorOverlay.gd" id="5_grid_editor"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_top_color = Color(0.14, 0.2, 0.32, 1)
@@ -54,9 +52,6 @@ light_energy = 0.35
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
 mesh = SubResource("PlaneMesh_1")
 
-[node name="MapBrowser3D" parent="." instance=ExtResource("2_browser")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
-
 [node name="StatusLabel" type="Label3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, -0.9, -1.8)
 text = "Map Studio"
@@ -64,16 +59,13 @@ font_size = 30
 outline_size = 6
 
 [node name="DesktopMapSwitcherOverlay" type="CanvasLayer" parent="."]
-script = ExtResource("3_overlay")
+script = ExtResource("2_overlay")
 
 [node name="MapDataEditorOverlay" type="CanvasLayer" parent="."]
-script = ExtResource("4_editor")
+script = ExtResource("3_editor")
 
 [node name="MapLayerEditorOverlay" type="CanvasLayer" parent="."]
-script = ExtResource("5_layer_editor")
-
-[node name="ProjectDashboardOverlay" type="CanvasLayer" parent="."]
-script = ExtResource("6_dashboard")
+script = ExtResource("4_layer_editor")
 
 [node name="MapGridEditorOverlay" type="CanvasLayer" parent="."]
-script = ExtResource("7_grid_editor")
+script = ExtResource("5_grid_editor")
