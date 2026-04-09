@@ -21,11 +21,11 @@ func _build_kiosk() -> void:
 	# Kiosk positioned in front of the artifact (player stands behind kiosk, facing artifact)
 	var kiosk_z := 2.5  # In front of center
 
-	# Panel stand (cylinder post)
+	# Panel stand (shorter so it doesn't poke through the screen)
 	var stand := CSGCylinder3D.new()
 	stand.radius = 0.04
-	stand.height = 1.6
-	stand.position = Vector3(0, 0.8, kiosk_z)
+	stand.height = 1.1
+	stand.position = Vector3(0, 0.55, kiosk_z)
 	var stand_mat := StandardMaterial3D.new()
 	stand_mat.albedo_color = Color(0.15, 0.15, 0.18)
 	stand_mat.metallic = 0.5
