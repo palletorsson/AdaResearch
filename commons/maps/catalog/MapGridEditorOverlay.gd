@@ -63,14 +63,16 @@ func _build_ui() -> void:
 	_panel = PanelContainer.new()
 	_panel.name = "GridPanel"
 	_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-	_panel.anchor_left = 0.35
+	_panel.anchor_left = 0.55
 	_panel.anchor_top = 0.0
 	_panel.anchor_right = 1.0
-	_panel.anchor_bottom = 0.65
-	_panel.offset_left = 0
-	_panel.offset_top = 0
-	_panel.offset_right = 0
+	_panel.anchor_bottom = 0.55
 	_root.add_child(_panel)
+
+	# Opaque background so 3D doesn't show through
+	var grid_bg := StyleBoxFlat.new()
+	grid_bg.bg_color = Color(0.11, 0.11, 0.14, 1.0)
+	_panel.add_theme_stylebox_override("panel", grid_bg)
 
 	var vbox := VBoxContainer.new()
 	_panel.add_child(vbox)
@@ -102,19 +104,19 @@ func _build_ui() -> void:
 	_grid_canvas.draw.connect(_on_grid_draw)
 	scroll.add_child(_grid_canvas)
 
-	# Inspector panel (bottom-right)
+	# Inspector panel (bottom-right, same width as grid)
 	_insp_panel = PanelContainer.new()
 	_insp_panel.name = "InspPanel"
 	_insp_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-	_insp_panel.anchor_left = 0.35
-	_insp_panel.anchor_top = 0.65
+	_insp_panel.anchor_left = 0.55
+	_insp_panel.anchor_top = 0.55
 	_insp_panel.anchor_right = 1.0
 	_insp_panel.anchor_bottom = 1.0
-	_insp_panel.offset_left = 0
-	_insp_panel.offset_top = 0
-	_insp_panel.offset_right = 0
-	_insp_panel.offset_bottom = 0
 	_root.add_child(_insp_panel)
+
+	var insp_bg := StyleBoxFlat.new()
+	insp_bg.bg_color = Color(0.11, 0.11, 0.14, 1.0)
+	_insp_panel.add_theme_stylebox_override("panel", insp_bg)
 
 	var ivbox := VBoxContainer.new()
 	_insp_panel.add_child(ivbox)
