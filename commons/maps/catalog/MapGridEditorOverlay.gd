@@ -63,13 +63,13 @@ func _build_ui() -> void:
 	_panel = PanelContainer.new()
 	_panel.name = "GridPanel"
 	_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-	_panel.anchor_left = 0.5
+	_panel.anchor_left = 0.35
 	_panel.anchor_top = 0.0
 	_panel.anchor_right = 1.0
-	_panel.anchor_bottom = 0.6
-	_panel.offset_left = 5
-	_panel.offset_top = 5
-	_panel.offset_right = -5
+	_panel.anchor_bottom = 0.65
+	_panel.offset_left = 0
+	_panel.offset_top = 0
+	_panel.offset_right = 0
 	_root.add_child(_panel)
 
 	var vbox := VBoxContainer.new()
@@ -106,14 +106,14 @@ func _build_ui() -> void:
 	_insp_panel = PanelContainer.new()
 	_insp_panel.name = "InspPanel"
 	_insp_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-	_insp_panel.anchor_left = 0.5
-	_insp_panel.anchor_top = 0.6
+	_insp_panel.anchor_left = 0.35
+	_insp_panel.anchor_top = 0.65
 	_insp_panel.anchor_right = 1.0
 	_insp_panel.anchor_bottom = 1.0
-	_insp_panel.offset_left = 5
-	_insp_panel.offset_top = 5
-	_insp_panel.offset_right = -5
-	_insp_panel.offset_bottom = -5
+	_insp_panel.offset_left = 0
+	_insp_panel.offset_top = 0
+	_insp_panel.offset_right = 0
+	_insp_panel.offset_bottom = 0
 	_root.add_child(_insp_panel)
 
 	var ivbox := VBoxContainer.new()
