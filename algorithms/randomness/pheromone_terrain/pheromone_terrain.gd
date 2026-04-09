@@ -92,6 +92,7 @@ func _ready() -> void:
 	_initialize_grids()
 	_create_walkers()
 	
+	_add_info_label()
 	set_process(true)
 	print("PheromoneeTerrain: Initialized with %d walkers on %dx%d grid" % [walker_count, x_segments, y_segments])
 
@@ -192,6 +193,7 @@ func _process(delta: float) -> void:
 		for i in range(steps_to_run):
 			_walk_step()
 		_update_mesh()
+		_update_info_label()
 
 func _decay_pheromones(delta: float) -> void:
 	"""Decay all pheromones over time"""
@@ -345,6 +347,34 @@ func _is_in_border(x: int, y: int) -> bool:
 	"""Check if position is in the border area"""
 	return x < border_size or x > x_segments - border_size or \
 		   y < border_size or y > y_segments - border_size
+
+var _info_label: Label3D
+
+func _add_info_label() -> void:
+	_info_label = Label3D.new()
+	_info_label.font_size = 20
+	_info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_info_label.modulate = Color(1.0, 0.5, 1.0, 0.8)
+	_info_label.position = Vector3(0, max_height + 2.0, 0)
+	add_child(_info_label)
+
+	var title := Label3D.new()
+	title.text = "Pheromone Terrain"
+	title.font_size = 24
+	title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	title.modulate = Color(1, 1, 1, 0.8)
+	title.position = Vector3(0, max_height + 3.5, 0)
+	add_child(title)
+
+func _update_info_label() -> void:
+	if _info_label:
+		var total_phero := 0.0
+		for row in pheromone_grid:
+			for val in row:
+				total_phero += val
+		_info_label.text = "walkers: %d  attraction: %.0f%%  pheromone: %.0f" % [
+			walker_count, pheromone_attraction * 100, total_phero
+		]
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass

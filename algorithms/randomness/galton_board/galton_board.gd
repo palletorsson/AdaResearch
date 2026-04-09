@@ -756,7 +756,7 @@ func _create_labels() -> void:
 		var lbl := Label3D.new()
 		lbl.text = str(i)
 		lbl.pixel_size = 0.001
-		lbl.font_size = 8
+		lbl.font_size = 18
 		lbl.modulate = Color(0.5, 0.5, 0.6)
 		lbl.position = Vector3(x, -0.015, board_depth * 0.35)
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -839,7 +839,7 @@ func _add_button_label(btn: Node, text: String) -> void:
 	var lbl := Label3D.new()
 	lbl.text = text
 	lbl.pixel_size = 0.001
-	lbl.font_size = 8
+	lbl.font_size = 18
 	lbl.position = Vector3(0, -0.022, 0)
 	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	btn.add_child(lbl)

@@ -296,7 +296,7 @@ func _create_display_panel() -> void:
 	_step_label.name = "StepLabel"
 	_step_label.text = "step: 0"
 	_step_label.pixel_size = 0.001
-	_step_label.font_size = 10
+	_step_label.font_size = 16
 	_step_label.modulate = Color(0.5, 0.8, 0.5)
 	_step_label.position = Vector3(body_width * 0.35, panel_y + 0.045, panel_z + 0.003)
 	_step_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -307,7 +307,7 @@ func _create_display_panel() -> void:
 	_seed_label.name = "SeedLabel"
 	_seed_label.text = "seed: %d" % initial_seed
 	_seed_label.pixel_size = 0.001
-	_seed_label.font_size = 10
+	_seed_label.font_size = 16
 	_seed_label.modulate = Color(0.6, 0.6, 0.5)
 	_seed_label.position = Vector3(-body_width * 0.35, panel_y + 0.045, panel_z + 0.003)
 	_seed_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -334,7 +334,7 @@ func _create_formula_display() -> void:
 	_formula_label.name = "FormulaLabel"
 	_formula_label.text = "state = (state × a + c) mod m"
 	_formula_label.pixel_size = 0.001
-	_formula_label.font_size = 11
+	_formula_label.font_size = 16
 	_formula_label.modulate = color_formula
 	_formula_label.position = Vector3(0, formula_y + 0.015, panel_z + 0.003)
 	_formula_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -345,7 +345,7 @@ func _create_formula_display() -> void:
 	_state_label.name = "StateLabel"
 	_state_label.text = ""
 	_state_label.pixel_size = 0.001
-	_state_label.font_size = 9
+	_state_label.font_size = 14
 	_state_label.modulate = Color(0.7, 0.7, 0.75)
 	_state_label.position = Vector3(0, formula_y - 0.015, panel_z + 0.003)
 	_state_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -355,7 +355,7 @@ func _create_formula_display() -> void:
 	var params := Label3D.new()
 	params.text = "a = %d    c = %d    m = 2^32" % [lcg_multiplier, lcg_increment]
 	params.pixel_size = 0.0008
-	params.font_size = 9
+	params.font_size = 14
 	params.modulate = Color(0.45, 0.45, 0.5)
 	params.position = Vector3(0, formula_y - 0.045, panel_z + 0.003)
 	params.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -381,7 +381,7 @@ func _create_history_panel() -> void:
 	var header := Label3D.new()
 	header.text = "sequence:"
 	header.pixel_size = 0.0008
-	header.font_size = 8
+	header.font_size = 16
 	header.modulate = Color(0.5, 0.5, 0.55)
 	header.position = Vector3(-body_width * 0.38, hist_y + 0.032, panel_z + 0.003)
 	header.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -392,7 +392,7 @@ func _create_history_panel() -> void:
 	_history_label.name = "HistoryLabel"
 	_history_label.text = ""
 	_history_label.pixel_size = 0.0007
-	_history_label.font_size = 8
+	_history_label.font_size = 16
 	_history_label.modulate = Color(0.4, 0.7, 0.4)
 	_history_label.position = Vector3(0, hist_y - 0.005, panel_z + 0.003)
 	_history_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -487,7 +487,7 @@ func _add_button_label(btn: Node, text: String) -> void:
 	var lbl := Label3D.new()
 	lbl.text = text
 	lbl.pixel_size = 0.001
-	lbl.font_size = 8
+	lbl.font_size = 16
 	lbl.position = Vector3(0, -0.022, 0)
 	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	btn.add_child(lbl)

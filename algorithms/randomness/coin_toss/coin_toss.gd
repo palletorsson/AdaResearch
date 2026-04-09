@@ -460,7 +460,7 @@ func _create_labels() -> void:
 	_stats_label.name = "StatsLabel"
 	_stats_label.text = "Flips: 0\n\nGrab a coin\nand toss it!"
 	_stats_label.pixel_size = 0.0012
-	_stats_label.font_size = 10
+	_stats_label.font_size = 16
 	_stats_label.modulate = Color(0.75, 0.75, 0.8)
 	_stats_label.position = Vector3(0.17, pedestal_height + 0.04, -0.15)
 	_stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -471,7 +471,7 @@ func _create_labels() -> void:
 	_history_label.name = "HistoryLabel"
 	_history_label.text = ""
 	_history_label.pixel_size = 0.001
-	_history_label.font_size = 10
+	_history_label.font_size = 16
 	_history_label.modulate = Color(0.5, 0.5, 0.55)
 	_history_label.position = Vector3(0.17, pedestal_height - 0.02, -0.15)
 	_history_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -550,7 +550,7 @@ func _add_button_label(btn: Node, text: String) -> void:
 	var lbl := Label3D.new()
 	lbl.text = text
 	lbl.pixel_size = 0.001
-	lbl.font_size = 8
+	lbl.font_size = 18
 	lbl.position = Vector3(0, -0.02, 0)
 	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	btn.add_child(lbl)
