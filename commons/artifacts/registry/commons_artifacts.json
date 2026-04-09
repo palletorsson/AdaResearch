@@ -5428,6 +5428,42 @@
 			"tags": [
 				"3d"
 			]
+		},
+		"artifact_workstation": {
+			"category": "tools",
+			"complexity": "beginner",
+			"description": "VR Artifact Workstation — browse and test any of 1692 artifacts from inside VR. Navigate by sequence, type, or all. Arrow keys for desktop, VR buttons for headset.",
+			"dev_themes": [
+				"tools",
+				"quality"
+			],
+			"footprint": [
+				4.0,
+				3.0,
+				4.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "artifact_workstation",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Artifact Workstation",
+			"parameters": {
+				"footprint": [
+					4.0,
+					3.0,
+					4.0
+				],
+				"size_group": "large"
+			},
+			"scene": "res://commons/artifacts/workstation/ArtifactWorkstationVR.tscn",
+			"size_group": "large",
+			"tags": [
+				"tools",
+				"workstation",
+				"browser",
+				"quality",
+				"testing"
+			]
 		}
 	},
 	"registry_info": {

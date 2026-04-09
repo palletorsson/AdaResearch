@@ -27,8 +27,11 @@ var _description_label: Label3D
 
 const SORT_NAMES := ["ALL", "SEQUENCE", "TYPE"]
 
+@export var standalone_mode: bool = false  ## Create own environment (true when loaded as scene, false when placed in map)
+
 func _ready() -> void:
-	_build_environment()
+	if standalone_mode:
+		_build_environment()
 	_build_presentation_area()
 	_build_control_panel()
 	_build_info_panel()
