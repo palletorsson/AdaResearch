@@ -59,17 +59,16 @@ func _build_ui() -> void:
 	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_root)
 
-	# Grid editor panel (top-right)
+	# 2D grid panel (center-top)
 	_panel = PanelContainer.new()
 	_panel.name = "GridPanel"
 	_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-	_panel.anchor_left = 0.55
+	_panel.anchor_left = 0.2
 	_panel.anchor_top = 0.0
-	_panel.anchor_right = 1.0
-	_panel.anchor_bottom = 0.55
+	_panel.anchor_right = 0.78
+	_panel.anchor_bottom = 0.5
 	_root.add_child(_panel)
 
-	# Opaque background so 3D doesn't show through
 	var grid_bg := StyleBoxFlat.new()
 	grid_bg.bg_color = Color(0.11, 0.11, 0.14, 1.0)
 	_panel.add_theme_stylebox_override("panel", grid_bg)
@@ -104,12 +103,12 @@ func _build_ui() -> void:
 	_grid_canvas.draw.connect(_on_grid_draw)
 	scroll.add_child(_grid_canvas)
 
-	# Inspector panel (bottom-right, same width as grid)
+	# Inspector panel (right column, full height)
 	_insp_panel = PanelContainer.new()
 	_insp_panel.name = "InspPanel"
 	_insp_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-	_insp_panel.anchor_left = 0.55
-	_insp_panel.anchor_top = 0.55
+	_insp_panel.anchor_left = 0.78
+	_insp_panel.anchor_top = 0.0
 	_insp_panel.anchor_right = 1.0
 	_insp_panel.anchor_bottom = 1.0
 	_root.add_child(_insp_panel)
