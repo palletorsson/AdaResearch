@@ -187,12 +187,8 @@ func _build_artifact_palette() -> void:
 				_all_artifact_names.append(n)
 		_all_artifact_names.sort()
 
-	var vbox := VBoxContainer.new()
-	vbox.size_flags_horizontal = SIZE_EXPAND_FILL
-	palette.add_child(vbox)
-
 	var row := HBoxContainer.new()
-	vbox.add_child(row)
+	palette.add_child(row)
 
 	_art_search = LineEdit.new()
 	_art_search.placeholder_text = "Search artifact..."
@@ -213,10 +209,10 @@ func _build_artifact_palette() -> void:
 	row.add_child(clear_btn)
 
 	_art_list = ItemList.new()
-	_art_list.custom_minimum_size = Vector2(0, 80)
-	_art_list.max_columns = 3
+	_art_list.size_flags_vertical = SIZE_EXPAND_FILL
+	_art_list.max_columns = 2
 	_art_list.item_selected.connect(_on_art_picked)
-	vbox.add_child(_art_list)
+	palette.add_child(_art_list)
 
 	_filter_art_list("")
 
