@@ -151,7 +151,16 @@ func _load_artifact(lookup_name: String) -> void:
 		print("ArtifactWorkstation: Skip '%s' (instantiate failed)" % lookup_name)
 		return
 
+	# Add to tree — some artifacts crash in _ready() due to missing context
+	# We can't try/catch in GDScript, but we can check if it survived
 	_presentation_area.add_child(instance)
+
+	# Check if it's still valid after _ready() ran
+	if not is_instance_valid(instance):
+		print("ArtifactWorkstation: Skip '%s' (crashed in _ready)" % lookup_name)
+		_current_artifact = null
+		return
+
 	_current_artifact = instance
 	_disable_cameras_recursive(instance)
 
