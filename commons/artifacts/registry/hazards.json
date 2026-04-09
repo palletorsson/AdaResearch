@@ -81,6 +81,65 @@
 				"hand_force"
 			]
 		},
+		"catalyst_pedestal": {
+			"category": "tools",
+			"complexity": "simple",
+			"description": "A one-meter wireframe cube display case with the Becoming Catalyst crystal floating and rotating inside. Place this in lab spawn areas. The player walks up, sees the glowing crystal, and grabs it — the cage fades away as the crystal absorbs into their hand.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"interaction": "immersive",
+			"lookup_name": "catalyst_pedestal",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards",
+				"lab",
+				"testmaps"
+			],
+			"name": "Catalyst Pedestal",
+			"qfep_connection": "The cage frames the invitation. Not protection but presentation — the moment before transformation, when the tool exists waiting to be claimed.",
+			"scene": "res://commons/hazards/becoming_catalyst/catalyst_pedestal.tscn",
+			"tags": [
+				"tool",
+				"catalyst",
+				"pedestal",
+				"display",
+				"wireframe",
+				"pickable",
+				"spawn"
+			]
+		},
+		"wedge_skill_pickup": {
+			"category": "tools",
+			"complexity": "simple",
+			"description": "A one-meter wireframe cube containing a floating orange prism. When grabbed, unlocks the wedge_placer mode on the catalyst bracelet. Place in the primitives sequence for the player to discover.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"interaction": "immersive",
+			"lookup_name": "wedge_skill_pickup",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"hazards",
+				"testmaps"
+			],
+			"name": "Wedge Skill Pickup",
+			"qfep_connection": "The wedge teaches that not everything fits in a box. Slopes, ramps, and angles expand the vocabulary of space.",
+			"scene": "res://commons/hazards/becoming_catalyst/wedge_skill_pickup.tscn",
+			"tags": [
+				"tool",
+				"catalyst",
+				"skill_pickup",
+				"wedge",
+				"prism",
+				"unlock"
+			]
+		},
 		"blockbuilderentity": {
 			"category": "hazards",
 			"complexity": "intermediate",

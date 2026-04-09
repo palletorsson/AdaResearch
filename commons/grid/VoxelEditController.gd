@@ -106,6 +106,24 @@ func update_target_from_ray(ray_origin: Vector3, ray_dir: Vector3, max_dist: flo
 	_update_ghost()
 
 
+## Set target directly (no raycast). Used for cardinal neighbor placement.
+## target: the existing cube to highlight for removal.
+## add: the empty cell where a new cube would go.
+func set_target_direct(target: Vector3i, add: Vector3i) -> void:
+	target_cell = target
+	add_cell = add
+	has_target = true
+	_update_ghost()
+
+
+## Clear targeting (no valid target).
+func clear_target() -> void:
+	has_target = false
+	target_cell = Vector3i(-1, -1, -1)
+	add_cell = Vector3i(-1, -1, -1)
+	_update_ghost()
+
+
 ## Update target from mouse position (desktop convenience).
 func update_target_from_mouse() -> void:
 	var camera := get_viewport().get_camera_3d()
@@ -196,30 +214,36 @@ func _create_ghost_cubes() -> void:
 	var box_mesh := BoxMesh.new()
 	box_mesh.size = Vector3.ONE * cube_size * 0.98
 
-	# Green ghost — shows where a cube will be ADDED
+	# Green ghost — shows where a cube will be ADDED (very transparent)
 	_ghost_add = MeshInstance3D.new()
 	_ghost_add.name = "GhostAdd"
 	_ghost_add.mesh = box_mesh
 	_ghost_add.top_level = true  # Ignore parent transform — render at world scale
 	var add_mat := StandardMaterial3D.new()
-	add_mat.albedo_color = Color(0.2, 0.9, 0.3, 0.35)
+	add_mat.albedo_color = Color(0.2, 0.9, 0.3, 0.15)
 	add_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	add_mat.no_depth_test = true
 	add_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	add_mat.emission_enabled = true
+	add_mat.emission = Color(0.2, 0.9, 0.3)
+	add_mat.emission_energy_multiplier = 0.3
 	_ghost_add.material_override = add_mat
 	_ghost_add.visible = false
 	add_child(_ghost_add)
 
-	# Red ghost — shows which cube will be REMOVED
+	# Red ghost — shows which cube will be REMOVED (very transparent)
 	_ghost_remove = MeshInstance3D.new()
 	_ghost_remove.name = "GhostRemove"
 	_ghost_remove.mesh = box_mesh.duplicate()
 	_ghost_remove.top_level = true  # Ignore parent transform — render at world scale
 	var rem_mat := StandardMaterial3D.new()
-	rem_mat.albedo_color = Color(0.9, 0.2, 0.2, 0.25)
+	rem_mat.albedo_color = Color(0.9, 0.2, 0.2, 0.12)
 	rem_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	rem_mat.no_depth_test = true
 	rem_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	rem_mat.emission_enabled = true
+	rem_mat.emission = Color(0.9, 0.2, 0.2)
+	rem_mat.emission_energy_multiplier = 0.2
 	_ghost_remove.material_override = rem_mat
 	_ghost_remove.visible = false
 	add_child(_ghost_remove)
@@ -233,19 +257,27 @@ func _update_ghost() -> void:
 
 	var total_size: float = cube_size + (structure_component.gutter if structure_component else 0.0)
 
-	# Green ghost at the ADD position (face-adjacent empty cell)
+	# Grid origin in world space — GridStructureComponent extends Node (not Node3D),
+	# so we get the position from its parent (GridSystem, which IS a Node3D).
+	var grid_origin := Vector3.ZERO
+	var grid_parent := structure_component.get_parent()
+	if grid_parent is Node3D:
+		grid_origin = (grid_parent as Node3D).global_position
+
+	# Green ghost at the ADD position
 	if _ghost_add:
 		_ghost_add.visible = true
-		_ghost_add.global_position = Vector3(
+		_ghost_add.global_position = grid_origin + Vector3(
 			float(add_cell.x) * total_size,
 			float(add_cell.y) * total_size,
 			float(add_cell.z) * total_size
 		)
 
-	# Red ghost on the REMOVE target (the existing cube being aimed at)
+	# Red ghost on the REMOVE target
 	if _ghost_remove:
-		_ghost_remove.visible = true
-		_ghost_remove.global_position = Vector3(
+		var height: int = structure_component.get_height_at(target_cell.x, target_cell.z)
+		_ghost_remove.visible = height > 0  # Only show if there's something to remove
+		_ghost_remove.global_position = grid_origin + Vector3(
 			float(target_cell.x) * total_size,
 			float(target_cell.y) * total_size,
 			float(target_cell.z) * total_size

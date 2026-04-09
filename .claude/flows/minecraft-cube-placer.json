@@ -1,0 +1,109 @@
+{
+  "id": "minecraft-cube-placer",
+  "title": "Minecraft Cube Placer — Head Raycast Voxel Editor",
+  "description": "The catalyst's voxel_editor mode raycasts from the player's head (XRCamera3D) to a grid cell, shows a ghost cube preview, and lets the player place or remove cubes with trigger press. This is the first and only catalyst skill at game start — a Minecraft-style building tool that teaches spatial reasoning before any algorithm modes unlock.",
+  "summary": "Look with your head, trigger to place, double-trigger to remove. Can't build on the cell you're standing on. Only skill at start.",
+  "confidence": "verified",
+  "links_to": ["artifact-creation", "vr-input-debug"],
+  "triggers": [
+    "cube placer",
+    "minecraft",
+    "voxel editor",
+    "head raycast",
+    "place cubes",
+    "catalyst voxel",
+    "building tool",
+    "ghost cube"
+  ],
+  "granularity": "meso",
+  "model_version": "opus-4.6",
+  "created": "2026-04-09",
+  "updated": "2026-04-09",
+  "earned_from": "Minecraft cube placer session — changed voxel mode from controller-ray to head-ray, added standing-cell guard, disabled mode persistence so only voxel_editor shows at start",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "label": "Player picks up catalyst crystal",
+      "detail": "Crystal shrinks into hand, absorbs permanently. Hand is free again. BecomingCatalyst auto-absorbs onto the XRController3D. Default mode: voxel_editor."
+    },
+    {
+      "id": "voxel_activates",
+      "type": "action",
+      "label": "Voxel mode activates, finds XR nodes",
+      "detail": "becoming_catalyst._activate_voxel_mode() creates a VoxelEditController child, then walks up from the controller to find XROrigin3D and its XRCamera3D child. These are cached for per-frame head raycasting.",
+      "code": "# Walk up from controller to find XR nodes\nvar node = controller.get_parent()\nwhile node:\n  if node is XROrigin3D:\n    _xr_origin = node\n    break\n  node = node.get_parent()\nfor child in _xr_origin.get_children():\n  if child is XRCamera3D:\n    _xr_camera = child"
+    },
+    {
+      "id": "head_raycast",
+      "type": "action",
+      "label": "Every frame: raycast from head into grid",
+      "detail": "In _physics_process, _update_voxel_raycast() fires a ray from _xr_camera.global_position along -_xr_camera.basis.z. VoxelEditController.update_target_from_ray() does the physics query and computes target_cell (existing cube hit) and add_cell (adjacent empty cell).",
+      "code": "var origin = _xr_camera.global_position\nvar forward = -_xr_camera.global_transform.basis.z\n_voxel_controller.update_target_from_ray(origin, forward)"
+    },
+    {
+      "id": "ghost_shows",
+      "type": "action",
+      "label": "Ghost cubes appear at target",
+      "detail": "VoxelEditController shows a translucent green cube at add_cell (where new cube would go) and a red cube at target_cell (existing cube being aimed at). Both use top_level=true so they render at world scale regardless of catalyst's tiny absorbed scale."
+    },
+    {
+      "id": "trigger_pressed",
+      "type": "decision",
+      "label": "Player presses trigger?",
+      "detail": "Controller button_pressed signal fires 'trigger_click' or 'ax_button'. _on_controller_button routes to _handle_voxel_fire()."
+    },
+    {
+      "id": "double_check",
+      "type": "decision",
+      "label": "Double press? (< 350ms gap)",
+      "detail": "_handle_voxel_fire() compares Time.get_ticks_msec() with _last_fire_time. If gap < DOUBLE_CLICK_MS (350), it's a double press."
+    },
+    {
+      "id": "standing_check",
+      "type": "decision",
+      "label": "Is add_cell on player's standing column?",
+      "detail": "_is_player_standing_cell() converts XROrigin3D position (feet level) to grid coords via world_to_grid(), then compares XZ with the target add_cell. Blocks placement if they match.",
+      "code": "var player_grid = structure_component.world_to_grid(_xr_origin.global_position)\nreturn player_grid.x == cell_x and player_grid.z == cell_z"
+    },
+    {
+      "id": "reject_place",
+      "type": "action",
+      "label": "Reject: short haptic buzz",
+      "detail": "If player tries to build on their standing cell, a tiny haptic pulse (0.02s, amplitude 0.1) signals rejection. No cube placed."
+    },
+    {
+      "id": "place_cube",
+      "type": "action",
+      "label": "Place cube at add_cell",
+      "detail": "VoxelEditController.try_add() calls GridStructureComponent.stack_add(x, z) which increments the height column and rebuilds the MultiMesh. Haptic pulse confirms placement."
+    },
+    {
+      "id": "remove_cube",
+      "type": "action",
+      "label": "Remove cube at target_cell",
+      "detail": "VoxelEditController.try_remove() calls GridStructureComponent.stack_remove(x, z) which decrements the height. No standing-cell guard on removal — you CAN remove the cube you're standing on."
+    },
+    {
+      "id": "loop_back",
+      "type": "end",
+      "label": "Continue building",
+      "detail": "Player keeps looking and placing. The ghost cube updates every frame. fire_cooldown (0.15s) prevents accidental rapid placement."
+    }
+  ],
+  "edges": [
+    { "from": "start", "to": "voxel_activates" },
+    { "from": "voxel_activates", "to": "head_raycast" },
+    { "from": "head_raycast", "to": "ghost_shows" },
+    { "from": "ghost_shows", "to": "trigger_pressed" },
+    { "from": "trigger_pressed", "to": "double_check", "label": "yes" },
+    { "from": "trigger_pressed", "to": "head_raycast", "label": "no (keep looking)" },
+    { "from": "double_check", "to": "remove_cube", "label": "yes (double)" },
+    { "from": "double_check", "to": "standing_check", "label": "no (single)" },
+    { "from": "standing_check", "to": "reject_place", "label": "yes (blocked)" },
+    { "from": "standing_check", "to": "place_cube", "label": "no (allowed)" },
+    { "from": "place_cube", "to": "loop_back" },
+    { "from": "remove_cube", "to": "loop_back" },
+    { "from": "reject_place", "to": "loop_back" }
+  ]
+}

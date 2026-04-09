@@ -155,23 +155,9 @@ func spawn_bracelet_on_controller(controller: XRController3D) -> void:
 
 	print("[BraceletMgr] Activating bracelet with %d modes: %s" % [bracelet_modes.size(), bracelet_modes])
 
-	# Get all mode IDs for display (all 11 stones shown, locked ones dimmed)
-	var all_display: Array = []
-	for cat in catalysts:
-		if "all_mode_ids" in cat:
-			all_display = cat.all_mode_ids.duplicate()
-			break
-	if all_display.is_empty():
-		# Fallback: build from MODE_DEFS
-		for cat in catalysts:
-			if "MODE_DEFS" in cat:
-				for def in cat.MODE_DEFS:
-					all_display.append(def["id"])
-				break
-
-	# Activate with unlocked modes + all display modes
+	# Activate with only the unlocked modes — no "show all dimmed" display
 	if _bracelet.has_method("activate"):
-		_bracelet.activate(bracelet_modes, controller, true, all_display)
+		_bracelet.activate(bracelet_modes, controller, true)
 	else:
 		push_error("[BraceletMgr] Bracelet has NO activate() method — script not attached?")
 
@@ -300,9 +286,8 @@ func _on_node_added(node: Node) -> void:
 		if is_instance_valid(_bracelet) and _bracelet.has_method("link_catalyst"):
 			_bracelet.link_catalyst(node)
 
-	# Re-spawn bracelet on new controller after scene transition
+	# Re-spawn catalyst + bracelet on scene transitions (in-memory only, no disk save)
 	if _bracelet_activated and node is XRController3D:
-		# Wait a frame for the controller to be fully set up
 		call_deferred("_try_respawn_bracelet_on_controller", node)
 
 func _on_sequence_completed(sequence_name: String) -> void:
@@ -489,37 +474,7 @@ func _load_stages() -> void:
 # ---------------------------------------------------------------------------
 
 func save_state() -> void:
-	var save_data = {
-		"completed_sequences": _completed_sequences,
-		"catalyst_modes": _catalyst_modes,
-		"bracelet_activated": _bracelet_activated,
-		"bracelet_tracker": _bracelet_tracker,
-		"last_saved": Time.get_datetime_string_from_system()
-	}
-	var file = FileAccess.open(SAVE_FILE, FileAccess.WRITE)
-	if file:
-		file.store_string(JSON.stringify(save_data))
-		file.close()
+	pass  # In-memory only — fresh start each game, persists across scene transitions
 
 func _load_saved_progress() -> void:
-	if not FileAccess.file_exists(SAVE_FILE):
-		return
-
-	var file = FileAccess.open(SAVE_FILE, FileAccess.READ)
-	if not file:
-		return
-
-	var json_text = file.get_as_text()
-	file.close()
-
-	var json = JSON.new()
-	if json.parse(json_text) == OK:
-		var data: Dictionary = json.data
-		_completed_sequences.clear()
-		for seq in data.get("completed_sequences", []):
-			_completed_sequences.append(str(seq))
-		_catalyst_modes.clear()
-		for mode in data.get("catalyst_modes", []):
-			_catalyst_modes.append(str(mode))
-		_bracelet_activated = data.get("bracelet_activated", false)
-		_bracelet_tracker = str(data.get("bracelet_tracker", ""))
+	pass  # In-memory only — CatalystCapabilityManager is an autoload, state survives scene changes

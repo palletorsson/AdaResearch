@@ -119,7 +119,8 @@ func activate(modes: Array, controller: XRController3D, animate: bool = true, al
 		for m in all_modes:
 			_all_display_modes.append(str(m))
 	else:
-		_all_display_modes = _unlocked_modes.duplicate()
+		for m in _unlocked_modes:
+			_all_display_modes.append(str(m))
 
 	_current_mode_index = clampi(_current_mode_index, 0, maxi(0, _unlocked_modes.size() - 1))
 
@@ -333,6 +334,10 @@ func _build_hinge() -> void:
 		handle_mesh.material_override = handle_mat
 		handle.add_child(handle_mesh)
 
+		# Prevent the bracelet hand from grabbing its own bracelet
+		if handle.has_signal("picked_up"):
+			handle.picked_up.connect(_on_handle_picked_up.bind(handle))
+
 	# Re-hook handles — hinge's _ready() already ran before we added the handles,
 	# so we need to manually connect the handle signals to the hinge.
 	if _hinge.has_method("_hook_child_handles"):
@@ -405,9 +410,21 @@ func _rebuild_gems() -> void:
 ## Create a distinct 3D icon mesh per catalyst mode.
 func _create_mode_icon_mesh(mode_id: String) -> Mesh:
 	match mode_id:
+		"off":
+			# Small dim sphere — "empty" position on the bracelet
+			var m := SphereMesh.new()
+			m.radius = GEM_RADIUS * 0.5
+			m.height = GEM_RADIUS * 1.0
+			m.radial_segments = 6
+			m.rings = 3
+			return m
 		"voxel_editor":
 			var m := BoxMesh.new()
 			m.size = Vector3.ONE * GEM_RADIUS * 2.5
+			return m
+		"wedge_placer":
+			var m := PrismMesh.new()
+			m.size = Vector3(GEM_RADIUS * 2.5, GEM_RADIUS * 2.0, GEM_RADIUS * 2.5)
 			return m
 		"primitives":
 			var m := SphereMesh.new()
@@ -562,6 +579,23 @@ func _on_hinge_moved(angle: float) -> void:
 		bracelet_mode_selected.emit(str(_unlocked_modes[_current_mode_index]))
 
 	print("[Bracelet] Rotated to mode: %s" % str(_unlocked_modes[_current_mode_index]))
+
+# ═══════════════════════════════════════════════════════════════════════════
+# HANDLE GUARD — Prevent bracelet hand from grabbing its own bracelet
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _on_handle_picked_up(_pickable, handle: Node) -> void:
+	# Check if the grabber is on the same controller as the bracelet
+	if not _controller or not is_instance_valid(_controller):
+		return
+	if not handle.has_method("get_picked_up_by_controller"):
+		return
+	var grabber_ctrl: XRController3D = handle.get_picked_up_by_controller()
+	if grabber_ctrl == _controller:
+		# Same hand — force release
+		if handle.has_method("let_go"):
+			handle.let_go(handle.get_picked_up_by(), Vector3.ZERO, Vector3.ZERO)
+			print("[Bracelet] Blocked same-hand grab")
 
 # ═══════════════════════════════════════════════════════════════════════════
 # SIGNALS — React to catalyst events
