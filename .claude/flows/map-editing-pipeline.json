@@ -31,13 +31,13 @@
       "id": "edit_web",
       "type": "action",
       "label": "Use Map Builder web editor",
-      "detail": "localhost:3003/map-builder — 3 layers: structure (heights), utilities (spawn/teleporter), interactables (artifacts)"
+      "detail": "localhost:3003/map-builder \u00e2\u20ac\u201d 3 layers: structure (heights), utilities (spawn/teleporter), interactables (artifacts)"
     },
     {
       "id": "edit_json",
       "type": "action",
       "label": "Edit map_data.json directly",
-      "detail": "commons/maps/{MapName}/map_data.json — structure, utilities, interactables layers"
+      "detail": "commons/maps/{MapName}/map_data.json \u00e2\u20ac\u201d structure, utilities, interactables layers"
     },
     {
       "id": "validate",
@@ -72,13 +72,19 @@
     {
       "id": "bridge",
       "type": "action",
-      "label": "BRIDGE — read VR feedback",
+      "label": "BRIDGE \u00e2\u20ac\u201d read VR feedback",
       "detail": "Check ada_run/desktop_feedback.md for player comments from VR overlay."
     },
     {
       "id": "done",
       "type": "end",
-      "label": "Map complete — commit"
+      "label": "Map complete \u00e2\u20ac\u201d commit"
+    },
+    {
+      "id": "check_notes",
+      "type": "action",
+      "label": "Check dev_notes for this map",
+      "detail": "grep dev_notes commons/maps/MAP_NAME/map_data.json \u2014 written from Map Studio editor. Shows what the designer flagged."
     }
   ],
   "edges": [
@@ -133,13 +139,22 @@
     {
       "from": "bridge",
       "to": "done"
+    },
+    {
+      "from": "discover",
+      "to": "check_notes"
+    },
+    {
+      "from": "check_notes",
+      "to": "edit_choice"
     }
   ],
   "confidence": "verified",
-  "summary": "DISCOVER (ada.py) → EDIT (web or JSON) → VALIDATE (pathfinder) → CAPTURE → REVIEW → BRIDGE (VR feedback) → ITERATE.",
+  "summary": "DISCOVER \u2192 EDIT (Map Studio or JSON) \u2192 VALIDATE \u2192 CAPTURE \u2192 REVIEW \u2192 BRIDGE \u2192 ITERATE. Check dev_notes for map-specific issues.",
   "links_to": [
     "pathfinder-validation",
     "capture-framing",
-    "vr-feedback-bridge"
+    "vr-feedback-bridge",
+    "grep-dev_notes-in-map_data-json"
   ]
 }
