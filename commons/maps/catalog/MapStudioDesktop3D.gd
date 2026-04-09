@@ -62,6 +62,8 @@ func _ready() -> void:
 
 	list.item_selected.connect(_on_list)
 	filter.text_changed.connect(_on_filter)
+	$MapList/NavRow/PrevBtn.pressed.connect(_on_prev_map)
+	$MapList/NavRow/NextBtn.pressed.connect(_on_next_map)
 	# All palette sections visible at once — no tabs
 	save_btn.pressed.connect(_save)
 	canvas.gui_input.connect(_on_canvas_input)
@@ -82,7 +84,7 @@ func _scan() -> void:
 	_seq_maps.clear()
 	_all_map_names.clear()
 
-	# Load sequences
+	# Load sequences — format: { "sequences": { "name": { "maps": [...] } } }
 	var seq_dir := DirAccess.open("res://commons/maps/sequences/")
 	if seq_dir:
 		seq_dir.list_dir_begin()
@@ -95,16 +97,18 @@ func _scan() -> void:
 					var sj := JSON.new()
 					if sj.parse(sf.get_as_text()) == OK:
 						var sd: Dictionary = sj.data
-						var seq_name: String = str(sd.get("name", fname.replace(".json", "")))
-						var maps_arr: Array = sd.get("maps", [])
-						var map_names: Array[String] = []
-						for m in maps_arr:
-							if m is Dictionary:
-								map_names.append(str(m.get("name", "")))
-							elif m is String:
-								map_names.append(m)
-						if map_names.size() > 0:
-							_seq_maps[seq_name] = map_names
+						var seqs_dict: Dictionary = sd.get("sequences", {})
+						for seq_name in seqs_dict:
+							var seq_data: Dictionary = seqs_dict[seq_name]
+							var maps_arr: Array = seq_data.get("maps", [])
+							var map_names: Array[String] = []
+							for m in maps_arr:
+								if m is String:
+									map_names.append(m)
+								elif m is Dictionary:
+									map_names.append(str(m.get("name", "")))
+							if map_names.size() > 0:
+								_seq_maps[seq_name] = map_names
 					sf.close()
 		seq_dir.list_dir_end()
 
@@ -191,9 +195,33 @@ func _on_filter(t: String) -> void:
 			paths.append("res://commons/maps/" + m + "/map_data.json")
 
 func _on_list(idx: int) -> void:
-	var n := list.get_item_text(idx)
-	map_path = "res://commons/maps/" + n + "/map_data.json"
+	if idx < 0 or idx >= paths.size() or paths[idx] == "":
+		return
+	var n := list.get_item_text(idx).strip_edges()
+	map_path = paths[idx]
 	_load(map_path)
+
+func _on_prev_map() -> void:
+	_navigate_map(-1)
+
+func _on_next_map() -> void:
+	_navigate_map(1)
+
+func _navigate_map(dir: int) -> void:
+	var cur := -1
+	for i in range(list.item_count):
+		if list.is_selected(i):
+			cur = i
+			break
+	# Find next non-disabled item
+	var idx := cur
+	for _attempt in range(list.item_count):
+		idx = (idx + dir + list.item_count) % list.item_count
+		if not list.is_item_disabled(idx) and paths[idx] != "":
+			list.select(idx)
+			list.ensure_current_is_visible()
+			_on_list(idx)
+			return
 
 func _load(p: String) -> void:
 	var f := FileAccess.open(p, FileAccess.READ)
