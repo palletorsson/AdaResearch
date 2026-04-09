@@ -40,8 +40,17 @@ var _insp_name: Label
 var _insp_detail: RichTextLabel
 var _artifact_input: LineEdit
 
+var _last_map_name: String = ""
+
 func _ready() -> void:
 	_build_ui()
+	set_process(true)
+
+func _process(_delta: float) -> void:
+	var current: String = DesktopMapSwitcherOverlay.last_selected_map_name
+	if current != "" and current != _last_map_name:
+		_last_map_name = current
+		_load_map_data(current)
 
 func _build_ui() -> void:
 	_root = Control.new()
@@ -132,6 +141,24 @@ func _build_ui() -> void:
 	ivbox.add_child(_insp_detail)
 
 	_build_palette()
+
+func _load_map_data(map_name: String) -> void:
+	var path := "res://commons/maps/" + map_name + "/map_data.json"
+	var file := FileAccess.open(path, FileAccess.READ)
+	if not file: return
+	var json := JSON.new()
+	if json.parse(file.get_as_text()) != OK:
+		file.close()
+		return
+	file.close()
+	var data: Dictionary = json.data
+	var layers: Dictionary = data.get("layers", {})
+	var s: Array = layers.get("structure", [])
+	var u: Array = layers.get("utilities", [])
+	var a: Array = layers.get("interactables", [])
+	var d: int = s.size()
+	var w: int = s[0].size() if d > 0 else 0
+	load_layers(s, u, a, w, d)
 
 func load_layers(structure: Array, utilities: Array, interactables: Array, w: int, d: int) -> void:
 	structure_layer = structure
