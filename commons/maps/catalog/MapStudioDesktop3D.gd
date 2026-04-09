@@ -421,6 +421,8 @@ var _drag_from := Vector2i(-1, -1)
 var _drag_value := ""
 var _drag_layer := -1
 
+var _dirty_3d := false
+
 func _on_canvas_input(ev: InputEvent) -> void:
 	if ev is InputEventMouseButton:
 		if ev.button_index == MOUSE_BUTTON_LEFT:
@@ -429,6 +431,9 @@ func _on_canvas_input(ev: InputEvent) -> void:
 				_cell(ev.position)
 			else:
 				painting = false
+				if _dirty_3d:
+					_dirty_3d = false
+					_reload_3d()
 		elif ev.button_index == MOUSE_BUTTON_RIGHT:
 			if ev.pressed:
 				_drag_start(ev.position)
@@ -454,7 +459,7 @@ func _cell(pos: Vector2) -> void:
 				art_input.text = paint
 	canvas.queue_redraw()
 	_update_insp()
-	_request_3d_reload()
+	_dirty_3d = true
 	_auto_save()
 
 func _erase_cell(pos: Vector2) -> void:
@@ -467,6 +472,7 @@ func _erase_cell(pos: Vector2) -> void:
 	canvas.queue_redraw()
 	_update_insp()
 	_auto_save()
+	_reload_3d()
 
 func _drag_start(pos: Vector2) -> void:
 	var x := int(pos.x / CELL)
