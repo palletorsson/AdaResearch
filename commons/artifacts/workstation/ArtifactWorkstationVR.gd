@@ -82,14 +82,22 @@ func _build_kiosk() -> void:
 
 func _connect_ui(viewport: Node) -> void:
 	# Wait for viewport to create the scene instance
-	await get_tree().process_frame
-	await get_tree().process_frame
-	await get_tree().process_frame
+	for i in range(10):
+		await get_tree().process_frame
+		_ui_instance = viewport.get_scene_instance() if viewport.has_method("get_scene_instance") else null
+		if _ui_instance:
+			break
 
-	_ui_instance = viewport.get_scene_instance() if viewport.has_method("get_scene_instance") else null
 	if _ui_instance and _ui_instance.has_signal("artifact_changed"):
 		_ui_instance.artifact_changed.connect(_on_artifact_changed)
 		print("ArtifactWorkstation: UI connected")
+		# Load the first artifact (signal was emitted before we connected)
+		if _ui_instance.has_method("_get_current_lookup"):
+			_load_artifact(_ui_instance._get_current_lookup())
+		elif _ui_instance.get("_current_list") and _ui_instance._current_list.size() > 0:
+			var first: String = str(_ui_instance._current_list[0].get("lookup_name", ""))
+			if first != "":
+				_load_artifact(first)
 	else:
 		print("ArtifactWorkstation: Could not connect to UI scene")
 
@@ -127,23 +135,29 @@ func _load_artifact(lookup_name: String) -> void:
 		print("ArtifactWorkstation: Scene not found: %s" % scene_path)
 		return
 
-	var packed: PackedScene = ResourceLoader.load(scene_path)
-	if not packed:
+	print("ArtifactWorkstation: Loading '%s'" % lookup_name)
+
+	# Some scenes have broken scripts — catch load failures
+	var packed: Resource = null
+	if ResourceLoader.exists(scene_path):
+		packed = ResourceLoader.load(scene_path, "PackedScene", ResourceLoader.CACHE_MODE_REUSE)
+
+	if not packed or not packed is PackedScene:
+		print("ArtifactWorkstation: Skip '%s' (load failed)" % lookup_name)
 		return
 
-	var instance: Node = packed.instantiate()
+	var instance: Node = (packed as PackedScene).instantiate()
 	if not instance:
+		print("ArtifactWorkstation: Skip '%s' (instantiate failed)" % lookup_name)
 		return
 
 	_presentation_area.add_child(instance)
 	_current_artifact = instance
-
-	# Disable artifact cameras
 	_disable_cameras_recursive(instance)
 
-	# Auto-fit
+	# Auto-fit after a frame
 	call_deferred("_fit_artifact")
-	print("ArtifactWorkstation: Loaded '%s'" % lookup_name)
+	print("ArtifactWorkstation: Showing '%s'" % lookup_name)
 
 func _fit_artifact() -> void:
 	if not _current_artifact or not _current_artifact is Node3D:
