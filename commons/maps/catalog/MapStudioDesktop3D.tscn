@@ -34,6 +34,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Grid2D" type="VBoxContainer" parent="CenterRight/Center"]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
 [node name="Toolbar" type="HBoxContainer" parent="CenterRight/Center/Grid2D"]
