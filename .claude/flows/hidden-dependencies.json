@@ -96,5 +96,12 @@
       "from": "camera",
       "to": "done"
     }
+  ],
+  "confidence": "verified",
+  "summary": "VR weird? Check: camera override (multiple Camera3D), WorldEnvironment conflict, gaze pointer side effects, MovementCapabilityGate silently disabling input.",
+  "links_to": [
+    "capture-debug",
+    "vr-input-mapping",
+    "error-recovery"
   ]
 }

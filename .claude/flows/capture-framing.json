@@ -67,5 +67,10 @@
       "from": "pick_zoom",
       "to": "done"
     }
+  ],
+  "confidence": "verified",
+  "summary": "3 zoom levels per angle. Default = far (1.4x). If artifact tiny, check camera override first.",
+  "links_to": [
+    "capture-debug"
   ]
 }

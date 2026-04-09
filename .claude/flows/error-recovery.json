@@ -96,5 +96,11 @@
       "from": "sequence_fail",
       "to": "done"
     }
+  ],
+  "confidence": "extracted",
+  "summary": "Scene fail → try fallback. Map missing → empty grid. Artifact missing → skip. Sequence broken → hide. Only staging failure crashes.",
+  "links_to": [
+    "scene-transition",
+    "hidden-dependencies"
   ]
 }

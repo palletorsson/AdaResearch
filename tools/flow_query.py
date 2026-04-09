@@ -80,10 +80,16 @@ def search_flows(flows, query):
 
 
 def show_flow(f):
-    print(f"  {f['title']}")
+    conf = f.get('confidence', '?')
+    conf_label = {'verified': 'VERIFIED', 'extracted': 'EXTRACTED (untested)', 'scaffolded': 'SCAFFOLD'}.get(conf, '?')
+    print(f"  {f['title']}  [{conf_label}]")
+    if f.get('summary'):
+        print(f"  TL;DR: {f['summary']}")
     print(f"  {f.get('description', '')}")
     print(f"  Earned from: {f.get('earned_from', '?')}")
     print(f"  Model: {f.get('model_version', '?')} | Updated: {f.get('updated', '?')}")
+    if f.get('links_to'):
+        print(f"  Links to: {', '.join(f['links_to'])}")
     print()
 
     # Build edge map

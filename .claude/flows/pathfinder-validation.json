@@ -106,5 +106,10 @@
       "from": "rerun",
       "to": "pass"
     }
+  ],
+  "confidence": "verified",
+  "summary": "Run pathfinder check. Fails? Common: no spawn, unreachable artifact, teleporter not on void. Fix, re-run.",
+  "links_to": [
+    "map-editing-pipeline"
   ]
 }

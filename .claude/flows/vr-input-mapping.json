@@ -126,5 +126,10 @@
       "from": "pointer",
       "to": "done"
     }
+  ],
+  "confidence": "verified",
+  "summary": "Left: joystick=strafe, trigger=grab. Right: joystick=turn, trigger=grab, AX=flight, pointer=UI. MovementCapabilityGate may disable flight.",
+  "links_to": [
+    "hidden-dependencies"
   ]
 }

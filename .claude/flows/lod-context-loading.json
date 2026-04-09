@@ -102,5 +102,10 @@
       "from": "function",
       "to": "done"
     }
+  ],
+  "confidence": "verified",
+  "summary": "Don't read everything. lod_query.py <topic> at the right depth: project → sequence → map → artifact → function.",
+  "links_to": [
+    "heat-map-triage"
   ]
 }

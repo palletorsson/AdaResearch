@@ -134,5 +134,12 @@
       "from": "bridge",
       "to": "done"
     }
+  ],
+  "confidence": "verified",
+  "summary": "DISCOVER (ada.py) → EDIT (web or JSON) → VALIDATE (pathfinder) → CAPTURE → REVIEW → BRIDGE (VR feedback) → ITERATE.",
+  "links_to": [
+    "pathfinder-validation",
+    "capture-framing",
+    "vr-feedback-bridge"
   ]
 }

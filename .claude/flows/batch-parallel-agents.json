@@ -61,5 +61,11 @@
       "from": "verify",
       "to": "done"
     }
+  ],
+  "confidence": "verified",
+  "summary": "Do one by hand → extract pattern → spawn 4-5 agents with pattern + specific file → verify all succeeded.",
+  "links_to": [
+    "sequence-improve",
+    "artifact-visual-upgrade"
   ]
 }

@@ -366,6 +366,8 @@ func _run_artifact_capture() -> void:
 			])
 
 	print("capture_multi_angle [artifact]: Done — %d/%d shots saved" % [saved, ARTIFACT_ANGLES.size()])
+	if saved == 0:
+		print("capture_multi_angle: TIP — If artifact invisible, run: python tools/flow_query.py screenshot")
 	_save_report(saved)
 	quit(0)
 

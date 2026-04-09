@@ -94,19 +94,72 @@
     }
   ],
   "edges": [
-    { "from": "read", "to": "identity" },
-    { "from": "identity", "to": "write_identity", "label": "no @identity" },
-    { "from": "identity", "to": "find_story", "label": "has @identity" },
-    { "from": "write_identity", "to": "find_story" },
-    { "from": "find_story", "to": "class_name" },
-    { "from": "class_name", "to": "materials" },
-    { "from": "materials", "to": "trail" },
-    { "from": "trail", "to": "markers" },
-    { "from": "markers", "to": "readout" },
-    { "from": "readout", "to": "capture" },
-    { "from": "capture", "to": "evaluate" },
-    { "from": "evaluate", "to": "done", "label": "yes — tells the story" },
-    { "from": "evaluate", "to": "iterate", "label": "no — missing something" },
-    { "from": "iterate", "to": "capture" }
+    {
+      "from": "read",
+      "to": "identity"
+    },
+    {
+      "from": "identity",
+      "to": "write_identity",
+      "label": "no @identity"
+    },
+    {
+      "from": "identity",
+      "to": "find_story",
+      "label": "has @identity"
+    },
+    {
+      "from": "write_identity",
+      "to": "find_story"
+    },
+    {
+      "from": "find_story",
+      "to": "class_name"
+    },
+    {
+      "from": "class_name",
+      "to": "materials"
+    },
+    {
+      "from": "materials",
+      "to": "trail"
+    },
+    {
+      "from": "trail",
+      "to": "markers"
+    },
+    {
+      "from": "markers",
+      "to": "readout"
+    },
+    {
+      "from": "readout",
+      "to": "capture"
+    },
+    {
+      "from": "capture",
+      "to": "evaluate"
+    },
+    {
+      "from": "evaluate",
+      "to": "done",
+      "label": "yes — tells the story"
+    },
+    {
+      "from": "evaluate",
+      "to": "iterate",
+      "label": "no — missing something"
+    },
+    {
+      "from": "iterate",
+      "to": "capture"
+    }
+  ],
+  "confidence": "verified",
+  "summary": "Read code → find story → emissive materials → trail → markers → label → capture → evaluate. If screenshot empty, load capture-debug.",
+  "links_to": [
+    "identity-writing",
+    "capture-debug",
+    "capture-framing"
   ]
 }

@@ -89,21 +89,84 @@
     }
   ],
   "edges": [
-    { "from": "start", "to": "check_camera" },
-    { "from": "check_camera", "to": "disable_cameras", "label": "yes" },
-    { "from": "check_camera", "to": "check_env", "label": "no" },
-    { "from": "disable_cameras", "to": "check_env" },
-    { "from": "check_env", "to": "skip_ground", "label": "yes" },
-    { "from": "check_env", "to": "check_aabb", "label": "no" },
-    { "from": "skip_ground", "to": "check_aabb" },
-    { "from": "check_aabb", "to": "check_process", "label": "< 0.01 — no mesh" },
-    { "from": "check_aabb", "to": "check_material", "label": "> 0.01 — mesh exists" },
-    { "from": "check_process", "to": "resolved" },
-    { "from": "check_material", "to": "fix_cull", "label": "yes — custom quads" },
-    { "from": "check_material", "to": "check_distance", "label": "no — standard mesh" },
-    { "from": "fix_cull", "to": "resolved" },
-    { "from": "check_distance", "to": "fix_distance", "label": "yes — too far" },
-    { "from": "check_distance", "to": "resolved", "label": "distance OK" },
-    { "from": "fix_distance", "to": "resolved" }
+    {
+      "from": "start",
+      "to": "check_camera"
+    },
+    {
+      "from": "check_camera",
+      "to": "disable_cameras",
+      "label": "yes"
+    },
+    {
+      "from": "check_camera",
+      "to": "check_env",
+      "label": "no"
+    },
+    {
+      "from": "disable_cameras",
+      "to": "check_env"
+    },
+    {
+      "from": "check_env",
+      "to": "skip_ground",
+      "label": "yes"
+    },
+    {
+      "from": "check_env",
+      "to": "check_aabb",
+      "label": "no"
+    },
+    {
+      "from": "skip_ground",
+      "to": "check_aabb"
+    },
+    {
+      "from": "check_aabb",
+      "to": "check_process",
+      "label": "< 0.01 — no mesh"
+    },
+    {
+      "from": "check_aabb",
+      "to": "check_material",
+      "label": "> 0.01 — mesh exists"
+    },
+    {
+      "from": "check_process",
+      "to": "resolved"
+    },
+    {
+      "from": "check_material",
+      "to": "fix_cull",
+      "label": "yes — custom quads"
+    },
+    {
+      "from": "check_material",
+      "to": "check_distance",
+      "label": "no — standard mesh"
+    },
+    {
+      "from": "fix_cull",
+      "to": "resolved"
+    },
+    {
+      "from": "check_distance",
+      "to": "fix_distance",
+      "label": "yes — too far"
+    },
+    {
+      "from": "check_distance",
+      "to": "resolved",
+      "label": "distance OK"
+    },
+    {
+      "from": "fix_distance",
+      "to": "resolved"
+    }
+  ],
+  "confidence": "verified",
+  "summary": "Screenshot empty? 1) Disable artifact cameras. 2) Skip ground if scene has WorldEnvironment. 3) Check AABB — no mesh or wrong cull mode.",
+  "links_to": [
+    "capture-framing"
   ]
 }

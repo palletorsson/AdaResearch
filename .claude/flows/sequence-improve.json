@@ -95,19 +95,73 @@
     }
   ],
   "edges": [
-    { "from": "score_all", "to": "pick" },
-    { "from": "pick", "to": "find_artifacts" },
-    { "from": "find_artifacts", "to": "read_all_code" },
-    { "from": "read_all_code", "to": "batch_metadata" },
-    { "from": "batch_metadata", "to": "batch_identity" },
-    { "from": "batch_identity", "to": "capture_footprints" },
-    { "from": "capture_footprints", "to": "visual_needed" },
-    { "from": "visual_needed", "to": "visual_batch", "label": "yes" },
-    { "from": "visual_needed", "to": "rescore", "label": "no — already alive" },
-    { "from": "visual_batch", "to": "rescore" },
-    { "from": "rescore", "to": "checkpoint" },
-    { "from": "checkpoint", "to": "commit", "label": ">= 7.0" },
-    { "from": "checkpoint", "to": "find_artifacts", "label": "< 7.0 — iterate" },
-    { "from": "commit", "to": "next" }
+    {
+      "from": "score_all",
+      "to": "pick"
+    },
+    {
+      "from": "pick",
+      "to": "find_artifacts"
+    },
+    {
+      "from": "find_artifacts",
+      "to": "read_all_code"
+    },
+    {
+      "from": "read_all_code",
+      "to": "batch_metadata"
+    },
+    {
+      "from": "batch_metadata",
+      "to": "batch_identity"
+    },
+    {
+      "from": "batch_identity",
+      "to": "capture_footprints"
+    },
+    {
+      "from": "capture_footprints",
+      "to": "visual_needed"
+    },
+    {
+      "from": "visual_needed",
+      "to": "visual_batch",
+      "label": "yes"
+    },
+    {
+      "from": "visual_needed",
+      "to": "rescore",
+      "label": "no — already alive"
+    },
+    {
+      "from": "visual_batch",
+      "to": "rescore"
+    },
+    {
+      "from": "rescore",
+      "to": "checkpoint"
+    },
+    {
+      "from": "checkpoint",
+      "to": "commit",
+      "label": ">= 7.0"
+    },
+    {
+      "from": "checkpoint",
+      "to": "find_artifacts",
+      "label": "< 7.0 — iterate"
+    },
+    {
+      "from": "commit",
+      "to": "next"
+    }
+  ],
+  "confidence": "verified",
+  "summary": "Score all → pick smallest×lowest → read all code → batch metadata → batch identity → capture footprints → visual if needed → re-score → commit.",
+  "links_to": [
+    "heat-map-triage",
+    "metadata-enrich",
+    "artifact-visual-upgrade",
+    "batch-parallel-agents"
   ]
 }

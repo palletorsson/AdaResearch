@@ -89,5 +89,11 @@
       "from": "visible",
       "to": "done"
     }
+  ],
+  "confidence": "extracted",
+  "summary": "load_scene → fade → instantiate → pass user_data → WAIT 3 FRAMES → GridSystem.load_map → scene_visible. The 3-frame wait is critical.",
+  "links_to": [
+    "grid-content-pipeline",
+    "error-recovery"
   ]
 }

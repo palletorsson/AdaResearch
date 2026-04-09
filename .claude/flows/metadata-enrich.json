@@ -76,15 +76,53 @@
     }
   ],
   "edges": [
-    { "from": "find_entry", "to": "find_code" },
-    { "from": "find_code", "to": "extract_identity" },
-    { "from": "extract_identity", "to": "draft_description", "label": "has @identity" },
-    { "from": "extract_identity", "to": "draft_description", "label": "no @identity — draft from code analysis" },
-    { "from": "draft_description", "to": "draft_qfep" },
-    { "from": "draft_qfep", "to": "draft_rest" },
-    { "from": "draft_rest", "to": "write_script" },
-    { "from": "write_script", "to": "validate" },
-    { "from": "validate", "to": "rescore" },
-    { "from": "rescore", "to": "done" }
+    {
+      "from": "find_entry",
+      "to": "find_code"
+    },
+    {
+      "from": "find_code",
+      "to": "extract_identity"
+    },
+    {
+      "from": "extract_identity",
+      "to": "draft_description",
+      "label": "has @identity"
+    },
+    {
+      "from": "extract_identity",
+      "to": "draft_description",
+      "label": "no @identity — draft from code analysis"
+    },
+    {
+      "from": "draft_description",
+      "to": "draft_qfep"
+    },
+    {
+      "from": "draft_qfep",
+      "to": "draft_rest"
+    },
+    {
+      "from": "draft_rest",
+      "to": "write_script"
+    },
+    {
+      "from": "write_script",
+      "to": "validate"
+    },
+    {
+      "from": "validate",
+      "to": "rescore"
+    },
+    {
+      "from": "rescore",
+      "to": "done"
+    }
+  ],
+  "confidence": "verified",
+  "summary": "Find registry entry → read GDScript → extract @identity → draft 8 fields → edit JSON → validate → re-score.",
+  "links_to": [
+    "identity-writing",
+    "qfep-classification"
   ]
 }
