@@ -152,6 +152,19 @@ const UTIL_DEFS := {
 }
 
 func _build_palette() -> void:
+	# Eraser — clears utility + artifact from selected cell
+	var eraser := Button.new()
+	eraser.text = "Eraser (clear cell)"
+	eraser.pressed.connect(func():
+		if sel.x >= 0:
+			ul[sel.y][sel.x] = " "
+			il[sel.y][sel.x] = " "
+			canvas.queue_redraw()
+			_build_3d()
+			_update_insp()
+	)
+	palette.add_child(eraser)
+
 	# Structure heights
 	var h_label := Label.new()
 	h_label.text = "Structure"
@@ -289,6 +302,8 @@ func _on_canvas_input(ev: InputEvent) -> void:
 				_drag_start(ev.position)
 			else:
 				_drag_drop(ev.position)
+		elif ev.button_index == MOUSE_BUTTON_MIDDLE and ev.pressed:
+			_erase_cell(ev.position)
 	elif ev is InputEventMouseMotion:
 		if painting:
 			_cell(ev.position)
@@ -305,6 +320,17 @@ func _cell(pos: Vector2) -> void:
 			if paint != "" and paint != " ":
 				il[z][x] = paint
 				art_input.text = paint
+	canvas.queue_redraw()
+	_update_insp()
+	_build_3d()
+
+func _erase_cell(pos: Vector2) -> void:
+	var x := int(pos.x / CELL)
+	var z := int(pos.y / CELL)
+	if x < 0 or x >= gw or z < 0 or z >= gd_val: return
+	sel = Vector2i(x, z)
+	ul[z][x] = " "
+	il[z][x] = " "
 	canvas.queue_redraw()
 	_update_insp()
 	_build_3d()
