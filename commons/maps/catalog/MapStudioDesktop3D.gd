@@ -41,6 +41,8 @@ var orbiting := false
 @onready var save_btn: Button = $CenterRight/Center/Grid2D/Palette/SaveBtn
 @onready var cam: Camera3D = $CenterRight/Center/View3D/Viewport/Camera
 @onready var map_root: Node3D = $CenterRight/Center/View3D/Viewport/MapContainer
+const GRID_SYSTEM_PATH := "res://commons/grid/grid_system.tscn"
+var _grid_system: Node3D = null
 @onready var viewport: SubViewport = $CenterRight/Center/View3D/Viewport
 @onready var view3d: SubViewportContainer = $CenterRight/Center/View3D
 @onready var cell_label: Label = $CenterRight/Inspector/CellLabel
@@ -252,7 +254,7 @@ func _load(p: String) -> void:
 	_pad(il)
 	canvas.custom_minimum_size = Vector2(gw * CELL + 1, gd_val * CELL + 1)
 	canvas.queue_redraw()
-	_build_3d()
+	_reload_3d()
 	orbit_focus = Vector3(gw * 0.5, 0, gd_val * 0.5)
 	orbit_dist = maxf(gw, gd_val) * 1.2
 	_update_cam()
@@ -290,7 +292,7 @@ func _build_palette() -> void:
 			ul[sel.y][sel.x] = " "
 			il[sel.y][sel.x] = " "
 			canvas.queue_redraw()
-			_build_3d()
+			_request_3d_reload()
 			_update_insp()
 	)
 	palette.add_child(eraser)
@@ -382,7 +384,7 @@ func _on_art_picked(idx: int) -> void:
 	if sel.x >= 0:
 		il[sel.y][sel.x] = name_str
 		canvas.queue_redraw()
-		_build_3d()
+		_request_3d_reload()
 		_update_insp()
 		art_input.text = name_str
 
@@ -452,7 +454,7 @@ func _cell(pos: Vector2) -> void:
 				art_input.text = paint
 	canvas.queue_redraw()
 	_update_insp()
-	_build_3d()
+	_request_3d_reload()
 	_auto_save()
 
 func _erase_cell(pos: Vector2) -> void:
@@ -464,7 +466,6 @@ func _erase_cell(pos: Vector2) -> void:
 	il[z][x] = " "
 	canvas.queue_redraw()
 	_update_insp()
-	_build_3d()
 	_auto_save()
 
 func _drag_start(pos: Vector2) -> void:
@@ -525,7 +526,7 @@ func _drag_drop(pos: Vector2) -> void:
 	_drag_value = ""
 	_drag_layer = -1
 	canvas.queue_redraw()
-	_build_3d()
+	_request_3d_reload()
 	_auto_save()
 
 func _on_art_submit(t: String) -> void:
@@ -538,7 +539,7 @@ func _apply_art_text(t: String) -> void:
 	if sel.x < 0 or sel.y < 0: return
 	il[sel.y][sel.x] = t if t != "" else " "
 	canvas.queue_redraw()
-	_build_3d()
+	_request_3d_reload()
 	_update_insp_detail()
 	_auto_save()
 
@@ -590,74 +591,46 @@ func _update_insp_detail() -> void:
 	t += "\n[color=gray]Left-click: paint | Right-drag: move | Ctrl+S: save[/color]"
 	detail.text = t
 
-# 3D PREVIEW
-func _build_3d() -> void:
-	for c in map_root.get_children(): c.queue_free()
-	if sl.is_empty(): return
-	var cube := BoxMesh.new()
-	cube.size = Vector3(0.95, 0.95, 0.95)
-	for z in range(gd_val):
-		for x in range(gw):
-			var hs: String = str(sl[z][x])
-			var h: int = int(hs) if hs.is_valid_int() else 0
-			if h <= 0: continue
-			if h == 6:
-				for y in range(3):
-					var m := MeshInstance3D.new()
-					m.mesh = cube
-					m.position = Vector3(x, y + 0.5, z)
-					var mt := StandardMaterial3D.new()
-					mt.albedo_color = Color(0.4, 0.15, 0.15)
-					m.material_override = mt
-					map_root.add_child(m)
-			else:
-				var m := MeshInstance3D.new()
-				m.mesh = cube
-				m.position = Vector3(x, (h - 1) * 0.5, z)
-				var mt := StandardMaterial3D.new()
-				mt.albedo_color = H_COLORS.get(hs, Color(0.3, 0.3, 0.3))
-				m.material_override = mt
-				map_root.add_child(m)
+# 3D PREVIEW — uses the real GridSystem for accurate VR representation
+func _request_3d_reload() -> void:
+	# Only full-reload on map load — too expensive per paint stroke
+	# For live editing, just auto-save and let user press R to reload 3D
+	pass
 
-	# Real artifacts from registry
-	for z in range(gd_val):
-		for x in range(gw):
-			var ia: String = str(il[z][x]).strip_edges()
-			if ia == "" or ia == " ": continue
-			var lookup: String = ia.split(":")[0]
-			var rot: float = 0.0
-			var y_off: float = 0.0
-			var parts := ia.split(":")
-			if parts.size() > 1 and parts[1].is_valid_float(): rot = float(parts[1])
-			if parts.size() > 2 and parts[2].is_valid_float(): y_off = float(parts[2])
+func _reload_3d() -> void:
+	_load_grid_system()
 
-			var art_data: Dictionary = ArtifactCatalogDataProvider.get_artifact_by_lookup_name(lookup)
-			var scene_path: String = str(art_data.get("scene", ""))
-			if scene_path != "" and ResourceLoader.exists(scene_path):
-				var packed: PackedScene = ResourceLoader.load(scene_path, "PackedScene", ResourceLoader.CACHE_MODE_REUSE) as PackedScene
-				if packed:
-					var inst: Node = packed.instantiate()
-					if inst:
-						map_root.add_child(inst)
-						if inst is Node3D:
-							(inst as Node3D).position = Vector3(x, y_off, z)
-							(inst as Node3D).rotation_degrees.y = rot
-						# Disable cameras
-						_disable_cams(inst)
-						continue
+func _load_grid_system() -> void:
+	# Destroy old grid
+	if _grid_system and is_instance_valid(_grid_system):
+		_grid_system.get_parent().remove_child(_grid_system)
+		_grid_system.queue_free()
+		_grid_system = null
 
-			# Fallback: amber box if artifact can't load
-			var m := MeshInstance3D.new()
-			var box := BoxMesh.new()
-			box.size = Vector3(0.6, 1.2, 0.6)
-			m.mesh = box
-			m.position = Vector3(x, 0.6 + y_off, z)
-			var mt := StandardMaterial3D.new()
-			mt.albedo_color = Color(1.0, 0.7, 0.2)
-			mt.emission_enabled = true
-			mt.emission = Color(1.0, 0.7, 0.2) * 0.4
-			m.material_override = mt
-			map_root.add_child(m)
+	if map_path == "": return
+
+	var grid_scene := load(GRID_SYSTEM_PATH)
+	if not grid_scene is PackedScene: return
+
+	_grid_system = (grid_scene as PackedScene).instantiate() as Node3D
+	if not _grid_system: return
+
+	# Set map name before adding to tree so it loads in _ready()
+	var map_name: String = map_path.get_base_dir().get_file()
+	if "map_name" in _grid_system:
+		_grid_system.map_name = map_name
+
+	_grid_system.transform.origin = Vector3(0, -0.5, 0)
+	map_root.add_child(_grid_system)
+
+	# Disable any cameras the grid system creates
+	call_deferred("_disable_grid_cams")
+
+func _disable_grid_cams() -> void:
+	if not _grid_system or not is_instance_valid(_grid_system): return
+	_disable_cams(_grid_system)
+	# Re-enable our preview camera
+	cam.current = true
 
 func _disable_cams(node: Node) -> void:
 	if node is Camera3D:
@@ -703,6 +676,10 @@ func _save() -> void:
 		status.text = "Saved!"
 
 func _unhandled_input(ev: InputEvent) -> void:
-	if ev is InputEventKey and ev.pressed and ev.ctrl_pressed and ev.keycode == KEY_S:
-		_save()
-		get_viewport().set_input_as_handled()
+	if ev is InputEventKey and ev.pressed:
+		if ev.ctrl_pressed and ev.keycode == KEY_S:
+			_save()
+			get_viewport().set_input_as_handled()
+		elif ev.keycode == KEY_R and not ev.ctrl_pressed:
+			_reload_3d()
+			status.text = "3D reloaded"
