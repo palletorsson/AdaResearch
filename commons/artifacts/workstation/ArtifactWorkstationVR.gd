@@ -126,27 +126,19 @@ func _load_artifact(lookup_name: String) -> void:
 		print("ArtifactWorkstation: Scene not found: %s" % scene_path)
 		return
 
-	print("ArtifactWorkstation: Loading '%s'" % lookup_name)
-
-	# Some scenes have broken scripts — catch load failures
-	var packed: Resource = null
-	if ResourceLoader.exists(scene_path):
-		packed = ResourceLoader.load(scene_path, "PackedScene", ResourceLoader.CACHE_MODE_REUSE)
-
-	if not packed or not packed is PackedScene:
+	# Some scenes have broken scripts or type mismatches — skip gracefully
+	var packed: PackedScene = _safe_load(scene_path)
+	if not packed:
 		print("ArtifactWorkstation: Skip '%s' (load failed)" % lookup_name)
 		return
 
-	var instance: Node = (packed as PackedScene).instantiate()
+	var instance: Node = _safe_instantiate(packed)
 	if not instance:
 		print("ArtifactWorkstation: Skip '%s' (instantiate failed)" % lookup_name)
 		return
 
-	# Add to tree — some artifacts crash in _ready() due to missing context
-	# We can't try/catch in GDScript, but we can check if it survived
 	_presentation_area.add_child(instance)
 
-	# Check if it's still valid after _ready() ran
 	if not is_instance_valid(instance):
 		print("ArtifactWorkstation: Skip '%s' (crashed in _ready)" % lookup_name)
 		_current_artifact = null
@@ -154,10 +146,25 @@ func _load_artifact(lookup_name: String) -> void:
 
 	_current_artifact = instance
 	_disable_cameras_recursive(instance)
-
-	# Auto-fit after a frame
 	call_deferred("_fit_artifact")
 	print("ArtifactWorkstation: Showing '%s'" % lookup_name)
+
+## Safe scene loading — returns null on any error (broken script, type mismatch, missing file)
+func _safe_load(path: String) -> PackedScene:
+	if not ResourceLoader.exists(path):
+		return null
+	var res: Resource = ResourceLoader.load(path, "PackedScene", ResourceLoader.CACHE_MODE_REUSE)
+	if res is PackedScene:
+		return res as PackedScene
+	return null
+
+## Safe instantiation — returns null if the scene can't create a valid node
+func _safe_instantiate(packed: PackedScene) -> Node:
+	# Check the scene state for script/type conflicts before instantiating
+	var state: SceneState = packed.get_state()
+	if state.get_node_count() == 0:
+		return null
+	return packed.instantiate()
 
 func _fit_artifact() -> void:
 	if not _current_artifact or not _current_artifact is Node3D:
