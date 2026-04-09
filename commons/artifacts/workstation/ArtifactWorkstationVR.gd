@@ -18,11 +18,14 @@ func _ready() -> void:
 	_build_presentation_area()
 
 func _build_kiosk() -> void:
+	# Kiosk positioned in front of the artifact (player stands behind kiosk, facing artifact)
+	var kiosk_z := 2.5  # In front of center
+
 	# Panel stand (cylinder post)
 	var stand := CSGCylinder3D.new()
 	stand.radius = 0.04
 	stand.height = 1.6
-	stand.position = Vector3(-2.0, 0.8, 0)
+	stand.position = Vector3(0, 0.8, kiosk_z)
 	var stand_mat := StandardMaterial3D.new()
 	stand_mat.albedo_color = Color(0.15, 0.15, 0.18)
 	stand_mat.metallic = 0.5
@@ -38,10 +41,10 @@ func _build_kiosk() -> void:
 	var screen_mat := StandardMaterial3D.new()
 	screen_mat.albedo_color = Color(0.08, 0.08, 0.12)
 	screen.material_override = screen_mat
-	# Tilt screen toward player (30 degrees back)
+	# Tilt screen toward player (angled back)
 	screen.transform = Transform3D(
 		Basis(Vector3.RIGHT, deg_to_rad(-25)),
-		Vector3(-2.0, 1.45, 0)
+		Vector3(0, 1.45, kiosk_z)
 	)
 	add_child(screen)
 
@@ -49,7 +52,7 @@ func _build_kiosk() -> void:
 	var viewport := VIEWPORT_2D_3D.instantiate()
 	viewport.transform = Transform3D(
 		Basis(Vector3.RIGHT, deg_to_rad(-25)),
-		Vector3(-2.0, 1.45, 0.015)
+		Vector3(0, 1.45, kiosk_z + 0.015)
 	)
 	viewport.screen_size = Vector2(0.6, 0.5)
 	viewport.scene = UI_SCENE
@@ -61,7 +64,7 @@ func _build_kiosk() -> void:
 		var hand_area := HAND_POSE_AREA.instantiate()
 		hand_area.transform = Transform3D(
 			Basis(Vector3.RIGHT, deg_to_rad(-25)),
-			Vector3(-2.0, 1.45, 0)
+			Vector3(0, 1.45, kiosk_z)
 		)
 		if ResourceLoader.exists("res://addons/godot-xr-tools/hands/poses/pose_point_left.tres"):
 			hand_area.left_pose = load("res://addons/godot-xr-tools/hands/poses/pose_point_left.tres")
