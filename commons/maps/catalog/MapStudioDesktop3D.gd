@@ -37,7 +37,8 @@ var orbiting := false
 @onready var list: ItemList = $MapList/List
 @onready var filter: LineEdit = $MapList/Filter
 @onready var palette: VBoxContainer = $CenterRight/Center/Grid2D/Palette/PaletteContent
-@onready var canvas: Control = $CenterRight/Center/Grid2D/GridScroll/GridCanvas
+@onready var canvas: Control = $CenterRight/Center/Grid2D/GridAndNotes/GridScroll/GridCanvas
+@onready var notes_edit: TextEdit = $CenterRight/Center/Grid2D/GridAndNotes/NotesBox/NotesEdit
 @onready var save_btn: Button = $CenterRight/Center/Grid2D/Palette/SaveBtn
 @onready var cam: Camera3D = $CenterRight/Center/View3D/Viewport/Camera
 @onready var map_root: Node3D = $CenterRight/Center/View3D/Viewport/MapContainer
@@ -69,6 +70,7 @@ func _ready() -> void:
 	# All palette sections visible at once — no tabs
 	save_btn.pressed.connect(_save)
 	canvas.gui_input.connect(_on_canvas_input)
+	notes_edit.text_changed.connect(_on_notes_changed)
 	canvas.draw.connect(_on_canvas_draw)
 	art_input.text_submitted.connect(_on_art_submit)
 	art_input.text_changed.connect(_on_art_changed)
@@ -259,6 +261,8 @@ func _load(p: String) -> void:
 	orbit_dist = maxf(gw, gd_val) * 1.2
 	_update_cam()
 	sel = Vector2i(-1, -1)
+	# Load dev notes
+	notes_edit.text = str(map_data.get("dev_notes", ""))
 	status.text = "%s %dx%d" % [p.get_base_dir().get_file(), gw, gd_val]
 
 func _pad(a: Array) -> void:
@@ -665,6 +669,9 @@ func _update_cam() -> void:
 	cam.look_at(orbit_focus, Vector3.UP)
 
 # SAVE
+func _on_notes_changed() -> void:
+	_auto_save()
+
 func _auto_save() -> void:
 	_save()
 	status.text = "Auto-saved"
@@ -675,6 +682,12 @@ func _save() -> void:
 	map_data["layers"]["structure"] = sl
 	map_data["layers"]["utilities"] = ul
 	map_data["layers"]["interactables"] = il
+	# Save dev notes
+	var notes: String = notes_edit.text.strip_edges()
+	if notes != "":
+		map_data["dev_notes"] = notes
+	elif "dev_notes" in map_data:
+		map_data.erase("dev_notes")
 	var f := FileAccess.open(map_path, FileAccess.WRITE)
 	if f:
 		f.store_string(JSON.stringify(map_data, "  "))
