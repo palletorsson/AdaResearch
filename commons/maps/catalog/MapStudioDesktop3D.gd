@@ -114,11 +114,18 @@ func _update_camera() -> void:
 # === 2D UI OVERLAYS ===
 
 func _build_ui_overlays() -> void:
-	# Layer 1: Left panel (map list)
-	var left_layer := CanvasLayer.new()
-	left_layer.layer = 10
-	add_child(left_layer)
+	# Single CanvasLayer with a root Control (IGNORE mouse) containing panels (STOP mouse)
+	var ui_layer := CanvasLayer.new()
+	ui_layer.layer = 10
+	add_child(ui_layer)
 
+	var root := Control.new()
+	root.name = "UIRoot"
+	root.set_anchors_preset(Control.PRESET_FULL_RECT)
+	root.mouse_filter = Control.MOUSE_FILTER_IGNORE  # Let clicks pass through to 3D
+	ui_layer.add_child(root)
+
+	# Left panel (map list)
 	var left_panel := PanelContainer.new()
 	left_panel.anchor_left = 0.0
 	left_panel.anchor_top = 0.0
@@ -126,7 +133,7 @@ func _build_ui_overlays() -> void:
 	left_panel.anchor_bottom = 1.0
 	left_panel.offset_right = 185
 	left_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-	left_layer.add_child(left_panel)
+	root.add_child(left_panel)
 
 	var left_vbox := VBoxContainer.new()
 	left_panel.add_child(left_vbox)
@@ -153,18 +160,14 @@ func _build_ui_overlays() -> void:
 	_status.add_theme_font_size_override("font_size", 11)
 	left_vbox.add_child(_status)
 
-	# Layer 2: Top-right panel (2D grid editor)
-	var grid_layer := CanvasLayer.new()
-	grid_layer.layer = 10
-	add_child(grid_layer)
-
+	# Top-right panel (2D grid editor)
 	var grid_panel := PanelContainer.new()
 	grid_panel.anchor_left = 0.55
 	grid_panel.anchor_right = 1.0
 	grid_panel.anchor_top = 0.0
 	grid_panel.anchor_bottom = 0.55
 	grid_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-	grid_layer.add_child(grid_panel)
+	root.add_child(grid_panel)
 
 	var grid_vbox := VBoxContainer.new()
 	grid_panel.add_child(grid_vbox)
@@ -198,18 +201,14 @@ func _build_ui_overlays() -> void:
 	_grid_canvas.draw.connect(_on_grid_draw)
 	grid_scroll.add_child(_grid_canvas)
 
-	# Layer 3: Bottom-right panel (inspector)
-	var insp_layer := CanvasLayer.new()
-	insp_layer.layer = 10
-	add_child(insp_layer)
-
+	# Bottom-right panel (inspector)
 	var insp_panel := PanelContainer.new()
 	insp_panel.anchor_left = 0.55
 	insp_panel.anchor_right = 1.0
 	insp_panel.anchor_top = 0.55
 	insp_panel.anchor_bottom = 1.0
 	insp_panel.mouse_filter = Control.MOUSE_FILTER_STOP
-	insp_layer.add_child(insp_panel)
+	root.add_child(insp_panel)
 
 	var insp_vbox := VBoxContainer.new()
 	insp_panel.add_child(insp_vbox)
