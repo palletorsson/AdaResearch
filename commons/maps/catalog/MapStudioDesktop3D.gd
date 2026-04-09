@@ -270,6 +270,52 @@ func _build_3d() -> void:
 				m.material_override = mt
 				map_root.add_child(m)
 
+	# Real artifacts from registry
+	for z in range(gd_val):
+		for x in range(gw):
+			var ia: String = str(il[z][x]).strip_edges()
+			if ia == "" or ia == " ": continue
+			var lookup: String = ia.split(":")[0]
+			var rot: float = 0.0
+			var y_off: float = 0.0
+			var parts := ia.split(":")
+			if parts.size() > 1 and parts[1].is_valid_float(): rot = float(parts[1])
+			if parts.size() > 2 and parts[2].is_valid_float(): y_off = float(parts[2])
+
+			var art_data: Dictionary = ArtifactCatalogDataProvider.get_artifact_by_lookup_name(lookup)
+			var scene_path: String = str(art_data.get("scene", ""))
+			if scene_path != "" and ResourceLoader.exists(scene_path):
+				var packed: PackedScene = ResourceLoader.load(scene_path, "PackedScene", ResourceLoader.CACHE_MODE_REUSE) as PackedScene
+				if packed:
+					var inst: Node = packed.instantiate()
+					if inst:
+						map_root.add_child(inst)
+						if inst is Node3D:
+							(inst as Node3D).position = Vector3(x, y_off, z)
+							(inst as Node3D).rotation_degrees.y = rot
+						# Disable cameras
+						_disable_cams(inst)
+						continue
+
+			# Fallback: amber box if artifact can't load
+			var m := MeshInstance3D.new()
+			var box := BoxMesh.new()
+			box.size = Vector3(0.6, 1.2, 0.6)
+			m.mesh = box
+			m.position = Vector3(x, 0.6 + y_off, z)
+			var mt := StandardMaterial3D.new()
+			mt.albedo_color = Color(1.0, 0.7, 0.2)
+			mt.emission_enabled = true
+			mt.emission = Color(1.0, 0.7, 0.2) * 0.4
+			m.material_override = mt
+			map_root.add_child(m)
+
+func _disable_cams(node: Node) -> void:
+	if node is Camera3D:
+		(node as Camera3D).current = false
+	for c in node.get_children():
+		_disable_cams(c)
+
 func _on_3d_input(ev: InputEvent) -> void:
 	if ev is InputEventMouseButton:
 		if ev.button_index == MOUSE_BUTTON_RIGHT or ev.button_index == MOUSE_BUTTON_MIDDLE:
