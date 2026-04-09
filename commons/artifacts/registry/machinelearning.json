@@ -2033,6 +2033,102 @@
 			"tags": [
 				"machine_learning"
 			]
+		},
+		"adaboost": {
+			"lookup_name": "adaboost",
+			"name": "AdaBoost",
+			"scene": "res://algorithms/machinelearning/adaboost/adaboost.tscn",
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Watch a sequence of weak learners focus on what the previous ones got wrong. Each decision stump is simple — a single threshold on one axis. But AdaBoost weights misclassified points heavier, so each new stump specializes on the hard cases. Points that keep getting misclassified visually grow larger. The ensemble decision boundary gets progressively more sophisticated from trivially simple components.",
+			"qfep_connection": "Lambda-tuning — the alpha weight per stump is the lambda that tunes how much each weak learner contributes. The ensemble is a weighted sum where lambda encodes earned trust.",
+			"gamwell_reference": "Boosting algorithms, Freund and Schapire 1997, ensemble learning, bias-variance tradeoff, weak learner aggregation",
+			"interactions": [
+				"watch stumps grow round by round",
+				"observe misclassified points growing larger as weight increases",
+				"see the decision boundary evolve from simple to complex"
+			],
+			"capacity": "EXPLAIN how AdaBoost builds a strong classifier from weighted weak learners by focusing each round on previously misclassified samples.",
+			"tags": [
+				"machinelearning",
+				"boosting",
+				"adaboost",
+				"ensemble",
+				"weak-learner",
+				"decision-stump",
+				"classification",
+				"weighting"
+			],
+			"map_sequences": [
+				"machinelearning"
+			],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"footprint": [
+				9.0,
+				4.0,
+				9.0
+			],
+			"parameters": {
+				"footprint": [
+					9.0,
+					4.0,
+					9.0
+				],
+				"size_group": "xlarge"
+			},
+			"size_group": "xlarge",
+			"dev_themes": [
+				"machinelearning"
+			]
+		},
+		"random_forest": {
+			"lookup_name": "random_forest",
+			"name": "Random Forest",
+			"scene": "res://algorithms/machinelearning/random_forest/random_forest.tscn",
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "A forest of decision trees grows one by one, each trained on a random bootstrap sample with random feature selection. Individual trees overfit — their boundaries are jagged and noisy. But the majority vote of all trees produces a smooth, generalizing boundary. Tree columns light up as each tree joins the ensemble. The decision boundary visibly smooths with each addition. Democracy applied to prediction.",
+			"qfep_connection": "E(S) filtered through Form — each tree sees random entropy (bootstrap + feature randomness) but the ensemble vote is the Form that filters noise into signal. More trees = more stable Form.",
+			"gamwell_reference": "Random forests, Breiman 2001, bagging, bootstrap aggregation, Gini impurity, ensemble diversity",
+			"interactions": [
+				"watch trees grow one by one",
+				"observe tree columns lighting up as they join",
+				"see the boundary smooth as more trees vote"
+			],
+			"capacity": "EXPLAIN how Random Forest uses bootstrap sampling and random feature selection to build diverse trees whose majority vote generalizes better than any single tree.",
+			"tags": [
+				"machinelearning",
+				"random-forest",
+				"ensemble",
+				"bagging",
+				"decision-tree",
+				"bootstrap",
+				"gini",
+				"classification"
+			],
+			"map_sequences": [
+				"machinelearning"
+			],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"footprint": [
+				9.0,
+				4.0,
+				9.0
+			],
+			"parameters": {
+				"footprint": [
+					9.0,
+					4.0,
+					9.0
+				],
+				"size_group": "xlarge"
+			},
+			"size_group": "xlarge",
+			"dev_themes": [
+				"machinelearning"
+			]
 		}
 	}
 }
