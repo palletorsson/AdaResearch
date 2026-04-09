@@ -1,5 +1,5 @@
 @tool
-extends Control
+extends VBoxContainer
 
 ## 2D top-down map_data.json editor
 ## Three layers: structure (heights), utilities (spawn/teleporter), interactables (artifacts)
@@ -108,18 +108,7 @@ func _build_ui() -> void:
 	grid_canvas.draw.connect(_on_grid_draw)
 	scroll.add_child(grid_canvas)
 
-	# Layout
-	var vbox_layout := BoxContainer.new()
-	vbox_layout.vertical = true
-	# Re-parent everything into a VBox for proper layout
-	var children := []
-	for child in get_children():
-		children.append(child)
-	for child in children:
-		remove_child(child)
-	add_child(vbox_layout)
-	for child in children:
-		vbox_layout.add_child(child)
+	# Layout is handled by VBoxContainer root — children stack vertically
 
 func _build_palette() -> void:
 	for child in palette_container.get_children():
