@@ -36,7 +36,6 @@ var orbiting := false
 
 @onready var list: ItemList = $MapList/List
 @onready var filter: LineEdit = $MapList/Filter
-@onready var tabs: TabBar = $CenterRight/Center/Grid2D/Palette/LayerTabs
 @onready var palette: VBoxContainer = $CenterRight/Center/Grid2D/Palette/PaletteContent
 @onready var canvas: Control = $CenterRight/Center/Grid2D/GridScroll/GridCanvas
 @onready var save_btn: Button = $CenterRight/Center/Grid2D/Palette/SaveBtn
@@ -63,8 +62,7 @@ func _ready() -> void:
 
 	list.item_selected.connect(_on_list)
 	filter.text_changed.connect(_on_filter)
-	tabs.tab_changed.connect(_on_tab)
-	tabs.tab_clicked.connect(_on_tab)
+	# All palette sections visible at once — no tabs
 	save_btn.pressed.connect(_save)
 	canvas.gui_input.connect(_on_canvas_input)
 	canvas.draw.connect(_on_canvas_draw)
@@ -142,73 +140,75 @@ func _pad(a: Array) -> void:
 			r.append(" ")
 
 # 2D GRID
-func _on_tab(i: int) -> void:
-	layer = i
-	print("MapStudio: tab changed to %d, palette children before: %d" % [i, palette.get_child_count()])
-	_build_palette()
-	print("MapStudio: palette children after: %d" % palette.get_child_count())
-	canvas.queue_redraw()
-
 var _art_search: LineEdit
 var _art_list: ItemList
+var _util_list: ItemList
 var _all_artifact_names: Array[String] = []
 
 const UTIL_DEFS := {
-	"sp": "Spawn point",
-	"t": "Teleporter",
-	"r": "Ramp",
-	"wp": "Wall path / ramp",
-	"tc": "Transport cube",
-	"m": "Music trigger",
-	"ds": "Danger / slow zone",
-	"sub": "Subtitle annotation",
-	"3t": "3-way teleporter",
-	"an": "Annotation label",
-	" ": "Clear cell",
+	"sp": "Spawn", "t": "Teleporter", "r": "Ramp", "wp": "Ramp/path",
+	"tc": "Transport cube", "m": "Music", "ds": "Danger",
+	"sub": "Subtitle", "3t": "3-way teleport", "an": "Annotation", " ": "Clear",
 }
 
 func _build_palette() -> void:
-	# Remove old children immediately (not deferred)
-	while palette.get_child_count() > 0:
-		var c := palette.get_child(0)
-		palette.remove_child(c)
-		c.queue_free()
-	match layer:
-		0:
-			var row := HFlowContainer.new()
-			palette.add_child(row)
-			for h in range(7):
-				var b := Button.new()
-				b.text = str(h)
-				b.custom_minimum_size = Vector2(28, 24)
-				var v: String = str(h)
-				b.pressed.connect(func(): paint = v)
-				row.add_child(b)
-			paint = "1"
-		1:
-			_build_utility_list()
-		2:
-			_build_artifact_palette()
+	# Structure heights
+	var h_label := Label.new()
+	h_label.text = "Structure"
+	h_label.add_theme_font_size_override("font_size", 12)
+	palette.add_child(h_label)
 
-func _build_utility_list() -> void:
-	var util_list := ItemList.new()
-	util_list.size_flags_vertical = SIZE_EXPAND_FILL
-	util_list.item_selected.connect(func(idx: int):
-		paint = util_list.get_item_metadata(idx)
+	var h_row := HFlowContainer.new()
+	palette.add_child(h_row)
+	for h in range(7):
+		var b := Button.new()
+		b.text = str(h)
+		b.custom_minimum_size = Vector2(28, 24)
+		var v: String = str(h)
+		b.pressed.connect(func():
+			paint = v
+			layer = 0
+		)
+		h_row.add_child(b)
+
+	# Utilities
+	var u_label := Label.new()
+	u_label.text = "Utilities"
+	u_label.add_theme_font_size_override("font_size", 12)
+	palette.add_child(u_label)
+
+	_util_list = ItemList.new()
+	_util_list.custom_minimum_size = Vector2(0, 100)
+	_util_list.item_selected.connect(func(idx: int):
+		paint = _util_list.get_item_metadata(idx)
+		layer = 1
 	)
-	palette.add_child(util_list)
+	palette.add_child(_util_list)
 
 	for code in UTIL_DEFS:
-		var label: String = code if code != " " else "x"
-		var desc: String = UTIL_DEFS[code]
-		util_list.add_item("%s  —  %s" % [label, desc])
-		util_list.set_item_metadata(util_list.item_count - 1, code)
+		var lbl: String = code if code != " " else "x"
+		_util_list.add_item("%s — %s" % [lbl, UTIL_DEFS[code]])
+		_util_list.set_item_metadata(_util_list.item_count - 1, code)
 		if code in U_COLORS:
-			util_list.set_item_custom_fg_color(util_list.item_count - 1, U_COLORS[code])
-	paint = "sp"
+			_util_list.set_item_custom_fg_color(_util_list.item_count - 1, U_COLORS[code])
 
-func _build_artifact_palette() -> void:
-	# Load all artifact names once
+	# Artifacts
+	var a_label := Label.new()
+	a_label.text = "Artifacts"
+	a_label.add_theme_font_size_override("font_size", 12)
+	palette.add_child(a_label)
+
+	_art_search = LineEdit.new()
+	_art_search.placeholder_text = "Search..."
+	_art_search.text_changed.connect(_on_art_filter)
+	palette.add_child(_art_search)
+
+	_art_list = ItemList.new()
+	_art_list.size_flags_vertical = SIZE_EXPAND_FILL
+	_art_list.item_selected.connect(_on_art_picked)
+	palette.add_child(_art_list)
+
+	# Load artifact names
 	if _all_artifact_names.is_empty():
 		var all := ArtifactCatalogDataProvider.get_all_artifacts()
 		for a in all:
@@ -216,35 +216,10 @@ func _build_artifact_palette() -> void:
 			if n != "":
 				_all_artifact_names.append(n)
 		_all_artifact_names.sort()
-
-	var row := HBoxContainer.new()
-	palette.add_child(row)
-
-	_art_search = LineEdit.new()
-	_art_search.placeholder_text = "Search artifact..."
-	_art_search.size_flags_horizontal = SIZE_EXPAND_FILL
-	_art_search.text_changed.connect(_on_art_filter)
-	row.add_child(_art_search)
-
-	var clear_btn := Button.new()
-	clear_btn.text = "x"
-	clear_btn.custom_minimum_size = Vector2(28, 0)
-	clear_btn.pressed.connect(func():
-		if sel.x >= 0:
-			il[sel.y][sel.x] = " "
-			canvas.queue_redraw()
-			_build_3d()
-			_update_insp()
-	)
-	row.add_child(clear_btn)
-
-	_art_list = ItemList.new()
-	_art_list.size_flags_vertical = SIZE_EXPAND_FILL
-	_art_list.item_selected.connect(_on_art_picked)
-	palette.add_child(_art_list)
-
 	_filter_art_list("")
-	_art_search.grab_focus()
+
+	paint = "1"
+	layer = 0
 
 func _on_art_filter(t: String) -> void:
 	_filter_art_list(t)
