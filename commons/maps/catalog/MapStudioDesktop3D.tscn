@@ -63,17 +63,19 @@ size_flags_vertical = 3
 layout_mode = 2
 
 [node name="NotesBox" type="VBoxContainer" parent="CenterRight/Center/Grid2D/GridAndNotes"]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="NotesLabel" type="Label" parent="CenterRight/Center/Grid2D/GridAndNotes/NotesBox"]
 layout_mode = 2
 text = "Dev Notes"
 
 [node name="NotesEdit" type="TextEdit" parent="CenterRight/Center/Grid2D/GridAndNotes/NotesBox"]
+custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
 size_flags_vertical = 3
-placeholder_text = "Notes about this map..."
+placeholder_text = "Dev notes — persists in map_data.json..."
 
 [node name="Palette" type="VBoxContainer" parent="CenterRight/Center/Grid2D" unique_id=422989799]
 custom_minimum_size = Vector2(180, 0)
