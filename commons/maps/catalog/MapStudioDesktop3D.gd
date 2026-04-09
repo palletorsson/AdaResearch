@@ -1,6 +1,6 @@
 extends HSplitContainer
 
-const CELL := 24
+const CELL := 38
 const H_COLORS := {
 	"0": Color(0.06, 0.06, 0.08), "1": Color(0.3, 0.3, 0.35),
 	"2": Color(0.4, 0.4, 0.45), "3": Color(0.5, 0.5, 0.55),
