@@ -118,6 +118,62 @@ Every artifact is one of 7 types. Each type has a different improvement strategy
 
 ---
 
+---
+
+## Subtypes (discovered from form factor analysis)
+
+Each type has 2-4 subtypes based on what the artifact physically IS:
+
+### Type 1: Interaction Objects → subtypes
+| Subtype | Examples | Key trait |
+|---------|----------|-----------|
+| **physical_machine** | coin_toss, dice_throw | Grab+throw, physics settle, outcome display |
+| **grabbable_canvas** | living_paper_* (6 artifacts) | Hold to run, release to pause, algorithm draws on surface |
+| **shaker_container** | entropy_jar | Grab+shake, particles respond inside |
+
+### Type 2: Button Simulations → subtypes
+| Subtype | Examples | Key trait |
+|---------|----------|-----------|
+| **control_station** | distribution_sampler, noise_mixer, noise_terrain | Full panel: sliders + buttons + readout labels |
+| **step_machine** | prng_crank, monte_carlo_dartboard | One button advances one step, accumulates |
+| **cranked_visualizer** | galton_board, hardware_entropy_decay | Multi-phase visual machine, button triggers cycle |
+
+### Type 3: Auto-Generative → subtypes
+| Subtype | Examples | Key trait |
+|---------|----------|-----------|
+| **growing_structure** | pipe_dream, ten_print_maze | Structure extends over time, growth front visible |
+| **field_evolution** | crackpropagation_ca, omoss | Grid-based CA or diffusion, state spreads |
+| **procedural_form** | mesh_grammar_*, pixel_cloud | One-shot generation, static result |
+
+### Type 4: Navigable Landscapes → subtypes
+| Subtype | Examples | Key trait |
+|---------|----------|-----------|
+| **noise_terrain** | noise_terrain_with_blobs, pheromone_terrain | Height from noise, walkable |
+| **spatial_corridor** | bell_alley | Shaped space you walk through |
+
+### Type 5: Floating Data → subtypes
+| Subtype | Examples | Key trait |
+|---------|----------|-----------|
+| **shader_surface** | GaussianBlur*, RandomGaussianTexture | ShaderMaterial on flat mesh, visual effect |
+| **3d_distribution** | probability_distributions_3d | Math surface in space, parameter animation |
+| **animated_chart** | distribution_visualization | Bar chart / histogram that cycles states |
+
+### Type 6: Particle Swarms → subtypes
+| Subtype | Examples | Key trait |
+|---------|----------|-----------|
+| **creature_flock** | random_butterflies | Individual agents with behavior |
+| **effect_cloud** | bubble_particles, perlin_noise_clouds | GPU particles filling space |
+| **paint_trail** | pollock_3d, pollock_painting_in_3d | Movement leaves permanent marks |
+
+### Type 7: Minimal Demos → subtypes
+| Subtype | Examples | Key trait |
+|---------|----------|-----------|
+| **cube_grid** | rotate_random_y, randomize_cubes_over_Z | MultimeshInstance3D with random transforms |
+| **stub** | 0-line .gd, .tscn-only | No real code, placeholder |
+| **helper_class** | RefCounted modules (profile, grid3d, bar_array) | Not a scene artifact — utility code |
+
+---
+
 ## How to Use This
 
 1. **Classify** every artifact in a sequence into one of the 7 types
