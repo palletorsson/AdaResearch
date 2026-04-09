@@ -64,6 +64,7 @@ func _ready() -> void:
 	list.item_selected.connect(_on_list)
 	filter.text_changed.connect(_on_filter)
 	tabs.tab_changed.connect(_on_tab)
+	tabs.tab_clicked.connect(_on_tab)
 	save_btn.pressed.connect(_save)
 	canvas.gui_input.connect(_on_canvas_input)
 	canvas.draw.connect(_on_canvas_draw)
@@ -143,7 +144,9 @@ func _pad(a: Array) -> void:
 # 2D GRID
 func _on_tab(i: int) -> void:
 	layer = i
+	print("MapStudio: tab changed to %d, palette children before: %d" % [i, palette.get_child_count()])
 	_build_palette()
+	print("MapStudio: palette children after: %d" % palette.get_child_count())
 	canvas.queue_redraw()
 
 var _art_search: LineEdit
