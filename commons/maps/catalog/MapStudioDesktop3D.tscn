@@ -1,11 +1,75 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://commons/maps/catalog/MapStudioDesktop3D.gd" id="1"]
+[ext_resource type="Script" path="res://commons/maps/catalog/MapCatalogDesktop3D.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://commons/scenes/main_menu/components/MapBrowser3D.tscn" id="2_browser"]
+[ext_resource type="Script" path="res://commons/maps/catalog/DesktopMapSwitcherOverlay.gd" id="3_overlay"]
+[ext_resource type="Script" path="res://commons/maps/catalog/MapDataEditorOverlay.gd" id="4_editor"]
+[ext_resource type="Script" path="res://commons/maps/catalog/MapLayerEditorOverlay.gd" id="5_layer_editor"]
+[ext_resource type="Script" path="res://commons/maps/catalog/ProjectDashboardOverlay.gd" id="6_dashboard"]
 
-[node name="MapStudioDesktop3D" type="Control"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1")
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
+sky_top_color = Color(0.14, 0.2, 0.32, 1)
+sky_horizon_color = Color(0.2, 0.26, 0.38, 1)
+ground_bottom_color = Color(0.07, 0.09, 0.12, 1)
+ground_horizon_color = Color(0.12, 0.14, 0.2, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("ProceduralSkyMaterial_1")
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+ambient_light_source = 2
+ambient_light_color = Color(0.45, 0.5, 0.58, 1)
+ambient_light_energy = 0.55
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1"]
+size = Vector2(18, 18)
+
+[node name="MapStudioDesktop3D" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="PreviewCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1.2, 6.5)
+current = true
+fov = 55.0
+
+[node name="KeyLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 2, 4, 2)
+light_energy = 1.1
+shadow_enabled = true
+
+[node name="FillLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, 0.25, -0.433013, 0, 0.866025, 0.5, 0.5, -0.433013, 0.75, -2, 2, -2)
+light_color = Color(0.75, 0.82, 1, 1)
+light_energy = 0.35
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = SubResource("PlaneMesh_1")
+
+[node name="MapBrowser3D" parent="." instance=ExtResource("2_browser")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+
+[node name="StatusLabel" type="Label3D" parent="."]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, -0.9, -1.8)
+text = "Map Studio"
+font_size = 30
+outline_size = 6
+
+[node name="DesktopMapSwitcherOverlay" type="CanvasLayer" parent="."]
+script = ExtResource("3_overlay")
+
+[node name="MapDataEditorOverlay" type="CanvasLayer" parent="."]
+script = ExtResource("4_editor")
+
+[node name="MapLayerEditorOverlay" type="CanvasLayer" parent="."]
+script = ExtResource("5_layer_editor")
+
+[node name="ProjectDashboardOverlay" type="CanvasLayer" parent="."]
+script = ExtResource("6_dashboard")
