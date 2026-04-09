@@ -153,22 +153,26 @@ func _build_palette() -> void:
 	for c in palette.get_children(): c.queue_free()
 	match layer:
 		0:
+			var row := HFlowContainer.new()
+			palette.add_child(row)
 			for h in range(7):
 				var b := Button.new()
 				b.text = str(h)
 				b.custom_minimum_size = Vector2(28, 24)
 				var v: String = str(h)
 				b.pressed.connect(func(): paint = v)
-				palette.add_child(b)
+				row.add_child(b)
 			paint = "1"
 		1:
+			var row := HFlowContainer.new()
+			palette.add_child(row)
 			for code in ["sp", "t", "r", "wp", "tc", "m", "ds", "sub", " "]:
 				var b := Button.new()
 				b.text = code if code != " " else "x"
 				b.custom_minimum_size = Vector2(32, 24)
 				var v: String = code
 				b.pressed.connect(func(): paint = v)
-				palette.add_child(b)
+				row.add_child(b)
 			paint = "sp"
 		2:
 			_build_artifact_palette()
