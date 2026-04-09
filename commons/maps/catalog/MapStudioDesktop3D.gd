@@ -36,10 +36,10 @@ var orbiting := false
 
 @onready var list: ItemList = $MapList/List
 @onready var filter: LineEdit = $MapList/Filter
-@onready var tabs: TabBar = $CenterRight/Center/Grid2D/Toolbar/LayerTabs
-@onready var palette: VBoxContainer = $CenterRight/Center/Grid2D/Palette
+@onready var tabs: TabBar = $CenterRight/Center/Grid2D/Palette/LayerTabs
+@onready var palette: VBoxContainer = $CenterRight/Center/Grid2D/Palette/PaletteContent
 @onready var canvas: Control = $CenterRight/Center/Grid2D/GridScroll/GridCanvas
-@onready var save_btn: Button = $CenterRight/Center/Grid2D/Toolbar/SaveBtn
+@onready var save_btn: Button = $CenterRight/Center/Grid2D/Palette/SaveBtn
 @onready var cam: Camera3D = $CenterRight/Center/View3D/Viewport/Camera
 @onready var map_root: Node3D = $CenterRight/Center/View3D/Viewport/MapContainer
 @onready var viewport: SubViewport = $CenterRight/Center/View3D/Viewport

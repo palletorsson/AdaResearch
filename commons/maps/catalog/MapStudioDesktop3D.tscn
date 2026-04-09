@@ -33,43 +33,46 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Grid2D" type="VBoxContainer" parent="CenterRight/Center"]
-custom_minimum_size = Vector2(400, 0)
+[node name="Grid2D" type="HSplitContainer" parent="CenterRight/Center"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GridScroll" type="ScrollContainer" parent="CenterRight/Center/Grid2D"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridCanvas" type="Control" parent="CenterRight/Center/Grid2D/GridScroll"]
 layout_mode = 2
 
-[node name="Toolbar" type="HBoxContainer" parent="CenterRight/Center/Grid2D"]
+[node name="Palette" type="VBoxContainer" parent="CenterRight/Center/Grid2D"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 
-[node name="LayerTabs" type="TabBar" parent="CenterRight/Center/Grid2D/Toolbar"]
+[node name="LayerTabs" type="TabBar" parent="CenterRight/Center/Grid2D/Palette"]
 layout_mode = 2
 tab_count = 3
 tab_0/title = "Structure"
 tab_1/title = "Utilities"
 tab_2/title = "Artifacts"
 
-[node name="SaveBtn" type="Button" parent="CenterRight/Center/Grid2D/Toolbar"]
+[node name="PaletteContent" type="VBoxContainer" parent="CenterRight/Center/Grid2D/Palette"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SaveBtn" type="Button" parent="CenterRight/Center/Grid2D/Palette"]
 layout_mode = 2
 text = "Save"
 
-[node name="Palette" type="VBoxContainer" parent="CenterRight/Center/Grid2D"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 200)
-size_flags_vertical = 3
-
-[node name="GridScroll" type="ScrollContainer" parent="CenterRight/Center/Grid2D"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="GridCanvas" type="Control" parent="CenterRight/Center/Grid2D/GridScroll"]
-layout_mode = 2
-
 [node name="View3D" type="SubViewportContainer" parent="CenterRight/Center"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 3
 stretch = true
 
 [node name="Viewport" type="SubViewport" parent="CenterRight/Center/View3D"]
-size = Vector2i(800, 400)
+size = Vector2i(800, 600)
 render_target_update_mode = 3
 
 [node name="Camera" type="Camera3D" parent="CenterRight/Center/View3D/Viewport"]
