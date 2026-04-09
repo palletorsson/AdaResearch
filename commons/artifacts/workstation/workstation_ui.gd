@@ -15,22 +15,36 @@ var _current_group: String = "all"
 
 const SORT_NAMES := ["ALL", "SEQUENCE", "TYPE"]
 
-@onready var _name_label: Label = $VBox/NameLabel
-@onready var _pos_label: Label = $VBox/PosLabel
-@onready var _group_label: Label = $VBox/GroupLabel
-@onready var _info_label: Label = $VBox/InfoLabel
-@onready var _mode_button: Button = $VBox/ButtonRow/ModeButton
+var _name_label: Label
+var _pos_label: Label
+var _group_label: Label
+var _info_label: Label
+var _mode_button: Button
 
 func _ready() -> void:
+	# Find nodes (works both standalone and inside viewport_2d_in_3d)
+	_name_label = get_node_or_null("VBox/NameLabel") as Label
+	_pos_label = get_node_or_null("VBox/PosLabel") as Label
+	_group_label = get_node_or_null("VBox/GroupRow/GroupLabel") as Label
+	_info_label = get_node_or_null("VBox/InfoLabel") as Label
+	_mode_button = get_node_or_null("VBox/ButtonRow/ModeButton") as Button
+
+	var prev_btn = get_node_or_null("VBox/ButtonRow/PrevButton")
+	var next_btn = get_node_or_null("VBox/ButtonRow/NextButton")
+	var mode_btn = get_node_or_null("VBox/ButtonRow/ModeButton")
+	var gprev_btn = get_node_or_null("VBox/GroupRow/GrpPrevButton")
+	var gnext_btn = get_node_or_null("VBox/GroupRow/GrpNextButton")
+
+	if prev_btn: prev_btn.pressed.connect(_on_prev)
+	if next_btn: next_btn.pressed.connect(_on_next)
+	if mode_btn: mode_btn.pressed.connect(_on_mode)
+	if gprev_btn: gprev_btn.pressed.connect(_on_group_prev)
+	if gnext_btn: gnext_btn.pressed.connect(_on_group_next)
+
 	_load_data()
-	$VBox/ButtonRow/PrevButton.pressed.connect(_on_prev)
-	$VBox/ButtonRow/NextButton.pressed.connect(_on_next)
-	$VBox/ButtonRow/ModeButton.pressed.connect(_on_mode)
-	$VBox/GroupRow/GrpPrevButton.pressed.connect(_on_group_prev)
-	$VBox/GroupRow/GrpNextButton.pressed.connect(_on_group_next)
 	if _current_list.size() > 0:
 		_update_ui()
-		emit_signal("artifact_changed", str(_current_list[0].get("lookup_name", "")))
+		artifact_changed.emit(str(_current_list[0].get("lookup_name", "")))
 
 func _load_data() -> void:
 	_all_artifacts = ArtifactCatalogDataProvider.get_all_artifacts()
@@ -124,11 +138,14 @@ func _emit_and_update() -> void:
 		emit_signal("artifact_changed", lookup)
 
 func _update_ui() -> void:
+	if not _name_label:
+		return
+
 	if _current_list.size() == 0:
 		_name_label.text = "No artifacts"
-		_pos_label.text = ""
-		_group_label.text = ""
-		_info_label.text = ""
+		if _pos_label: _pos_label.text = ""
+		if _group_label: _group_label.text = ""
+		if _info_label: _info_label.text = ""
 		return
 
 	var art: Dictionary = _current_list[_current_index] if _current_index < _current_list.size() else {}
@@ -136,17 +153,19 @@ func _update_ui() -> void:
 	var name_str: String = str(art.get("name", lookup))
 
 	_name_label.text = name_str
-	_pos_label.text = "%d / %d" % [_current_index + 1, _current_list.size()]
-	_mode_button.text = SORT_NAMES[_sort_mode]
+	if _pos_label: _pos_label.text = "%d / %d" % [_current_index + 1, _current_list.size()]
+	if _mode_button: _mode_button.text = SORT_NAMES[_sort_mode]
 
-	if _sort_mode == 0:
-		_group_label.text = "all artifacts"
-	else:
-		_group_label.text = "%s  (%d/%d)" % [_current_group, _group_index + 1, _groups.size()]
+	if _group_label:
+		if _sort_mode == 0:
+			_group_label.text = "all artifacts"
+		else:
+			_group_label.text = "%s  (%d/%d)" % [_current_group, _group_index + 1, _groups.size()]
 
-	var seqs = art.get("map_sequences", [])
-	var seq_str: String = ", ".join(seqs) if seqs is Array else str(seqs)
-	var desc: String = str(art.get("description", ""))
-	if desc.length() > 120:
-		desc = desc.substr(0, 117) + "..."
-	_info_label.text = "%s\n%s\n%s" % [lookup, seq_str, desc]
+	if _info_label:
+		var seqs = art.get("map_sequences", [])
+		var seq_str: String = ", ".join(seqs) if seqs is Array else str(seqs)
+		var desc: String = str(art.get("description", ""))
+		if desc.length() > 120:
+			desc = desc.substr(0, 117) + "..."
+		_info_label.text = "%s\n%s\n%s" % [lookup, seq_str, desc]
