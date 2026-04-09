@@ -2,9 +2,9 @@ extends MeshInstance3D
 class_name GaussianBlurCircle
 
 # Constants
-const DEFAULT_WIDTH := 640
-const DEFAULT_HEIGHT := 640
-const CIRCLE_RADIUS := 200
+const DEFAULT_WIDTH := 128  # Was 640 — CPU blur is O(w*h*kernel), must be small
+const DEFAULT_HEIGHT := 128
+const CIRCLE_RADIUS := 40
 
 # Image properties
 var original_image := Image.new()
@@ -16,7 +16,7 @@ var height := DEFAULT_HEIGHT
 # Animation control
 var blur_time := 0.0
 var blur_duration := 10.0  # Duration to go from sharp to fully blurred
-var max_blur_radius := 20.0  # Maximum blur kernel radius
+var max_blur_radius := 8.0  # Maximum blur kernel radius (keep small for CPU blur)
 var current_blur_radius := 0.0
 var active := true
 
@@ -64,26 +64,26 @@ func _setup_material() -> void:
 	new_material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR
 	material_override = new_material
 
+var _frame_skip: int = 0
+
 func _process(delta: float) -> void:
 	if not active:
 		return
 
+	# Only update blur every 4th frame (CPU blur is expensive)
+	_frame_skip += 1
+	if _frame_skip < 4:
+		return
+	_frame_skip = 0
+
 	if blur_time < blur_duration:
-		blur_time += delta
+		blur_time += delta * 4.0  # Compensate for frame skip
 		var progress = min(blur_time / blur_duration, 1.0)
 
-		# Calculate current blur radius with easing
 		current_blur_radius = ease(progress, 0.5) * max_blur_radius
 
-		# Apply Gaussian blur
 		_apply_gaussian_blur()
-
-		# Update texture
 		texture.update(current_image)
-
-		# Debug output
-		if int(blur_time * 10) != int((blur_time - delta) * 10):  # Print every 0.1 seconds
-			print("GaussianBlurCircle: Blur progress: %.1f%%, radius: %.2f" % [progress * 100, current_blur_radius])
 
 # Apply Gaussian blur to the image
 func _apply_gaussian_blur() -> void:
