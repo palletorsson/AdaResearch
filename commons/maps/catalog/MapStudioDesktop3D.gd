@@ -1,10 +1,9 @@
-@tool
-extends Control
+extends Node3D
 
-## Map Studio Desktop — split-view map editor
-## Left: map list | Top center: 2D grid | Bottom center: 3D preview | Right: inspector
+## Map Studio Desktop — 3D scene with 2D overlay panels
+## 3D viewport IS the map preview. 2D panels overlay: map list (left), grid editor (top-right), inspector (right).
 
-const CELL_SIZE := 28
+const CELL_SIZE := 24
 const HEIGHT_COLORS := {
 	"0": Color(0.06, 0.06, 0.08),
 	"1": Color(0.3, 0.3, 0.35),
@@ -15,17 +14,12 @@ const HEIGHT_COLORS := {
 	"6": Color(0.5, 0.12, 0.12),
 }
 const UTILITY_COLORS := {
-	"sp": Color(0.2, 1.0, 0.3),
-	"s": Color(0.2, 1.0, 0.3),
-	"t": Color(0.2, 0.5, 1.0),
-	"r": Color(1.0, 0.8, 0.2),
-	"wp": Color(1.0, 0.8, 0.2),
-	"tc": Color(0.8, 0.4, 1.0),
-	"m": Color(0.5, 0.5, 0.5),
-	"ds": Color(1.0, 0.3, 0.3),
-	"an": Color(0.3, 0.8, 0.8),
+	"sp": Color(0.2, 1.0, 0.3), "s": Color(0.2, 1.0, 0.3),
+	"t": Color(0.2, 0.5, 1.0), "3t": Color(0.2, 0.5, 1.0),
+	"r": Color(1.0, 0.8, 0.2), "wp": Color(1.0, 0.8, 0.2),
+	"tc": Color(0.8, 0.4, 1.0), "m": Color(0.5, 0.5, 0.5),
+	"ds": Color(1.0, 0.3, 0.3), "an": Color(0.3, 0.8, 0.8),
 	"sub": Color(0.3, 0.8, 0.8),
-	"3t": Color(0.2, 0.5, 1.0),
 }
 
 # Map data
@@ -37,231 +31,252 @@ var structure_layer: Array = []
 var utilities_layer: Array = []
 var interactables_layer: Array = []
 
-# Editor state
+# State
 var active_layer: int = 0
 var paint_value: String = "1"
 var is_painting: bool = false
 var selected_cell: Vector2i = Vector2i(-1, -1)
 
-# UI references
-var map_list: ItemList
-var grid_canvas: Control
-var layer_tabs: TabBar
-var palette_container: HBoxContainer
-var info_label: Label
-var inspector_name: Label
-var inspector_detail: RichTextLabel
-var artifact_input: LineEdit
-var preview_3d: SubViewportContainer
-var preview_viewport: SubViewport
-var status_bar: Label
+# 3D scene
+var _camera: Camera3D
+var _map_container: Node3D  # holds generated 3D map preview
+var _orbit_yaw: float = 0.4
+var _orbit_pitch: float = 0.5
+var _orbit_dist: float = 15.0
+var _orbit_focus: Vector3 = Vector3(5, 0, 5)
+var _is_orbiting: bool = false
 
-# Map paths cache
+# UI refs
+var _map_list: ItemList
+var _grid_canvas: Control
+var _layer_tabs: TabBar
+var _palette: HBoxContainer
+var _inspector_name: Label
+var _inspector_detail: RichTextLabel
+var _artifact_input: LineEdit
+var _status: Label
 var _map_paths: Array[String] = []
 
 func _ready() -> void:
-	_build_layout()
+	_build_3d_scene()
+	_build_ui_overlays()
 	_scan_maps()
 
-func _build_layout() -> void:
-	# Root: HSplitContainer
-	var root_split := HSplitContainer.new()
-	root_split.set_anchors_and_offsets_preset(PRESET_FULL_RECT)
-	root_split.split_offset = 180
-	add_child(root_split)
+# === 3D SCENE ===
 
-	# === LEFT: Map list ===
-	var left_panel := VBoxContainer.new()
-	left_panel.custom_minimum_size = Vector2(170, 0)
-	root_split.add_child(left_panel)
+func _build_3d_scene() -> void:
+	# Environment
+	var env := Environment.new()
+	env.background_mode = Environment.BG_COLOR
+	env.background_color = Color(0.12, 0.13, 0.18)
+	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	env.ambient_light_color = Color(0.4, 0.4, 0.45)
+	env.ambient_light_energy = 0.5
+	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	var world_env := WorldEnvironment.new()
+	world_env.environment = env
+	add_child(world_env)
 
-	var list_label := Label.new()
-	list_label.text = "Maps"
-	list_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	left_panel.add_child(list_label)
+	# Camera
+	_camera = Camera3D.new()
+	_camera.name = "StudioCamera"
+	_camera.fov = 50
+	_camera.current = true
+	add_child(_camera)
+	_update_camera()
+
+	# Lights
+	var key := DirectionalLight3D.new()
+	key.rotation_degrees = Vector3(-45, -30, 0)
+	key.light_energy = 1.2
+	key.shadow_enabled = true
+	add_child(key)
+
+	var fill := DirectionalLight3D.new()
+	fill.rotation_degrees = Vector3(-20, 150, 0)
+	fill.light_energy = 0.4
+	add_child(fill)
+
+	# Container for map geometry
+	_map_container = Node3D.new()
+	_map_container.name = "MapPreview"
+	add_child(_map_container)
+
+func _update_camera() -> void:
+	var offset := Vector3(
+		sin(_orbit_yaw) * cos(_orbit_pitch),
+		sin(_orbit_pitch),
+		cos(_orbit_yaw) * cos(_orbit_pitch)
+	) * _orbit_dist
+	_camera.position = _orbit_focus + offset
+	_camera.look_at(_orbit_focus, Vector3.UP)
+
+# === 2D UI OVERLAYS ===
+
+func _build_ui_overlays() -> void:
+	# Layer 1: Left panel (map list)
+	var left_layer := CanvasLayer.new()
+	left_layer.layer = 10
+	add_child(left_layer)
+
+	var left_panel := PanelContainer.new()
+	left_panel.set_anchors_and_offsets_preset(Control.PRESET_LEFT_WIDE)
+	left_panel.offset_right = 180
+	left_panel.offset_top = 0
+	left_panel.offset_bottom = 0
+	left_layer.add_child(left_panel)
+
+	var left_vbox := VBoxContainer.new()
+	left_panel.add_child(left_vbox)
+
+	var title := Label.new()
+	title.text = "Map Studio"
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size", 18)
+	left_vbox.add_child(title)
 
 	var search := LineEdit.new()
-	search.placeholder_text = "Filter..."
+	search.placeholder_text = "Filter maps..."
 	search.text_changed.connect(_filter_maps)
-	left_panel.add_child(search)
+	left_vbox.add_child(search)
 
-	map_list = ItemList.new()
-	map_list.size_flags_vertical = SIZE_EXPAND_FILL
-	map_list.item_selected.connect(_on_map_item_selected)
-	map_list.auto_height = false
-	left_panel.add_child(map_list)
+	_map_list = ItemList.new()
+	_map_list.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_map_list.item_selected.connect(_on_map_selected)
+	left_vbox.add_child(_map_list)
 
-	# === CENTER + RIGHT split ===
-	var center_right := HSplitContainer.new()
-	center_right.split_offset = -280
-	root_split.add_child(center_right)
+	_status = Label.new()
+	_status.text = "Ready"
+	_status.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5))
+	_status.add_theme_font_size_override("font_size", 11)
+	left_vbox.add_child(_status)
 
-	# === CENTER: 2D grid (top) + 3D preview (bottom) ===
-	var center_split := VSplitContainer.new()
-	center_split.split_offset = 300
-	center_right.add_child(center_split)
+	# Layer 2: Top-right panel (2D grid editor)
+	var grid_layer := CanvasLayer.new()
+	grid_layer.layer = 10
+	add_child(grid_layer)
 
-	# Top: 2D grid editor
-	var grid_panel := VBoxContainer.new()
-	center_split.add_child(grid_panel)
+	var grid_panel := PanelContainer.new()
+	grid_panel.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	grid_panel.anchor_left = 0.55
+	grid_panel.anchor_right = 1.0
+	grid_panel.anchor_top = 0.0
+	grid_panel.anchor_bottom = 0.55
+	grid_panel.offset_left = 0
+	grid_panel.offset_right = 0
+	grid_panel.offset_top = 0
+	grid_panel.offset_bottom = 0
+	grid_layer.add_child(grid_panel)
 
-	# Layer tabs + palette
-	var grid_toolbar := HBoxContainer.new()
-	grid_panel.add_child(grid_toolbar)
+	var grid_vbox := VBoxContainer.new()
+	grid_panel.add_child(grid_vbox)
 
-	layer_tabs = TabBar.new()
-	layer_tabs.add_tab("Structure")
-	layer_tabs.add_tab("Utilities")
-	layer_tabs.add_tab("Interactables")
-	layer_tabs.tab_changed.connect(_on_layer_changed)
-	grid_toolbar.add_child(layer_tabs)
+	# Layer tabs + save
+	var toolbar := HBoxContainer.new()
+	grid_vbox.add_child(toolbar)
+
+	_layer_tabs = TabBar.new()
+	_layer_tabs.add_tab("Structure")
+	_layer_tabs.add_tab("Utilities")
+	_layer_tabs.add_tab("Interactables")
+	_layer_tabs.tab_changed.connect(_on_layer_changed)
+	toolbar.add_child(_layer_tabs)
 
 	var save_btn := Button.new()
 	save_btn.text = "Save"
 	save_btn.pressed.connect(_save_map)
-	grid_toolbar.add_child(save_btn)
+	toolbar.add_child(save_btn)
 
-	palette_container = HBoxContainer.new()
-	grid_panel.add_child(palette_container)
+	_palette = HBoxContainer.new()
+	grid_vbox.add_child(_palette)
 
-	# Scrollable grid canvas
 	var grid_scroll := ScrollContainer.new()
-	grid_scroll.size_flags_vertical = SIZE_EXPAND_FILL
-	grid_scroll.size_flags_horizontal = SIZE_EXPAND_FILL
-	grid_panel.add_child(grid_scroll)
+	grid_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	grid_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	grid_vbox.add_child(grid_scroll)
 
-	grid_canvas = Control.new()
-	grid_canvas.gui_input.connect(_on_grid_input)
-	grid_canvas.draw.connect(_on_grid_draw)
-	grid_scroll.add_child(grid_canvas)
+	_grid_canvas = Control.new()
+	_grid_canvas.gui_input.connect(_on_grid_input)
+	_grid_canvas.draw.connect(_on_grid_draw)
+	grid_scroll.add_child(_grid_canvas)
 
-	# Bottom: 3D preview
-	var preview_panel := VBoxContainer.new()
-	center_split.add_child(preview_panel)
+	# Layer 3: Bottom-right panel (inspector)
+	var insp_layer := CanvasLayer.new()
+	insp_layer.layer = 10
+	add_child(insp_layer)
 
-	var preview_label := Label.new()
-	preview_label.text = "3D Preview"
-	preview_panel.add_child(preview_label)
+	var insp_panel := PanelContainer.new()
+	insp_panel.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
+	insp_panel.anchor_left = 0.55
+	insp_panel.anchor_right = 1.0
+	insp_panel.anchor_top = 0.55
+	insp_panel.anchor_bottom = 1.0
+	insp_layer.add_child(insp_panel)
 
-	preview_3d = SubViewportContainer.new()
-	preview_3d.size_flags_vertical = SIZE_EXPAND_FILL
-	preview_3d.size_flags_horizontal = SIZE_EXPAND_FILL
-	preview_3d.stretch = true
-	preview_panel.add_child(preview_3d)
-
-	preview_viewport = SubViewport.new()
-	preview_viewport.size = Vector2i(800, 400)
-	preview_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
-	preview_3d.add_child(preview_viewport)
-
-	# Add camera + light to preview
-	var cam := Camera3D.new()
-	cam.name = "PreviewCam"
-	cam.position = Vector3(5, 8, 12)
-	cam.look_at(Vector3(5, 0, 5))
-	cam.fov = 50
-	cam.current = true
-	preview_viewport.add_child(cam)
-
-	var light := DirectionalLight3D.new()
-	light.rotation_degrees = Vector3(-45, -30, 0)
-	light.light_energy = 1.2
-	preview_viewport.add_child(light)
-
-	var env := WorldEnvironment.new()
-	var environment := Environment.new()
-	environment.background_mode = Environment.BG_COLOR
-	environment.background_color = Color(0.1, 0.1, 0.14)
-	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	environment.ambient_light_color = Color(0.4, 0.4, 0.45)
-	environment.ambient_light_energy = 0.5
-	env.environment = environment
-	preview_viewport.add_child(env)
-
-	# === RIGHT: Inspector ===
-	var right_panel := VBoxContainer.new()
-	right_panel.custom_minimum_size = Vector2(260, 0)
-	center_right.add_child(right_panel)
+	var insp_vbox := VBoxContainer.new()
+	insp_panel.add_child(insp_vbox)
 
 	var insp_title := Label.new()
 	insp_title.text = "Inspector"
-	insp_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	right_panel.add_child(insp_title)
+	insp_title.add_theme_font_size_override("font_size", 14)
+	insp_vbox.add_child(insp_title)
 
-	inspector_name = Label.new()
-	inspector_name.text = "No cell selected"
-	inspector_name.add_theme_font_size_override("font_size", 16)
-	right_panel.add_child(inspector_name)
+	_inspector_name = Label.new()
+	_inspector_name.text = "No cell selected"
+	insp_vbox.add_child(_inspector_name)
 
-	var sep := HSeparator.new()
-	right_panel.add_child(sep)
+	var art_row := HBoxContainer.new()
+	insp_vbox.add_child(art_row)
+	var art_lbl := Label.new()
+	art_lbl.text = "Artifact:"
+	art_row.add_child(art_lbl)
+	_artifact_input = LineEdit.new()
+	_artifact_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_artifact_input.placeholder_text = "lookup_name:rot:y"
+	_artifact_input.text_submitted.connect(_on_artifact_submitted)
+	art_row.add_child(_artifact_input)
 
-	# Artifact input for interactables layer
-	var art_label := Label.new()
-	art_label.text = "Artifact:"
-	right_panel.add_child(art_label)
-
-	artifact_input = LineEdit.new()
-	artifact_input.placeholder_text = "lookup_name:rot:y_off"
-	artifact_input.text_submitted.connect(_on_artifact_input_submitted)
-	right_panel.add_child(artifact_input)
-
-	inspector_detail = RichTextLabel.new()
-	inspector_detail.size_flags_vertical = SIZE_EXPAND_FILL
-	inspector_detail.bbcode_enabled = true
-	right_panel.add_child(inspector_detail)
-
-	# Status bar at bottom of right panel
-	status_bar = Label.new()
-	status_bar.text = "Map Studio"
-	status_bar.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5))
-	right_panel.add_child(status_bar)
+	_inspector_detail = RichTextLabel.new()
+	_inspector_detail.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_inspector_detail.bbcode_enabled = true
+	insp_vbox.add_child(_inspector_detail)
 
 	_build_palette()
 
 # === MAP LIST ===
 
 func _scan_maps() -> void:
-	map_list.clear()
+	_map_list.clear()
 	_map_paths.clear()
-	var maps_dir := "res://commons/maps/"
-	var dir := DirAccess.open(maps_dir)
-	if not dir:
-		return
+	var dir := DirAccess.open("res://commons/maps/")
+	if not dir: return
 	dir.list_dir_begin()
 	while true:
 		var folder := dir.get_next()
-		if folder == "":
-			break
+		if folder == "": break
 		if dir.current_is_dir() and not folder.begins_with(".") and not folder.begins_with("catalog"):
-			var json_path := maps_dir + folder + "/map_data.json"
-			if FileAccess.file_exists(json_path):
-				map_list.add_item(folder)
-				_map_paths.append(json_path)
+			var p := "res://commons/maps/" + folder + "/map_data.json"
+			if FileAccess.file_exists(p):
+				_map_list.add_item(folder)
+				_map_paths.append(p)
 	dir.list_dir_end()
-	status_bar.text = "%d maps found" % _map_paths.size()
+	_status.text = "%d maps" % _map_paths.size()
 
 func _filter_maps(text: String) -> void:
-	var filter := text.to_lower()
-	for i in range(map_list.item_count):
-		var name_str: String = map_list.get_item_text(i)
-		map_list.set_item_disabled(i, filter != "" and not name_str.to_lower().contains(filter))
+	var f := text.to_lower()
+	for i in range(_map_list.item_count):
+		_map_list.set_item_disabled(i, f != "" and not _map_list.get_item_text(i).to_lower().contains(f))
 
-func _on_map_item_selected(idx: int) -> void:
-	if idx < 0 or idx >= _map_paths.size():
-		return
+func _on_map_selected(idx: int) -> void:
+	if idx < 0 or idx >= _map_paths.size(): return
 	map_path = _map_paths[idx]
 	_load_map(map_path)
 
 func _load_map(path: String) -> void:
 	var file := FileAccess.open(path, FileAccess.READ)
-	if not file:
-		status_bar.text = "Failed to open"
-		return
-
+	if not file: return
 	var json := JSON.new()
 	if json.parse(file.get_as_text()) != OK:
-		status_bar.text = "JSON error"
 		file.close()
 		return
 	file.close()
@@ -271,22 +286,27 @@ func _load_map(path: String) -> void:
 	structure_layer = layers.get("structure", [])
 	utilities_layer = layers.get("utilities", [])
 	interactables_layer = layers.get("interactables", [])
-
 	grid_depth = structure_layer.size()
 	grid_width = structure_layer[0].size() if grid_depth > 0 else 0
+	_ensure_layer(utilities_layer)
+	_ensure_layer(interactables_layer)
 
-	_ensure_layer_size(utilities_layer)
-	_ensure_layer_size(interactables_layer)
+	_grid_canvas.custom_minimum_size = Vector2(grid_width * CELL_SIZE + 1, grid_depth * CELL_SIZE + 1)
+	_grid_canvas.queue_redraw()
 
-	grid_canvas.custom_minimum_size = Vector2(grid_width * CELL_SIZE + 1, grid_depth * CELL_SIZE + 1)
-	grid_canvas.queue_redraw()
+	# Update 3D preview
+	_rebuild_3d_preview()
 
-	var map_name: String = str(map_data.get("map_info", {}).get("name", path.get_file()))
-	status_bar.text = "%s  %dx%d" % [map_name, grid_width, grid_depth]
+	# Fit camera
+	_orbit_focus = Vector3(grid_width * 0.5, 0, grid_depth * 0.5)
+	_orbit_dist = maxf(grid_width, grid_depth) * 1.2
+	_update_camera()
+
+	var name_str: String = str(map_data.get("map_info", {}).get("name", path.get_file()))
+	_status.text = "%s  %dx%d" % [name_str, grid_width, grid_depth]
 	selected_cell = Vector2i(-1, -1)
-	_update_inspector()
 
-func _ensure_layer_size(layer: Array) -> void:
+func _ensure_layer(layer: Array) -> void:
 	while layer.size() < grid_depth:
 		var row: Array = []
 		row.resize(grid_width)
@@ -296,191 +316,247 @@ func _ensure_layer_size(layer: Array) -> void:
 		while row.size() < grid_width:
 			row.append(" ")
 
+# === 3D MAP PREVIEW ===
+
+func _rebuild_3d_preview() -> void:
+	# Clear existing
+	for child in _map_container.get_children():
+		child.queue_free()
+
+	if structure_layer.is_empty():
+		return
+
+	# Build simple cube geometry from structure layer
+	var cube_mesh := BoxMesh.new()
+	cube_mesh.size = Vector3(0.95, 0.95, 0.95)
+
+	for z in range(grid_depth):
+		for x in range(grid_width):
+			var h_str: String = str(structure_layer[z][x])
+			var h: int = int(h_str) if h_str.is_valid_int() else 0
+			if h <= 0:
+				continue  # void
+
+			if h == 6:
+				# Wall — tall column
+				for y in range(3):
+					var wall := MeshInstance3D.new()
+					wall.mesh = cube_mesh
+					wall.position = Vector3(x, y + 0.5, z)
+					var mat := StandardMaterial3D.new()
+					mat.albedo_color = Color(0.4, 0.15, 0.15)
+					wall.material_override = mat
+					_map_container.add_child(wall)
+			else:
+				# Floor at height h
+				var floor_block := MeshInstance3D.new()
+				floor_block.mesh = cube_mesh
+				floor_block.position = Vector3(x, (h - 1) * 0.5, z)
+				var mat := StandardMaterial3D.new()
+				mat.albedo_color = HEIGHT_COLORS.get(h_str, Color(0.3, 0.3, 0.3))
+				mat.emission_enabled = true
+				mat.emission = mat.albedo_color * 0.15
+				mat.emission_energy_multiplier = 0.3
+				floor_block.material_override = mat
+				_map_container.add_child(floor_block)
+
+	# Utility markers
+	for z in range(grid_depth):
+		for x in range(grid_width):
+			var u: String = str(utilities_layer[z][x]).strip_edges()
+			if u == "" or u == " ": continue
+			var code := u.split(":")[0]
+			var marker := MeshInstance3D.new()
+			var sphere := SphereMesh.new()
+			sphere.radius = 0.3
+			sphere.height = 0.6
+			marker.mesh = sphere
+			marker.position = Vector3(x, 1.5, z)
+			var mat := StandardMaterial3D.new()
+			mat.albedo_color = UTILITY_COLORS.get(code, Color(0.8, 0.8, 0.8))
+			mat.emission_enabled = true
+			mat.emission = mat.albedo_color * 0.5
+			mat.emission_energy_multiplier = 2.0
+			marker.material_override = mat
+			_map_container.add_child(marker)
+
+	# Interactable markers
+	for z in range(grid_depth):
+		for x in range(grid_width):
+			var a: String = str(interactables_layer[z][x]).strip_edges()
+			if a == "" or a == " ": continue
+			var marker := MeshInstance3D.new()
+			var box := BoxMesh.new()
+			box.size = Vector3(0.6, 1.2, 0.6)
+			marker.mesh = box
+			marker.position = Vector3(x, 0.6, z)
+			var mat := StandardMaterial3D.new()
+			mat.albedo_color = Color(1.0, 0.7, 0.2)
+			mat.emission_enabled = true
+			mat.emission = Color(1.0, 0.7, 0.2) * 0.4
+			mat.emission_energy_multiplier = 1.5
+			marker.material_override = mat
+			_map_container.add_child(marker)
+
+			var lbl := Label3D.new()
+			lbl.text = a.split(":")[0].substr(0, 10)
+			lbl.font_size = 12
+			lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+			lbl.position = Vector3(x, 2.0, z)
+			lbl.modulate = Color(1.0, 0.8, 0.3, 0.8)
+			_map_container.add_child(lbl)
+
+# === CAMERA ORBIT (middle mouse or right-click drag in 3D area) ===
+
+func _input(event: InputEvent) -> void:
+	# Only orbit when mouse is in the 3D area (left 55% of screen)
+	if event is InputEventMouseButton:
+		var vp := get_viewport()
+		if vp and event.position.x < vp.size.x * 0.55:
+			if event.button_index == MOUSE_BUTTON_MIDDLE or event.button_index == MOUSE_BUTTON_RIGHT:
+				_is_orbiting = event.pressed
+			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				_orbit_dist = maxf(3.0, _orbit_dist - 1.5)
+				_update_camera()
+			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				_orbit_dist += 1.5
+				_update_camera()
+
+	elif event is InputEventMouseMotion and _is_orbiting:
+		_orbit_yaw -= event.relative.x * 0.005
+		_orbit_pitch = clampf(_orbit_pitch + event.relative.y * 0.005, 0.1, 1.4)
+		_update_camera()
+
 # === LAYER & PALETTE ===
 
 func _on_layer_changed(idx: int) -> void:
 	active_layer = idx
 	_build_palette()
-	grid_canvas.queue_redraw()
+	_grid_canvas.queue_redraw()
 
 func _build_palette() -> void:
-	for child in palette_container.get_children():
-		child.queue_free()
-
+	for c in _palette.get_children():
+		c.queue_free()
 	match active_layer:
 		0:
 			for h in range(7):
 				var btn := Button.new()
 				btn.text = str(h)
-				btn.custom_minimum_size = Vector2(32, 26)
-				var c: Color = HEIGHT_COLORS.get(str(h), Color.WHITE)
-				var style := StyleBoxFlat.new()
-				style.bg_color = c
-				btn.add_theme_stylebox_override("normal", style)
-				btn.pressed.connect(_set_paint.bind(str(h)))
-				palette_container.add_child(btn)
+				btn.custom_minimum_size = Vector2(28, 24)
+				btn.pressed.connect(func(): paint_value = str(h))
+				_palette.add_child(btn)
 			paint_value = "1"
 		1:
 			for code in ["sp", "t", "r", "wp", "tc", "m", "ds", "sub", " "]:
 				var btn := Button.new()
 				btn.text = code if code != " " else "x"
-				btn.custom_minimum_size = Vector2(36, 26)
-				btn.pressed.connect(_set_paint.bind(code))
-				palette_container.add_child(btn)
+				btn.custom_minimum_size = Vector2(32, 24)
+				btn.pressed.connect(func(): paint_value = code)
+				_palette.add_child(btn)
 			paint_value = "sp"
 		2:
 			var lbl := Label.new()
-			lbl.text = "Click cell, type in inspector →"
-			palette_container.add_child(lbl)
+			lbl.text = "Select cell → type in inspector"
+			_palette.add_child(lbl)
 			paint_value = " "
 
-func _set_paint(val: String) -> void:
-	paint_value = val
-
-# === 2D GRID DRAWING ===
+# === 2D GRID ===
 
 func _on_grid_draw() -> void:
-	if structure_layer.is_empty():
-		return
-
+	if structure_layer.is_empty(): return
 	var font: Font = ThemeDB.fallback_font
-	var fs := 8
-
 	for z in range(grid_depth):
 		for x in range(grid_width):
 			var rect := Rect2(x * CELL_SIZE, z * CELL_SIZE, CELL_SIZE, CELL_SIZE)
-
-			# Structure background
 			var h_str: String = str(structure_layer[z][x]) if z < structure_layer.size() and x < structure_layer[z].size() else "0"
 			var bg: Color = HEIGHT_COLORS.get(h_str, Color(0.15, 0.15, 0.15))
-			if active_layer != 0:
-				bg = bg.darkened(0.3)
-			grid_canvas.draw_rect(rect, bg)
+			if active_layer != 0: bg = bg.darkened(0.3)
+			_grid_canvas.draw_rect(rect, bg)
 
-			# Utilities
-			var util_str: String = str(utilities_layer[z][x]).strip_edges() if z < utilities_layer.size() and x < utilities_layer[z].size() else ""
-			if util_str != "" and util_str != " ":
-				var code := util_str.split(":")[0]
+			var u: String = str(utilities_layer[z][x]).strip_edges() if z < utilities_layer.size() and x < utilities_layer[z].size() else ""
+			if u != "" and u != " ":
+				var code := u.split(":")[0]
 				var uc: Color = UTILITY_COLORS.get(code, Color(0.7, 0.7, 0.7))
-				if active_layer != 1:
-					uc.a = 0.35
-				grid_canvas.draw_rect(rect.grow(-2), uc, false, 2.0)
-				grid_canvas.draw_string(font, rect.position + Vector2(2, fs + 1), code, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, uc)
+				if active_layer != 1: uc.a = 0.35
+				_grid_canvas.draw_rect(rect.grow(-2), uc, false, 2.0)
+				_grid_canvas.draw_string(font, rect.position + Vector2(2, 9), code, HORIZONTAL_ALIGNMENT_LEFT, -1, 8, uc)
 
-			# Interactables
-			var inter_str: String = str(interactables_layer[z][x]).strip_edges() if z < interactables_layer.size() and x < interactables_layer[z].size() else ""
-			if inter_str != "" and inter_str != " ":
-				var name_part: String = inter_str.split(":")[0]
-				var ic := Color(1.0, 0.7, 0.2)
-				if active_layer != 2:
-					ic.a = 0.25
-				grid_canvas.draw_circle(rect.get_center(), CELL_SIZE * 0.3, ic)
-				grid_canvas.draw_string(font, rect.position + Vector2(2, CELL_SIZE - 2), name_part.substr(0, 5), HORIZONTAL_ALIGNMENT_LEFT, -1, 7, ic)
+			var a: String = str(interactables_layer[z][x]).strip_edges() if z < interactables_layer.size() and x < interactables_layer[z].size() else ""
+			if a != "" and a != " ":
+				var ic := Color(1.0, 0.7, 0.2, 0.8 if active_layer == 2 else 0.25)
+				_grid_canvas.draw_circle(rect.get_center(), CELL_SIZE * 0.3, ic)
+				_grid_canvas.draw_string(font, rect.position + Vector2(2, CELL_SIZE - 2), a.split(":")[0].substr(0, 4), HORIZONTAL_ALIGNMENT_LEFT, -1, 7, ic)
 
-			# Grid lines
-			grid_canvas.draw_rect(rect, Color(0.18, 0.18, 0.22), false, 1.0)
-
-			# Selected cell highlight
+			_grid_canvas.draw_rect(rect, Color(0.18, 0.18, 0.22), false, 1.0)
 			if Vector2i(x, z) == selected_cell:
-				grid_canvas.draw_rect(rect.grow(-1), Color(1.0, 1.0, 0.3, 0.6), false, 2.0)
-
-# === GRID INPUT ===
+				_grid_canvas.draw_rect(rect.grow(-1), Color(1.0, 1.0, 0.3, 0.7), false, 2.0)
 
 func _on_grid_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		var pos: Vector2 = event.position
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			is_painting = event.pressed
-			if event.pressed:
-				_select_cell(pos)
-				if active_layer != 2:
-					_paint_at(pos)
-		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			_select_cell(pos)
-	elif event is InputEventMouseMotion and is_painting and active_layer != 2:
-		_paint_at(event.position)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		is_painting = event.pressed
+		if event.pressed:
+			_cell_action(event.position)
+	elif event is InputEventMouseMotion and is_painting:
+		_cell_action(event.position)
 
-func _select_cell(pos: Vector2) -> void:
+func _cell_action(pos: Vector2) -> void:
 	var x := int(pos.x / CELL_SIZE)
 	var z := int(pos.y / CELL_SIZE)
-	if x >= 0 and x < grid_width and z >= 0 and z < grid_depth:
-		selected_cell = Vector2i(x, z)
-		_update_inspector()
-		grid_canvas.queue_redraw()
+	if x < 0 or x >= grid_width or z < 0 or z >= grid_depth: return
+	selected_cell = Vector2i(x, z)
 
-func _paint_at(pos: Vector2) -> void:
-	var x := int(pos.x / CELL_SIZE)
-	var z := int(pos.y / CELL_SIZE)
-	if x < 0 or x >= grid_width or z < 0 or z >= grid_depth:
-		return
 	match active_layer:
-		0:
-			structure_layer[z][x] = paint_value
-		1:
-			utilities_layer[z][x] = paint_value
-	grid_canvas.queue_redraw()
+		0: structure_layer[z][x] = paint_value
+		1: utilities_layer[z][x] = paint_value
+		# 2: interactables — use inspector input instead of painting
 
-func _on_artifact_input_submitted(text: String) -> void:
+	_grid_canvas.queue_redraw()
+	_update_inspector()
+
+func _on_artifact_submitted(text: String) -> void:
 	if selected_cell.x >= 0 and selected_cell.y >= 0:
-		if selected_cell.y < interactables_layer.size() and selected_cell.x < interactables_layer[selected_cell.y].size():
-			interactables_layer[selected_cell.y][selected_cell.x] = text if text != "" else " "
-			grid_canvas.queue_redraw()
-			_update_inspector()
-
-# === INSPECTOR ===
+		interactables_layer[selected_cell.y][selected_cell.x] = text if text != "" else " "
+		_grid_canvas.queue_redraw()
+		_rebuild_3d_preview()
+		_update_inspector()
 
 func _update_inspector() -> void:
 	if selected_cell.x < 0:
-		inspector_name.text = "No cell selected"
-		inspector_detail.text = ""
-		artifact_input.text = ""
+		_inspector_name.text = "No cell"
+		_inspector_detail.text = ""
+		_artifact_input.text = ""
 		return
-
 	var x := selected_cell.x
 	var z := selected_cell.y
-	inspector_name.text = "Cell [%d, %d]" % [x, z]
-
-	var h: String = str(structure_layer[z][x]) if z < structure_layer.size() and x < structure_layer[z].size() else "?"
-	var u: String = str(utilities_layer[z][x]).strip_edges() if z < utilities_layer.size() and x < utilities_layer[z].size() else ""
-	var a: String = str(interactables_layer[z][x]).strip_edges() if z < interactables_layer.size() and x < interactables_layer[z].size() else ""
-
-	var detail := "[b]Height:[/b] %s\n" % h
-	if u != "" and u != " ":
-		detail += "[b]Utility:[/b] %s\n" % u
-	if a != "" and a != " ":
-		detail += "[b]Artifact:[/b] %s\n" % a
-		artifact_input.text = a
-	else:
-		artifact_input.text = ""
-
-	detail += "\n[color=gray]Click to select. Paint structure/utilities.\nType artifact name in the field above.[/color]"
-	inspector_detail.text = detail
+	_inspector_name.text = "Cell [%d, %d]" % [x, z]
+	var h: String = str(structure_layer[z][x])
+	var u: String = str(utilities_layer[z][x]).strip_edges()
+	var a: String = str(interactables_layer[z][x]).strip_edges()
+	_artifact_input.text = a if a != " " else ""
+	var txt := "[b]Height:[/b] %s\n" % h
+	if u != "" and u != " ": txt += "[b]Utility:[/b] %s\n" % u
+	if a != "" and a != " ": txt += "[b]Artifact:[/b] %s\n" % a
+	_inspector_detail.text = txt
 
 # === SAVE ===
 
 func _save_map() -> void:
 	if map_path == "":
-		status_bar.text = "No map loaded"
+		_status.text = "No map loaded"
 		return
-	if "layers" not in map_data:
-		map_data["layers"] = {}
+	if "layers" not in map_data: map_data["layers"] = {}
 	map_data["layers"]["structure"] = structure_layer
 	map_data["layers"]["utilities"] = utilities_layer
 	map_data["layers"]["interactables"] = interactables_layer
-
-	var json_str := JSON.stringify(map_data, "  ")
 	var file := FileAccess.open(map_path, FileAccess.WRITE)
 	if file:
-		file.store_string(json_str)
+		file.store_string(JSON.stringify(map_data, "  "))
 		file.close()
-		status_bar.text = "Saved: " + map_path.get_file()
+		_status.text = "Saved!"
 	else:
-		status_bar.text = "Save failed!"
-
-# === KEYBOARD SHORTCUTS ===
+		_status.text = "Save failed"
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed:
-		if event.ctrl_pressed and event.keycode == KEY_S:
-			_save_map()
-			get_viewport().set_input_as_handled()
+	if event is InputEventKey and event.pressed and event.ctrl_pressed and event.keycode == KEY_S:
+		_save_map()
+		get_viewport().set_input_as_handled()
