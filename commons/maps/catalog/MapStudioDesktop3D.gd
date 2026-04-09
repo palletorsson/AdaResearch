@@ -165,7 +165,11 @@ const UTIL_DEFS := {
 }
 
 func _build_palette() -> void:
-	for c in palette.get_children(): c.queue_free()
+	# Remove old children immediately (not deferred)
+	while palette.get_child_count() > 0:
+		var c := palette.get_child(0)
+		palette.remove_child(c)
+		c.queue_free()
 	match layer:
 		0:
 			var row := HFlowContainer.new()
