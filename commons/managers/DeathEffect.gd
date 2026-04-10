@@ -88,25 +88,37 @@ func hurt(damage_pos: Vector3) -> void:
 	_timer = 0.0
 	_death_pos = damage_pos
 
-	_xr_camera = _find_xr_camera()
-	_create_vignette(Color(0.7, 0.0, 0.0, 0.6))
+	# Use MushroomEffect's proven VR overlay for the red flash
+	_trigger_damage_flash()
 	_haptic_burst(0.15, 0.5)
+	print("[DeathEffect] HURT at %s" % damage_pos)
+
+
+## Use MushroomEffect (proven to work in VR) to show red damage flash.
+func _trigger_damage_flash() -> void:
+	var shader_path := "res://commons/resourses/shaders/damage_flash_spatial.gdshader"
+	# Find or create a MushroomEffect for damage
+	var scene_root := get_tree().current_scene
+	if not scene_root:
+		return
+	var fx: Node = scene_root.get_node_or_null("DamageFlashEffect")
+	if not fx:
+		fx = MushroomEffect.new()
+		fx.name = "DamageFlashEffect"
+		fx.fade_in_duration = 0.1
+		fx.fade_out_duration = 0.4
+		fx.max_intensity = 0.7
+		scene_root.add_child(fx)
+	if fx.has_method("trigger_with_shader"):
+		fx.trigger_with_shader(shader_path, 0.3)  # 0.3 second flash
 
 
 func _process_hurt(_delta: float) -> void:
-	# Flash phase — shader intensity fades from 0.8 to 0
-	if _timer < HURT_FLASH_DURATION:
-		var t := _timer / HURT_FLASH_DURATION
-		var intensity := 0.8 * (1.0 - t)
-		if _shader_mat:
-			_shader_mat.set_shader_parameter("intensity", intensity)
-		else:
-			_update_vignette_color(Color(0.7, 0.0, 0.0, intensity))
-	else:
+	if _timer >= HURT_FLASH_DURATION:
 		# Teleport to spawn (no scene reload — just reposition)
 		_teleport_to_spawn()
 		_immunity_timer = HURT_IMMUNITY_DURATION
-		_cleanup()
+		_playing = false
 		hurt_effect_complete.emit()
 
 

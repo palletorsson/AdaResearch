@@ -18,8 +18,8 @@ extends Node3D
 
 @export_category("Damage Settings")
 @export var deals_damage: bool = false           ## Enable to make laser hurt the player
-@export var damage_amount: float = 20.0          ## Damage per hit
-@export var damage_cooldown: float = 1.5         ## Seconds between damage ticks
+@export var damage_amount: float = 1.0           ## 1% damage per hit
+@export var damage_cooldown: float = 1.0         ## Seconds between damage ticks
 
 @export_category("Display Settings")
 @export var text_color: Color = Color(0.2, 1.0, 0.3, 1.0)
@@ -182,14 +182,16 @@ func perform_measurement():
 		update_hit_dot(hit_point)
 		update_display(distance, last_target, true)
 
-		# Damage player if enabled and laser hits them
+		# Damage: any hit triggers damage when enabled (the laser itself is the hazard)
 		if deals_damage and _damage_timer <= 0.0:
-			if _is_player_body(hit_object):
-				var gm = get_node_or_null("/root/GameManager")
-				if gm and gm.has_method("apply_health_damage"):
+			var gm = get_node_or_null("/root/GameManager")
+			if gm and gm.has_method("apply_health_damage"):
+				# The laser beam touching anything while player holds it = player in danger
+				# For static placed lasers: hitting the player body specifically
+				if _is_player_body(hit_object):
 					gm.apply_health_damage(damage_amount)
 					_damage_timer = damage_cooldown
-					print("[LaserMeasure] HIT PLAYER! damage=%.0f" % damage_amount)
+					print("[LaserMeasure] LASER HIT PLAYER! dmg=%.1f target=%s" % [damage_amount, hit_object.name])
 	else:
 		is_measuring = false
 		last_distance = 0.0
