@@ -25,6 +25,7 @@ var _is_death: bool = false  # true = full death, false = hurt+respawn
 var _timer: float = 0.0
 var _death_pos: Vector3 = Vector3.ZERO
 var _vignette_quad: MeshInstance3D = null
+var _shader_mat: ShaderMaterial = null
 var _particles: GPUParticles3D = null
 var _original_camera_pos: Vector3 = Vector3.ZERO
 var _xr_camera: XRCamera3D = null
@@ -86,11 +87,14 @@ func hurt(damage_pos: Vector3) -> void:
 
 
 func _process_hurt(_delta: float) -> void:
-	# Flash phase
+	# Flash phase — shader intensity fades from 0.8 to 0
 	if _timer < HURT_FLASH_DURATION:
 		var t := _timer / HURT_FLASH_DURATION
-		var alpha := 0.6 * (1.0 - t)  # Fade out
-		_update_vignette_color(Color(0.7, 0.0, 0.0, alpha))
+		var intensity := 0.8 * (1.0 - t)
+		if _shader_mat:
+			_shader_mat.set_shader_parameter("intensity", intensity)
+		else:
+			_update_vignette_color(Color(0.7, 0.0, 0.0, intensity))
 	else:
 		# Reset the scene (reload map, keep health)
 		_cleanup()
@@ -196,12 +200,14 @@ func cancel() -> void:
 # VIGNETTE
 # ═══════════════════════════════════════════════════════════════════════════
 
-func _create_vignette(color: Color) -> void:
-	# Try XR camera first, fall back to any Camera3D
+func _create_vignette(_color: Color) -> void:
+	# Find camera — search entire tree like MushroomEffect does
 	if not _xr_camera or not is_instance_valid(_xr_camera):
-		_xr_camera = _find_xr_camera()
+		var root: Node = get_tree().root
+		var cam: Node = root.find_child("XRCamera3D", true, false)
+		if cam and cam is Camera3D:
+			_xr_camera = cam as Camera3D
 	if not _xr_camera:
-		# Fallback: try any active camera
 		var vp := get_viewport()
 		if vp:
 			_xr_camera = vp.get_camera_3d()
@@ -209,32 +215,38 @@ func _create_vignette(color: Color) -> void:
 		print("[DeathEffect] WARNING: No camera found for vignette")
 		return
 
-	# Use a sphere (inside-out) instead of a quad — works reliably in VR
-	# because it surrounds both eyes equally
+	# Use the same VR quad approach as MushroomEffect (proven to work)
 	_vignette_quad = MeshInstance3D.new()
 	_vignette_quad.name = "DamageVignette"
-	var sphere := SphereMesh.new()
-	sphere.radius = 0.3
-	sphere.height = 0.6
-	sphere.radial_segments = 12
-	sphere.rings = 6
-	_vignette_quad.mesh = sphere
-	# No position offset — centered on camera, player is inside the sphere
+	var quad := QuadMesh.new()
+	quad.size = Vector2(2.0, 2.0)
+	quad.subdivide_width = 8
+	quad.subdivide_depth = 8
+	_vignette_quad.mesh = quad
+	_vignette_quad.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_vignette_quad.extra_cull_margin = 16384.0
+	_vignette_quad.layers = 0xFFFFF
 
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = color
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	mat.no_depth_test = true
-	mat.render_priority = 100
-	mat.cull_mode = BaseMaterial3D.CULL_FRONT  # Render inside faces only
-	_vignette_quad.material_override = mat
+	# Load the spatial damage shader
+	var shader: Shader = load("res://commons/resourses/shaders/damage_flash_spatial.gdshader")
+	if shader:
+		_shader_mat = ShaderMaterial.new()
+		_shader_mat.shader = shader
+		_shader_mat.set_shader_parameter("intensity", 0.0)
+		_shader_mat.render_priority = 127
+		_vignette_quad.material_override = _shader_mat
+	else:
+		print("[DeathEffect] WARNING: Could not load damage shader")
+
 	_xr_camera.add_child(_vignette_quad)
-	print("[DeathEffect] Vignette created on %s" % _xr_camera.name)
+	print("[DeathEffect] VR vignette created on %s" % _xr_camera.name)
 
 
 func _update_vignette_color(color: Color) -> void:
-	if _vignette_quad and is_instance_valid(_vignette_quad) and _vignette_quad.material_override:
+	if _shader_mat:
+		_shader_mat.set_shader_parameter("intensity", color.a)
+		_shader_mat.set_shader_parameter("tint_color", color)
+	elif _vignette_quad and is_instance_valid(_vignette_quad) and _vignette_quad.material_override is StandardMaterial3D:
 		(_vignette_quad.material_override as StandardMaterial3D).albedo_color = color
 
 
@@ -304,6 +316,7 @@ func _cleanup() -> void:
 	if _vignette_quad and is_instance_valid(_vignette_quad):
 		_vignette_quad.queue_free()
 	_vignette_quad = null
+	_shader_mat = null
 	if _particles and is_instance_valid(_particles):
 		_particles.queue_free()
 	_particles = null
