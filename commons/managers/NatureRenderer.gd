@@ -281,7 +281,9 @@ func _find_grid_data() -> GridDataComponent:
 # ---------------------------------------------------------------------------
 
 func _update_living_ground(terrain_mode: String, density: float, kingdoms: Array) -> void:
-	var should_be_active: bool = terrain_mode in ["growth", "self_generating"]
+	# Living ground overlay disabled — biome ring handles ground visuals.
+	# The shader PlaneMesh was rendering as a black rectangle in VR.
+	var should_be_active: bool = false
 
 	if should_be_active and not _living_ground_active:
 		_activate_living_ground(terrain_mode, density, kingdoms)

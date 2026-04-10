@@ -114,31 +114,8 @@ func _build_ring_ground(grid_w: float, grid_d: float, grid_center: Vector3,
 	# Position: centered on grid, slightly below grid floor
 	_ground_mesh.position = grid_center + Vector3(0, -0.5, 0)
 
-	# Material
-	if terrain_mode in ["growth", "self_generating"]:
-		# Use living ground shader with procedurally seeded presence
-		var shader_path: String = "res://algorithms/nature_system/shaders/living_ground.gdshader"
-		if ResourceLoader.exists(shader_path):
-			var shader: Shader = load(shader_path)
-			var mat := ShaderMaterial.new()
-			mat.shader = shader
-			mat.set_shader_parameter("world_size", Vector2(total_w, total_d))
-			mat.set_shader_parameter("world_offset", Vector2(grid_center.x, grid_center.z))
-
-			# Create and seed a presence grid for the ring
-			var presence_texture := _create_ring_presence(
-				grid_w, grid_d, total_w, total_d, density
-			)
-			mat.set_shader_parameter("presence_map", presence_texture)
-			_ground_mesh.material_override = mat
-		else:
-			_ground_mesh.material_override = _create_earth_material(density)
-	elif terrain_mode == "noise":
-		# Warm earth with noise — no presence, just color
-		_ground_mesh.material_override = _create_earth_material(density)
-	else:
-		# Flat — simple warm earth
-		_ground_mesh.material_override = _create_earth_material(density)
+	# Simple earth material for all terrain modes — VR friendly, no shader complexity
+	_ground_mesh.material_override = _create_earth_material(density)
 
 	add_child(_ground_mesh)
 
