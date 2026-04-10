@@ -45,7 +45,7 @@ const KINGDOM_FOLIAGE: Dictionary = {
 	"flower": ["grass", "flower"],
 	"tree": ["grass", "tree", "bush"],
 	"fungus": ["mushroom", "fern"],
-	"creature": ["grass", "reed"],
+	"creature": ["grass", "reed", "creature"],
 }
 
 
@@ -114,8 +114,20 @@ func _build_ring_ground(grid_w: float, grid_d: float, grid_center: Vector3,
 	# Position: centered on grid, slightly below grid floor
 	_ground_mesh.position = grid_center + Vector3(0, -0.5, 0)
 
-	# Simple earth material for all terrain modes — VR friendly, no shader complexity
-	_ground_mesh.material_override = _create_earth_material(density)
+	# VR-safe ground shader — distance-based earth→grass→fade coloring
+	var shader = load("res://commons/resourses/shaders/biome_ground.gdshader")
+	if shader:
+		var mat := ShaderMaterial.new()
+		mat.shader = shader
+		mat.set_shader_parameter("grid_size", Vector2(grid_w, grid_d))
+		mat.set_shader_parameter("grid_center", Vector2(grid_center.x, grid_center.z))
+		mat.set_shader_parameter("ring_width", ring_width)
+		mat.set_shader_parameter("fade_width", fade_width)
+		mat.set_shader_parameter("density", density)
+		mat.render_priority = -1  # Render below other transparent objects
+		_ground_mesh.material_override = mat
+	else:
+		_ground_mesh.material_override = _create_earth_material(density)
 
 	add_child(_ground_mesh)
 
@@ -319,10 +331,13 @@ func _place_foliage(grid_w: float, grid_d: float, grid_center: Vector3,
 		mmi.name = "BiomeFoliage_%s" % flora_type
 		mmi.multimesh = mm
 
-		# Simple material
+		# Material with subtle emission so plants glow slightly in dark VR
 		var mat := StandardMaterial3D.new()
 		mat.vertex_color_use_as_albedo = true
 		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+		mat.emission_enabled = true
+		mat.emission = Color(0.1, 0.15, 0.05)
+		mat.emission_energy_multiplier = 0.3
 		mmi.material_override = mat
 
 		add_child(mmi)
@@ -333,49 +348,63 @@ func _get_foliage_mesh(flora_type: String) -> Mesh:
 	# Simple meshes for each type — low-poly for VR budget
 	match flora_type:
 		"grass":
+			# Tall grass blade — billboard quad
 			var mesh := QuadMesh.new()
-			mesh.size = Vector2(0.15, 0.3)
-			mesh.center_offset = Vector3(0, 0.15, 0)
+			mesh.size = Vector2(0.12, 0.4)
+			mesh.center_offset = Vector3(0, 0.2, 0)
 			return mesh
 		"flower":
+			# Flower on stem — sphere cap on thin cylinder
+			# Use a sphere for the bloom (MultiMesh can't combine meshes)
 			var mesh := SphereMesh.new()
-			mesh.radius = 0.08
-			mesh.height = 0.16
-			mesh.radial_segments = 4
-			mesh.rings = 2
+			mesh.radius = 0.06
+			mesh.height = 0.12
+			mesh.radial_segments = 6
+			mesh.rings = 3
 			return mesh
 		"tree":
+			# Taller tree — tapered cylinder trunk with spherical canopy implied by scale
 			var mesh := CylinderMesh.new()
-			mesh.top_radius = 0.3
-			mesh.bottom_radius = 0.05
-			mesh.height = 1.2
-			mesh.radial_segments = 5
+			mesh.top_radius = 0.5
+			mesh.bottom_radius = 0.08
+			mesh.height = 2.5
+			mesh.radial_segments = 6
 			return mesh
 		"bush":
+			# Dense low bush
 			var mesh := SphereMesh.new()
-			mesh.radius = 0.25
-			mesh.height = 0.35
-			mesh.radial_segments = 5
+			mesh.radius = 0.35
+			mesh.height = 0.4
+			mesh.radial_segments = 6
 			mesh.rings = 3
 			return mesh
 		"mushroom":
+			# Toadstool cap shape
 			var mesh := CylinderMesh.new()
-			mesh.top_radius = 0.12
+			mesh.top_radius = 0.15
 			mesh.bottom_radius = 0.03
-			mesh.height = 0.15
-			mesh.radial_segments = 5
+			mesh.height = 0.18
+			mesh.radial_segments = 6
 			return mesh
 		"fern":
+			# Wide fern frond
 			var mesh := QuadMesh.new()
-			mesh.size = Vector2(0.3, 0.25)
-			mesh.center_offset = Vector3(0, 0.12, 0)
+			mesh.size = Vector2(0.35, 0.3)
+			mesh.center_offset = Vector3(0, 0.15, 0)
 			return mesh
 		"reed":
+			# Tall thin reed
 			var mesh := CylinderMesh.new()
-			mesh.top_radius = 0.01
+			mesh.top_radius = 0.008
 			mesh.bottom_radius = 0.015
-			mesh.height = 0.5
+			mesh.height = 0.7
 			mesh.radial_segments = 3
+			return mesh
+		"creature":
+			# Static creature silhouette — low-poly body shape
+			var mesh := CapsuleMesh.new()
+			mesh.radius = 0.12
+			mesh.height = 0.35
 			return mesh
 		_:
 			return null
@@ -397,5 +426,8 @@ func _get_foliage_color(flora_type: String) -> Color:
 			return Color(0.15, 0.4, 0.1)
 		"reed":
 			return Color(0.35, 0.45, 0.2)
+		"creature":
+			# Warm earthy creatures — brown/orange tones
+			return Color(_rng.randf_range(0.4, 0.7), _rng.randf_range(0.25, 0.45), _rng.randf_range(0.1, 0.25))
 		_:
 			return Color(0.3, 0.4, 0.2)
