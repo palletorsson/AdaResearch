@@ -1,5 +1,17 @@
 {
 	"artifacts": {
+		"creature_gallery": {
+			"category": "nature_system",
+			"complexity": "advanced",
+			"description": "DNA organism gallery — 12 preset pedestals in a ring + 5 kingdom clusters. Every organism spawned from CritterDNA at full detail. The proof that the nature system works.",
+			"include_in_map_data": true,
+			"lookup_name": "creature_gallery",
+			"map_ready": true,
+			"map_sequences": ["pokemonstudio", "hazards", "testmaps"],
+			"name": "Creature Gallery",
+			"scene": "res://commons/scenes/creature_gallery.tscn",
+			"tags": ["gallery", "creature", "dna", "showcase", "nature_system"]
+		},
 		"critter_placer": {
 			"category": "nature_system",
 			"complexity": "beginner",
