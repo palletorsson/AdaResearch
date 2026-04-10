@@ -183,11 +183,13 @@ func perform_measurement():
 		update_display(distance, last_target, true)
 
 		# Damage player if enabled and laser hits them
-		if deals_damage and _damage_timer <= 0.0 and _is_player_body(hit_object):
-			var gm = get_node_or_null("/root/GameManager")
-			if gm and gm.has_method("apply_health_damage"):
-				gm.apply_health_damage(damage_amount)
-				_damage_timer = damage_cooldown
+		if deals_damage and _damage_timer <= 0.0:
+			if _is_player_body(hit_object):
+				var gm = get_node_or_null("/root/GameManager")
+				if gm and gm.has_method("apply_health_damage"):
+					gm.apply_health_damage(damage_amount)
+					_damage_timer = damage_cooldown
+					print("[LaserMeasure] HIT PLAYER! damage=%.0f" % damage_amount)
 	else:
 		is_measuring = false
 		last_distance = 0.0
@@ -314,12 +316,21 @@ func apply_grid_config(config_data: Dictionary) -> void:
 func _is_player_body(obj: Node) -> bool:
 	if not obj:
 		return false
+	# Direct checks
 	if obj.is_in_group("player") or obj.is_in_group("player_body"):
 		return true
-	# Check if parent chain contains XROrigin or PlayerBody
+	if obj.name.containsn("player") or obj.name.containsn("Player"):
+		return true
+	# Check collision layer 20 (player body layer = 524288)
+	if obj is CollisionObject3D:
+		if (obj as CollisionObject3D).collision_layer & 524288 != 0:
+			return true
+	# Check parent chain
 	var node := obj
 	while node:
 		if node.name == "PlayerBody" or node is XROrigin3D:
+			return true
+		if node.is_in_group("player"):
 			return true
 		node = node.get_parent()
 	return false

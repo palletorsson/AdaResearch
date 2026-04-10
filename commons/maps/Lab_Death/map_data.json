@@ -1,20 +1,20 @@
 {
-  "map_info": {"description":"Test death: fire pits, laser, turret. Walk in, die, reset.","dimensions":{"depth":9,"max_height":4,"width":11},"format":"json","lookup_name":"Lab_Death","name":"Death Lab","title":"Death Lab","version":"1.0"},
+  "map_info": {"description":"Test death: fire pits, laser, turret, mushroom. Walk in, die, eat, reset.","dimensions":{"depth":9,"max_height":7,"width":11},"format":"json","lookup_name":"Lab_Death","name":"Death Lab","title":"Death Lab","version":"1.0"},
   "lighting": {"ambient_color":[0.5,0.3,0.3],"ambient_energy":0.8,"directional_light":{"color":[1.0,0.8,0.7],"direction":[-0.4,-0.7,-0.4],"enabled":true,"energy":1.0}},
   "settings": {"cube_size":1.0,"enable_physics":true,"gutter":0.0,"show_grid":true},
   "utility_definitions": {"t":{"name":"Exit","properties":{"action":"next_in_sequence"},"type":"teleporter"}},
-  "dev_notes": "Row 0-1: spawn. Row 2: fire pits (h:fire on height 0). Row 3: walkway. Row 4: laser_measure with damage enabled. Row 5: sentry_turret with cover wall. Row 6-7: cover walls to hide. Row 8: exit.",
+  "dev_notes": "Row 0: spawn + mushroom (eat to see screen effect). Row 1: safe. Row 2: fire pits (h:fire on height 0, walls height 6). Row 3: walkway. Row 4: laser_measure with damage. Row 5: sentry_turret + cover walls. Row 7: teleporter. All at floor height 2.",
   "layers": {
     "structure": [
-      ["3","3","3","3","3","3","3","3","3","3","3"],
-      ["3","3","3","3","3","3","3","3","3","3","3"],
-      ["3","3","0","3","0","3","0","3","3","3","3"],
-      ["3","3","3","3","3","3","3","3","3","3","3"],
-      ["3","3","3","3","3","3","3","3","3","3","3"],
-      ["3","3","3","3","3","3","5","3","0","3","3"],
-      ["3","3","3","3","5","3","3","3","3","3","3"],
-      ["3","3","3","3","3","3","3","3","3","3","3"],
-      ["3","3","3","3","3","3","3","3","3","3","3"]
+      ["2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2"],
+      ["6","6","0","6","0","6","0","6","6","2","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","5","2","2","2","2"],
+      ["2","2","2","2","5","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2"]
     ],
     "utilities": [
       ["sp"," "," "," "," "," "," "," "," "," "," "],
@@ -24,15 +24,15 @@
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","t"," "," "," "," "," "]
+      [" "," "," "," "," ","t"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
     ],
     "interactables": [
+      [" "," "," "," "," "," "," "," ","edible_mushroom"," "," "],
+      [" "," "," "," "," "," ","laser_measure:0:1#damage:true"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","laser_measure:0:1#damage:true"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," ","sentry_turret:180:1"," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],

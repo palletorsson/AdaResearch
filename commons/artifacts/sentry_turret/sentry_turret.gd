@@ -13,15 +13,14 @@ signal hit_target(target: Node3D, position: Vector3)
 @export_category("Turret")
 @export var rotation_speed: float = 5.0
 @export var detection_range: float = 15.0
-@export var fire_rate: float = 3.0  # shots per second
+@export var fire_rate: float = 2.0  # shots per second
 @export var bullet_speed: float = 20.0
-@export var reload_time: float = 2.0  # cooldown between bursts
-@export var burst_size: int = 5  # shots before reload
+@export var reload_time: float = 3.0  # cooldown between bursts (visible pause)
+@export var burst_size: int = 3  # shots before reload
 @export var target_player: bool = true
 @export var target_balls: bool = true
-@export var use_laser_damage: bool = true  # Laser deals damage instead of bullets
-@export var laser_damage_per_second: float = 20.0   # Damage per hit on player
-@export var hit_cooldown: float = 1.5                # Seconds between damage ticks on player
+@export var use_laser_damage: bool = true
+@export var laser_damage_per_hit: float = 20.0       # Damage per burst hit on player
 @export var require_line_of_sight: bool = true       # Can't shoot through walls
 
 @export_category("Appearance")
@@ -577,16 +576,13 @@ func _apply_laser_damage(delta: float):
 	# Emit signal for any listeners
 	emit_signal("laser_hit", current_target, damage, target_pos)
 
-	# Route damage: player goes through GameManager with cooldown
+	# Player damage: per-burst hit (not continuous), respects fire_rate + reload
 	var is_player_target: bool = _is_player_node(current_target)
 	if is_player_target:
-		_player_hit_cooldown -= delta
-		if _player_hit_cooldown <= 0.0:
-			var gm = get_node_or_null("/root/GameManager")
-			if gm and gm.has_method("apply_health_damage"):
-				gm.apply_health_damage(laser_damage_per_second)
-				_player_hit_cooldown = hit_cooldown
-		return  # Don't apply metadata health or burn effects to player
+		# Damage happens in _fire() burst cycle, not here
+		# Just track and emit signal
+		emit_signal("laser_hit", current_target, laser_damage_per_hit, target_pos)
+		return
 
 	# Try to call take_damage() on the target if it has that method
 	if current_target.has_method("take_damage"):
@@ -782,6 +778,13 @@ func _fire():
 	var direction = -barrel.global_transform.basis.z
 
 	emit_signal("fired", muzzle_world, direction)
+
+	# Deal burst damage to player if targeting them
+	if current_target and _is_player_node(current_target):
+		var gm = get_node_or_null("/root/GameManager")
+		if gm and gm.has_method("apply_health_damage"):
+			gm.apply_health_damage(laser_damage_per_hit)
+			print("[Turret] BURST HIT player! damage=%.0f" % laser_damage_per_hit)
 
 	# Activate next bullet slot in pool
 	var slot = _bullet_next
