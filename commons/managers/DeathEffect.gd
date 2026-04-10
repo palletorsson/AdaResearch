@@ -11,7 +11,6 @@
 # Autoload singleton — GameManager calls DeathEffect.play(death_position)
 
 extends Node
-class_name DeathEffect
 
 # Timing
 const FLASH_DURATION := 0.15        # Red flash
