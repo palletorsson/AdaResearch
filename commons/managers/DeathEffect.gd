@@ -68,6 +68,11 @@ func _process(_delta: float) -> void:
 		return
 	_timer += real_delta
 
+	if _is_death:
+		_process_death(real_delta)
+	else:
+		_process_hurt(real_delta)
+
 
 ## Real (unscaled) delta — immune to Engine.time_scale changes.
 var _last_real_time: int = 0
@@ -76,11 +81,6 @@ func _get_real_delta() -> float:
 	var dt := float(now - _last_real_time) / 1000.0
 	_last_real_time = now
 	return clampf(dt, 0.0, 0.1)  # Cap to avoid spikes
-
-	if _is_death:
-		_process_death(delta)
-	else:
-		_process_hurt(delta)
 
 
 # ═══════════════════════════════════════════════════════════════════════════
