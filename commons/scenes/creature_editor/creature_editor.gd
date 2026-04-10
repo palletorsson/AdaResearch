@@ -340,31 +340,110 @@ func _save_favorite() -> void:
 		return
 	var fav_name: String = fav_name_edit.text.strip_edges()
 	if fav_name.is_empty():
-		# Auto-name
-		var kingdoms: Array[String] = ["Tree", "Creature", "Flower", "Fungus", "Hybrid"]
-		var kid: int = clampi(int(round(_dna.body_type)), 0, 4)
-		fav_name = "%s_%d" % [kingdoms[kid], _favorites.size() + 1]
+		fav_name = _auto_name_from_dna(_dna)
 
 	# Serialize DNA to dictionary
 	var dna_data: Dictionary = _serialize_dna(_dna)
 	_favorites.append({"name": fav_name, "dna": dna_data})
 	_save_favorites_to_disk()
 	_refresh_favorites_list()
+	_play_save_sound()
 	fav_name_edit.text = ""
+
+
+## Generate a descriptive name from DNA traits.
+func _auto_name_from_dna(dna: CritterDNA) -> String:
+	var kingdoms: Array[String] = ["Tree", "Creature", "Flower", "Fungus", "Hybrid"]
+	var kid: int = clampi(int(round(dna.body_type)), 0, 4)
+	var kname: String = kingdoms[kid]
+
+	# Size descriptor
+	var size_word: String = "Small"
+	if dna.scale > 1.5:
+		size_word = "Giant"
+	elif dna.scale > 1.0:
+		size_word = "Large"
+	elif dna.scale > 0.6:
+		size_word = "Medium"
+
+	# Trait descriptor based on dominant gene
+	var trait_word: String = ""
+	match kid:
+		0:  # Tree
+			if dna.branch_angle > 60: trait_word = "Spreading"
+			elif dna.leaf_density > 0.7: trait_word = "Leafy"
+			elif dna.branch_decay < 0.5: trait_word = "Twisted"
+			else: trait_word = "Tall"
+		1:  # Creature
+			if dna.aggression > 0.6: trait_word = "Fierce"
+			elif dna.curiosity > 0.6: trait_word = "Curious"
+			elif dna.mobility > 0.7: trait_word = "Swift"
+			elif dna.segments > 6: trait_word = "Segmented"
+			else: trait_word = "Quiet"
+		2:  # Flower
+			if dna.symmetry > 5: trait_word = "Complex"
+			elif dna.iridescence > 0.3: trait_word = "Shimmering"
+			elif dna.scent_strength > 0.5: trait_word = "Fragrant"
+			else: trait_word = "Delicate"
+		3:  # Fungus
+			if dna.sociality > 0.7: trait_word = "Colonial"
+			elif dna.transparency > 0.3: trait_word = "Ghostly"
+			elif dna.inflorescence > 0.5: trait_word = "Clustered"
+			else: trait_word = "Pale"
+		_:  # Hybrid
+			trait_word = "Strange"
+
+	return "%s %s %s" % [size_word, trait_word, kname]
+
+
+## Short beep on save — confirmation feedback.
+var _save_beep: AudioStreamPlayer = null
+func _play_save_sound() -> void:
+	if not _save_beep:
+		_save_beep = AudioStreamPlayer.new()
+		_save_beep.volume_db = -12.0
+		add_child(_save_beep)
+		var sr: int = 22050
+		var dur: float = 0.08
+		var samples: int = int(sr * dur)
+		var data := PackedByteArray()
+		data.resize(samples * 2)
+		for i: int in samples:
+			var t: float = float(i) / float(sr)
+			var env: float = sin(t / dur * PI)
+			var wave: float = sin(t * TAU * 1200.0) * env * 0.4
+			var s16: int = clampi(int(wave * 16000.0), -32768, 32767)
+			data[i * 2] = s16 & 0xFF
+			data[i * 2 + 1] = (s16 >> 8) & 0xFF
+		var stream := AudioStreamWAV.new()
+		stream.format = AudioStreamWAV.FORMAT_16_BITS
+		stream.mix_rate = sr
+		stream.data = data
+		_save_beep.stream = stream
+	_save_beep.play()
 
 
 func _delete_favorite() -> void:
 	var sel: PackedInt32Array = fav_list.get_selected_items()
 	if sel.is_empty():
 		return
-	var idx: int = sel[0]
+	var list_idx: int = sel[0]
+	var real_idx: Variant = fav_list.get_item_metadata(list_idx)
+	if real_idx == null or not real_idx is int:
+		return
+	var idx: int = real_idx as int
 	if idx >= 0 and idx < _favorites.size():
 		_favorites.remove_at(idx)
 		_save_favorites_to_disk()
 		_refresh_favorites_list()
 
 
-func _on_favorite_selected(idx: int) -> void:
+func _on_favorite_selected(list_idx: int) -> void:
+	# Map list index to real favorites index via metadata (headers are disabled)
+	var real_idx: Variant = fav_list.get_item_metadata(list_idx)
+	if real_idx == null or not real_idx is int:
+		return
+	var idx: int = real_idx as int
 	if idx < 0 or idx >= _favorites.size():
 		return
 	var fav: Dictionary = _favorites[idx]
@@ -377,13 +456,46 @@ func _refresh_favorites_list() -> void:
 	if not fav_list:
 		return
 	fav_list.clear()
-	for fav: Dictionary in _favorites:
+
+	# Sort by kingdom then name
+	var sorted_indices: Array[int] = []
+	for i: int in _favorites.size():
+		sorted_indices.append(i)
+	sorted_indices.sort_custom(func(a: int, b: int) -> bool:
+		var da: Dictionary = _favorites[a].get("dna", {})
+		var db: Dictionary = _favorites[b].get("dna", {})
+		var ka: int = int(da.get("body_type", 0))
+		var kb: int = int(db.get("body_type", 0))
+		if ka != kb:
+			return ka < kb
+		var na: String = _favorites[a].get("name", "")
+		var nb: String = _favorites[b].get("name", "")
+		return na < nb
+	)
+
+	var kingdoms: Array[String] = ["Tree", "Creature", "Flower", "Fungus", "Hybrid"]
+	var kingdom_colors: Array[Color] = [
+		Color(0.3, 0.7, 0.2), Color(0.8, 0.4, 0.6),
+		Color(0.9, 0.4, 0.4), Color(0.6, 0.4, 0.8), Color(0.9, 0.7, 0.3),
+	]
+	var last_kingdom: int = -1
+
+	for idx: int in sorted_indices:
+		var fav: Dictionary = _favorites[idx]
 		var fname: String = fav.get("name", "???")
 		var dna_data: Dictionary = fav.get("dna", {})
-		var kid: int = int(dna_data.get("body_type", 0))
-		var kingdoms: Array[String] = ["Tree", "Creature", "Flower", "Fungus", "Hybrid"]
-		var kname: String = kingdoms[clampi(kid, 0, 4)]
-		fav_list.add_item("%s [%s]" % [fname, kname])
+		var kid: int = clampi(int(dna_data.get("body_type", 0)), 0, 4)
+
+		# Add kingdom header when category changes
+		if kid != last_kingdom:
+			fav_list.add_item("── %s ──" % kingdoms[kid])
+			fav_list.set_item_disabled(fav_list.item_count - 1, true)
+			fav_list.set_item_custom_fg_color(fav_list.item_count - 1, kingdom_colors[kid])
+			last_kingdom = kid
+
+		fav_list.add_item("  %s" % fname)
+		# Store the real index as metadata so selection maps back
+		fav_list.set_item_metadata(fav_list.item_count - 1, idx)
 
 
 func _serialize_dna(dna: CritterDNA) -> Dictionary:
