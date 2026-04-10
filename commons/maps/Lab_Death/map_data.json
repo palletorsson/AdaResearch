@@ -1,9 +1,9 @@
 {
-  "map_info": {"description":"Test all ways to die. Each zone has one kill method. Walk in, die, reset, try the next one.","dimensions":{"depth":13.0,"max_height":4.0,"width":11.0},"format":"json","lookup_name":"Lab_Death","name":"Death Lab","title":"Death Lab","version":"1.0"},
+  "map_info": {"description":"Test death: fire pits and laser. Walk in, die, reset.","dimensions":{"depth":9,"max_height":4,"width":11},"format":"json","lookup_name":"Lab_Death","name":"Death Lab","title":"Death Lab","version":"1.0"},
   "lighting": {"ambient_color":[0.5,0.3,0.3],"ambient_energy":0.8,"directional_light":{"color":[1.0,0.8,0.7],"direction":[-0.4,-0.7,-0.4],"enabled":true,"energy":1.0}},
   "settings": {"cube_size":1.0,"enable_physics":true,"gutter":0.0,"show_grid":true},
   "utility_definitions": {"t":{"name":"Exit","properties":{"action":"next_in_sequence"},"type":"teleporter"}},
-  "dev_notes": "Death test lab. Row 0-1: spawn+safe. Row 2-3: FIRE PIT (h:fire on height 1). Row 4-5: DEATH ZONE (h:death instant kill). Row 6-7: LASER (sentry_turret targeting player). Row 8-9: ELECTRIC (h:electric). Row 10-11: VOID FALL (height 0, no floor). Row 12: exit teleporter. Each zone is 2 rows deep, separated by height-3 walkways.",
+  "dev_notes": "Row 0-1: spawn. Row 2-3: FIRE PIT (h:fire, height 1). Row 4: walkway. Row 5-6: LASER (laser_turret + laser_exploding_sphere). Row 7: walkway. Row 8: exit.",
   "layers": {
     "structure": [
       ["3","3","3","3","3","3","3","3","3","3","3"],
@@ -11,13 +11,9 @@
       ["3","3","1","1","1","1","1","1","1","3","3"],
       ["3","3","1","1","1","1","1","1","1","3","3"],
       ["3","3","3","3","3","3","3","3","3","3","3"],
-      ["3","3","1","1","1","1","1","1","1","3","3"],
-      ["3","3","1","1","1","1","1","1","1","3","3"],
       ["3","3","3","3","3","3","3","3","3","3","3"],
-      ["3","3","3","3","3","1","3","3","3","3","3"],
       ["3","3","3","3","3","3","3","3","3","3","3"],
-      ["3","3","1","1","1","1","1","1","1","3","3"],
-      ["3","3","1","1","1","1","1","1","1","3","3"],
+      ["3","3","3","3","3","3","3","3","3","3","3"],
       ["3","3","3","3","3","3","3","3","3","3","3"]
     ],
     "utilities": [
@@ -26,13 +22,9 @@
       [" "," ","h:fire","h:fire","h:fire","h:fire","h:fire","h:fire","h:fire"," "," "],
       [" "," ","h:fire","h:fire","h:fire","h:fire","h:fire","h:fire","h:fire"," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," ","h:death","h:death","h:death","h:death","h:death","h:death","h:death"," "," "],
-      [" "," ","h:death","h:death","h:death","h:death","h:death","h:death","h:death"," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," ","h:electric","h:electric","h:electric","h:electric","h:electric","h:electric","h:electric"," "," "],
-      [" "," ","h:electric","h:electric","h:electric","h:electric","h:electric","h:electric","h:electric"," "," "],
       [" "," "," "," "," ","t"," "," "," "," "," "]
     ],
     "interactables": [
@@ -41,11 +33,7 @@
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","sentry_turret:0:0:1#target:player"," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","laser_turret:0:1"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "]
