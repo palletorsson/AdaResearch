@@ -142,12 +142,15 @@ func _build_ring_ground(grid_w: float, grid_d: float, grid_center: Vector3,
 
 	add_child(_ground_mesh)
 
-	# Walkable collision for the ground
+	# Walkable collision — covers grid + ring only (not fade zone)
+	# Player falls off at the ring edge into void
+	var walk_w: float = grid_w + ring_width * 2.0
+	var walk_d: float = grid_d + ring_width * 2.0
 	var body := StaticBody3D.new()
 	body.name = "BiomeGroundBody"
 	var col := CollisionShape3D.new()
 	var col_shape := BoxShape3D.new()
-	col_shape.size = Vector3(total_w, 0.1, total_d)
+	col_shape.size = Vector3(walk_w, 0.1, walk_d)
 	col.shape = col_shape
 	body.add_child(col)
 	body.position = grid_center + Vector3(0, -0.55, 0)
