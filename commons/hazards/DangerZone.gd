@@ -17,6 +17,10 @@ enum Type {
 @export var danger_type: Type = Type.GENERIC
 @export var damage_per_tick: float = 10.0
 @export var tick_interval: float = 0.5
+
+# Fire burns fast — override damage when type is FIRE
+const FIRE_DAMAGE_PER_TICK := 35.0
+const FIRE_TICK_INTERVAL := 0.3
 @export var instant_kill: bool = false  ## Dumb ways to die
 
 # Type-specific configuration
@@ -74,10 +78,15 @@ signal damage_dealt(amount: float, danger_type: Type)
 func _ready() -> void:
 	print("[DangerZone] _ready() called - type: %s, position: %s" % [Type.keys()[danger_type], global_position])
 	config = TYPE_CONFIG.get(danger_type, TYPE_CONFIG[Type.GENERIC])
-	
+
+	# Fire burns fast — ~1 second to kill from full health
+	if danger_type == Type.FIRE:
+		damage_per_tick = FIRE_DAMAGE_PER_TICK
+		tick_interval = FIRE_TICK_INTERVAL
+
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
-	
+
 	_setup_collision()
 	_setup_visuals()
 	_setup_audio()
