@@ -19,7 +19,7 @@ enum Type {
 @export var tick_interval: float = 0.5
 
 # Fire: light damage (1%) with cooldown
-const FIRE_DAMAGE_PER_TICK := 1.0
+const FIRE_DAMAGE_PER_TICK := 10.0
 const FIRE_TICK_INTERVAL := 2.0
 @export var instant_kill: bool = false  ## Dumb ways to die
 

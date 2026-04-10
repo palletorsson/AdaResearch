@@ -20,7 +20,7 @@ signal hit_target(target: Node3D, position: Vector3)
 @export var target_player: bool = true
 @export var target_balls: bool = true
 @export var use_laser_damage: bool = false            # Disable continuous laser — use bullet bursts
-@export var laser_damage_per_hit: float = 1.0        # 1% damage per hit
+@export var laser_damage_per_hit: float = 20.0       # 20% damage per hit
 @export var require_line_of_sight: bool = true       # Can't shoot through walls
 
 @export_category("Appearance")
