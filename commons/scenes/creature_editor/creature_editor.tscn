@@ -1,8 +1,8 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bhrnvt2qw8iad"]
 
-[ext_resource type="Script" path="res://commons/scenes/creature_editor/creature_editor.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://usl8lmgdoi1j" path="res://commons/scenes/creature_editor/creature_editor.gd" id="1_script"]
 
-[node name="CreatureEditor" type="HSplitContainer"]
+[node name="CreatureEditor" type="HSplitContainer" unique_id=1828287137]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

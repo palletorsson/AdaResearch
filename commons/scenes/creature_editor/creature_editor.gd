@@ -159,7 +159,8 @@ func _build_kingdom_buttons() -> void:
 		var btn := Button.new()
 		btn.text = kname
 		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		var kid: int = ["Tree", "Creature", "Flower", "Fungus", "Hybrid"].find(kname)
+		var kingdoms_list := ["Tree", "Creature", "Flower", "Fungus", "Hybrid"]
+		var kid: int = kingdoms_list.find(kname)
 		btn.pressed.connect(_spawn_new.bind(kid))
 		hbox.add_child(btn)
 	controls.add_child(hbox)
@@ -167,7 +168,7 @@ func _build_kingdom_buttons() -> void:
 	# Random button
 	var rand_btn := Button.new()
 	rand_btn.text = "Random"
-	rand_btn.pressed.connect(func(): _spawn_new(randi_range(0, 4)))
+	rand_btn.pressed.connect(func(): _spawn_new(randi() % 5))
 	controls.add_child(rand_btn)
 
 
@@ -265,8 +266,7 @@ func _load_preset(preset_name: String) -> void:
 		for gene_name in preset:
 			if gene_name in ["kingdom", "primary_color", "secondary_color", "tertiary_color"]:
 				continue
-			if gene_name in _dna:
-				_dna.set(gene_name, float(preset[gene_name]))
+			_dna.set(gene_name, float(preset[gene_name]))
 		if preset.has("primary_color"):
 			_dna.primary_color = Color(preset["primary_color"])
 		if preset.has("secondary_color"):
@@ -307,8 +307,9 @@ func _sync_sliders_to_dna() -> void:
 		return
 	for gene_id in _sliders:
 		var slider: HSlider = _sliders[gene_id]
-		if gene_id in _dna:
-			slider.set_value_no_signal(float(_dna.get(gene_id)))
+		var val = _dna.get(gene_id)
+		if val != null:
+			slider.set_value_no_signal(float(val))
 		var val_label = slider.get_parent().get_node_or_null("Val")
 		if val_label:
 			val_label.text = "%.2f" % slider.value
@@ -317,9 +318,9 @@ func _sync_sliders_to_dna() -> void:
 func _update_info() -> void:
 	if not info_label or not _dna:
 		return
-	var kingdoms := ["Tree", "Creature", "Flower", "Fungus", "Hybrid"]
-	var kid := int(round(_dna.body_type))
-	var kname := kingdoms[clampi(kid, 0, 4)]
+	var kingdoms: Array[String] = ["Tree", "Creature", "Flower", "Fungus", "Hybrid"]
+	var kid: int = int(round(_dna.body_type))
+	var kname: String = kingdoms[clampi(kid, 0, 4)]
 	info_label.text = "%s | seg=%.0f sym=%.0f scale=%.1f" % [
 		kname, _dna.segments, _dna.symmetry, _dna.scale]
 
@@ -331,8 +332,7 @@ func _update_info() -> void:
 func _on_gene_changed(value: float, gene_id: String) -> void:
 	if not _dna:
 		return
-	if gene_id in _dna:
-		_dna.set(gene_id, value)
+	_dna.set(gene_id, value)
 	# Update value label
 	var slider: HSlider = _sliders.get(gene_id)
 	if slider:
