@@ -55,6 +55,7 @@ const KINGDOM_FOLIAGE: Dictionary = {
 
 var _ground_mesh: MeshInstance3D = null
 var _foliage_instances: Array[MultiMeshInstance3D] = []
+var _chunk_manager: ChunkManager = null
 var _rng: RandomNumberGenerator = null
 
 
@@ -83,11 +84,16 @@ func generate(grid_dims: Vector3i, cube_size: float, terrain_mode: String,
 	# Build ground
 	_build_ring_ground(grid_w, grid_d, grid_center, terrain_mode, density)
 
-	# Place foliage (MultiMesh only — static, batched, VR-friendly)
+	# Place foliage (MultiMesh — static background fill, LOD 3 equivalent)
 	_place_foliage(grid_w, grid_d, grid_center, kingdoms, density)
 
-	print("[BiomeRing] Generated: %.0fx%.0f grid, ring=%.1fm, fade=%.1fm, density=%.2f, kingdoms=%s" % [
-		grid_w, grid_d, ring_width, fade_width, density, str(kingdoms)
+	# Spawn DNA organisms via ChunkManager (LOD 0-2 — real morphology near player)
+	if density >= 0.1:
+		_spawn_dna_organisms(grid_center, kingdoms, density)
+
+	print("[BiomeRing] Generated: %.0fx%.0f grid, ring=%.1fm, fade=%.1fm, density=%.2f, kingdoms=%s, chunks=%s" % [
+		grid_w, grid_d, ring_width, fade_width, density, str(kingdoms),
+		"yes" if _chunk_manager else "no"
 	])
 
 
@@ -408,6 +414,65 @@ func _get_foliage_mesh(flora_type: String) -> Mesh:
 			return mesh
 		_:
 			return null
+
+
+# ═══════════════════════════════════════════════════════════════
+# DNA ORGANISMS — Real CritterDNA via ChunkManager (LOD 0-2)
+# ═══════════════════════════════════════════════════════════════
+
+func _spawn_dna_organisms(grid_center: Vector3, kingdoms: Array, density: float) -> void:
+	_chunk_manager = ChunkManager.new()
+	_chunk_manager.name = "BiomeChunkManager"
+
+	# Configure for biome ring — population scales with density
+	# Early maps (density 0.1): 4 organisms. Late maps (density 1.0): 40.
+	_chunk_manager.chunk_size = 4.0
+	_chunk_manager.max_population = clampi(int(density * 40), 4, 40)
+	_chunk_manager.spawn_radius = ring_width * 0.8
+	_chunk_manager.center_offset = grid_center
+	_chunk_manager.lod_update_interval = 0.5
+	_chunk_manager.creature_throttle_distance = 8.0
+
+	# Override kingdoms/density so ChunkManager uses biome context
+	var kingdom_strings: Array[String] = []
+	for k in kingdoms:
+		kingdom_strings.append(str(k))
+	_chunk_manager.override_kingdoms = kingdom_strings
+	_chunk_manager.override_density = density
+
+	# Deterministic seeding
+	_chunk_manager.rng_seed = _rng.seed
+
+	add_child(_chunk_manager)
+
+	# Connect to ChunkManager's DNA generation to apply curriculum scaling
+	# ChunkManager creates CritterDNA.random_kingdom() — we post-process via signal
+	if _chunk_manager.has_signal("organism_dna_created"):
+		_chunk_manager.organism_dna_created.connect(_scale_dna_by_curriculum.bind(density))
+
+	print("[BiomeRing] ChunkManager: pop=%d radius=%.1f kingdoms=%s density=%.2f" % [
+		_chunk_manager.max_population, _chunk_manager.spawn_radius, str(kingdom_strings), density
+	])
+
+
+## Scale DNA complexity by curriculum progression.
+## Early maps (low density) → simple organisms. Late maps → full complexity.
+## This is applied AFTER random_kingdom generates the base DNA.
+static func scale_dna_for_density(dna: CritterDNA, density: float) -> void:
+	# Complexity genes scale with density: 0.1 → minimal, 1.0 → full range
+	dna.segments = lerpf(2.0, dna.segments, density)
+	dna.symmetry = lerpf(1.0, dna.symmetry, density)
+	dna.branch_angle = lerpf(25.0, dna.branch_angle, density)
+	dna.branch_decay = lerpf(0.7, dna.branch_decay, density)
+	dna.leaf_density = lerpf(0.3, dna.leaf_density, density)
+	dna.iridescence = lerpf(0.0, dna.iridescence, density)
+	dna.pattern_scale = lerpf(0.5, dna.pattern_scale, density)
+	# Scale stays in range but biases smaller for early maps
+	dna.scale = lerpf(0.5, dna.scale, clampf(density * 1.5, 0.0, 1.0))
+
+
+func _scale_dna_by_curriculum(dna: CritterDNA, density: float) -> void:
+	scale_dna_for_density(dna, density)
 
 
 func _get_foliage_color(flora_type: String) -> Color:
