@@ -630,11 +630,27 @@ func _load_grid_system() -> void:
 	if "map_name" in _grid_system:
 		_grid_system.map_name = map_name
 
+	# Advance EcosystemManager to this map's sequence so biome ring appears in editor
+	_sync_ecosystem_to_map(map_name)
+
 	_grid_system.transform.origin = Vector3(0, -0.5, 0)
 	map_root.add_child(_grid_system)
 
 	# Disable any cameras the grid system creates
 	call_deferred("_disable_grid_cams")
+
+## Advance EcosystemManager so the editor preview shows the correct biome density.
+## Finds which sequence owns this map and marks all sequences up to that point as complete.
+func _sync_ecosystem_to_map(map_name: String) -> void:
+	var eco = get_node_or_null("/root/EcosystemManager")
+	if not eco or not eco.has_method("force_advance_to"):
+		return
+	# Find which sequence this map belongs to
+	for seq_name in _seq_maps:
+		if map_name in _seq_maps[seq_name]:
+			eco.force_advance_to(seq_name)
+			print("[MapStudio] Ecosystem synced to '%s' for map '%s'" % [seq_name, map_name])
+			return
 
 func _disable_grid_cams() -> void:
 	if not _grid_system or not is_instance_valid(_grid_system): return
