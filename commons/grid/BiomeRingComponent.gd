@@ -55,7 +55,6 @@ const KINGDOM_FOLIAGE: Dictionary = {
 
 var _ground_mesh: MeshInstance3D = null
 var _foliage_instances: Array[MultiMeshInstance3D] = []
-var _critter_spawner = null  # CritterSpawner (loaded dynamically)
 var _rng: RandomNumberGenerator = null
 
 
@@ -84,11 +83,8 @@ func generate(grid_dims: Vector3i, cube_size: float, terrain_mode: String,
 	# Build ground
 	_build_ring_ground(grid_w, grid_d, grid_center, terrain_mode, density)
 
-	# Place foliage (MultiMesh — simple decorative meshes)
+	# Place foliage (MultiMesh only — static, batched, VR-friendly)
 	_place_foliage(grid_w, grid_d, grid_center, kingdoms, density)
-
-	# Spawn living CritterEntity organisms for late-sequence maps
-	_spawn_living_organisms(grid_center, kingdoms, density)
 
 	print("[BiomeRing] Generated: %.0fx%.0f grid, ring=%.1fm, fade=%.1fm, density=%.2f, kingdoms=%s" % [
 		grid_w, grid_d, ring_width, fade_width, density, str(kingdoms)
@@ -145,6 +141,17 @@ func _build_ring_ground(grid_w: float, grid_d: float, grid_center: Vector3,
 		_ground_mesh.material_override = _create_earth_material(density)
 
 	add_child(_ground_mesh)
+
+	# Walkable collision for the ground
+	var body := StaticBody3D.new()
+	body.name = "BiomeGroundBody"
+	var col := CollisionShape3D.new()
+	var col_shape := BoxShape3D.new()
+	col_shape.size = Vector3(total_w, 0.1, total_d)
+	col.shape = col_shape
+	body.add_child(col)
+	body.position = grid_center + Vector3(0, -0.1, 0)
+	add_child(body)
 
 
 func _create_earth_material(density: float) -> StandardMaterial3D:
@@ -392,62 +399,6 @@ func _get_foliage_mesh(flora_type: String) -> Mesh:
 			return mesh
 		_:
 			return null
-
-
-# ═══════════════════════════════════════════════════════════════
-# LIVING ORGANISMS — DNA-driven CritterEntity instances
-# ═══════════════════════════════════════════════════════════════
-
-## Spawn real CritterEntity organisms in the biome ring.
-## Only activates for late-sequence maps where kingdoms include living types.
-## density > 0.3: a few L-system trees replace some MultiMesh cylinders
-## density > 0.5: DNA flowers with real morphology join
-## creature kingdom: actual walking/roaming entities appear
-func _spawn_living_organisms(center: Vector3, kingdoms: Array, density: float) -> void:
-	# Need at least moderate density for living organisms (performance budget)
-	if density < 0.3:
-		return
-
-	# Guard: CritterSpawner and morphology systems must be available
-	if not ClassDB.class_exists("CritterSpawner") and not ResourceLoader.exists("res://algorithms/nature_system/systems/spawner.gd"):
-		print("[BiomeRing] CritterSpawner not available, skipping living organisms")
-		return
-
-	# Create a container for living organisms
-	var nature_root := Node3D.new()
-	nature_root.name = "LivingOrganisms"
-	add_child(nature_root)
-
-	# Create spawner (wrapped — morphology errors shouldn't crash the grid)
-	_critter_spawner = CritterSpawner.new(nature_root)
-	_critter_spawner.default_lod = 3  # Low detail for ring organisms (safe)
-	_critter_spawner.max_population = int(density * 12)  # Conservative: 4-12
-
-	var ring_radius: float = ring_width * 0.6
-
-	# Kingdom 0 = tree: L-system trees (density > 0.3)
-	if "tree" in kingdoms:
-		var tree_count: int = mini(int(density * 4), 4)
-		_critter_spawner.seed_population(0, tree_count, center, ring_radius)
-		print("[BiomeRing] Spawned %d living trees" % tree_count)
-
-	# Kingdom 2 = flower: DNA-driven petal flowers (density > 0.5)
-	if "flower" in kingdoms and density > 0.5:
-		var flower_count: int = mini(int(density * 3), 3)
-		_critter_spawner.seed_population(2, flower_count, center, ring_radius)
-		print("[BiomeRing] Spawned %d living flowers" % flower_count)
-
-	# Kingdom 3 = fungus: morphology fungi (density > 0.5)
-	if "fungus" in kingdoms and density > 0.5:
-		var fungus_count: int = int(density * 3)  # 2-3 fungi
-		_critter_spawner.seed_population(3, fungus_count, center, ring_radius)
-		print("[BiomeRing] Spawned %d living fungi" % fungus_count)
-
-	# Kingdom 1 = creature: walking/roaming entities (only when creature kingdom unlocked)
-	if "creature" in kingdoms:
-		var creature_count: int = int(density * 8)  # 6-8 creatures
-		_critter_spawner.seed_population(1, creature_count, center, ring_radius)
-		print("[BiomeRing] Spawned %d living creatures" % creature_count)
 
 
 func _get_foliage_color(flora_type: String) -> Color:
