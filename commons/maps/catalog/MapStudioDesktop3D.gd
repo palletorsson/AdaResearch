@@ -690,9 +690,40 @@ func _save() -> void:
 		map_data.erase("dev_notes")
 	var f := FileAccess.open(map_path, FileAccess.WRITE)
 	if f:
-		f.store_string(JSON.stringify(map_data, "  "))
+		f.store_string(_compact_map_json(map_data))
 		f.close()
 		status.text = "Saved!"
+
+
+## Compact JSON: layer rows on single lines, everything else indented normally.
+static func _compact_map_json(data: Dictionary) -> String:
+	var lines: PackedStringArray = PackedStringArray()
+	lines.append("{")
+	var keys := data.keys()
+	for ki in keys.size():
+		var key: String = str(keys[ki])
+		var val = data[key]
+		var comma: String = "," if ki < keys.size() - 1 else ""
+		if key == "layers" and val is Dictionary:
+			lines.append("  \"layers\": {")
+			var layer_keys := (val as Dictionary).keys()
+			for li in layer_keys.size():
+				var lname: String = str(layer_keys[li])
+				var rows = val[lname]
+				var lcomma: String = "," if li < layer_keys.size() - 1 else ""
+				if rows is Array:
+					lines.append("    \"%s\": [" % lname)
+					for ri in (rows as Array).size():
+						var rcomma: String = "," if ri < (rows as Array).size() - 1 else ""
+						lines.append("      %s%s" % [JSON.stringify(rows[ri]), rcomma])
+					lines.append("    ]%s" % lcomma)
+				else:
+					lines.append("    %s: %s%s" % [JSON.stringify(lname), JSON.stringify(rows), lcomma])
+			lines.append("  }%s" % comma)
+		else:
+			lines.append("  %s: %s%s" % [JSON.stringify(key), JSON.stringify(val), comma])
+	lines.append("}")
+	return "\n".join(lines) + "\n"
 
 func _unhandled_input(ev: InputEvent) -> void:
 	if ev is InputEventKey and ev.pressed:
