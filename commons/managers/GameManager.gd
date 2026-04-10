@@ -329,11 +329,28 @@ func _handle_player_death() -> void:
 	if debug:
 		print("GameManager: Player health depleted at %s" % str(death_position))
 
-	if death_sequence_enabled:
+	# Play visceral death effect (red flash, shake, particles, haptic)
+	var death_fx = get_node_or_null("/root/DeathEffect")
+	if death_fx and death_fx.has_method("play"):
+		death_fx.play(death_position)
+		# Reload map when effect completes
+		if not death_fx.death_effect_complete.is_connected(_on_death_effect_done):
+			death_fx.death_effect_complete.connect(_on_death_effect_done, CONNECT_ONE_SHOT)
+		_death_sequence_running = true
+	elif death_sequence_enabled:
 		_death_sequence_running = true
 		call_deferred("_run_death_sequence", death_position)
 	else:
 		call_deferred("_reload_scene")
+
+
+func _on_death_effect_done() -> void:
+	_death_sequence_running = false
+	# Full map reload — reset everything, start from spawn
+	var tree = get_tree()
+	if tree:
+		tree.reload_current_scene()
+		reset_level_state()
 
 func _run_death_sequence(death_position: Vector3) -> void:
 	var tree: SceneTree = get_tree()
