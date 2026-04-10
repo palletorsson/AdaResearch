@@ -36,6 +36,24 @@ signal death_effect_complete()
 
 func _ready() -> void:
 	_rng.randomize()
+	# Clean up on scene changes (autoload survives scene reloads)
+	get_tree().node_added.connect(_on_node_added)
+
+
+## When a new XRCamera3D appears (scene reloaded), clean any stale vignette state.
+func _on_node_added(node: Node) -> void:
+	if node is XRCamera3D:
+		# New camera means scene reloaded — force cleanup
+		if _playing:
+			_playing = false
+			Engine.time_scale = 1.0
+		_vignette_quad = null
+		_particles = null
+		_xr_camera = null
+		# Remove any orphaned vignettes on this camera
+		for child in node.get_children():
+			if child.name == "DamageVignette":
+				child.queue_free()
 
 
 func _process(delta: float) -> void:
