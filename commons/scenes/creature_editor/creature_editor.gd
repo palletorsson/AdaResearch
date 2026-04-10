@@ -71,10 +71,14 @@ var orbiting: bool = false
 
 
 func _ready() -> void:
-	# Left panel: controls
+	# Left panel: controls (scroll the whole panel)
+	var left_scroll := ScrollContainer.new()
+	left_scroll.custom_minimum_size = Vector2(300, 0)
+	left_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	add_child(left_scroll)
 	controls = VBoxContainer.new()
-	controls.custom_minimum_size = Vector2(280, 0)
-	add_child(controls)
+	controls.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	left_scroll.add_child(controls)
 
 	# Right panel: 3D viewport
 	viewport_container = SubViewportContainer.new()
@@ -240,8 +244,11 @@ func _build_color_pickers() -> void:
 func _build_gene_sliders() -> void:
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.custom_minimum_size = Vector2(0, 300)
+	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.custom_minimum_size = Vector2(260, 300)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	var vbox := VBoxContainer.new()
+	vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 	for group: Dictionary in GENE_GROUPS:
 		var group_label := Label.new()
@@ -264,6 +271,7 @@ func _build_gene_sliders() -> void:
 			slider.min_value = gene["min"] as float
 			slider.max_value = gene["max"] as float
 			slider.step = gene["step"] as float
+			slider.custom_minimum_size = Vector2(120, 20)
 			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			slider.value_changed.connect(_on_gene_changed.bind(gene_id))
 			hbox.add_child(slider)
