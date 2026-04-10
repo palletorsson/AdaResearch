@@ -414,8 +414,8 @@ func _process(delta: float) -> void:
 
 func _spawn_new_target() -> void:
 	_point_target = Vector3(
-		randf_range(-1.5, 1.5),
-		randf_range(-0.5, 1.5),
+		randf_range(-0.5, 0.5),
+		randf_range(-0.5, 0.5),
 		0
 	)
 	_point_target_idx += 1
@@ -1402,8 +1402,8 @@ class _ScreenCanvas extends Control:
 		draw_line(Vector2(sb.x, sb.y), Vector2(cx, sb.y), Color(I_AXIS_Y, 0.12), 1.0)
 
 		# ── Line AB (violet with glow) ──
-		draw_line(sa, sb, Color(I_DOT, 0.2), 10.0)
-		draw_line(sa, sb, I_DOT, 3.0)
+		draw_line(sa, sb, Color(I_DOT, 0.25), 16.0)
+		draw_line(sa, sb, I_DOT, 5.0)
 
 		# ── Midpoint ──
 		var mid: Vector2 = (sa + sb) * 0.5
@@ -1529,9 +1529,10 @@ class _ScreenCanvas extends Control:
 	# ═══════════════════════════════════════════════════════════════
 
 	func _draw_triangle_tracker(vp_size: Vector2, grid_top: float, grid_margin: float, area: Vector2, font: Font) -> void:
-		var pa: Vector3 = Vector3(-0.5, 0, 0)
-		var pb: Vector3 = Vector3(0.5, 0, 0)
-		var pc: Vector3 = Vector3(0, 0.8, 0)
+		# Default vertices match the triangle artifact (commons/primitives/triangle/triangle.gd)
+		var pa: Vector3 = Vector3(-0.25, 0.25, 0)
+		var pb: Vector3 = Vector3(0.25, 0.25, 0)
+		var pc: Vector3 = Vector3(0, 0.75, 0)
 		if screen_ref._tracking_tri_points.size() >= 3:
 			if is_instance_valid(screen_ref._tracking_tri_points[0]):
 				pa = screen_ref._tracking_tri_points[0].global_position
@@ -1563,12 +1564,12 @@ class _ScreenCanvas extends Control:
 		draw_polygon(tri_points, tri_colors)
 
 		# ── Triangle edges (glow + solid) ──
-		draw_line(sa, sb, Color(I_DOT, 0.15), 8.0)
-		draw_line(sb, sc, Color(I_DOT, 0.15), 8.0)
-		draw_line(sc, sa, Color(I_DOT, 0.15), 8.0)
-		draw_line(sa, sb, I_DOT, 2.5)
-		draw_line(sb, sc, I_DOT, 2.5)
-		draw_line(sc, sa, I_DOT, 2.5)
+		draw_line(sa, sb, Color(I_DOT, 0.2), 14.0)
+		draw_line(sb, sc, Color(I_DOT, 0.2), 14.0)
+		draw_line(sc, sa, Color(I_DOT, 0.2), 14.0)
+		draw_line(sa, sb, I_DOT, 4.0)
+		draw_line(sb, sc, I_DOT, 4.0)
+		draw_line(sc, sa, I_DOT, 4.0)
 
 		# ── Vertex A (cyan) ──
 		draw_circle(sa, 14.0, Color(I_CYAN, 0.15))

@@ -1,0 +1,106 @@
+{
+  "map_info": {
+    "name": "The Pit",
+    "lookup_name": "Trans_Pit",
+    "description": "Three transformations, three ways to die. A translating block pushes you, a rotating beam sweeps you, a scaling cube squeezes you — all toward the void. The pit is not an enemy. The pit is absence. The transformations are the force. You are the body that must learn to read space or be moved by it.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 13,
+      "depth": 17,
+      "max_height": 3
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "challenge",
+      "estimated_time": "5-8 minutes",
+      "learning_objectives": [
+        "Translation as displacement force",
+        "Rotation as sweep force",
+        "Scale as pressure force",
+        "Timing movement through transforming space"
+      ]
+    },
+    "title": "The Pit"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "audio": {
+    "ambient_preset": "danger_minimal",
+    "volume": -8.0
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true
+  },
+  "dev_notes": "Three trials: PUSH (translation), SWEEP (rotation), GROW (scale). Each is a corridor with a pit in the middle and a transformation block that forces the player to time their crossing. The pit resets you to the corridor start (checkpoint before each trial). Utilities tc/rc/sc configured as hostile — they push TOWARD the void instead of carrying across. DangerZone h:fire at the bottom of each pit for instant visual feedback. After all three trials, the player reaches the teleporter. Ontology: the player's body IS the test subject for each transformation.",
+  "layers": {
+    "structure": [
+      ["2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2"],
+      ["2", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "2"],
+      ["2", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "2"],
+      ["2", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "2"],
+      ["2", "1", "1", "1", "0", "1", "1", "1", "0", "1", "1", "1", "2"],
+      ["2", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "2"],
+      ["2", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "2"],
+      ["2", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "2"],
+      ["2", "1", "1", "1", "0", "1", "1", "1", "0", "1", "1", "1", "2"],
+      ["2", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "2"],
+      ["2", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "2"],
+      ["2", "1", "1", "1", "2", "1", "1", "1", "2", "1", "1", "1", "2"],
+      ["2", "2", "1", "2", "2", "2", "1", "2", "2", "2", "1", "2", "2"],
+      ["2", "2", "1", "2", "2", "2", "1", "2", "2", "2", "1", "2", "2"],
+      ["2", "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "2", "2"],
+      ["2", "2", "2", "2", "2", "2", "1", "2", "2", "2", "2", "2", "2"],
+      ["2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2"]
+    ],
+    "utilities": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", "sp", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", "tc:5:z:auto", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", " "],
+      [" ", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", " "],
+      [" ", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", "h:fire", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", "rc:45:y:4:-0.6", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "sc:3:-0.5:1:-1", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", "t", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "pusher_block#axis:x#distance:4#speed:2.5", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", "sweeper_block#speed:0.6#length:2.5", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", "grower_block#min:0.2#max:2.5#speed:0.4", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+    ]
+  }
+}

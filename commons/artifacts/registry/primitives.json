@@ -6721,6 +6721,29 @@
 				"3d"
 			]
 		},
+		"parasol_triangle": {
+			"category": "primitives",
+			"complexity": "simple",
+			"description": "A triangle mounted on a thin stick like a parasol. Double-sided (pink front, blue back) to show orientation. Place multiples for a forest of triangle flags.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "parasol_triangle",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Parasol Triangle",
+			"scene": "res://commons/primitives/triangle/parasol_triangle.tscn",
+			"tags": [
+				"3d",
+				"triangle",
+				"parasol",
+				"landmark"
+			]
+		},
 		"triangle_line_puzzle": {
 			"category": "unknown",
 			"complexity": "beginner",

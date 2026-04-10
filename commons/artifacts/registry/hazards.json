@@ -1,5 +1,50 @@
 {
 	"artifacts": {
+		"pusher_block": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "A red cube that translates back and forth along one axis, physically pushing the player into pits. Uses AnimatableBody3D for proper physics collision. The translation transformation made dangerous.",
+			"dev_themes": ["gameplay", "hazards"],
+			"include_in_map_data": true,
+			"interaction": "immersive",
+			"lookup_name": "pusher_block",
+			"map_ready": true,
+			"map_sequences": ["transformation", "hazards"],
+			"name": "Pusher Block",
+			"qfep_connection": "Translation as force — the simplest transformation becomes the most direct threat. The block does to the player what the player does to objects.",
+			"scene": "res://commons/hazards/transformation_blocks/pusher_block.tscn",
+			"tags": ["hazard", "transformation", "translation", "push", "pit"]
+		},
+		"sweeper_block": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "A blue beam that rotates around a central pivot, sweeping players off edges into pits. Don Quixote's windmill — the world spins and you must time your crossing. Uses AnimatableBody3D.",
+			"dev_themes": ["gameplay", "hazards"],
+			"include_in_map_data": true,
+			"interaction": "immersive",
+			"lookup_name": "sweeper_block",
+			"map_ready": true,
+			"map_sequences": ["transformation", "hazards"],
+			"name": "Sweeper Block",
+			"qfep_connection": "Rotation as sweep — the transformation you feel in your inner ear. The windmill doesn't attack you; you attack it, and it wins because it is the world.",
+			"scene": "res://commons/hazards/transformation_blocks/sweeper_block.tscn",
+			"tags": ["hazard", "transformation", "rotation", "sweep", "windmill", "pit"]
+		},
+		"grower_block": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "A cube that pulses between tiny and huge, physically pushing the player as it grows. When small you can pass, when large it fills the corridor and squeezes you into the pit. Color shifts from green (safe) to red (danger).",
+			"dev_themes": ["gameplay", "hazards"],
+			"include_in_map_data": true,
+			"interaction": "immersive",
+			"lookup_name": "grower_block",
+			"map_ready": true,
+			"map_sequences": ["transformation", "hazards"],
+			"name": "Grower Block",
+			"qfep_connection": "Scale as pressure — the uncanny transformation that changes everything while appearing to change nothing. You don't move; the world moves into you.",
+			"scene": "res://commons/hazards/transformation_blocks/grower_block.tscn",
+			"tags": ["hazard", "transformation", "scale", "grow", "breathe", "pit"]
+		},
 		"armadillo_droideka": {
 			"category": "hazards",
 			"complexity": "intermediate",
