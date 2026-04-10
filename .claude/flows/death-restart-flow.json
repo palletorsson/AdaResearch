@@ -1,0 +1,156 @@
+{
+  "id": "death-restart-flow",
+  "title": "Death → Restart Pipeline",
+  "description": "DangerZone/laser damages player through GameManager.apply_health_damage. When health reaches zero, DeathEffect plays a cinematic death sequence (red vignette, time freeze, camera shake, meat particles, haptic burst, fade to black) then reloads the current map. Fire does 35 dmg per 0.3s tick, lasers deal 100 dps through GameManager, and h:death utility cells cause instant kill.",
+  "summary": "Hazard damages player → health zero → cinematic death (vignette+freeze+shake+particles+haptic+fade) → map reload.",
+  "confidence": "verified",
+  "links_to": ["scene-transition", "hidden-dependencies", "progression-state"],
+  "triggers": [
+    "death",
+    "restart",
+    "damage",
+    "health",
+    "danger zone",
+    "laser damage",
+    "fire damage",
+    "death effect",
+    "map reload",
+    "meat particles",
+    "vignette",
+    "time freeze",
+    "camera shake",
+    "haptic burst",
+    "instant kill",
+    "h:death"
+  ],
+  "granularity": "meso",
+  "model_version": "opus-4.6",
+  "created": "2026-04-10",
+  "updated": "2026-04-10",
+  "earned_from": "Death and restart system session — DangerZone hazards, GameManager health tracking, DeathEffect cinematic sequence, map reload on death",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "label": "Player enters hazardous area",
+      "detail": "Player walks into a DangerZone (fire, laser) or onto an h:death utility cell. GameManager tracks player health starting at 100."
+    },
+    {
+      "id": "hazard_detect",
+      "type": "decision",
+      "label": "Which hazard type?",
+      "detail": "Three damage paths: DangerZone fire (35 dmg per 0.3s tick via body_entered/exited signals), laser beams (100 dps continuous through GameManager), or h:death utility cell (instant kill, health set to 0 immediately)."
+    },
+    {
+      "id": "fire_tick",
+      "type": "action",
+      "label": "Fire: 35 dmg per 0.3s tick",
+      "detail": "DangerZone with fire type detects player via Area3D body_entered. Starts a 0.3s timer loop calling GameManager.apply_health_damage(35) each tick. Stops when player exits (body_exited)."
+    },
+    {
+      "id": "laser_continuous",
+      "type": "action",
+      "label": "Laser: 100 dps continuous",
+      "detail": "Laser beam intersects player. GameManager receives continuous damage at 100 dps rate. Damage applies every physics frame while intersection holds."
+    },
+    {
+      "id": "instant_kill",
+      "type": "action",
+      "label": "h:death: instant kill",
+      "detail": "Utility layer cell marked h:death. When player steps on it, health is set to 0 immediately, bypassing normal damage calculation."
+    },
+    {
+      "id": "apply_damage",
+      "type": "action",
+      "label": "GameManager.apply_health_damage(amount)",
+      "detail": "Central damage function. Subtracts amount from player health. Emits health_changed signal. Checks if health <= 0 after each application."
+    },
+    {
+      "id": "health_check",
+      "type": "decision",
+      "label": "Health <= 0?",
+      "detail": "If health is still above zero, player survives and can escape. If zero or below, death sequence triggers."
+    },
+    {
+      "id": "survive",
+      "type": "action",
+      "label": "Player survives, can escape",
+      "detail": "Health above zero. Player can walk out of hazard area. Health regeneration may apply depending on game state. DangerZone stops ticking once player exits."
+    },
+    {
+      "id": "death_trigger",
+      "type": "action",
+      "label": "DeathEffect.play(death_pos)",
+      "detail": "GameManager calls DeathEffect.play() with the player's position at moment of death. DeathEffect is an autoload singleton that orchestrates the full cinematic sequence."
+    },
+    {
+      "id": "vignette",
+      "type": "action",
+      "label": "Red vignette flash (0.15s)",
+      "detail": "Screen edges flash red using a full-screen shader overlay. Duration 0.15 seconds. Signals to the player that a critical event has occurred."
+    },
+    {
+      "id": "time_freeze",
+      "type": "action",
+      "label": "Time freeze (0.05x speed)",
+      "detail": "Engine.time_scale set to 0.05. Near-complete time freeze creates dramatic pause. Everything in the scene slows to a crawl except the death effect UI elements."
+    },
+    {
+      "id": "camera_shake",
+      "type": "action",
+      "label": "Camera shake (0.4s)",
+      "detail": "XR camera offset oscillates with decreasing amplitude over 0.4 seconds. Adds physical impact feeling to the death moment."
+    },
+    {
+      "id": "particles",
+      "type": "action",
+      "label": "40 meat particles burst",
+      "detail": "GPUParticles3D emits 40 meat-colored particles from death_pos. Particles spread outward with gravity, creating a visceral explosion effect at the point of death."
+    },
+    {
+      "id": "haptic",
+      "type": "action",
+      "label": "Haptic burst on controllers",
+      "detail": "Both VR controllers receive a strong haptic pulse. Provides physical feedback that reinforces the death event through touch."
+    },
+    {
+      "id": "fade_black",
+      "type": "action",
+      "label": "Fade to black (0.8s)",
+      "detail": "Full-screen black overlay fades in over 0.8 seconds. Engine.time_scale restored to 1.0 during fade. Screen goes completely black before reload."
+    },
+    {
+      "id": "map_reload",
+      "type": "action",
+      "label": "Reload current map",
+      "detail": "After fade completes, the current map scene is reloaded from scratch. Player health reset to 100. All hazard states reset. Player spawns at the map's spawn point. DeathEffect cleans up its overlay nodes."
+    },
+    {
+      "id": "end",
+      "type": "end",
+      "label": "Player respawns at map start",
+      "detail": "Full reset. Player is alive at spawn with full health. All map state is fresh. Death counter may increment for analytics."
+    }
+  ],
+  "edges": [
+    { "from": "start", "to": "hazard_detect" },
+    { "from": "hazard_detect", "to": "fire_tick", "label": "fire" },
+    { "from": "hazard_detect", "to": "laser_continuous", "label": "laser" },
+    { "from": "hazard_detect", "to": "instant_kill", "label": "h:death" },
+    { "from": "fire_tick", "to": "apply_damage" },
+    { "from": "laser_continuous", "to": "apply_damage" },
+    { "from": "instant_kill", "to": "apply_damage" },
+    { "from": "apply_damage", "to": "health_check" },
+    { "from": "health_check", "to": "survive", "label": "health > 0" },
+    { "from": "health_check", "to": "death_trigger", "label": "health <= 0" },
+    { "from": "survive", "to": "end" },
+    { "from": "death_trigger", "to": "vignette" },
+    { "from": "vignette", "to": "time_freeze" },
+    { "from": "time_freeze", "to": "camera_shake" },
+    { "from": "camera_shake", "to": "particles" },
+    { "from": "particles", "to": "haptic" },
+    { "from": "haptic", "to": "fade_black" },
+    { "from": "fade_black", "to": "map_reload" },
+    { "from": "map_reload", "to": "end" }
+  ]
+}

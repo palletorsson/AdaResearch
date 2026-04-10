@@ -1,0 +1,136 @@
+{
+  "id": "ecology-progression",
+  "title": "Ecology Progression — Grey to Living World",
+  "description": "soft_stages.json defines density, kingdoms, and terrain per sequence. EcosystemManager tracks completed sequences and accumulates ecological state. BiomeRingComponent generates foliage rings and living CritterEntity organisms when density exceeds 0.3. NatureRenderer controls fog, sky, particles, and living ground, activating EvolutionSystem and TransmutationManager at the self_generating stage. GridSystem auto-syncs the ecosystem to the current map's sequence.",
+  "summary": "Stages file drives density per sequence → EcosystemManager accumulates → BiomeRing spawns foliage/creatures → NatureRenderer adds atmosphere → evolution unlocks late.",
+  "confidence": "verified",
+  "links_to": ["progression-state", "scene-transition", "hidden-dependencies"],
+  "triggers": [
+    "ecology",
+    "ecosystem",
+    "biome",
+    "soft stages",
+    "nature renderer",
+    "foliage",
+    "creatures appear",
+    "living ground",
+    "evolution system",
+    "transmutation",
+    "density",
+    "kingdoms",
+    "terrain progression",
+    "grey to green",
+    "biome ring",
+    "critter entity",
+    "fungi",
+    "flowers"
+  ],
+  "granularity": "macro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-10",
+  "updated": "2026-04-10",
+  "earned_from": "Ecology progression session — soft_stages pipeline, BiomeRingComponent foliage/creature spawning, NatureRenderer atmosphere, EvolutionSystem activation gating",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "label": "Game launches, sequence 1",
+      "detail": "World starts grey and sterile. soft_stages.json entry for seq 1-2 has density 0, no kingdoms, minimal terrain. EcosystemManager initializes with no completed sequences."
+    },
+    {
+      "id": "load_stages",
+      "type": "action",
+      "label": "soft_stages.json loaded",
+      "detail": "JSON file at commons/maps/soft_stages.json defines per-sequence ecology parameters: density (0.0-1.0), kingdoms array (flowers, fungi, moss, grass, creatures), terrain type (stone, earth, living). GridSystem reads this on map load."
+    },
+    {
+      "id": "grid_sync",
+      "type": "action",
+      "label": "GridSystem syncs ecosystem to current sequence",
+      "detail": "When a map loads, GridSystem reads the map's sequence ID, looks up soft_stages.json for that sequence, and passes the stage config to EcosystemManager. This auto-sync means ecology matches the narrative position."
+    },
+    {
+      "id": "ecosystem_accumulate",
+      "type": "action",
+      "label": "EcosystemManager tracks completed sequences",
+      "detail": "EcosystemManager maintains a list of completed sequences. As player progresses, density increases and new kingdoms unlock. State accumulates — once flowers appear, they persist in all future maps."
+    },
+    {
+      "id": "density_check",
+      "type": "decision",
+      "label": "Density > 0.3?",
+      "detail": "BiomeRingComponent checks current density threshold. Below 0.3, only minimal terrain changes occur (stone to earth tones). Above 0.3, active foliage and organism spawning begins."
+    },
+    {
+      "id": "grey_world",
+      "type": "action",
+      "label": "Seq 1-2: Grey, sterile world",
+      "detail": "Density near 0. No foliage, no creatures. Stone terrain. Fog is thin and neutral. Sky is flat. The lab aesthetic dominates. Player learns algorithms in isolation."
+    },
+    {
+      "id": "first_flowers",
+      "type": "action",
+      "label": "Seq 3: First flowers appear",
+      "detail": "Density crosses 0.3. kingdoms includes 'flowers'. BiomeRingComponent generates a foliage ring around map edges with flower meshes. Subtle color enters the world for the first time."
+    },
+    {
+      "id": "fungi_arrive",
+      "type": "action",
+      "label": "Seq 7: Fungi kingdom unlocks",
+      "detail": "kingdoms adds 'fungi'. BiomeRingComponent spawns mushroom clusters alongside flowers. Density around 0.5. Terrain shifts from stone to earth. NatureRenderer increases fog density and adds green tint."
+    },
+    {
+      "id": "living_ground",
+      "type": "action",
+      "label": "Seq 9: Living ground activates",
+      "detail": "Terrain type becomes 'living'. NatureRenderer applies animated ground shader — subtle movement, organic texture. Moss and grass kingdoms active. Density around 0.7. Particles (pollen, spores) begin floating."
+    },
+    {
+      "id": "creatures_spawn",
+      "type": "action",
+      "label": "Seq 11: CritterEntity organisms appear",
+      "detail": "kingdoms includes 'creatures'. BiomeRingComponent spawns living CritterEntity instances at density-scaled counts. Creatures use CritterDNA for procedural appearance. They wander, react to player proximity. Density above 0.8."
+    },
+    {
+      "id": "self_generating",
+      "type": "decision",
+      "label": "Reached self_generating stage?",
+      "detail": "At seq 12+, soft_stages marks the stage as 'self_generating'. This is the gate for activating the autonomous evolution and transmutation systems."
+    },
+    {
+      "id": "evolution_active",
+      "type": "action",
+      "label": "Seq 12+: EvolutionSystem + TransmutationManager activate",
+      "detail": "NatureRenderer detects self_generating flag and activates EvolutionSystem (creatures breed, mutate, speciate) and TransmutationManager (artifacts transform between states). The world becomes self-sustaining — ecology runs without player input."
+    },
+    {
+      "id": "full_ecology",
+      "type": "action",
+      "label": "Full living world",
+      "detail": "All kingdoms active. Density at 1.0. Living ground, dense foliage rings, wandering creatures, atmospheric particles, rich fog and sky. Evolution produces novel creature variants. The sterile lab has become a thriving ecosystem."
+    },
+    {
+      "id": "end",
+      "type": "end",
+      "label": "Ecology reflects learning journey",
+      "detail": "The world's ecological richness is a direct mirror of the player's algorithmic understanding. Grey isolation → first life → full ecosystem. The progression is irreversible — knowledge, once gained, persists."
+    }
+  ],
+  "edges": [
+    { "from": "start", "to": "load_stages" },
+    { "from": "load_stages", "to": "grid_sync" },
+    { "from": "grid_sync", "to": "ecosystem_accumulate" },
+    { "from": "ecosystem_accumulate", "to": "density_check" },
+    { "from": "density_check", "to": "grey_world", "label": "density <= 0.3" },
+    { "from": "density_check", "to": "first_flowers", "label": "density > 0.3 (seq 3)" },
+    { "from": "grey_world", "to": "ecosystem_accumulate", "label": "sequence completes" },
+    { "from": "first_flowers", "to": "fungi_arrive", "label": "seq 7" },
+    { "from": "fungi_arrive", "to": "living_ground", "label": "seq 9" },
+    { "from": "living_ground", "to": "creatures_spawn", "label": "seq 11" },
+    { "from": "creatures_spawn", "to": "self_generating" },
+    { "from": "self_generating", "to": "evolution_active", "label": "yes (seq 12+)" },
+    { "from": "self_generating", "to": "full_ecology", "label": "not yet" },
+    { "from": "evolution_active", "to": "full_ecology" },
+    { "from": "full_ecology", "to": "end" }
+  ]
+}

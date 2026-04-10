@@ -30,6 +30,14 @@ Thinking paths that survive context death. Search: `python tools/flow_query.py <
 - [~] [Progression State Management](progression-state.json) — sequence_completed signal → MapProgressionManager saves → LabManager reads unlock list → instantiate new artifacts → save lab state.
 - [+] [Hidden Dependencies Debugging](hidden-dependencies.json) — VR weird? Check: camera override (multiple Camera3D), WorldEnvironment conflict, gaze pointer side effects, MovementCapabilityGate silently disabling input.
 
+## Catalyst & Building
+- [+] [Minecraft Cube Placer](minecraft-cube-placer.json) — Look with head, trigger to place, double-trigger to remove. Cardinal neighbors, 2 cells out. Ghost cube preview.
+- [+] [Catalyst Pedestal Pickup](catalyst-pedestal-pickup.json) — Pedestal in lab, grab bracelet, cage fades. Survives map changes (in-memory). Fresh each game.
+
+## Death & Hazards
+- [+] [Death → Restart Flow](death-restart-flow.json) — DangerZone/laser → GameManager → DeathEffect: red flash, shake, particles, fade, map reload. Fire: 35dmg/0.3s. Laser: 100dps.
+- [+] [Ecology Progression](ecology-progression.json) — Biome ring + living organisms grow across 19 sequences. density 0→1.0, kingdoms unlock, EvolutionSystem + TransmutationManager in late maps.
+
 ## VR & Input
 - [+] [VR Input Mapping](vr-input-mapping.json) — Left: joystick=strafe, trigger=grab. Right: joystick=turn, trigger=grab, AX=flight, pointer=UI. MovementCapabilityGate may disable flight.
 - [+] [VR Feedback Bridge](vr-feedback-bridge.json) — Read ada_run/desktop_feedback.md. Timestamped entries with map+artifact context. Bug→fix now, feature→backlog, visual→load visual-upgrade flow.
