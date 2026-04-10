@@ -1,180 +1,272 @@
-# AdaResearch
+# Ada Research
 
-> A VR/desktop meta-quest into algorithms, exploring the queer potential within mathematical objects
+> A VR meta-quest into algorithms, exploring the queer potential within mathematical objects
 
-Named after **Ada Lovelace**, who in 1842 wrote about computation's capacity for generative art. AdaResearch asks: *Can we put Paul Klee's Pedagogical Sketchbook in Virtual Drag?*
+Named after **Ada Lovelace**, who in 1842 wrote about computation's capacity for generative art. Ada Research asks: *Can we put Paul Klee's Pedagogical Sketchbook in Virtual Drag?*
 
-## 🎯 Vision
+## Vision
 
-AdaResearch is an educational VR/desktop platform built in Godot 4 that teaches algorithms through embodied interaction and critical theory. The project probes for **queer potential within technical objects** — exploring how digital resolution creates "invisible fences" that shape bodies, creativity, and subjectivity.
+Ada Research is an educational VR/desktop platform built in **Godot 4.6** that teaches algorithms through embodied interaction and critical theory. You don't read about algorithms — you grab them, tune them, walk through them. Every algorithm has both a technical explanation and a queer theory critique. The project probes for **queer potential within technical objects** — exploring how digital resolution creates invisible fences that shape bodies, creativity, and subjectivity.
 
 ### The Queer Free Energy Principle (QFEP)
 
 The theoretical framework unifying the curriculum:
 
 ```
-QFE = F − λE(S) + φΔE(S,t)
+QFE = F - lambda * E(S) + phi * dE(S,t)
 ```
 
-| Term | Meaning | In the Project |
-|------|---------|----------------|
-| **F** | Free energy (order, prediction) | Primitives, structure, determinism |
-| **E(S)** | Entropy (disorder, freedom) | Randomness, possibility space |
-| **λ** | Entropy drive (0→1) | The dial between order and chaos |
-| **φΔE(S,t)** | Rate of change sensitivity | Positive φ = queer signature |
+| Term | Meaning | In the Curriculum |
+|------|---------|-------------------|
+| **F** | Free energy (order, prediction) | Primitives, geometry, structure |
+| **E(S)** | Entropy (disorder, freedom) | Randomness, noise, possibility space |
+| **lambda** | Entropy drive (0 to 1) | The dial between order and chaos |
+| **phi * dE** | Rate of change sensitivity | Positive phi = the queer signature |
 
-**Life exists at λ ≈ 0.3-0.5** — enough order to maintain identity, enough chaos to adapt.
+Life exists at lambda ~ 0.3-0.5: enough order to maintain identity, enough chaos to adapt. The curriculum physically embodies this — you start at pure order (primitives), move through oscillation (waves, forces), into entropy (randomness, noise, cellular automata), reach the edge of chaos (fractals, L-systems), enter integration (morphogenesis, swarms, soft bodies), and arrive at synthesis (foundations crisis, QFEP laboratory).
 
-The curriculum embodies this:
-- **Primitives** → F maximized (pure order)
-- **Wavefunctions** → F ↔ E(S) oscillation
-- **Randomness** → E(S) made visible
-- **Emergence** → E(S) → F (patterns from noise)
+## Scale
 
-## 🗺️ Learning Sequences
+| Metric | Count |
+|--------|-------|
+| Sequences | 42 (18 spine + 24 branch) |
+| Maps | 500+ |
+| Artifacts | 750+ across 12 registries |
+| Algorithm categories | 52 |
+| AI skills | 14 Claude Code slash commands |
+| CLI tools | 15+ Python/PowerShell |
 
-42 sequences organize 500+ maps into learning progressions:
+## The 18 Spine Sequences
 
-| Sequence | Maps | Focus |
-|----------|------|-------|
-| `primitives` | 13 | Points, lines, planes, cubes — the building blocks |
-| `randomness` | 13 | Entropy, distributions, noise, walks |
-| `fractals` | 10 | Self-similarity, recursion, infinite detail |
-| `wavefunctions` | — | Audio, oscillation, signal processing |
-| `cellularautomata` | — | Local rules → global patterns |
-| `lsystems` | — | Grammar-based growth |
-| `softbodies` | — | Deformable physics |
-| `qfeplaboratory` | 8 | Interactive QFEP exploration |
+The core curriculum, ordered by QFEP trajectory:
 
-Each map contains:
-- **3-layer grid** — structure, utilities, interactables
-- **4 documentation files** — blurb, summary, technical, critical theory
+| # | Sequence | QFEP Phase | What You Learn |
+|---|----------|------------|----------------|
+| 1 | `primitives` | F (order) | Points, lines, triangles, cubes — the atoms of 3D |
+| 2 | `transformation` | F (order) | Translation, rotation, scale — and the pits that kill you |
+| 3 | `color` | oscillation | Chromatic space, perception |
+| 4 | `forces` | oscillation | Newton, vectors, gravity |
+| 5 | `wavefunctions` | oscillation | Sine, audio, signal processing |
+| 6 | `randomness` | E(S) entropy | Distributions, walks, entropy meters |
+| 7 | `noise` | E(S) entropy | Perlin, flow fields, terrain |
+| 8 | `cellularautomata` | E(S) entropy | Game of Life, local rules to global patterns |
+| 9 | `fractals` | lambda edge | Self-similarity, recursion, infinite detail |
+| 10 | `lsystems` | lambda edge | Grammar-based growth, branching |
+| 11 | `proceduralgeneration` | lambda edge | WFC, Markov, dungeon generation |
+| 12 | `morphogenesis` | integration | Turing patterns, reaction-diffusion |
+| 13 | `swarmintelligence` | integration | Boids, flocking, emergence |
+| 14 | `softbodies` | integration | Deformable physics |
+| 15 | `machinelearning` | integration | Neural nets, backpropagation |
+| 16 | `foundationscrisis` | synthesis | Godel, Russell, limits of formal systems |
+| 17 | `qfeplaboratory` | synthesis | Full QFEP embodied — tune the formula |
+| 18 | `criticalalgorithms` | synthesis | Algorithmic bias, queer futures |
 
-## 🏗️ Architecture
+## How It Works
 
-See **[ARCHITECTURE.md](ARCHITECTURE.md)** for complete technical reference.
+### Content Chain
 
 ```
-AdaResearch/
-├── algorithms/         # 52 categories of algorithm visualizations
-├── commons/
-│   ├── artifacts/      # 750+ educational objects (registry)
-│   ├── audio/          # Procedural sound system
-│   ├── grid/           # Component-based map rendering
-│   ├── managers/       # Scene, game, progression managers
-│   └── maps/           # Map data and sequences
-├── core/               # Physics and particle engines
-├── addons/             # godot-xr-tools, custom plugins
-└── shaders/            # Visual effects
+Sequence JSON --> Map JSON --> Artifact Registry --> Scene (.tscn/.gd)
 ```
 
-### Key Systems
+### 3-Layer Grid System
 
-| System | Purpose | Entry Point |
-|--------|---------|-------------|
-| **Grid** | Renders maps from JSON | `commons/grid/GridSystem.gd` |
-| **Artifacts** | Object registry & spawning | `commons/artifacts/registry/` |
-| **Sequences** | Curriculum organization | `commons/maps/sequences/` |
-| **Audio** | Procedural sound | `commons/audio/SoundBankSingleton.gd` |
+Every map is a `map_data.json` file with three layers:
 
-## 🎮 Getting Started
+- **structure**: heights 0-5 defining floors, walls, and voids
+- **utilities**: spawn points, teleporters, ramps, hazards, labels
+- **interactables**: artifacts placed by lookup name with rotation and offset
+
+### Map Narrative Design (5 phases)
+
+1. **Entry** — spawn + context setting
+2. **Teaching** — the main artifact, front and center
+3. **Exploration** — related artifacts to discover
+4. **Reflection** — text panels and darkness
+5. **Exit** — teleporter to the next map
+
+### Each Map Has 4 Documentation Files
+
+- `blurb.md` — poetic hook (what draws you in)
+- `summary.md` — overview (what you'll learn)
+- `technical.md` — code examples and implementation
+- `critical.md` — queer theory critique (the unique part)
+
+## Major Systems
+
+### Catalyst Bracelet
+
+The player's building tool, found in a wireframe pedestal in the lab. Three bracelet stones:
+- **Cube** (blue) — Minecraft-style block placement with cardinal neighbors
+- **Wedge** (orange) — walkable ramp/prism placement
+- **Off** (grey) — deactivates building
+
+Trigger places, grip removes, other hand rotates bracelet to switch modes. Look direction determines placement: 4 compass directions, 2 cells out. In-memory persistence across maps, fresh each game launch.
+
+### Ecology Progression
+
+The world grows as you advance through the curriculum:
+
+| Stage | Sequences | What Appears |
+|-------|-----------|-------------|
+| Sterile | 1-2 | Grey lab, no nature |
+| First flowers | 3-4 | Sparse grass and flowers in biome ring |
+| Forest | 5-8 | Trees, bushes, fungi, Perlin terrain |
+| Living ground | 9-10 | Presence grid, organisms mark terrain |
+| Creatures | 11 | DNA-driven walking entities with L-system trees |
+| Full evolution | 12+ | Self-generating world, breeding, transmutation |
+
+Powered by `EcosystemManager`, `BiomeRingComponent`, `NatureRenderer`, and the full Nature System (CritterDNA, MorphologyRouter, EvolutionSystem, TransmutationManager).
+
+### Death and Hazards
+
+Hazard zones (`h:fire`, `h:death`, `h:electric`) and turrets deal damage. On hit: red VR vignette flash, teleport to spawn, 3-second immunity. Health reaches 0: full death sequence (shake, particles, fade) and game reset.
+
+### Creature System
+
+Unified DNA genome drives all 5 kingdoms (tree, creature, flower, fungus, hybrid). Procedural morphology generates meshes from genes. Creatures have a personality arc: FOE → WARY → NEUTRAL → CURIOUS → FRIEND. Player bonds through observation, feeding, touch, and shared survival. At bond 0.95: transmutation grants kingdom-specific abilities.
+
+### Science Screen
+
+2D visualization display inside VR. Tracks player interaction with point, line, and triangle primitives. Renders real-time coordinate grids, measurements, and formulas. The bridge between web-based 2D thinking tools and 3D VR experience.
+
+## VR Design
+
+### 6-Level Capacity Progression
+
+1. **OBSERVE** — watch phenomena
+2. **TOUCH** — grab objects, feel haptics
+3. **MANIPULATE** — edit vertices, draw traces
+4. **CONSTRUCT** — build shapes, solve puzzles
+5. **CONTROL** — sliders, tune parameters
+6. **EMBODY** — your movement IS the input
+
+### Three Scales
+
+- **INTIMATE** — table-scale, arm's reach
+- **ROOM** — walk around installations
+- **WORLD** — architectural/landscape scale
+
+## Companion Tools
+
+| Tool | Location | Purpose |
+|------|----------|---------|
+| **Ada Encyclopedia** | `ada_encyclopedia/` | Next.js web app: map-builder, voxel-editor, pattern-maker, facade-builder, pokemon-studio, search, blog |
+| **Claude Context Manager** | Separate repo | Session browser, clone, memory, working tree management |
+| **Ada Writer** | Separate repo | Book writing tool |
+
+## CLI Tools
+
+Run from repo root:
+
+| Tool | Command | Purpose |
+|------|---------|---------|
+| Pipeline Scorer | `python tools/sequence_pipeline_scorer.py` | Score all 18 spine sequences through 7 stages |
+| Heat Map | `python tools/heat_map_generator.py` | Priority scoring for what needs work |
+| LOD Query | `python tools/lod_query.py <topic>` | Fractal-depth context lookup |
+| Dashboard | `powershell -File commons/tools/project_dashboard_cli.ps1 -Mode status` | Project status and recommendations |
+| Pathfinder | `python tools/map_pathfinder.py check <MapName> --verbose` | Map reachability validation |
+| Release Gates | `python tools/run_release_gates.py` | Launch-quality checks |
+| Garden Listener | `python tools/garden_listener.py --diagnosis` | Sequence/map/artifact health audit |
+
+## 7-Stage Completion Pipeline
+
+```
+1. Structure     - maps defined in sequence JSON
+2. Documentation - blurb.md + intent.md per map
+3. Artifacts     - every interactable has a scene file
+4. Maps          - map_data.json with 3 layers
+5. Validation    - pathfinder passes
+6. VR Testing    - walked in headset
+7. Polish        - captures fresh, docs updated
+```
+
+HEAD = lowest incomplete stage. Work at the head. Move it forward.
+
+## Getting Started
 
 ### Prerequisites
-- Godot 4.x
+
+- Godot 4.6
 - VR headset (optional — desktop mode available)
+- Python 3.10+ (for CLI tools)
 
 ### Quick Start
 
 1. Clone and open in Godot
 2. Run `commons/scenes/lab.tscn` — the hub environment
-3. Use teleporters to navigate between maps
-4. Grab and interact with artifacts
+3. Pick up the bracelet from the wireframe pedestal
+4. Use teleporters to navigate between maps
+5. Grab and interact with artifacts
 
 ### Desktop Testing
-- `commons/scenes/grid_desktop.tscn` — Test any map
-- `commons/scenes/desktop_map_tester.tscn` — Map browser
 
-### Release Gates (Onboarding)
+- Map Studio: `commons/maps/catalog/MapStudioDesktop3D.tscn` — split-view map editor
+- Grid Desktop: `commons/scenes/grid_desktop.tscn` — test any map
 
-Before opening a PR, run the machine gate checks:
+### Encyclopedia (Web)
 
-```powershell
-python tools/run_release_gates.py --max-grade-c -1 --gate-toggles doc/reports/RELEASE_GATES_TOGGLES.json
+```bash
+cd ada_encyclopedia
+npm install && npm run dev
+# Open http://localhost:3003
 ```
 
-Strict mode (all gates must be ON and passing):
+Map builder, artifact browser, search, flows, blog, and more.
 
-```powershell
-python tools/run_release_gates.py --max-grade-c -1 --gate-toggles doc/reports/RELEASE_GATES_TOGGLES.json --require-all-gates-enabled
+## Architecture
+
+```
+AdaResearch/
+├── algorithms/              # 52 categories of algorithm visualizations
+│   ├── nature_system/       # CritterDNA, morphology, evolution, spawner
+│   └── ...
+├── commons/
+│   ├── artifacts/           # 750+ educational objects (12 registry files)
+│   ├── audio/               # Procedural sound system (70+ parameter files)
+│   ├── grid/                # Component-based map rendering from JSON
+│   ├── hazards/             # Creatures, danger zones, catalyst bracelet
+│   ├── managers/            # Scene, game, progression, ecosystem, death
+│   ├── maps/                # 500+ map directories + sequence definitions
+│   └── scenes/              # Lab hub, VR staging, desktop testers
+├── doc/                     # Architecture, onboarding, guides
+└── tools/                   # CLI tools (Python/PowerShell)
 ```
 
-Gate toggle file used by dashboard + tooling:
-- `doc/reports/RELEASE_GATES_TOGGLES.json`
+### Key Entry Points
 
-## 📚 Documentation
+| System | File | Purpose |
+|--------|------|---------|
+| Grid | `commons/grid/GridSystem.gd` | Renders maps from JSON |
+| Artifacts | `commons/artifacts/registry/*.json` | 12 modular registries |
+| Sequences | `commons/maps/sequences/*.json` | Curriculum definitions |
+| Catalyst | `commons/hazards/becoming_catalyst/` | Bracelet building tool |
+| Ecology | `commons/managers/EcosystemManager.gd` | Progressive nature |
+| Death | `commons/managers/DeathEffect.gd` | Damage/death feedback |
+| Nature | `algorithms/nature_system/` | DNA, morphology, evolution |
+
+## Documentation
 
 | Document | Purpose |
 |----------|---------|
-| [ENTRY.md](ENTRY.md) | **Start here** — Project entry point |
-| [ARCHITECTURE.md](ARCHITECTURE.md) | Technical system reference |
-| [TAXONOMY.md](TAXONOMY.md) | Generative paradigms framework |
-| [CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md](CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md) | Gameplay walkthrough |
-| [commons/audio/SOUND_SYSTEM_GUIDE.md](commons/audio/SOUND_SYSTEM_GUIDE.md) | Audio system details |
-| [commons/scenes/world_map/README.md](commons/scenes/world_map/README.md) | World map modes, VR full-map toggle, hold-to-enter |
-| [doc/LAUNCH_GATES.md](doc/LAUNCH_GATES.md) | Release gate policy, strict mode, and CI behavior |
-| [doc/SKILL_WORKFLOW.md](doc/SKILL_WORKFLOW.md) | Skill-driven PR workflow and evidence checklist |
+| [doc/ENTRY.md](doc/ENTRY.md) | Project overview, QFEP framework |
+| [doc/ARCHITECTURE.md](doc/ARCHITECTURE.md) | Technical system reference |
+| [doc/MAP_BUILDING_GUIDE.md](doc/MAP_BUILDING_GUIDE.md) | How to build maps |
 | [doc/VR_GAMEPLAY_DESIGN.md](doc/VR_GAMEPLAY_DESIGN.md) | VR design philosophy |
-| [doc/QFEP_GAMWELL_MAPPING.md](doc/QFEP_GAMWELL_MAPPING.md) | Theory grounded in art/math history |
-| [XR_TOOLS_CHANGES.md](XR_TOOLS_CHANGES.md) | Local patches to `godot-xr-tools` when addon code is ignored |
+| [doc/ONBOARDING_GUIDE.md](doc/ONBOARDING_GUIDE.md) | Comprehensive onboarding |
+| [doc/MAP_EDITING_PIPELINE.md](doc/MAP_EDITING_PIPELINE.md) | End-to-end map editing flow |
+| [CLAUDE.md](CLAUDE.md) | AI quick reference (auto-loaded by Claude Code) |
 
-## 🔄 Recent Development
+## References
 
-### February 2026
-- ✅ Vector scenes scaled to 1m cube standard
-- ✅ ENTRY.md documentation entry point
-- ✅ Content validator integration
-
-### January 2026
-- ✅ QFEP Laboratory artifacts (sliders, reactor, meters)
-- ✅ Trace & Movement Unlock System
-- ✅ Procedural generation sequence reorganization
-- ✅ Registry cleanup (26 placeholder descriptions fixed)
-- ✅ Architecture documentation
-
-### January 2025
-- ✅ Singleton Sound Bank system
-- ✅ 10 ambient presets with hierarchical configuration
-- ✅ 70+ audio parameter files
-
-## 🧭 Project Status
-
-| Area | Status |
-|------|--------|
-| Grid System | ✅ Production |
-| Artifact Registry | ✅ 750+ objects |
-| Audio System | ✅ Production |
-| VR Integration | ✅ Working |
-| Primitives sequence | ✅ 80% documented |
-| Randomness sequence | 🔄 Maps done, docs needed |
-| Fractals sequence | 🔄 Needs audit |
-| Other sequences | 📋 Planned |
-
-## 🤝 Contributing
-
-The project uses component-based architecture for independent development:
-- Each algorithm category is self-contained
-- Grid system components are modular
-- Artifacts can be added via JSON registry
-- VR features gracefully degrade to desktop
-
-## 📖 References
-
-- Ada Lovelace's Notes on the Analytical Engine (1842)
+- Ada Lovelace, *Notes on the Analytical Engine* (1842)
 - Paul Klee, *Pedagogical Sketchbook* (1953)
-- Karl Friston, Free Energy Principle
-- Lynn Gamwell, *Mathematics and Art* (2015)
+- Karl Friston, *The Free Energy Principle*
+- Lynn Gamwell, *Mathematics and Art: A Cultural History* (2015)
 - Daniel Shiffman, *The Nature of Code*
+- Donna Haraway, *Staying with the Trouble* (2016)
+- Karen Barad, *Meeting the Universe Halfway* (2007)
 
----
+## License
 
-*For module-specific documentation, see README files in each subdirectory.*
+MIT - see [LICENSE](LICENSE)
