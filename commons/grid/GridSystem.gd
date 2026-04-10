@@ -633,15 +633,19 @@ func _handle_audio_start():
 func _handle_biome_ring():
 	var eco = get_node_or_null("/root/EcosystemManager")
 	if not eco:
+		print("GridSystem: No EcosystemManager — no biome ring")
 		return
 	if not eco.has_method("get_vegetation_density"):
+		print("GridSystem: EcosystemManager missing get_vegetation_density")
 		return
 
 	# Auto-advance ecosystem to the current map's sequence so biome matches context
 	_sync_ecosystem_to_current_map(eco)
 
 	var density: float = eco.get_vegetation_density()
+	print("GridSystem: Biome check — map='%s' density=%.2f" % [map_name, density])
 	if density < 0.05:
+		print("GridSystem: Density too low (%.2f < 0.05) — no biome ring" % density)
 		return  # No ring for barren maps
 
 	# Remove old ring if reloading
