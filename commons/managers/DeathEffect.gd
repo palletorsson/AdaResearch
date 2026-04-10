@@ -197,23 +197,40 @@ func cancel() -> void:
 # ═══════════════════════════════════════════════════════════════════════════
 
 func _create_vignette(color: Color) -> void:
+	# Try XR camera first, fall back to any Camera3D
 	if not _xr_camera or not is_instance_valid(_xr_camera):
+		_xr_camera = _find_xr_camera()
+	if not _xr_camera:
+		# Fallback: try any active camera
+		var vp := get_viewport()
+		if vp:
+			_xr_camera = vp.get_camera_3d()
+	if not _xr_camera:
+		print("[DeathEffect] WARNING: No camera found for vignette")
 		return
+
+	# Use a sphere (inside-out) instead of a quad — works reliably in VR
+	# because it surrounds both eyes equally
 	_vignette_quad = MeshInstance3D.new()
 	_vignette_quad.name = "DamageVignette"
-	var quad := QuadMesh.new()
-	quad.size = Vector2(2.0, 2.0)
-	_vignette_quad.mesh = quad
-	_vignette_quad.position = Vector3(0, 0, -0.5)
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.3
+	sphere.height = 0.6
+	sphere.radial_segments = 12
+	sphere.rings = 6
+	_vignette_quad.mesh = sphere
+	# No position offset — centered on camera, player is inside the sphere
+
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = color
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.no_depth_test = true
 	mat.render_priority = 100
-	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mat.cull_mode = BaseMaterial3D.CULL_FRONT  # Render inside faces only
 	_vignette_quad.material_override = mat
 	_xr_camera.add_child(_vignette_quad)
+	print("[DeathEffect] Vignette created on %s" % _xr_camera.name)
 
 
 func _update_vignette_color(color: Color) -> void:
