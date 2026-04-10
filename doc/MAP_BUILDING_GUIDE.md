@@ -25,6 +25,19 @@ GridSystem reads these → creates BoxMesh geometry.
 "an:angle" = set player facing angle
 "sub:scene_name" = sub-scene portal
 "3t:text" = 3D text display
+
+# Transport utilities
+"tc:distance:axis:auto" = transport cube (carries player across voids)
+"rc:angle:axis:pause:y_offset" = rotation cube (wall that rotates/sweeps)
+"sc:max:min:speed:y_offset" = scale cube (grows/shrinks to fill gaps)
+"wp:rotation[:color]" = walkable prism/ramp
+
+# Hazard utilities
+"h:fire" = fire hazard (35 dmg per 0.3s, burns fast)
+"h:death" = instant death (health → 0 immediately)
+"h:electric" = electric shock (periodic pulse damage)
+"h:toxic" = poison zone (lingers after exit)
+"h:vacuum" = suffocation zone
 ```
 
 ### Interactables Layer (artifacts)
@@ -34,6 +47,13 @@ GridSystem reads these → creates BoxMesh geometry.
 "artifact_name:rotation" = with rotation in degrees
 "artifact_name:rotation:y_offset" = with vertical offset
 "artifact_name#variant:rotation:scale" = variant with scale
+
+# Catalyst / building interactables
+"catalyst_pedestal" = wireframe cube with bracelet, player picks up building tools
+"wedge_skill_pickup" = orange wireframe cube with prism, unlocks wedge placer mode
+"pusher_block#axis:x#distance:3#speed:2#pause:1" = translating block that pushes player
+"sweeper_block#speed:0.5#length:4#height:0.9" = rotating beam that sweeps player
+"grower_block#min:0.3#max:3.5#speed:0.3" = scaling block that squeezes player
 ```
 
 ## Map as Narrative Space

@@ -158,6 +158,12 @@ See `doc/MAP_EDITING_PIPELINE.md` for detailed documentation.
 | Legacy registry (deprecated) | `commons/artifacts/grid_artifacts.json.deprecated` |
 | Grid system | `commons/grid/GridSystem.gd` |
 | Utility registry | `commons/grid/UtilityRegistry.gd` |
+| Hazard creatures | `commons/hazards/` — DangerZone, transformation blocks |
+| Catalyst bracelet | `commons/hazards/becoming_catalyst/` — bracelet system |
+| Nature system | `algorithms/nature_system/` — CritterDNA, morphology, evolution, spawner |
+| Death effect | `commons/managers/DeathEffect.gd` — red flash, shake, reload |
+| Ecosystem manager | `commons/managers/EcosystemManager.gd` — ecology progression |
+| Soft stages | `commons/maps/soft_stages.json` — ecology density/kingdoms per sequence |
 
 ## AI Skills
 
@@ -236,3 +242,26 @@ The `/continue` skill reads this to pick the next task.
 - Include `apply_grid_config(config_data: Dictionary)`
 - Register in `commons/artifacts/registry/<category>.json`
 - Commit: `feat: add <token> artifact — description`
+
+## Catalyst Bracelet System
+
+Found on wireframe pedestal (bracelet, not crystal). 3 stones switch modes: cube (voxel block), wedge (walkable prism), off.
+- Cardinal neighbor placement: 4 directions, 2 cells out from player
+- trigger=place, grip=remove, bracelet rotation switches active stone
+- Placed blocks persist in memory across maps within a session; fresh each game launch
+- Source: `commons/hazards/becoming_catalyst/`
+
+## Death System
+
+DeathEffect is an autoload: red flash overlay, time freeze, camera shake, particles, haptic feedback, fade to black, then map reload.
+- Fire hazard: 35 dmg per 0.3s tick. Lasers: 100 dps. `h:death`: instant kill.
+- DangerZone utility codes in map_data.json: `h:fire`, `h:death`, `h:electric`, `h:toxic`, `h:vacuum`
+- Source: `commons/managers/DeathEffect.gd`, `commons/hazards/`
+
+## Ecology Progression
+
+`soft_stages.json` defines creature density, kingdoms, and terrain per sequence stage.
+- BiomeRingComponent spawns foliage and living CritterEntity organisms around maps
+- NatureRenderer handles fog, sky color, and particles. EvolutionSystem + TransmutationManager drive self-generating behavior
+- Progression: seq 1-2 grey/sterile, seq 3 first flowers, seq 11 creatures appear, seq 12+ full evolution
+- Source: `algorithms/nature_system/`, `commons/managers/EcosystemManager.gd`

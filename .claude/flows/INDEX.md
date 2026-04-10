@@ -17,6 +17,8 @@ Thinking paths that survive context death. Search: `python tools/flow_query.py <
 - [~] [Sequence Audit Playbook](sequence-audit.json) — Horizontal: score all sequences. Vertical: deep-dive on worst. Classify artifacts DORMANT→SCATTERED→REACHING→GROWING→LIVING.
 - [+] [Map Editing Pipeline](map-editing-pipeline.json) — DISCOVER (ada.py) → EDIT (web or JSON) → VALIDATE (pathfinder) → CAPTURE → REVIEW → BRIDGE (VR feedback) → ITERATE.
 - [+] [Map Pathfinder Validation](pathfinder-validation.json) — Run pathfinder check. Fails? Common: no spawn, unreachable artifact, teleporter not on void. Fix, re-run.
+- [?] [Build 2D Top-Down Map Editor](map-editor-plugin.json)
+- [?] [Map Studio Desktop](map-studio-desktop.json)
 
 ## Navigation & Context
 - [+] [LOD Context Loading](lod-context-loading.json) — Don't read everything. lod_query.py <topic> at the right depth: project → sequence → map → artifact → function.
@@ -46,6 +48,7 @@ Thinking paths that survive context death. Search: `python tools/flow_query.py <
 - [+] [Session Handoff](session-handoff.json) — Commit → score baseline → save new flows from discoveries → update handover doc → update memory.
 - [+] [Batch Processing with Parallel Agents](batch-parallel-agents.json) — Do one by hand → extract pattern → spawn 4-5 agents with pattern + specific file → verify all succeeded.
 - [~] [Writing Discovers Gaps](coherence-writing-loop.json) — Write docs → discover gap (concept mentioned, no artifact) → build missing artifact → update docs → capture to verify coherence.
+- [?] [grep dev_notes in map_data.json](grep-dev_notes-in-map_data-json.json)
 
 ## Confidence
 - [+] verified — tested across multiple artifacts/sessions

@@ -1,17 +1,43 @@
 # The Becoming Catalyst
 
-The player's evolving VR tool. Not a weapon of destruction but a tool of transformation, becoming, and boundary dissolution. Each Lab sequence unlocks a new expressive mode.
+The player's evolving VR tool. Not a weapon of destruction but a tool of transformation, becoming, and boundary dissolution. A bracelet that lives on the wrist, picked up from a wireframe pedestal in the lab.
+
+## Pickup
+
+- Player grabs the bracelet from a wireframe pedestal
+- The catalyst absorbs into the hand; the bracelet spawns on the wrist
+- The other hand rotates the bracelet to switch modes
 
 ## Controls
 
-- **Grip the crystal**: It shrinks into your hand and is absorbed — the hand permanently gains its power
-- **Trigger**: Fire from the hand (behavior depends on current mode)
-- **Thumbstick left/right**: Switch between unlocked modes
-- The crystal is consumed on pickup. The hand is free to grab other things while keeping the ability.
+- **Trigger**: Place (behavior depends on current mode)
+- **Grip**: Remove last placed object
+- **Bracelet rotation** (other hand): Switch between unlocked modes
 
-## Modes
+## Modes (Current)
 
-Each mode corresponds to a curriculum sequence. Completing a sequence unlocks its mode.
+3 modes available at start:
+
+| Mode | Description |
+|------|-------------|
+| `voxel_editor` | Cube placement — solid blocks on the grid |
+| `wedge_placer` | Walkable prism — ramps and wedge geometry |
+| `off` | Bracelet inactive, no placement |
+
+## Placement
+
+- **Cardinal neighbor placement**: Head direction picks one of 4 compass directions, 2 cells out from current position
+- Ghost preview shows where the block will land
+- Trigger to confirm placement, grip to remove
+
+## Persistence
+
+- **In-memory**: Placed objects survive map transitions within a session
+- **Fresh each launch**: No disk save files — every game start is a clean slate
+
+## Mode-per-Sequence Unlock Architecture (Planned)
+
+Each mode will correspond to a curriculum sequence. Completing a sequence unlocks its mode.
 
 | Mode | Sequence | Description |
 |------|----------|-------------|
@@ -66,9 +92,9 @@ static func create_projectile(pos: Vector3, dir: Vector3) -> CatalystProjectile:
 - `_on_hit(body)` — What happens on collision
 - `_expire()` — What happens when lifetime runs out
 
-## Visual Evolution
+## Visual Evolution (Planned)
 
-The crystal's appearance evolves as modes unlock (managed by `catalyst_visual.gd`):
+The bracelet's appearance will evolve as modes unlock (managed by `catalyst_visual.gd`):
 - Tier 0: Simple faceted sphere
 - Tier 1+: Elongated, asymmetric
 - Tier 2+: Rainbow rim + aura particles
@@ -86,12 +112,9 @@ Supports `apply_grid_config()`:
 - `"start_mode": "forces"` — Unlock a specific mode
 - `"unlock_to": 4` — Unlock all modes up to order 4
 
-## Save/Load
-
-Unlocked modes persist to `user://catalyst_modes.save` (JSON).
-
 ## Future
 
+- **Mode-per-sequence unlocks** will activate as the progression system matures
 - **Forces mode** will integrate gravity gun mechanics (attract, capture, launch objects)
 - **Algo gun** (Grid Agent capture/direction) will fold into the Catalyst
 - Continuous mode handler pattern for non-projectile modes
