@@ -20,7 +20,9 @@ signal hit_target(target: Node3D, position: Vector3)
 @export var target_player: bool = true
 @export var target_balls: bool = true
 @export var use_laser_damage: bool = true  # Laser deals damage instead of bullets
-@export var laser_damage_per_second: float = 100.0  # Damage when laser is on target
+@export var laser_damage_per_second: float = 20.0   # Damage per hit on player
+@export var hit_cooldown: float = 1.5                # Seconds between damage ticks on player
+@export var require_line_of_sight: bool = true       # Can't shoot through walls
 
 @export_category("Appearance")
 @export var turret_color: Color = Color(0.5, 0.5, 0.55)
@@ -373,8 +375,19 @@ func _find_target():
 		if player:
 			var dist = global_position.distance_to(player.global_position)
 			if dist < detection_range and dist < best_dist:
-				best_dist = dist
-				best_target = player
+				# Line-of-sight check — can't target through walls
+				if require_line_of_sight:
+					var space := get_world_3d().direct_space_state
+					if space:
+						var query := PhysicsRayQueryParameters3D.create(global_position, player.global_position)
+						query.exclude = []  # Don't exclude anything
+						query.collision_mask = 1  # Layer 1 = static geometry (walls/floor)
+						var result := space.intersect_ray(query)
+						if not result.is_empty() and result.collider != player:
+							player = null  # Wall blocks line of sight
+				if player:
+					best_dist = dist
+					best_target = player
 
 	# Find balls
 	if target_balls:
@@ -547,6 +560,7 @@ func _update_shooting(delta: float):
 			shots_in_burst = 0
 
 var _damage_debug_timer: float = 0.0
+var _player_hit_cooldown: float = 0.0
 
 # Signal for external listeners
 signal laser_hit(target: Node3D, damage: float, position: Vector3)
@@ -563,12 +577,15 @@ func _apply_laser_damage(delta: float):
 	# Emit signal for any listeners
 	emit_signal("laser_hit", current_target, damage, target_pos)
 
-	# Route damage: player goes through GameManager, objects use metadata
+	# Route damage: player goes through GameManager with cooldown
 	var is_player_target: bool = _is_player_node(current_target)
 	if is_player_target:
-		var gm = get_node_or_null("/root/GameManager")
-		if gm and gm.has_method("apply_health_damage"):
-			gm.apply_health_damage(damage)
+		_player_hit_cooldown -= delta
+		if _player_hit_cooldown <= 0.0:
+			var gm = get_node_or_null("/root/GameManager")
+			if gm and gm.has_method("apply_health_damage"):
+				gm.apply_health_damage(laser_damage_per_second)
+				_player_hit_cooldown = hit_cooldown
 		return  # Don't apply metadata health or burn effects to player
 
 	# Try to call take_damage() on the target if it has that method

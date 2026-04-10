@@ -16,6 +16,11 @@ extends Node3D
 @export var show_hit_dot: bool = true
 @export var hit_dot_size: float = 0.02
 
+@export_category("Damage Settings")
+@export var deals_damage: bool = false           ## Enable to make laser hurt the player
+@export var damage_amount: float = 20.0          ## Damage per hit
+@export var damage_cooldown: float = 1.5         ## Seconds between damage ticks
+
 @export_category("Display Settings")
 @export var text_color: Color = Color(0.2, 1.0, 0.3, 1.0)
 @export var show_target_name: bool = true
@@ -33,6 +38,7 @@ var scan_timer: float = 0.0
 var last_distance: float = 0.0
 var last_target: String = ""
 var is_measuring: bool = false
+var _damage_timer: float = 0.0
 
 func _ready():
 	setup_raycast()
@@ -150,6 +156,8 @@ func setup_labels():
 
 func _process(delta):
 	scan_timer += delta
+	if _damage_timer > 0.0:
+		_damage_timer -= delta
 
 	if scan_timer >= (1.0 / scan_frequency):
 		perform_measurement()
@@ -173,6 +181,13 @@ func perform_measurement():
 		update_laser_hit(distance)
 		update_hit_dot(hit_point)
 		update_display(distance, last_target, true)
+
+		# Damage player if enabled and laser hits them
+		if deals_damage and _damage_timer <= 0.0 and _is_player_body(hit_object):
+			var gm = get_node_or_null("/root/GameManager")
+			if gm and gm.has_method("apply_health_damage"):
+				gm.apply_health_damage(damage_amount)
+				_damage_timer = damage_cooldown
 	else:
 		is_measuring = false
 		last_distance = 0.0
@@ -285,3 +300,17 @@ func set_max_range(new_range: float):
 	max_range = new_range
 	if raycast:
 		raycast.target_position = Vector3(0, 0, -max_range)
+
+
+func _is_player_body(obj: Node) -> bool:
+	if not obj:
+		return false
+	if obj.is_in_group("player") or obj.is_in_group("player_body"):
+		return true
+	# Check if parent chain contains XROrigin or PlayerBody
+	var node := obj
+	while node:
+		if node.name == "PlayerBody" or node is XROrigin3D:
+			return true
+		node = node.get_parent()
+	return false
