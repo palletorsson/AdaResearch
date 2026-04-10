@@ -680,6 +680,8 @@ func _on_3d_input(ev: InputEvent) -> void:
 		_update_cam()
 
 func _update_cam() -> void:
+	if not cam or not is_instance_valid(cam):
+		return
 	var o := Vector3(sin(orbit_yaw) * cos(orbit_pitch), sin(orbit_pitch), cos(orbit_yaw) * cos(orbit_pitch)) * orbit_dist
 	cam.position = orbit_focus + o
 	cam.look_at(orbit_focus, Vector3.UP)
