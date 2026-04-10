@@ -679,16 +679,20 @@ func _sync_ecosystem_to_current_map(eco) -> void:
 			if sf:
 				var sj := JSON.new()
 				if sj.parse(sf.get_as_text()) == OK and sj.data is Dictionary:
-					var seqs: Dictionary = sj.data.get("sequences", {})
-					for seq_name in seqs:
-						var seq_data: Dictionary = seqs[seq_name] if seqs[seq_name] is Dictionary else {}
-						var maps: Array = seq_data.get("maps", [])
-						for m in maps:
-							var mn: String = str(m.get("name", m)) if m is Dictionary else str(m)
-							if mn == map_name:
-								eco.force_advance_to(seq_name)
-								print("GridSystem: Ecosystem synced to '%s' for map '%s'" % [seq_name, map_name])
-								return
+					var seqs_raw = sj.data.get("sequences", {})
+					if seqs_raw is Dictionary:
+						for seq_name in seqs_raw:
+							var seq_data = seqs_raw[seq_name]
+							if not seq_data is Dictionary:
+								continue
+							var maps: Array = seq_data.get("maps", [])
+							for m in maps:
+								var mn: String = str(m.get("name", m)) if m is Dictionary else str(m)
+								if mn == map_name:
+									eco.force_advance_to(str(seq_name))
+									print("GridSystem: Ecosystem synced to '%s' for map '%s'" % [seq_name, map_name])
+									sf.close()
+									return
 				sf.close()
 		fname = seq_dir.get_next()
 
