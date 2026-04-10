@@ -420,11 +420,18 @@ func _update_targeting(delta: float) -> void:
 func _apply_damage(delta: float) -> void:
 	if current_target == null:
 		return
-	
+
+	# Player damage routes through GameManager
+	if current_target is XRCamera3D or current_target.is_in_group("player"):
+		var gm = get_node_or_null("/root/GameManager")
+		if gm and gm.has_method("apply_health_damage"):
+			gm.apply_health_damage(damage_per_second * delta)
+		return
+
 	if not current_target.has_meta("health"):
 		current_target.set_meta("health", 100.0)
 		current_target.set_meta("max_health", 100.0)
-	
+
 	var health = current_target.get_meta("health")
 	health -= damage_per_second * delta
 	current_target.set_meta("health", health)

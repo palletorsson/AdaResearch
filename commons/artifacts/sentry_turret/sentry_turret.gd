@@ -425,6 +425,19 @@ func _find_player() -> Node3D:
 
 	return null
 
+## Check if a target node is the player (XR camera, player group, or main camera).
+func _is_player_node(target: Node3D) -> bool:
+	if not is_instance_valid(target):
+		return false
+	if target is XRCamera3D:
+		return true
+	if target.is_in_group("player"):
+		return true
+	var xr_origin = get_tree().get_first_node_in_group("xr_origin")
+	if xr_origin and target.get_parent() == xr_origin:
+		return true
+	return false
+
 ## Collect all visible balls from droppers, spawners, and ball group
 func _find_balls() -> Array:
 	var balls: Array = []
@@ -550,18 +563,24 @@ func _apply_laser_damage(delta: float):
 	# Emit signal for any listeners
 	emit_signal("laser_hit", current_target, damage, target_pos)
 
+	# Route damage: player goes through GameManager, objects use metadata
+	var is_player_target: bool = _is_player_node(current_target)
+	if is_player_target:
+		var gm = get_node_or_null("/root/GameManager")
+		if gm and gm.has_method("apply_health_damage"):
+			gm.apply_health_damage(damage)
+		return  # Don't apply metadata health or burn effects to player
+
 	# Try to call take_damage() on the target if it has that method
 	if current_target.has_method("take_damage"):
 		current_target.take_damage(damage)
 	else:
-		# Also check RigidBody child
 		var rb = current_target.get_node_or_null("RigidBody3D")
 		if rb and rb.has_method("take_damage"):
 			rb.take_damage(damage)
 
-	# Also manage health via metadata (fallback)
+	# Manage health via metadata (fallback for non-player targets)
 	if not current_target.has_meta("health"):
-		print("[Turret] Setting initial health on %s" % current_target.name)
 		current_target.set_meta("health", 80.0)
 		current_target.set_meta("max_health", 80.0)
 
