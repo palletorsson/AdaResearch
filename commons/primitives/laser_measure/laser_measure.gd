@@ -302,6 +302,15 @@ func set_max_range(new_range: float):
 		raycast.target_position = Vector3(0, 0, -max_range)
 
 
+func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("damage"):
+		deals_damage = str(config_data["damage"]).to_lower() == "true"
+	if config_data.has("damage_amount"):
+		damage_amount = float(config_data["damage_amount"])
+	if config_data.has("cooldown"):
+		damage_cooldown = float(config_data["cooldown"])
+
+
 func _is_player_body(obj: Node) -> bool:
 	if not obj:
 		return false
