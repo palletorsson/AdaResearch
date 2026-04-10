@@ -57,6 +57,8 @@ var _ground_mesh: MeshInstance3D = null
 var _foliage_instances: Array[MultiMeshInstance3D] = []
 var _chunk_manager: ChunkManager = null
 var _rng: RandomNumberGenerator = null
+var _grid_w: float = 0.0
+var _grid_d: float = 0.0
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -73,8 +75,10 @@ func generate(grid_dims: Vector3i, cube_size: float, terrain_mode: String,
 	_rng = RandomNumberGenerator.new()
 	_rng.seed = hash(str(grid_dims))
 
-	var grid_w: float = float(grid_dims.x) * cube_size
-	var grid_d: float = float(grid_dims.z) * cube_size
+	_grid_w = float(grid_dims.x) * cube_size
+	_grid_d = float(grid_dims.z) * cube_size
+	var grid_w := _grid_w
+	var grid_d := _grid_d
 	var grid_center := Vector3(grid_w * 0.5, 0, grid_d * 0.5)
 
 	# Scale ring width by density (early = thin, late = wide)
@@ -424,16 +428,23 @@ func _spawn_dna_organisms(grid_center: Vector3, kingdoms: Array, density: float)
 	_chunk_manager = ChunkManager.new()
 	_chunk_manager.name = "BiomeChunkManager"
 
-	# Configure for biome ring — population scales with density
-	# Early maps (density 0.1): 4 organisms. Late maps (density 1.0): 40.
+	# Population scales: early maps few, late maps many
+	var pop := clampi(int(density * 40), 4, 40)
+
+	# Spawn circle covers the entire ring zone around the grid.
+	# center = grid center, radius = half-grid diagonal + ring width
+	# This ensures organisms fill the ring, not just a circle.
+	var half_diag := Vector2(_grid_w * 0.5, _grid_d * 0.5).length() if _grid_w > 0 else 10.0
+	var total_radius := half_diag + ring_width
+
 	_chunk_manager.chunk_size = 4.0
-	_chunk_manager.max_population = clampi(int(density * 40), 4, 40)
-	_chunk_manager.spawn_radius = ring_width * 0.8
+	_chunk_manager.max_population = pop
+	_chunk_manager.spawn_radius = total_radius
 	_chunk_manager.center_offset = grid_center
 	_chunk_manager.lod_update_interval = 0.5
 	_chunk_manager.creature_throttle_distance = 8.0
 
-	# Override kingdoms/density so ChunkManager uses biome context
+	# Override kingdoms/density
 	var kingdom_strings: Array[String] = []
 	for k in kingdoms:
 		kingdom_strings.append(str(k))
@@ -443,36 +454,18 @@ func _spawn_dna_organisms(grid_center: Vector3, kingdoms: Array, density: float)
 	# Deterministic seeding
 	_chunk_manager.rng_seed = _rng.seed
 
+	# Store grid dimensions for inner-zone rejection
+	_chunk_manager.set_meta("grid_half_w", _grid_w * 0.5)
+	_chunk_manager.set_meta("grid_half_d", _grid_d * 0.5)
+	_chunk_manager.set_meta("grid_center", grid_center)
+
 	add_child(_chunk_manager)
 
-	# Connect to ChunkManager's DNA generation to apply curriculum scaling
-	# ChunkManager creates CritterDNA.random_kingdom() — we post-process via signal
-	if _chunk_manager.has_signal("organism_dna_created"):
-		_chunk_manager.organism_dna_created.connect(_scale_dna_by_curriculum.bind(density))
-
 	print("[BiomeRing] ChunkManager: pop=%d radius=%.1f kingdoms=%s density=%.2f" % [
-		_chunk_manager.max_population, _chunk_manager.spawn_radius, str(kingdom_strings), density
+		pop, total_radius, str(kingdom_strings), density
 	])
 
 
-## Scale DNA complexity by curriculum progression.
-## Early maps (low density) → simple organisms. Late maps → full complexity.
-## This is applied AFTER random_kingdom generates the base DNA.
-static func scale_dna_for_density(dna: CritterDNA, density: float) -> void:
-	# Complexity genes scale with density: 0.1 → minimal, 1.0 → full range
-	dna.segments = lerpf(2.0, dna.segments, density)
-	dna.symmetry = lerpf(1.0, dna.symmetry, density)
-	dna.branch_angle = lerpf(25.0, dna.branch_angle, density)
-	dna.branch_decay = lerpf(0.7, dna.branch_decay, density)
-	dna.leaf_density = lerpf(0.3, dna.leaf_density, density)
-	dna.iridescence = lerpf(0.0, dna.iridescence, density)
-	dna.pattern_scale = lerpf(0.5, dna.pattern_scale, density)
-	# Scale stays in range but biases smaller for early maps
-	dna.scale = lerpf(0.5, dna.scale, clampf(density * 1.5, 0.0, 1.0))
-
-
-func _scale_dna_by_curriculum(dna: CritterDNA, density: float) -> void:
-	scale_dna_for_density(dna, density)
 
 
 func _get_foliage_color(flora_type: String) -> Color:

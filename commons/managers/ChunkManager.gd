@@ -421,6 +421,8 @@ func _rebuild_population() -> void:
 			# Queue individual spawn jobs (cheap — just DNA + position, no mesh yet)
 			for _i in range(count):
 				var dna := CritterDNA.random_kingdom(kid, rng.randi())
+				# Scale DNA complexity by density — early maps get simpler organisms
+				_scale_dna_complexity(dna, density)
 				var offset_x: float = rng.randf_range(-half_chunk, half_chunk)
 				var offset_z: float = rng.randf_range(-half_chunk, half_chunk)
 				var pos := Vector3(
@@ -432,6 +434,13 @@ func _rebuild_population() -> void:
 				var dist_xz := Vector2(pos.x - _spawn_center.x, pos.z - _spawn_center.z).length()
 				if dist_xz > spawn_radius:
 					continue
+				# Reject inside grid area (organisms should be in the ring, not on the grid)
+				if has_meta("grid_half_w") and has_meta("grid_center"):
+					var gc: Vector3 = get_meta("grid_center")
+					var hw: float = get_meta("grid_half_w")
+					var hd: float = get_meta("grid_half_d")
+					if absf(pos.x - gc.x) < hw and absf(pos.z - gc.z) < hd:
+						continue
 
 				_spawn_queue.append({
 					"chunk_coord": coord,
@@ -451,6 +460,19 @@ func _rebuild_population() -> void:
 	print("ChunkManager: Queued %d organisms across %d chunks (density=%.2f, kingdoms=%s)" % [
 		queued_total, _chunks.size(), density, str(kingdoms)
 	])
+
+
+## Scale DNA complexity by curriculum density.
+## Low density (early sequences) → simple organisms. High density → full complexity.
+func _scale_dna_complexity(dna: CritterDNA, density: float) -> void:
+	# Lerp from simple (few segments, small) to complex (many segments, large)
+	dna.segments = lerpf(2.0, dna.segments, density)
+	dna.symmetry = lerpf(1.0, dna.symmetry, density)
+	dna.branch_angle = lerpf(25.0, dna.branch_angle, density)
+	dna.branch_decay = lerpf(0.7, dna.branch_decay, density)
+	dna.leaf_density = lerpf(0.3, dna.leaf_density, density)
+	dna.iridescence = lerpf(0.0, dna.iridescence, density)
+	dna.scale = lerpf(0.5, dna.scale, clampf(density * 1.5, 0.0, 1.0))
 
 
 ## Process pending spawn jobs (budget-limited per frame). Returns builds done.
