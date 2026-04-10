@@ -38,6 +38,7 @@ signal death_effect_complete()
 
 func _ready() -> void:
 	_rng.randomize()
+	_last_real_time = Time.get_ticks_msec()
 	# Clean up on scene changes (autoload survives scene reloads)
 	get_tree().node_added.connect(_on_node_added)
 
@@ -58,12 +59,23 @@ func _on_node_added(node: Node) -> void:
 				child.queue_free()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
+	# Use unscaled time so time_scale freeze doesn't stall the effect
+	var real_delta := _get_real_delta()
 	if _immunity_timer > 0.0:
-		_immunity_timer -= delta
+		_immunity_timer -= real_delta
 	if not _playing:
 		return
-	_timer += delta
+	_timer += real_delta
+
+
+## Real (unscaled) delta — immune to Engine.time_scale changes.
+var _last_real_time: int = 0
+func _get_real_delta() -> float:
+	var now := Time.get_ticks_msec()
+	var dt := float(now - _last_real_time) / 1000.0
+	_last_real_time = now
+	return clampf(dt, 0.0, 0.1)  # Cap to avoid spikes
 
 	if _is_death:
 		_process_death(delta)
@@ -165,8 +177,11 @@ func _find_spawn_position() -> Vector3:
 # DEATH — Full sequence when health reaches 0
 # ═══════════════════════════════════════════════════════════════════════════
 
-## Full death: flash, shake, particles, fade, map reload.
+## Full death: flash, shake, particles, fade, death scene.
 func play(death_position: Vector3) -> void:
+	# Force-stop any hurt in progress — death overrides everything
+	if _playing and not _is_death:
+		_cleanup()
 	if _playing:
 		return
 	_playing = true
