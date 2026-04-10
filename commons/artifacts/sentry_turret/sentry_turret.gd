@@ -570,7 +570,7 @@ func _apply_laser_damage(delta: float):
 		print("[Turret] _apply_laser_damage: No valid target!")
 		return
 
-	var damage = laser_damage_per_second * delta
+	var damage = laser_damage_per_hit * delta
 	var target_pos = _get_target_position(current_target)
 
 	# Emit signal for any listeners
@@ -956,8 +956,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		reload_time = float(config_data["reload_time"])
 	if config_data.has("burst_size"):
 		burst_size = int(config_data["burst_size"])
-	if config_data.has("laser_damage_per_second"):
-		laser_damage_per_second = float(config_data["laser_damage_per_second"])
+	if config_data.has("laser_damage_per_hit"):
+		laser_damage_per_hit = float(config_data["laser_damage_per_hit"])
 	if config_data.has("use_laser_damage"):
 		use_laser_damage = bool(config_data["use_laser_damage"])
 	if config_data.has("target"):
