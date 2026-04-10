@@ -656,7 +656,8 @@ func _disable_grid_cams() -> void:
 	if not _grid_system or not is_instance_valid(_grid_system): return
 	_disable_cams(_grid_system)
 	# Re-enable our preview camera
-	cam.current = true
+	if cam and is_instance_valid(cam):
+		cam.current = true
 
 func _disable_cams(node: Node) -> void:
 	if node is Camera3D:
