@@ -289,8 +289,39 @@ func set_health(new_health: float) -> void:
 	if player_health < previous_health:
 		var damage := previous_health - player_health
 		emit_signal("player_damaged", damage, player_health)
+		_play_damage_beep()
 		if player_health <= 0.0 and previous_health > 0.0:
 			_handle_player_death()
+
+
+## EKG-style beep on health loss — short sine pulse.
+var _beep_player: AudioStreamPlayer = null
+func _play_damage_beep() -> void:
+	if not _beep_player:
+		_beep_player = AudioStreamPlayer.new()
+		_beep_player.name = "DamageBeep"
+		_beep_player.volume_db = -8.0
+		_beep_player.bus = "Master"
+		add_child(_beep_player)
+		# Generate EKG beep: short 880Hz sine pulse
+		var sample_rate: int = 22050
+		var duration: float = 0.12
+		var samples: int = int(sample_rate * duration)
+		var data := PackedByteArray()
+		data.resize(samples * 2)
+		for i in samples:
+			var t: float = float(i) / float(sample_rate)
+			var env: float = sin(t / duration * PI)  # Envelope: rise and fall
+			var wave: float = sin(t * TAU * 880.0) * env * 0.6
+			var s16: int = clampi(int(wave * 16000.0), -32768, 32767)
+			data[i * 2] = s16 & 0xFF
+			data[i * 2 + 1] = (s16 >> 8) & 0xFF
+		var stream := AudioStreamWAV.new()
+		stream.format = AudioStreamWAV.FORMAT_16_BITS
+		stream.mix_rate = sample_rate
+		stream.data = data
+		_beep_player.stream = stream
+	_beep_player.play()
 
 func apply_health_damage(amount: float) -> void:
 	if amount <= 0.0:

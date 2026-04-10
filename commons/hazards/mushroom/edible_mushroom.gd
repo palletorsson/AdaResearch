@@ -117,12 +117,17 @@ func _eat() -> void:
 	if has_node("MushroomCollision"):
 		$MushroomCollision.disabled = true
 
+	# Heal 5% health
+	var gm = get_node_or_null("/root/GameManager")
+	if gm and gm.has_method("heal_player"):
+		gm.heal_player(5.0)
+
 	# Find or create the effect manager
 	var effect: MushroomEffect = _find_or_create_effect()
 	if effect:
 		effect.trigger_with_shader(effect_shader_path, effect_duration)
 
-	print("[EdibleMushroom] Eaten! Triggering effect: %s (%.0fs)" % [
+	print("[EdibleMushroom] Eaten! +5 health, effect: %s (%.0fs)" % [
 		effect_shader_path.get_file(), effect_duration])
 
 func _find_or_create_effect() -> MushroomEffect:
