@@ -129,16 +129,7 @@ func _setup_visuals() -> void:
 		zone_mesh.position = collision_shape.position
 		add_child(zone_mesh)
 	
-	# Warning label
-	warning_label = Label3D.new()
-	warning_label.name = "WarningLabel"
-	warning_label.text = "⚠ " + config.description.to_upper()
-	warning_label.font_size = 48
-	warning_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	warning_label.no_depth_test = true
-	warning_label.modulate = config.emission_color
-	warning_label.position.y = 1.5
-	add_child(warning_label)
+	# No warning label — the fire speaks for itself
 
 func _setup_audio() -> void:
 	ambient_audio = AudioStreamPlayer3D.new()
