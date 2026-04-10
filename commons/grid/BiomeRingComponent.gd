@@ -112,7 +112,7 @@ func _build_ring_ground(grid_w: float, grid_d: float, grid_center: Vector3,
 	_ground_mesh.mesh = plane
 
 	# Position: centered on grid, slightly below grid floor
-	_ground_mesh.position = grid_center + Vector3(0, -0.05, 0)
+	_ground_mesh.position = grid_center + Vector3(0, -0.5, 0)
 
 	# Material
 	if terrain_mode in ["growth", "self_generating"]:
@@ -150,7 +150,7 @@ func _build_ring_ground(grid_w: float, grid_d: float, grid_center: Vector3,
 	col_shape.size = Vector3(total_w, 0.1, total_d)
 	col.shape = col_shape
 	body.add_child(col)
-	body.position = grid_center + Vector3(0, -0.1, 0)
+	body.position = grid_center + Vector3(0, -0.55, 0)
 	add_child(body)
 
 
