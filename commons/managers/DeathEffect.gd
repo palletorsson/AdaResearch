@@ -74,9 +74,11 @@ func _process_hurt(_delta: float) -> void:
 		var alpha := 0.6 * (1.0 - t)  # Fade out
 		_update_vignette_color(Color(0.7, 0.0, 0.0, alpha))
 	else:
-		# Teleport to spawn and finish
-		_teleport_to_spawn()
+		# Reset the scene (reload map, keep health)
 		_cleanup()
+		var tree := get_tree()
+		if tree:
+			tree.reload_current_scene()
 		hurt_effect_complete.emit()
 
 

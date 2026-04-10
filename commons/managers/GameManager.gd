@@ -295,11 +295,13 @@ func set_health(new_health: float) -> void:
 func apply_health_damage(amount: float) -> void:
 	if amount <= 0.0:
 		return
-	# On any damage: red flash + teleport to spawn (hurt, not death)
-	var death_fx = get_node_or_null("/root/DeathEffect")
-	if death_fx and death_fx.has_method("hurt") and not death_fx._playing:
-		death_fx.hurt(_get_player_death_position())
 	set_health(player_health - amount)
+	# Health > 0: red flash + reset scene (try again)
+	# Health <= 0: handled by _handle_player_death (full death + game reset)
+	if player_health > 0.0:
+		var death_fx = get_node_or_null("/root/DeathEffect")
+		if death_fx and death_fx.has_method("hurt") and not death_fx._playing:
+			death_fx.hurt(_get_player_death_position())
 
 func heal_player(amount: float) -> void:
 	if amount <= 0.0:
@@ -350,11 +352,9 @@ func _handle_player_death() -> void:
 
 func _on_death_effect_done() -> void:
 	_death_sequence_running = false
-	# Full map reload — reset everything, start from spawn
-	var tree = get_tree()
-	if tree:
-		tree.reload_current_scene()
-		reset_level_state()
+	# Health = 0: full game reset (back to lab/main menu)
+	reset_level_state()  # Restore health to full
+	_reload_scene()      # Uses checkpoint or scene reload
 
 func _run_death_sequence(death_position: Vector3) -> void:
 	var tree: SceneTree = get_tree()

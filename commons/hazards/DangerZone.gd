@@ -18,9 +18,9 @@ enum Type {
 @export var damage_per_tick: float = 10.0
 @export var tick_interval: float = 0.5
 
-# Fire burns fast — override damage when type is FIRE
-const FIRE_DAMAGE_PER_TICK := 35.0
-const FIRE_TICK_INTERVAL := 0.3
+# Fire: moderate damage with cooldown so player can escape
+const FIRE_DAMAGE_PER_TICK := 10.0
+const FIRE_TICK_INTERVAL := 2.0
 @export var instant_kill: bool = false  ## Dumb ways to die
 
 # Type-specific configuration
