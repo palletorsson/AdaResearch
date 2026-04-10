@@ -15,7 +15,7 @@ signal hit_target(target: Node3D, position: Vector3)
 @export var detection_range: float = 15.0
 @export var fire_rate: float = 2.0  # shots per second
 @export var bullet_speed: float = 20.0
-@export var reload_time: float = 3.0  # cooldown between bursts (visible pause)
+@export var reload_time: float = 10.0  # long cooldown between bursts
 @export var burst_size: int = 3  # shots before reload
 @export var target_player: bool = true
 @export var target_balls: bool = true

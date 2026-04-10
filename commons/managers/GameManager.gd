@@ -355,9 +355,13 @@ func _handle_player_death() -> void:
 
 func _on_death_effect_done() -> void:
 	_death_sequence_running = false
-	# Health = 0: full game reset (back to lab/main menu)
 	reset_level_state()  # Restore health to full
-	_reload_scene()      # Uses checkpoint or scene reload
+	# Go to death scene (cross on hill, "You Died", continue → lab)
+	var death_scene_path := "res://commons/scenes/death_scene.tscn"
+	if ResourceLoader.exists(death_scene_path):
+		get_tree().change_scene_to_file(death_scene_path)
+	else:
+		_reload_scene()
 
 func _run_death_sequence(death_position: Vector3) -> void:
 	var tree: SceneTree = get_tree()
