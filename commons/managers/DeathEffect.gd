@@ -53,9 +53,9 @@ func _on_node_added(node: Node) -> void:
 		_vignette_quad = null
 		_particles = null
 		_xr_camera = null
-		# Remove any orphaned vignettes on this camera
+		# Remove any orphaned vignettes/quads on this camera
 		for child in node.get_children():
-			if child.name == "DamageVignette":
+			if child.name in ["DamageVignette", "MushroomEffectQuad"]:
 				child.queue_free()
 
 
@@ -131,6 +131,12 @@ func _process_hurt(_delta: float) -> void:
 		_teleport_to_spawn()
 		_immunity_timer = HURT_IMMUNITY_DURATION
 		_playing = false
+		# Clean up the damage flash effect so no black quad lingers
+		var scene_root := get_tree().current_scene
+		if scene_root:
+			var fx := scene_root.get_node_or_null("DamageFlashEffect")
+			if fx:
+				fx.queue_free()
 		hurt_effect_complete.emit()
 
 
