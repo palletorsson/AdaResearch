@@ -11,8 +11,8 @@
 extends Node
 
 # Timing
-const HURT_FLASH_DURATION := 0.4      # Red flash on damage
-const HURT_TELEPORT_DELAY := 0.3      # Teleport after brief flash
+const HURT_FLASH_DURATION := 0.5      # Red flash on damage
+const HURT_IMMUNITY_DURATION := 3.0   # Seconds of immunity after being hurt
 const DEATH_FLASH_DURATION := 0.15
 const DEATH_SHAKE_DURATION := 0.4
 const DEATH_SHAKE_INTENSITY := 0.08
@@ -27,6 +27,7 @@ var _death_pos: Vector3 = Vector3.ZERO
 var _vignette_quad: MeshInstance3D = null
 var _shader_mat: ShaderMaterial = null
 var _particles: GPUParticles3D = null
+var _immunity_timer: float = 0.0  # Damage immunity after hurt
 var _original_camera_pos: Vector3 = Vector3.ZERO
 var _xr_camera: XRCamera3D = null
 var _rng := RandomNumberGenerator.new()
@@ -58,6 +59,8 @@ func _on_node_added(node: Node) -> void:
 
 
 func _process(delta: float) -> void:
+	if _immunity_timer > 0.0:
+		_immunity_timer -= delta
 	if not _playing:
 		return
 	_timer += delta
@@ -72,9 +75,13 @@ func _process(delta: float) -> void:
 # HURT — Red flash + teleport to spawn (player survives)
 # ═══════════════════════════════════════════════════════════════════════════
 
+## Check if player is immune (recently hurt).
+func is_immune() -> bool:
+	return _immunity_timer > 0.0
+
 ## Flash red and teleport player back to spawn. Health is NOT restored.
 func hurt(damage_pos: Vector3) -> void:
-	if _playing:
+	if _playing or _immunity_timer > 0.0:
 		return
 	_playing = true
 	_is_death = false
@@ -96,11 +103,10 @@ func _process_hurt(_delta: float) -> void:
 		else:
 			_update_vignette_color(Color(0.7, 0.0, 0.0, intensity))
 	else:
-		# Reset the scene (reload map, keep health)
+		# Teleport to spawn (no scene reload — just reposition)
+		_teleport_to_spawn()
+		_immunity_timer = HURT_IMMUNITY_DURATION
 		_cleanup()
-		var tree := get_tree()
-		if tree:
-			tree.reload_current_scene()
 		hurt_effect_complete.emit()
 
 

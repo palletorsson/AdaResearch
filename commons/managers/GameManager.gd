@@ -295,12 +295,15 @@ func set_health(new_health: float) -> void:
 func apply_health_damage(amount: float) -> void:
 	if amount <= 0.0:
 		return
+	# Skip damage if player is immune (recently hurt)
+	var death_fx = get_node_or_null("/root/DeathEffect")
+	if death_fx and death_fx.has_method("is_immune") and death_fx.is_immune():
+		return
 	set_health(player_health - amount)
-	# Health > 0: red flash + reset scene (try again)
+	# Health > 0: red flash + teleport to spawn (try again)
 	# Health <= 0: handled by _handle_player_death (full death + game reset)
 	if player_health > 0.0:
-		var death_fx = get_node_or_null("/root/DeathEffect")
-		if death_fx and death_fx.has_method("hurt") and not death_fx._playing:
+		if death_fx and death_fx.has_method("hurt"):
 			death_fx.hurt(_get_player_death_position())
 
 func heal_player(amount: float) -> void:
