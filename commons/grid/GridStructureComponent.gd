@@ -950,6 +950,10 @@ func get_height_at(x: int, z: int) -> int:
 func stack_add(x: int, z: int) -> bool:
 	if _editable_layout.is_empty():
 		return false
+	if z < 0 or z >= _editable_layout.size():
+		return false  # Out of bounds
+	if x < 0 or x >= _editable_layout[z].size():
+		return false  # Out of bounds
 	var current: int = get_height_at(x, z)
 	if current >= grid_y:
 		return false  # Max height reached
@@ -964,6 +968,10 @@ func stack_add(x: int, z: int) -> bool:
 func stack_remove(x: int, z: int) -> bool:
 	if _editable_layout.is_empty():
 		return false
+	if z < 0 or z >= _editable_layout.size():
+		return false  # Out of bounds
+	if x < 0 or x >= _editable_layout[z].size():
+		return false  # Out of bounds
 	var current: int = get_height_at(x, z)
 	if current <= 0:
 		return false  # Nothing to remove

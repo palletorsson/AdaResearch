@@ -637,6 +637,9 @@ func _handle_biome_ring():
 	if not eco.has_method("get_vegetation_density"):
 		return
 
+	# Auto-advance ecosystem to the current map's sequence so biome matches context
+	_sync_ecosystem_to_current_map(eco)
+
 	var density: float = eco.get_vegetation_density()
 	if density < 0.05:
 		return  # No ring for barren maps
@@ -657,6 +660,37 @@ func _handle_biome_ring():
 		density
 	)
 	print("GridSystem: 🌿 Biome ring generated (density=%.2f)" % density)
+
+
+## Advance EcosystemManager to the sequence that owns the current map.
+## This ensures biome density/kingdoms match the map's position in the curriculum.
+func _sync_ecosystem_to_current_map(eco) -> void:
+	if not eco.has_method("force_advance_to"):
+		return
+	# Scan sequence files to find which sequence owns this map
+	var seq_dir := DirAccess.open("res://commons/maps/sequences/")
+	if not seq_dir:
+		return
+	seq_dir.list_dir_begin()
+	var fname := seq_dir.get_next()
+	while fname != "":
+		if fname.ends_with(".json"):
+			var sf := FileAccess.open("res://commons/maps/sequences/" + fname, FileAccess.READ)
+			if sf:
+				var sj := JSON.new()
+				if sj.parse(sf.get_as_text()) == OK and sj.data is Dictionary:
+					var seqs: Dictionary = sj.data.get("sequences", {})
+					for seq_name in seqs:
+						var seq_data: Dictionary = seqs[seq_name] if seqs[seq_name] is Dictionary else {}
+						var maps: Array = seq_data.get("maps", [])
+						for m in maps:
+							var mn: String = str(m.get("name", m)) if m is Dictionary else str(m)
+							if mn == map_name:
+								eco.force_advance_to(seq_name)
+								print("GridSystem: Ecosystem synced to '%s' for map '%s'" % [seq_name, map_name])
+								return
+				sf.close()
+		fname = seq_dir.get_next()
 
 
 ## Notify NatureRenderer of per-map environment overrides + trigger living ground.
