@@ -6,6 +6,8 @@
 #   - Each organism spawned from CritterDNA at LOD 0 (full detail)
 #   - Slow rotation on pedestals for inspection
 #   - Labels with preset/kingdom names
+#   - Glowing ground rings around each pedestal
+#   - Central title floating above the gallery
 #
 # Place as a map accessible from the Lab.
 
@@ -27,6 +29,9 @@ const KINGDOM_COLORS: Array[Color] = [
 	Color(0.9, 0.7, 0.3),   # Hybrid gold
 ]
 
+const GLOW_RING_COLOR: Color = Color(0.3, 0.6, 1.0)
+const GLOW_RING_EMISSION_ENERGY: float = 2.5
+
 var _spawner: CritterSpawner = null
 var _nature_root: Node3D = null
 var _pedestal_organisms: Array[Node3D] = []
@@ -43,20 +48,39 @@ func _ready() -> void:
 
 	_build_floor()
 	_build_lighting()
+	_build_title()
 	call_deferred("_build_preset_ring")
 	call_deferred("_build_kingdom_clusters")
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	# Slow rotation on preset pedestals
-	for org in _pedestal_organisms:
+	for org: Node3D in _pedestal_organisms:
 		if is_instance_valid(org):
-			org.rotation.y += _delta * 0.3
+			org.rotation.y += delta * 0.3
 
 
-# ═══════════════════════════════════════════════════════════════
+# ===================================================================
+# TITLE
+# ===================================================================
+
+func _build_title() -> void:
+	var title := Label3D.new()
+	title.name = "GalleryTitle"
+	title.text = "DNA Organism Gallery"
+	title.font_size = 64
+	title.pixel_size = 0.005
+	title.position = Vector3(0.0, 5.0, 0.0)
+	title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	title.modulate = Color(0.9, 0.85, 1.0)
+	title.outline_size = 6
+	title.outline_modulate = Color(0.15, 0.1, 0.3)
+	add_child(title)
+
+
+# ===================================================================
 # FLOOR + LIGHTING
-# ═══════════════════════════════════════════════════════════════
+# ===================================================================
 
 func _build_floor() -> void:
 	var floor_mesh := MeshInstance3D.new()
@@ -100,26 +124,26 @@ func _build_lighting() -> void:
 	add_child(light)
 
 
-# ═══════════════════════════════════════════════════════════════
+# ===================================================================
 # PRESET RING — 12 pedestals in a circle
-# ═══════════════════════════════════════════════════════════════
+# ===================================================================
 
 func _build_preset_ring() -> void:
-	var radius := 10.0
+	var radius: float = 10.0
 	var center := Vector3(0, 0, 0)
 
-	for i in PRESET_NAMES.size():
-		var angle := (float(i) / float(PRESET_NAMES.size())) * TAU
+	for i: int in PRESET_NAMES.size():
+		var angle: float = (float(i) / float(PRESET_NAMES.size())) * TAU
 		var pos := center + Vector3(cos(angle) * radius, 0, sin(angle) * radius)
 		var preset_name: String = PRESET_NAMES[i]
 
-		# Build pedestal
+		# Build pedestal with glow ring
 		_build_pedestal(pos, preset_name)
 
 		# Spawn organism from preset
-		var dna := _load_preset_dna(preset_name)
+		var dna: CritterDNA = _load_preset_dna(preset_name)
 		if dna:
-			var entity := _spawner.spawn(dna, pos + Vector3(0, 1.2, 0), 0)
+			var entity: CritterEntity = _spawner.spawn(dna, pos + Vector3(0, 1.2, 0), 0)
 			if entity:
 				entity.set_process(false)
 				entity.set_physics_process(false)
@@ -144,6 +168,9 @@ func _build_pedestal(pos: Vector3, label_text: String) -> void:
 	pedestal.material_override = mat
 	add_child(pedestal)
 
+	# Glowing ground ring
+	_build_glow_ring(pos, 0.7, GLOW_RING_COLOR)
+
 	# Label
 	var label := Label3D.new()
 	label.name = "Label_%s" % label_text
@@ -166,15 +193,39 @@ func _build_pedestal(pos: Vector3, label_text: String) -> void:
 	add_child(spot)
 
 
-# ═══════════════════════════════════════════════════════════════
+func _build_glow_ring(pos: Vector3, radius: float, color: Color) -> void:
+	var ring := MeshInstance3D.new()
+	ring.name = "GlowRing"
+	var torus := TorusMesh.new()
+	torus.inner_radius = radius - 0.03
+	torus.outer_radius = radius + 0.03
+	torus.rings = 24
+	torus.ring_segments = 12
+	ring.mesh = torus
+
+	var ring_mat := StandardMaterial3D.new()
+	ring_mat.albedo_color = color
+	ring_mat.emission_enabled = true
+	ring_mat.emission = color
+	ring_mat.emission_energy_multiplier = GLOW_RING_EMISSION_ENERGY
+	ring_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	ring.material_override = ring_mat
+
+	# Lay flat on the ground — rotate 90 degrees around X so the torus is horizontal
+	ring.position = pos + Vector3(0, 0.02, 0)
+	ring.rotation_degrees.x = 90.0
+	add_child(ring)
+
+
+# ===================================================================
 # KINGDOM CLUSTERS — 5 groups in the inner area
-# ═══════════════════════════════════════════════════════════════
+# ===================================================================
 
 func _build_kingdom_clusters() -> void:
-	var inner_radius := 4.0
+	var inner_radius: float = 4.0
 
-	for ki in KINGDOM_IDS.size():
-		var angle := (float(ki) / float(KINGDOM_IDS.size())) * TAU
+	for ki: int in KINGDOM_IDS.size():
+		var angle: float = (float(ki) / float(KINGDOM_IDS.size())) * TAU
 		var cluster_center := Vector3(cos(angle) * inner_radius, 0, sin(angle) * inner_radius)
 		var kingdom_id: int = KINGDOM_IDS[ki]
 		var kingdom_name: String = KINGDOM_NAMES[ki]
@@ -210,7 +261,7 @@ func _build_kingdom_clusters() -> void:
 		# Spawn 4 specimens per kingdom at random positions within cluster
 		var rng := RandomNumberGenerator.new()
 		rng.seed = hash(kingdom_name)
-		for j in 4:
+		for j: int in 4:
 			var offset := Vector3(
 				rng.randf_range(-1.2, 1.2),
 				0,
@@ -229,42 +280,43 @@ func _build_kingdom_clusters() -> void:
 			# Scale variation
 			dna.scale = rng.randf_range(0.8, 1.5)
 
-			var entity := _spawner.spawn(dna, spawn_pos + Vector3(0, 0.5, 0), 0)
+			var entity: CritterEntity = _spawner.spawn(dna, spawn_pos + Vector3(0, 0.5, 0), 0)
 			if entity:
 				entity.set_process(false)
 				entity.set_physics_process(false)
 
 
-# ═══════════════════════════════════════════════════════════════
+# ===================================================================
 # DNA PRESET LOADING — mirrors CritterPlacer.PRESETS
-# ═══════════════════════════════════════════════════════════════
+# ===================================================================
 
 func _load_preset_dna(preset_name: String) -> CritterDNA:
 	# Use CritterPlacer's preset system
-	var placer_script = load("res://commons/artifacts/critter_placer/critter_placer.gd")
+	var placer_script: GDScript = load("res://commons/artifacts/critter_placer/critter_placer.gd") as GDScript
 	if not placer_script:
 		return CritterDNA.random()
 
 	var presets: Dictionary = placer_script.PRESETS
-	if preset_name not in presets:
+	if not presets.has(preset_name):
 		return CritterDNA.random()
 
 	var preset: Dictionary = presets[preset_name]
 	var dna := CritterDNA.new()
 
 	# Set kingdom
-	var kingdom: int = preset.get("kingdom", 0)
+	var kingdom: int = preset.get("kingdom", 0) as int
 	if kingdom >= 0:
 		dna.body_type = float(kingdom)
 	elif preset.has("body_type"):
 		dna.body_type = float(preset["body_type"])
 
-	# Apply gene overrides
-	for gene_name in preset:
-		if gene_name in ["kingdom", "primary_color", "secondary_color", "tertiary_color"]:
+	# Apply gene overrides — use .set() directly; CritterDNA is a Resource
+	# and does not support the `in` operator for property checking.
+	var skip_keys: Array[String] = ["kingdom", "primary_color", "secondary_color", "tertiary_color"]
+	for gene_name: String in preset:
+		if skip_keys.has(gene_name):
 			continue
-		if gene_name in dna:
-			dna.set(gene_name, float(preset[gene_name]))
+		dna.set(gene_name, float(preset[gene_name]))
 
 	# Apply colors
 	if preset.has("primary_color"):
