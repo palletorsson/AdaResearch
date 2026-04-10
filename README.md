@@ -1,12 +1,25 @@
 # Ada Research
 
-> A VR meta-quest into algorithms, exploring the queer potential within mathematical objects
+> An artistic-research VR project that investigates algorithms by turning them into worlds the body can enter, manipulate, and think through.
 
-Named after **Ada Lovelace**, who in 1842 wrote about computation's capacity for generative art. Ada Research asks: *Can we put Paul Klee's Pedagogical Sketchbook in Virtual Drag?*
+Ada Research is a three-year artistic research project that uses the making of a VR game-world to investigate algorithms, computational geometry, and the limits of formal systems.
 
-## Vision
+At its core, it is a **meta-quest into the world of algorithms**. "Meta" because the project is not only about presenting algorithmic ideas; it studies them by building an environment out of them. The development of the world is itself part of the research.
 
-Ada Research is an educational VR/desktop platform built in **Godot 4.6** that teaches algorithms through embodied interaction and critical theory. You don't read about algorithms — you grab them, tune them, walk through them. Every algorithm has both a technical explanation and a queer theory critique. The project probes for **queer potential within technical objects** — exploring how digital resolution creates invisible fences that shape bodies, creativity, and subjectivity.
+The project explores questions like:
+- How do algorithms shape perception, knowledge, and action?
+- What can algorithmic systems do well, and where do they break down?
+- Are the limits of algorithms technical, ontological, social, or political?
+- How can embodied, spatial, and visual experience help people understand structures that are usually taught symbolically?
+
+It does this through immersive VR scenes where the user can encounter points, lines, primitives, transformations, grids, recursion, randomness, and more advanced mathematical structures as **explorable environments** rather than only as abstract notation.
+
+But Ada Research is not just an educational math visualization project. It also has a critical and artistic aim. It questions dominant, streamlined, stereotyped digital worlds and tries to open space for alternative ways of seeing and building — often from queer, marginal, or non-standard perspectives. It is both:
+
+- **a research platform** for embodied understanding of algorithms, and
+- **a critique** of how algorithmic representation organizes the world.
+
+Named after **Ada Lovelace** — invoking the history of computation, imagination, and formal systems. Built in **Godot 4.6** with OpenXR. *Can we put Paul Klee's Pedagogical Sketchbook in Virtual Drag?*
 
 ### The Queer Free Energy Principle (QFEP)
 
