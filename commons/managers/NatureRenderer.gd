@@ -21,6 +21,10 @@ var _presence_grid = null  # PresenceGrid instance
 var _ground_spawner = null  # GroundSpawner instance
 var _living_ground_active: bool = false
 
+# -- Evolution + Transmutation (self_generating mode) --
+var _evolution_system = null  # EvolutionSystem instance
+var _transmutation_manager = null  # TransmutationManager instance
+
 # -- Per-map environment overrides --
 var _map_overrides: Dictionary = {}
 
@@ -293,9 +297,12 @@ func _update_living_ground(terrain_mode: String, density: float, kingdoms: Array
 			(_living_ground_mesh.material_override as ShaderMaterial).set_shader_parameter(
 				"presence_map", _presence_grid.get_texture()
 			)
-		# Run ground spawner for self-generating mode
-		if _ground_spawner and terrain_mode == "self_generating":
-			_ground_spawner.process(POLL_INTERVAL)
+		# Run ground spawner + evolution for self-generating mode
+		if terrain_mode == "self_generating":
+			if _ground_spawner:
+				_ground_spawner.process(POLL_INTERVAL)
+			if _evolution_system and _evolution_system.has_method("process"):
+				_evolution_system.process(POLL_INTERVAL)
 
 
 func _activate_living_ground(terrain_mode: String, density: float, kingdoms: Array) -> void:
@@ -311,17 +318,41 @@ func _activate_living_ground(terrain_mode: String, density: float, kingdoms: Arr
 
 	_presence_grid = _PresenceGridScript.new(128, map_size)
 
-	# Create ground spawner for self_generating mode
+	# Create ground spawner + evolution system for self_generating mode
 	if terrain_mode == "self_generating":
+		var scene_root: Node3D = get_tree().current_scene as Node3D
+		if not scene_root:
+			return
+
+		# Ground spawner: organisms propagate from fertile ground
 		_ground_spawner = _GroundSpawnerScript.new()
 		_ground_spawner.presence = _presence_grid
 		_ground_spawner.terrain_size = maxf(map_size.x, map_size.y)
-		# Create a dedicated spawner for ground-born organisms
-		var scene_root: Node3D = get_tree().current_scene as Node3D
-		if scene_root:
-			var spawner := CritterSpawner.new(scene_root)
-			spawner.max_population = 30
-			_ground_spawner.spawner = spawner
+		var spawner := CritterSpawner.new(scene_root)
+		spawner.max_population = 30
+		_ground_spawner.spawner = spawner
+
+		# Evolution system: generational cycles, breeding, culling
+		if ClassDB.class_exists("EvolutionSystem") or ResourceLoader.exists("res://algorithms/nature_system/systems/evolution_system.gd"):
+			var evo_script = load("res://algorithms/nature_system/systems/evolution_system.gd")
+			if evo_script:
+				_evolution_system = evo_script.new()
+				_evolution_system.name = "EvolutionSystem"
+				if "spawner" in _evolution_system:
+					_evolution_system.spawner = spawner
+				scene_root.add_child(_evolution_system)
+				if _evolution_system.has_method("start"):
+					_evolution_system.start()
+				print("NatureRenderer: EvolutionSystem started (self_generating)")
+
+		# Transmutation manager: player bonding with creatures
+		if ResourceLoader.exists("res://algorithms/nature_system/systems/transmutation_manager.gd"):
+			var trans_script = load("res://algorithms/nature_system/systems/transmutation_manager.gd")
+			if trans_script:
+				_transmutation_manager = trans_script.new()
+				_transmutation_manager.name = "TransmutationManager"
+				scene_root.add_child(_transmutation_manager)
+				print("NatureRenderer: TransmutationManager started (self_generating)")
 
 	# Create living ground mesh overlay
 	var shader_path: String = "res://algorithms/nature_system/shaders/living_ground.gdshader"
@@ -359,6 +390,12 @@ func _deactivate_living_ground() -> void:
 	_living_ground_mesh = null
 	_presence_grid = null
 	_ground_spawner = null
+	if _evolution_system and is_instance_valid(_evolution_system):
+		_evolution_system.queue_free()
+	_evolution_system = null
+	if _transmutation_manager and is_instance_valid(_transmutation_manager):
+		_transmutation_manager.queue_free()
+	_transmutation_manager = null
 	_living_ground_active = false
 	print("NatureRenderer: Deactivated living ground")
 
