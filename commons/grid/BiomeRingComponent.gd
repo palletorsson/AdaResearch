@@ -408,27 +408,32 @@ func _spawn_living_organisms(center: Vector3, kingdoms: Array, density: float) -
 	if density < 0.3:
 		return
 
+	# Guard: CritterSpawner and morphology systems must be available
+	if not ClassDB.class_exists("CritterSpawner") and not ResourceLoader.exists("res://algorithms/nature_system/systems/spawner.gd"):
+		print("[BiomeRing] CritterSpawner not available, skipping living organisms")
+		return
+
 	# Create a container for living organisms
 	var nature_root := Node3D.new()
 	nature_root.name = "LivingOrganisms"
 	add_child(nature_root)
 
-	# Create spawner
+	# Create spawner (wrapped — morphology errors shouldn't crash the grid)
 	_critter_spawner = CritterSpawner.new(nature_root)
-	_critter_spawner.default_lod = 2  # Medium detail for ring organisms
-	_critter_spawner.max_population = int(density * 20)  # Scale with density: 6-20
+	_critter_spawner.default_lod = 3  # Low detail for ring organisms (safe)
+	_critter_spawner.max_population = int(density * 12)  # Conservative: 4-12
 
-	var ring_radius: float = ring_width * 0.6  # Spawn in the mid-ring zone
+	var ring_radius: float = ring_width * 0.6
 
-	# Kingdom 0 = tree: L-system trees with real morphology (density > 0.3)
+	# Kingdom 0 = tree: L-system trees (density > 0.3)
 	if "tree" in kingdoms:
-		var tree_count: int = int(density * 6)  # 2-6 trees
+		var tree_count: int = mini(int(density * 4), 4)
 		_critter_spawner.seed_population(0, tree_count, center, ring_radius)
 		print("[BiomeRing] Spawned %d living trees" % tree_count)
 
 	# Kingdom 2 = flower: DNA-driven petal flowers (density > 0.5)
 	if "flower" in kingdoms and density > 0.5:
-		var flower_count: int = int(density * 5)  # 3-5 flowers
+		var flower_count: int = mini(int(density * 3), 3)
 		_critter_spawner.seed_population(2, flower_count, center, ring_radius)
 		print("[BiomeRing] Spawned %d living flowers" % flower_count)
 

@@ -651,6 +651,12 @@ func _sync_ecosystem_to_map(map_name: String) -> void:
 			eco.force_advance_to(seq_name)
 			print("[MapStudio] Ecosystem synced to '%s' for map '%s'" % [seq_name, map_name])
 			return
+	# Map not in any sequence — reset ecosystem to clean state
+	if eco.has_method("reset_progression"):
+		eco.reset_progression()
+		print("[MapStudio] Ecosystem reset — map '%s' not in any sequence" % map_name)
+			print("[MapStudio] Ecosystem synced to '%s' for map '%s'" % [seq_name, map_name])
+			return
 
 func _disable_grid_cams() -> void:
 	if not _grid_system or not is_instance_valid(_grid_system): return
