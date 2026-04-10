@@ -57,6 +57,9 @@ var _sliders: Dictionary = {}  # gene_id → HSlider
 var _color_pickers: Dictionary = {}  # color_id → ColorPickerButton
 var _rebuild_timer: float = 0.0
 var _needs_rebuild: bool = false
+var _favorites: Array[Dictionary] = []  # [{name, dna_data}]
+
+const FAVORITES_PATH := "user://creature_favorites.json"
 
 # ── UI refs ───────────────────────────────────────────────────────
 var controls: VBoxContainer = null
@@ -64,6 +67,8 @@ var viewport_container: SubViewportContainer = null
 var viewport: SubViewport = null
 var cam: Camera3D = null
 var info_label: Label = null
+var fav_list: ItemList = null
+var fav_name_edit: LineEdit = null
 var orbit_yaw: float = 0.3
 var orbit_pitch: float = 0.4
 var orbit_dist: float = 4.0
@@ -127,7 +132,11 @@ func _ready() -> void:
 	_build_preset_buttons()
 	_build_color_pickers()
 	_build_gene_sliders()
+	_build_favorites_panel()
 	_build_info_bar()
+
+	# Load saved favorites
+	_load_favorites()
 
 	# Start with a random tree
 	_spawn_new(0)
@@ -287,6 +296,144 @@ func _build_gene_sliders() -> void:
 
 	scroll.add_child(vbox)
 	controls.add_child(scroll)
+
+
+func _build_favorites_panel() -> void:
+	var sep := HSeparator.new()
+	controls.add_child(sep)
+
+	var header := Label.new()
+	header.text = "Favorites"
+	header.add_theme_font_size_override("font_size", 14)
+	controls.add_child(header)
+
+	# Name input + Save button
+	var save_row := HBoxContainer.new()
+	fav_name_edit = LineEdit.new()
+	fav_name_edit.placeholder_text = "Name..."
+	fav_name_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	fav_name_edit.custom_minimum_size = Vector2(150, 0)
+	save_row.add_child(fav_name_edit)
+
+	var save_btn := Button.new()
+	save_btn.text = "Save"
+	save_btn.pressed.connect(_save_favorite)
+	save_row.add_child(save_btn)
+
+	var del_btn := Button.new()
+	del_btn.text = "Del"
+	del_btn.pressed.connect(_delete_favorite)
+	save_row.add_child(del_btn)
+
+	controls.add_child(save_row)
+
+	# Favorites list
+	fav_list = ItemList.new()
+	fav_list.custom_minimum_size = Vector2(0, 120)
+	fav_list.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	fav_list.item_selected.connect(_on_favorite_selected)
+	controls.add_child(fav_list)
+
+
+func _save_favorite() -> void:
+	if not _dna:
+		return
+	var fav_name: String = fav_name_edit.text.strip_edges()
+	if fav_name.is_empty():
+		# Auto-name
+		var kingdoms: Array[String] = ["Tree", "Creature", "Flower", "Fungus", "Hybrid"]
+		var kid: int = clampi(int(round(_dna.body_type)), 0, 4)
+		fav_name = "%s_%d" % [kingdoms[kid], _favorites.size() + 1]
+
+	# Serialize DNA to dictionary
+	var dna_data: Dictionary = _serialize_dna(_dna)
+	_favorites.append({"name": fav_name, "dna": dna_data})
+	_save_favorites_to_disk()
+	_refresh_favorites_list()
+	fav_name_edit.text = ""
+
+
+func _delete_favorite() -> void:
+	var sel: PackedInt32Array = fav_list.get_selected_items()
+	if sel.is_empty():
+		return
+	var idx: int = sel[0]
+	if idx >= 0 and idx < _favorites.size():
+		_favorites.remove_at(idx)
+		_save_favorites_to_disk()
+		_refresh_favorites_list()
+
+
+func _on_favorite_selected(idx: int) -> void:
+	if idx < 0 or idx >= _favorites.size():
+		return
+	var fav: Dictionary = _favorites[idx]
+	_clear_organism()
+	_dna = _deserialize_dna(fav.get("dna", {}))
+	_spawn_from_dna()
+
+
+func _refresh_favorites_list() -> void:
+	if not fav_list:
+		return
+	fav_list.clear()
+	for fav: Dictionary in _favorites:
+		var fname: String = fav.get("name", "???")
+		var dna_data: Dictionary = fav.get("dna", {})
+		var kid: int = int(dna_data.get("body_type", 0))
+		var kingdoms: Array[String] = ["Tree", "Creature", "Flower", "Fungus", "Hybrid"]
+		var kname: String = kingdoms[clampi(kid, 0, 4)]
+		fav_list.add_item("%s [%s]" % [fname, kname])
+
+
+func _serialize_dna(dna: CritterDNA) -> Dictionary:
+	var data: Dictionary = {}
+	for group: Dictionary in GENE_GROUPS:
+		var genes: Array = group["genes"] as Array
+		for gene: Dictionary in genes:
+			var gene_id: String = gene["id"] as String
+			var val: Variant = dna.get(gene_id)
+			if val != null:
+				data[gene_id] = float(val)
+	# Colors
+	data["primary_color"] = dna.primary_color.to_html(false)
+	data["secondary_color"] = dna.secondary_color.to_html(false)
+	data["tertiary_color"] = dna.tertiary_color.to_html(false)
+	return data
+
+
+func _deserialize_dna(data: Dictionary) -> CritterDNA:
+	var dna := CritterDNA.new()
+	for key: String in data:
+		if key.ends_with("_color"):
+			dna.set(key, Color(data[key]))
+		else:
+			dna.set(key, float(data[key]))
+	return dna
+
+
+func _save_favorites_to_disk() -> void:
+	var file := FileAccess.open(FAVORITES_PATH, FileAccess.WRITE)
+	if file:
+		file.store_string(JSON.stringify(_favorites, "  "))
+		file.close()
+
+
+func _load_favorites() -> void:
+	if not FileAccess.file_exists(FAVORITES_PATH):
+		return
+	var file := FileAccess.open(FAVORITES_PATH, FileAccess.READ)
+	if not file:
+		return
+	var text: String = file.get_as_text()
+	file.close()
+	var parsed: Variant = JSON.parse_string(text)
+	if parsed is Array:
+		_favorites.clear()
+		for item: Variant in parsed:
+			if item is Dictionary:
+				_favorites.append(item as Dictionary)
+	_refresh_favorites_list()
 
 
 func _build_info_bar() -> void:
