@@ -295,6 +295,10 @@ func set_health(new_health: float) -> void:
 func apply_health_damage(amount: float) -> void:
 	if amount <= 0.0:
 		return
+	# On any damage: red flash + teleport to spawn (hurt, not death)
+	var death_fx = get_node_or_null("/root/DeathEffect")
+	if death_fx and death_fx.has_method("hurt") and not death_fx._playing:
+		death_fx.hurt(_get_player_death_position())
 	set_health(player_health - amount)
 
 func heal_player(amount: float) -> void:
