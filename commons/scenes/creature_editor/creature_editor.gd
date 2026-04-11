@@ -732,6 +732,27 @@ func _spawn_biome_ring() -> void:
 		mat.roughness = 0.9
 		_biome_ground.material_override = mat
 
+	# Apply subtle height variation via noise
+	if density > 0.1:
+		var noise := FastNoiseLite.new()
+		noise.noise_type = FastNoiseLite.TYPE_PERLIN
+		noise.frequency = 0.5
+		noise.seed = randi()
+		var amplitude: float = density * 0.08
+		# Convert to ArrayMesh for MeshDataTool access
+		var st := SurfaceTool.new()
+		st.create_from(plane, 0)
+		var array_mesh: ArrayMesh = st.commit()
+		var mdt := MeshDataTool.new()
+		if mdt.create_from_surface(array_mesh, 0) == OK:
+			for vi in mdt.get_vertex_count():
+				var v: Vector3 = mdt.get_vertex(vi)
+				v.y += noise.get_noise_2d(v.x * 2.0, v.z * 2.0) * amplitude
+				mdt.set_vertex(vi, v)
+			var result := ArrayMesh.new()
+			mdt.commit_to_surface(result)
+			_biome_ground.mesh = result
+
 	_biome_ground.position = Vector3.ZERO
 	_organism_root.add_child(_biome_ground)
 
@@ -742,11 +763,21 @@ func _spawn_biome_ring() -> void:
 	if density > 0.0:
 		_spawn_biome_foliage(kingdoms, density)
 
-	# ── 4. Creature ring (original behavior) ─────────────────────
+	# ── 4. Floating particles (spores/pollen) ───────────────────
+	if density > 0.1:
+		_spawn_biome_particles(kingdoms, density)
+
+	# ── 5. Creature ring with glow rings + spotlights ────────────
 	if kingdoms.is_empty():
 		return
 
 	var kingdom_map: Dictionary = {"tree": 0, "creature": 1, "flower": 2, "fungus": 3}
+	var glow_colors: Dictionary = {
+		"tree": Color(0.2, 0.8, 0.3),
+		"creature": Color(0.9, 0.4, 0.6),
+		"flower": Color(0.9, 0.3, 0.4),
+		"fungus": Color(0.6, 0.3, 0.8),
+	}
 	var count: int = mini(kingdoms.size() * 2, 10)
 	var radius: float = 3.0
 
@@ -762,6 +793,38 @@ func _spawn_biome_ring() -> void:
 			ent.set_process(false)
 			ent.set_physics_process(false)
 			_biome_entities.append(ent)
+
+			# Glow ring under creature (like creature_gallery)
+			var glow_color: Color = glow_colors.get(kname, Color(0.5, 0.5, 0.8))
+			var glow_torus := TorusMesh.new()
+			glow_torus.inner_radius = 0.08 * ring_dna.scale
+			glow_torus.outer_radius = 0.25 * ring_dna.scale
+			glow_torus.ring_segments = 16
+			glow_torus.rings = 12
+			var glow_mi := MeshInstance3D.new()
+			glow_mi.mesh = glow_torus
+			glow_mi.position = pos + Vector3(0, 0.02, 0)
+			glow_mi.rotation_degrees.x = 90  # Lay flat
+			var glow_mat := StandardMaterial3D.new()
+			glow_mat.albedo_color = glow_color
+			glow_mat.emission_enabled = true
+			glow_mat.emission = glow_color
+			glow_mat.emission_energy_multiplier = 1.5
+			glow_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			glow_mat.albedo_color.a = 0.6
+			glow_mi.material_override = glow_mat
+			_organism_root.add_child(glow_mi)
+			_biome_foliage.append(glow_mi)  # Track for cleanup
+
+			# Spotlight above creature
+			var spot := OmniLight3D.new()
+			spot.position = pos + Vector3(0, 0.6, 0)
+			spot.light_energy = 0.8
+			spot.omni_range = 2.0
+			spot.light_color = Color(0.95, 0.9, 0.8)
+			spot.omni_attenuation = 2.0
+			_organism_root.add_child(spot)
+			_biome_foliage.append(spot)  # Track for cleanup
 
 
 func _apply_biome_atmosphere(density: float) -> void:
@@ -837,75 +900,158 @@ func _add_foliage_multimesh(kind: String, count: int, scale_factor: float) -> vo
 	mm.use_colors = true
 	mm.instance_count = count
 
-	# Create mesh and base color per kind
+	# ── Better mesh shapes per kingdom ──────────────────────────
 	var mesh: Mesh = null
 	var base_color := Color.WHITE
+	var emission_color := Color.BLACK
+	var emission_energy: float = 0.0
 	var y_offset: float = 0.0
 
 	match kind:
 		"grass":
+			# Crossed quads for volume (X pattern)
 			var quad := QuadMesh.new()
-			quad.size = Vector2(0.06, 0.15)
+			quad.size = Vector2(0.07, 0.18)
 			mesh = quad
-			base_color = Color(0.2, 0.5, 0.1)
-			y_offset = 0.07
+			base_color = Color(0.2, 0.55, 0.1)
+			emission_color = Color(0.05, 0.1, 0.03)
+			emission_energy = 0.15
+			y_offset = 0.09
 		"flower":
+			# Sphere head on tiny stem
 			var sphere := SphereMesh.new()
-			sphere.radius = 0.04
-			sphere.height = 0.08
+			sphere.radius = 0.045
+			sphere.height = 0.09
+			sphere.radial_segments = 6
+			sphere.rings = 4
 			mesh = sphere
-			base_color = Color(0.9, 0.3, 0.4)
-			y_offset = 0.04
+			base_color = Color(0.9, 0.35, 0.45)
+			emission_color = Color(0.2, 0.1, 0.05)
+			emission_energy = 0.3
+			y_offset = 0.12  # Raised for stem
 		"tree":
+			# Trunk + canopy composite (use cylinder for trunk, rendered small)
 			var cyl := CylinderMesh.new()
-			cyl.top_radius = 0.15
-			cyl.bottom_radius = 0.03
-			cyl.height = 0.5
+			cyl.top_radius = 0.2
+			cyl.bottom_radius = 0.04
+			cyl.height = 0.6
+			cyl.radial_segments = 6
 			mesh = cyl
-			base_color = Color(0.15, 0.45, 0.12)
-			y_offset = 0.25
+			base_color = Color(0.18, 0.5, 0.15)
+			emission_color = Color(0.1, 0.15, 0.05)
+			emission_energy = 0.3
+			y_offset = 0.3
 		"fungus":
+			# Mushroom cap shape: wide top, thin stem
 			var cyl := CylinderMesh.new()
-			cyl.top_radius = 0.08
-			cyl.bottom_radius = 0.03
-			cyl.height = 0.12
+			cyl.top_radius = 0.12
+			cyl.bottom_radius = 0.025
+			cyl.height = 0.14
+			cyl.radial_segments = 8
 			mesh = cyl
-			base_color = Color(0.5, 0.25, 0.6)
-			y_offset = 0.06
+			base_color = Color(0.55, 0.3, 0.65)
+			emission_color = Color(0.15, 0.1, 0.2)
+			emission_energy = 0.4  # Bioluminescent!
+			y_offset = 0.07
 
 	if not mesh:
 		return
 
-	# Apply material with vertex colors
+	# ── Material with glow emission ─────────────────────────────
 	var mat := StandardMaterial3D.new()
 	mat.vertex_color_use_as_albedo = true
-	mat.roughness = 0.85
+	mat.roughness = 0.8
 	if kind == "grass":
 		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	# Add subtle glow
+	if emission_energy > 0.0:
+		mat.emission_enabled = true
+		mat.emission = emission_color
+		mat.emission_energy_multiplier = emission_energy
 
 	mm.mesh = mesh
 
-	# Place instances in ring 1.0–4.0m from center
+	# ── Parabolic density clustering ────────────────────────────
+	# Dense at 60% of ring, sparse at center and edge
 	for i: int in count:
 		var angle: float = randf() * TAU
-		var r: float = randf_range(1.0, 4.0)
-		var pos := Vector3(cos(angle) * r, y_offset, sin(angle) * r)
-		var sc: float = randf_range(0.6, 1.2) * scale_factor
+		# Parabolic distribution: peak at ~2.5m (60% of 4.0)
+		var t: float = randf()
+		var density_curve: float = 4.0 * t * (1.0 - t)  # Peaks at t=0.5
+		var r: float = lerpf(0.8, 4.5, t) * density_curve / 1.0 + 0.8
+		r = clampf(r, 0.8, 4.5)
+		# Y jitter so foliage sits "in" the ground
+		var y_jitter: float = randf_range(-0.02, 0.01)
+		var pos := Vector3(cos(angle) * r, y_offset + y_jitter, sin(angle) * r)
+		var sc: float = randf_range(0.5, 1.3) * scale_factor
 		var rot_y: float = randf() * TAU
 		var xf := Transform3D(Basis.IDENTITY.rotated(Vector3.UP, rot_y).scaled(Vector3(sc, sc, sc)), pos)
 		mm.set_instance_transform(i, xf)
-		# Color variation: hue shift ±0.05
-		var hue_shift: float = randf_range(-0.05, 0.05)
+		# Color variation: hue ±0.06, saturation ±0.1, value ±0.1
 		var c := base_color
-		var hsv_h: float = fmod(c.h + hue_shift + 1.0, 1.0)
-		var varied := Color.from_hsv(hsv_h, c.s, c.v)
-		mm.set_instance_color(i, varied)
+		var hsv_h: float = fmod(c.h + randf_range(-0.06, 0.06) + 1.0, 1.0)
+		var hsv_s: float = clampf(c.s + randf_range(-0.1, 0.1), 0.1, 1.0)
+		var hsv_v: float = clampf(c.v + randf_range(-0.1, 0.1), 0.2, 1.0)
+		mm.set_instance_color(i, Color.from_hsv(hsv_h, hsv_s, hsv_v))
 
 	var mmi := MultiMeshInstance3D.new()
 	mmi.multimesh = mm
 	mmi.material_override = mat
 	_organism_root.add_child(mmi)
 	_biome_foliage.append(mmi)
+
+
+func _spawn_biome_particles(kingdoms: Array, density: float) -> void:
+	var particles := GPUParticles3D.new()
+	particles.name = "BiomeParticles"
+	particles.amount = clampi(int(density * 25.0), 5, 30)
+	particles.lifetime = 4.0
+	particles.speed_scale = 0.8
+	particles.visibility_aabb = AABB(Vector3(-4, -1, -4), Vector3(8, 3, 8))
+
+	# Particle material
+	var pmat := ParticleProcessMaterial.new()
+	pmat.direction = Vector3(0, 1, 0)  # Drift upward
+	pmat.spread = 30.0
+	pmat.initial_velocity_min = 0.03
+	pmat.initial_velocity_max = 0.08
+	pmat.gravity = Vector3(0, -0.01, 0)  # Very slight float
+	pmat.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	pmat.emission_box_extents = Vector3(3.0, 0.3, 3.0)
+	pmat.scale_min = 0.8
+	pmat.scale_max = 1.5
+
+	# Color by dominant kingdom
+	var particle_color := Color(0.7, 0.8, 0.6, 0.6)  # Default green-ish
+	if kingdoms.size() > 0:
+		var k: String = kingdoms[0] as String
+		match k:
+			"flower": particle_color = Color(0.9, 0.7, 0.5, 0.5)
+			"fungus": particle_color = Color(0.7, 0.5, 0.85, 0.5)
+			"creature": particle_color = Color(0.8, 0.65, 0.5, 0.4)
+			"tree": particle_color = Color(0.5, 0.75, 0.4, 0.5)
+	pmat.color = particle_color
+
+	particles.process_material = pmat
+	particles.position = Vector3(0, 0.5, 0)
+
+	# Particle mesh: tiny quad
+	var quad := QuadMesh.new()
+	quad.size = Vector2(0.015, 0.015)
+	particles.draw_pass_1 = quad
+
+	# Particle material (visual)
+	var draw_mat := StandardMaterial3D.new()
+	draw_mat.albedo_color = particle_color
+	draw_mat.emission_enabled = true
+	draw_mat.emission = particle_color
+	draw_mat.emission_energy_multiplier = 0.5
+	draw_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	draw_mat.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+	particles.material_override = draw_mat
+
+	_organism_root.add_child(particles)
+	_biome_foliage.append(particles)  # Track for cleanup
 
 
 func _clear_biome_ring() -> void:
