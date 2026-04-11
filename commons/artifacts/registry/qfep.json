@@ -36,6 +36,38 @@
 					1
 				],
 				"size_group": "compact"
+			},
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "~0"
 			}
 		},
 		"phi_slider": {
@@ -75,6 +107,38 @@
 					1
 				],
 				"size_group": "compact"
+			},
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "~0"
 			}
 		},
 		"qfep_formula_3d": {
@@ -113,6 +177,34 @@
 					1
 				],
 				"size_group": "compact"
+			},
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
 			}
 		},
 		"qfep_sandbox_console": {
@@ -145,7 +237,43 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "particle_system",
+					"affects": [
+						"transform",
+						"color",
+						"visibility"
+					]
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"bifurcation_walkway": {
 			"name": "Bifurcation Walkway",
@@ -187,7 +315,42 @@
 				],
 				"size_group": "environment"
 			},
-			"qfep_connection": "The logistic map's r parameter IS the Î» drive. At râ‰ˆ3.57, chaos begins â€” this is Î»_edge, where life exists. You walk through the phase space of orderâ†’chaos."
+			"qfep_connection": "The logistic map's r parameter IS the Î» drive. At râ‰ˆ3.57, chaos begins â€” this is Î»_edge, where life exists. You walk through the phase space of orderâ†’chaos.",
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~36"
+			}
 		},
 		"edge_of_chaos_orb": {
 			"name": "Edge of Chaos Orb",
@@ -217,7 +380,43 @@
 			"map_ready": false,
 			"map_sequences": [
 				"qfeplaboratory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere",
+						"torus"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "particle_system",
+					"affects": [
+						"transform",
+						"color",
+						"visibility"
+					]
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "~768"
+			}
 		},
 		"grab_sphere_F": {
 			"name": "F Term Sphere",
@@ -255,7 +454,34 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			}
 		},
 		"grab_sphere_E": {
 			"name": "E Term Sphere",
@@ -293,7 +519,34 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			}
 		},
 		"grab_sphere_lambda": {
 			"name": "Lambda Term Sphere",
@@ -331,7 +584,34 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			}
 		},
 		"grab_sphere_phi": {
 			"name": "Phi Term Sphere",
@@ -368,7 +648,34 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			}
 		},
 		"qfep_reactor": {
 			"name": "QFEP Reactor",
@@ -404,7 +711,41 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "particle_system",
+					"affects": [
+						"transform",
+						"color",
+						"visibility"
+					]
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "~1024"
+			}
 		},
 		"entropy_meter": {
 			"name": "Entropy Meter",
@@ -441,7 +782,40 @@
 				"music",
 				"philosophy",
 				"qfep"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~512"
+			}
 		},
 		"edge_detector": {
 			"name": "Edge Detector",
@@ -477,7 +851,40 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"phase_cube": {
 			"name": "Phase Cube",
@@ -513,7 +920,43 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "particle_system",
+					"affects": [
+						"transform",
+						"color",
+						"visibility"
+					]
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"qfep_oscilloscope": {
 			"name": "QFEP Oscilloscope",
@@ -551,7 +994,38 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"reactive_particle_field": {
 			"name": "Reactive Particle Field",
@@ -582,7 +1056,37 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"_comment_aliases": "=== ALIASES TO EXISTING ARTIFACTS ===",
 		"crystal_cluster": {
@@ -609,7 +1113,35 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"reactive_particles": {
 			"name": "Reactive Particles",
@@ -634,7 +1166,37 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"crystal_formation": {
 			"name": "Crystal Formation",
@@ -663,7 +1225,35 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"edge_particles": {
 			"name": "Edge Particles",
@@ -693,7 +1283,37 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"emergence_zone": {
 			"name": "Emergence Zone",
@@ -724,7 +1344,37 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"_comment_new": "=== NEW ARTIFACTS TO BUILD ===",
 		"random_cubes": {
@@ -753,7 +1403,38 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"particle_chaos": {
 			"name": "Particle Chaos",
@@ -784,7 +1465,37 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "~64"
+			}
 		},
 		"ordered_grid": {
 			"name": "Ordered Grid",
@@ -811,7 +1522,38 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"chaos_particles": {
 			"name": "Chaos Particles",
@@ -838,7 +1580,36 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"dissolving_form": {
 			"name": "Dissolving Form",
@@ -864,7 +1635,40 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere",
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"complexity_pattern": {
 			"name": "Complexity Pattern",
@@ -894,7 +1698,37 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			}
 		},
 		"turing_pattern": {
 			"name": "Turing Pattern",
@@ -928,7 +1762,38 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [
+						"plane"
+					],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~4-24 (base mesh)"
+			}
 		},
 		"edge_core": {
 			"name": "Edge Core",
@@ -955,7 +1820,42 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "particle_system",
+					"affects": [
+						"transform",
+						"color",
+						"visibility"
+					]
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "~1024"
+			}
 		},
 		"rigid_sculpture": {
 			"name": "Rigid Sculpture",
@@ -982,7 +1882,37 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"prism"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"fluid_form": {
 			"name": "Fluid Form",
@@ -1007,7 +1937,38 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "shader_time",
+					"driven_by": "shader_uniform",
+					"affects": [
+						"visual"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~4-24 (base mesh)"
+			}
 		},
 		"preserved_pattern": {
 			"name": "Preserved Pattern",
@@ -1033,7 +1994,35 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"transforming_pattern": {
 			"name": "Transforming Pattern",
@@ -1060,7 +2049,37 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"earths_delight": {
 			"lookup_name": "earths_delight",
@@ -1094,7 +2113,41 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"torus",
+						"plane",
+						"prism",
+						"capsule"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~20000"
+			}
 		},
 		"PipilottiRistWorld": {
 			"lookup_name": "PipilottiRistWorld",
@@ -1129,7 +2182,42 @@
 				"philosophy",
 				"qfep",
 				"theory"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere",
+						"plane",
+						"capsule"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~400"
+			}
 		},
 		"science_desk": {
 			"lookup_name": "science_desk",
@@ -1162,7 +2250,37 @@
 			],
 			"tags": [
 				"qfep"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"science_glasses": {
 			"lookup_name": "science_glasses",
@@ -1195,7 +2313,39 @@
 			],
 			"tags": [
 				"qfep"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"fuzzy_cloud": {
 			"lookup_name": "fuzzy_cloud",
@@ -1228,7 +2378,37 @@
 			],
 			"tags": [
 				"qfep"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"sphere",
+						"cylinder",
+						"plane"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~16"
+			}
 		},
 		"edge_of_chaos_unlocked": {
 			"name": "Edge of Chaos Unlocked",
@@ -1268,7 +2448,39 @@
 				"qfep",
 				"theory",
 				"emergence"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "texture_plane",
+				"topology": "planar",
+				"construction": {
+					"method": "pixel_computation",
+					"primitives": [
+						"box",
+						"plane"
+					],
+					"operations": [
+						"create_image",
+						"compute_pixels",
+						"apply_texture"
+					]
+				},
+				"material": {
+					"type": "generated_texture",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~4 (quad)"
+			}
 		},
 		"AnickaYiLab": {
 			"lookup_name": "AnickaYiLab",
@@ -1301,7 +2513,40 @@
 			],
 			"tags": [
 				"qfep"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"capsule"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~384"
+			}
 		}
 	}
 }

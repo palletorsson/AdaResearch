@@ -115,7 +115,33 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"SierpinskiPyramid": {
 			"category": "unknown",
@@ -147,7 +173,34 @@
 			"size_group": "environment",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~4-24 (base mesh)"
+			}
 		},
 		"WFC3DGenerator": {
 			"category": "unknown",
@@ -282,7 +335,34 @@
 			"size_group": "environment",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~4-24 (base mesh)"
+			}
 		},
 		"binary_space_partitioning": {
 			"category": "unknown",
@@ -317,7 +397,34 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~800"
+			}
 		},
 		"boolean_patterns": {
 			"category": "unknown",
@@ -376,7 +483,32 @@
 				"botanical",
 				"morphology",
 				"growth"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			}
 		},
 		"box_counting_dimension": {
 			"description": "Interactive box-counting dimension measurement on a Sierpinski triangle with log-log plot",
@@ -487,7 +619,36 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"cantor_set": {
 			"category": "unknown",
@@ -521,7 +682,37 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~0"
+			}
 		},
 		"cave_explorer_3d_ui": {
 			"category": "unknown",
@@ -555,7 +746,31 @@
 			"size_group": "compact",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"cave_generator": {
 			"category": "proceduralgeneration",
@@ -580,7 +795,36 @@
 				"procedural",
 				"generation",
 				"connectivity"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "texture_plane",
+				"topology": "planar",
+				"construction": {
+					"method": "pixel_computation",
+					"primitives": [
+						"plane"
+					],
+					"operations": [
+						"create_image",
+						"compute_pixels",
+						"apply_texture"
+					]
+				},
+				"material": {
+					"type": "generated_texture",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~4 (quad)"
+			}
 		},
 		"caverandomwalk": {
 			"category": "unknown",
@@ -615,7 +859,34 @@
 			"size_group": "compact",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"color_pattern_mate_texture_for_3d": {
 			"category": "unknown",
@@ -774,7 +1045,37 @@
 			"size_group": "compact",
 			"tags": [
 				"2d"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			}
 		},
 		"cube_cabin": {
 			"category": "unknown",
@@ -808,7 +1109,38 @@
 			"size_group": "compact",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~0"
+			}
 		},
 		"cube_chair": {
 			"category": "unknown",
@@ -840,7 +1172,37 @@
 			"size_group": "room_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			}
 		},
 		"cube_desk": {
 			"category": "unknown",
@@ -874,7 +1236,37 @@
 			"size_group": "compact",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			}
 		},
 		"cube_mound_scene": {
 			"category": "unknown",
@@ -977,7 +1369,37 @@
 			"size_group": "compact",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			}
 		},
 		"cube_subdivision": {
 			"category": "unknown",
@@ -1011,7 +1433,36 @@
 			"size_group": "environment",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "varies"
+			}
 		},
 		"delaunay_triangulation_3d_cell": {
 			"category": "unknown",
@@ -1047,7 +1498,33 @@
 			"size_group": "compact",
 			"tags": [
 				"cell"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"sphere"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"dewcoveredfol": {
 			"category": "unknown",
@@ -1111,7 +1588,38 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"dress_selector": {
 			"category": "body",
@@ -1137,7 +1645,38 @@
 				"body",
 				"fashion",
 				"customization"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"cylinder",
+						"capsule"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_8_3_recursion_circles_vr": {
 			"category": "unknown",
@@ -1171,7 +1710,35 @@
 			"size_group": "room_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_8_4_cantor_pagoda_vr": {
 			"category": "unknown",
@@ -1205,7 +1772,36 @@
 			"size_group": "world_scale",
 			"tags": [
 				"3d"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_8_4_cantor_set_vr": {
 			"category": "unknown",
@@ -1239,7 +1835,35 @@
 			"size_group": "room_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_8_6_recursive_tree_vr": {
 			"category": "unknown",
@@ -1271,7 +1895,37 @@
 			"size_group": "room_scale",
 			"tags": [
 				"tree"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"fabrics": {
 			"category": "unknown",
@@ -1373,7 +2027,35 @@
 			"size_group": "environment",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "varies"
+			}
 		},
 		"fibonacci_terrain": {
 			"category": "unknown",
@@ -1409,7 +2091,37 @@
 				"procedural",
 				"recursion",
 				"terrain"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			}
 		},
 		"flower_lab": {
 			"category": "proceduralgeneration",
@@ -1434,7 +2146,36 @@
 				"morphology",
 				"vr",
 				"sliders"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			}
 		},
 		"fractal_cantor_set": {
 			"category": "unknown",
@@ -1466,7 +2207,35 @@
 			"size_group": "room_scale",
 			"tags": [
 				"fractal"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"fractal_clouds": {
 			"category": "unknown",
@@ -1500,7 +2269,40 @@
 				"animation",
 				"fractal",
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"fractal_koch_curve": {
 			"category": "unknown",
@@ -1535,7 +2337,35 @@
 			"tags": [
 				"fractal",
 				"graph"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"fractal_lsystem_tree": {
 			"category": "unknown",
@@ -1570,7 +2400,33 @@
 				"l_system",
 				"simulation",
 				"tree"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"fractal_recursion_1": {
 			"category": "unknown",
@@ -1604,7 +2460,40 @@
 			"size_group": "room_scale",
 			"tags": [
 				"fractal"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~1024"
+			}
 		},
 		"fractal_recursion_2": {
 			"category": "unknown",
@@ -1638,7 +2527,37 @@
 			"size_group": "room_scale",
 			"tags": [
 				"fractal"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"fractal_recursion_circles": {
 			"category": "unknown",
@@ -1670,7 +2589,35 @@
 			"size_group": "room_scale",
 			"tags": [
 				"fractal"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"fractal_recursive_tree": {
 			"category": "unknown",
@@ -1703,7 +2650,37 @@
 			"tags": [
 				"fractal",
 				"tree"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"fractal_scene": {
 			"category": "unknown",
@@ -1737,7 +2714,35 @@
 			"size_group": "world_scale",
 			"tags": [
 				"fractal"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"fractal_stochastic_tree": {
 			"category": "unknown",
@@ -1773,7 +2778,35 @@
 				"fractal",
 				"probability",
 				"tree"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"genetic_programming": {
 			"category": "proceduralgeneration",
@@ -1864,7 +2897,37 @@
 			"size_group": "compact",
 			"tags": [
 				"recursion"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"gridscheckers": {
 			"category": "unknown",
@@ -1924,7 +2987,37 @@
 				"body",
 				"skeleton",
 				"procedural_mesh"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"sphere",
+						"capsule"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"implicit_surface_modeling": {
 			"category": "unknown",
@@ -1960,7 +3053,36 @@
 			"size_group": "world_scale",
 			"tags": [
 				"3d"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~4-24 (base mesh)"
+			}
 		},
 		"inverted_tree_cloud": {
 			"category": "unknown",
@@ -1994,7 +3116,40 @@
 			"size_group": "world_scale",
 			"tags": [
 				"tree"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"julia_set": {
 			"category": "unknown",
@@ -2063,7 +3218,38 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			}
 		},
 		"koch_curve_3d": {
 			"category": "unknown",
@@ -2098,7 +3284,37 @@
 			"size_group": "environment",
 			"tags": [
 				"3d"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~36"
+			}
 		},
 		"layered_membrane": {
 			"category": "unknown",
@@ -2200,7 +3416,39 @@
 			"size_group": "world_scale",
 			"tags": [
 				"fractal"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"marching_cubes_cave_gallery": {
 			"category": "unknown",
@@ -2233,7 +3481,38 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"marching_cubes_gallery": {
 			"category": "unknown",
@@ -2301,7 +3580,41 @@
 			"tags": [
 				"3d",
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "~256"
+			}
 		},
 		"marchingcave": {
 			"category": "unknown",
@@ -2336,7 +3649,32 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~1600"
+			}
 		},
 		"marchingcubes_cave": {
 			"category": "unknown",
@@ -2371,7 +3709,32 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~1600"
+			}
 		},
 		"marchingcubes_flat_landscape": {
 			"category": "unknown",
@@ -2406,7 +3769,32 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~2500"
+			}
 		},
 		"marchingcubes_inside_cave": {
 			"category": "unknown",
@@ -2441,7 +3829,32 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~1600"
+			}
 		},
 		"marchingcubes_portal_landscape": {
 			"category": "unknown",
@@ -2476,7 +3889,32 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~3600"
+			}
 		},
 		"marchingcubes_torus_sculpture": {
 			"category": "unknown",
@@ -2512,7 +3950,33 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~576"
+			}
 		},
 		"maze_generation": {
 			"category": "unknown",
@@ -2612,7 +4076,34 @@
 			"size_group": "environment",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			}
 		},
 		"metaballs": {
 			"category": "unknown",
@@ -2646,7 +4137,36 @@
 			"size_group": "world_scale",
 			"tags": [
 				"3d"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~4-24 (base mesh)"
+			}
 		},
 		"mirror_artifact": {
 			"category": "body",
@@ -2671,7 +4191,36 @@
 				"reflection",
 				"hands",
 				"self"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"plane"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"mirror_cellular_texture_for_3d": {
 			"category": "unknown",
@@ -2830,7 +4379,36 @@
 				"notice how clearings form from noise thresholds"
 			],
 			"signals": [],
-			"capacity": "EXPLAIN how noise-driven spatial processes create naturalistic distributions and how fairy rings emerge as self-organized order within random fields."
+			"capacity": "EXPLAIN how noise-driven spatial processes create naturalistic distributions and how fairy rings emerge as self-organized order within random fields.",
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"plane",
+						"prism"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~256"
+			}
 		},
 		"necklace_anchor": {
 			"category": "body",
@@ -2855,7 +4433,40 @@
 				"identity",
 				"body",
 				"jewelry"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"cylinder",
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"penrose_tilings": {
 			"category": "unknown",
@@ -2889,7 +4500,36 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~0"
+			}
 		},
 		"penteract_double_projection": {
 			"category": "proceduralgeneration",
@@ -2945,7 +4585,37 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			}
 		},
 		"poisson_disk_sampling_3d": {
 			"category": "unknown",
@@ -3069,7 +4739,35 @@
 			"size_group": "room_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"recursive_chair": {
 			"category": "unknown",
@@ -3103,7 +4801,37 @@
 			"size_group": "environment",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			}
 		},
 		"recursive_table": {
 			"category": "unknown",
@@ -3137,7 +4865,37 @@
 			"size_group": "environment",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			}
 		},
 		"recursive_tree": {
 			"category": "unknown",
@@ -3175,7 +4933,36 @@
 			"size_group": "world_scale",
 			"tags": [
 				"tree"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"recursive_tree_2": {
 			"category": "unknown",
@@ -3209,7 +4996,39 @@
 			"size_group": "compact",
 			"tags": [
 				"tree"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~64"
+			}
 		},
 		"romanesco": {
 			"category": "unknown",
@@ -3243,7 +5062,36 @@
 			"size_group": "environment",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~144"
+			}
 		},
 		"room_grammar": {
 			"category": "proceduralgeneration",
@@ -3267,7 +5115,36 @@
 				"procedural",
 				"architecture",
 				"partition"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "texture_plane",
+				"topology": "planar",
+				"construction": {
+					"method": "pixel_computation",
+					"primitives": [
+						"plane"
+					],
+					"operations": [
+						"create_image",
+						"compute_pixels",
+						"apply_texture"
+					]
+				},
+				"material": {
+					"type": "generated_texture",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~4 (quad)"
+			}
 		},
 		"sierpinski_triangle": {
 			"category": "unknown",
@@ -3301,7 +5178,38 @@
 			"size_group": "compact",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~0"
+			}
 		},
 		"sixteen_cell_net_space_showcase": {
 			"category": "unknown",
@@ -3471,7 +5379,37 @@
 			"size_group": "room_scale",
 			"tags": [
 				"tree"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"terrain_erosion": {
 			"category": "proceduralgeneration",
@@ -3495,7 +5433,34 @@
 				"procedural",
 				"landscape",
 				"sediment"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "terrain_deformation",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "heightmap_displacement",
+					"primitives": [],
+					"operations": [
+						"create_plane",
+						"compute_heights",
+						"displace_vertices"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"tessellating_portal_demo": {
 			"category": "unknown",
@@ -3655,7 +5620,35 @@
 			"size_group": "room_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"test_scene_4": {
 			"category": "unknown",
@@ -3687,7 +5680,35 @@
 			"size_group": "room_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"test_scene_5": {
 			"category": "unknown",
@@ -3719,7 +5740,37 @@
 			"size_group": "room_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"test_scene_6": {
 			"category": "unknown",
@@ -3751,7 +5802,35 @@
 			"size_group": "room_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"tile_patterns": {
 			"category": "unknown",
@@ -3811,7 +5890,39 @@
 				"vr",
 				"3point",
 				"ik"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"cylinder",
+						"capsule"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"tree_gen": {
 			"category": "morphogenesis",
@@ -3935,7 +6046,39 @@
 			"size_group": "compact",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"voronoi_diagrams": {
 			"category": "unknown",
@@ -4029,7 +6172,32 @@
 				"buoyancy",
 				"waves",
 				"simulation"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			}
 		},
 		"wave_function_collapse": {
 			"category": "unknown",
@@ -4192,7 +6360,37 @@
 			"size_group": "world_scale",
 			"tags": [
 				"procedural"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "~0"
+			}
 		}
 	},
 	"registry_info": {

@@ -43,7 +43,42 @@
 			"dev_themes": [
 				"formal_languages",
 				"grammar"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "~0"
+			}
 		},
 		"markov_chains_tree": {
 			"lookup_name": "markov_chains_tree",
@@ -89,7 +124,36 @@
 			"dev_themes": [
 				"formal_languages",
 				"grammar"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~64"
+			}
 		}
 	},
 	"sequence_mapping": {

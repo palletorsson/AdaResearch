@@ -27,7 +27,39 @@
 			"dev_themes": [
 				"biology",
 				"simulation"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~64"
+			}
 		},
 		"limbgrowth": {
 			"lookup_name": "limbgrowth",
@@ -50,7 +82,38 @@
 			"dev_themes": [
 				"biology",
 				"simulation"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"monte_carlo_protein": {
 			"lookup_name": "monte_carlo_protein",
@@ -73,7 +136,43 @@
 			"dev_themes": [
 				"biology",
 				"simulation"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "particle_system",
+					"affects": [
+						"transform",
+						"color",
+						"visibility"
+					]
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "~0"
+			}
 		},
 		"morphobody": {
 			"lookup_name": "morphobody",
@@ -95,7 +194,38 @@
 			"dev_themes": [
 				"biology",
 				"simulation"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"capsule"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~576"
+			}
 		},
 		"radiolaria": {
 			"lookup_name": "radiolaria",
@@ -129,7 +259,45 @@
 				"art",
 				"biology",
 				"simulation"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "particle_system",
+					"affects": [
+						"transform",
+						"color",
+						"visibility"
+					]
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "~256"
+			}
 		},
 		"ten_tulip_buckets": {
 			"lookup_name": "ten_tulip_buckets",
@@ -152,7 +320,32 @@
 			"dev_themes": [
 				"biology",
 				"simulation"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			}
 		},
 		"MolecularDesigner": {
 			"lookup_name": "MolecularDesigner",
@@ -185,7 +378,40 @@
 			"dev_themes": [
 				"biology",
 				"simulation"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"attractorsphere": {
 			"lookup_name": "attractorsphere",
@@ -226,7 +452,38 @@
 				"turing-patterns",
 				"gray-scott",
 				"morphogenesis"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "~0"
+			}
 		}
 	}
 }

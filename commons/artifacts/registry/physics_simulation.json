@@ -51,7 +51,39 @@
 				"notice how joint markers glow at constraint points"
 			],
 			"signals": [],
-			"capacity": "PREDICT how force propagates through a chain of pin joints by observing the relationship between driving frequency and swing amplitude."
+			"capacity": "PREDICT how force propagates through a chain of pin joints by observing the relationship between driving frequency and swing amplitude.",
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"CharacterRagdoll": {
 			"category": "forces",
@@ -101,7 +133,40 @@
 				"compare with ConeTwistBag for the same joint type on different geometry"
 			],
 			"signals": [],
-			"capacity": "BUILD a minimal ragdoll from rigid bodies and cone-twist joints and explain how joint limits produce biomechanically plausible motion."
+			"capacity": "BUILD a minimal ragdoll from rigid bodies and cone-twist joints and explain how joint limits produce biomechanically plausible motion.",
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "l_system_turtle",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"string_rewrite",
+						"turtle_interpret",
+						"emit_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"ConeTwistBag": {
 			"category": "forces",
@@ -151,7 +216,39 @@
 				"notice how twist is more restricted than swing"
 			],
 			"signals": [],
-			"capacity": "DISTINGUISH between swing span and twist span in a cone-twist joint and predict how angular limits shape pendular motion."
+			"capacity": "DISTINGUISH between swing span and twist span in a cone-twist joint and predict how angular limits shape pendular motion.",
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"DrawbridgeHinge": {
 			"category": "forces",
@@ -202,7 +299,38 @@
 				"observe the hinge limit preventing over-rotation"
 			],
 			"signals": [],
-			"capacity": "CONTROL a motorized hinge joint and explain how angular limits and motor velocity combine to create mechanical behavior."
+			"capacity": "CONTROL a motorized hinge joint and explain how angular limits and motor velocity combine to create mechanical behavior.",
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"GimbalStabilizer": {
 			"category": "forces",
@@ -254,7 +382,38 @@
 				"observe how pitch limits constrain vertical range while yaw is free"
 			],
 			"signals": [],
-			"capacity": "COMPOSE two orthogonal hinge joints into a gimbal system and predict how independent motor control on each axis produces 2D aiming."
+			"capacity": "COMPOSE two orthogonal hinge joints into a gimbal system and predict how independent motor control on each axis produces 2D aiming.",
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"HingeCrank": {
 			"category": "forces",
@@ -306,7 +465,40 @@
 				"notice the slider rail constraining the rod's path"
 			],
 			"signals": [],
-			"capacity": "DESCRIBE how combining hinge, pin, and slider joints converts rotary motion to linear motion in a crank-slider mechanism."
+			"capacity": "DESCRIBE how combining hinge, pin, and slider joints converts rotary motion to linear motion in a crank-slider mechanism.",
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"IKArm": {
 			"description": "FABRIK inverse kinematics on a 4-segment arm — target orbits, arm solves backward and forward",
@@ -365,7 +557,39 @@
 				"observe how damping gradually reduces the arc"
 			],
 			"signals": [],
-			"capacity": "EXPLAIN how a pin joint constrains motion to rotation around a fixed point and how damping converts oscillation into stillness."
+			"capacity": "EXPLAIN how a pin joint constrains motion to rotation around a fixed point and how damping converts oscillation into stillness.",
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"SliderPress": {
 			"category": "forces",
@@ -418,7 +642,39 @@
 				"compare slider behavior with hinge rotation"
 			],
 			"signals": [],
-			"capacity": "TUNE motor speed and force parameters to control a slider joint's translational motion and read the resulting position and velocity."
+			"capacity": "TUNE motor speed and force parameters to control a slider joint's translational motion and read the resulting position and velocity.",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"SpringSuspension": {
 			"category": "forces",
@@ -469,7 +725,38 @@
 				"notice how vertical motion is free but lateral motion is locked"
 			],
 			"signals": [],
-			"capacity": "EXPLAIN how a 6DOF joint with spring parameters on one axis and locks on all others creates suspension behavior."
+			"capacity": "EXPLAIN how a 6DOF joint with spring parameters on one axis and locks on all others creates suspension behavior.",
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"algo_gun": {
 			"category": "unknown",
@@ -506,7 +793,35 @@
 				"2d",
 				"interactive",
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"bouncing_ball": {
 			"capacity": "SEE that the bounce coefficient controls how much chaos (energy) survives each collision",
@@ -559,7 +874,40 @@
 				"physics",
 				"beginner",
 				"forces"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"cylinder",
+						"plane"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~16"
+			}
 		},
 		"cloth_simulation": {
 			"category": "physics",
@@ -602,7 +950,36 @@
 				"wind",
 				"deformable",
 				"grid"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"sphere"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~36"
+			}
 		},
 		"collision_detection": {
 			"category": "physics",
@@ -645,7 +1022,38 @@
 				"spatial_hashing",
 				"bounding_box",
 				"optimization"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"capsule"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"constraints": {
 			"capacity": "SEE that each constraint removes a degree of freedom — freedom is defined by what is forbidden",
@@ -693,7 +1101,41 @@
 				"solver",
 				"iterative",
 				"manifold"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_1_10_accelerating_towards_the_mouse_vr": {
 			"category": "unknown",
@@ -725,7 +1167,36 @@
 			"size_group": "compact",
 			"tags": [
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			}
 		},
 		"example_2_2_forces_mass_variation_vr": {
 			"category": "unknown",
@@ -759,7 +1230,38 @@
 			"size_group": "compact",
 			"tags": [
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_2_3_gravity_scaled_by_mass_vr": {
 			"category": "unknown",
@@ -793,7 +1295,38 @@
 			"size_group": "standard",
 			"tags": [
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_2_4_friction_vr": {
 			"category": "unknown",
@@ -825,7 +1358,40 @@
 			"size_group": "compact",
 			"tags": [
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder",
+						"plane"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_2_5_fluid_resistance_vr": {
 			"capacity": "FEEL that drag is the medium's memory of your velocity — the faster you move, the harder the world pushes back",
@@ -874,7 +1440,41 @@
 				"physics",
 				"forces",
 				"nature_of_code"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_2_6_single_attractor_vr": {
 			"category": "unknown",
@@ -909,7 +1509,36 @@
 			"tags": [
 				"chaos",
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_2_7_multiple_attractors_vr": {
 			"category": "unknown",
@@ -943,7 +1572,39 @@
 			"size_group": "compact",
 			"tags": [
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "varies"
+			}
 		},
 		"example_2_8_two_body_attraction_vr": {
 			"category": "unknown",
@@ -978,7 +1639,38 @@
 			"size_group": "standard",
 			"tags": [
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_2_9_n_body_attraction_vr": {
 			"category": "unknown",
@@ -1013,7 +1705,38 @@
 			"size_group": "standard",
 			"tags": [
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_3_10_swinging_pendulum_vr": {
 			"category": "unknown",
@@ -1048,7 +1771,36 @@
 			"tags": [
 				"pendulum",
 				"wave"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_3_11_a_spring_connection_vr": {
 			"category": "unknown",
@@ -1083,7 +1835,35 @@
 			"tags": [
 				"physics",
 				"spring"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_3_1_angular_motion_using_rotate_vr": {
 			"category": "unknown",
@@ -1117,7 +1897,36 @@
 			"size_group": "compact",
 			"tags": [
 				"animation"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			}
 		},
 		"example_3_2_forces_with_arbitrary_angular_motion_vr": {
 			"capacity": "SEE that rotation and translation are independent stories told by the same body",
@@ -1167,7 +1976,36 @@
 				"forces",
 				"nature_of_code",
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_3_3_pointing_in_the_direction_of_motion_vr": {
 			"capacity": "FEEL that heading is not chosen but inherited from motion — direction of motion IS orientation",
@@ -1217,7 +2055,36 @@
 				"oscillation",
 				"nature_of_code",
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			}
 		},
 		"example_3_4_polar_to_cartesian_vr": {
 			"category": "unknown",
@@ -1249,7 +2116,35 @@
 			"size_group": "compact",
 			"tags": [
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_3_5_simple_harmonic_motion_vr": {
 			"category": "oscillation",
@@ -1295,7 +2190,39 @@
 				"coupled-oscillators",
 				"energy",
 				"resonance"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_3_6_simple_harmonic_motion_ii_vr": {
 			"category": "unknown",
@@ -1330,7 +2257,35 @@
 			"tags": [
 				"animation",
 				"wave"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_3_7_oscillator_objects_vr": {
 			"category": "unknown",
@@ -1364,7 +2319,36 @@
 			"size_group": "compact",
 			"tags": [
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			}
 		},
 		"example_3_8_static_wave_vr": {
 			"category": "oscillation",
@@ -1411,7 +2395,36 @@
 				"interference",
 				"pde",
 				"membrane"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_3_9_the_wave_vr": {
 			"category": "unknown",
@@ -1445,7 +2458,33 @@
 			"size_group": "world_scale",
 			"tags": [
 				"wave"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_4_1_single_particle_vr": {
 			"category": "unknown",
@@ -1481,7 +2520,38 @@
 				"particle",
 				"simulation",
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_4_2_array_particles_vr": {
 			"category": "unknown",
@@ -1517,7 +2587,33 @@
 				"array",
 				"simulation",
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_4_3_particle_emitter_vr": {
 			"category": "unknown",
@@ -1553,7 +2649,38 @@
 				"particle",
 				"simulation",
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_4_4_multiple_emitters_vr": {
 			"category": "unknown",
@@ -1587,7 +2714,37 @@
 			"size_group": "compact",
 			"tags": [
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_4_5_inheritance_polymorphism_vr": {
 			"category": "unknown",
@@ -1621,7 +2778,33 @@
 			"size_group": "environment",
 			"tags": [
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~0"
+			}
 		},
 		"example_4_6_particle_repeller_vr": {
 			"category": "unknown",
@@ -1657,7 +2840,35 @@
 				"particle",
 				"simulation",
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"sphere"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~64"
+			}
 		},
 		"example_6_1_basic_rigidbody_vr": {
 			"category": "unknown",
@@ -1689,7 +2900,33 @@
 			"size_group": "compact",
 			"tags": [
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_6_2_falling_boxes_vr": {
 			"category": "unknown",
@@ -1721,7 +2958,35 @@
 			"size_group": "compact",
 			"tags": [
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_6_3_compound_bodies_vr": {
 			"category": "unknown",
@@ -1753,7 +3018,37 @@
 			"size_group": "compact",
 			"tags": [
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_6_4_windmill_vr": {
 			"category": "unknown",
@@ -1785,7 +3080,38 @@
 			"size_group": "compact",
 			"tags": [
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_6_5_chain_vr": {
 			"category": "unknown",
@@ -1817,7 +3143,38 @@
 			"size_group": "compact",
 			"tags": [
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_6_6_grab_vr": {
 			"category": "unknown",
@@ -1850,7 +3207,40 @@
 			"tags": [
 				"interactive",
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_6_7_bridge_vr": {
 			"category": "unknown",
@@ -1882,7 +3272,38 @@
 			"size_group": "compact",
 			"tags": [
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_6_8_collision_layers_vr": {
 			"category": "unknown",
@@ -1915,7 +3336,38 @@
 			"tags": [
 				"physics",
 				"vr"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"example_particle_body": {
 			"category": "unknown",
@@ -1949,7 +3401,35 @@
 			"size_group": "room_scale",
 			"tags": [
 				"particle"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "color_cycle",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"color"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"exercise_3_11_oop_wave_vr": {
 			"category": "unknown",
@@ -1983,7 +3463,33 @@
 			"size_group": "world_scale",
 			"tags": [
 				"wave"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"exercise_3_12_additive_wave_vr": {
 			"category": "unknown",
@@ -2017,7 +3523,33 @@
 			"size_group": "world_scale",
 			"tags": [
 				"wave"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"exercise_3_15_double_pendulum_vr": {
 			"category": "unknown",
@@ -2052,7 +3584,36 @@
 			"tags": [
 				"pendulum",
 				"wave"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"exercise_3_1_baton_vr": {
 			"category": "unknown",
@@ -2086,7 +3647,36 @@
 			"size_group": "compact",
 			"tags": [
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"exercise_3_5_spiral_vr": {
 			"category": "unknown",
@@ -2120,7 +3710,33 @@
 			"size_group": "compact",
 			"tags": [
 				"spiral"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"exercise_3_6_asteroids_vr": {
 			"category": "unknown",
@@ -2154,7 +3770,36 @@
 			"size_group": "compact",
 			"tags": [
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			}
 		},
 		"fem_simulation": {
 			"category": "physics",
@@ -2196,7 +3841,37 @@
 				"tetrahedral",
 				"engineering",
 				"solid_mechanics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~32"
+			}
 		},
 		"firework_launcher": {
 			"capacity": "SEE that a firework is a population explosion — one event becomes many independent paths, each obeying the same law",
@@ -2236,7 +3911,40 @@
 				"explosion",
 				"color",
 				"statistical"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "particle_system",
+					"affects": [
+						"transform",
+						"color",
+						"visibility"
+					]
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"fluid_simulation": {
 			"category": "physics",
@@ -2278,7 +3986,42 @@
 				"lagrangian",
 				"particles",
 				"continuum"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~64"
+			}
 		},
 		"force_fields": {
 			"capacity": "FEEL that a force field is a region with different rules — cross the boundary and the laws change",
@@ -2333,7 +4076,41 @@
 				"spatial",
 				"superposition",
 				"flow"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"friction_ramp": {
 			"capacity": "FEEL how friction coefficient controls the balance between motion and resistance on an inclined plane",
@@ -2375,7 +4152,36 @@
 				"static",
 				"force_diagram",
 				"beginner"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"gravity_well": {
 			"capacity": "FEEL that gravity is not a force but a curvature — objects follow the shape of warped space",
@@ -2414,7 +4220,40 @@
 				"orbit",
 				"field",
 				"general_relativity"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"lifetime_curves": {
 			"description": "Three emitters demonstrating color, size, and opacity curves over particle lifetime",
@@ -2464,7 +4303,40 @@
 				"maxwell",
 				"helical",
 				"iron_filings"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"mass_spring_damper": {
 			"capacity": "UNDERSTAND that every vibrating system is a mass-spring-damper in disguise — the damping ratio is the system's temperament",
@@ -2520,7 +4392,40 @@
 				"critical_damping",
 				"overdamped",
 				"harmonic_oscillator"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"momentum_collision": {
 			"description": "Elastic and inelastic collisions on a rail — conservation of momentum and kinetic energy",
@@ -2579,7 +4484,36 @@
 				"pairwise",
 				"computational",
 				"barnes_hut"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"sphere"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~100"
+			}
 		},
 		"newton_cradle": {
 			"capacity": "SEE that momentum transfers through a chain — the middle balls are messengers, not movers",
@@ -2617,7 +4551,39 @@
 				"elastic_collision",
 				"energy_conservation",
 				"F=ma"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"newtons_laws": {
 			"category": "physics",
@@ -2665,7 +4631,38 @@
 				"classical_mechanics",
 				"beginner",
 				"foundations"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"numerical_integration": {
 			"category": "physics",
@@ -2706,7 +4703,37 @@
 				"error",
 				"stability",
 				"comparison"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"particle_campfire": {
 			"description": "Synthesis campfire combining fire, embers, and smoke particle systems",
@@ -2773,7 +4800,36 @@
 				"statistical",
 				"ensemble",
 				"effects"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"raycastingpoints": {
 			"category": "unknown",
@@ -2805,7 +4861,42 @@
 			"size_group": "world_scale",
 			"tags": [
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere",
+						"plane"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "particle_system",
+					"affects": [
+						"transform",
+						"color",
+						"visibility"
+					]
+				},
+				"instance_strategy": "particles",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"rigid_body": {
 			"category": "physics",
@@ -2844,7 +4935,41 @@
 				"inertia_tensor",
 				"dynamics",
 				"tumbling"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"simulation_instability": {
 			"description": "Spring system with ramping timestep — watch stable oscillation drift, then explode as dt grows too large",
@@ -2887,7 +5012,39 @@
 				"parabola",
 				"player_interaction",
 				"VR"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"torus"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"soft_bodies": {
 			"category": "physics",
@@ -2928,7 +5085,39 @@
 				"squish",
 				"jiggle",
 				"position_based"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~32"
+			}
 		},
 		"softmill": {
 			"category": "unknown",
@@ -2962,7 +5151,34 @@
 			"size_group": "environment",
 			"tags": [
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "terrain_deformation",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "heightmap_displacement",
+					"primitives": [],
+					"operations": [
+						"create_plane",
+						"compute_heights",
+						"displace_vertices"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"softstopscene": {
 			"category": "unknown",
@@ -2996,7 +5212,38 @@
 			"size_group": "compact",
 			"tags": [
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"spring_mass_system": {
 			"category": "physics",
@@ -3037,7 +5284,38 @@
 				"elastic",
 				"deformable",
 				"propagation"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"spring_system": {
 			"capacity": "SEE that a spring network is a medium — perturbation at one point travels through connections",
@@ -3091,7 +5369,41 @@
 				"beats",
 				"energy_transfer",
 				"spectral"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"sub_emitters": {
 			"description": "Firework mortar launching projectiles that spawn burst particles on death",
@@ -3144,7 +5456,39 @@
 				"aesthetic",
 				"surreal",
 				"perpetual_motion"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"three_body_problem": {
 			"capacity": "WITNESS that three bodies under gravity have no formula — determinism and predictability are not the same thing",
@@ -3199,7 +5543,38 @@
 				"lagrange_points",
 				"figure_eight",
 				"initial_conditions"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~16"
+			}
 		},
 		"tscn_joint": {
 			"category": "forces",
@@ -3250,7 +5625,33 @@
 				"observe which axes each joint type permits or restricts"
 			],
 			"signals": [],
-			"capacity": "CLASSIFY joint types by the degrees of freedom they permit and predict which joint is appropriate for a given mechanical task."
+			"capacity": "CLASSIFY joint types by the degrees of freedom they permit and predict which joint is appropriate for a given mechanical task.",
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"vector_fields": {
 			"capacity": "SEE the force before the object arrives — the field exists everywhere, waiting",
@@ -3298,7 +5699,39 @@
 				"3d",
 				"advection",
 				"topology"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"verlet_integration": {
 			"capacity": "UNDERSTAND that the most stable integration method forgot to track velocity — positions remember",
@@ -3336,7 +5769,38 @@
 				"time_reversible",
 				"molecular_dynamics",
 				"game_physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "procedural_line",
+				"topology": "non_manifold",
+				"construction": {
+					"method": "vertex_line_strip",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"compute_vertices",
+						"connect_lines"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"viscosity_layers": {
 			"category": "physics",
@@ -3369,7 +5833,39 @@
 				"air",
 				"water",
 				"honey"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"waterflowers": {
 			"category": "unknown",
@@ -3404,7 +5900,42 @@
 			"size_group": "compact",
 			"tags": [
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [
+						"box",
+						"sphere",
+						"plane"
+					],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "physics",
+					"driven_by": "physics_engine",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~20000"
+			}
 		},
 		"waterone": {
 			"category": "unknown",
@@ -3436,7 +5967,41 @@
 			"size_group": "room_scale",
 			"tags": [
 				"3d"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"box",
+						"cylinder",
+						"plane"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "shader_time",
+					"driven_by": "shader_uniform",
+					"affects": [
+						"visual"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~45000"
+			}
 		}
 	},
 	"registry_info": {

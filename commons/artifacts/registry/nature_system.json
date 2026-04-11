@@ -7,10 +7,54 @@
 			"include_in_map_data": true,
 			"lookup_name": "creature_gallery",
 			"map_ready": true,
-			"map_sequences": ["pokemonstudio", "hazards", "testmaps"],
+			"map_sequences": [
+				"pokemonstudio",
+				"hazards",
+				"testmaps"
+			],
 			"name": "Creature Gallery",
 			"scene": "res://commons/scenes/creature_gallery.tscn",
-			"tags": ["gallery", "creature", "dna", "showcase", "nature_system"]
+			"tags": [
+				"gallery",
+				"creature",
+				"dna",
+				"showcase",
+				"nature_system"
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder",
+						"torus",
+						"plane"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "unlit",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "~288"
+			}
 		},
 		"critter_placer": {
 			"category": "nature_system",
@@ -42,7 +86,34 @@
 				"creature",
 				"hybrid",
 				"teaching"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"nature_system_demo": {
 			"category": "nature_system",
@@ -95,7 +166,33 @@
 				"hybrid",
 				"cross_kingdom",
 				"interactive"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		}
 	}
 }

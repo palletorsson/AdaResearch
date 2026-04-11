@@ -23,7 +23,31 @@
 				"collective",
 				"emergence",
 				"swarm"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "~20000"
+			}
 		},
 		"ant_agent": {
 			"name": "Ant Agent",
@@ -45,7 +69,35 @@
 				"collective",
 				"emergence",
 				"swarm"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"cylinder",
+						"capsule"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"particle_swarm_optimization_legacy": {
 			"name": "Particle Swarm Optimization (Legacy)",
@@ -68,7 +120,39 @@
 				"collective",
 				"emergence",
 				"swarm"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"plane"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~800"
+			}
 		},
 		"ant_colony_v2": {
 			"name": "Ant Colony V2",
@@ -100,7 +184,37 @@
 				"collective",
 				"emergence",
 				"swarm"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "texture_plane",
+				"topology": "planar",
+				"construction": {
+					"method": "pixel_computation",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_image",
+						"compute_pixels",
+						"apply_texture"
+					]
+				},
+				"material": {
+					"type": "generated_texture",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~4 (quad)"
+			}
 		},
 		"physarum_colony": {
 			"name": "Physarum Colony",
@@ -132,7 +246,37 @@
 				"collective",
 				"emergence",
 				"swarm"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "texture_plane",
+				"topology": "planar",
+				"construction": {
+					"method": "pixel_computation",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_image",
+						"compute_pixels",
+						"apply_texture"
+					]
+				},
+				"material": {
+					"type": "generated_texture",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~4 (quad)"
+			}
 		},
 		"ant_colony_optimization": {
 			"name": "Ant Colony Optimization",
@@ -163,15 +307,63 @@
 				],
 				"size_group": "world_scale",
 				"config_schema": {
-					"ant_count": {"type": "int", "default": 40, "min": 5, "max": 80},
-					"evaporation_rate": {"type": "float", "default": 0.02, "min": 0.001, "max": 0.1},
-					"pheromone_deposit": {"type": "float", "default": 5.0, "min": 1.0, "max": 20.0},
-					"alpha_weight": {"type": "float", "default": 1.0, "min": 0.1, "max": 5.0},
-					"beta_weight": {"type": "float", "default": 2.0, "min": 0.1, "max": 5.0},
-					"ant_speed": {"type": "float", "default": 3.0, "min": 1.0, "max": 8.0},
-					"field_size": {"type": "float", "default": 6.0, "min": 3.0, "max": 10.0},
-					"food_source_count": {"type": "int", "default": 4, "min": 1, "max": 8},
-					"mode": {"type": "string", "default": "COLONY", "enum": ["COLONY", "COMMUNICATION", "MULTI_SOURCE"]}
+					"ant_count": {
+						"type": "int",
+						"default": 40,
+						"min": 5,
+						"max": 80
+					},
+					"evaporation_rate": {
+						"type": "float",
+						"default": 0.02,
+						"min": 0.001,
+						"max": 0.1
+					},
+					"pheromone_deposit": {
+						"type": "float",
+						"default": 5.0,
+						"min": 1.0,
+						"max": 20.0
+					},
+					"alpha_weight": {
+						"type": "float",
+						"default": 1.0,
+						"min": 0.1,
+						"max": 5.0
+					},
+					"beta_weight": {
+						"type": "float",
+						"default": 2.0,
+						"min": 0.1,
+						"max": 5.0
+					},
+					"ant_speed": {
+						"type": "float",
+						"default": 3.0,
+						"min": 1.0,
+						"max": 8.0
+					},
+					"field_size": {
+						"type": "float",
+						"default": 6.0,
+						"min": 3.0,
+						"max": 10.0
+					},
+					"food_source_count": {
+						"type": "int",
+						"default": 4,
+						"min": 1,
+						"max": 8
+					},
+					"mode": {
+						"type": "string",
+						"default": "COLONY",
+						"enum": [
+							"COLONY",
+							"COMMUNICATION",
+							"MULTI_SOURCE"
+						]
+					}
 				}
 			},
 			"complexity": "advanced",
@@ -180,7 +372,37 @@
 				"emergence",
 				"swarm",
 				"communication"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "vertex",
+					"driven_by": "per_frame_rebuild",
+					"affects": [
+						"vertex_positions"
+					]
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "varies"
+			}
 		},
 		"particle_swarm_optimization": {
 			"name": "Particle Swarm Optimization",
@@ -212,7 +434,39 @@
 				"collective",
 				"emergence",
 				"swarm"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~25"
+			}
 		},
 		"boids_aquarium": {
 			"name": "Boids Aquarium",
@@ -253,7 +507,42 @@
 				"collective",
 				"emergence",
 				"swarm"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"stigmergy_grid": {
 			"name": "Stigmergy Grid",
@@ -278,7 +567,39 @@
 				"collective",
 				"emergence",
 				"swarm"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "texture_plane",
+				"topology": "planar",
+				"construction": {
+					"method": "pixel_computation",
+					"primitives": [
+						"plane"
+					],
+					"operations": [
+						"create_image",
+						"compute_pixels",
+						"apply_texture"
+					]
+				},
+				"material": {
+					"type": "generated_texture",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~4 (quad)"
+			}
 		},
 		"AntColonyV2": {
 			"lookup_name": "AntColonyV2",
@@ -313,7 +634,37 @@
 			],
 			"tags": [
 				"swarm"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "texture_plane",
+				"topology": "planar",
+				"construction": {
+					"method": "pixel_computation",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_image",
+						"compute_pixels",
+						"apply_texture"
+					]
+				},
+				"material": {
+					"type": "generated_texture",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~4 (quad)"
+			}
 		},
 		"fitness_landscape_politics": {
 			"name": "Fitness Landscape Politics",
@@ -350,7 +701,40 @@
 				"emergence",
 				"swarm",
 				"philosophy"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "vertex_color",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~64"
+			}
 		},
 		"PhysarumColony": {
 			"lookup_name": "PhysarumColony",
@@ -385,7 +769,37 @@
 			],
 			"tags": [
 				"swarm"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "texture_plane",
+				"topology": "planar",
+				"construction": {
+					"method": "pixel_computation",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_image",
+						"compute_pixels",
+						"apply_texture"
+					]
+				},
+				"material": {
+					"type": "generated_texture",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~4 (quad)"
+			}
 		}
 	}
 }

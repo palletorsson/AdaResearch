@@ -10,9 +10,9 @@
 				"non_euclidean"
 			],
 			"footprint": [
-				3.0,
-				3.0,
-				10.0
+				3,
+				3,
+				10
 			],
 			"gamwell_reference": "Non-Euclidean geometry, Riemannian manifolds, topology",
 			"include_in_map_data": true,
@@ -30,9 +30,9 @@
 				"bulge_max_radius": "Maximum bulge radius (default: 2.0)",
 				"bulge_seed": "Random seed for reproducibility (default: 42)",
 				"footprint": [
-					3.0,
-					3.0,
-					10.0
+					3,
+					3,
+					10
 				],
 				"num_bulges": "Number of bulge deformations (default: 5)",
 				"size_group": "xlarge",
@@ -53,7 +53,39 @@
 				"procedural",
 				"cave",
 				"parametric"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder",
+						"torus"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"curvature_slider": {
 			"category": "geometry",
@@ -73,9 +105,9 @@
 			"name": "Curvature Slider",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -86,7 +118,32 @@
 				"slider",
 				"interactive",
 				"alternative_geometry"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "delegated_scene",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "scene_instantiation",
+					"primitives": [],
+					"operations": [
+						"load_scene",
+						"instantiate",
+						"configure"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "varies"
+			}
 		},
 		"elliptic_surface": {
 			"category": "geometry",
@@ -105,9 +162,9 @@
 			"name": "Elliptic Surface",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -118,7 +175,35 @@
 				"non_euclidean",
 				"surface",
 				"alternative_geometry"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"entropy_morphogenesis": {
 			"category": "unknown",
@@ -129,9 +214,9 @@
 				"non_euclidean"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "entropy_morphogenesis",
@@ -142,9 +227,9 @@
 			"name": "entropy_morphogenesis",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -152,7 +237,35 @@
 			"size_group": "compact",
 			"tags": [
 				"geometry"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"grid_overlay",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~4-24 (base mesh)"
+			}
 		},
 		"gyroid_cheese": {
 			"category": "unknown",
@@ -163,9 +276,9 @@
 				"non_euclidean"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "gyroid_cheese",
@@ -174,9 +287,9 @@
 			"name": "gyroid_cheese",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -184,7 +297,35 @@
 			"size_group": "compact",
 			"tags": [
 				"geometry"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "shader_driven",
+				"topology": "planar",
+				"construction": {
+					"method": "shader_rendering",
+					"primitives": [],
+					"operations": [
+						"create_base_mesh",
+						"apply_shader",
+						"set_parameters"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"grid_overlay",
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "~4-24 (base mesh)"
+			}
 		},
 		"hyperbolic_surface": {
 			"category": "geometry",
@@ -203,9 +344,9 @@
 			"name": "Hyperbolic Surface",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -217,7 +358,34 @@
 				"saddle",
 				"surface",
 				"alternative_geometry"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": [
+						"metallic"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"marching_cubes": {
 			"category": "unknown",
@@ -228,9 +396,9 @@
 				"non_euclidean"
 			],
 			"footprint": [
-				1.0,
-				21.0,
-				11.0
+				1,
+				21,
+				11
 			],
 			"include_in_map_data": true,
 			"lookup_name": "marching_cubes",
@@ -241,9 +409,9 @@
 			"name": "Marching Cubes Test",
 			"parameters": {
 				"footprint": [
-					1.0,
-					21.0,
-					11.0
+					1,
+					21,
+					11
 				],
 				"size_group": "world_scale"
 			},
@@ -251,7 +419,37 @@
 			"size_group": "world_scale",
 			"tags": [
 				"geometry"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "~256"
+			}
 		},
 		"mobius_strip_altgeo": {
 			"category": "geometry",
@@ -273,7 +471,51 @@
 				"non_orientable",
 				"walkable",
 				"alternative_geometry"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					3,
+					1,
+					3
+				],
+				"reading_light": {
+					"type": "omni",
+					"direction": "+z",
+					"cone": 360,
+					"radius": 3
+				}
+			},
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"mobius_world": {
 			"category": "unknown",
@@ -308,7 +550,37 @@
 			"tags": [
 				"3d",
 				"physics"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "parametric_surface",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "uv_grid_triangulation",
+					"primitives": [],
+					"operations": [
+						"compute_vertices",
+						"generate_triangles",
+						"compute_normals"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "wireframe",
+					"key_properties": [
+						"emission",
+						"grid_overlay",
+						"metallic",
+						"double_sided"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"non_euclidean_space": {
 			"category": "geometry",
@@ -325,9 +597,9 @@
 			"name": "Non-Euclidean Space",
 			"parameters": {
 				"footprint": [
-					7.0,
-					1.0,
-					8.0
+					7,
+					1,
+					8
 				],
 				"size_group": "environment"
 			},
@@ -338,7 +610,33 @@
 				"elliptic",
 				"impossible_space",
 				"alternative_geometry"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "transform",
+					"driven_by": "per_frame_update",
+					"affects": [
+						"transform"
+					]
+				},
+				"instance_strategy": "single",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"organic_space": {
 			"category": "unknown",
@@ -349,9 +647,9 @@
 				"non_euclidean"
 			],
 			"footprint": [
-				1.0,
-				6.0,
-				13.0
+				1,
+				6,
+				13
 			],
 			"include_in_map_data": true,
 			"lookup_name": "organic_space",
@@ -363,9 +661,9 @@
 			"name": "Organic Space",
 			"parameters": {
 				"footprint": [
-					1.0,
-					6.0,
-					13.0
+					1,
+					6,
+					13
 				],
 				"size_group": "world_scale"
 			},
@@ -373,7 +671,36 @@
 			"size_group": "world_scale",
 			"tags": [
 				"geometry"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "boolean_composition",
+				"topology": "volumetric",
+				"construction": {
+					"method": "csg_boolean",
+					"primitives": [
+						"box",
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_primitives",
+						"boolean_combine"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"rhizomatic_maze_space": {
 			"category": "unknown",
@@ -384,9 +711,9 @@
 				"non_euclidean"
 			],
 			"footprint": [
-				50.0,
-				21.0,
-				50.0
+				50,
+				21,
+				50
 			],
 			"include_in_map_data": true,
 			"lookup_name": "rhizomatic_maze_space",
@@ -398,9 +725,9 @@
 			"name": "Rhizomatic Maze Space",
 			"parameters": {
 				"footprint": [
-					50.0,
-					21.0,
-					50.0
+					50,
+					21,
+					50
 				],
 				"size_group": "world_scale"
 			},
@@ -408,7 +735,31 @@
 			"size_group": "world_scale",
 			"tags": [
 				"geometry"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"rhizomatic_structure": {
 			"category": "geometry",
@@ -451,7 +802,33 @@
 				"tune connection_probability to move between tree and rhizome",
 				"change growth_direction_randomness to bias branching",
 				"inspect cycles formed by lateral reconnections"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "pbr",
+					"key_properties": []
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "array",
+				"vertex_estimate": "unknown"
+			}
 		},
 		"riemann_pi": {
 			"category": "unknown",
@@ -462,9 +839,9 @@
 				"non_euclidean"
 			],
 			"footprint": [
-				23.0,
-				6.0,
-				4.0
+				23,
+				6,
+				4
 			],
 			"include_in_map_data": true,
 			"lookup_name": "riemann_pi",
@@ -473,9 +850,9 @@
 			"name": "riemann_pi",
 			"parameters": {
 				"footprint": [
-					23.0,
-					6.0,
-					4.0
+					23,
+					6,
+					4
 				],
 				"size_group": "world_scale"
 			},
@@ -483,7 +860,42 @@
 			"size_group": "world_scale",
 			"tags": [
 				"geometry"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "instanced_particles",
+				"topology": "scattered",
+				"construction": {
+					"method": "multimesh_instancing",
+					"primitives": [
+						"sphere",
+						"plane"
+					],
+					"operations": [
+						"allocate_instances",
+						"set_transforms",
+						"update_per_frame"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "unshaded",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~512"
+			}
 		},
 		"riemann_sphere": {
 			"category": "geometry",
@@ -502,9 +914,9 @@
 			"name": "Riemann Sphere",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -516,7 +928,39 @@
 				"projection",
 				"sphere",
 				"alternative_geometry"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "composed_primitives",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "primitive_assembly",
+					"primitives": [
+						"sphere",
+						"torus",
+						"plane"
+					],
+					"operations": [
+						"create_primitives",
+						"position_children"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "static",
+					"driven_by": null,
+					"affects": []
+				},
+				"instance_strategy": "few",
+				"vertex_estimate": "~512"
+			}
 		},
 		"riemann_torus": {
 			"category": "unknown",
@@ -527,9 +971,9 @@
 				"non_euclidean"
 			],
 			"footprint": [
-				15.0,
-				2.0,
-				2.0
+				15,
+				2,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "riemann_torus",
@@ -538,9 +982,9 @@
 			"name": "riemann_torus",
 			"parameters": {
 				"footprint": [
-					15.0,
-					2.0,
-					2.0
+					15,
+					2,
+					2
 				],
 				"size_group": "world_scale"
 			},
@@ -548,7 +992,39 @@
 			"size_group": "world_scale",
 			"tags": [
 				"geometry"
-			]
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "unknown",
+					"primitives": [
+						"cylinder",
+						"torus",
+						"plane"
+					],
+					"operations": []
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom_fragment",
+					"key_properties": [
+						"emission",
+						"metallic",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "particle_lifecycle",
+					"driven_by": "cpu_simulation",
+					"affects": [
+						"transform",
+						"color"
+					]
+				},
+				"instance_strategy": "multimesh",
+				"vertex_estimate": "~64"
+			}
 		}
 	},
 	"registry_info": {
