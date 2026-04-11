@@ -67,8 +67,18 @@ static func build(
 	var kingdom: int = dna.get_kingdom()
 	var hybridity: float = dna.get_hybridity()
 
-	# Build the primary mesh
-	var root: Node3D = _build_kingdom(kingdom, dna, parent, mapper, lod)
+	# Check if this DNA uses the universal morphology pipeline
+	# (body_type > 4.0 or form_process gene is non-default for the kingdom)
+	var root: Node3D = null
+	if _should_use_pipeline(dna, kingdom):
+		root = MorphoPipeline.build_from_dna(dna, parent, mapper, lod)
+		if root:
+			root.set_meta("morphology_root", true)
+			root.set_meta("pipeline_built", true)
+			return root
+
+	# Build the primary mesh via kingdom-specific builder
+	root = _build_kingdom(kingdom, dna, parent, mapper, lod)
 	if not root:
 		root = _fallback_mesh(parent)
 
@@ -131,6 +141,41 @@ static func decompose_body_type(body_type: float) -> Dictionary:
 		"secondary": secondary,
 		"hybridity": hybridity,
 	}
+
+
+# ═══════════════════════════════════════════════════════════════
+# INTERNAL — Pipeline routing
+# ═══════════════════════════════════════════════════════════════
+
+## Determine whether this DNA should use the universal MorphoPipeline
+## instead of the kingdom-specific builder. Routes to pipeline when:
+##   - body_type > 4.0 (explicit pipeline request)
+##   - form_process gene is set to a value that doesn't match the kingdom default
+static func _should_use_pipeline(dna: CritterDNA, kingdom: int) -> bool:
+	# Explicit pipeline request: body_type beyond the 4 kingdoms
+	if dna.body_type > 4.0:
+		return true
+
+	# Check if form_process gene exists and differs from kingdom default
+	var fp: float = dna.get("form_process") as float if dna.get("form_process") != null else -1.0
+	if fp < 0.0:
+		return false  # Gene not set (old DNA format) — use kingdom builder
+
+	# Kingdom defaults: tree=0.0-0.15, creature=0.2-0.4, flower=0.2-0.4, fungus=0.0-0.2
+	# Only route to pipeline if form_process is clearly outside the kingdom's natural range
+	match kingdom:
+		KINGDOM_TREE:
+			return fp > 0.45  # Trees are naturally "grown" (low form_process)
+		KINGDOM_CREATURE:
+			return fp > 0.6 or fp < 0.1  # Creatures are naturally "extruded"
+		KINGDOM_FLOWER:
+			return fp > 0.6 or fp < 0.1
+		KINGDOM_FUNGUS:
+			return fp > 0.45
+		KINGDOM_HYBRID:
+			return true  # Hybrids always try the pipeline
+
+	return false
 
 
 # ═══════════════════════════════════════════════════════════════

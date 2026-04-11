@@ -46,7 +46,25 @@ const GENE_GROUPS: Array[Dictionary] = [
 		{"id": "pattern_type", "label": "Pattern Type", "min": 0.0, "max": 1.0, "step": 0.1},
 		{"id": "pattern_density", "label": "Pattern Density", "min": 0.0, "max": 1.0, "step": 0.05},
 	]},
+	{"name": "Process", "genes": [
+		{"id": "form_process", "label": "Form Process", "min": 0.0, "max": 1.0, "step": 0.05},
+		{"id": "skeleton_complexity", "label": "Skeleton", "min": 0.0, "max": 1.0, "step": 0.05},
+		{"id": "surface_method", "label": "Surface", "min": 0.0, "max": 1.0, "step": 0.05},
+		{"id": "modularity", "label": "Modularity", "min": 0.0, "max": 1.0, "step": 0.05},
+		{"id": "recursion_depth", "label": "Recursion", "min": 0.0, "max": 1.0, "step": 0.05},
+	]},
 ]
+
+# ── Form process taxonomy labels ─────────────────────────────────
+const PROCESS_LABELS: Array[String] = ["Grown", "Grown", "Extruded", "Extruded", "Carved", "Carved", "Carved", "Folded", "Folded", "Crystallized", "Crystallized"]
+const SKELETON_LABELS: Array[String] = ["None", "None", "Simple", "Simple", "Spine", "Spine", "Branching", "Branching", "Recursive", "Recursive", "Deep"]
+const SURFACE_LABELS: Array[String] = ["Sweep", "Sweep", "Sweep", "Revolution", "Revolution", "SDF", "SDF", "Primitive", "Primitive", "Particle", "Particle"]
+
+# ── Biome stages (loaded from soft_stages.json) ──────────────────
+var _biome_stages: Dictionary = {}
+var _current_stage: String = ""
+var _biome_mode: bool = false
+var _biome_entities: Array = []
 
 # ── State ─────────────────────────────────────────────────────────
 var _dna: CritterDNA = null
@@ -67,8 +85,10 @@ var viewport_container: SubViewportContainer = null
 var viewport: SubViewport = null
 var cam: Camera3D = null
 var info_label: Label = null
+var process_label: Label = null
 var fav_list: ItemList = null
 var fav_name_edit: LineEdit = null
+var stage_selector: OptionButton = null
 var orbit_yaw: float = 0.3
 var orbit_pitch: float = 0.4
 var orbit_dist: float = 4.0
@@ -124,16 +144,21 @@ func _ready() -> void:
 	viewport.add_child(_organism_root)
 
 	_spawner = CritterSpawner.new(_organism_root)
-	_spawner.max_population = 5
+	_spawner.max_population = 15  # Enough for main creature + biome ring
 	_spawner.default_lod = 0
+
+	# Load biome stages
+	_load_biome_stages()
 
 	# Build UI
 	_build_kingdom_buttons()
 	_build_preset_buttons()
+	_build_biome_controls()
 	_build_color_pickers()
 	_build_gene_sliders()
 	_build_favorites_panel()
 	_build_info_bar()
+	_build_export_button()
 
 	# Load saved favorites
 	_load_favorites()
@@ -170,7 +195,7 @@ func _build_kingdom_buttons() -> void:
 	controls.add_child(header)
 
 	var hbox := HBoxContainer.new()
-	var kingdoms_list: Array[String] = ["Tree", "Creature", "Flower", "Fungus", "Hybrid"]
+	var kingdoms_list: Array[String] = ["Tree", "Creature", "Flower", "Fungus", "Hybrid", "Pipeline"]
 	for i: int in kingdoms_list.size():
 		var btn := Button.new()
 		btn.text = kingdoms_list[i]
@@ -554,6 +579,166 @@ func _build_info_bar() -> void:
 	info_label.add_theme_font_size_override("font_size", 10)
 	controls.add_child(info_label)
 
+	process_label = Label.new()
+	process_label.text = "Process: — | Skeleton: — | Surface: —"
+	process_label.add_theme_font_size_override("font_size", 10)
+	process_label.add_theme_color_override("font_color", Color(0.4, 0.9, 0.9))
+	controls.add_child(process_label)
+
+
+func _build_biome_controls() -> void:
+	var sep := HSeparator.new()
+	controls.add_child(sep)
+
+	var header := Label.new()
+	header.text = "Biome Stage"
+	header.add_theme_font_size_override("font_size", 14)
+	controls.add_child(header)
+
+	# Stage selector dropdown
+	stage_selector = OptionButton.new()
+	stage_selector.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var stage_names: Array = _biome_stages.keys()
+	stage_names.sort()
+	for i: int in stage_names.size():
+		var sname: String = stage_names[i] as String
+		stage_selector.add_item(sname, i)
+	stage_selector.item_selected.connect(_on_stage_selected)
+	controls.add_child(stage_selector)
+
+	# Biome toggle button
+	var biome_row := HBoxContainer.new()
+	var biome_btn := Button.new()
+	biome_btn.text = "Biome Mode"
+	biome_btn.toggle_mode = true
+	biome_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	biome_btn.toggled.connect(_on_biome_toggled)
+	biome_row.add_child(biome_btn)
+
+	# Stage info label
+	var stage_info := Label.new()
+	stage_info.name = "StageInfo"
+	stage_info.text = ""
+	stage_info.add_theme_font_size_override("font_size", 10)
+	stage_info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	biome_row.add_child(stage_info)
+	controls.add_child(biome_row)
+
+
+func _build_export_button() -> void:
+	var sep := HSeparator.new()
+	controls.add_child(sep)
+
+	var export_btn := Button.new()
+	export_btn.text = "Export DNA to JSON"
+	export_btn.pressed.connect(_export_dna)
+	controls.add_child(export_btn)
+
+
+func _load_biome_stages() -> void:
+	var path: String = "res://commons/maps/soft_stages.json"
+	if not FileAccess.file_exists(path):
+		return
+	var file := FileAccess.open(path, FileAccess.READ)
+	if not file:
+		return
+	var text: String = file.get_as_text()
+	file.close()
+	var parsed: Variant = JSON.parse_string(text)
+	if parsed is Dictionary:
+		_biome_stages = parsed as Dictionary
+
+
+func _on_stage_selected(idx: int) -> void:
+	var sname: String = stage_selector.get_item_text(idx)
+	_current_stage = sname
+
+	# Update stage info
+	var stage_info: Label = controls.get_node_or_null("StageInfo") as Label
+	if stage_info and _biome_stages.has(sname):
+		var stage: Dictionary = _biome_stages[sname] as Dictionary
+		var kingdoms: Array = stage.get("nature_kingdoms", [])
+		var density: float = stage.get("vegetation_density", 0.0) as float
+		stage_info.text = "Kingdoms: %s | Density: %.0f%%" % [
+			", ".join(PackedStringArray(kingdoms)) if kingdoms.size() > 0 else "none",
+			density * 100.0]
+
+	# If biome mode is active, respawn the ring
+	if _biome_mode:
+		_spawn_biome_ring()
+
+
+func _on_biome_toggled(pressed: bool) -> void:
+	_biome_mode = pressed
+	if pressed:
+		_spawn_biome_ring()
+	else:
+		_clear_biome_ring()
+
+
+func _spawn_biome_ring() -> void:
+	_clear_biome_ring()
+	if not _biome_stages.has(_current_stage):
+		return
+
+	var stage: Dictionary = _biome_stages[_current_stage] as Dictionary
+	var kingdoms: Array = stage.get("nature_kingdoms", [])
+	if kingdoms.is_empty():
+		return
+
+	var kingdom_map: Dictionary = {"tree": 0, "creature": 1, "flower": 2, "fungus": 3}
+	var count: int = mini(kingdoms.size() * 2, 10)
+	var radius: float = 3.0
+
+	for i: int in count:
+		var angle: float = TAU * float(i) / float(count)
+		var pos := Vector3(cos(angle) * radius, 0.0, sin(angle) * radius)
+		var kname: String = kingdoms[i % kingdoms.size()] as String
+		var kid: int = kingdom_map.get(kname, 0)
+		var ring_dna := CritterDNA.random_kingdom(kid)
+		ring_dna.scale = randf_range(0.4, 0.8)
+		var ent: CritterEntity = _spawner.spawn(ring_dna, pos, 1)
+		if ent:
+			ent.set_process(false)
+			ent.set_physics_process(false)
+			_biome_entities.append(ent)
+
+
+func _clear_biome_ring() -> void:
+	for ent: Variant in _biome_entities:
+		if ent is Node and is_instance_valid(ent as Node):
+			(ent as Node).queue_free()
+	_biome_entities.clear()
+
+
+func _export_dna() -> void:
+	if not _dna:
+		return
+
+	# Ensure directory exists
+	var dir_path: String = "user://creature_snapshots"
+	DirAccess.make_dir_recursive_absolute(dir_path)
+
+	# Build export data
+	var data: Dictionary = _serialize_dna(_dna)
+	data["export_time"] = Time.get_datetime_string_from_system()
+	data["auto_name"] = _auto_name_from_dna(_dna)
+
+	# Process taxonomy
+	var fp_idx: int = clampi(int(_dna.form_process * 10.0), 0, PROCESS_LABELS.size() - 1)
+	data["form_taxonomy"] = PROCESS_LABELS[fp_idx]
+	data["biome_stage"] = _current_stage
+
+	# Save as JSON
+	var timestamp: String = Time.get_datetime_string_from_system().replace(":", "-").replace("T", "_")
+	var filename: String = "%s/%s.json" % [dir_path, timestamp]
+	var file := FileAccess.open(filename, FileAccess.WRITE)
+	if file:
+		file.store_string(JSON.stringify(data, "  "))
+		file.close()
+		print("[CreatureEditor] Exported DNA to: ", filename)
+		_play_save_sound()
+
 
 # ═══════════════════════════════════════════════════════════════
 # ORGANISM MANAGEMENT
@@ -561,7 +746,16 @@ func _build_info_bar() -> void:
 
 func _spawn_new(kingdom: int) -> void:
 	_clear_organism()
-	if kingdom == 4:
+	if kingdom == 5:
+		# Pipeline mode — force MorphoPipeline route
+		_dna = CritterDNA.random()
+		_dna.body_type = 5.0
+		_dna.form_process = randf_range(0.0, 1.0)
+		_dna.skeleton_complexity = randf_range(0.0, 1.0)
+		_dna.surface_method = randf_range(0.0, 1.0)
+		_dna.modularity = randf_range(0.0, 1.0)
+		_dna.recursion_depth = randf_range(0.0, 0.6)
+	elif kingdom == 4:
 		_dna = CritterDNA.random()
 		_dna.body_type = randf_range(0.5, 3.5)
 	else:
@@ -644,11 +838,19 @@ func _sync_color_pickers_to_dna() -> void:
 func _update_info() -> void:
 	if not info_label or not _dna:
 		return
-	var kingdoms: Array[String] = ["Tree", "Creature", "Flower", "Fungus", "Hybrid"]
+	var kingdoms: Array[String] = ["Tree", "Creature", "Flower", "Fungus", "Hybrid", "Pipeline"]
 	var kid: int = int(round(_dna.body_type))
-	var kname: String = kingdoms[clampi(kid, 0, 4)]
+	var kname: String = kingdoms[clampi(kid, 0, 5)]
 	info_label.text = "%s | seg=%.0f sym=%.0f scale=%.1f" % [
 		kname, _dna.segments, _dna.symmetry, _dna.scale]
+
+	# Update process taxonomy label
+	if process_label:
+		var fp_idx: int = clampi(int(_dna.form_process * 10.0), 0, PROCESS_LABELS.size() - 1)
+		var sk_idx: int = clampi(int(_dna.skeleton_complexity * 10.0), 0, SKELETON_LABELS.size() - 1)
+		var sf_idx: int = clampi(int(_dna.surface_method * 10.0), 0, SURFACE_LABELS.size() - 1)
+		process_label.text = "Process: %s | Skeleton: %s | Surface: %s" % [
+			PROCESS_LABELS[fp_idx], SKELETON_LABELS[sk_idx], SURFACE_LABELS[sf_idx]]
 
 
 # ═══════════════════════════════════════════════════════════════

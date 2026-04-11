@@ -75,6 +75,13 @@ extends Resource
 @export_range(0.0, 1.0) var volatility: float = 0.3   ## How unstable current form is
 @export_range(0.0, 5.0) var latent_ability: float = 0.0  ## Which transmutation it carries
 
+# ── MORPHOLOGY PROCESS (how form is made) ─────────────────────
+@export_range(0.0, 1.0) var form_process: float = 0.3       ## 0=grown (L-system) 0.3=extruded (sweep) 0.5=carved (boolean) 0.7=folded (origami) 1.0=crystallized
+@export_range(0.0, 1.0) var skeleton_complexity: float = 0.5 ## 0=no skeleton (primitive only) 0.5=simple spine 1.0=branching recursive
+@export_range(0.0, 1.0) var surface_method: float = 0.0      ## 0=sweep tube 0.3=revolution 0.5=SDF field 0.7=primitive mesh 1.0=particle cloud
+@export_range(0.0, 1.0) var modularity: float = 0.5          ## 0=monolithic (single mesh) 0.5=segmented 1.0=modular (many distinct parts)
+@export_range(0.0, 1.0) var recursion_depth: float = 0.3     ## 0=no recursion 1.0=deep recursive structure (fractals L-systems)
+
 # ── LINEAGE (not inherited — accumulated) ──────────────────────
 @export var generation: int = 0
 @export var parent_a_id: String = ""
@@ -223,6 +230,9 @@ static func random_kingdom(kingdom: int, rng_seed: int = -1) -> CritterDNA:
 			dna.roughness = rng.randf_range(0.5, 1.0)  # Bark
 			dna.inflorescence = rng.randf_range(0.0, 0.3)
 			dna.root_type = rng.randf_range(0.5, 1.0)  # Deep roots
+			dna.form_process = rng.randf_range(0.0, 0.15)  # Grown (L-system)
+			dna.skeleton_complexity = rng.randf_range(0.6, 1.0)  # Branching
+			dna.recursion_depth = rng.randf_range(0.3, 0.8)  # Recursive branching
 
 		1:  # Creature — mobile, segments, legs
 			dna.mobility = rng.randf_range(0.3, 1.0)
@@ -232,6 +242,9 @@ static func random_kingdom(kingdom: int, rng_seed: int = -1) -> CritterDNA:
 			dna.part_length = rng.randf_range(0.3, 1.5)  # Leg length
 			dna.aggression = rng.randf_range(0.1, 0.8)
 			dna.curiosity = rng.randf_range(0.3, 0.9)
+			dna.form_process = rng.randf_range(0.2, 0.4)  # Extruded (spine sweep)
+			dna.skeleton_complexity = rng.randf_range(0.3, 0.7)  # Simple spine
+			dna.modularity = rng.randf_range(0.4, 0.8)  # Segmented + limbs
 
 		2:  # Flower — rooted, petals, scent
 			dna.mobility = rng.randf_range(0.0, 0.02)
@@ -244,6 +257,8 @@ static func random_kingdom(kingdom: int, rng_seed: int = -1) -> CritterDNA:
 			dna.roughness = rng.randf_range(0.05, 0.4)  # Smooth petals
 			dna.inflorescence = rng.randf_range(0.0, 1.0)
 			dna.root_type = rng.randf_range(0.0, 0.5)  # Bulb/rhizome
+			dna.form_process = rng.randf_range(0.2, 0.4)  # Extruded (Bézier sweep)
+			dna.surface_method = rng.randf_range(0.0, 0.2)  # Sweep tube
 
 		3:  # Fungus — decomposer, cap, spores
 			dna.mobility = rng.randf_range(0.0, 0.01)
@@ -255,6 +270,9 @@ static func random_kingdom(kingdom: int, rng_seed: int = -1) -> CritterDNA:
 			dna.sociality = rng.randf_range(0.4, 0.9)   # Colony forming
 			dna.inflorescence = rng.randf_range(0.0, 0.8)  # Cluster pattern
 			dna.root_type = rng.randf_range(0.2, 0.7)  # Mycelium
+			dna.form_process = rng.randf_range(0.0, 0.2)  # Grown (revolution)
+			dna.surface_method = rng.randf_range(0.2, 0.4)  # Revolution
+			dna.modularity = rng.randf_range(0.3, 0.7)  # Cap + stem + gills
 
 		4:  # Hybrid — truly random, the whole space is open
 			pass  # Already fully random from random()
