@@ -89,9 +89,11 @@ var viewport: SubViewport = null
 var cam: Camera3D = null
 var info_label: Label = null
 var process_label: Label = null
+var stage_info_label: Label = null
 var fav_list: ItemList = null
 var fav_name_edit: LineEdit = null
 var stage_selector: OptionButton = null
+var _world_env: WorldEnvironment = null
 var orbit_yaw: float = 0.3
 var orbit_pitch: float = 0.4
 var orbit_dist: float = 4.0
@@ -132,14 +134,14 @@ func _ready() -> void:
 	light.rotation_degrees = Vector3(-40, -30, 0)
 	viewport.add_child(light)
 
-	var ambient := WorldEnvironment.new()
+	_world_env = WorldEnvironment.new()
 	var env := Environment.new()
 	env.background_mode = Environment.BG_COLOR
 	env.background_color = Color(0.1, 0.1, 0.13)
 	env.ambient_light_color = Color(0.5, 0.5, 0.55)
 	env.ambient_light_energy = 0.6
-	ambient.environment = env
-	viewport.add_child(ambient)
+	_world_env.environment = env
+	viewport.add_child(_world_env)
 
 	# Organism root in viewport
 	_organism_root = Node3D.new()
@@ -619,13 +621,12 @@ func _build_biome_controls() -> void:
 	biome_btn.toggled.connect(_on_biome_toggled)
 	biome_row.add_child(biome_btn)
 
-	# Stage info label
-	var stage_info := Label.new()
-	stage_info.name = "StageInfo"
-	stage_info.text = ""
-	stage_info.add_theme_font_size_override("font_size", 10)
-	stage_info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	biome_row.add_child(stage_info)
+	# Stage info label — stored as class var for direct access
+	stage_info_label = Label.new()
+	stage_info_label.text = ""
+	stage_info_label.add_theme_font_size_override("font_size", 10)
+	stage_info_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	biome_row.add_child(stage_info_label)
 	controls.add_child(biome_row)
 
 
@@ -642,29 +643,34 @@ func _build_export_button() -> void:
 func _load_biome_stages() -> void:
 	var path: String = "res://commons/maps/soft_stages.json"
 	if not FileAccess.file_exists(path):
+		push_warning("[CreatureEditor] soft_stages.json not found at: ", path)
 		return
 	var file := FileAccess.open(path, FileAccess.READ)
 	if not file:
+		push_warning("[CreatureEditor] Failed to open: ", path)
 		return
 	var text: String = file.get_as_text()
 	file.close()
 	var parsed: Variant = JSON.parse_string(text)
 	if parsed is Dictionary:
 		_biome_stages = parsed as Dictionary
+		var stage_count: int = (_biome_stages.get("stages", {}) as Dictionary).size()
+		print("[CreatureEditor] Loaded %d biome stages" % stage_count)
+	else:
+		push_warning("[CreatureEditor] Failed to parse soft_stages.json")
 
 
 func _on_stage_selected(idx: int) -> void:
 	var sname: String = stage_selector.get_item_text(idx)
 	_current_stage = sname
 
-	# Update stage info
+	# Update stage info label
 	var stages_dict: Dictionary = _biome_stages.get("stages", {})
-	var stage_info: Label = controls.get_node_or_null("StageInfo") as Label
-	if stage_info and stages_dict.has(sname):
+	if stage_info_label and stages_dict.has(sname):
 		var stage: Dictionary = stages_dict[sname] as Dictionary
 		var kingdoms: Array = stage.get("nature_kingdoms", [])
 		var density: float = stage.get("vegetation_density", 0.0) as float
-		stage_info.text = "Kingdoms: %s | Density: %.0f%%" % [
+		stage_info_label.text = "Kingdoms: %s | Density: %.0f%%" % [
 			", ".join(PackedStringArray(kingdoms)) if kingdoms.size() > 0 else "none",
 			density * 100.0]
 
@@ -759,16 +765,10 @@ func _spawn_biome_ring() -> void:
 
 
 func _apply_biome_atmosphere(density: float) -> void:
-	# Find the WorldEnvironment in the viewport
-	var we: WorldEnvironment = null
-	for child: Node in viewport.get_children():
-		if child is WorldEnvironment:
-			we = child as WorldEnvironment
-			break
-	if not we or not we.environment:
+	if not _world_env or not _world_env.environment:
 		return
 
-	var env: Environment = we.environment
+	var env: Environment = _world_env.environment
 
 	# Save original settings on first call
 	if _biome_env_original.is_empty():
@@ -804,14 +804,9 @@ func _apply_biome_atmosphere(density: float) -> void:
 func _restore_biome_atmosphere() -> void:
 	if _biome_env_original.is_empty():
 		return
-	var we: WorldEnvironment = null
-	for child: Node in viewport.get_children():
-		if child is WorldEnvironment:
-			we = child as WorldEnvironment
-			break
-	if not we or not we.environment:
+	if not _world_env or not _world_env.environment:
 		return
-	var env: Environment = we.environment
+	var env: Environment = _world_env.environment
 	env.background_color = _biome_env_original.get("bg_color", Color(0.1, 0.1, 0.13))
 	env.ambient_light_color = _biome_env_original.get("ambient_color", Color(0.5, 0.5, 0.55))
 	env.ambient_light_energy = _biome_env_original.get("ambient_energy", 0.6)
