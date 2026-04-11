@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Morphology Engine | Ada Research Blog</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 720px; margin: 0 auto; padding: 2rem; background: #0a0a0f; color: #d4d4d8; line-height: 1.8; }
+  h1 { color: #e4e4e7; font-size: 1.8rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+  h2 { color: #67e8f9; font-size: 1.3rem; margin-top: 2.5rem; }
+  h3 { color: #c084fc; font-size: 1.1rem; margin-top: 2rem; }
+  .date { color: #71717a; font-size: 0.9rem; }
+  .highlight { background: #0a1520; border-left: 3px solid #67e8f9; padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 6px 6px 0; }
+  .pullquote { border-left: 3px solid #c084fc; padding: 1rem 1.5rem; margin: 2rem 0; background: #1a0a2e; border-radius: 0 8px 8px 0; font-size: 1.05rem; color: #c084fc; font-style: italic; }
+  code { background: #0a1520; padding: 2px 6px; border-radius: 3px; font-size: 0.9rem; color: #67e8f9; }
+  pre { background: #0a1520; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.85rem; color: #67e8f9; line-height: 1.4; }
+  a { color: #67e8f9; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .section-break { text-align: center; color: #333; margin: 2rem 0; letter-spacing: 1em; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin: 1rem 0; }
+  .stat { text-align: center; background: #0a1520; padding: 0.8rem; border-radius: 4px; border: 1px solid rgba(103,232,249,0.2); }
+  .stat-num { font-size: 1.4rem; color: #67e8f9; font-weight: bold; }
+  .stat-label { font-size: 0.7rem; color: #71717a; }
+  .taxonomy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 1.5rem 0; }
+  .tax-card { background: #0a1520; border-radius: 6px; padding: 0.8rem; border-left: 3px solid; }
+  .tax-card h4 { margin: 0 0 0.3rem; font-size: 0.9rem; color: #e4e4e7; }
+  .tax-card .meta { font-size: 0.75rem; color: #71717a; margin: 0.2rem 0; }
+  .tax-card .examples { font-size: 0.8rem; color: #a1a1aa; }
+  .pipeline { background: #0a1520; border-radius: 8px; padding: 1.2rem; margin: 1.5rem 0; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #67e8f9; }
+  .pipeline .arrow { color: #c084fc; }
+  .pipeline .stage { color: #e4e4e7; }
+  .layer-row { display: flex; gap: 0.5rem; margin: 0.5rem 0; align-items: center; }
+  .layer-box { flex: 1; text-align: center; padding: 0.5rem 0.3rem; border-radius: 4px; font-size: 0.75rem; }
+  .qfep-bar { display: flex; gap: 0; margin: 1.5rem 0; height: 32px; border-radius: 6px; overflow: hidden; }
+  .qfep-bar div { display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; }
+  .screenshot { background: #111118; border: 1px solid #2a2a35; border-radius: 8px; padding: 0.5rem; margin: 1.5rem 0; text-align: center; }
+  .screenshot img { max-width: 100%; border-radius: 4px; }
+  .screenshot .caption { font-size: 0.75rem; color: #52525b; margin-top: 0.4rem; }
+  .gene-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  .gene-table th, .gene-table td { text-align: left; padding: 0.4rem 0.5rem; border-bottom: 1px solid #1a2a2f; font-size: 0.8rem; }
+  .gene-table th { color: #67e8f9; font-size: 0.7rem; text-transform: uppercase; }
+  .gene-table td:first-child { color: #e4e4e7; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<p class="date">April 11, 2026</p>
+<h1>The Morphology Engine</h1>
+
+<p>What is the universal vocabulary of form? Not form as in shape &mdash; form as in process. A tree is not a shape. A tree is the record of a growth algorithm encountering light and gravity over time. A crystal is not a shape either. A crystal is the record of a lattice energy minimization. The shape is evidence. The process is the thing.</p>
+
+<div class="pullquote">
+Every shape is primitives + modifiers + time. The question is not what it looks like but how it was made.
+</div>
+
+<h2>The Problem</h2>
+
+<p>Ada Research has four kingdom-specific morphology builders: one for trees (L-system branching), one for creatures (spine segmentation), one for flowers (B&eacute;zier petal rings), one for fungi (revolution caps). Each hardcodes its construction strategy. A tree can only be grown. A creature can only be extruded. There is no vocabulary for saying: what if a tree were carved? What if a creature were crystallized?</p>
+
+<p>The existing DNA system already hints at the answer. Genes like <code>part_twist</code> and <code>part_curve</code> describe process, not fixed form. The same gene means helical body twist for creatures, petal twist for flowers, and stem spiral for fungi. This polymorphic interpretation is already a universal morphology engine &mdash; it just does not know it yet.</p>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">15</div><div class="stat-label">primitive generators</div></div>
+  <div class="stat"><div class="stat-num">8</div><div class="stat-label">mesh modifiers</div></div>
+  <div class="stat"><div class="stat-num">5</div><div class="stat-label">new DNA genes</div></div>
+</div>
+
+<h2>Three Classes</h2>
+
+<p>The engine is three GDScript files. No external dependencies. Each is a static library of pure functions.</p>
+
+<h3>MorphoPrimitive</h3>
+
+<p>Atomic form generators. Every shape starts here. The tube function &mdash; extracted from identical code duplicated in both <code>CreatureMorphology</code> and <code>TreeMorphology</code> &mdash; is the workhorse. It sweeps a circular cross-section between two points with start and end radii.</p>
+
+<div class="highlight">
+<strong>Surface generators</strong>: tube, multi_tube, bezier_sweep, revolution<br>
+<strong>Godot wrappers</strong>: sphere, cylinder, cone, box, torus, capsule, prism, quad, plane<br>
+<strong>Field generators</strong>: sdf_mesh + 6 SDF combinators (union, subtract, intersect, smooth_union)<br>
+<strong>Instance generators</strong>: multimesh_scatter
+</div>
+
+<p>The SDF combinators are the most interesting. They let you compose distance functions: a smooth union of two spheres makes a metaball. A subtraction of a box from a sphere makes a carved shell. The <code>sdf_mesh</code> function evaluates any distance function on a voxel grid and extracts the surface.</p>
+
+<h3>MorphoModifier</h3>
+
+<p>Mesh transformations via <code>MeshDataTool</code>. Each takes a mesh and returns a modified mesh. They compose by chaining:</p>
+
+<div class="pipeline">
+<span class="stage">noise_displace</span><span class="arrow">(</span><span class="stage">twist</span><span class="arrow">(</span><span class="stage">taper</span><span class="arrow">(</span><span class="stage">mesh</span><span class="arrow">)))</span>
+</div>
+
+<p>Order matters. Taper-then-twist produces a tornado. Twist-then-taper produces a drill. Same two operations, different sequence, different form. This is the morphological equivalent of non-commutativity.</p>
+
+<h3>MorphoPipeline</h3>
+
+<p>The composable form recipe. A pipeline chains:</p>
+
+<div class="layer-row">
+  <div class="layer-box" style="background: #0a2530; color: #67e8f9;">Skeleton</div>
+  <div class="layer-box" style="background: #1a0a30; color: #c084fc;">Surface</div>
+  <div class="layer-box" style="background: #2a1a00; color: #f59e0b;">Modifier*</div>
+  <div class="layer-box" style="background: #0a2a1a; color: #4ade80;">Instance?</div>
+  <div class="layer-box" style="background: #2a0a1a; color: #ec4899;">Children</div>
+</div>
+
+<p>The children field makes it recursive. A tree trunk pipeline has branch children, which have leaf children. This captures the vast majority of biological forms: spine with limbs, stem with petals, trunk with branches with leaves.</p>
+
+<p class="section-break">&bull; &bull; &bull;</p>
+
+<h2>Taxonomy of Process</h2>
+
+<p>The deepest idea is not the code. The deepest idea is the classification. Every form in the universe was made by a process. The process has thermodynamic character: how stable is it (F)? How much entropy does it inject (E)? How fast is it changing (&phi;)?</p>
+
+<div class="taxonomy-grid">
+  <div class="tax-card" style="border-color: #22d3ee;">
+    <h4>Grown</h4>
+    <div class="meta">F: High | E: Low | &phi;: Low</div>
+    <div class="examples">Trees, coral, blood vessels. L-systems, fractals.</div>
+  </div>
+  <div class="tax-card" style="border-color: #a78bfa;">
+    <h4>Extruded</h4>
+    <div class="meta">F: Medium | E: Low | &phi;: Low</div>
+    <div class="examples">Worms, spines, tubes. Sweeps, profiles.</div>
+  </div>
+  <div class="tax-card" style="border-color: #f59e0b;">
+    <h4>Carved</h4>
+    <div class="meta">F: High | E: Medium | &phi;: Medium</div>
+    <div class="examples">Shells, caves. Boolean ops, SDFs.</div>
+  </div>
+  <div class="tax-card" style="border-color: #ec4899;">
+    <h4>Folded</h4>
+    <div class="meta">F: Variable | E: Variable | &phi;: High</div>
+    <div class="examples">Insects, proteins, leaves. Origami, springs.</div>
+  </div>
+  <div class="tax-card" style="border-color: #06b6d4;">
+    <h4>Crystallized</h4>
+    <div class="meta">F: Very High | E: Very Low | &phi;: Very Low</div>
+    <div class="examples">Minerals, diatoms, snowflakes. Polyhedra, lattices.</div>
+  </div>
+  <div class="tax-card" style="border-color: #84cc16;">
+    <h4>Dissolved</h4>
+    <div class="meta">F: Low | E: High | &phi;: Medium</div>
+    <div class="examples">Slime mold, lichen, clouds. Reaction-diffusion.</div>
+  </div>
+  <div class="tax-card" style="border-color: #f97316;">
+    <h4>Assembled</h4>
+    <div class="meta">F: Medium | E: Medium | &phi;: Medium</div>
+    <div class="examples">Colonial organisms, machines. Graph composition.</div>
+  </div>
+  <div class="tax-card" style="border-color: #14b8a6;">
+    <h4>Instanced</h4>
+    <div class="meta">F: High | E: Medium | &phi;: Low</div>
+    <div class="examples">Forests, swarms, colonies. Arrays, scatter.</div>
+  </div>
+</div>
+
+<p>Each existing kingdom maps naturally. Trees are Grown + Instanced. Creatures are Extruded + Assembled. Flowers are Extruded + Instanced. Fungi are Grown + Instanced + Assembled. But the vocabulary is open. A creature can be Carved. A tree can be Crystallized. The <code>form_process</code> gene is a continuous float from 0 to 1, so 0.35 is something between Grown and Extruded &mdash; a transitional process with no name yet.</p>
+
+<h2>Five New Genes</h2>
+
+<table class="gene-table">
+  <tr><th>Gene</th><th>Range</th><th>What It Encodes</th></tr>
+  <tr><td>form_process</td><td>0&ndash;1</td><td>grown &rarr; extruded &rarr; carved &rarr; folded &rarr; crystallized</td></tr>
+  <tr><td>skeleton_complexity</td><td>0&ndash;1</td><td>no skeleton &rarr; spine &rarr; branching &rarr; recursive</td></tr>
+  <tr><td>surface_method</td><td>0&ndash;1</td><td>sweep &rarr; revolution &rarr; SDF &rarr; primitive &rarr; particle</td></tr>
+  <tr><td>modularity</td><td>0&ndash;1</td><td>monolithic &rarr; segmented &rarr; many parts</td></tr>
+  <tr><td>recursion_depth</td><td>0&ndash;1</td><td>flat &rarr; shallow &rarr; deep fractal</td></tr>
+</table>
+
+<p>All continuous. All heritable. All subject to crossover and mutation. A creature with <code>form_process=0.55</code> and <code>surface_method=0.5</code> will be built via SDF carving instead of spine extrusion &mdash; a carved creature, something the old system could not express.</p>
+
+<h2>The Biome Preview</h2>
+
+<p>To see these organisms in context, the creature editor now has a biome mode. Select a curriculum stage &mdash; from barren primitives to lush self-generating ecosystems &mdash; and toggle Biome Mode. The viewport fills with ground, foliage, fog, and a ring of organisms matching that stage&rsquo;s kingdoms.</p>
+
+<div class="highlight">
+<strong>Ground</strong>: PlaneMesh with biome shader (grey &rarr; brown &rarr; green by density)<br>
+<strong>Foliage</strong>: MultiMesh grass quads, flower spheres, tree cylinders, fungus caps<br>
+<strong>Atmosphere</strong>: Fog density + ambient color lerps from clinical lab to deep forest<br>
+<strong>Organisms</strong>: 4&ndash;8 DNA creatures from the stage&rsquo;s active kingdoms<br>
+<strong>20 stages</strong>: From empty (density 0) to self-generating (density 1.0)
+</div>
+
+<p>The dashboard at <code>/morphology</code> mirrors this with data visualization: a donut chart of kingdom distribution, histograms of gene frequencies, radar charts of the five process genes per creature, and the 20-stage biome progression as a clickable timeline.</p>
+
+<h2>The QFEP Spectrum</h2>
+
+<p>The process taxonomy is not arbitrary. It maps directly onto the Queer Free Energy Principle:</p>
+
+<div class="qfep-bar">
+  <div style="flex:2; background: #06b6d4; color: #000;">F</div>
+  <div style="flex:2; background: #22d3ee; color: #000;">F</div>
+  <div style="flex:1; background: #a78bfa; color: #000;">&nbsp;</div>
+  <div style="flex:1; background: #f59e0b; color: #000;">&nbsp;</div>
+  <div style="flex:1; background: #ec4899; color: #fff;">&phi;</div>
+  <div style="flex:1; background: #84cc16; color: #000;">E</div>
+  <div style="flex:1; background: #f97316; color: #000;">&nbsp;</div>
+</div>
+<div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #52525b; margin-top: 0.2rem;">
+  <span>Crystallized (max stability)</span>
+  <span>Dissolved (max entropy)</span>
+</div>
+
+<p>The left end is maximum free energy &mdash; rigid, stable, crystalline form that resists change. The right end is maximum entropy &mdash; dissolved, diffusing, reaction-diffusion form that embraces instability. The fold system sits in the middle as the rate-of-change term: spring velocity, tension, misfold. The mesh itself is the Markov blanket &mdash; the boundary between what the organism is (DNA, energy, fold state) and what the world is (environment, other organisms, the player).</p>
+
+<div class="pullquote">
+Form is not a thing. Form is a process with a thermodynamic address.
+</div>
+
+<h2>What This Makes Possible</h2>
+
+<p>Before today, a creature was always an extruded spine with limbs. Now it can be a carved SDF surface. A folded origami shell. A crystallized polyhedron. The same DNA system that breeds trees and flowers can breed math objects, architectural elements, and abstract sculptures.</p>
+
+<p>The five new genes are heritable. When a tree breeds with a creature, the offspring&rsquo;s <code>form_process</code> is a blend &mdash; something between grown and extruded. Over evolutionary generations, the population explores the full process space, finding forms that the four kingdom builders could never produce.</p>
+
+<p>The pipeline is recursive. A creature with high <code>recursion_depth</code> grows branches from its limbs, which grow sub-branches, which grow leaves. The same pipeline that makes a tree can make a fractal creature. The same modifiers that twist a petal can twist a building.</p>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">3</div><div class="stat-label">new GDScript files</div></div>
+  <div class="stat"><div class="stat-num">8</div><div class="stat-label">form processes</div></div>
+  <div class="stat"><div class="stat-num">&infin;</div><div class="stat-label">possible forms</div></div>
+</div>
+
+<p>The biome preview shows them in context. The web dashboard tracks their evolution. The BREATHE system measures whether the project is improving. And underneath it all, every organism is still just primitives + modifiers + time.</p>
+
+<div class="pullquote">
+Biology does not have a shape library. It has a process vocabulary. Now so do we.
+</div>
+
+</body>
+</html>
