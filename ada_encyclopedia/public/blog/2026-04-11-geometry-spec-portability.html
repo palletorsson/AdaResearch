@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Geometry Spec | Ada Research Blog</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 720px; margin: 0 auto; padding: 2rem; background: #18181b; color: #d4d4d8; line-height: 1.8; }
+  h1 { color: #e4e4e7; font-size: 1.8rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+  h2 { color: #67e8f9; font-size: 1.3rem; margin-top: 2.5rem; }
+  h3 { color: #c084fc; font-size: 1.1rem; margin-top: 2rem; }
+  .date { color: #71717a; font-size: 0.9rem; }
+  .highlight { background: #0a1520; border-left: 3px solid #67e8f9; padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 6px 6px 0; }
+  .pullquote { border-left: 3px solid #c084fc; padding: 1rem 1.5rem; margin: 2rem 0; background: #1a0a2e; border-radius: 0 8px 8px 0; font-size: 1.05rem; color: #c084fc; font-style: italic; }
+  code { background: #0a1520; padding: 2px 6px; border-radius: 3px; font-size: 0.9rem; color: #67e8f9; }
+  pre { background: #0a1520; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.85rem; color: #67e8f9; line-height: 1.4; }
+  a { color: #67e8f9; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .section-break { text-align: center; color: #333; margin: 2rem 0; letter-spacing: 1em; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin: 1.5rem 0; }
+  .stat { text-align: center; background: #0a1520; padding: 0.8rem; border-radius: 4px; border: 1px solid rgba(103,232,249,0.2); }
+  .stat-num { font-size: 1.4rem; color: #67e8f9; font-weight: bold; }
+  .stat-label { font-size: 0.7rem; color: #71717a; }
+  .layer-stack { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+  .layer { display: flex; align-items: center; gap: 1rem; padding: 0.7rem 1rem; border-left: 3px solid; }
+  .layer-exists { border-color: #4ade80; background: rgba(74,222,128,0.05); }
+  .layer-new { border-color: #f59e0b; background: rgba(245,158,11,0.08); }
+  .layer-label { font-size: 0.85rem; font-weight: bold; min-width: 140px; }
+  .layer-exists .layer-label { color: #4ade80; }
+  .layer-new .layer-label { color: #f59e0b; }
+  .layer-desc { font-size: 0.8rem; color: #a1a1aa; }
+  .layer-check { font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 3px; margin-left: auto; flex-shrink: 0; }
+  .check-yes { background: rgba(74,222,128,0.2); color: #4ade80; }
+  .check-new { background: rgba(245,158,11,0.2); color: #f59e0b; }
+  .dist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin: 1rem 0; }
+  .dist-item { display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0.7rem; background: #0a1520; border-radius: 4px; font-size: 0.8rem; }
+  .dist-name { color: #d4d4d8; }
+  .dist-bar { display: flex; align-items: center; gap: 0.4rem; }
+  .dist-count { color: #67e8f9; font-weight: bold; font-size: 0.85rem; }
+  .dist-pct { color: #71717a; font-size: 0.7rem; }
+  .example-block { background: #0a1520; border: 1px solid rgba(103,232,249,0.15); border-radius: 6px; padding: 1rem 1.2rem; margin: 1rem 0; }
+  .example-title { font-size: 0.9rem; color: #67e8f9; font-weight: bold; margin-bottom: 0.5rem; }
+  .example-field { font-size: 0.8rem; color: #a1a1aa; margin: 0.2rem 0; }
+  .example-field span { color: #d4d4d8; }
+  .engine-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin: 1rem 0; }
+  .engine { padding: 0.8rem; border-radius: 6px; font-size: 0.8rem; background: #0a1520; border: 1px solid rgba(103,232,249,0.15); }
+  .engine h4 { font-size: 0.85rem; margin: 0 0 0.3rem; color: #e4e4e7; }
+  .engine p { margin: 0.2rem 0; color: #a1a1aa; font-size: 0.75rem; }
+</style>
+</head>
+<body>
+
+<p class="date">April 11, 2026</p>
+<h1>The Geometry Spec</h1>
+
+<p>Ada Research has 1,700 artifacts. Each one is a handwritten GDScript file that builds geometry from scratch &mdash; parametric surfaces, L-system line networks, CSG boolean tunnels, pixel-computed textures, instanced particle swarms. Every one of them teaches an algorithm through embodied experience in VR.</p>
+
+<p>But the build instructions live inside Godot-specific code. If you wanted to rebuild a M&ouml;bius strip in another engine, you'd need to read 200 lines of GDScript and reverse-engineer the parametric equations, the shader properties, the mesh topology. Multiply by 1,700.</p>
+
+<div class="pullquote">
+What if every artifact carried its own build recipe &mdash; engine-agnostic, machine-readable, and complete enough for any system to reconstruct it?
+</div>
+
+<h2>The Portability Stack</h2>
+
+<p>Ada Research already had most of the layers. The curriculum, maps, and sequences are pure JSON. Every artifact has an <code>@identity</code> block with a <code>desire</code> field &mdash; what it wants to be. The registry carries metadata, tags, and placement rules. The only missing piece was the technical recipe.</p>
+
+<div class="layer-stack">
+  <div class="layer layer-exists">
+    <span class="layer-label">@identity.desire</span>
+    <span class="layer-desc">What it wants to be</span>
+    <span class="layer-check check-yes">exists</span>
+  </div>
+  <div class="layer layer-exists">
+    <span class="layer-label">@identity.truth</span>
+    <span class="layer-desc">What it proves</span>
+    <span class="layer-check check-yes">exists</span>
+  </div>
+  <div class="layer layer-exists">
+    <span class="layer-label">README.md</span>
+    <span class="layer-desc">Human explanation (92% coverage)</span>
+    <span class="layer-check check-yes">exists</span>
+  </div>
+  <div class="layer layer-exists">
+    <span class="layer-label">registry.json</span>
+    <span class="layer-desc">Metadata, placement, sequences</span>
+    <span class="layer-check check-yes">exists</span>
+  </div>
+  <div class="layer layer-new">
+    <span class="layer-label">geometry_spec</span>
+    <span class="layer-desc">Technical build recipe</span>
+    <span class="layer-check check-new">new</span>
+  </div>
+</div>
+
+<p>With this layer in place, any engine &mdash; or any AI &mdash; gets both the soul and the skeleton.</p>
+
+<h2>What the Spec Contains</h2>
+
+<p>Each <code>geometry_spec</code> is a JSON object inside the existing registry entry. No new files, no new schemas, no migration. The Godot registry loader reads all fields generically, so the entire codebase continued working the moment we wrote the field.</p>
+
+<div class="example-block">
+  <div class="example-title">M&ouml;bius Strip</div>
+  <div class="example-field">mesh_type: <span>parametric_surface</span></div>
+  <div class="example-field">topology: <span>manifold_open</span></div>
+  <div class="example-field">construction: <span>uv_grid_triangulation</span></div>
+  <div class="example-field">material: <span>shader / wireframe / emission, double_sided</span></div>
+  <div class="example-field">animation: <span>static</span></div>
+  <div class="example-field">instance_strategy: <span>single</span></div>
+</div>
+
+<div class="example-block">
+  <div class="example-title">Chladni Plate</div>
+  <div class="example-field">mesh_type: <span>instanced_particles</span></div>
+  <div class="example-field">topology: <span>scattered</span></div>
+  <div class="example-field">construction: <span>multimesh_instancing</span></div>
+  <div class="example-field">material: <span>standard / pbr</span></div>
+  <div class="example-field">animation: <span>particle_lifecycle / cpu_simulation</span></div>
+  <div class="example-field">instance_strategy: <span>multimesh</span></div>
+</div>
+
+<div class="example-block">
+  <div class="example-title">Bulging Tunnel</div>
+  <div class="example-field">mesh_type: <span>boolean_composition</span></div>
+  <div class="example-field">topology: <span>volumetric</span></div>
+  <div class="example-field">construction: <span>csg_boolean / cylinder + sphere</span></div>
+  <div class="example-field">material: <span>standard / pbr</span></div>
+  <div class="example-field">animation: <span>static</span></div>
+  <div class="example-field">instance_strategy: <span>few</span></div>
+</div>
+
+<h2>10 Mesh Types</h2>
+
+<p>Every artifact in the project falls into one of ten geometry categories. This taxonomy emerged from reading the actual code, not from theory.</p>
+
+<div class="dist-grid">
+  <div class="dist-item">
+    <span class="dist-name">composed_primitives</span>
+    <span class="dist-bar"><span class="dist-count">537</span><span class="dist-pct">36%</span></span>
+  </div>
+  <div class="dist-item">
+    <span class="dist-name">parametric_surface</span>
+    <span class="dist-bar"><span class="dist-count">264</span><span class="dist-pct">18%</span></span>
+  </div>
+  <div class="dist-item">
+    <span class="dist-name">delegated_scene</span>
+    <span class="dist-bar"><span class="dist-count">137</span><span class="dist-pct">9%</span></span>
+  </div>
+  <div class="dist-item">
+    <span class="dist-name">instanced_particles</span>
+    <span class="dist-bar"><span class="dist-count">137</span><span class="dist-pct">9%</span></span>
+  </div>
+  <div class="dist-item">
+    <span class="dist-name">procedural_line</span>
+    <span class="dist-bar"><span class="dist-count">136</span><span class="dist-pct">9%</span></span>
+  </div>
+  <div class="dist-item">
+    <span class="dist-name">hybrid</span>
+    <span class="dist-bar"><span class="dist-count">91</span><span class="dist-pct">6%</span></span>
+  </div>
+  <div class="dist-item">
+    <span class="dist-name">boolean_composition</span>
+    <span class="dist-bar"><span class="dist-count">83</span><span class="dist-pct">6%</span></span>
+  </div>
+  <div class="dist-item">
+    <span class="dist-name">texture_plane</span>
+    <span class="dist-bar"><span class="dist-count">74</span><span class="dist-pct">5%</span></span>
+  </div>
+  <div class="dist-item">
+    <span class="dist-name">shader_driven</span>
+    <span class="dist-bar"><span class="dist-count">43</span><span class="dist-pct">3%</span></span>
+  </div>
+  <div class="dist-item">
+    <span class="dist-name">terrain_deformation</span>
+    <span class="dist-bar"><span class="dist-count">6</span><span class="dist-pct">&lt;1%</span></span>
+  </div>
+</div>
+
+<p>The largest category &mdash; <code>composed_primitives</code> &mdash; is artifacts built from boxes, spheres, and cylinders arranged in space. These are the easiest to port. <code>parametric_surface</code> artifacts carry the most mathematical complexity: they define geometry through equations, which means the equations themselves become the portable specification.</p>
+
+<h2>Engine Portability</h2>
+
+<p>The geometry spec was designed with a specific question in mind: what would it take to rebuild Ada Research in a different engine?</p>
+
+<div class="engine-grid">
+  <div class="engine">
+    <h4>s&box</h4>
+    <p>C# runtime. Grid system maps directly. Parametric surfaces via mesh API. CSG available natively.</p>
+  </div>
+  <div class="engine">
+    <h4>Unreal</h4>
+    <p>Procedural Mesh Component covers parametric + line types. Niagara for particles. Blueprint for composition.</p>
+  </div>
+  <div class="engine">
+    <h4>AI Reconstruction</h4>
+    <p>Feed mesh_type + construction + material to an LLM. It generates the target engine code. Desire provides intent.</p>
+  </div>
+</div>
+
+<p>The JSON data layer &mdash; sequences, maps, artifact placement &mdash; was already engine-agnostic. Now the geometry layer is too. What remains engine-specific is the VR interaction pattern (grab, trigger, slider) and the runtime managers (death, ecology, grid system). Those are smaller problems.</p>
+
+<h2>The Extraction Process</h2>
+
+<p>We built a Python tool that reads every artifact's GDScript source and infers the geometry spec through heuristic scoring. The same pattern the project already uses for artifact type classification and metadata enrichment.</p>
+
+<div class="highlight">
+<pre>python tools/extract_geometry_spec.py                     # dry-run all
+python tools/extract_geometry_spec.py --registry parametric  # one registry
+python tools/extract_geometry_spec.py --artifact mobius_strip # one artifact
+python tools/extract_geometry_spec.py --save                 # write to JSONs</pre>
+</div>
+
+<p>The tool detects mesh construction patterns (SurfaceTool for parametric, CSG nodes for booleans, MultiMesh for particles), infers topology from cull mode and surface type, identifies material and shading from StandardMaterial3D vs ShaderMaterial, and estimates vertex counts from grid dimensions.</p>
+
+<p>1,508 artifacts were enriched in a single run. 202 were skipped because they had no script file (scene-only or external). The remaining ~200 in the total 1,713 count are utility entries or have registry keys but no corresponding scene.</p>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">1,508</div><div class="stat-label">artifacts enriched</div></div>
+  <div class="stat"><div class="stat-num">47</div><div class="stat-label">registry files</div></div>
+  <div class="stat"><div class="stat-num">10</div><div class="stat-label">mesh types</div></div>
+</div>
+
+<h2>Desire + Recipe</h2>
+
+<p>The most interesting consequence is how the geometry spec interacts with the existing <code>@identity</code> system. Every artifact already declares what it <em>wants to be</em>:</p>
+
+<div class="highlight">
+<p><strong>Barnsley Fern</strong> desire: "Reveal how four simple affine transforms, chosen by weighted randomness, conspire to grow an unmistakably organic shape"</p>
+<p><strong>Barnsley Fern</strong> geometry_spec: texture_plane, pixel_computation, generated_texture</p>
+</div>
+
+<p>The desire is the soul. The geometry spec is the skeleton. Together they give any reconstruction system &mdash; human, engine, or AI &mdash; both the <em>why</em> and the <em>how</em>. The desire tells you what experience to create. The spec tells you how to build the geometry that creates it.</p>
+
+<div class="pullquote">
+An artifact that knows what it wants to be AND how it's built can be reborn in any engine that's willing to listen.
+</div>
+
+<h2>What This Means</h2>
+
+<p>Ada Research is no longer locked to Godot. The curriculum was always engine-agnostic (JSON sequences, JSON maps, JSON registries). The pedagogical intent was always engine-agnostic (@identity blocks in code comments). Now the geometry is engine-agnostic too.</p>
+
+<p>If s&box ships with a good mesh API, the spec tells you exactly what to build. If an AI model gets good enough at code generation, you hand it the desire and the spec and it writes the implementation. If Godot 5 breaks everything, the spec survives because it's just data in a JSON file.</p>
+
+<p>The project carries its own blueprint. Not as documentation that rots, but as structured data that travels with the artifacts themselves.</p>
+
+<p class="section-break">&middot; &middot; &middot;</p>
+
+<p style="font-size: 0.85rem; color: #71717a;">Built with <code>extract_geometry_spec.py</code>. The tool follows the same heuristic scoring pattern as <code>classify_artifact_types.py</code> and <code>enrich_registry_metadata.py</code> &mdash; read code, score signals, pick the best match. Run <code>--skip-existing</code> for incremental updates after new artifacts are added.</p>
+
+</body>
+</html>
