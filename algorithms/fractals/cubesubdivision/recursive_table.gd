@@ -4,6 +4,16 @@ extends Node3D
 # Starts with one cube, subdivides it, keeps tabletop and legs
 # Similar approach to recursive_chair but for a table form
 
+# @identity
+# essence: table = subdivide_3x2(cube) -> keep(top_layer, corner_legs) -> flatten(top) -> stretch(legs)
+# desire: To stand beside in VR — a table that assembled itself from a single cube through pure subtraction
+# critical_parameter: the top-layer vs bottom-layer role split — one layer becomes surface, four corners become legs
+# triggers: Each step refines: merge tabletop into single slab, thin the legs, add apron supports
+# emerges: Structural apron supports arise from the need to connect legs to tabletop — engineering from aesthetics
+# needs: VR place-objects-on-top [missing], construction replay [missing]
+# relationships: Sibling to recursive_chair; together they prove furniture is a family of subdivision strategies
+# truth: A table is a cube that kept its top layer and four corners — everything else was excess.
+
 @export var table_size: float = 2.5
 @export var show_animation: bool = true
 @export var step_delay: float = 0.4
@@ -23,7 +33,7 @@ var timer: float = 0.0
 var is_animating: bool = false
 
 
-func _ready():
+func _ready() -> void:
 	if show_animation:
 		is_animating = true
 		_step_0_initial_cube()
@@ -31,7 +41,7 @@ func _ready():
 		_build_instant()
 
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_animating:
 		return
 
@@ -42,7 +52,7 @@ func _process(delta: float):
 		_execute_step(step)
 
 
-func _execute_step(s: int):
+func _execute_step(s: int) -> void:
 	match s:
 		1: _step_1_first_subdivision()
 		2: _step_2_shape_tabletop()
@@ -53,7 +63,7 @@ func _execute_step(s: int):
 			print("Recursive table complete! Total parts: %d" % all_cubes.size())
 
 
-func _build_instant():
+func _build_instant() -> void:
 	_step_0_initial_cube()
 	_step_1_first_subdivision()
 	_step_2_shape_tabletop()
@@ -61,13 +71,13 @@ func _build_instant():
 	_step_4_add_supports()
 
 
-func _step_0_initial_cube():
+func _step_0_initial_cube() -> void:
 	# Create the initial cube that will become the table
 	_create_cube(Vector3(0, table_size * 0.4, 0), Vector3(table_size, table_size * 0.8, table_size), 0, "base")
 	print("Step 0: Initial cube")
 
 
-func _step_1_first_subdivision():
+func _step_1_first_subdivision() -> void:
 	# Subdivide into 3x3x2 grid (3 wide, 3 deep, 2 tall)
 	# Top layer = tabletop, bottom corners = legs
 	var base = _find_cubes_by_role("base")
@@ -112,7 +122,7 @@ func _step_1_first_subdivision():
 	print("Step 1: Subdivided into table shape")
 
 
-func _step_2_shape_tabletop():
+func _step_2_shape_tabletop() -> void:
 	# Remove the 9 individual tabletop cubes and replace with single solid piece
 	var tabletops = _find_cubes_by_role("tabletop")
 
@@ -138,7 +148,7 @@ func _step_2_shape_tabletop():
 	print("Step 2: Shaped tabletop (thin plastic)")
 
 
-func _step_3_create_legs():
+func _step_3_create_legs() -> void:
 	# Extend the leg cubes to meet tabletop - thinner plastic legs
 	var legs = _find_cubes_by_role("leg_top")
 
@@ -181,7 +191,7 @@ func _step_3_create_legs():
 	print("Step 3: Extended legs (thin plastic, bridging gap)")
 
 
-func _step_4_add_supports():
+func _step_4_add_supports() -> void:
 	# Add cross supports between legs (apron) - thinner plastic
 	var apron_thickness = table_size * 0.025
 	var apron_height = table_size * 0.05
@@ -230,7 +240,7 @@ func _step_4_add_supports():
 	print("Step 4: Added apron supports (thin plastic)")
 
 
-func _create_cube(pos: Vector3, size: Vector3, generation: int, role: String):
+func _create_cube(pos: Vector3, size: Vector3, generation: int, role: String) -> void:
 	var mesh_instance := MeshInstance3D.new()
 	var box := BoxMesh.new()
 	box.size = size
@@ -244,7 +254,7 @@ func _create_cube(pos: Vector3, size: Vector3, generation: int, role: String):
 	all_cubes.append({"node": mesh_instance, "generation": generation, "role": role})
 
 
-func _apply_color(mesh: MeshInstance3D, color: Color):
+func _apply_color(mesh: MeshInstance3D, color: Color) -> void:
 	var material := StandardMaterial3D.new()
 	material.albedo_color = color
 	# Light plastic look - slightly shiny, smooth
@@ -262,13 +272,13 @@ func _find_cubes_by_role(role: String) -> Array:
 	return result
 
 
-func _remove_cube(cube_data: Dictionary):
+func _remove_cube(cube_data: Dictionary) -> void:
 	if cube_data.node and is_instance_valid(cube_data.node):
 		cube_data.node.queue_free()
 	all_cubes.erase(cube_data)
 
 
-func reset():
+func reset() -> void:
 	for cube_data in all_cubes:
 		if cube_data.node and is_instance_valid(cube_data.node):
 			cube_data.node.queue_free()
@@ -281,3 +291,12 @@ func reset():
 		_step_0_initial_cube()
 	else:
 		_build_instant()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

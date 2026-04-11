@@ -60,7 +60,7 @@ Add "cat":
 
 [color=yellow][b]Code:[/b][/color]
 [code]
-class_name BloomFilter
+class BloomFilter
 
 var bit_array: PackedByteArray
 var m: int  # Size of bit array
@@ -176,7 +176,7 @@ Bloom filter is 40× smaller!
 
 [color=yellow][b]Code:[/b][/color]
 [code]
-class_name CountingBloomFilter
+class CountingBloomFilter
 
 var counters: Array[int]  # Array of counters instead of bits
 var m: int

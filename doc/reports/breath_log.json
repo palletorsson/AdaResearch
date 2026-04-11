@@ -1,0 +1,37 @@
+{
+  "version": "1.0",
+  "description": "Append-only log of BREATHE cycles. Each entry records baseline/post scores, items attempted, skill effectiveness, and discoveries.",
+  "breaths": [
+    {
+      "breath_id": "2026-04-11T00:30",
+      "mode": "full",
+      "baseline_avg": 2.04,
+      "post_avg": 2.04,
+      "delta": 0,
+      "items_attempted": ["primitives_documentation", "transformation_documentation", "validation_investigation"],
+      "items_succeeded": ["primitives_documentation", "transformation_documentation"],
+      "items_failed": ["validation_investigation"],
+      "failure_reasons": {
+        "validation_investigation": "pathfinder passes individually (5/5 maps OK) but pipeline scorer reports 0% — likely timeout issue in batch subprocess (10s per map). Maps ARE valid but scorer can't confirm in time."
+      },
+      "skills_used": ["documentation_writing", "pathfinder_validation"],
+      "skill_effectiveness": {
+        "documentation_writing": {"calls": 5, "succeeded": 5, "failed": 0},
+        "pathfinder_validation": {"calls": 5, "succeeded": 5, "failed": 0}
+      },
+      "discoveries": [
+        "Pipeline scorer validation stage runs pathfinder with 10s timeout per map — maps pass individually but fail in batch due to cumulative timeout. The scorer reports 0% validation even for structurally valid maps.",
+        "Primitives Lab_Death and Point_Line were missing docs. Transformation Trans_Pit was missing docs. Writing 5 doc files (2 blurb + 3 intent) advanced both sequences from stage 2 to stage 3.",
+        "Documentation gaps are the cheapest HEAD to advance — 5 small files move 2 sequences forward."
+      ],
+      "files_changed": [
+        "commons/maps/Lab_Death/blurb.md",
+        "commons/maps/Lab_Death/intent.md",
+        "commons/maps/Point_Line/intent.md",
+        "commons/maps/Trans_Pit/blurb.md",
+        "commons/maps/Trans_Pit/intent.md"
+      ],
+      "duration_minutes": 15
+    }
+  ]
+}

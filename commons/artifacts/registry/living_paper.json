@@ -20,8 +20,13 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"lab",
-				"randomness"
+				"fractals"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_random_walk": {
@@ -41,8 +46,13 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"randomness",
 				"testmaps"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_brownian": {
@@ -64,6 +74,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"randomness"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_levy": {
@@ -84,8 +100,13 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"randomness",
 				"testmaps"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_self_avoiding": {
@@ -107,6 +128,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"randomness"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_rule30": {
@@ -129,6 +156,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"cellular_automata"
+			],
+			"dev_themes": [
+				"art",
+				"biology",
+				"origami",
+				"paper"
 			]
 		},
 		"living_paper_rule110": {
@@ -151,6 +184,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"cellular_automata"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_life": {
@@ -172,8 +211,13 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"cellular_automata",
 				"testmaps"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_seeds": {
@@ -195,6 +239,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"cellular_automata"
+			],
+			"dev_themes": [
+				"art",
+				"biology",
+				"origami",
+				"paper"
 			]
 		},
 		"living_paper_brians_brain": {
@@ -216,6 +266,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"cellular_automata"
+			],
+			"dev_themes": [
+				"art",
+				"biology",
+				"origami",
+				"paper"
 			]
 		},
 		"living_paper_bubble_sort": {
@@ -237,6 +293,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"arrays"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_insertion_sort": {
@@ -258,6 +320,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"arrays"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_merge_sort": {
@@ -279,6 +347,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"arrays"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_quick_sort": {
@@ -300,6 +374,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"arrays"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_sine": {
@@ -321,6 +401,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_fourier": {
@@ -343,6 +429,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_lissajous": {
@@ -364,6 +456,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_mandelbrot": {
@@ -384,8 +482,13 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"fractals",
 				"testmaps"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_julia": {
@@ -407,6 +510,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"fractals"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_sierpinski": {
@@ -428,8 +537,13 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"fractals",
 				"testmaps"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_koch": {
@@ -452,6 +566,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"fractals"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_tree": {
@@ -473,6 +593,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"lsystems"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_fern": {
@@ -495,6 +621,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"lsystems"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_dragon": {
@@ -516,6 +648,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"lsystems"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_perlin": {
@@ -538,6 +676,12 @@
 			"map_sequences": [
 				"noise",
 				"randomness"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_noise_octaves": {
@@ -561,6 +705,12 @@
 			"map_sequences": [
 				"noise",
 				"randomness"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_bfs": {
@@ -583,6 +733,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"graphtheory"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_dfs_maze": {
@@ -605,6 +761,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"graphtheory"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_reaction_diffusion": {
@@ -627,6 +789,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"cellular_automata"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_dla": {
@@ -649,6 +817,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"randomness"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_voronoi": {
@@ -672,6 +846,12 @@
 				"compgeom",
 				"noise",
 				"randomness"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_kmeans": {
@@ -694,6 +874,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_heat": {
@@ -716,6 +902,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"wavefunctions"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		},
 		"living_paper_quadtree": {
@@ -738,6 +930,12 @@
 			"map_ready": true,
 			"map_sequences": [
 				"compgeom"
+			],
+			"dev_themes": [
+				"art",
+				"origami",
+				"paper",
+				"procedural"
 			]
 		}
 	}

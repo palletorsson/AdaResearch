@@ -5,7 +5,7 @@ extends BaseCA
 const CRITICAL_SLOPE = 4
 const SAND_DROP_RATE = 0.1
 
-func initialize_grid():
+func initialize_grid() -> void:
 	# Configure MultiMesh
 	var step = 2
 	var cube_size = CUBE_SIZE * step # Match step
@@ -19,7 +19,7 @@ func initialize_grid():
 	
 	grid = create_2d_grid()
 
-func update_simulation(_delta):
+func update_simulation(_delta) -> void:
 	# Add sand grain to random location
 	if randf() < SAND_DROP_RATE:
 		add_sand_grain()
@@ -29,12 +29,12 @@ func update_simulation(_delta):
 	
 	update_visualization()
 
-func add_sand_grain():
+func add_sand_grain() -> void:
 	var x = randi() % GRID_SIZE
 	var y = randi() % GRID_SIZE
 	grid[x][y] += 1
 
-func check_avalanche_conditions():
+func check_avalanche_conditions() -> void:
 	for x in range(GRID_SIZE):
 		for y in range(GRID_SIZE):
 			if grid[x][y] >= CRITICAL_SLOPE:
@@ -47,7 +47,7 @@ func check_avalanche_conditions():
 					if is_valid_2d_position(neighbor):
 						grid[neighbor.x][neighbor.y] += excess / neighbors.size()
 
-func update_visualization():
+func update_visualization() -> void:
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
 		return
 		
@@ -87,6 +87,9 @@ func get_total_sand() -> int:
 			total += grid[x][y]
 	return total
 
-func reset_simulation():
+func reset_simulation() -> void:
 	grid = create_2d_grid()
 	iteration_count = 0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

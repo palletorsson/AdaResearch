@@ -1,4 +1,14 @@
-﻿extends Node3D
+extends Node3D
+
+# @identity
+# essence: F_ij = G*m_i*m_j/r^2. Three bodies, three mutual attractions, no closed-form solution. Deterministic rules, unpredictable trajectories.
+# desire: To watch three glowing bodies dance — orbiting, swapping partners, ejecting one, recapturing — Poincare's impossibility made visible.
+# critical_parameter: gravitational_constant (0.1) and initial conditions. Tiny changes in starting positions produce wildly different long-term behavior. This IS chaos.
+# triggers: Auto-start — bodies attract pairwise, trails trace history. Reset button → return to initial positions. Pause → freeze the dance. Mass slider → all masses change.
+# emerges: Figure-eight orbits (rare, unstable). Hierarchical pairs (two orbit closely, third orbits the pair). Ejection events (one body flung away). Sensitivity to initial conditions.
+# needs: VR UI buttons [has], trail visualization [has], auto-rotate for 3D perspective [has]. Missing: VR grabbable bodies to set initial conditions, Lyapunov exponent display.
+# relationships: Extends exercise_1_8 (two-body attraction → three-body chaos). Pairs with nbody_simulation (3 → N). Gateway to chaos_attractor (strange attractors from deterministic ODEs).
+# truth: Three bodies under gravity have no formula. The future is computable but not predictable. Determinism and predictability are not the same thing.
 
 class_name ThreeBodyProblem
 
@@ -19,7 +29,7 @@ var queer_colors = [
 	Color(1.0, 0.5, 0.3, 1.0)     # Coral
 ]
 
-func _ready():
+func _ready() -> void:
 	# Scale for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
@@ -32,34 +42,54 @@ func _ready():
 	paused = false
 	trails_enabled = true
 
-func _create_star_field():
-	# Create a background star field for visual appeal
-	var star_material = StandardMaterial3D.new()
+func _create_star_field() -> void:
+	# Create a background star field using a single MultiMeshInstance3D
+	# instead of 200 individual CSGSphere3D nodes (saves ~200 RIDs).
+	var star_field := get_node_or_null("StarField")
+	if not star_field:
+		return
+
+	var star_mesh := SphereMesh.new()
+	star_mesh.radius = 0.03
+	star_mesh.height = 0.06
+	star_mesh.radial_segments = 4
+	star_mesh.rings = 2
+
+	var star_material := StandardMaterial3D.new()
 	star_material.albedo_color = Color.WHITE
 	star_material.emission_enabled = true
 	star_material.emission = Color.WHITE * 0.5
-	
+	star_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.mesh = star_mesh
+	mm.instance_count = 200
+
+	# Seed star positions and random sizes via per-instance transforms
 	for i in range(200):
-		var star = CSGSphere3D.new()
-		star.radius = randf_range(0.01, 0.05)
-		star.material = star_material
-		
-		# Random position in a large sphere
-		var angle1 = randf_range(0, 2 * PI)
-		var angle2 = randf_range(0, PI)
-		var radius = randf_range(50, 100)
-		
-		star.position = Vector3(
+		var angle1: float = randf_range(0, 2 * PI)
+		var angle2: float = randf_range(0, PI)
+		var radius: float = randf_range(50, 100)
+		var pos := Vector3(
 			radius * sin(angle2) * cos(angle1),
 			radius * sin(angle2) * sin(angle1),
 			radius * cos(angle2)
 		)
-		
-		var star_field = get_node_or_null("StarField")
-		if star_field:
-			star_field.add_child(star)
+		var s: float = randf_range(0.3, 1.5)  # Random scale variation
+		var t := Transform3D(Basis().scaled(Vector3(s, s, s)), pos)
+		mm.set_instance_transform(i, t)
+		# Slight color variation for visual depth
+		var brightness: float = randf_range(0.6, 1.0)
+		mm.set_instance_color(i, Color(brightness, brightness, brightness + 0.1, 1.0))
 
-func _initialize_bodies():
+	var mmi := MultiMeshInstance3D.new()
+	mmi.multimesh = mm
+	mmi.material_override = star_material
+	star_field.add_child(mmi)
+
+func _initialize_bodies() -> void:
 	var celestial = get_node_or_null("CelestialBodies")
 	if not celestial:
 		return
@@ -69,7 +99,7 @@ func _initialize_bodies():
 	for body in bodies:
 		body.initialize()
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if paused:
 		return
 
@@ -88,7 +118,7 @@ func _physics_process(delta):
 	if trails_enabled:
 		_update_trails()
 
-func _apply_gravitational_forces(_delta):
+func _apply_gravitational_forces(_delta) -> void:
 	# Calculate gravitational forces between all pairs of bodies
 	for i in range(bodies.size()):
 		for j in range(i + 1, bodies.size()):
@@ -106,17 +136,17 @@ func _apply_gravitational_forces(_delta):
 				body1.apply_force(force_direction * force_magnitude)
 				body2.apply_force(-force_direction * force_magnitude)
 
-func _update_bodies(delta):
+func _update_bodies(delta) -> void:
 	# Update each body's physics
 	for body in bodies:
 		body.update_physics(delta * time_scale)
 
-func _update_trails():
+func _update_trails() -> void:
 	# Update trails for each body
 	for body in bodies:
 		body.update_trail()
 
-func _connect_ui():
+func _connect_ui() -> void:
 	var reset_btn = get_node_or_null("UI/VBoxContainer/ResetButton")
 	if reset_btn:
 		reset_btn.pressed.connect(_on_reset_pressed)
@@ -130,37 +160,31 @@ func _connect_ui():
 	if mass_slider:
 		mass_slider.value_changed.connect(_on_mass_changed)
 
-func _on_reset_pressed():
-	# Reset all bodies to initial positions
+func _on_reset_pressed() -> void:
+	# Reset all bodies to initial positions (CelestialBody.reset_to_initial
+	# already clears trail_points and rebuilds the ImmediateMesh)
 	for body in bodies:
 		body.reset_to_initial()
-	
-	# Clear trails
-	var trails = get_node_or_null("Trails")
-	if trails:
-		for child in trails.get_children():
-			child.queue_free()
 
-func _on_pause_pressed():
+func _on_pause_pressed() -> void:
 	paused = !paused
 	var pause_btn = get_node_or_null("UI/VBoxContainer/PauseButton")
 	if pause_btn:
 		pause_btn.text = "Resume" if paused else "Pause"
 
-func _on_trail_toggle_pressed():
+func _on_trail_toggle_pressed() -> void:
 	trails_enabled = !trails_enabled
 	var trail_btn = get_node_or_null("UI/VBoxContainer/TrailToggle")
 	if trail_btn:
 		trail_btn.text = "Trails: " + ("ON" if trails_enabled else "OFF")
 	
 	if !trails_enabled:
-		# Clear all trails
-		var trails = get_node_or_null("Trails")
-		if trails:
-			for child in trails.get_children():
-				child.queue_free()
+		# Clear trails by resetting each body's trail data
+		for body in bodies:
+			body.trail_points.clear()
+			body._rebuild_trail_mesh()
 
-func _on_mass_changed(value: float):
+func _on_mass_changed(value: float) -> void:
 	# Update mass of all bodies
 	for body in bodies:
 		body.body_mass = value
@@ -170,21 +194,21 @@ func _on_mass_changed(value: float):
 	if mass_label:
 		mass_label.text = "Mass: " + str(int(value))
 
-func _apply_vibrant_colors():
-	# Apply vibrant queer colors to celestial bodies
+func _apply_vibrant_colors() -> void:
+	# Apply vibrant queer colors to celestial bodies.
+	# CelestialBody.set_trail_color() handles both body mesh and trail material.
 	for i in range(bodies.size()):
-		var body = bodies[i]
-		var color = queer_colors[i % queer_colors.size()]
+		var body: CelestialBody = bodies[i] as CelestialBody
+		if body == null:
+			continue
+		var color: Color = queer_colors[i % queer_colors.size()]
+		body.set_trail_color(color)
 
-		# Apply color to body mesh
-		if body.has_node("MeshInstance3D"):
-			var mesh_instance = body.get_node("MeshInstance3D")
-			if mesh_instance.material_override:
-				mesh_instance.material_override.albedo_color = color
-				mesh_instance.material_override.emission_enabled = true
-				mesh_instance.material_override.emission = color
-				mesh_instance.material_override.emission_energy_multiplier = 3.0
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 
-		# Apply color to trail if available
-		if body.has_method("set_trail_color"):
-			body.set_trail_color(color)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

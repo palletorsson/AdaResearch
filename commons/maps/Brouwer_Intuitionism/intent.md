@@ -3,3 +3,5 @@ Sequence role: Fifth map in Foundations Crisis; the constructive response to Gö
 Technical angle: Constructive vs classical logic, rejection of the law of excluded middle (A ∨ ¬A is not assumed), the Brouwer-Heyting-Kolmogorov interpretation, constructive proofs as programs (Curry-Howard correspondence). The brouwer_choice_sequence, constructive_proof, and excluded_middle_demo make these abstractions interactive.
 Critical angle: Brouwer's intuitionism is computationally prescient — constructive proofs are programs, existence claims are algorithms. The rejection of excluded middle is not weakness but discipline: you may not assert something exists without showing how to find it. This connects directly to the curriculum's coding emphasis: in computation, existence without construction is meaningless.
 Key artifacts: constructive_proof demonstrates the difference between classical and constructive existence; excluded_middle_demo lets the learner experience what's lost (and gained) when excluded middle is rejected; brouwer_choice_sequence shows the free-choice alternative.
+
+Gap: brouwer_choice_sequence needs VR controls; constructive_proof needs VR controls.

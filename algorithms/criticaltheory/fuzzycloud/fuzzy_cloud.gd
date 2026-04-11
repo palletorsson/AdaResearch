@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Configuration
 @export_category("Sculpture Configuration")
@@ -17,12 +17,12 @@
 @export var randomize_colors: bool = true
 @export var color_variation: float = 0.05  # How much the colors can vary
 
-func _ready():
+func _ready() -> void:
 	if generate_on_ready:
 		create_sculpture()
 		setup_environment()
 
-func create_sculpture():
+func create_sculpture() -> void:
 	var sculpture = Node3D.new()
 	sculpture.name = "DonovanSculpture"
 	
@@ -40,7 +40,7 @@ func create_sculpture():
 
 
 
-func create_blob_cluster(parent):
+func create_blob_cluster(parent) -> void:
 	# Create the cluster of hairy blobs
 	var cluster = Node3D.new()
 	cluster.name = "BlobCluster"
@@ -154,7 +154,7 @@ func create_blob_core(size):
 	
 	return core
 
-func create_hair_for_blob(parent_node, core_mesh, size):
+func create_hair_for_blob(parent_node, core_mesh, size) -> void:
 	var hair_container = Node3D.new()
 	hair_container.name = "HairContainer"
 	
@@ -236,7 +236,7 @@ func create_hair_for_blob(parent_node, core_mesh, size):
 	hair_container.add_child(hair_instance)
 	parent_node.add_child(hair_container)
 
-func setup_vr_camera():
+func setup_vr_camera() -> void:
 	"""Set up VR-compatible camera and positioning"""
 	# Remove existing camera if present
 	var existing_camera = get_node_or_null("Camera3D")
@@ -265,7 +265,7 @@ func setup_vr_camera():
 		sculpture.position = Vector3(0, 0, -2.5)  # Closer for VR viewing
 		sculpture.scale = Vector3(1.5, 1.5, 1.5)  # Larger scale for VR
 
-func setup_environment():
+func setup_environment() -> void:
 	# Create VR-compatible camera setup
 	setup_vr_camera()
 	
@@ -275,7 +275,7 @@ func setup_environment():
 	# Create a gallery environment
 	create_gallery_room()
 
-func setup_lighting():
+func setup_lighting() -> void:
 	# Create a world environment
 	var env = WorldEnvironment.new()
 	env.name = "Environment"
@@ -311,7 +311,7 @@ func setup_lighting():
 	# Add spotlights as in gallery setting
 	add_gallery_lights()
 
-func add_gallery_lights():
+func add_gallery_lights() -> void:
 	# Main directional light
 	var dir_light = DirectionalLight3D.new()
 	dir_light.name = "MainLight"
@@ -355,7 +355,7 @@ func add_gallery_lights():
 	
 	add_child(spots)
 
-func create_gallery_room():
+func create_gallery_room() -> void:
 	var room = Node3D.new()
 	room.name = "GalleryRoom"
 	
@@ -426,7 +426,7 @@ func create_gallery_room():
 	add_child(room)
 
 # Enhanced version of the hair system using MultiMesh for better performance
-func create_optimized_hair_for_blob(parent_node, core_mesh, size):
+func create_optimized_hair_for_blob(parent_node, core_mesh, size) -> void:
 	var hair_container = Node3D.new()
 	hair_container.name = "OptimizedHairContainer"
 	
@@ -521,7 +521,7 @@ func create_optimized_hair_for_blob(parent_node, core_mesh, size):
 	parent_node.add_child(hair_container)
 
 # Alternative hair implementation using a particle system
-func create_particle_hair_for_blob(parent_node, core_mesh, _size):
+func create_particle_hair_for_blob(parent_node, core_mesh, _size) -> void:
 	var particles = GPUParticles3D.new()
 	particles.name = "HairParticles"
 	
@@ -577,7 +577,7 @@ func create_particle_hair_for_blob(parent_node, core_mesh, _size):
 	
 	parent_node.add_child(particles)
 
-func optimize_for_vr(sculpture: Node3D):
+func optimize_for_vr(sculpture: Node3D) -> void:
 	"""Apply VR-specific optimizations to the sculpture"""
 	# Ensure all meshes are visible in VR
 	var mesh_instances = find_children_by_type(sculpture, "MeshInstance3D")
@@ -611,3 +611,12 @@ func find_children_by_type(node: Node, type_name: String) -> Array:
 		result.append_array(find_children_by_type(child, type_name))
 	
 	return result
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,287 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 5,
+				"name": "script_runner",
+				"pos": [
+					1,
+					1,
+					4
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 9,
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					5
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "pattern_tile_puzzle",
+				"pos": [
+					2,
+					2,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "pattern_tile_puzzle",
+				"pos": [
+					3,
+					2,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "pattern_tile_mirror",
+				"pos": [
+					4,
+					2,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [
+			[
+				0,
+				0,
+				0
+			]
+		],
+		"issues": [
+			{
+				"description": "pattern_tile_puzzle at (2,2,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "pattern_tile_puzzle at (3,2,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "pattern_tile_mirror at (4,2,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Tutorial_Pattern",
+		"pacing": {
+			"density": 4.5,
+			"reachable_artifacts": 2,
+			"total_artifacts": 5,
+			"walkable_tiles": 53
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": 13,
+			"pos": [
+				5,
+				0,
+				8
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Tutorial_Pattern",
+	"sequence": "array_tutorial",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "script_runner",
+				"pos": [
+					1,
+					1,
+					4
+				]
+			},
+			{
+				"name": "pattern_tile_puzzle",
+				"pos": [
+					2,
+					2,
+					4
+				]
+			},
+			{
+				"name": "pattern_tile_puzzle",
+				"pos": [
+					3,
+					2,
+					4
+				]
+			},
+			{
+				"name": "pattern_tile_mirror",
+				"pos": [
+					4,
+					2,
+					4
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					5
+				]
+			}
+		],
+		"dimensions": [
+			10,
+			3,
+			10
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 53,
+			"ground_pct": 53.0,
+			"void": 1,
+			"walls": 46
+		},
+		"map_name": "Tutorial_Pattern",
+		"rooms": [
+			{
+				"artifacts": [
+					"script_runner",
+					"dark_sphere"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 52
+			}
+		],
+		"spawn": [
+			0,
+			1,
+			0
+		],
+		"teleporter": [
+			5,
+			0,
+			8
+		]
+	},
+	"timestamp": "2026-03-16T12:13:06",
+	"walkthrough": {
+		"map_name": "Tutorial_Pattern",
+		"stops": [
+			{
+				"facing": "south",
+				"look_at": [
+					1,
+					1,
+					4
+				],
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southeast",
+						"dist": 7,
+						"name": "pattern_tile_puzzle"
+					},
+					{
+						"direction": "southeast",
+						"dist": 8,
+						"name": "pattern_tile_mirror"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "east",
+				"name": "script_runner",
+				"pos": [
+					1,
+					1,
+					4
+				],
+				"steps_from_prev": 5,
+				"total_steps": 5,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "east",
+						"dist": 1,
+						"name": "pattern_tile_puzzle"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "south",
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					5
+				],
+				"steps_from_prev": 4,
+				"total_steps": 9,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 1,
+						"name": "pattern_tile_mirror"
+					},
+					{
+						"direction": "northwest",
+						"dist": 2,
+						"name": "pattern_tile_puzzle"
+					},
+					{
+						"direction": "northwest",
+						"dist": 3,
+						"name": "pattern_tile_puzzle"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"pos": [
+					5,
+					0,
+					8
+				],
+				"reachable": true,
+				"steps_from_prev": 4,
+				"total_steps": 13,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 2,
+			"total_steps": 13,
+			"total_stops": 4
+		}
+	}
+}

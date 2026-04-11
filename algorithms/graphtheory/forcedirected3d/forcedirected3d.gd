@@ -4,6 +4,16 @@ extends Node3D
 # 3D Force-Directed Layout: Volumetric Graph Physics
 # Advanced 3D implementation with realistic physics simulation
 # Supports VR interaction and real-time manipulation
+#
+# @identity
+# essence: F_repel = k/r^2 (all pairs), F_spring = -k*(L-L0) (edges only). Repulsion spreads nodes apart; springs hold connected nodes together. Layout is equilibrium.
+# desire: To watch a graph untangle itself — nodes pushing apart, edges pulling together, the layout emerging from physics rather than being designed.
+# critical_parameter: temperature (simulated annealing). It starts at 1.0 and cools by 0.995 per step. High temperature = large movements, exploration. Low temperature = fine adjustment, convergence.
+# triggers: Auto-run on ready → simulation iterates, SPACE → pause/resume, R → regenerate graph, F → toggle force arrows, E → toggle edges, S → toggle stress coloring
+# emerges: Clusters forming for densely connected subgraphs. Simulated annealing cooling the system into a stable layout. Stress coloring revealing which nodes are under the most force.
+# needs: MultiMesh node/edge/force rendering [has], VR grab nodes [has], spatial hashing [has], convergence detection [has]. Missing: community detection coloring, edge bundling.
+# relationships: Applies force physics to graph theory (forces as layout algorithm, not simulation). Contrasts with nbody_simulation (all-pairs gravity vs spring+repulsion). Lives in ForcesChaos.
+# truth: A good layout is a force equilibrium. The graph does not know its shape — physics finds it by minimizing energy.
 
 @export_category("Graph Configuration")
 @export var node_count: int = 20
@@ -58,7 +68,7 @@ class GraphNode3D:
 	var stress_level: float = 0.0
 	var degree: int = 0
 	
-	func _init(node_id: int, pos: Vector3):
+	func _init(node_id: int, pos: Vector3) -> void:
 		id = node_id
 		position = pos
 		velocity = Vector3.ZERO
@@ -73,7 +83,7 @@ class GraphEdge3D:
 	var visual_object: Node3D
 	var force_line: Node3D
 	
-	func _init(from: int, to: int, length: float = 8.0, k: float = 0.1):
+	func _init(from: int, to: int, length: float = 8.0, k: float = 0.1) -> void:
 		from_id = from
 		to_id = to
 		rest_length = length
@@ -99,6 +109,13 @@ var edges_container: Node3D
 var forces_container: Node3D
 var ui_container: CanvasLayer
 
+# MultiMesh instances for batched rendering
+var _node_multimesh_instance: MultiMeshInstance3D
+var _edge_multimesh_instance: MultiMeshInstance3D
+var _force_shaft_multimesh_instance: MultiMeshInstance3D
+var _force_head_multimesh_instance: MultiMeshInstance3D
+var _node_labels: Array[Label3D] = []
+
 # VR interaction
 var grabbed_nodes: Dictionary = {}  # controller_id -> node_id
 var controller_positions: Dictionary = {}
@@ -107,7 +124,7 @@ var controller_positions: Dictionary = {}
 var spatial_hash: Dictionary = {}
 var hash_cell_size: float = 10.0
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	setup_containers()
 	setup_ui()
@@ -117,14 +134,14 @@ func _ready():
 	if auto_run:
 		start_simulation()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_running:
 		simulation_step(delta)
 		update_visualization()
 		update_ui_stats()
 		check_convergence()
 
-func setup_environment():
+func setup_environment() -> void:
 	"""Setup lighting and environment for 3D visualization"""
 	# Main directional light
 	var main_light = DirectionalLight3D.new()
@@ -153,7 +170,7 @@ func setup_environment():
 	accent_light.omni_range = 40.0
 	add_child(accent_light)
 
-func setup_containers():
+func setup_containers() -> void:
 	"""Create containers for different visual elements"""
 	nodes_container = Node3D.new()
 	nodes_container.name = "NodesContainer"
@@ -167,7 +184,7 @@ func setup_containers():
 	forces_container.name = "ForcesContainer"
 	add_child(forces_container)
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create UI overlay for statistics and controls"""
 	ui_container = CanvasLayer.new()
 	ui_container.name = "UIContainer"
@@ -190,7 +207,7 @@ func setup_ui():
 		label.text = ""
 		stats_vbox.add_child(label)
 
-func initialize_graph():
+func initialize_graph() -> void:
 	"""Initialize the 3D graph structure"""
 	nodes.clear()
 	edges.clear()
@@ -256,7 +273,7 @@ func get_initial_position(node_id: int) -> Vector3:
 		_:
 			return Vector3.ZERO
 
-func create_edge(from_id: int, to_id: int):
+func create_edge(from_id: int, to_id: int) -> void:
 	"""Create an edge between two nodes"""
 	var distance = nodes[from_id].position.distance_to(nodes[to_id].position)
 	var edge = GraphEdge3D.new(from_id, to_id, distance, spring_constant)
@@ -266,7 +283,7 @@ func create_edge(from_id: int, to_id: int):
 	adjacency_list[from_id].append(to_id)
 	adjacency_list[to_id].append(from_id)
 
-func ensure_connectivity():
+func ensure_connectivity() -> void:
 	"""Ensure the graph is connected using minimum spanning tree approach"""
 	var connected = [0]  # Start with node 0
 	var unconnected = []
@@ -293,147 +310,169 @@ func ensure_connectivity():
 			connected.append(best_unconnected)
 			unconnected.erase(best_unconnected)
 
-func calculate_node_degrees():
+func calculate_node_degrees() -> void:
 	"""Calculate degree for each node"""
 	for node in nodes:
 		node.degree = adjacency_list[node.id].size()
 
-func create_visualization():
-	"""Create 3D visual representations"""
+func create_visualization() -> void:
+	"""Create 3D visual representations using MultiMesh for performance"""
 	create_node_visuals()
 	create_edge_visuals()
 	if show_forces:
 		create_force_visuals()
 
-func create_node_visuals():
-	"""Create visual representations for nodes"""
-	for node in nodes:
-		var mesh_instance = MeshInstance3D.new()
-		var sphere = SphereMesh.new()
-		sphere.radius = 0.5
-		sphere.height = 1.0
-		mesh_instance.mesh = sphere
-		
-		# Create material based on degree
-		var material = StandardMaterial3D.new()
-		var degree_factor = float(node.degree) / float(edges.size() * 2 / node_count)  # Normalized degree
-		material.albedo_color = Color(0.3 + degree_factor * 0.5, 0.6, 0.9 - degree_factor * 0.3)
-		material.emission_enabled = true
-		material.emission = material.albedo_color * 0.3
-		material.metallic = 0.2
-		material.roughness = 0.3
-		mesh_instance.material_override = material
-		
-		mesh_instance.position = node.position
-		mesh_instance.name = "Node_" + str(node.id)
-		
-		# Add label
-		var label = Label3D.new()
+func create_node_visuals() -> void:
+	"""Create batched node spheres via MultiMesh + separate Label3D per node"""
+	var sphere_mesh := SphereMesh.new()
+	sphere_mesh.radius = 0.5
+	sphere_mesh.height = 1.0
+
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.instance_count = nodes.size()
+	mm.mesh = sphere_mesh
+
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.metallic = 0.2
+	mat.roughness = 0.3
+	mm.mesh.material = mat
+
+	_node_multimesh_instance = MultiMeshInstance3D.new()
+	_node_multimesh_instance.name = "NodeMultiMesh"
+	_node_multimesh_instance.multimesh = mm
+	nodes_container.add_child(_node_multimesh_instance)
+
+	# Set initial transforms and colors, create labels
+	_node_labels.clear()
+	for i in nodes.size():
+		var node := nodes[i]
+		mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, node.position))
+		var degree_factor: float = float(node.degree) / max(float(edges.size() * 2 / node_count), 1.0)
+		var color := Color(0.3 + degree_factor * 0.5, 0.6, 0.9 - degree_factor * 0.3)
+		mm.set_instance_color(i, color)
+
+		# Label3D for node ID (lightweight, no mesh overhead)
+		var label := Label3D.new()
 		label.text = str(node.id)
-		label.position = Vector3(0, 1.2, 0)
+		label.position = node.position + Vector3(0, 1.2, 0)
 		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		label.font_size = 24
-		mesh_instance.add_child(label)
-		
-		nodes_container.add_child(mesh_instance)
-		node.visual_object = mesh_instance
+		nodes_container.add_child(label)
+		_node_labels.append(label)
 
-func create_edge_visuals():
-	"""Create visual representations for edges"""
-	if not show_edges:
+func create_edge_visuals() -> void:
+	"""Create batched edge cylinders via MultiMesh"""
+	if not show_edges or edges.is_empty():
 		return
-	
-	for edge in edges:
-		var from_pos = nodes[edge.from_id].position
-		var to_pos = nodes[edge.to_id].position
-		
-		var edge_mesh = create_edge_cylinder(from_pos, to_pos)
-		edge_mesh.name = "Edge_" + str(edge.from_id) + "_" + str(edge.to_id)
-		edges_container.add_child(edge_mesh)
-		edge.visual_object = edge_mesh
 
-func create_edge_cylinder(from_pos: Vector3, to_pos: Vector3) -> MeshInstance3D:
-	"""Create a cylinder mesh for an edge"""
-	var mesh_instance = MeshInstance3D.new()
-	var cylinder = CylinderMesh.new()
-	
-	var distance = from_pos.distance_to(to_pos)
-	cylinder.top_radius = 0.05
-	cylinder.bottom_radius = 0.05
-	cylinder.height = distance
-	
-	mesh_instance.mesh = cylinder
-	
-	# Position and orient the cylinder
-	var mid_point = (from_pos + to_pos) * 0.5
-	mesh_instance.position = mid_point
-	mesh_instance.look_at_from_position(mesh_instance.position, to_pos, Vector3.UP)
-	mesh_instance.rotate_object_local(Vector3.RIGHT, PI/2)
-	
-	# Material
-	var material = StandardMaterial3D.new()
-	material.albedo_color = Color(0.7, 0.7, 0.7, 0.8)
-	material.emission_enabled = true
-	material.emission = Color(0.2, 0.2, 0.2)
-	material.flags_transparent = true
-	mesh_instance.material_override = material
-	
-	return mesh_instance
+	# Unit cylinder — scale Y per instance to match edge length
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = 0.05
+	cyl.bottom_radius = 0.05
+	cyl.height = 1.0
 
-func create_force_visuals():
-	"""Create visual representations for forces"""
-	for node in nodes:
-		var arrow = create_force_arrow()
-		arrow.name = "Force_" + str(node.id)
-		forces_container.add_child(arrow)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.7, 0.7, 0.7, 0.8)
+	mat.emission_enabled = true
+	mat.emission = Color(0.2, 0.2, 0.2)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	cyl.material = mat
 
-func create_force_arrow() -> Node3D:
-	"""Create an arrow to visualize force vectors"""
-	var arrow_root = Node3D.new()
-	
-	# Arrow shaft
-	var shaft = MeshInstance3D.new()
-	var cylinder = CylinderMesh.new()
-	cylinder.top_radius = 0.02
-	cylinder.bottom_radius = 0.02
-	cylinder.height = 1.0
-	shaft.mesh = cylinder
-	
-	# Arrow head
-	var head = MeshInstance3D.new()
-	var cone = SphereMesh.new()  # Using sphere for simplicity
-	cone.radius = 0.08
-	cone.height = 0.16
-	head.mesh = cone
-	head.position = Vector3(0, 0.6, 0)
-	
-	# Material for forces
-	var material = StandardMaterial3D.new()
-	material.albedo_color = Color(1.0, 0.2, 0.2)
-	material.emission_enabled = true
-	material.emission = Color(0.5, 0.1, 0.1)
-	shaft.material_override = material
-	head.material_override = material
-	
-	arrow_root.add_child(shaft)
-	arrow_root.add_child(head)
-	arrow_root.visible = false  # Initially hidden
-	
-	return arrow_root
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = edges.size()
+	mm.mesh = cyl
 
-func start_simulation():
+	_edge_multimesh_instance = MultiMeshInstance3D.new()
+	_edge_multimesh_instance.name = "EdgeMultiMesh"
+	_edge_multimesh_instance.multimesh = mm
+	edges_container.add_child(_edge_multimesh_instance)
+
+	# Set initial transforms
+	for i in edges.size():
+		var edge := edges[i]
+		var t := _compute_edge_transform(nodes[edge.from_id].position, nodes[edge.to_id].position)
+		mm.set_instance_transform(i, t)
+
+func _compute_edge_transform(from_pos: Vector3, to_pos: Vector3) -> Transform3D:
+	"""Compute transform for a unit cylinder to span between two points"""
+	var mid := (from_pos + to_pos) * 0.5
+	var diff := to_pos - from_pos
+	var dist := diff.length()
+	if dist < 0.001:
+		return Transform3D(Basis.IDENTITY, mid)
+	var dir := diff / dist
+	# Build basis: Y axis along direction, scale Y by distance
+	var up := Vector3.UP
+	if abs(dir.dot(up)) > 0.99:
+		up = Vector3.RIGHT
+	var right := dir.cross(up).normalized()
+	up = right.cross(dir).normalized()
+	var basis := Basis(right, dir * dist, up)
+	return Transform3D(basis, mid)
+
+func create_force_visuals() -> void:
+	"""Create batched force arrows via two MultiMesh (shafts + heads)"""
+	# Shaft — unit cylinder
+	var shaft_cyl := CylinderMesh.new()
+	shaft_cyl.top_radius = 0.02
+	shaft_cyl.bottom_radius = 0.02
+	shaft_cyl.height = 1.0
+	var force_mat := StandardMaterial3D.new()
+	force_mat.albedo_color = Color(1.0, 0.2, 0.2)
+	force_mat.emission_enabled = true
+	force_mat.emission = Color(0.5, 0.1, 0.1)
+	shaft_cyl.material = force_mat
+
+	var shaft_mm := MultiMesh.new()
+	shaft_mm.transform_format = MultiMesh.TRANSFORM_3D
+	shaft_mm.instance_count = nodes.size()
+	shaft_mm.mesh = shaft_cyl
+
+	_force_shaft_multimesh_instance = MultiMeshInstance3D.new()
+	_force_shaft_multimesh_instance.name = "ForceShaftMultiMesh"
+	_force_shaft_multimesh_instance.multimesh = shaft_mm
+	forces_container.add_child(_force_shaft_multimesh_instance)
+
+	# Head — small sphere
+	var head_sphere := SphereMesh.new()
+	head_sphere.radius = 0.08
+	head_sphere.height = 0.16
+	head_sphere.material = force_mat
+
+	var head_mm := MultiMesh.new()
+	head_mm.transform_format = MultiMesh.TRANSFORM_3D
+	head_mm.instance_count = nodes.size()
+	head_mm.mesh = head_sphere
+
+	_force_head_multimesh_instance = MultiMeshInstance3D.new()
+	_force_head_multimesh_instance.name = "ForceHeadMultiMesh"
+	_force_head_multimesh_instance.multimesh = head_mm
+	forces_container.add_child(_force_head_multimesh_instance)
+
+	# Hide all initially (zero scale)
+	var hidden := Transform3D(Basis.IDENTITY.scaled(Vector3.ZERO), Vector3.ZERO)
+	for i in nodes.size():
+		shaft_mm.set_instance_transform(i, hidden)
+		head_mm.set_instance_transform(i, hidden)
+
+func start_simulation() -> void:
 	"""Start the force-directed layout simulation"""
 	is_running = true
 	current_iteration = 0
 	temperature = 1.0
 	print("Starting 3D force-directed layout simulation")
 
-func stop_simulation():
+func stop_simulation() -> void:
 	"""Stop the simulation"""
 	is_running = false
 	print("Simulation stopped at iteration ", current_iteration)
 
-func simulation_step(delta: float):
+func simulation_step(delta: float) -> void:
 	"""Perform one step of the physics simulation"""
 	if current_iteration >= max_iterations:
 		stop_simulation()
@@ -464,7 +503,7 @@ func simulation_step(delta: float):
 	
 	current_iteration += 1
 
-func calculate_repulsion_forces():
+func calculate_repulsion_forces() -> void:
 	"""Calculate repulsion forces between all node pairs"""
 	for i in range(nodes.size()):
 		for j in range(i + 1, nodes.size()):
@@ -490,7 +529,7 @@ func calculate_repulsion_forces():
 			if not node2.is_fixed:
 				node2.force -= force / node2.mass
 
-func calculate_spring_forces():
+func calculate_spring_forces() -> void:
 	"""Calculate spring forces along edges"""
 	for edge in edges:
 		var node1 = nodes[edge.from_id]
@@ -513,13 +552,13 @@ func calculate_spring_forces():
 		if not node2.is_fixed:
 			node2.force -= force / node2.mass
 
-func apply_gravity():
+func apply_gravity() -> void:
 	"""Apply gravitational force"""
 	for node in nodes:
 		if not node.is_fixed:
 			node.force.y -= gravity_strength
 
-func integrate_motion(delta: float):
+func integrate_motion(delta: float) -> void:
 	"""Integrate forces to update positions and velocities"""
 	total_energy = 0.0
 	kinetic_energy = 0.0
@@ -552,7 +591,7 @@ func integrate_motion(delta: float):
 	
 	total_energy = kinetic_energy + potential_energy
 
-func apply_bounds_constraints(node: GraphNode3D):
+func apply_bounds_constraints(node: GraphNode3D) -> void:
 	"""Keep nodes within the layout bounds"""
 	# Soft bounds with spring-like force
 	var bounds_force = Vector3.ZERO
@@ -566,7 +605,7 @@ func apply_bounds_constraints(node: GraphNode3D):
 	
 	node.force += bounds_force
 
-func update_spatial_hash():
+func update_spatial_hash() -> void:
 	"""Update spatial hash for performance optimization"""
 	spatial_hash.clear()
 	
@@ -584,78 +623,81 @@ func get_spatial_hash_key(position: Vector3) -> Vector3i:
 		int(position.z / hash_cell_size)
 	)
 
-func update_visualization():
+func update_visualization() -> void:
 	"""Update visual elements based on current positions"""
 	update_node_visuals()
 	update_edge_visuals()
 	if show_forces:
 		update_force_visuals()
 
-func update_node_visuals():
-	"""Update node visual positions and properties"""
-	for node in nodes:
-		if node.visual_object:
-			node.visual_object.position = node.position
-			
-			# Update color based on stress if enabled
-			if stress_color_mapping:
-				var material = node.visual_object.material_override as StandardMaterial3D
-				var stress_factor = clamp(node.stress_level / max_force, 0.0, 1.0)
-				material.albedo_color = Color(0.3 + stress_factor * 0.7, 0.6 - stress_factor * 0.3, 0.9 - stress_factor * 0.6)
-				material.emission = material.albedo_color * 0.3
-			
-			# Update trails
-			if show_node_trails:
-				update_node_trail(node)
+func update_node_visuals() -> void:
+	"""Update node positions and colors via MultiMesh"""
+	if not _node_multimesh_instance:
+		return
+	var mm := _node_multimesh_instance.multimesh
+	for i in nodes.size():
+		var node := nodes[i]
+		mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, node.position))
 
-func update_node_trail(node: GraphNode3D):
+		# Update label position
+		if i < _node_labels.size():
+			_node_labels[i].position = node.position + Vector3(0, 1.2, 0)
+
+		# Update color based on stress if enabled
+		if stress_color_mapping:
+			var stress_factor: float = clamp(node.stress_level / max_force, 0.0, 1.0)
+			var color := Color(0.3 + stress_factor * 0.7, 0.6 - stress_factor * 0.3, 0.9 - stress_factor * 0.6)
+			mm.set_instance_color(i, color)
+
+		# Update trails
+		if show_node_trails:
+			update_node_trail(node)
+
+func update_node_trail(node: GraphNode3D) -> void:
 	"""Update particle trail for a node"""
 	node.trail_points.append(node.position)
 	if node.trail_points.size() > node_trail_length:
 		node.trail_points = node.trail_points.slice(1)
 
-func update_edge_visuals():
-	"""Update edge visual positions and orientations"""
-	if not show_edges:
+func update_edge_visuals() -> void:
+	"""Update edge transforms via MultiMesh"""
+	if not show_edges or not _edge_multimesh_instance:
 		return
-	
-	for i in range(edges.size()):
-		var edge = edges[i]
-		if edge.visual_object:
-			var from_pos = nodes[edge.from_id].position
-			var to_pos = nodes[edge.to_id].position
-			
-			# Update position and orientation
-			var mid_point = (from_pos + to_pos) * 0.5
-			edge.visual_object.position = mid_point
-			edge.visual_object.look_at_from_position(edge.visual_object.position, to_pos, Vector3.UP)
-			edge.visual_object.rotate_object_local(Vector3.RIGHT, PI/2)
-			
-			# Update length
-			var distance = from_pos.distance_to(to_pos)
-			var cylinder_mesh = edge.visual_object.mesh as CylinderMesh
-			cylinder_mesh.height = distance
+	var mm := _edge_multimesh_instance.multimesh
+	for i in edges.size():
+		var edge := edges[i]
+		var t := _compute_edge_transform(nodes[edge.from_id].position, nodes[edge.to_id].position)
+		mm.set_instance_transform(i, t)
 
-func update_force_visuals():
-	"""Update force vector visualizations"""
-	for i in range(nodes.size()):
-		var node = nodes[i]
-		var force_arrow = forces_container.get_child(i)
-		
+func update_force_visuals() -> void:
+	"""Update force arrow transforms via MultiMesh"""
+	if not _force_shaft_multimesh_instance or not _force_head_multimesh_instance:
+		return
+	var shaft_mm := _force_shaft_multimesh_instance.multimesh
+	var head_mm := _force_head_multimesh_instance.multimesh
+	var hidden := Transform3D(Basis.IDENTITY.scaled(Vector3.ZERO), Vector3(0, -9999, 0))
+
+	for i in nodes.size():
+		var node := nodes[i]
 		if node.force.length() > 0.01:
-			force_arrow.visible = true
-			force_arrow.position = node.position
-			
-			# Scale and orient arrow based on force
-			var force_magnitude = node.force.length()
-			var force_direction = node.force.normalized()
-			
-			force_arrow.scale = Vector3.ONE * min(force_magnitude * force_visualization_scale, 3.0)
-			force_arrow.look_at_from_position(force_arrow.position, node.position + force_direction, Vector3.UP)
+			var mag := node.force.length()
+			var dir := node.force.normalized()
+			var arrow_len: float = min(mag * force_visualization_scale, 3.0)
+			# Build transform: Y axis along force direction, scaled by arrow length
+			var up := Vector3.UP
+			if abs(dir.dot(up)) > 0.99:
+				up = Vector3.RIGHT
+			var right := dir.cross(up).normalized()
+			up = right.cross(dir).normalized()
+			var basis := Basis(right, dir * arrow_len, up)
+			shaft_mm.set_instance_transform(i, Transform3D(basis, node.position))
+			# Head at tip of arrow
+			head_mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, node.position + dir * arrow_len))
 		else:
-			force_arrow.visible = false
+			shaft_mm.set_instance_transform(i, hidden)
+			head_mm.set_instance_transform(i, hidden)
 
-func check_convergence():
+func check_convergence() -> void:
 	"""Check if the simulation has converged"""
 	if current_iteration < 10:  # Skip early iterations
 		return
@@ -670,7 +712,7 @@ func check_convergence():
 		stop_simulation()
 		print("Simulation converged at iteration ", current_iteration)
 
-func update_ui_stats():
+func update_ui_stats() -> void:
 	"""Update UI statistics display"""
 	if not ui_container:
 		return
@@ -695,7 +737,7 @@ func update_ui_stats():
 		labels[10].text = "Controls: SPACE-Start/Stop, R-Reset"
 		labels[11].text = "F-Toggle Forces, E-Toggle Edges"
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input for simulation control"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -717,10 +759,10 @@ func _input(event):
 			KEY_S:
 				stress_color_mapping = not stress_color_mapping
 
-func reset_simulation():
+func reset_simulation() -> void:
 	"""Reset the simulation to initial state"""
 	stop_simulation()
-	
+
 	# Clear existing visualization
 	for child in nodes_container.get_children():
 		child.queue_free()
@@ -728,13 +770,18 @@ func reset_simulation():
 		child.queue_free()
 	for child in forces_container.get_children():
 		child.queue_free()
-	
+	_node_multimesh_instance = null
+	_edge_multimesh_instance = null
+	_force_shaft_multimesh_instance = null
+	_force_head_multimesh_instance = null
+	_node_labels.clear()
+
 	# Reinitialize
 	current_iteration = 0
 	temperature = 1.0
 	initialize_graph()
 	create_visualization()
-	
+
 	print("Simulation reset")
 
 # VR Interaction methods
@@ -760,7 +807,7 @@ func grab_node(controller_id: int, world_position: Vector3) -> bool:
 	
 	return false
 
-func release_node(controller_id: int):
+func release_node(controller_id: int) -> void:
 	"""Release a grabbed node"""
 	if controller_id in grabbed_nodes:
 		var node_id = grabbed_nodes[controller_id]
@@ -768,7 +815,7 @@ func release_node(controller_id: int):
 		nodes[node_id].mass /= grabbed_node_mass_multiplier
 		grabbed_nodes.erase(controller_id)
 
-func update_grabbed_nodes():
+func update_grabbed_nodes() -> void:
 	"""Update positions of grabbed nodes"""
 	for controller_id in grabbed_nodes:
 		if controller_id in controller_positions:
@@ -804,3 +851,12 @@ func get_simulation_info() -> Dictionary:
 			"gravity_strength": gravity_strength
 		}
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

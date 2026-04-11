@@ -56,13 +56,13 @@ const PRNG_ARROW_COUNT := 4
 const STAT_TEST_COUNT := 4
 const ENTROPY_HISTORY_COUNT := 50
 
-func _ready():
+func _ready() -> void:
 	initialize_generators()
 	_setup_visual_frames()
 	_setup_explanation_labels()
 	_setup_all_multimeshes()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	sample_timer += delta
 
@@ -75,14 +75,14 @@ func _process(delta):
 	show_statistical_comparison()
 	demonstrate_entropy_visualization()
 
-func initialize_generators():
+func initialize_generators() -> void:
 	prng_state = prng_seed
 	trng_buffer.clear()
 	prng_buffer.clear()
 	trng_samples.clear()
 	prng_samples.clear()
 
-func collect_samples():
+func collect_samples() -> void:
 	var trng_sample = simulate_true_random()
 	trng_buffer.append(trng_sample)
 	trng_samples.append(trng_sample)
@@ -157,7 +157,7 @@ func _make_sphere_mesh(radius: float = 0.5) -> SphereMesh:
 	m.rings = 8
 	return m
 
-func _setup_all_multimeshes():
+func _setup_all_multimeshes() -> void:
 	var trng_container = $TrueRandomGenerator
 	var prng_container = $PseudoRandomGenerator
 	var stat_container = $StatisticalComparison
@@ -257,7 +257,7 @@ func _setup_all_multimeshes():
 
 # ── Explanation labels ───────────────────────────────────────────────
 
-func _setup_explanation_labels():
+func _setup_explanation_labels() -> void:
 	var trng_container = $TrueRandomGenerator
 	var prng_container = $PseudoRandomGenerator
 
@@ -299,7 +299,7 @@ func _mm_set(mmi: MultiMeshInstance3D, idx: int, xform: Transform3D, col: Color)
 
 # ── Visualization (MultiMesh updates only — zero allocations) ────────
 
-func visualize_true_random():
+func visualize_true_random() -> void:
 	var entropy_values := [
 		quantum_fluctuation(),
 		thermal_fluctuation(),
@@ -339,7 +339,7 @@ func visualize_true_random():
 	# Output bars
 	_update_output_bars(mm_trng_output, trng_buffer, Vector3(0, -3, 0), Color.GREEN)
 
-func visualize_pseudo_random():
+func visualize_pseudo_random() -> void:
 	# Algorithm step boxes
 	mm_prng_steps.multimesh.visible_instance_count = PRNG_STEP_COUNT
 	for i in range(PRNG_STEP_COUNT):
@@ -364,7 +364,7 @@ func visualize_pseudo_random():
 	# Output bars
 	_update_output_bars(mm_prng_output, prng_buffer, Vector3(0, -3, 0), Color.CYAN)
 
-func _update_output_bars(mmi: MultiMeshInstance3D, buffer: Array, base_pos: Vector3, color: Color):
+func _update_output_bars(mmi: MultiMeshInstance3D, buffer: Array, base_pos: Vector3, color: Color) -> void:
 	var count := mini(OUTPUT_BAR_COUNT, buffer.size())
 	mmi.multimesh.visible_instance_count = count
 
@@ -377,7 +377,7 @@ func _update_output_bars(mmi: MultiMeshInstance3D, buffer: Array, base_pos: Vect
 		var bar_color := Color(color.r, color.g, color.b, 1.0).lerp(Color.WHITE, value * 0.3)
 		_mm_set(mmi, i, xform, bar_color)
 
-func show_statistical_comparison():
+func show_statistical_comparison() -> void:
 	if trng_samples.size() < 50 or prng_samples.size() < 50:
 		mm_stat_trng_bars.multimesh.visible_instance_count = 0
 		mm_stat_prng_bars.multimesh.visible_instance_count = 0
@@ -449,7 +449,7 @@ func calculate_statistics(samples: Array) -> Dictionary:
 
 	return stats
 
-func demonstrate_entropy_visualization():
+func demonstrate_entropy_visualization() -> void:
 	var trng_entropy := calculate_entropy(trng_samples)
 	var prng_entropy := calculate_entropy(prng_samples)
 
@@ -561,3 +561,12 @@ func _add_frame_piece(parent: Node3D, nm: String, pos: Vector3, size_vec: Vector
 	piece.position = pos
 	piece.set_meta("persistent_frame", true)
 	parent.add_child(piece)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

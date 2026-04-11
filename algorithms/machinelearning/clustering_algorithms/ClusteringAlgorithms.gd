@@ -430,6 +430,7 @@ func _update_centroid_visuals() -> void:
 		return
 	var centroid_mesh := SphereMesh.new()
 	centroid_mesh.radius = POINT_RADIUS * 1.4
+	centroid_mesh.height = POINT_RADIUS * 1.4 * 2.0
 	for idx in range(_centroids.size()):
 		var centroid := _centroids[idx]
 		var mesh_instance := MeshInstance3D.new()
@@ -520,3 +521,12 @@ func _recalculate_dataset_radius() -> void:
 	for sample in _samples:
 		max_dist = max(max_dist, sample["position"].distance_to(centre))
 	_max_radius = max(1.0, max_dist)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

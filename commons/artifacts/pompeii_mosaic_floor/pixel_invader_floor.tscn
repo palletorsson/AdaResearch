@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/pompeii_mosaic_floor/pixel_invader_floor.gd" id="1"]
+
+[node name="PixelInvaderFloor" type="Node3D"]
+script = ExtResource("1")

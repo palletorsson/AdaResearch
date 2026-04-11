@@ -110,6 +110,13 @@ var _fitness_cache: Dictionary = {}
 ## Running stats for the current generation.
 var _generation_stats: Dictionary = {}
 
+## History of generation stats (for dashboard / trend graphs).
+var _generation_history: Array[Dictionary] = []
+
+## Optional mating filter — if set, overrides kingdom/radius checks.
+## Callable(parent_a: CritterEntity, parent_b: CritterEntity) -> bool
+var custom_mating_filter: Callable = Callable()
+
 ## Is the system currently running automatic cycles?
 var _running: bool = false
 
@@ -191,6 +198,9 @@ func evolve_step() -> void:
 
 	# 6. Stats
 	_generation_stats = _build_stats(ranked, offspring_count, culled_count, asexual_count)
+	_generation_history.append(_generation_stats)
+	if _generation_history.size() > 500:
+		_generation_history = _generation_history.slice(-250)
 	generation_complete.emit(current_generation, _generation_stats)
 
 	if debug:
@@ -548,6 +558,11 @@ func _build_stats(
 ## Get the stats from the last evolution cycle.
 func get_last_stats() -> Dictionary:
 	return _generation_stats
+
+
+## Get stats history for all recorded generations (for trend graphs).
+func get_generation_history() -> Array[Dictionary]:
+	return _generation_history
 
 
 # ═══════════════════════════════════════════════════════════════

@@ -1,3 +1,13 @@
+# @identity
+# essence: roll(v) + contact_damage · δ(collision) — pure kinetic threat with no ranged capability
+# desire: a small armored egg that rolls toward you, dealing 9 damage on contact — the simplest predator
+# critical_parameter: contact_damage (9.0) — the only weapon; balanced by 0.74 scale making it hard to hit
+# triggers: inherited state machine from armadillo_droideka; no fire capability (can_deploy_fire = false)
+# emerges: egglings in groups create emergent flanking patterns despite having zero coordination logic
+# needs: inherited armadillo_droideka visual rig [has]; scute shell animation [has]
+# relationships: depends on armadillo_droideka base class; contrasts with origami_droideka (no ranged vs full combat)
+# truth: The simplest enemy teaches the most — contact damage is threat reduced to pure proximity.
+
 extends "res://commons/hazards/armadillo_droideka/armadillo_droideka.gd"
 class_name ArmadilloEggling
 

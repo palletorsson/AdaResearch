@@ -1,0 +1,180 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": -1,
+				"name": "dark_sphere",
+				"pos": [
+					5,
+					1,
+					5
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "noise_space",
+				"pos": [
+					5,
+					1,
+					6
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			}
+		],
+		"dead_ends": [
+			[
+				2,
+				0,
+				11
+			],
+			[
+				10,
+				0,
+				11
+			]
+		],
+		"issues": [
+			{
+				"description": "Teleporter at (10,0,12) unreachable from spawn",
+				"severity": "critical",
+				"type": "unreachable_teleporter"
+			},
+			{
+				"description": "dark_sphere at (5,1,5) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "noise_space at (5,1,6) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Noise_Space_10",
+		"pacing": {
+			"density": 0.0,
+			"reachable_artifacts": 0,
+			"total_artifacts": 2,
+			"walkable_tiles": 90
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			12,
+			2,
+			0
+		],
+		"teleporter": {
+			"dist": -1,
+			"pos": [
+				10,
+				0,
+				12
+			],
+			"reachable": false
+		}
+	},
+	"map_name": "Noise_Space_10",
+	"sequence": "noise",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "dark_sphere",
+				"pos": [
+					5,
+					1,
+					5
+				]
+			},
+			{
+				"name": "noise_space",
+				"pos": [
+					5,
+					1,
+					6
+				]
+			}
+		],
+		"dimensions": [
+			13,
+			3,
+			14
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 89,
+			"ground_pct": 48.9010989010989,
+			"void": 2,
+			"walls": 91
+		},
+		"map_name": "Noise_Space_10",
+		"rooms": [
+			{
+				"artifacts": [],
+				"label": "A",
+				"region": "north, west",
+				"tiles": 4
+			},
+			{
+				"artifacts": [
+					"dark_sphere",
+					"noise_space"
+				],
+				"label": "B",
+				"region": "center",
+				"tiles": 83
+			}
+		],
+		"spawn": [
+			12,
+			2,
+			0
+		],
+		"teleporter": [
+			10,
+			0,
+			12
+		]
+	},
+	"timestamp": "2026-03-16T12:14:00",
+	"walkthrough": {
+		"map_name": "Noise_Space_10",
+		"stops": [
+			{
+				"facing": "south",
+				"look_at": [
+					10,
+					0,
+					12
+				],
+				"pos": [
+					12,
+					2,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": []
+			},
+			{
+				"approach_from": "south",
+				"pos": [
+					10,
+					0,
+					12
+				],
+				"reachable": false,
+				"steps_from_prev": 0,
+				"total_steps": 0,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 0,
+			"total_steps": 0,
+			"total_stops": 2
+		}
+	}
+}

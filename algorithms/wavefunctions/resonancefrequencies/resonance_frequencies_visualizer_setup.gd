@@ -40,7 +40,7 @@ class Harmonic:
 	var phase: float
 	var amplitude: float
 	
-	func _init(f: float, p: float, a: float):
+	func _init(f: float, p: float, a: float) -> void:
 		frequency = f
 		phase = p
 		amplitude = a
@@ -48,7 +48,7 @@ class Harmonic:
 	func value(t: float) -> float:
 		return amplitude * sin(2.0 * PI * frequency * t + phase)
 
-func _ready():
+func _ready() -> void:
 	# Initialize harmonics
 	initialize_harmonics()
 	
@@ -68,7 +68,7 @@ func _ready():
 	# Create resonance nodes
 	create_resonance_nodes()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta * time_scale
 	
 	# Update visualization based on mode
@@ -87,7 +87,7 @@ func _process(delta):
 	# Update resonance nodes
 	update_resonance_nodes()
 
-func initialize_harmonics():
+func initialize_harmonics() -> void:
 	harmonics.clear()
 	
 	var rng = RandomNumberGenerator.new()
@@ -148,7 +148,7 @@ func get_membrane_amplitude(t: float, x: float, y: float) -> float:
 	return value
 
 # STRING VISUALIZATION FUNCTIONS
-func create_string_visualization():
+func create_string_visualization() -> void:
 	# Create line renderer for the string
 	line_renderer = ImmediateMesh.new()
 	var line_instance = MeshInstance3D.new()
@@ -166,7 +166,7 @@ func create_string_visualization():
 	if show_node_positions:
 		create_node_visualizations()
 
-func update_string_visualization():
+func update_string_visualization() -> void:
 	# Clear previous line
 	line_renderer.clear_surfaces()
 	
@@ -196,7 +196,7 @@ func update_string_visualization():
 	if show_node_positions:
 		update_node_positions()
 
-func create_node_visualizations():
+func create_node_visualizations() -> void:
 	nodes.clear()
 	
 	# Create a small sphere for each node
@@ -220,7 +220,7 @@ func create_node_visualizations():
 		add_child(node_instance)
 		nodes.append(node_instance)
 
-func update_node_positions():
+func update_node_positions() -> void:
 	# Calculate the positions of nodes (points of zero amplitude)
 	node_positions.clear()
 	
@@ -238,7 +238,7 @@ func update_node_positions():
 		nodes[i].visible = true
 
 # MEMBRANE VISUALIZATION FUNCTIONS
-func create_membrane_visualization():
+func create_membrane_visualization() -> void:
 	# Create a mesh for the membrane
 	mesh_instance = MeshInstance3D.new()
 	mesh_instance.name = "MembraneMesh"
@@ -253,7 +253,7 @@ func create_membrane_visualization():
 	# Create initial mesh
 	update_membrane_visualization()
 
-func update_membrane_visualization():
+func update_membrane_visualization() -> void:
 	var surface_tool = SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
@@ -307,7 +307,7 @@ func update_membrane_visualization():
 	mesh_instance.mesh = mesh
 
 # 3D FIELD VISUALIZATION FUNCTIONS
-func create_3d_field_visualization():
+func create_3d_field_visualization() -> void:
 	# For 3D visualization, we'll use particles
 	var particles = GPUParticles3D.new()
 	particles.name = "ResonanceParticles"
@@ -352,7 +352,7 @@ var particles_instance: GPUParticles3D = null  # Add separate variable for parti
 
 
 # And replace this function
-func update_3d_field_visualization():
+func update_3d_field_visualization() -> void:
 	# For 3D field visualization, we mainly rely on the particle system
 	# However, we can update properties based on current time
 	
@@ -380,7 +380,7 @@ func update_3d_field_visualization():
 
 
 # DEBUG INFORMATION
-func create_debug_label():
+func create_debug_label() -> void:
 	debug_label = Label3D.new()
 	debug_label.name = "DebugLabel"
 	debug_label.position = Vector3(-string_length/2, 2.0, 0)
@@ -392,7 +392,7 @@ func create_debug_label():
 	
 	add_child(debug_label)
 
-func update_debug_info():
+func update_debug_info() -> void:
 	var debug_text = "Resonance Frequencies Visualization\n"
 	debug_text += "Base Frequency: " + str(base_frequency) + " Hz\n"
 	debug_text += "Harmonics: " + str(num_harmonics) + "\n"
@@ -405,7 +405,7 @@ func update_debug_info():
 	debug_label.text = debug_text
 
 # RESONANCE NODES
-func create_resonance_nodes():
+func create_resonance_nodes() -> void:
 	resonance_nodes.clear()
 	
 	# Create visualization for resonance modes
@@ -436,7 +436,7 @@ func create_resonance_nodes():
 	# Add buttons to toggle resonance nodes
 	create_resonance_buttons()
 
-func create_resonance_buttons():
+func create_resonance_buttons() -> void:
 	var ui = Control.new()
 	ui.name = "UI"
 	ui.anchor_right = 1.0
@@ -463,11 +463,11 @@ func create_resonance_buttons():
 		checkbox.connect("toggled", _on_mode_toggled.bind(i))
 		vbox.add_child(checkbox)
 
-func _on_mode_toggled(toggled, index):
+func _on_mode_toggled(toggled, index) -> void:
 	if index >= 0 and index < resonance_nodes.size():
 		resonance_nodes[index].node.visible = toggled
 
-func update_resonance_nodes():
+func update_resonance_nodes() -> void:
 	for i in range(resonance_nodes.size()):
 		if not resonance_nodes[i].node.visible:
 			continue
@@ -503,7 +503,7 @@ func update_resonance_nodes():
 		mode_line.surface_end()
 
 # USER INTERFACE
-func create_ui():
+func create_ui() -> void:
 	var ui = Control.new()
 	ui.anchor_right = 1.0
 	ui.anchor_bottom = 1.0
@@ -547,7 +547,7 @@ func create_ui():
 	reset_button.connect("pressed", _on_reset_pressed)
 	vbox.add_child(reset_button)
 
-func add_slider(parent, label_text, initial_value, min_value, max_value, callback):
+func add_slider(parent, label_text, initial_value, min_value, max_value, callback) -> void:
 	var container = HBoxContainer.new()
 	parent.add_child(container)
 	
@@ -572,7 +572,7 @@ func add_slider(parent, label_text, initial_value, min_value, max_value, callbac
 	# Store label for updates
 	slider.set_meta("value_label", value_label)
 
-func add_mode_dropdown(parent):
+func add_mode_dropdown(parent) -> void:
 	var container = HBoxContainer.new()
 	parent.add_child(container)
 	
@@ -590,13 +590,13 @@ func add_mode_dropdown(parent):
 	container.add_child(dropdown)
 
 # CALLBACKS
-func _on_frequency_changed(value):
+func _on_frequency_changed(value) -> void:
 	base_frequency = value
 	if get_tree().get_nodes_in_group("value_labels").size() > 0:
 		get_tree().get_nodes_in_group("value_labels")[0].text = str(snappedf(value, 0.01))
 	initialize_harmonics()
 
-func _on_harmonics_changed(value):
+func _on_harmonics_changed(value) -> void:
 	num_harmonics = int(value)
 	if get_tree().get_nodes_in_group("value_labels").size() > 1:
 		get_tree().get_nodes_in_group("value_labels")[1].text = str(num_harmonics)
@@ -607,18 +607,18 @@ func _on_harmonics_changed(value):
 		node.node.queue_free()
 	create_resonance_nodes()
 
-func _on_amplitude_changed(value):
+func _on_amplitude_changed(value) -> void:
 	amplitude = value
 	if get_tree().get_nodes_in_group("value_labels").size() > 2:
 		get_tree().get_nodes_in_group("value_labels")[2].text = str(snappedf(value, 0.01))
 	initialize_harmonics()
 
-func _on_time_scale_changed(value):
+func _on_time_scale_changed(value) -> void:
 	time_scale = value
 	if get_tree().get_nodes_in_group("value_labels").size() > 3:
 		get_tree().get_nodes_in_group("value_labels")[3].text = str(snappedf(value, 0.01))
 
-func _on_mode_selected(index):
+func _on_mode_selected(index) -> void:
 	visualization_mode = index
 	
 	# Clean up previous visualization
@@ -642,6 +642,15 @@ func _on_mode_selected(index):
 		2:
 			create_3d_field_visualization()
 
-func _on_reset_pressed():
+func _on_reset_pressed() -> void:
 	time = 0.0
 	initialize_harmonics()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

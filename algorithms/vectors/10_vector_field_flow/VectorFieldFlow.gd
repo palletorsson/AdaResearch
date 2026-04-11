@@ -1,5 +1,15 @@
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
+# @identity
+# essence: F(p) = swirl(p) - radial(p). A vector field assigns a direction to every point. The particle reads the field and follows.
+# desire: To make an invisible flow visible — 81 arrows breathing in unison, a particle tracing the field's will.
+# critical_parameter: The swirl-to-radial ratio in _field_value(). It determines whether the field spirals inward, orbits, or ejects.
+# triggers: Automatic — arrows oscillate vertically, particle advects continuously. R → reset particle to origin, Space → freeze velocity.
+# emerges: Spiral trajectories from the combination of rotational swirl and inward radial pull. The particle's path is never a straight line.
+# needs: MultiMesh arrows [has], particle tracer [has]. Missing: VR slider to blend swirl vs radial, grabbable field source.
+# relationships: Applied version of force_field_visualizer (same concept, different rendering). Feeds into weather_vector_field (wind as vector field).
+# truth: A vector field is a set of instructions written in space. The particle has no memory and no plan — it only reads the local instruction.
+
 const GRID_RANGE := 4
 const GRID_SPACING := 0.9
 const FIELD_VERTICAL_OSCILLATION := 0.3
@@ -8,14 +18,20 @@ const PARTICLE_FOLLOW := 0.35
 const PARTICLE_DAMPING := 0.985
 const PARTICLE_VERTICAL_LIMIT := 0.35
 
-var field_vectors: Array[Node3D] = []
+var field_vectors: Array[Node3D] = []  # kept for compatibility but unused with MultiMesh
 var particle: Node3D
 var particle_velocity: Vector3 = Vector3.ZERO
 var particle_position: Vector3 = Vector3.ZERO
 var info_label: Label3D
 var elapsed := 0.0
 
-func _ready():
+# MultiMesh for field arrows — replaces 81 line scenes with 2 draw calls
+var _field_shaft_mm_instance: MultiMeshInstance3D
+var _field_head_mm_instance: MultiMeshInstance3D
+var _field_origins: PackedVector3Array = PackedVector3Array()
+var _field_count: int = 0
+
+func _ready() -> void:
 	super._ready()
 	# Match the compact exhibition presentation used by other advanced vector scenes.
 	scale = Vector3(0.5, 0.5, 0.5)
@@ -31,13 +47,13 @@ func _ready():
 		"Particle follows field vectors"
 	)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	elapsed += delta
 	_update_field_vectors()
 	_update_particle(delta)
 	_update_info()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_R:
 			reposition_particle(Vector3.ZERO)
@@ -45,18 +61,98 @@ func _input(event):
 		if event.keycode == KEY_SPACE:
 			particle_velocity = Vector3.ZERO
 
-func _create_field_vectors():
+func _create_field_vectors() -> void:
+	# Compute grid origins
+	_field_origins.clear()
 	for x in range(-GRID_RANGE, GRID_RANGE + 1):
 		for z in range(-GRID_RANGE, GRID_RANGE + 1):
-			var origin = Vector3(x * GRID_SPACING, 0.0, z * GRID_SPACING)
-			var arrow = spawn_vector(origin, Vector3.ZERO, Color(0.3, 0.8, 1.0, 1.0), "Field", false)
-			field_vectors.append(arrow)
+			_field_origins.append(Vector3(x * GRID_SPACING, 0.0, z * GRID_SPACING))
+	_field_count = _field_origins.size()
 
-func _update_field_vectors():
-	for arrow in field_vectors:
-		var local_origin = arrow.position
-		var value = _field_value(local_origin)
-		update_vector(arrow, value)
+	# Arrow shafts — unit cylinder scaled per instance
+	var shaft_cyl := CylinderMesh.new()
+	shaft_cyl.top_radius = 0.006
+	shaft_cyl.bottom_radius = 0.006
+	shaft_cyl.height = 1.0
+	shaft_cyl.radial_segments = 8
+	var shaft_mat := StandardMaterial3D.new()
+	shaft_mat.albedo_color = Color(0.3, 0.8, 1.0, 1.0)
+	shaft_mat.emission_enabled = true
+	shaft_mat.emission = Color(0.3, 0.8, 1.0) * 0.5
+	shaft_cyl.material = shaft_mat
+
+	var shaft_mm := MultiMesh.new()
+	shaft_mm.transform_format = MultiMesh.TRANSFORM_3D
+	shaft_mm.instance_count = _field_count
+	shaft_mm.mesh = shaft_cyl
+
+	_field_shaft_mm_instance = MultiMeshInstance3D.new()
+	_field_shaft_mm_instance.name = "FieldShaftMM"
+	_field_shaft_mm_instance.multimesh = shaft_mm
+	add_child(_field_shaft_mm_instance)
+
+	# Arrow heads — small cone
+	var head_cone := CylinderMesh.new()
+	head_cone.top_radius = 0.0
+	head_cone.bottom_radius = 0.025
+	head_cone.height = 0.12
+	head_cone.radial_segments = 12
+	var head_mat := StandardMaterial3D.new()
+	head_mat.albedo_color = Color(0.3, 0.8, 1.0, 1.0)
+	head_mat.emission_enabled = true
+	head_mat.emission = Color(0.3, 0.8, 1.0) * 0.5
+	head_cone.material = head_mat
+
+	var head_mm := MultiMesh.new()
+	head_mm.transform_format = MultiMesh.TRANSFORM_3D
+	head_mm.instance_count = _field_count
+	head_mm.mesh = head_cone
+
+	_field_head_mm_instance = MultiMeshInstance3D.new()
+	_field_head_mm_instance.name = "FieldHeadMM"
+	_field_head_mm_instance.multimesh = head_mm
+	add_child(_field_head_mm_instance)
+
+func _update_field_vectors() -> void:
+	if not _field_shaft_mm_instance or not _field_head_mm_instance:
+		return
+	var shaft_mm := _field_shaft_mm_instance.multimesh
+	var head_mm := _field_head_mm_instance.multimesh
+	var sc := SCENE_SCALE
+
+	for i in _field_count:
+		var origin := _field_origins[i]
+		var value := _field_value(origin)
+		var mag := value.length()
+
+		# Origin in local space (scene is scaled by SCENE_SCALE in _ready)
+		var base := origin * sc
+
+		if mag < 0.001:
+			# Hide this instance
+			var hidden := Transform3D(Basis.IDENTITY.scaled(Vector3.ZERO), Vector3(0, -999, 0))
+			shaft_mm.set_instance_transform(i, hidden)
+			head_mm.set_instance_transform(i, hidden)
+			continue
+
+		var dir := value / mag
+		var arrow_len := mag * sc  # Scale arrow length to scene scale
+		# Build basis: Y axis along direction, height = arrow_len
+		var up := Vector3.UP
+		if abs(dir.dot(up)) > 0.99:
+			up = Vector3.RIGHT
+		var right := dir.cross(up).normalized()
+		up = right.cross(dir).normalized()
+
+		# Shaft: centered at origin + half arrow length along direction
+		var shaft_basis := Basis(right, dir * arrow_len, up)
+		var shaft_pos := base + dir * (arrow_len * 0.5)
+		shaft_mm.set_instance_transform(i, Transform3D(shaft_basis, shaft_pos))
+
+		# Head: at tip of arrow
+		var head_basis := Basis(right, dir, up)  # Unit scale, just oriented
+		var head_pos := base + dir * arrow_len
+		head_mm.set_instance_transform(i, Transform3D(head_basis, head_pos))
 
 func _field_value(position: Vector3) -> Vector3:
 	var swirl = Vector3(
@@ -86,7 +182,7 @@ func _create_particle_marker() -> Node3D:
 	add_child(marker)
 	return marker
 
-func _update_particle(delta: float):
+func _update_particle(delta: float) -> void:
 	var sample = _field_value(particle_position)
 	# Keep vertical motion compact and readable in VR.
 	sample.y *= 0.5
@@ -102,15 +198,15 @@ func _update_particle(delta: float):
 		particle_velocity.y *= -0.25
 	reposition_particle(particle_position)
 
-func reposition_particle(position: Vector3):
+func reposition_particle(position: Vector3) -> void:
 	particle_position = position
 	if particle:
 		particle.position = particle_position
 
-func restart_particle():
+func restart_particle() -> void:
 	particle_velocity = Vector3.ZERO
 
-func _update_info():
+func _update_info() -> void:
 	var field_here = _field_value(particle_position)
 	var builder := []
 	builder.append("Position = (%.2f, %.2f, %.2f)" % [particle_position.x, particle_position.y, particle_position.z])
@@ -118,5 +214,11 @@ func _update_info():
 	builder.append("Field(position) = (%.2f, %.2f, %.2f)" % [field_here.x, field_here.y, field_here.z])
 	info_label.text = "\n".join(builder)
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 
 
+func apply_grid_config(config: Dictionary) -> void:
+	pass

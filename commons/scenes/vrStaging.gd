@@ -506,7 +506,7 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 		
 		if res != ResourceLoader.THREAD_LOAD_LOADED:
 			push_error("Error ", res, " loading resource ", p_scene_path)
-			breakpoint
+			push_error("Failed to load scene resource: ", p_scene_path, " (status: ", res, "). Shutting down.")
 			get_tree().quit(1)
 		
 		if prompt_for_continue and not _use_quick_transition:
@@ -522,9 +522,10 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 	
 	# Small delay for VR tracking (shorter for quick transitions)
 	await get_tree().create_timer(tracking_delay).timeout
-	if current_scene.has_method("scene_loaded"):
+	if is_instance_valid(current_scene) and current_scene.has_method("scene_loaded"):
 		current_scene.scene_loaded(user_data)
-	scene_loaded.emit(current_scene, user_data)
+	if is_instance_valid(current_scene):
+		scene_loaded.emit(current_scene, user_data)
 
 	if loading_screen_visible and wait_for_map_generation_before_reveal:
 		await _await_scene_content_ready(current_scene, p_scene_path, user_data)
@@ -549,9 +550,10 @@ func load_scene(p_scene_path: String, user_data = null) -> void:
 	await _tween.finished
 	
 	# Report scene visible
-	if current_scene.has_method("scene_visible"):
+	if is_instance_valid(current_scene) and current_scene.has_method("scene_visible"):
 		current_scene.scene_visible(user_data)
-	scene_visible.emit(current_scene, user_data)
+	if is_instance_valid(current_scene):
+		scene_visible.emit(current_scene, user_data)
 	
 	# Reset quick transition flag
 	_use_quick_transition = false

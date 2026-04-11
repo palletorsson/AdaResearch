@@ -11,11 +11,11 @@ var angular_velocity: Vector3
 var block_size: Vector3 = Vector3(1, 1, 1)
 var inertia_tensor: Vector3 = Vector3(1, 1, 1)  # Simplified inertia
 
-func _ready():
+func _ready() -> void:
 	_create_block_mesh()
 	_create_wireframe()
 
-func _create_block_mesh():
+func _create_block_mesh() -> void:
 	# Create the block cube
 	var cube = CSGBox3D.new()
 	cube.size = block_size
@@ -26,7 +26,7 @@ func _create_block_mesh():
 	
 	add_child(cube)
 
-func _create_wireframe():
+func _create_wireframe() -> void:
 	# Create wireframe edges for better visualization
 	var wireframe_material = StandardMaterial3D.new()
 	wireframe_material.albedo_color = Color.BLACK
@@ -40,13 +40,13 @@ func _create_wireframe():
 	
 	add_child(wireframe_cube)
 
-func initialize():
+func initialize() -> void:
 	position = initial_position
 	rotation = initial_rotation
 	velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
 
-func update_physics(delta: float, gravity: Vector3):
+func update_physics(delta: float, gravity: Vector3) -> void:
 	# Apply gravity
 	velocity += gravity * delta
 	
@@ -66,7 +66,7 @@ func update_physics(delta: float, gravity: Vector3):
 	# Check wall collisions
 	_check_wall_collisions()
 
-func _check_ground_collision():
+func _check_ground_collision() -> void:
 	var ground_y = 0.5  # Half block height
 	
 	if position.y < ground_y:
@@ -78,7 +78,7 @@ func _check_ground_collision():
 		# Angular friction on ground
 		angular_velocity *= 0.7
 
-func _check_wall_collisions():
+func _check_wall_collisions() -> void:
 	var wall_bounds = Vector3(9.5, 10, 9.5)  # Slightly inside walls
 	var half_size = block_size / 2
 	
@@ -106,8 +106,17 @@ func _check_wall_collisions():
 		angular_velocity.x *= 0.8
 		angular_velocity.y *= 0.8
 
-func reset_to_initial():
+func reset_to_initial() -> void:
 	position = initial_position
 	rotation = initial_rotation
 	velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 class_name GadgetBase
 
@@ -244,3 +244,12 @@ func _shape_from_mesh(mesh: Mesh) -> Shape3D:
 		var shape = BoxShape3D.new()
 		shape.size = Vector3(0.1, 0.1, 0.1)
 		return shape
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

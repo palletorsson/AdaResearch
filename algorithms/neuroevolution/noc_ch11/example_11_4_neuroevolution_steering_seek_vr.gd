@@ -27,17 +27,18 @@ class NeuroCreature extends VREntity:
 	var arrow_mesh: ImmediateMesh
 	var arrow_node: MeshInstance3D
 
-	func _init():
+	func _init() -> void:
 		# Brain: 8 inputs, 12 hidden, 2 outputs
 		# Inputs: position (3), velocity (3), goal direction (2)
 		# Outputs: steering force X, steering force Y
 		brain = NeuralNetwork.new(8, 12, 2)
 
-	func setup_mesh():
+	func setup_mesh() -> void:
 		# Body
 		mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.025
+		sphere.height = 0.05
 		mesh_instance.mesh = sphere
 		add_child(mesh_instance)
 
@@ -47,7 +48,7 @@ class NeuroCreature extends VREntity:
 		arrow_node.mesh = arrow_mesh
 		add_child(arrow_node)
 
-	func think(goal_pos: Vector3, hazards: Array):
+	func think(goal_pos: Vector3, hazards: Array) -> void:
 		if not alive:
 			return
 
@@ -79,7 +80,7 @@ class NeuroCreature extends VREntity:
 		# Draw steering arrow
 		draw_arrow(steer)
 
-	func draw_arrow(force: Vector3):
+	func draw_arrow(force: Vector3) -> void:
 		"""Visualize steering force as pink arrow"""
 		if force.length() < 0.001:
 			return
@@ -96,7 +97,7 @@ class NeuroCreature extends VREntity:
 
 		arrow_mesh.surface_end()
 
-	func _physics_process(delta):
+	func _physics_process(delta: float) -> void:
 		if not alive:
 			return
 
@@ -122,7 +123,7 @@ class NeuroCreature extends VREntity:
 			return true
 		return false
 
-	func check_hazard(hazard_pos: Vector3, size: float):
+	func check_hazard(hazard_pos: Vector3, size: float) -> void:
 		if abs(position_v.x - hazard_pos.x) < size and \
 		   abs(position_v.y - hazard_pos.y) < size:
 			alive = false
@@ -130,7 +131,7 @@ class NeuroCreature extends VREntity:
 			if material:
 				material.albedo_color.a = 0.2
 
-	func calculate_fitness(goal_pos: Vector3):
+	func calculate_fitness(goal_pos: Vector3) -> void:
 		"""Calculate fitness based on proximity to goal and survival time"""
 		var distance = position_v.distance_to(goal_pos)
 		fitness += 1.0 / (distance + 1.0)
@@ -142,10 +143,11 @@ class Goal extends Node3D:
 	var mesh_instance: MeshInstance3D
 	var accent_pink: Color = Color(1.0, 0.6, 1.0, 1.0)
 
-	func _ready():
+	func _ready() -> void:
 		mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = radius
+		sphere.height = radius * 2.0
 		mesh_instance.mesh = sphere
 
 		var mat = StandardMaterial3D.new()
@@ -162,7 +164,7 @@ class Hazard extends Node3D:
 	var size: float = 0.12
 	var mesh_instance: MeshInstance3D
 
-	func _ready():
+	func _ready() -> void:
 		mesh_instance = MeshInstance3D.new()
 		var prism = BoxMesh.new()
 		prism.size = Vector3(size, size, size)
@@ -175,7 +177,7 @@ class Hazard extends Node3D:
 
 		add_child(mesh_instance)
 
-	func _process(delta):
+	func _process(delta: float) -> void:
 		# Slowly rotate
 		mesh_instance.rotate_y(delta * 0.5)
 
@@ -194,7 +196,7 @@ var gen_label: Label3D
 var alive_label: Label3D
 var best_label: Label3D
 
-func _ready():
+func _ready() -> void:
 	# Create goal
 	goal = Goal.new()
 	goal.position = Vector3(0, 0.2, goal_position)
@@ -209,7 +211,7 @@ func _ready():
 	# Create UI
 	create_ui()
 
-func create_hazards():
+func create_hazards() -> void:
 	"""Create hazard obstacles"""
 	var haz1 = Hazard.new()
 	haz1.position = Vector3(-0.15, 0.1, -0.1)
@@ -226,7 +228,7 @@ func create_hazards():
 	add_child(haz3)
 	hazards.append(haz3)
 
-func create_population():
+func create_population() -> void:
 	"""Create or evolve population"""
 	for i in range(population_size):
 		var creature = NeuroCreature.new()
@@ -238,7 +240,7 @@ func create_population():
 		add_child(creature)
 		population.append(creature)
 
-func create_ui():
+func create_ui() -> void:
 	gen_label = Label3D.new()
 	gen_label.text = "Generation: 1"
 	gen_label.font_size = 28
@@ -299,7 +301,7 @@ func _process(_delta):
 	if alive_count == 0:
 		next_generation()
 
-func next_generation():
+func next_generation() -> void:
 	"""Evolve next generation"""
 	generation += 1
 	gen_label.text = "Generation: " + str(generation)
@@ -354,3 +356,12 @@ func next_generation():
 
 	# Reset goal
 	goal.position = Vector3(0, 0.2, goal_position)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

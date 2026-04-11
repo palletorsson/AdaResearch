@@ -1,5 +1,16 @@
 ## Shader 11: Queer Rubber — leather, latex, oil slick, pop plastic, fur
 ## Material extravaganza on 3D objects. Not flat panels. THEATRICAL.
+
+# @identity
+# essence: color = PBR(normal, view, roughness, metallic, Fresnel) — five shader materials on 3D objects: leather grain, oil slick thin-film interference, pop plastic Fresnel, fur anisotropy, sad metal
+# desire: to watch five rotating objects under dramatic colored lights — leather absorbs, latex catches highlights too sharp, oil slick fractures the spectrum, fur breaks silhouettes
+# critical_parameter: rotation_speed — each object spins at a different rate, continuously revealing how the material responds to changing view angles
+# triggers: objects rotate automatically in _process; colored OmniLight3D from three angles creates theatrical cross-lighting that exposes each material's character
+# emerges: the arc arrangement with dramatic lighting produces a runway/gallery effect — materials become performers, each demanding attention through different optical strategies
+# needs: [missing] no VR sliders or buttons — pure showcase; no interactive roughness/metallic control
+# relationships: applies all shader techniques from 01-09 to the question of surface identity; feeds into shader_12_pinkextravaganza (everything maxed out)
+# truth: every material shader encodes a claim about which bodies deserve to be touched — the question is not how to render realistically but which surfaces get rendered at all
+
 extends Node3D
 
 var materials: Array[ShaderMaterial] = []
@@ -148,3 +159,12 @@ func _process(delta: float) -> void:
 	for i in range(objects.size()):
 		if is_instance_valid(objects[i]):
 			objects[i].rotate_y(rotation_speeds[i] * delta)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

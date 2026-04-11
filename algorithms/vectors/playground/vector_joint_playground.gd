@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Vector-Joint Playground
 # Human-scale VR arena with 6 interactive stations.
@@ -34,7 +34,7 @@ const TEXT_INTERVAL := 0.1
 #  LIFECYCLE
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _ready():
+func _ready() -> void:
 	_build_arena()
 	_build_station_crane()
 	_build_station_pistons()
@@ -43,7 +43,7 @@ func _ready():
 	_build_station_waterwheel()
 	_build_station_spring()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_text_timer += delta
 	var do_text := _text_timer >= TEXT_INTERVAL
 	if do_text:
@@ -60,7 +60,7 @@ func _process(delta):
 #  ARENA
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _build_arena():
+func _build_arena() -> void:
 	# Floor
 	var floor_body := StaticBody3D.new()
 	floor_body.name = "ArenaFloor"
@@ -93,7 +93,7 @@ func _build_arena():
 #  STATION 1: THE CRANE â€” Magnitude â†’ HingeJoint3D
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _build_station_crane():
+func _build_station_crane() -> void:
 	var sd := _init_station("Crane", 0)
 	var h: Node3D = sd.helper  # GadgetBase instance
 
@@ -135,7 +135,7 @@ func _build_station_crane():
 	# Info panel
 	sd.info_label = _build_info_panel(sd.root, "THE CRANE", "|v| = sqrt(xÂ² + yÂ² + zÂ²)", "Magnitude controls arm angle", Vector3(0, 4.8, -1.0))
 
-func _update_crane(do_text: bool):
+func _update_crane(do_text: bool) -> void:
 	var sd: Dictionary = _stations[0]
 	var v := _get_vec(sd.vectors[0], sd.caches[0])
 	var mag := v.length()
@@ -153,7 +153,7 @@ func _update_crane(do_text: bool):
 #  STATION 2: THE PISTONS â€” Addition â†’ SliderJoint3D Ã—2
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _build_station_pistons():
+func _build_station_pistons() -> void:
 	var sd := _init_station("Pistons", 1)
 	var h: Node3D = sd.helper
 
@@ -192,7 +192,7 @@ func _build_station_pistons():
 
 	sd.info_label = _build_info_panel(sd.root, "THE PISTONS", "C = A + B", "Addition: each magnitude drives a piston", Vector3(0, 4.2, -1.0))
 
-func _update_pistons(do_text: bool):
+func _update_pistons(do_text: bool) -> void:
 	var sd: Dictionary = _stations[1]
 	var a := _get_vec(sd.vectors[0], sd.caches[0])
 	var b := _get_vec(sd.vectors[1], sd.caches[1])
@@ -220,7 +220,7 @@ func _update_pistons(do_text: bool):
 #  STATION 3: THE DOOR â€” Dot Product â†’ HingeJoint3D Ã—2
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _build_station_door():
+func _build_station_door() -> void:
 	var sd := _init_station("Door", 2)
 	var h: Node3D = sd.helper
 
@@ -256,7 +256,7 @@ func _build_station_door():
 
 	sd.info_label = _build_info_panel(sd.root, "THE DOOR", "A Â· B = |A||B| cos Î¸", "Dot product angle opens the doors", Vector3(0, 4.2, -1.0))
 
-func _update_door(do_text: bool):
+func _update_door(do_text: bool) -> void:
 	var sd: Dictionary = _stations[2]
 	var a := _get_vec(sd.vectors[0], sd.caches[0])
 	var b := _get_vec(sd.vectors[1], sd.caches[1])
@@ -285,7 +285,7 @@ func _update_door(do_text: bool):
 #  STATION 4: THE SEESAW â€” Subtraction â†’ HingeJoint3D + gravity
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _build_station_seesaw():
+func _build_station_seesaw() -> void:
 	var sd := _init_station("Seesaw", 3)
 	var h: Node3D = sd.helper
 
@@ -333,7 +333,7 @@ func _build_station_seesaw():
 
 	sd.info_label = _build_info_panel(sd.root, "THE SEESAW", "C = A âˆ’ B = A + (âˆ’B)", "Magnitudes as weights â€” gravity shows the difference", Vector3(0, 3.5, -1.0))
 
-func _update_seesaw(do_text: bool):
+func _update_seesaw(do_text: bool) -> void:
 	var sd: Dictionary = _stations[3]
 	var a := _get_vec(sd.vectors[0], sd.caches[0])
 	var b := _get_vec(sd.vectors[1], sd.caches[1])
@@ -359,7 +359,7 @@ func _update_seesaw(do_text: bool):
 #  STATION 5: THE WATERWHEEL â€” Cross Product â†’ HingeJoint3D
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _build_station_waterwheel():
+func _build_station_waterwheel() -> void:
 	var sd := _init_station("Waterwheel", 4)
 	var h: Node3D = sd.helper
 
@@ -372,17 +372,22 @@ func _build_station_waterwheel():
 	wheel.rotation_degrees.x = 90  # Lay axle along Z
 	wheel.angular_damp = 0.5
 
-	# 6 blades
+	# 6 blades — MultiMesh
+	var blade_base := BoxMesh.new()
+	blade_base.size = Vector3(0.5, 0.03, 0.2)
+	blade_base.material = h.get_material(Color(0.3, 0.5, 1.0))
+	var blade_mm := MultiMesh.new()
+	blade_mm.transform_format = MultiMesh.TRANSFORM_3D
+	blade_mm.instance_count = 6
+	blade_mm.mesh = blade_base
 	for i in range(6):
 		var angle := float(i) * TAU / 6.0
-		var blade := MeshInstance3D.new()
-		var blade_mesh := BoxMesh.new()
-		blade_mesh.size = Vector3(0.5, 0.03, 0.2)
-		blade.mesh = blade_mesh
-		blade.material_override = h.get_material(Color(0.3, 0.5, 1.0))
-		blade.position = Vector3(cos(angle) * 0.55, sin(angle) * 0.55, 0)
-		blade.rotation.z = angle
-		wheel.add_child(blade)
+		var pos := Vector3(cos(angle) * 0.55, sin(angle) * 0.55, 0)
+		var basis := Basis(Vector3.FORWARD, angle)
+		blade_mm.set_instance_transform(i, Transform3D(basis, pos))
+	var blade_mmi := MultiMeshInstance3D.new()
+	blade_mmi.multimesh = blade_mm
+	wheel.add_child(blade_mmi)
 
 	# Hub ring (visual)
 	var ring := MeshInstance3D.new()
@@ -409,7 +414,7 @@ func _build_station_waterwheel():
 
 	sd.info_label = _build_info_panel(sd.root, "THE WATERWHEEL", "A Ã— B = |A||B| sin Î¸  nÌ‚", "Cross product magnitude spins the wheel", Vector3(0, 3.8, -1.0))
 
-func _update_waterwheel(do_text: bool):
+func _update_waterwheel(do_text: bool) -> void:
 	var sd: Dictionary = _stations[4]
 	var a := _get_vec(sd.vectors[0], sd.caches[0])
 	var b := _get_vec(sd.vectors[1], sd.caches[1])
@@ -431,20 +436,26 @@ func _update_waterwheel(do_text: bool):
 #  STATION 6: THE SPRING TOWER â€” Forces â†’ Generic6DOFJoint3D
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-func _build_station_spring():
+func _build_station_spring() -> void:
 	var sd := _init_station("Spring", 5)
 	var h: Node3D = sd.helper
 
 	# Base plate (static)
 	var base = h.create_static_body(Vector3(0, 0.075, 0), h.make_box_mesh(Vector3(1.0, 0.15, 1.0)), COLOR_FRAME, "Base")
 
-	# Guide columns
-	for offset in [Vector3(-0.4, 1.75, -0.4), Vector3(0.4, 1.75, -0.4), Vector3(-0.4, 1.75, 0.4), Vector3(0.4, 1.75, 0.4)]:
-		var col := MeshInstance3D.new()
-		col.mesh = h.make_cylinder_mesh(0.04, 3.5)
-		col.material_override = h.get_material(COLOR_METAL)
-		col.position = offset
-		sd.root.add_child(col)
+	# Guide columns — MultiMesh
+	var col_cyl: CylinderMesh = h.make_cylinder_mesh(0.04, 3.5)
+	col_cyl.material = h.get_material(COLOR_METAL)
+	var col_offsets := [Vector3(-0.4, 1.75, -0.4), Vector3(0.4, 1.75, -0.4), Vector3(-0.4, 1.75, 0.4), Vector3(0.4, 1.75, 0.4)]
+	var col_mm := MultiMesh.new()
+	col_mm.transform_format = MultiMesh.TRANSFORM_3D
+	col_mm.instance_count = 4
+	col_mm.mesh = col_cyl
+	for i in range(4):
+		col_mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, col_offsets[i]))
+	var col_mmi := MultiMeshInstance3D.new()
+	col_mmi.multimesh = col_mm
+	sd.root.add_child(col_mmi)
 
 	# Platform (rigid)
 	var platform = h.create_rigid_body(Vector3(0, 0.6, 0), h.make_box_mesh(Vector3(0.8, 0.12, 0.8)), COLOR_RESULT, 2.0, "Platform")
@@ -454,20 +465,23 @@ func _build_station_spring():
 	# Spring joint
 	var spring = h.create_spring_joint(base, platform, Vector3(0, 0.4, 0), "y", 25.0, 4.0, 0.0, 3.0, "TowerSpring")
 
-	# Visual coil springs (8 toruses along guides)
-	var coils: Array[MeshInstance3D] = []
+	# Visual coil springs (8 toruses along guides) — MultiMesh for VR perf
+	var coil_torus := TorusMesh.new()
+	coil_torus.inner_radius = 0.02
+	coil_torus.outer_radius = 0.12
+	coil_torus.ring_segments = 16
+	coil_torus.rings = 8
+	coil_torus.material = h.get_emissive_material(Color(0.4, 0.7, 1.0), 1.0)
+	var coil_mm := MultiMesh.new()
+	coil_mm.transform_format = MultiMesh.TRANSFORM_3D
+	coil_mm.instance_count = 8
+	coil_mm.mesh = coil_torus
+	var coil_basis := Basis(Vector3.RIGHT, deg_to_rad(90))
 	for i in range(8):
-		var coil := MeshInstance3D.new()
-		var t := TorusMesh.new()
-		t.inner_radius = 0.02
-		t.outer_radius = 0.12
-		t.ring_segments = 16
-		t.rings = 8
-		coil.mesh = t
-		coil.material_override = h.get_emissive_material(Color(0.4, 0.7, 1.0), 1.0)
-		coil.rotation_degrees.x = 90
-		sd.root.add_child(coil)
-		coils.append(coil)
+		coil_mm.set_instance_transform(i, Transform3D(coil_basis, Vector3.ZERO))
+	var coil_mmi := MultiMeshInstance3D.new()
+	coil_mmi.multimesh = coil_mm
+	sd.root.add_child(coil_mmi)
 
 	# Indicator sphere on platform
 	var ind := MeshInstance3D.new()
@@ -478,7 +492,8 @@ func _build_station_spring():
 
 	sd.joints = [spring]
 	sd.bodies = [platform]
-	sd["coils"] = coils
+	sd["coil_mm"] = coil_mm
+	sd["coil_basis"] = coil_basis
 
 	# Two force vectors
 	var vec_a := _spawn_vector(sd.root, Vector3(-2.0, 1.0, 1.5), Vector3(-2.0, 2.5, 1.5), COLOR_A, "Thrust")
@@ -488,7 +503,7 @@ func _build_station_spring():
 
 	sd.info_label = _build_info_panel(sd.root, "THE SPRING TOWER", "F_net = Î£F_i", "Net force compresses or extends the spring", Vector3(0, 4.8, -1.0))
 
-func _update_spring(do_text: bool):
+func _update_spring(do_text: bool) -> void:
 	var sd: Dictionary = _stations[5]
 	var a := _get_vec(sd.vectors[0], sd.caches[0])
 	var b := _get_vec(sd.vectors[1], sd.caches[1])
@@ -500,15 +515,17 @@ func _update_spring(do_text: bool):
 	var platform: RigidBody3D = sd.bodies[0]
 	platform.apply_central_force(Vector3(0, force_up, 0))
 
-	# Redistribute coil springs between base and platform
-	var coils: Array = sd.get("coils", [])
-	var plat_y: float = platform.global_position.y - sd.root.global_position.y
-	var base_y := 0.15
-	var span := maxf(plat_y - base_y, 0.1)
-	for i in range(coils.size()):
-		var t := (float(i) + 0.5) / float(coils.size())
-		var cy := base_y + t * span
-		coils[i].position = Vector3(0, cy, 0)
+	# Redistribute coil springs between base and platform via MultiMesh
+	var coil_mm: MultiMesh = sd.get("coil_mm")
+	var coil_basis: Basis = sd.get("coil_basis", Basis(Vector3.RIGHT, deg_to_rad(90)))
+	if coil_mm:
+		var plat_y: float = platform.global_position.y - sd.root.global_position.y
+		var base_y := 0.15
+		var span := maxf(plat_y - base_y, 0.1)
+		for i in range(coil_mm.instance_count):
+			var t := (float(i) + 0.5) / float(coil_mm.instance_count)
+			var cy := base_y + t * span
+			coil_mm.set_instance_transform(i, Transform3D(coil_basis, Vector3(0, cy, 0)))
 
 	if do_text and sd.info_label:
 		sd.info_label.text = "Thrust = (%.1f, %.1f, %.1f)\nGravity = (%.1f, %.1f, %.1f)\nF_net = (%.1f, %.1f, %.1f)\n|F_net| = %.2f" % [a.x, a.y, a.z, b.x, b.y, b.z, net.x, net.y, net.z, net.length()]
@@ -711,3 +728,12 @@ func _mat(color: Color, unlit: bool = false, transparent: bool = false) -> Stand
 		mat.render_priority = -10
 	_mat_cache[key] = mat
 	return mat
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

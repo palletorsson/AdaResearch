@@ -27,13 +27,13 @@ var queer_colors := [
 	Color(1.0, 0.3, 0.5),   # Rose
 ]
 
-func _ready():
+func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 	_create_containment()
 	_create_visible_cube()
 	_spawn_balls()
 
-func _create_containment():
+func _create_containment() -> void:
 	# Floor
 	var floor_body := StaticBody3D.new()
 	var floor_col := CollisionShape3D.new()
@@ -83,7 +83,7 @@ func _create_containment():
 		add_child(wall)
 
 ## Visible wireframe cube — 12 edges as thin glowing cylinders
-func _create_visible_cube():
+func _create_visible_cube() -> void:
 	var w := CUBE_HALF
 	var h := CUBE_HEIGHT
 
@@ -135,7 +135,7 @@ func _create_visible_cube():
 	floor_vis.position = Vector3(0, 0.01, 0)
 	add_child(floor_vis)
 
-func _add_edge(a: Vector3, b: Vector3, mat: StandardMaterial3D, idx: int):
+func _add_edge(a: Vector3, b: Vector3, mat: StandardMaterial3D, idx: int) -> void:
 	var edge := MeshInstance3D.new()
 	edge.name = "Edge_%d" % idx
 
@@ -144,23 +144,29 @@ func _add_edge(a: Vector3, b: Vector3, mat: StandardMaterial3D, idx: int):
 	cylinder.top_radius = edge_thickness
 	cylinder.bottom_radius = edge_thickness
 	cylinder.height = length
+	cylinder.radial_segments = 4
 	edge.mesh = cylinder
 	edge.material_override = mat
 
 	# Position at midpoint
-	var midpoint := (a + b) / 2.0
-	edge.position = midpoint
+	edge.position = (a + b) / 2.0
 
-	# Orient along the edge direction
+	# Orient cylinder along edge direction using Basis (same as cube_lines / line_static)
 	var direction := (b - a).normalized()
-	if abs(direction.dot(Vector3.UP)) < 0.999:
-		edge.look_at(edge.position + direction, Vector3.UP)
-		edge.rotate_object_local(Vector3.RIGHT, PI / 2.0)
-	# else: vertical edge, default cylinder orientation is fine
+	if direction.length() > 0.001:
+		var up := Vector3.UP
+		var right := direction.cross(up).normalized()
+		if right.length() < 0.001:
+			# Direction is parallel to UP — use a different reference
+			right = Vector3.RIGHT
+			up = right.cross(direction).normalized()
+		else:
+			up = right.cross(direction).normalized()
+		edge.transform.basis = Basis(right, direction, up)
 
 	add_child(edge)
 
-func _spawn_balls():
+func _spawn_balls() -> void:
 	for i in range(ball_count):
 		var rb := RigidBody3D.new()
 		rb.name = "Ball_%d" % i
@@ -215,8 +221,17 @@ func _spawn_balls():
 		add_child(rb)
 		balls.append(rb)
 
-func reset():
+func reset() -> void:
 	for ball in balls:
 		ball.queue_free()
 	balls.clear()
 	_spawn_balls()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

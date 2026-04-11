@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: max margin: min ||w||² s.t. yᵢ(w·xᵢ + b) ≥ 1; kernel trick maps to higher dimensions
+# desire: see the maximum-margin hyperplane crystallize between classes, support vectors glowing gold at the boundary
+# critical_parameter: C_parameter — regularization; low C allows misclassification for wider margin, high C demands perfection
+# triggers: auto_start runs SMO optimization; kernel_type switches between linear, polynomial, RBF, sigmoid decision boundaries
+# emerges: support vectors — the few critical points that define the entire boundary; most data points are irrelevant
+# needs: VR controls [missing] — exported params but no spatial sliders
+# relationships: contrasts enhanced_kmeans (supervised vs unsupervised); contrasts random_forest_visualization (single optimal boundary vs ensemble of approximations)
+# truth: the decision boundary depends on only a few points — most of the data is redundant once the margin is found
+
 # =============================================================================
 # SVM — Support Vector Machine Visualization
 # =============================================================================
@@ -76,10 +86,10 @@ signal training_step_complete()
 signal training_finished()
 signal classification_changed()
 
-func _init():
+func _init() -> void:
 	name = "SVM_Visualization"
 
-func _ready():
+func _ready() -> void:
 	setup_ui()
 	setup_timer()
 	_build_3d_labels()
@@ -105,7 +115,7 @@ func _build_3d_labels() -> void:
 	_stats_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(_stats_label_3d)
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create comprehensive UI for SVM visualization"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
@@ -128,14 +138,14 @@ func setup_ui():
 	
 	update_ui()
 
-func setup_timer():
+func setup_timer() -> void:
 	"""Setup timer for animation"""
 	optimization_timer = Timer.new()
 	optimization_timer.wait_time = step_delay
 	optimization_timer.timeout.connect(_on_optimization_timer_timeout)
 	add_child(optimization_timer)
 
-func generate_training_data():
+func generate_training_data() -> void:
 	"""Generate training data with clear class separation"""
 	training_data.clear()
 	training_labels.clear()
@@ -161,7 +171,7 @@ func generate_training_data():
 	create_data_visualization()
 	print("Generated ", training_data.size(), " training samples")
 
-func create_data_visualization():
+func create_data_visualization() -> void:
 	"""Create 3D visualization of training data"""
 	clear_previous_visualization()
 	
@@ -193,7 +203,7 @@ func create_data_point(point: Vector2, label: int) -> MeshInstance3D:
 	sphere.position = Vector3(point.x, point.y, 0)
 	return sphere
 
-func start_training():
+func start_training() -> void:
 	"""Start SVM training process"""
 	if is_training:
 		return
@@ -211,7 +221,7 @@ func start_training():
 	
 	print("Starting SVM training with kernel: ", kernel_type)
 
-func initialize_svm_parameters():
+func initialize_svm_parameters() -> void:
 	"""Initialize SVM parameters"""
 	alphas.clear()
 	for i in range(training_data.size()):
@@ -221,7 +231,7 @@ func initialize_svm_parameters():
 	support_vectors.clear()
 	support_vector_labels.clear()
 
-func _on_optimization_timer_timeout():
+func _on_optimization_timer_timeout() -> void:
 	"""Perform one step of SVM optimization"""
 	if not is_training:
 		return
@@ -357,7 +367,7 @@ func update_alphas(i: int, j: int, Ei: float, Ej: float) -> bool:
 	
 	return true
 
-func update_bias(i: int, j: int, old_alpha_i: float, old_alpha_j: float, Ei: float, Ej: float):
+func update_bias(i: int, j: int, old_alpha_i: float, old_alpha_j: float, Ei: float, Ej: float) -> void:
 	"""Update bias term"""
 	var b1 = bias - Ei - training_labels[i] * (alphas[i] - old_alpha_i) * kernel_function(training_data[i], training_data[i]) - \
 			 training_labels[j] * (alphas[j] - old_alpha_j) * kernel_function(training_data[i], training_data[j])
@@ -372,7 +382,7 @@ func update_bias(i: int, j: int, old_alpha_i: float, old_alpha_j: float, Ei: flo
 	else:
 		bias = (b1 + b2) / 2
 
-func train_svm_full():
+func train_svm_full() -> void:
 	"""Train SVM without animation"""
 	initialize_svm_parameters()
 	
@@ -382,7 +392,7 @@ func train_svm_full():
 	
 	finalize_training()
 
-func finalize_training():
+func finalize_training() -> void:
 	"""Finalize SVM training"""
 	extract_support_vectors()
 	create_decision_boundary()
@@ -401,7 +411,7 @@ func finalize_training():
 	print("SVM training completed")
 	print("Support vectors found: ", support_vectors.size())
 
-func extract_support_vectors():
+func extract_support_vectors() -> void:
 	"""Extract support vectors from training data"""
 	support_vectors.clear()
 	support_vector_labels.clear()
@@ -411,7 +421,7 @@ func extract_support_vectors():
 			support_vectors.append(training_data[i])
 			support_vector_labels.append(training_labels[i])
 
-func create_decision_boundary():
+func create_decision_boundary() -> void:
 	"""Create visualization of decision boundary"""
 	if boundary_mesh:
 		boundary_mesh.queue_free()
@@ -471,7 +481,7 @@ func create_boundary_mesh() -> ArrayMesh:
 	
 	return array_mesh
 
-func update_support_vector_visualization():
+func update_support_vector_visualization() -> void:
 	"""Highlight support vectors with animated scale-up and golden glow."""
 	if not show_support_vectors:
 		return
@@ -506,7 +516,7 @@ func classify_new_point(point: Vector2) -> Dictionary:
 		"distance_to_boundary": abs(prediction)
 	}
 
-func clear_previous_visualization():
+func clear_previous_visualization() -> void:
 	"""Clear previous visualization elements"""
 	for point in data_points:
 		point.queue_free()
@@ -519,7 +529,7 @@ func clear_previous_visualization():
 		margin_mesh.queue_free()
 	margin_meshes.clear()
 
-func update_ui():
+func update_ui() -> void:
 	"""Update UI with current SVM state"""
 	if not ui_display:
 		return
@@ -552,7 +562,7 @@ func update_ui():
 		labels[18].text = "Examines how classification boundaries"
 		labels[19].text = "separate identities in high-dimensional space"
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -578,18 +588,18 @@ func _input(event):
 				C_parameter = max(C_parameter / 1.5, 0.1)
 				reset_svm()
 
-func stop_training():
+func stop_training() -> void:
 	"""Stop SVM training"""
 	is_training = false
 	optimization_timer.stop()
 
-func reset_svm():
+func reset_svm() -> void:
 	"""Reset SVM and regenerate data"""
 	stop_training()
 	is_trained = false
 	generate_training_data()
 
-func change_kernel(new_kernel: String):
+func change_kernel(new_kernel: String) -> void:
 	"""Change kernel type and retrain"""
 	kernel_type = new_kernel
 	reset_svm()
@@ -618,4 +628,13 @@ func get_algorithm_info() -> Dictionary:
 			"bias": bias,
 			"training_samples": training_data.size()
 		}
-	} 
+	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

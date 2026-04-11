@@ -3,3 +3,5 @@ Sequence role: Seventh map in Graph Theory; introduces capacity constraints. Aft
 Technical angle: Max-flow min-cut theorem (maximum flow equals minimum cut capacity), push-relabel algorithm (local excess management, height-based routing), augmenting paths (Ford-Fulkerson). The push_relabel_algorithm artifact demonstrates the local operations that produce global optimality.
 Critical angle: Every network has a throat. The max-flow min-cut theorem reveals that the bottleneck is not where you think (not the longest path or the most connections) but the cheapest way to disconnect source from sink. This is infrastructure critique: the weakest point in a network determines its total capacity. No amount of bandwidth elsewhere compensates for a single narrow passage.
 Key artifacts: push_relabel_algorithm demonstrates flow optimization — excess accumulation, height relabeling, and local push operations that converge to globally optimal flow.
+
+Gap: push_relabel_algorithm needs slider_horizontal, push_button.

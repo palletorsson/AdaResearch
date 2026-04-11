@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_base"]
+[ext_resource type="Script" path="res://commons/scenes/LandscapeScene.gd" id="2_landscape"]
+
+[node name="Landscape" instance=ExtResource("1_base")]
+
+[node name="LandscapeScene" type="Node3D" parent="." index="0"]
+script = ExtResource("2_landscape")

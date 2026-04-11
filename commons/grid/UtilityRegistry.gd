@@ -209,6 +209,13 @@ const UTILITY_TYPES = {
 		"description": "Transparent green grid bridge spanning voids on x/z axis",
 		"supports_parameters": true  # axis:length (e.g. "z:3", "-x:2")
 	},
+	"jp": {
+		"name": "jump_pad",
+		"file": "jump_pad.tscn",
+		"category": "transport",
+		"description": "Parabolic arc launcher to target grid position — player becomes the projectile",
+		"supports_parameters": true  # target_x:target_z[:arc_height] (e.g. "15:3", "15:3:8")
+	},
 	"rc": {
 		"name": "rotation_cube",
 		"file": "rotation_cube.tscn",
@@ -250,7 +257,7 @@ const UTILITY_TYPES = {
 		"name": "label",
 		"file": "info_label.tscn",
 		"category": "ui",
-		"description": "Displays artifact name from grid_artifacts.json by keyid",
+		"description": "Displays artifact name from the artifact registry by keyid",
 		"supports_parameters": true  # keyid parameter
 	},
 
@@ -280,10 +287,18 @@ const UTILITY_TYPES = {
 		"supports_parameters": true  # feature_name, optional color/params
 	},
 
+	"ds": {
+		"name": "dark_sphere",
+		"file": "dark_sphere_utility.tscn",
+		"category": "atmosphere",
+		"description": "Large dark sphere that envelops the scene — makes artifacts pop against darkness",
+		"supports_parameters": true  # radius (default covers entire map)
+	},
+
 	# Empty space
 	" ": {
-		"name": "none", 
-		"file": "", 
+		"name": "none",
+		"file": "",
 		"category": "empty",
 		"description": "Empty grid space",
 		"supports_parameters": false
@@ -302,6 +317,7 @@ const CATEGORIES = {
 	"navigation": "Navigation aids and indicators",
 	"safety": "Checkpoints and reset points",
 	"hazard": "Danger zones and environmental hazards",
+	"atmosphere": "Scene atmosphere and environmental effects",
 	"empty": "Empty space marker"
 }
 

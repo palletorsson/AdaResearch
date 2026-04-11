@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/torso_estimation_vis/torso_estimation_vis.gd" id="1"]
+
+[node name="TorsoEstimationVis" type="Node3D"]
+script = ExtResource("1")

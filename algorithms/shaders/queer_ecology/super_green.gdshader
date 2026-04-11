@@ -9,8 +9,6 @@ uniform vec3 pulse_color : source_color = vec3(0.2, 1.0, 0.4); // Highlights
 uniform float pulse_speed = 2.0;
 uniform float pulse_amount = 0.1;
 
-uniform sampler2D noise_tex; // Assign a noise texture here for best results
-
 void vertex() {
     // Breathing motion
     float breathe = sin(TIME * pulse_speed) * pulse_amount;

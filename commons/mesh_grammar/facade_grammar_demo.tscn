@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://dmi3ndr08cer"]
-
-[ext_resource type="Script" uid="uid://3xgiuqm5klys" path="res://commons/mesh_grammar/facade_grammar_demo.gd" id="1_facade_demo"]
-
-[node name="FacadeGrammarDemo" type="Node3D" unique_id=1460029422]
-script = ExtResource("1_facade_demo")
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=685716706]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.75946)

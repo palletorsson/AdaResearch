@@ -31,10 +31,10 @@ extends MeshInstance3D
 
 @export var auto_update: bool = true
 
-func _ready():
+func _ready() -> void:
 	_generate_mesh()
 
-func _generate_mesh():
+func _generate_mesh() -> void:
 	if not auto_update and Engine.is_editor_hint(): return
 	
 	var st = SurfaceTool.new()
@@ -112,3 +112,6 @@ func _get_u_ratio(i: int) -> float:
 
 func _get_v_ratio(j: int) -> float:
 	return float(j) / float(v_segments - 1)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

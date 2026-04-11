@@ -1,3 +1,13 @@
+# @identity
+# essence: emit(pattern, t) = spawn(particle, lifetime, velocity) -- nozzle cycling cone/fountain/spiral
+# desire: a particle emitter cycling emission patterns, birth-white to dying-red, lifecycle as ammunition
+# critical_parameter: _current_pattern (EmissionPattern) -- cone, fountain, spiral produce different threats
+# triggers: emit_timer spawns particles; pattern_timer cycles modes; particles age from white to red
+# emerges: particle lifecycle as weapon -- birth, travel, death mapped to color
+# needs: manual particle management [has]; 3 emission patterns [has]; color lifecycle [has]; VR interaction [missing]
+# relationships: embodies particles sequence; manual particles for educational visibility
+# truth: the particle emitter cycles cone, fountain, spiral -- birth-white to dying-red, lifecycle as ammunition.
+
 extends Node3D
 class_name ParticleEmitterHazard
 ## Particles sequence hazard — a nozzle that fires manually-managed projectile particles.

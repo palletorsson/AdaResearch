@@ -3,6 +3,16 @@
 ## Shows vectors A and B from origin, the negation -B, and the tip-to-tail
 ## construction where -B is placed at A's tip to produce the result A - B.
 ## VR-enabled: grabbable arrow endpoints let learners drag vectors interactively.
+##
+## @identity
+## essence: A - B = A + (-B). Subtraction is addition of the opposite. The difference vector points from B's tip to A's tip.
+## desire: To show that subtraction is not removal — it is the directed gap between two positions.
+## critical_parameter: The relationship between vector_a and vector_b. When equal, the result is zero — the gap closes.
+## triggers: Handle drag → all five arrows update (A, B, -B, -B from tip, result), preset buttons → orthogonal/same/opposing configurations
+## emerges: The ghost arrow -B appearing at A's tip makes the tip-to-tail construction visible. Subtracting identical vectors yields zero — visually collapsing to a point.
+## needs: VR grabbable handles [has], preset buttons [has]. Missing: animation showing the construction step by step.
+## relationships: Inverse of vector_addition_demo. Prerequisite for hl_turret_vectors (direction = target - turret is subtraction).
+## truth: The difference between two positions is a direction. Subtraction creates the arrow that connects them.
 
 extends Node3D
 

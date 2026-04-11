@@ -67,13 +67,13 @@ var noise: FastNoiseLite
 var mesh_instance: MeshInstance3D
 var points_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	remove_all_children()
 	randomize_seed()
 	setup_noise()
 	generate()
 
-func setup_noise():
+func setup_noise() -> void:
 	"""Initialize noise with hole-free settings"""
 	noise = FastNoiseLite.new()
 	noise.seed = seed_value
@@ -84,18 +84,18 @@ func setup_noise():
 	noise.fractal_gain = 0.5
 	noise.fractal_lacunarity = 2.0
 
-func randomize_seed():
+func randomize_seed() -> void:
 	"""Generate new random seed"""
 	seed_value = randi()
 	if noise:
 		noise.seed = seed_value
 
-func remove_all_children():
+func remove_all_children() -> void:
 	"""Clean up previous generation"""
 	for child in get_children():
 		child.queue_free()
 
-func generate():
+func generate() -> void:
 	"""Main generation function with hole-free techniques"""
 	if not get_tree() or not get_tree().get_root():
 		return
@@ -112,7 +112,7 @@ func generate():
 	
 	print("✅ Generation complete!")
 
-func generate_debug_points():
+func generate_debug_points() -> void:
 	"""Generate debug point visualization"""
 	var points_mesh = ImmediateMesh.new()
 	points_mesh.surface_begin(Mesh.PRIMITIVE_POINTS)
@@ -147,7 +147,7 @@ func generate_debug_points():
 	points_instance.set_surface_override_material(0, material)
 	add_child(points_instance)
 
-func generate_terrain_mesh():
+func generate_terrain_mesh() -> void:
 	"""Generate the main terrain mesh using hole-free marching cubes"""
 	var terrain_mesh = ImmediateMesh.new()
 	terrain_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -404,4 +404,13 @@ func get_generation_stats() -> Dictionary:
 #    - show_points: Toggle debug point visualization
 #    - show_wireframe: Toggle wireframe view
 #    - use_smooth_interpolation: Enable hole-free interpolation
-#    - prevent_degenerate_triangles: Enable triangle validation 
+#    - prevent_degenerate_triangles: Enable triangle validation
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

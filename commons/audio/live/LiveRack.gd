@@ -31,6 +31,9 @@ var channel_levels: Dictionary = {
 
 var channel_mutes: Dictionary = {}
 
+# Fade state: { "channel": { "from": float, "to": float, "duration": float, "elapsed": float } }
+var _fade_states: Dictionary = {}
+
 # Master state
 var bpm: float = 132.0
 var playing: bool = false
@@ -198,6 +201,38 @@ func _interpolate_params(delta: float):
 	var filter_speed = 0.5  # Takes 2 seconds to fully sweep
 	acid_cutoff = lerp(acid_cutoff, acid_cutoff_target, delta * filter_speed)
 	master_filter = lerp(master_filter, master_filter_target, delta * filter_speed)
+	_process_fades(delta)
+
+
+func _process_fades(delta: float):
+	var completed: Array = []
+	for channel in _fade_states.keys():
+		var fade: Dictionary = _fade_states[channel]
+		fade["elapsed"] += delta
+		var t = clamp(fade["elapsed"] / fade["duration"], 0.0, 1.0)
+		# Smooth ease-in-out curve
+		var eased = t * t * (3.0 - 2.0 * t)
+		channel_levels[channel] = lerp(float(fade["from"]), float(fade["to"]), eased)
+		parameter_changed.emit(channel + "_level", channel_levels[channel])
+		if t >= 1.0:
+			completed.append(channel)
+			if fade["to"] <= 0.0:
+				channel_mutes[channel] = true
+	for channel in completed:
+		_fade_states.erase(channel)
+
+
+func _bars_to_seconds(bars: int) -> float:
+	return float(maxi(1, bars)) * 240.0 / maxf(1.0, bpm)
+
+
+func _default_level(channel: String) -> float:
+	# Initial levels from the channel_levels defaults at top of file
+	var defaults: Dictionary = {
+		"kick": 1.0, "hats": 0.7, "clap": 0.8,
+		"bass": 0.9, "acid": 0.6, "pad": 0.3
+	}
+	return defaults.get(channel, 0.8)
 
 
 func _on_phrase():
@@ -319,14 +354,30 @@ func mute_channel(channel: String, muted: bool):
 		channel_mutes[channel] = muted
 
 
-func fade_in(_channel: String, bars: int = 4):
-	# Gradual fade in over N bars
-	# This would be handled by the render loop
-	pass
+func fade_in(channel: String, bars: int = 4):
+	if not channel_levels.has(channel):
+		return
+	var duration = _bars_to_seconds(bars)
+	channel_levels[channel] = 0.0
+	channel_mutes[channel] = false
+	_fade_states[channel] = {
+		"from": 0.0,
+		"to": _default_level(channel),
+		"duration": duration,
+		"elapsed": 0.0
+	}
 
 
-func fade_out(_channel: String, bars: int = 4):
-	pass
+func fade_out(channel: String, bars: int = 4):
+	if not channel_levels.has(channel):
+		return
+	var duration = _bars_to_seconds(bars)
+	_fade_states[channel] = {
+		"from": channel_levels[channel],
+		"to": 0.0,
+		"duration": duration,
+		"elapsed": 0.0
+	}
 
 
 # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
@@ -558,5 +609,6 @@ func get_state() -> Dictionary:
 		"acid_slides": acid_slides.duplicate(),
 		"master_filter": master_filter,
 		"channel_levels": channel_levels.duplicate(),
-		"channel_mutes": channel_mutes.duplicate()
+		"channel_mutes": channel_mutes.duplicate(),
+		"fading": _fade_states.keys().duplicate()
 	}

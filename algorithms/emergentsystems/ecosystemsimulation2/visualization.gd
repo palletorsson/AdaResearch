@@ -124,7 +124,7 @@ var visualization_modes = [
 	"historical_trajectories"
 ]
 
-func _ready():
+func _ready() -> void:
 	# Create containers for different visual elements
 	entity_visuals = Node3D.new()
 	entity_visuals.name = "EntityVisuals"
@@ -161,7 +161,7 @@ func _ready():
 	# Initialize visualization
 	_setup_post_processing()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Update visualizations
 	_update_entity_visuals(delta)
 	_update_connection_visuals(delta)
@@ -207,7 +207,7 @@ func add_entity_visualization(entity: Object):
 	
 	return visual
 
-func _create_default_entity_visual(visual: Node3D, entity: Object):
+func _create_default_entity_visual(visual: Node3D, entity: Object) -> void:
 	# Create a simple sphere to represent the entity
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.name = "DefaultMesh"
@@ -267,7 +267,7 @@ func update_entity_visualization(entity: Object):
 	
 	return visual
 
-func remove_entity_visualization(entity: Object):
+func remove_entity_visualization(entity: Object) -> void:
 	if entity_visual_cache.has(entity):
 		var visual = entity_visual_cache[entity]
 		
@@ -354,7 +354,7 @@ func update_resource_visualization(resource: Object):
 	
 	return visual
 
-func remove_resource_visualization(resource: Object):
+func remove_resource_visualization(resource: Object) -> void:
 	if resource_visual_cache.has(resource):
 		var visual = resource_visual_cache[resource]
 		
@@ -471,7 +471,7 @@ func update_connection_visualization(entity1: Object, entity2: Object, type: Str
 	
 	return visual
 
-func remove_connection_visualization(entity1: Object, entity2: Object):
+func remove_connection_visualization(entity1: Object, entity2: Object) -> void:
 	if not enable_connection_visualization:
 		return
 	
@@ -574,7 +574,7 @@ func update_boundary_visualization(boundary: Object, visual: Node3D = null):
 	
 	return visual
 
-func remove_boundary_visualization(boundary: Object):
+func remove_boundary_visualization(boundary: Object) -> void:
 	if not enable_boundary_visualization:
 		return
 	
@@ -643,7 +643,7 @@ func create_event_visualization(event_type: String, location: Vector3, parameter
 	
 	return visual
 
-func _create_celebration_effect(visual: Node3D, color: Color, intensity: float, radius: float):
+func _create_celebration_effect(visual: Node3D, color: Color, intensity: float, radius: float) -> void:
 	# Create particles for celebration
 	var particles = GPUParticles3D.new()
 	particles.name = "CelebrationParticles"
@@ -693,7 +693,7 @@ func _create_celebration_effect(visual: Node3D, color: Color, intensity: float, 
 	visual.add_child(particles)
 	visual.add_child(animation_player)
 
-func _create_challenge_effect(visual: Node3D, color: Color, intensity: float, radius: float):
+func _create_challenge_effect(visual: Node3D, color: Color, intensity: float, radius: float) -> void:
 	# Create spiky sphere for challenge
 	var sphere = MeshInstance3D.new()
 	sphere.name = "ChallengeSphere"
@@ -766,7 +766,7 @@ func _create_challenge_effect(visual: Node3D, color: Color, intensity: float, ra
 	
 	visual.add_child(animation_player)
 
-func _create_transformation_effect(visual: Node3D, color: Color, intensity: float, radius: float):
+func _create_transformation_effect(visual: Node3D, color: Color, intensity: float, radius: float) -> void:
 	# Create morphing effect for transformation
 	var torus = MeshInstance3D.new()
 	torus.name = "TransformationTorus"
@@ -832,7 +832,7 @@ func _create_transformation_effect(visual: Node3D, color: Color, intensity: floa
 	
 	visual.add_child(animation_player)
 
-func _create_default_event_effect(visual: Node3D, color: Color, intensity: float, radius: float):
+func _create_default_event_effect(visual: Node3D, color: Color, intensity: float, radius: float) -> void:
 	# Create simple pulsing sphere
 	var sphere = MeshInstance3D.new()
 	sphere.name = "EventSphere"
@@ -853,17 +853,17 @@ func _create_default_event_effect(visual: Node3D, color: Color, intensity: float
 	
 	visual.add_child(sphere)
 
-func _update_entity_visuals(_delta: float):
+func _update_entity_visuals(_delta: float) -> void:
 	# Update all entity visuals to match current positions
 	for entity in entity_visual_cache.keys():
 		update_entity_visualization(entity)
 
-func _update_connection_visuals(_delta: float):
+func _update_connection_visuals(_delta: float) -> void:
 	# Connection visuals are updated on demand
 	# This function would be used for automatic updates
 	pass
 
-func _update_trajectory_visuals(_delta: float):
+func _update_trajectory_visuals(_delta: float) -> void:
 	# Only update if trajectory visualization is enabled
 	if not enable_trajectory_visualization:
 		return
@@ -936,7 +936,7 @@ func _update_trajectory_visuals(_delta: float):
 				# If the line didn't get added to the tree properly, clean it up
 				line.queue_free()
 
-func _update_active_effects(_delta: float):
+func _update_active_effects(_delta: float) -> void:
 	# Update active visual effects
 	for effect in active_effects.duplicate():
 		var visual = effect.visual
@@ -965,7 +965,7 @@ func _update_active_effects(_delta: float):
 				# Transformation effects might distort space
 				pass
 
-func _update_entity_histories(_delta: float):
+func _update_entity_histories(_delta: float) -> void:
 	# Add current positions to history for trajectory visualization
 	for entity in entity_visual_cache.keys():
 		if not entity_history.has(entity):
@@ -978,7 +978,7 @@ func _update_entity_histories(_delta: float):
 		while entity_history[entity].size() > history_length:
 			entity_history[entity].pop_front()
 
-func highlight_entity(entity: Object, is_highlighted: bool = true):
+func highlight_entity(entity: Object, is_highlighted: bool = true) -> void:
 	if not enable_entity_highlighting:
 		return
 	
@@ -997,7 +997,7 @@ func highlight_entity(entity: Object, is_highlighted: bool = true):
 	if is_highlighted:
 		emit_signal("entity_highlighted", entity)
 
-func set_visualization_mode(mode: String):
+func set_visualization_mode(mode: String) -> void:
 	if visualization_modes.has(mode):
 		current_mode = mode
 		
@@ -1007,7 +1007,7 @@ func set_visualization_mode(mode: String):
 		# Emit signal
 		emit_signal("visualization_mode_changed", mode)
 
-func _apply_visualization_mode():
+func _apply_visualization_mode() -> void:
 	# Apply different visualization styles based on current mode
 	match current_mode:
 		"trait_heatmap":
@@ -1100,7 +1100,7 @@ func _get_connection_key(entity1: Object, entity2: Object) -> String:
 	else:
 		return str(id2) + "_" + str(id1)
 
-func _setup_post_processing():
+func _setup_post_processing() -> void:
 	# Set up post-processing effects
 	if not apply_post_processing:
 		return
@@ -1110,7 +1110,7 @@ func _setup_post_processing():
 	
 	pass
 
-func set_color_scheme(scheme: String):
+func set_color_scheme(scheme: String) -> void:
 	if color_palettes.has(scheme):
 		color_scheme = scheme
 		
@@ -1123,16 +1123,25 @@ func set_color_scheme(scheme: String):
 		if environment:
 			environment.background_color = color_palettes[scheme].background
 
-func set_detail_level(level: int):
+func set_detail_level(level: int) -> void:
 	detail_level = clamp(level, 1, 3)
 	
 	# Adjust detail level of all visualizations
 	# In a full implementation, this would modify mesh complexity,
 	# particle counts, etc.
 
-func set_visualization_scale(scale: float):
+func set_visualization_scale(scale: float) -> void:
 	visualization_scale = clamp(scale, 0.1, 2.0)
 	
 	# Scale all visualization elements
 	# In a full implementation, this would adjust the size of
 	# visual elements without affecting the actual entities
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

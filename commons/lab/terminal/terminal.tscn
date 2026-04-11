@@ -20,7 +20,7 @@ func _ready():
 
 func setup_terminal():
 	add_to_group('lab_equipment')
-	screen.material_override.emission_energy = 0.5
+	screen.material_override.emission_energy_multiplier = 0.5
 
 func start_idle_animations():
 	# Screen glow pulse
@@ -46,7 +46,7 @@ func _process(delta):
 	if data_processing:
 		screen_flicker_timer += delta * 8.0
 		var flicker = sin(screen_flicker_timer) * 0.1 + 0.9
-		screen.material_override.emission_energy = flicker
+		screen.material_override.emission_energy_multiplier = flicker
 
 func _on_area_3d_body_entered(body):
 	if body.is_in_group('player'):

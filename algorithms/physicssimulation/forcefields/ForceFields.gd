@@ -3,6 +3,16 @@
 # Uses Godot's built-in Area3D gravity_space_override to create force regions.
 # RigidBody3D balls are dropped in; the engine applies the forces automatically.
 # ===========================================================================
+#
+# @identity
+# essence: Area3D.gravity_space_override = COMBINE. Three zones, three rules: directional push, radial pull, viscous drag. Same balls, different fates.
+# desire: To throw balls into colored zones and watch physics change — one zone pushes sideways, one sucks inward, one floats with resistance. Territory as force law.
+# critical_parameter: gravity and linear_damp per zone. The point attractor's gravity (20.0) vs the wind zone's damp (4.0) — pull vs resistance, two ways to trap a ball.
+# triggers: VR grab balls → throw into zones, each zone applies its own physics automatically via Godot's Area3D system, R → reset all balls
+# emerges: Balls orbiting the point attractor. Balls floating in the wind/drag zone as buoyancy balances gravity. Balls ricocheting in the directional field.
+# needs: VR grabbable balls [has], three distinct Area3D zones [has]. Missing: zone parameter sliders, zone boundary visualization toggle.
+# relationships: Uses Godot's built-in Area3D (unlike force_field_visualizer which computes manually). Complements vector_fields (arrow visualization) with tactile interaction. Lives in ForcesSystems.
+# truth: A force field is a region with different rules. Cross the boundary and the laws change. Physics is local.
 extends Node3D
 
 # ---------------------------------------------------------------------------
@@ -39,7 +49,7 @@ var colors := [
 # ===========================================================================
 # Lifecycle
 # ===========================================================================
-func _ready():
+func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 	var fields := Node3D.new()
 	fields.name = "Fields"
@@ -58,7 +68,7 @@ func _ready():
 # ===========================================================================
 # 1. GRAVITY FIELD — directional override (pushes everything sideways)
 # ===========================================================================
-func _build_gravity_field():
+func _build_gravity_field() -> void:
 	var area := Area3D.new()
 	area.name = "GravityField"
 	area.position = Vector3(-3.0, 1.5, 0.0)
@@ -84,7 +94,7 @@ func _build_gravity_field():
 # ===========================================================================
 # 2. POINT ATTRACTOR — radial pull towards centre
 # ===========================================================================
-func _build_point_attractor():
+func _build_point_attractor() -> void:
 	var area := Area3D.new()
 	area.name = "PointAttractor"
 	area.position = Vector3(0.0, 1.5, 0.0)
@@ -135,7 +145,7 @@ func _build_point_attractor():
 # ===========================================================================
 # 3. WIND / DRAG FIELD — linear damping override
 # ===========================================================================
-func _build_wind_drag_field():
+func _build_wind_drag_field() -> void:
 	var area := Area3D.new()
 	area.name = "WindDragField"
 	area.position = Vector3(3.0, 1.5, 0.0)
@@ -163,7 +173,7 @@ func _build_wind_drag_field():
 # ===========================================================================
 # Spawn grabbable RigidBody3D balls
 # ===========================================================================
-func _spawn_balls():
+func _spawn_balls() -> void:
 	for i in range(ball_count):
 		var body := RigidBody3D.new()
 		body.mass = ball_mass
@@ -220,7 +230,7 @@ func _zone_visual(size: Vector3, color: Color) -> MeshInstance3D:
 	viz.material_override = mat
 	return viz
 
-func _add_zone_label(parent: Node3D, text: String, offset: Vector3):
+func _add_zone_label(parent: Node3D, text: String, offset: Vector3) -> void:
 	var label := Label3D.new()
 	label.text = text
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -230,7 +240,7 @@ func _add_zone_label(parent: Node3D, text: String, offset: Vector3):
 	label.modulate = Color.WHITE
 	parent.add_child(label)
 
-func _create_ui():
+func _create_ui() -> void:
 	var title := Label3D.new()
 	title.text = "FORCE FIELDS"
 	title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -250,14 +260,14 @@ func _create_ui():
 # ===========================================================================
 # Floor so balls don't fall forever
 # ===========================================================================
-func _create_floor():
+func _create_floor() -> void:
 	# Created in .tscn — StaticBody3D at y = -0.5
 	pass
 
 # ===========================================================================
 # VR grab system (same as Constraints_Interactive)
 # ===========================================================================
-func setup_vr_controllers():
+func setup_vr_controllers() -> void:
 	var xr_origin = get_tree().get_first_node_in_group("XROrigin")
 	if xr_origin:
 		left_controller = xr_origin.get_node_or_null("LeftController")
@@ -272,7 +282,7 @@ func setup_vr_controllers():
 func _process(_delta: float):
 	_update_vr_grab()
 
-func _update_vr_grab():
+func _update_vr_grab() -> void:
 	if left_grab_active and left_controller and not grabbed_body:
 		_attempt_grab(left_controller.global_position)
 	elif not left_grab_active and grabbed_body:
@@ -290,7 +300,7 @@ func _update_vr_grab():
 		elif right_grab_active and right_controller:
 			grab_anchor.global_position = right_controller.global_position
 
-func _attempt_grab(controller_global_pos: Vector3):
+func _attempt_grab(controller_global_pos: Vector3) -> void:
 	var radius := 0.35
 	for body in balls:
 		if not is_instance_valid(body):
@@ -313,7 +323,7 @@ func _attempt_grab(controller_global_pos: Vector3):
 			add_child(grab_joint)
 			break
 
-func _release_grab():
+func _release_grab() -> void:
 	if grab_joint:
 		grab_joint.queue_free()
 		grab_joint = null
@@ -322,32 +332,41 @@ func _release_grab():
 		grab_anchor = null
 	grabbed_body = null
 
-func _on_left_button_pressed(button_name: String):
+func _on_left_button_pressed(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		left_grab_active = true
-func _on_left_button_released(button_name: String):
+func _on_left_button_released(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		left_grab_active = false
-func _on_right_button_pressed(button_name: String):
+func _on_right_button_pressed(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		right_grab_active = true
-func _on_right_button_released(button_name: String):
+func _on_right_button_released(button_name: String) -> void:
 	if button_name == "trigger_click" or button_name == "grip_click":
 		right_grab_active = false
 
 # ===========================================================================
 # Keyboard shortcuts
 # ===========================================================================
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		match event.keycode:
 			KEY_R:
 				_reset()
 
-func _reset():
+func _reset() -> void:
 	for b in balls:
 		if is_instance_valid(b):
 			b.queue_free()
 	balls.clear()
 	await get_tree().create_timer(0.1).timeout
 	_spawn_balls()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

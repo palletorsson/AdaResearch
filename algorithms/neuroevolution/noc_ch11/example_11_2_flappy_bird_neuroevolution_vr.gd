@@ -22,19 +22,20 @@ class NeuroBird extends VREntity:
 	var distance_traveled: float = 0.0
 	var pipes_passed: int = 0
 
-	func _init():
+	func _init() -> void:
 		# Create brain: 5 inputs, 8 hidden neurons, 1 output
 		# Inputs: bird Y, bird velocity Y, nearest pipe X distance, upper gap Y, lower gap Y
 		brain = NeuralNetwork.new(5, 8, 1)
 
-	func setup_mesh():
+	func setup_mesh() -> void:
 		mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.025
+		sphere.height = 0.05
 		mesh_instance.mesh = sphere
 		add_child(mesh_instance)
 
-	func think(pipes: Array):
+	func think(pipes: Array) -> void:
 		if not alive:
 			return
 
@@ -68,10 +69,10 @@ class NeuroBird extends VREntity:
 		if output[0] > 0.5:
 			flap()
 
-	func flap():
+	func flap() -> void:
 		velocity.y = flap_force
 
-	func _physics_process(delta):
+	func _physics_process(delta: float) -> void:
 		if not alive:
 			return
 
@@ -101,13 +102,13 @@ class Pipe extends Node3D:
 	var secondary_pink: Color = Color(0.9, 0.5, 0.8, 0.5)
 	var accent_pink: Color = Color(1.0, 0.6, 1.0, 0.8)  # Glow when passed
 
-	func _init(y_pos: float = 0.0):
+	func _init(y_pos: float = 0.0) -> void:
 		gap_y = y_pos
 
-	func _ready():
+	func _ready() -> void:
 		create_pipes()
 
-	func create_pipes():
+	func create_pipes() -> void:
 		# Upper pipe
 		upper_mesh = MeshInstance3D.new()
 		var upper_box = BoxMesh.new()
@@ -134,7 +135,7 @@ class Pipe extends Node3D:
 		lower_mesh.material_override = mat_lower
 		add_child(lower_mesh)
 
-	func _process(delta):
+	func _process(delta: float) -> void:
 		position.x -= speed * delta
 
 	func check_collision(bird_pos: Vector3) -> bool:
@@ -143,7 +144,7 @@ class Pipe extends Node3D:
 				return true
 		return false
 
-	func glow():
+	func glow() -> void:
 		"""Glow when bird successfully passes"""
 		if upper_mesh and lower_mesh:
 			upper_mesh.material_override.albedo_color = accent_pink
@@ -167,7 +168,7 @@ var best_label: Label3D
 var primary_pink: Color = Color(1.0, 0.7, 0.9, 1.0)
 var alt_pink: Color = Color(0.9, 0.5, 0.8, 1.0)
 
-func _ready():
+func _ready() -> void:
 	# Create initial population
 	create_population()
 
@@ -177,7 +178,7 @@ func _ready():
 	# Spawn first pipe
 	spawn_pipe()
 
-func create_population():
+func create_population() -> void:
 	"""Create or evolve new population of birds"""
 	for i in range(population_size):
 		var bird = NeuroBird.new()
@@ -192,7 +193,7 @@ func create_population():
 		add_child(bird)
 		population.append(bird)
 
-func create_ui():
+func create_ui() -> void:
 	# Generation label
 	gen_label = Label3D.new()
 	gen_label.text = "Generation: 1"
@@ -220,7 +221,7 @@ func create_ui():
 	best_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(best_label)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Spawn pipes
 	spawn_timer += delta
 	if spawn_timer > spawn_interval:
@@ -278,7 +279,7 @@ func _process(delta):
 	if alive_count == 0:
 		next_generation()
 
-func spawn_pipe():
+func spawn_pipe() -> void:
 	"""Spawn a new pipe at random height"""
 	var gap_y = randf_range(-0.2, 0.2)
 	var pipe = Pipe.new(gap_y)
@@ -286,7 +287,7 @@ func spawn_pipe():
 	add_child(pipe)
 	pipes.append(pipe)
 
-func next_generation():
+func next_generation() -> void:
 	"""Evolve next generation using neuroevolution"""
 	generation += 1
 	gen_label.text = "Generation: " + str(generation)
@@ -339,3 +340,12 @@ func next_generation():
 
 	spawn_timer = 0.0
 	spawn_pipe()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

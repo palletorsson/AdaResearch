@@ -3,7 +3,7 @@ extends Node3D
 @onready var noise_plane: MeshInstance3D = $NoisePlane
 var fnoise = FastNoiseLite.new()  # Noise generator
 
-func _ready():
+func _ready() -> void:
 	fnoise = NoiseHelper.setup_noise(randi(), 1.2)
 
 	# Set subdivisions dynamically
@@ -13,7 +13,7 @@ func _ready():
 		modify_top_edge_vertices()
 		print("is plane mesh")
 
-func modify_top_edge_vertices():
+func modify_top_edge_vertices() -> void:
 	var mesh = noise_plane.mesh
 	
 	# Extracts vertex data from a MeshInstance3D and returns the vertices array.	
@@ -40,3 +40,6 @@ func modify_top_edge_vertices():
 	noise_plane.mesh = new_mesh
 
 	print("✅ Top edge modified successfully!")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

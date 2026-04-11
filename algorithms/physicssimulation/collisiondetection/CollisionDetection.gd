@@ -14,12 +14,12 @@ var shape_colors := [
 	Color(1.0, 0.8, 0.2),  # Cylinder — gold
 ]
 
-func _ready():
+func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 	_create_containment()
 	_create_objects()
 
-func _create_containment():
+func _create_containment() -> void:
 	var floor_body := StaticBody3D.new()
 	var floor_col := CollisionShape3D.new()
 	var floor_shape := BoxShape3D.new()
@@ -45,7 +45,7 @@ func _create_containment():
 		wall.position = wall_data[0]
 		add_child(wall)
 
-func _create_objects():
+func _create_objects() -> void:
 	for i in range(object_count):
 		var shape_type := i % 4
 		var rb := RigidBody3D.new()
@@ -124,7 +124,7 @@ func _create_objects():
 		add_child(rb)
 		objects.append(rb)
 
-func _on_body_entered(_body: Node, rb: RigidBody3D, mesh_inst: MeshInstance3D):
+func _on_body_entered(_body: Node, rb: RigidBody3D, mesh_inst: MeshInstance3D) -> void:
 	# Flash white on collision
 	if mesh_inst.material_override:
 		var mat: StandardMaterial3D = mesh_inst.material_override
@@ -137,12 +137,21 @@ func _on_body_entered(_body: Node, rb: RigidBody3D, mesh_inst: MeshInstance3D):
 		tween.tween_property(mat, "albedo_color", orig_color, 0.3)
 		tween.parallel().tween_property(mat, "emission", orig_color * 0.3, 0.3)
 
-func _on_body_exited(_body: Node, _rb: RigidBody3D, _mesh_inst: MeshInstance3D):
+func _on_body_exited(_body: Node, _rb: RigidBody3D, _mesh_inst: MeshInstance3D) -> void:
 	pass  # Color already restoring via tween
 
-func reset():
+func reset() -> void:
 	for obj in objects:
 		obj.queue_free()
 	objects.clear()
 	original_colors.clear()
 	_create_objects()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

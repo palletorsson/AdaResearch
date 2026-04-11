@@ -162,11 +162,12 @@ static func _load_standalone_registry() -> void:
 	print("ArtifactCatalogDataProvider: Loading artifacts directly (standalone mode)...")
 	_standalone_registry.clear()
 	
-	# Load base registry
-	var base_path = "res://commons/artifacts/grid_artifacts.json"
-	_load_registry_file(base_path)
-	
-	# Load modular registries
+	# Legacy base registry — DEPRECATED: all entries migrated to registry/*.json
+	# Skipping load; kept as comment for reference.
+	# var base_path = "res://commons/artifacts/grid_artifacts.json"
+	# _load_registry_file(base_path)
+
+	# Load modular registries (authoritative source)
 	var registry_dir = "res://commons/artifacts/registry/"
 	var dir = DirAccess.open(registry_dir)
 	if dir:

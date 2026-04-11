@@ -1,3 +1,13 @@
+# @identity
+# essence: DFS(grid) -> carve(corridors) -> spin(core) -- maze regenerating itself every 8 seconds
+# desire: a crystalline core surrounded by DFS-carved maze that rebuilds constantly
+# critical_parameter: _maze_grid / regeneration timer -- DFS carving determines corridors; 8-second rebuild
+# triggers: timer triggers regeneration; DFS carves new corridors; core spins; walls damage on contact
+# emerges: procedural generation as perpetual threat -- never the same maze, never memorizable
+# needs: HazardCreatureBase [has]; DFS maze generation [has]; wall mesh [has]; core viz [has]; VR interaction [missing]
+# relationships: embodies proceduralgeneration sequence; pairs with constraint_web (generation vs satisfaction)
+# truth: the maze generates itself -- DFS carving corridors that are always new, always temporary, always dangerous.
+
 extends HazardCreatureBase
 class_name MazeSpinner
 ## Procedural generation sequence — crystalline core that generates a

@@ -29,17 +29,17 @@ var _time: float = 0.0
 var _grid_size: int:
 	get: return grid_radius * 2 + 1
 
-func _ready():
+func _ready() -> void:
 	_setup_noise()
 	_init_multimesh()
 
-func _setup_noise():
+func _setup_noise() -> void:
 	_noise = FastNoiseLite.new()
 	_noise.seed = randi()
 	_noise.frequency = noise_frequency
 	_noise.noise_type = FastNoiseLite.TYPE_PERLIN
 
-func _init_multimesh():
+func _init_multimesh() -> void:
 	# Cleanup existing
 	if _multimesh_instance:
 		_multimesh_instance.queue_free()
@@ -68,7 +68,7 @@ func _init_multimesh():
 	mat.emission_energy_multiplier = 1.0
 	_multimesh_instance.material_override = mat
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_time += delta * color_speed
 	
 	var player = GameManager.get_player()
@@ -115,3 +115,12 @@ func _process(delta):
 			color = color * (1.0 + emission_val) # Boost brightness
 			
 			_multimesh.set_instance_color(index, color)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

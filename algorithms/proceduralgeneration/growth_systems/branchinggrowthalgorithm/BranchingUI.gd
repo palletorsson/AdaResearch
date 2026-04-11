@@ -7,10 +7,10 @@
 @onready var sparkle_check = $Panel/VBoxContainer/SparkleCheck
 @onready var stats_label = $Panel/VBoxContainer/StatsLabel
 
-func _ready():
+func _ready() -> void:
 	_update_ui()
 
-func _update_ui():
+func _update_ui() -> void:
 	if not growth_node: return
 	branch_slider.value = growth_node.max_branches
 	attractor_slider.value = growth_node.attractor_count
@@ -27,7 +27,7 @@ func _process(_delta):
 			"Yes" if stats.is_growing else "No"
 		]
 
-func _on_restart_pressed():
+func _on_restart_pressed() -> void:
 	growth_node.max_branches = int(branch_slider.value)
 	growth_node.attractor_count = int(attractor_slider.value)
 	
@@ -36,16 +36,16 @@ func _on_restart_pressed():
 	growth_node.generate_attractors_vr_optimized()
 	growth_node.start_growth()
 
-func _on_branch_changed(value):
+func _on_branch_changed(value) -> void:
 	growth_node.max_branches = int(value)
 	$Panel/VBoxContainer/BranchLabel.text = "Max Branches: %d" % int(value)
 
-func _on_attractor_changed(value):
+func _on_attractor_changed(value) -> void:
 	growth_node.attractor_count = int(value)
 	$Panel/VBoxContainer/AttractorLabel.text = "Attractors: %d" % int(value)
 
-func _on_rainbow_toggled(button_pressed):
+func _on_rainbow_toggled(button_pressed) -> void:
 	growth_node.enable_pride_colors = button_pressed
 
-func _on_sparkle_toggled(button_pressed):
+func _on_sparkle_toggled(button_pressed) -> void:
 	growth_node.enable_sparkles = button_pressed

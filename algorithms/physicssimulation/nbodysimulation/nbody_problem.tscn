@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://ch6nqhx4ioaq0" path="res://algorithms/physicssimulation/nbodysimulation/nbody_problem.gd" id="1_ekfkv"]
 
-[node name="NbodyProblem" type="Node2D"]
+[node name="NbodyProblem" type="Node3D"]
 script = ExtResource("1_ekfkv")

@@ -1,19 +1,34 @@
 # bias_visualizer.gd
-# Demonstrates bias in word embeddings
-# VR-enabled with button controls for analogy selection
-
 extends Node3D
-
 class_name BiasVisualizer
 
-## Display settings
-@export var display_size: float = 1.0
-@export var word_scale: float = 0.05
+# @identity
+# essence: embedding_space(words, gender_axis) -> proximity_reveals_prejudice
+# desire: see whose edge cases the training data forgot
+# critical_parameter: analogy_type — switches between gender-profession, gender-trait, and algorithmic redlining
+# triggers: push-button selection cycles analogy modes; word proximity to gendered anchors shifts meaning
+# emerges: the uncomfortable recognition that "neutral" embeddings reproduce structural inequality
+# needs: VR push buttons [has], rotation toggle [has], word grab interaction [missing]
+# relationships: unlocks critical algorithmic thinking; depends on foundations crisis (incompleteness); contrasts ordered_grid (perfect pattern vs biased pattern)
+# truth: classification systems do not describe the world — they encode whose categories get to count
+## Visualizes bias in word embeddings using a 3D word cloud.
+## Words are positioned in a simulated embedding space where proximity to
+## gendered anchors (man/woman) reveals learned stereotypical associations.
+## Three analogy modes show gender-profession, gender-trait, and algorithmic
+## redlining patterns. VR-enabled with push-button analogy selection.
 
-## Colors
+## Overall scale of the embedding space display (meters)
+@export_range(0.5, 3.0, 0.1) var display_size: float = 1.0
+## Radius of each word sphere in the cloud (meters)
+@export_range(0.01, 0.2, 0.01) var word_scale: float = 0.05
+
+## Color for male-gendered words (man, he, king)
 @export var male_color: Color = Color(0.3, 0.5, 1.0)
+## Color for female-gendered words (woman, she, queen)
 @export var female_color: Color = Color(1.0, 0.4, 0.6)
+## Color for trait words (strong, gentle, logical, etc.)
 @export var neutral_color: Color = Color(0.5, 0.9, 0.4)
+## Color for profession words (doctor, nurse, engineer, etc.)
 @export var profession_color: Color = Color(1.0, 0.8, 0.2)
 
 ## Current analogy
@@ -68,6 +83,8 @@ const ANALOGIES = {
 }
 
 var _word_nodes: Dictionary = {}
+var _word_mm: MultiMesh
+var _word_mmi: MultiMeshInstance3D
 var _connection_lines: ImmediateMesh
 var _connection_instance: MeshInstance3D
 var _title_label: Label3D
@@ -75,6 +92,7 @@ var _equation_label: Label3D
 var _explanation_label: Label3D
 var _control_panel: Node3D
 var _rotation_enabled: bool = false
+var _created_nodes: Array[Node] = []
 
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
@@ -102,7 +120,8 @@ func _create_base():
 	
 	base.position = Vector3(0, -0.01, 0)
 	add_child(base)
-	
+	_created_nodes.append(base)
+
 	# Gender axis indicators
 	var axis_label_m = Label3D.new()
 	axis_label_m.text = "♂"
@@ -111,7 +130,8 @@ func _create_base():
 	axis_label_m.position = Vector3(-display_size * 0.5, 0.02, 0)
 	axis_label_m.modulate = male_color
 	add_child(axis_label_m)
-	
+	_created_nodes.append(axis_label_m)
+
 	var axis_label_f = Label3D.new()
 	axis_label_f.text = "♀"
 	axis_label_f.pixel_size = 0.003
@@ -119,6 +139,7 @@ func _create_base():
 	axis_label_f.position = Vector3(display_size * 0.5, 0.02, 0)
 	axis_label_f.modulate = female_color
 	add_child(axis_label_f)
+	_created_nodes.append(axis_label_f)
 
 func _create_labels():
 	_title_label = Label3D.new()
@@ -127,7 +148,8 @@ func _create_labels():
 	_title_label.font_size = 28
 	_title_label.position = Vector3(0, display_size * 0.7, -display_size * 0.5)
 	add_child(_title_label)
-	
+	_created_nodes.append(_title_label)
+
 	_equation_label = Label3D.new()
 	_equation_label.name = "EquationLabel"
 	_equation_label.pixel_size = 0.002
@@ -135,7 +157,8 @@ func _create_labels():
 	_equation_label.position = Vector3(0, display_size * 0.55, -display_size * 0.5)
 	_equation_label.modulate = Color(0.9, 0.9, 0.5)
 	add_child(_equation_label)
-	
+	_created_nodes.append(_equation_label)
+
 	_explanation_label = Label3D.new()
 	_explanation_label.name = "ExplanationLabel"
 	_explanation_label.pixel_size = 0.0015
@@ -143,49 +166,73 @@ func _create_labels():
 	_explanation_label.position = Vector3(0, 0.05, display_size * 0.55)
 	_explanation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	add_child(_explanation_label)
+	_created_nodes.append(_explanation_label)
 
 func _create_word_cloud():
-	for word in WORD_DATA.keys():
+	var words = WORD_DATA.keys()
+	var count = words.size()
+
+	# Create MultiMesh for all word spheres
+	var sphere := SphereMesh.new()
+	sphere.radius = word_scale
+	sphere.height = word_scale * 2
+
+	_word_mm = MultiMesh.new()
+	_word_mm.transform_format = MultiMesh.TRANSFORM_3D
+	_word_mm.use_colors = true
+	_word_mm.mesh = sphere
+	_word_mm.instance_count = count
+
+	# Shared material with per-instance color and subtle emission
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.emission_enabled = true
+	mat.emission_energy_multiplier = 0.3
+
+	_word_mmi = MultiMeshInstance3D.new()
+	_word_mmi.name = "WordCloud"
+	_word_mmi.multimesh = _word_mm
+	_word_mmi.material_override = mat
+	add_child(_word_mmi)
+	_created_nodes.append(_word_mmi)
+
+	# Fill instances and create labels
+	for i in count:
+		var word = words[i]
 		var data = WORD_DATA[word]
-		
-		var sphere_mesh = SphereMesh.new()
-		sphere_mesh.radius = word_scale
-		sphere_mesh.height = word_scale * 2
-		
-		var node = MeshInstance3D.new()
-		node.name = "Word_" + word
-		node.mesh = sphere_mesh
-		
-		var mat = StandardMaterial3D.new()
+		var pos = data.pos * display_size
+
+		var color: Color
 		match data.category:
 			"gender_m":
-				mat.albedo_color = male_color
+				color = male_color
 			"gender_f":
-				mat.albedo_color = female_color
+				color = female_color
 			"profession":
-				mat.albedo_color = profession_color
+				color = profession_color
 			"trait":
-				mat.albedo_color = neutral_color
-		
-		mat.emission_enabled = true
-		mat.emission = mat.albedo_color
-		mat.emission_energy_multiplier = 0.3
-		node.material_override = mat
-		
-		node.position = data.pos * display_size
-		node.visible = false
-		add_child(node)
-		
+				color = neutral_color
+			_:
+				color = neutral_color
+
+		# Start hidden (zero scale)
+		var xf := Transform3D()
+		xf.origin = pos
+		xf = xf.scaled_local(Vector3.ZERO)
+		_word_mm.set_instance_transform(i, xf)
+		_word_mm.set_instance_color(i, color)
+
 		var label = Label3D.new()
 		label.text = word
 		label.pixel_size = 0.0015
 		label.font_size = 16
-		label.position = data.pos * display_size + Vector3(0, word_scale * 1.5, 0)
+		label.position = pos + Vector3(0, word_scale * 1.5, 0)
 		label.visible = false
-		label.modulate = mat.albedo_color
+		label.modulate = color
 		add_child(label)
-		
-		_word_nodes[word] = {"sphere": node, "label": label, "data": data}
+		_created_nodes.append(label)
+
+		_word_nodes[word] = {"index": i, "label": label, "data": data, "pos": pos}
 
 func _create_connections():
 	_connection_lines = ImmediateMesh.new()
@@ -200,6 +247,7 @@ func _create_connections():
 	_connection_instance.material_override = mat
 	
 	add_child(_connection_instance)
+	_created_nodes.append(_connection_instance)
 
 func _create_vr_controls():
 	_control_panel = Node3D.new()
@@ -207,7 +255,8 @@ func _create_vr_controls():
 	_control_panel.position = Vector3(0, 0.04, display_size * 0.6 + 0.12)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
-	
+	_created_nodes.append(_control_panel)
+
 	# Panel backing
 	var panel_back = MeshInstance3D.new()
 	var panel_mesh = BoxMesh.new()
@@ -254,16 +303,25 @@ func _add_button_label(btn: Node, text: String):
 	btn.add_child(lbl)
 
 func _show_analogy():
+	# Hide all: zero-scale transform and hide labels
 	for word in _word_nodes.keys():
-		_word_nodes[word].sphere.visible = false
-		_word_nodes[word].label.visible = false
-	
+		var info = _word_nodes[word]
+		var xf := Transform3D()
+		xf.origin = info.pos
+		xf = xf.scaled_local(Vector3.ZERO)
+		_word_mm.set_instance_transform(info.index, xf)
+		info.label.visible = false
+
 	var analogy = ANALOGIES.get(analogy_type, ANALOGIES[0])
-	
+
+	# Show selected: restore full-scale transform
 	for word in analogy.words:
 		if _word_nodes.has(word):
-			_word_nodes[word].sphere.visible = true
-			_word_nodes[word].label.visible = true
+			var info = _word_nodes[word]
+			var xf := Transform3D()
+			xf.origin = info.pos
+			_word_mm.set_instance_transform(info.index, xf)
+			info.label.visible = true
 	
 	_title_label.text = analogy.title
 	_equation_label.text = analogy.equation
@@ -301,7 +359,7 @@ func _draw_connections(words: Array):
 
 func _process(delta):
 	if _rotation_enabled:
-		rotation.y += delta * 0.3
+		rotation.y = wrapf(rotation.y + delta * 0.3, 0.0, TAU)
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -314,3 +372,12 @@ func _input(event):
 				analogy_type = 2
 			KEY_SPACE:
 				_rotation_enabled = not _rotation_enabled
+
+func _exit_tree():
+	for node in _created_nodes:
+		if is_instance_valid(node):
+			node.queue_free()
+	_created_nodes.clear()
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

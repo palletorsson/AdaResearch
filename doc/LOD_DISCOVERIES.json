@@ -1,0 +1,54 @@
+{
+  "version": "1.0",
+  "discoveries": [
+    {
+      "timestamp": "2026-03-29T08:15:52.982449+00:00",
+      "topic": "LOD system",
+      "insight": "Built 3-tool LOD onboarding: generator, query, session writer. Tree has 55 sequences, 498 maps, 1670 artifacts.",
+      "lod": 0
+    },
+    {
+      "timestamp": "2026-03-29T21:15:51.391176+00:00",
+      "topic": "map_building",
+      "insight": "Maps are narrative spaces: entry(spawn+context) → teaching(main artifact) → exploration(related artifacts) → reflection(text+darkness) → exit(teleporter). Artifact params: name:rotation:y_offset. Structure 0=void 1=floor 2+=wall. Utilities: sp/t/ds/r/m:x:y:z:delay/an:angle/sub:scene/3t:text. The Map Studio at /map-studio understands all 3 layers.",
+      "lod": 2,
+      "tags": [
+        "map",
+        "building",
+        "narrative",
+        "structure",
+        "utilities",
+        "interactables"
+      ]
+    },
+    {
+      "timestamp": "2026-03-29T21:16:06.034423+00:00",
+      "topic": "map_building",
+      "insight": "Maps are narrative spaces with 5 phases. Structure 0=void 1=floor 2+=wall. Artifact params name:rotation:y_offset. Map Studio at /map-studio.",
+      "lod": 2,
+      "tags": [
+        "map",
+        "building",
+        "narrative"
+      ]
+    },
+    {
+      "timestamp": "2026-03-29T21:55:39.531462+00:00",
+      "topic": "primitives_maps_study",
+      "insight": "All 11 primitives maps studied. Design language: 7 wide, 10-35 deep. Spawn at (0,0), facing set at (0,6). Dark sphere at center. Teleporter on void. Text at bottom. Walls (S=2) used as artifact pedestals not rooms. Grouping via #fillhole. Average 8-13 placed items per map.",
+      "lod": 2,
+      "tags": [
+        "map",
+        "primitives",
+        "design",
+        "study"
+      ]
+    },
+    {
+      "timestamp": "2026-04-11T08:34:39.273912+00:00",
+      "topic": "pipeline_scorer_validation_timeout",
+      "insight": "Pipeline scorer validation stage runs pathfinder with 10s subprocess timeout per map. Maps pass individually but batch scoring reports 0% because cumulative processing exceeds limits. Fix: increase timeout or cache validation results.",
+      "lod": 3
+    }
+  ]
+}

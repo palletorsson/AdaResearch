@@ -4,8 +4,19 @@
 # 17 wallpaper symmetry groups. VR buttons for palette, group cycling,
 # mirror/rotate operations.
 #
-# Layout: XY back-panel (like control_board), carpet on floor below.
+# Layout: XY back-panel (rotated 180 to face player), carpet on floor.
 # Reuses WallpaperGroups.get_symmetric_color() for tiling.
+
+# @identity
+# essence: symmetry_group(domain[x][y]) -> infinite_carpet — paint a small NxN grid, select one of 17 wallpaper groups, watch the GPU tile it into an infinite-seeming carpet via symmetry operators
+# desire: to touch cells on the upright panel with VR hands and see the floor carpet update in real time — to cycle through P1 to P6M and feel how constraint multiplies a fragment into architecture
+# critical_parameter: wallpaper_group — the symmetry operator that transforms a 4x4 domain into a universe; 17 groups, exactly 17, a hard constraint the universe imposes on 2D repetition
+# triggers: palette buttons select paint color; group cycle button advances through all 17 groups; flip X/Y and rotate CW transform the domain; clear resets to blank; touch painting via Area3D collision
+# emerges: the GPU shader carpet (wallpaper_tile.gdshader) with grout, noise distort, and aging parameters produces worn Italian mosaic effects from a handful of colored cells
+# needs: [has] push_button for group/flip/rotate/clear; [has] push_button palette selectors with emission indicators; [has] touch-paint via Area3D; [missing] no slider_horizontal controls
+# relationships: the hands-on synthesis station for the entire patterngeneration sequence; carpet uses WallpaperGroups from tiling_system; connects to Cove_Display_Gallery (gallery of all 17)
+# truth: structure does not emerge from complexity — it emerges from constraint applied to the almost-nothing
+
 extends Node3D
 class_name PatternMakerStation
 
@@ -34,8 +45,18 @@ const COL_GRID_LINE := Color(0.3, 0.3, 0.35, 0.8)
 @export var cell_size: float = 0.06     # Meters per cell on panel
 @export var panel_width: float = 1.2    # XY panel width
 @export var panel_height: float = 0.9   # XY panel height
-@export var carpet_world_size: float = 3.0  # Carpet side length in meters
-@export var carpet_repeats: int = 8     # How many domain repeats across carpet
+@export var carpet_world_size: float = 4.0  # Carpet side length in meters
+@export var carpet_repeats: int = 10    # How many domain repeats across carpet
+@export var use_gpu_tiling: bool = true # Use GPU shader for carpet tiling (faster + grout/distort)
+@export var grout_width: float = 0.02   # Gap between tiles (GPU mode only)
+@export var noise_distort: float = 0.0  # Organic irregularity (GPU mode only)
+# Aging & Weathering (GPU mode only)
+@export var wear_amount: float = 0.0    # Edge erosion + surface scuffing
+@export var dust_amount: float = 0.0    # Accumulated dust/dirt in crevices
+@export var fade_amount: float = 0.0    # Sun/UV color fading (desaturation)
+@export var crack_density: float = 0.0  # Micro-fractures and crazing
+@export var stain_amount: float = 0.0   # Water/mineral staining
+@export var chip_amount: float = 0.0    # Missing tesserae / chipped areas
 
 # ── Groups ───────────────────────────────────────────────────────────
 const GROUP_ORDER: Array = [
@@ -57,10 +78,13 @@ var _group_index: int = 0           # Index into GROUP_ORDER
 var _current_group: WallpaperGroups.Group = WallpaperGroups.Group.P1
 
 # ── Scene refs ───────────────────────────────────────────────────────
+var _panel_root: Node3D
 var _cell_meshes: Array = []        # 2D array of MeshInstance3D
 var _cell_materials: Array = []     # 2D array of StandardMaterial3D
 var _carpet_mesh: MeshInstance3D
-var _carpet_material: StandardMaterial3D
+var _carpet_material: StandardMaterial3D  # CPU fallback
+var _carpet_shader_material: ShaderMaterial  # GPU tiling
+var _domain_texture: ImageTexture  # Small domain texture for GPU shader
 var _group_label: Label3D
 var _size_label: Label3D
 var _palette_indicators: Array[MeshInstance3D] = []
@@ -74,6 +98,14 @@ var _last_painted_cell: Vector2i = Vector2i(-1, -1)
 
 func _ready() -> void:
 	_init_grid_data()
+
+	# Panel root — rotated 180 to face the player, raised up
+	_panel_root = Node3D.new()
+	_panel_root.name = "PanelRoot"
+	_panel_root.rotation_degrees.y = 180
+	_panel_root.position.y = 0.3
+	add_child(_panel_root)
+
 	_build_back_panel()
 	_build_edit_grid()
 	_build_palette()
@@ -100,6 +132,24 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("wallpaper_group"):
 		_group_index = clampi(int(config_data["wallpaper_group"]), 0, GROUP_ORDER.size() - 1)
 		_current_group = GROUP_ORDER[_group_index]
+	if config_data.has("use_gpu_tiling"):
+		use_gpu_tiling = bool(config_data["use_gpu_tiling"])
+	if config_data.has("grout_width"):
+		grout_width = clampf(float(config_data["grout_width"]), 0.0, 0.1)
+	if config_data.has("noise_distort"):
+		noise_distort = clampf(float(config_data["noise_distort"]), 0.0, 0.1)
+	if config_data.has("wear_amount"):
+		wear_amount = clampf(float(config_data["wear_amount"]), 0.0, 1.0)
+	if config_data.has("dust_amount"):
+		dust_amount = clampf(float(config_data["dust_amount"]), 0.0, 1.0)
+	if config_data.has("fade_amount"):
+		fade_amount = clampf(float(config_data["fade_amount"]), 0.0, 1.0)
+	if config_data.has("crack_density"):
+		crack_density = clampf(float(config_data["crack_density"]), 0.0, 1.0)
+	if config_data.has("stain_amount"):
+		stain_amount = clampf(float(config_data["stain_amount"]), 0.0, 1.0)
+	if config_data.has("chip_amount"):
+		chip_amount = clampf(float(config_data["chip_amount"]), 0.0, 1.0)
 
 # ═══════════════════════════════════════════════════════════════════
 # DATA
@@ -130,12 +180,12 @@ func _build_back_panel() -> void:
 	plate.mesh = mesh
 	plate.material_override = _mat(COL_PANEL, 0.3, 0.7)
 	plate.position = Vector3(0, panel_height * 0.5, -0.02)
-	add_child(plate)
+	_panel_root.add_child(plate)
 
 func _build_edit_grid() -> void:
 	_edit_grid_container = Node3D.new()
 	_edit_grid_container.name = "EditGrid"
-	add_child(_edit_grid_container)
+	_panel_root.add_child(_edit_grid_container)
 
 	var grid_total := tile_size * cell_size
 	var start_x := -grid_total / 2.0
@@ -182,7 +232,7 @@ func _build_edit_grid() -> void:
 	title.font_size = 14
 	title.modulate = Color(0.7, 0.7, 0.7)
 	title.position = Vector3(0, panel_height - 0.03, 0.01)
-	add_child(title)
+	_panel_root.add_child(title)
 
 func _build_grid_lines(start_x: float, start_y: float, total: float) -> void:
 	var line_mat := StandardMaterial3D.new()
@@ -240,7 +290,7 @@ func _build_palette() -> void:
 	lbl.font_size = 8
 	lbl.modulate = Color(0.5, 0.5, 0.5)
 	lbl.position = Vector3(start_x - 0.02, base_y + 0.04, 0.01)
-	add_child(lbl)
+	_panel_root.add_child(lbl)
 
 	_palette_indicators.clear()
 	for i in PALETTE.size():
@@ -250,7 +300,7 @@ func _build_palette() -> void:
 		btn.scale = Vector3(0.5, 0.5, 0.5)
 		btn.pressed_color = PALETTE[i]
 		btn.released_color = PALETTE[i].darkened(0.3)
-		add_child(btn)
+		_panel_root.add_child(btn)
 		var area := btn.get_node_or_null("InteractableAreaButton")
 		if area:
 			var idx := i
@@ -269,7 +319,7 @@ func _build_palette() -> void:
 		ind_mat.albedo_color = PALETTE[i].darkened(0.5)
 		indicator.material_override = ind_mat
 		indicator.position = Vector3(start_x + i * spacing, base_y - 0.035, 0.02)
-		add_child(indicator)
+		_panel_root.add_child(indicator)
 		_palette_indicators.append(indicator)
 
 func _build_controls() -> void:
@@ -283,7 +333,7 @@ func _build_controls() -> void:
 	group_btn.scale = Vector3(0.6, 0.6, 0.6)
 	group_btn.pressed_color = Color(0.3, 0.6, 0.9)
 	group_btn.released_color = Color(0.15, 0.3, 0.45)
-	add_child(group_btn)
+	_panel_root.add_child(group_btn)
 	_connect_btn(group_btn, _cycle_group)
 
 	_group_label = Label3D.new()
@@ -292,7 +342,7 @@ func _build_controls() -> void:
 	_group_label.font_size = 12
 	_group_label.modulate = Color(0.3, 0.7, 1.0)
 	_group_label.position = Vector3(base_x, base_y - 0.04, 0.01)
-	add_child(_group_label)
+	_panel_root.add_child(_group_label)
 
 	var group_lbl := Label3D.new()
 	group_lbl.text = "GROUP"
@@ -300,7 +350,7 @@ func _build_controls() -> void:
 	group_lbl.font_size = 7
 	group_lbl.modulate = Color(0.4, 0.4, 0.4)
 	group_lbl.position = Vector3(base_x, base_y + 0.035, 0.01)
-	add_child(group_lbl)
+	_panel_root.add_child(group_lbl)
 
 	# ── Mirror X ──
 	var mx_btn := PUSH_BUTTON.instantiate()
@@ -309,7 +359,7 @@ func _build_controls() -> void:
 	mx_btn.scale = Vector3(0.5, 0.5, 0.5)
 	mx_btn.pressed_color = Color(0.8, 0.6, 0.2)
 	mx_btn.released_color = Color(0.4, 0.3, 0.1)
-	add_child(mx_btn)
+	_panel_root.add_child(mx_btn)
 	_connect_btn(mx_btn, _mirror_x)
 	_add_btn_label(mx_btn, "FLIP X")
 
@@ -320,7 +370,7 @@ func _build_controls() -> void:
 	my_btn.scale = Vector3(0.5, 0.5, 0.5)
 	my_btn.pressed_color = Color(0.8, 0.6, 0.2)
 	my_btn.released_color = Color(0.4, 0.3, 0.1)
-	add_child(my_btn)
+	_panel_root.add_child(my_btn)
 	_connect_btn(my_btn, _mirror_y)
 	_add_btn_label(my_btn, "FLIP Y")
 
@@ -331,7 +381,7 @@ func _build_controls() -> void:
 	rot_btn.scale = Vector3(0.5, 0.5, 0.5)
 	rot_btn.pressed_color = Color(0.2, 0.7, 0.5)
 	rot_btn.released_color = Color(0.1, 0.35, 0.25)
-	add_child(rot_btn)
+	_panel_root.add_child(rot_btn)
 	_connect_btn(rot_btn, _rotate_cw)
 	_add_btn_label(rot_btn, "ROTATE")
 
@@ -342,7 +392,7 @@ func _build_controls() -> void:
 	clr_btn.scale = Vector3(0.5, 0.5, 0.5)
 	clr_btn.pressed_color = Color(0.8, 0.2, 0.2)
 	clr_btn.released_color = Color(0.4, 0.1, 0.1)
-	add_child(clr_btn)
+	_panel_root.add_child(clr_btn)
 	_connect_btn(clr_btn, _clear_domain)
 	_add_btn_label(clr_btn, "CLEAR")
 
@@ -354,26 +404,55 @@ func _build_carpet() -> void:
 	quad.size = Vector2(carpet_world_size, carpet_world_size)
 	_carpet_mesh.mesh = quad
 
-	# Lie flat on the floor in front of the panel
+	# Lie flat on the floor, centered under the station
 	_carpet_mesh.rotation_degrees.x = -90
-	_carpet_mesh.position = Vector3(0, 0.005, carpet_world_size * 0.5 + 0.3)
+	_carpet_mesh.position = Vector3(0, 0.005, 0)
 
-	_carpet_material = StandardMaterial3D.new()
-	_carpet_material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
-	_carpet_material.roughness = 0.9
-	_carpet_material.metallic = 0.0
-	_carpet_mesh.material_override = _carpet_material
+	if use_gpu_tiling:
+		# GPU path: shader does all tiling on the GPU
+		var shader := load("res://commons/resourses/shaders/wallpaper_tile.gdshader") as Shader
+		if shader:
+			_carpet_shader_material = ShaderMaterial.new()
+			_carpet_shader_material.shader = shader
+			_carpet_shader_material.set_shader_parameter("tile_scale", float(carpet_repeats))
+			_carpet_shader_material.set_shader_parameter("wallpaper_group", _group_index)
+			_carpet_shader_material.set_shader_parameter("grout_width", grout_width)
+			_carpet_shader_material.set_shader_parameter("grout_color", Vector3(0.1, 0.1, 0.1))
+			_carpet_shader_material.set_shader_parameter("grout_softness", 0.005)
+			_carpet_shader_material.set_shader_parameter("roughness", 0.9)
+			_carpet_shader_material.set_shader_parameter("noise_distort", noise_distort)
+			# Aging & Weathering
+			_carpet_shader_material.set_shader_parameter("wear_amount", wear_amount)
+			_carpet_shader_material.set_shader_parameter("dust_amount", dust_amount)
+			_carpet_shader_material.set_shader_parameter("fade_amount", fade_amount)
+			_carpet_shader_material.set_shader_parameter("crack_density", crack_density)
+			_carpet_shader_material.set_shader_parameter("stain_amount", stain_amount)
+			_carpet_shader_material.set_shader_parameter("chip_amount", chip_amount)
+			_carpet_mesh.material_override = _carpet_shader_material
+		else:
+			push_warning("[PatternMaker] GPU shader not found, falling back to CPU tiling")
+			use_gpu_tiling = false
+
+	if not use_gpu_tiling:
+		# CPU fallback: build full tiled texture per update
+		_carpet_material = StandardMaterial3D.new()
+		_carpet_material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		_carpet_material.roughness = 0.9
+		_carpet_material.metallic = 0.0
+		_carpet_mesh.material_override = _carpet_material
 
 	add_child(_carpet_mesh)
 
 func _build_capture_camera() -> void:
-	# Built-in camera for screenshot capture — positioned to show
-	# both the upright panel and the floor carpet in one shot.
 	var cam := Camera3D.new()
 	cam.name = "CaptureCamera"
 	cam.fov = 60.0
-	cam.position = Vector3(0.0, 0.5, 2.0)
-	cam.look_at(Vector3(0.0, 0.2, 0.8), Vector3.UP)
+	# Position in front of panel, looking at center of station
+	# Panel faces -Z (panel_root rotated 180 on Y), carpet on floor
+	cam.position = Vector3(1.5, 1.8, 2.5)
+	# Set rotation manually (look_at requires being in tree)
+	# Looking from front-right toward origin at roughly y=0.3
+	cam.rotation_degrees = Vector3(-30, 20, 0)
 	add_child(cam)
 
 func _build_touch_area() -> void:
@@ -389,7 +468,7 @@ func _build_touch_area() -> void:
 
 	var collision := CollisionShape3D.new()
 	var shape := BoxShape3D.new()
-	shape.size = Vector3(grid_total + 0.02, grid_total + 0.02, 0.06)
+	shape.size = Vector3(grid_total + 0.02, grid_total + 0.02, 0.10)
 	collision.shape = shape
 	collision.position = Vector3(
 		0,
@@ -397,7 +476,7 @@ func _build_touch_area() -> void:
 		0.01
 	)
 	_touch_area.add_child(collision)
-	add_child(_touch_area)
+	_panel_root.add_child(_touch_area)
 
 # ═══════════════════════════════════════════════════════════════════
 # INTERACTIONS
@@ -497,7 +576,30 @@ func _refresh_grid_visuals() -> void:
 # CARPET TEXTURE
 # ═══════════════════════════════════════════════════════════════════
 
+func _update_domain_texture() -> void:
+	## Create a small NxN texture from the grid data and palette for GPU shader.
+	var image := Image.create(tile_size, tile_size, false, Image.FORMAT_RGBA8)
+	for y in tile_size:
+		for x in tile_size:
+			var color_idx: int = _grid_data[y][x] if y < _grid_data.size() and x < _grid_data[y].size() else 0
+			var color: Color = PALETTE[color_idx] if color_idx < PALETTE.size() else Color.WHITE
+			image.set_pixel(x, y, color)
+	if _domain_texture:
+		_domain_texture.update(image)
+	else:
+		_domain_texture = ImageTexture.create_from_image(image)
+	# Nearest-neighbor filtering for crisp pixel art tiles
+	_carpet_shader_material.set_shader_parameter("domain_texture", _domain_texture)
+
 func _update_carpet() -> void:
+	if use_gpu_tiling and _carpet_shader_material:
+		# GPU path: update domain texture + uniforms (fast!)
+		_update_domain_texture()
+		_carpet_shader_material.set_shader_parameter("wallpaper_group", _group_index)
+		_carpet_shader_material.set_shader_parameter("tile_scale", float(carpet_repeats))
+		return
+
+	# CPU fallback: rebuild full tiled texture
 	var tex_size: int = carpet_repeats * tile_size
 	if tex_size <= 0:
 		return

@@ -23,16 +23,16 @@ var _time: float = 0.0
 # Bone trackers
 var _bone_trackers: Dictionary = {}
 
-func _ready():
+func _ready() -> void:
 	_load_player_model()
 	_setup_bone_trackers()
 	_update_body_visibility()
 
-func _update_body_visibility():
+func _update_body_visibility() -> void:
 	if _player_model:
 		_player_model.visible = show_body
 
-func _load_player_model():
+func _load_player_model() -> void:
 	var player_scene = load("res://algorithms/wavefunctions/dancing_body/player.glb")
 	if player_scene:
 		_player_model = player_scene.instantiate()
@@ -53,7 +53,7 @@ func _find_skeleton(node: Node) -> Skeleton3D:
 			return result
 	return null
 
-func _setup_animation_tree():
+func _setup_animation_tree() -> void:
 	# Create a simple animation tree that cycles through animations
 	_animation_tree = AnimationTree.new()
 	add_child(_animation_tree)
@@ -63,7 +63,7 @@ func _setup_animation_tree():
 		if anim_player:
 			_animation_tree.anim_player = anim_player.get_path()
 
-func _setup_bone_trackers():
+func _setup_bone_trackers() -> void:
 	if not _skeleton:
 		return
 		
@@ -85,7 +85,7 @@ func _setup_bone_trackers():
 				"tracker": tracker
 			}
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_time += delta
 
 	# Apply sine/cosine animation to bones
@@ -105,7 +105,7 @@ func _process(delta):
 
 			tracker.global_position = bone_global_pos
 
-func _apply_sine_cosine_animation():
+func _apply_sine_cosine_animation() -> void:
 	if not _skeleton:
 		return
 
@@ -139,3 +139,12 @@ func _apply_sine_cosine_animation():
 
 		# Update bone pose
 		_skeleton.set_bone_pose(bone_idx, bone_pose)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

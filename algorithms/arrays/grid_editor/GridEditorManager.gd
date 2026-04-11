@@ -260,3 +260,12 @@ func add_object(object_type: String, grid_pos: Vector3i) -> void:
 			add_cube_at_position(grid_pos)
 		_:
 			push_warning("GridEditorManager: Unknown object type '%s'" % object_type)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

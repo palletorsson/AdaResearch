@@ -1,3 +1,13 @@
+# @identity
+# essence: y(x,t) = A*sin(kx - omega*t) -- ribbon of 20 boxes riding a traveling sine wave
+# desire: box segments along a sine wave, frequency climbing toward resonance, firing at the peak
+# critical_parameter: _base_frequency / _phase -- frequency determines wave speed; burst fires at peaks
+# triggers: continuous phase advancement; segments follow sine positions; burst at wave peaks
+# emerges: the wave IS the creature -- not riding a wave but being one, each segment a traveling node
+# needs: HazardCreatureBase [has]; 20-segment ribbon [has]; sine positioning [has]; burst attack [has]; VR interaction [missing]
+# relationships: embodies wavefunctions sequence; pairs with resonance_chamber (traveling vs standing)
+# truth: the creature does not ride the wave -- it IS the wave, and the wave fires at resonance.
+
 extends HazardCreatureBase
 class_name WaveRider
 ## A ribbon of 20 BoxMesh segments arranged in a sine wave.

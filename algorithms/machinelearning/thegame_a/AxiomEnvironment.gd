@@ -4,7 +4,7 @@ class_name AxiomEnvironment
 # The Axiom Garden - Iteration 8: The Aesthetic
 # Sets up the neon-void atmosphere.
 
-func _ready():
+func _ready() -> void:
 	environment = Environment.new()
 	
 	# 1. Background: The Void
@@ -22,3 +22,6 @@ func _ready():
 	environment.volumetric_fog_enabled = true
 	environment.volumetric_fog_density = 0.01
 	environment.volumetric_fog_albedo = Color(0.1, 0.2, 0.3)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -240,3 +240,12 @@ func apply_settings(settings: Dictionary) -> void:
 		reverb_slider.move_slider(settings.reverb)
 	
 	print("Applied custom settings: ", settings)# xr_slider_control_panel.gd - Scene setup for XR slider-controlled pickup sounds
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

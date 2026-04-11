@@ -1,4 +1,14 @@
-﻿extends CanvasLayer
+extends CanvasLayer
+
+# @identity
+# essence: documentation panel for Reynolds' 1987 boids algorithm — separation + alignment + cohesion described in text and connected to a live BoidManager instance
+# desire: to read the three rules and immediately look up to see them happening — the gap between description and phenomenon collapsed into the same VR moment
+# critical_parameter: show_algorithm — with algorithm text visible, learners read the rules while watching them; without it, the behavior looks like magic with no explanation
+# triggers: the panel connects to the live BoidManager in the scene, so parameter changes in the manager are reflected in the UI context — explanation and simulation stay in sync
+# emerges: the question "why does alignment make them look alive?" — the documentation exists to be outrun by the learner's own observation
+# needs: [missing] no VR interaction; panel is 2D CanvasLayer projected into VR viewport — cannot be grabbed or repositioned by VR controller
+# relationships: companion to boid_manager (documents what it simulates); boids_2d_in_3d projects this panel into a 3D viewport quad for VR placement
+# truth: the rules are three lines of math; the flock is what those lines mean when they meet each other a thousand times per second
 
 # This script creates a 2D UI panel that can be displayed in your VR environment
 # with information about boids algorithms, history, and controls
@@ -37,7 +47,7 @@ var panel_position: Vector2 = Vector2(100, 100)
 var dragging: bool = false
 var drag_start_pos: Vector2
 
-func _ready():
+func _ready() -> void:
 	# Don't show until requested if not set to show on start
 	if not show_on_start:
 		visible = false
@@ -73,7 +83,7 @@ func find_node_with_script(node, script_name):
 	
 	return null
 
-func setup_ui():
+func setup_ui() -> void:
 	# Main panel
 	main_panel = $Panel
 	main_panel.custom_minimum_size = Vector2(panel_width, panel_height)
@@ -97,7 +107,7 @@ func setup_ui():
 	# Generate content
 	generate_content()
 
-func generate_content():
+func generate_content() -> void:
 	clear_content()
 	
 	# Add custom description if provided
@@ -113,11 +123,11 @@ func generate_content():
 		add_algorithm_section()
 	
 
-func clear_content():
+func clear_content() -> void:
 	for child in content_container.get_children():
 		child.queue_free()
 
-func add_section(title, text):
+func add_section(title, text) -> void:
 	# Add heading
 	var heading = Label.new()
 	heading.text = title
@@ -143,7 +153,7 @@ func add_section(title, text):
 	bottom_spacer.custom_minimum_size = Vector2(0, 20)
 	content_container.add_child(bottom_spacer)
 
-func add_history_section():
+func add_history_section() -> void:
 	var history_text = """
 Craig Reynolds developed the Boids algorithm in 1986 while working at Symbolics, a computer manufacturer. The name "Boids" is a play on "bird-oid objects" and the New York/New Jersey accent pronunciation of "birds."
 
@@ -157,7 +167,7 @@ Boids represents an early example of artificial life simulation, where complex g
 """
 	add_section("Historical Context", history_text)
 
-func add_algorithm_section():
+func add_algorithm_section() -> void:
 	var algorithm_text = """
 The Boids algorithm simulates flocking behavior using three simple steering rules:
 
@@ -195,10 +205,10 @@ func get_param(node, param_name, default_value):
 		return node.get(param_name)
 	return default_value
 
-func _on_close_button_pressed():
+func _on_close_button_pressed() -> void:
 	hide()
 
-func _on_title_bar_input(event):
+func _on_title_bar_input(event) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			dragging = event.pressed
@@ -230,14 +240,14 @@ func _process(_delta):
 			main_panel.position.y = clamp(main_panel.position.y, 0, get_viewport().size.y - panel_height)
 
 
-func toggle():
+func toggle() -> void:
 	if is_visible:
 		hide()
 	else:
 		show()
 
 # Public method to update a specific section
-func update_section(section_name, new_text):
+func update_section(section_name, new_text) -> void:
 	# Regenerate content with new text
 	match section_name:
 		"description":
@@ -245,3 +255,12 @@ func update_section(section_name, new_text):
 		# Add other section updates as needed
 	
 	generate_content()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

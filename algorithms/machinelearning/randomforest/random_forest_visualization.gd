@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: prediction = majority_vote(tree₁(x), tree₂(x), ..., tree_n(x)); each tree trained on bootstrap sample with random feature subsets
+# desire: watch a forest of decision trees grow, each different, each voting — democracy of weak learners producing strong predictions
+# critical_parameter: num_trees — more trees reduce variance; the wisdom of crowds effect
+# triggers: auto_start grows trees one by one; bootstrap sampling shows how each tree sees different data; feature importance emerges
+# emerges: the ensemble is wiser than any individual tree — diversity plus aggregation equals accuracy
+# needs: VR controls [missing] — exported params but no spatial sliders
+# relationships: depends on enhanced_kmeans (trees split data like clustering); contrasts svm_visualization (one optimal boundary vs many approximate ones)
+# truth: a forest of imperfect decision-makers can be more reliable than any single expert — this is the mathematics of collective intelligence
+
 # =============================================================================
 # Random Forest Visualization — Collective Intelligence & Democratic Decisions
 # =============================================================================
@@ -89,7 +99,7 @@ class DecisionTreeNode:
 	var node_id: int = 0
 	var gini_impurity: float = 0.0
 	
-	func _init(id: int = 0, d: int = 0):
+	func _init(id: int = 0, d: int = 0) -> void:
 		node_id = id
 		depth = d
 
@@ -102,14 +112,14 @@ class DecisionTree:
 	var tree_id: int = 0
 	var next_node_id: int = 0
 	
-	func _init(id: int, max_d: int, min_samples: int, max_feat: int):
+	func _init(id: int, max_d: int, min_samples: int, max_feat: int) -> void:
 		tree_id = id
 		max_depth = max_d
 		min_samples_split = min_samples
 		max_features = max_feat
 		next_node_id = 0
 	
-	func train(data: Array, labels: Array, feature_indices: Array):
+	func train(data: Array, labels: Array, feature_indices: Array) -> void:
 		root = build_tree(data, labels, feature_indices, 0)
 	
 	func build_tree(data: Array, labels: Array, feature_indices: Array, depth: int) -> DecisionTreeNode:
@@ -273,10 +283,10 @@ class DecisionTree:
 			return predict_recursive(node.right_child, sample)
 
 # Main RandomForest class methods
-func _init():
+func _init() -> void:
 	name = "RandomForest_Visualization"
 
-func _ready():
+func _ready() -> void:
 	setup_ui()
 	setup_timer()
 	setup_forest_visualization()
@@ -286,7 +296,7 @@ func _ready():
 	if auto_start:
 		call_deferred("start_training")
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create comprehensive UI for Random Forest visualization"""
 	ui_display = CanvasLayer.new()
 	add_child(ui_display)
@@ -309,14 +319,14 @@ func setup_ui():
 	
 	update_ui()
 
-func setup_timer():
+func setup_timer() -> void:
 	"""Setup timer for training animation"""
 	training_timer = Timer.new()
 	training_timer.wait_time = training_speed
 	training_timer.timeout.connect(_on_training_timer_timeout)
 	add_child(training_timer)
 
-func setup_forest_visualization():
+func setup_forest_visualization() -> void:
 	"""Setup the 3D forest visualization container"""
 	forest_root = Node3D.new()
 	forest_root.name = "Forest_Root"
@@ -339,7 +349,7 @@ func _build_3d_labels() -> void:
 	_stats_label_3d.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(_stats_label_3d)
 
-func generate_training_data():
+func generate_training_data() -> void:
 	"""Generate training data with multiple features"""
 	training_data.clear()
 	training_labels.clear()
@@ -363,7 +373,7 @@ func generate_training_data():
 	create_data_visualization()
 	print("Generated ", training_data.size(), " training samples with ", num_features, " features")
 
-func create_data_visualization():
+func create_data_visualization() -> void:
 	"""Create 3D visualization of training data"""
 	clear_data_points()
 	
@@ -402,7 +412,7 @@ func create_data_point(position: Vector3, label: int) -> MeshInstance3D:
 	sphere.position = position
 	return sphere
 
-func start_training():
+func start_training() -> void:
 	"""Start Random Forest training process"""
 	if is_training:
 		return
@@ -422,7 +432,7 @@ func start_training():
 	
 	print("Starting Random Forest training with ", num_trees, " trees")
 
-func _on_training_timer_timeout():
+func _on_training_timer_timeout() -> void:
 	"""Handle training timer timeout"""
 	if not is_training:
 		return
@@ -433,7 +443,7 @@ func _on_training_timer_timeout():
 	else:
 		finalize_training()
 
-func train_single_tree(tree_index: int):
+func train_single_tree(tree_index: int) -> void:
 	"""Train a single decision tree"""
 	# Create bootstrap sample
 	var bootstrap_data = []
@@ -475,14 +485,14 @@ func train_single_tree(tree_index: int):
 	print("Trained tree ", tree_index + 1, "/", num_trees)
 	update_ui()
 
-func train_all_trees():
+func train_all_trees() -> void:
 	"""Train all trees without animation"""
 	for i in range(num_trees):
 		train_single_tree(i)
 	
 	finalize_training()
 
-func finalize_training():
+func finalize_training() -> void:
 	"""Finalize Random Forest training"""
 	is_training = false
 	training_complete = true
@@ -510,7 +520,7 @@ func finalize_training():
 	print("Random Forest training completed")
 	update_ui()
 
-func create_tree_visualization(tree: DecisionTree, tree_index: int):
+func create_tree_visualization(tree: DecisionTree, tree_index: int) -> void:
 	"""Create 3D visualization of a decision tree"""
 	var tree_root = Node3D.new()
 	tree_root.name = "Tree_" + str(tree_index)
@@ -537,7 +547,7 @@ func create_tree_visualization(tree: DecisionTree, tree_index: int):
 	
 	tree_visualizations.append(tree_root)
 
-func create_tree_nodes(node: DecisionTreeNode, parent: Node3D, position: Vector3, color: Color, level: int):
+func create_tree_nodes(node: DecisionTreeNode, parent: Node3D, position: Vector3, color: Color, level: int) -> void:
 	"""Recursively create tree node visualizations"""
 	if not node:
 		return
@@ -589,7 +599,7 @@ func create_tree_nodes(node: DecisionTreeNode, parent: Node3D, position: Vector3
 		# Create connection line
 		create_connection_line(node_mesh, right_pos, color)
 
-func create_connection_line(from_node: MeshInstance3D, to_position: Vector3, color: Color):
+func create_connection_line(from_node: MeshInstance3D, to_position: Vector3, color: Color) -> void:
 	"""Create a line connecting tree nodes"""
 	var line = MeshInstance3D.new()
 	var mesh = BoxMesh.new()
@@ -667,7 +677,7 @@ func calculate_feature_importance():
 	print("Feature importance: ", importance_scores)
 	return importance_scores
 
-func calculate_tree_importance(node: DecisionTreeNode, importance_scores: Array):
+func calculate_tree_importance(node: DecisionTreeNode, importance_scores: Array) -> void:
 	"""Recursively calculate importance for a tree"""
 	if not node or node.is_leaf:
 		return
@@ -680,19 +690,19 @@ func calculate_tree_importance(node: DecisionTreeNode, importance_scores: Array)
 	if node.right_child:
 		calculate_tree_importance(node.right_child, importance_scores)
 
-func clear_tree_visualizations():
+func clear_tree_visualizations() -> void:
 	"""Clear all tree visualizations"""
 	for tree_vis in tree_visualizations:
 		tree_vis.queue_free()
 	tree_visualizations.clear()
 
-func clear_data_points():
+func clear_data_points() -> void:
 	"""Clear all data point visualizations"""
 	for point in data_points:
 		point.queue_free()
 	data_points.clear()
 
-func update_ui():
+func update_ui() -> void:
 	"""Update UI with current Random Forest state"""
 	if not ui_display:
 		return
@@ -730,7 +740,7 @@ func update_ui():
 		labels[23].text = "Explores collective decision-making"
 		labels[24].text = "through ensemble learning methods"
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -750,12 +760,12 @@ func _input(event):
 				num_trees = max(num_trees - 1, 1)
 				reset_forest()
 
-func stop_training():
+func stop_training() -> void:
 	"""Stop Random Forest training"""
 	is_training = false
 	training_timer.stop()
 
-func reset_forest():
+func reset_forest() -> void:
 	"""Reset Random Forest and regenerate data"""
 	stop_training()
 	training_complete = false
@@ -765,7 +775,7 @@ func reset_forest():
 	clear_tree_visualizations()
 	generate_training_data()
 
-func toggle_tree_display():
+func toggle_tree_display() -> void:
 	"""Toggle individual tree display"""
 	show_individual_trees = !show_individual_trees
 	
@@ -799,4 +809,13 @@ func get_algorithm_info() -> Dictionary:
 			"num_features": num_features,
 			"class_balance": class_balance
 		}
-	} 
+	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

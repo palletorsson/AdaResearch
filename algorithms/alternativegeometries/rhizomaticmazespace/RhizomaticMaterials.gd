@@ -4,10 +4,10 @@ extends Node
 
 var materials: Dictionary = {}
 
-func _ready():
+func _ready() -> void:
 	create_material_library()
 
-func create_material_library():
+func create_material_library() -> void:
 	"""Create materials for different maze elements"""
 	# Tunnel material
 	var tunnel_mat = StandardMaterial3D.new()

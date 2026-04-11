@@ -26,7 +26,7 @@ func _init(size: Vector3i = Vector3i(32, 32, 32), pos: Vector3 = Vector3.ZERO, s
 	voxel_scale = scale
 	initialize_density_data()
 
-func initialize_density_data():
+func initialize_density_data() -> void:
 	"""Initialize the 3D density array with default values"""
 	density_data = []
 	
@@ -41,7 +41,7 @@ func initialize_density_data():
 	
 	print("VoxelChunk: Initialized %dx%dx%d density grid" % [chunk_size.x + 1, chunk_size.y + 1, chunk_size.z + 1])
 
-func set_density(local_pos: Vector3i, value: float):
+func set_density(local_pos: Vector3i, value: float) -> void:
 	"""Set density value at local voxel position"""
 	if is_valid_position(local_pos):
 		density_data[local_pos.x][local_pos.y][local_pos.z] = clamp(value, 0.0, 1.0)
@@ -68,7 +68,7 @@ func local_to_world(local_pos: Vector3i) -> Vector3:
 	"""Convert local voxel coordinates to world position"""
 	return world_position + Vector3(local_pos) * voxel_scale
 
-func fill_sphere(center: Vector3, radius: float, density: float = 1.0):
+func fill_sphere(center: Vector3, radius: float, density: float = 1.0) -> void:
 	"""Fill a spherical region with specified density"""
 	var local_center = world_to_local(center)
 	var voxel_radius = radius / voxel_scale
@@ -97,7 +97,7 @@ func fill_sphere(center: Vector3, radius: float, density: float = 1.0):
 					else:  # Adding material
 						set_density(Vector3i(x, y, z), max(current_density, new_density))
 
-func carve_tunnel(start: Vector3, end: Vector3, radius: float):
+func carve_tunnel(start: Vector3, end: Vector3, radius: float) -> void:
 	"""Carve a tunnel between two points"""
 	var direction = (end - start).normalized()
 	var distance = start.distance_to(end)
@@ -113,7 +113,7 @@ func carve_tunnel(start: Vector3, end: Vector3, radius: float):
 		
 		fill_sphere(current_pos, current_radius, 0.0)  # Carve by setting density to 0
 
-func add_rhizome_branch(start: Vector3, direction: Vector3, length: float, start_radius: float, end_radius: float):
+func add_rhizome_branch(start: Vector3, direction: Vector3, length: float, start_radius: float, end_radius: float) -> void:
 	"""Add a rhizomatic branch with varying radius"""
 	var steps = max(int(length / (voxel_scale * 0.25)), 15)  # Finer steps for smoother branches
 	
@@ -135,7 +135,7 @@ func add_rhizome_branch(start: Vector3, direction: Vector3, length: float, start
 		
 		fill_sphere(current_pos + noise_offset, current_radius, 0.0)
 
-func apply_noise_field(noise: FastNoiseLite, strength: float = 0.5):
+func apply_noise_field(noise: FastNoiseLite, strength: float = 0.5) -> void:
 	"""Apply 3D noise to density field for organic variation"""
 	for x in range(chunk_size.x + 1):
 		for y in range(chunk_size.y + 1):
@@ -153,7 +153,7 @@ func apply_noise_field(noise: FastNoiseLite, strength: float = 0.5):
 				var new_density = current_density + combined_noise * strength
 				set_density(Vector3i(x, y, z), clamp(new_density, 0.0, 1.0))
 
-func set_neighbor_chunk(direction: Vector3i, chunk: VoxelChunk):
+func set_neighbor_chunk(direction: Vector3i, chunk: VoxelChunk) -> void:
 	"""Set neighboring chunk for seamless generation"""
 	var key = str(direction)
 	neighbors[key] = chunk
@@ -167,7 +167,7 @@ func get_density_with_neighbors(local_pos: Vector3i) -> float:
 	# that direct terrain calculation should be used instead
 	return -1.0  # Special value indicating "use direct calculation"
 
-func clear():
+func clear() -> void:
 	"""Clear all density data"""
 	initialize_density_data()
 	is_dirty = true

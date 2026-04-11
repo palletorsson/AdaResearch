@@ -1,18 +1,31 @@
 extends Node3D
 
+# @identity
+# essence: v_i(t+1) = field[grid(pos_i)] — each agent reads one arrow and moves; the entire "decision" is a lookup
+# desire: to stand inside an invisible force that bends your trajectory before you notice — to feel steered without a steerer
+# critical_parameter: sequence_mode — switching between open field, U-wall, zig-zag, linear wind, and noise turbulence reveals how field topology determines reachability
+# triggers: placing an obstacle changes the entire downstream vector field instantly via Dijkstra propagation from the target cell
+# emerges: traffic-like lane formation where many agents converge on the same narrow corridor without coordination or negotiation
+# needs: [missing] no VR controls — mouse-click target and right-click walls are desktop-only; VR needs controller-raycast placement of target and obstacles
+# relationships: foundation for ant pheromone fields; contrasts with boid_flocking (field is external vs. social); shares grid_resolution with PhysarumColony approach
+# truth: purpose is not inside the agent — it lives in the field the agent inhabits
+
 @export var agent_scene: PackedScene
 @onready var visualizer: MeshInstance3D = $FieldVisualizer
 @onready var camera: Camera3D = $Camera3D
 
 var grid: FlowGrid
 var agents = []
+var _xr_active: bool = false
 
 var sequence_timer: float = 0.0
 var sequence_mode: int = 0
 const DURATION = 10.0
 var current_target = Vector2i(20, 20)
 
-func _ready():
+func _ready() -> void:
+	_xr_active = XRServer.primary_interface != null
+
 	# 1. Setup Grid
 	grid = FlowGrid.new(40, 40, 1.0)
 	
@@ -25,7 +38,7 @@ func _ready():
 	# 4. Start Sequence
 	set_scenario(0)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Animate Noise (if in final mode)
 	if sequence_mode == 5:
 		var time = Time.get_ticks_msec() / 1000.0
@@ -40,7 +53,7 @@ func _process(delta):
 		sequence_mode = (sequence_mode + 1) % 6
 		set_scenario(sequence_mode)
 
-func set_scenario(mode: int):
+func set_scenario(mode: int) -> void:
 	grid.reset_costs()
 	print("Changing Flow Field Scenario: ", mode)
 	
@@ -79,7 +92,7 @@ func set_scenario(mode: int):
 			
 	update_field(current_target.x, current_target.y)
 
-func spawn_agents(count: int):
+func spawn_agents(count: int) -> void:
 	for i in range(count):
 		var agent = agent_scene.instantiate()
 		add_child(agent)
@@ -89,14 +102,17 @@ func spawn_agents(count: int):
 		agent.initialize(grid, pos)
 		agents.append(agent)
 
-func update_field(target_x: int, target_y: int):
+func update_field(target_x: int, target_y: int) -> void:
 	# Recalculate Logic
 	grid.calculate_flow_field(target_x, target_y)
 	
 	# Update Arrows
 	visualizer.update_visuals()
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
+	# VR: interaction handled by XR controller raycasts
+	if _xr_active:
+		return
 	if event is InputEventMouseButton and event.pressed:
 		var result = raycast_from_mouse(event.position)
 		if result:
@@ -125,3 +141,6 @@ func raycast_from_mouse(mouse_pos):
 	var query = PhysicsRayQueryParameters3D.create(from, to)
 	# query.collision_mask = ... (Ground layer)
 	return space.intersect_ray(query)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,6 +1,16 @@
 ﻿# FoldedStrip.gd - Creates an editable strip of triangles acting like folded paper
 extends Node3D
 
+# @identity
+# essence: triangle_strip(24) — alternating-height vertices forming a pleated ribbon of connected faces
+# desire: learner feels how topology (which vertices connect) differs from geometry (where vertices are)
+# critical_parameter: alternating high/low vertex heights — remove alternation and the pleat disappears
+# triggers: dragging any of the 24 vertex grab spheres — adjacent triangles deform because they share edges
+# emerges: mesh topology as a constraint — shared edges mean vertices drag each other's neighbours
+# needs: [has 24 grabbable vertex handles [has], missing global fold-height or frequency slider]
+# relationships: extends triangleprofiles into 3D; shows how strip topology enables organic forms
+# truth: topology (which vertices are connected) is more fundamental than geometry (where they sit)
+
 @export var color_main: Color = Color(0.2, 0.8, 0.3, 1.0)
 @export var color_alt: Color = Color(0.8, 0.2, 0.3, 1.0)
 

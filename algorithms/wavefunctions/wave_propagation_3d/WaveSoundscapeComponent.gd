@@ -17,10 +17,10 @@ var phases: Array[float] = []
 # Pentatonic scale ratios for musical harmony
 var scale_ratios: Array[float] = [1.0, 1.125, 1.25, 1.5, 1.667, 2.0]
 
-func _ready():
+func _ready() -> void:
 	_setup_ring_sounds()
 
-func _setup_ring_sounds():
+func _setup_ring_sounds() -> void:
 	"""Create subtle pitched tones for each wave ring"""
 	for i in range(ring_count):
 		var player = AudioStreamPlayer3D.new()
@@ -43,7 +43,7 @@ func _setup_ring_sounds():
 		player.play()
 		ring_playbacks.append(player.get_stream_playback())
 
-func update_parameters(frequency: float, amplitude: float, current_time: float, ring_data: Array):
+func update_parameters(frequency: float, amplitude: float, current_time: float, ring_data: Array) -> void:
 	"""Called by WavePropagation3D to sync sound with visuals"""
 	for i in range(min(ring_players.size(), ring_data.size())):
 		var ring_node = ring_data[i]
@@ -58,7 +58,7 @@ func update_parameters(frequency: float, amplitude: float, current_time: float, 
 func _process(_delta):
 	pass  # All generation happens in update_parameters
 
-func _generate_ring_tone(index: int, freq: float, amp: float, radius: float):
+func _generate_ring_tone(index: int, freq: float, amp: float, radius: float) -> void:
 	"""Generate subtle crystalline tone for a wave ring"""
 	var playback = ring_playbacks[index]
 	if not playback:
@@ -111,8 +111,17 @@ func _generate_ring_tone(index: int, freq: float, amp: float, radius: float):
 		
 		playback.push_frame(Vector2(left, right))
 
-func set_master_volume(volume_db: float):
+func set_master_volume(volume_db: float) -> void:
 	"""Adjust overall volume"""
 	master_volume_db = volume_db
 	for i in range(ring_players.size()):
 		ring_players[i].volume_db = master_volume_db - (i * 3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,4 +1,14 @@
 # Homing drone that chases the player and can be destroyed by throwable balls
+#
+# @identity
+# essence: desired = (target - position).normalized() * speed. Chase, prepare, shoot, cooldown. A state machine driven by vector subtraction.
+# desire: To hunt. To orbit at ideal_distance, charge projectiles, fire in bursts, and kamikaze when dying — an adversary that teaches vectors by trying to kill you.
+# critical_parameter: ideal_distance (4.0 units) — the range the drone wants to maintain. Too close = backs up. Too far = approaches. In range = switches to attack states.
+# triggers: Player position → chase/orbit, prepare timer → spawn held projectiles, shoot timer → fire burst, health reaches 0 → kamikaze mode (speed boost, explosion, damage)
+# emerges: The drone's strafing pattern from sinusoidal offsets. Leading shots via look_at. Kamikaze desperation creating final-moment tension.
+# needs: State machine AI [has], burst-fire system [has], kamikaze mode [has], VR player tracking [has]. Missing: difficulty scaling, formation flying with multiple drones.
+# relationships: Enemy counterpart to hl_turret_vectors (player-controlled targeting vs AI targeting). Sub-component of VectorThrowing. Uses subtraction and normalization as core AI.
+# truth: The drone is a mirror of the turret. Same math, opposite role. Subtraction works for both hunter and hunted.
 extends CharacterBody3D
 
 signal player_hit(drone: Node3D)
@@ -589,3 +599,12 @@ func reset_drone() -> void:
 	_apply_material_color(base_color)
 	if visual_root:
 		visual_root.scale = Vector3.ONE
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

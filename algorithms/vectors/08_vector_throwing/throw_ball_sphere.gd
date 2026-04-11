@@ -333,3 +333,12 @@ func set_ball_color(color: Color) -> void:
 	"""Set the ball color (can be called externally)"""
 	ball_color = color
 	_apply_ball_color()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

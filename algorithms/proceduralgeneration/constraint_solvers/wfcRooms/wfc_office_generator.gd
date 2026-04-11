@@ -42,7 +42,7 @@ var transition_tiles : Array[Node3D] = []
 var utility_tiles : Array[Node3D] = []
 var corner_tiles : Array[Node3D] = []
 
-func _ready():
+func _ready() -> void:
 	if auto_generate:
 		generate_office()
 
@@ -140,7 +140,7 @@ func _load_tile_prototypes() -> bool:
 	return true
 
 ## Build rules for which tiles can be adjacent
-func _build_socket_rules():
+func _build_socket_rules() -> void:
 	socket_rules.clear()
 
 	for tile in tile_prototypes:
@@ -150,7 +150,7 @@ func _build_socket_rules():
 	print("Built socket rules for ", socket_rules.size(), " tiles")
 
 ## Initialize the grid with all possibilities
-func _initialize_grid():
+func _initialize_grid() -> void:
 	grid = []
 	possible = []
 
@@ -167,7 +167,7 @@ func _initialize_grid():
 	print("Initialized grid: ", grid_width, "x", grid_height)
 
 ## Apply constraints for perimeter walls
-func _apply_perimeter_constraints():
+func _apply_perimeter_constraints() -> void:
 	print("Applying perimeter wall constraints...")
 
 	for y in range(grid_height):
@@ -316,7 +316,7 @@ func _find_min_entropy_cell():
 	return candidates[randi() % candidates.size()]
 
 ## Propagate constraints after collapsing a cell
-func _propagate_constraints(start_x: int, start_y: int):
+func _propagate_constraints(start_x: int, start_y: int) -> void:
 	var stack = [Vector2i(start_x, start_y)]
 
 	while not stack.is_empty():
@@ -349,7 +349,7 @@ func _propagate_constraints(start_x: int, start_y: int):
 				stack.append(Vector2i(nx, ny))
 
 ## Constrain a cell based on its neighbor
-func _constrain_cell(cell_x: int, cell_y: int, neighbor_x: int, neighbor_y: int, direction: String, opposite: String):
+func _constrain_cell(cell_x: int, cell_y: int, neighbor_x: int, neighbor_y: int, direction: String, opposite: String) -> void:
 	var neighbor_tile = grid[neighbor_y][neighbor_x]
 
 	if neighbor_tile != null:
@@ -401,7 +401,7 @@ func _count_collapsed() -> int:
 	return count
 
 ## Place the generated tiles in the 3D world
-func _place_tiles_in_world():
+func _place_tiles_in_world() -> void:
 	# Clear existing children
 	for child in get_children():
 		if child.is_in_group("generated_tile"):
@@ -428,7 +428,7 @@ func _place_tiles_in_world():
 	_add_ceiling()
 
 ## Add a ceiling plane over the office
-func _add_ceiling():
+func _add_ceiling() -> void:
 	var ceiling = CSGBox3D.new()
 	ceiling.name = "Ceiling"
 	ceiling.size = Vector3(grid_width * tile_size, 0.1, grid_height * tile_size)
@@ -447,7 +447,7 @@ func _add_ceiling():
 	add_child(ceiling)
 
 ## Public function to regenerate with new seed
-func regenerate(new_seed: int = -1):
+func regenerate(new_seed: int = -1) -> void:
 	if new_seed >= 0:
 		generation_seed = new_seed
 	else:
@@ -480,7 +480,7 @@ func get_room_type_at(x: int, y: int) -> String:
 	return "empty"
 
 ## Debug: Print grid layout
-func print_grid():
+func print_grid() -> void:
 	print("Office Grid Layout:")
 	for y in range(grid_height - 1, -1, -1):  # Print top to bottom
 		var row = ""
@@ -495,7 +495,7 @@ func print_grid():
 	print("Legend: C=corridor, O=office, P=open_plan, F=conference, U=cubicle, T=transition, Y=utility, R=corner")
 
 ## Create a simple fallback grid when tiles aren't available
-func _create_fallback_grid():
+func _create_fallback_grid() -> void:
 	print("Creating fallback office grid visualization...")
 
 	for y in range(grid_height):
@@ -521,3 +521,12 @@ func _create_fallback_grid():
 	add_child(label)
 
 	print("Fallback grid created - ", grid_width * grid_height, " tiles")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

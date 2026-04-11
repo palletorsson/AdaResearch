@@ -747,7 +747,7 @@ func _has_edge(a: int, b: int) -> bool:
 			return true
 	return false
 
-func _notification(what):
+func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSFORM_CHANGED:
 		update_gizmos()
 
@@ -835,3 +835,12 @@ func clear_pathway_previews() -> void:
 		if preview and is_instance_valid(preview):
 			preview.queue_free()
 	pathway_previews.clear()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

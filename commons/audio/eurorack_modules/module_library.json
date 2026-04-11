@@ -1,0 +1,359 @@
+{
+  "format_version": "1.0",
+  "hp_meters": 0.018,
+  "row_height_meters": 0.450,
+
+  "modules": {
+    "vco": {
+      "name": "VCO",
+      "full_name": "Voltage Controlled Oscillator",
+      "hp_width": 16,
+      "row_span": 1,
+      "category": "sources",
+      "color_accent": "#8BC34A",
+      "controls": [
+        {
+          "id": "wave_sel",
+          "type": "sls",
+          "label": "WAVE",
+          "parameter": "source_type",
+          "x_hp": 12,
+          "y_frac": 0.15,
+          "min": 0,
+          "max": 9,
+          "step": 1,
+          "default": 0
+        },
+        {
+          "id": "freq",
+          "type": "knob",
+          "label": "FREQ",
+          "parameter": "freq",
+          "x_hp": 4,
+          "y_frac": 0.35,
+          "min": 20,
+          "max": 2000,
+          "default": 440
+        },
+        {
+          "id": "fine",
+          "type": "knob",
+          "label": "FINE",
+          "parameter": "detune",
+          "x_hp": 12,
+          "y_frac": 0.50,
+          "min": -50,
+          "max": 50,
+          "default": 0
+        },
+        {
+          "id": "out_disp",
+          "type": "simple_waveform",
+          "label": "OUT",
+          "x_hp": 4,
+          "y_frac": 0.75,
+          "width_hp": 8,
+          "source": "rack"
+        }
+      ],
+      "jacks": [
+        { "id": "freq_out", "type": "output", "parameter": "frequency", "label": "OUT", "x_hp": 14, "y_frac": 0.90 }
+      ]
+    },
+    "vcf": {
+      "name": "VCF",
+      "full_name": "Voltage Controlled Filter",
+      "hp_width": 12,
+      "row_span": 1,
+      "category": "filters",
+      "color_accent": "#2196F3",
+      "controls": [
+        {
+          "id": "cutoff",
+          "type": "knob",
+          "label": "CUTOFF",
+          "parameter": "cutoff",
+          "x_hp": 3,
+          "y_frac": 0.38,
+          "min": 100,
+          "max": 8000,
+          "default": 1000
+        },
+        {
+          "id": "res",
+          "type": "knob",
+          "label": "RES",
+          "parameter": "resonance",
+          "x_hp": 9,
+          "y_frac": 0.38,
+          "min": 0,
+          "max": 1,
+          "default": 0.3
+        }
+      ],
+      "jacks": [
+        { "id": "audio_in", "type": "input", "parameter": "audio_in", "label": "IN", "x_hp": 3, "y_frac": 0.88 },
+        { "id": "audio_out", "type": "output", "parameter": "audio_out", "label": "OUT", "x_hp": 9, "y_frac": 0.88 }
+      ]
+    },
+    "vca": {
+      "name": "VCA",
+      "full_name": "Voltage Controlled Amplifier",
+      "hp_width": 14,
+      "row_span": 1,
+      "category": "controls",
+      "color_accent": "#4CAF50",
+      "controls": [
+        {
+          "id": "amp",
+          "type": "slv",
+          "label": "AMP",
+          "parameter": "amp",
+          "x_hp": 4,
+          "y_frac": 0.38,
+          "min": 0,
+          "max": 1,
+          "default": 0.8
+        },
+        {
+          "id": "pan",
+          "type": "knob",
+          "label": "PAN",
+          "parameter": "pan",
+          "x_hp": 10,
+          "y_frac": 0.55,
+          "min": -1,
+          "max": 1,
+          "default": 0
+        }
+      ],
+      "jacks": [
+        { "id": "audio_in", "type": "input", "parameter": "audio_in", "label": "IN", "x_hp": 3, "y_frac": 0.88 },
+        { "id": "cv_in", "type": "input", "parameter": "cv_in", "label": "CV", "x_hp": 7, "y_frac": 0.88 },
+        { "id": "audio_out", "type": "output", "parameter": "audio_out", "label": "OUT", "x_hp": 11, "y_frac": 0.88 }
+      ]
+    },
+    "envelope": {
+      "name": "ENV",
+      "full_name": "Envelope Generator",
+      "hp_width": 16,
+      "row_span": 1,
+      "category": "modulators",
+      "color_accent": "#9C27B0",
+      "controls": [
+        {
+          "id": "atk",
+          "type": "knob",
+          "label": "ATK",
+          "parameter": "attack",
+          "x_hp": 3,
+          "y_frac": 0.38,
+          "min": 0,
+          "max": 2,
+          "default": 0.01
+        },
+        {
+          "id": "dec",
+          "type": "knob",
+          "label": "DEC",
+          "parameter": "decay_rate",
+          "x_hp": 8,
+          "y_frac": 0.38,
+          "min": 0,
+          "max": 2,
+          "default": 0.1
+        },
+        {
+          "id": "rel",
+          "type": "knob",
+          "label": "REL",
+          "parameter": "release",
+          "x_hp": 13,
+          "y_frac": 0.38,
+          "min": 0,
+          "max": 5,
+          "default": 0.3
+        }
+      ],
+      "jacks": [
+        { "id": "env_out", "type": "output", "parameter": "envelope", "label": "OUT", "x_hp": 8, "y_frac": 0.88 }
+      ]
+    },
+    "mixer": {
+      "name": "MIX",
+      "full_name": "Mixer / Output",
+      "hp_width": 14,
+      "row_span": 1,
+      "category": "effects",
+      "color_accent": "#FF9800",
+      "controls": [
+        {
+          "id": "mix",
+          "type": "slh",
+          "label": "MIX",
+          "parameter": "harmonic_mix",
+          "x_hp": 2,
+          "y_frac": 0.28,
+          "min": 0,
+          "max": 1,
+          "default": 0.5
+        },
+        {
+          "id": "pan",
+          "type": "slh",
+          "label": "PAN",
+          "parameter": "pan",
+          "x_hp": 2,
+          "y_frac": 0.50,
+          "min": -1,
+          "max": 1,
+          "default": 0
+        },
+        {
+          "id": "vu_l",
+          "type": "meter",
+          "label": "L",
+          "x_hp": 10,
+          "y_frac": 0.35
+        },
+        {
+          "id": "vu_r",
+          "type": "meter",
+          "label": "R",
+          "x_hp": 12,
+          "y_frac": 0.35
+        }
+      ],
+      "jacks": [
+        { "id": "mix_in", "type": "input", "parameter": "mix_in", "label": "IN", "x_hp": 3, "y_frac": 0.88 },
+        { "id": "master_out", "type": "output", "parameter": "master_out", "label": "OUT", "x_hp": 11, "y_frac": 0.88 }
+      ]
+    },
+    "scope": {
+      "name": "SCOPE",
+      "full_name": "Oscilloscope / Analyzer",
+      "hp_width": 20,
+      "row_span": 2,
+      "category": "displays",
+      "color_accent": "#F44336",
+      "controls": [
+        {
+          "id": "main_disp",
+          "type": "monitor",
+          "label": "SCOPE",
+          "x_hp": 2,
+          "y_frac": 0.08,
+          "width_hp": 16,
+          "height_frac": 0.75,
+          "source": "rack"
+        }
+      ],
+      "jacks": [
+        { "id": "scope_in", "type": "input", "parameter": "scope_in", "label": "IN", "x_hp": 10, "y_frac": 0.92 }
+      ]
+    },
+    "transport": {
+      "name": "TRNS",
+      "full_name": "Transport Controls",
+      "hp_width": 6,
+      "row_span": 1,
+      "category": "buttons",
+      "color_accent": "#E91E63",
+      "controls": [
+        {
+          "id": "play",
+          "type": "button",
+          "label": "PLAY",
+          "action": "play",
+          "x_hp": 3,
+          "y_frac": 0.25,
+          "color": "#4CAF50"
+        },
+        {
+          "id": "stop",
+          "type": "button",
+          "label": "STOP",
+          "action": "stop",
+          "x_hp": 3,
+          "y_frac": 0.50,
+          "color": "#F44336"
+        },
+        {
+          "id": "reset",
+          "type": "button",
+          "label": "RST",
+          "action": "reset",
+          "x_hp": 3,
+          "y_frac": 0.75,
+          "color": "#FF9800"
+        }
+      ]
+    },
+    "effects": {
+      "name": "FX",
+      "full_name": "Frequency Effects",
+      "hp_width": 12,
+      "row_span": 1,
+      "category": "effects",
+      "color_accent": "#FF9800",
+      "controls": [
+        {
+          "id": "start_f",
+          "type": "slv",
+          "label": "START",
+          "parameter": "start_freq",
+          "x_hp": 3,
+          "y_frac": 0.40,
+          "min": 20,
+          "max": 2000,
+          "default": 200
+        },
+        {
+          "id": "end_f",
+          "type": "slv",
+          "label": "END",
+          "parameter": "end_freq",
+          "x_hp": 9,
+          "y_frac": 0.40,
+          "min": 20,
+          "max": 2000,
+          "default": 800
+        }
+      ],
+      "jacks": [
+        { "id": "fx_in", "type": "input", "parameter": "fx_in", "label": "IN", "x_hp": 3, "y_frac": 0.88 },
+        { "id": "fx_out", "type": "output", "parameter": "fx_out", "label": "OUT", "x_hp": 9, "y_frac": 0.88 }
+      ]
+    }
+  },
+
+  "rack_presets": {
+    "basic_mono": {
+      "name": "Basic Mono Synth",
+      "sound_type": "synth_wave",
+      "rows": 1,
+      "modules": [
+        { "module": "transport", "row": 0, "slot": 0 },
+        { "module": "vco",       "row": 0, "slot": 1 },
+        { "module": "vcf",       "row": 0, "slot": 2 },
+        { "module": "vca",       "row": 0, "slot": 3 },
+        { "module": "envelope",  "row": 0, "slot": 4 }
+      ]
+    },
+    "full_studio": {
+      "name": "Full Studio",
+      "sound_type": "synth_wave",
+      "rows": 2,
+      "modules": [
+        { "module": "transport", "row": 0, "slot": 0 },
+        { "module": "vco",       "row": 0, "slot": 1 },
+        { "module": "vcf",       "row": 0, "slot": 2 },
+        { "module": "envelope",  "row": 0, "slot": 3 },
+        { "module": "vca",       "row": 0, "slot": 4 },
+        { "module": "mixer",     "row": 0, "slot": 5 },
+        { "module": "scope",     "row": 0, "slot": 6 },
+        { "module": "effects",   "row": 1, "slot": 0 }
+      ]
+    }
+  }
+}

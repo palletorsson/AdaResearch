@@ -1,3 +1,13 @@
+# @identity
+# essence: sphere_roll(t) -> unfold(t) -> attack(t) -- armadillo-inspired droideka rolls compressed, deploys to strike
+# desire: a segmented sphere that trundles toward you as a ball, then blooms into an armored attacker
+# critical_parameter: deployment state -- ROLLED vs DEPLOYED determines geometry, speed, and attack capability
+# triggers: player proximity triggers deployment; distance triggers re-rolling; health-based personality progression
+# emerges: the compressed form IS the locomotion -- rolling geometry becomes attack geometry through unfolding
+# needs: segment mesh generation [has]; roll physics [has]; deploy animation [has]; personality system [has]; VR interaction [missing]
+# relationships: parent class for origami_droideka and waterbomb_enemy; contrasts with sphere_droideka
+# truth: compression and deployment are the same transformation in opposite directions -- the body is its own weapon.
+
 extends CharacterBody3D
 class_name ArmadilloDroideka
 

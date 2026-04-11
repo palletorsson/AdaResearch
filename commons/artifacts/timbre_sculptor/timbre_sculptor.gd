@@ -24,6 +24,17 @@
 extends Node3D
 class_name TimbreSculptor
 
+
+# @identity
+# essence: waveform(t) = sum(amplitude[n] * sin(n * fundamental * t)) — additive synthesis with audio
+# desire: Sculpt timbre by adjusting harmonic sliders and hearing the result immediately in VR
+# critical_parameter: fundamental_freq — sets the pitch; all harmonics are integer multiples of this
+# triggers: slider movement changes harmonic amplitudes; morph_speed controls preset transitions
+# emerges: the sound of mathematics — square waves, saw waves, clarinet, all from the same formula
+# needs: VR sliders for 8 harmonics [has], preset buttons [has], audio output [has]
+# relationships: depends on AudioStreamGenerator; contrasts with additive_wave_demo (audible vs visual synthesis); unlocks timbre-as-spectrum
+# truth: Timbre is the harmonic fingerprint of a sound — the same note on different instruments differs only in overtone amplitudes.
+
 const _P = preload("res://commons/ui/ada_palette.gd")
 
 # ── Preloads for VR components ──

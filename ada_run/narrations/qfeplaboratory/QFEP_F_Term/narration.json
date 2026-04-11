@@ -1,0 +1,362 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 2,
+				"name": "snap_cube_puzzle",
+				"pos": [
+					2,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 6,
+				"name": "lambda_slider",
+				"pos": [
+					1,
+					1,
+					7
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 7,
+				"name": "snap_tetra_puzzle",
+				"pos": [
+					7,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 13,
+				"name": "tt",
+				"pos": [
+					8,
+					1,
+					7
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "crystal_cluster",
+				"pos": [
+					4,
+					2,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					2,
+					10
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			}
+		],
+		"dead_ends": [],
+		"issues": [
+			{
+				"description": "Teleporter at (4,0,11) unreachable from spawn",
+				"severity": "critical",
+				"type": "unreachable_teleporter"
+			},
+			{
+				"description": "crystal_cluster at (4,2,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "dark_sphere at (4,2,10) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "QFEP_F_Term",
+		"pacing": {
+			"density": 3.25,
+			"reachable_artifacts": 4,
+			"total_artifacts": 6,
+			"walkable_tiles": 100
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			1,
+			1,
+			1
+		],
+		"teleporter": {
+			"dist": -1,
+			"pos": [
+				4,
+				0,
+				11
+			],
+			"reachable": false
+		}
+	},
+	"map_name": "QFEP_F_Term",
+	"sequence": "qfeplaboratory",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "snap_cube_puzzle",
+				"pos": [
+					2,
+					1,
+					2
+				]
+			},
+			{
+				"name": "snap_tetra_puzzle",
+				"pos": [
+					7,
+					1,
+					2
+				]
+			},
+			{
+				"name": "crystal_cluster",
+				"pos": [
+					4,
+					2,
+					4
+				]
+			},
+			{
+				"name": "lambda_slider",
+				"pos": [
+					1,
+					1,
+					7
+				]
+			},
+			{
+				"name": "tt",
+				"pos": [
+					8,
+					1,
+					7
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					2,
+					10
+				]
+			}
+		],
+		"dimensions": [
+			10,
+			3,
+			14
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 100,
+			"ground_pct": 71.4285714285714,
+			"void": 24,
+			"walls": 16
+		},
+		"map_name": "QFEP_F_Term",
+		"rooms": [
+			{
+				"artifacts": [
+					"snap_cube_puzzle",
+					"snap_tetra_puzzle",
+					"lambda_slider",
+					"tt"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 100
+			}
+		],
+		"spawn": [
+			1,
+			1,
+			1
+		],
+		"teleporter": [
+			4,
+			0,
+			11
+		]
+	},
+	"timestamp": "2026-03-16T12:16:18",
+	"walkthrough": {
+		"map_name": "QFEP_F_Term",
+		"stops": [
+			{
+				"facing": "southeast",
+				"look_at": [
+					2,
+					1,
+					2
+				],
+				"pos": [
+					1,
+					1,
+					1
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southeast",
+						"dist": 2,
+						"name": "snap_cube_puzzle"
+					},
+					{
+						"direction": "south",
+						"dist": 6,
+						"name": "lambda_slider"
+					},
+					{
+						"direction": "east",
+						"dist": 7,
+						"name": "snap_tetra_puzzle"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "east",
+				"name": "snap_cube_puzzle",
+				"pos": [
+					2,
+					1,
+					2
+				],
+				"steps_from_prev": 2,
+				"total_steps": 2,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "east",
+						"dist": 5,
+						"name": "snap_tetra_puzzle"
+					},
+					{
+						"direction": "south",
+						"dist": 6,
+						"name": "lambda_slider"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "south",
+				"name": "snap_tetra_puzzle",
+				"pos": [
+					7,
+					1,
+					2
+				],
+				"steps_from_prev": 5,
+				"total_steps": 7,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 5,
+						"name": "snap_cube_puzzle"
+					},
+					{
+						"direction": "south",
+						"dist": 6,
+						"name": "tt"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "west",
+				"name": "tt",
+				"pos": [
+					8,
+					1,
+					7
+				],
+				"steps_from_prev": 6,
+				"total_steps": 13,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 6,
+						"name": "snap_tetra_puzzle"
+					},
+					{
+						"direction": "west",
+						"dist": 7,
+						"name": "lambda_slider"
+					}
+				]
+			},
+			{
+				"approach_from": "west",
+				"facing": "southeast",
+				"name": "lambda_slider",
+				"pos": [
+					1,
+					1,
+					7
+				],
+				"steps_from_prev": 7,
+				"total_steps": 20,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 6,
+						"name": "snap_cube_puzzle"
+					},
+					{
+						"direction": "southeast",
+						"dist": 6,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "east",
+						"dist": 7,
+						"name": "tt"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					4,
+					0,
+					11
+				],
+				"reachable": false,
+				"steps_from_prev": 0,
+				"total_steps": 20,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 4,
+			"total_steps": 20,
+			"total_stops": 6
+		}
+	}
+}

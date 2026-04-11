@@ -1,0 +1,488 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 2,
+				"name": "rigid_sculpture",
+				"pos": [
+					2,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 5,
+				"name": "preserved_pattern",
+				"pos": [
+					1,
+					1,
+					6
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 7,
+				"name": "fluid_form",
+				"pos": [
+					7,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 8,
+				"name": "tt",
+				"pos": [
+					2,
+					1,
+					8
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 11,
+				"name": "transforming_pattern",
+				"pos": [
+					7,
+					1,
+					6
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 12,
+				"name": "tt",
+				"pos": [
+					6,
+					1,
+					8
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "phi_slider",
+				"pos": [
+					4,
+					2,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [],
+		"issues": [
+			{
+				"description": "phi_slider at (4,2,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "QFEP_Phi_Term",
+		"pacing": {
+			"density": 2.0,
+			"reachable_artifacts": 6,
+			"total_artifacts": 7,
+			"walkable_tiles": 63
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			1,
+			1,
+			1
+		],
+		"teleporter": {
+			"dist": 11,
+			"pos": [
+				4,
+				0,
+				9
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "QFEP_Phi_Term",
+	"sequence": "qfeplaboratory",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "rigid_sculpture",
+				"pos": [
+					2,
+					1,
+					2
+				]
+			},
+			{
+				"name": "fluid_form",
+				"pos": [
+					7,
+					1,
+					2
+				]
+			},
+			{
+				"name": "phi_slider",
+				"pos": [
+					4,
+					2,
+					4
+				]
+			},
+			{
+				"name": "preserved_pattern",
+				"pos": [
+					1,
+					1,
+					6
+				]
+			},
+			{
+				"name": "transforming_pattern",
+				"pos": [
+					7,
+					1,
+					6
+				]
+			},
+			{
+				"name": "tt",
+				"pos": [
+					2,
+					1,
+					8
+				]
+			},
+			{
+				"name": "tt",
+				"pos": [
+					6,
+					1,
+					8
+				]
+			}
+		],
+		"dimensions": [
+			10,
+			3,
+			12
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 63,
+			"ground_pct": 52.5,
+			"void": 22,
+			"walls": 35
+		},
+		"map_name": "QFEP_Phi_Term",
+		"rooms": [
+			{
+				"artifacts": [
+					"rigid_sculpture",
+					"fluid_form",
+					"preserved_pattern",
+					"transforming_pattern",
+					"tt",
+					"tt"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 63
+			}
+		],
+		"spawn": [
+			1,
+			1,
+			1
+		],
+		"teleporter": [
+			4,
+			0,
+			9
+		]
+	},
+	"timestamp": "2026-03-16T12:16:22",
+	"walkthrough": {
+		"map_name": "QFEP_Phi_Term",
+		"stops": [
+			{
+				"facing": "southeast",
+				"look_at": [
+					2,
+					1,
+					2
+				],
+				"pos": [
+					1,
+					1,
+					1
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southeast",
+						"dist": 2,
+						"name": "rigid_sculpture"
+					},
+					{
+						"direction": "south",
+						"dist": 5,
+						"name": "preserved_pattern"
+					},
+					{
+						"direction": "southeast",
+						"dist": 6,
+						"name": "phi_slider"
+					},
+					{
+						"direction": "east",
+						"dist": 7,
+						"name": "fluid_form"
+					},
+					{
+						"direction": "south",
+						"dist": 8,
+						"name": "tt"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "east",
+				"name": "rigid_sculpture",
+				"pos": [
+					2,
+					1,
+					2
+				],
+				"steps_from_prev": 2,
+				"total_steps": 2,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "southeast",
+						"dist": 4,
+						"name": "phi_slider"
+					},
+					{
+						"direction": "east",
+						"dist": 5,
+						"name": "fluid_form"
+					},
+					{
+						"direction": "south",
+						"dist": 5,
+						"name": "preserved_pattern"
+					},
+					{
+						"direction": "south",
+						"dist": 6,
+						"name": "tt"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "south",
+				"name": "fluid_form",
+				"pos": [
+					7,
+					1,
+					2
+				],
+				"steps_from_prev": 5,
+				"total_steps": 7,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "south",
+						"dist": 4,
+						"name": "transforming_pattern"
+					},
+					{
+						"direction": "west",
+						"dist": 5,
+						"name": "rigid_sculpture"
+					},
+					{
+						"direction": "southwest",
+						"dist": 5,
+						"name": "phi_slider"
+					},
+					{
+						"direction": "south",
+						"dist": 7,
+						"name": "tt"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "southwest",
+				"name": "transforming_pattern",
+				"pos": [
+					7,
+					1,
+					6
+				],
+				"steps_from_prev": 4,
+				"total_steps": 11,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "southwest",
+						"dist": 3,
+						"name": "tt"
+					},
+					{
+						"direction": "north",
+						"dist": 4,
+						"name": "fluid_form"
+					},
+					{
+						"direction": "west",
+						"dist": 6,
+						"name": "preserved_pattern"
+					},
+					{
+						"direction": "west",
+						"dist": 7,
+						"name": "tt"
+					}
+				]
+			},
+			{
+				"approach_from": "southwest",
+				"facing": "west",
+				"name": "tt",
+				"pos": [
+					6,
+					1,
+					8
+				],
+				"steps_from_prev": 3,
+				"total_steps": 14,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "transforming_pattern"
+					},
+					{
+						"direction": "north",
+						"dist": 7,
+						"name": "fluid_form"
+					},
+					{
+						"direction": "west",
+						"dist": 7,
+						"name": "preserved_pattern"
+					}
+				]
+			},
+			{
+				"approach_from": "west",
+				"facing": "northwest",
+				"name": "tt",
+				"pos": [
+					2,
+					1,
+					8
+				],
+				"steps_from_prev": 4,
+				"total_steps": 18,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 3,
+						"name": "preserved_pattern"
+					},
+					{
+						"direction": "north",
+						"dist": 6,
+						"name": "rigid_sculpture"
+					},
+					{
+						"direction": "northeast",
+						"dist": 6,
+						"name": "phi_slider"
+					},
+					{
+						"direction": "east",
+						"dist": 7,
+						"name": "transforming_pattern"
+					}
+				]
+			},
+			{
+				"approach_from": "northwest",
+				"facing": "southeast",
+				"name": "preserved_pattern",
+				"pos": [
+					1,
+					1,
+					6
+				],
+				"steps_from_prev": 3,
+				"total_steps": 21,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "southeast",
+						"dist": 3,
+						"name": "tt"
+					},
+					{
+						"direction": "north",
+						"dist": 5,
+						"name": "rigid_sculpture"
+					},
+					{
+						"direction": "northeast",
+						"dist": 5,
+						"name": "phi_slider"
+					},
+					{
+						"direction": "east",
+						"dist": 6,
+						"name": "transforming_pattern"
+					},
+					{
+						"direction": "east",
+						"dist": 7,
+						"name": "tt"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					4,
+					0,
+					9
+				],
+				"reachable": true,
+				"steps_from_prev": 6,
+				"total_steps": 27,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 6,
+			"total_steps": 27,
+			"total_stops": 8
+		}
+	}
+}

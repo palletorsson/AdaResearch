@@ -5,6 +5,16 @@
 # Usage: Place in scene, ensure player has MovementWallWalk enabled
 # The collision layer 4 (wall-walk) allows the player to stick to the surface
 
+# @identity
+# essence: p(u,v) = (R + v*w*cos(u/2))*cos(u), sin), v*w*sin(u/2) — the half-twist parametric surface
+# desire: To be walked — one full loop and your orientation flips, a second loop restores it, and you realize the surface has one side
+# critical_parameter: the u/2 in cos(u/2) — this single half-angle is the entire twist, the difference between a cylinder and a Mobius strip
+# triggers: Wall-walk collision layer enables lizard-feet adhesion; completing a loop flips the player's up-vector
+# emerges: The disorientation of walking a non-orientable surface — you cannot tell which side you are on because there is only one side
+# needs: VR wall-walk [has], orientation indicator [missing], loop-completion detection [missing]
+# relationships: Guest from alternative_geometries sequence; contrasts Euclidean assumptions of all other maps
+# truth: The Mobius strip does not have two sides — it has one side and the persistent illusion of two.
+
 extends Node3D
 class_name MobiusWorld
 
@@ -28,15 +38,15 @@ var static_body: StaticBody3D
 
 signal world_ready
 
-func _ready():
+func _ready() -> void:
 	create_mobius_world()
 	emit_signal("world_ready")
 
-func create_mobius_world():
+func create_mobius_world() -> void:
 	create_mesh()
 	create_collision()
 
-func create_mesh():
+func create_mesh() -> void:
 	var surface_tool = SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 
@@ -121,7 +131,7 @@ func calculate_normal_at(u: float, v: float) -> Vector3:
 
 	return du.cross(dv).normalized()
 
-func apply_material():
+func apply_material() -> void:
 	if not mesh_instance:
 		return
 
@@ -144,7 +154,7 @@ func apply_material():
 		standard_material.cull_mode = BaseMaterial3D.CULL_DISABLED
 		mesh_instance.mesh.surface_set_material(0, standard_material)
 
-func create_collision():
+func create_collision() -> void:
 	static_body = StaticBody3D.new()
 	static_body.name = "MobiusCollision"
 	# Layer 4 for wall-walk, plus layer 1 for normal collisions
@@ -179,3 +189,12 @@ func configure(data: Dictionary) -> void:
 			child.queue_free()
 		await get_tree().process_frame
 		create_mobius_world()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

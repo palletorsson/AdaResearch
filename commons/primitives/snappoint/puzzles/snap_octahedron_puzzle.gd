@@ -1,6 +1,16 @@
 extends SnapPointPuzzleBase
 class_name SnapOctahedronPuzzle
 
+# @identity
+# essence: octahedron = 6 vertices, 12 edges, 8 faces — dual of the cube, all faces equilateral triangles
+# desire: learner places 6 floating points and discovers the shape that emerges from this particular arrangement
+# critical_parameter: 6 snap target positions — form a regular octahedron at ±1 on each axis
+# triggers: snapping all 6 snap points to their targets → puzzle complete signal fires
+# emerges: the dual relationship to the cube — realizing these 6 positions are the face-centers of a cube
+# needs: [missing VR controls besides snapping — no label or slider]
+# relationships: extends SnapPointPuzzleBase; sibling to snap_tetrahedron_puzzle; grab_octahedron is its held version
+# truth: the octahedron is the cube's dual — swap faces and vertices and you get the other
+
 ## Snap Octahedron Puzzle Controller
 ## Manages a 6-point octahedron puzzle
 ## Extends SnapPointPuzzleBase for common functionality and tag system

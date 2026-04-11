@@ -2,6 +2,16 @@
 # MultiMesh-compatible cube colorizer
 # Finds MultiMeshInstance3D and applies colors using per-instance color system
 
+# @identity
+# essence: color_pattern(i) -> MultiMesh.set_instance_color(i) — palettes, gradients, and sphere reflection mapped to grid indices
+# desire: to watch the entire grid floor transform as named color patterns sweep across hundreds of cubes simultaneously
+# critical_parameter: pattern_names[current_pattern_index] — each pattern is a different mapping from position to color (diagonal stripes, radial gradient, sphere reflection)
+# triggers: auto_cycle timer rotates through all patterns; NextCube signal advances manually; palette resource provides the color vocabulary
+# emerges: the sphere_reflection pattern creates an illusion of a reflective ball on a flat grid — pure math, no actual sphere
+# needs: MultiMeshInstance3D [has]; NextCube integration [has]; auto_cycle [has]; VR pattern selector [missing]
+# relationships: depends on GridMultiMesh and color_palettes.tres; contrasts with pillarcolorcollection (flat grid vs vertical pillars); GameManager provides gradient palettes
+# truth: color is not a property of the cube — it is a function of the cube's position in the pattern
+
 extends Node
 
 @export var color_palette_resource: Resource = preload("res://algorithms/color/color_palettes.tres")
@@ -35,7 +45,7 @@ func _log(message: String) -> void:
 	if debug_logs:
 		print(message)
 
-func _initialize_pattern_names():
+func _initialize_pattern_names() -> void:
 	if pattern_names.size() > 0:
 		return
 
@@ -70,7 +80,7 @@ func _get_palette_colors(palette_name: String) -> Array:
 				return result
 	return []
 
-func _ready():
+func _ready() -> void:
 	_log("ColorGrid: Ready to cycle through palette patterns")
 	_initialize_pattern_names()
 
@@ -176,7 +186,7 @@ func _apply_named_pattern(pattern_name: String) -> void:
 	else:
 		_log("ColorGrid: WARNING - Unknown pattern '%s'" % pattern_name)
 
-func start_pattern_cycling():
+func start_pattern_cycling() -> void:
 	_initialize_pattern_names()
 	if _cycle_active:
 		return
@@ -206,7 +216,7 @@ func start_pattern_cycling():
 		current_pattern_index = (current_pattern_index + 1) % pattern_names.size()
 	_cycle_active = false
 
-func apply_pattern_to_multimesh(palette_colors: Array, pattern_name: String):
+func apply_pattern_to_multimesh(palette_colors: Array, pattern_name: String) -> void:
 	if not multimesh:
 		_log("ColorGrid: ERROR - No multimesh!")
 		return
@@ -252,7 +262,7 @@ func apply_pattern_to_multimesh(palette_colors: Array, pattern_name: String):
 	_log("ColorGrid: Applied palette '%s' - set %d colors on %d instances" % [pattern_name, colors_applied, instance_count])
 	_log("ColorGrid: Sample colors: %s" % ", ".join(sample_colors))
 
-func _adjust_material_for_colors():
+func _adjust_material_for_colors() -> void:
 	"""Adjust shader parameters to make instance colors visible"""
 	if not multimesh_instance:
 		_log("ColorGrid: No multimesh_instance found")
@@ -286,7 +296,7 @@ func _adjust_material_for_colors():
 	else:
 		_log("ColorGrid: Material is not a ShaderMaterial. Type: %s" % material.get_class())
 
-func apply_gradient_pattern(gradient_name: String):
+func apply_gradient_pattern(gradient_name: String) -> void:
 	if not multimesh:
 		return
 
@@ -344,7 +354,7 @@ func interpolate_gradient(progress: float, gradient_colors: Array) -> Color:
 
 	return color1.lerp(color2, local_progress)
 
-func apply_sphere_reflection(_pattern_name: String):
+func apply_sphere_reflection(_pattern_name: String) -> void:
 	if not multimesh:
 		return
 
@@ -397,7 +407,7 @@ func calculate_sphere_reflection_color(row: int, col: int, center: Vector2, grid
 		return reflection_color
 
 # Next cube integration functions
-func connect_to_next_cubes():
+func connect_to_next_cubes() -> void:
 	var next_cubes = find_next_cubes()
 	if next_cubes.size() > 0:
 		_log("ColorGrid: Found %d NextCube(s), disabling auto-cycle" % next_cubes.size())
@@ -414,17 +424,17 @@ func find_next_cubes() -> Array:
 	find_next_cubes_recursive(get_tree().current_scene, next_cubes)
 	return next_cubes
 
-func find_next_cubes_recursive(node: Node, next_cubes: Array):
+func find_next_cubes_recursive(node: Node, next_cubes: Array) -> void:
 	if node.get_script() and node.get_script().get_global_name() == "NextCube":
 		next_cubes.append(node)
 	for child in node.get_children():
 		find_next_cubes_recursive(child, next_cubes)
 
-func _on_next_requested(from_position: Vector3):
+func _on_next_requested(from_position: Vector3) -> void:
 	_log("ColorGrid: Next pattern requested from %s" % from_position)
 	advance_to_next_pattern()
 
-func advance_to_next_pattern():
+func advance_to_next_pattern() -> void:
 	if pattern_names.is_empty():
 		_initialize_pattern_names()
 		if pattern_names.is_empty():
@@ -443,7 +453,7 @@ func get_current_pattern_index() -> int:
 func get_pattern_count() -> int:
 	return pattern_names.size()
 
-func set_pattern_by_index(index: int):
+func set_pattern_by_index(index: int) -> void:
 	_initialize_pattern_names()
 	if index >= 0 and index < pattern_names.size():
 		current_pattern_index = index
@@ -452,12 +462,12 @@ func set_pattern_by_index(index: int):
 func get_current_pattern_name() -> String:
 	return pattern_names[current_pattern_index]
 
-func enable_auto_cycle():
+func enable_auto_cycle() -> void:
 	auto_cycle_enabled = true
 	if not _cycle_active:
 		start_pattern_cycling()
 
-func disable_auto_cycle():
+func disable_auto_cycle() -> void:
 	auto_cycle_enabled = false
 	_cycle_active = false
 

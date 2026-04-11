@@ -5,6 +5,16 @@ extends "res://algorithms/vectors/shared/force_containment_base.gd"
 ## Concept: Forces combine using tip-to-tail addition
 ## Agent-PhysicsArchitect: Shows superposition principle
 ## Protocol: IACP v2.2
+##
+## @identity
+## essence: F_net = F1 + F2. Superposition. Forces add as vectors. The ball feels only the sum.
+## desire: To let the learner drag two force arrows and watch the ball respond to their sum — not to either alone. Superposition as felt experience.
+## critical_parameter: The angle between F1 and F2. Parallel forces compound; perpendicular forces create diagonal motion; opposing forces cancel.
+## triggers: Drag red F1 or orange F2 → yellow net force updates, ball accelerates along net force, R → reset, Space → freeze
+## emerges: Cancellation when forces oppose. Diagonal trajectories from perpendicular forces. The net force arrow always predicting the ball's next move.
+## needs: VR draggable force vectors [has], net force visualization [has], velocity readout [has]. Missing: third force for true 3-body superposition.
+## relationships: Physical application of vector_addition_demo. Feeds into ForcesComposition map. Prerequisite for weather_vector_field (wind superposition).
+## truth: Nature does not apply forces one at a time. Every force acts simultaneously. The body knows only the sum.
 
 var force1_vector: Node3D
 var force2_vector: Node3D
@@ -20,12 +30,12 @@ var _velocity_cache: Dictionary = {}
 var accumulator: float = 0.0
 const UPDATE_INTERVAL = 0.1
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	_setup_demo()
 	print("CombinedForcesDemo: Ready - Drag the force vectors!")
 
-func _setup_demo():
+func _setup_demo() -> void:
 	"""Setup combined forces demonstration"""
 	# Force 1 (user can drag) - Red
 	force1_vector = create_force_vector(
@@ -70,7 +80,7 @@ func _setup_demo():
 		"Forces add as vectors"
 	])
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	update_force_vector_position()
 	
 	# Get forces (logical units)
@@ -96,7 +106,7 @@ func _physics_process(delta):
 		_update_info(f1, f2, f_net, velocity)
 		accumulator = 0.0
 
-func _update_info(f1: Vector3, f2: Vector3, f_net: Vector3, velocity: Vector3):
+func _update_info(f1: Vector3, f2: Vector3, f_net: Vector3, velocity: Vector3) -> void:
 	"""Update info display"""
 	var lines = [
 		"Combined Forces Demo",
@@ -115,7 +125,7 @@ func _update_info(f1: Vector3, f2: Vector3, f_net: Vector3, velocity: Vector3):
 	]
 	update_info_text(lines)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_R:
 			_reset_demo()
@@ -123,7 +133,7 @@ func _input(event):
 			physics_ball.linear_velocity = Vector3.ZERO
 			physics_ball.angular_velocity = Vector3.ZERO
 
-func _reset_demo():
+func _reset_demo() -> void:
 	"""Reset to initial state"""
 	reset_ball(Vector3.ZERO)
 	
@@ -144,3 +154,6 @@ func _reset_demo():
 		line2.refresh_connections()
 	
 	print("CombinedForcesDemo: Reset")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

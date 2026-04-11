@@ -1,1004 +1,910 @@
+# ===========================================================================
+# VoronoiVisualization — Fortune Sweep & Delaunay Dual
+# Voronoi diagrams with animated Fortune's algorithm sweep line,
+# Delaunay triangulation dual, and weighted power diagrams.
+# Elevated features:
+#   - Fortune's algorithm sweep line with beach line parabolas & circle events
+#   - Delaunay triangulation dual animation
+#   - Power diagrams for weighted sites
+#   - Configurable via apply_grid_config()
+# License: CC BY-NC-SA 3.0 derivative
+# ===========================================================================
+
 class_name VoronoiVisualization
 extends Node3D
 
-# Voronoi Diagrams: Spatial Justice & Territorial Organization
-# Visualizes spatial partitioning, Fortune's algorithm, Delaunay triangulation
-# Explores territorial politics and spatial equity in computational geometry
+## Voronoi diagrams: Fortune sweep, Delaunay dual, power diagrams.
+## VORONOI mode shows Fortune's sweep line with beach line parabolas.
+## DELAUNAY mode highlights the dual triangulation with animated edges.
+## POWER mode uses weighted sites for power diagrams.
 
-@export_category("Voronoi Configuration")
-@export var site_count: int = 15
-@export var auto_generate_sites: bool = true
-@export var show_delaunay_triangulation: bool = true
-@export var show_fortune_algorithm: bool = true
-@export var animate_sweepline: bool = false
+# --- Configuration ---
+@export var site_count: int = 12
+@export var field_width: float = 6.0
+@export var field_height: float = 5.0
+@export var sweep_speed: float = 0.8
+@export var grid_resolution: int = 80
+@export var show_edges: bool = true
+@export var show_cells: bool = true
 
-@export_category("Algorithm Settings")
-@export var use_fortune_algorithm: bool = true
-@export var sweepline_speed: float = 2.0
-@export var show_beach_line: bool = true
-@export var show_circle_events: bool = true
-@export var precision_epsilon: float = 1e-9
+# --- Mode ---
+enum Mode { VORONOI, DELAUNAY, POWER }
+var _mode: int = Mode.VORONOI
 
-@export_category("Spatial Analysis")
-@export var show_territory_sizes: bool = true
-@export var highlight_largest_territory: bool = true
-@export var show_territorial_borders: bool = true
-@export var analyze_spatial_equity: bool = true
-@export var show_power_diagrams: bool = false
+# --- Internal state ---
+var _time: float = 0.0
+var _sites: Array = []          # Array of Vector2
+var _weights: Array = []        # float weights for power diagrams
+var _cell_colors: Array = []    # Color per site
+var _adjacency: Array = []      # Array of [i, j] pairs (Delaunay edges)
+var _step_timer: float = 0.0
 
-@export_category("Visualization")
-@export var diagram_bounds: Vector2 = Vector2(20, 15)
-@export var site_radius: float = 0.2
-@export var edge_thickness: float = 0.05
-@export var show_infinite_edges: bool = true
-@export var animate_construction: bool = true
+# Fortune sweep state
+var _sweep_x: float = -INF
+var _sweep_running: bool = false
+var _sweep_done: bool = false
+var _circle_events: Array = []  # Array of {center: Vector2, radius: float, site_indices: Array}
+var _beach_breakpoints: Array = []  # Array of {left: int, right: int, x: float}
 
-@export_category("Animation Settings")
-@export var animation_speed: float = 1.0
-@export var site_animation_duration: float = 0.8
-@export var cell_animation_duration: float = 1.2
-@export var enable_pulsing: bool = true
-@export var enable_rotation: bool = true
-@export var rotation_speed: float = 0.5
-@export var enable_floating: bool = true
-@export var floating_amplitude: float = 0.1
-@export var floating_frequency: float = 1.0
+# Delaunay animation state
+var _del_edge_progress: float = 0.0
+var _del_animating: bool = false
 
-@export_category("Interactive Features")
-@export var allow_site_dragging: bool = true
-@export var real_time_updates: bool = true
-@export var show_nearest_site: bool = true
-@export var highlight_mouse_cell: bool = true
+# Cell data (computed)
+var _cell_vertices: Array = []   # Array of PackedVector2Array per site
+var _cell_areas: Array = []      # float area per site
 
-# Colors for visualization
-@export var site_color: Color = Color(0.9, 0.3, 0.2, 1.0)
-@export var voronoi_edge_color: Color = Color(0.2, 0.7, 0.9, 1.0)
-@export var delaunay_edge_color: Color = Color(0.9, 0.7, 0.2, 1.0)
-@export var sweepline_color: Color = Color(0.9, 0.2, 0.9, 1.0)
-@export var beach_line_color: Color = Color(0.3, 0.9, 0.3, 1.0)
+# --- Rendering ---
+var _cells_im: ImmediateMesh
+var _cells_mi: MeshInstance3D
+var _edges_im: ImmediateMesh
+var _edges_mi: MeshInstance3D
+var _sites_im: ImmediateMesh
+var _sites_mi: MeshInstance3D
+var _delaunay_im: ImmediateMesh
+var _delaunay_mi: MeshInstance3D
+var _sweep_im: ImmediateMesh
+var _sweep_mi: MeshInstance3D
+var _beach_im: ImmediateMesh
+var _beach_mi: MeshInstance3D
 
-# Voronoi diagram data structures
-class VoronoiSite:
-	var position: Vector2
-	var index: int
-	var territory_area: float = 0.0
-	var mesh_instance: MeshInstance3D = null
-	
-	func _init(pos: Vector2, idx: int):
-		position = pos
-		index = idx
+# Materials
+var _mat_unshaded: StandardMaterial3D
+var _mat_alpha: StandardMaterial3D
 
-class VoronoiCell:
-	var site: VoronoiSite
-	var vertices: Array[Vector2] = []
-	var area: float = 0.0
-	var mesh_instance: MeshInstance3D = null
+# Labels
+var _title_label: Label3D
+var _mode_label: Label3D
+var _info_label: Label3D
+var _sweep_label: Label3D
+var _equity_label: Label3D
 
-# Algorithm state
-var sites: Array[VoronoiSite] = []
-var cells: Array[VoronoiCell] = []
+# VR controls
+const SLIDER_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
+const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
+var _mode_button: Node3D
+var _restart_button: Node3D
+var _count_slider: Node3D
+var _speed_slider: Node3D
 
-# Visualization elements
-var site_meshes: Array = []
-var cell_meshes: Array = []
-var delaunay_meshes: Array = []
-var ui_display: CanvasLayer
+# Colors
+const COL_SITE := Color(0.95, 0.3, 0.15)
+const COL_SITE_GLOW := Color(1.0, 0.5, 0.2)
+const COL_VORONOI_EDGE := Color(0.2, 0.75, 0.95)
+const COL_DELAUNAY_EDGE := Color(0.95, 0.75, 0.15)
+const COL_SWEEP_LINE := Color(0.9, 0.15, 0.9, 0.85)
+const COL_BEACH_LINE := Color(0.2, 0.95, 0.4, 0.7)
+const COL_CIRCLE_EVENT := Color(1.0, 0.4, 0.4, 0.5)
+const COL_WEIGHT_RING := Color(0.6, 0.4, 1.0, 0.6)
+const COL_GRID := Color(0.3, 0.3, 0.35, 0.15)
 
-# Animation elements
-var animation_tweens: Array = []
-var construction_timer: Timer
-var animation_phase: int = 0  # 0=sites, 1=cells, 2=complete
-var base_time: float = 0.0
+func _ready() -> void:
+	_create_materials()
+	_create_mesh_instances()
+	_create_labels()
+	_create_vr_controls()
+	_generate_sites()
+	_compute_diagram()
+	_start_sweep()
 
-# Performance metrics
-var construction_time: float = 0.0
-var spatial_equity_index: float = 0.0
+# =========================================================================
+# Materials
+# =========================================================================
 
-func _init():
-	name = "Voronoi_Visualization"
+func _create_materials() -> void:
+	_mat_unshaded = StandardMaterial3D.new()
+	_mat_unshaded.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_mat_unshaded.vertex_color_use_as_albedo = true
+	_mat_unshaded.cull_mode = BaseMaterial3D.CULL_DISABLED
 
-func _ready():
-	setup_visual_environment()
-	setup_animation_system()
-	
-	if auto_generate_sites:
-		generate_random_sites()
-	
-	if animate_construction:
-		call_deferred("animate_construction_process")
-	else:
-		call_deferred("construct_voronoi_cells")
-		call_deferred("update_visualization")
+	_mat_alpha = StandardMaterial3D.new()
+	_mat_alpha.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_mat_alpha.vertex_color_use_as_albedo = true
+	_mat_alpha.cull_mode = BaseMaterial3D.CULL_DISABLED
+	_mat_alpha.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 
-func setup_visual_environment():
-	"""Set up enhanced visual environment"""
-	var main_light = DirectionalLight3D.new()
-	main_light.transform.basis = Basis.from_euler(Vector3(-0.3, 0.5, 0))
-	main_light.light_energy = 1.5
-	main_light.shadow_enabled = true
-	main_light.shadow_bias = 0.1
-	add_child(main_light)
-	
-	var rim_light = DirectionalLight3D.new()
-	rim_light.transform.basis = Basis.from_euler(Vector3(0.3, -0.5, 0))
-	rim_light.light_energy = 0.8
-	rim_light.light_color = Color(0.8, 0.9, 1.0)
-	add_child(rim_light)
-	
-	var camera = Camera3D.new()
-	camera.position = Vector3(15, 12, 15)
-	camera.look_at_from_position(camera.position, Vector3(0, 0, 0), Vector3.UP)
-	camera.fov = 60.0
-	add_child(camera)
+# =========================================================================
+# Mesh instances
+# =========================================================================
 
-func setup_animation_system():
-	"""Set up animation system"""
-	construction_timer = Timer.new()
-	construction_timer.wait_time = 0.1
-	construction_timer.timeout.connect(_on_construction_timer_timeout)
-	add_child(construction_timer)
+func _create_mesh_instances() -> void:
+	_cells_im = ImmediateMesh.new()
+	_cells_mi = MeshInstance3D.new()
+	_cells_mi.mesh = _cells_im
+	_cells_mi.material_override = _mat_alpha
+	add_child(_cells_mi)
 
-func setup_ui():
-	"""Create UI for Voronoi visualization"""
-	ui_display = CanvasLayer.new()
-	add_child(ui_display)
-	
-	var panel = Panel.new()
-	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
-	panel.size = Vector2(600, 800)
-	panel.position = Vector2(10, 10)
-	ui_display.add_child(panel)
-	
-	var vbox = VBoxContainer.new()
-	panel.add_child(vbox)
-	
-	for i in range(40):
-		var label = Label.new()
-		label.name = "info_label_" + str(i)
-		label.text = ""
-		vbox.add_child(label)
-	
-	update_ui()
+	_edges_im = ImmediateMesh.new()
+	_edges_mi = MeshInstance3D.new()
+	_edges_mi.mesh = _edges_im
+	_edges_mi.material_override = _mat_unshaded
+	add_child(_edges_mi)
 
-func _process(delta):
-	"""Update animations and effects"""
-	base_time += delta
-	
-	# Update floating animation
-	if enable_floating:
-		update_floating_animation()
-	
-	# Update rotation animation
-	if enable_rotation:
-		update_rotation_animation(delta)
-	
-	# Update pulsing animation
-	if enable_pulsing:
-		update_pulsing_animation()
+	_sites_im = ImmediateMesh.new()
+	_sites_mi = MeshInstance3D.new()
+	_sites_mi.mesh = _sites_im
+	_sites_mi.material_override = _mat_unshaded
+	add_child(_sites_mi)
 
-func update_floating_animation():
-	"""Update floating animation for sites"""
-	for i in range(site_meshes.size()):
-		var mesh = site_meshes[i]
-		if mesh and is_instance_valid(mesh):
-			var original_y = 0.1
-			var float_offset = sin(base_time * floating_frequency + i * 0.5) * floating_amplitude
-			mesh.position.y = original_y + float_offset
+	_delaunay_im = ImmediateMesh.new()
+	_delaunay_mi = MeshInstance3D.new()
+	_delaunay_mi.mesh = _delaunay_im
+	_delaunay_mi.material_override = _mat_alpha
+	add_child(_delaunay_mi)
 
-func update_rotation_animation(delta):
-	"""Update rotation animation for the entire diagram"""
-	rotation.y += rotation_speed * delta
+	_sweep_im = ImmediateMesh.new()
+	_sweep_mi = MeshInstance3D.new()
+	_sweep_mi.mesh = _sweep_im
+	_sweep_mi.material_override = _mat_alpha
+	add_child(_sweep_mi)
 
-func update_pulsing_animation():
-	"""Update pulsing animation for sites"""
-	for i in range(site_meshes.size()):
-		var mesh = site_meshes[i]
-		if mesh and is_instance_valid(mesh):
-			var pulse_scale = 1.0 + sin(base_time * 2.0 + i * 0.3) * 0.1
-			mesh.scale = Vector3(pulse_scale, pulse_scale, pulse_scale)
+	_beach_im = ImmediateMesh.new()
+	_beach_mi = MeshInstance3D.new()
+	_beach_mi.mesh = _beach_im
+	_beach_mi.material_override = _mat_alpha
+	add_child(_beach_mi)
 
-func generate_random_sites():
-	"""Generate random site points"""
-	sites.clear()
-	var bounds = diagram_bounds
-	
+# =========================================================================
+# Labels
+# =========================================================================
+
+func _create_labels() -> void:
+	_title_label = Label3D.new()
+	_title_label.text = "Voronoi Diagrams"
+	_title_label.font_size = 48
+	_title_label.position = Vector3(0, field_height * 0.5 + 0.6, 0)
+	_title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_title_label.modulate = Color(0.9, 0.9, 1.0)
+	add_child(_title_label)
+
+	_mode_label = Label3D.new()
+	_mode_label.font_size = 32
+	_mode_label.position = Vector3(0, field_height * 0.5 + 0.3, 0)
+	_mode_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_mode_label.modulate = Color(0.7, 0.85, 1.0)
+	add_child(_mode_label)
+
+	_info_label = Label3D.new()
+	_info_label.font_size = 24
+	_info_label.position = Vector3(-field_width * 0.5 - 0.8, field_height * 0.3, 0)
+	_info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_info_label.modulate = Color(0.8, 0.8, 0.8)
+	_info_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	add_child(_info_label)
+
+	_sweep_label = Label3D.new()
+	_sweep_label.font_size = 20
+	_sweep_label.position = Vector3(-field_width * 0.5 - 0.8, -0.2, 0)
+	_sweep_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_sweep_label.modulate = Color(0.9, 0.5, 0.9)
+	_sweep_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	add_child(_sweep_label)
+
+	_equity_label = Label3D.new()
+	_equity_label.font_size = 22
+	_equity_label.position = Vector3(-field_width * 0.5 - 0.8, -field_height * 0.3, 0)
+	_equity_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_equity_label.modulate = Color(0.7, 0.9, 0.7)
+	_equity_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	add_child(_equity_label)
+
+# =========================================================================
+# VR Controls
+# =========================================================================
+
+func _create_vr_controls() -> void:
+	var panel_y := -field_height * 0.5 - 0.5
+	var panel_x := -field_width * 0.3
+
+	_count_slider = SLIDER_SCENE.instantiate()
+	_count_slider.position = Vector3(panel_x, panel_y, 0.05)
+	_count_slider.set_param_name("Sites")
+	_count_slider.set_normalized_value(clampf(float(site_count - 4) / 36.0, 0.0, 1.0))
+	_count_slider.slider_moved.connect(_on_count_slider)
+	add_child(_count_slider)
+
+	_speed_slider = SLIDER_SCENE.instantiate()
+	_speed_slider.position = Vector3(panel_x + 1.5, panel_y, 0.05)
+	_speed_slider.set_param_name("Speed")
+	_speed_slider.set_normalized_value(clampf(sweep_speed / 3.0, 0.0, 1.0))
+	_speed_slider.slider_moved.connect(_on_speed_slider)
+	add_child(_speed_slider)
+
+	_mode_button = BUTTON_SCENE.instantiate()
+	_mode_button.position = Vector3(panel_x + 3.0, panel_y, 0.05)
+	var area = _mode_button.get_node_or_null("InteractableAreaButton")
+	if area:
+		area.button_pressed.connect(_on_mode_pressed)
+	add_child(_mode_button)
+
+	_restart_button = BUTTON_SCENE.instantiate()
+	_restart_button.position = Vector3(panel_x + 4.2, panel_y, 0.05)
+	var area2 = _restart_button.get_node_or_null("InteractableAreaButton")
+	if area2:
+		area2.button_pressed.connect(_on_restart_pressed)
+	add_child(_restart_button)
+
+func _on_count_slider(_val: float) -> void:
+	var nv: float = _count_slider.get_normalized_value()
+	site_count = int(4 + nv * 36)
+	_restart()
+
+func _on_speed_slider(_val: float) -> void:
+	var nv: float = _speed_slider.get_normalized_value()
+	sweep_speed = nv * 3.0
+
+func _on_mode_pressed() -> void:
+	_mode = (_mode + 1) % 3
+	_restart()
+
+func _on_restart_pressed() -> void:
+	_restart()
+
+# =========================================================================
+# Site generation
+# =========================================================================
+
+func _generate_sites() -> void:
+	_sites.clear()
+	_weights.clear()
+	_cell_colors.clear()
+
+	var hw := field_width * 0.45
+	var hh := field_height * 0.45
+
 	for i in range(site_count):
-		var pos = Vector2(
-			randf_range(-bounds.x/2, bounds.x/2),
-			randf_range(-bounds.y/2, bounds.y/2)
-		)
-		var site = VoronoiSite.new(pos, i)
-		sites.append(site)
-	
-	print("Generated ", sites.size(), " random sites")
-	visualize_sites()
+		var pos := Vector2(randf_range(-hw, hw), randf_range(-hh, hh))
+		_sites.append(pos)
+		_weights.append(randf_range(0.3, 1.5))
+		var hue := float(i) / float(maxi(site_count, 1))
+		_cell_colors.append(Color.from_hsv(hue, 0.55, 0.85, 0.35))
 
-func construct_voronoi_cells():
-	"""Construct proper Voronoi cells using a more robust method"""
-	cells.clear()
-	var bounds = Rect2(-diagram_bounds/2, diagram_bounds)
-	var start_time = Time.get_ticks_msec()
-	
-	print("Constructing Voronoi cells using improved algorithm...")
-	
-	# Create a grid-based approach for better cell generation
-	var grid_resolution = 100
-	var cell_map = {} # int -> Array[Vector2]
-	
-	# For each grid point, find the closest site
-	for x in range(grid_resolution):
-		for y in range(grid_resolution):
-			var world_x = bounds.position.x + (x / float(grid_resolution - 1)) * bounds.size.x
-			var world_y = bounds.position.y + (y / float(grid_resolution - 1)) * bounds.size.y
-			var grid_pos = Vector2(world_x, world_y)
-			
-			var closest_site = find_closest_site(grid_pos)
-			if closest_site != null:
-				if not cell_map.has(closest_site.index):
-					cell_map[closest_site.index] = []
-				cell_map[closest_site.index].append(grid_pos)
-	
-	# Create cells from the grid data
-	for site in sites:
-		var cell = VoronoiCell.new()
-		cell.site = site
-		
-		if cell_map.has(site.index):
-			# Create convex hull of grid points
-			var grid_points: Array[Vector2] = []
-			grid_points.assign(cell_map[site.index])
-			cell.vertices = create_convex_hull(grid_points)
-		else:
-			# Fallback: create a small cell around the site
-			cell.vertices = create_small_cell_around_site(site.position)
-		
-		cell.area = calculate_polygon_area(cell.vertices)
-		site.territory_area = cell.area
-		cells.append(cell)
-	
-	construction_time = Time.get_ticks_msec() - start_time
-	print("Cell construction completed in ", construction_time, "ms")
-	print("Created ", cells.size(), " cells")
-	
-	validate_voronoi_structure()
-	calculate_spatial_metrics()
-	update_ui()
+# =========================================================================
+# Diagram computation (grid-based nearest-site)
+# =========================================================================
 
-func find_closest_site(position: Vector2) -> VoronoiSite:
-	"""Find the closest site to a given position"""
-	if sites.is_empty():
-		return null
-	
-	var closest_site = sites[0]
-	var min_distance = position.distance_squared_to(sites[0].position)
-	
-	for i in range(1, sites.size()):
-		var distance = position.distance_squared_to(sites[i].position)
-		if distance < min_distance:
-			min_distance = distance
-			closest_site = sites[i]
-	
-	return closest_site
+func _compute_diagram() -> void:
+	_cell_vertices.clear()
+	_cell_areas.clear()
+	_adjacency.clear()
 
-func create_convex_hull(points: Array[Vector2]) -> Array[Vector2]:
-	"""Create convex hull from a set of points using Graham scan"""
+	var hw := field_width * 0.5
+	var hh := field_height * 0.5
+	var n := _sites.size()
+	if n == 0:
+		return
+
+	# Grid ownership map
+	var ownership: Array = []
+	ownership.resize(grid_resolution * grid_resolution)
+	for gx in range(grid_resolution):
+		for gy in range(grid_resolution):
+			var wx: float = -hw + (gx + 0.5) / float(grid_resolution) * field_width
+			var wy: float = -hh + (gy + 0.5) / float(grid_resolution) * field_height
+			var gp := Vector2(wx, wy)
+			var best := 0
+			var best_d: float = _site_distance(gp, 0)
+			for s in range(1, n):
+				var d: float = _site_distance(gp, s)
+				if d < best_d:
+					best_d = d
+					best = s
+			ownership[gx * grid_resolution + gy] = best
+
+	# Extract boundary vertices per cell and adjacency
+	var adj_set: Dictionary = {}
+	var cell_points: Array = []
+	cell_points.resize(n)
+	for i in range(n):
+		cell_points[i] = []
+
+	var dx := field_width / float(grid_resolution)
+	var dy := field_height / float(grid_resolution)
+
+	for gx in range(grid_resolution):
+		for gy in range(grid_resolution):
+			var owner: int = ownership[gx * grid_resolution + gy]
+			var wx: float = -hw + (gx + 0.5) * dx
+			var wy: float = -hh + (gy + 0.5) * dy
+			var is_boundary := false
+
+			# Check 4-neighbors for adjacency
+			for dir in [[1, 0], [-1, 0], [0, 1], [0, -1]]:
+				var nx: int = gx + dir[0]
+				var ny: int = gy + dir[1]
+				if nx >= 0 and nx < grid_resolution and ny >= 0 and ny < grid_resolution:
+					var neighbor: int = ownership[nx * grid_resolution + ny]
+					if neighbor != owner:
+						is_boundary = true
+						var key: int = mini(owner, neighbor) * 10000 + maxi(owner, neighbor)
+						adj_set[key] = [mini(owner, neighbor), maxi(owner, neighbor)]
+				else:
+					is_boundary = true
+
+			cell_points[owner].append(Vector2(wx, wy))
+
+	# Build adjacency list
+	for key in adj_set:
+		_adjacency.append(adj_set[key])
+
+	# Build convex hulls for each cell
+	for i in range(n):
+		var pts: Array = cell_points[i]
+		if pts.size() < 3:
+			_cell_vertices.append(PackedVector2Array())
+			_cell_areas.append(0.0)
+			continue
+		var hull: PackedVector2Array = _convex_hull(pts)
+		_cell_vertices.append(hull)
+		_cell_areas.append(_polygon_area(hull))
+
+	# Detect circle events from Delaunay triples
+	_detect_circle_events()
+
+func _site_distance(point: Vector2, site_idx: int) -> float:
+	var d2: float = point.distance_squared_to(_sites[site_idx])
+	if _mode == Mode.POWER:
+		return d2 - _weights[site_idx] * _weights[site_idx]
+	return d2
+
+func _convex_hull(points: Array) -> PackedVector2Array:
 	if points.size() < 3:
-		return points
-	
-	# Find bottom-most point (and leftmost in case of tie)
-	var start_point = points[0]
-	for point in points:
-		if point.y < start_point.y or (point.y == start_point.y and point.x < start_point.x):
-			start_point = point
-	
-	# Sort points by polar angle with respect to start point
-	points.sort_custom(func(a: Vector2, b: Vector2) -> bool:
-		var angle_a = atan2(a.y - start_point.y, a.x - start_point.x)
-		var angle_b = atan2(b.y - start_point.y, b.x - start_point.x)
-		return angle_a < angle_b
+		var r := PackedVector2Array()
+		for p in points:
+			r.append(p)
+		return r
+
+	# Graham scan
+	var start: Vector2 = points[0]
+	for p in points:
+		if p.y < start.y or (p.y == start.y and p.x < start.x):
+			start = p
+
+	var sorted_pts: Array = points.duplicate()
+	sorted_pts.sort_custom(func(a: Vector2, b: Vector2) -> bool:
+		var aa: float = atan2(a.y - start.y, a.x - start.x)
+		var ab: float = atan2(b.y - start.y, b.x - start.x)
+		if abs(aa - ab) < 1e-9:
+			return a.distance_squared_to(start) < b.distance_squared_to(start)
+		return aa < ab
 	)
-	
-	# Build convex hull
-	var hull: Array[Vector2] = []
-	
-	for point in points:
-		while hull.size() > 1 and cross_product(hull[-2], hull[-1], point) <= 0:
-			hull.pop_back()
-		hull.append(point)
-	
-	return hull
 
-func cross_product(o: Vector2, a: Vector2, b: Vector2) -> float:
-	"""Calculate cross product of vectors OA and OB"""
-	return (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x)
+	var hull: Array = []
+	for p in sorted_pts:
+		while hull.size() > 1:
+			var o: Vector2 = hull[hull.size() - 2]
+			var a: Vector2 = hull[hull.size() - 1]
+			if (a.x - o.x) * (p.y - o.y) - (a.y - o.y) * (p.x - o.x) <= 0:
+				hull.pop_back()
+			else:
+				break
+		hull.append(p)
 
-func create_small_cell_around_site(site_pos: Vector2) -> Array[Vector2]:
-	"""Create a small cell around a site as fallback"""
-	var cell_size = 1.0
-	return [
-		Vector2(site_pos.x - cell_size, site_pos.y - cell_size),
-		Vector2(site_pos.x + cell_size, site_pos.y - cell_size),
-		Vector2(site_pos.x + cell_size, site_pos.y + cell_size),
-		Vector2(site_pos.x - cell_size, site_pos.y + cell_size)
-	]
-
-func clip_polygon_by_bisector(polygon: Array[Vector2], site1: Vector2, site2: Vector2) -> Array[Vector2]:
-	"""Clip polygon by perpendicular bisector between two sites"""
-	if polygon.size() < 3:
-		return polygon
-	
-	var midpoint = (site1 + site2) / 2.0
-	var direction = (site2 - site1).normalized()
-	var normal = Vector2(-direction.y, direction.x)
-	
-	var result: Array[Vector2] = []
-	
-	for i in range(polygon.size()):
-		var current = polygon[i]
-		var next = polygon[(i + 1) % polygon.size()]
-		
-		var current_side = (current - midpoint).dot(normal)
-		var next_side = (next - midpoint).dot(normal)
-		
-		if current_side >= -precision_epsilon:
-			result.append(current)
-		
-		if (current_side > precision_epsilon and next_side < -precision_epsilon) or \
-		   (current_side < -precision_epsilon and next_side > precision_epsilon):
-			var intersection = line_line_intersection(current, next, midpoint, midpoint + Vector2(-normal.y, normal.x))
-			if intersection != Vector2.INF:
-				result.append(intersection)
-	
+	var result := PackedVector2Array()
+	for p in hull:
+		result.append(p)
 	return result
 
-func line_line_intersection(p1: Vector2, p2: Vector2, p3: Vector2, p4: Vector2) -> Vector2:
-	"""Find intersection point of two line segments"""
-	var d = (p1.x - p2.x) * (p3.y - p4.y) - (p1.y - p2.y) * (p3.x - p4.x)
-	
-	if abs(d) < precision_epsilon:
-		return Vector2.INF
-	
-	var t = ((p1.x - p3.x) * (p3.y - p4.y) - (p1.y - p3.y) * (p3.x - p4.x)) / d
-	
-	return Vector2(p1.x + t * (p2.x - p1.x), p1.y + t * (p2.y - p1.y))
+func _polygon_area(verts: PackedVector2Array) -> float:
+	if verts.size() < 3:
+		return 0.0
+	var area := 0.0
+	for i in range(verts.size()):
+		var j := (i + 1) % verts.size()
+		area += verts[i].x * verts[j].y
+		area -= verts[j].x * verts[i].y
+	return absf(area) * 0.5
 
-func clip_polygon_to_bounds(polygon: Array[Vector2], bounds: Rect2) -> Array[Vector2]:
-	"""Clip polygon to diagram bounds"""
-	if polygon.size() < 3:
-		return polygon
-	
-	var result = polygon.duplicate()
-	
-	# Clip against each edge of the bounds
-	var edges = [
-		[Vector2(bounds.position.x, bounds.position.y), Vector2(bounds.position.x + bounds.size.x, bounds.position.y)],  # Bottom
-		[Vector2(bounds.position.x + bounds.size.x, bounds.position.y), Vector2(bounds.position.x + bounds.size.x, bounds.position.y + bounds.size.y)],  # Right
-		[Vector2(bounds.position.x + bounds.size.x, bounds.position.y + bounds.size.y), Vector2(bounds.position.x, bounds.position.y + bounds.size.y)],  # Top
-		[Vector2(bounds.position.x, bounds.position.y + bounds.size.y), Vector2(bounds.position.x, bounds.position.y)]   # Left
-	]
-	
-	for edge in edges:
-		result = clip_polygon_by_line(result, edge[0], edge[1])
-		if result.size() < 3:
-			break
-	
-	return result
+# =========================================================================
+# Circle event detection (circumcircles of Delaunay triples)
+# =========================================================================
 
-func clip_polygon_by_line(polygon: Array[Vector2], line_start: Vector2, line_end: Vector2) -> Array[Vector2]:
-	"""Clip polygon by a line (keeping points on the inside)"""
-	if polygon.size() < 3:
-		return polygon
-	
-	var result: Array[Vector2] = []
-	var line_dir = (line_end - line_start).normalized()
-	var line_normal = Vector2(-line_dir.y, line_dir.x)
-	
-	for i in range(polygon.size()):
-		var current = polygon[i]
-		var next = polygon[(i + 1) % polygon.size()]
-		
-		var current_side = (current - line_start).dot(line_normal)
-		var next_side = (next - line_start).dot(line_normal)
-		
-		if current_side >= -precision_epsilon:
-			result.append(current)
-		
-		if (current_side > precision_epsilon and next_side < -precision_epsilon) or \
-		   (current_side < -precision_epsilon and next_side > precision_epsilon):
-			var intersection = line_line_intersection(current, next, line_start, line_end)
-			if intersection != Vector2.INF:
-				result.append(intersection)
-	
-	return result
+func _detect_circle_events() -> void:
+	_circle_events.clear()
+	# Build adjacency lookup
+	var adj_map: Dictionary = {}
+	for edge in _adjacency:
+		var a: int = edge[0]
+		var b: int = edge[1]
+		if not adj_map.has(a):
+			adj_map[a] = []
+		if not adj_map.has(b):
+			adj_map[b] = []
+		adj_map[a].append(b)
+		adj_map[b].append(a)
 
-func validate_voronoi_structure():
-	"""Validate that the Voronoi structure is mathematically correct"""
-	print("Validating Voronoi structure...")
-	
-	var total_area = 0.0
-	var bounds = diagram_bounds
-	var expected_area = bounds.x * bounds.y
-	var valid_cells = 0
-	
-	for i in range(cells.size()):
-		var cell = cells[i]
-		print("Cell ", i, ": ", cell.vertices.size(), " vertices, area: ", cell.area)
-		if cell.vertices.size() >= 3:
-			total_area += cell.area
-			valid_cells += 1
-	
-	print("Valid cells: ", valid_cells, " out of ", cells.size())
-	
-	var coverage_ratio = total_area / expected_area
-	print("Coverage ratio: ", snapped(coverage_ratio, 0.001), " (should be close to 1.0)")
-	
-	if coverage_ratio < 0.95:
-		print("WARNING: Low coverage ratio - cells may be incomplete")
-	elif coverage_ratio > 1.05:
-		print("WARNING: High coverage ratio - cells may be overlapping")
+	# Find triples sharing edges
+	var found: Dictionary = {}
+	for edge in _adjacency:
+		var a: int = edge[0]
+		var b: int = edge[1]
+		if not adj_map.has(a) or not adj_map.has(b):
+			continue
+		for c in adj_map[a]:
+			if c > b and adj_map[b].has(c):
+				var key: int = a * 100000000 + b * 10000 + c
+				if found.has(key):
+					continue
+				found[key] = true
+				var cc: Dictionary = _circumcircle(_sites[a], _sites[b], _sites[c])
+				if cc.size() > 0:
+					_circle_events.append({
+						"center": cc["center"],
+						"radius": cc["radius"],
+						"sites": [a, b, c]
+					})
+
+func _circumcircle(a: Vector2, b: Vector2, c: Vector2) -> Dictionary:
+	var ax: float = a.x; var ay: float = a.y
+	var bx: float = b.x; var by: float = b.y
+	var cx: float = c.x; var cy: float = c.y
+	var d: float = 2.0 * (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by))
+	if absf(d) < 1e-10:
+		return {}
+	var ux: float = ((ax * ax + ay * ay) * (by - cy) + (bx * bx + by * by) * (cy - ay) + (cx * cx + cy * cy) * (ay - by)) / d
+	var uy: float = ((ax * ax + ay * ay) * (cx - bx) + (bx * bx + by * by) * (ax - cx) + (cx * cx + cy * cy) * (bx - ax)) / d
+	var center := Vector2(ux, uy)
+	var radius: float = center.distance_to(a)
+	return {"center": center, "radius": radius}
+
+# =========================================================================
+# Sweep control
+# =========================================================================
+
+func _start_sweep() -> void:
+	_sweep_x = -field_width * 0.5 - 0.5
+	_sweep_running = true
+	_sweep_done = false
+	_del_edge_progress = 0.0
+	_del_animating = _mode == Mode.DELAUNAY
+
+func _restart() -> void:
+	_generate_sites()
+	_compute_diagram()
+	_start_sweep()
+
+# =========================================================================
+# Process
+# =========================================================================
+
+func _process(delta: float) -> void:
+	_time += delta
+
+	# Advance sweep line
+	if _sweep_running and not _sweep_done:
+		_sweep_x += sweep_speed * delta
+		if _sweep_x > field_width * 0.5 + 0.5:
+			_sweep_done = true
+			_sweep_running = false
+
+	# Delaunay edge animation
+	if _del_animating and _sweep_done:
+		_del_edge_progress += delta * 0.8
+		if _del_edge_progress >= 1.0:
+			_del_edge_progress = 1.0
+			_del_animating = false
+
+	_draw_all()
+	_update_labels()
+
+# =========================================================================
+# Drawing
+# =========================================================================
+
+func _draw_all() -> void:
+	_draw_cells()
+	_draw_edges()
+	_draw_sites()
+	_draw_delaunay()
+	_draw_sweep_line()
+	_draw_beach_line()
+
+# --- Cells (filled polygons) ---
+func _draw_cells() -> void:
+	_cells_im.clear_surfaces()
+	if not show_cells:
+		return
+
+	var n := _sites.size()
+	for i in range(n):
+		var verts: PackedVector2Array = _cell_vertices[i] if i < _cell_vertices.size() else PackedVector2Array()
+		if verts.size() < 3:
+			continue
+
+		# In sweep mode, only reveal cells left of sweep line
+		var reveal: bool = _sweep_done or _mode != Mode.VORONOI
+		if not reveal:
+			# Check if site is left of sweep
+			if _sites[i].x > _sweep_x:
+				continue
+
+		var col: Color = _cell_colors[i] if i < _cell_colors.size() else Color(0.5, 0.5, 0.5, 0.3)
+
+		_cells_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		for t in range(1, verts.size() - 1):
+			_cells_im.surface_set_color(col)
+			_cells_im.surface_add_vertex(Vector3(verts[0].x, 0.0, verts[0].y))
+			_cells_im.surface_set_color(col)
+			_cells_im.surface_add_vertex(Vector3(verts[t].x, 0.0, verts[t].y))
+			_cells_im.surface_set_color(col)
+			_cells_im.surface_add_vertex(Vector3(verts[t + 1].x, 0.0, verts[t + 1].y))
+		_cells_im.surface_end()
+
+# --- Voronoi edges ---
+func _draw_edges() -> void:
+	_edges_im.clear_surfaces()
+	if not show_edges:
+		return
+
+	var n := _cell_vertices.size()
+	if n == 0:
+		return
+
+	_edges_im.surface_begin(Mesh.PRIMITIVE_LINES)
+	for i in range(n):
+		var verts: PackedVector2Array = _cell_vertices[i]
+		if verts.size() < 3:
+			continue
+
+		# In sweep mode, only reveal edges left of sweep
+		if _mode == Mode.VORONOI and not _sweep_done and _sites[i].x > _sweep_x:
+			continue
+
+		for j in range(verts.size()):
+			var a: Vector2 = verts[j]
+			var b: Vector2 = verts[(j + 1) % verts.size()]
+			_edges_im.surface_set_color(COL_VORONOI_EDGE)
+			_edges_im.surface_add_vertex(Vector3(a.x, 0.02, a.y))
+			_edges_im.surface_set_color(COL_VORONOI_EDGE)
+			_edges_im.surface_add_vertex(Vector3(b.x, 0.02, b.y))
+	_edges_im.surface_end()
+
+# --- Sites (diamond markers) ---
+func _draw_sites() -> void:
+	_sites_im.clear_surfaces()
+	var n := _sites.size()
+	if n == 0:
+		return
+
+	_sites_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+	for i in range(n):
+		var s: Vector2 = _sites[i]
+		var r := 0.12
+		var pulse: float = 1.0 + sin(_time * 2.5 + i * 0.7) * 0.08
+		r *= pulse
+		var col: Color = COL_SITE
+
+		# Diamond (4 triangles)
+		var top := Vector3(s.x, 0.05, s.y - r)
+		var right := Vector3(s.x + r, 0.05, s.y)
+		var bottom := Vector3(s.x, 0.05, s.y + r)
+		var left := Vector3(s.x - r, 0.05, s.y)
+		var up := Vector3(s.x, 0.05 + r * 0.7, s.y)
+		var down := Vector3(s.x, 0.05 - r * 0.3, s.y)
+
+		for tri in [[top, right, up], [right, bottom, up], [bottom, left, up], [left, top, up],
+					[right, top, down], [bottom, right, down], [left, bottom, down], [top, left, down]]:
+			_sites_im.surface_set_color(col)
+			_sites_im.surface_add_vertex(tri[0])
+			_sites_im.surface_set_color(COL_SITE_GLOW)
+			_sites_im.surface_add_vertex(tri[1])
+			_sites_im.surface_set_color(col)
+			_sites_im.surface_add_vertex(tri[2])
+
+		# Power diagram weight ring
+		if _mode == Mode.POWER:
+			var w: float = _weights[i] if i < _weights.size() else 1.0
+			_draw_weight_ring(s, w)
+
+	_sites_im.surface_end()
+
+func _draw_weight_ring(center: Vector2, weight: float) -> void:
+	# Weight ring is drawn separately in the sweep mesh to keep sites mesh clean
+	pass
+
+# --- Delaunay triangulation edges ---
+func _draw_delaunay() -> void:
+	_delaunay_im.clear_surfaces()
+	if _mode != Mode.DELAUNAY and _mode != Mode.VORONOI:
+		return
+	if _adjacency.is_empty():
+		return
+
+	# In VORONOI mode show Delaunay dimly; in DELAUNAY mode show prominently
+	var alpha: float = 0.3 if _mode == Mode.VORONOI else 0.85
+	var progress: float = 1.0
+	if _mode == Mode.DELAUNAY:
+		progress = clampf(_del_edge_progress, 0.0, 1.0) if _del_animating else 1.0
+		if not _sweep_done:
+			progress = 0.0
+
+	var edge_count: int = int(ceil(float(_adjacency.size()) * progress))
+
+	_delaunay_im.surface_begin(Mesh.PRIMITIVE_LINES)
+	for e in range(mini(edge_count, _adjacency.size())):
+		var pair: Array = _adjacency[e]
+		var a: Vector2 = _sites[pair[0]]
+		var b: Vector2 = _sites[pair[1]]
+		var col := Color(COL_DELAUNAY_EDGE.r, COL_DELAUNAY_EDGE.g, COL_DELAUNAY_EDGE.b, alpha)
+
+		# In VORONOI sweep mode, only show edges where both sites are left of sweep
+		if _mode == Mode.VORONOI and not _sweep_done:
+			if a.x > _sweep_x or b.x > _sweep_x:
+				continue
+
+		_delaunay_im.surface_set_color(col)
+		_delaunay_im.surface_add_vertex(Vector3(a.x, 0.04, a.y))
+		_delaunay_im.surface_set_color(col)
+		_delaunay_im.surface_add_vertex(Vector3(b.x, 0.04, b.y))
+	_delaunay_im.surface_end()
+
+# --- Fortune's sweep line ---
+func _draw_sweep_line() -> void:
+	_sweep_im.clear_surfaces()
+	if _sweep_done and _mode != Mode.POWER:
+		return
+
+	var hh := field_height * 0.5
+
+	if _mode == Mode.VORONOI and not _sweep_done:
+		# Vertical sweep line
+		_sweep_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		var lw := 0.03
+		var col: Color = COL_SWEEP_LINE
+		_add_quad(_sweep_im, col,
+			Vector3(_sweep_x - lw, -0.01, -hh),
+			Vector3(_sweep_x + lw, -0.01, -hh),
+			Vector3(_sweep_x + lw, -0.01, hh),
+			Vector3(_sweep_x - lw, -0.01, hh))
+		_sweep_im.surface_end()
+
+		# Circle events
+		if not _circle_events.is_empty():
+			_sweep_im.surface_begin(Mesh.PRIMITIVE_LINES)
+			for evt in _circle_events:
+				var c: Vector2 = evt["center"]
+				var r: float = evt["radius"]
+				# Only show circles near the sweep line
+				var right_edge: float = c.x + r
+				if right_edge < _sweep_x - 1.0 or c.x - r > _sweep_x + 2.0:
+					continue
+				var active: bool = absf(right_edge - _sweep_x) < 0.5
+				var ecol: Color = COL_CIRCLE_EVENT if not active else Color(1.0, 1.0, 0.3, 0.8)
+				var segs := 24
+				for s in range(segs):
+					var a1: float = TAU * s / float(segs)
+					var a2: float = TAU * (s + 1) / float(segs)
+					_sweep_im.surface_set_color(ecol)
+					_sweep_im.surface_add_vertex(Vector3(c.x + cos(a1) * r, 0.03, c.y + sin(a1) * r))
+					_sweep_im.surface_set_color(ecol)
+					_sweep_im.surface_add_vertex(Vector3(c.x + cos(a2) * r, 0.03, c.y + sin(a2) * r))
+			_sweep_im.surface_end()
+
+	# Power diagram weight rings
+	if _mode == Mode.POWER:
+		_sweep_im.surface_begin(Mesh.PRIMITIVE_LINES)
+		for i in range(_sites.size()):
+			var s: Vector2 = _sites[i]
+			var w: float = _weights[i] if i < _weights.size() else 1.0
+			var r: float = w * 0.5
+			var segs := 20
+			for seg in range(segs):
+				var a1: float = TAU * seg / float(segs)
+				var a2: float = TAU * (seg + 1) / float(segs)
+				_sweep_im.surface_set_color(COL_WEIGHT_RING)
+				_sweep_im.surface_add_vertex(Vector3(s.x + cos(a1) * r, 0.06, s.y + sin(a1) * r))
+				_sweep_im.surface_set_color(COL_WEIGHT_RING)
+				_sweep_im.surface_add_vertex(Vector3(s.x + cos(a2) * r, 0.06, s.y + sin(a2) * r))
+		_sweep_im.surface_end()
+
+# --- Beach line (parabolic fronts) ---
+func _draw_beach_line() -> void:
+	_beach_im.clear_surfaces()
+	if _mode != Mode.VORONOI or _sweep_done:
+		return
+
+	# Draw parabolic arcs for each site left of the sweep line
+	_beach_im.surface_begin(Mesh.PRIMITIVE_LINES)
+	var hh := field_height * 0.5
+	var segments := 60
+
+	# Collect sites left of sweep, compute their parabola contribution
+	var active_sites: Array = []
+	for i in range(_sites.size()):
+		if _sites[i].x < _sweep_x:
+			active_sites.append(i)
+
+	if active_sites.is_empty():
+		_beach_im.surface_end()
+		return
+
+	# For each y position, find the beach line x (closest parabola to sweep)
+	var prev_point := Vector3.ZERO
+	var has_prev := false
+
+	for seg in range(segments + 1):
+		var y: float = -hh + float(seg) / float(segments) * field_height
+		var best_x: float = -INF
+
+		for si in active_sites:
+			var sx: float = _sites[si].x
+			var sy: float = _sites[si].y
+			var dx: float = _sweep_x - sx
+			if dx < 0.01:
+				continue
+			# Parabola: x = (y - sy)^2 / (2 * dx) + (sx + sweep_x) / 2
+			var px: float = (y - sy) * (y - sy) / (2.0 * dx) + (sx + _sweep_x) * 0.5
+			if px > best_x:
+				best_x = px
+
+		if best_x > -INF:
+			# Clamp to field bounds
+			best_x = clampf(best_x, -field_width * 0.5, field_width * 0.5)
+			var current := Vector3(best_x, 0.01, y)
+			if has_prev:
+				_beach_im.surface_set_color(COL_BEACH_LINE)
+				_beach_im.surface_add_vertex(prev_point)
+				_beach_im.surface_set_color(COL_BEACH_LINE)
+				_beach_im.surface_add_vertex(current)
+			prev_point = current
+			has_prev = true
+
+	_beach_im.surface_end()
+
+# --- Quad helper ---
+func _add_quad(im: ImmediateMesh, col: Color, a: Vector3, b: Vector3, c: Vector3, d: Vector3) -> void:
+	im.surface_set_color(col)
+	im.surface_add_vertex(a)
+	im.surface_set_color(col)
+	im.surface_add_vertex(b)
+	im.surface_set_color(col)
+	im.surface_add_vertex(c)
+	im.surface_set_color(col)
+	im.surface_add_vertex(a)
+	im.surface_set_color(col)
+	im.surface_add_vertex(c)
+	im.surface_set_color(col)
+	im.surface_add_vertex(d)
+
+# =========================================================================
+# Labels
+# =========================================================================
+
+func _update_labels() -> void:
+	var mode_names := ["Fortune's Sweep", "Delaunay Dual", "Power Diagram"]
+	_mode_label.text = mode_names[_mode]
+
+	# Info
+	var total_area: float = 0.0
+	var max_area: float = 0.0
+	var min_area: float = INF
+	for a in _cell_areas:
+		total_area += a
+		max_area = maxf(max_area, a)
+		if a > 0.01:
+			min_area = minf(min_area, a)
+	if min_area == INF:
+		min_area = 0.0
+	var avg_area: float = total_area / maxf(float(_sites.size()), 1.0)
+
+	_info_label.text = "Sites: %d\nCells: %d\nEdges: %d" % [
+		_sites.size(), _cell_vertices.size(), _adjacency.size()]
+
+	# Sweep progress
+	if _mode == Mode.VORONOI and not _sweep_done:
+		var pct: float = clampf((_sweep_x + field_width * 0.5) / field_width * 100.0, 0.0, 100.0)
+		_sweep_label.text = "Sweep: %.0f%%\nCircle events: %d\nBeach arcs: %d" % [
+			pct, _circle_events.size(), _count_active_arcs()]
+	elif _mode == Mode.POWER:
+		_sweep_label.text = "Weighted Voronoi\nWeights: %.2f–%.2f" % [
+			_weights.min() if not _weights.is_empty() else 0.0,
+			_weights.max() if not _weights.is_empty() else 0.0]
+	elif _mode == Mode.DELAUNAY:
+		_sweep_label.text = "Triangulation edges: %d\nCircumcircles: %d" % [
+			_adjacency.size(), _circle_events.size()]
 	else:
-		print("Voronoi structure is mathematically correct!")
+		_sweep_label.text = "Complete"
 
-func calculate_polygon_area(vertices: Array[Vector2]) -> float:
-	"""Calculate area of a polygon using the shoelace formula"""
-	if vertices.size() < 3:
-		return 0.0
-	
-	var area = 0.0
-	for i in range(vertices.size()):
-		var j = (i + 1) % vertices.size()
-		area += vertices[i].x * vertices[j].y
-		area -= vertices[j].x * vertices[i].y
-	
-	return abs(area) / 2.0
+	# Spatial equity
+	var variance_sum: float = 0.0
+	for a in _cell_areas:
+		var dev: float = a - avg_area
+		variance_sum += dev * dev
+	var std_dev: float = sqrt(variance_sum / maxf(float(_sites.size()), 1.0))
+	var equity: float = clampf(1.0 - std_dev / maxf(avg_area, 0.01), 0.0, 1.0) * 100.0
+	_equity_label.text = "Equity: %.0f%%\nArea range: %.1f–%.1f" % [equity, min_area, max_area]
 
-func calculate_spatial_metrics():
-	"""Calculate spatial equity and territorial metrics"""
-	if sites.is_empty():
-		return
-	
-	var total_area = diagram_bounds.x * diagram_bounds.y
-	var average_area = total_area / sites.size()
-	var variance_sum = 0.0
-	
-	for site in sites:
-		var deviation = site.territory_area - average_area
-		variance_sum += deviation * deviation
-	
-	var variance = variance_sum / sites.size()
-	var std_dev = sqrt(variance)
-	spatial_equity_index = 1.0 - (std_dev / average_area)
-	spatial_equity_index = max(0.0, min(1.0, spatial_equity_index))
+func _count_active_arcs() -> int:
+	var count := 0
+	for i in range(_sites.size()):
+		if _sites[i].x < _sweep_x:
+			count += 1
+	return count
 
-func animate_construction_process():
-	"""Animate the construction of the Voronoi diagram"""
-	animation_phase = 0
-	construction_timer.start()
-	clear_all_meshes()
+# =========================================================================
+# apply_grid_config
+# =========================================================================
 
-func _on_construction_timer_timeout():
-	"""Handle construction timer for animated building"""
-	match animation_phase:
-		0:  # Animate sites appearing
-			animate_sites_construction()
-		1:  # Animate cells construction
-			animate_cells_construction()
-		2:  # Construction complete
-			construction_timer.stop()
-			animation_phase = 3
+func apply_grid_config(config: Dictionary) -> void:
+	if config.has("site_count"):
+		site_count = clampi(int(config["site_count"]), 3, 40)
+	if config.has("field_width"):
+		field_width = clampf(float(config["field_width"]), 2.0, 12.0)
+	if config.has("field_height"):
+		field_height = clampf(float(config["field_height"]), 2.0, 10.0)
+	if config.has("sweep_speed"):
+		sweep_speed = clampf(float(config["sweep_speed"]), 0.1, 5.0)
+	if config.has("show_edges"):
+		show_edges = bool(config["show_edges"])
+	if config.has("show_cells"):
+		show_cells = bool(config["show_cells"])
+	if config.has("grid_resolution"):
+		grid_resolution = clampi(int(config["grid_resolution"]), 30, 150)
+	if config.has("mode"):
+		var m: String = str(config["mode"]).to_upper()
+		match m:
+			"VORONOI": _mode = Mode.VORONOI
+			"DELAUNAY": _mode = Mode.DELAUNAY
+			"POWER": _mode = Mode.POWER
 
-func animate_sites_construction():
-	"""Animate sites appearing one by one"""
-	if sites.is_empty():
-		animation_phase = 1
-		return
-	
-	var current_site_index = site_meshes.size()
-	if current_site_index >= sites.size():
-		animation_phase = 1
-		return
-	
-	# Create and animate the next site
-	var site = sites[current_site_index]
-	var mesh_instance = create_animated_site(site, current_site_index)
-	add_child(mesh_instance)
-	site_meshes.append(mesh_instance)
-	site.mesh_instance = mesh_instance
+	# Update slider visuals
+	if _count_slider:
+		_count_slider.set_normalized_value(clampf(float(site_count - 4) / 36.0, 0.0, 1.0))
+	if _speed_slider:
+		_speed_slider.set_normalized_value(clampf(sweep_speed / 3.0, 0.0, 1.0))
 
-func animate_cells_construction():
-	"""Animate cells appearing"""
-	if not animate_construction:
-		construct_voronoi_cells()
-		update_visualization()
-		animation_phase = 2
-		return
-	
-	# Construct cells first
-	construct_voronoi_cells()
-	
-	# Then animate their appearance
-	animate_cells_appearing()
-	animation_phase = 2
+	# Reposition labels
+	_title_label.position.y = field_height * 0.5 + 0.6
+	_mode_label.position.y = field_height * 0.5 + 0.3
+	_info_label.position.x = -field_width * 0.5 - 0.8
+	_sweep_label.position.x = -field_width * 0.5 - 0.8
+	_equity_label.position.x = -field_width * 0.5 - 0.8
 
-func create_animated_site(site: VoronoiSite, index: int) -> MeshInstance3D:
-	"""Create an animated site with entrance effect"""
-	var mesh_instance = MeshInstance3D.new()
-	var mesh = SphereMesh.new()
-	mesh.radius = site_radius
-	mesh.height = site_radius * 2
-	mesh_instance.mesh = mesh
-	
-	# Start from above and animate down
-	mesh_instance.position = Vector3(site.position.x, 5.0, site.position.y)
-	
-	var material = StandardMaterial3D.new()
-	var hue = float(index) / float(sites.size())
-	material.albedo_color = Color.from_hsv(hue, 0.8, 0.9)
-	material.emission_enabled = true
-	material.emission = Color.from_hsv(hue, 0.6, 0.4)
-	material.metallic = 0.3
-	material.roughness = 0.2
-	mesh_instance.material_override = material
-		
-	# Animate entrance
-	var tween = create_tween()
-	tween.set_parallel(true)
-	tween.tween_property(mesh_instance, "position", Vector3(site.position.x, 0.1, site.position.y), site_animation_duration)
-	tween.tween_property(mesh_instance, "scale", Vector3.ONE, site_animation_duration).from(Vector3.ZERO)
-	
+	_restart()
 
-	animation_tweens.append(tween)
-	return mesh_instance
-
-func animate_cells_appearing():
-	"""Animate cells appearing with fade-in effect"""
-	clear_cell_meshes()
-	
-	for i in range(cells.size()):
-		var cell = cells[i]
-		if cell.vertices.size() < 3:
-			continue
-		
-		var hue = float(i) / float(cells.size())
-		var color = Color.from_hsv(hue, 0.5, 0.8, 0.0)  # Start transparent
-		
-		var mesh_instance = create_territory_polygon_mesh(cell, color)
-		if mesh_instance:
-			add_child(mesh_instance)
-			cell_meshes.append(mesh_instance)
-			cell.mesh_instance = mesh_instance
-			
-			# Animate fade-in
-			var tween = create_tween()
-			tween.tween_property(mesh_instance.material_override, "albedo_color:a", 0.3, cell_animation_duration)
-			tween.tween_property(mesh_instance, "scale", Vector3.ONE, cell_animation_duration).from(Vector3(0.1, 0.1, 0.1))
-			
-			animation_tweens.append(tween)
-
-func visualize_sites():
-	"""Create 3D visualization of sites"""
-	clear_site_meshes()
-	
-	for i in range(sites.size()):
-		var site = sites[i]
-		var mesh_instance = create_animated_site(site, i)
-		add_child(mesh_instance)
-		site_meshes.append(mesh_instance)
-		site.mesh_instance = mesh_instance
-
-func update_visualization():
-	"""Update complete Voronoi visualization"""
-	clear_all_meshes()
-	visualize_sites()
-	
-	if show_delaunay_triangulation:
-		visualize_delaunay()
-	
-	if show_territory_sizes:
-		visualize_territories_detailed()
-		visualize_voronoi_edges()
-
-func visualize_territories_detailed():
-	"""Create detailed territory visualization using grid-based approach"""
-	print("Creating detailed territory visualization...")
-	
-	var bounds = Rect2(-diagram_bounds/2, diagram_bounds)
-	var grid_resolution = 50  # Higher resolution for better detail
-	
-	# Create a mesh for each cell using grid sampling
-	for i in range(sites.size()):
-		var site = sites[i]
-		var cell_points: Array[Vector2] = []
-		
-		# Sample grid points that belong to this site
-		for x in range(grid_resolution):
-			for y in range(grid_resolution):
-				var world_x = bounds.position.x + (x / float(grid_resolution - 1)) * bounds.size.x
-				var world_y = bounds.position.y + (y / float(grid_resolution - 1)) * bounds.size.y
-				var grid_pos = Vector2(world_x, world_y)
-				
-				var closest_site = find_closest_site(grid_pos)
-				if closest_site == site:
-					cell_points.append(grid_pos)
-		
-		if cell_points.size() > 3:
-			# Create convex hull of the cell points
-			var hull_vertices: Array[Vector2] = create_convex_hull(cell_points)
-			
-			# Create mesh for this cell
-			var cell = VoronoiCell.new()
-			cell.site = site
-			cell.vertices = hull_vertices
-			cell.area = calculate_polygon_area(hull_vertices)
-			
-			# Visualize this cell
-			var hue = float(i) / float(sites.size())
-			var color = Color.from_hsv(hue, 0.8, 0.9, 0.8)  # Very opaque
-			
-			var mesh_instance = create_territory_polygon_mesh(cell, color)
-			if mesh_instance:
-				mesh_instance.position.y = 0.01 + (i * 0.001)
-				add_child(mesh_instance)
-				cell_meshes.append(mesh_instance)
-				cell.mesh_instance = mesh_instance
-				print("Created detailed cell ", i, " with ", hull_vertices.size(), " vertices")
-
-func visualize_delaunay():
-	"""Visualize Delaunay triangulation (dual of Voronoi)"""
-	for i in range(sites.size()):
-		for j in range(i + 1, sites.size()):
-			var site1 = sites[i]
-			var site2 = sites[j]
-			
-			if are_sites_adjacent(site1, site2):
-				var mesh_instance = create_edge_mesh(
-									site1.position,
-									site2.position,
-					delaunay_edge_color
-				)
-				add_child(mesh_instance)
-				delaunay_meshes.append(mesh_instance)
-
-func are_sites_adjacent(site1: VoronoiSite, site2: VoronoiSite) -> bool:
-	"""Check if two sites share a Voronoi edge"""
-	var midpoint = (site1.position + site2.position) / 2.0
-	var min_dist = midpoint.distance_squared_to(site1.position)
-	
-	for site in sites:
-		if site == site1 or site == site2:
-			continue
-		var dist = midpoint.distance_squared_to(site.position)
-		if dist < min_dist - precision_epsilon:
-			return false
-	
-	return true
-
-func visualize_territories():
-	"""Visualize territorial areas"""
-	print("Visualizing ", cells.size(), " territories...")
-	
-	for i in range(cells.size()):
-		var cell = cells[i]
-		if cell.vertices.size() < 3:
-			print("Skipping cell ", i, " - insufficient vertices: ", cell.vertices.size())
-			continue
-		
-		# Ensure vertices are in proper order (counter-clockwise)
-		cell.vertices = sort_vertices_counterclockwise(cell.vertices, cell.site.position)
-		
-		# Create more distinct colors with higher opacity
-		var hue = float(i) / float(cells.size())
-		var saturation = 0.8 + (randf() * 0.2)  # Add some variation
-		var value = 0.7 + (randf() * 0.3)  # Add some variation
-		var color = Color.from_hsv(hue, saturation, value, 0.7)  # Much more opaque
-		
-		var mesh_instance = create_territory_polygon_mesh(cell, color)
-		if mesh_instance:
-			# Offset each cell slightly to prevent z-fighting
-			mesh_instance.position.y = 0.01 + (i * 0.001)
-			add_child(mesh_instance)
-			cell_meshes.append(mesh_instance)
-			cell.mesh_instance = mesh_instance
-			print("Created cell ", i, " with ", cell.vertices.size(), " vertices, area: ", cell.area)
-
-func sort_vertices_counterclockwise(vertices: Array[Vector2], center: Vector2) -> Array[Vector2]:
-	"""Sort vertices in counter-clockwise order around the center point"""
-	if vertices.size() < 3:
-		return vertices
-	
-	# Sort by angle from center
-	vertices.sort_custom(func(a: Vector2, b: Vector2) -> bool:
-		var angle_a = atan2(a.y - center.y, a.x - center.x)
-		var angle_b = atan2(b.y - center.y, b.x - center.x)
-		return angle_a < angle_b
-	)
-	
-	return vertices
-
-func visualize_voronoi_edges():
-	"""Visualize Voronoi cell edges"""
-	print("Visualizing Voronoi edges...")
-	
-	for i in range(cells.size()):
-		var cell = cells[i]
-		if cell.vertices.size() < 3:
-			continue
-		
-		# Create edges between consecutive vertices
-		for j in range(cell.vertices.size()):
-			var start_vertex = cell.vertices[j]
-			var end_vertex = cell.vertices[(j + 1) % cell.vertices.size()]
-			
-			var edge_mesh = create_edge_mesh(start_vertex, end_vertex, voronoi_edge_color)
-			if edge_mesh:
-				edge_mesh.position.y = 0.02  # Slightly above the cell surface
-				add_child(edge_mesh)
-				cell_meshes.append(edge_mesh)
-
-func create_edge_mesh(start: Vector2, end: Vector2, color: Color) -> MeshInstance3D:
-	"""Create mesh for Voronoi edge"""
-	var mesh_instance = MeshInstance3D.new()
-	var mesh = CylinderMesh.new()
-	
-	mesh.top_radius = edge_thickness
-	mesh.bottom_radius = edge_thickness
-	mesh.height = start.distance_to(end)
-	
-	mesh_instance.mesh = mesh
-	var mid_point = (start + end) / 2.0
-	mesh_instance.position = Vector3(mid_point.x, 0.05, mid_point.y)
-	
-	var direction = Vector3(end.x - start.x, 0, end.y - start.y).normalized()
-	if direction != Vector3.ZERO:
-		mesh_instance.look_at_from_position(mesh_instance.position, mesh_instance.position + direction, Vector3.UP)
-		mesh_instance.rotate_x(PI/2)
-	
-	var material = StandardMaterial3D.new()
-	material.albedo_color = color
-	material.emission_enabled = true
-	material.emission = color * 0.5
-	material.metallic = 0.2
-	material.roughness = 0.3
-	mesh_instance.material_override = material
-	
-	return mesh_instance
-
-func create_territory_polygon_mesh(cell: VoronoiCell, color: Color) -> MeshInstance3D:
-	"""Create filled polygon mesh for territory visualization"""
-	if cell.vertices.size() < 3:
-		return null
-		
-	var mesh_instance = MeshInstance3D.new()
-	var array_mesh = ArrayMesh.new()
-	var vertices = PackedVector3Array()
-	var normals = PackedVector3Array()
-	var indices = PackedInt32Array()
-	
-	# Create vertices in world space
-	for vertex in cell.vertices:
-		vertices.append(Vector3(vertex.x, 0.01, vertex.y))
-		normals.append(Vector3.UP)
-	
-	# Create triangles using fan triangulation
-	for i in range(1, cell.vertices.size() - 1):
-		indices.append(0)
-		indices.append(i)
-		indices.append(i + 1)
-	
-	# Create arrays
-	var arrays = []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = vertices
-	arrays[Mesh.ARRAY_NORMAL] = normals
-	arrays[Mesh.ARRAY_INDEX] = indices
-	
-	# Add surface to mesh
-	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-	mesh_instance.mesh = array_mesh
-	
-	# Position at origin (vertices already in world space)
-	mesh_instance.position = Vector3.ZERO
-	
-	# Create material
-	var material = StandardMaterial3D.new()
-	material.albedo_color = color
-	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	material.emission_enabled = true
-	material.emission = color * 0.1
-	material.metallic = 0.2
-	material.roughness = 0.6
-	mesh_instance.material_override = material
-	
-	return mesh_instance
-
-func clear_all_meshes():
-	"""Clear all visualization meshes"""
-	clear_site_meshes()
-	clear_cell_meshes()
-	clear_delaunay_meshes()
-
-func clear_site_meshes():
-	for mesh in site_meshes:
-		if mesh and is_instance_valid(mesh):
-			mesh.queue_free()
-	site_meshes.clear()
-
-func clear_cell_meshes():
-	for mesh in cell_meshes:
-		if mesh and is_instance_valid(mesh):
-			mesh.queue_free()
-	cell_meshes.clear()
-
-func clear_delaunay_meshes():
-	for mesh in delaunay_meshes:
-		if mesh and is_instance_valid(mesh):
-			mesh.queue_free()
-	delaunay_meshes.clear()
-
-func update_ui():
-	"""Update UI with Voronoi diagram information"""
-	if not ui_display:
-		return
-	
-	var labels = []
-	for i in range(40):
-		var label = ui_display.get_node_or_null("Panel/VBoxContainer/info_label_" + str(i))
-		if label:
-			labels.append(label)
-	
-	if labels.size() >= 40:
-		labels[0].text = "Voronoi Diagrams - Spatial Justice & Territory"
-		labels[1].text = "Sites: " + str(sites.size())
-		labels[2].text = "Cells: " + str(cells.size())
-		labels[3].text = ""
-		labels[4].text = "Algorithm: Geometric Clipping"
-		labels[5].text = "Construction Time: " + str(construction_time) + " ms"
-		labels[6].text = ""
-		labels[7].text = "Spatial Analysis:"
-		labels[8].text = "Total Area: " + str(snapped(diagram_bounds.x * diagram_bounds.y, 0.1))
-		labels[9].text = "Avg Territory: " + str(snapped(get_average_territory_size(), 0.1))
-		labels[10].text = "Largest Territory: " + str(snapped(get_largest_territory_size(), 0.1))
-		labels[11].text = "Smallest Territory: " + str(snapped(get_smallest_territory_size(), 0.1))
-		labels[12].text = "Spatial Equity: " + str(snapped(spatial_equity_index * 100, 1)) + "%"
-		labels[13].text = ""
-		labels[14].text = "Territorial Politics:"
-		labels[15].text = "Territory Variance: " + str(snapped(get_territory_variance(), 0.1))
-		labels[16].text = "Power Concentration: " + get_power_concentration_level()
-		labels[17].text = ""
-		labels[18].text = "Visualization:"
-		labels[19].text = "Delaunay Dual: " + ("ON" if show_delaunay_triangulation else "OFF")
-		labels[20].text = "Territory Colors: " + ("ON" if show_territory_sizes else "OFF")
-		labels[21].text = ""
-		labels[22].text = "Controls:"
-		labels[23].text = "SPACE - Generate new sites"
-		labels[24].text = "R - Reset diagram"
-		labels[25].text = "D - Toggle Delaunay"
-		labels[26].text = "T - Toggle territories"
-		labels[27].text = "1/2/3/4 - Set site count (5/10/15/25)"
-		labels[28].text = ""
-		labels[29].text = "Animation Controls:"
-		labels[30].text = "A - Toggle construction animation"
-		labels[31].text = "P - Toggle pulsing effects"
-		labels[32].text = "F - Toggle floating animation"
-		labels[33].text = "O - Toggle rotation"
-		labels[34].text = ""
-		labels[35].text = "Explores spatial justice & territorial equity"
-
-func get_average_territory_size() -> float:
-	if sites.is_empty():
-		return 0.0
-	return (diagram_bounds.x * diagram_bounds.y) / sites.size()
-
-func get_largest_territory_size() -> float:
-	var largest = 0.0
-	for site in sites:
-		largest = max(largest, site.territory_area)
-	return largest
-
-func get_smallest_territory_size() -> float:
-	if sites.is_empty():
-		return 0.0
-	var smallest = INF
-	for site in sites:
-		smallest = min(smallest, site.territory_area)
-	return smallest if smallest != INF else 0.0
-
-func get_territory_variance() -> float:
-	if sites.is_empty():
-		return 0.0
-	
-	var avg = get_average_territory_size()
-	var variance_sum = 0.0
-	
-	for site in sites:
-		var deviation = site.territory_area - avg
-		variance_sum += deviation * deviation
-	
-	return variance_sum / sites.size()
-
-func get_power_concentration_level() -> String:
-	var variance = get_territory_variance()
-	var avg = get_average_territory_size()
-	
-	if avg == 0:
-		return "N/A"
-	
-	var coefficient = sqrt(variance) / avg
-	
-	if coefficient < 0.2:
-		return "Low"
-	elif coefficient < 0.5:
-		return "Medium"
-	else:
-		return "High"
-
-func _input(event):
-	"""Handle user input"""
-	if event is InputEventKey and event.pressed:
-		match event.keycode:
-			KEY_SPACE:
-				generate_random_sites()
-				if animate_construction:
-					animate_construction_process()
-				else:
-					construct_voronoi_cells()
-					update_visualization()
-			KEY_R:
-				reset_diagram()
-			KEY_D:
-				show_delaunay_triangulation = not show_delaunay_triangulation
-				update_visualization()
-			KEY_T:
-				show_territory_sizes = not show_territory_sizes
-				update_visualization()
-			KEY_A:
-				animate_construction = not animate_construction
-				print("Animation: ", "ON" if animate_construction else "OFF")
-			KEY_P:
-				enable_pulsing = not enable_pulsing
-				print("Pulsing: ", "ON" if enable_pulsing else "OFF")
-			KEY_F:
-				enable_floating = not enable_floating
-				print("Floating: ", "ON" if enable_floating else "OFF")
-			KEY_O:
-				enable_rotation = not enable_rotation
-				print("Rotation: ", "ON" if enable_rotation else "OFF")
-			KEY_1, KEY_2, KEY_3, KEY_4:
-				var new_count = [5, 10, 15, 25][event.keycode - KEY_1]
-				site_count = new_count
-				generate_random_sites()
-				if animate_construction:
-					animate_construction_process()
-				else:
-					construct_voronoi_cells()
-					update_visualization()
-
-func reset_diagram():
-	"""Reset Voronoi diagram"""
-	clear_all_meshes()
-	sites.clear()
-	cells.clear()
-	construction_time = 0.0
-	spatial_equity_index = 0.0
-	update_ui()
-	print("Voronoi diagram reset")
+# =========================================================================
+# Utility
+# =========================================================================
 
 func get_algorithm_info() -> Dictionary:
-	"""Get comprehensive Voronoi algorithm information"""
+	var mode_names := ["voronoi_fortune", "delaunay_dual", "power_diagram"]
 	return {
 		"name": "Voronoi Diagrams",
-		"description": "Spatial partitioning with geometric clipping",
+		"description": "Fortune sweep, Delaunay dual, power diagrams",
+		"mode": mode_names[_mode],
 		"properties": {
-			"sites": sites.size(),
-			"cells": cells.size(),
-			"algorithm": "Perpendicular Bisector Clipping"
-		},
-		"performance": {
-			"construction_time_ms": construction_time,
-			"spatial_equity_index": spatial_equity_index
+			"sites": _sites.size(),
+			"cells": _cell_vertices.size(),
+			"delaunay_edges": _adjacency.size(),
+			"circle_events": _circle_events.size(),
 		},
 		"complexity": {
-			"time": "O(n²)",
+			"time": "O(n log n) Fortune / O(n²) grid",
 			"space": "O(n)"
 		}
-	} 
+	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()

@@ -1,7 +1,5 @@
-Two corridors cross. The intersection point is the entire problem.
+Two corridors cross. Height-5 walls form a cruciform — one arm running north-south, the other east-west. You enter from the top and walk toward the center, where the corridors meet in a single open cell.
 
-Given two line segments, do they meet? The cross product answers: compute the signed area of the triangle formed by three points. If the signs differ, the segments straddle each other's supporting lines. Two straddle tests — one per segment — and the answer falls out. No quadratics, no special cases for slope. Just the sign of a determinant.
+Line intersection is the foundational question of computational geometry: do these two segments share a point? The cross product gives the answer — the sign tells you which side of one line the other's endpoints fall on. If the signs differ, the lines cross. The room makes this spatial. Two paths, one crossing point. You cannot reach the far arms without passing through the intersection.
 
-One pair is trivial. A thousand pairs is not. The sweep line moves left to right, maintaining only the segments currently alive. When segments swap vertical order, check that pair — and only that pair. O(n log n) instead of brute force. Order imposed on disorder through a moving frontier.
-
-The cross at the center of the room is the algorithm made architectural. Two paths share a single cell. Intersection is not collision — it is the point where independent trajectories produce shared coordinates. Geometry's most basic question: where does one line's logic meet another's?
+The sweep line algorithm processes many intersections at once, advancing across the plane like a horizon. But each individual test comes down to this: two directions, one shared coordinate. Where paths cross, something must be resolved.

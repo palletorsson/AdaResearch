@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiential Walk-Through: Teaching the Narrator to Tour Every Map | Ada Research</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: #2a2a3a;
+    --text: #e0e0e8;
+    --text-dim: #8888a0;
+    --accent-pink: #E91E63;
+    --accent-blue: #4A90D9;
+    --accent-purple: #9B59B6;
+    --accent-green: #2ECC71;
+    --accent-orange: #F39C12;
+    --accent-red: #E74C3C;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.7;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  h1 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--accent-pink); }
+  h2 { font-size: 1.4rem; margin: 2.5rem 0 1rem; color: var(--accent-blue); border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+  h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: var(--accent-purple); }
+  p { margin-bottom: 1rem; }
+  .date { color: var(--text-dim); margin-bottom: 2rem; }
+  code { background: var(--surface2); padding: 0.15rem 0.4rem; border-radius: 3px; font-size: 0.9rem; color: var(--accent-green); }
+  pre { background: var(--surface); padding: 1rem; border-radius: 6px; overflow-x: auto; margin: 1rem 0; border: 1px solid var(--border); }
+  pre code { background: none; padding: 0; }
+  blockquote { border-left: 3px solid var(--accent-purple); padding: 0.5rem 1rem; margin: 1rem 0; background: var(--surface); border-radius: 0 6px 6px 0; }
+  a { color: var(--accent-blue); }
+
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.8rem; margin: 1.5rem 0; }
+  .stat { background: var(--surface); padding: 1rem; border-radius: 6px; text-align: center; border: 1px solid var(--border); }
+  .stat .value { font-size: 1.8rem; font-weight: 700; color: var(--accent-pink); }
+  .stat .label { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .walkthrough { background: var(--surface); border-radius: 8px; padding: 1.2rem; margin: 1.5rem 0; border: 1px solid var(--border); }
+  .walkthrough .map-title { color: var(--accent-orange); font-weight: 600; margin-bottom: 0.8rem; font-size: 1.05rem; }
+  .stop { display: flex; gap: 0.8rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
+  .stop:last-child { border-bottom: none; }
+  .stop-num { background: var(--accent-blue); color: #fff; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 600; flex-shrink: 0; margin-top: 0.1rem; }
+  .stop-num.spawn { background: var(--accent-green); }
+  .stop-num.teleporter { background: var(--accent-purple); }
+  .stop-body { flex: 1; }
+  .stop-action { font-weight: 600; margin-bottom: 0.2rem; }
+  .stop-visible { color: var(--text-dim); font-size: 0.9rem; }
+  .stop-visible em { color: var(--accent-orange); font-style: normal; }
+
+  .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+  .comp-box { background: var(--surface); padding: 1rem; border-radius: 6px; border: 1px solid var(--border); }
+  .comp-box h4 { margin-bottom: 0.6rem; font-size: 0.95rem; }
+  .comp-box.before h4 { color: var(--text-dim); }
+  .comp-box.after h4 { color: var(--accent-green); }
+  .comp-box pre { margin: 0; border: none; font-size: 0.82rem; }
+
+  .pipeline { display: grid; grid-template-columns: 1fr; gap: 0.5rem; margin: 1.5rem 0; }
+  .pipeline-step { background: var(--surface); padding: 0.8rem 1rem; border-radius: 6px; border-left: 3px solid var(--accent-blue); display: flex; align-items: center; gap: 0.8rem; }
+  .pipeline-step .num { background: var(--accent-blue); color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 600; flex-shrink: 0; }
+
+  .architecture { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+  .arch-box { background: var(--surface); padding: 1rem; border-radius: 6px; border: 1px solid var(--border); }
+  .arch-box h4 { color: var(--accent-orange); margin-bottom: 0.5rem; font-size: 0.95rem; }
+  .arch-box ul { list-style: none; font-size: 0.9rem; }
+  .arch-box ul li { padding: 0.15rem 0; color: var(--text-dim); }
+  .arch-box ul li::before { content: ""; display: inline-block; width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; margin-right: 0.5rem; }
+
+  .viewer-preview { background: var(--surface); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; border: 1px solid var(--accent-blue); }
+  .viewer-preview h4 { color: var(--accent-blue); margin-bottom: 0.8rem; }
+  .viewer-mockup { display: grid; grid-template-columns: 200px 1fr; gap: 1rem; font-size: 0.85rem; }
+  .viewer-sidebar { background: var(--surface2); border-radius: 6px; padding: 0.8rem; }
+  .viewer-sidebar .seq { padding: 0.3rem 0; font-weight: 600; }
+  .viewer-sidebar .seq .badge { font-size: 0.7rem; background: var(--accent-orange); color: #000; padding: 0.1rem 0.4rem; border-radius: 3px; font-weight: 700; margin-left: 0.3rem; }
+  .viewer-sidebar .map { padding: 0.2rem 0 0.2rem 1rem; color: var(--text-dim); }
+  .viewer-sidebar .map .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.4rem; }
+  .viewer-sidebar .map .dot.green { background: var(--accent-green); }
+  .viewer-sidebar .map .dot.orange { background: var(--accent-orange); }
+  .viewer-sidebar .map .dot.red { background: var(--accent-red); }
+  .viewer-main { background: var(--surface2); border-radius: 6px; padding: 0.8rem; }
+  .viewer-tabs { display: flex; gap: 0.5rem; margin-bottom: 0.8rem; }
+  .viewer-tab { padding: 0.3rem 0.8rem; border-radius: 4px; background: var(--surface); font-size: 0.8rem; }
+  .viewer-tab.active { background: var(--accent-blue); color: #fff; }
+
+  @media (max-width: 600px) {
+    .comparison, .architecture { grid-template-columns: 1fr; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+    .viewer-mockup { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Experiential Walk-Through Narrator</h1>
+<p class="date">March 16, 2026</p>
+
+<p>The batch narration system we built earlier told us <em>whether</em> a map worked &mdash; which artifacts were reachable, where dead ends lived, whether the teleporter was accessible. Structural facts. But it couldn't tell us what it <em>felt like</em> to walk through a map. Where do you look when you arrive? What catches your eye first? How does the space unfold as you move through it?</p>
+
+<p>Today we added an experiential layer: the narrator now walks every map the way a player would, recording what it sees at each stop.</p>
+
+<h2>The Problem with BFS</h2>
+
+<p>BFS (breadth-first search) radiates outward from spawn like a flood. It visits every reachable tile and computes shortest distances. That's useful for reachability analysis, but it produces a flat view of the map &mdash; everything gets a distance number, and the order of exploration is geometric, not experiential.</p>
+
+<p>A player doesn't explore like a flood. They look around, spot the nearest interesting thing, walk to it, look around again. The experience is <em>sequential</em> and <em>perceptual</em> &mdash; shaped by what's visible from where you're standing, not by graph distances.</p>
+
+<h2>Nearest-Neighbor Touring</h2>
+
+<p>We already had a system that understood this: <code>CameraTourManager.gd</code>, the 992-line camera tour controller that generates smooth flythrough paths for map previews. Its core algorithm is a greedy nearest-neighbor walk &mdash; from your current position, always go to the closest unvisited artifact.</p>
+
+<p>We adapted its logic for the text narrator. The walkthrough algorithm:</p>
+
+<div class="pipeline">
+  <div class="pipeline-step"><span class="num">1</span> Start at spawn. Record facing direction (toward nearest artifact).</div>
+  <div class="pipeline-step"><span class="num">2</span> Scan: which artifacts are visible from here? List them with distance and direction.</div>
+  <div class="pipeline-step"><span class="num">3</span> Walk to the nearest unvisited artifact (Manhattan distance, skip unreachable).</div>
+  <div class="pipeline-step"><span class="num">4</span> At the new position, scan again. Record what's visible from this vantage point.</div>
+  <div class="pipeline-step"><span class="num">5</span> Repeat until all reachable artifacts visited, then walk to teleporter.</div>
+</div>
+
+<p>The key difference from BFS: this produces a <em>sequence of stops</em>, each with a perspective. You know what the player sees at each moment, what draws them forward, and where the journey has gaps where nothing is visible.</p>
+
+<h2>What a Walk-Through Looks Like</h2>
+
+<div class="walkthrough">
+  <div class="map-title">SwarmIntelligence_Boids_Algorithm</div>
+  <div class="stop">
+    <div class="stop-num spawn">1</div>
+    <div class="stop-body">
+      <div class="stop-action">Spawn at (0,1,0) &mdash; facing southeast</div>
+      <div class="stop-visible">I can see: <em>boids_aquarium</em> (6 steps SE), <em>boid_flocking</em> (10 steps SE), <em>boid_manager</em> (10 steps SE), <em>boids_2d_in_3d</em> (14 steps SE)</div>
+    </div>
+  </div>
+  <div class="stop">
+    <div class="stop-num">2</div>
+    <div class="stop-body">
+      <div class="stop-action">Walk 6 steps southeast &rarr; boids_aquarium at (3,1,3)</div>
+      <div class="stop-visible">Looking around: <em>boid_flocking</em> (4 steps E), <em>boid_manager</em> (4 steps S), <em>boids_2d_in_3d</em> (8 steps SE)</div>
+    </div>
+  </div>
+  <div class="stop">
+    <div class="stop-num">3</div>
+    <div class="stop-body">
+      <div class="stop-action">Walk 4 steps east &rarr; boid_flocking at (7,1,3)</div>
+      <div class="stop-visible">Looking around: <em>boids_aquarium</em> (4 steps W), <em>boids_2d_in_3d</em> (4 steps S), <em>boid_manager</em> (8 steps SW)</div>
+    </div>
+  </div>
+  <div class="stop">
+    <div class="stop-num">4</div>
+    <div class="stop-body">
+      <div class="stop-action">Walk 4 steps south &rarr; boids_2d_in_3d at (7,1,7)</div>
+      <div class="stop-visible">Looking around: <em>boid_flocking</em> (4 steps N), <em>boid_manager</em> (4 steps W)</div>
+    </div>
+  </div>
+  <div class="stop">
+    <div class="stop-num">5</div>
+    <div class="stop-body">
+      <div class="stop-action">Walk 4 steps west &rarr; boid_manager at (3,1,7)</div>
+      <div class="stop-visible">Looking around: <em>boids_aquarium</em> (4 steps N), <em>boids_2d_in_3d</em> (4 steps E)</div>
+    </div>
+  </div>
+  <div class="stop">
+    <div class="stop-num teleporter">6</div>
+    <div class="stop-body">
+      <div class="stop-action">Walk 8 steps east &rarr; Teleporter at (9,0,9)</div>
+      <div class="stop-visible">Journey complete: 26 total steps, 4 artifacts encountered</div>
+    </div>
+  </div>
+</div>
+
+<p>This tells you something the structural analysis never could: the Boids map has good spatial rhythm. Four artifacts arranged in a square, each visible from the others, with a natural circuit that loops you through all of them before the exit. You can almost feel the map working.</p>
+
+<p>Compare that to a walkthrough with long stretches of nothing visible &mdash; 15 steps south into emptiness, then an artifact that can't see any of its neighbors. That map needs attention, and the walkthrough makes it obvious in a way that a BFS distance table doesn't.</p>
+
+<h2>Before and After</h2>
+
+<p>The structural journey narrative (what we had before) tells you facts. The experiential walkthrough tells you the story.</p>
+
+<div class="comparison">
+  <div class="comp-box before">
+    <h4>Journey Narrative (structural)</h4>
+    <pre><code>Artifact Distances from Spawn:
+  boids_aquarium: 6 steps
+  boid_flocking: 10 steps
+  boid_manager: 10 steps
+  boids_2d_in_3d: 14 steps
+Teleporter: 18 steps
+Pacing: 4.5 steps/artifact</code></pre>
+  </div>
+  <div class="comp-box after">
+    <h4>Walk-Through (experiential)</h4>
+    <pre><code>1. Spawn &mdash; facing SE
+   See: aquarium (6 SE)
+2. Walk 6 SE &rarr; aquarium
+   See: flocking (4 E), manager (4 S)
+3. Walk 4 E &rarr; flocking
+   See: 2d_in_3d (4 S)
+4. Walk 4 S &rarr; 2d_in_3d
+5. Walk 4 W &rarr; manager
+6. Walk 8 E &rarr; Teleporter
+   26 steps, 4 artifacts</code></pre>
+  </div>
+</div>
+
+<h2>Full Spine Results</h2>
+
+<p>We ran the walkthrough narrator across all 19 curriculum sequences &mdash; 163 maps, every one with a complete experiential walk-through.</p>
+
+<div class="stat-row">
+  <div class="stat"><div class="value">163</div><div class="label">Maps Walked</div></div>
+  <div class="stat"><div class="value">19</div><div class="label">Sequences</div></div>
+  <div class="stat"><div class="value">49</div><div class="label">Clean Maps</div></div>
+  <div class="stat"><div class="value">114</div><div class="label">Maps with Issues</div></div>
+  <div class="stat"><div class="value">0</div><div class="label">Failed</div></div>
+</div>
+
+<p>Some sequences came out spotless. <strong>Swarm Intelligence</strong> (7 maps) and <strong>Post-Foundations Crisis</strong> (3 maps) have zero issues &mdash; every artifact reachable, every teleporter accessible, every walkthrough a clean circuit. Others tell a different story: <strong>Forces</strong> has 110 issues across 9 maps, <strong>Wavefunctions</strong> has 100 across 12. These are real design debts, now visible.</p>
+
+<h2>The Text Board Bug</h2>
+
+<p>While testing the narrator we noticed the desktop comment panel &mdash; the text board from <code>DesktopMapSwitcherOverlay</code> that players use to type feedback during VR sessions &mdash; was staying visible during batch narration. It shouldn't be.</p>
+
+<p>The root cause was simple: the <code>_set_overlay_visible()</code> method toggled the main panel, camera bar, and rating panel, but forgot the comment panel. One line fix:</p>
+
+<pre><code>if _comment_panel:
+    _comment_panel.visible = is_visible</code></pre>
+
+<p>The batch runner now hides the full overlay before narrating, so screenshots captured during narration show clean map views without UI clutter.</p>
+
+<h2>The Narration Viewer</h2>
+
+<p>163 walkthrough files sitting in a directory tree are useful for machines but not for humans. We built an interactive viewer into the Ada Encyclopedia.</p>
+
+<div class="viewer-preview">
+  <h4>narration-viewer.html</h4>
+  <div class="viewer-mockup">
+    <div class="viewer-sidebar">
+      <div class="seq">primitives <span class="badge">82</span></div>
+      <div class="map"><span class="dot red"></span> Point_One</div>
+      <div class="map"><span class="dot orange"></span> Point_Lines</div>
+      <div class="map"><span class="dot green"></span> Point_Trace</div>
+      <div class="seq">transformation <span class="badge">47</span></div>
+      <div class="seq">color <span class="badge">24</span></div>
+      <div class="seq">swarmintelligence</div>
+    </div>
+    <div class="viewer-main">
+      <div class="viewer-tabs">
+        <div class="viewer-tab active">Walk-Through</div>
+        <div class="viewer-tab">Spatial</div>
+        <div class="viewer-tab">Issues</div>
+        <div class="viewer-tab">Artifacts</div>
+      </div>
+      <div style="color: var(--text-dim); font-size: 0.85rem; padding: 0.5rem;">
+        Each walk stop rendered as a card with spawn position, facing direction, visible artifacts and distances, cumulative step count. Color-coded: green for spawn, blue for artifacts, purple for teleporter. Tabs switch between the experiential walkthrough, spatial analysis grid, issues list, and artifact reachability table.
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>The viewer loads the narration report JSON, lets you browse by sequence and map, and shows the walkthrough as styled stop cards. Each stop shows where you are, what direction you walked from, and what you can see from that vantage point. Issue badges (red for critical, orange for high, green for clean) surface problems at a glance.</p>
+
+<p>Run controls let you trigger new narration runs directly from the encyclopedia &mdash; narrate a single sequence or the full spine, with live progress tracking via API polling.</p>
+
+<h2>The API Layer</h2>
+
+<p>Two new API routes power the viewer and open narration data to other tools:</p>
+
+<div class="architecture">
+  <div class="arch-box">
+    <h4>Trigger Runs</h4>
+    <ul>
+      <li>POST /api/game/narrate</li>
+      <li>Spawns Godot headless process</li>
+      <li>Returns run ID for progress polling</li>
+      <li>GET /api/game/narrate?id=... for status</li>
+    </ul>
+  </div>
+  <div class="arch-box">
+    <h4>Read Results</h4>
+    <ul>
+      <li>GET /api/game/narration?sequence=...&amp;map=...</li>
+      <li>Serves per-map narration.json</li>
+      <li>Includes walkthrough, spatial, journey data</li>
+      <li>Path traversal protection via sanitization</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Architecture</h2>
+
+<pre><code>SceneNarrator.gd
+  get_walkthrough_data()       &larr; structured stop data
+  build_walkthrough_narrative() &larr; first-person markdown
+  _order_by_nearest_neighbor() &larr; greedy tour ordering
+  _visible_artifact_details()  &larr; what's visible from here
+
+narrate_all.gd
+  per map: spatial + journey + walkthrough
+  writes: walkthrough.md, narration.json (with walkthrough key)
+  writes: narration_report.json (global)
+
+Encyclopedia
+  narration-viewer.html        &larr; interactive browse + run UI
+  /api/game/narrate            &larr; trigger Godot subprocess
+  /api/game/narration          &larr; serve per-map JSON</code></pre>
+
+<h2>What Changes</h2>
+
+<p>The structural narrator told us <em>this map has 4 artifacts at distances 6, 10, 10, 14</em>. The experiential narrator tells us <em>you arrive facing southeast, the aquarium catches your eye first, then you spot the flocking demo to the east, and after visiting all four you loop back toward the exit</em>. One is a health check. The other is a design review.</p>
+
+<p>With 163 walkthroughs now generated across the full curriculum, we can read the player experience of every map without loading a headset. Maps where the walkthrough shows long blind stretches &mdash; 15 steps with nothing visible &mdash; are maps where the spatial design needs work. Maps where every stop has two or three visible neighbors are maps where the space guides the player naturally.</p>
+
+<p>The walkthrough doesn't replace playtesting. But it compresses hours of VR time into seconds of reading, and it turns spatial intuition into something you can grep.</p>
+
+</body>
+</html>

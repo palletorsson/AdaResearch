@@ -23,13 +23,13 @@ func get_params_array() -> Array:
 	params.append(portal_emergence_height)
 	return params
 
-func _create_fallback_mesh():
+func _create_fallback_mesh() -> void:
 	print("TerrainGeneratorUnifiedPortals: Creating fallback combined mesh (terrain + simple toruses)...")
 	# For now, just create terrain - proper fallback would need CSG
 	_create_simple_terrain()
 	print("✅ Fallback mesh created")
 
-func _create_simple_terrain():
+func _create_simple_terrain() -> void:
 	# Simple flat plane
 	var vertices = PackedVector3Array()
 	var normals = PackedVector3Array()
@@ -73,3 +73,6 @@ func _create_simple_terrain():
 	array_mesh.clear_surfaces()
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh_arrays)
 	_create_collision()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

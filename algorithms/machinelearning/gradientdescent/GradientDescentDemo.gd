@@ -312,3 +312,12 @@ func _clamp_to_domain(pos: Vector2) -> Vector2:
 
 func _rand_range(min_value: float, max_value: float) -> float:
 	return _rng.randf_range(min_value, max_value)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

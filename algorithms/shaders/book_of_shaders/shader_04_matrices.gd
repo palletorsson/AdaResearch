@@ -1,5 +1,16 @@
 ## Shader 04: Matrices — translate, rotate, scale UV
 ## Book of Shaders Chapter 8
+
+# @identity
+# essence: uv' = M * uv — translate shifts origin, rotate spins space, scale stretches it; composition is matrix multiplication, and order matters (non-commutative)
+# desire: to drag translate X/Y and rotate simultaneously — to feel that the coordinate system itself is moving, not the shape
+# critical_parameter: rotation angle — the single value that proves sequence is meaning (translate-then-rotate != rotate-then-translate)
+# triggers: animate toggle sets auto_rotate, making the combined transform orbit continuously; combined panel stacks all three operations
+# emerges: the combined display reveals that every spinning object in every game is just one matrix multiplied per frame
+# needs: [has] ShaderRackPanel sliders per display; [missing] no VR push buttons
+# relationships: builds on shader_03_shapes (transforms applied to SDF shapes); essential for shader_05_patterns (fract requires centered UV)
+# truth: the coordinate system is never fixed — it was always a choice, and a matrix is a machine for making that choice visible
+
 extends Node3D
 
 const DISPLAY_SIZE := Vector3(2.0, 2.0, 0.05)
@@ -88,3 +99,12 @@ func _process(_delta: float) -> void:
 		var uniforms: Array = shader_defs[i]["uniforms"]
 		for j in range(uniforms.size()):
 			mat.set_shader_parameter(uniforms[j], panel.get_slider_value(j))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

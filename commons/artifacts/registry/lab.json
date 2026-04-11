@@ -14,8 +14,20 @@
 			"description": "Black Mesa-style mission control console with interactive CRT monitors, VU meters, push buttons, toggle switches, faders, rotary knobs, speaker and LED indicators. Screens flicker with phosphor glow, needles bounce to simulated signal, LEDs blink with activity.",
 			"category": "laboratory",
 			"complexity": "advanced",
-			"tags": ["lab", "control-panel", "interactive", "vr", "monitors", "buttons", "retro"],
-			"interactions": ["press buttons to toggle LEDs", "move faders to drive VU meters", "observe animated CRT screens and blinking indicators"],
+			"tags": [
+				"lab",
+				"control-panel",
+				"interactive",
+				"vr",
+				"monitors",
+				"buttons",
+				"retro"
+			],
+			"interactions": [
+				"press buttons to toggle LEDs",
+				"move faders to drive VU meters",
+				"observe animated CRT screens and blinking indicators"
+			],
 			"signals": [],
 			"parameters": {
 				"desk_width": "Console width in meters (default 2.4)",
@@ -25,8 +37,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"dev_themes": ["environment", "immersion", "retro-tech"],
-			"dev_category": "furniture"
+			"dev_themes": [
+				"environment",
+				"immersion",
+				"retro-tech"
+			],
+			"dev_category": "furniture",
+			"map_sequences": [
+				"testmaps"
+			]
 		},
 		"pipettedispenser": {
 			"lookup_name": "pipettedispenser",
@@ -44,7 +63,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"interactive",
+				"lab",
+				"music"
+			]
 		},
 		"quantumentanglementmeter": {
 			"lookup_name": "quantumentanglementmeter",
@@ -62,7 +86,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
 		},
 		"resonancechamber": {
 			"lookup_name": "resonancechamber",
@@ -80,7 +108,19 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					5,
+					5,
+					4
+				],
+				"size_group": "environment"
+			},
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
 		},
 		"fluxdetector": {
 			"lookup_name": "fluxdetector",
@@ -98,7 +138,19 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
 		},
 		"cryogenicpreservation": {
 			"lookup_name": "cryogenicpreservation",
@@ -116,7 +168,19 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					4,
+					3,
+					2
+				],
+				"size_group": "room_scale"
+			},
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
 		},
 		"robotarm": {
 			"lookup_name": "robotarm",
@@ -134,7 +198,20 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					1,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"art",
+				"interactive",
+				"lab"
+			]
 		},
 		"circularradarmonitor": {
 			"lookup_name": "circularradarmonitor",
@@ -152,7 +229,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
 		},
 		"datatablet": {
 			"lookup_name": "datatablet",
@@ -170,7 +251,11 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
 		},
 		"electromagneticfieldgenerator": {
 			"lookup_name": "electromagneticfieldgenerator",
@@ -188,7 +273,19 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					8,
+					2,
+					7
+				],
+				"size_group": "environment"
+			},
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
 		},
 		"terminal": {
 			"lookup_name": "terminal",
@@ -206,7 +303,107 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"interactive",
+				"lab"
+			]
+		},
+		"smallcontainment": {
+			"lookup_name": "smallcontainment",
+			"name": "smallcontainment",
+			"description": "Desk-scale containment cube with animated field projectors and floating specimen.",
+			"scene": "res://commons/lab/smallcontainment/smallcontainment.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"tags": [
+				"interactive"
+			]
+		},
+		"chair2": {
+			"lookup_name": "chair2",
+			"name": "chair2",
+			"description": "Procedurally builds a wood chair with seat, backrest, and legs atop a tartan accent pad.",
+			"scene": "res://commons/lab/chair/officechair.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				5,
+				6,
+				3
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					5,
+					6,
+					3
+				],
+				"size_group": "environment"
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"tags": [
+				"interactive"
+			]
+		},
+		"entropy_visualization": {
+			"lookup_name": "entropy_visualization",
+			"name": "entropy_visualization",
+			"description": "entropy_visualization",
+			"scene": "res://algorithms/advancedlaboratory/entropy_visualization/entropy_visualization.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"interactive",
+				"lab"
+			],
+			"tags": [
+				"interactive"
+			]
 		}
 	}
 }

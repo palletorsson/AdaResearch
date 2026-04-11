@@ -1,4 +1,4 @@
-﻿extends RigidBody3D
+extends RigidBody3D
 class_name MagneticObject
 
 # Magnetic properties
@@ -12,7 +12,7 @@ var north_pole: MeshInstance3D
 var south_pole: MeshInstance3D
 var body: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	# Create visual representation
 	create_visual()
 	
@@ -23,7 +23,7 @@ func _ready():
 	# Allow for user interaction
 	input_ray_pickable = true
 
-func create_visual():
+func create_visual() -> void:
 	# Create the main body
 	body = MeshInstance3D.new()
 	var body_mesh = BoxMesh.new()
@@ -82,12 +82,12 @@ func get_magnetic_moment() -> Vector3:
 	# Direction is from south to north pole, scaled by strength
 	return pole_direction.normalized() * magnetic_strength
 
-func _integrate_forces(_state):
+func _integrate_forces(_state) -> void:
 	# This could be used to actually apply forces between magnets
 	# But we're focusing on visualization for now
 	pass
 
-func flip_polarity():
+func flip_polarity() -> void:
 	# Flip the magnetic poles
 	pole_direction = -pole_direction
 	
@@ -95,3 +95,12 @@ func flip_polarity():
 	var temp_pos = north_pole.position
 	north_pole.position = south_pole.position
 	south_pole.position = temp_pos
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

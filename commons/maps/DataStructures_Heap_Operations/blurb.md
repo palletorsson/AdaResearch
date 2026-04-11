@@ -1,5 +1,5 @@
-A heap is a almost-sorted tree. Not fully ordered — just enough. Every parent dominates its children. The maximum floats to the top. Insert at the bottom, bubble up. Extract from the top, sift down. Two operations, both logarithmic, both vertical.
+Tiered platforms ascend from the floor. The lowest level is wide — many cells. The next is narrower. The top is a single elevated point. The room is a pyramid you climb, and the pyramid is the heap.
 
-Tiered platforms rise across the grid. Each level enforces a single constraint: be greater than what's beneath. Not sorted left to right — the heap doesn't care about siblings. Only the parent-child relationship matters. This is partial order. Minimum structure for maximum access.
+A heap is a partially ordered tree stored in an array. Every parent must be greater (or less) than its children. Not fully sorted — just dominated. The maximum lives at the root, always. Insert at the bottom, bubble up. Extract the max, trickle down. Each operation touches one path from root to leaf: log-n steps.
 
-Priority queues run on this. Emergency rooms, operating systems, packet routers — anything that needs the most urgent element *now* without sorting everything else. The heap's secret: total order is expensive, and usually unnecessary. Dominance is cheaper than discipline.
+Partial order is weaker than total order but cheaper to maintain. The heap does not care about the relationship between siblings — only between parent and child. Dominance without exhaustive comparison. The insight is that you rarely need everything sorted. You just need the extreme, right now.

@@ -1,3 +1,13 @@
+# @identity
+# essence: impulse = m * delta_v -- central body with 5 tethered blocks demonstrating momentum conservation
+# desire: blocks crash and bounce on tethers, impulse arrows tracing each collision's physics
+# critical_parameter: tether length / block mass -- constrain the collision space; impulse arrows show transfer
+# triggers: player proximity triggers block release; physics simulation drives collisions continuously
+# emerges: Newton's third law made ambulatory -- every action-reaction pair visible as arrow vectors
+# needs: HazardCreatureBase [has]; tethered block physics [has]; impulse visualization [has]; VR interaction [missing]
+# relationships: embodies physics simulation sequence; pairs with spring_mass_bouncer (impulse vs elasticity)
+# truth: momentum is always conserved -- the impulse arrows prove it whether you believe the math or not.
+
 extends HazardCreatureBase
 class_name CollisionCrasher
 ## Physics simulation sequence — central body with 5 tethered BoxMesh blocks.

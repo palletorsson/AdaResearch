@@ -1,5 +1,16 @@
 extends "res://commons/primitives/point/draw_dot.gd"
 
+
+# @identity
+# essence: trace(t) = (x(t), y(t), z_origin - v_z * t) — position history as frozen trail
+# desire: Grab a point in VR and see your hand movements recorded as a time-domain waveform
+# critical_parameter: time_axis_speed — controls how fast history recedes along the Z axis
+# triggers: continuous sampling of draw sphere position at sample_interval creates the trace
+# emerges: hand gestures become visible waveforms — the body as oscillator made legible
+# needs: VR grab on draw sphere [has], trail rendering [has]
+# relationships: extends draw_dot base; contrasts with OscillationCurve (manual vs algorithmic wave drawing); unlocks gesture-to-waveform
+# truth: Every motion is a signal; recording it in time reveals the wave hidden in movement.
+
 @export var time_axis_speed: float = 0.6
 @export var sample_interval: float = 0.05
 @export var lock_origin_on_ready: bool = true

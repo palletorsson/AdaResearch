@@ -2,14 +2,14 @@
 ## Jelly cube, rubber ball, inflated balloon — all using Godot's native SoftBody3D
 extends Node3D
 
-func _ready():
+func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 	_create_floor()
 	_create_jelly_cube(Vector3(-2, 2, 0))
 	_create_rubber_ball(Vector3(0, 2, 0))
 	_create_balloon(Vector3(2, 2, 0))
 
-func _create_floor():
+func _create_floor() -> void:
 	var floor_body := StaticBody3D.new()
 	var floor_col := CollisionShape3D.new()
 	var floor_shape := BoxShape3D.new()
@@ -19,7 +19,7 @@ func _create_floor():
 	floor_body.position = Vector3(0, -0.1, 0)
 	add_child(floor_body)
 
-func _create_jelly_cube(pos: Vector3):
+func _create_jelly_cube(pos: Vector3) -> void:
 	var sb := SoftBody3D.new()
 	sb.name = "JellyCube"
 
@@ -46,7 +46,7 @@ func _create_jelly_cube(pos: Vector3):
 	sb.position = pos
 	add_child(sb)
 
-func _create_rubber_ball(pos: Vector3):
+func _create_rubber_ball(pos: Vector3) -> void:
 	var sb := SoftBody3D.new()
 	sb.name = "RubberBall"
 
@@ -74,7 +74,7 @@ func _create_rubber_ball(pos: Vector3):
 	sb.position = pos
 	add_child(sb)
 
-func _create_balloon(pos: Vector3):
+func _create_balloon(pos: Vector3) -> void:
 	var sb := SoftBody3D.new()
 	sb.name = "Balloon"
 
@@ -101,3 +101,12 @@ func _create_balloon(pos: Vector3):
 
 	sb.position = pos
 	add_child(sb)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

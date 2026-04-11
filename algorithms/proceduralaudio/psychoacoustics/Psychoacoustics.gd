@@ -1,3 +1,13 @@
+# @identity
+# essence: perception = transform(signal, cochlea, brain) -- the gap between pressure wave and heard sound
+# desire: masking, beating, binaural offsets -- auditory illusions revealing how hearing constructs reality
+# critical_parameter: masker_frequency / probe_offset -- where one tone renders another inaudible
+# triggers: theme profiles reshape masker frequency, probe timing, binaural offset, modulation depth
+# emerges: perception is not reception but generation -- the ear performs its own Fourier transform
+# needs: AudioStreamGenerator [has]; masker/probe envelope system [has]; binaural offset [has]; VR controls [missing]
+# relationships: capstone of proceduralaudio -- all synthesis lands between waveform and listener
+# truth: the instrument is the ear -- every synthesis decision is judged by what the listener constructs.
+
 extends Node3D
 
 # Psychoacoustics Visualization
@@ -112,12 +122,12 @@ var critical_bands := [
 	6400, 7700, 9500, 12000, 15500
 ]
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	setup_audio_synthesis()
 	apply_theme_profile(theme_sequence[0])
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	masking_timer += delta
 	
@@ -129,7 +139,7 @@ func _process(delta):
 	update_theme_cycle(delta)
 	generate_audio_samples()
 
-func update_masking_parameters():
+func update_masking_parameters() -> void:
 	# Animate psychoacoustic parameters
 	if current_theme_profile.is_empty():
 		masker_frequency = 800 + sin(time * 0.3) * 400
@@ -159,7 +169,7 @@ func update_masking_parameters():
 	probe_frequency = masker_frequency + audio_probe_offset + sin(time * 0.6) * audio_probe_offset * 0.2
 	probe_amplitude = clamp(audio_probe_level, 0.05, 1.0)
 
-func visualize_frequency_masking():
+func visualize_frequency_masking() -> void:
 	var container = $FrequencyMasking
 	
 	# Clear previous visualization
@@ -233,7 +243,7 @@ func frequency_to_bark(frequency: float) -> float:
 	# Convert frequency to Bark scale
 	return 13.0 * atan(0.00076 * frequency) + 3.5 * atan(pow(frequency / 7500.0, 2))
 
-func visualize_temporal_masking():
+func visualize_temporal_masking() -> void:
 	var container = $TemporalMasking
 	
 	# Clear previous visualization
@@ -307,7 +317,7 @@ func visualize_temporal_masking():
 			
 			container.add_child(threshold_curve)
 
-func show_critical_bands():
+func show_critical_bands() -> void:
 	var container = $CriticalBands
 	
 	# Clear previous visualization
@@ -364,7 +374,7 @@ func show_critical_bands():
 			
 			container.add_child(overlap)
 
-func demonstrate_loudness_perception():
+func demonstrate_loudness_perception() -> void:
 	var container = $LoudnessPerception
 	
 	# Clear previous visualization
@@ -429,7 +439,7 @@ func calculate_equal_loudness_spl(frequency: float, phon_level: float) -> float:
 	
 	return Ln + low_freq_boost + high_freq_reduction
 
-func show_a_weighting_filter(container: Node3D):
+func show_a_weighting_filter(container: Node3D) -> void:
 	# Show A-weighting frequency response
 	var filter_frequencies = [63, 125, 250, 500, 1000, 2000, 4000, 8000, 16000]
 	var a_weighting_values = [-26.2, -16.1, -8.6, -3.2, 0.0, 1.2, 1.0, -1.1, -6.6]
@@ -474,7 +484,7 @@ func create_contour_connection(from: Vector3, to: Vector3) -> CSGCylinder3D:
 	
 	return connection
 
-func setup_audio_synthesis():
+func setup_audio_synthesis() -> void:
 	audio_stream = AudioStreamGenerator.new()
 	audio_stream.mix_rate = sample_rate
 	audio_stream.buffer_length = 0.2
@@ -496,7 +506,7 @@ func ensure_playback() -> bool:
 	audio_playback = audio_player.get_stream_playback()
 	return audio_playback != null
 
-func reset_audio_state():
+func reset_audio_state() -> void:
 	audio_probe_cycle = 0.0
 	audio_probe_envelope = 0.0
 	masker_phase = 0.0
@@ -504,7 +514,7 @@ func reset_audio_state():
 	probe_phase_right = 0.0
 	audio_pad_phase = 0.0
 
-func apply_theme_profile(theme_name: String):
+func apply_theme_profile(theme_name: String) -> void:
 	if not theme_profiles.has(theme_name):
 		return
 
@@ -519,17 +529,17 @@ func apply_theme_profile(theme_name: String):
 	theme_timer = 0.0
 	print("Psychoacoustics: activated %s theme" % theme_name)
 
-func update_theme_cycle(delta: float):
+func update_theme_cycle(delta: float) -> void:
 	theme_timer += delta
 	if theme_timer >= theme_cycle_duration:
 		theme_timer = 0.0
 		advance_theme()
 
-func advance_theme():
+func advance_theme() -> void:
 	current_theme_index = (current_theme_index + 1) % theme_sequence.size()
 	apply_theme_profile(theme_sequence[current_theme_index])
 
-func generate_audio_samples():
+func generate_audio_samples() -> void:
 	if not audio_player or not audio_player.playing:
 		return
 	if current_theme_profile.is_empty():
@@ -571,3 +581,12 @@ func generate_audio_samples():
 		var left = clamp(masker_sample + probe_left + shimmer + noise, -1.0, 1.0)
 		var right = clamp(masker_sample + probe_right - shimmer + noise, -1.0, 1.0)
 		audio_playback.push_frame(Vector2(left, right))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -24,7 +24,7 @@ var horizon: MeshInstance3D
 var prime_line_node: Node3D
 var travel_position: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	# --- Prime sequence ---
 	primes = _generate_primes(max_x)
 	print("Generated %d primes up to %d" % [primes.size(), max_x])
@@ -44,7 +44,7 @@ func _ready():
 	set_process(true)
 
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Animate horizon surface phase (simulating zeta-wave oscillation)
 	if animate_horizon and is_instance_valid(horizon) and horizon.material_override != null:
 		var mat := horizon.material_override as ShaderMaterial
@@ -88,7 +88,7 @@ func _generate_primes(limit: int) -> PackedInt32Array:
 # ----------------------------
 #   PRIME LINE VISUALIZATION
 # ----------------------------
-func _setup_prime_line():
+func _setup_prime_line() -> void:
 	prime_line_node = Node3D.new()
 	prime_line_node.name = "PrimeLine"
 	add_child(prime_line_node)
@@ -134,7 +134,7 @@ func _setup_prime_line():
 # ----------------------------
 #   π(x) RIBBON (Prime counting function)
 # ----------------------------
-func _setup_pi_ribbon():
+func _setup_pi_ribbon() -> void:
 	# Build the staircase of π(x)
 	var arr := PackedVector3Array()
 	var pi_count := 0
@@ -176,7 +176,7 @@ func _setup_pi_ribbon():
 # ----------------------------
 #   ZETA HORIZON (∞) - Complex wave surface
 # ----------------------------
-func _setup_zeta_horizon():
+func _setup_zeta_horizon() -> void:
 	var plane := PlaneMesh.new()
 	plane.size = Vector2(6, 3)
 	plane.subdivide_width = 32
@@ -204,7 +204,7 @@ func _setup_zeta_horizon():
 # ----------------------------
 #   ENVIRONMENT SETUP
 # ----------------------------
-func _setup_environment():
+func _setup_environment() -> void:
 	# Add a subtle ground plane for spatial reference
 	var ground := MeshInstance3D.new()
 	var ground_plane := PlaneMesh.new()
@@ -290,3 +290,12 @@ func teleport_to_prime(prime_index: int) -> void:
 	var cam := get_viewport().get_camera_3d()
 	if cam != null:
 		cam.global_transform.origin = Vector3(p * x_scale, 1.0, 2.0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

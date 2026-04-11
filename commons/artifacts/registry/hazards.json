@@ -1,244 +1,1533 @@
 {
 	"artifacts": {
-		"force_field": {
-			"name": "Force Field",
-			"lookup_name": "force_field",
-			"description": "Dual-nature force zone: every hazard is also medicine. Fire warms or burns. Poison kills or reveals. Q-FEP: same potential, different restraint, different manifestation. Bring a mediator object into the field to transmute hazard into benefit.",
-			"scene": "res://commons/hazards/force_field/force_field.tscn",
+		"pusher_block": {
 			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "A red cube that translates back and forth along one axis, physically pushing the player into pits. Uses AnimatableBody3D for proper physics collision. The translation transformation made dangerous.",
+			"dev_themes": ["gameplay", "hazards"],
+			"include_in_map_data": true,
 			"interaction": "immersive",
-			"complexity": "advanced",
-			"include_in_map_data": true,
+			"lookup_name": "pusher_block",
 			"map_ready": true,
-			"qfep_connection": "Central demonstration of Q-FEP: identical potential under different relational constraint produces opposite outcomes. The player experiences this directly.",
-			"tags": ["forces", "transmutation", "qfep", "dual-nature", "vr"],
-			"map_sequences": ["forces"]
+			"map_sequences": ["transformation", "hazards"],
+			"name": "Pusher Block",
+			"qfep_connection": "Translation as force — the simplest transformation becomes the most direct threat. The block does to the player what the player does to objects.",
+			"scene": "res://commons/hazards/transformation_blocks/pusher_block.tscn",
+			"tags": ["hazard", "transformation", "translation", "push", "pit"]
 		},
-		"gridagent": {
-			"name": "Grid Agent",
-			"lookup_name": "gridagent",
-			"description": "Grid-traversing hazard agent spawned from map tokens like `gridagent:copy`.",
-			"scene": "res://commons/hazards/gridagent/grid_agent_base.tscn",
+		"sweeper_block": {
 			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "A blue beam that rotates around a central pivot, sweeping players off edges into pits. Don Quixote's windmill — the world spins and you must time your crossing. Uses AnimatableBody3D.",
+			"dev_themes": ["gameplay", "hazards"],
 			"include_in_map_data": true,
+			"interaction": "immersive",
+			"lookup_name": "sweeper_block",
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": ["transformation", "hazards"],
+			"name": "Sweeper Block",
+			"qfep_connection": "Rotation as sweep — the transformation you feel in your inner ear. The windmill doesn't attack you; you attack it, and it wins because it is the world.",
+			"scene": "res://commons/hazards/transformation_blocks/sweeper_block.tscn",
+			"tags": ["hazard", "transformation", "rotation", "sweep", "windmill", "pit"]
+		},
+		"grower_block": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "A cube that pulses between tiny and huge, physically pushing the player as it grows. When small you can pass, when large it fills the corridor and squeezes you into the pit. Color shifts from green (safe) to red (danger).",
+			"dev_themes": ["gameplay", "hazards"],
+			"include_in_map_data": true,
+			"interaction": "immersive",
+			"lookup_name": "grower_block",
+			"map_ready": true,
+			"map_sequences": ["transformation", "hazards"],
+			"name": "Grower Block",
+			"qfep_connection": "Scale as pressure — the uncanny transformation that changes everything while appearing to change nothing. You don't move; the world moves into you.",
+			"scene": "res://commons/hazards/transformation_blocks/grower_block.tscn",
+			"tags": ["hazard", "transformation", "scale", "grow", "breathe", "pit"]
 		},
 		"armadillo_droideka": {
-			"name": "Armadillo Droideka",
-			"lookup_name": "armadillo_droideka",
-			"description": "Foldable machine-creature enemy with rigid scutes, split equator rings, deployable legs, and fire-bolt burst attacks.",
-			"scene": "res://commons/hazards/armadillo_droideka/armadillo_droideka.tscn",
 			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Foldable machine-creature enemy with rigid scutes, split equator rings, deployable legs, and fire-bolt burst attacks.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
 			"include_in_map_data": true,
+			"lookup_name": "armadillo_droideka",
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Armadillo Droideka",
+			"scene": "res://commons/hazards/armadillo_droideka/armadillo_droideka.tscn",
+			"tags": [
+				"hazard",
+				"physics"
+			]
 		},
 		"armadillo_eggling": {
-			"name": "Armadillo Eggling",
-			"lookup_name": "armadillo_eggling",
+			"category": "hazards",
+			"complexity": "intermediate",
 			"description": "Small aggressive roll-form variant focused on contact pressure, tuned for swarm behavior.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"footprint": [
+				2,
+				1,
+				2
+			],
+			"include_in_map_data": true,
+			"lookup_name": "armadillo_eggling",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards",
+				"testmaps"
+			],
+			"name": "Armadillo Eggling",
 			"scene": "res://commons/hazards/armadillo_droideka/armadillo_eggling.tscn",
-			"category": "hazards",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness"
-		},
-		"origami_droideka": {
-			"name": "Origami Droideka",
-			"lookup_name": "origami_droideka",
-			"description": "Magic-ball inspired fold shell using accordion pleats and braided ring bands; rolls compressed and deploys to fire.",
-			"scene": "res://commons/hazards/armadillo_droideka/origami_droideka.tscn",
-			"category": "hazards",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness"
-		},
-		"waterbomb_enemy": {
-			"name": "Waterbomb Enemy",
-			"lookup_name": "waterbomb_enemy",
-			"description": "True rigid-foldable origami enemy using waterbomb tessellation. Faces remain rigid during folding; geometry is computed from kinematic constraints. Rolls collapsed, unfolds to flower shape when attacking.",
-			"scene": "res://commons/hazards/armadillo_droideka/waterbomb_enemy.tscn",
-			"category": "hazards",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"miura_crawler": {
-			"name": "Miura Crawler",
-			"lookup_name": "miura_crawler",
-			"description": "Miura-ori folding enemy - flat corrugated sheet that crawls like an inchworm. Lies flat and nearly invisible, pops up when player approaches, uses zigzag locomotion. Can squeeze through gaps when flattened.",
-			"scene": "res://commons/hazards/miura_crawler/miura_crawler.tscn",
-			"category": "hazards",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness"
-		},
-		"kresling_spire": {
-			"name": "Kresling Spire",
-			"lookup_name": "kresling_spire",
-			"description": "Kresling origami sniper tower - twisting cylinder that extends from compact disc to tall tower. Rolls as disc to reposition, rises by untwisting to snipe from elevation, collapses rapidly to relocate.",
-			"scene": "res://commons/hazards/kresling_spire/kresling_spire.tscn",
-			"category": "hazards",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness"
-		},
-		"scissor_stalker": {
-			"name": "Scissor Stalker",
-			"lookup_name": "scissor_stalker",
-			"description": "Spider-like enemy with Hoberman scissor linkage legs. Legs extend 3x their compact length for dramatic reach. Stalks with partially extended legs, pounces by rapidly extending, slams down to attack.",
-			"scene": "res://commons/hazards/scissor_stalker/scissor_stalker.tscn",
-			"category": "hazards",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness"
-		},
-		"kaleidocycle_enemy": {
-			"name": "Kaleidocycle",
-			"lookup_name": "kaleidocycle_enemy",
-			"description": "Tumbling ring of tetrahedra with 4 attack modes. Rolls toward player while continuously rotating through itself. Each face color triggers different attack: Fire (red), Ice (blue), Spike (purple), Shield (gold).",
-			"scene": "res://commons/hazards/kaleidocycle/kaleidocycle_enemy.tscn",
-			"category": "hazards",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"randomness"
-			],
-			"sequence": "randomness"
-		},
-		"proximity_spawner": {
-			"name": "Proximity Spawner",
-			"lookup_name": "proximity_spawner",
-			"description": "Spawns enemies when player enters radius. Respawns after enemy death. Configure with type, spawn_radius, despawn_radius, respawn_delay.",
-			"scene": "res://commons/hazards/proximity_spawner.tscn",
-			"category": "hazards",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"sphere_droideka": {
-			"name": "Sphere Droideka",
-			"lookup_name": "sphere_droideka",
-			"description": "Armadillidiidae-style spherical droideka. Rolls as compact ball of overlapping shell plates, unfolds to tripod stance with shield dome and twin blasters. Star Wars droideka inspired.",
-			"scene": "res://commons/hazards/sphere_droideka/sphere_droideka.tscn",
-			"category": "hazards",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"plasma_critter": {
-			"name": "Plasma Critter",
-			"lookup_name": "plasma_critter",
-			"description": "Shapeshifting energy substance — a critter that takes form based on relational context. Raw form shocks on contact. Touch with a stick → fire torch. Touch water → healing aura. Touch crystal → power orb. Q-FEP: same potential, different restraint.",
-			"scene": "res://commons/hazards/plasma/plasma_critter.tscn",
-			"category": "hazards",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"stick_tool": {
-			"name": "Stick Tool",
-			"lookup_name": "stick_tool",
-			"description": "A simple wooden stick the player can grab. Hold near a Plasma Critter to transform it into a torch. The mediator between player and plasma — the relational bridge.",
-			"scene": "res://commons/hazards/plasma/stick_tool.tscn",
-			"category": "tools",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"octapod_crawler": {
-			"name": "Octapod Crawler",
-			"lookup_name": "octapod_crawler",
-			"description": "Procedural 8-legged wall-crawling creature. Headcrab meets octopus. Patrols surfaces, detects player, chases and leaps. Can be stunned with fire. Future: befriend in lab, evolves through game.",
-			"scene": "res://commons/hazards/octapod_crawler/octapod_crawler.tscn",
-			"category": "hazards",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"hazards_demo": {
-			"name": "Hazards Demo",
-			"lookup_name": "hazards_demo",
-			"description": "Test arena for all hazard creatures. Spawns plasma critters, stick tools, dormant egg-plant octapods, and an active crawler in a dark atmospheric arena with moody lighting and fog.",
-			"scene": "res://commons/hazards/hazards_demo/hazards_demo.tscn",
-			"category": "demos",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": []
-		},
-		"waterbomb_hopper": {
-			"name": "Waterbomb Hopper",
-			"lookup_name": "waterbomb_hopper",
-			"description": "Bouncing waterbomb tessellation enemy. Origami-themed hazard with a waterbomb base shape built from triangular faces. Bounces sinusoidally with squash-and-stretch, fold angle oscillates for a breathing effect. Patrols a rectangular path, chases on detection.",
-			"scene": "res://commons/hazards/waterbomb_hopper/waterbomb_hopper.tscn",
-			"category": "hazards",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"catalyst_target": {
-			"name": "Catalyst Target",
-			"lookup_name": "catalyst_target",
-			"description": "Practice target for catalyst projectiles. A floating sphere with orbiting rings that flashes on hit. Can be static or moving via grid config.",
-			"scene": "res://commons/hazards/becoming_catalyst/catalyst_target.tscn",
-			"category": "tools",
-			"interaction": "immersive",
-			"complexity": "beginner",
-			"tags": ["target", "catalyst", "practice", "projectile"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
+			"sequence": "randomness",
+			"size_group": "standard",
+			"tags": [
+				"hazards",
+				"swarm"
+			]
 		},
 		"becoming_catalyst": {
-			"name": "The Catalyst",
-			"lookup_name": "becoming_catalyst",
-			"description": "An evolving hand force that grows alongside the player. Not a weapon of destruction but a tool of transformation, becoming, and boundary dissolution. Each Lab sequence unlocks a new expressive mode — from slow cubes to calming fields to swarm intelligence.",
-			"scene": "res://commons/hazards/becoming_catalyst/becoming_catalyst.tscn",
 			"category": "tools",
-			"interaction": "immersive",
 			"complexity": "advanced",
-			"tags": ["tool", "catalyst", "becoming", "qfep", "vr", "pickable", "evolution", "hand_force"],
+			"description": "An evolving hand force that grows alongside the player. Not a weapon of destruction but a tool of transformation, becoming, and boundary dissolution. Each Lab sequence unlocks a new expressive mode — from slow cubes to calming fields to swarm intelligence.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
 			"include_in_map_data": true,
+			"interaction": "immersive",
+			"lookup_name": "becoming_catalyst",
 			"map_ready": true,
+			"map_sequences": [
+				"hazards",
+				"lab",
+				"testmaps"
+			],
+			"name": "The Catalyst",
 			"qfep_connection": "Embodies the full QFEP trajectory: from order (primitives) through entropy (randomness) to the edge of chaos (fractals, L-systems) and collective emergence (swarms). The catalyst IS the curriculum made tangible.",
-			"map_sequences": ["primitives"]
+			"scene": "res://commons/hazards/becoming_catalyst/becoming_catalyst.tscn",
+			"tags": [
+				"tool",
+				"catalyst",
+				"becoming",
+				"qfep",
+				"vr",
+				"pickable",
+				"evolution",
+				"hand_force"
+			]
+		},
+		"catalyst_pedestal": {
+			"category": "tools",
+			"complexity": "simple",
+			"description": "A one-meter wireframe cube display case with the Becoming Catalyst crystal floating and rotating inside. Place this in lab spawn areas. The player walks up, sees the glowing crystal, and grabs it — the cage fades away as the crystal absorbs into their hand.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"interaction": "immersive",
+			"lookup_name": "catalyst_pedestal",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards",
+				"lab",
+				"testmaps"
+			],
+			"name": "Catalyst Pedestal",
+			"qfep_connection": "The cage frames the invitation. Not protection but presentation — the moment before transformation, when the tool exists waiting to be claimed.",
+			"scene": "res://commons/hazards/becoming_catalyst/catalyst_pedestal.tscn",
+			"tags": [
+				"tool",
+				"catalyst",
+				"pedestal",
+				"display",
+				"wireframe",
+				"pickable",
+				"spawn"
+			]
+		},
+		"wedge_skill_pickup": {
+			"category": "tools",
+			"complexity": "simple",
+			"description": "A one-meter wireframe cube containing a floating orange prism. When grabbed, unlocks the wedge_placer mode on the catalyst bracelet. Place in the primitives sequence for the player to discover.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"interaction": "immersive",
+			"lookup_name": "wedge_skill_pickup",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"hazards",
+				"testmaps"
+			],
+			"name": "Wedge Skill Pickup",
+			"qfep_connection": "The wedge teaches that not everything fits in a box. Slopes, ramps, and angles expand the vocabulary of space.",
+			"scene": "res://commons/hazards/becoming_catalyst/wedge_skill_pickup.tscn",
+			"tags": [
+				"tool",
+				"catalyst",
+				"skill_pickup",
+				"wedge",
+				"prism",
+				"unlock"
+			]
+		},
+		"blockbuilderentity": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "A creature that builds with blocks — constructing and deconstructing grid structures as it moves. The world-shaping hazard that treats the grid as raw material.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "blockbuilderentity",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Block Builder Entity",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/hazards/blockbuilderentity/blockbuilderentity.tscn",
+			"tags": [
+				"builder",
+				"grid",
+				"constructive"
+			]
+		},
+		"branching_vine": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "L-system vine growing from a root point. Turtle graphics interpretation builds cylinder branches that reach toward the player. Damage prunes random branches. Formal grammar becomes organic growth.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "branching_vine",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Branching Vine",
+			"scene": "res://commons/hazards/branching_vine/branching_vine.tscn",
+			"sequence": "lsystems",
+			"tags": [
+				"l-system",
+				"growth",
+				"vine",
+				"turtle-graphics",
+				"pruning"
+			]
+		},
+		"bricoleur_golem": {
+			"category": "hazards",
+			"complexity": "beginner",
+			"description": "Asymmetric golem built from mismatched primitives. Rebuilds itself from random parts after damage — each reconstruction unique. Exhausts after 3 rebuilds. Teaches bricolage: creation from whatever is at hand.",
+			"dev_themes": [
+				"education",
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "bricoleur_golem",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Bricoleur Golem",
+			"scene": "res://commons/hazards/bricoleur_golem/bricoleur_golem.tscn",
+			"sequence": "bricolage",
+			"tags": [
+				"bricolage",
+				"reconstruction",
+				"randomness",
+				"adaptation"
+			]
+		},
+		"catalyst_target": {
+			"category": "tools",
+			"complexity": "beginner",
+			"description": "A practice target that flashes, explodes, and respawns when struck. Its visible states change quickly, but the target remains recognizably the same object across idle, hit, destroyed, and restored phases. Movement options add patrol and orbit patterns without changing that core identity. It is a compact lesson in state transition.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"footprint": [
+				8,
+				8,
+				8
+			],
+			"include_in_map_data": true,
+			"interaction": "immersive",
+			"lookup_name": "catalyst_target",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"name": "Catalyst Target",
+			"scene": "res://commons/hazards/becoming_catalyst/catalyst_target.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"transformation",
+				"state_change",
+				"target",
+				"respawn",
+				"projectile",
+				"practice",
+				"catalyst"
+			],
+			"qfep_connection": "Transformation here is discrete state change: intact, flashing, destroyed, respawned. Identity persists while S moves through a small cycle of visibly distinct modes.",
+			"gamwell_reference": "",
+			"capacity": "TRACK a target through hit, destroy, and respawn states while keeping its identity legible.",
+			"interactions": [
+				"hit the target with catalyst projectiles",
+				"switch between static, patrolling, and orbiting motion via config",
+				"change the target shape to compare different visual states",
+				"watch the respawn loop reset the object after destruction"
+			]
+		},
+		"chromatic_field": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "RGB zone hazard with three overlapping translucent spheres cycling through hue. Damage type depends on the dominant color channel — red heat, green poison, blue cold. Teaches color mixing and perception.",
+			"dev_themes": [
+				"education",
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "chromatic_field",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Chromatic Field",
+			"scene": "res://commons/hazards/chromatic_field/chromatic_field.tscn",
+			"sequence": "color",
+			"tags": [
+				"color",
+				"rgb",
+				"perception",
+				"zone"
+			]
+		},
+		"collision_crasher": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Central body with 5 tethered physics blocks that bounce and collide with elastic collision math. Impulse vectors visible as arrows on impact. Momentum conservation made tangible.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "collision_crasher",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Collision Crasher",
+			"scene": "res://commons/hazards/collision_crasher/collision_crasher.tscn",
+			"sequence": "physicssimulation",
+			"tags": [
+				"collision",
+				"impulse",
+				"momentum",
+				"elastic",
+				"physics"
+			]
+		},
+		"constraint_web": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "5x5 grid of superposition tiles representing a constraint satisfaction problem. Tiles collapse on step; contradictions explode. Graph coloring as minefield — no two adjacent tiles may share a color.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "constraint_web",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Constraint Web",
+			"scene": "res://commons/hazards/constraint_web/constraint_web.tscn",
+			"sequence": "constraint_solvers",
+			"tags": [
+				"constraint",
+				"csp",
+				"superposition",
+				"graph-coloring"
+			]
+		},
+		"data_tree_walker": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Binary search tree of sphere nodes connected by cylinder edges. BST insert with values 1-7; visible tree rotations on damage. Walks on its leaf nodes. Data structures made physical.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "data_tree_walker",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Data Tree Walker",
+			"scene": "res://commons/hazards/data_tree_walker/data_tree_walker.tscn",
+			"sequence": "datastructures",
+			"tags": [
+				"binary-tree",
+				"bst",
+				"data-structure",
+				"traversal"
+			]
+		},
+		"deltahedron_creature": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "A creature whose body IS its mesh net. Flat at fold_amount=0, assembled convex solid at fold_amount=1. All equilateral triangles — Cauchy's rigidity theorem guarantees structural integrity when closed. Species: tetrahedron (4), octahedron (8), icosahedron (20).",
+			"dev_themes": [
+				"fold_system"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "deltahedron_creature",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Deltahedron Creature",
+			"scene": "res://commons/fold_system/deltahedron_creature.tscn",
+			"sequence": "hazards",
+			"tags": [
+				"fold_system",
+				"procedural",
+				"deltahedron",
+				"net",
+				"origami",
+				"triangles",
+				"rigid"
+			]
+		},
+		"deltahedron_stages": {
+			"category": "hazards",
+			"complexity": "beginner",
+			"description": "Five octahedra in a row at fold_amount 0%, 25%, 50%, 75%, 100%. Shows the complete net-to-solid fold progression in one glance. Blue (flat) to gold (assembled).",
+			"dev_themes": [
+				"fold_system"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "deltahedron_stages",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Deltahedron Stages",
+			"scene": "res://commons/fold_system/deltahedron_stages.tscn",
+			"sequence": "hazards",
+			"tags": [
+				"fold_system",
+				"deltahedron",
+				"stages",
+				"progression"
+			]
+		},
+		"edible_mushroom": {
+			"category": "items",
+			"complexity": "intermediate",
+			"description": "Pickable mushroom with transformative effects. RAND Corporation 1955 meets fungal spores — historical randomness made edible. Consume to trigger perceptual shifts.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "edible_mushroom",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Edible Mushroom",
+			"scene": "res://commons/hazards/mushroom/edible_mushroom.tscn",
+			"tags": [
+				"mushroom",
+				"pickup",
+				"effect",
+				"randomness",
+				"perception"
+			]
+		},
+		"escher_stairwalker": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Minimalist figure walking an impossible staircase loop. Always appears to climb but stays at the same height. Invulnerable while on stairs; glitches out to lunge. Impossible geometry as armor.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "escher_stairwalker",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Escher Stairwalker",
+			"scene": "res://commons/hazards/escher_stairwalker/escher_stairwalker.tscn",
+			"sequence": "artmathematics",
+			"tags": [
+				"escher",
+				"impossible",
+				"geometry",
+				"illusion",
+				"staircase"
+			]
+		},
+		"fallingblocks": {
+			"category": "hazards",
+			"complexity": "beginner",
+			"description": "Environmental hazard that spawns falling block formations. Gravity as threat — the grid raining down. Dodge, shelter, or ride the cascade.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fallingblocks",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Falling Blocks",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					3.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/hazards/fallingblocks/fallingblocks.tscn",
+			"tags": [
+				"environmental",
+				"gravity",
+				"blocks",
+				"spawner"
+			]
+		},
+		"fibonacci_snake": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "Triangle strip coiled in a golden spiral unfolds into a slithering sine-wave snake. Phi encodes rest, sin encodes motion. Same vertices, same faces — only positions change.",
+			"dev_themes": [
+				"fold_system"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fibonacci_snake",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Fibonacci Snake",
+			"scene": "res://commons/fold_system/fibonacci_snake.tscn",
+			"sequence": "hazards",
+			"tags": [
+				"fold_system",
+				"fibonacci",
+				"snake",
+				"spiral",
+				"sine",
+				"locomotion",
+				"golden_ratio"
+			]
+		},
+		"fibonacci_snake_stages": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Five stages: Fibonacci spiral to sine snake. Golden ratio coil unfurling into wave locomotion. Same vertex and face count throughout.",
+			"dev_themes": [
+				"fold_system"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fibonacci_snake_stages",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Fibonacci Snake Stages",
+			"scene": "res://commons/fold_system/fibonacci_snake_stages.tscn",
+			"sequence": "hazards",
+			"tags": [
+				"fold_system",
+				"fibonacci",
+				"snake",
+				"stages",
+				"progression"
+			]
+		},
+		"five_leg_critter": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Five-legged procedural walker. Odd symmetry forces asymmetric gait patterns — starfish-like radial locomotion.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "five_leg_critter",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Five Leg Critter",
+			"parameters": {
+				"footprint": [
+					2.0,
+					1.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/hazards/octapod_crawler/five_leg_critter.tscn",
+			"tags": [
+				"procedural",
+				"ik",
+				"legs",
+				"locomotion",
+				"pentapod"
+			]
+		},
+		"flora_landscape": {
+			"category": "hazards",
+			"complexity": "exhibition",
+			"description": "Renders the Folding Zoo nature_layer.json as a 3D landscape. Vertex-colored ground mesh with MultiMesh flora on top.",
+			"dev_themes": [
+				"fold_system"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "flora_landscape",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Flora Landscape",
+			"scene": "res://commons/fold_system/flora_landscape.tscn",
+			"sequence": "hazards",
+			"tags": [
+				"fold_system",
+				"nature",
+				"landscape",
+				"flora",
+				"ground_mesh"
+			]
+		},
+		"fold_demo_critter": {
+			"category": "hazards",
+			"complexity": "beginner",
+			"description": "Four-segment folding creature — wings spread open and tail lifts as fold_amount increases. Demonstrates BoneFoldSolver with spring dynamics, energy gating, and misfold. The simplest possible folding body.",
+			"dev_themes": [
+				"gameplay",
+				"fold_system"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fold_demo_critter",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Fold Demo Critter",
+			"scene": "res://commons/fold_system/fold_demo_critter.tscn",
+			"sequence": "hazards",
+			"tags": [
+				"fold_system",
+				"procedural",
+				"folding",
+				"demo",
+				"bone_solver"
+			]
+		},
+		"fold_wall": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Triangulated curtain pooled flat on the ground rises into a hanging drape. Columns cascade left to right with sine billow for fabric feel. Same vertices, same faces.",
+			"dev_themes": [
+				"fold_system"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fold_wall",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Fold Wall / Curtain",
+			"scene": "res://commons/fold_system/fold_wall.tscn",
+			"sequence": "hazards",
+			"tags": [
+				"fold_system",
+				"wall",
+				"curtain",
+				"architecture",
+				"cascade",
+				"drape"
+			]
+		},
+		"folding_zoo": {
+			"category": "hazards",
+			"complexity": "exhibition",
+			"description": "Six-zone interactive showcase of the fold system — bone fold, chain fold, shell fold, state parade, misfold, and spring tension. All three solvers demonstrated with debug overlays.",
+			"dev_themes": [
+				"fold_system"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "folding_zoo",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Folding Zoo",
+			"scene": "res://commons/fold_system/zoo/folding_zoo.tscn",
+			"sequence": "hazards",
+			"tags": [
+				"fold_system",
+				"zoo",
+				"showcase",
+				"demo",
+				"bone_solver",
+				"chain_solver",
+				"shell_solver"
+			]
+		},
+		"foliage_showcase": {
+			"category": "hazards",
+			"complexity": "beginner",
+			"description": "All 8 synthetic plant types side by side — grass, flower, fern, mushroom, reed, tree, bush, vine. Low-poly procedural meshes for MultiMesh instancing.",
+			"dev_themes": [
+				"fold_system"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "foliage_showcase",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Foliage Showcase",
+			"scene": "res://commons/fold_system/foliage_showcase.tscn",
+			"sequence": "hazards",
+			"tags": [
+				"fold_system",
+				"foliage",
+				"plants",
+				"procedural",
+				"showcase"
+			]
+		},
+		"force_field": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "Dual-nature force zone: every hazard is also medicine. Fire warms or burns. Poison kills or reveals. Q-FEP: same potential, different restraint, different manifestation. Bring a mediator object into the field to transmute hazard into benefit.",
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"qfep"
+			],
+			"include_in_map_data": true,
+			"interaction": "immersive",
+			"lookup_name": "force_field",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Force Field",
+			"qfep_connection": "Central demonstration of Q-FEP: identical potential under different relational constraint produces opposite outcomes. The player experiences this directly.",
+			"scene": "res://commons/hazards/force_field/force_field.tscn",
+			"tags": [
+				"forces",
+				"transmutation",
+				"qfep",
+				"dual-nature",
+				"vr"
+			]
+		},
+		"four_leg_critter": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Four-legged procedural walker. Quadruped gait with diagonal pairing — walk, trot, gallop emerge from phase relationships between legs.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "four_leg_critter",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Four Leg Critter",
+			"parameters": {
+				"footprint": [
+					2.0,
+					1.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/hazards/octapod_crawler/four_leg_critter.tscn",
+			"tags": [
+				"procedural",
+				"ik",
+				"legs",
+				"locomotion",
+				"quadruped"
+			]
+		},
+		"fractal_hydra": {
+			"category": "hazards",
+			"complexity": "beginner",
+			"description": "Central body with branching heads on cylinder necks. Damage splits a head into two half-size copies — fractal branching up to depth 3. More heads means more attacks but less damage each. Cut one head, two grow back.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fractal_hydra",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Fractal Hydra",
+			"scene": "res://commons/hazards/fractal_hydra/fractal_hydra.tscn",
+			"sequence": "fractals",
+			"tags": [
+				"fractal",
+				"self-similarity",
+				"branching",
+				"hydra"
+			]
+		},
+		"goomba_box": {
+			"category": "hazards",
+			"complexity": "beginner",
+			"description": "Folding cardboard box that patrols corridors. Stomp from above to flatten it — topology as vulnerability. Side contact deals damage.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"interaction": "stomp",
+			"lookup_name": "goomba_box",
+			"map_ready": true,
+			"name": "Goomba Box",
+			"scene": "res://commons/hazards/goomba_box/goomba_box.tscn",
+			"tags": [
+				"mario",
+				"stomp",
+				"box",
+				"patrol"
+			]
+		},
+		"gradient_hunter": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "Sleek predator with orbiting sample-point particles. Gradient descent pathfinding toward player — gets stuck in local minima, anneals out with random teleport. Machine learning as locomotion strategy.",
+			"dev_themes": [
+				"education",
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "gradient_hunter",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Gradient Hunter",
+			"scene": "res://commons/hazards/gradient_hunter/gradient_hunter.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"gradient-descent",
+				"optimization",
+				"machine-learning",
+				"loss-function"
+			]
+		},
+		"grammar_markov": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "Tetrahedron with 4 colored state-faces. Markov chain transition matrix determines attack patterns — visible transition probabilities. Matrix mutates over time. Stochastic grammar made combative.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grammar_markov",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Grammar Markov",
+			"scene": "res://commons/hazards/grammar_markov/grammar_markov.tscn",
+			"sequence": "grammar_systems",
+			"tags": [
+				"markov-chain",
+				"grammar",
+				"stochastic",
+				"state-machine"
+			]
+		},
+		"graph_weaver": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Network of 8 sphere-nodes connected by cylinder-edges. Reconfigures edges to create shortest path toward player with visible BFS/DFS traversal. Can cast edges as projectile attacks.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "graph_weaver",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Graph Weaver",
+			"scene": "res://commons/hazards/graph_weaver/graph_weaver.tscn",
+			"sequence": "graphtheory",
+			"tags": [
+				"graph",
+				"bfs",
+				"dfs",
+				"shortest-path",
+				"network"
+			]
+		},
+		"gridagent": {
+			"category": "hazards",
+			"complexity": "beginner",
+			"description": "Grid-traversing hazard agent spawned from map tokens like `gridagent:copy`.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "gridagent",
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial",
+				"devexamples",
+				"hazards",
+				"softbodies",
+				"testmaps"
+			],
+			"name": "Grid Agent",
+			"scene": "res://commons/hazards/gridagent/grid_agent_base.tscn",
+			"tags": [
+				"2d",
+				"hazard",
+				"simulation"
+			]
+		},
+		"hazards_demo": {
+			"category": "demos",
+			"complexity": "beginner",
+			"description": "Test arena for all hazard creatures. Spawns plasma critters, stick tools, dormant egg-plant octapods, and an active crawler in a dark atmospheric arena with moody lighting and fog.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"footprint": [
+				16,
+				10,
+				16
+			],
+			"include_in_map_data": false,
+			"lookup_name": "hazards_demo",
+			"map_ready": false,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Hazards Demo",
+			"scene": "res://commons/hazards/hazards_demo/hazards_demo.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"demos",
+				"hazard"
+			]
+		},
+		"helix_cylinder": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Vertices on a helix form triangles into a closed faceted cylinder. Pineapple diamond topology. Flat triangle grid unfurls into a twisted tube. Kresling-inspired.",
+			"dev_themes": [
+				"fold_system"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "helix_cylinder",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Helix Cylinder",
+			"scene": "res://commons/fold_system/helix_cylinder.tscn",
+			"sequence": "hazards",
+			"tags": [
+				"fold_system",
+				"helix",
+				"cylinder",
+				"pineapple",
+				"kresling",
+				"triangle_grid"
+			]
+		},
+		"helix_cylinder_creature": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Runtime fold creature — flat triangle grid folds into twisted faceted cylinder. Pineapple topology. Same vertices, same faces, only positions change. Driven by fold_amount.",
+			"dev_themes": [
+				"fold_system"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "helix_cylinder_creature",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Helix Cylinder Creature",
+			"scene": "res://commons/fold_system/helix_cylinder_creature.tscn",
+			"sequence": "hazards",
+			"tags": [
+				"fold_system",
+				"helix",
+				"cylinder",
+				"pineapple",
+				"creature",
+				"runtime"
+			]
+		},
+		"helix_fold": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "A triangle strip coils from flat zigzag ribbon into a helix via sin/cos. Five stages showing the fold progression. DNA springs spiral shells.",
+			"dev_themes": [
+				"fold_system"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "helix_fold",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Helix Fold",
+			"scene": "res://commons/fold_system/helix_fold.tscn",
+			"sequence": "hazards",
+			"tags": [
+				"fold_system",
+				"helix",
+				"spiral",
+				"sin",
+				"triangle_strip",
+				"stages"
+			]
+		},
+		"hull_crusher": {
+			"category": "hazards",
+			"complexity": "beginner",
+			"description": "Morphing convex polyhedron with orbiting point-nodes. Fires points as projectiles — each launch shrinks the convex hull. Points respawn over time. Teaches computational geometry through combat.",
+			"dev_themes": [
+				"education",
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "hull_crusher",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Hull Crusher",
+			"scene": "res://commons/hazards/hull_crusher/hull_crusher.tscn",
+			"sequence": "computationalgeometry",
+			"tags": [
+				"convex-hull",
+				"geometry",
+				"polyhedron",
+				"projectiles"
+			]
+		},
+		"index_sentinel": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "A walking 4x4 grid that fires cells by [i][j] index, teaching array traversal through attack patterns. Row-major order, visual telegraphing of the next index.",
+			"dev_themes": [
+				"biology",
+				"education",
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "index_sentinel",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Index Sentinel",
+			"scene": "res://commons/hazards/index_sentinel/index_sentinel.tscn",
+			"sequence": "array_tutorial",
+			"tags": [
+				"array",
+				"indexing",
+				"grid",
+				"tutorial"
+			]
+		},
+		"inflate_flock": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "Icosphere inflates from a point using vertex flocking — pressure pushes out, separation prevents overlap, cohesion holds shape. Organic breathing inflation. Same vertices, same faces.",
+			"dev_themes": [
+				"fold_system"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "inflate_flock",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Inflate Flock",
+			"scene": "res://commons/fold_system/inflate_flock.tscn",
+			"sequence": "hazards",
+			"tags": [
+				"fold_system",
+				"inflation",
+				"flocking",
+				"boids",
+				"vertices",
+				"sphere",
+				"organic"
+			]
+		},
+		"isosurface_trap": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Blobby metaball surface from point charges. Scalar field bulges toward player; contact equals damage proportional to field strength. The implicit surface made dangerous.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "isosurface_trap",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Isosurface Trap",
+			"scene": "res://commons/hazards/isosurface_trap/isosurface_trap.tscn",
+			"sequence": "isosurfaces",
+			"tags": [
+				"isosurface",
+				"metaball",
+				"scalar-field",
+				"implicit"
+			]
+		},
+		"joint_articulator": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "Central body with 6 limbs, each using a different joint type — hinge, ball, slider, revolute, prismatic, fixed. Each limb moves per its constraint. Joint physics made visible.",
+			"dev_themes": [
+				"art",
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "joint_articulator",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Joint Articulator",
+			"scene": "res://commons/hazards/joint_articulator/joint_articulator.tscn",
+			"sequence": "joints",
+			"tags": [
+				"joints",
+				"constraints",
+				"articulation",
+				"physics"
+			]
+		},
+		"kaleidocycle_enemy": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Tumbling ring of tetrahedra with 4 attack modes. Rolls toward player while continuously rotating through itself. Each face color triggers different attack: Fire (red), Ice (blue), Spike (purple), Shield (gold).",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "kaleidocycle_enemy",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards",
+				"randomness"
+			],
+			"name": "Kaleidocycle",
+			"scene": "res://commons/hazards/kaleidocycle/kaleidocycle_enemy.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"color",
+				"hazard"
+			]
+		},
+		"kresling_spire": {
+			"category": "hazards",
+			"complexity": "beginner",
+			"description": "Kresling origami sniper tower - twisting cylinder that extends from compact disc to tall tower. Rolls as disc to reposition, rises by untwisting to snipe from elevation, collapses rapidly to relocate.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "kresling_spire",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards",
+				"randomness"
+			],
+			"name": "Kresling Spire",
+			"scene": "res://commons/hazards/kresling_spire/kresling_spire.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"hazards",
+				"origami"
+			]
+		},
+		"lifeform_walker": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Walking creature with a 6x6 Game of Life grid on its torso. Living cells provide armor; Conway's rules run each tick. Dead automaton reinitializes. The cellular automaton made corporeal.",
+			"dev_themes": [
+				"biology",
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "lifeform_walker",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Lifeform Walker",
+			"scene": "res://commons/hazards/lifeform_walker/lifeform_walker.tscn",
+			"sequence": "cellularautomata",
+			"tags": [
+				"cellular-automata",
+				"conway",
+				"game-of-life",
+				"armor"
+			]
 		},
 		"loving_triangle": {
-			"name": "Loving Triangle",
-			"lookup_name": "loving_triangle",
-			"description": "A triangle-shaped companion that dances with the Becoming Catalyst. Triangles are the atom of all 3D worlds — every mesh reduces to triangles. This entity makes that visible. Not an enemy — a relational partner. It responds to each catalyst mode with its own transformation: folding, tiling, compressing, expanding. Evolves through tiers as lab sequences complete.",
-			"scene": "res://commons/hazards/loving_triangle/loving_triangle.tscn",
 			"category": "companions",
-			"interaction": "immersive",
 			"complexity": "advanced",
-			"tags": ["companion", "catalyst", "becoming", "qfep", "vr", "evolution", "triangle", "folding", "tiling"],
+			"description": "A triangle-shaped companion that dances with the Becoming Catalyst. Triangles are the atom of all 3D worlds — every mesh reduces to triangles. This entity makes that visible. Not an enemy — a relational partner. It responds to each catalyst mode with its own transformation: folding, tiling, compressing, expanding. Evolves through tiers as lab sequences complete.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
 			"include_in_map_data": true,
+			"interaction": "immersive",
+			"lookup_name": "loving_triangle",
 			"map_ready": true,
+			"map_sequences": [
+				"hazards",
+				"lab"
+			],
+			"name": "Loving Triangle",
 			"qfep_connection": "The triangle embodies relational identity: the self constituted through encounter. Same potential (catalyst projectile), different relational context (triangle vs wall vs enemy), different manifestation. The simplest polygon that creates enclosure — the other that completes the becoming.",
-			"map_sequences": ["primitives"]
+			"scene": "res://commons/hazards/loving_triangle/loving_triangle.tscn",
+			"tags": [
+				"companion",
+				"catalyst",
+				"becoming",
+				"qfep",
+				"vr",
+				"evolution",
+				"triangle",
+				"folding",
+				"tiling"
+			]
+		},
+		"maze_spinner": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Crystalline core that procedurally generates rotating maze walls. DFS-based maze generation with new random seed every 8 seconds. Navigate the gaps or take wall damage. The algorithm IS the enemy.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "maze_spinner",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Maze Spinner",
+			"scene": "res://commons/hazards/maze_spinner/maze_spinner.tscn",
+			"sequence": "proceduralgeneration",
+			"tags": [
+				"maze",
+				"procedural",
+				"dfs",
+				"generation",
+				"walls"
+			]
+		},
+		"mesh_morpher": {
+			"category": "hazards",
+			"complexity": "expert",
+			"description": "Shape-shifting creature morphing between sphere, cube, torus, and cylinder. Each topology has a different attack pattern — roll, slam, spin, sweep. Mesh topology as combat strategy.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "mesh_morpher",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Mesh Morpher",
+			"scene": "res://commons/hazards/mesh_morpher/mesh_morpher.tscn",
+			"sequence": "meshes",
+			"tags": [
+				"mesh",
+				"topology",
+				"morphing",
+				"shape-shifting"
+			]
+		},
+		"miura_crawler": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Miura-ori folding enemy - flat corrugated sheet that crawls like an inchworm. Lies flat and nearly invisible, pops up when player approaches, uses zigzag locomotion. Can squeeze through gaps when flattened.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "miura_crawler",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards",
+				"randomness",
+				"testmaps"
+			],
+			"name": "Miura Crawler",
+			"scene": "res://commons/hazards/miura_crawler/miura_crawler.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"hazard"
+			]
+		},
+		"noise_field": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "10x10 grid of height-varying tiles driven by Perlin noise. High tiles are danger zones, low tiles are safe. Noise scrolls continuously — the landscape of randomness shifts under your feet.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "noise_field",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Noise Field",
+			"scene": "res://commons/hazards/noise_field/noise_field.tscn",
+			"sequence": "noise",
+			"tags": [
+				"noise",
+				"perlin",
+				"height-map",
+				"scrolling"
+			]
+		},
+		"octapod_crawler": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Procedural 8-legged wall-crawling creature. Headcrab meets octopus. Patrols surfaces, detects player, chases and leaps. Can be stunned with fire. Future: befriend in lab, evolves through game.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "octapod_crawler",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Octapod Crawler",
+			"scene": "res://commons/hazards/octapod_crawler/octapod_crawler.tscn",
+			"tags": [
+				"hazards",
+				"procedural"
+			]
+		},
+		"octapod_ik": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "Eight-legged IK walker variant. Pure inverse kinematics locomotion without CharacterBody3D physics — legs find surfaces procedurally. The mathematical octapod.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "octapod_ik",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Octapod IK",
+			"parameters": {
+				"footprint": [
+					2.0,
+					1.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/hazards/octapod_crawler/octapod_ik.tscn",
+			"tags": [
+				"procedural",
+				"ik",
+				"legs",
+				"locomotion",
+				"octapod"
+			]
+		},
+		"one_leg": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Single IK leg demo — the fundamental unit of procedural locomotion. One joint chain finding ground contact. The building block from which all multi-legged creatures emerge.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "one_leg",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "One Leg",
+			"parameters": {
+				"footprint": [
+					4.0,
+					3.0,
+					1.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/hazards/octapod_crawler/one_leg.tscn",
+			"tags": [
+				"procedural",
+				"ik",
+				"legs",
+				"locomotion"
+			]
+		},
+		"origami_bird": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "Origami crane that progresses through four fold stages: egg seed (0.0) → standing crane (0.4) → walking with alternating gait (0.6) → full wingspan flight (1.0). Twelve segments, paper-white materials, spring-damped fold dynamics. One fold_amount variable drives the entire lifecycle.",
+			"dev_themes": [
+				"fold_system",
+				"gameplay"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "origami_bird",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Origami Bird",
+			"scene": "res://commons/fold_system/origami_bird.tscn",
+			"sequence": "hazards",
+			"tags": [
+				"fold_system",
+				"procedural",
+				"folding",
+				"origami",
+				"bird",
+				"locomotion",
+				"bone_solver",
+				"flying",
+				"walking"
+			]
+		},
+		"origami_droideka": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Magic-ball inspired fold shell using accordion pleats and braided ring bands; rolls compressed and deploys to fire.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"footprint": [
+				2,
+				2,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "origami_droideka",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Origami Droideka",
+			"scene": "res://commons/hazards/armadillo_droideka/origami_droideka.tscn",
+			"sequence": "randomness",
+			"size_group": "standard",
+			"tags": [
+				"hazards",
+				"origami"
+			]
 		},
 		"origami_pyre_plane": {
-			"lookup_name": "origami_pyre_plane",
-			"name": "Pyre Plane",
-			"description": "A folded-paper rectangle of fire that sits beneath transport cubes. Its creased surface cycles through affine transformations — scale pulses, rotation sweeps, positional drift — while the rectangular shape remains invariant. Demonstrates that identity persists under transformation. Lethal on contact.",
-			"scene": "res://commons/hazards/origami_pyre_plane/origami_pyre_plane.tscn",
 			"category": "hazards",
+			"complexity": "advanced",
+			"description": "A folded-paper rectangle of fire that sits beneath transport cubes. Its creased surface cycles through affine transformations — scale pulses, rotation sweeps, positional drift — while the rectangular shape remains invariant. Demonstrates that identity persists under transformation. Lethal on contact.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "origami_pyre_plane",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Pyre Plane",
+			"scene": "res://commons/hazards/origami_pyre_plane/origami_pyre_plane.tscn",
+			"sequence": "transformation",
 			"tags": [
 				"origami",
 				"foe",
@@ -246,505 +1535,634 @@
 				"fire",
 				"transformation",
 				"invariant"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "transformation",
-			"map_sequences": [
-				"transformation"
 			]
 		},
-		"one_leg": {
-			"name": "One Leg",
-			"lookup_name": "one_leg",
-			"description": "Single IK leg demo — the fundamental unit of procedural locomotion. One joint chain finding ground contact. The building block from which all multi-legged creatures emerge.",
-			"scene": "res://commons/hazards/octapod_crawler/one_leg.tscn",
-			"category": "hazards",
-			"tags": ["procedural", "ik", "legs", "locomotion"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"two_leg_critter": {
-			"name": "Two Leg Critter",
-			"lookup_name": "two_leg_critter",
-			"description": "Two-legged procedural walker. Bipedal gait emerges from alternating step cycles. The simplest creature that must solve balance.",
-			"scene": "res://commons/hazards/octapod_crawler/two_leg_critter.tscn",
-			"category": "hazards",
-			"tags": ["procedural", "ik", "legs", "locomotion", "bipedal"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"three_leg_critter": {
-			"name": "Three Leg Critter",
-			"lookup_name": "three_leg_critter",
-			"description": "Three-legged procedural walker. Tripod gait — the minimum legs for static stability. Always has a support triangle.",
-			"scene": "res://commons/hazards/octapod_crawler/three_leg_critter.tscn",
-			"category": "hazards",
-			"tags": ["procedural", "ik", "legs", "locomotion", "tripod"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"four_leg_critter": {
-			"name": "Four Leg Critter",
-			"lookup_name": "four_leg_critter",
-			"description": "Four-legged procedural walker. Quadruped gait with diagonal pairing — walk, trot, gallop emerge from phase relationships between legs.",
-			"scene": "res://commons/hazards/octapod_crawler/four_leg_critter.tscn",
-			"category": "hazards",
-			"tags": ["procedural", "ik", "legs", "locomotion", "quadruped"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"five_leg_critter": {
-			"name": "Five Leg Critter",
-			"lookup_name": "five_leg_critter",
-			"description": "Five-legged procedural walker. Odd symmetry forces asymmetric gait patterns — starfish-like radial locomotion.",
-			"scene": "res://commons/hazards/octapod_crawler/five_leg_critter.tscn",
-			"category": "hazards",
-			"tags": ["procedural", "ik", "legs", "locomotion", "pentapod"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"six_leg_critter": {
-			"name": "Six Leg Critter",
-			"lookup_name": "six_leg_critter",
-			"description": "Six-legged procedural walker. Insect-like alternating tripod gait — three legs always grounded. The most common arthropod configuration.",
-			"scene": "res://commons/hazards/octapod_crawler/six_leg_critter.tscn",
-			"category": "hazards",
-			"tags": ["procedural", "ik", "legs", "locomotion", "hexapod"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"octapod_ik": {
-			"name": "Octapod IK",
-			"lookup_name": "octapod_ik",
-			"description": "Eight-legged IK walker variant. Pure inverse kinematics locomotion without CharacterBody3D physics — legs find surfaces procedurally. The mathematical octapod.",
-			"scene": "res://commons/hazards/octapod_crawler/octapod_ik.tscn",
-			"category": "hazards",
-			"tags": ["procedural", "ik", "legs", "locomotion", "octapod"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"blockbuilderentity": {
-			"name": "Block Builder Entity",
-			"lookup_name": "blockbuilderentity",
-			"description": "A creature that builds with blocks — constructing and deconstructing grid structures as it moves. The world-shaping hazard that treats the grid as raw material.",
-			"scene": "res://commons/hazards/blockbuilderentity/blockbuilderentity.tscn",
-			"category": "hazards",
-			"tags": ["builder", "grid", "constructive"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"techstrider": {
-			"name": "Tech Strider",
-			"lookup_name": "techstrider",
-			"description": "Tall mechanical strider with long articulated legs. Patrols elevated paths, steps over obstacles. A walking architecture — the legs ARE the structure.",
-			"scene": "res://commons/hazards/techstrider/techstrider.tscn",
-			"category": "hazards",
-			"tags": ["mechanical", "strider", "tall", "patrol"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"tentacle_cube": {
-			"name": "Tentacle Cube",
-			"lookup_name": "tentacle_cube",
-			"description": "A cube with procedural tentacles extending from its faces. Combines rigid geometry with fluid organic motion — the grid cell that grew limbs.",
-			"scene": "res://commons/hazards/tentacle_cube/tentacle_cube.tscn",
-			"category": "hazards",
-			"tags": ["tentacle", "procedural", "cube", "hybrid"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"fallingblocks": {
-			"name": "Falling Blocks",
-			"lookup_name": "fallingblocks",
-			"description": "Environmental hazard that spawns falling block formations. Gravity as threat — the grid raining down. Dodge, shelter, or ride the cascade.",
-			"scene": "res://commons/hazards/fallingblocks/fallingblocks.tscn",
-			"category": "hazards",
-			"tags": ["environmental", "gravity", "blocks", "spawner"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"edible_mushroom": {
-			"name": "Edible Mushroom",
-			"lookup_name": "edible_mushroom",
-			"description": "Pickable mushroom with transformative effects. RAND Corporation 1955 meets fungal spores — historical randomness made edible. Consume to trigger perceptual shifts.",
-			"scene": "res://commons/hazards/mushroom/edible_mushroom.tscn",
-			"category": "items",
-			"tags": ["mushroom", "pickup", "effect", "randomness", "perception"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": ["randomness"]
-		},
-		"index_sentinel": {
-			"name": "Index Sentinel",
-			"lookup_name": "index_sentinel",
-			"description": "A walking 4x4 grid that fires cells by [i][j] index, teaching array traversal through attack patterns. Row-major order, visual telegraphing of the next index.",
-			"scene": "res://commons/hazards/index_sentinel/index_sentinel.tscn",
-			"category": "hazards",
-			"tags": ["array", "indexing", "grid", "tutorial"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "array_tutorial",
-			"map_sequences": ["array_tutorial"]
-		},
-		"chromatic_field": {
-			"name": "Chromatic Field",
-			"lookup_name": "chromatic_field",
-			"description": "RGB zone hazard with three overlapping translucent spheres cycling through hue. Damage type depends on the dominant color channel — red heat, green poison, blue cold. Teaches color mixing and perception.",
-			"scene": "res://commons/hazards/chromatic_field/chromatic_field.tscn",
-			"category": "hazards",
-			"tags": ["color", "rgb", "perception", "zone"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "color",
-			"map_sequences": ["color"]
-		},
-		"swarm_hive": {
-			"name": "Swarm Hive",
-			"lookup_name": "swarm_hive",
-			"description": "Stationary hive spawning boid particles that follow separation/alignment/cohesion rules plus player-seeking. Emergent collective behavior from simple local rules. Destroy the hive to disperse the swarm.",
-			"scene": "res://commons/hazards/swarm_hive/swarm_hive.tscn",
-			"category": "hazards",
-			"tags": ["swarm", "boids", "flocking", "emergence"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "swarmintelligence",
-			"map_sequences": ["swarmintelligence"]
-		},
-		"bricoleur_golem": {
-			"name": "Bricoleur Golem",
-			"lookup_name": "bricoleur_golem",
-			"description": "Asymmetric golem built from mismatched primitives. Rebuilds itself from random parts after damage — each reconstruction unique. Exhausts after 3 rebuilds. Teaches bricolage: creation from whatever is at hand.",
-			"scene": "res://commons/hazards/bricoleur_golem/bricoleur_golem.tscn",
-			"category": "hazards",
-			"tags": ["bricolage", "reconstruction", "randomness", "adaptation"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "bricolage",
-			"map_sequences": ["bricolage"]
-		},
-		"lifeform_walker": {
-			"name": "Lifeform Walker",
-			"lookup_name": "lifeform_walker",
-			"description": "Walking creature with a 6x6 Game of Life grid on its torso. Living cells provide armor; Conway's rules run each tick. Dead automaton reinitializes. The cellular automaton made corporeal.",
-			"scene": "res://commons/hazards/lifeform_walker/lifeform_walker.tscn",
-			"category": "hazards",
-			"tags": ["cellular-automata", "conway", "game-of-life", "armor"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "cellularautomata",
-			"map_sequences": ["cellularautomata"]
-		},
-		"hull_crusher": {
-			"name": "Hull Crusher",
-			"lookup_name": "hull_crusher",
-			"description": "Morphing convex polyhedron with orbiting point-nodes. Fires points as projectiles — each launch shrinks the convex hull. Points respawn over time. Teaches computational geometry through combat.",
-			"scene": "res://commons/hazards/hull_crusher/hull_crusher.tscn",
-			"category": "hazards",
-			"tags": ["convex-hull", "geometry", "polyhedron", "projectiles"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "computationalgeometry",
-			"map_sequences": ["computationalgeometry"]
-		},
-		"data_tree_walker": {
-			"name": "Data Tree Walker",
-			"lookup_name": "data_tree_walker",
-			"description": "Binary search tree of sphere nodes connected by cylinder edges. BST insert with values 1-7; visible tree rotations on damage. Walks on its leaf nodes. Data structures made physical.",
-			"scene": "res://commons/hazards/data_tree_walker/data_tree_walker.tscn",
-			"category": "hazards",
-			"tags": ["binary-tree", "bst", "data-structure", "traversal"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "datastructures",
-			"map_sequences": ["datastructures"]
-		},
 		"paradox_stalker": {
-			"name": "Paradox Stalker",
-			"lookup_name": "paradox_stalker",
+			"category": "hazards",
+			"complexity": "intermediate",
 			"description": "Two overlapping ghost silhouettes that swap which is real every 3 seconds. 50% chance damage passes through the wrong ghost. Zeno's paradox: sometimes halves distance to player instead of closing it.",
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"philosophy"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "paradox_stalker",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Paradox Stalker",
 			"scene": "res://commons/hazards/paradox_stalker/paradox_stalker.tscn",
-			"category": "hazards",
-			"tags": ["paradox", "duality", "zeno", "foundations", "ghost"],
-			"include_in_map_data": true,
-			"map_ready": true,
 			"sequence": "foundationscrisis",
-			"map_sequences": ["foundationscrisis"]
-		},
-		"fractal_hydra": {
-			"name": "Fractal Hydra",
-			"lookup_name": "fractal_hydra",
-			"description": "Central body with branching heads on cylinder necks. Damage splits a head into two half-size copies — fractal branching up to depth 3. More heads means more attacks but less damage each. Cut one head, two grow back.",
-			"scene": "res://commons/hazards/fractal_hydra/fractal_hydra.tscn",
-			"category": "hazards",
-			"tags": ["fractal", "self-similarity", "branching", "hydra"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "fractals",
-			"map_sequences": ["fractals"]
-		},
-		"grammar_markov": {
-			"name": "Grammar Markov",
-			"lookup_name": "grammar_markov",
-			"description": "Tetrahedron with 4 colored state-faces. Markov chain transition matrix determines attack patterns — visible transition probabilities. Matrix mutates over time. Stochastic grammar made combative.",
-			"scene": "res://commons/hazards/grammar_markov/grammar_markov.tscn",
-			"category": "hazards",
-			"tags": ["markov-chain", "grammar", "stochastic", "state-machine"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "grammar_systems",
-			"map_sequences": ["grammar_systems"]
-		},
-		"graph_weaver": {
-			"name": "Graph Weaver",
-			"lookup_name": "graph_weaver",
-			"description": "Network of 8 sphere-nodes connected by cylinder-edges. Reconfigures edges to create shortest path toward player with visible BFS/DFS traversal. Can cast edges as projectile attacks.",
-			"scene": "res://commons/hazards/graph_weaver/graph_weaver.tscn",
-			"category": "hazards",
-			"tags": ["graph", "bfs", "dfs", "shortest-path", "network"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "graphtheory",
-			"map_sequences": ["graphtheory"]
-		},
-		"tesseract_phaser": {
-			"name": "Tesseract Phaser",
-			"lookup_name": "tesseract_phaser",
-			"description": "Wireframe hypercube with 16 vertices and 32 edges. 4D rotation phases parts in and out of hittability — vertex alpha based on W-depth. The fourth dimension as combat mechanic.",
-			"scene": "res://commons/hazards/tesseract_phaser/tesseract_phaser.tscn",
-			"category": "hazards",
-			"tags": ["4d", "hypercube", "tesseract", "projection", "rotation"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "higher_dimensions",
-			"map_sequences": ["higher_dimensions"]
-		},
-		"joint_articulator": {
-			"name": "Joint Articulator",
-			"lookup_name": "joint_articulator",
-			"description": "Central body with 6 limbs, each using a different joint type — hinge, ball, slider, revolute, prismatic, fixed. Each limb moves per its constraint. Joint physics made visible.",
-			"scene": "res://commons/hazards/joint_articulator/joint_articulator.tscn",
-			"category": "hazards",
-			"tags": ["joints", "constraints", "articulation", "physics"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "joints",
-			"map_sequences": ["joints"]
-		},
-		"branching_vine": {
-			"name": "Branching Vine",
-			"lookup_name": "branching_vine",
-			"description": "L-system vine growing from a root point. Turtle graphics interpretation builds cylinder branches that reach toward the player. Damage prunes random branches. Formal grammar becomes organic growth.",
-			"scene": "res://commons/hazards/branching_vine/branching_vine.tscn",
-			"category": "hazards",
-			"tags": ["l-system", "growth", "vine", "turtle-graphics", "pruning"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "lsystems",
-			"map_sequences": ["lsystems"]
-		},
-		"gradient_hunter": {
-			"name": "Gradient Hunter",
-			"lookup_name": "gradient_hunter",
-			"description": "Sleek predator with orbiting sample-point particles. Gradient descent pathfinding toward player — gets stuck in local minima, anneals out with random teleport. Machine learning as locomotion strategy.",
-			"scene": "res://commons/hazards/gradient_hunter/gradient_hunter.tscn",
-			"category": "hazards",
-			"tags": ["gradient-descent", "optimization", "machine-learning", "loss-function"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "machinelearning",
-			"map_sequences": ["machinelearning"]
-		},
-		"wave_rider": {
-			"name": "Wave Rider",
-			"lookup_name": "wave_rider",
-			"description": "Ribbon of 20 box segments in sine wave formation. Oscillation frequency ramps on detection; attacks at resonance with projectile bursts. Wave physics as creature locomotion.",
-			"scene": "res://commons/hazards/wave_rider/wave_rider.tscn",
-			"category": "hazards",
-			"tags": ["wave", "sine", "frequency", "resonance", "oscillation"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "wavefunctions",
-			"map_sequences": ["wavefunctions"]
-		},
-		"escher_stairwalker": {
-			"name": "Escher Stairwalker",
-			"lookup_name": "escher_stairwalker",
-			"description": "Minimalist figure walking an impossible staircase loop. Always appears to climb but stays at the same height. Invulnerable while on stairs; glitches out to lunge. Impossible geometry as armor.",
-			"scene": "res://commons/hazards/escher_stairwalker/escher_stairwalker.tscn",
-			"category": "hazards",
-			"tags": ["escher", "impossible", "geometry", "illusion", "staircase"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "artmathematics",
-			"map_sequences": ["artmathematics"]
-		},
-		"mesh_morpher": {
-			"name": "Mesh Morpher",
-			"lookup_name": "mesh_morpher",
-			"description": "Shape-shifting creature morphing between sphere, cube, torus, and cylinder. Each topology has a different attack pattern — roll, slam, spin, sweep. Mesh topology as combat strategy.",
-			"scene": "res://commons/hazards/mesh_morpher/mesh_morpher.tscn",
-			"category": "hazards",
-			"tags": ["mesh", "topology", "morphing", "shape-shifting"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "meshes",
-			"map_sequences": ["meshes"]
-		},
-		"spring_mass_bouncer": {
-			"name": "Spring Mass Bouncer",
-			"lookup_name": "spring_mass_bouncer",
-			"description": "3x3 grid of sphere mass-nodes connected by springs with Hooke's law physics. Deforms on contact; spring tension equals damage. Visible soft-body simulation as creature.",
-			"scene": "res://commons/hazards/spring_mass_bouncer/spring_mass_bouncer.tscn",
-			"category": "hazards",
-			"tags": ["spring", "mass", "hooke", "soft-body", "deformation"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "softbodies",
-			"map_sequences": ["softbodies"]
-		},
-		"collision_crasher": {
-			"name": "Collision Crasher",
-			"lookup_name": "collision_crasher",
-			"description": "Central body with 5 tethered physics blocks that bounce and collide with elastic collision math. Impulse vectors visible as arrows on impact. Momentum conservation made tangible.",
-			"scene": "res://commons/hazards/collision_crasher/collision_crasher.tscn",
-			"category": "hazards",
-			"tags": ["collision", "impulse", "momentum", "elastic", "physics"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "physicssimulation",
-			"map_sequences": ["physicssimulation"]
-		},
-		"recursion_spiral": {
-			"name": "Recursion Spiral",
-			"lookup_name": "recursion_spiral",
-			"description": "Fibonacci spiral of shrinking sphere nodes spawned at golden-angle intervals. Each node is 0.618x parent size up to depth 5. Recursive cleanup on death. The golden ratio as creature architecture.",
-			"scene": "res://commons/hazards/recursion_spiral/recursion_spiral.tscn",
-			"category": "hazards",
-			"tags": ["recursion", "fibonacci", "golden-ratio", "spiral", "self-similar"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "recursiveemergence",
-			"map_sequences": ["recursiveemergence"]
-		},
-		"maze_spinner": {
-			"name": "Maze Spinner",
-			"lookup_name": "maze_spinner",
-			"description": "Crystalline core that procedurally generates rotating maze walls. DFS-based maze generation with new random seed every 8 seconds. Navigate the gaps or take wall damage. The algorithm IS the enemy.",
-			"scene": "res://commons/hazards/maze_spinner/maze_spinner.tscn",
-			"category": "hazards",
-			"tags": ["maze", "procedural", "dfs", "generation", "walls"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "proceduralgeneration",
-			"map_sequences": ["proceduralgeneration"]
-		},
-		"constraint_web": {
-			"name": "Constraint Web",
-			"lookup_name": "constraint_web",
-			"description": "5x5 grid of superposition tiles representing a constraint satisfaction problem. Tiles collapse on step; contradictions explode. Graph coloring as minefield — no two adjacent tiles may share a color.",
-			"scene": "res://commons/hazards/constraint_web/constraint_web.tscn",
-			"category": "hazards",
-			"tags": ["constraint", "csp", "superposition", "graph-coloring"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "constraint_solvers",
-			"map_sequences": ["constraint_solvers"]
-		},
-		"isosurface_trap": {
-			"name": "Isosurface Trap",
-			"lookup_name": "isosurface_trap",
-			"description": "Blobby metaball surface from point charges. Scalar field bulges toward player; contact equals damage proportional to field strength. The implicit surface made dangerous.",
-			"scene": "res://commons/hazards/isosurface_trap/isosurface_trap.tscn",
-			"category": "hazards",
-			"tags": ["isosurface", "metaball", "scalar-field", "implicit"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "isosurfaces",
-			"map_sequences": ["isosurfaces"]
-		},
-		"noise_field": {
-			"name": "Noise Field",
-			"lookup_name": "noise_field",
-			"description": "10x10 grid of height-varying tiles driven by Perlin noise. High tiles are danger zones, low tiles are safe. Noise scrolls continuously — the landscape of randomness shifts under your feet.",
-			"scene": "res://commons/hazards/noise_field/noise_field.tscn",
-			"category": "hazards",
-			"tags": ["noise", "perlin", "height-map", "scrolling"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "noise",
-			"map_sequences": ["noise"]
-		},
-		"pattern_mine": {
-			"name": "Pattern Mine",
-			"lookup_name": "pattern_mine",
-			"description": "Mines with SDF contour rings marking danger zones. Cross the zero-contour and they detonate. Different ring shapes, pulsing indicators, and respawning after cooldown. Signed distance as survival instinct.",
-			"scene": "res://commons/hazards/pattern_mine/pattern_mine.tscn",
-			"category": "hazards",
-			"tags": ["sdf", "pattern", "mines", "contour", "detonation"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "patterngeneration",
-			"map_sequences": ["patterngeneration"]
-		},
-		"resonance_chamber": {
-			"name": "Resonance Chamber",
-			"lookup_name": "resonance_chamber",
-			"description": "Transparent box with standing wave bars at node positions. Damage at wave nodes, safe at anti-nodes; harmonic frequency shifts every 8 seconds. Sound physics as spatial puzzle.",
-			"scene": "res://commons/hazards/resonance_chamber/resonance_chamber.tscn",
-			"category": "hazards",
-			"tags": ["resonance", "standing-wave", "harmonics", "audio", "nodes"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "proceduralaudio",
-			"map_sequences": ["proceduralaudio"]
-		},
-		"spatial_voronoi": {
-			"name": "Spatial Voronoi",
-			"lookup_name": "spatial_voronoi",
-			"description": "Ground plane divided into Voronoi cells by drifting seed points. Each cell has a different danger type — safe, damage, slow, heal. Seeds drift and types shuffle, remapping the partition. Spatial decomposition as territory.",
-			"scene": "res://commons/hazards/spatial_voronoi/spatial_voronoi.tscn",
-			"category": "hazards",
-			"tags": ["voronoi", "spatial", "partition", "cells", "seeds"],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"sequence": "spatial_partitioning",
-			"map_sequences": ["spatial_partitioning"]
+			"tags": [
+				"paradox",
+				"duality",
+				"zeno",
+				"foundations",
+				"ghost"
+			]
 		},
 		"particle_emitter_hazard": {
-			"name": "Particle Emitter",
-			"lookup_name": "particle_emitter_hazard",
-			"description": "Nozzle firing lifecycle-colored spheres with manual particle pool. Cycles between cone, fountain, and spiral emission patterns. Birth-white to active-yellow to dying-red. The particle system as weapon.",
-			"scene": "res://commons/hazards/particle_emitter_hazard/particle_emitter_hazard.tscn",
 			"category": "hazards",
-			"tags": ["particles", "emission", "lifecycle", "pool", "patterns"],
+			"complexity": "intermediate",
+			"description": "Nozzle firing lifecycle-colored spheres with manual particle pool. Cycles between cone, fountain, and spiral emission patterns. Birth-white to active-yellow to dying-red. The particle system as weapon.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
 			"include_in_map_data": true,
+			"lookup_name": "particle_emitter_hazard",
 			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Particle Emitter",
+			"scene": "res://commons/hazards/particle_emitter_hazard/particle_emitter_hazard.tscn",
 			"sequence": "particles",
-			"map_sequences": ["particles"]
+			"tags": [
+				"particles",
+				"emission",
+				"lifecycle",
+				"pool",
+				"patterns"
+			]
+		},
+		"pattern_mine": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "Mines with SDF contour rings marking danger zones. Cross the zero-contour and they detonate. Different ring shapes, pulsing indicators, and respawning after cooldown. Signed distance as survival instinct.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pattern_mine",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Pattern Mine",
+			"scene": "res://commons/hazards/pattern_mine/pattern_mine.tscn",
+			"sequence": "patterngeneration",
+			"tags": [
+				"sdf",
+				"pattern",
+				"mines",
+				"contour",
+				"detonation"
+			]
+		},
+		"plasma_critter": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Shapeshifting energy substance — a critter that takes form based on relational context. Raw form shocks on contact. Touch with a stick → fire torch. Touch water → healing aura. Touch crystal → power orb. Q-FEP: same potential, different restraint.",
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"qfep"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "plasma_critter",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Plasma Critter",
+			"scene": "res://commons/hazards/plasma/plasma_critter.tscn",
+			"tags": [
+				"hazards",
+				"interactive"
+			]
+		},
+		"proximity_spawner": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Spawns enemies when player enters radius. Respawns after enemy death. Configure with type, spawn_radius, despawn_radius, respawn_delay.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "proximity_spawner",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Proximity Spawner",
+			"scene": "res://commons/hazards/proximity_spawner.tscn",
+			"tags": [
+				"hazard"
+			]
 		},
 		"qfep_calibrator": {
-			"name": "QFEP Calibrator",
-			"lookup_name": "qfep_calibrator",
-			"description": "Morphing dodecahedron with 3 parameter beams — phi (rotation speed), delta_e (damage), constraint (detection). Parameters oscillate, creating emergent behavior from their interaction. The QFEP laboratory's creature.",
-			"scene": "res://commons/hazards/qfep_calibrator/qfep_calibrator.tscn",
 			"category": "hazards",
-			"tags": ["qfep", "parameters", "calibration", "oscillation", "emergence"],
+			"complexity": "advanced",
+			"description": "Morphing dodecahedron with 3 parameter beams — phi (rotation speed), delta_e (damage), constraint (detection). Parameters oscillate, creating emergent behavior from their interaction. The QFEP laboratory's creature.",
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"qfep"
+			],
 			"include_in_map_data": true,
+			"lookup_name": "qfep_calibrator",
 			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "QFEP Calibrator",
+			"scene": "res://commons/hazards/qfep_calibrator/qfep_calibrator.tscn",
 			"sequence": "qfeplaboratory",
-			"map_sequences": ["qfeplaboratory"]
+			"tags": [
+				"qfep",
+				"parameters",
+				"calibration",
+				"oscillation",
+				"emergence"
+			]
+		},
+		"recursion_spiral": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "Fibonacci spiral of shrinking sphere nodes spawned at golden-angle intervals. Each node is 0.618x parent size up to depth 5. Recursive cleanup on death. The golden ratio as creature architecture.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "recursion_spiral",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Recursion Spiral",
+			"scene": "res://commons/hazards/recursion_spiral/recursion_spiral.tscn",
+			"sequence": "recursiveemergence",
+			"tags": [
+				"recursion",
+				"fibonacci",
+				"golden-ratio",
+				"spiral",
+				"self-similar"
+			]
+		},
+		"resonance_chamber": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "Transparent box with standing wave bars at node positions. Damage at wave nodes, safe at anti-nodes; harmonic frequency shifts every 8 seconds. Sound physics as spatial puzzle.",
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"music"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "resonance_chamber",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Resonance Chamber",
+			"scene": "res://commons/hazards/resonance_chamber/resonance_chamber.tscn",
+			"sequence": "proceduralaudio",
+			"tags": [
+				"resonance",
+				"standing-wave",
+				"harmonics",
+				"audio",
+				"nodes"
+			]
+		},
+		"scissor_stalker": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Spider-like enemy with Hoberman scissor linkage legs. Legs extend 3x their compact length for dramatic reach. Stalks with partially extended legs, pounces by rapidly extending, slams down to attack.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "scissor_stalker",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards",
+				"randomness"
+			],
+			"name": "Scissor Stalker",
+			"scene": "res://commons/hazards/scissor_stalker/scissor_stalker.tscn",
+			"sequence": "randomness",
+			"tags": [
+				"hazard"
+			]
+		},
+		"shell_roller": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Icosahedron creature that retracts into a kickable shell. Kick it to send it rolling — it bounces off walls and damages other enemies on contact.",
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"physics"
+			],
+			"include_in_map_data": true,
+			"interaction": "kick",
+			"lookup_name": "shell_roller",
+			"map_ready": true,
+			"name": "Shell Roller",
+			"scene": "res://commons/hazards/shell_roller/shell_roller.tscn",
+			"tags": [
+				"mario",
+				"kick",
+				"shell",
+				"momentum",
+				"chain-reaction"
+			]
+		},
+		"six_leg_critter": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Six-legged procedural walker. Insect-like alternating tripod gait — three legs always grounded. The most common arthropod configuration.",
+			"dev_themes": [
+				"art",
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "six_leg_critter",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Six Leg Critter",
+			"parameters": {
+				"footprint": [
+					2.0,
+					1.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/hazards/octapod_crawler/six_leg_critter.tscn",
+			"tags": [
+				"procedural",
+				"ik",
+				"legs",
+				"locomotion",
+				"hexapod"
+			]
+		},
+		"spatial_voronoi": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Ground plane divided into Voronoi cells by drifting seed points. Each cell has a different danger type — safe, damage, slow, heal. Seeds drift and types shuffle, remapping the partition. Spatial decomposition as territory.",
+			"dev_themes": [
+				"biology",
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "spatial_voronoi",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Spatial Voronoi",
+			"scene": "res://commons/hazards/spatial_voronoi/spatial_voronoi.tscn",
+			"sequence": "spatial_partitioning",
+			"tags": [
+				"voronoi",
+				"spatial",
+				"partition",
+				"cells",
+				"seeds"
+			]
+		},
+		"sphere_droideka": {
+			"category": "hazards",
+			"complexity": "beginner",
+			"description": "Armadillidiidae-style spherical droideka. Rolls as compact ball of overlapping shell plates, unfolds to tripod stance with shield dome and twin blasters. Star Wars droideka inspired.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sphere_droideka",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Sphere Droideka",
+			"scene": "res://commons/hazards/sphere_droideka/sphere_droideka.tscn",
+			"tags": [
+				"geometry",
+				"hazards"
+			]
+		},
+		"spring_hopper": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Coil spring creature that bounces rhythmically. Land on top when compressed to get launched upward — Hooke's law as creature.",
+			"dev_themes": [
+				"gameplay",
+				"hazards",
+				"physics"
+			],
+			"include_in_map_data": true,
+			"interaction": "ride",
+			"lookup_name": "spring_hopper",
+			"map_ready": true,
+			"name": "Spring Hopper",
+			"scene": "res://commons/hazards/spring_hopper/spring_hopper.tscn",
+			"tags": [
+				"mario",
+				"spring",
+				"bounce",
+				"hooke",
+				"launch"
+			]
+		},
+		"spring_mass_bouncer": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "3x3 grid of sphere mass-nodes connected by springs with Hooke's law physics. Deforms on contact; spring tension equals damage. Visible soft-body simulation as creature.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "spring_mass_bouncer",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Spring Mass Bouncer",
+			"scene": "res://commons/hazards/spring_mass_bouncer/spring_mass_bouncer.tscn",
+			"sequence": "softbodies",
+			"tags": [
+				"spring",
+				"mass",
+				"hooke",
+				"soft-body",
+				"deformation"
+			]
+		},
+		"stick_tool": {
+			"category": "tools",
+			"complexity": "intermediate",
+			"description": "A simple wooden stick the player can grab. Hold near a Plasma Critter to transform it into a torch. The mediator between player and plasma — the relational bridge.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "stick_tool",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Stick Tool",
+			"scene": "res://commons/hazards/plasma/stick_tool.tscn",
+			"tags": [
+				"interactive",
+				"tools",
+				"vr"
+			]
+		},
+		"swarm_hive": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "Stationary hive spawning boid particles that follow separation/alignment/cohesion rules plus player-seeking. Emergent collective behavior from simple local rules. Destroy the hive to disperse the swarm.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "swarm_hive",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Swarm Hive",
+			"scene": "res://commons/hazards/swarm_hive/swarm_hive.tscn",
+			"sequence": "swarmintelligence",
+			"tags": [
+				"swarm",
+				"boids",
+				"flocking",
+				"emergence"
+			]
+		},
+		"techstrider": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Tall mechanical strider with long articulated legs. Patrols elevated paths, steps over obstacles. A walking architecture — the legs ARE the structure.",
+			"dev_themes": [
+				"art",
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "techstrider",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Tech Strider",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/hazards/techstrider/techstrider.tscn",
+			"tags": [
+				"mechanical",
+				"strider",
+				"tall",
+				"patrol"
+			]
+		},
+		"tentacle_cube": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "A cube with procedural tentacles extending from its faces. Combines rigid geometry with fluid organic motion — the grid cell that grew limbs.",
+			"dev_themes": [
+				"biology",
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "tentacle_cube",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Tentacle Cube",
+			"scene": "res://commons/hazards/tentacle_cube/tentacle_cube.tscn",
+			"tags": [
+				"tentacle",
+				"procedural",
+				"cube",
+				"hybrid"
+			]
+		},
+		"tesseract_phaser": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Wireframe hypercube with 16 vertices and 32 edges. 4D rotation phases parts in and out of hittability — vertex alpha based on W-depth. The fourth dimension as combat mechanic.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "tesseract_phaser",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Tesseract Phaser",
+			"scene": "res://commons/hazards/tesseract_phaser/tesseract_phaser.tscn",
+			"sequence": "higher_dimensions",
+			"tags": [
+				"4d",
+				"hypercube",
+				"tesseract",
+				"projection",
+				"rotation"
+			]
+		},
+		"three_leg_critter": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Three-legged procedural walker. Tripod gait — the minimum legs for static stability. Always has a support triangle.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "three_leg_critter",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Three Leg Critter",
+			"parameters": {
+				"footprint": [
+					2.0,
+					1.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/hazards/octapod_crawler/three_leg_critter.tscn",
+			"tags": [
+				"procedural",
+				"ik",
+				"legs",
+				"locomotion",
+				"tripod"
+			]
+		},
+		"two_leg_critter": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Two-legged procedural walker. Bipedal gait emerges from alternating step cycles. The simplest creature that must solve balance.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "two_leg_critter",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Two Leg Critter",
+			"parameters": {
+				"footprint": [
+					2.0,
+					1.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/hazards/octapod_crawler/two_leg_critter.tscn",
+			"tags": [
+				"procedural",
+				"ik",
+				"legs",
+				"locomotion",
+				"bipedal"
+			]
+		},
+		"waterbomb_enemy": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "True rigid-foldable origami enemy using waterbomb tessellation. Faces remain rigid during folding; geometry is computed from kinematic constraints. Rolls collapsed, unfolds to flower shape when attacking.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "waterbomb_enemy",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Waterbomb Enemy",
+			"scene": "res://commons/hazards/armadillo_droideka/waterbomb_enemy.tscn",
+			"tags": [
+				"hazard",
+				"origami",
+				"physics"
+			]
+		},
+		"waterbomb_hopper": {
+			"category": "hazards",
+			"complexity": "intermediate",
+			"description": "Bouncing waterbomb tessellation enemy. Origami-themed hazard with a waterbomb base shape built from triangular faces. Bounces sinusoidally with squash-and-stretch, fold angle oscillates for a breathing effect. Patrols a rectangular path, chases on detection.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "waterbomb_hopper",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Waterbomb Hopper",
+			"scene": "res://commons/hazards/waterbomb_hopper/waterbomb_hopper.tscn",
+			"tags": [
+				"hazard",
+				"origami"
+			]
+		},
+		"wave_rider": {
+			"category": "hazards",
+			"complexity": "advanced",
+			"description": "Ribbon of 20 box segments in sine wave formation. Oscillation frequency ramps on detection; attacks at resonance with projectile bursts. Wave physics as creature locomotion.",
+			"dev_themes": [
+				"gameplay",
+				"hazards"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "wave_rider",
+			"map_ready": true,
+			"map_sequences": [
+				"hazards"
+			],
+			"name": "Wave Rider",
+			"scene": "res://commons/hazards/wave_rider/wave_rider.tscn",
+			"sequence": "wavefunctions",
+			"tags": [
+				"wave",
+				"sine",
+				"frequency",
+				"resonance",
+				"oscillation"
+			]
 		}
 	}
 }

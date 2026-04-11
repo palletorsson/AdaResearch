@@ -2,6 +2,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: diamonds[i].position = (cos(2πi/n)*r, -cylinder_length, sin(2πi/n)*r) — radial distribution on a torus
+# desire: learner feels the torus as a path — walking around it reveals equally-spaced hanging elements
+# critical_parameter: diamond_count — how many hanging diamonds; more creates denser radial symmetry
+# triggers: nothing at runtime — static display; editor-tool flag allows live-editing in Godot editor
+# emerges: the rainbow color array as a pedagogical signal — hue encodes position in the radial sequence
+# needs: [missing VR controls — static display; no live diamond_count slider]
+# relationships: uses octahedron as diamond unit; depends on torus geometry from torus_radials_rings
+# truth: a torus is a circle of circles — its symmetry group allows equal radial distribution of any count
+
 # Torus and diamond parameters
 @export var torus_radius: float = 2.0        # 2 meters from center to torus
 @export var cylinder_length: float = 1.0     # 1 meter long cylinders
@@ -30,11 +40,11 @@ var diamond_colors = [
 	Color(1.0, 0.0, 1.0)     # Magenta
 ]
 
-func _ready():
+func _ready() -> void:
 	create_torus_reference()
 	create_hanging_arrangement()
 
-func create_torus_reference():
+func create_torus_reference() -> void:
 	"""Create a wireframe torus for reference"""
 	if not show_torus_wireframe:
 		return
@@ -60,7 +70,7 @@ func create_torus_reference():
 	
 	add_child(torus_mesh)
 
-func create_hanging_arrangement():
+func create_hanging_arrangement() -> void:
 	"""Create cylinders pointing downward from torus with diamonds hanging below"""
 	
 	# Load diamond scene
@@ -144,13 +154,13 @@ func create_hanging_cylinder(torus_position: Vector3) -> MeshInstance3D:
 
 # Public methods for external control
 
-func set_diamond_count(count: int):
+func set_diamond_count(count: int) -> void:
 	"""Change the number of diamonds and recreate arrangement"""
 	diamond_count = count
 	clear_arrangement()
 	create_hanging_arrangement()
 
-func set_torus_radius(radius: float):
+func set_torus_radius(radius: float) -> void:
 	"""Change torus radius and recreate arrangement"""
 	torus_radius = radius
 	clear_arrangement()
@@ -163,13 +173,13 @@ func set_torus_radius(radius: float):
 			torus.inner_radius = torus_radius - 0.1
 			torus.outer_radius = torus_radius + 0.1
 
-func set_cylinder_length(length: float):
+func set_cylinder_length(length: float) -> void:
 	"""Change cylinder length and recreate arrangement"""
 	cylinder_length = length
 	clear_arrangement()
 	create_hanging_arrangement()
 
-func clear_arrangement():
+func clear_arrangement() -> void:
 	"""Remove all cylinders and diamonds from scene"""
 	for cylinder in cylinders:
 		if is_instance_valid(cylinder):
@@ -181,20 +191,20 @@ func clear_arrangement():
 	cylinders.clear()
 	diamonds.clear()
 
-func toggle_torus_wireframe():
+func toggle_torus_wireframe() -> void:
 	"""Show/hide the reference torus wireframe"""
 	show_torus_wireframe = !show_torus_wireframe
 	if torus_mesh:
 		torus_mesh.visible = show_torus_wireframe
 
-func set_diamond_colors_custom(colors: Array[Color]):
+func set_diamond_colors_custom(colors: Array[Color]) -> void:
 	"""Apply custom colors to diamonds"""
 	for i in range(diamonds.size()):
 		var diamond = diamonds[i]
 		if diamond and diamond.has_method("set_base_color") and i < colors.size():
 			diamond.set_base_color(colors[i])
 
-func set_cylinder_color(color: Color):
+func set_cylinder_color(color: Color) -> void:
 	"""Change the color of all cylinders"""
 	cylinder_color = color
 	for cylinder in cylinders:
@@ -211,3 +221,12 @@ func get_arrangement_info() -> Dictionary:
 		"cylinder_length": cylinder_length,
 		"diamonds_height": -cylinder_length
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

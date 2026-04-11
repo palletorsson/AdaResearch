@@ -1,6 +1,16 @@
 # PyramidLong.gd - Long pyramid with rectangular base (6 faces total)
 extends Node3D
 
+# @identity
+# essence: tall pyramid(rectangular base, height=2.8) — a stretched variant that teaches aspect ratio
+# desire: learner sees that changing one dimension breaks square symmetry and changes the entire character
+# critical_parameter: pyramid_height = 2.8 — taller than wide, making it a spire rather than a mound
+# triggers: nothing — static object placed for spatial comparison with regular pyramid
+# emerges: the architectural reading — this is a steeple, an obelisk, a monument; proportion carries meaning
+# needs: [missing VR controls — static display; pink color chosen for visibility]
+# relationships: sibling to pyramid.gd; demonstrates non-uniform scaling at the geometry level
+# truth: proportion is a dimension of meaning — the same topology at different aspect ratios tells different stories
+
 var base_color: Color = Color(1.0, 0.4, 0.8)  # Pink color
 var pyramid_height: float = 2.8  # Keep the height you set
 var base_width: float = 0.8      # Width (X axis)

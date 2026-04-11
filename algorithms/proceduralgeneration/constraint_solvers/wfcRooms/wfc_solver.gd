@@ -3,6 +3,16 @@
 ## Attach to a Node3D in your scene to generate procedural dungeons
 extends Node3D
 
+# @identity
+# essence: 2D Wave Function Collapse dungeon generator — room and corridor tiles collapsed via socket adjacency into floor plans
+# desire: To generate dungeons that feel designed but were never drawn: rooms connect because the rules permit nothing else
+# critical_parameter: grid_width x grid_height — the dungeon footprint; larger grids produce more complex layouts
+# triggers: Auto-generate fills the grid on ready; seed control enables reproducible dungeons; max_iterations prevents loops
+# emerges: Coherent dungeon layouts with rooms, corridors, and props — architecture from tile adjacency rules alone
+# needs: Tile prototype loading [has], socket rules [has], floor/wall materials [has], auto-generate [has], VR walkthrough [has]
+# relationships: Dungeon application of WFC in constraint_solvers. Contrasts with BSP dungeon generation (constraint vs division).
+# truth: A dungeon is not designed — it precipitates from adjacency rules, and the rules never see the whole.
+
 ## Size of the dungeon grid
 @export var grid_width : int = 20  # Scaled up
 @export var grid_height : int = 20 # Scaled up
@@ -34,12 +44,12 @@ var wall_material : StandardMaterial3D
 var prop_desk_material : StandardMaterial3D
 var prop_plant_material : StandardMaterial3D
 
-func _ready():
+func _ready() -> void:
 	_init_materials()
 	if auto_generate:
 		generate_dungeon()
 
-func _init_materials():
+func _init_materials() -> void:
 	floor_material = StandardMaterial3D.new()
 	floor_material.albedo_color = Color(0.15, 0.16, 0.2)
 	floor_material.roughness = 0.3
@@ -122,7 +132,7 @@ func _load_tile_prototypes() -> bool:
 	return true
 
 ## Build rules for which tiles can be adjacent
-func _build_socket_rules():
+func _build_socket_rules() -> void:
 	socket_rules.clear()
 	
 	for tile in tile_prototypes:
@@ -132,7 +142,7 @@ func _build_socket_rules():
 	print("📋 Built socket rules for ", socket_rules.size(), " tiles")
 
 ## Initialize the grid with all possibilities
-func _initialize_grid():
+func _initialize_grid() -> void:
 	grid = []
 	possible = []
 	
@@ -211,7 +221,7 @@ func _find_min_entropy_cell():
 	return candidates[randi() % candidates.size()]
 
 ## Propagate constraints after collapsing a cell
-func _propagate_constraints(start_x: int, start_y: int):
+func _propagate_constraints(start_x: int, start_y: int) -> void:
 	var stack = [Vector2i(start_x, start_y)]
 	
 	while not stack.is_empty():
@@ -249,7 +259,7 @@ func _propagate_constraints(start_x: int, start_y: int):
 				stack.append(Vector2i(nx, ny))
 
 ## Constrain a cell based on its neighbor
-func _constrain_cell(cell_x: int, cell_y: int, neighbor_x: int, neighbor_y: int, direction: String, opposite: String):
+func _constrain_cell(cell_x: int, cell_y: int, neighbor_x: int, neighbor_y: int, direction: String, opposite: String) -> void:
 	var neighbor_tile = grid[neighbor_y][neighbor_x]
 	
 	# If neighbor is collapsed, filter based on its socket
@@ -306,7 +316,7 @@ func _count_collapsed() -> int:
 	return count
 
 ## Place the generated tiles in the 3D world
-func _place_tiles_in_world():
+func _place_tiles_in_world() -> void:
 	# Clear existing children (except camera/lights)
 	for child in get_children():
 		if child.is_in_group("generated_tile"):
@@ -334,7 +344,7 @@ func _place_tiles_in_world():
 	print("🎨 Placed ", grid_width * grid_height, " tiles in world")
 
 ## Decorate tile with props and proper materials
-func _decorate_tile(tile: Node3D, x: int, y: int):
+func _decorate_tile(tile: Node3D, x: int, y: int) -> void:
 	# 1. Apply Materials via override
 	_apply_materials_recursive(tile)
 	
@@ -362,7 +372,7 @@ func _decorate_tile(tile: Node3D, x: int, y: int):
 			light.position = Vector3(tile_size/2, 2.0, tile_size/2)
 			tile.add_child(light)
 
-func _apply_materials_recursive(node: Node):
+func _apply_materials_recursive(node: Node) -> void:
 	if node is CSGBox3D:
 		if "Floor" in node.name:
 			node.material = floor_material
@@ -372,7 +382,7 @@ func _apply_materials_recursive(node: Node):
 	for child in node.get_children():
 		_apply_materials_recursive(child)
 
-func _spawn_prop_at(tile: Node, type: String, pos: Vector3):
+func _spawn_prop_at(tile: Node, type: String, pos: Vector3) -> void:
 	if type == "Prop_Center":
 		if randf() < 0.3:
 			_add_desk(tile, pos)
@@ -383,7 +393,7 @@ func _spawn_prop_at(tile: Node, type: String, pos: Vector3):
 		if randf() < 0.5:
 			_add_plant(tile, pos)
 
-func _apply_fallback_props(tile: Node, x: int, y: int):
+func _apply_fallback_props(tile: Node, x: int, y: int) -> void:
 	var pos_center = Vector3(tile_size/2, 0, tile_size/2)
 	
 	if tile.name.begins_with("Floor"):
@@ -395,7 +405,7 @@ func _apply_fallback_props(tile: Node, x: int, y: int):
 		if randf() < 0.3:
 			_add_plant(tile, pos_center)
 
-func _add_desk(parent: Node, pos: Vector3):
+func _add_desk(parent: Node, pos: Vector3) -> void:
 	var desk = CSGBox3D.new()
 	desk.size = Vector3(1.2, 0.8, 0.6)
 	desk.position = pos + Vector3(0, 0.4, 0) # Raise to sit on floor
@@ -403,7 +413,7 @@ func _add_desk(parent: Node, pos: Vector3):
 	desk.name = "Desk"
 	parent.add_child(desk)
 
-func _add_plant(parent: Node, pos: Vector3):
+func _add_plant(parent: Node, pos: Vector3) -> void:
 	var plant = CSGCylinder3D.new()
 	plant.radius = 0.3
 	plant.height = 1.0
@@ -412,7 +422,7 @@ func _add_plant(parent: Node, pos: Vector3):
 	plant.name = "Plant"
 	parent.add_child(plant)
 
-func _add_shelf(parent: Node, pos: Vector3):
+func _add_shelf(parent: Node, pos: Vector3) -> void:
 	var shelf = CSGBox3D.new()
 	shelf.size = Vector3(0.4, 1.8, 1.0)
 	shelf.position = pos + Vector3(0, 0.9, 0)
@@ -421,7 +431,7 @@ func _add_shelf(parent: Node, pos: Vector3):
 	parent.add_child(shelf)
 
 ## Public function to regenerate with new seed
-func regenerate(new_seed: int = -1):
+func regenerate(new_seed: int = -1) -> void:
 	if new_seed >= 0:
 		generation_seed = new_seed
 	else:
@@ -436,7 +446,7 @@ func get_tile_at(x: int, y: int) -> Node3D:
 	return grid[y][x]
 
 ## Debug: Print grid layout
-func print_grid():
+func print_grid() -> void:
 	print("Grid layout:")
 	for y in range(grid_height):
 		var row = ""
@@ -449,7 +459,7 @@ func print_grid():
 		print(row)
 
 ## Create a simple fallback grid when tiles aren't available
-func _create_fallback_grid():
+func _create_fallback_grid() -> void:
 	print("📦 Creating fallback grid visualization...")
 	
 	for y in range(grid_height):
@@ -478,3 +488,12 @@ func _create_fallback_grid():
 	add_child(label)
 	
 	print("✅ Fallback grid created - ", grid_width * grid_height, " tiles")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

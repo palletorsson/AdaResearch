@@ -1,1 +1,0 @@
-Trees grow down as well as up. The inverted tree reflects the recursive pattern into root space—branching downward, toward depth rather than height. Roots and canopy mirror each other: fractal structure above, fractal structure below.

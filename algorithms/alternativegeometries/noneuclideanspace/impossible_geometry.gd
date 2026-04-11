@@ -7,11 +7,11 @@ extends Node3D
 @export var corridor_width: float = 2.0
 @export var corridor_height: float = 3.0
 
-func _ready():
+func _ready() -> void:
 	# Create an impossible corridor (4 turns but returns to start)
 	_create_impossible_corridor()
 
-func _create_impossible_corridor():
+func _create_impossible_corridor() -> void:
 	var corridors = []
 	var turns = 4
 	var angle_per_turn = impossible_angle
@@ -119,7 +119,7 @@ func _create_corridor_segment() -> Node3D:
 	
 	return corridor
 
-func _create_portal_pair(pos1: Vector3, rot1: Quaternion, pos2: Vector3, rot2: Quaternion):
+func _create_portal_pair(pos1: Vector3, rot1: Quaternion, pos2: Vector3, rot2: Quaternion) -> void:
 	var portal1 = Portal.new()
 	portal1.name = "Portal1"
 	portal1.transform.origin = pos1
@@ -136,3 +136,12 @@ func _create_portal_pair(pos1: Vector3, rot1: Quaternion, pos2: Vector3, rot2: Q
 	
 	add_child(portal1)
 	add_child(portal2)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

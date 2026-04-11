@@ -14,7 +14,7 @@ extends Node3D
 var sphere_positions: Dictionary = {}  # Stores vertex positions
 var index_count: int = 0  # Counter for indexing vertices
 
-func _ready():
+func _ready() -> void:
 	# Generate an icosphere structure
 	var data  = generate_icosphere(subdivisions)
 	var vertices = data[0]
@@ -149,7 +149,7 @@ func create_sphere_instance() -> Node3D:
 	return sphere
 
 # Function to draw a cylinder between two points in 3D space
-func draw_cylinder_between_points(start: Vector3, end: Vector3):
+func draw_cylinder_between_points(start: Vector3, end: Vector3) -> void:
 	var cylinder_mesh = CylinderMesh.new()
 	cylinder_mesh.top_radius = line_thickness
 	cylinder_mesh.bottom_radius = line_thickness
@@ -177,3 +177,12 @@ func draw_cylinder_between_points(start: Vector3, end: Vector3):
 	
 	# Add the cylinder to the scene
 	add_child(cylinder)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -6,12 +6,12 @@ func get_class_name() -> String:
 func get_compute_shader_path() -> String:
 	return "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesTorus.glsl"
 
-func _create_fallback_mesh():
+func _create_fallback_mesh() -> void:
 	print("TerrainGeneratorTorus: Creating fallback simple torus...")
 	_create_fallback_torus()
 	print("✅ Fallback torus created")
 
-func _create_fallback_torus():
+func _create_fallback_torus() -> void:
 	var torus = TorusMesh.new()
 	torus.inner_radius = 30.0
 	torus.outer_radius = 50.0
@@ -22,3 +22,6 @@ func _create_fallback_torus():
 	create_trimesh_collision() 
 	
 	print("✅ Fallback torus created")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

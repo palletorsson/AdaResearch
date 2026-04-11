@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 class_name FourSoftBodyController
 
 # Configuration
@@ -13,7 +13,7 @@ var stop_timers: Array[Timer] = []
 var ui_labels: Array[Label] = []
 var stopped_states: Array[bool] = [false, false, false, false]
 
-func _ready():
+func _ready() -> void:
  
 	create_four_soft_bodies()
 	setup_stop_timers()
@@ -25,7 +25,7 @@ func _ready():
 
 
 
-func create_four_soft_bodies():
+func create_four_soft_bodies() -> void:
 	"""Create 4 soft bodies in a 2x2 grid"""
 	
 	var soft_body_scene = load(soft_body_scene_path)
@@ -76,7 +76,7 @@ func find_soft_body_in_instance(instance: Node) -> SoftBody3D:
 	
 	return null
 
-func create_fallback_soft_bodies():
+func create_fallback_soft_bodies() -> void:
 	"""Create basic soft bodies if scene loading fails"""
 	
 	print("ðŸ”„ Creating fallback soft bodies...")
@@ -115,7 +115,7 @@ func create_fallback_soft_bodies():
 		add_child(soft_body)
 		soft_body_instances.append(soft_body)
 
-func setup_stop_timers():
+func setup_stop_timers() -> void:
 	"""Setup individual stop timers for each soft body"""
 	
 	for i in range(soft_body_instances.size()):
@@ -154,7 +154,7 @@ func _process(_delta):
 				else:
 					label.add_theme_color_override("font_color", Color.WHITE)
 
-func _on_stop_timeout(index: int):
+func _on_stop_timeout(index: int) -> void:
 	"""Called when a specific timer expires"""
 	
 	if index >= soft_body_instances.size():
@@ -165,7 +165,7 @@ func _on_stop_timeout(index: int):
 	print("â° Timer %d expired - stopping SoftBody: %s" % [index + 1, soft_body.name])
 	stop_soft_body(index)
 
-func stop_soft_body(index: int):
+func stop_soft_body(index: int) -> void:
 	"""Stop a specific soft body"""
 	
 	if index >= soft_body_instances.size() or stopped_states[index]:
@@ -189,7 +189,7 @@ func stop_soft_body(index: int):
 	
 	print("ðŸ§Š SoftBody %d stopped and frozen!" % [index + 1])
 
-func restart_all():
+func restart_all() -> void:
 	"""Restart all soft bodies"""
 	
 	print("ðŸ”„ Restarting all soft bodies...")
@@ -202,7 +202,7 @@ func restart_all():
 	for timer in stop_timers:
 		timer.start()
 
-func restart_soft_body(index: int):
+func restart_soft_body(index: int) -> void:
 	"""Restart a specific soft body"""
 	
 	if index >= soft_body_instances.size():
@@ -245,7 +245,7 @@ func _get_soft_body_material(soft_body: SoftBody3D, surface_index: int = 0) -> M
 	
 	return null
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle input"""
 	
 	if event.is_action_pressed("ui_accept"):  # Space key
@@ -268,3 +268,12 @@ func _input(event):
 				if not stopped_states[2]: stop_soft_body(2)
 			KEY_4:
 				if not stopped_states[3]: stop_soft_body(3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: for each leaf_node: find closest attractor, grow segment_length toward it, kill attractor when reached — space colonization
+# desire: to watch a vascular network bloom from a single root as branches compete for scattered attractor points in 3D
+# critical_parameter: kill_distance — the radius at which an attractor is consumed; too small and branches overshoot, too large and the tree is sparse
+# triggers: regenerate rebuilds entirely; step_growth advances one iteration; toggle_animation switches between instant and animated growth
+# emerges: natural branch tapering from thickness_decay creates tree-like hierarchy without any explicit tree data structure
+# needs: attraction point display [has]; cube guide [has]; step/animate toggle [has]; VR attractor placement [missing]
+# relationships: follows GeneticProgramming (evolution vs growth); contrasts with branching_growth_algorithm (attractor-driven vs free branching)
+# truth: a tree does not know its shape — it only knows which direction has light, and how far to reach before stopping
+
 @export_group("Target Shape")
 @export var cube_size: Vector3 = Vector3(4, 4, 4)
 @export var attraction_points_count: int = 500
@@ -51,7 +61,7 @@ class GrowthNode:
 	var growth_direction: Vector3 = Vector3.ZERO
 	var influenced_by: int = 0
 	
-	func _init(pos: Vector3, par: GrowthNode = null, thick: float = 1.0):
+	func _init(pos: Vector3, par: GrowthNode = null, thick: float = 1.0) -> void:
 		position = pos
 		parent = par
 		thickness = thick
@@ -66,10 +76,10 @@ var is_growing: bool = false
 var current_iteration: int = 0
 var growth_timer: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	generate_structure()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if show_growth_animation and is_growing:
 		growth_timer += delta * 5.0
 		if growth_timer >= 0.05:
@@ -77,7 +87,7 @@ func _process(delta):
 			if not grow_iteration():
 				is_growing = false
 
-func generate_structure():
+func generate_structure() -> void:
 	clear_structure()
 	current_iteration = 0
 	
@@ -97,7 +107,7 @@ func generate_structure():
 	
 	visualize_structure()
 
-func generate_attraction_points():
+func generate_attraction_points() -> void:
 	attraction_points.clear()
 	active_attraction_points.clear()
 	
@@ -113,7 +123,7 @@ func generate_attraction_points():
 	
 	active_attraction_points = attraction_points.duplicate()
 
-func generate_shell_distribution():
+func generate_shell_distribution() -> void:
 	for i in range(attraction_points_count):
 		# Random point on cube surface
 		var face = randi() % 6
@@ -135,7 +145,7 @@ func generate_shell_distribution():
 		
 		attraction_points.append(point)
 
-func generate_volume_distribution():
+func generate_volume_distribution() -> void:
 	for i in range(attraction_points_count):
 		var point = Vector3(
 			randf() * (cube_size.x + distribution_thickness * 2) - (cube_size.x / 2 + distribution_thickness),
@@ -155,7 +165,7 @@ func generate_volume_distribution():
 		if inside_outer and not inside_inner:
 			attraction_points.append(point)
 
-func generate_surface_distribution():
+func generate_surface_distribution() -> void:
 	for i in range(attraction_points_count):
 		var face = randi() % 6
 		var u = randf() * cube_size.x - cube_size.x / 2
@@ -172,7 +182,7 @@ func generate_surface_distribution():
 		
 		attraction_points.append(point)
 
-func generate_corner_distribution():
+func generate_corner_distribution() -> void:
 	var corners = [
 		Vector3(1, 1, 1), Vector3(-1, 1, 1),
 		Vector3(1, -1, 1), Vector3(-1, -1, 1),
@@ -193,7 +203,7 @@ func generate_corner_distribution():
 		
 		attraction_points.append(base_pos + offset)
 
-func create_root_nodes():
+func create_root_nodes() -> void:
 	root_nodes.clear()
 	leaf_nodes.clear()
 	all_nodes.clear()
@@ -300,7 +310,7 @@ func grow_iteration() -> bool:
 	
 	return grew
 
-func visualize_structure():
+func visualize_structure() -> void:
 	clear_visualization()
 	
 	# Draw cube guide
@@ -314,7 +324,7 @@ func visualize_structure():
 	# Draw growth structure
 	draw_branches()
 
-func create_cube_guide():
+func create_cube_guide() -> void:
 	var cube_mesh = MeshInstance3D.new()
 	add_child(cube_mesh)
 	
@@ -350,7 +360,7 @@ func create_cube_guide():
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	cube_mesh.material_override = material
 
-func draw_attraction_points():
+func draw_attraction_points() -> void:
 	# Draw active points
 	for point in active_attraction_points:
 		var sphere = MeshInstance3D.new()
@@ -388,12 +398,12 @@ func draw_attraction_points():
 				material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 				sphere.material_override = material
 
-func draw_branches():
+func draw_branches() -> void:
 	for node in all_nodes:
 		if node.parent != null:
 			create_branch_segment(node)
 
-func create_branch_segment(node: GrowthNode):
+func create_branch_segment(node: GrowthNode) -> void:
 	var mesh_instance = MeshInstance3D.new()
 	add_child(mesh_instance)
 	
@@ -453,7 +463,7 @@ func create_cylinder_between(start: Vector3, end: Vector3, start_radius: float, 
 	surface_tool.generate_normals()
 	return surface_tool.commit()
 
-func clear_structure():
+func clear_structure() -> void:
 	attraction_points.clear()
 	active_attraction_points.clear()
 	root_nodes.clear()
@@ -461,6 +471,15 @@ func clear_structure():
 	all_nodes.clear()
 	clear_visualization()
 
-func clear_visualization():
+func clear_visualization() -> void:
 	for child in get_children():
 		child.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

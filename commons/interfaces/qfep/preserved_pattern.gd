@@ -7,6 +7,16 @@ extends Node3D
 
 class_name QFEPPreservedPattern
 
+# @identity
+# essence: checkerboard(x+z mod 2) -> static grid, no _process(), no animation
+# desire: confront a pattern that will never change — feel the weight of preservation
+# critical_parameter: the absence of time — there is no _process, no delta, no becoming
+# triggers: nothing triggers change — that is the point
+# emerges: nothing emerges — the pattern is dead on arrival, perfectly preserved
+# needs: no VR controls needed — immutability is the interaction [has]
+# relationships: contrasts transforming_pattern (phi>0 vs phi<0); paired with rigid_sculpture; represents conservative phi
+# truth: negative phi preserves pattern at the cost of life — a frozen checkerboard is a museum piece, not an organism
+
 ## Grid size
 @export var grid_size: int = 6
 

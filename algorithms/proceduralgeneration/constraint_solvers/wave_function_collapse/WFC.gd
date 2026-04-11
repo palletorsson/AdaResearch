@@ -17,15 +17,15 @@ class WFCCell:
 	var options: Array[int] = []
 	var position: Vector3i
 	
-	func _init(tile_count: int, pos: Vector3i = Vector3i.ZERO):
+	func _init(tile_count: int, pos: Vector3i = Vector3i.ZERO) -> void:
 		position = pos
 		for i in range(tile_count):
 			options.append(i)
 	
-	func set_options(new_options: Array[int]):
+	func set_options(new_options: Array[int]) -> void:
 		options = new_options.duplicate()
 	
-	func collapse_to(tile_index: int):
+	func collapse_to(tile_index: int) -> void:
 		collapsed = true
 		options = [tile_index]
 
@@ -43,20 +43,20 @@ class WFCBasicTile:
 	var east: Array[int] = []    # X+
 	var west: Array[int] = []    # X-
 	
-	func _init(idx: int, tile_edges: Array[String], tex: Texture2D = null):
+	func _init(idx: int, tile_edges: Array[String], tex: Texture2D = null) -> void:
 		index = idx
 		edges = tile_edges.duplicate()
 		texture = tex
 		_create_material()
 	
-	func _create_material():
+	func _create_material() -> void:
 		material = StandardMaterial3D.new()
 		if texture:
 			material.albedo_texture = texture
 		material.roughness = 0.8
 		material.metallic = 0.1
 	
-	func analyze_adjacency(all_tiles: Array):
+	func analyze_adjacency(all_tiles: Array) -> void:
 		# Analyze which tiles can be adjacent based on matching edges
 		up.clear()
 		down.clear()
@@ -125,13 +125,13 @@ var default_tile_edges: Array = [
 	["BCB", "BBB", "BCB", "BBB", "BBB", "BBB"],  # Tile 11: Two-way
 ]
 
-func _ready():
+func _ready() -> void:
 	setup_tiles()
 	initialize_grid()
 	if auto_generate:
 		start_generation()
 
-func setup_tiles():
+func setup_tiles() -> void:
 	tiles.clear()
 	
 	# Create default materials if no textures provided
@@ -169,7 +169,7 @@ func _should_generate_rotations(tile_index: int) -> bool:
 	# Don't rotate symmetric tiles (0, 1, 7, 10)
 	return not tile_index in [0, 1, 7, 10]
 
-func _generate_rotations(base_tile: WFCBasicTile):
+func _generate_rotations(base_tile: WFCBasicTile) -> void:
 	# Generate Y-axis rotations (90°, 180°, 270°)
 	for rotation in range(1, 4):
 		var rotated_edges = _rotate_edges_y(base_tile.edges, rotation)
@@ -197,7 +197,7 @@ func _is_duplicate_tile(new_tile: WFCBasicTile) -> bool:
 			return true
 	return false
 
-func _create_default_textures():
+func _create_default_textures() -> void:
 	# Create simple colored textures if none provided
 	var colors = [
 		Color.BLACK, Color.WHITE, Color.RED, Color.GREEN, 
@@ -213,7 +213,7 @@ func _create_default_textures():
 		texture.create_from_image(image)
 		tile_textures.append(texture)
 
-func initialize_grid():
+func initialize_grid() -> void:
 	grid.clear()
 	mesh_instances.clear()
 	
@@ -241,18 +241,18 @@ func initialize_grid():
 	
 	print("Initialized grid: ", grid_size, " = ", grid.size(), " cells")
 
-func start_generation():
+func start_generation() -> void:
 	is_generating = true
 	generation_timer = 0.0
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_generating:
 		generation_timer += delta
 		if generation_timer >= generation_speed:
 			generation_timer = 0.0
 			wfc_step()
 
-func wfc_step():
+func wfc_step() -> void:
 	# Get uncollapsed cells
 	var uncollapsed_cells = grid.filter(func(cell): return not cell.collapsed)
 	
@@ -287,7 +287,7 @@ func wfc_step():
 	# Propagate constraints
 	_propagate_constraints(chosen_cell)
 
-func _update_cell_visual(cell: WFCCell):
+func _update_cell_visual(cell: WFCCell) -> void:
 	var index = _cell_position_to_index(cell.position)
 	if index >= 0 and index < mesh_instances.size():
 		var mesh_instance = mesh_instances[index]
@@ -302,7 +302,7 @@ func _update_cell_visual(cell: WFCCell):
 			material.albedo_color.a = 0.3
 			mesh_instance.material_override = material
 
-func _propagate_constraints(changed_cell: WFCCell):
+func _propagate_constraints(changed_cell: WFCCell) -> void:
 	var stack = [changed_cell]
 	
 	while not stack.is_empty():
@@ -385,27 +385,27 @@ func _get_cell_at_position(pos: Vector3i) -> WFCCell:
 func _cell_position_to_index(pos: Vector3i) -> int:
 	return pos.x + pos.y * grid_size.x + pos.z * grid_size.x * grid_size.y
 
-func restart_generation():
+func restart_generation() -> void:
 	initialize_grid()
 	if auto_generate:
 		start_generation()
 
 # Public functions for external control
-func generate_step():
+func generate_step() -> void:
 	if is_generating:
 		wfc_step()
 
-func toggle_generation():
+func toggle_generation() -> void:
 	is_generating = not is_generating
 	if is_generating:
 		generation_timer = 0.0
 
-func clear_grid():
+func clear_grid() -> void:
 	is_generating = false
 	initialize_grid()
 
 # Debug information
-func _draw_debug_info():
+func _draw_debug_info() -> void:
 	if not show_debug_info:
 		return
 	
@@ -417,10 +417,19 @@ func _draw_debug_info():
 		var max_entropy = uncollapsed.map(func(cell): return cell.options.size()).max()
 		print("Entropy range: ", min_entropy, " - ", max_entropy)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space key
 		toggle_generation()
 	elif event.is_action_pressed("ui_cancel"):  # Escape key  
 		restart_generation()
 	elif event.is_action_pressed("ui_select"):  # Enter key
 		generate_step()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -5,6 +5,16 @@
 #
 # QFEP: Central Limit Theorem as convergence — many independent binary
 # choices accumulate into Gaussian structure. Order from repetition.
+#
+# @identity
+# essence: Binomial(n, 0.5) → N(n/2, n/4) as n → ∞ — the Central Limit Theorem
+# desire: watch balls cascade through pegs and see the bell curve assemble itself from binary choices
+# critical_parameter: peg_rows — more rows means tighter Gaussian convergence; 8 rows gives 9 bins
+# triggers: auto_drop spawns balls at balls_per_second rate; peg collisions create the L/R branching
+# emerges: the bell curve overlay converges to match the histogram — theory becomes visible fact
+# needs: VR push buttons for DROP/AUTO/RESET/SPEED [has]; ball pool recycling [has]
+# relationships: contrasts with slot_machine (uniform vs Gaussian); feeds gaussian_random and random_bell_curve
+# truth: The bell curve is not imposed — it is the inevitable shape of accumulated independence.
 
 extends Node3D
 
@@ -310,6 +320,33 @@ func _create_pegs() -> void:
 	var row_height := peg_spacing * 0.866
 	var first_peg_y := board_height - 0.06
 
+	# Count total pegs for MultiMesh visual
+	var total_pegs := 0
+	for row in range(peg_rows):
+		total_pegs += row + 1
+
+	# Create MultiMesh for peg visuals
+	var cyl_mesh := CylinderMesh.new()
+	cyl_mesh.top_radius = peg_radius
+	cyl_mesh.bottom_radius = peg_radius
+	cyl_mesh.height = board_depth * 0.9
+	cyl_mesh.radial_segments = 12
+
+	var peg_mat := StandardMaterial3D.new()
+	peg_mat.albedo_color = color_peg
+	peg_mat.metallic = 0.6
+	peg_mat.roughness = 0.3
+	peg_mat.emission_enabled = true
+	peg_mat.emission = color_peg * 0.3
+	peg_mat.emission_energy_multiplier = 0.2
+	cyl_mesh.material = peg_mat
+
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = total_pegs
+	mm.mesh = cyl_mesh
+
+	var peg_idx := 0
 	for row in range(peg_rows):
 		var pegs_in_row := row + 1
 		var row_width := (pegs_in_row - 1) * peg_spacing
@@ -317,40 +354,35 @@ func _create_pegs() -> void:
 
 		for col in range(pegs_in_row):
 			var x := -row_width / 2.0 + col * peg_spacing
-			_create_single_peg(Vector3(x, y, 0))
+			var pos := Vector3(x, y, 0)
+
+			# MultiMesh visual transform (rotated 90 on X to align along Z)
+			var t := Transform3D()
+			t.basis = Basis(Vector3(1, 0, 0), deg_to_rad(90))
+			t.origin = pos
+			mm.set_instance_transform(peg_idx, t)
+			peg_idx += 1
+
+			# Still need individual StaticBody3D for collision
+			_create_single_peg_collision(pos)
+
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = "Pegs_MM"
+	mmi.multimesh = mm
+	add_child(mmi)
 
 
-func _create_single_peg(pos: Vector3) -> void:
+func _create_single_peg_collision(pos: Vector3) -> void:
+	# Collision-only StaticBody3D (visuals handled by MultiMesh)
 	var body := StaticBody3D.new()
 
-	# Collision — cylinder spanning board depth
 	var col := CollisionShape3D.new()
 	var cyl_shape := CylinderShape3D.new()
 	cyl_shape.radius = peg_radius
 	cyl_shape.height = board_depth * 0.9
 	col.shape = cyl_shape
-	col.rotation_degrees.x = 90  # Align along Z axis
+	col.rotation_degrees.x = 90
 	body.add_child(col)
-
-	# Mesh
-	var mesh_inst := MeshInstance3D.new()
-	var cyl_mesh := CylinderMesh.new()
-	cyl_mesh.top_radius = peg_radius
-	cyl_mesh.bottom_radius = peg_radius
-	cyl_mesh.height = board_depth * 0.9
-	cyl_mesh.radial_segments = 12
-	mesh_inst.mesh = cyl_mesh
-	mesh_inst.rotation_degrees.x = 90
-
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = color_peg
-	mat.metallic = 0.6
-	mat.roughness = 0.3
-	mat.emission_enabled = true
-	mat.emission = color_peg * 0.3
-	mat.emission_energy_multiplier = 0.2
-	mesh_inst.material_override = mat
-	body.add_child(mesh_inst)
 
 	body.position = pos
 	add_child(body)
@@ -724,7 +756,7 @@ func _create_labels() -> void:
 		var lbl := Label3D.new()
 		lbl.text = str(i)
 		lbl.pixel_size = 0.001
-		lbl.font_size = 8
+		lbl.font_size = 18
 		lbl.modulate = Color(0.5, 0.5, 0.6)
 		lbl.position = Vector3(x, -0.015, board_depth * 0.35)
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -807,7 +839,7 @@ func _add_button_label(btn: Node, text: String) -> void:
 	var lbl := Label3D.new()
 	lbl.text = text
 	lbl.pixel_size = 0.001
-	lbl.font_size = 8
+	lbl.font_size = 18
 	lbl.position = Vector3(0, -0.022, 0)
 	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	btn.add_child(lbl)
@@ -848,3 +880,12 @@ func _reset_board() -> void:
 	# Clear bell curve
 	if _bell_curve_mesh:
 		_bell_curve_mesh.mesh = null
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

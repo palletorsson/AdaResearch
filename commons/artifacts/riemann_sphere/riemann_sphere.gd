@@ -5,6 +5,16 @@ extends Node3D
 
 class_name RiemannSphere
 
+# @identity
+# essence: C ∪ {∞} — the complex plane plus a point at infinity, wrapped onto a sphere via stereographic projection
+# desire: see the infinite complex plane folded onto a finite sphere — the north pole IS infinity
+# critical_parameter: radius — the sphere that contains the entire complex plane plus its boundary
+# triggers: static display; the glowing north pole and equator teach by geometry alone
+# emerges: the intuition that infinity is not "far away" — it is a point you can see and almost touch
+# needs: VR controls [missing] — could add interactive stereographic projection
+# relationships: contrasts poincare_disk (compactification of hyperbolic vs complex plane); paired with elliptic_surface (both positive curvature)
+# truth: infinity is not the absence of a boundary — it is a boundary that has been folded back into the space it bounds
+
 @export var radius: float = 0.3
 @export var show_projection_lines: bool = true
 
@@ -100,3 +110,8 @@ func _create_label():
 	_label.text = "RIEMANN SPHERE\nComplex plane + ∞"
 	_label.position = Vector3(0, -radius - 0.2, 0)
 	add_child(_label)
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Paint node 
 var paint_container: Node3D
@@ -28,10 +28,14 @@ var active_strokes = []
 var max_active_strokes = 3
 var canvas_bounds = Rect2(-5, -3, 10, 6)  # Canvas boundaries in local space
 
+# Splat limit to prevent unbounded node accumulation
+@export var max_splats: int = 5000
+var _splat_nodes: Array = []
+
 # Animation tracking
 var time_elapsed: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	
 	# Create 3D canvas
@@ -48,7 +52,7 @@ func _ready():
 	# Set up stroke timer
 	setup_timer()
 
-func setup_camera():
+func setup_camera() -> void:
 	# Create camera if not exists
 	if not has_node("Camera3D"):
 		var camera = Camera3D.new()
@@ -59,7 +63,7 @@ func setup_camera():
 	camera.position = Vector3(0, 0, 8)
 	camera.current = true
 
-func create_canvas():
+func create_canvas() -> void:
 	# Create a plane mesh for the canvas
 	var plane_mesh = PlaneMesh.new()
 	plane_mesh.size = Vector2(canvas_size.x, canvas_size.y)
@@ -81,7 +85,7 @@ func create_canvas():
 	# Rotate to face camera
 	canvas.rotation_degrees.x = -90
 
-func setup_timer():
+func setup_timer() -> void:
 	# Create timer for generating new strokes
 	stroke_timer = Timer.new()
 	stroke_timer.wait_time = stroke_interval
@@ -90,12 +94,12 @@ func setup_timer():
 	stroke_timer.connect("timeout", Callable(self, "_on_stroke_timer_timeout"))
 	add_child(stroke_timer)
 
-func _on_stroke_timer_timeout():
+func _on_stroke_timer_timeout() -> void:
 	# Start a new stroke if we haven't reached max active strokes
 	if active_strokes.size() < max_active_strokes:
 		start_new_stroke()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time_elapsed += delta
 	
 	# Update active strokes
@@ -118,7 +122,7 @@ func _process(delta):
 	for stroke in strokes_to_remove:
 		active_strokes.erase(stroke)
 
-func start_new_stroke():
+func start_new_stroke() -> void:
 	# Generate random start and end points within canvas bounds
 	var start_pos = random_point_on_canvas()
 	
@@ -176,7 +180,7 @@ func start_new_stroke():
 	paint_container.add_child(stroke.node)
 	active_strokes.append(stroke)
 
-func animate_stroke(stroke, progress):
+func animate_stroke(stroke, progress) -> void:
 	# How far along the curve we should be
 	var target_point = progress
 	
@@ -225,7 +229,7 @@ func animate_stroke(stroke, progress):
 	# Remember where we left off
 	stroke.last_rendered_point = end_t
 
-func add_random_splatters(parent, pos, width, color, viscosity):
+func add_random_splatters(parent, pos, width, color, viscosity) -> void:
 	# Number of splatters to add - affected by viscosity
 	var count = randi_range(1, int(3 * viscosity.spread_factor))
 	
@@ -242,7 +246,7 @@ func add_random_splatters(parent, pos, width, color, viscosity):
 		var splat_size = width * randf_range(0.1, 0.5) * viscosity.spread_factor
 		add_splat(parent, splat_pos, splat_size, color)
 		
-func add_paint_drip(parent, pos, width, color, _direction, viscosity):
+func add_paint_drip(parent, pos, width, color, _direction, viscosity) -> void:
 	# Create a drip that goes downward from the position
 	var drip_length = randf_range(0.2, 1.0) / viscosity.spread_factor
 	
@@ -282,7 +286,7 @@ func get_curve_tangent_at(curve, t):
 	var pos2 = curve.sample_baked(min(1, t + 0.01) * curve_length)
 	return (pos2 - pos1).normalized()
 
-func add_splat(parent: Node3D, position: Vector3, size: float, color: Color):
+func add_splat(parent: Node3D, position: Vector3, size: float, color: Color) -> void:
 	# Create sphere for splatter
 	var mesh = SphereMesh.new()
 	mesh.radius = size
@@ -305,25 +309,42 @@ func add_splat(parent: Node3D, position: Vector3, size: float, color: Color):
 	
 	parent.add_child(splat_instance)
 
+	# Track splat and enforce rolling window limit
+	_splat_nodes.append(splat_instance)
+	while _splat_nodes.size() > max_splats:
+		var oldest = _splat_nodes.pop_front()
+		if is_instance_valid(oldest):
+			oldest.queue_free()
+
 func random_point_on_canvas() -> Vector3:
 	# Generate a random point within canvas bounds
 	var x = randf_range(canvas_bounds.position.x, canvas_bounds.position.x + canvas_bounds.size.x)
 	var y = randf_range(canvas_bounds.position.y, canvas_bounds.position.y + canvas_bounds.size.y)
 	return Vector3(x, y, 0.01)  # Small Z offset to appear above canvas
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Space key to clear canvas
 	if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
 		clear_canvas()
 
-func clear_canvas():
+func clear_canvas() -> void:
 	# Remove all paint nodes and active strokes
 	for child in paint_container.get_children():
 		child.queue_free()
 	active_strokes.clear()
+	_splat_nodes.clear()
 
 func randf_range(min_val: float, max_val: float) -> float:
 	return min_val + (max_val - min_val) * randf()
 
 func randi_range(min_val: int, max_val: int) -> int:
 	return min_val + randi() % (max_val - min_val + 1)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

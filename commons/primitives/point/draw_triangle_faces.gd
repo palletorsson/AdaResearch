@@ -1,4 +1,15 @@
 extends Node3D
+
+# @identity
+# essence: fan_triangulate(loop) → colored mesh face — closed point loops become surfaces
+# desire: learner discovers that faces are just organized points — drop points, close the loop, get geometry
+# critical_parameter: the loop-closing gesture — dropping the sphere near the first point closes and fills
+# triggers: dropping the sphere — each drop places a point; proximity to first point triggers triangulation
+# emerges: the mesh as a collection of closed loops; surfaces as a social contract between points
+# needs: [has Label3D [has], grabbable sphere [has], missing undo control]
+# relationships: extends draw_dot into 2D; prerequisite understanding for triangle, quad, and all mesh faces
+# truth: a surface is not a thing — it is an agreement among boundary points
+
 ## Draw triangle faces by placing points and closing loops
 
 @export var grab_point_path: NodePath = NodePath("GrabPoint")

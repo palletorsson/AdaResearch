@@ -7,6 +7,17 @@ extends Node3D
 class_name SpringDemo
 
 ## Slider paths
+
+# @identity
+# essence: m*a + c*v + k*x = 0 — damped harmonic oscillator with mass, spring, damper
+# desire: Pull a mass on a spring with VR sliders and watch it oscillate, overdamp, or critically damp
+# critical_parameter: damping_c — determines whether oscillation is underdamped, critical, or overdamped
+# triggers: slider adjustment changes k, m, c in real-time; pull_and_release() sets initial displacement
+# emerges: the three regimes of damped oscillation become physically intuitive through parameter control
+# needs: VR sliders for k, m, c [has], pull interaction [has]
+# relationships: depends on second-order ODE integration; contrasts with control_pendulum (spring vs gravity restoring force); unlocks damped oscillation regimes
+# truth: Every oscillation in nature eventually damps — the question is how: ringing, critical, or sluggish.
+
 @export var stiffness_slider_path: NodePath = "ControlPanel/StiffnessSlider"
 @export var mass_slider_path: NodePath = "ControlPanel/MassSlider"
 @export var damping_slider_path: NodePath = "ControlPanel/DampingSlider"
@@ -211,3 +222,8 @@ func is_underdamped() -> bool:
 	# Critical damping: c_crit = 2*sqrt(k*m)
 	var c_crit = 2.0 * sqrt(spring_k * mass)
 	return damping_c < c_crit
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

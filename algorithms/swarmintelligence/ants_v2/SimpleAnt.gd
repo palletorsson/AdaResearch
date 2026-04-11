@@ -22,7 +22,7 @@ var rng = RandomNumberGenerator.new()
 var wander_noise: float = 0.0
 var pheromone_energy: float = 1.0
 
-func initialize(start_pos: Vector3, _grid: PheromoneGrid, _map_size: Vector2):
+func initialize(start_pos: Vector3, _grid: PheromoneGrid, _map_size: Vector2) -> void:
 	position = start_pos
 	grid = _grid
 	map_size = _map_size
@@ -30,7 +30,7 @@ func initialize(start_pos: Vector3, _grid: PheromoneGrid, _map_size: Vector2):
 	# Random initial direction
 	rotation.y = rng.randf() * TAU
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# Decay energy (lasts approx 20 seconds)
 	pheromone_energy = max(0.0, pheromone_energy - (delta * 0.05))
 	
@@ -98,7 +98,7 @@ func _physics_process(delta):
 	# Border handling (Bounce)
 	_handle_boundaries()
 
-func _handle_boundaries():
+func _handle_boundaries() -> void:
 	var half_size = map_size / 2.0
 	var margin = 1.0
 	# Simple bounce if out of bounds (Local check)
@@ -116,16 +116,19 @@ func _world_to_grid(pos: Vector3) -> Vector2i:
 	var gy = int(remap(pos.z, -map_size.y/2, map_size.y/2, 0, grid.height))
 	return Vector2i(gx, gy)
 
-func set_found_food():
+func set_found_food() -> void:
 	if current_state == State.FORAGING:
 		current_state = State.RETURNING
 		pheromone_energy = 1.0 # Refill energy
 		# Do a 180 turn
 		rotate_y(PI)
 
-func set_reached_home():
+func set_reached_home() -> void:
 	if current_state == State.RETURNING:
 		current_state = State.FORAGING
 		pheromone_energy = 1.0 # Refill energy
 		# Do a 180 turn
 		rotate_y(PI)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -13,7 +13,7 @@ var grid: PackedFloat32Array
 var decay_rate: float = 0.95 # Higher decay = thinner trails
 var diffuse_rate: float = 0.5 # Fast diffusion helps network formation
 
-func _init(w: int = 128, h: int = 128):
+func _init(w: int = 128, h: int = 128) -> void:
 	width = w
 	height = h
 	size = w * h
@@ -31,7 +31,7 @@ func get_index(x: int, y: int) -> int:
 	return y * width + x
 
 # Add slime at position
-func add_slime(x: int, y: int, amount: float):
+func add_slime(x: int, y: int, amount: float) -> void:
 	var idx = get_index(x, y)
 	grid[idx] = min(grid[idx] + amount, 10.0)
 
@@ -41,7 +41,7 @@ func get_slime(x: int, y: int) -> float:
 	return grid[idx]
 
 # Source Emission (Centers of Power - Food)
-func process_attractors(centers: Array):
+func process_attractors(centers: Array) -> void:
 	for c in centers:
 		var r = int(c.radius)
 		var start_x = clampi(c.x - r, 0, width)
@@ -55,7 +55,7 @@ func process_attractors(centers: Array):
 					add_slime(x, y, c.amount)
 
 # Process Step (Decay + Diffusion)
-func process_step():
+func process_step() -> void:
 	# 1. Decay
 	for i in range(size):
 		grid[i] *= decay_rate

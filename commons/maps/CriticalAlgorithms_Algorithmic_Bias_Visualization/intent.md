@@ -3,3 +3,5 @@ Sequence role: First map in Post-Foundations Crisis; the applied consequences of
 Technical angle: Algorithmic bias as unequal distribution of computational resources (training data, feature weighting, outcome allocation). The bias_visualizer makes the disparity spatial — walk from the spacious side to the cramped side and feel the difference. The room itself is the dataset, partitioned unfairly.
 Critical angle: Algorithms inherit the biases of their training data, their designers, and their deployment contexts. The post-crisis insight: knowing that formal systems have limits does not prevent those systems from having real effects. Bias is not a bug but a structural property of any system that classifies — and classification always creates an outside. The room's asymmetry is the QFEP F-term imposing order that excludes.
 Key artifacts: bias_visualizer demonstrates algorithmic bias as spatial inequality — the architecture IS the argument.
+
+Gap: No gap identified.

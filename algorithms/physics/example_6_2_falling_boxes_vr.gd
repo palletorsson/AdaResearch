@@ -35,7 +35,7 @@ var box_colors: Array[Color] = [
 	Color(1.0, 0.7, 0.9, 1.0),   # Light pink
 ]
 
-func _ready():
+func _ready() -> void:
 
 	# Create UI
 	create_info_label()
@@ -49,7 +49,7 @@ func _ready():
 
 	print("Example 6.2: Falling Boxes - %d boxes spawning" % num_boxes)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if auto_spawn and boxes.size() < max_boxes:
 		spawn_timer += delta
 		if spawn_timer >= spawn_interval:
@@ -61,7 +61,7 @@ func _process(delta):
 
 	update_info_label()
 
-func create_info_label():
+func create_info_label() -> void:
 	"""Create info label"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -71,12 +71,12 @@ func create_info_label():
 	info_label.position = Vector3(0, 0.6, 0)
 	add_child(info_label)
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info label"""
 	if info_label:
 		info_label.text = "Falling Boxes\nActive: %d / %d" % [boxes.size(), max_boxes]
 
-func create_ground():
+func create_ground() -> void:
 	"""Create static ground plane"""
 	ground = StaticBody3D.new()
 	ground.position = Vector3(0, -0.45, 0)
@@ -102,7 +102,7 @@ func create_ground():
 
 	add_child(ground)
 
-func spawn_box():
+func spawn_box() -> void:
 	"""Spawn a new box with random properties"""
 	# Random position at top of tank
 	var x = randf_range(-0.3, 0.3)
@@ -121,7 +121,7 @@ func spawn_box():
 
 	create_box(Vector3(x, y, z), size, mass)
 
-func create_box(pos: Vector3, size: Vector3, mass: float = 1.0):
+func create_box(pos: Vector3, size: Vector3, mass: float = 1.0) -> void:
 	"""Create a box with specified properties"""
 	var box = VRRigidBody.new()
 	box.position = pos
@@ -157,11 +157,11 @@ func create_box(pos: Vector3, size: Vector3, mass: float = 1.0):
 	add_child(box)
 	boxes.append(box)
 
-func _on_box_collision(_body: Node):
+func _on_box_collision(_body: Node) -> void:
 	"""Handle box collision"""
 	# Collision feedback handled in VRRigidBody
 
-func cleanup_fallen_boxes():
+func cleanup_fallen_boxes() -> void:
 	"""Remove boxes that fell too far below ground"""
 	var boxes_to_remove: Array[VRRigidBody] = []
 
@@ -173,18 +173,18 @@ func cleanup_fallen_boxes():
 		boxes.erase(box)
 		box.queue_free()
 
-func toggle_auto_spawn():
+func toggle_auto_spawn() -> void:
 	"""Toggle automatic spawning"""
 	auto_spawn = !auto_spawn
 	print("Auto-spawn: %s" % ("ON" if auto_spawn else "OFF"))
 
-func clear_boxes():
+func clear_boxes() -> void:
 	"""Clear all boxes"""
 	for box in boxes:
 		box.queue_free()
 	boxes.clear()
 
-func reset():
+func reset() -> void:
 	"""Reset scene"""
 	clear_boxes()
 	spawn_timer = 0.0
@@ -192,3 +192,12 @@ func reset():
 	# Spawn initial boxes
 	for i in range(num_boxes):
 		spawn_box()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

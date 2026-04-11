@@ -120,3 +120,12 @@ func set_part_info(id: String, type: String) -> void:
 	"""Set part identification info"""
 	part_id = id
 	part_type = type
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

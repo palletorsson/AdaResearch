@@ -49,14 +49,14 @@ var sphere_material: StandardMaterial3D
 @export var collision_layer: int = 1
 @export var collision_mask: int = 1
 
-func _ready():
+func _ready() -> void:
 	"""Initialize the rigidbody sphere spawner system"""
 	setup_sphere_system()
 	find_terrain_reference()
 	if auto_spawn:
 		spawn_initial_spheres()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	"""Main update loop"""
 	time_elapsed += delta
 	
@@ -68,7 +68,7 @@ func _process(delta):
 	
 	cleanup_fallen_spheres()
 
-func setup_sphere_system():
+func setup_sphere_system() -> void:
 	"""Setup the sphere mesh and material"""
 	# Create sphere mesh
 	sphere_mesh = SphereMesh.new()
@@ -86,7 +86,7 @@ func setup_sphere_system():
 	
 	print("RigidBody Sphere Spawner: System setup complete!")
 
-func find_terrain_reference():
+func find_terrain_reference() -> void:
 	"""Find the terrain reference for height sampling"""
 	# Look for terrain in parent or sibling nodes
 	var parent = get_parent()
@@ -111,13 +111,13 @@ func find_terrain_reference():
 	else:
 		print("WARNING: No terrain reference found!")
 
-func spawn_initial_spheres():
+func spawn_initial_spheres() -> void:
 	"""Spawn the initial set of spheres"""
 	print("Spawning ", sphere_count, " initial rigidbody spheres...")
 	for i in range(sphere_count):
 		spawn_single_sphere()
 
-func spawn_single_sphere():
+func spawn_single_sphere() -> void:
 	"""Spawn a single rigidbody sphere"""
 	# Generate random spawn position within radius
 	var angle = randf() * TAU
@@ -194,7 +194,7 @@ func spawn_single_sphere():
 	
 	print("Spawned rigidbody sphere at position: ", spawn_pos, " with force: ", force_direction * force_magnitude)
 
-func spawn_sphere_at_position(pos: Vector3, force: Vector3 = Vector3.ZERO):
+func spawn_sphere_at_position(pos: Vector3, force: Vector3 = Vector3.ZERO) -> void:
 	"""Spawn a sphere at a specific position with optional force"""
 	# Adjust height to terrain if available
 	var spawn_pos = pos
@@ -258,7 +258,7 @@ func spawn_sphere_at_position(pos: Vector3, force: Vector3 = Vector3.ZERO):
 	
 	print("Spawned rigidbody sphere at specific position: ", spawn_pos)
 
-func cleanup_fallen_spheres():
+func cleanup_fallen_spheres() -> void:
 	"""Remove spheres that have fallen too far or are too old"""
 	var spheres_to_remove = []
 	
@@ -275,7 +275,7 @@ func cleanup_fallen_spheres():
 			spheres.remove_at(i)
 			print("Removed fallen sphere")
 
-func clear_all_spheres():
+func clear_all_spheres() -> void:
 	"""Remove all spheres"""
 	for sphere in spheres:
 		if is_instance_valid(sphere):
@@ -283,7 +283,7 @@ func clear_all_spheres():
 	spheres.clear()
 	print("Cleared all rigidbody spheres")
 
-func set_sphere_parameters(params: Dictionary):
+func set_sphere_parameters(params: Dictionary) -> void:
 	"""Update sphere parameters dynamically"""
 	if params.has("sphere_count"):
 		sphere_count = params.sphere_count
@@ -321,19 +321,19 @@ func get_sphere_stats() -> Dictionary:
 		"total_kinetic_energy": total_kinetic_energy
 	}
 
-func apply_force_to_all_spheres(force: Vector3):
+func apply_force_to_all_spheres(force: Vector3) -> void:
 	"""Apply a force to all active spheres"""
 	for sphere in spheres:
 		if is_instance_valid(sphere):
 			sphere.apply_central_force(force)
 
-func apply_impulse_to_all_spheres(impulse: Vector3):
+func apply_impulse_to_all_spheres(impulse: Vector3) -> void:
 	"""Apply an impulse to all active spheres"""
 	for sphere in spheres:
 		if is_instance_valid(sphere):
 			sphere.apply_central_impulse(impulse)
 
-func set_gravity_scale(scale: float):
+func set_gravity_scale(scale: float) -> void:
 	"""Set gravity scale for all spheres"""
 	gravity_scale = scale
 	for sphere in spheres:
@@ -341,7 +341,7 @@ func set_gravity_scale(scale: float):
 			sphere.gravity_scale = scale
 
 # Debug functions
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle input for debugging"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -362,3 +362,12 @@ func _input(event):
 				var new_gravity = 0.0 if gravity_scale > 0.0 else 1.0
 				set_gravity_scale(new_gravity)
 				print("Gravity scale set to: ", new_gravity)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

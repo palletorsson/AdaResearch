@@ -7,12 +7,12 @@ var tanguy_materials: Array[StandardMaterial3D] = []
 var niki_materials: Array[Array] = []  # Array of color schemes
 var accent_materials: Array[StandardMaterial3D] = []
 
-func _ready():
+func _ready() -> void:
 	create_tanguy_materials()
 	create_niki_color_schemes()
 	create_accent_materials()
 
-func create_tanguy_materials():
+func create_tanguy_materials() -> void:
 	"""Create dark, mechanical materials for Tanguy elements"""
 	# Main black metallic
 	var black_metal = StandardMaterial3D.new()
@@ -30,7 +30,7 @@ func create_tanguy_materials():
 	dark_iron.roughness = 0.4
 	tanguy_materials.append(dark_iron)
 
-func create_niki_color_schemes():
+func create_niki_color_schemes() -> void:
 	"""Create bright, colorful materials for Niki elements"""
 	# Color scheme 0: Pink/Magenta
 	var pink_scheme = []
@@ -80,7 +80,7 @@ func create_niki_color_schemes():
 	
 	niki_materials.append(yellow_scheme)
 
-func create_accent_materials():
+func create_accent_materials() -> void:
 	"""Create small accent materials for details"""
 	var white_accent = StandardMaterial3D.new()
 	white_accent.albedo_color = Color(0.9, 0.9, 0.95, 1.0)

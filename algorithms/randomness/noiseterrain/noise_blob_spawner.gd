@@ -46,7 +46,7 @@ class NoiseBlobInstance:
 	var wander_phase: Vector3
 	var target_height: float
 	
-	func _init(mesh_inst: MeshInstance3D, pos: Vector3, vel: Vector3, blob_size: float, time: float):
+	func _init(mesh_inst: MeshInstance3D, pos: Vector3, vel: Vector3, blob_size: float, time: float) -> void:
 		mesh_instance = mesh_inst
 		position = pos
 		velocity = vel
@@ -56,13 +56,13 @@ class NoiseBlobInstance:
 		wander_phase = Vector3(randf() * TAU, randf() * TAU, randf() * TAU)
 		target_height = pos.y
 
-func _ready():
+func _ready() -> void:
 	setup_blob_system()
 	find_terrain_reference()
 	if auto_spawn:
 		spawn_initial_blobs()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time_elapsed += delta
 	
 	if auto_spawn:
@@ -74,7 +74,7 @@ func _process(delta):
 	update_blobs(delta)
 	cleanup_old_blobs()
 
-func setup_blob_system():
+func setup_blob_system() -> void:
 	# Create blob mesh
 	blob_mesh = SphereMesh.new()
 	blob_mesh.radius = 1.0
@@ -105,7 +105,7 @@ func setup_blob_system():
 	
 	print("Blob system setup complete!")
 
-func find_terrain_reference():
+func find_terrain_reference() -> void:
 	# Look for terrain in parent or sibling nodes
 	var parent = get_parent()
 	if parent is QueerNoiseTerrain:
@@ -129,12 +129,12 @@ func find_terrain_reference():
 	else:
 		print("WARNING: No terrain reference found!")
 
-func spawn_initial_blobs():
+func spawn_initial_blobs() -> void:
 	print("Spawning ", blob_count, " initial blobs...")
 	for i in range(blob_count):
 		spawn_single_blob()
 
-func spawn_single_blob():
+func spawn_single_blob() -> void:
 	# Generate random spawn position within radius
 	var angle = randf() * TAU
 	var distance = randf() * spawn_radius
@@ -188,7 +188,7 @@ func spawn_single_blob():
 	blobs.append(blob_instance)
 	print("Spawned blob at position: ", spawn_pos)
 
-func update_blobs(delta: float):
+func update_blobs(delta: float) -> void:
 	for blob in blobs:
 		if not is_instance_valid(blob.mesh_instance):
 			continue
@@ -219,7 +219,7 @@ func update_blobs(delta: float):
 		blob.mesh_instance.rotation.y += delta * 0.5
 		blob.mesh_instance.rotation.x = sin(time_elapsed + blob.birth_time) * 0.1
 
-func cleanup_old_blobs():
+func cleanup_old_blobs() -> void:
 	var blobs_to_remove = []
 	
 	for i in range(blobs.size() - 1, -1, -1):
@@ -235,7 +235,7 @@ func cleanup_old_blobs():
 			print("Removed old blob")
 
 # Public API functions
-func spawn_blob_at_position(pos: Vector3):
+func spawn_blob_at_position(pos: Vector3) -> void:
 	"""Spawn a blob at a specific position"""
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = blob_mesh
@@ -265,7 +265,7 @@ func spawn_blob_at_position(pos: Vector3):
 	
 	blobs.append(blob_instance)
 
-func clear_all_blobs():
+func clear_all_blobs() -> void:
 	"""Remove all blobs"""
 	for blob in blobs:
 		if is_instance_valid(blob.mesh_instance):
@@ -273,7 +273,7 @@ func clear_all_blobs():
 	blobs.clear()
 	print("Cleared all blobs")
 
-func set_blob_parameters(params: Dictionary):
+func set_blob_parameters(params: Dictionary) -> void:
 	"""Update blob parameters dynamically"""
 	if params.has("blob_count"):
 		blob_count = params.blob_count
@@ -304,7 +304,7 @@ func get_average_blob_age() -> float:
 	return total_age / blobs.size()
 
 # Debug functions
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_B:
@@ -316,3 +316,11 @@ func _input(event):
 			KEY_N:
 				print("Blob stats: ", get_blob_stats())
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

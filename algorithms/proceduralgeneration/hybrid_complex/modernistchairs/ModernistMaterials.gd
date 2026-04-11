@@ -5,10 +5,10 @@ extends Node
 
 var materials: Dictionary = {}
 
-func _ready():
+func _ready() -> void:
 	create_modernist_materials()
 
-func create_modernist_materials():
+func create_modernist_materials() -> void:
 	"""Create a comprehensive library of modernist materials"""
 	
 	# METALS
@@ -156,7 +156,7 @@ func get_transparent_set() -> Array[StandardMaterial3D]:
 	"""Get transparent materials for ethereal designs"""
 	return [materials["clear_acrylic"], materials["tinted_glass"], materials["holographic"]]
 
-func apply_material_with_variation(mesh_instance: MeshInstance3D, base_material_name: String, variation: float = 0.1):
+func apply_material_with_variation(mesh_instance: MeshInstance3D, base_material_name: String, variation: float = 0.1) -> void:
 	"""Apply material with slight color variation"""
 	var base_material = get_material(base_material_name)
 	var varied_material = base_material.duplicate()

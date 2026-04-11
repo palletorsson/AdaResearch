@@ -41,3 +41,6 @@ func _update_vectors() -> void:
 	update_vector(x_line, pos * Vector3.RIGHT)
 	update_vector(y_line, pos * Vector3.UP)
 	update_vector(z_line, pos * Vector3.BACK)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

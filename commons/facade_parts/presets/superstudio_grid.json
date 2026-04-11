@@ -1,0 +1,51 @@
+{
+  "version": 3,
+  "generator": "ada_facade_builder",
+  "description": "Superstudio Grid Monument — Pure white surface with perfect perspective grid lines. Inspired by Superstudio's totalitarian geometry: no ornament, no hierarchy, just THE GRID. A sculptural wall meant to hang freely in space.",
+  "facade": {
+    "bays": 3,
+    "stories": 3,
+    "symmetry": "bilateral",
+    "total_width": 8.0,
+    "total_height": 6.0,
+    "wall_depth": 0.15
+  },
+  "zones": [
+    { "row": 0, "name": "Grid Upper", "height_multiplier": 1.0 },
+    { "row": 1, "name": "Grid Middle", "height_multiplier": 1.0 },
+    { "row": 2, "name": "Grid Lower", "height_multiplier": 1.0 }
+  ],
+  "materials": {
+    "wall": "#FFFFFF",
+    "zones": {
+      "Grid Upper":  { "color": "#FFFFFF", "type": "plaster" },
+      "Grid Middle": { "color": "#FFFFFF", "type": "plaster" },
+      "Grid Lower":  { "color": "#FFFFFF", "type": "plaster" }
+    }
+  },
+  "placements": [
+    { "col": 0, "row": 0, "part": "ashlar", "col_span": 1, "row_span": 1, "params": { "rows": 1, "cols": 1 } },
+    { "col": 1, "row": 0, "part": "ashlar", "col_span": 1, "row_span": 1, "params": { "rows": 1, "cols": 1 } },
+    { "col": 2, "row": 0, "part": "ashlar", "col_span": 1, "row_span": 1, "params": { "rows": 1, "cols": 1 } },
+
+    { "col": 0, "row": 0, "part": "string_course", "col_span": 3,
+      "params": { "depth": 0.01, "band_height": 0.015, "y_frac": 0.0, "material": "stone_cornice" }
+    },
+
+    { "col": 0, "row": 1, "part": "ashlar", "col_span": 1, "row_span": 1, "params": { "rows": 1, "cols": 1 } },
+    { "col": 1, "row": 1, "part": "ashlar", "col_span": 1, "row_span": 1, "params": { "rows": 1, "cols": 1 } },
+    { "col": 2, "row": 1, "part": "ashlar", "col_span": 1, "row_span": 1, "params": { "rows": 1, "cols": 1 } },
+
+    { "col": 0, "row": 1, "part": "string_course", "col_span": 3,
+      "params": { "depth": 0.01, "band_height": 0.015, "y_frac": 0.0, "material": "stone_cornice" }
+    },
+
+    { "col": 0, "row": 2, "part": "ashlar", "col_span": 1, "row_span": 1, "params": { "rows": 1, "cols": 1 } },
+    { "col": 1, "row": 2, "part": "ashlar", "col_span": 1, "row_span": 1, "params": { "rows": 1, "cols": 1 } },
+    { "col": 2, "row": 2, "part": "ashlar", "col_span": 1, "row_span": 1, "params": { "rows": 1, "cols": 1 } },
+
+    { "col": 0, "row": 2, "part": "string_course", "col_span": 3,
+      "params": { "depth": 0.01, "band_height": 0.015, "y_frac": 0.0, "material": "stone_cornice" }
+    }
+  ]
+}

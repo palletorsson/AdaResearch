@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: trail(x,y) = deposit(agent_positions) * diffuse - evaporate — no neurons, no memory, just chemistry
+# desire: to feel what it's like to be a network that designs itself — the moment a random scatter becomes a vascular web
+# critical_parameter: emission_centers layout — the attractor geometry determines every possible network the colony can grow
+# triggers: adding a new attractor causes the colony to re-route all trails within seconds, like rewiring a circuit live
+# emerges: shortest-path trees, Steiner networks, and load-balanced branching — solutions that take mathematicians centuries to formalize
+# needs: [missing] no VR sliders; attractor positions could be grabbed and moved; deposit/evaporation rate sliders would let learner push colony to collapse or overgrowth
+# relationships: unlocks AntColonyV2 and ant_colony_optimization; contrasts with FlowFieldMain (external field vs. self-created field); depends on PhysarumGrid and PhysarumAgent
+# truth: intelligence is a property of the medium, not the agent — the slime mold's network is smarter than any individual cell
+
 # Config
 @export var num_agents: int = 500
 @export var grid_resolution: int = 256
@@ -19,7 +29,7 @@ const DURATION = 20.0
 # Nodes
 @onready var result_mesh: MeshInstance3D = $ResultMesh
 
-func _ready():
+func _ready() -> void:
 	# 1. Setup Grid
 	grid = PhysarumGrid.new(grid_resolution, grid_resolution)
 	
@@ -49,7 +59,7 @@ func _ready():
 	# 5. Start Sequence
 	set_distribution(0)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# Sequence Logic
 	dist_timer += delta
 	if dist_timer >= DURATION:
@@ -65,7 +75,7 @@ func _physics_process(delta):
 	p_image = grid.get_image()
 	p_texture.update(p_image)
 
-func set_distribution(mode: int):
+func set_distribution(mode: int) -> void:
 	# Clear old
 	emission_centers.clear()
 	for m in markers: m.queue_free()
@@ -92,12 +102,12 @@ func set_distribution(mode: int):
 				var pos = Vector3(randf_range(-20,20), 0, randf_range(-20,20))
 				add_attractor(pos, 6.0)
 
-func add_attractor(pos_world: Vector3, radius: float):
+func add_attractor(pos_world: Vector3, radius: float) -> void:
 	var grid_pos = _world_to_grid(pos_world)
 	emission_centers.append({"x": grid_pos.x, "y": grid_pos.y, "radius": radius, "amount": 2.0})
 	_spawn_marker(pos_world, radius)
 
-func _spawn_marker(pos: Vector3, radius: float):
+func _spawn_marker(pos: Vector3, radius: float) -> void:
 	var m = MeshInstance3D.new()
 	m.mesh = SphereMesh.new()
 	m.mesh.radius = radius * 0.4 # Scale visual to be slightly smaller than influence
@@ -114,3 +124,12 @@ func _world_to_grid(pos: Vector3) -> Vector2i:
 	var gx = int(remap(pos.x, -terrain_size.x/2, terrain_size.x/2, 0, grid.width))
 	var gy = int(remap(pos.z, -terrain_size.y/2, terrain_size.y/2, 0, grid.height))
 	return Vector2i(gx, gy)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

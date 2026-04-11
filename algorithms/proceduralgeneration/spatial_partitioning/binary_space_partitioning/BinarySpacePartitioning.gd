@@ -2,6 +2,16 @@
 extends Node3D
 class_name BinarySpacePartitioning
 
+# @identity
+# essence: Recursive hyperplane cuts partitioning an AABB into a binary tree of convex cells — division as architecture
+# desire: To show that dungeon rooms, office layouts, and game levels all begin with the same act: splitting space in two
+# critical_parameter: max_depth — how many recursive cuts; each level doubles the cell count and halves the room scale
+# triggers: Depth 3 produces a few large rooms; depth 7 produces dense labyrinth; gradient bias clusters small cells at edges
+# emerges: Room layouts, density heatmaps, and hierarchical spatial structure from a single recursive rule
+# needs: @tool editor preview [has], gradient bias [has], stage visualization [has], VR interaction [missing]
+# relationships: Foundation for dungeon generators in constraint_solvers. Contrasts with Voronoi (proximity vs cuts).
+# truth: Architecture begins with division — every room is what remains after the cut.
+
 @export_group("BSP Settings")
 @export var max_depth: int = 7
 @export var min_cell_size: float = 0.5
@@ -35,14 +45,14 @@ class BSPNode:
 	var split_position: float = 0.0
 	var partition_probability: float = 1.0
 	
-	func _init(aabb: AABB, d: int = 0):
+	func _init(aabb: AABB, d: int = 0) -> void:
 		bounds = aabb
 		depth = d
 
-func _ready():
+func _ready() -> void:
 	generate_bsp()
 
-func generate_bsp():
+func generate_bsp() -> void:
 	clear_children()
 	all_cells.clear()
 
@@ -65,7 +75,7 @@ func generate_bsp():
 	if show_heatmap:
 		create_heatmap_mesh()
 
-func partition_node(node: BSPNode):
+func partition_node(node: BSPNode) -> void:
 	if node.depth >= max_depth:
 		return
 	
@@ -153,14 +163,14 @@ func get_split_ratio(position: Vector3, axis: int) -> float:
 	
 	return clamp(base_ratio + variation * center_influence, 0.3, 0.7)
 
-func collect_leaves(node: BSPNode):
+func collect_leaves(node: BSPNode) -> void:
 	if node.is_leaf:
 		all_cells.append(node)
 	else:
 		for child in node.children:
 			collect_leaves(child)
 
-func visualize_partitions():
+func visualize_partitions() -> void:
 	# Note: clear_children() is called in generate_bsp() before this
 	for cell in all_cells:
 		var color_intensity = cell.partition_probability
@@ -242,7 +252,7 @@ func _create_box_geo_nodes(bounds: AABB, color: Color) -> Node3D:
 	
 	return container
 
-func create_heatmap_mesh():
+func create_heatmap_mesh() -> void:
 	# Create a plane mesh showing the partition probability heatmap
 	var heatmap_mesh = MeshInstance3D.new()
 	add_child.call_deferred(heatmap_mesh)
@@ -280,7 +290,7 @@ func create_heatmap_mesh():
 	
 	heatmap_mesh.mesh = surface_tool.commit()
 
-func create_stage():
+func create_stage() -> void:
 	# Create an off-white platform/stage beneath the BSP sculpture
 	var stage = MeshInstance3D.new()
 	stage.name = "Stage"
@@ -316,6 +326,15 @@ func create_stage():
 	rim_mat.roughness = 0.7
 	rim.material_override = rim_mat
 
-func clear_children():
+func clear_children() -> void:
 	for child in get_children():
 		child.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

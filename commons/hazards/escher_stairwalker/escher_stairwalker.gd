@@ -1,3 +1,13 @@
+# @identity
+# essence: walk(impossible_loop) -> invulnerable_inside_paradox -- figure climbing stairs that go nowhere
+# desire: a minimalist figure endlessly ascending an impossible staircase, phasing through contradictions
+# critical_parameter: _loop_phase -- position along the impossible loop; _glitch_timer triggers visual paradox
+# triggers: continuous loop walking; glitch events cause visual distortion; invulnerable on impossible stairs
+# emerges: the creature inhabits impossibility as armor -- you cannot attack what exists in contradiction
+# needs: HazardCreatureBase [has]; loop phase tracking [has]; glitch visualization [has]; VR interaction [missing]
+# relationships: embodies artmathematics Escher as creature; pairs with paradox_stalker
+# truth: invulnerable inside its own impossibility -- local validity allows global contradiction.
+
 extends HazardCreatureBase
 class_name EscherStairwalker
 ## Art & Mathematics hazard — a minimalist figure walking an impossible

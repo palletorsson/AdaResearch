@@ -1,4 +1,15 @@
 extends Node3D
+
+# @identity
+# essence: score(x) > threshold → anomaly; three heuristics: z-score, isolation radius, autoencoder error
+# desire: see the boundary between normal and anomalous shift as you change methods and thresholds
+# critical_parameter: threshold — determines where the decision boundary falls for each method
+# triggers: cycling detection mode recolors all points; lowering threshold floods with false positives
+# emerges: the realization that "anomaly" is not intrinsic — it depends entirely on which lens you use
+# needs: VR controls for mode cycling [missing], threshold adjustment [missing] — exported params only
+# relationships: contrasts enhanced_kmeans (clustering finds groups, anomaly detection finds outsiders); unlocks explainable_ai_xai_vr
+# truth: anomaly is not a property of a point but a relationship between a point and the model judging it
+
 ## Anomaly Detection Sandbox
 ## Interactive visualization of Z-Score, Isolation Radius, and Autoencoder
 ## Error anomaly detection methods. Anomalous points glow, rise, and scale
@@ -41,14 +52,14 @@ var _mean := Vector2.ZERO
 var _std := Vector2.ONE
 var _max_distance := 1.0
 
-func _ready():
+func _ready() -> void:
 	_rng.seed = dataset_seed
 	_generate_samples()
 	_build_points()
 	_refresh_statistics()
 	run_detection()
 
-func _generate_samples():
+func _generate_samples() -> void:
 	_samples.clear()
 	for i in range(max(10, normal_sample_count)):
 		var pos := Vector2(
@@ -70,7 +81,7 @@ func _generate_samples():
 			"tag": "seeded_anomaly"
 		})
 
-func _build_points():
+func _build_points() -> void:
 	for child in data_root.get_children():
 		child.queue_free()
 
@@ -95,7 +106,7 @@ func _build_points():
 		sample["mesh"] = mesh_instance
 		sample["material"] = material
 
-func run_detection():
+func run_detection() -> void:
 	_refresh_statistics()
 	var threshold := _active_threshold()
 	var anomaly_count := 0
@@ -154,7 +165,7 @@ func reset_dataset(new_seed: int = dataset_seed) -> void:
 	_refresh_statistics()
 	run_detection()
 
-func _refresh_statistics():
+func _refresh_statistics() -> void:
 	if _samples.is_empty():
 		_mean = Vector2.ZERO
 		_std = Vector2.ONE
@@ -281,3 +292,12 @@ func _mode_color() -> Color:
 
 func _total_samples() -> int:
 	return _samples.size()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

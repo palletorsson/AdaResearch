@@ -1,0 +1,135 @@
+{
+  "id": "vr-input-mapping",
+  "title": "VR Input Mapping",
+  "description": "Which button does what in VR. Left hand = movement, right hand = turn/fly/point. Know this before debugging input.",
+  "triggers": [
+    "vr controls",
+    "button mapping",
+    "input",
+    "which button",
+    "controller"
+  ],
+  "granularity": "micro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "DeepWiki: Hand Controller Input-to-Action Mapping, hidden dependencies clause",
+  "nodes": [
+    {
+      "id": "which",
+      "type": "decision",
+      "label": "Which hand/input?"
+    },
+    {
+      "id": "left_stick",
+      "type": "action",
+      "label": "Left joystick → strafe movement (MovementDirect)"
+    },
+    {
+      "id": "left_trigger",
+      "type": "action",
+      "label": "Left trigger → grab/pickup (FunctionPickup)"
+    },
+    {
+      "id": "right_stick",
+      "type": "action",
+      "label": "Right joystick → turn (MovementTurn)"
+    },
+    {
+      "id": "right_trigger",
+      "type": "action",
+      "label": "Right trigger → grab/pickup"
+    },
+    {
+      "id": "ax_button",
+      "type": "action",
+      "label": "AX button → flight (MovementFlight)",
+      "detail": "WARNING: MovementCapabilityGate may disable this by stage. Flight is now ungated."
+    },
+    {
+      "id": "by_button",
+      "type": "action",
+      "label": "BY button → voice (disabled)"
+    },
+    {
+      "id": "pointer",
+      "type": "action",
+      "label": "Right pointer laser → UI interaction (FunctionPointer)"
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Input mapped"
+    }
+  ],
+  "edges": [
+    {
+      "from": "which",
+      "to": "left_stick",
+      "label": "left joystick"
+    },
+    {
+      "from": "which",
+      "to": "left_trigger",
+      "label": "left trigger"
+    },
+    {
+      "from": "which",
+      "to": "right_stick",
+      "label": "right joystick"
+    },
+    {
+      "from": "which",
+      "to": "right_trigger",
+      "label": "right trigger"
+    },
+    {
+      "from": "which",
+      "to": "ax_button",
+      "label": "AX button"
+    },
+    {
+      "from": "which",
+      "to": "by_button",
+      "label": "BY button"
+    },
+    {
+      "from": "which",
+      "to": "pointer",
+      "label": "pointer laser"
+    },
+    {
+      "from": "left_stick",
+      "to": "done"
+    },
+    {
+      "from": "left_trigger",
+      "to": "done"
+    },
+    {
+      "from": "right_stick",
+      "to": "done"
+    },
+    {
+      "from": "right_trigger",
+      "to": "done"
+    },
+    {
+      "from": "ax_button",
+      "to": "done"
+    },
+    {
+      "from": "by_button",
+      "to": "done"
+    },
+    {
+      "from": "pointer",
+      "to": "done"
+    }
+  ],
+  "confidence": "verified",
+  "summary": "Left: joystick=strafe, trigger=grab. Right: joystick=turn, trigger=grab, AX=flight, pointer=UI. MovementCapabilityGate may disable flight.",
+  "links_to": [
+    "hidden-dependencies"
+  ]
+}

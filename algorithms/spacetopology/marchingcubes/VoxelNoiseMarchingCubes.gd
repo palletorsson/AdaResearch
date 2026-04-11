@@ -43,7 +43,7 @@ class Triangle:
 	var vertices: Array[Vector3]
 	var normals: Array[Vector3]
 
-	func _init(v1: Vector3, v2: Vector3, v3: Vector3):
+	func _init(v1: Vector3, v2: Vector3, v3: Vector3) -> void:
 		vertices = [v1, v2, v3]
 		# Calculate normal
 		var edge1 = v2 - v1
@@ -52,12 +52,12 @@ class Triangle:
 		normals = [normal, normal, normal]
 
 # === INITIALIZATION ===
-func _ready():
+func _ready() -> void:
 	setup_noise()
 	setup_marching_cubes_tables()
 	generate_world()
 
-func setup_noise():
+func setup_noise() -> void:
 	"""Initialize noise generator"""
 	noise = FastNoiseLite.new()
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
@@ -69,14 +69,14 @@ func setup_noise():
 	noise.fractal_gain = noise_persistence
 	print("VoxelNoiseMarchingCubes: Noise generator initialized")
 
-func setup_marching_cubes_tables():
+func setup_marching_cubes_tables() -> void:
 	"""Initialize marching cubes lookup tables"""
 	edge_table = MarchingCubesLookupTables.get_edge_table()
 	triangle_table = MarchingCubesLookupTables.get_triangle_table()
 	print("VoxelNoiseMarchingCubes: Marching cubes tables initialized")
 
 # === MAIN GENERATION ===
-func generate_world():
+func generate_world() -> void:
 	"""Generate the voxel world with marching cubes"""
 	print("VoxelNoiseMarchingCubes: Starting world generation...")
 
@@ -295,7 +295,7 @@ func create_mesh_from_triangles(triangles: Array[Triangle]) -> ArrayMesh:
 
 	return mesh
 
-func apply_shader_material(mi: MeshInstance3D):
+func apply_shader_material(mi: MeshInstance3D) -> void:
 	"""Apply glass shader with outline effect"""
 	var shader = Shader.new()
 	shader.code = """
@@ -343,7 +343,7 @@ void fragment() {
 	mat.set_shader_parameter("outline_width", outline_width)
 	mi.set_surface_override_material(0, mat)
 
-func create_collision(mesh: ArrayMesh):
+func create_collision(mesh: ArrayMesh) -> void:
 	"""Create collision shape for the mesh"""
 	var col = StaticBody3D.new()
 	var shape = CollisionShape3D.new()
@@ -360,12 +360,12 @@ func create_collision(mesh: ArrayMesh):
 	add_child(col)
 
 # === PUBLIC API ===
-func regenerate():
+func regenerate() -> void:
 	"""Regenerate the world"""
 	clear_world()
 	generate_world()
 
-func clear_world():
+func clear_world() -> void:
 	"""Clear generated mesh and collision"""
 	if mesh_instance:
 		mesh_instance.queue_free()
@@ -375,7 +375,7 @@ func clear_world():
 	if collision:
 		collision.queue_free()
 
-func set_noise_parameters(params: Dictionary):
+func set_noise_parameters(params: Dictionary) -> void:
 	"""Update noise parameters"""
 	if params.has("seed"):
 		noise_seed = params.seed
@@ -397,3 +397,12 @@ func set_noise_parameters(params: Dictionary):
 		noise_lacunarity = params.lacunarity
 		if noise:
 			noise.fractal_lacunarity = noise_lacunarity
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

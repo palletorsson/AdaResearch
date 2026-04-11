@@ -580,3 +580,12 @@ func get_current_target() -> Node3D:
 
 func get_kill_count() -> int:
 	return total_kills
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -20,7 +20,7 @@ var xy_neighbor: Node3D = null
 # Voxel visualization
 var voxel_objects: Array = []
 
-func initialize(res: int, size: float):
+func initialize(res: int, size: float) -> void:
 	resolution = res
 	grid_size = size
 	voxel_size = size / float(resolution)
@@ -51,7 +51,7 @@ func initialize(res: int, size: float):
 	
 	refresh()
 
-func create_voxel_visual(_i: int, x: int, y: int):
+func create_voxel_visual(_i: int, x: int, y: int) -> void:
 	var quad = MeshInstance3D.new()
 	var quad_mesh = QuadMesh.new()
 	quad_mesh.size = Vector2.ONE * voxel_size * 0.1
@@ -70,11 +70,11 @@ func create_voxel_visual(_i: int, x: int, y: int):
 	add_child(quad)
 	voxel_objects.append({"mesh": quad, "material": mat})
 
-func set_voxel(x: int, y: int, state: bool):
+func set_voxel(x: int, y: int, state: bool) -> void:
 	voxels[y * resolution + x].state = state
 	refresh()
 
-func apply(stencil: VoxelStencil):
+func apply(stencil: VoxelStencil) -> void:
 	var x_start = stencil.get_x_start()
 	if x_start < 0:
 		x_start = 0
@@ -97,16 +97,16 @@ func apply(stencil: VoxelStencil):
 	
 	refresh()
 
-func refresh():
+func refresh() -> void:
 	set_voxel_colors()
 	triangulate()
 
-func set_voxel_colors():
+func set_voxel_colors() -> void:
 	for i in range(voxels.size()):
 		var color = Color.BLACK if voxels[i].state else Color.WHITE
 		voxel_objects[i].material.albedo_color = color
 
-func triangulate():
+func triangulate() -> void:
 	var surf = surface.get_child(0)
 	surf.clear()
 	
@@ -121,7 +121,7 @@ func triangulate():
 	
 	surf.apply()
 
-func fill_first_row_cache():
+func fill_first_row_cache() -> void:
 	var surf = surface.get_child(0)
 	cache_first_corner(voxels[0])
 	
@@ -132,24 +132,24 @@ func fill_first_row_cache():
 		dummy_x.become_x_dummy_of(x_neighbor.voxels[0], grid_size)
 		cache_next_edge_and_corner(resolution - 1, voxels[resolution - 1], dummy_x)
 
-func cache_first_corner(voxel: Voxel):
+func cache_first_corner(voxel: Voxel) -> void:
 	if voxel.state:
 		surface.get_child(0).cache_first_corner(voxel)
 
-func cache_next_edge_and_corner(i: int, x_min: Voxel, x_max: Voxel):
+func cache_next_edge_and_corner(i: int, x_min: Voxel, x_max: Voxel) -> void:
 	var surf = surface.get_child(0)
 	if x_min.state != x_max.state:
 		surf.cache_x_edge(i, x_min)
 	if x_max.state:
 		surf.cache_next_corner(i, x_max)
 
-func cache_next_middle_edge(y_min: Voxel, y_max: Voxel):
+func cache_next_middle_edge(y_min: Voxel, y_max: Voxel) -> void:
 	var surf = surface.get_child(0)
 	surf.prepare_cache_for_next_cell()
 	if y_min.state != y_max.state:
 		surf.cache_y_edge(y_min)
 
-func triangulate_cell_rows():
+func triangulate_cell_rows() -> void:
 	var cells = resolution - 1
 	
 	for y in range(cells):
@@ -172,14 +172,14 @@ func triangulate_cell_rows():
 		if x_neighbor:
 			triangulate_gap_cell(i)
 
-func triangulate_gap_cell(i: int):
+func triangulate_gap_cell(i: int) -> void:
 	var swap = dummy_t
 	swap.become_x_dummy_of(x_neighbor.voxels[i + 1], grid_size)
 	dummy_t = dummy_x
 	dummy_x = swap
 	triangulate_cell(resolution - 1, voxels[i], dummy_t, voxels[i + resolution], dummy_x)
 
-func triangulate_gap_row():
+func triangulate_gap_row() -> void:
 	var surf = surface.get_child(0)
 	swap_row_caches()
 	
@@ -206,10 +206,10 @@ func triangulate_gap_row():
 		cache_next_middle_edge(dummy_x, dummy_t)
 		triangulate_cell(cells, voxels[voxels.size() - 1], dummy_x, dummy_y, dummy_t)
 
-func swap_row_caches():
+func swap_row_caches() -> void:
 	surface.get_child(0).prepare_cache_for_next_row()
 
-func triangulate_cell(i: int, a: Voxel, b: Voxel, c: Voxel, d: Voxel):
+func triangulate_cell(i: int, a: Voxel, b: Voxel, c: Voxel, d: Voxel) -> void:
 	var cell_type = 0
 	if a.state:
 		cell_type |= 1
@@ -256,3 +256,12 @@ func triangulate_cell(i: int, a: Voxel, b: Voxel, c: Voxel, d: Voxel):
 			surf.add_pentagon_d(i)
 		15:
 			surf.add_quad_e(i)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

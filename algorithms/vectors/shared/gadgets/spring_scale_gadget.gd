@@ -23,7 +23,7 @@ const SPRING_DAMPING := 4.0
 var _target_magnitude: float = 0.0
 var _current_magnitude: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	# --- Base plate ---
 	base_body = create_static_body(
 		Vector3.ZERO,
@@ -88,7 +88,7 @@ func _ready():
 	# --- Label ---
 	magnitude_label = create_label("|v|", Vector3(0.06, REST_HEIGHT, 0))
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_current_magnitude = lerp(_current_magnitude, _target_magnitude, delta * 8.0)
 
 	# Redistribute coils between base top and platform bottom
@@ -115,3 +115,12 @@ func update_from_vectors(a: Vector3, _b: Vector3) -> void:
 	# This pushes the platform up against the spring
 	var force_strength = _target_magnitude * 8.0
 	platform.apply_central_force(Vector3(0, force_strength, 0))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -65,3 +65,12 @@ func _ready() -> void:
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 0, 5)
 	add_child(camera)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

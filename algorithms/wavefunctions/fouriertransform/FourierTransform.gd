@@ -14,7 +14,7 @@ extends Node3D
 
 var signal_types = ["Sine Wave", "Square Wave", "Triangle Wave", "Sawtooth Wave"]
 
-func _ready():
+func _ready() -> void:
 	# Connect UI signals
 	signal_type_slider.value_changed.connect(_on_signal_type_changed)
 	frequency_slider.value_changed.connect(_on_frequency_changed)
@@ -26,34 +26,37 @@ func _ready():
 	# Initialize the signal generator
 	_update_signal_parameters()
 
-func _on_signal_type_changed(value):
+func _on_signal_type_changed(value) -> void:
 	var signal_type = signal_types[int(value)]
 	signal_type_label.text = "Signal Type: " + signal_type
 	_update_signal_parameters()
 
-func _on_frequency_changed(value):
+func _on_frequency_changed(value) -> void:
 	frequency_label.text = "Frequency: " + str(value) + " Hz"
 	_update_signal_parameters()
 
-func _on_amplitude_changed(value):
+func _on_amplitude_changed(value) -> void:
 	amplitude_label.text = "Amplitude: " + str(value)
 	_update_signal_parameters()
 
-func _on_harmonics_changed(value):
+func _on_harmonics_changed(value) -> void:
 	harmonics_label.text = "Harmonics: " + str(int(value))
 	_update_signal_parameters()
 
-func _on_transform_pressed():
+func _on_transform_pressed() -> void:
 	signal_generator.compute_fft()
 
-func _on_reset_pressed():
+func _on_reset_pressed() -> void:
 	signal_generator.reset_signal()
 	_update_signal_parameters()
 
-func _update_signal_parameters():
+func _update_signal_parameters() -> void:
 	if signal_generator:
 		signal_generator.signal_type = int(signal_type_slider.value)
 		signal_generator.frequency = frequency_slider.value
 		signal_generator.amplitude = amplitude_slider.value
 		signal_generator.harmonics = int(harmonics_slider.value)
 		signal_generator.update_signal()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,51 +1,1494 @@
 {
-	"registry_info": {
-		"name": "vectors",
-		"description": "Vector operation artifacts - addition, subtraction, magnitude, normalization, dot product, cross product, projection",
-		"category": "mathematics",
-		"theoretical_grounding": "Linear algebra fundamentals, 3D graphics programming, physics simulation"
-	},
 	"artifacts": {
-		"hl_turret_vectors": {
-			"lookup_name": "hl_turret_vectors",
-			"scene": "res://commons/artifacts/hl_turret_vectors/hl_turret_vectors.tscn",
-			"class_name": "HLTurretVectors",
-			"name": "Half-Life Turret - Vector Compendium",
-			"description": "Half-Life inspired sentry turret demonstrating ALL vector operations in one coherent system: subtraction (direction to target), magnitude (distance/range check), normalization (unit direction), dot product (FOV check), cross product (rotation axis), projection (ground plane), scalar multiplication (bullet velocity), and velocity integration (bullet physics). Fires tracer rounds with visible velocity vectors!",
-			"qfep_connection": "The turret as computational subject - vectors as the mathematics of surveillance, targeting, and ballistics. Shows how abstract math operations have immediate, embodied applications in games and simulations.",
-			"signals": [
-				"target_acquired",
-				"target_lost",
-				"bullet_fired",
-				"bullet_hit"
+		"CoordinateSystem3M": {
+			"capacity": "FEEL orientation as embodied direction by standing inside the coordinate frame",
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Stand inside the coordinate system. Three meter-long axes — X red, Y green, Z blue — establish the right-handed frame that every 3D operation assumes. A gyroscope gadget shows your orientation relative to the axes. The arbitrary nature of axis conventions becomes visible: right-handed vs left-handed, Y-up vs Z-up are choices, not laws.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
 			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"gamwell_reference": "Linear algebra fundamentals, 3D graphics programming",
+			"include_in_map_data": true,
 			"interactions": [
-				"grab target sphere to move it",
-				"preset buttons for scenarios",
-				"SPACE to manual fire",
-				"F to toggle auto-fire"
+				"observe axis colors (X=red, Y=green, Z=blue)",
+				"read info panel",
+				"interact with gyroscope gadget"
 			],
+			"lookup_name": "CoordinateSystem3M",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"testmaps"
+			],
+			"name": "CoordinateSystem3M",
 			"parameters": {
-				"turret_height": "Height of turret barrel (default 0.4)",
-				"barrel_length": "Length of gun barrel (default 0.25)",
-				"field_of_view_degrees": "Total FOV cone in degrees (default 90)",
-				"max_range": "Maximum targeting range (default 2.5)",
-				"tracking_speed": "How fast turret tracks target (default 2.0)",
-				"target_position": "Initial target position Vector3",
-				"shooting_enabled": "Enable automatic firing (default true)",
-				"fire_rate": "Shots per second (default 3.0)",
-				"bullet_speed": "Bullet velocity in units/sec (default 4.0)",
-				"show_bullet_vectors": "Show velocity arrows on bullets (default true)"
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
 			},
+			"qfep_connection": "Pure F — the coordinate system is the most fundamental structure, the frame from which all measurement begins. Without agreed axes, no vector has components, no transform has a matrix.",
+			"scene": "res://algorithms/vectors/00_coordinates/CoordinateSystem3M.tscn",
+			"size_group": "compact",
+			"tags": [
+				"coordinate_system",
+				"axes",
+				"orientation",
+				"right_hand_rule",
+				"3d",
+				"interactive",
+				"vectors"
+			]
+		},
+		"ForceMagnitudeDemo": {
+			"capacity": "FEEL that force and acceleration are the same shape by dragging an arrow and watching the ball respond proportionally",
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Drag the force arrow longer and the ball accelerates harder. F = ma made visceral — magnitude is felt, not read. The ball's trajectory traces the force's history. Reset with R, freeze with Space. Contrasts with WorkEnergyDemo (same force, different measure); feeds into CombinedForcesDemo (multiple forces).",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"gamwell_reference": "Linear algebra fundamentals, physics simulation",
+			"include_in_map_data": true,
+			"interactions": [
+				"drag force arrow to change magnitude and direction",
+				"press R to reset ball",
+				"press Space to freeze motion"
+			],
+			"lookup_name": "ForceMagnitudeDemo",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "ForceMagnitudeDemo",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Classical F — force as deterministic law. Drag the arrow, the ball obeys. No randomness, no emergence. Pure Newtonian causality where every input produces a proportional output.",
+			"scene": "res://algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.tscn",
+			"size_group": "compact",
+			"tags": [
+				"force",
+				"magnitude",
+				"acceleration",
+				"newton",
+				"f_equals_ma",
+				"interactive",
+				"vectors",
+				"physics"
+			]
+		},
+		"VectorAddition": {
+			"capacity": "SEE that the ball knows only the sum of all forces, not the individual forces themselves",
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Two force arrows, one ball, one truth: nature does not apply forces one at a time. Drag F1 and F2 independently — the yellow net force arrow updates as their vector sum, and the ball accelerates along it. Cancellation when forces oppose. Diagonal trajectories from perpendicular forces. Superposition as felt experience.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"gamwell_reference": "Linear algebra fundamentals, vector spaces",
+			"include_in_map_data": true,
+			"interactions": [
+				"drag red F1 vector",
+				"drag orange F2 vector",
+				"observe yellow net force",
+				"press R to reset",
+				"press Space to freeze"
+			],
+			"lookup_name": "VectorAddition",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "VectorAddition",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "F-composition — two deterministic forces combine into one deterministic result. Superposition is linearity made visible. The net force IS the sum, no approximation, no loss.",
+			"scene": "res://algorithms/vectors/02_vector_addition/VectorAddition.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector_addition",
+				"superposition",
+				"forces",
+				"net_force",
+				"interactive",
+				"vectors",
+				"physics"
+			]
+		},
+		"VectorBasics": {
+			"capacity": "UNDERSTAND that a vector is not a number and not a point — it is a displacement carrying both how far and which way",
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Grab an arrow and stretch it. Watch magnitude, unit vector, and components all update as one system. v = |v| * v-hat — a vector is magnitude times direction, decomposed into (x,y,z) components along the axes. The magnitude arc sweeps from the x-axis. The spring scale responds to vector length like a physical instrument.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"gamwell_reference": "Linear algebra fundamentals, vector decomposition",
+			"include_in_map_data": true,
+			"interactions": [
+				"grab and drag vector endpoint",
+				"observe component arrows along axes",
+				"read spring scale gadget",
+				"toggle component visibility"
+			],
+			"lookup_name": "VectorBasics",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "VectorBasics",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Pure F-decomposition — breaking a single quantity into orthogonal components. The vector IS its components, and the components ARE the vector. No information lost, no approximation.",
+			"scene": "res://algorithms/vectors/01_vector_basics/VectorBasics.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector",
+				"magnitude",
+				"direction",
+				"components",
+				"unit_vector",
+				"decomposition",
+				"interactive",
+				"vectors"
+			]
+		},
+		"VectorCrossProduct": {
+			"capacity": "FEEL that torque is not a force but the force's opinion about rotation, measured by how far off-center and how perpendicular it acts",
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Drag the force and its application point. The purple torque vector pops out perpendicular to both, spinning the ball via the right-hand rule. tau = r x F — the cross product. Zero torque when force passes through center (r parallel to F). Maximum torque when perpendicular to the lever arm.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"gamwell_reference": "Linear algebra fundamentals, cross product, angular momentum",
+			"include_in_map_data": true,
+			"interactions": [
+				"drag cyan position handle (lever arm)",
+				"drag red force handle",
+				"observe purple torque arrow",
+				"watch ball spin"
+			],
+			"lookup_name": "VectorCrossProduct",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "VectorCrossProduct",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "F-perpendicularity — the cross product extracts the component of interaction that is orthogonal to both inputs. It measures not agreement (that is dot product) but the capacity for rotation.",
+			"scene": "res://algorithms/vectors/06_vector_cross_product/VectorCrossProduct.tscn",
+			"size_group": "compact",
+			"tags": [
+				"cross_product",
+				"torque",
+				"rotation",
+				"right_hand_rule",
+				"perpendicular",
+				"interactive",
+				"vectors",
+				"physics"
+			]
+		},
+		"VectorDotProduct": {
+			"capacity": "SEE that pushing sideways does nothing — work is the component of force that agrees with motion",
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Push a ball and watch the work meter tick up. Push perpendicular and it stays at zero. W = F . d = |F||d|cos(theta) — the dot product made visceral. The meter turns green for positive work, red for negative, yellow for zero. Total work accumulates as a running dot-product integrator over the path.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"gamwell_reference": "Linear algebra fundamentals, dot product, work-energy theorem",
+			"include_in_map_data": true,
+			"interactions": [
+				"drag force vector",
+				"observe work meter (green/red/yellow)",
+				"read angle display",
+				"press R to reset total work"
+			],
+			"lookup_name": "VectorDotProduct",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "VectorDotProduct",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "F-projection — the dot product extracts the component of one vector that agrees with another. It measures alignment. Perpendicular forces do zero work because they have zero agreement with the direction of motion.",
+			"scene": "res://algorithms/vectors/03_dot_product/VectorDotProduct.tscn",
+			"size_group": "compact",
+			"tags": [
+				"dot_product",
+				"work",
+				"energy",
+				"projection",
+				"alignment",
+				"interactive",
+				"vectors",
+				"physics"
+			]
+		},
+		"VectorFieldFlow": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "VectorFieldFlow",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VectorFieldFlow",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"noise"
+			],
+			"name": "VectorFieldFlow",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/10_vector_field_flow/VectorFieldFlow.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			]
+		},
+		"VectorForces": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "VectorForces",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				20.0,
+				1.0,
+				20.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VectorForces",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "VectorForces",
+			"parameters": {
+				"footprint": [
+					20.0,
+					1.0,
+					20.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/vectors/05_vector_forces/VectorForces.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"vector"
+			]
+		},
+		"VectorMotion": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "VectorMotion",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				4.0,
+				4.0,
+				4.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VectorMotion",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "VectorMotion",
+			"parameters": {
+				"footprint": [
+					4.0,
+					4.0,
+					4.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/vectors/08_vector_motion/VectorMotion.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"vector"
+			]
+		},
+		"VectorProjectionReflection": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "VectorProjectionReflection",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VectorProjectionReflection",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "VectorProjectionReflection",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/07_vector_projection_reflection/VectorProjectionReflection.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			]
+		},
+		"VectorSubtraction": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "VectorSubtraction",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VectorSubtraction",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "VectorSubtraction",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/04_vector_subtraction/VectorSubtraction.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			]
+		},
+		"VectorThrowing": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "VectorThrowing",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				4.0,
+				5.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VectorThrowing",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "VectorThrowing",
+			"parameters": {
+				"footprint": [
+					1.0,
+					4.0,
+					5.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/vectors/08_vector_throwing/VectorThrowing.tscn",
+			"size_group": "environment",
+			"tags": [
+				"vector"
+			]
+		},
+		"VectorTorque": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "VectorTorque",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "VectorTorque",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "VectorTorque",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/09_vector_torque/VectorTorque.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			]
+		},
+		"VectorWorkbench": {
+			"category": "vectors",
+			"complexity": "intermediate",
+			"description": "Universal vector sandbox - two draggable vectors with all operations (add, subtract, dot, cross, projection) computed live",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				4.0,
+				2.0,
+				3.0
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab"
+			],
+			"lookup_name": "VectorWorkbench",
+			"map_ready": true,
+			"map_sequences": [
+				"vectors"
+			],
+			"name": "Vector Workbench",
+			"parameters": {
+				"footprint": [
+					4.0,
+					2.0,
+					3.0
+				],
+				"size_group": "room_scale"
+			},
+			"qfep_connection": "All vector operations in one frame of reference. See relationships between operations. Synthesis of mathematical tools.",
+			"scene": "res://algorithms/vectors/vector_workbench/VectorWorkbench.tscn",
+			"sequence": "vectors",
+			"size_group": "room_scale",
+			"tags": [
+				"vectors",
+				"addition",
+				"subtraction",
+				"dot_product",
+				"cross_product",
+				"projection",
+				"sandbox"
+			]
+		},
+		"ball_dropper": {
+			"category": "mathematics",
+			"class_name": "BallDropper",
+			"complexity": "beginner",
+			"description": "Drops colorful physics balls one at a time. Pair with laser_turret for targeting demo. Balls cycle through colors and have configurable physics properties.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"physics",
+				"spawning"
+			],
+			"include_in_map_data": true,
+			"interactions": [
+				"Automatic dropping - configure via parameters"
+			],
+			"lookup_name": "ball_dropper",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Ball Dropper",
+			"parameters": {
+				"auto_drop": "Enable automatic dropping (default true)",
+				"ball_bounce": "Bounciness (default 0.7)",
+				"ball_mass": "Mass for physics (default 0.5)",
+				"ball_radius": "Size of balls (default 0.1)",
+				"drop_interval": "Seconds between drops (default 3.0)",
+				"initial_velocity": "Starting velocity Vector3",
+				"max_balls": "Maximum balls alive at once (default 5)",
+				"spawn_spread": "Random XZ spread (default 0.3)"
+			},
+			"qfep_connection": "Entropy source - introducing moving targets into the system for the turret to track.",
+			"scene": "res://commons/artifacts/turret_targeting/ball_dropper.tscn",
+			"sequence": "forces",
+			"signals": [
+				"ball_spawned",
+				"ball_destroyed"
+			],
+			"tags": [
+				"balls",
+				"physics",
+				"spawner",
+				"dropper",
+				"colorful",
+				"standalone"
+			]
+		},
+		"basis_vectors_rig": {
+			"category": "mathematics",
+			"class_name": "BasisVectorsRig",
+			"complexity": "intermediate",
+			"description": "Interactive basis vectors (î, ĵ, k̂) showing how any 3D point is a linear combination: P = xî + yĵ + zk̂.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"linear_algebra"
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab and rotate basis",
+				"move target point",
+				"preset configurations"
+			],
+			"lookup_name": "basis_vectors_rig",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"testmaps"
+			],
+			"name": "Basis Vectors Rig",
+			"parameters": {
+				"axis_length": "Length of basis arrows",
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact",
+				"target_point": "Point to decompose into basis components"
+			},
+			"qfep_connection": "Basis as frame of reference - the coordinate system from which we measure all positions",
+			"scene": "res://commons/artifacts/basis_vectors_rig/basis_vectors_rig.tscn",
+			"sequence": "forces",
+			"signals": [],
+			"tags": [
+				"vectors",
+				"basis",
+				"coordinate_system",
+				"linear_combination",
+				"interactive"
+			]
+		},
+		"coordinate_system_switcher": {
+			"category": "mathematics",
+			"class_name": "CoordinateSystemSwitcher",
+			"complexity": "intermediate",
+			"description": "Shows the same 3D point in Cartesian (x,y,z), Cylindrical (r,θ,z), and Spherical (ρ,θ,φ) coordinates simultaneously. ImmediateMesh axes and arcs with projection lines showing how each system maps. Color-coded: Cartesian=RGB, Cylindrical=yellow, Spherical=magenta.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"coordinate_systems",
+				"visualization"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "coordinate_system_switcher",
+			"map_ready": true,
+			"map_sequences": [
+				"vectors"
+			],
+			"name": "Coordinate System Switcher",
+			"qfep_connection": "Multiple coordinate systems as multiple perspectives on the same reality — the point doesn't change, only the language describing it.",
+			"scene": "res://commons/artifacts/coordinate_system_switcher/coordinate_system_switcher.tscn",
+			"tags": [
+				"vectors",
+				"coordinates",
+				"cartesian",
+				"cylindrical",
+				"spherical",
+				"polar",
+				"conversion",
+				"3d",
+				"visualization"
+			]
+		},
+		"coordinates": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "coordinates",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				5.0,
+				5.0,
+				5.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "coordinates",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "coordinates",
+			"parameters": {
+				"footprint": [
+					5.0,
+					5.0,
+					5.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/vectors/01_vector_basics/coordinates.tscn",
+			"size_group": "environment",
+			"tags": [
+				"vector"
+			]
+		},
+		"cross_product_demo": {
+			"category": "mathematics",
+			"class_name": "CrossProductDemo",
+			"complexity": "intermediate",
+			"description": "Interactive cross product: A × B produces a vector perpendicular to both. Shows parallelogram area and right-hand rule.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab handle spheres",
+				"preset configurations"
+			],
+			"lookup_name": "cross_product_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Cross Product Demo",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact",
+				"vector_a": "First vector",
+				"vector_b": "Second vector"
+			},
+			"qfep_connection": "Cross product as emergence - a third direction arising from two, perpendicularity as difference",
+			"scene": "res://commons/artifacts/cross_product_demo/cross_product_demo.tscn",
+			"sequence": "forces",
+			"signals": [],
+			"tags": [
+				"vectors",
+				"cross_product",
+				"perpendicular",
+				"area",
+				"right_hand_rule",
+				"interactive"
+			]
+		},
+		"destructible_marching_cube": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "destructible_marching_cube",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "destructible_marching_cube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "destructible_marching_cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/08_vector_throwing/destructibles/organic_voronoi_cube_test.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			]
+		},
+		"destructibles_test_scene": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "destructibles_test_scene",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				20.0,
+				20.0,
+				20.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "destructibles_test_scene",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "destructibles_test_scene",
+			"parameters": {
+				"footprint": [
+					20.0,
+					20.0,
+					20.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/vectors/08_vector_throwing/destructibles_test_scene.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"vector"
+			]
+		},
+		"dot_product_projector": {
+			"category": "mathematics",
+			"class_name": "DotProductProjector",
+			"complexity": "intermediate",
+			"description": "Interactive dot product visualizer showing A · B = |A||B|cos(θ). Demonstrates projection and alignment measurement.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab handle spheres",
+				"preset configurations"
+			],
+			"lookup_name": "dot_product_projector",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Dot Product Projector",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact",
+				"vector_a": "Vector being projected",
+				"vector_b": "Vector projected onto"
+			},
+			"qfep_connection": "Dot product as alignment - measuring how much two directions agree or oppose",
+			"scene": "res://commons/artifacts/dot_product_projector/dot_product_projector.tscn",
+			"sequence": "forces",
+			"signals": [],
+			"tags": [
+				"vectors",
+				"dot_product",
+				"projection",
+				"angle",
+				"cosine",
+				"interactive"
+			]
+		},
+		"example_1_1_bouncing_ball_with_no_vectors_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Bouncing ball demonstration without vector math",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_1_bouncing_ball_with_no_vectors_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Bouncing Ball with No Vectors VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_1_bouncing_ball_with_no_vectors_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra",
+				"math",
+				"vr"
+			]
+		},
+		"example_1_2_bouncing_ball_with_vectors_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Bouncing ball demonstration using vector math",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_2_bouncing_ball_with_vectors_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Bouncing Ball with Vectors VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_2_bouncing_ball_with_vectors_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra",
+				"math",
+				"vr"
+			]
+		},
+		"example_1_3_vector_subtraction_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Vector subtraction demonstration",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_3_vector_subtraction_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Vector Subtraction VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_3_vector_subtraction_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra",
+				"vector",
+				"vr"
+			]
+		},
+		"example_1_4_vector_multiplication_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Vector multiplication demonstration",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_4_vector_multiplication_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Vector Multiplication VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_4_vector_multiplication_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra",
+				"vector",
+				"vr"
+			]
+		},
+		"example_1_5_vector_magnitude_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Vector magnitude calculation demonstration",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_5_vector_magnitude_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Vector Magnitude VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_5_vector_magnitude_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra",
+				"vector",
+				"vr"
+			]
+		},
+		"example_1_6_vector_normalize_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Vector normalization demonstration",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_6_vector_normalize_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Vector Normalize VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_6_vector_normalize_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra",
+				"vector",
+				"vr"
+			]
+		},
+		"example_1_7_motion_101_velocity_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Basic velocity motion demonstration",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_7_motion_101_velocity_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Motion 101 Velocity VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_7_motion_101_velocity_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"animation",
+				"physics",
+				"vr"
+			]
+		},
+		"example_1_8_motion_101_velocity_and_constant_acceleration_vr": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Velocity and constant acceleration demonstration",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Motion 101 Velocity and Constant Acceleration VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_8_motion_101_velocity_and_constant_acceleration_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"animation",
+				"physics",
+				"vr"
+			]
+		},
+		"example_1_9_motion_101_velocity_and_random_acceleration_vr": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Velocity and random acceleration demonstration",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "Motion 101 Velocity and Random Acceleration VR",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/noc_ch01/example_1_9_motion_101_velocity_and_random_acceleration_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"animation",
+				"physics",
+				"probability",
+				"procedural",
+				"vr"
+			]
+		},
+		"exercise_1_3_solution_3_d_bouncing_ball_vr": {
+			"capacity": "WATCH a bouncing ball as a clock that runs down — each bounce measures how much the universe forgot",
+			"category": "physics",
+			"complexity": "beginner",
+			"description": "A ball trapped in a box, slowly dying. Position accumulates velocity, velocity accumulates gravity, walls reverse and damp. Each bounce lower than the last as elasticity drains energy. A trail draws the ball's parabolic history as a fading line. The simplest dynamics: one force, one constraint, and the slow settling as the universe forgets.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, Nature of Code",
+			"include_in_map_data": true,
+			"interactions": [
+				"watch ball bounce with trail",
+				"observe parabolic arcs between bounces",
+				"see energy decay through diminishing heights"
+			],
+			"lookup_name": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "3D Bouncing Ball",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Pure F with dissipation — gravity is constant F, the wall's elasticity coefficient IS lambda. At e=1.0 energy is conserved forever. Below 1.0, each bounce leaks energy into the wall. Lambda controls how fast the system forgets its initial conditions.",
+			"scene": "res://algorithms/vectors/noc_ch01/exercise_1_3_solution_3_d_bouncing_ball_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"bouncing",
+				"ball",
+				"gravity",
+				"trail",
+				"energy_decay",
+				"elasticity",
+				"nature_of_code",
+				"vr"
+			]
+		},
+		"exercise_1_5_solution_accelerate_and_decelerate_vr": {
+			"capacity": "SEE that smooth deceleration emerges from scaling desired speed by distance — arrival is a feedback loop, not a decision",
+			"category": "physics",
+			"complexity": "beginner",
+			"description": "A ball chases a moving target, steering with arrival behavior — accelerating toward the target and decelerating as it approaches. The target traces sinusoidal curves through 3D space. When far, the ball applies maximum force. When close, force scales down proportionally, producing smooth deceleration. Seek behavior with distance-based speed ramping.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, Nature of Code",
+			"include_in_map_data": true,
+			"interactions": [
+				"watch ball chase moving target",
+				"observe acceleration phase vs deceleration phase",
+				"see smooth arrival behavior"
+			],
+			"lookup_name": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "Accelerate and Decelerate",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "F-feedback — the steering force depends on the gap between current and desired velocity. Close to the target, F diminishes. This is a self-regulating system: the closer you get, the gentler the approach. Negative feedback as navigation strategy.",
+			"scene": "res://algorithms/vectors/noc_ch01/exercise_1_5_solution_accelerate_and_decelerate_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"steering",
+				"arrival",
+				"acceleration",
+				"deceleration",
+				"seek",
+				"feedback",
+				"nature_of_code",
+				"vr"
+			]
+		},
+		"exercise_1_8_solution_attraction_magnitude_vr": {
+			"capacity": "FEEL that an orbit is a perpetual fall that always misses the ground — attraction creates structure from distance and direction",
+			"category": "physics",
+			"complexity": "beginner",
+			"description": "Inverse-square attraction. Closer means stronger. A ball orbits a grabbable attractor — drag it in VR and the orbit reshapes in real time. Elliptical paths emerge from the interplay of tangential velocity and radial pull. F = strength * dir / r-squared. An orbit is a perpetual fall that always misses the ground.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"gamwell_reference": "Classical mechanics, Newtonian dynamics, Nature of Code",
+			"include_in_map_data": true,
+			"interactions": [
+				"grab attractor sphere in VR and drag",
+				"adjust attraction strength slider",
+				"observe elliptical orbit formation",
+				"watch orbit reshape when attractor moves"
+			],
+			"lookup_name": "exercise_1_8_solution_attraction_magnitude_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "Attraction and Orbit",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "F as geometry — inverse-square means force IS a function of distance. The orbit shape encodes the relationship between speed and attraction. Move the attractor mid-orbit and watch deterministic chaos: same law, different trajectory.",
+			"scene": "res://algorithms/vectors/noc_ch01/exercise_1_8_solution_attraction_magnitude_vr.tscn",
+			"size_group": "compact",
+			"tags": [
+				"attraction",
+				"orbit",
+				"inverse_square",
+				"gravity",
+				"grabbable",
+				"interactive",
+				"nature_of_code",
+				"vr"
+			]
+		},
+		"gravity_gun_test_scene": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "gravity_gun_test_scene",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "gravity_gun_test_scene",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "gravity_gun_test_scene",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/08_vector_throwing/destructibles/gravity_gun_test_scene.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			]
+		},
+		"hl_turret_vectors": {
+			"category": "mathematics",
+			"class_name": "HLTurretVectors",
+			"complexity": "intermediate",
+			"description": "Half-Life inspired sentry turret demonstrating ALL vector operations in one coherent system: subtraction (direction to target), magnitude (distance/range check), normalization (unit direction), dot product (FOV check), cross product (rotation axis), projection (ground plane), scalar multiplication (bullet velocity), and velocity integration (bullet physics). Fires tracer rounds with visible velocity vectors!",
+			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors",
 				"game_mechanics",
 				"applied_math",
 				"physics"
 			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "intermediate",
+			"footprint": [
+				11,
+				5,
+				20
+			],
+			"include_in_map_data": true,
+			"interactions": [
+				"grab target sphere to move it",
+				"preset buttons for scenarios",
+				"SPACE to manual fire",
+				"F to toggle auto-fire"
+			],
+			"lookup_name": "hl_turret_vectors",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Half-Life Turret - Vector Compendium",
+			"parameters": {
+				"barrel_length": "Length of gun barrel (default 0.25)",
+				"bullet_speed": "Bullet velocity in units/sec (default 4.0)",
+				"field_of_view_degrees": "Total FOV cone in degrees (default 90)",
+				"fire_rate": "Shots per second (default 3.0)",
+				"footprint": [
+					11,
+					5,
+					20
+				],
+				"max_range": "Maximum targeting range (default 2.5)",
+				"shooting_enabled": "Enable automatic firing (default true)",
+				"show_bullet_vectors": "Show velocity arrows on bullets (default true)",
+				"size_group": "xlarge",
+				"target_position": "Initial target position Vector3",
+				"tracking_speed": "How fast turret tracks target (default 2.0)",
+				"turret_height": "Height of turret barrel (default 0.4)"
+			},
+			"qfep_connection": "The turret as computational subject - vectors as the mathematics of surveillance, targeting, and ballistics. Shows how abstract math operations have immediate, embodied applications in games and simulations.",
+			"scene": "res://commons/artifacts/hl_turret_vectors/hl_turret_vectors.tscn",
+			"signals": [
+				"target_acquired",
+				"target_lost",
+				"bullet_fired",
+				"bullet_hit"
+			],
+			"size_group": "xlarge",
 			"tags": [
 				"vectors",
 				"all_operations",
@@ -63,369 +1506,45 @@
 				"velocity",
 				"physics",
 				"shooting"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
+			]
 		},
-		"vector_addition_demo": {
-			"lookup_name": "vector_addition_demo",
-			"scene": "res://commons/artifacts/vector_addition_demo/vector_addition_demo.tscn",
-			"class_name": "VectorAdditionDemo",
-			"name": "Vector Addition",
-			"description": "Interactive vector addition visualizer: A + B = C. Shows parallelogram law with head-to-tail placement and ghost arrows.",
-			"qfep_connection": "Composition - how separate movements combine into a single displacement",
-			"signals": [],
-			"interactions": [
-				"grab handle spheres to adjust vectors",
-				"preset buttons"
-			],
-			"parameters": {
-				"vector_a": "First vector",
-				"vector_b": "Second vector",
-				"max_vector_length": "Maximum allowed vector length"
-			},
-			"dev_themes": [
-				"vectors"
-			],
-			"dev_category": "vector_operations",
+		"laser_turret": {
 			"category": "mathematics",
+			"class_name": "LaserTurret",
 			"complexity": "beginner",
-			"tags": [
-				"vectors",
-				"addition",
-				"parallelogram",
-				"interactive"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
-			],
-			"sequence": "forces"
-		},
-		"vector_subtraction_demo": {
-			"lookup_name": "vector_subtraction_demo",
-			"scene": "res://commons/artifacts/vector_subtraction_demo/vector_subtraction_demo.tscn",
-			"class_name": "VectorSubtractionDemo",
-			"name": "Vector Subtraction",
-			"description": "Interactive vector subtraction: A - B = C. Shows how subtraction finds the difference vector between two points.",
-			"qfep_connection": "Difference and direction - finding what separates two states",
-			"dev_themes": [
-				"vectors"
-			],
+			"description": "Standalone laser turret that auto-targets and destroys balls. Place separately from ball_dropper to customize layout. Demonstrates vector subtraction (direction), magnitude (range), normalization (aim), dot product (lock).",
 			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "beginner",
-			"tags": [
-				"vectors",
-				"subtraction",
-				"direction",
-				"interactive"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"vector_magnitude_demo": {
-			"lookup_name": "vector_magnitude_demo",
-			"scene": "res://commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.tscn",
-			"class_name": "VectorMagnitudeDemo",
-			"name": "Vector Magnitude",
-			"description": "Visualizes vector magnitude (length) using Pythagorean theorem. Shows |V| = √(x² + y² + z²).",
-			"qfep_connection": "Measurement - quantifying the 'amount' of a vector regardless of direction",
-			"dev_themes": [
-				"vectors"
-			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "beginner",
-			"tags": [
-				"vectors",
-				"magnitude",
-				"length",
-				"pythagorean",
-				"interactive"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
-			],
-			"sequence": "forces"
-		},
-		"vector_normalize_demo": {
-			"lookup_name": "vector_normalize_demo",
-			"scene": "res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn",
-			"class_name": "VectorNormalizeDemo",
-			"name": "Vector Normalization",
-			"description": "Shows normalization: V̂ = V/|V|. Converts any vector to unit length while preserving direction.",
-			"qfep_connection": "Pure direction - stripping magnitude to reveal only orientation",
-			"dev_themes": [
-				"vectors"
-			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "beginner",
-			"tags": [
-				"vectors",
-				"normalize",
-				"unit_vector",
-				"direction",
-				"interactive"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
-			],
-			"sequence": "forces"
-		},
-		"dot_product_projector": {
-			"lookup_name": "dot_product_projector",
-			"scene": "res://commons/artifacts/dot_product_projector/dot_product_projector.tscn",
-			"class_name": "DotProductProjector",
-			"name": "Dot Product Projector",
-			"description": "Interactive dot product visualizer showing A · B = |A||B|cos(θ). Demonstrates projection and alignment measurement.",
-			"qfep_connection": "Dot product as alignment - measuring how much two directions agree or oppose",
-			"signals": [],
-			"interactions": [
-				"grab handle spheres",
-				"preset configurations"
-			],
-			"parameters": {
-				"vector_a": "Vector being projected",
-				"vector_b": "Vector projected onto"
-			},
-			"dev_themes": [
-				"vectors"
-			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "intermediate",
-			"tags": [
-				"vectors",
-				"dot_product",
-				"projection",
-				"angle",
-				"cosine",
-				"interactive"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
-			],
-			"sequence": "forces"
-		},
-		"cross_product_demo": {
-			"lookup_name": "cross_product_demo",
-			"scene": "res://commons/artifacts/cross_product_demo/cross_product_demo.tscn",
-			"class_name": "CrossProductDemo",
-			"name": "Cross Product Demo",
-			"description": "Interactive cross product: A × B produces a vector perpendicular to both. Shows parallelogram area and right-hand rule.",
-			"qfep_connection": "Cross product as emergence - a third direction arising from two, perpendicularity as difference",
-			"signals": [],
-			"interactions": [
-				"grab handle spheres",
-				"preset configurations"
-			],
-			"parameters": {
-				"vector_a": "First vector",
-				"vector_b": "Second vector"
-			},
-			"dev_themes": [
-				"vectors"
-			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "intermediate",
-			"tags": [
-				"vectors",
-				"cross_product",
-				"perpendicular",
-				"area",
-				"right_hand_rule",
-				"interactive"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
-			],
-			"sequence": "forces"
-		},
-		"vector_projection_demo": {
-			"lookup_name": "vector_projection_demo",
-			"scene": "res://commons/artifacts/vector_projection_demo/vector_projection_demo.tscn",
-			"class_name": "VectorProjectionDemo",
-			"name": "Vector Projection",
-			"description": "Visualizes vector projection onto another vector or plane. Shows shadow/component decomposition.",
-			"qfep_connection": "Projection as filtering - extracting the component in a particular direction",
-			"dev_themes": [
-				"vectors"
-			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "intermediate",
-			"tags": [
-				"vectors",
-				"projection",
-				"shadow",
-				"component",
-				"interactive"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"vector_translation_demo": {
-			"lookup_name": "vector_translation_demo",
-			"scene": "res://commons/artifacts/vector_translation_demo/vector_translation_demo.tscn",
-			"class_name": "VectorTranslationDemo",
-			"name": "Vector Translation",
-			"description": "Shows vectors as displacements in space. Position vectors and translation vectors.",
-			"qfep_connection": "Translation as movement - vectors as instructions for displacement",
-			"dev_themes": [
-				"vectors",
-				"transforms"
-			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "beginner",
-			"tags": [
-				"vectors",
-				"translation",
-				"displacement",
-				"position",
-				"interactive"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"basis_vectors_rig": {
-			"lookup_name": "basis_vectors_rig",
-			"scene": "res://commons/artifacts/basis_vectors_rig/basis_vectors_rig.tscn",
-			"class_name": "BasisVectorsRig",
-			"name": "Basis Vectors Rig",
-			"description": "Interactive basis vectors (î, ĵ, k̂) showing how any 3D point is a linear combination: P = xî + yĵ + zk̂.",
-			"qfep_connection": "Basis as frame of reference - the coordinate system from which we measure all positions",
-			"signals": [],
-			"interactions": [
-				"grab and rotate basis",
-				"move target point",
-				"preset configurations"
-			],
-			"parameters": {
-				"target_point": "Point to decompose into basis components",
-				"axis_length": "Length of basis arrows"
-			},
-			"dev_themes": [
-				"vectors",
-				"linear_algebra"
-			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "intermediate",
-			"tags": [
-				"vectors",
-				"basis",
-				"coordinate_system",
-				"linear_combination",
-				"interactive"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
-			],
-			"sequence": "forces"
-		},
-		"turret_targeting": {
-			"lookup_name": "turret_targeting",
-			"scene": "res://commons/artifacts/turret_targeting/turret_targeting.tscn",
-			"class_name": "TurretTargeting",
-			"name": "Turret Targeting (Combined)",
-			"description": "Combined turret + ball dropper setup. Laser turret tracks and destroys falling balls. Use laser_turret and ball_dropper separately for custom arrangements.",
-			"qfep_connection": "Targeting as embodied vector math - the turret performs subtraction, normalization, and dot product continuously to track moving targets.",
-			"signals": [
-				"ball_destroyed",
-				"target_acquired",
-				"target_lost"
-			],
-			"interactions": [
-				"DROP BALL button",
-				"RESET button",
-				"AUTO toggle"
-			],
-			"parameters": {
-				"turret_position": "Position of turret base (default 0,0,0)",
-				"dropper_offset": "Offset of ball dropper from turret (default 0,3,2)",
-				"drop_interval": "Seconds between ball drops (default 2.5)",
-				"max_balls": "Maximum balls alive at once (default 4)",
-				"detection_range": "Turret targeting range (default 8.0)",
-				"burn_time": "Time laser burns before explosion (default 0.3)",
-				"laser_color": "Color of laser beam (default red)",
-				"show_controls": "Show VR control panel (default true)"
-			},
 			"dev_themes": [
 				"vectors",
 				"game_mechanics",
 				"applied_math"
 			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "beginner",
-			"tags": [
-				"vectors",
-				"subtraction",
-				"magnitude",
-				"normalize",
-				"dot_product",
-				"turret",
-				"targeting",
-				"interactive",
-				"game",
-				"laser",
-				"vr"
-			],
 			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"laser_turret": {
-			"lookup_name": "laser_turret",
-			"scene": "res://commons/artifacts/turret_targeting/laser_turret.tscn",
-			"class_name": "LaserTurret",
-			"name": "Laser Turret",
-			"description": "Standalone laser turret that auto-targets and destroys balls. Place separately from ball_dropper to customize layout. Demonstrates vector subtraction (direction), magnitude (range), normalization (aim), dot product (lock).",
-			"qfep_connection": "The turret as computational subject - continuously computing direction vectors to track moving targets.",
-			"signals": [
-				"ball_destroyed",
-				"target_acquired",
-				"target_lost"
-			],
 			"interactions": [
 				"Automatic targeting - no direct interaction needed"
 			],
+			"lookup_name": "laser_turret",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "Laser Turret",
 			"parameters": {
-				"rotation_speed": "Turret rotation speed in rad/s (default 4.0)",
+				"auto_target": "Auto-acquire targets (default true)",
+				"burn_time": "Laser burn time before explosion (default 0.35)",
 				"detection_range": "Maximum targeting range (default 10.0)",
 				"fire_delay": "Lock time before firing (default 0.25)",
-				"burn_time": "Laser burn time before explosion (default 0.35)",
 				"laser_color": "Color of laser beam (default red)",
-				"auto_target": "Auto-acquire targets (default true)",
+				"rotation_speed": "Turret rotation speed in rad/s (default 4.0)",
 				"target_closest": "Prioritize closest target (default true)"
 			},
-			"dev_themes": [
-				"vectors",
-				"game_mechanics",
-				"applied_math"
+			"qfep_connection": "The turret as computational subject - continuously computing direction vectors to track moving targets.",
+			"scene": "res://commons/artifacts/turret_targeting/laser_turret.tscn",
+			"signals": [
+				"ball_destroyed",
+				"target_acquired",
+				"target_lost"
 			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "beginner",
 			"tags": [
 				"vectors",
 				"subtraction",
@@ -435,90 +1554,46 @@
 				"turret",
 				"laser",
 				"standalone"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"ball_dropper": {
-			"lookup_name": "ball_dropper",
-			"scene": "res://commons/artifacts/turret_targeting/ball_dropper.tscn",
-			"class_name": "BallDropper",
-			"name": "Ball Dropper",
-			"description": "Drops colorful physics balls one at a time. Pair with laser_turret for targeting demo. Balls cycle through colors and have configurable physics properties.",
-			"qfep_connection": "Entropy source - introducing moving targets into the system for the turret to track.",
-			"signals": [
-				"ball_spawned",
-				"ball_destroyed"
-			],
-			"interactions": [
-				"Automatic dropping - configure via parameters"
-			],
-			"parameters": {
-				"drop_interval": "Seconds between drops (default 3.0)",
-				"auto_drop": "Enable automatic dropping (default true)",
-				"max_balls": "Maximum balls alive at once (default 5)",
-				"ball_radius": "Size of balls (default 0.1)",
-				"ball_mass": "Mass for physics (default 0.5)",
-				"ball_bounce": "Bounciness (default 0.7)",
-				"spawn_spread": "Random XZ spread (default 0.3)",
-				"initial_velocity": "Starting velocity Vector3"
-			},
-			"dev_themes": [
-				"vectors",
-				"physics",
-				"spawning"
-			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "beginner",
-			"tags": [
-				"balls",
-				"physics",
-				"spawner",
-				"dropper",
-				"colorful",
-				"standalone"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"forces"
-			],
-			"sequence": "forces"
+			]
 		},
 		"sentry_turret": {
-			"lookup_name": "sentry_turret",
-			"scene": "res://commons/artifacts/sentry_turret/sentry_turret.tscn",
+			"category": "mathematics",
 			"class_name": "SentryTurret",
-			"name": "Sentry Turret",
+			"complexity": "beginner",
 			"description": "Half-Life style sentry turret. Targets balls and/or player. Simple reliable targeting with bullet physics. Emits signals for hits.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"game_mechanics",
+				"targeting"
+			],
+			"include_in_map_data": true,
+			"interactions": [
+				"Automatic - targets balls and player"
+			],
+			"lookup_name": "sentry_turret",
+			"map_ready": true,
+			"map_sequences": [
+				"testmaps"
+			],
+			"name": "Sentry Turret",
+			"parameters": {
+				"bullet_speed": "Bullet velocity (default 20.0)",
+				"detection_range": "Maximum targeting range (default 15.0)",
+				"fire_rate": "Shots per second (default 5.0)",
+				"rotation_speed": "Turret rotation speed (default 5.0)",
+				"target_balls": "Target balls from droppers (default true)",
+				"target_player": "Target the player/camera (default true)"
+			},
 			"qfep_connection": "The turret as autonomous agent - continuously computing vectors to track and engage targets.",
+			"scene": "res://commons/artifacts/sentry_turret/sentry_turret.tscn",
+			"sequence": "forces",
 			"signals": [
 				"target_acquired",
 				"target_lost",
 				"fired",
 				"hit_target"
 			],
-			"interactions": [
-				"Automatic - targets balls and player"
-			],
-			"parameters": {
-				"rotation_speed": "Turret rotation speed (default 5.0)",
-				"detection_range": "Maximum targeting range (default 15.0)",
-				"fire_rate": "Shots per second (default 5.0)",
-				"bullet_speed": "Bullet velocity (default 20.0)",
-				"target_player": "Target the player/camera (default true)",
-				"target_balls": "Target balls from droppers (default true)"
-			},
-			"dev_themes": [
-				"vectors",
-				"game_mechanics",
-				"targeting"
-			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "beginner",
 			"tags": [
 				"turret",
 				"sentry",
@@ -527,34 +1602,104 @@
 				"halflife",
 				"player",
 				"balls"
+			]
+		},
+		"sphere_splitting_showcase": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "sphere_splitting_showcase.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				18.0,
+				18.0,
+				18.0
 			],
 			"include_in_map_data": true,
+			"lookup_name": "sphere_splitting_showcase",
 			"map_ready": true,
 			"map_sequences": [
 				"forces"
 			],
-			"sequence": "forces"
+			"name": "sphere_splitting_showcase",
+			"parameters": {
+				"footprint": [
+					18.0,
+					18.0,
+					18.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/vectors/08_vector_throwing/sphere_splitting_showcase.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"vector"
+			]
+		},
+		"throw_ball": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "throw_ball.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "throw_ball",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "throw_ball",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/08_vector_throwing/throw_ball.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			]
 		},
 		"turret_boll_infoboard": {
-			"lookup_name": "turret_boll_infoboard",
-			"scene": "res://commons/infoboards_3d/boards/TurretBoll/2d_in_3d_turretboll_vis.tscn",
+			"category": "mathematics",
 			"class_name": "TurretBollInfoBoard",
-			"name": "Turret-Boll Vector Diagram",
+			"complexity": "beginner",
 			"description": "3m × 6m semi-transparent infoboard showing ALL vector operations in one static diagram: subtraction (direction), magnitude (range), normalization (aim), dot product (lock), projection (prediction). Visual reference for turret targeting math.",
-			"qfep_connection": "The diagram as pedagogical synthesis - all vector operations unified through the targeting metaphor, showing how abstract math becomes embodied behavior.",
-			"signals": [],
-			"interactions": [
-				"Static display - no interaction"
-			],
-			"parameters": {},
+			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors",
 				"infoboard",
 				"reference"
 			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "beginner",
+			"include_in_map_data": true,
+			"interactions": [
+				"Static display - no interaction"
+			],
+			"lookup_name": "turret_boll_infoboard",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Turret-Boll Vector Diagram",
+			"parameters": {},
+			"qfep_connection": "The diagram as pedagogical synthesis - all vector operations unified through the targeting metaphor, showing how abstract math becomes embodied behavior.",
+			"scene": "res://commons/infoboards_3d/boards/TurretBoll/2d_in_3d_turretboll_vis.tscn",
+			"sequence": "forces",
+			"signals": [],
 			"tags": [
 				"vectors",
 				"infoboard",
@@ -567,37 +1712,272 @@
 				"turret",
 				"reference",
 				"diagram"
+			]
+		},
+		"turret_targeting": {
+			"category": "mathematics",
+			"class_name": "TurretTargeting",
+			"complexity": "beginner",
+			"description": "Combined turret + ball dropper setup. Laser turret tracks and destroys falling balls. Use laser_turret and ball_dropper separately for custom arrangements.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"game_mechanics",
+				"applied_math"
 			],
 			"include_in_map_data": true,
+			"interactions": [
+				"DROP BALL button",
+				"RESET button",
+				"AUTO toggle"
+			],
+			"lookup_name": "turret_targeting",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Turret Targeting (Combined)",
+			"parameters": {
+				"burn_time": "Time laser burns before explosion (default 0.3)",
+				"detection_range": "Turret targeting range (default 8.0)",
+				"drop_interval": "Seconds between ball drops (default 2.5)",
+				"dropper_offset": "Offset of ball dropper from turret (default 0,3,2)",
+				"footprint": [
+					2.0,
+					3.0,
+					3.0
+				],
+				"laser_color": "Color of laser beam (default red)",
+				"max_balls": "Maximum balls alive at once (default 4)",
+				"show_controls": "Show VR control panel (default true)",
+				"size_group": "room_scale",
+				"turret_position": "Position of turret base (default 0,0,0)"
+			},
+			"qfep_connection": "Targeting as embodied vector math - the turret performs subtraction, normalization, and dot product continuously to track moving targets.",
+			"scene": "res://commons/artifacts/turret_targeting/turret_targeting.tscn",
+			"signals": [
+				"ball_destroyed",
+				"target_acquired",
+				"target_lost"
+			],
+			"tags": [
+				"vectors",
+				"subtraction",
+				"magnitude",
+				"normalize",
+				"dot_product",
+				"turret",
+				"targeting",
+				"interactive",
+				"game",
+				"laser",
+				"vr"
+			]
+		},
+		"vector_addition_demo": {
+			"category": "mathematics",
+			"class_name": "VectorAdditionDemo",
+			"complexity": "beginner",
+			"description": "Interactive vector addition visualizer: A + B = C. Shows parallelogram law with head-to-tail placement and ghost arrows.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
+			],
+			"footprint": [
+				4,
+				2,
+				4
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab handle spheres to adjust vectors",
+				"preset buttons"
+			],
+			"lookup_name": "vector_addition_demo",
 			"map_ready": true,
 			"map_sequences": [
 				"forces"
 			],
-			"sequence": "forces"
+			"name": "Vector Addition",
+			"parameters": {
+				"footprint": [
+					4,
+					2,
+					4
+				],
+				"max_vector_length": "Maximum allowed vector length",
+				"size_group": "xlarge",
+				"vector_a": "First vector",
+				"vector_b": "Second vector"
+			},
+			"qfep_connection": "Composition - how separate movements combine into a single displacement",
+			"scene": "res://commons/artifacts/vector_addition_demo/vector_addition_demo.tscn",
+			"sequence": "forces",
+			"signals": [],
+			"size_group": "xlarge",
+			"tags": [
+				"vectors",
+				"addition",
+				"parallelogram",
+				"interactive"
+			]
+		},
+		"vector_addition_walk": {
+			"category": "mathematics",
+			"class_name": "VectorAdditionWalk",
+			"complexity": "beginner",
+			"description": "Player-scale 3D vector addition. Walk inside a 3m coordinate grid, grab vector endpoints at body height, see parallelogram construction and component projections in real space.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
+			],
+			"footprint": [
+				4,
+				4,
+				4
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab handle spheres to adjust vectors A and B",
+				"walk through the grid to see components",
+				"preset buttons for orthogonal/acute/3D configurations"
+			],
+			"lookup_name": "vector_addition_walk",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Vector Addition Walk (Room Scale)",
+			"parameters": {
+				"footprint": [
+					4,
+					4,
+					4
+				],
+				"grid_divisions": "Grid lines per axis (default 6)",
+				"grid_size": "Size of walkable grid in meters (default 3.0)",
+				"max_vector_length": "Maximum vector length (default 2.5)",
+				"size_group": "xlarge",
+				"vector_a": "First vector (default 1.5, 0.5, 0)",
+				"vector_b": "Second vector (default 0.3, 1.2, 0.8)"
+			},
+			"qfep_connection": "Embodied composition: you ARE inside the vector space. Walk along X to feel the X component. Addition becomes spatial, not symbolic.",
+			"scene": "res://commons/artifacts/vector_addition_walk/vector_addition_walk.tscn",
+			"sequence": "forces",
+			"signals": [],
+			"size_group": "xlarge",
+			"tags": [
+				"vectors",
+				"addition",
+				"parallelogram",
+				"room-scale",
+				"walkable"
+			]
+		},
+		"vector_drone": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "vector_drone",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vector_drone",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "vector_drone",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/08_vector_throwing/vector_drone.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vector"
+			]
+		},
+		"vector_field_visualizer": {
+			"category": "mathematics",
+			"class_name": "VectorFieldVisualizer",
+			"complexity": "intermediate",
+			"description": "3D arrow field showing flow — vortex, source, sink, or dipole fields. An 8x8x4 grid of arrow glyphs colored by magnitude (blue=slow, red=fast). Each arrow drawn with ImmediateMesh lines for shaft and arrowhead.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"fields",
+				"visualization"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vector_field_visualizer",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Vector Field Visualizer",
+			"qfep_connection": "Vector fields as continuous flow — every point in space carries a direction, the field as a living topology of force and movement.",
+			"scene": "res://commons/artifacts/vector_field_visualizer/vector_field_visualizer.tscn",
+			"tags": [
+				"vectors",
+				"vector_field",
+				"flow",
+				"vortex",
+				"dipole",
+				"source",
+				"sink",
+				"arrows",
+				"3d",
+				"magnitude",
+				"direction"
+			]
 		},
 		"vector_joint_playground": {
-			"lookup_name": "vector_joint_playground",
-			"scene": "res://algorithms/vectors/playground/vector_joint_playground.tscn",
+			"category": "mathematics",
 			"class_name": "VectorJointPlayground",
-			"name": "Vector-Joint Playground",
+			"complexity": "intermediate",
 			"description": "Human-scale VR playground with 6 interactive stations. Each station pairs draggable vectors with a large physics joint mechanism: crane (magnitude), pistons (addition), door (dot product), seesaw (subtraction), waterwheel (cross product), spring tower (forces). Drag a vector, watch the machine respond.",
-			"qfep_connection": "Vectors as embodied forces — abstract math becomes physical machinery that moves, tilts, spins, and bounces at human scale",
-			"signals": [],
-			"interactions": [
-				"grab vector endpoints to manipulate",
-				"observe mechanism responses",
-				"read live math on info panels"
-			],
-			"parameters": {},
+			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors",
 				"joints",
 				"physics",
 				"interactive"
 			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab vector endpoints to manipulate",
+				"observe mechanism responses",
+				"read live math on info panels"
+			],
+			"lookup_name": "vector_joint_playground",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Vector-Joint Playground",
+			"parameters": {
+				"footprint": [
+					18.0,
+					2.0,
+					18.0
+				],
+				"size_group": "world_scale"
+			},
+			"qfep_connection": "Vectors as embodied forces — abstract math becomes physical machinery that moves, tilts, spins, and bounces at human scale",
+			"scene": "res://algorithms/vectors/playground/vector_joint_playground.tscn",
+			"sequence": "vectors",
+			"signals": [],
 			"tags": [
 				"vectors",
 				"joints",
@@ -611,96 +1991,287 @@
 				"interactive",
 				"vr",
 				"human_scale"
+			]
+		},
+		"vector_magnitude_demo": {
+			"category": "mathematics",
+			"class_name": "VectorMagnitudeDemo",
+			"complexity": "beginner",
+			"description": "Visualizes vector magnitude (length) using Pythagorean theorem. Shows |V| = √(x² + y² + z²).",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
+			],
+			"footprint": [
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": []
-		},
-		"vector_field_visualizer": {
-			"lookup_name": "vector_field_visualizer",
-			"scene": "res://commons/artifacts/vector_field_visualizer/vector_field_visualizer.tscn",
-			"class_name": "VectorFieldVisualizer",
-			"name": "Vector Field Visualizer",
-			"description": "3D arrow field showing flow — vortex, source, sink, or dipole fields. An 8x8x4 grid of arrow glyphs colored by magnitude (blue=slow, red=fast). Each arrow drawn with ImmediateMesh lines for shaft and arrowhead.",
-			"qfep_connection": "Vector fields as continuous flow — every point in space carries a direction, the field as a living topology of force and movement.",
-			"dev_themes": [
-				"vectors",
-				"fields",
-				"visualization"
+			"interaction": "grab",
+			"interactions": [
+				"grab"
 			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "intermediate",
+			"lookup_name": "vector_magnitude_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"transformation"
+			],
+			"name": "Vector Magnitude",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Measurement - quantifying the 'amount' of a vector regardless of direction",
+			"scene": "res://commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.tscn",
+			"sequence": "forces",
+			"size_group": "compact",
 			"tags": [
 				"vectors",
-				"vector_field",
-				"flow",
-				"vortex",
-				"dipole",
-				"source",
-				"sink",
-				"arrows",
-				"3d",
 				"magnitude",
-				"direction"
+				"length",
+				"pythagorean",
+				"interactive"
+			]
+		},
+		"vector_normalize_demo": {
+			"category": "mathematics",
+			"class_name": "VectorNormalizeDemo",
+			"complexity": "beginner",
+			"description": "Shows normalization: V̂ = V/|V|. Converts any vector to unit length while preserving direction.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
 			],
 			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": ["forces"]
-		},
-		"coordinate_system_switcher": {
-			"lookup_name": "coordinate_system_switcher",
-			"scene": "res://commons/artifacts/coordinate_system_switcher/coordinate_system_switcher.tscn",
-			"class_name": "CoordinateSystemSwitcher",
-			"name": "Coordinate System Switcher",
-			"description": "Shows the same 3D point in Cartesian (x,y,z), Cylindrical (r,θ,z), and Spherical (ρ,θ,φ) coordinates simultaneously. ImmediateMesh axes and arcs with projection lines showing how each system maps. Color-coded: Cartesian=RGB, Cylindrical=yellow, Spherical=magenta.",
-			"qfep_connection": "Multiple coordinate systems as multiple perspectives on the same reality — the point doesn't change, only the language describing it.",
-			"dev_themes": [
-				"vectors",
-				"coordinate_systems",
-				"visualization"
+			"interaction": "grab",
+			"interactions": [
+				"grab"
 			],
-			"dev_category": "vector_operations",
-			"category": "mathematics",
-			"complexity": "intermediate",
+			"lookup_name": "vector_normalize_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"forces",
+				"testmaps",
+				"transformation"
+			],
+			"name": "Vector Normalization",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Pure direction - stripping magnitude to reveal only orientation",
+			"scene": "res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn",
+			"sequence": "forces",
 			"tags": [
 				"vectors",
-				"coordinates",
-				"cartesian",
-				"cylindrical",
-				"spherical",
-				"polar",
-				"conversion",
-				"3d",
-				"visualization"
+				"normalize",
+				"unit_vector",
+				"direction",
+				"interactive"
+			]
+		},
+		"vector_projection_demo": {
+			"category": "mathematics",
+			"class_name": "VectorProjectionDemo",
+			"complexity": "intermediate",
+			"description": "Visualizes vector projection onto another vector or plane. Shows shadow/component decomposition.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
+			],
+			"footprint": [
+				2,
+				3,
+				3
 			],
 			"include_in_map_data": true,
+			"lookup_name": "vector_projection_demo",
 			"map_ready": true,
-			"map_sequences": ["vectors"]
+			"map_sequences": [],
+			"name": "Vector Projection",
+			"parameters": {
+				"footprint": [
+					2,
+					3,
+					3
+				],
+				"size_group": "large"
+			},
+			"qfep_connection": "Projection as filtering - extracting the component in a particular direction",
+			"scene": "res://commons/artifacts/vector_projection_demo/vector_projection_demo.tscn",
+			"size_group": "large",
+			"tags": [
+				"vectors",
+				"projection",
+				"shadow",
+				"component",
+				"interactive"
+			]
+		},
+		"vector_subtraction_demo": {
+			"category": "mathematics",
+			"class_name": "VectorSubtractionDemo",
+			"complexity": "beginner",
+			"description": "Interactive vector subtraction: A - B = C. Shows how subtraction finds the difference vector between two points.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors"
+			],
+			"footprint": [
+				3,
+				3,
+				4
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vector_subtraction_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Vector Subtraction",
+			"parameters": {
+				"footprint": [
+					3,
+					3,
+					4
+				],
+				"size_group": "xlarge"
+			},
+			"qfep_connection": "Difference and direction - finding what separates two states",
+			"scene": "res://commons/artifacts/vector_subtraction_demo/vector_subtraction_demo.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"vectors",
+				"subtraction",
+				"direction",
+				"interactive"
+			]
+		},
+		"vector_translation_demo": {
+			"category": "mathematics",
+			"class_name": "VectorTranslationDemo",
+			"complexity": "beginner",
+			"description": "Shows vectors as displacements in space. Position vectors and translation vectors.",
+			"dev_category": "vector_operations",
+			"dev_themes": [
+				"vectors",
+				"transforms"
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab"
+			],
+			"lookup_name": "vector_translation_demo",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Vector Translation",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Translation as movement - vectors as instructions for displacement",
+			"scene": "res://commons/artifacts/vector_translation_demo/vector_translation_demo.tscn",
+			"tags": [
+				"vectors",
+				"translation",
+				"displacement",
+				"position",
+				"interactive"
+			]
+		},
+		"vectorline": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Interactive vector line with arrowhead",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				2.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vectorline",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "vectorline",
+			"parameters": {
+				"footprint": [
+					2.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/vectorline/vectorline.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra"
+			]
+		},
+		"vectorpoint": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Vector axes demonstration scene with grab sphere and info panel for 3D position breakdowns.",
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vectorpoint",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "VectorPoint",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://algorithms/vectors/01_vector_basics/VectorPoint.tscn",
+			"size_group": "compact",
+			"tags": [
+				"3d",
+				"geometry",
+				"interactive",
+				"linear_algebra",
+				"vr"
+			]
 		}
 	},
+	"registry_info": {
+		"category": "mathematics",
+		"description": "Vector operation artifacts - addition, subtraction, magnitude, normalization, dot product, cross product, projection",
+		"name": "vectors",
+		"theoretical_grounding": "Linear algebra fundamentals, 3D graphics programming, physics simulation"
+	},
 	"sequence_mapping": {
-		"vector_fundamentals": [
-			"vector_addition_demo",
-			"vector_subtraction_demo",
-			"vector_magnitude_demo",
-			"vector_normalize_demo"
-		],
-		"vector_products": [
-			"dot_product_projector",
-			"cross_product_demo",
-			"vector_projection_demo"
-		],
-		"vector_applications": [
-			"hl_turret_vectors",
-			"turret_targeting",
-			"laser_turret",
-			"ball_dropper",
-			"turret_boll_infoboard",
-			"basis_vectors_rig",
-			"vector_joint_playground",
-			"vector_field_visualizer"
-		],
 		"all_vectors": [
 			"vector_addition_demo",
 			"vector_subtraction_demo",
@@ -718,19 +2289,30 @@
 			"vector_joint_playground",
 			"vector_field_visualizer",
 			"coordinate_system_switcher"
-		]
-	},
-	"theoretical_connections": {
-		"basic_operations": [
+		],
+		"vector_applications": [
+			"hl_turret_vectors",
+			"turret_targeting",
+			"laser_turret",
+			"ball_dropper",
+			"turret_boll_infoboard",
+			"basis_vectors_rig",
+			"vector_joint_playground",
+			"vector_field_visualizer"
+		],
+		"vector_fundamentals": [
 			"vector_addition_demo",
 			"vector_subtraction_demo",
 			"vector_magnitude_demo",
 			"vector_normalize_demo"
 		],
-		"product_operations": [
+		"vector_products": [
 			"dot_product_projector",
-			"cross_product_demo"
-		],
+			"cross_product_demo",
+			"vector_projection_demo"
+		]
+	},
+	"theoretical_connections": {
 		"applied_examples": [
 			"hl_turret_vectors",
 			"turret_targeting",
@@ -739,10 +2321,20 @@
 			"turret_boll_infoboard",
 			"vector_field_visualizer"
 		],
+		"basic_operations": [
+			"vector_addition_demo",
+			"vector_subtraction_demo",
+			"vector_magnitude_demo",
+			"vector_normalize_demo"
+		],
 		"coordinate_systems": [
 			"basis_vectors_rig",
 			"vector_translation_demo",
 			"coordinate_system_switcher"
+		],
+		"product_operations": [
+			"dot_product_projector",
+			"cross_product_demo"
 		]
 	}
 }

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Library Rack: One Artifact for Every Collection | Ada Research Blog</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 720px; margin: 0 auto; padding: 2rem; background: #0a0a0f; color: #d4d4d8; line-height: 1.8; }
+  h1 { color: #e4e4e7; font-size: 1.8rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+  h2 { color: #4ade80; font-size: 1.3rem; margin-top: 2.5rem; }
+  h3 { color: #67e8f9; font-size: 1.1rem; }
+  .date { color: #71717a; font-size: 0.9rem; }
+  .highlight { background: #0a1a0f; border-left: 3px solid #4ade80; padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 6px 6px 0; }
+  code { background: #0d2614; padding: 2px 6px; border-radius: 3px; font-size: 0.9rem; color: #4ade80; }
+  pre { background: #0d2614; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.85rem; color: #4ade80; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.5rem; margin: 1rem 0; }
+  .stat { text-align: center; background: #0a1a0f; padding: 0.6rem; border-radius: 4px; border: 1px solid rgba(74,222,128,0.2); }
+  .stat-num { font-size: 1.6rem; color: #4ade80; font-weight: bold; }
+  .stat-label { font-size: 0.75rem; color: #71717a; }
+  a { color: #67e8f9; }
+  .section-break { text-align: center; color: #333; margin: 2rem 0; letter-spacing: 1em; }
+  .img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.2rem 0; }
+  .img-row.triple { grid-template-columns: 1fr 1fr 1fr; }
+  .img-row img { width: 100%; border-radius: 6px; border: 1px solid rgba(74,222,128,0.2); }
+  .img-single { margin: 1.2rem 0; }
+  .img-single img { width: 100%; border-radius: 6px; border: 1px solid rgba(74,222,128,0.2); }
+  .img-caption { text-align: center; font-size: 0.8rem; color: #71717a; margin-top: 0.3rem; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  th, td { text-align: left; padding: 0.4rem 0.6rem; border-bottom: 1px solid #1a2a1f; font-size: 0.85rem; }
+  th { color: #4ade80; font-size: 0.75rem; text-transform: uppercase; }
+  .ascii { background: #0a1a0f; border: 1px solid rgba(74,222,128,0.2); border-radius: 6px; padding: 1rem; font-family: monospace; font-size: 1rem; color: #4ade80; white-space: pre; margin: 1rem 0; letter-spacing: 0.1em; }
+</style>
+</head>
+<body>
+
+<p class="date">April 2, 2026</p>
+<h1>The Library Rack: One Artifact for Every Collection</h1>
+
+<p>Ada Research has 1,687 artifacts across 47 registries. Until today, displaying a collection meant hand-placing each artifact in map_data.json, one cell at a time. A museum with 40 shaders meant 40 lines of JSON. The library rack changes that to one line:</p>
+
+<pre>library_rack:0:1.5#collection:shaders</pre>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">25</div><div class="stat-label">racks deployed</div></div>
+  <div class="stat"><div class="stat-num">12</div><div class="stat-label">shader shelves</div></div>
+  <div class="stat"><div class="stat-num">47</div><div class="stat-label">registries</div></div>
+  <div class="stat"><div class="stat-num">1</div><div class="stat-label">web editor</div></div>
+</div>
+
+<h2>The Shelf Pattern</h2>
+
+<p>Every library rack follows the same visual pattern. Empty slots are 1x1 cubes with the grid shader &mdash; black faces, off-white wireframe edges. Filled slots have 0.8-scale cubes inside with the artifact's actual material. No gap between cubes. No backplate. Open from both sides.</p>
+
+<div class="ascii">ooooooooooooo
+oxoxoxoxoxoxo
+ooooooooooooo</div>
+
+<p><code>o</code> = grid cube (shelf structure). <code>x</code> = artifact cube (content). The border of grid cubes frames the artifacts. Each map's <code>rack_layout.json</code> defines exactly which slots are filled and which are empty.</p>
+
+<h2>Shader Shelves</h2>
+
+<p>Each of the 12 shader lesson maps gets a unique shelf showing the shaders taught in that lesson. The cubes display the actual <code>.gdshader</code> materials &mdash; not placeholders. Shader_01 shows step, smoothstep, sin, pow, combined. Shader_05 shows tile, truchet, brick, voronoi, wang, offset, noise.</p>
+
+<div class="img-row triple">
+  <div><img src="images/rack-shader_01_shaping.png" alt="Shader 01 rack"><p class="img-caption">Shader_01: 5 shaping functions</p></div>
+  <div><img src="images/rack-shader_05_patterns.png" alt="Shader 05 rack"><p class="img-caption">Shader_05: 7 pattern types</p></div>
+  <div><img src="images/rack-shader_11_queerrubber.png" alt="Shader 11 rack"><p class="img-caption">Shader_11: 5 queer materials</p></div>
+</div>
+
+<table>
+  <tr><th>Map</th><th>Shaders</th><th>Shelf size</th></tr>
+  <tr><td>Shader_01_Shaping</td><td>step, smoothstep, sin, pow, combined</td><td>11x3</td></tr>
+  <tr><td>Shader_02_Colors</td><td>gradient, hsb, mix, rainbow</td><td>9x3</td></tr>
+  <tr><td>Shader_05_Patterns</td><td>tile, truchet, offset, brick, wang, voronoi, noise</td><td>15x3</td></tr>
+  <tr><td>Shader_07_Noise</td><td>value, gradient, simplex, warped</td><td>9x3</td></tr>
+  <tr><td>Shader_10_ReactionDiffusion</td><td>dla_visual, reaction_diffusion</td><td>5x3</td></tr>
+  <tr><td>Shader_11_QueerRubber</td><td>leather, oil_slick, pop_plastic, fur, sad_metal</td><td>11x3</td></tr>
+  <tr><td>Shader_12_PinkExtravaganza</td><td>candy, pearl, oil_slick, water, drag</td><td>11x3</td></tr>
+</table>
+
+<h2>Beyond Shaders</h2>
+
+<p>The same rack works for any registry. One config key, different collections:</p>
+
+<div class="img-row">
+  <div><img src="images/rack-primitives_platonic.png" alt="Primitives rack"><p class="img-caption">Primitives: platonic solids</p></div>
+  <div><img src="images/rack-hazards_zoo.png" alt="Hazards rack"><p class="img-caption">Hazards: 66 creatures and traps</p></div>
+</div>
+
+<div class="img-single">
+  <img src="images/rack-shader_arch_gallery.png" alt="Full shader collection">
+  <p class="img-caption">Shader_Arch_Gallery: all 12 lesson shaders in a 13x5 rack</p>
+</div>
+
+<h2>The Web Editor</h2>
+
+<p>At <code>/library</code> in the encyclopedia: a split-view drag-and-drop editor. Left side is the shelf grid &mdash; drag artifacts in, drag to dumpster to remove. Right side is the catalog organized by category. Click Save to write <code>rack_layout.json</code> to the map directory. The VR rack reads the same file at runtime.</p>
+
+<div class="highlight">
+<strong>The data flow:</strong> Web editor &rarr; rack_layout.json &rarr; VR library_rack.gd. One file, two surfaces. Edit on the web, experience in VR. Same pattern as the Science Screen.
+</div>
+
+<h2>How It Works</h2>
+
+<h3>VR: <code>library_rack.gd</code></h3>
+
+<p>On <code>apply_grid_config()</code>, reads the collection name, loads <code>rack_layout.json</code> from the map directory, builds a wall of cubes. Empty slots get 1x1 grid-shader cubes (<code>SimpleGrid.gdshader</code>, black model, off-white wireframe). Filled slots get 0.8 cubes with the artifact's shader material extracted from the scene or loaded directly from <code>.gdshader</code> paths.</p>
+
+<h3>Layout file</h3>
+
+<pre>{
+  "collection": "shaders",
+  "cols": 11, "rows": 3,
+  "slots": [
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, "res://...shaping_step.gdshader", null, "res://...shaping_smoothstep.gdshader", null, ...],
+    [null, null, null, null, null, null, null, null, null, null, null]
+  ]
+}</pre>
+
+<p><code>null</code> = grid cube. String starting with <code>res://</code> = shader path loaded directly onto a cube. String without <code>res://</code> = artifact lookup name resolved from the registry.</p>
+
+<h3>Web: <code>/library</code></h3>
+
+<p>Split view: shelf grid (left) + artifact catalog (right). Drag from catalog to shelf. Drag to dumpster to remove. Number inputs for cols/rows. Preset buttons load saved layouts from the API. Save writes to disk. Load reads from disk.</p>
+
+<div class="section-break">&middot; &middot; &middot;</div>
+
+<h2>What Changed</h2>
+
+<table>
+  <tr><th>Component</th><th>Change</th></tr>
+  <tr><td>library_rack.gd</td><td>Created &mdash; generalized from shader_bibliotek. Reads registry or rack_layout.json. Grid cubes with SimpleGrid shader. 0.8 artifact cubes with extracted materials.</td></tr>
+  <tr><td>rack_layout.json</td><td>Created for 12 shader maps + Shader_Arch_Gallery + 12 collection maps. Each curated per map.</td></tr>
+  <tr><td>/library web page</td><td>Split-view drag-and-drop editor. Save/Load via API. Preset buttons for all deployed racks.</td></tr>
+  <tr><td>/api/library</td><td>GET reads rack_layout.json from map dir. POST writes it.</td></tr>
+  <tr><td>Map compaction</td><td>30 expanded map_data.json files compacted (arrays on single lines).</td></tr>
+</table>
+
+<p class="date" style="margin-top: 2rem; border-top: 1px solid #1a2a1f; padding-top: 1rem;">Session: Library rack system &mdash; one artifact for every collection, web editor for curation, shader cubes with actual materials.</p>
+
+</body>
+</html>

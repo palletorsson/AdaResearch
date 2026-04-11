@@ -1,3 +1,13 @@
+# @identity
+# essence: project_4D(vertices, angle_xw, angle_yw) -> 3D -- wireframe tesseract rotating through 4th dimension
+# desire: a hypercube whose vertices phase in/out of hittability based on W-depth coordinate
+# critical_parameter: _angle_xw / _angle_yw -- 4D rotation angles determine which vertices reach 3D space
+# triggers: continuous 4D rotation; vertices phase by W-depth; only vertices near W=0 can be hit
+# emerges: the fourth dimension as combat mechanic -- the creature is partly elsewhere, and elsewhere rotates
+# needs: HazardCreatureBase [has]; 4D vertex/edge system [has]; projection [has]; W-depth hitbox [has]; VR interaction [missing]
+# relationships: embodies higher_dimensions sequence; the only creature partly outside 3D space
+# truth: the tesseract rotates through dimensions you cannot see -- vertices phase in and out by W-depth.
+
 extends HazardCreatureBase
 class_name TesseractPhaser
 ## Higher Dimensions hazard — a wireframe tesseract (4D hypercube) projected

@@ -1,0 +1,375 @@
+{
+	"schema": "adaresearch.space_grammar_rules.v2",
+	"title": "Space Grammar Rules",
+	"description": "Maps artifact size_group + interaction + world_phase to architectural staging recipes. The world transitions from rigid grid (lab) through erosion (transition) to organic regions (organic) and finally self-questioning forms (beyond). Rules evaluated in order; first match wins. Per-artifact overrides in grid_artifacts.json take precedence.",
+
+	"world_phases": {
+		"grid": {
+			"name": "The Lab",
+			"description": "Pure cubic architecture. Clean walls, flat floors, right angles. The grid is sovereign. Knowledge presented as specimens in a controlled environment.",
+			"sequences": ["primitives", "transformations", "color", "forces", "array_tutorial", "wavefunctions"],
+			"ground": "cube",
+			"material_palette": ["concrete", "white_tile", "steel", "glass"],
+			"phase_range": [0.0, 0.0]
+		},
+		"transition": {
+			"name": "Cracks in the Grid",
+			"description": "Randomness and noise begin to erode the lab. Cubes soften at edges. Organic textures bleed through floor seams. The grid still holds but something else is growing underneath.",
+			"sequences": ["randomness", "noise", "cellularautomata"],
+			"ground": "eroded_cube",
+			"material_palette": ["cracked_concrete", "moss_seam", "weathered_steel", "translucent"],
+			"phase_range": [0.1, 0.6]
+		},
+		"organic": {
+			"name": "The Living World",
+			"description": "Nature has taken over. Floors become terrain. Walls become ridges and canopy. Regions replace cells. The grid is still readable underneath but the living world defines the space now. Queer ecology — form that refuses the straight line.",
+			"sequences": ["fractals", "lsystems", "proceduralgeneration", "softbodies", "swarmintelligence", "machinelearning"],
+			"ground": "terrain",
+			"material_palette": ["moss", "bark", "stone", "water", "mycelium", "bioluminescence"],
+			"phase_range": [0.4, 1.0]
+		},
+		"beyond": {
+			"name": "The World Questions Itself",
+			"description": "After the organic takeover, the world becomes self-aware. Architecture that knows it is architecture. Spaces that reference their own incompleteness. The grid, the organic, and the paradox coexist.",
+			"sequences": ["foundationscrisis", "qfep", "postcrisis", "graphtheory"],
+			"ground": "meta",
+			"material_palette": ["void", "mirror", "wireframe", "ghost_grid", "impossible_surface"],
+			"phase_range": [0.0, 1.0]
+		}
+	},
+
+	"vocabulary": {
+		"staging": {
+			"grid": {
+				"pedestal": "Small raised cube (1x1), eye-level focus",
+				"table": "Waist-height cubic surface for grab interactions",
+				"plinth": "Tall cubic monument base for symbolic objects",
+				"alcove": "Rectangular niche cut into wall",
+				"platform": "Raised rectangular floor area",
+				"open_stage": "Floor-level area with rectilinear boundary markers",
+				"room": "Fully enclosed cubic space",
+				"hall": "Large rectangular interior",
+				"landscape": "No frame, artifact IS the space"
+			},
+			"transition": {
+				"eroded_pedestal": "Pedestal with cracked edges, moss in seams",
+				"weathered_table": "Table surface with organic texture bleeding through",
+				"cracked_plinth": "Plinth splitting open, roots visible inside",
+				"softened_alcove": "Alcove with rounded corners, organic erosion",
+				"buckling_platform": "Platform with uneven surface, terrain pushing up",
+				"dissolving_stage": "Floor boundary breaking into organic patches",
+				"breached_room": "Room with walls partially overtaken by growth",
+				"crumbling_hall": "Hall where ceiling opens to canopy",
+				"landscape": "No frame, artifact IS the space"
+			},
+			"organic": {
+				"mound": "Natural raised earth or moss mound replacing pedestal",
+				"stump": "Tree stump or rock shelf replacing table",
+				"standing_stone": "Vertical natural formation replacing plinth",
+				"grotto": "Natural cave-like enclosure replacing alcove",
+				"clearing": "Open ground patch defined by surrounding growth",
+				"glade": "Forest clearing with natural boundary (trees, stones, water)",
+				"grove": "Tree-enclosed space replacing room",
+				"canyon": "Large natural formation replacing hall",
+				"wilderness": "Fully natural landscape, no architecture"
+			},
+			"beyond": {
+				"paradox_pedestal": "Pedestal that is simultaneously cube and mound",
+				"liminal_table": "Surface that flickers between materials",
+				"impossible_plinth": "Self-referencing monument (Escher-like)",
+				"fold": "Space that curves back on itself, replacing alcove",
+				"threshold": "Boundary zone between grid and organic",
+				"void_stage": "Stage that reveals the nothing underneath",
+				"recursive_room": "Room containing a smaller version of itself",
+				"infinite_hall": "Hall with no visible end",
+				"landscape": "The space refuses to be described"
+			}
+		},
+		"border": {
+			"grid": {
+				"none": "No border",
+				"floor_line": "Painted line on floor",
+				"bollard": "Low cubic posts at corners",
+				"low_wall": "Knee-height wall (height 1)",
+				"half_wall": "Waist-height wall (height 2)",
+				"full_wall": "Full-height wall (height 3-4)",
+				"glass": "Transparent panel barrier",
+				"railing": "Metal railing"
+			},
+			"transition": {
+				"none": "No border",
+				"crack_line": "Floor crack where organic seeps through",
+				"weathered_bollard": "Eroded posts with moss",
+				"crumbling_wall": "Wall with chunks missing, vines entering",
+				"half_ruin": "Wall reduced to half height by erosion",
+				"vine_wall": "Wall partially covered by climbing plants",
+				"foggy_glass": "Clouded glass with condensation",
+				"rusted_railing": "Corroded railing with growth"
+			},
+			"organic": {
+				"none": "No border",
+				"root_line": "Exposed root system marking territory",
+				"stones": "Natural stone arrangement at boundary",
+				"hedge": "Living plant wall",
+				"ridge": "Natural earth ridge",
+				"canopy_edge": "Tree coverage defines the zone",
+				"water_edge": "Stream or pool forms natural border",
+				"mycelium_net": "Visible fungal network marking ground"
+			},
+			"beyond": {
+				"none": "No border",
+				"glitch_line": "Boundary that flickers between grid and organic",
+				"ghost_bollard": "Semi-transparent posts from another phase",
+				"fold_wall": "Wall that exists in two states simultaneously",
+				"void_edge": "Space simply ends",
+				"mirror_wall": "Reflects a different version of the space",
+				"recursive_border": "Border that contains smaller borders"
+			}
+		},
+		"fill": {
+			"grid": {
+				"none": "Standard floor",
+				"pedestal_1x1": "Single raised cube",
+				"pedestal_2x2": "2x2 raised platform",
+				"platform_match": "Platform sized to footprint",
+				"recessed": "Sunken floor pit",
+				"elevated": "Raised stage",
+				"terrain": "Artifact generates own ground"
+			},
+			"transition": {
+				"none": "Standard floor with hairline cracks",
+				"moss_pedestal": "Cube with moss growing on top",
+				"cracked_platform": "Platform with terrain pushing through",
+				"buckling_floor": "Floor warping upward from organic pressure",
+				"soil_patch": "Small area where floor has given way to earth",
+				"puddle": "Standing water in floor depression",
+				"terrain": "Terrain breaking through grid floor"
+			},
+			"organic": {
+				"none": "Natural ground surface",
+				"moss_mound": "Raised earth covered in moss",
+				"rock_shelf": "Natural stone platform",
+				"root_platform": "Interwoven root system forming flat surface",
+				"hollow": "Natural depression in terrain",
+				"spring": "Water feature at ground level",
+				"mycelium_bed": "Fungal mat ground cover",
+				"terrain": "Full terrain generation"
+			},
+			"beyond": {
+				"none": "Ground that questions being ground",
+				"floating_slab": "Platform that hovers with no support",
+				"void_pit": "Hole that goes nowhere and everywhere",
+				"mirror_floor": "Reflects a different version of what stands on it",
+				"phase_terrain": "Terrain that shifts between grid and organic",
+				"terrain": "Terrain that knows it is terrain"
+			}
+		},
+		"enclosure": {
+			"open": "Fully accessible from all sides",
+			"semi": "Partial boundary, directional access",
+			"enclosed": "Mostly enclosed, single entry",
+			"embedded": "Artifact replaces architecture entirely",
+			"dissolved": "Enclosure that was once there but has eroded away",
+			"grown": "Enclosure formed by living material (canopy, hedge, ridge)"
+		}
+	},
+
+	"rules": [
+		{
+			"id": "compact_grab",
+			"match": { "size_group": "compact", "interaction": "grab" },
+			"by_phase": {
+				"grid":       { "staging": "table",             "border": "none",           "fill": "pedestal_1x1",    "enclosure": "open" },
+				"transition": { "staging": "weathered_table",   "border": "none",           "fill": "moss_pedestal",   "enclosure": "open" },
+				"organic":    { "staging": "stump",             "border": "none",           "fill": "moss_mound",      "enclosure": "open" },
+				"beyond":     { "staging": "liminal_table",     "border": "none",           "fill": "floating_slab",   "enclosure": "open" }
+			},
+			"clearance": 1.2,
+			"directional_profile": "half_circle"
+		},
+		{
+			"id": "compact_observe",
+			"match": { "size_group": "compact", "interaction": "observe" },
+			"by_phase": {
+				"grid":       { "staging": "pedestal",          "border": "none",           "fill": "pedestal_1x1",    "enclosure": "open" },
+				"transition": { "staging": "eroded_pedestal",   "border": "crack_line",     "fill": "moss_pedestal",   "enclosure": "open" },
+				"organic":    { "staging": "mound",             "border": "root_line",      "fill": "moss_mound",      "enclosure": "open" },
+				"beyond":     { "staging": "paradox_pedestal",  "border": "glitch_line",    "fill": "floating_slab",   "enclosure": "open" }
+			},
+			"clearance": 1.5,
+			"directional_profile": "full_circle"
+		},
+		{
+			"id": "compact_default",
+			"match": { "size_group": "compact" },
+			"by_phase": {
+				"grid":       { "staging": "pedestal",          "border": "none",           "fill": "pedestal_1x1",    "enclosure": "open" },
+				"transition": { "staging": "eroded_pedestal",   "border": "none",           "fill": "moss_pedestal",   "enclosure": "open" },
+				"organic":    { "staging": "mound",             "border": "none",           "fill": "moss_mound",      "enclosure": "open" },
+				"beyond":     { "staging": "paradox_pedestal",  "border": "none",           "fill": "floating_slab",   "enclosure": "open" }
+			},
+			"clearance": 1.5,
+			"directional_profile": "full_circle"
+		},
+		{
+			"id": "room_grab",
+			"match": { "size_group": "room_scale", "interaction": "grab" },
+			"by_phase": {
+				"grid":       { "staging": "alcove",            "border": "low_wall",       "fill": "pedestal_2x2",    "enclosure": "semi" },
+				"transition": { "staging": "softened_alcove",   "border": "crumbling_wall", "fill": "cracked_platform","enclosure": "semi" },
+				"organic":    { "staging": "grotto",            "border": "stones",         "fill": "rock_shelf",      "enclosure": "grown" },
+				"beyond":     { "staging": "fold",              "border": "fold_wall",      "fill": "floating_slab",   "enclosure": "semi" }
+			},
+			"clearance": 2.0,
+			"directional_profile": "half_circle"
+		},
+		{
+			"id": "room_observe",
+			"match": { "size_group": "room_scale", "interaction": "observe" },
+			"by_phase": {
+				"grid":       { "staging": "platform",          "border": "bollard",        "fill": "platform_match",  "enclosure": "open" },
+				"transition": { "staging": "buckling_platform", "border": "weathered_bollard","fill": "cracked_platform","enclosure": "open" },
+				"organic":    { "staging": "clearing",          "border": "stones",         "fill": "root_platform",   "enclosure": "open" },
+				"beyond":     { "staging": "threshold",         "border": "ghost_bollard",  "fill": "phase_terrain",   "enclosure": "open" }
+			},
+			"clearance": 2.0,
+			"directional_profile": "full_circle"
+		},
+		{
+			"id": "room_walkthrough",
+			"match": { "size_group": "room_scale", "interaction": "walk_through" },
+			"by_phase": {
+				"grid":       { "staging": "room",              "border": "half_wall",      "fill": "none",            "enclosure": "semi" },
+				"transition": { "staging": "breached_room",     "border": "vine_wall",      "fill": "soil_patch",      "enclosure": "dissolved" },
+				"organic":    { "staging": "grove",             "border": "canopy_edge",    "fill": "none",            "enclosure": "grown" },
+				"beyond":     { "staging": "recursive_room",    "border": "recursive_border","fill": "void_pit",       "enclosure": "semi" }
+			},
+			"clearance": 2.5,
+			"directional_profile": "corridor"
+		},
+		{
+			"id": "room_default",
+			"match": { "size_group": "room_scale" },
+			"by_phase": {
+				"grid":       { "staging": "platform",          "border": "floor_line",     "fill": "platform_match",  "enclosure": "open" },
+				"transition": { "staging": "buckling_platform", "border": "crack_line",     "fill": "buckling_floor",  "enclosure": "open" },
+				"organic":    { "staging": "clearing",          "border": "root_line",      "fill": "root_platform",   "enclosure": "open" },
+				"beyond":     { "staging": "threshold",         "border": "glitch_line",    "fill": "phase_terrain",   "enclosure": "open" }
+			},
+			"clearance": 2.0,
+			"directional_profile": "full_circle"
+		},
+		{
+			"id": "environment_observe",
+			"match": { "size_group": "environment", "interaction": "observe" },
+			"by_phase": {
+				"grid":       { "staging": "open_stage",        "border": "railing",        "fill": "elevated",        "enclosure": "open" },
+				"transition": { "staging": "dissolving_stage",  "border": "rusted_railing", "fill": "buckling_floor",  "enclosure": "open" },
+				"organic":    { "staging": "glade",             "border": "water_edge",     "fill": "terrain",         "enclosure": "open" },
+				"beyond":     { "staging": "void_stage",        "border": "void_edge",      "fill": "mirror_floor",    "enclosure": "open" }
+			},
+			"clearance": 3.0,
+			"directional_profile": "full_circle"
+		},
+		{
+			"id": "environment_walkthrough",
+			"match": { "size_group": "environment", "interaction": "walk_through" },
+			"by_phase": {
+				"grid":       { "staging": "hall",              "border": "low_wall",       "fill": "none",            "enclosure": "semi" },
+				"transition": { "staging": "crumbling_hall",    "border": "crumbling_wall", "fill": "terrain",         "enclosure": "dissolved" },
+				"organic":    { "staging": "canyon",            "border": "ridge",          "fill": "terrain",         "enclosure": "grown" },
+				"beyond":     { "staging": "infinite_hall",     "border": "mirror_wall",    "fill": "phase_terrain",   "enclosure": "semi" }
+			},
+			"clearance": 3.0,
+			"directional_profile": "corridor"
+		},
+		{
+			"id": "environment_default",
+			"match": { "size_group": "environment" },
+			"by_phase": {
+				"grid":       { "staging": "open_stage",        "border": "floor_line",     "fill": "platform_match",  "enclosure": "open" },
+				"transition": { "staging": "dissolving_stage",  "border": "crack_line",     "fill": "soil_patch",      "enclosure": "open" },
+				"organic":    { "staging": "glade",             "border": "mycelium_net",   "fill": "terrain",         "enclosure": "open" },
+				"beyond":     { "staging": "void_stage",        "border": "glitch_line",    "fill": "phase_terrain",   "enclosure": "open" }
+			},
+			"clearance": 2.5,
+			"directional_profile": "full_circle"
+		},
+		{
+			"id": "world_grid",
+			"match": { "size_group": "world_scale", "placement": "!scene_embed" },
+			"by_phase": {
+				"grid":       { "staging": "hall",              "border": "railing",        "fill": "terrain",         "enclosure": "open" },
+				"transition": { "staging": "crumbling_hall",    "border": "rusted_railing", "fill": "terrain",         "enclosure": "dissolved" },
+				"organic":    { "staging": "canyon",            "border": "ridge",          "fill": "terrain",         "enclosure": "grown" },
+				"beyond":     { "staging": "infinite_hall",     "border": "void_edge",      "fill": "terrain",         "enclosure": "open" }
+			},
+			"clearance": 4.0,
+			"directional_profile": "ambient"
+		},
+		{
+			"id": "world_embed",
+			"match": { "size_group": "world_scale", "placement": "scene_embed" },
+			"by_phase": {
+				"grid":       { "staging": "landscape",         "border": "none",           "fill": "terrain",         "enclosure": "embedded" },
+				"transition": { "staging": "landscape",         "border": "none",           "fill": "terrain",         "enclosure": "embedded" },
+				"organic":    { "staging": "wilderness",        "border": "none",           "fill": "terrain",         "enclosure": "embedded" },
+				"beyond":     { "staging": "landscape",         "border": "none",           "fill": "terrain",         "enclosure": "embedded" }
+			},
+			"clearance": 0,
+			"directional_profile": "ambient"
+		},
+		{
+			"id": "world_default",
+			"match": { "size_group": "world_scale" },
+			"by_phase": {
+				"grid":       { "staging": "hall",              "border": "floor_line",     "fill": "terrain",         "enclosure": "open" },
+				"transition": { "staging": "crumbling_hall",    "border": "crack_line",     "fill": "terrain",         "enclosure": "dissolved" },
+				"organic":    { "staging": "canyon",            "border": "root_line",      "fill": "terrain",         "enclosure": "grown" },
+				"beyond":     { "staging": "infinite_hall",     "border": "glitch_line",    "fill": "phase_terrain",   "enclosure": "open" }
+			},
+			"clearance": 3.0,
+			"directional_profile": "ambient"
+		},
+		{
+			"id": "fallback",
+			"match": {},
+			"by_phase": {
+				"grid":       { "staging": "pedestal",          "border": "none",           "fill": "pedestal_1x1",    "enclosure": "open" },
+				"transition": { "staging": "eroded_pedestal",   "border": "none",           "fill": "moss_pedestal",   "enclosure": "open" },
+				"organic":    { "staging": "mound",             "border": "none",           "fill": "moss_mound",      "enclosure": "open" },
+				"beyond":     { "staging": "paradox_pedestal",  "border": "none",           "fill": "floating_slab",   "enclosure": "open" }
+			},
+			"clearance": 1.5,
+			"directional_profile": "full_circle"
+		}
+	],
+
+	"phase_blending": {
+		"description": "Maps can specify a phase_blend value (0.0-1.0) to interpolate between their sequence's default phase and the next. Early maps in a transition sequence use lower blend, later maps use higher.",
+		"example": "A noise sequence map with phase_blend=0.3 is mostly grid with cracks appearing. phase_blend=0.8 is mostly organic with remnant grid lines.",
+		"implementation_note": "At runtime, phase_blend selects which vocabulary set to use. Values 0.0-0.3 use the current phase vocabulary. Values 0.3-0.7 mix elements from current and next. Values 0.7-1.0 use the next phase vocabulary."
+	},
+
+	"template_mapping": {
+		"description": "Maps staging types to recommended map templates. Organic/beyond staging types use the same spatial templates but different material/geometry generation.",
+		"pedestal":     { "min_map": "Template_Basic", "cells_needed": 3 },
+		"mound":        { "min_map": "Template_Basic", "cells_needed": 3 },
+		"table":        { "min_map": "Template_Basic", "cells_needed": 3 },
+		"stump":        { "min_map": "Template_Basic", "cells_needed": 3 },
+		"plinth":       { "min_map": "Template_Basic", "cells_needed": 4 },
+		"standing_stone": { "min_map": "Template_Basic", "cells_needed": 4 },
+		"alcove":       { "min_map": "Template_Basic", "cells_needed": 5 },
+		"grotto":       { "min_map": "Template_Basic", "cells_needed": 5 },
+		"platform":     { "min_map": "Template_Basic", "cells_needed": 6 },
+		"clearing":     { "min_map": "Template_Basic", "cells_needed": 6 },
+		"open_stage":   { "min_map": "Template_Basic", "cells_needed": 10 },
+		"glade":        { "min_map": "Template_Basic", "cells_needed": 10 },
+		"room":         { "min_map": "Template_Basic", "cells_needed": 12 },
+		"grove":        { "min_map": "Template_Basic", "cells_needed": 12 },
+		"hall":         { "min_map": "Template_Large_Exhibition", "cells_needed": 20 },
+		"canyon":       { "min_map": "Template_Large_Exhibition", "cells_needed": 20 },
+		"landscape":    { "min_map": "scene_embed", "cells_needed": 0 },
+		"wilderness":   { "min_map": "scene_embed", "cells_needed": 0 }
+	}
+}

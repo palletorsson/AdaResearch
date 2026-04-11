@@ -1,1 +1,0 @@
-Color over lifetime. Size over lifetime. Opacity fades as death approaches. Each particle traces an arc through parameter space as it ages. The effect designer sculpts these curves — quick bright flash or slow gentle fade, growing embers or shrinking sparks.

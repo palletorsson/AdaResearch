@@ -33,7 +33,7 @@ class WFC3DTile:
 	var color: Color = Color.WHITE
 	var can_rotate: bool = true
 	
-	func _init(tile_name: String, socket_pattern: Array[SocketType], w: float = 1.0, mesh: String = "box", col: Color = Color.WHITE, can_rot: bool = true):
+	func _init(tile_name: String, socket_pattern: Array[SocketType], w: float = 1.0, mesh: String = "box", col: Color = Color.WHITE, can_rot: bool = true) -> void:
 		name = tile_name
 		sockets = socket_pattern.duplicate()
 		weight = w
@@ -52,7 +52,7 @@ class GridCell:
 	var chosen_tile: WFC3DTile = null
 	var rotation: int = 0  # 0-3 for 90-degree rotations
 	
-	func _init(pos: Vector3i):
+	func _init(pos: Vector3i) -> void:
 		position = pos
 	
 	func get_entropy() -> int:
@@ -92,18 +92,18 @@ class GridCell:
 		collapsed = true
 		return true
 
-func _ready():
+func _ready() -> void:
 	setup_tile_library()
 
-func _trigger_generation(value):
+func _trigger_generation(value) -> void:
 	if value:
 		generate_wfc_space()
 
-func _clear_all(value):
+func _clear_all(value) -> void:
 	if value:
 		clear_generated_content()
 
-func setup_tile_library():
+func setup_tile_library() -> void:
 	tile_library.clear()
 	
 	# SIMPLIFIED TILE SET FOR BETTER COMPATIBILITY
@@ -130,7 +130,7 @@ func setup_tile_library():
 	for tile in tile_library:
 		print("- ", tile.name, " (weight: ", tile.weight, ")")
 
-func add_queer_joyful_tiles():
+func add_queer_joyful_tiles() -> void:
 	"""Add simplified queer joyful tiles that are more compatible"""
 	
 	# RAINBOW DANCE FLOOR - acts like a floor
@@ -165,7 +165,7 @@ func add_queer_joyful_tiles():
 	
 	print("🌈 Added 6 simplified queer joyful tiles!")
 
-func generate_wfc_space():
+func generate_wfc_space() -> void:
 	if seed_value > 0:
 		seed(seed_value)
 	
@@ -179,7 +179,7 @@ func generate_wfc_space():
 	generate_3d_meshes()
 	print("=== WFC GENERATION COMPLETE ===\n")
 
-func clear_generated_content():
+func clear_generated_content() -> void:
 	print("Clearing existing content...")
 	var cleared_count = 0
 	for child in get_children():
@@ -188,7 +188,7 @@ func clear_generated_content():
 			cleared_count += 1
 	print("Cleared ", cleared_count, " generated objects")
 
-func initialize_grid():
+func initialize_grid() -> void:
 	print("Initializing grid...")
 	grid.clear()
 	grid.resize(grid_dimensions.x)
@@ -208,7 +208,7 @@ func initialize_grid():
 	
 	print("Grid initialized with ", total_cells, " cells, each with ", tile_library.size(), " possible tiles")
 
-func run_wfc_algorithm():
+func run_wfc_algorithm() -> void:
 	print("Starting WFC algorithm...")
 	var max_iterations = grid_dimensions.x * grid_dimensions.y * grid_dimensions.z * 2
 	var iterations = 0
@@ -276,7 +276,7 @@ func find_lowest_entropy_cell() -> GridCell:
 	
 	return candidates[randi() % candidates.size()]
 
-func propagate_constraints(collapsed_cell: GridCell):
+func propagate_constraints(collapsed_cell: GridCell) -> void:
 	var propagation_stack: Array[GridCell] = [collapsed_cell]
 	var processed_cells: Array[Vector3i] = []
 	
@@ -384,7 +384,7 @@ func is_fully_collapsed() -> bool:
 					return false
 	return true
 
-func generate_3d_meshes():
+func generate_3d_meshes() -> void:
 	print("Generating 3D meshes...")
 	var mesh_count = 0
 	
@@ -398,7 +398,7 @@ func generate_3d_meshes():
 	
 	print("Generated ", mesh_count, " meshes")
 
-func create_tile_mesh(cell: GridCell):
+func create_tile_mesh(cell: GridCell) -> void:
 	var mesh_instance = MeshInstance3D.new()
 	mesh_instance.set_meta("wfc_generated", true)
 	mesh_instance.name = cell.chosen_tile.name + "_" + str(cell.position)
@@ -479,7 +479,7 @@ func create_mesh_for_type(mesh_type: String) -> Mesh:
 			box.size = Vector3(tile_size * 0.5, tile_size * 0.5, tile_size * 0.5)
 			return box
 
-func add_collision_to_mesh(mesh_instance: MeshInstance3D, mesh: Mesh):
+func add_collision_to_mesh(mesh_instance: MeshInstance3D, mesh: Mesh) -> void:
 	var static_body = StaticBody3D.new()
 	var collision_shape = CollisionShape3D.new()
 	collision_shape.shape = mesh.create_trimesh_shape()
@@ -489,3 +489,12 @@ func add_collision_to_mesh(mesh_instance: MeshInstance3D, mesh: Mesh):
 	if Engine.is_editor_hint():
 		static_body.owner = get_tree().edited_scene_root
 		collision_shape.owner = get_tree().edited_scene_root
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

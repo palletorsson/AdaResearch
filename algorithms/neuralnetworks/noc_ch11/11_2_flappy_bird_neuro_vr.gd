@@ -332,7 +332,7 @@ class Pipe:
 class TinyBrain:
 	var weights: Array[float] = []
 
-	func _init():
+	func _init() -> void:
 		weights.resize(8)
 		for i in weights.size():
 			weights[i] = randf_range(-1.0, 1.0)
@@ -351,3 +351,12 @@ class TinyBrain:
 
 	func copy_weights_from(other: TinyBrain) -> void:
 		weights = other.weights.duplicate()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

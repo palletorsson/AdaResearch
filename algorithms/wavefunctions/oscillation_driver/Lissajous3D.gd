@@ -35,10 +35,10 @@ extends Node3D
 var time: float = 0.0
 var trail_points: Array[Vector3] = []
 
-func _ready():
+func _ready() -> void:
 	_setup_visuals()
 
-func _setup_visuals():
+func _setup_visuals() -> void:
 	trail_mesh = ImmediateMesh.new()
 	trail_instance.mesh = trail_mesh
 	
@@ -52,7 +52,7 @@ func _setup_visuals():
 	material.point_size = 2.0
 	trail_instance.material_override = material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta * speed
 	
 	# --- CALCULATE LISSAJOUS POSITION ---
@@ -75,7 +75,7 @@ func _process(delta):
 	
 	_draw_trail()
 
-func _draw_trail():
+func _draw_trail() -> void:
 	trail_mesh.clear_surfaces()
 	if trail_points.is_empty(): return
 	
@@ -83,3 +83,6 @@ func _draw_trail():
 	for p in trail_points:
 		trail_mesh.surface_add_vertex(p)
 	trail_mesh.surface_end()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

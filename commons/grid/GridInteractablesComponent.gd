@@ -6,7 +6,6 @@ extends Node
 class_name GridInteractablesComponent
 
 # Path constants
-const DEFAULT_ARTIFACTS_JSON_PATH = "res://commons/artifacts/grid_artifacts.json"
 const REGISTRY_DIR_PATH = "res://commons/artifacts/registry/"
 const ARTIFACT_PLACEHOLDER_SCENE_PATH = "res://commons/artifacts/placeholders/ArtifactPlaceholder.tscn"
 static var _artifact_registry_cache_by_key: Dictionary = {}
@@ -39,6 +38,20 @@ const CONFIG_PARAM_NAMES = [
 	"algorithm", "interval", "auto_play", "grid_width", "grid_height", "nodes", "samples",
 	# Living paper params
 	"paper", "texture", "fold", "orientation",
+	# Shader / cove / wallpaper params
+	"shader", "pattern_seed", "wallpaper_group", "tile_scale", "grout_width",
+	"grout_color", "noise_distort", "emission_strength", "metallic", "roughness",
+	"wear_amount", "dust_amount", "fade_amount", "crack_density", "stain_amount", "chip_amount",
+	"cove_width", "cove_radius", "curve_segments", "wall_extend", "wall_height",
+	"floor_depth", "albedo_color", "shader_list", "cycle_interval", "auto_cycle",
+	# Composition params
+	"preset", "tile_size", "surface", "composition_type", "composition_json",
+	"grid_resolution", "tunnel_width", "tunnel_height", "tunnel_length", "arch_radius",
+	"arch_segments", "section_length", "cube_size",
+	# Art history gallery params
+	"tile_resolution", "tile_world_size", "columns",
+	# Tiling coordinate system
+	"tiling",
 ]
 
 # References
@@ -125,11 +138,8 @@ func _build_registry_cache_key(paths: Array[String]) -> String:
 # Get artifact registry paths from map data and registry directory
 func _get_artifact_registry_paths() -> Array[String]:
 	var paths: Array[String] = []
-	
-	# 1. Add the main default file
-	paths.append(DEFAULT_ARTIFACTS_JSON_PATH)
-	
-	# 2. Add all JSON files from the registry directory
+
+	# Load all JSON files from the registry directory
 	var dir = DirAccess.open(REGISTRY_DIR_PATH)
 	if dir:
 		dir.list_dir_begin()
@@ -601,6 +611,9 @@ func _place_grid_agent(x: int, y: int, z: int, lookup_name: String, total_size: 
 		return false
 	
 	var agent_scene = load(scene_path)
+	if agent_scene == null or not (agent_scene is PackedScene):
+		print("GridInteractablesComponent: Failed to load grid agent scene: %s" % scene_path)
+		return false
 	var agent = agent_scene.instantiate()
 	
 	# Position
@@ -818,15 +831,22 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 			print("    Set puzzle trigger_action: '%s'" % trigger_action)
 
 	parent_node.add_child(artifact_object)
-	
+
 	# Set owner for editor
 	if parent_node.get_tree() and parent_node.get_tree().edited_scene_root:
 		artifact_object.owner = parent_node.get_tree().edited_scene_root
-	
+
+	# Auto-ground: shift artifact up so geometry sits at/above grid surface.
+	# Uses call_deferred so _ready() has fired and procedural geometry exists.
+	if artifact_object is Node3D:
+		var skip_ground: bool = artifact_info.get("no_auto_ground", false)
+		if not skip_ground:
+			call_deferred("_auto_ground_artifact", artifact_object, lookup_name)
+
 # Handle successful placement
 	var display_name = artifact_info.get("name", lookup_name)
 	print("  ✅ Placed artifact '%s' (%s) at (%d,%d,%d)" % [display_name, lookup_name, x, y, z])
-	
+
 	return true
 
 
@@ -1449,3 +1469,95 @@ func print_artifact_registry_status():
 	
 	print("Available artifact types: %s" % str(get_available_artifact_types()))
 	print("================================================")
+
+
+# ── Auto-ground system ─────────────────────────────────────────────────────────
+# After an artifact is added to the scene tree (and _ready() has fired), compute
+# its AABB and shift it up so the bottom of its geometry sits at the grid surface
+# rather than clipping below.
+
+## Deferred callback: computes AABB, shifts artifact up if min_y < 0.
+func _auto_ground_artifact(artifact: Node3D, lookup_name: String) -> void:
+	if not is_instance_valid(artifact):
+		return
+
+	var aabb: AABB = _compute_local_aabb(artifact)
+	if aabb.size.length() < 0.01:
+		return  # No measurable geometry
+
+	# Clamp AABB Y range to filter hidden MultiMesh instances at Y=-1000
+	if aabb.size.y > 50.0:
+		var cmin: float = max(aabb.position.y, -10.0)
+		var cmax: float = min(aabb.position.y + aabb.size.y, 50.0)
+		if cmax > cmin:
+			aabb.position.y = cmin
+			aabb.size.y = cmax - cmin
+		else:
+			return  # All geometry is hidden
+
+	var min_y: float = aabb.position.y
+	if min_y >= -0.01:
+		return  # Already grounded (within tolerance)
+
+	var correction: float = abs(min_y)
+
+	# Safety cap: skip unreasonably large corrections (probably an environment
+	# object like a 40m sphere, a laser beam, or something that should have
+	# no_auto_ground in the registry)
+	if correction > 5.0:
+		print("  ⚠ Auto-ground: '%s' needs %.2f shift (exceeds 5.0 cap) — skipped. Consider adding no_auto_ground to registry." % [lookup_name, correction])
+		return
+
+	artifact.position.y += correction
+	print("  ↑ Auto-ground: shifted '%s' up by %.3f" % [lookup_name, correction])
+
+
+## Recursively compute the local-space AABB of a node and all its children.
+## Walks MeshInstance3D, MultiMeshInstance3D, CSGShape3D, GPUParticles3D.
+func _compute_local_aabb(node: Node3D) -> AABB:
+	var result := AABB()
+	var first := true
+	for child in node.get_children():
+		var child_aabb := AABB()
+		var has_aabb := false
+
+		if child is MeshInstance3D:
+			var mesh = (child as MeshInstance3D).mesh
+			if mesh:
+				child_aabb = child.transform * mesh.get_aabb()
+				has_aabb = true
+		elif child is MultiMeshInstance3D:
+			var mm = child.multimesh
+			if mm and mm.instance_count > 0:
+				child_aabb = child.transform * mm.get_aabb()
+				has_aabb = true
+		elif child is CSGShape3D:
+			var child_meshes: Array = child.get_meshes()
+			if child_meshes.size() >= 2:
+				var m = child_meshes[1]
+				if m is Mesh:
+					child_aabb = child.transform * m.get_aabb()
+					has_aabb = true
+		elif child is GPUParticles3D:
+			child_aabb = child.transform * child.visibility_aabb
+			has_aabb = true
+
+		if has_aabb and child_aabb.size.length() > 0:
+			if first:
+				result = child_aabb
+				first = false
+			else:
+				result = result.merge(child_aabb)
+
+		# Recurse into Node3D children
+		if child is Node3D:
+			var sub_aabb: AABB = _compute_local_aabb(child)
+			if sub_aabb.size.length() > 0:
+				sub_aabb = child.transform * sub_aabb
+				if first:
+					result = sub_aabb
+					first = false
+				else:
+					result = result.merge(sub_aabb)
+
+	return result

@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Configuration
 @export var pendulum_height: float = 8.0
@@ -8,19 +8,19 @@
 
 var lower_arm: RigidBody3D
 
-func _ready():
+func _ready() -> void:
 	# setup_scene()
 	setup_pendulum()
 	# setup_soft_body()
 	call_deferred("apply_initial_impulse")
 
-func apply_initial_impulse():
+func apply_initial_impulse() -> void:
 	if lower_arm:
 		# Swing it back first so it hits forward
 		lower_arm.apply_central_impulse(Vector3(0, 0, 50.0))
 
 
-func setup_pendulum():
+func setup_pendulum() -> void:
 	# Anchor
 	var anchor = StaticBody3D.new()
 	anchor.position = Vector3(0, pendulum_height, 0)
@@ -96,8 +96,17 @@ func _physics_process(_delta):
 	# Or just let it swing from gravity if we start it offset
 	pass
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		if lower_arm:
 			# Slap!
 			lower_arm.apply_central_impulse(Vector3(0, 0, -slap_force))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

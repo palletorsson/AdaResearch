@@ -1,3 +1,13 @@
+# @identity
+# essence: bipedal_balance(t) = alternate(foot_L, foot_R) -- constant negotiation with falling
+# desire: two legs in perpetual controlled falling -- the human gait's instability made visible
+# critical_parameter: _foot_L / _foot_R IK targets -- alternating support creates the bipedal problem
+# triggers: gait cycle alternates feet; patrol_timer drives direction; each step is a caught fall
+# emerges: bipedal locomotion as managed instability -- walking is falling and catching yourself
+# needs: MeshInstance3D [has]; dual IK chains [has]; alternating gait [has]; patrol [has]; VR interaction [missing]
+# relationships: second in leg progression; introduces bilateral symmetry
+# truth: two legs means constant falling -- every step is a crisis of balance resolved just in time.
+
 # two_leg_critter.gd
 # Two-legged critter with STEPPING GAIT.
 # Each leg plants on the ground, stays planted while body moves,

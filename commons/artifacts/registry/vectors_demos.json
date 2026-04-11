@@ -13,10 +13,24 @@
 			"description": "Vector addition as force combination — multiple forces acting on a body, visualized as arrows that add head-to-tail. The resultant force emerges from superposition.",
 			"category": "vectors",
 			"complexity": "beginner",
-			"tags": ["vector", "addition", "force", "superposition", "resultant", "physics"],
+			"tags": [
+				"vector",
+				"addition",
+				"force",
+				"superposition",
+				"resultant",
+				"physics"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["forces"]
+			"map_sequences": [
+				"forces"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"work_energy_demo": {
 			"lookup_name": "work_energy_demo",
@@ -25,10 +39,24 @@
 			"description": "Dot product as physical work — force dotted with displacement gives energy transfer. See why pushing perpendicular to motion does zero work.",
 			"category": "vectors",
 			"complexity": "intermediate",
-			"tags": ["vector", "dot_product", "work", "energy", "projection", "physics"],
+			"tags": [
+				"vector",
+				"dot_product",
+				"work",
+				"energy",
+				"projection",
+				"physics"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["forces"]
+			"map_sequences": [
+				"forces"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"torque_demo": {
 			"lookup_name": "torque_demo",
@@ -37,10 +65,24 @@
 			"description": "Cross product as torque — force applied at a lever arm produces rotation perpendicular to both. The right-hand rule determines which way things spin.",
 			"category": "vectors",
 			"complexity": "intermediate",
-			"tags": ["vector", "cross_product", "torque", "rotation", "right_hand_rule", "physics"],
+			"tags": [
+				"vector",
+				"cross_product",
+				"torque",
+				"rotation",
+				"right_hand_rule",
+				"physics"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["forces"]
+			"map_sequences": [
+				"forces"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"normal_force_demo": {
 			"lookup_name": "normal_force_demo",
@@ -49,10 +91,24 @@
 			"description": "Vector projection and reflection — decompose velocity into normal and tangent components, then reflect. The math behind every bouncing ball and billiard shot.",
 			"category": "vectors",
 			"complexity": "intermediate",
-			"tags": ["vector", "projection", "reflection", "normal", "bounce", "physics"],
+			"tags": [
+				"vector",
+				"projection",
+				"reflection",
+				"normal",
+				"bounce",
+				"physics"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["forces"]
+			"map_sequences": [
+				"forces"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"turret_targeting": {
 			"lookup_name": "turret_targeting",
@@ -61,10 +117,32 @@
 			"description": "Applied vector math for targeting — calculate direction, lead the target, account for projectile speed. Vectors solving the ancient problem of aiming at a moving target.",
 			"category": "vectors",
 			"complexity": "intermediate",
-			"tags": ["vector", "targeting", "turret", "prediction", "direction", "game_math"],
+			"tags": [
+				"vector",
+				"targeting",
+				"turret",
+				"prediction",
+				"direction",
+				"game_math"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["forces"]
+			"map_sequences": [
+				"forces"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					3,
+					3
+				],
+				"size_group": "room_scale"
+			},
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		},
 		"weather_vector_field": {
 			"lookup_name": "weather_vector_field",
@@ -73,10 +151,26 @@
 			"description": "Applied vector addition as weather — two grabbable wind vectors combine in real-time. Drag arrow endpoints to feel how wind directions sum. Rain particles fall under gravity + wind, their diagonal paths demonstrating force superposition. Pressure zones add local variation to the field.",
 			"category": "vectors",
 			"complexity": "intermediate",
-			"tags": ["vector_addition", "weather", "wind", "force_superposition", "vector_field", "rain", "pressure", "interactive"],
+			"tags": [
+				"vector_addition",
+				"weather",
+				"wind",
+				"force_superposition",
+				"vector_field",
+				"rain",
+				"pressure",
+				"interactive"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["forces"]
+			"map_sequences": [
+				"forces"
+			],
+			"dev_themes": [
+				"linear_algebra",
+				"math",
+				"vectors"
+			]
 		}
 	}
 }

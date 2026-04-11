@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: next_cell = wolfram_rule(left, center, right) extruded as walkable bridge
+# desire: To be crossed — a 1D automaton made physical, each row of cubes a generation you walk through
+# critical_parameter: rule (0-255) — each Wolfram rule number produces a completely different bridge topology
+# triggers: Rule 30 → chaotic, broken path; Rule 110 → structured walkway; random initial row → organic variation
+# emerges: Walkable architecture from an 8-bit number — bridges, walls, gaps appear from three-neighbor logic
+# needs: VR rule selector [missing], speed control [missing], collision [has]
+# relationships: Feeds into CA_GameOfLife. Contrasts with ca_columns (1D→bridge vs 2D→towers). Precedes ca_rule_explorer.
+# truth: A bridge built by a rule — you walk on computation.
+
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
 @export_category("Bridge Settings")
@@ -25,19 +35,19 @@ var generated_cubes: Array = []
 var static_body: StaticBody3D
 var box_shape: BoxShape3D
 
-func _ready():
+func _ready() -> void:
 	_setup_collision()
 	if auto_generate:
 		start_generation()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_generating:
 		timer += delta
 		if timer >= generation_speed:
 			timer = 0.0
 			step()
 
-func _setup_collision():
+func _setup_collision() -> void:
 	# Create a single StaticBody for the bridge to hold all shapes
 	if not static_body:
 		static_body = StaticBody3D.new()
@@ -50,16 +60,16 @@ func _setup_collision():
 		# Match the visual scale (0.5)
 		box_shape.size = Vector3(cell_size, cell_size, cell_size)
 
-func start_generation():
+func start_generation() -> void:
 	_clear_bridge()
 	_initialize_row()
 	current_z = 0
 	is_generating = true
 
-func stop_generation():
+func stop_generation() -> void:
 	is_generating = false
 
-func _clear_bridge():
+func _clear_bridge() -> void:
 	for cube in generated_cubes:
 		if is_instance_valid(cube):
 			cube.queue_free()
@@ -73,7 +83,7 @@ func _clear_bridge():
 	current_z = 0
 	is_generating = false
 
-func _initialize_row():
+func _initialize_row() -> void:
 	current_row = []
 	current_row.resize(width)
 	
@@ -86,7 +96,7 @@ func _initialize_row():
 			current_row[i] = 0
 		current_row[width / 2] = 1
 
-func step():
+func step() -> void:
 	if current_z >= length:
 		is_generating = false
 		return
@@ -95,7 +105,7 @@ func step():
 	current_row = _calculate_next_row(current_row)
 	current_z += 1
 
-func _spawn_row(row: Array, z_index: int):
+func _spawn_row(row: Array, z_index: int) -> void:
 	var offset_x = (width * cell_size) / 2.0
 	
 	for i in range(width):
@@ -139,3 +149,12 @@ func _apply_rule(a, b, c) -> int:
 		return 1
 	else:
 		return 0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

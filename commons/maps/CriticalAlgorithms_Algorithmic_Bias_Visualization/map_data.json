@@ -1,65 +1,66 @@
 {
   "map_info": {
-    "name": "Algorithmic Bias Visualization",
-    "lookup_name": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
-    "description": "A divided room — the left half is spacious, the right half cramped. The bias is spatial: unequal allocation of space.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 8,
-      "depth": 9,
-      "max_height": 5
-    },
-    "metadata": {
-      "difficulty": "advanced",
-      "category": "critical_algorithms",
-      "spatial_temperature": 0.7,
-      "design_notes": "Wall divides room into ~5-col spacious half and ~2-col cramped half. Inequality made visible through architecture."
-    }
+      "name": "Algorithmic Bias Visualization",
+      "lookup_name": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "description": "A divided room â€” the left half is spacious, the right half cramped. The bias is spatial: unequal allocation of space.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 8,
+          "depth": 9,
+          "max_height": 5
+      },
+      "metadata": {
+          "difficulty": "advanced",
+          "category": "critical_algorithms",
+          "spatial_temperature": 0.7,
+          "design_notes": "Wall divides room into ~5-col spacious half and ~2-col cramped half. Inequality made visible through architecture."
+      },
+      "title": "Bias as Structural Incompleteness"
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next",
+          "description": "Continue to next step",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
   },
   "layers": {
     "structure": [
-      [ "1", "1", "1", "1", "1", "1", "5", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "5", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "5", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "5", "1" ],
-      [ "1", "1", "1", "1", "1", "5", "5", "1" ],
-      [ "1", "1", "1", "1", "1", "5", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "0", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1" ]
+      ["1", "1", "1", "1", "1", "1", "5", "1"],
+      ["1", "1", "1", "1", "1", "1", "5", "1"],
+      ["1", "1", "1", "1", "1", "1", "5", "1"],
+      ["1", "1", "1", "1", "1", "1", "5", "1"],
+      ["1", "1", "1", "1", "1", "5", "5", "1"],
+      ["1", "1", "1", "1", "1", "5", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "0", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"]
     ],
     "utilities": [
-      [ "s", "an", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", "wp:90", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", "t", " " ],
-      [ " ", " ", " ", " ", " ", " ", "sp", " " ]
+      ["s", "an", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "wp:90", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", "t", " "],
+      [" ", " ", " ", " ", " ", " ", "sp", " "]
     ],
     "interactables": [
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", "bias_visualizer", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ]
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", "science_screen:180:1.5#mode:scatter"],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", "bias_visualizer", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", "bias_from_inside"],
+      [" ", " ", " ", " ", " ", " ", " ", " "]
     ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
   }
 }

@@ -1,110 +1,137 @@
 {
   "map_info": {
-    "name": "Kusama's Polka Dots: Self-Obliteration",
-    "lookup_name": "WaveFunctions_Kusama",
-    "description": "Inspired by Yayoi Kusama's aesthetic of accumulation and obsession. Experience high-frequency sine wave grids, step functions creating hard polka dot edges, and UV scrolling simulating hallucinations where patterns move from canvas to wall to body to universe. Lose the burden of uniqueness—camouflaged by the pattern of the world.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 13,
-      "depth": 14,
-      "max_height": 5
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "wavefunctions",
-      "estimated_time": "5-7 minutes",
-      "learning_objectives": [ "Infinite field: high-frequency sine grids (sin(x * density) * sin(y * density))", "Step functions: thresholds for hard-edged polka dots", "UV scrolling: simulating hallucination and pattern spread", "Camouflage: losing individual contour in the pattern", "Critical: Is this madness or liberation? The pattern encompasses all, cares for none" ]
-    }
+      "name": "Kusama's Polka Dots: Self-Obliteration",
+      "lookup_name": "WaveFunctions_Kusama",
+      "description": "Inspired by Yayoi Kusama's aesthetic of accumulation and obsession. Experience high-frequency sine wave grids, step functions creating hard polka dot edges, and UV scrolling simulating hallucinations where patterns move from canvas to wall to body to universe. Lose the burden of uniqueness—camouflaged by the pattern of the world.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 13,
+          "depth": 14,
+          "max_height": 5
+      },
+      "metadata": {
+          "difficulty": "intermediate",
+          "category": "wavefunctions",
+          "estimated_time": "5-7 minutes",
+          "learning_objectives": [
+              "Infinite field: high-frequency sine grids (sin(x * density) * sin(y * density))",
+              "Step functions: thresholds for hard-edged polka dots",
+              "UV scrolling: simulating hallucination and pattern spread",
+              "Camouflage: losing individual contour in the pattern",
+              "Critical: Is this madness or liberation? The pattern encompasses all, cares for none"
+          ]
+      }
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next Lesson",
+          "description": "Continue to the next algorithm demonstration",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      },
+      "s": {
+          "properties": {
+              "height": 5.5
+          }
+      }
   },
   "documentation": {
-    "summary": "WaveFunctions Kusama Field",
-    "layout": "13x14 void with a transport cube runway to reach the Kusama-inspired sine installation.",
-    "objective": "Ride the transport cube across the gap and observe the infinite polka-wave effect.",
-    "key_elements": [ "Spawn `s` at the northern lip of the chasm", "Transport cube `tc` spanning the central void", "`kusama_sine` interactive sculpture at the far platform", "Teleporter `t` positioned beyond the exhibit" ]
+      "summary": "WaveFunctions Kusama Field",
+      "layout": "13x14 void with a transport cube runway to reach the Kusama-inspired sine installation.",
+      "objective": "Ride the transport cube across the gap and observe the infinite polka-wave effect.",
+      "key_elements": [
+          "Spawn `s` at the northern lip of the chasm",
+          "Transport cube `tc` spanning the central void",
+          "`kusama_sine` interactive sculpture at the far platform",
+          "Teleporter `t` positioned beyond the exhibit"
+      ]
+  },
+  "lighting": {
+      "ambient_color": [
+          0.4,
+          0.4,
+          0.5
+      ],
+      "ambient_energy": 0.6,
+      "directional_light": {
+          "enabled": true,
+          "direction": [
+              -0.4,
+              -0.7,
+              -0.4
+          ],
+          "color": [
+              1.0,
+              0.9,
+              0.8
+          ],
+          "energy": 1.2
+      }
+  },
+  "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "hidden_except_corners",
+      "background": {
+          "type": "sky",
+          "color": [
+              0.2,
+              0.3,
+              0.7
+          ]
+      }
   },
   "layers": {
     "structure": [
-      [ "1", "1", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5" ],
-      [ "1", "1", "0", "0", "0", "0", " ", "0", "0", "0", "4", "3" ],
-      [ "4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "2" ],
-      [ "4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
-      [ "4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
-      [ "4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
-      [ "4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
-      [ "4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
-      [ "4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" ],
-      [ "4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "2" ],
-      [ "4", "1", "0", "0", "0", "0", "0", "0", "0", "1", "0", "3" ],
-      [ "4", "4", "4", "4", "4", "4", "4", "4", "4", "0", "5", "5" ],
-      [ "4", "4", "4", "4", "4", "4", "4", "4", "4", "1", "5", "5" ]
+      ["1", "1", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5"],
+      ["1", "1", "0", "0", "0", "0", " ", "0", "0", "0", "4", "3"],
+      ["4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "2"],
+      ["4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+      ["4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+      ["4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+      ["4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+      ["4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+      ["4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+      ["4", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "2"],
+      ["4", "1", "0", "0", "0", "0", "0", "0", "0", "1", "0", "3"],
+      ["4", "4", "4", "4", "4", "4", "4", "4", "4", "0", "5", "5"],
+      ["4", "4", "4", "4", "4", "4", "4", "4", "4", "1", "5", "5"]
     ],
     "utilities": [
-      [ "s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "tc:9:z", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", "tc:6:x", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+      ["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "tc:9:z", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", "tc:6:x", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
     ],
     "interactables": [
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", "clipboard#kusama_axioms:194:1.0", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", "kusama_sine", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", "clipboard#kusama_axioms:194:1.0", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "kusama_sine", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "dark_sphere", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
     ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next Lesson",
-      "description": "Continue to the next algorithm demonstration",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    },
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    }
-  },
-  "lighting": {
-    "ambient_color": [ 0.4, 0.4, 0.5 ],
-    "ambient_energy": 0.6,
-    "directional_light": {
-      "enabled": true,
-      "direction": [ -0.4, -0.7, -0.4 ],
-      "color": [ 1.0, 0.9, 0.8 ],
-      "energy": 1.2
-    }
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": true,
-    "enable_physics": true,
-    "auto_reveal_on_entry": false,
-    "initial_tile_visibility": "hidden_except_corners",
-    "background": {
-      "type": "sky",
-      "color": [ 0.2, 0.3, 0.7 ]
-    }
   }
 }

@@ -6,6 +6,16 @@ extends Node3D
 
 class_name SchrodingerBox
 
+# @identity
+# essence: |ψ⟩ = α|alive⟩ + β|dead⟩ → observation collapses to |alive⟩ or |dead⟩ with P = |α|²
+# desire: open the box and watch the superposition collapse — the lid swings, the state resolves, then resets
+# critical_parameter: auto_reset_time — how long the collapsed state persists before returning to superposition
+# triggers: click/observe collapses the wavefunction randomly; timer resets to superposition; lid animates open/close
+# emerges: the discomfort of genuine indeterminacy — the cat is not secretly alive or dead, it is both
+# needs: VR click interaction [has via mouse], XR interaction [missing]
+# relationships: contrasts florensky_sphere (quantum vs paraconsistent superposition); paired with superposition_display (abstract vs physical metaphor)
+# truth: observation does not reveal a pre-existing state — it creates one
+
 signal box_opened
 signal state_collapsed(is_alive: bool)
 signal superposition_entered
@@ -16,6 +26,7 @@ enum State { SUPERPOSITION, ALIVE, DEAD }
 @export var current_state: State = State.SUPERPOSITION
 @export var auto_reset_time: float = 5.0
 
+var _xr_active: bool = false
 var _box_mesh: MeshInstance3D
 var _lid_mesh: MeshInstance3D
 var _cat_alive: MeshInstance3D
@@ -27,6 +38,7 @@ var _lid_open: bool = false
 var _reset_timer: float = 0.0
 
 func _ready():
+	_xr_active = XRServer.primary_interface != null
 	_create_box()
 	_create_lid()
 	_create_cat_states()
@@ -188,9 +200,16 @@ func reset_to_superposition():
 	superposition_entered.emit()
 
 func _input(event):
+	if _xr_active:
+		return
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if current_state == State.SUPERPOSITION:
 				observe()
 			else:
 				reset_to_superposition()
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

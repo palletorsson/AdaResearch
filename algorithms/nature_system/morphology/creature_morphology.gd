@@ -156,8 +156,8 @@ static func _build_body_segments(dna: CritterDNA, root: Node3D, mapper: CritterT
 		inst.name = "Body_%d" % i
 		inst.mesh = mesh
 
-		# Material: primary color with per-segment variation
-		var mat := mapper.create_material_from_dna(dna, base_seed + i)
+		# Material: scales surface with per-segment variation
+		var mat := mapper.create_part_material(dna, CritterTraitMapper.PartType.TRUNK, base_seed + i)
 		# Body segments alternate slightly darker
 		if i % 2 == 1:
 			mat.set_shader_parameter("primary_color", dna.primary_color.darkened(0.08))
@@ -295,8 +295,8 @@ static func _build_single_limb(dna: CritterDNA, root: Node3D, mapper: CritterTra
 			inst.name = "Limb_%d_%d" % [seed_val, joint_idx]
 			inst.mesh = mesh
 
-			# Limb material: slightly different from body
-			var mat := mapper.create_material_from_dna(dna, seed_val + joint_idx * 10)
+			# Limb material: scale surface, different pattern from body
+			var mat := mapper.create_part_material(dna, CritterTraitMapper.PartType.LIMB, seed_val + joint_idx * 10)
 			mat.set_shader_parameter("primary_color", dna.primary_color.darkened(0.1))
 			mat.set_shader_parameter("secondary_color", dna.secondary_color)
 			mapper.apply_variation(mat, seed_val + joint_idx * 77)
@@ -358,8 +358,8 @@ static func _build_limb_tip(dna: CritterDNA, root: Node3D, mapper: CritterTraitM
 		var y_axis := z_axis.cross(x_axis).normalized()
 		inst.basis = Basis(x_axis, y_axis, z_axis)
 
-	# Material: accent/tertiary color for claws, primary for pads
-	var mat := mapper.create_material_from_dna(dna, seed_val)
+	# Material: root/feet surface for paws/claws
+	var mat := mapper.create_part_material(dna, CritterTraitMapper.PartType.ROOT, seed_val)
 	if dna.aggression > 0.6:
 		mat.set_shader_parameter("primary_color", dna.tertiary_color)
 		mat.set_shader_parameter("roughness", 0.3)
@@ -412,7 +412,7 @@ static func _build_head(dna: CritterDNA, root: Node3D, mapper: CritterTraitMappe
 	head_inst.mesh = head_mesh
 	head_inst.position = head_pos + forward * head_radius * 0.3
 
-	var head_mat := mapper.create_material_from_dna(dna, base_seed + 30000)
+	var head_mat := mapper.create_part_material(dna, CritterTraitMapper.PartType.HEAD, base_seed + 30000)
 	mapper.apply_variation(head_mat, base_seed + 30001)
 	head_inst.material_override = head_mat
 	root.add_child(head_inst)
@@ -623,3 +623,5 @@ static func _create_tube_mesh(start: Vector3, end: Vector3,
 
 	st.generate_normals()
 	return st.commit()
+
+

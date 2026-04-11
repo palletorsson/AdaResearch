@@ -104,5 +104,5 @@ Press trigger and move your hands. Colored ribbons flow from your fingertips, sm
 ## See Also
 
 - `drawing/` — Persistent drawing tools
-- `effects/` — Other visual effects
+- `postprocessing/` — Other visual effects
 - `oscillation/` — Rhythmic movement patterns

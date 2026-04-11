@@ -305,3 +305,12 @@ func _randfn(mean := 0.0, std_dev := 0.1) -> float:
 	return _rng.randfn(mean, std_dev)
 
 const MUTATION_STD: float = 0.25
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

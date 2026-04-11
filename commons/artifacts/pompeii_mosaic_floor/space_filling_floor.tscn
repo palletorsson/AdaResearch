@@ -1,0 +1,4 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://commons/artifacts/pompeii_mosaic_floor/space_filling_floor.gd" id="1"]
+[node name="SpaceFillingFloor" type="Node3D"]
+script = ExtResource("1")

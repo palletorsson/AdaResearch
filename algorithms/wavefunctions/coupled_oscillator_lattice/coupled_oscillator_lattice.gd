@@ -240,3 +240,12 @@ func get_total_energy() -> float:
 		var pe = 0.5 * mass * natural_frequency * natural_frequency * osc.displacement * osc.displacement
 		total_energy += ke + pe
 	return total_energy
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

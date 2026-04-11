@@ -14,6 +14,7 @@ static var instance: AdaSceneManager
 # Scene references and paths
 const GRID_SCENE_PATH = "res://commons/scenes/grid.tscn"
 const LAB_SCENE_PATH = "res://commons/scenes/lab.tscn"
+const LANDSCAPE_SCENE_PATH = "res://commons/scenes/landscape.tscn"
 
 # Transition types
 enum TransitionType {
@@ -236,39 +237,34 @@ func _load_single_sequence_file(path: String):
 # =============================================================================
 
 func _get_sequence_for_artifact(artifact_id: String) -> String:
-	"""Get sequence name for artifact from grid_artifacts.json"""
-	const ARTIFACTS_JSON_PATH = "res://commons/artifacts/grid_artifacts.json"
-	
-	if not FileAccess.file_exists(ARTIFACTS_JSON_PATH):
+	"""Get sequence name for artifact from registry/*.json"""
+	const REGISTRY_DIR = "res://commons/artifacts/registry/"
+
+	var dir = DirAccess.open(REGISTRY_DIR)
+	if not dir:
 		if debug:
-			print("AdaSceneManager: Artifacts JSON not found: %s" % ARTIFACTS_JSON_PATH)
+			print("AdaSceneManager: Registry directory not found: %s" % REGISTRY_DIR)
 		return ""
-	
-	var file = FileAccess.open(ARTIFACTS_JSON_PATH, FileAccess.READ)
-	if not file:
-		if debug:
-			print("AdaSceneManager: Could not open artifacts file")
-		return ""
-	
-	var json_text = file.get_as_text()
-	file.close()
-	
-	var json = JSON.new()
-	var parse_result = json.parse(json_text)
-	
-	if parse_result != OK:
-		if debug:
-			print("AdaSceneManager: Failed to parse artifacts JSON")
-		return ""
-	
-	var artifacts_data = json.data.get("artifacts", {})
-	
-	if artifacts_data.has(artifact_id):
-		var artifact_info = artifacts_data[artifact_id]
-		var sequence = artifact_info.get("sequence", "")
-		if sequence and sequence != null:
-			return sequence
-	
+
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		if not dir.current_is_dir() and file_name.ends_with(".json"):
+			var file = FileAccess.open(REGISTRY_DIR + file_name, FileAccess.READ)
+			if file:
+				var json = JSON.new()
+				if json.parse(file.get_as_text()) == OK:
+					var artifacts_data = json.data.get("artifacts", {})
+					if artifacts_data.has(artifact_id):
+						var artifact_info = artifacts_data[artifact_id]
+						var sequence = artifact_info.get("sequence", "")
+						if sequence and sequence != null:
+							dir.list_dir_end()
+							return sequence
+				file.close()
+		file_name = dir.get_next()
+	dir.list_dir_end()
+
 	return ""
 
 # =============================================================================
@@ -368,6 +364,8 @@ func request_transition(transition_request: Dictionary):
 			_handle_next_action(current_map)
 		"return_to_hub":
 			_return_to_hub(transition_request.get("completion_data", {}))
+		"load_landscape":
+			_load_landscape()
 		_:
 			if debug:
 				print("AdaSceneManager: Unknown action: %s" % action)
@@ -697,6 +695,16 @@ func _return_to_hub(completion_data: Dictionary = {}):
 	# Load lab scene
 	_load_scene_with_data(LAB_SCENE_PATH, lab_scene_data)
 
+
+func _load_landscape():
+	if debug:
+		print("AdaSceneManager: Loading open landscape scene")
+	var scene_data = {
+		"scene_manager": self,
+		"return_to": "lab",
+	}
+	_load_scene_with_data(LANDSCAPE_SCENE_PATH, scene_data)
+
 # Enhanced scene loading with lab map override support
 
 func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
@@ -706,7 +714,11 @@ func _load_scene_with_data(scene_path: String, scene_data: Dictionary):
 		return
 	
 	var from_scene = current_scene_type
-	var to_scene = "lab" if scene_path == LAB_SCENE_PATH else "grid"
+	var to_scene = "grid"
+	if scene_path == LAB_SCENE_PATH:
+		to_scene = "lab"
+	elif scene_path == LANDSCAPE_SCENE_PATH:
+		to_scene = "landscape"
 	
 	current_scene_type = to_scene
 	

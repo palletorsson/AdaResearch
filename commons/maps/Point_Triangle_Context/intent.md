@@ -3,3 +3,5 @@ Sequence role: Sixth map. Deepens Point_Triangle's closure into structural rigid
 Technical angle: Triangle rigidity vs quad flexibility, Pythagorean theorem as constraint relation, angle computation, quad decomposition into triangle pairs, folding strips as physical-to-digital bridge.
 Critical angle: Rigidity as geometric ideology — the triangle cannot deform without breaking, unlike the quad. Pythagorean theorem as the West's foundational geometric claim. Rigidity vs flexibility as competing spatial ethics.
 Key artifacts: interactivetriangle and pythagorean_triangle_angles for direct manipulation of constraint; folded_strip for physical folding intuition; draw_triangle_faces for surface construction; quad_line_puzzle#fillhole and quad for the triangle-to-quad transition.
+
+Gap: No gap identified.

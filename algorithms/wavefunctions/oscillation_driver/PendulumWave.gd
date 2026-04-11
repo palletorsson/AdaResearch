@@ -7,6 +7,17 @@ extends Node3D
 ## Protocol: IACP v2.2
 
 # The Driver (Pendulum)
+
+# @identity
+# essence: theta(t) = theta_0 * cos(sqrt(g/L) * t) * e^(-damping*t)
+# desire: Watch a pendulum swing and see its trajectory traced as a time-domain waveform
+# critical_parameter: length — determines natural frequency via sqrt(g/L)
+# triggers: initial_angle sets energy; damping controls decay envelope
+# emerges: the fundamental connection between pendulum length and oscillation period
+# needs: VR grab to set initial angle [missing], length adjustment [missing]
+# relationships: depends on gravity simulation; contrasts with spring_demo (gravity vs elasticity); unlocks harmonic motion intuition
+# truth: Gravity and a string are sufficient to generate periodic motion.
+
 @onready var pivot: Node3D = $Pivot
 @onready var rod: MeshInstance3D = $Pivot/Rod
 @onready var bob: MeshInstance3D = $Pivot/Bob
@@ -31,14 +42,14 @@ var angular_velocity: float = 0.0
 var angular_acceleration: float = 0.0
 var trail_points: Array[Vector3] = []
 
-func _ready():
+func _ready() -> void:
 	_setup_visuals()
 	
 	# Initialize pendulum
 	angle = deg_to_rad(initial_angle)
 	_update_pendulum_visuals()
 
-func _setup_visuals():
+func _setup_visuals() -> void:
 	trail_mesh = ImmediateMesh.new()
 	trail_instance.mesh = trail_mesh
 	
@@ -54,7 +65,7 @@ func _setup_visuals():
 	rod.mesh.height = length
 	bob.position.y = -length
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# --- PHYSICS SIMULATION (The Driver) ---
 	# Simple Pendulum Equation: alpha = -(g/L) * sin(theta)
 	angular_acceleration = -(gravity / length) * sin(angle)
@@ -87,11 +98,11 @@ func _process(delta):
 	# Render
 	_draw_trail()
 
-func _update_pendulum_visuals():
+func _update_pendulum_visuals() -> void:
 	# Rotate pivot to match angle
 	pivot.rotation.z = angle
 
-func _draw_trail():
+func _draw_trail() -> void:
 	trail_mesh.clear_surfaces()
 	
 	if trail_points.is_empty():
@@ -101,3 +112,6 @@ func _draw_trail():
 	for p in trail_points:
 		trail_mesh.surface_add_vertex(p)
 	trail_mesh.surface_end()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

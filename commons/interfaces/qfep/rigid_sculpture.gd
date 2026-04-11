@@ -7,6 +7,16 @@ extends Node3D
 
 class_name QFEPRigidSculpture
 
+# @identity
+# essence: octahedron_center + radial_prisms(angle = i/n * TAU) + caps -> crystalline sculpture, no _process
+# desire: confront a form that refuses to move — perfect geometry locked in metallic purple
+# critical_parameter: the absence of animation — no _process means no becoming, only being
+# triggers: nothing — the sculpture is immune to time
+# emerges: nothing emerges — and that absence is the lesson
+# needs: no VR controls — rigidity is the interaction [has]
+# relationships: contrasts fluid_form (phi>0 vs phi<0); paired with preserved_pattern; represents conservative resistance to change
+# truth: negative phi crystallizes form into monument — the rigid sculpture is beautiful and dead
+
 ## Sculpture size
 @export var size: float = 0.4
 

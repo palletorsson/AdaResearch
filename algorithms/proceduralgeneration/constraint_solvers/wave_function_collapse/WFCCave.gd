@@ -48,12 +48,12 @@ class CaveTile:
 	var material: Material
 	var weight: float = 1.0  # Probability weight for WFC
 	
-	func _init(tile_type: CaveType):
+	func _init(tile_type: CaveType) -> void:
 		type = tile_type
 		_setup_connections()
 		_create_mesh()
 	
-	func _setup_connections():
+	func _setup_connections() -> void:
 		# Define which directions each tile type can connect to
 		match type:
 			CaveType.SOLID:
@@ -97,7 +97,7 @@ class CaveTile:
 			CaveType.PILLAR:
 				connections = {"north": false, "south": false, "east": false, "west": false, "up": true, "down": true}
 	
-	func _create_mesh():
+	func _create_mesh() -> void:
 		# Create procedural meshes for each cave tile type
 		match type:
 			CaveType.SOLID:
@@ -297,17 +297,17 @@ class CaveCell:
 	var selected_tile: int = -1
 	var noise_influence: float = 0.0
 	
-	func _init(pos: Vector3i, tile_count: int):
+	func _init(pos: Vector3i, tile_count: int) -> void:
 		position = pos
 		for i in range(tile_count):
 			possible_tiles.append(i)
 	
-	func collapse_to_tile(tile_index: int):
+	func collapse_to_tile(tile_index: int) -> void:
 		collapsed = true
 		selected_tile = tile_index
 		possible_tiles = [tile_index] as Array[int]
 	
-	func remove_tile_option(tile_index: int):
+	func remove_tile_option(tile_index: int) -> void:
 		possible_tiles.erase(tile_index)
 
 # Main cave generation variables
@@ -318,20 +318,20 @@ var noise: FastNoiseLite
 var generation_timer: float = 0.0
 var is_generating: bool = false
 
-func _ready():
+func _ready() -> void:
 	setup_noise()
 	setup_cave_tiles()
 	initialize_cave_grid()
 	if auto_generate:
 		start_generation()
 
-func setup_noise():
+func setup_noise() -> void:
 	noise = FastNoiseLite.new()
 	noise.seed = randi()
 	noise.frequency = noise_scale
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 
-func setup_cave_tiles():
+func setup_cave_tiles() -> void:
 	cave_tiles.clear()
 	
 	# Create all cave tile types
@@ -367,7 +367,7 @@ func setup_cave_tiles():
 	
 	print("Created ", cave_tiles.size(), " cave tile types")
 
-func initialize_cave_grid():
+func initialize_cave_grid() -> void:
 	cave_grid.clear()
 	mesh_instances.clear()
 	
@@ -421,11 +421,11 @@ func initialize_cave_grid():
 	
 	print("Initialized cave grid: ", cave_size, " = ", cave_grid.size(), " cells")
 
-func start_generation():
+func start_generation() -> void:
 	is_generating = true
 	generation_timer = 0.0
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_generating:
 		generation_timer += delta
 		if generation_timer >= generation_speed:
@@ -510,7 +510,7 @@ func _pick_weighted_tile(cell: CaveCell) -> int:
 	# Fallback
 	return cell.possible_tiles[0] if cell.possible_tiles.size() > 0 else 0
 
-func _update_cell_visual(cell: CaveCell):
+func _update_cell_visual(cell: CaveCell) -> void:
 	var index = _cell_position_to_index(cell.position)
 	if index >= 0 and index < mesh_instances.size():
 		var mesh_instance = mesh_instances[index]
@@ -523,7 +523,7 @@ func _update_cell_visual(cell: CaveCell):
 				# Empty space - hide mesh
 				mesh_instance.visible = false
 
-func _propagate_cave_constraints(changed_cell: CaveCell):
+func _propagate_cave_constraints(changed_cell: CaveCell) -> void:
 	var stack = [changed_cell]
 	var directions = [
 		{"offset": Vector3i(0, 1, 0), "direction": "up", "opposite": "down"},
@@ -577,7 +577,7 @@ func _propagate_cave_constraints(changed_cell: CaveCell):
 					print("Constraint violation detected!")
 					return
 
-func _post_process_cave():
+func _post_process_cave() -> void:
 	# Add additional cave features after main generation
 	print("Post-processing cave...")
 	
@@ -587,7 +587,7 @@ func _post_process_cave():
 	# Add atmospheric effects
 	_add_cave_atmosphere()
 
-func _add_cave_lighting():
+func _add_cave_lighting() -> void:
 	# Add torches or bioluminescent lighting in chambers and tunnels
 	for i in range(cave_grid.size()):
 		var cell = cave_grid[i]
@@ -602,7 +602,7 @@ func _add_cave_lighting():
 				light.omni_range = cell_size * 3
 				add_child(light)
 
-func _add_cave_atmosphere():
+func _add_cave_atmosphere() -> void:
 	# Add fog or particle effects
 	var environment = Environment.new()
 	environment.fog_enabled = true
@@ -627,20 +627,20 @@ func _get_cave_cell_at_position(pos: Vector3i) -> CaveCell:
 func _cell_position_to_index(pos: Vector3i) -> int:
 	return pos.x + pos.y * cave_size.x + pos.z * cave_size.x * cave_size.y
 
-func restart_cave_generation():
+func restart_cave_generation() -> void:
 	initialize_cave_grid()
 	if auto_generate:
 		start_generation()
 
 # Public control functions
-func toggle_generation():
+func toggle_generation() -> void:
 	is_generating = not is_generating
 
-func clear_cave():
+func clear_cave() -> void:
 	is_generating = false
 	initialize_cave_grid()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space
 		toggle_generation()
 	elif event.is_action_pressed("ui_cancel"):  # Escape
@@ -648,3 +648,12 @@ func _input(event):
 	elif event.is_action_pressed("ui_select"):  # Enter
 		if not is_generating:
 			cave_wfc_step()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

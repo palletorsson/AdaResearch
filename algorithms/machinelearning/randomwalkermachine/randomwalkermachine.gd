@@ -41,7 +41,7 @@ class RandomWalker:
 	var neural_weights: Array[float] = []
 	var exploration_noise: float
 	
-	func _init(start_pos: Vector3, target_pos: Vector3):
+	func _init(start_pos: Vector3, target_pos: Vector3) -> void:
 		position = start_pos
 		target = target_pos
 		velocity = Vector3.ZERO
@@ -90,7 +90,7 @@ class RandomWalker:
 		
 		return position
 
-func _ready():
+func _ready() -> void:
 	setup_noise()
 	generate_target_points()
 	create_walker_agents()
@@ -98,12 +98,12 @@ func _ready():
 	visualize_targets()
 	_create_stats_label()
 
-func setup_noise():
+func setup_noise() -> void:
 	noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	noise.frequency = 0.1
 	noise.seed = randi()
 
-func generate_target_points():
+func generate_target_points() -> void:
 	# Sample 100 points on a noise-disturbed circle
 	for i in range(100):
 		var angle = (i / 100.0) * TAU
@@ -121,7 +121,7 @@ func generate_target_points():
 		)
 		target_points.append(target_point)
 
-func create_walker_agents():
+func create_walker_agents() -> void:
 	# Create 100 random walkers starting from center
 	for i in range(num_walkers):
 		var start_position = Vector3.ZERO  # Always start from center
@@ -129,7 +129,7 @@ func create_walker_agents():
 		var walker = RandomWalker.new(start_position, target)
 		walker_agents.append(walker)
 
-func setup_materials():
+func setup_materials() -> void:
 	## Enhanced materials with metallic sheen and stronger emission
 	target_material = StandardMaterial3D.new()
 	target_material.albedo_color = Color(0.3, 0.5, 0.9, 1)  # Blue for targets
@@ -153,12 +153,13 @@ func setup_materials():
 	trail_material.emission = Color(1.0, 0.85, 0.2, 1) * 0.4
 	trail_material.emission_energy_multiplier = 1.2
 
-func visualize_targets():
+func visualize_targets() -> void:
 	# Create target spheres
 	for i in range(target_points.size()):
 		var mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.1
+		sphere.height = 0.2
 		mesh_instance.mesh = sphere
 		mesh_instance.material_override = target_material
 		mesh_instance.position = target_points[i]
@@ -180,11 +181,11 @@ func _process(_delta):
 	visualize_walkers()
 	_update_stats_label_now()
 
-func update_walkers():
+func update_walkers() -> void:
 	for walker in walker_agents:
 		walker.update_position(temperature)
 
-func evolve_walkers():
+func evolve_walkers() -> void:
 	## Evolutionary step: keep top 30%, mutate middle 40%, replace bottom 30% with offspring
 	walker_agents.sort_custom(func(a, b): return a.fitness > b.fitness)
 	
@@ -223,7 +224,7 @@ func evolve_walkers():
 		
 		walker_agents[i] = new_walker
 
-func visualize_walkers():
+func visualize_walkers() -> void:
 	## Remove old walker visualizations and recreate with fitness-based coloring
 	for child in get_children():
 		if child.has_meta("walker_viz"):
@@ -248,6 +249,7 @@ func visualize_walkers():
 		var mesh_instance = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.05 + walker.fitness * 0.05  # Higher fitness = larger
+		sphere.height = 0.05 + walker.fitness * 0.05  # Higher fitness = larger * 2.0
 		mesh_instance.mesh = sphere
 		
 		# Fitness gradient: red (low) → green (high)
@@ -290,7 +292,7 @@ func visualize_walkers():
 
 # ── Input Handling ────────────────────────────────────────────────────────────
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space key — randomness burst
 		temperature += 2.0
 		# Visual feedback: flash the stats label
@@ -310,11 +312,11 @@ func _input(event):
 
 # ── Experiment Methods ────────────────────────────────────────────────────────
 
-func experiment_with_randomness_injection():
+func experiment_with_randomness_injection() -> void:
 	## Method to test different randomness injection strategies
 	pass
 
-func log_performance_metrics():
+func log_performance_metrics() -> void:
 	## Print current generation metrics to console
 	print("Gen %d | Avg Fitness: %.4f | Best: %.4f | Temp: %.2f" % [
 		_generation, _avg_fitness, _best_fitness, temperature
@@ -322,7 +324,7 @@ func log_performance_metrics():
 
 # ── Stats Label ──────────────────────────────────────────────────────────────
 
-func _create_stats_label():
+func _create_stats_label() -> void:
 	## Floating 3D label showing generation, fitness, and temperature in real-time
 	_stats_label = Label3D.new()
 	_stats_label.text = "Initializing..."
@@ -335,8 +337,17 @@ func _create_stats_label():
 	_stats_label.no_depth_test = true
 	add_child(_stats_label)
 
-func _update_stats_label_now():
+func _update_stats_label_now() -> void:
 	if _stats_label:
 		_stats_label.text = "Random Walker Machine\nGen: %d  |  Best: %.3f  |  Avg: %.3f  |  Temp: %.2f" % [
 			_generation, _best_fitness, _avg_fitness, temperature
 		]
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

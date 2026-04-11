@@ -1,3 +1,19 @@
-# PG_Percolation_Network - Critical
+# PG_Percolation_Network — Critical Reflection
 
-Describe what this map normalizes, what it excludes, and what alternative computation it can open.
+At 59.27%, the world changes. Below the threshold: isolated clusters, islands, local knowledge that cannot travel. Above it: a spanning path, a connected system, signals crossing from edge to edge. The transition is not gradual. It is a phase change — as sudden and irreversible as ice becoming water. Percolation theory studies the moment when quantity becomes quality, when enough random connections produce a qualitatively different system.
+
+Simondon would call this metastability. A system below the percolation threshold is metastable — it contains the potential for global connectivity but has not yet actualized it. Each additional occupied cell increases the tension between local clustering and global isolation. At the critical point, the tension resolves. Individuation occurs: not of a single entity but of the system itself, which crosses from one regime to another. The spanning cluster is not a thing but an event — the moment the lattice discovers it was connected all along, if only the density were sufficient.
+
+The percolationnetwork_ca artifact makes this visible. The @identity block names the desire: "to stand inside a 3D lattice and watch pink flow seep through white cubes, hoping it reaches the bottom before paths run out." Hoping. The word matters. Below threshold, hope is futile. Above it, hope is unnecessary. Only at the critical point does hope have meaning — only where the outcome is genuinely uncertain does observation become suspense.
+
+Stiegler's pharmacology enters through the threshold itself. The critical probability is a pharmacon: it is the point at which the system is simultaneously most creative and most fragile. Just below threshold, one more cell could create a spanning cluster. Just above it, one cell removed could destroy connectivity. The percolation threshold is the edge of chaos made precise — a number, p_c = 0.5927, that divides two worlds. All phase transitions share this structure: maximum sensitivity at the boundary, stability on either side, and the impossibility of dwelling at the edge without tipping.
+
+What does this map normalize? The idea that connectivity is a threshold property — that systems are either connected or not, that there is a critical density below which communication fails and above which it succeeds. This is the network-theory worldview: more links, more density, more occupied cells — more is better until the threshold is crossed, and then the system simply works.
+
+What does it exclude? The possibility that disconnection is valuable. That clusters serve purposes that spanning paths destroy. That local knowledge, local culture, local variation depend on barriers that percolation dissolves. When every node can reach every other node, homogenization follows. The spanning cluster that connects edge to edge also carries information, influence, and power from center to periphery. Percolation theory cannot distinguish between a network that empowers and a network that colonizes, because it measures only connectivity, not content.
+
+The PERCOLATION_THRESHOLD at 0.4 in the @identity block — lower than the theoretical 0.5927 — reveals a design choice. The artifact is tuned to make percolation likely, to make the dramatic moment of spanning accessible to the viewer. Even the demonstration of emergence is curated. The threshold that defines whether the system connects or fragments is itself a parameter someone set.
+
+Simondon's preindividual field has exactly the character of the lattice at threshold: a field of potentials that has not yet resolved into individual structures. The percolation grid is pregnant with two possible futures — connected and disconnected — and the resolution depends on a single cell. The raised walkway places you above this field. You observe the phase transition from a position of safety, unable to place or remove cells, unable to intervene in the density that determines connection.
+
+Is connectivity a right or a condition? Is the spanning cluster liberation or occupation? The lattice does not answer. It percolates, or does not, at a density no individual cell controls.

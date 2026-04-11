@@ -15,6 +15,7 @@ enum Feature {
 	HANDS,           # Base hands (always unlocked)
 	SKIN_COLOR,      # Change skin/hand color
 	NAIL_COLOR,      # Change nail color
+	BODY_ARMS,       # IK arms (TwoBoneIK3D from shoulder to hand)
 	DRESS_BASIC,     # Basic Elphaba dress
 	DRESS_WICKED,    # Multi-layer Wicked gown
 	BODY_TORSO,      # Visible torso
@@ -25,6 +26,7 @@ enum Feature {
 # Scenes for loadable features
 const DRESS_BASIC_SCENE = preload("res://algorithms/wavefunctions/dancing_body/ElphabaDress.tscn")
 const DRESS_WICKED_SCENE = preload("res://algorithms/wavefunctions/dancing_body/WickedGown.tscn")
+const BODY_IK_SCENE = preload("res://commons/body/ik_arms/player_body_ik.tscn")
 
 @export_group("Initial State")
 @export var unlocked_features: Array[String] = ["hands"]  # Features unlocked by default
@@ -120,6 +122,8 @@ func activate_feature(feature_name: String) -> bool:
 		return true
 
 	match key:
+		"body_arms":
+			return _activate_body_ik(key)
 		"dress_basic":
 			return _activate_dress(DRESS_BASIC_SCENE, key)
 		"dress_wicked":
@@ -206,6 +210,27 @@ func _activate_dress(scene: PackedScene, key: String) -> bool:
 	feature_activated.emit(key)
 	return true
 
+## ============ BODY IK SYSTEM ============
+
+func _activate_body_ik(key: String) -> bool:
+	if not _xr_origin:
+		push_error("PlayerCustomization: No XROrigin3D found for body IK!")
+		return false
+
+	var body_ik = BODY_IK_SCENE.instantiate()
+	body_ik.name = "PlayerBodyIK"
+	_xr_origin.add_child(body_ik)
+
+	# Apply current skin color
+	if body_ik.has_method("set_skin_color"):
+		body_ik.set_skin_color(skin_color)
+
+	_active_features[key] = body_ik
+	_log("Activated body IK arms")
+	feature_activated.emit(key)
+	return true
+
+
 func _remove_existing_dress():
 	for key in ["dress_basic", "dress_wicked"]:
 		if _active_features.has(key):
@@ -244,8 +269,13 @@ func set_nail_color(color: Color):
 	color_changed.emit("nail", color)
 
 func _apply_skin_color(color: Color):
-	"""Apply skin color to hand materials."""
+	"""Apply skin color to hand materials and IK arms."""
 	_apply_color_to_hands("skin", color)
+	# Also update IK arm color if active
+	if _active_features.has("body_arms"):
+		var body_ik = _active_features["body_arms"]
+		if is_instance_valid(body_ik) and body_ik.has_method("set_skin_color"):
+			body_ik.set_skin_color(color)
 
 func _apply_nail_color(color: Color):
 	"""Apply nail color to hand materials."""

@@ -31,7 +31,7 @@ func get_params_array():
 	params.append(float(shape_type))
 	return params
 
-func _create_fallback_mesh():
+func _create_fallback_mesh() -> void:
 	print("TerrainGeneratorShapes: Creating fallback mesh...")
 	var sphere = SphereMesh.new()
 	sphere.radius = 10.0

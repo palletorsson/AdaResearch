@@ -13,10 +13,22 @@
 			"description": "Markov blanket cell simulation with noise-driven pulsing and entropy measurement. Visualizes the statistical boundary between internal states and external environment — the free energy principle made tangible.",
 			"category": "neuroscience",
 			"complexity": "advanced",
-			"tags": ["markov_blanket", "free_energy", "entropy", "active_inference", "boundary", "neuroscience"],
+			"tags": [
+				"markov_blanket",
+				"free_energy",
+				"entropy",
+				"active_inference",
+				"boundary",
+				"neuroscience"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"biology",
+				"neuroscience",
+				"qfep"
+			]
 		},
 		"perception_altering": {
 			"lookup_name": "perception_altering",
@@ -25,10 +37,21 @@
 			"description": "Environmental perception distortion through shader manipulation and spatial warping. Experience how altered sensory parameters change the felt quality of space — perception as active construction, not passive recording.",
 			"category": "neuroscience",
 			"complexity": "intermediate",
-			"tags": ["perception", "shader", "distortion", "sensory", "embodiment", "neuroscience"],
+			"tags": [
+				"perception",
+				"shader",
+				"distortion",
+				"sensory",
+				"embodiment",
+				"neuroscience"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"biology",
+				"neuroscience"
+			]
 		}
 	}
 }

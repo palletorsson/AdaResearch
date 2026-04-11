@@ -1,4 +1,4 @@
-﻿extends "res://algorithms/vectors/shared/vector_scene_base.gd"
+extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 const PaddleWheelScript = preload("res://algorithms/vectors/shared/gadgets/paddle_wheel_gadget.gd")
 
@@ -18,7 +18,7 @@ var _cached_cross_nodes: Dictionary = {}
 var _time_since_last_text_update: float = 0.0
 const TEXT_UPDATE_INTERVAL: float = 0.1
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	# Half-size for exhibition display
 	scale = Vector3(0.5, 0.5, 0.5)
@@ -42,7 +42,7 @@ func _ready():
 	_cache_vector_nodes(vector_b, _cached_vector_b_nodes)
 	_cache_vector_nodes(cross_vector, _cached_cross_nodes)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	var a = _get_vector_fast(vector_a, _cached_vector_a_nodes)
 	var b = _get_vector_fast(vector_b, _cached_vector_b_nodes)
 	var cross = a.cross(b)
@@ -76,7 +76,7 @@ func _create_parallelogram_mesh_instance() -> MeshInstance3D:
 
 	return mesh_instance
 
-func _update_parallelogram(a: Vector3, b: Vector3):
+func _update_parallelogram(a: Vector3, b: Vector3) -> void:
 	if parallelogram == null or parallelogram.mesh == null:
 		return
 
@@ -112,7 +112,7 @@ func _update_parallelogram(a: Vector3, b: Vector3):
 	if vertices.size() >= 2:
 		m.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)
 
-func _update_info(a: Vector3, b: Vector3, cross: Vector3):
+func _update_info(a: Vector3, b: Vector3, cross: Vector3) -> void:
 	var mag_a = a.length()
 	var mag_b = b.length()
 	var dot = a.dot(b)
@@ -133,7 +133,7 @@ func _update_info(a: Vector3, b: Vector3, cross: Vector3):
 
 # --- Caching Helpers (Local Implementation) ---
 
-func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary):
+func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary) -> void:
 	if arrow == null: return
 	cache_dict["start"] = arrow.get_node_or_null("lineContainer/GrabSphere")
 	cache_dict["end"] = arrow.get_node_or_null("lineContainer/GrabSphere2")
@@ -149,7 +149,7 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
-func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary) -> void:
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		# SCENE_SCALE multiplication handled here for visual representation
@@ -157,3 +157,12 @@ func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary
 	var line_container: Node3D = cache_dict.get("line_container")
 	if line_container and line_container.has_method("refresh_connections"):
 		line_container.refresh_connections()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

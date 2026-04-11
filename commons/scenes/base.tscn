@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://bk6ban0hctyym" path="res://addons/godot-xr-tools/functions/movement_wall_walk.tscn" id="30_wall_walk"]
 [ext_resource type="Script" uid="uid://qlvmq6ji5udp" path="res://commons/player/WristStatsDisplay.gd" id="31_wrist_stats"]
 [ext_resource type="Script" path="res://commons/tools/OversightVoiceBridge.gd" id="32_voice_bridge"]
+[ext_resource type="Script" uid="uid://movecapgate01" path="res://commons/managers/MovementCapabilityGate.gd" id="33_move_cap_gate"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
 size = Vector3(0.096401334, 0.121734604, 0.16770938)
@@ -50,6 +51,7 @@ fov = 71.3
 
 [node name="FunctionGazePointer" parent="XROrigin3D/XRCamera3D" index="0" unique_id=591397232 instance=ExtResource("3_rldw0")]
 visible = false
+enabled = false
 click_on_hold = true
 color = Color(1, 0, 1, 1)
 
@@ -75,9 +77,9 @@ mode = 1
 strafe = true
 
 [node name="FunctionPickup" parent="XROrigin3D/LeftHand/XRToolsCollisionHand" index="1" unique_id=1366509493 instance=ExtResource("8_5nlub")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, -0.05, 0.1)
-grab_distance = 0.1
-ranged_angle = 10.0
+grab_distance = 0.3
+ranged_distance = 5.0
+ranged_angle = 5.0
 
 [node name="FunctionPointer" parent="XROrigin3D/LeftHand/XRToolsCollisionHand" index="2" unique_id=391032211 instance=ExtResource("13_c1k2x")]
 show_laser = 2
@@ -117,9 +119,9 @@ mode = 1
 jump_button_action = "_disabled"
 
 [node name="FunctionPickup" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="3" unique_id=1831217974 instance=ExtResource("8_5nlub")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, -0.05, 0.1)
-ranged_distance = 10.0
-ranged_angle = 15.0
+grab_distance = 0.3
+ranged_distance = 5.0
+ranged_angle = 5.0
 
 [node name="FunctionPointer" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="4" unique_id=339200772 instance=ExtResource("13_c1k2x")]
 show_laser = 2
@@ -128,6 +130,10 @@ suppress_radius = 0.05
 collide_with_areas = true
 
 [node name="MovementFlight" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="5" unique_id=1844701323 instance=ExtResource("10_5sk3y")]
+enabled = true
+controller = 0
+flight_button = "ax_button"
+is_active = true
 
 [node name="RightHand" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="6" unique_id=1913051319 instance=ExtResource("12_cwrn5")]
 script = ExtResource("13_j7xni")
@@ -185,6 +191,9 @@ debug_mode = true
 
 [node name="Node3D" type="Node3D" parent="XROrigin3D" index="9" unique_id=1752910990]
 
+[node name="MovementCapabilityGate" type="Node" parent="XROrigin3D" index="10"]
+script = ExtResource("33_move_cap_gate")
+
 [node name="Label3D" type="Label3D" parent="." index="2" unique_id=645111340]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.82028, -1.89971)
 text = "Base "
@@ -207,5 +216,5 @@ script = ExtResource("19_bounds")
 [node name="OversightVoiceBridge" type="Node" parent="." index="8"]
 script = ExtResource("32_voice_bridge")
 secondary_push_to_talk_action = &""
-controller_push_to_talk_button = &"ax_button"
+controller_push_to_talk_button = &"by_button"
 controller_push_to_talk_tracker = &"left_hand"

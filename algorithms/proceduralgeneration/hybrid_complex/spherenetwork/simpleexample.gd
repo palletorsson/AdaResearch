@@ -2,10 +2,10 @@
 extends Node3D
 
 # Simple example that creates a 3-sphere network with walkable paths
-func _ready():
+func _ready() -> void:
 	create_simple_network()
 
-func create_simple_network():
+func create_simple_network() -> void:
 	# Create 3 spheres in a line
 	var positions = [
 		Vector3(-10, 0, 0),
@@ -21,7 +21,7 @@ func create_simple_network():
 		if i < positions.size() - 1:
 			create_walkable_pipe(positions[i], positions[i + 1], i)
 
-func create_walkable_sphere(pos: Vector3, index: int):
+func create_walkable_sphere(pos: Vector3, index: int) -> void:
 	var csg_combiner = CSGCombiner3D.new()
 	csg_combiner.name = "Sphere_" + str(index)
 	csg_combiner.position = pos
@@ -58,7 +58,7 @@ func create_walkable_sphere(pos: Vector3, index: int):
 	
 	add_child(csg_combiner)
 
-func create_walkable_pipe(from_pos: Vector3, to_pos: Vector3, index: int):
+func create_walkable_pipe(from_pos: Vector3, to_pos: Vector3, index: int) -> void:
 	var direction = to_pos - from_pos
 	var distance = direction.length()
 	var center = from_pos + direction * 0.5
@@ -100,3 +100,12 @@ func create_walkable_pipe(from_pos: Vector3, to_pos: Vector3, index: int):
 	csg_combiner.material_override = material
 	
 	add_child(csg_combiner)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

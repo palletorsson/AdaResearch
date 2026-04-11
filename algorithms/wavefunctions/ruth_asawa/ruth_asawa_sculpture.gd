@@ -1,6 +1,17 @@
 @tool
 extends MeshInstance3D
 
+
+# @identity
+# essence: surface(u,v) = radius_curve(u) * (cos(v), sin(v)) + audio_reactive_deformation
+# desire: See a wire-mesh sculpture breathe and deform in response to ambient sound
+# critical_parameter: radius_curve — the profile curve that defines the lobed silhouette of the hanging form
+# triggers: audio spectrum analysis modulates the surface; band_values deform the mesh in real-time
+# emerges: sculpture as frozen listening — the wire form records sound as spatial deformation
+# needs: VR spatial audio input [has], spectrum analyzer [has]
+# relationships: depends on AudioEffectSpectrumAnalyzer; contrasts with kusama_sine (restrained wire vs excessive dots); unlocks sound-reactive sculpture
+# truth: A wire sculpture is a surface of revolution that has learned to listen.
+
 @export_category("Mesh Settings")
 @export_range(10, 200, 1) var u_resolution: int = 60
 @export_range(10, 200, 1) var v_resolution: int = 100
@@ -32,13 +43,13 @@ var base_scale: Vector3
 var audio_initialized: bool = false
 var debug_timer: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	if not radius_curve:
 		_create_default_curve()
 	generate_surface()
 	base_scale = scale
 
-func _ensure_audio_initialized():
+func _ensure_audio_initialized() -> void:
 	if audio_initialized:
 		return
 
@@ -50,7 +61,7 @@ func _ensure_audio_initialized():
 	audio_initialized = true
 	print("Ruth Asawa: Audio initialized, spectrum_instance = ", spectrum_instance != null)
 
-func _setup_audio_analysis():
+func _setup_audio_analysis() -> void:
 	var master_bus_index = AudioServer.get_bus_index("Master")
 	print("Ruth Asawa: Setting up audio on Master bus (index ", master_bus_index, ")")
 
@@ -73,7 +84,7 @@ func _setup_audio_analysis():
 	spectrum_instance = AudioServer.get_bus_effect_instance(master_bus_index, effect_count - 1) as AudioEffectSpectrumAnalyzerInstance
 	print("Ruth Asawa: Created new spectrum analyzer, instance = ", spectrum_instance != null)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if auto_rotate:
 		rotation.y += rotation_speed * delta
 
@@ -89,7 +100,7 @@ func _process(delta):
 					debug_timer = 0.0
 					print("Ruth Asawa: volume=%.2f, bands[0]=%.2f, bands[8]=%.2f" % [smoothed_volume, smoothed_bands[0] if smoothed_bands.size() > 0 else 0, smoothed_bands[8] if smoothed_bands.size() > 8 else 0])
 
-func _create_default_curve():
+func _create_default_curve() -> void:
 	radius_curve = Curve.new()
 	# Create a lobed shape similar to the reference
 	radius_curve.add_point(Vector2(0.0, 0.2))
@@ -101,7 +112,7 @@ func _create_default_curve():
 	radius_curve.add_point(Vector2(0.85, 0.2)) # Pinch
 	radius_curve.add_point(Vector2(1.0, 0.4)) # Bottom
 
-func generate_surface():
+func generate_surface() -> void:
 	var st := SurfaceTool.new()
 	
 	if wireframe:
@@ -180,7 +191,7 @@ func generate_surface():
 		generated_mesh.surface_set_material(0, material)
 		mesh = generated_mesh
 
-func _update_audio_data():
+func _update_audio_data() -> void:
 	if not spectrum_instance:
 		return
 
@@ -207,7 +218,7 @@ func _update_audio_data():
 	current_volume = total_magnitude / spectrum_bands
 	smoothed_volume = lerp(smoothed_volume, current_volume, audio_smoothing)
 
-func _apply_audio_to_mesh():
+func _apply_audio_to_mesh() -> void:
 	# Apply volume pulse to scale
 	var pulse = 1.0 + smoothed_volume * volume_pulse
 	scale = base_scale * pulse
@@ -215,7 +226,7 @@ func _apply_audio_to_mesh():
 	# Regenerate mesh with frequency-modulated shape
 	generate_audio_reactive_surface()
 
-func generate_audio_reactive_surface():
+func generate_audio_reactive_surface() -> void:
 	var st := SurfaceTool.new()
 
 	if wireframe:
@@ -327,3 +338,6 @@ func generate_audio_reactive_surface():
 
 		generated_mesh.surface_set_material(0, material)
 		mesh = generated_mesh
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

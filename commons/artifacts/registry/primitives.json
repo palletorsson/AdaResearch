@@ -1,0 +1,7057 @@
+{
+	"artifacts": {
+		"PipeLayout": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "High-level pipe network controller with anchor points. Supports glass and drain pipe types. Use PipeLayout#layout:network_name or PipeLayout#pipe_type:glass",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "PipeLayout",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "PipeLayout",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/pipes/PipeLayout.tscn",
+			"size_group": "compact",
+			"tags": [
+				"graph",
+				"vr"
+			]
+		},
+		"SDFDrawTool": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "SDFDrawTool.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "SDFDrawTool",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "SDFDrawTool",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/mesh_draw/SDFDrawTool.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"aalto_vase": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Procedural Aalto-style organic vase using Fourier harmonics. Based on Alvar Aalto's Savoy vase (1936).",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "aalto_vase",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "aalto_vase",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/design_classics/aalto_vase.tscn",
+			"size_group": "compact",
+			"tags": [
+				"procedural"
+			]
+		},
+		"alessi_tree": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Procedural Alessi-style stacked cone tree with radial stripes. Zigzag lathe form.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "alessi_tree",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "alessi_tree",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/design_classics/alessi_tree.tscn",
+			"size_group": "compact",
+			"tags": [
+				"procedural",
+				"tree"
+			]
+		},
+		"animated_cube": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Cartesian coordinate system, x y z godot",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "animated_cube",
+			"map_ready": true,
+			"map_sequences": [
+				"devexamples",
+				"structure"
+			],
+			"name": "Animated Cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/animated_cube.tscn",
+			"size_group": "compact",
+			"tags": [
+				"simulation"
+			]
+		},
+		"animatedcubebuilder": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Animated construction sequence that steps from vertices to edges to full cube mesh with grab handles.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				3.0,
+				2.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "animatedcubebuilder",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "animatedcubebuilder",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 3.0,
+					"type": "omni"
+				},
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/primitives/animatedcubebuilder/animatedcubebuilder.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"3d",
+				"interactive",
+				"vr"
+			]
+		},
+		"arch": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Architectural arch with curved top and pillars",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "arch",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Arch",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/arch/arch.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"array_rotate": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Array + Rotate. rotation[i] = i Ã— angle. The fan/wheel: cumulative rotation around axis.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "array_rotate",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "array_rotate",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/arrays/array_rotate.tscn",
+			"size_group": "compact",
+			"tags": [
+				"array"
+			]
+		},
+		"array_scale": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Array + Scale. scale[i] = factor^i. The nest: cumulative scaling (telescoping).",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "array_scale",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "array_scale",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/arrays/array_scale.tscn",
+			"size_group": "compact",
+			"tags": [
+				"array"
+			]
+		},
+		"array_translate": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Array + Translate. position[i] = i Ã— offset. The staircase: cumulative translation.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "array_translate",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "array_translate",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/arrays/array_transform_staircase.tscn",
+			"size_group": "compact",
+			"tags": [
+				"array"
+			]
+		},
+		"array_visualizer": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Interactive tool for visualizing array structures",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "array_visualizer",
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"name": "Array Visualizer",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/tools/array_visualizer.tscn",
+			"size_group": "compact",
+			"tags": [
+				"array"
+			]
+		},
+		"arrow": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "arrow",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				4.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "arrow",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "arrow",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					4.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/primitives/arrow/arrow.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"primitive"
+			]
+		},
+		"bigframe": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Hollow rectangular beam with configurable dimensions",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "bigframe",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "bigframe",
+			"parameters": {
+				"footprint": [
+					3.0,
+					1.0,
+					1.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 3.0,
+					"type": "omni"
+				},
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/boxbeam/boxbeam.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"bipyramid": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Double-ended pyramid primitive formed by mirrored pyramid faces.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "bipyramid",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "bipyramid",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/bipyramid/bipyramid.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"bucket_of_tulips": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "A charming metal bucket filled with colorful tulips, bringing natural beauty and algorithmic growth patterns to the laboratory space",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "bucket_of_tulips",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Bucket of Tulips",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/plants/bucket_of_tulips.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"capsule": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Grid-shaded capsule primitive with glowing wireframe overlay.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				3.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "capsule",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "capsule",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					1.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 2.0,
+					"type": "omni"
+				},
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/primitives/capsule/capsule.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"2d"
+			]
+		},
+		"capsule_radials_rings": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Configurable capsule with radial segments and rings. Usage: capsule_radials_rings:90:1:#radial:6#rings:3 for 6 radial segments and 3 rings.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "capsule_radials_rings",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Capsule Radials Rings",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 2.0,
+					"type": "omni"
+				},
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/capsule/capsule_radials_rings.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"capsules": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "caps.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "capsules",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "capsules",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/capsule/capsules.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"cavetest": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "cavetest",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				44.0,
+				15.0,
+				9.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cavetest",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "cavetest",
+			"parameters": {
+				"footprint": [
+					44.0,
+					15.0,
+					9.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://commons/primitives/cave/test.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"primitive"
+			]
+		},
+		"chaos_attractor": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Visualization of chaotic systems and strange attractors",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "chaos_attractor",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "Chaos Attractor",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/attractors/chaos_attractor.tscn",
+			"size_group": "compact",
+			"tags": [
+				"chaos"
+			]
+		},
+		"combine_capsule": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Arranges capsule meshes in a matrix while iterating through height and radial segment combinations.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "combine_capsule",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "combine_capsule",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/combines/combine_capsule.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra"
+			]
+		},
+		"combine_portals": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Duplicates a base torus to form a tunnel of portals that grow denser down the hallway.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				10.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "combine_portals",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "combine_portals",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					10.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://commons/primitives/combines/combine_portals.tscn",
+			"size_group": "environment",
+			"tags": [
+				"geometry"
+			]
+		},
+		"combine_primitives": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Shows four procedural walled-cube modules (cylinder, plane, sphere, torus) side by side for layout inspection.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				1.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "combine_primitives",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "combine_primitives",
+			"parameters": {
+				"footprint": [
+					2.0,
+					1.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/combines/combine_primitives.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry",
+				"procedural"
+			]
+		},
+		"combine_sphere": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Builds a grid of spheres varying ring and radial segment settings with optional hemisphere alternation.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "combine_sphere",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "combine_sphere",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/combines/combine_sphere.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d"
+			]
+		},
+		"combine_torus": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Generates a gradient-colored grid of torus meshes sweeping through ring and segment counts.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "combine_torus",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "combine_torus",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/combines/combine_torus.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d",
+				"geometry"
+			]
+		},
+		"combo_cube_visual": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "A visual-only cube that moves, rotates, and scales simultaneously (Not a pickup).",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "combo_cube_visual",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Transformation Rotation Scale Cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/animation/transformation_rotation_scale_cube.tscn",
+			"size_group": "compact",
+			"tags": [
+				"visualization"
+			]
+		},
+		"concept_synthesizer": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Device for synthesizing abstract concepts into tangible forms",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "concept_synthesizer",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Concept Synthesizer",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/tools/concept_synthesizer.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"coordinate_axes_xy": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Displays orthogonal X/Y line modules with floating labels for quick planar orientation.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				3.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "coordinate_axes_xy",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "coordinate_axes_xy",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					3.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/primitives/line/coordinate_axes_xy.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"sorting"
+			]
+		},
+		"coordinate_lines": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Orthogonal vertical and horizontal line modules forming a coordinate axis crosshair.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "coordinate_lines",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "coordinate_lines",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/coordinate_lines.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"cross_line_puzzle": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Interactive puzzle: drag line endpoints to form an X cross from two horizontal lines. Tag syntax: cross_line_puzzle:rot:ytrans:scale#tagname:action (e.g., cross_line_puzzle:0:0:1#fillhole:reveal triggers 'reveal' action on all nodes tagged 'fillhole' when solved)",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cross_line_puzzle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Cross Line Puzzle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/puzzles/cross_line_puzzle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"cross_lines": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Pair of line modules rotated into an X to demonstrate intersecting lines.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cross_lines",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "cross_lines",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/cross_lines.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"crystal": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Procedurally built quartz-style crystal with layered facets.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				1.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "crystal",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "crystal",
+			"parameters": {
+				"footprint": [
+					2.0,
+					1.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/crystal/crystal.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"crystalcluster": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Cluster of scaled crystals arranged with deterministic offsets.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "crystalcluster",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "crystalcluster",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/crystalcluster/crystalcluster.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"cube": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Static cube with grid shader and collider, used as a baseline geometric primitive.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cube",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cube/cube.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d"
+			]
+		},
+		"cube_lines": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "cube_lines.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				1.0,
+				3.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cube_lines",
+			"map_ready": true,
+			"map_sequences": [
+				"lab"
+			],
+			"name": "cube_lines",
+			"parameters": {
+				"footprint": [
+					2.0,
+					1.0,
+					3.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/primitives/line/cube_lines.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"primitive"
+			]
+		},
+		"cube_projectile_spawner": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Timed hazard that spawns projectile cubes, leads the target, and fires warning effects before launch.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				8.0,
+				8.0,
+				8.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cube_projectile_spawner",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "cube_projectile_spawner",
+			"parameters": {
+				"footprint": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://commons/primitives/cubes/cube_spawner.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"hazard"
+			]
+		},
+		"cube_scene": {
+			"capacity": "TEST how cubes can split, snap, scale, and recombine while remaining the basic reference primitive.",
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "A configurable cube scene used as reference geometry across the project. Its variants can be grabbed, scaled, subdivided, snapped, or augmented, but the cube remains the stable primitive beneath those state changes. That makes it ideal for seeing what a transformation preserves and what it alters. In the transformation sequence it functions as the baseline form against which other changes read clearly.",
+			"dev_themes": [
+				"art",
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"gamwell_reference": "",
+			"include_in_map_data": true,
+			"interactions": [
+				"grab cube variants and move them through space",
+				"compare scaled, subdivided, and snapped cube behaviors",
+				"attach or detach auxiliary utilities where present",
+				"use the cube as a baseline reference for other transformed forms"
+			],
+			"lookup_name": "cube_scene",
+			"map_ready": true,
+			"map_sequences": [
+				"devexamples",
+				"lab",
+				"primitives",
+				"structure",
+				"transformation",
+				"unused",
+				"wavefunctions"
+			],
+			"name": "Basic Cube Scene",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Transformation changes S while the cube serves as the invariant reference body. Because the base form is so legible, every modification becomes easy to compare against it.",
+			"scene": "res://commons/primitives/cubes/cube_scene.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitives",
+				"transformation",
+				"cube",
+				"subdivision",
+				"interaction",
+				"geometry",
+				"2d"
+			]
+		},
+		"cube_scene_drag_points": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "cube_scene_drag_points",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				4.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cube_scene_drag_points",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "cube_scene_drag_points",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					4.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/primitives/cubes/cube_scene_drag_points.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"primitive"
+			]
+		},
+		"cube_with_shader": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Cartesian coordinate system, x y z godot",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cube_with_shader",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Cube with shader",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/cube_with_shader.tscn",
+			"size_group": "compact",
+			"tags": [
+				"shader",
+				"simulation"
+			]
+		},
+		"cylinder": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Basic grid-lined cylinder primitive for quick scale checks.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cylinder",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "cylinder",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cylinder/cylinder.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d",
+				"sorting"
+			]
+		},
+		"cylinder_low": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Low poly cylinder with 8 radial segments showing faceted structure.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cylinder_low",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "cylinder_low",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/godotmeshes/cylinder_low.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"cylinder_mid": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Medium poly cylinder with 16 radial segments for smooth curves.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cylinder_mid",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "cylinder_mid",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/godotmeshes/cylinder_mid.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"cylinder_radials_rings": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Configurable cylinder with radial segments and rings. Usage: cylinder_radials_rings:90:1:#config:12:8 for 12 radial segments and 8 rings.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "cylinder_radials_rings",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Cylinder Radials Rings",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cylinder/cylinder_radials_rings.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"dgrid": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Standing perspective grid frame inspired by Albrecht DÃ¼rer. Use dgrid:90:1:1#config:10:10 for 10x10 grid.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "dgrid",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "DÃ¼rer Grid",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/frame/durer_grid.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d"
+			]
+		},
+		"diamond": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Faceted diamond mesh generated with grid shading for highlights.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "diamond",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "diamond",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/diamond/diamond.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d",
+				"3d"
+			]
+		},
+		"diamonds": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Stacks rotating octahedron instances into a twisting diamond tower sculpture.",
+			"dev_themes": [
+				"art",
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "diamonds",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "diamonds",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					1.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 3.0,
+					"type": "omni"
+				},
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/combines/diamonds.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"dimension_lens": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Lens for viewing multi-dimensional spaces",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "dimension_lens",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Dimension Lens",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/tools/dimension_lens.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"dodecahedron": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Procedural dodecahedron solid using grid material.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "dodecahedron",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "dodecahedron",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/dodecahedron/dodecahedron.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d",
+				"procedural"
+			]
+		},
+		"dome": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "dome.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				21.0,
+				11.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "dome",
+			"map_ready": true,
+			"map_sequences": [
+				"proceduralgeneration",
+				"proceduralgeneration_all"
+			],
+			"name": "dome",
+			"parameters": {
+				"footprint": [
+					1.0,
+					21.0,
+					11.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://commons/primitives/booleans/dome.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"primitive"
+			]
+		},
+		"doublestick": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "doublestick",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				1.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "doublestick",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "doublestick",
+			"parameters": {
+				"footprint": [
+					2.0,
+					1.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/doublestick.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"draw_dot": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "draw_dot.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "draw_dot",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "draw_dot",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 1.0,
+					"type": "omni"
+				},
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/point/draw_dot.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"draw_dot_time_domain": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Draw dot with time-domain trace along +Z.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "draw_dot_time_domain",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "draw_dot_time_domain",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/point/draw_dot_time_domain.tscn",
+			"size_group": "compact",
+			"tags": [
+				"visualization"
+			]
+		},
+		"draw_triangle_faces": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "draw_triangle_faces.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "draw_triangle_faces",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "draw_triangle_faces",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 3.0,
+					"type": "omni"
+				},
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/point/draw_triangle_faces.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"dynamic_rock": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Single procedural rock with gravity enabled - falls naturally with physics",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "dynamic_rock",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Dynamic Rock",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/rockfactory/DynamicRock.tscn",
+			"size_group": "compact",
+			"tags": [
+				"animation",
+				"physics",
+				"procedural"
+			]
+		},
+		"editable_bezier": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Cubic Bezier curve editor. 4 control points: P0-P1 defines start tangent, P2-P3 defines end tangent. Shows tangent handles.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "editable_bezier",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "editable_bezier",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/curves/editable_bezier.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"editable_catmull_rom": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Catmull-Rom spline editor. Curve passes through all control points. More intuitive for freeform drawing.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "editable_catmull_rom",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "editable_catmull_rom",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/curves/editable_catmull_rom.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"editable_curve": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Interactive curve with grabbable control points. Supports Bezier, Catmull-Rom, and linear modes. Extends the trace concept: deliberate construction over recorded gesture.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "editable_curve",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "editable_curve",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/curves/editable_curve.tscn",
+			"size_group": "compact",
+			"tags": [
+				"linear_algebra"
+			]
+		},
+		"elevator_platform": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Platform that slides up/down on Y axis. Teaches vertical translation with grid snapping to floor levels.",
+			"dev_themes": [
+				"core",
+				"education",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "elevator_platform",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Elevator Platform",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/translation/elevator_platform.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d"
+			]
+		},
+		"falling_cube": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Simple falling cube for physics testing",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "falling_cube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Falling Cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/rockfactory/FallingCube.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"folded_strip": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "pfolded_strip",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "folded_strip",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "1.2: folded_strip",
+			"parameters": {
+				"footprint": [
+					3.0,
+					1.0,
+					1.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 3.0,
+					"type": "omni"
+				},
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/folded_strip/folded_strip.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"foldedpaper": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Accordion-style folded paper mesh with editable top/base control points and multiple fold reset modes.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "foldedpaper",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "1.2: A foldedpaper",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/foldedpaper/foldedpaper.tscn",
+			"size_group": "compact",
+			"tags": [
+				"3d",
+				"origami"
+			]
+		},
+		"folding_cube": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Animated cube net folding into 3D cube. Shows how 6 connected squares become a volume. Cross net with hinge animation.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "folding_cube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "folding_cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/folding_cube.tscn",
+			"size_group": "compact",
+			"tags": [
+				"3d",
+				"topology"
+			]
+		},
+		"folding_cube_interactive": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Interactive folding cube. Grab the handle to manually fold/unfold. Snaps to flat or folded state on release.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "folding_cube_interactive",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "folding_cube_interactive",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/folding_cube_interactive.tscn",
+			"size_group": "compact",
+			"tags": [
+				"interactive",
+				"origami",
+				"vr"
+			]
+		},
+		"folding_past": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Animated accordion fold representing time/the past collapsing into the present.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "folding_past",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"testmaps"
+			],
+			"name": "Folding Past",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					3.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 3.0,
+					"type": "omni"
+				},
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/temporal/animated_folding_past.tscn",
+			"size_group": "compact",
+			"tags": [
+				"origami"
+			]
+		},
+		"geometric_crystal": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "A crystal that contains spatial algorithms",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "geometric_crystal",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Geometric Crystal",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/crystals/geometric_crystal.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"glass_planes_2_5d": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "2.5D: Glass planes + noise. Discrete layers framing continuous field. Volumetric look, flat render cost.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "glass_planes_2_5d",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "glass_planes_2_5d",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/arrays/glass_planes_2_5d.tscn",
+			"size_group": "compact",
+			"tags": [
+				"procedural",
+				"visualization"
+			]
+		},
+		"glass_planes_empty": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "2.5D: Array of transparent glass planes. Pure repetition â€” depth from layered transparency. No noise.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "glass_planes_empty",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "glass_planes_empty",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/arrays/glass_planes_empty.tscn",
+			"size_group": "compact",
+			"tags": [
+				"procedural"
+			]
+		},
+		"grab_aalto_vase": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Grabbable Aalto vase. Procedural organic form with glass material.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_aalto_vase",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "grab_aalto_vase",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/design_classics/grab_aalto_vase.tscn",
+			"size_group": "compact",
+			"tags": [
+				"procedural"
+			]
+		},
+		"grab_alessi_tree": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Grabbable Alessi tree. Red and white striped ceramic-style holiday decoration.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_alessi_tree",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "grab_alessi_tree",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/design_classics/grab_alessi_tree.tscn",
+			"size_group": "compact",
+			"tags": [
+				"tree"
+			]
+		},
+		"grab_cube": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "grab_cube",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_cube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "grab_cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/grab_cube.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"grab_cube_show": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "grab_cube_show.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_cube_show",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "grab_cube_show",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cube/grab_cube_show.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"grab_dodecahedron": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Grabbable dodecahedron. 12 pentagonal faces, 20 vertices, 30 edges.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_dodecahedron",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "grab_dodecahedron",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/dodecahedron/grab_dodecahedron.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"grab_icosahedron": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Grabbable icosahedron. 20 triangular faces, 12 vertices, 30 edges.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_icosahedron",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "grab_icosahedron",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/icosahedron/grab_icosahedron.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"grab_line": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Adjustable length grabbable line with trigger+joystick length control and optional length display.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_line",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "grab_line",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/grab_line.tscn",
+			"size_group": "compact",
+			"tags": [
+				"visualization"
+			]
+		},
+		"grab_line_drawer": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Grabbable line that draws fading trails from the tip when trigger is held.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_line_drawer",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "grab_line_drawer",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/grab_line_drawer.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"grab_line_music": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Grabbable line that produces music based on movement speed and length, with selectable waveforms.",
+			"dev_themes": [
+				"core",
+				"music",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_line_music",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "grab_line_music",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/grab_line_music.tscn",
+			"size_group": "compact",
+			"tags": [
+				"animation",
+				"sound"
+			]
+		},
+		"grab_line_pusher": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Grabbable line with sphere collider at tip for pushing objects away.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_line_pusher",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "grab_line_pusher",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/grab_line_pusher.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry"
+			]
+		},
+		"grab_long_stick": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "grab_long_stick",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				3.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_long_stick",
+			"map_ready": true,
+			"map_sequences": [
+				"softbodies"
+			],
+			"name": "grab_long_stick",
+			"parameters": {
+				"footprint": [
+					3.0,
+					1.0,
+					1.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/primitives/cubes/grab_long_stick.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"primitive"
+			]
+		},
+		"grab_octahedron": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "grab_octahedron.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_octahedron",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "grab_octahedron",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/octahedron/grab_octahedron.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"grab_rainbow_stick": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "grab_rainbow_stick",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				3.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_rainbow_stick",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "grab_rainbow_stick",
+			"parameters": {
+				"footprint": [
+					3.0,
+					1.0,
+					1.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/primitives/cubes/grab_rainbow_stick.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"primitive"
+			]
+		},
+		"grab_sphere_point": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "XR Tools pickable sphere with highlight ring for repositioning a reference point.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_sphere_point",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "grab_sphere_point",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/point/grab_sphere_point.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry",
+				"vr"
+			]
+		},
+		"grab_sphere_point_color_with_text": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Pickable point sphere combining color tint control with a live coordinate label.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_sphere_point_color_with_text",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "grab_sphere_point_color_with_text",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/point/grab_sphere_point_color_with_text.tscn",
+			"size_group": "compact",
+			"tags": [
+				"color",
+				"geometry"
+			]
+		},
+		"grab_sphere_point_snap": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "grab_sphere_point_snap.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_sphere_point_snap",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "grab_sphere_point_snap",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/point/grab_sphere_point_snap.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"grab_sphere_point_with_color": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Pickable point sphere that applies emission-tinted colors via the point_color helper.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_sphere_point_with_color",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "grab_sphere_point_with_color_text",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry"
+			]
+		},
+		"grab_sphere_point_with_text": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Pickable point sphere preset with a floating Label3D that shows its coordinates.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_sphere_point_with_text",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "grab_sphere_point_with_text",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/point/grab_sphere_point_with_text.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry"
+			]
+		},
+		"grab_tetrahedron": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "grab_tetrahedron.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_tetrahedron",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "grab_tetrahedron",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/tetrahedron/grab_tetrahedron.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"grab_trihedron": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "grab_trihedron",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grab_trihedron",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "grab_trihedron",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/trihedron/grab_trihedron.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"grid_lines": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "grid_lines.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				5.0,
+				6.0,
+				5.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grid_lines",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "grid_lines",
+			"parameters": {
+				"footprint": [
+					5.0,
+					6.0,
+					5.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://commons/primitives/line/grid_lines.tscn",
+			"size_group": "environment",
+			"tags": [
+				"grid"
+			]
+		},
+		"halocube": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Hollow cube frame with four mitered walls",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "halocube",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "Halo Cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/halocube/halocube.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"hole_with_cones": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Ground plane with circular hole and 3 traffic cones around it. Construction site warning setup.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "hole_with_cones",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Hole With Cones",
+			"parameters": {
+				"footprint": [
+					3.0,
+					1.0,
+					3.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 3.0,
+					"type": "omni"
+				},
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/combines/hole_with_cones.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"hollowrock": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Hollow rock using torus with varied openings",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "hollowrock",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Hollow Rock",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/hollowrock/hollowrock.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry"
+			]
+		},
+		"horizon_plumb_lines": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "horizon_plumb_lines.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "horizon_plumb_lines",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "horizon_plumb_lines",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/horizon_plumb_lines.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"icosahedron": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Procedural icosahedron primitive for sphere approximations.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "icosahedron",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "icosahedron",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/icosahedron/icosahedron.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry",
+				"procedural"
+			]
+		},
+		"interactive_point_origin": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Pickable point that displays its position and draws a thin line to origin (0,0,0) when held.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "interactive_point_origin",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "1.0.1 Interactive Point with Origin Line",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 2.0,
+					"type": "omni"
+				},
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/point/interactive_point_origin.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"interactivetriangle": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Standing triangle panel split into pink and black faces with grab spheres and multiple shape resets.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				6.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "interactivetriangle",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "1.2: A triangle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					1.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 1.0,
+					"type": "omni"
+				},
+				"size_group": "environment"
+			},
+			"scene": "res://commons/primitives/interactivetriangle/interactivetriangle.tscn",
+			"size_group": "environment",
+			"tags": [
+				"interactive",
+				"vr"
+			]
+		},
+		"knowledge_prism": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Prism that refracts complex concepts into understandable forms",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "knowledge_prism",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Knowledge Prism",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/prisms/knowledge_prism.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"kochsnowflake": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "kochsnowflaken",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "kochsnowflake",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "kochsnowflake",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/kochsnowflake/kochsnowflake.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"laser_measure": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Handheld laser distance measurement tool with LCD display",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "laser_measure",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "laser_measure",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/laser_measure/grab_laser_measure.tscn",
+			"size_group": "compact",
+			"tags": [
+				"visualization"
+			]
+		},
+		"lefttriangle": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Complementary right-triangle prism leaning left, rendered with pink grid shading and configurable size.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "lefttriangle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "lefttriangle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/lefttriangle/lefttriangle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d"
+			]
+		},
+		"level_entrance": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Entrance tile with door frame and label text",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				4.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "level_entrance",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Level Entrance",
+			"parameters": {
+				"footprint": [
+					2.0,
+					4.0,
+					2.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/primitives/entrances/level_entrance.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"2d",
+				"string"
+			]
+		},
+		"light_sphere": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "light_sphere.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "light_sphere",
+			"map_ready": true,
+			"map_sequences": [
+				"devexamples",
+				"lab",
+				"structure"
+			],
+			"name": "light_sphere",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/sphere/light_sphere.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"lightrod": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Glowing vertical blue light rods. Use lightrod:90:0:1#config:4:1 for 4 rods with 1m spacing.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "lightrod",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Light Rod",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/light_rod.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"line": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Interactive measuring line linking two grab spheres and rendering a cylinder with live distance text.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "line",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "1.1 A Line",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 2.0,
+					"type": "omni"
+				},
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/line.tscn",
+			"size_group": "compact",
+			"tags": [
+				"interactive",
+				"string",
+				"vr"
+			]
+		},
+		"line_collection": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Bundle of line modules offset in space for demonstrations of multiple edges.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "line_collection",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "line_collection",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/line_collection.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"line_demo": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "line_demo.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "line_demo",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "line_demo",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/snappoint/demos/line_demo.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"lshape": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Upside down L shape primitive with meeting corner joints",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "lshape",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"unused"
+			],
+			"name": "L Shape",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/lshape/lshape.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"mengersponge": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Menger sponge fractal with configurable depth",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "mengersponge",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Menger Sponge",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/mengersponge/mengersponge.tscn",
+			"size_group": "compact",
+			"tags": [
+				"fractal"
+			]
+		},
+		"menu": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Stacked slanted-cube VR menu with animated hover, keyboard navigation, and theme switching.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "menu",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "menu",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/menu/menu.tscn",
+			"size_group": "compact",
+			"tags": [
+				"vr"
+			]
+		},
+		"modernchair": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Modern chair with configurable seat, legs and backrest",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "modernchair",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Modern Chair",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/modernchair/modernchair.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"modernpolysolid": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Twisted multi-level polysolid sculpture with pride-inspired materials.",
+			"dev_themes": [
+				"art",
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "modernpolysolid",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "modernpolysolid",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/modernpolysolid/modernpolysolid.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"noisetorus_ex_1": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Example torus mesh using the noise planet shader to showcase parameter tweaks.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "noisetorus_ex_1",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "noisetorus_ex_1",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/torus/noisetorus_ex_1.tscn",
+			"size_group": "compact",
+			"tags": [
+				"3d",
+				"geometry",
+				"procedural"
+			]
+		},
+		"octahedron": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Procedural octahedron primitive useful as a diamond core.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "octahedron",
+			"map_ready": true,
+			"map_sequences": [
+				"unused"
+			],
+			"name": "octahedron",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/octahedron/octahedron.tscn",
+			"size_group": "compact",
+			"tags": [
+				"procedural"
+			]
+		},
+		"one_meter_line": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "one_meter_line.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "one_meter_line",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "one_meter_line",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/one_meter_line.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"origin": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "origin",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "origin",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"testmaps"
+			],
+			"name": "Point Zero",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/origin/origin.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"oscillation_cube": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "A cube that demonstrates smooth oscillating motion along multiple axes",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "oscillation_cube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Oscillation Cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/oscillation_cube.tscn",
+			"size_group": "compact",
+			"tags": [
+				"animation"
+			]
+		},
+		"parallel_line_puzzle": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Interactive puzzle: drag line endpoints to align two lines to be parallel.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "parallel_line_puzzle",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Parallel Line Puzzle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/puzzles/parallel_line_puzzle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"parallel_lines": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Three line modules arranged in parallel to visualize equidistant lines.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				3.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "parallel_lines",
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis"
+			],
+			"name": "parallel_lines",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					3.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/primitives/line/parallel_lines.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"primitive"
+			]
+		},
+		"parametric_surface": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Parametric surface with configurable equations",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				3.0,
+				1.0,
+				3.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "parametric_surface",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Parametric Surface",
+			"parameters": {
+				"footprint": [
+					3.0,
+					1.0,
+					3.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/primitives/parametric/parametric.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"3d"
+			]
+		},
+		"perspective_lines": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "perspective_lines.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				3.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "perspective_lines",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "perspective_lines",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					3.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/primitives/line/perspective_lines.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"primitive"
+			]
+		},
+		"pickup_cube_combo": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "A pickup cube that moves, rotates, and scales simultaneously.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pickup_cube_combo",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Combo Pickup Cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/pickups/pickup_cube_transformation_rotation_scale.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"pickup_cube_rotating": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "A pickup cube that rotates.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pickup_cube_rotating",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Rotating Pickup Cube",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/pickups/pickup_cube_rotating.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"pickup_cube_scaling": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "A pickup cube that pulsates in size.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pickup_cube_scaling",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Scaling Pickup Cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/pickups/pickup_cube_scaling.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"pickup_cube_static": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "A static pickup cube that can be collected.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pickup_cube_static",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Static Pickup Cube",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/pickups/pickup_cube_static.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"pickup_cube_transforming": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "A pickup cube that moves up and down.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pickup_cube_transforming",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Transforming Pickup Cube",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/pickups/pickup_cube_transforming.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"plane": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Grid-shaded plane mesh (0.8m square) used for flat surface demonstrations.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "plane",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "plane",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/plane/plane.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d",
+				"3d"
+			]
+		},
+		"platonic_demo": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "platonic_demo.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				6.0,
+				4.0,
+				6.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "platonic_demo",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "platonic_demo",
+			"parameters": {
+				"footprint": [
+					6.0,
+					4.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://commons/primitives/platonic_demo.tscn",
+			"size_group": "environment",
+			"tags": [
+				"primitive"
+			]
+		},
+		"platonic_grabbables": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Compact table of all 5 platonic solids, 3 grabbable copies each. Tetrahedron, cube, octahedron, dodecahedron, icosahedron.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				6.0,
+				1.0,
+				3.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "platonic_grabbables",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "platonic_grabbables",
+			"parameters": {
+				"footprint": [
+					6.0,
+					1.0,
+					3.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://commons/primitives/platonic_grabbables.tscn",
+			"size_group": "environment",
+			"tags": [
+				"primitive"
+			]
+		},
+		"player_trace": {
+			"capacity": "SEE your own motion become a drawable path through time.",
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "A recorder that turns the player's motion into a visible line in space. Every step writes another point, so translation through the room becomes geometry rather than a forgotten action. The artifact makes path and trajectory tangible, especially when compared against grids and axis-constrained motion. It turns movement into a time-indexed drawing.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"gamwell_reference": "",
+			"include_in_map_data": true,
+			"interactions": [
+				"walk through space to extend the trace",
+				"change trail_length to keep more or less motion history",
+				"compare your recorded path against grid or axis demonstrations",
+				"use the line as a visible record of translation over time"
+			],
+			"lookup_name": "player_trace",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"transformation"
+			],
+			"name": "player_trace",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Transformation is recorded here as a trajectory through S over time. The body changes position continuously, while the trace preserves that history as form.",
+			"scene": "res://commons/primitives/point/player_trace.tscn",
+			"size_group": "compact",
+			"tags": [
+				"transformation",
+				"path",
+				"trajectory",
+				"time",
+				"coordinates",
+				"trace",
+				"primitive"
+			]
+		},
+		"plus": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Plus/cross shape (+) with 4 arms at 90 degree angles. Classic health pickup shape.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "plus",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Plus",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/plus/plus.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"plus_line_puzzle": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Interactive puzzle: drag line endpoints to form a + (plus) with perpendicular lines.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "plus_line_puzzle",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Plus Line Puzzle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/puzzles/plus_line_puzzle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"plus_lines": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Reusable plus-shaped line rig built from two line segments for crosshair highlights.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "plus_lines",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "plus_lines",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/plus_lines.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"point": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Pickable point sphere that continuously displays its world coordinates with a floating label.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "point",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "1.0 A Point",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/point/point.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry"
+			]
+		},
+		"point_collection": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Grouped set of labelled pickable points for demonstrating multiple coordinate references.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "point_collection",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "point_collection",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/point/point_collection.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"portal_frame": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Portal doorway frame with three-plate lintel",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "portal_frame",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Portal Frame",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/portal/portal.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"prism": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Grid-shaded triangular prism mesh for primitive previews.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "prism",
+			"map_ready": true,
+			"map_sequences": [
+				"color"
+			],
+			"name": "prism",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/prism/prism.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d",
+				"3d"
+			]
+		},
+		"prism_block": {
+			"capacity": "COMPARE how a non-cubic primitive responds to rotation and scaling.",
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "A triangular prism used as reference geometry when cubes are too symmetrical to show the difference clearly. Rotating or scaling it changes which faces dominate the view, so the artifact makes orientation and aspect easier to read. It is a reminder that transformations act on more than boxes. The prism broadens the learner's sense of what can stay invariant under change.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"gamwell_reference": "",
+			"include_in_map_data": true,
+			"interactions": [
+				"place the prism beside cubes as a comparison shape",
+				"inspect how triangular faces reorient under rotation",
+				"use the block as a reference for scaling exercises",
+				"compare its silhouette against more symmetric primitives"
+			],
+			"lookup_name": "prism_block",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"transformation",
+				"unused"
+			],
+			"name": "prism_block",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Transformation changes pose and size while the prism's edge structure stays coherent. A less symmetric primitive makes preserved relations easier to notice.",
+			"scene": "res://commons/primitives/prismes/prism_block.tscn",
+			"size_group": "compact",
+			"tags": [
+				"transformation",
+				"prism",
+				"geometry",
+				"reference",
+				"scale",
+				"rotation",
+				"2d",
+				"physics"
+			]
+		},
+		"prismblock": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Triangular wedge primitive with grid shader and convex collision.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "prismblock",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "prismblock",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/prismblock/prismblock.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d",
+				"physics"
+			]
+		},
+		"probability_sphere": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "A sphere that shows the dance of randomness",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "probability_sphere",
+			"map_ready": true,
+			"map_sequences": [
+				"devexamples",
+				"structure"
+			],
+			"name": "Probability Sphere",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/spheres/probability_sphere.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry"
+			]
+		},
+		"proceduralrock": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Procedural rock using icosphere and noise deformation",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "proceduralrock",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Procedural Rock",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/proceduralrock/proceduralrock.tscn",
+			"size_group": "compact",
+			"tags": [
+				"procedural"
+			]
+		},
+		"profile_chair": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Profile chair with integrated seat and backrest corners",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "profile_chair",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Profile Chair",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/chair/chair.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"pyramid": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Procedural square-based pyramid primitive built via surface tool.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pyramid",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"unused"
+			],
+			"name": "pyramid",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/pyramid/pyramid.tscn",
+			"size_group": "compact",
+			"tags": [
+				"3d",
+				"procedural"
+			]
+		},
+		"pyramid_edit": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Interactive pyramid demo with grab handles to reshape the base and apex.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pyramid_edit",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "pyramid_edit",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/pyramid/pyramid_edit.tscn",
+			"size_group": "compact",
+			"tags": [
+				"interactive",
+				"vr"
+			]
+		},
+		"pyramidlong": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Procedurally models a long rectangular pyramid primitive with computed faces and materials.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pyramidlong",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "pyramidlong",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/pyramid/pyramidlong.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"pythagorean_proof": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Interactive right-triangle construction with draggable vertices and animated area proof squares.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				3.0,
+				6.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pythagorean_proof",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "pythagorean_proof",
+			"parameters": {
+				"footprint": [
+					1.0,
+					3.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://commons/primitives/pythagorean_proof/pythagorean_proof.tscn",
+			"size_group": "environment",
+			"tags": [
+				"math"
+			]
+		},
+		"pythagorean_triangle": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "pythagorean_triangle.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				6.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pythagorean_triangle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "pythagorean_triangle",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://commons/primitives/triangle/pythagorean_triangle.tscn",
+			"size_group": "environment",
+			"tags": [
+				"primitive"
+			]
+		},
+		"pythagorean_triangle_angles": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "pythagorean_triangle_angles",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				6.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "pythagorean_triangle_angles",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "1.2: A pythagorean_triangle_angles",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					1.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 1.0,
+					"type": "omni"
+				},
+				"size_group": "environment"
+			},
+			"scene": "res://commons/primitives/triangle/pythagorean_triangle_angles.tscn",
+			"size_group": "environment",
+			"tags": [
+				"primitive"
+			]
+		},
+		"quad": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Editable quad divided into pink and black triangles with draggable corners and square/rectangle/diamond presets.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "quad",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "quad",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/quad/quad.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"quad_line_puzzle": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Interactive puzzle: drag 4 line endpoints to form a square.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "quad_line_puzzle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Quad Line Puzzle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/puzzles/quad_line_puzzle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"quantum_dice": {
+			"category": "unknown",
+			"complexity": "expert",
+			"description": "Dice that demonstrate quantum probability principles",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "quantum_dice",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Quantum Dice",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/dice/quantum_dice.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"queer_cylinder_target": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "queer_cylinder_target",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				8.0,
+				8.0,
+				8.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "queer_cylinder_target",
+			"map_ready": true,
+			"map_sequences": [
+				"forces"
+			],
+			"name": "queer_cylinder_target",
+			"parameters": {
+				"footprint": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://commons/primitives/targets/queer_cylinder_target.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"primitive"
+			]
+		},
+		"quest_controller": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Procedural Quest Touch controller model for tutorials. Use #highlight:trigger/grip/thumbstick/button_a/button_b/menu and #right:true/false",
+			"dev_themes": [
+				"core",
+				"education",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "quest_controller",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Quest Controller",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/questcontroller/quest_controller.tscn",
+			"size_group": "compact",
+			"tags": [
+				"interactive",
+				"procedural",
+				"simulation",
+				"vr"
+			]
+		},
+		"random_object_spawner": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "A spawning algorithm that randomly generates and places objects in the environment",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "random_object_spawner",
+			"map_ready": true,
+			"map_sequences": [
+				"randomness"
+			],
+			"name": "Random Object Spawner",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/random_object_spawner.tscn",
+			"size_group": "compact",
+			"tags": [
+				"probability",
+				"procedural"
+			]
+		},
+		"reality_modifier": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Tool for modifying the fundamental nature of reality",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "reality_modifier",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Reality Modifier",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/tools/reality_modifier.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"rectcube": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Flat rectangular cube platform (1.0 x 0.2 x 1.0)",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rectcube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Rectangular Cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/rectcube/rectcube.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"right_triangle_lines": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "right_triangle_lines.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "right_triangle_lines",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "right_triangle_lines",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/right_triangle_lines.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"righttriangle": {
+			"capacity": "READ which properties survive rotation and translation because the right angle stays invariant.",
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "A right triangle presented as a clean spatial reference. Translation and rotation can move it anywhere, but the ninety-degree relation remains the defining invariant. That makes it useful for reading orientation, perpendicularity, and angular preservation against more complex scenes. It keeps the idea of the right angle available as a diagnostic form.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"gamwell_reference": "",
+			"include_in_map_data": true,
+			"interactions": [
+				"place the triangle beside rotating geometry as a reference",
+				"compare its hypotenuse and legs under different orientations",
+				"use it to read perpendicular relationships in the room",
+				"inspect how a thin 2D form behaves inside 3D space"
+			],
+			"lookup_name": "righttriangle",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"transformation"
+			],
+			"name": "righttriangle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"qfep_connection": "Transformation changes position and orientation while the right angle stays invariant. The artifact isolates what geometric identity survives motion.",
+			"scene": "res://commons/primitives/righttriangle/righttriangle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"transformation",
+				"right_triangle",
+				"geometry",
+				"invariant",
+				"reference",
+				"rotation",
+				"2d"
+			]
+		},
+		"rock_primitive": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Simple rock pyramid shape",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rock_primitive",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Rock",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/rock/rock.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"rock_scanner": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Dimensional scanner - reveals 2D cross-sections of 3D irregular forms, showing how dimensionality affects perception",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				4.0,
+				1.0,
+				4.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rock_scanner",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Rock Scanner",
+			"parameters": {
+				"footprint": [
+					4.0,
+					1.0,
+					4.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://commons/primitives/rockfactory/RockScanner.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"2d",
+				"3d"
+			]
+		},
+		"rock_spawner": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Spawns multiple irregular rocks with physics - demonstrates packing inefficiency and gaps",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rock_spawner",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Rock Spawner",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/rockfactory/RockSpawner.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"rockfactory": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Generates collections of irregular procedural rocks to demonstrate gaps and packing. Supports multiple spawn modes (box, pile, grid, ring, cluster) and optional gravity.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rockfactory",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Rock Factory",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/rockfactory/RockFactory.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d",
+				"physics",
+				"procedural"
+			]
+		},
+		"rockfactory_gravity": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Rock factory pre-configured with gravity enabled - spawns rocks that fall and settle into containers, demonstrating natural packing and gaps between irregular forms.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rockfactory_gravity",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Rock Factory (Gravity)",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/rockfactory/RockFactoryGravity.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"rotating_cube": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "A mysterious rotating cube that triggers the first learning sequence",
+			"dev_themes": [
+				"core",
+				"education",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rotating_cube",
+			"map_ready": true,
+			"map_sequences": [
+				"devexamples",
+				"lab",
+				"unused",
+				"wavefunctions"
+			],
+			"name": "Rotating Cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/animation/rotating_cube.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"rotation_match_puzzle": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Vera MolnÃ¡r-inspired rotation puzzle. Match cube rotations to ghost targets. Config: style:molnar|interruptions|random|gradient, grid_x:3, grid_z:3, max_rot:45, tolerance:10, axis:z",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rotation_match_puzzle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Rotation Match Puzzle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/puzzles/rotation_match_puzzle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"probability",
+				"procedural"
+			]
+		},
+		"roughrock": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Irregular rock polyhedron created from noise-perturbed vertices.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "roughrock",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"unused"
+			],
+			"name": "roughrock",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/roughrock/roughrock.tscn",
+			"size_group": "compact",
+			"tags": [
+				"procedural"
+			]
+		},
+		"scale_lines": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "scale_lines.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				7.0,
+				21.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "scale_lines",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "scale_lines",
+			"parameters": {
+				"footprint": [
+					1.0,
+					7.0,
+					21.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://commons/primitives/line/scale_lines.tscn",
+			"size_group": "world_scale",
+			"tags": [
+				"primitive"
+			]
+		},
+		"scifi_panel_wall": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "A futuristic panel wall with procedural greebles and atmospheric lighting",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "scifi_panel_wall",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Sci-Fi Panel Wall",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/panels/scifi_panel_wall.tscn",
+			"size_group": "compact",
+			"tags": [
+				"procedural"
+			]
+		},
+		"simple_rock": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Simple irregular rock made from wiggled low-poly sphere - falls with physics",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "simple_rock",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Simple Dynamic Rock",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/rockfactory/SimpleDynamicRock.tscn",
+			"size_group": "compact",
+			"tags": [
+				"animation",
+				"geometry"
+			]
+		},
+		"sliding_door": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Door that slides left/right on X axis. Teaches translation along a single axis with visual rail and position marker.",
+			"dev_themes": [
+				"core",
+				"education",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sliding_door",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Sliding Door",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/translation/sliding_door.tscn",
+			"size_group": "compact",
+			"tags": [
+				"visualization"
+			]
+		},
+		"small_subdivision_cube": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "small_subdivision_cube",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "small_subdivision_cube",
+			"map_ready": true,
+			"map_sequences": [
+				"fractals"
+			],
+			"name": "small_subdivision_cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/subdivision_cube.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"snap_demo": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "snap_demo.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				2.0,
+				2.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "snap_demo",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "snap_demo",
+			"parameters": {
+				"footprint": [
+					2.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/snappoint/snap_demo.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"snap_octahedron_puzzle": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Interactive puzzle where connecting 6 snap points forms an octahedron that spawns a walkable prism.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "snap_octahedron_puzzle",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Snap Octahedron Puzzle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"snap_pyramid_puzzle": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Interactive puzzle where connecting 5 snap points forms a square pyramid that spawns a walkable prism.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "snap_pyramid_puzzle",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Snap Pyramid Puzzle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"snap_tetrahedron_puzzle": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Interactive puzzle where connecting 4 snap points forms a tetrahedron that spawns a cube.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "snap_tetrahedron_puzzle",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Snap Tetrahedron Puzzle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/snappoint/puzzles/snap_tetrahedron_puzzle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"snap_triangle_puzzle": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Interactive puzzle where connecting 3 snap points forms a triangle that spawns a configurable object.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "snap_triangle_puzzle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Snap Triangle Puzzle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/snappoint/puzzles/snap_triangle_puzzle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"snap_wedge_puzzle": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Interactive puzzle where connecting 6 snap points forms a wedge/prism that spawns a walkable ramp.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "snap_wedge_puzzle",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Snap Wedge Puzzle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/snappoint/puzzles/snap_wedge_puzzle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"spatial_compass": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Tool for navigating geometric algorithms",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "spatial_compass",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Spatial Compass",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/tools/spatial_compass.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"sphere": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Standard grid-shaded sphere primitive for basic geometry demonstrations.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sphere",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "sphere",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/sphere/sphere.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d",
+				"geometry"
+			]
+		},
+		"sphere_high": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "High poly sphere with 32 rings and 32 radial segments for smooth appearance.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sphere_high",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "sphere_high",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/godotmeshes/sphere_high.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry"
+			]
+		},
+		"sphere_low": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Low poly sphere with 8 rings and 8 radial segments showing tessellation structure.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sphere_low",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "sphere_low",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/godotmeshes/sphere_low.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry"
+			]
+		},
+		"sphere_mid": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Medium poly sphere with 16 rings and 16 radial segments for balanced detail.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "sphere_mid",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "sphere_mid",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/godotmeshes/sphere_mid.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry"
+			]
+		},
+		"square_pyramid": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Johnson Solid J1: Square pyramid with 4 triangular faces and 1 square base.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "square_pyramid",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "square_pyramid",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/johnsonsolids/square_pyramid.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"star_primitive": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Five-pointed star shape with thickness",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "star_primitive",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Star",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/star/star.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"static_point": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Non-pickable point marker that displays position. Cannot be grabbed by hands or captured by gravity gun.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "static_point",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Static Point",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/point/static_point.tscn",
+			"size_group": "compact",
+			"tags": [
+				"physics"
+			]
+		},
+		"steppedpyramid": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Stepped pyramid/ziggurat with 10 levels",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "steppedpyramid",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Stepped Pyramid",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/steppedpyramid/steppedpyramid.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"tetrahedron": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Procedural tetrahedron mesh rendered with the project grid material.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "tetrahedron",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "tetrahedron",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/tetrahedron/tetrahedron.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d",
+				"3d",
+				"procedural"
+			]
+		},
+		"tetrahedron_edit": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Tetrahedron with draggable vertex handles. 4 vertices, 4 faces.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "tetrahedron_edit",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Editable Tetrahedron",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/pyramid/tetrahedron_edit.tscn",
+			"size_group": "compact",
+			"tags": [
+				"3d",
+				"graph"
+			]
+		},
+		"torus": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Grid material torus primitive for layout and shading tests.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "torus",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "torus",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/torus/torus.tscn",
+			"size_group": "compact",
+			"tags": [
+				"2d",
+				"geometry"
+			]
+		},
+		"torus_low": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Low poly torus with 8 ring segments and 6 radial segments showing donut structure.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "torus_low",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "torus_low",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/godotmeshes/torus_low.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry"
+			]
+		},
+		"torus_radials_rings": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Configurable torus with rings and ring segments. Usage: torus_radials_rings:90:1:#inner:0.2#outer:0.6 or #config:16:8 for 16 rings and 8 ring segments.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "torus_radials_rings",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Torus Radials Rings",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/torus/torus_radials_rings.tscn",
+			"size_group": "compact",
+			"tags": [
+				"geometry"
+			]
+		},
+		"trafficcone": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Orange traffic cone with white stripes and square base. Construction site safety marker.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "trafficcone",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Traffic Cone",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/trafficcone/trafficcone.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"transform_staircase_dna": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "DNA double helix: two interleaved spirals. Array + rotation + phase offset.",
+			"dev_themes": [
+				"biology",
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "transform_staircase_dna",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "transform_staircase_dna",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/arrays/transform_staircase_dna.tscn",
+			"size_group": "compact",
+			"tags": [
+				"dna"
+			]
+		},
+		"transform_staircase_fibonacci": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Fibonacci spiral: array + golden angle (137.5Â°) + scaling. Nature's growth pattern.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "transform_staircase_fibonacci",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "transform_staircase_fibonacci",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/arrays/transform_staircase_fibonacci.tscn",
+			"size_group": "compact",
+			"tags": [
+				"pattern",
+				"recursion"
+			]
+		},
+		"transform_staircase_mobius": {
+			"category": "unknown",
+			"complexity": "expert",
+			"description": "MÃ¶bius strip: array + rotation + twist. One-sided surface, topological oddity.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "transform_staircase_mobius",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "transform_staircase_mobius",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/arrays/transform_staircase_mobius.tscn",
+			"size_group": "compact",
+			"tags": [
+				"3d"
+			]
+		},
+		"transform_staircase_showcase": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "All five staircase types together: Linear, Spiral, DNA, Fibonacci, MÃ¶bius. Culmination of arrays + transformation.",
+			"dev_themes": [
+				"biology",
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				7.0,
+				1.0,
+				5.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "transform_staircase_showcase",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "transform_staircase_showcase",
+			"parameters": {
+				"footprint": [
+					7.0,
+					1.0,
+					5.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://commons/primitives/arrays/transform_staircase_showcase.tscn",
+			"size_group": "environment",
+			"tags": [
+				"linear_algebra",
+				"recursion"
+			]
+		},
+		"transform_staircase_spiral": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Spiral staircase: array + rotation + translation. Rainbow helix ascending through space.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "transform_staircase_spiral",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "transform_staircase_spiral",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/arrays/transform_staircase_spiral.tscn",
+			"size_group": "compact",
+			"tags": [
+				"spiral"
+			]
+		},
+		"transformation_cube": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "A mysterious rotating cube that triggers the first learning sequence",
+			"dev_themes": [
+				"core",
+				"education",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "transformation_cube",
+			"map_ready": true,
+			"map_sequences": [
+				"unused",
+				"wavefunctions"
+			],
+			"name": "transformation_cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/animation/transformation_cube.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"translation_demo": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Two blocking obstacles demonstrating X and Y axis translation. Red obstacle slides horizontally, blue obstacle slides vertically. Obstacles turn green when path is cleared.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "translation_demo",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Translation Demo",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/translation/translation_demo.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"triangle": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Interactive triangle mesh with draggable vertices and presets for equilateral, right-angled, and isosceles shapes.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				6.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "triangle",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "triangle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					6.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://commons/primitives/triangle/triangle.tscn",
+			"size_group": "environment",
+			"tags": [
+				"3d"
+			]
+		},
+		"parasol_triangle": {
+			"category": "primitives",
+			"complexity": "simple",
+			"description": "A triangle mounted on a thin stick like a parasol. Double-sided (pink front, blue back) to show orientation. Place multiples for a forest of triangle flags.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "parasol_triangle",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Parasol Triangle",
+			"scene": "res://commons/primitives/triangle/parasol_triangle.tscn",
+			"tags": [
+				"3d",
+				"triangle",
+				"parasol",
+				"landmark"
+			]
+		},
+		"triangle_line_puzzle": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Interactive puzzle: drag 3 line endpoints to form an equilateral triangle.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				2.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "triangle_line_puzzle",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Triangle Line Puzzle",
+			"parameters": {
+				"footprint": [
+					1.0,
+					2.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/puzzles/triangle_line_puzzle.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"triangleprofiles": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Folded pink zigzag profile built from alternating peaks with drag points to edit the pleated surface.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "triangleprofiles",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "1.2: A triangleprofilese",
+			"parameters": {
+				"footprint": [
+					5.0,
+					1.0,
+					5.0
+				],
+				"reading_light": {
+					"cone": 360.0,
+					"direction": "+z",
+					"radius": 6.0,
+					"type": "omni"
+				},
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/triangleprofiles/triangleprofiles.tscn",
+			"size_group": "compact",
+			"tags": [
+				"3d"
+			]
+		},
+		"triangular_cupola": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Johnson Solid J3: Triangular cupola combining triangular and square faces.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "triangular_cupola",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "triangular_cupola",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/johnsonsolids/triangular_cupola.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"triangularblock": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Triangular block mesh with matched convex collision for kitbashing.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "triangularblock",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "triangularblock",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/triangularblock/triangularblock.tscn",
+			"size_group": "compact",
+			"tags": [
+				"3d",
+				"physics"
+			]
+		},
+		"trihedron": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "trihedron",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "trihedron",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "trihedron",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/trihedron/trihedron.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"truncatedtetrahedron": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "A truncatedtetrahedron",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "truncatedtetrahedron",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives",
+				"unused"
+			],
+			"name": "truncatedtetrahedron",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/truncatedtetrahedron/truncatedtetrahedron.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"unitcube": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Unit cube from vertex and face arrays",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "unitcube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Unit Cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/unitcube/unitcube.tscn",
+			"size_group": "compact",
+			"tags": [
+				"3d",
+				"graph"
+			]
+		},
+		"wood_cube": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "wood_cube",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "wood_cube",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "wood_cube",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/cubes/grab_cube_wood.tscn",
+			"size_group": "compact",
+			"tags": [
+				"primitive"
+			]
+		},
+		"zigzagprofile": {
+			"category": "unknown",
+			"complexity": "intermediate",
+			"description": "Interactive zigzag strip featuring top and base grab points plus presets for zigzag, sine, and sawtooth patterns.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "zigzagprofile",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "1.2: A zigzagprofile",
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/zigzagprofile/zigzagprofile.tscn",
+			"size_group": "compact",
+			"tags": [
+				"interactive",
+				"vr"
+			]
+		}
+	},
+	"registry_info": {
+		"category": "primitives",
+		"description": "Primitives artifacts migrated from legacy grid_artifacts.json",
+		"name": "primitives"
+	}
+}

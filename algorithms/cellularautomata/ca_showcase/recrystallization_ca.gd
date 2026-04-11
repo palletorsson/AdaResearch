@@ -7,7 +7,7 @@ const NUCLEATION_SITES = 5
 
 var nucleation_sites: Array = []
 
-func initialize_grid():
+func initialize_grid() -> void:
 	# Configure MultiMesh
 	var step = 4
 	var cube_size = CUBE_SIZE * step
@@ -29,7 +29,7 @@ func initialize_grid():
 		nucleation_sites.append(site)
 		grid[site.x][site.y][site.z] = 1  # Mark as crystal
 
-func update_simulation(_delta):
+func update_simulation(_delta) -> void:
 	# Grow crystals from nucleation sites
 	for site in nucleation_sites:
 		if randf() < GROWTH_RATE:
@@ -37,14 +37,14 @@ func update_simulation(_delta):
 	
 	update_visualization()
 
-func grow_crystal_at_site(site: Vector3i):
+func grow_crystal_at_site(site: Vector3i) -> void:
 	# Expand from nucleation sites
 	var neighbors = get_3d_neighbors(site)
 	for neighbor in neighbors:
 		if is_valid_3d_position(neighbor) and randf() < 0.1:
 			grid[neighbor.x][neighbor.y][neighbor.z] = 1  # Crystal state
 
-func update_visualization():
+func update_visualization() -> void:
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
 		return
 		
@@ -83,8 +83,11 @@ func get_crystal_count() -> int:
 					count += 1
 	return count
 
-func reset_simulation():
+func reset_simulation() -> void:
 	grid = create_3d_grid()
 	nucleation_sites.clear()
 	initialize_grid()
 	iteration_count = 0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

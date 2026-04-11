@@ -1,5 +1,16 @@
 extends Node3D
 
+
+# @identity
+# essence: trace(t) = (target.x, target.y, z_origin - speed * t) — position history as fading trail
+# desire: Toss a pickup cube and see its trajectory recorded as a time-domain trace in space
+# critical_parameter: time_axis_speed — controls how fast the trace extends along the Z axis
+# triggers: continuous position sampling of target node at sample_interval creates the fading trail
+# emerges: thrown trajectories become visible waveforms — parabolas, oscillations, chaos all recorded
+# needs: VR pickup cube to track [has], trail rendering [has]
+# relationships: depends on target node position sampling; contrasts with draw_dot_time_domain (cube tracking vs hand tracking); unlocks trajectory visualization
+# truth: Every trajectory is a signal in time; recording it reveals the physics as waveform.
+
 @export var target_path: NodePath = NodePath("PickUpCube")
 @export var trail_color: Color = Color(0.95, 0.7, 0.2, 1.0)
 @export var trail_max_points: int = 1000

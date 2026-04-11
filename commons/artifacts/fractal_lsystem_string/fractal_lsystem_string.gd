@@ -9,6 +9,16 @@
 # encoded in the grammar before any geometric interpretation.
 #
 # QFEP: Grammar as generative engine — the string IS the structure
+#
+# @identity
+# essence: string(n+1) = replace_all(string(n), F, rule) — exponential rewriting made visible
+# desire: To show the string before the tree — stacked generations revealing how F→F[+F]F[-F]F explodes
+# critical_parameter: rule_to — the production rule determines the entire growth pattern of the string
+# triggers: Each generation multiplies string length exponentially; truncation at 50000 chars shows the limit of display
+# emerges: The realization that the tree was always in the string — geometry is just an interpretation of grammar
+# needs: VR rule editor [missing], generation stepper [missing], Label3D [has]
+# relationships: Paired with lsystem_tree (string vs geometry). Opens LSystems_Grammar_Lab.
+# truth: The string is the structure — the tree is just one way to read it.
 
 extends Node3D
 

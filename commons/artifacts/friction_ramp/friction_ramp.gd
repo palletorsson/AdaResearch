@@ -52,6 +52,9 @@ var _angle_slider: Node
 const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
+# Signal tracking for cleanup
+var _signal_connections: Array = []
+
 
 func _ready() -> void:
 	_create_ramp()
@@ -355,7 +358,9 @@ func _create_vr_controls() -> void:
 	reset_btn.rotation_degrees.x = -30
 	_control_panel.add_child(reset_btn)
 	_add_button_label(reset_btn, "RESET")
-	reset_btn.pressed.connect(func(): _reset_block(); _update_physics_state())
+	var reset_cb := func(): _reset_block(); _update_physics_state()
+	reset_btn.pressed.connect(reset_cb)
+	_signal_connections.append([reset_btn, &"pressed", reset_cb])
 
 	call_deferred("_sync_all_sliders")
 
@@ -371,6 +376,7 @@ func _add_slider(label_text: String, x_pos: float, callback: Callable) -> Node:
 		lbl.text = label_text
 	_control_panel.add_child(slider)
 	slider.slider_moved.connect(callback)
+	_signal_connections.append([slider, &"slider_moved", callback])
 	return slider
 
 
@@ -412,6 +418,12 @@ func _on_angle_slider(_pos) -> void:
 # ------------------------------------------------------------------
 # Grid system integration
 # ------------------------------------------------------------------
+
+func _exit_tree() -> void:
+	for conn in _signal_connections:
+		if is_instance_valid(conn[0]) and conn[0].is_connected(conn[1], conn[2]):
+			conn[0].disconnect(conn[1], conn[2])
+	_signal_connections.clear()
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("friction_mu"):

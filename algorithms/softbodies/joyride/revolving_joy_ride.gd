@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: RigidBody3D hub rotating at ride_speed, with PinJoint3D chains suspending SoftBody3D spheres — centripetal force stretches the soft bodies outward while gravity pulls them down
+# desire: to spin you inside a carousel where every hanging blob deforms differently depending on its chain length and the ride's angular velocity
+# critical_parameter: ride_speed — slow rotation lets soft bodies dangle and sway, fast rotation stretches them into elongated teardrops that barely hold together
+# triggers: rotation.y increment in _physics_process drives the entire chain system; obstacle ring at the perimeter causes collision-deformation events
+# emerges: at certain speeds the chain links begin to oscillate in phase, creating synchronized pendulum waves across the four arms
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: builds on jelly_cube's spring-mass intro by adding chain dynamics and centripetal force; contrasts with breathing_room's static pressure oscillation
+# truth: a carousel is a centrifuge for compliance — the soft bodies do not choose their shape, the rotation imposes it
+
 # Configuration
 @export var ride_radius: float = 3.0
 @export var ride_speed: float = 1.0 # Radians per second
@@ -18,7 +28,7 @@ const SHADER_PEARLESCENT = preload("res://commons/resourses/shaders/pearlescent.
 const SHADER_FROSTED = preload("res://commons/resourses/shaders/frosted_glass.gdshader")
 const SHADER_DISCO = preload("res://commons/resourses/shaders/discoLights.gdshader")
 
-func _ready():
+func _ready() -> void:
 	setup_camera()
 	setup_lighting()
 	setup_ride()
@@ -31,13 +41,13 @@ func create_shader_material(shader: Shader, params: Dictionary = {}) -> ShaderMa
 		mat.set_shader_parameter(key, params[key])
 	return mat
 
-func setup_camera():
+func setup_camera() -> void:
 	var cam = Camera3D.new()
 	cam.position = Vector3(0, 2.5, 6.25)
 	cam.look_at(Vector3(0, 1.25, 0))
 	add_child(cam)
 
-func setup_lighting():
+func setup_lighting() -> void:
 	var light = DirectionalLight3D.new()
 	light.position = Vector3(2.5, 5, 2.5)
 	light.look_at(Vector3.ZERO)
@@ -55,7 +65,7 @@ func setup_lighting():
 	env.environment = environment
 	add_child(env)
 
-func setup_ride():
+func setup_ride() -> void:
 	# Create the central hub that rotates
 	ride_hub = RigidBody3D.new()
 	ride_hub.name = "RideHub"
@@ -79,7 +89,7 @@ func setup_ride():
 		var angle = i * (PI / 2.0)
 		create_arm(angle)
 
-func create_arm(angle: float):
+func create_arm(angle: float) -> void:
 	var pos_on_ring = Vector3(cos(angle) * ride_radius, 0, sin(angle) * ride_radius)
 	
 	# Visual sphere
@@ -148,7 +158,7 @@ func create_link(pos: Vector3, color: Color) -> RigidBody3D:
 	
 	return body
 
-func create_hanging_soft_body(parent_body: RigidBody3D):
+func create_hanging_soft_body(parent_body: RigidBody3D) -> void:
 	var sb = SoftBody3D.new()
 	
 	# Create Mesh
@@ -179,7 +189,7 @@ func create_hanging_soft_body(parent_body: RigidBody3D):
 	# Defer pinning to ensure nodes are ready
 	call_deferred("_pin_soft_body", sb, parent_body)
 
-func _pin_soft_body(sb: SoftBody3D, parent_body: RigidBody3D):
+func _pin_soft_body(sb: SoftBody3D, parent_body: RigidBody3D) -> void:
 	if not is_instance_valid(sb) or not is_instance_valid(parent_body):
 		return
 
@@ -218,7 +228,7 @@ func _pin_soft_body(sb: SoftBody3D, parent_body: RigidBody3D):
 	else:
 		print("ERROR: Could not find top vertices for pinning!")
 
-func setup_obstacles():
+func setup_obstacles() -> void:
 	var obstacle_ring = Node3D.new()
 	obstacle_ring.name = "Obstacles"
 	add_child(obstacle_ring)
@@ -250,6 +260,15 @@ func setup_obstacles():
 		
 		obstacle_ring.add_child(static_body)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if ride_hub:
 		ride_hub.rotation.y += ride_speed * delta
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

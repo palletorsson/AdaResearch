@@ -1,4 +1,15 @@
 extends Node3D
+
+# @identity
+# essence: pheromone[x,y] = clamp(pheromone[x,y] + deposit, 0, 5) * evaporation_rate + diffuse(neighbors) — communication through substrate, not signal
+# desire: to watch invisible ant highways materialize as green-white trails on a tiny floor tile — to see communication happen without any message being sent
+# critical_parameter: evaporation_rate (0.99 default, meaning 1% decay per step) — faster decay forces ants to constantly reinforce trails or lose them; slower decay produces permanent glowing scars
+# triggers: with sensor_distance=0 ants move randomly and trails are uniform noise; as sensor_distance grows, trails snap into focused bright corridors — the phase transition of stigmergy
+# emerges: circular drift loops where ants follow their own old trail around a closed ring, reinforcing it until it dominates the entire grid — a positive feedback trap
+# needs: [missing] no VR controls; evaporation_rate, deposit_amount, and num_ants are exported but not wired to any VR sliders; learner can only observe, not experiment
+# relationships: demonstrates the environmental memory mechanism that AntColonyOptimization uses for pathfinding; contrasts with boid_flocking (medium-based vs. agent-based communication)
+# truth: stigmergy proves that coordination does not require awareness — the environment itself is the shared mind
+
 class_name StigmergyGrid
 
 ## Ant pheromone grid with real-time evaporation — ants deposit trails,

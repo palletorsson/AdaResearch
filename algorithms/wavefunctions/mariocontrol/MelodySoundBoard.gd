@@ -59,7 +59,7 @@ var _beat_duration: float = 0.5
 var note_markers: Dictionary = {}
 var melody_trail: Array[Vector3] = []
 
-func _ready():
+func _ready() -> void:
 	_beat_duration = 60.0 / tempo_bpm
 
 	# Configure mapper for pitch space
@@ -82,7 +82,7 @@ func _ready():
 	_spawn_note_markers()
 	_start_ambient_loop()
 
-func apply_grid_config(data: Dictionary):
+func apply_grid_config(data: Dictionary) -> void:
 	if data.has("melody"):
 		is_ambient_enabled = false
 		var melody = str(data["melody"]).to_lower().replace(" ", "")
@@ -104,7 +104,7 @@ func apply_grid_config(data: Dictionary):
 	if data.has("octave"):
 		base_octave = int(data["octave"])
 
-func _start_ambient_loop():
+func _start_ambient_loop() -> void:
 	await get_tree().create_timer(1.0).timeout
 	while true:
 		if not is_inside_tree(): return
@@ -119,7 +119,7 @@ func _start_ambient_loop():
 		else:
 			await get_tree().create_timer(1.0).timeout
 
-func play_melody(melody: String):
+func play_melody(melody: String) -> void:
 	if is_playing_sequence: return
 	is_playing_sequence = true
 
@@ -135,7 +135,7 @@ func play_melody(melody: String):
 
 # --- Melody Implementations ---
 
-func _play_c_major_scale():
+func _play_c_major_scale() -> void:
 	var scale_notes = ["C", "D", "E", "F", "G", "A", "B", "C"]
 	var octaves = [0, 0, 0, 0, 0, 0, 0, 1]
 
@@ -146,7 +146,7 @@ func _play_c_major_scale():
 	for i in range(scale_notes.size() - 2, -1, -1):
 		await _play_note(scale_notes[i], octaves[i], 1.0)
 
-func _play_twinkle_twinkle():
+func _play_twinkle_twinkle() -> void:
 	# Twinkle Twinkle Little Star melody
 	var notes = [
 		["C", 0, 1], ["C", 0, 1], ["G", 0, 1], ["G", 0, 1],
@@ -158,7 +158,7 @@ func _play_twinkle_twinkle():
 	for n in notes:
 		await _play_note(n[0], n[1], n[2])
 
-func _play_ode_to_joy():
+func _play_ode_to_joy() -> void:
 	# Beethoven's Ode to Joy (simplified)
 	var notes = [
 		["E", 0, 1], ["E", 0, 1], ["F", 0, 1], ["G", 0, 1],
@@ -170,7 +170,7 @@ func _play_ode_to_joy():
 	for n in notes:
 		await _play_note(n[0], n[1], n[2])
 
-func _play_mario_theme():
+func _play_mario_theme() -> void:
 	# Super Mario Bros theme (opening)
 	var notes = [
 		["E", 0, 0.5], ["E", 0, 0.5], ["E", 0, 1],
@@ -181,7 +181,7 @@ func _play_mario_theme():
 	for n in notes:
 		await _play_note(n[0], n[1], n[2])
 
-func _play_pentatonic_jam():
+func _play_pentatonic_jam() -> void:
 	# Pentatonic scale improvisation
 	var penta = ["C", "D", "E", "G", "A"]
 
@@ -191,7 +191,7 @@ func _play_pentatonic_jam():
 		var dur = [0.5, 0.5, 1.0, 1.0][randi() % 4]
 		await _play_note(note, octave, dur)
 
-func _play_chromatic_run():
+func _play_chromatic_run() -> void:
 	# Chromatic scale run up and down
 	var chromatic = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 
@@ -204,7 +204,7 @@ func _play_chromatic_run():
 
 # --- Core Note Playing ---
 
-func _play_note(note_name: String, octave_offset: int = 0, beat_count: float = 1.0):
+func _play_note(note_name: String, octave_offset: int = 0, beat_count: float = 1.0) -> void:
 	if not NOTE_ANCHORS.has(note_name):
 		push_warning("Unknown note: %s" % note_name)
 		return
@@ -231,7 +231,7 @@ func _play_note(note_name: String, octave_offset: int = 0, beat_count: float = 1
 	# Brief silence between notes
 	await get_tree().create_timer(_beat_duration * beat_count * 0.1).timeout
 
-func _trigger_tone(note_name: String, octave_offset: int, intensity: float):
+func _trigger_tone(note_name: String, octave_offset: int, intensity: float) -> void:
 	var semitone = NOTE_ANCHORS[note_name].x
 	var freq = _semitone_to_freq(semitone, base_octave + octave_offset)
 
@@ -277,11 +277,11 @@ func _generate_sine_bell(freq: float, intensity: float) -> AudioStreamWAV:
 
 # --- Mapper Interface ---
 
-func _on_mapper_changed(_semitone: float, octave_offset: float, intensity: float):
+func _on_mapper_changed(_semitone: float, octave_offset: float, intensity: float) -> void:
 	# Could trigger notes based on position for interactive play
 	pass
 
-func _tween_mapper(target: Vector3, duration: float):
+func _tween_mapper(target: Vector3, duration: float) -> void:
 	var tween = create_tween()
 	var start_val = mapper.get_values()
 
@@ -296,7 +296,7 @@ func _tween_mapper(target: Vector3, duration: float):
 
 # --- Visual Feedback ---
 
-func _spawn_note_markers():
+func _spawn_note_markers() -> void:
 	var white_notes = ["C", "D", "E", "F", "G", "A", "B"]
 	var black_notes = ["C#", "D#", "F#", "G#", "A#"]
 
@@ -343,7 +343,7 @@ func _spawn_note_markers():
 		lbl.modulate = Color(0.3, 0.3, 0.3) if is_black else Color(0.1, 0.1, 0.1)
 		mapper.add_child(lbl)
 
-func _highlight_note_marker(note_name: String):
+func _highlight_note_marker(note_name: String) -> void:
 	if not note_markers.has(note_name):
 		return
 
@@ -357,3 +357,9 @@ func _highlight_note_marker(note_name: String):
 	var tween = create_tween()
 	tween.tween_property(mat, "emission", Color(1, 0.8, 0.3) * 2.0, 0.05)
 	tween.tween_property(mat, "emission", original_emission, 0.3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

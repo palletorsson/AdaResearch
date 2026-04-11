@@ -1,11 +1,11 @@
-﻿extends CSGBox3D
+extends CSGBox3D
 
 # MondrianGhostBlock.gd
 # Animates the block from opaque white to transparent fading in and out.
 
 var time_offset: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	# Random start time for variety
 	time_offset = randf() * 10.0
 	
@@ -27,3 +27,6 @@ func _process(_delta):
 		var color = material_override.albedo_color
 		color.a = alpha
 		material_override.albedo_color = color
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,3 +1,13 @@
+# @identity
+# essence: next_note = markov_chain[current_note] -- algorithmic composition via probabilistic note selection
+# desire: melody that writes itself -- Markov chains choosing pitch, rhythm following tempo, scales shifting
+# critical_parameter: markov_chain transition probabilities -- which note follows which; tempo and scale set the frame
+# triggers: beat_timer fires notes per BPM; theme profiles reshape scale, tempo, vibrato, bass probability
+# emerges: music between noise and loops -- pattern almost holds, repetition almost breaks
+# needs: AudioStreamGenerator [has]; Markov chain state [has]; polyphonic note management [has]; VR controls [missing]
+# relationships: synthesis of all prior audio artifacts; Markov concept shared with grammar_markov hazard
+# truth: if a system produces music without intent, who is the musician? The rules, the randomness, or the listener?
+
 extends Node3D
 
 # Generative Music Algorithms
@@ -118,14 +128,14 @@ var rhythm_generations := []
 var fractal_iteration := 0
 var fractal_seed := [0, 2, 4, 2]
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	setup_audio_synthesis()
 	apply_theme_profile(theme_sequence[0])
 	initialize_rhythm_ca()
 	initialize_fractal_system()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	note_timer += delta
 	beat_timer += delta
@@ -137,7 +147,7 @@ func _process(delta):
 	update_theme_cycle(delta)
 	generate_audio_samples()
 
-func initialize_markov_chain():
+func initialize_markov_chain() -> void:
 	markov_chain = {}
 	if current_scale.is_empty():
 		current_scale = [0, 2, 4, 5, 7, 9, 11]
@@ -163,7 +173,7 @@ func initialize_markov_chain():
 	current_note = current_scale[0]
 	note_history = [current_note]
 
-func initialize_rhythm_ca():
+func initialize_rhythm_ca() -> void:
 	# Initialize 1D cellular automaton for rhythm generation
 	rhythm_cells.resize(16)
 	for i in range(rhythm_cells.size()):
@@ -171,10 +181,10 @@ func initialize_rhythm_ca():
 	
 	rhythm_generations = [rhythm_cells.duplicate()]
 
-func initialize_fractal_system():
+func initialize_fractal_system() -> void:
 	fractal_iteration = 0
 
-func update_algorithmic_composer():
+func update_algorithmic_composer() -> void:
 	var container = $AlgorithmicComposer
 	
 	# Clear previous visualization
@@ -210,7 +220,7 @@ func update_algorithmic_composer():
 			)
 			container.add_child(connection)
 
-func animate_markov_chain():
+func animate_markov_chain() -> void:
 	var container = $MarkovChain
 	
 	# Clear previous visualization
@@ -268,7 +278,7 @@ func animate_markov_chain():
 					var connection = create_weighted_connection(from_pos, to_pos, probability)
 					container.add_child(connection)
 
-func generate_next_markov_note():
+func generate_next_markov_note() -> void:
 	if not markov_chain.has(current_note):
 		return
 
@@ -298,7 +308,7 @@ func get_transition_probability(from_note: int, to_note: int) -> float:
 		return markov_chain[from_note][to_note]
 	return 0.0
 
-func animate_cellular_automata():
+func animate_cellular_automata() -> void:
 	var container = $CellularAutomata
 	
 	# Clear previous visualization
@@ -355,7 +365,7 @@ func animate_cellular_automata():
 				
 				container.add_child(history_cube)
 
-func update_rhythm_ca():
+func update_rhythm_ca() -> void:
 	var new_generation = []
 	
 	for i in range(rhythm_cells.size()):
@@ -374,7 +384,7 @@ func update_rhythm_ca():
 	if rhythm_generations.size() > 16:
 		rhythm_generations.remove_at(0)
 
-func generate_fractal_melodies():
+func generate_fractal_melodies() -> void:
 	var container = $FractalMelodies
 	
 	# Clear previous visualization
@@ -478,7 +488,7 @@ func create_weighted_connection(from: Vector3, to: Vector3, weight: float) -> CS
 	
 	return connection
 
-func setup_audio_synthesis():
+func setup_audio_synthesis() -> void:
 	audio_stream = AudioStreamGenerator.new()
 	audio_stream.mix_rate = sample_rate
 	audio_stream.buffer_length = 0.2
@@ -500,12 +510,12 @@ func ensure_playback() -> bool:
 	audio_playback = audio_player.get_stream_playback()
 	return audio_playback != null
 
-func reset_audio_state():
+func reset_audio_state() -> void:
 	active_notes.clear()
 	audio_pad_phase = 0.0
 	vibrato_phase = 0.0
 
-func apply_theme_profile(theme_name: String):
+func apply_theme_profile(theme_name: String) -> void:
 	if not theme_profiles.has(theme_name):
 		return
 
@@ -536,17 +546,17 @@ func apply_theme_profile(theme_name: String):
 	theme_timer = 0.0
 	print("GenerativeMusic: activated %s theme" % theme_name)
 
-func update_theme_cycle(delta: float):
+func update_theme_cycle(delta: float) -> void:
 	theme_timer += delta
 	if theme_timer >= theme_cycle_duration:
 		theme_timer = 0.0
 		advance_theme()
 
-func advance_theme():
+func advance_theme() -> void:
 	current_theme_index = (current_theme_index + 1) % theme_sequence.size()
 	apply_theme_profile(theme_sequence[current_theme_index])
 
-func trigger_audio_note(scale_degree: int, accent := 1.0):
+func trigger_audio_note(scale_degree: int, accent := 1.0) -> void:
 	if current_scale.is_empty():
 		return
 	var midi_note = current_key + scale_degree
@@ -562,7 +572,7 @@ func trigger_audio_note(scale_degree: int, accent := 1.0):
 	}
 	active_notes.append(note)
 
-func trigger_bass_note():
+func trigger_bass_note() -> void:
 	var root_degree = current_scale[0] if current_scale.size() > 0 else 0
 	var midi_note = current_key + root_degree + bass_interval
 	var note = {
@@ -576,7 +586,7 @@ func trigger_bass_note():
 	}
 	active_notes.append(note)
 
-func generate_audio_samples():
+func generate_audio_samples() -> void:
 	if not audio_player or not audio_player.playing:
 		return
 	if not ensure_playback():
@@ -633,3 +643,12 @@ func generate_wave_sample(phase: float, note_type: String) -> float:
 
 func midi_to_freq(midi_note: int) -> float:
 	return 440.0 * pow(2.0, (midi_note - 69) / 12.0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

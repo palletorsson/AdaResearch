@@ -20,11 +20,11 @@ var _time: float = 0.0
 # Bone indices
 var _bone_indices: Dictionary = {}
 
-func _ready():
+func _ready() -> void:
 	_load_player_model()
 	_setup_dress()
 
-func _load_player_model():
+func _load_player_model() -> void:
 	var player_scene = load("res://algorithms/wavefunctions/dancing_body/player.glb")
 	if player_scene:
 		_player_model = player_scene.instantiate()
@@ -51,7 +51,7 @@ func _load_player_model():
 	else:
 		print("ElphabaDemo: ERROR - Could not load player.glb!")
 
-func _setup_dress():
+func _setup_dress() -> void:
 	# Find the dress node that was instanced in the scene
 	_dress = get_node_or_null("ElphabaDress")
 
@@ -111,18 +111,18 @@ func _find_skeleton(node: Node) -> Skeleton3D:
 			return result
 	return null
 
-func _update_body_visibility():
+func _update_body_visibility() -> void:
 	if _player_model:
 		# Find mesh instances and toggle visibility
 		_set_mesh_visibility(_player_model, show_body)
 
-func _set_mesh_visibility(node: Node, visible: bool):
+func _set_mesh_visibility(node: Node, visible: bool) -> void:
 	if node is MeshInstance3D:
 		node.visible = visible
 	for child in node.get_children():
 		_set_mesh_visibility(child, visible)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_time += delta * animation_speed
 
 	if animate_bones and _skeleton:
@@ -131,7 +131,7 @@ func _process(delta):
 	if _dress and _skeleton:
 		_update_dress_position()
 
-func _apply_dance_animation():
+func _apply_dance_animation() -> void:
 	# Animate arms in a flowing dance motion
 	# Try multiple bone name variations
 
@@ -180,7 +180,7 @@ func _find_bone_by_names(names: Array) -> int:
 			return idx
 	return -1
 
-func _update_dress_position():
+func _update_dress_position() -> void:
 	# Dress is now parented to skeleton, so we just update local position to follow hip bone
 	if not _dress or not _skeleton:
 		return
@@ -191,12 +191,15 @@ func _update_dress_position():
 		_dress.transform = Transform3D(Basis.IDENTITY, bone_pose.origin)
 
 # Public API
-func set_body_visible(visible: bool):
+func set_body_visible(visible: bool) -> void:
 	show_body = visible
 	_update_body_visibility()
 
-func set_animation_speed(speed: float):
+func set_animation_speed(speed: float) -> void:
 	animation_speed = speed
 
-func set_arm_amplitude(amplitude: float):
+func set_arm_amplitude(amplitude: float) -> void:
 	arm_amplitude = amplitude
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

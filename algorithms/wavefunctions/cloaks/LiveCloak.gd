@@ -29,16 +29,16 @@ extends Node3D
 var _time: float = 0.0
 var _curve: Curve3D
 
-func _ready():
+func _ready() -> void:
 	_setup_nodes()
 	_initialize_curve()
 	_update_material()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_time += delta * speed
 	_animate_curve()
 
-func _setup_nodes():
+func _setup_nodes() -> void:
 	# Ensure Path3D exists
 	if not path_3d:
 		path_3d = Path3D.new()
@@ -77,7 +77,7 @@ func _setup_nodes():
 		])
 		layer.polygon = polygon
 
-func _update_material():
+func _update_material() -> void:
 	for i in range(layers):
 		var node_name = "CloakLayer_%d" % i
 		var layer = get_node_or_null(node_name)
@@ -92,7 +92,7 @@ func _update_material():
 			mat.emission_energy_multiplier = emission_strength
 			layer.material = mat
 
-func _initialize_curve():
+func _initialize_curve() -> void:
 	_curve = Curve3D.new()
 	for i in range(segments + 1):
 		# Start with a straight line or spiral
@@ -110,7 +110,7 @@ func _initialize_curve():
 	
 	path_3d.curve = _curve
 
-func _animate_curve():
+func _animate_curve() -> void:
 	if not _curve: return
 	
 	for i in range(_curve.point_count):
@@ -137,3 +137,12 @@ func _animate_curve():
 		
 		# Optional: Twist control points for smoother curves
 		# _curve.set_point_in(i, ...)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

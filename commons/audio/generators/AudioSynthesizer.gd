@@ -782,44 +782,21 @@ static func _generate_disco_section_stream(progression: Array, scale: Array, ins
 
 
 static func generate_detroit_techno_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
-	parameters = _merge_with_song_research_parameters("detroit_techno", parameters)
 	# Detroit Techno - Juan Atkins, Derrick May style
-	# Cold machine funk, minimal, hypnotic
-	randomize()
-	var bpm = 125.0
-	var bar_duration = 240.0 / bpm
-	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "2"
-	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-
-	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
-	print("AudioSynthesizer: Generating Detroit Techno in ", root_note)
-
-	var playback = AudioStreamInteractive.new()
-	playback.clip_count = 4
-	playback.initial_clip = 0
-
-	var intro = _generate_detroit_section(progression, scale, ["kick", "hihat"], bar_duration)
-	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
-
-	var build = _generate_detroit_section(progression, scale, ["kick", "hihat", "bass", "stab"], bar_duration)
-	playback.set_clip_stream(1, build); playback.set_clip_name(1, "Build")
-	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
-
-	var main = _generate_detroit_section(progression, scale, ["kick", "hihat", "clap", "bass", "stab", "pad"], bar_duration)
-	playback.set_clip_stream(2, main); playback.set_clip_name(2, "Main")
-	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
-
-	var outro = _generate_detroit_section(progression, scale, ["pad", "hihat"], bar_duration)
-	playback.set_clip_stream(3, outro); playback.set_clip_name(3, "Breakdown")
-	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
-
-	var xfade = 2.0
-	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(3, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	return playback
+	var config = SongStructureBuilder.SongConfig.new()
+	config.genre_id = "detroit_techno"
+	config.bpm = 125.0
+	config.scale_type = "minor"
+	config.octave_suffix = "2"
+	config.crossfade = 2.0
+	config.sections = [
+		{"name": "Intro", "instruments": ["kick", "hihat"]},
+		{"name": "Build", "instruments": ["kick", "hihat", "bass", "stab"]},
+		{"name": "Main", "instruments": ["kick", "hihat", "clap", "bass", "stab", "pad"]},
+		{"name": "Breakdown", "instruments": ["pad", "hihat"]},
+	]
+	config.section_generator = _generate_detroit_section
+	return SongStructureBuilder.build_song(config, parameters)
 
 
 static func _generate_detroit_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
@@ -924,44 +901,21 @@ static func _generate_detroit_section(progression: Array, scale: Array, instrume
 
 
 static func generate_synthwave_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
-	parameters = _merge_with_song_research_parameters("synthwave", parameters)
 	# Synthwave - The Weeknd, Kavinsky style
-	# 80s gated drums, detuned leads, arpeggios
-	randomize()
-	var bpm = 118.0
-	var bar_duration = 240.0 / bpm
-	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3"
-	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-
-	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
-	print("AudioSynthesizer: Generating Synthwave in ", root_note)
-
-	var playback = AudioStreamInteractive.new()
-	playback.clip_count = 4
-	playback.initial_clip = 0
-
-	var intro = _generate_synthwave_section(progression, scale, ["arp", "pad"], bar_duration)
-	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
-
-	var verse = _generate_synthwave_section(progression, scale, ["arp", "pad", "drums", "bass"], bar_duration)
-	playback.set_clip_stream(1, verse); playback.set_clip_name(1, "Verse")
-	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
-
-	var chorus = _generate_synthwave_section(progression, scale, ["arp", "pad", "drums", "bass", "lead"], bar_duration)
-	playback.set_clip_stream(2, chorus); playback.set_clip_name(2, "Chorus")
-	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
-
-	var outro = _generate_synthwave_section(progression, scale, ["pad", "arp"], bar_duration)
-	playback.set_clip_stream(3, outro); playback.set_clip_name(3, "Outro")
-	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
-
-	var xfade = 3.0
-	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(3, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	return playback
+	var config = SongStructureBuilder.SongConfig.new()
+	config.genre_id = "synthwave"
+	config.bpm = 118.0
+	config.scale_type = "minor"
+	config.octave_suffix = "3"
+	config.crossfade = 3.0
+	config.sections = [
+		{"name": "Intro", "instruments": ["arp", "pad"]},
+		{"name": "Verse", "instruments": ["arp", "pad", "drums", "bass"]},
+		{"name": "Chorus", "instruments": ["arp", "pad", "drums", "bass", "lead"]},
+		{"name": "Outro", "instruments": ["pad", "arp"]},
+	]
+	config.section_generator = _generate_synthwave_section
+	return SongStructureBuilder.build_song(config, parameters)
 
 
 static func _generate_synthwave_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
@@ -1076,44 +1030,21 @@ static func _generate_synthwave_section(progression: Array, scale: Array, instru
 
 
 static func generate_rave_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
-	parameters = _merge_with_song_research_parameters("rave", parameters)
 	# 90s Rave - The Prodigy, SL2 style
-	# Aggressive breakbeats, hoover bass, stabs
-	randomize()
-	var bpm = 140.0
-	var bar_duration = 240.0 / bpm
-	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "2"
-	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-
-	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
-	print("AudioSynthesizer: Generating Rave Track in ", root_note)
-
-	var playback = AudioStreamInteractive.new()
-	playback.clip_count = 4
-	playback.initial_clip = 0
-
-	var intro = _generate_rave_section(progression, scale, ["breakbeat"], bar_duration)
-	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
-
-	var build = _generate_rave_section(progression, scale, ["breakbeat", "hoover", "stab"], bar_duration)
-	playback.set_clip_stream(1, build); playback.set_clip_name(1, "Build")
-	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
-
-	var drop = _generate_rave_section(progression, scale, ["breakbeat", "hoover", "stab", "lead"], bar_duration)
-	playback.set_clip_stream(2, drop); playback.set_clip_name(2, "Drop")
-	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
-
-	var breakdown = _generate_rave_section(progression, scale, ["pad", "stab"], bar_duration)
-	playback.set_clip_stream(3, breakdown); playback.set_clip_name(3, "Breakdown")
-	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
-
-	var xfade = 1.5
-	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(3, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	return playback
+	var config = SongStructureBuilder.SongConfig.new()
+	config.genre_id = "rave"
+	config.bpm = 140.0
+	config.scale_type = "minor"
+	config.octave_suffix = "2"
+	config.crossfade = 1.5
+	config.sections = [
+		{"name": "Intro", "instruments": ["breakbeat"]},
+		{"name": "Build", "instruments": ["breakbeat", "hoover", "stab"]},
+		{"name": "Drop", "instruments": ["breakbeat", "hoover", "stab", "lead"]},
+		{"name": "Breakdown", "instruments": ["pad", "stab"]},
+	]
+	config.section_generator = _generate_rave_section
+	return SongStructureBuilder.build_song(config, parameters)
 
 
 static func _generate_rave_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
@@ -1460,42 +1391,21 @@ static func _generate_acid_house_section(progression: Array, scale: Array, instr
 # Based on research: Resonant bandpass "duck" leads, wavetable chiffs, filter disco
 # ============================================================================
 static func generate_french_touch_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
-	parameters = _merge_with_song_research_parameters("french_touch", parameters)
-	randomize()
-	var bpm = 120.0
-	var bar_duration = 240.0 / bpm
-	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3"
-	var scale = PopMusicTheory.get_major_scale_notes(root_note)
-
-	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
-	print("AudioSynthesizer: Generating French Touch in ", root_note)
-
-	var playback = AudioStreamInteractive.new()
-	playback.clip_count = 4
-	playback.initial_clip = 0
-
-	var intro = _generate_french_touch_section(progression, scale, ["filter_bass", "duck_lead"], bar_duration)
-	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
-
-	var verse = _generate_french_touch_section(progression, scale, ["filter_bass", "duck_lead", "chiff", "drums"], bar_duration)
-	playback.set_clip_stream(1, verse); playback.set_clip_name(1, "Verse")
-	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
-
-	var chorus = _generate_french_touch_section(progression, scale, ["filter_bass", "duck_lead", "chiff", "drums", "vocoder_pad"], bar_duration)
-	playback.set_clip_stream(2, chorus); playback.set_clip_name(2, "Chorus")
-	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
-
-	var outro = _generate_french_touch_section(progression, scale, ["filter_bass", "vocoder_pad"], bar_duration)
-	playback.set_clip_stream(3, outro); playback.set_clip_name(3, "Outro")
-	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
-
-	var xfade = 1.5
-	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(3, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	return playback
+	# French Touch - Daft Punk, Cassius style
+	var config = SongStructureBuilder.SongConfig.new()
+	config.genre_id = "french_touch"
+	config.bpm = 120.0
+	config.scale_type = "major"
+	config.octave_suffix = "3"
+	config.crossfade = 1.5
+	config.sections = [
+		{"name": "Intro", "instruments": ["filter_bass", "duck_lead"]},
+		{"name": "Verse", "instruments": ["filter_bass", "duck_lead", "chiff", "drums"]},
+		{"name": "Chorus", "instruments": ["filter_bass", "duck_lead", "chiff", "drums", "vocoder_pad"]},
+		{"name": "Outro", "instruments": ["filter_bass", "vocoder_pad"]},
+	]
+	config.section_generator = _generate_french_touch_section
+	return SongStructureBuilder.build_song(config, parameters)
 
 
 static func _generate_french_touch_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
@@ -1597,42 +1507,21 @@ static func _generate_french_touch_section(progression: Array, scale: Array, ins
 # Big uplifting chords with long attack/release
 # ============================================================================
 static func generate_supersaw_trance_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
-	parameters = _merge_with_song_research_parameters("supersaw_trance", parameters)
-	randomize()
-	var bpm = 138.0  # Classic trance tempo
-	var bar_duration = 240.0 / bpm
-	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3"
-	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-
-	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
-	print("AudioSynthesizer: Generating Supersaw Trance in ", root_note)
-
-	var playback = AudioStreamInteractive.new()
-	playback.clip_count = 4
-	playback.initial_clip = 0
-
-	var intro = _generate_supersaw_section(progression, scale, ["supersaw_pad"], bar_duration)
-	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
-
-	var build = _generate_supersaw_section(progression, scale, ["supersaw_pad", "trance_bass", "buildup_drums"], bar_duration)
-	playback.set_clip_stream(1, build); playback.set_clip_name(1, "Build")
-	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
-
-	var drop = _generate_supersaw_section(progression, scale, ["supersaw_pad", "supersaw_lead", "trance_bass", "trance_drums"], bar_duration)
-	playback.set_clip_stream(2, drop); playback.set_clip_name(2, "Drop")
-	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
-
-	var breakdown = _generate_supersaw_section(progression, scale, ["supersaw_pad", "arp"], bar_duration)
-	playback.set_clip_stream(3, breakdown); playback.set_clip_name(3, "Breakdown")
-	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
-
-	var xfade = 2.0
-	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(3, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	return playback
+	# Supersaw Trance - JP-8000, Above & Beyond style
+	var config = SongStructureBuilder.SongConfig.new()
+	config.genre_id = "supersaw_trance"
+	config.bpm = 138.0
+	config.scale_type = "minor"
+	config.octave_suffix = "3"
+	config.crossfade = 2.0
+	config.sections = [
+		{"name": "Intro", "instruments": ["supersaw_pad"]},
+		{"name": "Build", "instruments": ["supersaw_pad", "trance_bass", "buildup_drums"]},
+		{"name": "Drop", "instruments": ["supersaw_pad", "supersaw_lead", "trance_bass", "trance_drums"]},
+		{"name": "Breakdown", "instruments": ["supersaw_pad", "arp"]},
+	]
+	config.section_generator = _generate_supersaw_section
+	return SongStructureBuilder.build_song(config, parameters)
 
 
 static func _generate_supersaw_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
@@ -1744,42 +1633,21 @@ static func _generate_supersaw_section(progression: Array, scale: Array, instrum
 # Dusty drums, tape warmth, classic house groove
 # ============================================================================
 static func generate_lofi_house_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
-	parameters = _merge_with_song_research_parameters("lofi_house", parameters)
-	randomize()
-	var bpm = 118.0
-	var bar_duration = 240.0 / bpm
-	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "2"
-	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-
-	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
-	print("AudioSynthesizer: Generating Lo-Fi House in ", root_note)
-
-	var playback = AudioStreamInteractive.new()
-	playback.clip_count = 4
-	playback.initial_clip = 0
-
-	var intro = _generate_lofi_house_section(progression, scale, ["dusty_drums", "juno_pad"], bar_duration)
-	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
-
-	var groove = _generate_lofi_house_section(progression, scale, ["dusty_drums", "juno_bass", "juno_pad"], bar_duration)
-	playback.set_clip_stream(1, groove); playback.set_clip_name(1, "Groove")
-	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
-
-	var main = _generate_lofi_house_section(progression, scale, ["dusty_drums", "juno_bass", "juno_pad", "stab", "vocal_chop"], bar_duration)
-	playback.set_clip_stream(2, main); playback.set_clip_name(2, "Main")
-	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
-
-	var outro = _generate_lofi_house_section(progression, scale, ["dusty_drums", "juno_pad"], bar_duration)
-	playback.set_clip_stream(3, outro); playback.set_clip_name(3, "Outro")
-	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
-
-	var xfade = 1.5
-	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(3, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	return playback
+	# Lo-Fi House - DJ Seinfeld, Mall Grab style
+	var config = SongStructureBuilder.SongConfig.new()
+	config.genre_id = "lofi_house"
+	config.bpm = 118.0
+	config.scale_type = "minor"
+	config.octave_suffix = "2"
+	config.crossfade = 1.5
+	config.sections = [
+		{"name": "Intro", "instruments": ["dusty_drums", "juno_pad"]},
+		{"name": "Groove", "instruments": ["dusty_drums", "juno_bass", "juno_pad"]},
+		{"name": "Main", "instruments": ["dusty_drums", "juno_bass", "juno_pad", "stab", "vocal_chop"]},
+		{"name": "Outro", "instruments": ["dusty_drums", "juno_pad"]},
+	]
+	config.section_generator = _generate_lofi_house_section
+	return SongStructureBuilder.build_song(config, parameters)
 
 
 static func _generate_lofi_house_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
@@ -1891,42 +1759,21 @@ static func _generate_lofi_house_section(progression: Array, scale: Array, instr
 # Based on research: ÃƒÆ'Ã¢â'¬Å¡Ãƒâ€šÃ'Â±0.07 semitone detune, 64 unison voices, metal filter
 # ============================================================================
 static func generate_reese_jungle_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
-	parameters = _merge_with_song_research_parameters("reese_jungle", parameters)
-	randomize()
-	var bpm = 170.0  # Classic jungle tempo
-	var bar_duration = 240.0 / bpm
-	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "2"
-	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-
-	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
-	print("AudioSynthesizer: Generating Reese Jungle in ", root_note)
-
-	var playback = AudioStreamInteractive.new()
-	playback.clip_count = 4
-	playback.initial_clip = 0
-
-	var intro = _generate_reese_jungle_section(progression, scale, ["amen_break"], bar_duration)
-	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
-
-	var build = _generate_reese_jungle_section(progression, scale, ["amen_break", "reese_bass", "stab"], bar_duration)
-	playback.set_clip_stream(1, build); playback.set_clip_name(1, "Build")
-	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
-
-	var drop = _generate_reese_jungle_section(progression, scale, ["amen_break", "reese_bass", "stab", "pad"], bar_duration)
-	playback.set_clip_stream(2, drop); playback.set_clip_name(2, "Drop")
-	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
-
-	var breakdown = _generate_reese_jungle_section(progression, scale, ["pad", "reese_bass"], bar_duration)
-	playback.set_clip_stream(3, breakdown); playback.set_clip_name(3, "Breakdown")
-	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
-
-	var xfade = 1.0
-	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(3, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	return playback
+	# Reese Jungle - DnB, Goldie style
+	var config = SongStructureBuilder.SongConfig.new()
+	config.genre_id = "reese_jungle"
+	config.bpm = 170.0
+	config.scale_type = "minor"
+	config.octave_suffix = "2"
+	config.crossfade = 1.0
+	config.sections = [
+		{"name": "Intro", "instruments": ["amen_break"]},
+		{"name": "Build", "instruments": ["amen_break", "reese_bass", "stab"]},
+		{"name": "Drop", "instruments": ["amen_break", "reese_bass", "stab", "pad"]},
+		{"name": "Breakdown", "instruments": ["pad", "reese_bass"]},
+	]
+	config.section_generator = _generate_reese_jungle_section
+	return SongStructureBuilder.build_song(config, parameters)
 
 
 static func _generate_reese_jungle_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
@@ -2038,42 +1885,21 @@ static func _generate_reese_jungle_section(progression: Array, scale: Array, ins
 # Carl Craig, The Orb style immersive pads
 # ============================================================================
 static func generate_ambient_techno_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
-	parameters = _merge_with_song_research_parameters("ambient_techno", parameters)
-	randomize()
-	var bpm = 110.0  # Slower ambient tempo
-	var bar_duration = 240.0 / bpm
-	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3"
-	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-
-	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
-	print("AudioSynthesizer: Generating Ambient Techno in ", root_note)
-
-	var playback = AudioStreamInteractive.new()
-	playback.clip_count = 4
-	playback.initial_clip = 0
-
-	var intro = _generate_ambient_techno_section(progression, scale, ["ambient_pad"], bar_duration)
-	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
-
-	var evolve = _generate_ambient_techno_section(progression, scale, ["ambient_pad", "texture", "minimal_kick"], bar_duration)
-	playback.set_clip_stream(1, evolve); playback.set_clip_name(1, "Evolve")
-	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
-
-	var peak = _generate_ambient_techno_section(progression, scale, ["ambient_pad", "texture", "minimal_kick", "arp"], bar_duration)
-	playback.set_clip_stream(2, peak); playback.set_clip_name(2, "Peak")
-	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
-
-	var dissolve = _generate_ambient_techno_section(progression, scale, ["ambient_pad", "texture"], bar_duration)
-	playback.set_clip_stream(3, dissolve); playback.set_clip_name(3, "Dissolve")
-	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
-
-	var xfade = 3.0  # Longer crossfade for ambient
-	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(3, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	return playback
+	# Ambient Techno - Gas, Monolake style
+	var config = SongStructureBuilder.SongConfig.new()
+	config.genre_id = "ambient_techno"
+	config.bpm = 110.0
+	config.scale_type = "minor"
+	config.octave_suffix = "3"
+	config.crossfade = 3.0
+	config.sections = [
+		{"name": "Intro", "instruments": ["ambient_pad"]},
+		{"name": "Evolve", "instruments": ["ambient_pad", "texture", "minimal_kick"]},
+		{"name": "Peak", "instruments": ["ambient_pad", "texture", "minimal_kick", "arp"]},
+		{"name": "Dissolve", "instruments": ["ambient_pad", "texture"]},
+	]
+	config.section_generator = _generate_ambient_techno_section
+	return SongStructureBuilder.build_song(config, parameters)
 
 
 static func _generate_ambient_techno_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:
@@ -2160,42 +1986,21 @@ static func _generate_ambient_techno_section(progression: Array, scale: Array, i
 # Lush keys with ensemble chorus and plate reverb feel
 # ============================================================================
 static func generate_blade_runner_song(parameters: Dictionary = {}) -> AudioStreamInteractive:
-	parameters = _merge_with_song_research_parameters("blade_runner", parameters)
-	randomize()
-	var bpm = 70.0  # Slow cinematic tempo
-	var bar_duration = 240.0 / bpm
-	var root_note = PopMusicTheory.NOTES[randi() % PopMusicTheory.NOTES.size()] + "3"
-	var scale = PopMusicTheory.get_minor_scale_notes(root_note)
-
-	var progression = _resolve_progression_from_parameters(parameters, _default_progression_for_song(str(parameters.get("song_id", ""))), scale)
-	print("AudioSynthesizer: Generating Blade Runner in ", root_note)
-
-	var playback = AudioStreamInteractive.new()
-	playback.clip_count = 4
-	playback.initial_clip = 0
-
-	var intro = _generate_blade_runner_section(progression, scale, ["vangelis_keys"], bar_duration)
-	playback.set_clip_stream(0, intro); playback.set_clip_name(0, "Intro")
-	playback.set_clip_auto_advance(0, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(0, 1)
-
-	var theme = _generate_blade_runner_section(progression, scale, ["vangelis_keys", "string_pad", "bass_pulse"], bar_duration)
-	playback.set_clip_stream(1, theme); playback.set_clip_name(1, "Theme")
-	playback.set_clip_auto_advance(1, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(1, 2)
-
-	var climax = _generate_blade_runner_section(progression, scale, ["vangelis_keys", "string_pad", "bass_pulse", "lead", "derbyshire_fx"], bar_duration)
-	playback.set_clip_stream(2, climax); playback.set_clip_name(2, "Climax")
-	playback.set_clip_auto_advance(2, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(2, 3)
-
-	var outro = _generate_blade_runner_section(progression, scale, ["string_pad", "vangelis_keys"], bar_duration)
-	playback.set_clip_stream(3, outro); playback.set_clip_name(3, "Outro")
-	playback.set_clip_auto_advance(3, AudioStreamInteractive.AUTO_ADVANCE_ENABLED); playback.set_clip_auto_advance_next_clip(3, 0)
-
-	var xfade = 2.5
-	playback.add_transition(0, 1, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(1, 2, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(2, 3, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	playback.add_transition(3, 0, AudioStreamInteractive.TRANSITION_FROM_TIME_END, AudioStreamInteractive.TRANSITION_TO_TIME_START, AudioStreamInteractive.FADE_CROSS, xfade)
-	return playback
+	# Blade Runner - Vangelis CS-80 cinematic style
+	var config = SongStructureBuilder.SongConfig.new()
+	config.genre_id = "blade_runner"
+	config.bpm = 70.0
+	config.scale_type = "minor"
+	config.octave_suffix = "3"
+	config.crossfade = 2.5
+	config.sections = [
+		{"name": "Intro", "instruments": ["vangelis_keys"]},
+		{"name": "Theme", "instruments": ["vangelis_keys", "string_pad", "bass_pulse"]},
+		{"name": "Climax", "instruments": ["vangelis_keys", "string_pad", "bass_pulse", "lead", "derbyshire_fx"]},
+		{"name": "Outro", "instruments": ["string_pad", "vangelis_keys"]},
+	]
+	config.section_generator = _generate_blade_runner_section
+	return SongStructureBuilder.build_song(config, parameters)
 
 
 static func _generate_blade_runner_section(progression: Array, scale: Array, instruments: Array, bar_duration: float) -> AudioStreamWAV:

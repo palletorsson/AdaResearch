@@ -1,9 +1,20 @@
-﻿extends Node3D
+extends Node3D
 
 # Endless Techno-Noir Ambient Generator (Non-Blocking Version)
 # Creates a continuous ambient soundscape with modulated drones and random sound elements
 
 # Audio buses setup
+
+# @identity
+# essence: ambient(t) = drone(t) + sum(random_effect_i(t)) with stochastic scheduling
+# desire: Stand in a space where algorithmic composition endlessly generates cyberpunk ambience
+# critical_parameter: num_effect_players — determines the density of the random sound event texture
+# triggers: stochastic timers trigger random effect generation; drone layer provides continuous foundation
+# emerges: endless non-repeating ambient music from a small vocabulary of synthesis rules
+# needs: VR presence [has], 3D loading bar visualization [has]
+# relationships: depends on threaded audio generation; contrasts with SoundscapeRadioRack (generative vs preset ambience); unlocks algorithmic composition
+# truth: Silence is not the absence of sound — it is the space between algorithmically chosen events.
+
 const NUM_BUSES = 4
 var bus_names = ["Master", "Reverb", "Delay", "LowPass"]
 
@@ -67,7 +78,7 @@ signal sound_created(sound_name: String)
 signal generation_progress_updated(progress: float)
 signal sound_generation_complete
 
-func _ready():
+func _ready() -> void:
 	_ensure_rng()
 	mutex = Mutex.new()
 	generation_thread = Thread.new()
@@ -122,7 +133,7 @@ func _t_randf() -> float:
 func _t_randi() -> int:
 	return _ensure_thread_rng().randi()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_ensure_rng()
 	if stop_requested:
 		return
@@ -139,7 +150,7 @@ func _process(delta):
 		play_random_effect()
 		last_effect_time = elapsed_time
 
-func start_sound_generation():
+func start_sound_generation() -> void:
 	is_generating = true
 	sound_generation_started.emit()
 	
@@ -148,7 +159,7 @@ func start_sound_generation():
 		print("Failed to start generation thread")
 		return
 
-func _thread_generate_sounds():
+func _thread_generate_sounds() -> void:
 	_ensure_thread_rng()
 	if stop_requested:
 		return
@@ -235,19 +246,19 @@ func _thread_generate_sounds():
 	
 	call_deferred("_emit_generation_complete")
 
-func _emit_sound_created(sound_name: String):
+func _emit_sound_created(sound_name: String) -> void:
 	sound_created.emit(sound_name)
 
-func _emit_progress_updated():
+func _emit_progress_updated() -> void:
 	mutex.lock()
 	var progress = generation_progress
 	mutex.unlock()
 	generation_progress_updated.emit(progress)
 
-func _emit_generation_complete():
+func _emit_generation_complete() -> void:
 	sound_generation_complete.emit()
 
-func create_3d_loading_bar():
+func create_3d_loading_bar() -> void:
 	# Create container for loading bar
 	loading_bar_container = Node3D.new()
 	loading_bar_container.name = "LoadingBarContainer"
@@ -312,7 +323,7 @@ func create_3d_loading_bar():
 	# Position the entire loading bar at a good viewing position
 	loading_bar_container.position = Vector3(0, 2, -5)
 
-func create_loading_particles():
+func create_loading_particles() -> void:
 	# Create floating particles around the loading bar
 	for i in range(20):
 		var particle = MeshInstance3D.new()
@@ -350,7 +361,7 @@ func create_loading_particles():
 			"rotation_speed": _randf_range(1.0, 3.0)
 		})
 
-func animate_loading_bar(delta):
+func animate_loading_bar(delta) -> void:
 	if not loading_bar_container:
 		return
 	
@@ -386,16 +397,16 @@ func animate_loading_bar(delta):
 	# Rotate entire loading bar container slowly
 	loading_bar_container.rotation_degrees.y += delta * 5
 
-func _on_generation_started():
+func _on_generation_started() -> void:
 	print("Sound generation started...")
 
-func _on_sound_created(sound_name: String):
+func _on_sound_created(sound_name: String) -> void:
 	print("Created: " + sound_name)
 	_maybe_start_stream(sound_name)
 	if progress_text:
 		progress_text.text = "Created: " + sound_name.replace("_", " ").capitalize()
 
-func _on_progress_updated(progress: float):
+func _on_progress_updated(progress: float) -> void:
 	# Update loading bar fill
 	if loading_bar_fill:
 		var new_width = lerp(0.1, 7.9, progress)
@@ -412,7 +423,7 @@ func _on_progress_updated(progress: float):
 		var percentage = int(progress * 100)
 		loading_text.text = "Generating Sounds... " + str(percentage) + "%"
 
-func _on_generation_complete():
+func _on_generation_complete() -> void:
 	print("Sound generation complete!")
 	
 	# Hide loading bar with fade effect
@@ -429,14 +440,14 @@ func _on_generation_complete():
 		_try_start_playback()
 	is_generating = false
 
-func _try_start_playback():
+func _try_start_playback() -> void:
 	if base_sounds_ready["drone"] and base_sounds_ready["city_ambience"] and not playback_started:
 		playback_started = true
 		elapsed_time = 0.0
 		last_effect_time = 0.0
 		play_random_effect()
 
-func _ensure_player_stream(player: AudioStreamPlayer, stream: AudioStream):
+func _ensure_player_stream(player: AudioStreamPlayer, stream: AudioStream) -> void:
 	if player == null or stream == null:
 		return
 	if player.stream != stream:
@@ -444,7 +455,7 @@ func _ensure_player_stream(player: AudioStreamPlayer, stream: AudioStream):
 	if not player.playing:
 		player.play()
 
-func _maybe_start_stream(sound_name: String):
+func _maybe_start_stream(sound_name: String) -> void:
 	if sound_name == "drone" and precreated_sounds.has("drone"):
 		_ensure_player_stream(drone_player, precreated_sounds["drone"])
 		base_sounds_ready["drone"] = true
@@ -458,7 +469,7 @@ func _maybe_start_stream(sound_name: String):
 	if precreated_sounds.has(sound_name) and precreated_sounds[sound_name] is Array:
 		_play_effect_immediately(sound_name)
 
-func _play_effect_immediately(sound_name: String):
+func _play_effect_immediately(sound_name: String) -> void:
 	var available_players = []
 	for player in effect_players:
 		if not player.playing:
@@ -477,7 +488,7 @@ func _play_effect_immediately(sound_name: String):
 	player.play()
 	last_effect_time = elapsed_time
 
-func setup_audio_buses():
+func setup_audio_buses() -> void:
 	# Create audio buses for effects
 	for i in range(1, NUM_BUSES):
 		var bus_idx = AudioServer.get_bus_count()
@@ -507,7 +518,7 @@ func setup_audio_buses():
 				lowpass.cutoff_hz = 2000
 				AudioServer.add_bus_effect(bus_idx, lowpass)
 
-func setup_players():
+func setup_players() -> void:
 	# Create main players for continuous sounds
 	drone_player = AudioStreamPlayer.new()
 	drone_player.bus = "Reverb"
@@ -530,7 +541,7 @@ func setup_players():
 		add_child(player)
 		effect_players.append(player)
 
-func setup_visualizers():
+func setup_visualizers() -> void:
 	# Rebuild small transparent spheres for each audio source.
 	if visualizer_root:
 		visualizer_root.queue_free()
@@ -559,7 +570,7 @@ func setup_visualizers():
 		var color = Color.from_hsv(hue, 0.75, 1.0, 0.6)
 		add_visualizer_for_player(effect_players[i], pos, color)
 
-func add_visualizer_for_player(player: AudioStreamPlayer, position: Vector3, color: Color):
+func add_visualizer_for_player(player: AudioStreamPlayer, position: Vector3, color: Color) -> void:
 	if not player:
 		return
 	if visualizer_root == null:
@@ -597,7 +608,7 @@ func add_visualizer_for_player(player: AudioStreamPlayer, position: Vector3, col
 	})
 
 # Smooth amplitude-driven scaling to keep the floating orbs breathing.
-func update_visualizers(_delta):
+func update_visualizers(_delta) -> void:
 	if visualizer_infos.size() == 0:
 		return
 	for i in range(visualizer_infos.size()):
@@ -659,7 +670,7 @@ func _get_stream_amplitude(stream: AudioStreamWAV, position: float, sample_windo
 		return 0.0
 	return sum / float(samples)
 
-func start_ambient():
+func start_ambient() -> void:
 	# Start the continuous drone using pre-generated stream
 	if precreated_sounds.has("drone"):
 		_ensure_player_stream(drone_player, precreated_sounds["drone"])
@@ -668,7 +679,7 @@ func start_ambient():
 	if precreated_sounds.has("city_ambience"):
 		_ensure_player_stream(ambient_player, precreated_sounds["city_ambience"])
 
-func play_random_effect():
+func play_random_effect() -> void:
 	_ensure_rng()
 	if stop_requested:
 		return
@@ -1241,7 +1252,7 @@ func create_heartbeat_segment():
 func _exit_tree() -> void:
 	shutdown_audio()
 
-func shutdown_audio():
+func shutdown_audio() -> void:
 	if stop_requested:
 		return
 	stop_requested = true
@@ -1264,3 +1275,6 @@ func shutdown_audio():
 		visualizer_root.queue_free()
 		visualizer_root = null
 	visualizer_infos.clear()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

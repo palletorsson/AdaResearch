@@ -2,7 +2,7 @@ extends Node3D
 
 @export var length: float = 1.5
 @export var thickness: float = 0.01
-@export var color: Color = Color(0.0, 0.0, 0.0, 1.0)  # black
+@export var color: Color = Color(0.9, 0.1, 0.1, 1.0)  # red (visible on gray)
 @export var arrow_size: float = 0.06
 
 var shaft: MeshInstance3D

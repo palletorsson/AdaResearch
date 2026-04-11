@@ -12,7 +12,7 @@ extends Node3D
 
 var interpolation_methods = ["None", "Linear", "Smoothstep"]
 
-func _ready():
+func _ready() -> void:
 	# Connect UI signals
 	interpolation_slider.value_changed.connect(_on_interpolation_changed)
 	grid_size_slider.value_changed.connect(_on_grid_size_changed)
@@ -23,28 +23,31 @@ func _ready():
 	# Initialize the noise field
 	_update_noise_parameters()
 
-func _on_interpolation_changed(value):
+func _on_interpolation_changed(value) -> void:
 	var method = interpolation_methods[int(value)]
 	interpolation_label.text = "Interpolation: " + method
 	_update_noise_parameters()
 
-func _on_grid_size_changed(value):
+func _on_grid_size_changed(value) -> void:
 	grid_size_label.text = "Grid Size: " + str(int(value))
 	_update_noise_parameters()
 
-func _on_amplitude_changed(value):
+func _on_amplitude_changed(value) -> void:
 	amplitude_label.text = "Amplitude: " + str(value)
 	_update_noise_parameters()
 
-func _on_regenerate_pressed():
+func _on_regenerate_pressed() -> void:
 	noise_field.regenerate_noise()
 
-func _on_show_grid_pressed():
+func _on_show_grid_pressed() -> void:
 	noise_field.toggle_grid_lines()
 
-func _update_noise_parameters():
+func _update_noise_parameters() -> void:
 	if noise_field:
 		noise_field.interpolation_method = int(interpolation_slider.value)
 		noise_field.grid_size = int(grid_size_slider.value)
 		noise_field.amplitude = amplitude_slider.value
 		noise_field.update_noise_field()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

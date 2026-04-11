@@ -13,6 +13,16 @@ extends Node3D
 ## Recursive tree with random variation and branch separation
 ## Chapter 08: Fractals
 
+# @identity
+# essence: tree + separation_force(branches_at_level) + upward_alignment(blend), post-growth branch repulsion
+# desire: To watch a tree argue with itself — branches push apart level by level, finding space, then aligning upward
+# critical_parameter: separation_strength (0.05) — the repulsion force between same-level branches; too high and the tree explodes, too low and branches overlap
+# triggers: Growth completes → separation phase activates level by level (deepest first); upward_alignment smooths the result
+# emerges: Natural-looking canopy spacing from simple repulsion — branches discover their territory without planning
+# needs: VR separation speed control [missing], force visualization [missing]
+# relationships: Extends fractal_stochastic_tree with flocking-like separation; bridges fractals and emergence sequences
+# truth: A tree's canopy is not designed — it is negotiated, branch by branch, through local repulsion toward global form.
+
 const MAT_PINK := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
 
 @export var recursion_depth: int = 5
@@ -49,7 +59,7 @@ class BranchData:
 	var parent: BranchData = null
 	var children: Array[BranchData] = []
 
-	func _init(mesh: MeshInstance3D, start: Vector3, end: Vector3, lvl: int, thick: float, length: float):
+	func _init(mesh: MeshInstance3D, start: Vector3, end: Vector3, lvl: int, thick: float, length: float) -> void:
 		mesh_instance = mesh
 		start_pos = start
 		end_pos = end
@@ -362,3 +372,12 @@ func _update_status() -> void:
 	else:
 		status += " | Separation Complete"
 	_status_label.text = status
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

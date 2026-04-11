@@ -12,7 +12,7 @@ var organic_complexity: int = 3
 var base_scale: Vector3
 var motion_multiplier: float = 1.0
 
-func setup_organic_form(config: Dictionary):
+func setup_organic_form(config: Dictionary) -> void:
 	"""Create colorful, organic Niki de Saint Phalle-inspired form"""
 	color_scheme = config.get("color_scheme", 0)
 	organic_complexity = config.get("organic_complexity", 3)
@@ -25,7 +25,7 @@ func setup_organic_form(config: Dictionary):
 	apply_niki_materials()
 	add_surface_details()
 
-func create_organic_structure(size: float):
+func create_organic_structure(size: float) -> void:
 	"""Create the main organic structure"""
 	# Central body (rounded, feminine form)
 	var main_body = CSGSphere3D.new()
@@ -42,7 +42,7 @@ func create_organic_structure(size: float):
 	# Add flowing appendages
 	create_flowing_appendages(size)
 
-func create_organic_protrusion(parent: CSGShape3D, base_size: float, index: int):
+func create_organic_protrusion(parent: CSGShape3D, base_size: float, index: int) -> void:
 	"""Create colorful organic protrusions"""
 	var protrusion = CSGSphere3D.new()
 	protrusion.radius = base_size * randf_range(0.3, 0.7)
@@ -73,7 +73,7 @@ func create_organic_protrusion(parent: CSGShape3D, base_size: float, index: int)
 		protrusion.add_child(sub_protrusion)
 		base_forms.append(sub_protrusion)
 
-func create_flowing_appendages(size: float):
+func create_flowing_appendages(size: float) -> void:
 	"""Create flowing, ribbon-like appendages"""
 	var appendage_count = randi_range(2, 4)
 	
@@ -106,7 +106,7 @@ func create_flowing_appendages(size: float):
 			)
 			current_direction = current_direction.normalized()
 
-func apply_niki_materials():
+func apply_niki_materials() -> void:
 	"""Apply bright, colorful Niki de Saint Phalle-style materials"""
 	if not material_system:
 		return
@@ -116,14 +116,14 @@ func apply_niki_materials():
 		var material = material_system.get_niki_material(color_scheme, i)
 		form.material = material
 
-func add_surface_details():
+func add_surface_details() -> void:
 	"""Add surface texture and pattern details"""
 	# Add small decorative elements
 	for form in base_forms:
 		if randf() > 0.7:  # Only some forms get details
 			add_decorative_spots(form)
 
-func add_decorative_spots(parent: CSGShape3D):
+func add_decorative_spots(parent: CSGShape3D) -> void:
 	"""Add small colorful spots like Niki's mosaic patterns"""
 	var spot_count = randi_range(3, 8)
 	
@@ -141,7 +141,7 @@ func add_decorative_spots(parent: CSGShape3D):
 		
 		parent.add_child(spot)
 
-func update_based_on_motion(motion_data: Dictionary):
+func update_based_on_motion(motion_data: Dictionary) -> void:
 	"""Update the Niki form based on the driving mechanism motion"""
 	var extension = motion_data.get("extension", 0.0)
 	var rotation = motion_data.get("rotation", 0.0)
@@ -160,3 +160,12 @@ func update_based_on_motion(motion_data: Dictionary):
 		if form.has_method("set_radius"):
 			# This would work for spheres - adjust for specific form types
 			pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

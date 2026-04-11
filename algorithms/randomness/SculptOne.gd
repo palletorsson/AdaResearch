@@ -19,14 +19,14 @@ var materials = {
 var noise = FastNoiseLite.new()
 var rng = RandomNumberGenerator.new()
 
-func _ready():
+func _ready() -> void:
 	# Set up scene
 	setup_environment()
 	create_materials()
 	create_composition()
 
 
-func setup_environment():
+func setup_environment() -> void:
 	# Create environment with soft pink background
 	var environment = WorldEnvironment.new()
 	var env = Environment.new()
@@ -64,7 +64,7 @@ func setup_environment():
 	# Add lighting
 	setup_lighting()
 
-func setup_lighting():
+func setup_lighting() -> void:
 	# Create soft key light
 	var key_light = DirectionalLight3D.new()
 	key_light.light_color = Color(1.0, 0.98, 0.95)
@@ -90,7 +90,7 @@ func setup_lighting():
 	fill_light.omni_range = 8.0
 	add_child(fill_light)
 
-func create_materials():
+func create_materials() -> void:
 	# Initialize noise for materials
 	noise.seed = randi()
 	noise.fractal_octaves = 4
@@ -192,7 +192,7 @@ func create_materials():
 	materials.bubble_material.refraction_enabled = true
 	materials.bubble_material.refraction_scale = 0.05
 
-func create_composition():
+func create_composition() -> void:
 	# Root node for the composition
 	var composition = Node3D.new()
 	composition.name = "LiquidComposition"
@@ -258,7 +258,7 @@ func create_fluid_mass(material, position, scale_vec):
 	
 	return fluid
 
-func create_fabric_layer(parent, material, position, radius, height):
+func create_fabric_layer(parent, material, position, radius, height) -> void:
 	var fabric = Node3D.new()
 	fabric.position = position
 	
@@ -375,7 +375,7 @@ func create_textured_sphere(material, position, radius):
 	sphere_node.add_child(sphere)
 	return sphere_node
 
-func create_drip_elements(parent, count):
+func create_drip_elements(parent, count) -> void:
 	for i in range(count):
 		var drip = MeshInstance3D.new()
 		
@@ -414,7 +414,7 @@ func create_drip_elements(parent, count):
 		drip.material_override = materials.glossy_clear
 		parent.add_child(drip)
 
-func create_bubble_extensions(parent, origin_position, count):
+func create_bubble_extensions(parent, origin_position, count) -> void:
 	for i in range(count):
 		var extension = Node3D.new()
 		var extension_length = randf_range(0.3, 0.8)
@@ -465,8 +465,17 @@ func create_bubble_extensions(parent, origin_position, count):
 
 
 # Optional: add subtle animation
-func _process(delta):
+func _process(delta: float) -> void:
 	var composition = get_node("LiquidComposition")
 	if composition:
 		# Add very subtle movement
 		composition.rotate_y(delta * 0.05)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

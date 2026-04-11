@@ -7,6 +7,16 @@ extends Node3D
 
 class_name QFEPTransformingPattern
 
+# @identity
+# essence: wave_superposition(sin(t+x*a+z*b), cos(t*c+x*d-z*e)) -> height, scale, hue per cell
+# desire: watch a grid that never settles — every cell dancing to its own superposition of waves
+# critical_parameter: transform_speed — how fast the waves evolve, how quickly the pattern forgets itself
+# triggers: _process continuously updates height, scale, color, and rotation of every cell from wave functions
+# emerges: traveling wave fronts and interference patterns that no single wave produces alone
+# needs: VR speed control [missing], wave parameter adjustment [missing]
+# relationships: contrasts preserved_pattern (phi<0 frozen vs phi>0 flowing); paired with fluid_form; represents positive phi
+# truth: positive phi means the pattern itself is in motion — transformation is not corruption but the signature of life
+
 ## Grid size
 @export var grid_size: int = 6
 

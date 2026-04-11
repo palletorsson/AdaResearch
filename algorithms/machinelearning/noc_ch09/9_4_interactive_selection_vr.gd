@@ -1,4 +1,5 @@
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
 ## Interactive Selection — flowers evolve based on proximity-driven selection.
 ## A virtual "selector" orbits and flowers near it gain fitness. Each generation,
@@ -24,6 +25,7 @@ func _ready() -> void:
 	_setup_environment()
 	_spawn_population()
 	_update_status()
+	call_deferred("_apply_standard_presentation")
 	set_process(true)
 
 func _setup_environment() -> void:
@@ -200,6 +202,7 @@ class FlowerEntity:
 
 		petal_mesh = SphereMesh.new()
 		petal_mesh.radius = 0.03
+		petal_mesh.height = petal_mesh.radius * 2.0
 
 		for i in range(16):
 			var petal := MeshInstance3D.new()
@@ -211,6 +214,7 @@ class FlowerEntity:
 		center = MeshInstance3D.new()
 		var center_mesh := SphereMesh.new()
 		center_mesh.radius = 0.05
+		center_mesh.height = center_mesh.radius * 2.0
 		center.mesh = center_mesh
 		root.add_child(center)
 
@@ -242,6 +246,7 @@ class FlowerEntity:
 		petal_mat.emission = petal_color * 0.4
 
 		petal_mesh.radius = petal_size
+		petal_mesh.height = petal_mesh.radius * 2.0
 
 		for i in range(petals.size()):
 			var petal := petals[i]
@@ -255,7 +260,9 @@ class FlowerEntity:
 				petal.visible = false
 
 		if center.mesh is SphereMesh:
-			(center.mesh as SphereMesh).radius = center_size
+			var center_sphere := center.mesh as SphereMesh
+			center_sphere.radius = center_size
+			center_sphere.height = center_sphere.radius * 2.0
 		var center_mat := StandardMaterial3D.new()
 		center_mat.albedo_color = center_color
 		center_mat.emission_enabled = true
@@ -273,3 +280,19 @@ class FlowerEntity:
 	func queue_free() -> void:
 		if is_instance_valid(root):
 			root.queue_free()
+
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
+
+

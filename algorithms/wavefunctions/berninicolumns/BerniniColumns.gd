@@ -3,6 +3,17 @@
 # Gian Lorenzo Bernini's baroque architectural style.
 extends Node3D
 
+
+# @identity
+# essence: column(h) = r * (cos(spiral_density*h), h, sin(spiral_density*h)) with sine/cosine amplitude modulation
+# desire: Stand among baroque spiral columns that twist with trigonometric functions and emit organ tones
+# critical_parameter: spiral_density — controls how many helical turns per column height
+# triggers: time animates subtle column rotation; audio_phase drives organ sound generation
+# emerges: the baroque as frozen oscillation — architecture that remembers the wave that shaped it
+# needs: VR walkthrough [has], audio playback [has]
+# relationships: depends on procedural spiral mesh generation; contrasts with sine_cylinder_staircase (decorative vs functional spirals); unlocks wave-as-architecture
+# truth: A spiral column is a sine wave wrapped around a vertical axis.
+
 const BERNINI_BASE_SCENE := preload("res://algorithms/wavefunctions/berninicolumns/bernini_base.tscn")
 
 # -- Configuration --
@@ -37,7 +48,7 @@ var columns = []
 @export var grid_spacing: float = 4.0  # Distance between columns
 var column_positions = []
 
-func _generate_grid_positions():
+func _generate_grid_positions() -> void:
 	"""Generate a 3x3 equally spaced grid of column positions"""
 	column_positions.clear()
 	var grid_size = 3
@@ -54,7 +65,7 @@ func _generate_grid_positions():
 
 # -- Godot Lifecycle Functions --
 
-func _ready():
+func _ready() -> void:
 	_setup_audio()
 	
 	# Generate equally spaced grid positions
@@ -70,7 +81,7 @@ func _ready():
 	# Add a light to highlight the columns
 	create_lighting()
 
-func _setup_audio():
+func _setup_audio() -> void:
 	audio_player = AudioStreamPlayer3D.new()
 	audio_stream = AudioStreamGenerator.new()
 	audio_stream.mix_rate = SAMPLE_RATE
@@ -85,7 +96,7 @@ func _setup_audio():
 	audio_player.play()
 	playback = audio_player.get_stream_playback()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Animate the columns if enabled
 	if rotate_columns:
 		time += delta
@@ -97,7 +108,7 @@ func _process(delta):
 	
 	_generate_audio_samples()
 
-func _generate_audio_samples():
+func _generate_audio_samples() -> void:
 	if not playback:
 		return
 		
@@ -229,7 +240,7 @@ func generate_spiral_column_mesh() -> Mesh:
 	
 	return st.commit()
 
-func add_column_base(column_node: Node3D):
+func add_column_base(column_node: Node3D) -> void:
 	# Adds the Bernini base scene below the column shaft.
 	var base_instance = BERNINI_BASE_SCENE.instantiate()
 	base_instance.position.y = -0.25
@@ -245,7 +256,7 @@ func add_column_base(column_node: Node3D):
 		mesh_instance.set_surface_override_material(0, material)
 	column_node.add_child(base_instance)
 
-func add_column_capital(column_node: Node3D):
+func add_column_capital(column_node: Node3D) -> void:
 	# Adds a cylindrical capital to the top of a column.
 	var capital = MeshInstance3D.new()
 	var cylinder_mesh = CylinderMesh.new()
@@ -269,7 +280,7 @@ func add_column_capital(column_node: Node3D):
 
 # --- Scene Setup Functions ---
 
-func create_lighting():
+func create_lighting() -> void:
 	# Sets up basic lighting for the scene to make the columns visible.
 	var dir_light = DirectionalLight3D.new()
 	dir_light.light_energy = 1.2
@@ -293,3 +304,12 @@ func create_lighting():
 		spotlight.spot_range = column_height * 2.0
 		spotlight.spot_angle = 30.0
 		add_child(spotlight)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -130,3 +130,12 @@ func _update_arc(center: Vector3, radius: float, start_angle: float, end_angle: 
 
 func _process(_delta: float) -> void:
 	pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -10,13 +10,13 @@ extends Node3D
 var soft_body: SoftBody3D
 var poke_sphere: StaticBody3D
 
-func _ready():
+func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 	_create_deformable_body()
 	_create_poke_sphere()
 	_create_supports()
 
-func _create_deformable_body():
+func _create_deformable_body() -> void:
 	soft_body = SoftBody3D.new()
 	soft_body.name = "FEMBody"
 
@@ -48,7 +48,7 @@ func _create_deformable_body():
 	# Pin the corners after adding to tree
 	call_deferred("_pin_edges")
 
-func _pin_edges():
+func _pin_edges() -> void:
 	# Pin some edge vertices to simulate fixed boundary conditions
 	# This mimics FEM with Dirichlet boundary conditions
 	var mesh_data := soft_body.mesh
@@ -65,7 +65,7 @@ func _pin_edges():
 		if abs(v.x) > half or abs(v.z) > half:
 			soft_body.set_point_pinned(i, true)
 
-func _create_poke_sphere():
+func _create_poke_sphere() -> void:
 	# Interactive sphere that deforms the mesh when moved into it
 	poke_sphere = StaticBody3D.new()
 	poke_sphere.name = "PokeSphere"
@@ -91,7 +91,7 @@ func _create_poke_sphere():
 	poke_sphere.position = Vector3(0, 3, 0)
 	add_child(poke_sphere)
 
-func _create_supports():
+func _create_supports() -> void:
 	# Floor support
 	var floor_body := StaticBody3D.new()
 	var floor_col := CollisionShape3D.new()
@@ -101,3 +101,12 @@ func _create_supports():
 	floor_body.add_child(floor_col)
 	floor_body.position = Vector3(0, -0.1, 0)
 	add_child(floor_body)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

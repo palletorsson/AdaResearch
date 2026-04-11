@@ -5,6 +5,16 @@ extends Node3D
 
 class_name EllipticSurface
 
+# @identity
+# essence: K > 0 — positive Gaussian curvature; parallel lines converge, triangles have angle sum > 180°
+# desire: touch a dome and feel space curve inward — lines that start parallel must eventually meet
+# critical_parameter: radius — controls how tightly space curves
+# triggers: static geometry; presence alone teaches that parallel lines can converge
+# emerges: the realization that on a sphere there are NO parallel lines at all
+# needs: VR controls [missing] — could add curvature_slider connection
+# relationships: contrasts hyperbolic_surface (K<0, lines diverge); depends on curvature_slider; paired with angle_sum_triangle
+# truth: on a positively curved surface, there is no room for parallel lines — all paths eventually meet
+
 @export var radius: float = 0.4
 @export var resolution: int = 24
 
@@ -41,3 +51,8 @@ func _create_label():
 	_label.text = "ELLIPTIC SURFACE\nPositive curvature\nK > 0"
 	_label.position = Vector3(0, -radius - 0.15, 0)
 	add_child(_label)
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

@@ -1,48 +1,75 @@
 {
-	
-	"sequences": {
-		"postfoundationscrisis": {
-			"name": "Post-Crisis: Applied Limits",
-			"truth": "Knowing the limits of formalization, what do we build?",
-			"qfep_term": "Edge",
-			"qfep_connection": "After the foundations crisis, these maps explore what happens when incompleteness, bias, and rhizomatic thinking become design materials rather than problems to solve.",
-			"formula": "limits → critical practice → new structures",
-
-			"description": "Collected maps from deferred sequences — each a standalone exploration that extends the foundations crisis into contemporary territory. Algorithmic bias as lived incompleteness. Rhizomatic networks as alternatives to hierarchical formalization. Molecular design as post-reductionist practice.",
-			"layer": "integration",
-			"prerequisites": ["foundationscrisis"],
-			"unlocks": ["qfeplaboratory"],
-
-			"difficulty": "advanced",
-			"estimated_time": "15-20 minutes",
-
-			"learning_objectives": [
-				"Algorithmic bias as structural incompleteness in classification systems",
-				"Rhizomatic networks as non-hierarchical alternatives to tree structures",
-				"Molecular design as embodied formal systems"
-			],
-
-			"content": [
-				"CriticalAlgorithms_Algorithmic_Bias_Visualization: Classification systems encode assumptions — see whose edge cases get lost",
-				"SpeculativeComputation_Rhizome_Network: Deleuze's rhizome made navigable — connections without hierarchy",
-				"AdvancedLaboratory_Lab_Equipment_Simulation: Formal systems become tangible — molecular design as constructive proof"
-			],
-
-			"maps": [
-				"CriticalAlgorithms_Algorithmic_Bias_Visualization",
-				"SpeculativeComputation_Rhizome_Network",
-				"AdvancedLaboratory_Lab_Equipment_Simulation"
-			],
-
-			"audio": {
-				"ambient_preset": "minimal_drone",
-				"volume": -10.0
-			},
-
-			"return_to": "lab",
-			"completion_rewards": [
-				"critical_lens_badge"
-			]
+  "sequences": {
+	"postfoundationscrisis": {
+	  "name": "Post-Crisis: Applied Limits",
+	  "truth": "Knowing the limits of formalization, what do we build?",
+	  "qfep_term": "Edge",
+	  "qfep_connection": "After the foundations crisis, these maps explore what happens when incompleteness, bias, and rhizomatic thinking become design materials rather than problems to solve.",
+	  "formula": "limits â†’ critical practice â†’ new structures",
+	  "description": "Collected maps from deferred sequences â€” each a standalone exploration that extends the foundations crisis into contemporary territory. Algorithmic bias as lived incompleteness. Rhizomatic networks as alternatives to hierarchical formalization. Molecular design as post-reductionist practice.",
+	  "layer": "integration",
+	  "prerequisites": [
+        "foundationscrisis"
+	  ],
+	  "unlocks": [
+        "qfeplaboratory"
+	  ],
+	  "difficulty": "advanced",
+	  "estimated_time": "15-20 minutes",
+	  "learning_objectives": [
+		"Algorithmic bias as structural incompleteness in classification systems",
+		"Rhizomatic networks as non-hierarchical alternatives to tree structures",
+        "Molecular design as embodied formal systems"
+	  ],
+	  "content": [
+		"CriticalAlgorithms_Algorithmic_Bias_Visualization: Bias as Structural Incompleteness",
+		"SpeculativeComputation_Rhizome_Network: Networks Without Hierarchy",
+        "AdvancedLaboratory_Lab_Equipment_Simulation: Molecular Design After Crisis"
+	  ],
+	  "maps": [
+		"CriticalAlgorithms_Algorithmic_Bias_Visualization",
+		"SpeculativeComputation_Rhizome_Network",
+        "AdvancedLaboratory_Lab_Equipment_Simulation"
+	  ],
+	  "audio": {
+		"ambient_preset": "minimal_drone",
+		"volume": -10.0
+	  },
+	  "return_to": "lab",
+	  "completion_rewards": [
+        "critical_lens_badge"
+	  ],
+	  "artifact_groups": [
+		{
+		  "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+		  "position": "intro",
+		  "artifacts": [
+            "bias_visualizer"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Single artifact in divided room; spatial inequality of the architecture carries the lesson about bias"
+		},
+		{
+		  "map": "SpeculativeComputation_Rhizome_Network",
+		  "position": "exploration",
+		  "artifacts": [
+            "rhizome_cave_demo"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Single artifact in four-chamber rhizomatic cave; non-hierarchical layout enacts Deleuze/Guattari spatial logic"
+		},
+		{
+		  "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+		  "position": "synthesis",
+		  "artifacts": [
+            "MolecularDesigner"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Single artifact on clean lab benches; molecular design as constructive post-reductionist practice"
 		}
+	  ]
 	}
+  },
+  "world_phase": "beyond",
+  "artifact_groups": []
 }

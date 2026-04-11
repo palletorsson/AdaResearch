@@ -1,89 +1,144 @@
-﻿# TimelineController.gd
-extends Control
+# TimelineController.gd - VR timeline controls using push buttons
+extends Node3D
 
-# UI References
-@onready var record_button = $VBoxContainer/ControlPanel/RecordButton
-@onready var play_button = $VBoxContainer/ControlPanel/PlayButton
-@onready var stop_button = $VBoxContainer/ControlPanel/StopButton
-@onready var clear_button = $VBoxContainer/ControlPanel/ClearButton
-@onready var zoom_slider = $VBoxContainer/ControlPanel/ZoomSlider
-@onready var scroll_slider = $VBoxContainer/ControlPanel/ScrollSlider
-@onready var timeline_area = $VBoxContainer/TimelineArea
+# VR push button scene
+const PushButtonScene = preload("res://commons/interactables/push_button.tscn")
+
+# Button references
+var record_button: Node3D
+var play_button: Node3D
+var stop_button: Node3D
+var clear_button: Node3D
 
 # Timeline visualizer
 var timeline_visualizer: SoundTimelineVisualizer
 
-func _ready():
+# Button labels
+var _record_label: Label3D
+var _play_label: Label3D
+
+func _ready() -> void:
 	# Create the timeline visualizer
 	timeline_visualizer = SoundTimelineVisualizer.new()
-	timeline_area.add_child(timeline_visualizer)
-	
-	# Connect UI signals
-	connect_ui_signals()
-	
+	add_child(timeline_visualizer)
+	timeline_visualizer.position = Vector3(0, -0.05, 0)
+
+	# Create VR push buttons
+	_create_buttons()
+
 	# Start with recording enabled
 	timeline_visualizer.start_recording()
 
-func connect_ui_signals():
-	if record_button:
-		record_button.pressed.connect(_on_record_pressed)
-	if play_button:
-		play_button.pressed.connect(_on_play_pressed)
-	if stop_button:
-		stop_button.pressed.connect(_on_stop_pressed)
-	if clear_button:
-		clear_button.pressed.connect(_on_clear_pressed)
-	if zoom_slider:
-		zoom_slider.value_changed.connect(_on_zoom_changed)
-	if scroll_slider:
-		scroll_slider.value_changed.connect(_on_scroll_changed)
+func _create_buttons() -> void:
+	"""Create VR push button instances for transport controls"""
+	var button_spacing = 0.08
+	var button_y = 0.0
 
-func _on_record_pressed():
+	# Record button
+	record_button = PushButtonScene.instantiate()
+	record_button.position = Vector3(0, button_y, 0)
+	add_child(record_button)
+	_record_label = Label3D.new()
+	_record_label.text = "REC"
+	_record_label.font_size = 32
+	_record_label.pixel_size = 0.001
+	_record_label.no_depth_test = false
+	_record_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_record_label.modulate = Color.RED
+	_record_label.position = Vector3(0, 0.03, 0.01)
+	record_button.add_child(_record_label)
+	var rec_area = record_button.get_node_or_null("InteractableAreaButton")
+	if rec_area:
+		rec_area.button_pressed.connect(_on_record_pressed)
+
+	# Play button
+	play_button = PushButtonScene.instantiate()
+	play_button.position = Vector3(button_spacing, button_y, 0)
+	add_child(play_button)
+	_play_label = Label3D.new()
+	_play_label.text = "PLAY"
+	_play_label.font_size = 32
+	_play_label.pixel_size = 0.001
+	_play_label.no_depth_test = false
+	_play_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_play_label.modulate = Color.GREEN
+	_play_label.position = Vector3(0, 0.03, 0.01)
+	play_button.add_child(_play_label)
+	var play_area = play_button.get_node_or_null("InteractableAreaButton")
+	if play_area:
+		play_area.button_pressed.connect(_on_play_pressed)
+
+	# Stop button
+	stop_button = PushButtonScene.instantiate()
+	stop_button.position = Vector3(button_spacing * 2, button_y, 0)
+	add_child(stop_button)
+	var stop_label = Label3D.new()
+	stop_label.text = "STOP"
+	stop_label.font_size = 32
+	stop_label.pixel_size = 0.001
+	stop_label.no_depth_test = false
+	stop_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	stop_label.modulate = Color.WHITE
+	stop_label.position = Vector3(0, 0.03, 0.01)
+	stop_button.add_child(stop_label)
+	var stop_area = stop_button.get_node_or_null("InteractableAreaButton")
+	if stop_area:
+		stop_area.button_pressed.connect(_on_stop_pressed)
+
+	# Clear button
+	clear_button = PushButtonScene.instantiate()
+	clear_button.position = Vector3(button_spacing * 3, button_y, 0)
+	add_child(clear_button)
+	var clear_label = Label3D.new()
+	clear_label.text = "CLEAR"
+	clear_label.font_size = 32
+	clear_label.pixel_size = 0.001
+	clear_label.no_depth_test = false
+	clear_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	clear_label.modulate = Color.YELLOW
+	clear_label.position = Vector3(0, 0.03, 0.01)
+	clear_button.add_child(clear_label)
+	var clear_area = clear_button.get_node_or_null("InteractableAreaButton")
+	if clear_area:
+		clear_area.button_pressed.connect(_on_clear_pressed)
+
+func _on_record_pressed() -> void:
 	if timeline_visualizer.is_recording:
 		timeline_visualizer.stop_recording()
-		record_button.text = "Record"
-		record_button.modulate = Color.WHITE
+		_record_label.text = "REC"
+		_record_label.modulate = Color.RED
 	else:
 		timeline_visualizer.start_recording()
-		record_button.text = "Stop Rec"
-		record_button.modulate = Color.RED
+		_record_label.text = "STOP REC"
+		_record_label.modulate = Color(1, 0.3, 0.3)
 
-func _on_play_pressed():
+func _on_play_pressed() -> void:
 	if timeline_visualizer.is_playing and not timeline_visualizer.is_recording:
 		timeline_visualizer.stop_playback()
-		play_button.text = "Play"
-		play_button.modulate = Color.WHITE
+		_play_label.text = "PLAY"
+		_play_label.modulate = Color.GREEN
 	else:
 		timeline_visualizer.start_playback()
-		play_button.text = "Pause"
-		play_button.modulate = Color.GREEN
+		_play_label.text = "PAUSE"
+		_play_label.modulate = Color(0.3, 1.0, 0.3)
 
-func _on_stop_pressed():
+func _on_stop_pressed() -> void:
 	timeline_visualizer.stop_playback()
 	timeline_visualizer.stop_recording()
-	
-	# Reset button states
-	play_button.text = "Play"
-	play_button.modulate = Color.WHITE
-	record_button.text = "Record"
-	record_button.modulate = Color.WHITE
 
-func _on_clear_pressed():
+	_play_label.text = "PLAY"
+	_play_label.modulate = Color.GREEN
+	_record_label.text = "REC"
+	_record_label.modulate = Color.RED
+
+func _on_clear_pressed() -> void:
 	timeline_visualizer.clear_timeline()
-	_on_stop_pressed()  # Also stop any current operations
+	_on_stop_pressed()
 
-func _on_zoom_changed(value: float):
-	if timeline_visualizer:
-		timeline_visualizer.set_zoom(value)
+func apply_grid_config(config: Dictionary) -> void:
+	pass
 
-func _on_scroll_changed(value: float):
-	if timeline_visualizer:
-		timeline_visualizer.set_scroll(value)
-
-func _process(_delta):
-	# Update UI based on timeline state
-	if timeline_visualizer:
-		# Update scroll slider max value based on timeline content
-		var timeline_duration = timeline_visualizer.get_timeline_duration()
-		if timeline_duration > 0 and scroll_slider:
-			scroll_slider.max_value = max(0.0, 1.0 - (timeline_visualizer.timeline_width / (timeline_duration * 60.0)))
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()

@@ -14,10 +14,10 @@ extends Node3D
 
 var point_scene = preload("res://commons/primitives/point/grab_sphere_point_with_color.tscn")
 
-func _ready():
+func _ready() -> void:
 	generate_entropy_grid()
 
-func generate_entropy_grid():
+func generate_entropy_grid() -> void:
 	for z in range(grid_size_z):
 		for y in range(grid_size_y):
 			for x in range(grid_size_x):
@@ -78,3 +78,6 @@ func get_entropy_color(entropy_factor: float) -> Color:
 	var value = 1.0
 
 	return Color.from_hsv(hue, saturation, value)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,1 @@
+The journey ends where it could begin again. Stochastic trees return—deterministic rules plus random variation, the QFEP in botanical form. Here fractals meet evolutionary algorithms and cellular automata, bridging to other sequences. Each tree is unique, each follows the same grammar. This is synthesis: F + λE(S) made vegetable, made digital, made universal.

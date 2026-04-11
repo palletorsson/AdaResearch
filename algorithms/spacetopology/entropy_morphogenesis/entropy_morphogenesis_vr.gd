@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: entropy parameter S in [0,1] maps to gyroid field parameters — frequency = lerp(0.9, 1.6, S), noise_amp = lerp(0.05, 0.20, S), threshold = center + wobble*(S-0.5)*2 — then marching cubes generates the mesh
+# desire: to turn a single entropy slider and watch a gyroid surface crumple from smooth order into noisy complexity — morphogenesis as a function of one number
+# critical_parameter: S (entropy) — at S=0 the gyroid is smooth and periodic, at S=1 noise disrupts the field and the surface fragments into chaotic topology
+# triggers: setting S (via set_entropy or export) recomputes frequency, noise_amp, and threshold; regenerate_at_entropy triggers marching cubes mesh rebuild
+# emerges: the gyroid's triply-periodic minimal surface creates passages and chambers that open and close as entropy changes, producing architecture from pure mathematics
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: synthesis of softbodies sequence — entropy becoming form; depends on GyroidFieldGenerator for marching cubes mesh generation
+# truth: morphogenesis is not construction — it is what happens when entropy finds a threshold where disorder crystallizes into structure
+
 # Entropy Morphogenesis VR - Marching Cubes Edition
 # Entropy S(t) drives the morphological parameters of the gyroid
 # Creates actual mesh geometry at a specific entropy state
@@ -160,3 +170,6 @@ func get_entropy() -> float:
 func regenerate_now() -> void:
 	"""Manually trigger regeneration at current entropy"""
 	_regenerate()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -13,6 +13,16 @@ extends Node3D
 ## Recursive tree with random variation
 ## Chapter 08: Fractals
 
+# @identity
+# essence: tree(pos, dir, len, d) = branch + tree(left, angle+noise) + tree(right, angle+noise) + maybe tree(mid)
+# desire: To look natural — identical algorithm to a deterministic tree, but angle_variance and length_variance inject life
+# critical_parameter: angle_variance (15.0) — the random range added to each branch angle; at 0 the tree is symmetric, at 15 it is organic
+# triggers: Randomize seed at ready → unique tree every instantiation; depth-based color gradient from dark stem to bright tips
+# emerges: The 30% chance third branch (randf() < 0.3) — occasional triple branching creates asymmetric fullness, like a real tree
+# needs: VR regenerate button [missing], variance control [missing]
+# relationships: Stochastic variant of recursive_tree; parent to stochastic_tree_separated (adds post-growth separation physics)
+# truth: The stochastic tree proves that randomness is not noise — it is the difference between a diagram and a tree.
+
 const MAT_PINK := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
 
 @export var recursion_depth: int = 5
@@ -120,3 +130,12 @@ func _create_branch(start: Vector3, end: Vector3, thickness: float, depth: int) 
 
 func _rotate_vector(vec: Vector3, axis: Vector3, angle: float) -> Vector3:
 	return Basis(axis.normalized(), angle) * vec
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

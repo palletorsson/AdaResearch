@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grid Editor | Ada Research</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --surface3: #222233;
+    --border: #2a2a3a;
+    --border-light: #3a3a4a;
+    --text: #e0e0e8;
+    --text-dim: #8888a0;
+    --text-bright: #ffffff;
+    --accent-pink: #E91E63;
+    --accent-blue: #4A90D9;
+    --accent-purple: #9B59B6;
+    --accent-green: #2ECC71;
+    --accent-orange: #F39C12;
+    --accent-red: #E74C3C;
+    --grid-line: rgba(255,255,255,0.06);
+    --grid-line-major: rgba(255,255,255,0.12);
+    /* Facade category colors */
+    --cat-columns: #8D6E63;
+    --cat-openings: #42A5F5;
+    --cat-bands: #AB47BC;
+    --cat-surfaces: #78909C;
+    --cat-crowns: #FFA726;
+    --cat-zones: #66BB6A;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .header h1 {
+    font-size: 1.1rem;
+    color: var(--accent-pink);
+    white-space: nowrap;
+  }
+  .header .subset-selector {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .header select, .header button {
+    background: var(--surface2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 0.35rem 0.7rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .header select:hover, .header button:hover {
+    border-color: var(--accent-blue);
+  }
+  .header .subset-info {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    margin-left: auto;
+  }
+
+  /* ── Main Layout ── */
+  .main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* ── Left Panel: Element Palette ── */
+  .palette-panel {
+    width: 280px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .category-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .category-tab {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    background: var(--surface2);
+    color: var(--text-dim);
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .category-tab:hover {
+    border-color: var(--border-light);
+    color: var(--text);
+  }
+  .category-tab.active {
+    border-color: var(--accent-blue);
+    color: var(--text-bright);
+    background: var(--surface3);
+  }
+  .category-tab .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+
+  .element-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem;
+  }
+  .element-card {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    margin-bottom: 4px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    cursor: grab;
+    transition: all 0.15s;
+  }
+  .element-card:hover {
+    border-color: var(--accent-blue);
+    background: var(--surface3);
+  }
+  .element-card.selected {
+    border-color: var(--accent-pink);
+    box-shadow: 0 0 0 1px var(--accent-pink);
+  }
+  .element-card .icon-preview {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .element-card .el-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .element-card .el-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .element-card .el-size {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+  }
+
+  /* ── Center: Grid Canvas ── */
+  .canvas-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+  .canvas-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.4rem 0.75rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .canvas-toolbar label {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+  .canvas-toolbar input[type="number"] {
+    width: 50px;
+    background: var(--surface2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+  }
+  .canvas-toolbar .tool-btn {
+    padding: 0.25rem 0.6rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8rem;
+  }
+  .canvas-toolbar .tool-btn:hover { border-color: var(--accent-blue); color: var(--text); }
+  .canvas-toolbar .tool-btn.active { border-color: var(--accent-pink); color: var(--accent-pink); }
+
+  .canvas-container {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .grid-canvas {
+    position: relative;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+  }
+
+  /* ── Right Panel: Properties ── */
+  .properties-panel {
+    width: 260px;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    flex-shrink: 0;
+    overflow-y: auto;
+    padding: 0.75rem;
+  }
+  .props-section {
+    margin-bottom: 1rem;
+  }
+  .props-section h3 {
+    font-size: 0.8rem;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .props-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2rem 0;
+    font-size: 0.8rem;
+  }
+  .props-field .label { color: var(--text-dim); }
+  .props-field .value { color: var(--text); font-family: monospace; }
+  .preset-btn {
+    display: block;
+    width: 100%;
+    padding: 0.4rem;
+    margin-bottom: 4px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    text-align: left;
+  }
+  .preset-btn:hover {
+    border-color: var(--accent-blue);
+    background: var(--surface3);
+  }
+  .preset-btn .preset-name { font-weight: 500; }
+  .preset-btn .preset-desc { color: var(--text-dim); font-size: 0.7rem; display: block; margin-top: 2px; }
+
+  /* ── Zone overlay labels ── */
+  .zone-overlay-label {
+    position: absolute;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    z-index: 5;
+  }
+
+  /* ── Facade zone backgrounds ── */
+  .zone-bg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.06;
+  }
+
+  /* ── Grid placements ── */
+  .grid-placement {
+    position: absolute;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: box-shadow 0.1s;
+    overflow: hidden;
+  }
+  .grid-placement:hover {
+    box-shadow: 0 0 0 2px var(--accent-blue);
+  }
+  .grid-placement.selected-placement {
+    box-shadow: 0 0 0 2px var(--accent-pink);
+  }
+  .grid-placement .placement-label {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.8);
+    text-align: center;
+    line-height: 1.1;
+    padding: 2px;
+    pointer-events: none;
+  }
+
+  /* ── Ghost element (drag preview) ── */
+  .ghost-element {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.5;
+    z-index: 100;
+    border: 2px dashed var(--accent-blue);
+    border-radius: 2px;
+  }
+
+  /* ── Export dialog ── */
+  .export-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .export-overlay.visible { display: flex; }
+  .export-dialog {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .export-dialog h2 { color: var(--accent-pink); margin-bottom: 1rem; font-size: 1.2rem; }
+  .export-dialog pre {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    overflow-x: auto;
+    max-height: 50vh;
+    overflow-y: auto;
+    color: var(--accent-green);
+  }
+  .export-dialog .btn-row { display: flex; gap: 0.5rem; margin-top: 1rem; }
+  .export-dialog button {
+    padding: 0.4rem 1rem;
+    background: var(--accent-blue);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  .export-dialog button.secondary {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--surface); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
+
+  /* ── Facade-specific element rendering ── */
+  .facade-column-visual {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: stretch;
+  }
+  .facade-column-visual .capital {
+    width: 90%;
+    height: 12%;
+    border-radius: 2px 2px 0 0;
+  }
+  .facade-column-visual .shaft {
+    flex: 1;
+    width: 60%;
+  }
+  .facade-column-visual .base-part {
+    width: 85%;
+    height: 8%;
+    border-radius: 0 0 2px 2px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <h1>Grid Editor</h1>
+  <div class="subset-selector">
+    <label style="font-size:0.8rem; color:var(--text-dim)">Subset:</label>
+    <select id="subsetSelect">
+      <option value="">-- Select --</option>
+    </select>
+    <button id="btnLoadFile" title="Load subset from file">Load File</button>
+    <input type="file" id="fileInput" accept=".json" style="display:none">
+  </div>
+  <div class="subset-info" id="subsetInfo">No subset loaded</div>
+</div>
+
+<!-- Main Layout -->
+<div class="main-layout">
+
+  <!-- Left: Element Palette -->
+  <div class="palette-panel">
+    <div class="category-tabs" id="categoryTabs"></div>
+    <div class="element-list" id="elementList"></div>
+  </div>
+
+  <!-- Center: Grid Canvas -->
+  <div class="canvas-area">
+    <div class="canvas-toolbar">
+      <label>W:</label>
+      <input type="number" id="gridW" value="16" min="1" max="50">
+      <label>H:</label>
+      <input type="number" id="gridH" value="16" min="1" max="50">
+      <label>Cell:</label>
+      <input type="number" id="cellSize" value="36" min="16" max="80" step="4">
+      <span style="width:1px;height:20px;background:var(--border);display:inline-block"></span>
+      <button class="tool-btn" id="btnZoneOverlay" title="Toggle architectural zone overlay">Zones</button>
+      <button class="tool-btn" id="btnClear" title="Clear all placements">Clear</button>
+      <button class="tool-btn" id="btnExport" title="Export placements as JSON">Export</button>
+      <span style="flex:1"></span>
+      <span id="cursorInfo" style="font-size:0.75rem;color:var(--text-dim);font-family:monospace"></span>
+    </div>
+    <div class="canvas-container" id="canvasContainer">
+      <div class="grid-canvas" id="gridCanvas"></div>
+    </div>
+  </div>
+
+  <!-- Right: Properties -->
+  <div class="properties-panel">
+    <div class="props-section">
+      <h3>Subset</h3>
+      <div class="props-field"><span class="label">Name</span><span class="value" id="propSubsetName">--</span></div>
+      <div class="props-field"><span class="label">Plane</span><span class="value" id="propPlane">--</span></div>
+      <div class="props-field"><span class="label">Grid Size</span><span class="value" id="propGridSize">--</span></div>
+      <div class="props-field"><span class="label">Elements</span><span class="value" id="propElementCount">--</span></div>
+    </div>
+    <div class="props-section" id="selectedProps" style="display:none">
+      <h3>Selected Element</h3>
+      <div class="props-field"><span class="label">ID</span><span class="value" id="propElId">--</span></div>
+      <div class="props-field"><span class="label">Name</span><span class="value" id="propElName">--</span></div>
+      <div class="props-field"><span class="label">Size</span><span class="value" id="propElSize">--</span></div>
+      <div class="props-field"><span class="label">Category</span><span class="value" id="propElCategory">--</span></div>
+      <div id="propElExtra"></div>
+    </div>
+    <div class="props-section" id="placementProps" style="display:none">
+      <h3>Placement</h3>
+      <div class="props-field"><span class="label">Position</span><span class="value" id="propPlacePos">--</span></div>
+      <div class="props-field"><span class="label">Rotation</span><span class="value" id="propPlaceRot">0</span></div>
+      <div style="margin-top:0.5rem; display:flex; gap:0.3rem;">
+        <button class="tool-btn" onclick="rotatePlacement(-90)">-90</button>
+        <button class="tool-btn" onclick="rotatePlacement(90)">+90</button>
+        <button class="tool-btn" style="margin-left:auto;color:var(--accent-red)" onclick="deletePlacement()">Delete</button>
+      </div>
+    </div>
+    <div class="props-section" id="presetsSection">
+      <h3>Presets</h3>
+      <div id="presetList"><span style="font-size:0.8rem;color:var(--text-dim)">Load a subset to see presets</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Export Dialog -->
+<div class="export-overlay" id="exportOverlay">
+  <div class="export-dialog">
+    <h2>Export Layout</h2>
+    <pre id="exportJson"></pre>
+    <div class="btn-row">
+      <button onclick="copyExport()">Copy to Clipboard</button>
+      <button class="secondary" onclick="closeExport()">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── State ──
+let currentSubset = null;
+let selectedElement = null;
+let selectedCategory = 'all';
+let placements = [];
+let selectedPlacementIdx = -1;
+let showZoneOverlay = false;
+let cellPx = 36;
+let gridW = 16, gridH = 16;
+
+// ── Known subsets (relative paths from repo root) ──
+const KNOWN_SUBSETS = [
+  { id: 'audio_rack', name: 'Audio Rack' },
+  { id: 'big_pipes', name: 'Big Pipes' },
+  { id: 'glass_rack', name: 'Glass Rack' },
+  { id: 'facade_elements', name: 'Facade Elements' },
+  { id: 'sticky_notes', name: 'Sticky Notes' },
+  { id: 'chemical_models', name: 'Chemical Models' },
+  { id: 'periodic_table', name: 'Periodic Table' },
+  { id: 'lab_items_horizontal', name: 'Lab Items' },
+];
+
+// Try multiple paths for loading subset JSON
+function getSubsetPaths(id) {
+  return [
+    `/api/grid-editor/subset?id=${id}`,                       // Next.js API route
+    `/grid-editor/subsets/${id}.json`,                         // Public dir alongside this page
+    `../../tools/grid_editor/subsets/${id}.json`,              // Relative from repo root
+    `subsets/${id}.json`,                                      // Local subdir
+  ];
+}
+
+// ── Embedded subset data (fallback when fetch fails) ──
+const EMBEDDED_SUBSETS = {};
+
+// ── Category colors (from subset JSON) ──
+function getCategoryColor(catId) {
+  if (!currentSubset) return '#666';
+  const cat = currentSubset.categories.find(c => c.id === catId);
+  return cat ? cat.color : '#666';
+}
+
+function getCategoryName(catId) {
+  if (!currentSubset) return catId;
+  const cat = currentSubset.categories.find(c => c.id === catId);
+  return cat ? cat.name : catId;
+}
+
+// ── Facade zone definitions ──
+const FACADE_ZONES = [
+  { id: 'cornice', name: 'Cornice / Crown', rows: [0, 2], color: 'var(--cat-crowns)', textY: 0 },
+  { id: 'upper', name: 'Upper Story', rows: [2, 6], color: 'var(--cat-openings)', textY: 2 },
+  { id: 'piano_nobile', name: 'Piano Nobile', rows: [6, 11], color: 'var(--cat-columns)', textY: 6 },
+  { id: 'base', name: 'Rusticated Base', rows: [11, 14], color: 'var(--cat-surfaces)', textY: 11 },
+  { id: 'plinth', name: 'Plinth', rows: [14, 16], color: 'var(--cat-bands)', textY: 14 },
+];
+
+// ── Init ──
+function init() {
+  const sel = document.getElementById('subsetSelect');
+  KNOWN_SUBSETS.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s.id;
+    opt.textContent = s.name;
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', () => {
+    const s = KNOWN_SUBSETS.find(k => k.id === sel.value);
+    if (s) loadSubsetById(s.id);
+  });
+
+  document.getElementById('btnLoadFile').addEventListener('click', () => {
+    document.getElementById('fileInput').click();
+  });
+  document.getElementById('fileInput').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const data = JSON.parse(ev.target.result);
+        loadSubset(data);
+      } catch (err) {
+        alert('Failed to parse JSON: ' + err.message);
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  document.getElementById('gridW').addEventListener('change', (e) => { gridW = parseInt(e.target.value) || 16; renderGrid(); });
+  document.getElementById('gridH').addEventListener('change', (e) => { gridH = parseInt(e.target.value) || 16; renderGrid(); });
+  document.getElementById('cellSize').addEventListener('change', (e) => { cellPx = parseInt(e.target.value) || 36; renderGrid(); });
+  document.getElementById('btnZoneOverlay').addEventListener('click', toggleZoneOverlay);
+  document.getElementById('btnClear').addEventListener('click', () => { placements = []; selectedPlacementIdx = -1; renderGrid(); });
+  document.getElementById('btnExport').addEventListener('click', showExport);
+  document.getElementById('exportOverlay').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeExport(); });
+
+  // Grid click handler
+  document.getElementById('gridCanvas').addEventListener('click', onGridClick);
+  document.getElementById('gridCanvas').addEventListener('mousemove', onGridMouseMove);
+  document.getElementById('gridCanvas').addEventListener('contextmenu', (e) => { e.preventDefault(); onGridRightClick(e); });
+
+  renderGrid();
+}
+
+async function loadSubsetById(id) {
+  const paths = getSubsetPaths(id);
+  for (const url of paths) {
+    try {
+      const resp = await fetch(url);
+      if (!resp.ok) continue;
+      const data = await resp.json();
+      if (data && data.elements) {
+        loadSubset(data);
+        return;
+      }
+    } catch (e) { /* try next path */ }
+  }
+  // Fallback: check embedded data
+  if (EMBEDDED_SUBSETS[id]) {
+    loadSubset(EMBEDDED_SUBSETS[id]);
+    return;
+  }
+  alert('Failed to load subset "' + id + '" from any path.\n\nTry using "Load File" to load the JSON file directly from:\ntools/grid_editor/subsets/' + id + '.json');
+}
+
+async function loadSubsetFromUrl(url) {
+  try {
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    loadSubset(data);
+  } catch (err) {
+    alert('Failed to load subset: ' + err.message + '\n\nTry using "Load File" to load the JSON directly.');
+  }
+}
+
+function loadSubset(data) {
+  currentSubset = data;
+  selectedElement = null;
+  selectedCategory = 'all';
+  placements = [];
+  selectedPlacementIdx = -1;
+
+  // Update UI
+  document.getElementById('subsetInfo').textContent = data.description || data.name;
+  document.getElementById('propSubsetName').textContent = data.name;
+  document.getElementById('propPlane').textContent = data.orientation?.plane || '--';
+  document.getElementById('propGridSize').textContent = (data.orientation?.grid_size || '--') + 'm';
+  document.getElementById('propElementCount').textContent = data.elements?.length || 0;
+
+  // Show/hide zone overlay button for facade
+  const zoneBtn = document.getElementById('btnZoneOverlay');
+  if (data.id === 'facade_elements') {
+    zoneBtn.style.display = '';
+    showZoneOverlay = true;
+    zoneBtn.classList.add('active');
+  } else {
+    zoneBtn.style.display = 'none';
+    showZoneOverlay = false;
+    zoneBtn.classList.remove('active');
+  }
+
+  renderCategoryTabs();
+  renderElementList();
+  renderPresets();
+  renderGrid();
+}
+
+// ── Category Tabs ──
+function renderCategoryTabs() {
+  const container = document.getElementById('categoryTabs');
+  container.innerHTML = '';
+  if (!currentSubset) return;
+
+  // "All" tab
+  const allTab = document.createElement('div');
+  allTab.className = 'category-tab' + (selectedCategory === 'all' ? ' active' : '');
+  allTab.textContent = 'All';
+  allTab.onclick = () => { selectedCategory = 'all'; renderCategoryTabs(); renderElementList(); };
+  container.appendChild(allTab);
+
+  currentSubset.categories.forEach(cat => {
+    const tab = document.createElement('div');
+    tab.className = 'category-tab' + (selectedCategory === cat.id ? ' active' : '');
+    tab.innerHTML = `<span class="dot" style="background:${cat.color}"></span>${cat.name}`;
+    tab.onclick = () => { selectedCategory = cat.id; renderCategoryTabs(); renderElementList(); };
+    container.appendChild(tab);
+  });
+}
+
+// ── Element List ──
+function renderElementList() {
+  const container = document.getElementById('elementList');
+  container.innerHTML = '';
+  if (!currentSubset) return;
+
+  const elements = currentSubset.elements.filter(el =>
+    selectedCategory === 'all' || el.category === selectedCategory
+  );
+
+  elements.forEach(el => {
+    const card = document.createElement('div');
+    card.className = 'element-card' + (selectedElement?.id === el.id ? ' selected' : '');
+    card.draggable = true;
+
+    const catColor = getCategoryColor(el.category);
+    const iconHtml = renderElementIcon(el, catColor, 40, 40);
+
+    card.innerHTML = `
+      <div class="icon-preview" style="background:${catColor}22; border:1px solid ${catColor}44">
+        ${iconHtml}
+      </div>
+      <div class="el-info">
+        <div class="el-name">${el.name}</div>
+        <div class="el-size">${el.size[0]}x${el.size[1]} &middot; ${getCategoryName(el.category)}</div>
+      </div>
+    `;
+
+    card.onclick = () => selectElement(el);
+    card.ondragstart = (e) => {
+      selectedElement = el;
+      e.dataTransfer.setData('text/plain', el.id);
+      renderElementList();
+    };
+
+    container.appendChild(card);
+  });
+}
+
+function selectElement(el) {
+  selectedElement = el;
+  selectedPlacementIdx = -1;
+  renderElementList();
+  updateSelectedProps();
+}
+
+function updateSelectedProps() {
+  const panel = document.getElementById('selectedProps');
+  const placePanel = document.getElementById('placementProps');
+
+  if (selectedPlacementIdx >= 0 && placements[selectedPlacementIdx]) {
+    const p = placements[selectedPlacementIdx];
+    const el = currentSubset.elements.find(e => e.id === p.element);
+    panel.style.display = '';
+    placePanel.style.display = '';
+    if (el) {
+      document.getElementById('propElId').textContent = el.id;
+      document.getElementById('propElName').textContent = el.name;
+      document.getElementById('propElSize').textContent = `${el.size[0]}x${el.size[1]}`;
+      document.getElementById('propElCategory').textContent = getCategoryName(el.category);
+      renderExtraProps(el);
+    }
+    document.getElementById('propPlacePos').textContent = `[${p.position[0]}, ${p.position[1]}]`;
+    document.getElementById('propPlaceRot').textContent = p.rotation || 0;
+  } else if (selectedElement) {
+    panel.style.display = '';
+    placePanel.style.display = 'none';
+    document.getElementById('propElId').textContent = selectedElement.id;
+    document.getElementById('propElName').textContent = selectedElement.name;
+    document.getElementById('propElSize').textContent = `${selectedElement.size[0]}x${selectedElement.size[1]}`;
+    document.getElementById('propElCategory').textContent = getCategoryName(selectedElement.category);
+    renderExtraProps(selectedElement);
+  } else {
+    panel.style.display = 'none';
+    placePanel.style.display = 'none';
+  }
+}
+
+function renderExtraProps(el) {
+  const container = document.getElementById('propElExtra');
+  container.innerHTML = '';
+  if (!el.facade_element) return;
+  const fe = el.facade_element;
+  Object.keys(fe).forEach(key => {
+    const div = document.createElement('div');
+    div.className = 'props-field';
+    div.innerHTML = `<span class="label">${key}</span><span class="value">${fe[key]}</span>`;
+    container.appendChild(div);
+  });
+}
+
+// ── Presets ──
+function renderPresets() {
+  const container = document.getElementById('presetList');
+  container.innerHTML = '';
+  if (!currentSubset?.presets || currentSubset.presets.length === 0) {
+    container.innerHTML = '<span style="font-size:0.8rem;color:var(--text-dim)">No presets available</span>';
+    return;
+  }
+  currentSubset.presets.forEach(p => {
+    const btn = document.createElement('button');
+    btn.className = 'preset-btn';
+    btn.innerHTML = `<span class="preset-name">${p.name}</span><span class="preset-desc">${p.description || ''}</span>`;
+    btn.onclick = () => loadPreset(p);
+    container.appendChild(btn);
+  });
+}
+
+function loadPreset(preset) {
+  if (preset.grid_size) {
+    gridW = preset.grid_size[0];
+    gridH = preset.grid_size[1];
+    document.getElementById('gridW').value = gridW;
+    document.getElementById('gridH').value = gridH;
+  }
+  placements = (preset.placements || []).map(p => ({ ...p }));
+  selectedPlacementIdx = -1;
+  renderGrid();
+}
+
+// ── Facade-specific element icon rendering ──
+function renderElementIcon(el, catColor, w, h) {
+  if (!currentSubset || currentSubset.id !== 'facade_elements') {
+    return `<span style="font-size:1.1rem;color:${catColor}">${el.icon || '?'}</span>`;
+  }
+  return renderFacadeIcon(el, catColor, w, h);
+}
+
+function renderFacadeIcon(el, color, w, h) {
+  const fe = el.facade_element;
+  if (!fe) return `<span style="color:${color}">${el.icon}</span>`;
+
+  const type = fe.type;
+  const sw = w - 4;
+  const sh = h - 4;
+
+  if (type === 'column' || type === 'pilaster') {
+    const taperW = type === 'pilaster' ? sw * 0.7 : sw * 0.4;
+    const topW = taperW * (fe.taper || 0.85);
+    const capH = sh * 0.15;
+    const baseH = sh * 0.08;
+    const cx = sw / 2;
+    return `<svg width="${sw}" height="${sh}" viewBox="0 0 ${sw} ${sh}">
+      <rect x="${(sw-taperW*1.1)/2}" y="0" width="${taperW*1.1}" height="${capH}" rx="1" fill="${color}" opacity="0.9"/>
+      <polygon points="${(sw-topW)/2},${capH} ${(sw+topW)/2},${capH} ${(sw+taperW)/2},${sh-baseH} ${(sw-taperW)/2},${sh-baseH}" fill="${color}" opacity="0.7"/>
+      <rect x="${(sw-taperW*1.05)/2}" y="${sh-baseH}" width="${taperW*1.05}" height="${baseH}" rx="1" fill="${color}" opacity="0.9"/>
+      ${type === 'column' && fe.order !== 'tuscan' ? `<line x1="${cx-2}" y1="${capH+2}" x2="${cx-2}" y2="${sh-baseH-2}" stroke="${color}" stroke-width="0.5" opacity="0.3"/>
+      <line x1="${cx+2}" y1="${capH+2}" x2="${cx+2}" y2="${sh-baseH-2}" stroke="${color}" stroke-width="0.5" opacity="0.3"/>` : ''}
+    </svg>`;
+  }
+
+  if (type === 'opening_rectangular') {
+    const fw = fe.frame_width ? sw * 0.12 : 0;
+    return `<svg width="${sw}" height="${sh}" viewBox="0 0 ${sw} ${sh}">
+      <rect x="1" y="1" width="${sw-2}" height="${sh-2}" fill="${color}" opacity="0.3" rx="1"/>
+      <rect x="${fw+2}" y="${fw+2}" width="${sw-fw*2-4}" height="${sh-fw*2-4}" fill="#111" opacity="0.6" rx="1"/>
+      <line x1="${sw/2}" y1="${fw+4}" x2="${sw/2}" y2="${sh-fw-4}" stroke="${color}" stroke-width="0.5" opacity="0.4"/>
+    </svg>`;
+  }
+
+  if (type === 'opening_arched') {
+    const fw = sw * 0.08;
+    const archR = (sw - fw * 2 - 4) / 2;
+    return `<svg width="${sw}" height="${sh}" viewBox="0 0 ${sw} ${sh}">
+      <rect x="1" y="1" width="${sw-2}" height="${sh-2}" fill="${color}" opacity="0.3" rx="1"/>
+      <rect x="${fw+2}" y="${archR+fw+2}" width="${sw-fw*2-4}" height="${sh-archR-fw*2-4}" fill="#111" opacity="0.6"/>
+      <path d="M${fw+2},${archR+fw+2} Q${fw+2},${fw+2} ${sw/2},${fw+2} Q${sw-fw-2},${fw+2} ${sw-fw-2},${archR+fw+2}" fill="#111" opacity="0.6"/>
+    </svg>`;
+  }
+
+  if (type === 'horizontal_band' || type === 'string_course') {
+    const profile = fe.profile || 'flat';
+    return `<svg width="${sw}" height="${sh}" viewBox="0 0 ${sw} ${sh}">
+      <rect x="0" y="${sh*0.3}" width="${sw}" height="${sh*0.4}" fill="${color}" opacity="0.6" rx="1"/>
+      ${profile === 'dentil' ? Array.from({length: 5}, (_, i) =>
+        `<rect x="${i*(sw/5)+1}" y="${sh*0.15}" width="${sw/5-2}" height="${sh*0.18}" fill="${color}" opacity="0.5"/>`
+      ).join('') : ''}
+      ${profile === 'cyma_recta' || profile === 'cyma_reversa' ?
+        `<path d="M0,${sh*0.25} Q${sw*0.25},${sh*0.1} ${sw*0.5},${sh*0.25} Q${sw*0.75},${sh*0.4} ${sw},${sh*0.25}" stroke="${color}" stroke-width="1" fill="none" opacity="0.5"/>` : ''}
+      ${profile === 'stepped' || profile === 'art_deco_stepped' ?
+        `<rect x="0" y="${sh*0.1}" width="${sw}" height="${sh*0.15}" fill="${color}" opacity="0.3"/>
+         <rect x="${sw*0.1}" y="${sh*0.22}" width="${sw*0.8}" height="${sh*0.1}" fill="${color}" opacity="0.4"/>` : ''}
+    </svg>`;
+  }
+
+  if (type === 'rustication') {
+    const rows = fe.rows || 3;
+    const cols = fe.cols || 2;
+    const rh = (sh - 2) / rows;
+    const cw = (sw - 2) / (cols > 1 ? cols : 2);
+    return `<svg width="${sw}" height="${sh}" viewBox="0 0 ${sw} ${sh}">
+      ${Array.from({length: rows}, (_, r) =>
+        Array.from({length: cols > 1 ? cols : 2}, (_, c) =>
+          `<rect x="${c*cw+2}" y="${r*rh+2}" width="${cw-2}" height="${rh-2}" fill="${color}" opacity="${0.4 + Math.random()*0.2}" rx="1"/>`
+        ).join('')
+      ).join('')}
+    </svg>`;
+  }
+
+  if (type === 'balustrade') {
+    const n = fe.count || 6;
+    const spacing = sw / (n + 1);
+    return `<svg width="${sw}" height="${sh}" viewBox="0 0 ${sw} ${sh}">
+      <rect x="0" y="0" width="${sw}" height="${sh*0.15}" fill="${color}" opacity="0.7"/>
+      <rect x="0" y="${sh*0.85}" width="${sw}" height="${sh*0.15}" fill="${color}" opacity="0.7"/>
+      ${Array.from({length: n}, (_, i) => {
+        const x = (i + 1) * spacing;
+        return `<ellipse cx="${x}" cy="${sh/2}" rx="${spacing*0.25}" ry="${sh*0.35}" fill="${color}" opacity="0.5"/>`;
+      }).join('')}
+    </svg>`;
+  }
+
+  if (type === 'pediment') {
+    const broken = fe.broken;
+    return `<svg width="${sw}" height="${sh}" viewBox="0 0 ${sw} ${sh}">
+      <rect x="0" y="${sh*0.7}" width="${sw}" height="${sh*0.3}" fill="${color}" opacity="0.5"/>
+      ${broken ?
+        `<polygon points="0,${sh*0.7} ${sw*0.35},${sh*0.15} ${sw*0.4},${sh*0.25} ${sw*0.4},${sh*0.7}" fill="${color}" opacity="0.6"/>
+         <polygon points="${sw},${sh*0.7} ${sw*0.65},${sh*0.15} ${sw*0.6},${sh*0.25} ${sw*0.6},${sh*0.7}" fill="${color}" opacity="0.6"/>` :
+        `<polygon points="0,${sh*0.7} ${sw/2},${sh*0.1} ${sw},${sh*0.7}" fill="${color}" opacity="0.6"/>`
+      }
+    </svg>`;
+  }
+
+  if (type === 'zone') {
+    return `<svg width="${sw}" height="${sh}" viewBox="0 0 ${sw} ${sh}">
+      <rect x="1" y="1" width="${sw-2}" height="${sh-2}" fill="${color}" opacity="0.2" rx="2" stroke="${color}" stroke-width="1" stroke-dasharray="3,2"/>
+      <text x="${sw/2}" y="${sh/2+3}" text-anchor="middle" fill="${color}" font-size="7" opacity="0.8">${fe.template || 'zone'}</text>
+    </svg>`;
+  }
+
+  if (type === 'plain') {
+    return `<svg width="${sw}" height="${sh}" viewBox="0 0 ${sw} ${sh}">
+      <rect x="1" y="1" width="${sw-2}" height="${sh-2}" fill="${color}" opacity="0.15" rx="1"/>
+    </svg>`;
+  }
+
+  return `<span style="color:${color};font-size:1rem">${el.icon || '?'}</span>`;
+}
+
+// ── Grid Rendering ──
+function renderGrid() {
+  const canvas = document.getElementById('gridCanvas');
+  canvas.innerHTML = '';
+  canvas.style.width = (gridW * cellPx) + 'px';
+  canvas.style.height = (gridH * cellPx) + 'px';
+
+  // Draw grid lines
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('width', gridW * cellPx);
+  svg.setAttribute('height', gridH * cellPx);
+  svg.style.position = 'absolute';
+  svg.style.top = '0';
+  svg.style.left = '0';
+  svg.style.zIndex = '2';
+  svg.style.pointerEvents = 'none';
+
+  // Grid lines
+  for (let x = 0; x <= gridW; x++) {
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', x * cellPx);
+    line.setAttribute('y1', 0);
+    line.setAttribute('x2', x * cellPx);
+    line.setAttribute('y2', gridH * cellPx);
+    line.setAttribute('stroke', x % 4 === 0 ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.05)');
+    line.setAttribute('stroke-width', x % 4 === 0 ? '1' : '0.5');
+    svg.appendChild(line);
+  }
+  for (let y = 0; y <= gridH; y++) {
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', 0);
+    line.setAttribute('y1', y * cellPx);
+    line.setAttribute('x2', gridW * cellPx);
+    line.setAttribute('y2', y * cellPx);
+    line.setAttribute('stroke', y % 4 === 0 ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.05)');
+    line.setAttribute('stroke-width', y % 4 === 0 ? '1' : '0.5');
+    svg.appendChild(line);
+  }
+  canvas.appendChild(svg);
+
+  // Facade zone overlay
+  if (showZoneOverlay && currentSubset?.id === 'facade_elements') {
+    renderFacadeZoneOverlay(canvas);
+  }
+
+  // Render placements
+  placements.forEach((p, idx) => {
+    const el = currentSubset?.elements.find(e => e.id === p.element);
+    if (!el) return;
+    renderPlacement(canvas, el, p, idx);
+  });
+}
+
+function renderFacadeZoneOverlay(canvas) {
+  const zones = computeFacadeZones();
+  zones.forEach(zone => {
+    // Zone background
+    const bg = document.createElement('div');
+    bg.className = 'zone-bg';
+    bg.style.top = (zone.startRow * cellPx) + 'px';
+    bg.style.height = ((zone.endRow - zone.startRow) * cellPx) + 'px';
+    bg.style.background = zone.color;
+    bg.style.opacity = '0.08';
+    canvas.appendChild(bg);
+
+    // Zone label
+    const label = document.createElement('div');
+    label.className = 'zone-overlay-label';
+    label.style.top = (zone.startRow * cellPx + 2) + 'px';
+    label.textContent = zone.name;
+    label.style.color = zone.color;
+    label.style.opacity = '0.5';
+    canvas.appendChild(label);
+
+    // Divider line
+    if (zone.startRow > 0) {
+      const line = document.createElement('div');
+      line.style.position = 'absolute';
+      line.style.left = '0';
+      line.style.right = '0';
+      line.style.top = (zone.startRow * cellPx) + 'px';
+      line.style.height = '1px';
+      line.style.background = zone.color;
+      line.style.opacity = '0.3';
+      line.style.zIndex = '3';
+      line.style.pointerEvents = 'none';
+      canvas.appendChild(line);
+    }
+  });
+}
+
+function computeFacadeZones() {
+  // Scale the default zones to current grid height
+  const totalDefault = 16;
+  const scale = gridH / totalDefault;
+  return FACADE_ZONES.map(z => ({
+    ...z,
+    startRow: Math.round(z.rows[0] * scale),
+    endRow: Math.min(Math.round(z.rows[1] * scale), gridH),
+  })).filter(z => z.startRow < gridH && z.endRow > z.startRow);
+}
+
+function renderPlacement(canvas, el, placement, idx) {
+  const catColor = getCategoryColor(el.category);
+  const isSelected = idx === selectedPlacementIdx;
+  const [ew, eh] = el.size;
+  const [px, py] = placement.position;
+
+  const div = document.createElement('div');
+  div.className = 'grid-placement' + (isSelected ? ' selected-placement' : '');
+  div.style.left = (px * cellPx) + 'px';
+  div.style.top = (py * cellPx) + 'px';
+  div.style.width = (ew * cellPx) + 'px';
+  div.style.height = (eh * cellPx) + 'px';
+  div.style.background = catColor + '22';
+  div.style.border = `1px solid ${catColor}66`;
+
+  // Render facade-specific visual inside placement
+  if (currentSubset?.id === 'facade_elements') {
+    const iconHtml = renderFacadeIcon(el, catColor, ew * cellPx - 4, eh * cellPx - 4);
+    div.innerHTML = `<div style="position:absolute;inset:2px;display:flex;align-items:center;justify-content:center;">${iconHtml}</div>`;
+  } else {
+    div.innerHTML = `<span class="placement-label">${el.icon || el.name.charAt(0)}</span>`;
+  }
+
+  // Rotation transform
+  if (placement.rotation) {
+    div.style.transformOrigin = 'top left';
+    const rot = placement.rotation;
+    if (rot === 90) {
+      div.style.transform = `rotate(90deg) translateY(-100%)`;
+      // Swap dimensions visually
+      div.style.width = (eh * cellPx) + 'px';
+      div.style.height = (ew * cellPx) + 'px';
+    } else if (rot === 180) {
+      div.style.transform = `rotate(180deg)`;
+      div.style.left = ((px + ew) * cellPx) + 'px';
+      div.style.top = ((py + eh) * cellPx) + 'px';
+    } else if (rot === 270 || rot === -90) {
+      div.style.transform = `rotate(-90deg) translateX(-100%)`;
+      div.style.width = (eh * cellPx) + 'px';
+      div.style.height = (ew * cellPx) + 'px';
+    }
+  }
+
+  div.addEventListener('click', (e) => {
+    e.stopPropagation();
+    selectedPlacementIdx = idx;
+    selectedElement = el;
+    renderGrid();
+    renderElementList();
+    updateSelectedProps();
+  });
+
+  canvas.appendChild(div);
+}
+
+// ── Grid Interaction ──
+function onGridClick(e) {
+  if (!selectedElement || !currentSubset) return;
+  const rect = document.getElementById('gridCanvas').getBoundingClientRect();
+  const gx = Math.floor((e.clientX - rect.left) / cellPx);
+  const gy = Math.floor((e.clientY - rect.top) / cellPx);
+
+  if (gx < 0 || gy < 0 || gx >= gridW || gy >= gridH) return;
+
+  // Check if clicking on existing placement
+  const clickedIdx = findPlacementAt(gx, gy);
+  if (clickedIdx >= 0) {
+    selectedPlacementIdx = clickedIdx;
+    const p = placements[clickedIdx];
+    selectedElement = currentSubset.elements.find(el => el.id === p.element);
+    renderGrid();
+    renderElementList();
+    updateSelectedProps();
+    return;
+  }
+
+  // Place new element
+  placements.push({
+    element: selectedElement.id,
+    position: [gx, gy],
+    rotation: 0
+  });
+  selectedPlacementIdx = placements.length - 1;
+  renderGrid();
+  updateSelectedProps();
+}
+
+function onGridRightClick(e) {
+  const rect = document.getElementById('gridCanvas').getBoundingClientRect();
+  const gx = Math.floor((e.clientX - rect.left) / cellPx);
+  const gy = Math.floor((e.clientY - rect.top) / cellPx);
+  const idx = findPlacementAt(gx, gy);
+  if (idx >= 0) {
+    placements.splice(idx, 1);
+    if (selectedPlacementIdx === idx) selectedPlacementIdx = -1;
+    else if (selectedPlacementIdx > idx) selectedPlacementIdx--;
+    renderGrid();
+    updateSelectedProps();
+  }
+}
+
+function onGridMouseMove(e) {
+  const rect = document.getElementById('gridCanvas').getBoundingClientRect();
+  const gx = Math.floor((e.clientX - rect.left) / cellPx);
+  const gy = Math.floor((e.clientY - rect.top) / cellPx);
+  document.getElementById('cursorInfo').textContent = `[${gx}, ${gy}]`;
+}
+
+function findPlacementAt(gx, gy) {
+  for (let i = placements.length - 1; i >= 0; i--) {
+    const p = placements[i];
+    const el = currentSubset?.elements.find(e => e.id === p.element);
+    if (!el) continue;
+    const [px, py] = p.position;
+    const [ew, eh] = el.size;
+    if (gx >= px && gx < px + ew && gy >= py && gy < py + eh) return i;
+  }
+  return -1;
+}
+
+// ── Placement Operations ──
+function rotatePlacement(deg) {
+  if (selectedPlacementIdx < 0) return;
+  const p = placements[selectedPlacementIdx];
+  p.rotation = ((p.rotation || 0) + deg + 360) % 360;
+  renderGrid();
+  updateSelectedProps();
+}
+
+function deletePlacement() {
+  if (selectedPlacementIdx < 0) return;
+  placements.splice(selectedPlacementIdx, 1);
+  selectedPlacementIdx = -1;
+  renderGrid();
+  updateSelectedProps();
+}
+
+// ── Zone Overlay Toggle ──
+function toggleZoneOverlay() {
+  showZoneOverlay = !showZoneOverlay;
+  document.getElementById('btnZoneOverlay').classList.toggle('active', showZoneOverlay);
+  renderGrid();
+}
+
+// ── Export ──
+function showExport() {
+  if (!currentSubset) return;
+  const data = {
+    subset: currentSubset.id,
+    grid_size: [gridW, gridH],
+    placements: placements.map(p => ({
+      element: p.element,
+      position: p.position,
+      rotation: p.rotation || 0
+    }))
+  };
+  document.getElementById('exportJson').textContent = JSON.stringify(data, null, 2);
+  document.getElementById('exportOverlay').classList.add('visible');
+}
+
+function copyExport() {
+  const text = document.getElementById('exportJson').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.querySelector('.export-dialog button');
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy to Clipboard'; }, 1500);
+  });
+}
+
+function closeExport() {
+  document.getElementById('exportOverlay').classList.remove('visible');
+}
+
+// ── Keyboard shortcuts ──
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key === 'Delete' || e.key === 'Backspace') {
+    deletePlacement();
+  } else if (e.key === 'r' || e.key === 'R') {
+    rotatePlacement(e.shiftKey ? -90 : 90);
+  } else if (e.key === 'Escape') {
+    selectedElement = null;
+    selectedPlacementIdx = -1;
+    renderGrid();
+    renderElementList();
+    updateSelectedProps();
+  } else if (e.key === 'z' && e.ctrlKey) {
+    // Simple undo: remove last placement
+    if (placements.length > 0) {
+      placements.pop();
+      selectedPlacementIdx = -1;
+      renderGrid();
+      updateSelectedProps();
+    }
+  }
+});
+
+// ── Start ──
+init();
+
+// Auto-load subset from URL params: ?subset=facade_elements or #facade_elements
+const urlParams = new URLSearchParams(window.location.search);
+const hashSubset = window.location.hash.replace('#', '');
+const autoSubset = urlParams.get('subset') || hashSubset;
+if (autoSubset && KNOWN_SUBSETS.find(k => k.id === autoSubset)) {
+  document.getElementById('subsetSelect').value = autoSubset;
+  loadSubsetById(autoSubset);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": -1,
+				"name": "chair_assembly_puzzle",
+				"pos": [
+					3,
+					2,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "clipboard",
+				"pos": [
+					4,
+					2,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "scale_me",
+				"pos": [
+					3,
+					1,
+					8
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "prism_block",
+				"pos": [
+					0,
+					1,
+					10
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "prism_block",
+				"pos": [
+					1,
+					1,
+					10
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "cube_scene",
+				"pos": [
+					2,
+					1,
+					10
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "cube_scene",
+				"pos": [
+					3,
+					1,
+					10
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "cube_scene",
+				"pos": [
+					4,
+					1,
+					10
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "prism_block",
+				"pos": [
+					5,
+					1,
+					10
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "prism_block",
+				"pos": [
+					6,
+					1,
+					10
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "dark_sphere",
+				"pos": [
+					2,
+					1,
+					13
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "prism_block",
+				"pos": [
+					1,
+					1,
+					15
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "prism_block",
+				"pos": [
+					5,
+					1,
+					15
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "prism_block",
+				"pos": [
+					3,
+					1,
+					16
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [],
+		"issues": [
+			{
+				"description": "Teleporter at (1,0,14) unreachable from spawn",
+				"severity": "critical",
+				"type": "unreachable_teleporter"
+			},
+			{
+				"description": "chair_assembly_puzzle at (3,2,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "clipboard at (4,2,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "scale_me at (3,1,8) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "prism_block at (0,1,10) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "prism_block at (1,1,10) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "cube_scene at (2,1,10) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "cube_scene at (3,1,10) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "cube_scene at (4,1,10) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "prism_block at (5,1,10) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "prism_block at (6,1,10) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "dark_sphere at (2,1,13) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "prism_block at (1,1,15) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "prism_block at (5,1,15) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "prism_block at (3,1,16) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Trans_Scale",
+		"pacing": {
+			"density": 0.0,
+			"reachable_artifacts": 0,
+			"total_artifacts": 14,
+			"walkable_tiles": 131
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			6,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": -1,
+			"pos": [
+				1,
+				0,
+				14
+			],
+			"reachable": false
+		}
+	},
+	"map_name": "Trans_Scale",
+	"sequence": "transformation",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "chair_assembly_puzzle",
+				"pos": [
+					3,
+					2,
+					4
+				]
+			},
+			{
+				"name": "clipboard",
+				"pos": [
+					4,
+					2,
+					4
+				]
+			},
+			{
+				"name": "scale_me",
+				"pos": [
+					3,
+					1,
+					8
+				]
+			},
+			{
+				"name": "prism_block",
+				"pos": [
+					0,
+					1,
+					10
+				]
+			},
+			{
+				"name": "prism_block",
+				"pos": [
+					1,
+					1,
+					10
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					2,
+					1,
+					10
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					3,
+					1,
+					10
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					4,
+					1,
+					10
+				]
+			},
+			{
+				"name": "prism_block",
+				"pos": [
+					5,
+					1,
+					10
+				]
+			},
+			{
+				"name": "prism_block",
+				"pos": [
+					6,
+					1,
+					10
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					2,
+					1,
+					13
+				]
+			},
+			{
+				"name": "prism_block",
+				"pos": [
+					1,
+					1,
+					15
+				]
+			},
+			{
+				"name": "prism_block",
+				"pos": [
+					5,
+					1,
+					15
+				]
+			},
+			{
+				"name": "prism_block",
+				"pos": [
+					3,
+					1,
+					16
+				]
+			}
+		],
+		"dimensions": [
+			7,
+			5,
+			21
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 131,
+			"ground_pct": 89.1156462585034,
+			"void": 13,
+			"walls": 3
+		},
+		"map_name": "Trans_Scale",
+		"rooms": [
+			{
+				"artifacts": [
+					"scale_me",
+					"prism_block",
+					"prism_block",
+					"cube_scene",
+					"cube_scene",
+					"cube_scene",
+					"prism_block",
+					"prism_block",
+					"dark_sphere",
+					"prism_block",
+					"prism_block",
+					"prism_block"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 130
+			}
+		],
+		"spawn": [
+			6,
+			1,
+			0
+		],
+		"teleporter": [
+			1,
+			0,
+			14
+		]
+	},
+	"timestamp": "2026-03-16T12:12:34",
+	"walkthrough": {
+		"map_name": "Trans_Scale",
+		"stops": [
+			{
+				"facing": "south",
+				"look_at": [
+					1,
+					0,
+					14
+				],
+				"pos": [
+					6,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southwest",
+						"dist": 6,
+						"name": "clipboard"
+					},
+					{
+						"direction": "southwest",
+						"dist": 7,
+						"name": "chair_assembly_puzzle"
+					},
+					{
+						"direction": "south",
+						"dist": 10,
+						"name": "prism_block"
+					},
+					{
+						"direction": "south",
+						"dist": 11,
+						"name": "scale_me"
+					},
+					{
+						"direction": "south",
+						"dist": 11,
+						"name": "prism_block"
+					},
+					{
+						"direction": "south",
+						"dist": 12,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "south",
+						"dist": 13,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "south",
+						"dist": 16,
+						"name": "prism_block"
+					},
+					{
+						"direction": "south",
+						"dist": 17,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "south",
+						"dist": 19,
+						"name": "prism_block"
+					},
+					{
+						"direction": "south",
+						"dist": 20,
+						"name": "prism_block"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"pos": [
+					1,
+					0,
+					14
+				],
+				"reachable": false,
+				"steps_from_prev": 0,
+				"total_steps": 0,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 0,
+			"total_steps": 0,
+			"total_stops": 2
+		}
+	}
+}

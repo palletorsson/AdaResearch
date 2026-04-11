@@ -7,11 +7,11 @@ var frequency = 2.0
 var amplitude = 2.0
 var string_length = 10.0
 
-func _ready():
+func _ready() -> void:
 	create_wave_nodes()
 	setup_materials()
 
-func create_wave_nodes():
+func create_wave_nodes() -> void:
 	var wave_nodes_parent = $WaveNodes
 	
 	for i in range(node_count):
@@ -23,7 +23,7 @@ func create_wave_nodes():
 		wave_nodes_parent.add_child(node_sphere)
 		wave_nodes.append(node_sphere)
 
-func setup_materials():
+func setup_materials() -> void:
 	# String material
 	var string_material = StandardMaterial3D.new()
 	string_material.albedo_color = Color(0.6, 0.6, 0.6, 1.0)
@@ -61,12 +61,12 @@ func setup_materials():
 	amp_material.emission = Color(0.2, 0.3, 0.05, 1.0)
 	$AmplitudeIndicator.material_override = amp_material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	animate_standing_wave()
 	animate_indicators()
 
-func animate_standing_wave():
+func animate_standing_wave() -> void:
 	# Standing wave pattern: A(x) * sin(ωt)
 	# where A(x) = 2 * amplitude * sin(kx) and k = nπ/L
 	var wave_number = frequency * PI / string_length
@@ -93,7 +93,7 @@ func animate_standing_wave():
 		if node_material:
 			node_material.emission = Color(0.1 * intensity, 0.3 * intensity, 0.4 * intensity, 1.0)
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Frequency indicator - height represents frequency
 	var freq_height = frequency * 0.5
 	var frequencyindicator = get_node_or_null("FrequencyIndicator")
@@ -111,3 +111,12 @@ func animate_indicators():
 	# Slowly vary parameters for demonstration
 	frequency = 2.0 + sin(time * 0.3) * 1.0
 	amplitude = 2.0 + cos(time * 0.2) * 1.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

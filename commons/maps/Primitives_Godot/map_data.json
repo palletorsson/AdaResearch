@@ -14,37 +14,8 @@
       "difficulty": "beginner",
       "category": "primitives",
       "estimated_time": "5 minutes",
-      "learning_objectives": [ "Godot primitives", "Mesh segments", "Tessellation", "Low poly vs high poly" ]
+      "learning_objectives": ["Godot primitives", "Mesh segments", "Tessellation", "Low poly vs high poly"]
     }
-  },
-  "documentation": {
-    "summary": "Primitives_Godot - Built-in Mesh Gallery",
-    "layout": "9x5 platform showcasing Godot's built-in mesh types with varying segment counts",
-    "objective": "Understand how segment parameters affect mesh appearance and performance",
-    "key_elements": [ "Sphere variations (low/mid/high poly) demonstrating rings and radial segments", "Cylinder variations showing radial segment differences", "Torus with low segment count revealing donut structure", "Capsule and Box meshes as reference primitives", "Teleporter at exit" ]
-  },
-  "layers": {
-    "structure": [
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "0", "0", "0" ]
-    ],
-    "utilities": [
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", "t", " ", " " ]
-    ],
-    "interactables": [
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ "sphere_low", "sphere_mid", "sphere_high", " ", "cylinder_low", "cylinder_mid", " ", "torus_low", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ "sphere", " ", "cylinder", " ", "capsule", " ", "torus", " ", "cube" ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ]
-    ]
   },
   "utility_definitions": {
     "t": {
@@ -56,13 +27,19 @@
       }
     }
   },
+  "documentation": {
+    "summary": "Primitives_Godot - Built-in Mesh Gallery",
+    "layout": "9x5 platform showcasing Godot's built-in mesh types with varying segment counts",
+    "objective": "Understand how segment parameters affect mesh appearance and performance",
+    "key_elements": ["Sphere variations (low/mid/high poly) demonstrating rings and radial segments", "Cylinder variations showing radial segment differences", "Torus with low segment count revealing donut structure", "Capsule and Box meshes as reference primitives", "Teleporter at exit"]
+  },
   "lighting": {
-    "ambient_color": [ 0.5, 0.5, 0.6 ],
+    "ambient_color": [0.5, 0.5, 0.6],
     "ambient_energy": 0.7,
     "directional_light": {
       "enabled": true,
-      "direction": [ -0.3, -0.7, -0.5 ],
-      "color": [ 1.0, 0.95, 0.9 ],
+      "direction": [-0.3, -0.7, -0.5],
+      "color": [1.0, 0.95, 0.9],
       "energy": 1.3
     }
   },
@@ -75,7 +52,30 @@
     "initial_tile_visibility": "all_visible",
     "background": {
       "type": "sky",
-      "color": [ 0.3, 0.4, 0.7 ]
+      "color": [0.3, 0.4, 0.7]
     }
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "0", "0", "0"]
+    ],
+    "utilities": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", "t", " ", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", "library_rack:0:0#collection:primitives#layout:rack_layout.json"],
+      ["sphere_low", "sphere_mid", "sphere_high", " ", "cylinder_low", "cylinder_mid", " ", "torus_low", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      ["sphere", " ", "cylinder", " ", "capsule", " ", "torus", " ", "cube"],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    ]
   }
 }

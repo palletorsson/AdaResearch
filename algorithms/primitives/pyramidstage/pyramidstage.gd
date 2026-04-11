@@ -19,10 +19,10 @@ var obelisk_color = Color(0.9, 0.47, 0.63, 0.86)  # Pink/rose with transparency
 var small_pyramid_color = Color(0.59, 0.71, 0.86)  # Light blue
 var cube_color = Color(0.8, 0.63, 0.27)  # Golden
 
-func _ready():
+func _ready() -> void:
 	create_pyramid_stage()
 
-func create_pyramid_stage():
+func create_pyramid_stage() -> void:
 	"""Create the pyramid stage composition"""
 	create_base_plinth()
 	create_central_pyramid()
@@ -31,7 +31,7 @@ func create_pyramid_stage():
 	add_camera_and_light()
 	print("PyramidStage: Created obelisk-style pyramid stage")
 
-func create_base_plinth():
+func create_base_plinth() -> void:
 	"""Create the base platform (scaled cube)"""
 	var cube_scene = load(CUBE_SCENE_PATH)
 	if not cube_scene:
@@ -49,7 +49,7 @@ func create_base_plinth():
 		
 		add_child(plinth)
 
-func create_central_pyramid():
+func create_central_pyramid() -> void:
 	"""Create the central tall pyramid (obelisk)"""
 	var pyramid_scene = load(PYRAMID_SCENE_PATH)
 	if not pyramid_scene:
@@ -67,7 +67,7 @@ func create_central_pyramid():
 		
 		add_child(obelisk)
 
-func create_corner_pyramids():
+func create_corner_pyramids() -> void:
 	"""Create four smaller pyramids at corners"""
 	var pyramid_scene = load(PYRAMID_SCENE_PATH)
 	if not pyramid_scene:
@@ -93,7 +93,7 @@ func create_corner_pyramids():
 			
 			add_child(pyramid)
 
-func create_golden_cubes():
+func create_golden_cubes() -> void:
 	"""Create four golden cubes around the central obelisk"""
 	var cube_scene = load(CUBE_SCENE_PATH)
 	if not cube_scene:
@@ -122,7 +122,7 @@ func create_golden_cubes():
 
 # Helper functions
 
-func _apply_color_to_object(object: Node3D, color: Color):
+func _apply_color_to_object(object: Node3D, color: Color) -> void:
 	"""Apply color to an object using various methods"""
 	# Try different color application methods
 	if object.has_method("set_base_color"):
@@ -133,7 +133,7 @@ func _apply_color_to_object(object: Node3D, color: Color):
 		# Try to find and modify materials directly
 		_apply_color_to_mesh_materials(object, color)
 
-func _apply_color_to_mesh_materials(node: Node3D, color: Color):
+func _apply_color_to_mesh_materials(node: Node3D, color: Color) -> void:
 	"""Recursively find MeshInstance3D nodes and apply color"""
 	for child in node.get_children():
 		if child is MeshInstance3D:
@@ -147,7 +147,7 @@ func _apply_color_to_mesh_materials(node: Node3D, color: Color):
 		elif child is Node3D:
 			_apply_color_to_mesh_materials(child, color)
 
-func add_camera_and_light():
+func add_camera_and_light() -> void:
 	"""Add camera and lighting to the scene"""
 	# Directional light
 	var sun = DirectionalLight3D.new()
@@ -168,3 +168,12 @@ func add_camera_and_light():
 	e.ambient_light_energy = 0.3
 	env.environment = e
 	add_child(env)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

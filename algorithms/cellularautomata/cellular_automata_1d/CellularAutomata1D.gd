@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Preload the cube scene
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
@@ -18,7 +18,7 @@ var walls = []  # Array of wall data {cells, current_state, history, rule, direc
 var wall_rules = [30, 110, 90, 150]  # Different rule for each wall
 var wall_names = ["North", "South", "East", "West"]
 
-func _ready():
+func _ready() -> void:
 	print("Cellular Automata 1D - Wall Pattern initialized")
 	# Remove unused nodes
 	if has_node("RuleTable"):
@@ -31,7 +31,7 @@ func _ready():
 	create_four_walls()
 	initialize_all_walls()
 
-func create_four_walls():
+func create_four_walls() -> void:
 	# Create parent node for walls
 	var walls_parent = $AutomatonGrid
 
@@ -57,7 +57,7 @@ func create_four_walls():
 
 		walls.append(wall_data)
 
-func initialize_all_walls():
+func initialize_all_walls() -> void:
 	# Initialize each wall with a starting pattern
 	for wall_idx in range(4):
 		var wall = walls[wall_idx]
@@ -75,7 +75,7 @@ func initialize_all_walls():
 	current_generation = 0
 	update_all_walls_display()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	generation_timer += delta
 	rule_timer += delta
@@ -92,7 +92,7 @@ func _process(delta):
 
 	animate_walls(delta)
 
-func generate_next_generation_all_walls():
+func generate_next_generation_all_walls() -> void:
 	# Generate next generation for each wall with its own rule
 	for wall in walls:
 		var new_state = []
@@ -118,16 +118,16 @@ func apply_rule(neighborhood: int, rule_number: int) -> int:
 	# Apply elementary cellular automaton rule
 	return (rule_number >> neighborhood) & 1
 
-func reset_all_walls():
+func reset_all_walls() -> void:
 	# Reset and optionally rotate rules
 	initialize_all_walls()
 
-func update_all_walls_display():
+func update_all_walls_display() -> void:
 	# Update display for all 4 walls
 	for wall_idx in range(4):
 		update_wall_display(wall_idx)
 
-func update_wall_display(wall_idx: int):
+func update_wall_display(wall_idx: int) -> void:
 	var wall = walls[wall_idx]
 
 	# Update all visible generations for this wall
@@ -185,7 +185,7 @@ func get_wall_color(wall_idx: int) -> Color:
 		_:
 			return Color(1.0, 1.0, 1.0, 1.0)
 
-func animate_walls(_delta):
+func animate_walls(_delta) -> void:
 	# Animate current generation row on all walls
 	if current_generation < grid_height:
 		for wall in walls:
@@ -195,3 +195,12 @@ func animate_walls(_delta):
 					# Pulse animation for newest generation
 					var pulse = 1.0 + sin(time * 5.0 + x * 0.3) * 0.15
 					cell.scale = Vector3.ONE * pulse
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

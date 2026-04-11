@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: for i in range(4): cube.position = Vector3(i × spacing, 0, 0) with label "[i]" — a 1D array of four pickup cubes along the X axis, backed by a 1-row BinaryTableDisplay that turns to 0 when a cube is grabbed
+# desire: to walk along an array in the X direction and feel that index increases as you move right — to then grab a cube and see the binary table update, closing the loop between physical action and data representation
+# critical_parameter: show_binary_table — when true, a 1-row × 4-column "array[i]" table hovers above the row; picking up cube [2] changes the table cell at column 2 from 1 to 0, showing that the cube is the data
+# triggers: tree_exiting signal on each cube fires _on_cube_removed(index) → sets array_data[0][index] = 0 → calls binary_table.set_cell(0, index, 0) — every grab is a write operation to a 1D array
+# emerges: the single-row binary table labeled "array[i]" makes explicit that a row of objects IS an array — the visualization and the physical layout are the same data structure rendered in two different media
+# needs: pickup cubes [has]; Label3D index labels [has]; BinaryTableDisplay [has]; apply_grid_config supports count/spacing/label overrides [has]; no VR controls beyond grabbing [missing]
+# relationships: same architecture as column_3_z but oriented along X instead of Z, and with binary table companion; both appear in Tutorial_2D_Build to show X and Z axes as independent array dimensions; precedes grid_2d_4x4
+# truth: a 1D array is a line of values — row_3_x makes this literal by arranging physical objects along an axis and labeling them with their distance from the origin
+
 # Row of 4 cubes arranged in X direction
 # Each cube is spaced 1 unit apart
 
@@ -15,12 +25,12 @@ var _binary_table: Node3D = null
 # Track cube references by index
 var _cube_refs: Dictionary = {}  # index -> cube_instance
 
-func _ready():
+func _ready() -> void:
 	create_row()
 	if show_binary_table:
 		_create_binary_table()
 
-func create_row():
+func create_row() -> void:
 	# Load the pickup cube scene
 	var pickup_cube_scene = preload("res://commons/scenes/mapobjects/pick_up_cube.tscn")
 
@@ -57,7 +67,7 @@ func create_row():
 
 		add_child(cube_instance)
 
-func _create_binary_table():
+func _create_binary_table() -> void:
 	# Load the binary table display scene
 	var table_scene = load("res://algorithms/arrays/binary_table/binary_table_display.tscn")
 	if not table_scene:
@@ -100,3 +110,57 @@ func _on_cube_removed(index: int) -> void:
 	# Remove from tracking
 	if _cube_refs.has(index):
 		_cube_refs.erase(index)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	if config.is_empty():
+		return
+	var count = int(config["count"]) if config.has("count") else 4
+	var spacing = float(config["spacing"]) if config.has("spacing") else 1.0
+	var label_size = int(config["label_size"]) if config.has("label_size") else 24
+	var label_color = Color.from_string(config["label_color"], Color(1.0, 0.7, 0.8)) if config.has("label_color") else Color(1.0, 0.7, 0.8)
+	if config.has("show_binary_table"):
+		show_binary_table = config["show_binary_table"] is bool and config["show_binary_table"]
+
+	# Rebuild
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+	_cube_refs.clear()
+	_binary_table = null
+	await get_tree().process_frame
+
+	var pickup_cube_scene = preload("res://commons/scenes/mapobjects/pick_up_cube.tscn")
+	array_data = []
+	var row_data: Array = []
+	for i in range(count):
+		row_data.append(1)
+	array_data.append(row_data)
+
+	for i in range(count):
+		var cube_instance = pickup_cube_scene.instantiate()
+		cube_instance.name = "Cube_" + str(i)
+		cube_instance.position = Vector3(i * spacing, 0, 0)
+		cube_instance.set_meta("array_index", i)
+		cube_instance.tree_exiting.connect(_on_cube_removed.bind(i))
+		_cube_refs[i] = cube_instance
+
+		var label = Label3D.new()
+		label.text = "[%d]" % i
+		label.font_size = label_size
+		label.pixel_size = 0.003
+		label.outline_size = 0
+		label.position = Vector3(0, 1.0, 0)
+		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		label.modulate = label_color
+		cube_instance.add_child(label)
+
+		add_child(cube_instance)
+
+	if show_binary_table:
+		_create_binary_table()

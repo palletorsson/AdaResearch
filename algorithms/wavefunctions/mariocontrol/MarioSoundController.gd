@@ -5,6 +5,17 @@ extends Node3D
 ## Controls various synthesis parameters via a 3D ball (ValueMapper3D)
 
 # Load PickupCube class to access static functions for Mario mode compatibility
+
+# @identity
+# essence: waveform(t) = generator(p1, p2, p3, t) where generator in {sweep, noise, square, FM}
+# desire: Grab a ball in VR and hear game sound effects respond to your hand position
+# critical_parameter: mode — switches between Mario jump, coin, laser, explosion, powerup generators
+# triggers: ball movement maps 3D position to three synthesis parameters per mode
+# emerges: retro game audio vocabulary from basic waveform mathematics
+# needs: VR ball grab [has], mode switching [has]
+# relationships: depends on AudioStreamPlayer3D; contrasts with DualBallFMController (preset modes vs free FM); unlocks game audio literacy
+# truth: Every game sound is a parametric function of time with at most three degrees of freedom.
+
 const PickupCube = preload("res://commons/scenes/mapobjects/pick_up_cube.gd")
 
 enum SoundMode { MARIO, SINE_BELL, LASER_ZAP, TECHNO_KICK, NOISE_BURST }
@@ -67,7 +78,7 @@ func _process(_delta: float) -> void:
 			last_play_time = current_time
 		last_ball_position = current_pos
 
-func _update_mapper_config():
+func _update_mapper_config() -> void:
 	if not value_mapper: return
 	
 	match mode:
@@ -107,7 +118,7 @@ func _update_mapper_config():
 	if value_mapper.has_method("_update_output"):
 		value_mapper.call("_update_output")
 
-func apply_grid_config(data: Dictionary):
+func apply_grid_config(data: Dictionary) -> void:
 	print("UniversalSound: Config received: %s" % data)
 	if data.has("mode"):
 		var m_str = data.mode.to_upper()
@@ -190,7 +201,7 @@ func _generate_sound() -> AudioStreamWAV:
 	stream.data = data
 	return stream
 
-func _create_preview_cube():
+func _create_preview_cube() -> void:
 	preview_cube = MeshInstance3D.new()
 	preview_cube.mesh = BoxMesh.new(); preview_cube.mesh.size = Vector3(0.2, 0.2, 0.2)
 	preview_cube.position = Vector3(0, -0.5, 0)
@@ -204,18 +215,24 @@ func _create_preview_cube():
 	label.scale = Vector3.ONE * 0.08
 	add_child(label)
 
-func _pulse_preview_cube():
+func _pulse_preview_cube() -> void:
 	if not preview_cube: return
 	var tween = create_tween()
 	tween.tween_property(preview_cube, "scale", Vector3.ONE * 1.5, 0.1)
 	tween.tween_property(preview_cube, "scale", Vector3.ONE, 0.4)
 
-func _setup_auto_save_timer():
+func _setup_auto_save_timer() -> void:
 	auto_save_timer = Timer.new()
 	auto_save_timer.wait_time = save_interval; auto_save_timer.autostart = true
 	auto_save_timer.timeout.connect(_on_auto_save_timeout)
 	add_child(auto_save_timer)
 
-func _on_auto_save_timeout():
+func _on_auto_save_timeout() -> void:
 	if mode == SoundMode.MARIO:
 		PickupCube.set_shared_mario_parameters(p1, p2, p3, sound_duration)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

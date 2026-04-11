@@ -1,4 +1,15 @@
 extends Node3D
+
+# @identity
+# essence: Q(s,a) ← Q(s,a) + α[r + γ·max_a' Q(s',a') - Q(s,a)] — tabular Q-learning for joint torques
+# desire: watch a random-limbed creature teach itself to walk through trial and error in VR
+# critical_parameter: exploration_rate (ε) — too high and the creature flails forever; too low and it gets stuck in a local gait
+# triggers: each update_frequency tick evaluates reward (distance traveled) and updates Q-table; exploration_decay shrinks ε over time
+# emerges: locomotion gaits nobody designed — the creature discovers how to use its own body
+# needs: VR controls [missing] — exported params but no spatial sliders
+# relationships: contrasts evolved_creatures (RL adapts behavior, EA adapts morphology); depends on gradient_descent_visualization (both are optimization)
+# truth: an agent does not need to understand its body to learn to use it — reward is the only teacher
+
 ## Reinforcement Learning Creature with Random Joints
 ## Creates a procedural creature that learns to walk using Q-learning.
 ## Joint torques are discovered through exploration / exploitation,
@@ -55,7 +66,7 @@ var path_instance = null
 var ui_root
 var stats_label
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	
 	# Create the environment
@@ -83,7 +94,7 @@ func _ready():
 	# Start training
 	start_learning()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Update timer
 	timer += delta
 	
@@ -107,7 +118,7 @@ func _process(delta):
 		timer = 0.0
 		update_learning()
 
-func create_environment():
+func create_environment() -> void:
 	# Create a floor
 	var floor_mesh = PlaneMesh.new()
 	floor_mesh.size = Vector2(50.0, 50.0)
@@ -144,7 +155,7 @@ func create_environment():
 	camera.rotation = Vector3(-0.2, 0, 0)
 	add_child(camera)
 
-func create_grid():
+func create_grid() -> void:
 	# Create a grid on the floor for distance reference
 	var grid_lines = ImmediateMesh.new()
 	var grid_instance = MeshInstance3D.new()
@@ -174,7 +185,7 @@ func create_grid():
 	grid_lines.surface_end()
 	add_child(grid_instance)
 
-func create_debug_visualization():
+func create_debug_visualization() -> void:
 	# Create a node for path visualization
 	path_instance = ImmediateMesh.new()
 	var path_mesh_instance = MeshInstance3D.new()
@@ -207,11 +218,11 @@ func create_debug_visualization():
 	
 	add_child(start_marker)
 
-func add_path_point(point):
+func add_path_point(point) -> void:
 	path_points.append(Vector3(point.x, 0.05, point.z))  # Keep y slightly above floor
 	update_path_visualization()
 
-func update_path_visualization():
+func update_path_visualization() -> void:
 	# Set start marker position
 	if start_marker:
 		start_marker.position = Vector3(starting_position.x, 0.2, starting_position.z)
@@ -226,7 +237,7 @@ func update_path_visualization():
 		
 		path_instance.surface_end()
 
-func create_ui():
+func create_ui() -> void:
 	# 2D overlay for stats
 	ui_root = Control.new()
 	ui_root.name = "UI"
@@ -252,7 +263,7 @@ func create_ui():
 	label_3d.text = "RL Creature"
 	add_child(label_3d)
 
-func update_ui():
+func update_ui() -> void:
 	var text = "Episode: %d\n" % episode_count
 	text += "Distance: %.2f\n" % current_distance
 	text += "Reward: %.2f\n" % episode_reward
@@ -267,7 +278,7 @@ func update_ui():
 	
 	stats_label.text = text
 
-func create_body():
+func create_body() -> void:
 	# Create the core/center body
 	core_body = create_core()
 	
@@ -420,7 +431,7 @@ func create_joint(body_a, body_b, joint_position):
 	add_child(joint)
 	return joint
 
-func initialize_learning():
+func initialize_learning() -> void:
 	# Initialize state vector (joint angles and body velocities)
 	state = []
 	for joint in joints:
@@ -433,7 +444,7 @@ func initialize_learning():
 	for i in range(joints.size() * 3):  # 3 axes per joint
 		action.append(0.0)
 
-func start_learning():
+func start_learning() -> void:
 	# Initialize state
 	update_state()
 	
@@ -441,7 +452,7 @@ func start_learning():
 	exploration_rate = 1.0
 	choose_action()
 
-func update_state():
+func update_state() -> void:
 	# Update state vector with current joint angles and body velocities
 	state = []
 	for joint in joints:
@@ -489,7 +500,7 @@ func get_state_key():
 	# Convert state vector to string key for q-table
 	return str(state)
 
-func choose_action():
+func choose_action() -> void:
 	var state_key = get_state_key()
 	
 	# Initialize state in q_table if not exists
@@ -510,7 +521,7 @@ func choose_action():
 	# Apply action (torques to joints)
 	apply_action()
 
-func apply_action():
+func apply_action() -> void:
 	# Apply torques to each joint based on action vector
 	var action_idx = 0
 	for joint_idx in range(joints.size()):
@@ -548,7 +559,7 @@ func apply_action():
 		
 		action_idx += 3
 
-func update_learning():
+func update_learning() -> void:
 	# Make sure core body exists
 	if not core_body or not is_instance_valid(core_body):
 		return
@@ -618,7 +629,7 @@ func is_stuck():
 	# Check if the creature is stuck (not moving for a while)
 	return current_distance < 0.1 and episode_reward > 10.0
 
-func end_episode():
+func end_episode() -> void:
 	episode_count += 1
 	print("Episode %d ended. Total reward: %.2f, Distance: %.2f" % [episode_count, episode_reward, current_distance])
 	
@@ -665,7 +676,7 @@ func end_episode():
 	choose_action()
 
 # Input for debugging and control
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed:
 			if event.keycode == KEY_SPACE:
@@ -674,3 +685,12 @@ func _input(event):
 			elif event.keycode == KEY_E:
 				# Toggle exploration mode
 				exploration_rate = 1.0 if exploration_rate < 0.5 else 0.01
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

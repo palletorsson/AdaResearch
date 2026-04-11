@@ -1,0 +1,3 @@
+Vectors aim turrets. Subtract the target position from the turret position and you get the direction to fire. Normalize it and you get the unit vector — pure direction without magnitude. Check the dot product against the turret's forward vector and you know if the target is in range. Every operation from the previous maps finds a job.
+
+Vector fields fill space with arrows. Wind pushes rain sideways. Currents carry particles in spirals. A weather system overlays gravity, wind, and turbulence — each point in space has a force direction and magnitude. Walk through the field and watch particles respond. The math that was abstract in the operations map now moves things.

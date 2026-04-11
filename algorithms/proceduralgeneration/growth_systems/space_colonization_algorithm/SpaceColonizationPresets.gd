@@ -17,10 +17,10 @@ class_name SpaceColonizationPresets
 
 @export var base_colonization: Node3D
 
-func _ready():
+func _ready() -> void:
     setup_colonization()
 
-func apply_preset():
+func apply_preset() -> void:
     if not base_colonization:
         return
     
@@ -67,7 +67,7 @@ func apply_preset():
             base_colonization.branch_color = Color(0.9, 0.9, 0.5)
             base_colonization.origin_type = 3  # Base
 
-func setup_colonization():
+func setup_colonization() -> void:
     if not base_colonization:
         base_colonization = get_node_or_null("SpaceColonization")
     
@@ -81,3 +81,12 @@ func setup_colonization():
         # base_colonization.set_script(...)
     
     apply_preset()
+
+func _exit_tree() -> void:
+    for child in get_children():
+        if not child.owner:
+            child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+    pass

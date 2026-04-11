@@ -26,7 +26,17 @@ var camera_distance: float = 8.0
 var camera_angle: float = 0.0
 var camera_height: float = 5.0
 
-func _ready():
+# @identity
+# essence: Desktop UI controller for tessellating portal — sliders for radius, thickness, block size, color, emission, animation
+# desire: To let players tune a dimensional gateway: adjust portal geometry and see non-Euclidean space respond in real time
+# critical_parameter: portal_type — which tessellation pattern tiles through the portal; each creates different infinite-room topology
+# triggers: Radius change rescales the gateway; animation toggle starts rotation; randomize produces surprising configurations
+# emerges: Infinite non-Euclidean architecture from a finite portal mesh and seamless camera stitching
+# needs: Desktop UI sliders [has], color picker [has], animation toggle [has], camera orbit [has], VR controls [missing]
+# relationships: Controller for tessellating_portal_demo in higher_dimensions. Synthesis of projection, nets, and topology.
+# truth: The portal does not connect two rooms — it proves that the room was never bounded in the first place.
+
+func _ready() -> void:
 	# Connect UI signals
 	portal_type_option.item_selected.connect(_on_portal_type_selected)
 	radius_slider.value_changed.connect(_on_radius_changed)
@@ -43,65 +53,65 @@ func _ready():
 	_update_ui()
 	_update_stats()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Rotate camera around the portal
 	camera_angle += delta * 0.2
 	_update_camera_position()
 
-func _update_camera_position():
+func _update_camera_position() -> void:
 	var x = cos(camera_angle) * camera_distance
 	var z = sin(camera_angle) * camera_distance
 	camera.position = Vector3(x, camera_height, z)
 	camera.look_at(Vector3.ZERO, Vector3.UP)
 
-func _on_portal_type_selected(index: int):
+func _on_portal_type_selected(index: int) -> void:
 	portal.portal_type = index
 	if portal_type_label:
 		portal_type_label.text = "Portal Type: " + portal_type_option.get_item_text(index)
 	_update_stats()
 
-func _on_radius_changed(value: float):
+func _on_radius_changed(value: float) -> void:
 	portal.portal_radius = value
 	if radius_label:
 		radius_label.text = "Radius: " + "%.1f" % value
 	_update_stats()
 
-func _on_thickness_changed(value: float):
+func _on_thickness_changed(value: float) -> void:
 	portal.portal_thickness = value
 	if thickness_label:
 		thickness_label.text = "Thickness: " + "%.1f" % value
 	_update_stats()
 
-func _on_block_size_changed(value: float):
+func _on_block_size_changed(value: float) -> void:
 	portal.block_size = value
 	if block_size_label:
 		block_size_label.text = "Block Size: " + "%.2f" % value
 	_update_stats()
 
-func _on_color_changed(color: Color):
+func _on_color_changed(color: Color) -> void:
 	portal.portal_color = color
 
-func _on_emission_changed(value: float):
+func _on_emission_changed(value: float) -> void:
 	portal.emission_strength = value
 	if emission_label:
 		emission_label.text = "Emission Strength: " + "%.1f" % value
 
-func _on_animation_toggled(pressed: bool):
+func _on_animation_toggled(pressed: bool) -> void:
 	portal.animate_rotation = pressed
 
-func _on_speed_changed(value: float):
+func _on_speed_changed(value: float) -> void:
 	portal.rotation_speed = value
 	if speed_label:
 		speed_label.text = "Rotation Speed: " + "%.1f" % value
 
-func _on_regenerate_pressed():
+func _on_regenerate_pressed() -> void:
 	portal.regenerate()
 	_update_stats()
 
-func _on_randomize_pressed():
+func _on_randomize_pressed() -> void:
 	_randomize_parameters()
 
-func _update_ui():
+func _update_ui() -> void:
 	"""Update UI to reflect current portal settings"""
 	portal_type_option.selected = portal.portal_type
 	radius_slider.value = portal.portal_radius
@@ -112,7 +122,7 @@ func _update_ui():
 	animation_checkbox.button_pressed = portal.animate_rotation
 	speed_slider.value = portal.rotation_speed
 
-func _update_stats():
+func _update_stats() -> void:
 	"""Update statistics display"""
 	if not stats_label:
 		return
@@ -123,7 +133,7 @@ func _update_stats():
 	stats_label.text += "Thickness: " + "%.1f" % stats["portal_thickness"] + "\n"
 	stats_label.text += "Block Size: " + "%.2f" % stats["block_size"]
 
-func _randomize_parameters():
+func _randomize_parameters() -> void:
 	"""Randomize portal parameters for variety"""
 	portal.portal_type = randi() % 6
 	portal.portal_radius = randf_range(2.0, 8.0)
@@ -141,7 +151,7 @@ func _randomize_parameters():
 	_update_stats()
 
 # Input handling for camera control
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			camera_distance = max(3.0, camera_distance - 0.5)
@@ -150,3 +160,6 @@ func _input(event):
 		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			# Click to randomize parameters
 			_randomize_parameters()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

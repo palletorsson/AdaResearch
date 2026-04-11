@@ -4,17 +4,17 @@ extends CharacterBody3D
 
 @export var maze_generator: Node3D
 
-func _ready():
+func _ready() -> void:
 	if not maze_generator:
 		maze_generator = get_parent().get_node("MazeGenerator")
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space key
 		debug_current_position()
 	if event.is_action_pressed("ui_cancel"):  # Escape key
 		debug_maze_info()
 
-func debug_current_position():
+func debug_current_position() -> void:
 	var pos = global_position
 	var is_wall = maze_generator.is_wall_at_position(pos)
 	var is_floor = maze_generator.is_floor_at_position(pos)
@@ -31,7 +31,7 @@ func debug_current_position():
 	print("Floor collider name: ", floor_collider.name if floor_collider else "None")
 	print("=============================")
 
-func debug_maze_info():
+func debug_maze_info() -> void:
 	var info = maze_generator.debug_collision_info()
 	print("=== MAZE INFO ===")
 	print("Total walls with collision: ", info.total_walls)
@@ -55,3 +55,6 @@ func _physics_process(_delta):
 	
 	velocity = input_dir * 5.0
 	move_and_slide()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

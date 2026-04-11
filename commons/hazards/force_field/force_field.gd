@@ -1,3 +1,13 @@
+# @identity
+# essence: effect(player, mediator) = hazard XOR benefit -- dual-nature zone where context determines outcome
+# desire: a force field that burns or warms, poisons or reveals, depending on what the player brings
+# critical_parameter: mediator_object presence -- same field produces opposite effects based on relational context
+# triggers: player enters Area3D; field checks for mediator; mode determined by carried objects
+# emerges: Q-FEP made spatial -- identical potential under different constraint produces opposite outcomes
+# needs: Area3D [has]; mediator detection [has]; multi-mode effects [has]; VR interaction [missing]
+# relationships: central Q-FEP demonstration; pairs with plasma_critter (creature vs zone dual-nature)
+# truth: the force that burns also warms -- constraint determines outcome, not the force itself.
+
 # ForceField.gd
 # Dual-nature force zone: every hazard is also medicine.
 # In HAZARD mode the force damages. In TRANSMUTED mode it benefits.

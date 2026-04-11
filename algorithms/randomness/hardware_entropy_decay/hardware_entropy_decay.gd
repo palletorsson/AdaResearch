@@ -1,3 +1,13 @@
+# @identity
+# essence: S_hardware = f(velocity, grip, head_rotation) — your body is the entropy source
+# desire: move your hands fast, squeeze the grip, turn your head — and watch surfaces rust and corrode because of you
+# critical_parameter: velocity_to_scratch — how aggressively hand speed maps to scratch intensity on the shader
+# triggers: _sample_hardware() reads XR controller velocity, grip pressure, head angular speed every frame
+# emerges: a feedback loop where curiosity (moving to look) accelerates the decay you came to observe
+# needs: XR controllers [has with fallback]; custom hardware_decay.gdshader [has]; VR RESET/PAUSE buttons [has]
+# relationships: depends on random_decay_multimesh (conceptual); contrasts with entropy_jar (physics-based vs shader-based decay)
+# truth: The observer is not separate from the system — every measurement is an intervention.
+
 extends Node3D
 
 ## Hardware Entropy Decay
@@ -625,3 +635,12 @@ func _physics_process(delta: float) -> void:
 		mesh.rotation.y = _spin_time * speed
 		# Gentle bob
 		mesh.position.y = pedestal_height + 0.5 + sin(_spin_time * 0.5 + i * 1.2) * 0.03
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

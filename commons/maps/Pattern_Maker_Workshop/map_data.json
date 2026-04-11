@@ -1,81 +1,98 @@
 {
-	"map_info": {
-		"name": "Pattern Maker Workshop",
-		"lookup_name": "Pattern_Maker_Workshop",
-		"description": "Interactive wallpaper group station — paint a domain on the upright panel and watch the tiled symmetry unfold on a large floor carpet.",
-		"version": "1.0",
-		"format": "json",
-		"dimensions": {
-			"width": 9,
-			"depth": 9,
-			"max_height": 3
-		},
-		"metadata": {
-			"difficulty": "beginner",
-			"category": "arrays",
-			"estimated_time": "exploration based",
-			"learning_objectives": [
-				"Understand wallpaper groups and plane symmetry",
-				"See how a small domain tiles into a large pattern",
-				"Explore all 17 crystallographic symmetry groups"
-			]
-		}
-	},
-	"layers": {
-		"structure": [
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"],
-			["1","1","1","1","1","1","1","1","1"]
-		],
-		"utilities": [
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," ","t"," "," "," "," "," "],
-			["s"," "," "," "," "," "," "," "," "]
-		],
-		"interactables": [
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," ","pattern_maker_station"," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "],
-			[" "," "," "," "," "," "," "," "," "]
-		]
-	},
-	"settings": {
-		"auto_reveal_on_entry": true,
-		"background": {
-			"color": [0.15, 0.15, 0.2],
-			"type": "sky"
-		},
-		"cube_size": 1.0,
-		"gutter": 0.0,
-		"initial_tile_visibility": "visible",
-		"show_grid": false,
-		"enable_physics": true
-	},
-	"lighting": {
-		"ambient_color": [0.5, 0.5, 0.55],
-		"ambient_energy": 0.7,
-		"directional_light": {
-			"color": [1.0, 0.95, 0.9],
-			"direction": [-0.3, -0.8, -0.3],
-			"enabled": true,
-			"energy": 1.0
-		}
-	}
+  "map_info": {
+      "name": "Pattern Maker Workshop",
+      "lookup_name": "Pattern_Maker_Workshop",
+      "description": "Interactive wallpaper group station — paint a domain on the upright panel and watch the tiled symmetry unfold on a large floor carpet.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 9,
+          "depth": 9,
+          "max_height": 3
+      },
+      "metadata": {
+          "difficulty": "beginner",
+          "category": "arrays",
+          "estimated_time": "exploration based",
+          "learning_objectives": [
+              "Understand wallpaper groups and plane symmetry",
+              "See how a small domain tiles into a large pattern",
+              "Explore all 17 crystallographic symmetry groups"
+          ]
+      },
+      "title": "Symmetry Workshop"
+  },
+  "settings": {
+      "auto_reveal_on_entry": true,
+      "background": {
+          "color": [
+              0.15,
+              0.15,
+              0.2
+          ],
+          "type": "sky"
+      },
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "initial_tile_visibility": "visible",
+      "show_grid": false,
+      "enable_physics": true
+  },
+  "lighting": {
+      "ambient_color": [
+          0.5,
+          0.5,
+          0.55
+      ],
+      "ambient_energy": 0.7,
+      "directional_light": {
+          "color": [
+              1.0,
+              0.95,
+              0.9
+          ],
+          "direction": [
+              -0.3,
+              -0.8,
+              -0.3
+          ],
+          "enabled": true,
+          "energy": 1.0
+      }
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "0", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"]
+    ],
+    "utilities": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", "t", " ", " ", " ", " ", " "],
+      ["s", " ", " ", " ", " ", " ", " ", " ", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", "pattern_maker_station", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    ]
+  }
 }

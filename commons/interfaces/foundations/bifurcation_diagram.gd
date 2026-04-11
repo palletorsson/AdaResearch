@@ -12,6 +12,16 @@ extends Node3D
 
 class_name BifurcationDiagram
 
+# @identity
+# essence: x(n+1) = r·x(n)·(1 - x(n)); period doubling cascade → chaos at r ≈ 3.57
+# desire: walk through the phase transition from order to chaos as r sweeps right
+# critical_parameter: r (mapped to current_r) — the ONE number that controls the entire regime
+# triggers: r crossing 3.0 → bifurcation; r crossing 3.57 → chaos onset; r ≈ 3.83 → window of order inside chaos
+# emerges: Feigenbaum universality — the same constants appear in ALL period-doubling systems
+# needs: VR slider for r [missing] — highlight plane tracks current_r but no physical controller
+# relationships: unlocks lambda_slider (r IS the QFEP lambda); contrasts florensky_sphere (holding contradiction vs cascading into it)
+# truth: the edge of chaos is not a metaphor — it is a precise mathematical boundary where computation is maximized
+
 signal r_changed(r_value: float)
 signal regime_changed(regime: String)
 

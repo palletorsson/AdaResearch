@@ -237,3 +237,12 @@ func _on_wind_slider_moved(_position) -> void:
 
 func _on_drag_slider_moved(_position) -> void:
 	drag_coefficient = _panel.get_slider_value(1)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

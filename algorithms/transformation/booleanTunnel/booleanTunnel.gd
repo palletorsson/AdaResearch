@@ -1,4 +1,15 @@
 extends Node3D
+class_name BooleanTunnel
+
+# @identity
+# essence: hollow_cube[i].rotation_z += i * rotation_per_segment — accumulating rotation carves a twisted corridor
+# desire: learner walks through a tunnel whose walls rotate and understands rotation as spatial grammar
+# critical_parameter: rotation_per_segment — how many degrees each segment adds; at 0° it is a straight box, at 10° a spiral
+# triggers: burst mode toggle and cone taper parameters; optional teleporter at the end fires on entry
+# emerges: the architectural experience of rotation as navigation — the body learns angles by moving through them
+# needs: [has apply_grid_config [has], missing live VR slider for rotation_per_segment]
+# relationships: used as boolean_tunnel in Trans_RotationSpectacle; sibling to hole_with_cones (Boolean topology)
+# truth: accumulated rotation is non-linear — each segment adds to all previous, so the total diverges quickly
 
 @export var cube_scene: PackedScene = preload("res://algorithms/primitives/booleans/booleanHollowCube.tscn")
 var teleport_scene: PackedScene = preload("res://commons/scenes/mapobjects/teleport_scene.tscn")
@@ -29,7 +40,7 @@ var teleport_scene: PackedScene = preload("res://commons/scenes/mapobjects/telep
 var _config_applied := false
 var _generated := false
 
-func _ready():
+func _ready() -> void:
 	# Wait multiple frames for apply_grid_config to potentially be called (it uses call_deferred)
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -39,7 +50,7 @@ func _ready():
 		print("BooleanTunnel: No config received, generating with defaults")
 		generate_tunnel()
 
-func apply_grid_config(config: Dictionary):
+func apply_grid_config(config: Dictionary) -> void:
 	print("BooleanTunnel: Applying grid config: %s" % str(config))
 	_config_applied = true
 	
@@ -93,7 +104,7 @@ func apply_grid_config(config: Dictionary):
 	# Regenerate with new config
 	generate_tunnel()
 
-func generate_tunnel():
+func generate_tunnel() -> void:
 	_generated = true
 	print("BooleanTunnel: Generating tunnel with settings:")
 	print("  - num_segments: %d" % num_segments)
@@ -179,7 +190,7 @@ func generate_tunnel():
 	if enable_teleporter:
 		_create_end_teleporter()
 
-func _create_end_teleporter():
+func _create_end_teleporter() -> void:
 	var teleporter = teleport_scene.instantiate()
 	teleporter.name = "EndTeleporter"
 	
@@ -214,7 +225,7 @@ func _create_end_teleporter():
 	add_child(teleporter)
 	print("BooleanTunnel: Created end teleporter at z=%.1f, destination=%s" % [last_cube_z, teleport_destination])
 
-func _on_teleporter_activated():
+func _on_teleporter_activated() -> void:
 	# Find and teleport the player
 	var player_root = _find_player_in_scene()
 	if player_root:

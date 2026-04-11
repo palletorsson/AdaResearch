@@ -17,14 +17,14 @@ var tube_mesh_instance: MeshInstance3D
 var seat_mesh_instance: MeshInstance3D
 var back_mesh_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	materials = ModernistMaterials.new()
 	add_child(materials)
 	
 	if generate_on_ready:
 		generate_chair()
 
-func generate_chair():
+func generate_chair() -> void:
 	"""Generate the complete cantilever chair"""
 	clear_existing_geometry()
 	
@@ -32,7 +32,7 @@ func generate_chair():
 	generate_seat()
 	generate_backrest()
 
-func clear_existing_geometry():
+func clear_existing_geometry() -> void:
 	"""Remove existing chair geometry"""
 	if tube_mesh_instance:
 		tube_mesh_instance.queue_free()
@@ -41,7 +41,7 @@ func clear_existing_geometry():
 	if back_mesh_instance:
 		back_mesh_instance.queue_free()
 
-func generate_tubular_frame():
+func generate_tubular_frame() -> void:
 	"""Generate the continuous tubular steel frame"""
 	var curve = Curve3D.new()
 	
@@ -96,7 +96,7 @@ func calculate_cantilever_curve() -> Array[Vector3]:
 	
 	return curve_points
 
-func create_tube_from_curve(curve: Curve3D):
+func create_tube_from_curve(curve: Curve3D) -> void:
 	"""Create tube geometry following the curve"""
 	tube_mesh_instance = MeshInstance3D.new()
 	add_child(tube_mesh_instance)
@@ -162,7 +162,7 @@ func create_tube_from_curve(curve: Curve3D):
 	tube_mesh_instance.mesh = array_mesh
 	tube_mesh_instance.material_override = materials.get_material("chrome")
 
-func generate_seat():
+func generate_seat() -> void:
 	"""Generate the tensioned fabric seat"""
 	seat_mesh_instance = MeshInstance3D.new()
 	add_child(seat_mesh_instance)
@@ -182,7 +182,7 @@ func generate_seat():
 	# Add slight sag simulation by modifying mesh vertices
 	apply_fabric_sag(seat_mesh_instance)
 
-func apply_fabric_sag(mesh_instance: MeshInstance3D):
+func apply_fabric_sag(mesh_instance: MeshInstance3D) -> void:
 	"""Apply subtle sagging effect to simulate fabric tension"""
 	var mesh = mesh_instance.mesh as PlaneMesh
 	var array_mesh = ArrayMesh.new()
@@ -233,7 +233,7 @@ func apply_fabric_sag(mesh_instance: MeshInstance3D):
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	mesh_instance.mesh = array_mesh
 
-func generate_backrest():
+func generate_backrest() -> void:
 	"""Generate the tensioned fabric backrest"""
 	back_mesh_instance = MeshInstance3D.new()
 	add_child(back_mesh_instance)
@@ -255,7 +255,7 @@ func generate_backrest():
 	# Apply fabric material
 	back_mesh_instance.material_override = materials.get_material("canvas")
 
-func regenerate_with_parameters(params: Dictionary):
+func regenerate_with_parameters(params: Dictionary) -> void:
 	"""Regenerate chair with new parameters"""
 	if params.has("tube_diameter"):
 		tube_diameter = params.tube_diameter
@@ -271,3 +271,12 @@ func regenerate_with_parameters(params: Dictionary):
 		cantilever_length = params.cantilever_length
 	
 	generate_chair()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

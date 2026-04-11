@@ -9,6 +9,16 @@ extends Node3D
 
 class_name PhiSlider
 
+# @identity
+# essence: slider_position -> phi in [-1,1]; color_gradient(purple->gray->gold)
+# desire: grab the becoming dial and choose: resist change or embrace it
+# critical_parameter: phi — rate sensitivity that determines whether the system fights or welcomes transformation
+# triggers: XR grab moves handle; phi_changed signal propagates globally; particles shift direction with sign
+# emerges: the asymmetry of the scale — negative phi feels heavy (downward particles), positive phi feels liberating (upward)
+# needs: VR XR slider grab [has], visual gradient rail [has], particle feedback [has], global broadcast [has]
+# relationships: controls queer_morphology_specimen, fluid_form, rigid_sculpture; paired with lambda_slider; the queer signature of QFEP
+# truth: phi is the queer parameter — positive phi means the system does not merely tolerate change but seeks it as generative
+
 ## Signal emitted when phi value changes
 signal phi_changed(value: float)
 

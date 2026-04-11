@@ -1,9 +1,9 @@
-﻿extends Node3D
+extends Node3D
 
 @export var spacing : float = 4.0  # Meters between shapes
 @export var shape_scale : float = 0.025  # Scale down from SDF units to VR meters
 
-func _ready():
+func _ready() -> void:
 	var shape_names = ["Human", "Chair", "House", "Bottle", "Cup", "Computer"]
 	
 	for i in range(6):
@@ -46,3 +46,12 @@ func _ready():
 		add_child(label)
 		
 		print("Spawned " + shape_names[i])
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

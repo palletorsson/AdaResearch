@@ -1,0 +1,238 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 9,
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					5
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 11,
+				"name": "prism",
+				"pos": [
+					5,
+					1,
+					6
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "flashlight_demo",
+				"pos": [
+					5,
+					2,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [],
+		"issues": [
+			{
+				"description": "flashlight_demo at (5,2,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Color_Flashlight",
+		"pacing": {
+			"density": 5.5,
+			"reachable_artifacts": 2,
+			"total_artifacts": 3,
+			"walkable_tiles": 130
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			0,
+			0
+		],
+		"teleporter": {
+			"dist": 15,
+			"pos": [
+				5,
+				0,
+				10
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Color_Flashlight",
+	"sequence": "color",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "flashlight_demo",
+				"pos": [
+					5,
+					2,
+					4
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					5
+				]
+			},
+			{
+				"name": "prism",
+				"pos": [
+					5,
+					1,
+					6
+				]
+			}
+		],
+		"dimensions": [
+			11,
+			3,
+			12
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 130,
+			"ground_pct": 98.4848484848485,
+			"void": 1,
+			"walls": 1
+		},
+		"map_name": "Color_Flashlight",
+		"rooms": [
+			{
+				"artifacts": [
+					"dark_sphere",
+					"prism"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 130
+			}
+		],
+		"spawn": [
+			0,
+			0,
+			0
+		],
+		"teleporter": [
+			5,
+			0,
+			10
+		]
+	},
+	"timestamp": "2026-03-16T12:12:44",
+	"walkthrough": {
+		"map_name": "Color_Flashlight",
+		"stops": [
+			{
+				"facing": "southeast",
+				"look_at": [
+					4,
+					1,
+					5
+				],
+				"pos": [
+					0,
+					0,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southeast",
+						"dist": 9,
+						"name": "flashlight_demo"
+					},
+					{
+						"direction": "southeast",
+						"dist": 9,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southeast",
+						"dist": 11,
+						"name": "prism"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "southeast",
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					5
+				],
+				"steps_from_prev": 9,
+				"total_steps": 9,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northeast",
+						"dist": 2,
+						"name": "flashlight_demo"
+					},
+					{
+						"direction": "southeast",
+						"dist": 2,
+						"name": "prism"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "south",
+				"name": "prism",
+				"pos": [
+					5,
+					1,
+					6
+				],
+				"steps_from_prev": 2,
+				"total_steps": 11,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 2,
+						"name": "flashlight_demo"
+					},
+					{
+						"direction": "northwest",
+						"dist": 2,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"pos": [
+					5,
+					0,
+					10
+				],
+				"reachable": true,
+				"steps_from_prev": 4,
+				"total_steps": 15,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 2,
+			"total_steps": 15,
+			"total_stops": 4
+		}
+	}
+}

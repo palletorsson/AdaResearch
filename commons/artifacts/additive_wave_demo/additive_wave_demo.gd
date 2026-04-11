@@ -11,6 +11,17 @@ class_name AdditiveWaveDemo
 ## square, sawtooth, and triangle waves by their harmonic signatures.
 
 ## Path to the fundamental frequency slider in the scene tree
+
+# @identity
+# essence: f(x) = sum(a_n * sin(n * omega * x)) — Fourier additive synthesis
+# desire: Stack harmonics with VR sliders and watch complex waveforms build from pure sines
+# critical_parameter: harmonic_amplitudes[] — each slider adds one frequency component
+# triggers: slider movement updates harmonic amplitudes; waveform redraws in real-time
+# emerges: square waves from odd harmonics, sawtooth from all — Fourier theorem made tactile
+# needs: VR sliders for 5 harmonics [has], preset buttons [has]
+# relationships: depends on fundamental + harmonics; contrasts with timbre_sculptor (visual vs audible synthesis); unlocks Fourier intuition
+# truth: Any periodic function is a sum of sines; complexity is superposition of simplicity.
+
 @export var fundamental_slider_path: NodePath = "ControlPanel/FundamentalSlider"
 ## Path to the 2nd harmonic slider
 @export var harmonic2_slider_path: NodePath = "ControlPanel/Harmonic2Slider"
@@ -41,6 +52,9 @@ const WAVE_POINTS: int = 256
 const WAVE_LENGTH: float = 2.0  # Visual length in meters
 const NUM_HARMONICS: int = 5
 var _time: float = 0.0
+
+## Dirty flag — set when harmonic parameters change so labels are rebuilt
+var _dirty: bool = true
 
 ## Cached ImmediateMesh objects (reused each frame instead of allocating new ones)
 var _combined_im: ImmediateMesh
@@ -118,7 +132,14 @@ func _setup_component_meshes() -> void:
 func _process(delta: float) -> void:
 	# Bound the accumulator to prevent floating-point precision loss over long sessions
 	_time = fmod(_time + delta * base_frequency, 1000.0)
-	_update_visualization()
+	# Meshes must rebuild every frame because the wave animates over time.
+	# Labels only need updating when harmonic parameters change (_dirty).
+	_draw_combined_wave()
+	if show_components:
+		_draw_component_waves()
+	if _dirty:
+		_update_labels()
+		_dirty = false
 
 ## Redraws combined and component waves, updates formula labels
 func _update_visualization() -> void:
@@ -185,8 +206,8 @@ func _draw_component_waves() -> void:
 			var y = harmonic_amplitudes[h] * sin(phase * (h + 1))
 
 			im.surface_set_color(color)
-			# Offset each harmonic vertically for visibility
-			im.surface_add_vertex(Vector3(x, y * 0.3 - 0.5 - h * 0.25, 0.1))
+			# Offset each harmonic vertically — tighter spacing to keep compact
+			im.surface_add_vertex(Vector3(x, y * 0.2 - 0.35 - h * 0.15, 0.1))
 
 		im.surface_end()
 
@@ -244,6 +265,7 @@ func _detect_preset() -> String:
 func _on_harmonic_changed(_value, harmonic_index: int) -> void:
 	if harmonic_index < harmonic_sliders.size() and harmonic_sliders[harmonic_index]:
 		harmonic_amplitudes[harmonic_index] = harmonic_sliders[harmonic_index].get_normalized_value()
+		_dirty = true
 		waveform_changed.emit(harmonic_amplitudes)
 
 ## Cleans up dynamically created nodes when exiting the tree
@@ -278,10 +300,12 @@ func _set_amplitudes(amps: Array) -> void:
 		harmonic_amplitudes[i] = amps[i]
 		if i < harmonic_sliders.size() and harmonic_sliders[i]:
 			harmonic_sliders[i].set_normalized_value(amps[i])
+	_dirty = true
 
 ## Toggles visibility of individual harmonic component waves
 func toggle_components() -> void:
 	show_components = not show_components
+	_dirty = true
 
 ## Grid system integration
 func apply_grid_config(config_data: Dictionary) -> void:

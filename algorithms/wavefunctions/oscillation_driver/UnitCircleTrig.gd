@@ -6,6 +6,17 @@ extends Node3D
 ## Protocol: IACP v2.2
 
 # The Driver (Unit Circle Ball)
+
+# @identity
+# essence: (cos(theta), sin(theta)) on circle -> sin projected as wave, cos projected as wave
+# desire: See rotation on the unit circle continuously generate sine and cosine wave trails
+# critical_parameter: rotation_speed — controls how fast the angle sweeps and waves extend
+# triggers: continuous angle increment projects position onto two perpendicular wave axes
+# emerges: visual proof that sine and cosine are projections of circular motion
+# needs: VR angle control [missing], projection distance slider [missing]
+# relationships: depends on ImmediateMesh trail drawing; contrasts with OscillationCurve (generation vs observation); unlocks unit circle intuition
+# truth: Rotation is the generator of all oscillation; sine and cosine are its shadows.
+
 @onready var driver_ball: MeshInstance3D = $DriverBall
 @onready var connection_lines: MeshInstance3D = $ConnectionLines
 
@@ -31,10 +42,10 @@ var angle: float = 0.0
 var sine_points: Array[Vector3] = []
 var cosine_points: Array[Vector3] = []
 
-func _ready():
+func _ready() -> void:
 	_setup_visuals()
 
-func _setup_visuals():
+func _setup_visuals() -> void:
 	# Sine Trail (Red)
 	sine_mesh = ImmediateMesh.new()
 	sine_trail.mesh = sine_mesh
@@ -62,7 +73,7 @@ func _setup_visuals():
 	connection_lines.material_override = mat_lines
 	connection_lines.mesh = ImmediateMesh.new()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	angle += rotation_speed * delta
 	
@@ -96,7 +107,7 @@ func _process(delta):
 	# --- VISUALIZATION LINES ---
 	_draw_connections()
 
-func _update_trail_points(points: Array[Vector3], delta: float):
+func _update_trail_points(points: Array[Vector3], delta: float) -> void:
 	# Move points along Z (Time)
 	for i in range(points.size()):
 		points[i].z -= time_speed * delta
@@ -104,7 +115,7 @@ func _update_trail_points(points: Array[Vector3], delta: float):
 	if points.size() > max_trail_length:
 		points.pop_back()
 
-func _draw_trail(mesh: ImmediateMesh, points: Array[Vector3]):
+func _draw_trail(mesh: ImmediateMesh, points: Array[Vector3]) -> void:
 	mesh.clear_surfaces()
 	if points.is_empty(): return
 	
@@ -113,7 +124,7 @@ func _draw_trail(mesh: ImmediateMesh, points: Array[Vector3]):
 		mesh.surface_add_vertex(p)
 	mesh.surface_end()
 
-func _draw_connections():
+func _draw_connections() -> void:
 	var mesh = connection_lines.mesh as ImmediateMesh
 	mesh.clear_surfaces()
 	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
@@ -133,3 +144,6 @@ func _draw_connections():
 	mesh.surface_add_vertex(center)
 	
 	mesh.surface_end()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

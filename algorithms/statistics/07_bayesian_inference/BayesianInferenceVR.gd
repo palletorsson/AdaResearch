@@ -43,14 +43,14 @@ var observation_history: Node3D
 # Animation
 var update_tween: Tween
 
-func _ready():
+func _ready() -> void:
 	setup_vr()
 	initialize_bayesian_params()
 	setup_visualization()
 	setup_info_display()
 	update_all_displays()
 
-func setup_vr():
+func setup_vr() -> void:
 	"""Initialize VR system"""
 	if enable_vr:
 		var xr_interface = XRServer.find_interface("OpenXR")
@@ -73,12 +73,12 @@ func setup_vr():
 			xr_origin.add_child(controller)
 			controllers.append(controller)
 
-func initialize_bayesian_params():
+func initialize_bayesian_params() -> void:
 	"""Initialize Bayesian inference parameters"""
 	posterior_alpha = prior_alpha
 	posterior_beta = prior_beta
 
-func setup_visualization():
+func setup_visualization() -> void:
 	"""Create visualization elements"""
 	# Prior distribution display
 	prior_curve = Node3D.new()
@@ -107,7 +107,7 @@ func setup_visualization():
 	observation_history.position = Vector3(0, -1.5, 0)
 	add_child(observation_history)
 
-func create_distribution_curve(parent: Node3D, alpha: float, beta: float, color: Color, label: String):
+func create_distribution_curve(parent: Node3D, alpha: float, beta: float, color: Color, label: String) -> void:
 	"""Create beta distribution curve visualization"""
 	# Clear existing curve
 	for child in parent.get_children():
@@ -142,7 +142,7 @@ func create_distribution_curve(parent: Node3D, alpha: float, beta: float, color:
 	if show_true_value:
 		create_true_value_line(parent, true_coin_bias, Color.RED)
 
-func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], color: Color):
+func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], color: Color) -> void:
 	"""Create line mesh from points"""
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
@@ -164,7 +164,7 @@ func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], col
 	material.flags_unshaded = true
 	mesh_instance.material_override = material
 
-func create_axes(parent: Node3D):
+func create_axes(parent: Node3D) -> void:
 	"""Create coordinate axes for probability plots"""
 	# X-axis (probability)
 	var x_axis = MeshInstance3D.new()
@@ -186,7 +186,7 @@ func create_axes(parent: Node3D):
 		label.font_size = 12
 		parent.add_child(label)
 
-func create_true_value_line(parent: Node3D, value: float, color: Color):
+func create_true_value_line(parent: Node3D, value: float, color: Color) -> void:
 	"""Create vertical line showing true parameter value"""
 	var line = MeshInstance3D.new()
 	var x_pos = (value - 0.5) * 2.0
@@ -194,7 +194,7 @@ func create_true_value_line(parent: Node3D, value: float, color: Color):
 	create_line_mesh(line, line_points, color)
 	parent.add_child(line)
 
-func create_coin_visual():
+func create_coin_visual() -> void:
 	"""Create interactive coin for observations"""
 	var coin = MeshInstance3D.new()
 	var cylinder_mesh = CylinderMesh.new()
@@ -218,7 +218,7 @@ func create_coin_visual():
 	instruction.font_size = 18
 	coin_display.add_child(instruction)
 
-func setup_info_display():
+func setup_info_display() -> void:
 	"""Create information display"""
 	info_display = Label3D.new()
 	info_display.position = Vector3(-2.5, 2.5, 0)
@@ -226,14 +226,14 @@ func setup_info_display():
 	info_display.modulate = Color.WHITE
 	add_child(info_display)
 
-func _on_controller_button(button_name: String):
+func _on_controller_button(button_name: String) -> void:
 	"""Handle VR controller input"""
 	if button_name == "trigger_click":
 		flip_coin()
 	elif button_name == "grip_click":
 		reset_inference()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle desktop input"""
 	if not enable_vr and event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
@@ -244,7 +244,7 @@ func _input(event):
 			show_true_value = !show_true_value
 			update_all_displays()
 
-func flip_coin():
+func flip_coin() -> void:
 	"""Flip coin and update Bayesian inference"""
 	if observations.size() >= max_observations:
 		return
@@ -267,7 +267,7 @@ func flip_coin():
 	# Update displays
 	update_all_displays()
 
-func update_posterior(is_heads: bool):
+func update_posterior(is_heads: bool) -> void:
 	"""Update posterior distribution using Bayes' theorem"""
 	# Beta-Binomial conjugate prior
 	if is_heads:
@@ -279,7 +279,7 @@ func update_posterior(is_heads: bool):
 	var current_estimate = posterior_alpha / (posterior_alpha + posterior_beta)
 	likelihood_history.append(current_estimate)
 
-func animate_coin_flip(is_heads: bool):
+func animate_coin_flip(is_heads: bool) -> void:
 	"""Animate coin flip result"""
 	if update_tween:
 		update_tween.kill()
@@ -296,7 +296,7 @@ func animate_coin_flip(is_heads: bool):
 	update_tween.parallel().tween_property(material, "albedo_color", result_color, 0.5)
 	update_tween.tween_property(material, "albedo_color", Color.GOLD, 0.5)
 
-func update_all_displays():
+func update_all_displays() -> void:
 	"""Update all visualization displays"""
 	# Update posterior curve
 	create_distribution_curve(posterior_curve, posterior_alpha, posterior_beta, Color.GREEN, "Posterior")
@@ -310,7 +310,7 @@ func update_all_displays():
 	# Update info display
 	update_info_display_text()
 
-func update_likelihood_display():
+func update_likelihood_display() -> void:
 	"""Update likelihood visualization"""
 	# Clear existing
 	for child in likelihood_display.get_children():
@@ -340,7 +340,7 @@ func update_likelihood_display():
 	# Add axes
 	create_axes(likelihood_display)
 
-func update_observation_history():
+func update_observation_history() -> void:
 	"""Update visual history of observations"""
 	# Clear existing
 	for child in observation_history.get_children():
@@ -355,6 +355,7 @@ func update_observation_history():
 		var obs_visual = MeshInstance3D.new()
 		var sphere_mesh = SphereMesh.new()
 		sphere_mesh.radius = 0.03
+		sphere_mesh.height = 0.06
 		obs_visual.mesh = sphere_mesh
 		
 		var material = StandardMaterial3D.new()
@@ -374,7 +375,7 @@ func update_observation_history():
 	label.font_size = 16
 	observation_history.add_child(label)
 
-func update_info_display_text():
+func update_info_display_text() -> void:
 	"""Update information text"""
 	var text = "Bayesian Coin Bias Estimation\n\n"
 	text += "Observations: %d/%d\n" % [observations.size(), max_observations]
@@ -449,7 +450,7 @@ func beta_quantile(p: float, alpha: float, beta: float) -> float:
 	var result = mean + z_score * std_dev
 	return clamp(result, 0.001, 0.999)
 
-func reset_inference():
+func reset_inference() -> void:
 	"""Reset all inference data"""
 	observations.clear()
 	likelihood_history.clear()
@@ -478,3 +479,12 @@ func get_statistics_summary() -> Dictionary:
 		"credible_interval": calculate_credible_interval(0.95),
 		"observations": observations.duplicate()
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

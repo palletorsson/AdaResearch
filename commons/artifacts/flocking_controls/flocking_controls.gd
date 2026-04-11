@@ -100,6 +100,9 @@ var _radius_slider: Node
 const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
+# Signal tracking for cleanup
+var _signal_connections: Array = []
+
 
 func _ready() -> void:
 	_create_bounds_wireframe()
@@ -352,7 +355,9 @@ func _create_vr_controls() -> void:
 	_add_button_label(reset_btn, "RESET")
 	var area = reset_btn.get_node_or_null("InteractableAreaButton")
 	if area:
-		area.button_pressed.connect(func(_b): _spawn_boids())
+		var cb := func(_b): _spawn_boids()
+		area.button_pressed.connect(cb)
+		_signal_connections.append([area, &"button_pressed", cb])
 
 	call_deferred("_sync_all_sliders")
 
@@ -368,6 +373,7 @@ func _add_slider(label_text: String, x_pos: float, callback: Callable) -> Node:
 		lbl.text = label_text
 	_control_panel.add_child(slider)
 	slider.slider_moved.connect(callback)
+	_signal_connections.append([slider, &"slider_moved", callback])
 	return slider
 
 
@@ -555,6 +561,12 @@ func _update_highlight() -> void:
 # ------------------------------------------------------------------
 # Grid system integration
 # ------------------------------------------------------------------
+
+func _exit_tree() -> void:
+	for conn in _signal_connections:
+		if is_instance_valid(conn[0]) and conn[0].is_connected(conn[1], conn[2]):
+			conn[0].disconnect(conn[1], conn[2])
+	_signal_connections.clear()
 
 ## Accept configuration from map data.
 func apply_grid_config(config_data: Dictionary) -> void:

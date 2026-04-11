@@ -28,7 +28,7 @@ const GEM_ACTIVE_EMISSION := 3.0
 
 const HANDLE_OFFSET := 0.055  # Distance from center for grab handles
 const HANDLE_COLLISION_RADIUS := 0.025
-const NUM_HANDLES := 4
+const NUM_HANDLES := 2  # Fewer handles = less chance of multi-grab jumping
 
 const SPAWN_DURATION := 0.6
 const UNLOCK_DURATION := 0.5
@@ -46,6 +46,7 @@ var _ring_mesh: MeshInstance3D = null
 var _gem_container: Node3D = null
 var _gem_meshes: Array[MeshInstance3D] = []
 var _gem_materials: Array[StandardMaterial3D] = []
+var _all_display_modes: Array[String] = []  # All 11 modes (for display, locked ones dimmed)
 var _hinge: Node = null  # XRToolsInteractableHinge
 var _hinge_origin: Node3D = null
 var _mode_label: Label3D = null
@@ -55,7 +56,7 @@ var _label_timer: float = 0.0
 var _last_hinge_step: int = 0
 var _active := false
 var _mode_switch_cooldown: float = 0.0
-const MODE_SWITCH_COOLDOWN := 1.2  # Seconds between mode switches
+const MODE_SWITCH_COOLDOWN := 0.5  # Short — smooth lerp handles the visual
 
 # ── Signals ────────────────────────────────────────────────────────────────
 
@@ -83,6 +84,9 @@ func _process(delta: float) -> void:
 	if not _active:
 		return
 
+	# Smooth continuous rotation toward active gem (lerp every frame)
+	_highlight_current_gem()
+
 	# Pulse active gem
 	_pulse_active_gem(delta)
 
@@ -101,15 +105,26 @@ func _process(delta: float) -> void:
 # ═══════════════════════════════════════════════════════════════════════════
 
 ## Activate with a list of mode IDs. Called by CatalystCapabilityManager.
-func activate(modes: Array, controller: XRController3D, animate: bool = true) -> void:
-	print("[Bracelet] activate() called — %d modes, animate=%s, controller=%s" % [modes.size(), animate, controller.name if controller else "NULL"])
+## all_modes: every mode ID (always 11), unlocked: which are usable
+func activate(modes: Array, controller: XRController3D, animate: bool = true, all_modes: Array = []) -> void:
+	print("[Bracelet] activate() called — %d unlocked, %d total" % [modes.size(), all_modes.size()])
 	_controller = controller
 	_unlocked_modes = []
 	for m in modes:
 		_unlocked_modes.append(str(m))
+
+	# Store all modes for display (if provided, otherwise use unlocked only)
+	_all_display_modes = []
+	if all_modes.size() > 0:
+		for m in all_modes:
+			_all_display_modes.append(str(m))
+	else:
+		for m in _unlocked_modes:
+			_all_display_modes.append(str(m))
+
 	_current_mode_index = clampi(_current_mode_index, 0, maxi(0, _unlocked_modes.size() - 1))
 
-	# Build the gems for current state
+	# Build gems for ALL modes (dim locked ones)
 	_rebuild_gems()
 	_update_hinge_steps()
 	_highlight_current_gem()
@@ -156,12 +171,12 @@ func sync_to_mode(index: int) -> void:
 	_highlight_current_gem()
 	_show_mode_label()
 
-	# Sync hinge position so it visually matches
+	# Rotate hinge so the selected gem physically arrives at the top
 	if _hinge and _unlocked_modes.size() > 1:
 		var step_deg := 360.0 / _unlocked_modes.size()
-		var target_angle := _current_mode_index * step_deg
-		if _hinge.has_method("set_hinge_angle"):
-			_hinge.set_hinge_angle(target_angle)
+		var target_angle := -_current_mode_index * step_deg  # Negative = gem i rotates to top
+		if _hinge.has_method("move_hinge"):
+			_hinge.move_hinge(deg_to_rad(target_angle))
 		elif "hinge_position" in _hinge:
 			_hinge.hinge_position = target_angle
 
@@ -240,7 +255,7 @@ func _build_glow() -> void:
 	add_child(_bracelet_glow)
 
 func _build_hinge() -> void:
-	# HingeOrigin — rotate so hinge axis goes around the wrist (Y-up becomes circumferential)
+	# HingeOrigin — no rotation. Hinge rotates around X, we'll map the angle ourselves.
 	_hinge_origin = Node3D.new()
 	_hinge_origin.name = "HingeOrigin"
 	add_child(_hinge_origin)
@@ -319,6 +334,10 @@ func _build_hinge() -> void:
 		handle_mesh.material_override = handle_mat
 		handle.add_child(handle_mesh)
 
+		# Prevent the bracelet hand from grabbing its own bracelet
+		if handle.has_signal("picked_up"):
+			handle.picked_up.connect(_on_handle_picked_up.bind(handle))
+
 	# Re-hook handles — hinge's _ready() already ran before we added the handles,
 	# so we need to manually connect the handle signals to the hinge.
 	if _hinge.has_method("_hook_child_handles"):
@@ -329,64 +348,174 @@ func _build_hinge() -> void:
 # ═══════════════════════════════════════════════════════════════════════════
 
 func _rebuild_gems() -> void:
-	# Clear old gems
+	# Clear old gems from BOTH containers
 	for child in _gem_container.get_children():
 		child.queue_free()
 	_gem_meshes.clear()
 	_gem_materials.clear()
 
+	# Only show UNLOCKED modes as stones on the bracelet
 	if _unlocked_modes.is_empty():
 		return
+
+	var gem_parent: Node3D = _gem_container
 
 	var count := _unlocked_modes.size()
 	for i in count:
 		var mode_id: String = str(_unlocked_modes[i])
-		var angle := (TAU / count) * i
-		var pos := Vector3(cos(angle) * RING_MID_RADIUS, 0, sin(angle) * RING_MID_RADIUS)
+		var is_unlocked: bool = true
+		# Place gems on the torus surface — XZ plane matches the TorusMesh orientation
+		var angle := (TAU / float(count)) * float(i)
+		var pos := Vector3(cos(angle) * RING_MID_RADIUS, 0.0, sin(angle) * RING_MID_RADIUS)
+		# Lift gems slightly above the torus surface so they sit ON it, not inside
+		pos.y = 0.012
 
 		var gem := MeshInstance3D.new()
 		gem.name = "Gem_%s" % mode_id
 
-		var sphere := SphereMesh.new()
-		sphere.radius = GEM_RADIUS
-		sphere.height = GEM_RADIUS * 2.0
-		sphere.radial_segments = 8
-		sphere.rings = 4
-		gem.mesh = sphere
+		# Mode-specific 3D icon
+		gem.mesh = _create_mode_icon_mesh(mode_id)
 		gem.position = pos
 
 		var color: Color = CatalystVisual.get_mode_color(mode_id)
 
 		var mat := StandardMaterial3D.new()
-		mat.albedo_color = Color(color.r, color.g, color.b, 0.9)
-		mat.emission_enabled = true
-		mat.emission = color
-		mat.emission_energy_multiplier = GEM_INACTIVE_EMISSION
-		mat.metallic = 0.2
-		mat.roughness = 0.3
+		if is_unlocked:
+			mat.albedo_color = Color(color.r, color.g, color.b, 0.9)
+			mat.emission_enabled = true
+			mat.emission = color
+			mat.emission_energy_multiplier = GEM_INACTIVE_EMISSION
+			mat.metallic = 0.2
+			mat.roughness = 0.3
+		else:
+			# Locked — dim and dark
+			mat.albedo_color = Color(color.r * 0.2, color.g * 0.2, color.b * 0.2, 0.4)
+			mat.emission_enabled = true
+			mat.emission = Color(color.r * 0.1, color.g * 0.1, color.b * 0.1)
+			mat.emission_energy_multiplier = 0.3
+			mat.metallic = 0.0
+			mat.roughness = 0.8
 		mat.rim_enabled = true
 		mat.rim = 0.4
 		mat.rim_tint = 0.3
 		gem.material_override = mat
 
-		_gem_container.add_child(gem)
+		gem_parent.add_child(gem)
 		_gem_meshes.append(gem)
 		_gem_materials.append(mat)
 
+	# Update hinge step size for this number of modes
+	_update_hinge_steps()
+
+## Create a distinct 3D icon mesh per catalyst mode.
+func _create_mode_icon_mesh(mode_id: String) -> Mesh:
+	match mode_id:
+		"off":
+			# Small dim sphere — "empty" position on the bracelet
+			var m := SphereMesh.new()
+			m.radius = GEM_RADIUS * 0.5
+			m.height = GEM_RADIUS * 1.0
+			m.radial_segments = 6
+			m.rings = 3
+			return m
+		"voxel_editor":
+			var m := BoxMesh.new()
+			m.size = Vector3.ONE * GEM_RADIUS * 2.5
+			return m
+		"wedge_placer":
+			var m := PrismMesh.new()
+			m.size = Vector3(GEM_RADIUS * 2.5, GEM_RADIUS * 2.0, GEM_RADIUS * 2.5)
+			return m
+		"primitives":
+			var m := SphereMesh.new()
+			m.radius = GEM_RADIUS
+			m.height = GEM_RADIUS * 2.0
+			m.radial_segments = 6
+			m.rings = 3
+			return m
+		"transformation":
+			var m := PrismMesh.new()
+			m.size = Vector3.ONE * GEM_RADIUS * 2.5
+			return m
+		"chromatic":
+			var m := CylinderMesh.new()
+			m.height = GEM_RADIUS * 1.5
+			m.top_radius = GEM_RADIUS * 0.8
+			m.bottom_radius = GEM_RADIUS * 0.8
+			m.radial_segments = 6
+			return m
+		"forces":
+			var m := BoxMesh.new()
+			m.size = Vector3(GEM_RADIUS * 3.0, GEM_RADIUS, GEM_RADIUS)
+			return m
+		"waveform":
+			var m := TorusMesh.new()
+			m.inner_radius = GEM_RADIUS * 0.3
+			m.outer_radius = GEM_RADIUS * 1.0
+			return m
+		"chaos":
+			var m := SphereMesh.new()
+			m.radius = GEM_RADIUS * 0.9
+			m.height = GEM_RADIUS * 1.8
+			m.radial_segments = 4
+			m.rings = 2
+			return m
+		"fractal":
+			var m := BoxMesh.new()
+			m.size = Vector3.ONE * GEM_RADIUS * 1.8
+			return m
+		"cellular":
+			var m := BoxMesh.new()
+			m.size = Vector3.ONE * GEM_RADIUS * 2.0
+			return m
+		"branching":
+			var m := CylinderMesh.new()
+			m.height = GEM_RADIUS * 3.0
+			m.top_radius = GEM_RADIUS * 0.2
+			m.bottom_radius = GEM_RADIUS * 0.6
+			m.radial_segments = 4
+			return m
+		"swarm":
+			var m := SphereMesh.new()
+			m.radius = GEM_RADIUS * 0.6
+			m.height = GEM_RADIUS * 1.2
+			m.radial_segments = 3
+			m.rings = 2
+			return m
+		_:
+			var m := SphereMesh.new()
+			m.radius = GEM_RADIUS
+			m.height = GEM_RADIUS * 2.0
+			return m
+
+
 func _highlight_current_gem() -> void:
+	if _unlocked_modes.is_empty():
+		return
+
+	var count: int = _unlocked_modes.size()
+
+	# Smoothly rotate gem_container so active gem is at top
+	if _gem_container and count > 1:
+		var step_angle: float = TAU / float(count)
+		var target_y: float = -step_angle * _current_mode_index
+		# Smooth lerp every frame
+		_gem_container.rotation.y = lerpf(_gem_container.rotation.y, target_y, 0.12)
+	elif _gem_container and count == 1:
+		_gem_container.rotation.y = 0.0  # Single stone always at top
+
 	for i in _gem_meshes.size():
 		var is_active := (i == _current_mode_index)
 		var gem := _gem_meshes[i]
 		var mat := _gem_materials[i]
 
 		if is_active:
-			gem.scale = Vector3.ONE * GEM_ACTIVE_SCALE
+			gem.scale = Vector3.ONE * 2.0
 			mat.emission_energy_multiplier = GEM_ACTIVE_EMISSION
 		else:
-			gem.scale = Vector3.ONE
+			gem.scale = Vector3.ONE * 0.7
 			mat.emission_energy_multiplier = GEM_INACTIVE_EMISSION
 
-	# Glow disabled
 	if _bracelet_glow:
 		_bracelet_glow.light_energy = 0.0
 
@@ -418,9 +547,14 @@ func _on_hinge_moved(angle: float) -> void:
 	if _mode_switch_cooldown > 0.0:
 		return
 
+	# As gems rotate with the hinge, the gem at the "top" (angle=0 in world)
+	# is the one whose initial angle + hinge rotation ≈ 0 (mod TAU).
+	# Each gem i was placed at angle = (TAU/count)*i.
+	# After hinge rotation of `angle` degrees, gem i is now at:
+	#   effective_angle = (TAU/count)*i + deg_to_rad(angle)
+	# The gem closest to the top (angle 0) is selected.
 	var step_deg := 360.0 / count
-	# Calculate which step we're at, handling wrapping
-	var raw_step := int(round(angle / step_deg))
+	var raw_step := int(round(-angle / step_deg))  # Negative because rotation is opposite
 	var step_index := ((raw_step % count) + count) % count
 
 	if step_index == _last_hinge_step:
@@ -445,6 +579,23 @@ func _on_hinge_moved(angle: float) -> void:
 		bracelet_mode_selected.emit(str(_unlocked_modes[_current_mode_index]))
 
 	print("[Bracelet] Rotated to mode: %s" % str(_unlocked_modes[_current_mode_index]))
+
+# ═══════════════════════════════════════════════════════════════════════════
+# HANDLE GUARD — Prevent bracelet hand from grabbing its own bracelet
+# ═══════════════════════════════════════════════════════════════════════════
+
+func _on_handle_picked_up(_pickable, handle: Node) -> void:
+	# Check if the grabber is on the same controller as the bracelet
+	if not _controller or not is_instance_valid(_controller):
+		return
+	if not handle.has_method("get_picked_up_by_controller"):
+		return
+	var grabber_ctrl: XRController3D = handle.get_picked_up_by_controller()
+	if grabber_ctrl == _controller:
+		# Same hand — force release
+		if handle.has_method("let_go"):
+			handle.let_go(handle.get_picked_up_by(), Vector3.ZERO, Vector3.ZERO)
+			print("[Bracelet] Blocked same-hand grab")
 
 # ═══════════════════════════════════════════════════════════════════════════
 # SIGNALS — React to catalyst events
@@ -509,7 +660,8 @@ func _show_mode_label() -> void:
 			if def.get("id", "") == mode_id:
 				display_name = def.get("name", display_name)
 				break
-	_mode_label.text = display_name
+	var index_str: String = "%d/%d" % [_current_mode_index + 1, _unlocked_modes.size()]
+	_mode_label.text = "%s  %s" % [index_str, display_name]
 	_mode_label.modulate = CatalystVisual.get_mode_color(mode_id)
 	_mode_label.visible = true
-	_label_timer = LABEL_FADE_TIME
+	_label_timer = LABEL_FADE_TIME * 2.0  # Stay visible longer

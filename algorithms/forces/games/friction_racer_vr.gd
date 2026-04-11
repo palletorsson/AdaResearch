@@ -52,7 +52,7 @@ var friction_info_labels: Array[Label3D] = []
 # Settings
 var show_friction_info: bool = true
 
-func _ready():
+func _ready() -> void:
 	# Scale down for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
@@ -64,7 +64,7 @@ func _ready():
 
 	print("Friction Racer VR - Master surface physics to win!")
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if race_active:
 		race_time += delta
 
@@ -77,7 +77,7 @@ func _physics_process(_delta: float):
 	apply_racer_physics()
 	apply_opponent_physics()
 
-func create_race_track():
+func create_race_track() -> void:
 	var current_z: float = RACER_START_Z
 	var lane_width: float = 0.25
 
@@ -111,7 +111,7 @@ func create_race_track():
 	# Create finish line
 	create_finish_line(Vector3(0, -0.33, FINISH_LINE_Z))
 
-func create_track_segment(pos: Vector3, size: Vector3, color: Color, friction: float):
+func create_track_segment(pos: Vector3, size: Vector3, color: Color, friction: float) -> void:
 	var segment := StaticBody3D.new()
 	segment.set_meta("friction", friction)
 
@@ -136,14 +136,14 @@ func create_track_segment(pos: Vector3, size: Vector3, color: Color, friction: f
 
 	add_child(segment)
 
-func create_friction_label(pos: Vector3, text: String, color: Color):
+func create_friction_label(pos: Vector3, text: String, color: Color) -> void:
 	var label := Label3D.new()
 	FORCES_UI.style_tag_label(label, pos, color, 14)
 	FORCES_UI.set_label_text(label, text)
 	add_child(label)
 	friction_info_labels.append(label)
 
-func create_barrier(pos: Vector3, size: Vector3):
+func create_barrier(pos: Vector3, size: Vector3) -> void:
 	var barrier := StaticBody3D.new()
 	var collider := CollisionShape3D.new()
 	var box := BoxShape3D.new()
@@ -165,7 +165,7 @@ func create_barrier(pos: Vector3, size: Vector3):
 
 	add_child(barrier)
 
-func create_finish_line(pos: Vector3):
+func create_finish_line(pos: Vector3) -> void:
 	var finish := MeshInstance3D.new()
 	var plane := PlaneMesh.new()
 	plane.size = Vector2(0.3, 0.1)
@@ -181,7 +181,7 @@ func create_finish_line(pos: Vector3):
 	finish.material_override = mat
 	add_child(finish)
 
-func create_checkpoints():
+func create_checkpoints() -> void:
 	# Create invisible checkpoints along the track for progress tracking
 	var checkpoint_positions := [-0.5, -0.1, 0.3, 0.7, FINISH_LINE_Z]
 
@@ -200,7 +200,7 @@ func create_checkpoints():
 		add_child(checkpoint)
 		checkpoint_areas.append(checkpoint)
 
-func create_racers():
+func create_racers() -> void:
 	# Player racer (blue)
 	racer = Mover.new()
 	racer.mass = 1.0
@@ -221,7 +221,7 @@ func create_racers():
 	opponent.set_size(0.06)
 	opponent.set_color(Color.RED)
 
-func apply_racer_physics():
+func apply_racer_physics() -> void:
 	if not racer:
 		return
 
@@ -236,7 +236,7 @@ func apply_racer_physics():
 		var friction_force: Vector3 = friction_dir * friction_coeff * normal_force
 		racer.apply_force(friction_force)
 
-func apply_opponent_physics():
+func apply_opponent_physics() -> void:
 	if not opponent:
 		return
 
@@ -260,7 +260,7 @@ func get_friction_at_position(z_pos: float) -> float:
 		current_z += seg_length
 	return 0.15  # Default friction
 
-func update_opponent_ai(_delta: float):
+func update_opponent_ai(_delta: float) -> void:
 	if not opponent or not race_active:
 		return
 
@@ -269,14 +269,14 @@ func update_opponent_ai(_delta: float):
 	var forward_force := Vector3(0, 0, opponent_speed_base) * (1.2 - current_friction)
 	opponent.apply_force(forward_force)
 
-func update_boost_cooldown(delta: float):
+func update_boost_cooldown(delta: float) -> void:
 	if not can_boost:
 		boost_timer += delta
 		if boost_timer >= BOOST_COOLDOWN:
 			can_boost = true
 			boost_timer = 0.0
 
-func apply_boost():
+func apply_boost() -> void:
 	if not racer or not can_boost:
 		return
 
@@ -287,7 +287,7 @@ func apply_boost():
 	# Visual effect
 	create_boost_effect(racer.position_v)
 
-func create_boost_effect(pos: Vector3):
+func create_boost_effect(pos: Vector3) -> void:
 	var particles := CPUParticles3D.new()
 	particles.emitting = true
 	particles.one_shot = true
@@ -309,7 +309,7 @@ func create_boost_effect(pos: Vector3):
 	if is_instance_valid(particles):
 		particles.queue_free()
 
-func _on_checkpoint_entered(body: Node, checkpoint_index: int):
+func _on_checkpoint_entered(body: Node, checkpoint_index: int) -> void:
 	if body == racer and checkpoint_index == checkpoints_passed:
 		checkpoints_passed += 1
 
@@ -317,14 +317,14 @@ func _on_checkpoint_entered(body: Node, checkpoint_index: int):
 			# Crossed finish line
 			complete_race()
 
-func check_race_completion():
+func check_race_completion() -> void:
 	# Also check if opponent finished
 	if opponent and opponent.position_v.z >= FINISH_LINE_Z and race_active:
 		race_active = false
 		if info_label:
 			FORCES_UI.set_label_text(info_label, "OPPONENT WON!")
 
-func complete_race():
+func complete_race() -> void:
 	if not race_active:
 		return
 
@@ -339,11 +339,11 @@ func complete_race():
 	await get_tree().create_timer(3.0).timeout
 	reset_race()
 
-func position_camera_overhead():
+func position_camera_overhead() -> void:
 	# Helper to position a follow camera (if needed)
 	pass
 
-func create_ui():
+func create_ui() -> void:
 	info_label = Label3D.new()
 	FORCES_UI.style_title_label(info_label, Vector3(0, 0.7, 0), 32)
 	add_child(info_label)
@@ -361,7 +361,7 @@ func create_ui():
 	FORCES_UI.set_label_text(instructions_label, "[SPACE/TRIGGER] Boost | [R] Reset | [S] Start")
 	add_child(instructions_label)
 
-func update_ui():
+func update_ui() -> void:
 	if info_label and not race_active:
 		if best_time < INF:
 			FORCES_UI.set_label_text(info_label, "FRICTION RACER\nBest: %.2fs" % best_time)
@@ -380,7 +380,7 @@ func update_ui():
 		else:
 			FORCES_UI.set_label_text(boost_label, "Boost: %.1fs" % (BOOST_COOLDOWN - boost_timer))
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		match event.keycode:
 			KEY_R:
@@ -390,7 +390,7 @@ func _input(event: InputEvent):
 			KEY_SPACE:
 				apply_boost()
 
-func start_race():
+func start_race() -> void:
 	race_active = true
 	race_time = 0.0
 	checkpoints_passed = 0
@@ -403,7 +403,7 @@ func start_race():
 		opponent.position_v = Vector3(0.08, 0.0, RACER_START_Z)
 		opponent.velocity = Vector3.ZERO
 
-func reset_race():
+func reset_race() -> void:
 	race_active = false
 	race_time = 0.0
 	checkpoints_passed = 0
@@ -419,3 +419,12 @@ func reset_race():
 		opponent.position_v = Vector3(0.08, 0.0, RACER_START_Z)
 		opponent.velocity = Vector3.ZERO
 		opponent.acceleration = Vector3.ZERO
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

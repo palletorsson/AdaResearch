@@ -2,6 +2,16 @@
 extends MeshInstance3D
 class_name DelaunayTriangulation3DCell
 
+# @identity
+# essence: Incremental Delaunay triangulation in 3D — circumsphere-tested tetrahedralization with grabbable vertex interaction
+# desire: To show the dual of Voronoi: optimal triangulation where no point violates any circumsphere, dragging a vertex re-triangulates live
+# critical_parameter: randomness — how far points deviate from hierarchical placement; 0 = regular lattice, 1 = scattered cloud
+# triggers: Grabbing a vertex and dragging re-triggers triangulation; low randomness produces crystalline; high produces chaotic mesh
+# emerges: Mathematically optimal triangulation from a single geometric constraint applied everywhere
+# needs: @tool editor preview [has], grabbable VR points [has], edge/vertex visualization [has], Label3D [has]
+# relationships: Dual of voronoi_diagram_3d in spatial_partitioning. Foundation for mesh generation in meshes sequence.
+# truth: One constraint — no point inside any circumsphere — is enough to produce the best possible triangulation.
+
 @export var generations: int = 7
 @export var initial_points: int = 20
 @export var subdivision_factor: float = 0.5
@@ -23,13 +33,13 @@ var edge_container: Node3D
 var current_points: Array = []  # Store points for retriangulation
 var grab_point_scene: PackedScene
 
-func _ready():
+func _ready() -> void:
 	# Load grabbable point scene (only at runtime, not in editor)
 	if not Engine.is_editor_hint() and use_grabbable_points:
 		grab_point_scene = load("res://commons/primitives/point/grab_sphere_point_with_text.tscn")
 	generate_cell_body()
 
-func generate_cell_body():
+func generate_cell_body() -> void:
 	# Clear previous visualization
 	for child in get_children():
 		child.queue_free()
@@ -50,7 +60,7 @@ func generate_cell_body():
 	if show_label:
 		add_explanation_label()
 
-func visualize_vertices(points: Array):
+func visualize_vertices(points: Array) -> void:
 	vertex_container = Node3D.new()
 	vertex_container.name = "Vertices"
 	add_child(vertex_container)
@@ -87,14 +97,14 @@ func visualize_vertices(points: Array):
 
 			vertex_container.add_child(sphere)
 
-func _on_point_dropped(_pickable, index: int, grab_node: Node3D):
+func _on_point_dropped(_pickable, index: int, grab_node: Node3D) -> void:
 	# Update the point position when dropped
 	if index < current_points.size():
 		current_points[index] = grab_node.position
 		# Regenerate mesh and edges with new point positions
 		_update_mesh_and_edges()
 
-func _update_mesh_and_edges():
+func _update_mesh_and_edges() -> void:
 	# Regenerate mesh with new point positions
 	var mesh_data = create_delaunay_mesh(current_points)
 	mesh = mesh_data
@@ -105,7 +115,7 @@ func _update_mesh_and_edges():
 	if show_edges:
 		visualize_edges(current_points)
 
-func visualize_edges(points: Array):
+func visualize_edges(points: Array) -> void:
 	edge_container = Node3D.new()
 	edge_container.name = "Edges"
 	add_child(edge_container)
@@ -131,7 +141,7 @@ func visualize_edges(points: Array):
 
 	edge_container.add_child(edge_instance)
 
-func add_explanation_label():
+func add_explanation_label() -> void:
 	var label = Label3D.new()
 	label.text = "DELAUNAY TRIANGULATION\nTriangles where no point\nlies inside circumcircle"
 	label.position = Vector3(0, cell_radius + 1.0, 0)
@@ -283,3 +293,12 @@ func remove_duplicate_triangles(triangles: Array) -> Array:
 			unique.append(tri)
 	
 	return unique
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

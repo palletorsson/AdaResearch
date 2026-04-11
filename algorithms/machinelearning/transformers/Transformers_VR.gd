@@ -1,4 +1,14 @@
-﻿extends Node3D
+extends Node3D
+
+# @identity
+# essence: Attention(Q,K,V) = softmax(QK^T / √d_k)V — tokens attend to all other tokens via learned queries and keys
+# desire: walk through a token sequence, see attention beams connect distant tokens, switch between attention heads
+# critical_parameter: num_attention_heads — each head learns to attend to different relationship types
+# triggers: auto_train drives loss descent; head switching reveals different attention patterns; positional encoding visualization shows how order is encoded
+# emerges: multi-head attention patterns — some heads attend locally, others capture long-range dependencies, nobody assigns these roles
+# needs: grabbable tokens [has], switchable attention heads [has], attention beam visualization [has], positional encoding display [has]
+# relationships: supersedes lstms_vr (attention replaces recurrence for long-range dependencies); depends on neural_networks_vr (transformer IS a neural network)
+# truth: attention is all you need — the transformer proves that explicit memory gates are unnecessary when every token can directly query every other token
 
 # VR-Reimagined Transformer Visualization
 # Walk through token sequences with visible attention beams
@@ -46,7 +56,7 @@ var positional_encodings: Array = []
 # Query/Key/Value visualization
 var qkv_visualizations: Array = []
 
-func _ready():
+func _ready() -> void:
 	print("[Transformers_VR] Initializing transformer architecture")
 	_initialize_attention()
 	_create_encoder_sequence()
@@ -58,7 +68,7 @@ func _ready():
 	_create_control_panel()
 	_create_info_panels()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 
 	if auto_train:
@@ -73,7 +83,7 @@ func _process(delta):
 	_animate_qkv(delta)
 	_update_control_panel()
 
-func _initialize_attention():
+func _initialize_attention() -> void:
 	"""Initialize attention weight matrices"""
 	for head in range(num_attention_heads):
 		var head_weights = []
@@ -91,7 +101,7 @@ func _initialize_attention():
 			head_weights.append(token_weights)
 		attention_weights.append(head_weights)
 
-func _create_encoder_sequence():
+func _create_encoder_sequence() -> void:
 	"""Create encoder token sequence"""
 	var encoder_container = Node3D.new()
 	encoder_container.name = "EncoderSequence"
@@ -117,7 +127,7 @@ func _create_encoder_sequence():
 	# Floor platform
 	_create_sequence_platform(encoder_container, Color(0.3, 0.9, 0.5, 0.4))
 
-func _create_decoder_sequence():
+func _create_decoder_sequence() -> void:
 	"""Create decoder token sequence"""
 	var decoder_container = Node3D.new()
 	decoder_container.name = "DecoderSequence"
@@ -160,6 +170,7 @@ func _create_token(index: int, is_encoder: bool) -> RigidBody3D:
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = token_size
+	sphere.height = token_size * 2.0
 	mesh.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -200,7 +211,7 @@ func _create_token(index: int, is_encoder: bool) -> RigidBody3D:
 
 	return body
 
-func _create_sequence_platform(container: Node3D, color: Color):
+func _create_sequence_platform(container: Node3D, color: Color) -> void:
 	"""Create platform under sequence"""
 	var platform = MeshInstance3D.new()
 	var box = BoxMesh.new()
@@ -220,7 +231,7 @@ func _create_sequence_platform(container: Node3D, color: Color):
 	platform.position = Vector3(0, -(sequence_length * token_spacing) / 2.0 - 0.5, 0)
 	container.add_child(platform)
 
-func _create_attention_mechanism():
+func _create_attention_mechanism() -> void:
 	"""Create visual representation of attention"""
 	if not show_attention_beams:
 		return
@@ -262,7 +273,7 @@ func _create_attention_mechanism():
 			head_beams.append(query_beams)
 		attention_beams.append(head_beams)
 
-func _create_positional_encoding_viz():
+func _create_positional_encoding_viz() -> void:
 	"""Create wave pattern showing positional encoding"""
 	if not show_positional_encoding:
 		return
@@ -279,6 +290,7 @@ func _create_positional_encoding_viz():
 			var particle = MeshInstance3D.new()
 			var sphere = SphereMesh.new()
 			sphere.radius = 0.05
+			sphere.height = 0.1
 			particle.mesh = sphere
 
 			var mat = StandardMaterial3D.new()
@@ -309,7 +321,7 @@ func _create_positional_encoding_viz():
 	label.position = Vector3(0, 1.5, 0)
 	encoding_container.add_child(label)
 
-func _create_qkv_visualization():
+func _create_qkv_visualization() -> void:
 	"""Create Query/Key/Value triplet visualization"""
 	var qkv_container = Node3D.new()
 	qkv_container.name = "QKV_Visualization"
@@ -326,6 +338,7 @@ func _create_qkv_visualization():
 		var qkv_sphere = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.4
+		sphere.height = 0.8
 		qkv_sphere.mesh = sphere
 
 		var mat = StandardMaterial3D.new()
@@ -361,7 +374,7 @@ func _create_qkv_visualization():
 	desc.position = Vector3(0, -1.2, 0)
 	qkv_container.add_child(desc)
 
-func _create_attention_head_selectors():
+func _create_attention_head_selectors() -> void:
 	"""Create buttons to switch between attention heads"""
 	if not enable_head_switching:
 		return
@@ -411,7 +424,7 @@ func _create_attention_head_selectors():
 		btn_label.position = Vector3(x, -0.7, 0)
 		selector_container.add_child(btn_label)
 
-func _create_control_panel():
+func _create_control_panel() -> void:
 	"""Create VR-accessible control panel"""
 	var controls = Node3D.new()
 	controls.name = "ControlPanel"
@@ -459,7 +472,7 @@ func _create_control_panel():
 	metrics.position = Vector3(0, -0.9, 0.1)
 	controls.add_child(metrics)
 
-func _create_info_panels():
+func _create_info_panels() -> void:
 	"""Create educational info panels"""
 	# Self-attention explanation
 	_create_info_panel(
@@ -483,7 +496,7 @@ func _create_info_panels():
 			Color(0.9, 0.3, 0.9)
 		)
 
-func _create_info_panel(pos: Vector3, text: String, color: Color):
+func _create_info_panel(pos: Vector3, text: String, color: Color) -> void:
 	"""Create floating info panel"""
 	var label = Label3D.new()
 	label.text = text
@@ -495,7 +508,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _update_attention_weights(delta):
+func _update_attention_weights(delta) -> void:
 	"""Simulate changing attention patterns"""
 	# Slowly shift attention weights during training
 	for head in range(num_attention_heads):
@@ -511,7 +524,7 @@ func _update_attention_weights(delta):
 			for k_idx in range(sequence_length):
 				attention_weights[head][q_idx][k_idx] = max(0.0, attention_weights[head][q_idx][k_idx]) / max(0.001, total)
 
-func _animate_tokens(_delta):
+func _animate_tokens(_delta) -> void:
 	"""Animate token spheres"""
 	for i in range(encoder_tokens.size()):
 		var token = encoder_tokens[i]
@@ -523,7 +536,7 @@ func _animate_tokens(_delta):
 		var pulse = 1.0 + cos(time * 2.2 + i * 0.4) * 0.15 * training_progress
 		token.scale = Vector3.ONE * pulse
 
-func _animate_attention_beams(_delta):
+func _animate_attention_beams(_delta) -> void:
 	"""Update attention beam visualizations"""
 	if not show_attention_beams:
 		return
@@ -550,7 +563,7 @@ func _animate_attention_beams(_delta):
 				var weight = attention_weights[head][q_idx][k_idx]
 				beam.material_override.emission_energy_multiplier = weight * 2.0
 
-func _animate_positional_encoding(_delta):
+func _animate_positional_encoding(_delta) -> void:
 	"""Animate positional encoding waves"""
 	for encoding_data in positional_encodings:
 		var pos = encoding_data.position
@@ -568,14 +581,14 @@ func _animate_positional_encoding(_delta):
 
 			particle.position = Vector3(x, y, z)
 
-func _animate_qkv(_delta):
+func _animate_qkv(_delta) -> void:
 	"""Animate Query/Key/Value spheres"""
 	for i in range(qkv_visualizations.size()):
 		var qkv = qkv_visualizations[i]
 		var pulse = 1.0 + sin(time * 2.0 + i * TAU / 3.0) * 0.2
 		qkv.scale = Vector3.ONE * pulse
 
-func _update_control_panel():
+func _update_control_panel() -> void:
 	"""Update control panel displays"""
 	var controls = get_node_or_null("ControlPanel")
 	if not controls:
@@ -586,7 +599,7 @@ func _update_control_panel():
 		metrics.text = "Loss: %.3f\nHead: %d/%d" % [loss, current_attention_head, num_attention_heads - 1]
 
 # Public API
-func switch_attention_head(head: int):
+func switch_attention_head(head: int) -> void:
 	"""Switch to different attention head"""
 	if head < 0 or head >= num_attention_heads:
 		return
@@ -603,7 +616,16 @@ func switch_attention_head(head: int):
 		for k_idx in range(sequence_length):
 			attention_beams[current_attention_head][q_idx][k_idx].visible = true
 
-func reset_training():
+func reset_training() -> void:
 	training_progress = 0.0
 	loss = 1.0
 	time = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

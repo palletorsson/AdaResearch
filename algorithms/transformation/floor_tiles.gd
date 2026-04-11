@@ -114,3 +114,12 @@ func generate_tiles() -> void:
 					mm.set_instance_color(k, color_a if use_color_a else color_b)
 
 			k += 1
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

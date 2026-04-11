@@ -5,12 +5,13 @@
 [node name="CombinePrimitives" type="Node3D"]
 
 [node name="cylinder" parent="." instance=ExtResource("4_6p5hs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, -0.6)
 
 [node name="plane" parent="." instance=ExtResource("4_6p5hs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, -0.6)
 
 [node name="sphere" parent="." instance=ExtResource("4_6p5hs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.710827, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 0.6)
 
 [node name="torus" parent="." instance=ExtResource("4_6p5hs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.401002, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0.6)

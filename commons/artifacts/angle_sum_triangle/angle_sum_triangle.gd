@@ -4,6 +4,16 @@
 extends Node3D
 class_name AngleSumTriangle
 
+# @identity
+# essence: α + β + γ = 180° (Euclidean angle sum theorem)
+# desire: see the number 180 emerge from three vertices — the axiom made spatial
+# critical_parameter: curvature — at K=0 the sum is exactly 180°; any deviation breaks it
+# triggers: static display; presence alone teaches
+# emerges: the realization that this "obvious" fact depends on the parallel postulate
+# needs: VR controls [missing] — could add draggable vertices to explore angle sum changes
+# relationships: contrasts hyperbolic_surface (angle sum < 180°) and elliptic_surface (angle sum > 180°); depends on euclid_postulates_plaque
+# truth: the angle sum of a triangle is not a fact about triangles but a fact about the space they inhabit
+
 @export var size: float = 0.4
 var _triangle: MeshInstance3D
 var _angle_labels: Array[Label3D] = []

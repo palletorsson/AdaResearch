@@ -10,7 +10,7 @@ extends Node3D
 
 var mesh_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
     mesh_instance = MeshInstance3D.new()
     add_child(mesh_instance)
     mesh_instance.mesh = _build_surface()
@@ -70,4 +70,11 @@ func _build_surface() -> ArrayMesh:
     var mesh := st.commit()
     return mesh
 
+func _exit_tree() -> void:
+    for child in get_children():
+        if not child.owner:
+            child.queue_free()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+    pass

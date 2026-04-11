@@ -45,16 +45,6 @@ def get_registry():
                 _registry.update(arts.keys())
         except:
             pass
-    gf = os.path.join(PROJECT, 'commons', 'artifacts', 'grid_artifacts.json')
-    if os.path.isfile(gf):
-        try:
-            with open(gf, 'r', encoding='utf-8-sig') as fh:
-                d = json.load(fh)
-            arts = d.get('artifacts', d)
-            if isinstance(arts, dict):
-                _registry.update(arts.keys())
-        except:
-            pass
     return _registry
 
 

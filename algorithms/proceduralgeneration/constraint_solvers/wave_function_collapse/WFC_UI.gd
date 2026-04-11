@@ -10,10 +10,10 @@
 @onready var restart_btn = $Panel/VBoxContainer/RestartButton
 @onready var stats_label = $Panel/VBoxContainer/StatsLabel
 
-func _ready():
+func _ready() -> void:
 	_update_ui()
 
-func _update_ui():
+func _update_ui() -> void:
 	if not wfc_root: return
 	speed_slider.value = wfc_root.generation_interval
 	size_slider.value = wfc_root.grid_size
@@ -23,13 +23,13 @@ func _process(_delta):
 		var info = wfc_root.get_wfc_info()
 		stats_label.text = "Collapsed: %d / %d\nProgress: %.1f%%" % [info.collapsed_cells, info.total_cells, info.progress * 100]
 
-func _on_restart_pressed():
+func _on_restart_pressed() -> void:
 	wfc_root.start_wfc_generation()
 
-func _on_speed_changed(value):
+func _on_speed_changed(value) -> void:
 	wfc_root.generation_interval = max(0.01, 1.05 - value) # Invert so higher value = faster
 	
-func _on_size_changed(value):
+func _on_size_changed(value) -> void:
 	var s = int(value)
 	if wfc_root.grid_size != s:
 		wfc_root.grid_size = s
@@ -37,7 +37,7 @@ func _on_size_changed(value):
 		# Re-create grid
 		wfc_root.create_wfc_grid() # This clears old one? Need to verify script
 
-func _on_size_drag_ended(value_changed):
+func _on_size_drag_ended(value_changed) -> void:
 	if value_changed:
 		wfc_root.create_wfc_grid()
 		wfc_root.start_wfc_generation()

@@ -5,6 +5,17 @@ extends Node3D
 
 class_name LabAtmosphericMonitoring
 
+
+# @identity
+# essence: reading(t) = base + variation * sin(frequency * t * TAU) + noise
+# desire: Watch laboratory instruments slowly drift through atmospheric measurements
+# critical_parameter: pressure_frequency — controls the speed of atmospheric drift cycles
+# triggers: time drives sinusoidal variation in pressure, temperature, humidity needles
+# emerges: the feeling of a living laboratory where instruments never fully settle
+# needs: VR needle observation [has], alert threshold adjustment [missing]
+# relationships: depends on sine-driven gauge animation; contrasts with multimeter (AC measurement vs environmental monitoring); unlocks lab atmosphere
+# truth: The atmosphere is a superposition of slow oscillations that instruments make legible.
+
 @export_group("Pressure")
 @export var pressure_base: float = 1013.25  # hPa (standard atm)
 @export var pressure_variation: float = 5.0  # hPa

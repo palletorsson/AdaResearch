@@ -10,13 +10,28 @@ const ALL_SEQUENCES_LABEL := "All sequences"
 const ALL_ALGORITHMS_LABEL := "All map algorithms"
 const STATE_FILE_PATH := "user://vr_map_loader_ui_state.cfg"
 
-@onready var _sequence_option: OptionButton = $Margin/VBox/SequenceRow/SequenceOption
-@onready var _algorithm_option: OptionButton = $Margin/VBox/AlgorithmRow/AlgorithmOption
-@onready var _map_option: OptionButton = $Margin/VBox/MapRow/MapOption
-@onready var _count_label: Label = $Margin/VBox/CountLabel
-@onready var _context_label: Label = $Margin/VBox/ContextLabel
-@onready var _status_label: Label = $Margin/VBox/StatusLabel
+const VR_BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
 
+# VR UI elements
+var _sequence_cycle_btn: Node3D
+var _sequence_label: Label3D
+var _algorithm_cycle_btn: Node3D
+var _algorithm_label: Label3D
+var _map_cycle_btn: Node3D
+var _map_label: Label3D
+var _count_label: Label3D
+var _context_label: Label3D
+var _status_label: Label3D
+
+# Navigation buttons
+var _prev_btn: Node3D
+var _next_btn: Node3D
+var _load_next_btn: Node3D
+var _load_btn: Node3D
+var _start_sequence_btn: Node3D
+var _refresh_btn: Node3D
+
+# Data
 var _sequence_names: Array[String] = []
 var _algorithm_names: Array[String] = []
 var _maps_by_sequence: Dictionary = {}
@@ -28,20 +43,158 @@ var _saved_sequence_filter: String = ""
 var _saved_algorithm_filter: String = ""
 var _saved_map_name: String = ""
 
+# Current selection indices for cycle-through
+var _sequence_index: int = 0
+var _algorithm_index: int = 0
+var _map_index: int = 0
+
 func _ready() -> void:
-	_sequence_option.item_selected.connect(_on_sequence_selected)
-	_algorithm_option.item_selected.connect(_on_algorithm_selected)
-	_map_option.item_selected.connect(_on_map_selected)
-
-	$Margin/VBox/ButtonRow/PrevButton.pressed.connect(_on_prev_pressed)
-	$Margin/VBox/ButtonRow/NextButton.pressed.connect(_on_next_pressed)
-	$Margin/VBox/ButtonRow/LoadNextButton.pressed.connect(_on_load_next_pressed)
-	$Margin/VBox/ButtonRow/LoadButton.pressed.connect(_on_load_pressed)
-	$Margin/VBox/ButtonRow/StartSequenceButton.pressed.connect(_on_start_sequence_pressed)
-	$Margin/VBox/ButtonRow/RefreshButton.pressed.connect(_on_refresh_pressed)
-
+	_build_vr_ui()
 	_load_state()
 	_reload_data()
+
+func _build_vr_ui() -> void:
+	var y_pos := 0.48
+	var spacing := 0.12
+
+	# Title
+	var title = Label3D.new()
+	title.text = "VR Map Loader"
+	title.font_size = 48
+	title.modulate = Color(0.3, 0.7, 1.0)
+	title.position = Vector3(0, y_pos + 0.08, 0)
+	add_child(title)
+
+	# Sequence cycle
+	_sequence_label = _make_label(ALL_SEQUENCES_LABEL, Vector3(-0.15, y_pos, 0))
+	_sequence_cycle_btn = _make_button("Seq", Vector3(0.2, y_pos, 0))
+	_connect_button(_sequence_cycle_btn, _on_sequence_cycle)
+	y_pos -= spacing
+
+	# Algorithm cycle
+	_algorithm_label = _make_label(ALL_ALGORITHMS_LABEL, Vector3(-0.15, y_pos, 0))
+	_algorithm_cycle_btn = _make_button("Algo", Vector3(0.2, y_pos, 0))
+	_connect_button(_algorithm_cycle_btn, _on_algorithm_cycle)
+	y_pos -= spacing
+
+	# Map cycle
+	_map_label = _make_label("-", Vector3(-0.15, y_pos, 0))
+	_map_cycle_btn = _make_button("Map", Vector3(0.2, y_pos, 0))
+	_connect_button(_map_cycle_btn, _on_map_cycle)
+	y_pos -= spacing
+
+	# Count label
+	_count_label = _make_label("0 maps", Vector3(0, y_pos, 0))
+	_count_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	y_pos -= spacing * 0.7
+
+	# Context label
+	_context_label = _make_label("", Vector3(0, y_pos, 0))
+	_context_label.font_size = 18
+	_context_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	y_pos -= spacing * 0.7
+
+	# Navigation buttons row
+	_prev_btn = _make_button("Prev", Vector3(-0.3, y_pos, 0))
+	_connect_button(_prev_btn, _on_prev_pressed)
+
+	_next_btn = _make_button("Next", Vector3(-0.15, y_pos, 0))
+	_connect_button(_next_btn, _on_next_pressed)
+
+	_load_btn = _make_button("Load", Vector3(0.0, y_pos, 0))
+	_connect_button(_load_btn, _on_load_pressed)
+
+	_load_next_btn = _make_button("Load+", Vector3(0.15, y_pos, 0))
+	_connect_button(_load_next_btn, _on_load_next_pressed)
+
+	_start_sequence_btn = _make_button("Start", Vector3(0.3, y_pos, 0))
+	_connect_button(_start_sequence_btn, _on_start_sequence_pressed)
+	y_pos -= spacing
+
+	_refresh_btn = _make_button("Refresh", Vector3(0, y_pos, 0))
+	_connect_button(_refresh_btn, _on_refresh_pressed)
+	y_pos -= spacing
+
+	# Status label
+	_status_label = _make_label("", Vector3(0, y_pos, 0))
+	_status_label.font_size = 18
+	_status_label.modulate = Color(0.5, 0.5, 0.5)
+	_status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+
+func _make_label(text: String, pos: Vector3) -> Label3D:
+	var label = Label3D.new()
+	label.text = text
+	label.font_size = 22
+	label.modulate = Color(0.85, 0.9, 1.0)
+	label.position = pos
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	add_child(label)
+	return label
+
+func _make_button(text: String, pos: Vector3) -> Node3D:
+	var btn = VR_BUTTON_SCENE.instantiate()
+	btn.position = pos
+	add_child(btn)
+	var lbl = Label3D.new()
+	lbl.text = text
+	lbl.font_size = 18
+	lbl.modulate = Color(0.9, 0.9, 0.7)
+	lbl.position = Vector3(0, 0.03, 0)
+	btn.add_child(lbl)
+	return btn
+
+func _connect_button(btn: Node3D, callback: Callable) -> void:
+	var area = btn.get_node_or_null("InteractableAreaButton")
+	if area:
+		area.button_pressed.connect(callback)
+
+# -- Cycle-through callbacks --
+
+func _on_sequence_cycle() -> void:
+	# Cycle: All -> seq[0] -> seq[1] -> ... -> All
+	var total = _sequence_names.size() + 1
+	_sequence_index = (_sequence_index + 1) % total
+	if _sequence_index == 0:
+		_sequence_label.text = ALL_SEQUENCES_LABEL
+	else:
+		var seq_name = _sequence_names[_sequence_index - 1]
+		var map_count = _get_maps_for_sequence(seq_name).size()
+		_sequence_label.text = "%s (%d)" % [_format_name(seq_name), map_count]
+	_rebuild_algorithm_option()
+	_apply_filters(true)
+	_update_context_label()
+	_save_state()
+
+func _on_algorithm_cycle() -> void:
+	var total = _algorithm_names.size() + 1
+	_algorithm_index = (_algorithm_index + 1) % total
+	if _algorithm_index == 0:
+		_algorithm_label.text = ALL_ALGORITHMS_LABEL
+	else:
+		_algorithm_label.text = _format_name(_algorithm_names[_algorithm_index - 1])
+	_apply_filters(true)
+	_update_context_label()
+	_save_state()
+
+func _on_map_cycle() -> void:
+	if _current_maps.is_empty():
+		return
+	_map_index = (_map_index + 1) % _current_maps.size()
+	_last_selected_map = _current_maps[_map_index]
+	_update_map_label()
+	_update_context_label()
+	_save_state()
+	_set_status("Selected map: %s" % _last_selected_map)
+
+func _update_map_label() -> void:
+	if _current_maps.is_empty():
+		_map_label.text = "-"
+		return
+	if _map_index < 0 or _map_index >= _current_maps.size():
+		_map_index = 0
+	var map_name = _current_maps[_map_index]
+	var algorithm_key = str(_algorithm_by_map.get(map_name, "uncategorized"))
+	_map_label.text = "%s [%s]" % [_format_name(map_name), _format_name(algorithm_key)]
 
 func _reload_data() -> void:
 	_sequence_names.clear()
@@ -93,22 +246,11 @@ func _reload_data() -> void:
 	_sequence_names.sort()
 	_all_maps.sort()
 
-	_rebuild_sequence_option()
 	_rebuild_algorithm_option()
 	_apply_filters(true)
 	_set_status("Loaded %d sequences / %d maps." % [_sequence_names.size(), _all_maps.size()])
 	_restore_selection_from_state()
 	_update_context_label()
-
-func _rebuild_sequence_option() -> void:
-	_sequence_option.clear()
-	_sequence_option.add_item(ALL_SEQUENCES_LABEL)
-
-	for sequence_name in _sequence_names:
-		var map_count := _get_maps_for_sequence(sequence_name).size()
-		_sequence_option.add_item("%s (%d)" % [_format_name(sequence_name), map_count])
-
-	_sequence_option.select(0)
 
 func _rebuild_algorithm_option() -> void:
 	var previous_algorithm := _get_selected_algorithm_filter()
@@ -128,16 +270,15 @@ func _rebuild_algorithm_option() -> void:
 	rebuilt_algorithms.sort()
 	_algorithm_names = rebuilt_algorithms
 
-	_algorithm_option.clear()
-	_algorithm_option.add_item(ALL_ALGORITHMS_LABEL)
-	for algorithm_key in _algorithm_names:
-		_algorithm_option.add_item(_format_name(algorithm_key))
-
 	var selected_index := _algorithm_names.find(previous_algorithm)
 	if selected_index >= 0:
-		_algorithm_option.select(selected_index + 1)
+		_algorithm_index = selected_index + 1
 	else:
-		_algorithm_option.select(0)
+		_algorithm_index = 0
+	if _algorithm_index == 0:
+		_algorithm_label.text = ALL_ALGORITHMS_LABEL
+	elif _algorithm_index - 1 < _algorithm_names.size():
+		_algorithm_label.text = _format_name(_algorithm_names[_algorithm_index - 1])
 
 func _apply_filters(reset_selection: bool) -> void:
 	var algorithm_filter := _get_selected_algorithm_filter()
@@ -151,97 +292,80 @@ func _apply_filters(reset_selection: bool) -> void:
 
 	filtered_maps.sort()
 	_current_maps = filtered_maps
-	_rebuild_map_option(reset_selection)
+	_rebuild_map_display(reset_selection)
 
-func _rebuild_map_option(reset_selection: bool) -> void:
-	var previously_selected := _last_selected_map
-	if not reset_selection:
-		var current_index := _map_option.get_selected()
-		if current_index >= 0 and current_index < _current_maps.size():
-			previously_selected = _current_maps[current_index]
-
-	_map_option.clear()
-	for map_name in _current_maps:
-		var algorithm_key := str(_algorithm_by_map.get(map_name, "uncategorized"))
-		_map_option.add_item("%s [%s]" % [_format_name(map_name), _format_name(algorithm_key)])
-
+func _rebuild_map_display(reset_selection: bool) -> void:
 	if _current_maps.is_empty():
 		_count_label.text = "0 maps in filter"
 		_last_selected_map = ""
+		_map_index = 0
+		_update_map_label()
 		_update_context_label()
 		_set_status("No maps for this filter.")
 		return
 
 	_count_label.text = "%d maps in filter" % _current_maps.size()
-	var selected_index := 0
-	if not previously_selected.is_empty():
-		var found_index := _current_maps.find(previously_selected)
-		if found_index >= 0:
-			selected_index = found_index
 
-	_map_option.select(selected_index)
-	_last_selected_map = _current_maps[selected_index]
+	if reset_selection:
+		_map_index = 0
+	else:
+		if not _last_selected_map.is_empty():
+			var found = _current_maps.find(_last_selected_map)
+			if found >= 0:
+				_map_index = found
+			else:
+				_map_index = 0
+		else:
+			_map_index = 0
+
+	_last_selected_map = _current_maps[_map_index]
+	_update_map_label()
 	_update_context_label()
 	_set_status("Ready map: %s" % _last_selected_map)
-
-func _on_sequence_selected(_index: int) -> void:
-	_rebuild_algorithm_option()
-	_apply_filters(true)
-	_update_context_label()
-	_save_state()
-
-func _on_algorithm_selected(_index: int) -> void:
-	_apply_filters(true)
-	_update_context_label()
-	_save_state()
-
-func _on_map_selected(index: int) -> void:
-	if index < 0 or index >= _current_maps.size():
-		return
-	_last_selected_map = _current_maps[index]
-	_update_context_label()
-	_save_state()
-	_set_status("Selected map: %s\n%s" % [_last_selected_map, _get_map_data_path(_last_selected_map)])
 
 func _on_prev_pressed() -> void:
 	if _current_maps.is_empty():
 		return
 
-	var current_index := _map_option.get_selected()
-	if current_index <= 0:
+	if _map_index <= 0:
 		_set_status("Already at first map.")
 		return
 
-	_map_option.select(current_index - 1)
-	_on_map_selected(current_index - 1)
+	_map_index -= 1
+	_last_selected_map = _current_maps[_map_index]
+	_update_map_label()
+	_update_context_label()
+	_save_state()
+	_set_status("Selected map: %s" % _last_selected_map)
 
 func _on_next_pressed() -> void:
 	if _current_maps.is_empty():
 		return
 
-	var current_index := _map_option.get_selected()
-	if current_index >= _current_maps.size() - 1:
+	if _map_index >= _current_maps.size() - 1:
 		_set_status("Already at last map.")
 		return
 
-	_map_option.select(current_index + 1)
-	_on_map_selected(current_index + 1)
+	_map_index += 1
+	_last_selected_map = _current_maps[_map_index]
+	_update_map_label()
+	_update_context_label()
+	_save_state()
+	_set_status("Selected map: %s" % _last_selected_map)
 
 func _on_load_next_pressed() -> void:
 	if _current_maps.is_empty():
 		_set_status("No maps available in this filter.")
 		return
 
-	var current_index := _map_option.get_selected()
-	if current_index < 0:
-		current_index = 0
-
-	var next_index := current_index + 1
+	var next_index := _map_index + 1
 	if next_index >= _current_maps.size():
 		next_index = 0
 
-	_map_option.select(next_index)
-	_on_map_selected(next_index)
+	_map_index = next_index
+	_last_selected_map = _current_maps[_map_index]
+	_update_map_label()
+	_update_context_label()
 	_on_load_pressed()
 
 func _on_load_pressed() -> void:
@@ -349,32 +473,19 @@ func _get_maps_for_sequence(sequence_name: String) -> Array[String]:
 	return sequence_maps
 
 func _get_selected_sequence_filter() -> String:
-	var index := _sequence_option.get_selected()
-	if index <= 0:
+	if _sequence_index <= 0 or _sequence_index - 1 >= _sequence_names.size():
 		return ""
-
-	var sequence_index := index - 1
-	if sequence_index < 0 or sequence_index >= _sequence_names.size():
-		return ""
-
-	return _sequence_names[sequence_index]
+	return _sequence_names[_sequence_index - 1]
 
 func _get_selected_algorithm_filter() -> String:
-	var index := _algorithm_option.get_selected()
-	if index <= 0:
+	if _algorithm_index <= 0 or _algorithm_index - 1 >= _algorithm_names.size():
 		return ""
-
-	var algorithm_index := index - 1
-	if algorithm_index < 0 or algorithm_index >= _algorithm_names.size():
-		return ""
-
-	return _algorithm_names[algorithm_index]
+	return _algorithm_names[_algorithm_index - 1]
 
 func _get_selected_map_name() -> String:
-	var index := _map_option.get_selected()
-	if index < 0 or index >= _current_maps.size():
+	if _map_index < 0 or _map_index >= _current_maps.size():
 		return ""
-	return _current_maps[index]
+	return _current_maps[_map_index]
 
 func _get_sequence_configs() -> Dictionary:
 	if AdaSceneManager.is_available():
@@ -535,23 +646,28 @@ func _restore_selection_from_state() -> void:
 	if _saved_sequence_filter.is_empty() and _saved_algorithm_filter.is_empty() and _saved_map_name.is_empty():
 		return
 
-	var sequence_index := _sequence_names.find(_saved_sequence_filter)
-	if sequence_index >= 0:
-		_sequence_option.select(sequence_index + 1)
+	var sequence_idx := _sequence_names.find(_saved_sequence_filter)
+	if sequence_idx >= 0:
+		_sequence_index = sequence_idx + 1
+		var seq_name = _sequence_names[sequence_idx]
+		var map_count = _get_maps_for_sequence(seq_name).size()
+		_sequence_label.text = "%s (%d)" % [_format_name(seq_name), map_count]
 
 	_rebuild_algorithm_option()
 
-	var algorithm_index := _algorithm_names.find(_saved_algorithm_filter)
-	if algorithm_index >= 0:
-		_algorithm_option.select(algorithm_index + 1)
+	var algorithm_idx := _algorithm_names.find(_saved_algorithm_filter)
+	if algorithm_idx >= 0:
+		_algorithm_index = algorithm_idx + 1
+		_algorithm_label.text = _format_name(_algorithm_names[algorithm_idx])
 
 	_apply_filters(false)
 
 	if not _saved_map_name.is_empty():
-		var map_index := _current_maps.find(_saved_map_name)
-		if map_index >= 0:
-			_map_option.select(map_index)
-			_on_map_selected(map_index)
+		var map_idx := _current_maps.find(_saved_map_name)
+		if map_idx >= 0:
+			_map_index = map_idx
+			_last_selected_map = _current_maps[_map_index]
+			_update_map_label()
 
 func _load_state() -> void:
 	var config := ConfigFile.new()
@@ -585,12 +701,11 @@ func _update_context_label() -> void:
 	if map_name.is_empty():
 		map_name = "-"
 
-	var selected_index := _map_option.get_selected()
 	var position_text := "0/0"
-	if selected_index >= 0 and selected_index < _current_maps.size():
-		position_text = "%d/%d" % [selected_index + 1, _current_maps.size()]
+	if _map_index >= 0 and _map_index < _current_maps.size():
+		position_text = "%d/%d" % [_map_index + 1, _current_maps.size()]
 
-	_context_label.text = "Seq: %s  |  Algo: %s  |  Map: %s (%s)" % [
+	_context_label.text = "Seq: %s | Algo: %s | Map: %s (%s)" % [
 		_format_name(sequence_name),
 		_format_name(algorithm_name),
 		_format_name(map_name),
@@ -603,7 +718,8 @@ func _get_map_data_path(map_name: String) -> String:
 	return "res://commons/maps/%s/map_data.json" % map_name
 
 func _set_status(text: String) -> void:
-	_status_label.text = text
+	if _status_label:
+		_status_label.text = text
 
 func _format_name(raw_name: String) -> String:
 	var result := raw_name.replace("_", " ")
@@ -614,3 +730,11 @@ func _format_name(raw_name: String) -> String:
 			continue
 		capitalized.append(word[0].to_upper() + word.substr(1))
 	return " ".join(capitalized)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()

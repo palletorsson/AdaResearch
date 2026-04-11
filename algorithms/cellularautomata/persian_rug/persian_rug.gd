@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: cell(t+1) = born/survive(neighbors) with four-fold symmetry enforcement
+# desire: To weave itself — a living carpet whose patterns breathe and shift like textile memory
+# critical_parameter: rule_border_born/survive vs rule_inner_born/survive — two rulesets create the border-interior tension
+# triggers: Switching random_seed reshuffles initial conditions; changing border vs inner rules shifts the visual dialect entirely
+# emerges: Intricate symmetric textile patterns from the interplay of two CA rulesets and forced mirror symmetry
+# needs: VR parameter controls [missing], auto-play toggle [has via auto_step]
+# relationships: Contrasts with mirrored_cellular_automata (stochastic symmetry vs deterministic). Feeds into CA_Introduction.
+# truth: Symmetry imposed on local rules transforms noise into ornament — the rug designs itself.
+
 @export_category("Rug Settings")
 @export var width: int = 256
 @export var height: int = 384
@@ -48,7 +58,7 @@ var is_playing = true
 
 @onready var mesh_instance: MeshInstance3D = $RugMesh
 
-func _ready():
+func _ready() -> void:
 	if not color_decay:
 		_setup_default_gradient()
 	
@@ -57,7 +67,7 @@ func _ready():
 	# Initial full update
 	_update_texture_slice(height)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Ensure variables are initialized for @tool hot-reloading
 	if cycle_timer == null: cycle_timer = 0.0
 	if is_playing == null: is_playing = true
@@ -98,7 +108,7 @@ func _process(delta):
 			step()
 			current_row = 0
 
-func _setup_default_gradient():
+func _setup_default_gradient() -> void:
 	color_decay = Gradient.new()
 	color_decay.remove_point(0)
 	color_decay.remove_point(0)
@@ -106,7 +116,7 @@ func _setup_default_gradient():
 	color_decay.add_point(0.5, Color("9c1c5a"))
 	color_decay.add_point(1.0, Color("f8d7da"))
 
-func _initialize_grid():
+func _initialize_grid() -> void:
 	var size = width * height
 	# Force type reset in case of hot-reload artifact
 	grid = PackedByteArray()
@@ -134,7 +144,7 @@ func _initialize_grid():
 func _is_border(x, y) -> bool:
 	return x < border_size or x >= width - border_size or y < border_size or y >= height - border_size
 
-func _enforce_symmetry():
+func _enforce_symmetry() -> void:
 	# Mirror Top-Left to Top-Right, Bottom-Left, Bottom-Right
 	for y in range(height / 2):
 		var row_offset = y * width
@@ -150,7 +160,7 @@ func _enforce_symmetry():
 			# Bottom-Right
 			grid[mirror_row_offset + (width - 1 - x)] = val
 
-func step():
+func step() -> void:
 	# Pre-calculate constants to avoid lookups in loop
 	var w = width
 	var h = height
@@ -236,7 +246,7 @@ func step():
 	_enforce_symmetry()
 	current_step += 1
 
-func _setup_texture():
+func _setup_texture() -> void:
 	image = Image.create(width, height, false, Image.FORMAT_RGBA8)
 	texture = ImageTexture.create_from_image(image)
 	
@@ -253,7 +263,7 @@ func _setup_texture():
 	if mesh_instance:
 		mesh_instance.material_override = mat
 
-func _update_texture_slice(rows: int):
+func _update_texture_slice(rows: int) -> void:
 	var end_row = min(current_row + rows, height)
 	var w = width
 	
@@ -286,3 +296,6 @@ func _update_texture_slice(rows: int):
 	texture.update(image)
 	
 	current_row = end_row
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

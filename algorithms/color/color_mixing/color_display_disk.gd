@@ -67,3 +67,12 @@ func _update_from_tracked_disk() -> void:
 	
 	# Update rotation: mirror the small disk's rotation
 	global_rotation = _tracked_disk.global_rotation
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -145,3 +145,5 @@ static func create(parent: Node3D, title: String, formula: String, description: 
 	root.add_child(accent)
 
 	return root
+
+

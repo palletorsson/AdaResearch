@@ -23,7 +23,13 @@
 			],
 			"parameters": {
 				"current_index": "Starting statement (0-8)",
-				"grabbable": "Enable XR grab interaction"
+				"grabbable": "Enable XR grab interaction",
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy",
@@ -44,7 +50,8 @@
 			"map_sequences": [
 				"foundationscrisis"
 			],
-			"sequence": "foundationscrisis"
+			"sequence": "foundationscrisis",
+			"name": "GÃ¶del Statement Plaque"
 		},
 		"russell_set_box": {
 			"lookup_name": "russell_set_box",
@@ -64,7 +71,13 @@
 			],
 			"parameters": {
 				"max_visible_depth": "How many nested boxes before infinite indicator",
-				"size": "Outer box dimensions"
+				"size": "Outer box dimensions",
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy",
@@ -85,7 +98,8 @@
 			"map_sequences": [
 				"foundationscrisis"
 			],
-			"sequence": "foundationscrisis"
+			"sequence": "foundationscrisis",
+			"name": "Russell's Set Box"
 		},
 		"magritte_pipe": {
 			"lookup_name": "magritte_pipe",
@@ -102,7 +116,13 @@
 				"click to cycle through meta-layers of representation"
 			],
 			"parameters": {
-				"current_layer": "Current level of representation questioning (0-5)"
+				"current_layer": "Current level of representation questioning (0-5)",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy"
@@ -120,9 +140,11 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"artmathematics"
+				"artmathematics",
+				"foundationscrisis"
 			],
-			"sequence": "artmathematics"
+			"sequence": "artmathematics",
+			"name": "Magritte Pipe"
 		},
 		"escher_staircase": {
 			"lookup_name": "escher_staircase",
@@ -140,7 +162,13 @@
 			],
 			"parameters": {
 				"steps_per_side": "Number of steps on each side of the square",
-				"rotate_view": "Auto-rotate for viewing"
+				"rotate_view": "Auto-rotate for viewing",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy",
@@ -162,7 +190,8 @@
 				"artmathematics",
 				"foundationscrisis"
 			],
-			"sequence": "artmathematics"
+			"sequence": "artmathematics",
+			"name": "Escher Staircase"
 		},
 		"florensky_sphere": {
 			"lookup_name": "florensky_sphere",
@@ -182,7 +211,13 @@
 			],
 			"parameters": {
 				"current_state": "A, NOT_A, BOTH, or NEITHER",
-				"allow_observation": "Whether observation collapses superposition"
+				"allow_observation": "Whether observation collapses superposition",
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy",
@@ -203,7 +238,8 @@
 			"map_sequences": [
 				"foundationscrisis"
 			],
-			"sequence": "foundationscrisis"
+			"sequence": "foundationscrisis",
+			"name": "Florensky Sphere"
 		},
 		"bifurcation_diagram": {
 			"lookup_name": "bifurcation_diagram",
@@ -223,7 +259,13 @@
 			"parameters": {
 				"current_r": "Current r value (2.5-4.0)",
 				"r_steps": "Resolution of diagram",
-				"width": "Physical width of visualization"
+				"width": "Physical width of visualization",
+				"footprint": [
+					5,
+					5,
+					5
+				],
+				"size_group": "environment"
 			},
 			"dev_themes": [
 				"qfep",
@@ -243,7 +285,8 @@
 			"map_sequences": [
 				"foundationscrisis"
 			],
-			"sequence": "foundationscrisis"
+			"sequence": "foundationscrisis",
+			"name": "Bifurcation Diagram"
 		},
 		"euclid_postulates_plaque": {
 			"lookup_name": "euclid_postulates_plaque",
@@ -261,7 +304,13 @@
 			],
 			"parameters": {
 				"current_postulate": "Current postulate (0-4)",
-				"highlight_fifth": "Emphasize the parallel postulate"
+				"highlight_fifth": "Emphasize the parallel postulate",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy",
@@ -300,7 +349,13 @@
 			],
 			"parameters": {
 				"size": "Triangle size",
-				"auto_rotate": "Slowly rotate to reveal impossibility"
+				"auto_rotate": "Slowly rotate to reveal impossibility",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy",
@@ -319,7 +374,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"artmathematics"
+				"artmathematics",
+				"foundationscrisis"
 			],
 			"sequence": "artmathematics"
 		},
@@ -339,7 +395,13 @@
 			"parameters": {
 				"disk_radius": "Size of the disk",
 				"line_count": "Number of geodesic lines",
-				"show_triangle": "Display hyperbolic triangle"
+				"show_triangle": "Display hyperbolic triangle",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"geometry",
@@ -380,7 +442,13 @@
 			],
 			"parameters": {
 				"box_size": "Physical dimensions",
-				"auto_reset_time": "Seconds before returning to superposition"
+				"auto_reset_time": "Seconds before returning to superposition",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"philosophy",
@@ -415,7 +483,13 @@
 				"observe angle labels and sum"
 			],
 			"parameters": {
-				"size": "Triangle scale factor (default 0.4)"
+				"size": "Triangle scale factor (default 0.4)",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			},
 			"dev_themes": [
 				"geometry",
@@ -434,7 +508,8 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"foundationscrisis"
+				"foundationscrisis",
+				"testmaps"
 			],
 			"sequence": "foundationscrisis"
 		},
@@ -487,7 +562,14 @@
 			"interactions": [
 				"observe the contrast between constructive and classical proof"
 			],
-			"parameters": {},
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
 			"dev_themes": [
 				"philosophy"
 			],
@@ -504,7 +586,89 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
+				"foundationscrisis",
+				"testmaps"
+			],
+			"sequence": "foundationscrisis"
+		},
+		"brouwer_choice_sequence": {
+			"lookup_name": "brouwer_choice_sequence",
+			"scene": "res://commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.tscn",
+			"class_name": "BrouwerChoiceSequence",
+			"description": "Brouwer's free choice sequences - unfinished infinite objects that unfold over time, visualized as fading dots with an open-ended future",
+			"gamwell_reference": "Chapter 3-5: Intuitionism and Brouwer",
+			"qfep_connection": "The sequence is never complete - knowledge is always in-progress, never finalized",
+			"signals": [],
+			"interactions": [
+				"observe the unfolding sequence with animated dots"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"philosophy"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"brouwer",
+				"intuitionism",
+				"choice_sequence",
+				"infinity",
+				"foundations"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
 				"foundationscrisis"
+			],
+			"sequence": "foundationscrisis"
+		},
+		"excluded_middle_demo": {
+			"lookup_name": "excluded_middle_demo",
+			"scene": "res://commons/artifacts/excluded_middle_demo/excluded_middle_demo.tscn",
+			"class_name": "ExcludedMiddleDemo",
+			"description": "Law of excluded middle (P or not-P) interactive demo - Brouwer rejected this for non-constructive proofs, slider controls the degree of rejection",
+			"gamwell_reference": "Chapter 3-5: Intuitionism and the rejection of excluded middle",
+			"qfep_connection": "Not everything is decidable - the excluded middle assumes omniscience that constructivism rejects",
+			"signals": [],
+			"interactions": [
+				"use slider to toggle between classical and intuitionist views"
+			],
+			"parameters": {
+				"show_rejection": "Whether to display Brouwer's rejection of the law",
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"philosophy"
+			],
+			"dev_category": "foundations_crisis",
+			"category": "philosophy",
+			"complexity": "intermediate",
+			"tags": [
+				"brouwer",
+				"intuitionism",
+				"excluded_middle",
+				"logic",
+				"foundations",
+				"interactive"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis",
+				"testmaps"
 			],
 			"sequence": "foundationscrisis"
 		}
@@ -519,7 +683,9 @@
 			"penrose_triangle",
 			"poincare_disk",
 			"schrodinger_box",
-			"hilbert_hotel"
+			"hilbert_hotel",
+			"brouwer_choice_sequence",
+			"excluded_middle_demo"
 		],
 		"artmathematics": [
 			"magritte_pipe",

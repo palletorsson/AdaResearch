@@ -8,11 +8,11 @@ class_name ConstraintBlock
 
 var block_size: Vector3 = Vector3(0.5, 0.5, 0.5)
 
-func _ready():
+func _ready() -> void:
 	_create_block_mesh()
 	_create_constraint_indicator()
 
-func _create_block_mesh():
+func _create_block_mesh() -> void:
 	# Create the block cube
 	var cube = CSGBox3D.new()
 	cube.size = block_size
@@ -23,7 +23,7 @@ func _create_block_mesh():
 	
 	add_child(cube)
 
-func _create_constraint_indicator():
+func _create_constraint_indicator() -> void:
 	if is_fixed:
 		# Add visual indicator for fixed blocks
 		var indicator = CSGSphere3D.new()
@@ -43,3 +43,12 @@ func _create_constraint_indicator():
 		label.pixel_size = 0.05
 		label.position = Vector3(0, 0.8, 0)
 		add_child(label)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

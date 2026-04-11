@@ -58,6 +58,7 @@ func create_sphere_at_position(pos: Vector3, rings: int, segments: int, gradient
 	var mesh_instance = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = radius
+	sphere_mesh.height = radius * 2.0
 	sphere_mesh.rings = rings
 	sphere_mesh.radial_segments = segments
 	var hemisphere_enabled = hemisphere_default

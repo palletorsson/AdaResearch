@@ -1,0 +1,80 @@
+{
+  "version": 3,
+  "generator": "ada_facade_builder",
+  "description": "New York City Chinatown / Lower East Side tenement — narrow brick facade with arched windows, cast iron fire escape platforms, pressed tin cornice, and ground-floor shop front. Dense and vertical.",
+  "facade": {
+    "bays": 4,
+    "stories": 5,
+    "symmetry": "bilateral",
+    "total_width": 8.0,
+    "total_height": 16.0,
+    "wall_depth": 0.25
+  },
+  "zones": [
+    { "row": 0, "name": "Cornice",     "height_multiplier": 0.40 },
+    { "row": 1, "name": "Upper3",      "height_multiplier": 1.00 },
+    { "row": 2, "name": "Upper2",      "height_multiplier": 1.00 },
+    { "row": 3, "name": "Upper1",      "height_multiplier": 1.00 },
+    { "row": 4, "name": "GroundFloor", "height_multiplier": 1.30 }
+  ],
+  "materials": {
+    "wall": "#8B4513",
+    "zones": {
+      "Cornice":     { "color": "#6B6B6B", "type": "pressed_tin" },
+      "Upper3":      { "color": "#8B4513", "type": "brick" },
+      "Upper2":      { "color": "#8B4513", "type": "brick" },
+      "Upper1":      { "color": "#8B4513", "type": "brick" },
+      "GroundFloor": { "color": "#7A3B10", "type": "brick" }
+    }
+  },
+  "placements": [
+
+    { "col": 0, "row": 0, "part": "cornice_shelf", "col_span": 4,
+      "sub_grid": {
+        "rows": [0.35, 0.30, 0.35],
+        "placements": [
+          { "row": 0, "part": "cornice_shelf", "params": { "projection": 0.05 } },
+          { "row": 1, "part": "dentil_band",   "params": { "block_w": 0.025, "block_h": 0.025, "block_d": 0.02 } },
+          { "row": 2, "part": "fascia" }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 1, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "ornate_frame": true, "frame_style": "stone_surround", "frame_depth": 0.02 }
+    },
+    { "col": 1, "row": 1, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "ornate_frame": true, "frame_style": "stone_surround", "frame_depth": 0.02 }
+    },
+    { "col": 0, "row": 1, "part": "string_course", "col_span": 4,
+      "params": { "depth": 0.02, "band_height": 0.03, "y_frac": 0.0, "material": "cast_iron" }
+    },
+
+    { "col": 0, "row": 2, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "ornate_frame": true, "frame_style": "stone_surround", "frame_depth": 0.02 }
+    },
+    { "col": 1, "row": 2, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "ornate_frame": true, "frame_style": "stone_surround", "frame_depth": 0.02 }
+    },
+    { "col": 0, "row": 2, "part": "string_course", "col_span": 4,
+      "params": { "depth": 0.02, "band_height": 0.03, "y_frac": 0.0, "material": "cast_iron" }
+    },
+
+    { "col": 0, "row": 3, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "ornate_frame": true, "frame_style": "stone_surround", "frame_depth": 0.02 }
+    },
+    { "col": 1, "row": 3, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "ornate_frame": true, "frame_style": "stone_surround", "frame_depth": 0.02 }
+    },
+    { "col": 0, "row": 3, "part": "string_course", "col_span": 4,
+      "params": { "depth": 0.02, "band_height": 0.03, "y_frac": 0.0, "material": "cast_iron" }
+    },
+
+    { "col": 0, "row": 4, "part": "rect_window", "col_span": 1, "row_span": 1,
+      "params": { "ornate_frame": false, "frame_style": "shop_front", "frame_depth": 0.015 }
+    },
+    { "col": 1, "row": 4, "part": "rect_window", "col_span": 1, "row_span": 1,
+      "params": { "ornate_frame": false, "frame_style": "shop_front", "frame_depth": 0.015 }
+    }
+  ]
+}

@@ -28,7 +28,15 @@
 			"map_sequences": [
 				"foundationscrisis",
 				"qfeplaboratory"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
 		},
 		"phi_slider": {
 			"name": "Phi Slider",
@@ -59,7 +67,15 @@
 			"map_sequences": [
 				"foundationscrisis",
 				"qfeplaboratory"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
 		},
 		"qfep_formula_3d": {
 			"name": "QFEP Formula 3D",
@@ -89,7 +105,15 @@
 			"map_sequences": [
 				"foundationscrisis",
 				"qfeplaboratory"
-			]
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
 		},
 		"qfep_sandbox_console": {
 			"name": "QFEP Sandbox Console",
@@ -107,6 +131,20 @@
 			"map_ready": false,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "advanced",
+			"tags": [
+				"animation",
+				"chaos",
+				"graph",
+				"physics",
+				"qfep",
+				"searching"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"bifurcation_walkway": {
@@ -137,7 +175,19 @@
 			"map_ready": false,
 			"map_sequences": [
 				"qfeplaboratory"
-			]
+			],
+			"interactions": [
+				"walk_through"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					3,
+					10
+				],
+				"size_group": "environment"
+			},
+			"qfep_connection": "The logistic map's r parameter IS the Î» drive. At râ‰ˆ3.57, chaos begins â€” this is Î»_edge, where life exists. You walk through the phase space of orderâ†’chaos."
 		},
 		"edge_of_chaos_orb": {
 			"name": "Edge of Chaos Orb",
@@ -186,6 +236,25 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"geometry",
+				"pattern",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"grab_sphere_E": {
@@ -205,6 +274,25 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"tags": [
+				"compression",
+				"geometry",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"grab_sphere_lambda": {
@@ -224,6 +312,25 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"tags": [
+				"compression",
+				"geometry",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"grab_sphere_phi": {
@@ -243,6 +350,24 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"tags": [
+				"geometry",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"qfep_reactor": {
@@ -260,6 +385,25 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"chaos",
+				"graph",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"entropy_meter": {
@@ -277,6 +421,26 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"compression",
+				"qfep",
+				"visualization"
+			],
+			"dev_themes": [
+				"art",
+				"music",
+				"philosophy",
+				"qfep"
 			]
 		},
 		"edge_detector": {
@@ -294,6 +458,25 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"chaos",
+				"graph",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"phase_cube": {
@@ -311,6 +494,25 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"graph",
+				"qfep",
+				"visualization"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"qfep_oscilloscope": {
@@ -328,6 +530,27 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"animation",
+				"compression",
+				"qfep",
+				"visualization"
+			],
+			"dev_themes": [
+				"art",
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"reactive_particle_field": {
@@ -345,6 +568,20 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"graph",
+				"math",
+				"particle",
+				"qfep",
+				"swarm"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"_comment_aliases": "=== ALIASES TO EXISTING ARTIFACTS ===",
@@ -363,6 +600,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "beginner",
+			"tags": [
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"reactive_particles": {
@@ -379,6 +625,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "intermediate",
+			"tags": [
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"crystal_formation": {
@@ -398,6 +653,16 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "intermediate",
+			"tags": [
+				"pattern",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"edge_particles": {
@@ -417,6 +682,17 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "advanced",
+			"tags": [
+				"chaos",
+				"graph",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"emergence_zone": {
@@ -437,6 +713,17 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "advanced",
+			"tags": [
+				"chaos",
+				"graph",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"_comment_new": "=== NEW ARTIFACTS TO BUILD ===",
@@ -454,6 +741,18 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "advanced",
+			"tags": [
+				"compression",
+				"probability",
+				"procedural",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"particle_chaos": {
@@ -470,6 +769,21 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "advanced",
+			"tags": [
+				"chaos",
+				"compression",
+				"particle",
+				"probability",
+				"procedural",
+				"qfep",
+				"simulation"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"ordered_grid": {
@@ -486,6 +800,17 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"grid",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"chaos_particles": {
@@ -502,6 +827,17 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "advanced",
+			"tags": [
+				"chaos",
+				"compression",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"dissolving_form": {
@@ -518,6 +854,16 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"complexity_pattern": {
@@ -534,6 +880,20 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "advanced",
+			"tags": [
+				"cellular_automata",
+				"chaos",
+				"graph",
+				"pattern",
+				"qfep"
+			],
+			"dev_themes": [
+				"biology",
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"turing_pattern": {
@@ -550,6 +910,24 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"pattern",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"edge_core": {
@@ -566,6 +944,17 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "advanced",
+			"tags": [
+				"chaos",
+				"graph",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"rigid_sculpture": {
@@ -582,6 +971,17 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "advanced",
+			"tags": [
+				"physics",
+				"qfep"
+			],
+			"dev_themes": [
+				"art",
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"fluid_form": {
@@ -598,6 +998,15 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "advanced",
+			"tags": [
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"preserved_pattern": {
@@ -614,6 +1023,16 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "intermediate",
+			"tags": [
+				"pattern",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
 			]
 		},
 		"transforming_pattern": {
@@ -630,6 +1049,258 @@
 			"map_ready": true,
 			"map_sequences": [
 				"qfeplaboratory"
+			],
+			"complexity": "intermediate",
+			"tags": [
+				"pattern",
+				"qfep",
+				"wave"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
+			]
+		},
+		"earths_delight": {
+			"lookup_name": "earths_delight",
+			"name": "earths_delight",
+			"description": "Procedurally sculpts noise terrain and scatters mutated Bosch-inspired plants across it.",
+			"scene": "res://algorithms/criticaltheory/earthsdelight/earths_delight.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"procedural",
+				"terrain"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
+			]
+		},
+		"PipilottiRistWorld": {
+			"lookup_name": "PipilottiRistWorld",
+			"name": "PipilottiRistWorld",
+			"description": "Immersive projection space with animated color grading, floating sculptures, and video-mapped surfaces.",
+			"scene": "res://algorithms/criticaltheory/pipilottiristworld/PipilottiRistWorld.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				10,
+				1,
+				20
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					10,
+					1,
+					20
+				],
+				"size_group": "world_scale"
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"color",
+				"vr"
+			],
+			"dev_themes": [
+				"art",
+				"philosophy",
+				"qfep",
+				"theory"
+			]
+		},
+		"science_desk": {
+			"lookup_name": "science_desk",
+			"name": "science_desk",
+			"description": "a lab workstation with cabinets, countertop equipment, and built-in lighting.",
+			"scene": "res://algorithms/criticaltheory/sciencedesk/science_desk.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
+			],
+			"tags": [
+				"qfep"
+			]
+		},
+		"science_glasses": {
+			"lookup_name": "science_glasses",
+			"name": "science_glasses",
+			"description": "Generates a full suite of laboratory glassware, adapters, and accessories with translucent materials.",
+			"scene": "res://algorithms/criticaltheory/scienceglasses/science_glasses.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
+			],
+			"tags": [
+				"qfep"
+			]
+		},
+		"fuzzy_cloud": {
+			"lookup_name": "fuzzy_cloud",
+			"name": "fuzzy_cloud",
+			"description": "fuzzy_cloud",
+			"scene": "res://algorithms/criticaltheory/fuzzycloud/fuzzy_cloud.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				4,
+				1,
+				4
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					4,
+					1,
+					4
+				],
+				"size_group": "room_scale"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
+			],
+			"tags": [
+				"qfep"
+			]
+		},
+		"edge_of_chaos_unlocked": {
+			"name": "Edge of Chaos Unlocked",
+			"lookup_name": "edge_of_chaos_unlocked",
+			"description": "Reaction-diffusion system with the UNLOCKED lambda slider that the QFEP_Edge_Of_Chaos map withheld. Drag lambda from 0 (frozen crystal) through 0.4 (Turing patterns emerge) to 1.0 (pure noise). The artifact answers the critical text's question: adjusting IS knowledge. Witnessing IS knowledge. Different kinds.",
+			"scene": "res://commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.tscn",
+			"category": "qfep",
+			"interaction": "grab_slide",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "qfep_visualization",
+			"qfep_term": "lambda",
+			"capacity": "CONTROL lambda directly",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"qfeplaboratory"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					2
+				],
+				"size_group": "room_scale"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"reaction_diffusion",
+				"turing_pattern",
+				"lambda",
+				"edge_of_chaos",
+				"critical_theory",
+				"qfep"
+			],
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory",
+				"emergence"
+			]
+		},
+		"AnickaYiLab": {
+			"lookup_name": "AnickaYiLab",
+			"name": "AnickaYiLab",
+			"description": "AnickaYiLab",
+			"scene": "res://algorithms/criticaltheory/anickayilab/AnickaYiLab.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"philosophy",
+				"qfep",
+				"theory"
+			],
+			"tags": [
+				"qfep"
 			]
 		}
 	}

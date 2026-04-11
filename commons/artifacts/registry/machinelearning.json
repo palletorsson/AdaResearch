@@ -1,166 +1,2134 @@
 {
 	"artifacts": {
-		"enhanced_kmeans": {
-			"name": "Enhanced K-Means Clustering",
-			"description": "Interactive K-means clustering visualization with adjustable k, colored cluster assignments, and centroid movement animation.",
-			"qfep_connection": "K-means IS iterative F-minimization — centroids move to minimize within-cluster variance. Each step reduces the system's free energy until convergence. K itself is a λ-like parameter: too few clusters = underfitting, too many = overfitting.",
+		"9_1_ga_shakespeare_vr": {
 			"category": "machinelearning",
-			"scene": "res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
-			"interaction": "observe",
-			"complexity": "intermediate",
+			"complexity": "beginner",
+			"description": "Genetic algorithm evolving random strings toward a target phrase — selection, crossover, and mutation producing Shakespeare. Based on Nature of Code Ch.9.",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			],
 			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "9_1_ga_shakespeare_vr",
 			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"name": "GA Shakespeare (Basic)",
+			"scene": "res://algorithms/machinelearning/noc_ch09/9_1_ga_shakespeare_vr.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"genetic_algorithm",
+				"shakespeare",
+				"string_evolution",
+				"nature_of_code"
+			]
 		},
-		"random_forest_visualization": {
-			"name": "Random Forest Visualization",
-			"description": "Visual representation of random forest ensemble — multiple decision trees voting on classification, showing how diversity improves accuracy.",
+		"9_2_smart_rockets_basic_vr": {
 			"category": "machinelearning",
-			"scene": "res://algorithms/machinelearning/randomforest/random_forest_visualization.tscn",
-			"interaction": "observe",
-			"complexity": "intermediate",
+			"complexity": "beginner",
+			"description": "Basic smart rockets evolving thrust vectors to reach a target — simplified version of genetic algorithm-driven rocket navigation. Based on Nature of Code Ch.9.",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			],
 			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "9_2_smart_rockets_basic_vr",
 			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
-		},
-		"svm_visualization": {
-			"name": "Support Vector Machine Visualization",
-			"description": "SVM hyperplane separator with support vectors highlighted. Shows maximum margin classification and kernel trick for non-linear boundaries.",
-			"qfep_connection": "SVM finds the maximum-margin boundary — the F-minimal separation between classes. Support vectors are the critical data points where the decision boundary is defined. The kernel trick lifts data to higher dimensions for linear separability: same F-minimization strategy as homogeneous coordinates.",
-			"category": "machinelearning",
-			"scene": "res://algorithms/machinelearning/supportvectormachine/svm_visualization.tscn",
-			"interaction": "observe",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"machinelearning"
-			],
-			"sequence": "machinelearning"
+			"name": "Smart Rockets (Basic)",
+			"scene": "res://algorithms/machinelearning/noc_ch09/9_2_smart_rockets_basic_vr.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"genetic_algorithm",
+				"rockets",
+				"evolution",
+				"nature_of_code"
+			]
 		},
 		"9_3_smart_rockets_vr": {
-			"name": "Smart Rockets (Genetic Algorithm)",
-			"description": "Rockets evolving to reach a target through genetic algorithm — selection, crossover, mutation visible in real-time. Based on Nature of Code Ch.9.",
-			"qfep_connection": "Genetic algorithms as population-level F-minimization — fitness IS negative free energy. Mutation injects λ (entropy); selection reduces F (keeps what works). The population explores the edge of chaos between exploitation and exploration.",
 			"category": "machinelearning",
-			"scene": "res://algorithms/machinelearning/noc_ch09/9_3_smart_rockets_vr.tscn",
-			"interaction": "observe",
 			"complexity": "beginner",
+			"description": "Rockets evolving to reach a target through genetic algorithm — selection, crossover, mutation visible in real-time. Based on Nature of Code Ch.9.",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			],
+			"footprint": [
+				2,
+				2,
+				2
+			],
 			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "9_3_smart_rockets_vr",
 			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"name": "Smart Rockets (Genetic Algorithm)",
+			"qfep_connection": "Genetic algorithms as population-level F-minimization — fitness IS negative free energy. Mutation injects λ (entropy); selection reduces F (keeps what works). The population explores the edge of chaos between exploitation and exploration.",
+			"scene": "res://algorithms/machinelearning/noc_ch09/9_3_smart_rockets_vr.tscn",
+			"sequence": "machinelearning",
+			"size_group": "standard",
+			"tags": [
+				"genetic_algorithm",
+				"rockets",
+				"evolution",
+				"fitness",
+				"nature_of_code"
+			]
+		},
+		"9_4_interactive_selection_vr": {
+			"category": "machinelearning",
+			"complexity": "beginner",
+			"description": "User-driven evolutionary selection — choose which organisms survive and reproduce, experiencing artificial selection firsthand. Based on Nature of Code Ch.9.",
+			"dev_themes": [
+				"ai",
+				"art",
+				"biology",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"interaction": "interact",
+			"lookup_name": "9_4_interactive_selection_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Interactive Selection",
+			"scene": "res://algorithms/machinelearning/noc_ch09/9_4_interactive_selection_vr.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"genetic_algorithm",
+				"interactive",
+				"selection",
+				"evolution",
+				"nature_of_code"
+			]
 		},
 		"9_5_evolving_bloops_vr": {
-			"name": "Evolving Bloops",
-			"description": "Organisms evolving size, speed, and behavior through natural selection pressure. Survival of the fittest visualized. Based on Nature of Code Ch.9.",
 			"category": "machinelearning",
-			"scene": "res://algorithms/machinelearning/noc_ch09/9_5_evolving_bloops_vr.tscn",
-			"interaction": "observe",
 			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"machinelearning"
+			"description": "Organisms evolving size, speed, and behavior through natural selection pressure. Survival of the fittest visualized. Based on Nature of Code Ch.9.",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
 			],
-			"sequence": "machinelearning"
-		},
-		"pca_visualization": {
-			"name": "PCA Visualization",
-			"description": "Principal Component Analysis — high-dimensional data projected onto principal axes. Shows variance capture and dimensionality reduction in 3D.",
-			"qfep_connection": "PCA is pure F-minimization through dimensionality reduction — finding the axes of maximum variance and discarding the rest. Compression of high-dimensional E(S) into the most informative low-dimensional F-model.",
-			"category": "machinelearning",
-			"scene": "res://algorithms/machinelearning/pca/pca_visualization.tscn",
+			"footprint": [
+				2,
+				2,
+				2
+			],
+			"include_in_map_data": true,
 			"interaction": "observe",
-			"complexity": "advanced",
-			"include_in_map_data": true,
+			"lookup_name": "9_5_evolving_bloops_vr",
 			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"name": "Evolving Bloops",
+			"scene": "res://algorithms/machinelearning/noc_ch09/9_5_evolving_bloops_vr.tscn",
+			"sequence": "machinelearning",
+			"size_group": "standard",
+			"tags": [
+				"genetic_algorithm",
+				"bloops",
+				"natural_selection",
+				"evolution",
+				"nature_of_code"
+			]
 		},
-		"neural_network_visualization": {
-			"name": "Neural Network Visualization",
-			"description": "Layered neural network with visible activations, weights as line thickness, forward pass animation. See how information transforms through layers.",
-			"qfep_connection": "Neural networks learn F-models through gradient descent — each weight update reduces prediction error. Overfitting = F too low (memorization); regularization = intentional λ (noise tolerance). Generalization lives at the edge of chaos between memorization and randomness.",
+		"9_6_ga_shakespeare_annotated_vr": {
 			"category": "machinelearning",
-			"scene": "res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
-			"interaction": "observe",
-			"complexity": "intermediate",
+			"complexity": "beginner",
+			"description": "Annotated version of the genetic algorithm Shakespeare demo — with explanatory labels showing fitness, mutation rate, and generation progress. Based on Nature of Code Ch.9.",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			],
 			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "9_6_ga_shakespeare_annotated_vr",
 			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
-		},
-		"attention_mechanisms": {
-			"name": "Attention Mechanisms",
-			"description": "Transformer attention visualization — query-key-value matrices, attention weights as connection strengths. See what the model attends to.",
-			"qfep_connection": "Attention IS selective F-allocation — the model learns which inputs to weight heavily (low F surprise) and which to ignore (high E(S) noise). Self-attention computes relevance dynamically, adapting the F-model to each input.",
-			"category": "machinelearning",
-			"scene": "res://algorithms/machinelearning/attention_mechanisms/attention_mechanisms.tscn",
-			"interaction": "observe",
-			"complexity": "advanced",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"machinelearning"
-			],
-			"sequence": "machinelearning"
-		},
-		"time_series_analysis": {
-			"name": "Time Series Analysis",
-			"description": "Temporal pattern recognition — sliding windows, autocorrelation, seasonal decomposition. Algorithms that learn from sequential data.",
-			"category": "machinelearning",
-			"scene": "res://algorithms/machinelearning/time_series_analysis/time_series_analysis.tscn",
-			"interaction": "observe",
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"machinelearning"
-			],
-			"sequence": "machinelearning"
+			"name": "GA Shakespeare (Annotated)",
+			"scene": "res://algorithms/machinelearning/noc_ch09/9_6_ga_shakespeare_annotated_vr.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"genetic_algorithm",
+				"shakespeare",
+				"annotated",
+				"nature_of_code"
+			]
 		},
 		"anomaly_detection": {
-			"name": "Anomaly Detection",
-			"description": "Outlier detection algorithms — isolation forests, statistical boundaries, autoencoder reconstruction error. Finding what doesn't belong.",
-			"qfep_connection": "Anomalies are high-F surprises — data points that the F-model cannot predict. Detection algorithms learn the boundary between expected E(S) and genuine novelty. The queer reading: who counts as anomalous depends on whose F-model defines normal.",
 			"category": "machinelearning",
-			"scene": "res://algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn",
-			"interaction": "observe",
 			"complexity": "intermediate",
+			"description": "Outlier detection algorithms — isolation forests, statistical boundaries, autoencoder reconstruction error. Finding what doesn't belong.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"footprint": [
+				18,
+				1,
+				18
+			],
 			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "anomaly_detection",
 			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"name": "Anomaly Detection",
+			"parameters": {
+				"footprint": [
+					18,
+					1,
+					18
+				],
+				"size_group": "xlarge"
+			},
+			"qfep_connection": "Anomalies are high-F surprises — data points that the F-model cannot predict. Detection algorithms learn the boundary between expected E(S) and genuine novelty. The queer reading: who counts as anomalous depends on whose F-model defines normal.",
+			"scene": "res://algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn",
+			"sequence": "machinelearning",
+			"size_group": "xlarge",
+			"tags": [
+				"anomaly",
+				"outlier",
+				"isolation_forest",
+				"detection"
+			]
+		},
+		"attention_mechanisms": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "Transformer attention visualization — query-key-value matrices, attention weights as connection strengths. See what the model attends to.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "attention_mechanisms",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Attention Mechanisms",
+			"parameters": {
+				"footprint": [
+					24.0,
+					26.0,
+					14.0
+				],
+				"size_group": "world_scale"
+			},
+			"qfep_connection": "Attention IS selective F-allocation — the model learns which inputs to weight heavily (low F surprise) and which to ignore (high E(S) noise). Self-attention computes relevance dynamically, adapting the F-model to each input.",
+			"scene": "res://algorithms/machinelearning/attention_mechanisms/attention_mechanisms.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"attention",
+				"transformer",
+				"query_key_value",
+				"self_attention"
+			]
+		},
+		"axiom_garden": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "An L-System garden game — grow plants from axiom strings, navigate a turtle through branching structures, overcome obstacles with evolved grammar rules. Formal languages become living landscapes.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "axiom_garden",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Axiom Garden",
+			"parameters": {
+				"footprint": [
+					3.0,
+					9.0,
+					9.0
+				],
+				"size_group": "environment"
+			},
+			"scene": "res://algorithms/machinelearning/thegame_a/AxiomGarden.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"axiom",
+				"garden",
+				"l_system",
+				"game",
+				"turtle",
+				"grammar",
+				"evolution"
+			]
+		},
+		"clustering_algorithms": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "K-Means, Agglomerative, and DBSCAN clustering side by side — watch three different strategies for finding groups in data. Same points, different assumptions, different results.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "clustering_algorithms",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Clustering Algorithms",
+			"parameters": {
+				"footprint": [
+					18.0,
+					4.0,
+					18.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/clustering_algorithms/clustering_algorithms.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"clustering",
+				"k_means",
+				"dbscan",
+				"agglomerative",
+				"unsupervised",
+				"comparison"
+			]
+		},
+		"computer_vision": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Computer vision pipeline visualization — from raw pixels through feature extraction to classification. See how machines learn to see: edges, textures, objects.",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "computer_vision",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Computer Vision",
+			"parameters": {
+				"footprint": [
+					16.0,
+					24.0,
+					15.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/computer_vision/computer_vision.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"computer_vision",
+				"cnn",
+				"feature_extraction",
+				"classification",
+				"image"
+			]
+		},
+		"computer_vision_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Interactive image processing with spatial convolution filters",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"footprint": [
+				4,
+				5,
+				2
+			],
+			"include_in_map_data": true,
+			"lookup_name": "computer_vision_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "ComputerVision_VR",
+			"parameters": {
+				"footprint": [
+					4,
+					5,
+					2
+				],
+				"size_group": "large"
+			},
+			"scene": "res://algorithms/machinelearning/computer_vision/ComputerVision_VR.tscn",
+			"size_group": "large",
+			"tags": [
+				"machine_learning"
+			]
+		},
+		"convolutional_neural_networks": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "CNN architecture visualization — convolutional filters, pooling layers, and feature maps. See how spatial hierarchies emerge from learned kernels scanning across input data.",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "convolutional_neural_networks",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Convolutional Neural Networks (CNNs)",
+			"parameters": {
+				"footprint": [
+					14.0,
+					6.0,
+					16.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/convolutional_neural_networks_CNNs/convolutional_neural_networks_CNNs.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"cnn",
+				"convolution",
+				"pooling",
+				"feature_maps",
+				"deep_learning",
+				"image"
+			]
+		},
+		"convolutional_neural_networks_cnns_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Walkable CNN architecture with interactive kernels",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"footprint": [
+				50,
+				54,
+				3
+			],
+			"include_in_map_data": true,
+			"lookup_name": "convolutional_neural_networks_cnns_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "ConvolutionalNeuralNetworksCNNs_VR",
+			"parameters": {
+				"footprint": [
+					50,
+					54,
+					3
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/machinelearning/convolutional_neural_networks_CNNs/ConvolutionalNeuralNetworksCNNs_VR.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"machine_learning"
+			]
+		},
+		"decision_boundary_viewer": {
+			"category": "machinelearning",
+			"complexity": "beginner",
+			"description": "2D classification with live decision boundary — two clusters of points separated by a linear classifier (w1*x + w2*y + bias > 0). Background colored by classification region, data points as bright dots, yellow boundary line. VR sliders for w1, w2, bias with live accuracy display.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "decision_boundary_viewer",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Decision Boundary Viewer",
+			"scene": "res://commons/artifacts/decision_boundary_viewer/decision_boundary_viewer.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"decision_boundary",
+				"classification",
+				"linear_classifier",
+				"supervised_learning",
+				"machine_learning"
+			]
+		},
+		"dimensionality_reduction": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "High-dimensional data projected to lower dimensions — PCA, t-SNE, and UMAP approaches compared. Finding the essential structure hidden in high-dimensional chaos.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "dimensionality_reduction",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Dimensionality Reduction",
+			"parameters": {
+				"footprint": [
+					16.0,
+					24.0,
+					15.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/dimensionality_reduction/dimensionality_reduction.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"dimensionality_reduction",
+				"pca",
+				"tsne",
+				"umap",
+				"projection",
+				"embedding"
+			]
+		},
+		"enhanced_kmeans": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Interactive K-means clustering visualization with adjustable k, colored cluster assignments, and centroid movement animation.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"footprint": [
+				50,
+				10,
+				50
+			],
+			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "enhanced_kmeans",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Enhanced K-Means Clustering",
+			"parameters": {
+				"footprint": [
+					50,
+					10,
+					50
+				],
+				"size_group": "xlarge"
+			},
+			"qfep_connection": "K-means IS iterative F-minimization — centroids move to minimize within-cluster variance. Each step reduces the system's free energy until convergence. K itself is a λ-like parameter: too few clusters = underfitting, too many = overfitting.",
+			"scene": "res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
+			"sequence": "machinelearning",
+			"size_group": "xlarge",
+			"tags": [
+				"k_means",
+				"clustering",
+				"unsupervised",
+				"centroids",
+				"animation"
+			]
+		},
+		"ensemble_methods": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Ensemble learning visualization — multiple weak learners combining into a strong one. Bagging, boosting, and stacking: the wisdom of crowds applied to algorithms.",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "ensemble_methods",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Ensemble Methods",
+			"parameters": {
+				"footprint": [
+					16.0,
+					24.0,
+					15.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/ensemble_methods/ensemble_methods.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"ensemble",
+				"bagging",
+				"boosting",
+				"stacking",
+				"random_forest"
+			]
+		},
+		"evolved_creatures": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "Physics-based creature evolution inspired by Karl Sims — bipedal bodies evolve locomotion through genetic algorithms. Morphology and behavior co-evolve, producing creatures that learn to walk through selection pressure.",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"education",
+				"machine_learning"
+			],
+			"footprint": [
+				40,
+				1,
+				40
+			],
+			"include_in_map_data": true,
+			"lookup_name": "evolved_creatures",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Evolved Creatures (Karl Sims)",
+			"parameters": {
+				"footprint": [
+					40,
+					1,
+					40
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/machinelearning/carlsims/evolvedcreatures.tscn",
+			"sequence": "machinelearning",
+			"size_group": "xlarge",
+			"tags": [
+				"evolution",
+				"karl_sims",
+				"creature",
+				"locomotion",
+				"genetic_algorithm",
+				"physics"
+			]
+		},
+		"evolved_creatures_v2": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "Second-generation evolved creatures — improved physics-based creature evolution with more complex body plans and neural network controllers. Evolution as iterative design.",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "evolved_creatures_v2",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Evolved Creatures v2",
+			"scene": "res://algorithms/machinelearning/evolutionaryalgorithms2/scenes/evolved_creatures.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"evolution",
+				"creature",
+				"evolutionary_algorithm",
+				"v2",
+				"physics"
+			]
+		},
+		"evolving_creatures_ea": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Evolutionary algorithms demo — creatures evolving body plans and behaviors through selection, crossover, and mutation. A hands-on look at how evolution works as an optimization process.",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "evolving_creatures_ea",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Evolving Creatures (EA)",
+			"scene": "res://algorithms/machinelearning/evolutionaryalgorithms/evolving_creatures.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"evolution",
+				"creature",
+				"evolutionary_algorithm",
+				"morphology"
+			]
+		},
+		"evolving_flowers": {
+			"category": "machinelearning",
+			"complexity": "beginner",
+			"description": "Flowers evolving color, petal count, and shape through aesthetic selection — beauty as a fitness function. Interactive evolution where the user is the selection pressure.",
+			"dev_themes": [
+				"ai",
+				"art",
+				"biology",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "evolving_flowers",
+			"map_ready": true,
+			"map_sequences": [
+				"flowers"
+			],
+			"name": "Evolving Flowers",
+			"scene": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"evolution",
+				"flowers",
+				"aesthetic_selection",
+				"interactive",
+				"genetic_algorithm"
+			]
+		},
+		"evolvingflowers": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "evolvingflowers",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"footprint": [
+				20,
+				3,
+				20
+			],
+			"include_in_map_data": true,
+			"lookup_name": "evolvingflowers",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "evolvingflowers",
+			"parameters": {
+				"footprint": [
+					20,
+					3,
+					20
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"machine_learning"
+			]
+		},
+		"explainable_ai": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "Making AI decisions interpretable — feature importance, attention maps, and explanation methods. The critical question: not just what the model predicts, but why.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "explainable_ai",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Explainable AI (XAI)",
+			"parameters": {
+				"footprint": [
+					16.0,
+					24.0,
+					15.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/explainable_AI_XAI/explainable_AI_XAI.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"xai",
+				"explainability",
+				"interpretability",
+				"feature_importance",
+				"transparency"
+			]
+		},
+		"explainable_ai_xai_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Interactive SHAP, LIME, and Grad-CAM explanations",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"footprint": [
+				6,
+				16,
+				7
+			],
+			"include_in_map_data": true,
+			"lookup_name": "explainable_ai_xai_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "ExplainableAIXAI_VR",
+			"parameters": {
+				"footprint": [
+					6,
+					16,
+					7
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/machinelearning/explainable_AI_XAI/ExplainableAIXAI_VR.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"machine_learning"
+			]
+		},
+		"feature_engineering": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Feature engineering visualization — transforming raw data into useful representations. The art of asking the right questions of your data before the model does.",
+			"dev_themes": [
+				"ai",
+				"art",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "feature_engineering",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Feature Engineering",
+			"parameters": {
+				"footprint": [
+					16.0,
+					24.0,
+					15.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/feature_engineering/feature_engineering.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"feature_engineering",
+				"preprocessing",
+				"transformation",
+				"representation"
+			]
+		},
+		"fine_tuning": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "Transfer learning and fine-tuning visualization — taking a pre-trained model and adapting it to a new task by updating select layers. The efficient path from general knowledge to specific expertise.",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fine_tuning",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Fine-Tuning",
+			"scene": "res://algorithms/machinelearning/fine_tuning/FineTuning_VR.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"fine_tuning",
+				"transfer_learning",
+				"pretrained",
+				"adaptation",
+				"deep_learning"
+			]
+		},
+		"fine_tuning_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Transfer learning tower with frozen and trainable layers",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			],
+			"footprint": [
+				3.0,
+				1.0,
+				3.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "fine_tuning_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "FineTuning_VR",
+			"parameters": {
+				"footprint": [
+					3.0,
+					1.0,
+					3.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/machinelearning/fine_tuning/FineTuning_VR.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"machine_learning"
+			]
+		},
+		"gans": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "GAN visualization — generator and discriminator locked in adversarial training. One creates, the other critiques, and from this competition emerges the ability to generate realistic data.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "gans",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Generative Adversarial Networks",
+			"parameters": {
+				"footprint": [
+					16.0,
+					24.0,
+					15.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/generative_adversarial_networks_GANs/generative_adversarial_networks_GANs.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"gan",
+				"generative",
+				"adversarial",
+				"generator",
+				"discriminator",
+				"deep_learning"
+			]
+		},
+		"generative_adversarial_networks_gans_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Spatial GAN arena with generator and discriminator zones",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"footprint": [
+				13,
+				5,
+				8
+			],
+			"include_in_map_data": true,
+			"lookup_name": "generative_adversarial_networks_gans_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "GenerativeAdversarialNetworksGANs_VR",
+			"parameters": {
+				"footprint": [
+					13,
+					5,
+					8
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"machine_learning"
+			]
+		},
+		"genetic_algorithm": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "Advanced neuroevolution ecosystem with speciation — populations split into species, compete for resources, and evolve distinct strategies. Punctuated equilibrium and adaptive radiation in code.",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "genetic_algorithm",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Evolutionary Ecosystem",
+			"parameters": {
+				"footprint": [
+					30.0,
+					21.0,
+					30.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/geneticalgorithm/genetic_algorithm.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"genetic_algorithm",
+				"neuroevolution",
+				"speciation",
+				"ecosystem",
+				"evolution"
+			]
+		},
+		"gradient_descent": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Gradient descent optimization demo — a ball rolling downhill on a loss surface, following the steepest path to the minimum. The foundational optimization algorithm behind all of deep learning.",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "gradient_descent",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Gradient Descent",
+			"parameters": {
+				"footprint": [
+					20.0,
+					14.0,
+					20.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/gradientdescent/gradient_descent.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"gradient_descent",
+				"optimization",
+				"loss_surface",
+				"learning"
+			]
+		},
+		"gradient_descent_landscape": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "3D loss surface with a ball rolling down to the minimum — gradient descent visualization. ImmediateMesh surface colored green at minima, red at peaks. Adjustable learning rate slider and reset button. Trail of breadcrumb spheres shows the optimization path.",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "gradient_descent_landscape",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Gradient Descent Landscape",
+			"scene": "res://commons/artifacts/gradient_descent_landscape/gradient_descent_landscape.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"gradient_descent",
+				"optimization",
+				"loss_surface",
+				"learning_rate",
+				"gradient",
+				"machine_learning"
+			]
 		},
 		"joint_learn_walk": {
-			"name": "Joint Learn Walk (Reinforcement Learning)",
-			"description": "RL agent learning to walk — reward shaping, policy gradient, emergent locomotion. Joints discover coordinated movement through trial and error.",
-			"qfep_connection": "Reinforcement learning as embodied F-minimization — the agent builds an internal model through interaction, reducing surprise about its own body. Emergent locomotion is the system discovering its own edge of chaos: coordinated movement from noisy exploration.",
 			"category": "machinelearning",
-			"scene": "res://algorithms/machinelearning/reinforcementlearning/joint_learn_walk.tscn",
-			"interaction": "observe",
 			"complexity": "advanced",
+			"description": "RL agent learning to walk — reward shaping, policy gradient, emergent locomotion. Joints discover coordinated movement through trial and error.",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			],
+			"footprint": [
+				80,
+				1,
+				80
+			],
 			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "joint_learn_walk",
 			"map_ready": true,
 			"map_sequences": [
 				"machinelearning"
 			],
-			"sequence": "machinelearning"
+			"name": "Joint Learn Walk (Reinforcement Learning)",
+			"qfep_connection": "Reinforcement learning as embodied F-minimization — the agent builds an internal model through interaction, reducing surprise about its own body. Emergent locomotion is the system discovering its own edge of chaos: coordinated movement from noisy exploration.",
+			"scene": "res://algorithms/machinelearning/reinforcementlearning/joint_learn_walk.tscn",
+			"sequence": "machinelearning",
+			"size_group": "xlarge",
+			"tags": [
+				"reinforcement_learning",
+				"locomotion",
+				"joints",
+				"policy_gradient"
+			]
+		},
+		"kmeans_simple": {
+			"category": "machinelearning",
+			"complexity": "beginner",
+			"description": "Simplified K-means clustering demonstration — a minimal version showing the core iterative assignment-and-update loop.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "kmeans_simple",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "K-Means Simple",
+			"parameters": {
+				"footprint": [
+					20.0,
+					15.0,
+					25.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/kmeansclustering/kmeans_simple.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"k_means",
+				"clustering",
+				"unsupervised",
+				"simple"
+			]
+		},
+		"learn_world_stacked": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "Stacked learning environment — multiple ML models layered together, each learning from the previous layer's output. Meta-learning through hierarchical composition.",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			],
+			"footprint": [
+				20,
+				1,
+				20
+			],
+			"include_in_map_data": true,
+			"lookup_name": "learn_world_stacked",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Learn World (Stacked)",
+			"parameters": {
+				"footprint": [
+					20,
+					1,
+					20
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/machinelearning/stacked/learn_world_stacked.tscn",
+			"sequence": "machinelearning",
+			"size_group": "xlarge",
+			"tags": [
+				"stacked",
+				"meta_learning",
+				"hierarchical",
+				"composition"
+			]
+		},
+		"loss_function_comparator": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Same dataset, three different loss functions applied simultaneously. MSE (smooth bowl), Huber (outlier-robust), and adversarial (deceptive valleys). Gradient descent balls roll on each surface, arriving at different answers. The landscape is not given — it is authored.",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"interaction": "interact",
+			"lookup_name": "loss_function_comparator",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Loss Function Comparator",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "standard"
+			},
+			"scene": "res://algorithms/machinelearning/loss_function_comparator/loss_function_comparator.tscn",
+			"sequence": "machinelearning",
+			"size_group": "standard",
+			"tags": [
+				"loss_function",
+				"gradient_descent",
+				"optimization",
+				"comparison",
+				"mse",
+				"huber",
+				"critical_theory"
+			]
+		},
+		"lstms": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "Long Short-Term Memory network visualization — gates (forget, input, output) controlling information flow through time. The architecture that solved vanishing gradients and enabled sequence modeling.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "lstms",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "LSTMs",
+			"parameters": {
+				"footprint": [
+					24.0,
+					26.0,
+					14.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/LSTMs/LSTMs.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"lstm",
+				"recurrent",
+				"gates",
+				"memory",
+				"sequence",
+				"deep_learning"
+			]
+		},
+		"lstms_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Interactive LSTM cell with walkable memory flow",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			],
+			"footprint": [
+				11,
+				4,
+				11
+			],
+			"include_in_map_data": true,
+			"lookup_name": "lstms_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "LSTMs_VR",
+			"parameters": {
+				"footprint": [
+					11,
+					4,
+					11
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/machinelearning/LSTMs/LSTMs_VR.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"machine_learning"
+			]
+		},
+		"neural_network_visualization": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Layered neural network with visible activations, weights as line thickness, forward pass animation. See how information transforms through layers.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"footprint": [
+				10,
+				9,
+				1
+			],
+			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "neural_network_visualization",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Neural Network Visualization",
+			"qfep_connection": "Neural networks learn F-models through gradient descent — each weight update reduces prediction error. Overfitting = F too low (memorization); regularization = intentional λ (noise tolerance). Generalization lives at the edge of chaos between memorization and randomness.",
+			"scene": "res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
+			"sequence": "machinelearning",
+			"size_group": "xlarge",
+			"tags": [
+				"neural_network",
+				"activations",
+				"weights",
+				"forward_pass",
+				"layers"
+			]
+		},
+		"neural_networks": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Feedforward neural network with configurable layer sizes — visible activations, weighted connections, and forward pass animation. Watch information transform through layers of weighted sums and activations.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "neural_networks",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Neural Networks",
+			"parameters": {
+				"footprint": [
+					16.0,
+					18.0,
+					8.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/neural_networks/neural_networks.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"neural_network",
+				"feedforward",
+				"activation",
+				"weights",
+				"layers",
+				"visualization"
+			]
+		},
+		"neural_networks_vr": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Walkable neural network with visible weights and backpropagation",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"footprint": [
+				23,
+				10,
+				8
+			],
+			"include_in_map_data": true,
+			"lookup_name": "neural_networks_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "NeuralNetworks_VR",
+			"parameters": {
+				"footprint": [
+					23,
+					10,
+					8
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/machinelearning/neural_networks/NeuralNetworks_VR.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"graph"
+			]
+		},
+		"nlp": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "NLP pipeline visualization — tokenization, embedding, and sequence modeling. How machines process text: from strings of characters to vectors of meaning.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "nlp",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Natural Language Processing",
+			"parameters": {
+				"footprint": [
+					16.0,
+					24.0,
+					15.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/natural_language_processing_NLP/natural_language_processing_NLP.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"nlp",
+				"tokenization",
+				"embedding",
+				"language",
+				"text",
+				"sequence"
+			]
+		},
+		"non_teleological_evolution": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Bodies exist in a space with no fitness function. They reproduce based on proximity and energy (gained by exploring, lost by existing). Forms diversify without goal or optimization — just drift, variation, and persistence. No best creature. No progress narrative.",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			],
+			"footprint": [
+				2,
+				1,
+				2
+			],
+			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "non_teleological_evolution",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Non-Teleological Evolution",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					2
+				],
+				"size_group": "standard"
+			},
+			"scene": "res://algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.tscn",
+			"sequence": "machinelearning",
+			"size_group": "standard",
+			"tags": [
+				"evolution",
+				"non_teleological",
+				"drift",
+				"no_fitness",
+				"emergence",
+				"critical_theory"
+			]
+		},
+		"optimization_algorithms": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Comparison of optimization algorithms — SGD, Adam, RMSprop, and others navigating loss landscapes. See why some optimizers dance while others plod.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "optimization_algorithms",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Optimization Algorithms",
+			"parameters": {
+				"footprint": [
+					16.0,
+					24.0,
+					15.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/optimization_algorithms/optimization_algorithms.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"optimization",
+				"sgd",
+				"adam",
+				"rmsprop",
+				"gradient",
+				"loss_landscape"
+			]
+		},
+		"pca_visualization": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "Principal Component Analysis — high-dimensional data projected onto principal axes. Shows variance capture and dimensionality reduction in 3D.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"footprint": [
+				12,
+				5,
+				12
+			],
+			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "pca_visualization",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "PCA Visualization",
+			"parameters": {
+				"footprint": [
+					12,
+					5,
+					12
+				],
+				"size_group": "xlarge"
+			},
+			"qfep_connection": "PCA is pure F-minimization through dimensionality reduction — finding the axes of maximum variance and discarding the rest. Compression of high-dimensional E(S) into the most informative low-dimensional F-model.",
+			"scene": "res://algorithms/machinelearning/pca/pca_visualization.tscn",
+			"sequence": "machinelearning",
+			"size_group": "xlarge",
+			"tags": [
+				"pca",
+				"dimensionality_reduction",
+				"variance",
+				"projection"
+			]
+		},
+		"perceptron_playground": {
+			"category": "machinelearning",
+			"complexity": "beginner",
+			"description": "Single neuron with adjustable weights — the simplest possible neural network. Drag sliders to change w1, w2, and bias, watch the decision boundary shift on a 2D scatter plot. Misclassified points get white corners so you can see the perceptron learning.",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"interaction": "grab",
+			"interactions": [
+				"grab"
+			],
+			"lookup_name": "perceptron_playground",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Perceptron Playground",
+			"parameters": {
+				"footprint": [
+					2.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/artifacts/perceptron_playground/perceptron_playground.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"perceptron",
+				"neuron",
+				"weights",
+				"bias",
+				"decision_boundary",
+				"classification",
+				"neural_network"
+			]
+		},
+		"random_forest_visualization": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Visual representation of random forest ensemble — multiple decision trees voting on classification, showing how diversity improves accuracy.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"footprint": [
+				20,
+				9,
+				20
+			],
+			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "random_forest_visualization",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Random Forest Visualization",
+			"parameters": {
+				"footprint": [
+					20,
+					9,
+					20
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/machinelearning/randomforest/random_forest_visualization.tscn",
+			"sequence": "machinelearning",
+			"size_group": "xlarge",
+			"tags": [
+				"random_forest",
+				"ensemble",
+				"decision_tree",
+				"classification"
+			]
+		},
+		"random_walker_machine": {
+			"category": "machinelearning",
+			"complexity": "beginner",
+			"description": "Random walk simulation — agents taking stochastic steps, demonstrating how randomness underlies exploration in ML. From Brownian motion to Monte Carlo methods.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "random_walker_machine",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Random Walker Machine",
+			"parameters": {
+				"footprint": [
+					25.0,
+					7.0,
+					25.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/randomwalkermachine/randomwalkermachine.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"random_walk",
+				"stochastic",
+				"exploration",
+				"monte_carlo"
+			]
+		},
+		"recommendation_systems": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Collaborative and content-based filtering — how algorithms predict what you'll like based on what similar people liked. The math behind Netflix suggestions.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "recommendation_systems",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Recommendation Systems",
+			"parameters": {
+				"footprint": [
+					16.0,
+					24.0,
+					15.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/recommendation_systems/recommendation_systems.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"recommendation",
+				"collaborative_filtering",
+				"content_based",
+				"similarity"
+			]
+		},
+		"reinforcement_learning": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "RL agent exploring an environment — reward signals, policy updates, and the exploration-exploitation tradeoff. Learning from consequences rather than examples.",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "reinforcement_learning",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Reinforcement Learning",
+			"parameters": {
+				"footprint": [
+					16.0,
+					24.0,
+					15.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/reinforcement_learning/reinforcement_learning.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"reinforcement_learning",
+				"reward",
+				"policy",
+				"exploration",
+				"exploitation"
+			]
+		},
+		"shape_learner_2d": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "Genetic algorithm + cellular automaton hybrid learning target shapes in 2D. Evolution discovers the CA rules that produce desired patterns — emergence guided by selection.",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"education",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "shape_learner_2d",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Shape Learner (2D)",
+			"scene": "res://algorithms/machinelearning/ga_ca_shape_learner/ShapeLearner.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"genetic_algorithm",
+				"cellular_automaton",
+				"shape",
+				"evolution",
+				"2d",
+				"hybrid"
+			]
+		},
+		"shape_learner_3d": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "3D version of the GA+CA shape learner — evolving cellular automaton rules to produce target 3D structures. Emergence in three dimensions guided by evolutionary pressure.",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"education",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "shape_learner_3d",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Shape Learner (3D)",
+			"scene": "res://algorithms/machinelearning/shape_learner_3d/ShapeLearner3D.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"genetic_algorithm",
+				"cellular_automaton",
+				"shape",
+				"3d",
+				"evolution",
+				"hybrid"
+			]
+		},
+		"spotlight_attention": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Spotlight model of attention — a focused beam illuminating selected elements while others fade. The cognitive psychology model that inspired transformer attention mechanisms.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "spotlight_attention",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Spotlight Attention",
+			"parameters": {
+				"footprint": [
+					20.0,
+					10.0,
+					25.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/spotlight_attention/spotlight_attention.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"attention",
+				"spotlight",
+				"cognitive",
+				"selection",
+				"focus",
+				"transformer"
+			]
+		},
+		"svm_visualization": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "SVM hyperplane separator with support vectors highlighted. Shows maximum margin classification and kernel trick for non-linear boundaries.",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"footprint": [
+				10,
+				6,
+				10
+			],
+			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "svm_visualization",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Support Vector Machine Visualization",
+			"parameters": {
+				"footprint": [
+					10,
+					6,
+					10
+				],
+				"size_group": "xlarge"
+			},
+			"qfep_connection": "SVM finds the maximum-margin boundary — the F-minimal separation between classes. Support vectors are the critical data points where the decision boundary is defined. The kernel trick lifts data to higher dimensions for linear separability: same F-minimization strategy as homogeneous coordinates.",
+			"scene": "res://algorithms/machinelearning/supportvectormachine/svm_visualization.tscn",
+			"sequence": "machinelearning",
+			"size_group": "xlarge",
+			"tags": [
+				"svm",
+				"support_vector",
+				"classification",
+				"margin",
+				"kernel"
+			]
+		},
+		"switchboard_attention": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Switchboard model of attention — input-output connections routed dynamically, like a telephone operator connecting callers. Attention as learned routing rather than spotlight focusing.",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "switchboard_attention",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Switchboard Attention",
+			"scene": "res://algorithms/machinelearning/switchboard_attention/switchboard_attention.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"attention",
+				"switchboard",
+				"routing",
+				"connection",
+				"transformer"
+			]
+		},
+		"time_series_analysis": {
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Temporal pattern recognition — sliding windows, autocorrelation, seasonal decomposition. Algorithms that learn from sequential data.",
+			"dev_themes": [
+				"ai",
+				"education",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"interaction": "observe",
+			"lookup_name": "time_series_analysis",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Time Series Analysis",
+			"parameters": {
+				"footprint": [
+					16.0,
+					24.0,
+					15.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/time_series_analysis/time_series_analysis.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"time_series",
+				"temporal",
+				"autocorrelation",
+				"sequential"
+			]
+		},
+		"transformers": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "Transformer architecture visualization — self-attention, multi-head attention, positional encoding. The architecture behind GPT, BERT, and the current AI revolution.",
+			"dev_themes": [
+				"ai",
+				"biology",
+				"machine_learning"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "transformers",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Transformers",
+			"parameters": {
+				"footprint": [
+					24.0,
+					26.0,
+					14.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/transformers/transformers.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"transformer",
+				"self_attention",
+				"multi_head",
+				"positional_encoding",
+				"deep_learning"
+			]
+		},
+		"transformers_vr": {
+			"category": "unknown",
+			"complexity": "advanced",
+			"description": "Interactive transformer with attention beam visualization",
+			"dev_themes": [
+				"ai",
+				"machine_learning"
+			],
+			"footprint": [
+				9,
+				10,
+				11
+			],
+			"include_in_map_data": true,
+			"lookup_name": "transformers_vr",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Transformers_VR",
+			"parameters": {
+				"footprint": [
+					9,
+					10,
+					11
+				],
+				"size_group": "xlarge"
+			},
+			"scene": "res://algorithms/machinelearning/transformers/Transformers_VR.tscn",
+			"size_group": "xlarge",
+			"tags": [
+				"machine_learning"
+			]
+		},
+		"vaes": {
+			"category": "machinelearning",
+			"complexity": "advanced",
+			"description": "VAE visualization — encoder compresses to latent space, decoder reconstructs. The bottleneck forces meaningful representations, and the variational bound enables generation of new samples.",
+			"dev_themes": [
+				"ai",
+				"machine_learning",
+				"qfep"
+			],
+			"include_in_map_data": true,
+			"lookup_name": "vaes",
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"name": "Variational Autoencoders",
+			"parameters": {
+				"footprint": [
+					16.0,
+					24.0,
+					15.0
+				],
+				"size_group": "world_scale"
+			},
+			"scene": "res://algorithms/machinelearning/variational_autoencoders_VAEs/variational_autoencoders_VAEs.tscn",
+			"sequence": "machinelearning",
+			"tags": [
+				"vae",
+				"autoencoder",
+				"latent_space",
+				"generative",
+				"variational",
+				"deep_learning"
+			]
+		},
+		"variational_autoencoders_vaes_vr": {
+			"category": "unknown",
+			"complexity": "beginner",
+			"description": "Walkable latent space with reparameterization trick",
+			"dev_themes": [
+				"ai",
+				"machine_learning",
+				"qfep"
+			],
+			"footprint": [
+				4.0,
+				4.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "variational_autoencoders_vaes_vr",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "VariationalAutoencodersVAEs_VR",
+			"parameters": {
+				"footprint": [
+					4.0,
+					4.0,
+					1.0
+				],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/machinelearning/variational_autoencoders_VAEs/VariationalAutoencodersVAEs_VR.tscn",
+			"size_group": "room_scale",
+			"tags": [
+				"machine_learning"
+			]
+		},
+		"adaboost": {
+			"lookup_name": "adaboost",
+			"name": "AdaBoost",
+			"scene": "res://algorithms/machinelearning/adaboost/adaboost.tscn",
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "Watch a sequence of weak learners focus on what the previous ones got wrong. Each decision stump is simple — a single threshold on one axis. But AdaBoost weights misclassified points heavier, so each new stump specializes on the hard cases. Points that keep getting misclassified visually grow larger. The ensemble decision boundary gets progressively more sophisticated from trivially simple components.",
+			"qfep_connection": "Lambda-tuning — the alpha weight per stump is the lambda that tunes how much each weak learner contributes. The ensemble is a weighted sum where lambda encodes earned trust.",
+			"gamwell_reference": "Boosting algorithms, Freund and Schapire 1997, ensemble learning, bias-variance tradeoff, weak learner aggregation",
+			"interactions": [
+				"watch stumps grow round by round",
+				"observe misclassified points growing larger as weight increases",
+				"see the decision boundary evolve from simple to complex"
+			],
+			"capacity": "EXPLAIN how AdaBoost builds a strong classifier from weighted weak learners by focusing each round on previously misclassified samples.",
+			"tags": [
+				"machinelearning",
+				"boosting",
+				"adaboost",
+				"ensemble",
+				"weak-learner",
+				"decision-stump",
+				"classification",
+				"weighting"
+			],
+			"map_sequences": [
+				"machinelearning"
+			],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"footprint": [
+				9.0,
+				4.0,
+				9.0
+			],
+			"parameters": {
+				"footprint": [
+					9.0,
+					4.0,
+					9.0
+				],
+				"size_group": "xlarge"
+			},
+			"size_group": "xlarge",
+			"dev_themes": [
+				"machinelearning"
+			]
+		},
+		"random_forest": {
+			"lookup_name": "random_forest",
+			"name": "Random Forest",
+			"scene": "res://algorithms/machinelearning/random_forest/random_forest.tscn",
+			"category": "machinelearning",
+			"complexity": "intermediate",
+			"description": "A forest of decision trees grows one by one, each trained on a random bootstrap sample with random feature selection. Individual trees overfit — their boundaries are jagged and noisy. But the majority vote of all trees produces a smooth, generalizing boundary. Tree columns light up as each tree joins the ensemble. The decision boundary visibly smooths with each addition. Democracy applied to prediction.",
+			"qfep_connection": "E(S) filtered through Form — each tree sees random entropy (bootstrap + feature randomness) but the ensemble vote is the Form that filters noise into signal. More trees = more stable Form.",
+			"gamwell_reference": "Random forests, Breiman 2001, bagging, bootstrap aggregation, Gini impurity, ensemble diversity",
+			"interactions": [
+				"watch trees grow one by one",
+				"observe tree columns lighting up as they join",
+				"see the boundary smooth as more trees vote"
+			],
+			"capacity": "EXPLAIN how Random Forest uses bootstrap sampling and random feature selection to build diverse trees whose majority vote generalizes better than any single tree.",
+			"tags": [
+				"machinelearning",
+				"random-forest",
+				"ensemble",
+				"bagging",
+				"decision-tree",
+				"bootstrap",
+				"gini",
+				"classification"
+			],
+			"map_sequences": [
+				"machinelearning"
+			],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"footprint": [
+				9.0,
+				4.0,
+				9.0
+			],
+			"parameters": {
+				"footprint": [
+					9.0,
+					4.0,
+					9.0
+				],
+				"size_group": "xlarge"
+			},
+			"size_group": "xlarge",
+			"dev_themes": [
+				"machinelearning"
+			]
 		}
 	}
 }

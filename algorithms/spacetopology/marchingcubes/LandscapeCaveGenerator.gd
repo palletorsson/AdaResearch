@@ -82,7 +82,7 @@ class TerrainChunk:
 	var density_field: Array = []
 	var is_dirty: bool = true
 	
-	func _init(chunk_coord: Vector3i, bounds: AABB):
+	func _init(chunk_coord: Vector3i, bounds: AABB) -> void:
 		coord = chunk_coord
 		world_bounds = bounds
 		
@@ -96,13 +96,13 @@ class TerrainChunk:
 		collision_body.add_child(collision_shape)
 		collision_body.name = "Chunk_Collision_%d_%d_%d" % [coord.x, coord.y, coord.z]
 	
-	func set_up(material: Material, generate_collision: bool):
+	func set_up(material: Material, generate_collision: bool) -> void:
 		if material:
 			mesh_instance.set_surface_override_material(0, material)
 		
 		collision_body.visible = false  # Collision doesn't need to be visible
 		
-	func destroy_or_disable():
+	func destroy_or_disable() -> void:
 		if mesh_instance:
 			mesh_instance.queue_free()
 		if collision_body:
@@ -112,7 +112,7 @@ class Triangle:
 	var vertices: Array[Vector3]
 	var normals: Array[Vector3]
 	
-	func _init(v1: Vector3, v2: Vector3, v3: Vector3):
+	func _init(v1: Vector3, v2: Vector3, v3: Vector3) -> void:
 		vertices = [v1, v2, v3]
 		# Calculate normal
 		var edge1 = v2 - v1
@@ -121,14 +121,14 @@ class Triangle:
 		normals = [normal, normal, normal]
 
 # === INITIALIZATION ===
-func _ready():
+func _ready() -> void:
 	setup_noise_generators()
 	setup_marching_cubes_tables()
 	
 	if auto_update_in_editor or (Engine.is_editor_hint() == false and auto_update_in_game):
 		call_deferred("generate_world")
 
-func setup_noise_generators():
+func setup_noise_generators() -> void:
 	"""Initialize all noise generators with proper parameters"""
 	var base_seed = randi()
 	
@@ -164,7 +164,7 @@ func setup_noise_generators():
 	
 	print("LandscapeCaveGenerator: Noise generators initialized")
 
-func setup_marching_cubes_tables():
+func setup_marching_cubes_tables() -> void:
 	"""Initialize marching cubes lookup tables"""
 	# Use the proper lookup tables class
 	edge_table = MarchingCubesLookupTables.get_edge_table()
@@ -177,7 +177,7 @@ func _process(_delta):
 		generate_world()
 		settings_updated = false
 
-func generate_world():
+func generate_world() -> void:
 	"""Main world generation function - unified landscape and caves"""
 	if is_generating:
 		return
@@ -193,13 +193,13 @@ func generate_world():
 	is_generating = false
 	print("LandscapeCaveGenerator: World generation complete!")
 
-func generate_fixed_world():
+func generate_fixed_world() -> void:
 	"""Generate a fixed-size world with chunks"""
 	create_chunk_holder()
 	await init_chunks()
 	await update_all_chunks()
 
-func generate_infinite_world():
+func generate_infinite_world() -> void:
 	"""Generate infinite world around viewer"""
 	if not viewer:
 		print("LandscapeCaveGenerator: No viewer set for infinite world")
@@ -208,7 +208,7 @@ func generate_infinite_world():
 	create_chunk_holder()
 	await init_visible_chunks()
 
-func init_chunks():
+func init_chunks() -> void:
 	"""Initialize all chunks for fixed world"""
 	chunks.clear()
 	
@@ -230,7 +230,7 @@ func init_chunks():
 	
 	print("LandscapeCaveGenerator: Created %d chunks" % chunks.size())
 
-func init_visible_chunks():
+func init_visible_chunks() -> void:
 	"""Initialize chunks around viewer for infinite world"""
 	if not viewer:
 		return
@@ -287,7 +287,7 @@ func init_visible_chunks():
 					# Update this chunk immediately
 					await update_chunk_mesh(chunk)
 
-func update_all_chunks():
+func update_all_chunks() -> void:
 	"""Update all chunks with mesh generation"""
 	var chunks_per_frame = max(1, chunks.size() / 10)
 	var processed = 0
@@ -300,7 +300,7 @@ func update_all_chunks():
 		if processed % chunks_per_frame == 0:
 			await get_tree().process_frame
 
-func update_chunk_mesh(chunk: TerrainChunk):
+func update_chunk_mesh(chunk: TerrainChunk) -> void:
 	"""Update a single chunk's mesh using marching cubes"""
 	var point_spacing = bounds_size / (num_points_per_axis - 1)
 	
@@ -322,7 +322,7 @@ func update_chunk_mesh(chunk: TerrainChunk):
 			chunk_holder.add_child(chunk.collision_body)
 
 # === DENSITY FIELD GENERATION ===
-func generate_density_field(chunk: TerrainChunk, point_spacing: float):
+func generate_density_field(chunk: TerrainChunk, point_spacing: float) -> void:
 	"""Generate density field combining terrain and caves"""
 	var field_size = num_points_per_axis
 	chunk.density_field.clear()
@@ -539,7 +539,7 @@ func calculate_edge_intersections_fixed(cube_data: Dictionary) -> Array:
 
 
 # === MESH CREATION ===
-func create_mesh_from_triangles(chunk: TerrainChunk, triangles: Array[Triangle]):
+func create_mesh_from_triangles(chunk: TerrainChunk, triangles: Array[Triangle]) -> void:
 	"""Create ArrayMesh from triangle array"""
 	if triangles.is_empty():
 		return
@@ -576,7 +576,7 @@ func create_mesh_from_triangles(chunk: TerrainChunk, triangles: Array[Triangle])
 	
 	print("LandscapeCaveGenerator: Created mesh with %d triangles for chunk %s" % [triangles.size(), chunk.coord])
 
-func create_collision_for_chunk(chunk: TerrainChunk):
+func create_collision_for_chunk(chunk: TerrainChunk) -> void:
 	"""Create collision shape for chunk"""
 	if not chunk.mesh or chunk.mesh.get_surface_count() == 0:
 		return
@@ -600,7 +600,7 @@ func create_collision_for_chunk(chunk: TerrainChunk):
 	chunk.collision_shape.shape = shape
 
 # === UTILITY FUNCTIONS ===
-func create_chunk_holder():
+func create_chunk_holder() -> void:
 	"""Create or find chunk holder node"""
 	if chunk_holder == null:
 		var existing = get_node_or_null("ChunkHolder")
@@ -634,12 +634,12 @@ func get_material_for_chunk(coord: Vector3i) -> Material:
 	return material
 
 # === PUBLIC API ===
-func regenerate_world():
+func regenerate_world() -> void:
 	"""Public function to regenerate the world"""
 	clear_world()
 	generate_world()
 
-func clear_world():
+func clear_world() -> void:
 	"""Clear all generated chunks"""
 	for chunk in chunks:
 		chunk.destroy_or_disable()
@@ -648,7 +648,7 @@ func clear_world():
 	existing_chunks.clear()
 	recycleable_chunks.clear()
 
-func set_terrain_parameters(params: Dictionary):
+func set_terrain_parameters(params: Dictionary) -> void:
 	"""Set terrain generation parameters"""
 	if params.has("height"):
 		terrain_height = params.height
@@ -659,7 +659,7 @@ func set_terrain_parameters(params: Dictionary):
 	
 	settings_updated = true
 
-func set_cave_parameters(params: Dictionary):
+func set_cave_parameters(params: Dictionary) -> void:
 	"""Set cave generation parameters"""
 	if params.has("density"):
 		cave_density = params.density
@@ -698,12 +698,12 @@ func get_generation_info() -> Dictionary:
 	}
 
 # === EDITOR INTEGRATION ===
-func _on_validate():
+func _on_validate() -> void:
 	"""Called when properties change in editor"""
 	settings_updated = true
 
 # === GIZMO DRAWING ===
-func _draw_gizmos():
+func _draw_gizmos() -> void:
 	"""Draw chunk bounds gizmos"""
 	if not show_bounds_gizmo:
 		return
@@ -712,23 +712,32 @@ func _draw_gizmos():
 	# For now, we can visualize bounds with debug mesh instances
 
 # === UI INTERACTION ===
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle input events"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_R:
 				regenerate_world()
 
-func _on_regenerate_button_pressed():
+func _on_regenerate_button_pressed() -> void:
 	"""Handle regenerate button press"""
 	regenerate_world()
 
-func _on_cave_density_slider_value_changed(value: float):
+func _on_cave_density_slider_value_changed(value: float) -> void:
 	"""Handle cave density slider change"""
 	cave_density = value
 	settings_updated = true
 
-func _on_terrain_height_slider_value_changed(value: float):
+func _on_terrain_height_slider_value_changed(value: float) -> void:
 	"""Handle terrain height slider change"""
 	terrain_height = value
 	settings_updated = true
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

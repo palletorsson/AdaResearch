@@ -1,3 +1,13 @@
+# @identity
+# essence: Side-by-side elementary CA comparison — Rule 30 (chaotic) and Rule 110 (Turing-complete) visualized as dual MultiMesh grids. Each generation appends a row of colored cubes; Rule 30 in warm chaos tones, Rule 110 in cool complexity gradients.
+# desire: To show that eight bits separate noise from thought — same three-neighbor input, same pattern-to-state lookup, but Rule 30 produces cryptographic randomness while Rule 110 carries logic. Both advance in lockstep.
+# critical_parameter: grid_width (51) — cell count per row; max_generations (30) — vertical depth before reset; generation_speed (0.3s) — time between row advances
+# triggers: _process → generation_timer fires → advance_generation → apply_rule_30/apply_rule_110 → visualize both; reset at max_generations → reinitialize seeds
+# emerges: Rule 30's left half: turbulent triangles, no period, no compression. Rule 110's right half: structured gliders, localized structures, proven universal computation. The visual gap between them is the gap between entropy and information.
+# needs: VR rule number selector [missing], generation scrubber [missing], side-by-side parameter comparison [missing]
+# relationships: Focused companion to cellular_automata (1D scrolling texture) — same Wolfram rule engine, different visualization strategy. Appears in RecursiveEmergence_Rule_30_110 map under rule_30_110_gravity lookup.
+# truth: The distance between noise and thought is one lookup table apart. Rule 30 generates chaos. Rule 110 generates computation. Same format. Same input size. Radically different outputs.
+
 extends Node3D
 
 # Rule 30/110 Elementary Cellular Automaton Visualization
@@ -22,11 +32,11 @@ var rule_110_seed := []
 var mm_rule_30: MultiMeshInstance3D
 var mm_rule_110: MultiMeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	_setup_multimeshes()
 	initialize_rules()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	generation_timer += delta
 	
@@ -37,7 +47,7 @@ func _process(delta):
 		visualize_rule_30()
 		visualize_rule_110()
 
-func _setup_multimeshes():
+func _setup_multimeshes() -> void:
 	# Setup Rule 30 MultiMesh
 	mm_rule_30 = MultiMeshInstance3D.new()
 	mm_rule_30.name = "MM_Rule30"
@@ -72,7 +82,7 @@ func _setup_multimeshes():
 	mm110.instance_count = grid_width * max_generations
 	mm_rule_110.multimesh = mm110
 
-func initialize_rules():
+func initialize_rules() -> void:
 	# Initialize Rule 30
 	rule_30_seed = []
 	for i in range(grid_width):
@@ -95,7 +105,7 @@ func initialize_rules():
 	visualize_rule_30()
 	visualize_rule_110()
 
-func advance_generation():
+func advance_generation() -> void:
 	if current_generation < max_generations:
 		current_generation += 1
 		
@@ -150,7 +160,7 @@ func apply_rule_110(current_row: Array) -> Array:
 		new_row.append(next_state)
 	return new_row
 
-func visualize_rule_30():
+func visualize_rule_30() -> void:
 	if not mm_rule_30 or not mm_rule_30.multimesh: return
 	
 	var mm = mm_rule_30.multimesh
@@ -176,7 +186,7 @@ func visualize_rule_30():
 				mm.set_instance_color(idx, col)
 				idx += 1
 
-func visualize_rule_110():
+func visualize_rule_110() -> void:
 	if not mm_rule_110 or not mm_rule_110.multimesh: return
 	
 	var mm = mm_rule_110.multimesh
@@ -202,12 +212,21 @@ func visualize_rule_110():
 				mm.set_instance_color(idx, col)
 				idx += 1
 
-func show_rule_comparison():
+func show_rule_comparison() -> void:
 	# Keep existing logic but optimize if needed. 
 	# For now, let's leave the comparison and emergent pattern parts as they are less intensive (few nodes)
 	# or we could rewrite them too. Given time constraints, I'll leave the helper visualizations as is
 	# but ensure they don't leak memory.
 	pass # The original code re-created nodes every frame. I should probably fix that too.
 
-func demonstrate_emergent_patterns():
+func demonstrate_emergent_patterns() -> void:
 	pass # Same here.
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

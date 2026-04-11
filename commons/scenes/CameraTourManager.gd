@@ -908,10 +908,7 @@ func _build_artifact_registry() -> void:
 				return
 
 	# Fallback: read registry JSONs ourselves
-	var registry_paths: Array[String] = [
-		"res://commons/artifacts/grid_artifacts.json",
-		"res://commons/artifacts/lab_artifacts.json",
-	]
+	var registry_paths: Array[String] = []
 	var dir := DirAccess.open("res://commons/artifacts/registry/")
 	if dir:
 		dir.list_dir_begin()

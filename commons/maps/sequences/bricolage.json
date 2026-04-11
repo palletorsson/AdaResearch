@@ -2,9 +2,9 @@
 	"sequences": {
 		"bricolage": {
 			"name": "Bricolage: From Parts to Structures",
-			"description": "Construction without blueprint—discover structures by recombining primitives until constraints are satisfied",
-			"qfep_term": "λ",
-			"qfep_connection": "Working with available parts rather than ideal materials — constraint as λ-bound. Bricolage accepts imperfection and limitation as generative, creating from what exists rather than what's optimal.",
+			"description": "Construction without blueprint\u00e2\u20ac\u201ddiscover structures by recombining primitives until constraints are satisfied",
+			"qfep_term": "\u00ce\u00bb",
+			"qfep_connection": "Working with available parts rather than ideal materials \u00e2\u20ac\u201d constraint as \u00ce\u00bb-bound. Bricolage accepts imperfection and limitation as generative, creating from what exists rather than what's optimal.",
 			"difficulty": "intermediate",
 			"estimated_time": "30-40 minutes",
 			"learning_objectives": [
@@ -12,6 +12,15 @@
 				"Affordance discovery (what parts can do)",
 				"Constraint literacy (what pushes back)",
 				"Emergent structure (assembly without blueprint)"
+			],
+			"content": [
+				"Bricolage_Inventory: Shapes Become Potential Parts",
+				"Bricolage_Affordances: What Parts Can Do",
+				"Bricolage_Arrays_as_Probes: What Repetition Reveals",
+				"Bricolage_Constraints: What Pushes Back",
+				"Bricolage_Chair: Discovered, Not Designed",
+				"Bricolage_Sculpture: Balance Without Blueprint",
+				"Bricolage_Dome: Bricolage Scaled Up"
 			],
 			"maps": [
 				"Bricolage_Inventory",
@@ -31,7 +40,116 @@
 			"completion_rewards": [
 				"bricoleur_badge",
 				"structural_intuition_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "Bricolage_Inventory",
+					"position": "intro",
+					"artifacts": [
+						"clipboard",
+						"cube_specimen",
+						"cylinder_specimen",
+						"dark_sphere",
+						"inventory_workbench",
+						"line_specimen",
+						"plane_specimen",
+						"point_specimen",
+						"sphere_specimen",
+						"torus_specimen",
+						"triangle_specimen"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Parts inventory: eleven geometric specimens laid out on workbench. Clipboard tracks what's available — bricolage begins with knowing your materials."
+				},
+				{
+					"map": "Bricolage_Affordances",
+					"position": "foundation",
+					"artifacts": [
+						"clipboard",
+						"cylinder_as_axle",
+						"cylinder_as_column",
+						"dark_sphere",
+						"plane_as_seat",
+						"plane_as_wall",
+						"sphere_as_hub",
+						"sphere_as_joint"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Affordance discovery: same primitives recast as functional parts — cylinder as axle or column, plane as seat or wall, sphere as hub or joint. Parts reveal what they can do."
+				},
+				{
+					"map": "Bricolage_Arrays_as_Probes",
+					"position": "foundation",
+					"artifacts": [
+						"clipboard",
+						"dark_sphere",
+						"grid_array_demo",
+						"linear_array_demo",
+						"radial_array_demo",
+						"stack_array_demo"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Arrays as structural probes: linear, radial, grid, and stack arrangements test how repetition transforms single parts into spatial systems."
+				},
+				{
+					"map": "Bricolage_Constraints",
+					"position": "exploration",
+					"artifacts": [
+						"balance_fail_demo",
+						"balance_pass_demo",
+						"clipboard",
+						"dark_sphere",
+						"gravity_fail_demo",
+						"gravity_pass_demo",
+						"triangulation_fail_demo",
+						"triangulation_pass_demo"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Constraint literacy: pass/fail pairs for gravity, balance, and triangulation. What pushes back teaches what holds together — structure emerges from what fails."
+				},
+				{
+					"map": "Bricolage_Chair",
+					"position": "integration",
+					"artifacts": [
+						"chair_assembled",
+						"chair_builder",
+						"chair_parts_inventory",
+						"dark_sphere"
+					],
+					"size_budget": "compact_only",
+					"rationale": "First assembly challenge: chair from inventory parts. Builder tool, parts palette, and assembled reference — construction without blueprint, guided by constraint satisfaction."
+				},
+				{
+					"map": "Bricolage_Sculpture",
+					"position": "integration",
+					"artifacts": [
+						"balanced_sculpture_1",
+						"balanced_sculpture_2",
+						"counterweight_demo",
+						"dark_sphere",
+						"sculpture_builder",
+						"tension_demo"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Sculpture as balance negotiation: counterweight and tension demos teach forces, two balanced sculptures show solutions, builder lets players compose their own equilibrium."
+				},
+				{
+					"map": "Bricolage_Dome",
+					"position": "synthesis",
+					"artifacts": [
+						"dark_sphere",
+						"dome_builder",
+						"geodesic_dome",
+						"icosahedron_base",
+						"strut_inventory",
+						"subdivision_demo"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Geodesic dome as capstone: icosahedron base, strut inventory, subdivision demo, and dome builder synthesize all prior skills — parts, affordances, constraints, assembly — into Fuller's tensegrity."
+				}
 			]
 		}
-	}
+	},
+	"world_phase": "beyond",
+	"artifact_groups": []
 }

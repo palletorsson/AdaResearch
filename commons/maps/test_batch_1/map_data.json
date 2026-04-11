@@ -1,116 +1,132 @@
 {
   "map_info": {
-    "name": "Audit Batch 1",
-    "lookup_name": "test_batch_1",
-    "description": "Test map for 13 uncommitted artifact scripts: waves, geometry, physics, logic, VR controls",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 9,
-      "depth": 16,
-      "max_height": 3
-    },
-    "metadata": {
-      "difficulty": "testing",
-      "category": "testing",
-      "estimated_time": "variable",
-      "learning_objectives": [
-        "Visual inspection of recently modified artifacts",
-        "Verify audit fixes in-engine"
-      ]
-    }
+      "name": "Audit Batch 1",
+      "lookup_name": "test_batch_1",
+      "description": "Test map for 13 uncommitted artifact scripts: waves, geometry, physics, logic, VR controls",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 9,
+          "depth": 16,
+          "max_height": 3
+      },
+      "metadata": {
+          "difficulty": "testing",
+          "category": "testing",
+          "estimated_time": "variable",
+          "learning_objectives": [
+              "Visual inspection of recently modified artifacts",
+              "Verify audit fixes in-engine"
+          ]
+      }
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next",
+          "description": "Continue to next map in sequence",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      },
+      "s": {
+          "properties": {
+              "height": 5.5
+          }
+      }
+  },
+  "lighting": {
+      "ambient_color": [
+          0.45,
+          0.45,
+          0.5
+      ],
+      "ambient_energy": 0.7,
+      "directional_light": {
+          "enabled": true,
+          "direction": [
+              -0.4,
+              -0.7,
+              -0.4
+          ],
+          "color": [
+              1.0,
+              0.95,
+              0.85
+          ],
+          "energy": 1.2
+      }
+  },
+  "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "visible",
+      "background": {
+          "type": "sky",
+          "color": [
+              0.15,
+              0.2,
+              0.35
+          ]
+      }
   },
   "layers": {
     "structure": [
-      [ "1", "1", "2", "2", "2", "2", "2", "2", "2" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "2" ],
-      [ "2", "1", "0", "0", "0", "0", "0", "1", "2" ],
-      [ "2", "1", "0", "0", "0", "0", "0", "1", "2" ],
-      [ "2", "1", "0", "0", "0", "0", "0", "1", "2" ],
-      [ "2", "1", "0", "0", "0", "0", "0", "1", "2" ],
-      [ "2", "1", "0", "0", "0", "0", "0", "1", "2" ],
-      [ "2", "1", "0", "0", "0", "0", "0", "1", "2" ],
-      [ "2", "1", "0", "0", "0", "0", "0", "1", "2" ],
-      [ "2", "1", "0", "0", "0", "0", "0", "1", "2" ],
-      [ "2", "1", "0", "0", "0", "0", "0", "1", "2" ],
-      [ "2", "1", "0", "0", "0", "0", "0", "1", "2" ],
-      [ "2", "1", "0", "0", "0", "0", "0", "1", "2" ],
-      [ "2", "1", "0", "0", "0", "0", "0", "1", "2" ],
-      [ "2", "1", "1", "1", "1", "1", "1", "1", "2" ],
-      [ "2", "2", "2", "2", "2", "2", "2", "2", "2" ]
+      ["1", "1", "2", "2", "2", "2", "2", "2", "2"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "2"],
+      ["2", "1", "0", "0", "0", "0", "0", "1", "2"],
+      ["2", "1", "0", "0", "0", "0", "0", "1", "2"],
+      ["2", "1", "0", "0", "0", "0", "0", "1", "1"],
+      ["2", "1", "0", "0", "0", "0", "0", "1", "2"],
+      ["2", "1", "0", "0", "0", "0", "0", "1", "2"],
+      ["2", "1", "0", "0", "0", "0", "0", "1", "2"],
+      ["2", "1", "0", "0", "0", "0", "0", "1", "2"],
+      ["2", "1", "0", "0", "0", "0", "0", "1", "2"],
+      ["2", "1", "0", "0", "0", "0", "0", "1", "2"],
+      ["2", "1", "0", "0", "0", "0", "0", "1", "2"],
+      ["2", "1", "0", "0", "0", "0", "0", "1", "2"],
+      ["2", "1", "0", "0", "0", "0", "0", "1", "2"],
+      ["2", "1", "1", "1", "1", "1", "0", "1", "2"],
+      ["2", "2", "2", "2", "2", "2", "2", "2", "2"]
     ],
     "utilities": [
-      [ "s", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", "t", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+      ["s", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", "t", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     ],
     "interactables": [
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", "additive_wave_demo", " ", "angle_sum_triangle", " ", "basis_vectors_rig", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", "chord_tension_spring", " ", "constructive_proof", " ", "curvature_slider", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", "excluded_middle_demo", " ", "flow_field_painter", " ", "harmonic_distance_table", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", "random_walk_terrarium", " ", "sentry_turret", " ", "superposition_display", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", "vector_normalize_demo", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", "additive_wave_demo", " ", "angle_sum_triangle", " ", "basis_vectors_rig", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", "chord_tension_spring", " ", "constructive_proof", " ", "curvature_slider", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", "excluded_middle_demo", " ", "flow_field_painter", " ", "harmonic_distance_table", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", "random_walk_terrarium", " ", "sentry_turret", " ", "superposition_display", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", "vector_normalize_demo", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next map in sequence",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    },
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    }
-  },
-  "lighting": {
-    "ambient_color": [ 0.45, 0.45, 0.5 ],
-    "ambient_energy": 0.7,
-    "directional_light": {
-      "enabled": true,
-      "direction": [ -0.4, -0.7, -0.4 ],
-      "color": [ 1.0, 0.95, 0.85 ],
-      "energy": 1.2
-    }
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": true,
-    "enable_physics": true,
-    "auto_reveal_on_entry": false,
-    "initial_tile_visibility": "visible",
-    "background": {
-      "type": "sky",
-      "color": [ 0.15, 0.2, 0.35 ]
-    }
   }
 }

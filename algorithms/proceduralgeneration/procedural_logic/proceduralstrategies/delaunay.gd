@@ -8,10 +8,10 @@ extends Node3D
 var points: PackedVector2Array = []
 var mesh_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	generate_mesh()
 
-func generate_mesh():
+func generate_mesh() -> void:
 	generate_points()
 	var mesh = create_delaunay_mesh()
 	
@@ -28,7 +28,7 @@ func generate_mesh():
 	
 	add_child(mesh_instance)
 
-func generate_points():
+func generate_points() -> void:
 	points.clear()
 	for i in range(num_points):
 		points.append(Vector2(
@@ -71,7 +71,7 @@ func create_delaunay_mesh() -> ArrayMesh:
 	st.generate_normals()
 	return st.commit()
 
-func add_side_face(st: SurfaceTool, p0: Vector3, p1: Vector3, height: float):
+func add_side_face(st: SurfaceTool, p0: Vector3, p1: Vector3, height: float) -> void:
 	var p0_top = p0 + Vector3.UP * height
 	var p1_top = p1 + Vector3.UP * height
 	
@@ -83,6 +83,15 @@ func add_side_face(st: SurfaceTool, p0: Vector3, p1: Vector3, height: float):
 	st.add_vertex(p1_top)
 	st.add_vertex(p0_top)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
 		generate_mesh()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

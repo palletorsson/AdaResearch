@@ -1,5 +1,15 @@
 ﻿extends Node3D
 
+# @identity
+# essence: tapered CSG tube tunnel + animated rainbow gradient shader — walk through a cone of cycling color
+# desire: to step into a narrowing tunnel of light where color flows past you like standing inside a prism
+# critical_parameter: start_radius vs end_radius — the taper ratio determines whether the tunnel feels like entering or being swallowed
+# triggers: _process updates shader parameters every frame; gradient_offset and animation_speed drive continuous color flow
+# emerges: the cone shape creates forced perspective that makes the tunnel feel infinitely long even at modest segment counts
+# needs: rainbow_hallway.gdshader [has]; CSG collision [has]; VR walkthrough [has]; speed control slider [missing]
+# relationships: follows rainbow (static arc vs immersive tunnel); contrasts with spectrum_forest (ambient vs directed color experience)
+# truth: a hallway of color is not a hallway with color on it — it is a space where color becomes the architecture itself
+
 @export var animation_speed: float = 1.0
 @export var gradient_offset: float = 0.5
 @export var glow_intensity: float = 0.5
@@ -17,7 +27,7 @@ var shader_material: ShaderMaterial
 var gradient_texture: GradientTexture1D
 var segments_parent: Node3D
 
-func _ready():
+func _ready() -> void:
 	segments_parent = get_node_or_null("HallwaySegments")
 	if not segments_parent:
 		segments_parent = Node3D.new()
@@ -27,7 +37,7 @@ func _ready():
 	setup_hallway()
 	setup_environment()
 
-func setup_hallway():
+func setup_hallway() -> void:
 	# Clear existing segments
 	for child in segments_parent.get_children():
 		child.queue_free()
@@ -64,7 +74,7 @@ func setup_hallway():
 	# Set initial shader parameters
 	update_shader_parameters()
 
-func _generate_cone_segments():
+func _generate_cone_segments() -> void:
 	var total_length = num_segments * segment_length
 	
 	for i in range(num_segments):
@@ -128,7 +138,7 @@ func _create_tube_segment(radius: float, length: float, index: int) -> CSGCombin
 	
 	return combiner
 
-func setup_environment():
+func setup_environment() -> void:
 	var env = Environment.new()
 	
 	env.glow_enabled = true
@@ -151,7 +161,7 @@ func setup_environment():
 func _process(_delta):
 	update_shader_parameters()
 
-func update_shader_parameters():
+func update_shader_parameters() -> void:
 	if shader_material:
 		shader_material.set_shader_parameter("animation_speed", animation_speed)
 		shader_material.set_shader_parameter("gradient_offset", gradient_offset)
@@ -161,7 +171,7 @@ func update_shader_parameters():
 		shader_material.set_shader_parameter("gradient_start_z", 0.0)
 		shader_material.set_shader_parameter("gradient_length_m", total_length)
 
-func apply_grid_config(config: Dictionary):
+func apply_grid_config(config: Dictionary) -> void:
 	if config.has("start_radius"):
 		start_radius = float(config["start_radius"])
 	if config.has("end_radius"):
@@ -174,3 +184,9 @@ func apply_grid_config(config: Dictionary):
 		animation_speed = float(config["animation_speed"])
 	
 	setup_hallway()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

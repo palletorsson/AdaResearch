@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: (0, 0, 0) — the reference from which all coordinates are measured
+# desire: learner viscerally locates themselves relative to the world's fixed anchor
+# critical_parameter: spinning octahedron at origin, cycling alias labels (origin / home / zero / (0,0,0))
+# triggers: proximity — labels cycle on a timer to reinforce multiple names for the same concept
+# emerges: understanding that "zero" is a choice, not a given — every coordinate system has an origin
+# needs: [missing VR controls — atmospheric/reference object only]
+# relationships: prerequisite for all spatial reasoning; every other artifact measures itself from here
+# truth: the origin is a convention, not a place — but every space must agree on one
+
 ## AXIOM 0: The origin (0, 0, 0) is the reference point
 ## from which all positions are measured.
 

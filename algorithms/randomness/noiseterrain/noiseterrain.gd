@@ -1,5 +1,15 @@
-﻿extends Node3D
+extends Node3D
 class_name QueerNoiseTerrain
+
+# @identity
+# essence: height(x,z) = (primary_simplex + detail_perlin × 0.2 + cellular_warp × bulginess × 0.3) × height_multiplier — three noise layers where cellular noise warps the sample coordinates of the primary noise (domain warping)
+# desire: to sculpt with sliders in VR and feel the terrain respond — to discover that bulginess does not add hills but distorts the coordinate system, creating a qualitatively different kind of organic shape
+# critical_parameter: bulginess — controls the strength of domain warping; at 0 the terrain is standard fBm, at high values it develops bulging protrusions and hollow valleys that feel biological rather than geological
+# triggers: randomize_button generates entirely new seeds for all three noise generators; octaves slider changes primary fractal detail in real-time; contour toggle overlays topographic lines that reveal the height function's level sets
+# emerges: the queer color palette (pink→purple→cyan by height) encodes elevation as emotion rather than information — the terrain becomes a mood landscape; the NoiseBlobSpawner adds animated spheres that navigate the terrain surface
+# needs: NoiseScaleSlider [has]; HeightMultiplierSlider [has]; BulginessSlider [has]; OctavesSlider [has]; ColorShiftSlider [has]; ContourFrequencySlider [has]; BlobSpawnButton [has]; no VR slider_horizontal controls [missing]
+# relationships: precedes noise_terrain (terrain_generator.gd, time-animated); both are displayed in Noise_Perlin_Simplex map; domain warping connects to noisesphere concept; queer color scheme connects to QFEP
+# truth: domain warping is the act of sampling a function at a displaced location — when you warp the coordinate system with noise, you are not changing what the function computes but where it is asked
 
 # Terrain parameters
 @export var terrain_size: int = 100
@@ -46,7 +56,7 @@ var animate_terrain: bool = true
 # Blob system
 var blob_spawner: NoiseBlobSpawner
 
-func _ready():
+func _ready() -> void:
 	setup_noise_generators()
 	setup_materials()
 	setup_ui_connections()
@@ -54,13 +64,13 @@ func _ready():
 	setup_blob_system()
 	generate_terrain()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	if animate_terrain:
 		animate_terrain_colors(delta)
 
-func setup_noise_generators():
+func setup_noise_generators() -> void:
 	print("Setting up noise generators...")
 	
 	# Primary terrain noise - smoother settings
@@ -97,7 +107,7 @@ func setup_noise_generators():
 	
 	print("Noise generators created successfully!")
 
-func setup_materials():
+func setup_materials() -> void:
 	# Create heightmap material
 	var shader = load("res://algorithms/randomness/noiseterrain/heightmap_shader.gdshader")
 	if shader == null:
@@ -113,12 +123,12 @@ func setup_materials():
 	
 	print("Heightmap material created successfully")
 
-func update_ui_button_states():
+func update_ui_button_states() -> void:
 	# Set button states based on current material mode
 	$ParameterUI/ParameterPanel/MaterialButtons/StandardMaterialButton.button_pressed = not use_heightmap_shader
 	$ParameterUI/ParameterPanel/MaterialButtons/HeightmapShaderButton.button_pressed = use_heightmap_shader
 
-func setup_ui_connections():
+func setup_ui_connections() -> void:
 	$ParameterUI/ParameterPanel/NoiseScaleSlider.value_changed.connect(_on_noise_scale_changed)
 	$ParameterUI/ParameterPanel/HeightMultiplierSlider.value_changed.connect(_on_height_multiplier_changed)
 	$ParameterUI/ParameterPanel/BulginessSlider.value_changed.connect(_on_bulginess_changed)
@@ -146,7 +156,7 @@ func setup_ui_connections():
 # Removed camera and player movement functions
 # setup_camera_follow(), handle_player_movement(), update_camera_follow(), _input()
 
-func generate_terrain():
+func generate_terrain() -> void:
 	clear_terrain()
 	create_terrain_mesh()
 	create_terrain_collision()
@@ -154,14 +164,14 @@ func generate_terrain():
 	
 	print("Terrain generated: %d vertices, %d triangles" % [vertices.size(), indices.size() / 3])
 
-func clear_terrain():
+func clear_terrain() -> void:
 	vertices.clear()
 	normals.clear()
 	uvs.clear()
 	indices.clear()
 	colors.clear()
 
-func create_terrain_mesh():
+func create_terrain_mesh() -> void:
 	var mesh_instance = $TerrainMesh
 	terrain_mesh = ArrayMesh.new()
 	
@@ -287,7 +297,7 @@ func generate_color_at_position(x: float, z: float, height: float) -> Color:
 	
 	return final_color
 
-func calculate_normals():
+func calculate_normals() -> void:
 	normals.resize(vertices.size())
 	
 	# Initialize all normals to up vector
@@ -332,7 +342,7 @@ func calculate_normals():
 	
 	print("Normals calculated for %d vertices" % normals.size())
 
-func create_terrain_collision():
+func create_terrain_collision() -> void:
 	var collision_shape = $TerrainBody/TerrainCollision
 	
 	# CRITICAL: Use ConcavePolygonShape3D for detailed terrain collision
@@ -353,7 +363,7 @@ func create_terrain_collision():
 	print("Collision mesh created with %d triangles" % (collision_vertices.size() / 3))
 	print("IMPORTANT: Make sure TerrainCollision uses ConcavePolygonShape3D, not ConvexPolygonShape3D!")
 
-func apply_terrain_material():
+func apply_terrain_material() -> void:
 	var mesh_instance = $TerrainMesh
 	
 	if use_heightmap_shader:
@@ -383,7 +393,7 @@ func apply_terrain_material():
 		mesh_instance.material_override = terrain_material
 		print("Applied standard material")
 
-func animate_terrain_colors(_delta):
+func animate_terrain_colors(_delta) -> void:
 	if not terrain_mesh:
 		return
 	
@@ -393,7 +403,7 @@ func animate_terrain_colors(_delta):
 
 # Removed player movement and camera functions
 
-func update_ui_labels():
+func update_ui_labels() -> void:
 	$ParameterUI/ParameterPanel/NoiseScaleLabel.text = "Noise Scale: %.1f" % noise_scale
 	$ParameterUI/ParameterPanel/HeightMultiplierLabel.text = "Height Multiplier: %.1f" % height_multiplier
 	$ParameterUI/ParameterPanel/BulginessLabel.text = "Bulginess: %.1f" % bulginess
@@ -403,41 +413,41 @@ func update_ui_labels():
 	$ParameterUI/ParameterPanel/ContourStrengthLabel.text = "Contour Strength: %.2f" % contour_strength
 
 # UI Event Handlers
-func _on_noise_scale_changed(value: float):
+func _on_noise_scale_changed(value: float) -> void:
 	noise_scale = value
 	noise.frequency = 0.01 * noise_scale
 	update_ui_labels()
 	generate_terrain()
 
-func _on_height_multiplier_changed(value: float):
+func _on_height_multiplier_changed(value: float) -> void:
 	height_multiplier = value
 	update_ui_labels()
 	generate_terrain()
 
-func _on_bulginess_changed(value: float):
+func _on_bulginess_changed(value: float) -> void:
 	bulginess = value
 	update_ui_labels()
 	generate_terrain()
 
-func _on_octaves_changed(value: float):
+func _on_octaves_changed(value: float) -> void:
 	octaves = int(value)
 	noise.fractal_octaves = octaves
 	update_ui_labels()
 	generate_terrain()
 
-func _on_color_shift_changed(value: float):
+func _on_color_shift_changed(value: float) -> void:
 	color_shift = value
 	update_ui_labels()
 	generate_terrain()
 
-func _on_regenerate_pressed():
+func _on_regenerate_pressed() -> void:
 	# Generate new noise seeds
 	noise.seed = randi()
 	secondary_noise.seed = randi()
 	bulge_noise.seed = randi()
 	generate_terrain()
 
-func _on_randomize_pressed():
+func _on_randomize_pressed() -> void:
 	# Randomize all parameters
 	noise_scale = randf_range(0.3, 3.0)
 	height_multiplier = randf_range(2.0, 15.0)
@@ -462,7 +472,7 @@ func _on_randomize_pressed():
 	update_ui_labels()
 
 # Material switching event handlers
-func _on_standard_material_pressed():
+func _on_standard_material_pressed() -> void:
 	if not use_heightmap_shader:
 		return
 	use_heightmap_shader = false
@@ -470,7 +480,7 @@ func _on_standard_material_pressed():
 	$ParameterUI/ParameterPanel/MaterialButtons/HeightmapShaderButton.button_pressed = false
 	apply_terrain_material()
 
-func _on_heightmap_shader_pressed():
+func _on_heightmap_shader_pressed() -> void:
 	if use_heightmap_shader:
 		return
 	use_heightmap_shader = true
@@ -479,52 +489,52 @@ func _on_heightmap_shader_pressed():
 	apply_terrain_material()
 
 # Shader parameter event handlers
-func _on_contour_frequency_changed(value: float):
+func _on_contour_frequency_changed(value: float) -> void:
 	contour_frequency = value
 	if heightmap_material:
 		heightmap_material.set_shader_parameter("contour_frequency", contour_frequency)
 	update_ui_labels()
 
-func _on_contour_strength_changed(value: float):
+func _on_contour_strength_changed(value: float) -> void:
 	contour_strength = value
 	if heightmap_material:
 		heightmap_material.set_shader_parameter("contour_strength", contour_strength)
 	update_ui_labels()
 
-func _on_enable_contours_toggled(enabled: bool):
+func _on_enable_contours_toggled(enabled: bool) -> void:
 	enable_contours = enabled
 	if heightmap_material:
 		heightmap_material.set_shader_parameter("enable_contours", enable_contours)
 
 # Blob system setup and event handlers
-func setup_blob_system():
+func setup_blob_system() -> void:
 	blob_spawner = $NoiseBlobSpawner
 	if blob_spawner:
 		print("Blob spawner found and connected!")
 	else:
 		print("WARNING: Blob spawner not found!")
 
-func _on_spawn_blob_pressed():
+func _on_spawn_blob_pressed() -> void:
 	if blob_spawner:
 		blob_spawner.spawn_single_blob()
 		update_blob_ui_labels()
 
-func _on_clear_blobs_pressed():
+func _on_clear_blobs_pressed() -> void:
 	if blob_spawner:
 		blob_spawner.clear_all_blobs()
 		update_blob_ui_labels()
 
-func _on_blob_count_changed(value: float):
+func _on_blob_count_changed(value: float) -> void:
 	if blob_spawner:
 		blob_spawner.blob_count = int(value)
 		update_blob_ui_labels()
 
-func _on_blob_speed_changed(value: float):
+func _on_blob_speed_changed(value: float) -> void:
 	if blob_spawner:
 		blob_spawner.blob_speed = value
 		update_blob_ui_labels()
 
-func update_blob_ui_labels():
+func update_blob_ui_labels() -> void:
 	if blob_spawner:
 		var stats = blob_spawner.get_blob_stats()
 		$ParameterUI/ParameterPanel/BlobCountLabel.text = "Active Blobs: %d/%d" % [stats.active_blobs, stats.max_blobs]
@@ -534,7 +544,7 @@ func update_blob_ui_labels():
 func get_height_at_world_position(world_pos: Vector3) -> float:
 	return generate_height_at_position(world_pos.x, world_pos.z)
 
-func set_terrain_parameters(params: Dictionary):
+func set_terrain_parameters(params: Dictionary) -> void:
 	if params.has("noise_scale"):
 		noise_scale = params.noise_scale
 	if params.has("height_multiplier"):
@@ -559,3 +569,6 @@ func get_terrain_info() -> Dictionary:
 		"terrain_size": terrain_size,
 		"resolution": terrain_resolution
 	}
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

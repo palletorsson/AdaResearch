@@ -1,6 +1,16 @@
 extends Node3D
 class_name GeneticTreeSculptor
 
+# @identity
+# essence: 8 sliders → CritterDNA → TreeMorphology.build() — design a tree's genome, watch it grow live
+# desire: To sculpt a tree by tweaking its DNA — depth, forks, angle, taper, leaves, tropism, twist, arrangement
+# critical_parameter: branch_angle (15-90°) — the single gene that most visibly transforms the tree's character
+# triggers: Any slider move → debounced rebuild in 0.3s; Randomize → new genome; Plant → exports DNA for world placement
+# emerges: The player becomes a breeder — intuition about which genes produce which forms develops through play
+# needs: VR sliders [has, 8 sliders], push buttons [has, Random + Plant], Label3D [has via slider labels]
+# relationships: Central to LSystems_Living. Uses CritterDNA and TreeMorphology systems. Bridges to evolution concepts.
+# truth: A tree is eight numbers — change them and you are doing what evolution does, but with intention.
+
 ## Interactive DNA-to-tree workbench. Eight sliders control tree genes,
 ## live preview regenerates via TreeMorphology. The designed DNA is stored
 ## globally so the branching catalyst can plant copies in the world.

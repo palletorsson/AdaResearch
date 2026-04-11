@@ -1,7 +1,7 @@
 # ecosystem_controller.gd
 extends Node3D
 
-func _ready():
+func _ready() -> void:
 	# Initialize all systems
 	var environment_node = EcosystemEnvironment.new()
 	add_child(environment_node)
@@ -57,7 +57,7 @@ func _ready():
 	add_child(camera)
 
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Update all systems
 	var current_day = 1  # Or whatever your current day value is
 
@@ -70,3 +70,12 @@ func _process(delta):
 			else:
 				# Others might only need delta
 				child.update(delta)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

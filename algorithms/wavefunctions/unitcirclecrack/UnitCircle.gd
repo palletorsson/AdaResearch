@@ -11,10 +11,10 @@ var x_projection: MeshInstance3D
 var y_projection: MeshInstance3D
 var circle_mesh: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Rainbow unit circle
 	circle_mesh = MeshInstance3D.new()
 	var torus_mesh = TorusMesh.new()
@@ -40,6 +40,7 @@ func setup_scene():
 	moving_point = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.08
+	sphere_mesh.height = 0.16
 	moving_point.mesh = sphere_mesh
 	
 	var point_material = StandardMaterial3D.new()
@@ -56,7 +57,7 @@ func setup_scene():
 	x_projection = create_glowing_line(Vector3.ZERO, Vector3(1, 0, 0), Color.RED)
 	y_projection = create_glowing_line(Vector3.ZERO, Vector3(0, 1, 0), Color.GREEN)
 
-func create_axis(end_pos: Vector3, color: Color):
+func create_axis(end_pos: Vector3, color: Color) -> void:
 	var axis = create_glowing_line(Vector3.ZERO, end_pos, color)
 	axis.scale = Vector3(1, 1, 0.5)
 
@@ -82,7 +83,7 @@ func create_glowing_line(start: Vector3, end: Vector3, color: Color) -> MeshInst
 	add_child(line_mesh)
 	return line_mesh
 
-func update_line(line: MeshInstance3D, start: Vector3, end: Vector3):
+func update_line(line: MeshInstance3D, start: Vector3, end: Vector3) -> void:
 	var distance = start.distance_to(end)
 	if distance > 0:
 		var original_height = (line.mesh as CylinderMesh).height
@@ -91,7 +92,7 @@ func update_line(line: MeshInstance3D, start: Vector3, end: Vector3):
 		var direction = (end - start).normalized()
 		line.look_at_from_position(line.position, line.position + direction, Vector3.UP)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	angle += delta * 0.8
 	
@@ -127,3 +128,12 @@ func _process(delta):
 	
 	# Rotate the whole scene slowly
 	rotation.z = time * 0.1
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

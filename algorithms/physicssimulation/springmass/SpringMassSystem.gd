@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 class_name SpringMassSystem
 
@@ -18,7 +18,7 @@ var physics_update_interval = 2  # Update physics every 2 frames
 var frame_counter = 0
 var performance_timer = 0.0
 
-func _ready():
+func _ready() -> void:
 	# Scale for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
@@ -38,7 +38,7 @@ func _ready():
 	_connect_ui()
 	print("Created ", mass_points.size(), " mass points and ", springs.size(), " springs")
 
-func _create_mass_point_grid():
+func _create_mass_point_grid() -> void:
 	# Create a grid of mass points
 	for x in range(-grid_size, grid_size + 1):
 		for y in range(0, grid_size + 1):
@@ -54,7 +54,7 @@ func _create_mass_point_grid():
 				$MassPoints.add_child(mass_point)
 				mass_points.append(mass_point)
 
-func _create_spring_connections():
+func _create_spring_connections() -> void:
 	# Create springs only between direct neighbors (VR-optimized)
 	# This reduces the number of springs significantly
 	for i in range(mass_points.size()):
@@ -80,7 +80,7 @@ func _create_spring_connections():
 				# Create visual spring representation
 				_create_spring_visual(spring)
 
-func _create_spring_visual(spring):
+func _create_spring_visual(spring) -> void:
 	var spring_line = CSGBox3D.new()
 	spring_line.size = Vector3(0.02, 0.02, spring.rest_length)
 	spring_line.material = StandardMaterial3D.new()
@@ -98,7 +98,7 @@ func _create_spring_visual(spring):
 	$Springs.add_child(spring_line)
 	spring["visual"] = spring_line
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if paused:
 		return
 	
@@ -126,7 +126,7 @@ func _physics_process(delta):
 	# Update spring visuals (less frequently)
 	_update_spring_visuals()
 
-func _apply_spring_forces(_delta):
+func _apply_spring_forces(_delta) -> void:
 	for spring in springs:
 		var point1 = spring.point1
 		var point2 = spring.point2
@@ -148,7 +148,7 @@ func _apply_spring_forces(_delta):
 			if not point2.is_fixed:
 				point2.apply_force(-force)
 
-func _update_spring_visuals():
+func _update_spring_visuals() -> void:
 	for spring in springs:
 		var visual = spring.visual
 		var point1 = spring.point1
@@ -183,7 +183,7 @@ func _update_spring_visuals():
 		
 		visual.material.albedo_color = color
 
-func _connect_ui():
+func _connect_ui() -> void:
 	var ui: Node = get_node_or_null("UI/VBoxContainer")
 	if not ui:
 		return
@@ -200,18 +200,18 @@ func _connect_ui():
 	if damping_slider:
 		damping_slider.value_changed.connect(_on_damping_changed)
 
-func _on_reset_pressed():
+func _on_reset_pressed() -> void:
 	# Reset all mass points to initial positions
 	for mass_point in mass_points:
 		mass_point.reset_to_initial()
 
-func _on_pause_pressed():
+func _on_pause_pressed() -> void:
 	paused = !paused
 	var pause_btn: Node = get_node_or_null("UI/VBoxContainer/PauseButton")
 	if pause_btn:
 		pause_btn.text = "Resume" if paused else "Pause"
 
-func _on_stiffness_changed(value: float):
+func _on_stiffness_changed(value: float) -> void:
 	spring_stiffness = value
 	var label: Node = get_node_or_null("UI/VBoxContainer/StiffnessLabel")
 	if label:
@@ -221,7 +221,7 @@ func _on_stiffness_changed(value: float):
 	for spring in springs:
 		spring.stiffness = value
 
-func _on_damping_changed(value: float):
+func _on_damping_changed(value: float) -> void:
 	damping = value
 	var label: Node = get_node_or_null("UI/VBoxContainer/DampingLabel")
 	if label:
@@ -230,3 +230,12 @@ func _on_damping_changed(value: float):
 	# Update all mass points
 	for mass_point in mass_points:
 		mass_point.damping = value
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

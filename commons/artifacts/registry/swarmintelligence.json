@@ -1,0 +1,391 @@
+{
+	"artifacts": {
+		"ant_colony_art": {
+			"name": "Ant Colony Art",
+			"lookup_name": "ant_colony_art",
+			"description": "Artistic visualization of ant colony optimization with pheromone trails.",
+			"scene": "res://algorithms/swarmintelligence/antcolonyoptimization/artmain.tscn",
+			"category": "swarmintelligence",
+			"tags": [
+				"ants",
+				"colony",
+				"pheromone",
+				"art",
+				"swarm"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "swarmintelligence",
+			"complexity": "advanced",
+			"dev_themes": [
+				"art",
+				"collective",
+				"emergence",
+				"swarm"
+			]
+		},
+		"ant_agent": {
+			"name": "Ant Agent",
+			"lookup_name": "ant_agent",
+			"description": "Individual ant agent for colony optimization simulations.",
+			"scene": "res://algorithms/swarmintelligence/antcolonyoptimization/AntAgent.tscn",
+			"category": "swarmintelligence",
+			"tags": [
+				"ant",
+				"agent",
+				"swarm"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "swarmintelligence",
+			"complexity": "advanced",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			]
+		},
+		"particle_swarm_optimization_legacy": {
+			"name": "Particle Swarm Optimization (Legacy)",
+			"lookup_name": "particle_swarm_optimization_legacy",
+			"description": "Particle swarm optimization visualizing swarm convergence on optimal solutions.",
+			"scene": "res://algorithms/swarmintelligence/particleswarmoptimization/particle_swarm_optimization.tscn",
+			"category": "swarmintelligence",
+			"tags": [
+				"pso",
+				"particles",
+				"optimization",
+				"swarm"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "swarmintelligence",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			]
+		},
+		"ant_colony_v2": {
+			"name": "Ant Colony V2",
+			"lookup_name": "ant_colony_v2",
+			"description": "Improved ant colony simulation with updated agent behavior and visuals.",
+			"scene": "res://algorithms/swarmintelligence/ants_v2/AntColonyV2.tscn",
+			"category": "swarmintelligence",
+			"tags": [
+				"ants",
+				"colony",
+				"simulation",
+				"swarm",
+				"v2"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "swarmintelligence",
+			"parameters": {
+				"footprint": [
+					11,
+					21,
+					6
+				],
+				"size_group": "world_scale"
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			]
+		},
+		"physarum_colony": {
+			"name": "Physarum Colony",
+			"lookup_name": "physarum_colony",
+			"description": "Physarum slime mold simulation demonstrating emergent network formation.",
+			"scene": "res://algorithms/swarmintelligence/physarum/PhysarumColony.tscn",
+			"category": "swarmintelligence",
+			"tags": [
+				"physarum",
+				"slime_mold",
+				"emergence",
+				"network",
+				"swarm"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "swarmintelligence",
+			"parameters": {
+				"footprint": [
+					11,
+					31,
+					1
+				],
+				"size_group": "world_scale"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			]
+		},
+		"ant_colony_optimization": {
+			"name": "Ant Colony Optimization",
+			"lookup_name": "ant_colony_optimization",
+			"description": "Ant colony optimization with pheromone evaporation gradient heatmap, multi-source quality-weighted foraging, tandem running communication, and 3 modes (Colony/Communication/Multi-Source).",
+			"scene": "res://algorithms/swarmintelligence/ant_colony_optimization/ant_colony_optimization.tscn",
+			"category": "swarmintelligence",
+			"tags": [
+				"ants",
+				"optimization",
+				"pheromone",
+				"heatmap",
+				"foraging",
+				"communication",
+				"swarm"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"swarmintelligence"
+			],
+			"sequence": "swarmintelligence",
+			"parameters": {
+				"footprint": [
+					17,
+					19,
+					9
+				],
+				"size_group": "world_scale",
+				"config_schema": {
+					"ant_count": {"type": "int", "default": 40, "min": 5, "max": 80},
+					"evaporation_rate": {"type": "float", "default": 0.02, "min": 0.001, "max": 0.1},
+					"pheromone_deposit": {"type": "float", "default": 5.0, "min": 1.0, "max": 20.0},
+					"alpha_weight": {"type": "float", "default": 1.0, "min": 0.1, "max": 5.0},
+					"beta_weight": {"type": "float", "default": 2.0, "min": 0.1, "max": 5.0},
+					"ant_speed": {"type": "float", "default": 3.0, "min": 1.0, "max": 8.0},
+					"field_size": {"type": "float", "default": 6.0, "min": 3.0, "max": 10.0},
+					"food_source_count": {"type": "int", "default": 4, "min": 1, "max": 8},
+					"mode": {"type": "string", "default": "COLONY", "enum": ["COLONY", "COMMUNICATION", "MULTI_SOURCE"]}
+				}
+			},
+			"complexity": "advanced",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm",
+				"communication"
+			]
+		},
+		"particle_swarm_optimization": {
+			"name": "Particle Swarm Optimization",
+			"lookup_name": "particle_swarm_optimization",
+			"description": "Particle swarm optimization with visual representation of swarm search dynamics.",
+			"scene": "res://algorithms/swarmintelligence/particle_swarm_optimization/particle_swarm_optimization.tscn",
+			"category": "swarmintelligence",
+			"tags": [
+				"pso",
+				"particles",
+				"optimization",
+				"search",
+				"swarm"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "swarmintelligence",
+			"parameters": {
+				"footprint": [
+					17,
+					19,
+					9
+				],
+				"size_group": "world_scale"
+			},
+			"complexity": "intermediate",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			]
+		},
+		"boids_aquarium": {
+			"name": "Boids Aquarium",
+			"lookup_name": "boids_aquarium",
+			"description": "A 1m glass cube containing a school of 30 boids demonstrating emergent flocking behavior. Three simple rules (separation, alignment, cohesion) create lifelike collective motion.",
+			"scene": "res://commons/artifacts/boids_aquarium/boids_aquarium.tscn",
+			"category": "emergence",
+			"tags": [
+				"boids",
+				"flocking",
+				"emergence",
+				"swarm",
+				"reynolds",
+				"collective_behavior",
+				"self_organization"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"swarmintelligence"
+			],
+			"sequence": "swarmintelligence",
+			"interactions": [
+				"observe"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"interaction": "observe",
+			"qfep_connection": "Emergence at Î»â‰ˆ0.4 â€” simple rules create complex, unpredictable behavior without central control",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			]
+		},
+		"stigmergy_grid": {
+			"name": "Stigmergy Grid",
+			"lookup_name": "stigmergy_grid",
+			"description": "Ant pheromone grid with real-time evaporation and diffusion — ants deposit trails that fade over time, demonstrating indirect communication (stigmergy).",
+			"scene": "res://commons/artifacts/stigmergy_grid/stigmergy_grid.tscn",
+			"category": "swarmintelligence",
+			"tags": [
+				"stigmergy",
+				"pheromone",
+				"ants",
+				"emergence",
+				"indirect_communication",
+				"swarm"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"sequence": "swarmintelligence",
+			"complexity": "advanced",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			]
+		},
+		"AntColonyV2": {
+			"lookup_name": "AntColonyV2",
+			"name": "AntColonyV2",
+			"description": "AntColonyV2",
+			"scene": "res://algorithms/swarmintelligence/ants_v2/AntColonyV2.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"swarmintelligence"
+			],
+			"footprint": [
+				11,
+				21,
+				6
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					11,
+					21,
+					6
+				],
+				"size_group": "world_scale"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			],
+			"tags": [
+				"swarm"
+			]
+		},
+		"fitness_landscape_politics": {
+			"name": "Fitness Landscape Politics",
+			"lookup_name": "fitness_landscape_politics",
+			"description": "30 PSO particles on 3 switchable fitness landscapes: convergence (corporate — minimize distance), spread (ecological — maximize diversity), novelty (artistic — seek the unvisited). Same agents, different power structures, different 'success.'",
+			"qfep_connection": "The fitness function IS the power structure. Switching landscapes does not change the agents' F-model — it changes what counts as low energy. Who defines the loss function defines the world.",
+			"scene": "res://commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.tscn",
+			"category": "swarmintelligence",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"swarmintelligence"
+			],
+			"sequence": "swarmintelligence",
+			"parameters": {
+				"footprint": [
+					3,
+					2,
+					3
+				],
+				"size_group": "room_scale"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"pso",
+				"particles",
+				"optimization",
+				"critical_theory",
+				"fitness",
+				"swarm"
+			],
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm",
+				"philosophy"
+			]
+		},
+		"PhysarumColony": {
+			"lookup_name": "PhysarumColony",
+			"name": "PhysarumColony",
+			"description": "PhysarumColony",
+			"scene": "res://algorithms/swarmintelligence/physarum/PhysarumColony.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"swarmintelligence"
+			],
+			"footprint": [
+				11,
+				31,
+				1
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					11,
+					31,
+					1
+				],
+				"size_group": "world_scale"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"collective",
+				"emergence",
+				"swarm"
+			],
+			"tags": [
+				"swarm"
+			]
+		}
+	}
+}

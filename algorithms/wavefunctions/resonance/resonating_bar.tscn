@@ -6,6 +6,7 @@
 size = Vector3(0.08, 0.04, 0.3)
 
 [node name="ResonatingBar" type="RigidBody3D"]
+gravity_scale = 0.0
 mass = 0.5
 contact_monitor = true
 max_contacts_reported = 4

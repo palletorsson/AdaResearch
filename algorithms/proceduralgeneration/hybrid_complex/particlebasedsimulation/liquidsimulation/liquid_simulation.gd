@@ -27,7 +27,7 @@ class LiquidType:
 	var density: float
 	var viscosity: float
 	
-	func _init(p_name: String, p_color: Color, p_density: float, p_viscosity: float):
+	func _init(p_name: String, p_color: Color, p_density: float, p_viscosity: float) -> void:
 		name = p_name
 		base_color = p_color
 		density = p_density
@@ -50,7 +50,7 @@ class LiquidParticle:
 	var mixed_properties = {}
 	var neighbors = []
 	
-	func _init(pos: Vector3, type: String, mesh: MeshInstance3D):
+	func _init(pos: Vector3, type: String, mesh: MeshInstance3D) -> void:
 		position = pos
 		velocity = Vector3.ZERO
 		acceleration = Vector3.ZERO
@@ -61,7 +61,7 @@ class LiquidParticle:
 			type: 1.0  # Concentration of this type is 100%
 		}
 
-func _ready():
+func _ready() -> void:
 	# Set up the container
 	_create_container()
 	
@@ -74,7 +74,7 @@ func _ready():
 	# Set up shader material for visualization
 	_setup_material()
 
-func _create_container():
+func _create_container() -> void:
 	# Create a transparent container
 	var container_mesh = BoxMesh.new()
 	container_mesh.size = container_size
@@ -89,7 +89,7 @@ func _create_container():
 	
 	add_child(container_instance)
 
-func _initialize_particles():
+func _initialize_particles() -> void:
 	# Set up grid cell size based on typical interaction distance
 	grid_cell_size = container_size.x / 20
 	
@@ -130,14 +130,14 @@ func _initialize_particles():
 	# Calculate maximum possible entropy for normalization
 	max_entropy = -1.0 * (0.5 * log(0.5) + 0.5 * log(0.5))
 
-func _setup_entropy_display():
+func _setup_entropy_display() -> void:
 	entropy_label = Label3D.new()
 	entropy_label.text = "Entropy: 0.00"
 	entropy_label.position = Vector3(0, container_size.y / 2 + 1, 0)
 	entropy_label.font_size = 24
 	add_child(entropy_label)
 
-func _setup_material():
+func _setup_material() -> void:
 	spatial_material = ShaderMaterial.new()
 	var shader = Shader.new()
 	
@@ -160,7 +160,7 @@ func _setup_material():
 	
 	spatial_material.shader = shader
 
-func _process(delta):
+func _process(delta: float) -> void:
 	for i in range(simulation_steps_per_frame):
 		# Update simulation at a smaller time step for stability
 		var step_delta = delta / simulation_steps_per_frame
@@ -170,7 +170,7 @@ func _process(delta):
 	_update_visuals()
 	_calculate_entropy()
 
-func _update_simulation(delta):
+func _update_simulation(delta) -> void:
 	# Update grid for spatial partitioning
 	_update_spatial_grid()
 	
@@ -189,7 +189,7 @@ func _update_simulation(delta):
 	# Handle liquid mixing
 	_handle_mixing(delta)
 
-func _update_spatial_grid():
+func _update_spatial_grid() -> void:
 	# Clear the previous grid
 	neighbor_grid.clear()
 	
@@ -211,7 +211,7 @@ func _update_spatial_grid():
 		
 		neighbor_grid[cell_key].append(i)
 
-func _find_neighbors():
+func _find_neighbors() -> void:
 	# For each particle, find its neighbors
 	for i in range(particle_data.size()):
 		var particle = particle_data[i]
@@ -238,7 +238,7 @@ func _find_neighbors():
 								if distance < grid_cell_size:
 									particle.neighbors.append(neighbor_idx)
 
-func _calculate_forces(delta):
+func _calculate_forces(delta) -> void:
 	# Apply forces for each particle
 	for i in range(particle_data.size()):
 		var particle = particle_data[i]
@@ -282,7 +282,7 @@ func _calculate_forces(delta):
 				
 				particle.acceleration += (viscous_force + pressure_force) * delta
 
-func _update_positions(delta):
+func _update_positions(delta) -> void:
 	# Update position for each particle using velocity verlet integration
 	for particle in particle_data:
 		var old_acceleration = particle.acceleration
@@ -298,7 +298,7 @@ func _update_positions(delta):
 		# Update velocity (second half step)
 		particle.velocity += particle.acceleration * delta * 0.5
 
-func _apply_boundary_conditions():
+func _apply_boundary_conditions() -> void:
 	# Keep particles inside the container with soft boundaries
 	var half_size = container_size * 0.5
 	
@@ -312,7 +312,7 @@ func _apply_boundary_conditions():
 				particle.position[axis] = half_size[axis]
 				particle.velocity[axis] *= -0.5  # Bounce with dampening
 
-func _handle_mixing(delta):
+func _handle_mixing(delta) -> void:
 	# Handle diffusion between particles
 	for i in range(particle_data.size()):
 		var particle = particle_data[i]
@@ -349,7 +349,7 @@ func _handle_mixing(delta):
 			for type in particle.mixed_properties:
 				particle.mixed_properties[type] /= total_concentration
 
-func _update_visuals():
+func _update_visuals() -> void:
 	# Update particle visual representation
 	for particle in particle_data:
 		# Update position
@@ -374,7 +374,7 @@ func _update_visuals():
 		if material:
 			material.albedo_color = mixed_color
 
-func _calculate_entropy():
+func _calculate_entropy() -> void:
 	# Calculate system entropy based on mixing state
 	var total_entropy = 0.0
 	
@@ -406,7 +406,7 @@ func _calculate_entropy():
 		entropy_label.text = "Entropy: %.2f" % entropy_value
 
 # Add a method to pour a new liquid
-func add_liquid(position: Vector3, type: String, amount: int):
+func add_liquid(position: Vector3, type: String, amount: int) -> void:
 	if not liquid_types.has(type):
 		push_error("Unknown liquid type: " + type)
 		return
@@ -441,3 +441,12 @@ func add_liquid(position: Vector3, type: String, amount: int):
 # A function to get the current entropy value
 func get_entropy():
 	return entropy_value
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

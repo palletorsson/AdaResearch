@@ -2,6 +2,16 @@
 extends Node3D
 class_name GeneticProgramming
 
+# @identity
+# essence: population[i].fitness = f(genome) -> select, crossover, mutate, repeat — evolution without a designer
+# desire: to watch 3D creatures evolve in front of you, generation by generation, toward a fitness goal no individual understands
+# critical_parameter: mutation_rate — too low and evolution stagnates, too high and good solutions dissolve; 0.3 is the edge of chaos
+# triggers: auto_evolve ticks generations on a timer; evolve_one_generation allows manual stepping; fitness_function selects the selection pressure
+# emerges: creatures converge on similar body plans despite random initialization — convergent evolution from pure math
+# needs: population grid display [has]; fitness labels [has]; auto-evolve timer [has]; VR selection pressure picker [missing]
+# relationships: opener for proceduralgeneration sequence; contrasts with space_colonization_algorithm (evolution vs growth); genome_type spans primitives to L-systems
+# truth: evolution does not design — it accumulates accidents that happen to survive
+
 @export_group("Evolution Settings")
 @export var population_size: int = 20
 @export var max_generations: int = 50
@@ -130,17 +140,17 @@ var best_genome: Genome = null
 var evolution_timer: float = 0.0
 var fitness_history: Array[float] = []
 
-func _ready():
+func _ready() -> void:
     initialize_population()
 
-func _process(delta):
+func _process(delta: float) -> void:
     if auto_evolve:
         evolution_timer += delta * evolution_speed
         if evolution_timer >= 1.0:
             evolution_timer = 0.0
             evolve_generation()
 
-func initialize_population():
+func initialize_population() -> void:
     clear_population()
     population.clear()
     current_generation = 0
@@ -173,12 +183,12 @@ func create_random_genome() -> Genome:
     
     return genome
 
-func create_primitive_genome(genome: Genome):
+func create_primitive_genome(genome: Genome) -> void:
     var num_genes = randi() % genome_complexity + 3
     for i in range(num_genes):
         genome.genes.append(genome.create_random_gene())
 
-func create_csg_genome(genome: Genome):
+func create_csg_genome(genome: Genome) -> void:
     # Create CSG operations (union, subtract, intersect)
     var num_operations = randi() % (genome_complexity / 2) + 2
     
@@ -200,7 +210,7 @@ func create_csg_genome(genome: Genome):
         }
         genome.genes.append(Gene.new(operation, params))
 
-func create_parametric_genome(genome: Genome):
+func create_parametric_genome(genome: Genome) -> void:
     # Parametric equations for generating forms
     var params = {
         "freq_x": randf_range(0.5, 3.0),
@@ -215,7 +225,7 @@ func create_parametric_genome(genome: Genome):
     }
     genome.genes.append(Gene.new("parametric", params))
 
-func create_voxel_genome(genome: Genome):
+func create_voxel_genome(genome: Genome) -> void:
     # 3D voxel grid representation
     var grid_size = 8
     var params = {
@@ -232,7 +242,7 @@ func create_voxel_genome(genome: Genome):
     
     genome.genes.append(Gene.new("voxel", params))
 
-func create_lsystem_genome(genome: Genome):
+func create_lsystem_genome(genome: Genome) -> void:
     # L-System grammar for generative forms
     var rules = {
         "axiom": "F",
@@ -243,7 +253,7 @@ func create_lsystem_genome(genome: Genome):
     }
     genome.genes.append(Gene.new("lsystem", rules))
 
-func evaluate_population():
+func evaluate_population() -> void:
     for genome in population:
         genome.fitness = calculate_fitness(genome)
     
@@ -359,7 +369,7 @@ func calculate_sphericity(genome: Genome) -> float:
     # Lower variance = more spherical
     return 1.0 / (1.0 + variance)
 
-func evolve_generation():
+func evolve_generation() -> void:
     if current_generation >= max_generations:
         print("Maximum generations reached")
         return
@@ -438,7 +448,7 @@ func build_phenotype(genome: Genome) -> Node3D:
     
     return phenotype
 
-func build_primitive_phenotype(genome: Genome, phenotype: Node3D):
+func build_primitive_phenotype(genome: Genome, phenotype: Node3D) -> void:
     for gene in genome.genes:
         var mesh_instance = MeshInstance3D.new()
         phenotype.add_child(mesh_instance)
@@ -478,7 +488,7 @@ func build_primitive_phenotype(genome: Genome, phenotype: Node3D):
         material.roughness = 0.7
         mesh_instance.material_override = material
 
-func build_csg_phenotype(genome: Genome, phenotype: Node3D):
+func build_csg_phenotype(genome: Genome, phenotype: Node3D) -> void:
     if genome.genes.size() == 0:
         return
     
@@ -502,7 +512,7 @@ func build_csg_phenotype(genome: Genome, phenotype: Node3D):
     material.albedo_color = Color(0.8, 0.6, 0.4)
     base_mesh.material_override = material
 
-func add_primitive_to_surface(surface_tool: SurfaceTool, gene: Gene):
+func add_primitive_to_surface(surface_tool: SurfaceTool, gene: Gene) -> void:
     # Simplified - just add a cube
     var pos = gene.parameters.get("position", Vector3.ZERO)
     var scale = gene.parameters.get("scale", Vector3.ONE)
@@ -523,7 +533,7 @@ func add_primitive_to_surface(surface_tool: SurfaceTool, gene: Gene):
     surface_tool.add_vertex(vertices[1])
     surface_tool.add_vertex(vertices[2])
 
-func build_parametric_phenotype(genome: Genome, phenotype: Node3D):
+func build_parametric_phenotype(genome: Genome, phenotype: Node3D) -> void:
     if genome.genes.size() == 0:
         return
     
@@ -574,7 +584,7 @@ func build_parametric_phenotype(genome: Genome, phenotype: Node3D):
     material.albedo_color = Color(0.9, 0.5, 0.7)
     mesh_instance.material_override = material
 
-func build_voxel_phenotype(genome: Genome, phenotype: Node3D):
+func build_voxel_phenotype(genome: Genome, phenotype: Node3D) -> void:
     if genome.genes.size() == 0:
         return
     
@@ -600,7 +610,7 @@ func build_voxel_phenotype(genome: Genome, phenotype: Node3D):
         material.albedo_color = Color(0.5, 0.8, 0.6)
         cube.material_override = material
 
-func build_lsystem_phenotype(genome: Genome, phenotype: Node3D):
+func build_lsystem_phenotype(genome: Genome, phenotype: Node3D) -> void:
     if genome.genes.size() == 0:
         return
     
@@ -624,7 +634,7 @@ func expand_lsystem(lstring: String, rules: Dictionary) -> String:
             result += c
     return result
 
-func interpret_lsystem(lstring: String, rules: Dictionary, parent: Node3D):
+func interpret_lsystem(lstring: String, rules: Dictionary, parent: Node3D) -> void:
     var position = Vector3.ZERO
     var direction = Vector3.UP
     var angle = deg_to_rad(rules.angle)
@@ -655,7 +665,7 @@ func interpret_lsystem(lstring: String, rules: Dictionary, parent: Node3D):
                     position = state[0]
                     direction = state[1]
 
-func create_branch_segment(parent: Node3D, start: Vector3, end: Vector3):
+func create_branch_segment(parent: Node3D, start: Vector3, end: Vector3) -> void:
     var mesh_instance = MeshInstance3D.new()
     parent.add_child(mesh_instance)
     
@@ -673,7 +683,7 @@ func create_branch_segment(parent: Node3D, start: Vector3, end: Vector3):
     material.albedo_color = Color(0.6, 0.4, 0.2)
     mesh_instance.material_override = material
 
-func visualize_population():
+func visualize_population() -> void:
     clear_visualization()
     
     if show_best_only:
@@ -717,12 +727,21 @@ func visualize_population():
             label.position = phenotype.position + Vector3(0, 4, 0)
             label.font_size = 16
 
-func clear_population():
+func clear_population() -> void:
     for genome in population:
         if genome.phenotype:
             genome.phenotype.queue_free()
     clear_visualization()
 
-func clear_visualization():
+func clear_visualization() -> void:
     for child in get_children():
         child.queue_free()
+
+func _exit_tree() -> void:
+    for child in get_children():
+        if not child.owner:
+            child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+    pass

@@ -1,4 +1,4 @@
-﻿extends "res://algorithms/vectors/shared/vector_scene_base.gd"
+extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 var incident_vector: Node3D
 var normal_vector: Node3D
@@ -21,7 +21,7 @@ var _cached_normal_component_nodes: Dictionary = {}
 var _time_since_last_text_update: float = 0.0
 const TEXT_UPDATE_INTERVAL: float = 0.1
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	# Match the compact exhibition presentation used by other advanced vector scenes.
 	scale = Vector3(0.5, 0.5, 0.5)
@@ -57,7 +57,7 @@ func _ready():
 	_cache_vector_nodes(reflection_vector, _cached_refl_nodes)
 	_cache_vector_nodes(normal_component_vector, _cached_normal_component_nodes)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	var incident = _get_vector_fast(incident_vector, _cached_incident_nodes)
 	var normal = _get_vector_fast(normal_vector, _cached_normal_nodes)
 	if normal.length() < 0.001:
@@ -115,7 +115,7 @@ func _create_projection_drop_line() -> MeshInstance3D:
 	mesh_instance.material_override = material
 	return mesh_instance
 
-func _update_projection_drop_line(incident: Vector3, projection: Vector3):
+func _update_projection_drop_line(incident: Vector3, projection: Vector3) -> void:
 	if _projection_drop_mesh == null:
 		return
 
@@ -126,7 +126,7 @@ func _update_projection_drop_line(incident: Vector3, projection: Vector3):
 	_projection_drop_mesh.surface_add_vertex(projection * SCENE_SCALE)
 	_projection_drop_mesh.surface_end()
 
-func _update_plane_orientation(normal: Vector3):
+func _update_plane_orientation(normal: Vector3) -> void:
 	var n = normal.normalized()
 	var reference = Vector3.UP
 	if absf(n.dot(reference)) > 0.99:
@@ -138,7 +138,7 @@ func _update_plane_orientation(normal: Vector3):
 	if plane_mesh:
 		plane_mesh.transform.basis = basis
 
-func _update_info(incident: Vector3, normal: Vector3, projection: Vector3, reflection: Vector3):
+func _update_info(incident: Vector3, normal: Vector3, projection: Vector3, reflection: Vector3) -> void:
 	var builder := []
 	var n_unit = normal.normalized()
 	builder.append("Incident = (%.2f, %.2f, %.2f)" % [incident.x, incident.y, incident.z])
@@ -153,7 +153,7 @@ func _update_info(incident: Vector3, normal: Vector3, projection: Vector3, refle
 
 # --- Caching Helpers (Local Implementation) ---
 
-func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary):
+func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary) -> void:
 	if arrow == null: return
 	cache_dict["start"] = arrow.get_node_or_null("lineContainer/GrabSphere")
 	cache_dict["end"] = arrow.get_node_or_null("lineContainer/GrabSphere2")
@@ -168,10 +168,19 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
-func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary) -> void:
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		end_node.position = vector * SCENE_SCALE
 	var line_container: Node3D = cache_dict.get("line_container")
 	if line_container and line_container.has_method("refresh_connections"):
 		line_container.refresh_connections()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

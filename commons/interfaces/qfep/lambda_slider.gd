@@ -9,6 +9,16 @@ extends Node3D
 
 class_name LambdaSlider
 
+# @identity
+# essence: slider_position / rail_length -> lambda in [0,1]; color_gradient(blue->green->red)
+# desire: grab the entropy drive and feel the system shift from crystal to chaos under your hand
+# critical_parameter: lambda — the single number that controls order/chaos balance across the entire QFEP system
+# triggers: XR grab moves handle; slider_moved signal propagates to all connected visualizations; broadcasts globally
+# emerges: the green zone at 0.3-0.5 where particles and color converge — the sweet spot finds you
+# needs: VR XR slider grab [has], visual gradient rail [has], particle feedback [has], global broadcast [has]
+# relationships: controls edge_core, qfep_reactor, queer_morphology_specimen; paired with phi_slider; central to every QFEP map
+# truth: lambda is the entropy drive — the dial between crystallization and dissolution that every living system must negotiate
+
 ## Signal emitted when lambda value changes
 signal lambda_changed(value: float)
 

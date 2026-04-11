@@ -94,3 +94,12 @@ func _make_test_ground() -> StaticBody3D:
 	sb.add_child(mesh_inst)
 	print("   Created ground plane")
 	return sb
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,184 @@
+{
+  "query": "Swarm Intelligence and Emergent Systems",
+  "matched_topic": "generic",
+  "pack_slug": "swarm-intelligence",
+  "title": "Generic development start for: Swarm Intelligence and Emergent Systems",
+  "category": "exploration",
+  "tags": [
+    "swarm",
+    "intelligence",
+    "and",
+    "emergent",
+    "systems"
+  ],
+  "overview": "No curated starter pack matched exactly. This pack is assembled from document hits and repo path matches, so it is useful for discovery but less trustworthy than a curated topic profile.",
+  "read_first": [],
+  "principles": [],
+  "constraints": [],
+  "first_moves": [
+    "Refine the intent into a system noun if possible, then rerun this tool.",
+    "Use tools/lod_query.py when you know the sequence, map, or artifact name."
+  ],
+  "deepwiki_url": "https://deepwiki.com/palletorsson/AdaResearch",
+  "deepwiki_topics": [
+    "Overview"
+  ],
+  "encyclopedia": [],
+  "history_hits": [
+    {
+      "path": "doc/sessions/2026-03-23-continued-session.md",
+      "snippet": "Single session spanning ~14 hours. Started with renaming map folders, ended with 363 algorithms having identity, desire, and truth.",
+      "score": "2"
+    },
+    {
+      "path": "doc/sessions/2026-03-19-garden-session-summary.md",
+      "snippet": "Single session spanning ~14 hours. Started with renaming map folders, ended with 363 algorithms having identity, desire, and truth.",
+      "score": "1"
+    },
+    {
+      "path": "doc/SESSION_HANDOFF_2026-03-28.md",
+      "snippet": "# Session Handoff: March 23-28, 2026",
+      "score": "1"
+    }
+  ],
+  "doc_hits": [
+    {
+      "path": "doc/ALGORITHM_REPORT.md",
+      "snippet": "AdaResearch contains **451 algorithm implementations** across **48 categories**. The project emphasizes wave functions, randomness, and machine learning, with strong coverage of physics simulation and visual/mathematical",
+      "score": "5"
+    },
+    {
+      "path": "doc/ALGORITHM_TESTING_INTEGRATION_SUMMARY.md",
+      "snippet": "- `datastructures`, `lsystems`, `machinelearning`",
+      "score": "5"
+    },
+    {
+      "path": "doc/ARTIFACT_DEVELOPMENT_PLAN.md",
+      "snippet": "| `cross_product_demo` | ✅ Done | HIGH | **2026-02-03** — Normal, parallelogram area, right-hand rule |",
+      "score": "5"
+    },
+    {
+      "path": "doc/CLAUDE_PROJECT_NAVIGATOR.md",
+      "snippet": "**Ada Research** is named after Ada Lovelace, who wrote about the relationship between computers and generative art in 1842. The project is a VR meta-quest exploring how algorithms create \"invisible fences\" - how digital",
+      "score": "5"
+    },
+    {
+      "path": "doc/LOD_TREE.json",
+      "snippet": "\"lod1\": \"Advanced Laboratory: Advanced lab equipment simulation and systems theory\",",
+      "score": "5"
+    },
+    {
+      "path": "doc/TAXONOMY.md",
+      "snippet": "> How do we encode form? What primitives and operations are needed?",
+      "score": "5"
+    }
+  ],
+  "repo_hits": [
+    "algorithms/emergentsystems/README.md",
+    "algorithms/emergentsystems/boidflocking/Boid.gd",
+    "algorithms/emergentsystems/boidflocking/Boid.gd.uid",
+    "algorithms/emergentsystems/boidflocking/README.md",
+    "algorithms/emergentsystems/boidflocking/TrailRibbon.gd",
+    "algorithms/emergentsystems/boidflocking/TrailRibbon.gd.uid",
+    "algorithms/emergentsystems/boidflocking/boid.tscn",
+    "algorithms/emergentsystems/boidflocking/boid_manager.gd"
+  ],
+  "grounded_wiki": {
+    "project_slug": "adaresearch-case-study",
+    "points": [
+      {
+        "point_type": "decision",
+        "title": "I'll start by exploring both registry systems to understand their structure a...",
+        "statement": "I'll start by exploring both registry systems to understand their structure and overlap. Good overview.",
+        "support_count": 1,
+        "confidence": 0.71
+      },
+      {
+        "point_type": "fact",
+        "title": "Bridge: Map authors work in JSON and web tooling, while the Grid System turns...",
+        "statement": "Bridge: Map authors work in JSON and web tooling, while the Grid System turns the same data into walls, utilities, artifacts, spawn logic, and scene flow in VR.",
+        "support_count": 3,
+        "confidence": 0.81
+      },
+      {
+        "point_type": "fact",
+        "title": "Bridge: Maps and sequences refer to stable `lookup_name` identifiers, while r...",
+        "statement": "Bridge: Maps and sequences refer to stable `lookup_name` identifiers, while registry metadata carries the bridge back to scenes, categories, tags, and sequence ownership.",
+        "support_count": 3,
+        "confidence": 0.81
+      },
+      {
+        "point_type": "fact",
+        "title": "Bridge: Web tools, CLI validators, and VR feedback all operate on the same ma...",
+        "statement": "Bridge: Web tools, CLI validators, and VR feedback all operate on the same map and sequence data, so the project can move between planning, authoring, and embodied verification without losing the thread.",
+        "support_count": 3,
+        "confidence": 0.81
+      }
+    ],
+    "claims": [
+      {
+        "claim_type": "decision",
+        "statement": "I'll start by exploring both registry systems to understand their structure and overlap. Good overview.",
+        "support_count": 1,
+        "confidence": 0.71,
+        "status": "verified"
+      },
+      {
+        "claim_type": "principle",
+        "statement": "Repo and chat-grounded overview for AdaResearch 46.",
+        "support_count": 1,
+        "confidence": 0.82,
+        "status": "grounded"
+      },
+      {
+        "claim_type": "principle",
+        "statement": "Grounded page for AdaResearch's sequence, map, validation, and VR iteration pipeline.",
+        "support_count": 1,
+        "confidence": 0.82,
+        "status": "grounded"
+      },
+      {
+        "claim_type": "principle",
+        "statement": "Grounded page for AdaResearch's merged artifact catalog and lookup_name contract.",
+        "support_count": 1,
+        "confidence": 0.82,
+        "status": "grounded"
+      }
+    ],
+    "turns": [
+      {
+        "session_id": "c5c4c59b-9852-43e3-acf6-0d49b1df6811",
+        "turn_index": 742,
+        "role": "user",
+        "text": "...ed via a Sourcemap in npm, Let's Talk About it Mar 31, 202617 min read AI ChatGPT Social-Media Artificial-Intelligence GenerativeAI Internet OpenAI Claude Anthropic Earlier today (March 31st, 2026) - Chaofan Shou on X discovered something that Anthropic probably didn't want the world to see: the entire source code of C..."
+      },
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 505,
+        "role": "assistant",
+        "text": "Continuing with the 5-sequence batch. Let me check the swarm artifacts task and start capturing the remaining artifact batches in parallel. Good, swarm artifacts completed. Let me check more captures and start the remaining artifact batches: Two swarm artifacts failed. Let me check the output for error details and also..."
+      },
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 521,
+        "role": "assistant",
+        "text": "...ents, 11 marked \"good\" These are the last 4 sequences - combined with the earlier sessions that covered L-Systems, Noise, Cellular Automata, Fractals, Forces, Vectors, Physics, Particles, Oscillation, Isosurfaces, Joints, Soft Bodies, Swarm Intelligence, Color, Bricolage, Procedural Gen, and Array Tutorial, **all 21 ta..."
+      },
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 609,
+        "role": "assistant",
+        "text": "... dataset. If Barad's agential realism survives formalization in cellular automata, physics simulations, L-systems, wave functions, noise fields, AND procedural generation - that's not rhetoric. That's empirical evidence for an ontological claim, tested in code. Let me see what the real scope is. The data is striking. L..."
+      }
+    ]
+  },
+  "trust_order": [
+    "repo files",
+    "doc/ and docs/ contracts",
+    "session handoffs and session summaries",
+    "grounded wiki chat points and turns",
+    "encyclopedia routes and source files",
+    "DeepWiki overview"
+  ],
+  "generated_at": "2026-04-04T12:25:56+00:00"
+}

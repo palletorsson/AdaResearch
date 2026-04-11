@@ -176,6 +176,71 @@ func to_array_mesh(options: Dictionary = {}) -> ArrayMesh:
 		st.generate_tangents()
 	return st.commit()
 
+
+## Convert to ArrayMesh with multiple surfaces, one per unique tag prefix.
+## tag_prefix: e.g. "zone_" — groups faces by their zone_* tag.
+## Returns: { "mesh": ArrayMesh, "surface_names": Array[String] }
+func to_multi_surface_mesh(tag_prefix: String = "zone_", options: Dictionary = {}) -> Dictionary:
+	var double_sided: bool = options.get("double_sided", true)
+	
+	# Group faces by their first matching tag
+	var groups: Dictionary = {}  # tag_value -> Array[int] (face indices)
+	for fi in range(faces.size()):
+		var group_name := "default"
+		if fi < face_tags.size():
+			for t in face_tags[fi]:
+				if t.begins_with(tag_prefix):
+					group_name = t
+					break
+		if not groups.has(group_name):
+			groups[group_name] = []
+		groups[group_name].append(fi)
+	
+	var array_mesh := ArrayMesh.new()
+	var surface_names: Array[String] = []
+	
+	for group_name in groups.keys():
+		var st := SurfaceTool.new()
+		st.begin(Mesh.PRIMITIVE_TRIANGLES)
+		var has_geometry := false
+		
+		for fi in groups[group_name]:
+			var face: PackedInt32Array = faces[fi]
+			if face.size() != 3:
+				continue
+			var v0: Vector3 = vertices[face[0]]
+			var v1: Vector3 = vertices[face[1]]
+			var v2: Vector3 = vertices[face[2]]
+			var normal := (v1 - v0).cross(v2 - v0)
+			if normal.length_squared() < 1e-10:
+				continue
+			normal = normal.normalized()
+			has_geometry = true
+
+			st.set_normal(normal)
+			st.add_vertex(v0)
+			st.set_normal(normal)
+			st.add_vertex(v1)
+			st.set_normal(normal)
+			st.add_vertex(v2)
+
+			if double_sided:
+				var back := -normal
+				st.set_normal(back)
+				st.add_vertex(v0)
+				st.set_normal(back)
+				st.add_vertex(v2)
+				st.set_normal(back)
+				st.add_vertex(v1)
+		
+		if has_geometry:
+			st.generate_normals()
+			st.commit(array_mesh)
+			surface_names.append(group_name)
+	
+	return { "mesh": array_mesh, "surface_names": surface_names }
+
+
 # ---------------------------------------------------------------------------
 # Topology queries (lazy-rebuild adjacency)
 # ---------------------------------------------------------------------------

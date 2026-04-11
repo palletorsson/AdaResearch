@@ -1,6 +1,16 @@
 extends LineSnapPuzzleBase
 class_name PlusLinePuzzle
 
+# @identity
+# essence: ⊥ — two lines whose direction vectors have dot product zero
+# desire: learner feels perpendicularity as a physical arrangement they construct with their hands
+# critical_parameter: the intersection constraint — lines must cross at their midpoints to validate
+# triggers: snapping all 4 endpoints to the cross targets — success fires only when both conditions met
+# emerges: that 90 degrees is not special until you define an inner product — the dot product makes it special
+# needs: [missing VR controls — all interaction is line-endpoint snapping]
+# relationships: extends LineSnapPuzzleBase; contrasts with parallel_line_puzzle
+# truth: perpendicularity is defined by the dot product equaling zero — geometry expressed as algebra
+
 ## PlusLinePuzzle - Interactive puzzle to form a + shape from two lines
 ## Any endpoint can snap to any of the 4 targets
 

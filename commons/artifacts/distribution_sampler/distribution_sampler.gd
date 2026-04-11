@@ -4,6 +4,16 @@
 #
 # QFEP: Distributions as "shape of randomness" — entropy has structure
 #
+# @identity
+# essence: f(x|θ) — probability density function parameterized by distribution type
+# desire: switch between Uniform, Gaussian, Poisson, Exponential and watch falling particles build different shapes
+# critical_parameter: distribution — selects which PDF governs sampling; each has fundamentally different tail behavior
+# triggers: _sample_distribution() dispatches to Box-Muller (Gaussian), inverse CDF (Exponential), Knuth (Poisson)
+# emerges: the theoretical PDF curve overlays the histogram and they converge — shape is not noise, noise has shape
+# needs: VR push buttons for distribution switching [has]; falling-particle animation [has]; slider for params [missing]
+# relationships: depends on galton_board (Gaussian intuition); contrasts with slot_machine (discrete uniform vs continuous families)
+# truth: Every distribution is a constraint on randomness — the shape of what remains possible.
+#
 ## Implements an interactive probability distribution sampler.
 ## Draws samples from Uniform, Gaussian (Box-Muller transform), Poisson
 ## (inverse transform), or Exponential (inverse CDF) distributions and

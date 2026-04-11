@@ -1,5 +1,16 @@
 ## Shader 02: Colors — mix, gradients, HSB/RGB
 ## Book of Shaders Chapter 6
+
+# @identity
+# essence: color = f(UV, hue, saturation) — mix() interpolates, HSB reframes RGB as angle+distance+depth, every pixel derives its color independently
+# desire: to rotate hue offset and watch the gradient wheel spin — to see that a rainbow is just sin() applied to three channels
+# critical_parameter: hue_offset — shifts the entire color wheel, proving color is position on a circle not a line
+# triggers: saturation slider desaturates to grey; mode toggle switches HSB visualization between hue-value and hue-saturation planes
+# emerges: the rainbow panel reveals that spectral color is periodic — the same trigonometric oscillation that shaped gradients now paints light
+# needs: [has] ShaderRackPanel sliders per display; [missing] no VR push buttons
+# relationships: builds on shader_01_shaping (mix uses smoothstep); feeds into shader_03_shapes (SDF coloring) and all subsequent visual work
+# truth: math does not represent color — math is color; the screen is the proof
+
 extends Node3D
 
 const DISPLAY_SIZE := Vector3(2.0, 2.0, 0.05)
@@ -89,3 +100,12 @@ func _process(_delta: float) -> void:
 		var uniforms: Array = shader_defs[i]["uniforms"]
 		for j in range(uniforms.size()):
 			mat.set_shader_parameter(uniforms[j], panel.get_slider_value(j))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

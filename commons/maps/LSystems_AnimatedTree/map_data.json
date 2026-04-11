@@ -1,56 +1,56 @@
 {
   "map_info": {
-	"name": "Animated Tree",
-	"lookup_name": "LSystems_AnimatedTree",
-	"description": "A cathedral-like clearing enclosed by towering h6 walls. The tree grows upward in the central nave.",
-	"version": "1.0",
-	"format": "json",
-	"dimensions": {
-	  "width": 10,
-	  "depth": 6,
-	  "max_height": 1
-	},
-	"metadata": {
-	  "difficulty": "intermediate",
-	  "category": "l_systems",
-	  "spatial_temperature": 0.55,
-	  "design_notes": "Narrow tall room with h6 walls. Central clearing for tree growth. Cathedral-nave proportions."
-	}
+	  "name": "Animated Tree",
+	  "lookup_name": "LSystems_AnimatedTree",
+	  "description": "A cathedral-like clearing enclosed by towering h6 walls. The tree grows upward in the central nave.",
+	  "version": "1.0",
+	  "format": "json",
+	  "dimensions": {
+		  "width": 10,
+		  "depth": 6,
+		  "max_height": 1
+	  },
+	  "metadata": {
+		  "difficulty": "intermediate",
+		  "category": "l_systems",
+		  "spatial_temperature": 0.55,
+		  "design_notes": "Narrow tall room with h6 walls. Central clearing for tree growth. Cathedral-nave proportions."
+	  }
+  },
+  "utility_definitions": {
+	  "t": {
+		  "type": "teleporter",
+		  "name": "Next",
+		  "description": "Continue to next step",
+		  "properties": {
+			  "action": "next_in_sequence"
+		  }
+	  }
   },
   "layers": {
 	"structure": [
-	  [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-	  [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-	  [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-	  [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-	  [ "1", "1", "1", "1", "1", "0", "1", "1", "1", "1" ],
-	  [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ]
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "0", "1", "1", "1", "1"],
+	  ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
 	],
 	"utilities": [
-	  [ "s", "an", " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", "wp", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", "t", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", "sp", " ", " ", " ", " " ]
+	  ["s", "an", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", "wp", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", "t", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", "sp", " ", " ", " ", " "]
 	],
 	"interactables": [
-	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-	  [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 	]
-  },
-  "utility_definitions": {
-	"t": {
-	  "type": "teleporter",
-	  "name": "Next",
-	  "description": "Continue to next step",
-	  "properties": {
-		"action": "next_in_sequence"
-	  }
-	}
   }
 }

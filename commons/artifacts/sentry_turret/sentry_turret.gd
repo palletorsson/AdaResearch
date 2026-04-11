@@ -13,14 +13,15 @@ signal hit_target(target: Node3D, position: Vector3)
 @export_category("Turret")
 @export var rotation_speed: float = 5.0
 @export var detection_range: float = 15.0
-@export var fire_rate: float = 3.0  # shots per second
+@export var fire_rate: float = 2.0  # shots per second
 @export var bullet_speed: float = 20.0
-@export var reload_time: float = 2.0  # cooldown between bursts
-@export var burst_size: int = 5  # shots before reload
+@export var reload_time: float = 10.0  # long cooldown between bursts
+@export var burst_size: int = 3  # shots before reload
 @export var target_player: bool = true
 @export var target_balls: bool = true
-@export var use_laser_damage: bool = true  # Laser deals damage instead of bullets
-@export var laser_damage_per_second: float = 100.0  # Damage when laser is on target
+@export var use_laser_damage: bool = false            # Disable continuous laser — use bullet bursts
+@export var laser_damage_per_hit: float = 20.0       # 20% damage per hit
+@export var require_line_of_sight: bool = true       # Can't shoot through walls
 
 @export_category("Appearance")
 @export var turret_color: Color = Color(0.5, 0.5, 0.55)
@@ -135,6 +136,7 @@ func _init_shared_resources():
 	# Spark effect mesh + material (shared across all explosion sparks)
 	_spark_mesh = SphereMesh.new()
 	_spark_mesh.radius = 0.04
+	_spark_mesh.height = 0.08
 	_spark_mat_template = StandardMaterial3D.new()
 	_spark_mat_template.emission_enabled = true
 	_spark_mat_template.emission_energy_multiplier = 8.0
@@ -153,6 +155,7 @@ func _init_shared_resources():
 	# Hit flash mesh + material (used as MultiMesh template)
 	_hit_mesh = SphereMesh.new()
 	_hit_mesh.radius = 0.08
+	_hit_mesh.height = 0.16
 	_hit_mat_template = StandardMaterial3D.new()
 	_hit_mat_template.albedo_color = Color(1.0, 0.5, 0.2)
 	_hit_mat_template.emission_enabled = true
@@ -371,8 +374,19 @@ func _find_target():
 		if player:
 			var dist = global_position.distance_to(player.global_position)
 			if dist < detection_range and dist < best_dist:
-				best_dist = dist
-				best_target = player
+				# Line-of-sight check — can't target through walls
+				if require_line_of_sight:
+					var space := get_world_3d().direct_space_state
+					if space:
+						var query := PhysicsRayQueryParameters3D.create(global_position, player.global_position)
+						query.exclude = []  # Don't exclude anything
+						query.collision_mask = 1  # Layer 1 = static geometry (walls/floor)
+						var result := space.intersect_ray(query)
+						if not result.is_empty() and result.collider != player:
+							player = null  # Wall blocks line of sight
+				if player:
+					best_dist = dist
+					best_target = player
 
 	# Find balls
 	if target_balls:
@@ -414,14 +428,27 @@ func _find_player() -> Node3D:
 	if cameras.size() > 0:
 		return cameras[0]
 
-	# Fallback to any Camera3D
+	# Fallback to any Camera3D (skip capture/utility cameras)
 	var viewport = get_viewport()
 	if viewport:
 		var cam = viewport.get_camera_3d()
-		if cam:
+		if cam and not cam.is_in_group("capture_camera"):
 			return cam
 
 	return null
+
+## Check if a target node is the player (XR camera, player group, or main camera).
+func _is_player_node(target: Node3D) -> bool:
+	if not is_instance_valid(target):
+		return false
+	if target is XRCamera3D:
+		return true
+	if target.is_in_group("player"):
+		return true
+	var xr_origin = get_tree().get_first_node_in_group("xr_origin")
+	if xr_origin and target.get_parent() == xr_origin:
+		return true
+	return false
 
 ## Collect all visible balls from droppers, spawners, and ball group
 func _find_balls() -> Array:
@@ -532,6 +559,7 @@ func _update_shooting(delta: float):
 			shots_in_burst = 0
 
 var _damage_debug_timer: float = 0.0
+var _player_hit_cooldown: float = 0.0
 
 # Signal for external listeners
 signal laser_hit(target: Node3D, damage: float, position: Vector3)
@@ -542,24 +570,30 @@ func _apply_laser_damage(delta: float):
 		print("[Turret] _apply_laser_damage: No valid target!")
 		return
 
-	var damage = laser_damage_per_second * delta
+	var damage = laser_damage_per_hit * delta
 	var target_pos = _get_target_position(current_target)
 
 	# Emit signal for any listeners
 	emit_signal("laser_hit", current_target, damage, target_pos)
 
+	# Player damage: per-burst hit (not continuous), respects fire_rate + reload
+	var is_player_target: bool = _is_player_node(current_target)
+	if is_player_target:
+		# Damage happens in _fire() burst cycle, not here
+		# Just track and emit signal
+		emit_signal("laser_hit", current_target, laser_damage_per_hit, target_pos)
+		return
+
 	# Try to call take_damage() on the target if it has that method
 	if current_target.has_method("take_damage"):
 		current_target.take_damage(damage)
 	else:
-		# Also check RigidBody child
 		var rb = current_target.get_node_or_null("RigidBody3D")
 		if rb and rb.has_method("take_damage"):
 			rb.take_damage(damage)
 
-	# Also manage health via metadata (fallback)
+	# Manage health via metadata (fallback for non-player targets)
 	if not current_target.has_meta("health"):
-		print("[Turret] Setting initial health on %s" % current_target.name)
 		current_target.set_meta("health", 80.0)
 		current_target.set_meta("max_health", 80.0)
 
@@ -655,6 +689,7 @@ func _spawn_explosion_flash(pos: Vector3):
 	var flash = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.2
+	sphere.height = 0.4
 	flash.mesh = sphere
 	var mat = _explosion_mat_template.duplicate() as StandardMaterial3D
 	mat.albedo_color = Color.WHITE
@@ -743,6 +778,13 @@ func _fire():
 	var direction = -barrel.global_transform.basis.z
 
 	emit_signal("fired", muzzle_world, direction)
+
+	# Deal burst damage to player if targeting them
+	if current_target and _is_player_node(current_target):
+		var gm = get_node_or_null("/root/GameManager")
+		if gm and gm.has_method("apply_health_damage"):
+			gm.apply_health_damage(laser_damage_per_hit)
+			print("[Turret] BURST HIT player! damage=%.0f" % laser_damage_per_hit)
 
 	# Activate next bullet slot in pool
 	var slot = _bullet_next
@@ -914,8 +956,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		reload_time = float(config_data["reload_time"])
 	if config_data.has("burst_size"):
 		burst_size = int(config_data["burst_size"])
-	if config_data.has("laser_damage_per_second"):
-		laser_damage_per_second = float(config_data["laser_damage_per_second"])
+	if config_data.has("laser_damage_per_hit"):
+		laser_damage_per_hit = float(config_data["laser_damage_per_hit"])
 	if config_data.has("use_laser_damage"):
 		use_laser_damage = bool(config_data["use_laser_damage"])
 	if config_data.has("target"):

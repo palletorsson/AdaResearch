@@ -13,11 +13,11 @@ var trail_points = []
 var max_trail_points = 200
 var trail_material: StandardMaterial3D
 
-func _ready():
+func _ready() -> void:
 	_create_particle_mesh()
 	_create_trail_material()
 
-func _create_particle_mesh():
+func _create_particle_mesh() -> void:
 	# Create the particle sphere
 	var sphere = CSGSphere3D.new()
 	sphere.radius = 0.2
@@ -28,18 +28,18 @@ func _create_particle_mesh():
 	
 	add_child(sphere)
 
-func _create_trail_material():
+func _create_trail_material() -> void:
 	trail_material = StandardMaterial3D.new()
 	trail_material.albedo_color = particle_color
 	trail_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	trail_material.albedo_color.a = 0.7
 
-func initialize():
+func initialize() -> void:
 	particle_position = initial_position
 	velocity = initial_velocity
 	trail_points.clear()
 
-func update_physics(delta: float, gravity: Vector3, damping: float):
+func update_physics(delta: float, gravity: Vector3, damping: float) -> void:
 	match integration_method:
 		"euler":
 			_euler_integration(delta, gravity, damping)
@@ -51,13 +51,13 @@ func update_physics(delta: float, gravity: Vector3, damping: float):
 	# Update node position
 	self.position = particle_position
 
-func _euler_integration(delta: float, gravity: Vector3, damping: float):
+func _euler_integration(delta: float, gravity: Vector3, damping: float) -> void:
 	# Simple Euler method: x(t+dt) = x(t) + v(t)*dt
 	particle_position += velocity * delta
 	velocity += gravity * delta
 	velocity *= damping
 
-func _rk4_integration(delta: float, gravity: Vector3, damping: float):
+func _rk4_integration(delta: float, gravity: Vector3, damping: float) -> void:
 	# Runge-Kutta 4th order method
 	var k1_pos = velocity
 	var k1_vel = gravity
@@ -76,7 +76,7 @@ func _rk4_integration(delta: float, gravity: Vector3, damping: float):
 	velocity += (k1_vel + 2*k2_vel + 2*k3_vel + k4_vel) * delta / 6.0
 	velocity *= damping
 
-func _analytical_solution(delta: float, gravity: Vector3, damping: float):
+func _analytical_solution(delta: float, gravity: Vector3, damping: float) -> void:
 	# Analytical solution for projectile motion with damping
 	var t = delta
 	
@@ -87,7 +87,7 @@ func _analytical_solution(delta: float, gravity: Vector3, damping: float):
 	velocity += gravity * t
 	velocity *= damping
 
-func update_trail():
+func update_trail() -> void:
 	# Add current position to trail
 	trail_points.append(particle_position)
 	
@@ -115,7 +115,7 @@ func update_trail():
 		# Add to trails parent
 		get_parent().get_parent().get_node("Trails").add_child(trail_segment)
 
-func reset_to_initial():
+func reset_to_initial() -> void:
 	particle_position = initial_position
 	velocity = initial_velocity
 	trail_points.clear()
@@ -124,3 +124,12 @@ func reset_to_initial():
 	for child in get_children():
 		if child.name.begins_with("TrailSegment"):
 			child.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

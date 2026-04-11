@@ -8,7 +8,7 @@ extends Node3D
 @onready var cave_generator_node = $CaveGenerator
 var cave_generator: RhizomeCaveGenerator
 
-func _ready():
+func _ready() -> void:
 	setup_cave_generator()
 	
 	# Generate initial cave asynchronously to prevent blocking on startup
@@ -16,7 +16,7 @@ func _ready():
 
 # UI setup removed - no UI needed for cave generation only
 
-func setup_cave_generator():
+func setup_cave_generator() -> void:
 	"""Initialize the cave generator"""
 	cave_generator = RhizomeCaveGenerator.new()
 	cave_generator.name = "RhizomeCaveGenerator"
@@ -28,7 +28,7 @@ func setup_cave_generator():
 	
 	print("RhizomeCaveDemo: Cave generator initialized")
  
-func generate_cave_async():
+func generate_cave_async() -> void:
 	"""Generate a new cave system asynchronously with default parameters"""
 	if cave_generator == null:
 		return
@@ -62,11 +62,11 @@ func generate_cave_async():
 	await cave_generator.generate_cave_async()
 
 # Keep the old function for backwards compatibility but make it call the async version
-func generate_cave():
+func generate_cave() -> void:
 	"""Generate a new cave system with current parameters (legacy function)"""
 	generate_cave_async()
 
-func _on_generation_progress(percentage: float):
+func _on_generation_progress(percentage: float) -> void:
 	"""Log progress during generation"""
 	var status = ""
 	if percentage <= 20:
@@ -84,14 +84,14 @@ func _on_generation_progress(percentage: float):
 	
 	print("Cave Generation Progress: %.0f%% - %s" % [percentage, status])
 
-func _on_generation_complete():
+func _on_generation_complete() -> void:
 	"""Handle generation completion"""
 	print("RhizomeCaveDemo: Generation complete!")
 	
 	# Log cave statistics
 	update_cave_statistics()
 
-func update_cave_statistics():
+func update_cave_statistics() -> void:
 	"""Log cave statistics"""
 	if cave_generator == null:
 		return
@@ -124,4 +124,12 @@ func format_number(num: int) -> String:
 		count += 1
 	
 	return formatted
- 
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

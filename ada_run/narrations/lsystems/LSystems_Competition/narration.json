@@ -1,0 +1,258 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 3,
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					7
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 6,
+				"name": "branching_coral",
+				"pos": [
+					6,
+					1,
+					4
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 9,
+				"name": "ForestCompetition",
+				"pos": [
+					3,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [],
+		"issues": [],
+		"map_name": "LSystems_Competition",
+		"pacing": {
+			"density": 3.0,
+			"reachable_artifacts": 3,
+			"total_artifacts": 3,
+			"walkable_tiles": 77
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			5,
+			1,
+			9
+		],
+		"teleporter": {
+			"dist": 2,
+			"pos": [
+				4,
+				0,
+				8
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "LSystems_Competition",
+	"sequence": "lsystems",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "ForestCompetition",
+				"pos": [
+					3,
+					1,
+					2
+				]
+			},
+			{
+				"name": "branching_coral",
+				"pos": [
+					6,
+					1,
+					4
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					7
+				]
+			}
+		],
+		"dimensions": [
+			8,
+			1,
+			10
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 77,
+			"ground_pct": 96.25,
+			"void": 3,
+			"walls": 0
+		},
+		"map_name": "LSystems_Competition",
+		"rooms": [
+			{
+				"artifacts": [
+					"ForestCompetition",
+					"branching_coral",
+					"dark_sphere"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 77
+			}
+		],
+		"spawn": [
+			5,
+			1,
+			9
+		],
+		"teleporter": [
+			4,
+			0,
+			8
+		]
+	},
+	"timestamp": "2026-03-16T12:15:14",
+	"walkthrough": {
+		"map_name": "LSystems_Competition",
+		"stops": [
+			{
+				"facing": "northwest",
+				"look_at": [
+					4,
+					1,
+					7
+				],
+				"pos": [
+					5,
+					1,
+					9
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "northwest",
+						"dist": 3,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "north",
+						"dist": 6,
+						"name": "branching_coral"
+					},
+					{
+						"direction": "north",
+						"dist": 9,
+						"name": "ForestCompetition"
+					}
+				]
+			},
+			{
+				"approach_from": "northwest",
+				"facing": "northeast",
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					7
+				],
+				"steps_from_prev": 3,
+				"total_steps": 3,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northeast",
+						"dist": 5,
+						"name": "branching_coral"
+					},
+					{
+						"direction": "north",
+						"dist": 6,
+						"name": "ForestCompetition"
+					}
+				]
+			},
+			{
+				"approach_from": "northeast",
+				"facing": "northwest",
+				"name": "branching_coral",
+				"pos": [
+					6,
+					1,
+					4
+				],
+				"steps_from_prev": 5,
+				"total_steps": 8,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 5,
+						"name": "ForestCompetition"
+					},
+					{
+						"direction": "southwest",
+						"dist": 5,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "northwest",
+				"facing": "south",
+				"name": "ForestCompetition",
+				"pos": [
+					3,
+					1,
+					2
+				],
+				"steps_from_prev": 5,
+				"total_steps": 13,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "southeast",
+						"dist": 5,
+						"name": "branching_coral"
+					},
+					{
+						"direction": "south",
+						"dist": 6,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"pos": [
+					4,
+					0,
+					8
+				],
+				"reachable": true,
+				"steps_from_prev": 0,
+				"total_steps": 13,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 3,
+			"total_steps": 13,
+			"total_stops": 5
+		}
+	}
+}

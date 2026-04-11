@@ -10,6 +10,16 @@ extends Node3D
 
 class_name RussellSetBox
 
+# @identity
+# essence: S = { x | x ∉ x }; S ∈ S ↔ S ∉ S — Russell's paradox as infinite regress
+# desire: open the box and find another box inside, and another, forever — feel the paradox as infinite nesting
+# critical_parameter: max_visible_depth — how many nested boxes before the infinite regress indicator
+# triggers: click/interact opens next layer; each opening reveals a smaller box; at max depth the ∞ symbol appears; paradox text escalates
+# emerges: the visceral experience that self-reference creates bottomless contradiction
+# needs: VR click interaction [has], XR ray pickable [has]
+# relationships: contrasts godel_statement_plaque (arithmetic vs set-theoretic self-reference); contrasts florensky_sphere (contradiction as paradox vs contradiction as truth); unlocks escher_staircase (spatial self-reference)
+# truth: naive set theory is inconsistent — the set of all sets that do not contain themselves destroyed the foundations of mathematics in 1901
+
 signal paradox_observed(depth: int)
 signal box_opened(depth: int)
 signal infinite_regress_detected()

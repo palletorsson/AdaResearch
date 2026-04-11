@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Creature properties
 var creature_type = 0
@@ -18,12 +18,12 @@ signal reproduction_event(parent, child)
 signal death_event(creature)
 
 # Called when the node enters the scene tree for the first time
-func _ready():
+func _ready() -> void:
 	# Generate initial fitness evaluation
 	evaluate_fitness()
 
 # Called every frame
-func _process(delta):
+func _process(delta: float) -> void:
 	# Update age
 	age += delta
 	
@@ -50,7 +50,7 @@ func _process(delta):
 	# Update fitness
 	evaluate_fitness()
 
-func initialize(type):
+func initialize(type) -> void:
 	creature_type = type
 	
 	# Generate random genome based on type
@@ -62,7 +62,7 @@ func initialize(type):
 	# Set up behaviors
 	setup_behaviors()
 
-func initialize_from_genes(genes):
+func initialize_from_genes(genes) -> void:
 	genome = genes
 	creature_type = genome.get("type", 0)
 	
@@ -107,7 +107,7 @@ func generate_random_genome(type):
 	return genes
 
 # Add auxiliary functions here for better organization
-func _add_joint_between(body_a, body_b, position):
+func _add_joint_between(body_a, body_b, position) -> void:
 	# Create joint between parent and child
 	if body_a.is_inside_tree() and body_b.is_inside_tree():
 		var joint = Generic6DOFJoint3D.new()
@@ -124,7 +124,7 @@ func _add_joint_between(body_a, body_b, position):
 		add_child(joint)
 		joints.push_back(joint)
 
-func _add_symbiotic_joint(body_a, body_b, position):
+func _add_symbiotic_joint(body_a, body_b, position) -> void:
 	# Create joint between symbiotic body parts
 	if body_a.is_inside_tree() and body_b.is_inside_tree():
 		var joint = Generic6DOFJoint3D.new()
@@ -142,7 +142,7 @@ func _add_symbiotic_joint(body_a, body_b, position):
 		add_child(joint)
 		joints.push_back(joint)
 
-func _add_resonance_joint(body_a, body_b, position):
+func _add_resonance_joint(body_a, body_b, position) -> void:
 	# Create joint between resonance body parts
 	if body_a.is_inside_tree() and body_b.is_inside_tree():
 		var joint = Generic6DOFJoint3D.new()
@@ -154,7 +154,7 @@ func _add_resonance_joint(body_a, body_b, position):
 		add_child(joint)
 		joints.push_back(joint)
 
-func build_body():
+func build_body() -> void:
 	# Clear existing body parts
 	for part in body_parts:
 		part.queue_free()
@@ -188,7 +188,7 @@ func build_body():
 	add_child(main_body)
 	body_parts.push_back(main_body)
 
-func build_symbiotic_body(main_body, collision_shape, mesh_instance):
+func build_symbiotic_body(main_body, collision_shape, mesh_instance) -> void:
 	# Create base sphere — symbiotic creatures glow faintly
 	collision_shape.shape = SphereShape3D.new()
 	collision_shape.shape.radius = 0.5 * genome["body_scale"].x
@@ -243,7 +243,7 @@ func build_symbiotic_body(main_body, collision_shape, mesh_instance):
 		# Use deferred call to create joint after nodes are in the tree
 		call_deferred("_add_symbiotic_joint", main_body, part, Vector3(pos_x/2, 0, pos_z/2))
 
-func build_phase_shifting_body(main_body, collision_shape, mesh_instance):
+func build_phase_shifting_body(main_body, collision_shape, mesh_instance) -> void:
 	# Use a blob mesh that can be morphed via shader
 	collision_shape.shape = SphereShape3D.new()
 	collision_shape.shape.radius = 0.7 * genome["body_scale"].x
@@ -271,7 +271,7 @@ func build_phase_shifting_body(main_body, collision_shape, mesh_instance):
 	main_body.add_child(collision_shape)
 	main_body.add_child(mesh_instance)
 
-func build_recursive_body(main_body, collision_shape, mesh_instance):
+func build_recursive_body(main_body, collision_shape, mesh_instance) -> void:
 	# Start with a cube base — recursive fractal creatures
 	collision_shape.shape = BoxShape3D.new()
 	collision_shape.shape.size = genome["body_scale"]
@@ -296,7 +296,7 @@ func build_recursive_body(main_body, collision_shape, mesh_instance):
 	
 	create_recursive_parts(main_body, recursion_depth, scale_factor, genome["body_scale"])
 
-func create_recursive_parts(parent_body, depth, scale_factor, parent_size):
+func create_recursive_parts(parent_body, depth, scale_factor, parent_size) -> void:
 	if depth <= 0:
 		return
 	
@@ -343,7 +343,7 @@ func create_recursive_parts(parent_body, depth, scale_factor, parent_size):
 		if depth > 1:
 			call_deferred("create_recursive_parts", child, depth - 1, scale_factor, child_size)
 
-func build_resonance_body(main_body, collision_shape, mesh_instance):
+func build_resonance_body(main_body, collision_shape, mesh_instance) -> void:
 	# Use a cylinder with wave distortion shader
 	collision_shape.shape = CylinderShape3D.new()
 	collision_shape.shape.radius = 0.5 * genome["body_scale"].x
@@ -420,7 +420,7 @@ func build_resonance_body(main_body, collision_shape, mesh_instance):
 		# Create joint using deferred call
 		call_deferred("_add_resonance_joint", main_body, harmonic, Vector3(pos_x/2, 0, pos_z/2))
 
-func build_topology_body(main_body, collision_shape, mesh_instance):
+func build_topology_body(main_body, collision_shape, mesh_instance) -> void:
 	# Use a torus shape that can change genus
 	collision_shape.shape = SphereShape3D.new()  # Approximation for physics
 	collision_shape.shape.radius = 0.7 * genome["body_scale"].x
@@ -456,7 +456,7 @@ func build_topology_body(main_body, collision_shape, mesh_instance):
 	main_body.add_child(collision_shape)
 	main_body.add_child(mesh_instance)
 
-func setup_behaviors():
+func setup_behaviors() -> void:
 	# Set up behavior trees or state machines based on creature type
 	match creature_type:
 		0: # SYMBIOTIC
@@ -470,27 +470,27 @@ func setup_behaviors():
 		4: # TOPOLOGY
 			setup_topology_behavior()
 
-func setup_symbiotic_behavior():
+func setup_symbiotic_behavior() -> void:
 	# Behavior: Seek other symbiotic creatures to connect with
 	pass
 
-func setup_phase_shifting_behavior():
+func setup_phase_shifting_behavior() -> void:
 	# Behavior: Cycle through different physical states
 	pass
 
-func setup_recursive_behavior():
+func setup_recursive_behavior() -> void:
 	# Behavior: Occasionally spawn smaller creatures
 	pass
 
-func setup_resonance_behavior():
+func setup_resonance_behavior() -> void:
 	# Behavior: Generate harmonic patterns
 	pass
 
-func setup_topology_behavior():
+func setup_topology_behavior() -> void:
 	# Behavior: Change topological genus periodically
 	pass
 
-func process_symbiotic(_delta):
+func process_symbiotic(_delta) -> void:
 	# Look for nearby symbiotic creatures to connect with
 	var nearby_creatures = find_nearby_creatures(3.0)
 	
@@ -498,7 +498,7 @@ func process_symbiotic(_delta):
 		if creature.creature_type == creature_type:
 			attempt_connection(creature)
 
-func process_phase_shifting(_delta):
+func process_phase_shifting(_delta) -> void:
 	# Cycle between states: solid, liquid, gas
 	var phase_time = fmod(age, genome.get("phase_duration", 10.0))
 	var phase_progress = phase_time / genome.get("phase_duration", 10.0)
@@ -524,7 +524,7 @@ func process_phase_shifting(_delta):
 		# Gas phase - low mass, no friction, more bounce
 		adjust_physical_properties(1.0, 0.05, 0.9)
 
-func process_recursive(delta):
+func process_recursive(delta) -> void:
 	# Occasionally spawn smaller versions of self
 	if randf() < 0.01 * delta and energy > 50.0:
 		var spawn_chance = 0.05 * genome.get("recursion_depth", 2)
@@ -549,7 +549,7 @@ func process_recursive(delta):
 		
 		part.apply_central_force(force)
 
-func process_resonance(_delta):
+func process_resonance(_delta) -> void:
 	# Update resonance wave parameters
 	var base_freq = genome.get("base_frequency", 1.0)
 	var amplitude = genome.get("amplitude", 0.2)
@@ -588,7 +588,7 @@ func process_resonance(_delta):
 		# Create resonance effects with nearby objects
 		emit_resonance_wave(part.global_position, base_freq * freq_mod, amplitude)
 
-func process_topology(_delta):
+func process_topology(_delta) -> void:
 	# Change topological genus over time
 	var morph_time = fmod(age, 20.0) 
 	var morph_speed = genome.get("morph_speed", 0.5)
@@ -616,7 +616,7 @@ func process_topology(_delta):
 		body_parts[0].center_of_mass_mode = RigidBody3D.CENTER_OF_MASS_MODE_CUSTOM
 		body_parts[0].center_of_mass = center_of_mass
 
-func update_energy(delta):
+func update_energy(delta) -> void:
 	# Base energy consumption
 	var consumption_rate = 1.0 / genome.get("energy_efficiency", 1.0)
 	
@@ -659,7 +659,7 @@ func update_energy(delta):
 	if energy <= 0:
 		die()
 
-func evaluate_fitness():
+func evaluate_fitness() -> void:
 	# Base fitness from age and energy
 	var base_fitness = age * 0.1 + energy * 0.2
 	
@@ -810,7 +810,7 @@ func mutate_genes(parent_genes):
 	
 	return mutated_genes
 
-func die():
+func die() -> void:
 	# Emit death signal
 	emit_signal("death_event", self)
 	
@@ -852,7 +852,7 @@ func find_nearby_creatures(radius):
 	
 	return nearby
 
-func adjust_physical_properties(mass_factor, friction, bounce):
+func adjust_physical_properties(mass_factor, friction, bounce) -> void:
 	# Apply physics properties to all body parts
 	for part in body_parts:
 		if part is RigidBody3D:
@@ -973,7 +973,7 @@ func spawn_recursive_child():
 	
 	return child
 
-func emit_resonance_wave(_position, frequency, amplitude):
+func emit_resonance_wave(_position, frequency, amplitude) -> void:
 	# Emit a resonance wave that affects nearby objects
 	var nearby = find_nearby_creatures(amplitude * 10.0)
 	
@@ -1131,3 +1131,12 @@ func _get_body_scale() -> Vector3:
 			return Vector3(float(v[0]), float(v[1]), float(v[2]))
 	# Fallback scale
 	return Vector3.ONE
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

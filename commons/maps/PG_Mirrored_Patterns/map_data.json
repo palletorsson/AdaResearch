@@ -1,66 +1,67 @@
 {
   "map_info": {
-    "name": "PG Mirrored Patterns",
-    "lookup_name": "PG_Mirrored_Patterns",
-    "description": "Pattern from reflection and branching: mirrored cellular automata creates kaleidoscopic textures, while rhizomatic mazes branch without hierarchy.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 11,
-      "depth": 9,
-      "max_height": 3
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "proceduralgeneration",
-      "estimated_time": "4-6 minutes",
-      "spatial_temperature": 0.5,
-      "design_notes": "Symmetric room — mirror symmetry echoes the content. Two exhibit pits flanking a raised central walkway. Light artifacts, both one-shot generators."
-    }
+      "name": "PG Mirrored Patterns",
+      "lookup_name": "PG_Mirrored_Patterns",
+      "description": "Pattern from reflection and branching: mirrored cellular automata creates kaleidoscopic textures, while rhizomatic mazes branch without hierarchy.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 11,
+          "depth": 9,
+          "max_height": 3
+      },
+      "metadata": {
+          "difficulty": "intermediate",
+          "category": "proceduralgeneration",
+          "estimated_time": "4-6 minutes",
+          "spatial_temperature": 0.5,
+          "design_notes": "Symmetric room — mirror symmetry echoes the content. Two exhibit pits flanking a raised central walkway. Light artifacts, both one-shot generators."
+      },
+      "title": "Reflection and Rhizomatic Branching"
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next",
+          "description": "Continue to next step",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
   },
   "layers": {
     "structure": [
-      [ "1", "1", "1", "1", "1", "2", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "0", "0", "1", "2", "1", "0", "0", "0", "1" ],
-      [ "1", "0", "0", "0", "1", "2", "1", "0", "0", "0", "1" ],
-      [ "1", "0", "0", "0", "1", "2", "1", "0", "0", "0", "1" ],
-      [ "1", "0", "0", "0", "1", "1", "1", "0", "0", "0", "1" ],
-      [ "1", "0", "0", "0", "1", "2", "1", "0", "0", "0", "1" ],
-      [ "1", "0", "0", "0", "1", "2", "1", "0", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "2", "1", "1", "1", "0", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ]
+      ["1", "1", "1", "1", "1", "2", "1", "1", "1", "1", "1"],
+      ["1", "1", "0", "0", "1", "2", "1", "0", "0", "0", "1"],
+      ["1", "0", "0", "0", "1", "2", "1", "0", "0", "0", "1"],
+      ["1", "0", "0", "0", "1", "2", "1", "0", "0", "0", "1"],
+      ["1", "0", "0", "0", "1", "1", "1", "0", "0", "0", "1"],
+      ["1", "0", "0", "0", "1", "2", "1", "0", "0", "0", "1"],
+      ["1", "0", "0", "0", "1", "2", "1", "0", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "2", "1", "1", "1", "0", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
     ],
     "utilities": [
-      [ "s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", "an", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", "sp", " " ]
+      ["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "an", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", "sp", " "]
     ],
     "interactables": [
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ "mirror_cellular_texture_for_3d:0:2", " ", " ", " ", " ", " ", "rhizomatic_maze_space:0:2", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      ["mirror_cellular_texture_for_3d:0:2", " ", " ", " ", " ", " ", "rhizomatic_maze_space:0:2", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
     ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
   }
 }

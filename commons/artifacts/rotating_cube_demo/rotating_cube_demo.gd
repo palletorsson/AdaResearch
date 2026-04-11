@@ -7,6 +7,17 @@ extends Node3D
 
 class_name RotatingCubeDemo
 
+
+# @identity
+# essence: theta(t) = omega * t, displayed with circular trail and angle readout
+# desire: Watch a single cube rotate at constant angular velocity with its circular path traced
+# critical_parameter: rotation_speed (omega) — the angular velocity in radians per second
+# triggers: continuous time integration rotates the cube; trail mesh shows the circular orbit
+# emerges: the connection between angular velocity, period, and the circular path
+# needs: VR observation [has], speed adjustment [missing], angle readout [has]
+# relationships: depends on basic rotation math; contrasts with y_oscillation_cube (rotation vs translation); unlocks angular velocity intuition
+# truth: Rotation at constant speed is the simplest periodic motion — the mother of all oscillation.
+
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
 @export var cube_size: float = 0.3
@@ -209,3 +220,8 @@ func reset() -> void:
 
 func get_cube_instance() -> Node3D:
 	return _cube_instance
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

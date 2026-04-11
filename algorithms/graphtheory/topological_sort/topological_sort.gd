@@ -62,7 +62,7 @@ var info_label: Label3D
 var queue_label: Label3D
 var order_label: Label3D
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	initialize_graph()
 	create_visual_elements()
@@ -70,7 +70,7 @@ func _ready():
 	if auto_start:
 		call_deferred("start_algorithm")
 
-func setup_environment():
+func setup_environment() -> void:
 	# Add lighting
 	var light := DirectionalLight3D.new()
 	light.name = "SunLight"
@@ -93,7 +93,7 @@ func setup_environment():
 	camera.current = true
 	add_child(camera)
 
-func initialize_graph():
+func initialize_graph() -> void:
 	vertices.clear()
 	edges.clear()
 	adjacency_list.clear()
@@ -116,7 +116,7 @@ func initialize_graph():
 	for edge in edges:
 		in_degrees[edge.to] += 1
 
-func generate_random_dag():
+func generate_random_dag() -> void:
 	# Create vertices
 	for i in range(graph_size):
 		var vertex = "v" + str(i)
@@ -152,7 +152,7 @@ func has_edge(from: String, to: String) -> bool:
 			return true
 	return false
 
-func create_visual_elements():
+func create_visual_elements() -> void:
 	# Clear existing visuals
 	for child in get_children():
 		if child.name.begins_with("Vertex_") or child.name.begins_with("Edge_") or child.name.begins_with("Level_"):
@@ -172,7 +172,7 @@ func create_visual_elements():
 	# Create info labels
 	create_info_labels()
 
-func create_hierarchical_layout():
+func create_hierarchical_layout() -> void:
 	var level_height = 1.5
 	var level_width = 4.0
 	
@@ -229,7 +229,7 @@ func create_hierarchical_layout():
 		# Create level indicator
 		create_level_indicator(level_key, level_vertices_list.size())
 
-func create_level_indicator(level_num: int, vertex_count: int):
+func create_level_indicator(level_num: int, vertex_count: int) -> void:
 	var indicator := MeshInstance3D.new()
 	indicator.name = "Level_" + str(level_num)
 	indicator.mesh = create_level_plane(level_num, vertex_count)
@@ -279,7 +279,7 @@ func get_level_color(level_num: int) -> Color:
 	var colors = [level_1_color, level_2_color, level_3_color, level_4_color, level_5_color]
 	return colors[level_num % colors.size()]
 
-func create_edge_visual(edge: Dictionary):
+func create_edge_visual(edge: Dictionary) -> void:
 	var from_pos = vertex_nodes[edge.from].position
 	var to_pos = vertex_nodes[edge.to].position
 	
@@ -339,7 +339,7 @@ func create_arrow_mesh(from: Vector3, to: Vector3) -> ArrayMesh:
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)
 	return mesh
 
-func create_info_labels():
+func create_info_labels() -> void:
 	info_label = Label3D.new()
 	info_label.text = "Topological Sort: Dependency Ordering"
 	info_label.font_size = 20
@@ -358,7 +358,7 @@ func create_info_labels():
 	order_label.position = Vector3(0, 5, 0)
 	add_child(order_label)
 
-func start_algorithm():
+func start_algorithm() -> void:
 	if algorithm_running:
 		return
 	
@@ -380,7 +380,7 @@ func start_algorithm():
 	update_queue_display()
 	call_deferred("process_queue")
 
-func process_queue():
+func process_queue() -> void:
 	if not algorithm_running or queue.is_empty():
 		algorithm_running = false
 		update_info_text("Topological sort completed!")
@@ -422,14 +422,14 @@ func process_queue():
 	await get_tree().create_timer(animation_delay * 0.5).timeout
 	call_deferred("process_queue")
 
-func update_vertex_color(vertex: String, color: Color):
+func update_vertex_color(vertex: String, color: Color) -> void:
 	if vertex_nodes.has(vertex):
 		var material := StandardMaterial3D.new()
 		material.albedo_color = color
 		material.emission = color * 0.3
 		vertex_nodes[vertex].material_override = material
 
-func update_edge_color(from: String, to: String, color: Color):
+func update_edge_color(from: String, to: String, color: Color) -> void:
 	var edge_key = from + "_" + to
 	if edge_lines.has(edge_key):
 		var material := StandardMaterial3D.new()
@@ -437,25 +437,25 @@ func update_edge_color(from: String, to: String, color: Color):
 		material.emission = color * 0.2
 		edge_lines[edge_key].material_override = material
 
-func update_in_degree_display(vertex: String):
+func update_in_degree_display(vertex: String) -> void:
 	if vertex_nodes.has(vertex):
 		var in_degree_label = vertex_nodes[vertex].get_child(1)  # Second child is in-degree label
 		if in_degree_label and in_degree_label.text.begins_with("in:"):
 			in_degree_label.text = "in:" + str(in_degrees[vertex])
 
-func update_queue_display():
+func update_queue_display() -> void:
 	if queue_label:
 		queue_label.text = "Queue: " + str(queue)
 
-func update_order_display():
+func update_order_display() -> void:
 	if order_label:
 		order_label.text = "Sorted Order: " + str(sorted_order)
 
-func update_info_text(text: String):
+func update_info_text(text: String) -> void:
 	if info_label:
 		info_label.text = text
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		if algorithm_running:
 			stop_algorithm()
@@ -464,11 +464,11 @@ func _input(event):
 	elif event.is_action_pressed("ui_cancel"):
 		reset_algorithm()
 
-func stop_algorithm():
+func stop_algorithm() -> void:
 	algorithm_running = false
 	update_info_text("Algorithm stopped. Sorted order: " + str(sorted_order))
 
-func reset_algorithm():
+func reset_algorithm() -> void:
 	algorithm_running = false
 	algorithm_step = 0
 	initialize_graph()
@@ -485,3 +485,12 @@ func get_algorithm_info() -> Dictionary:
 		"current_step": algorithm_step,
 		"queue_size": queue.size()
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

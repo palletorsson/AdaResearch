@@ -9,9 +9,21 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"array_tutorial"
+				"mosaicanalysis",
+				"testmaps"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"data_structures"
+			]
 		},
 		"pattern_tile_4x4": {
 			"name": "4x4 Pattern Tile",
@@ -28,7 +40,17 @@
 			"map_sequences": [
 				"array_tutorial"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"pattern",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pattern_tile_mirror": {
 			"name": "Mirror Pattern Tile",
@@ -43,9 +65,20 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"array_tutorial"
+				"array_tutorial",
+				"testmaps"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pattern_tile_8x8": {
 			"name": "8x8 Pattern Tile",
@@ -59,7 +92,17 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pattern_tile_brick": {
 			"name": "Brick Pattern Tile",
@@ -74,9 +117,20 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"array_tutorial"
+				"array_tutorial",
+				"transformation"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pattern_tile_herringbone": {
 			"name": "Herringbone Pattern Tile",
@@ -93,7 +147,17 @@
 			"map_sequences": [
 				"array_tutorial"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"index_visualizer": {
 			"name": "Index Visualizer",
@@ -103,7 +167,16 @@
 			"category": "primitives",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pattern_tile_cube": {
 			"name": "Pattern Tile Cube",
@@ -113,7 +186,19 @@
 			"category": "primitives",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"color",
+				"pattern",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"biology",
+				"data_structures"
+			]
 		},
 		"step_sequencer": {
 			"name": "Step Sequencer",
@@ -126,7 +211,19 @@
 			"map_sequences": [
 				"array_tutorial"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"interactive",
+				"primitives",
+				"sound"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures",
+				"music"
+			]
 		},
 		"step_sequencer_trap": {
 			"name": "Trap Sequencer",
@@ -170,7 +267,16 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures",
+				"music"
+			]
 		},
 		"step_sequencer_house": {
 			"name": "90s House Sequencer",
@@ -215,7 +321,16 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives",
+				"wave"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"step_sequencer_kraftwerk": {
 			"name": "Kraftwerk Sequencer",
@@ -261,7 +376,16 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"step_sequencer_ambient": {
 			"name": "Ambient Works Sequencer",
@@ -335,7 +459,16 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures",
+				"music"
+			]
 		},
 		"step_sequencer_scifi": {
 			"name": "Sci-Fi Lab Sequencer",
@@ -351,7 +484,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"step_sequencer_cinematic": {
 			"name": "Cinematic Sequencer",
@@ -367,7 +508,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"step_sequencer_breakbeat": {
 			"name": "Breakbeat Sequencer",
@@ -383,7 +532,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"step_sequencer_cosmic": {
 			"name": "Cosmic Sequencer",
@@ -399,7 +556,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"step_sequencer_lofi": {
 			"name": "Lo-Fi Sequencer",
@@ -415,7 +580,17 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives",
+				"sound"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures",
+				"music"
+			]
 		},
 		"binary_table": {
 			"name": "Binary Table Display",
@@ -425,7 +600,17 @@
 			"category": "primitives",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"primitives",
+				"visualization"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pulsar_glass_tubes": {
 			"name": "Pulsar Glass Tubes",
@@ -435,7 +620,17 @@
 			"category": "primitives",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"data_structures"
+			]
 		},
 		"pulsar_visualizer": {
 			"name": "Pulsar B1919+21 Visualizer",
@@ -448,7 +643,24 @@
 			"map_sequences": [
 				"array_tutorial"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"3d",
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pulsar_compact": {
 			"name": "Pulsar Compact",
@@ -463,7 +675,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"pulsar_lines": {
 			"name": "Pulsar Lines",
@@ -478,7 +698,15 @@
 			},
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"tags": [
+				"primitives"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"tiling_demo": {
 			"name": "Tiling System Demo",
@@ -499,7 +727,13 @@
 			"map_sequences": [
 				"array_tutorial"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"arrays",
+				"art",
+				"data_structures"
+			]
 		},
 		"facade_grammar_demo": {
 			"name": "Facade Grammar Demo",
@@ -518,9 +752,16 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"array_tutorial"
+				"array_tutorial",
+				"facades"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "beginner",
+			"dev_themes": [
+				"arrays",
+				"art",
+				"data_structures"
+			]
 		},
 		"vr_tile_editor": {
 			"name": "VR Tile Editor",
@@ -538,7 +779,12 @@
 			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"vr_tile_editor_mirror": {
 			"name": "VR Tile Editor Mirror",
@@ -564,7 +810,12 @@
 			"map_sequences": [
 				"array_tutorial"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"array_carpet": {
 			"name": "Array Carpet",
@@ -577,7 +828,19 @@
 			"map_sequences": [
 				"array_tutorial"
 			],
-			"sequence": "array_tutorial"
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"array",
+				"pattern",
+				"showcase"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures",
+				"education"
+			]
 		},
 		"wfc_tile_mosaic": {
 			"name": "WFC Tile Mosaic",
@@ -585,10 +848,25 @@
 			"description": "Floor panel showing a pre-generated Wave Function Collapse output — a grid of tiles where each cell respects adjacency constraints. Constraint propagation made visible.",
 			"scene": "res://commons/artifacts/wfc_tile_mosaic/wfc_tile_mosaic.tscn",
 			"category": "showcase",
-			"tags": ["wfc", "wave_function_collapse", "constraint", "tiling", "mosaic", "procedural"],
+			"tags": [
+				"wfc",
+				"wave_function_collapse",
+				"constraint",
+				"tiling",
+				"mosaic",
+				"procedural"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"complexity": "advanced",
+			"dev_themes": [
+				"arrays",
+				"biology",
+				"data_structures"
+			]
 		},
 		"pattern_maker_station": {
 			"name": "Pattern Maker Station",
@@ -596,10 +874,25 @@
 			"description": "Interactive wallpaper group station — paint a domain grid on an upright panel, choose from 17 symmetry groups, and watch the tiled result unfold on a large floor carpet in real time.",
 			"scene": "res://commons/artifacts/pattern_maker_station/pattern_maker_station.tscn",
 			"category": "interactive",
-			"tags": ["pattern", "wallpaper_group", "symmetry", "tiling", "carpet", "painting"],
+			"tags": [
+				"pattern",
+				"wallpaper_group",
+				"symmetry",
+				"tiling",
+				"carpet",
+				"painting"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"mosaicanalysis",
+				"patterngeneration"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"grid_editor_board": {
 			"name": "Grid Editor Board",
@@ -607,10 +900,23 @@
 			"description": "Interactive grid layout editor — Godot VR mirror of the web grid-editor. Control Board subset with 34 elements across 9 categories, 4 presets (Mission Control, Server Rack, Comms Station). Place and arrange control panel components on a 24x14 grid.",
 			"scene": "res://commons/artifacts/grid_editor_board/grid_editor_board.tscn",
 			"category": "interactive",
-			"tags": ["grid_editor", "control_board", "layout", "interactive", "black_mesa"],
+			"tags": [
+				"grid_editor",
+				"control_board",
+				"layout",
+				"interactive",
+				"black_mesa"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [
+				"testmaps"
+			],
+			"complexity": "beginner",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"grid_editor_board_3d": {
 			"name": "Grid Editor Board (3D)",
@@ -618,21 +924,2040 @@
 			"description": "3D interactive version of the grid editor board. Same layout data as the shadow board but with real 3D elements — CRT monitors with phosphor flicker, VU meters with bouncing needles, interactive push buttons, slider faders, rotary knobs, toggle switches, speakers, and blinking LEDs.",
 			"scene": "res://commons/artifacts/grid_editor_board/grid_editor_board_3d.tscn",
 			"category": "interactive",
-			"tags": ["grid_editor", "control_board", "3d", "interactive", "black_mesa"],
+			"tags": [
+				"grid_editor",
+				"control_board",
+				"3d",
+				"interactive",
+				"black_mesa"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "beginner",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
 		},
 		"grid_3d_capture": {
 			"name": "Grid Editor 3D Capture",
 			"lookup_name": "grid_3d_capture",
 			"description": "Procedural 3D builder for all grid editor subsets — chemical models, sticky notes, periodic table, glass racks, big pipes. Accepts subset and preset via config.",
-			"scene": "res://tools/grid_editor/scenes/capture.tscn",
+			"scene": "res://commons/artifacts/grid_3d_capture/grid_3d_capture.tscn",
 			"category": "interactive",
-			"tags": ["grid_editor", "3d", "chemical_models", "sticky_notes", "periodic_table"],
+			"tags": [
+				"grid_editor",
+				"3d",
+				"chemical_models",
+				"sticky_notes",
+				"periodic_table"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
+		},
+		"facade_builder": {
+			"name": "Facade Builder",
+			"lookup_name": "facade_builder",
+			"description": "Interactive architectural facade composer. Five presets (classical, gothic, palazzo, arcade, minimal) with configurable bays, stories, symmetry, and colors. Uses SpatialComposition zones and SurfaceTool geometry.",
+			"scene": "res://commons/artifacts/facade_builder/facade_builder.tscn",
+			"category": "primitives",
+			"tags": [
+				"facade",
+				"architecture",
+				"builder",
+				"classical",
+				"gothic",
+				"palazzo"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"facades"
+			],
+			"complexity": "intermediate",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
+		},
+		"row_3_x": {
+			"lookup_name": "row_3_x",
+			"name": "row_3_x",
+			"description": "Places three pickup cubes in a single row along the X axis.",
+			"scene": "res://algorithms/array/row_3_x.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				4,
+				1,
+				1
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					4,
+					1,
+					1
+				],
+				"size_group": "room_scale"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			],
+			"tags": [
+				"array"
+			]
+		},
+		"column_3_z": {
+			"lookup_name": "column_3_z",
+			"name": "column_3_z",
+			"description": "Stacks three pickup cubes in the Z direction for spacing tests.",
+			"scene": "res://algorithms/array/column_3_z.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				4
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					4
+				],
+				"size_group": "room_scale"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			],
+			"tags": [
+				"array"
+			]
+		},
+		"grid_2d_4x4": {
+			"lookup_name": "grid_2d_4x4",
+			"name": "grid_2d_4x4",
+			"description": "Builds a 4x4 pickup-cube grid laid out across the floor.",
+			"scene": "res://algorithms/array/grid_2d_4x4.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				4,
+				1,
+				4
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					4,
+					1,
+					4
+				],
+				"size_group": "room_scale"
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"grid"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
+		},
+		"grid_3d_4x4x4": {
+			"lookup_name": "grid_3d_4x4x4",
+			"name": "grid_3d_4x4x4",
+			"description": "Populates a 4x4x4 lattice of pickup cubes for volumetric layouts.",
+			"scene": "res://algorithms/array/grid_3d_4x4x4.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				4,
+				4,
+				4
+			],
+			"size_group": "room_scale",
+			"parameters": {
+				"footprint": [
+					4,
+					4,
+					4
+				],
+				"size_group": "room_scale"
+			},
+			"complexity": "beginner",
+			"tags": [
+				"grid"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
+		},
+		"grid_snapper": {
+			"lookup_name": "grid_snapper",
+			"name": "grid_snapper",
+			"description": "grid_snapper",
+			"scene": "res://algorithms/array/grid_snapper.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"tags": [
+				"grid"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
+		},
+		"mondrian_run": {
+			"lookup_name": "mondrian_run",
+			"name": "mondrian_run",
+			"description": "mondrian_run",
+			"scene": "res://algorithms/array/mondrian_grid/mondrian_run.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				20,
+				1,
+				20
+			],
+			"size_group": "world_scale",
+			"parameters": {
+				"footprint": [
+					20,
+					1,
+					20
+				],
+				"size_group": "world_scale"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			],
+			"tags": [
+				"array"
+			]
+		},
+		"grid_editor_main": {
+			"lookup_name": "grid_editor_main",
+			"name": "grid_editor_main",
+			"description": "grid_editor_main",
+			"scene": "res://algorithms/array/grid_editor/grid_editor_main.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				8,
+				8,
+				8
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					8,
+					8,
+					8
+				],
+				"size_group": "environment"
+			},
+			"complexity": "beginner",
+			"tags": [
+				"grid"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
+		},
+		"IndexVisualizer": {
+			"lookup_name": "IndexVisualizer",
+			"name": "IndexVisualizer",
+			"description": "Visualizes current grid index above player",
+			"scene": "res://algorithms/arrays/index_visualizer/IndexVisualizer.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"tags": [
+				"2d"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures"
+			]
+		},
+		"pompeii_mosaic_floor": {
+			"name": "Pompeii Mosaic Floor",
+			"lookup_name": "pompeii_mosaic_floor",
+			"description": "Multi-zone Roman mosaic floor from Pompeii. Composes field, border, corner, and threshold patterns using wallpaper group symmetries with opus tessellatum aging effects.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/pompeii_mosaic_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"octagon_square_floor": {
+			"name": "Octagon & Square Floor",
+			"lookup_name": "octagon_square_floor",
+			"description": "Procedural Pompeii mosaic floor with octagon-and-square tessellation — terracotta diamonds inside light octagons with dark interstitial squares.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/octagon_square_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"octagon",
+				"semi-regular"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"tumbling_blocks_floor": {
+			"name": "Tumbling Blocks Floor",
+			"lookup_name": "tumbling_blocks_floor",
+			"description": "Procedural Pompeii mosaic floor with tumbling blocks pattern — three rhombus shades create a 3D cube illusion on a hexagonal grid.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/tumbling_blocks_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"isometric"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"perspective_cubes_floor": {
+			"name": "Perspective Cubes Floor",
+			"lookup_name": "perspective_cubes_floor",
+			"description": "Procedural Pompeii mosaic floor with perspective cubes pattern — three rhombus shades on a regular rectangular grid create a strong 3D stacked-cube illusion.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/perspective_cubes_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"isometric"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"diamonds_squares_floor": {
+			"name": "Diamonds in Squares Floor",
+			"lookup_name": "diamonds_squares_floor",
+			"description": "Pompeii mosaic floor with diamonds-in-squares pattern. Each cell contains a 45-degree rotated diamond inscribed in a square, alternating dark/light in a checkerboard arrangement.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/diamonds_squares_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"nested_diamonds_floor": {
+			"name": "Nested Diamonds Floor",
+			"lookup_name": "nested_diamonds_floor",
+			"description": "Pompeii mosaic floor with nested diamonds pattern. Each cell contains three concentric 45-degree rotated squares creating a bulls-eye of dark-light-dark-light zones radiating inward.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/nested_diamonds_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"swastika_meander_floor": {
+			"name": "Swastika Meander Floor",
+			"lookup_name": "swastika_meander_floor",
+			"description": "Pompeii mosaic floor with swastika meander (Greek key labyrinth) pattern. Continuous dark meander path on light background with terracotta accent squares at cell centers.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/swastika_meander_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"meander",
+				"greek_key"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"solomons_knot_floor": {
+			"name": "Solomon's Knot Floor",
+			"lookup_name": "solomons_knot_floor",
+			"description": "Pompeii mosaic floor with Solomon's Knot (nodo di Salomone) — two interlocked loops forming an infinite knot, a classic Roman/Byzantine decorative motif with over-under weave in three colors.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/solomons_knot_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"knot",
+				"interlace"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"stepped_zigzag_floor": {
+			"name": "Stepped Zigzag Floor",
+			"lookup_name": "stepped_zigzag_floor",
+			"description": "Pompeii mosaic floor with stepped zigzag pattern — interlocking L-shaped steps in three tones create a 3D staircase illusion reminiscent of Escher's impossible staircases.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/stepped_zigzag_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"optical_illusion",
+				"zigzag"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"flower_of_life_floor": {
+			"name": "Flower of Life Floor",
+			"lookup_name": "flower_of_life_floor",
+			"description": "Procedural Pompeii mosaic floor with Flower of Life sacred geometry pattern — overlapping circles on a hexagonal grid creating petal shapes at intersections. Dark circle outlines on light background with terracotta accent petals.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/flower_of_life_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"sacred_geometry",
+				"flower_of_life",
+				"hexagonal"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"polka_dot_field_floor": {
+			"name": "Polka Dot Field Floor",
+			"lookup_name": "polka_dot_field_floor",
+			"description": "Pompeii mosaic floor with dark field and scattered small light tesserae in a regular grid with organic jitter. Common in vestibules and corridors, bordered by a meander pattern.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/polka_dot_field_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"dots"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"meander_threshold_floor": {
+			"name": "Meander Threshold Floor",
+			"lookup_name": "meander_threshold_floor",
+			"description": "Pompeii mosaic threshold floor with bold Greek key meander border framing a dark field with scattered white tesserae. Common Roman doorway pattern placed at transitions between rooms.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/meander_threshold_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"meander",
+				"threshold"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"pompeii_meander_floor": {
+			"name": "Pompeii Meander Floor",
+			"lookup_name": "pompeii_meander_floor",
+			"description": "Greek key meander border drawn as actual geometry — thick rectangular quads for each line segment rather than bitmap pixels. Crisp, thick, properly proportioned meander lines at any scale with dark polka-dot interior field.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/pompeii_meander_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"meander",
+				"geometry"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"exact_meander_floor": {
+			"name": "Exact Meander Floor",
+			"lookup_name": "exact_meander_floor",
+			"description": "Faithful pixel reproduction of a Pompeii meander floor from photograph. 84x66 grid with continuous Greek key meander border (3-cell dark lines on light band, 12-cell border depth), L-bend corners, and dark field with scattered white tesserae.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/exact_meander_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"meander",
+				"greek_key"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"double_snake_meander": {
+			"name": "Double Snake Meander",
+			"lookup_name": "double_snake_meander",
+			"description": "Greek key meander generated by TWO mirrored self-avoiding walks that dance around each other. Snake A hugs the outer edge, Snake B hugs the inner edge. Their interlocking territories produce the classic meander pattern. Dark field interior with polka dots.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/double_snake_meander.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"meander",
+				"greek_key",
+				"self_avoiding_walk"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"free_meander_floor": {
+			"name": "Free Meander Floor",
+			"lookup_name": "free_meander_floor",
+			"description": "Rule-based Greek key meander — no tiles, no turtle, no bitmap. Each cell decides its own color from ONE modular arithmetic rule applied to its global position. The entire pattern is: territory = ((pos_along + ring * band_width) % period) < half_period. Dark field interior with polka dots.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/free_meander_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"meander",
+				"greek_key",
+				"modular_arithmetic"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"mirror_snake_meander": {
+			"name": "Mirror Snake Meander",
+			"lookup_name": "mirror_snake_meander",
+			"description": "Greek key meander via mirrored self-avoiding crossing snakes. Solve one quarter of the border, mirror X to complete each side, mirror Y to create the interlocking counter-snake. The crossings emerge automatically from the mirroring. Four depth bands where bands 0/3 and 1/2 are mirrors produce the classic Pompeii hook pattern.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/mirror_snake_meander.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"meander",
+				"greek_key",
+				"mirror_symmetry"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"braid_meander_floor": {
+			"name": "Braid Meander Floor",
+			"lookup_name": "braid_meander_floor",
+			"description": "Greek key meander generated TOP-DOWN from braid topology. Two strands cross at regular intervals; each crossing projects onto the grid as an angular spiral hook. The braid crossing number controls the pattern: 1 = classic Greek key, 2 = double meander. Dark field interior with polka dots.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/braid_meander_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"meander",
+				"greek_key",
+				"braid",
+				"topology"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"star_rosette_floor": {
+			"name": "Star Rosette Floor",
+			"lookup_name": "star_rosette_floor",
+			"description": "Pompeii mosaic floor with hexagonal star rosette (hexagram) pattern. Six-pointed stars formed by overlapping equilateral triangles with small rhombi between stars. Classic Roman geometric mosaic.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/star_rosette_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"hexagram",
+				"star"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"floor_plan_space": {
+			"name": "Floor Plan Space",
+			"lookup_name": "floor_plan_space",
+			"description": "Standalone 3D space builder that loads a floor_plan.json and constructs rooms with facade walls and mosaic floors, independent of the grid system.",
+			"scene": "res://commons/artifacts/floor_plan_space/floor_plan_space.tscn",
+			"category": "architecture",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "advanced",
+			"tags": [
+				"floor_plan",
+				"architecture",
+				"museum",
+				"rooms"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					4,
+					4,
+					0
+				],
+				"size_group": "large"
+			}
+		},
+		"radial_mandala_floor": {
+			"name": "Radial Mandala Floor",
+			"lookup_name": "radial_mandala_floor",
+			"description": "Procedural Pompeii mosaic floor with concentric radial mandala pattern. A terracotta 6-pointed star rosette at center, surrounded by rings of alternating dark/light triangles radiating outward with interlocking offset.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/radial_mandala_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"mandala",
+				"radial"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"guilloche_border_floor": {
+			"name": "Guilloche Border Floor",
+			"lookup_name": "guilloche_border_floor",
+			"description": "Pompeii mosaic floor with prominent guilloche (braided rope) border surrounding a simple checkerboard grid field with a central terracotta pictorial panel inset. The guilloche band features interlocking S-curves in dark, light and terracotta tesserae.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/guilloche_border_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"guilloche",
+				"border"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"honeycomb_hex_floor": {
+			"name": "Honeycomb Hex Floor",
+			"lookup_name": "honeycomb_hex_floor",
+			"description": "Procedural Pompeii mosaic floor with honeycomb hexagonal tessellation. Regular hexagons in alternating dark/light with dark grout outlines. Every 3rd hexagon features a small terracotta cross motif at its center.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/honeycomb_hex_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"hexagonal",
+				"honeycomb"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"diamond_lattice_floor": {
+			"name": "Diamond Lattice Floor",
+			"lookup_name": "diamond_lattice_floor",
+			"description": "Pompeii mosaic floor with diamond lattice pattern. Two sets of diagonal lines at 45 and 135 degrees cross to form a regular rhombus grid. Alternating dark/light diamonds create a rotated checkerboard effect.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/diamond_lattice_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"diamond",
+				"lattice"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"multi_zone_carpet_floor": {
+			"name": "Multi-Zone Carpet Floor",
+			"lookup_name": "multi_zone_carpet_floor",
+			"description": "Pompeii mosaic floor demonstrating carpet composition — nested rectangular bands of distinct motifs (dark border, sawtooth chevrons, scallop semicircles) surrounding a central checkerboard field. Demonstrates the Roman principle of hierarchical spatial framing.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/multi_zone_carpet_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"carpet",
+				"composition"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"wave_scale_floor": {
+			"name": "Wave Scale Floor",
+			"lookup_name": "wave_scale_floor",
+			"description": "Roman imbrication (fish-scale) mosaic floor — overlapping semicircles arranged in offset rows creating a wave/scale effect. Common in Roman baths and fountains. Alternating dark, light, and terracotta rows with grout arc outlines.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/wave_scale_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis",
+				"testmaps"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"scale",
+				"wave",
+				"imbrication"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"pelta_shield_floor": {
+			"name": "Pelta Shield Floor",
+			"lookup_name": "pelta_shield_floor",
+			"description": "Roman pelta (Amazon shield) mosaic floor — interlocking crescent shapes with concave bites arranged in offset rows. A classic Roman border and field pattern where paired crescents face opposite directions, creating a rhythmic shield motif.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/pelta_shield_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis",
+				"testmaps"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"pelta",
+				"shield",
+				"crescent"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"basket_weave_floor": {
+			"name": "Basket Weave Floor",
+			"lookup_name": "basket_weave_floor",
+			"description": "Procedural Pompeii mosaic floor with basket weave (opus spicatum) pattern. Alternating horizontal and vertical pairs of 2:1 rectangular tiles in a checkerboard arrangement create a woven textile appearance. Dark and light pairs interlock like fabric.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/basket_weave_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"weave",
+				"textile"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"herringbone_floor": {
+			"name": "Herringbone Floor",
+			"lookup_name": "herringbone_floor",
+			"description": "Procedural Pompeii mosaic floor with herringbone (opus spicatum) pattern. Rectangular 2:1 bricks laid at 45-degree angles in alternating zigzag rows. Adjacent bricks point in opposite directions creating the classic V/chevron pattern found in Roman and medieval floors.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/herringbone_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"herringbone",
+				"chevron"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"labyrinth_floor": {
+			"name": "Labyrinth Floor",
+			"lookup_name": "labyrinth_floor",
+			"description": "Pompeii mosaic floor with classical 7-circuit labyrinth pattern. A single unbroken path spirals inward from the entrance to the center — not a maze but a meditation in stone. Based on Roman house labyrinths found across the Mediterranean.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/labyrinth_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"labyrinth",
+				"classical"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"san_michele_mosaic_floor": {
+			"name": "San Michele Mosaic Floor",
+			"lookup_name": "san_michele_mosaic_floor",
+			"description": "Circular Roman mosaic floor inspired by Villa San Michele, Capri. Concentric zones read from outside in: circular vine scroll border, square Greek key meander frame, dark solid band, classical 7-circuit labyrinth, and a central terracotta rosette.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/san_michele_mosaic_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "advanced",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"roman",
+				"labyrinth",
+				"circular",
+				"meander",
+				"rosette"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"tile_meander_floor": {
+			"name": "Tile Meander Floor",
+			"lookup_name": "tile_meander_floor",
+			"description": "Greek key meander floor built from exactly 3 tile types: field (solid blue), straight (horizontal key hook), and corner (90-degree turn). Villa San Michele blue majolica style. Each tile is a 7x7 bitmap; when tiled along all 4 borders, they form a continuous Greek key band.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/tile_meander_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"meander",
+				"greek_key",
+				"majolica",
+				"san_michele",
+				"tiling"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"dense_carpet_floor": {
+			"name": "Dense Carpet Floor",
+			"lookup_name": "dense_carpet_floor",
+			"description": "Pompeii mosaic floor imitating woven textile: a dark field covered in hundreds of tiny light crosses arranged in a dense offset grid, creating a carpet/tweed effect.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/dense_carpet_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"roman",
+				"carpet",
+				"cross",
+				"textile"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"opus_sectile_floor": {
+			"name": "Opus Sectile Floor",
+			"lookup_name": "opus_sectile_floor",
+			"description": "Opus sectile marble floor � large cut stone pieces forming bold geometric patterns. Grid of circles inscribed in squares with triangular corner fills in 4+ marble colors (basalt, terracotta, serpentine green, porphyry red). Cosmatesque / Pantheon style.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/opus_sectile_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"roman",
+				"marble",
+				"opus_sectile",
+				"cosmatesque"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"spiral_mosaic_floor": {
+			"name": "Spiral Mosaic Floor",
+			"lookup_name": "spiral_mosaic_floor",
+			"description": "Procedural Pompeii mosaic floor with Archimedean spiral pattern. A single continuous dark spiral band winds from a central rosette outward on a light background, widening as it goes. Ancient symbol found across cultures from Newgrange to Roman mosaics.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/spiral_mosaic_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"roman",
+				"spiral",
+				"archimedean",
+				"ancient"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"interlocking_t_floor": {
+			"name": "Interlocking T Floor",
+			"lookup_name": "interlocking_t_floor",
+			"description": "Procedural Pompeii mosaic floor with interlocking T-shaped tetromino pattern. T-pieces (3 wide x 2 tall) tile with alternating rotations and colors, dark Ts pointing down interlock with light Ts pointing up, creating a satisfying puzzle-like woven surface.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/interlocking_t_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pompeii",
+				"tetromino",
+				"puzzle",
+				"interlocking"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"compass_rose_floor": {
+			"name": "Compass Rose Floor",
+			"lookup_name": "compass_rose_floor",
+			"description": "Procedural compass rose mosaic floor � 16-pointed mariner's star with alternating dark/light triangular wedges radiating from a terracotta center disc. Inner ring of 8 narrow intercardinal points, outer ring of 8 cardinal points, surrounded by concentric border bands.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/compass_rose_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"compass",
+				"radial",
+				"renaissance"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"windmill_floor": {
+			"name": "Windmill Floor",
+			"lookup_name": "windmill_floor",
+			"description": "Pompeii mosaic floor with windmill/pinwheel pattern. Each unit has a small terracotta center square surrounded by 4 L-shaped blades — two dark, two light opposite — creating a spinning windmill effect. Adjacent units rotate 90 degrees for continuous flow.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/windmill_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"roman",
+				"pinwheel",
+				"windmill",
+				"rotational_symmetry"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"chain_link_floor": {
+			"name": "Chain Link Floor",
+			"lookup_name": "chain_link_floor",
+			"description": "Pompeii mosaic floor with interlocking circles arranged so each passes through its neighbors centers, creating a continuous chain. Classic Roman guilloche derivative. Overlapping areas form pointed vesica piscis shapes filled in terracotta.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/chain_link_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"roman",
+				"circles",
+				"chain",
+				"vesica_piscis",
+				"guilloche"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"pixel_invader_floor": {
+			"name": "Pixel Invader Floor",
+			"lookup_name": "pixel_invader_floor",
+			"description": "Procedural pixel art floor with space invader sprites tiled in electric green on a black field. 11x8 bitmap characters march across the ground like an 8-bit arcade screen.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/pixel_invader_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pixel_art",
+				"retro",
+				"neon"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"neon_chevron_floor": {
+			"name": "Neon Chevron Floor",
+			"lookup_name": "neon_chevron_floor",
+			"description": "Procedural pixel art floor with bold V-shaped chevron stripes radiating from center. Hot pink, electric blue, yellow, and purple bands alternate with black gaps for a rainbow V pattern.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/neon_chevron_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pixel_art",
+				"chevron",
+				"neon"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"glitch_grid_floor": {
+			"name": "Glitch Grid Floor",
+			"lookup_name": "glitch_grid_floor",
+			"description": "Procedural pixel art floor with digital noise aesthetic. Mostly black grid with ~18% of cells lit in hot pink, cyan, lime, red, or white using deterministic hash for reproducible glitch pattern.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/glitch_grid_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pixel_art",
+				"glitch",
+				"neon"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"memphis_floor": {
+			"name": "Memphis Pattern Floor",
+			"lookup_name": "memphis_floor",
+			"description": "Procedural pixel art floor inspired by Memphis Group / Sottsass design. Pastel pink background with scattered black triangles, yellow dots, and teal zigzag shapes placed by pseudo-random hash.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/memphis_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pixel_art",
+				"memphis",
+				"postmodern"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"rainbow_checker_floor": {
+			"name": "Rainbow Checkerboard Floor",
+			"lookup_name": "rainbow_checker_floor",
+			"description": "Procedural pixel art floor with rainbow checkerboard pattern. Each row uses a different spectrum color paired with black: red, orange, yellow, green, blue, purple — then repeats.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/rainbow_checker_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pixel_art",
+				"rainbow",
+				"checkerboard"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"pixel_cross_floor": {
+			"name": "Pixel Cross Carpet Floor",
+			"lookup_name": "pixel_cross_floor",
+			"description": "Procedural pixel art floor with large 5x5 pixel crosses on a dark background. Alternating bright green and hot pink crosses in staggered rows create a bold carpet effect.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/pixel_cross_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "beginner",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"pixel_art",
+				"cross",
+				"neon"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"turtle_meander_floor": {
+			"name": "Turtle Meander Floor",
+			"lookup_name": "turtle_meander_floor",
+			"description": "Procedural mosaic floor whose Greek key border is traced by a turtle graphics engine. The same turtle machine generates the ancient meander, the Hilbert curve, and the Peano curve — different programs, same machine.",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/turtle_meander_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"turtle_graphics",
+				"meander",
+				"hilbert",
+				"algorithms"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation",
+				"algorithms"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
+		},
+		"space_filling_floor": {
+			"name": "Space-Filling Floor",
+			"lookup_name": "space_filling_floor",
+			"description": "Procedural mosaic floor demonstrating the connection between ancient meanders and modern space-filling curves. Four modes — Greek key, Hilbert, Peano, Penrose — each answer: how do you fill a bounded area with a path?",
+			"scene": "res://commons/artifacts/pompeii_mosaic_floor/space_filling_floor.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis"
+			],
+			"sequence": "mosaicanalysis",
+			"complexity": "advanced",
+			"tags": [
+				"2d",
+				"pattern",
+				"mosaic",
+				"floor",
+				"space_filling",
+				"meander",
+				"hilbert",
+				"peano",
+				"penrose",
+				"algorithms"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"cultural_computation",
+				"algorithms"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					0
+				],
+				"size_group": "compact"
+			}
 		}
 	}
 }

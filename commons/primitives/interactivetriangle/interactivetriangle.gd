@@ -1,6 +1,16 @@
 ﻿# SplitQuad.gd - Creates a quad split into two triangles with different colors
 extends Node3D
 
+# @identity
+# essence: triangle with randomized shader color — the single-face primitive in its simplest movable form
+# desire: learner grabs a triangle and feels it as a physical object, not a mathematical abstraction
+# critical_parameter: random shader color assigned at startup — makes each instance visually distinct
+# triggers: dragging any of the 3 vertex grab spheres — face deforms following hand movement
+# emerges: the distinction between the geometric shape and its visual representation (color is not intrinsic)
+# needs: [has 3 grabbable vertex spheres [has], missing color-override VR control]
+# relationships: lighter sibling to quad.gd; used alongside other primitives for comparison
+# truth: a triangle is the same shape regardless of color — properties are separable from appearance
+
 var vertex_color: Color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
 @export var sphere_size_multiplier: float = 0.5  # Half the original size
 @export var triangle_scale: float = 0.5 # Scale of the triangle vertices

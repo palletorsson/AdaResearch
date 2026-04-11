@@ -3,3 +3,5 @@ Sequence role: Sixth map in Graph Theory; introduces optimization on graphs. Aft
 Technical angle: Minimum spanning tree (MST), Kruskal's algorithm (sort edges, add cheapest that doesn't create cycle), Prim's algorithm (grow from root, add cheapest edge to unvisited node), cut property and cycle property. The mst_visualization artifact demonstrates the greedy construction.
 Critical angle: The spanning tree is the graph stripped to its essentials — no redundancy, no cycles, minimum cost. This is the F-term applied to networks: minimize, simplify, find the most efficient structure. But the MST is fragile — remove one edge and the tree disconnects. Redundancy (cycles) is the E-term's contribution: resilience through structural excess. The MST-vs-full-graph tension is the QFEP formula applied to network design.
 Key artifacts: mst_visualization demonstrates Kruskal/Prim construction — watching the skeleton emerge edge by edge from the scattered platforms, connections forming as cost is minimized.
+
+Gap: mst_visualization needs slider_horizontal, push_button.

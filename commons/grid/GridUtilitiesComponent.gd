@@ -432,10 +432,7 @@ func _place_force_field(cell_value: String, x: int, y: int, z: int, total_size: 
 	print("  Added ForceField (%s, intensity=%.1f) at (%d,%d,%d)" % [force_type_str, intensity, x, y, z])
 
 
-# Apply utility parameters
-
-# Add this to GridUtilitiesComponent.gd in the _apply_utility_parameters method
-
+# Apply utility-specific parameters parsed from map notation (e.g. "t:next:3", "jp:15:3:8")
 func _apply_utility_parameters(utility_object: Node3D, utility_type: String, parameters: Array):
 	var normalized_type = utility_type.to_lower()
 	match normalized_type:
@@ -689,6 +686,41 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				if utility_object.has_method("set_bridge_parameters"):
 					utility_object.set_bridge_parameters(bridge_length, bridge_axis)
 				print("GridUtilitiesComponent: Set bridge path %d segments along %s" % [bridge_length, bridge_axis])
+		"jp":  # Jump Pad — parabolic arc launcher
+			# Format: jp:target_x:target_z[:arc_height]
+			if parameters.size() >= 2:
+				var target_x: int = int(parameters[0])
+				var target_z: int = int(parameters[1])
+				var arc_h: float = 6.0
+				if parameters.size() >= 3 and parameters[2].is_valid_float():
+					arc_h = float(parameters[2])
+
+				# Compute world-space target from grid coords
+				var ts: float = cube_size + gutter
+				var target_world := Vector3(
+					target_x * ts + ts * 0.5,
+					0.0,
+					target_z * ts + ts * 0.5
+				)
+				# Look up structure height at target for landing Y
+				if structure_component:
+					var struct_y: int = structure_component.find_highest_y_at(target_x, target_z)
+					target_world.y = (struct_y + 1) * ts  # land on top of highest cube
+
+				# Apply config via the standard apply_grid_config pattern
+				if utility_object.has_method("apply_grid_config"):
+					utility_object.apply_grid_config({
+						"target_x": target_x,
+						"target_z": target_z,
+						"arc_height": arc_h
+					})
+				# Also set the world target directly
+				if "target_world_pos" in utility_object:
+					utility_object.target_world_pos = target_world
+				if utility_object.has_method("set_grid_spacing"):
+					utility_object.set_grid_spacing(cube_size, gutter)
+
+				print("GridUtilitiesComponent: Jump pad -> target grid (%d,%d), arc=%.1f, world=%s" % [target_x, target_z, arc_h, target_world])
 		"rc":  # Rotation Cube
 			# Format: rc:angle:axis:pause:y_offset (e.g. "45:y:4:0.5")
 			if parameters.size() >= 1:
@@ -779,7 +811,7 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				utility_object.set_target_data([], target_params)
 			if status_message.length() > 0 and utility_object.has_method("set_status_message"):
 				utility_object.set_status_message(status_message)
-		"la":  # Label - displays artifact name from grid_artifacts.json
+		"la":  # Label - displays artifact name from the artifact registry
 			if parameters.size() > 0:
 				var keyid = parameters[0]
 				if utility_object.has_method("set_keyid"):
@@ -1183,50 +1215,29 @@ func _find_scene_manager():
 
 	return null
 
+## Cached sequence names — auto-discovered from res://commons/maps/sequences/*.json
+var _known_sequences_cache: Array = []
+
 func _is_sequence_name(name: String) -> bool:
-	"""Check if the name is a sequence name rather than a map name"""
-	var known_sequences = [
-		"primitives",
-		"transformation",
-		"tests",
-		"color",
-		"array_tutorial",
-		"meshestextures",
-		"randomness",
-		"vectors",
-		"fractals",
-		"cellularautomata",
-		"joints",
-		"wavefunctions",
-		"noise",
-		"forces",
-		"proceduralaudio",
-		"physicssimulation",
-		"softbodies",
-		"recursiveemergence",
-		"lsystems",
-		"swarmintelligence",
-		"patterngeneration",
-		"proceduralgeneration",
-		"searchpathfinding",
-		"topology",
-		"graphtheory",
-		"computationalgeometry",
-		"machinelearning",
-		"criticalalgorithms",
-		"speculativecomputation",
-		"resourcemanagement",
-		"advancedlaboratory",
-		"qfeplaboratory",
-		"testmaps",
-		"grammar_systems",
-		"spatial_partitioning",
-		"constraint_solvers",
-		"isosurfaces",
-		"higher_dimensions",
-		"morphogenesis"
-	]
-	return name in known_sequences
+	if _known_sequences_cache.is_empty():
+		_known_sequences_cache = _discover_sequence_names()
+	return name in _known_sequences_cache
+
+## Scan the sequences directory for all .json files and extract their names.
+## Runs once, cached for the session.
+static func _discover_sequence_names() -> Array:
+	var names: Array = []
+	var dir := DirAccess.open("res://commons/maps/sequences")
+	if not dir:
+		push_warning("GridUtilitiesComponent: Could not open sequences directory for autodiscovery")
+		return names
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+	while file_name != "":
+		if file_name.ends_with(".json") and file_name != "sequence_index.json" and file_name != "templates.json":
+			names.append(file_name.get_basename())
+		file_name = dir.get_next()
+	return names
 
 # Debug: Print scene tree to help find SceneManager
 func _debug_print_scene_tree():
@@ -1409,7 +1420,11 @@ func _create_info_board_with_universal_template(board_id: String) -> Node3D:
 		push_error("GridUtilitiesComponent: HandheldInfoBoard base scene not found")
 		return null
 
-	var board_3d = load(base_scene_path).instantiate()
+	var board_scene = load(base_scene_path)
+	if not board_scene:
+		push_error("GridUtilitiesComponent: Failed to load HandheldInfoBoard scene: " + base_scene_path)
+		return null
+	var board_3d = board_scene.instantiate()
 
 	# Configure the Viewport2Din3D script properties on the root node
 	# The script automatically loads the scene into the viewport
@@ -1673,6 +1688,9 @@ func _generate_border_frame(border_data: Dictionary):
 
 	# Load SimpleGrid shader
 	var shader = load("res://commons/resourses/shaders/SimpleGrid.gdshader")
+	if not shader:
+		push_error("GridUtilitiesComponent: Failed to load SimpleGrid shader")
+		return
 
 	# Create shader material with black model color and light blue outline
 	var wall_material = ShaderMaterial.new()

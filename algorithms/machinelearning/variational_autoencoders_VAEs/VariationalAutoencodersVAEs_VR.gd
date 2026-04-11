@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # VR-Reimagined Variational Autoencoder Visualization
 # Walk inside latent space, grab points to generate samples
@@ -52,7 +52,7 @@ var latent_sphere: Node3D
 # Interpolation path
 var interpolation_points: Array = []
 
-func _ready():
+func _ready() -> void:
 	print("[VAEs_VR] Initializing variational autoencoder")
 	_initialize_latent_distribution()
 	_create_input_area()
@@ -64,7 +64,7 @@ func _ready():
 	_create_control_panel()
 	_create_info_panels()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 
 	if auto_train:
@@ -83,12 +83,12 @@ func _process(delta):
 	_update_distribution_visualization(delta)
 	_update_control_panel()
 
-func _initialize_latent_distribution():
+func _initialize_latent_distribution() -> void:
 	"""Initialize latent space distribution"""
 	latent_mean = Vector3(randf_range(-0.5, 0.5), randf_range(-0.5, 0.5), randf_range(-0.5, 0.5))
 	latent_variance = Vector3(randf_range(0.8, 1.5), randf_range(0.8, 1.5), randf_range(0.8, 1.5))
 
-func _create_input_area():
+func _create_input_area() -> void:
 	"""Create input data area"""
 	var input_container = Node3D.new()
 	input_container.name = "InputDataArea"
@@ -137,7 +137,7 @@ func _create_input_area():
 		input_container.add_child(data)
 		input_data_particles.append(data)
 
-func _create_encoder_tunnel():
+func _create_encoder_tunnel() -> void:
 	"""Create encoder tunnel (data compression)"""
 	encoder_tunnel = Node3D.new()
 	encoder_tunnel.name = "EncoderTunnel"
@@ -180,7 +180,7 @@ func _create_encoder_tunnel():
 	label.position = Vector3(tunnel_length / 2.0, 3.5, 0)
 	encoder_tunnel.add_child(label)
 
-func _create_latent_space():
+func _create_latent_space() -> void:
 	"""Create walkable latent space sphere"""
 	latent_sphere = Node3D.new()
 	latent_sphere.name = "LatentSpace"
@@ -191,6 +191,7 @@ func _create_latent_space():
 	var sphere_mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = latent_space_radius
+	sphere.height = latent_space_radius * 2.0
 	sphere_mesh.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -244,6 +245,7 @@ func _create_latent_sample() -> RigidBody3D:
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = sample_point_size
+	sphere.height = sample_point_size * 2.0
 	mesh.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -283,7 +285,7 @@ func _sample_from_gaussian() -> Vector3:
 		latent_mean.z + z2 * sqrt(latent_variance.z)
 	) * (latent_space_radius * 0.7)
 
-func _create_distribution_particles():
+func _create_distribution_particles() -> void:
 	"""Create particles showing probability density"""
 	var dist_container = Node3D.new()
 	dist_container.name = "DistributionFog"
@@ -294,6 +296,7 @@ func _create_distribution_particles():
 		var particle = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.04
+		sphere.height = 0.08
 		particle.mesh = sphere
 
 		var mat = StandardMaterial3D.new()
@@ -311,7 +314,7 @@ func _create_distribution_particles():
 
 		dist_container.add_child(particle)
 
-func _create_decoder_tunnel():
+func _create_decoder_tunnel() -> void:
 	"""Create decoder tunnel (data expansion)"""
 	decoder_tunnel = Node3D.new()
 	decoder_tunnel.name = "DecoderTunnel"
@@ -354,7 +357,7 @@ func _create_decoder_tunnel():
 	label.position = Vector3(tunnel_length / 2.0, 3.5, 0)
 	decoder_tunnel.add_child(label)
 
-func _create_output_area():
+func _create_output_area() -> void:
 	"""Create reconstructed output area"""
 	var output_container = Node3D.new()
 	output_container.name = "OutputDataArea"
@@ -408,6 +411,7 @@ func _create_data_particle(pos: Vector3, color: Color, label_text: String) -> Me
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.18
+	sphere.height = 0.36
 	mesh.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -432,7 +436,7 @@ func _create_data_particle(pos: Vector3, color: Color, label_text: String) -> Me
 
 	return mesh
 
-func _create_reparameterization_viz():
+func _create_reparameterization_viz() -> void:
 	"""Visualize reparameterization trick: z = Î¼ + ÏƒÎµ"""
 	if not show_reparameterization:
 		return
@@ -460,6 +464,7 @@ func _create_reparameterization_viz():
 		var comp_sphere = MeshInstance3D.new()
 		var sphere = SphereMesh.new()
 		sphere.radius = 0.3
+		sphere.height = 0.6
 		comp_sphere.mesh = sphere
 
 		var mat = StandardMaterial3D.new()
@@ -483,7 +488,7 @@ func _create_reparameterization_viz():
 		comp_label.position = positions[i] + Vector3(0, 0.6, 0)
 		reparam_container.add_child(comp_label)
 
-func _create_control_panel():
+func _create_control_panel() -> void:
 	"""Create VR-accessible control panel"""
 	var controls = Node3D.new()
 	controls.name = "ControlPanel"
@@ -531,7 +536,7 @@ func _create_control_panel():
 	metrics.position = Vector3(0, -0.7, 0.1)
 	controls.add_child(metrics)
 
-func _create_info_panels():
+func _create_info_panels() -> void:
 	"""Create educational info panels"""
 	# Latent space explanation
 	_create_info_panel(
@@ -555,7 +560,7 @@ func _create_info_panels():
 			Color(0.3, 0.9, 0.9)
 		)
 
-func _create_info_panel(pos: Vector3, text: String, color: Color):
+func _create_info_panel(pos: Vector3, text: String, color: Color) -> void:
 	"""Create floating info panel"""
 	var label = Label3D.new()
 	label.text = text
@@ -567,7 +572,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _animate_encoder(_delta):
+func _animate_encoder(_delta) -> void:
 	"""Animate encoder tunnel"""
 	for i in range(encoder_tunnel.get_child_count()):
 		var child = encoder_tunnel.get_child(i)
@@ -575,7 +580,7 @@ func _animate_encoder(_delta):
 			var pulse = 0.4 + sin(time * 2.0 - float(i) * 0.5) * 0.2 * training_progress
 			child.material_override.emission_energy_multiplier = pulse
 
-func _animate_latent_space(delta):
+func _animate_latent_space(delta) -> void:
 	"""Animate latent space samples"""
 	for sample in latent_samples:
 		# Gentle drift toward mean
@@ -591,7 +596,7 @@ func _animate_latent_space(delta):
 			var to_center = -sample.position.normalized() * 2.0
 			sample.apply_central_force(to_center)
 
-func _animate_decoder(_delta):
+func _animate_decoder(_delta) -> void:
 	"""Animate decoder tunnel"""
 	for i in range(decoder_tunnel.get_child_count()):
 		var child = decoder_tunnel.get_child(i)
@@ -599,7 +604,7 @@ func _animate_decoder(_delta):
 			var pulse = 0.4 + sin(time * 2.0 + float(i) * 0.5) * 0.2 * training_progress
 			child.material_override.emission_energy_multiplier = pulse
 
-func _animate_data_flow(_delta):
+func _animate_data_flow(_delta) -> void:
 	"""Animate particles flowing through VAE"""
 	# Input particles pulse
 	for particle in input_data_particles:
@@ -611,7 +616,7 @@ func _animate_data_flow(_delta):
 		var pulse = 1.0 + cos(time * 2.3 + particle.position.x) * 0.15
 		particle.scale = Vector3.ONE * pulse
 
-func _update_distribution_visualization(_delta):
+func _update_distribution_visualization(_delta) -> void:
 	"""Update latent distribution label"""
 	if not show_distribution:
 		return
@@ -623,7 +628,7 @@ func _update_distribution_visualization(_delta):
 			latent_variance.x, latent_variance.y, latent_variance.z
 		]
 
-func _update_control_panel():
+func _update_control_panel() -> void:
 	"""Update control panel displays"""
 	var controls = get_node_or_null("ControlPanel")
 	if not controls:
@@ -634,7 +639,7 @@ func _update_control_panel():
 		metrics.text = "Recon Loss: %.3f\nKL Div: %.3f" % [reconstruction_loss, kl_divergence]
 
 # Public API
-func sample_latent_point(position: Vector3):
+func sample_latent_point(position: Vector3) -> void:
 	"""Generate new data from latent point"""
 	if not enable_generation:
 		return
@@ -642,7 +647,7 @@ func sample_latent_point(position: Vector3):
 	print("[VAE] Sampling from latent position: ", position)
 	# Would trigger decoder to generate sample
 
-func interpolate_between_points(start: Vector3, end: Vector3, steps: int = 10):
+func interpolate_between_points(start: Vector3, end: Vector3, steps: int = 10) -> void:
 	"""Create interpolation path between two latent points"""
 	if not enable_interpolation:
 		return
@@ -653,9 +658,18 @@ func interpolate_between_points(start: Vector3, end: Vector3, steps: int = 10):
 		var point = start.lerp(end, t)
 		interpolation_points.append(point)
 
-func reset_training():
+func reset_training() -> void:
 	training_progress = 0.0
 	reconstruction_loss = 1.0
 	kl_divergence = 1.0
 	time = 0.0
 	_initialize_latent_distribution()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

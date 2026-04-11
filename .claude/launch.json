@@ -2,22 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "workbench",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\.claude\\start-workbench.js"],
-      "port": 3011
-    },
-    {
       "name": "encyclopedia",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\.claude\\start-encyclopedia.js"],
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\palle\\Documents\\GitHub\\ada_encyclopedia && npm run dev"],
       "port": 3003
-    },
-    {
-      "name": "claude-self",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\.claude\\start-claude-self.js"],
-      "port": 3004
     }
   ]
 }

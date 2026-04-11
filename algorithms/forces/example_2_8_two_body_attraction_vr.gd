@@ -211,3 +211,12 @@ func toggle_force_vectors() -> void:
 
 func _on_gravity_slider_moved(_position) -> void:
 	gravity_strength = _panel.get_slider_value(0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

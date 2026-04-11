@@ -9,10 +9,10 @@ var network_nodes: Array[Dictionary] = []
 var connections: Array[Dictionary] = []
 var config: Dictionary = {}
 
-func configure(params: Dictionary):
+func configure(params: Dictionary) -> void:
 	config = params
 
-func initialize_growth_points(seeds: Array[Vector3]):
+func initialize_growth_points(seeds: Array[Vector3]) -> void:
 	growth_points = seeds.duplicate()
 
 func generate_rhizomatic_network() -> Dictionary:
@@ -39,7 +39,7 @@ func generate_rhizomatic_network() -> Dictionary:
 		"connections": connections
 	}
 
-func generate_primary_connections():
+func generate_primary_connections() -> void:
 	"""Create main connecting paths between growth points"""
 	# Connect nearby nodes using Delaunay-like triangulation
 	for i in range(network_nodes.size()):
@@ -50,7 +50,7 @@ func generate_primary_connections():
 			if randf() < config.get("branch_prob", 0.7):
 				create_connection(node_a, node_b, {"type": "primary", "width_multiplier": 1.0})
 
-func generate_secondary_branches():
+func generate_secondary_branches() -> void:
 	"""Add secondary branching connections"""
 	var branch_count = config.get("iterations", 100)
 	
@@ -97,7 +97,7 @@ func find_closest_nodes(target_node: Dictionary, count: int) -> Array:
 	
 	return result
 
-func create_connection(node_a: Dictionary, node_b: Dictionary, properties: Dictionary):
+func create_connection(node_a: Dictionary, node_b: Dictionary, properties: Dictionary) -> void:
 	"""Create connection between two nodes"""
 	var connection = {
 		"start": node_a.position,
@@ -111,7 +111,7 @@ func create_connection(node_a: Dictionary, node_b: Dictionary, properties: Dicti
 	node_a.connections.append(node_b.id)
 	node_b.connections.append(node_a.id)
 
-func prune_redundant_paths():
+func prune_redundant_paths() -> void:
 	"""Remove redundant or problematic connections"""
 	# Implementation would remove overly short connections, 
 	# connections that create too dense areas, etc.

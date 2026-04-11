@@ -1,3 +1,13 @@
+# @identity
+# essence: body = assemble(available_parts) -- asymmetric creature built from mismatched geometric primitives
+# desire: a golem that shatters and rebuilds from whatever is at hand, never the same body twice
+# critical_parameter: available parts inventory -- which primitives are nearby determines the next body form
+# triggers: damage causes disassembly; reassembly from local parts; each rebuild produces different geometry
+# emerges: improvisation as survival -- the bricoleur's method applied to self-construction
+# needs: HazardCreatureBase [has]; procedural part assembly [has]; disassembly/reassembly [has]; VR interaction [missing]
+# relationships: embodies bricolage sequence philosophy; contrasts with mesh_morpher (fixed topologies vs improvised)
+# truth: the bricoleur does not design -- it discovers what available parts want to become.
+
 extends HazardCreatureBase
 class_name BricoleurGolem
 ## Asymmetric body assembled from mismatched primitive parts.

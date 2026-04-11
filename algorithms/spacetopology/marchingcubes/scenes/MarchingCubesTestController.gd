@@ -4,13 +4,13 @@
 
 extends Node3D
 
-func _ready():
+func _ready() -> void:
 	print("🧪 Marching Cubes Test: Starting tests...")
 	test_basic_sphere()
 	test_voxel_chunk()
 	test_rhizome_generation()
 
-func test_basic_sphere():
+func test_basic_sphere() -> void:
 	"""Test basic marching cubes with a simple sphere"""
 	print("Testing basic sphere generation...")
 	
@@ -54,7 +54,7 @@ func test_basic_sphere():
 	else:
 		print("❌ Sphere test failed - no mesh generated")
 
-func test_voxel_chunk():
+func test_voxel_chunk() -> void:
 	"""Test voxel chunk functionality"""
 	print("Testing voxel chunk operations...")
 	
@@ -78,7 +78,7 @@ func test_voxel_chunk():
 	else:
 		print("❌ Sphere carving test failed")
 
-func test_rhizome_generation():
+func test_rhizome_generation() -> void:
 	"""Test basic rhizome pattern generation"""
 	print("Testing rhizome growth pattern...")
 	
@@ -101,7 +101,7 @@ func test_rhizome_generation():
 	else:
 		print("❌ Rhizome generation test failed")
 
-func create_rhizome_visualization(network: Dictionary):
+func create_rhizome_visualization(network: Dictionary) -> void:
 	"""Create a vibrant visualization of the rhizome network"""
 	print("Creating rhizome visualization...")
 	
@@ -177,4 +177,13 @@ func create_debug_line(start: Vector3, end: Vector3, color: Color) -> MeshInstan
 	material.vertex_color_use_as_albedo = false
 	mesh_instance.set_surface_override_material(0, material)
 	
-	return mesh_instance 
+	return mesh_instance
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,495 +1,776 @@
-﻿class_name KargerAlgorithm
+class_name KargerAlgorithm
 extends Node3D
 
-# Karger's Algorithm: Minimum Cut
-# Visualizes the randomized contraction algorithm for finding minimum cuts
-# Explores the concept of edge contraction and cut probability
+# @identity
+# essence: randomized edge contraction — repeatedly merge endpoints of a random edge (Union-Find) until 2 super-vertices remain; the crossing edges are a cut; P(finding min-cut) >= 2/(n*(n-1))
+# desire: to watch four parallel contractions race side by side, each making different random choices, and see probability amplification turn a terrible single-run chance into near-certainty
+# critical_parameter: initial_vertex_count (n) — P(success per run) = 2/(n*(n-1)); for n=8 that is ~3.6% per run, but parallel repetition amplifies it exponentially
+# triggers: auto-demo starts new parallel rounds every _auto_interval seconds; ParameterController3D sliders for vertices, density, speed, and panel count; ImmediateMesh redrawn every frame
+# emerges: the probability amplification chart shows observed success rate converging toward theoretical P(at least one success) = 1 - (1-p)^k as rounds accumulate
+# needs: slider_horizontal [missing] (uses custom ParameterController3D instead); push_button [missing]; Label3D [has] (title, metrics, probability)
+# relationships: appears in GT_Flow alongside push_relabel; demonstrates randomized algorithms and the power of repetition; contrasts with deterministic Edmonds-Karp
+# truth: Karger's algorithm is a bet that randomness repeated enough times becomes certainty — the min-cut is always there, you just need enough attempts to stumble onto it
 
-@export_category("Karger Configuration")
-@export var graph_size: int = 8  # Number of vertices
-@export var edge_density: float = 0.4  # Connection probability
-@export var auto_start: bool = true
-@export var step_by_step: bool = true
-@export var animation_delay: float = 1.0
-@export var num_iterations: int = 10  # Number of contraction attempts
+## Karger's Algorithm — Expressive VR 3D visualization
+## Parallel run comparison: multiple simultaneous contractions, best-cut highlighting,
+## probability amplification chart, cut/uncut edge coloring, VR slider controls.
+## Shows how repeated random contractions amplify success probability from ~2/n² to ~1-1/e.
 
-@export_category("Visualization")
-@export var show_contraction_steps: bool = true
-@export var highlight_contracted_edges: bool = true
-@export var show_cut_edges: bool = true
-@export var animate_contraction: bool = true
-@export var show_probability: bool = true
-@export var show_best_cut: bool = true
+@export var bounding_size: float = 0.8
+@export var initial_vertex_count: int = 8
+@export var initial_edge_density: float = 0.45
 
-@export_category("Interactive Mode")
-@export var enable_graph_editing: bool = true
-@export var allow_edge_editing: bool = true
-@export var real_time_cut_update: bool = true
-@export var show_algorithm_state: bool = true
+# ── Graph state ──────────────────────────────────────────────────────────
+var _n: int = 8
+var _density: float = 0.45
+var _adj: Array[PackedInt32Array] = []       # adjacency lists (edge indices)
+var _edge_from: PackedInt32Array = PackedInt32Array()
+var _edge_to: PackedInt32Array = PackedInt32Array()
+var _edge_count: int = 0
 
-# Colors for visualization
-@export var vertex_color: Color = Color(0.4, 0.6, 0.9, 1.0)
-@export var contracted_color: Color = Color(0.9, 0.2, 0.2, 1.0)
-@export var cut_edge_color: Color = Color(0.9, 0.9, 0.2, 1.0)
-@export var edge_color: Color = Color(0.6, 0.6, 0.6, 0.8)
-@export var best_cut_color: Color = Color(0.9, 0.3, 0.9, 1.0)
-@export var partition_a_color: Color = Color(0.2, 0.9, 0.2, 1.0)
-@export var partition_b_color: Color = Color(0.2, 0.2, 0.9, 1.0)
+# ── Parallel runs ────────────────────────────────────────────────────────
+const MAX_PANELS: int = 4
+var _num_panels: int = 4
+var _run_states: Array[Dictionary] = []      # per-panel contraction state
+var _best_global_cut: int = 999
+var _best_global_edges: PackedInt32Array = PackedInt32Array()  # edge indices in best cut
+var _best_panel: int = -1
+var _total_runs: int = 0
+var _success_count: int = 0                  # runs that found the actual min cut
 
-# Graph representation
-var vertices: Array = []
-var edges: Array = []
-var adjacency_list: Dictionary = {}
-var original_edges: Array = []
+# ── Animation ────────────────────────────────────────────────────────────
+var _time: float = 0.0
+var _anim_speed: float = 0.5                 # seconds per contraction step
+var _anim_timer: float = 0.0
+var _is_running: bool = false
+var _is_initialized: bool = false
+var _round: int = 0                          # how many full parallel rounds completed
+var _flash: float = 0.0                      # completion flash
 
-# Karger's algorithm state
-var contracted_vertices: Dictionary = {}
-var current_cut: Array = []
-var best_cut: Array = []
-var min_cut_size: int = INF
-var iteration: int = 0
-var algorithm_running: bool = false
-var algorithm_step: int = 0
-var current_operation: String = ""
+# Auto-demo
+var _auto_timer: float = 0.0
+var _auto_interval: float = 2.0
 
-# Visual elements
-var vertex_nodes: Dictionary = {}
-var edge_lines: Dictionary = {}
-var cut_indicators: Array = []
-var info_label: Label3D
-var iteration_label: Label3D
-var cut_label: Label3D
-var probability_label: Label3D
+# ── Meshes (ImmediateMesh layers) ────────────────────────────────────────
+# Main graph display
+var _graph_mi: MeshInstance3D
+var _graph_im: ImmediateMesh
+var _graph_mat: StandardMaterial3D
 
-func _ready():
-	setup_environment()
-	initialize_graph()
-	create_visual_elements()
-	
-	if auto_start:
-		call_deferred("start_algorithm")
+# Parallel panels
+var _panel_mis: Array[MeshInstance3D] = []
+var _panel_ims: Array[ImmediateMesh] = []
 
-func setup_environment():
-	# Add lighting
-	var light := DirectionalLight3D.new()
-	light.name = "SunLight"
-	light.rotation_degrees = Vector3(-50.0, -35.0, 0.0)
-	light.light_energy = 1.2
-	add_child(light)
-	
-	# Add ambient lighting
-	var ambient := WorldEnvironment.new()
-	ambient.environment = Environment.new()
-	ambient.environment.background_color = Color(0.05, 0.05, 0.1)
-	ambient.environment.background_mode = Environment.BG_COLOR
-	add_child(ambient)
-	
-	# Add camera
-	var camera := Camera3D.new()
-	camera.name = "AlgorithmCamera"
-	camera.position = Vector3(8.0, 6.0, 12.0)
-	camera.look_at_from_position(camera.position, Vector3(0.0, 0.0, 0.0), Vector3.UP)
-	camera.current = true
-	add_child(camera)
+# Probability chart
+var _chart_mi: MeshInstance3D
+var _chart_im: ImmediateMesh
+var _chart_mat: StandardMaterial3D
+var _prob_history: PackedFloat32Array = PackedFloat32Array()
 
-func initialize_graph():
-	vertices.clear()
-	edges.clear()
-	adjacency_list.clear()
-	contracted_vertices.clear()
-	current_cut.clear()
-	best_cut.clear()
-	min_cut_size = INF
-	iteration = 0
-	algorithm_running = false
-	algorithm_step = 0
-	current_operation = ""
-	
-	# Generate random graph
-	generate_random_graph()
-	
-	# Store original edges
-	original_edges = edges.duplicate(true)
+# ── Labels ───────────────────────────────────────────────────────────────
+var _title_label: Label3D
+var _metrics_label: Label3D
+var _prob_label: Label3D
 
-func generate_random_graph():
-	# Create vertices
-	for i in range(graph_size):
-		var vertex = "v" + str(i)
-		vertices.append(vertex)
-		adjacency_list[vertex] = []
-		contracted_vertices[vertex] = [vertex]  # Each vertex starts as its own component
-	
-	# Create edges with probability edge_density
-	for i in range(graph_size):
-		for j in range(i + 1, graph_size):
-			if randf() < edge_density:
-				var from_vertex = "v" + str(i)
-				var to_vertex = "v" + str(j)
-				edges.append({"from": from_vertex, "to": to_vertex})
-				adjacency_list[from_vertex].append(to_vertex)
-				adjacency_list[to_vertex].append(from_vertex)
-	
-	# Ensure graph is connected
-	ensure_connectivity()
+# ── Controllers ──────────────────────────────────────────────────────────
+var _vertex_ctrl: ParameterController3D
+var _density_ctrl: ParameterController3D
+var _speed_ctrl: ParameterController3D
+var _panels_ctrl: ParameterController3D
 
-func ensure_connectivity():
-	# Add edges to ensure connectivity
-	for i in range(graph_size - 1):
-		var from_vertex = "v" + str(i)
-		var to_vertex = "v" + str(i + 1)
-		if not has_edge(from_vertex, to_vertex):
-			edges.append({"from": from_vertex, "to": to_vertex})
-			adjacency_list[from_vertex].append(to_vertex)
-			adjacency_list[to_vertex].append(from_vertex)
+# ── Layout constants ─────────────────────────────────────────────────────
+const PANEL_SPACING: float = 0.48
+const PANEL_SIZE: float = 0.18
+const GRAPH_RADIUS: float = 0.28
+const VERTEX_RADIUS: float = 0.015
+const EDGE_WIDTH: float = 0.003
 
-func has_edge(from: String, to: String) -> bool:
-	for edge in edges:
-		if (edge.from == from and edge.to == to) or (edge.from == to and edge.to == from):
+# Colors
+const COL_VERTEX := Color(0.45, 0.65, 0.95)
+const COL_VERTEX_A := Color(0.2, 0.85, 0.4)
+const COL_VERTEX_B := Color(0.3, 0.35, 0.95)
+const COL_EDGE := Color(0.5, 0.5, 0.55, 0.7)
+const COL_CUT := Color(0.95, 0.85, 0.15)
+const COL_BEST := Color(0.95, 0.25, 0.85)
+const COL_CONTRACTED := Color(0.9, 0.25, 0.2, 0.35)
+const COL_PANEL_BG := Color(0.08, 0.09, 0.14, 0.6)
+const COL_CHART_BG := Color(0.06, 0.07, 0.11, 0.5)
+const COL_CHART_BAR := Color(0.3, 0.75, 0.9)
+const COL_CHART_THEORY := Color(0.95, 0.5, 0.2)
+
+
+func _ready() -> void:
+	_n = clampi(initial_vertex_count, 4, 12)
+	_density = clampf(initial_edge_density, 0.2, 0.8)
+	_generate_graph()
+	_init_run_states()
+	_setup_graph_mesh()
+	_setup_panel_meshes()
+	_setup_chart_mesh()
+	_setup_labels()
+	_setup_controllers()
+	_is_initialized = true
+
+
+# ── Graph generation ─────────────────────────────────────────────────────
+
+func _generate_graph() -> void:
+	_adj.clear()
+	_edge_from.clear()
+	_edge_to.clear()
+	_edge_count = 0
+	_best_global_cut = 999
+	_best_global_edges.clear()
+	_best_panel = -1
+	_total_runs = 0
+	_success_count = 0
+	_round = 0
+	_prob_history.clear()
+
+	_adj.resize(_n)
+	for i in range(_n):
+		_adj[i] = PackedInt32Array()
+
+	# Random edges
+	for i in range(_n):
+		for j in range(i + 1, _n):
+			if randf() < _density:
+				_add_edge(i, j)
+
+	# Ensure connectivity via chain
+	for i in range(_n - 1):
+		if not _has_edge(i, i + 1):
+			_add_edge(i, i + 1)
+
+func _add_edge(a: int, b: int) -> void:
+	var idx := _edge_count
+	_edge_from.append(a)
+	_edge_to.append(b)
+	_adj[a].append(idx)
+	_adj[b].append(idx)
+	_edge_count += 1
+
+func _has_edge(a: int, b: int) -> bool:
+	for ei in _adj[a]:
+		if (_edge_from[ei] == b or _edge_to[ei] == b):
 			return true
 	return false
 
-func create_visual_elements():
-	# Clear existing visuals
-	for child in get_children():
-		if child.name.begins_with("Vertex_") or child.name.begins_with("Edge_") or child.name.begins_with("Cut_"):
-			child.queue_free()
-	
-	vertex_nodes.clear()
-	edge_lines.clear()
-	cut_indicators.clear()
-	
-	# Create vertex spheres
-	var radius = 2.0
-	var angle_step = 2.0 * PI / vertices.size()
-	
-	for i in range(vertices.size()):
-		var vertex = vertices[i]
-		var angle = i * angle_step
-		var x = cos(angle) * radius
-		var z = sin(angle) * radius
-		var y = 0.0
-		
-		var sphere := MeshInstance3D.new()
-		sphere.name = "Vertex_" + vertex
-		sphere.mesh = SphereMesh.new()
-		sphere.mesh.radius = 0.15
-		sphere.mesh.height = 0.3
-		sphere.position = Vector3(x, y, z)
-		
-		var material := StandardMaterial3D.new()
-		material.albedo_color = vertex_color
-		material.emission = vertex_color * 0.3
-		sphere.material_override = material
-		
-		add_child(sphere)
-		vertex_nodes[vertex] = sphere
-		
-		# Add vertex label
-		var label := Label3D.new()
-		label.text = vertex
-		label.font_size = 16
-		label.position = Vector3(0, 0.4, 0)
-		sphere.add_child(label)
-	
-	# Create edge lines
-	for edge in edges:
-		create_edge_visual(edge)
-	
-	# Create info labels
-	create_info_labels()
 
-func create_edge_visual(edge: Dictionary):
-	var from_pos = vertex_nodes[edge.from].position
-	var to_pos = vertex_nodes[edge.to].position
-	
-	var line := MeshInstance3D.new()
-	line.name = "Edge_" + edge.from + "_" + edge.to
-	line.mesh = create_line_mesh(from_pos, to_pos)
-	
-	var material := StandardMaterial3D.new()
-	material.albedo_color = edge_color
-	material.emission = edge_color * 0.2
-	line.material_override = material
-	
-	add_child(line)
-	edge_lines[edge.from + "_" + edge.to] = line
+# ── Vertex positions (circle layout) ────────────────────────────────────
 
-func create_line_mesh(from: Vector3, to: Vector3) -> ArrayMesh:
-	var mesh := ArrayMesh.new()
-	var arrays := []
-	arrays.resize(Mesh.ARRAY_MAX)
-	
-	var vertices_array := PackedVector3Array()
-	var indices := PackedInt32Array()
-	
-	# Create simple line
-	vertices_array.append(from)
-	vertices_array.append(to)
-	
-	indices.append(0)
-	indices.append(1)
-	
-	arrays[Mesh.ARRAY_VERTEX] = vertices_array
-	arrays[Mesh.ARRAY_INDEX] = indices
-	
-	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)
-	return mesh
+func _vertex_pos(v: int, cx: float, cz: float, r: float) -> Vector3:
+	var angle := (float(v) / float(_n)) * TAU - PI * 0.5
+	return Vector3(cx + cos(angle) * r, 0.0, cz + sin(angle) * r)
 
-func create_info_labels():
-	info_label = Label3D.new()
-	info_label.text = "Karger's Algorithm: Minimum Cut"
-	info_label.font_size = 20
-	info_label.position = Vector3(0, 4, 0)
-	add_child(info_label)
-	
-	iteration_label = Label3D.new()
-	iteration_label.text = "Iteration: 0/" + str(num_iterations)
-	iteration_label.font_size = 16
-	iteration_label.position = Vector3(0, 3.5, 0)
-	add_child(iteration_label)
-	
-	cut_label = Label3D.new()
-	cut_label.text = "Current Cut Size: 0"
-	cut_label.font_size = 16
-	cut_label.position = Vector3(0, 3, 0)
-	add_child(cut_label)
-	
-	probability_label = Label3D.new()
-	probability_label.text = "Success Probability: 0%"
-	probability_label.font_size = 16
-	probability_label.position = Vector3(0, 2.5, 0)
-	add_child(probability_label)
 
-func start_algorithm():
-	if algorithm_running:
+# ── Run state management ────────────────────────────────────────────────
+
+func _init_run_states() -> void:
+	_run_states.clear()
+	for p in range(MAX_PANELS):
+		_run_states.append(_make_fresh_run())
+
+func _make_fresh_run() -> Dictionary:
+	# Union-Find parent array for contraction
+	var parent := PackedInt32Array()
+	parent.resize(_n)
+	for i in range(_n):
+		parent[i] = i
+	var rank := PackedInt32Array()
+	rank.resize(_n)
+	rank.fill(0)
+	# Available edges (shuffled order for random contraction)
+	var order := PackedInt32Array()
+	for i in range(_edge_count):
+		order.append(i)
+	# Fisher-Yates shuffle
+	for i in range(order.size() - 1, 0, -1):
+		var j := randi_range(0, i)
+		var tmp := order[i]
+		order[i] = order[j]
+		order[j] = tmp
+	return {
+		"parent": parent,
+		"rank": rank,
+		"order": order,
+		"step": 0,
+		"remaining": _n,
+		"done": false,
+		"cut_size": 0,
+		"cut_edges": PackedInt32Array(),
+	}
+
+func _uf_find(parent: PackedInt32Array, x: int) -> int:
+	while parent[x] != x:
+		parent[x] = parent[parent[x]]  # path compression
+		x = parent[x]
+	return x
+
+func _uf_union(state: Dictionary, a: int, b: int) -> void:
+	var ra := _uf_find(state.parent, a)
+	var rb := _uf_find(state.parent, b)
+	if ra == rb:
 		return
-	
-	algorithm_running = true
-	algorithm_step = 0
-	iteration = 0
-	min_cut_size = INF
-	best_cut.clear()
-	
-	call_deferred("run_iterations")
+	if state.rank[ra] < state.rank[rb]:
+		state.parent[ra] = rb
+	elif state.rank[ra] > state.rank[rb]:
+		state.parent[rb] = ra
+	else:
+		state.parent[rb] = ra
+		state.rank[ra] += 1
+	state.remaining -= 1
 
-func run_iterations():
-	if not algorithm_running or iteration >= num_iterations:
-		algorithm_running = false
-		show_final_result()
+
+# ── Advance one contraction step for a panel ─────────────────────────────
+
+func _step_run(state: Dictionary) -> void:
+	if state.done or state.remaining <= 2:
+		if not state.done:
+			_finalize_run(state)
 		return
-	
-	iteration += 1
-	update_iteration_display()
-	
-	# Reset for new iteration
-	reset_for_iteration()
-	
-	# Run contraction algorithm
-	call_deferred("contraction_algorithm")
 
-func reset_for_iteration():
-	# Reset contracted vertices
-	for vertex in vertices:
-		contracted_vertices[vertex] = [vertex]
-	
-	# Reset visual state
-	for vertex in vertices:
-		update_vertex_color(vertex, vertex_color)
-	
-	# Reset edges
-	for edge in edges:
-		update_edge_color(edge.from, edge.to, edge_color)
-	
-	current_cut.clear()
-	algorithm_step = 0
+	# Find next edge that crosses components
+	while state.step < state.order.size():
+		var ei: int = state.order[state.step]
+		state.step += 1
+		var ra := _uf_find(state.parent, _edge_from[ei])
+		var rb := _uf_find(state.parent, _edge_to[ei])
+		if ra != rb:
+			_uf_union(state, ra, rb)
+			return
 
-func contraction_algorithm():
-	if not algorithm_running:
-		return
-	
-	# Continue until only 2 vertices remain
-	var remaining_vertices = vertices.duplicate()
-	
-	while remaining_vertices.size() > 2:
-		# Select random edge
-		var available_edges = get_available_edges(remaining_vertices)
-		if available_edges.is_empty():
-			break
-		
-		var random_edge = available_edges[randi() % available_edges.size()]
-		contract_edge(random_edge, remaining_vertices)
-		
-		algorithm_step += 1
-		current_operation = "Contracting edge: " + random_edge.from + "-" + random_edge.to
-		update_operation_display()
-		
-		if step_by_step:
-			await get_tree().create_timer(animation_delay).timeout
-	
-	# Calculate cut size
-	if remaining_vertices.size() == 2:
-		var cut_size = calculate_cut_size(remaining_vertices)
-		current_cut = get_cut_edges(remaining_vertices)
-		
-		update_cut_display(cut_size)
-		
-		# Update best cut if this is better
-		if cut_size < min_cut_size:
-			min_cut_size = cut_size
-			best_cut = current_cut.duplicate(true)
-			highlight_best_cut()
-		
-		update_probability_display()
-	
-	# Move to next iteration
-	await get_tree().create_timer(animation_delay * 2).timeout
-	call_deferred("run_iterations")
+	# Ran out of edges (shouldn't happen with connected graph)
+	_finalize_run(state)
 
-func get_available_edges(remaining_vertices: Array) -> Array:
-	var available = []
-	for edge in edges:
-		var from_component = get_vertex_component(edge.from)
-		var to_component = get_vertex_component(edge.to)
-		if from_component != to_component and from_component in remaining_vertices and to_component in remaining_vertices:
-			available.append(edge)
-	return available
-
-func get_vertex_component(vertex: String) -> String:
-	for comp in contracted_vertices.keys():
-		if vertex in contracted_vertices[comp]:
-			return comp
-	return vertex
-
-func contract_edge(edge: Dictionary, remaining_vertices: Array):
-	var from_comp = get_vertex_component(edge.from)
-	var to_comp = get_vertex_component(edge.to)
-	
-	# Merge components
-	contracted_vertices[from_comp].append_array(contracted_vertices[to_comp])
-	contracted_vertices.erase(to_comp)
-	remaining_vertices.erase(to_comp)
-	
-	# Update visual representation
-	update_vertex_color(from_comp, contracted_color)
-	highlight_contracted_edge(edge.from, edge.to)
-	
-	# Update vertex label to show contraction
-	var from_node = vertex_nodes[from_comp]
-	if from_node:
-		var label = from_node.get_child(0)
-		label.text = from_comp + "(" + str(contracted_vertices[from_comp].size()) + ")"
-
-func calculate_cut_size(_remaining_vertices: Array) -> int:
-	var cut_size = 0
-	for edge in original_edges:
-		var from_comp = get_vertex_component(edge.from)
-		var to_comp = get_vertex_component(edge.to)
-		if from_comp != to_comp:
+func _finalize_run(state: Dictionary) -> void:
+	state.done = true
+	# Count cut edges
+	var cut_size := 0
+	var cut_edges := PackedInt32Array()
+	for ei in range(_edge_count):
+		var ra := _uf_find(state.parent, _edge_from[ei])
+		var rb := _uf_find(state.parent, _edge_to[ei])
+		if ra != rb:
 			cut_size += 1
-	return cut_size
+			cut_edges.append(ei)
+	state.cut_size = cut_size
+	state.cut_edges = cut_edges
 
-func get_cut_edges(_remaining_vertices: Array) -> Array:
-	var cut_edges = []
-	for edge in original_edges:
-		var from_comp = get_vertex_component(edge.from)
-		var to_comp = get_vertex_component(edge.to)
-		if from_comp != to_comp:
-			cut_edges.append(edge)
-	return cut_edges
 
-func highlight_contracted_edge(from: String, to: String):
-	var edge_key = from + "_" + to
-	if not edge_lines.has(edge_key):
-		edge_key = to + "_" + from
-	
-	if edge_lines.has(edge_key):
-		var material := StandardMaterial3D.new()
-		material.albedo_color = cut_edge_color
-		material.emission = cut_edge_color * 0.5
-		edge_lines[edge_key].material_override = material
+# ── Process new round of parallel runs ───────────────────────────────────
 
-func highlight_best_cut():
-	# Reset all edges
-	for edge in original_edges:
-		update_edge_color(edge.from, edge.to, edge_color)
-	
-	# Highlight best cut edges
-	for edge in best_cut:
-		update_edge_color(edge.from, edge.to, best_cut_color)
+func _start_round() -> void:
+	for p in range(_num_panels):
+		_run_states[p] = _make_fresh_run()
+	_is_running = true
+	_anim_timer = 0.0
 
-func update_vertex_color(vertex: String, color: Color):
-	if vertex_nodes.has(vertex):
-		var material := StandardMaterial3D.new()
-		material.albedo_color = color
-		material.emission = color * 0.3
-		vertex_nodes[vertex].material_override = material
+func _check_round_complete() -> void:
+	var all_done := true
+	for p in range(_num_panels):
+		if not _run_states[p].done:
+			all_done = false
+			break
 
-func update_edge_color(from: String, to: String, color: Color):
-	var edge_key = from + "_" + to
-	if not edge_lines.has(edge_key):
-		edge_key = to + "_" + from
-	
-	if edge_lines.has(edge_key):
-		var material := StandardMaterial3D.new()
-		material.albedo_color = color
-		material.emission = color * 0.2
-		edge_lines[edge_key].material_override = material
+	if all_done:
+		_round += 1
+		_total_runs += _num_panels
 
-func update_iteration_display():
-	if iteration_label:
-		iteration_label.text = "Iteration: " + str(iteration) + "/" + str(num_iterations)
+		# Find best in this round
+		var round_best := 999
+		var round_best_panel := 0
+		for p in range(_num_panels):
+			if _run_states[p].cut_size < round_best:
+				round_best = _run_states[p].cut_size
+				round_best_panel = p
 
-func update_cut_display(cut_size: int):
-	if cut_label:
-		cut_label.text = "Current Cut Size: " + str(cut_size)
+		if round_best < _best_global_cut:
+			_best_global_cut = round_best
+			_best_global_edges = _run_states[round_best_panel].cut_edges.duplicate()
+			_best_panel = round_best_panel
+			_flash = 1.0
 
-func update_probability_display():
-	var n = vertices.size()
-	var probability = 2.0 / (n * (n - 1)) * 100.0
-	if probability_label:
-		probability_label.text = "Success Probability: " + str(probability) + "%"
+		# Count successes (matching global best)
+		for p in range(_num_panels):
+			if _run_states[p].cut_size == _best_global_cut:
+				_success_count += 1
 
-func update_operation_display():
-	if info_label:
-		info_label.text = current_operation
+		# Record probability history
+		if _total_runs > 0:
+			_prob_history.append(float(_success_count) / float(_total_runs))
+			if _prob_history.size() > 40:
+				_prob_history.remove_at(0)
 
-func show_final_result():
-	update_operation_display()
-	update_cut_display(min_cut_size)
-	highlight_best_cut()
-	
-	# Show final message
-	var final_message = "Algorithm completed! Minimum cut size: " + str(min_cut_size)
-	update_operation_display()
+		_is_running = false
+		_auto_timer = 0.0
 
-func _input(event):
-	if event.is_action_pressed("ui_accept"):
-		if algorithm_running:
-			stop_algorithm()
+
+# ── Mesh setup ───────────────────────────────────────────────────────────
+
+func _make_unshaded_mat(color: Color) -> StandardMaterial3D:
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	mat.albedo_color = color
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if color.a < 1.0 else BaseMaterial3D.TRANSPARENCY_DISABLED
+	return mat
+
+func _setup_graph_mesh() -> void:
+	_graph_im = ImmediateMesh.new()
+	_graph_mi = MeshInstance3D.new()
+	_graph_mi.mesh = _graph_im
+	_graph_mat = _make_unshaded_mat(Color.WHITE)
+	_graph_mi.material_override = _graph_mat
+	_graph_mi.position = Vector3(0.0, 0.35, 0.0)
+	add_child(_graph_mi)
+
+func _setup_panel_meshes() -> void:
+	_panel_mis.clear()
+	_panel_ims.clear()
+	for p in range(MAX_PANELS):
+		var im := ImmediateMesh.new()
+		var mi := MeshInstance3D.new()
+		mi.mesh = im
+		mi.material_override = _make_unshaded_mat(Color.WHITE)
+		var x_offset := (float(p) - 1.5) * PANEL_SPACING
+		mi.position = Vector3(x_offset, -0.05, 0.0)
+		add_child(mi)
+		_panel_mis.append(mi)
+		_panel_ims.append(im)
+
+func _setup_chart_mesh() -> void:
+	_chart_im = ImmediateMesh.new()
+	_chart_mi = MeshInstance3D.new()
+	_chart_mi.mesh = _chart_im
+	_chart_mat = _make_unshaded_mat(Color.WHITE)
+	_chart_mi.material_override = _chart_mat
+	_chart_mi.position = Vector3(0.0, -0.32, 0.0)
+	add_child(_chart_mi)
+
+
+# ── Label setup ──────────────────────────────────────────────────────────
+
+func _make_label(pos: Vector3, font_sz: int) -> Label3D:
+	var lbl := Label3D.new()
+	lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	lbl.no_depth_test = true
+	lbl.font_size = font_sz
+	lbl.modulate = Color(0.95, 0.95, 0.97, 1.0)
+	lbl.outline_size = 4
+	lbl.outline_modulate = Color(0.05, 0.06, 0.09)
+	lbl.position = pos
+	add_child(lbl)
+	return lbl
+
+func _setup_labels() -> void:
+	_title_label = _make_label(Vector3(0, 0.62, 0), 28)
+	_metrics_label = _make_label(Vector3(0, 0.55, 0), 20)
+	_prob_label = _make_label(Vector3(0, -0.22, 0), 18)
+
+
+# ── Controller setup ─────────────────────────────────────────────────────
+
+func _make_ctrl(pname: String, lo: float, hi: float, val: float, step: float) -> ParameterController3D:
+	var ctrl := ParameterController3D.new()
+	ctrl.parameter_name = pname
+	ctrl.min_value = lo
+	ctrl.max_value = hi
+	ctrl.default_value = val
+	ctrl.step_size = step
+	add_child(ctrl)
+	return ctrl
+
+func _setup_controllers() -> void:
+	_vertex_ctrl = _make_ctrl("Vertices", 4.0, 12.0, float(_n), 1.0)
+	_vertex_ctrl.position = Vector3(-0.35, 0.0, 0.35)
+	_vertex_ctrl.value_changed.connect(_on_vertex_changed)
+
+	_density_ctrl = _make_ctrl("Edge density", 0.2, 0.8, _density, 0.05)
+	_density_ctrl.position = Vector3(-0.12, 0.0, 0.35)
+	_density_ctrl.value_changed.connect(_on_density_changed)
+
+	_speed_ctrl = _make_ctrl("Anim speed", 0.1, 1.5, _anim_speed, 0.1)
+	_speed_ctrl.position = Vector3(0.12, 0.0, 0.35)
+	_speed_ctrl.value_changed.connect(_on_speed_changed)
+
+	_panels_ctrl = _make_ctrl("Panels", 1.0, 4.0, float(_num_panels), 1.0)
+	_panels_ctrl.position = Vector3(0.35, 0.0, 0.35)
+	_panels_ctrl.value_changed.connect(_on_panels_changed)
+
+func _on_vertex_changed(val: float) -> void:
+	var new_n := clampi(int(val), 4, 12)
+	if new_n != _n:
+		_n = new_n
+		_rebuild_graph()
+
+func _on_density_changed(val: float) -> void:
+	_density = clampf(val, 0.2, 0.8)
+	_rebuild_graph()
+
+func _on_speed_changed(val: float) -> void:
+	_anim_speed = clampf(val, 0.1, 1.5)
+
+func _on_panels_changed(val: float) -> void:
+	_num_panels = clampi(int(val), 1, 4)
+	for p in range(MAX_PANELS):
+		_panel_mis[p].visible = p < _num_panels
+
+func _rebuild_graph() -> void:
+	_generate_graph()
+	_init_run_states()
+	_is_running = false
+	_sync_controllers()
+
+func _sync_controllers() -> void:
+	if _vertex_ctrl:
+		_vertex_ctrl.set_value(float(_n))
+	if _density_ctrl:
+		_density_ctrl.set_value(_density)
+	if _speed_ctrl:
+		_speed_ctrl.set_value(_anim_speed)
+	if _panels_ctrl:
+		_panels_ctrl.set_value(float(_num_panels))
+
+
+# ── Process loop ─────────────────────────────────────────────────────────
+
+func _process(delta: float) -> void:
+	if not _is_initialized:
+		return
+
+	_time += delta
+	_flash = maxf(_flash - delta * 2.0, 0.0)
+
+	if _is_running:
+		_anim_timer += delta
+		if _anim_timer >= _anim_speed:
+			_anim_timer -= _anim_speed
+			# Advance each panel one step
+			for p in range(_num_panels):
+				_step_run(_run_states[p])
+			_check_round_complete()
+	else:
+		# Auto-start next round
+		_auto_timer += delta
+		if _auto_timer >= _auto_interval:
+			_start_round()
+
+	_rebuild_graph_mesh()
+	_rebuild_panel_meshes()
+	_rebuild_chart_mesh()
+	_update_labels()
+
+
+# ── Rebuild main graph ───────────────────────────────────────────────────
+
+func _rebuild_graph_mesh() -> void:
+	_graph_im.clear_surfaces()
+
+	var half := bounding_size * 0.5
+
+	# Draw edges
+	_graph_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+	for ei in range(_edge_count):
+		var a := _edge_from[ei]
+		var b := _edge_to[ei]
+		var pa := _vertex_pos(a, 0.0, 0.0, GRAPH_RADIUS)
+		var pb := _vertex_pos(b, 0.0, 0.0, GRAPH_RADIUS)
+
+		var is_cut := false
+		for ci in _best_global_edges:
+			if ci == ei:
+				is_cut = true
+				break
+
+		var col: Color
+		if is_cut:
+			# Pulse cut edges
+			var pulse := 0.6 + 0.4 * sin(_time * 4.0)
+			col = COL_CUT.lerp(COL_BEST, pulse)
 		else:
-			start_algorithm()
-	elif event.is_action_pressed("ui_cancel"):
-		reset_algorithm()
+			col = COL_EDGE
 
-func stop_algorithm():
-	algorithm_running = false
-	update_operation_display()
+		_add_line_ribbon(_graph_im, pa, pb, EDGE_WIDTH, col)
+	_graph_im.surface_end()
 
-func reset_algorithm():
-	algorithm_running = false
-	algorithm_step = 0
-	iteration = 0
-	initialize_graph()
-	create_visual_elements()
-	update_operation_display()
+	# Draw vertices
+	_graph_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+	for v in range(_n):
+		var pos := _vertex_pos(v, 0.0, 0.0, GRAPH_RADIUS)
+		# Color by partition if we have a best cut
+		var col := COL_VERTEX
+		if _best_global_edges.size() > 0 and _run_states.size() > 0:
+			var state: Dictionary = _run_states[0] if _best_panel < 0 else _run_states[clampi(_best_panel, 0, _num_panels - 1)]
+			if state.done:
+				# Determine partition from the best run
+				var root0 := _uf_find(state.parent, 0)
+				var root_v := _uf_find(state.parent, v)
+				col = COL_VERTEX_A if root_v == root0 else COL_VERTEX_B
+		_add_sphere_approx(_graph_im, pos, VERTEX_RADIUS, col)
+	_graph_im.surface_end()
+
+
+# ── Rebuild panel meshes ─────────────────────────────────────────────────
+
+func _rebuild_panel_meshes() -> void:
+	for p in range(MAX_PANELS):
+		var im: ImmediateMesh = _panel_ims[p]
+		im.clear_surfaces()
+
+		if p >= _num_panels:
+			continue
+
+		var state: Dictionary = _run_states[p]
+		var panel_r := PANEL_SIZE * 0.4
+
+		# Panel background
+		im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		var bgc := COL_PANEL_BG
+		if state.done and state.cut_size == _best_global_cut:
+			bgc = Color(0.1, 0.2, 0.12, 0.6)  # green tint for best
+			if _flash > 0.0 and p == _best_panel:
+				bgc = bgc.lerp(Color(0.3, 0.6, 0.2, 0.8), _flash)
+		_add_quad(im, Vector3(-PANEL_SIZE * 0.5, -PANEL_SIZE * 0.45, 0.001),
+				  Vector3(PANEL_SIZE, 0.0, 0.0), Vector3(0.0, PANEL_SIZE * 0.75, 0.0), bgc)
+		im.surface_end()
+
+		# Draw edges
+		im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		for ei in range(_edge_count):
+			var a := _edge_from[ei]
+			var b := _edge_to[ei]
+			var pa := _vertex_pos(a, 0.0, 0.0, panel_r)
+			var pb := _vertex_pos(b, 0.0, 0.0, panel_r)
+
+			var ra := _uf_find(state.parent, a)
+			var rb := _uf_find(state.parent, b)
+
+			var col: Color
+			if state.done:
+				var is_cut := ra != rb
+				col = COL_CUT if is_cut else COL_EDGE.lerp(COL_VERTEX, 0.3)
+			else:
+				if ra == rb:
+					col = COL_CONTRACTED
+				else:
+					col = COL_EDGE
+			_add_line_ribbon(im, pa, pb, EDGE_WIDTH * 0.6, col)
+		im.surface_end()
+
+		# Draw vertices
+		im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		for v in range(_n):
+			var pos := _vertex_pos(v, 0.0, 0.0, panel_r)
+			var root := _uf_find(state.parent, v)
+			var col: Color
+			if state.done:
+				var root0 := _uf_find(state.parent, 0)
+				col = COL_VERTEX_A if root == root0 else COL_VERTEX_B
+			elif root != v:
+				col = COL_CONTRACTED.lerp(COL_VERTEX, 0.3)
+			else:
+				col = COL_VERTEX
+			_add_sphere_approx(im, pos, VERTEX_RADIUS * 0.7, col)
+		im.surface_end()
+
+		# Cut size label rendered as small boxes (digit encoding)
+		if state.done:
+			im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+			var cut_col := COL_BEST if state.cut_size == _best_global_cut else COL_CUT
+			# Small indicator bar proportional to cut size
+			var bar_w := clampf(float(state.cut_size) / float(maxi(_edge_count, 1)) * PANEL_SIZE * 0.8, 0.005, PANEL_SIZE * 0.8)
+			_add_quad(im, Vector3(-bar_w * 0.5, -PANEL_SIZE * 0.42, 0.0),
+					  Vector3(bar_w, 0.0, 0.0), Vector3(0.0, 0.015, 0.0), cut_col)
+			im.surface_end()
+
+
+# ── Rebuild chart (probability amplification) ────────────────────────────
+
+func _rebuild_chart_mesh() -> void:
+	_chart_im.clear_surfaces()
+
+	var chart_w := bounding_size * 0.8
+	var chart_h := 0.12
+	var base_x := -chart_w * 0.5
+	var base_y := 0.0
+
+	# Background
+	_chart_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+	_add_quad(_chart_im, Vector3(base_x - 0.01, base_y - 0.01, 0.001),
+			  Vector3(chart_w + 0.02, 0.0, 0.0), Vector3(0.0, chart_h + 0.02, 0.0), COL_CHART_BG)
+	_chart_im.surface_end()
+
+	if _prob_history.size() < 2:
+		return
+
+	# Probability bars
+	_chart_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+	var bar_count := _prob_history.size()
+	var bar_w := chart_w / float(bar_count)
+
+	for i in range(bar_count):
+		var prob := _prob_history[i]
+		var bx := base_x + float(i) * bar_w
+		var bh := prob * chart_h
+		_add_quad(_chart_im, Vector3(bx + bar_w * 0.1, base_y, 0.0),
+				  Vector3(bar_w * 0.8, 0.0, 0.0), Vector3(0.0, bh, 0.0), COL_CHART_BAR)
+
+	# Theoretical line: P(success per run) = 2/(n*(n-1)), amplified over k runs
+	# P(fail all k) = (1 - 2/(n*(n-1)))^k → P(at least one) = 1 - (1-p)^k
+	var p_single := 2.0 / float(_n * (_n - 1)) if _n > 1 else 1.0
+	for i in range(bar_count):
+		var k := float((i + 1) * _num_panels)
+		var p_amp := 1.0 - pow(1.0 - p_single, k)
+		var bx := base_x + float(i) * bar_w + bar_w * 0.4
+		var bh := clampf(p_amp, 0.0, 1.0) * chart_h
+		_add_quad(_chart_im, Vector3(bx, base_y, -0.001),
+				  Vector3(bar_w * 0.2, 0.0, 0.0), Vector3(0.0, bh, 0.0), COL_CHART_THEORY)
+
+	_chart_im.surface_end()
+
+
+# ── Update labels ────────────────────────────────────────────────────────
+
+func _update_labels() -> void:
+	if _title_label:
+		_title_label.text = "Karger's Min-Cut — Parallel Runs"
+
+	if _metrics_label:
+		var status := "running..." if _is_running else "idle"
+		_metrics_label.text = "n=%d  edges=%d | round %d | best cut=%s | %s" % [
+			_n, _edge_count, _round,
+			str(_best_global_cut) if _best_global_cut < 999 else "?",
+			status
+		]
+
+	if _prob_label:
+		var p_single := 2.0 / float(_n * (_n - 1)) if _n > 1 else 1.0
+		var p_amp := 1.0 - pow(1.0 - p_single, float(maxi(_total_runs, 1)))
+		var obs_rate := float(_success_count) / float(maxi(_total_runs, 1)) * 100.0 if _total_runs > 0 else 0.0
+		_prob_label.text = "P(single)=%.1f%%  P(amp/%d runs)=%.1f%%  observed=%.0f%%" % [
+			p_single * 100.0, _total_runs, p_amp * 100.0, obs_rate
+		]
+		# Color by observed success
+		if obs_rate > 50.0:
+			_prob_label.modulate = Color(0.3, 0.95, 0.5)
+		elif obs_rate > 20.0:
+			_prob_label.modulate = Color(0.95, 0.9, 0.3)
+		else:
+			_prob_label.modulate = Color(0.95, 0.95, 0.97)
+
+
+# ── Geometry helpers ─────────────────────────────────────────────────────
+
+func _add_quad(im: ImmediateMesh, origin: Vector3, right: Vector3, up: Vector3, col: Color) -> void:
+	var a := origin
+	var b := origin + right
+	var c := origin + right + up
+	var d := origin + up
+	im.surface_set_color(col)
+	im.surface_add_vertex(a)
+	im.surface_set_color(col)
+	im.surface_add_vertex(b)
+	im.surface_set_color(col)
+	im.surface_add_vertex(c)
+	im.surface_set_color(col)
+	im.surface_add_vertex(a)
+	im.surface_set_color(col)
+	im.surface_add_vertex(c)
+	im.surface_set_color(col)
+	im.surface_add_vertex(d)
+
+func _add_line_ribbon(im: ImmediateMesh, a: Vector3, b: Vector3, width: float, col: Color) -> void:
+	# Flat ribbon in XZ plane
+	var dir := (b - a).normalized()
+	var perp := Vector3(-dir.z, 0.0, dir.x) * width * 0.5
+	if perp.length_squared() < 0.0001:
+		perp = Vector3(width * 0.5, 0.0, 0.0)
+	var v0 := a + perp
+	var v1 := a - perp
+	var v2 := b - perp
+	var v3 := b + perp
+	im.surface_set_color(col)
+	im.surface_add_vertex(v0)
+	im.surface_set_color(col)
+	im.surface_add_vertex(v1)
+	im.surface_set_color(col)
+	im.surface_add_vertex(v2)
+	im.surface_set_color(col)
+	im.surface_add_vertex(v0)
+	im.surface_set_color(col)
+	im.surface_add_vertex(v2)
+	im.surface_set_color(col)
+	im.surface_add_vertex(v3)
+
+func _add_sphere_approx(im: ImmediateMesh, center: Vector3, radius: float, col: Color, segments: int = 6) -> void:
+	var rings := segments
+	var slices := segments * 2
+	for ring in range(rings):
+		var theta0 := PI * float(ring) / float(rings)
+		var theta1 := PI * float(ring + 1) / float(rings)
+		var st0 := sin(theta0)
+		var ct0 := cos(theta0)
+		var st1 := sin(theta1)
+		var ct1 := cos(theta1)
+		for sl in range(slices):
+			var phi0 := TAU * float(sl) / float(slices)
+			var phi1 := TAU * float(sl + 1) / float(slices)
+			var sp0 := sin(phi0)
+			var cp0 := cos(phi0)
+			var sp1 := sin(phi1)
+			var cp1 := cos(phi1)
+
+			var p00 := center + Vector3(st0 * cp0, ct0, st0 * sp0) * radius
+			var p01 := center + Vector3(st0 * cp1, ct0, st0 * sp1) * radius
+			var p10 := center + Vector3(st1 * cp0, ct1, st1 * sp0) * radius
+			var p11 := center + Vector3(st1 * cp1, ct1, st1 * sp1) * radius
+
+			im.surface_set_color(col)
+			im.surface_add_vertex(p00)
+			im.surface_set_color(col)
+			im.surface_add_vertex(p10)
+			im.surface_set_color(col)
+			im.surface_add_vertex(p11)
+			im.surface_set_color(col)
+			im.surface_add_vertex(p00)
+			im.surface_set_color(col)
+			im.surface_add_vertex(p11)
+			im.surface_set_color(col)
+			im.surface_add_vertex(p01)
+
+
+# ── apply_grid_config ────────────────────────────────────────────────────
+
+func apply_grid_config(config: Dictionary) -> void:
+	if config.has("vertex_count"):
+		var vc := clampi(int(config.vertex_count), 4, 12)
+		if vc != _n:
+			_n = vc
+			_rebuild_graph()
+	if config.has("edge_density"):
+		_density = clampf(float(config.edge_density), 0.2, 0.8)
+		_rebuild_graph()
+	if config.has("anim_speed"):
+		_anim_speed = clampf(float(config.anim_speed), 0.1, 1.5)
+	if config.has("panels"):
+		_num_panels = clampi(int(config.panels), 1, 4)
+		for p in range(MAX_PANELS):
+			_panel_mis[p].visible = p < _num_panels
+	_sync_controllers()
+
+
+# ── Algorithm info ───────────────────────────────────────────────────────
 
 func get_algorithm_info() -> Dictionary:
+	var p_single := 2.0 / float(_n * (_n - 1)) if _n > 1 else 1.0
 	return {
 		"name": "Karger's Algorithm",
-		"description": "Randomized algorithm for finding minimum cut",
-		"time_complexity": "O(VÂ²) per iteration",
+		"description": "Randomized contraction algorithm for minimum cut with parallel runs",
+		"time_complexity": "O(V² per run, n²·log(n) runs for high probability)",
 		"space_complexity": "O(V + E)",
-		"min_cut_size": min_cut_size,
-		"current_iteration": iteration,
-		"success_probability": 2.0 / (vertices.size() * (vertices.size() - 1))
+		"min_cut_size": _best_global_cut if _best_global_cut < 999 else -1,
+		"total_runs": _total_runs,
+		"success_probability_single": p_single,
+		"success_probability_amplified": 1.0 - pow(1.0 - p_single, float(maxi(_total_runs, 1))),
 	}

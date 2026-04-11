@@ -1,0 +1,258 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 8,
+				"name": "remove_random",
+				"pos": [
+					6,
+					1,
+					7
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 10,
+				"name": "dark_sphere",
+				"pos": [
+					5,
+					1,
+					8
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 11,
+				"name": "hazards_demo",
+				"pos": [
+					5,
+					1,
+					9
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [],
+		"issues": [],
+		"map_name": "Random_Remove",
+		"pacing": {
+			"density": 3.66666666666667,
+			"reachable_artifacts": 3,
+			"total_artifacts": 3,
+			"walkable_tiles": 207
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			11,
+			0,
+			4
+		],
+		"teleporter": {
+			"dist": 10,
+			"pos": [
+				1,
+				0,
+				4
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Random_Remove",
+	"sequence": "randomness",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "remove_random",
+				"pos": [
+					6,
+					1,
+					7
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					5,
+					1,
+					8
+				]
+			},
+			{
+				"name": "hazards_demo",
+				"pos": [
+					5,
+					1,
+					9
+				]
+			}
+		],
+		"dimensions": [
+			12,
+			2,
+			24
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 206,
+			"ground_pct": 71.5277777777778,
+			"void": 78,
+			"walls": 4
+		},
+		"map_name": "Random_Remove",
+		"rooms": [
+			{
+				"artifacts": [
+					"remove_random",
+					"dark_sphere",
+					"hazards_demo"
+				],
+				"label": "A",
+				"region": "north",
+				"tiles": 206
+			}
+		],
+		"spawn": [
+			11,
+			0,
+			4
+		],
+		"teleporter": [
+			1,
+			0,
+			4
+		]
+	},
+	"timestamp": "2026-03-16T12:13:34",
+	"walkthrough": {
+		"map_name": "Random_Remove",
+		"stops": [
+			{
+				"facing": "southwest",
+				"look_at": [
+					6,
+					1,
+					7
+				],
+				"pos": [
+					11,
+					0,
+					4
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southwest",
+						"dist": 8,
+						"name": "remove_random"
+					},
+					{
+						"direction": "southwest",
+						"dist": 10,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southwest",
+						"dist": 11,
+						"name": "hazards_demo"
+					}
+				]
+			},
+			{
+				"approach_from": "southwest",
+				"facing": "southwest",
+				"name": "remove_random",
+				"pos": [
+					6,
+					1,
+					7
+				],
+				"steps_from_prev": 8,
+				"total_steps": 8,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "southwest",
+						"dist": 2,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southwest",
+						"dist": 3,
+						"name": "hazards_demo"
+					}
+				]
+			},
+			{
+				"approach_from": "southwest",
+				"facing": "south",
+				"name": "dark_sphere",
+				"pos": [
+					5,
+					1,
+					8
+				],
+				"steps_from_prev": 2,
+				"total_steps": 10,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "south",
+						"dist": 1,
+						"name": "hazards_demo"
+					},
+					{
+						"direction": "northeast",
+						"dist": 2,
+						"name": "remove_random"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "northwest",
+				"name": "hazards_demo",
+				"pos": [
+					5,
+					1,
+					9
+				],
+				"steps_from_prev": 1,
+				"total_steps": 11,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 1,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "remove_random"
+					}
+				]
+			},
+			{
+				"approach_from": "northwest",
+				"pos": [
+					1,
+					0,
+					4
+				],
+				"reachable": true,
+				"steps_from_prev": 0,
+				"total_steps": 11,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 3,
+			"total_steps": 11,
+			"total_stops": 5
+		}
+	}
+}

@@ -19,11 +19,13 @@ enum JackType { OUTPUT, INPUT }
 
 var connected_plug: Node3D = null
 var is_connected: bool = false
+var level: float = 1.0  ## 0.0–1.0 attenuation, controlled by level slider
+var level_slider: Node3D = null  ## Reference to the attached slider_smooth instance
 
-@onready var socket_area: Area3D = $SocketArea
-@onready var socket_mesh: MeshInstance3D = $SocketMesh
-@onready var ring_mesh: MeshInstance3D = $RingMesh
-@onready var glow_light: OmniLight3D = $GlowLight if has_node("GlowLight") else null
+var socket_area: Area3D = null
+var socket_mesh: MeshInstance3D = null
+var ring_mesh: MeshInstance3D = null
+var glow_light: OmniLight3D = null
 
 
 func _ready():
@@ -79,15 +81,9 @@ func _setup_visuals():
 	else:
 		ring_mat.albedo_color = ring_color.lerp(Color(0.9, 0.5, 0.2), 0.3)
 	
-	# Label
-	var label = Label3D.new()
-	label.name = "ParamLabel"
-	label.text = parameter_name.to_upper() if parameter_name else ("OUT" if jack_type == JackType.OUTPUT else "IN")
-	label.font_size = 24
-	label.pixel_size = 0.0005
-	label.position = Vector3(0, socket_radius + 0.015, 0.005)
-	label.modulate = Color(0.7, 0.7, 0.7)
-	add_child(label)
+	# Type indicator dot (no built-in label — EurorackModule adds its own short label)
+	# Only add a tiny "O"/"I" if no external label is expected
+	pass
 
 
 func _setup_detection():

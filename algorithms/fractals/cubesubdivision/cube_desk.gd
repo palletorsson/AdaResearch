@@ -4,6 +4,16 @@ extends Node3D
 # Demonstrates hierarchical subdivision: table form + drawer grid
 # Shows how functional complexity emerges from recursive structure
 
+# @identity
+# essence: desk = table_form + grid_subdivide(drawer_unit, rows * cols), nested subdivision hierarchy
+# desire: To be used — drawers that emerged from subdividing a box within a box, functional complexity from recursive cuts
+# critical_parameter: drawer_rows * drawer_cols — the grid resolution of the drawer unit determines storage granularity
+# triggers: Construction sequence: desktop -> legs -> drawer frame -> individual drawers with handles -> details
+# emerges: Cable management holes and accent strips appear as final-step details — the desk develops personality
+# needs: VR drawer-open interaction [missing], construction speed control [missing]
+# relationships: Most complex cube-subdivision furniture; builds on recursive_table by adding nested second-level subdivision
+# truth: A desk is a table that subdivided one of its own volumes into a grid — recursion within recursion.
+
 @export var desk_size: float = 2.0
 @export var drawer_rows: int = 2
 @export var drawer_cols: int = 3
@@ -22,14 +32,14 @@ var step: int = 0
 var timer: float = 0.0
 var is_constructing: bool = false
 
-func _ready():
+func _ready() -> void:
 	if show_construction:
 		is_constructing = true
 		step = 0
 	else:
 		_build_instant()
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_constructing:
 		return
 
@@ -39,7 +49,7 @@ func _process(delta: float):
 		_execute_step(step)
 		step += 1
 
-func _execute_step(s: int):
+func _execute_step(s: int) -> void:
 	var total_steps = 5 + drawer_rows * drawer_cols
 	if s == 0:
 		_step_desktop()
@@ -60,7 +70,7 @@ func _execute_step(s: int):
 		is_constructing = false
 		print("Desk complete! %d parts" % all_parts.size())
 
-func _build_instant():
+func _build_instant() -> void:
 	_step_desktop()
 	_step_legs()
 	_step_drawer_frame()
@@ -70,7 +80,7 @@ func _build_instant():
 			_step_single_drawer(row, col)
 	_step_details()
 
-func _step_desktop():
+func _step_desktop() -> void:
 	# Main work surface
 	var top_thickness = desk_size * 0.04
 	var desk_height = desk_size * 0.4
@@ -84,7 +94,7 @@ func _step_desktop():
 	)
 	print("Step: Desktop surface")
 
-func _step_legs():
+func _step_legs() -> void:
 	var leg_thickness = desk_size * 0.04
 	var desk_height = desk_size * 0.4 - desk_size * 0.02
 	var desk_width = desk_size * 1.2
@@ -105,7 +115,7 @@ func _step_legs():
 
 	print("Step: Legs")
 
-func _step_drawer_frame():
+func _step_drawer_frame() -> void:
 	# Frame that holds the drawers (left side of desk)
 	var frame_thickness = desk_size * 0.02
 	var drawer_unit_width = desk_size * 0.5
@@ -150,7 +160,7 @@ func _step_drawer_frame():
 
 	print("Step: Drawer frame")
 
-func _step_back_panel():
+func _step_back_panel() -> void:
 	var desk_height = desk_size * 0.4
 	var desk_width = desk_size * 1.2
 	var desk_depth = desk_size * 0.6
@@ -163,7 +173,7 @@ func _step_back_panel():
 	)
 	print("Step: Back panel")
 
-func _step_single_drawer(row: int, col: int):
+func _step_single_drawer(row: int, col: int) -> void:
 	var drawer_unit_width = desk_size * 0.5
 	var drawer_unit_height = desk_size * 0.35
 	var drawer_unit_depth = desk_size * 0.55
@@ -203,7 +213,7 @@ func _step_single_drawer(row: int, col: int):
 
 	print("Step: Drawer [%d,%d]" % [row, col])
 
-func _step_details():
+func _step_details() -> void:
 	var desk_height = desk_size * 0.4
 	var desk_width = desk_size * 1.2
 
@@ -223,7 +233,7 @@ func _step_details():
 
 	print("Step: Details")
 
-func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String):
+func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String) -> void:
 	var mesh_instance := MeshInstance3D.new()
 	var box := BoxMesh.new()
 	box.size = size
@@ -240,7 +250,7 @@ func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String):
 	add_child(mesh_instance)
 	all_parts.append(mesh_instance)
 
-func reset():
+func reset() -> void:
 	for part in all_parts:
 		if is_instance_valid(part):
 			part.queue_free()
@@ -252,3 +262,12 @@ func reset():
 		is_constructing = true
 	else:
 		_build_instant()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

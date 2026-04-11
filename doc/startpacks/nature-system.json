@@ -1,0 +1,184 @@
+{
+  "query": "Nature System",
+  "matched_topic": "nature_system",
+  "pack_slug": "nature-system",
+  "title": "Nature System",
+  "category": "nature",
+  "tags": [
+    "nature",
+    "critters",
+    "dna",
+    "morphology",
+    "simulation"
+  ],
+  "overview": "The nature system is a critter-based Q-FEP simulation layer spanning DNA, morphology, evolution, transmutation, and map-level nature painting.",
+  "read_first": [
+    {
+      "path": "doc/NATURE_SYSTEM_PLAN.md",
+      "reason": "Main design contract for the system.",
+      "exists": true
+    },
+    {
+      "path": "algorithms/nature_system/README.md",
+      "reason": "Code-level entry point for the implemented nature system folder.",
+      "exists": true
+    },
+    {
+      "path": "algorithms/nature_system/demo/nature_system_demo.gd",
+      "reason": "Runnable demo surface tying the subsystems together.",
+      "exists": true
+    },
+    {
+      "path": "algorithms/nature_system/dna/critter_dna.gd",
+      "reason": "Core data structure for critter morphology and behavior.",
+      "exists": true
+    },
+    {
+      "path": "algorithms/nature_system/morphology/flower_morphology.gd",
+      "reason": "Starting point for flower shape generation.",
+      "exists": true
+    },
+    {
+      "path": "algorithms/nature_system/systems/transmutation_manager.gd",
+      "reason": "Relationship and state transformation logic.",
+      "exists": true
+    },
+    {
+      "path": "commons/artifacts/registry/nature_system.json",
+      "reason": "Registry truth for the demo artifact and current map-readiness state.",
+      "exists": true
+    }
+  ],
+  "principles": [],
+  "constraints": [
+    "The design principle is transmutation across a spectrum, not fixed friend/enemy categories.",
+    "The demo artifact is registered but currently marked map_ready=false.",
+    "The system spans all four kingdoms: tree, creature, flower, fungus."
+  ],
+  "first_moves": [
+    "Choose whether the work is DNA-level, morphology-level, or map authoring before editing.",
+    "If the goal is a new system behavior, start in algorithms/nature_system/systems/.",
+    "If the goal is a new visible organism, start in morphology plus registry/demo wiring."
+  ],
+  "deepwiki_url": "https://deepwiki.com/palletorsson/AdaResearch",
+  "deepwiki_topics": [
+    "Overview",
+    "Artifact Registry System",
+    "Map & Content Definition"
+  ],
+  "encyclopedia": [
+    {
+      "label": "Nature layer persistence API",
+      "route": "",
+      "source": "src/app/api/game/save-nature-layer/route.ts",
+      "reason": "Writes and reads nature_layer.json per map.",
+      "exists": true
+    },
+    {
+      "label": "Project context store",
+      "route": "",
+      "source": "src/app/api/context/route.ts",
+      "reason": "Good place to persist derived patterns and nature formulas.",
+      "exists": true
+    }
+  ],
+  "history_hits": [
+    {
+      "path": "doc/sessions/2026-03-23-continued-session.md",
+      "snippet": "# Garden Session — 2026-03-19",
+      "score": "5"
+    },
+    {
+      "path": "doc/sessions/2026-03-19-garden-session-summary.md",
+      "snippet": "# Garden Session — 2026-03-19",
+      "score": "4"
+    },
+    {
+      "path": "doc/SESSION_HANDOFF_2026-03-28.md",
+      "snippet": "Over six days, this session built the Naples-to-VR pipeline end-to-end: 42 procedural floor patterns from MANN museum photos, 27 facade presets from Italian buildings, 23 museum maps with floor plans, a floor plan editor",
+      "score": "2"
+    }
+  ],
+  "doc_hits": [
+    {
+      "path": "doc/NATURE_SYSTEM_PLAN.md",
+      "snippet": "# Ada Research 46 — Nature System Plan",
+      "score": "10"
+    },
+    {
+      "path": "doc/FOLDING_CREATURE_SYSTEM.md",
+      "snippet": "# Folding Creature System — Design Document v2.1",
+      "score": "9"
+    },
+    {
+      "path": "doc/LOD_TREE.json",
+      "snippet": "\"generated\": \"lod_tree_generator.py\",",
+      "score": "9"
+    },
+    {
+      "path": "docs/noc_vr_translation_plan.md",
+      "snippet": "# Nature of Code VR Translation Plan",
+      "score": "7"
+    },
+    {
+      "path": "docs/design/ECOSYSTEM_TRAJECTORY_RAPPORT.md",
+      "snippet": "# Ecosystem Trajectory Rapport",
+      "score": "6"
+    },
+    {
+      "path": "docs/progress/progress_log.md",
+      "snippet": "# Nature of Code VR Progress Log",
+      "score": "6"
+    }
+  ],
+  "repo_hits": [
+    "algorithms/nature_system/dna/critter_dna.gd",
+    "algorithms/nature_system/dna/critter_dna.gd.uid",
+    "algorithms/nature_system/dna/critter_trait_mapper.gd",
+    "algorithms/nature_system/dna/critter_trait_mapper.gd.uid",
+    "algorithms/nature_system/shaders/critter_dna.gdshader",
+    "algorithms/nature_system/shaders/critter_dna.gdshader.uid",
+    "algorithms/nature_system/dna/README.md",
+    "algorithms/nature_system/entities/critter_entity.gd"
+  ],
+  "grounded_wiki": {
+    "project_slug": "adaresearch-case-study",
+    "points": [],
+    "claims": [],
+    "turns": [
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 411,
+        "role": "assistant",
+        "text": "Great research. Here's what stands out - the nature system has a full **DNA -> morphology pipeline** (`CritterDNA` -> `TreeMorphology`, `FlowerMorphology`, `FungusMorphology`, `CreatureMorphology`) but **zero interactive artifacts** exposing it to players. That's the gap. ## Top 3 Artifacts for the L-Systems Sequence #..."
+      },
+      {
+        "session_id": "531f69cf-2ddc-41b2-9bdb-3d1a36046289",
+        "turn_index": 495,
+        "role": "assistant",
+        "text": "The background capture agent for body progression maps couldn't get Bash permissions, but the flower system agent already successfully captured botanical flower images and copied them to the encyclopedia. All three major systems are now complete with blog posts and images. Here's the final tally of everything built thi..."
+      },
+      {
+        "session_id": "531f69cf-2ddc-41b2-9bdb-3d1a36046289",
+        "turn_index": 498,
+        "role": "assistant",
+        "text": "...s session are all in place: Everything is in place. Let me also check the encyclopedia for blog posts and flower sequence: One missing map: `Flower_Water`. Let me create it quickly, then we can look at the full change summary: Now let me get a full picture of everything to commit across both repos: This is a massive se..."
+      },
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 412,
+        "role": "user",
+        "text": "yes and a new catalyst brunching gun for a special tree?"
+      }
+    ]
+  },
+  "trust_order": [
+    "repo files",
+    "doc/ and docs/ contracts",
+    "session handoffs and session summaries",
+    "grounded wiki chat points and turns",
+    "encyclopedia routes and source files",
+    "DeepWiki overview"
+  ],
+  "generated_at": "2026-04-04T11:51:06+00:00"
+}

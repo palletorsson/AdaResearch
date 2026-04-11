@@ -1,0 +1,1 @@
+Four islands arranged in a clockwise circuit, each built around a different force system. Attractors and gravitational fields on one, vector fields and superposition on another, springs and oscillators on the third, particle systems on the fourth. Jump pads connect the loop. Each island shows a different way that forces organize matter over time.

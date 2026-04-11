@@ -1,45 +1,45 @@
 {
   "map_info": {
-    "name": "TestMap_Unused_20",
-    "lookup_name": "TestMap_Unused_20",
-    "description": "Test map for artifacts: random_walk_128, random_walk_collection, random_walk_grab_paper, randomize_cubes_over_Z",
-    "dimensions": {
-      "width": 5,
-      "depth": 5,
-      "max_height": 3
-    }
+      "name": "TestMap_Unused_20",
+      "lookup_name": "TestMap_Unused_20",
+      "description": "Test map for artifacts: random_walk_128, random_walk_collection, random_walk_grab_paper, randomize_cubes_over_Z",
+      "dimensions": {
+          "width": 5,
+          "depth": 5,
+          "max_height": 3
+      }
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next Lesson",
+          "description": "Continue to the next algorithm demonstration",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
   },
   "layers": {
     "structure": [
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ]
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "0", "1", "1"]
     ],
     "utilities": [
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", "s", " ", " " ],
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", "t", " ", " " ]
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", "s", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", "t", " ", " "]
     ],
     "interactables": [
-      [ " ", " ", " ", " ", " " ],
-      [ " ", "random_walk_128:0:2", " ", "random_walk_collection:0:2", " " ],
-      [ " ", " ", " ", " ", " " ],
-      [ " ", "random_walk_grab_paper:0:2", " ", "randomize_cubes_over_Z:0:2", " " ],
-      [ " ", " ", " ", " ", " " ]
+      [" ", " ", " ", " ", " "],
+      [" ", "random_walk_128:0:2", " ", "random_walk_collection:0:2", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", "random_walk_grab_paper:0:2", " ", "randomize_cubes_over_Z:0:2", " "],
+      [" ", " ", " ", " ", " "]
     ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next Lesson",
-      "description": "Continue to the next algorithm demonstration",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
   }
 }

@@ -93,4 +93,4 @@ Look up at clouds drifting overhead. They form, shift, and dissipate naturally. 
 
 - `noiselayers/` — Terrain from layered noise
 - `noisesphere/` — Spherical noise
-- `effects/` — Other atmospheric effects
+- `postprocessing/` — Other atmospheric effects

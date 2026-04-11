@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: v_i(t+1) = ω·v_i(t) + c1·r1·(pbest_i - x_i) + c2·r2·(gbest - x_i) — velocity is nostalgia plus social pressure plus momentum
+# desire: to watch particles swarm a multi-peaked landscape and see them settle into the global maximum without any single particle understanding what "global" means
+# critical_parameter: inertia_weight (ω, oscillating 0.5–0.9) — high inertia keeps particles exploring wildly; low inertia causes premature convergence on a local peak
+# triggers: when the landscape's central peak is globally best, all particles eventually abandon personal bests to converge on the center — a visible collective capitulation
+# emerges: temporary sub-swarms that cluster around local peaks before the global best signal pulls them away — visible competition between exploitation and exploration
+# needs: [missing] no VR sliders for inertia, cognitive_coefficient, or social_coefficient; InertiaWeight and SwarmConvergence nodes are visual indicators only, not interactive
+# relationships: contrasts with AntColonyOptimization (pheromone trail vs. velocity memory); shares optimization objective with gradient_descent_landscape but without gradients; unlocks understanding of hyperparameter tuning in machinelearning
+# truth: remembering where you were best is not enough — you also need to know where the group was best; all optimization is a negotiation between self and collective
+
 var time = 0.0
 var particles = []
 var landscape_nodes = []
@@ -21,18 +31,18 @@ class PSOParticle:
 	var personal_best_fitness: float
 	var visual_object: CSGSphere3D
 	
-	func _init(start_pos: Vector2):
+	func _init(start_pos: Vector2) -> void:
 		position = start_pos
 		velocity = Vector2(randf() * 2 - 1, randf() * 2 - 1)
 		personal_best_position = start_pos
 		personal_best_fitness = -INF
 
-func _ready():
+func _ready() -> void:
 	create_fitness_landscape()
 	create_particles()
 	setup_materials()
 
-func create_fitness_landscape():
+func create_fitness_landscape() -> void:
 	var landscape_parent = $FitnessLandscape
 	
 	for x in range(landscape_size):
@@ -49,7 +59,7 @@ func create_fitness_landscape():
 			landscape_parent.add_child(landscape_point)
 			landscape_nodes[x].append(landscape_point)
 
-func create_particles():
+func create_particles() -> void:
 	var particle_parent = $Particles
 	
 	for i in range(particle_count):
@@ -69,7 +79,7 @@ func create_particles():
 		
 		particles.append(particle)
 
-func setup_materials():
+func setup_materials() -> void:
 	# Landscape materials (height-based coloring)
 	for x in range(landscape_size):
 		for y in range(landscape_size):
@@ -117,7 +127,7 @@ func setup_materials():
 	convergence_material.emission = Color(0.05, 0.3, 0.2, 1.0)
 	$SwarmConvergence.material_override = convergence_material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Update PSO parameters
@@ -127,7 +137,7 @@ func _process(delta):
 	animate_swarm()
 	animate_indicators()
 
-func update_particles(delta):
+func update_particles(delta) -> void:
 	# Update each particle
 	for particle in particles:
 		# Calculate fitness
@@ -188,7 +198,7 @@ func fitness_function(pos: Vector2) -> float:
 	
 	return f1 + f2 + f3 + f4 + noise
 
-func animate_swarm():
+func animate_swarm() -> void:
 	# Animate particles
 	for i in range(particles.size()):
 		var particle = particles[i]
@@ -219,7 +229,7 @@ func animate_swarm():
 			var wave = sin(time * 3.0 + x * 0.2 + y * 0.3) * 0.05
 			point.position.z += wave
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Inertia weight indicator
 	var inertia_height = inertia_weight * 2.0 + 0.5
 	$InertiaWeight.height = inertia_height
@@ -259,3 +269,12 @@ func get_optimization_info() -> Dictionary:
 		"inertia_weight": inertia_weight,
 		"particle_count": particle_count
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

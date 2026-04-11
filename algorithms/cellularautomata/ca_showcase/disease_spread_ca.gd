@@ -1,12 +1,23 @@
 ﻿# DiseaseSpreadCA.gd
 # Epidemic spread model (SIR)
+#
+# @identity
+# essence: S → I with P(infection) * infected_neighbors; I → R with P(recovery) — the SIR model on a 3D grid
+# desire: To spread — watch infection ripple outward from patient zero, then the green wave of recovery follow
+# critical_parameter: INFECTION_RATE vs RECOVERY_RATE — their ratio determines whether the epidemic burns out or persists
+# triggers: High infection rate → explosive spread; high recovery → quick burnout; few initial infected → slow simmer
+# emerges: Epidemic wavefronts, herd immunity boundaries, and spatial clustering from two probabilities
+# needs: VR rate sliders [missing], reset button [missing], SIR count display [has via get_disease_counts]
+# relationships: Feeds into CA_EdgeOfChaos. Extends PulsingCA (pulsing spheres for visual drama).
+# truth: Two probabilities and a grid of neighbors — this is how pandemics actually work.
+
 extends PulsingCA
 
 const INFECTION_RATE = 0.2
 const RECOVERY_RATE = 0.1
 const INITIAL_INFECTED = 5
 
-func initialize_grid():
+func initialize_grid() -> void:
 	# Configure PulsingCA settings
 	pulse_speed = 3.0
 	pulse_amount = 0.2
@@ -30,11 +41,11 @@ func initialize_grid():
 		var z = randi() % GRID_SIZE
 		grid[x][y][z] = 1  # Infected
 
-func update_simulation(_delta):
+func update_simulation(_delta) -> void:
 	spread_disease()
 	update_visualization()
 
-func spread_disease():
+func spread_disease() -> void:
 	var new_grid = duplicate_3d_grid(grid)
 	
 	for x in range(GRID_SIZE):
@@ -64,7 +75,7 @@ func count_infected_neighbors(pos: Vector3i) -> int:
 			count += 1
 	return count
 
-func update_visualization():
+func update_visualization() -> void:
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
 		return
 		
@@ -115,7 +126,10 @@ func get_disease_counts() -> Dictionary:
 	
 	return {"susceptible": susceptible, "infected": infected, "recovered": recovered}
 
-func reset_simulation():
+func reset_simulation() -> void:
 	grid = create_3d_grid()
 	initialize_grid()
 	iteration_count = 0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

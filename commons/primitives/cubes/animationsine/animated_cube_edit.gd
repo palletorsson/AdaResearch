@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: SurfaceTool.commit(vertices[handle.position for handle in 8_corners]) — a cube whose 8 vertices are VR-grabbable spheres; drag any corner and the mesh rebuilds in real time
+# desire: to grab a corner of the cube in VR and pull it — to deform a perfect box into a skewed parallelepiped and feel topology resist while geometry yields
+# critical_parameter: handle positions — the 8 Vector3 corners that define the cube; moving any one rebuilds the entire mesh via _rebuild_cube() with recomputed face normals
+# triggers: _process checks _handles_changed() every frame; if any grab_sphere_point moved, the SurfaceTool regenerates all 12 triangles with fresh normals; grid shader applied for wireframe visualization
+# emerges: because all 8 handles are independent, the cube can become any convex hexahedron — shear, stretch, collapse — making the Cartesian coordinate system feel like soft clay
+# needs: [has] 8 grab_sphere_point handles (VR-grabbable RigidBody3D); [missing] no slider_horizontal or push_button — interaction is direct spatial manipulation
+# relationships: used in F11_Comparison alongside static cube_scene to demonstrate animated vs static geometry; the editable counterpart to the rigid cube_scene primitive
+# truth: a cube is not a shape — it is eight agreements about where corners should be, and VR lets you break those agreements one vertex at a time
+
 const HANDLE_SCENE := preload("res://commons/primitives/point/grab_sphere_point.tscn")
 const HANDLE_ORDER := [
 	"back_bottom_left",

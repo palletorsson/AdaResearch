@@ -19,6 +19,9 @@ extends RefCounted
 
 # Mode colors for visual identity (used by bracelet gems, labels, etc.)
 const MODE_COLORS := {
+	"off":            Color(0.3, 0.3, 0.3),
+	"voxel_editor":   Color(0.3, 0.7, 1.0),
+	"wedge_placer":   Color(0.85, 0.55, 0.2),
 	"primitives":     Color(0.85, 0.85, 0.9),
 	"transformation": Color(0.7, 0.3, 0.85),
 	"chromatic":      Color(1.0, 0.4, 0.4),
@@ -33,6 +36,7 @@ const MODE_COLORS := {
 
 # Mode order values for determining the highest unlocked mode
 const MODE_ORDER := {
+	"voxel_editor": 0,
 	"primitives": 1,
 	"transformation": 2,
 	"chromatic": 3,
@@ -128,25 +132,40 @@ static func _add(parent: Node3D, node: Node3D) -> void:
 
 
 # ═════════════════════════════════════════════════════════════════════════
-# 1. PRIMITIVES — Clean faceted octahedron. Pure geometric form.
-#    The starting crystal. Simple, elegant, untouched.
+# 1. PRIMITIVES — Bracelet torus. The tool you'll wear on your wrist.
+#    Glowing ring floating in the pedestal, waiting to be claimed.
 # ═════════════════════════════════════════════════════════════════════════
 
 static func _build_primitives_crystal(parent: Node3D) -> void:
-	var mesh_inst := MeshInstance3D.new()
-	mesh_inst.name = "CrystalCore"
-	var sphere := SphereMesh.new()
-	sphere.radius = 0.08
-	sphere.height = 0.16
-	sphere.radial_segments = 6
-	sphere.rings = 4
-	mesh_inst.mesh = sphere
-	mesh_inst.material_override = _make_mat(
-		Color(0.75, 0.75, 0.85, 0.9),
-		Color(0.85, 0.85, 0.9),
-		1.5, 0.3, 0.25, true
+	# Main torus — the bracelet ring
+	var ring := MeshInstance3D.new()
+	ring.name = "BraceletRing"
+	var torus := TorusMesh.new()
+	torus.inner_radius = 0.035
+	torus.outer_radius = 0.045
+	torus.rings = 32
+	torus.ring_segments = 12
+	ring.mesh = torus
+	ring.material_override = _make_mat(
+		Color(0.25, 0.3, 0.45, 0.9),
+		Color(0.3, 0.5, 0.9),
+		2.0, 0.7, 0.15, true
 	)
-	_add(parent, mesh_inst)
+	_add(parent, ring)
+
+	# Gem on top — the voxel editor cube icon
+	var gem := MeshInstance3D.new()
+	gem.name = "BraceletGem"
+	var box := BoxMesh.new()
+	box.size = Vector3.ONE * 0.018
+	gem.mesh = box
+	gem.position = Vector3(0, 0.012, 0.04)  # Sitting on top of the ring
+	gem.material_override = _make_mat(
+		Color(0.3, 0.7, 1.0, 0.9),
+		Color(0.3, 0.7, 1.0),
+		3.0, 0.2, 0.3, false
+	)
+	_add(parent, gem)
 
 
 # ═════════════════════════════════════════════════════════════════════════

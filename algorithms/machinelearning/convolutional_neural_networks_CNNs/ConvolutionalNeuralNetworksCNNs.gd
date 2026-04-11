@@ -225,6 +225,7 @@ func _build_dense_stage() -> void:
 	_dense_weights.clear()
 	var orb_mesh := SphereMesh.new()
 	orb_mesh.radius = 0.32
+	orb_mesh.height = 0.64
 	_dense_biases = PackedFloat32Array()
 	_dense_biases.resize(dense_count)
 
@@ -265,6 +266,7 @@ func _build_ribbon() -> void:
 	_ribbon_particles.clear()
 	var particle_mesh := SphereMesh.new()
 	particle_mesh.radius = 0.12
+	particle_mesh.height = 0.24
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = Color(0.95, 0.92, 0.5, 1.0)
 	mat.emission_enabled = true
@@ -479,3 +481,12 @@ func _update_stats_label() -> void:
 func _clear_children(node: Node) -> void:
 	for child in node.get_children():
 		child.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

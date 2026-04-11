@@ -3,3 +3,5 @@ Sequence role: Sixth map in Color sequence; moves from gestural color applicatio
 Technical angle: Continuous color interpolation across surfaces (rainbow_hallway), smooth HSV transitions without discrete steps. The color_constellation_office maps color relationships spatially — hues as navigable coordinates rather than flat swatches.
 Critical angle: Where color names fail, perception continues. The gradient hallway is the phenomenological core of the sequence — you walk through territory that language cannot discretize. This is the strongest expression of "color is perception, not physics": the wavelengths change smoothly, but your brain still tries to carve them into categories.
 Key artifacts: rainbow_hallway is the immersive centerpiece — color as continuous field rather than discrete assignment; color_constellation_office provides a spatial model of color relationships, turning the color wheel into architecture.
+
+Gap: color_constellation_office needs interactive wall rotation.

@@ -7,11 +7,11 @@ extends Node3D
 var terrain_generator: TerrainGenerator
 var terrain_meshes: Array[MeshInstance3D] = []
 
-func _ready():
+func _ready() -> void:
 	print("🌍 Hole-Free Marching Cubes Demo")
 	generate_demo_terrain()
 
-func generate_demo_terrain():
+func generate_demo_terrain() -> void:
 	"""Generate demonstration terrain using the hole-free marching cubes system"""
 	
 	# Initialize the terrain generator
@@ -51,7 +51,7 @@ func generate_demo_terrain():
 	# Validate for holes
 	validate_terrain_integrity()
 
-func validate_terrain_integrity():
+func validate_terrain_integrity() -> void:
 	"""Validate that the generated terrain has no holes"""
 	var total_triangles = 0
 	var valid_meshes = 0
@@ -69,7 +69,7 @@ func validate_terrain_integrity():
 	else:
 		print("⚠️  Validation: Potential issues detected")
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input for demonstration controls"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -86,7 +86,7 @@ func _input(event):
 				# Show help
 				show_help()
 
-func regenerate_terrain():
+func regenerate_terrain() -> void:
 	"""Regenerate terrain with a new random seed"""
 	# Clear existing terrain
 	for mesh_instance in terrain_meshes:
@@ -98,7 +98,7 @@ func regenerate_terrain():
 	generate_demo_terrain()
 	print("🔄 Terrain regenerated with new seed")
 
-func toggle_debug_mode():
+func toggle_debug_mode() -> void:
 	"""Toggle debug mode to eliminate surface variation"""
 	if terrain_generator:
 		var current_debug = terrain_generator.debug_disable_surface_variation
@@ -108,14 +108,14 @@ func toggle_debug_mode():
 		regenerate_terrain()
 		print("🐛 Debug mode: %s" % ("ON" if not current_debug else "OFF"))
 
-func toggle_wireframe_mode():
+func toggle_wireframe_mode() -> void:
 	"""Toggle wireframe rendering for mesh inspection"""
 	if terrain_generator:
 		terrain_generator.debug_wireframe_mode = not terrain_generator.debug_wireframe_mode
 		regenerate_terrain()
 		print("📐 Wireframe mode: %s" % ("ON" if terrain_generator.debug_wireframe_mode else "OFF"))
 
-func show_help():
+func show_help() -> void:
 	"""Display help information"""
 	print("")
 	print("🔧 HOLE-FREE MARCHING CUBES DEMO CONTROLS:")
@@ -137,4 +137,13 @@ func show_help():
 # 2. Add this script to the root Node3D
 # 3. Add a Camera3D positioned to view the terrain (e.g., position (20, 15, 20))
 # 4. Run the scene to see hole-free terrain generation
-# 5. Use the keyboard controls to test different configurations 
+# 5. Use the keyboard controls to test different configurations
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

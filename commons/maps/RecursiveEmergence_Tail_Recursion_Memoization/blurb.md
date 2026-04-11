@@ -1,5 +1,3 @@
-A function calls itself. Standard recursion stacks frames — each call waiting for the next to finish, memory piling up like unsupported floors. Tail recursion rewrites the contract. The recursive call is the last thing that happens. Nothing waits. The current frame is released before the next begins. Constant space. Infinite depth.
+Branching corridors fork and rejoin, separated by void trenches. The same path appears twice — once as a recursive descent that splits and splits again, once as a flattened loop that remembers what it already computed.
 
-Memoization adds memory to the process. Results cached, redundant branches pruned. The recursive tree that would explode exponentially collapses into linear traversal. Fibonacci without the fraud — each subproblem solved once, then remembered.
-
-Walk the branching corridors. Watch the tree grow, split, recurse. Then watch tail optimization flatten it — halls that should multiply instead extend, a structure that consumes itself as it advances. The paradox of recursion made efficient: a process that forgets its past in order to continue indefinitely.
+A recursive tree builds the same subtree thousands of times. Memoization collapses that redundancy: compute once, look up forever after. Tail recursion goes further — it never builds the stack at all, converting depth into iteration. The insight is not about speed. It is that memory and structure are interchangeable.

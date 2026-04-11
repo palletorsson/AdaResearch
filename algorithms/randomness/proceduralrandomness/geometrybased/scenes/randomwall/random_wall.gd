@@ -16,7 +16,7 @@ extends Node3D
 @export var position_jitter: float = 0.1  # Adds some random offset to cube positions
 
 # Called when the node enters the scene tree
-func _ready():
+func _ready() -> void:
 	# Hide the original cube - we'll use it as a template
 	base_cube.visible = false
 	
@@ -26,7 +26,7 @@ func _ready():
 	# Generate the cube wall
 	generate_wall()
 
-func generate_wall():
+func generate_wall() -> void:
 	for x in range(wall_width):
 		for y in range(wall_height):
 			for z in range(wall_depth):
@@ -63,7 +63,7 @@ func generate_wall():
 						new_cube.scale = Vector3(scale_factor, scale_factor, scale_factor)
 
 # Optional - add a button in the editor to regenerate the wall
-func regenerate():
+func regenerate() -> void:
 	# Remove all previous cubes except the base one
 	for child in get_children():
 		if child != base_cube and child.is_in_group("cube_wall"):
@@ -72,3 +72,6 @@ func regenerate():
 	# Generate a new wall
 	random_seed = randi()  # New random seed
 	generate_wall()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

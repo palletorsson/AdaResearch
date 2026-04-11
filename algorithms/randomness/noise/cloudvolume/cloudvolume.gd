@@ -9,7 +9,7 @@ var volume_mesh: MeshInstance3D
 var sun_light: DirectionalLight3D
 var camera: Camera3D
 
-func _ready():
+func _ready() -> void:
 	# Find the necessary nodes in the scene
 	volume_mesh = $VolumeBox
 	sun_light = $Sun
@@ -19,7 +19,7 @@ func _ready():
 		push_error("Scene is missing required nodes: VolumeBox, Sun, or Camera3D.")
 		return
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_instance_valid(volume_mesh):
 		# Slowly rotate the volume to showcase its 3D nature
 		volume_mesh.rotate_y(rotation_speed * delta)
@@ -31,3 +31,6 @@ func _process(delta):
 			var sun_direction = -sun_light.global_transform.basis.z
 			material.set_shader_parameter("sun_direction", sun_direction)
 			material.set_shader_parameter("camera_position", camera.global_position)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -310,3 +310,12 @@ func reset() -> void:
 	if mesh_instance and mesh_instance.material_override:
 		mesh_instance.material_override.albedo_color = target_color
 		mesh_instance.material_override.emission = target_color
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

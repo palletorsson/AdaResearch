@@ -1,6 +1,16 @@
 extends Node3D
 class_name CaveGenerator
 
+# @identity
+# essence: N walkers carve air from solid voxel grid — biased random walk inward, then upward level by level
+# desire: to spelunk through a cave that no one designed, knowing every tunnel exists because a random walker happened to step there
+# critical_parameter: walkers — more walkers create more interconnected passages; fewer create lonely corridors with dead ends
+# triggers: regenerate() rebuilds from seed; walkers start from four sides, converge at center, then climb — three distinct phases
+# emerges: the biased-toward-center walk in Phase A creates a natural hub without explicitly coding one; vertical climbing creates multi-story caves
+# needs: voxel collision [has]; spawn gizmo [has]; VR exploration [has]; seed control slider [missing]
+# relationships: paired with maze_generation in PG_Caves_Mazes; contrasts random walk (organic) with recursive backtracking (structured)
+# truth: a cave is not empty space — it is the record of everything that was removed, and the walker's path is the cave's memory
+
 @export var grid_size: Vector3i = Vector3i(10, 10, 10)
 @export var cube_size: float = 1.0
 @export var walkers: int = 4
@@ -202,7 +212,17 @@ func _build_meshes() -> void:
 		var giz := MeshInstance3D.new()
 		var gmesh := SphereMesh.new()
 		gmesh.radius = cube_size * 0.4
+		gmesh.height = cube_size * 0.4 * 2.0
 		giz.mesh = gmesh
 		giz.modulate = Color(1.0, 0.2, 0.6, 1.0)
 		giz.transform.origin = Vector3(_center.x * cube_size, cube_size, _center.z * cube_size) + origin_offset
 		add_child(giz)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

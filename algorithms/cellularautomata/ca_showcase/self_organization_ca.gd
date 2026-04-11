@@ -1,11 +1,22 @@
 ﻿# SelfOrganizationCA.gd
 # Self-organizing patterns and emergence
+#
+# @identity
+# essence: cell(t+1) = cell(t) * (1 - k) + avg(neighbors) * k + noise — local averaging with perturbation
+# desire: To settle into consensus regions, then be disturbed — watch opinion clusters form and dissolve
+# critical_parameter: INTERACTION_STRENGTH (0.1) — how fast cells converge toward their neighbors' average
+# triggers: High interaction → rapid homogenization into uniform zones; randomness prevents total consensus
+# emerges: Domain boundaries and cluster formation from simple averaging — phase separation without physics
+# needs: VR interaction/randomness sliders [missing], diversity readout [has via get_pattern_diversity]
+# relationships: Feeds into CA_EdgeOfChaos. Demonstrates self-organization as the CA analogue of social consensus.
+# truth: Average with your neighbors and add noise — domains form, boundaries emerge, organization happens without an organizer.
+
 extends BaseCA
 
 const INTERACTION_STRENGTH = 0.1
 const RANDOMNESS = 0.05
 
-func initialize_grid():
+func initialize_grid() -> void:
 	# Configure MultiMesh
 	var step = 3
 	var cube_size = CUBE_SIZE * step
@@ -24,12 +35,12 @@ func initialize_grid():
 			for z in range(GRID_SIZE):
 				grid[x][y][z] = randi() % 10  # Random state 0-9
 
-func update_simulation(_delta):
+func update_simulation(_delta) -> void:
 	# Evolve self-organizing patterns
 	evolve_self_organization()
 	# Note: update_visualization() is called by base_ca._process() after this
 
-func evolve_self_organization():
+func evolve_self_organization() -> void:
 	var new_grid = duplicate_3d_grid(grid)
 	
 	for x in range(GRID_SIZE):
@@ -57,7 +68,7 @@ func evolve_self_organization():
 	
 	grid = new_grid
 
-func update_visualization():
+func update_visualization() -> void:
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
 		return
 		
@@ -114,7 +125,10 @@ func get_pattern_diversity() -> int:
 				unique_states[state] = true
 	return unique_states.size()
 
-func reset_simulation():
+func reset_simulation() -> void:
 	grid = create_3d_grid()
 	initialize_grid()
 	iteration_count = 0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

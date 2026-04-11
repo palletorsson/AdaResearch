@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: portals[i].ring_segments = base_segments + i*increment — a progression of torus discretization levels
+# desire: learner walks through a corridor of increasingly refined tori and feels resolution as spatial experience
+# critical_parameter: portal_count — how many steps the resolution ladder has; more steps = finer progression
+# triggers: nothing at runtime — all portals are placed at ready() along Z axis
+# emerges: the relationship between segment count and perceived smoothness — resolution is a resource allocation
+# needs: [missing VR controls — purely spatial/visual; walk through to experience]
+# relationships: demonstrates combine/instantiation pattern; related to sphere_low/mid/high resolution comparison
+# truth: every smooth curve in 3D graphics is an illusion — beneath it are polygons, and you choose how many
+
 @export var portal_count: int = 20
 @export var portal_spacing: float = 4.5
 @export var base_path: NodePath = NodePath("Lowrestorus")

@@ -12,10 +12,10 @@ class_name FirstPersonController
 
 var rotation_x: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Mouse look
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		# Rotate horizontally (around Y axis)
@@ -33,7 +33,7 @@ func _input(event):
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# Get movement input
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 
@@ -55,3 +55,6 @@ func _physics_process(delta):
 		velocity.y -= 9.8 * delta
 
 	move_and_slide()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

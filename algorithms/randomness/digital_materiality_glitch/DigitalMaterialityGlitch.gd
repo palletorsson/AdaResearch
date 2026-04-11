@@ -72,7 +72,7 @@ var _pixel_sort_randf := PackedFloat32Array()
 # RNG for deterministic per-frame randomness where needed
 var _rng := RandomNumberGenerator.new()
 
-func _ready():
+func _ready() -> void:
 	_rng.randomize()
 	initialize_digital_structures()
 	_create_all_multimeshes()
@@ -80,7 +80,7 @@ func _ready():
 	_reroll_noise()
 	_reroll_pixel_sort()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	glitch_timer += delta
 
@@ -94,7 +94,7 @@ func _process(delta):
 # Initialization helpers
 # ─────────────────────────────────────────────
 
-func initialize_digital_structures():
+func initialize_digital_structures() -> void:
 	data_grid.clear()
 	for i in range(8):
 		var row = []
@@ -131,7 +131,7 @@ func _make_transparent_material(base_color: Color, emission_color: Color = Color
 		mat.emission_energy_multiplier = emission_energy
 	return mat
 
-func _create_all_multimeshes():
+func _create_all_multimeshes() -> void:
 	# ── Meshes ──
 	var box_mesh := BoxMesh.new()
 	box_mesh.size = Vector3(1, 1, 1)  # unit; we scale per-instance
@@ -187,7 +187,7 @@ func _create_all_multimeshes():
 var _noise_reroll_timer := 0.0
 var _pixel_sort_reroll_timer := 0.0
 
-func _reroll_noise():
+func _reroll_noise() -> void:
 	_noise_randf.resize(NOISE_COUNT)
 	_noise_colors.resize(NOISE_COUNT)
 	_noise_positions.resize(NOISE_COUNT)
@@ -200,7 +200,7 @@ func _reroll_noise():
 			_rng.randf_range(-1, 1)
 		)
 
-func _reroll_pixel_sort():
+func _reroll_pixel_sort() -> void:
 	_pixel_sort_randf.resize(PIXEL_SORT_COUNT)
 	for i in range(PIXEL_SORT_COUNT):
 		_pixel_sort_randf[i] = _rng.randf()
@@ -209,7 +209,7 @@ func _reroll_pixel_sort():
 # Parameter update
 # ─────────────────────────────────────────────
 
-func update_glitch_parameters():
+func update_glitch_parameters() -> void:
 	glitch_intensity = 0.2 + sin(time * 0.4) * 0.3
 	artifact_probability = 0.05 + cos(time * 0.6) * 0.04
 	error_propagation_speed = 1.5 + sin(time * 0.8) * 1.0
@@ -218,13 +218,13 @@ func update_glitch_parameters():
 # GlitchAesthetics
 # ─────────────────────────────────────────────
 
-func _update_glitch_aesthetics():
+func _update_glitch_aesthetics() -> void:
 	_update_datamosh()
 	_update_pixel_sort()
 	_update_channel_shift()
 	_update_compression()
 
-func _update_datamosh():
+func _update_datamosh() -> void:
 	var mm := mm_datamosh.multimesh
 	var base_pos := Vector3(0 * 3.0 - 6.0, 0, 0)  # index 0 → "datamosh"
 
@@ -254,7 +254,7 @@ func _update_datamosh():
 		mm.set_instance_transform(i, xform)
 		mm.set_instance_color(i, Color(1.0, 0.2, 0.8, 0.7))
 
-func _update_pixel_sort():
+func _update_pixel_sort() -> void:
 	var mm := mm_pixel_sort.multimesh
 	var base_pos := Vector3(1 * 3.0 - 6.0, 0, 0)  # index 1 → "pixel_sort"
 
@@ -289,7 +289,7 @@ func _update_pixel_sort():
 		var sorted_color := h
 		mm.set_instance_color(i, Color(sorted_color, 1.0 - sorted_color, 0.5))
 
-func _update_channel_shift():
+func _update_channel_shift() -> void:
 	var mm := mm_channel_shift.multimesh
 	var base_pos := Vector3(2 * 3.0 - 6.0, 0, 0)  # index 2 → "channel_shift"
 
@@ -319,7 +319,7 @@ func _update_channel_shift():
 			mm.set_instance_color(idx, channel_colors[channel_idx])
 			idx += 1
 
-func _update_compression():
+func _update_compression() -> void:
 	var mm := mm_compression.multimesh
 	var base_pos := Vector3(3 * 3.0 - 6.0, 0, 0)  # index 3 → "compression"
 
@@ -359,7 +359,7 @@ func _update_compression():
 # DataCorruption
 # ─────────────────────────────────────────────
 
-func _update_data_corruption(_delta: float):
+func _update_data_corruption(_delta: float) -> void:
 	# Corruption propagation at intervals
 	if glitch_timer > 0.1:
 		glitch_timer = 0.0
@@ -400,7 +400,7 @@ func _update_data_corruption(_delta: float):
 			mm.set_instance_color(idx, color)
 			idx += 1
 
-func propagate_corruption():
+func propagate_corruption() -> void:
 	for i in range(data_grid.size()):
 		for j in range(data_grid[i].size()):
 			var cell: Dictionary = data_grid[i][j]
@@ -415,13 +415,13 @@ func propagate_corruption():
 # DigitalArtifacts
 # ─────────────────────────────────────────────
 
-func _update_digital_artifacts():
+func _update_digital_artifacts() -> void:
 	_update_scan_lines()
 	_update_chromatic_aberration()
 	_update_digital_noise()
 	_update_buffer_overflow()
 
-func _update_scan_lines():
+func _update_scan_lines() -> void:
 	var mm := mm_scan_lines.multimesh
 	for i in range(SCAN_LINE_COUNT):
 		var pos := Vector3(0, i * 0.2 - 2.0, -2.0)
@@ -432,7 +432,7 @@ func _update_scan_lines():
 		var alpha := 0.3 + sin(time * 10 + i) * 0.2
 		mm.set_instance_color(i, Color(0.0, 1.0, 0.0, alpha))
 
-func _update_chromatic_aberration():
+func _update_chromatic_aberration() -> void:
 	var mm := mm_chromatic.multimesh
 	var aberration_strength := glitch_intensity * 0.5
 	var channel_colors := [
@@ -449,7 +449,7 @@ func _update_chromatic_aberration():
 		mm.set_instance_transform(color_idx, xform)
 		mm.set_instance_color(color_idx, channel_colors[color_idx])
 
-func _update_digital_noise():
+func _update_digital_noise() -> void:
 	var mm := mm_noise.multimesh
 
 	# Re-roll noise periodically for flickering effect
@@ -469,7 +469,7 @@ func _update_digital_noise():
 		else:
 			mm.set_instance_transform(i, hidden_xform)
 
-func _update_buffer_overflow():
+func _update_buffer_overflow() -> void:
 	var mm := mm_overflow.multimesh
 	var overflow_height := 3.0 + glitch_intensity * 2.0
 
@@ -496,11 +496,11 @@ func _update_buffer_overflow():
 # ErrorPropagation
 # ─────────────────────────────────────────────
 
-func _update_error_propagation(_delta: float):
+func _update_error_propagation(_delta: float) -> void:
 	_update_error_cascade()
 	_update_error_waves()
 
-func _update_error_waves():
+func _update_error_waves() -> void:
 	var mm := mm_error_waves.multimesh
 	for i in range(ERROR_WAVE_COUNT):
 		var wave_radius := fmod(time * error_propagation_speed + i * 0.5, 4.0)
@@ -514,7 +514,7 @@ func _update_error_waves():
 		var alpha := 1.0 - (wave_radius / 4.0)
 		mm.set_instance_color(i, Color(1.0, 0.5, 0.0, alpha * 0.6))
 
-func _update_error_cascade():
+func _update_error_cascade() -> void:
 	# Propagate errors
 	var new_errors := []
 	for error in error_cascade:
@@ -558,3 +558,12 @@ func _update_error_cascade():
 			mm.set_instance_color(i, Color(1.0, 0.0, 0.0, error.intensity))
 		else:
 			mm.set_instance_transform(i, hidden_xform)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

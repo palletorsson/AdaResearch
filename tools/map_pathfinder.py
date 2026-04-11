@@ -19,6 +19,7 @@ Movement rules:
   - wp (walkpath/ramp) allows traversal between adjacent cells of different heights
   - tc (transport cube) bridges gaps along an axis; standable even on void
   - br (bridge) transparent walkable path over void: br:z:3, br:x:2, br:-z:1
+  - jp (jump pad) one-way arc: jp:target_x:target_z[:arc_height]
   - Teleport cells are walkable destinations even on void
   - Height 0 = void (unwalkable without tc/br)
 
@@ -228,6 +229,10 @@ class MapGraph:
         self.br_cells: set[tuple[int, int]] = set()
         self._parse_br()
 
+        # jp (jump pad) one-way connections
+        self.jp_edges: dict[tuple[int, int], set[tuple[int, int]]] = {}
+        self._parse_jp()
+
         # Walkable set
         self.walkable: set[tuple[int, int]] = set()
         for pos, h in self.hmap.items():
@@ -237,6 +242,10 @@ class MapGraph:
             self.walkable.add(pos)
         for pos in self.br_cells:
             self.walkable.add(pos)
+        # jp landing cells are walkable destinations
+        for targets in self.jp_edges.values():
+            for t in targets:
+                self.walkable.add(t)
 
         # Spawn
         self.spawn = find_spawn(self.utils)
@@ -329,6 +338,35 @@ class MapGraph:
                 if 0 <= br[0] < self.rows and 0 <= br[1] < self.cols:
                     self.br_cells.add(br)
 
+    def _parse_jp(self):
+        """Parse jp:X:Z[:H] jump pad utilities.
+
+        A jump pad launches the player in a parabolic arc from its grid
+        position to the target cell (target_z, target_x).  This creates
+        a one-way connection — the player can reach the landing cell from
+        the jump pad, but not the other way around.
+
+        Format: jp:target_x:target_z[:arc_height]
+          target_x = column index at landing
+          target_z = row index at landing
+          arc_height is cosmetic (ignored for reachability)
+        """
+        for pos, cell in self.util_map.items():
+            if not cell.startswith("jp"):
+                continue
+            parts = cell.split(":")
+            if len(parts) < 3:
+                continue
+            try:
+                target_x = int(parts[1])
+                target_z = int(parts[2])
+            except (ValueError, IndexError):
+                continue
+            # In pathfinder coords: row=z, col=x
+            target = (target_z, target_x)
+            if 0 <= target[0] < self.rows and 0 <= target[1] < self.cols:
+                self.jp_edges.setdefault(pos, set()).add(target)
+
     def neighbors(self, pos: tuple[int, int]) -> list[tuple[int, int]]:
         """Return all positions reachable from pos in one step.
 
@@ -370,6 +408,11 @@ class MapGraph:
         # tc bridges
         if pos in self.tc_adj:
             for dest in self.tc_adj[pos]:
+                if dest in self.walkable:
+                    result.append(dest)
+        # jp one-way jump pads
+        if pos in self.jp_edges:
+            for dest in self.jp_edges[pos]:
                 if dest in self.walkable:
                     result.append(dest)
         return result
@@ -508,12 +551,15 @@ def check_rules(graph: MapGraph) -> list[dict]:
             for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]
         )
         if not adjacent_reachable:
-            on_void = graph.hmap.get(pos, 0) == 0
+            art_h = graph.hmap.get(pos, 0)
+            on_void = art_h == 0
             suffix = " [on VOID]" if on_void else ""
+            # Unreachable artifacts are treated as view-only display pieces
+            # (isolated pedestals, elevated decorations, etc.) — WARN not ERROR
             issues.append({
                 "rule": 4,
-                "severity": "ERROR",
-                "msg": f"Artifact '{art['name']}' at ({art['col']},{art['row']}) h={graph.hmap.get(pos, 0)} unreachable{suffix}",
+                "severity": "WARN",
+                "msg": f"Artifact '{art['name']}' at ({art['col']},{art['row']}) h={art_h} unreachable (view-only){suffix}",
             })
 
     # Rule 5: Teleport must stand on y=0 (void) in structure
@@ -772,6 +818,8 @@ def render_ascii(
                     ch, color = "^", _BLUE
                 else:
                     ch, color = "_", _DIM
+            elif pos in graph.jp_edges:
+                ch, color = "J", _MAGENTA
             elif pos in graph.wp_cells:
                 ch, color = "~", _BLUE
             elif pos in graph.tc_positions:
@@ -798,13 +846,13 @@ def render_ascii(
         )
         lines.append(
             f"  {_BLUE}~{_RESET}=ramp  {_BLUE}^{_RESET}=transport  "
-            f"{_CYAN}={_RESET}=bridge  "
+            f"{_CYAN}={_RESET}=bridge  {_MAGENTA}J{_RESET}=jump pad  "
             f"{_RED}#{_RESET}=unreachable floor  "
             f"{_DIM}_{_RESET}=void  1-9=floor height"
         )
     else:
         lines.append("  S=spawn  T=teleport  *=artifact  !=unreachable  @=path")
-        lines.append("  ~=ramp  ^=transport  ==bridge  #=unreachable floor  _=void  1-9=height")
+        lines.append("  ~=ramp  ^=transport  ==bridge  J=jump pad  #=unreachable floor  _=void  1-9=height")
 
     return "\n".join(lines)
 
@@ -1033,9 +1081,9 @@ def generate_fix_text(map_name: str, issues: list[dict]) -> str:
 
     for iss in manual:
         if iss["rule"] == 3:
-            parts.append(f"  Manual: Teleport unreachable — connect with wp ramp, tc transport, or br bridge")
+            parts.append(f"  Manual: Teleport unreachable — connect with wp ramp, tc transport, br bridge, or jp jump pad")
         elif iss["rule"] == 4:
-            parts.append(f"  Manual: {iss['msg']} — add wp/tc/br to connect, or move artifact to reachable cell")
+            parts.append(f"  Manual: {iss['msg']} — add wp/tc/br/jp to connect, or move artifact to reachable cell")
 
     for w in warnings:
         parts.append(f"  Note: {w['msg']}")

@@ -8,7 +8,7 @@ extends Node3D
 var points: Array[Node3D] = []
 var mesh_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	mesh_instance = $LineMesh
 	_spawn_points()
 	_update_line()
@@ -16,7 +16,7 @@ func _ready():
 func _process(_delta):
 	_update_line()  # dynamically rebuild as points move
 
-func _spawn_points():
+func _spawn_points() -> void:
 	var parent = $Points
 	for i in range(point_count):
 		var p = point_scene.instantiate()
@@ -24,7 +24,7 @@ func _spawn_points():
 		parent.add_child(p)
 		points.append(p)
 
-func _update_line():
+func _update_line() -> void:
 	if points.size() < 2:
 		return
 
@@ -43,3 +43,12 @@ func _update_line():
 
 	var mesh = st.commit()
 	mesh_instance.mesh = mesh
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -24,7 +24,7 @@ var chair_instances: Array[Node3D] = []
 var chair_info_labels: Array[Label3D] = []
 var regenerate_timer: Timer
 
-func _ready():
+func _ready() -> void:
 	setup_gallery()
 	setup_lighting()
 	setup_environment()
@@ -33,7 +33,7 @@ func _ready():
 	if auto_regenerate:
 		setup_auto_regeneration()
 
-func setup_gallery():
+func setup_gallery() -> void:
 	"""Create and position all 10 chair types in a circular gallery"""
 	for i in range(chair_classes.size()):
 		var angle = float(i) / chair_classes.size() * TAU
@@ -91,7 +91,7 @@ func get_chair_name(chair_class) -> String:
 		_:
 			return "Unknown Chair"
 
-func setup_lighting():
+func setup_lighting() -> void:
 	"""Create professional gallery lighting"""
 	# Main directional light (key light)
 	var key_light = DirectionalLight3D.new()
@@ -127,7 +127,7 @@ func setup_lighting():
 	spot_light.spot_angle = 45.0
 	add_child(spot_light)
 
-func setup_environment():
+func setup_environment() -> void:
 	"""Create gallery environment"""
 	# Gallery floor
 	var floor = MeshInstance3D.new()
@@ -168,7 +168,7 @@ func setup_environment():
 	info_panel.modulate = Color.WHITE
 	add_child(info_panel)
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create user interface controls"""
 	var ui_canvas = CanvasLayer.new()
 	add_child(ui_canvas)
@@ -221,7 +221,7 @@ func setup_ui():
 	radius_slider.value_changed.connect(_on_radius_changed)
 	vbox.add_child(radius_slider)
 
-func setup_auto_regeneration():
+func setup_auto_regeneration() -> void:
 	"""Setup automatic chair regeneration timer"""
 	regenerate_timer = Timer.new()
 	regenerate_timer.wait_time = regenerate_interval
@@ -229,14 +229,14 @@ func setup_auto_regeneration():
 	regenerate_timer.timeout.connect(_on_regenerate_timer_timeout)
 	add_child(regenerate_timer)
 
-func _on_regenerate_all():
+func _on_regenerate_all() -> void:
 	"""Regenerate all chairs with random parameters"""
 	for chair in chair_instances:
 		if chair.has_method("regenerate_with_parameters"):
 			var random_params = generate_random_parameters()
 			chair.regenerate_with_parameters(random_params)
 
-func _on_auto_regenerate_toggled(pressed: bool):
+func _on_auto_regenerate_toggled(pressed: bool) -> void:
 	"""Toggle auto-regeneration"""
 	auto_regenerate = pressed
 	if auto_regenerate and not regenerate_timer:
@@ -244,17 +244,17 @@ func _on_auto_regenerate_toggled(pressed: bool):
 	elif regenerate_timer:
 		regenerate_timer.paused = not auto_regenerate
 
-func _on_radius_changed(value: float):
+func _on_radius_changed(value: float) -> void:
 	"""Change gallery radius"""
 	gallery_radius = value
 	reposition_chairs()
 
-func _on_regenerate_timer_timeout():
+func _on_regenerate_timer_timeout() -> void:
 	"""Auto-regeneration timer callback"""
 	if auto_regenerate:
 		_on_regenerate_all()
 
-func reposition_chairs():
+func reposition_chairs() -> void:
 	"""Reposition chairs in a circle with new radius"""
 	for i in range(chair_instances.size()):
 		var angle = float(i) / chair_instances.size() * TAU
@@ -276,7 +276,7 @@ func generate_random_parameters() -> Dictionary:
 		"geometric_variation": randf_range(0.0, 0.3)
 	}
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle input for gallery interaction"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -288,47 +288,11 @@ func _input(event):
 			KEY_ESCAPE:
 				get_tree().quit()
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+func apply_grid_config(config: Dictionary) -> void:
+	pass

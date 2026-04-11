@@ -17,14 +17,14 @@ var frame_instance: MeshInstance3D
 var seat_instance: MeshInstance3D
 var back_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	materials = ModernistMaterials.new()
 	add_child(materials)
 	
 	if generate_on_ready:
 		generate_chair()
 
-func generate_chair():
+func generate_chair() -> void:
 	"""Generate the complete Barcelona chair"""
 	clear_existing_geometry()
 	
@@ -32,7 +32,7 @@ func generate_chair():
 	generate_tufted_seat()
 	generate_tufted_backrest()
 
-func clear_existing_geometry():
+func clear_existing_geometry() -> void:
 	"""Remove existing chair geometry"""
 	if frame_instance:
 		frame_instance.queue_free()
@@ -41,7 +41,7 @@ func clear_existing_geometry():
 	if back_instance:
 		back_instance.queue_free()
 
-func generate_x_frame():
+func generate_x_frame() -> void:
 	"""Generate the iconic X-shaped chrome frame"""
 	frame_instance = MeshInstance3D.new()
 	add_child(frame_instance)
@@ -132,7 +132,7 @@ func add_support_bar(vertices: PackedVector3Array, normals: PackedVector3Array,
 	"""Add a simple support bar between two points"""
 	add_x_leg_geometry(vertices, normals, indices, start, end)
 
-func generate_tufted_seat():
+func generate_tufted_seat() -> void:
 	"""Generate the tufted leather seat cushion"""
 	seat_instance = MeshInstance3D.new()
 	add_child(seat_instance)
@@ -142,7 +142,7 @@ func generate_tufted_seat():
 	seat_instance.position = Vector3(0, seat_height + 0.02, 0)
 	seat_instance.material_override = materials.get_material("black_leather")
 
-func generate_tufted_backrest():
+func generate_tufted_backrest() -> void:
 	"""Generate the tufted leather backrest"""
 	back_instance = MeshInstance3D.new()
 	add_child(back_instance)
@@ -211,7 +211,7 @@ func create_tufted_surface(width: float, depth: float, divisions: int, tuft_dept
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	return array_mesh
 
-func regenerate_with_parameters(params: Dictionary):
+func regenerate_with_parameters(params: Dictionary) -> void:
 	"""Regenerate chair with new parameters"""
 	if params.has("seat_width"):
 		seat_width = params.seat_width
@@ -228,3 +228,11 @@ func regenerate_with_parameters(params: Dictionary):
 	
 	generate_chair()
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -17,7 +17,7 @@ var fill_type_index: int = 0
 var radius_index: int = 0
 var stencil_index: int = 0
 
-func _ready():
+func _ready() -> void:
 	half_size = map_size * 0.5
 	chunk_size = map_size / float(chunk_resolution)
 	voxel_size = chunk_size / float(voxel_resolution)
@@ -48,7 +48,7 @@ func _ready():
 	static_body.add_child(box)
 	add_child(static_body)
 
-func create_chunk(i: int, x: int, y: int, grid_script):
+func create_chunk(i: int, x: int, y: int, grid_script) -> void:
 	var chunk = Node3D.new()
 	chunk.set_script(grid_script)
 	chunk.voxel_material = voxel_material
@@ -83,7 +83,7 @@ func _process(_delta):
 			if result and result.collider.get_parent() == self:
 				edit_voxels(to_local(result.position))
 
-func edit_voxels(point: Vector3):
+func edit_voxels(point: Vector3) -> void:
 	var center_x = int((point.x + half_size) / voxel_size)
 	var center_y = int((point.y + half_size) / voxel_size)
 	
@@ -116,7 +116,7 @@ func edit_voxels(point: Vector3):
 		
 		voxel_y_offset -= voxel_resolution
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode >= KEY_1 and event.keycode <= KEY_6:
 			radius_index = event.keycode - KEY_1
@@ -128,3 +128,12 @@ func _input(event):
 			stencil_index = 0
 		elif event.keycode == KEY_C:
 			stencil_index = 1
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

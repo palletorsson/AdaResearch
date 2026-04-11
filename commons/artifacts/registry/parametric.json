@@ -13,10 +13,22 @@
 			"description": "Pseudospherical surface of constant negative curvature that appears to breathe. A soliton solution to the sine-Gordon equation — where differential geometry meets nonlinear wave theory.",
 			"category": "geometry",
 			"complexity": "advanced",
-			"tags": ["parametric", "surface", "soliton", "curvature", "differential_geometry", "pickable"],
+			"tags": [
+				"parametric",
+				"surface",
+				"soliton",
+				"curvature",
+				"differential_geometry",
+				"pickable"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"catenoid": {
 			"lookup_name": "catenoid",
@@ -25,10 +37,23 @@
 			"description": "Minimal surface formed by rotating a catenary curve. The shape soap film makes between two rings — nature solving a variational calculus problem in real time.",
 			"category": "geometry",
 			"complexity": "intermediate",
-			"tags": ["parametric", "minimal_surface", "catenary", "soap_film", "calculus_of_variations", "pickable"],
+			"tags": [
+				"parametric",
+				"minimal_surface",
+				"catenary",
+				"soap_film",
+				"calculus_of_variations",
+				"pickable"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric",
+				"qfep"
+			]
 		},
 		"dini_surface": {
 			"lookup_name": "dini_surface",
@@ -37,10 +62,22 @@
 			"description": "Twisted pseudospherical surface with constant negative Gaussian curvature. A helicoid-like spiral proving that hyperbolic geometry can be embedded in 3D space.",
 			"category": "geometry",
 			"complexity": "advanced",
-			"tags": ["parametric", "surface", "pseudosphere", "hyperbolic", "negative_curvature", "pickable"],
+			"tags": [
+				"parametric",
+				"surface",
+				"pseudosphere",
+				"hyperbolic",
+				"negative_curvature",
+				"pickable"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"double_enneper": {
 			"lookup_name": "double_enneper",
@@ -49,10 +86,21 @@
 			"description": "Extended Enneper minimal surface with self-intersecting folds. A higher-order minimal surface where mean curvature vanishes everywhere despite complex geometry.",
 			"category": "geometry",
 			"complexity": "advanced",
-			"tags": ["parametric", "minimal_surface", "enneper", "self_intersection", "pickable"],
+			"tags": [
+				"parametric",
+				"minimal_surface",
+				"enneper",
+				"self_intersection",
+				"pickable"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"enneper_order3": {
 			"lookup_name": "enneper_order3",
@@ -61,10 +109,21 @@
 			"description": "Third-order Enneper minimal surface with three-fold symmetry. More complex than the classic Enneper, with deeper self-intersections revealing the richness of minimal surface theory.",
 			"category": "geometry",
 			"complexity": "advanced",
-			"tags": ["parametric", "minimal_surface", "enneper", "symmetry", "pickable"],
+			"tags": [
+				"parametric",
+				"minimal_surface",
+				"enneper",
+				"symmetry",
+				"pickable"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"figure_eight_knot": {
 			"lookup_name": "figure_eight_knot",
@@ -73,10 +132,23 @@
 			"description": "The simplest non-trivial knot after the trefoil — four crossings forming a figure-eight pattern. A fundamental object in knot theory with applications from DNA topology to quantum field theory.",
 			"category": "geometry",
 			"complexity": "intermediate",
-			"tags": ["parametric", "knot", "topology", "figure_eight", "knot_theory", "pickable"],
+			"tags": [
+				"parametric",
+				"knot",
+				"topology",
+				"figure_eight",
+				"knot_theory",
+				"pickable"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"biology",
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"helicoid": {
 			"lookup_name": "helicoid",
@@ -85,10 +157,21 @@
 			"description": "Ruled minimal surface — a plane rotating as it rises, like a spiral staircase with infinite steps. The only ruled minimal surface besides the plane, and continuously deformable into a catenoid.",
 			"category": "geometry",
 			"complexity": "intermediate",
-			"tags": ["parametric", "minimal_surface", "ruled", "helical", "pickable"],
+			"tags": [
+				"parametric",
+				"minimal_surface",
+				"ruled",
+				"helical",
+				"pickable"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"klein_bottle": {
 			"lookup_name": "klein_bottle",
@@ -97,10 +180,22 @@
 			"description": "Non-orientable surface with no inside or outside — the 3D immersion of a surface that can only truly exist in 4D. A topological curiosity: genus-1 non-orientable, Euler characteristic 0.",
 			"category": "geometry",
 			"complexity": "intermediate",
-			"tags": ["parametric", "topology", "non_orientable", "klein_bottle", "4d", "pickable"],
+			"tags": [
+				"parametric",
+				"topology",
+				"non_orientable",
+				"klein_bottle",
+				"4d",
+				"pickable"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"mobius_strip_parametric": {
 			"lookup_name": "mobius_strip_parametric",
@@ -109,10 +204,22 @@
 			"description": "The iconic one-sided surface: a strip with a half-twist. Walk along it and you return to where you started but on the 'other side' — except there is no other side.",
 			"category": "geometry",
 			"complexity": "beginner",
-			"tags": ["parametric", "topology", "non_orientable", "mobius", "one_sided", "pickable"],
+			"tags": [
+				"parametric",
+				"topology",
+				"non_orientable",
+				"mobius",
+				"one_sided",
+				"pickable"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"seashell": {
 			"lookup_name": "seashell",
@@ -121,10 +228,24 @@
 			"description": "Logarithmic spiral surface mimicking mollusk shell growth. Biology as parametric equation — the shell grows at a constant angle, producing the same shape at every scale.",
 			"category": "geometry",
 			"complexity": "beginner",
-			"tags": ["parametric", "spiral", "logarithmic", "biology", "growth", "self_similar", "pickable"],
+			"tags": [
+				"parametric",
+				"spiral",
+				"logarithmic",
+				"biology",
+				"growth",
+				"self_similar",
+				"pickable"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"biology",
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"torus_knot": {
 			"lookup_name": "torus_knot",
@@ -133,10 +254,22 @@
 			"description": "A knot that wraps around a torus surface — p times around the meridian, q times around the longitude. The family includes the trefoil (2,3) and all torus links.",
 			"category": "geometry",
 			"complexity": "intermediate",
-			"tags": ["parametric", "knot", "torus", "topology", "knot_theory", "pickable"],
+			"tags": [
+				"parametric",
+				"knot",
+				"torus",
+				"topology",
+				"knot_theory",
+				"pickable"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"trefoil_knot": {
 			"lookup_name": "trefoil_knot",
@@ -145,10 +278,23 @@
 			"description": "The simplest non-trivial knot — three crossings forming a three-lobed shape. Fundamental in knot theory, appearing in Celtic art, molecular biology, and quantum computing.",
 			"category": "geometry",
 			"complexity": "beginner",
-			"tags": ["parametric", "knot", "trefoil", "topology", "three_crossing", "pickable"],
+			"tags": [
+				"parametric",
+				"knot",
+				"trefoil",
+				"topology",
+				"three_crossing",
+				"pickable"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"art",
+				"biology",
+				"curves",
+				"math"
+			]
 		},
 		"wave_torus": {
 			"lookup_name": "wave_torus",
@@ -157,10 +303,22 @@
 			"description": "Torus surface with sinusoidal displacement — waves rippling around the ring. Parametric surface meets wave equation, creating a form that oscillates between smooth and turbulent.",
 			"category": "geometry",
 			"complexity": "intermediate",
-			"tags": ["parametric", "torus", "wave", "displacement", "oscillation", "pickable"],
+			"tags": [
+				"parametric",
+				"torus",
+				"wave",
+				"displacement",
+				"oscillation",
+				"pickable"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"curves",
+				"math",
+				"parametric"
+			]
 		},
 		"math_objects_gallery": {
 			"lookup_name": "math_objects_gallery",
@@ -169,10 +327,56 @@
 			"description": "Gallery layout showcasing all parametric mathematical objects together — surfaces, knots, and topological curiosities arranged for comparison and exploration.",
 			"category": "geometry",
 			"complexity": "beginner",
-			"tags": ["parametric", "gallery", "collection", "math_objects", "overview"],
+			"tags": [
+				"parametric",
+				"gallery",
+				"collection",
+				"math_objects",
+				"overview"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"art",
+				"curves",
+				"math",
+				"parametric"
+			]
+		},
+		"renaissancepaintingfloorrattern": {
+			"lookup_name": "renaissancepaintingfloorrattern",
+			"name": "renaissancepaintingfloorrattern",
+			"description": "renaissancepaintingfloorrattern",
+			"scene": "res://algorithms/geometry/renaissancepaintingfloorrattern/renaissancepaintingfloorrattern.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"art",
+				"curves",
+				"math",
+				"parametric"
+			],
+			"tags": [
+				"parametric"
+			]
 		}
 	}
 }

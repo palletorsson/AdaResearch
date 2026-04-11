@@ -1,0 +1,329 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 8,
+				"name": "lambda_slider",
+				"pos": [
+					1,
+					1,
+					9
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 16,
+				"name": "tt",
+				"pos": [
+					9,
+					1,
+					9
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "random_cubes",
+				"pos": [
+					4,
+					3,
+					3
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "random_cubes",
+				"pos": [
+					7,
+					3,
+					3
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "particle_chaos",
+				"pos": [
+					5,
+					3,
+					5
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "random_cubes",
+				"pos": [
+					4,
+					3,
+					7
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "random_cubes",
+				"pos": [
+					7,
+					3,
+					7
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			}
+		],
+		"dead_ends": [],
+		"issues": [
+			{
+				"description": "random_cubes at (4,3,3) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "random_cubes at (7,3,3) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "particle_chaos at (5,3,5) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "random_cubes at (4,3,7) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "random_cubes at (7,3,7) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "QFEP_E_Term",
+		"pacing": {
+			"density": 8.0,
+			"reachable_artifacts": 2,
+			"total_artifacts": 7,
+			"walkable_tiles": 96
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			1,
+			1,
+			1
+		],
+		"teleporter": {
+			"dist": 14,
+			"pos": [
+				5,
+				0,
+				11
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "QFEP_E_Term",
+	"sequence": "qfeplaboratory",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "random_cubes",
+				"pos": [
+					4,
+					3,
+					3
+				]
+			},
+			{
+				"name": "random_cubes",
+				"pos": [
+					7,
+					3,
+					3
+				]
+			},
+			{
+				"name": "particle_chaos",
+				"pos": [
+					5,
+					3,
+					5
+				]
+			},
+			{
+				"name": "random_cubes",
+				"pos": [
+					4,
+					3,
+					7
+				]
+			},
+			{
+				"name": "random_cubes",
+				"pos": [
+					7,
+					3,
+					7
+				]
+			},
+			{
+				"name": "lambda_slider",
+				"pos": [
+					1,
+					1,
+					9
+				]
+			},
+			{
+				"name": "tt",
+				"pos": [
+					9,
+					1,
+					9
+				]
+			}
+		],
+		"dimensions": [
+			12,
+			4,
+			14
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 96,
+			"ground_pct": 57.1428571428571,
+			"void": 28,
+			"walls": 44
+		},
+		"map_name": "QFEP_E_Term",
+		"rooms": [
+			{
+				"artifacts": [
+					"lambda_slider",
+					"tt"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 96
+			}
+		],
+		"spawn": [
+			1,
+			1,
+			1
+		],
+		"teleporter": [
+			5,
+			0,
+			11
+		]
+	},
+	"timestamp": "2026-03-16T12:16:19",
+	"walkthrough": {
+		"map_name": "QFEP_E_Term",
+		"stops": [
+			{
+				"facing": "south",
+				"look_at": [
+					1,
+					1,
+					9
+				],
+				"pos": [
+					1,
+					1,
+					1
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southeast",
+						"dist": 5,
+						"name": "random_cubes"
+					},
+					{
+						"direction": "south",
+						"dist": 8,
+						"name": "lambda_slider"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "east",
+				"name": "lambda_slider",
+				"pos": [
+					1,
+					1,
+					9
+				],
+				"steps_from_prev": 8,
+				"total_steps": 8,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northeast",
+						"dist": 5,
+						"name": "random_cubes"
+					},
+					{
+						"direction": "east",
+						"dist": 8,
+						"name": "tt"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "southwest",
+				"name": "tt",
+				"pos": [
+					9,
+					1,
+					9
+				],
+				"steps_from_prev": 8,
+				"total_steps": 16,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 4,
+						"name": "random_cubes"
+					},
+					{
+						"direction": "west",
+						"dist": 8,
+						"name": "lambda_slider"
+					}
+				]
+			},
+			{
+				"approach_from": "southwest",
+				"pos": [
+					5,
+					0,
+					11
+				],
+				"reachable": true,
+				"steps_from_prev": 0,
+				"total_steps": 16,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 2,
+			"total_steps": 16,
+			"total_stops": 4
+		}
+	}
+}

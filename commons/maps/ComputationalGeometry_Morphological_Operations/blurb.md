@@ -1,5 +1,5 @@
-Erosion subtracts. Dilation adds. A structuring element — small kernel, simple shape — slides across a binary image and asks one question at every pixel: does the neighborhood fit? Erosion keeps only what the kernel fully covers. Dilation claims everything the kernel touches. Two operations, mirror-image logic, and between them the entire grammar of shape transformation.
+Walls with bites taken out of them. Void patches eat into solid geometry like acid, leaving ragged edges where clean surfaces used to be. Elsewhere, thick protrusions bulge outward from surfaces that should be flat.
 
-Walls bitten into by void. Patches eaten away where the structure couldn't sustain the kernel's demand for completeness. What remains after erosion is what was robust — geometry that could survive interrogation at every point. Dilation is the inverse impulse: borders thicken, gaps close, fragments merge into mass.
+Erosion shrinks a shape by peeling pixels from its boundary. Dilation grows it by adding pixels around the edge. The operations are duals — erosion of the foreground is dilation of the background. This room shows both at once: walls thinned by erosion on one side, thickened by dilation on the other. The height-5 columns that remain are what survived the shrinking.
 
-Opening is erosion then dilation — noise dies, structure persists. Closing is dilation then erosion — wounds heal, holes seal. The shape remembers what it was, approximately. Identity as statistical residue.
+Morphological operations do not change what a shape is. They change where its edge falls. Identity is not the interior. Identity is the boundary, and the boundary is negotiable.

@@ -19,13 +19,13 @@ var current_pattern = NavigationPattern.SPIRAL
 var pattern_timer = 0.0
 var pattern_interval = 8.0
 
-func _ready():
+func _ready() -> void:
 	create_grid_lines()
 	create_coordinate_axes()
 	create_reference_points()
 	setup_materials()
 
-func create_grid_lines():
+func create_grid_lines() -> void:
 	var grid_parent = $GridLines
 	
 	# Create grid lines along X and Z axes
@@ -42,7 +42,7 @@ func create_grid_lines():
 		z_line.position = Vector3(i * grid_spacing, 0, 0)
 		grid_parent.add_child(z_line)
 
-func create_coordinate_axes():
+func create_coordinate_axes() -> void:
 	var axes_parent = $CoordinateAxes
 	
 	# X-axis (Red)
@@ -76,7 +76,7 @@ func create_coordinate_axes():
 	y_axis.set_meta("axis_type", "y")
 	z_axis.set_meta("axis_type", "z")
 
-func create_reference_points():
+func create_reference_points() -> void:
 	var ref_parent = $ReferencePoints
 	
 	# Create reference points at key coordinates
@@ -96,7 +96,7 @@ func create_reference_points():
 		point.position = key_points[i]
 		ref_parent.add_child(point)
 
-func setup_materials():
+func setup_materials() -> void:
 	# Grid lines material - cyan glow
 	var grid_material = StandardMaterial3D.new()
 	grid_material.albedo_color = Color(0.0, 1.0, 1.0, 0.8)
@@ -155,7 +155,7 @@ func setup_materials():
 	mode_material.emission = Color(0.3, 0.2, 0.05, 1.0)
 	$GridModeIndicator.material_override = mode_material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	pattern_timer += delta
 	
@@ -170,7 +170,7 @@ func _process(delta):
 	animate_grid_effects()
 	update_coordinate_display()
 
-func update_navigator_position():
+func update_navigator_position() -> void:
 	var pattern_progress = pattern_timer / pattern_interval
 	
 	match current_pattern:
@@ -186,7 +186,7 @@ func update_navigator_position():
 		NavigationPattern.RANDOM_WALK:
 			navigate_random_walk()
 
-func navigate_spiral(progress):
+func navigate_spiral(progress) -> void:
 	var angle = progress * PI * 8.0  # Multiple rotations
 	var radius = progress * 6.0
 	
@@ -198,7 +198,7 @@ func navigate_spiral(progress):
 	
 	$Navigator.position = navigator_position
 
-func navigate_maze_runner(progress):
+func navigate_maze_runner(progress) -> void:
 	# Create a maze-like path using step functions
 	var steps = 16
 	var step_progress = fmod(progress * steps, 1.0)
@@ -223,7 +223,7 @@ func navigate_maze_runner(progress):
 	
 	$Navigator.position = navigator_position
 
-func navigate_coordinate_sweep(progress):
+func navigate_coordinate_sweep(progress) -> void:
 	# Sweep through coordinate system in organized pattern
 	var phase = fmod(progress * 3.0, 1.0)
 	var sweep_phase = int(progress * 3.0)
@@ -250,7 +250,7 @@ func navigate_coordinate_sweep(progress):
 	
 	$Navigator.position = navigator_position
 
-func navigate_random_walk():
+func navigate_random_walk() -> void:
 	# Random walk with grid snapping
 	if fmod(time, 0.5) < 0.1:  # Move every 0.5 seconds
 		var directions = [
@@ -269,7 +269,7 @@ func navigate_random_walk():
 		navigator_position = new_position
 		$Navigator.position = navigator_position
 
-func update_trail():
+func update_trail() -> void:
 	# Add current position to trail
 	if trail_points.size() == 0 or trail_points[-1].distance_to(navigator_position) > 0.5:
 		trail_points.append(navigator_position)
@@ -286,7 +286,7 @@ func update_trail():
 		if $NavigatorTrail.get_child_count() > 0:
 			$NavigatorTrail.get_child(0).queue_free()
 
-func create_trail_segment(start_pos, end_pos):
+func create_trail_segment(start_pos, end_pos) -> void:
 	var segment = CSGCylinder3D.new()
 	var length = start_pos.distance_to(end_pos)
 	
@@ -315,12 +315,12 @@ func create_trail_segment(start_pos, end_pos):
 	
 	$NavigatorTrail.add_child(segment)
 
-func clear_trail():
+func clear_trail() -> void:
 	trail_points.clear()
 	for child in $NavigatorTrail.get_children():
 		child.queue_free()
 
-func animate_grid_effects():
+func animate_grid_effects() -> void:
 	# Pulse grid lines
 	var pulse = 1.0 + sin(time * 2.0) * 0.2
 	
@@ -334,7 +334,7 @@ func animate_grid_effects():
 	var nav_pulse = 1.0 + sin(time * 4.0) * 0.3
 	$Navigator.scale = Vector3.ONE * nav_pulse
 
-func update_coordinate_display():
+func update_coordinate_display() -> void:
 	# Update coordinate display based on navigator position
 	var coord_height = (abs(navigator_position.x) + abs(navigator_position.z)) * 0.1 + 0.5
 	$CoordinateDisplay.size.y = coord_height
@@ -346,3 +346,12 @@ func update_coordinate_display():
 	if gridmodeindicator and gridmodeindicator is CSGCylinder3D:
 		gridmodeindicator.height = mode_height
 		gridmodeindicator.position.y = 4 + mode_height/2
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,1 +1,0 @@
-1, 1, 2, 3, 5, 8, 13... The Fibonacci sequence meets the Sierpinski triangle. Here, growth by addition encounters growth by deletion. Two paths to fractal structure: accumulative (Fibonacci) and subtractive (Sierpinski). Both spiral toward the golden ratio.

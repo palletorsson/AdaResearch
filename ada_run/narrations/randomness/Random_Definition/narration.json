@@ -1,0 +1,1521 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 2,
+				"name": "prng_crank_machine",
+				"pos": [
+					4,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 6,
+				"name": "slot_machine",
+				"pos": [
+					0,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 7,
+				"name": "entropy_axiom",
+				"pos": [
+					2,
+					1,
+					5
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 11,
+				"name": "entropy_jar",
+				"pos": [
+					2,
+					1,
+					9
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 12,
+				"name": "random_butterflies",
+				"pos": [
+					2,
+					1,
+					10
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 14,
+				"name": "dark_sphere",
+				"pos": [
+					2,
+					1,
+					12
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 21,
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					19
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 23,
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					21
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 25,
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					23
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 27,
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					25
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 29,
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					27
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 31,
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					29
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "clipboard",
+				"pos": [
+					4,
+					2,
+					13
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "digital_materiality_glitch",
+				"pos": [
+					0,
+					2,
+					15
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "trng_vs_prng",
+				"pos": [
+					4,
+					2,
+					15
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					0,
+					31
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					0,
+					33
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					0,
+					35
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					0,
+					37
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					0,
+					39
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [],
+		"issues": [
+			{
+				"description": "clipboard at (4,2,13) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "digital_materiality_glitch at (0,2,15) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "trng_vs_prng at (4,2,15) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "random_number_book_page_1955 at (2,0,31) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "random_number_book_page_1955 at (2,0,33) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "random_number_book_page_1955 at (2,0,35) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "random_number_book_page_1955 at (2,0,37) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "random_number_book_page_1955 at (2,0,39) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Random_Definition",
+		"pacing": {
+			"density": 2.58333333333333,
+			"reachable_artifacts": 12,
+			"total_artifacts": 20,
+			"walkable_tiles": 141
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			4,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": 18,
+			"pos": [
+				2,
+				0,
+				16
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Random_Definition",
+	"sequence": "randomness",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "slot_machine",
+				"pos": [
+					0,
+					1,
+					2
+				]
+			},
+			{
+				"name": "prng_crank_machine",
+				"pos": [
+					4,
+					1,
+					2
+				]
+			},
+			{
+				"name": "entropy_axiom",
+				"pos": [
+					2,
+					1,
+					5
+				]
+			},
+			{
+				"name": "entropy_jar",
+				"pos": [
+					2,
+					1,
+					9
+				]
+			},
+			{
+				"name": "random_butterflies",
+				"pos": [
+					2,
+					1,
+					10
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					2,
+					1,
+					12
+				]
+			},
+			{
+				"name": "clipboard",
+				"pos": [
+					4,
+					2,
+					13
+				]
+			},
+			{
+				"name": "digital_materiality_glitch",
+				"pos": [
+					0,
+					2,
+					15
+				]
+			},
+			{
+				"name": "trng_vs_prng",
+				"pos": [
+					4,
+					2,
+					15
+				]
+			},
+			{
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					19
+				]
+			},
+			{
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					21
+				]
+			},
+			{
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					23
+				]
+			},
+			{
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					25
+				]
+			},
+			{
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					27
+				]
+			},
+			{
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					29
+				]
+			},
+			{
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					0,
+					31
+				]
+			},
+			{
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					0,
+					33
+				]
+			},
+			{
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					0,
+					35
+				]
+			},
+			{
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					0,
+					37
+				]
+			},
+			{
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					0,
+					39
+				]
+			}
+		],
+		"dimensions": [
+			5,
+			3,
+			30
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 141,
+			"ground_pct": 94.0,
+			"void": 1,
+			"walls": 8
+		},
+		"map_name": "Random_Definition",
+		"rooms": [
+			{
+				"artifacts": [
+					"slot_machine",
+					"prng_crank_machine",
+					"entropy_axiom",
+					"entropy_jar",
+					"random_butterflies",
+					"dark_sphere",
+					"random_number_book_page_1955",
+					"random_number_book_page_1955",
+					"random_number_book_page_1955",
+					"random_number_book_page_1955",
+					"random_number_book_page_1955",
+					"random_number_book_page_1955"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 141
+			}
+		],
+		"spawn": [
+			4,
+			1,
+			0
+		],
+		"teleporter": [
+			2,
+			0,
+			16
+		]
+	},
+	"timestamp": "2026-03-16T12:13:33",
+	"walkthrough": {
+		"map_name": "Random_Definition",
+		"stops": [
+			{
+				"facing": "south",
+				"look_at": [
+					4,
+					1,
+					2
+				],
+				"pos": [
+					4,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "south",
+						"dist": 2,
+						"name": "prng_crank_machine"
+					},
+					{
+						"direction": "southwest",
+						"dist": 6,
+						"name": "slot_machine"
+					},
+					{
+						"direction": "south",
+						"dist": 7,
+						"name": "entropy_axiom"
+					},
+					{
+						"direction": "south",
+						"dist": 11,
+						"name": "entropy_jar"
+					},
+					{
+						"direction": "south",
+						"dist": 12,
+						"name": "random_butterflies"
+					},
+					{
+						"direction": "south",
+						"dist": 13,
+						"name": "clipboard"
+					},
+					{
+						"direction": "south",
+						"dist": 14,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "south",
+						"dist": 21,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 23,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 25,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 27,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 29,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 31,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 33,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 35,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 37,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 39,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 41,
+						"name": "random_number_book_page_1955"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "west",
+				"name": "prng_crank_machine",
+				"pos": [
+					4,
+					1,
+					2
+				],
+				"steps_from_prev": 2,
+				"total_steps": 2,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 4,
+						"name": "slot_machine"
+					},
+					{
+						"direction": "southwest",
+						"dist": 5,
+						"name": "entropy_axiom"
+					},
+					{
+						"direction": "south",
+						"dist": 9,
+						"name": "entropy_jar"
+					},
+					{
+						"direction": "south",
+						"dist": 10,
+						"name": "random_butterflies"
+					},
+					{
+						"direction": "south",
+						"dist": 11,
+						"name": "clipboard"
+					},
+					{
+						"direction": "south",
+						"dist": 12,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "south",
+						"dist": 19,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 21,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 23,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 25,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 27,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 29,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 31,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 33,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 35,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 37,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 39,
+						"name": "random_number_book_page_1955"
+					}
+				]
+			},
+			{
+				"approach_from": "west",
+				"facing": "southeast",
+				"name": "slot_machine",
+				"pos": [
+					0,
+					1,
+					2
+				],
+				"steps_from_prev": 4,
+				"total_steps": 6,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "east",
+						"dist": 4,
+						"name": "prng_crank_machine"
+					},
+					{
+						"direction": "southeast",
+						"dist": 5,
+						"name": "entropy_axiom"
+					},
+					{
+						"direction": "south",
+						"dist": 9,
+						"name": "entropy_jar"
+					},
+					{
+						"direction": "south",
+						"dist": 10,
+						"name": "random_butterflies"
+					},
+					{
+						"direction": "south",
+						"dist": 12,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "south",
+						"dist": 15,
+						"name": "clipboard"
+					},
+					{
+						"direction": "south",
+						"dist": 19,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 21,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 23,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 25,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 27,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 29,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 31,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 33,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 35,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 37,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 39,
+						"name": "random_number_book_page_1955"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "south",
+				"name": "entropy_axiom",
+				"pos": [
+					2,
+					1,
+					5
+				],
+				"steps_from_prev": 5,
+				"total_steps": 11,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "south",
+						"dist": 4,
+						"name": "entropy_jar"
+					},
+					{
+						"direction": "northwest",
+						"dist": 5,
+						"name": "slot_machine"
+					},
+					{
+						"direction": "northeast",
+						"dist": 5,
+						"name": "prng_crank_machine"
+					},
+					{
+						"direction": "south",
+						"dist": 5,
+						"name": "random_butterflies"
+					},
+					{
+						"direction": "south",
+						"dist": 7,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "south",
+						"dist": 10,
+						"name": "clipboard"
+					},
+					{
+						"direction": "south",
+						"dist": 14,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 16,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 18,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 20,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 22,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 24,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 26,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 28,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 30,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 32,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 34,
+						"name": "random_number_book_page_1955"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "entropy_jar",
+				"pos": [
+					2,
+					1,
+					9
+				],
+				"steps_from_prev": 4,
+				"total_steps": 15,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "south",
+						"dist": 1,
+						"name": "random_butterflies"
+					},
+					{
+						"direction": "south",
+						"dist": 3,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "north",
+						"dist": 4,
+						"name": "entropy_axiom"
+					},
+					{
+						"direction": "southeast",
+						"dist": 6,
+						"name": "clipboard"
+					},
+					{
+						"direction": "north",
+						"dist": 9,
+						"name": "slot_machine"
+					},
+					{
+						"direction": "north",
+						"dist": 9,
+						"name": "prng_crank_machine"
+					},
+					{
+						"direction": "south",
+						"dist": 10,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 12,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 14,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 16,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 18,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 20,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 22,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 24,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 26,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 28,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 30,
+						"name": "random_number_book_page_1955"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "random_butterflies",
+				"pos": [
+					2,
+					1,
+					10
+				],
+				"steps_from_prev": 1,
+				"total_steps": 16,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 1,
+						"name": "entropy_jar"
+					},
+					{
+						"direction": "south",
+						"dist": 2,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "north",
+						"dist": 5,
+						"name": "entropy_axiom"
+					},
+					{
+						"direction": "southeast",
+						"dist": 5,
+						"name": "clipboard"
+					},
+					{
+						"direction": "south",
+						"dist": 9,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "north",
+						"dist": 10,
+						"name": "slot_machine"
+					},
+					{
+						"direction": "north",
+						"dist": 10,
+						"name": "prng_crank_machine"
+					},
+					{
+						"direction": "south",
+						"dist": 11,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 13,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 15,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 17,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 19,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 21,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 23,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 25,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 27,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 29,
+						"name": "random_number_book_page_1955"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "dark_sphere",
+				"pos": [
+					2,
+					1,
+					12
+				],
+				"steps_from_prev": 2,
+				"total_steps": 18,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 2,
+						"name": "random_butterflies"
+					},
+					{
+						"direction": "north",
+						"dist": 3,
+						"name": "entropy_jar"
+					},
+					{
+						"direction": "southeast",
+						"dist": 3,
+						"name": "clipboard"
+					},
+					{
+						"direction": "southwest",
+						"dist": 5,
+						"name": "digital_materiality_glitch"
+					},
+					{
+						"direction": "southeast",
+						"dist": 5,
+						"name": "trng_vs_prng"
+					},
+					{
+						"direction": "north",
+						"dist": 7,
+						"name": "entropy_axiom"
+					},
+					{
+						"direction": "south",
+						"dist": 7,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 9,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 11,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "north",
+						"dist": 12,
+						"name": "prng_crank_machine"
+					},
+					{
+						"direction": "north",
+						"dist": 12,
+						"name": "slot_machine"
+					},
+					{
+						"direction": "south",
+						"dist": 13,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 15,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 17,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 19,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 21,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 23,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 25,
+						"name": "random_number_book_page_1955"
+					},
+					{
+						"direction": "south",
+						"dist": 27,
+						"name": "random_number_book_page_1955"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					19
+				],
+				"steps_from_prev": 7,
+				"total_steps": 25,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 6,
+						"name": "digital_materiality_glitch"
+					},
+					{
+						"direction": "northeast",
+						"dist": 6,
+						"name": "trng_vs_prng"
+					},
+					{
+						"direction": "north",
+						"dist": 7,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "north",
+						"dist": 9,
+						"name": "random_butterflies"
+					},
+					{
+						"direction": "north",
+						"dist": 10,
+						"name": "entropy_jar"
+					},
+					{
+						"direction": "north",
+						"dist": 14,
+						"name": "entropy_axiom"
+					},
+					{
+						"direction": "north",
+						"dist": 19,
+						"name": "prng_crank_machine"
+					},
+					{
+						"direction": "north",
+						"dist": 19,
+						"name": "slot_machine"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					21
+				],
+				"steps_from_prev": 2,
+				"total_steps": 27,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 9,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "north",
+						"dist": 11,
+						"name": "random_butterflies"
+					},
+					{
+						"direction": "north",
+						"dist": 12,
+						"name": "entropy_jar"
+					},
+					{
+						"direction": "north",
+						"dist": 16,
+						"name": "entropy_axiom"
+					},
+					{
+						"direction": "north",
+						"dist": 21,
+						"name": "slot_machine"
+					},
+					{
+						"direction": "north",
+						"dist": 21,
+						"name": "prng_crank_machine"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					23
+				],
+				"steps_from_prev": 2,
+				"total_steps": 29,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 11,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "north",
+						"dist": 13,
+						"name": "random_butterflies"
+					},
+					{
+						"direction": "north",
+						"dist": 14,
+						"name": "entropy_jar"
+					},
+					{
+						"direction": "north",
+						"dist": 18,
+						"name": "entropy_axiom"
+					},
+					{
+						"direction": "north",
+						"dist": 23,
+						"name": "slot_machine"
+					},
+					{
+						"direction": "north",
+						"dist": 23,
+						"name": "prng_crank_machine"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					25
+				],
+				"steps_from_prev": 2,
+				"total_steps": 31,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 13,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "north",
+						"dist": 15,
+						"name": "random_butterflies"
+					},
+					{
+						"direction": "north",
+						"dist": 16,
+						"name": "entropy_jar"
+					},
+					{
+						"direction": "north",
+						"dist": 20,
+						"name": "entropy_axiom"
+					},
+					{
+						"direction": "north",
+						"dist": 25,
+						"name": "slot_machine"
+					},
+					{
+						"direction": "north",
+						"dist": 25,
+						"name": "prng_crank_machine"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					27
+				],
+				"steps_from_prev": 2,
+				"total_steps": 33,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 15,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "north",
+						"dist": 17,
+						"name": "random_butterflies"
+					},
+					{
+						"direction": "north",
+						"dist": 18,
+						"name": "entropy_jar"
+					},
+					{
+						"direction": "north",
+						"dist": 22,
+						"name": "entropy_axiom"
+					},
+					{
+						"direction": "north",
+						"dist": 27,
+						"name": "slot_machine"
+					},
+					{
+						"direction": "north",
+						"dist": 27,
+						"name": "prng_crank_machine"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "north",
+				"name": "random_number_book_page_1955",
+				"pos": [
+					2,
+					1,
+					29
+				],
+				"steps_from_prev": 2,
+				"total_steps": 35,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 17,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "north",
+						"dist": 19,
+						"name": "random_butterflies"
+					},
+					{
+						"direction": "north",
+						"dist": 20,
+						"name": "entropy_jar"
+					},
+					{
+						"direction": "north",
+						"dist": 24,
+						"name": "entropy_axiom"
+					},
+					{
+						"direction": "north",
+						"dist": 29,
+						"name": "slot_machine"
+					},
+					{
+						"direction": "north",
+						"dist": 29,
+						"name": "prng_crank_machine"
+					}
+				]
+			},
+			{
+				"approach_from": "north",
+				"pos": [
+					2,
+					0,
+					16
+				],
+				"reachable": true,
+				"steps_from_prev": 0,
+				"total_steps": 35,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 12,
+			"total_steps": 35,
+			"total_stops": 14
+		}
+	}
+}

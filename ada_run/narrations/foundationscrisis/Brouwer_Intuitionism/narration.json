@@ -1,0 +1,313 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": -1,
+				"name": "excluded_middle_demo",
+				"pos": [
+					2,
+					1,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "constructive_proof",
+				"pos": [
+					9,
+					1,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "brouwer_choice_sequence",
+				"pos": [
+					5,
+					1,
+					7
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [
+			[
+				0,
+				0,
+				13
+			],
+			[
+				1,
+				0,
+				10
+			],
+			[
+				2,
+				0,
+				10
+			],
+			[
+				4,
+				0,
+				7
+			],
+			[
+				4,
+				0,
+				12
+			],
+			[
+				5,
+				0,
+				6
+			],
+			[
+				5,
+				0,
+				8
+			],
+			[
+				6,
+				0,
+				7
+			],
+			[
+				6,
+				0,
+				12
+			],
+			[
+				8,
+				0,
+				10
+			],
+			[
+				9,
+				0,
+				10
+			],
+			[
+				10,
+				0,
+				13
+			],
+			[
+				5,
+				0,
+				3
+			]
+		],
+		"issues": [
+			{
+				"description": "Teleporter at (5,0,12) unreachable from spawn",
+				"severity": "critical",
+				"type": "unreachable_teleporter"
+			},
+			{
+				"description": "13 dead ends found",
+				"severity": "low",
+				"type": "high_dead_ends"
+			},
+			{
+				"description": "excluded_middle_demo at (2,1,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "constructive_proof at (9,1,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "brouwer_choice_sequence at (5,1,7) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Brouwer_Intuitionism",
+		"pacing": {
+			"density": 0.0,
+			"reachable_artifacts": 0,
+			"total_artifacts": 3,
+			"walkable_tiles": 55
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			5,
+			0,
+			3
+		],
+		"teleporter": {
+			"dist": -1,
+			"pos": [
+				5,
+				0,
+				12
+			],
+			"reachable": false
+		}
+	},
+	"map_name": "Brouwer_Intuitionism",
+	"sequence": "foundationscrisis",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "excluded_middle_demo",
+				"pos": [
+					2,
+					1,
+					4
+				]
+			},
+			{
+				"name": "constructive_proof",
+				"pos": [
+					9,
+					1,
+					4
+				]
+			},
+			{
+				"name": "brouwer_choice_sequence",
+				"pos": [
+					5,
+					1,
+					7
+				]
+			}
+		],
+		"dimensions": [
+			11,
+			2,
+			14
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 54,
+			"ground_pct": 35.0649350649351,
+			"void": 100,
+			"walls": 0
+		},
+		"map_name": "Brouwer_Intuitionism",
+		"rooms": [
+			{
+				"artifacts": [],
+				"label": "A",
+				"region": "north",
+				"tiles": 19
+			},
+			{
+				"artifacts": [],
+				"label": "B",
+				"region": "south",
+				"tiles": 13
+			},
+			{
+				"artifacts": [
+					"excluded_middle_demo"
+				],
+				"label": "C",
+				"region": "north, west",
+				"tiles": 6
+			},
+			{
+				"artifacts": [],
+				"label": "D",
+				"region": "south, west",
+				"tiles": 2
+			},
+			{
+				"artifacts": [
+					"brouwer_choice_sequence"
+				],
+				"label": "E",
+				"region": "center",
+				"tiles": 5
+			},
+			{
+				"artifacts": [
+					"constructive_proof"
+				],
+				"label": "F",
+				"region": "north, east",
+				"tiles": 6
+			},
+			{
+				"artifacts": [],
+				"label": "G",
+				"region": "south, east",
+				"tiles": 2
+			}
+		],
+		"spawn": [
+			5,
+			0,
+			3
+		],
+		"teleporter": [
+			5,
+			0,
+			12
+		]
+	},
+	"timestamp": "2026-03-16T12:16:12",
+	"walkthrough": {
+		"map_name": "Brouwer_Intuitionism",
+		"stops": [
+			{
+				"facing": "south",
+				"look_at": [
+					5,
+					0,
+					12
+				],
+				"pos": [
+					5,
+					0,
+					3
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "west",
+						"dist": 4,
+						"name": "excluded_middle_demo"
+					},
+					{
+						"direction": "south",
+						"dist": 4,
+						"name": "brouwer_choice_sequence"
+					},
+					{
+						"direction": "east",
+						"dist": 5,
+						"name": "constructive_proof"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"pos": [
+					5,
+					0,
+					12
+				],
+				"reachable": false,
+				"steps_from_prev": 0,
+				"total_steps": 0,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 0,
+			"total_steps": 0,
+			"total_stops": 2
+		}
+	}
+}

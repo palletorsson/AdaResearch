@@ -1,3 +1,13 @@
+# @identity
+# essence: cell(t+1) = GoL(neighbors(t)) -- walking creature with 6x6 Game of Life grid as armor
+# desire: Conway's automaton tiling a walker's torso, alive cells as armor, dead cells as vulnerability
+# critical_parameter: _grid state / _generation -- GoL rules determine which body cells are armored
+# triggers: _ca_timer advances generations; alive cells block damage; dead cells expose creature
+# emerges: emergent armor patterns -- gliders, oscillators, still lifes have tactical meaning as coverage
+# needs: HazardCreatureBase [has]; 6x6 GoL grid [has]; cell mesh [has]; armor logic [has]; VR interaction [missing]
+# relationships: embodies cellularautomata sequence; GoL rules create unpredictable defense patterns
+# truth: armor that evolves by its own rules -- the creature does not choose defenses, emergence does.
+
 extends HazardCreatureBase
 class_name LifeformWalker
 ## Cellular Automata hazard — a walking creature with a 6×6 Game of Life grid

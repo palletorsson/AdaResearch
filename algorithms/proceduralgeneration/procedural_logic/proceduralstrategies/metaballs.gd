@@ -10,12 +10,12 @@ var balls: Array = []
 var mesh_instance: MeshInstance3D
 var time: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	create_metaballs()
 	generate_mesh()
 
-func create_metaballs():
+func create_metaballs() -> void:
 	balls.clear()
 	for i in range(num_balls):
 		balls.append({
@@ -24,13 +24,13 @@ func create_metaballs():
 			"velocity": Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1))
 		})
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if animate:
 		time += delta
 		update_metaballs(delta)
 		generate_mesh()
 
-func update_metaballs(delta):
+func update_metaballs(delta) -> void:
 	for ball in balls:
 		ball.position += ball.velocity * delta
 		
@@ -49,7 +49,7 @@ func metaball_field(pos: Vector3) -> float:
 		sum += (ball.radius * ball.radius) / (dist * dist)
 	return sum
 
-func generate_mesh():
+func generate_mesh() -> void:
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
@@ -96,7 +96,7 @@ func generate_mesh():
 		mesh_instance.material_override = material
 		add_child(mesh_instance)
 
-func add_surface_geometry(st: SurfaceTool, center: Vector3, size: float):
+func add_surface_geometry(st: SurfaceTool, center: Vector3, size: float) -> void:
 	var hs = size * 0.5
 	# Add simple cube for surface approximation
 	var dirs = [Vector3.UP, Vector3.RIGHT, Vector3.FORWARD]
@@ -106,7 +106,16 @@ func add_surface_geometry(st: SurfaceTool, center: Vector3, size: float):
 			var v = center + n * hs
 			st.add_vertex(v)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
 		create_metaballs()
 		generate_mesh()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

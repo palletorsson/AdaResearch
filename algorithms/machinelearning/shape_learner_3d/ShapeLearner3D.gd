@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 ## GA + Cellular Automaton Shape Learner (3D).
 ## Evolves 3D CA rules to grow target shapes (cube, sphere, pyramid) from a single seed voxel.
@@ -35,7 +35,7 @@ var _status_label: Label3D
 var is_evaluating = false
 var current_eval_index = 0
 
-func _ready():
+func _ready() -> void:
 	multimesh_instance = $MultiMeshInstance3D
 	$Timer.wait_time = 0.1
 	$Timer.timeout.connect(stamp_ca_generation)
@@ -60,7 +60,7 @@ func _process(_delta):
 	if is_evaluating:
 		evaluate_population_async()
 
-func run_ga_generation():
+func run_ga_generation() -> void:
 	if current_generation < generations:
 		# Start async evaluation
 		is_evaluating = true
@@ -70,7 +70,7 @@ func run_ga_generation():
 	else:
 		set_process(false)
 
-func finish_ga_generation():
+func finish_ga_generation() -> void:
 	var best_fitness = fitness.max()
 	_best_fitness_ever = max(_best_fitness_ever, best_fitness)
 	print("Gen %d | Best %.4f | Record %.4f" % [current_generation, best_fitness, _best_fitness_ever])
@@ -95,7 +95,7 @@ func finish_ga_generation():
 	ca_grid_index = 0
 	$Timer.start()
 
-func stamp_ca_generation():
+func stamp_ca_generation() -> void:
 	if ca_grid_index < ca_grids.size():
 		update_multimesh(ca_grids[ca_grid_index])
 		ca_grid_index += 1
@@ -104,7 +104,7 @@ func stamp_ca_generation():
 		current_generation += 1
 		run_ga_generation()
 
-func create_target_shape():
+func create_target_shape() -> void:
 	target_shape.resize(grid_size)
 	for x in range(grid_size):
 		target_shape[x] = []
@@ -134,7 +134,7 @@ func create_target_shape():
 				else:
 					target_shape[x][y][z] = 0
 
-func initialize_population():
+func initialize_population() -> void:
 	population.resize(population_size)
 	for i in range(population_size):
 		population[i] = []
@@ -142,7 +142,7 @@ func initialize_population():
 		for j in range(27):
 			population[i][j] = randi() % 2
 
-func evaluate_population_async():
+func evaluate_population_async() -> void:
 	# Evaluate a few individuals per frame to avoid freezing
 	var end_index = min(current_eval_index + individuals_per_frame, population_size)
 
@@ -223,7 +223,7 @@ func calculate_fitness(grid):
 					score += 1
 	return float(score) / (grid_size * grid_size * grid_size)
 
-func select_new_population():
+func select_new_population() -> void:
 	var new_population = []
 	new_population.resize(population_size)
 	for i in range(population_size):
@@ -255,12 +255,12 @@ func crossover(parent1, parent2):
 			child[i] = parent2[i]
 	return child
 
-func mutate(child):
+func mutate(child) -> void:
 	for i in range(27):
 		if randf() < mutation_rate:
 			child[i] = 1 - child[i]
 
-func update_multimesh(grid):
+func update_multimesh(grid) -> void:
 	var multimesh = MultiMesh.new()
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D
 	multimesh.use_colors = true  # Per-instance colour coding
@@ -291,3 +291,12 @@ func update_multimesh(grid):
 					instance_index += 1
 
 	multimesh_instance.multimesh = multimesh
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

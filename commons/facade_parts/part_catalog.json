@@ -1,0 +1,110 @@
+{
+  "version": 2,
+  "categories": [
+    {
+      "id": "columns",
+      "name": "Columns",
+      "color": "#8D6E63",
+      "parts": [
+        { "id": "col_tuscan", "name": "Tuscan Column", "description": "Simple unfluted column with plain capital", "default_params": {} },
+        { "id": "col_doric", "name": "Doric Column", "description": "Fluted column with plain capital, 20 flutes", "default_params": { "flute_count": 20 } },
+        { "id": "col_ionic", "name": "Ionic Column", "description": "Fluted column with volute scroll capital", "default_params": { "flute_count": 24 } },
+        { "id": "col_corinthian", "name": "Corinthian Column", "description": "Fluted column with acanthus bell capital", "default_params": { "flute_count": 24 } },
+        { "id": "pilaster", "name": "Pilaster", "description": "Flat rectangular column attached to wall", "default_params": { "depth": 0.08 } },
+        { "id": "col_solomonic", "name": "Solomonic Column", "description": "Barley-twist helical shaft column", "default_params": { "twist_count": 6 } },
+        { "id": "col_composite", "name": "Composite Column", "description": "Corinthian body with Ionic volutes", "default_params": { "flute_count": 24 } }
+      ]
+    },
+    {
+      "id": "openings",
+      "name": "Openings",
+      "color": "#5C6BC0",
+      "parts": [
+        { "id": "rect_window", "name": "Rectangular Window", "description": "Standard rectangular window with frame, sill, and lintel", "default_params": {} },
+        { "id": "arched_window", "name": "Arched Window", "description": "Window with semicircular arch top and keystone", "default_params": {} },
+        { "id": "venetian_bifora", "name": "Venetian Bifora", "description": "Two arched openings divided by a central column", "default_params": {} },
+        { "id": "rose_window", "name": "Rose Window", "description": "Circular window with radial tracery spokes", "default_params": { "spoke_count": 8 } },
+        { "id": "porthole", "name": "Porthole", "description": "Simple circular window with frame ring", "default_params": {} },
+        { "id": "single_door", "name": "Single Door", "description": "One-panel door with handle reaching near ground", "default_params": {} },
+        { "id": "double_door", "name": "Double Door", "description": "Two-leaf door with central meeting stile", "default_params": {} },
+        { "id": "arched_door", "name": "Arched Door", "description": "Door with semicircular arch top and keystone", "default_params": {} },
+        { "id": "portal", "name": "Portal", "description": "Large arched entrance with archivolt surround", "default_params": {} }
+      ]
+    },
+    {
+      "id": "arches",
+      "name": "Arches",
+      "color": "#EF6C00",
+      "parts": [
+        { "id": "round_arch", "name": "Round Arch", "description": "Simple semicircular arch with piers", "default_params": {} },
+        { "id": "pointed_arch", "name": "Pointed Arch", "description": "Gothic pointed arch with piers", "default_params": {} },
+        { "id": "arcade_arch", "name": "Arcade Arch", "description": "Two piers with spanning arch and impost blocks", "default_params": {} },
+        { "id": "segmental_arch", "name": "Segmental Arch", "description": "Shallow arc arch less than semicircle", "default_params": {} }
+      ]
+    },
+    {
+      "id": "balconies",
+      "name": "Balconies",
+      "color": "#26A69A",
+      "parts": [
+        { "id": "juliet_balcony", "name": "Juliet Balcony", "description": "Iron railing flush with wall and window behind", "default_params": {} },
+        { "id": "projecting_balcony", "name": "Projecting Balcony", "description": "Platform extending from wall with bracket supports", "default_params": { "balcony_depth": 0.6 } },
+        { "id": "loggia", "name": "Loggia", "description": "Recessed open gallery with columns", "default_params": { "column_count": 3 } }
+      ]
+    },
+    {
+      "id": "cornices",
+      "name": "Cornices",
+      "color": "#AB47BC",
+      "parts": [
+        { "id": "dentil_cornice", "name": "Dentil Cornice", "description": "Row of small cube blocks on a backing strip", "default_params": {} },
+        { "id": "cyma_recta", "name": "Cyma Recta", "description": "S-curve molding profile extruded along width", "default_params": {} },
+        { "id": "string_course", "name": "String Course", "description": "Simple horizontal band with slight projection", "default_params": {} },
+        { "id": "fascia", "name": "Fascia", "description": "Flat band flush with wall surface", "default_params": {} },
+        { "id": "modillion", "name": "Modillion Cornice", "description": "Cornice with bracket supports underneath", "default_params": {} }
+      ]
+    },
+    {
+      "id": "shutters",
+      "name": "Shutters",
+      "color": "#6D4C41",
+      "parts": [
+        { "id": "louvered_shutter", "name": "Louvered Shutter", "description": "Pair of shutters with angled slat louvers", "default_params": {} },
+        { "id": "paneled_shutter", "name": "Paneled Shutter", "description": "Pair of solid-panel shutters", "default_params": {} }
+      ]
+    },
+    {
+      "id": "railings",
+      "name": "Railings",
+      "color": "#546E7A",
+      "parts": [
+        { "id": "simple_railing", "name": "Simple Railing", "description": "Horizontal bars between end posts", "default_params": { "bar_count": 3 } },
+        { "id": "balustrade", "name": "Balustrade", "description": "Classical balustrade with tapered balusters", "default_params": {} },
+        { "id": "iron_railing", "name": "Iron Railing", "description": "Vertical iron bars with decorative finials", "default_params": {} }
+      ]
+    },
+    {
+      "id": "surfaces",
+      "name": "Surfaces",
+      "color": "#9E9E9E",
+      "parts": [
+        { "id": "plain_wall", "name": "Plain Wall", "description": "Empty surface showing wall behind", "default_params": {} },
+        { "id": "rusticated_block", "name": "Rusticated Block", "description": "Grid of offset blocks with visible gaps", "default_params": { "rows": 4, "cols": 2 } },
+        { "id": "stucco", "name": "Stucco", "description": "Smooth flat panel with minimal depth", "default_params": {} },
+        { "id": "ashlar", "name": "Ashlar", "description": "Cut stone blocks with fine joints in running bond", "default_params": { "rows": 6, "cols": 3 } }
+      ]
+    },
+    {
+      "id": "ornaments",
+      "name": "Ornaments",
+      "color": "#FFA726",
+      "parts": [
+        { "id": "pediment_tri", "name": "Triangular Pediment", "description": "Classical triangular pediment with oculus", "default_params": {} },
+        { "id": "pediment_broken", "name": "Broken Pediment", "description": "Two halves with gap and central urn finial", "default_params": {} },
+        { "id": "medallion", "name": "Medallion", "description": "Circular relief disc with border ring", "default_params": {} },
+        { "id": "cartouche", "name": "Cartouche", "description": "Oval decorative frame with scroll edges", "default_params": {} },
+        { "id": "pilaster_orn", "name": "Ornamental Pilaster", "description": "Flat decorative pilaster strip, thinner than structural", "default_params": {} }
+      ]
+    }
+  ]
+}

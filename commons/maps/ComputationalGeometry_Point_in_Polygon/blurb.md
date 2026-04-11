@@ -1,5 +1,5 @@
-Cast a ray from any point toward infinity. Count how many times it crosses the boundary. Odd — inside. Even — outside. The ray casting algorithm reduces a spatial question to arithmetic. Where am I? becomes How many walls did I cross?
+The floor is an irregular shape — not a rectangle, not convex. Walls jut inward at odd angles, creating a polygon boundary you can trace with your eyes but not easily classify. Stand inside it. Are you sure you are inside?
 
-The room is the polygon. Irregular walls trace a non-convex outline across the 9×9 grid — no clean symmetry, no convex guarantees. The floor itself is the test region. Stand somewhere and know: the boundary decides what belongs.
+The ray casting algorithm answers by drawing an imaginary line from the test point to infinity and counting boundary crossings. Odd count: inside. Even: outside. The winding number method asks instead how many times the boundary wraps around you. Both reduce containment to counting.
 
-The winding number offers a second answer. Instead of counting crossings, it counts how many times the boundary wraps around the point. Zero — outside. Nonzero — enclosed. Two algorithms, same question, different geometry of proof. Containment is not a property of the point. It is a relation to every edge at once.
+A convex shape makes inside and outside obvious. But add one concavity — one inward notch — and intuition fails. You need an algorithm. Containment is not a feeling. It is a crossing count, and the crossing count does not lie.

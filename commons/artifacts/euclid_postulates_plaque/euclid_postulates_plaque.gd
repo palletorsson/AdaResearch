@@ -6,6 +6,16 @@ extends Node3D
 
 class_name EuclidPostulatesPlaque
 
+# @identity
+# essence: five axioms; four self-evident, the fifth (parallel postulate) independent and contingent
+# desire: cycle through the postulates and feel the fifth one glow differently — it was always the odd one out
+# critical_parameter: current_postulate — when it reaches 4 (the fifth), the entire color scheme shifts
+# triggers: click/interact cycles postulates; reaching the fifth fires parallel_highlighted signal
+# emerges: the dawning suspicion that the fifth postulate is not like the others — it can be denied
+# needs: VR click interaction [has via mouse], XR grab interaction [missing]
+# relationships: unlocks hyperbolic_surface and elliptic_surface (what happens when you deny the fifth); depends on angle_sum_triangle
+# truth: the parallel postulate was assumed for two thousand years — its independence was the first crack in mathematical certainty
+
 signal postulate_selected(index: int)
 signal parallel_highlighted
 
@@ -17,6 +27,7 @@ signal parallel_highlighted
 @export var highlight_fifth: bool = true
 @export var plaque_size: Vector3 = Vector3(0.8, 1.0, 0.05)
 
+var _xr_active: bool = false
 var _plaque_mesh: MeshInstance3D
 var _title_label: Label3D
 var _text_label: Label3D
@@ -40,6 +51,7 @@ const POSTULATE_TITLES = [
 ]
 
 func _ready():
+	_xr_active = XRServer.primary_interface != null
 	_create_plaque()
 	_create_labels()
 	_create_highlight()
@@ -162,8 +174,15 @@ func previous_postulate():
 	current_postulate = (current_postulate + 4) % 5
 
 func _input(event):
+	if _xr_active:
+		return
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			next_postulate()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			previous_postulate()
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

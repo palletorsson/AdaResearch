@@ -1,0 +1,35 @@
+{
+  "name": "Pompeii Diamond Carpet",
+  "type": "mosaic_composite",
+  "technique": "opus_tessellatum",
+  "period": "roman_republican",
+  "palette": ["#1A1714", "#DDD5C0", "#B8603C"],
+  "aging": {
+    "grout_width": 0.04,
+    "wear_amount": 0.35,
+    "crack_density": 0.0
+  },
+  "rings": [
+    { "type": "separator", "width": 2, "color_index": 0 },
+    { "type": "separator", "width": 1, "color_index": 2 },
+    { "type": "separator", "width": 1, "color_index": 1 },
+    { "type": "separator", "width": 1, "color_index": 0 }
+  ],
+  "zones": {
+    "field": {
+      "motif": "nested_diamonds",
+      "group": "PMM",
+      "domain_size": 8,
+      "domain": [
+        [0, 0, 0, 1, 1, 0, 0, 0],
+        [0, 0, 1, 0, 0, 1, 0, 0],
+        [0, 1, 0, 0, 0, 0, 1, 0],
+        [1, 0, 0, 1, 1, 0, 0, 1],
+        [1, 0, 0, 1, 1, 0, 0, 1],
+        [0, 1, 0, 0, 0, 0, 1, 0],
+        [0, 0, 1, 0, 0, 1, 0, 0],
+        [0, 0, 0, 1, 1, 0, 0, 0]
+      ]
+    }
+  }
+}

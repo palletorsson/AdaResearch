@@ -1,0 +1,1 @@
+Replace every edge with a spike. Do it again. The Koch curve has infinite length contained in finite area—a line that wants to be a plane but never quite arrives. Dimension 1.262: coastline logic. Remove the center of a triangle, repeat on each remainder—the Sierpinski triangle has zero area yet infinite structure, dimension 1.585. Both constructions refuse integer dimensions.

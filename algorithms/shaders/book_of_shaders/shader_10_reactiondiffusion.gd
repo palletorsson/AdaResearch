@@ -1,5 +1,16 @@
 ## Shader 10: Reaction-Diffusion and DLA
 ## Simulation as pattern generation
+
+# @identity
+# essence: du/dt = Du*laplacian(u) - u*v^2 + F*(1-u) — two chemicals diffusing at different rates produce spots, stripes, labyrinths; DLA grows dendrites from random walk adhesion
+# desire: to watch a blank field spontaneously organize into Turing patterns — to see DLA branches grow like frost from nothing but collision and accumulation
+# critical_parameter: growth — controls DLA branch density; higher values fill space, lower values produce sparse dendritic trees
+# triggers: scale slider zooms the pattern field; density slider controls how much of the DLA field solidifies; reaction-diffusion runs autonomously from its initial shader state
+# emerges: neither pattern is designed — reaction-diffusion computes morphogenesis frame by frame; DLA grows without blueprint; the leopard does not choose its spots
+# needs: [has] ShaderRackPanel sliders for DLA; [missing] no sliders for reaction-diffusion parameters (feed/kill rates)
+# relationships: culmination of shader_06 through shader_09 (noise/simulation synthesis); connects to PatternGeneration_Diffusion_Limited_Aggregation_DLA (the physical DLA room)
+# truth: simulation does not represent pattern — simulation is pattern; the skin was always already code
+
 extends Node3D
 
 const DISPLAY_SIZE := Vector3(2.5, 2.5, 0.05)
@@ -92,3 +103,12 @@ func _process(_delta: float) -> void:
 		var uniforms: Array = shader_defs[i]["uniforms"]
 		for j in range(uniforms.size()):
 			mat.set_shader_parameter(uniforms[j], panel.get_slider_value(j))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

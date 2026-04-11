@@ -6,7 +6,7 @@ var torque_vector: Node3D
 var moment_arm_vector: Node3D
 var info_label: Label3D
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	# Match the compact exhibition presentation used by other advanced vector scenes.
 	scale = Vector3(0.5, 0.5, 0.5)
@@ -36,7 +36,7 @@ func _process(_delta):
 	_update_moment_arm(r, f)
 	_update_info(r, f, torque)
 
-func _update_moment_arm(r: Vector3, f: Vector3):
+func _update_moment_arm(r: Vector3, f: Vector3) -> void:
 	if f.length() < 0.001:
 		update_vector(moment_arm_vector, Vector3.ZERO)
 		return
@@ -45,7 +45,7 @@ func _update_moment_arm(r: Vector3, f: Vector3):
 	moment_arm_vector.position = Vector3.ZERO
 	update_vector(moment_arm_vector, perpendicular)
 
-func _update_info(r: Vector3, f: Vector3, torque: Vector3):
+func _update_info(r: Vector3, f: Vector3, torque: Vector3) -> void:
 	var builder := []
 	builder.append("r = (%.2f, %.2f, %.2f)" % [r.x, r.y, r.z])
 	builder.append("F = (%.2f, %.2f, %.2f)" % [f.x, f.y, f.z])
@@ -58,3 +58,6 @@ func _update_info(r: Vector3, f: Vector3, torque: Vector3):
 
 
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -14,7 +14,23 @@
 			"map_sequences": [
 				"physicssimulation"
 			],
-			"sequence": "physicssimulation"
+			"sequence": "physicssimulation",
+			"parameters": {
+				"footprint": [
+					8,
+					12,
+					10
+				],
+				"size_group": "world_scale"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"flagdancer": {
 			"name": "Flag Dancer",
@@ -27,7 +43,23 @@
 			"map_sequences": [
 				"softbodies"
 			],
-			"sequence": "softbodies"
+			"sequence": "softbodies",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"softbody3d": {
 			"name": "SoftBody 3D",
@@ -37,7 +69,25 @@
 			"category": "physics",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					12,
+					10,
+					19
+				],
+				"size_group": "world_scale"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"3d",
+				"graph",
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"squishy_ball_pit": {
 			"name": "Squishy Ball Pit",
@@ -47,7 +97,15 @@
 			"category": "physics",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"soft_trampoline": {
 			"name": "Soft Trampoline",
@@ -57,7 +115,15 @@
 			"category": "physics",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"breathing_room": {
 			"name": "Breathing Room",
@@ -70,7 +136,23 @@
 			"map_sequences": [
 				"softbodies"
 			],
-			"sequence": "softbodies"
+			"sequence": "softbodies",
+			"parameters": {
+				"footprint": [
+					7,
+					2,
+					11
+				],
+				"size_group": "world_scale"
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"soft_mushrooms": {
 			"name": "Soft Mushrooms",
@@ -80,7 +162,15 @@
 			"category": "physics",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"complexity": "intermediate",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"cloth_straps": {
 			"name": "Cloth Straps",
@@ -93,7 +183,23 @@
 			"map_sequences": [
 				"softbodies"
 			],
-			"sequence": "softbodies"
+			"sequence": "softbodies",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"revolving_joy_ride": {
 			"name": "Revolving Joy Ride",
@@ -106,7 +212,23 @@
 			"map_sequences": [
 				"softbodies"
 			],
-			"sequence": "softbodies"
+			"sequence": "softbodies",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"pendulum_slap": {
 			"name": "Pendulum Slap",
@@ -116,7 +238,25 @@
 			"category": "physics",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					2,
+					2,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "intermediate",
+			"tags": [
+				"pendulum",
+				"physics",
+				"wave"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
 		},
 		"softbody_gallery_part1": {
 			"name": "SoftBody Gallery Part 1",
@@ -126,7 +266,24 @@
 			"category": "physics",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"art",
+				"physics",
+				"soft_body"
+			]
 		},
 		"softbody_gallery_part2": {
 			"name": "SoftBody Gallery Part 2",
@@ -139,7 +296,24 @@
 			"map_sequences": [
 				"softbodies"
 			],
-			"sequence": "softbodies"
+			"sequence": "softbodies",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"art",
+				"physics",
+				"soft_body"
+			]
 		},
 		"softbody_gallery_part3": {
 			"name": "SoftBody Gallery Part 3",
@@ -152,12 +326,29 @@
 			"map_sequences": [
 				"softbodies"
 			],
-			"sequence": "softbodies"
+			"sequence": "softbodies",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"tags": [
+				"physics"
+			],
+			"dev_themes": [
+				"art",
+				"physics",
+				"soft_body"
+			]
 		},
 		"rounded_softbody_test": {
-			"name": "Rounded SoftBody Test",
+			"name": "Rounded SoftBody — Strain Energy",
 			"lookup_name": "rounded_softbody_test",
-			"description": "Test scene for a rounded soft body implementation.",
+			"description": "Deformable rounded cube with 3 modes: strain energy heatmap coloring by vertex displacement, collision-response force arrows with impact bursts, and volume preservation with real-time ratio chart. VR hand squeeze interaction pushes vertices. ImmediateMesh overlays for all visualizations.",
 			"scene": "res://algorithms/softbodies/rounded_softbody_test.tscn",
 			"category": "physics",
 			"include_in_map_data": true,
@@ -165,7 +356,136 @@
 			"map_sequences": [
 				"softbodies"
 			],
-			"sequence": "softbodies"
+			"sequence": "softbodies",
+			"interactions": [
+				"squeeze"
+			],
+			"parameters": {
+				"footprint": [
+					9,
+					7,
+					6
+				],
+				"size_group": "environment"
+			},
+			"complexity": "advanced",
+			"tags": [
+				"physics",
+				"soft_body",
+				"strain",
+				"deformable",
+				"interactive"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body",
+				"visualization"
+			]
+		},
+		"jelly_cube": {
+			"name": "Jelly Cube",
+			"lookup_name": "jelly_cube",
+			"description": "A soft, deformable cube that jiggles when touched. VR-enabled with physics parameter controls for stiffness, damping, and pressure.",
+			"scene": "res://commons/artifacts/jelly_cube/jelly_cube.tscn",
+			"category": "physics",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"softbodies"
+			],
+			"sequence": "softbodies",
+			"interactions": [
+				"grab"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"interaction": "grab",
+			"qfep_connection": "Low stiffness = high Î» territory. Form becomes fluid, resists fixed categories.",
+			"complexity": "beginner",
+			"tags": [
+				"softbody",
+				"physics",
+				"deformable",
+				"jelly",
+				"queer_morphology",
+				"interactive"
+			],
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			]
+		},
+		"softbodytest": {
+			"lookup_name": "softbodytest",
+			"name": "softbodytest",
+			"description": "softbodytest",
+			"scene": "res://algorithms/softbodies/softbodytest.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"size_group": "compact",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			],
+			"tags": [
+				"soft_body"
+			]
+		},
+		"soft_mushroom": {
+			"lookup_name": "soft_mushroom",
+			"name": "soft_mushroom",
+			"description": "soft_mushroom",
+			"scene": "res://algorithms/softbodies/mushrooms/soft_mushrooms.tscn",
+			"category": "unknown",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"softbodies"
+			],
+			"footprint": [
+				5,
+				3,
+				5
+			],
+			"size_group": "environment",
+			"parameters": {
+				"footprint": [
+					5,
+					3,
+					5
+				],
+				"size_group": "environment"
+			},
+			"complexity": "beginner",
+			"dev_themes": [
+				"physics",
+				"soft_body"
+			],
+			"tags": [
+				"soft_body"
+			]
 		}
 	}
 }

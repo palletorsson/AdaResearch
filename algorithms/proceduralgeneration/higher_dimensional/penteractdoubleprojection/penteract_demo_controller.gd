@@ -36,7 +36,7 @@ var camera_distance: float = 10.0
 var camera_angle: float = 0.0
 var camera_height: float = 6.0
 
-func _ready():
+func _ready() -> void:
 	# Connect UI signals
 	projection_option.item_selected.connect(_on_projection_selected)
 	size_slider.value_changed.connect(_on_size_changed)
@@ -59,89 +59,89 @@ func _ready():
 	_update_ui()
 	_update_stats()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Rotate camera around the penteract
 	camera_angle += delta * 0.1
 	_update_camera_position()
 
-func _update_camera_position():
+func _update_camera_position() -> void:
 	var x = cos(camera_angle) * camera_distance
 	var z = sin(camera_angle) * camera_distance
 	camera.position = Vector3(x, camera_height, z)
 	camera.look_at(Vector3.ZERO, Vector3.UP)
 
-func _on_projection_selected(index: int):
+func _on_projection_selected(index: int) -> void:
 	penteract.projection_mode = index
 	if projection_label:
 		projection_label.text = "Projection: " + projection_option.get_item_text(index)
 	_update_stats()
 
-func _on_size_changed(value: float):
+func _on_size_changed(value: float) -> void:
 	penteract.penteract_size = value
 	if size_label:
 		size_label.text = "Penteract Size: " + "%.1f" % value
 	_update_stats()
 
-func _on_dist_5d_changed(value: float):
+func _on_dist_5d_changed(value: float) -> void:
 	penteract.projection_distance_5d = value
 	if dist_5d_label:
 		dist_5d_label.text = "5D Projection Distance: " + "%.1f" % value
 
-func _on_dist_4d_changed(value: float):
+func _on_dist_4d_changed(value: float) -> void:
 	penteract.projection_distance_4d = value
 	if dist_4d_label:
 		dist_4d_label.text = "4D Projection Distance: " + "%.1f" % value
 
-func _on_rot_5d_vw_changed(value: float):
+func _on_rot_5d_vw_changed(value: float) -> void:
 	penteract.rotation_5d_vw = value
 	if rot_5d_vw_label:
 		rot_5d_vw_label.text = "5D VW Rotation: " + "%.1f" % value
 
-func _on_rot_4d_xw_changed(value: float):
+func _on_rot_4d_xw_changed(value: float) -> void:
 	penteract.rotation_4d_xw = value
 	if rot_4d_xw_label:
 		rot_4d_xw_label.text = "4D XW Rotation: " + "%.1f" % value
 
-func _on_rot_4d_yw_changed(value: float):
+func _on_rot_4d_yw_changed(value: float) -> void:
 	penteract.rotation_4d_yw = value
 	if rot_4d_yw_label:
 		rot_4d_yw_label.text = "4D YW Rotation: " + "%.1f" % value
 
-func _on_rot_4d_zw_changed(value: float):
+func _on_rot_4d_zw_changed(value: float) -> void:
 	penteract.rotation_4d_zw = value
 	if rot_4d_zw_label:
 		rot_4d_zw_label.text = "4D ZW Rotation: " + "%.1f" % value
 
-func _on_animation_toggled(pressed: bool):
+func _on_animation_toggled(pressed: bool) -> void:
 	penteract.animate_rotation = pressed
 
-func _on_speed_changed(value: float):
+func _on_speed_changed(value: float) -> void:
 	penteract.rotation_speed = value
 	if speed_label:
 		speed_label.text = "Rotation Speed: " + "%.2f" % value
 
-func _on_inner_color_changed(color: Color):
+func _on_inner_color_changed(color: Color) -> void:
 	penteract.inner_color = color
 
-func _on_middle_color_changed(color: Color):
+func _on_middle_color_changed(color: Color) -> void:
 	penteract.middle_color = color
 
-func _on_outer_color_changed(color: Color):
+func _on_outer_color_changed(color: Color) -> void:
 	penteract.outer_color = color
 
-func _on_emission_changed(value: float):
+func _on_emission_changed(value: float) -> void:
 	penteract.emission_strength = value
 	if emission_label:
 		emission_label.text = "Emission: " + "%.1f" % value
 
-func _on_regenerate_pressed():
+func _on_regenerate_pressed() -> void:
 	penteract.regenerate()
 	_update_stats()
 
-func _on_randomize_pressed():
+func _on_randomize_pressed() -> void:
 	_randomize_parameters()
 
-func _update_ui():
+func _update_ui() -> void:
 	"""Update UI to reflect current penteract settings"""
 	if projection_option:
 		projection_option.selected = penteract.projection_mode
@@ -172,7 +172,7 @@ func _update_ui():
 	if emission_slider:
 		emission_slider.value = penteract.emission_strength
 
-func _update_stats():
+func _update_stats() -> void:
 	"""Update statistics display"""
 	if not stats_label:
 		return
@@ -188,7 +188,7 @@ func _update_stats():
 	stats_label.text += "4D YW: " + "%.1f" % stats["rotation_4d_yw"] + "\n"
 	stats_label.text += "4D ZW: " + "%.1f" % stats["rotation_4d_zw"]
 
-func _randomize_parameters():
+func _randomize_parameters() -> void:
 	"""Randomize penteract parameters for variety"""
 	penteract.projection_mode = randi() % 4
 	penteract.penteract_size = randf_range(1.0, 4.0)
@@ -215,7 +215,7 @@ func _randomize_parameters():
 	_update_stats()
 
 # Input handling for camera control
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			camera_distance = max(4.0, camera_distance - 1.0)
@@ -233,3 +233,6 @@ func _input(event):
 			if projection_label:
 				projection_label.text = "Projection: " + projection_option.get_item_text(next_projection)
 			_update_stats()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

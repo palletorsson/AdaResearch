@@ -29,7 +29,7 @@ var leaf_material: StandardMaterial3D
 var flower_material: StandardMaterial3D
 var grass_material: StandardMaterial3D
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	
 	# Create materials
@@ -44,7 +44,7 @@ func _ready():
 	# Add environment lighting
 	setup_environment()
 
-func create_materials():
+func create_materials() -> void:
 	# Trunk material
 	trunk_material = StandardMaterial3D.new()
 	trunk_material.albedo_color = Color(0.45, 0.22, 0.06)
@@ -65,7 +65,7 @@ func create_materials():
 	grass_material.albedo_color = Color(0.3, 0.6, 0.2)
 	grass_material.roughness = 0.8
 
-func create_terrain():
+func create_terrain() -> void:
 	var terrain = CSGBox3D.new()
 	terrain.name = "Terrain"
 	terrain.size = Vector3(area_size, 1.0, area_size)
@@ -77,7 +77,7 @@ func create_terrain():
 	
 	add_child(terrain)
 
-func generate_plants():
+func generate_plants() -> void:
 	# Calculate actual number of plants based on density
 	var actual_plants = int(number_of_plants * plant_density)
 	
@@ -272,7 +272,7 @@ func create_bush(parent, position):
 	parent.add_child(bush)
 	return bush
 
-func add_flowers_to_bush(bush):
+func add_flowers_to_bush(bush) -> void:
 	var num_flowers = randi() % 8 + 3
 	var bush_radius = 0.6  # Approximate radius
 	
@@ -556,7 +556,7 @@ func create_grass(parent, position):
 	parent.add_child(grass_clump)
 	return grass_clump
 
-func setup_environment():
+func setup_environment() -> void:
 	# Create a camera for better viewing
 	var camera = Camera3D.new()
 	camera.name = "Camera"
@@ -580,3 +580,12 @@ func setup_environment():
 	var world_env = WorldEnvironment.new()
 	world_env.environment = environment
 	add_child(world_env)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

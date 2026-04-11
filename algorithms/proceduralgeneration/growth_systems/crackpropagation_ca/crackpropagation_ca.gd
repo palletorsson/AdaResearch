@@ -1,10 +1,21 @@
 # CrackPropagation.gd
 # Attach to a Node3D. Generates, grows and draws 2D crack lines on XZ-plane.
+class_name CrackPropagationCA
 extends Node3D
+
+# @identity
+# essence: Cellular automaton on a 2D stress grid — cells crack when local stress exceeds threshold, propagating fracture to neighbors
+# desire: To watch destruction emerge from accumulation: stress builds invisibly, then cracks bloom along paths of least resistance
+# critical_parameter: CRACK_THRESHOLD — the breaking point; lower values create dense shatter, higher values yield sparse clean fractures
+# triggers: High propagation rate produces explosive branching; direction bias produces river-like cracks; low threshold fragments everything
+# emerges: Realistic fracture networks from three cell states and local stress transfer
+# needs: Per-frame simulation [has], crack mesh visualization [has], seed control [has], VR interaction [missing]
+# relationships: Growth system in biological_growth alongside slimemold, mushrooms, tree_gen. CA-based like cellular_automata_3d_tree.
+# truth: A crack does not choose where to go — it reads the stress the material already carries.
 
 # ---------- Simulation parameters ----------
 @export var GRID_SIZE: int = 64        # cells per side
-@export var CELL_SIZE: float = 0.25    # world meters per cell
+@export var CELL_SIZE: float = 0.08    # world meters per cell (~5m total)
 @export var SEED: int = 0              # 0 = randomize()
 
 @export_range(0.0, 1.0, 0.001) var CRACK_THRESHOLD: float = 0.30
@@ -18,10 +29,10 @@ extends Node3D
 @export_range(0.0, 1.0, 0.05) var DIRECTION_BIAS: float = 0.6
 
 # ---------- Visual parameters ----------
-@export var CRACK_COLOR: Color = Color(0.08, 0.05, 0.04, 1.0)
-@export_range(0.001, 0.5, 0.001) var CRACK_WIDTH_BASE: float = 0.02  # meters
-@export_range(0.0, 1.0, 0.01) var CRACK_WIDTH_STRESS_SCALE: float = 0.15
-@export var EMISSIVE: float = 0.0   # set >0 for faint glow
+@export var CRACK_COLOR: Color = Color(1.0, 0.4, 0.1, 1.0)  # warm orange, emissive
+@export_range(0.001, 0.5, 0.001) var CRACK_WIDTH_BASE: float = 0.06  # meters — wider for visibility
+@export_range(0.0, 1.0, 0.01) var CRACK_WIDTH_STRESS_SCALE: float = 0.25
+@export var EMISSIVE: float = 1.8   # glow on crack lines
 
 # ---------- Grids ----------
 var grid: Array = []         # int states
@@ -43,7 +54,7 @@ const N8 := [
 	Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1)
 ]
 
-func _ready():
+func _ready() -> void:
 	if SEED == 0: 
 		randomize() 
 	else: 
@@ -52,8 +63,12 @@ func _ready():
 	_init_arrays()
 	_seed_weakness()
 	_make_crack_mesh()
+	_make_ground_surface()
 	_add_initial_stress_center()
-	_mesh_dirty = true
+	# Pre-run simulation steps so cracks are visible immediately
+	for i in range(40):
+		_step_sim()
+	_update_crack_mesh()
 
 func _process(_delta: float) -> void:
 	var changed := _step_sim()
@@ -92,16 +107,33 @@ func _make_crack_mesh() -> void:
 	add_child(crack_mesh)
 
 	crack_material = StandardMaterial3D.new()
-	crack_material.flags_unshaded = true
-	crack_material.flags_transparent = false
+	crack_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	crack_material.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
+	crack_material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	crack_material.no_depth_test = false
 	crack_material.albedo_color = CRACK_COLOR
 	crack_material.metallic = 0.0
 	crack_material.roughness = 1.0
-	if EMISSIVE > 0.0:
-		crack_material.emission_enabled = true
-		crack_material.emission = CRACK_COLOR
-		crack_material.emission_energy_multiplier = EMISSIVE
+	crack_material.emission_enabled = true
+	crack_material.emission = CRACK_COLOR
+	crack_material.emission_energy_multiplier = EMISSIVE
+
+func _make_ground_surface() -> void:
+	# Visible ground plane so cracks have context
+	var extent: float = GRID_SIZE * CELL_SIZE * 0.5
+	var ground := MeshInstance3D.new()
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(extent * 2.0, extent * 2.0)
+	ground.mesh = plane
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.18, 0.16, 0.14)
+	mat.roughness = 0.9
+	mat.emission_enabled = true
+	mat.emission = Color(0.08, 0.06, 0.05)
+	mat.emission_energy_multiplier = 0.3
+	ground.material_override = mat
+	ground.position.y = -0.03  # slightly below cracks
+	add_child(ground)
 
 func _add_initial_stress_center() -> void:
 	var cx: int = int(float(GRID_SIZE) / 2.0)
@@ -361,7 +393,7 @@ func _emit_quad_segment(vertices: PackedVector3Array, normals: PackedVector3Arra
 # ----------------- Utilities -----------------
 func _grid_to_world(p: Vector2i) -> Vector3:
 	var offset := (GRID_SIZE * CELL_SIZE) * 0.5
-	return Vector3(float(p.x) * CELL_SIZE - offset + CELL_SIZE * 0.5, -0.02, float(p.y) * CELL_SIZE - offset + CELL_SIZE * 0.5)
+	return Vector3(float(p.x) * CELL_SIZE - offset + CELL_SIZE * 0.5, 0.05, float(p.y) * CELL_SIZE - offset + CELL_SIZE * 0.5)
 
 func _in_bounds(x: int, z: int) -> bool:
 	return x >= 0 and x < GRID_SIZE and z >= 0 and z < GRID_SIZE
@@ -402,3 +434,12 @@ func get_stress_at(world_pos: Vector3) -> float:
 	if _in_bounds(gx, gz):
 		return stress_grid[gx][gz]
 	return 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

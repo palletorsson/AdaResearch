@@ -1,33 +1,32 @@
 # simple_mario_slider.gd
-extends Control
+extends Node3D
 
 class_name SimpleMarioSlider
 
-# UI Elements
-@onready var freq1_slider = $"VBox/Freq1Container/Freq1Slider"
-@onready var freq1_label = $"VBox/Freq1Container/Freq1Label"
-@onready var freq2_slider = $"VBox/Freq2Container/Freq2Slider"
-@onready var freq2_label = $"VBox/Freq2Container/Freq2Label"
-@onready var volume_slider = $"VBox/VolumeContainer/VolumeSlider"
-@onready var volume_label = $"VBox/VolumeContainer/VolumeLabel"
-@onready var length_slider = $"VBox/LengthContainer/LengthSlider"
-@onready var length_label = $"VBox/LengthContainer/LengthLabel"
-@onready var attack_slider = $"VBox/AttackContainer/AttackSlider"
-@onready var attack_label = $"VBox/AttackContainer/AttackLabel"
-@onready var release_slider = $"VBox/ReleaseContainer/ReleaseSlider"
-@onready var release_label = $"VBox/ReleaseContainer/ReleaseLabel"
-@onready var noise_slider = $"VBox/NoiseContainer/NoiseSlider"
-@onready var noise_label = $"VBox/NoiseContainer/NoiseLabel"
-@onready var sparkle_toggle = $"VBox/SparkleContainer/SparkleToggle"
-@onready var test_button = $"VBox/ButtonRow/TestButton"
-@onready var randomize_button = $"VBox/ButtonRow/RandomizeButton"
-@onready var reset_button = $"VBox/ButtonRow/ResetButton"
-@onready var load_button = $"VBox/ButtonRow/LoadButton"
-@onready var load_dialog = $"LoadSoundDialog"
-@onready var waveform_label = $"VBox/VisualizationContainer/WaveformLabel"
-@onready var waveform_display = $"VBox/VisualizationContainer/WaveformDisplay"
-@onready var spectrum_label = $"VBox/VisualizationContainer/SpectrumLabel"
-@onready var spectrum_display = $"VBox/VisualizationContainer/SpectrumDisplay"
+# VR slider scene
+const VR_SLIDER_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
+const VR_BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
+
+# VR UI Elements
+var freq1_slider: Node3D
+var freq1_label: Label3D
+var freq2_slider: Node3D
+var freq2_label: Label3D
+var volume_slider: Node3D
+var volume_label: Label3D
+var length_slider: Node3D
+var length_label: Label3D
+var attack_slider: Node3D
+var attack_label: Label3D
+var release_slider: Node3D
+var release_label: Label3D
+var noise_slider: Node3D
+var noise_label: Label3D
+var sparkle_toggle_btn: Node3D
+var sparkle_label: Label3D
+var test_button: Node3D
+var randomize_button: Node3D
+var reset_button: Node3D
 
 # Sound parameters
 var freq1: float = 880.0
@@ -69,106 +68,175 @@ const DEFAULT_SPARKLE := true
 
 var rng := RandomNumberGenerator.new()
 
-func _ready():
+# Slider parameter ranges for normalization
+var _slider_ranges := {
+	"freq1": {"min": 200.0, "max": 2000.0},
+	"freq2": {"min": 400.0, "max": 3200.0},
+	"volume": {"min": 0.0, "max": 1.0},
+	"length": {"min": 0.1, "max": 0.5},
+	"attack": {"min": 0.0, "max": 0.08},
+	"release": {"min": 0.03, "max": 0.3},
+	"noise": {"min": 0.0, "max": 0.3},
+}
+
+func _ready() -> void:
 	rng.randomize()
-	setup_sliders()
-	connect_signals()
+	_build_vr_ui()
 	create_audio_player()
-	_configure_load_dialog()
-	# initialize_pickup_sound() wait with this until make a asingelton audio managere 
 	setup_visualizations()
 	update_all_labels()
 	add_to_group("audio_emitters")
 	update_waveform()
 
-func setup_sliders():
-	if freq1_slider:
-		freq1_slider.min_value = 200.0
-		freq1_slider.max_value = 2000.0
-		freq1_slider.value = freq1
-		freq1_slider.step = 5.0
-	if freq2_slider:
-		freq2_slider.min_value = 400.0
-		freq2_slider.max_value = 3200.0
-		freq2_slider.value = freq2
-		freq2_slider.step = 5.0
-	if volume_slider:
-		volume_slider.min_value = 0.0
-		volume_slider.max_value = 1.0
-		volume_slider.value = volume
-		volume_slider.step = 0.01
-	if length_slider:
-		length_slider.min_value = 0.1
-		length_slider.max_value = 0.5
-		length_slider.value = sound_length
-		length_slider.step = 0.01
-	if attack_slider:
-		attack_slider.min_value = 0.0
-		attack_slider.max_value = 0.08
-		attack_slider.value = attack_time
-		attack_slider.step = 0.001
-	if release_slider:
-		release_slider.min_value = 0.03
-		release_slider.max_value = 0.3
-		release_slider.value = release_time
-		release_slider.step = 0.001
-	if noise_slider:
-		noise_slider.min_value = 0.0
-		noise_slider.max_value = 0.3
-		noise_slider.value = noise_amount
-		noise_slider.step = 0.005
-	if sparkle_toggle:
-		sparkle_toggle.button_pressed = sparkle_enabled
+func _build_vr_ui() -> void:
+	var y_pos := 0.48
+	var spacing := 0.12
 
-func setup_visualizations():
+	# Title
+	var title = Label3D.new()
+	title.text = "Mario Sound Slider"
+	title.font_size = 48
+	title.modulate = Color(0.3, 0.9, 0.6)
+	title.position = Vector3(0, y_pos + 0.08, 0)
+	add_child(title)
+
+	# Freq1
+	freq1_label = _make_label("Frequency 1: %.0f Hz" % freq1, Vector3(-0.25, y_pos, 0))
+	freq1_slider = _make_slider("Freq1", Vector3(0.15, y_pos, 0))
+	freq1_slider.get_node_or_null("InteractableAreaButton").slider_moved.connect(_on_freq1_slider_moved) if freq1_slider.get_node_or_null("InteractableAreaButton") else null
+	_connect_slider(freq1_slider, _on_freq1_slider_moved)
+	_set_slider_value(freq1_slider, _normalize("freq1", freq1))
+	y_pos -= spacing
+
+	# Freq2
+	freq2_label = _make_label("Frequency 2: %.0f Hz" % freq2, Vector3(-0.25, y_pos, 0))
+	freq2_slider = _make_slider("Freq2", Vector3(0.15, y_pos, 0))
+	_connect_slider(freq2_slider, _on_freq2_slider_moved)
+	_set_slider_value(freq2_slider, _normalize("freq2", freq2))
+	y_pos -= spacing
+
+	# Volume
+	volume_label = _make_label("Volume: %.2f" % volume, Vector3(-0.25, y_pos, 0))
+	volume_slider = _make_slider("Volume", Vector3(0.15, y_pos, 0))
+	_connect_slider(volume_slider, _on_volume_slider_moved)
+	_set_slider_value(volume_slider, _normalize("volume", volume))
+	y_pos -= spacing
+
+	# Length
+	length_label = _make_label("Length: %.2fs" % sound_length, Vector3(-0.25, y_pos, 0))
+	length_slider = _make_slider("Length", Vector3(0.15, y_pos, 0))
+	_connect_slider(length_slider, _on_length_slider_moved)
+	_set_slider_value(length_slider, _normalize("length", sound_length))
+	y_pos -= spacing
+
+	# Attack
+	attack_label = _make_label("Attack: %s" % _format_ms(attack_time), Vector3(-0.25, y_pos, 0))
+	attack_slider = _make_slider("Attack", Vector3(0.15, y_pos, 0))
+	_connect_slider(attack_slider, _on_attack_slider_moved)
+	_set_slider_value(attack_slider, _normalize("attack", attack_time))
+	y_pos -= spacing
+
+	# Release
+	release_label = _make_label("Release: %s" % _format_ms(release_time), Vector3(-0.25, y_pos, 0))
+	release_slider = _make_slider("Release", Vector3(0.15, y_pos, 0))
+	_connect_slider(release_slider, _on_release_slider_moved)
+	_set_slider_value(release_slider, _normalize("release", release_time))
+	y_pos -= spacing
+
+	# Noise
+	noise_label = _make_label("Noise Sparkle: %d%%" % int(round(noise_amount * 100.0)), Vector3(-0.25, y_pos, 0))
+	noise_slider = _make_slider("Noise", Vector3(0.15, y_pos, 0))
+	_connect_slider(noise_slider, _on_noise_slider_moved)
+	_set_slider_value(noise_slider, _normalize("noise", noise_amount))
+	y_pos -= spacing
+
+	# Sparkle toggle (button-based)
+	sparkle_label = _make_label("Sparkle: ON" if sparkle_enabled else "Sparkle: OFF", Vector3(-0.25, y_pos, 0))
+	sparkle_toggle_btn = VR_BUTTON_SCENE.instantiate()
+	sparkle_toggle_btn.position = Vector3(0.15, y_pos, 0)
+	add_child(sparkle_toggle_btn)
+	var sparkle_area = sparkle_toggle_btn.get_node_or_null("InteractableAreaButton")
+	if sparkle_area:
+		sparkle_area.button_pressed.connect(_on_sparkle_pressed)
+	y_pos -= spacing
+
+	# Buttons row
+	test_button = _make_button("Test", Vector3(-0.2, y_pos, 0))
+	_connect_button(test_button, _on_test_pressed)
+
+	randomize_button = _make_button("Random", Vector3(0.0, y_pos, 0))
+	_connect_button(randomize_button, _on_randomize_pressed)
+
+	reset_button = _make_button("Reset", Vector3(0.2, y_pos, 0))
+	_connect_button(reset_button, _on_reset_pressed)
+
+func _make_label(text: String, pos: Vector3) -> Label3D:
+	var label = Label3D.new()
+	label.text = text
+	label.font_size = 24
+	label.modulate = Color(0.85, 0.9, 1.0)
+	label.position = pos
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	add_child(label)
+	return label
+
+func _make_slider(param_name: String, pos: Vector3) -> Node3D:
+	var slider = VR_SLIDER_SCENE.instantiate()
+	slider.position = pos
+	slider.set_param_name(param_name) if slider.has_method("set_param_name") else null
+	add_child(slider)
+	return slider
+
+func _make_button(text: String, pos: Vector3) -> Node3D:
+	var btn = VR_BUTTON_SCENE.instantiate()
+	btn.position = pos
+	add_child(btn)
+	# Add label above button
+	var lbl = Label3D.new()
+	lbl.text = text
+	lbl.font_size = 20
+	lbl.modulate = Color(0.9, 0.9, 0.7)
+	lbl.position = Vector3(0, 0.03, 0)
+	btn.add_child(lbl)
+	return btn
+
+func _connect_slider(slider: Node3D, callback: Callable) -> void:
+	if slider.has_signal("slider_moved"):
+		slider.slider_moved.connect(callback)
+
+func _connect_button(btn: Node3D, callback: Callable) -> void:
+	var area = btn.get_node_or_null("InteractableAreaButton")
+	if area:
+		area.button_pressed.connect(callback)
+
+func _set_slider_value(slider: Node3D, norm_value: float) -> void:
+	if slider.has_method("set_normalized_value"):
+		slider.set_normalized_value(clamp(norm_value, 0.0, 1.0))
+
+func _get_slider_value(slider: Node3D) -> float:
+	if slider and slider.has_method("get_normalized_value"):
+		return slider.get_normalized_value()
+	return 0.0
+
+func _normalize(param: String, value: float) -> float:
+	var r = _slider_ranges.get(param, {"min": 0.0, "max": 1.0})
+	var range_size = r["max"] - r["min"]
+	if range_size <= 0.0:
+		return 0.0
+	return clamp((value - r["min"]) / range_size, 0.0, 1.0)
+
+func _denormalize(param: String, norm: float) -> float:
+	var r = _slider_ranges.get(param, {"min": 0.0, "max": 1.0})
+	return lerp(r["min"], r["max"], clamp(norm, 0.0, 1.0))
+
+func setup_visualizations() -> void:
 	waveform_points.resize(DISPLAY_SAMPLES)
 	spectrum_bins.resize(SPECTRUM_BINS)
-	if waveform_display and not waveform_display.draw.is_connected(_on_waveform_draw):
-		waveform_display.custom_minimum_size = Vector2(420, 160)
-		waveform_display.draw.connect(_on_waveform_draw)
-	if spectrum_display and not spectrum_display.draw.is_connected(_on_spectrum_draw):
-		spectrum_display.custom_minimum_size = Vector2(420, 120)
-		spectrum_display.draw.connect(_on_spectrum_draw)
 
-func connect_signals():
-	if freq1_slider:
-		freq1_slider.value_changed.connect(_on_freq1_changed)
-	if freq2_slider:
-		freq2_slider.value_changed.connect(_on_freq2_changed)
-	if volume_slider:
-		volume_slider.value_changed.connect(_on_volume_changed)
-	if length_slider:
-		length_slider.value_changed.connect(_on_length_changed)
-	if attack_slider:
-		attack_slider.value_changed.connect(_on_attack_changed)
-	if release_slider:
-		release_slider.value_changed.connect(_on_release_changed)
-	if noise_slider:
-		noise_slider.value_changed.connect(_on_noise_changed)
-	if sparkle_toggle:
-		sparkle_toggle.toggled.connect(_on_sparkle_toggled)
-	if test_button:
-		test_button.pressed.connect(_on_test_pressed)
-	if randomize_button:
-		randomize_button.pressed.connect(_on_randomize_pressed)
-	if reset_button:
-		reset_button.pressed.connect(_on_reset_pressed)
-	if load_button:
-		load_button.pressed.connect(_on_load_pressed)
-	if load_dialog:
-		load_dialog.file_selected.connect(_on_sound_file_selected)
-
-func create_audio_player():
+func create_audio_player() -> void:
 	audio_player = AudioStreamPlayer.new()
 	add_child(audio_player)
 	audio_player.bus = "Master"
-
-func _configure_load_dialog() -> void:
-	if load_dialog:
-		load_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
-		load_dialog.access = FileDialog.ACCESS_FILESYSTEM
-		load_dialog.filters = PackedStringArray(["*.wav ; WAV Audio", "*.ogg ; OGG Audio", "*.mp3 ; MP3 Audio"])
-		load_dialog.title = "Select Custom Sound"
 
 func initialize_pickup_sound() -> void:
 	original_stream = PickupCube.get_shared_pickup_stream()
@@ -211,22 +279,13 @@ func _apply_default_settings() -> void:
 	release_time = DEFAULT_RELEASE
 	noise_amount = DEFAULT_NOISE
 	sparkle_enabled = DEFAULT_SPARKLE
-	if freq1_slider:
-		freq1_slider.value = freq1
-	if freq2_slider:
-		freq2_slider.value = freq2
-	if volume_slider:
-		volume_slider.value = volume
-	if length_slider:
-		length_slider.value = sound_length
-	if attack_slider:
-		attack_slider.value = attack_time
-	if release_slider:
-		release_slider.value = release_time
-	if noise_slider:
-		noise_slider.value = noise_amount
-	if sparkle_toggle:
-		sparkle_toggle.button_pressed = sparkle_enabled
+	_set_slider_value(freq1_slider, _normalize("freq1", freq1))
+	_set_slider_value(freq2_slider, _normalize("freq2", freq2))
+	_set_slider_value(volume_slider, _normalize("volume", volume))
+	_set_slider_value(length_slider, _normalize("length", sound_length))
+	_set_slider_value(attack_slider, _normalize("attack", attack_time))
+	_set_slider_value(release_slider, _normalize("release", release_time))
+	_set_slider_value(noise_slider, _normalize("noise", noise_amount))
 
 func _get_active_stream() -> AudioStream:
 	if use_custom_stream and custom_stream:
@@ -235,6 +294,94 @@ func _get_active_stream() -> AudioStream:
 		return PickupCube.get_shared_pickup_stream()
 	update_waveform()
 	return create_mario_sound()
+
+# -- VR slider callbacks (normalized 0..1) --
+
+func _on_freq1_slider_moved(_value: float = 0.0) -> void:
+	_clear_custom_stream_if_needed()
+	freq1 = _denormalize("freq1", _get_slider_value(freq1_slider))
+	if freq1_label:
+		freq1_label.text = "Frequency 1: %.0f Hz" % freq1
+	update_waveform()
+
+func _on_freq2_slider_moved(_value: float = 0.0) -> void:
+	_clear_custom_stream_if_needed()
+	freq2 = _denormalize("freq2", _get_slider_value(freq2_slider))
+	if freq2_label:
+		freq2_label.text = "Frequency 2: %.0f Hz" % freq2
+	update_waveform()
+
+func _on_volume_slider_moved(_value: float = 0.0) -> void:
+	_clear_custom_stream_if_needed()
+	volume = _denormalize("volume", _get_slider_value(volume_slider))
+	if volume_label:
+		volume_label.text = "Volume: %.2f" % volume
+	update_waveform()
+
+func _on_length_slider_moved(_value: float = 0.0) -> void:
+	_clear_custom_stream_if_needed()
+	sound_length = clamp(_denormalize("length", _get_slider_value(length_slider)), 0.05, 1.0)
+	if length_label:
+		length_label.text = "Length: %.2fs" % sound_length
+	_ensure_envelope_within_bounds()
+	update_waveform()
+
+func _on_attack_slider_moved(_value: float = 0.0) -> void:
+	_clear_custom_stream_if_needed()
+	attack_time = clamp(_denormalize("attack", _get_slider_value(attack_slider)), 0.0, 0.2)
+	if attack_label:
+		attack_label.text = "Attack: %s" % _format_ms(attack_time)
+	_adjust_release_if_needed()
+	update_waveform()
+
+func _on_release_slider_moved(_value: float = 0.0) -> void:
+	_clear_custom_stream_if_needed()
+	release_time = clamp(_denormalize("release", _get_slider_value(release_slider)), 0.0, 0.5)
+	if release_label:
+		release_label.text = "Release: %s" % _format_ms(release_time)
+	_adjust_attack_if_needed()
+	update_waveform()
+
+func _on_noise_slider_moved(_value: float = 0.0) -> void:
+	_clear_custom_stream_if_needed()
+	noise_amount = clamp(_denormalize("noise", _get_slider_value(noise_slider)), 0.0, 1.0)
+	if noise_label:
+		noise_label.text = "Noise Sparkle: %d%%" % int(round(noise_amount * 100.0))
+	update_waveform()
+
+func _on_sparkle_pressed() -> void:
+	_clear_custom_stream_if_needed()
+	sparkle_enabled = not sparkle_enabled
+	if sparkle_label:
+		sparkle_label.text = "Sparkle: ON" if sparkle_enabled else "Sparkle: OFF"
+	update_waveform()
+
+func _on_test_pressed() -> void:
+	var stream = _get_active_stream()
+	_apply_stream_to_audio_player(stream)
+	audio_player.play()
+	_apply_stream_to_pickups(stream)
+
+func _on_randomize_pressed() -> void:
+	_clear_custom_stream_if_needed()
+	rng.randomize()
+	freq1 = rng.randf_range(420.0, 980.0)
+	freq2 = freq1 + rng.randf_range(280.0, 620.0)
+	volume = rng.randf_range(0.45, 0.85)
+	sound_length = rng.randf_range(0.16, 0.28)
+	attack_time = rng.randf_range(0.0, 0.035)
+	release_time = rng.randf_range(0.09, 0.18)
+	noise_amount = rng.randf_range(0.02, 0.14)
+	sparkle_enabled = rng.randf() > 0.2
+	_set_slider_value(freq1_slider, _normalize("freq1", freq1))
+	_set_slider_value(freq2_slider, _normalize("freq2", freq2))
+	_set_slider_value(volume_slider, _normalize("volume", volume))
+	_set_slider_value(length_slider, _normalize("length", sound_length))
+	_set_slider_value(attack_slider, _normalize("attack", attack_time))
+	_set_slider_value(release_slider, _normalize("release", release_time))
+	_set_slider_value(noise_slider, _normalize("noise", noise_amount))
+	update_all_labels()
+	update_waveform()
 
 func _on_reset_pressed() -> void:
 	use_custom_stream = false
@@ -246,106 +393,15 @@ func _on_reset_pressed() -> void:
 	original_stream = stream
 	_apply_stream_to_audio_player(stream)
 
-func _on_load_pressed() -> void:
-	if load_dialog:
-		load_dialog.popup_centered_ratio()
-
-func _on_sound_file_selected(path: String) -> void:
-	var resource = ResourceLoader.load(path)
-	if resource == null or not resource is AudioStream:
-		push_warning("Unsupported audio file: %s" % path)
-		return
-	custom_stream = resource
-	use_custom_stream = true
-	_apply_stream_to_audio_player(custom_stream)
-	_apply_stream_to_pickups(custom_stream)
-	update_waveform()
-
-func _on_freq1_changed(value: float):
-	_clear_custom_stream_if_needed()
-	freq1 = value
-	if freq1_label:
-		freq1_label.text = "Frequency 1: %.0f Hz" % value
-	update_waveform()
-
-func _on_freq2_changed(value: float):
-	_clear_custom_stream_if_needed()
-	freq2 = value
-	if freq2_label:
-		freq2_label.text = "Frequency 2: %.0f Hz" % value
-	update_waveform()
-
-func _on_volume_changed(value: float):
-	_clear_custom_stream_if_needed()
-	volume = value
-	if volume_label:
-		volume_label.text = "Volume: %.2f" % value
-	update_waveform()
-
-func _on_length_changed(value: float):
-	_clear_custom_stream_if_needed()
-	sound_length = clamp(value, 0.05, 1.0)
-	if length_label:
-		length_label.text = "Length: %.2fs" % sound_length
-	_ensure_envelope_within_bounds()
-	update_waveform()
-
-func _on_attack_changed(value: float):
-	_clear_custom_stream_if_needed()
-	attack_time = clamp(value, 0.0, 0.2)
-	if attack_label:
-		attack_label.text = "Attack: %s" % _format_ms(attack_time)
-	_adjust_release_if_needed()
-	update_waveform()
-
-func _on_release_changed(value: float):
-	_clear_custom_stream_if_needed()
-	release_time = clamp(value, 0.0, 0.5)
-	if release_label:
-		release_label.text = "Release: %s" % _format_ms(release_time)
-	_adjust_attack_if_needed()
-	update_waveform()
-
-func _on_noise_changed(value: float):
-	_clear_custom_stream_if_needed()
-	noise_amount = clamp(value, 0.0, 1.0)
-	if noise_label:
-		noise_label.text = "Noise Sparkle: %d%%" % int(round(noise_amount * 100.0))
-	update_waveform()
-
-func _on_sparkle_toggled(pressed: bool):
-	_clear_custom_stream_if_needed()
-	sparkle_enabled = pressed
-	update_waveform()
-
-func _on_test_pressed():
-	var stream = _get_active_stream()
-	_apply_stream_to_audio_player(stream)
-	audio_player.play()
-	_apply_stream_to_pickups(stream)
-
-func _on_randomize_pressed():
-	_clear_custom_stream_if_needed()
-	rng.randomize()
-	freq1_slider.value = rng.randf_range(420.0, 980.0)
-	freq2_slider.value = freq1_slider.value + rng.randf_range(280.0, 620.0)
-	volume_slider.value = rng.randf_range(0.45, 0.85)
-	length_slider.value = rng.randf_range(0.16, 0.28)
-	attack_slider.value = rng.randf_range(0.0, 0.035)
-	release_slider.value = rng.randf_range(0.09, 0.18)
-	noise_slider.value = rng.randf_range(0.02, 0.14)
-	sparkle_toggle.button_pressed = rng.randf() > 0.2
-
-func _ensure_envelope_within_bounds():
+func _ensure_envelope_within_bounds() -> void:
 	var max_total = max(sound_length - 0.01, 0.02)
 	var total = attack_time + release_time
 	if total <= max_total:
 		return
 	release_time = clamp(max_total - attack_time, 0.0, max_total)
-	if release_slider:
-		release_slider.value = release_time
+	_set_slider_value(release_slider, _normalize("release", release_time))
 
-func shutdown_audio():
+func shutdown_audio() -> void:
 	if audio_player:
 		audio_player.stop()
 	for player in external_players.duplicate():
@@ -355,12 +411,8 @@ func shutdown_audio():
 	for cube in get_tree().get_nodes_in_group("mario_pickup_cubes"):
 		if cube.has_method("shutdown_audio"):
 			cube.shutdown_audio()
-	if waveform_display:
-		waveform_display.queue_redraw()
-	if spectrum_display:
-		spectrum_display.queue_redraw()
 
-func _register_external_player(player: AudioStreamPlayer):
+func _register_external_player(player: AudioStreamPlayer) -> void:
 	if player == null or not is_instance_valid(player):
 		return
 	if player in external_players:
@@ -369,10 +421,10 @@ func _register_external_player(player: AudioStreamPlayer):
 	if player.has_signal("finished"):
 		player.finished.connect(Callable(self, "_on_external_player_finished").bind(player), CONNECT_ONE_SHOT)
 
-func _on_external_player_finished(player: AudioStreamPlayer):
+func _on_external_player_finished(player: AudioStreamPlayer) -> void:
 	_unregister_external_player(player)
 
-func _unregister_external_player(player: AudioStreamPlayer):
+func _unregister_external_player(player: AudioStreamPlayer) -> void:
 	if player == null:
 		return
 	if player in external_players:
@@ -380,38 +432,28 @@ func _unregister_external_player(player: AudioStreamPlayer):
 	if is_instance_valid(player):
 		player.queue_free()
 
-func _adjust_release_if_needed():
+func _adjust_release_if_needed() -> void:
 	var max_total = max(sound_length - 0.01, 0.02)
 	if attack_time + release_time > max_total:
 		release_time = clamp(max_total - attack_time, 0.0, max_total)
-		if release_slider:
-			release_slider.value = release_time
-			if release_label:
-				release_label.text = "Release: %s" % _format_ms(release_time)
+		_set_slider_value(release_slider, _normalize("release", release_time))
+		if release_label:
+			release_label.text = "Release: %s" % _format_ms(release_time)
 
-func _adjust_attack_if_needed():
+func _adjust_attack_if_needed() -> void:
 	var max_total = max(sound_length - 0.01, 0.02)
 	if attack_time + release_time > max_total:
 		attack_time = clamp(max_total - release_time, 0.0, max_total)
-		if attack_slider:
-			attack_slider.value = attack_time
-			if attack_label:
-				attack_label.text = "Attack: %s" % _format_ms(attack_time)
+		_set_slider_value(attack_slider, _normalize("attack", attack_time))
+		if attack_label:
+			attack_label.text = "Attack: %s" % _format_ms(attack_time)
 
-func update_waveform():
+func update_waveform() -> void:
 	if use_custom_stream and custom_stream:
 		for i in range(waveform_points.size()):
 			waveform_points[i] = 0.0
 		for i in range(spectrum_bins.size()):
 			spectrum_bins[i] = 0.0
-		if waveform_label:
-			waveform_label.text = "Waveform (custom audio)"
-		if spectrum_label:
-			spectrum_label.text = "Spectrum (custom audio)"
-		if waveform_display:
-			waveform_display.queue_redraw()
-		if spectrum_display:
-			spectrum_display.queue_redraw()
 		return
 	if sound_length <= 0.0:
 		return
@@ -427,14 +469,8 @@ func update_waveform():
 		var sample_index = int(round(i * stride))
 		waveform_points[i] = raw_samples[min(sample_index, display_count - 1)]
 	_update_spectrum_from_samples()
-	if waveform_label:
-		waveform_label.text = "Waveform (first %s)" % _format_ms(display_time)
-	if waveform_display:
-		waveform_display.queue_redraw()
-	if spectrum_display:
-		spectrum_display.queue_redraw()
 
-func _update_spectrum_from_samples():
+func _update_spectrum_from_samples() -> void:
 	var sample_count = min(raw_samples.size(), SPECTRUM_SOURCE_SAMPLES)
 	if sample_count <= 1:
 		for i in range(SPECTRUM_BINS):
@@ -463,102 +499,24 @@ func _update_spectrum_from_samples():
 	for i in range(SPECTRUM_BINS):
 		var normalized = pow(clamp(spectrum_bins[i] / max_value, 0.0, 1.0), 0.8)
 		spectrum_bins[i] = normalized
-	if spectrum_label:
-		spectrum_label.text = "Spectrum (%.0f Hz - %.0f Hz)" % [SPECTRUM_FREQ_MIN, SPECTRUM_FREQ_MAX]
 
-func _on_waveform_draw():
-	if not waveform_display or waveform_points.is_empty():
-		return
-	var rect = waveform_display.get_rect()
-	waveform_display.draw_rect(rect, Color(0.07, 0.08, 0.14, 1.0))
-	var center_y = rect.size.y * 0.5
-	waveform_display.draw_line(Vector2(0, center_y), Vector2(rect.size.x, center_y), Color(0.25, 0.3, 0.4, 0.7), 1.0)
-	var point_array = PackedVector2Array()
-	for i in range(waveform_points.size()):
-		var x = (float(i) / max(waveform_points.size() - 1, 1)) * rect.size.x
-		var y = center_y - (waveform_points[i] * rect.size.y * 0.45)
-		point_array.append(Vector2(x, y))
-	if point_array.size() > 1:
-		var fill_points = PackedVector2Array()
-		for point in point_array:
-			fill_points.append(point)
-		fill_points.append(Vector2(rect.size.x, center_y))
-		fill_points.append(Vector2(0, center_y))
-		# Only draw polygon if we have at least 3 valid points and some y-variation
-		if fill_points.size() >= 3:
-			# Check for y-variation to avoid degenerate polygons
-			var has_variation = false
-			var first_y = fill_points[0].y
-			for pt in fill_points:
-				if absf(pt.y - first_y) > 0.1:
-					has_variation = true
-					break
-			if has_variation:
-				var fill_colors = PackedColorArray()
-				for _i in range(fill_points.size()):
-					fill_colors.append(Color(0.2, 0.8, 0.6, 0.15))
-				waveform_display.draw_polygon(fill_points, fill_colors)
-		for i in range(point_array.size() - 1):
-			var hue = clamp(absf(waveform_points[i]) * 0.6 + 0.35, 0.0, 1.0)
-			var color = Color.from_hsv(0.32, 0.7, hue, 0.9)
-			waveform_display.draw_line(point_array[i], point_array[i + 1], color, 2.0)
-	var envelope_points = PackedVector2Array()
-	var display_time = min(sound_length, 0.12)
-	for i in range(point_array.size()):
-		var ratio = float(i) / max(point_array.size() - 1, 1)
-		var t = ratio * display_time
-		var envelope = _compute_envelope(t)
-		var y = center_y - envelope * rect.size.y * 0.45
-		envelope_points.append(Vector2(ratio * rect.size.x, y))
-	if envelope_points.size() > 1:
-		waveform_display.draw_polyline(envelope_points, Color(1.0, 0.7, 0.2, 0.7), 1.5)
-	var font = ThemeDB.fallback_font
-	var font_size = 12
-	waveform_display.draw_string(font, Vector2(10, 20), "Sweep %.0f ? %.0f Hz" % [freq1, freq2], HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color(0.9, 0.95, 1.0))
-	waveform_display.draw_string(font, Vector2(10, rect.size.y - 10), "Attack %s  �  Release %s" % [_format_ms(attack_time), _format_ms(release_time)], HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color(0.7, 0.85, 1.0))
-
-func _on_spectrum_draw():
-	if not spectrum_display or spectrum_bins.is_empty():
-		return
-	var rect = spectrum_display.get_rect()
-	spectrum_display.draw_rect(rect, Color(0.05, 0.06, 0.12, 1.0))
-	var bin_width = rect.size.x / float(SPECTRUM_BINS)
-	for i in range(1, 6):
-		var y = rect.size.y * (1.0 - float(i) / 6.0)
-		spectrum_display.draw_line(Vector2(0, y), Vector2(rect.size.x, y), Color(0.18, 0.2, 0.3, 0.35), 1.0)
-	for bin_index in range(SPECTRUM_BINS):
-		var magnitude = spectrum_bins[bin_index]
-		var height = magnitude * rect.size.y * 0.9
-		var x = bin_width * bin_index
-		var top = rect.size.y - height
-		var color = Color.from_hsv(0.55 - magnitude * 0.25, 0.7, 0.85 + magnitude * 0.15, 0.9)
-		spectrum_display.draw_rect(Rect2(Vector2(x + bin_width * 0.05, top), Vector2(bin_width * 0.9, height)), color)
-	_draw_frequency_marker(freq1, Color(1.0, 0.65, 0.3, 1.0), rect)
-	_draw_frequency_marker(freq2, Color(0.4, 0.85, 1.0, 1.0), rect)
-
-func _draw_frequency_marker(freq: float, color: Color, rect: Rect2):
-	var ratio = clamp((freq - SPECTRUM_FREQ_MIN) / (SPECTRUM_FREQ_MAX - SPECTRUM_FREQ_MIN), 0.0, 1.0)
-	var x = rect.size.x * ratio
-	spectrum_display.draw_line(Vector2(x, rect.size.y), Vector2(x, -4), color, 1.6)
-	var font = ThemeDB.fallback_font
-	var font_size = 11
-	spectrum_display.draw_string(font, Vector2(clamp(x - 40, 4, rect.size.x - 60), 14), "%.0f Hz" % freq, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, color)
-
-func update_all_labels():
-	if freq1_slider:
-		_on_freq1_changed(freq1_slider.value)
-	if freq2_slider:
-		_on_freq2_changed(freq2_slider.value)
-	if volume_slider:
-		_on_volume_changed(volume_slider.value)
-	if length_slider:
-		_on_length_changed(length_slider.value)
-	if attack_slider:
-		_on_attack_changed(attack_slider.value)
-	if release_slider:
-		_on_release_changed(release_slider.value)
-	if noise_slider:
-		_on_noise_changed(noise_slider.value)
+func update_all_labels() -> void:
+	if freq1_label:
+		freq1_label.text = "Frequency 1: %.0f Hz" % freq1
+	if freq2_label:
+		freq2_label.text = "Frequency 2: %.0f Hz" % freq2
+	if volume_label:
+		volume_label.text = "Volume: %.2f" % volume
+	if length_label:
+		length_label.text = "Length: %.2fs" % sound_length
+	if attack_label:
+		attack_label.text = "Attack: %s" % _format_ms(attack_time)
+	if release_label:
+		release_label.text = "Release: %s" % _format_ms(release_time)
+	if noise_label:
+		noise_label.text = "Noise Sparkle: %d%%" % int(round(noise_amount * 100.0))
+	if sparkle_label:
+		sparkle_label.text = "Sparkle: ON" if sparkle_enabled else "Sparkle: OFF"
 
 func create_mario_sound() -> AudioStreamWAV:
 	var stream = AudioStreamWAV.new()
@@ -630,27 +588,27 @@ func get_sound_settings() -> Dictionary:
 # Enhanced pickup cube that uses these simple sliders
 class SimpleMarioPickupCube:
 	extends Node3D
-	
+
 	@export var points_value: int = 1
 	@export var rotation_speed: float = 2.0
 	@export var bob_height: float = 0.2
 	@export var bob_speed: float = 2.0
-	
+
 	var original_y: float
 	var time_passed: float = 0.0
 	var has_been_collected: bool = false
 	var pickup_sound: AudioStreamPlayer3D
-	
+
 	# Reference to the simple slider control
 	var mario_slider: SimpleMarioSlider
-	
+
 	func _ready() -> void:
 		original_y = global_position.y
 		add_to_group("mario_pickup_cubes")
 		setup_pickup_sound()
 		find_mario_slider()
 		print("SimpleMarioPickupCube ready")
-	
+
 	func shutdown_audio() -> void:
 		if pickup_sound:
 			pickup_sound.stop()
@@ -658,7 +616,7 @@ class SimpleMarioPickupCube:
 		for player in get_children():
 			if player is AudioStreamPlayer3D:
 				player.stop()
-	
+
 	func _process(delta: float) -> void:
 		if has_been_collected:
 			return
@@ -666,7 +624,7 @@ class SimpleMarioPickupCube:
 		time_passed += delta
 		var bob_offset = sin(time_passed * bob_speed) * bob_height
 		global_position.y = original_y + bob_offset
-	
+
 	func setup_pickup_sound() -> void:
 		pickup_sound = AudioStreamPlayer3D.new()
 		add_child(pickup_sound)
@@ -674,12 +632,12 @@ class SimpleMarioPickupCube:
 		pickup_sound.max_distance = 20.0
 		pickup_sound.volume_db = -6.0
 		pickup_sound.stream = PickupCube.get_shared_pickup_stream()
-	
+
 	func find_mario_slider() -> void:
 		mario_slider = get_tree().get_first_node_in_group("mario_slider_control")
 		if not mario_slider:
 			print("Warning: No SimpleMarioSlider found in scene")
-	
+
 	func collect() -> void:
 		if has_been_collected:
 			return
@@ -709,21 +667,31 @@ class SimpleMarioPickupCube:
 		_play_collection_effect()
 		await get_tree().create_timer(0.1).timeout
 		queue_free()
-	
+
 	func create_default_mario_sound() -> AudioStream:
 		return PickupCube.get_default_pickup_stream()
 
 
-	func _play_collection_effect():
+	func _play_collection_effect() -> void:
 		var mesh_instance = find_child("CubeBaseMesh", true, false)
 		if mesh_instance:
 			var tween = create_tween()
 			tween.parallel().tween_property(mesh_instance, "scale", mesh_instance.scale * 1.5, 0.2)
 			tween.parallel().tween_property(mesh_instance, "modulate", Color.TRANSPARENT, 0.2)
-	
+
 	func _on_detection_area_body_entered(body: Node3D) -> void:
 		if _is_player(body):
 			collect()
-	
+
 	func _is_player(body: Node3D) -> bool:
 		return body.is_in_group("player") or body.is_in_group("vr_player") or body.name.contains("Player")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
+
+func _exit_tree() -> void:
+	if audio_player:
+		audio_player.stop()
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()

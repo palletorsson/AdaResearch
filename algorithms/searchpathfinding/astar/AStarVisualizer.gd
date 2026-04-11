@@ -22,17 +22,17 @@ var came_from: Dictionary = {}
 var g_score: Dictionary = {}
 var f_score: Dictionary = {}
 
-func _ready():
+func _ready() -> void:
 	generate_grid()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_step_by_step:
 		step_timer += delta
 		if step_timer >= step_delay:
 			step_timer = 0.0
 			step_astar()
 
-func generate_grid():
+func generate_grid() -> void:
 	clear_grid()  # Now this function exists
 	
 	# Initialize grid
@@ -55,7 +55,7 @@ func generate_grid():
 	
 	create_visual_grid()
 
-func clear_grid():
+func clear_grid() -> void:
 	"""Clear existing grid cubes and reset grid data"""
 	# Clear existing cubes
 	for cube in grid_cubes:
@@ -69,7 +69,7 @@ func clear_grid():
 	# Clear pathfinding data
 	reset_astar()
 
-func create_visual_grid():
+func create_visual_grid() -> void:
 	# Clear existing cubes (redundant but safe)
 	for cube in grid_cubes:
 		if is_instance_valid(cube):
@@ -105,7 +105,7 @@ func create_visual_grid():
 			add_child(cube)
 			grid_cubes.append(cube)
 
-func find_path():
+func find_path() -> void:
 	clear_path()
 	reset_astar()
 	
@@ -116,13 +116,13 @@ func find_path():
 		# Run A* immediately
 		run_astar()
 
-func initialize_astar():
+func initialize_astar() -> void:
 	"""Initialize A* for step-by-step mode"""
 	open_set.append(start_pos)
 	g_score[start_pos] = 0
 	f_score[start_pos] = heuristic(start_pos, goal_pos)
 
-func run_astar():
+func run_astar() -> void:
 	# Initialize A* variables
 	open_set.append(start_pos)
 	g_score[start_pos] = 0
@@ -167,7 +167,7 @@ func run_astar():
 	# No path found
 	print("No path found!")
 
-func step_astar():
+func step_astar() -> void:
 	# Single step of A* algorithm
 	if open_set.size() == 0:
 		print("No path found!")
@@ -245,7 +245,7 @@ func heuristic(a: Vector2i, b: Vector2i) -> float:
 		_:
 			return float(dx + dy)
 
-func reconstruct_path():
+func reconstruct_path() -> void:
 	path.clear()
 	var current = goal_pos
 	
@@ -258,7 +258,7 @@ func reconstruct_path():
 	
 	update_visualization()
 
-func reset_astar():
+func reset_astar() -> void:
 	open_set.clear()
 	closed_set.clear()
 	came_from.clear()
@@ -267,18 +267,18 @@ func reset_astar():
 	explored_nodes.clear()
 	path.clear()
 
-func clear_path():
+func clear_path() -> void:
 	path.clear()
 	explored_nodes.clear()
 	update_visualization()
 
-func toggle_step_by_step():
+func toggle_step_by_step() -> void:
 	is_step_by_step = !is_step_by_step
 	if is_step_by_step:
 		reset_astar()
 		initialize_astar()
 
-func update_visualization():
+func update_visualization() -> void:
 	# Update grid cube colors
 	for i in range(grid_cubes.size()):
 		var x = i / grid_size
@@ -311,27 +311,27 @@ func update_visualization():
 			else:
 				material.albedo_color = Color(0.3, 0.6, 0.9)  # Blue for walkable
 
-func update_parameters():
+func update_parameters() -> void:
 	# This function is called when parameters change
 	# Regenerate grid with new parameters
 	generate_grid()
 
 # Public interface functions for external control
-func set_start_position(pos: Vector2i):
+func set_start_position(pos: Vector2i) -> void:
 	if is_valid_position(pos):
 		start_pos = pos
 		update_visualization()
 
-func set_goal_position(pos: Vector2i):
+func set_goal_position(pos: Vector2i) -> void:
 	if is_valid_position(pos):
 		goal_pos = pos
 		update_visualization()
 
-func set_obstacle_density(density: float):
+func set_obstacle_density(density: float) -> void:
 	obstacle_density = clamp(density, 0.0, 1.0)
 	generate_grid()
 
-func set_heuristic_type(type: int):
+func set_heuristic_type(type: int) -> void:
 	heuristic_type = clamp(type, 0, 3)
 
 func get_path_length() -> int:
@@ -339,3 +339,12 @@ func get_path_length() -> int:
 
 func get_explored_count() -> int:
 	return explored_nodes.size()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

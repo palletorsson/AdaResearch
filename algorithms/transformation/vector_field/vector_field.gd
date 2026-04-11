@@ -483,3 +483,12 @@ func _noise_3d(x: float, y: float, z: float) -> float:
 	n += sin(z * 1.9 + sin(x * 0.8)) * 0.5
 	n += cos(x * 2.3 + y * 0.7 + z * 1.1) * 0.25
 	return n / 1.75
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

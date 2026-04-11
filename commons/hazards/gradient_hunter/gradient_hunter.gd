@@ -1,3 +1,13 @@
+# @identity
+# essence: x_next = x - lr * grad(loss(x)) -- gradient descent as locomotion, loss as distance-to-player
+# desire: a sleek predator sampling 6 points, moving toward lowest loss, stuck in local minima
+# critical_parameter: _sample_positions / _gradient_dir -- 6-point gradient estimate determines movement
+# triggers: continuous gradient sampling; steepest descent movement; local minima -> random annealing jump
+# emerges: machine learning as hunting -- the loss function IS the space between predator and prey
+# needs: HazardCreatureBase [has]; gradient sampling [has]; minima detection [has]; annealing [has]; VR interaction [missing]
+# relationships: embodies machinelearning sequence; pairs with grammar_markov (optimization vs stochastic)
+# truth: gradient descent finds A minimum but not THE minimum -- the hunter gets stuck because optimization does.
+
 extends HazardCreatureBase
 class_name GradientHunter
 ## Sleek predator that uses gradient descent to find the player.

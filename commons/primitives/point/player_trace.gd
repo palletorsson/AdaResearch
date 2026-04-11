@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: path(t) — the sequence of positions your body occupies over time
+# desire: learner sees their own movement become geometry — the body writes in space
+# critical_parameter: trail_length — how many past positions are remembered and drawn
+# triggers: any player movement — the LINE_STRIP grows with every step taken
+# emerges: the realization that motion is just a continuous set of points — a set of coordinates
+# needs: [missing VR controls — purely passive recorder of XROrigin3D position]
+# relationships: used alongside player_trace in grid_lines to replay traces; complement to draw_dot
+# truth: every path through space is a function of time, and you are constantly computing it
+
 ## Player Trace - Records the player's movement through space
 ## Embodies "The Trace" - continuous expression of bodily duration
 

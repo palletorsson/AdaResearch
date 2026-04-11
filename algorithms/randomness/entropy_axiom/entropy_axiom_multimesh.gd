@@ -3,6 +3,16 @@ extends Node3D
 # Entropy Visualization: Order → Chaos (MultiMesh Version)
 # Static visualization - much more efficient than individual instances
 # 10x10x40 grid = 4000 instances in a single draw call
+#
+# @identity
+# essence: S = -Σ p_i log p_i — Shannon entropy as spatial gradient
+# desire: walk along the z-axis and watch order dissolve into chaos before your eyes
+# critical_parameter: max_randomness — controls displacement amplitude at the chaos end
+# triggers: z-position of each sphere determines its entropy factor via exponential curve
+# emerges: the blue-to-red color gradient makes the arrow of entropy visible as a thermodynamic landscape
+# needs: VR walkthrough [has via grid placement]; no controls needed — it is contemplative
+# relationships: anchors random_butterflies (they land on its grid); unlocks entropy_jar
+# truth: Entropy is not disorder — it is the number of ways a system can be without you noticing.
 
 @export var grid_size_x: int = 10
 @export var grid_size_y: int = 10
@@ -21,13 +31,13 @@ extends Node3D
 var multimesh_instance: MultiMeshInstance3D
 var frame_root: Node3D
 
-func _ready():
+func _ready() -> void:
 	add_to_group("entropy_axiom")
 	create_multimesh()
 	generate_entropy_grid()
 	create_bounds_frame()
 
-func create_multimesh():
+func create_multimesh() -> void:
 	# Create MultiMeshInstance3D node
 	multimesh_instance = MultiMeshInstance3D.new()
 	add_child(multimesh_instance)
@@ -62,7 +72,7 @@ func create_multimesh():
 	material.emission_energy_multiplier = 0.8
 	multimesh_instance.material_override = material
 
-func generate_entropy_grid():
+func generate_entropy_grid() -> void:
 	var multimesh = multimesh_instance.multimesh
 	var instance_index = 0
 
@@ -116,7 +126,7 @@ func get_entropy_color(entropy_factor: float) -> Color:
 
 	return Color.from_hsv(hue, saturation, value)
 
-func create_bounds_frame():
+func create_bounds_frame() -> void:
 	if not show_bounds_frame:
 		return
 
@@ -140,7 +150,7 @@ func _get_bounds_max() -> Vector3:
 	var max_z = (grid_size_z - 1) * base_spacing + point_radius + frame_padding
 	return Vector3(max_x, max_y, max_z)
 
-func _build_frame_edges(min_corner: Vector3, max_corner: Vector3):
+func _build_frame_edges(min_corner: Vector3, max_corner: Vector3) -> void:
 	var thickness = max(frame_thickness, 0.001)
 	var size_x = max(max_corner.x - min_corner.x, thickness)
 	var size_y = max(max_corner.y - min_corner.y, thickness)
@@ -181,10 +191,19 @@ func _build_frame_edges(min_corner: Vector3, max_corner: Vector3):
 	_add_frame_edge(edge_mesh, material, Vector3(max_corner.x, min_corner.y, cz), Vector3(thickness, thickness, size_z))
 	_add_frame_edge(edge_mesh, material, Vector3(max_corner.x, max_corner.y, cz), Vector3(thickness, thickness, size_z))
 
-func _add_frame_edge(mesh: Mesh, material: Material, center: Vector3, size: Vector3):
+func _add_frame_edge(mesh: Mesh, material: Material, center: Vector3, size: Vector3) -> void:
 	var edge = MeshInstance3D.new()
 	edge.mesh = mesh
 	edge.material_override = material
 	edge.position = center
 	edge.scale = size
 	frame_root.add_child(edge)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

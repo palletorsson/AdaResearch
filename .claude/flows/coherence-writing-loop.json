@@ -1,0 +1,88 @@
+{
+  "id": "coherence-writing-loop",
+  "title": "Writing Discovers Gaps",
+  "description": "Writing documentation reveals what's missing in code. The doc-code-screenshot loop where writing is generative, not documentary.",
+  "triggers": [
+    "write docs",
+    "blurb",
+    "critical.md",
+    "writing reveals",
+    "coherence"
+  ],
+  "granularity": "meso",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "blog: coherence-refactor, writing-grows-artifacts",
+  "nodes": [
+    {
+      "id": "write",
+      "type": "action",
+      "label": "Write critical.md or blurb.md for a map",
+      "detail": "Read the sequence context, artifact list, and @identity blocks. Write about what the learner experiences."
+    },
+    {
+      "id": "gap",
+      "type": "decision",
+      "label": "Did writing reveal a gap?",
+      "detail": "A concept mentioned but no artifact represents it. A relationship described but not visible."
+    },
+    {
+      "id": "build",
+      "type": "action",
+      "label": "Build the missing artifact",
+      "detail": "Load artifact-creation flow. The writing told you what's needed."
+    },
+    {
+      "id": "update",
+      "type": "action",
+      "label": "Update the doc with the new artifact",
+      "detail": "The artifact changes what's true about the map. Rewrite to include it."
+    },
+    {
+      "id": "screenshot",
+      "type": "action",
+      "label": "Capture to verify the new whole",
+      "detail": "The map should now tell the story the doc describes."
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Doc and code are coherent"
+    }
+  ],
+  "edges": [
+    {
+      "from": "write",
+      "to": "gap"
+    },
+    {
+      "from": "gap",
+      "to": "build",
+      "label": "yes — concept missing"
+    },
+    {
+      "from": "gap",
+      "to": "done",
+      "label": "no — everything represented"
+    },
+    {
+      "from": "build",
+      "to": "update"
+    },
+    {
+      "from": "update",
+      "to": "screenshot"
+    },
+    {
+      "from": "screenshot",
+      "to": "done"
+    }
+  ],
+  "confidence": "extracted",
+  "summary": "Write docs → discover gap (concept mentioned, no artifact) → build missing artifact → update docs → capture to verify coherence.",
+  "links_to": [
+    "identity-writing",
+    "artifact-creation"
+  ]
+}

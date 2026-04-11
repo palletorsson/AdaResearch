@@ -13,7 +13,7 @@ class Edge:
 	var v2: int
 	var length: float = 0.0
 
-	func _init(vert1: int, vert2: int):
+	func _init(vert1: int, vert2: int) -> void:
 		v1 = mini(vert1, vert2)
 		v2 = maxi(vert1, vert2)
 
@@ -51,7 +51,7 @@ var current_growth_point: Vector3 = Vector3.ZERO
 var is_growing: bool = false
 var growth_zones: Array[Vector3] = []
 
-func _ready():
+func _ready() -> void:
 	mesh_instance = MeshInstance3D.new()
 	add_child(mesh_instance)
 	
@@ -62,7 +62,7 @@ func _ready():
 	print("Press SPACE to start growth, R to reset")
 	print("Growth will pick random points and grow limbs from them")
 
-func create_icosphere(radius: float, subdivisions: int):
+func create_icosphere(radius: float, subdivisions: int) -> void:
 	vertices.clear()
 	faces.clear()
 	
@@ -101,7 +101,7 @@ func create_icosphere(radius: float, subdivisions: int):
 	
 	update_face_data()
 
-func subdivide_all():
+func subdivide_all() -> void:
 	var new_faces: Array[Face] = []
 	var edge_midpoints: Dictionary = {}
 	
@@ -149,7 +149,7 @@ func create_face(vert_indices: Array) -> Face:
 	face.vertex_indices = vert_indices
 	return face
 
-func update_face_data():
+func update_face_data() -> void:
 	for face in faces:
 		var center = Vector3.ZERO
 		for idx in face.vertex_indices:
@@ -157,7 +157,7 @@ func update_face_data():
 		face.center = center / face.vertex_indices.size()
 		face.normal = face.center.normalized()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_growing:
 		growth_timer += delta
 		
@@ -165,7 +165,7 @@ func _process(delta):
 			growth_timer = 0.0
 			start_new_growth_zone()
 
-func start_new_growth_zone():
+func start_new_growth_zone() -> void:
 	# Pick random point on sphere surface
 	var random_theta = randf() * TAU
 	var random_phi = acos(randf_range(-1.0, 1.0))
@@ -182,6 +182,7 @@ func start_new_growth_zone():
 	var marker = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.1
+	sphere_mesh.height = 0.2
 	marker.mesh = sphere_mesh
 	marker.position = current_growth_point
 	var mat = StandardMaterial3D.new()
@@ -201,7 +202,7 @@ func start_new_growth_zone():
 	update_mesh()
 	print("New growth zone started at ", current_growth_point)
 
-func grow_and_extrude():
+func grow_and_extrude() -> void:
 	if dyntopo_enabled:
 		# Dynamic topology: subdivide/collapse based on detail needs
 		dyntopo_remesh()
@@ -231,7 +232,7 @@ func grow_and_extrude():
 
 	update_face_data()
 
-func static_subdivide_growth_zone():
+func static_subdivide_growth_zone() -> void:
 	# Original static subdivision approach
 	var new_faces: Array[Face] = []
 	var edge_midpoints: Dictionary = {}
@@ -266,7 +267,7 @@ func static_subdivide_growth_zone():
 
 	faces = new_faces
 
-func dyntopo_remesh():
+func dyntopo_remesh() -> void:
 	# Dyntopo: adaptive subdivision and collapse based on edge length
 	update_edges()
 
@@ -300,7 +301,7 @@ func dyntopo_remesh():
 	# Rebuild edges after modifications
 	update_edges()
 
-func update_edges():
+func update_edges() -> void:
 	edges.clear()
 
 	for face in faces:
@@ -320,7 +321,7 @@ func is_vertex_in_growth_zone(v_idx: int) -> bool:
 		return false
 	return vertices[v_idx].position.distance_to(current_growth_point) < growth_zone_radius
 
-func subdivide_edge(edge: Edge):
+func subdivide_edge(edge: Edge) -> void:
 	var v1 = vertices[edge.v1]
 	var v2 = vertices[edge.v2]
 
@@ -354,7 +355,7 @@ func subdivide_edge(edge: Edge):
 
 	faces = new_faces
 
-func collapse_edge(edge: Edge):
+func collapse_edge(edge: Edge) -> void:
 	# Collapse edge by merging v2 into v1
 	var target_pos = (vertices[edge.v1].position + vertices[edge.v2].position) / 2.0
 	vertices[edge.v1].position = target_pos
@@ -393,7 +394,7 @@ func is_face_degenerate(face: Face) -> bool:
 				return true
 	return false
 
-func update_mesh():
+func update_mesh() -> void:
 	var surface_tool = SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 	
@@ -412,19 +413,19 @@ func update_mesh():
 	material.roughness = 0.8
 	mesh_instance.material_override = material
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			start_growth()
 		elif event.keycode == KEY_R:
 			reset_growth()
 
-func start_growth():
+func start_growth() -> void:
 	is_growing = true
 	growth_timer = 0.0
 	print("Starting morphogenesis growth from sphere surface...")
 
-func reset_growth():
+func reset_growth() -> void:
 	is_growing = false
 	growth_timer = 0.0
 	growth_zones.clear()
@@ -437,3 +438,12 @@ func reset_growth():
 	create_icosphere(sphere_radius, initial_subdivisions)
 	update_mesh()
 	print("Reset complete. Press SPACE to start growing.")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

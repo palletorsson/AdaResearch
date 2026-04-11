@@ -21,11 +21,11 @@ extends Node3D
 @export var spawner_spacing: float = 7.0
 @export var spawner_offset: float = 1.0 # Distance outside the grid
 
-func _ready():
+func _ready() -> void:
 	if generate_on_ready:
 		generate_grid()
 
-func generate_grid():
+func generate_grid() -> void:
 	# Clear existing children
 	for child in get_children():
 		child.queue_free()
@@ -51,7 +51,7 @@ func generate_grid():
 		if FileAccess.file_exists("res://algorithms/arrays/mondrian_grid/mondrian_spawner.tscn"):
 			spawner_scene = load("res://algorithms/arrays/mondrian_grid/mondrian_spawner.tscn")
 
-func _subdivide_rect(rect: Rect2i, partitions: Array):
+func _subdivide_rect(rect: Rect2i, partitions: Array) -> void:
 	# Check if we should stop splitting
 	# Stop if we are small enough, or randomly
 	if rect.size.x <= min_block_size or rect.size.y <= min_block_size:
@@ -99,7 +99,7 @@ func _subdivide_rect(rect: Rect2i, partitions: Array):
 		else:
 			partitions.append(rect)
 
-func _build_geometry(partitions: Array):
+func _build_geometry(partitions: Array) -> void:
 	# Create a container for the mesh
 	var mesh_root = Node3D.new()
 	mesh_root.name = "GridMesh"
@@ -153,7 +153,7 @@ func _build_geometry(partitions: Array):
 	# Generate Grid Lines (Black)
 	_generate_grid_lines(partitions, offset)
 
-func _generate_grid_lines(partitions: Array, offset: Vector3):
+func _generate_grid_lines(partitions: Array, offset: Vector3) -> void:
 	# We create beams for all 4 edges of every rect.
 	
 	var beams_root = Node3D.new()
@@ -204,7 +204,7 @@ func _generate_grid_lines(partitions: Array, offset: Vector3):
 					print("MondrianGenerator: Near-miss LEFT edge? %s (x==0: %s, z==0: %s)" % [e, e.x==0, e.z==0])
 
 
-func _try_place_spawners(coords: Vector4, offset: Vector3, parent: Node):
+func _try_place_spawners(coords: Vector4, offset: Vector3, parent: Node) -> void:
 	if not spawner_scene:
 		# Auto-load default if missing
 		print("MondrianGenerator: Spawner scene not set, loading default...")
@@ -245,7 +245,7 @@ func _try_place_spawners(coords: Vector4, offset: Vector3, parent: Node):
 			
 		t += 1.0 # Check every unit
 
-func _spawn_spawner(pos_2d: Vector2, offset: Vector3, parent: Node, is_horizontal: bool):
+func _spawn_spawner(pos_2d: Vector2, offset: Vector3, parent: Node, is_horizontal: bool) -> void:
 	# Calculate 3D position
 	var pos_3d = Vector3(pos_2d.x, block_height/2.0, pos_2d.y) + offset
 	
@@ -289,7 +289,7 @@ func _spawn_spawner(pos_2d: Vector2, offset: Vector3, parent: Node, is_horizonta
 	# Move back slightly to sit "on the side"
 	spawner.translate_object_local(Vector3(0, 0, spawner_offset)) 
 
-func _create_beam(coords: Vector4, offset: Vector3, parent: Node):
+func _create_beam(coords: Vector4, offset: Vector3, parent: Node) -> void:
 	var start = Vector2(coords.x, coords.y)
 	var end = Vector2(coords.z, coords.w)
 	var length = start.distance_to(end)
@@ -359,3 +359,37 @@ func _get_yellow_material() -> StandardMaterial3D:
 	_mat_yellow.emission = _mat_yellow.albedo_color
 	_mat_yellow.emission_energy_multiplier = 1.0
 	return _mat_yellow
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	if config.is_empty():
+		return
+	if config.has("grid_width"):
+		grid_width = int(config["grid_width"])
+	if config.has("grid_depth"):
+		grid_depth = int(config["grid_depth"])
+	if config.has("min_block_size"):
+		min_block_size = int(config["min_block_size"])
+	if config.has("line_thickness"):
+		line_thickness = float(config["line_thickness"])
+	if config.has("block_height"):
+		block_height = float(config["block_height"])
+	if config.has("split_probability"):
+		split_probability = clampf(float(config["split_probability"]), 0.0, 1.0)
+	if config.has("colored_section_probability"):
+		colored_section_probability = clampf(float(config["colored_section_probability"]), 0.0, 1.0)
+	if config.has("seed"):
+		random_seed = int(config["seed"])
+	# Clear cached materials so they regenerate
+	_mat_white = null
+	_mat_black = null
+	_mat_red = null
+	_mat_blue = null
+	_mat_yellow = null
+	# Regenerate the grid
+	generate_grid()

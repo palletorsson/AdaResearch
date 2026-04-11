@@ -1,5 +1,16 @@
 @tool
 extends Node3D
+class_name CarouselCake
+
+# @identity
+# essence: layer_speed[i] = base_speed * multiplier^i — exponential speed escalation across 8 rotating layers
+# desire: learner watches layers spin at different speeds and feels how a single rule creates complex motion
+# critical_parameter: rotation_speed_multiplier — each layer is this factor faster than the one below it
+# triggers: _process(delta) — updates MultiMesh transforms every frame; each layer rotates at its own rate
+# emerges: visual interference patterns as fast and slow layers pass each other — complexity from simple scaling
+# needs: [missing VR controls — no live speed or layer-count slider]
+# relationships: used in Trans_RotationSpectacle; sibling to spin.gd; stripe shader syncs visually with rotation
+# truth: geometric progression means small multiplier differences create enormous speed ratios after many layers
 
 @export var layer_radii: Array[float] = [4.0, 3.5, 3.0, 1.6, 3.0, 3.5, 4.0, 5.0]
 @export var layer_heights: Array[float] = [0.05, 0.05, 0.05, 3.0, 1.0, 0.5, 0.5, 0.5]
@@ -208,3 +219,12 @@ func _clear_colliders() -> void:
 		if is_instance_valid(body):
 			body.queue_free()
 	_collider_bodies.clear()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

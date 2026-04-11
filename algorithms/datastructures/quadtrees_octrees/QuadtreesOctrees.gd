@@ -31,11 +31,11 @@ var query_volume: AABB
 var quad_points := []
 var oct_points := []
 
-func _ready():
+func _ready() -> void:
 	initialize_structures()
 	create_initial_points()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	insertion_timer += delta
 	
@@ -44,7 +44,7 @@ func _process(delta):
 	demonstrate_spatial_queries()
 	show_dynamic_insertion()
 
-func initialize_structures():
+func initialize_structures() -> void:
 	# Initialize quadtree
 	quadtree_root = QuadNode.new()
 	quadtree_root.bounds = Rect2(-5, -5, 10, 10)
@@ -61,7 +61,7 @@ func initialize_structures():
 	query_region = Rect2(-2, -2, 4, 4)
 	query_volume = AABB(Vector3(-2, -2, -2), Vector3(4, 4, 4))
 
-func create_initial_points():
+func create_initial_points() -> void:
 	# Create random points for quadtree
 	for i in range(20):
 		quad_points.append(Vector2(randf_range(-4.5, 4.5), randf_range(-4.5, 4.5)))
@@ -70,7 +70,7 @@ func create_initial_points():
 	for i in range(30):
 		oct_points.append(Vector3(randf_range(-4.5, 4.5), randf_range(-4.5, 4.5), randf_range(-4.5, 4.5)))
 
-func animate_quadtree():
+func animate_quadtree() -> void:
 	var container = $QuadtreeVisualization
 	
 	# Clear previous visualization
@@ -105,7 +105,7 @@ func animate_quadtree():
 		
 		container.add_child(point_marker)
 
-func animate_octree():
+func animate_octree() -> void:
 	var container = $OctreeVisualization
 	
 	# Clear previous visualization
@@ -140,7 +140,7 @@ func animate_octree():
 		
 		container.add_child(point_marker)
 
-func insert_point_quad(node: QuadNode, point: Vector2):
+func insert_point_quad(node: QuadNode, point: Vector2) -> void:
 	if not node.bounds.has_point(point):
 		return
 	
@@ -157,7 +157,7 @@ func insert_point_quad(node: QuadNode, point: Vector2):
 			insert_point_quad(child, point)
 			break
 
-func subdivide_quad(node: QuadNode):
+func subdivide_quad(node: QuadNode) -> void:
 	var x = node.bounds.position.x
 	var y = node.bounds.position.y
 	var w = node.bounds.size.x / 2
@@ -196,7 +196,7 @@ func subdivide_quad(node: QuadNode):
 	
 	node.points.clear()
 
-func insert_point_oct(node: OctNode, point: Vector3):
+func insert_point_oct(node: OctNode, point: Vector3) -> void:
 	if not node.bounds.has_point(point):
 		return
 	
@@ -213,7 +213,7 @@ func insert_point_oct(node: OctNode, point: Vector3):
 			insert_point_oct(child, point)
 			break
 
-func subdivide_oct(node: OctNode):
+func subdivide_oct(node: OctNode) -> void:
 	var pos = node.bounds.position
 	var size = node.bounds.size / 2
 	
@@ -244,7 +244,7 @@ func subdivide_oct(node: OctNode):
 	
 	node.points.clear()
 
-func visualize_quadtree(container: Node3D, node: QuadNode, depth: int):
+func visualize_quadtree(container: Node3D, node: QuadNode, depth: int) -> void:
 	if not node:
 		return
 	
@@ -272,7 +272,7 @@ func visualize_quadtree(container: Node3D, node: QuadNode, depth: int):
 		for child in node.children:
 			visualize_quadtree(container, child, depth + 1)
 
-func visualize_octree(container: Node3D, node: OctNode, depth: int):
+func visualize_octree(container: Node3D, node: OctNode, depth: int) -> void:
 	if not node:
 		return
 	
@@ -296,7 +296,7 @@ func visualize_octree(container: Node3D, node: OctNode, depth: int):
 		for child in node.children:
 			visualize_octree(container, child, depth + 1)
 
-func demonstrate_spatial_queries():
+func demonstrate_spatial_queries() -> void:
 	var container = $SpatialQueries
 	
 	# Clear previous visualization
@@ -335,7 +335,7 @@ func demonstrate_spatial_queries():
 	
 	container.add_child(query_3d)
 
-func show_dynamic_insertion():
+func show_dynamic_insertion() -> void:
 	var container = $DynamicInsertion
 	
 	# Clear previous visualization
@@ -391,3 +391,11 @@ func show_dynamic_insertion():
 		
 		container.add_child(trail_point)
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

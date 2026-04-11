@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Script to create a 3D composition inspired by David McLeod's style
 # Using recursive sphere packing and various primitives created on the fly
@@ -21,7 +21,7 @@ var bubble_density = 0.8
 var min_sphere_size = 0.1
 var max_sphere_size = 1.2
 
-func _ready():
+func _ready() -> void:
 	# Set up environment
 	setup_environment()
 	
@@ -34,7 +34,7 @@ func _ready():
 	# Setup camera
 	setup_camera()
 
-func setup_environment():
+func setup_environment() -> void:
 	# World environment
 	var environment = WorldEnvironment.new()
 	var env = Environment.new()
@@ -96,7 +96,7 @@ func setup_environment():
 		point_light.omni_range = 10.0
 		add_child(point_light)
 
-func create_materials():
+func create_materials() -> void:
 	# Coral material (red bubbles)
 	materials.coral = StandardMaterial3D.new()
 	materials.coral.albedo_color = Color(1.0, 0.4, 0.4)
@@ -175,7 +175,7 @@ func create_cylinder_mesh():
 	cylinder.radial_segments = 32
 	return cylinder
 
-func create_composition():
+func create_composition() -> void:
 	# Create a root node for the composition
 	var composition = Node3D.new()
 	composition.name = "McLeodComposition"
@@ -192,7 +192,7 @@ func create_composition():
 	# Add some glass cubes as refraction elements
 	add_refractive_elements(composition)
 
-func create_cluster(parent, position, size, type, recursion_level):
+func create_cluster(parent, position, size, type, recursion_level) -> void:
 	if recursion_level > max_recursion_level:
 		return
 	
@@ -224,7 +224,7 @@ func create_cluster(parent, position, size, type, recursion_level):
 			
 			create_cluster(cluster, sub_position, sub_size, sub_type, recursion_level + 1)
 
-func create_bubble_cluster(parent, size, _recursion_level):
+func create_bubble_cluster(parent, size, _recursion_level) -> void:
 	# Calculate how many bubbles to create based on size and density
 	var bubble_count = int(size * bubble_density * 50)
 	bubble_count = min(bubble_count, 100)  # Cap to prevent too many objects
@@ -249,14 +249,14 @@ func create_bubble_cluster(parent, size, _recursion_level):
 		
 		parent.add_child(bubble)
 
-func create_striped_sphere(parent, size):
+func create_striped_sphere(parent, size) -> void:
 	var sphere = MeshInstance3D.new()
 	sphere.mesh = create_sphere_mesh()
 	sphere.scale = Vector3(size, size, size)
 	sphere.material_override = materials.orange_stripe
 	parent.add_child(sphere)
 
-func create_fur_object(parent, size):
+func create_fur_object(parent, size) -> void:
 	# Base object
 	var base = MeshInstance3D.new()
 	base.mesh = create_sphere_mesh() if randf() < 0.7 else create_cylinder_mesh()
@@ -297,7 +297,7 @@ func create_fur_object(parent, size):
 		
 		parent.add_child(fur_strand)
 
-func create_glass_object(parent, size):
+func create_glass_object(parent, size) -> void:
 	var glass_shape = MeshInstance3D.new()
 	
 	# Randomly choose between different shapes
@@ -323,14 +323,14 @@ func create_glass_object(parent, size):
 	
 	parent.add_child(glass_shape)
 
-func create_chrome_object(parent, size):
+func create_chrome_object(parent, size) -> void:
 	var chrome_object = MeshInstance3D.new()
 	chrome_object.mesh = create_sphere_mesh()
 	chrome_object.scale = Vector3(size, size, size)
 	chrome_object.material_override = materials.chrome
 	parent.add_child(chrome_object)
 
-func add_refractive_elements(parent):
+func add_refractive_elements(parent) -> void:
 	# Add some glass cubes that intersect with the composition
 	for i in range(3):
 		var glass_element = MeshInstance3D.new()
@@ -352,7 +352,7 @@ func add_refractive_elements(parent):
 		glass_element.material_override = materials.glass
 		parent.add_child(glass_element)
 
-func setup_camera():
+func setup_camera() -> void:
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 0, 6)
 	camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP)
@@ -376,9 +376,18 @@ func random_position_in_sphere(radius):
 	)
 
 # Optional: add animation
-func _process(delta):
+func _process(delta: float) -> void:
 	# Add gentle rotation to the composition
 	var composition = get_node("McLeodComposition")
 	if composition:
 		composition.rotate_y(delta * 0.1)
 		composition.rotate_x(delta * 0.05)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

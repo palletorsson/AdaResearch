@@ -99,3 +99,6 @@ func randomize_cubes_over_z() -> void:
 			multimesh.set_instance_color(i, final_color)
 
 	print("✅ Randomized %d instances with increasing randomness over Z" % multimesh.instance_count)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

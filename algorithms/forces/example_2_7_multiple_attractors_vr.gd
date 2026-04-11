@@ -291,3 +291,12 @@ func _on_mass_slider_moved(_position) -> void:
 	var val: float = _panel.get_slider_value(1)
 	for attractor in attractors:
 		attractor.mass = val
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

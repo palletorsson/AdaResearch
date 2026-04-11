@@ -1,0 +1,177 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": -1,
+				"name": "computer_vision_vr",
+				"pos": [
+					5,
+					2,
+					1
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "convolutional_neural_networks_cnns_vr",
+				"pos": [
+					1,
+					2,
+					3
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			}
+		],
+		"dead_ends": [
+			[
+				3,
+				0,
+				7
+			],
+			[
+				7,
+				0,
+				6
+			]
+		],
+		"issues": [
+			{
+				"description": "Teleporter at (4,0,6) unreachable from spawn",
+				"severity": "critical",
+				"type": "unreachable_teleporter"
+			},
+			{
+				"description": "computer_vision_vr at (5,2,1) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "convolutional_neural_networks_cnns_vr at (1,2,3) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "ML_Perception",
+		"pacing": {
+			"density": 0.0,
+			"reachable_artifacts": 0,
+			"total_artifacts": 2,
+			"walkable_tiles": 12
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": -1,
+			"pos": [
+				4,
+				0,
+				6
+			],
+			"reachable": false
+		}
+	},
+	"map_name": "ML_Perception",
+	"sequence": "machinelearning",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "computer_vision_vr",
+				"pos": [
+					5,
+					2,
+					1
+				]
+			},
+			{
+				"name": "convolutional_neural_networks_cnns_vr",
+				"pos": [
+					1,
+					2,
+					3
+				]
+			}
+		],
+		"dimensions": [
+			8,
+			3,
+			8
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 12,
+			"ground_pct": 18.75,
+			"void": 1,
+			"walls": 51
+		},
+		"map_name": "ML_Perception",
+		"rooms": [
+			{
+				"artifacts": [],
+				"label": "A",
+				"region": "north, west",
+				"tiles": 6
+			},
+			{
+				"artifacts": [],
+				"label": "B",
+				"region": "south",
+				"tiles": 6
+			}
+		],
+		"spawn": [
+			0,
+			1,
+			0
+		],
+		"teleporter": [
+			4,
+			0,
+			6
+		]
+	},
+	"timestamp": "2026-03-16T12:16:01",
+	"walkthrough": {
+		"map_name": "ML_Perception",
+		"stops": [
+			{
+				"facing": "southeast",
+				"look_at": [
+					4,
+					0,
+					6
+				],
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": []
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					4,
+					0,
+					6
+				],
+				"reachable": false,
+				"steps_from_prev": 0,
+				"total_steps": 0,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 0,
+			"total_steps": 0,
+			"total_stops": 2
+		}
+	}
+}

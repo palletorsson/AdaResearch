@@ -1,3 +1,13 @@
+# @identity
+# essence: Lattice gas automaton on a 20x20 grid with 8 velocity directions — particles propagate, collide (head-on pairs scatter perpendicular), and produce emergent fluid dynamics. Macroscopic density, velocity, and pressure computed from microscopic boolean states.
+# desire: To demonstrate that Navier-Stokes emerges from counting — particles obey trivial collision rules, yet the lattice forgets it is discrete. Vortices form. Turbulence cascades.
+# critical_parameter: grid_size (20) — lattice resolution; velocity_directions — 8 compass vectors defining the HPP/FHP-style lattice connectivity
+# triggers: _process → step_timer fires every 0.1s → update_lattice (collision + propagation + macroscopic calculation) → visualize all three layers
+# emerges: Four visualization layers: grid base (static), particle spheres (colored by direction), flow arrows (oriented by local velocity), density pillars (height = local density). Fluid behavior visible at macro scale from micro rules.
+# needs: VR obstacle placement [missing], flow speed control [missing], lattice topology selector [missing]
+# relationships: Bridges cellular automata to fluid dynamics — same grid logic as cellular_automata_2d, different interpretation. Appears in both RecursiveEmergence_Cellular_Automata_2D and RecursiveEmergence_Lattice_Gas_Automata maps.
+# truth: The continuous is a hallucination performed by the discrete at sufficient scale. Matter performing smoothness through sheer repetition.
+
 extends Node3D
 
 # Lattice Gas Automata Visualization
@@ -27,11 +37,11 @@ class LatticeCell:
 	var velocity: Vector2
 	var pressure: float
 
-func _ready():
+func _ready() -> void:
 	_setup_multimeshes()
 	initialize_lattice()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	step_timer += delta
 	
@@ -43,7 +53,7 @@ func _process(delta):
 		show_particle_flow()
 		display_macroscopic_properties()
 
-func _setup_multimeshes():
+func _setup_multimeshes() -> void:
 	# 1. Grid Base
 	mm_grid_base = _create_multimesh("MM_GridBase", BoxMesh.new(), grid_size * grid_size, "LatticeGrid")
 	mm_grid_base.multimesh.mesh.size = Vector3(0.9, 0.1, 0.9)
@@ -88,7 +98,7 @@ func _create_multimesh(name: String, mesh: Mesh, count: int, parent_name: String
 		
 	return mmi
 
-func initialize_lattice():
+func initialize_lattice() -> void:
 	lattice_grid.clear()
 	
 	for i in range(grid_size):
@@ -118,13 +128,13 @@ func initialize_lattice():
 			mm.set_instance_color(idx, Color(0.3, 0.3, 0.3))
 			idx += 1
 
-func update_lattice():
+func update_lattice() -> void:
 	# Two-step LGA update: collision then propagation
 	apply_collision_rules()
 	propagate_particles()
 	calculate_macroscopic_properties()
 
-func apply_collision_rules():
+func apply_collision_rules() -> void:
 	# Apply local collision rules (simplified)
 	for i in range(grid_size):
 		for j in range(grid_size):
@@ -145,7 +155,7 @@ func apply_collision_rules():
 				# Two particles: apply specific collision rules
 				apply_two_particle_collision(cell)
 
-func apply_two_particle_collision(cell: LatticeCell):
+func apply_two_particle_collision(cell: LatticeCell) -> void:
 	var active_directions = []
 	
 	for i in range(cell.particles.size()):
@@ -186,7 +196,7 @@ func get_perpendicular_directions(dir1: int, dir2: int) -> Array:
 	
 	return perp_dirs
 
-func propagate_particles():
+func propagate_particles() -> void:
 	var new_grid = []
 	
 	# Initialize new grid
@@ -215,7 +225,7 @@ func propagate_particles():
 	
 	lattice_grid = new_grid
 
-func calculate_macroscopic_properties():
+func calculate_macroscopic_properties() -> void:
 	for i in range(grid_size):
 		for j in range(grid_size):
 			var cell = lattice_grid[i][j]
@@ -239,7 +249,7 @@ func calculate_macroscopic_properties():
 			# Calculate pressure (simplified)
 			cell.pressure = cell.density * cell.density
 
-func visualize_lattice_grid():
+func visualize_lattice_grid() -> void:
 	var mm = mm_particles.multimesh
 	var idx = 0
 	
@@ -266,7 +276,7 @@ func visualize_lattice_grid():
 					mm.set_instance_color(idx, Color.from_hsv(dir_color, 0.8, 1.0))
 					idx += 1
 
-func show_particle_flow():
+func show_particle_flow() -> void:
 	var mm = mm_flow.multimesh
 	var idx = 0
 	
@@ -301,7 +311,7 @@ func show_particle_flow():
 				mm.set_instance_color(idx, Color(speed_ratio, 0.5, 1.0 - speed_ratio))
 				idx += 1
 
-func display_macroscopic_properties():
+func display_macroscopic_properties() -> void:
 	var mm = mm_density.multimesh
 	var idx = 0
 	
@@ -328,6 +338,15 @@ func display_macroscopic_properties():
 			mm.set_instance_color(idx, col)
 			idx += 1
 
-func demonstrate_collision_dynamics():
+func demonstrate_collision_dynamics() -> void:
 	# Removed for performance/simplicity in this refactor
+	pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
 	pass

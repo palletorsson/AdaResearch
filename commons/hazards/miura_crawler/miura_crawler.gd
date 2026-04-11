@@ -1,4 +1,14 @@
-﻿extends CharacterBody3D
+﻿# @identity
+# essence: fold(t) = sin(crawl_phase) — Miura-ori corrugation drives inchworm locomotion
+# desire: a flat sheet that ripples toward you like a living carpet, compresses to strike, then flattens to disappear
+# critical_parameter: _fold_amount — 0 is flat (dormant/invisible), 1 is fully corrugated (attack wind-up)
+# triggers: state machine (DORMANT→ALERT→CRAWL→ATTACK→FLATTEN) with fold amount oscillating during crawl phase
+# emerges: the inchworm gait arises from sinusoidal fold cycling — no explicit leg animation, just geometry folding
+# needs: MiuraGeometry solver [has]; mountain/valley crease visualization [has]; player detection [has]
+# relationships: contrasts with kresling_spire (horizontal vs vertical folding); feeds random_game hazard gauntlet
+# truth: Miura-ori proves that a single degree of freedom — fold amount — can generate locomotion from flat material.
+
+extends CharacterBody3D
 class_name MiuraCrawler
 ## Miura-ori folding enemy - flat corrugated sheet that crawls like an inchworm.
 ## Can flatten to squeeze through gaps, pops up to attack.

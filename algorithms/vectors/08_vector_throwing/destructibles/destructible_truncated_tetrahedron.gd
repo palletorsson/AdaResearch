@@ -360,3 +360,12 @@ func _fade_out_part(part: RigidBody3D, mesh_instance: MeshInstance3D) -> void:
 	)
 	if callback_tweener:
 		callback_tweener.set_delay(1.5)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

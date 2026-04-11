@@ -2,6 +2,16 @@
 extends Node3D
 class_name PatternTilePuzzle
 
+# @identity
+# essence: preview[px,py] = palette[grid[(py%N, px%N)]] transformed by RepeatMode/WallpaperGroup — a NxN color array tiled infinitely by a symmetry rule, with drag-and-drop colored cubes to edit the source tile
+# desire: to experience pattern as repetition made tangible — to place a single colored cube and watch it propagate across a carpet according to a mathematical symmetry rule, understanding that patterns are small decisions amplified by structure
+# critical_parameter: wallpaper_group (when in WALLPAPER mode) — the 17 mathematical wallpaper groups classify every possible way to tile a plane with a repeating motif, and switching between them changes the character of the whole carpet from a single edit
+# triggers: placing a cube on the editor grid immediately updates the full preview; toggling symmetry_mode from LEGACY to WALLPAPER activates the 17-group system; cursor animation sweeps through the preview showing index↔source mapping
+# emerges: the cursor visualization reveals that the same source cell appears multiple times in the preview — the index math (px%N, py%N) becomes physically visible as a spotlight moving across the carpet, connecting to identical tiles
+# needs: grabbable color cubes [has]; snap audio on placement [has]; mode Label3D [has]; cursor highlight [has]; VR buttons BY=lattice AX=group [has via handle_vr_button]; no physical VR slider [has keyboard+VR buttons]
+# relationships: serves all four pattern_tile variants (4x4, mirror, brick, herringbone) via apply_grid_config; feeds into array_carpet artifact; connects to WallpaperGroups static class (17 symmetry groups); contrasts with tiling_demo (historical Italian floors)
+# truth: every repeating pattern in the world — from Islamic tiles to woven textiles to crystal structures — is an instance of one of the 17 wallpaper groups, and this artifact makes that classification navigable with your hands
+
 ## Pattern Tile Puzzle - Handmade meets Computational
 ##
 ## Create patterns on a small tile grid, watch them repeat across

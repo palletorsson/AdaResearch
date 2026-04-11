@@ -39,7 +39,7 @@ const ARTIFACT_ANGLES: Array[Dictionary] = [
 	{ "name": "front",  "yaw": 0.4,    "pitch": 0.4   },  # hero shot — slightly above, looking down
 	{ "name": "left",   "yaw": 1.97,   "pitch": 0.35  },  # 90° left, slightly above
 	{ "name": "right",  "yaw": -1.17,  "pitch": 0.35  },  # 90° right, slightly above
-	{ "name": "top",    "yaw": 0.4,    "pitch": 1.2   },  # looking down from above
+	{ "name": "top",    "yaw": 0.001,  "pitch": 1.5607 },  # straight down (near PI/2)
 ]
 
 # ── Initialization ────────────────────────────────────────────────
@@ -218,6 +218,7 @@ func _run_artifact_capture() -> void:
 	var camera := Camera3D.new()
 	camera.current = true
 	camera.fov = 50.0
+	camera.add_to_group("capture_camera")
 	scene_root.add_child(camera)
 
 	# Directional light
@@ -234,17 +235,7 @@ func _run_artifact_capture() -> void:
 	fill.shadow_enabled = false
 	scene_root.add_child(fill)
 
-	# Ground plane
-	var ground := MeshInstance3D.new()
-	var ground_mesh := PlaneMesh.new()
-	ground_mesh.size = Vector2(20, 20)
-	ground.mesh = ground_mesh
-	var ground_mat := StandardMaterial3D.new()
-	ground_mat.albedo_color = Color(0.15, 0.15, 0.18)
-	ground.material_override = ground_mat
-	scene_root.add_child(ground)
-
-	# Load artifact from registry
+	# Load artifact from registry (ground added later if scene lacks its own)
 	var artifact_info: Dictionary = _find_artifact(_target)
 	if artifact_info.is_empty():
 		push_error("capture_multi_angle: Artifact '%s' not found in any registry" % _target)
@@ -279,52 +270,104 @@ func _run_artifact_capture() -> void:
 	await process_frame
 	await process_frame
 
+	# Disable any cameras the artifact created (they override our capture camera)
+	_disable_cameras_recursive(artifact)
+	camera.current = true
+
+	# Add ground plane only if artifact doesn't provide its own WorldEnvironment
+	var has_own_env := false
+	for child in (artifact as Node).get_children():
+		if child is WorldEnvironment:
+			has_own_env = true
+			break
+	if not has_own_env:
+		var ground := MeshInstance3D.new()
+		var ground_mesh := PlaneMesh.new()
+		ground_mesh.size = Vector2(16, 16)
+		ground.mesh = ground_mesh
+		var ground_mat := StandardMaterial3D.new()
+		ground_mat.albedo_color = Color(0.13, 0.13, 0.16)
+		ground_mat.roughness = 0.95
+		ground.material_override = ground_mat
+		scene_root.add_child(ground)
+
 	# Compute AABB for framing
 	var aabb: AABB = _get_combined_aabb(artifact as Node3D)
 	var orbit_focus: Vector3 = Vector3(0, 1.0, 0)
-	var orbit_distance: float = 5.0
+	var base_distance: float = 5.0
 
 	if aabb.size.length() > 0:
 		orbit_focus = aabb.get_center()
 		var max_dim: float = max(aabb.size.x, max(aabb.size.y, aabb.size.z))
-		orbit_distance = max_dim * 2.0
-		print("capture_multi_angle [artifact]: AABB size=%s center=%s distance=%.1f" % [
-			aabb.size, orbit_focus, orbit_distance
+		base_distance = max_dim * 1.0
+		print("capture_multi_angle [artifact]: AABB size=%s center=%s base_dist=%.1f" % [
+			aabb.size, orbit_focus, base_distance
 		])
 
-	# Wait for rendering
+	# Wait for rendering (trails need time to build)
 	await create_timer(_wait_seconds).timeout
 	await process_frame
 	await process_frame
 
-	# Capture each angle
+	# --- ZOOM SWEEP: 3 distances (wide / sweet / tight), default = sweet ---
+	var zoom_factors: Array[float] = [1.4, 1.0, 0.65]
+
 	var saved: int = 0
 	for angle_def in ARTIFACT_ANGLES:
 		var angle_name: String = angle_def["name"]
 		var yaw: float = float(angle_def["yaw"])
 		var pitch: float = float(angle_def["pitch"])
 
-		var offset := Vector3(
+		# Capture at all 3 distances
+		for zi in range(zoom_factors.size()):
+			var zoom: float = zoom_factors[zi]
+			var dist: float = base_distance * zoom
+			var cam_offset := Vector3(
+				sin(yaw) * cos(pitch),
+				sin(pitch),
+				cos(yaw) * cos(pitch)
+			) * dist
+			camera.global_position = orbit_focus + cam_offset
+			camera.look_at(orbit_focus, Vector3.UP)
+
+			await process_frame
+			await process_frame
+			await create_timer(0.15).timeout
+			await process_frame
+
+			var img: Image = root.get_texture().get_image()
+			if img == null:
+				continue
+
+			# Save with zoom suffix (far/mid/close)
+			var zoom_name: String = ["far", "mid", "close"][zi]
+			var suffix: String = angle_name + "_" + zoom_name
+			var shot_path: String = _save_shot(suffix)
+			if not shot_path.is_empty():
+				print("capture_multi_angle [artifact]:   %s @ dist=%.1f -> %s" % [suffix, dist, shot_path])
+
+		# Save the wide zoom (full artifact visible) as the default
+		var sweet_dist: float = base_distance * zoom_factors[0]
+		var cam_offset := Vector3(
 			sin(yaw) * cos(pitch),
 			sin(pitch),
 			cos(yaw) * cos(pitch)
-		) * orbit_distance
-		camera.global_position = orbit_focus + offset
+		) * sweet_dist
+		camera.global_position = orbit_focus + cam_offset
 		camera.look_at(orbit_focus, Vector3.UP)
-
-		# Settle
-		await create_timer(_settle_seconds).timeout
 		await process_frame
 		await process_frame
 
 		var shot_path: String = _save_shot(angle_name)
 		if not shot_path.is_empty():
 			saved += 1
-			print("capture_multi_angle [artifact]: ✅ %s -> %s" % [angle_name, shot_path])
-		else:
-			push_error("capture_multi_angle [artifact]: ❌ Failed to save %s" % angle_name)
+			print("capture_multi_angle [artifact]: ✅ %s -> %s (dist=%.1f)" % [
+				angle_name, shot_path, sweet_dist
+			])
 
 	print("capture_multi_angle [artifact]: Done — %d/%d shots saved" % [saved, ARTIFACT_ANGLES.size()])
+	if saved == 0:
+		print("capture_multi_angle: TIP — If artifact invisible, run: python tools/flow_query.py screenshot")
 	_save_report(saved)
 	quit(0)
 
@@ -365,6 +408,12 @@ func _save_report(saved_count: int) -> void:
 		file.store_string(JSON.stringify(report, "\t"))
 		file.close()
 		print("capture_multi_angle: Report -> %s" % report_path)
+
+func _disable_cameras_recursive(node: Node) -> void:
+	if node is Camera3D:
+		(node as Camera3D).current = false
+	for child in node.get_children():
+		_disable_cameras_recursive(child)
 
 func _hide_overlay_nodes(catalog: Node) -> void:
 	var names: Array[String] = [
@@ -415,18 +464,7 @@ func _wait_for_map_ready(catalog: Node, timeout_seconds: float) -> bool:
 	return done
 
 func _find_artifact(lookup_name: String) -> Dictionary:
-	# Check grid_artifacts.json first (largest registry)
-	var grid_path: String = "res://commons/artifacts/grid_artifacts.json"
-	var grid_text: String = FileAccess.get_file_as_string(grid_path)
-	if not grid_text.is_empty():
-		var json := JSON.new()
-		if json.parse(grid_text) == OK and json.data is Dictionary:
-			var data: Dictionary = json.data
-			var artifacts: Dictionary = data.get("artifacts", data)
-			if artifacts.has(lookup_name):
-				return artifacts[lookup_name]
-
-	# Then check registry/ subdirectory
+	# Check registry/ directory
 	var registry_dir: String = "res://commons/artifacts/registry"
 	var dir := DirAccess.open(registry_dir)
 	if not dir:
@@ -466,6 +504,23 @@ func _get_combined_aabb(node: Node3D) -> AABB:
 			if mm and mm.instance_count > 0:
 				child_aabb = child.transform * mm.get_aabb()
 				has_aabb = true
+		elif child is CSGShape3D:
+			# CSG nodes have get_meshes() which returns [Transform3D, Mesh] pairs
+			var meshes = (child as CSGShape3D).get_meshes()
+			if meshes.size() >= 2 and meshes[1] is Mesh:
+				child_aabb = child.transform * (meshes[1] as Mesh).get_aabb()
+				has_aabb = true
+			elif child is CSGPrimitive3D:
+				# Fallback: estimate from position + size for CSGBox3D etc.
+				var sz := Vector3(1, 1, 1)
+				if child is CSGBox3D:
+					sz = (child as CSGBox3D).size
+				elif child is CSGCylinder3D:
+					var r: float = (child as CSGCylinder3D).radius
+					var h: float = (child as CSGCylinder3D).height
+					sz = Vector3(r * 2, h, r * 2)
+				child_aabb = child.transform * AABB(-sz * 0.5, sz)
+				has_aabb = true
 		if has_aabb and child_aabb.size.length() > 0:
 			if first:
 				result = child_aabb
@@ -475,6 +530,8 @@ func _get_combined_aabb(node: Node3D) -> AABB:
 		if child is Node3D:
 			var sub_aabb: AABB = _get_combined_aabb(child)
 			if sub_aabb.size.length() > 0:
+				# Transform sub-AABB into parent's space
+				sub_aabb = (child as Node3D).transform * sub_aabb
 				if first:
 					result = sub_aabb
 					first = false

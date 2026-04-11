@@ -1,4 +1,14 @@
-﻿extends CharacterBody3D
+# @identity
+# essence: rigid_cube.unfold(tentacles) -- rigid cell that grew soft appendages when threatened
+# desire: a stationary machine cube unfolding mechanical tentacles when the player approaches
+# critical_parameter: _health / tentacle reach -- cube is rigid, tentacles flexible; proximity triggers deploy
+# triggers: player proximity triggers deployment; tentacles extend, sweep, retract; damage on contact
+# emerges: the hybrid of rigid and soft -- a cube that forgot which kingdom it belonged to
+# needs: class_name TentacleCube [has]; tentacle deployment [has]; proximity detection [has]; VR interaction [missing]
+# relationships: unique hybrid -- rigid body with soft appendages; contrasts with pure walkers and fields
+# truth: a rigid cell that grew soft appendages -- the boundary of categories dissolves.
+
+extends CharacterBody3D
 class_name TentacleCube
 ## Stationary machine cube that unfolds mechanical tentacles when player approaches.
 ## Uses Godot 4.6 IK for tentacle tracking. Dormant cube â†’ unfolds â†’ tracks player.

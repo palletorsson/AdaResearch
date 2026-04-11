@@ -1,0 +1,88 @@
+{
+  "id": "heat-map-triage",
+  "title": "Heat Map Triage",
+  "description": "Decide what to work on next using the heat map and scoring system. Smallest × lowest = quickest win.",
+  "triggers": [
+    "what should I work on",
+    "next task",
+    "priorities",
+    "heat map",
+    "triage"
+  ],
+  "granularity": "micro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "baseline scoring revealed joints(0.5) as best target over randomness(2.0, 114 artifacts)",
+  "nodes": [
+    {
+      "id": "score",
+      "type": "action",
+      "label": "Run scoring across all sequences",
+      "detail": "python tools/heat_map_generator.py OR the inline scoring one-liner from baseline."
+    },
+    {
+      "id": "sort",
+      "type": "action",
+      "label": "Sort by: artifact_count * (8 - avg_score)",
+      "detail": "This gives impact score. Small sequences with low scores are quickest wins."
+    },
+    {
+      "id": "pick",
+      "type": "decision",
+      "label": "Quick win or big impact?",
+      "detail": "Quick win: 3-10 artifacts at 0-1/8. Big impact: 50+ artifacts at 1-2/8 (needs batch processing)."
+    },
+    {
+      "id": "quick",
+      "type": "action",
+      "label": "Load sequence-improve flow",
+      "detail": "Small sequence: do it all in one session. Read code, batch metadata, visual upgrade, commit."
+    },
+    {
+      "id": "big",
+      "type": "action",
+      "label": "Use /ada-artifact-improver auto",
+      "detail": "Large sequence: run the improver skill in batch mode. Process 10-20 per session."
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Working on highest-impact target"
+    }
+  ],
+  "edges": [
+    {
+      "from": "score",
+      "to": "sort"
+    },
+    {
+      "from": "sort",
+      "to": "pick"
+    },
+    {
+      "from": "pick",
+      "to": "quick",
+      "label": "quick win (< 15 artifacts)"
+    },
+    {
+      "from": "pick",
+      "to": "big",
+      "label": "big impact (> 15 artifacts)"
+    },
+    {
+      "from": "quick",
+      "to": "done"
+    },
+    {
+      "from": "big",
+      "to": "done"
+    }
+  ],
+  "confidence": "verified",
+  "summary": "Score all. Sort by artifact_count × (8 - avg). Small×low = quick win. Large×low = batch job.",
+  "links_to": [
+    "sequence-improve",
+    "sequence-audit"
+  ]
+}

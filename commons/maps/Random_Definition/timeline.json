@@ -1,0 +1,98 @@
+{
+  "version": "1.0",
+  "description": "Random_Definition: darkness, then a dice roll breaks the silence. Walk forward through entropy — from order to chaos, cool blue to warm amber.",
+  "initial_state": {
+    "hidden_artifacts": [
+      "slot_machine",
+      "prng_crank_machine",
+      "entropy_axiom",
+      "entropy_jar",
+      "random_butterflies",
+      "dark_sphere",
+      "clipboard#prng_axioms",
+      "digital_materiality_glitch",
+      "trng_vs_prng",
+      "random_number_book_page_1955"
+    ],
+    "hidden_utilities": ["t"],
+    "lighting": {
+      "ambient_energy": 0.0,
+      "directional_energy": 0.0
+    }
+  },
+  "events": [
+    {
+      "id": "first_light",
+      "trigger": { "type": "delay", "delay": 2.0 },
+      "actions": [
+        { "type": "lighting", "ambient_energy": 0.1, "directional_energy": 0.05, "duration": 2.0 },
+        { "type": "reveal", "target": "random_number_book_page_1955", "animation": "fade_in", "duration": 1.5 },
+        { "type": "text", "text": "a number, chosen by chance", "position": [2, 2.5, 19] }
+      ]
+    },
+    {
+      "id": "approach_book",
+      "trigger": { "type": "zone", "position": [2, 17], "radius": 2.5 },
+      "actions": [
+        { "type": "reveal", "target": "digital_materiality_glitch", "animation": "fade_in", "duration": 1.0 },
+        { "type": "reveal", "target": "trng_vs_prng", "animation": "fade_in", "duration": 1.0 },
+        { "type": "lighting", "ambient_energy": 0.2, "directional_energy": 0.15, "duration": 2.0 },
+        { "type": "text", "text": "true random vs pseudo-random", "position": [2, 2.5, 15] }
+      ]
+    },
+    {
+      "id": "reveal_prng_axioms",
+      "trigger": { "type": "after", "event": "approach_book", "delay": 1.5 },
+      "actions": [
+        { "type": "reveal", "target": "clipboard#prng_axioms", "animation": "scale_up", "duration": 0.8 }
+      ]
+    },
+    {
+      "id": "midway_darkness",
+      "trigger": { "type": "zone", "position": [2, 12], "radius": 2.0 },
+      "actions": [
+        { "type": "reveal", "target": "dark_sphere", "animation": "fade_in", "duration": 1.5 },
+        { "type": "lighting", "ambient_energy": 0.3, "directional_energy": 0.25, "duration": 2.5 },
+        { "type": "text", "text": "entropy — disorder as resource", "position": [2, 2.5, 12] }
+      ]
+    },
+    {
+      "id": "butterflies_and_jar",
+      "trigger": { "type": "zone", "position": [2, 10], "radius": 2.0 },
+      "actions": [
+        { "type": "reveal", "target": "random_butterflies", "animation": "fade_in", "duration": 1.2 },
+        { "type": "reveal", "target": "entropy_jar", "animation": "scale_up", "duration": 1.0 },
+        { "type": "lighting", "ambient_energy": 0.4, "directional_energy": 0.4, "duration": 2.0 }
+      ]
+    },
+    {
+      "id": "entropy_axiom_reveal",
+      "trigger": { "type": "zone", "position": [2, 6], "radius": 2.0 },
+      "actions": [
+        { "type": "reveal", "target": "entropy_axiom", "animation": "fade_in", "duration": 1.5 },
+        { "type": "lighting", "ambient_energy": 0.5, "directional_energy": 0.6, "duration": 2.0 },
+        { "type": "text", "text": "randomness is not absence of pattern — it is all patterns at once", "position": [2, 2.5, 5] }
+      ]
+    },
+    {
+      "id": "machines_appear",
+      "trigger": { "type": "zone", "position": [2, 3], "radius": 2.5 },
+      "actions": [
+        { "type": "reveal", "target": "slot_machine", "animation": "scale_up", "duration": 0.8 },
+        { "type": "reveal", "target": "prng_crank_machine", "animation": "scale_up", "duration": 0.8 },
+        { "type": "activate", "target": "slot_machine" },
+        { "type": "activate", "target": "prng_crank_machine" },
+        { "type": "lighting", "ambient_energy": 0.6, "directional_energy": 1.0, "duration": 2.5 }
+      ]
+    },
+    {
+      "id": "show_exit",
+      "trigger": { "type": "after", "event": "machines_appear", "delay": 3.0 },
+      "actions": [
+        { "type": "activate", "target": "t" },
+        { "type": "reveal", "target": "t", "animation": "fade_in", "duration": 1.0 },
+        { "type": "lighting", "ambient_energy": 0.6, "directional_energy": 1.2, "duration": 1.5 }
+      ]
+    }
+  ]
+}

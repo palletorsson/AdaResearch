@@ -94,6 +94,6 @@ Apply to metal objects and watch them age. Crank `degradation_amount` from 0 to 
 
 ## See Also
 
-- `effects/` — Other material effects
+- `postprocessing/` — Other material effects
 - `shaders/queer_ecology/` — Organic decay
 - `cellularautomata/` — Pattern-based degradation

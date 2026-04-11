@@ -1,3 +1,13 @@
+# @identity
+# essence: SDF(x) = contour_rings(mines) -- minefield where crossing zero-boundary detonates
+# desire: pulsing SDF contour rings from buried mines -- cross the zero-boundary and they explode
+# critical_parameter: mine positions / SDF threshold -- signed distance field defines safe vs lethal
+# triggers: player enters Area3D; SDF evaluated at position; zero-crossing triggers detonation
+# emerges: signed distance fields as danger topology -- contour lines border safe and lethal
+# needs: Area3D [has]; mine array [has]; SDF contour viz [has]; detonation logic [has]; VR interaction [missing]
+# relationships: embodies patterngeneration; SDF connects to isosurface_trap (implicit surfaces)
+# truth: the pattern is the weapon -- cross the zero-boundary and mathematics detonates.
+
 extends Area3D
 class_name PatternMine
 ## Pattern generation sequence hazard — a minefield with SDF contour rings.

@@ -1,4 +1,15 @@
 extends "res://commons/primitives/point/grab_sphere.gd"
+class_name ScaleMe
+
+# @identity
+# essence: world.scale *= scale_amount on pickup — the player's reference frame grows, making everything feel tiny
+# desire: learner experiences scale change as embodied perspective shift — not a number, a felt transformation
+# critical_parameter: scale_amount — at 100× the world becomes monumental; lower values are subtle
+# triggers: picking up the grab sphere — world scales up immediately; timer fires after scale_duration to revert
+# emerges: the phenomenological difference between knowing a scale ratio and experiencing it as body-relative space
+# needs: [has grabbable sphere [has], missing preview label showing current scale_amount before pickup]
+# relationships: used in Trans_Scale map; demonstrates non-uniform vs uniform scale at the player-body level
+# truth: scale is relational — 100× larger means nothing without a reference body to measure against
 
 ## Scale parameters
 @export var scale_amount: float = 100.0
@@ -305,3 +316,12 @@ func _move_player_to_safe_position(space_state: PhysicsDirectSpaceState3D, curre
 	# Apply the safe position
 	_xr_origin.global_position = safe_pos
 	print("ScaleMe: Moved player to safe position at ", safe_pos)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

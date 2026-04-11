@@ -23,11 +23,11 @@ var compatible_neighbors = {
 var mesh_scene: String = ""
 var color: Color = Color.WHITE
 
-func _init(id: String = "", w: float = 1.0):
+func _init(id: String = "", w: float = 1.0) -> void:
 	tile_id = id
 	weight = w
 
-func set_compatible(direction: Vector3, tile_ids: Array):
+func set_compatible(direction: Vector3, tile_ids: Array) -> void:
 	"""Set which tile IDs are compatible in a given direction"""
 	compatible_neighbors[direction] = tile_ids.duplicate()
 

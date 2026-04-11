@@ -1,11 +1,21 @@
 # ===========================================================================
 # NOC Example 2.5: Fluid Resistance
 # Original: Daniel Shiffman (Processing) - https://natureofcode.com
-# Translation: AI-assisted Processing → GDScript, 2025
+# Translation: AI-assisted Processing -> GDScript, 2025
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
 # ===========================================================================
+#
+# @identity
+# essence: F_drag = -C * |v|^2 * v-hat. Drag opposes motion and scales with speed squared. Heavier objects fall faster through the same fluid.
+# desire: To drop five balls of different masses into a blue fluid and watch the heavy ones punch through while the light ones float — mass as privilege in a resistive medium.
+# critical_parameter: drag_coefficient — higher C means thicker fluid. It determines terminal velocity and how quickly the fluid swallows kinetic energy.
+# triggers: VR sliders → adjust drag/gravity/depth in real time, Space → scatter movers sideways, R → reset, drag arrows appear when movers enter fluid
+# emerges: Terminal velocity — each mover reaches a speed where gravity and drag balance. Heavier movers reach higher terminal velocity. The cyan drag arrows grow with speed.
+# needs: VR rack panel with three sliders [has], drag arrow visualization [has], auto-reset timer [has]. Missing: density comparison overlay.
+# relationships: Force decomposition like normal_force_demo. Lives in ForcesFoundations. Feeds into particle_systems (particles with drag). Contrasts with force_fields (area-based vs velocity-based forces).
+# truth: Drag is the medium's memory of your velocity. The faster you move, the harder the world pushes back.
 
 extends Node3D
 
@@ -312,3 +322,12 @@ func _on_gravity_slider_moved(_position) -> void:
 func _on_depth_slider_moved(_position) -> void:
 	fluid_depth = _panel.get_slider_value(2)
 	update_fluid_volume()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

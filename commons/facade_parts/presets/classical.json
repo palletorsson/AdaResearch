@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "generator": "ada_facade_builder",
+  "facade": {
+    "bays": 5,
+    "stories": 4,
+    "symmetry": "bilateral",
+    "total_width": 15.0,
+    "total_height": 12.0,
+    "wall_depth": 0.25
+  },
+  "zones": [
+    { "row": 0, "name": "Cornice", "height_multiplier": 0.5 },
+    { "row": 1, "name": "Upper", "height_multiplier": 1.0 },
+    { "row": 2, "name": "Piano Nobile", "height_multiplier": 1.4 },
+    { "row": 3, "name": "Base", "height_multiplier": 0.9 }
+  ],
+  "materials": {
+    "wall": "#d4c5a9",
+    "zones": {
+      "Cornice": { "color": "#c9a96e", "type": "stone_cornice" },
+      "Upper": { "color": "#d4c5a9", "type": "plaster" },
+      "Piano Nobile": { "color": "#c9b896", "type": "dressed_stone" },
+      "Base": { "color": "#8c7e6a", "type": "rusticated_stone" }
+    }
+  },
+  "placements": [
+    { "col": 0, "row": 2, "part": "col_ionic", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 2, "part": "arched_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 2, "part": "arched_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 0, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 0, "row": 0, "part": "dentil_cornice", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 0, "part": "dentil_cornice", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 0, "part": "dentil_cornice", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 0, "row": 3, "part": "rusticated_block", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 3, "part": "arcade_arch", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 2, "row": 3, "part": "rusticated_block", "col_span": 1, "row_span": 1, "params": {} }
+  ]
+}

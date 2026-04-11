@@ -15,10 +15,10 @@ var _hit_area: Area3D
 var _collision_body: StaticBody3D
 var _mesh_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	call_deferred("_generate_organic_cube")
 
-func _generate_organic_cube():
+func _generate_organic_cube() -> void:
 	print("OrganicVoronoiCube: Generating ", cell_count, " organic fragments")
 
 	# Generate Voronoi seeds
@@ -51,7 +51,7 @@ func _generate_voronoi_seeds() -> Array[Vector3]:
 
 	return seeds
 
-func _create_organic_fragment(seed: Vector3, all_seeds: Array[Vector3], index: int):
+func _create_organic_fragment(seed: Vector3, all_seeds: Array[Vector3], index: int) -> void:
 	# Create RigidBody for this fragment
 	var fragment = RigidBody3D.new()
 	fragment.name = "Fragment_" + str(index)
@@ -152,7 +152,7 @@ func _get_closest_seed(pos: Vector3, seeds: Array[Vector3]) -> Vector3:
 
 	return closest
 
-func _create_convex_hull(surface_tool: SurfaceTool, points: PackedVector3Array):
+func _create_convex_hull(surface_tool: SurfaceTool, points: PackedVector3Array) -> void:
 	# Simple convex hull approximation - create triangles from points
 	# This is a simplified approach; a proper convex hull would use algorithms like QuickHull
 
@@ -183,7 +183,7 @@ func _create_convex_hull(surface_tool: SurfaceTool, points: PackedVector3Array):
 					surface_tool.add_vertex(p2)
 					surface_tool.add_vertex(p3)
 
-func _create_combined_visual():
+func _create_combined_visual() -> void:
 	# Create a simple cube visual that represents the whole object
 	_mesh_instance = MeshInstance3D.new()
 	_mesh_instance.name = "CubeMesh"
@@ -203,7 +203,7 @@ func _create_combined_visual():
 
 	print("OrganicVoronoiCube: Visual cube created")
 
-func _setup_collision():
+func _setup_collision() -> void:
 	_collision_body = StaticBody3D.new()
 	_collision_body.name = "CollisionBody"
 	add_child(_collision_body)
@@ -215,7 +215,7 @@ func _setup_collision():
 	collision_shape.shape = box_shape
 	_collision_body.add_child(collision_shape)
 
-func _setup_hit_detection():
+func _setup_hit_detection() -> void:
 	_hit_area = Area3D.new()
 	_hit_area.name = "HitArea"
 	_hit_area.collision_layer = 0
@@ -232,7 +232,7 @@ func _setup_hit_detection():
 
 	print("OrganicVoronoiCube: Hit detection ready - waiting for throwable objects")
 
-func _on_body_entered(body: Node3D):
+func _on_body_entered(body: Node3D) -> void:
 	if _is_destroyed or not body.is_in_group("throwable"):
 		return
 
@@ -246,7 +246,7 @@ func _on_body_entered(body: Node3D):
 	if health <= 0:
 		_destroy(impact_velocity)
 
-func _destroy(impact_velocity: Vector3):
+func _destroy(impact_velocity: Vector3) -> void:
 	if _is_destroyed:
 		return
 
@@ -293,7 +293,7 @@ func _destroy(impact_velocity: Vector3):
 	await get_tree().create_timer(7.0).timeout
 	queue_free()
 
-func _fade_fragment(mesh_instance: MeshInstance3D):
+func _fade_fragment(mesh_instance: MeshInstance3D) -> void:
 	if not mesh_instance:
 		return
 
@@ -304,3 +304,12 @@ func _fade_fragment(mesh_instance: MeshInstance3D):
 
 	var tween = create_tween()
 	tween.tween_property(mesh_instance, "scale", Vector3.ZERO, 2.0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

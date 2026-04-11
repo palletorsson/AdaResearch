@@ -22,14 +22,14 @@ var _nav_graph: Dictionary = {}  # Vector3i -> Array[Vector3i]
 var _blocked_positions: Dictionary = {}  # Vector3i -> bool, reserved by slope footprints
 
 
-func _ready():
+func _ready() -> void:
 	_rng = RandomNumberGenerator.new()
 	_rng.seed = seed
 	_current_position = Vector3i.ZERO
 	generate_palace()
 
 
-func generate_palace():
+func generate_palace() -> void:
 	# Start with foundation cube
 	_place_cube(_current_position)
 	
@@ -124,7 +124,7 @@ func _fallback_horizontal_target() -> Vector3i:
 	return _current_position
 
 
-func _place_cube(pos: Vector3i):
+func _place_cube(pos: Vector3i) -> void:
 	"""Instantiate cube and register in spatial database"""
 	var cube = cube_scene.instantiate()
 	cube.position = pos
@@ -132,7 +132,7 @@ func _place_cube(pos: Vector3i):
 	_register_cube(pos, cube)
 
 
-func _place_slope_cube(from: Vector3i, to: Vector3i):
+func _place_slope_cube(from: Vector3i, to: Vector3i) -> void:
 	"""Places the combined slope+cube bridge for upward moves and reserves the slope footprint."""
 	var slope_cube = slope_cube_scene.instantiate()
 	slope_cube.position = Vector3(to)
@@ -143,7 +143,7 @@ func _place_slope_cube(from: Vector3i, to: Vector3i):
 	print("Slope cube %s -> %s (rot: %.2f deg)" % [from, to, rad_to_deg(slope_cube.rotation.y)])
 
 
-func _register_cube(pos: Vector3i, node: Node3D):
+func _register_cube(pos: Vector3i, node: Node3D) -> void:
 	_occupied_positions[pos] = node
 	if not _nav_graph.has(pos):
 		_nav_graph[pos] = []
@@ -158,7 +158,7 @@ func _bridge_rotation(from: Vector3i, to: Vector3i) -> Vector3:
 	return Vector3(0, yaw, 0)
 
 
-func _block_bridge_between(from: Vector3i, to: Vector3i):
+func _block_bridge_between(from: Vector3i, to: Vector3i) -> void:
 	var horizontal = Vector3i(to.x - from.x, 0, to.z - from.z)
 	if horizontal == Vector3i.ZERO:
 		return
@@ -196,11 +196,11 @@ func _sign_int(value: int) -> int:
 
 
 
-func _block_cell(pos: Vector3i):
+func _block_cell(pos: Vector3i) -> void:
 	_blocked_positions[pos] = true
 
 
-func _block_column_above(base: Vector3i, extra_levels: int):
+func _block_column_above(base: Vector3i, extra_levels: int) -> void:
 	for height in range(1, extra_levels + 1):
 		var elevated = Vector3i(base.x, base.y + height, base.z)
 		_block_cell(elevated)
@@ -224,3 +224,12 @@ func _validate_palace() -> bool:
 	print("Palace self-validation: %d/%d cubes reachable = %s" % 
 		  [visited.size(), _occupied_positions.size(), "PASS" if all_reachable else "FAIL"])
 	return all_reachable
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

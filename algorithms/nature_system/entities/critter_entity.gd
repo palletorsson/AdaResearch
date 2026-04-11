@@ -36,6 +36,8 @@ var _bond_level: float = 0.0  ## Player bond (0-1), drives transmutation overlay
 var _age: float = 0.0
 var _energy: float = 100.0
 var _max_energy: float = 100.0
+var growth_factor: float = 1.0   ## 0-1, how mature (1.0 = fully grown)
+var is_released: bool = false    ## Whether this entity has been released to ecosystem
 
 # ─────────────────────────────────────────────────────────────
 #  Signals
@@ -81,6 +83,10 @@ func _on_dna_changed() -> void:
 	_apply_visual_traits()
 	_apply_gameplay_traits()
 
+	# Walking tree: if tree kingdom with high mobility, attach walker
+	if dna.get_kingdom() == 0 and dna.mobility > 0.2:
+		call_deferred("_attach_tree_walker")
+
 	dna_applied.emit(self)
 
 
@@ -107,11 +113,11 @@ func _apply_gameplay_traits() -> void:
 	if not dna:
 		return
 
-	# Base energy from efficiency
-	_max_energy = dna.efficiency * 100.0
-	_energy = _max_energy
+	# Base energy from efficiency, scaled by growth
+	_max_energy = dna.efficiency * 100.0 * growth_factor
+	_energy = minf(_energy, _max_energy)
 
-	# Scale from DNA
+	# Scale from DNA (growth_factor applied during growth chamber updates)
 	scale = Vector3.ONE * dna.scale
 
 	if debug_mode:
@@ -331,3 +337,63 @@ func get_kingdom_name() -> String:
 ## How hybrid is this entity (0 = pure kingdom, 0.5 = max hybrid).
 func get_hybridity() -> float:
 	return dna.get_hybridity() if dna else 0.0
+
+
+# ═══════════════════════════════════════════════════════════════
+# LOD / CHUNK SYSTEM SUPPORT
+# ═══════════════════════════════════════════════════════════════
+
+## Whether this entity belongs to a static kingdom (tree, flower, fungus).
+## Static organisms don't move after spawn — their animation is purely shader-based.
+## Creatures (mobility >= 0.1) are mobile and need per-frame updates.
+func is_static_kingdom() -> bool:
+	if not dna:
+		return true
+	return dna.mobility < 0.1
+
+## Attach a TreeWalker component for walking trees (mobility > 0.2).
+const _TreeWalkerScript = preload("res://algorithms/nature_system/morphology/tree_walker.gd")
+
+func _attach_tree_walker() -> void:
+	if not dna or dna.get_kingdom() != 0 or dna.mobility <= 0.2:
+		return
+	if get_node_or_null("TreeWalker"):
+		return
+	var walker = _TreeWalkerScript.new()
+	walker.name = "TreeWalker"
+	add_child(walker)
+	walker.setup(dna, self)
+	if debug_mode:
+		print("[CritterEntity: %s] Walking tree! mobility=%.2f" % [name, dna.mobility])
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
+
+
+## Get a summary dictionary for UI panels (VR inspector, web editor).
+func get_info_dict() -> Dictionary:
+	var info: Dictionary = {
+		"name": name,
+		"kingdom": get_kingdom_name(),
+		"generation": dna.generation if dna else 0,
+		"hybridity": get_hybridity(),
+		"body_type": dna.body_type if dna else 0.0,
+		"growth_factor": growth_factor,
+		"is_released": is_released,
+		"bond_level": _bond_level,
+		"energy_ratio": get_energy_ratio(),
+		"age": _age,
+		"mobility": dna.mobility if dna else 0.0,
+		"aggression": dna.aggression if dna else 0.0,
+		"sociality": dna.sociality if dna else 0.0,
+		"curiosity": dna.curiosity if dna else 0.0,
+		"fertility": dna.fertility if dna else 0.0,
+		"affinity": dna.affinity if dna else 0.0,
+		"scale": dna.scale if dna else 1.0,
+	}
+	if dna:
+		info["primary_color"] = dna.primary_color.to_html(false)
+		info["secondary_color"] = dna.secondary_color.to_html(false)
+		info["tertiary_color"] = dna.tertiary_color.to_html(false)
+	return info

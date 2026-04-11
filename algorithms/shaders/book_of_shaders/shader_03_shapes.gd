@@ -1,5 +1,16 @@
 ## Shader 03: Shapes — SDF circles, rects, polygons
 ## Book of Shaders Chapter 7
+
+# @identity
+# essence: d = length(uv) - radius — signed distance fields reduce geometry to a single number per pixel: negative inside, zero on boundary, positive outside
+# desire: to slide polygon sides from 3 to 12 and watch a triangle become a circle — to boolean-combine shapes with min/max and see geometry as arithmetic
+# critical_parameter: radius/sides — the number that separates inside from outside, or the symmetry order of the polygon
+# triggers: operation slider switches between union(min), intersection(max), and subtraction(max(a,-b)) — three words, three operators, infinite compositions
+# emerges: the show_distance toggle reveals the full SDF field — smooth hills radiating from every boundary, making the implicit geometry explicit
+# needs: [has] ShaderRackPanel sliders per display; [missing] no VR push buttons
+# relationships: depends on shader_01_shaping (smoothstep for anti-aliasing); feeds into shader_05_patterns (tiled SDF shapes) and all procedural geometry
+# truth: the shape is not stored — it is perpetually computed; distance is the oldest geometric concept, and the fragment shader asks it millions of times per frame
+
 extends Node3D
 
 const DISPLAY_SIZE := Vector3(2.0, 2.0, 0.05)
@@ -88,3 +99,12 @@ func _process(_delta: float) -> void:
 		var uniforms: Array = shader_defs[i]["uniforms"]
 		for j in range(uniforms.size()):
 			mat.set_shader_parameter(uniforms[j], panel.get_slider_value(j))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

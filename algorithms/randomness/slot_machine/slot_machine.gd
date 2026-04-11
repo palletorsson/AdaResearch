@@ -5,6 +5,16 @@
 #
 # QFEP: Independence — each reel is an independent uniform trial.
 # The combination space grows multiplicatively (6^3 = 216 outcomes).
+#
+# @identity
+# essence: P(A∩B∩C) = P(A)·P(B)·P(C) — independent joint probability
+# desire: pull the lever, feel anticipation as reels decelerate one by one
+# critical_parameter: symbols_per_reel — determines outcome space (6^3 = 216)
+# triggers: _pull_lever() → sequential reel-stop cascade via _stop_sequence_timer
+# emerges: histogram convergence to uniform — the longer you play, the flatter the bars
+# needs: VR push button [has], lever pull gesture [has]
+# relationships: contrasts with galton_board (binomial, not uniform); unlocks coin_toss
+# truth: Independence is not absence of connection — it is the impossibility of prediction from correlation.
 
 extends Node3D
 
@@ -336,21 +346,41 @@ func _create_window() -> void:
 	frame_mat.metallic = 0.6
 	frame_mat.roughness = 0.3
 
+	# Window frame border bars using MultiMesh
+	# Two horizontal bars (same size) and two vertical bars (same size)
 	var bar_thick := 0.012
-	var sides := [
-		[Vector3(0, frame_h / 2.0, 0), Vector3(frame_w + bar_thick, bar_thick, bar_thick)],
-		[Vector3(0, -frame_h / 2.0, 0), Vector3(frame_w + bar_thick, bar_thick, bar_thick)],
-		[Vector3(frame_w / 2.0, 0, 0), Vector3(bar_thick, frame_h, bar_thick)],
-		[Vector3(-frame_w / 2.0, 0, 0), Vector3(bar_thick, frame_h, bar_thick)],
-	]
-	for s in sides:
-		var bar := MeshInstance3D.new()
-		var bar_box := BoxMesh.new()
-		bar_box.size = s[1]
-		bar.mesh = bar_box
-		bar.material_override = frame_mat
-		bar.position = s[0]
-		_window_frame.add_child(bar)
+
+	# Horizontal bars
+	var hbar_mesh := BoxMesh.new()
+	hbar_mesh.size = Vector3(frame_w + bar_thick, bar_thick, bar_thick)
+	hbar_mesh.material = frame_mat
+
+	var hbar_mm := MultiMesh.new()
+	hbar_mm.transform_format = MultiMesh.TRANSFORM_3D
+	hbar_mm.instance_count = 2
+	hbar_mm.mesh = hbar_mesh
+	hbar_mm.set_instance_transform(0, Transform3D(Basis.IDENTITY, Vector3(0, frame_h / 2.0, 0)))
+	hbar_mm.set_instance_transform(1, Transform3D(Basis.IDENTITY, Vector3(0, -frame_h / 2.0, 0)))
+	var hbar_mmi := MultiMeshInstance3D.new()
+	hbar_mmi.name = "HBars_MM"
+	hbar_mmi.multimesh = hbar_mm
+	_window_frame.add_child(hbar_mmi)
+
+	# Vertical bars
+	var vbar_mesh := BoxMesh.new()
+	vbar_mesh.size = Vector3(bar_thick, frame_h, bar_thick)
+	vbar_mesh.material = frame_mat
+
+	var vbar_mm := MultiMesh.new()
+	vbar_mm.transform_format = MultiMesh.TRANSFORM_3D
+	vbar_mm.instance_count = 2
+	vbar_mm.mesh = vbar_mesh
+	vbar_mm.set_instance_transform(0, Transform3D(Basis.IDENTITY, Vector3(frame_w / 2.0, 0, 0)))
+	vbar_mm.set_instance_transform(1, Transform3D(Basis.IDENTITY, Vector3(-frame_w / 2.0, 0, 0)))
+	var vbar_mmi := MultiMeshInstance3D.new()
+	vbar_mmi.name = "VBars_MM"
+	vbar_mmi.multimesh = vbar_mm
+	_window_frame.add_child(vbar_mmi)
 
 	# Payline indicator — horizontal line across reels
 	var payline := MeshInstance3D.new()
@@ -602,3 +632,12 @@ func _reset_stats() -> void:
 	_stats_label.text = "Pulls: 0\n\nPull the lever!"
 	_auto_spin = false
 	_auto_timer = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

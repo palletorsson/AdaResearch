@@ -3,3 +3,5 @@ Sequence role: Second map. Extends Point_One's single mark into connection and m
 Technical angle: Line drawing between two Vector3 positions, parametric line equations, grid construction from parallel/perpendicular sets, perspective projection and vanishing points, scale and measurement via laser_measure.
 Critical angle: The politics of the grid — who decides which lines are parallel, which directions are privileged. Le Corbusier's Modulor (modulor_man_demo) as ideological measurement system. Perspective as Renaissance power geometry.
 Key artifacts: line_builder_3d for constructing lines in space; plus_line_puzzle and parallel_line_puzzle for interactive constraint discovery; perspective_lines and scale_lines for measurement systems; dgrid for the emergent network; modulor_man_demo for the human body as metric unit.
+
+Gap: No gap identified.

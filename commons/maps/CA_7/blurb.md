@@ -1,1 +1,0 @@
-Stochastic automata add randomness. A rule might fire with 80% probability, not certainty. Noise enters the system. Perfect patterns become imperfect. Edges fuzz. Strict determinism softens into probabilistic flow. The automaton breathes.

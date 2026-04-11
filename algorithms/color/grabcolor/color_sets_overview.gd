@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: palette_atlas — N palettes laid out as grabbable sticker grids, each sticker labeled with hex + nearest web color name
+# desire: to pick up a color, read its name, and carry it across the room — making color portable and personal
+# critical_parameter: sets_to_show — controls how many palettes are visible simultaneously, determining comparison density
+# triggers: none at runtime — static grabbable display; XR pickup on each sticker via grab_paper.tscn
+# emerges: the luminance-adaptive label contrast (dark text on light stickers, light on dark) makes every color readable without explicit design per palette
+# needs: grab_paper.tscn XR pickup [has]; hex/name labels [has]; VR grab [has]; palette filtering [missing]
+# relationships: depends on color_palettes.tres; follows pillarcolorcollection (viewing vs holding color); closest_web_color_name bridges digital hex to human language
+# truth: naming a color does not capture it — but it makes the gap between name and experience visible
+
 const GRAB_PAPER_SCENE = preload("res://commons/primitives/panels/DigitalPaper/grab_paper.tscn")
 const DEFAULT_PALETTE_PATH := "res://algorithms/color/color_palettes.tres"
 
@@ -180,3 +190,12 @@ func _get_closest_web_color_name(target: Color) -> String:
 			min_distance = distance
 			closest_name = color_name
 	return closest_name
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

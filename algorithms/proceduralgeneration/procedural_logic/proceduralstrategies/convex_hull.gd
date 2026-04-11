@@ -9,10 +9,10 @@ var points: PackedVector3Array = []
 var mesh_instance: MeshInstance3D
 var point_instances: Array = []
 
-func _ready():
+func _ready() -> void:
 	generate_mesh()
 
-func generate_mesh():
+func generate_mesh() -> void:
 	clear_points()
 	generate_points()
 	var mesh = create_convex_hull()
@@ -34,7 +34,7 @@ func generate_mesh():
 	if show_points:
 		visualize_points()
 
-func generate_points():
+func generate_points() -> void:
 	points.clear()
 	for i in range(num_points):
 		points.append(Vector3(
@@ -62,7 +62,7 @@ func create_convex_hull() -> ArrayMesh:
 	st.generate_normals()
 	return st.commit()
 
-func visualize_points():
+func visualize_points() -> void:
 	for point in points:
 		var sphere = MeshInstance3D.new()
 		var sphere_mesh = SphereMesh.new()
@@ -80,12 +80,12 @@ func visualize_points():
 		add_child(sphere)
 		point_instances.append(sphere)
 
-func clear_points():
+func clear_points() -> void:
 	for inst in point_instances:
 		inst.queue_free()
 	point_instances.clear()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			generate_mesh()
@@ -95,3 +95,12 @@ func _input(event):
 				visualize_points()
 			else:
 				clear_points()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

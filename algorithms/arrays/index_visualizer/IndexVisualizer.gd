@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 @export var tracked_node_name: String = "XRPlayer" 
 @export var font_size: int = 48
@@ -7,7 +7,7 @@
 var _label: Label3D
 var _player: Node3D
 
-func _ready():
+func _ready() -> void:
 	_create_label()
 
 func _process(_delta):
@@ -31,7 +31,7 @@ func _process(_delta):
 		
 		# Optional: Turn to face camera (billboard is on)
 
-func _create_label():
+func _create_label() -> void:
 	if _label:
 		_label.queue_free()
 		
@@ -43,3 +43,22 @@ func _create_label():
 	_label.modulate = text_color
 	_label.text = "Searching for Player..."
 	add_child(_label)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	if config.is_empty():
+		return
+	if config.has("font_size"):
+		font_size = int(config["font_size"])
+	if config.has("text_color"):
+		text_color = Color.from_string(config["text_color"], text_color)
+	if config.has("tracked_node_name"):
+		tracked_node_name = str(config["tracked_node_name"])
+		_player = null  # Force re-search on next frame
+	# Rebuild label with updated settings
+	_create_label()

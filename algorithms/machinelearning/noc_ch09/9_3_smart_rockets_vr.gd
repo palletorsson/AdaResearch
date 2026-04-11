@@ -1,4 +1,15 @@
 extends Node3D
+const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
+
+# @identity
+# essence: fitness(x) = 1/d(x, target)^2; DNA = [thrust_vectors]; select → crossover → mutate
+# desire: watch a swarm of rockets evolve from chaos to precision across generations
+# critical_parameter: mutation_rate — too low freezes, too high forgets
+# triggers: obstacle collisions kill fitness; target proximity rewards; generation boundary resets
+# emerges: coordinated flight paths through gaps nobody designed
+# needs: VR slider for mutation_rate [has], slider for obstacle gap [has]
+# relationships: unlocks gradient_descent_visualization (optimization WITH gradient); depends on evolvingflowers (shared GA pattern)
+# truth: selection pressure alone, without any gradient, discovers solutions in spaces too vast to search
 
 ## Smart Rockets — evolves rocket trajectories via genetic algorithm.
 ## Each rocket carries a DNA sequence of thrust vectors. The population breeds
@@ -40,6 +51,7 @@ func _ready() -> void:
 	_spawn_population()
 	_record_time = lifespan
 	_update_status(0.0)
+	call_deferred("_apply_standard_presentation")
 	set_physics_process(true)
 
 func _setup_environment() -> void:
@@ -332,6 +344,7 @@ class RocketTarget:
 		mesh = MeshInstance3D.new()
 		var sphere := SphereMesh.new()
 		sphere.radius = rad
+		sphere.height = sphere.radius * 2.0
 		mesh.mesh = sphere
 		# Glowing gold target material
 		var target_mat := StandardMaterial3D.new()
@@ -378,3 +391,19 @@ class RocketObstacle:
 	func queue_free() -> void:
 		if is_instance_valid(root):
 			root.queue_free()
+
+func _apply_standard_presentation() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	ARTIFACT_SCENE_PRESENTER.present(self, _sim_root)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
+
+

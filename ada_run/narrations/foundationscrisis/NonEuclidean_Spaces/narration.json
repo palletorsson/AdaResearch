@@ -1,0 +1,390 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 4,
+				"name": "curvature_slider",
+				"pos": [
+					7,
+					1,
+					6
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 5,
+				"name": "hyperbolic_surface",
+				"pos": [
+					4,
+					1,
+					4
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 5,
+				"name": "elliptic_surface",
+				"pos": [
+					10,
+					1,
+					4
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "poincare_disk",
+				"pos": [
+					3,
+					2,
+					8
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "riemann_sphere",
+				"pos": [
+					11,
+					2,
+					8
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [
+			[
+				0,
+				0,
+				12
+			],
+			[
+				4,
+				0,
+				12
+			],
+			[
+				10,
+				0,
+				12
+			],
+			[
+				14,
+				0,
+				12
+			]
+		],
+		"issues": [
+			{
+				"description": "Teleporter at (7,0,11) unreachable from spawn",
+				"severity": "critical",
+				"type": "unreachable_teleporter"
+			},
+			{
+				"description": "4 dead ends found",
+				"severity": "low",
+				"type": "high_dead_ends"
+			},
+			{
+				"description": "poincare_disk at (3,2,8) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "riemann_sphere at (11,2,8) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "NonEuclidean_Spaces",
+		"pacing": {
+			"density": 1.66666666666667,
+			"reachable_artifacts": 3,
+			"total_artifacts": 5,
+			"walkable_tiles": 90
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			7,
+			1,
+			2
+		],
+		"teleporter": {
+			"dist": -1,
+			"pos": [
+				7,
+				0,
+				11
+			],
+			"reachable": false
+		}
+	},
+	"map_name": "NonEuclidean_Spaces",
+	"sequence": "foundationscrisis",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "hyperbolic_surface",
+				"pos": [
+					4,
+					1,
+					4
+				]
+			},
+			{
+				"name": "elliptic_surface",
+				"pos": [
+					10,
+					1,
+					4
+				]
+			},
+			{
+				"name": "curvature_slider",
+				"pos": [
+					7,
+					1,
+					6
+				]
+			},
+			{
+				"name": "poincare_disk",
+				"pos": [
+					3,
+					2,
+					8
+				]
+			},
+			{
+				"name": "riemann_sphere",
+				"pos": [
+					11,
+					2,
+					8
+				]
+			}
+		],
+		"dimensions": [
+			15,
+			4,
+			13
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 90,
+			"ground_pct": 46.1538461538462,
+			"void": 49,
+			"walls": 56
+		},
+		"map_name": "NonEuclidean_Spaces",
+		"rooms": [
+			{
+				"artifacts": [
+					"hyperbolic_surface",
+					"elliptic_surface",
+					"curvature_slider"
+				],
+				"label": "A",
+				"region": "north",
+				"tiles": 79
+			},
+			{
+				"artifacts": [],
+				"label": "B",
+				"region": "south, west",
+				"tiles": 5
+			},
+			{
+				"artifacts": [],
+				"label": "C",
+				"region": "south, east",
+				"tiles": 5
+			}
+		],
+		"spawn": [
+			7,
+			1,
+			2
+		],
+		"teleporter": [
+			7,
+			0,
+			11
+		]
+	},
+	"timestamp": "2026-03-16T12:16:08",
+	"walkthrough": {
+		"map_name": "NonEuclidean_Spaces",
+		"stops": [
+			{
+				"facing": "south",
+				"look_at": [
+					7,
+					1,
+					6
+				],
+				"pos": [
+					7,
+					1,
+					2
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "south",
+						"dist": 4,
+						"name": "curvature_slider"
+					},
+					{
+						"direction": "southwest",
+						"dist": 5,
+						"name": "hyperbolic_surface"
+					},
+					{
+						"direction": "southeast",
+						"dist": 5,
+						"name": "elliptic_surface"
+					},
+					{
+						"direction": "southwest",
+						"dist": 10,
+						"name": "poincare_disk"
+					},
+					{
+						"direction": "southeast",
+						"dist": 10,
+						"name": "riemann_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "northwest",
+				"name": "curvature_slider",
+				"pos": [
+					7,
+					1,
+					6
+				],
+				"steps_from_prev": 4,
+				"total_steps": 4,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 5,
+						"name": "hyperbolic_surface"
+					},
+					{
+						"direction": "northeast",
+						"dist": 5,
+						"name": "elliptic_surface"
+					},
+					{
+						"direction": "southwest",
+						"dist": 6,
+						"name": "poincare_disk"
+					},
+					{
+						"direction": "southeast",
+						"dist": 6,
+						"name": "riemann_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "northwest",
+				"facing": "east",
+				"name": "hyperbolic_surface",
+				"pos": [
+					4,
+					1,
+					4
+				],
+				"steps_from_prev": 5,
+				"total_steps": 9,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "southeast",
+						"dist": 5,
+						"name": "curvature_slider"
+					},
+					{
+						"direction": "south",
+						"dist": 5,
+						"name": "poincare_disk"
+					},
+					{
+						"direction": "east",
+						"dist": 6,
+						"name": "elliptic_surface"
+					},
+					{
+						"direction": "southeast",
+						"dist": 11,
+						"name": "riemann_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "southwest",
+				"name": "elliptic_surface",
+				"pos": [
+					10,
+					1,
+					4
+				],
+				"steps_from_prev": 6,
+				"total_steps": 15,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "southwest",
+						"dist": 5,
+						"name": "curvature_slider"
+					},
+					{
+						"direction": "south",
+						"dist": 5,
+						"name": "riemann_sphere"
+					},
+					{
+						"direction": "west",
+						"dist": 6,
+						"name": "hyperbolic_surface"
+					},
+					{
+						"direction": "southwest",
+						"dist": 11,
+						"name": "poincare_disk"
+					}
+				]
+			},
+			{
+				"approach_from": "southwest",
+				"pos": [
+					7,
+					0,
+					11
+				],
+				"reachable": false,
+				"steps_from_prev": 0,
+				"total_steps": 15,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 3,
+			"total_steps": 15,
+			"total_stops": 5
+		}
+	}
+}

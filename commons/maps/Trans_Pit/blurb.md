@@ -1,0 +1,1 @@
+Three transformations, three ways to die. A corridor where pushing stones shove you over fire pits. An arena with revolving walls sweeping toward the edge. A room where the center grows and forces you out. Translation displaces, rotation sweeps, scale pressures. The pit below is the same in every case — only the geometry of your removal changes.

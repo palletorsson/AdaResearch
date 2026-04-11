@@ -9,12 +9,12 @@ extends Node3D
 @export var plane_opacity: float = 0.5
 @export var separation: float = 0.5 # Distance between planes centers
 
-func _ready():
+func _ready() -> void:
 	_create_subtractive_mix(Vector3(-4, 0, 0))
 	_create_additive_mix(Vector3(4, 0, 0))
 	_create_labels()
 
-func _create_subtractive_mix(position: Vector3):
+func _create_subtractive_mix(position: Vector3) -> void:
 	# Subtractive Mixing (CMY) - Like Ink/Paint
 	# Cyan + Magenta = Blue
 	# Magenta + Yellow = Red
@@ -37,7 +37,7 @@ func _create_subtractive_mix(position: Vector3):
 	# Yellow
 	_create_plane(root, "Yellow", Color(1, 1, 0, plane_opacity), Vector3(0.8, -0.5, 0.02), false)
 
-func _create_additive_mix(position: Vector3):
+func _create_additive_mix(position: Vector3) -> void:
 	# Additive Mixing (RGB) - Like Light/Screens
 	# Red + Green = Yellow
 	# Green + Blue = Cyan
@@ -58,7 +58,7 @@ func _create_additive_mix(position: Vector3):
 	# Blue
 	_create_plane(root, "Blue", Color(0, 0, 1, 1.0), Vector3(0.8, -0.5, 0.02), true)
 
-func _create_plane(parent: Node, name: String, color: Color, pos: Vector3, additive: bool):
+func _create_plane(parent: Node, name: String, color: Color, pos: Vector3, additive: bool) -> void:
 	var mesh_inst = MeshInstance3D.new()
 	mesh_inst.name = name
 	
@@ -82,7 +82,7 @@ func _create_plane(parent: Node, name: String, color: Color, pos: Vector3, addit
 	
 	parent.add_child(mesh_inst)
 
-func _create_labels():
+func _create_labels() -> void:
 	var sub_label = Label3D.new()
 	sub_label.text = "Subtractive (CMY)\nMix"
 	sub_label.font_size = 64
@@ -94,3 +94,12 @@ func _create_labels():
 	add_label.font_size = 64
 	add_label.position = Vector3(4, 2.5, 0)
 	add_child(add_label)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

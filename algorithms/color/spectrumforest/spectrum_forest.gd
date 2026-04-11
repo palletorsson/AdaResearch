@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: hue(x) = remap(x, bounds) — 5000 vertical lines colored by x-position across the visible spectrum
+# desire: to walk through a rain of color, each step shifting the hue around you from violet to red
+# critical_parameter: line_count — at low counts the spectrum is sparse and abstract, at high counts it becomes an immersive curtain
+# triggers: none at runtime — static procedural sculpture generated once from deterministic seed
+# emerges: the density of lines creates an accidental fog effect where distant colors blend perceptually, demonstrating optical mixing
+# needs: VR walkthrough [has]; line_count slider [missing]; spectrum range control [missing]
+# relationships: contrasts with dark_side_prism (linear spectrum vs spatial spectrum); feeds into SpectrumVisualizer (animated spectrum vs static)
+# truth: the spectrum is continuous but we discretize it into lines — the gaps between lines are the same lie as RGB
+
 # Spectrum Forest: A field of hanging lines visualizing the color spectrum
 # Uses ImmediateMesh for thin, glowing "trace" lines.
 
@@ -29,11 +39,11 @@ extends Node3D
 var _mesh_instance: MeshInstance3D
 var _rng = RandomNumberGenerator.new()
 
-func _ready():
+func _ready() -> void:
 	_setup_mesh_instance()
 	generate_forest()
 
-func _setup_mesh_instance():
+func _setup_mesh_instance() -> void:
 	if _mesh_instance:
 		_mesh_instance.queue_free()
 	
@@ -51,7 +61,7 @@ func _setup_mesh_instance():
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	_mesh_instance.material_override = material
 
-func generate_forest():
+func generate_forest() -> void:
 	if not _mesh_instance:
 		return
 		
@@ -99,3 +109,23 @@ func generate_forest():
 		
 	im.surface_end()
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	if config.is_empty():
+		return
+	if config.has("forest_width"):
+		forest_size.x = float(config["forest_width"])
+	if config.has("forest_depth"):
+		forest_size.y = float(config["forest_depth"])
+	if config.has("line_count"):
+		line_count = int(config["line_count"])
+	if config.has("line_length"):
+		line_length = float(config["line_length"])
+	if config.has("ceiling_height"):
+		ceiling_height = float(config["ceiling_height"])
+	generate_forest()

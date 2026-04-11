@@ -36,12 +36,12 @@ class WFCCell:
 	var is_candidate: bool = false  # NEW: Is min entropy candidate
 	var propagation_highlight: float = 0.0  # NEW: Highlight from propagation wave
 
-	func _init(pos: Vector2, states: Array):
+	func _init(pos: Vector2, states: Array) -> void:
 		position = pos
 		possible_states = states.duplicate()
 		entropy = possible_states.size()
 
-func _ready():
+func _ready() -> void:
 	setup_adjacency_rules()
 	create_wfc_grid()
 	setup_materials()
@@ -49,7 +49,7 @@ func _ready():
 	create_concept_labels()    # NEW: Labels explaining what's happening
 	start_wfc_generation()
 
-func setup_adjacency_rules():
+func setup_adjacency_rules() -> void:
 	# Define which tiles can be adjacent to each other
 	adjacency_rules = {
 		"empty": ["empty", "wall"],
@@ -58,7 +58,7 @@ func setup_adjacency_rules():
 		"corner": ["wall", "floor", "corner"]
 	}
 
-func create_wfc_grid():
+func create_wfc_grid() -> void:
 	var grid_parent = $WFCGrid
 	var cell_spacing = 0.8  # Larger spacing for clarity
 	var offset = -grid_size * cell_spacing / 2.0
@@ -131,7 +131,7 @@ func create_superposition_display(parent: Node3D, possible_states: Array) -> Arr
 
 	return visuals
 
-func setup_materials():
+func setup_materials() -> void:
 	# Entropy indicator material
 	var entropy_material = StandardMaterial3D.new()
 	entropy_material.albedo_color = Color(1.0, 0.8, 0.2, 1.0)
@@ -146,7 +146,7 @@ func setup_materials():
 	progress_material.emission = Color(0.05, 0.3, 0.2, 1.0)
 	$CollapseProgress.material_override = progress_material
 
-func create_adjacency_legend():
+func create_adjacency_legend() -> void:
 	# Show the adjacency rules visually
 	var legend_parent = Node3D.new()
 	legend_parent.name = "AdjacencyLegend"
@@ -211,7 +211,7 @@ func create_adjacency_legend():
 
 		y_offset -= 1.0
 
-func create_concept_labels():
+func create_concept_labels() -> void:
 	# Labels explaining WFC concepts
 
 	# Superposition explanation
@@ -250,7 +250,7 @@ func create_concept_labels():
 	prop_label.outline_size = 4
 	add_child(prop_label)
 
-func start_wfc_generation():
+func start_wfc_generation() -> void:
 	collapsed_cells = 0
 	propagation_wave.clear()
 	min_entropy_candidates.clear()
@@ -272,7 +272,7 @@ func start_wfc_generation():
 
 	update_all_visuals()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	generation_timer += delta
 	
@@ -283,7 +283,7 @@ func _process(delta):
 	animate_wfc()
 	animate_indicators()
 
-func wfc_step():
+func wfc_step() -> void:
 	if collapsed_cells >= grid_size * grid_size:
 		# Reset and start over
 		await get_tree().create_timer(2.0).timeout  # Pause to see final result
@@ -330,7 +330,7 @@ func wfc_step():
 	# Propagate constraints with visual wave
 	propagate_constraints_with_wave(selected_cell)
 
-func collapse_cell(cell: WFCCell):
+func collapse_cell(cell: WFCCell) -> void:
 	if cell.possible_states.size() == 0:
 		return
 
@@ -344,7 +344,7 @@ func collapse_cell(cell: WFCCell):
 	update_cell_visual(cell)
 	update_superposition_display(cell)
 
-func propagate_constraints_with_wave(changed_cell: WFCCell):
+func propagate_constraints_with_wave(changed_cell: WFCCell) -> void:
 	# Clear previous wave
 	propagation_wave.clear()
 
@@ -378,10 +378,10 @@ func propagate_constraints_with_wave(changed_cell: WFCCell):
 				propagate_constraints_with_wave(neighbor)
 
 # Keep old function for compatibility
-func propagate_constraints(changed_cell: WFCCell):
+func propagate_constraints(changed_cell: WFCCell) -> void:
 	propagate_constraints_with_wave(changed_cell)
 
-func update_superposition_display(cell: WFCCell):
+func update_superposition_display(cell: WFCCell) -> void:
 	# Update the mini-tiles showing possible states
 	for visual_data in cell.superposition_visuals:
 		var tile = visual_data["tile"]
@@ -408,7 +408,7 @@ func get_neighbors(pos: Vector2) -> Array:
 func can_be_adjacent(state1: String, state2: String) -> bool:
 	return state2 in adjacency_rules.get(state1, [])
 
-func update_cell_visual(cell: WFCCell):
+func update_cell_visual(cell: WFCCell) -> void:
 	var material = StandardMaterial3D.new()
 
 	if cell.collapsed_state != "":
@@ -444,14 +444,14 @@ func update_cell_visual(cell: WFCCell):
 			var certainty = 1.0 - (float(cell.entropy) / tile_types.size())
 			cell.entropy_label.modulate = Color(1, 1 - certainty * 0.5, 1 - certainty * 0.8, 1)
 
-func update_all_visuals():
+func update_all_visuals() -> void:
 	for x in range(grid_size):
 		for y in range(grid_size):
 			var cell = wfc_grid[x][y]
 			update_cell_visual(cell)
 			update_superposition_display(cell)
 
-func animate_wfc():
+func animate_wfc() -> void:
 	# Animate cells based on their state
 	for x in range(grid_size):
 		for y in range(grid_size):
@@ -502,7 +502,7 @@ func animate_wfc():
 					var float_offset = sin(time * 4.0 + i * 1.5) * 0.03
 					tile.position.z = 0.15 + float_offset
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Entropy indicator (average entropy)
 	var total_entropy = 0.0
 	var uncollapsed_count = 0
@@ -544,3 +544,12 @@ func get_wfc_info() -> Dictionary:
 		"progress": float(collapsed_cells) / (grid_size * grid_size),
 		"total_entropy": total_entropy
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

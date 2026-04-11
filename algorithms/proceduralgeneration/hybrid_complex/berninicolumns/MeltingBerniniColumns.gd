@@ -76,7 +76,7 @@ var queer_colors = [
 
 # -- Godot Lifecycle Functions --
 
-func _ready():
+func _ready() -> void:
 	_build_column_positions()
 
 	# Confirm displacement shader availability (falls back to procedural normal map when null)
@@ -127,7 +127,7 @@ func _build_column_positions() -> void:
 		var z := sin(angle) * layout_radius
 		column_positions.append(Vector3(x, 0.0, z))
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Animate the columns if enabled
 	time += delta
 
@@ -585,7 +585,7 @@ func add_column_capital(column_node: Node3D, color: Color, index: int) -> MeshIn
 
 # --- Scene Setup Functions ---
 
-func create_platform():
+func create_platform() -> void:
 	# Creates a vibrant queer platform
 	var platform = MeshInstance3D.new()
 	var box_mesh = BoxMesh.new()
@@ -603,7 +603,7 @@ func create_platform():
 
 	add_child(platform)
 
-func create_lighting():
+func create_lighting() -> void:
 	# Dramatic queer lighting
 	var dir_light = DirectionalLight3D.new()
 	dir_light.light_energy = 0.8
@@ -635,3 +635,12 @@ func create_lighting():
 		spotlight.spot_range = column_height * 2.5
 		spotlight.spot_angle = 35.0
 		add_child(spotlight)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

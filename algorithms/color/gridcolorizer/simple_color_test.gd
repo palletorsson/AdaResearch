@@ -3,7 +3,7 @@
 
 extends Node3D
 
-func _ready():
+func _ready() -> void:
 	# Create MultiMeshInstance3D
 	var mmi = MultiMeshInstance3D.new()
 	add_child(mmi)
@@ -46,3 +46,12 @@ func _ready():
 	mmi.multimesh = mm
 	print("✅ Created %d cubes with per-instance colors" % mm.instance_count)
 	print("   Colors WILL show if shader supports them (SimpleGrid.gdshader does!)")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

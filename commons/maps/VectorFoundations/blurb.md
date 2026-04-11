@@ -1,0 +1,3 @@
+Direction is not given, it is composed. Three basis vectors root themselves in the ground — i points east, j points up, k points north. Every position in space is a combination of these three: P = xi + yj + zk. Decompose any arrow into components and you see the recipe.
+
+Addition stacks vectors tip to tail. Subtraction finds the difference — the arrow from one point to another. Magnitude measures how much force, how far the displacement, how fast the motion. These operations are the grammar of directed quantity. Everything that follows — dot products, cross products, forces, fields — builds on this foundation of components, magnitude, and arithmetic.

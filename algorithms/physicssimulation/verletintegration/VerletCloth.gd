@@ -10,12 +10,12 @@ extends Node3D
 var cloth: SoftBody3D
 var obstacle_sphere: StaticBody3D
 
-func _ready():
+func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 	_create_cloth()
 	_create_obstacle()
 
-func _create_cloth():
+func _create_cloth() -> void:
 	cloth = SoftBody3D.new()
 	cloth.name = "VerletCloth"
 
@@ -53,7 +53,7 @@ func _create_cloth():
 	var rows: int = cloth_resolution + 2
 	call_deferred("_pin_corners", cols, rows)
 
-func _pin_corners(cols: int, rows: int):
+func _pin_corners(cols: int, rows: int) -> void:
 	# Pin top-left and top-right corners
 	cloth.set_point_pinned(0, true)                    # Top-left
 	cloth.set_point_pinned(cols - 1, true)             # Top-right
@@ -61,7 +61,7 @@ func _pin_corners(cols: int, rows: int):
 	# cloth.set_point_pinned((rows - 1) * cols, true)       # Bottom-left
 	# cloth.set_point_pinned(rows * cols - 1, true)          # Bottom-right
 
-func _create_obstacle():
+func _create_obstacle() -> void:
 	# Sphere underneath the cloth for it to drape over
 	obstacle_sphere = StaticBody3D.new()
 	obstacle_sphere.name = "ObstacleSphere"
@@ -85,3 +85,12 @@ func _create_obstacle():
 
 	obstacle_sphere.position = Vector3(0, 1.5, 0)
 	add_child(obstacle_sphere)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

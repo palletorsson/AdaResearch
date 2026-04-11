@@ -1,5 +1,3 @@
-Particles on a grid. Six directions, binary occupation, deterministic collisions. Two particles meet head-on — they scatter perpendicular. That's the entire physics. No calculus, no partial differential equations, no continuum assumption.
+Particles bounce along a hexagonal lattice, colliding and scattering at each node. No fluid equations, no calculus — just discrete billiard balls following conservation laws on a grid. Void pools punctuate the floor like eddies in a current.
 
-Run it long enough. The lattice forgets it's discrete. Vortices form. Turbulence cascades. The Navier-Stokes equations — among the hardest unsolved problems in mathematics — emerge from particles that can only count to one.
-
-Void pools fill this room with simulated flow. Each cell resolves its neighbors, propagates, collides. Microscopic obedience to trivial rules. Macroscopic disobedience into fluid complexity. The continuous was always an approximation of the discrete pretending to be continuous. Matter performing smoothness through sheer repetition.
+Watch long enough and the particles blur into something uncanny: viscosity, turbulence, flow. The Navier-Stokes equations emerge from below, never written down, never solved. Fluids are not continuous. They just look that way from far enough away.

@@ -7,6 +7,16 @@ class_name LivingPaperManager
 ## Grab the paper → algorithm steps. Drop it → algorithm pauses.
 ## The paper accumulates its history visually.
 
+# @identity
+# essence: grab → step(algorithm, image, t) → drop → pause. The paper is a universal Turing surface.
+# desire: To be held — the algorithm only runs while grabbed, making the learner's hand the clock signal
+# critical_parameter: algorithm enum — 35 algorithms from random walks to Mandelbrot, each a different cartridge in the same machine
+# triggers: grab → _is_walking = true → steps accumulate on texture; drop → freeze; config swap → new algorithm
+# emerges: The paper's visual history — every step leaves a permanent mark, creating a fossil record of computation
+# needs: VR grab [has], algorithm swap via config [has], speed control [missing]
+# relationships: Universal substrate appearing across all sequences; each algorithm cartridge connects to its parent sequence
+# truth: The paper does not compute — the hand that holds it does. Grab is the clock. Drop is halt.
+
 ## --- Configuration ---
 
 @export var width: int = 128

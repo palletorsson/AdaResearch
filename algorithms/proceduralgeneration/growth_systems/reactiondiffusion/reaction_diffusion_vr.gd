@@ -2,6 +2,16 @@
 # VR-optimized reaction-diffusion using GPU shader
 extends Node3D
 
+# @identity
+# essence: Gray-Scott reaction-diffusion on GPU via ping-pong SubViewport rendering — feed_rate and kill_rate parameters select pattern regimes (coral, mitosis, spots, maze, waves)
+# desire: to watch Turing patterns bloom on a quad in front of you — spots splitting, stripes forming, mazes growing — all from two chemicals diffusing at different speeds
+# critical_parameter: feed_rate / kill_rate pair — together they select the pattern regime; tiny changes (0.001) cross phase boundaries between spots and stripes
+# triggers: preset cycling (KEY_LEFT/RIGHT) loads predefined feed/kill pairs; KEY_SPACE drops a new seed point; KEY_R resets the simulation to uniform state
+# emerges: seed placement geometry determines the initial symmetry which the reaction-diffusion dynamics then break or amplify — same parameters, different seeds, different patterns
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [has] (preset label)
+# relationships: GPU shader complement to turing_pattern_generator's CPU simulation; absorbed into softbodies sequence from morphogenesis
+# truth: Turing's last paper proved that two diffusing chemicals can create pattern from homogeneity — no blueprint needed, only differential diffusion
+
 # Shader parameters
 @export var feed_rate: float = 0.037
 @export var kill_rate: float = 0.06
@@ -33,14 +43,14 @@ var next_viewport: SubViewport
 # UI
 var preset_label: Label3D
 
-func _ready():
+func _ready() -> void:
 	_setup_viewports()
 	_setup_display()
 	_setup_shader()
 	_setup_ui()
 	_add_initial_seeds()
 
-func _setup_viewports():
+func _setup_viewports() -> void:
 	# Create SubViewport A
 	viewport_a = SubViewport.new()
 	viewport_a.name = "ViewportA"
@@ -76,7 +86,7 @@ func _setup_viewports():
 	current_viewport = viewport_a
 	next_viewport = viewport_b
 
-func _setup_display():
+func _setup_display() -> void:
 	# Create a 3D quad to display the pattern
 	display_mesh = MeshInstance3D.new()
 	display_mesh.name = "Display"
@@ -91,7 +101,7 @@ func _setup_display():
 
 	add_child(display_mesh)
 
-func _setup_shader():
+func _setup_shader() -> void:
 	# Load the GPU shader
 	var shader = load("res://algorithms/patterngeneration/reactiondiffusion/reactiondiffusion.gdshader")
 	if not shader:
@@ -141,7 +151,7 @@ void fragment() {
 	display_material.shader = display_shader
 	display_mesh.material_override = display_material
 
-func _setup_ui():
+func _setup_ui() -> void:
 	# Create 3D label for current preset
 	preset_label = Label3D.new()
 	preset_label.name = "PresetLabel"
@@ -152,7 +162,7 @@ func _setup_ui():
 	preset_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(preset_label)
 
-func _add_initial_seeds():
+func _add_initial_seeds() -> void:
 	# Add seed pattern after setup
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -206,15 +216,15 @@ func _process(_delta):
 	current_viewport = next_viewport
 	next_viewport = temp
 
-func next_preset():
+func next_preset() -> void:
 	current_preset = (current_preset + 1) % presets.size()
 	_apply_preset()
 
-func previous_preset():
+func previous_preset() -> void:
 	current_preset = (current_preset - 1 + presets.size()) % presets.size()
 	_apply_preset()
 
-func _apply_preset():
+func _apply_preset() -> void:
 	var preset = presets[current_preset]
 	feed_rate = preset.feed
 	kill_rate = preset.kill
@@ -226,7 +236,7 @@ func _apply_preset():
 	if preset_label:
 		preset_label.text = "Preset: " + preset.name
 
-func reset_simulation():
+func reset_simulation() -> void:
 	# Reset to initial state
 	var rect_a = viewport_a.get_node("ColorRect")
 	if rect_a:
@@ -238,7 +248,7 @@ func reset_simulation():
 	# Re-add seeds
 	_add_initial_seeds()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_RIGHT, KEY_D:
@@ -255,3 +265,12 @@ func _input(event):
 					next_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 					await get_tree().process_frame
 					sim_material.set_shader_parameter("mouse_pos", Vector2(-1, -1))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

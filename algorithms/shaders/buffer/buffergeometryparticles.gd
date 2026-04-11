@@ -96,13 +96,13 @@ void fragment() {
 }
 """
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 	generate_particle_data()
 	create_custom_particle_mesh()
 	start_particle_animation()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Create space-like environment
 	var env = Environment.new()
 	env.background_mode = Environment.BG_SKY
@@ -128,7 +128,7 @@ func setup_scene():
 	if camera_env:
 		camera_env.environment = env
 
-func generate_particle_data():
+func generate_particle_data() -> void:
 	# Initialize arrays
 	positions.clear()
 	velocities.clear()
@@ -171,7 +171,7 @@ func generate_particle_data():
 		# Random lifetime offset
 		life_times.append(randf() * 10.0)
 
-func create_custom_particle_mesh():
+func create_custom_particle_mesh() -> void:
 	custom_mesh = ArrayMesh.new()
 	
 	var vertices = PackedVector3Array()
@@ -260,12 +260,12 @@ func create_custom_particle_mesh():
 	particle_mesh.set_surface_override_material(0, particle_material)
 	add_child(particle_mesh)
 
-func start_particle_animation():
+func start_particle_animation() -> void:
 	# The particles animate automatically via the shader
 	# Add some dynamic parameter changes
 	animate_shader_parameters()
 
-func animate_shader_parameters():
+func animate_shader_parameters() -> void:
 	# Animate size multiplier
 	var size_tween = create_tween()
 	size_tween.set_loops()
@@ -297,7 +297,7 @@ func _process(_delta):
 	pass
 
 # Function to regenerate particles with new parameters
-func regenerate_particles():
+func regenerate_particles() -> void:
 	if particle_mesh:
 		particle_mesh.queue_free()
 	
@@ -305,7 +305,7 @@ func regenerate_particles():
 	create_custom_particle_mesh()
 
 # Create different particle patterns
-func create_spiral_pattern():
+func create_spiral_pattern() -> void:
 	positions.clear()
 	velocities.clear()
 	colors.clear()
@@ -336,7 +336,7 @@ func create_spiral_pattern():
 		sizes.append(randf_range(0.2, 0.6))
 		life_times.append(randf() * 5.0)
 
-func create_explosion_pattern():
+func create_explosion_pattern() -> void:
 	positions.clear()
 	velocities.clear()
 	colors.clear()
@@ -369,7 +369,7 @@ func create_explosion_pattern():
 		sizes.append(randf_range(0.3, 1.0))
 		life_times.append(randf() * 3.0)
 
-func create_galaxy_pattern():
+func create_galaxy_pattern() -> void:
 	positions.clear()
 	velocities.clear()
 	colors.clear()
@@ -413,7 +413,7 @@ func create_galaxy_pattern():
 		life_times.append(randf() * 8.0)
 
 # Call these in _ready() for different patterns
-func _ready_with_pattern(pattern: String):
+func _ready_with_pattern(pattern: String) -> void:
 	setup_scene()
 	
 	match pattern:
@@ -428,3 +428,12 @@ func _ready_with_pattern(pattern: String):
 	
 	create_custom_particle_mesh()
 	start_particle_animation()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

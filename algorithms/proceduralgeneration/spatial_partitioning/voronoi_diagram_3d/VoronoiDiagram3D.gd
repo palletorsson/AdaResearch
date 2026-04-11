@@ -46,7 +46,7 @@ class VoronoiCell:
 	var color: Color
 	var id: int
 	
-	func _init(seed: Vector3, cell_id: int):
+	func _init(seed: Vector3, cell_id: int) -> void:
 		seed_point = seed
 		id = cell_id
 
@@ -56,12 +56,12 @@ class BoundaryFace:
 	var neighbor_cell_id: int = -1
 	var is_external: bool = false
 	
-	func _init(verts: Array[Vector3]):
+	func _init(verts: Array[Vector3]) -> void:
 		vertices = verts
 		if vertices.size() >= 3:
 			calculate_normal()
 	
-	func calculate_normal():
+	func calculate_normal() -> void:
 		var v1 = vertices[1] - vertices[0]
 		var v2 = vertices[2] - vertices[0]
 		normal = v1.cross(v2).normalized()
@@ -76,10 +76,20 @@ var seed_points: Array[Vector3] = []
 var voronoi_cells: Array[VoronoiCell] = []
 var grid_resolution: Vector3i
 
-func _ready():
+# @identity
+# essence: 3D Voronoi tessellation — seed points partitioning space into convex cells where every point belongs to its nearest seed
+# desire: To show that territory emerges from proximity alone: scatter seeds, and boundaries appear where claims collide
+# critical_parameter: num_seeds — how many territories; few seeds produce large kingdoms, many produce fine-grained mosaic
+# triggers: Regenerating with different seeds reorganizes all boundaries; render mode toggles faces, wireframe, and dual mesh
+# emerges: Organic spatial partitions from a single distance calculation per point
+# needs: @tool editor preview [has], seed distribution modes [has], color per cell [has], regenerate [has], VR interaction [missing]
+# relationships: Opening artifact in spatial_partitioning. Dual of delaunay_triangulation_3d_cell. Foundation for procedural terrain.
+# truth: The boundary between two territories is not drawn — it is discovered by distance alone.
+
+func _ready() -> void:
 	generate_voronoi()
 
-func generate_voronoi():
+func generate_voronoi() -> void:
 	clear_structure()
 	
 	if seed_value != 0:
@@ -92,7 +102,7 @@ func generate_voronoi():
 	
 	print("Generated ", voronoi_cells.size(), " Voronoi cells with boundary faces")
 
-func generate_seeds():
+func generate_seeds() -> void:
 	seed_points.clear()
 	
 	match seed_distribution:
@@ -138,7 +148,7 @@ func generate_seeds():
 						cos(angle) * radius, y, sin(angle) * radius
 					))
 
-func generate_poisson_seeds():
+func generate_poisson_seeds() -> void:
 	var min_distance = region_size.length() / pow(num_seeds, 1.0/3.0) * 0.8
 	var active_list: Array[Vector3] = []
 	var initial = random_point_in_region()
@@ -161,7 +171,7 @@ func generate_poisson_seeds():
 		if not found:
 			active_list.remove_at(idx)
 
-func compute_voronoi_cells():
+func compute_voronoi_cells() -> void:
 	voronoi_cells.clear()
 	grid_resolution = Vector3i(resolution, resolution, resolution)
 	
@@ -174,7 +184,7 @@ func compute_voronoi_cells():
 			cell.color = Color(0.7, 0.7, 0.9)
 		voronoi_cells.append(cell)
 
-func detect_boundary_faces():
+func detect_boundary_faces() -> void:
 	# Sample the volume to find boundary faces between cells
 	var step = region_size / Vector3(grid_resolution)
 	var half_region = region_size / 2
@@ -301,7 +311,7 @@ func sort_points_by_angle(points: Array, center: Vector3) -> Array[Vector3]:
 	
 	return sorted
 
-func visualize_samples():
+func visualize_samples() -> void:
 	clear_visualization()
 	
 	match render_mode:
@@ -317,7 +327,7 @@ func visualize_samples():
 	if show_seeds:
 		visualize_seeds()
 
-func draw_outer_faces_only():
+func draw_outer_faces_only() -> void:
 	# Draw only the boundary faces of each cell
 	for cell in voronoi_cells:
 		if cell.boundary_faces.size() == 0:
@@ -360,11 +370,11 @@ func draw_outer_faces_only():
 		material.cull_mode = BaseMaterial3D.CULL_BACK
 		mesh_instance.material_override = material
 
-func draw_all_faces():
+func draw_all_faces() -> void:
 	# Similar to outer faces but includes all detected faces
 	draw_outer_faces_only()  # For now, same implementation
 
-func draw_wireframe():
+func draw_wireframe() -> void:
 	# Draw edges of boundary faces
 	for cell in voronoi_cells:
 		for face in cell.boundary_faces:
@@ -396,7 +406,7 @@ func draw_wireframe():
 			material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 			mesh_instance.material_override = material
 
-func draw_dual_mesh():
+func draw_dual_mesh() -> void:
 	# Draw lines connecting seed points through boundary faces
 	var surface_tool = SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_LINES)
@@ -417,7 +427,7 @@ func draw_dual_mesh():
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mesh_instance.material_override = material
 
-func visualize_seeds():
+func visualize_seeds() -> void:
 	for i in range(seed_points.size()):
 		var seed_pos = seed_points[i]
 		var sphere = MeshInstance3D.new()
@@ -503,11 +513,20 @@ func is_far_enough(point: Vector3, min_dist: float) -> bool:
 			return false
 	return true
 
-func clear_structure():
+func clear_structure() -> void:
 	seed_points.clear()
 	voronoi_cells.clear()
 	clear_visualization()
 
-func clear_visualization():
+func clear_visualization() -> void:
 	for child in get_children():
 		child.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -31,7 +31,7 @@ var raw_particles: Array = []
 var engineered_particles: Array = []
 var _stats_label: Label3D = null
 
-func _ready():
+func _ready() -> void:
 	# Initialize Feature Engineering visualization
 	print("Feature Engineering Visualization initialized")
 	create_raw_particles()
@@ -40,7 +40,7 @@ func _ready():
 	setup_engineering_metrics()
 	_create_stats_label()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta * animation_speed
 	
 	# ── Auto-advance progress if enabled ─────────────────────────────────
@@ -57,7 +57,7 @@ func _process(delta):
 	update_engineering_metrics(delta)
 	_update_stats_label()
 
-func create_raw_particles():
+func create_raw_particles() -> void:
 	## Create raw feature particles — color-coded by type (numerical, categorical, binary, ordinal, text)
 	var raw_particles_node = $RawFeatures/RawParticles
 	for i in range(particle_count):
@@ -97,7 +97,7 @@ func create_raw_particles():
 		raw_particles_node.add_child(particle)
 		raw_particles.append(particle)
 
-func create_engineered_particles():
+func create_engineered_particles() -> void:
 	## Create engineered feature particles — larger, refined spheres representing transformed features
 	var engineered_particles_node = $EngineereddFeatures/EngineeredParticles
 	for i in range(25):
@@ -122,7 +122,7 @@ func create_engineered_particles():
 		engineered_particles_node.add_child(particle)
 		engineered_particles.append(particle)
 
-func create_flow_particles():
+func create_flow_particles() -> void:
 	## Create feature flow particles — gold data-flow trail through the pipeline
 	var flow_particles_node = $DataFlow/FlowParticles
 	for i in range(35):
@@ -145,7 +145,7 @@ func create_flow_particles():
 		flow_particles_node.add_child(particle)
 		flow_particles.append(particle)
 
-func setup_engineering_metrics():
+func setup_engineering_metrics() -> void:
 	# Initialize engineering metrics
 	var quality_indicator = $EngineeringMetrics/QualityMeter/QualityIndicator
 	var relevance_indicator = $EngineeringMetrics/RelevanceMeter/RelevanceIndicator
@@ -154,7 +154,7 @@ func setup_engineering_metrics():
 	if relevance_indicator:
 		relevance_indicator.position.x = 0  # Start at middle
 
-func animate_raw_features(delta):
+func animate_raw_features(delta) -> void:
 	# Animate raw feature particles
 	for i in range(raw_particles.size()):
 		var particle = raw_particles[i]
@@ -181,7 +181,7 @@ func animate_raw_features(delta):
 			if particle.material_override:
 				particle.material_override.emission = particle.material_override.albedo_color * (0.3 + importance * 0.4)
 
-func animate_transformation_pipeline(delta):
+func animate_transformation_pipeline(delta) -> void:
 	# Animate transformation pipeline core
 	var pipeline_core = $TransformationPipeline/PipelineCore
 	if pipeline_core:
@@ -263,7 +263,7 @@ func animate_transformation_pipeline(delta):
 			var intensity = 0.3 + binning_activation * 0.7
 			binning_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_engineered_features(delta):
+func animate_engineered_features(delta) -> void:
 	# Animate engineered feature particles
 	for i in range(engineered_particles.size()):
 		var particle = engineered_particles[i]
@@ -288,7 +288,7 @@ func animate_engineered_features(delta):
 			var red_component = 0.2 + 0.6 * (1.0 - quality)
 			particle.material_override.albedo_color = Color(red_component, green_component, 0.8, 1)
 
-func animate_feature_selection(delta):
+func animate_feature_selection(delta) -> void:
 	# Animate feature selection core
 	var selection_core = $FeatureSelection/SelectionCore
 	if selection_core:
@@ -344,7 +344,7 @@ func animate_feature_selection(delta):
 			var intensity = 0.3 + lasso_activation * 0.7
 			lasso_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_data_flow(delta):
+func animate_data_flow(delta) -> void:
 	# Animate flow particles
 	for i in range(flow_particles.size()):
 		var particle = flow_particles[i]
@@ -368,7 +368,7 @@ func animate_data_flow(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * engineering_progress
 			particle.scale = Vector3.ONE * pulse
 
-func update_engineering_metrics(delta):
+func update_engineering_metrics(delta) -> void:
 	# Update feature quality meter
 	var quality_indicator = $EngineeringMetrics/QualityMeter/QualityIndicator
 	if quality_indicator:
@@ -393,13 +393,13 @@ func update_engineering_metrics(delta):
 
 # ── Public API ───────────────────────────────────────────────────────────────
 
-func set_engineering_progress(progress: float):
+func set_engineering_progress(progress: float) -> void:
 	engineering_progress = clamp(progress, 0.0, 1.0)
 
-func set_feature_quality(quality: float):
+func set_feature_quality(quality: float) -> void:
 	feature_quality = clamp(quality, 0.0, 1.0)
 
-func set_feature_relevance(relevance: float):
+func set_feature_relevance(relevance: float) -> void:
 	feature_relevance = clamp(relevance, 0.0, 1.0)
 
 func get_engineering_progress() -> float:
@@ -411,7 +411,7 @@ func get_feature_quality() -> float:
 func get_feature_relevance() -> float:
 	return feature_relevance
 
-func reset_engineering():
+func reset_engineering() -> void:
 	time = 0.0
 	engineering_progress = 0.0
 	feature_quality = 0.0
@@ -424,7 +424,7 @@ func reset_engineering():
 
 # ── Stats Label & Visual Feedback ────────────────────────────────────────────
 
-func _create_stats_label():
+func _create_stats_label() -> void:
 	## Creates a floating 3D label showing live feature engineering stats
 	_stats_label = Label3D.new()
 	_stats_label.text = "Initializing..."
@@ -437,7 +437,7 @@ func _create_stats_label():
 	_stats_label.no_depth_test = true
 	add_child(_stats_label)
 
-func _update_stats_label():
+func _update_stats_label() -> void:
 	if _stats_label:
 		_stats_label.text = "Feature Engineering\nProgress: %d%%  |  Quality: %.0f%%  |  Relevance: %.0f%%" % [
 			engineering_progress * 100,
@@ -445,7 +445,7 @@ func _update_stats_label():
 			feature_relevance * 100
 		]
 
-func _on_progress_changed():
+func _on_progress_changed() -> void:
 	## Visual feedback — pulse pipeline core with gold glow on progress change
 	var pipeline_core = $TransformationPipeline/PipelineCore
 	if pipeline_core and pipeline_core.material_override:
@@ -454,3 +454,12 @@ func _on_progress_changed():
 			Color(1.0, 0.85, 0.2) * 1.5, 0.15)
 		tween.tween_property(pipeline_core.material_override, "emission",
 			Color(0.3, 0.85, 0.4) * (0.3 + engineering_progress * 0.7), 0.3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

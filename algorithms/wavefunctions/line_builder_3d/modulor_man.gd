@@ -29,14 +29,14 @@ const MODULOR_UNITS = {
 	"torso_width": 0.35,               # Approximate chest width
 }
 
-func _ready():
+func _ready() -> void:
 	mesh_instance = $LineMesh
 	_build_modulor_path()
 	_update_line()
 
 ## Build the continuous line path for Modulor Man
 ## Path: Left foot → left leg → torso → right arm → left arm → head → right leg → right foot
-func _build_modulor_path():
+func _build_modulor_path() -> void:
 	line_points.clear()
 
 	# Center the figure at origin
@@ -145,7 +145,7 @@ func _build_modulor_path():
 	_print_segment_lengths()
 
 ## Print the length of each segment (educational/proportional reference)
-func _print_segment_lengths():
+func _print_segment_lengths() -> void:
 	print("\n=== MODULOR MAN - Segment Lengths (Le Corbusier Proportions) ===")
 
 	var segments = [
@@ -172,7 +172,7 @@ func _print_segment_lengths():
 	print("  Arm Raised: %.2f m (Red 226)" % MODULOR_UNITS["total_height_arm_raised"])
 	print("===============================================================\n")
 
-func _update_line():
+func _update_line() -> void:
 	if line_points.size() < 2:
 		return
 
@@ -237,3 +237,6 @@ func _create_line_material() -> ShaderMaterial:
 	mat.set_shader_parameter("pulse_frequency", 0.0)
 
 	return mat
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -101,7 +101,7 @@ func _process(delta: float) -> void:
 # Attention Score Computation — Softmax over inverse-distance scores
 # ============================================================================
 
-func _calculate_attention_scores():
+func _calculate_attention_scores() -> void:
 	_attention_scores.clear()
 	if not _query_token or _key_tokens.is_empty():
 		return
@@ -162,6 +162,7 @@ func _setup_materials() -> void:
 	_mat_qkv.roughness = 0.35
 
 	_mesh_sphere.radius = 0.2
+	_mesh_sphere.height = 0.4
 	_mesh_cyl.top_radius = 0.01
 	_mesh_cyl.bottom_radius = 0.01
 	_mesh_cyl.height = 0.8
@@ -183,7 +184,7 @@ func _create_input_tokens() -> void:
 	
 	_update_query_and_keys()
 
-func _update_query_and_keys():
+func _update_query_and_keys() -> void:
 	if _input_tokens.get_child_count() == 0:
 		return
 
@@ -226,6 +227,7 @@ func _create_qkv_visuals() -> void:
 		if node:
 			var m := SphereMesh.new()
 			m.radius = 0.8
+			m.height = 1.6
 			node.mesh = m
 			node.material_override = _mat_qkv
 
@@ -235,6 +237,7 @@ func _create_attention_matrix_multimesh() -> void:
 	_matrix_mm.use_colors = true
 	var s := SphereMesh.new()
 	s.radius = 0.05
+	s.height = 0.1
 	_matrix_mm.mesh = s
 	_matrix_mm.instance_count = token_count * token_count
 
@@ -437,3 +440,12 @@ func _update_stats_label() -> void:
 func _clear_children(parent: Node) -> void:
 	for c in parent.get_children():
 		c.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

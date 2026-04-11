@@ -376,23 +376,48 @@ Write `doc/ONBOARDING_GUIDE.md` with this exact heading structure:
 
 ---
 
+## Step 0: Pipeline State (Run FIRST)
+
+**Before anything else**, run the sequence pipeline scorer:
+
+```bash
+python tools/sequence_pipeline_scorer.py
+```
+
+This shows all 19 spine sequences scored through 7 completion stages:
+1. Structure → 2. Documentation → 3. Artifacts → 4. Maps → 5. Validation → 6. VR Testing → 7. Polish
+
+The HEAD = lowest incomplete stage. Include the full scorer output in the onboarding guide.
+
+Also check for active threads in `.claude/projects/*/memory/`:
+- Thread files (thread_*.md) with status ACTIVE or PAUSED
+- These are resumable conversation contexts from previous sessions
+- List them with their status and open questions
+
+And check the Context Manager if running (`curl -s http://localhost:8000/api/dashboard` for session counts, active threads, context branches).
+
+**Output section:** `## 0. Where All Heads Are` — the pipeline table + active threads.
+
+---
+
 ## Important Rules
 
 1. **Reference, do not reproduce.** When an existing document covers something well, summarize in 1-2 sentences and add: "Full reference: `path/to/doc.md`". Each major section should be ~300 words max.
 
 2. **Live data from JSON, not docs.** Stats in Step 1 must come from counting actual JSON files with Glob and Read, not from documentation that may be stale. Note any discrepancy.
 
-3. **Date-stamp live sections.** Steps 1 and 7 carry "Generated: YYYY-MM-DD" stamps so the reader knows when to refresh.
+3. **Date-stamp live sections.** Steps 0, 1, and 7 carry "Generated: YYYY-MM-DD" stamps so the reader knows when to refresh.
 
 4. **Be honest about gaps.** If SYSTEM_KNOWLEDGE.md hasn't been generated, say so. If sequences are scaffolded but not fully built, say so.
 
 5. **Ground examples in real names.** Use actual sequence names, map names, artifact lookup_names from the project — never use hypothetical placeholders.
 
-6. **The Quick-Start Checklist** should give 7 concrete first actions:
+6. **The Quick-Start Checklist** should give 8 concrete first actions:
+   - [ ] Run `python tools/sequence_pipeline_scorer.py` — see where all 19 heads are
+   - [ ] Read `.claude/memory/MEMORY.md` — what previous sessions discovered
+   - [ ] Check `.claude/memory/thread_*.md` — any paused threads to resume?
    - [ ] Read `doc/ENTRY.md` — the project entry point
-   - [ ] Check `commons/maps/curriculum_spine.json` — the canonical learning order
-   - [ ] Skim `doc/TAXONOMY.md` spine table — playability at a glance
+   - [ ] Run `python tools/lod_query.py <topic>` — drill into any topic
    - [ ] Pick a sequence and run `/ada-test-player [sequence]` — experience the content
-   - [ ] Run `/ada-knowledge-updater all` if `SYSTEM_KNOWLEDGE.md` doesn't exist
-   - [ ] Check `doc/reports/SEQUENCE_CONTRACT_AUDIT.md` for any blockers
+   - [ ] Run `python tools/heat_map_generator.py` — see what's hottest
    - [ ] Run `git log --oneline -10` to see recent changes

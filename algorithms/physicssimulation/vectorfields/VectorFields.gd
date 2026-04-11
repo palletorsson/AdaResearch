@@ -1,23 +1,33 @@
 ## Vector Fields — Visualizes force fields with MultiMesh arrows and Area3D sources
 ## Arrows rendered in ONE draw call via MultiMesh, particles advected through the field
+##
+## @identity
+## essence: F(p) = sum(sources). Each point samples the superposed field of all Area3D gravity sources. Arrows point where particles would go.
+## desire: To place an attractor and a repulsor and watch the field tear itself between them — arrows bending, particles caught in the tug of war.
+## critical_parameter: The ratio of attractor gravity (+8) to repulsor gravity (-6). It determines whether particles orbit, escape, or get trapped.
+## triggers: Automatic — 125 arrows orient by sampling field, 30 particles advected by Area3D gravity overrides, escaped particles respawn randomly
+## emerges: Saddle points between attractor and repulsor where the field cancels. Particle streams forming visible flow lanes. Color gradient mapping field magnitude.
+## needs: MultiMesh arrow grid [has], RigidBody3D test particles [has], Area3D sources [has]. Missing: VR grabbable sources, field strength sliders.
+## relationships: More physical than VectorFieldFlow (uses Godot's Area3D physics). Complements force_field_visualizer (which computes fields analytically). Lives in ForcesSystems.
+## truth: A field is not a picture of arrows. It is a promise: if you put a particle here, this is what will happen.
 extends Node3D
 
-@export var grid_resolution: int = 6  # arrows per axis (6³ = 216 arrows)
-@export var grid_spacing: float = 0.6
-@export var arrow_scale: float = 0.1
+@export var grid_resolution: int = 5  # arrows per axis (5³ = 125 arrows)
+@export var grid_spacing: float = 0.7
+@export var arrow_scale: float = 0.18
 @export var particle_count: int = 30
 
 var arrow_multimesh: MultiMeshInstance3D
 var field_sources: Array[Area3D] = []
 var particles: Array[RigidBody3D] = []
 
-func _ready():
+func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 	_create_field_sources()
 	_create_arrow_grid()
 	_create_test_particles()
 
-func _create_field_sources():
+func _create_field_sources() -> void:
 	# Attractor (pulls inward)
 	var attractor := Area3D.new()
 	attractor.name = "Attractor"
@@ -35,12 +45,12 @@ func _create_field_sources():
 	# Visual marker
 	var amarker := MeshInstance3D.new()
 	var asphere := SphereMesh.new()
-	asphere.radius = 0.15
+	asphere.radius = 0.25
 	amarker.mesh = asphere
 	var amat := StandardMaterial3D.new()
 	amat.albedo_color = Color(1.0, 0.3, 0.3)
 	amat.emission_enabled = true
-	amat.emission = Color(1.0, 0.2, 0.2) * 0.8
+	amat.emission = Color(1.0, 0.2, 0.2) * 1.5
 	amarker.material_override = amat
 	attractor.add_child(amarker)
 	add_child(attractor)
@@ -62,18 +72,18 @@ func _create_field_sources():
 
 	var rmarker := MeshInstance3D.new()
 	var rsphere := SphereMesh.new()
-	rsphere.radius = 0.15
+	rsphere.radius = 0.25
 	rmarker.mesh = rsphere
 	var rmat := StandardMaterial3D.new()
 	rmat.albedo_color = Color(0.3, 0.5, 1.0)
 	rmat.emission_enabled = true
-	rmat.emission = Color(0.2, 0.4, 1.0) * 0.8
+	rmat.emission = Color(0.2, 0.4, 1.0) * 1.5
 	rmarker.material_override = rmat
 	repulsor.add_child(rmarker)
 	add_child(repulsor)
 	field_sources.append(repulsor)
 
-func _create_arrow_grid():
+func _create_arrow_grid() -> void:
 	arrow_multimesh = MultiMeshInstance3D.new()
 	arrow_multimesh.name = "ArrowGrid"
 
@@ -96,13 +106,13 @@ func _create_arrow_grid():
 	var mat := StandardMaterial3D.new()
 	mat.vertex_color_use_as_albedo = true
 	mat.emission_enabled = true
-	mat.emission_energy_multiplier = 0.5
+	mat.emission_energy_multiplier = 1.5
 	arrow_multimesh.material_override = mat
 
 	add_child(arrow_multimesh)
 	_update_arrows()
 
-func _create_test_particles():
+func _create_test_particles() -> void:
 	for i in range(particle_count):
 		var rb := RigidBody3D.new()
 		rb.mass = 0.1
@@ -116,13 +126,13 @@ func _create_test_particles():
 
 		var mesh_inst := MeshInstance3D.new()
 		var sphere := SphereMesh.new()
-		sphere.radius = 0.04
-		sphere.height = 0.08
+		sphere.radius = 0.06
+		sphere.height = 0.12
 		mesh_inst.mesh = sphere
 		var mat := StandardMaterial3D.new()
 		mat.albedo_color = Color(1.0, 1.0, 0.3)
 		mat.emission_enabled = true
-		mat.emission = Color(1.0, 0.9, 0.2) * 0.6
+		mat.emission = Color(1.0, 0.9, 0.2) * 1.2
 		mesh_inst.material_override = mat
 		rb.add_child(mesh_inst)
 
@@ -148,7 +158,7 @@ func _physics_process(_delta: float):
 			)
 			rb.linear_velocity = Vector3.ZERO
 
-func _update_arrows():
+func _update_arrows() -> void:
 	var mm := arrow_multimesh.multimesh
 	var idx := 0
 	var half := (grid_resolution - 1) * grid_spacing * 0.5
@@ -194,3 +204,12 @@ func _update_arrows():
 				mm.set_instance_color(idx, color)
 
 				idx += 1
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

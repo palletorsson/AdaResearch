@@ -1,6 +1,17 @@
 extends Node3D
 
 # --- Circle / indicators ---
+
+# @identity
+# essence: point(t) = (cos(theta), sin(theta)), waves built stroke by stroke as angle sweeps
+# desire: Watch a point trace the unit circle while sine and cosine waves build incrementally
+# critical_parameter: rotation_speed — controls how fast the circle is traced and waves extend
+# triggers: continuous angle increment builds the wave one sample at a time until complete
+# emerges: visual proof that sine and cosine are born from circular motion
+# needs: VR observation [has], speed control [missing]
+# relationships: depends on MultiMesh segment rendering; contrasts with UnitCircleTrig (buildup vs continuous trail); unlocks the circle-wave connection
+# truth: The unit circle is the Rosetta Stone of trigonometry — rotation on one side, oscillation on the other.
+
 @export var radius: float = 1.0
 @export var rotation_speed: float = 0.8
 @export var samples_per_cycle: int = 100
@@ -243,3 +254,12 @@ func _create_bridge_step(step_angle: float, idx: int) -> void:
 func _get_wheel_color(theta: float, value: float) -> Color:
 	var hue = fposmod(theta / TAU, 1.0)
 	return Color.from_hsv(hue, wheel_saturation, value)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

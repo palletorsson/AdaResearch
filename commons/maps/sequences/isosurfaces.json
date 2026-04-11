@@ -1,100 +1,250 @@
 {
-	"sequences": {
-		"isosurfaces": {
-			"name": "Isosurfaces: Implicit to Explicit",
-			"truth": "Define a field, extract a surface. The boundary between inside and outside becomes geometry.",
-			"qfep_term": "I→",
-			"qfep_connection": "Marching algorithms find the edge — the threshold between states. This IS the edge of chaos made geometric: where density crosses zero, form emerges.",
-			"formula": "f(x,y,z) = threshold → mesh",
-
-			"description": "Algorithms that extract surfaces from scalar fields. Marching Cubes walks through voxels finding boundaries. Caves emerge from noise. Landscapes generate portals. The implicit becomes explicit.",
-			"layer": "systems",
-			"prerequisites": ["noise"],
-			"unlocks": [],
-
-			"difficulty": "intermediate-advanced",
-			"estimated_time": "25-35 minutes",
-
-			"learning_objectives": [
-				"Implicit surfaces: functions that define inside/outside",
-				"Marching Cubes: the 256-case lookup table",
-				"Gyroid minimal surfaces and triply periodic functions",
-				"Cave generation from 3D noise fields",
-				"Portal landscapes — terrain with marching cubes"
-			],
-
-			"content": [
-				"ISO_Marching_Cubes: The core algorithm + gyroid sculpture — sphere/torus extraction, sculpt VR, GyroidDemo",
-				"ProceduralGeneration_MarchingCave: Walkable procedural cave system — noise-driven marching cubes",
-				"ProceduralGenerationMarchingcubesPortalLandscape: Terrain with portals — landscape-scale marching cubes",
-				"ISO_Metaballs: Organic blobby forms — implicit surfaces that merge and flow",
-				"ISO_Implicit_Modeling: Implicit surface modeling — CSG-like boolean operations on distance fields"
-			],
-
-			"maps": [
-				"ISO_Voxel_Cave_Struct",
-				"ISO_Showcase_2",
-				"ISO_Showcase_3",
-				"ISO_Showcase_4",
-				"ISO_Showcase_5",
-				"ISO_Showcase_6",
-				"ISO_Showcase_7",
-				"ISO_Showcase_8",
-				"ISO_Showcase_9",
-				"ISO_Showcase_10",
-				"ISO_Showcase_11",				
-				"ISO_Marching_Gyroid",
-				"ProceduralGeneration_MarchingCave",
-				"ProceduralGenerationMarchingcubesPortalLandscape",
-				"ISO_Metaballs",
-				"ISO_Implicit_Modeling"
-			],
-
-			"algorithm_sources": {
-				"ISO_Marching_Cubes": {
-					"algorithms": ["proceduralgeneration/isosurfaces/marchingcave"],
-					"original_maps": ["ProceduralGeneration_Marching_Cubes_Algorithm", "ProceduralGenerationMarchingCubesSculpture"],
-					"artifacts": ["mc:sphere", "mc:torus", "marching_cubes", "marching_cubes_sculpt_vr", "GyroidDemo"],
-					"compute": "MEDIUM — multiple MC artifacts, spread spatially"
-				},
-				"ISO_Metaballs": {
-					"algorithms": ["proceduralgeneration/isosurfaces/metaballs", "proceduralgeneration/hybrid_complex/metaballgenerator"],
-					"artifacts": ["metaballs", "metaball_generator"],
-					"compute": "MEDIUM — 15KB + 34KB, real-time distance field evaluation"
-				},
-				"ISO_Implicit_Modeling": {
-					"algorithms": ["proceduralgeneration/isosurfaces/implicitsurfacemodeling"],
-					"artifacts": ["implicit_surface_modeling"],
-					"compute": "MEDIUM — 17KB, CSG operations on fields"
-				}
-			},
-
-			"deferred_maps": [
-				"ProceduralGenerationMarchingcubesFlatLandscape",
-				"ProceduralGenerationMarchingCubesInsideCave",
-				"ProceduralGenerationMarchingcubesTorusSculpture",
-				"ProceduralGenerationMarchingCubesVovelNoise",
-				"ProceduralGeneration_MarchingGallery"
-			],
-
-			"algorithm_paths": {
-				"marching_cubes": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/",
-				"marching_squares": "res://algorithms/proceduralgeneration/isosurfaces/marchingsquares/",
-				"metaballs": "res://algorithms/proceduralgeneration/isosurfaces/metaballs/",
-				"implicit": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/"
-			},
-
-			"audio": {
-				"ambient_preset": "minimal_drone",
-				"volume": -10.0
-			},
-
-			"return_to": "lab",
-
-			"references": {
-				"key_concepts": ["Marching Cubes (Lorensen & Cline, 1987)", "Metaballs (Blinn, 1982)", "Signed Distance Fields", "Gyroid (Schoen, 1970)"],
-				"related_sequences": ["proceduralgeneration", "noise", "spatial_partitioning"]
-			}
+  "sequences": {
+	"isosurfaces": {
+	  "name": "Isosurfaces: Implicit to Explicit",
+	  "truth": "Define a field, extract a surface. The boundary between inside and outside becomes geometry.",
+	  "qfep_term": "Iâ†’",
+	  "qfep_connection": "Marching algorithms find the edge â€” the threshold between states. This IS the edge of chaos made geometric: where density crosses zero, form emerges.",
+	  "formula": "f(x,y,z) = threshold â†’ mesh",
+	  "description": "Algorithms that extract surfaces from scalar fields. Marching Cubes walks through voxels finding boundaries. Caves emerge from noise. Landscapes generate portals. The implicit becomes explicit.",
+	  "layer": "systems",
+	  "prerequisites": [
+        "noise"
+	  ],
+	  "unlocks": [],
+	  "difficulty": "intermediate-advanced",
+	  "estimated_time": "25-35 minutes",
+	  "learning_objectives": [
+		"Implicit surfaces: functions that define inside/outside",
+		"Marching Cubes: the 256-case lookup table",
+		"Gyroid minimal surfaces and triply periodic functions",
+		"Cave generation from 3D noise fields",
+        "Portal landscapes â€” terrain with marching cubes"
+	  ],
+	  "content": [
+		"ISO_Introduction: Introduction",
+		"ISO_LookupTable: The 256 Cases",
+		"ISO_ShapesGallery: Shapes Gallery",
+		"ISO_TorusGyroid: Torus and Gyroid",
+		"ISO_Sculpting: VR Sculpting",
+		"ISO_FlatTerrain: Terrain and Overhangs",
+		"ISO_PortalLandscape: Portal Landscape",
+		"ISO_Caves: Caves",
+		"ISO_CaveGeneration: Cave Generation",
+		"ISO_AnimatedNoise: Animated Noise",
+		"ISO_Metaballs: Metaballs",
+        "ISO_ImplicitModeling: Implicit Modeling"
+	  ],
+	  "maps": [
+		"ISO_Introduction",
+		"ISO_LookupTable",
+		"ISO_ShapesGallery",
+		"ISO_TorusGyroid",
+		"ISO_Sculpting",
+		"ISO_FlatTerrain",
+		"ISO_PortalLandscape",
+		"ISO_Caves",
+		"ISO_CaveGeneration",
+		"ISO_AnimatedNoise",
+		"ISO_Metaballs",
+        "ISO_ImplicitModeling"
+	  ],
+	  "algorithm_sources": {
+		"ISO_Marching_Cubes": {
+		  "algorithms": [
+            "proceduralgeneration/isosurfaces/marchingcave"
+		  ],
+		  "original_maps": [
+			"ProceduralGeneration_Marching_Cubes_Algorithm",
+            "ProceduralGenerationMarchingCubesSculpture"
+		  ],
+		  "artifacts": [
+			"mc:sphere",
+			"mc:torus",
+			"marching_cubes",
+			"marching_cubes_sculpt_vr",
+            "GyroidDemo"
+		  ],
+		  "compute": "MEDIUM â€” multiple MC artifacts, spread spatially"
+		},
+		"ISO_Metaballs": {
+		  "algorithms": [
+			"proceduralgeneration/isosurfaces/metaballs",
+            "proceduralgeneration/hybrid_complex/metaballgenerator"
+		  ],
+		  "artifacts": [
+			"metaballs",
+            "metaball_generator"
+		  ],
+		  "compute": "MEDIUM â€” 15KB + 34KB, real-time distance field evaluation"
+		},
+		"ISO_Implicit_Modeling": {
+		  "algorithms": [
+            "proceduralgeneration/isosurfaces/implicitsurfacemodeling"
+		  ],
+		  "artifacts": [
+            "implicit_surface_modeling"
+		  ],
+		  "compute": "MEDIUM â€” 17KB, CSG operations on fields"
 		}
+	  },
+	  "deferred_maps": [
+		"ProceduralGenerationMarchingcubesFlatLandscape",
+		"ProceduralGenerationMarchingCubesInsideCave",
+		"ProceduralGenerationMarchingcubesTorusSculpture",
+		"ProceduralGenerationMarchingCubesVovelNoise",
+        "ProceduralGeneration_MarchingGallery"
+	  ],
+	  "algorithm_paths": {
+		"marching_cubes": "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/",
+		"marching_squares": "res://algorithms/proceduralgeneration/isosurfaces/marchingsquares/",
+		"metaballs": "res://algorithms/proceduralgeneration/isosurfaces/metaballs/",
+		"implicit": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/"
+	  },
+	  "audio": {
+		"ambient_preset": "minimal_drone",
+		"volume": -10.0
+	  },
+	  "return_to": "lab",
+	  "references": {
+		"key_concepts": [
+		  "Marching Cubes (Lorensen & Cline, 1987)",
+		  "Metaballs (Blinn, 1982)",
+		  "Signed Distance Fields",
+          "Gyroid (Schoen, 1970)"
+		],
+		"related_sequences": [
+		  "proceduralgeneration",
+		  "noise",
+          "spatial_partitioning"
+		]
+	  },
+	  "artifact_groups": [
+		{
+		  "map": "ISO_Introduction",
+		  "position": "intro",
+		  "artifacts": [
+            "voxel_noise_demo"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "Voxel noise as implicit surface source: 3D noise field defining density values that marching cubes will later polygonize. The raw material before the algorithm acts."
+		},
+		{
+		  "map": "ISO_LookupTable",
+		  "position": "intro",
+		  "artifacts": [
+			"fifteen_cases_demo",
+            "mc_cave"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "The 256 marching cubes cases with 2 artifacts"
+		},
+		{
+		  "map": "ISO_ShapesGallery",
+		  "position": "intro",
+		  "artifacts": [
+			"mc_shapes_gallery",
+			"mc:sphere",
+            "mc:torus"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "Shapes gallery with 3 artifacts"
+		},
+		{
+		  "map": "ISO_TorusGyroid",
+		  "position": "foundation",
+		  "artifacts": [
+			"GyroidDemo",
+            "mc_torus_sculpture"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "Torus and gyroid merged with 2 artifacts"
+		},
+		{
+		  "map": "ISO_Sculpting",
+		  "position": "foundation",
+		  "artifacts": [
+			"fountain_demo",
+            "mc_sculpt_vr"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "VR sculpting with 2 artifacts"
+		},
+		{
+		  "map": "ISO_FlatTerrain",
+		  "position": "foundation",
+		  "artifacts": [
+			"mc_flat_landscape",
+			"mc_overhang_landscape",
+            "mc_terrain_demo"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "Terrain and overhangs with 3 artifacts"
+		},
+		{
+		  "map": "ISO_PortalLandscape",
+		  "position": "exploration",
+		  "artifacts": [
+            "marchingcubes_portal_landscape"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "Portal landscape with 1 artifact"
+		},
+		{
+		  "map": "ISO_Caves",
+		  "position": "exploration",
+		  "artifacts": [
+			"mc_portal_landscape",
+			"mc_inside_cave",
+            "queer_marching_cave"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "Cave exploration with 3 artifacts"
+		},
+		{
+		  "map": "ISO_CaveGeneration",
+		  "position": "exploration",
+		  "artifacts": [
+			"marchingcave",
+            "marchingcubes_cave"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "Cave generation with 2 artifacts"
+		},
+		{
+		  "map": "ISO_AnimatedNoise",
+		  "position": "integration",
+		  "artifacts": [
+			"mc_base",
+            "animated_noise_explorer"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "Animated noise with 2 artifacts"
+		},
+		{
+		  "map": "ISO_Metaballs",
+		  "position": "synthesis",
+		  "artifacts": [
+			"metaballs",
+			"raymarched_metaballs",
+			"nakama_metaballs",
+            "metaball_world"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "Metaballs consolidated with 4 artifacts"
+		},
+		{
+		  "map": "ISO_ImplicitModeling",
+		  "position": "synthesis",
+		  "artifacts": [
+            "implicit_surface_modeling"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "Implicit modeling with 1 artifact"
+		}
+	  ]
 	}
+  },
+  "world_phase": "transition",
+  "artifact_groups": []
 }

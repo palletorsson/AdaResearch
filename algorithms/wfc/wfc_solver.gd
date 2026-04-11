@@ -19,11 +19,11 @@ func _init(size: Vector3 = Vector3(10, 1, 10), seed_val: int = 0):
 	if seed_val != 0:
 		seed(seed_val)
 
-func add_tile_type(tile: WFCTile):
+func add_tile_type(tile: WFCTile) -> void:
 	"""Register a tile type that can be used in generation"""
 	tile_types[tile.tile_id] = tile
 
-func initialize_grid():
+func initialize_grid() -> void:
 	"""Initialize the grid with all possible tiles at each position"""
 	grid.clear()
 	collapsed.clear()

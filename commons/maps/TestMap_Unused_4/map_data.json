@@ -1,45 +1,45 @@
 {
   "map_info": {
-    "name": "TestMap_Unused_4",
-    "lookup_name": "TestMap_Unused_4",
-    "description": "Test map for artifacts: blue_noise, bubbles_random, cloudvolume, coshlea",
-    "dimensions": {
-      "width": 5,
-      "depth": 5,
-      "max_height": 3
-    }
+      "name": "TestMap_Unused_4",
+      "lookup_name": "TestMap_Unused_4",
+      "description": "Test map for artifacts: blue_noise, bubbles_random, cloudvolume, coshlea",
+      "dimensions": {
+          "width": 5,
+          "depth": 5,
+          "max_height": 3
+      }
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next Lesson",
+          "description": "Continue to the next algorithm demonstration",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
   },
   "layers": {
     "structure": [
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1" ]
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1"],
+      ["1", "1", "0", "1", "1"]
     ],
     "utilities": [
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", "s", " ", " " ],
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", "t", " ", " " ]
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", "s", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", "t", " ", " "]
     ],
     "interactables": [
-      [ " ", " ", " ", " ", " " ],
-      [ " ", "blue_noise:0:2", " ", "bubbles_random:0:2", " " ],
-      [ " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", "coshlea:0:2", " " ],
-      [ " ", " ", " ", " ", " " ]
+      [" ", " ", " ", " ", " "],
+      [" ", "blue_noise:0:2", " ", "bubbles_random:0:2", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", "coshlea:0:2", " "],
+      [" ", " ", " ", " ", " "]
     ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next Lesson",
-      "description": "Continue to the next algorithm demonstration",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
   }
 }

@@ -4,6 +4,16 @@ extends Node3D
 # Demonstrates how buildings emerge from subtractive/additive operations
 # Subdivision creates rooms, windows, doors from a base cube
 
+# @identity
+# essence: cabin = foundation + walls + subtract(door, windows) + add(roof, chimney, porch), subtractive architecture
+# desire: To be approached — door, windows, porch, chimney, each step makes it more inviting, more inhabitable
+# critical_parameter: cabin_size — scales the entire structure proportionally; the ratios (wall height 0.6, door 0.45) are the architectural DNA
+# triggers: 8-step construction: foundation → walls → door → windows → roof → chimney → porch → details (lantern, welcome mat)
+# emerges: A sense of home from geometric primitives — the welcome mat and lantern are the final touches that transform boxes into architecture
+# needs: VR walk-inside [missing], door-open interaction [missing]
+# relationships: Most architecturally complete subdivision artifact; contrasts pure-math subdivisions (bookshelf, chair) with lived space
+# truth: Architecture is not the boxes — it is the holes cut in them for doors and windows, the subtractions that let light and people through.
+
 @export var cabin_size: float = 3.0
 @export var show_construction: bool = true
 @export var step_delay: float = 0.35
@@ -22,14 +32,14 @@ var step: int = 0
 var timer: float = 0.0
 var is_constructing: bool = false
 
-func _ready():
+func _ready() -> void:
 	if show_construction:
 		is_constructing = true
 		step = 0
 	else:
 		_build_instant()
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_constructing:
 		return
 
@@ -39,7 +49,7 @@ func _process(delta: float):
 		_execute_step(step)
 		step += 1
 
-func _execute_step(s: int):
+func _execute_step(s: int) -> void:
 	match s:
 		0: _step_foundation()
 		1: _step_walls()
@@ -53,7 +63,7 @@ func _execute_step(s: int):
 			is_constructing = false
 			print("Cabin complete! %d parts" % all_parts.size())
 
-func _build_instant():
+func _build_instant() -> void:
 	_step_foundation()
 	_step_walls()
 	_step_door_opening()
@@ -63,7 +73,7 @@ func _build_instant():
 	_step_porch()
 	_step_details()
 
-func _step_foundation():
+func _step_foundation() -> void:
 	# Raised foundation/floor
 	var foundation_height = cabin_size * 0.08
 
@@ -74,7 +84,7 @@ func _step_foundation():
 	)
 	print("Step 0: Foundation")
 
-func _step_walls():
+func _step_walls() -> void:
 	var wall_thickness = cabin_size * 0.08
 	var wall_height = cabin_size * 0.6
 	var foundation_height = cabin_size * 0.08
@@ -111,7 +121,7 @@ func _step_walls():
 
 	print("Step 1: Walls")
 
-func _step_door_opening():
+func _step_door_opening() -> void:
 	# Door frame and door
 	var door_width = cabin_size * 0.22
 	var door_height = cabin_size * 0.45
@@ -149,7 +159,7 @@ func _step_door_opening():
 
 	print("Step 2: Door")
 
-func _step_windows():
+func _step_windows() -> void:
 	var window_size = cabin_size * 0.18
 	var window_height = cabin_size * 0.15
 	var wall_height = cabin_size * 0.6
@@ -195,7 +205,7 @@ func _step_windows():
 
 	print("Step 3: Windows")
 
-func _step_roof():
+func _step_roof() -> void:
 	var wall_height = cabin_size * 0.6
 	var foundation_height = cabin_size * 0.08
 	var roof_height = cabin_size * 0.35
@@ -246,7 +256,7 @@ func _step_roof():
 
 	print("Step 4: Roof")
 
-func _step_chimney():
+func _step_chimney() -> void:
 	var wall_height = cabin_size * 0.6
 	var foundation_height = cabin_size * 0.08
 	var roof_height = cabin_size * 0.35
@@ -269,7 +279,7 @@ func _step_chimney():
 
 	print("Step 5: Chimney")
 
-func _step_porch():
+func _step_porch() -> void:
 	var foundation_height = cabin_size * 0.08
 	var porch_depth = cabin_size * 0.25
 	var porch_width = cabin_size * 0.6
@@ -309,7 +319,7 @@ func _step_porch():
 
 	print("Step 6: Porch")
 
-func _step_details():
+func _step_details() -> void:
 	var foundation_height = cabin_size * 0.08
 
 	# Welcome mat (small dark rectangle)
@@ -351,7 +361,7 @@ func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String) 
 	all_parts.append(mesh_instance)
 	return mesh_instance
 
-func reset():
+func reset() -> void:
 	for part in all_parts:
 		if is_instance_valid(part):
 			part.queue_free()
@@ -363,3 +373,12 @@ func reset():
 		is_constructing = true
 	else:
 		_build_instant()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

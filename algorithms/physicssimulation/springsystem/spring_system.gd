@@ -1,7 +1,17 @@
-﻿extends Node3D
+extends Node3D
 
 # Spring-Mass System Physics Simulation
 # Interactive network of masses connected by springs with real-time physics
+#
+# @identity
+# essence: F = -k(|x|-L)*x-hat. A network of masses connected by Hooke's law springs. Each spring pulls its endpoints toward rest length.
+# desire: To see a web of springs breathe — wind perturbing it, colors shifting with tension, the whole system finding equilibrium and losing it again.
+# critical_parameter: spring_stiffness (k=50) and damping (0.95). Higher stiffness = faster oscillation, tighter network. Lower damping = longer ringing. Together they set the network's texture.
+# triggers: Auto-interaction pulses random forces every 2 seconds, wind oscillates continuously, Space → manual random impulse, auto-rotate reveals 3D structure
+# emerges: Tension waves propagating through the network. Color shifting from calm blue to hot pink as springs stretch. Fixed anchor points creating standing wave patterns.
+# needs: MultiMesh rendering for masses and springs [has], wind force [has], auto-interaction [has]. Missing: VR grab individual masses, stiffness slider.
+# relationships: Network extension of mass_spring_damper (single spring → many). Feeds into cloth simulation (2D grid of springs). Lives in ForcesSystems.
+# truth: A spring network is a medium. Perturbation at one point travels through connections. Structure is communication.
 
 @export_category("Spring System Parameters")
 @export var mass_count: int = 20
@@ -46,6 +56,10 @@ var spring_lines: Array = []
 var velocity_arrows: Array = []
 var system_container: Node3D
 
+# MultiMesh instances for batched rendering
+var _mass_multimesh_instance: MultiMeshInstance3D
+var _spring_multimesh_instance: MultiMeshInstance3D
+
 # Vibrant queer color palette
 var queer_colors = [
 	Color(1.0, 0.4, 0.7, 1.0),    # Hot pink
@@ -69,18 +83,18 @@ class Mass:
 	var mesh_instance: MeshInstance3D
 	var connected_springs: Array = []
 	
-	func _init(pos: Vector3, m: float, r: float):
+	func _init(pos: Vector3, m: float, r: float) -> void:
 		position = pos
 		velocity = Vector3.ZERO
 		acceleration = Vector3.ZERO
 		mass = m
 		radius = r
 	
-	func apply_force(force: Vector3):
+	func apply_force(force: Vector3) -> void:
 		if not is_fixed:
 			acceleration += force / mass
 	
-	func update(delta: float):
+	func update(delta: float) -> void:
 		if not is_fixed:
 			# Verlet integration
 			velocity += acceleration * delta
@@ -89,7 +103,7 @@ class Mass:
 			# Reset acceleration
 			acceleration = Vector3.ZERO
 	
-	func set_fixed(fixed: bool):
+	func set_fixed(fixed: bool) -> void:
 		is_fixed = fixed
 		if is_fixed:
 			velocity = Vector3.ZERO
@@ -104,7 +118,7 @@ class Spring:
 	var tension: float
 	var line_mesh: MeshInstance3D
 	
-	func _init(m1: Mass, m2: Mass, length: float, k: float):
+	func _init(m1: Mass, m2: Mass, length: float, k: float) -> void:
 		mass1 = m1
 		mass2 = m2
 		rest_length = length
@@ -114,7 +128,7 @@ class Spring:
 		mass1.connected_springs.append(self)
 		mass2.connected_springs.append(self)
 	
-	func update_physics():
+	func update_physics() -> void:
 		var direction = mass2.position - mass1.position
 		current_length = direction.length()
 		
@@ -130,7 +144,7 @@ class Spring:
 			mass1.apply_force(force)
 			mass2.apply_force(-force)
 	
-	func update_visual():
+	func update_visual() -> void:
 		if line_mesh:
 			# Update line position and orientation
 			var center = (mass1.position + mass2.position) / 2
@@ -158,13 +172,13 @@ class Spring:
 				material.emission = base_color * 0.6
 				material.emission_energy_multiplier = 1.5
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	initialize_system()
 	create_visuals()
 	setup_camera()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	simulate_physics(delta)
 	update_wind_force(delta)
 	update_visuals()
@@ -186,7 +200,7 @@ func _process(delta):
 	if enable_mouse_interaction:
 		handle_mouse_interaction()
 
-func setup_environment():
+func setup_environment() -> void:
 	# Lighting
 	var light = DirectionalLight3D.new()
 	light.light_energy = 1.0
@@ -208,7 +222,7 @@ func setup_environment():
 	system_container.name = "SpringSystem"
 	add_child(system_container)
 
-func initialize_system():
+func initialize_system() -> void:
 	masses.clear()
 	springs.clear()
 	anchors.clear()
@@ -253,67 +267,94 @@ func initialize_system():
 				var spring = Spring.new(masses[i], masses[j], rest_length, spring_stiffness)
 				springs.append(spring)
 
-func create_visuals():
+func create_visuals() -> void:
 	mass_meshes.clear()
 	spring_lines.clear()
-	
-	# Create mass visuals
-	for i in range(masses.size()):
+
+	# --- Mass MultiMesh ---
+	var sphere := SphereMesh.new()
+	sphere.radius = mass_radius
+	sphere.height = mass_radius * 2
+
+	var mass_mat := StandardMaterial3D.new()
+	mass_mat.vertex_color_use_as_albedo = true
+	mass_mat.emission_enabled = true
+	mass_mat.metallic = 0.3
+	mass_mat.roughness = 0.7
+
+	var mass_mm := MultiMesh.new()
+	mass_mm.transform_format = MultiMesh.TRANSFORM_3D
+	mass_mm.use_colors = true
+	mass_mm.instance_count = masses.size()
+	mass_mm.mesh = sphere
+	mass_mm.mesh.material = mass_mat
+
+	_mass_multimesh_instance = MultiMeshInstance3D.new()
+	_mass_multimesh_instance.name = "MassMultiMesh"
+	_mass_multimesh_instance.multimesh = mass_mm
+	system_container.add_child(_mass_multimesh_instance)
+
+	for i in masses.size():
 		var mass = masses[i]
-		var mesh_instance = MeshInstance3D.new()
-		var sphere = SphereMesh.new()
-		sphere.radius = mass.radius
-		sphere.height = mass.radius * 2
-		mesh_instance.mesh = sphere
-		
-		var material = StandardMaterial3D.new()
-		var color = queer_colors[i % queer_colors.size()]
+		mass_mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, mass.position))
+		var color: Color = queer_colors[i % queer_colors.size()]
 		if mass.is_fixed:
-			material.albedo_color = color * 0.7  # Darker for fixed masses
-			material.emission_enabled = true
-			material.emission = color * 0.8
-			material.emission_energy_multiplier = 3.0
-		else:
-			material.albedo_color = color
-			material.emission_enabled = true
-			material.emission = color * 0.5
-			material.emission_energy_multiplier = 2.0
+			color = color * 0.7
+		mass_mm.set_instance_color(i, color)
 
-		material.metallic = 0.3
-		material.roughness = 0.7
-		mesh_instance.material_override = material
-		mesh_instance.position = mass.position
-		
-		mass.mesh_instance = mesh_instance
-		system_container.add_child(mesh_instance)
-		mass_meshes.append(mesh_instance)
-	
-	# Create spring visuals
-	if show_springs:
-		for spring in springs:
-			var line_mesh = MeshInstance3D.new()
-			var cylinder = CylinderMesh.new()
-			cylinder.top_radius = 0.03
-			cylinder.bottom_radius = 0.03
-			cylinder.height = 1.0
-			line_mesh.mesh = cylinder
-			
-			var material = StandardMaterial3D.new()
-			material.albedo_color = Color(0.6, 0.6, 0.6, 0.8)
-			material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-			line_mesh.material_override = material
-			
-			spring.line_mesh = line_mesh
-			system_container.add_child(line_mesh)
-			spring_lines.append(line_mesh)
+	# --- Spring MultiMesh ---
+	if show_springs and not springs.is_empty():
+		var cyl := CylinderMesh.new()
+		cyl.top_radius = 0.03
+		cyl.bottom_radius = 0.03
+		cyl.height = 1.0
 
-func setup_camera():
+		var spring_mat := StandardMaterial3D.new()
+		spring_mat.vertex_color_use_as_albedo = true
+		spring_mat.emission_enabled = true
+		spring_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+
+		var spring_mm := MultiMesh.new()
+		spring_mm.transform_format = MultiMesh.TRANSFORM_3D
+		spring_mm.use_colors = true
+		spring_mm.instance_count = springs.size()
+		spring_mm.mesh = cyl
+		spring_mm.mesh.material = spring_mat
+
+		_spring_multimesh_instance = MultiMeshInstance3D.new()
+		_spring_multimesh_instance.name = "SpringMultiMesh"
+		_spring_multimesh_instance.multimesh = spring_mm
+		system_container.add_child(_spring_multimesh_instance)
+
+		for i in springs.size():
+			var s = springs[i]
+			var t := _compute_spring_transform(s.mass1.position, s.mass2.position)
+			spring_mm.set_instance_transform(i, t)
+			spring_mm.set_instance_color(i, Color(0.6, 0.6, 0.6, 0.8))
+
+func _compute_spring_transform(from_pos: Vector3, to_pos: Vector3) -> Transform3D:
+	"""Compute transform for a unit cylinder to span between two points"""
+	var mid := (from_pos + to_pos) * 0.5
+	var diff := to_pos - from_pos
+	var dist := diff.length()
+	if dist < 0.001:
+		return Transform3D(Basis.IDENTITY, mid)
+	var dir := diff / dist
+	var up := Vector3.UP
+	if abs(dir.dot(up)) > 0.99:
+		up = Vector3.RIGHT
+	var right := dir.cross(up).normalized()
+	up = right.cross(dir).normalized()
+	var basis := Basis(right, dir * dist, up)
+	return Transform3D(basis, mid)
+
+func setup_camera() -> void:
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 8, 12)
 	add_child(camera)
 	camera.look_at_from_position(camera.position, Vector3(0, 3, 0), Vector3.UP)
 
-func simulate_physics(_delta):
+func simulate_physics(_delta) -> void:
 	var fixed_delta = time_step
 	
 	# Apply gravity to all masses
@@ -339,7 +380,7 @@ func simulate_physics(_delta):
 			mass.position.y = -5
 			mass.velocity.y = abs(mass.velocity.y) * 0.5
 
-func update_wind_force(delta):
+func update_wind_force(delta) -> void:
 	if enable_wind_force:
 		wind_time += delta
 		
@@ -354,7 +395,7 @@ func update_wind_force(delta):
 			if not mass.is_fixed:
 				mass.apply_force(wind_direction)
 
-func handle_mouse_interaction():
+func handle_mouse_interaction() -> void:
 	# This is a simplified version - in a real implementation you'd use proper mouse raycasting
 	# For now, we'll just apply a random force to simulate interaction
 	if Input.is_action_pressed("ui_accept"):  # Space bar
@@ -368,27 +409,42 @@ func handle_mouse_interaction():
 				)
 				random_mass.apply_force(random_force)
 
-func update_visuals():
-	# Update mass positions
-	for i in range(masses.size()):
-		var mass = masses[i]
-		if mass.mesh_instance:
-			mass.mesh_instance.position = mass.position
-			
-			# Update mass color based on velocity if desired
-			var speed = mass.velocity.length()
+func update_visuals() -> void:
+	# Update mass positions and colors via MultiMesh
+	if _mass_multimesh_instance:
+		var mm := _mass_multimesh_instance.multimesh
+		for i in masses.size():
+			var mass = masses[i]
+			mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, mass.position))
+			# Update color based on velocity
+			var speed: float = mass.velocity.length()
+			var base_color: Color = queer_colors[i % queer_colors.size()]
+			if mass.is_fixed:
+				base_color = base_color * 0.7
 			if speed > 1.0 and not mass.is_fixed:
-				var material = mass.mesh_instance.material_override
-				var intensity = clamp(speed / 5.0, 0.0, 1.0)
-				material.emission_enabled = true
-				material.emission = Color(intensity * 0.3, intensity * 0.1, intensity * 0.5)
-	
-	# Update spring visuals
-	if show_springs:
-		for spring in springs:
-			spring.update_visual()
+				var intensity: float = clamp(speed / 5.0, 0.0, 1.0)
+				base_color = base_color.lerp(Color(1.0, 0.4, 0.8), intensity)
+			mm.set_instance_color(i, base_color)
 
-func _apply_auto_force():
+	# Update spring transforms and colors via MultiMesh
+	if show_springs and _spring_multimesh_instance:
+		var smm := _spring_multimesh_instance.multimesh
+		for i in springs.size():
+			var s = springs[i]
+			var t := _compute_spring_transform(s.mass1.position, s.mass2.position)
+			smm.set_instance_transform(i, t)
+			# Color by tension
+			if color_by_tension:
+				var tension_normalized: float = clamp(s.tension / 100.0, 0.0, 1.0)
+				var c := Color(
+					0.5 + sin(tension_normalized * 3.14) * 0.5,
+					0.5 + cos(tension_normalized * 3.14 * 1.5) * 0.5,
+					0.7 + sin(tension_normalized * 3.14 * 2.0) * 0.3,
+					0.9
+				)
+				smm.set_instance_color(i, c)
+
+func _apply_auto_force() -> void:
 	# Apply random forces to create automatic interaction
 	if masses.size() > 0:
 		var random_indices = []
@@ -403,4 +459,13 @@ func _apply_auto_force():
 					randf_range(-mouse_force_strength, mouse_force_strength),
 					randf_range(-mouse_force_strength, mouse_force_strength)
 				)
-				mass.apply_force(random_force) 
+				mass.apply_force(random_force)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

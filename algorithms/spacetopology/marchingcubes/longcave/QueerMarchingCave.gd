@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 class_name QueerMarchingCave
 
 # Marching cubes parameters
@@ -73,16 +73,16 @@ var edge_table: PackedInt32Array = [
 # Simplified triangle table (first few entries - full table would be very long)
 var triangle_table: Array = []
 
-func _ready():
+func _ready() -> void:
 	setup_noise_generators()
 	setup_triangle_table()
 	generate_cave()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	animate_cave_colors(delta)
 
-func setup_noise_generators():
+func setup_noise_generators() -> void:
 	# Primary cave structure noise
 	primary_noise = FastNoiseLite.new()
 	primary_noise.seed = randi()
@@ -111,7 +111,7 @@ func setup_noise_generators():
 	cave_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	cave_noise.frequency = 0.015
 
-func setup_triangle_table():
+func setup_triangle_table() -> void:
 	var t = [
 		[-1],
 		[0,8,3,-1],[0,1,9,-1],[1,8,3,9,8,1,-1],[1,2,10,-1],[0,8,3,1,2,10,-1],[9,2,10,0,2,9,-1],[2,8,3,2,10,8,10,9,8,-1],
@@ -151,7 +151,7 @@ func setup_triangle_table():
 	for i in 256:
 		triangle_table[i] = t[i]
 
-func generate_cave():
+func generate_cave() -> void:
 	print("Generating queer bulgy cave landscape...")
 	
 	clear_previous_data()
@@ -161,14 +161,14 @@ func generate_cave():
 	
 	print("Cave generation complete!")
 
-func clear_previous_data():
+func clear_previous_data() -> void:
 	vertices.clear()
 	indices.clear()
 	normals.clear()
 	colors.clear()
 	density_field.clear()
 
-func generate_density_field():
+func generate_density_field() -> void:
 	# Create 3D density field for marching cubes
 	var grid_x = int(cave_size.x / resolution) + 1
 	var grid_y = int(cave_size.y / resolution) + 1
@@ -221,7 +221,7 @@ func calculate_density_at_position(pos: Vector3) -> float:
 	
 	return final_density
 
-func generate_mesh_marching_cubes():
+func generate_mesh_marching_cubes() -> void:
 	var grid_x = int(cave_size.x / resolution)
 	var grid_y = int(cave_size.y / resolution)
 	var grid_z = int(cave_size.z / resolution)
@@ -235,7 +235,7 @@ func generate_mesh_marching_cubes():
 	if vertices.size() > 0:
 		create_mesh()
 
-func process_cube(x: int, y: int, z: int, size_x: int, size_y: int, size_z: int):
+func process_cube(x: int, y: int, z: int, size_x: int, size_y: int, size_z: int) -> void:
 	var cube_index = 0
 	var cube_vertices: Array = []
 	
@@ -328,7 +328,7 @@ func world_position_from_grid(grid_pos: Vector3, offset_x: int, offset_y: int, o
 		(grid_pos.z + offset_z) * resolution - cave_size.z * 0.5
 	)
 
-func add_triangle(v1: Vector3, v2: Vector3, v3: Vector3):
+func add_triangle(v1: Vector3, v2: Vector3, v3: Vector3) -> void:
 	var base_index = vertices.size()
 	
 	# Add vertices
@@ -377,7 +377,7 @@ func generate_queer_color(pos: Vector3) -> Color:
 	
 	return final_color
 
-func create_mesh():
+func create_mesh() -> void:
 	cave_mesh = ArrayMesh.new()
 	
 	var arrays = []
@@ -392,7 +392,7 @@ func create_mesh():
 	var mesh_instance = $CaveMesh
 	mesh_instance.mesh = cave_mesh
 
-func create_collision():
+func create_collision() -> void:
 	var collision_shape = $CaveCollision/CollisionShape
 	
 	if cave_mesh and vertices.size() > 0:
@@ -408,7 +408,7 @@ func create_collision():
 		shape.set_faces(collision_faces)
 		collision_shape.shape = shape
 
-func animate_cave_colors(_delta):
+func animate_cave_colors(_delta) -> void:
 	var mesh_instance = $CaveMesh
 	if mesh_instance.material_override:
 		var material = mesh_instance.material_override as StandardMaterial3D
@@ -422,7 +422,7 @@ func animate_cave_colors(_delta):
 			material.albedo_color = base_color.lerp(Color(0.8, 0.3, 0.7, 1.0), hue_shift + 0.5)
 
 # Public API for parameter adjustment
-func set_cave_parameters(params: Dictionary):
+func set_cave_parameters(params: Dictionary) -> void:
 	if params.has("bulginess"):
 		bulginess = params.bulginess
 	if params.has("cave_density"):
@@ -439,7 +439,7 @@ func set_cave_parameters(params: Dictionary):
 	# Regenerate cave with new parameters
 	generate_cave()
 
-func regenerate_cave():
+func regenerate_cave() -> void:
 	# Generate new random seeds
 	primary_noise.seed = randi()
 	secondary_noise.seed = randi()
@@ -458,3 +458,6 @@ func get_cave_info() -> Dictionary:
 		"cave_density": cave_density,
 		"vertical_bias": vertical_bias
 	}
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

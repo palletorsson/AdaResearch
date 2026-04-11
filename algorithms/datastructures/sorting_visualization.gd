@@ -41,7 +41,7 @@ var comparing_color = Color(0.9, 0.7, 0.2)
 var swapping_color = Color(0.9, 0.2, 0.2)
 var sorted_color = Color(0.2, 0.8, 0.2)
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	initialize_array()
 	create_visuals()
@@ -52,7 +52,7 @@ func _ready():
 	
 	start_sorting()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if sorting_active:
 		algorithm_timer += delta
 		if algorithm_timer >= animation_speed:
@@ -61,7 +61,7 @@ func _process(delta):
 	
 	update_ui()
 
-func setup_environment():
+func setup_environment() -> void:
 	# Lighting
 	var light = DirectionalLight3D.new()
 	light.light_energy = 1.0
@@ -83,12 +83,12 @@ func setup_environment():
 	camera.look_at_from_position(camera.position, Vector3(array_size * bar_spacing / 2.0, 5, 0), Vector3.UP)
 	add_child(camera)
 
-func initialize_array():
+func initialize_array() -> void:
 	array.clear()
 	for i in range(array_size):
 		array.append(i + 1)
 
-func shuffle_array():
+func shuffle_array() -> void:
 	for i in range(array.size()):
 		var j = randi() % array.size()
 		var temp = array[i]
@@ -97,7 +97,7 @@ func shuffle_array():
 	
 	update_visual_array()
 
-func create_visuals():
+func create_visuals() -> void:
 	bar_meshes.clear()
 	
 	for i in range(array.size()):
@@ -123,7 +123,7 @@ func create_bar(index: int, value: int) -> MeshInstance3D:
 	
 	return mesh_instance
 
-func start_sorting():
+func start_sorting() -> void:
 	sorting_active = true
 	current_step = 0
 	comparison_count = 0
@@ -142,7 +142,7 @@ func start_sorting():
 	
 	print("Starting ", sorting_algorithm, " with array size ", array.size())
 
-func perform_sorting_step():
+func perform_sorting_step() -> void:
 	match sorting_algorithm:
 		"bubble_sort":
 			bubble_sort_step()
@@ -153,7 +153,7 @@ func perform_sorting_step():
 		_:
 			bubble_sort_step()
 
-func bubble_sort_step():
+func bubble_sort_step() -> void:
 	var i = algorithm_state.i
 	var j = algorithm_state.j
 	var n = algorithm_state.n
@@ -184,7 +184,7 @@ func bubble_sort_step():
 	
 	algorithm_state.j += 1
 
-func selection_sort_step():
+func selection_sort_step() -> void:
 	var i = algorithm_state.i
 	var min_idx = algorithm_state.min_idx
 	var j = algorithm_state.j
@@ -222,7 +222,7 @@ func selection_sort_step():
 	
 	algorithm_state.j += 1
 
-func insertion_sort_step():
+func insertion_sort_step() -> void:
 	var i = algorithm_state.i
 	var j = algorithm_state.j
 	
@@ -251,7 +251,7 @@ func insertion_sort_step():
 		algorithm_state.j = 0
 		update_visual_array()
 
-func highlight_bars(indices: Array, color: Color):
+func highlight_bars(indices: Array, color: Color) -> void:
 	# Reset all bars to default color
 	for i in range(bar_meshes.size()):
 		var material = bar_meshes[i].material_override
@@ -263,14 +263,14 @@ func highlight_bars(indices: Array, color: Color):
 			var material = bar_meshes[index].material_override
 			material.albedo_color = color
 
-func highlight_sorted():
+func highlight_sorted() -> void:
 	for i in range(bar_meshes.size()):
 		var material = bar_meshes[i].material_override
 		material.albedo_color = sorted_color
 		material.emission_enabled = true
 		material.emission = sorted_color * 0.3
 
-func update_visual_array():
+func update_visual_array() -> void:
 	for i in range(array.size()):
 		var bar = bar_meshes[i]
 		var box = BoxMesh.new()
@@ -278,7 +278,7 @@ func update_visual_array():
 		bar.mesh = box
 		bar.position.y = array[i] / 2.0
 
-func setup_ui():
+func setup_ui() -> void:
 	var canvas = CanvasLayer.new()
 	add_child(canvas)
 	
@@ -306,7 +306,7 @@ func setup_ui():
 	canvas.add_child(status_label)
 	ui_labels.append(status_label)
 
-func update_ui():
+func update_ui() -> void:
 	if ui_labels.size() >= 2:
 		ui_labels[1].text = "Comparisons: " + str(comparison_count)
 	
@@ -317,4 +317,13 @@ func update_ui():
 		if sorting_active:
 			ui_labels[3].text = "Status: Sorting..."
 		else:
-			ui_labels[3].text = "Status: Complete!" 
+			ui_labels[3].text = "Status: Complete!"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

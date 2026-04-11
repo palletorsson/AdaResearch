@@ -167,34 +167,34 @@
       "spine_order": 3,
       "branches": [],
       "maps": [
-        "Trans_Rotation_1",
+        "Trans_Rotation",
         "Transformation_Intro",
-        "Trans_Translate_1",
-        "Trans_Translate_2",
-        "Trans_Rotation_2",
+        "Trans_Translation",
+        "Trans_AxisDecomposition",
+        "Trans_RotationSpectacle",
         "Trans_Scale"
       ],
       "docs": [
-        "commons\\maps\\Trans_Rotation_1\\blurb.md",
-        "commons\\maps\\Trans_Rotation_1\\summary.md",
-        "commons\\maps\\Trans_Rotation_1\\technical.md",
-        "commons\\maps\\Trans_Rotation_1\\critical.md",
+        "commons\\maps\\Trans_Rotation\\blurb.md",
+        "commons\\maps\\Trans_Rotation\\summary.md",
+        "commons\\maps\\Trans_Rotation\\technical.md",
+        "commons\\maps\\Trans_Rotation\\critical.md",
         "commons\\maps\\Transformation_Intro\\blurb.md",
         "commons\\maps\\Transformation_Intro\\summary.md",
         "commons\\maps\\Transformation_Intro\\technical.md",
         "commons\\maps\\Transformation_Intro\\critical.md",
-        "commons\\maps\\Trans_Translate_1\\blurb.md",
-        "commons\\maps\\Trans_Translate_1\\summary.md",
-        "commons\\maps\\Trans_Translate_1\\technical.md",
-        "commons\\maps\\Trans_Translate_1\\critical.md",
-        "commons\\maps\\Trans_Translate_2\\blurb.md",
-        "commons\\maps\\Trans_Translate_2\\summary.md",
-        "commons\\maps\\Trans_Translate_2\\technical.md",
-        "commons\\maps\\Trans_Translate_2\\critical.md",
-        "commons\\maps\\Trans_Rotation_2\\blurb.md",
-        "commons\\maps\\Trans_Rotation_2\\summary.md",
-        "commons\\maps\\Trans_Rotation_2\\technical.md",
-        "commons\\maps\\Trans_Rotation_2\\critical.md",
+        "commons\\maps\\Trans_Translation\\blurb.md",
+        "commons\\maps\\Trans_Translation\\summary.md",
+        "commons\\maps\\Trans_Translation\\technical.md",
+        "commons\\maps\\Trans_Translation\\critical.md",
+        "commons\\maps\\Trans_AxisDecomposition\\blurb.md",
+        "commons\\maps\\Trans_AxisDecomposition\\summary.md",
+        "commons\\maps\\Trans_AxisDecomposition\\technical.md",
+        "commons\\maps\\Trans_AxisDecomposition\\critical.md",
+        "commons\\maps\\Trans_RotationSpectacle\\blurb.md",
+        "commons\\maps\\Trans_RotationSpectacle\\summary.md",
+        "commons\\maps\\Trans_RotationSpectacle\\technical.md",
+        "commons\\maps\\Trans_RotationSpectacle\\critical.md",
         "commons\\maps\\Trans_Scale\\blurb.md",
         "commons\\maps\\Trans_Scale\\summary.md",
         "commons\\maps\\Trans_Scale\\technical.md",
@@ -3321,16 +3321,16 @@
       "artifacts": [],
       "has_map_data": true
     },
-    "Trans_Rotation_1": {
+    "Trans_Rotation": {
       "sequence": "transformations",
-      "path": "commons/maps/Trans_Rotation_1",
+      "path": "commons/maps/Trans_Rotation",
       "artifacts": [],
       "has_map_data": true,
       "docs": [
-        "commons\\maps\\Trans_Rotation_1\\blurb.md",
-        "commons\\maps\\Trans_Rotation_1\\summary.md",
-        "commons\\maps\\Trans_Rotation_1\\technical.md",
-        "commons\\maps\\Trans_Rotation_1\\critical.md"
+        "commons\\maps\\Trans_Rotation\\blurb.md",
+        "commons\\maps\\Trans_Rotation\\summary.md",
+        "commons\\maps\\Trans_Rotation\\technical.md",
+        "commons\\maps\\Trans_Rotation\\critical.md"
       ]
     },
     "Transformation_Intro": {
@@ -3345,40 +3345,40 @@
         "commons\\maps\\Transformation_Intro\\critical.md"
       ]
     },
-    "Trans_Translate_1": {
+    "Trans_Translation": {
       "sequence": "transformations",
-      "path": "commons/maps/Trans_Translate_1",
+      "path": "commons/maps/Trans_Translation",
       "artifacts": [],
       "has_map_data": true,
       "docs": [
-        "commons\\maps\\Trans_Translate_1\\blurb.md",
-        "commons\\maps\\Trans_Translate_1\\summary.md",
-        "commons\\maps\\Trans_Translate_1\\technical.md",
-        "commons\\maps\\Trans_Translate_1\\critical.md"
+        "commons\\maps\\Trans_Translation\\blurb.md",
+        "commons\\maps\\Trans_Translation\\summary.md",
+        "commons\\maps\\Trans_Translation\\technical.md",
+        "commons\\maps\\Trans_Translation\\critical.md"
       ]
     },
-    "Trans_Translate_2": {
+    "Trans_AxisDecomposition": {
       "sequence": "transformations",
-      "path": "commons/maps/Trans_Translate_2",
+      "path": "commons/maps/Trans_AxisDecomposition",
       "artifacts": [],
       "has_map_data": true,
       "docs": [
-        "commons\\maps\\Trans_Translate_2\\blurb.md",
-        "commons\\maps\\Trans_Translate_2\\summary.md",
-        "commons\\maps\\Trans_Translate_2\\technical.md",
-        "commons\\maps\\Trans_Translate_2\\critical.md"
+        "commons\\maps\\Trans_AxisDecomposition\\blurb.md",
+        "commons\\maps\\Trans_AxisDecomposition\\summary.md",
+        "commons\\maps\\Trans_AxisDecomposition\\technical.md",
+        "commons\\maps\\Trans_AxisDecomposition\\critical.md"
       ]
     },
-    "Trans_Rotation_2": {
+    "Trans_RotationSpectacle": {
       "sequence": "transformations",
-      "path": "commons/maps/Trans_Rotation_2",
+      "path": "commons/maps/Trans_RotationSpectacle",
       "artifacts": [],
       "has_map_data": true,
       "docs": [
-        "commons\\maps\\Trans_Rotation_2\\blurb.md",
-        "commons\\maps\\Trans_Rotation_2\\summary.md",
-        "commons\\maps\\Trans_Rotation_2\\technical.md",
-        "commons\\maps\\Trans_Rotation_2\\critical.md"
+        "commons\\maps\\Trans_RotationSpectacle\\blurb.md",
+        "commons\\maps\\Trans_RotationSpectacle\\summary.md",
+        "commons\\maps\\Trans_RotationSpectacle\\technical.md",
+        "commons\\maps\\Trans_RotationSpectacle\\critical.md"
       ]
     },
     "Trans_Scale": {
@@ -3872,45 +3872,39 @@
       "artifacts": [],
       "has_map_data": true
     },
-    "Joints_1": {
-      "sequence": "",
-      "path": "commons\\maps\\Joints_1",
+    "Joints_ConstrainedMotion": {
+      "sequence": "joints",
+      "path": "commons\\maps\\Joints_ConstrainedMotion",
       "artifacts": [],
       "has_map_data": true
     },
-    "Joints_2": {
-      "sequence": "",
-      "path": "commons\\maps\\Joints_2",
+    "Joints_HingeAxis": {
+      "sequence": "joints",
+      "path": "commons\\maps\\Joints_HingeAxis",
       "artifacts": [],
       "has_map_data": true
     },
-    "Joints_3": {
-      "sequence": "",
-      "path": "commons\\maps\\Joints_3",
+    "Joints_SliderRail": {
+      "sequence": "joints",
+      "path": "commons\\maps\\Joints_SliderRail",
       "artifacts": [],
       "has_map_data": true
     },
-    "Joints_4": {
-      "sequence": "",
-      "path": "commons\\maps\\Joints_4",
+    "Joints_BallSocket": {
+      "sequence": "joints",
+      "path": "commons\\maps\\Joints_BallSocket",
       "artifacts": [],
       "has_map_data": true
     },
-    "Joints_5": {
-      "sequence": "",
-      "path": "commons\\maps\\Joints_5",
+    "Joints_SoftConstraints": {
+      "sequence": "joints",
+      "path": "commons\\maps\\Joints_SoftConstraints",
       "artifacts": [],
       "has_map_data": true
     },
-    "Joints_6": {
-      "sequence": "",
-      "path": "commons\\maps\\Joints_6",
-      "artifacts": [],
-      "has_map_data": true
-    },
-    "Joints_7": {
-      "sequence": "",
-      "path": "commons\\maps\\Joints_7",
+    "Joints_Kinematics": {
+      "sequence": "joints",
+      "path": "commons\\maps\\Joints_Kinematics",
       "artifacts": [],
       "has_map_data": true
     },
@@ -6116,14 +6110,14 @@
       "path": "commons\\artifacts\\grid_artifacts.json",
       "name": "Rorschach Brain Scan",
       "description": "Animated mirrored inkblot pattern like a brain CT scan",
-      "scene": "res://algorithms/visualization/rorschach_scan/rorschach_scan.tscn",
+      "scene": "res://algorithms/datastructures/rorschach_scan/rorschach_scan.tscn",
       "used_in": []
     },
     "rorschach_monitor": {
       "path": "commons\\artifacts\\grid_artifacts.json",
       "name": "Rorschach Monitor",
       "description": "Medical monitor displaying animated Rorschach brain scan layers",
-      "scene": "res://algorithms/visualization/rorschach_scan/rorschach_monitor.tscn",
+      "scene": "res://algorithms/datastructures/rorschach_scan/rorschach_monitor.tscn",
       "used_in": []
     },
     "radiolaria": {
@@ -8034,7 +8028,7 @@
       "path": "commons\\artifacts\\grid_artifacts.json",
       "name": "Clipping Planes",
       "description": "Interactive clipping plane algorithms for geometric visualization and spatial cutting",
-      "scene": "res://algorithms/effects/clipping/clippingplanes.tscn",
+      "scene": "res://algorithms/postprocessing/clipping/clippingplanes.tscn",
       "used_in": []
     },
     "raycastingpoints": {
@@ -12966,29 +12960,29 @@
       "type": "critical",
       "name": "SpeculativeComputation_Rhizome_Network/critical"
     },
-    "commons\\maps\\Trans_Rotation_1\\blurb.md": {
-      "map": "Trans_Rotation_1",
+    "commons\\maps\\Trans_Rotation\\blurb.md": {
+      "map": "Trans_Rotation",
       "sequence": "transformations",
       "type": "blurb",
-      "name": "Trans_Rotation_1/blurb"
+      "name": "Trans_Rotation/blurb"
     },
-    "commons\\maps\\Trans_Rotation_1\\summary.md": {
-      "map": "Trans_Rotation_1",
+    "commons\\maps\\Trans_Rotation\\summary.md": {
+      "map": "Trans_Rotation",
       "sequence": "transformations",
       "type": "summary",
-      "name": "Trans_Rotation_1/summary"
+      "name": "Trans_Rotation/summary"
     },
-    "commons\\maps\\Trans_Rotation_1\\technical.md": {
-      "map": "Trans_Rotation_1",
+    "commons\\maps\\Trans_Rotation\\technical.md": {
+      "map": "Trans_Rotation",
       "sequence": "transformations",
       "type": "technical",
-      "name": "Trans_Rotation_1/technical"
+      "name": "Trans_Rotation/technical"
     },
-    "commons\\maps\\Trans_Rotation_1\\critical.md": {
-      "map": "Trans_Rotation_1",
+    "commons\\maps\\Trans_Rotation\\critical.md": {
+      "map": "Trans_Rotation",
       "sequence": "transformations",
       "type": "critical",
-      "name": "Trans_Rotation_1/critical"
+      "name": "Trans_Rotation/critical"
     },
     "commons\\maps\\Transformation_Intro\\blurb.md": {
       "map": "Transformation_Intro",
@@ -13014,77 +13008,77 @@
       "type": "critical",
       "name": "Transformation_Intro/critical"
     },
-    "commons\\maps\\Trans_Translate_1\\blurb.md": {
-      "map": "Trans_Translate_1",
+    "commons\\maps\\Trans_Translation\\blurb.md": {
+      "map": "Trans_Translation",
       "sequence": "transformations",
       "type": "blurb",
-      "name": "Trans_Translate_1/blurb"
+      "name": "Trans_Translation/blurb"
     },
-    "commons\\maps\\Trans_Translate_1\\summary.md": {
-      "map": "Trans_Translate_1",
+    "commons\\maps\\Trans_Translation\\summary.md": {
+      "map": "Trans_Translation",
       "sequence": "transformations",
       "type": "summary",
-      "name": "Trans_Translate_1/summary"
+      "name": "Trans_Translation/summary"
     },
-    "commons\\maps\\Trans_Translate_1\\technical.md": {
-      "map": "Trans_Translate_1",
+    "commons\\maps\\Trans_Translation\\technical.md": {
+      "map": "Trans_Translation",
       "sequence": "transformations",
       "type": "technical",
-      "name": "Trans_Translate_1/technical"
+      "name": "Trans_Translation/technical"
     },
-    "commons\\maps\\Trans_Translate_1\\critical.md": {
-      "map": "Trans_Translate_1",
+    "commons\\maps\\Trans_Translation\\critical.md": {
+      "map": "Trans_Translation",
       "sequence": "transformations",
       "type": "critical",
-      "name": "Trans_Translate_1/critical"
+      "name": "Trans_Translation/critical"
     },
-    "commons\\maps\\Trans_Translate_2\\blurb.md": {
-      "map": "Trans_Translate_2",
+    "commons\\maps\\Trans_AxisDecomposition\\blurb.md": {
+      "map": "Trans_AxisDecomposition",
       "sequence": "transformations",
       "type": "blurb",
-      "name": "Trans_Translate_2/blurb"
+      "name": "Trans_AxisDecomposition/blurb"
     },
-    "commons\\maps\\Trans_Translate_2\\summary.md": {
-      "map": "Trans_Translate_2",
+    "commons\\maps\\Trans_AxisDecomposition\\summary.md": {
+      "map": "Trans_AxisDecomposition",
       "sequence": "transformations",
       "type": "summary",
-      "name": "Trans_Translate_2/summary"
+      "name": "Trans_AxisDecomposition/summary"
     },
-    "commons\\maps\\Trans_Translate_2\\technical.md": {
-      "map": "Trans_Translate_2",
+    "commons\\maps\\Trans_AxisDecomposition\\technical.md": {
+      "map": "Trans_AxisDecomposition",
       "sequence": "transformations",
       "type": "technical",
-      "name": "Trans_Translate_2/technical"
+      "name": "Trans_AxisDecomposition/technical"
     },
-    "commons\\maps\\Trans_Translate_2\\critical.md": {
-      "map": "Trans_Translate_2",
+    "commons\\maps\\Trans_AxisDecomposition\\critical.md": {
+      "map": "Trans_AxisDecomposition",
       "sequence": "transformations",
       "type": "critical",
-      "name": "Trans_Translate_2/critical"
+      "name": "Trans_AxisDecomposition/critical"
     },
-    "commons\\maps\\Trans_Rotation_2\\blurb.md": {
-      "map": "Trans_Rotation_2",
+    "commons\\maps\\Trans_RotationSpectacle\\blurb.md": {
+      "map": "Trans_RotationSpectacle",
       "sequence": "transformations",
       "type": "blurb",
-      "name": "Trans_Rotation_2/blurb"
+      "name": "Trans_RotationSpectacle/blurb"
     },
-    "commons\\maps\\Trans_Rotation_2\\summary.md": {
-      "map": "Trans_Rotation_2",
+    "commons\\maps\\Trans_RotationSpectacle\\summary.md": {
+      "map": "Trans_RotationSpectacle",
       "sequence": "transformations",
       "type": "summary",
-      "name": "Trans_Rotation_2/summary"
+      "name": "Trans_RotationSpectacle/summary"
     },
-    "commons\\maps\\Trans_Rotation_2\\technical.md": {
-      "map": "Trans_Rotation_2",
+    "commons\\maps\\Trans_RotationSpectacle\\technical.md": {
+      "map": "Trans_RotationSpectacle",
       "sequence": "transformations",
       "type": "technical",
-      "name": "Trans_Rotation_2/technical"
+      "name": "Trans_RotationSpectacle/technical"
     },
-    "commons\\maps\\Trans_Rotation_2\\critical.md": {
-      "map": "Trans_Rotation_2",
+    "commons\\maps\\Trans_RotationSpectacle\\critical.md": {
+      "map": "Trans_RotationSpectacle",
       "sequence": "transformations",
       "type": "critical",
-      "name": "Trans_Rotation_2/critical"
+      "name": "Trans_RotationSpectacle/critical"
     },
     "commons\\maps\\Trans_Scale\\blurb.md": {
       "map": "Trans_Scale",

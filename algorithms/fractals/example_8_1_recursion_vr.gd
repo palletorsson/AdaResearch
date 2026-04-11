@@ -15,6 +15,16 @@ extends Node3D
 ##
 ## Each depth level has a distinct color. A frame surrounds the pattern.
 
+# @identity
+# essence: circle(center, r, d) = torus(r) + circle(center, r * 0.5, d-1), concentric halving
+# desire: To introduce recursion visually — each ring half the size of the last, rainbow colors marking each depth level
+# critical_parameter: max_depth — at 6 the innermost ring is 1/64th of the original, nearly invisible, proving the recursion continues beyond sight
+# triggers: show_animation → rings appear one depth at a time; animation_speed controls the reveal rhythm
+# emerges: The visual proof that halving never reaches zero — the rings keep going, each smaller but present
+# needs: VR depth control [missing], animation toggle [has]
+# relationships: The simplest recursion example; precedes example_8_2 (squares) and example_8_3 (branching circles)
+# truth: Recursion is a function that trusts its smaller self to do the same work — and the concentric circles are the proof that trust was warranted.
+
 @export var max_depth: int = 6
 @export var initial_radius: float = 0.4
 @export var show_animation: bool = false
@@ -38,7 +48,7 @@ var depth_colors: Array[Color] = [
 	Color(0.7, 0.3, 0.9, 0.7),    # Level 5 - Purple
 ]
 
-func _ready():
+func _ready() -> void:
 	# Create frame background
 	if show_frame:
 		_create_frame()
@@ -51,7 +61,7 @@ func _ready():
 		draw_recursive_circles(Vector3.ZERO, initial_radius, max_depth)
 		current_depth = max_depth
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if show_animation and current_depth < max_depth:
 		animation_timer += delta
 		if animation_timer >= animation_speed:
@@ -109,7 +119,7 @@ func _create_frame_bar(pos: Vector3, bar_size: Vector3, mat: StandardMaterial3D)
 	add_child(mesh_instance)
 
 
-func draw_recursive_circles(center: Vector3, radius: float, depth: int):
+func draw_recursive_circles(center: Vector3, radius: float, depth: int) -> void:
 	"""Recursively draw concentric circles"""
 	if depth < 0 or radius < 0.01:
 		return
@@ -121,7 +131,7 @@ func draw_recursive_circles(center: Vector3, radius: float, depth: int):
 	draw_recursive_circles(center, radius * 0.5, depth - 1)
 
 
-func create_circle(center: Vector3, radius: float, depth: int):
+func create_circle(center: Vector3, radius: float, depth: int) -> void:
 	"""Create a torus (ring) to represent a circle"""
 	var circle = MeshInstance3D.new()
 
@@ -155,14 +165,14 @@ func create_circle(center: Vector3, radius: float, depth: int):
 	circles.append(circle)
 
 
-func clear_circles():
+func clear_circles() -> void:
 	"""Clear all circles"""
 	for circle in circles:
 		circle.queue_free()
 	circles.clear()
 
 
-func increase_depth():
+func increase_depth() -> void:
 	"""Increase max depth"""
 	max_depth += 1
 	current_depth = max_depth
@@ -170,7 +180,7 @@ func increase_depth():
 	draw_recursive_circles(Vector3.ZERO, initial_radius, max_depth)
 
 
-func decrease_depth():
+func decrease_depth() -> void:
 	"""Decrease max depth"""
 	if max_depth > 1:
 		max_depth -= 1
@@ -179,8 +189,17 @@ func decrease_depth():
 		draw_recursive_circles(Vector3.ZERO, initial_radius, max_depth)
 
 
-func reset():
+func reset() -> void:
 	"""Reset animation"""
 	current_depth = 0
 	animation_timer = 0.0
 	clear_circles()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

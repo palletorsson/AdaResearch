@@ -1,6 +1,16 @@
 class_name Pathfinding3D
 extends Node3D
 
+# @identity
+# essence: A* on a 3D voxel grid — f(n) = g(n) + h(n), with pluggable heuristics (Manhattan, Euclidean, Chebyshev) and movement models (ground, flying, swimming, climbing)
+# desire: to carve a glowing path through a 3D maze of voxels — watching the open set expand like a wavefront and the path crystallize when goal is reached
+# critical_parameter: heuristic_weight — at 1.0 it is standard A*, above 1.0 it becomes greedy (faster but suboptimal), at 0.0 it degenerates to Dijkstra
+# triggers: animated search mode steps through A* one node at a time, coloring open (yellow) and closed (blue) voxels; algorithm_type switches between A*, Dijkstra, JPS, and flow field
+# emerges: the search wavefront's shape reveals the heuristic's bias — Euclidean creates spherical expansion, Manhattan creates diamond-shaped expansion, Chebyshev creates cubic expansion
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: contrasts with KonigsbergBridge (paths that don't exist) by finding paths that DO exist; builds on graph foundations to add spatial navigation
+# truth: pathfinding does not move through space — it moves through a graph that happens to be embedded in space, and the heuristic is the algorithm's guess about geometry
+
 # 3D Pathfinding: Volumetric Navigation Algorithms
 # Comprehensive 3D pathfinding with voxel grids and multiple algorithms
 # Optimized for VR interaction and large-scale navigation
@@ -98,7 +108,7 @@ class Voxel3D:
 	var visual_object: Node3D
 	var surface_normal: Vector3 = Vector3.UP
 	
-	func _init(pos: Vector3i, world_pos: Vector3):
+	func _init(pos: Vector3i, world_pos: Vector3) -> void:
 		position = pos
 		world_position = world_pos
 
@@ -114,18 +124,18 @@ class PathNode3D:
 	var elevation_change: float = 0.0
 	var comfort_score: float = 1.0  # VR comfort rating
 	
-	func _init(pos: Vector3i, world_pos: Vector3):
+	func _init(pos: Vector3i, world_pos: Vector3) -> void:
 		position = pos
 		world_position = world_pos
 	
-	func calculate_f_cost():
+	func calculate_f_cost() -> void:
 		f_cost = g_cost + h_cost
 
 # Priority queue for A* algorithm
 class PriorityQueue:
 	var elements: Array[PathNode3D] = []
 	
-	func push(node: PathNode3D):
+	func push(node: PathNode3D) -> void:
 		elements.append(node)
 		_bubble_up(elements.size() - 1)
 	
@@ -148,7 +158,7 @@ class PriorityQueue:
 	func contains(node: PathNode3D) -> bool:
 		return node in elements
 	
-	func _bubble_up(index: int):
+	func _bubble_up(index: int) -> void:
 		while index > 0:
 			var parent_index = (index - 1) / 2
 			if elements[index].f_cost >= elements[parent_index].f_cost:
@@ -159,7 +169,7 @@ class PriorityQueue:
 			elements[parent_index] = temp
 			index = parent_index
 	
-	func _bubble_down(index: int):
+	func _bubble_down(index: int) -> void:
 		while true:
 			var left_child = 2 * index + 1
 			var right_child = 2 * index + 2
@@ -224,7 +234,7 @@ var movement_26_connected = movement_18_connected + [
 	Vector3i(-1, 1, 1), Vector3i(-1, 1, -1), Vector3i(-1, -1, 1), Vector3i(-1, -1, -1)
 ]
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	setup_containers()
 	setup_ui()
@@ -239,7 +249,7 @@ func _ready():
 func _process(_delta):
 	update_ui_stats()
 
-func setup_environment():
+func setup_environment() -> void:
 	"""Setup basic 3D environment"""
 	var light = DirectionalLight3D.new()
 	light.light_energy = 1.0
@@ -256,7 +266,7 @@ func setup_environment():
 	env.environment = environment
 	add_child(env)
 
-func setup_containers():
+func setup_containers() -> void:
 	"""Create containers for different visual elements"""
 	grid_container = Node3D.new()
 	grid_container.name = "GridContainer"
@@ -270,7 +280,7 @@ func setup_containers():
 	search_container.name = "SearchContainer"
 	add_child(search_container)
 
-func setup_ui():
+func setup_ui() -> void:
 	"""Create UI for statistics and controls"""
 	ui_container = CanvasLayer.new()
 	ui_container.name = "UIContainer"
@@ -291,14 +301,14 @@ func setup_ui():
 		label.text = ""
 		vbox.add_child(label)
 
-func setup_search_timer():
+func setup_search_timer() -> void:
 	"""Setup timer for animated search visualization"""
 	search_timer = Timer.new()
 	search_timer.wait_time = search_step_delay
 	search_timer.timeout.connect(_on_search_step)
 	add_child(search_timer)
 
-func initialize_3d_grid():
+func initialize_3d_grid() -> void:
 	"""Initialize the 3D voxel grid"""
 	voxel_grid.clear()
 	
@@ -312,7 +322,7 @@ func initialize_3d_grid():
 				var voxel = Voxel3D.new(grid_pos, world_pos)
 				voxel_grid[x][y].append(voxel)
 
-func place_random_obstacles():
+func place_random_obstacles() -> void:
 	"""Place random obstacles in the grid"""
 	for x in range(grid_dimensions.x):
 		for y in range(grid_dimensions.y):
@@ -320,7 +330,7 @@ func place_random_obstacles():
 				if randf() < obstacle_probability:
 					set_voxel_type(Vector3i(x, y, z), VoxelType.OBSTACLE)
 
-func set_start_and_goal():
+func set_start_and_goal() -> void:
 	"""Set start and goal positions"""
 	# Find open positions for start and goal
 	start_position = find_open_position()
@@ -353,7 +363,7 @@ func find_open_position() -> Vector3i:
 	# Fallback to corner if no open position found
 	return Vector3i(0, 0, 0)
 
-func create_grid_visualization():
+func create_grid_visualization() -> void:
 	"""Create visual representation of the 3D grid"""
 	if not show_grid and not show_obstacles:
 		return
@@ -365,7 +375,7 @@ func create_grid_visualization():
 				if voxel.type != VoxelType.EMPTY or show_grid:
 					create_voxel_visual(voxel)
 
-func create_voxel_visual(voxel: Voxel3D):
+func create_voxel_visual(voxel: Voxel3D) -> void:
 	"""Create visual representation for a single voxel"""
 	var mesh_instance = MeshInstance3D.new()
 	var box = BoxMesh.new()
@@ -415,7 +425,7 @@ func create_voxel_visual(voxel: Voxel3D):
 	
 	voxel.visual_object = mesh_instance
 
-func start_pathfinding():
+func start_pathfinding() -> void:
 	"""Start the pathfinding algorithm"""
 	clear_previous_search()
 	
@@ -434,7 +444,7 @@ func start_pathfinding():
 		AlgorithmType.FLOW_FIELD:
 			generate_flow_field()
 
-func clear_previous_search():
+func clear_previous_search() -> void:
 	"""Clear previous search visualization"""
 	current_path.clear()
 	search_nodes_created = 0
@@ -530,7 +540,7 @@ var animated_closed_set: Dictionary
 var animated_came_from: Dictionary
 var animated_g_score: Dictionary
 
-func start_animated_astar():
+func start_animated_astar() -> void:
 	"""Start animated A* visualization"""
 	animated_open_set = PriorityQueue.new()
 	animated_closed_set = {}
@@ -547,7 +557,7 @@ func start_animated_astar():
 	
 	search_timer.start()
 
-func _on_search_step():
+func _on_search_step() -> void:
 	"""Perform one step of animated A* search"""
 	if animated_open_set.is_empty():
 		search_timer.stop()
@@ -641,7 +651,7 @@ func find_path_hierarchical() -> Array[Vector3i]:
 	# Simplified hierarchical approach
 	return find_path_astar_3d()
 
-func generate_flow_field():
+func generate_flow_field() -> void:
 	"""Generate flow field for goal position"""
 	var flow_field: Dictionary = {}
 	var integration_field: Dictionary = {}
@@ -864,7 +874,7 @@ func reconstruct_path_dijkstra(previous: Dictionary, goal: Vector3i) -> Array[Ve
 	path.push_front(start_position)
 	return path
 
-func visualize_path():
+func visualize_path() -> void:
 	"""Create visual representation of the found path"""
 	if not show_path or current_path.is_empty():
 		return
@@ -882,7 +892,7 @@ func visualize_path():
 		if i > 0 and smooth_path_curves:
 			create_path_segment(current_path[i-1], position, i)
 
-func create_path_segment(from: Vector3i, to: Vector3i, segment_index: int):
+func create_path_segment(from: Vector3i, to: Vector3i, segment_index: int) -> void:
 	"""Create a smooth path segment between two points"""
 	var from_world = get_world_position(from)
 	var to_world = get_world_position(to)
@@ -911,7 +921,7 @@ func create_path_segment(from: Vector3i, to: Vector3i, segment_index: int):
 	segment.name = "PathSegment_" + str(segment_index)
 	path_container.add_child(segment)
 
-func visualize_flow_field(flow_field: Dictionary):
+func visualize_flow_field(flow_field: Dictionary) -> void:
 	"""Visualize flow field with arrows"""
 	for position in flow_field:
 		var world_pos = get_world_position(position)
@@ -920,7 +930,7 @@ func visualize_flow_field(flow_field: Dictionary):
 		if direction.length() > 0:
 			create_flow_arrow(world_pos, Vector3(direction))
 
-func create_flow_arrow(position: Vector3, direction: Vector3):
+func create_flow_arrow(position: Vector3, direction: Vector3) -> void:
 	"""Create an arrow to show flow direction"""
 	var arrow = MeshInstance3D.new()
 	var mesh = SphereMesh.new()  # Simplified arrow as sphere
@@ -943,7 +953,7 @@ func get_voxel(position: Vector3i) -> Voxel3D:
 	"""Get voxel at grid position"""
 	return voxel_grid[position.x][position.y][position.z]
 
-func set_voxel_type(position: Vector3i, type: VoxelType):
+func set_voxel_type(position: Vector3i, type: VoxelType) -> void:
 	"""Set voxel type and update visualization"""
 	var voxel = get_voxel(position)
 	voxel.type = type
@@ -954,7 +964,7 @@ func set_voxel_type(position: Vector3i, type: VoxelType):
 	else:
 		create_voxel_visual(voxel)
 
-func update_voxel_visual(voxel: Voxel3D):
+func update_voxel_visual(voxel: Voxel3D) -> void:
 	"""Update existing voxel visual"""
 	if not voxel.visual_object:
 		return
@@ -976,7 +986,7 @@ func get_world_position(grid_position: Vector3i) -> Vector3:
 	"""Convert grid position to world position"""
 	return grid_origin + Vector3(grid_position) * voxel_size
 
-func update_ui_stats():
+func update_ui_stats() -> void:
 	"""Update UI statistics"""
 	if not ui_container:
 		return
@@ -1009,7 +1019,7 @@ func update_ui_stats():
 		labels[18].text = "Controls: SPACE-Find Path, R-Reset"
 		labels[19].text = "G-Toggle Grid, O-Toggle Obstacles"
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle user input"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -1035,7 +1045,7 @@ func _input(event):
 			KEY_A:
 				animate_search = not animate_search
 
-func reset_pathfinding():
+func reset_pathfinding() -> void:
 	"""Reset the pathfinding system"""
 	search_timer.stop()
 	clear_previous_search()
@@ -1052,7 +1062,7 @@ func reset_pathfinding():
 	
 	print("Pathfinding system reset")
 
-func recreate_grid_visualization():
+func recreate_grid_visualization() -> void:
 	"""Recreate grid visualization based on current settings"""
 	for child in grid_container.get_children():
 		child.queue_free()
@@ -1082,3 +1092,12 @@ func get_pathfinding_info() -> Dictionary:
 			"search_complete": search_complete
 		}
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,101 @@
+{
+  "version": 3,
+  "generator": "ada_facade_builder",
+  "description": "Bernini Colonnade — St. Peter's Square monumental Doric colonnade with flat entablature and crowning statues",
+  "facade": {
+    "bays": 5,
+    "stories": 3,
+    "symmetry": "bilateral",
+    "total_width": 15.0,
+    "total_height": 10.0,
+    "wall_depth": 0.35
+  },
+  "zones": [
+    { "row": 0, "name": "Statuary",    "height_multiplier": 0.55 },
+    { "row": 1, "name": "Entablature", "height_multiplier": 0.45 },
+    { "row": 2, "name": "Colonnade",   "height_multiplier": 2.00 }
+  ],
+  "materials": {
+    "wall": "#E8DCC8",
+    "zones": {
+      "Statuary":    { "color": "#DDD4C2", "type": "travertine" },
+      "Entablature": { "color": "#D6CBAF", "type": "stone_cornice" },
+      "Colonnade":   { "color": "#E8DCC8", "type": "travertine" }
+    }
+  },
+  "placements": [
+
+    { "col": 0, "row": 0, "part": "balustrade", "col_span": 5,
+      "sub_grid": {
+        "rows": [0.55, 0.45],
+        "placements": [
+          { "row": 0, "part": "statue_figure", "params": { "style": "saint", "spacing": "per_bay" } },
+          { "row": 1, "part": "balustrade_rail", "params": { "baluster_count": 20, "baluster_style": "turned" } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 1, "part": "cornice_shelf", "col_span": 5,
+      "sub_grid": {
+        "rows": [0.30, 0.20, 0.20, 0.30],
+        "placements": [
+          { "row": 0, "part": "cornice_shelf", "params": { "projection": 0.06 } },
+          { "row": 1, "part": "modillion", "params": { "count": 18, "spacing": "even" } },
+          { "row": 2, "part": "dentil_band", "params": { "block_w": 0.04, "block_h": 0.05, "block_d": 0.03 } },
+          { "row": 3, "part": "fascia", "params": { "bands": 3 } }
+        ]
+      }
+    },
+
+    { "col": 0, "row": 2, "part": "framed_marble_panel",
+      "sub_grid": {
+        "cols": [0.20, 0.60, 0.20],
+        "placements": [
+          { "col": 0, "part": "col_doric", "params": { "style": "doric", "fluted": true, "full_round": true, "shaft_taper": 0.85 } },
+          { "col": 1, "part": "dark_void", "params": { "color": "#2A2520", "depth": 0.30 } },
+          { "col": 2, "part": "col_doric", "params": { "style": "doric", "fluted": true, "full_round": true, "shaft_taper": 0.85 } }
+        ]
+      }
+    },
+    { "col": 1, "row": 2, "part": "framed_marble_panel",
+      "sub_grid": {
+        "cols": [0.20, 0.60, 0.20],
+        "placements": [
+          { "col": 0, "part": "col_doric", "params": { "style": "doric", "fluted": true, "full_round": true, "shaft_taper": 0.85 } },
+          { "col": 1, "part": "dark_void", "params": { "color": "#2A2520", "depth": 0.30 } },
+          { "col": 2, "part": "col_doric", "params": { "style": "doric", "fluted": true, "full_round": true, "shaft_taper": 0.85 } }
+        ]
+      }
+    },
+    { "col": 2, "row": 2, "part": "framed_marble_panel",
+      "sub_grid": {
+        "cols": [0.20, 0.60, 0.20],
+        "placements": [
+          { "col": 0, "part": "col_doric", "params": { "style": "doric", "fluted": true, "full_round": true, "shaft_taper": 0.85 } },
+          { "col": 1, "part": "dark_void", "params": { "color": "#2A2520", "depth": 0.30 } },
+          { "col": 2, "part": "col_doric", "params": { "style": "doric", "fluted": true, "full_round": true, "shaft_taper": 0.85 } }
+        ]
+      }
+    },
+    { "col": 3, "row": 2, "part": "framed_marble_panel",
+      "sub_grid": {
+        "cols": [0.20, 0.60, 0.20],
+        "placements": [
+          { "col": 0, "part": "col_doric", "params": { "style": "doric", "fluted": true, "full_round": true, "shaft_taper": 0.85 } },
+          { "col": 1, "part": "dark_void", "params": { "color": "#2A2520", "depth": 0.30 } },
+          { "col": 2, "part": "col_doric", "params": { "style": "doric", "fluted": true, "full_round": true, "shaft_taper": 0.85 } }
+        ]
+      }
+    },
+    { "col": 4, "row": 2, "part": "framed_marble_panel",
+      "sub_grid": {
+        "cols": [0.20, 0.60, 0.20],
+        "placements": [
+          { "col": 0, "part": "col_doric", "params": { "style": "doric", "fluted": true, "full_round": true, "shaft_taper": 0.85 } },
+          { "col": 1, "part": "dark_void", "params": { "color": "#2A2520", "depth": 0.30 } },
+          { "col": 2, "part": "col_doric", "params": { "style": "doric", "fluted": true, "full_round": true, "shaft_taper": 0.85 } }
+        ]
+      }
+    }
+  ]
+}

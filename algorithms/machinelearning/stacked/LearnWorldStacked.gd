@@ -1,6 +1,16 @@
 extends Node3D
 class_name BuildEnv
 
+# @identity
+# essence: reward = height + span + stability + symmetry + motif_reuse; agent places primitives, physics settles, reward evaluates
+# desire: watch an RL agent learn to build stable structures from cubes, beams, arches — discovering architecture through trial
+# critical_parameter: stability_threshold — determines what counts as "stable" after physics settling
+# triggers: step() places a primitive; settle_time lets physics resolve; grammar discovery identifies recurring stable sub-structures as reusable motifs
+# emerges: architectural motifs nobody designed — arches, buttresses, symmetric towers from pure reward signal
+# needs: VR controls [missing] — API-driven, no spatial sliders
+# relationships: depends on joint_learn_walk (shared RL framework); contrasts evolved_creatures (building vs moving)
+# truth: architecture is frozen reward — every stable structure is a solution to the optimization problem of resisting gravity
+
 ## BuildEnv — a reinforcement-learning environment for constructing stable structures.
 ## An agent places primitives (cubes, beams, pyramids, pillars, wedges, arches) and is
 ## rewarded for height, span, stability, symmetry, and motif reuse. Includes automatic
@@ -911,3 +921,12 @@ func _get_debug_info() -> Dictionary:
 		"success_episodes": success_episodes.size(),
 		"graph_edges": current_structure_graph.size()
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

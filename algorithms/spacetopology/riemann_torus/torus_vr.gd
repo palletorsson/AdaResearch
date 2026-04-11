@@ -307,3 +307,12 @@ func _wrap_player_in_box() -> void:
 		var t := (rig as Node3D).global_transform
 		t.origin = p
 		(rig as Node3D).global_transform = t
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

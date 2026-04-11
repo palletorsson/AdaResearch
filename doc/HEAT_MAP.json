@@ -1,0 +1,24 @@
+{
+  "generated": "2026-04-11T10:29:17.800634",
+  "description": "Auto-generated heat map from project signals",
+  "items": [
+    {
+      "item": "lod",
+      "temperature": 65,
+      "reason": "active (1 recent commits)",
+      "action": "continue"
+    },
+    {
+      "item": "shader",
+      "temperature": 65,
+      "reason": "active (1 recent commits)",
+      "action": "continue"
+    },
+    {
+      "item": "sequence:resourcemanagement",
+      "temperature": 50,
+      "reason": "empty sequence (Resource Management)",
+      "action": "create maps"
+    }
+  ]
+}

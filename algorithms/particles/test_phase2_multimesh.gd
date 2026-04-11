@@ -8,14 +8,14 @@ var emitter_legacy: ParticleEmitter
 var emitter_instanced: ParticleEmitter
 var test_results: Dictionary = {}
 
-func _ready():
+func _ready() -> void:
 	print("\n" + "=".repeat(70))
 	print("PHASE 2: MULTIMESH INSTANCING VERIFICATION")
 	print("=".repeat(70) + "\n")
 	
 	run_all_tests()
 
-func run_all_tests():
+func run_all_tests() -> void:
 	"""Run all Phase 2 verification tests"""
 	await test_draw_call_reduction()
 	await test_performance_comparison()
@@ -24,7 +24,7 @@ func run_all_tests():
 	
 	print_results()
 
-func test_draw_call_reduction():
+func test_draw_call_reduction() -> void:
 	"""Test: MultiMesh reduces draw calls from N to 1"""
 	print("TEST 1: Draw Call Reduction")
 	
@@ -59,7 +59,7 @@ func test_draw_call_reduction():
 	print("  Expected draw calls: 1 (vs 100 legacy)")
 	print("  Status: %s\n" % ("✅ PASS" if passed else "❌ FAIL"))
 
-func test_performance_comparison():
+func test_performance_comparison() -> void:
 	"""Test: Instanced rendering is faster than legacy"""
 	print("TEST 2: Performance Comparison (Legacy vs Instanced)")
 	
@@ -104,7 +104,7 @@ func test_performance_comparison():
 	print("  Speedup: %.2fx" % speedup)
 	print("  Status: %s\n" % ("✅ PASS" if passed else "❌ FAIL"))
 
-func test_visual_parity():
+func test_visual_parity() -> void:
 	"""Test: Instanced particles look identical to legacy"""
 	print("TEST 3: Visual Parity Check")
 	
@@ -135,7 +135,7 @@ func test_visual_parity():
 	print("  Color setup: %s" % ("✅" if has_correct_color else "❌"))
 	print("  Status: %s\n" % ("✅ PASS" if passed else "❌ FAIL"))
 
-func test_instance_recycling():
+func test_instance_recycling() -> void:
 	"""Test: Instance IDs are recycled properly"""
 	print("TEST 4: Instance ID Recycling")
 	
@@ -166,7 +166,7 @@ func test_instance_recycling():
 	print("  Recycled IDs: %d" % (final_pool_size - initial_pool_size))
 	print("  Status: %s\n" % ("✅ PASS" if passed else "❌ FAIL"))
 
-func print_results():
+func print_results() -> void:
 	"""Print final test summary"""
 	print("=".repeat(70))
 	print("TEST SUMMARY - PHASE 2")
@@ -207,3 +207,12 @@ func print_results():
 		emitter_legacy.queue_free()
 	if emitter_instanced:
 		emitter_instanced.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

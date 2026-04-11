@@ -3,7 +3,7 @@
 # "Double" version uses extended parameter range for more dramatic form
 # Famous for its saddle-like shape with beautiful symmetric curves
 
-extends XRToolsPickable
+extends Node3D
 
 @export var u_min: float = -2.0
 @export var u_max: float = 2.0
@@ -11,13 +11,12 @@ extends XRToolsPickable
 @export var v_min: float = -2.0
 @export var v_max: float = 2.0
 @export var v_steps: int = 64
-@export var scale_factor: float = 0.1  # Hand-sized scale
+@export var scale_factor: float = 0.15  # Visible at grid scale
 @export var base_color: Color = Color(0.8, 0.4, 0.9)  # Purple
 
 var mesh_instance: MeshInstance3D
 
 func _ready():
-	super._ready()
 	create_parametric_surface()
 
 func create_parametric_surface():
@@ -92,9 +91,6 @@ func create_parametric_surface():
 	# Apply material
 	apply_material()
 
-	# Add collision shape for pickable
-	create_collision()
-
 func apply_material():
 	if not mesh_instance:
 		return
@@ -119,13 +115,5 @@ func apply_material():
 		standard_material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Show both sides
 		mesh_instance.mesh.surface_set_material(0, standard_material)
 
-func create_collision():
-	# Add collision shape for XRToolsPickable
-	var collision = CollisionShape3D.new()
-	var box = BoxShape3D.new()
-	box.size = Vector3(4.0, 2.0, 4.0) * scale_factor
-	collision.shape = box
-	collision.name = "CollisionShape3D"
-	collision.position = Vector3(0, 0, 0)
-	add_child(collision)
-	move_child(collision, 0)  # Move to first position for XRTools
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

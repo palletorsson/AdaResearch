@@ -5,13 +5,13 @@ extends "res://algorithms/proceduralgeneration/constraint_solvers/wfcRooms/wfc_o
 ## Add a random path constraint to ensure connectivity to an office
 @export var force_path_to_office : bool = true
 
-func _initialize_grid():
+func _initialize_grid() -> void:
 	super._initialize_grid()
 	
 	if force_path_to_office:
 		_generate_guide_path()
 
-func _generate_guide_path():
+func _generate_guide_path() -> void:
 	print("🗺️ Generating reliable path to Office...")
 	
 	# Start at (0,0) or random edge
@@ -113,3 +113,6 @@ func _get_wiggly_path(start: Vector2i, end: Vector2i) -> Array[Vector2i]:
 			path.append(current)
 			
 	return path
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,246 @@
+{
+  "query": "The Lab Hub System",
+  "matched_topic": "grid",
+  "pack_slug": "lab-hub-system",
+  "title": "Grid System",
+  "category": "systems",
+  "tags": [
+    "grid",
+    "maps",
+    "layout",
+    "rendering",
+    "utilities"
+  ],
+  "overview": "The grid is the stage system for AdaResearch. It turns JSON map data into structure, utilities, and interactables, and it is the right starting point for changes to layout, colors, utilities, spawning, or map-level affordances.",
+  "read_first": [
+    {
+      "path": "commons/grid/GridSystem.gd",
+      "reason": "Master orchestrator for map rendering.",
+      "exists": true
+    },
+    {
+      "path": "commons/grid/GridInteractablesComponent.gd",
+      "reason": "Artifact placement and token resolution from the interactables layer.",
+      "exists": true
+    },
+    {
+      "path": "commons/grid/UtilityRegistry.gd",
+      "reason": "Single source of truth for utility token meanings.",
+      "exists": true
+    },
+    {
+      "path": "doc/LAB_GRID_GUID.md",
+      "reason": "Concrete lab-specific grid styling, progression, and the current cube colors.",
+      "exists": true
+    },
+    {
+      "path": "docs/GRID_MODIFIER_AND_SPATIAL_FIT_PLAN.md",
+      "reason": "Current extension plan for grid modifiers and artifact placement logic.",
+      "exists": true
+    },
+    {
+      "path": "doc/MAP_EDITING_PIPELINE.md",
+      "reason": "Operational map editing flow if the change touches authored map data.",
+      "exists": true
+    }
+  ],
+  "principles": [],
+  "constraints": [
+    "Maps use a 3-layer contract: structure, utilities, interactables.",
+    "The lab grid currently uses off-white cubes: Color(0.95, 0.95, 0.98, 1.0).",
+    "Lab ambient light is documented as Color(0.9, 0.9, 1.0, 0.4).",
+    "The current plan keeps the 2.5D map format and adds complexity through modifiers, not format replacement."
+  ],
+  "first_moves": [
+    "Decide whether the change is structural, utility-level, or interactable-level before touching code.",
+    "Check whether the request belongs in generic GridSystem or only in lab-specific styling.",
+    "If the change affects authored maps, inspect one representative map_data.json first."
+  ],
+  "deepwiki_url": "https://deepwiki.com/palletorsson/AdaResearch",
+  "deepwiki_topics": [
+    "Grid System",
+    "Grid System Architecture",
+    "Map Data Format",
+    "Artifact Registry System"
+  ],
+  "encyclopedia": [
+    {
+      "label": "Grid Editor",
+      "route": "/grid-editor",
+      "source": "src/components/grid-editor/GridCanvas.tsx",
+      "reason": "2D editing surface for tile/grid changes.",
+      "exists": true
+    },
+    {
+      "label": "Map Builder",
+      "route": "/map-builder",
+      "source": "src/components/map-builder/MapBuilderPage.tsx",
+      "reason": "Higher-level map composition and analysis flow.",
+      "exists": true
+    },
+    {
+      "label": "Project context store",
+      "route": "",
+      "source": "src/app/api/context/route.ts",
+      "reason": "Reusable place to persist derived clauses, formulas, and patterns.",
+      "exists": true
+    }
+  ],
+  "history_hits": [
+    {
+      "path": "doc/SESSION_HANDOFF_2026-03-28.md",
+      "snippet": "Over six days, this session built the Naples-to-VR pipeline end-to-end: 42 procedural floor patterns from MANN museum photos, 27 facade presets from Italian buildings, 23 museum maps with floor plans, a floor plan editor",
+      "score": "8"
+    },
+    {
+      "path": "doc/sessions/2026-03-19-garden-session-summary.md",
+      "snippet": "Single session spanning ~14 hours. Started with renaming map folders, ended with 363 algorithms having identity, desire, and truth.",
+      "score": "5"
+    },
+    {
+      "path": "doc/sessions/2026-03-23-continued-session.md",
+      "snippet": "Single session spanning ~14 hours. Started with renaming map folders, ended with 363 algorithms having identity, desire, and truth.",
+      "score": "5"
+    }
+  ],
+  "doc_hits": [
+    {
+      "path": "doc/CLAUDE_PROJECT_NAVIGATOR.md",
+      "snippet": "This navigator follows a **self-similar structure**: each level contains the same pattern of organization, just at different scales. Start at the level you need, zoom in or out as required.",
+      "score": "11"
+    },
+    {
+      "path": "doc/CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md",
+      "snippet": "# Guide: How to \"Play\" Ada Research by Reading the Files",
+      "score": "10"
+    },
+    {
+      "path": "doc/CONTRIBUTING.md",
+      "snippet": "A practical first-day guide for new contributors. Read this, then start building.",
+      "score": "10"
+    },
+    {
+      "path": "doc/LOD_TREE.json",
+      "snippet": "\"summary\": \"Ada Research: a Godot 4 VR/desktop game teaching algorithms through interactive 3D spaces. QFEP (Queer Feminist Enactivist Pedagogy) framework. Content chain: Sequence -> Map -> Artifact.\",",
+      "score": "10"
+    },
+    {
+      "path": "doc/MAP_QUALITY_SYSTEM.md",
+      "snippet": "# Map Quality System",
+      "score": "10"
+    },
+    {
+      "path": "doc/ONBOARDING_GUIDE.md",
+      "snippet": "This guide orients anyone arriving at the Ada Research project for the first time — a new Claude session picking up mid-project, a human collaborator joining the team, or an AI assistant asked a one-off question. It is t",
+      "score": "10"
+    }
+  ],
+  "repo_hits": [
+    "commons/maps/AdvancedLaboratory_Systems_Theory/map_data.json",
+    "commons/maps/AdvancedLaboratory_Systems_Lab/map_data.json",
+    "commons/maps/Color_Grid_Pallet/map_data.json",
+    "commons/maps/GraphTheory_Push_Relabel_Algorithm/map_data.json",
+    "commons/maps/LSystems_Grammar_Lab/map_data.json",
+    "commons/maps/Lab/map_data_post_artmathematics.json",
+    "commons/maps/Lab/map_data_post_color.json",
+    "commons/maps/Lab/map_data_post_graphtheory.json"
+  ],
+  "grounded_wiki": {
+    "project_slug": "adaresearch-case-study",
+    "points": [
+      {
+        "point_type": "principle",
+        "title": "New grid behavior should preserve the contract: add or update a focused compo...",
+        "statement": "New grid behavior should preserve the contract: add or update a focused component or utility definition, then keep `map_data.json` as the external source of truth.",
+        "support_count": 1,
+        "confidence": 0.73
+      },
+      {
+        "point_type": "fact",
+        "title": "Bridge: Map authors work in JSON and web tooling, while the Grid System turns...",
+        "statement": "Bridge: Map authors work in JSON and web tooling, while the Grid System turns the same data into walls, utilities, artifacts, spawn logic, and scene flow in VR.",
+        "support_count": 3,
+        "confidence": 0.81
+      },
+      {
+        "point_type": "fact",
+        "title": "What: The Science Screen is a **2D visualization surface that mirrors 3D VR i...",
+        "statement": "...ayer grabs a point, draws a line, builds a triangle. The Science Screen - a large monitor standing in the map - renders a 2D coordinate grid showing exactly what the player is doing, with live coordinates, measurements, and trails.",
+        "support_count": 3,
+        "confidence": 0.81
+      },
+      {
+        "point_type": "principle",
+        "title": "The Grid System is AdaResearch's map runtime: it turns declarative map data i...",
+        "statement": "The Grid System is AdaResearch's map runtime: it turns declarative map data into explorable VR spaces, and it is the main reason hundreds of maps can stay editable without hand-authoring every scene.",
+        "support_count": 2,
+        "confidence": 0.76
+      }
+    ],
+    "claims": [
+      {
+        "claim_type": "principle",
+        "statement": "New grid behavior should preserve the contract: add or update a focused component or utility definition, then keep `map_data.json` as the external source of truth.",
+        "support_count": 1,
+        "confidence": 0.73,
+        "status": "inferred"
+      },
+      {
+        "claim_type": "fact",
+        "statement": "...ayer grabs a point, draws a line, builds a triangle. The Science Screen - a large monitor standing in the map - renders a 2D coordinate grid showing exactly what the player is doing, with live coordinates, measurements, and trails.",
+        "support_count": 1,
+        "confidence": 0.81,
+        "status": "grounded"
+      },
+      {
+        "claim_type": "fact",
+        "statement": "Modes currently deployed through map data: `bars`, `field`, `grid`, `line`, `net`, `point`, `scatter`, `trace`, `triangle`, `wave`",
+        "support_count": 1,
+        "confidence": 0.81,
+        "status": "grounded"
+      },
+      {
+        "claim_type": "fact",
+        "statement": "...ayer grabs a point, draws a line, builds a triangle. The Science Screen - a large monitor standing in the map - renders a 2D coordinate grid showing exactly what the player is doing, with live coordinates, measurements, and trails.",
+        "support_count": 1,
+        "confidence": 0.81,
+        "status": "grounded"
+      }
+    ],
+    "turns": [
+      {
+        "session_id": "531f69cf-2ddc-41b2-9bdb-3d1a36046289",
+        "turn_index": 99,
+        "role": "assistant",
+        "text": "Continuing from where we left off. I'll tackle the three selected tasks: commit the QFEP Lab spawn fixes, implement Forces map fixes, and continue the screenshot improvement loop. Let me start by checking the current state and committing what's ready. Good. The 8 QFEP Lab spawn fixes are ready. Let me commit them and v..."
+      },
+      {
+        "session_id": "66df209d-b3a1-4657-9cf6-522c844b3022",
+        "turn_index": 1,
+        "role": "user",
+        "text": "...s fields `nFb5-2Ixksji7dU5rNj4L` ~278 artifacts (30%) have empty map_sequences arrays. Worst offenders: - color.json: 100% empty - parametric.json: 100% empty - arrays.json: 72% empty - algorithms_misc.json: 91% empty Needs a batch script to check which maps each artifact appears in and populate the field. - [ ] Enrich..."
+      },
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 448,
+        "role": "user",
+        "text": "...e, fractal_lsystem_string, dark_sphere, lsystem_dungeon, genetic_tree_sculptor.\", \"entries\": [ { \"type\": \"map\", \"target\": \"LSystems_Grammar_Lab\", \"shots\": { \"above\": \"/audit-shots/lsystems/LSystems_Grammar_Lab/above.png\", \"front\": \"/audit-shots/lsystems/LSystems_Grammar_Lab/front.png\", \"left\": \"/audit-shots/lsystems/LS..."
+      },
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 614,
+        "role": "user",
+        "text": "...s the FractalNode. It has the same shape whether it represents the whole project, a domain, a registry, a map, or an artifact. interface FractalNode { id: string; kind: EntityKind; name: string; fold: string; depth: number; metrics: Record<string, number>; tags: string[]; edges: FractalEdge[]; children?: FractalNode[];..."
+      }
+    ]
+  },
+  "trust_order": [
+    "repo files",
+    "doc/ and docs/ contracts",
+    "session handoffs and session summaries",
+    "grounded wiki chat points and turns",
+    "encyclopedia routes and source files",
+    "DeepWiki overview"
+  ],
+  "generated_at": "2026-04-04T11:51:04+00:00"
+}

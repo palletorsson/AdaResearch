@@ -18,11 +18,11 @@ const DoublePendulumScene = preload("res://algorithms/wavefunctions/oscillation_
 
 var pendulums: Array[Node3D] = []
 
-func _ready():
+func _ready() -> void:
 	_spawn_pendulum_grid()
 	_setup_camera()
 
-func _spawn_pendulum_grid():
+func _spawn_pendulum_grid() -> void:
 	"""Spawn 9 complete DoublePendulum instances in a 3x3 grid"""
 	# Calculate offset to center the grid
 	var total_size = (grid_size - 1) * cell_spacing
@@ -63,7 +63,7 @@ func _create_pendulum(row: int, col: int) -> Node3D:
 	
 	return pendulum
 
-func _disable_camera(pendulum: Node3D):
+func _disable_camera(pendulum: Node3D) -> void:
 	"""Disable camera from individual pendulum"""
 	var camera = pendulum.get_node_or_null("Camera3D")
 	if camera: 
@@ -96,7 +96,7 @@ func get_pendulum_at(row: int, col: int) -> Node3D:
 		return pendulums[index]
 	return null
 
-func reset_all_pendulums():
+func reset_all_pendulums() -> void:
 	"""Reset all pendulums to initial state"""
 	for pendulum in pendulums:
 		pendulum.theta1 = deg_to_rad(pendulum.theta1_start)
@@ -104,3 +104,12 @@ func reset_all_pendulums():
 		pendulum.omega1 = 0.0
 		pendulum.omega2 = 0.0
 		pendulum.trail_points.clear()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

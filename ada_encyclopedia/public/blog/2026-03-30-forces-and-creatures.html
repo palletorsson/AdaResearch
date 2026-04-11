@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forces Redesign & Mario Creatures | Ada Research Blog</title>
+<style>
+  body { font-family: 'Georgia', serif; max-width: 720px; margin: 0 auto; padding: 2rem; background: #0a0a0f; color: #d4d4d8; line-height: 1.7; }
+  h1 { color: #e4e4e7; font-size: 1.8rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+  h2 { color: #a78bfa; font-size: 1.3rem; margin-top: 2rem; }
+  h3 { color: #67e8f9; font-size: 1.1rem; }
+  .date { color: #71717a; font-size: 0.9rem; }
+  .highlight { background: #1e1b2e; border-left: 3px solid #a78bfa; padding: 1rem 1.2rem; margin: 1.5rem 0; border-radius: 0 6px 6px 0; }
+  .creature-card { background: #111118; border: 1px solid #27272a; border-radius: 8px; padding: 1.2rem; margin: 1rem 0; }
+  .creature-card h3 { margin-top: 0; }
+  .tag { display: inline-block; background: #1e1b2e; color: #a78bfa; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; margin: 2px; }
+  code { background: #1e1b2e; padding: 2px 6px; border-radius: 3px; font-size: 0.9rem; color: #67e8f9; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin: 1rem 0; }
+  .stat { text-align: center; background: #111118; padding: 0.5rem; border-radius: 4px; }
+  .stat-num { font-size: 1.4rem; color: #a78bfa; font-weight: bold; }
+  .stat-label { font-size: 0.75rem; color: #71717a; }
+  a { color: #67e8f9; }
+  .section-break { text-align: center; color: #333; margin: 2rem 0; letter-spacing: 1em; }
+  .img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1.2rem 0; }
+  .img-row.triple { grid-template-columns: 1fr 1fr 1fr; }
+  .img-row img { width: 100%; border-radius: 6px; border: 1px solid #27272a; }
+  .img-single { margin: 1.2rem 0; }
+  .img-single img { width: 100%; border-radius: 6px; border: 1px solid #27272a; }
+  .img-caption { text-align: center; font-size: 0.8rem; color: #71717a; margin-top: 0.3rem; }
+</style>
+</head>
+<body>
+
+<p class="date">March 30, 2026</p>
+<h1>Forces Redesign & Three Mario Creatures</h1>
+
+<p>Today's session had two threads: redesigning the forces sequence maps, and building Mario-like interactive creatures. Both connect to the same question: <em>how does a player learn physics by being inside it?</em></p>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">1</div><div class="stat-label">new artifact</div></div>
+  <div class="stat"><div class="stat-num">3</div><div class="stat-label">maps redesigned</div></div>
+  <div class="stat"><div class="stat-num">3</div><div class="stat-label">creatures built</div></div>
+</div>
+
+<h2>Walking Inside Vector Addition</h2>
+
+<p>The existing vector addition demos are tabletop-scale. You look at them. The new <code>vector_addition_walk</code> is room-scale: a 3-meter coordinate grid you stand inside. The vectors are at body height. You grab the endpoints and walk along the X-axis to feel the X-component.</p>
+
+<div class="highlight">
+<strong>The shift:</strong> From observing addition to inhabiting it. The parallelogram isn't a diagram &mdash; it's the space you're standing in. Component projections trace dashed lines along the axes at your feet.
+</div>
+
+<div class="img-row">
+  <div><img src="images/vector-addition-walk-front.png" alt="Vector Addition Walk - front view"><p class="img-caption">Front view: 3D grid, vectors A (coral) and B (cyan), result (green)</p></div>
+  <div><img src="images/vector-addition-walk-top.png" alt="Vector Addition Walk - top view"><p class="img-caption">Top view: floor grid, wall grids, parallelogram construction</p></div>
+</div>
+
+<p>Four preset buttons (ORTHO, ACUTE, 3D, RESET) let you snap to canonical configurations. The formula panel updates in real-time as you drag handles. Ghost arrows show the parallelogram construction.</p>
+
+<h2>Forces Maps: Before and After</h2>
+
+<p>Three maps in the forces sequence were weak:</p>
+
+<p><strong>ForcesComposition</strong> was a 14&times;14 diamond &mdash; too cramped for the ideas it holds. Expanded to 20&times;16 with <code>vector_addition_walk</code> as the centerpiece. Now the narrative flows: enter &rarr; walk inside the vector grid &rarr; see force composition demos &rarr; reflect &rarr; exit.</p>
+
+<p><strong>ForcesChaos</strong> had two tiny islands floating in void. Redesigned as a 3-island L-shape: n-body systems (NW), chaos attractors (NE), reflection (SE). Jump pads connect the islands &mdash; you become the projectile between deterministic systems that produce chaos.</p>
+
+<p><strong>ForcesFoundations</strong> had a teleporter bug and duplicate artifacts. Fixed: teleporter on void, dark sphere moved to Island C, duplicate VectorBasics removed.</p>
+
+<div class="img-row triple">
+  <div><img src="images/forces-composition-above.png" alt="ForcesComposition above"><p class="img-caption">ForcesComposition: 20x16 with vector_addition_walk</p></div>
+  <div><img src="images/forces-chaos-above.png" alt="ForcesChaos above"><p class="img-caption">ForcesChaos: 3-island L-shape</p></div>
+  <div><img src="images/forces-foundations-above.png" alt="ForcesFoundations above"><p class="img-caption">ForcesFoundations: 3 islands, fixed</p></div>
+</div>
+
+<p class="section-break">. . .</p>
+
+<h2>Three Creatures That Teach Physics</h2>
+
+<p>The existing hazard system is brilliant: origami-themed procedural creatures with single-parameter behavior, personality evolution via the curriculum. But the interaction vocabulary was limited to "shoot and dodge." Mario taught a generation about physics through <em>creature mechanics</em>: stomping, kicking, bouncing. We added three.</p>
+
+<div class="creature-card">
+  <h3>GoombaBox &mdash; Stomp</h3>
+  <div class="img-single"><img src="images/goomba-box-front.png" alt="GoombaBox creature"></div>
+  <p>A cardboard box with angry yellow eyes. Waddles on patrol, charges when it spots you. Stomp from above to flatten it. The lid hinges open, the body squashes to 10% height.</p>
+  <p><strong>What it teaches:</strong> Attack from above, not head-on. Topology as vulnerability &mdash; a box has six faces but only the top is weak.</p>
+  <span class="tag">stomp</span> <span class="tag">flatten</span> <span class="tag">topology</span>
+</div>
+
+<div class="creature-card">
+  <h3>ShellRoller &mdash; Kick</h3>
+  <div class="img-single"><img src="images/shell-roller-front.png" alt="ShellRoller creature"></div>
+  <p>A green icosahedron with retractable legs. Retracts into its shell when scared. Kick the shell to send it rolling at 6 m/s &mdash; it bounces off walls and damages other enemies it hits.</p>
+  <p><strong>What it teaches:</strong> Conservation of momentum. Chain reactions. The kicked shell is a lesson in elastic collisions delivered through play.</p>
+  <span class="tag">kick</span> <span class="tag">momentum</span> <span class="tag">chain-reaction</span>
+</div>
+
+<div class="creature-card">
+  <h3>SpringHopper &mdash; Bounce</h3>
+  <div class="img-single"><img src="images/spring-hopper-front.png" alt="SpringHopper creature"></div>
+  <p>A red coil spring with a yellow head. Bounces rhythmically. Land on top when compressed to get launched upward &mdash; Hooke's law as creature.</p>
+  <p><strong>What it teaches:</strong> F = -kx. Compression stores potential energy. Release converts to kinetic. The player times their landing to harness the spring.</p>
+  <span class="tag">bounce</span> <span class="tag">hooke</span> <span class="tag">energy-transfer</span>
+</div>
+
+<h2>The Evolution System</h2>
+
+<p>All three creatures plug into the existing progression system. They unlock at the forces sequence (order 4) in <code>soft_stages.json</code>. As the player progresses through the curriculum, the HazardManager shifts creature personalities from foe &rarr; wary &rarr; neutral &rarr; curious &rarr; friend. The goomba you stomped in forces becomes a curious follower by the time you reach graph theory.</p>
+
+<div class="highlight">
+<strong>The creatures don't just test the player &mdash; they evolve with the curriculum.</strong> A shell you kicked in frustration becomes a companion. A spring that launched you becomes a friend that bounces alongside you. The hazard system is really a relationship system.
+</div>
+
+<h2>What's Next</h2>
+
+<p>VR testing. The creatures compiled and render, but the real test is feel: does the stomp feel satisfying? Does the kicked shell have enough weight? Does the spring launch feel right? These are body questions that only VR can answer.</p>
+
+</body>
+</html>

@@ -4,6 +4,16 @@
 extends Node3D
 class_name SuperpositionDisplay
 
+# @identity
+# essence: |ψ⟩ = α|0⟩ + β|1⟩; α oscillates as sin(t·speed), β = 1 - α; both states simultaneously present
+# desire: see two basis states |0⟩ and |1⟩ breathe in and out of opacity while the superposition sphere pulses between them
+# critical_parameter: _speed — controls the oscillation frequency between basis states
+# triggers: VR slider adjusts oscillation speed; opacity of |0⟩ and |1⟩ spheres anti-correlate continuously
+# emerges: the visual proof that superposition is not flickering between states — it is occupying both simultaneously
+# needs: VR horizontal slider for speed [has]
+# relationships: paired with schrodinger_box (abstract vs physical superposition); contrasts florensky_sphere (quantum vs paraconsistent logic)
+# truth: superposition is not uncertainty about which state the system is in — it is the system genuinely being in both
+
 var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
 
 var _state_0: MeshInstance3D

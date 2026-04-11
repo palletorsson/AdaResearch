@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://algorithms/statistics/04_central_limit_theorem/CentralLimitTheoremVR.gd" id="1_script"]
+
+[node name="CentralLimitTheoremVR" type="Node3D"]
+script = ExtResource("1_script")

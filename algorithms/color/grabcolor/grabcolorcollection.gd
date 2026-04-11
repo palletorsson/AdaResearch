@@ -374,3 +374,12 @@ func remove_top_paper() -> void:
 		var top_paper = papers[-1]
 		print("Removing paper: %s" % top_paper.name)
 		top_paper.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

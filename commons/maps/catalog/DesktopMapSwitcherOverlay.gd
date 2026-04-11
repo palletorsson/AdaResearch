@@ -24,7 +24,6 @@ const SPAWNED_MAP_LOADER_GROUP := "desktop_spawned_map_loader_kiosk"
 const COMMENT_DEFAULT_MARKDOWN_PATH := "res://ada_run/desktop_feedback.md"
 const COMMENT_DEFAULT_JSON_PATH := "res://ada_run/desktop_feedback.json"
 const COMMENT_CODEX_QUEUE_PATH := "res://ada_run/codex_change_requests.md"
-const ARTIFACT_LEGACY_REGISTRY_PATH := "res://commons/artifacts/grid_artifacts.json"
 const ARTIFACT_REGISTRY_DIR_PATH := "res://commons/artifacts/registry/"
 const MAP_GRADES_PATH := "res://commons/maps/catalog/map_grades.json"
 static var pending_map_name: String = ""
@@ -931,6 +930,8 @@ func _set_overlay_visible(is_visible: bool) -> void:
 		_camera_bar.visible = is_visible
 	if _rating_panel:
 		_rating_panel.visible = is_visible
+	if _comment_panel:
+		_comment_panel.visible = is_visible
 
 	if is_visible and refresh_on_open:
 		_reload_data()
@@ -1257,7 +1258,7 @@ const SPINE_ORDER: Array[String] = [
 const BRANCH_ORDER: Array[String] = [
 	"speculativecomputation", "criticalalgorithms",
 	"physicssimulation", "datastructures", "searchpathfinding", "vectors",
-	"computationalgeometry", "meshes", "patterngeneration",
+	"computationalgeometry", "meshes", "patterngeneration", "mosaicanalysis",
 	"grammar_systems", "spatial_partitioning", "constraint_solvers",
 	"isosurfaces", "higher_dimensions", "biological_growth",
 	"artmathematics", "advancedlaboratory", "resourcemanagement", "bricolage",
@@ -2503,8 +2504,6 @@ func _ensure_artifact_scene_index() -> void:
 		return
 
 	_artifact_scene_path_by_name.clear()
-	_merge_artifact_registry_file(ARTIFACT_LEGACY_REGISTRY_PATH, _artifact_scene_path_by_name)
-
 	var dir = DirAccess.open(ARTIFACT_REGISTRY_DIR_PATH)
 	if dir:
 		dir.list_dir_begin()

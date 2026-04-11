@@ -367,6 +367,48 @@ func get_within_radius(position: Vector3, radius: float) -> Array[CritterEntity]
 	return result
 
 
+## Spawn a critter at a partial growth stage. Growth factor (0-1) is stored
+## on the entity for the GrowthChamber to animate from.
+func spawn_with_growth(dna: CritterDNA, world_position: Vector3, growth_factor: float) -> CritterEntity:
+	var entity: CritterEntity = spawn(dna, world_position)
+	if entity:
+		entity.growth_factor = clampf(growth_factor, 0.0, 1.0)
+	return entity
+
+
+## Transfer an entity from this spawner to another. Removes from our tracking
+## and adds to the target's tracking without destroying/recreating the entity.
+func transfer_entity(entity: CritterEntity, target_spawner: CritterSpawner) -> bool:
+	if not entity or not is_instance_valid(entity):
+		return false
+	if not target_spawner:
+		return false
+	if target_spawner.get_population_count() >= target_spawner.max_population:
+		return false
+
+	# Remove from our tracking
+	_active_critters.erase(entity)
+
+	# Reparent to target's world root
+	if entity.is_inside_tree():
+		entity.get_parent().remove_child(entity)
+	if target_spawner.world_root:
+		target_spawner.world_root.add_child(entity)
+
+	# Add to target's tracking
+	target_spawner._active_critters.append(entity)
+
+	# Rewire cleanup signal
+	if entity.tree_exiting.is_connected(_on_critter_removed):
+		entity.tree_exiting.disconnect(_on_critter_removed)
+	entity.tree_exiting.connect(target_spawner._on_critter_removed.bind(entity))
+
+	if debug:
+		print("[CritterSpawner] Transferred %s to target spawner" % entity.name)
+
+	return true
+
+
 ## Current population count.
 func get_population_count() -> int:
 	return _active_critters.size()
@@ -389,3 +431,5 @@ func get_population_summary() -> Dictionary:
 				summary[kn] += 1
 			summary["total"] += 1
 	return summary
+
+

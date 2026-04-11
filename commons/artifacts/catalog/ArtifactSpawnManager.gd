@@ -78,7 +78,11 @@ func spawn_artifact(lookup_name: String) -> bool:
 		spawn_failed.emit(lookup_name, "Scene file not found: " + scene_path)
 		return false
 
-	var artifact = ResourceLoader.load(scene_path).instantiate()
+	var scene = ResourceLoader.load(scene_path)
+	if not scene:
+		spawn_failed.emit(lookup_name, "Failed to load scene: " + scene_path)
+		return false
+	var artifact = scene.instantiate()
 	if not artifact:
 		spawn_failed.emit(lookup_name, "Failed to instantiate artifact")
 		return false

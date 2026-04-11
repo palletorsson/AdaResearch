@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: X → F[+X]F[-X][^X][&X], F → FF at 90° with pitch/yaw branching — orthogonal L-system architecture
+# desire: To generate a city from a seed — watch right-angle grammar produce buildings, bridges, and towers
+# critical_parameter: iterations — complexity grows exponentially; each level adds branching in all six cardinal directions
+# triggers: Iteration 2 → simple cross; iteration 4 → dense brutalist megastructure; slow rotation reveals 3D depth
+# emerges: Building-like structures from botanical L-system rules reinterpreted with 90-degree angles
+# needs: VR complexity controller [has], Label3D [has], auto-rotation [has]
+# relationships: Feeds into LSystems_Architecture. Contrasts with lsystem_dungeon (3D growth vs 2D floor plan). Uses Turtle3D.
+# truth: Change the angle from 25° to 90° and the tree becomes a city — architecture is botany with right angles.
+
 ## 3D Architecture Generator using L-Systems
 ## Creates complex 3D structures showing L-System spatial patterns
 
@@ -20,7 +30,7 @@ var info_label: Label3D
 var description_label: Label3D
 var generation_controller: ParameterController3D
 
-func _ready():
+func _ready() -> void:
 	# Setup materials for architectural look
 	structure_material = StandardMaterial3D.new()
 	structure_material.albedo_color = Color(0.7, 0.7, 0.8)  # Concrete gray
@@ -53,7 +63,7 @@ func _ready():
 
 	print("CityGenerator: 3D architectural structure generated")
 
-func generate_structure():
+func generate_structure() -> void:
 	"""Generate the 3D structure"""
 	lsystem.reset()
 	lsystem.generate_n(iterations)
@@ -74,7 +84,7 @@ func generate_structure():
 
 	update_ui()
 
-func create_ui():
+func create_ui() -> void:
 	"""Create info labels and controllers"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -105,12 +115,12 @@ func create_ui():
 	generation_controller.value_changed.connect(_on_iterations_changed)
 	add_child(generation_controller)
 
-func _on_iterations_changed(new_val: float):
+func _on_iterations_changed(new_val: float) -> void:
 	"""Update iterations and regenerate"""
 	iterations = int(new_val)
 	generate_structure()
 
-func update_ui():
+func update_ui() -> void:
 	"""Update info display"""
 	if info_label:
 		var segment_count = turtle.branches.size()
@@ -120,13 +130,22 @@ func update_ui():
 		var instructions = lsystem.get_sentence()
 		description_label.text = "3D Architectural Structure\nInstructions: %d" % instructions.length()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Gentle rotation to view the structure
 	rotation.y += delta * 0.15
 
-func set_iterations(val: int):
+func set_iterations(val: int) -> void:
 	"""Set iteration count (for external control)"""
 	iterations = val
 	if generation_controller:
 		generation_controller.set_value(float(val))
 	generate_structure()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

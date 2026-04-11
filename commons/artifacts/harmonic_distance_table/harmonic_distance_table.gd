@@ -22,6 +22,17 @@
 extends Node3D
 class_name HarmonicDistanceTable
 
+
+# @identity
+# essence: harmonic_distance(a, b) = |shared_overtones(a, b)| — consonance as overtone overlap
+# desire: Touch pitch nodes on a circle-of-fifths layout and see overtone relationships light up
+# critical_parameter: base_octave — determines the frequency range for tone generation and overtone calculation
+# triggers: selecting two notes computes shared overtone count and plays the interval
+# emerges: consonance and dissonance as a visible network — more shared overtones = closer connection
+# needs: VR touch on note nodes [has], audio playback [has]
+# relationships: depends on circle-of-fifths layout; contrasts with chord_tension_spring (visual distance vs physical tension); unlocks harmonic series understanding
+# truth: Consonance is the degree to which two pitches share the same overtone series.
+
 const _P = preload("res://commons/ui/ada_palette.gd")
 
 # ── Circle of fifths order (clockwise from C) ──

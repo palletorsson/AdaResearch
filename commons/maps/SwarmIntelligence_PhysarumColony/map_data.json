@@ -1,65 +1,66 @@
 {
   "map_info": {
-    "name": "Physarum Colony",
-    "lookup_name": "SwarmIntelligence_PhysarumColony",
-    "description": "An organic cave housing a branching slime mold network. Voids serve as nutrient pools in an irregular cavern.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 9,
-      "depth": 9,
-      "max_height": 1
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "swarm_intelligence",
-      "spatial_temperature": 0.55,
-      "design_notes": "Irregular cave walls with void nutrient pools. Organic, non-rectilinear."
-    }
+      "name": "Physarum Colony",
+      "lookup_name": "SwarmIntelligence_PhysarumColony",
+      "description": "An organic cave housing a branching slime mold network. Voids serve as nutrient pools in an irregular cavern.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 9,
+          "depth": 9,
+          "max_height": 1
+      },
+      "metadata": {
+          "difficulty": "intermediate",
+          "category": "swarm_intelligence",
+          "spatial_temperature": 0.55,
+          "design_notes": "Irregular cave walls with void nutrient pools. Organic, non-rectilinear."
+      },
+      "title": "Physarum Colony"
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next",
+          "description": "Continue to next step",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
   },
   "layers": {
     "structure": [
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "0", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1" ]
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "0", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1"]
     ],
     "utilities": [
-      [ "s", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ "an", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", "t", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", "sp", " ", " ", " " ]
+      ["s", " ", " ", " ", " ", " ", " ", " ", " "],
+      ["an", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "t", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "sp", " ", " ", " "]
     ],
     "interactables": [
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", "PhysarumColony", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", "science_screen:180:1.5#mode:scatter"],
+      [" ", " ", " ", " ", "PhysarumColony", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
   }
 }

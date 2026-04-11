@@ -4,6 +4,16 @@
 
 extends Node3D
 
+# @identity
+# essence: CPU Gray-Scott simulation — du/dt = Du*laplacian(u) - u*v^2 + f*(1-u), dv/dt = Dv*laplacian(v) + u*v^2 - (k+f)*v — iterated steps_per_frame times per frame on a 2D grid
+# desire: to hold a Turing pattern in your hands and twist the feed/kill knobs until you find the boundary where spots become stripes become mazes
+# critical_parameter: feed/kill ratio — the two parameters together define a 2D phase space; each preset (Spots, Stripes, Maze, Mitosis, Coral, Waves) is a point in that space
+# triggers: VR sliders for feed, kill, and preset selection; reset button re-seeds the simulation; keyboard 1-6 for direct preset selection
+# emerges: the laplacian coupling between neighboring cells means local perturbations propagate as waves — pattern is not local but a property of the entire coupled field
+# needs: slider_horizontal [has] (preset, feed, kill); push_button [has] (reset); Label3D [has]
+# relationships: CPU complement to reaction_diffusion's GPU shader approach; both demonstrate Turing's morphogenesis paper in different implementations
+# truth: pattern emerges from the ratio of two diffusion rates — not from a template, not from a gene, but from the mathematics of how fast activation outruns inhibition
+
 class_name TuringPatternGenerator
 
 ## Display size
@@ -377,3 +387,8 @@ func set_gradient(gradient: Gradient):
 
 func reset():
 	_init_simulation()
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

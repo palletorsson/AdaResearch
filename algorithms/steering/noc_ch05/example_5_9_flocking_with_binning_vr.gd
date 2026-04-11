@@ -283,3 +283,6 @@ class FlockingBoidWithBinning:
 	func queue_free() -> void:
 		if is_instance_valid(root):
 			root.queue_free()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

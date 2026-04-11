@@ -1,0 +1,9 @@
+# SwarmIntelligence_Boids_Algorithm — Summary
+
+Separation, alignment, cohesion. Three rules, applied locally, produce flocking globally. Craig Reynolds' 1987 algorithm proves that coordinated group motion needs no choreographer — each boid sees only its neighbors, computes three weighted steering forces, and the flock emerges as a side effect.
+
+The `boids_aquarium` artifact renders 200 boids in a glass tank. Separation steers away from neighbors within a short radius. Alignment steers toward the average heading of neighbors within a medium radius. Cohesion steers toward the average position of neighbors within a long radius. The weighted sum drives velocity. Three VR sliders control the weights, and the flock's character shifts in real time: separation dominant produces cold dispersal; cohesion dominant produces a pulsing sphere; alignment dominant produces a synchronized arrow. The narrow band between extremes is where the flock lives — rotating toroids, figure-eight loops, and sudden directional consensus events that no parameter setting predicted.
+
+The shift from Physarum and flow fields is fundamental. Physarum agents communicated through the environment — trail persisted across time. Boids communicate through space but not through time. No memory. No trail. Each frame, every boid recomputes its forces from the current neighbor configuration. The flock's coherence comes from continuous mutual adjustment, not accumulated history. Spatial hashing replaces the trail map for efficient O(n) neighbor queries.
+
+This is the third map in the Swarm Intelligence sequence. The wide-open arena with scattered observation platforms provides multiple vantage points for watching the flock. The teleporter leads to SwarmIntelligence_Agent_Based_Modeling_ABM, where the boid framework generalizes to agents with arbitrary rule sets.

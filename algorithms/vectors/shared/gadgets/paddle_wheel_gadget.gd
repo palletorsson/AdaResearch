@@ -18,7 +18,7 @@ const AXLE_LENGTH := 0.04
 var _target_speed: float = 0.0
 var _cross_magnitude: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	# --- Axle support (static) ---
 	axle = StaticBody3D.new()
 	axle.name = "Axle"
@@ -148,3 +148,12 @@ func update_from_vectors(a: Vector3, b: Vector3) -> void:
 		_target_speed *= dir
 
 	wheel_hinge.set_param(HingeJoint3D.PARAM_MOTOR_TARGET_VELOCITY, _target_speed)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

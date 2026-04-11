@@ -3,7 +3,7 @@
 
 extends SceneTree
 
-func _init():
+func _init() -> void:
 	# Load and run validation
 	print("Loading validation script...")
 	

@@ -1,0 +1,183 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 4,
+				"name": "space_filling_curve_gallery",
+				"pos": [
+					4,
+					1,
+					6
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "Hilbert3D",
+				"pos": [
+					3,
+					2,
+					3
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [],
+		"issues": [
+			{
+				"description": "Hilbert3D at (3,2,3) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "LSystems_Grammars_And_Curves",
+		"pacing": {
+			"density": 4.0,
+			"reachable_artifacts": 1,
+			"total_artifacts": 2,
+			"walkable_tiles": 78
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			5,
+			1,
+			9
+		],
+		"teleporter": {
+			"dist": 2,
+			"pos": [
+				4,
+				0,
+				8
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "LSystems_Grammars_And_Curves",
+	"sequence": "lsystems",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "Hilbert3D",
+				"pos": [
+					3,
+					2,
+					3
+				]
+			},
+			{
+				"name": "space_filling_curve_gallery",
+				"pos": [
+					4,
+					1,
+					6
+				]
+			}
+		],
+		"dimensions": [
+			8,
+			2,
+			10
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 78,
+			"ground_pct": 97.5,
+			"void": 1,
+			"walls": 1
+		},
+		"map_name": "LSystems_Grammars_And_Curves",
+		"rooms": [
+			{
+				"artifacts": [
+					"space_filling_curve_gallery"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 78
+			}
+		],
+		"spawn": [
+			5,
+			1,
+			9
+		],
+		"teleporter": [
+			4,
+			0,
+			8
+		]
+	},
+	"timestamp": "2026-03-16T12:15:11",
+	"walkthrough": {
+		"map_name": "LSystems_Grammars_And_Curves",
+		"stops": [
+			{
+				"facing": "north",
+				"look_at": [
+					4,
+					1,
+					6
+				],
+				"pos": [
+					5,
+					1,
+					9
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "north",
+						"dist": 4,
+						"name": "space_filling_curve_gallery"
+					},
+					{
+						"direction": "north",
+						"dist": 8,
+						"name": "Hilbert3D"
+					}
+				]
+			},
+			{
+				"approach_from": "north",
+				"facing": "south",
+				"name": "space_filling_curve_gallery",
+				"pos": [
+					4,
+					1,
+					6
+				],
+				"steps_from_prev": 4,
+				"total_steps": 4,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 4,
+						"name": "Hilbert3D"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"pos": [
+					4,
+					0,
+					8
+				],
+				"reachable": true,
+				"steps_from_prev": 0,
+				"total_steps": 4,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 1,
+			"total_steps": 4,
+			"total_stops": 3
+		}
+	}
+}

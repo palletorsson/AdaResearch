@@ -1,81 +1,169 @@
 {
-	"sequences": {
-		"cellularautomata": {
-			"name": "Cellular Automata: Local Rules, Global Patterns",
-			"truth": "Local rules, global patterns. Each cell knows only its neighbors, yet worlds emerge. Rule 110 is Turing complete—simple rules can compute anything.",
-			"qfep_term": "E(S)",
-			"qfep_connection": "Cellular automata demonstrate emergence—the E(S) term manifesting as complex global behavior from simple local entropy. They are laboratories for studying how order and chaos interact at the edge of computation.",
-			"formula": "cell(t+1) = rule(cell(t), neighbors(t))",
-			"demonstration": "Watch Game of Life emerge from four rules. See Rule 30 generate randomness from simplicity. Build patterns that compute.",
-
-			"description": "Emergent complexity from local rules. Each cell updates based only on its immediate neighbors, yet global structures—gliders, oscillators, even computers—emerge. This is computation at the edge of chaos.",
-			"layer": "emergence",
-			"prerequisites": ["primitives", "randomness"],
-			"unlocks": ["swarmintelligence", "proceduralgeneration"],
-
-			"difficulty": "intermediate",
-			"estimated_time": "25-30 minutes",
-
-			"learning_objectives": [
-				"Cellular automata basics: cells, states, neighborhoods, rules",
-				"1D automata: Wolfram's 256 rules, Rule 30, Rule 110",
-				"2D automata: Conway's Game of Life—birth, survival, death",
-				"Emergent structures: gliders, oscillators, still lifes",
-				"Computational universality: Rule 110 is Turing complete",
-				"Edge of chaos: where complex behavior emerges"
-			],
-
-			"content": [
-				"CA_1: Introduction to cellular automata concepts",
-				"CA_2: 1D automata—Wolfram's rule numbering",
-				"CA_3: Rule 30—chaos from simple rules",
-				"CA_4: Rule 110—computation at the edge",
-				"CA_5: Conway's Game of Life basics",
-				"CA_6: Gliders and spaceships",
-				"CA_7: Oscillators and still lifes",
-				"CA_8: Building with Life patterns",
-				"CA_9: 3D cellular automata",
-				"CA_10: Continuous automata",
-				"CA_11: Custom rule exploration",
-				"CA_12: Computational universality"
-			],
-
-			"maps": [
-				"CA_1",
-				"CA_2",
-				"CA_3",
-				"CA_4",
-				"CA_5",
-				"CA_6",
-				"CA_7",
-				"CA_8",
-				"CA_9",
-				"CA_10",
-				"CA_12",
-				"CA_11"
-
-			],
-
-			"axiom_files": [
-				"res://commons/context/clipboard/tutorial_text/cellularautomata_axioms.md",
-				"res://commons/context/clipboard/tutorial_text/wolfram_rules.md",
-				"res://commons/context/clipboard/tutorial_text/game_of_life_axioms.md"
-			],
-
-			"algorithm_paths": {
-				"CA_1": "res://algorithms/cellularautomata/basic/",
-				"CA_5": "res://algorithms/cellularautomata/gameoflife/",
-				"CA_9": "res://algorithms/cellularautomata/3d/"
-			},
-
-			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_cellularautomata",
-			"unlock_requirements": ["array_tutorial"],
-			"completion_rewards": [
-				"automaton_badge",
-				"emergence_badge",
-				"turing_complete_badge"
-			]
+  "sequences": {
+	"cellularautomata": {
+	  "name": "Cellular Automata: Local Rules, Global Patterns",
+	  "truth": "Local rules, global patterns. Each cell knows only its neighbors, yet worlds emerge. Rule 110 is Turing completeâ€”simple rules can compute anything.",
+	  "qfep_term": "E(S)",
+	  "qfep_connection": "Cellular automata demonstrate emergenceâ€”the E(S) term manifesting as complex global behavior from simple local entropy. They are laboratories for studying how order and chaos interact at the edge of computation.",
+	  "formula": "cell(t+1) = rule(cell(t), neighbors(t))",
+	  "demonstration": "Watch Game of Life emerge from four rules. See Rule 30 generate randomness from simplicity. Build patterns that compute.",
+	  "description": "Emergent complexity from local rules. Each cell updates based only on its immediate neighbors, yet global structuresâ€”gliders, oscillators, even computersâ€”emerge. This is computation at the edge of chaos.",
+	  "layer": "emergence",
+	  "prerequisites": [
+		"primitives",
+        "randomness"
+	  ],
+	  "unlocks": [
+		"swarmintelligence",
+        "proceduralgeneration"
+	  ],
+	  "difficulty": "intermediate",
+	  "estimated_time": "25-30 minutes",
+	  "learning_objectives": [
+		"Cellular automata basics: cells, states, neighborhoods, rules",
+		"1D automata: Wolfram's 256 rules, Rule 30, Rule 110",
+		"2D automata: Conway's Game of Lifeâ€”birth, survival, death",
+		"Emergent structures: gliders, oscillators, still lifes",
+		"Computational universality: Rule 110 is Turing complete",
+        "Edge of chaos: where complex behavior emerges"
+	  ],
+	  "content": [
+		"CA_Introduction: Introduction",
+		"CA_ElementaryRules: Elementary Rules",
+		"CA_GameOfLife: Game of Life",
+		"CA_BeyondBinary: Beyond Binary",
+		"CA_ExpandingSpace: Expanding Space",
+		"CA_SoftRules: Soft Rules",
+		"CA_AgentsCircuits: Agents and Circuits",
+        "CA_EdgeOfChaos: Edge of Chaos"
+	  ],
+	  "maps": [
+		"CA_Introduction",
+		"CA_ElementaryRules",
+		"CA_GameOfLife",
+		"CA_BeyondBinary",
+		"CA_ExpandingSpace",
+		"CA_SoftRules",
+		"CA_AgentsCircuits",
+		"CA_EdgeOfChaos",
+        "Chamber_CA"
+	  ],
+	  "axiom_files": [
+		"res://commons/context/clipboard/tutorial_text/cellularautomata_axioms.md",
+		"res://commons/context/clipboard/tutorial_text/wolfram_rules.md",
+        "res://commons/context/clipboard/tutorial_text/game_of_life_axioms.md"
+	  ],
+	  "algorithm_paths": {
+		"CA_Introduction": "res://algorithms/cellularautomata/basic/",
+		"CA_BeyondBinary": "res://algorithms/cellularautomata/gameoflife/",
+		"CA_ExpandingSpace": "res://algorithms/cellularautomata/3d/"
+	  },
+	  "return_to": "lab",
+	  "lab_map": "Lab/map_data_post_cellularautomata",
+	  "unlock_requirements": [
+        "array_tutorial"
+	  ],
+	  "completion_rewards": [
+		"automaton_badge",
+		"emergence_badge",
+        "turing_complete_badge"
+	  ],
+	  "artifact_groups": [
+		{
+		  "map": "CA_Introduction",
+		  "position": "intro",
+		  "artifacts": [
+			"dark_sphere",
+			"persian_rug",
+            "line_network_ca"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Artistic CA highlights: Persian rug pattern and line network introduce visual CA output"
+		},
+		{
+		  "map": "CA_ElementaryRules",
+		  "position": "foundation",
+		  "artifacts": [
+			"structure_growth",
+            "dark_sphere"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Recrystallization and self-organization; building blocks of CA growth patterns"
+		},
+		{
+		  "map": "CA_GameOfLife",
+		  "position": "intro",
+		  "artifacts": [
+			"dark_sphere",
+			"ca_columns",
+			"mirrored_cellular_automata",
+            "ca_bridge"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "CA showcase: columns, mirrored automata, bridge structures, and natural phenomena"
+		},
+		{
+		  "map": "CA_BeyondBinary",
+		  "position": "foundation",
+		  "artifacts": [
+			"dark_sphere",
+			"hexagon_ca_vr",
+			"ca_growth_network",
+			"game_of_life_petri",
+            "mold_network"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Beyond binary: hexagonal CA, growth networks, petri dish life, and mold network dynamics"
+		},
+		{
+		  "map": "CA_ExpandingSpace",
+		  "position": "exploration",
+		  "artifacts": [
+			"dark_sphere",
+			"cellular_automata_3d_tree",
+			"crossway_ca",
+			"decaying_bridge",
+            "ca_chair_test"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Expanding into space: 3D tree growth, crossway patterns, decay, and fractal chair exploration"
+		},
+		{
+		  "map": "CA_SoftRules",
+		  "position": "exploration",
+		  "artifacts": [
+			"rule_30_110_gravity",
+            "ca_sphere"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Soft rules: stochastic Rule 30/110 gravity and CA on spherical non-planar topology"
+		},
+		{
+		  "map": "CA_AgentsCircuits",
+		  "position": "synthesis",
+		  "artifacts": [
+			"ca_rule_explorer",
+			"CellularAutomata3DStacked",
+            "sierpinski_pyramid"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Agents and circuits: interactive rule explorer, 3D stacked automata, and Sierpinski fractal"
+		},
+		{
+		  "map": "CA_EdgeOfChaos",
+		  "position": "synthesis",
+		  "artifacts": [
+			"ca_screen",
+			"self_organization_ca",
+			"disease_spread_ca",
+            "volumetric_fog_ca"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Edge of chaos: screen display, self-organization, disease spread, and volumetric fog CA"
 		}
+	  ]
 	}
+  },
+  "world_phase": "transition",
+  "artifact_groups": []
 }

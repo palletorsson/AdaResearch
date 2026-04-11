@@ -13,7 +13,7 @@ var grid_food: PackedFloat32Array
 # Parameters
 var decay_rate: float = 0.98
 
-func _init(w: int = 128, h: int = 128):
+func _init(w: int = 128, h: int = 128) -> void:
 	width = w
 	height = h
 	size = w * h
@@ -36,7 +36,7 @@ func get_index(x: int, y: int) -> int:
 	return y * width + x
 
 # Add pheromone at position
-func add_pheromone(x: int, y: int, type: int, amount: float):
+func add_pheromone(x: int, y: int, type: int, amount: float) -> void:
 	var idx = get_index(x, y)
 	if type == 0: # HOME
 		grid_home[idx] = min(grid_home[idx] + amount, 10.0) # Cap values
@@ -52,7 +52,7 @@ func get_pheromone(x: int, y: int, type: int) -> float:
 		return grid_food[idx]
 
 # Process Decay (Run potentially every frame or tick)
-func process_decay():
+func process_decay() -> void:
 	for i in range(size):
 		grid_home[i] *= decay_rate
 		grid_food[i] *= decay_rate
@@ -62,7 +62,7 @@ func process_decay():
 		if grid_food[i] < 0.01: grid_food[i] = 0.0
 
 # Process Source Emission (Centers of Power)
-func process_source_emission(centers: Array):
+func process_source_emission(centers: Array) -> void:
 	for c in centers:
 		# Approximate circle as square for speed
 		var r = int(c.radius)
@@ -78,7 +78,7 @@ func process_source_emission(centers: Array):
 					add_pheromone(x, y, c.type, c.amount)
 
 # Process Diffusion (Blur)
-func process_diffusion():
+func process_diffusion() -> void:
 	# Simple 4-neighbor blur (In-place approximate)
 	# Iterate excluding borders
 	for y in range(1, height - 1):

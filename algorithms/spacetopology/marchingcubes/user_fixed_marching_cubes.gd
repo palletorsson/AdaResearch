@@ -320,7 +320,7 @@ class VoxelGrid:
 	var data: PackedFloat32Array
 	var resolution: int
 	
-	func _init(resolution: int):
+	func _init(resolution: int) -> void:
 		self.resolution = resolution
 		# HOLE-FREE: Extend grid by 1 for proper boundary handling
 		var extended_size = (resolution + 2)
@@ -354,7 +354,7 @@ const EDGES = [
 ]
 
 # === HOLE-FREE TERRAIN GENERATION ===
-func generate():
+func generate() -> void:
 	if not NOISE:
 		print("⚠️ No noise assigned - creating default noise")
 		NOISE = FastNoiseLite.new()
@@ -539,13 +539,13 @@ func is_valid_triangle(v1: Vector3, v2: Vector3, v3: Vector3) -> bool:
 # Global variables for mesh building
 var current_vertices: PackedVector3Array = []
 
-func add_triangle_to_mesh(v1: Vector3, v2: Vector3, v3: Vector3):
+func add_triangle_to_mesh(v1: Vector3, v2: Vector3, v3: Vector3) -> void:
 	"""Add triangle to mesh arrays"""
 	current_vertices.append(v1)
 	current_vertices.append(v2)
 	current_vertices.append(v3)
 
-func create_mesh_from_vertices(vertices: PackedVector3Array):
+func create_mesh_from_vertices(vertices: PackedVector3Array) -> void:
 	"""Create final mesh from vertices"""
 	var surface_tool = SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -593,3 +593,6 @@ func get_triangulation(x: int, y: int, z: int, voxel_grid: VoxelGrid) -> Array:
 		return TRIANGULATIONS[idx]
 	else:
 		return [] 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

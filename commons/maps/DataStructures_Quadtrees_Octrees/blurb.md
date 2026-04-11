@@ -1,5 +1,5 @@
-Divide space into four. If a quadrant holds too much, divide again. Recursive bisection along two axes — each split doubles resolution where density demands it. The octree extends this into three dimensions. Eight children instead of four. Same logic, another axis.
+Four quadrants. Void boundaries mark the divisions — a cross cut through the center of the room, splitting space into equal quarters. Some quadrants are dense with platforms. Others are nearly empty. The subdivision is uniform, but the contents are not.
 
-The room is cut into quadrants with void boundaries. Procedural terrain rises and falls — random walks, gaussian peaks, height noise. Objects scatter across the grid. The quadtree decides where to pay attention. Dense clusters get subdivided; empty space stays coarse. One data structure, variable focus.
+A quadtree divides 2D space into four equal regions. If a region contains too many objects, subdivide it into four more. Empty regions stay as single large cells. Dense regions split recursively until each leaf holds a manageable count. Octrees extend this to 3D — eight children instead of four. The structure adapts its resolution to the data.
 
-This is spatial triage. Not every region deserves equal precision. The quadtree encodes a judgment about where complexity lives — and where it doesn't. Uniform grids treat all space as equal. Quadtrees refuse that premise. Resolution follows need. The structure learns to ignore.
+Adaptive spatial triage. The quadtree does not treat all space equally — it allocates detail where detail exists and ignores the rest. The same total area, but the structure's attention is unevenly distributed. Resolution is not a property of the space. It is a response to what the space contains.

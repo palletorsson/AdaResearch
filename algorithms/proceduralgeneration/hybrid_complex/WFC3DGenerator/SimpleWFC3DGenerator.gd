@@ -63,15 +63,15 @@ var tile_rules = {
 var grid = []
 var possible_states = []
 
-func _ready():
+func _ready() -> void:
 	generate_dungeon()
 
-func generate_dungeon():
+func generate_dungeon() -> void:
 	initialize_grid()
 	run_wfc()
 	create_meshes()
 
-func initialize_grid():
+func initialize_grid() -> void:
 	grid = []
 	possible_states = []
 	
@@ -90,7 +90,7 @@ func initialize_grid():
 	# Set boundary constraints
 	apply_boundary_constraints()
 
-func apply_boundary_constraints():
+func apply_boundary_constraints() -> void:
 	# Force walls or empty on boundaries for structure
 	for x in width:
 		for y in height:
@@ -110,7 +110,7 @@ func apply_boundary_constraints():
 					else:
 						possible_states[x][y][z] = [Tile.EMPTY, Tile.WALL]
 
-func run_wfc():
+func run_wfc() -> void:
 	var iterations = 0
 	var max_iterations = width * height * depth * 2
 	
@@ -145,7 +145,7 @@ func find_lowest_entropy_cell():
 	
 	return candidates[randi() % candidates.size()]
 
-func collapse_cell(pos):
+func collapse_cell(pos) -> void:
 	var x = pos[0]
 	var y = pos[1] 
 	var z = pos[2]
@@ -174,7 +174,7 @@ func collapse_cell(pos):
 	grid[x][y][z] = weighted_possibilities[randi() % weighted_possibilities.size()]
 	possible_states[x][y][z] = [grid[x][y][z]]
 
-func propagate_constraints(changed_pos):
+func propagate_constraints(changed_pos) -> void:
 	var stack = [changed_pos]
 	
 	while not stack.is_empty():
@@ -271,7 +271,7 @@ func get_neighbors(x, y, z):
 	
 	return neighbors
 
-func get_opposite_direction(direction):
+func get_opposite_direction(direction) -> int:
 	match direction:
 		0: return 1  # North -> South
 		1: return 0  # South -> North
@@ -289,7 +289,7 @@ func is_fully_collapsed() -> bool:
 					return false
 	return true
 
-func create_meshes():
+func create_meshes() -> void:
 	# Clear existing meshes
 	for child in get_children():
 		child.queue_free()
@@ -301,7 +301,7 @@ func create_meshes():
 				if tile != Tile.EMPTY and tile != -1:
 					create_tile_mesh(tile, Vector3(x, y, z))
 
-func create_tile_mesh(tile_type, grid_pos):
+func create_tile_mesh(tile_type, grid_pos) -> void:
 	var mesh_instance = MeshInstance3D.new()
 	var world_pos = grid_pos * cell_size
 	mesh_instance.position = world_pos
@@ -353,7 +353,7 @@ func create_tile_mesh(tile_type, grid_pos):
 
 # Additional utility functions for enhanced WFC
 
-func add_seed_rooms():
+func add_seed_rooms() -> void:
 	"""Add predefined room patterns to guide generation"""
 	# Place a guaranteed room in the center
 	var center_x = width / 2
@@ -366,7 +366,7 @@ func add_seed_rooms():
 				possible_states[x][0][z] = [Tile.FLOOR]
 				possible_states[x][1][z] = [Tile.EMPTY]
 
-func apply_structural_constraints():
+func apply_structural_constraints() -> void:
 	"""Ensure structural integrity and navigability"""
 	# Ensure ground level has some floors
 	for x in width:
@@ -385,7 +385,7 @@ func apply_structural_constraints():
 				possible_states[x][y][z] = [Tile.PILLAR, Tile.EMPTY]
 
 # Enhanced generation function
-func generate_advanced_dungeon():
+func generate_advanced_dungeon() -> void:
 	"""Generate dungeon with better structure"""
 	initialize_grid()
 	add_seed_rooms()
@@ -394,7 +394,7 @@ func generate_advanced_dungeon():
 	post_process_generation()
 	create_meshes()
 
-func post_process_generation():
+func post_process_generation() -> void:
 	"""Clean up generation artifacts and ensure connectivity"""
 	# Ensure there are some doors
 	var door_count = 0
@@ -408,7 +408,7 @@ func post_process_generation():
 	if door_count < 3:
 		add_doors_to_walls()
 
-func add_doors_to_walls():
+func add_doors_to_walls() -> void:
 	"""Convert some strategic walls to doors for connectivity"""
 	var walls_converted = 0
 	for x in range(1, width - 1):
@@ -426,3 +426,12 @@ func add_doors_to_walls():
 				if neighbors_floors >= 2:
 					grid[x][0][z] = Tile.DOOR
 					walls_converted += 1
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

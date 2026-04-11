@@ -43,7 +43,7 @@ var cell_mesh: Mesh
 var multimesh_instance: MultiMeshInstance3D
 var walk_timer: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	if random_seed != 0:
 		seed(random_seed)
 
@@ -67,7 +67,7 @@ func _ready():
 	if show_all_at_start:
 		reveal_all()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if auto_walk and walk_path.size() > 0:
 		walk_timer += delta
 		var cells_to_reveal = int(walk_timer * walk_speed)
@@ -82,7 +82,7 @@ func _process(delta):
 					reset_walk()
 					reveal_next_cell()
 
-func create_cell_mesh():
+func create_cell_mesh() -> void:
 	"""Create mesh based on tessellation type"""
 	match tessellation_type:
 		TessellationType.CUBE:
@@ -404,7 +404,7 @@ func create_truncated_octahedron_mesh() -> Mesh:
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array)
 	return array_mesh
 
-func generate_lattice():
+func generate_lattice() -> void:
 	"""Generate grid positions and transforms for the tessellation"""
 	lattice_positions.clear()
 	lattice_transforms.clear()
@@ -443,7 +443,7 @@ func generate_lattice():
 
 	print("Generated lattice with ", lattice_positions.size(), " cells")
 
-func generate_walk_path():
+func generate_walk_path() -> void:
 	"""Create a TRUE random walk path through the lattice (neighbor to neighbor)"""
 	walk_path.clear()
 
@@ -539,7 +539,7 @@ func _find_nearest_unvisited(from_index: int, visited: Dictionary) -> int:
 
 	return nearest_index
 
-func setup_multimesh():
+func setup_multimesh() -> void:
 	"""Create multimesh for efficient rendering"""
 	if multimesh_instance:
 		multimesh_instance.queue_free()
@@ -571,7 +571,7 @@ func setup_multimesh():
 
 	print("Multimesh setup complete")
 
-func reveal_next_cell():
+func reveal_next_cell() -> void:
 	"""Reveal the next cell in the walk path"""
 	if current_walk_index >= walk_path.size():
 		return
@@ -593,12 +593,12 @@ func reveal_next_cell():
 	if current_walk_index % 100 == 0:
 		print("Revealed ", current_walk_index, " / ", walk_path.size(), " cells")
 
-func reveal_all():
+func reveal_all() -> void:
 	"""Reveal all cells at once"""
 	for i in range(walk_path.size()):
 		reveal_next_cell()
 
-func reset_walk():
+func reset_walk() -> void:
 	"""Reset the walk to the beginning"""
 	# Hide all cells
 	var mm = multimesh_instance.multimesh
@@ -615,13 +615,13 @@ func reset_walk():
 	print("Walk reset")
 
 ## Public API
-func pause_walk():
+func pause_walk() -> void:
 	auto_walk = false
 
-func resume_walk():
+func resume_walk() -> void:
 	auto_walk = true
 
-func set_tessellation_type(type: TessellationType):
+func set_tessellation_type(type: TessellationType) -> void:
 	tessellation_type = type
 	create_cell_mesh()
 	setup_multimesh()
@@ -635,3 +635,12 @@ func get_stats() -> Dictionary:
 		"revealed_cells": revealed_indices.size(),
 		"walk_progress": float(current_walk_index) / float(walk_path.size()) if walk_path.size() > 0 else 0.0
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

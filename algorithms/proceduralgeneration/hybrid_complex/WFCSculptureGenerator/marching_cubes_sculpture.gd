@@ -46,7 +46,7 @@ var mesh_instance : MeshInstance3D
 var camera : Camera3D
 var camera_rotation : Vector3 = Vector3.ZERO
 
-func _ready():
+func _ready() -> void:
 	if sculpture_seed > 0:
 		seed(sculpture_seed)
 	
@@ -55,20 +55,20 @@ func _ready():
 	if auto_generate_on_ready:
 		call_deferred("generate_sculpture")
 
-func _generate(value):
+func _generate(value) -> void:
 	if value:
 		generate_sculpture()
 
-func _clear(value):
+func _clear(value) -> void:
 	if value:
 		clear_sculpture()
 
-func _set_wireframe(value):
+func _set_wireframe(value) -> void:
 	show_wireframe = value
 	if mesh_instance and mesh_instance.material_override:
 		mesh_instance.material_override.wireframe = value
 
-func setup_camera():
+func setup_camera() -> void:
 	# Create fly camera for exploration
 	camera = Camera3D.new()
 	camera.name = "ExplorationCamera"
@@ -77,7 +77,7 @@ func setup_camera():
 	add_child(camera)
 	camera.make_current()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if not enable_fly_camera or not camera:
 		return
 	
@@ -87,7 +87,7 @@ func _input(event):
 		camera_rotation.x = clamp(camera_rotation.x, -PI/2, PI/2)
 		camera.rotation = camera_rotation
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if not enable_fly_camera or not camera:
 		return
 	
@@ -109,7 +109,7 @@ func _process(delta):
 	if input_dir.length() > 0:
 		camera.position += input_dir.normalized() * camera_speed * delta
 
-func generate_sculpture():
+func generate_sculpture() -> void:
 	print("🎨 Generating marching cubes sculpture...")
 	clear_sculpture()
 	
@@ -362,7 +362,7 @@ func simplex_noise(p: Vector3) -> float:
 	# Simple 3D noise function (simplified - you can use a better implementation)
 	return sin(p.x * 2.3 + p.y * 1.7) * cos(p.z * 1.9 + p.x * 2.1) * sin(p.y * 2.5 + p.z * 1.8)
 
-func create_marching_cubes_mesh(density_field: Array):
+func create_marching_cubes_mesh(density_field: Array) -> void:
 	print("🔨 Creating mesh from density field...")
 	
 	# Create mesh using simplified surface extraction
@@ -467,7 +467,7 @@ func create_marching_cubes_mesh(density_field: Array):
 		print("⚠️ No mesh generated - no surface found")
 		print("   Try adjusting iso_level or checking density values")
 
-func clear_sculpture():
+func clear_sculpture() -> void:
 	if mesh_instance:
 		mesh_instance.queue_free()
 		mesh_instance = null
@@ -480,3 +480,11 @@ func get_tri_table() -> Array:
 	# Marching cubes triangle table (simplified)
 	return []
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

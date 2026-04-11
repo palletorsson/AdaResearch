@@ -30,7 +30,7 @@ const MODULOR_UNITS = {
 	"torso_width": 0.35,
 }
 
-func _ready():
+func _ready() -> void:
 	mesh_instance = $LineMesh
 	_spawn_modulor_points()
 	_update_line()
@@ -38,7 +38,7 @@ func _ready():
 func _process(_delta):
 	_update_line()
 
-func _spawn_modulor_points():
+func _spawn_modulor_points() -> void:
 	var parent = $Points
 	points.clear()
 
@@ -142,7 +142,7 @@ func _get_modulor_positions() -> Array[Vector3]:
 
 	return positions
 
-func _update_line():
+func _update_line() -> void:
 	if points.size() < 2:
 		return
 
@@ -200,3 +200,12 @@ func _create_line_material() -> ShaderMaterial:
 	mat.set_shader_parameter("thickness_variation", 0.0)
 	mat.set_shader_parameter("pulse_frequency", 0.0)
 	return mat
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

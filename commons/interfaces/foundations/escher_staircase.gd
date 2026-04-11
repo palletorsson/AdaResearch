@@ -11,6 +11,16 @@ extends Node3D
 
 class_name EscherStaircase
 
+# @identity
+# essence: each step locally valid; global loop returns to start — the Penrose stairs
+# desire: climb "up" forever and arrive where you started — feel the paradox in your legs
+# critical_parameter: steps_per_side — more steps make the impossibility more convincing
+# triggers: climb_step() advances the highlight; completing a full loop fires paradox_completed
+# emerges: the visceral understanding that local consistency does not guarantee global consistency
+# needs: VR step-climbing interaction [missing] — has climb_step() API but no physical trigger
+# relationships: visualizes godel_statement_plaque (local proof steps valid, global conclusion impossible); contrasts russell_set_box (self-reference vs spatial paradox)
+# truth: locally coherent does not mean globally possible — this is Godel's incompleteness made architectural
+
 signal step_taken(step_index: int, direction: String)
 signal paradox_completed()
 
@@ -168,6 +178,7 @@ func _create_highlight() -> void:
 	highlight.name = "StepHighlight"
 	var mesh = SphereMesh.new()
 	mesh.radius = 0.1
+	mesh.height = 0.2
 	highlight.mesh = mesh
 	
 	var mat = StandardMaterial3D.new()

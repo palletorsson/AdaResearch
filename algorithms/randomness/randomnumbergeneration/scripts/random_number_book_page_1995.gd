@@ -190,3 +190,12 @@ func _cascade_step() -> void:
 				if flow_idx < flowing.size():
 					(_cells[row][col] as Label3D).text = flowing[flow_idx]
 					flow_idx += 1
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

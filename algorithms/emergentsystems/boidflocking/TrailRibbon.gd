@@ -1,4 +1,4 @@
-﻿extends MeshInstance3D
+extends MeshInstance3D
 
 @export var length: int = 30
 @export var width: float = 0.2
@@ -6,7 +6,7 @@
 
 var history = []
 
-func _ready():
+func _ready() -> void:
 	mesh = ImmediateMesh.new()
 	
 	var mat = StandardMaterial3D.new()
@@ -34,7 +34,7 @@ func _process(_delta):
 	
 	_draw_ribbon()
 
-func _draw_ribbon():
+func _draw_ribbon() -> void:
 	mesh.clear_surfaces()
 	if history.size() < 2: return
 	
@@ -59,3 +59,6 @@ func _draw_ribbon():
 		mesh.surface_add_vertex(pos + right * w)
 		
 	mesh.surface_end()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -5,9 +5,11 @@
 [node name="CoordinateAxesXY" type="Node3D"]
 
 [node name="AxisX" parent="." instance=ExtResource("1_line")]
+color = Color(0.9, 0.15, 0.15, 1)
 
 [node name="AxisY" parent="." instance=ExtResource("1_line")]
 transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+color = Color(0.15, 0.8, 0.15, 1)
 
 [node name="Labels" type="Node3D" parent="."]
 

@@ -93,6 +93,6 @@ Glitch reveals the fragility of digital systems — and finds beauty in their fa
 
 ## See Also
 
-- `effects/` — Other visual effects
+- `postprocessing/` — Other visual effects
 - `shaders/` — GPU-based corruption
 - `randomness/` — Stochastic processes

@@ -52,7 +52,7 @@ var wall_material: StandardMaterial3D
 var floor_material: StandardMaterial3D
 var path_material: StandardMaterial3D
 
-func _ready():
+func _ready() -> void:
 	_create_materials()
 	_initialize_maze()
 	_create_floor_and_ceiling()
@@ -66,14 +66,14 @@ func _ready():
 	else:
 		_generate_instant()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if generating:
 		generation_timer += delta
 		if generation_timer >= generation_speed:
 			_generation_step()
 			generation_timer = 0.0
 
-func _create_materials():
+func _create_materials() -> void:
 	# Wall material
 	wall_material = StandardMaterial3D.new()
 	wall_material.albedo_color = wall_color
@@ -89,7 +89,7 @@ func _create_materials():
 	path_material.albedo_color = visited_color
 	path_material.roughness = 0.9
 
-func _initialize_maze():
+func _initialize_maze() -> void:
 	maze.clear()
 	visited.clear()
 
@@ -107,7 +107,7 @@ func _initialize_maze():
 		for x in range(1, maze_width, 2):
 			maze[y][x] = false
 
-func _create_floor_and_ceiling():
+func _create_floor_and_ceiling() -> void:
 	var total_width = maze_width * cell_size
 	var total_depth = maze_height * cell_size
 
@@ -132,7 +132,7 @@ func _create_floor_and_ceiling():
 	floor_body.position = Vector3(total_width / 2 - cell_size / 2, -0.1, total_depth / 2 - cell_size / 2)
 	add_child(floor_body)
 
-func _setup_lighting():
+func _setup_lighting() -> void:
 	# Add subtle ambient lighting throughout the maze
 	var light = DirectionalLight3D.new()
 	light.name = "MazeLight"
@@ -142,7 +142,7 @@ func _setup_lighting():
 	light.shadow_enabled = false  # Better VR performance
 	add_child(light)
 
-func _create_maze_visuals():
+func _create_maze_visuals() -> void:
 	# Clear existing
 	for child in get_children():
 		if child.name.begins_with("Wall_"):
@@ -194,7 +194,7 @@ func _create_wall_collider(x: int, y: int) -> StaticBody3D:
 
 	return body
 
-func start_generation():
+func start_generation() -> void:
 	current_cell = Vector2i(1, 1)
 	visited[1][1] = true
 	generation_stack.clear()
@@ -203,7 +203,7 @@ func start_generation():
 
 	_highlight_cell(current_cell, current_color)
 
-func _generation_step():
+func _generation_step() -> void:
 	var neighbors = _get_unvisited_neighbors(current_cell)
 
 	if neighbors.size() > 0:
@@ -241,7 +241,7 @@ func _get_unvisited_neighbors(cell: Vector2i) -> Array:
 				neighbors.append(next)
 	return neighbors
 
-func _remove_wall(x: int, y: int):
+func _remove_wall(x: int, y: int) -> void:
 	maze[y][x] = false
 
 	# Remove visual
@@ -254,11 +254,11 @@ func _remove_wall(x: int, y: int):
 		wall_colliders[y][x].queue_free()
 		wall_colliders[y][x] = null
 
-func _highlight_cell(_cell: Vector2i, color: Color):
+func _highlight_cell(_cell: Vector2i, color: Color) -> void:
 	# During generation, we highlight path cells by creating temporary markers
 	pass  # Skip for VR performance
 
-func _create_entrance_exit():
+func _create_entrance_exit() -> void:
 	# Entrance at top
 	maze[0][1] = false
 	_remove_wall(1, 0)
@@ -269,7 +269,7 @@ func _create_entrance_exit():
 	_remove_wall(maze_width - 2, maze_height - 1)
 	_add_marker(maze_width - 2, maze_height - 1, exit_color, "Exit")
 
-func _add_marker(x: int, y: int, color: Color, marker_name: String):
+func _add_marker(x: int, y: int, color: Color, marker_name: String) -> void:
 	# Add a glowing marker at entrance/exit
 	var marker = MeshInstance3D.new()
 	marker.name = marker_name + "Marker"
@@ -290,14 +290,14 @@ func _add_marker(x: int, y: int, color: Color, marker_name: String):
 	marker.position = Vector3(x * cell_size, 0.05, y * cell_size)
 	add_child(marker)
 
-func _finalize_visuals():
+func _finalize_visuals() -> void:
 	# Remove all remaining wall highlights, use final colors
 	for y in range(maze_height):
 		for x in range(maze_width):
 			if cell_meshes[y][x]:
 				cell_meshes[y][x].material_override = wall_material
 
-func _generate_instant():
+func _generate_instant() -> void:
 	# Generate maze without animation
 	current_cell = Vector2i(1, 1)
 	visited[1][1] = true
@@ -326,7 +326,7 @@ func _generate_instant():
 	_create_entrance_exit()
 	_finalize_visuals()
 
-func regenerate():
+func regenerate() -> void:
 	# Clear and regenerate
 	for child in get_children():
 		if child.name.begins_with("Wall_") or child.name.begins_with("WallCollider_"):
@@ -360,7 +360,7 @@ func get_maze_center() -> Vector3:
 func get_total_size() -> Vector3:
 	return Vector3(maze_width * cell_size, wall_height, maze_height * cell_size)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_R:
@@ -373,3 +373,12 @@ func _input(event):
 				if not generating:
 					show_generation = false
 					regenerate()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

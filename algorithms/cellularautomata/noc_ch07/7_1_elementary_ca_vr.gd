@@ -141,3 +141,12 @@ func _update_all_visuals() -> void:
 
 func _update_status() -> void:
 	_status_label.text = "Rule %d" % rule_number
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -25,12 +25,12 @@ var current_angle = 0.0
 var panel_root
 
 # Called when the node enters the scene tree for the first time
-func _ready():
+func _ready() -> void:
 	create_pit()
 	create_frame()
 	create_panels()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_opening and current_angle < max_open_angle:
 		current_angle += open_speed * delta * 50
 		current_angle = min(current_angle, max_open_angle)
@@ -40,7 +40,7 @@ func _process(delta):
 		current_angle = max(current_angle, 0)
 		update_panel_rotation()
 
-func update_panel_rotation():
+func update_panel_rotation() -> void:
 	for i in range(grid_size_x):
 		for j in range(grid_size_z):
 			var panel = panels[i][j]
@@ -90,7 +90,7 @@ func update_panel_rotation():
 			
 			panel.translate(hinge_offset)
 
-func create_pit():
+func create_pit() -> void:
 	# Create the pit below the panels
 	var pit = CSGBox3D.new()
 	pit.name = "Pit"
@@ -110,7 +110,7 @@ func create_pit():
 	
 	add_child(pit)
 
-func create_frame():
+func create_frame() -> void:
 	# Create the frame around the panels
 	var frame_width = grid_size_x * (panel_size + gap_size) + gap_size
 	var frame_depth = grid_size_z * (panel_size + gap_size) + gap_size
@@ -140,7 +140,7 @@ func create_frame():
 	frame.add_child(hole)
 	add_child(frame)
 
-func create_panels():
+func create_panels() -> void:
 	# Create panel root to organize the scene
 	panel_root = Node3D.new()
 	panel_root.name = "Panels"
@@ -174,11 +174,11 @@ func create_panels():
 			panel_root.add_child(panel)
 			panels[i].append(panel)
 
-func toggle_panels():
+func toggle_panels() -> void:
 	is_opening = !is_opening
 
 # Set up input handling
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_SPACE:
 			toggle_panels()
@@ -189,3 +189,12 @@ func _input(event):
 # 3. Attach this script to the root node
 # 4. Optionally create materials and assign them in the Inspector
 # 5. Run the scene and press Space to toggle the panels
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

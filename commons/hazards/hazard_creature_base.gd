@@ -24,6 +24,20 @@ enum BaseState { IDLE, PATROL, DETECT, CHASE, ATTACK, STUNNED, DEAD }
 @export var patrol_width: float = 3.0
 @export var patrol_depth: float = 2.0
 
+# ── Personality (from HazardManager) ─────────────────────────────────────
+
+## Personality determines high-level behavior: foe attacks, friend follows.
+## Set by ProximitySpawner or configure(). Defaults to "foe" (legacy behavior).
+var _personality: String = "foe"
+
+# Personality-derived behavior params (set in _apply_personality)
+var _can_chase: bool = true
+var _can_damage: bool = true
+var _flee_from_player: bool = false
+var _orbit_player: bool = false
+var _follow_player: bool = false
+var _approach_speed_factor: float = 1.0
+
 # ── State ────────────────────────────────────────────────────────────────
 
 var _health: float = 0.0
@@ -53,6 +67,7 @@ func _ready() -> void:
 	_build_mesh()
 	_find_player()
 	add_to_group("enemy")
+	call_deferred("_query_hazard_manager")
 	_on_ready()
 
 
@@ -118,7 +133,14 @@ func _process_visual(_delta: float) -> void:
 func _process_idle(_delta: float) -> void:
 	velocity = velocity.move_toward(Vector3.ZERO, 0.15)
 	if _get_player_distance() <= detection_radius:
-		_set_state(BaseState.DETECT)
+		if _follow_player:
+			_set_state(BaseState.CHASE)  # Repurposed as "follow"
+		elif _orbit_player:
+			_set_state(BaseState.CHASE)  # Repurposed as "orbit"
+		elif _flee_from_player:
+			_set_state(BaseState.CHASE)  # Repurposed as "flee"
+		elif _can_chase:
+			_set_state(BaseState.DETECT)
 
 
 func _process_patrol(delta: float) -> void:
@@ -148,13 +170,21 @@ func _process_patrol(delta: float) -> void:
 	velocity.y = 0.0
 
 	if _get_player_distance() <= detection_radius:
-		_set_state(BaseState.DETECT)
+		if _flee_from_player:
+			_set_state(BaseState.CHASE)
+		elif _follow_player or _orbit_player:
+			_set_state(BaseState.CHASE)
+		elif _can_chase:
+			_set_state(BaseState.DETECT)
 
 
 func _process_detect(_delta: float) -> void:
 	velocity = velocity.move_toward(Vector3.ZERO, 0.2)
 	if _state_time >= 0.4:
-		_set_state(BaseState.CHASE)
+		if _can_chase:
+			_set_state(BaseState.CHASE)
+		else:
+			_set_state(BaseState.PATROL)
 
 
 func _process_chase(delta: float) -> void:
@@ -164,9 +194,63 @@ func _process_chase(delta: float) -> void:
 		_set_state(BaseState.PATROL)
 		return
 
-	if is_instance_valid(_player_node):
-		var to_player: Vector3 = _player_node.global_position - global_position
-		to_player.y = 0.0
+	if not is_instance_valid(_player_node):
+		velocity.x = 0.0
+		velocity.z = 0.0
+		velocity.y = 0.0
+		return
+
+	var to_player: Vector3 = _player_node.global_position - global_position
+	to_player.y = 0.0
+
+	# Personality-aware movement
+	if _flee_from_player:
+		# Wary: flee away from player
+		if to_player.length() > 0.1:
+			var flee_dir: Vector3 = -to_player.normalized()
+			var flee_speed: float = chase_speed * _approach_speed_factor
+			velocity.x = flee_dir.x * flee_speed
+			velocity.z = flee_dir.z * flee_speed
+			_face_direction(flee_dir, delta * 3.0)
+		if dist > detection_radius * 1.5:
+			_set_state(BaseState.PATROL)
+	elif _orbit_player:
+		# Curious: orbit at a safe distance (3-5m)
+		var orbit_dist := 4.0
+		var orbit_speed: float = patrol_speed * _approach_speed_factor
+		if dist > orbit_dist + 1.0:
+			# Move toward orbit radius
+			var move_dir := to_player.normalized()
+			velocity.x = move_dir.x * orbit_speed
+			velocity.z = move_dir.z * orbit_speed
+			_face_direction(move_dir, delta * 3.0)
+		elif dist < orbit_dist - 1.0:
+			# Too close, back off
+			var away_dir := -to_player.normalized()
+			velocity.x = away_dir.x * orbit_speed * 0.5
+			velocity.z = away_dir.z * orbit_speed * 0.5
+		else:
+			# Orbit: perpendicular movement
+			var perp := Vector3(-to_player.normalized().z, 0, to_player.normalized().x)
+			velocity.x = perp.x * orbit_speed
+			velocity.z = perp.z * orbit_speed
+			_face_direction(to_player.normalized(), delta * 2.0)
+	elif _follow_player:
+		# Friend: follow at comfortable distance (2-3m)
+		var follow_dist := 2.5
+		if dist > follow_dist + 0.5:
+			var move_dir := to_player.normalized()
+			var follow_speed: float = chase_speed * _approach_speed_factor
+			velocity.x = move_dir.x * follow_speed
+			velocity.z = move_dir.z * follow_speed
+			_face_direction(move_dir, delta * 3.0)
+		else:
+			# Close enough, slow down
+			velocity.x = velocity.x * 0.85
+			velocity.z = velocity.z * 0.85
+			_face_direction(to_player.normalized(), delta * 1.0)
+	else:
+		# Foe: standard aggressive chase
 		if to_player.length() > 0.1:
 			var move_dir: Vector3 = to_player.normalized()
 			velocity.x = move_dir.x * chase_speed
@@ -175,9 +259,6 @@ func _process_chase(delta: float) -> void:
 		else:
 			velocity.x = 0.0
 			velocity.z = 0.0
-	else:
-		velocity.x = 0.0
-		velocity.z = 0.0
 
 	velocity.y = 0.0
 
@@ -273,7 +354,7 @@ func _on_damaged(_amount: float) -> void:
 # ── Contact Damage ──────────────────────────────────────────────────────
 
 func _handle_contact_damage() -> void:
-	if _contact_timer > 0.0 or contact_damage <= 0.0:
+	if _contact_timer > 0.0 or contact_damage <= 0.0 or not _can_damage:
 		return
 	for i in range(get_slide_collision_count()):
 		var collision: KinematicCollision3D = get_slide_collision(i)
@@ -317,6 +398,84 @@ func _face_direction(dir: Vector3, weight: float = 0.1) -> void:
 	var target_angle: float = atan2(dir.x, dir.z)
 	rotation.y = lerp_angle(rotation.y, target_angle, clamp(weight, 0.0, 1.0))
 
+
+# ── Personality ─────────────────────────────────────────────────────────
+
+func set_personality(personality: String) -> void:
+	_personality = personality
+	_apply_personality()
+
+func get_personality() -> String:
+	return _personality
+
+func _apply_personality() -> void:
+	match _personality:
+		"foe":
+			_can_chase = true
+			_can_damage = true
+			_flee_from_player = false
+			_orbit_player = false
+			_follow_player = false
+			_approach_speed_factor = 1.0
+		"wary":
+			_can_chase = false
+			_can_damage = true
+			_flee_from_player = true
+			_orbit_player = false
+			_follow_player = false
+			_approach_speed_factor = 1.2
+			contact_damage *= 0.5
+		"neutral":
+			_can_chase = false
+			_can_damage = false
+			_flee_from_player = false
+			_orbit_player = false
+			_follow_player = false
+			_approach_speed_factor = 0.0
+			contact_damage = 0.0
+		"curious":
+			_can_chase = false
+			_can_damage = false
+			_flee_from_player = false
+			_orbit_player = true
+			_follow_player = false
+			_approach_speed_factor = 0.4
+			contact_damage = 0.0
+		"friend":
+			_can_chase = false
+			_can_damage = false
+			_flee_from_player = false
+			_orbit_player = false
+			_follow_player = true
+			_approach_speed_factor = 0.6
+			contact_damage = 0.0
+
+func _query_hazard_manager() -> void:
+	var hm = get_node_or_null("/root/HazardManager")
+	if not hm:
+		return
+	# Derive hazard_type from scene filename or class
+	var hazard_type := _get_hazard_type()
+	if hazard_type.is_empty():
+		return
+	var personality: String = hm.get_hazard_personality(hazard_type)
+	if personality != _personality:
+		set_personality(personality)
+
+func _get_hazard_type() -> String:
+	# Derive from scene file path: res://commons/hazards/miura_crawler/... -> miura_crawler
+	var path := scene_file_path
+	if path.is_empty() and owner:
+		path = owner.scene_file_path
+	if path.is_empty():
+		return ""
+	var parts := path.split("/")
+	for i in range(parts.size() - 1, -1, -1):
+		if parts[i].ends_with(".tscn") or parts[i].ends_with(".gd"):
+			continue
+		if parts[i] != "commons" and parts[i] != "hazards":
+			return parts[i]
+	return name.to_snake_case()
 
 # ── Configuration ───────────────────────────────────────────────────────
 

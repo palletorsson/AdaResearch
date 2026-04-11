@@ -192,3 +192,12 @@ func _make_signature() -> String:
 		else:
 			layers_sig.append(layer)
 	return str(columns, rows, wall_width, wall_height, wall_depth, base_frequency, base_amplitude, phase, layers_sig, bottom_color, mid_color, top_color)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

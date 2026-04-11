@@ -1,0 +1,40 @@
+{
+  "version": 3,
+  "generator": "ada_facade_builder",
+  "facade": {
+    "bays": 3,
+    "stories": 4,
+    "symmetry": "bilateral",
+    "total_width": 10.0,
+    "total_height": 14.0,
+    "wall_depth": 0.30
+  },
+  "zones": [
+    { "row": 0, "name": "Gable", "height_multiplier": 0.6 },
+    { "row": 1, "name": "Rose Window", "height_multiplier": 1.0 },
+    { "row": 2, "name": "Arcade Gallery", "height_multiplier": 0.8 },
+    { "row": 3, "name": "Portal", "height_multiplier": 1.6 }
+  ],
+  "materials": {
+    "wall": "#5A554E",
+    "zones": {
+      "Gable": { "color": "#4E4944", "type": "stone_cornice" },
+      "Rose Window": { "color": "#5A554E", "type": "dressed_stone" },
+      "Arcade Gallery": { "color": "#635E57", "type": "dressed_stone" },
+      "Portal": { "color": "#504B46", "type": "rusticated_stone" }
+    }
+  },
+  "placements": [
+    { "col": 0, "row": 0, "part": "pilaster", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 0, "part": "pediment_tri", "col_span": 1, "row_span": 1, "params": {} },
+
+    { "col": 0, "row": 1, "part": "pilaster", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 1, "part": "rose_window", "col_span": 1, "row_span": 1, "params": { "spoke_count": 12 } },
+
+    { "col": 0, "row": 2, "part": "pointed_arch", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 2, "part": "pointed_arch", "col_span": 1, "row_span": 1, "params": {} },
+
+    { "col": 0, "row": 3, "part": "pilaster", "col_span": 1, "row_span": 1, "params": {} },
+    { "col": 1, "row": 3, "part": "arched_window", "col_span": 1, "row_span": 1, "params": {} }
+  ]
+}

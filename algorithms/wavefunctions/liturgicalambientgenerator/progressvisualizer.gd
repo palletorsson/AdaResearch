@@ -22,16 +22,16 @@ var fill_material: StandardMaterial3D
 # Signals
 signal visualization_complete
 
-func _ready():
+func _ready() -> void:
 	setup_progress_bar()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Smooth progress animation
 	if abs(current_progress - target_progress) > 0.001:
 		current_progress = lerp(current_progress, target_progress, delta * 3.0)
 		update_progress_bar()
 
-func setup_progress_bar():
+func setup_progress_bar() -> void:
 	# Container positioned for VR comfort
 	progress_container = Node3D.new()
 	# Position closer and more visible for VR
@@ -88,7 +88,7 @@ func setup_progress_bar():
 	progress_container.add_child(progress_text)
 
 
-func update_progress_bar():
+func update_progress_bar() -> void:
 	if not progress_fill:
 		print("ERROR: progress_fill is null!")
 		return
@@ -110,7 +110,7 @@ func update_progress_bar():
 	fill_material.albedo_color = progress_color
 	fill_material.emission = progress_color * 0.5
 
-func update_vr_positioning():
+func update_vr_positioning() -> void:
 	# Position the progress bar in front of the player's view for VR
 	var camera = get_viewport().get_camera_3d()
 	if camera:
@@ -128,7 +128,7 @@ func update_vr_positioning():
 		# Make it face the camera
 		progress_container.look_at(camera.global_position, Vector3.UP)
 
-func update_progress(progress: float):
+func update_progress(progress: float) -> void:
 	target_progress = clamp(progress, 0.0, 1.0)
 	
 	# Check if complete
@@ -140,26 +140,26 @@ func update_progress(progress: float):
 		add_child(timer)
 		timer.start()
 
-func fade_out():
+func fade_out() -> void:
 	var tween = create_tween()
 	tween.tween_property(progress_container, "modulate:a", 0.0, 1.0)
 	tween.tween_callback(func(): visualization_complete.emit())
 
 # Public interface for the main generator
-func connect_to_generator(generator_node):
+func connect_to_generator(generator_node) -> void:
 	if generator_node.has_signal("liturgical_progress_updated"):
 		generator_node.liturgical_progress_updated.connect(_on_progress_updated)
 	if generator_node.has_signal("sacred_generation_complete"):
 		generator_node.sacred_generation_complete.connect(_on_generation_complete)
 
-func _on_progress_updated(progress: float):
+func _on_progress_updated(progress: float) -> void:
 	update_progress(progress)
 
-func _on_generation_complete():
+func _on_generation_complete() -> void:
 	update_progress(1.0)
 
 # Debug function to test progress bar visibility
-func debug_progress_bar():
+func debug_progress_bar() -> void:
 	print("=== PROGRESS BAR DEBUG ===")
 	print("Container position: ", progress_container.global_position)
 	print("Container scale: ", progress_container.scale)
@@ -168,3 +168,12 @@ func debug_progress_bar():
 	print("Text exists: ", progress_text != null)
 	print("Current progress: ", current_progress)
 	print("=========================")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

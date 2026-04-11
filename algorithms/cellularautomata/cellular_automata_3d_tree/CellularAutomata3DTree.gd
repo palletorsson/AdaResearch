@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: square_layer(n) → ca_prune(edge, isolation, random) → tree silhouette
+# desire: To grow upward layer by layer, pruning itself into a tree shape through local elimination rules
+# critical_parameter: edge_pruning_chance — controls how aggressively corners are carved, shaping the crown profile
+# triggers: High isolation_pruning → skeletal branches; low → dense canopy; changing base_size → bonsai vs oak
+# emerges: Tree-like silhouettes from rectangular layers and three simple removal rules — no tree model was coded
+# needs: VR pruning sliders [missing], growth speed control [missing]
+# relationships: Feeds into CA_ExpandingSpace. Contrasts with lsystem_tree (subtractive CA vs additive grammar).
+# truth: A tree is what remains when you remove everything that isn't tree.
+
 @export_category("Tree Settings")
 @export var base_size: int = 4
 @export var max_height: int = 20
@@ -20,7 +30,7 @@ var is_growing = false
 
 var multi_mesh_instance: MultiMeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	# Try to get existing MultiMeshInstance3D node, or create one
 	if has_node("MultiMeshInstance3D"):
 		multi_mesh_instance = get_node("MultiMeshInstance3D")
@@ -33,14 +43,14 @@ func _ready():
 	if auto_play:
 		start_growth()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_growing:
 		generation_timer += delta
 		if generation_timer >= generation_interval:
 			generation_timer = 0.0
 			grow_next_level()
 
-func _setup_multimesh():
+func _setup_multimesh() -> void:
 	multi_mesh_instance = MultiMeshInstance3D.new()
 	multi_mesh_instance.name = "MultiMeshInstance3D"
 	add_child(multi_mesh_instance)
@@ -53,7 +63,7 @@ func _setup_multimesh():
 	multimesh.instance_count = 0
 	multi_mesh_instance.multimesh = multimesh
 
-func _setup_default_gradient():
+func _setup_default_gradient() -> void:
 	gradient = Gradient.new()
 	# Default gradient has 2 points at 0.0 and 1.0
 	
@@ -68,7 +78,7 @@ func _setup_default_gradient():
 	# Add middle point (Leaves)
 	gradient.add_point(0.4, Color("388e3c"))
 
-func start_growth():
+func start_growth() -> void:
 	current_level = 0
 	grid.clear()
 	if multi_mesh_instance.multimesh:
@@ -81,7 +91,7 @@ func start_growth():
 	_update_multimesh()
 	is_growing = true
 
-func grow_next_level():
+func grow_next_level() -> void:
 	# Expansion phase: levels 8-10
 	if current_level >= 8 and current_level <= 10:
 		var size = (base_size + 1) + (current_level - 8)
@@ -108,7 +118,7 @@ func grow_next_level():
 	
 	_update_multimesh()
 
-func create_square_layer(level: int, size: int):
+func create_square_layer(level: int, size: int) -> void:
 	for x in range(size):
 		for z in range(size):
 			var grid_pos = Vector3i(x, level, z)
@@ -116,7 +126,7 @@ func create_square_layer(level: int, size: int):
 			# This simplifies the pruning logic which assumes a center
 			grid[grid_pos] = 1
 
-func apply_ca_pruning(level: int, size: int):
+func apply_ca_pruning(level: int, size: int) -> void:
 	var cubes_to_remove = []
 	var center = float(size) / 2.0 - 0.5
 
@@ -165,7 +175,7 @@ func count_neighbors_2d(x: int, level: int, z: int, size: int) -> int:
 				count += 1
 	return count
 
-func _update_multimesh():
+func _update_multimesh() -> void:
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh: return
 	
 	var mm = multi_mesh_instance.multimesh
@@ -203,3 +213,12 @@ func _get_size_for_level(level: int) -> int:
 	if level >= 11 and level <= 14: return base_size + 3
 	if level >= 15 and level <= 18: return (base_size + 3) - ((level - 15) * 2)
 	return 0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

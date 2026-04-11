@@ -7,6 +7,17 @@ extends Node3D
 ## Protocol: IACP v2.2
 
 # The Driver (Rotating Ball)
+
+# @identity
+# essence: p(t) = (r*cos(omega*t), r*sin(omega*t), v_z*t) — helix as circle extruded through time
+# desire: Watch circular motion leave a helical trail as time flows along the Z axis
+# critical_parameter: radius — determines the helix width, making rotation visible as spatial coil
+# triggers: continuous time progression extends the helix; rotation_speed sets coil tightness
+# emerges: visual proof that a helix is circular motion plus linear translation
+# needs: VR viewpoint control [has], speed adjustment [missing]
+# relationships: depends on ImmediateMesh trail; contrasts with UnitCircleTrig (projection vs extrusion); unlocks helix intuition
+# truth: A helix is what happens when rotation refuses to stay in one plane.
+
 @onready var pivot: Node3D = $Pivot
 @onready var ball: MeshInstance3D = $Pivot/Ball
 
@@ -24,7 +35,7 @@ var time: float = 0.0
 var trail_points: Array[Vector3] = []
 var end_pivots: Array[Node3D] = []
 
-func _ready():
+func _ready() -> void:
 	_setup_visuals()
 	
 	# Setup ball position
@@ -45,7 +56,7 @@ func _ready():
 	_create_ring_assembly(-3.0, "EndAssembly1")
 	_create_ring_assembly(-6.0, "EndAssembly2")
 
-func _create_ring_assembly(z_pos: float, assembly_name: String):
+func _create_ring_assembly(z_pos: float, assembly_name: String) -> void:
 	# Root for the end assembly
 	var end_root = Node3D.new()
 	end_root.name = assembly_name
@@ -80,7 +91,7 @@ func _create_ring_assembly(z_pos: float, assembly_name: String):
 	end_ball.transform = ball.transform # Copy position (radius)
 	new_pivot.add_child(end_ball)
 
-func _setup_visuals():
+func _setup_visuals() -> void:
 	trail_mesh = ImmediateMesh.new()
 	trail_instance.mesh = trail_mesh
 	
@@ -91,7 +102,7 @@ func _setup_visuals():
 	material.point_size = 3.0
 	trail_instance.material_override = material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# --- THE DRIVER (Rotation) ---
@@ -125,7 +136,7 @@ func _process(delta):
 	# Render
 	_draw_trail()
 
-func _draw_trail():
+func _draw_trail() -> void:
 	trail_mesh.clear_surfaces()
 	
 	if trail_points.is_empty():
@@ -135,3 +146,12 @@ func _draw_trail():
 	for p in trail_points:
 		trail_mesh.surface_add_vertex(p)
 	trail_mesh.surface_end()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -18,10 +18,10 @@ var time = 0.0
 var trace_material: StandardMaterial3D
 var show_rings: bool = false # Hidden by default as requested
 
-func _ready():
+func _ready() -> void:
 	setup_trace()
 
-func configure(descriptors: Array):
+func configure(descriptors: Array) -> void:
 	# Clear existing
 	for node in wheel_nodes:
 		node.queue_free()
@@ -32,7 +32,7 @@ func configure(descriptors: Array):
 	wheels = descriptors
 	setup_wheels()
 
-func setup_wheels():
+func setup_wheels() -> void:
 	# Materials
 	var connection_material = StandardMaterial3D.new()
 	connection_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
@@ -81,7 +81,7 @@ func setup_wheels():
 var _trail_mesh: ImmediateMesh
 var _trail_instance: MeshInstance3D
 
-func setup_trace():
+func setup_trace() -> void:
 	_trail_mesh = ImmediateMesh.new()
 	_trail_instance = MeshInstance3D.new()
 	_trail_instance.name = "FourierTrail"
@@ -99,7 +99,7 @@ func setup_trace():
 	
 	add_child(_trail_instance)
 
-func update_trace():
+func update_trace() -> void:
 	_trail_mesh.clear_surfaces()
 	if trace_points.size() < 2:
 		return
@@ -121,3 +121,12 @@ func update_trace():
 		_trail_mesh.surface_add_vertex(trace_points[i])
 		
 	_trail_mesh.surface_end()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

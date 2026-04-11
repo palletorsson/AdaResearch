@@ -36,6 +36,7 @@ var _placements: Dictionary = {}
 var _next_id: int = 0
 var _current_preset_name: String = ""
 var _time: float = 0.0
+var _inline_elements: Dictionary = {}  # element_id -> {w, h, color} from config JSON
 
 # Animation tracking
 var _animated_elements: Array[Dictionary] = []  # {node, element}
@@ -74,18 +75,25 @@ func apply_grid_config(config_data: Dictionary) -> void:
 				_load_preset(p)
 				break
 	elif config_data.has("placements"):
-		# Accept web grid editor format: {placements: [{element, position: [x,y]}], grid_size: [w,h]}
-		_clear_board()
+		# Accept web grid editor format: {placements: [{element, position: [x,y]}], grid_size: [w,h], elements: {id: {w,h,color}}}
+		# Store inline element definitions for subsets CBS doesn't know
+		if config_data.has("elements"):
+			_inline_elements = config_data["elements"]
+		# Rebuild board to match grid size
+		var new_w: int = default_grid_w
+		var new_h: int = default_grid_h
 		if config_data.has("grid_size"):
 			var gs: Array = config_data["grid_size"]
 			if gs.size() >= 2:
-				_init_occupancy(int(gs[0]), int(gs[1]))
+				new_w = int(gs[0])
+				new_h = int(gs[1])
+		_rebuild_for_grid(new_w, new_h)
 		var placements: Array = config_data["placements"]
 		for p in placements:
 			var pos: Array = p.get("position", [0, 0])
-			_place_element(str(p["element"]), int(pos[0]), int(pos[1]))
+			_place_element(str(p["element"]), roundi(pos[0]), roundi(pos[1]))
 		_update_status()
-		print("[GridEditorBoard3D] Loaded web layout — %d elements" % _placements.size())
+		print("[GridEditorBoard3D] Loaded web layout — %d elements (%d inline defs) on %dx%d" % [_placements.size(), _inline_elements.size(), new_w, new_h])
 
 # ═══════════════════════════════════════════════════════════════════════
 # DATA
@@ -114,6 +122,28 @@ func _clear_board() -> void:
 # ═══════════════════════════════════════════════════════════════════════
 # BUILDERS
 # ═══════════════════════════════════════════════════════════════════════
+
+func _rebuild_for_grid(w: int, h: int) -> void:
+	# Remove all visual children and rebuild for the new grid size
+	for child in get_children():
+		remove_child(child)
+		child.queue_free()
+	_placements.clear()
+	_animated_elements.clear()
+	_grid_container = null
+	_placement_container = null
+	_status_label = null
+	_count_label = null
+	_next_id = 0
+	# Resize panel to fit the grid with margin
+	var margin := grid_margin_left * 2
+	panel_width = maxf(w * cell_size + margin, 0.5)
+	panel_height = maxf(h * cell_size + margin, 0.3)
+	_init_occupancy(w, h)
+	_build_back_panel()
+	_build_grid()
+	_build_status_label()
+	_build_capture_camera()
 
 func _build_back_panel() -> void:
 	var plate := MeshInstance3D.new()
@@ -234,8 +264,17 @@ func _build_capture_camera() -> void:
 	cam.name = "CaptureCamera"
 	cam.fov = 60.0
 	add_child(cam)
-	cam.position = Vector3(0.0, 0.65, 1.8)
-	cam.look_at(Vector3(0.0, 0.65, 0.0), Vector3.UP)
+	# Dynamic framing based on actual panel size
+	var half_w := panel_width * 0.5
+	var half_h := panel_height * 0.5
+	var aspect := 1.333  # 4:3 capture
+	var fov_rad := deg_to_rad(cam.fov)
+	var dist_h := half_h / tan(fov_rad * 0.5)
+	var dist_w := half_w / (tan(fov_rad * 0.5) * aspect)
+	var dist := maxf(dist_h, dist_w) * 1.15  # 15% padding
+	var center_y := panel_height * 0.5
+	cam.position = Vector3(0.0, center_y, dist)
+	cam.look_at(Vector3(0.0, center_y, 0.0), Vector3.UP)
 
 # ═══════════════════════════════════════════════════════════════════════
 # PRESET LOADING
@@ -264,12 +303,17 @@ func _load_preset(preset: Dictionary) -> void:
 
 func _place_element(el_id: String, gx: int, gy: int) -> void:
 	var el: Dictionary = CBS.get_element(el_id)
+	var is_inline := false
+	if el.is_empty() and _inline_elements.has(el_id):
+		# Use inline element definition from config JSON
+		el = _inline_elements[el_id]
+		is_inline = true
 	if el.is_empty():
 		push_warning("[GridEditorBoard3D] Unknown element: %s" % el_id)
 		return
 
-	var ew: int = int(el["w"])
-	var eh: int = int(el["h"])
+	var ew: int = int(el.get("w", 1))
+	var eh: int = int(el.get("h", 1))
 
 	if gx < 0 or gy < 0 or gx + ew > _grid_w or gy + eh > _grid_h:
 		return
@@ -286,20 +330,27 @@ func _place_element(el_id: String, gx: int, gy: int) -> void:
 		for dx in ew:
 			_occupancy[gy + dy][gx + dx] = inst_id
 
-	# Build 3D element via factory
-	var node: Node3D = Factory.build_element_3d(el_id, cell_size)
-	if node == null:
-		# Fallback: coloured quad (same as shadow board)
-		node = _build_fallback_quad(el_id, ew, eh)
+	var node: Node3D = null
+	if is_inline:
+		# Inline element — build colored quad with color from config
+		var color_hex: String = str(el.get("color", "#666666"))
+		node = _build_inline_element(el_id, ew, eh, color_hex)
+	else:
+		# Build 3D element via factory
+		node = Factory.build_element_3d(el_id, cell_size)
+		if node == null:
+			# Fallback: coloured quad (same as shadow board)
+			node = _build_fallback_quad(el_id, ew, eh)
 
 	node.name = inst_id
 	node.position = _grid_cell_to_local_center(gx, gy, ew, eh)
 	_placement_container.add_child(node)
 
 	# Track for animation
-	var el_type: String = Factory.get_element_type(el_id)
-	if el_type == "animated":
-		_animated_elements.append({"node": node, "element": el_id})
+	if not is_inline:
+		var el_type: String = Factory.get_element_type(el_id)
+		if el_type == "animated":
+			_animated_elements.append({"node": node, "element": el_id})
 
 	_placements[inst_id] = {
 		"element": el_id,
@@ -307,6 +358,600 @@ func _place_element(el_id: String, gx: int, gy: int) -> void:
 		"gy": gy,
 		"node": node,
 	}
+
+func _build_inline_element(el_id: String, w: int, h: int, color_hex: String) -> Node3D:
+	var col := Color(color_hex)
+	var sx: float = w * cell_size - 0.004
+	var sy: float = h * cell_size - 0.004
+	var depth: float = cell_size * 0.4
+
+	# --- Glass Rack ---
+	if el_id in ["flask", "beaker"]:
+		return _inline_flask(sx, sy, col)
+	if el_id in ["straight", "straight_long", "straight_h", "wobbly"]:
+		return _inline_tube(sx, sy, col, el_id == "straight_h")
+	if el_id.begins_with("corner") or el_id in ["sbend", "ubend", "reducer"]:
+		return _inline_bend(sx, sy, col)
+	if el_id in ["tee", "ypipe", "cross"]:
+		return _inline_junction(sx, sy, col)
+	if el_id in ["spiral", "condenser"]:
+		return _inline_condenser(sx, sy, col)
+	if el_id in ["cap", "drip"]:
+		return _inline_terminal(sx, sy, col)
+
+	# --- Chemical Models ---
+	if el_id.begins_with("atom_"):
+		return _inline_atom(sx, sy, el_id, col)
+	if el_id == "bond_single" or el_id == "lone_pair":
+		return _inline_bond(sx, sy, col)
+
+	# --- Big Pipes ---
+	if el_id in ["t_junction", "end_cap", "up", "down"] or (el_id == "straight" and w >= 1) or el_id.begins_with("corner_"):
+		return _inline_pipe(sx, sy, col, el_id)
+
+	# --- Sticky Notes ---
+	if el_id.begins_with("note_") or el_id in ["index_card", "photo_frame"]:
+		return _inline_sticky(sx, sy, col, el_id)
+	if el_id in ["push_pin", "star_marker"]:
+		return _inline_pin(sx, sy, col)
+	if el_id.begins_with("arrow_"):
+		return _inline_arrow(sx, sy, col, el_id)
+	if el_id in ["header_strip", "label_tag"]:
+		return _inline_label_strip(sx, sy, col)
+
+	# --- Periodic Table ---
+	if el_id.begins_with("el_"):
+		return _inline_periodic_cell(sx, sy, el_id, col)
+
+	# --- Audio Rack ---
+	if el_id.begins_with("src_"):
+		return _inline_audio_source(sx, sy, col)
+	if el_id.begins_with("sl_") or el_id.begins_with("knob_"):
+		return _inline_knob(sx, sy, col)
+	if el_id.begins_with("btn_"):
+		return _inline_button(sx, sy, col)
+	if el_id.begins_with("disp_") or el_id == "meter_vu":
+		return _inline_display(sx, sy, col)
+
+	# --- Facade Elements ---
+	if el_id.begins_with("column_") or el_id.begins_with("pilaster"):
+		return _inline_column(sx, sy, col)
+	if el_id.begins_with("window_") or el_id.begins_with("door_") or el_id == "arcade_arch":
+		return _inline_opening(sx, sy, col)
+	if el_id.begins_with("cornice_") or el_id.begins_with("string_") or el_id.begins_with("fascia_"):
+		return _inline_band(sx, sy, col)
+	if el_id.begins_with("pediment_") or el_id == "art_deco_crown":
+		return _inline_pediment(sx, sy, col)
+	if el_id.begins_with("zone_") or el_id.begins_with("rustication") or el_id == "wall_plain" or el_id == "balustrade":
+		return _inline_wall_block(sx, sy, col)
+
+	# --- Lab Items ---
+	if el_id in ["microscope", "oscilloscope", "atmosphericmonitoring", "seismograph"]:
+		return _inline_lab_device(sx, sy, col)
+	if el_id in ["multimeter", "electronicscales", "terminal", "datatablet"]:
+		return _inline_lab_box(sx, sy, col)
+	if el_id in ["chemicalapparatus", "samplevialrack", "petri_dish_worms", "pipettedispenser"]:
+		return _inline_flask(sx, sy, col)
+	if el_id in ["dna_specimen", "additive_wave_demo"]:
+		return _inline_display(sx, sy, col)
+
+	# Fallback: colored box with depth
+	return _inline_box_fallback(sx, sy, depth, col, el_id)
+
+# ── Inline 3D builders ──────────────────────────────────────────────
+
+func _inline_flask(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	# Cylindrical body
+	var body := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = sx * 0.2
+	cm.bottom_radius = sx * 0.45
+	cm.height = sy * 0.7
+	body.mesh = cm
+	body.rotation_degrees.x = 90
+	body.material_override = _mat_glass(col)
+	node.add_child(body)
+	# Neck
+	var neck := MeshInstance3D.new()
+	var nm := CylinderMesh.new()
+	nm.top_radius = sx * 0.1
+	nm.bottom_radius = sx * 0.2
+	nm.height = sy * 0.35
+	neck.mesh = nm
+	neck.rotation_degrees.x = 90
+	neck.position.y = sy * 0.35
+	neck.material_override = _mat_glass(col)
+	node.add_child(neck)
+	return node
+
+func _inline_tube(sx: float, sy: float, col: Color, horizontal: bool) -> Node3D:
+	var node := Node3D.new()
+	var tube := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	var length := sx if horizontal else sy
+	cm.top_radius = cell_size * 0.15
+	cm.bottom_radius = cell_size * 0.15
+	cm.height = length * 0.9
+	tube.mesh = cm
+	if horizontal:
+		tube.rotation_degrees.z = 90
+	else:
+		tube.rotation_degrees.x = 90
+	tube.material_override = _mat_glass(col)
+	node.add_child(tube)
+	return node
+
+func _inline_bend(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	var bend := MeshInstance3D.new()
+	var tm := TorusMesh.new()
+	tm.inner_radius = cell_size * 0.12
+	tm.outer_radius = cell_size * 0.35
+	bend.mesh = tm
+	bend.material_override = _mat_glass(col)
+	node.add_child(bend)
+	return node
+
+func _inline_junction(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	var sp := MeshInstance3D.new()
+	var sm := SphereMesh.new()
+	sm.radius = cell_size * 0.25
+	sm.height = cell_size * 0.5
+	sp.mesh = sm
+	sp.material_override = _mat_glass(col)
+	node.add_child(sp)
+	# Small tubes radiating
+	for angle in [0, 90, 180]:
+		var t := MeshInstance3D.new()
+		var cm := CylinderMesh.new()
+		cm.top_radius = cell_size * 0.08
+		cm.bottom_radius = cell_size * 0.08
+		cm.height = cell_size * 0.3
+		t.mesh = cm
+		t.rotation_degrees.z = float(angle)
+		t.material_override = _mat_glass(col)
+		node.add_child(t)
+	return node
+
+func _inline_condenser(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	# Outer jacket
+	var outer := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = sx * 0.3
+	cm.bottom_radius = sx * 0.3
+	cm.height = sy * 0.8
+	outer.mesh = cm
+	outer.rotation_degrees.x = 90
+	outer.material_override = _mat_glass(col, 0.5)
+	node.add_child(outer)
+	# Inner coil (smaller cylinder)
+	var inner := MeshInstance3D.new()
+	var im := CylinderMesh.new()
+	im.top_radius = sx * 0.1
+	im.bottom_radius = sx * 0.1
+	im.height = sy * 0.85
+	inner.mesh = im
+	inner.rotation_degrees.x = 90
+	inner.material_override = _mat_glass(col.lightened(0.3))
+	node.add_child(inner)
+	return node
+
+func _inline_terminal(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	var sp := MeshInstance3D.new()
+	var sm := SphereMesh.new()
+	sm.radius = minf(sx, sy) * 0.35
+	sm.height = minf(sx, sy) * 0.7
+	sp.mesh = sm
+	sp.material_override = _mat_glass(col)
+	node.add_child(sp)
+	return node
+
+func _inline_atom(sx: float, sy: float, el_id: String, col: Color) -> Node3D:
+	# CPK coloring for atoms
+	var cpk_colors := {
+		"atom_H": Color(1.0, 1.0, 1.0), "atom_C": Color(0.2, 0.2, 0.2),
+		"atom_N": Color(0.2, 0.3, 1.0), "atom_O": Color(1.0, 0.15, 0.15),
+		"atom_F": Color(0.6, 1.0, 0.6), "atom_Cl": Color(0.1, 0.9, 0.1),
+		"atom_S": Color(1.0, 0.85, 0.2), "atom_P": Color(1.0, 0.5, 0.0),
+		"atom_Na": Color(0.7, 0.3, 1.0), "atom_Ca": Color(0.3, 1.0, 0.3),
+		"atom_Fe": Color(0.9, 0.5, 0.15), "atom_Cu": Color(0.8, 0.5, 0.2),
+		"atom_Zn": Color(0.5, 0.5, 0.7),
+	}
+	var atom_col: Color = cpk_colors.get(el_id, col)
+	var node := Node3D.new()
+	var sp := MeshInstance3D.new()
+	var sm := SphereMesh.new()
+	sm.radius = minf(sx, sy) * 0.45
+	sm.height = minf(sx, sy) * 0.9
+	sp.mesh = sm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = atom_col
+	mat.metallic = 0.2
+	mat.roughness = 0.3
+	mat.emission_enabled = true
+	mat.emission = atom_col
+	mat.emission_energy_multiplier = 0.2
+	sp.material_override = mat
+	node.add_child(sp)
+	# Label
+	var lbl := Label3D.new()
+	lbl.text = el_id.replace("atom_", "")
+	lbl.pixel_size = 0.0006
+	lbl.font_size = 8
+	lbl.modulate = Color(0.0, 0.0, 0.0) if atom_col.get_luminance() > 0.5 else Color(1, 1, 1)
+	lbl.position.z = minf(sx, sy) * 0.46
+	node.add_child(lbl)
+	return node
+
+func _inline_bond(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	var stick := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = cell_size * 0.06
+	cm.bottom_radius = cell_size * 0.06
+	cm.height = maxf(sx, sy) * 0.9
+	stick.mesh = cm
+	if sx > sy:
+		stick.rotation_degrees.z = 90
+	else:
+		stick.rotation_degrees.x = 90
+	stick.material_override = _mat(Color(0.6, 0.6, 0.6), 0.3, 0.5)
+	node.add_child(stick)
+	return node
+
+func _inline_pipe(sx: float, sy: float, col: Color, el_id: String) -> Node3D:
+	var node := Node3D.new()
+	var pipe := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = minf(sx, sy) * 0.35
+	cm.bottom_radius = minf(sx, sy) * 0.35
+	cm.height = maxf(sx, sy) * 0.85
+	pipe.mesh = cm
+	if sx > sy:
+		pipe.rotation_degrees.z = 90
+	pipe.material_override = _mat(col.darkened(0.1), 0.7, 0.3)
+	node.add_child(pipe)
+	if el_id == "t_junction" or el_id == "cross":
+		var branch := MeshInstance3D.new()
+		var bm := CylinderMesh.new()
+		bm.top_radius = minf(sx, sy) * 0.3
+		bm.bottom_radius = minf(sx, sy) * 0.3
+		bm.height = minf(sx, sy) * 0.6
+		branch.mesh = bm
+		branch.rotation_degrees.z = 90
+		branch.material_override = _mat(col.darkened(0.1), 0.7, 0.3)
+		node.add_child(branch)
+	return node
+
+func _inline_sticky(sx: float, sy: float, col: Color, el_id: String) -> Node3D:
+	var node := Node3D.new()
+	var note := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(sx * 0.9, sy * 0.9, cell_size * 0.05)
+	note.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = col
+	mat.emission_enabled = true
+	mat.emission = col
+	mat.emission_energy_multiplier = 0.5
+	mat.roughness = 0.8
+	note.material_override = mat
+	# Slight tilt for 3D feel
+	node.rotation_degrees.x = randf_range(-3, 3)
+	node.rotation_degrees.y = randf_range(-5, 5)
+	node.add_child(note)
+	return node
+
+func _inline_pin(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	var head := MeshInstance3D.new()
+	var sm := SphereMesh.new()
+	sm.radius = minf(sx, sy) * 0.3
+	sm.height = minf(sx, sy) * 0.6
+	head.mesh = sm
+	head.material_override = _mat(col, 0.5, 0.3)
+	head.position.z = cell_size * 0.1
+	node.add_child(head)
+	return node
+
+func _inline_arrow(sx: float, sy: float, col: Color, el_id: String) -> Node3D:
+	var node := Node3D.new()
+	var shaft := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(sx * 0.6, sy * 0.15, cell_size * 0.04)
+	shaft.mesh = bm
+	shaft.material_override = _mat(col, 0.0, 0.8)
+	node.add_child(shaft)
+	return node
+
+func _inline_label_strip(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	var strip := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(sx * 0.9, sy * 0.5, cell_size * 0.03)
+	strip.mesh = bm
+	strip.material_override = _mat(col.darkened(0.2), 0.0, 0.7)
+	node.add_child(strip)
+	return node
+
+func _inline_periodic_cell(sx: float, sy: float, el_id: String, col: Color) -> Node3D:
+	var node := Node3D.new()
+	var cell := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(sx * 0.88, sy * 0.88, cell_size * 0.12)
+	cell.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = col.darkened(0.15)
+	mat.emission_enabled = true
+	mat.emission = col
+	mat.emission_energy_multiplier = 0.6
+	mat.roughness = 0.5
+	cell.material_override = mat
+	node.add_child(cell)
+	var lbl := Label3D.new()
+	lbl.text = el_id.replace("el_", "")
+	lbl.pixel_size = 0.0008
+	lbl.font_size = 10
+	lbl.modulate = Color(1, 1, 1)
+	lbl.position.z = cell_size * 0.07
+	node.add_child(lbl)
+	return node
+
+func _inline_audio_source(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	# Speaker-like shape
+	var body := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(sx * 0.85, sy * 0.85, cell_size * 0.2)
+	body.mesh = bm
+	body.material_override = _mat(col.darkened(0.3), 0.3, 0.6)
+	node.add_child(body)
+	var cone := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = minf(sx, sy) * 0.15
+	cm.bottom_radius = minf(sx, sy) * 0.35
+	cm.height = cell_size * 0.15
+	cone.mesh = cm
+	cone.rotation_degrees.x = 90
+	cone.position.z = cell_size * 0.12
+	cone.material_override = _mat(col, 0.1, 0.7)
+	node.add_child(cone)
+	return node
+
+func _inline_knob(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	var knob := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = minf(sx, sy) * 0.35
+	cm.bottom_radius = minf(sx, sy) * 0.4
+	cm.height = cell_size * 0.2
+	knob.mesh = cm
+	knob.rotation_degrees.x = 90
+	knob.position.z = cell_size * 0.1
+	knob.material_override = _mat(col.darkened(0.2), 0.6, 0.3)
+	node.add_child(knob)
+	# Pointer
+	var ptr := MeshInstance3D.new()
+	var pm := BoxMesh.new()
+	pm.size = Vector3(cell_size * 0.03, minf(sx, sy) * 0.3, cell_size * 0.02)
+	ptr.mesh = pm
+	ptr.position.z = cell_size * 0.21
+	ptr.material_override = _mat(Color.WHITE, 0.0, 0.5)
+	ptr.rotation_degrees.z = randf_range(-140, 140)
+	node.add_child(ptr)
+	return node
+
+func _inline_button(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	var btn := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = minf(sx, sy) * 0.35
+	cm.bottom_radius = minf(sx, sy) * 0.35
+	cm.height = cell_size * 0.15
+	btn.mesh = cm
+	btn.rotation_degrees.x = 90
+	btn.position.z = cell_size * 0.08
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = col
+	mat.emission_enabled = true
+	mat.emission = col
+	mat.emission_energy_multiplier = 0.8
+	mat.roughness = 0.4
+	btn.material_override = mat
+	node.add_child(btn)
+	return node
+
+func _inline_display(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	# Bezel
+	var bezel := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(sx * 0.9, sy * 0.9, cell_size * 0.15)
+	bezel.mesh = bm
+	bezel.material_override = _mat(Color(0.1, 0.1, 0.12), 0.3, 0.6)
+	node.add_child(bezel)
+	# Screen
+	var screen := MeshInstance3D.new()
+	var sm := QuadMesh.new()
+	sm.size = Vector2(sx * 0.75, sy * 0.75)
+	screen.mesh = sm
+	screen.position.z = cell_size * 0.08
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = col.darkened(0.5)
+	mat.emission_enabled = true
+	mat.emission = col
+	mat.emission_energy_multiplier = 1.0
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	screen.material_override = mat
+	node.add_child(screen)
+	return node
+
+func _inline_column(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	var shaft := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = sx * 0.3
+	cm.bottom_radius = sx * 0.35
+	cm.height = sy * 0.75
+	shaft.mesh = cm
+	shaft.rotation_degrees.x = 90
+	shaft.material_override = _mat(col, 0.2, 0.6)
+	node.add_child(shaft)
+	# Capital
+	var cap := MeshInstance3D.new()
+	var capm := BoxMesh.new()
+	capm.size = Vector3(sx * 0.8, sy * 0.12, cell_size * 0.15)
+	cap.mesh = capm
+	cap.position.y = sy * 0.42
+	cap.material_override = _mat(col.lightened(0.1), 0.2, 0.5)
+	node.add_child(cap)
+	# Base
+	var base := MeshInstance3D.new()
+	var basem := BoxMesh.new()
+	basem.size = Vector3(sx * 0.8, sy * 0.08, cell_size * 0.15)
+	base.mesh = basem
+	base.position.y = -sy * 0.42
+	base.material_override = _mat(col.lightened(0.1), 0.2, 0.5)
+	node.add_child(base)
+	return node
+
+func _inline_opening(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	# Frame
+	var frame := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(sx * 0.9, sy * 0.9, cell_size * 0.1)
+	frame.mesh = bm
+	frame.material_override = _mat(col.darkened(0.2), 0.2, 0.6)
+	node.add_child(frame)
+	# Dark interior
+	var glass := MeshInstance3D.new()
+	var gm := QuadMesh.new()
+	gm.size = Vector2(sx * 0.65, sy * 0.7)
+	glass.mesh = gm
+	glass.position.z = cell_size * 0.06
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.15, 0.2, 0.35, 0.6)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	glass.material_override = mat
+	node.add_child(glass)
+	return node
+
+func _inline_band(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	var band := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(sx * 0.95, sy * 0.6, cell_size * 0.12)
+	band.mesh = bm
+	band.material_override = _mat(col, 0.2, 0.6)
+	node.add_child(band)
+	return node
+
+func _inline_pediment(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	# Triangular shape approximated with box + prism
+	var base := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(sx * 0.9, sy * 0.4, cell_size * 0.1)
+	base.mesh = bm
+	base.position.y = -sy * 0.2
+	base.material_override = _mat(col, 0.2, 0.6)
+	node.add_child(base)
+	var peak := MeshInstance3D.new()
+	var pm := PrismMesh.new()
+	pm.size = Vector3(sx * 0.85, sy * 0.5, cell_size * 0.1)
+	peak.mesh = pm
+	peak.position.y = sy * 0.1
+	peak.material_override = _mat(col, 0.2, 0.6)
+	node.add_child(peak)
+	return node
+
+func _inline_wall_block(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	var block := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(sx * 0.92, sy * 0.92, cell_size * 0.08)
+	block.mesh = bm
+	block.material_override = _mat(col.darkened(0.15), 0.1, 0.8)
+	node.add_child(block)
+	return node
+
+func _inline_lab_device(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	# Body
+	var body := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(sx * 0.8, sy * 0.5, cell_size * 0.3)
+	body.mesh = bm
+	body.position.y = -sy * 0.15
+	body.material_override = _mat(col.darkened(0.2), 0.3, 0.6)
+	node.add_child(body)
+	# Eyepiece / display
+	var top := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	cm.top_radius = sx * 0.1
+	cm.bottom_radius = sx * 0.15
+	cm.height = sy * 0.35
+	top.mesh = cm
+	top.rotation_degrees.x = 90
+	top.position.y = sy * 0.2
+	top.position.z = cell_size * 0.1
+	top.material_override = _mat(col, 0.5, 0.4)
+	node.add_child(top)
+	return node
+
+func _inline_lab_box(sx: float, sy: float, col: Color) -> Node3D:
+	var node := Node3D.new()
+	var box := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(sx * 0.85, sy * 0.85, cell_size * 0.25)
+	box.mesh = bm
+	box.material_override = _mat(col.darkened(0.1), 0.3, 0.5)
+	node.add_child(box)
+	# Screen face
+	var face := MeshInstance3D.new()
+	var fm := QuadMesh.new()
+	fm.size = Vector2(sx * 0.6, sy * 0.5)
+	face.mesh = fm
+	face.position.z = cell_size * 0.13
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.1, 0.15, 0.1)
+	mat.emission_enabled = true
+	mat.emission = col
+	mat.emission_energy_multiplier = 0.5
+	face.material_override = mat
+	node.add_child(face)
+	return node
+
+func _inline_box_fallback(sx: float, sy: float, depth: float, col: Color, el_id: String) -> Node3D:
+	var node := Node3D.new()
+	var box := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(sx * 0.85, sy * 0.85, depth)
+	box.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = col.darkened(0.2)
+	mat.emission_enabled = true
+	mat.emission = col
+	mat.emission_energy_multiplier = 0.3
+	box.material_override = mat
+	node.add_child(box)
+	return node
+
+func _mat_glass(col: Color, alpha: float = 0.7) -> StandardMaterial3D:
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(col.r, col.g, col.b, alpha)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.metallic = 0.1
+	mat.roughness = 0.15
+	mat.emission_enabled = true
+	mat.emission = col
+	mat.emission_energy_multiplier = 0.3
+	return mat
 
 func _build_fallback_quad(el_id: String, w: int, h: int) -> Node3D:
 	var node := Node3D.new()

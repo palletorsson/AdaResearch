@@ -14,18 +14,18 @@ extends Node3D
 
 var sphere_positions: Array[Vector3] = []
 
-func _ready():
+func _ready() -> void:
 	if Engine.is_editor_hint():
 		_setup_default_material()
 
-func _setup_default_material():
+func _setup_default_material() -> void:
 	if not material:
 		material = StandardMaterial3D.new()
 		material.albedo_color = Color(0.7, 0.7, 0.9)
 		material.metallic = 0.3
 		material.roughness = 0.4
 
-func _generate_network(value):
+func _generate_network(value) -> void:
 	if not value:
 		return
 		
@@ -44,7 +44,7 @@ func _generate_network(value):
 	# Create the network
 	_create_sphere_network()
 
-func _create_sphere_network():
+func _create_sphere_network() -> void:
 	# Create each sphere with carved walkways
 	for i in sphere_positions.size():
 		_create_carved_sphere(i)
@@ -53,7 +53,7 @@ func _create_sphere_network():
 	for i in sphere_positions.size() - 1:
 		_create_carved_pipe(i, i + 1)
 
-func _create_carved_sphere(sphere_index: int):
+func _create_carved_sphere(sphere_index: int) -> void:
 	var pos = sphere_positions[sphere_index]
 	
 	# Create the main sphere
@@ -78,6 +78,7 @@ func _create_carved_sphere(sphere_index: int):
 		
 		var connection_carve = SphereMesh.new()
 		connection_carve.radius = walkway_radius * 1.1
+		connection_carve.height = walkway_radius * 1.1 * 2.0
 		carve_spheres.append(connection_carve)
 	
 	# If connected to next sphere, carve in that direction
@@ -88,6 +89,7 @@ func _create_carved_sphere(sphere_index: int):
 		
 		var connection_carve = SphereMesh.new()
 		connection_carve.radius = walkway_radius * 1.1
+		connection_carve.height = walkway_radius * 1.1 * 2.0
 		carve_spheres.append(connection_carve)
 	
 	# Create the carved sphere using CSG
@@ -98,7 +100,7 @@ func _create_carved_sphere(sphere_index: int):
 	if Engine.is_editor_hint():
 		sphere_node.owner = get_tree().edited_scene_root
 
-func _create_carved_pipe(from_index: int, to_index: int):
+func _create_carved_pipe(from_index: int, to_index: int) -> void:
 	var from_pos = sphere_positions[from_index]
 	var to_pos = sphere_positions[to_index]
 	
@@ -236,3 +238,12 @@ func _create_walkable_sphere_mesh(sphere_pos: Vector3, connections: Array[Vector
 		array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	
 	return array_mesh
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

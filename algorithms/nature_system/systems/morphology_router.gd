@@ -456,3 +456,5 @@ static func _fallback_mesh(parent: Node3D = null) -> Node3D:
 		parent.add_child(root)
 
 	return root
+
+

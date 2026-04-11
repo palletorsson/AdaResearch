@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://commons/artifacts/filter_screen/filter_screen.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://commons/primitives/snappoint/demos/line_demo.tscn" id="2"]
+
+[node name="FilterScreenTest" type="Node3D"]
+
+[node name="FilterScreen" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="LineDemo" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 3)

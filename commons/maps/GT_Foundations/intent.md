@@ -3,3 +3,5 @@ Sequence role: Opens the Graph Theory sequence; the 19th spine sequence (integra
 Technical angle: Euler's theorem on traversability (a graph has an Eulerian path iff it has exactly 0 or 2 vertices of odd degree), graph representation (adjacency list, adjacency matrix), vertices and edges as the primitive elements. The KonigsbergBridge artifact recreates the historical problem; graphspace provides general graph construction.
 Critical angle: Graph theory begins with deliberate abstraction — Euler ignored the bridges' lengths, the islands' shapes, everything except connection. This is the most radical formalization in mathematics: reducing the world to dots and lines. The sequence truth ("everything is a graph if you squint hard enough") is an ontological claim about what matters: not objects but relationships.
 Key artifacts: KonigsbergBridge recreates the founding problem — four landmasses, seven bridges, the impossibility proven by degree counting; graphspace provides the general graph construction toolkit.
+
+Gap: graphspace needs slider_horizontal, push_button, Label3D.

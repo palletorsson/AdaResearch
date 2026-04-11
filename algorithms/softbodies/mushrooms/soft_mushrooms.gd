@@ -1,16 +1,26 @@
 extends Node3D
 
+# @identity
+# essence: N StaticBody3D stems topped with SoftBody3D sphere caps pinned at the bottom — each cap's pressure_coefficient and linear_stiffness create a wobbly mushroom that jiggles when touched
+# desire: to grow a field of soft mushrooms you can push through, each one bobbing and recovering differently because of randomized cap size and stiffness
+# critical_parameter: cap_radius_range — larger caps wobble more dramatically under the same force, smaller caps feel springy and taut
+# triggers: player or rigid body collision with the SoftBody3D cap causes vertex displacement; the pin constraint at the stem-cap junction prevents the cap from flying off
+# emerges: randomized hue and dot patterns on the mushroom_dots shader make each specimen visually unique despite identical physics, creating a garden that feels grown rather than copied
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: extends jelly_cube's single-object deformation to a population; appears in SoftBodies_Carusell alongside cloth_straps and revolving_joy_ride
+# truth: a mushroom cap does not decide its shape — the pin constraint, gravity, and whatever bumps into it negotiate the form in real time
+
 @export var mushroom_count: int = 15
 @export var spawn_area_size: Vector2 = Vector2(20, 20)
 @export var stem_height_range: Vector2 = Vector2(0.5, 1.5)
 @export var stem_radius: float = 0.2
 @export var cap_radius_range: Vector2 = Vector2(0.6, 1.2)
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 	spawn_mushrooms()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Camera
 	var cam = Camera3D.new()
 	cam.position = Vector3(0, 5, 15)
@@ -26,7 +36,7 @@ func setup_scene():
 	
 	# Ground removed as per request
 
-func spawn_mushrooms():
+func spawn_mushrooms() -> void:
 	for i in range(mushroom_count):
 		var pos = Vector3(
 			randf_range(-spawn_area_size.x/2, spawn_area_size.x/2),
@@ -35,7 +45,7 @@ func spawn_mushrooms():
 		)
 		create_mushroom(pos)
 
-func create_mushroom(pos: Vector3):
+func create_mushroom(pos: Vector3) -> void:
 	var stem_h = randf_range(stem_height_range.x, stem_height_range.y)
 	var cap_r = randf_range(cap_radius_range.x, cap_radius_range.y)
 	
@@ -107,7 +117,7 @@ func create_mushroom(pos: Vector3):
 	# Pin the bottom of the cap to the stem
 	call_deferred("_pin_cap_to_stem", cap, stem, cap_mesh.height)
 
-func _pin_cap_to_stem(cap: SoftBody3D, stem: StaticBody3D, height: float):
+func _pin_cap_to_stem(cap: SoftBody3D, stem: StaticBody3D, height: float) -> void:
 	if not is_instance_valid(cap) or not is_instance_valid(stem):
 		return
 		
@@ -142,3 +152,12 @@ func _pin_cap_to_stem(cap: SoftBody3D, stem: StaticBody3D, height: float):
 		
 		# Collision exception
 		cap.add_collision_exception_with(stem)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

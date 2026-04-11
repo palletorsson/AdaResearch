@@ -5,6 +5,16 @@
 extends Node3D
 class_name ExcludedMiddleDemo
 
+# @identity
+# essence: P ∨ ¬P — the law of excluded middle; Brouwer: "not always!"
+# desire: see two glowing spheres (P and ¬P) with the disjunction between them, and toggle Brouwer's rejection
+# critical_parameter: show_rejection — flips between classical acceptance and intuitionistic doubt
+# triggers: VR slider toggles rejection mode; label text changes to reflect Brouwer's position
+# emerges: the discomfort of undecidable propositions — some P genuinely cannot be decided
+# needs: VR horizontal slider for rejection toggle [has]
+# relationships: unlocks constructive_proof (if LEM is rejected, only constructive proofs survive); unlocks brouwer_choice_sequence; contrasts godel_statement_plaque (unprovable vs undecidable)
+# truth: the law of excluded middle is not a law of logic — it is a philosophical commitment about what "true" means
+
 @export var show_rejection: bool = true
 
 var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")

@@ -7,7 +7,7 @@ extends Node3D
 var _spawned_count = 0
 var _timer: Timer
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 	setup_container()
 	
@@ -17,7 +17,7 @@ func _ready():
 	add_child(_timer)
 	_timer.start()
 
-func setup_scene():
+func setup_scene() -> void:
 	var cam = Camera3D.new()
 	cam.position = Vector3(0, 5, 12)
 	cam.look_at(Vector3(0, 2, 0))
@@ -41,7 +41,7 @@ func setup_scene():
 	env.environment = environment
 	add_child(env)
 
-func setup_container():
+func setup_container() -> void:
 	var container = Node3D.new()
 	container.name = "Container"
 	add_child(container)
@@ -70,7 +70,7 @@ func setup_container():
 	create_wall(container, Vector3(container_size.x + thickness * 2, h, thickness), Vector3(0, h/2.0, -half_d - thickness/2.0), glass_mat) # Back
 	create_wall(container, Vector3(container_size.x + thickness * 2, h, thickness), Vector3(0, h/2.0, half_d + thickness/2.0), glass_mat) # Front
 
-func create_wall(parent, size, pos, mat):
+func create_wall(parent, size, pos, mat) -> void:
 	var body = StaticBody3D.new()
 	body.position = pos
 	
@@ -88,7 +88,7 @@ func create_wall(parent, size, pos, mat):
 	
 	parent.add_child(body)
 
-func _on_spawn_timer():
+func _on_spawn_timer() -> void:
 	if _spawned_count >= spawn_count:
 		_timer.stop()
 		return
@@ -96,7 +96,7 @@ func _on_spawn_timer():
 	spawn_soft_body()
 	_spawned_count += 1
 
-func spawn_soft_body():
+func spawn_soft_body() -> void:
 	var sb = SoftBody3D.new()
 	
 	# Random shape: Sphere or Box (Box as SoftBody needs subdivided cube)
@@ -139,3 +139,12 @@ func spawn_soft_body():
 	sb.collision_mask = 1 | 524288
 	
 	add_child(sb)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

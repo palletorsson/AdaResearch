@@ -5,6 +5,16 @@
 extends Node3D
 class_name QFEPReactor
 
+# @identity
+# essence: QFE = (1-lambda) - lambda*0.8 + phi*0.2; visualized as pulsing orb with color(lambda) and jitter(chaos)
+# desire: stand before the reactor and watch theory become light — adjust sliders and see the formula respond
+# critical_parameter: lambda — shifts reactor from crystalline blue through living green to chaotic red with position jitter
+# triggers: set_lambda/set_phi from connected sliders; pulse_speed triples at edge of chaos; jitter activates above 0.6
+# emerges: the reactor appears to think at the edge — fast pulsing, maximum particles, bright green glow
+# needs: VR slider connections via group system [has], label display [has], particle system [has]
+# relationships: central to QFEP_Sandbox; depends on lambda_slider and phi_slider; connects to reactive_particles; computes QFE in real-time
+# truth: the reactor is the QFEP formula made tangible — not a metaphor for the equation but the equation itself, running
+
 # State
 var current_lambda := 0.4
 var current_phi := 0.0

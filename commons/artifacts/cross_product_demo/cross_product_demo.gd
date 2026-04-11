@@ -346,3 +346,8 @@ func get_cross_product() -> Vector3:
 
 func get_area() -> float:
 	return vector_a.cross(vector_b).length()
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

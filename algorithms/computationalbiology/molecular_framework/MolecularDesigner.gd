@@ -4,6 +4,16 @@
 extends Node3D
 class_name MolecularDesigner
 
+# @identity
+# essence: catalog(parts) + assembly(bonds, positions) -> molecular morphology
+# desire: watch scattered atoms find each other and snap into bodies
+# critical_parameter: assembly_name — switches between VRBody, Chair, entirely different topologies
+# triggers: auto_cycle timer alternates float/assemble; JSON hot-reload rebuilds catalog live
+# emerges: the moment of recognition when disordered parts coalesce into a legible form
+# needs: VR grab on parts [missing], keyboard controls [has], auto-cycle [has]
+# relationships: unlocks post-reductionist design thinking; depends on Part.tscn/assemblies.json; contrasts snap_cube_puzzle (fixed vs fluid assembly)
+# truth: form is not imposed on matter — it is a conversation between catalog and constraint
+
 @export_group("Configuration")
 @export var json_path: String = "res://algorithms/computationalbiology/molecular_framework/assemblies.json"
 @export_file("*.tscn") var part_scene_path: String = "res://algorithms/computationalbiology/molecular_framework/Part.tscn"
@@ -481,3 +491,12 @@ func is_assembled() -> bool:
 func get_current_assembly_name() -> String:
 	"""Get the name of the current assembly"""
 	return current_assembly if assembled else ""
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

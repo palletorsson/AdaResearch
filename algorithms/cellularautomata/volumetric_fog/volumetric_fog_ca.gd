@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: B5+/S4+ on a 3D grid → density texture → FogVolume — CA rules become visible atmosphere
+# desire: To be walked through — fog that has opinions about where it clumps, thinning and thickening by local rules
+# critical_parameter: smooth_factor and birth/survival thresholds (B5/S4) — control whether fog dissipates or aggregates
+# triggers: High survival threshold → fog evaporates; low → dense permanent clouds; grid resolution → fine mist vs chunky blocks
+# emerges: Cloud-like formations from binary CA rules — no fluid dynamics, yet the fog moves like weather
+# needs: VR density controls [missing], rule parameter sliders [missing]
+# relationships: Feeds into CA_EdgeOfChaos. Unique in using CA to drive Godot's FogVolume system directly.
+# truth: Fog is a cellular automaton — local density rules produce clouds no one shaped.
+
 # Volumetric Fog CA
 # Uses a 3D CA to drive a FogVolume's density texture.
 
@@ -16,11 +26,11 @@ var texture: Texture3D
 var image_data: Array[Image] = []
 var timer: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	_initialize_grid()
 	_setup_fog()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 		
@@ -30,14 +40,14 @@ func _process(delta):
 		_step()
 		_update_texture()
 
-func _initialize_grid():
+func _initialize_grid() -> void:
 	current_state.resize(grid_size.x * grid_size.y * grid_size.z)
 	next_state.resize(grid_size.x * grid_size.y * grid_size.z)
 	
 	for i in range(current_state.size()):
 		current_state[i] = 1 if randf() < 0.4 else 0
 
-func _setup_fog():
+func _setup_fog() -> void:
 	if not fog_volume:
 		fog_volume = FogVolume.new()
 		fog_volume.size = Vector3(10, 10, 10)
@@ -58,7 +68,7 @@ func _setup_fog():
 	texture.create(Image.FORMAT_R8, grid_size.x, grid_size.y, grid_size.z, false, image_data)
 	mat.density_texture = texture
 
-func _step():
+func _step() -> void:
 	# Simple smoothing / cloud rule
 	# B45678/S45678 (High survival/birth = clumping)
 	var sx = grid_size.x
@@ -106,7 +116,7 @@ func _count_neighbors(x, y, z) -> int:
 					count += 1
 	return count
 
-func _update_texture():
+func _update_texture() -> void:
 	# Update images
 	var sx = grid_size.x
 	var sy = grid_size.y
@@ -122,3 +132,12 @@ func _update_texture():
 	
 	# Update Texture3D
 	texture.update(image_data)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

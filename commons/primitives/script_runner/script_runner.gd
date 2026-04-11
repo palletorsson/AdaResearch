@@ -1,6 +1,17 @@
 # Script Runner - Live code display with line-by-line execution
 # Shows GDScript code on a panel and executes it in real-time
 # Uses Expression class to actually evaluate code and show results
+
+# @identity
+# essence: a 3D SubViewport-rendered code panel that steps through an array of {text, duration, expression} line dictionaries one at a time, evaluating each via GDScript Expression and displaying the result beside the highlighted line
+# desire: to watch code execute as a physical event — to stand beside a panel where each line of a for-loop lights up in sequence, with the array it's building appearing in 3D space as the loop runs
+# critical_parameter: script_name — determines which pre-configured script content is loaded (e.g., "array" loads an array construction demo); the script content is the entire lesson
+# triggers: the play button (Area3D) starts execution; auto_loop replays the script after completion; each line highlights for its configured duration; Expression.execute() evaluates GDScript expressions and returns results that appear on result_label
+# emerges: the temporal experience of code execution — seeing line 3 highlighted while lines 1-2 are dimmed above makes algorithms feel like processes unfolding in time rather than static text
+# needs: SubViewport panel [has]; RichTextLabel for syntax-highlighted code [has]; play button Area3D [has]; result Label3D [has]; line indicator Label3D [has]; VR button interaction [has]; target_node for spawning objects [has]
+# relationships: appears in Tutorial_Pattern with script_name="array"; connects to column_3_z and grid_2d_4x4 (the physical arrays the script constructs in 3D); bridges code literacy with spatial array understanding
+# truth: a running program is a trajectory through state space — the script runner makes this trajectory visible by showing each state transition as a physical moment in time
+
 extends Node3D
 
 signal script_started
@@ -85,8 +96,8 @@ const GRID_COLORS = {
 
 # Keywords for syntax highlighting
 const KEYWORDS = ["var", "func", "if", "else", "elif", "for", "while", "return",
-                  "class", "extends", "const", "enum", "signal", "await", "in",
-                  "true", "false", "null", "self", "print", "Vector3", "Color"]
+				  "class", "extends", "const", "enum", "signal", "await", "in",
+				  "true", "false", "null", "self", "print", "Vector3", "Color"]
 
 # Path to scripts JSON
 const SCRIPTS_PATH = "res://commons/primitives/script_runner/scripts.json"
@@ -1084,4 +1095,3 @@ func _input(event):
 		elif event.keycode == KEY_R:
 			_reset_script()
 			play()
-

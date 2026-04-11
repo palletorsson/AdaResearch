@@ -31,7 +31,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SPINE_PATH = ROOT / "commons/maps/curriculum_spine.json"
 SEQUENCE_DIR = ROOT / "commons/maps/sequences"
 ARTIFACT_REGISTRY_DIR = ROOT / "commons/artifacts/registry"
-ARTIFACT_BASE_REGISTRY_PATH = ROOT / "commons/artifacts/grid_artifacts.json"
+# Legacy registry deprecated — all entries now in ARTIFACT_REGISTRY_DIR
 MAPS_DIR = ROOT / "commons/maps"
 
 TAXONOMY_MARKER_START = "<!-- SPINE_PLAYABLE_STATUS:START -->"
@@ -174,8 +174,6 @@ def map_has_data(map_name: str) -> bool:
 
 def _artifact_registry_files() -> list[Path]:
     files: list[Path] = []
-    if ARTIFACT_BASE_REGISTRY_PATH.exists():
-        files.append(ARTIFACT_BASE_REGISTRY_PATH)
     if ARTIFACT_REGISTRY_DIR.exists():
         files.extend(sorted(ARTIFACT_REGISTRY_DIR.glob("*.json")))
     return files

@@ -1,6 +1,16 @@
 class_name PushRelabel
 extends Node3D
 
+# @identity
+# essence: preflow-push with height labels — initialize by saturating source edges, then repeatedly: push excess flow along admissible edges (height[u] > height[v]), or relabel (raise height) if no push is possible
+# desire: to see water pile up at nodes and overflow downhill — excess flow accumulates, height labels rise, and the algorithm finds max flow by managing local floods rather than finding global paths
+# critical_parameter: height[source] = |V| — the source starts at maximum height, creating initial pressure; excess flow at the sink accumulates into max_flow
+# triggers: step-by-step animation with delay between operations; push operations highlighted in orange; active nodes (with excess) glow yellow; height and excess labels update per node
+# emerges: the relabel operations create a "waterfall" effect where height labels propagate backward from sink to source, establishing the pressure gradient that drives flow forward
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [has] (info, flow, operation labels; per-node height/excess labels)
+# relationships: appears in GT_Flow; solves the same max-flow problem as networkflow3d's Edmonds-Karp but through local operations instead of global augmenting paths
+# truth: push-relabel proves that maximum flow can be found without ever finding a complete path — local excess management is sufficient if you get the heights right
+
 # Push-Relabel Algorithm: Maximum Flow
 # Visualizes the preflow-based approach to finding maximum flow in networks
 # Explores the concepts of excess flow, height labels, and push/relabel operations
@@ -63,7 +73,7 @@ var info_label: Label3D
 var flow_label: Label3D
 var operation_label: Label3D
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	initialize_graph()
 	create_visual_elements()
@@ -71,7 +81,7 @@ func _ready():
 	if auto_start:
 		call_deferred("start_algorithm")
 
-func setup_environment():
+func setup_environment() -> void:
 	# Add lighting
 	var light := DirectionalLight3D.new()
 	light.name = "SunLight"
@@ -94,7 +104,7 @@ func setup_environment():
 	camera.current = true
 	add_child(camera)
 
-func initialize_graph():
+func initialize_graph() -> void:
 	nodes.clear()
 	edges.clear()
 	adjacency_list.clear()
@@ -114,7 +124,7 @@ func initialize_graph():
 		height[node] = 0
 		excess[node] = 0
 
-func generate_random_network():
+func generate_random_network() -> void:
 	# Create nodes
 	for i in range(graph_size):
 		var node = "n" + str(i)
@@ -147,7 +157,7 @@ func generate_random_network():
 	# Ensure connectivity from source to sink
 	ensure_connectivity()
 
-func ensure_connectivity():
+func ensure_connectivity() -> void:
 	# Add a path from source to sink if none exists
 	var has_path = false
 	for edge in edges:
@@ -167,7 +177,7 @@ func ensure_connectivity():
 			capacity_matrix[0][1] = 5
 			capacity_matrix[1][graph_size - 1] = 5
 
-func create_visual_elements():
+func create_visual_elements() -> void:
 	# Clear existing visuals
 	for child in get_children():
 		if child.name.begins_with("Node_") or child.name.begins_with("Edge_") or child.name.begins_with("Flow_"):
@@ -236,7 +246,7 @@ func create_visual_elements():
 	# Create info labels
 	create_info_labels()
 
-func create_edge_visual(edge: Dictionary):
+func create_edge_visual(edge: Dictionary) -> void:
 	var from_pos = node_spheres[edge.from].position
 	var to_pos = node_spheres[edge.to].position
 	
@@ -303,7 +313,7 @@ func create_arrow_mesh(from: Vector3, to: Vector3) -> ArrayMesh:
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)
 	return mesh
 
-func create_info_labels():
+func create_info_labels() -> void:
 	info_label = Label3D.new()
 	info_label.text = "Push-Relabel Algorithm: Maximum Flow"
 	info_label.font_size = 20
@@ -322,7 +332,7 @@ func create_info_labels():
 	operation_label.position = Vector3(0, 3, 0)
 	add_child(operation_label)
 
-func start_algorithm():
+func start_algorithm() -> void:
 	if algorithm_running:
 		return
 	
@@ -336,7 +346,7 @@ func start_algorithm():
 	# Start push-relabel operations
 	call_deferred("push_relabel_loop")
 
-func initialize_preflow():
+func initialize_preflow() -> void:
 	# Set source height to number of nodes
 	height[source] = len(nodes)
 	
@@ -354,7 +364,7 @@ func initialize_preflow():
 	
 	update_visuals()
 
-func push_relabel_loop():
+func push_relabel_loop() -> void:
 	if not algorithm_running or active_nodes.is_empty():
 		algorithm_running = false
 		max_flow = excess[sink]
@@ -418,7 +428,7 @@ func push_relabel_loop():
 func get_node_index(node: String) -> int:
 	return nodes.find(node)
 
-func highlight_push_operation(from: String, to: String):
+func highlight_push_operation(from: String, to: String) -> void:
 	# Highlight the edge being used for push
 	var edge_key = from + "_" + to
 	if edge_lines.has(edge_key):
@@ -427,7 +437,7 @@ func highlight_push_operation(from: String, to: String):
 		material.emission = push_highlight_color * 0.5
 		edge_lines[edge_key].material_override = material
 
-func update_visuals():
+func update_visuals() -> void:
 	# Update node colors based on state
 	for node in nodes:
 		var sphere = node_spheres[node]
@@ -467,15 +477,15 @@ func update_visuals():
 			
 			edge_lines[edge_key].material_override = material
 
-func update_flow_display():
+func update_flow_display() -> void:
 	if flow_label:
 		flow_label.text = "Max Flow: " + str(max_flow)
 
-func update_operation_text(text: String):
+func update_operation_text(text: String) -> void:
 	if operation_label:
 		operation_label.text = "Operation: " + text
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		if algorithm_running:
 			stop_algorithm()
@@ -484,11 +494,11 @@ func _input(event):
 	elif event.is_action_pressed("ui_cancel"):
 		reset_algorithm()
 
-func stop_algorithm():
+func stop_algorithm() -> void:
 	algorithm_running = false
 	update_operation_text("Algorithm stopped")
 
-func reset_algorithm():
+func reset_algorithm() -> void:
 	algorithm_running = false
 	algorithm_step = 0
 	initialize_graph()
@@ -505,3 +515,12 @@ func get_algorithm_info() -> Dictionary:
 		"current_step": algorithm_step,
 		"active_nodes": active_nodes.size()
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

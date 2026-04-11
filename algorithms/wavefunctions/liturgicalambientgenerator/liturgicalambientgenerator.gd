@@ -80,7 +80,7 @@ signal divine_sound_created(sound_name: String)
 signal liturgical_progress_updated(progress: float)
 signal sacred_generation_complete
 
-func _ready():
+func _ready() -> void:
 	_ensure_rng()
 	mutex = Mutex.new()
 	generation_thread = Thread.new()
@@ -102,7 +102,7 @@ func _ready():
 	# Begin non-blocking sacred sound creation
 	start_liturgical_generation()
 
-func _exit_tree():
+func _exit_tree() -> void:
 	# Stop generation and clean up when leaving the scene tree
 	stop_requested = true
 	
@@ -122,7 +122,7 @@ func _exit_tree():
 		if player and is_instance_valid(player):
 			player.stop()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_ensure_rng()
 	if stop_requested:
 		return
@@ -143,7 +143,7 @@ func _process(delta):
 		trigger_sacred_event()
 		last_sacred_event_time = elapsed_time
 
-func setup_progress_visualization():
+func setup_progress_visualization() -> void:
 	# Create and setup the progress visualizer
 	var ProgressVisualizer = preload("res://algorithms/wavefunctions/liturgicalambientgenerator/progressvisualizer.gd")
 	progress_visualizer = ProgressVisualizer.new()
@@ -151,12 +151,12 @@ func setup_progress_visualization():
 	progress_visualizer.connect_to_generator(self)
 	progress_visualizer.visualization_complete.connect(_on_visualization_complete)
 
-func _on_visualization_complete():
+func _on_visualization_complete() -> void:
 	if progress_visualizer:
 		progress_visualizer.queue_free()
 		progress_visualizer = null
 
-func start_liturgical_generation():
+func start_liturgical_generation() -> void:
 	is_generating = true
 	sacred_generation_started.emit()
 	
@@ -164,7 +164,7 @@ func start_liturgical_generation():
 		print("Failed to start sacred sound generation")
 		return
 
-func _thread_generate_sacred_sounds():
+func _thread_generate_sacred_sounds() -> void:
 	_ensure_rng()
 	if stop_requested:
 		return
@@ -281,19 +281,19 @@ func _thread_generate_sacred_sounds():
 	
 	call_deferred("_emit_sacred_generation_complete")
 
-func _emit_divine_sound_created(sound_name: String):
+func _emit_divine_sound_created(sound_name: String) -> void:
 	divine_sound_created.emit(sound_name)
 
-func _emit_liturgical_progress_updated():
+func _emit_liturgical_progress_updated() -> void:
 	mutex.lock()
 	var progress = generation_progress
 	mutex.unlock()
 	liturgical_progress_updated.emit(progress)
 
-func _emit_sacred_generation_complete():
+func _emit_sacred_generation_complete() -> void:
 	sacred_generation_complete.emit()
 
-func setup_sacred_audio_buses():
+func setup_sacred_audio_buses() -> void:
 	# Create sacred audio buses
 	for i in range(1, NUM_BUSES):
 		var bus_idx = AudioServer.get_bus_count()
@@ -341,7 +341,7 @@ func setup_sacred_audio_buses():
 				AudioServer.add_bus_effect(bus_idx, dark_reverb)
 				AudioServer.add_bus_effect(bus_idx, distortion)
 
-func setup_liturgical_players():
+func setup_liturgical_players() -> void:
 	# Main choral drone player
 	choral_drone_player = AudioStreamPlayer.new()
 	choral_drone_player.bus = "Choir_Hall"
@@ -375,7 +375,7 @@ func setup_liturgical_players():
 		add_child(player)
 		effect_players.append(player)
 
-func start_sacred_ambient():
+func start_sacred_ambient() -> void:
 	# Begin the sacred foundations
 	choral_drone_player.stream = precreated_sounds["choral_foundation"]
 	choral_drone_player.play()
@@ -386,7 +386,7 @@ func start_sacred_ambient():
 	string_ensemble_player.stream = precreated_sounds["string_atmosphere"]
 	string_ensemble_player.play()
 
-func trigger_sacred_event():
+func trigger_sacred_event() -> void:
 	_ensure_rng()
 	if stop_requested:
 		return
@@ -964,19 +964,22 @@ func create_angelic_texture():
 	return stream
 
 # Event handlers
-func _on_sacred_generation_started():
+func _on_sacred_generation_started() -> void:
 	print("Sacred sound generation has begun...")
 
-func _on_divine_sound_created(sound_name: String):
+func _on_divine_sound_created(sound_name: String) -> void:
 	print("Divine sound created: " + sound_name.replace("_", " ").capitalize())
 
-func _on_liturgical_progress_updated(progress: float):
+func _on_liturgical_progress_updated(progress: float) -> void:
 	var percentage = int(progress * 100)
 	print("Sacred generation progress: " + str(percentage) + "%")
 
-func _on_sacred_generation_complete():
+func _on_sacred_generation_complete() -> void:
 	print("Sacred sound generation complete. Entering divine presence...")
 	start_sacred_ambient()
 	is_initialized = true
 	is_generating = false
 	print("The liturgical atmosphere now surrounds you...")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

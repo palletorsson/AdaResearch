@@ -1,31 +1,77 @@
 {
-    "sequences": {
-        "meshes": {
-            "name": "Mesh Generation",
-            "description": "Procedural mesh generation and manipulation",
-            "qfep_term": "F",
-            "qfep_connection": "Mesh topology as structural order — vertices, edges, and faces encoding surface geometry. The mesh IS the F-model of a shape: minimum triangles to approximate maximum surface detail.",
-            "difficulty": "intermediate",
-            "estimated_time": "15-20 minutes",
-            "learning_objectives": [
-                "Vertex manipulation",
-                "Mesh topology",
-                "Procedural geometry"
-            ],
-            "maps": [
-                "Meshes_One",
-                "Meshes_Two",
-                "Meshes_Three",
-                "Meshes_Four"
-            ],
-            "return_to": "lab",
-            "lab_map": "Lab/map_data_post_meshes",
-            "unlock_requirements": [
-                "computationalgeometry"
-            ],
-            "completion_rewards": [
-                "mesh_weaver_badge"
-            ]
-        }
-    }
+	"sequences": {
+		"meshes": {
+			"name": "Mesh Generation",
+			"description": "Procedural mesh generation and manipulation",
+			"qfep_term": "F",
+			"qfep_connection": "Mesh topology as structural order â€” vertices, edges, and faces encoding surface geometry. The mesh IS the F-model of a shape: minimum triangles to approximate maximum surface detail.",
+			"difficulty": "intermediate",
+			"estimated_time": "15-20 minutes",
+			"learning_objectives": [
+				"Vertex manipulation",
+				"Mesh topology",
+				"Procedural geometry"
+			],
+			"maps": [
+				"Meshes_One",
+				"Meshes_Two",
+				"Meshes_Three",
+				"Meshes_Four"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_meshes",
+			"unlock_requirements": [
+				"computationalgeometry"
+			],
+			"completion_rewards": [
+				"mesh_weaver_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "Meshes_One",
+					"position": "intro",
+					"artifacts": [
+						"geometric_transformations"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Vertex manipulation: geometric transformations applied to mesh surfaces. Translation, rotation, scale operating on vertices — the foundation of procedural geometry."
+				},
+				{
+					"map": "Meshes_Two",
+					"position": "foundation",
+					"artifacts": [
+						"noisesphere"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Noise-deformed sphere: Perlin noise displacing vertices along normals. Mesh topology maintained while surface becomes organic — procedural deformation in action."
+				},
+				{
+					"map": "Meshes_Three",
+					"position": "integration",
+					"artifacts": [
+						"geometric_transformations"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Advanced mesh operations: geometric transformations applied to complex topologies. Building on vertex manipulation with multi-mesh coordination."
+				},
+				{
+					"map": "Meshes_Four",
+					"position": "synthesis",
+					"artifacts": [
+						"geometric_transformations"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Mesh synthesis: all transformation techniques combined — vertex displacement, topology manipulation, and procedural deformation composing complete procedural geometry."
+				}
+			],
+			"content": [
+				"Meshes_One: Vertices Edges Faces",
+				"Meshes_Two: Normals and Light",
+				"Meshes_Three: UV Mapping",
+				"Meshes_Four: Subdivision Surfaces"
+			]
+		}
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
 }

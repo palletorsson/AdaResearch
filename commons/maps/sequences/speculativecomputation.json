@@ -6,7 +6,7 @@
 			"deferred_reason": "4/5 maps were env_one placeholders. Real map (Rhizome_Network) moved to postfoundationscrisis. Rebuild when content exists.",
 			"description": "Queer futures, non-normative algorithms, speculative design",
 			"qfep_term": "Edge",
-			"qfep_connection": "Queering formal systems — computation beyond the norm. Speculative algorithms explore what happens at the boundaries of computability, decidability, and formal logic.",
+			"qfep_connection": "Queering formal systems \u00e2\u20ac\u201d computation beyond the norm. Speculative algorithms explore what happens at the boundaries of computability, decidability, and formal logic.",
 			"difficulty": "advanced",
 			"learning_objectives": [
 				"Evolutionary algorithms as speculative design",
@@ -14,7 +14,7 @@
 				"Rhizomatic network structures",
 				"Ontological uncertainty in computation"
 			],
-			"maps": [],
+			"maps": ["SpeculativeComputation_Queer_Machines"],
 			"deferred_maps": [
 				"SpeculativeComputation_Evolutionary_Algorithms",
 				"SpeculativeComputation_Queer_Cyborg_Subjectivity",
@@ -23,7 +23,10 @@
 			],
 			"moved_maps": {
 				"SpeculativeComputation_Rhizome_Network": "postfoundationscrisis"
-			}
+			},
+			"artifact_groups": []
 		}
-	}
+	},
+	"world_phase": "beyond",
+	"artifact_groups": []
 }

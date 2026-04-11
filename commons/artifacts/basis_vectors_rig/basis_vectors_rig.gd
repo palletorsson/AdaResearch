@@ -6,6 +6,16 @@
 # QFEP: Basis as "frame of reference" - the order from which we measure
 #
 # UPGRADED VISUALS - Sleek modern look with glow effects
+#
+# @identity
+# essence: P = x*i + y*j + z*k. Any point is a weighted sum of basis directions.
+# desire: To decompose space into understandable parts — grab a point and see its coordinates unfold along three axes.
+# critical_parameter: target_point — the Vector3 being decomposed. Moving it rewrites the linear combination in real time.
+# triggers: VR handle drag → coordinates update, preset buttons → snap to pure-axis or combined points, rotation presets → tilt/spin the basis itself
+# emerges: The realization that coordinates are not absolute — they depend on which basis you choose. Rotating the basis changes the numbers but not the point.
+# needs: VR grabbable handles [has], preset buttons [has], keyboard shortcuts [has]. Missing: free-rotation grab on the entire rig.
+# relationships: Foundation for vector_addition_demo (addition requires understanding components). Paired with coordinate_system_switcher (same point, different frames).
+# truth: Coordinates do not belong to the point. They belong to the relationship between the point and the frame.
 
 extends Node3D
 

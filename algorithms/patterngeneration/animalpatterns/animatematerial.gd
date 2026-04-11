@@ -11,10 +11,10 @@ extends Node3D
 
 @onready var mat: ShaderMaterial = $".".material_override
 
-func _ready():
+func _ready() -> void:
 	apply_preset()
 
-func apply_preset():
+func apply_preset() -> void:
 	if not mat:
 		return
 
@@ -68,3 +68,6 @@ func apply_preset():
 			mat.set_shader_parameter("rough", 0.45)
 			mat.set_shader_parameter("metallic_amt", 0.05)
 			mat.set_shader_parameter("normal_amount", 0.4)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

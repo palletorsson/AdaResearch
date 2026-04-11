@@ -1,5 +1,16 @@
 extends Node3D
 
+
+# @identity
+# essence: tube_y(x, t) = A * sin(omega * x + phi * t) — sine-displaced cylinders in a tunnel
+# desire: Walk through a hallway where glowing tubes undulate with sine wave displacement
+# critical_parameter: tube_count — determines visual density of the oscillating environment
+# triggers: time drives phase animation; color_variants assign distinct hues per tube
+# emerges: an immersive sine wave environment — architecture that breathes with oscillation
+# needs: VR walkthrough [has], frequency control [missing]
+# relationships: depends on MultiMesh cylinder instancing; contrasts with coloredlines (sine tubes vs parametric curves); unlocks environmental wave experience
+# truth: A hallway of sine tubes is a frozen moment of wave interference made architectural.
+
 @export var hallway_length: float = 60.0
 @export var hallway_width: float = 12.0
 @export var hallway_height: float = 12.0
@@ -20,7 +31,7 @@ extends Node3D
 var tube_segments: Array[MultiMeshInstance3D] = []
 var elapsed: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	_setup_environment()
 	_create_sine_tubes()
 
@@ -30,7 +41,7 @@ func _process(delta: float) -> void:
 	elapsed += delta
 	_update_tubes(elapsed)
 
-func _setup_environment():
+func _setup_environment() -> void:
 	var env := Environment.new()
 	env.background_mode = Environment.BG_COLOR
 	env.background_color = Color(0.05, 0.05, 0.08)
@@ -41,7 +52,7 @@ func _setup_environment():
 	$WorldEnvironment.environment = env
 
 
-func _create_sine_tubes():
+func _create_sine_tubes() -> void:
 	var half_len := int(tube_length * 0.5)
 	var segments_per_tube := half_len * 2  # -half_len to half_len-1
 
@@ -69,7 +80,7 @@ func _create_sine_tubes():
 
 	_update_tubes(0.0)
 
-func _update_tubes(time_val: float):
+func _update_tubes(time_val: float) -> void:
 	var half_len := int(tube_length * 0.5)
 	var rot_basis := Basis.IDENTITY.rotated(Vector3(1, 0, 0), PI * 0.5)
 
@@ -100,3 +111,12 @@ func _make_reflective(col: Color) -> StandardMaterial3D:
 	mat.metallic = 1.0
 	mat.roughness = 0.06
 	return mat
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

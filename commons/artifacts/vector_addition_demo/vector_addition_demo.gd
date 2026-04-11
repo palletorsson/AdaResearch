@@ -2,10 +2,20 @@
 # Interactive vector addition: A + B = C
 # VR-enabled with grabbable arrow endpoints
 #
-# Visualizes the parallelogram law: 
+# Visualizes the parallelogram law:
 # Place vectors head-to-tail, resultant is the diagonal
 #
 # UPGRADED VISUALS - Sleek modern look with glow effects
+#
+# @identity
+# essence: C = A + B. Head-to-tail construction. The parallelogram law.
+# desire: To let the learner grab two arrows and watch a third arrow appear — the sum — making addition tangible rather than symbolic.
+# critical_parameter: The angle between vector_a and vector_b. Parallel vectors add magnitudes; perpendicular vectors add by Pythagoras; opposed vectors cancel.
+# triggers: Handle drag → resultant updates, preset buttons → snap to orthogonal/acute/3D configurations, ghost arrows → parallelogram appears
+# emerges: The parallelogram from ghost arrows. The triangle inequality (|A+B| <= |A|+|B|) becomes visible without being stated.
+# needs: VR grabbable handles [has], preset buttons [has]. Missing: slider to animate blending between A and B.
+# relationships: Prerequisite for combined_forces_demo (force superposition is vector addition). Pairs with vector_subtraction_demo (inverse operation).
+# truth: Addition is geometry, not arithmetic. Two directions become one.
 
 extends Node3D
 
@@ -232,3 +242,8 @@ func set_vectors(a: Vector3, b: Vector3):
 
 func get_result() -> Vector3:
 	return vector_a + vector_b
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

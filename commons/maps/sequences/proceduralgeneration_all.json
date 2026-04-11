@@ -2,7 +2,7 @@
 	"sequences": {
 		"proceduralgeneration_all": {
 			"name": "Procedural Generation (All Maps)",
-			"description": "All 43 ProceduralGeneration maps — raw directory listing for browsing and testing.",
+			"description": "All 43 ProceduralGeneration maps \u00e2\u20ac\u201d raw directory listing for browsing and testing.",
 			"difficulty": "mixed",
 			"maps": [
 				"ProceduralGeneration_21",
@@ -47,7 +47,416 @@
 				"ProceduralGenerationSixteenCellNet",
 				"ProceduralGenerationTesseractErrorTunnel",
 				"ProceduralGenerationWfcDungeonGenerator"
+			],
+			"artifact_groups": [
+				{
+					"map": "ProceduralGeneration_21",
+					"position": "intro",
+					"artifacts": [
+						"sixteen_cell_net_space_showcase"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Introduction with 1 artifact"
+				},
+				{
+					"map": "ProceduralGeneration_BranchingGrowthAlgorithm",
+					"position": "intro",
+					"artifacts": [
+						"branching_growth_algorithm"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 1 artifact"
+				},
+				{
+					"map": "ProceduralGeneration_CaveRandomWalk",
+					"position": "intro",
+					"artifacts": [
+						"caverandomwalk"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 1 artifact"
+				},
+				{
+					"map": "ProceduralGeneration_CubeMound",
+					"position": "intro",
+					"artifacts": [
+						"cube_mound_scene",
+						"cube_mound_scene_sphere"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Introduction with 2 artifacts"
+				},
+				{
+					"map": "ProceduralGeneration_Delaunay_Triangulation",
+					"position": "intro",
+					"artifacts": [
+						"delaunay_triangulation_3d_cell"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 1 artifact"
+				},
+				{
+					"map": "ProceduralGeneration_Dome",
+					"position": "intro",
+					"artifacts": [
+						"dome",
+						"interactable_demo",
+						"voronoi_grid_3d"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Introduction with 3 artifacts"
+				},
+				{
+					"map": "ProceduralGeneration_Eight",
+					"position": "intro",
+					"artifacts": [
+						"grab_stick",
+						"mirror_cellular_texture_for_3d",
+						"rhizomatic_maze_space"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Introduction with 3 artifacts"
+				},
+				{
+					"map": "ProceduralGeneration_Eleven",
+					"position": "foundation",
+					"artifacts": [
+						"array_visualizer",
+						"organic_space",
+						"rule_30_110"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Building foundations with 3 artifacts"
+				},
+				{
+					"map": "ProceduralGeneration_Five",
+					"position": "foundation",
+					"artifacts": [
+						"implicit_surface_modeling",
+						"layered_membrane",
+						"lsystem_tree"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Building foundations with 3 artifacts"
+				},
+				{
+					"map": "ProceduralGeneration_Four",
+					"position": "foundation",
+					"artifacts": [
+						"fibonacci_sequences"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 1 artifact"
+				},
+				{
+					"map": "ProceduralGeneration_Genetic_Algorithms",
+					"position": "foundation",
+					"artifacts": [
+						"GeneticProgramming"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 1 artifact"
+				},
+				{
+					"map": "ProceduralGeneration_Genetic_Programming",
+					"position": "foundation",
+					"artifacts": [
+						"GeneticProgramming",
+						"clipboard"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "ProceduralGeneration_Marching_Cubes_Algorithm",
+					"position": "foundation",
+					"artifacts": [
+						"marching_cubes",
+						"mc"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "ProceduralGeneration_MarchingCave",
+					"position": "foundation",
+					"artifacts": [
+						"marchingcave",
+						"marchingcubes_cave"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "ProceduralGeneration_MarchingGallery",
+					"position": "foundation",
+					"artifacts": [
+						"mc",
+						"portal"
+					],
+					"size_budget": "mixed",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "ProceduralGeneration_Markov_Chains",
+					"position": "exploration",
+					"artifacts": [
+						"clipboard",
+						"markov_chains",
+						"markov_chains_tree"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 3 artifacts"
+				},
+				{
+					"map": "ProceduralGeneration_Maze",
+					"position": "exploration",
+					"artifacts": [
+						"maze_generation"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "ProceduralGeneration_N_grams",
+					"position": "exploration",
+					"artifacts": [
+						"markov_chains"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "ProceduralGeneration_Poisson_Disk_Sampling",
+					"position": "exploration",
+					"artifacts": [
+						"poisson_disk_sampling_3d"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+					"position": "exploration",
+					"artifacts": [
+						"reaction_diffusion",
+						"turing_pattern_generator"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 2 artifacts"
+				},
+				{
+					"map": "ProceduralGeneration_Seven",
+					"position": "exploration",
+					"artifacts": [
+						"array_visualizer",
+						"organic_space",
+						"recursive_tree"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 3 artifacts"
+				},
+				{
+					"map": "ProceduralGeneration_Space_Colonization_Algorithms",
+					"position": "exploration",
+					"artifacts": [
+						"space_colonization_algorithm"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "ProceduralGeneration_Space_Partitioning",
+					"position": "exploration",
+					"artifacts": [
+						"binary_space_partitioning"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "ProceduralGeneration_Ten",
+					"position": "exploration",
+					"artifacts": [
+						"context_free_grammars",
+						"fibonacci_sequences",
+						"julia_set",
+						"tree_gen"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 4 artifacts"
+				},
+				{
+					"map": "ProceduralGeneration_Three",
+					"position": "exploration",
+					"artifacts": [
+						"voronoi_diagrams",
+						"voronoi_space"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 2 artifacts"
+				},
+				{
+					"map": "ProceduralGeneration_Two",
+					"position": "integration",
+					"artifacts": [
+						"boolean_patterns_demo"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "ProceduralGeneration_Voronoi_Diagrams",
+					"position": "integration",
+					"artifacts": [
+						"voronoi_diagram_3d"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "ProceduralGeneration_Wave_Function_Collapse",
+					"position": "integration",
+					"artifacts": [
+						"wave_function_collapse",
+						"wfc_3d_demo"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 2 artifacts"
+				},
+				{
+					"map": "ProceduralGenerationBooleanPatterns",
+					"position": "integration",
+					"artifacts": [
+						"boolean_patterns"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "ProceduralGenerationCaveExplorer3dUi",
+					"position": "integration",
+					"artifacts": [
+						"cave_explorer_3d_ui"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "ProceduralGenerationCrystalRandom",
+					"position": "integration",
+					"artifacts": [
+						"crystal_random_walk_demo"
+					],
+					"size_budget": "environment",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "ProceduralGenerationMarchingcubesFlatLandscape",
+					"position": "integration",
+					"artifacts": [
+						"marchingcubes_flat_landscape"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "ProceduralGenerationMarchingCubesInsideCave",
+					"position": "integration",
+					"artifacts": [
+						"dark_sphere",
+						"marchingcubes_inside_cave"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 2 artifacts"
+				},
+				{
+					"map": "ProceduralGenerationMarchingcubesPortalLandscape",
+					"position": "integration",
+					"artifacts": [
+						"marchingcubes_portal_landscape"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "ProceduralGenerationMarchingCubesSculpture",
+					"position": "integration",
+					"artifacts": [
+						"GyroidDemo",
+						"marching_cubes_sculpt_vr"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 2 artifacts"
+				},
+				{
+					"map": "ProceduralGenerationMarchingcubesTorusSculpture",
+					"position": "synthesis",
+					"artifacts": [
+						"marchingcubes_torus_sculpture"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 1 artifact"
+				},
+				{
+					"map": "ProceduralGenerationMarchingCubesVovelNoise",
+					"position": "synthesis",
+					"artifacts": [
+						"dark_sphere",
+						"marchingcubes_voxel_noise_demo"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 2 artifacts"
+				},
+				{
+					"map": "ProceduralGenerationNetSpace",
+					"position": "synthesis",
+					"artifacts": [
+						"tesseract_net_space_showcase"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 1 artifact"
+				},
+				{
+					"map": "ProceduralGenerationPortals",
+					"position": "synthesis",
+					"artifacts": [
+						"tessellating_portal_demo"
+					],
+					"size_budget": "environment",
+					"rationale": "Synthesis with 1 artifact"
+				},
+				{
+					"map": "ProceduralGenerationSixteenCellNet",
+					"position": "synthesis",
+					"artifacts": [
+						"sixteen_cell_net_space_showcase"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 1 artifact"
+				},
+				{
+					"map": "ProceduralGenerationTesseractErrorTunnel",
+					"position": "synthesis",
+					"artifacts": [
+						"tesseract_tunnel_demo"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 1 artifact"
+				},
+				{
+					"map": "ProceduralGenerationWfcDungeonGenerator",
+					"position": "synthesis",
+					"artifacts": [
+						"dark_sphere",
+						"wfc_dungeon_generator"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 2 artifacts"
+				}
 			]
 		}
-	}
+	},
+	"world_phase": "organic",
+	"artifact_groups": []
 }

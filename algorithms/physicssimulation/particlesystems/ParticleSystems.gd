@@ -1,15 +1,25 @@
 ## Particle Systems — Uses Godot's GPUParticles3D (runs on GPU, not CPU)
 ## Shows different particle behaviors: fountain, fire, sparks, snow
+##
+## @identity
+## essence: emit(position, velocity, lifetime). Each particle: born, forced, aged, dead. The system is the population, not the individual.
+## desire: To show four archetypal particle behaviors side by side — fountain (ballistic), fire (buoyant), sparks (explosive), snow (gentle) — all from the same GPU machinery.
+## critical_parameter: gravity direction and damping per system. Fountain: gravity down, low damp. Fire: gravity UP (buoyancy), high damp. These two parameters create completely different phenomena.
+## triggers: Automatic — all four GPUParticles3D emit continuously. No interaction needed; the artifact is a living taxonomy.
+## emerges: Fire looking like fire despite being spheres — because upward gravity + high damping + color ramp = buoyant fading embers. The color gradient does most of the work.
+## needs: Four GPU particle systems [has]. Missing: VR sliders to morph between behaviors, particle count control, custom emission shapes.
+## relationships: GPU counterpart to firework_launcher (CPU particles). Lives in ForcesSystems. Feeds into particle effects throughout the engine.
+## truth: A particle system is a statistical object. No single particle matters. The population's distribution is the phenomenon.
 extends Node3D
 
-func _ready():
+func _ready() -> void:
 	scale = Vector3(0.8, 0.8, 0.8)
 	_create_fountain(Vector3(-2, 0, -1))
 	_create_fire(Vector3(2, 0, -1))
 	_create_sparks(Vector3(-2, 0, 2))
 	_create_snow(Vector3(2, 0, 2))
 
-func _create_fountain(pos: Vector3):
+func _create_fountain(pos: Vector3) -> void:
 	var particles := GPUParticles3D.new()
 	particles.name = "Fountain"
 	particles.amount = 200
@@ -35,7 +45,7 @@ func _create_fountain(pos: Vector3):
 
 	add_child(particles)
 
-func _create_fire(pos: Vector3):
+func _create_fire(pos: Vector3) -> void:
 	var particles := GPUParticles3D.new()
 	particles.name = "Fire"
 	particles.amount = 150
@@ -71,7 +81,7 @@ func _create_fire(pos: Vector3):
 
 	add_child(particles)
 
-func _create_sparks(pos: Vector3):
+func _create_sparks(pos: Vector3) -> void:
 	var particles := GPUParticles3D.new()
 	particles.name = "Sparks"
 	particles.amount = 80
@@ -95,7 +105,7 @@ func _create_sparks(pos: Vector3):
 
 	add_child(particles)
 
-func _create_snow(pos: Vector3):
+func _create_snow(pos: Vector3) -> void:
 	var particles := GPUParticles3D.new()
 	particles.name = "Snow"
 	particles.amount = 100
@@ -123,3 +133,12 @@ func _create_snow(pos: Vector3):
 	particles.draw_pass_1.height = 0.06
 
 	add_child(particles)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

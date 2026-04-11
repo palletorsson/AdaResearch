@@ -1,5 +1,5 @@
-The floor breaks. Where Geometric I offered open ground, here the ground itself becomes argument. L-shaped walkways frame rectangular voids — absence cut with precision. Platforms rise to height 3, forcing the body upward while the eye drops into empty pits below.
+The floor drops away. Where Geometric_1 was solid ground, this room has gaps — voids cut into the grid like missing teeth. L-shaped walkways thread between the absences. Raised platforms offer observation points over the pits below.
 
-Void is not error. Void is datum. Computational geometry must account for what isn't there — holes in polygons, gaps in meshes, the negative space that defines a boundary as much as any edge does. Walk the L-shaped corridors. Stand on the raised platform. Look down into nothing.
+Void is not emptiness. It is a datum — a reference point that defines the boundary between walkable and not. The platforms at height-3 let you look down into the voids and see their shapes. An L-shaped void is still a shape. A missing square still has coordinates. Geometry does not require presence; it requires definition.
 
-Every spatial algorithm eventually asks: where does the surface end? The void answers by subtraction. Geometry's first hard lesson — structure is what remains after removal.
+Navigate the negative space. The voids teach what the solid floor could not: that a coordinate system must account for what is absent as precisely as what is there.

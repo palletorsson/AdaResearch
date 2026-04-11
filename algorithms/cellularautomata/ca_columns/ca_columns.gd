@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: 2D Game of Life stacked as 3D history — each generation becomes a new vertical layer
+# desire: To grow a city of columns from a flat seed, then release walkers to erode and reshape it
+# critical_parameter: rule_born/rule_survive — the Life variant determines whether columns are sparse towers or dense walls
+# triggers: Generation completes → walkers spawn on top and begin stochastic erosion/deposition cycle
+# emerges: Architectural forms from Life rules; walker erosion carves arches and bridges no one planned
+# needs: VR rule controls [missing], walker parameter sliders [missing], density control [missing]
+# relationships: Feeds into CA_GameOfLife. Contrasts with ca_bridge (1D rule → bridge vs 2D rule → columns). Unlocks CellularAutomata3DStacked.
+# truth: Stack time as space and a flat automaton becomes architecture.
+
 @export_category("Grid Settings")
 @export var grid_size: int = 64
 @export var max_height: int = 128
@@ -30,7 +40,7 @@ var is_generating: bool = false
 
 var multi_mesh_instance: MultiMeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	if not gradient:
 		_setup_gradient_from_colors()
 
@@ -43,14 +53,14 @@ func _ready():
 	if auto_generate:
 		start_generation()
 
-func _setup_gradient_from_colors():
+func _setup_gradient_from_colors() -> void:
 	gradient = Gradient.new()
 	gradient.remove_point(0)
 	gradient.remove_point(0)
 	gradient.add_point(0.0, color_start)
 	gradient.add_point(1.0, color_end)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_generating:
 		timer += delta
 		if timer >= generation_speed:
@@ -59,7 +69,7 @@ func _process(delta):
 	else:
 		_process_walkers(delta)
 
-func start_generation():
+func start_generation() -> void:
 	if random_seed == 0:
 		randomize()
 	else:
@@ -71,10 +81,10 @@ func start_generation():
 	_update_multimesh()
 	is_generating = true
 
-func stop_generation():
+func stop_generation() -> void:
 	is_generating = false
 
-func clear():
+func clear() -> void:
 	is_generating = false
 	current_generation = 0
 	history_3d.clear()
@@ -83,7 +93,7 @@ func clear():
 	if multi_mesh_instance and multi_mesh_instance.multimesh:
 		multi_mesh_instance.multimesh.instance_count = 0
 
-func step():
+func step() -> void:
 	if history_3d.size() >= max_height:
 		if continuous_mode:
 			history_3d.pop_front()
@@ -98,7 +108,7 @@ func step():
 	if not continuous_mode:
 		current_generation += 1
 
-func _initialize_grid():
+func _initialize_grid() -> void:
 	grid_2d = []
 	for x in range(grid_size):
 		var col = []
@@ -109,7 +119,7 @@ func _initialize_grid():
 	# Store initial state
 	history_3d.append(grid_2d.duplicate(true))
 
-func _evolve_grid():
+func _evolve_grid() -> void:
 	var new_grid = []
 	for x in range(grid_size):
 		var col = []
@@ -145,7 +155,7 @@ func _count_neighbors(x, y) -> int:
 				count += 1
 	return count
 
-func _setup_multimesh():
+func _setup_multimesh() -> void:
 	multi_mesh_instance = MultiMeshInstance3D.new()
 	multi_mesh_instance.name = "MultiMeshInstance3D"
 	add_child(multi_mesh_instance)
@@ -170,7 +180,7 @@ func _setup_multimesh():
 	multimesh.use_colors = true
 	multi_mesh_instance.multimesh = multimesh
 
-func _update_multimesh():
+func _update_multimesh() -> void:
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
 		return
 
@@ -220,7 +230,7 @@ func _update_multimesh():
 var walkers: Array = [] # Array of Vector3i positions
 var walker_timer: float = 0.0
 
-func _spawn_walkers():
+func _spawn_walkers() -> void:
 	walkers.clear()
 	if not enable_walkers or history_3d.is_empty():
 		return
@@ -232,7 +242,7 @@ func _spawn_walkers():
 		var y = randi() % grid_size
 		walkers.append(Vector3i(x, y, top_z))
 
-func _process_walkers(delta):
+func _process_walkers(delta) -> void:
 	if is_generating or history_3d.is_empty():
 		return
 		
@@ -242,7 +252,7 @@ func _process_walkers(delta):
 		_step_walkers()
 		_update_multimesh() # Re-render changes
 
-func _step_walkers():
+func _step_walkers() -> void:
 	for i in range(walkers.size()):
 		var pos = walkers[i]
 		
@@ -287,3 +297,12 @@ func _count_3d_neighbors(x, y, z) -> int:
 					if history_3d[nz][nx][ny] == 1:
 						count += 1
 	return count
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

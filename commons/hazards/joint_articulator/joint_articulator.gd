@@ -1,3 +1,13 @@
+# @identity
+# essence: joint_type(limb_i) = {hinge, ball, slider, revolute, prismatic, fixed} -- 6 limbs, 6 constraints
+# desire: central body with 6 limbs, each demonstrating a different joint constraint as locomotion
+# critical_parameter: joint type per limb -- hinge restricts to 1 axis, ball allows 3, slider translates
+# triggers: continuous locomotion cycle; each limb moves per its joint constraint; proximity triggers attack
+# emerges: physics constraints as morphology -- the joint type IS the movement vocabulary
+# needs: HazardCreatureBase [has]; 6 joint type implementations [has]; limb mesh [has]; VR interaction [missing]
+# relationships: embodies joints sequence; pairs with spring_mass_bouncer (constraints vs elasticity)
+# truth: six limbs, six joint types -- the constraint vocabulary of all articulated motion.
+
 extends HazardCreatureBase
 class_name JointArticulator
 ## Central body with 6 limbs, each demonstrating a different joint type.

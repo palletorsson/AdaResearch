@@ -114,8 +114,8 @@ static func _build_stem(dna: CritterDNA, root: Node3D, mapper: CritterTraitMappe
 	stem_inst.mesh = stem_mesh
 	stem_inst.position = Vector3(0.0, stem_height * 0.5, 0.0)
 
-	# Stem material: secondary color, fibrous texture
-	var mat := mapper.create_material_from_dna(dna, seed_val)
+	# Stem material: bark surface, fibrous texture
+	var mat := mapper.create_part_material(dna, CritterTraitMapper.PartType.TRUNK, seed_val)
 	mat.set_shader_parameter("primary_color", dna.secondary_color)
 	mat.set_shader_parameter("secondary_color", dna.secondary_color.lightened(0.15))
 	mat.set_shader_parameter("roughness", clampf(dna.roughness + 0.1, 0.3, 1.0))
@@ -324,8 +324,8 @@ static func _build_cap(dna: CritterDNA, root: Node3D, mapper: CritterTraitMapper
 	if absf(dna.part_tilt) > 1.0:
 		cap_inst.rotation.z = deg_to_rad(dna.part_tilt * 0.3)
 
-	# Cap material: primary color, with pattern
-	var mat := mapper.create_material_from_dna(dna, seed_val)
+	# Cap material: membrane surface for organic cap look
+	var mat := mapper.create_part_material(dna, CritterTraitMapper.PartType.HEAD, seed_val)
 	mapper.apply_variation(mat, seed_val)
 
 	# Translucency for bioluminescent fungi
@@ -587,3 +587,5 @@ static func _build_colony(dna: CritterDNA, root: Node3D, mapper: CritterTraitMap
 
 			var sub_scale: float = rng.randf_range(0.3, 1.0)
 			_build_single_mushroom(dna, sub_root, mapper, base_seed + i * 100, sub_scale, maxi(lod - 1, 0))
+
+

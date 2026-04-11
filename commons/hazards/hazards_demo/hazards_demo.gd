@@ -1,3 +1,13 @@
+# @identity
+# essence: F_transmute(agent, field) → new_state — same potential, different restraint, different manifestation
+# desire: walk into danger, grab tools, discover that hazards transmute when you bring the right catalyst
+# critical_parameter: force_intensity — governs damage-per-tick in each force field type
+# triggers: body_entered on ForceField Area3D; mushroom proximity triggers transmutation
+# emerges: players discover the mushroom-to-force-field transmutation loop without explicit instruction
+# needs: VR locomotion [has], grab [has], force field shaders [has]
+# relationships: depends on plasma_critter, octapod_crawler, edible_mushroom, force_field; unlocks random_game hazard gauntlet
+# truth: A hazard is not an obstacle — it is a relationship waiting for the right mediator.
+#
 # ===========================================================================
 # Hazards Demo Scene
 # Test scene for Plasma Critter, Stick Tool, Octapod Crawler, and Force Fields

@@ -1,0 +1,184 @@
+{
+  "query": "Space Topology and Marching Cubes",
+  "matched_topic": "generic",
+  "pack_slug": "marching-cubes",
+  "title": "Generic development start for: Space Topology and Marching Cubes",
+  "category": "exploration",
+  "tags": [
+    "space",
+    "topology",
+    "and",
+    "marching",
+    "cubes"
+  ],
+  "overview": "No curated starter pack matched exactly. This pack is assembled from document hits and repo path matches, so it is useful for discovery but less trustworthy than a curated topic profile.",
+  "read_first": [],
+  "principles": [],
+  "constraints": [],
+  "first_moves": [
+    "Refine the intent into a system noun if possible, then rerun this tool.",
+    "Use tools/lod_query.py when you know the sequence, map, or artifact name."
+  ],
+  "deepwiki_url": "https://deepwiki.com/palletorsson/AdaResearch",
+  "deepwiki_topics": [
+    "Overview"
+  ],
+  "encyclopedia": [],
+  "history_hits": [
+    {
+      "path": "doc/SESSION_HANDOFF_2026-03-28.md",
+      "snippet": "# Session Handoff: March 23-28, 2026",
+      "score": "3"
+    },
+    {
+      "path": "doc/sessions/2026-03-19-garden-session-summary.md",
+      "snippet": "Single session spanning ~14 hours. Started with renaming map folders, ended with 363 algorithms having identity, desire, and truth.",
+      "score": "1"
+    },
+    {
+      "path": "doc/sessions/2026-03-23-continued-session.md",
+      "snippet": "Single session spanning ~14 hours. Started with renaming map folders, ended with 363 algorithms having identity, desire, and truth.",
+      "score": "1"
+    }
+  ],
+  "doc_hits": [
+    {
+      "path": "doc/AlgorithmsList.md",
+      "snippet": "- Tron Grid Navigation - Spatial reference and coordinate systems",
+      "score": "5"
+    },
+    {
+      "path": "doc/CompliteAlgorithms.md",
+      "snippet": "Tron grid navigation and spatial references",
+      "score": "5"
+    },
+    {
+      "path": "doc/LOD_TREE.json",
+      "snippet": "\"summary\": \"Ada Research: a Godot 4 VR/desktop game teaching algorithms through interactive 3D spaces. QFEP (Queer Feminist Enactivist Pedagogy) framework. Content chain: Sequence -> Map -> Artifact.\",",
+      "score": "5"
+    },
+    {
+      "path": "doc/NATURE_SYSTEM_PLAN.md",
+      "snippet": "> **potential under restraint** — and the restraint can change. A poison",
+      "score": "5"
+    },
+    {
+      "path": "doc/TAXONOMY.md",
+      "snippet": "> How do we encode form? What primitives and operations are needed?",
+      "score": "5"
+    },
+    {
+      "path": "doc/reports/ARTIFACT_REGISTRY_AUDIT.json",
+      "snippet": "\"scene_path\": \"res://commons/primitives/cubes/animated_cube.tscn\",",
+      "score": "5"
+    }
+  ],
+  "repo_hits": [
+    "algorithms/spacetopology/marchingcubes/FastCPULandscapeCaveGenerator.gd",
+    "algorithms/spacetopology/marchingcubes/FastCPULandscapeCaveGenerator.gd.uid",
+    "algorithms/spacetopology/marchingcubes/FastLandscapeCaveGenerator.gd",
+    "algorithms/spacetopology/marchingcubes/FastLandscapeCaveGenerator.gd.uid",
+    "algorithms/spacetopology/marchingcubes/LandscapeCaveGenerator.gd",
+    "algorithms/spacetopology/marchingcubes/LandscapeCaveGenerator.gd.uid",
+    "algorithms/spacetopology/marchingcubes/fast_landscape_demo.tscn",
+    "algorithms/spacetopology/marchingcubes/gpu_landscape_demo.tscn"
+  ],
+  "grounded_wiki": {
+    "project_slug": "adaresearch-case-study",
+    "points": [
+      {
+        "point_type": "pattern",
+        "title": "1. Primary Request and Intent: - **Shader on grid cubes**: User wanted the ac...",
+        "statement": "1. Primary Request and Intent: - **Shader on grid cubes**: User wanted the actual grid wall cubes (rendered via GridMultiMesh) to display GPU shader patterns - \"target the grid cubes\" - not just flat colors - **Patchwork tile tu...",
+        "support_count": 1,
+        "confidence": 0.71
+      },
+      {
+        "point_type": "decision",
+        "title": "Key finding: GridSystem uses **MultiMesh** for all structure cubes - can't ap...",
+        "statement": "Key finding: GridSystem uses **MultiMesh** for all structure cubes - can't apply different shaders per cube. But we can use `wall_cove` with `wall_extend` to cover both the slope AND wall surface.",
+        "support_count": 1,
+        "confidence": 0.71
+      },
+      {
+        "point_type": "fact",
+        "title": "Bridge: Map authors work in JSON and web tooling, while the Grid System turns...",
+        "statement": "Bridge: Map authors work in JSON and web tooling, while the Grid System turns the same data into walls, utilities, artifacts, spawn logic, and scene flow in VR.",
+        "support_count": 3,
+        "confidence": 0.81
+      },
+      {
+        "point_type": "fact",
+        "title": "Bridge: Maps and sequences refer to stable `lookup_name` identifiers, while r...",
+        "statement": "Bridge: Maps and sequences refer to stable `lookup_name` identifiers, while registry metadata carries the bridge back to scenes, categories, tags, and sequence ownership.",
+        "support_count": 3,
+        "confidence": 0.81
+      }
+    ],
+    "claims": [
+      {
+        "claim_type": "decision",
+        "statement": "Key finding: GridSystem uses **MultiMesh** for all structure cubes - can't apply different shaders per cube. But we can use `wall_cove` with `wall_extend` to cover both the slope AND wall surface.",
+        "support_count": 1,
+        "confidence": 0.71,
+        "status": "verified"
+      },
+      {
+        "claim_type": "pattern",
+        "statement": "1. Primary Request and Intent: - **Shader on grid cubes**: User wanted the actual grid wall cubes (rendered via GridMultiMesh) to display GPU shader patterns - \"target the grid cubes\" - not just flat colors - **Patchwork tile tu...",
+        "support_count": 1,
+        "confidence": 0.71,
+        "status": "verified"
+      },
+      {
+        "claim_type": "principle",
+        "statement": "Repo and chat-grounded overview for AdaResearch 46.",
+        "support_count": 1,
+        "confidence": 0.82,
+        "status": "grounded"
+      },
+      {
+        "claim_type": "principle",
+        "statement": "Grounded page for AdaResearch's sequence, map, validation, and VR iteration pipeline.",
+        "support_count": 1,
+        "confidence": 0.82,
+        "status": "grounded"
+      }
+    ],
+    "turns": [
+      {
+        "session_id": "531f69cf-2ddc-41b2-9bdb-3d1a36046289",
+        "turn_index": 121,
+        "role": "assistant",
+        "text": "Continuing with artifact screenshot work. Let me review the remaining 5 batch 8 screenshots and start preparing the next batches. **Batch 8 remaining review:** - **coordinate_system_switcher**: ✅ PASS - 3D axes with Cartesian/Spherical coordinate labels, white point marker - **coupled_pendulums**: ✅ PASS - Red & blue p..."
+      },
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 23,
+        "role": "user",
+        "text": "can you make the interface a bit more light and out line the cubes so I see them better"
+      },
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 206,
+        "role": "user",
+        "text": "* Waveform should be a continuous helix double * branching branch forward and branch more * Swarms should swarm separate look for targets * Cellular automata should be cubes with rules slower * Color should color every cube in the grid it hits"
+      },
+      {
+        "session_id": "12c4a6be-d651-49ff-9ec9-a4ca4d021cb1",
+        "turn_index": 214,
+        "role": "user",
+        "text": "I love the color gun! For Transform cubes in scene scale down move a bit and rotate a bit scale a bit, for fractals if I shoot a cube spawn two new cubes."
+      }
+    ]
+  },
+  "trust_order": [
+    "repo files",
+    "doc/ and docs/ contracts",
+    "session handoffs and session summaries",
+    "grounded wiki chat points and turns",
+    "encyclopedia routes and source files",
+    "DeepWiki overview"
+  ],
+  "generated_at": "2026-04-04T12:23:39+00:00"
+}

@@ -2,7 +2,7 @@ extends SceneTree
 
 # Quick compile test for WFC
 
-func _init():
+func _init() -> void:
 	print("=== Testing WFC Compilation ===")
 
 	# Test WFCTile

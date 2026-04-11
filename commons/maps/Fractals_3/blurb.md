@@ -1,1 +1,0 @@
-Circles within circles, spiraling inward forever. The recursive circle demonstrates radial self-similarity—each ring contains smaller rings, each center spawns new centers. Where does the circle end? It doesn't. It converges on infinity.

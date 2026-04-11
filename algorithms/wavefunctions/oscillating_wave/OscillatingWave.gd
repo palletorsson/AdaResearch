@@ -346,3 +346,12 @@ func toggle_reference_curve() -> void:
 	if reference_curve_multimesh:
 		reference_curve_multimesh.visible = !reference_curve_multimesh.visible
 		print("OscillatingWave: Reference curve %s" % ("visible" if reference_curve_multimesh.visible else "hidden"))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

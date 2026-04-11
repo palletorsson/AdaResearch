@@ -5,6 +5,17 @@
 
 extends Node3D
 
+
+# @identity
+# essence: double_pendulum(theta1, theta2, omega1, omega2) -> canvas(x,y) trace
+# desire: Swing pendulums by hand and watch chaotic trajectories paint on wet canvases below
+# critical_parameter: num_pendulums and spacing — determines how many simultaneous paintings emerge
+# triggers: grabbing the bob sets initial conditions; release begins chaotic evolution
+# emerges: unique unrepeatable paintings from deterministic but chaotic double-pendulum dynamics
+# needs: VR grab on pendulum bobs [has], canvas painting system [has]
+# relationships: depends on DoublePendulum physics; contrasts with foucault_pendulum (chaos vs precession); unlocks chaos-as-art
+# truth: Chaos is not randomness — it is determinism so sensitive that prediction becomes impossible.
+
 const DoublePendulumScene = preload("res://algorithms/wavefunctions/oscillation_driver/DoublePendulum.tscn")
 const GRAB_SPHERE_SCENE = preload("res://commons/primitives/point/grab_sphere_point.tscn")
 
@@ -42,7 +53,7 @@ var _grabbable_bob: Node3D = null
 var _paint_surfaces: Array[Node] = []
 var _paint_time: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	_spawn_pendulums()
 	if enable_middle_interaction:
 		_setup_middle_grabbable()
@@ -50,7 +61,7 @@ func _ready():
 	_setup_environment()
 	_create_title()
 
-func _spawn_pendulums():
+func _spawn_pendulums() -> void:
 	var total_width = (num_pendulums - 1) * spacing
 	var start_x = -total_width / 2.0
 	
@@ -92,7 +103,7 @@ func _spawn_pendulums():
 	
 	print("WavePaintings: Spawned %d pendulums" % pendulums.size())
 
-func _disable_camera(pendulum: Node3D):
+func _disable_camera(pendulum: Node3D) -> void:
 	var camera = pendulum.get_node_or_null("Camera3D")
 	if camera:
 		camera.queue_free()
@@ -107,7 +118,7 @@ func _disable_camera(pendulum: Node3D):
 	if label:
 		label.visible = false
 
-func _setup_middle_grabbable():
+func _setup_middle_grabbable() -> void:
 	"""Add a grabbable sphere overlaying the middle pendulum's Bob2"""
 	if not enable_middle_interaction:
 		return
@@ -165,7 +176,7 @@ func _setup_middle_grabbable():
 	label.outline_size = 6
 	middle.add_child(label)
 
-func _setup_camera():
+func _setup_camera() -> void:
 	var camera = Camera3D.new()
 	camera.name = "Camera3D"
 	var view_distance = num_pendulums * spacing * 0.7
@@ -176,7 +187,7 @@ func _setup_camera():
 	camera.look_at_from_position(cam_pos, look_target)
 	add_child(camera)
 
-func _setup_environment():
+func _setup_environment() -> void:
 	var env = Environment.new()
 	env.background_mode = Environment.BG_COLOR
 	env.background_color = Color(0.08, 0.08, 0.1)
@@ -201,7 +212,7 @@ func _setup_environment():
 	fill.light_energy = 0.3
 	add_child(fill)
 
-func _create_title():
+func _create_title() -> void:
 	var title = Label3D.new()
 	title.text = "Wave Paintings"
 	title.font_size = 72
@@ -221,7 +232,7 @@ func _create_title():
 # GRAB HANDLING
 # =============================================================================
 
-func _on_bob_picked_up(_pickable):
+func _on_bob_picked_up(_pickable) -> void:
 	if not enable_middle_interaction:
 		return
 	_is_grabbed = true
@@ -238,7 +249,7 @@ func _on_bob_picked_up(_pickable):
 	if label:
 		label.text = "SWING IT!"
 
-func _on_bob_dropped(_pickable):
+func _on_bob_dropped(_pickable) -> void:
 	if not enable_middle_interaction:
 		return
 	_is_grabbed = false
@@ -278,7 +289,7 @@ func _on_bob_dropped(_pickable):
 	if label:
 		label.text = "GRAB & SWING"
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if not enable_middle_interaction:
 		return
 	if not _is_grabbed or middle_index >= pendulums.size():
@@ -341,7 +352,7 @@ func get_pendulum(index: int) -> Node3D:
 		return pendulums[index]
 	return null
 
-func reset_all():
+func reset_all() -> void:
 	for i in range(pendulums.size()):
 		var p = pendulums[i]
 		var theta1_offset = 0.0
@@ -433,3 +444,12 @@ func _update_paint_colors(delta: float) -> void:
 				mesh_surface.material_override = material
 			if material is StandardMaterial3D:
 				(material as StandardMaterial3D).albedo_color = tint
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

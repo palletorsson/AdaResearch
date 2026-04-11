@@ -1,3 +1,13 @@
+# @identity
+# essence: damage(t) = f(hue_phase, player_position) -- RGB zone shifting hue with color-coded effects
+# desire: three overlapping colored spheres cycling through RGB, each hue carrying different damage
+# critical_parameter: _hue_phase -- continuous rotation through color space determines active damage type
+# triggers: player enters area; hue_phase cycles continuously; damage accumulates based on current color
+# emerges: color as information -- the visible spectrum becomes a hazard language where hue means harm-type
+# needs: Area3D detection [has]; RGB sphere meshes [has]; hue-based damage [has]; VR interaction [missing]
+# relationships: embodies color sequence concepts as spatial hazard; pairs with noise_field
+# truth: color is not decoration -- it is a signal channel carrying damage semantics in the visible spectrum.
+
 extends Area3D
 class_name ChromaticField
 ## Color sequence hazard — RGB zone that shifts hue and applies color-coded damage.

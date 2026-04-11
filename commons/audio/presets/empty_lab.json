@@ -1,0 +1,33 @@
+{
+    "description": "Stage 1-2: Near-silence. A single low hum. No events. Sterile, clinical. Like standing in an empty room.",
+    "continuous_layers": [
+        {
+            "sound_id": "SyntheticSoundGenerator.ambient_sound",
+            "volume_db": -35,
+            "bus": "DeepAmbient",
+            "parameters": {
+                "entropy": 0.02,
+                "queer_factor": 0.0
+            }
+        }
+    ],
+    "random_events": [],
+    "buses": {
+        "DeepAmbient": {
+            "effects": [
+                {
+                    "type": "EQ",
+                    "low_gain_db": -3.0,
+                    "mid_gain_db": -12.0,
+                    "high_gain_db": -18.0
+                },
+                {
+                    "type": "Reverb",
+                    "room_size": 0.15,
+                    "wet": 0.1,
+                    "damping": 0.9
+                }
+            ]
+        }
+    }
+}

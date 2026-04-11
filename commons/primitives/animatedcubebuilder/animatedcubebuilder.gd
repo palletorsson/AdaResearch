@@ -2,6 +2,16 @@
 # No UI - just the educational animation for VR environments
 extends Node3D
 
+# @identity
+# essence: cube = 8 vertices + 12 edges + 6 faces — build it layer by layer from its components
+# desire: learner watches a cube assemble itself and understands it as an accumulation of primitives
+# critical_parameter: the animation sequence — vertices appear first, then edges, then faces, in order
+# triggers: automatically starts on ready; after full build, vertex drag handles activate for deformation
+# emerges: the pedagogical insight that a solid is constructed from lower-dimensional elements: 0D → 1D → 2D → 3D
+# needs: [has grabbable vertex handles after animation completes [has], missing play/pause/reset button]
+# relationships: depends on triangle (faces) and line (edges) concepts; precursor to animating fractals
+# truth: dimension accumulates — points make edges, edges make faces, faces make solids
+
 const HANDLE_SCENE := preload("res://commons/primitives/point/grab_sphere_point.tscn")
 
 # Animation states

@@ -1,3 +1,13 @@
+# @identity
+# essence: triangle.respond(catalyst_mode) -> fold, tile, dance -- atom of 3D worlds responding to its tool
+# desire: a triangle that folds and tiles in response to the Becoming Catalyst, dancing with its partner
+# critical_parameter: catalyst mode / response type -- each curriculum stage evokes different triangle behavior
+# triggers: proximity to becoming_catalyst; mode-dependent responses; folding, tiling, dance behaviors
+# emerges: the simplest polygon becomes expressive through relational context -- same triangle, different dance
+# needs: CharacterBody3D [has]; catalyst response system [has]; fold/tile behaviors [has]; VR interaction [missing]
+# relationships: companion to becoming_catalyst (atom + tool pair); triangle is the irreducible geometric unit
+# truth: three vertices, three edges, infinite possibility when given a relational partner.
+
 # LovingTriangle.gd
 # The Loving Triangle — a companion entity that dances with the
 # Becoming Catalyst.  Triangles are the atom of all 3D worlds.

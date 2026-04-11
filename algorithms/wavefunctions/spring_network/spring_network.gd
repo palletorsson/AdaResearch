@@ -40,7 +40,7 @@ class NetworkNode:
 	var force: Vector3 = Vector3.ZERO
 	var fixed: bool = false
 
-	func _init(idx: int, pos: Vector3):
+	func _init(idx: int, pos: Vector3) -> void:
 		index = idx
 		position = pos
 
@@ -49,7 +49,7 @@ class Spring:
 	var node_b: int
 	var rest_length: float
 
-	func _init(a: int, b: int, rest: float):
+	func _init(a: int, b: int, rest: float) -> void:
 		node_a = a
 		node_b = b
 		rest_length = rest
@@ -232,3 +232,12 @@ func get_node_at_index(idx: int) -> Dictionary:
 func apply_impulse(node_idx: int, impulse: Vector3) -> void:
 	if node_idx >= 0 and node_idx < nodes.size():
 		nodes[node_idx].velocity += impulse / mass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,324 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 8,
+				"name": "clipboard",
+				"pos": [
+					2,
+					1,
+					6
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 9,
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					5
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 10,
+				"name": "pheromone_terrain",
+				"pos": [
+					5,
+					1,
+					5
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 10,
+				"name": "clipboard",
+				"pos": [
+					3,
+					1,
+					7
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [
+			[
+				0,
+				0,
+				0
+			]
+		],
+		"issues": [],
+		"map_name": "Random_Pheromone",
+		"pacing": {
+			"density": 2.5,
+			"reachable_artifacts": 4,
+			"total_artifacts": 4,
+			"walkable_tiles": 26
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": 14,
+			"pos": [
+				7,
+				0,
+				7
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Random_Pheromone",
+	"sequence": "randomness",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					5
+				]
+			},
+			{
+				"name": "pheromone_terrain",
+				"pos": [
+					5,
+					1,
+					5
+				]
+			},
+			{
+				"name": "clipboard",
+				"pos": [
+					2,
+					1,
+					6
+				]
+			},
+			{
+				"name": "clipboard",
+				"pos": [
+					3,
+					1,
+					7
+				]
+			}
+		],
+		"dimensions": [
+			13,
+			3,
+			14
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 26,
+			"ground_pct": 14.2857142857143,
+			"void": 156,
+			"walls": 0
+		},
+		"map_name": "Random_Pheromone",
+		"rooms": [
+			{
+				"artifacts": [
+					"dark_sphere",
+					"pheromone_terrain",
+					"clipboard",
+					"clipboard"
+				],
+				"label": "A",
+				"region": "west",
+				"tiles": 24
+			}
+		],
+		"spawn": [
+			0,
+			1,
+			0
+		],
+		"teleporter": [
+			7,
+			0,
+			7
+		]
+	},
+	"timestamp": "2026-03-16T12:13:47",
+	"walkthrough": {
+		"map_name": "Random_Pheromone",
+		"stops": [
+			{
+				"facing": "south",
+				"look_at": [
+					2,
+					1,
+					6
+				],
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "south",
+						"dist": 8,
+						"name": "clipboard"
+					},
+					{
+						"direction": "southeast",
+						"dist": 9,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southeast",
+						"dist": 10,
+						"name": "pheromone_terrain"
+					},
+					{
+						"direction": "southeast",
+						"dist": 10,
+						"name": "clipboard"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "southeast",
+				"name": "clipboard",
+				"pos": [
+					2,
+					1,
+					6
+				],
+				"steps_from_prev": 8,
+				"total_steps": 8,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "east",
+						"dist": 4,
+						"name": "pheromone_terrain"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "northeast",
+				"name": "clipboard",
+				"pos": [
+					3,
+					1,
+					7
+				],
+				"steps_from_prev": 2,
+				"total_steps": 10,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "northeast",
+						"dist": 4,
+						"name": "pheromone_terrain"
+					}
+				]
+			},
+			{
+				"approach_from": "northeast",
+				"facing": "east",
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					5
+				],
+				"steps_from_prev": 3,
+				"total_steps": 13,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "east",
+						"dist": 1,
+						"name": "pheromone_terrain"
+					},
+					{
+						"direction": "southwest",
+						"dist": 3,
+						"name": "clipboard"
+					},
+					{
+						"direction": "southwest",
+						"dist": 3,
+						"name": "clipboard"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "southeast",
+				"name": "pheromone_terrain",
+				"pos": [
+					5,
+					1,
+					5
+				],
+				"steps_from_prev": 1,
+				"total_steps": 14,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 1,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "west",
+						"dist": 4,
+						"name": "clipboard"
+					},
+					{
+						"direction": "southwest",
+						"dist": 4,
+						"name": "clipboard"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					7,
+					0,
+					7
+				],
+				"reachable": true,
+				"steps_from_prev": 4,
+				"total_steps": 18,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 4,
+			"total_steps": 18,
+			"total_stops": 6
+		}
+	}
+}

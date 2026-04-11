@@ -1,3 +1,13 @@
+# @identity
+# essence: E(S) = f(phi, delta_e, constraint) -- morphing dodecahedron with 3 Q-FEP parameter beams
+# desire: a dodecahedron whose shape responds to three Q-FEP parameters, beams probing the landscape
+# critical_parameter: _phi / _delta_e / _constraint -- three Q-FEP dimensions deform body and aim beams
+# triggers: parameter oscillation drives deformation; beams sweep based on Q-FEP state; proximity attacks
+# emerges: Q-FEP parameter space made physical -- the creature IS the theory, body IS the equation
+# needs: HazardCreatureBase [has]; dodecahedron mesh [has]; 3 parameter beams [has]; Q-FEP mapping [has]; VR interaction [missing]
+# relationships: embodies qfeplaboratory sequence; theoretical capstone creature of the bestiary
+# truth: the Q-FEP calibrator does not demonstrate the theory -- it IS the theory, parameters made flesh.
+
 extends HazardCreatureBase
 class_name QFEPCalibrator
 ## QFEP Laboratory sequence creature — morphing dodecahedron with 3 parameter beams.

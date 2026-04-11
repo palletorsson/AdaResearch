@@ -1,0 +1,147 @@
+{
+	"sequences": {
+		"pokemonstudio": {
+			"name": "Pokemon Studio: Life from Code",
+			"truth": "Life is not designed. It is grown, bred, released, and surprised by what it becomes. The studio is where you learn to let go.",
+			"qfep_term": "φΔE(S,t) × crossover(A,B)",
+			"qfep_connection": "The studio IS the full QFEP loop made interactive. Growth is entropy change over time (φ). Breeding is boundary dissolution — two organisms become one that is neither. Release is the transition from controlled to wild. Evolution is the free energy principle in action — organisms that minimize surprise persist. The drag queen aesthetic emerges naturally: when boundaries dissolve, what remains is excess, expression, and infinite variety.",
+			"description": "A breeding and evolution laboratory where players grow life from DNA seeds, cross-breed across kingdoms, and release specimens into a shared ecosystem. Trees, creatures, flowers, and fungi coexist, compete, and evolve. The Pokemon Studio teaches genetic algorithms, procedural generation, ecology, and the QFEP through hands-on experimentation with living code.",
+			"layer": "systems",
+			"prerequisites": [
+				"biological_growth",
+				"swarmintelligence"
+			],
+			"unlocks": [],
+			"difficulty": "advanced",
+			"estimated_time": "30-45 minutes",
+			"learning_objectives": [
+				"DNA as parameterized design — continuous genes, not discrete categories",
+				"Growth interpolation — how organisms develop from seed to maturity",
+				"Crossover and mutation — the mechanics of genetic algorithms",
+				"Cross-kingdom hybridity — boundary dissolution in code",
+				"Population dynamics — predation, symbiosis, competition, pollination",
+				"Evolutionary selection — fitness, tournament selection, culling",
+				"Emergent behavior — what happens when you release designed organisms into the wild"
+			],
+			"content": [
+				"PS_Seed_Lab: From Nothing, Potential — Generate random DNA seeds, see them expressed as trees, creatures, flowers, or fungi. Genotype vs phenotype.",
+				"PS_Growth_Chamber: Watch Time Work — Grow a specimen from seed to maturity with time-lapse control. DNA interpolation in action.",
+				"PS_Kingdom_Safari: Four Kingdoms — Spawn one of each kingdom, inspect DNA side by side. Same genome, four expressions.",
+				"PS_Breeding_Lab: Two Become One Become Many — Select parents, breed, see crossover and mutation. Genetic algorithms made tangible.",
+				"PS_Hybrid_Workshop: Boundaries Are Soft — Cross-kingdom breeding. Push body_type to fractional values. Hybrid decorations emerge.",
+				"PS_Release: Into the Wild — Release specimens through the gate into the ecosystem. First contact with natural selection.",
+				"PS_Evolution_Arena: Selection Pressure — Run evolution cycles manually. Adjust fitness functions. Watch populations shift.",
+				"PS_Ecosystem: The Living World — Full ecosystem sandbox. All kingdoms, all ecology rules. Watch life evolve over generations."
+			],
+			"maps": [
+				"PS_Seed_Lab",
+				"PS_Growth_Chamber",
+				"PS_Kingdom_Safari",
+				"PS_Breeding_Lab",
+				"PS_Hybrid_Workshop",
+				"PS_Release",
+				"PS_Evolution_Arena",
+				"PS_Ecosystem"
+			],
+			"algorithm_sources": {
+				"PS_Seed_Lab": {
+					"algorithms": [
+						"nature_system/dna/critter_dna",
+						"nature_system/systems/morphology_router"
+					],
+					"artifacts": [
+						"pokemon_studio"
+					],
+					"compute": "LOW — single specimen generation"
+				},
+				"PS_Growth_Chamber": {
+					"algorithms": [
+						"nature_system/studio/growth_interpolator",
+						"nature_system/studio/growth_chamber"
+					],
+					"artifacts": [
+						"pokemon_studio"
+					],
+					"compute": "LOW — single specimen mesh rebuild at interval"
+				},
+				"PS_Kingdom_Safari": {
+					"algorithms": [
+						"nature_system/morphology/tree_morphology",
+						"nature_system/morphology/creature_morphology",
+						"nature_system/morphology/flower_morphology",
+						"nature_system/morphology/fungus_morphology"
+					],
+					"artifacts": [
+						"pokemon_studio"
+					],
+					"compute": "MEDIUM — 4 specimens at LOD 0"
+				},
+				"PS_Breeding_Lab": {
+					"algorithms": [
+						"nature_system/dna/critter_dna",
+						"nature_system/studio/breeding_lab"
+					],
+					"artifacts": [
+						"pokemon_studio"
+					],
+					"compute": "MEDIUM — 2 parents + 3 preview offspring"
+				},
+				"PS_Hybrid_Workshop": {
+					"algorithms": [
+						"nature_system/systems/morphology_router"
+					],
+					"artifacts": [
+						"pokemon_studio"
+					],
+					"compute": "MEDIUM — cross-kingdom specimens with hybrid decorations"
+				},
+				"PS_Release": {
+					"algorithms": [
+						"nature_system/studio/release_gate",
+						"nature_system/systems/spawner"
+					],
+					"artifacts": [
+						"pokemon_studio"
+					],
+					"compute": "MEDIUM — transfer specimens to ecosystem spawner"
+				},
+				"PS_Evolution_Arena": {
+					"algorithms": [
+						"nature_system/systems/evolution_system"
+					],
+					"artifacts": [
+						"pokemon_studio"
+					],
+					"compute": "HIGH — full evolution cycles with fitness evaluation"
+				},
+				"PS_Ecosystem": {
+					"algorithms": [
+						"nature_system/studio/ecosystem_viewport",
+						"nature_system/studio/ecology_interaction_system",
+						"nature_system/systems/evolution_system"
+					],
+					"artifacts": [
+						"pokemon_studio"
+					],
+					"compute": "HIGH — 60-120 entities with real-time ecology + generational evolution"
+				}
+			},
+			"artifact_groups": [
+				{
+					"map": "PS_Seed_Lab",
+					"position": "intro",
+					"artifacts": ["pokemon_studio"],
+					"size_budget": "environment",
+					"rationale": "Single studio scene, seed generation zone active"
+				},
+				{
+					"map": "PS_Ecosystem",
+					"position": "synthesis",
+					"artifacts": ["pokemon_studio"],
+					"size_budget": "world_scale",
+					"rationale": "Full ecosystem with terrain, all kingdoms, evolution running"
+				}
+			]
+		}
+	}
+}

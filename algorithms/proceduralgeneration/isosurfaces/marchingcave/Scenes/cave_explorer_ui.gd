@@ -52,12 +52,12 @@ var cave_presets = [
 
 var current_preset_index : int = 0
 
-func _ready():
+func _ready() -> void:
 	create_mini_cave()
 	update_mini_cave()
 	connect_ui_signals()
 
-func connect_ui_signals():
+func connect_ui_signals() -> void:
 	# Wait for the Viewport2Din3D to create the scene
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -83,7 +83,7 @@ func connect_ui_signals():
 		else:
 			print("⚠️ Control panel not found in viewport")
 
-func create_mini_cave():
+func create_mini_cave() -> void:
 	# Create a scaled-down version of the marching cubes cave
 	var terrain_script = load("res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd")
 	var terrain_material = load("res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Materials/TerrainMat.tres")
@@ -108,7 +108,7 @@ func create_mini_cave():
 	
 	print("🏔️ Mini cave created at scale: ", chunk_scale)
 
-func update_mini_cave():
+func update_mini_cave() -> void:
 	if mini_cave:
 		mini_cave.noise_scale = noise_scale
 		mini_cave.noise_offset = noise_offset
@@ -120,31 +120,31 @@ func update_mini_cave():
 
 
 # Called from UI sliders
-func on_noise_scale_changed(value: float):
+func on_noise_scale_changed(value: float) -> void:
 	noise_scale = value
 	update_mini_cave()
 	print("Noise Scale: %.2f" % value)
 
-func on_iso_level_changed(value: float):
+func on_iso_level_changed(value: float) -> void:
 	iso_level = value
 	update_mini_cave()
 	print("Iso Level: %.2f" % value)
 
-func on_chunk_scale_changed(value: float):
+func on_chunk_scale_changed(value: float) -> void:
 	chunk_scale = value
 	update_mini_cave()
 	print("Chunk Scale: %.0f" % value)
 
 # Scroll through presets
-func next_preset():
+func next_preset() -> void:
 	current_preset_index = (current_preset_index + 1) % cave_presets.size()
 	load_preset(current_preset_index)
 
-func previous_preset():
+func previous_preset() -> void:
 	current_preset_index = (current_preset_index - 1 + cave_presets.size()) % cave_presets.size()
 	load_preset(current_preset_index)
 
-func load_preset(index: int):
+func load_preset(index: int) -> void:
 	var preset = cave_presets[index]
 	noise_scale = preset["noise_scale"]
 	iso_level = preset["iso_level"]
@@ -167,3 +167,12 @@ func load_preset(index: int):
 
 func get_current_preset_name() -> String:
 	return cave_presets[current_preset_index]["name"]
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

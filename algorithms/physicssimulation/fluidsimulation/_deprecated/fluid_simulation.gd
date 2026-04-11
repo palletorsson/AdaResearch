@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Simple Fluid Simulation using Particle-Based Method
 # Demonstrates basic fluid dynamics with attraction/repulsion forces
@@ -45,17 +45,17 @@ class FluidSimulationParticle:
 	var mesh_instance: MeshInstance3D
 	var neighbors: Array = []
 	
-	func _init(pos: Vector3, m: float, r: float):
+	func _init(pos: Vector3, m: float, r: float) -> void:
 		position = pos
 		velocity = Vector3.ZERO
 		acceleration = Vector3.ZERO
 		mass = m
 		radius = r
 	
-	func apply_force(force: Vector3):
+	func apply_force(force: Vector3) -> void:
 		acceleration += force / mass
 	
-	func update(delta: float):
+	func update(delta: float) -> void:
 		# Integrate using Verlet integration for stability
 		velocity += acceleration * delta
 		position += velocity * delta
@@ -63,7 +63,7 @@ class FluidSimulationParticle:
 		# Reset acceleration for next frame
 		acceleration = Vector3.ZERO
 	
-	func calculate_density(all_particles: Array, interaction_radius: float):
+	func calculate_density(all_particles: Array, interaction_radius: float) -> void:
 		density = 0.0
 		neighbors.clear()
 		
@@ -78,20 +78,20 @@ class FluidSimulationParticle:
 				var influence = max(0, interaction_radius - distance)
 				density += other.mass * influence * influence
 	
-	func calculate_pressure(rest_density: float, pressure_constant: float = 1.0):
+	func calculate_pressure(rest_density: float, pressure_constant: float = 1.0) -> void:
 		pressure = pressure_constant * (density - rest_density)
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	initialize_particles()
 	create_container()
 	setup_camera()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	simulate_fluid(delta)
 	update_visuals()
 
-func setup_environment():
+func setup_environment() -> void:
 	# Lighting
 	var light = DirectionalLight3D.new()
 	light.light_energy = 1.0
@@ -108,7 +108,7 @@ func setup_environment():
 	env.environment = environment
 	add_child(env)
 
-func initialize_particles():
+func initialize_particles() -> void:
 	particles.clear()
 	particle_meshes.clear()
 	
@@ -140,7 +140,7 @@ func initialize_particles():
 				
 				created_particles += 1
 
-func create_particle_visual(particle: FluidSimulationParticle):
+func create_particle_visual(particle: FluidSimulationParticle) -> void:
 	var mesh_instance = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = particle.radius
@@ -159,7 +159,7 @@ func create_particle_visual(particle: FluidSimulationParticle):
 	add_child(mesh_instance)
 	particle_meshes.append(mesh_instance)
 
-func create_container():
+func create_container() -> void:
 	# Create container walls as invisible collision boundaries
 	container_mesh = MeshInstance3D.new()
 	var box = BoxMesh.new()
@@ -174,13 +174,13 @@ func create_container():
 	
 	add_child(container_mesh)
 
-func setup_camera():
+func setup_camera() -> void:
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 5, 15)
 	camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP)
 	add_child(camera)
 
-func simulate_fluid(_delta):
+func simulate_fluid(_delta) -> void:
 	# Use fixed time step for stability
 	var fixed_delta = time_step
 	
@@ -201,11 +201,11 @@ func simulate_fluid(_delta):
 		particle.update(fixed_delta)
 		apply_boundary_constraints(particle)
 
-func apply_gravity(particle: FluidSimulationParticle):
+func apply_gravity(particle: FluidSimulationParticle) -> void:
 	var gravity_force = Vector3(0, gravity * particle.mass, 0)
 	particle.apply_force(gravity_force)
 
-func apply_pressure_forces(particle: FluidSimulationParticle):
+func apply_pressure_forces(particle: FluidSimulationParticle) -> void:
 	for neighbor in particle.neighbors:
 		var direction = particle.position - neighbor.position
 		var distance = direction.length()
@@ -216,7 +216,7 @@ func apply_pressure_forces(particle: FluidSimulationParticle):
 			var force_magnitude = pressure_diff * pressure_force / (distance * distance)
 			particle.apply_force(direction * force_magnitude)
 
-func apply_viscosity_forces(particle: FluidSimulationParticle):
+func apply_viscosity_forces(particle: FluidSimulationParticle) -> void:
 	var viscosity_force = Vector3.ZERO
 	
 	for neighbor in particle.neighbors:
@@ -229,7 +229,7 @@ func apply_viscosity_forces(particle: FluidSimulationParticle):
 	
 	particle.apply_force(viscosity_force)
 
-func apply_surface_tension(particle: FluidSimulationParticle):
+func apply_surface_tension(particle: FluidSimulationParticle) -> void:
 	if particle.neighbors.size() < 6:  # Surface particles have fewer neighbors
 		var surface_normal = Vector3.ZERO
 		
@@ -241,7 +241,7 @@ func apply_surface_tension(particle: FluidSimulationParticle):
 			surface_normal = surface_normal.normalized()
 			particle.apply_force(surface_normal * surface_tension)
 
-func apply_boundary_constraints(particle: FluidSimulationParticle):
+func apply_boundary_constraints(particle: FluidSimulationParticle) -> void:
 	var half_size = container_size / 2
 	var damping = 0.7  # Energy loss on collision
 	
@@ -269,7 +269,7 @@ func apply_boundary_constraints(particle: FluidSimulationParticle):
 		particle.position.z = half_size.z - particle.radius
 		particle.velocity.z = -abs(particle.velocity.z) * damping
 
-func update_visuals():
+func update_visuals() -> void:
 	for i in range(particles.size()):
 		var particle = particles[i]
 		if particle.mesh_instance:
@@ -286,4 +286,13 @@ func update_visuals():
 					0.6 - normalized_speed * 0.3,  # Less green with higher speed
 					0.9 - normalized_speed * 0.4,  # Less blue with higher speed
 					0.8
-				) 
+				)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

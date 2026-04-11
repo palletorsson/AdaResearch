@@ -1,3 +1,4 @@
+class_name LaserTurret
 extends Node3D
 
 # Laser Turret - Tracks and destroys balls using vector math
@@ -22,6 +23,7 @@ signal target_lost
 @export_category("Targeting")
 @export var auto_target: bool = true
 @export var target_closest: bool = true
+@export var target_player: bool = true
 @export var idle_reset_time: float = 10.0
 
 # State
@@ -271,40 +273,53 @@ func _reset_hunt() -> void:
 	print("[Turret] Reset hunt - looking for targets (kills: %d)" % total_kills)
 
 func _find_target() -> void:
-	var all_balls = _get_all_balls()
-	if all_balls.is_empty():
-		return
-	
 	var best: Node3D = null
 	var best_score: float = -INF
-	
+
+	# Check player first
+	if target_player:
+		var player := _find_player()
+		if player:
+			var dist := global_position.distance_to(player.global_position)
+			if dist < detection_range:
+				var dist_score := 1.0 - (dist / detection_range)
+				if dist_score > best_score:
+					best_score = dist_score
+					best = player
+
+	# Check balls
+	var all_balls = _get_all_balls()
 	for ball in all_balls:
-		if not is_instance_valid(ball):
+		if not is_instance_valid(ball) or not ball.visible:
 			continue
-		if not ball.visible:
-			continue
-		
 		var ball_pos = ball.global_position
 		var to_ball = ball_pos - global_position
 		var dist = to_ball.length()
-		
 		if dist > detection_range:
 			continue
-		
-		# Score: prefer closer balls, and balls in last target direction
 		var dist_score = 1.0 - (dist / detection_range)
 		var dir_score = 0.0
 		if last_target_direction != Vector3.ZERO:
 			dir_score = to_ball.normalized().dot(last_target_direction) * 0.3
-		
 		var score = dist_score + dir_score
-		
 		if score > best_score:
 			best_score = score
 			best = ball
-	
+
 	if best != null:
 		_acquire_target(best)
+
+
+func _find_player() -> Node3D:
+	var xr_origin = get_tree().get_first_node_in_group("xr_origin")
+	if xr_origin:
+		var camera = xr_origin.get_node_or_null("XRCamera3D")
+		if camera:
+			return camera
+	var players = get_tree().get_nodes_in_group("player")
+	if players.size() > 0:
+		return players[0]
+	return null
 
 func _get_all_balls() -> Array:
 	var balls: Array = []
@@ -419,11 +434,18 @@ func _update_targeting(delta: float) -> void:
 func _apply_damage(delta: float) -> void:
 	if current_target == null:
 		return
-	
+
+	# Player damage routes through GameManager
+	if current_target is XRCamera3D or current_target.is_in_group("player"):
+		var gm = get_node_or_null("/root/GameManager")
+		if gm and gm.has_method("apply_health_damage"):
+			gm.apply_health_damage(damage_per_second * delta)
+		return
+
 	if not current_target.has_meta("health"):
 		current_target.set_meta("health", 100.0)
 		current_target.set_meta("max_health", 100.0)
-	
+
 	var health = current_target.get_meta("health")
 	health -= damage_per_second * delta
 	current_target.set_meta("health", health)

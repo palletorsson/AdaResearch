@@ -1,4 +1,4 @@
-﻿extends "res://algorithms/vectors/shared/vector_scene_base.gd"
+extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 @export var axis_length: float = 1.5
 
@@ -82,3 +82,12 @@ func _clear_environment() -> void:
 	if info_root:
 		for child in info_root.get_children():
 			child.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

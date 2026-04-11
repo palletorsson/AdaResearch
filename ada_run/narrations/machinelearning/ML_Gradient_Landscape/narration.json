@@ -1,0 +1,198 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 4,
+				"name": "gradient_descent_visualization",
+				"pos": [
+					2,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 8,
+				"name": "pca_visualization",
+				"pos": [
+					4,
+					1,
+					4
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [],
+		"issues": [],
+		"map_name": "ML_Gradient_Landscape",
+		"pacing": {
+			"density": 4.0,
+			"reachable_artifacts": 2,
+			"total_artifacts": 2,
+			"walkable_tiles": 31
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": 15,
+			"pos": [
+				7,
+				0,
+				8
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "ML_Gradient_Landscape",
+	"sequence": "machinelearning",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "gradient_descent_visualization",
+				"pos": [
+					2,
+					1,
+					2
+				]
+			},
+			{
+				"name": "pca_visualization",
+				"pos": [
+					4,
+					1,
+					4
+				]
+			}
+		],
+		"dimensions": [
+			9,
+			3,
+			10
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 31,
+			"ground_pct": 34.4444444444444,
+			"void": 1,
+			"walls": 58
+		},
+		"map_name": "ML_Gradient_Landscape",
+		"rooms": [
+			{
+				"artifacts": [
+					"gradient_descent_visualization",
+					"pca_visualization"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 31
+			}
+		],
+		"spawn": [
+			0,
+			1,
+			0
+		],
+		"teleporter": [
+			7,
+			0,
+			8
+		]
+	},
+	"timestamp": "2026-03-16T12:15:56",
+	"walkthrough": {
+		"map_name": "ML_Gradient_Landscape",
+		"stops": [
+			{
+				"facing": "southeast",
+				"look_at": [
+					2,
+					1,
+					2
+				],
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southeast",
+						"dist": 4,
+						"name": "gradient_descent_visualization"
+					},
+					{
+						"direction": "southeast",
+						"dist": 8,
+						"name": "pca_visualization"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "southeast",
+				"name": "gradient_descent_visualization",
+				"pos": [
+					2,
+					1,
+					2
+				],
+				"steps_from_prev": 4,
+				"total_steps": 4,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "southeast",
+						"dist": 4,
+						"name": "pca_visualization"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "southeast",
+				"name": "pca_visualization",
+				"pos": [
+					4,
+					1,
+					4
+				],
+				"steps_from_prev": 4,
+				"total_steps": 8,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 4,
+						"name": "gradient_descent_visualization"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					7,
+					0,
+					8
+				],
+				"reachable": true,
+				"steps_from_prev": 7,
+				"total_steps": 15,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 2,
+			"total_steps": 15,
+			"total_stops": 4
+		}
+	}
+}

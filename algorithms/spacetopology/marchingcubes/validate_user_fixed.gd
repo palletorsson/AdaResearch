@@ -11,7 +11,7 @@ class TestVoxelGrid:
 	var data: PackedFloat32Array
 	var resolution: int
 	
-	func _init(resolution: int):
+	func _init(resolution: int) -> void:
 		self.resolution = resolution
 		var extended_size = (resolution + 2)
 		self.data.resize(extended_size * extended_size * extended_size)
@@ -23,7 +23,7 @@ class TestVoxelGrid:
 			return 1.0
 		return self.data[x + extended_res * (y + extended_res * z)]
 	
-	func write(x: int, y: int, z: int, value: float):
+	func write(x: int, y: int, z: int, value: float) -> void:
 		var extended_res = resolution + 2
 		if x < 0 or y < 0 or z < 0 or x >= extended_res or y >= extended_res or z >= extended_res:
 			return

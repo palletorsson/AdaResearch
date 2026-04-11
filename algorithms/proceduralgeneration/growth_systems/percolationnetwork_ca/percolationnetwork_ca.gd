@@ -1,4 +1,15 @@
 # PercolationNetwork3D.gd
+
+# @identity
+# essence: P(occupied) = threshold -> CA flow propagation from top to bottom — does the random lattice percolate?
+# desire: to stand inside a 3D lattice and watch pink flow seep through white cubes, hoping it reaches the bottom before paths run out
+# critical_parameter: PERCOLATION_THRESHOLD (0.4) — the probability that defines whether the system connects or fragments; near p_c the outcome is uncertain
+# triggers: _process ticks the CA every frame; flow propagates through 6-connected neighbors; collision removed from flowing cubes so player can walk through the network
+# emerges: at the critical threshold, the percolating cluster forms a fractal — neither filling the space nor vanishing, but threading through it
+# needs: per-cube collision [has]; flow visualization [has]; real-time CA [has]; VR threshold slider [missing]; Label3D [missing]
+# relationships: bridges cellularautomata sequence to proceduralgeneration; contrasts with caverandomwalk (random walk vs random lattice); teaches phase transitions
+# truth: connectivity is not gradual — below the threshold nothing connects, above it everything does, and at the threshold the system decides
+
 # Attach this script to a Node3D in your scene
 extends Node3D
 
@@ -27,13 +38,13 @@ enum CellState {
 	SOURCE = 4        # Source points (top face)
 }
 
-func _ready():
+func _ready() -> void:
 	setup_percolation_system()
 	initialize_lattice()
 	create_cube_collision_boxes()
 	start_percolation()
 
-func setup_percolation_system():
+func setup_percolation_system() -> void:
 	# Initialize 3D arrays
 	grid.resize(GRID_SIZE)
 	flow_grid.resize(GRID_SIZE)
@@ -54,7 +65,7 @@ func setup_percolation_system():
 				grid[x][y][z] = CellState.EMPTY
 				flow_grid[x][y][z] = 0.0
 
-func initialize_lattice():
+func initialize_lattice() -> void:
 	# Create random occupied sites based on percolation threshold
 	for x in range(GRID_SIZE):
 		for y in range(GRID_SIZE):
@@ -69,7 +80,7 @@ func initialize_lattice():
 				grid[x][y][GRID_SIZE - 1] = CellState.SOURCE
 				flow_grid[x][y][GRID_SIZE - 1] = 1.0
 
-func create_cube_collision_boxes():
+func create_cube_collision_boxes() -> void:
 	# Initialize cube nodes array
 	cube_nodes.resize(GRID_SIZE)
 	for x in range(GRID_SIZE):
@@ -101,7 +112,7 @@ func create_cube_collision_boxes():
 				if grid[x][y][z] != CellState.EMPTY:
 					create_single_cube_collision(x, y, z, grid[x][y][z])
 
-func start_percolation():
+func start_percolation() -> void:
 	print("Starting percolation simulation...")
 	print("Grid size: ", GRID_SIZE, "³")
 	print("Occupied sites: ", count_occupied_sites())
@@ -115,7 +126,7 @@ func _process(_delta):
 		if iteration_count % 10 == 0:
 			check_percolation_status()
 
-func update_percolation_automata():
+func update_percolation_automata() -> void:
 	var new_grid = duplicate_grid()
 	var new_flow = duplicate_flow_grid()
 	
@@ -173,7 +184,7 @@ func calculate_neighbor_flow(x: int, y: int, z: int) -> float:
 	
 	return max_flow
 
-func propagate_flow_to_neighbors(new_flow: Array, x: int, y: int, z: int, current_flow: float):
+func propagate_flow_to_neighbors(new_flow: Array, x: int, y: int, z: int, current_flow: float) -> void:
 	var flow_amount = current_flow * FLOW_RATE
 	
 	# 6-connected neighborhood
@@ -219,7 +230,7 @@ func duplicate_flow_grid() -> Array:
 	
 	return new_flow
 
-func create_single_cube_collision(x: int, y: int, z: int, state: CellState):
+func create_single_cube_collision(x: int, y: int, z: int, state: CellState) -> void:
 	# Create parent node
 	var cube_node = Node3D.new()
 	cube_node.name = "Cube_" + str(x) + "_" + str(y) + "_" + str(z)
@@ -272,7 +283,7 @@ func get_material_for_state(state: CellState) -> StandardMaterial3D:
 		_:
 			return material_blocked
 
-func update_cube_visualization():
+func update_cube_visualization() -> void:
 	# Update existing cubes and create new ones as needed
 	for x in range(GRID_SIZE):
 		for y in range(GRID_SIZE):
@@ -298,7 +309,7 @@ func update_cube_visualization():
 						cube_node.queue_free()
 						cube_nodes[x][y][z] = null
 
-func update_cube_collision(cube_node: Node3D, state: CellState):
+func update_cube_collision(cube_node: Node3D, state: CellState) -> void:
 	# Remove existing collision body if it exists
 	var existing_collision = cube_node.get_node_or_null("CollisionBody")
 	if existing_collision:
@@ -329,7 +340,7 @@ func get_cube_world_position(x: int, y: int, z: int) -> Vector3:
 		(z - GRID_SIZE/2) * CUBE_SIZE
 	)
 
-func check_percolation_status():
+func check_percolation_status() -> void:
 	var bottom_connected = false
 	
 	# Check if flow has reached the bottom face (z = 0)
@@ -433,7 +444,7 @@ func debug_collision_at_position(world_pos: Vector3) -> Dictionary:
 	}
 
 # Force remove all collision from pink cubes (call this if needed)
-func force_remove_pink_cube_collisions():
+func force_remove_pink_cube_collisions() -> void:
 	for x in range(GRID_SIZE):
 		for y in range(GRID_SIZE):
 			for z in range(GRID_SIZE):
@@ -446,3 +457,12 @@ func force_remove_pink_cube_collisions():
 							cube_node.remove_child(collision_body)
 							collision_body.queue_free()
 							print("Removed collision from pink cube at ", x, ",", y, ",", z)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

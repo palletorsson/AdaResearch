@@ -14,10 +14,10 @@ const PRISM_SCENE = preload("res://commons/primitives/prismes/prism_block.tscn")
 
 var active_soft_bodies: Array[Dictionary] = []
 
-func _ready():
+func _ready() -> void:
 	create_gallery()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	for item in active_soft_bodies:
 		var sb = item["node"]
 		var label = item["label"]
@@ -61,7 +61,7 @@ func _process(delta):
 		elif is_instance_valid(label):
 			label.queue_free()
 
-func create_gallery():
+func create_gallery() -> void:
 	var tests = [
 		# 1. Standard Sphere vs Cube
 		{
@@ -425,7 +425,7 @@ func create_gallery():
 		
 		create_test_cell(test, pos)
 
-func create_test_cell(config: Dictionary, position: Vector3):
+func create_test_cell(config: Dictionary, position: Vector3) -> void:
 	var cell = Node3D.new()
 	cell.name = config["name"]
 	cell.position = position
@@ -464,7 +464,7 @@ func create_test_cell(config: Dictionary, position: Vector3):
 	# Initial spawn
 	spawn_soft_body(cell, config)
 
-func spawn_soft_body(parent: Node, config: Dictionary):
+func spawn_soft_body(parent: Node, config: Dictionary) -> void:
 	# Limit spawns per cell to avoid performance kill
 	var current_spawns = 0
 	for child in parent.get_children():
@@ -594,6 +594,15 @@ func find_static_body(node: Node) -> StaticBody3D:
 			return res
 	return null
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") or (event is InputEventKey and event.pressed and event.keycode == KEY_R):
 		get_tree().reload_current_scene()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

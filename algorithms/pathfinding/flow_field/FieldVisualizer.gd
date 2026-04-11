@@ -2,7 +2,7 @@ extends MeshInstance3D
 
 var grid: FlowGrid
 
-func setup(g: FlowGrid):
+func setup(g: FlowGrid) -> void:
 	grid = g
 	mesh = ImmediateMesh.new()
 	
@@ -12,7 +12,7 @@ func setup(g: FlowGrid):
 	mat.vertex_color_use_as_albedo = true
 	material_override = mat
 
-func update_visuals():
+func update_visuals() -> void:
 	mesh.clear_surfaces()
 	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	
@@ -37,3 +37,6 @@ func update_visuals():
 				mesh.surface_add_vertex(end_pos)
 				
 	mesh.surface_end()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

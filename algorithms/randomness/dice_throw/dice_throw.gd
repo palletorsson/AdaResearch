@@ -4,6 +4,16 @@
 # Demonstrates discrete uniform distribution and expected value.
 #
 # QFEP: Equiprobability — each face equally likely. Fairness as symmetry.
+#
+# @identity
+# essence: P(X=k) = 1/6 for k ∈ {1,...,6} — discrete uniform distribution
+# desire: grab a die, throw it physically, and be showered with reward balls proportional to the result
+# critical_parameter: balls_per_pip — multiplier that makes a 6 spectacular (96 balls) and a 1 humbling (16 balls)
+# triggers: _on_dice_dropped() starts settle detection; velocity < 0.02 for 0.8s triggers _read_dice_result()
+# emerges: the histogram converges to E[X]=3.5 — fairness is not felt in one throw but in the accumulation
+# needs: XRToolsPickable grab + throw [has]; pip rendering on 6 faces [has]; ball rain physics [has]
+# relationships: contrasts with coin_toss (6 outcomes vs 2); feeds slot_machine (compound dice)
+# truth: Fairness is not a single outcome — it is the symmetry of the generating process.
 
 extends Node3D
 
@@ -599,3 +609,12 @@ func _reset_stats() -> void:
 	_roll_counts.fill(0)
 	_result_label.text = "?"
 	_stats_label.text = "Rolls: 0\n\nGrab & throw\nthe dice!"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

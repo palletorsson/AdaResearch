@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: recursive backtracking — push cell, carve to random unvisited neighbor, backtrack when stuck, repeat until all visited
+# desire: to watch a maze carve itself in real time, the red cursor probing forward then retreating, every wall removal a permanent decision
+# critical_parameter: generation_speed — controls how fast the animation plays; slow enough to follow the algorithm's logic, fast enough to see the pattern emerge
+# triggers: show_generation enables animated step-by-step; each generation_step carves one wall and advances; stack exhaustion signals completion
+# emerges: the algorithm naturally creates a spanning tree — every cell is reachable from every other cell via exactly one path, without coding for it
+# needs: animated generation [has]; wall/floor collision [has]; entrance/exit creation [has]; VR walk-the-maze [has]; maze size slider [missing]
+# relationships: paired with caverandomwalk in PG_Caves_Mazes; contrasts structured corridors with organic tunnels; both create explorable spaces from rules
+# truth: a perfect maze has no loops — every dead end is a branch that reached as far as it could before the algorithm gave up and tried another way
+
 # Maze Generation using Recursive Backtracking
 # Creates animated 3D maze with step-by-step generation
 
@@ -39,7 +49,7 @@ var directions = [
 	Vector2i(-2, 0)   # West
 ]
 
-func _ready():
+func _ready() -> void:
 	# Removed setup_environment() as it's now in the scene
 	# setup_environment() 
 	initialize_maze()
@@ -48,7 +58,7 @@ func _ready():
 	if show_generation:
 		start_generation()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if generating:
 		generation_timer += delta
 		if generation_timer >= generation_speed:
@@ -57,7 +67,7 @@ func _process(delta):
 
 # setup_environment removed - scene file handles this
 
-func initialize_maze():
+func initialize_maze() -> void:
 	# Initialize maze grid - true = wall, false = path
 	maze.clear()
 	visited.clear()
@@ -77,7 +87,7 @@ func initialize_maze():
 		for x in range(1, maze_width, 2):
 			maze[y][x] = false  # Create path cell
 
-func create_maze_visuals():
+func create_maze_visuals() -> void:
 	# Clear existing visuals cleanly
 	for child in get_children():
 		if child is MeshInstance3D or child is StaticBody3D:
@@ -165,7 +175,7 @@ func create_floor_collider(x: int, y: int) -> StaticBody3D:
 	
 	return static_body
 
-func start_generation():
+func start_generation() -> void:
 	# Start from top-left path cell
 	current_cell = Vector2i(1, 1)
 	visited[1][1] = true
@@ -175,7 +185,7 @@ func start_generation():
 	update_cell_visual(current_cell, current_color)
 	print("Starting maze generation...")
 
-func generation_step():
+func generation_step() -> void:
 	var neighbors = get_unvisited_neighbors(current_cell)
 	
 	if neighbors.size() > 0:
@@ -231,13 +241,13 @@ func get_unvisited_neighbors(cell: Vector2i) -> Array:
 	
 	return neighbors
 
-func update_cell_visual(cell: Vector2i, color: Color):
+func update_cell_visual(cell: Vector2i, color: Color) -> void:
 	if cell.y < cell_meshes.size() and cell.x < cell_meshes[cell.y].size():
 		var mesh_instance = cell_meshes[cell.y][cell.x]
 		if mesh_instance and mesh_instance.material_override:
 			mesh_instance.material_override.albedo_color = color
 
-func update_wall_visual(x: int, y: int):
+func update_wall_visual(x: int, y: int) -> void:
 	# Convert wall to path
 	maze[y][x] = false
 	
@@ -264,7 +274,7 @@ func update_wall_visual(x: int, y: int):
 	floor_colliders[y][x] = floor_collider
 	add_child(floor_collider)
 
-func create_entrance_exit():
+func create_entrance_exit() -> void:
 	# Create entrance at top
 	maze[0][1] = false
 	update_entrance_exit_visual(1, 0)
@@ -273,7 +283,7 @@ func create_entrance_exit():
 	maze[maze_height - 1][maze_width - 2] = false
 	update_entrance_exit_visual(maze_width - 2, maze_height - 1)
 
-func update_entrance_exit_visual(x: int, y: int):
+func update_entrance_exit_visual(x: int, y: int) -> void:
 	var mesh_instance = cell_meshes[y][x]
 	
 	# Change to path
@@ -365,3 +375,12 @@ func debug_collision_info() -> Dictionary:
 		"cell_size": cell_size,
 		"wall_height": wall_height
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

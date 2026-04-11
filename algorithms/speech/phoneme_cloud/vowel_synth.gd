@@ -78,7 +78,7 @@ class AudioEvent:
 var events: Array[AudioEvent] = []
 var sample_clock: int = 0
 
-func _ready():
+func _ready() -> void:
 	var player = AudioStreamPlayer3D.new()
 	add_child(player)
 	
@@ -107,7 +107,7 @@ var target_intensity: float = 0.0
 var is_speaking: bool = false
 var time_accum: float = 0.0
 
-func trigger_fricative(type: String, duration_ms: float = 150.0):
+func trigger_fricative(type: String, duration_ms: float = 150.0) -> void:
 	var e = AudioEvent.new()
 	e.type = "fricative"
 	e.sample_time = sample_clock + 256 # Small buffer
@@ -125,7 +125,7 @@ func trigger_fricative(type: String, duration_ms: float = 150.0):
 	
 	events.push_back(e)
 
-func trigger_plosive(type: String):
+func trigger_plosive(type: String) -> void:
 	# 1. Closure (Silence)
 	var e1 = AudioEvent.new()
 	e1.type = "closure"
@@ -150,7 +150,7 @@ func trigger_plosive(type: String):
 	e2.amplitude = e2.params["amp"]
 	events.push_back(e2)
 
-func trigger_nasal(type: String, duration_ms: float = 100.0):
+func trigger_nasal(type: String, duration_ms: float = 100.0) -> void:
 	var e = AudioEvent.new()
 	e.type = "nasal"
 	e.sample_time = sample_clock + 256
@@ -158,23 +158,23 @@ func trigger_nasal(type: String, duration_ms: float = 100.0):
 	e.amplitude = 0.5
 	events.push_back(e)
 
-func trigger_affricate(_type: String):
+func trigger_affricate(_type: String) -> void:
 	# ch = t + sh
 	trigger_plosive("t")
 	trigger_fricative("sh", 100)
 
-func stop():
+func stop() -> void:
 	is_speaking = false
 	target_intensity = 0.0
 	env_target = 0.0
 
-func _fill_until(frames_requested: int):
+func _fill_until(frames_requested: int) -> void:
 	var space = playback.get_frames_available()
 	if space < frames_requested: return
 	
 	_process_audio_chunk(space)
 
-func _process_audio_chunk(frames: int):
+func _process_audio_chunk(frames: int) -> void:
 	# Parameter smoothing (Block Rate for F1/Delta)
 	var f1_inc = (audio_target_f1 - audio_current_f1) / float(frames)
 	var delta_inc = (audio_target_delta - audio_current_delta) / float(frames)
@@ -283,7 +283,7 @@ func _process_audio_chunk(frames: int):
 		var frame = Vector2(vowel_signal + noise_signal, vowel_signal + noise_signal)
 		playback.push_frame(frame)
 
-func _apply_event(e: AudioEvent):
+func _apply_event(e: AudioEvent) -> void:
 	if e.type == "closure":
 		plosive_state = PlosiveState.CLOSURE
 		env_target = 0.0
@@ -354,3 +354,9 @@ func _poly_blep(t: float, dt: float) -> float:
 		return t * t + t + t + 1.0
 	else:
 		return 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

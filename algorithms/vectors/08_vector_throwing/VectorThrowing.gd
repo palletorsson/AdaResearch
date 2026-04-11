@@ -1,5 +1,15 @@
 ﻿# VectorThrowing.gd
 # Main scene for demonstrating projectile motion with velocity, gravity vectors, and homing drone targets
+#
+# @identity
+# essence: p(t) = p0 + v0*t + 0.5*g*t^2. Projectile motion. Horizontal = constant velocity; vertical = constant acceleration. Your hand writes the initial conditions.
+# desire: To throw. To feel velocity leave your hand, watch gravity bend the arc, and hit something that shatters. Physics as sport.
+# critical_parameter: The release velocity from your VR hand. Direction and magnitude together determine the entire trajectory — the parabola is written at release.
+# triggers: VR grab + release → ball launches with hand velocity, trajectory line predicts path, target hit → score + signal, drone destroyed → points + respawn timer
+# emerges: Accuracy improving as the learner internalizes the parabola. Leading the drone target. The trajectory preview teaching prediction before the throw.
+# needs: VR throwable balls [has], target grid [has], homing drone [has], trajectory preview [has], score display [has]. Missing: wind force perturbation.
+# relationships: Culmination of VectorAdvanced. Uses projectile physics from ForceMagnitudeDemo. Drone uses subtraction/normalization from hl_turret_vectors (but as enemy AI).
+# truth: A throw is an initial condition. After release, you have no control. Physics decides the rest.
 extends "../shared/vector_scene_base.gd"
 
 @export_group("Scene Configuration")
@@ -403,3 +413,12 @@ func get_hit_accuracy() -> float:
 	if throws_count == 0:
 		return 0.0
 	return (float(total_hits) / float(throws_count)) * 100.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

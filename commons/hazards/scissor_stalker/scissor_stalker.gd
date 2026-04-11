@@ -1,4 +1,14 @@
-﻿extends CharacterBody3D
+﻿# @identity
+# essence: L(extension) = Σ bar_length · f(θ_i) — Hoberman scissor linkage maps single parameter to reach
+# desire: a crouching spider that stalks low, then explosively extends scissor legs to pounce and slam
+# critical_parameter: _leg_extension — 0 = compact (hiding), 1 = fully extended (3x reach for pounce)
+# triggers: state machine (COMPACT→STALK→POUNCE→ATTACK→RETRACT) with leg extension ramping per state
+# emerges: the walk animation arises from phase-offset sine waves on leg tilt — no IK, just linkage geometry
+# needs: ScissorLinkage geometry solver [has]; per-leg bar/joint mesh updates [has]; player tracking [has]
+# relationships: contrasts with kresling_spire (radial extension vs linear extension); feeds random_game gauntlet
+# truth: A scissor linkage is amplification — small angular change becomes dramatic spatial reach.
+
+extends CharacterBody3D
 class_name ScissorStalker
 ## Spider-like enemy with Hoberman scissor linkage legs.
 ## Legs can extend 3x their compact length for dramatic reach.

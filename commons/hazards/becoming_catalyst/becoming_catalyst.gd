@@ -1,3 +1,13 @@
+# @identity
+# essence: mode(curriculum_progress) -> hand_force(type) -- a held tool that evolves through the curriculum
+# desire: an evolving hand force tracking player progression, from slow cubes to swarm intelligence
+# critical_parameter: current_mode_index / unlocked_modes -- curriculum stage determines the tool's current power
+# triggers: XRToolsPickable grab/release; mode cycling through unlocked abilities; curriculum progression unlocks
+# emerges: the tool that grows with the learner -- same object, different capability at each understanding stage
+# needs: XRToolsPickable [has]; mode system [has]; fire cooldown [has]; curriculum tracking [has]
+# relationships: companion to loving_triangle (tool + atom pair); embodies Q-FEP progression across all sequences
+# truth: the catalyst does not change the world -- it changes what the holder can do in the world.
+
 # BecomingCatalyst.gd
 # The Becoming Catalyst — an evolving hand force that grows with the curriculum.
 # Not a weapon of destruction but a tool of transformation, becoming, and
@@ -15,6 +25,8 @@ class_name BecomingCatalyst
 # ── Mode Definitions ──────────────────────────────────────────────────────
 # Each entry maps a mode_id to its metadata and factory script.
 const MODE_DEFS: Array[Dictionary] = [
+	{"id": "voxel_editor",   "order": 0,  "name": "Voxel Editor",   "sequence": "",                   "script": "res://commons/hazards/becoming_catalyst/modes/mode_voxel_editor.gd"},
+	{"id": "wedge_placer",   "order": 0,  "name": "Wedge Placer",  "sequence": "",                   "script": "res://commons/hazards/becoming_catalyst/modes/mode_wedge_placer.gd"},
 	{"id": "primitives",     "order": 1,  "name": "Primitives",     "sequence": "primitives",         "script": "res://commons/hazards/becoming_catalyst/modes/mode_primitives.gd"},
 	{"id": "transformation", "order": 2,  "name": "Transformation", "sequence": "transformation",     "script": "res://commons/hazards/becoming_catalyst/modes/mode_transformation.gd"},
 	{"id": "chromatic",      "order": 3,  "name": "Chromatic",      "sequence": "color",              "script": "res://commons/hazards/becoming_catalyst/modes/mode_chromatic.gd"},
@@ -28,7 +40,7 @@ const MODE_DEFS: Array[Dictionary] = [
 ]
 
 # ── State ─────────────────────────────────────────────────────────────────
-var unlocked_modes: Array[String] = ["primitives"]
+var unlocked_modes: Array[String] = ["voxel_editor", "wedge_placer", "off"]
 var current_mode_index: int = 0
 var fire_cooldown: float = 0.0
 var is_held: bool = false
@@ -39,7 +51,24 @@ var _pickup_controller_name: String = ""  # Remember which controller picked us 
 # Mode switching debounce
 var _stick_debounce: float = 0.0
 const STICK_THRESHOLD := 0.7
-const STICK_COOLDOWN := 0.8
+const STICK_COOLDOWN := 0.5  # Short cooldown — smooth lerp handles the visual transition
+
+# Voxel editing (tool mode)
+var _voxel_controller: VoxelEditController = null
+var _voxel_active: bool = false
+# Voxel activation retry (grid may not be ready on map transition)
+var _voxel_activate_retries: int = 0
+const VOXEL_MAX_RETRIES := 10
+const VOXEL_RETRY_DELAY := 0.3  # seconds between retries
+
+# Head raycast (Minecraft style) — look where you want to place
+var _xr_camera: XRCamera3D = null
+var _xr_origin: XROrigin3D = null
+
+# Wedge placement — placed prisms stored for removal
+var _placed_wedges: Array[Dictionary] = []  # {node, grid_x, grid_z, direction}
+var _wedge_ghost: MeshInstance3D = null
+var _wedge_ghost_dir: float = 0.0  # Y rotation in degrees
 
 # Tip marker — where projectiles spawn
 var _tip: Marker3D = null
@@ -96,16 +125,43 @@ func _physics_process(delta: float) -> void:
 	fire_cooldown = maxf(0.0, fire_cooldown - delta)
 	_stick_debounce = maxf(0.0, _stick_debounce - delta)
 
-	# Mode label fade
-	if _mode_label_timer > 0.0:
-		_mode_label_timer -= delta
-		if _mode_label_timer <= 0.0 and _mode_label:
-			_mode_label.visible = false
+	# Mode label — always visible when held, shows current mode + index
+	if is_held and _mode_label:
+		if _mode_label_timer > 0.0:
+			_mode_label_timer -= delta
+			# After the flash period, show a dimmer persistent label
+			if _mode_label_timer <= 0.0:
+				var mode_def := _get_current_mode_def()
+				_mode_label.text = mode_def.get("name", "")
+				_mode_label.modulate = CatalystVisual.get_mode_color(mode_def.get("id", "")).darkened(0.3)
+				_mode_label.modulate.a = 0.6  # Dimmer but still visible
+		_mode_label.visible = true
+	elif _mode_label:
+		_mode_label.visible = false
 
 	# Hand glow pulse — the absorbed power breathes
 	if is_held and _held_glow:
 		var pulse := 1.5 + sin(Time.get_ticks_msec() / 400.0) * 0.5
 		_held_glow.light_energy = pulse
+
+	# Update cardinal neighbor targeting (shared by voxel + wedge modes)
+	_update_voxel_raycast()
+
+	# Update mode-specific ghost preview
+	var _cur_mode_id := ""
+	if current_mode_index >= 0 and current_mode_index < unlocked_modes.size():
+		_cur_mode_id = unlocked_modes[current_mode_index]
+	if _cur_mode_id == "wedge_placer":
+		_update_wedge_ghost()
+		# Hide voxel ghosts when in wedge mode
+		if _voxel_controller:
+			if _voxel_controller._ghost_add:
+				_voxel_controller._ghost_add.visible = false
+			if _voxel_controller._ghost_remove:
+				_voxel_controller._ghost_remove.visible = false
+	else:
+		if _wedge_ghost:
+			_wedge_ghost.visible = false
 
 	# Mode switching disabled on controller thumbstick — use the bracelet instead
 
@@ -119,14 +175,198 @@ func _physics_process(delta: float) -> void:
 func action() -> void:
 	super()
 
-## Direct controller button handler — fires on A/X face button (ax_button).
-## Trigger is reserved for XRTools interactions (grab, poke, etc.).
+## Controller button handler.
+## Mode switching is done by the OTHER hand grabbing and rotating the bracelet hinge.
+## This handler only deals with firing/voxel actions on the catalyst hand.
+##
+## A/X = fire projectile OR add cube (voxel mode)
+## B/Y = remove cube (voxel mode only)
+## Trigger = add cube (voxel mode) — in other modes trigger is XRTools grab
+## Grip = NOT used here — grip is for the OTHER hand grabbing the bracelet
+##
 func _on_controller_button(button_name: String) -> void:
-	if button_name == "ax_button":
-		# Don't fire while the hand is busy holding/picking up another object
-		if _is_hand_busy():
+	var mode_def := _get_current_mode_def()
+	var mode_id: String = mode_def.get("id", "") if not mode_def.is_empty() else ""
+
+	match button_name:
+		"ax_button", "trigger_click":
+			match mode_id:
+				"voxel_editor":
+					_handle_voxel_add()
+				"wedge_placer":
+					_handle_wedge_add()
+				_:
+					if not _is_hand_busy():
+						_fire()
+		"grip_click":
+			match mode_id:
+				"voxel_editor":
+					_handle_voxel_remove()
+				"wedge_placer":
+					_handle_wedge_remove()
+
+
+## Voxel mode: trigger/AX = ADD cube on the cardinal neighbor you're facing.
+func _handle_voxel_add() -> void:
+	if not _voxel_controller or not _voxel_controller.has_target:
+		return
+	_voxel_controller.try_add()
+	fire_cooldown = 0.15
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.2, 0.0)
+
+
+## Voxel mode: grip = REMOVE cube.
+func _handle_voxel_remove() -> void:
+	if not _voxel_controller:
+		return
+	_voxel_controller.try_remove()
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.3, 0.0)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# WEDGE PLACEMENT — PrismMesh slopes on the grid
+# ═══════════════════════════════════════════════════════════════════════════
+
+## Wedge mode: trigger/AX = place wedge on the cardinal neighbor, sloping toward you.
+func _handle_wedge_add() -> void:
+	if not _voxel_controller or not _voxel_controller.has_target:
+		return
+	if not _voxel_controller.structure_component:
+		return
+
+	var ac := _voxel_controller.add_cell
+	var structure: GridStructureComponent = _voxel_controller.structure_component
+	var total_size: float = structure.cube_size + structure.gutter
+
+	# Grid origin
+	var grid_origin := Vector3.ZERO
+	var grid_parent := structure.get_parent()
+	if grid_parent is Node3D:
+		grid_origin = (grid_parent as Node3D).global_position
+
+	# Check if there's already a wedge at this XZ
+	for w in _placed_wedges:
+		if w["grid_x"] == ac.x and w["grid_z"] == ac.z:
+			return  # Already occupied
+
+	# Load the walkable prism scene (has StaticBody3D + ConcavePolygonShape3D)
+	var wp_scene := load("res://commons/scenes/mapobjects/walkableprism.tscn")
+	if wp_scene == null:
+		push_error("[Catalyst] Failed to load walkableprism.tscn")
+		return
+	var wedge: Node3D = wp_scene.instantiate()
+	wedge.name = "Wedge_%d_%d" % [ac.x, ac.z]
+
+	# Scale to fit one grid cell (scene default is 2x1x1, we need total_size)
+	var scene_width := 2.0  # Default PrismMesh width in the scene
+	var scale_factor := total_size / scene_width
+	wedge.scale = Vector3(scale_factor, total_size, scale_factor)
+
+	# Position at grid cell
+	var world_pos := grid_origin + Vector3(
+		float(ac.x) * total_size,
+		float(ac.y) * total_size,
+		float(ac.z) * total_size
+	)
+	wedge.global_position = world_pos
+
+	# Rotate so the slope faces the player's look direction
+	wedge.rotation_degrees.y = _wedge_ghost_dir
+
+	# Add to scene
+	get_tree().current_scene.add_child(wedge)
+	_placed_wedges.append({
+		"node": wedge,
+		"grid_x": ac.x,
+		"grid_z": ac.z,
+		"direction": _wedge_ghost_dir,
+	})
+
+	fire_cooldown = 0.2
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.2, 0.0)
+	print("[Catalyst] Wedge placed at (%d, %d) dir=%.0f" % [ac.x, ac.z, _wedge_ghost_dir])
+
+
+## Wedge mode: grip = remove the wedge at the target neighbor.
+func _handle_wedge_remove() -> void:
+	if not _voxel_controller or not _voxel_controller.has_target:
+		return
+	var tc := _voxel_controller.add_cell  # Same cell as where we'd place
+
+	for i in range(_placed_wedges.size() - 1, -1, -1):
+		var w: Dictionary = _placed_wedges[i]
+		if w["grid_x"] == tc.x and w["grid_z"] == tc.z:
+			if is_instance_valid(w["node"]):
+				(w["node"] as Node).queue_free()
+			_placed_wedges.remove_at(i)
+			if controller:
+				controller.trigger_haptic_pulse("haptic", 0.0, 0.08, 0.3, 0.0)
+			print("[Catalyst] Wedge removed at (%d, %d)" % [tc.x, tc.z])
 			return
-		_fire()
+
+
+## Build or update the wedge ghost preview.
+func _update_wedge_ghost() -> void:
+	if not _voxel_active or not _voxel_controller or not _voxel_controller.has_target:
+		if _wedge_ghost:
+			_wedge_ghost.visible = false
+		return
+	if not _voxel_controller.structure_component:
+		return
+
+	var structure: GridStructureComponent = _voxel_controller.structure_component
+	var total_size: float = structure.cube_size + structure.gutter
+	var ac := _voxel_controller.add_cell
+
+	# Grid origin
+	var grid_origin := Vector3.ZERO
+	var grid_parent := structure.get_parent()
+	if grid_parent is Node3D:
+		grid_origin = (grid_parent as Node3D).global_position
+
+	# Create ghost on first use
+	if not _wedge_ghost:
+		_wedge_ghost = MeshInstance3D.new()
+		_wedge_ghost.name = "WedgeGhost"
+		_wedge_ghost.top_level = true
+		var prism := PrismMesh.new()
+		prism.size = Vector3(total_size * 0.96, total_size * 0.96, total_size * 0.96)
+		prism.left_to_right = 0.0
+		_wedge_ghost.mesh = prism
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(0.85, 0.55, 0.2, 0.15)
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.no_depth_test = true
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mat.emission_enabled = true
+		mat.emission = Color(0.85, 0.55, 0.2)
+		mat.emission_energy_multiplier = 0.3
+		_wedge_ghost.material_override = mat
+		add_child(_wedge_ghost)
+
+	_wedge_ghost.visible = true
+	_wedge_ghost.global_position = grid_origin + Vector3(
+		float(ac.x) * total_size,
+		float(ac.y) * total_size,
+		float(ac.z) * total_size
+	)
+
+	# Compute wedge direction from look direction
+	var look_dir := Vector3.ZERO
+	if _xr_camera and is_instance_valid(_xr_camera):
+		look_dir = -_xr_camera.global_transform.basis.z
+	elif controller:
+		look_dir = -controller.global_transform.basis.z
+	var flat := Vector2(look_dir.x, look_dir.z)
+	if flat.length() > 0.01:
+		# Snap to 4 cardinal directions (0, 90, 180, 270)
+		var angle_rad := atan2(flat.x, flat.y)
+		var snapped := roundf(angle_rad / (PI * 0.5)) * 90.0
+		_wedge_ghost_dir = snapped
+	_wedge_ghost.rotation_degrees.y = _wedge_ghost_dir
+
 
 ## Check if FunctionPickup on this controller is currently holding a pickable.
 func _is_hand_busy() -> bool:
@@ -146,6 +386,15 @@ func _fire() -> void:
 	if mode_def.is_empty():
 		return
 
+	# ── Tool modes: voxel cubes and wedge prisms ──
+	if mode_def["id"] == "voxel_editor":
+		_handle_voxel_add()
+		return
+	if mode_def["id"] == "wedge_placer":
+		_handle_wedge_add()
+		return
+
+	# ── Standard projectile modes ──
 	# Fire where the controller points (local -Z, same axis as FunctionPointer ray)
 	var spawn_pos: Vector3
 	var fire_dir: Vector3
@@ -180,19 +429,162 @@ func _fire() -> void:
 # MODE SWITCHING
 # ═════════════════════════════════════════════════════════════════════════
 
-func _check_mode_switch() -> void:
-	if not controller or _stick_debounce > 0.0:
+# ═════════════════════════════════════════════════════════════════════════
+# VOXEL EDITING — Tool mode for adding/removing grid cubes
+# ═════════════════════════════════════════════════════════════════════════
+
+func _activate_voxel_mode() -> void:
+	if _voxel_active:
 		return
-	if unlocked_modes.size() <= 1:
+	# Find GridStructureComponent in scene
+	var structure := _find_node_by_name(get_tree().root, "GridStructureComponent")
+	if not structure or not (structure is GridStructureComponent):
+		# Grid not ready yet (common after map transitions — grid needs ~3 frames)
+		if _voxel_activate_retries < VOXEL_MAX_RETRIES:
+			_voxel_activate_retries += 1
+			print("[Catalyst] Grid not ready, retry %d/%d in %.1fs" % [_voxel_activate_retries, VOXEL_MAX_RETRIES, VOXEL_RETRY_DELAY])
+			get_tree().create_timer(VOXEL_RETRY_DELAY).timeout.connect(_activate_voxel_mode)
+			return
+		print("[Catalyst] No GridStructureComponent found after %d retries — voxel mode unavailable" % VOXEL_MAX_RETRIES)
+		return
+	# Check if grid data is actually loaded (not just the node existing)
+	var data := _find_node_by_name(get_tree().root, "GridDataComponent")
+	if not data or not data.has_method("is_data_loaded") or not data.is_data_loaded():
+		if _voxel_activate_retries < VOXEL_MAX_RETRIES:
+			_voxel_activate_retries += 1
+			print("[Catalyst] Grid data not loaded yet, retry %d/%d" % [_voxel_activate_retries, VOXEL_MAX_RETRIES])
+			get_tree().create_timer(VOXEL_RETRY_DELAY).timeout.connect(_activate_voxel_mode)
+			return
+		print("[Catalyst] Grid data not available after %d retries" % VOXEL_MAX_RETRIES)
+		return
+	_voxel_activate_retries = 0
+	if data.has_method("get_structure_data"):
+		(structure as GridStructureComponent).enable_editing(data.get_structure_data())
+	_voxel_controller = VoxelEditController.new()
+	_voxel_controller.name = "CatalystVoxelEdit"
+	_voxel_controller.structure_component = structure as GridStructureComponent
+	_voxel_controller.cube_size = (structure as GridStructureComponent).cube_size
+	add_child(_voxel_controller)
+	_voxel_active = true
+
+	# Find XR nodes for head raycast (Minecraft style)
+	_xr_camera = null
+	_xr_origin = null
+	if controller:
+		var node = controller.get_parent()
+		while node:
+			if node is XROrigin3D:
+				_xr_origin = node
+				break
+			node = node.get_parent()
+		if _xr_origin:
+			for child in _xr_origin.get_children():
+				if child is XRCamera3D:
+					_xr_camera = child
+					break
+	if _xr_camera:
+		print("[Catalyst] Head raycast active — using %s" % _xr_camera.get_path())
+	else:
+		push_warning("[Catalyst] No XRCamera3D found — falling back to controller ray")
+	print("[Catalyst] Voxel editor activated")
+
+
+func _deactivate_voxel_mode() -> void:
+	if not _voxel_active:
+		return
+	if _voxel_controller and is_instance_valid(_voxel_controller):
+		_voxel_controller.queue_free()
+	_voxel_controller = null
+	_xr_camera = null
+	_xr_origin = null
+	_voxel_active = false
+
+
+func _update_voxel_raycast() -> void:
+	if not _voxel_active or not _voxel_controller:
+		return
+	if not _voxel_controller.structure_component:
 		return
 
-	var stick := controller.get_vector2("primary")
-	if stick.x > STICK_THRESHOLD:
-		_switch_mode(1)
-		_stick_debounce = STICK_COOLDOWN
-	elif stick.x < -STICK_THRESHOLD:
-		_switch_mode(-1)
-		_stick_debounce = STICK_COOLDOWN
+	var structure: GridStructureComponent = _voxel_controller.structure_component
+	var total_size: float = structure.cube_size + structure.gutter
+
+	# Get player grid position (feet level), accounting for grid world offset
+	if not _xr_origin or not is_instance_valid(_xr_origin):
+		_voxel_controller.clear_target()
+		return
+	var grid_origin := Vector3.ZERO
+	var grid_parent := structure.get_parent()
+	if grid_parent is Node3D:
+		grid_origin = (grid_parent as Node3D).global_position
+	var local_pos: Vector3 = _xr_origin.global_position - grid_origin
+	var player_grid: Vector3i = structure.world_to_grid(local_pos)
+
+	# Get look direction from head (or controller fallback), projected onto XZ
+	var look_dir := Vector3.ZERO
+	if _xr_camera and is_instance_valid(_xr_camera):
+		look_dir = -_xr_camera.global_transform.basis.z
+	elif controller:
+		look_dir = -controller.global_transform.basis.z
+	else:
+		_voxel_controller.clear_target()
+		return
+
+	# Project onto XZ plane and pick the dominant cardinal direction
+	# Reach = 2 cells out (skip the cell right next to you for better visibility)
+	var flat := Vector2(look_dir.x, look_dir.z)
+	if flat.length() < 0.01:
+		_voxel_controller.clear_target()
+		return
+
+	const REACH := 2  # How many cells out to place/remove
+	var offset := Vector3i.ZERO
+	if absf(flat.x) > absf(flat.y):
+		offset = Vector3i(REACH, 0, 0) if flat.x > 0 else Vector3i(-REACH, 0, 0)
+	else:
+		offset = Vector3i(0, 0, REACH) if flat.y > 0 else Vector3i(0, 0, -REACH)
+
+	var neighbor_x: int = player_grid.x + offset.x
+	var neighbor_z: int = player_grid.z + offset.z
+	var height: int = structure.get_height_at(neighbor_x, neighbor_z)
+
+	# Target cell: top cube of the neighbor column (for removal)
+	var target := Vector3i(neighbor_x, maxi(height - 1, 0), neighbor_z)
+	# Add cell: on top of the neighbor column (for placement)
+	var add := Vector3i(neighbor_x, height, neighbor_z)
+
+	_voxel_controller.set_target_direct(target, add)
+
+
+func _voxel_save() -> void:
+	if not _voxel_controller or not _voxel_controller.structure_component:
+		return
+	var data := _find_node_by_name(get_tree().root, "GridDataComponent")
+	var map_name: String = ""
+	if data and data.has_method("get_current_map_name"):
+		map_name = data.get_current_map_name()
+	if map_name.is_empty():
+		return
+	VoxelSaveManager.save(map_name, _voxel_controller.structure_component)
+	print("[Catalyst] 💾 Saved: %s" % map_name)
+	if controller:
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.15, 0.5, 0.0)
+
+
+func _find_node_by_name(node: Node, target_name: String) -> Node:
+	if node.name == target_name:
+		return node
+	for child in node.get_children():
+		var found := _find_node_by_name(child, target_name)
+		if found:
+			return found
+	return null
+
+
+func _check_mode_switch() -> void:
+	# Mode switching is done by the OTHER hand rotating the bracelet hinge.
+	# No thumbstick or grip-click mode switching on the catalyst hand.
+	pass
 
 func _switch_mode(direction: int) -> void:
 	var new_index := (current_mode_index + direction) % unlocked_modes.size()
@@ -206,6 +598,12 @@ func _switch_mode(direction: int) -> void:
 
 	_show_mode_label()
 	mode_changed.emit(mode_id)
+
+	# Activate/deactivate grid editing based on mode (voxel + wedge share the controller)
+	if mode_id in ["voxel_editor", "wedge_placer"]:
+		_activate_voxel_mode()
+	else:
+		_deactivate_voxel_mode()
 
 	# Keep bracelet in sync with thumbstick switching
 	var cap_mgr = get_node_or_null("/root/CatalystCapabilityManager")
@@ -229,6 +627,13 @@ func set_mode_index(index: int) -> void:
 	_show_mode_label()
 	_rebuild_visual()
 	mode_changed.emit(mode_id)
+
+	# Activate/deactivate grid editing (voxel + wedge share the controller)
+	if mode_id in ["voxel_editor", "wedge_placer"]:
+		_activate_voxel_mode()
+	else:
+		_deactivate_voxel_mode()
+
 	# Don't call bracelet.sync_to_mode here — the bracelet initiated this change
 	if controller:
 		controller.trigger_haptic_pulse("haptic", 0.0, 0.04, 0.15, 0.0)
@@ -238,10 +643,12 @@ func _show_mode_label() -> void:
 	if not _mode_label:
 		return
 	var mode_def := _get_current_mode_def()
-	_mode_label.text = mode_def.get("name", "???")
+	var mode_name: String = mode_def.get("name", "???")
+	var index_display: String = "%d/%d" % [current_mode_index + 1, unlocked_modes.size()]
+	_mode_label.text = "%s  %s" % [index_display, mode_name]
 	_mode_label.modulate = CatalystVisual.get_mode_color(mode_def.get("id", ""))
 	_mode_label.visible = true
-	_mode_label_timer = 2.0
+	_mode_label_timer = 4.0  # Visible longer so player can read it
 
 func _get_current_mode_def() -> Dictionary:
 	if current_mode_index < 0 or current_mode_index >= unlocked_modes.size():
@@ -322,39 +729,12 @@ func _find_lab_manager() -> Node:
 # SAVE / LOAD
 # ═════════════════════════════════════════════════════════════════════════
 
-const SAVE_PATH := "user://catalyst_modes.save"
-
 func _save_unlocked_modes() -> void:
-	var data := {
-		"unlocked": unlocked_modes.duplicate(),
-		"last_mode": unlocked_modes[current_mode_index] if current_mode_index < unlocked_modes.size() else "primitives",
-	}
-	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
-	if file:
-		file.store_string(JSON.stringify(data))
-		file.close()
+	pass  # Fresh start every session — modes unlock during gameplay
 
 func _load_unlocked_modes() -> void:
-	if not FileAccess.file_exists(SAVE_PATH):
-		return
-	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
-	if not file:
-		return
-	var text := file.get_as_text()
-	file.close()
-	var data = JSON.parse_string(text)
-	if data is Dictionary and data.has("unlocked"):
-		unlocked_modes.clear()
-		for mode_id in data["unlocked"]:
-			unlocked_modes.append(str(mode_id))
-		# Ensure primitives always present
-		if "primitives" not in unlocked_modes:
-			unlocked_modes.insert(0, "primitives")
-		# Restore last mode
-		if data.has("last_mode"):
-			var idx := unlocked_modes.find(str(data["last_mode"]))
-			if idx >= 0:
-				current_mode_index = idx
+	# Fresh start: only voxel_editor, modes unlock during gameplay
+	current_mode_index = 0
 
 # ═════════════════════════════════════════════════════════════════════════
 # VISUAL CONSTRUCTION
@@ -513,6 +893,10 @@ func _absorb_into_hand() -> void:
 		_held_glow.light_color = mode_color
 		_held_glow.light_energy = 1.5
 
+	# Activate voxel mode if it's the current mode (default on start)
+	if unlocked_modes[current_mode_index] == "voxel_editor":
+		call_deferred("_activate_voxel_mode")
+
 ## Auto-absorb onto a controller without pickup animation.
 ## Used by CatalystCapabilityManager to restore catalyst after scene transitions.
 func auto_absorb(ctrl: XRController3D) -> void:
@@ -542,13 +926,19 @@ func auto_absorb(ctrl: XRController3D) -> void:
 	controller.add_child(self)
 	position = Vector3.ZERO
 	scale = Vector3(0.01, 0.01, 0.01)
-	visible = false  # Absorbed crystals are invisible
+	# Don't set visible=false — ghost cubes are descendants and Godot hides
+	# all children of invisible nodes even with top_level=true.
+	# The 0.01 scale already makes the catalyst effectively invisible.
 
 	# Hand glow
 	if _held_glow and current_mode_index < unlocked_modes.size():
 		var mode_color := CatalystVisual.get_mode_color(unlocked_modes[current_mode_index])
 		_held_glow.light_color = mode_color
 		_held_glow.light_energy = 1.5
+
+	# Activate voxel mode if it's the current mode (same as regular pickup)
+	if unlocked_modes[current_mode_index] == "voxel_editor":
+		call_deferred("_activate_voxel_mode")
 
 	print("[Catalyst] Auto-absorbed onto '%s' with %d modes: %s" % [
 		controller.name, unlocked_modes.size(), unlocked_modes])

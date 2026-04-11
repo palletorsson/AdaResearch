@@ -1,4 +1,14 @@
-﻿extends Node3D
+extends Node3D
+
+# @identity
+# essence: ROYGBIV arc(inner_radius + i*thickness) — concentric half-circle bands from ArrayMesh, primary + fainter secondary
+# desire: to stand beneath a double rainbow and feel the scale of spectral order arching overhead
+# critical_parameter: SECONDARY_FADE — controls how visible the second rainbow is, teaching that double rainbows exist with reversed color order
+# triggers: atmospheric particles drift with sin(time); no interaction triggers — the rainbow simply is
+# emerges: the reversed color order of the secondary rainbow is physically accurate and usually surprises people
+# needs: atmospheric particles [has]; VR scale [has]; interactive angle control [missing]; Label3D [missing]
+# relationships: echoes mario_cube (reveals rainbow); contrasts with dark_side_prism (arc vs linear); precedes rainbow_hallway (static vs immersive)
+# truth: a rainbow has no location — it exists only in the geometry between sun, water, and eye
 
 # Local debug flag to gate prints (default off)
 @export var debug: bool = false
@@ -24,7 +34,7 @@ var rainbow_colors = [
 	Color(0.5, 0.0, 1.0, 1.0)     # Violet
 ]
 
-func _ready():
+func _ready() -> void:
 	# Create the primary rainbow
 	create_rainbow(Vector3.ZERO, 1.0, false)
 	
@@ -36,7 +46,7 @@ func _ready():
 	
 
 
-func create_rainbow(offset: Vector3, alpha_multiplier: float, reverse_colors: bool):
+func create_rainbow(offset: Vector3, alpha_multiplier: float, reverse_colors: bool) -> void:
 	var rainbow_node = Node3D.new()
 	rainbow_node.name = "Rainbow_" + str(randf())
 	add_child(rainbow_node)
@@ -123,7 +133,7 @@ func create_color_band(color_index: int, alpha_multiplier: float, reverse_colors
 	
 	return mesh_instance
 
-func create_atmosphere():
+func create_atmosphere() -> void:
 	# Add some atmospheric particles/effects
 	var particles = GPUParticles3D.new()
 	particles.name = "AtmosphereParticles"
@@ -167,3 +177,12 @@ func _process(_delta):
 	var particles = get_node_or_null("AtmosphereParticles")
 	if particles:
 		particles.position.x = sin(time_factor) * 2.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -35,13 +35,13 @@ var _control_panel: Node3D
 
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
-func _ready():
+func _ready() -> void:
 	_create_columns()
 	_create_balls()
 	_create_labels()
 	_create_vr_controls()
 
-func _create_columns():
+func _create_columns() -> void:
 	var spacing := column_width * 1.8
 	var start_x := -(fluids.size() - 1) * spacing / 2.0
 
@@ -102,7 +102,7 @@ func _create_columns():
 	base.position = Vector3(0, -0.01, 0)
 	add_child(base)
 
-func _create_balls():
+func _create_balls() -> void:
 	for i in range(fluids.size()):
 		var ball := MeshInstance3D.new()
 		ball.name = "Ball_%d" % i
@@ -129,7 +129,7 @@ func _create_balls():
 			"active": false,
 		})
 
-func _drop_all():
+func _drop_all() -> void:
 	var spacing := column_width * 1.8
 	var start_x := -(fluids.size() - 1) * spacing / 2.0
 
@@ -140,7 +140,7 @@ func _drop_all():
 		_ball_meshes[i].visible = true
 		_ball_meshes[i].position = Vector3(start_x + i * spacing, _ball_states[i]["y"], 0)
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	var spacing := column_width * 1.8
 	var start_x := -(fluids.size() - 1) * spacing / 2.0
 
@@ -176,7 +176,7 @@ func _physics_process(delta: float):
 		# Speed readout
 		_speed_labels[i].text = "v=%.2f" % abs(state["vy"])
 
-func _create_labels():
+func _create_labels() -> void:
 	_info_label = Label3D.new()
 	_info_label.name = "InfoLabel"
 	_info_label.pixel_size = 0.002
@@ -186,7 +186,7 @@ func _create_labels():
 	_info_label.text = "VISCOSITY COMPARISON\nDrop balls to compare drag"
 	add_child(_info_label)
 
-func _create_vr_controls():
+func _create_vr_controls() -> void:
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, -0.05, 0.35)
@@ -227,7 +227,7 @@ func _create_vr_controls():
 	if reset_area:
 		reset_area.button_pressed.connect(func(_b): _reset())
 
-func _add_button_label(btn: Node, text: String):
+func _add_button_label(btn: Node, text: String) -> void:
 	var lbl := Label3D.new()
 	lbl.text = text
 	lbl.pixel_size = 0.0008
@@ -235,7 +235,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.position = Vector3(0, -0.02, 0)
 	btn.add_child(lbl)
 
-func _reset():
+func _reset() -> void:
 	for i in range(fluids.size()):
 		_ball_states[i]["y"] = column_height + ball_radius
 		_ball_states[i]["vy"] = 0.0
@@ -243,11 +243,20 @@ func _reset():
 		_ball_meshes[i].visible = false
 		_speed_labels[i].text = ""
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE: _drop_all()
 			KEY_R: _reset()
 
-func reset():
+func reset() -> void:
 	_reset()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

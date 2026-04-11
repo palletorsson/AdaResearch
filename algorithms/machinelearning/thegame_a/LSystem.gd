@@ -1,5 +1,5 @@
 extends Node
-class_name lSystem
+class_name AxiomGardenLSystem
 
 # The Axiom Garden - Iteration 1: The Seed
 # Handles the string rewriting logic for L-Systems.
@@ -8,7 +8,7 @@ var axiom: String = ""
 var rules: Dictionary = {}
 var generations: int = 0
 
-func _init(start_axiom: String = "", production_rules: Dictionary = {}):
+func _init(start_axiom: String = "", production_rules: Dictionary = {}) -> void:
 	axiom = start_axiom
 	rules = production_rules
 
@@ -34,5 +34,5 @@ func generate(iterations: int) -> String:
 	return current_string
 
 # Helper to set rules easily
-func set_rule(predecessor: String, successor: String):
+func set_rule(predecessor: String, successor: String) -> void:
 	rules[predecessor] = successor

@@ -19,10 +19,10 @@ extends Node3D
 
 var time: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	_setup_visuals()
 
-func _setup_visuals():
+func _setup_visuals() -> void:
 	# Create a simple line mesh if not present
 	if connection_line.mesh == null:
 		var mesh = ImmediateMesh.new()
@@ -33,7 +33,7 @@ func _setup_visuals():
 		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		connection_line.material_override = material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# --- THE DRIVER ---
@@ -58,7 +58,7 @@ func _process(delta):
 	# Rotate cube for extra flair
 	product_cube.rotate_y(delta * 0.5)
 
-func _update_connection():
+func _update_connection() -> void:
 	var mesh = connection_line.mesh as ImmediateMesh
 	mesh.clear_surfaces()
 	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
@@ -70,3 +70,6 @@ func _update_connection():
 	mesh.surface_add_vertex(product_cube.position)
 	
 	mesh.surface_end()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

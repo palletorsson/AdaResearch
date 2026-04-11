@@ -1,5 +1,15 @@
-﻿extends Node3D
+extends Node3D
 class_name MarkovChains
+
+# @identity
+# essence: P(next|current) = transition_matrix[current][next] — a memoryless stochastic process: 5 states in a circle, weighted arcs, dice-roll selection animation, stationary distribution convergence
+# desire: to watch the golden selector bar sweep across probability columns and land on the next state — to see visit frequencies converge to the stationary distribution after enough steps
+# critical_parameter: transition_matrix — the row-stochastic matrix whose eigenvalue-1 eigenvector determines the long-run frequency of every state, regardless of where the chain starts
+# triggers: advance_markov_step fires every 1.5s — rolls random value against cumulative probabilities, animates transition arc, updates visit frequency bars and memoryless sequence fading
+# emerges: the sequence display fades older elements (age * 0.15 opacity decay) to embody the Markov property — past history literally disappears, only the current state glows bright
+# needs: [missing] no VR slider_horizontal or push_button — no interactive control of step_interval or transition probabilities; relies on .tscn scene tree nodes ($StateSpace, $ProbabilityMatrix, etc.)
+# relationships: the narrative generation artifact for PatternGeneration_Narrative_Generation; shares probabilistic foundations with randomness sequence; the stationary distribution connects to eigenvalue theory
+# truth: a Markov chain does not know what it is saying — it does not need to; structure was never about understanding, it was about the weight of what comes next
 
 var time: float = 0.0
 var generation_progress: float = 0.0
@@ -26,7 +36,7 @@ var is_selecting: bool = false
 var selection_progress: float = 0.0
 var selected_probability: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	# Initialize Markov Chains visualization
 	print("Markov Chains Visualization initialized")
 	initialize_transition_matrix()
@@ -39,12 +49,12 @@ func _ready():
 	create_sequence_elements()
 	setup_markov_metrics()
 
-func initialize_visit_frequency():
+func initialize_visit_frequency() -> void:
 	visit_frequency.clear()
 	for i in range(state_count):
 		visit_frequency.append(0)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	step_timer += delta
 
@@ -74,7 +84,7 @@ func _process(delta):
 	animate_probability_selector(delta)
 	update_markov_metrics(delta)
 
-func animate_probability_selector(_delta):
+func animate_probability_selector(_delta) -> void:
 	# Animate the probability selection visualization
 	if not is_selecting:
 		return
@@ -93,7 +103,7 @@ func animate_probability_selector(_delta):
 			var glow = 1.5 + sin(time * 8.0) * 0.5
 			bar.material_override.emission_energy_multiplier = glow
 
-func initialize_transition_matrix():
+func initialize_transition_matrix() -> void:
 	# Create a random transition matrix
 	transition_matrix = []
 	for i in range(state_count):
@@ -112,7 +122,7 @@ func initialize_transition_matrix():
 		
 		transition_matrix.append(row)
 
-func create_states():
+func create_states() -> void:
 	# Create Markov chain states with labels
 	var states_node = $StateSpace/States
 
@@ -183,7 +193,7 @@ func create_states():
 			"is_current": i == current_state
 		})
 
-func create_transitions():
+func create_transitions() -> void:
 	# Create transition arrows between states with probability labels
 	var transitions_node = $StateSpace/Transitions
 	for i in range(state_count):
@@ -253,7 +263,7 @@ func create_transitions():
 					"active": false
 				})
 
-func create_probability_selector():
+func create_probability_selector() -> void:
 	# Create the "dice roll" visualization - shows probability bars being selected
 	var selector_node = get_node_or_null("ProbabilitySelector")
 	if not selector_node:
@@ -329,7 +339,7 @@ func create_probability_selector():
 	selector_indicator.visible = false
 	selector_node.add_child(selector_indicator)
 
-func create_frequency_display():
+func create_frequency_display() -> void:
 	# Create stationary distribution visualization - bar chart of visit frequencies
 	var freq_node = get_node_or_null("VisitFrequency")
 	if not freq_node:
@@ -388,7 +398,7 @@ func create_frequency_display():
 			"state_index": i
 		})
 
-func create_probability_values():
+func create_probability_values() -> void:
 	# Create probability value indicators
 	var probability_values_node = $ProbabilityMatrix/ProbabilityValues
 	for i in range(state_count):
@@ -417,7 +427,7 @@ func create_probability_values():
 				"probability": prob
 			})
 
-func create_sequence_elements():
+func create_sequence_elements() -> void:
 	# Create generated sequence elements
 	var sequence_elements_node = $GeneratedSequence/SequenceElements
 
@@ -464,7 +474,7 @@ func create_current_state_indicator():
 	current_state_node.add_child(indicator)
 	return indicator
 
-func setup_markov_metrics():
+func setup_markov_metrics() -> void:
 	# Initialize Markov metrics
 	var entropy_indicator = $MarkovMetrics/EntropyMeter/EntropyIndicator
 	var convergence_indicator = $MarkovMetrics/ConvergenceMeter/ConvergenceIndicator
@@ -473,7 +483,7 @@ func setup_markov_metrics():
 	if convergence_indicator:
 		convergence_indicator.position.x = 0  # Start at middle
 
-func advance_markov_step():
+func advance_markov_step() -> void:
 	# Advance one step in the Markov chain
 	var current_row = transition_matrix[current_state]
 	var random_value = randf()
@@ -524,7 +534,7 @@ func advance_markov_step():
 			element_data["age"] = element_data.get("age", 0) + 1
 		step += 1
 
-func update_probability_bars(from_state: int, random_val: float):
+func update_probability_bars(from_state: int, random_val: float) -> void:
 	# Update the probability selector to show current transition probabilities
 	var current_row = transition_matrix[from_state]
 	var cumulative = 0.0
@@ -552,7 +562,7 @@ func update_probability_bars(from_state: int, random_val: float):
 		selector_indicator.visible = true
 		selector_indicator.position.y = random_val * 2.0
 
-func update_frequency_display():
+func update_frequency_display() -> void:
 	# Update the stationary distribution bar chart
 	var total_visits = 0
 	for v in visit_frequency:
@@ -577,7 +587,7 @@ func update_frequency_display():
 		pct_label.text = "%.1f%%" % (frequency * 100)
 		pct_label.position.y = height + 0.3
 
-func animate_states(delta):
+func animate_states(delta) -> void:
 	# Animate states
 	for i in range(states.size()):
 		var state_data = states[i]
@@ -612,7 +622,7 @@ func animate_states(delta):
 				var intensity = 0.3 + activity * 0.4 + current_boost
 				state.material_override.emission_energy_multiplier = intensity
 
-func animate_transitions(_delta):
+func animate_transitions(_delta) -> void:
 	# Animate transitions (arrows with probability labels)
 	for i in range(transitions.size()):
 		var transition_data = transitions[i]
@@ -652,7 +662,7 @@ func animate_transitions(_delta):
 				if arrowhead:
 					arrowhead.scale = Vector3.ONE
 
-func animate_generation_engine(delta):
+func animate_generation_engine(delta) -> void:
 	# Animate generation engine core
 	var engine_core = $GenerationEngine/EngineCore
 	if engine_core:
@@ -708,7 +718,7 @@ func animate_generation_engine(delta):
 			var intensity = 0.3 + pattern_activation * 0.7
 			pattern_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_probability_matrix(delta):
+func animate_probability_matrix(delta) -> void:
 	# Animate probability matrix core
 	var matrix_core = $ProbabilityMatrix/MatrixCore
 	if matrix_core:
@@ -742,7 +752,7 @@ func animate_probability_matrix(delta):
 			else:
 				indicator.material_override.emission = Color(prob, prob, 0.2, 1) * 0.3
 
-func animate_generated_sequence(_delta):
+func animate_generated_sequence(_delta) -> void:
 	# Animate generated sequence core
 	var sequence_core = $GeneratedSequence/SequenceCore
 	if sequence_core:
@@ -796,7 +806,7 @@ func animate_generated_sequence(_delta):
 				var pulse = 1.0 + sin(time * 1.5 + i * 0.1) * 0.1
 				element.scale = Vector3.ONE * pulse
 
-func update_markov_metrics(delta):
+func update_markov_metrics(delta) -> void:
 	# Update entropy meter
 	var entropy_indicator = $MarkovMetrics/EntropyMeter/EntropyIndicator
 	if entropy_indicator:
@@ -819,7 +829,7 @@ func update_markov_metrics(delta):
 		var red_component = 0.2 + 0.6 * (1.0 - convergence_rate)
 		convergence_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
 
-func set_step_interval(interval: float):
+func set_step_interval(interval: float) -> void:
 	step_interval = clamp(interval, 0.2, 3.0)
 
 func get_current_state() -> int:
@@ -834,7 +844,7 @@ func get_entropy_level() -> float:
 func get_convergence_rate() -> float:
 	return convergence_rate
 
-func reset_chain():
+func reset_chain() -> void:
 	current_state = 0
 	time = 0.0
 	step_timer = 0.0
@@ -860,3 +870,12 @@ func reset_chain():
 	# Hide selector
 	if selector_indicator:
 		selector_indicator.visible = false
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

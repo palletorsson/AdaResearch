@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: assign each point to nearest centroid; move centroids to cluster means; repeat until convergence
+# desire: watch colored clusters crystallize from unlabeled chaos as centroids drift to their resting places
+# critical_parameter: cluster_count (K) — choosing K is the fundamental unsupervised learning decision
+# triggers: iteration step reassigns points and moves centroids; convergence stops when movement < threshold
+# emerges: Voronoi tessellation of space; initialization sensitivity (K-means++ vs random); the elbow in the inertia curve
+# needs: VR controls [missing] — has 2D UI buttons but no spatial VR sliders
+# relationships: contrasts svm_visualization (supervised boundaries vs unsupervised clustering); unlocks random_forest_visualization (ensemble methods)
+# truth: clustering does not discover structure in data — it imposes structure by choosing K
+
 # Enhanced K-Means Clustering Algorithm Visualization
 # Educational tool with advanced features and interactive controls
 
@@ -117,7 +127,7 @@ class DataPoint:
 	var mesh_instance: MeshInstance3D
 	var distance_to_centroid: float = 0.0
 	
-	func _init(pos: Vector3):
+	func _init(pos: Vector3) -> void:
 		position = pos
 
 class Centroid:
@@ -128,12 +138,12 @@ class Centroid:
 	var assigned_points: Array = []
 	var movement_distance: float = 0.0
 	
-	func _init(pos: Vector3, id: int):
+	func _init(pos: Vector3, id: int) -> void:
 		position = pos
 		previous_position = pos
 		cluster_id = id
 
-func _ready():
+func _ready() -> void:
 	setup_environment()
 	setup_ui()
 	generate_data()
@@ -144,7 +154,7 @@ func _ready():
 	if animate_clustering and not step_by_step_mode:
 		start_clustering()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if animate_clustering and not converged and not is_paused and not step_by_step_mode:
 		algorithm_timer += delta
 		if algorithm_timer >= iteration_speed:
@@ -154,7 +164,7 @@ func _process(delta):
 	update_ui()
 	handle_input()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space key
 		if step_by_step_mode or is_paused:
 			manual_step = true
@@ -163,13 +173,13 @@ func _input(event):
 	elif event.is_action_pressed("ui_select"):  # Enter key
 		is_paused = !is_paused
 
-func handle_input():
+func handle_input() -> void:
 	if manual_step:
 		manual_step = false
 		if not converged:
 			perform_clustering_step()
 
-func setup_environment():
+func setup_environment() -> void:
 	# Enhanced lighting setup
 	var light = DirectionalLight3D.new()
 	light.light_energy = 0.8
@@ -192,7 +202,7 @@ func setup_environment():
 	camera.fov = 65
 	add_child(camera)
 
-func setup_ui():
+func setup_ui() -> void:
 	# Create UI container
 	ui_container = Control.new()
 	ui_container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -349,7 +359,7 @@ func create_convergence_graph() -> Panel:
 	# Graph will be drawn in _draw method
 	return panel
 
-func generate_data():
+func generate_data() -> void:
 	clear_data()
 	
 	if generate_clustered_data:
@@ -359,7 +369,7 @@ func generate_data():
 	
 	print("Generated ", data_points.size(), " data points")
 
-func generate_clustered_dataset():
+func generate_clustered_dataset() -> void:
 	var points_per_cluster = int(data_point_count * (1.0 - noise_points_percentage) / natural_cluster_count)
 	
 	# Generate natural clusters
@@ -395,7 +405,7 @@ func generate_clustered_dataset():
 		var point = DataPoint.new(random_pos)
 		data_points.append(point)
 
-func generate_random_dataset():
+func generate_random_dataset() -> void:
 	for i in range(data_point_count):
 		var random_pos = Vector3(
 			randf_range(-data_space_size/2, data_space_size/2),
@@ -405,7 +415,7 @@ func generate_random_dataset():
 		var point = DataPoint.new(random_pos)
 		data_points.append(point)
 
-func initialize_centroids():
+func initialize_centroids() -> void:
 	clear_centroids()
 	
 	# K-means++ initialization for better initial centroid placement
@@ -444,7 +454,7 @@ func initialize_centroids():
 		assignments.append(-1)
 		previous_assignments.append(-1)
 
-func create_visuals():
+func create_visuals() -> void:
 	clear_visuals()
 	
 	# Create data point visuals
@@ -488,7 +498,7 @@ func create_visuals():
 		add_child(mesh_instance)
 		centroid_meshes.append(mesh_instance)
 
-func start_clustering():
+func start_clustering() -> void:
 	iteration = 0
 	converged = false
 	is_paused = false
@@ -497,7 +507,7 @@ func start_clustering():
 	
 	print("Starting K-means clustering with ", cluster_count, " clusters")
 
-func perform_clustering_step():
+func perform_clustering_step() -> void:
 	if converged:
 		return
 	
@@ -562,7 +572,7 @@ func perform_clustering_step():
 	# Update visuals
 	update_visuals()
 
-func update_visuals():
+func update_visuals() -> void:
 	# Update point colors and highlight changes
 	for i in range(data_points.size()):
 		var point = data_points[i]
@@ -609,7 +619,7 @@ func update_visuals():
 	if show_voronoi_regions:
 		update_voronoi_regions()
 
-func update_connection_lines():
+func update_connection_lines() -> void:
 	clear_connections()
 	
 	# Limit connections for performance
@@ -653,7 +663,7 @@ func create_connection_line(from: Vector3, to: Vector3, color: Color) -> MeshIns
 	add_child(line_mesh)
 	return line_mesh
 
-func update_voronoi_regions():
+func update_voronoi_regions() -> void:
 	clear_voronoi()
 	
 	# Create simplified voronoi visualization using planes
@@ -674,7 +684,7 @@ func update_voronoi_regions():
 		add_child(plane_mesh)
 		voronoi_planes.append(plane_mesh)
 
-func update_ui():
+func update_ui() -> void:
 	if not ui_container:
 		return
 	
@@ -697,13 +707,13 @@ func update_ui():
 		status_label.text = status
 
 # Utility functions
-func clear_data():
+func clear_data() -> void:
 	data_points.clear()
 
-func clear_centroids():
+func clear_centroids() -> void:
 	centroids.clear()
 
-func clear_visuals():
+func clear_visuals() -> void:
 	for mesh in point_meshes:
 		if mesh:
 			mesh.queue_free()
@@ -717,34 +727,34 @@ func clear_visuals():
 	clear_connections()
 	clear_voronoi()
 
-func clear_connections():
+func clear_connections() -> void:
 	for line in connection_lines:
 		if line:
 			line.queue_free()
 	connection_lines.clear()
 
-func clear_voronoi():
+func clear_voronoi() -> void:
 	for plane in voronoi_planes:
 		if plane:
 			plane.queue_free()
 	voronoi_planes.clear()
 
-func update_centroid_visibility():
+func update_centroid_visibility() -> void:
 	for mesh in centroid_meshes:
 		if mesh:
 			mesh.visible = show_centroids
 
-func update_connection_visibility():
+func update_connection_visibility() -> void:
 	for line in connection_lines:
 		if line:
 			line.visible = show_connections
 
-func update_voronoi_visibility():
+func update_voronoi_visibility() -> void:
 	for plane in voronoi_planes:
 		if plane:
 			plane.visible = show_voronoi_regions
 
-func update_point_sizes():
+func update_point_sizes() -> void:
 	for point in data_points:
 		if point.mesh_instance and point.mesh_instance.mesh:
 			var sphere = point.mesh_instance.mesh as SphereMesh
@@ -752,14 +762,14 @@ func update_point_sizes():
 				sphere.radius = 0.3 * point_size_scale
 				sphere.height = 0.6 * point_size_scale
 
-func restart_clustering():
+func restart_clustering() -> void:
 	clear_visuals()
 	generate_data()
 	initialize_centroids()
 	create_visuals()
 	start_clustering()
 
-func regenerate_data():
+func regenerate_data() -> void:
 	if not is_inside_tree():
 		return
 	clear_visuals()
@@ -886,14 +896,14 @@ var performance_metrics = {
 	"render_times": []
 }
 
-func _notification(what):
+func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		# Clean up resources
 		clear_visuals()
 		get_tree().quit()
 
 # Advanced visualization features
-func create_3d_convergence_visualization():
+func create_3d_convergence_visualization() -> void:
 	"""Create a 3D trail showing centroid movement over time"""
 	if centroid_movement_history.size() < 2:
 		return
@@ -916,7 +926,7 @@ func create_3d_convergence_visualization():
 		# Create trail visualization
 		create_centroid_trail(centroid, history)
 
-func create_centroid_trail(centroid: Centroid, positions: Array):
+func create_centroid_trail(centroid: Centroid, positions: Array) -> void:
 	if positions.size() < 2:
 		return
 	
@@ -959,11 +969,11 @@ func create_centroid_trail(centroid: Centroid, positions: Array):
 		timer.start()
 
 # Interactive features
-func _on_data_point_clicked(point: DataPoint):
+func _on_data_point_clicked(point: DataPoint) -> void:
 	"""Handle clicking on data points for detailed information"""
 	show_point_info(point)
 
-func show_point_info(point: DataPoint):
+func show_point_info(point: DataPoint) -> void:
 	var info_panel = create_info_panel(point)
 	ui_container.add_child(info_panel)
 	
@@ -1049,7 +1059,7 @@ func generate_learning_report() -> Dictionary:
 	return report
 
 # Experiment modes for educational purposes
-func run_k_comparison_experiment():
+func run_k_comparison_experiment() -> void:
 	"""Run clustering with different K values to demonstrate elbow method"""
 	var k_values = [2, 3, 4, 5, 6, 7, 8]
 	var inertias = []
@@ -1073,17 +1083,17 @@ func run_k_comparison_experiment():
 	# Display results
 	show_elbow_analysis(k_values, inertias)
 
-func show_elbow_analysis(k_values: Array, inertias: Array):
+func show_elbow_analysis(k_values: Array, inertias: Array) -> void:
 	print("Elbow Method Analysis:")
 	for i in range(k_values.size()):
 		print("K=%d: Inertia=%.2f" % [k_values[i], inertias[i]])
 
 # Advanced initialization methods
-func initialize_centroids_plus_plus():
+func initialize_centroids_plus_plus() -> void:
 	"""K-means++ initialization - already implemented in initialize_centroids()"""
 	pass
 
-func initialize_centroids_random():
+func initialize_centroids_random() -> void:
 	"""Pure random initialization"""
 	clear_centroids()
 	
@@ -1103,7 +1113,7 @@ func initialize_centroids_random():
 		assignments.append(-1)
 		previous_assignments.append(-1)
 
-func initialize_centroids_data_points():
+func initialize_centroids_data_points() -> void:
 	"""Initialize centroids at random data point positions"""
 	clear_centroids()
 	
@@ -1127,7 +1137,7 @@ func initialize_centroids_data_points():
 		previous_assignments.append(-1)
 
 # Save/Load functionality
-func save_clustering_session(filename: String):
+func save_clustering_session(filename: String) -> void:
 	var save_data = export_clustering_data()
 	var file = FileAccess.open("user://clustering_sessions/" + filename + ".json", FileAccess.WRITE)
 	if file:
@@ -1169,7 +1179,7 @@ func load_clustering_session(filename: String) -> bool:
 	return true
 
 # Performance optimization
-func optimize_rendering_for_large_datasets():
+func optimize_rendering_for_large_datasets() -> void:
 	"""Implement LOD (Level of Detail) for large datasets"""
 	var camera_pos = get_viewport().get_camera_3d().global_position
 	
@@ -1219,7 +1229,7 @@ func get_cluster_statistics() -> Array:
 	
 	return stats
 
-func print_algorithm_summary():
+func print_algorithm_summary() -> void:
 	print("\n=== K-Means Clustering Summary ===")
 	print("Clusters: ", cluster_count)
 	print("Data Points: ", data_point_count)
@@ -1227,3 +1237,12 @@ func print_algorithm_summary():
 	print("Converged: ", converged)
 	print("Final Inertia: ", snapped(total_distance, 0.01))
 	print("================================\n")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

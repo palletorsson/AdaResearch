@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dyfp266gagccu"]
 
 [ext_resource type="Script" uid="uid://bhrq477espur1" path="res://commons/artifacts/catalog/ArtifactCatalogDesktop3D.gd" id="1_script"]
-[ext_resource type="Script" path="res://commons/artifacts/catalog/DesktopArtifactSwitcherOverlay.gd" id="3_overlay"]
+[ext_resource type="Script" uid="uid://d246oe1cmvs78" path="res://commons/artifacts/catalog/DesktopArtifactSwitcherOverlay.gd" id="3_overlay"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_top_color = Color(0.14, 0.2, 0.32, 1)

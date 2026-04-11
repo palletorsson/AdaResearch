@@ -8,7 +8,7 @@ const HUNT_SUCCESS_RATE = 0.3
 
 # States: 0 = empty, 1 = prey, 2 = predator
 
-func initialize_grid():
+func initialize_grid() -> void:
 	# Configure MultiMesh
 	var step = 4
 	var cube_size = CUBE_SIZE * step
@@ -30,12 +30,12 @@ func initialize_grid():
 				elif rand < 0.15:
 					grid[x][y][z] = 2  # Predator
 
-func update_simulation(_delta):
+func update_simulation(_delta) -> void:
 	# Update population dynamics
 	update_population_dynamics()
 	update_visualization()
 
-func update_population_dynamics():
+func update_population_dynamics() -> void:
 	var new_grid = duplicate_3d_grid(grid)
 	
 	for x in range(GRID_SIZE):
@@ -66,7 +66,7 @@ func update_population_dynamics():
 	
 	grid = new_grid
 
-func update_visualization():
+func update_visualization() -> void:
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
 		return
 		
@@ -112,7 +112,10 @@ func get_population_counts() -> Dictionary:
 	
 	return {"prey": prey_count, "predators": predator_count}
 
-func reset_simulation():
+func reset_simulation() -> void:
 	grid = create_3d_grid()
 	initialize_grid()
 	iteration_count = 0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

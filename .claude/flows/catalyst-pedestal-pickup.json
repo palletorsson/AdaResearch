@@ -1,0 +1,103 @@
+{
+  "id": "catalyst-pedestal-pickup",
+  "title": "Catalyst Pedestal — Pickup & Persistence",
+  "description": "The catalyst lives inside a wireframe cube pedestal in the lab. Player walks up, grabs the crystal, cage fades away. On map transitions the catalyst auto-respawns on the same controller. On game restart everything resets — player picks it up again from the pedestal.",
+  "summary": "Pedestal in lab, grab crystal, cage fades. Survives map changes (in-memory). Fresh each game launch.",
+  "confidence": "verified",
+  "links_to": ["minecraft-cube-placer", "scene-transition", "hidden-dependencies"],
+  "triggers": [
+    "catalyst pedestal",
+    "pick up catalyst",
+    "wireframe cube",
+    "catalyst spawn",
+    "catalyst persistence",
+    "map transition catalyst",
+    "auto absorb",
+    "bracelet spawn"
+  ],
+  "granularity": "meso",
+  "model_version": "opus-4.6",
+  "created": "2026-04-09",
+  "updated": "2026-04-09",
+  "earned_from": "Catalyst pedestal session — built wireframe display case, fixed auto_absorb missing voxel mode activation, switched from disk persistence to in-memory only",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "label": "Player enters lab",
+      "detail": "Game launch or first lab visit. CatalystCapabilityManager has no saved state — _bracelet_activated is false, no catalyst on any controller."
+    },
+    {
+      "id": "pedestal_visible",
+      "type": "action",
+      "label": "Pedestal spawns from map interactables",
+      "detail": "map_data.json has 'catalyst_pedestal' in the interactables layer. GridInteractablesComponent instantiates catalyst_pedestal.tscn at the grid cell. The pedestal builds 12 wireframe edges (1m cube), spawns a BecomingCatalyst crystal inside, and starts the bob/spin animation.",
+      "code": "# In map_data.json interactables layer:\n[\" \", \"catalyst_pedestal\", \" \", ...]"
+    },
+    {
+      "id": "player_grabs",
+      "type": "action",
+      "label": "Player grabs the crystal",
+      "detail": "XRToolsPickable fires picked_up signal. BecomingCatalyst._on_picked_up() shrinks crystal into hand, then _absorb_into_hand() fires. Pedestal receives picked_up signal too — starts cage fade (1.5s) then queue_free()."
+    },
+    {
+      "id": "absorb",
+      "type": "action",
+      "label": "Crystal absorbs, voxel mode activates",
+      "detail": "_absorb_into_hand() reparents catalyst to controller, kills physics, connects trigger button, calls _activate_voxel_mode(). This finds GridStructureComponent and XRCamera3D for head raycasting. CatalystCapabilityManager spawns the bracelet on the same controller.",
+      "code": "# Key line in _absorb_into_hand():\nif unlocked_modes[current_mode_index] == \"voxel_editor\":\n    call_deferred(\"_activate_voxel_mode\")"
+    },
+    {
+      "id": "playing",
+      "type": "action",
+      "label": "Player builds with head raycast",
+      "detail": "Voxel editor active — head ray, ghost cubes, trigger to place, double-trigger to remove. See minecraft-cube-placer flow for details."
+    },
+    {
+      "id": "map_change",
+      "type": "decision",
+      "label": "Player transitions to new map?",
+      "detail": "Teleporter, scene manager, or direct map load triggers a scene change."
+    },
+    {
+      "id": "respawn",
+      "type": "action",
+      "label": "Auto-respawn on new controller",
+      "detail": "CatalystCapabilityManager._on_node_added() detects new XRController3D. Checks _bracelet_activated (in-memory flag). Calls _respawn_absorbed_catalyst() which creates a fresh catalyst, calls auto_absorb(ctrl). auto_absorb() now includes call_deferred('_activate_voxel_mode'). Then spawns bracelet.",
+      "code": "# Fix: auto_absorb() must activate voxel mode\nif unlocked_modes[current_mode_index] == \"voxel_editor\":\n    call_deferred(\"_activate_voxel_mode\")"
+    },
+    {
+      "id": "game_restart",
+      "type": "decision",
+      "label": "Game restarted?",
+      "detail": "App closed and reopened. CatalystCapabilityManager autoload reinitializes — all in-memory state cleared. _bracelet_activated = false. No save_state() writes to disk, no _load_saved_progress() reads."
+    },
+    {
+      "id": "fresh_start",
+      "type": "action",
+      "label": "Fresh start — find pedestal again",
+      "detail": "No catalyst on hand, no bracelet. Player must find and pick up the catalyst from the pedestal in the lab. unlocked_modes starts at [\"voxel_editor\"] only."
+    },
+    {
+      "id": "end",
+      "type": "end",
+      "label": "Cycle continues",
+      "detail": "Per-session: pick up once, keep forever across maps. Per-game: always fresh."
+    }
+  ],
+  "edges": [
+    { "from": "start", "to": "pedestal_visible" },
+    { "from": "pedestal_visible", "to": "player_grabs" },
+    { "from": "player_grabs", "to": "absorb" },
+    { "from": "absorb", "to": "playing" },
+    { "from": "playing", "to": "map_change" },
+    { "from": "map_change", "to": "respawn", "label": "yes" },
+    { "from": "map_change", "to": "playing", "label": "no (keep building)" },
+    { "from": "respawn", "to": "playing" },
+    { "from": "playing", "to": "game_restart" },
+    { "from": "game_restart", "to": "fresh_start", "label": "yes" },
+    { "from": "game_restart", "to": "map_change", "label": "no (keep playing)" },
+    { "from": "fresh_start", "to": "pedestal_visible" },
+    { "from": "fresh_start", "to": "end" }
+  ]
+}

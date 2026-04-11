@@ -213,7 +213,7 @@ static func print_tile_set(tiles: Array, set_name: String):
 	print("]")
 
 ## Run this script to print all example tile sets
-func _run():
+func _run() -> void:
 	print("\n🎨 WFC Tile Template Examples\n")
 	print("Copy any of these into wfc_rooms.gd's _run() function:\n")
 	

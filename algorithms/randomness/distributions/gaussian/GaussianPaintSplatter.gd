@@ -38,7 +38,7 @@ var outline_mesh: ImmediateMesh
 var outline_mesh_instance: MeshInstance3D
 var visual_frame_root: Node3D
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	_setup_visual_frame()
 	_initialize_texture()
@@ -83,7 +83,7 @@ func _setup_outline_mesh() -> void:
 	outline_mesh_instance.visible = edge_toggle
 
 # Timer callback
-func _on_timer_timeout():
+func _on_timer_timeout() -> void:
 	_add_gaussian_splatter()
 	texture.update(img)
 
@@ -339,3 +339,12 @@ func _size_from_axes(normal_axis: int, axis_u: int, axis_v: int, depth: float, s
 	out = out + _axis_vector(axis_u) * size_u
 	out = out + _axis_vector(axis_v) * size_v
 	return Vector3(absf(out.x), absf(out.y), absf(out.z))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -37,10 +37,14 @@ CatalystCapabilityManager="*res://commons/managers/CatalystCapabilityManager.gd"
 SceneManager="*res://commons/managers/AdaSceneManager.gd"
 SoundBank="*res://commons/audio/SoundBankSingleton.gd"
 TraceData="*res://commons/globals/trace_data.gd"
+SceneNarrator="*res://commons/managers/SceneNarrator.gd"
 EquipmentRegistry="*res://commons/globals/equipment_registry.gd"
 Subtitles="*res://commons/ui/subtitles/SubtitleManager.gd"
 StuckDetector="*res://commons/player/stuck_detector.gd"
 DebugLogger="*res://commons/managers/DebugLogger.gd"
+DeathEffect="*res://commons/managers/DeathEffect.gd"
+NatureRenderer="*res://commons/managers/NatureRenderer.gd"
+FloraSpawner="*res://commons/managers/FloraSpawner.gd"
 OversightVoiceBridge="*res://commons/tools/OversightVoiceBridge.gd"
 ClaudeBridge="*res://commons/tools/ClaudeBridge.gd"
 
@@ -56,7 +60,7 @@ window/size/viewport_height=1200
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/audio_catalog_editor/plugin.cfg", "res://addons/element_editor/plugin.cfg", "res://addons/godot-xr-tools/plugin.cfg", "res://addons/map_sequence_editor/plugin.cfg", "res://addons/markdownlabel/plugin.cfg", "res://addons/tutorial_text_editor/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg", "res://addons/map_grid_editor/plugin.cfg")
 
 [filesystem]
 

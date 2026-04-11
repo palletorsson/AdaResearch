@@ -23,13 +23,13 @@ var material_occupied: StandardMaterial3D
 var material_empty: StandardMaterial3D
 var material_active: StandardMaterial3D
 
-func _ready():
+func _ready() -> void:
 	setup_common_materials()
 	create_mesh_instance()
 	initialize_grid()
 	start_simulation()
 
-func setup_common_materials():
+func setup_common_materials() -> void:
 	# Create common materials for all CA types
 	material_occupied = StandardMaterial3D.new()
 	material_occupied.albedo_color = Color.WHITE
@@ -45,11 +45,11 @@ func setup_common_materials():
 	material_active.albedo_color = Color.WHITE
 	material_active.emission_enabled = false
 
-func create_mesh_instance():
+func create_mesh_instance() -> void:
 	mesh_instance = MeshInstance3D.new()
 	add_child(mesh_instance)
 
-func configure_multimesh(mesh: Mesh, max_instances: int):
+func configure_multimesh(mesh: Mesh, max_instances: int) -> void:
 	if multi_mesh_instance:
 		multi_mesh_instance.queue_free()
 	
@@ -67,29 +67,29 @@ func configure_multimesh(mesh: Mesh, max_instances: int):
 	for i in range(max_instances):
 		mm.set_instance_transform(i, Transform3D(Basis(), Vector3(0, -1000, 0)))
 
-func initialize_grid():
+func initialize_grid() -> void:
 	# Override in subclasses
 	pass
 
-func start_simulation():
+func start_simulation() -> void:
 	is_running = true
 	print("Starting CA simulation: ", get_script().get_global_name())
 
-func stop_simulation():
+func stop_simulation() -> void:
 	is_running = false
 	print("Stopping CA simulation")
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if is_running:
 		update_simulation(delta)
 		update_visualization()
 		iteration_count += 1
 
-func update_simulation(_delta):
+func update_simulation(_delta) -> void:
 	# Override in subclasses
 	pass
 
-func update_visualization():
+func update_visualization() -> void:
 	# Override in subclasses
 	pass
 
@@ -148,7 +148,7 @@ func is_valid_2d_position(pos: Vector2i) -> bool:
 	return pos.x >= 0 and pos.x < GRID_SIZE and pos.y >= 0 and pos.y < GRID_SIZE
 
 # Visualization helper
-func create_cube_at_position(vertices: PackedVector3Array, normals: PackedVector3Array, indices: PackedInt32Array, start_index: int, x: int, y: int, z: int, state: int = 1):
+func create_cube_at_position(vertices: PackedVector3Array, normals: PackedVector3Array, indices: PackedInt32Array, start_index: int, x: int, y: int, z: int, state: int = 1) -> void:
 	var world_pos = Vector3(
 		(x - GRID_SIZE/2) * CUBE_SIZE,
 		(y - GRID_SIZE/2) * CUBE_SIZE,
@@ -223,3 +223,12 @@ func duplicate_2d_grid(grid: Array) -> Array:
 		new_grid[x] = grid[x].duplicate()
 	
 	return new_grid
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

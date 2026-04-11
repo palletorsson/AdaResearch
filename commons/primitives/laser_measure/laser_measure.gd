@@ -16,6 +16,11 @@ extends Node3D
 @export var show_hit_dot: bool = true
 @export var hit_dot_size: float = 0.02
 
+@export_category("Damage Settings")
+@export var deals_damage: bool = false           ## Enable to make laser hurt the player
+@export var damage_amount: float = 1.0           ## 1% damage per hit
+@export var damage_cooldown: float = 1.0         ## Seconds between damage ticks
+
 @export_category("Display Settings")
 @export var text_color: Color = Color(0.2, 1.0, 0.3, 1.0)
 @export var show_target_name: bool = true
@@ -33,6 +38,7 @@ var scan_timer: float = 0.0
 var last_distance: float = 0.0
 var last_target: String = ""
 var is_measuring: bool = false
+var _damage_timer: float = 0.0
 
 func _ready():
 	setup_raycast()
@@ -150,6 +156,8 @@ func setup_labels():
 
 func _process(delta):
 	scan_timer += delta
+	if _damage_timer > 0.0:
+		_damage_timer -= delta
 
 	if scan_timer >= (1.0 / scan_frequency):
 		perform_measurement()
@@ -173,6 +181,17 @@ func perform_measurement():
 		update_laser_hit(distance)
 		update_hit_dot(hit_point)
 		update_display(distance, last_target, true)
+
+		# Damage: any hit triggers damage when enabled (the laser itself is the hazard)
+		if deals_damage and _damage_timer <= 0.0:
+			var gm = get_node_or_null("/root/GameManager")
+			if gm and gm.has_method("apply_health_damage"):
+				# The laser beam touching anything while player holds it = player in danger
+				# For static placed lasers: hitting the player body specifically
+				if _is_player_body(hit_object):
+					gm.apply_health_damage(damage_amount)
+					_damage_timer = damage_cooldown
+					print("[LaserMeasure] LASER HIT PLAYER! dmg=%.1f target=%s" % [damage_amount, hit_object.name])
 	else:
 		is_measuring = false
 		last_distance = 0.0
@@ -285,3 +304,35 @@ func set_max_range(new_range: float):
 	max_range = new_range
 	if raycast:
 		raycast.target_position = Vector3(0, 0, -max_range)
+
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("damage"):
+		deals_damage = str(config_data["damage"]).to_lower() == "true"
+	if config_data.has("damage_amount"):
+		damage_amount = float(config_data["damage_amount"])
+	if config_data.has("cooldown"):
+		damage_cooldown = float(config_data["cooldown"])
+
+
+func _is_player_body(obj: Node) -> bool:
+	if not obj:
+		return false
+	# Direct checks
+	if obj.is_in_group("player") or obj.is_in_group("player_body"):
+		return true
+	if obj.name.containsn("player") or obj.name.containsn("Player"):
+		return true
+	# Check collision layer 20 (player body layer = 524288)
+	if obj is CollisionObject3D:
+		if (obj as CollisionObject3D).collision_layer & 524288 != 0:
+			return true
+	# Check parent chain
+	var node := obj
+	while node:
+		if node.name == "PlayerBody" or node is XROrigin3D:
+			return true
+		if node.is_in_group("player"):
+			return true
+		node = node.get_parent()
+	return false

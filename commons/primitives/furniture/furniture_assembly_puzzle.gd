@@ -1,6 +1,16 @@
 extends TransformPuzzleBase
 class_name FurnitureAssemblyPuzzle
 
+# @identity
+# essence: place_and_scale(cube_pieces) to match holographic ghost guides — transformations as furniture assembly
+# desire: learner discovers that scale, rotate, and translate together are sufficient to build any rectangular form
+# critical_parameter: furniture_type enum — selects which target configuration (CHAIR/STOOL/TABLE/SHELF/CUSTOM)
+# triggers: snapping a piece to its ghost guide — piece locks with a pulse effect; all snapped → grow animation
+# emerges: Judd's insight made playable: "a chair is just rectangles with the right transforms"
+# needs: [has grab_cube_scalable pieces [has], has ghost holographic guides [has], missing undo/reset button]
+# relationships: extends TransformPuzzleBase; used in Trans_Scale as chair_assembly_puzzle artifact
+# truth: all furniture is transformation applied to a primitive — the cube is the universal raw material
+
 ## FurnitureAssemblyPuzzle - Assembly puzzles for furniture (chair, table, etc.)
 ##
 ## Inspired by Donald Judd's furniture: complex forms from simple rectangles.

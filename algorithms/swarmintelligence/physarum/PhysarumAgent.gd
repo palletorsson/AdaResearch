@@ -1,4 +1,4 @@
-﻿extends CharacterBody3D
+extends CharacterBody3D
 class_name PhysarumAgent
 
 # References
@@ -15,7 +15,7 @@ var map_size: Vector2
 # Internals
 var rng = RandomNumberGenerator.new()
 
-func initialize(start_pos: Vector3, _grid: PhysarumGrid, _map_size: Vector2):
+func initialize(start_pos: Vector3, _grid: PhysarumGrid, _map_size: Vector2) -> void:
 	position = start_pos
 	grid = _grid
 	map_size = _map_size
@@ -75,7 +75,7 @@ func _physics_process(_delta):
 	# Border handling
 	_handle_boundaries()
 
-func _handle_boundaries():
+func _handle_boundaries() -> void:
 	var half_size = map_size / 2.0
 	var margin = 0.5
 	if abs(position.x) > half_size.x - margin or abs(position.z) > half_size.y - margin:
@@ -88,3 +88,6 @@ func _local_to_grid(pos: Vector3) -> Vector2i:
 	var gx = int(remap(pos.x, -map_size.x/2, map_size.x/2, 0, grid.width))
 	var gy = int(remap(pos.z, -map_size.y/2, map_size.y/2, 0, grid.height))
 	return Vector2i(gx, gy)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

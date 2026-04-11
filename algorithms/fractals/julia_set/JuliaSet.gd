@@ -3,6 +3,16 @@ extends Node3D
 # Julia Set Visualization - MultiMesh Optimized
 # Parameter-space fractal variants of the Mandelbrot set
 
+# @identity
+# essence: z_{n+1} = z_n^2 + c, fixed c, vary z_0. Each pixel is a starting point; escape or stay determines membership.
+# desire: To morph — c_real and c_imag animate through parameter space, and the Julia set shape-shifts in real-time
+# critical_parameter: c_real + c_imag — the complex parameter c determines whether the Julia set is connected (c inside Mandelbrot) or dust (c outside)
+# triggers: animate_parameters → c traces a Lissajous path; parameter trail shows recent c values as fading spheres
+# emerges: The topology change — as c crosses the Mandelbrot boundary, the Julia set shatters from connected to disconnected, visibly
+# needs: VR c-parameter control [missing], Mandelbrot overlay [missing]
+# relationships: Sibling to julia_set_explorer (GPU shader) and mandelbrot_set; each point in the Mandelbrot indexes a Julia set
+# truth: Every Julia set is a cross-section of the Mandelbrot set — the Mandelbrot is the catalog, each Julia set a page.
+
 # Julia set parameters
 @export var c_real := -0.7
 @export var c_imag := 0.27015
@@ -37,13 +47,13 @@ var last_c_real := 0.0
 var last_c_imag := 0.0
 var last_zoom := 0.0
 
-func _ready():
+func _ready() -> void:
 	_setup_meshes()
 	_setup_materials()
 	_setup_multimesh_instances()
 	_generate_julia_set()
 
-func _setup_meshes():
+func _setup_meshes() -> void:
 	# Small cube for Julia set points
 	cube_mesh = BoxMesh.new()
 	cube_mesh.size = Vector3(point_size, point_size, point_size)
@@ -53,7 +63,7 @@ func _setup_meshes():
 	sphere_mesh.radius = 0.15
 	sphere_mesh.height = 0.3
 
-func _setup_materials():
+func _setup_materials() -> void:
 	# Material for points in the set (black)
 	set_material = StandardMaterial3D.new()
 	set_material.albedo_color = Color(0.0, 0.0, 0.0)
@@ -71,7 +81,7 @@ func _setup_materials():
 	param_material.emission = Color(1.0, 0.0, 0.0)
 	param_material.emission_energy_multiplier = 0.8
 
-func _setup_multimesh_instances():
+func _setup_multimesh_instances() -> void:
 	# Julia set visualization
 	julia_multimesh = MultiMesh.new()
 	julia_multimesh.transform_format = MultiMesh.TRANSFORM_3D
@@ -103,7 +113,7 @@ func _setup_multimesh_instances():
 	else:
 		add_child(param_multimesh_instance)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 
 	if animate_parameters:
@@ -126,7 +136,7 @@ func _parameters_changed() -> bool:
 		   abs(c_imag - last_c_imag) > 0.001 or \
 		   abs(zoom_level - last_zoom) > 0.01
 
-func _generate_julia_set():
+func _generate_julia_set() -> void:
 	var bounds = 3.0 / zoom_level
 	var point_data: Array[Dictionary] = []
 
@@ -184,7 +194,7 @@ func _julia_iterations(x: float, y: float, c_r: float, c_i: float) -> int:
 
 	return iteration
 
-func _update_parameter_space():
+func _update_parameter_space() -> void:
 	# Current parameter point + trajectory
 	var trajectory_points = 20
 	param_multimesh.instance_count = trajectory_points + 1
@@ -211,14 +221,23 @@ func _update_parameter_space():
 		param_multimesh.set_instance_color(i + 1, Color(1.0, 0.5, 0.0, alpha))
 
 # Public API for external control
-func set_julia_parameters(real: float, imag: float):
+func set_julia_parameters(real: float, imag: float) -> void:
 	c_real = real
 	c_imag = imag
 	animate_parameters = false
 
-func set_zoom(new_zoom: float):
+func set_zoom(new_zoom: float) -> void:
 	zoom_level = new_zoom
 
-func set_resolution(new_resolution: int):
+func set_resolution(new_resolution: int) -> void:
 	grid_resolution = new_resolution
 	_generate_julia_set()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

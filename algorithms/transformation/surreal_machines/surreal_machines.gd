@@ -119,14 +119,14 @@ void fragment() {
 }
 """
 
-func _ready():
+func _ready() -> void:
 	setup_joyful_environment()
 	create_surreal_machines()
 	create_celebration_soft_bodies()
 	create_particle_celebrations()
 	start_machine_animations()
 
-func setup_joyful_environment():
+func setup_joyful_environment() -> void:
 	# Create vibrant, welcoming environment
 	var env = Environment.new()
 	env.background_mode = Environment.BG_SKY
@@ -162,7 +162,7 @@ func setup_joyful_environment():
 	celebration_light.shadow_enabled = true
 	add_child(celebration_light)
 
-func create_surreal_machines():
+func create_surreal_machines() -> void:
 	# Create various whimsical mechanical contraptions
 	create_rainbow_pendulum_machine()
 	create_bouncy_gear_assembly()
@@ -170,7 +170,7 @@ func create_surreal_machines():
 	create_pride_powered_engine()
 	create_celebration_conveyor()
 
-func create_rainbow_pendulum_machine():
+func create_rainbow_pendulum_machine() -> void:
 	# Central pendulum with multiple connected parts
 	var base = create_mechanical_base(Vector3.ZERO, "RainbowPendulumBase")
 
@@ -223,7 +223,7 @@ func create_rainbow_pendulum_machine():
 	add_child(final_joint)
 	joint_connections.append(final_joint)
 
-func create_bouncy_gear_assembly():
+func create_bouncy_gear_assembly() -> void:
 	# Interconnected rotating gears with spring joints
 	var gear_positions = [
 		Vector3(4, 2, 0),
@@ -279,7 +279,7 @@ func create_bouncy_gear_assembly():
 			add_child(gear_joint)
 			joint_connections.append(gear_joint)
 
-func create_floating_joint_sculpture():
+func create_floating_joint_sculpture() -> void:
 	# Artistic floating sculpture with various joint types
 	var sculpture_parts = []
 	var center = Vector3(-4, 3, 0)
@@ -366,7 +366,7 @@ func create_floating_joint_sculpture():
 				add_child(pin)
 				joint_connections.append(pin)
 
-func create_pride_powered_engine():
+func create_pride_powered_engine() -> void:
 	# Engine with pistons and connecting rods - pride themed
 	var engine_base = create_mechanical_base(Vector3(0, 0, -5), "PrideEngine")
 
@@ -442,7 +442,7 @@ func create_pride_powered_engine():
 		add_child(slider_joint)
 		joint_connections.append(slider_joint)
 
-func create_celebration_conveyor():
+func create_celebration_conveyor() -> void:
 	# Moving conveyor belt carrying celebration objects
 	var conveyor_segments = []
 	var conveyor_start = Vector3(-8, 1, 3)
@@ -482,13 +482,13 @@ func create_celebration_conveyor():
 			add_child(conveyor_joint)
 			joint_connections.append(conveyor_joint)
 
-func create_celebration_soft_bodies():
+func create_celebration_soft_bodies() -> void:
 	# Create bouncy, joyful soft body objects
 	create_happy_bouncing_blobs()
 	create_pride_flag_cloth()
 	create_celebration_balloons()
 
-func create_happy_bouncing_blobs():
+func create_happy_bouncing_blobs() -> void:
 	# Bouncy soft body blobs that celebrate
 	var blob_positions = [
 		Vector3(2, 5, 2),
@@ -505,6 +505,7 @@ func create_happy_bouncing_blobs():
 		# Create blob mesh
 		var sphere_mesh = SphereMesh.new()
 		sphere_mesh.radius = 0.8
+		sphere_mesh.height = 1.6
 		sphere_mesh.radial_segments = 16
 		sphere_mesh.rings = 12
 
@@ -536,7 +537,7 @@ func create_happy_bouncing_blobs():
 		add_child(soft_blob)
 		soft_bodies.append(soft_blob)
 
-func create_pride_flag_cloth():
+func create_pride_flag_cloth() -> void:
 	# Soft body pride flag that waves in celebration
 	var pride_flag = SoftBody3D.new()
 	pride_flag.name = "PrideFlagCloth"
@@ -576,7 +577,7 @@ func create_pride_flag_cloth():
 	add_child(pride_flag)
 	soft_bodies.append(pride_flag)
 
-func create_celebration_balloons():
+func create_celebration_balloons() -> void:
 	# Bouncy soft body balloons
 	var balloon_colors = [
 		Color.HOT_PINK,
@@ -631,7 +632,7 @@ func create_celebration_balloons():
 		# Add balloon string (just visual)
 		create_balloon_string(balloon)
 
-func create_balloon_string(balloon: SoftBody3D):
+func create_balloon_string(balloon: SoftBody3D) -> void:
 	# Create a visual string for the balloon
 	var string = RigidBody3D.new()
 	string.name = balloon.name + "_String"
@@ -653,13 +654,13 @@ func create_balloon_string(balloon: SoftBody3D):
 
 	add_child(string)
 
-func create_particle_celebrations():
+func create_particle_celebrations() -> void:
 	# Create joyful particle effects throughout the scene
 	create_rainbow_fountain_particles()
 	create_confetti_bursts()
 	create_sparkle_trails()
 
-func create_rainbow_fountain_particles():
+func create_rainbow_fountain_particles() -> void:
 	var fountain = GPUParticles3D.new()
 	fountain.name = "RainbowFountain"
 	fountain.position = Vector3(0, 0, 0)
@@ -698,7 +699,7 @@ func create_rainbow_fountain_particles():
 	add_child(fountain)
 	celebration_particles.append(fountain)
 
-func create_confetti_bursts():
+func create_confetti_bursts() -> void:
 	# Multiple confetti burst locations
 	var burst_positions = [
 		Vector3(5, 8, 5),
@@ -744,7 +745,7 @@ func create_confetti_bursts():
 		add_child(confetti)
 		celebration_particles.append(confetti)
 
-func create_sparkle_trails():
+func create_sparkle_trails() -> void:
 	# Sparkle trails that follow moving objects
 	for mechanical_part in mechanical_parts:
 		if randf() < 0.3:  # Only some parts get sparkles
@@ -817,6 +818,7 @@ func create_celebration_sphere(position: Vector3) -> RigidBody3D:
 
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.6
+	sphere_mesh.height = 1.2
 	sphere_mesh.radial_segments = 16
 	sphere_mesh.rings = 12
 
@@ -857,14 +859,14 @@ func create_rainbow_material(seed: int) -> ShaderMaterial:
 	rainbow_materials.append(material)
 	return material
 
-func start_machine_animations():
+func start_machine_animations() -> void:
 	# Start various animations for the mechanical parts
 	animate_machine_rotations()
 	animate_piston_movements()
 	animate_conveyor_motion()
 	animate_celebration_bounces()
 
-func animate_machine_rotations():
+func animate_machine_rotations() -> void:
 	# Rotate various mechanical parts
 	for i in range(mechanical_parts.size()):
 		var part = mechanical_parts[i]
@@ -880,7 +882,7 @@ func animate_machine_rotations():
 				0.0, PI * 2.0, rotation_speed
 			)
 
-func animate_piston_movements():
+func animate_piston_movements() -> void:
 	# Animate piston movements
 	for part in mechanical_parts:
 		if part.name.begins_with("PistonHead"):
@@ -896,7 +898,7 @@ func animate_piston_movements():
 				0.0, PI * 2.0, piston_speed
 			)
 
-func animate_conveyor_motion():
+func animate_conveyor_motion() -> void:
 	# Animate conveyor belt movement
 	var conveyor_tween = create_tween()
 	conveyor_tween.set_loops()
@@ -909,7 +911,7 @@ func animate_conveyor_motion():
 				0.0, PI * 2.0, 3.0 / animation_speed
 			)
 
-func animate_celebration_bounces():
+func animate_celebration_bounces() -> void:
 	# Make soft bodies bounce periodically for extra joy
 	for soft_body in soft_bodies:
 		if soft_body.name.begins_with("HappyBlob") or soft_body.name.begins_with("CelebrationBalloon"):
@@ -924,7 +926,7 @@ func animate_celebration_bounces():
 			add_child(delay_timer)
 			delay_timer.start()
 
-func apply_bounce_force(soft_body: SoftBody3D, force: Vector3):
+func apply_bounce_force(soft_body: SoftBody3D, force: Vector3) -> void:
 	# Apply upward force to soft bodies for bouncing
 	if soft_body and is_instance_valid(soft_body):
 		# Note: SoftBody3D doesn't have direct force application in Godot 4
@@ -941,11 +943,11 @@ func apply_bounce_force(soft_body: SoftBody3D, force: Vector3):
 			force.y * 0.1, 0.0, 0.7
 		)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	update_celebration_effects(delta)
 	update_physics_interactions(delta)
 
-func update_celebration_effects(_delta):
+func update_celebration_effects(_delta) -> void:
 	# Pulse rainbow effects
 	var time_factor = sin(Time.get_time_dict_from_system()["second"] * 2.0) * 0.2 + 1.0
 
@@ -954,7 +956,7 @@ func update_celebration_effects(_delta):
 			var base_glow = material.get_shader_parameter("glow_intensity")
 			material.set_shader_parameter("glow_intensity", base_glow * time_factor)
 
-func update_physics_interactions(_delta):
+func update_physics_interactions(_delta) -> void:
 	# Apply gentle forces to create organic movement
 	for i in range(mechanical_parts.size()):
 		var part = mechanical_parts[i]
@@ -969,23 +971,23 @@ func update_physics_interactions(_delta):
 				part.apply_central_impulse(random_force)
 
 # Public control functions
-func set_animation_speed(speed: float):
+func set_animation_speed(speed: float) -> void:
 	animation_speed = speed
 
-func set_physics_intensity(intensity: float):
+func set_physics_intensity(intensity: float) -> void:
 	physics_intensity = intensity
 
-func toggle_rainbow_mode(enabled: bool):
+func toggle_rainbow_mode(enabled: bool) -> void:
 	rainbow_mode = enabled
 	# Update all materials
 	for material in rainbow_materials:
 		if material.has_shader_parameter("pride_factor"):
 			material.set_shader_parameter("pride_factor", 2.0 if enabled else 0.5)
 
-func set_bouncy_factor(factor: float):
+func set_bouncy_factor(factor: float) -> void:
 	bouncy_factor = factor
 
-func trigger_celebration_burst():
+func trigger_celebration_burst() -> void:
 	# Trigger simultaneous effects for maximum joy
 	for particle_system in celebration_particles:
 		particle_system.restart()
@@ -1031,7 +1033,7 @@ func create_custom_machine_part(position: Vector3, part_type: String = "celebrat
 
 	return new_part
 
-func add_joy_particles_to_object(object: Node3D):
+func add_joy_particles_to_object(object: Node3D) -> void:
 	# Add celebration particles to any object
 	var joy_particles = GPUParticles3D.new()
 	joy_particles.emitting = true
@@ -1058,3 +1060,12 @@ func add_joy_particles_to_object(object: Node3D):
 
 	object.add_child(joy_particles)
 	celebration_particles.append(joy_particles)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

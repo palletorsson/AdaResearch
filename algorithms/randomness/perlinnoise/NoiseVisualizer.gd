@@ -10,7 +10,7 @@ var noise_resolution = 0.5
 var noise_cubes: Array[CSGBox3D] = []
 var noise_generator: FastNoiseLite
 
-func _ready():
+func _ready() -> void:
 	# Initialize noise generator
 	noise_generator = FastNoiseLite.new()
 	noise_generator.seed = randi()
@@ -21,7 +21,7 @@ func _ready():
 	# Create the noise field
 	create_noise_field()
 
-func create_noise_field():
+func create_noise_field() -> void:
 	# Clear existing cubes
 	for cube in noise_cubes:
 		cube.queue_free()
@@ -59,7 +59,7 @@ func create_noise_field():
 func generate_noise_at(x: float, z: float) -> float:
 	return noise_generator.get_noise_2d(x * frequency + animation_offset, z * frequency + animation_offset)
 
-func update_noise_field():
+func update_noise_field() -> void:
 	for i in range(noise_cubes.size()):
 		var cube = noise_cubes[i]
 		var x = (i % int(noise_field_size / noise_resolution) - noise_field_size / (2 * noise_resolution)) * noise_resolution
@@ -77,9 +77,18 @@ func update_noise_field():
 		if cube.material_override:
 			cube.material_override.albedo_color = color
 
-func regenerate_noise():
+func regenerate_noise() -> void:
 	noise_generator.seed = randi()
 	update_noise_field()
 
-func on_animation_offset_changed():
+func on_animation_offset_changed() -> void:
 	update_noise_field()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

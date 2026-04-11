@@ -16,6 +16,16 @@ extends Node3D
 ## Each iteration has a distinct color from a predefined palette.
 ## A frame surrounds the entire pattern.
 
+# @identity
+# essence: square(center, size, d) = box(size) + square(center, size * 0.5, d-1)
+# desire: To be stared into — concentric squares receding in Z, each layer a different color, pulling the eye inward
+# critical_parameter: size_reduction (0.5) — the ratio between parent and child determines whether the nesting feels dense or sparse
+# triggers: max_depth increase → deeper nesting; z-offset per layer prevents z-fighting and creates parallax depth
+# emerges: A tunnel effect from flat geometry — depth perception from color gradient and z-stacking alone
+# needs: VR depth control [missing], animation toggle [missing]
+# relationships: Simplest 2D recursion before Koch and Sierpinski; sibling to example_8_1 (concentric circles)
+# truth: A square inside a square is not decoration — it is the first evidence that a function can call itself.
+
 @export var max_depth: int = 6
 @export var size_reduction: float = 0.5
 @export var initial_size: float = 1.0
@@ -122,3 +132,12 @@ func _create_square(center: Vector3, size: float, depth: int) -> void:
 
 	_sim_root.add_child(mesh_instance)
 	_mesh_instances.append(mesh_instance)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

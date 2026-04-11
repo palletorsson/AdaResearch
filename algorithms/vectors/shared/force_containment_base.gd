@@ -21,14 +21,14 @@ var info_label: Label3D
 # Cached nodes for performance
 var _cached_vector_nodes: Dictionary = {}  # vector_name -> {start, end, line_container}
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	_create_containment()
 	_create_physics_ball()
 	_create_info_label()
 	print("ForceContainmentBase: 1x1x1m containment ready")
 
-func _create_containment():
+func _create_containment() -> void:
 	"""Create 1x1x1 meter glass box with physics walls"""
 	containment_root = Node3D.new()
 	containment_root.name = "Containment"
@@ -42,7 +42,7 @@ func _create_containment():
 	_create_wall(Vector3(0, 0, 0.5), Vector3(1, 1, WALL_THICKNESS), "WallBack")  # +Z
 	_create_wall(Vector3(0, 0, -0.5), Vector3(1, 1, WALL_THICKNESS), "WallFront")  # -Z
 
-func _create_wall(pos: Vector3, size: Vector3, wall_name: String):
+func _create_wall(pos: Vector3, size: Vector3, wall_name: String) -> void:
 	"""Create a single wall with collision"""
 	var wall = StaticBody3D.new()
 	wall.name = wall_name
@@ -81,7 +81,7 @@ func _get_wall_material(wall_name: String) -> StandardMaterial3D:
 		mat.emission = color * 0.3
 	return mat
 
-func _create_physics_ball():
+func _create_physics_ball() -> void:
 	"""Create physics ball inside containment"""
 	var spawn_pos = Vector3(0, 0, 0)  # Center of containment
 	physics_ball = create_ball(spawn_pos, BALL_RADIUS, BALL_MASS, Color(0.9, 0.5, 0.8, 1.0))
@@ -91,7 +91,7 @@ func _create_physics_ball():
 	physics_ball.linear_damp = 0.1
 	physics_ball.angular_damp = 0.1
 
-func _create_info_label():
+func _create_info_label() -> void:
 	"""Create floating info label above containment"""
 	info_label = Label3D.new()
 	info_label.text = "Force Demo"
@@ -122,13 +122,13 @@ func get_force_vector(force_name: String) -> Vector3:
 	var cache = _cached_vector_nodes.get(force_name, {})
 	return _get_vector_fast_cached(cache)
 
-func update_force_vector_position():
+func update_force_vector_position() -> void:
 	"""Update all force vector positions to follow ball"""
 	var ball_pos_scaled = physics_ball.global_position
 	for vector in force_vectors.values():
 		vector.position = ball_pos_scaled
 
-func apply_forces_to_ball(forces: Dictionary):
+func apply_forces_to_ball(forces: Dictionary) -> void:
 	"""Apply multiple forces to ball. forces = {name: Vector3 (logical)}"""
 	var net_force_logical = Vector3.ZERO
 	for force in forces.values():
@@ -137,14 +137,14 @@ func apply_forces_to_ball(forces: Dictionary):
 	# Apply scaled force to physics
 	physics_ball.apply_central_force(net_force_logical * SCENE_SCALE)
 
-func reset_ball(position: Vector3 = Vector3.ZERO):
+func reset_ball(position: Vector3 = Vector3.ZERO) -> void:
 	"""Reset ball to position (logical units)"""
 	physics_ball.global_position = position * SCENE_SCALE
 	physics_ball.linear_velocity = Vector3.ZERO
 	physics_ball.angular_velocity = Vector3.ZERO
 	update_force_vector_positions()
 
-func update_force_vector_positions():
+func update_force_vector_positions() -> void:
 	"""Update all force vector positions to follow ball"""
 	var ball_pos_scaled = physics_ball.global_position
 	for vector_name in force_vectors:
@@ -152,13 +152,13 @@ func update_force_vector_positions():
 		vector.position = ball_pos_scaled
 
 
-func update_info_text(lines: Array):
+func update_info_text(lines: Array) -> void:
 	"""Update info label with array of strings"""
 	info_label.text = "\n".join(lines)
 
 # --- Performance Helpers ---
 
-func _cache_vector_nodes(arrow: Node3D, vector_name: String):
+func _cache_vector_nodes(arrow: Node3D, vector_name: String) -> void:
 	"""Cache vector nodes for fast access"""
 	var cache = {}
 	cache["start"] = arrow.get_node_or_null("lineContainer/GrabSphere")
@@ -174,7 +174,7 @@ func _get_vector_fast_cached(cache: Dictionary) -> Vector3:
 		return (end.global_position - start.global_position) / SCENE_SCALE
 	return Vector3.ZERO
 
-func _update_vector_fast_cached(cache: Dictionary, vector: Vector3):
+func _update_vector_fast_cached(cache: Dictionary, vector: Vector3) -> void:
 	"""Update vector using cached nodes"""
 	var end_node: Node3D = cache.get("end")
 	if end_node:
@@ -182,3 +182,12 @@ func _update_vector_fast_cached(cache: Dictionary, vector: Vector3):
 	var line_container: Node3D = cache.get("line_container")
 	if line_container and line_container.has_method("refresh_connections"):
 		line_container.refresh_connections()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -15,7 +15,7 @@ var arrow_tip: MeshInstance3D
 var line_material: StandardMaterial3D
 var last_distance: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	_create_length_label()
 	_refresh_geometry()
 	if point_one and point_one.has_signal("dropped"):
@@ -26,7 +26,7 @@ func _ready():
 func _process(_delta):
 	_refresh_geometry()
 
-func _refresh_geometry():
+func _refresh_geometry() -> void:
 	if not point_one or not point_two:
 		return
 	var start_global = point_one.global_position
@@ -37,7 +37,7 @@ func _refresh_geometry():
 	_update_arrow_tip(start_local, end_local)
 	_update_length_label(start_local, end_local)
 
-func _update_line(start_local: Vector3, end_local: Vector3):
+func _update_line(start_local: Vector3, end_local: Vector3) -> void:
 	if not current_line or not is_instance_valid(current_line):
 		current_line = MeshInstance3D.new()
 		current_line.name = "VectorBody"
@@ -58,7 +58,7 @@ func _update_line(start_local: Vector3, end_local: Vector3):
 	if distance > 0.001:
 		current_line.transform.basis = _compute_basis(direction)
 
-func _update_arrow_tip(start_local: Vector3, end_local: Vector3):
+func _update_arrow_tip(start_local: Vector3, end_local: Vector3) -> void:
 	if not arrow_tip or not is_instance_valid(arrow_tip):
 		arrow_tip = MeshInstance3D.new()
 		arrow_tip.name = "VectorArrow"
@@ -84,7 +84,7 @@ func _update_arrow_tip(start_local: Vector3, end_local: Vector3):
 	arrow_tip.transform.basis = _compute_basis(direction)
 	arrow_tip.position = end_local - normalized * (tip_length * 0.5)
 
-func _create_length_label():
+func _create_length_label() -> void:
 	length_label = Label3D.new()
 	length_label.name = "LengthLabel"
 	length_label.text = "Vector |v| = 0.00m"
@@ -96,7 +96,7 @@ func _create_length_label():
 	length_label.scale = Vector3.ONE * 0.12
 	add_child(length_label)
 
-func _update_length_label(start_local: Vector3, end_local: Vector3):
+func _update_length_label(start_local: Vector3, end_local: Vector3) -> void:
 	if not length_label:
 		return
 	var distance = start_local.distance_to(end_local)
@@ -106,7 +106,7 @@ func _update_length_label(start_local: Vector3, end_local: Vector3):
 	center_pos.y += 0.08
 	length_label.position = center_pos
 
-func _on_point_dropped(_pickable):
+func _on_point_dropped(_pickable) -> void:
 	var context := {
 		"length": "%.2f" % last_distance,
 		"length_raw": last_distance
@@ -138,3 +138,12 @@ func _compute_basis(direction: Vector3) -> Basis:
 	else:
 		up = right.cross(dir).normalized()
 	return Basis(right, dir, up)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

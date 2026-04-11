@@ -2,6 +2,16 @@
 # Voxel sculpture tool where Perlin noise is the brush
 # VR-enabled with slider controls
 
+# @identity
+# essence: voxel_on[pos] = noise_3d(pos × frequency) > threshold — a 24³ grid that thresholds Perlin noise, with VR sliders broadcasting changes to linked voxelnoise receivers
+# desire: to sculpt with mathematics — to move a VR slider and feel the threshold of existence rise through a landscape of cubes, watching matter emerge and dissolve at your hand
+# critical_parameter: threshold — the cut-plane through the noise field; at -1.0 everything is solid, at 1.0 everything is void, and interesting terrain lives between -0.3 and 0.3
+# triggers: noise_scale changes restructure what frequencies create terrain features; octaves add detail without changing the overall scale; dragging sliders broadcasts payload to voxelnoise peers via signal
+# emerges: the learner discovers that sculpting with noise parameters is fundamentally different from sculpting with geometry — you are not placing matter, you are choosing which noise values count as matter
+# needs: threshold slider [has] (slider_horizontal); noise_scale slider [has]; octaves slider [has]; push button for regenerate [has]; info Label3D [has]
+# relationships: broadcasts terrain_controls_changed to voxelnoise receivers; paired with voxelnoise in Noise_Voxel map; contrasts with direct mesh sculpting
+# truth: noise-based sculpting inverts the usual creative act — instead of adding form, you reveal it by moving the threshold through a pre-existing mathematical landscape
+
 extends Node3D
 
 class_name PerlinTerrainSculptor
@@ -341,3 +351,8 @@ func _broadcast_controls_to_voxelnoise() -> void:
 
 	if get_tree():
 		get_tree().call_group("voxelnoise_receivers", "apply_perlin_terrain_controls", payload)
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

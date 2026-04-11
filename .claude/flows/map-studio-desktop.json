@@ -1,0 +1,37 @@
+{
+  "id": "map-studio-desktop",
+  "title": "Map Studio — Desktop Split-View Map Editor",
+  "description": "Standalone Godot scene (not plugin). Left: map selector list. Top: 2D top-down grid editor (paint structure, stamp utilities, place artifacts). Bottom: 3D live preview of the map. Right: inspector panel with artifact config, preview, and screenshot capture. Based on MapCatalogDesktop3D pattern.",
+  "triggers": ["map editor", "map studio", "edit map", "build map", "2d grid editor"],
+  "granularity": "macro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "User tried: web map-builder, voxel editor, raw JSON, @tool plugin. Split-view desktop scene with 2D+3D is the right format.",
+  "confidence": "scaffolded",
+  "summary": "Standalone scene: map list (left) | 2D grid editor (top) + 3D preview (bottom) | artifact inspector + screenshot (right). Like MapCatalogDesktop3D but for editing.",
+  "links_to": ["pathfinder-validation", "map-editing-pipeline", "capture-framing"],
+  "nodes": [
+    {"id": "start", "type": "start", "label": "Build MapStudioDesktop3D scene"},
+    {"id": "layout", "type": "action", "label": "HSplit: left panel | center split | right panel", "detail": "Left: map list (ScrollContainer + buttons per map). Center: VSplit with 2D grid (top) and 3D SubViewport (bottom). Right: inspector panel."},
+    {"id": "map_list", "type": "action", "label": "Left panel: map selector", "detail": "Scan commons/maps/ for map_data.json. Button per map, grouped by sequence. Click to load."},
+    {"id": "grid_2d", "type": "action", "label": "Top center: 2D grid editor", "detail": "Reuse grid rendering from map_grid_editor_dock.gd. Paint structure heights, stamp utilities, place artifacts. Layer toggle tabs."},
+    {"id": "preview_3d", "type": "action", "label": "Bottom center: 3D live preview", "detail": "SubViewport with GridSystem loading the map. Updates when 2D grid changes. Orbit camera."},
+    {"id": "inspector", "type": "action", "label": "Right panel: artifact inspector", "detail": "Selected cell info. If interactable: artifact name, rotation, y_offset. Preview of artifact scene. Screenshot button."},
+    {"id": "screenshot", "type": "action", "label": "Screenshot capture from inspector", "detail": "Expand artifact preview to full size. Capture with PerfectShotFramer. Save to scene-catalog. Uses existing capture pipeline."},
+    {"id": "pathfinder", "type": "action", "label": "Live pathfinder overlay on 2D grid", "detail": "Reachability colors: green=reachable from spawn, red=unreachable, blue=teleporter path. Updates on paint."},
+    {"id": "save", "type": "action", "label": "Save to map_data.json", "detail": "Ctrl+S writes layers back to JSON. Preserves map_info, settings, lighting."},
+    {"id": "done", "type": "end", "label": "Map Studio working"}
+  ],
+  "edges": [
+    {"from": "start", "to": "layout"},
+    {"from": "layout", "to": "map_list"},
+    {"from": "map_list", "to": "grid_2d"},
+    {"from": "grid_2d", "to": "preview_3d"},
+    {"from": "preview_3d", "to": "inspector"},
+    {"from": "inspector", "to": "screenshot"},
+    {"from": "screenshot", "to": "pathfinder"},
+    {"from": "pathfinder", "to": "save"},
+    {"from": "save", "to": "done"}
+  ]
+}

@@ -1,4 +1,14 @@
-﻿# Antimatter grey goo entity that consumes geometry and cages the player.
+# @identity
+# essence: eat(grid_cell) -> extrude(block) -- creature that consumes and rebuilds the grid environment
+# desire: a block-eating, block-extruding entity that reshapes the map as it moves through it
+# critical_parameter: navigation_agent pathfinding -- determines which grid cells to consume and where to build
+# triggers: proximity to grid cells; pathfinding decisions; build/consume cycle timer
+# emerges: the environment is not static scenery but edible/buildable material -- creature IS architecture
+# needs: CharacterBody3D [has]; NavigationAgent3D [has]; grid consumption [has]; block extrusion [has]; VR interaction [missing]
+# relationships: unique among hazards -- modifies the map itself; techstrider legs ARE architecture too
+# truth: when the creature eats the environment and rebuilds it, hazard and level design become the same thing.
+
+# Antimatter grey goo entity that consumes geometry and cages the player.
 extends CharacterBody3D
 class_name BlockBuilderEntity
 

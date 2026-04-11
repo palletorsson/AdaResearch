@@ -4,6 +4,16 @@ extends Node3D
 # Demonstrates how a regular grid subdivision creates functional storage
 # The "removed" cells become the storage spaces
 
+# @identity
+# essence: bookshelf = frame + horizontal_shelves(rows) + vertical_dividers(cols) + trim, uniform grid subdivision
+# desire: To organize — the grid creates equal cells, and the emptiness between dividers is where meaning (books) will live
+# critical_parameter: rows * columns — the grid resolution determines how many compartments emerge from the single rectangular volume
+# triggers: Construction sequence: back panel → frame → shelves → dividers → crown molding; each step subdivides further
+# emerges: The crown and base molding appear as aesthetic finishing — the bookshelf develops architectural personality from utility
+# needs: VR place-books interaction [missing], grid size control [missing]
+# relationships: Simplest grid-subdivision furniture; contrasts with cube_desk (nested hierarchy) and recursive_chair (role-based)
+# truth: A bookshelf is the negative space of a grid — the shelves exist so that the gaps between them can hold something.
+
 @export var shelf_size: float = 2.0
 @export var rows: int = 4
 @export var columns: int = 3
@@ -21,14 +31,14 @@ var step: int = 0
 var timer: float = 0.0
 var is_constructing: bool = false
 
-func _ready():
+func _ready() -> void:
 	if show_construction:
 		is_constructing = true
 		step = 0
 	else:
 		_build_instant()
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_constructing:
 		return
 
@@ -38,7 +48,7 @@ func _process(delta: float):
 		_execute_step(step)
 		step += 1
 
-func _execute_step(s: int):
+func _execute_step(s: int) -> void:
 	match s:
 		0: _step_0_back_panel()
 		1: _step_1_outer_frame()
@@ -49,14 +59,14 @@ func _execute_step(s: int):
 			is_constructing = false
 			print("Bookshelf complete! %d parts" % all_parts.size())
 
-func _build_instant():
+func _build_instant() -> void:
 	_step_0_back_panel()
 	_step_1_outer_frame()
 	_step_2_horizontal_shelves()
 	_step_3_vertical_dividers()
 	_step_4_top_trim()
 
-func _step_0_back_panel():
+func _step_0_back_panel() -> void:
 	# Thin back panel
 	var thickness = shelf_size * 0.02
 	var height = shelf_size * 1.5
@@ -69,7 +79,7 @@ func _step_0_back_panel():
 	)
 	print("Step 0: Back panel")
 
-func _step_1_outer_frame():
+func _step_1_outer_frame() -> void:
 	var thickness = shelf_size * 0.06
 	var height = shelf_size * 1.5
 	var depth = shelf_size * 0.25
@@ -104,7 +114,7 @@ func _step_1_outer_frame():
 
 	print("Step 1: Outer frame")
 
-func _step_2_horizontal_shelves():
+func _step_2_horizontal_shelves() -> void:
 	var thickness = shelf_size * 0.04
 	var height = shelf_size * 1.5
 	var depth = shelf_size * 0.24
@@ -124,7 +134,7 @@ func _step_2_horizontal_shelves():
 
 	print("Step 2: Horizontal shelves (%d)" % (rows - 1))
 
-func _step_3_vertical_dividers():
+func _step_3_vertical_dividers() -> void:
 	var thickness = shelf_size * 0.03
 	var height = shelf_size * 1.5
 	var depth = shelf_size * 0.23
@@ -147,7 +157,7 @@ func _step_3_vertical_dividers():
 
 	print("Step 3: Vertical dividers (%d)" % (columns - 1))
 
-func _step_4_top_trim():
+func _step_4_top_trim() -> void:
 	# Decorative crown molding at top
 	var trim_height = shelf_size * 0.08
 	var trim_depth = shelf_size * 0.28
@@ -168,7 +178,7 @@ func _step_4_top_trim():
 
 	print("Step 4: Trim details")
 
-func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String):
+func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String) -> void:
 	var mesh_instance := MeshInstance3D.new()
 	var box := BoxMesh.new()
 	box.size = size
@@ -185,7 +195,7 @@ func _create_part(pos: Vector3, size: Vector3, color: Color, part_name: String):
 	add_child(mesh_instance)
 	all_parts.append(mesh_instance)
 
-func reset():
+func reset() -> void:
 	for part in all_parts:
 		if is_instance_valid(part):
 			part.queue_free()
@@ -197,3 +207,12 @@ func reset():
 		is_constructing = true
 	else:
 		_build_instant()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,3 +1,13 @@
+# @identity
+# essence: hive.spawn(boid) -> flock(separation, alignment, cohesion) -- stationary hive releasing swarms
+# desire: a hive spawning boid particles following three flocking rules -- the swarm IS the weapon
+# critical_parameter: boid rules (separation, alignment, cohesion) / spawn_timer -- three rules generate all behavior
+# triggers: spawn_timer releases boids; boids flock using three rules; player proximity attracts swarm
+# emerges: three rules produce flocking -- separation prevents collision, alignment creates direction, cohesion mass
+# needs: player tracking [has]; boid array [has]; flocking rules [has]; hive health [has]; VR interaction [missing]
+# relationships: embodies swarmintelligence sequence; three rules that generate coordinated group behavior
+# truth: separation, alignment, cohesion -- three rules, and the swarm organizes itself.
+
 extends Node3D
 class_name SwarmHive
 ## Swarm Intelligence hazard — a stationary hive that spawns boid particles.

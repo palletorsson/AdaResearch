@@ -128,7 +128,7 @@ func increase_projection_power(power: float):
 	
 	# Gradual hologram materialization
 	hologram_field.material_override.albedo_color.a = power * 0.5
-	hologram_field.material_override.emission_energy = power * 2.0
+	hologram_field.material_override.emission_energy_multiplier = power * 2.0
 	
 	# Lens focusing effect
 	projection_lens.get_child(0).light_energy = power * 3.0
@@ -154,9 +154,9 @@ func display_specific_dataset(dataset: String):
 		
 		# Dramatic data loading effect
 		var loading_tween = create_tween()
-		loading_tween.tween_property(hologram_field, 'material_override:emission_energy', 0.0, 0.2)
-		loading_tween.tween_property(hologram_field, 'material_override:emission_energy', 3.0, 0.5)
-		loading_tween.tween_property(hologram_field, 'material_override:emission_energy', 1.5, 0.8)
+		loading_tween.tween_property(hologram_field, 'material_override:emission_energy_multiplier', 0.0, 0.2)
+		loading_tween.tween_property(hologram_field, 'material_override:emission_energy_multiplier', 3.0, 0.5)
+		loading_tween.tween_property(hologram_field, 'material_override:emission_energy_multiplier', 1.5, 0.8)
 
 func trigger_projection_error():
 	print('⚠️ HOLOGRAM ERROR: Data corruption detected!')

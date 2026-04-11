@@ -1,4 +1,14 @@
-﻿extends Node3D
+extends Node3D
+
+# @identity
+# essence: output(x,y) = Σ kernel(i,j) · image(x+i, y+j) — convolution as local pattern matching
+# desire: slide a kernel across an image with your hands, watch edges and features materialize
+# critical_parameter: kernel weights — Sobel detects edges, Gaussian blurs, Sharpen enhances
+# triggers: painting pixels changes the input image; applying different filters reveals different truths about the same data
+# emerges: the realization that "seeing" is not passive — it requires a choice of what to look for
+# needs: VR pixel painting [has conceptual], grabbable filter kernels [has], sliding kernel animation [has]
+# relationships: unlocks convolutional_neural_networks_cnns_vr (learned kernels vs hand-designed); depends on neural_networks_vr (feature hierarchy)
+# truth: every act of perception is a convolution — a commitment to which local patterns matter
 
 # VR-Reimagined Computer Vision
 # Interactive image processing with spatial convolution filters
@@ -52,7 +62,7 @@ var current_filter_pos: Vector2i = Vector2i(0, 0)
 # Kernel visualization
 var kernel_window: Node3D
 
-func _ready():
+func _ready() -> void:
 	print("[ComputerVision_VR] Initializing computer vision workspace")
 	_initialize_image_data()
 	_create_input_canvas()
@@ -64,7 +74,7 @@ func _ready():
 	_create_control_panel()
 	_create_info_panels()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 
 	if animate_convolution:
@@ -77,7 +87,7 @@ func _process(delta):
 	_animate_kernel_window(delta)
 	_animate_features(delta)
 
-func _initialize_image_data():
+func _initialize_image_data() -> void:
 	"""Initialize input image with sample pattern"""
 	for y in range(image_resolution):
 		var row = []
@@ -104,7 +114,7 @@ func _initialize_image_data():
 	for i in range(num_feature_maps):
 		feature_maps.append([])
 
-func _create_input_canvas():
+func _create_input_canvas() -> void:
 	"""Create interactive input image canvas"""
 	var canvas_container = Node3D.new()
 	canvas_container.name = "InputCanvas"
@@ -154,7 +164,7 @@ func _create_pixel(x: int, y: int, value: float) -> MeshInstance3D:
 
 	return mesh
 
-func _create_filter_toolkit():
+func _create_filter_toolkit() -> void:
 	"""Create grabbable filter objects"""
 	var toolkit_container = Node3D.new()
 	toolkit_container.name = "FilterToolkit"
@@ -244,7 +254,7 @@ func _create_filter_object(filter_data: Dictionary, pos: Vector3) -> RigidBody3D
 
 	return body
 
-func _create_edge_detection_area():
+func _create_edge_detection_area() -> void:
 	"""Create edge detection visualization area"""
 	var edge_container = Node3D.new()
 	edge_container.name = "EdgeDetection"
@@ -271,7 +281,7 @@ func _create_edge_detection_area():
 			row_meshes.append(pixel)
 		edge_pixels.append(row_meshes)
 
-func _create_feature_extraction_area():
+func _create_feature_extraction_area() -> void:
 	"""Create feature map visualization"""
 	var feature_container = Node3D.new()
 	feature_container.name = "FeatureExtraction"
@@ -302,6 +312,7 @@ func _create_feature_extraction_area():
 			var sphere = MeshInstance3D.new()
 			var sphere_mesh = SphereMesh.new()
 			sphere_mesh.radius = 0.15
+			sphere_mesh.height = 0.3
 			sphere.mesh = sphere_mesh
 
 			var mat = StandardMaterial3D.new()
@@ -328,7 +339,7 @@ func _create_feature_extraction_area():
 
 		feature_visualizations.append(feature_spheres)
 
-func _create_object_detection_area():
+func _create_object_detection_area() -> void:
 	"""Create object detection bounding box visualization"""
 	if not enable_object_detection:
 		return
@@ -416,7 +427,7 @@ func _create_bounding_box(data: Dictionary) -> Node3D:
 
 	return bbox_container
 
-func _create_convolution_visualizer():
+func _create_convolution_visualizer() -> void:
 	"""Create sliding kernel window animation"""
 	if not show_sliding_kernel:
 		return
@@ -447,7 +458,7 @@ func _create_convolution_visualizer():
 	# Position at input canvas
 	kernel_window.position = Vector3(-8.0, 0, 0.2)
 
-func _create_control_panel():
+func _create_control_panel() -> void:
 	"""Create VR control panel"""
 	var controls = Node3D.new()
 	controls.name = "ControlPanel"
@@ -484,7 +495,7 @@ func _create_control_panel():
 	info.position = Vector3(0, 0.3, 0.1)
 	controls.add_child(info)
 
-func _create_info_panels():
+func _create_info_panels() -> void:
 	"""Create educational info panels"""
 	# Convolution explanation
 	_create_info_panel(
@@ -507,7 +518,7 @@ func _create_info_panels():
 		Color(0.3, 0.9, 0.5)
 	)
 
-func _create_info_panel(pos: Vector3, text: String, color: Color):
+func _create_info_panel(pos: Vector3, text: String, color: Color) -> void:
 	"""Create floating info panel"""
 	var label = Label3D.new()
 	label.text = text
@@ -519,7 +530,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _update_pixel_display(_delta):
+func _update_pixel_display(_delta) -> void:
 	"""Update pixel visualization"""
 	# Update input pixels
 	for y in range(image_resolution):
@@ -544,7 +555,7 @@ func _update_pixel_display(_delta):
 			pixel.material_override.albedo_color = Color(value, value * 0.3, value * 0.3)
 			pixel.material_override.emission = Color(value, value * 0.3, value * 0.3)
 
-func _animate_kernel_window(_delta):
+func _animate_kernel_window(_delta) -> void:
 	"""Animate sliding convolution kernel"""
 	if not show_sliding_kernel or not kernel_window:
 		return
@@ -555,7 +566,7 @@ func _animate_kernel_window(_delta):
 	var py = (float(current_filter_pos.y) / image_resolution - 0.5) * grid_size
 	kernel_window.position = Vector3(-8.0 + px, py, 0.2)
 
-func _animate_features(_delta):
+func _animate_features(_delta) -> void:
 	"""Animate feature visualizations"""
 	for i in range(feature_visualizations.size()):
 		var features = feature_visualizations[i]
@@ -564,7 +575,7 @@ func _animate_features(_delta):
 			var pulse = 1.0 + sin(time * 2.5 + i + f * 0.5) * 0.2
 			sphere.scale = Vector3.ONE * pulse
 
-func _step_convolution():
+func _step_convolution() -> void:
 	"""Step convolution animation"""
 	current_filter_pos.x += 1
 	if current_filter_pos.x >= image_resolution - 2:
@@ -598,13 +609,22 @@ func _apply_edge_detection(img: Array) -> Array:
 	return result
 
 # Public API
-func apply_filter(filter_name: String):
+func apply_filter(filter_name: String) -> void:
 	"""Apply a filter to the input image"""
 	print("[CV] Applying filter: ", filter_name)
 	edge_map = _apply_edge_detection(input_image)
 
-func set_pixel_value(x: int, y: int, value: float):
+func set_pixel_value(x: int, y: int, value: float) -> void:
 	"""Set a pixel value (for painting)"""
 	if x >= 0 and x < image_resolution and y >= 0 and y < image_resolution:
 		input_image[y][x] = clamp(value, 0.0, 1.0)
 		edge_map = _apply_edge_detection(input_image)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

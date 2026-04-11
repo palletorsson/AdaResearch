@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b8x7y203a4w1" path="res://commons/structures/corridor/CorridorScene.tscn" id="9_gudac"]
 [ext_resource type="PackedScene" path="res://commons/structures/entry/OneCubeEntry.tscn" id="10_ngsxs"]
 [ext_resource type="Script" path="res://commons/audio/components/AudioLoadingIndicator.gd" id="11_loading"]
+[ext_resource type="PackedScene" uid="uid://b7gpc47eqau2t" path="res://commons/primitives/sphere/dark_sphere.tscn" id="12_darksphere"]
 
 [node name="Base" instance=ExtResource("1_qxwn1")]
 
@@ -63,3 +64,5 @@ visible = false
 script = ExtResource("11_loading")
 label_offset = Vector3(0, 0.3, -1.2)
 label_font_size = 24
+
+[node name="DarkSphere" parent="." index="11" instance=ExtResource("12_darksphere")]

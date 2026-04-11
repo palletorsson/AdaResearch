@@ -6,12 +6,12 @@ func get_class_name() -> String:
 func get_compute_shader_path() -> String:
 	return "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubes.glsl"
 
-func _create_fallback_mesh():
+func _create_fallback_mesh() -> void:
 	print("TerrainGenerator: Creating fallback rainbow cave...")
 	_create_simple_cave_mesh()
 	print("✅ Fallback rainbow cave created")
 
-func _create_simple_cave_mesh():
+func _create_simple_cave_mesh() -> void:
 	# Create a simple tunnel/cave mesh as fallback
 	var vertices = PackedVector3Array()
 	var normals = PackedVector3Array()
@@ -109,3 +109,6 @@ func _create_simple_cave_mesh():
 	
 	print("✅ Created double-sided cave tunnel with ", vertices.size(), " vertices, ", indices.size() / 3, " triangles")
 	_create_collision()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

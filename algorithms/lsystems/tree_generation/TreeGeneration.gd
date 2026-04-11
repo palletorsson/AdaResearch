@@ -21,11 +21,11 @@ var turtle_stack = []
 var branch_segments = []
 var leaf_positions = []
 
-func _ready():
+func _ready() -> void:
 	setup_materials()
 	generate_initial_tree()
 
-func setup_materials():
+func setup_materials() -> void:
 	# Root material
 	var root_material = StandardMaterial3D.new()
 	root_material.albedo_color = Color(0.6, 0.4, 0.2, 1.0)
@@ -47,13 +47,13 @@ func setup_materials():
 	rule_material.emission = Color(0.05, 0.3, 0.2, 1.0)
 	$RuleDisplay.material_override = rule_material
 
-func generate_initial_tree():
+func generate_initial_tree() -> void:
 	current_string = "F"
 	generation = 0
 	clear_tree()
 	draw_tree()
 
-func clear_tree():
+func clear_tree() -> void:
 	# Clear existing branches and leaves
 	for child in $TreeBranches.get_children():
 		child.queue_free()
@@ -63,7 +63,7 @@ func clear_tree():
 	branch_segments.clear()
 	leaf_positions.clear()
 
-func apply_lsystem_rules():
+func apply_lsystem_rules() -> void:
 	var new_string = ""
 	for char in current_string:
 		if char in rules:
@@ -72,7 +72,7 @@ func apply_lsystem_rules():
 			new_string += char
 	current_string = new_string
 
-func draw_tree():
+func draw_tree() -> void:
 	clear_tree()
 	
 	# Turtle graphics interpretation
@@ -115,7 +115,7 @@ func draw_tree():
 					position = state.pos
 					direction = state.dir
 
-func create_branch_segment(start_pos, end_pos, thickness):
+func create_branch_segment(start_pos, end_pos, thickness) -> void:
 	var branch = CSGCylinder3D.new()
 	var length = start_pos.distance_to(end_pos)
 	
@@ -144,7 +144,7 @@ func create_branch_segment(start_pos, end_pos, thickness):
 	$TreeBranches.add_child(branch)
 	branch_segments.append(branch)
 
-func create_leaf(position):
+func create_leaf(position) -> void:
 	var leaf = CSGSphere3D.new()
 	leaf.radius = 0.08 + randf() * 0.04
 	leaf.position = position + Vector3(randf() * 0.2 - 0.1, 0, randf() * 0.2 - 0.1)
@@ -160,7 +160,7 @@ func create_leaf(position):
 	$TreeLeaves.add_child(leaf)
 	leaf_positions.append(leaf)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	generation_timer += delta
 	
@@ -178,7 +178,7 @@ func _process(delta):
 	animate_growth()
 	animate_indicators()
 
-func animate_growth():
+func animate_growth() -> void:
 	# Animate branch growth
 	var growth_progress = generation_timer / generation_interval
 	for i in range(branch_segments.size()):
@@ -201,7 +201,7 @@ func animate_growth():
 			var appear_progress = max(0.0, growth_progress * 1.5 - i * 0.05)
 			leaf.scale = Vector3.ONE * min(1.0, appear_progress)
 
-func animate_indicators():
+func animate_indicators() -> void:
 	# Generation indicator height
 	var gen_height = (generation + 1) * 0.3
 	var generationindicator = get_node_or_null("GenerationIndicator")
@@ -218,3 +218,12 @@ func animate_indicators():
 		if leaf and is_instance_valid(leaf):
 			var sway = sin(time * 2.0 + leaf.position.x) * 0.1
 			leaf.position.x += sway * 0.01
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

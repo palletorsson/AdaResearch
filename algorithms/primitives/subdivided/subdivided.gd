@@ -3,13 +3,13 @@ extends Node3D
 # Scene for comparing different cube subdivision and smoothing methods
 
 # Generate smooth corner cube geometry 
-func generate_smooth_corner_cube_geometry(surface_tool: SurfaceTool, subdivisions: int):
+func generate_smooth_corner_cube_geometry(surface_tool: SurfaceTool, subdivisions: int) -> void:
 	# Use the existing subdivided cube geometry as a base for now
 	# This function will be enhanced with proper smooth corner generation
 	generate_subdivided_cube_geometry(surface_tool, subdivisions)
 
 # Method 3: Rounded corner cube using spherical blending
-func create_rounded_corner_cube():
+func create_rounded_corner_cube() -> void:
 	print("Creating rounded corner cube...")
 	
 	var surface_tool = SurfaceTool.new()
@@ -47,7 +47,7 @@ func create_rounded_corner_cube():
 	print("Rounded corner cube created with %d vertices" % array_mesh.surface_get_array_len(0))
 
 # Simplified rounded cube generation
-func generate_rounded_cube_simple(surface_tool: SurfaceTool, subdivisions: int):
+func generate_rounded_cube_simple(surface_tool: SurfaceTool, subdivisions: int) -> void:
 	var size = 1.0
 	var half_size = size * 0.5
 	var corner_radius = 0.3  # How rounded the corners are
@@ -79,7 +79,7 @@ func generate_rounded_cube_simple(surface_tool: SurfaceTool, subdivisions: int):
 		subdivide_face_with_rounding(surface_tool, face, subdivisions, corner_radius)
 
 # Subdivide a face with corner rounding
-func subdivide_face_with_rounding(surface_tool: SurfaceTool, corners: Array, subdivisions: int, corner_radius: float):
+func subdivide_face_with_rounding(surface_tool: SurfaceTool, corners: Array, subdivisions: int, corner_radius: float) -> void:
 	var step = 1.0 / subdivisions
 	
 	# Generate vertices for subdivided face with rounding
@@ -118,7 +118,7 @@ func lerp_quad_rounded(corners: Array, u: float, v: float, corner_radius: float)
 	
 	return cube_pos.lerp(sphere_pos, rounding_factor)
 
-func _ready():
+func _ready() -> void:
 	# Create cubes with different smoothing approaches
 	create_surface_tool_cube()
 	create_built_in_smooth_cube()
@@ -128,7 +128,7 @@ func _ready():
 	setup_scene()
 
 # Method 1: SurfaceTool with manual subdivision and smoothing  
-func create_surface_tool_cube():
+func create_surface_tool_cube() -> void:
 	print("Creating SurfaceTool subdivided cube...")
 	
 	var surface_tool = SurfaceTool.new()
@@ -166,7 +166,7 @@ func create_surface_tool_cube():
 	print("Smooth corner cube created with %d vertices" % array_mesh.surface_get_array_len(0))
 
 # Method 2: Built-in BoxMesh with subdivision parameters
-func create_built_in_smooth_cube():
+func create_built_in_smooth_cube() -> void:
 	print("Creating built-in subdivided cube...")
 	
 	var box_mesh = BoxMesh.new()
@@ -193,7 +193,7 @@ func create_built_in_smooth_cube():
 	print("Built-in cube created with subdivisions: %dx%dx%d" % [box_mesh.subdivide_width, box_mesh.subdivide_height, box_mesh.subdivide_depth])
 
 # Generate subdivided cube geometry using SurfaceTool
-func generate_subdivided_cube_geometry(surface_tool: SurfaceTool, subdivisions: int):
+func generate_subdivided_cube_geometry(surface_tool: SurfaceTool, subdivisions: int) -> void:
 	var size = 1.0
 	var half_size = size * 0.5
 	
@@ -224,7 +224,7 @@ func generate_subdivided_cube_geometry(surface_tool: SurfaceTool, subdivisions: 
 		subdivide_face(surface_tool, face, subdivisions)
 
 # Subdivide a single face into smaller quads
-func subdivide_face(surface_tool: SurfaceTool, corners: Array, subdivisions: int):
+func subdivide_face(surface_tool: SurfaceTool, corners: Array, subdivisions: int) -> void:
 	var step = 1.0 / subdivisions
 	
 	# Generate vertices for subdivided face
@@ -276,7 +276,7 @@ func add_quad_as_triangles_with_uv(surface_tool: SurfaceTool, p1: Vector3, p2: V
 	surface_tool.set_vertex(p4)
 
 # Setup scene with camera, lighting, and labels
-func setup_scene():
+func setup_scene() -> void:
 	# Add directional light
 	var light = DirectionalLight3D.new()
 	light.position = Vector3(5, 5, 5)
@@ -302,9 +302,18 @@ func setup_scene():
 	print("Right (Orange): Built-in BoxMesh with subdivision parameters")
 
 # Optional: Add rotation for better visualization
-func _process(delta):
+func _process(delta: float) -> void:
 	# Slowly rotate both cubes for better viewing
 	for child in get_children():
 		if child is MeshInstance3D:
 			child.rotation.y += delta * 0.5
 			child.rotation.x += delta * 0.3
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

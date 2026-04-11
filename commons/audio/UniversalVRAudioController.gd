@@ -133,6 +133,13 @@ func get_dedicated_bus_name() -> String:
 	"""Return the dedicated bus name for this rack"""
 	return dedicated_bus_name
 
+func _exit_tree():
+	# Remove the dedicated audio bus to avoid leaking buses
+	if dedicated_bus_name != "":
+		var bus_idx = AudioServer.get_bus_index(dedicated_bus_name)
+		if bus_idx != -1:
+			AudioServer.remove_bus(bus_idx)
+
 func _setup_auto_save_timer():
 	_auto_save_timer = Timer.new()
 	_auto_save_timer.wait_time = _auto_save_interval
@@ -220,6 +227,11 @@ func _setup_rack_spectrum_analyzer():
 # Example: AudioContr#config:synth_rack#sound:pickup_mario#autoplay:true
 func apply_grid_config(config_data: Dictionary):
 	print("UniversalVRAudioController: Applying grid config: %s" % str(config_data))
+
+	# If this is a full rack config (has grid + control_definitions), load directly
+	if config_data.has("grid") and config_data.has("control_definitions"):
+		load_rack_config_from_dict(config_data)
+		return
 
 	# Load rack config first (if specified)
 	if config_data.has("config"):
@@ -374,6 +386,77 @@ func load_rack_config_from_dict(data: Dictionary):
 	print("Loaded rack config from dict: ", rack_config.get("rack_info", {}).get("name", "Unknown"))
 
 
+## --- Eurorack Modular Rack API ---
+
+## Load a Eurorack preset by name from module_library.json.
+## Creates an EurorackRack with compound modules containing real interactive controls.
+func load_eurorack_preset(preset_name: String) -> void:
+	_clear_controls()
+
+	# Hide legacy UI panels
+	if has_node("SelectionPanel"):
+		$SelectionPanel.visible = false
+	if has_node("Buttons"):
+		$Buttons.visible = false
+	if has_node("CableCase"):
+		$CableCase.visible = false
+
+	var EurorackRackScript = load("res://commons/audio/EurorackRack.gd")
+	var rack: Node3D = EurorackRackScript.new()
+	rack.name = "EurorackRack"
+	parameter_container.add_child(rack)
+	rack.load_preset(preset_name, self)
+
+	# Wire up cable routing if cable manager exists
+	if rack.cable_manager:
+		_eurorack_cable_manager = rack.cable_manager
+		_eurorack_cable_manager.parameter_routed.connect(_on_cable_routed)
+		_eurorack_cable_manager.parameter_unrouted.connect(_on_cable_unrouted)
+		print("UniversalVRAudioController: Cable manager connected — %d cables" % _eurorack_cable_manager.get_cable_count())
+
+	# Read sound_type from preset
+	var lib_path := "res://commons/audio/eurorack_modules/module_library.json"
+	if FileAccess.file_exists(lib_path):
+		var file := FileAccess.open(lib_path, FileAccess.READ)
+		var json := JSON.new()
+		if json.parse(file.get_as_text()) == OK:
+			var presets: Dictionary = json.data.get("rack_presets", {})
+			if presets.has(preset_name):
+				current_sound_key = presets[preset_name].get("sound_type", current_sound_key)
+		file.close()
+
+	print("UniversalVRAudioController: Loaded Eurorack preset '%s'" % preset_name)
+
+
+## Public wrappers for control creation (used by EurorackModule).
+func instantiate_control(control_type: String, control_id: String) -> Node:
+	return _instantiate_control(control_type, control_id)
+
+func configure_control(control: Node, config: Dictionary, control_type: String) -> void:
+	_configure_control(control, config, control_type)
+
+func connect_control_signals(control: Node, control_id: String, control_type: String, config: Dictionary) -> void:
+	_connect_control_signals(control, control_id, control_type, config)
+
+func attach_face_plate(control: Node3D, control_type: String):
+	return _attach_face_plate(control, control_type)
+
+
+## --- Eurorack Cable Routing ---
+
+var _eurorack_cable_manager: SynthCableManager = null
+
+
+func _on_cable_routed(from_param: String, to_param: String) -> void:
+	print("UVAC Cable: Routed %s → %s" % [from_param, to_param])
+	play_current_sound()
+
+
+func _on_cable_unrouted(from_param: String, to_param: String) -> void:
+	print("UVAC Cable: Unrouted %s → %s" % [from_param, to_param])
+	play_current_sound()
+
+
 func _configure_cable_case(layout: Dictionary):
 	"""Configure cable case decoration colors based on layout settings"""
 	var cable_case = get_node_or_null("CableCase")
@@ -499,11 +582,12 @@ func _spawn_controls_from_json():
 		# Connect signals based on control type
 		_connect_control_signals(control, control_id, control_type, control_config)
 
-		# Attach face plate behind physical controls if enabled
-		if layout.get("face_plates", false) and not (control is VRRackControl):
+		# Attach face plate behind physical controls (default: on)
+		if layout.get("face_plates", true) and not (control is VRRackControl):
 			var plate := _attach_face_plate(control, control_type)
 			if plate:
 				plate.set_param_name(control_config.get("label", ""))
+				_strip_interactable_visuals(control, control_type)
 
 		# Store control with structure
 		active_controls[control_id] = {
@@ -677,6 +761,97 @@ func _attach_face_plate(control: Node3D, control_type: String) -> VRFacePlate:
 	plate.control_scene_path = scene_path
 	control.add_child(plate)
 	return plate
+
+# Strip visual meshes from a physical interactable, leaving only collision/grab nodes.
+# Called when face plates are enabled so the 2D visual is the only visible layer.
+func _strip_interactable_visuals(control: Node3D, control_type: String) -> void:
+	var hide_paths: Array = []
+	match control_type:
+		"slider", "slv", "slider_vertical", "vfader", "fader":
+			hide_paths = [
+				"Frame/PanelMesh", "Frame/TrackGroove",
+				"Frame/Label3DValue", "Frame/LabelName",
+				"SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle/HandleMesh",
+			]
+		"slh", "slider_horizontal":
+			hide_paths = [
+				"Frame/BaseMesh", "Frame/TrackMesh",
+				"Frame/Label3DValue", "Frame/LabelName",
+				"SliderOrigin/InteractableSlider/SliderBody/HandleMesh",
+				"SliderOrigin/InteractableSlider/SliderBody/AccentMesh",
+				"SliderOrigin/InteractableSlider/SliderBody/ShadowMesh",
+			]
+		"sls", "slider_snap", "stepped":
+			hide_paths = [
+				"Frame/MeshInstance3D", "Frame/TrackMesh",
+				"Frame/Label3DValue", "Frame/Notches",
+				"SliderOrigin/InteractableSlider/SliderBody/HandleMesh",
+				"SliderOrigin/InteractableSlider/SliderBody/AccentMesh",
+			]
+		"slz", "slider_zero", "bipolar":
+			hide_paths = [
+				"Frame/MeshInstance3D", "Frame/TrackMesh",
+				"Frame/Label3DValue", "Frame/CenterMark",
+				"SliderOrigin/InteractableSlider/SliderBody/HandleMesh",
+				"SliderOrigin/InteractableSlider/SliderBody/AccentMesh",
+			]
+		"knob", "dial", "nb", "rotary":
+			hide_paths = [
+				"Frame/PanelMesh", "Frame/BaseRing",
+				"Frame/Label3DValue", "Frame/LabelName",
+				"DialOrigin/InteractableHinge/KnobMesh",
+				"DialOrigin/InteractableHinge/KnobMesh/Indicator",
+			]
+		"wheel", "whl", "pitchbend":
+			hide_paths = [
+				"Frame/MeshInstance3D",
+				"HingeOrigin/InteractableHinge/WheelBody/MeshInstance3D",
+				"HingeOrigin/InteractableHinge/WheelBody/MeshInstance3D2",
+			]
+		"xy", "xypad", "2df", "pad":
+			hide_paths = [
+				"Frame/BaseMesh", "Frame/TrackMesh",
+				"Frame/Label3DValue",
+				"SliderOrigin/InteractableSlider/SliderBody/HandleMesh",
+			]
+		"js", "joystick":
+			hide_paths = [
+				"Frame/MeshInstance3D",
+				"JoystickOrigin/InteractableJoystick/JoystickBody/BarMesh",
+				"JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh",
+			]
+		"lv", "lever", "throw":
+			hide_paths = [
+				"Frame/MeshInstance3D",
+				"LeverOrigin/InteractableLever/HingeBody/BarMesh",
+				"LeverOrigin/InteractableLever/HingeBody/HandleMesh",
+			]
+		"btn", "button", "trigger":
+			hide_paths = [
+				"ButtonBase/BaseMesh", "AccentRing",
+				"Button/ButtonMesh",
+			]
+
+	for path in hide_paths:
+		var node = control.get_node_or_null(path)
+		if node and node is Node3D:
+			(node as Node3D).visible = false
+
+	# Also hide handle visuals inside grab point handles (spheres/meshes on grab handles)
+	_hide_handle_visuals(control)
+
+
+# Recursively hide MeshInstance3D nodes inside InteractableHandle RigidBody3D nodes
+func _hide_handle_visuals(node: Node) -> void:
+	for child in node.get_children():
+		if child.name == "InteractableHandle" and child is RigidBody3D:
+			# Hide mesh children of handles (but not collision shapes)
+			for handle_child in child.get_children():
+				if handle_child is MeshInstance3D:
+					handle_child.visible = false
+		if child is Node3D:
+			_hide_handle_visuals(child)
+
 
 # Get control size for spacing calculations
 func _get_control_size(control_type: String) -> Vector2:

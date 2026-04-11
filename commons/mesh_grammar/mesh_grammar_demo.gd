@@ -438,6 +438,6 @@ func _parse_selector(s: String) -> MeshSelector:
 			elif s.begins_with("depth:"):
 				var parts := s.substr(6).split("-")
 				var min_d := int(parts[0])
-				var max_d := int(parts[1]) if parts.size() > 1 else -1
+				var max_d: int = int(parts[1]) if parts.size() > 1 else -1
 				return MeshSelector.by_depth(min_d, max_d)
 	return MeshSelector.all_faces()

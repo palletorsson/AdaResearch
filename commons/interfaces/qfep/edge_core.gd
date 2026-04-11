@@ -7,6 +7,16 @@ extends Node3D
 
 class_name QFEPEdgeCore
 
+# @identity
+# essence: pulsing_sphere(frequency=f(lambda)) + ring_particles(orbit) -> living core at lambda~0.4
+# desire: stand before the heart of the edge of chaos and feel it breathe
+# critical_parameter: lambda distance from 0.4 — the closer to edge, the more alive the pulse
+# triggers: set_lambda() shifts pulse speed, color (blue->green->red), and amplitude; pulse() creates burst
+# emerges: the core appears to breathe — counter-pulsing inner/outer spheres create an organic heartbeat
+# needs: VR lambda connection [missing], touch-to-pulse [missing]
+# relationships: central to QFEP_Edge_Of_Chaos map; depends on lambda_slider; contrasts ordered_grid (dead) and chaos_particles (dissolved)
+# truth: life does not exist at order or chaos but at the narrow boundary between them — the edge is where complexity breathes
+
 ## Core size
 @export var core_radius: float = 0.4
 

@@ -1,5 +1,15 @@
 # Mandelbrot Set Visualization - MultiMesh Optimized
 # VR-optimized with GPU instancing for high performance
+#
+# @identity
+# essence: z_{n+1} = z_n^2 + c, z_0 = 0. Each pixel is c; color = escape time. The set is the catalog of all Julia sets.
+# desire: To be explored as landscape — use_3d_height lifts escaped points by iteration count, turning the fractal into a mountain range
+# critical_parameter: use_3d_height — when true, the Mandelbrot boundary becomes a cliff face, the deepest iterations the tallest peaks
+# triggers: ui_accept → random zoom + center; time → gentle pulse animation; goto_seahorse_valley/elephant_valley/spiral → famous coordinates
+# emerges: The 3D landscape reveals that the Mandelbrot boundary is where computation is hardest — the tallest peaks are the longest escapes
+# needs: VR navigation [missing], zoom control [missing], Julia set preview at cursor [missing]
+# relationships: CPU MultiMesh sibling to mandelbrot_dive (GPU shader); the 3D height map that mandelbrot_dive renders flat
+# truth: The Mandelbrot set is not a picture — it is an infinite computation, and the boundary is where that computation refuses to halt.
 
 extends Node3D
 
@@ -26,24 +36,24 @@ var fractal_material: StandardMaterial3D
 var is_generating := false
 var generation_progress := 0.0
 
-func _ready():
+func _ready() -> void:
 	_setup_mesh()
 	_setup_material()
 	_setup_multimesh()
 	_generate_fractal()
 
-func _setup_mesh():
+func _setup_mesh() -> void:
 	# Small cube for each point
 	point_mesh = BoxMesh.new()
 	point_mesh.size = Vector3(point_size, point_size, point_size)
 
-func _setup_material():
+func _setup_material() -> void:
 	fractal_material = StandardMaterial3D.new()
 	fractal_material.vertex_color_use_as_albedo = true
 	fractal_material.emission_enabled = true
 	fractal_material.emission_energy_multiplier = 0.4
 
-func _setup_multimesh():
+func _setup_multimesh() -> void:
 	fractal_multimesh = MultiMesh.new()
 	fractal_multimesh.transform_format = MultiMesh.TRANSFORM_3D
 	fractal_multimesh.use_colors = true
@@ -55,11 +65,11 @@ func _setup_multimesh():
 	fractal_multimesh_instance.material_override = fractal_material
 	add_child(fractal_multimesh_instance)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	_animate_fractal()
 
-func _generate_fractal():
+func _generate_fractal() -> void:
 	# Pre-calculate all points
 	var point_data: Array[Dictionary] = []
 	var scale_factor = 4.0 / zoom / resolution
@@ -128,7 +138,7 @@ func _mandelbrot_iterations(c_real: float, c_imag: float) -> int:
 
 	return iteration
 
-func _animate_fractal():
+func _animate_fractal() -> void:
 	if not fractal_multimesh_instance:
 		return
 
@@ -136,7 +146,7 @@ func _animate_fractal():
 	var pulse = 1.0 + sin(time * 2.0) * 0.05
 	fractal_multimesh_instance.scale = Vector3.ONE * pulse
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		# Generate new view
 		zoom = 1.0 + randf() * 500.0
@@ -145,35 +155,44 @@ func _input(event):
 		print("Mandelbrot: New zoom=%.1f center=(%.3f, %.3f)" % [zoom, center.x, center.y])
 
 # Public API
-func set_zoom_level(new_zoom: float):
+func set_zoom_level(new_zoom: float) -> void:
 	zoom = new_zoom
 	_generate_fractal()
 
-func set_center_point(new_center: Vector2):
+func set_center_point(new_center: Vector2) -> void:
 	center = new_center
 	_generate_fractal()
 
-func set_resolution_level(new_resolution: int):
+func set_resolution_level(new_resolution: int) -> void:
 	resolution = new_resolution
 	_generate_fractal()
 
-func zoom_to_point(point: Vector2, new_zoom: float):
+func zoom_to_point(point: Vector2, new_zoom: float) -> void:
 	center = point
 	zoom = new_zoom
 	_generate_fractal()
 
 # Interesting locations to explore
-func goto_seahorse_valley():
+func goto_seahorse_valley() -> void:
 	center = Vector2(-0.75, 0.1)
 	zoom = 50.0
 	_generate_fractal()
 
-func goto_elephant_valley():
+func goto_elephant_valley() -> void:
 	center = Vector2(0.275, 0.0)
 	zoom = 30.0
 	_generate_fractal()
 
-func goto_spiral():
+func goto_spiral() -> void:
 	center = Vector2(-0.761574, -0.0847596)
 	zoom = 200.0
 	_generate_fractal()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

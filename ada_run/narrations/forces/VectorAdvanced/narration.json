@@ -1,0 +1,596 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": -1,
+				"name": "VectorFieldFlow",
+				"pos": [
+					16,
+					1,
+					1
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "VectorTorque",
+				"pos": [
+					3,
+					2,
+					2
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "VectorTorque",
+				"pos": [
+					18,
+					1,
+					3
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "dark_sphere",
+				"pos": [
+					3,
+					2,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+				"pos": [
+					16,
+					1,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "dark_sphere",
+				"pos": [
+					18,
+					1,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "proximity_spawner",
+				"pos": [
+					15,
+					2,
+					5
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+				"pos": [
+					18,
+					1,
+					5
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "catalyst_target",
+				"pos": [
+					16,
+					1,
+					10
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+				"pos": [
+					2,
+					1,
+					11
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "exercise_1_8_solution_attraction_magnitude_vr",
+				"pos": [
+					4,
+					2,
+					12
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "VectorThrowing",
+				"pos": [
+					17,
+					1,
+					12
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "dark_sphere",
+				"pos": [
+					6,
+					1,
+					13
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "dark_sphere",
+				"pos": [
+					17,
+					1,
+					14
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "catalyst_target",
+				"pos": [
+					19,
+					1,
+					15
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "proximity_spawner",
+				"pos": [
+					15,
+					1,
+					16
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [
+			[
+				0,
+				0,
+				15
+			],
+			[
+				8,
+				0,
+				3
+			]
+		],
+		"issues": [
+			{
+				"description": "Teleporter at (17,0,17) unreachable from spawn",
+				"severity": "critical",
+				"type": "unreachable_teleporter"
+			},
+			{
+				"description": "VectorFieldFlow at (16,1,1) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "VectorTorque at (3,2,2) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "VectorTorque at (18,1,3) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "dark_sphere at (3,2,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "exercise_1_3_solution_3_d_bouncing_ball_vr at (16,1,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "dark_sphere at (18,1,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "proximity_spawner at (15,2,5) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "example_1_9_motion_101_velocity_and_random_acceleration_vr at (18,1,5) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "catalyst_target at (16,1,10) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "exercise_1_5_solution_accelerate_and_decelerate_vr at (2,1,11) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "exercise_1_8_solution_attraction_magnitude_vr at (4,2,12) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "VectorThrowing at (17,1,12) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "dark_sphere at (6,1,13) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "dark_sphere at (17,1,14) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "catalyst_target at (19,1,15) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "proximity_spawner at (15,1,16) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "VectorAdvanced",
+		"pacing": {
+			"density": 0.0,
+			"reachable_artifacts": 0,
+			"total_artifacts": 16,
+			"walkable_tiles": 236
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			8,
+			1,
+			3
+		],
+		"teleporter": {
+			"dist": -1,
+			"pos": [
+				17,
+				0,
+				17
+			],
+			"reachable": false
+		}
+	},
+	"map_name": "VectorAdvanced",
+	"sequence": "forces",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "VectorFieldFlow",
+				"pos": [
+					16,
+					1,
+					1
+				]
+			},
+			{
+				"name": "VectorTorque",
+				"pos": [
+					3,
+					2,
+					2
+				]
+			},
+			{
+				"name": "VectorTorque",
+				"pos": [
+					18,
+					1,
+					3
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					3,
+					2,
+					4
+				]
+			},
+			{
+				"name": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+				"pos": [
+					16,
+					1,
+					4
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					18,
+					1,
+					4
+				]
+			},
+			{
+				"name": "proximity_spawner",
+				"pos": [
+					15,
+					2,
+					5
+				]
+			},
+			{
+				"name": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+				"pos": [
+					18,
+					1,
+					5
+				]
+			},
+			{
+				"name": "catalyst_target",
+				"pos": [
+					16,
+					1,
+					10
+				]
+			},
+			{
+				"name": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+				"pos": [
+					2,
+					1,
+					11
+				]
+			},
+			{
+				"name": "exercise_1_8_solution_attraction_magnitude_vr",
+				"pos": [
+					4,
+					2,
+					12
+				]
+			},
+			{
+				"name": "VectorThrowing",
+				"pos": [
+					17,
+					1,
+					12
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					6,
+					1,
+					13
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					17,
+					1,
+					14
+				]
+			},
+			{
+				"name": "catalyst_target",
+				"pos": [
+					19,
+					1,
+					15
+				]
+			},
+			{
+				"name": "proximity_spawner",
+				"pos": [
+					15,
+					1,
+					16
+				]
+			}
+		],
+		"dimensions": [
+			22,
+			6,
+			19
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 236,
+			"ground_pct": 56.4593301435407,
+			"void": 167,
+			"walls": 15
+		},
+		"map_name": "VectorAdvanced",
+		"rooms": [
+			{
+				"artifacts": [],
+				"label": "A",
+				"region": "north, west",
+				"tiles": 59
+			},
+			{
+				"artifacts": [
+					"exercise_1_5_solution_accelerate_and_decelerate_vr",
+					"dark_sphere"
+				],
+				"label": "B",
+				"region": "west",
+				"tiles": 54
+			},
+			{
+				"artifacts": [
+					"VectorFieldFlow",
+					"VectorTorque",
+					"exercise_1_3_solution_3_d_bouncing_ball_vr",
+					"dark_sphere",
+					"example_1_9_motion_101_velocity_and_random_acceleration_vr"
+				],
+				"label": "C",
+				"region": "north, east",
+				"tiles": 52
+			},
+			{
+				"artifacts": [
+					"catalyst_target",
+					"VectorThrowing",
+					"dark_sphere",
+					"catalyst_target",
+					"proximity_spawner"
+				],
+				"label": "D",
+				"region": "south, east",
+				"tiles": 69
+			}
+		],
+		"spawn": [
+			8,
+			1,
+			3
+		],
+		"teleporter": [
+			17,
+			0,
+			17
+		]
+	},
+	"timestamp": "2026-03-16T12:12:50",
+	"walkthrough": {
+		"map_name": "VectorAdvanced",
+		"stops": [
+			{
+				"facing": "southeast",
+				"look_at": [
+					17,
+					0,
+					17
+				],
+				"pos": [
+					8,
+					1,
+					3
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "west",
+						"dist": 6,
+						"name": "VectorTorque"
+					},
+					{
+						"direction": "west",
+						"dist": 6,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "east",
+						"dist": 10,
+						"name": "VectorFieldFlow"
+					},
+					{
+						"direction": "south",
+						"dist": 12,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southwest",
+						"dist": 13,
+						"name": "exercise_1_8_solution_attraction_magnitude_vr"
+					},
+					{
+						"direction": "southwest",
+						"dist": 14,
+						"name": "exercise_1_5_solution_accelerate_and_decelerate_vr"
+					},
+					{
+						"direction": "southeast",
+						"dist": 15,
+						"name": "catalyst_target"
+					},
+					{
+						"direction": "southeast",
+						"dist": 18,
+						"name": "VectorThrowing"
+					},
+					{
+						"direction": "southeast",
+						"dist": 20,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southeast",
+						"dist": 20,
+						"name": "proximity_spawner"
+					},
+					{
+						"direction": "southeast",
+						"dist": 23,
+						"name": "catalyst_target"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					17,
+					0,
+					17
+				],
+				"reachable": false,
+				"steps_from_prev": 0,
+				"total_steps": 0,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 0,
+			"total_steps": 0,
+			"total_stops": 2
+		}
+	}
+}

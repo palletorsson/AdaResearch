@@ -1,3 +1,13 @@
+# @identity
+# essence: height(x,z,t) = perlin(x,z,t) -- 10x10 grid driven by FastNoiseLite, danger rising and falling
+# desire: Perlin noise scrolling beneath feet, a landscape of danger that rises and falls organically
+# critical_parameter: FastNoiseLite parameters -- frequency and octaves determine spatial hazard texture
+# triggers: continuous noise evaluation; tiles rise/fall with noise value; damage scales with local height
+# emerges: natural-looking danger from deterministic noise -- structured unpredictability
+# needs: Area3D [has]; FastNoiseLite [has]; 10x10 tile grid [has]; height-to-damage [has]; VR interaction [missing]
+# relationships: embodies noise sequence; pairs with spatial_voronoi and chromatic_field as field hazards
+# truth: Perlin noise is not random -- it is structured variation, and structure makes the danger feel organic.
+
 extends Area3D
 class_name NoiseField
 ## Noise sequence hazard — a 10x10 grid of tiles driven by FastNoiseLite.

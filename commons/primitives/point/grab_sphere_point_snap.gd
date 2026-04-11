@@ -1,4 +1,15 @@
 extends Node3D
+
+# @identity
+# essence: snap(position) = round(position / grid_size) * grid_size — discretise continuous space
+# desire: learner feels the tension between analog hand movement and digital quantized grid
+# critical_parameter: grid_size — the quantization step that snaps position to nearest lattice point
+# triggers: moving the grabbed sphere — each snap is a click, a discrete decision
+# emerges: the grid as a constraint that makes space countable; infinite positions become finite choices
+# needs: [has Label3D [has], grabbable sphere [has], missing grid_size VR slider]
+# relationships: sibling to draw_dot (continuous vs discrete); foundation for voxel/pixel thinking
+# truth: quantization is a choice about what differences are worth keeping
+
 ## Grab sphere point that snaps to grid and leaves a trail
 
 @export var grab_point_path: NodePath = NodePath("GrabPoint")

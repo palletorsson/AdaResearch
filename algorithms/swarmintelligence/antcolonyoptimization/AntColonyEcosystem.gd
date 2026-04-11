@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Terrain and simulation parameters
 @export var terrain_size: Vector2 = Vector2(50.0, 50.0)
@@ -31,7 +31,7 @@ var pheromone_texture: ImageTexture
 var terrain_material: ShaderMaterial
 
 # Called when the node enters the scene tree for the first time
-func _ready():
+func _ready() -> void:
 	# Initialize noise generator
 	noise = FastNoiseLite.new()
 	noise.seed = terrain_seed
@@ -58,7 +58,7 @@ func _ready():
 	create_debug_visualization()
 
 # Generate procedural terrain
-func generate_terrain():
+func generate_terrain() -> void:
 	# Create a plane mesh with the specified resolution
 	var plane_mesh = PlaneMesh.new()
 	plane_mesh.size = terrain_size
@@ -120,7 +120,7 @@ func generate_terrain_height(x: float, z: float) -> float:
 	return (base_height + detail) * terrain_height_scale
 
 # Initialize the pheromone map
-func initialize_pheromone_map():
+func initialize_pheromone_map() -> void:
 	pheromone_map = []
 	for x in range(terrain_resolution + 1):
 		var row = []
@@ -133,7 +133,7 @@ func initialize_pheromone_map():
 		pheromone_map.append(row)
 
 # Place colony and food sources
-func place_colony_and_food():
+func place_colony_and_food() -> void:
 	# Place colony in a suitable flat area near the center
 	var center_x = 0
 	var center_z = 0
@@ -196,7 +196,7 @@ func get_height_at(x: float, z: float) -> float:
 	return generate_terrain_height(x_norm, z_norm)
 
 # Spawn ants around the colony
-func spawn_ants():
+func spawn_ants() -> void:
 	if ant_scene:
 		for i in range(num_ants):
 			var ant = ant_scene.instantiate()
@@ -215,16 +215,16 @@ func spawn_ants():
 			ant.position = start_pos
 
 # Alias for compatibility with AntAgent
-func add_pheromone(world_pos: Vector3, type: String, amount: float):
+func add_pheromone(world_pos: Vector3, type: String, amount: float) -> void:
 	place_pheromone(world_pos, type, amount)
 
 # Deposit food
 var collected_food_total: float = 0.0
-func deposit_food(amount: float):
+func deposit_food(amount: float) -> void:
 	collected_food_total += amount
 
 # Place pheromone at world position
-func place_pheromone(world_pos: Vector3, type: String, amount: float):
+func place_pheromone(world_pos: Vector3, type: String, amount: float) -> void:
 	var grid_pos = world_to_grid(world_pos)
 	var x = int(grid_pos.x)
 	var y = int(grid_pos.y)
@@ -309,7 +309,7 @@ func take_food_from_source(food_source) -> bool:
 	return false
 
 # Update pheromone texture for shader
-func update_pheromone_texture():
+func update_pheromone_texture() -> void:
 	if not pheromone_image: return
 	
 	for x in range(terrain_resolution + 1):
@@ -322,7 +322,7 @@ func update_pheromone_texture():
 	pheromone_texture.update(pheromone_image)
 
 # Process function called every frame
-func _process(delta):
+func _process(delta: float) -> void:
 	# Update pheromones
 	process_pheromones(delta)
 	
@@ -331,7 +331,7 @@ func _process(delta):
 		update_pheromone_texture()
 
 # Process pheromones (decay and diffusion)
-func process_pheromones(_delta):
+func process_pheromones(_delta) -> void:
 	# Decay pheromones
 	for x in range(terrain_resolution + 1):
 		for z in range(terrain_resolution + 1):
@@ -373,10 +373,19 @@ func process_pheromones(_delta):
 	pheromone_map = diffused_map
 
 # Create visualization for pheromones (Legacy / Backup)
-func create_debug_visualization():
+func create_debug_visualization() -> void:
 	# Keep this basic visualizer function if needed, but the Shader does the job now.
 	pass
 
 # Update pheromone visualization (Legacy / Backup)
-func update_pheromone_visualization():
+func update_pheromone_visualization() -> void:
+	pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
 	pass

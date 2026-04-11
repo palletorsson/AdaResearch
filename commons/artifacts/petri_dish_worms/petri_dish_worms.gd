@@ -9,6 +9,17 @@ extends Node3D
 class_name PetriDishWorms
 
 ## Number of worms in the dish (1–30)
+
+# @identity
+# essence: worm_segment[i].offset = amplitude * sin(oscillation_speed * t + i * phase_per_segment)
+# desire: Watch tiny worms wriggle in a petri dish, their bodies undulating with traveling sine waves
+# critical_parameter: oscillation_speed — controls the frequency of the sinusoidal body wave
+# triggers: time drives phase-offset sine displacement along each worm body segment
+# emerges: lifelike locomotion from pure sine wave propagation through a chain of segments
+# needs: VR sliders for speed/count [has], observation [has]
+# relationships: depends on phase-offset sine animation; contrasts with dna_specimen (motile vs static biology); unlocks biological wave locomotion
+# truth: A worm moves by passing a sine wave through its body — locomotion is traveling oscillation.
+
 @export_range(1, 30) var num_worms: int = 8
 ## Segments per worm body — higher values produce smoother curves (2–50)
 @export_range(2, 50) var worm_length: int = 20
@@ -18,8 +29,8 @@ class_name PetriDishWorms
 @export_range(0.1, 10.0, 0.1) var oscillation_speed: float = 1.5
 ## Lateral oscillation width in meters (0.001–0.1)
 @export_range(0.001, 0.1, 0.001) var oscillation_amplitude: float = 0.02
-## Radius of each worm line in meters (0.001–0.02)
-@export_range(0.001, 0.02, 0.001) var worm_radius: float = 0.003
+## Half-width of each worm ribbon in meters (0.001–0.02)
+@export_range(0.001, 0.02, 0.001) var worm_radius: float = 0.012
 
 ## Radius of the petri dish in meters (0.05–0.5)
 @export_range(0.05, 0.5, 0.01) var dish_radius: float = 0.15
@@ -81,6 +92,8 @@ func _spawn_worms() -> void:
 	var worm_mat = StandardMaterial3D.new()
 	worm_mat.vertex_color_use_as_albedo = true
 	worm_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	worm_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	worm_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 
 	_worms.resize(num_worms)
 	_worm_meshes.resize(num_worms)
@@ -96,9 +109,9 @@ func _spawn_worms() -> void:
 
 		var phase = randf() * TAU
 
-		var hue = randf_range(0.95, 1.05)
-		if hue > 1.0: hue -= 1.0
-		var worm_color = Color.from_hsv(hue, 0.6, 0.9)
+		# Varied worm hues: pinks, oranges, greens for contrast with agar
+		var hue = randf_range(0.0, 0.4)
+		var worm_color = Color.from_hsv(hue, 0.8, 1.0)
 
 		_worms[i] = {
 			"position": start_pos,
@@ -155,7 +168,8 @@ func _update_worm(index: int, delta: float) -> void:
 		var turn = randf_range(-0.3, 0.3)
 		worm.direction = worm.direction.rotated(Vector3.UP, turn)
 
-## Rebuilds a worm's line strip mesh with sine-wave oscillation.
+## Rebuilds a worm's ribbon mesh with sine-wave oscillation.
+## Uses TRIANGLE_STRIP for visible width instead of invisible 1-pixel lines.
 func _draw_worm(index: int) -> void:
 	var worm = _worms[index]
 	var im = _worm_ims[index]
@@ -165,23 +179,30 @@ func _draw_worm(index: int) -> void:
 	if worm_length < 2:
 		return
 
-	im.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+	im.surface_begin(Mesh.PRIMITIVE_TRIANGLE_STRIP)
 
 	var head_pos = worm.position
 	var dir = worm.direction
 	var perpendicular = Vector3(-dir.z, 0, dir.x)
+	var ribbon_up = Vector3.UP  # ribbon width direction
 
 	for j in range(worm_length):
 		var t = float(j) / (worm_length - 1)
-		var segment_pos = head_pos - dir * t * 0.05
+		var segment_pos = head_pos - dir * t * dish_radius * 0.6
 
-		var wave_offset = sin(_time * worm.frequency + worm.phase + t * 8.0) * oscillation_amplitude * (1.0 - t * 0.5)
+		var wave_offset = sin(_time * worm.frequency + worm.phase + t * 6.0) * oscillation_amplitude * 2.0 * (1.0 - t * 0.5)
 		segment_pos += perpendicular * wave_offset
 
 		var alpha = 1.0 - t * 0.7
 		var color = Color(worm.color.r, worm.color.g, worm.color.b, alpha)
+		# Worm tapers: head is full width, tail is thinner
+		var width = worm_radius * (1.0 - t * 0.6)
+		var offset = perpendicular * width
+
 		im.surface_set_color(color)
-		im.surface_add_vertex(segment_pos)
+		im.surface_add_vertex(segment_pos + offset)
+		im.surface_set_color(color)
+		im.surface_add_vertex(segment_pos - offset)
 
 	im.surface_end()
 

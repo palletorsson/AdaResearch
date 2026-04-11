@@ -9,7 +9,7 @@ extends Node3D
 		if value:
 			test_height_variations()
 
-func test_height_variations():
+func test_height_variations() -> void:
 	print("🧪 TESTING PLANE HEIGHT VARIATIONS")
 	#print("=" * 50)
 	
@@ -73,6 +73,9 @@ func simulate_terrain_generation(plane_offset: float) -> int:
 	
 	return triangle_count
 
-func _ready():
+func _ready() -> void:
 	print("🎛️ Plane Height Tester Ready")
 	print("Click 'test_different_heights' in inspector to run tests") 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

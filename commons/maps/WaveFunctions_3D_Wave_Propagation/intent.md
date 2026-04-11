@@ -3,3 +3,5 @@ Sequence role: Fifth map in Wavefunctions; the first intermediate-difficulty map
 Technical angle: wave(x,t) = A·sin(ωt - k·dist(x, source)) for propagation, attenuation as energy ∝ 1/(1+dist²), interference as wave summation (constructive at matching phase, destructive at opposing phase). The wave_propagation_3d artifact demonstrates all three; kusama_sine creates a polka-dot field of wave-displaced surfaces.
 Critical angle: Propagation transforms oscillation from a local phenomenon to a spatial one. A wave is not an object — it is a pattern of disturbance passing through a medium. The medium itself doesn't move far; the pattern moves. This distinction (matter vs pattern) is one of the deepest in physics. The critical angle on identity — "to exist in a medium is to be distorted by it" — connects to the QFEP environment term: the system is shaped by the field it inhabits.
 Key artifacts: wave_propagation_3d demonstrates distance-based phase, attenuation, and interference; kusama_sine creates a wave-displaced dot field; dark_sphere sits in the propagation field as the distorted body.
+
+Gap: No gap identified.

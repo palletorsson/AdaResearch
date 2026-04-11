@@ -130,8 +130,11 @@ func _attempt_solve() -> Array:
 	# Track collapse history for backtracking
 	var history: Array = []
 	var cells_remaining := grid_size * grid_size
+	var max_iterations := grid_size * grid_size * 20  # Safety cap
+	var iteration := 0
 
-	while cells_remaining > 0:
+	while cells_remaining > 0 and iteration < max_iterations:
+		iteration += 1
 		# Find cell with lowest entropy (fewest possibilities) among uncollapsed
 		var min_entropy := 999
 		var candidates: Array = []
@@ -195,6 +198,8 @@ func _attempt_solve() -> Array:
 				return []
 			cells_remaining = _count_remaining(collapsed)
 
+	if iteration >= max_iterations:
+		return []  # Exceeded iteration budget — signal failure
 	return collapsed
 
 

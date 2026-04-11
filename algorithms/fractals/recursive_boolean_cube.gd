@@ -13,6 +13,16 @@ extends Node3D
 ## Creates holes recursively in a cube structure
 ## Each iteration subdivides and removes center sections
 
+# @identity
+# essence: menger(center, size, d) = {subcube(i) for i in 27 if zeros(i) < 2}, recursive cross-removal
+# desire: To be peered through — the holes align on every axis, and through them you see deeper holes, endlessly
+# critical_parameter: max_iterations — at 1 it's a cube with a cross cut; at 3 it's a sponge you can barely distinguish from void
+# triggers: Each iteration subdivides every surviving cube into 27, removes 7 cross-members; the structure becomes more hole than solid
+# emerges: Light passing through aligned holes at every scale — the cube becomes a filter, not a solid
+# needs: VR walk-through collision [missing], iteration slider [missing]
+# relationships: Direct implementation of the Menger sponge rule; precedes the walkable menger_sponge artifact
+# truth: The Menger sponge has infinite surface area and zero volume — it is the solid that erased itself.
+
 @export var max_iterations: int = 3
 @export var cube_size: float = 2.0
 @export var show_frame: bool = true
@@ -137,3 +147,12 @@ func _create_cube(center: Vector3, size: float, iteration: int) -> void:
 
 	_sim_root.add_child(mesh_instance)
 	_mesh_instances.append(mesh_instance)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

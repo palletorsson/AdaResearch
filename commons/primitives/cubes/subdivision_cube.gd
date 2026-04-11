@@ -4,6 +4,16 @@ extends XRToolsPickable
 ## When touched or picked up, the cube halves in size and creates two copies
 ## Stops after max_divisions
 
+# @identity
+# essence: touch(cube) → cube.scale *= 0.5; spawn(cube_left, cube_right); queue_free(self)
+# desire: To be touched and shattered — each touch halves the cube and doubles the population, mitosis in geometry
+# critical_parameter: max_divisions — the generation limit; at 3 you get 8 tiny cubes from one, each a different hue
+# triggers: VR hand touch or grab → immediate division with impulse; color hue-shifts per generation
+# emerges: Cubes flying apart with physics impulse and torque — a controlled explosion that looks like cell division
+# needs: VR touch [has], grab [has], physics impulse [has]
+# relationships: The only interactive fractal primitive — used in Fractal_RecursiveTrees as tactile recursion lesson
+# truth: Division is not destruction — it is multiplication, and every touch proves that one contains many.
+
 @export var max_divisions: int = 3
 @export var division_color_shift: float = 0.15
 @export var divide_on_touch: bool = true  # Enable touch-to-divide

@@ -6,10 +6,10 @@ extends Node
 var base_materials: Array[StandardMaterial3D] = []
 var current_material_index: int = 0
 
-func _ready():
+func _ready() -> void:
 	create_material_library()
 
-func create_material_library():
+func create_material_library() -> void:
 	"""Create a library of organic materials"""
 	# Metallic surface material
 	var metallic = StandardMaterial3D.new()

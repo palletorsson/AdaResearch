@@ -1,5 +1,16 @@
 # pulsar_visualizer.gd - Combined Pulsar Visualization
 # Shows binary table + glass tubes + educational info
+
+# @identity
+# essence: real pulsar radio signal data (B1919+21) → binary threshold at 0.25 → 2D array of 0s and 1s displayed as both a grid of numbers and a 3D glass bar chart — the same dataset rendered twice in two representational languages
+# desire: to discover that Jocelyn Bell Burnell's pulsar discovery was a 2D array printed on a chart — to stand beside a radio signal visualized as glass tubes and understand that cosmic events are just arrays of numbers measured over time
+# critical_parameter: the threshold (0.25 in PulsarData.get_binary_pulsar_sample) — above this value the signal is 1, below it is 0; changing it would alter what counts as a "pulse" and reveals that binary representation requires a decision about where to draw the line
+# triggers: the glass tubes in pulsar_glass_tubes render signal amplitude as height — a tall tube means strong radio signal at that moment; the binary table beside it shows the same data after thresholding, making information loss from digitization visible
+# emerges: students realize that the same phenomenon (pulsing neutron star) looks completely different in analogue (tube heights) vs digital (binary table) representation — and that arrays are always a choice about which values to keep
+# needs: BinaryTableDisplay [has]; PulsarGlassTubes [has]; info panel with Label3D [has]; no VR interactive controls [missing]; apply_grid_config supports table_rows/cols/show_info [has]
+# relationships: uses PulsarData static class for signal generation; pairs with pulsar_compact (glass tubes only, compact form); appears in Tutorial_2D_Build alongside grid_2d_4x4 to show arrays as measurement
+# truth: the first discovered pulsar was initially called LGM-1 (Little Green Men) because the signal's regularity seemed artificial — arrays make the cosmic seem engineered, and engineered arrays can make data seem natural
+
 extends Node3D
 class_name PulsarVisualizer
 
@@ -144,3 +155,9 @@ func apply_grid_config(config: Dictionary) -> void:
 	for child in get_children():
 		child.queue_free()
 	call_deferred("_create_visualization")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+

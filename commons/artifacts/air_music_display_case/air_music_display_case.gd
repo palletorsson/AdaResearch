@@ -1,23 +1,46 @@
 extends Node3D
+class_name AirMusicDisplayCase
 ## Air Music Display Case
 ## A 0.5m glass display case with dark wood frame containing the Air Music system.
 ## Inspired by Ferm Living Miru - minimalist Scandinavian design.
 
-@export var case_scale: float = 0.5  # Overall case size (0.5m cube)
-@export var frame_color: Color = Color(0.25, 0.15, 0.08, 1.0)  # Dark walnut brown
-@export var frame_thickness: float = 0.02  # Thicker for wood appearance
-@export var base_height: float = 0.04  # Wood platform base
-@export var audio_volume_db: float = -12.0  # Quieter than default
-@export var inner_scale: float = 0.35  # Scale of content inside (half of case)
+## Overall case size in meters (0.5m cube default)
+
+# @identity
+# essence: display_case(air_music_instance, sliders[]) — framed exhibition of generative audio
+# desire: Examine a generative air music system like a museum specimen with parameter controls
+# critical_parameter: audio_volume_db — balances the sonic presence against the visual display
+# triggers: slider adjustments modify the contained air music system parameters
+# emerges: the museum-as-instrument — display cases that you play rather than observe
+# needs: VR sliders [has], air music system [has]
+# relationships: depends on air music generation; contrasts with SoundscapeRadioRack (curated display vs radio tuning); unlocks contemplative audio interaction
+# truth: Framing sound as specimen transforms listening from passive reception to active examination.
+
+@export_range(0.1, 2.0, 0.05) var case_scale: float = 0.5
+## Dark walnut brown frame color
+@export var frame_color: Color = Color(0.25, 0.15, 0.08, 1.0)
+## Frame edge thickness in meters
+@export_range(0.005, 0.1, 0.005) var frame_thickness: float = 0.02
+## Height of the wooden platform base
+@export_range(0.01, 0.2, 0.01) var base_height: float = 0.04
+## Audio volume in decibels (negative = quieter)
+@export_range(-40.0, 0.0, 0.5) var audio_volume_db: float = -12.0
+## Scale of content inside the case relative to case size
+@export_range(0.1, 1.0, 0.05) var inner_scale: float = 0.35
+
+var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
 
 var air_music_instance: Node3D
+var _volume_slider: Node3D
 
 func _ready():
 	_setup_frame()
 	_setup_base()
 	_setup_air_music()
 	_adjust_audio()
+	_setup_controls()
 
+## Scales the frame and applies wood color/thickness to all 12 cube lines.
 func _setup_frame():
 	# Scale the frame down
 	var frame = $Frame
@@ -40,6 +63,7 @@ func _setup_frame():
 		if cube_label:
 			cube_label.visible = false
 
+## Waits one frame then removes the auto-generated length label from a line node.
 func _remove_label_deferred(line_node: Node) -> void:
 	# Wait a frame so the line's _ready() has created the label
 	await get_tree().process_frame
@@ -47,6 +71,7 @@ func _remove_label_deferred(line_node: Node) -> void:
 	if label:
 		label.queue_free()
 
+## Creates and styles the wooden base platform beneath the display case.
 func _setup_base():
 	# Create wooden base platform
 	var base = $Base
@@ -64,6 +89,7 @@ func _setup_base():
 		mat.metallic = 0.0
 		base.material_override = mat
 
+## Scales, positions, and cleans up the embedded air music system.
 func _setup_air_music():
 	# Scale and position the air music system inside the case
 	air_music_instance = $AirMusicContent
@@ -82,11 +108,14 @@ func _setup_air_music():
 		if cam:
 			cam.queue_free()
 
+## Reduces audio volume and slows the intensity cycle for ambient effect.
 func _adjust_audio():
 	# Tone down the audio volume
 	if air_music_instance:
 		var synth = air_music_instance.get_node_or_null("FMPianoSynth")
-		if synth and synth is AudioStreamPlayer:
+		if synth and synth is AudioStreamPlayer3D:
+			synth.volume_db = audio_volume_db
+		elif synth and synth is AudioStreamPlayer:
 			synth.volume_db = audio_volume_db
 		
 		# Also reduce intensity for subtler ambient effect
@@ -94,3 +123,23 @@ func _adjust_audio():
 		if intensity and intensity.has_method("set"):
 			# Make the intensity cycle longer for more ambient feel
 			intensity.set("period", 90.0)
+
+## Adds a VR volume slider below the display case.
+func _setup_controls():
+	_volume_slider = SliderScene.instantiate()
+	_volume_slider.position = Vector3(0, (-0.5 * case_scale) - base_height - 0.05, 0.3)
+	_volume_slider.set_param_name("Volume")
+	_volume_slider.set_normalized_value(remap(audio_volume_db, -40.0, 0.0, 0.0, 1.0))
+	_volume_slider.slider_moved.connect(_on_volume_changed)
+	add_child(_volume_slider)
+
+func _on_volume_changed():
+	var val = _volume_slider.get_normalized_value()
+	audio_volume_db = remap(val, 0.0, 1.0, -40.0, 0.0)
+	if air_music_instance:
+		var synth = air_music_instance.get_node_or_null("FMPianoSynth")
+		if synth and (synth is AudioStreamPlayer3D or synth is AudioStreamPlayer):
+			synth.volume_db = audio_volume_db
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	pass

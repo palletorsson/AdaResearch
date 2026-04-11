@@ -1,0 +1,286 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": -1,
+				"name": "capsule",
+				"pos": [
+					5,
+					1,
+					2
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "combine_portals",
+				"pos": [
+					3,
+					1,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "achilles_tortoise",
+				"pos": [
+					5,
+					1,
+					5
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": -1,
+				"name": "dark_sphere",
+				"pos": [
+					3,
+					1,
+					18
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [
+			[
+				1,
+				0,
+				5
+			],
+			[
+				1,
+				0,
+				7
+			],
+			[
+				2,
+				0,
+				10
+			],
+			[
+				2,
+				0,
+				12
+			],
+			[
+				4,
+				0,
+				0
+			],
+			[
+				4,
+				0,
+				10
+			],
+			[
+				4,
+				0,
+				12
+			]
+		],
+		"issues": [
+			{
+				"description": "7 dead ends found",
+				"severity": "low",
+				"type": "high_dead_ends"
+			},
+			{
+				"description": "capsule at (5,1,2) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "combine_portals at (3,1,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "achilles_tortoise at (5,1,5) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			},
+			{
+				"description": "dark_sphere at (3,1,18) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Primitives_Portals",
+		"pacing": {
+			"density": 0.0,
+			"reachable_artifacts": 0,
+			"total_artifacts": 4,
+			"walkable_tiles": 51
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			5,
+			1,
+			34
+		],
+		"teleporter": {
+			"dist": 2,
+			"pos": [
+				4,
+				0,
+				33
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Primitives_Portals",
+	"sequence": "primitives",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "capsule",
+				"pos": [
+					5,
+					1,
+					2
+				]
+			},
+			{
+				"name": "combine_portals",
+				"pos": [
+					3,
+					1,
+					4
+				]
+			},
+			{
+				"name": "achilles_tortoise",
+				"pos": [
+					5,
+					1,
+					5
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					3,
+					1,
+					18
+				]
+			}
+		],
+		"dimensions": [
+			7,
+			2,
+			35
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 51,
+			"ground_pct": 20.8163265306122,
+			"void": 194,
+			"walls": 0
+		},
+		"map_name": "Primitives_Portals",
+		"rooms": [
+			{
+				"artifacts": [
+					"combine_portals",
+					"achilles_tortoise"
+				],
+				"label": "A",
+				"region": "north, west",
+				"tiles": 32
+			},
+			{
+				"artifacts": [],
+				"label": "B",
+				"region": "north, west",
+				"tiles": 3
+			},
+			{
+				"artifacts": [],
+				"label": "C",
+				"region": "south",
+				"tiles": 10
+			},
+			{
+				"artifacts": [],
+				"label": "D",
+				"region": "north",
+				"tiles": 3
+			}
+		],
+		"spawn": [
+			5,
+			1,
+			34
+		],
+		"teleporter": [
+			4,
+			0,
+			33
+		]
+	},
+	"timestamp": "2026-03-16T12:12:25",
+	"walkthrough": {
+		"map_name": "Primitives_Portals",
+		"stops": [
+			{
+				"facing": "northwest",
+				"look_at": [
+					4,
+					0,
+					33
+				],
+				"pos": [
+					5,
+					1,
+					34
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "north",
+						"dist": 18,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "north",
+						"dist": 29,
+						"name": "achilles_tortoise"
+					},
+					{
+						"direction": "north",
+						"dist": 32,
+						"name": "capsule"
+					},
+					{
+						"direction": "north",
+						"dist": 32,
+						"name": "combine_portals"
+					}
+				]
+			},
+			{
+				"approach_from": "northwest",
+				"pos": [
+					4,
+					0,
+					33
+				],
+				"reachable": true,
+				"steps_from_prev": 2,
+				"total_steps": 2,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 0,
+			"total_steps": 2,
+			"total_stops": 2
+		}
+	}
+}

@@ -1,9 +1,19 @@
 extends Node3D
 
 ## Golden Rectangle Subdivider
-## Recursively subdivides a rectangle using the golden ratio (φ ≈ 1.618)
+## Recursively subdivides a rectangle using the golden ratio (phi ~ 1.618)
 ## Each subdivision creates a square and a smaller golden rectangle
 ## Visualizes the classic Fibonacci spiral construction
+
+# @identity
+# essence: golden_rect → square(min_side) + golden_rect(remainder), spiral arc per square. phi = (1+sqrt(5))/2.
+# desire: To spiral inward forever — each subdivision peels off a square and the remainder is always another golden rectangle
+# critical_parameter: max_subdivisions — each step cuts a square and rotates direction (right→up→left→down); the spiral tightens with each
+# triggers: subdivision_delay tick → peel square → create remainder → draw quarter-circle arc → Fibonacci numbers label each square
+# emerges: The golden spiral from quarter-circle arcs in successive squares — no spiral was drawn, only arcs in boxes, yet the spiral appears
+# needs: VR subdivision control [missing], spiral toggle [has], number toggle [has]
+# relationships: The geometric proof that phi = 1 + 1/phi; feeds visual understanding into fibonacci_sequences and fibonacci_terrain
+# truth: The golden rectangle is the only rectangle that can lose a square and remain itself — self-similarity without fractals.
 
 @export_group("Rectangle")
 @export var initial_width := 5.0
@@ -43,7 +53,7 @@ var labels_parent: Node3D
 signal subdivision_complete(level: int, fib_number: int)
 signal all_subdivisions_complete()
 
-func _ready():
+func _ready() -> void:
 	_setup_containers()
 	_initialize_rectangle()
 
@@ -52,7 +62,7 @@ func _ready():
 	else:
 		_generate_all_subdivisions()
 
-func _setup_containers():
+func _setup_containers() -> void:
 	rectangles_parent = Node3D.new()
 	rectangles_parent.name = "Rectangles"
 	add_child(rectangles_parent)
@@ -61,7 +71,7 @@ func _setup_containers():
 	labels_parent.name = "Labels"
 	add_child(labels_parent)
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if is_animating:
 		subdivision_timer += delta
 		if subdivision_timer >= subdivision_delay:
@@ -74,7 +84,7 @@ func _process(delta: float):
 		spiral_progress = min(spiral_progress, 1.0)
 		_update_spiral()
 
-func _initialize_rectangle():
+func _initialize_rectangle() -> void:
 	"""Create the initial golden rectangle"""
 	rectangles.clear()
 
@@ -98,7 +108,7 @@ func _initialize_rectangle():
 
 	print("GoldenRectangle: Initialized %.2f x %.2f (ratio: %.4f)" % [initial_width, height, initial_width / height])
 
-func _perform_subdivision():
+func _perform_subdivision() -> void:
 	"""Subdivide the current golden rectangle"""
 	if current_subdivision >= max_subdivisions:
 		is_animating = false
@@ -223,7 +233,7 @@ func _perform_subdivision():
 
 	print("GoldenRectangle: Subdivision %d - Square %.2f, Fib: %d" % [current_subdivision, square_size, fib_num])
 
-func _create_rectangle_visual(rect: Dictionary, is_golden: bool):
+func _create_rectangle_visual(rect: Dictionary, is_golden: bool) -> void:
 	"""Create 3D visual for a rectangle"""
 	var mesh_instance = MeshInstance3D.new()
 
@@ -265,7 +275,7 @@ func _create_rectangle_visual(rect: Dictionary, is_golden: bool):
 	if show_numbers and rect.get("is_square", false):
 		_add_number_label(rect, height_offset)
 
-func _add_rectangle_outline(rect: Dictionary, height: float):
+func _add_rectangle_outline(rect: Dictionary, height: float) -> void:
 	"""Add outline edges to rectangle"""
 	var line_mesh = ImmediateMesh.new()
 	var mesh_instance = MeshInstance3D.new()
@@ -296,7 +306,7 @@ func _add_rectangle_outline(rect: Dictionary, height: float):
 
 	rectangles_parent.add_child(mesh_instance)
 
-func _add_number_label(rect: Dictionary, height: float):
+func _add_number_label(rect: Dictionary, height: float) -> void:
 	"""Add Fibonacci number label to square"""
 	var fib_index = rect.fib_index
 	if fib_index >= fibonacci.size():
@@ -320,7 +330,7 @@ func _add_number_label(rect: Dictionary, height: float):
 
 	labels_parent.add_child(label)
 
-func _update_spiral():
+func _update_spiral() -> void:
 	"""Update the golden spiral visualization"""
 	if spiral_mesh:
 		spiral_mesh.queue_free()
@@ -395,7 +405,7 @@ func _update_spiral():
 
 	add_child(spiral_mesh)
 
-func _generate_all_subdivisions():
+func _generate_all_subdivisions() -> void:
 	"""Generate all subdivisions immediately (no animation)"""
 	for i in range(max_subdivisions):
 		_perform_subdivision()
@@ -403,7 +413,7 @@ func _generate_all_subdivisions():
 	_update_spiral()
 
 # Public API
-func regenerate():
+func regenerate() -> void:
 	"""Clear and regenerate"""
 	# Clear visuals
 	for child in rectangles_parent.get_children():
@@ -426,12 +436,12 @@ func regenerate():
 	else:
 		_generate_all_subdivisions()
 
-func set_subdivisions(count: int):
+func set_subdivisions(count: int) -> void:
 	"""Set to specific subdivision count"""
 	max_subdivisions = count
 	regenerate()
 
-func toggle_spiral():
+func toggle_spiral() -> void:
 	"""Toggle spiral visibility"""
 	show_spiral = not show_spiral
 	if show_spiral:
@@ -440,7 +450,7 @@ func toggle_spiral():
 		spiral_mesh.queue_free()
 		spiral_mesh = null
 
-func toggle_numbers():
+func toggle_numbers() -> void:
 	"""Toggle number visibility"""
 	show_numbers = not show_numbers
 	regenerate()
@@ -471,7 +481,7 @@ func configure(data: Dictionary) -> void:
 	regenerate()
 
 # Presets
-func apply_preset(preset_name: String):
+func apply_preset(preset_name: String) -> void:
 	"""Apply visualization preset"""
 	match preset_name:
 		"classic":
@@ -505,3 +515,12 @@ func apply_preset(preset_name: String):
 			spiral_draw_speed = 5.0
 
 	regenerate()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

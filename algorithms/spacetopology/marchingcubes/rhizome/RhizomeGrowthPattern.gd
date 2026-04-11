@@ -25,7 +25,7 @@ class GrowthNode:
 	var children: Array[GrowthNode] = []
 	var is_chamber: bool = false
 	
-	func _init(pos: Vector3, rad: float = 2.0, d: int = 0):
+	func _init(pos: Vector3, rad: float = 2.0, d: int = 0) -> void:
 		position = pos
 		radius = rad
 		depth = d
@@ -41,7 +41,7 @@ var chamber_nodes: Array[GrowthNode] = []
 # Random number generator for consistent patterns
 var rng: RandomNumberGenerator
 
-func _init(seed_value: int = -1):
+func _init(seed_value: int = -1) -> void:
 	rng = RandomNumberGenerator.new()
 	if seed_value >= 0:
 		rng.seed = seed_value
@@ -57,7 +57,7 @@ func add_growth_node(position: Vector3, radius: float = 2.0) -> GrowthNode:
 	print("RhizomeGrowth: Added growth node at %v with radius %.2f" % [position, radius])
 	return node
 
-func set_growth_rules(rules: Dictionary):
+func set_growth_rules(rules: Dictionary) -> void:
 	"""Configure growth behavior with parameter dictionary"""
 	if rules.has("branch_probability"):
 		branch_probability = rules.branch_probability
@@ -95,7 +95,7 @@ func generate_rhizome_network(iterations: int = 50) -> Dictionary:
 		"connections": get_all_connections()
 	}
 
-func grow_iteration():
+func grow_iteration() -> void:
 	"""Perform one iteration of rhizomatic growth"""
 	var new_nodes: Array[GrowthNode] = []
 	
@@ -175,13 +175,13 @@ func find_merge_candidate(position: Vector3) -> GrowthNode:
 			return node
 	return null
 
-func create_connection(node1: GrowthNode, node2: GrowthNode):
+func create_connection(node1: GrowthNode, node2: GrowthNode) -> void:
 	"""Create a connection between two nodes"""
 	if node1 != node2 and not node1.children.has(node2):
 		node1.children.append(node2)
 		print("RhizomeGrowth: Connected nodes at %v and %v" % [node1.position, node2.position])
 
-func create_chambers():
+func create_chambers() -> void:
 	"""Create chamber nodes at intersection points"""
 	for node in growth_nodes:
 		if node.children.size() >= 2 and not node.is_chamber:
@@ -191,7 +191,7 @@ func create_chambers():
 				chamber_nodes.append(node)
 				print("RhizomeGrowth: Created chamber at %v with radius %.2f" % [node.position, node.radius])
 
-func prune_inactive_nodes():
+func prune_inactive_nodes() -> void:
 	"""Remove nodes with low energy from active list"""
 	var still_active: Array[GrowthNode] = []
 	for node in active_nodes:

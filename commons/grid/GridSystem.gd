@@ -14,6 +14,8 @@ const SpawnComponentScript = preload("res://commons/grid/GridSpawnComponent.gd")
 const CeilingComponentScript = preload("res://commons/grid/GridCeilingComponent.gd")
 const WallComponentScript = preload("res://commons/grid/GridWallComponent.gd")
 const AudioComponentScript = preload("res://commons/grid/GridAudioComponent.gd")
+const TimelineComponentScript = preload("res://commons/grid/GridTimelineComponent.gd")
+const FloorPlanLoader = preload("res://commons/grid/FloorPlanLoader.gd")
 
 # Configuration
 @export var cube_size: float = 1.0
@@ -34,6 +36,7 @@ var spawn_component
 var ceiling_component
 var wall_component
 var audio_component
+var timeline_component
 
 # Scene references
 @onready var base_cube = $CubeScene
@@ -41,6 +44,7 @@ var audio_component
 # State
 var is_initialized: bool = false
 var generation_in_progress: bool = false
+var _ecosystem_spawner: Node3D = null
 
 # Signals
 signal map_loaded(map_name: String, format: String)
@@ -167,6 +171,10 @@ func _initialize_components():
 	audio_component.name = "GridAudioComponent"
 	add_child(audio_component)
 
+	timeline_component = TimelineComponentScript.new()
+	timeline_component.name = "GridTimelineComponent"
+	add_child(timeline_component)
+
 	# Connect component signals
 	_connect_component_signals()
 
@@ -225,21 +233,29 @@ func _load_map_data():
 		push_error("GridSystem: Failed to load map data for '%s'" % map_name)
 
 # Check if a name is a sequence name
+## Cached sequence names — auto-discovered from res://commons/maps/sequences/*.json
+var _known_sequences_cache: Array = []
+
 func _is_sequence_name(name: String) -> bool:
-	var known_sequences = [
-		"primitives", "transformation", "tests", "color", "array_tutorial",
-		"meshestextures", "randomness", "wavefunctions", "vectors", 
-		"fractals", "cellularautomata", "joints", "noise", "forces",
-		"proceduralaudio", "physicssimulation", "softbodies",
-		"recursiveemergence", "lsystems", "swarmintelligence",
-		"patterngeneration", "proceduralgeneration", "searchpathfinding",
-		"topology", "graphtheory", "computationalgeometry",
-		"machinelearning", "criticalalgorithms", "speculativecomputation",
-		"resourcemanagement", "advancedlaboratory", "qfeplaboratory", "testmaps",
-		"grammar_systems", "spatial_partitioning", "constraint_solvers", 
-		"isosurfaces", "higher_dimensions", "morphogenesis"
-	]
-	return name in known_sequences
+	if _known_sequences_cache.is_empty():
+		_known_sequences_cache = _discover_sequence_names()
+	return name in _known_sequences_cache
+
+## Scan the sequences directory for all .json files and extract their names.
+## Runs once, cached for the session.
+static func _discover_sequence_names() -> Array:
+	var names: Array = []
+	var dir := DirAccess.open("res://commons/maps/sequences")
+	if not dir:
+		push_warning("GridSystem: Could not open sequences directory for autodiscovery")
+		return names
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+	while file_name != "":
+		if file_name.ends_with(".json") and file_name != "sequence_index.json" and file_name != "templates.json":
+			names.append(file_name.get_basename())
+		file_name = dir.get_next()
+	return names
 
 # Find AdaSceneManager in the scene tree
 func _find_ada_scene_manager():
@@ -301,6 +317,7 @@ func _on_data_loaded(loaded_map_name: String, format: String):
 	ceiling_component.initialize(self, data_component, component_settings)
 	wall_component.initialize(self, data_component, component_settings)
 	audio_component.initialize(self, data_component)
+	timeline_component.initialize(self, data_component, structure_component, component_settings)
 
 	# Set sequence ID if available from scene data
 	var current_sequence = get_meta("current_sequence", {})
@@ -498,15 +515,40 @@ func _handle_wall_generation():
 		print("GridSystem: Generating walls...")
 		wall_component.generate_walls(wall_config)
 	else:
-		# Skip walls, go directly to spawn
+		# No walls config — still try floor plan overlay
+		_try_load_floor_plan()
+		# Go directly to spawn
 		call_deferred("_handle_player_spawn")
 
 # Handle wall generation completion
 func _on_wall_complete(wall_count: int):
 	print("GridSystem: Wall generation complete (%d walls)" % wall_count)
-
-	# Now handle player spawn positioning
+	_try_load_floor_plan()
 	call_deferred("_handle_player_spawn")
+
+## Try to load and apply a floor_plan.json from the current map directory.
+## DISABLED: use floor_plan_space artifact in interactables instead.
+var _floor_plan_loaded: bool = false
+func _try_load_floor_plan() -> void:
+	return  # Disabled — floor_plan_space artifact handles this
+	if _floor_plan_loaded:
+		return
+	if not data_component:
+		return
+	var current_map: String = data_component.get_current_map_name()
+	if current_map == "":
+		return
+	var map_dir: String = "res://commons/maps/" + current_map
+	print("GridSystem: Checking for floor plan at %s" % map_dir)
+	var loader := FloorPlanLoader.new()
+	loader.name = "FloorPlanLoader"
+	add_child(loader)
+	if loader.load_floor_plan(map_dir):
+		loader.apply_floor_plan(self, cube_size)
+		_floor_plan_loaded = true
+		print("GridSystem: Floor plan applied")
+	else:
+		print("GridSystem: No floor plan found")
 
 # Handle player spawn positioning
 func _handle_player_spawn():
@@ -517,17 +559,165 @@ func _handle_player_spawn():
 func _on_spawn_complete(spawn_position: Vector3):
 	print("GridSystem: Spawn positioning complete at %s" % spawn_position)
 
+	# Spawn ecosystem organisms if configured (after terrain is built)
+	call_deferred("_handle_ecosystem_spawn")
+
 	# Start ambient audio after everything is set up
 	call_deferred("_handle_audio_start")
+
+	# Generate biome ring around grid (natural landscape surrounding the map)
+	call_deferred("_handle_biome_ring")
+
+	# Notify NatureRenderer of per-map environment overrides
+	call_deferred("_notify_nature_renderer")
 
 	generation_in_progress = false
 	print("GridSystem: ✅ Grid generation completed successfully")
 	emit_signal("map_generation_complete")
 
+# Handle ecosystem spawner creation from map settings
+func _handle_ecosystem_spawn():
+	var settings = data_component.get_settings()
+	var eco_config = settings.get("ecosystem", {})
+
+	if not eco_config.get("enabled", false):
+		return
+
+	# Clean up previous spawner if reloading
+	if _ecosystem_spawner and is_instance_valid(_ecosystem_spawner):
+		_ecosystem_spawner.queue_free()
+		_ecosystem_spawner = null
+
+	var spawner = EcosystemNatureSpawner.new()
+	spawner.name = "EcosystemNatureSpawner"
+
+	# Forward config from map_data.json → spawner exports
+	spawner.spawn_radius = eco_config.get("spawn_radius", 9.0)
+	spawner.max_population = eco_config.get("max_population", 50)
+	spawner.rng_seed = eco_config.get("rng_seed", -1)
+
+	# Center offset from config (array [x, y, z] → Vector3)
+	var offset = eco_config.get("center_offset", [0.0, 0.0, 0.0])
+	if offset is Array and offset.size() >= 3:
+		spawner.center_offset = Vector3(offset[0], offset[1], offset[2])
+
+	# Always use the chunk-based LOD system
+	spawner.use_chunk_system = eco_config.get("use_chunk_system", true)
+
+	# Test overrides — bypass progression-gated EcosystemManager values
+	spawner.override_density = eco_config.get("override_density", -1.0)
+	var kingdoms_override = eco_config.get("override_kingdoms", [])
+	if kingdoms_override is Array:
+		var typed_kingdoms: Array[String] = []
+		for k in kingdoms_override:
+			typed_kingdoms.append(str(k))
+		spawner.override_kingdoms = typed_kingdoms
+
+	add_child(spawner)
+	_ecosystem_spawner = spawner
+	print("GridSystem: Ecosystem spawner created (radius=%.1f, pop=%d, chunks=%s)" % [
+		spawner.spawn_radius, spawner.max_population, spawner.use_chunk_system
+	])
+
 # Handle audio start
 func _handle_audio_start():
 	print("GridSystem: Starting ambient audio...")
 	audio_component.start_ambient()
+
+
+# ═══════════════════════════════════════════════════════════════
+# BIO SYSTEMS — Biome ring + NatureRenderer wiring
+# ═══════════════════════════════════════════════════════════════
+
+## Generate a biome ring around the grid if vegetation density > 0.
+func _handle_biome_ring():
+	var eco = get_node_or_null("/root/EcosystemManager")
+	if not eco:
+		print("GridSystem: No EcosystemManager — no biome ring")
+		return
+	if not eco.has_method("get_vegetation_density"):
+		print("GridSystem: EcosystemManager missing get_vegetation_density")
+		return
+
+	# Auto-advance ecosystem to the current map's sequence so biome matches context
+	_sync_ecosystem_to_current_map(eco)
+
+	var density: float = eco.get_vegetation_density()
+	print("GridSystem: Biome check — map='%s' density=%.2f" % [map_name, density])
+	if density < 0.05:
+		print("GridSystem: Density too low (%.2f < 0.05) — no biome ring" % density)
+		return  # No ring for barren maps
+
+	# Remove old ring if reloading
+	var old_ring = get_node_or_null("BiomeRing")
+	if old_ring:
+		old_ring.queue_free()
+
+	var ring := BiomeRingComponent.new()
+	ring.name = "BiomeRing"
+	add_child(ring)
+	ring.generate(
+		data_component.get_grid_dimensions(),
+		cube_size,
+		eco.get_terrain_mode() if eco.has_method("get_terrain_mode") else "flat",
+		eco.get_allowed_kingdoms() if eco.has_method("get_allowed_kingdoms") else [],
+		density
+	)
+	print("GridSystem: 🌿 Biome ring generated (density=%.2f)" % density)
+
+
+## Advance EcosystemManager to the sequence that owns the current map.
+## This ensures biome density/kingdoms match the map's position in the curriculum.
+func _sync_ecosystem_to_current_map(eco) -> void:
+	if not eco.has_method("force_advance_to"):
+		return
+	# Scan sequence files to find which sequence owns this map
+	var seq_dir := DirAccess.open("res://commons/maps/sequences/")
+	if not seq_dir:
+		return
+	seq_dir.list_dir_begin()
+	var fname := seq_dir.get_next()
+	while fname != "":
+		if fname.ends_with(".json"):
+			var sf := FileAccess.open("res://commons/maps/sequences/" + fname, FileAccess.READ)
+			if sf:
+				var sj := JSON.new()
+				if sj.parse(sf.get_as_text()) == OK and sj.data is Dictionary:
+					var seqs_raw = sj.data.get("sequences", {})
+					if seqs_raw is Dictionary:
+						for seq_name in seqs_raw:
+							var seq_data = seqs_raw[seq_name]
+							if not seq_data is Dictionary:
+								continue
+							var maps: Array = seq_data.get("maps", [])
+							for m in maps:
+								var mn: String = str(m.get("name", m)) if m is Dictionary else str(m)
+								if mn == map_name:
+									eco.force_advance_to(str(seq_name))
+									print("GridSystem: Ecosystem synced to '%s' for map '%s'" % [seq_name, map_name])
+									sf.close()
+									return
+				sf.close()
+		fname = seq_dir.get_next()
+
+
+## Notify NatureRenderer of per-map environment overrides + trigger living ground.
+func _notify_nature_renderer():
+	var nr = get_node_or_null("/root/NatureRenderer")
+	if not nr:
+		return
+
+	# Load per-map overrides from map_data.json "environment" block
+	if nr.has_method("load_map_overrides"):
+		var overrides: Dictionary = data_component.get_environment_overrides()
+		nr.load_map_overrides(overrides)
+		if not overrides.is_empty():
+			print("GridSystem: 🌍 Loaded %d environment overrides" % overrides.size())
+
+	# Trigger living ground activation check
+	if nr.has_method("apply_grid_config"):
+		nr.apply_grid_config({})
+
 
 # Audio component signal handlers
 func _on_audio_initialized():
@@ -587,7 +777,7 @@ func _handle_teleporter_activation(position: Vector3, data: Dictionary):
 			action = "next"
 			print("GridSystem: ⚠️ No action specified, using 'next' action as fallback")
 		# Check if destination is a sequence name
-		elif destination in ["primitives", "tests", "array_tutorial", "meshestextures", "randomness", "wavefunctions", "noise", "forces", "proceduralaudio", "physicssimulation", "softbodies", "recursiveemergence", "lsystems", "swarmintelligence", "patterngeneration", "proceduralgeneration", "searchpathfinding", "graphtheory", "computationalgeometry", "machinelearning", "criticalalgorithms", "speculativecomputation", "resourcemanagement", "advancedlaboratory", "qfeplaboratory", "grammar_systems", "spatial_partitioning", "constraint_solvers", "isosurfaces", "higher_dimensions", "morphogenesis"]:
+		elif destination in ["primitives", "tests", "array_tutorial", "meshestextures", "randomness", "wavefunctions", "noise", "forces", "proceduralaudio", "physicssimulation", "softbodies", "recursiveemergence", "lsystems", "swarmintelligence", "patterngeneration", "mosaicanalysis", "proceduralgeneration", "searchpathfinding", "graphtheory", "computationalgeometry", "machinelearning", "criticalalgorithms", "speculativecomputation", "resourcemanagement", "advancedlaboratory", "qfeplaboratory", "grammar_systems", "spatial_partitioning", "constraint_solvers", "isosurfaces", "higher_dimensions", "morphogenesis"]:
 			action = "start_sequence"
 			sequence = destination
 			destination = ""
@@ -712,6 +902,10 @@ func _clear_all_components():
 
 	if audio_component:
 		audio_component.cleanup()
+
+	if _ecosystem_spawner and is_instance_valid(_ecosystem_spawner):
+		_ecosystem_spawner.queue_free()
+		_ecosystem_spawner = null
 
 	generation_in_progress = false
 

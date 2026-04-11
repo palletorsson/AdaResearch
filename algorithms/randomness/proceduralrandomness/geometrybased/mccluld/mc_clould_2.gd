@@ -7,7 +7,7 @@
 # Main scene structure (to be saved as main_scene.tscn)
 extends Node3D
 
-func _ready():
+func _ready() -> void:
 	# Set up environment
 	setup_environment()
 	# Create terrain
@@ -21,7 +21,7 @@ func _ready():
 	# Set up camera and lighting
 	setup_camera_and_lighting()
 	
-func setup_environment():
+func setup_environment() -> void:
 	# Create WorldEnvironment node
 	var environment = WorldEnvironment.new()
 	var env = Environment.new()
@@ -55,7 +55,7 @@ func setup_environment():
 
 
 # --- STEP 2: TERRAIN CREATION ---
-func create_terrain():
+func create_terrain() -> void:
 	# Base terrain
 	var terrain_mesh = PlaneMesh.new()
 	terrain_mesh.size = Vector2(50, 50)
@@ -109,7 +109,7 @@ func create_terrain():
 
 
 # --- STEP 3: CENTRAL FORMATIONS ---
-func create_central_formations():
+func create_central_formations() -> void:
 	# Create the tall spiral/floral formations
 	for i in range(3):
 		var spiral = create_spiral_formation()
@@ -147,30 +147,35 @@ func create_spiral_formation():
 	spiral.add_child(core)
 	
 	# Add decorative elements to make it look like the floral/coral formations
+	var petal_base_mesh = CapsuleMesh.new()
+	petal_base_mesh.radius = 0.3
+	petal_base_mesh.height = 2.0
+	var petal_material = StandardMaterial3D.new()
+	petal_material.roughness = 0.5
+	petal_material.vertex_color_use_as_albedo = true
+	petal_base_mesh.material = petal_material
+	var petal_mm = MultiMesh.new()
+	petal_mm.transform_format = MultiMesh.TRANSFORM_3D
+	petal_mm.use_colors = true
+	petal_mm.instance_count = 20
+	petal_mm.mesh = petal_base_mesh
 	for i in range(20):
-		var petal_mesh = CapsuleMesh.new()
-		petal_mesh.radius = 0.3
-		petal_mesh.height = 2.0
-		
-		var petal = MeshInstance3D.new()
-		petal.mesh = petal_mesh
-		
-		# Position the petal around the core
 		var angle = i * (PI * 2 / 20)
 		var height = (i % 5) * 2.0
-		petal.position = Vector3(cos(angle) * 1.2, height, sin(angle) * 1.2)
-		
+		var pos = Vector3(cos(angle) * 1.2, height, sin(angle) * 1.2)
 		# Orient the petal outward
-		petal.look_at_from_position(petal.position, Vector3(petal.position.x * 2, petal.position.y, petal.position.z * 2), Vector3.UP)
-		
-		# Material for petals with varying colors
-		var petal_material = StandardMaterial3D.new()
+		var target = Vector3(pos.x * 2, pos.y, pos.z * 2)
+		var dir = (target - pos).normalized()
+		var up = Vector3.UP
+		if abs(dir.dot(up)) > 0.99:
+			up = Vector3.RIGHT
+		var basis = Basis.looking_at(dir, up)
+		petal_mm.set_instance_transform(i, Transform3D(basis, pos))
 		var hue = fmod(i * 0.1, 1.0)
-		petal_material.albedo_color = Color.from_hsv(hue, 0.3, 0.9)
-		petal_material.roughness = 0.5
-		petal.material_override = petal_material
-		
-		spiral.add_child(petal)
+		petal_mm.set_instance_color(i, Color.from_hsv(hue, 0.3, 0.9))
+	var petal_mmi = MultiMeshInstance3D.new()
+	petal_mmi.multimesh = petal_mm
+	spiral.add_child(petal_mmi)
 	
 	return spiral
 
@@ -201,30 +206,29 @@ func create_crystal_formation():
 	crystal.add_child(crystal_instance)
 	
 	# Add smaller crystals around the main one
+	var small_crystal_base = PrismMesh.new()
+	small_crystal_base.size = Vector3(0.5, 1.5, 0.5)
+	var small_crystal_mat = crystal_material.duplicate()
+	small_crystal_mat.albedo_color = Color(0.2, 0.5, 0.7, 0.7)
+	small_crystal_base.material = small_crystal_mat
+	var sc_mm = MultiMesh.new()
+	sc_mm.transform_format = MultiMesh.TRANSFORM_3D
+	sc_mm.instance_count = 5
+	sc_mm.mesh = small_crystal_base
 	for i in range(5):
-		var small_crystal_mesh = PrismMesh.new()
-		small_crystal_mesh.size = Vector3(0.5, 1.5, 0.5)
-		
-		var small_crystal = MeshInstance3D.new()
-		small_crystal.mesh = small_crystal_mesh
-		
-		# Position the small crystals around the main one
 		var angle = i * (PI * 2 / 5)
-		small_crystal.position = Vector3(cos(angle) * 1.5, 0, sin(angle) * 1.5)
-		small_crystal.rotation_degrees.y = randf() * 360
-		
-		# Material for smaller crystals with slight variations
-		var small_crystal_material = crystal_material.duplicate()
-		small_crystal_material.albedo_color = Color(0.2, 0.5, 0.7, 0.7)
-		small_crystal.material_override = small_crystal_material
-		
-		crystal.add_child(small_crystal)
+		var pos = Vector3(cos(angle) * 1.5, 0, sin(angle) * 1.5)
+		var basis = Basis(Vector3.UP, deg_to_rad(randf() * 360))
+		sc_mm.set_instance_transform(i, Transform3D(basis, pos))
+	var sc_mmi = MultiMeshInstance3D.new()
+	sc_mmi.multimesh = sc_mm
+	crystal.add_child(sc_mmi)
 	
 	return crystal
 
 
 # --- STEP 4: ROCK FORMATIONS ---
-func create_rock_formations():
+func create_rock_formations() -> void:
 	for i in range(15):
 		var rock = create_rock()
 		var pos_x = randf_range(-20, 20)
@@ -266,7 +270,7 @@ func create_rock():
 
 
 # --- STEP 5: WATER FEATURES ---
-func add_water():
+func add_water() -> void:
 	# Create water plane
 	var water_mesh = PlaneMesh.new()
 	water_mesh.size = Vector2(50, 50)
@@ -290,7 +294,7 @@ func add_water():
 	add_boats()
 
 
-func add_boats():
+func add_boats() -> void:
 	for i in range(3):
 		var boat = create_boat()
 		var pos_x = randf_range(-15, 15)
@@ -340,7 +344,7 @@ func create_boat():
 
 
 # --- STEP 6: STRUCTURES ---
-func add_structures():
+func add_structures() -> void:
 	# Add the cabin/house
 	var cabin = create_cabin()
 	cabin.position = Vector3(randf_range(-5, 5), 4.0, randf_range(-5, 5))
@@ -420,7 +424,7 @@ func create_cabin():
 	return cabin
 
 
-func add_window(parent, position):
+func add_window(parent, position) -> void:
 	var window_mesh = BoxMesh.new()
 	window_mesh.size = Vector3(0.4, 0.4, 0.05)
 	
@@ -440,7 +444,7 @@ func add_window(parent, position):
 
 
 # --- STEP 7: DECORATIVE ELEMENTS ---
-func add_decorative_elements():
+func add_decorative_elements() -> void:
 	# Add trees
 	add_trees()
 	
@@ -448,7 +452,7 @@ func add_decorative_elements():
 	add_clouds()
 
 
-func add_trees():
+func add_trees() -> void:
 	for i in range(20):
 		var tree = create_tree()
 		var pos_x = randf_range(-20, 20)
@@ -506,7 +510,7 @@ func create_tree():
 	return tree
 
 
-func add_clouds():
+func add_clouds() -> void:
 	for i in range(8):
 		var cloud = create_cloud()
 		cloud.position = Vector3(randf_range(-20, 20), randf_range(10, 15), randf_range(-20, 20))
@@ -518,34 +522,32 @@ func create_cloud():
 	var cloud = Node3D.new()
 	cloud.name = "Cloud"
 	
-	# Create cloud from multiple spheres
+	# Create cloud from multiple spheres via MultiMesh
+	var cloud_sphere = SphereMesh.new()
+	cloud_sphere.radius = 1.0
+	cloud_sphere.height = 2.0
+	var cloud_material = StandardMaterial3D.new()
+	cloud_material.albedo_color = Color(1.0, 1.0, 1.0, 0.8)
+	cloud_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	cloud_sphere.material = cloud_material
+	var cloud_mm = MultiMesh.new()
+	cloud_mm.transform_format = MultiMesh.TRANSFORM_3D
+	cloud_mm.instance_count = 5
+	cloud_mm.mesh = cloud_sphere
 	for i in range(5):
-		var sphere_mesh = SphereMesh.new()
-		sphere_mesh.radius = 1.0
-		sphere_mesh.height = 2.0
-		
-		var sphere = MeshInstance3D.new()
-		sphere.mesh = sphere_mesh
-		
-		# Position spheres to form a cloud
 		var offset_x = randf_range(-1, 1)
 		var offset_y = randf_range(-0.5, 0.5)
 		var offset_z = randf_range(-1, 1)
-		sphere.position = Vector3(offset_x, offset_y, offset_z)
-		
-		# Material for clouds
-		var cloud_material = StandardMaterial3D.new()
-		cloud_material.albedo_color = Color(1.0, 1.0, 1.0, 0.8)
-		cloud_material.flags_transparent = true
-		sphere.material_override = cloud_material
-		
-		cloud.add_child(sphere)
+		cloud_mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3(offset_x, offset_y, offset_z)))
+	var cloud_mmi = MultiMeshInstance3D.new()
+	cloud_mmi.multimesh = cloud_mm
+	cloud.add_child(cloud_mmi)
 	
 	return cloud
 
 
 # --- STEP 8: CAMERA AND LIGHTING ---
-func setup_camera_and_lighting():
+func setup_camera_and_lighting() -> void:
 	# Create camera
 	var camera = Camera3D.new()
 	camera.name = "MainCamera"
@@ -581,3 +583,12 @@ func setup_camera_and_lighting():
 	ambient_light.omni_range = 30
 	
 	add_child(ambient_light)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

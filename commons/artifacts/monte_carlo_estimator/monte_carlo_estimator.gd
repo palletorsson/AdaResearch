@@ -59,6 +59,9 @@ var _control_panel: Node3D
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
+# Signal tracking for cleanup
+var _signal_connections: Array = []
+
 func _ready() -> void:
 	_create_board()
 	_create_circle()
@@ -228,10 +231,11 @@ func _create_vr_controls() -> void:
 	if speed_label:
 		speed_label.text = "SPEED"
 	_control_panel.add_child(speed_slider)
-	speed_slider.slider_moved.connect(func(_pos):
+	var speed_cb := func(_pos):
 		if speed_slider.has_method("get_normalized_value"):
 			darts_per_second = 1.0 + speed_slider.get_normalized_value() * 99.0
-	)
+	speed_slider.slider_moved.connect(speed_cb)
+	_signal_connections.append([speed_slider, &"slider_moved", speed_cb])
 
 	# Control buttons
 	var buttons = [
@@ -253,6 +257,7 @@ func _create_vr_controls() -> void:
 		var area = btn.get_node_or_null("InteractableAreaButton")
 		if area:
 			area.button_pressed.connect(callback)
+			_signal_connections.append([area, &"button_pressed", callback])
 
 ## Add a text label below a VR button
 func _add_button_label(btn: Node, text: String) -> void:
@@ -345,6 +350,12 @@ func get_estimate() -> float:
 	if _total_count == 0:
 		return 0.0
 	return 4.0 * float(_inside_count) / maxf(float(_total_count), 0.0001)
+
+func _exit_tree() -> void:
+	for conn in _signal_connections:
+		if is_instance_valid(conn[0]) and conn[0].is_connected(conn[1], conn[2]):
+			conn[0].disconnect(conn[1], conn[2])
+	_signal_connections.clear()
 
 ## Grid system integration hook
 func apply_grid_config(config_data: Dictionary) -> void:

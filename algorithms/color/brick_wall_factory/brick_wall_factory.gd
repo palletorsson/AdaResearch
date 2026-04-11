@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: grid(width, height) of BoxMesh bricks colored sequentially from a named palette — running bond pattern
+# desire: to see a color palette become architecture, each brick a swatch in a wall you can walk alongside
+# critical_parameter: palette — selects from 20 named palettes (starry_night to industrial_brutalism), redefining the wall's emotional register
+# triggers: apply_grid_config can change dimensions, brick size, mortar, and palette at runtime — wall regenerates entirely
+# emerges: the running bond offset (half-brick shift on odd rows) creates diagonal color rivers through the palette sequence
+# needs: palette selection [has via config]; VR interaction [missing]; mortar color control [missing]
+# relationships: depends on color_palettes.tres; contrasts with pillarcolorcollection (vertical vs horizontal color display)
+# truth: a brick wall is a color sequence made solid — the mortar is the silence between notes
+
 @export var wall_width: int = 10
 @export var wall_height: int = 5
 @export var brick_size: Vector3 = Vector3(0.2, 0.1, 0.1)
@@ -9,14 +19,14 @@ extends Node3D
 @export var color_palette_resource: Resource
 @export var palette_resource_path: String = "res://algorithms/color/color_palettes.tres"
 
-func _ready():
+func _ready() -> void:
 	if color_palette_resource == null:
 		var loaded := load(palette_resource_path)
 		if loaded is Resource:
 			color_palette_resource = loaded
 	generate_wall()
 
-func generate_wall():
+func generate_wall() -> void:
 	for child in get_children():
 		child.queue_free()
 
@@ -54,3 +64,28 @@ func generate_wall():
 			add_child(brick)
 
 			color_index = (color_index + 1) % colors.size()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	if config.is_empty():
+		return
+	if config.has("wall_width"):
+		wall_width = int(config["wall_width"])
+	if config.has("wall_height"):
+		wall_height = int(config["wall_height"])
+	if config.has("brick_width"):
+		brick_size.x = float(config["brick_width"])
+	if config.has("brick_height"):
+		brick_size.y = float(config["brick_height"])
+	if config.has("brick_depth"):
+		brick_size.z = float(config["brick_depth"])
+	if config.has("mortar_thickness"):
+		mortar_thickness = float(config["mortar_thickness"])
+	if config.has("palette"):
+		palette = str(config["palette"])
+	generate_wall()

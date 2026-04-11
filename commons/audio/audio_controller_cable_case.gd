@@ -24,6 +24,18 @@ func _ready():
 	_create_corner_jacks()
 	_create_decorative_cables()
 
+
+func rebuild(w: float, h: float) -> void:
+	## Rebuild all decorations for a new rack size.
+	frame_width = w
+	frame_height = h
+	for child in get_children():
+		child.queue_free()
+	# Defer rebuild so queue_free completes first
+	call_deferred("_create_frame")
+	call_deferred("_create_corner_jacks")
+	call_deferred("_create_decorative_cables")
+
 func _create_frame():
 	"""Create the outer cable frame around the rack"""
 	var half_w = frame_width / 2.0

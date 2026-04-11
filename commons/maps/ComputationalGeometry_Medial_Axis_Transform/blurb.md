@@ -1,5 +1,5 @@
-Every shape has a skeleton. The medial axis is the set of points equidistant from two or more boundary edges — the locus of centers of all maximal inscribed circles. Roll the largest possible circle along the interior of a shape. Its center traces the skeleton.
+A narrow corridor runs between thick walls. Height-5 walls press in from both sides, leaving a single-cell-wide path down the center. You walk the skeleton of the shape without knowing it.
 
-Thick walls rise on both sides. The corridor between them narrows, widens, branches. The medial axis IS the walkable path — computed not by planning but by measuring distance from every point to the nearest boundary and extracting the ridgeline. Where distances peak, the skeleton emerges. Where walls close in, the axis thins. Where corridors fork, the skeleton branches.
+The medial axis is the set of points equidistant from two or more boundaries — the spine that remains when you peel a shape down to its bones. In this room, the walkable path IS the medial axis. The walls are not obstacles. They are the shape whose skeleton you are tracing. Every step you take is maximally far from the nearest wall on either side.
 
-Reduction without loss. A complex shape compressed to a one-dimensional graph that preserves topology. The skeleton remembers what the flesh forgets — not surface, but structure. Identity as what remains when everything inessential burns away.
+Strip away everything that is not equidistant from the boundary. What remains is the shape's truest description of itself — not its surface, not its volume, but the line where all its edges agree.

@@ -110,13 +110,13 @@ void fragment() {
 }
 """
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 	create_water_surface()
 	setup_reflection_system()
 	start_water_animation()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Create realistic water environment
 	var env = Environment.new()
 	env.background_mode = Environment.BG_SKY
@@ -152,7 +152,7 @@ func setup_scene():
 	sun_light.shadow_enabled = true
 	add_child(sun_light)
 
-func create_water_surface():
+func create_water_surface() -> void:
 	# Create large water plane with high subdivision for smooth waves
 	var water_plane = PlaneMesh.new()
 	water_plane.size = Vector2(water_size, water_size)
@@ -187,7 +187,7 @@ func create_water_surface():
 	water_mesh.set_surface_override_material(0, water_material)
 	add_child(water_mesh)
 
-func setup_reflection_system():
+func setup_reflection_system() -> void:
 	# Create reflection viewport and camera
 	reflection_viewport = SubViewport.new()
 	reflection_viewport.size = Vector2i(512, 512) # Adjustable quality
@@ -202,12 +202,12 @@ func setup_reflection_system():
 	var reflection_texture = reflection_viewport.get_texture()
 	water_material.set_shader_parameter("reflection_texture", reflection_texture)
 
-func start_water_animation():
+func start_water_animation() -> void:
 	# The water surface animates automatically via shader TIME uniform
 	# Start reflection camera animation
 	animate_reflection_camera()
 
-func animate_reflection_camera():
+func animate_reflection_camera() -> void:
 	# Update reflection camera to match main camera but mirrored
 	var main_camera = get_viewport().get_camera_3d()
 	if main_camera and reflection_camera:
@@ -235,14 +235,14 @@ func _process(_delta):
 	# Optional: Update water properties based on external conditions
 	update_water_conditions()
 
-func update_water_conditions():
+func update_water_conditions() -> void:
 	# This function can be used to dynamically adjust water based on weather, time, etc.
 	# For now, we'll add some subtle variation
 	var time_factor = sin(Time.get_time_dict_from_system()["second"] * 0.1) * 0.1 + 0.9
 	water_material.set_shader_parameter("wave_speed", wave_speed * time_factor)
 
 # Additional environment objects for reflection
-func add_reflection_objects():
+func add_reflection_objects() -> void:
 	# Add some objects around the water for interesting reflections
 	
 	# Floating platforms
@@ -284,9 +284,18 @@ func add_reflection_objects():
 		add_child(pillar)
 
 # Call this in _ready() if you want environment objects
-func _ready_with_environment():
+func _ready_with_environment() -> void:
 	setup_scene()
 	create_water_surface()
 	setup_reflection_system()
 	add_reflection_objects()
 	start_water_animation()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

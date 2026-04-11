@@ -15,10 +15,10 @@ var head: MeshInstance3D
 var label: Label3D
 var force_direction: Vector3 = Vector3.UP
 
-func _ready():
+func _ready() -> void:
 	_create_arrow()
 
-func _create_arrow():
+func _create_arrow() -> void:
 	# Arrow shaft (cylinder)
 	shaft = MeshInstance3D.new()
 	var cylinder = CylinderMesh.new()
@@ -68,7 +68,7 @@ func _create_arrow():
 		add_child(label)
 
 ## Point the arrow from origin toward [direction], scaled by magnitude.
-func set_force(direction: Vector3, magnitude: float = -1.0):
+func set_force(direction: Vector3, magnitude: float = -1.0) -> void:
 	if direction.length() < 0.001:
 		visible = false
 		return
@@ -87,3 +87,12 @@ func set_force(direction: Vector3, magnitude: float = -1.0):
 		var up = Vector3.RIGHT if abs(force_direction.dot(Vector3.UP)) > 0.99 else Vector3.UP
 		look_at(global_position + force_direction, up)
 		rotate_object_local(Vector3.RIGHT, -PI / 2.0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

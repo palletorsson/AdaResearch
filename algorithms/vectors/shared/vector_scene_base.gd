@@ -16,7 +16,7 @@ static var _material_cache: Dictionary = {} # Color (as String) -> StandardMater
 var environment_root: Node3D
 var info_root: Node3D
 
-func _ready():
+func _ready() -> void:
 	environment_root = Node3D.new()
 	environment_root.name = "Environment"
 	add_child(environment_root)
@@ -26,7 +26,7 @@ func _ready():
 	_init_shared_resources()
 	_create_origin_marker()
 
-func _init_shared_resources():
+func _init_shared_resources() -> void:
 	if _shared_cylinder_mesh == null:
 		_shared_cylinder_mesh = CylinderMesh.new()
 		_shared_cylinder_mesh.height = 1.0 # Unit height for scaling
@@ -99,7 +99,7 @@ func spawn_vector(origin: Vector3, vector: Vector3, color: Color, name: String, 
 	add_child(arrow)
 	return arrow
 
-func update_vector(arrow: Node3D, vector: Vector3):
+func update_vector(arrow: Node3D, vector: Vector3) -> void:
 	if arrow == null:
 		return
 	var end_node: Node3D = arrow.get_node_or_null("lineContainer/GrabSphere2")
@@ -120,7 +120,7 @@ func get_vector(arrow: Node) -> Vector3:
 		return (end_node.global_position - start_node.global_position) / (SCENE_SCALE * scale.x)
 	return Vector3.ZERO
 
-func create_axes(length: float = 3.0):
+func create_axes(length: float = 3.0) -> void:
 	var axes = [
 		{ "dir": Vector3.RIGHT, "color": Color(1.0, 0.2, 0.2, 1.0), "label": "X" },
 		{ "dir": Vector3.UP, "color": Color(0.2, 1.0, 0.2, 1.0), "label": "Y" },
@@ -290,7 +290,7 @@ func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2
 
 	return data_label
 
-func _add_frame(parent: Node3D, size: Vector2):
+func _add_frame(parent: Node3D, size: Vector2) -> void:
 	var frame_mat = StandardMaterial3D.new()
 	frame_mat.albedo_color = Color(0.3, 0.35, 0.4)
 	frame_mat.metallic = 0.5
@@ -375,7 +375,7 @@ func _get_shared_material_custom_emission(color: Color, emission_mult: float) ->
 	_material_cache[key] = mat
 	return mat
 
-func _disable_grab_sphere(grab_node: Node):
+func _disable_grab_sphere(grab_node: Node) -> void:
 	if grab_node == null:
 		return
 	if grab_node.has_method("set_freeze_enabled"):
@@ -399,7 +399,7 @@ func _disable_grab_sphere(grab_node: Node):
 	if label:
 		label.visible = false
 
-func _create_origin_marker():
+func _create_origin_marker() -> void:
 	var mesh = MeshInstance3D.new()
 	mesh.mesh = _shared_sphere_mesh
 	# Shared sphere radius is 0.5 (dia 1). We want radius 0.05 (dia 0.1). Scale = 0.1.
@@ -438,3 +438,12 @@ func get_arrow_end_position(arrow: Node) -> Vector3:
 	if node:
 		return node.global_position
 	return arrow.global_position
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

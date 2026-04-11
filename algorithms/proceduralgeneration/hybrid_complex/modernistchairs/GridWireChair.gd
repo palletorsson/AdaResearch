@@ -17,28 +17,28 @@ var materials: ModernistMaterials
 var wire_frame_instance: MeshInstance3D
 var cushion_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	materials = ModernistMaterials.new()
 	add_child(materials)
 	
 	if generate_on_ready:
 		generate_chair()
 
-func generate_chair():
+func generate_chair() -> void:
 	"""Generate the complete wire grid chair"""
 	clear_existing_geometry()
 	
 	generate_wire_frame()
 	generate_optional_cushion()
 
-func clear_existing_geometry():
+func clear_existing_geometry() -> void:
 	"""Remove existing chair geometry"""
 	if wire_frame_instance:
 		wire_frame_instance.queue_free()
 	if cushion_instance:
 		cushion_instance.queue_free()
 
-func generate_wire_frame():
+func generate_wire_frame() -> void:
 	"""Generate the diamond-pattern wire frame"""
 	wire_frame_instance = MeshInstance3D.new()
 	add_child(wire_frame_instance)
@@ -65,7 +65,7 @@ func generate_wire_frame():
 	wire_frame_instance.mesh = array_mesh
 	wire_frame_instance.material_override = materials.get_material("chrome")
 
-func generate_shell_grid(vertices: PackedVector3Array, normals: PackedVector3Array, indices: PackedInt32Array):
+func generate_shell_grid(vertices: PackedVector3Array, normals: PackedVector3Array, indices: PackedInt32Array) -> void:
 	"""Generate the main shell with diamond wire pattern"""
 	
 	# Create diamond lattice pattern
@@ -177,7 +177,7 @@ func add_wire_segment(vertices: PackedVector3Array, normals: PackedVector3Array,
 			base_vertex_count + wire_sides + next_i
 		])
 
-func generate_base_structure(vertices: PackedVector3Array, normals: PackedVector3Array, indices: PackedInt32Array):
+func generate_base_structure(vertices: PackedVector3Array, normals: PackedVector3Array, indices: PackedInt32Array) -> void:
 	"""Generate the base support structure"""
 	# Simple four-point base connection to ground
 	var base_points = [
@@ -202,7 +202,7 @@ func generate_base_structure(vertices: PackedVector3Array, normals: PackedVector
 	add_wire_segment(vertices, normals, indices, base_points[0], base_points[3])
 	add_wire_segment(vertices, normals, indices, base_points[1], base_points[2])
 
-func generate_optional_cushion():
+func generate_optional_cushion() -> void:
 	"""Generate an optional seat cushion"""
 	if randf() > 0.5:  # 50% chance of having a cushion
 		cushion_instance = MeshInstance3D.new()
@@ -269,7 +269,7 @@ func create_cushion_mesh() -> ArrayMesh:
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	return array_mesh
 
-func regenerate_with_parameters(params: Dictionary):
+func regenerate_with_parameters(params: Dictionary) -> void:
 	"""Regenerate chair with new parameters"""
 	if params.has("chair_width"):
 		chair_width = params.chair_width
@@ -284,3 +284,11 @@ func regenerate_with_parameters(params: Dictionary):
 	
 	generate_chair()
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

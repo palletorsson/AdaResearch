@@ -1,6 +1,16 @@
 @tool
 extends XRToolsPickable
 
+# @identity
+# essence: octahedron — 6 vertices, 12 edges, 8 triangular faces: dual of the cube, Platonic solid
+# desire: learner holds the octahedron and discovers its symmetry through physical rotation
+# critical_parameter: button material toggle — reveals the 8-face structure through a contrasting material
+# triggers: pick up → snaps to shelf; button press → alternates material to show surface texture change
+# emerges: the dual relationship to the cube — 6 face-centers of a cube are the 6 vertices of an octahedron
+# needs: [has VR button (material toggle) [has], has shelf snap [has], missing Euler formula label]
+# relationships: sibling to grab_trihedron; also used as the origin spinning decoration
+# truth: the octahedron has more symmetry than it first appears — it looks the same from 48 orientations
+
 ## Alternate material when button pressed
 @export var alternate_material : Material
 @export var snap_to_shelf: bool = true

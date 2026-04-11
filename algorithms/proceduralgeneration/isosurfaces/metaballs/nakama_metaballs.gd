@@ -20,7 +20,7 @@ var time = 0.0
 var mesh_instance: MeshInstance3D
 var noise: FastNoiseLite
 
-func _ready():
+func _ready() -> void:
 	# Initialize noise for organic movement
 	noise = FastNoiseLite.new()
 	noise.seed = randi()
@@ -40,7 +40,7 @@ func _ready():
 	# Set up lighting
 	setup_lighting()
 
-func create_metaballs():
+func create_metaballs() -> void:
 	# Create the metaballs with random positions and radii
 	for i in range(num_metaballs):
 		# Create a pattern similar to the reference image
@@ -65,7 +65,7 @@ func create_metaballs():
 		
 		metaballs.append(metaball)
 
-func create_shader_material():
+func create_shader_material() -> ShaderMaterial:
 	# Create a shader material for the metaball surface
 	var material = ShaderMaterial.new()
 	
@@ -161,7 +161,7 @@ void fragment() {
 	
 	return material
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Update metaball positions
@@ -174,7 +174,7 @@ func _process(delta):
 	if mesh_instance.material_override is ShaderMaterial:
 		mesh_instance.material_override.set_shader_parameter("time", time)
 
-func update_metaballs(delta):
+func update_metaballs(delta) -> void:
 	# Move metaballs in organic patterns, but skip every other frame for performance
 	if Engine.get_frames_drawn() % 2 == 0:
 		return
@@ -210,7 +210,7 @@ func update_metaballs(delta):
 		if i % 3 == 0:  
 			mb.radius = base_radius + sin(time * 0.5 + idx * 0.2) * radius_variation * 0.5
 
-func generate_mesh():
+func generate_mesh() -> void:
 	# Generate a mesh based on metaballs using the marching cubes algorithm
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -224,7 +224,7 @@ func generate_mesh():
 	# Assign the mesh
 	mesh_instance.mesh = st.commit()
 
-func create_metaball_proxy_mesh(st):
+func create_metaball_proxy_mesh(st) -> void:
 	# Create a surface that approximates what metaballs would look like
 	# This is a workaround to avoid implementing full marching cubes
 	
@@ -292,7 +292,7 @@ func calculate_metaball_field(point):
 	
 	return field_value
 
-func setup_lighting():
+func setup_lighting() -> void:
 	# Set up lighting to highlight the organic forms
 	
 	# Main directional light
@@ -343,3 +343,12 @@ func setup_lighting():
 	
 	environment.environment = env
 	add_child(environment)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,5 +1,15 @@
 ﻿extends Node3D
 
+# @identity
+# essence: length = |p2 - p1| — the distance between two points, made visible and tangible
+# desire: learner feels a line as relationship, not object — it exists because two points exist
+# critical_parameter: the glitch/haptic resistance when length is near an integer — whole numbers resist
+# triggers: dragging either end grab sphere — length label updates live, glitch fires at integer thresholds
+# emerges: the privilege of whole numbers; the line as a tension between two positions
+# needs: [has Label3D [has], both endpoints are grabbable [has], missing color/thickness slider]
+# relationships: depends on two static_points; unlocks all polygon primitives, perspective_lines, scale_lines
+# truth: a line segment has no intrinsic existence — it is defined entirely by its two endpoints
+
 # Line connection system for grab spheres with queer CGI education
 @export var line_thickness: float = 0.005
 @export var line_color: Color = Color(1.0, 1.0, 1.0, 1.0)

@@ -10,19 +10,18 @@ The artifact system connects names used in map JSON files to actual Godot scenes
 
 ```
 artifacts/
-├── grid_artifacts.json     # Legacy master registry (700+ entries)
-├── registry/               # Modular registries by category
+├── grid_artifacts.json.deprecated  # Legacy registry (archived, no longer loaded)
+├── registry/                       # Authoritative modular registries by category
 │   ├── arrays.json
 │   ├── cellular_automata.json
 │   ├── foundations.json
-│   ├── fractals.json
 │   ├── furniture.json
 │   ├── lsystems.json
 │   ├── qfep.json
 │   ├── randomness.json
 │   ├── soft_bodies.json
-│   └── wavefunctions.json
-└── catalog/                # Visual browsing tools
+│   └── ...                         # 50 category files, 1600+ artifacts
+└── catalog/                        # Visual browsing tools
 ```
 
 ## Registry Entry Schema
@@ -68,8 +67,7 @@ artifact_name#key:value#key2:value2
 
 ## Resolution Order
 
-1. Search `registry/*.json` (modular registries)
-2. Fallback to `grid_artifacts.json` (legacy)
+All artifacts are loaded from `registry/*.json` files. The legacy `grid_artifacts.json` has been deprecated and renamed to `grid_artifacts.json.deprecated` (kept as backup, not loaded).
 
 ## Adding New Artifacts
 

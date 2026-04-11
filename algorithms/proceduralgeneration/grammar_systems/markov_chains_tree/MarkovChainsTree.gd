@@ -2,6 +2,16 @@
 extends Node3D
 class_name MarkovChainsTree
 
+# @identity
+# essence: Markov chain state machine growing a 3D tree — branch, grow, curve, or terminate as probabilistic state transitions
+# desire: To show that a tree is a random walk through growth states: each branch tip rolls dice to decide its next move
+# critical_parameter: branch_probability — the chance of forking; low values grow poles, high values grow bushes
+# triggers: High terminate_probability produces bonsai; high vertical_bias produces columnar; balanced produces naturalistic crown
+# emerges: Organic branching structure from eight Markov states — the tree shape is its transition matrix made spatial
+# needs: @tool editor preview [has], animated growth [has], bark/leaf materials [has], regenerate button [has], VR interaction [missing]
+# relationships: Tree variant of markov_chains in grammar_systems. Contrasts with L-system trees (rule rewriting vs state walking).
+# truth: A tree does not follow a blueprint — it walks a probability space, and the walk becomes wood.
+
 @export_group("Tree Settings")
 @export var tree_height: float = 10.0
 @export var max_iterations: int = 100
@@ -67,18 +77,18 @@ class Branch:
 var branches: Array[Branch] = []
 var active_branches: Array[Branch] = []
 
-func _ready():
+func _ready() -> void:
     setup_markov_chain()
     grow_tree()
 
-func _process(delta):
+func _process(delta: float) -> void:
     if animate_growth and active_branches.size() > 0:
         growth_timer += delta * growth_speed
         if growth_timer >= 0.1:
             growth_timer = 0.0
             grow_iteration()
 
-func setup_markov_chain():
+func setup_markov_chain() -> void:
     # Define transition probabilities for each state
     # Format: {current_state: {next_state: probability}}
     
@@ -131,7 +141,7 @@ func setup_markov_chain():
         }
     }
 
-func grow_tree():
+func grow_tree() -> void:
     clear_tree()
     current_iteration = 0
     
@@ -155,7 +165,7 @@ func grow_tree():
     # Visualize
     visualize_tree()
 
-func grow_iteration():
+func grow_iteration() -> void:
     if active_branches.size() == 0:
         return
     
@@ -354,14 +364,14 @@ func create_branch(parent: Branch, direction: Vector3, length: float, thickness:
     branches.append(new_branch)
     return new_branch
 
-func visualize_tree():
+func visualize_tree() -> void:
     clear_visualization()
     
     for branch in branches:
         if branch.parent != null:
             create_branch_mesh(branch)
 
-func create_branch_mesh(branch: Branch):
+func create_branch_mesh(branch: Branch) -> void:
     var mesh_instance = MeshInstance3D.new()
     add_child(mesh_instance)
     branch.mesh_instance = mesh_instance
@@ -429,7 +439,7 @@ func create_cylinder_mesh(start: Vector3, end: Vector3, start_radius: float, end
     surface_tool.generate_normals()
     return surface_tool.commit()
 
-func create_leaf(position: Vector3):
+func create_leaf(position: Vector3) -> void:
     var leaf = MeshInstance3D.new()
     add_child(leaf)
     
@@ -443,11 +453,20 @@ func create_leaf(position: Vector3):
     material.albedo_color = leaf_color
     leaf.material_override = material
 
-func clear_tree():
+func clear_tree() -> void:
     branches.clear()
     active_branches.clear()
     clear_visualization()
 
-func clear_visualization():
+func clear_visualization() -> void:
     for child in get_children():
         child.queue_free()
+
+func _exit_tree() -> void:
+    for child in get_children():
+        if not child.owner:
+            child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+    pass

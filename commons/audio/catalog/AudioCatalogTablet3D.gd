@@ -5,6 +5,17 @@
 extends Node3D
 class_name AudioCatalogTablet3D
 
+
+# @identity
+# essence: catalog[category][sound_key] -> preview(parameters) -> waveform display
+# desire: Browse and audition a library of synthesized sounds on a VR tablet interface
+# critical_parameter: sound_key — selects which synthesis algorithm to preview
+# triggers: touch-selecting a sound generates audio and visualizes its waveform
+# emerges: a sonic encyclopedia — every sound becomes a specimen you can examine and compare
+# needs: VR touch screen [has], category filtering [has], waveform visualization [has]
+# relationships: depends on AudioCatalogDataProvider; contrasts with SoundscapeRadioRack (individual sounds vs ambient streams); unlocks sound literacy
+# truth: A sound catalog is a periodic table of timbres, each defined by its synthesis recipe.
+
 signal sound_selected(sound_key: String)
 signal sound_preview_started(sound_key: String)
 signal sound_preview_stopped()

@@ -25,15 +25,15 @@ class_name VoronoiApplications
 
 var voronoi_generator: Node3D
 
-func _ready():
+func _ready() -> void:
     setup_voronoi()
 
-func setup_voronoi():
+func setup_voronoi() -> void:
     voronoi_generator = Node3D.new()
     add_child(voronoi_generator)
     # Attach voronoi script here
 
-func generate_application():
+func generate_application() -> void:
     clear_application()
     
     match application_type:
@@ -48,7 +48,7 @@ func generate_application():
         4:
             create_rock_formation()
 
-func create_cave_system():
+func create_cave_system() -> void:
     # Use Voronoi cells to create cave chambers connected by tunnels
     if voronoi_generator:
         voronoi_generator.num_seeds = cave_density
@@ -60,7 +60,7 @@ func create_cave_system():
     
     print("Cave system generated with ", cave_density, " chambers")
 
-func create_building_interior():
+func create_building_interior() -> void:
     # Use Voronoi cells as rooms
     if voronoi_generator:
         voronoi_generator.num_seeds = num_rooms
@@ -72,7 +72,7 @@ func create_building_interior():
     
     print("Building with ", num_rooms, " rooms generated")
 
-func create_fractured_object():
+func create_fractured_object() -> void:
     # Create shattered/fractured geometry
     if voronoi_generator:
         voronoi_generator.num_seeds = 25
@@ -83,7 +83,7 @@ func create_fractured_object():
     
     print("Fractured object generated")
 
-func create_coral_reef():
+func create_coral_reef() -> void:
     if voronoi_generator:
         voronoi_generator.num_seeds = 40
         voronoi_generator.structure_type = 3  # Foam
@@ -93,7 +93,7 @@ func create_coral_reef():
     
     print("Coral reef generated")
 
-func create_rock_formation():
+func create_rock_formation() -> void:
     if voronoi_generator:
         voronoi_generator.num_seeds = 20
         voronoi_generator.structure_type = 4  # Organic
@@ -104,7 +104,16 @@ func create_rock_formation():
     
     print("Rock formation generated")
 
-func clear_application():
+func clear_application() -> void:
     for child in get_children():
         if child != voronoi_generator:
             child.queue_free()
+
+func _exit_tree() -> void:
+    for child in get_children():
+        if not child.owner:
+            child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+    pass

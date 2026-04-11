@@ -24,13 +24,13 @@ var stems: Array = []
 var main_light: DirectionalLight3D
 var environment_resource: Environment
 
-func _ready():
+func _ready() -> void:
 	setup_lighting()
 	setup_materials()
 	if generate_on_start:
 		generate_foliage_scene()
 
-func setup_lighting():
+func setup_lighting() -> void:
 	# Create natural outdoor lighting
 	main_light = DirectionalLight3D.new()
 	main_light.position = Vector3(2, 4, 3)
@@ -54,7 +54,7 @@ func setup_lighting():
 	if camera:
 		camera.environment = environment_resource
 
-func setup_materials():
+func setup_materials() -> void:
 	# Leaf material - various shades of green
 	leaf_material = StandardMaterial3D.new()
 	leaf_material.albedo_color = Color(0.2, 0.6, 0.2)
@@ -80,13 +80,13 @@ func setup_materials():
 	stem_material.metallic = 0.0
 	stem_material.roughness = 0.9
 
-func generate_foliage_scene():
+func generate_foliage_scene() -> void:
 	clear_scene()
 	
 	for i in range(leaf_count):
 		create_leaf_cluster()
 
-func clear_scene():
+func clear_scene() -> void:
 	for leaf in leaves:
 		if is_instance_valid(leaf):
 			leaf.queue_free()
@@ -101,7 +101,7 @@ func clear_scene():
 	droplets.clear()
 	stems.clear()
 
-func create_leaf_cluster():
+func create_leaf_cluster() -> void:
 	# Random position within scene radius
 	var position = Vector3(
 		randf_range(-scene_radius, scene_radius),
@@ -165,7 +165,7 @@ func create_single_leaf(base_position: Vector3, leaf_index: int) -> MeshInstance
 	
 	return leaf
 
-func create_stem_for_leaf(leaf: MeshInstance3D):
+func create_stem_for_leaf(leaf: MeshInstance3D) -> void:
 	var stem = MeshInstance3D.new()
 	
 	var stem_mesh = CylinderMesh.new()
@@ -187,7 +187,7 @@ func create_stem_for_leaf(leaf: MeshInstance3D):
 	add_child(stem)
 	stems.append(stem)
 
-func add_droplets_to_leaf(leaf: MeshInstance3D):
+func add_droplets_to_leaf(leaf: MeshInstance3D) -> void:
 	var droplet_count = int(randf() * droplet_density * 10) + 1
 	
 	for i in range(droplet_count):
@@ -225,7 +225,7 @@ func create_water_droplet(leaf: MeshInstance3D) -> MeshInstance3D:
 	
 	return droplet
 
-func add_animated_effects():
+func add_animated_effects() -> void:
 	# Add gentle swaying to leaves
 	var tween = create_tween()
 	tween.set_loops()
@@ -239,29 +239,38 @@ func add_animated_effects():
 				0.0, PI * 2, randf_range(3.0, 6.0)
 			)
 
-func regenerate_scene():
+func regenerate_scene() -> void:
 	generate_foliage_scene()
 	if leaves.size() > 0:
 		add_animated_effects()
 
 # Public interface
-func set_leaf_count(count: int):
+func set_leaf_count(count: int) -> void:
 	leaf_count = count
 	regenerate_scene()
 
-func set_droplet_density(density: float):
+func set_droplet_density(density: float) -> void:
 	droplet_density = clamp(density, 0.0, 1.0)
 	regenerate_scene()
 
-func set_scene_size(radius: float):
+func set_scene_size(radius: float) -> void:
 	scene_radius = radius
 	regenerate_scene()
 
-func toggle_animation():
+func toggle_animation() -> void:
 	add_animated_effects()
 
 # Called when scene loads
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space key
 		regenerate_scene()
 		add_animated_effects()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -7,7 +7,7 @@ const STRESS_POINTS = 3
 
 var stress_points: Array = []
 
-func initialize_grid():
+func initialize_grid() -> void:
 	# Configure MultiMesh
 	var step = 3
 	var cube_size = CUBE_SIZE * step
@@ -29,12 +29,12 @@ func initialize_grid():
 		stress_points.append(stress_point)
 		grid[stress_point.x][stress_point.y][stress_point.z] = 1  # Stress point
 
-func update_simulation(_delta):
+func update_simulation(_delta) -> void:
 	# Propagate cracks from stress concentrators
 	propagate_cracks()
 	update_visualization()
 
-func propagate_cracks():
+func propagate_cracks() -> void:
 	for stress_point in stress_points:
 		var neighbors = get_3d_neighbors(stress_point)
 		for neighbor in neighbors:
@@ -42,7 +42,7 @@ func propagate_cracks():
 				if grid[neighbor.x][neighbor.y][neighbor.z] == 0:
 					grid[neighbor.x][neighbor.y][neighbor.z] = 2  # Cracked state
 
-func update_visualization():
+func update_visualization() -> void:
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
 		return
 		
@@ -84,8 +84,11 @@ func get_crack_count() -> int:
 					count += 1
 	return count
 
-func reset_simulation():
+func reset_simulation() -> void:
 	grid = create_3d_grid()
 	stress_points.clear()
 	initialize_grid()
 	iteration_count = 0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

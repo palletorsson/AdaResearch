@@ -4,6 +4,16 @@ extends Node3D
 # Starts with a 1-meter equilateral triangle and subdivides it recursively
 # Creates a beautiful fractal pattern by removing the center triangle each time
 
+# @identity
+# essence: sierpinski(v1,v2,v3,d) = 3 * sierpinski(corners, midpoints, d+1), skip center triangle. D = log(3)/log(2) ~ 1.585.
+# desire: To be walked through — 10m triangle rotated vertical, extruded per iteration, creating a fractal wall of triangular portals
+# critical_parameter: extrusion_height — each iteration extrudes deeper, turning the 2D fractal into a 3D walkable relief
+# triggers: subdivision_interval tick → all current triangles split into 3 → center removed → depth hue-shifts rainbow
+# emerges: The central voids become corridors — the removed triangles are the spaces you walk through
+# needs: VR walking [has via geometry], iteration control [missing]
+# relationships: 2D cousin of sierpinski_pyramid and menger_sponge; the canonical D ~ 1.585 fractal dimension example
+# truth: The Sierpinski triangle has zero area and infinite perimeter — it is the shape that taught mathematics that removal creates structure.
+
 # Settings
 @export var subdivision_interval: float = 1.0  # Time between subdivisions
 @export var max_iterations: int = 6  # Maximum subdivision depth
@@ -21,7 +31,7 @@ var subdivision_timer: float = 0.0
 var is_subdividing: bool = false
 var current_triangles: Array = []  # Array of triangle data
 
-func _ready():
+func _ready() -> void:
 	print("SierpinskiTriangle: Ready")
 	print("SierpinskiTriangle: Will subdivide to %d iterations" % max_iterations)
 
@@ -37,7 +47,7 @@ func _ready():
 		is_subdividing = true
 		print("SierpinskiTriangle: Auto-subdivision enabled")
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_subdividing:
 		return
 
@@ -50,7 +60,7 @@ func _process(delta: float):
 		perform_subdivision()
 
 # Create the initial 1-meter equilateral triangle
-func create_initial_triangle():
+func create_initial_triangle() -> void:
 	# Create equilateral triangle vertices (1 meter)
 	var height = triangle_size * sqrt(3.0) / 2.0  # Height of equilateral triangle
 
@@ -72,7 +82,7 @@ func create_initial_triangle():
 	print("SierpinskiTriangle: Created initial triangle")
 
 # Perform one subdivision iteration
-func perform_subdivision():
+func perform_subdivision() -> void:
 	if current_iteration >= max_iterations:
 		print("SierpinskiTriangle: Reached maximum iterations (%d)" % max_iterations)
 		is_subdividing = false
@@ -152,7 +162,7 @@ func subdivide_triangle(triangle: Dictionary) -> Array:
 	return triangles
 
 # Create a 3D mesh for a triangle
-func create_triangle_mesh(triangle: Dictionary):
+func create_triangle_mesh(triangle: Dictionary) -> void:
 	var mesh_instance = MeshInstance3D.new()
 	var mesh = create_extruded_triangle_mesh(triangle)
 	mesh_instance.mesh = mesh
@@ -300,16 +310,16 @@ func create_extruded_triangle_mesh(triangle: Dictionary) -> ArrayMesh:
 	return mesh
 
 # Manual control functions
-func start_subdivision():
+func start_subdivision() -> void:
 	is_subdividing = true
 	subdivision_timer = 0.0
 	print("SierpinskiTriangle: Started manually")
 
-func stop_subdivision():
+func stop_subdivision() -> void:
 	is_subdividing = false
 	print("SierpinskiTriangle: Stopped manually")
 
-func reset():
+func reset() -> void:
 	# Clear all meshes
 	for child in get_children():
 		if child is MeshInstance3D:
@@ -325,5 +335,14 @@ func reset():
 
 	print("SierpinskiTriangle: Reset")
 
-func step():
+func step() -> void:
 	perform_subdivision()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -116,3 +116,12 @@ func add_resonating_bar(bar: ResonatingBar) -> void:
 func clear_bars() -> void:
 	"""Clear all tracked bars"""
 	_resonating_bars.clear()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

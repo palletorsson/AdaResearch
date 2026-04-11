@@ -1,4 +1,14 @@
-﻿extends CharacterBody3D
+﻿# @identity
+# essence: twist(t) ∈ [0,1] — Kresling twist maps between flat disc and extended tower
+# desire: a disc rolls toward optimal range, twists upward into a sniper tower, fires, collapses, relocates
+# critical_parameter: _twist — 0 = tall tower (sniper mode), 1 = flat disc (mobile mode); single DOF controls entire behavior
+# triggers: state machine (DISC→RISE→AIM→FIRE→COLLAPSE→RELOCATE) drives twist interpolation
+# emerges: the tower seeks optimal_range — it backs away if too close, approaches if too far, creating a standoff distance
+# needs: KreslingGeometry solver [has]; fire_bolt projectile [has]; platform aiming [has]
+# relationships: contrasts with miura_crawler (vertical tower vs horizontal crawler); contrasts with scissor_stalker (rigid extension vs twist)
+# truth: The Kresling fold proves that rotation and translation are coupled — to twist is to rise.
+
+extends CharacterBody3D
 class_name KreslingSpire
 ## Kresling origami sniper tower - twisting cylinder that extends to fire.
 ## Compact disc form for mobility, tall tower form for sniping.

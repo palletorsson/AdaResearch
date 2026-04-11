@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # 3D Geometry Color Plates - Inspired by Three.js geometry colors
 # Color plates represented as geometric forms in 3D space
@@ -68,7 +68,7 @@ var slideshow_timer: float = 0.0
 var current_slide_index: int = 0
 var color_modes_list: Array = ["Rainbow", "HSV_Sweep", "RGB_Cube", "Gradient", "Random", "Pixel_Grid", "Additive_Mixing"]
 
-func _ready():
+func _ready() -> void:
 	original_scale = geometry_scale
 	setup_environment()
 
@@ -83,7 +83,7 @@ func _ready():
 
 	setup_camera_orbit()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 
 	# Handle automatic slideshow
@@ -99,7 +99,7 @@ func _process(delta):
 		if enable_morphing:
 			apply_morphing(delta)
 
-func setup_environment():
+func setup_environment() -> void:
 	# Create atmospheric environment
 	var env = Environment.new()
 	env.background_mode = Environment.BG_COLOR
@@ -132,7 +132,7 @@ func setup_environment():
 	dir_light.shadow_enabled = true
 	add_child(dir_light)
 
-func generate_geometry():
+func generate_geometry() -> void:
 	match geometry_type:
 		"Icosphere":
 			generate_icosphere()
@@ -147,7 +147,7 @@ func generate_geometry():
 
 	generate_colors()
 
-func generate_dots():
+func generate_dots() -> void:
 	# Clear previous data
 	dot_positions.clear()
 	dot_colors.clear()
@@ -211,7 +211,7 @@ func generate_dots():
 
 		dot_colors.append(color)
 
-func create_dots_mesh():
+func create_dots_mesh() -> void:
 	if dots_mesh_instance and is_instance_valid(dots_mesh_instance):
 		dots_mesh_instance.queue_free()
 		dots_mesh_instance = null
@@ -253,7 +253,7 @@ func create_dots_mesh():
 	add_child(multi_mesh_instance)
 	dots_mesh_instance = multi_mesh_instance
 
-func generate_icosphere():
+func generate_icosphere() -> void:
 	# Generate icosphere using iterative subdivision
 	base_vertices.clear()
 	base_indices.clear()
@@ -286,7 +286,7 @@ func generate_icosphere():
 	for subdivision in range(geometry_resolution):
 		subdivide_mesh()
 
-func generate_subdivided_cube():
+func generate_subdivided_cube() -> void:
 	base_vertices.clear()
 	base_indices.clear()
 	
@@ -323,7 +323,7 @@ func generate_subdivided_cube():
 				base_indices.append_array([i, i + 1, i + subdivisions + 1])
 				base_indices.append_array([i + 1, i + subdivisions + 2, i + subdivisions + 1])
 
-func generate_cylinder():
+func generate_cylinder() -> void:
 	base_vertices.clear()
 	base_indices.clear()
 	
@@ -354,7 +354,7 @@ func generate_cylinder():
 			base_indices.append_array([i, i + 1, i + radial_segments + 1])
 			base_indices.append_array([i + 1, i + radial_segments + 2, i + radial_segments + 1])
 
-func generate_torus():
+func generate_torus() -> void:
 	base_vertices.clear()
 	base_indices.clear()
 	
@@ -392,7 +392,7 @@ func generate_torus():
 			base_indices.append_array([a, b, c])
 			base_indices.append_array([b, d, c])
 
-func subdivide_mesh():
+func subdivide_mesh() -> void:
 	var new_vertices = base_vertices.duplicate()
 	var new_indices = PackedInt32Array()
 	var edge_map = {}
@@ -431,7 +431,7 @@ func get_or_create_midpoint(v1: int, v2: int, vertices: PackedVector3Array, edge
 	edge_map[key] = index
 	return index
 
-func generate_colors():
+func generate_colors() -> void:
 	vertex_colors.clear()
 	face_colors.clear()
 	
@@ -449,7 +449,7 @@ func generate_colors():
 		_:
 			generate_rainbow_colors()
 
-func generate_rainbow_colors():
+func generate_rainbow_colors() -> void:
 	for i in range(base_vertices.size()):
 		var vertex = base_vertices[i]
 		var angle = atan2(vertex.z, vertex.x) + PI
@@ -467,7 +467,7 @@ func generate_rainbow_colors():
 		var c3 = vertex_colors[base_indices[i + 2]]
 		face_colors.append((c1 + c2 + c3) / 3.0)
 
-func generate_hsv_sweep():
+func generate_hsv_sweep() -> void:
 	for i in range(base_vertices.size()):
 		var vertex = base_vertices[i]
 		var normalized_y = (vertex.y / geometry_scale + 1.0) * 0.5
@@ -480,7 +480,7 @@ func generate_hsv_sweep():
 	
 	generate_face_colors_from_vertices()
 
-func generate_rgb_cube_colors():
+func generate_rgb_cube_colors() -> void:
 	for i in range(base_vertices.size()):
 		var vertex = base_vertices[i].normalized()
 		var r = (vertex.x + 1.0) * 0.5
@@ -492,7 +492,7 @@ func generate_rgb_cube_colors():
 	
 	generate_face_colors_from_vertices()
 
-func generate_gradient_colors():
+func generate_gradient_colors() -> void:
 	for i in range(base_vertices.size()):
 		var vertex = base_vertices[i]
 		var factor = (vertex.length() - geometry_scale * 0.5) / (geometry_scale * 0.5)
@@ -505,14 +505,14 @@ func generate_gradient_colors():
 	
 	generate_face_colors_from_vertices()
 
-func generate_random_colors():
+func generate_random_colors() -> void:
 	for i in range(base_vertices.size()):
 		var color = Color(randf(), randf(), randf()) * color_intensity
 		vertex_colors.append(color)
 	
 	generate_face_colors_from_vertices()
 
-func generate_face_colors_from_vertices():
+func generate_face_colors_from_vertices() -> void:
 	face_colors.clear()
 	for i in range(0, base_indices.size(), 3):
 		var c1 = vertex_colors[base_indices[i]]
@@ -520,7 +520,7 @@ func generate_face_colors_from_vertices():
 		var c3 = vertex_colors[base_indices[i + 2]]
 		face_colors.append((c1 + c2 + c3) / 3.0)
 
-func create_color_plates():
+func create_color_plates() -> void:
 	color_plates.clear()
 	
 	# Create individual plates for each face
@@ -619,7 +619,7 @@ func create_plate_mesh(v1: Vector3, v2: Vector3, v3: Vector3, normal: Vector3) -
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	return mesh
 
-func create_wireframe():
+func create_wireframe() -> void:
 	wireframe_mesh = MeshInstance3D.new()
 	
 	var mesh = ArrayMesh.new()
@@ -639,7 +639,7 @@ func create_wireframe():
 	
 	add_child(wireframe_mesh)
 
-func setup_camera_orbit():
+func setup_camera_orbit() -> void:
 	# Only add camera if scene doesn't have one
 	var existing_camera = get_viewport().get_camera_3d()
 	if existing_camera:
@@ -651,7 +651,7 @@ func setup_camera_orbit():
 	camera.current = true
 	add_child(camera)
 
-func handle_slideshow(delta):
+func handle_slideshow(delta) -> void:
 	slideshow_timer += delta
 
 	if slideshow_timer >= slide_duration:
@@ -672,7 +672,7 @@ func handle_slideshow(delta):
 		# Reset timer
 		slideshow_timer = 0.0
 
-func update_existing_plate_colors():
+func update_existing_plate_colors() -> void:
 	# Update the colors of existing plates without recreating them
 	for i in range(color_plates.size()):
 		if i < color_plates.size() and i < face_colors.size():
@@ -684,7 +684,7 @@ func update_existing_plate_colors():
 					material.albedo_color = new_color
 					material.emission = new_color * emission_strength
 
-func animate_geometry(delta):
+func animate_geometry(delta) -> void:
 	# Rotate around Y axis only
 	rotation.y += rotation_speed.y * delta
 	
@@ -692,7 +692,7 @@ func animate_geometry(delta):
 	var pulse = 1.0 + sin(time * pulse_frequency) * pulse_amplitude
 	scale = Vector3.ONE * pulse
 
-func update_colors(_delta):
+func update_colors(_delta) -> void:
 	# Animate colors over time
 	var color_time_offset = time * color_wave_speed
 
@@ -709,7 +709,7 @@ func update_colors(_delta):
 				material.albedo_color = animated_color
 				material.emission = animated_color * emission_strength
 
-func update_dot_colors(_delta):
+func update_dot_colors(_delta) -> void:
 	if not dots_mesh_instance:
 		return
 
@@ -725,7 +725,7 @@ func update_dot_colors(_delta):
 		var animated_color = base_color * wave_factor
 		multi_mesh.set_instance_color(i, animated_color)
 
-func apply_morphing(_delta):
+func apply_morphing(_delta) -> void:
 	# Subtle vertex displacement for organic feel
 	for i in range(color_plates.size()):
 		if i < color_plates.size():
@@ -740,7 +740,7 @@ func _input(_event):
 
 # --- New Visualization Logic ---
 
-func _generate_pixel_grid_dots():
+func _generate_pixel_grid_dots() -> void:
 	# Visualizes the "screen deception" - overlapping R, G, B dots forming colors
 	var dim = int(pow(dot_count / 3.0, 1.0/3.0))  # Dimensions for a cube of subpixels
 	if dim < 2: dim = 2
@@ -778,7 +778,7 @@ func _generate_pixel_grid_dots():
 				dot_positions.append(base_pos + Vector3(0, sub_offset * 1.5, 0))
 				dot_colors.append(Color(0, 0, nz) * color_intensity)
 
-func _generate_additive_mixing_dots():
+func _generate_additive_mixing_dots() -> void:
 	# Three overlapping spheres: Red, Green, Blue
 	var particles_per_sphere = dot_count / 3
 	var sphere_radius = geometry_scale * 0.6
@@ -808,7 +808,7 @@ func _generate_additive_mixing_dots():
 		Color(0, 0, 1) * color_intensity
 	)
 
-func _generate_sphere_cluster(center: Vector3, radius: float, count: int, color: Color):
+func _generate_sphere_cluster(center: Vector3, radius: float, count: int, color: Color) -> void:
 	for i in range(count):
 		# Random point inside sphere
 		var r = pow(randf(), 1.0/3.0) * radius
@@ -824,7 +824,7 @@ func _generate_sphere_cluster(center: Vector3, radius: float, count: int, color:
 		dot_positions.append(center + pos)
 		dot_colors.append(color)
 
-func _generate_rgb_cube_dots():
+func _generate_rgb_cube_dots() -> void:
 	# Structured grid representing color space
 	var dim = int(pow(dot_count, 1.0/3.0))
 	var spacing = geometry_scale * 2.0 / dim
@@ -846,7 +846,7 @@ func _generate_rgb_cube_dots():
 				dot_positions.append(pos)
 				dot_colors.append(Color(nx, ny, nz) * color_intensity)
 
-func _update_labels(text: String):
+func _update_labels(text: String) -> void:
 	if not explanation_label:
 		explanation_label = Label3D.new()
 		explanation_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -858,3 +858,12 @@ func _update_labels(text: String):
 		add_child(explanation_label)
 	
 	explanation_label.text = text
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

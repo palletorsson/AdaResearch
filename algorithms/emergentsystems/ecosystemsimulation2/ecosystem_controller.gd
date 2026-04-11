@@ -36,7 +36,7 @@ var current_entropy: float = 0.0
 var paused: bool = false
 var day_timer: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	# Initialize ecosystem components
 	_initialize_components()
 	
@@ -48,7 +48,7 @@ func _ready():
 	
 	print("Queer Computational Ecosystem initialized with " + str(initial_entity_count) + " entities")
 
-func _initialize_components():
+func _initialize_components() -> void:
 	# Create environment
 	environment = EcosystemEnvironment.new()  # Updated class name
 	environment.name = "Environment"
@@ -87,7 +87,7 @@ func _initialize_components():
 		visualization.name = "Visualization"
 		add_child(visualization)
 
-func _spawn_initial_entities():
+func _spawn_initial_entities() -> void:
 	for i in range(initial_entity_count):
 		var position = Vector3(
 			randf_range(-environment_size.x/2, environment_size.x/2),
@@ -120,7 +120,7 @@ func _spawn_initial_entities():
 		# Emit signal
 		emit_signal("entity_born", entity)
 
-func _connect_signals():
+func _connect_signals() -> void:
 	# Connect to entity signals
 	for entity in entities:
 		entity.connect("transformation_requested", _on_entity_transformation_requested)
@@ -133,7 +133,7 @@ func _connect_signals():
 	# Connect to event system signals
 	event_system.connect("event_triggered", _on_event_triggered)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if paused:
 		return
 	
@@ -160,7 +160,7 @@ func _process(delta):
 	current_entropy += entropy_growth_rate * delta / day_duration_seconds
 	morphology_generator.set_entropy(current_entropy)
 
-func advance_day():
+func advance_day() -> void:
 	current_day += 1
 	emit_signal("day_changed", current_day)
 	
@@ -176,7 +176,7 @@ func advance_day():
 	for entity in entities.duplicate():  # Duplicate to avoid modification during iteration
 		entity.end_of_day_update(current_day)
 
-func _on_entity_transformation_requested(entity):
+func _on_entity_transformation_requested(entity) -> void:
 	var previous_form = entity.get_current_form()
 	
 	# Calculate new form based on current traits and entropy
@@ -189,7 +189,7 @@ func _on_entity_transformation_requested(entity):
 	if enable_visualization:
 		visualization.update_entity_visualization(entity)
 
-func _on_entity_expired(entity):
+func _on_entity_expired(entity) -> void:
 	emit_signal("entity_expired", entity)
 	
 	# Remove from relationships
@@ -208,7 +208,7 @@ func _on_entity_expired(entity):
 	# Actually remove the entity
 	entity.queue_free()
 
-func _on_boundary_challenge_requested(entity, boundary_type):
+func _on_boundary_challenge_requested(entity, boundary_type) -> void:
 	var challenge_result = boundary_system.challenge_boundary(entity, boundary_type, current_entropy)
 	emit_signal("boundary_challenged", boundary_type, entity)
 	
@@ -219,7 +219,7 @@ func _on_boundary_challenge_requested(entity, boundary_type):
 		# Might trigger an event
 		event_system.trigger_event("boundary_transcended", entity, boundary_type)
 
-func _on_resource_spawned(resource):
+func _on_resource_spawned(resource) -> void:
 	# Register new resource with the resource system
 	resource_system.register_resource(resource)
 	
@@ -227,7 +227,7 @@ func _on_resource_spawned(resource):
 	if enable_visualization:
 		visualization.add_resource_visualization(resource)
 
-func _on_event_triggered(event_type, affected_entities):
+func _on_event_triggered(event_type, affected_entities) -> void:
 	print("Event triggered: " + event_type + " affecting " + str(affected_entities.size()) + " entities")
 	
 	# Different event types might cause different ecosystem responses
@@ -244,7 +244,7 @@ func _on_event_triggered(event_type, affected_entities):
 			for entity in affected_entities:
 				relationship_network.create_random_connections(entity, 2)
 
-func _on_season_changed():
+func _on_season_changed() -> void:
 	print("Season changed to: " + _get_season_name(current_season))
 	
 	# Different seasons affect resource availability
@@ -265,17 +265,17 @@ func _get_season_name(season_index: int) -> String:
 		_: return "Unknown"
 
 # Public methods for interaction
-func pause():
+func pause() -> void:
 	paused = true
 
-func resume():
+func resume() -> void:
 	paused = false
 
 func toggle_pause():
 	paused = !paused
 	return paused
 
-func set_entropy(value: float):
+func set_entropy(value: float) -> void:
 	current_entropy = clamp(value, 0.0, 1.0)
 	morphology_generator.set_entropy(current_entropy)
 
@@ -318,3 +318,12 @@ func get_entity_count() -> int:
 
 func get_current_entropy() -> float:
 	return current_entropy
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

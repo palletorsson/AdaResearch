@@ -1,0 +1,236 @@
+{
+	"artifacts": {
+		"coin_flip": {
+			"name": "Coin Flip",
+			"lookup_name": "coin_flip",
+			"description": "Interactive coin flip simulation demonstrating probability and frequency distributions.",
+			"scene": "res://algorithms/statistics/01_coinflip/CoinFlipVR.tscn",
+			"category": "statistics",
+			"tags": [
+				"probability",
+				"coin_flip",
+				"frequency",
+				"statistics"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "statistics",
+			"complexity": "advanced",
+			"dev_themes": [
+				"math",
+				"probability",
+				"statistics"
+			]
+		},
+		"dice_roll": {
+			"name": "Dice Roll",
+			"lookup_name": "dice_roll",
+			"description": "Dice rolling simulation exploring discrete probability distributions.",
+			"scene": "res://algorithms/statistics/02_diceroll/DiceRollVR.tscn",
+			"category": "statistics",
+			"tags": [
+				"probability",
+				"dice",
+				"discrete",
+				"statistics"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "statistics",
+			"complexity": "advanced",
+			"dev_themes": [
+				"math",
+				"probability",
+				"statistics"
+			]
+		},
+		"normal_distribution": {
+			"name": "Normal Distribution",
+			"lookup_name": "normal_distribution",
+			"description": "Visualization of the Gaussian normal distribution and bell curve properties.",
+			"scene": "res://algorithms/statistics/03_normal_distribution/NormalDistributionVR.tscn",
+			"category": "statistics",
+			"tags": [
+				"gaussian",
+				"bell_curve",
+				"normal",
+				"statistics"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "statistics",
+			"complexity": "advanced",
+			"dev_themes": [
+				"math",
+				"probability",
+				"statistics"
+			]
+		},
+		"central_limit_theorem": {
+			"name": "Central Limit Theorem",
+			"lookup_name": "central_limit_theorem",
+			"description": "Demonstrates how sample means converge to a normal distribution regardless of population shape.",
+			"scene": "res://algorithms/statistics/04_central_limit_theorem/CentralLimitTheoremVR.tscn",
+			"category": "statistics",
+			"tags": [
+				"clt",
+				"sampling",
+				"convergence",
+				"statistics"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "statistics",
+			"complexity": "beginner",
+			"dev_themes": [
+				"math",
+				"probability",
+				"statistics"
+			]
+		},
+		"hypothesis_testing": {
+			"name": "Hypothesis Testing",
+			"lookup_name": "hypothesis_testing",
+			"description": "Interactive exploration of null hypotheses, p-values, and statistical significance.",
+			"scene": "res://algorithms/statistics/05_hypothesis_testing/HypothesisTestingVR.tscn",
+			"category": "statistics",
+			"tags": [
+				"hypothesis",
+				"p_value",
+				"significance",
+				"statistics"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "statistics",
+			"complexity": "beginner",
+			"dev_themes": [
+				"math",
+				"probability",
+				"statistics"
+			]
+		},
+		"regression_analysis": {
+			"name": "Regression Analysis",
+			"lookup_name": "regression_analysis",
+			"description": "Linear and polynomial regression fitting with visual residual analysis.",
+			"scene": "res://algorithms/statistics/06_regression_analysis/RegressionAnalysisVR.tscn",
+			"category": "statistics",
+			"tags": [
+				"regression",
+				"linear",
+				"fitting",
+				"statistics"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "statistics",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"math",
+				"probability",
+				"statistics"
+			]
+		},
+		"bayesian_inference": {
+			"name": "Bayesian Inference",
+			"lookup_name": "bayesian_inference",
+			"description": "Bayesian inference visualization showing prior, likelihood, and posterior updating.",
+			"scene": "res://algorithms/statistics/07_bayesian_inference/BayesianInferenceVR.tscn",
+			"category": "statistics",
+			"tags": [
+				"bayesian",
+				"prior",
+				"posterior",
+				"inference",
+				"statistics"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "statistics",
+			"complexity": "intermediate",
+			"dev_themes": [
+				"math",
+				"probability",
+				"statistics"
+			]
+		},
+		"monte_carlo": {
+			"name": "Monte Carlo Simulation",
+			"lookup_name": "monte_carlo",
+			"description": "Monte Carlo method using random sampling to estimate numerical results.",
+			"scene": "res://algorithms/statistics/08_monte_carlo/MonteCarloVR.tscn",
+			"category": "statistics",
+			"tags": [
+				"monte_carlo",
+				"random_sampling",
+				"estimation",
+				"statistics"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "statistics",
+			"complexity": "advanced",
+			"dev_themes": [
+				"math",
+				"probability",
+				"statistics"
+			]
+		},
+		"markov_chain": {
+			"name": "Markov Chain",
+			"lookup_name": "markov_chain",
+			"description": "Markov chain visualization showing state transitions and stationary distributions.",
+			"scene": "res://algorithms/statistics/09_markov_chain/MarkovChainVR.tscn",
+			"category": "statistics",
+			"tags": [
+				"markov",
+				"state_machine",
+				"transitions",
+				"statistics"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "statistics",
+			"complexity": "advanced",
+			"dev_themes": [
+				"math",
+				"probability",
+				"statistics"
+			]
+		},
+		"cross_validation": {
+			"name": "ML Cross Validation",
+			"lookup_name": "cross_validation",
+			"description": "Machine learning cross-validation demonstrating train/test splits and model evaluation.",
+			"scene": "res://algorithms/statistics/10_ml_crossvalidation/CrossValidationVR.tscn",
+			"category": "statistics",
+			"tags": [
+				"cross_validation",
+				"machine_learning",
+				"evaluation",
+				"statistics"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "statistics",
+			"complexity": "beginner",
+			"dev_themes": [
+				"education",
+				"math",
+				"probability",
+				"statistics"
+			]
+		}
+	}
+}

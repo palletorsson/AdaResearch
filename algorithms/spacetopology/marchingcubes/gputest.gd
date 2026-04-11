@@ -2,7 +2,7 @@
 # Simple script to test GPU compute shader support
 extends Node
 
-func _ready():
+func _ready() -> void:
 	test_gpu_availability()
 
 func test_gpu_availability():

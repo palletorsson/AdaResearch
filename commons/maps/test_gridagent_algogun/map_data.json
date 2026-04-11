@@ -1,119 +1,140 @@
 {
   "map_info": {
-    "name": "Grid Agent + Algo-Gun Test",
-    "lookup_name": "test_gridagent_algogun",
-    "description": "Complete Grid Agent system test: Spawn with COPY agent, capture with Algo-Gun, direct operations.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 11,
-      "depth": 11,
-      "max_height": 4
-    },
-    "metadata": {
-      "difficulty": "test",
-      "category": "development",
-      "estimated_time": "5 minutes"
-    }
+      "name": "Grid Agent + Algo-Gun Test",
+      "lookup_name": "test_gridagent_algogun",
+      "description": "Complete Grid Agent system test: Spawn with COPY agent, capture with Algo-Gun, direct operations.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 11,
+          "depth": 11,
+          "max_height": 4
+      },
+      "metadata": {
+          "difficulty": "test",
+          "category": "development",
+          "estimated_time": "5 minutes"
+      }
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Exit",
+          "description": "Return to sequence",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      },
+      "s": {
+          "properties": {
+              "height": 3.0
+          }
+      }
   },
   "documentation": {
-    "summary": "Complete Grid Agent System Test - Algo-Gun Integration",
-    "layout": "11x11 grid with varied structures for agent interaction",
-    "objective": "Test full workflow: spawn agent, use algo-gun to capture, direct to modify grid",
-    "key_elements": [ "gridagent:copy at center - autonomous behavior", "Algo-gun pickup for player", "Varied grid structures (platforms, towers) to modify", "Instructions via text display" ],
-    "instructions": "1. Observe agent wandering/working. 2. Pick up Algo-Gun. 3. Aim at agent, press GRIP to capture. 4. Aim at grid, press GRIP to direct agent."
+      "summary": "Complete Grid Agent System Test - Algo-Gun Integration",
+      "layout": "11x11 grid with varied structures for agent interaction",
+      "objective": "Test full workflow: spawn agent, use algo-gun to capture, direct to modify grid",
+      "key_elements": [
+          "gridagent:copy at center - autonomous behavior",
+          "Algo-gun pickup for player",
+          "Varied grid structures (platforms, towers) to modify",
+          "Instructions via text display"
+      ],
+      "instructions": "1. Observe agent wandering/working. 2. Pick up Algo-Gun. 3. Aim at agent, press GRIP to capture. 4. Aim at grid, press GRIP to direct agent."
+  },
+  "artifact_definitions": {
+      "algo_gun": {
+          "scene": "res://algorithms/forces/algo_gun.tscn",
+          "name": "Algo-Gun",
+          "description": "Capture and direct Grid Agents",
+          "scale": 1.0
+      }
+  },
+  "lighting": {
+      "ambient_color": [
+          0.3,
+          0.4,
+          0.5
+      ],
+      "ambient_energy": 0.9,
+      "directional_light": {
+          "enabled": true,
+          "direction": [
+              -0.3,
+              -0.8,
+              -0.5
+          ],
+          "color": [
+              1.0,
+              0.95,
+              0.9
+          ],
+          "energy": 1.6
+      }
+  },
+  "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+          "type": "sky",
+          "color": [
+              0.15,
+              0.2,
+              0.35
+          ]
+      }
   },
   "layers": {
     "structure": [
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "0", "0", "1", "1", "1", "1", "1", "1", "1", "0", "0" ],
-      [ "0", "0", "1", "1", "1", "1", "1", "1", "1", "0", "0" ],
-      [ "0", "0", "0", "1", "1", "1", "1", "1", "0", "0", "0" ]
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["0", "0", "1", "1", "1", "1", "1", "1", "1", "0", "0"],
+      ["0", "0", "1", "1", "1", "1", "1", "1", "1", "0", "0"],
+      ["0", "0", "0", "1", "1", "1", "1", "1", "0", "0", "0"]
     ],
     "utilities": [
-      [ "s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t" ],
-      [ "an", " ", " ", "3t:ALGO-GUN_TEST", " ", " ", " ", "3t:GRIP=CAPTURE/DIRECT", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+      ["s", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t"],
+      ["an", " ", " ", "3t:ALGO-GUN_TEST", " ", " ", " ", "3t:GRIP=CAPTURE/DIRECT", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
     ],
     "interactables": [
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", "algo_gun", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", "gridagent:copy", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", "algo_gun", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "gridagent:copy", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
     ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Exit",
-      "description": "Return to sequence",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    },
-    "s": {
-      "properties": {
-        "height": 3.0
-      }
-    }
-  },
-  "artifact_definitions": {
-    "algo_gun": {
-      "scene": "res://algorithms/forces/algo_gun.tscn",
-      "name": "Algo-Gun",
-      "description": "Capture and direct Grid Agents",
-      "scale": 1.0
-    }
-  },
-  "lighting": {
-    "ambient_color": [ 0.3, 0.4, 0.5 ],
-    "ambient_energy": 0.9,
-    "directional_light": {
-      "enabled": true,
-      "direction": [ -0.3, -0.8, -0.5 ],
-      "color": [ 1.0, 0.95, 0.9 ],
-      "energy": 1.6
-    }
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": true,
-    "enable_physics": true,
-    "background": {
-      "type": "sky",
-      "color": [ 0.15, 0.2, 0.35 ]
-    }
   }
 }

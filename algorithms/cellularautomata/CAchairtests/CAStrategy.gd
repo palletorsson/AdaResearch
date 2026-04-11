@@ -8,11 +8,11 @@ enum StrategyType { SIMPLE_SWITCHED, MEMORY_BASED, GRADIENT_BASED, PURE_CA, DOWN
 var grid: CAGrid
 var strategy_type: StrategyType
 
-func _init(grid_ref: CAGrid, type: StrategyType):
+func _init(grid_ref: CAGrid, type: StrategyType) -> void:
 	grid = grid_ref
 	strategy_type = type
 
-func step():
+func step() -> void:
 	"""Execute one generation step"""
 	match strategy_type:
 		StrategyType.SIMPLE_SWITCHED:
@@ -29,7 +29,7 @@ func step():
 	grid.generation += 1
 	grid.update_visualization()
 
-func strategy_downward_columns():
+func strategy_downward_columns() -> void:
 	"""Strategy 5: Start with platform, grow legs down using Rule 110"""
 	var z = 6 - grid.generation
 	if z < 0 or z >= 6:
@@ -81,7 +81,7 @@ func apply_rule_110(l: int, c: int, r: int) -> int:
 	var rule = 110
 	return (rule >> key) & 1
 
-func strategy_simple_switched():
+func strategy_simple_switched() -> void:
 	"""Strategy 1: Simple time-based rule switching"""
 	var new_states = []
 	var max_seat_radius = 4.5  # Maximum distance from origin for seat cells
@@ -134,7 +134,7 @@ func strategy_simple_switched():
 	for state in new_states:
 		state[0].set_occupied(state[1], grid.generation)
 
-func strategy_memory_based():
+func strategy_memory_based() -> void:
 	"""Strategy 2: Cells remember origin and act accordingly"""
 	var new_states = []
 	
@@ -178,7 +178,7 @@ func strategy_memory_based():
 	for state in new_states:
 		state[0].set_occupied(state[1], grid.generation)
 
-func compute_gradient():
+func compute_gradient() -> void:
 	"""Compute distance gradient from back edge"""
 	var back_cells = []
 	
@@ -196,7 +196,7 @@ func compute_gradient():
 			min_dist = min(min_dist, dist)
 		cell.gradient = min_dist
 
-func strategy_gradient_based():
+func strategy_gradient_based() -> void:
 	"""Strategy 3: Chemical gradient determines behavior"""
 	compute_gradient()
 	var new_states = []
@@ -226,7 +226,7 @@ func strategy_gradient_based():
 	for state in new_states:
 		state[0].set_occupied(state[1], grid.generation)
 
-func strategy_pure_ca():
+func strategy_pure_ca() -> void:
 	"""Strategy 4: Pure CA with state encoding"""
 	var new_states = []
 	

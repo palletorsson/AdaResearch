@@ -5,6 +5,17 @@ extends Node3D
 ## Ball 1 (Blue): Carrier - Frequency, Attack, Decay
 ## Ball 2 (Orange): Modulator - Ratio, Index, Mod Decay
 
+
+# @identity
+# essence: FM synthesis — carrier(t) * sin(mod_ratio * carrier * mod_index)
+# desire: Grab two balls in VR to sculpt sound through frequency modulation
+# critical_parameter: mod_index — controls harmonic richness from pure tone to metallic chaos
+# triggers: ball position changes map to carrier freq, attack, decay, mod ratio, mod index, mod decay
+# emerges: bell tones, electric pianos, brass — all from one oscillator modulating another
+# needs: VR grab for both balls [has], preset buttons [has]
+# relationships: depends on AudioStreamPlayer3D; contrasts with MarioSoundController (FM vs basic waveforms); unlocks timbre_sculptor
+# truth: All timbral complexity is phase modulation of simple oscillators.
+
 @onready var carrier_mapper = $Ball1_Carrier
 @onready var modulator_mapper = $Ball2_Modulator
 @onready var audio_player = $AudioStreamPlayer3D
@@ -301,3 +312,12 @@ func get_current_params() -> Dictionary:
 		"mod_index": mod_index,
 		"mod_decay": mod_decay
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

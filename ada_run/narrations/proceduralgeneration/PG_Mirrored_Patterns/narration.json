@@ -1,0 +1,181 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 3,
+				"name": "mirror_cellular_texture_for_3d",
+				"pos": [
+					0,
+					1,
+					3
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 11,
+				"name": "rhizomatic_maze_space",
+				"pos": [
+					6,
+					1,
+					3
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			}
+		],
+		"dead_ends": [],
+		"issues": [],
+		"map_name": "PG_Mirrored_Patterns",
+		"pacing": {
+			"density": 5.5,
+			"reachable_artifacts": 2,
+			"total_artifacts": 2,
+			"walkable_tiles": 58
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": 16,
+			"pos": [
+				9,
+				0,
+				7
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "PG_Mirrored_Patterns",
+	"sequence": "proceduralgeneration",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "mirror_cellular_texture_for_3d",
+				"pos": [
+					0,
+					1,
+					3
+				]
+			},
+			{
+				"name": "rhizomatic_maze_space",
+				"pos": [
+					6,
+					1,
+					3
+				]
+			}
+		],
+		"dimensions": [
+			11,
+			3,
+			9
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 58,
+			"ground_pct": 58.5858585858586,
+			"void": 34,
+			"walls": 7
+		},
+		"map_name": "PG_Mirrored_Patterns",
+		"rooms": [
+			{
+				"artifacts": [
+					"mirror_cellular_texture_for_3d",
+					"rhizomatic_maze_space"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 58
+			}
+		],
+		"spawn": [
+			0,
+			1,
+			0
+		],
+		"teleporter": [
+			9,
+			0,
+			7
+		]
+	},
+	"timestamp": "2026-03-16T12:15:27",
+	"walkthrough": {
+		"map_name": "PG_Mirrored_Patterns",
+		"stops": [
+			{
+				"facing": "south",
+				"look_at": [
+					0,
+					1,
+					3
+				],
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "south",
+						"dist": 3,
+						"name": "mirror_cellular_texture_for_3d"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "east",
+				"name": "mirror_cellular_texture_for_3d",
+				"pos": [
+					0,
+					1,
+					3
+				],
+				"steps_from_prev": 3,
+				"total_steps": 3,
+				"type": "artifact",
+				"visible_others": []
+			},
+			{
+				"approach_from": "east",
+				"facing": "southeast",
+				"name": "rhizomatic_maze_space",
+				"pos": [
+					6,
+					1,
+					3
+				],
+				"steps_from_prev": 6,
+				"total_steps": 9,
+				"type": "artifact",
+				"visible_others": []
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					9,
+					0,
+					7
+				],
+				"reachable": true,
+				"steps_from_prev": 5,
+				"total_steps": 14,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 2,
+			"total_steps": 14,
+			"total_stops": 4
+		}
+	}
+}

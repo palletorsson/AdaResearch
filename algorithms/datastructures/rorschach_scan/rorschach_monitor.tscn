@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://ifb5dbgkey5v"]
+
+[ext_resource type="Script" uid="uid://rorschachmon1gd" path="res://algorithms/datastructures/rorschach_scan/rorschach_monitor.gd" id="1_monitor"]
+
+[node name="RorschachMonitor" type="Node3D"]
+script = ExtResource("1_monitor")
+scan_speed = 0.4
+layer_count = 48
+resolution = 256
+auto_cycle = true
+scan_mode = 0
+ink_intensity = 1.0
+glow_strength = 0.5
+monitor_size = Vector2(1, 1)
+frame_color = Color(0.15, 0.15, 0.18, 1)
+screen_emission = 0.8
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)

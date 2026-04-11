@@ -7,7 +7,7 @@ extends EditorScript
 const TILE_SIZE = 2.0
 const TILE_HEIGHT = 1.0 # Half height for gentle slopes
 
-func _run():
+func _run() -> void:
 	var root = Node3D.new()
 	root.name = "Prototypes3D"
 	
@@ -125,7 +125,7 @@ func _run():
 	else:
 		push_error("Failed to save tiles!")
 
-func create_tile(parent, name, color, sockets, visible=true, pos=Vector3.ZERO, weight=1.0):
+func create_tile(parent, name, color, sockets, visible=true, pos=Vector3.ZERO, weight=1.0) -> void:
 	var node = Node3D.new()
 	node.name = name
 	node.set_meta("sockets", sockets)
@@ -149,7 +149,7 @@ func create_tile(parent, name, color, sockets, visible=true, pos=Vector3.ZERO, w
 	node.owner = parent
 	set_owner_params(node, parent)
 
-func create_slope(parent, name, color, rotation_degrees, left_to_right, sockets, pos=Vector3.ZERO, weight=1.0):
+func create_slope(parent, name, color, rotation_degrees, left_to_right, sockets, pos=Vector3.ZERO, weight=1.0) -> void:
 	var node = Node3D.new()
 	node.name = name
 	node.set_meta("sockets", sockets)
@@ -177,7 +177,7 @@ func create_slope(parent, name, color, rotation_degrees, left_to_right, sockets,
 	set_owner_params(node, parent)
 
 
-func create_water_tile(parent, name, color, sockets, pos=Vector3.ZERO, weight=1.0):
+func create_water_tile(parent, name, color, sockets, pos=Vector3.ZERO, weight=1.0) -> void:
 	var node = Node3D.new()
 	node.name = name
 	node.set_meta("sockets", sockets)
@@ -199,7 +199,9 @@ func create_water_tile(parent, name, color, sockets, pos=Vector3.ZERO, weight=1.
 	node.owner = parent
 	set_owner_params(node, parent)
 
-func set_owner_params(node, owner_node):
+func set_owner_params(node, owner_node) -> void:
 	for child in node.get_children():
 		child.owner = owner_node
 		set_owner_params(child, owner_node)
+
+

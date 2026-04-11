@@ -4,6 +4,17 @@ extends Node3D
 ## Uses wheel controls for station tuning and volume adjustment
 ## Loads soundscape presets from res://commons/audio/presets/
 
+
+# @identity
+# essence: station = floor(angle / station_width), clarity = 1 - |offset| / threshold
+# desire: Turn a physical wheel in VR to tune between soundscape radio stations
+# critical_parameter: station_width (degrees per station) — determines tuning precision
+# triggers: wheel rotation angle maps to station index; proximity to center determines signal clarity
+# emerges: static noise between stations, clean signal at center — analog radio metaphor
+# needs: VR hinge wheel [has], volume wheel [has]
+# relationships: depends on SciFiLoFiSoundscape presets; contrasts with audio_catalog_tablet (browsing vs tuning); unlocks ambient audio curation
+# truth: Every frequency band is a station; tuning is selecting which resonance to amplify.
+
 const PRESETS_PATH = "res://commons/audio/presets/"
 
 # Wheel controls

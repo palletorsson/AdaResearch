@@ -1,3 +1,13 @@
+# @identity
+# essence: eat(mushroom) -> alter_perception() -- pickable mushroom that rewrites sensory state
+# desire: a small organic form that dissolves when consumed, triggering perceptual transformation
+# critical_parameter: _dissolve_timer -- how quickly it vanishes after eating; effects depend on type
+# triggers: XRToolsPickable grab -> bring to face -> consume; dissolve animation; perception shift
+# emerges: the boundary between pickup and hazard dissolves -- medicine and poison share the same form
+# needs: XRToolsPickable [has]; dissolve animation [has]; mesh scaling [has]; VR grab interaction [has]
+# relationships: paired with stick_tool and becoming_catalyst as inventory items; Q-FEP dual-nature
+# truth: the mushroom is the same form whether it heals or harms -- context determines outcome.
+
 # edible_mushroom.gd
 # A mushroom the player can pick up and eat.
 # Extends XRToolsPickable so XR Tools' FunctionPickup can grab it.
@@ -107,12 +117,17 @@ func _eat() -> void:
 	if has_node("MushroomCollision"):
 		$MushroomCollision.disabled = true
 
+	# Heal 5% health
+	var gm = get_node_or_null("/root/GameManager")
+	if gm and gm.has_method("heal_player"):
+		gm.heal_player(5.0)
+
 	# Find or create the effect manager
 	var effect: MushroomEffect = _find_or_create_effect()
 	if effect:
 		effect.trigger_with_shader(effect_shader_path, effect_duration)
 
-	print("[EdibleMushroom] Eaten! Triggering effect: %s (%.0fs)" % [
+	print("[EdibleMushroom] Eaten! +5 health, effect: %s (%.0fs)" % [
 		effect_shader_path.get_file(), effect_duration])
 
 func _find_or_create_effect() -> MushroomEffect:

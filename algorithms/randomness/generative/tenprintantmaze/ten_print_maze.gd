@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # 3D Standing 10 PRINT Maze with Ant Pathfinder
 # Based on the classic one-liner: 10 PRINT CHR$(205.5+RND(1)); : GOTO 10
@@ -46,7 +46,7 @@ var visited: Dictionary = {}
 var wall_timer: Timer
 var wall_nodes: Array[Node3D] = []
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	generate_maze()
 	build_navigation_grid()
@@ -57,12 +57,12 @@ func _ready():
 	create_path_visualization()
 	place_ant()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if ant_moving and not found_exit:
 		move_ant(delta)
 		update_path_visualization()
 
-func generate_maze():
+func generate_maze() -> void:
 	# Initialize maze grid
 	maze.clear()
 	for z in range(grid_depth):
@@ -76,7 +76,7 @@ func generate_maze():
 	start_pos = Vector2i(0, randi() % grid_depth)
 	exit_pos = Vector2i(grid_width - 1, randi() % grid_depth)
 
-func build_navigation_grid():
+func build_navigation_grid() -> void:
 	# Create a finer grid for navigation where lines are walls
 	nav_grid.clear()
 	
@@ -107,7 +107,7 @@ func build_navigation_grid():
 					if nx < grid_width * nav_grid_scale and nz < grid_depth * nav_grid_scale:
 						nav_grid[nz][nx] = 1  # 1 = wall
 
-func create_3d_maze():
+func create_3d_maze() -> void:
 	# Clear existing wall nodes
 	wall_nodes.clear()
 
@@ -126,7 +126,7 @@ func create_3d_maze():
 		create_marker(Vector3(ant_size, start_pos.y * cell_size + cell_size/2, 0), Color.GREEN)
 		create_marker(Vector3(ant_size, exit_pos.y * cell_size + cell_size/2, grid_width * cell_size), Color.BLUE)
 
-func create_diagonal_wall(position, is_forward_slash):
+func create_diagonal_wall(position, is_forward_slash) -> void:
 	var wall_node = Node3D.new()
 	wall_node.position = position
 	add_child(wall_node)
@@ -164,7 +164,7 @@ func create_diagonal_wall(position, is_forward_slash):
 
 	wall_node.add_child(wall_instance)
 
-func create_marker(position, color):
+func create_marker(position, color) -> void:
 	var marker_mesh = CylinderMesh.new()
 	marker_mesh.top_radius = cell_size * 0.3
 	marker_mesh.bottom_radius = cell_size * 0.3
@@ -185,7 +185,7 @@ func create_marker(position, color):
 
 
 
-func create_ant():
+func create_ant() -> void:
 	ant_node = Node3D.new()
 	ant_node.name = "Ant"
 	
@@ -206,14 +206,14 @@ func create_ant():
 	ant_node.add_child(ant_mesh_instance)
 	add_child(ant_node)
 
-func create_path_visualization():
+func create_path_visualization() -> void:
 	path_node = Node3D.new()
 	path_node.name = "Path"
 	add_child(path_node)
 	
 	# We'll create the actual path mesh in update_path_visualization()
 
-func place_ant():
+func place_ant() -> void:
 	# Place ant at start (bottom side in ZY plane)
 	var start_z = start_pos.y * nav_grid_scale + nav_grid_scale / 2
 	ant_nav_pos = Vector2i(0, start_z)
@@ -227,7 +227,7 @@ func place_ant():
 	ant_moving = true
 	visited = {ant_nav_pos: true}
 
-func move_ant(_delta):
+func move_ant(_delta) -> void:
 	if is_at_exit():
 		found_exit = true
 		return
@@ -251,7 +251,7 @@ func move_ant(_delta):
 	visited[ant_nav_pos] = true
 	update_ant_3d_position()
 
-func update_ant_3d_position():
+func update_ant_3d_position() -> void:
 	# Update the 3D position of the ant based on its navigation grid position (ZY plane)
 	var ant_3d_y = ant_nav_pos.y * cell_size / nav_grid_scale
 	var ant_3d_z = ant_nav_pos.x * cell_size / nav_grid_scale
@@ -310,7 +310,7 @@ func choose_best_move(moves):
 	
 	return best_move
 
-func update_path_visualization():
+func update_path_visualization() -> void:
 	# Remove previous path
 	if path_mesh_instance != null:
 		path_mesh_instance.queue_free()
@@ -342,7 +342,7 @@ func update_path_visualization():
 	path_immediate_mesh.surface_end()
 	path_node.add_child(path_mesh_instance)
 
-func setup_wall_movement_timer():
+func setup_wall_movement_timer() -> void:
 	"""Setup timer to move a random wall at the configured interval."""
 	wall_timer = Timer.new()
 	wall_timer.wait_time = maxf(wall_change_interval, 0.02)
@@ -350,7 +350,7 @@ func setup_wall_movement_timer():
 	wall_timer.autostart = true
 	add_child(wall_timer)
 
-func _on_wall_timer_timeout():
+func _on_wall_timer_timeout() -> void:
 	"""Rotate a random wall to change its diagonal direction"""
 	if wall_nodes.is_empty():
 		return
@@ -365,3 +365,12 @@ func _on_wall_timer_timeout():
 
 	# Rotate the wall by 90 degrees around X axis (switching between / and \ in ZY plane)
 	wall_instance.rotate_x(PI/2)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -4,9 +4,9 @@ render_mode blend_mix, cull_disabled, diffuse_lambert, specular_schlick_ggx, dep
 // ═══════════════════════════════════════════════════════════════
 // critter_dna.gdshader — Universal DNA-expression shader
 //
-// Evolved from queerbreeder's dna_pattern.gdshader. Drives all
-// five kingdoms (tree, creature, flower, fungus, hybrid) from
-// a single shader with 20 interpolatable pattern types.
+// Drives all five kingdoms (tree, creature, flower, fungus, hybrid)
+// from a single shader. 20 interpolatable patterns, 5 surface types,
+// vertex breathing/wind/tension, and per-part material interpretation.
 //
 // Every uniform maps to a CritterDNA gene via CritterTraitMapper.
 // ═══════════════════════════════════════════════════════════════
@@ -35,44 +35,74 @@ uniform float specular_tint : hint_range(0.0, 1.0) = 0.0;
 uniform float transparency : hint_range(0.0, 0.9) = 0.0;
 uniform float cracking : hint_range(0.0, 1.0) = 0.0;
 
+// --- Surface type (kingdom-derived, per-part) ---
+// 0=bark, 1=scales, 2=petal, 3=membrane, 4=fur/velvet
+uniform float surface_type : hint_range(0.0, 4.0) = 0.0;
+
 // --- LOD ---
 uniform float detail_level : hint_range(0.1, 1.0) = 1.0;
 
-// --- Animation (from CritterDNA behavior genes via trait mapper) ---
+// --- Animation: Wave/Wind ---
 uniform float wave_intensity : hint_range(0.0, 1.0) = 0.0;
 uniform float wave_amplitude : hint_range(0.0, 0.5) = 0.5;
 uniform float wave_frequency : hint_range(0.1, 20.0) = 10.0;
 uniform float wave_speed : hint_range(0.0, 10.0) = 3.0;
 uniform vec2 wave_direction = vec2(1.0, 0.0);
 
-// --- Bond / Transmutation overlay (from CritterTraitMapper.apply_bond_overlay) ---
+// --- Animation: Breathing (all kingdoms) ---
+uniform float breath_speed : hint_range(0.1, 5.0) = 1.5;
+uniform float breath_amplitude : hint_range(0.0, 0.1) = 0.015;
+
+// --- Animation: Tension shimmer (creatures under stress) ---
+uniform float tension : hint_range(0.0, 1.0) = 0.0;
+
+// --- Bond / Transmutation overlay ---
 uniform float emission_energy : hint_range(0.0, 2.0) = 0.0;
 uniform float rim_light : hint_range(0.0, 1.0) = 0.0;
 uniform vec4 rim_color : source_color = vec4(0.8, 0.9, 1.0, 1.0);
 
 
 // ═══════════════════════════════════════════════════════════════
-// MULTIMESH INSTANCE DATA — passed from vertex to fragment
-// When not using MultiMesh, COLOR=(1,1,1,1), INSTANCE_CUSTOM=(0,0,0,0)
+// MULTIMESH INSTANCE DATA
 // ═══════════════════════════════════════════════════════════════
 
 varying vec4 v_instance_color;
 varying vec4 v_instance_custom;
+varying float v_height_factor;  // 0 at base, 1 at top — for wind weighting
 
 
 // ═══════════════════════════════════════════════════════════════
-// VERTEX — Wave animation + instance data passthrough
+// VERTEX — Breathing + height-weighted wind + tension shimmer
 // ═══════════════════════════════════════════════════════════════
 
 void vertex() {
-    // Pass MultiMesh per-instance data to fragment
-    v_instance_color = COLOR;           // Per-instance tint (white = no effect)
-    v_instance_custom = INSTANCE_CUSTOM; // .r = extra pattern rotation (0-1)
+    v_instance_color = COLOR;
+    v_instance_custom = INSTANCE_CUSTOM;
 
+    // Height factor for wind weighting (more sway at top)
+    v_height_factor = clamp(VERTEX.y * 0.5, 0.0, 1.0);
+
+    // 1. BREATHING — subtle normal-direction pulsing (all kingdoms)
+    if (breath_amplitude > 0.001) {
+        float breath = sin(TIME * breath_speed) * breath_amplitude;
+        VERTEX += NORMAL * breath;
+    }
+
+    // 2. WIND SWAY — direction-aware, height-weighted (trees, flowers)
     if (wave_intensity > 0.01) {
         vec2 dir = normalize(wave_direction);
         float phase = dot(VERTEX.xz, dir) * wave_frequency + TIME * wave_speed;
-        VERTEX.y += sin(phase) * wave_amplitude * wave_intensity;
+        float hf = v_height_factor;  // sway more at top
+        VERTEX.x += sin(phase) * wave_amplitude * wave_intensity * hf;
+        VERTEX.z += cos(phase * 0.7) * wave_amplitude * wave_intensity * 0.5 * hf;
+        VERTEX.y += sin(phase * 1.3) * wave_amplitude * wave_intensity * 0.3;
+    }
+
+    // 3. TENSION SHIMMER — jitter when stressed (creatures)
+    if (tension > 0.01) {
+        float jitter_phase = TIME * 12.0 + float(VERTEX_ID) * 3.7;
+        vec3 jitter = NORMAL * tension * 0.02 * sin(jitter_phase);
+        VERTEX += jitter;
     }
 }
 
@@ -97,7 +127,7 @@ float noise(vec2 p) {
 
 
 // ═══════════════════════════════════════════════════════════════
-// PATTERN HELPER FUNCTIONS
+// PATTERN HELPERS
 // ═══════════════════════════════════════════════════════════════
 
 float voronoi_cellular(vec2 uv, float scale, float randomness, float edge_width) {
@@ -106,7 +136,6 @@ float voronoi_cellular(vec2 uv, float scale, float randomness, float edge_width)
     vec2 local_pos = fract(uv);
     float min_dist = 8.0;
     float second_min_dist = 8.0;
-
     for (int y = -1; y <= 1; y++) {
         for (int x = -1; x <= 1; x++) {
             vec2 neighbor = vec2(float(x), float(y));
@@ -199,138 +228,48 @@ mat2 rotate2d(float angle) {
 
 
 // ═══════════════════════════════════════════════════════════════
-// PATTERN EVALUATOR — evaluate a single pattern by index
-// Refactored to avoid duplicating the 20-pattern switch twice
+// PATTERN EVALUATOR
 // ═══════════════════════════════════════════════════════════════
 
 float eval_pattern(int idx, vec2 uv, float freq_mult, float detail_mult) {
-    if (idx == 0) {
-        // 0: Dots
-        return 1.0 - smoothstep(0.3 / detail_mult, 0.5 / detail_mult,
-                    length(fract(uv * freq_mult * 0.5) - 0.5));
-    }
-    else if (idx == 1) {
-        // 1: Stripes
-        return 0.5 + 0.5 * sign(sin(uv.x * freq_mult * 0.6));
-    }
-    else if (idx == 2) {
-        // 2: Grid
-        return max(
-            0.5 + 0.5 * sign(sin(uv.x * freq_mult * 0.4)),
-            0.5 + 0.5 * sign(sin(uv.y * freq_mult * 0.4)));
-    }
-    else if (idx == 3) {
-        // 3: Waves
-        return 0.5 + 0.5 * sin(uv.x * freq_mult * 0.7 + uv.y * freq_mult * 0.4
-                    + noise(uv * 2.0) * 3.14159 * (detail_mult - 0.5));
-    }
-    else if (idx == 4) {
-        // 4: Noise
-        return noise(uv * freq_mult * 0.4);
-    }
-    else if (idx == 5) {
-        // 5: Voronoi
-        return voronoi(uv, freq_mult * 0.3);
-    }
-    else if (idx == 6) {
-        // 6: Fractal
-        float f = 0.0; float a = 1.0; float fr = 1.0;
-        for (int i = 0; i < 3; i++) {
-            f += a * noise(uv * freq_mult * fr);
-            a *= 0.5; fr *= 2.0;
-        }
-        return fract(f * 3.0);
-    }
-    else if (idx == 7) {
-        // 7: Blobs
-        float b = 0.0;
-        for (int i = 0; i < 3; i++) {
-            vec2 off = vec2(sin(float(i) * 1.57), cos(float(i) * 1.57)) * 0.5;
-            b += smoothstep(0.2, 0.7, 1.0 - length((fract(uv * freq_mult * 0.25) - 0.5) - off));
-        }
-        return clamp(b, 0.0, 1.0);
-    }
-    else if (idx == 8) {
-        // 8: Fragments
-        return step(0.5, noise(uv * freq_mult * 0.6)) *
-               step(0.5, noise((uv + vec2(1.3, 2.7)) * freq_mult * 0.4));
-    }
-    else if (idx == 9) {
-        // 9: Sine interference
-        return 0.5 + 0.5 * (sin(uv.x * freq_mult * 0.5) *
-               sin(uv.y * freq_mult * 0.6) *
-               sin((uv.x + uv.y) * freq_mult * 0.4));
-    }
-    else if (idx == 10) {
-        // 10: Edges
-        return detect_edges(noise(uv * freq_mult * 0.3), 1.0);
-    }
-    else if (idx == 11) {
-        // 11: Triangles
-        vec2 t = fract(uv * freq_mult * 0.25) - 0.5;
-        return step(t.x + t.y, 0.0);
-    }
-    else if (idx == 12) {
-        // 12: Hexagons
-        return smoothstep(0.4, 0.5, length(fract(uv * freq_mult * 0.2) - 0.5));
-    }
-    else if (idx == 13) {
-        // 13: Stitching
-        vec2 s = fract(uv * freq_mult * 0.3) - 0.5;
-        float sx = abs(s.x); float sy = abs(s.y);
-        return (1.0 - smoothstep(0.3, 0.35, max(sx, sy))) *
-               (1.0 - smoothstep(0.15, 0.2, min(sx, sy)));
-    }
-    else if (idx == 14) {
-        // 14: Tartan
-        float h = step(0.5, fract(uv.x * freq_mult * 0.2));
-        float v = step(0.5, fract(uv.y * freq_mult * 0.2));
-        float th = step(0.9, fract(uv.x * freq_mult * 0.5));
-        float tv = step(0.9, fract(uv.y * freq_mult * 0.5));
-        return max(max(h, v), max(th, tv));
-    }
-    else if (idx == 15) {
-        // 15: Spiral
-        return spiral_pattern(uv, freq_mult * 0.2, detail_mult);
-    }
-    else if (idx == 16) {
-        // 16: Vortex
-        return vortex_pattern(uv, freq_mult * 0.2, detail_mult);
-    }
-    else if (idx == 17) {
-        // 17: Crystal
-        return crystal_pattern(uv, freq_mult * 0.3, 2.0 + detail_mult * 3.0);
-    }
-    else if (idx == 18) {
-        // 18: Sinusoidal
-        return sinusoidal_pattern(uv, freq_mult * 0.3, detail_mult);
-    }
-    else if (idx == 19) {
-        // 19: Ripple
-        return ripple_pattern(uv, freq_mult * 0.25, detail_mult);
-    }
-
-    return 0.5;  // Fallback
+    if (idx == 0) { return 1.0 - smoothstep(0.3 / detail_mult, 0.5 / detail_mult, length(fract(uv * freq_mult * 0.5) - 0.5)); }
+    else if (idx == 1) { return 0.5 + 0.5 * sign(sin(uv.x * freq_mult * 0.6)); }
+    else if (idx == 2) { return max(0.5 + 0.5 * sign(sin(uv.x * freq_mult * 0.4)), 0.5 + 0.5 * sign(sin(uv.y * freq_mult * 0.4))); }
+    else if (idx == 3) { return 0.5 + 0.5 * sin(uv.x * freq_mult * 0.7 + uv.y * freq_mult * 0.4 + noise(uv * 2.0) * 3.14159 * (detail_mult - 0.5)); }
+    else if (idx == 4) { return noise(uv * freq_mult * 0.4); }
+    else if (idx == 5) { return voronoi(uv, freq_mult * 0.3); }
+    else if (idx == 6) { float f = 0.0; float a = 1.0; float fr = 1.0; for (int i = 0; i < 3; i++) { f += a * noise(uv * freq_mult * fr); a *= 0.5; fr *= 2.0; } return fract(f * 3.0); }
+    else if (idx == 7) { float b = 0.0; for (int i = 0; i < 3; i++) { vec2 off = vec2(sin(float(i) * 1.57), cos(float(i) * 1.57)) * 0.5; b += smoothstep(0.2, 0.7, 1.0 - length((fract(uv * freq_mult * 0.25) - 0.5) - off)); } return clamp(b, 0.0, 1.0); }
+    else if (idx == 8) { return step(0.5, noise(uv * freq_mult * 0.6)) * step(0.5, noise((uv + vec2(1.3, 2.7)) * freq_mult * 0.4)); }
+    else if (idx == 9) { return 0.5 + 0.5 * (sin(uv.x * freq_mult * 0.5) * sin(uv.y * freq_mult * 0.6) * sin((uv.x + uv.y) * freq_mult * 0.4)); }
+    else if (idx == 10) { return detect_edges(noise(uv * freq_mult * 0.3), 1.0); }
+    else if (idx == 11) { vec2 t = fract(uv * freq_mult * 0.25) - 0.5; return step(t.x + t.y, 0.0); }
+    else if (idx == 12) { return smoothstep(0.4, 0.5, length(fract(uv * freq_mult * 0.2) - 0.5)); }
+    else if (idx == 13) { vec2 s = fract(uv * freq_mult * 0.3) - 0.5; float sx = abs(s.x); float sy = abs(s.y); return (1.0 - smoothstep(0.3, 0.35, max(sx, sy))) * (1.0 - smoothstep(0.15, 0.2, min(sx, sy))); }
+    else if (idx == 14) { float h = step(0.5, fract(uv.x * freq_mult * 0.2)); float v = step(0.5, fract(uv.y * freq_mult * 0.2)); float th = step(0.9, fract(uv.x * freq_mult * 0.5)); float tv = step(0.9, fract(uv.y * freq_mult * 0.5)); return max(max(h, v), max(th, tv)); }
+    else if (idx == 15) { return spiral_pattern(uv, freq_mult * 0.2, detail_mult); }
+    else if (idx == 16) { return vortex_pattern(uv, freq_mult * 0.2, detail_mult); }
+    else if (idx == 17) { return crystal_pattern(uv, freq_mult * 0.3, 2.0 + detail_mult * 3.0); }
+    else if (idx == 18) { return sinusoidal_pattern(uv, freq_mult * 0.3, detail_mult); }
+    else if (idx == 19) { return ripple_pattern(uv, freq_mult * 0.25, detail_mult); }
+    return 0.5;
 }
 
 
 // ═══════════════════════════════════════════════════════════════
-// MAIN PATTERN GENERATOR — interpolates between two nearest types
+// MAIN PATTERN GENERATOR
 // ═══════════════════════════════════════════════════════════════
 
 float generate_base_pattern(vec2 uv, float type, float complexity, float intensity_mod) {
     complexity *= detail_level;
     float freq_mult = (5.0 + complexity * 15.0) * detail_level;
     float detail_mult = 0.5 + complexity;
-
-    float pattern_idx = type * 19.0;  // 20 patterns, indices 0-19
+    float pattern_idx = type * 19.0;
     int lower_idx = int(floor(pattern_idx)) % 20;
     int upper_idx = int(ceil(pattern_idx)) % 20;
     float blend = fract(pattern_idx);
-
     float lower_val = eval_pattern(lower_idx, uv, freq_mult, detail_mult);
     float upper_val = eval_pattern(upper_idx, uv, freq_mult, detail_mult);
-
     float pattern = mix(lower_val, upper_val, blend);
     return mix(0.5, pattern, intensity_mod);
 }
@@ -348,7 +287,78 @@ float generate_cracks(vec2 uv, float intensity) {
 
 
 // ═══════════════════════════════════════════════════════════════
-// FRAGMENT — Final color assembly
+// SURFACE TYPE EFFECTS — per-kingdom material character
+// Applied AFTER base pattern, BEFORE final PBR output
+// ═══════════════════════════════════════════════════════════════
+
+void apply_surface_effect(inout vec3 color, inout float r, inout float m,
+                          inout vec3 normal_perturbation, vec2 uv, float NdotV) {
+    int st = int(round(surface_type));
+
+    if (st == 0) {
+        // BARK — warm noise on normals, high roughness, crevice darkening
+        float bark_noise = noise(uv * 40.0);
+        float bark_crevice = smoothstep(0.3, 0.5, bark_noise);
+        color *= mix(0.7, 1.0, bark_crevice);  // darken crevices
+        color = mix(color, color * vec3(1.05, 0.98, 0.9), 0.3);  // warm shift
+        normal_perturbation = vec3(
+            (noise(uv * 60.0) - 0.5) * 0.15,
+            (noise(uv * 60.0 + vec2(7.0, 3.0)) - 0.5) * 0.15,
+            1.0
+        );
+        r = max(r, 0.7);  // bark is always rough
+    }
+    else if (st == 1) {
+        // SCALES — hexagonal overlay, slight metallic sheen
+        float hex = smoothstep(0.35, 0.45, length(fract(uv * 15.0) - 0.5));
+        color = mix(color, color * 0.7, hex * 0.4);  // scale edges darker
+        m = max(m, 0.15);  // slight metallic
+        r = mix(r, 0.4, 0.3);  // smoother than bark
+        normal_perturbation = vec3(
+            (hex - 0.5) * 0.1,
+            (hex - 0.5) * 0.1,
+            1.0
+        );
+    }
+    else if (st == 2) {
+        // PETAL — subsurface scattering approximation, soft and translucent
+        float sss = pow(max(0.0, 1.0 - NdotV), 2.0) * 0.3;
+        color += color * sss;  // light bleeds through at edges
+        color = mix(color, color * vec3(1.0, 0.95, 1.05), 0.2);  // cool-pink shift
+        r = min(r, 0.35);  // petals are smooth
+        m = 0.0;
+    }
+    else if (st == 3) {
+        // MEMBRANE — thin-film iridescence, translucent glow
+        float thin_film = pow(1.0 - NdotV, 4.0);
+        float film_hue = uv.x * 3.0 + uv.y * 2.0 + TIME * 0.2;
+        vec3 film_color = vec3(
+            0.5 + 0.5 * sin(film_hue * 6.28),
+            0.5 + 0.5 * sin(film_hue * 6.28 + 2.09),
+            0.5 + 0.5 * sin(film_hue * 6.28 + 4.19)
+        );
+        color = mix(color, film_color, thin_film * 0.5);
+        r = min(r, 0.25);
+    }
+    else if (st == 4) {
+        // FUR/VELVET — rim sheen, normal perturbation for softness
+        float rim = pow(1.0 - clamp(NdotV, 0.0, 1.0), 2.0);
+        float fur_noise = rand(uv * 100.0);
+        float noisy_rim = smoothstep(0.0, 1.0, rim) * (0.8 + 0.4 * fur_noise);
+        vec3 sheen = mix(color * 1.5, vec3(1.0), 0.3) * noisy_rim * 0.6;
+        color += sheen;
+        normal_perturbation = vec3(
+            (fur_noise - 0.5) * 0.08,
+            (rand(uv * 100.0 + vec2(5.0, 3.0)) - 0.5) * 0.08,
+            1.0
+        );
+        r = max(r, 0.75);  // fur is rough
+    }
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+// FRAGMENT — Final color assembly with surface types
 // ═══════════════════════════════════════════════════════════════
 
 void fragment() {
@@ -358,8 +368,7 @@ void fragment() {
     float darkness = effect_flags.z;
     float color_mixing = effect_flags.w;
 
-    // UV processing with rotation and scale
-    // Instance custom data: .r adds extra pattern rotation (0-1 → 0-TAU)
+    // UV processing
     float total_rotation = pattern_rotation;
     if (v_instance_custom.r > 0.001) {
         total_rotation += v_instance_custom.r * 6.28318;
@@ -367,7 +376,7 @@ void fragment() {
     vec2 base_uv = UV * pattern_scale;
     vec2 rotated_uv = rotate2d(total_rotation) * base_uv;
 
-    // Subtle time-based distortion (skip at low LOD)
+    // Subtle time-based distortion
     vec2 final_uv = rotated_uv;
     if (detail_level > 0.5) {
         float adj_density = pattern_density * detail_level;
@@ -402,22 +411,28 @@ void fragment() {
 
     vec3 base_color = mix(dark_primary, dark_secondary, base_pattern);
 
-    // Edge color
     if (edge_detection > 0.01) {
         vec3 edge_color = mix(dark_primary * 0.4, dark_wing * 0.7, 0.5);
         base_color = mix(base_color, edge_color, edge_value * edge_detection);
     }
 
-    // Three-color blend
     if (color_mixing > 0.01) {
         vec3 mixed = mix(mix(dark_primary, dark_secondary, 0.5), dark_wing, color_mixing * 0.5);
         base_color = mix(base_color, mixed, color_mixing * base_pattern);
     }
 
+    // ── Surface type effects ──
+    float NdotV = max(0.001, dot(NORMAL, VIEW));
+    float final_roughness = roughness;
+    float final_metallic = metallic;
+    vec3 normal_perturbation = vec3(0.0, 0.0, 1.0);
+
+    apply_surface_effect(base_color, final_roughness, final_metallic,
+                         normal_perturbation, final_uv, NdotV);
+
     // ── Iridescence (view-dependent color shift) ──
     if (iridescence > 0.001) {
-        float view_dot = max(0.001, dot(NORMAL, VIEW));
-        float fresnel = pow(1.0 - view_dot, 3.0);
+        float fresnel = pow(1.0 - NdotV, 3.0);
         float hue = final_uv.x * 0.5 + final_uv.y * 0.2 + TIME * 0.1;
         vec3 iri = vec3(
             0.5 + 0.5 * sin(hue * 6.28318),
@@ -427,7 +442,7 @@ void fragment() {
         base_color = mix(base_color, iri, iridescence * fresnel * 0.8);
     }
 
-    // ── Cracking (metamorphosis / aging) ──
+    // ── Cracking ──
     if (cracking > 0.001) {
         float crack = generate_cracks(UV, cracking);
         base_color = mix(base_color, base_color * 0.2, crack);
@@ -435,14 +450,11 @@ void fragment() {
 
     // ── Bond / Transmutation rim light ──
     if (rim_light > 0.001) {
-        float view_dot = max(0.0, dot(NORMAL, VIEW));
-        float rim = pow(1.0 - view_dot, 3.0) * rim_light;
+        float rim = pow(1.0 - NdotV, 3.0) * rim_light;
         base_color = mix(base_color, rim_color.rgb, rim * 0.6);
     }
 
-    // ── MultiMesh per-instance color tint ──
-    // When used in MultiMesh, v_instance_color carries per-instance tint.
-    // When used as individual MeshInstance3D, v_instance_color is (1,1,1,1) — no effect.
+    // ── MultiMesh per-instance tint ──
     base_color *= v_instance_color.rgb;
 
     // ── Final PBR output ──
@@ -453,11 +465,16 @@ void fragment() {
     }
     ALPHA = 1.0 - transparency;
 
-    METALLIC = metallic;
-    ROUGHNESS = roughness;
+    METALLIC = final_metallic;
+    ROUGHNESS = final_roughness;
     SPECULAR = specular_tint;
 
-    // Emission from bond overlay
+    // Normal perturbation from surface type
+    if (length(normal_perturbation.xy) > 0.001) {
+        NORMAL_MAP = normalize(normal_perturbation);
+    }
+
+    // Emission
     if (emission_energy > 0.001) {
         EMISSION = base_color * emission_energy;
     }

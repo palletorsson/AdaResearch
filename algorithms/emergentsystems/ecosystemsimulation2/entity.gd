@@ -30,7 +30,7 @@ var current_behavior: String = "idle"
 var target_position: Vector3 = Vector3.ZERO
 var memory: Dictionary = {}  # Stores experiences and interactions
 
-func _ready():
+func _ready() -> void:
 	# Generate initial lifespan based on traits
 	lifespan = int(randf_range(max_age * 0.5, max_age * 1.5) * traits.get_trait("longevity"))
 	
@@ -43,7 +43,7 @@ func _ready():
 	# Initialize behavior to idle
 	_set_behavior("idle")
 
-func _setup_visual_representation():
+func _setup_visual_representation() -> void:
 	# The visual representation will be set by the MorphologyGenerator
 	# This is a placeholder for any additional setup needed
 	visual_representation = Node3D.new()
@@ -54,7 +54,7 @@ func _process(_delta):
 	# Age and energy updates happen in process_behavior
 	pass
 
-func process_behavior(delta):
+func process_behavior(delta) -> void:
 	# Update age and energy
 	age += delta / 86400.0  # Convert seconds to days (very rough approximation)
 	energy -= energy_consumption_rate * delta * traits.get_trait("metabolism")
@@ -80,7 +80,7 @@ func process_behavior(delta):
 			_process_celebrating(delta)
 
 # Behavior processing methods
-func _process_idle(delta):
+func _process_idle(delta) -> void:
 	# Occasionally change to a different behavior
 	if randf() < 0.01:
 		_choose_new_behavior()
@@ -99,7 +99,7 @@ func _process_idle(delta):
 		var direction = (target_position - position).normalized()
 		position += direction * movement_speed * delta * traits.get_trait("mobility")
 
-func _process_seeking_resource(delta):
+func _process_seeking_resource(delta) -> void:
 	# This would involve finding and moving toward the nearest resource
 	# For this implementation, we'll just simulate finding a resource
 	if randf() < 0.02:
@@ -126,7 +126,7 @@ func _process_seeking_resource(delta):
 		)
 		target_position = position + random_offset
 
-func _process_seeking_connection(delta):
+func _process_seeking_connection(delta) -> void:
 	# In a full implementation, this would involve finding and approaching another entity
 	# For now, simulate finding a connection
 	if randf() < 0.01:
@@ -152,7 +152,7 @@ func _process_seeking_connection(delta):
 		)
 		target_position = position + random_offset
 
-func _process_transforming(_delta):
+func _process_transforming(_delta) -> void:
 	# Transformation is a process that takes time
 	if !is_transforming:
 		# Start transformation
@@ -172,7 +172,7 @@ func _process_transforming(_delta):
 		is_transforming = false
 		_set_behavior("celebrating")
 
-func _process_challenging_boundary(delta):
+func _process_challenging_boundary(delta) -> void:
 	# Challenging a boundary is a significant action that costs energy
 	energy -= 0.05 * delta
 	
@@ -186,7 +186,7 @@ func _process_challenging_boundary(delta):
 	# Move back to idle after the challenge
 	_set_behavior("idle")
 
-func _process_celebrating(_delta):
+func _process_celebrating(_delta) -> void:
 	# Celebration after a transformation or other significant event
 	# This might involve special visual effects or interactions
 	
@@ -203,7 +203,7 @@ func _process_celebrating(_delta):
 	if randf() < 0.01:
 		_set_behavior("idle")
 
-func _choose_new_behavior():
+func _choose_new_behavior() -> void:
 	# Choose a new behavior based on current state and traits
 	var behaviors = []
 	
@@ -229,7 +229,7 @@ func _choose_new_behavior():
 	var new_behavior = behaviors[randi() % behaviors.size()]
 	_set_behavior(new_behavior)
 
-func _set_behavior(behavior: String):
+func _set_behavior(behavior: String) -> void:
 	current_behavior = behavior
 	
 	# Set a new target position based on the behavior
@@ -252,7 +252,7 @@ func _set_behavior(behavior: String):
 			# Stay in place for these behaviors
 			target_position = position
 
-func end_of_day_update(day: int):
+func end_of_day_update(day: int) -> void:
 	# Check for reproduction
 	if energy > reproduction_energy_threshold and traits.get_trait("fertility") > randf():
 		_attempt_reproduction()
@@ -267,7 +267,7 @@ func end_of_day_update(day: int):
 	# Adjust traits slightly over time (gradual evolution)
 	traits.slight_random_drift()
 
-func _attempt_reproduction():
+func _attempt_reproduction() -> void:
 	# In a full implementation, this would involve finding a compatible entity
 	# For now, just signal that reproduction was attempted
 	# The ecosystem controller would handle the actual creation of a new entity
@@ -278,7 +278,7 @@ func _attempt_reproduction():
 	# This would be handled by the ecosystem controller via signals
 	print(name + " attempted reproduction")
 
-func apply_transformation(new_form: Dictionary):
+func apply_transformation(new_form: Dictionary) -> void:
 	current_form = new_form
 	
 	# Update visual representation
@@ -316,7 +316,7 @@ func interact_with(other_entity: Entity) -> Dictionary:
 		"receiver": other_entity
 	}
 
-func consume_resource(resource_type: String, amount: float):
+func consume_resource(resource_type: String, amount: float) -> void:
 	match resource_type:
 		"energy":
 			energy += amount
@@ -329,7 +329,7 @@ func consume_resource(resource_type: String, amount: float):
 	
 	emit_signal("resource_consumed", self, resource_type, amount)
 
-func take_damage(amount: float):
+func take_damage(amount: float) -> void:
 	health -= amount
 	if health < 0:
 		health = 0
@@ -345,3 +345,12 @@ func get_info() -> Dictionary:
 		"behavior": current_behavior,
 		"form": current_form
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

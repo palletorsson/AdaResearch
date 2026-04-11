@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: pyramid(depth) = 5 * pyramid(depth-1) — top + four corners, recursively
+# desire: To be climbed and understood — a fractal mountain where every face is itself
+# critical_parameter: depth — each increment multiplies complexity by 5, from 5 cubes to 3125
+# triggers: Depth 1 → five cubes; depth 4 → a mountain of self-similar structure; @tool → live preview in editor
+# emerges: Gaps and voids at every scale — the pyramid is more hole than solid, yet structurally coherent
+# needs: VR depth control [missing], scale adjustment [missing]
+# relationships: Feeds into CA_AgentsCircuits. Bridges fractals sequence to cellularautomata — Sierpinski via recursion, not CA rules.
+# truth: Five copies of yourself, arranged just so, and you contain yourself forever.
+
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 
 @export var depth: int = 4:
@@ -137,3 +147,6 @@ func _spawn_cube(pos: Vector3) -> void:
 	# And the offsets are based on that.
 	
 	cube.scale = Vector3(size, size, size)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

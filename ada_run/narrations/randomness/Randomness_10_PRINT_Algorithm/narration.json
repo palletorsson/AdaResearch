@@ -1,0 +1,594 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 2,
+				"name": "remove_random",
+				"pos": [
+					1,
+					1,
+					1
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 2,
+				"name": "pickup_cube_placer",
+				"pos": [
+					2,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 3,
+				"name": "ten_print_maze_3d",
+				"pos": [
+					1,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 10,
+				"name": "dark_sphere",
+				"pos": [
+					5,
+					1,
+					7
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 12,
+				"name": "nature_system_demo",
+				"pos": [
+					6,
+					1,
+					8
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 13,
+				"name": "ten_print_maze_3d",
+				"pos": [
+					1,
+					1,
+					12
+				],
+				"reachable": true,
+				"visible_from_spawn": true
+			},
+			{
+				"dist": 17,
+				"name": "ten_print_maze_3d",
+				"pos": [
+					11,
+					1,
+					2
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "clipboard",
+				"pos": [
+					6,
+					3,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			}
+		],
+		"dead_ends": [
+			[
+				4,
+				0,
+				1
+			],
+			[
+				2,
+				0,
+				0
+			]
+		],
+		"issues": [
+			{
+				"description": "clipboard at (6,3,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Randomness_10_PRINT_Algorithm",
+		"pacing": {
+			"density": 2.42857142857143,
+			"reachable_artifacts": 7,
+			"total_artifacts": 8,
+			"walkable_tiles": 156
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			2,
+			3,
+			0
+		],
+		"teleporter": {
+			"dist": 11,
+			"pos": [
+				6,
+				0,
+				7
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Randomness_10_PRINT_Algorithm",
+	"sequence": "randomness",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "remove_random",
+				"pos": [
+					1,
+					1,
+					1
+				]
+			},
+			{
+				"name": "ten_print_maze_3d",
+				"pos": [
+					1,
+					1,
+					2
+				]
+			},
+			{
+				"name": "pickup_cube_placer",
+				"pos": [
+					2,
+					1,
+					2
+				]
+			},
+			{
+				"name": "ten_print_maze_3d",
+				"pos": [
+					11,
+					1,
+					2
+				]
+			},
+			{
+				"name": "clipboard",
+				"pos": [
+					6,
+					3,
+					4
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					5,
+					1,
+					7
+				]
+			},
+			{
+				"name": "nature_system_demo",
+				"pos": [
+					6,
+					1,
+					8
+				]
+			},
+			{
+				"name": "ten_print_maze_3d",
+				"pos": [
+					1,
+					1,
+					12
+				]
+			}
+		],
+		"dimensions": [
+			13,
+			6,
+			14
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 155,
+			"ground_pct": 85.1648351648352,
+			"void": 1,
+			"walls": 26
+		},
+		"map_name": "Randomness_10_PRINT_Algorithm",
+		"rooms": [
+			{
+				"artifacts": [
+					"remove_random",
+					"ten_print_maze_3d",
+					"pickup_cube_placer",
+					"ten_print_maze_3d",
+					"dark_sphere",
+					"nature_system_demo",
+					"ten_print_maze_3d"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 155
+			}
+		],
+		"spawn": [
+			2,
+			3,
+			0
+		],
+		"teleporter": [
+			6,
+			0,
+			7
+		]
+	},
+	"timestamp": "2026-03-16T12:13:36",
+	"walkthrough": {
+		"map_name": "Randomness_10_PRINT_Algorithm",
+		"stops": [
+			{
+				"facing": "southwest",
+				"look_at": [
+					1,
+					1,
+					1
+				],
+				"pos": [
+					2,
+					3,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southwest",
+						"dist": 2,
+						"name": "remove_random"
+					},
+					{
+						"direction": "south",
+						"dist": 2,
+						"name": "pickup_cube_placer"
+					},
+					{
+						"direction": "southwest",
+						"dist": 3,
+						"name": "ten_print_maze_3d"
+					},
+					{
+						"direction": "southeast",
+						"dist": 10,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southeast",
+						"dist": 12,
+						"name": "nature_system_demo"
+					},
+					{
+						"direction": "south",
+						"dist": 13,
+						"name": "ten_print_maze_3d"
+					}
+				]
+			},
+			{
+				"approach_from": "southwest",
+				"facing": "south",
+				"name": "remove_random",
+				"pos": [
+					1,
+					1,
+					1
+				],
+				"steps_from_prev": 2,
+				"total_steps": 2,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "south",
+						"dist": 1,
+						"name": "ten_print_maze_3d"
+					},
+					{
+						"direction": "southeast",
+						"dist": 2,
+						"name": "pickup_cube_placer"
+					},
+					{
+						"direction": "southeast",
+						"dist": 10,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "south",
+						"dist": 11,
+						"name": "ten_print_maze_3d"
+					},
+					{
+						"direction": "southeast",
+						"dist": 12,
+						"name": "nature_system_demo"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "east",
+				"name": "ten_print_maze_3d",
+				"pos": [
+					1,
+					1,
+					2
+				],
+				"steps_from_prev": 1,
+				"total_steps": 3,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 1,
+						"name": "remove_random"
+					},
+					{
+						"direction": "east",
+						"dist": 1,
+						"name": "pickup_cube_placer"
+					},
+					{
+						"direction": "southeast",
+						"dist": 9,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southeast",
+						"dist": 11,
+						"name": "nature_system_demo"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "southeast",
+				"name": "pickup_cube_placer",
+				"pos": [
+					2,
+					1,
+					2
+				],
+				"steps_from_prev": 1,
+				"total_steps": 4,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 1,
+						"name": "ten_print_maze_3d"
+					},
+					{
+						"direction": "northwest",
+						"dist": 2,
+						"name": "remove_random"
+					},
+					{
+						"direction": "southeast",
+						"dist": 8,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southeast",
+						"dist": 10,
+						"name": "nature_system_demo"
+					},
+					{
+						"direction": "south",
+						"dist": 11,
+						"name": "ten_print_maze_3d"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "southeast",
+				"name": "dark_sphere",
+				"pos": [
+					5,
+					1,
+					7
+				],
+				"steps_from_prev": 8,
+				"total_steps": 12,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "southeast",
+						"dist": 2,
+						"name": "nature_system_demo"
+					},
+					{
+						"direction": "north",
+						"dist": 4,
+						"name": "clipboard"
+					},
+					{
+						"direction": "northwest",
+						"dist": 8,
+						"name": "pickup_cube_placer"
+					},
+					{
+						"direction": "northwest",
+						"dist": 9,
+						"name": "ten_print_maze_3d"
+					},
+					{
+						"direction": "southwest",
+						"dist": 9,
+						"name": "ten_print_maze_3d"
+					},
+					{
+						"direction": "northwest",
+						"dist": 10,
+						"name": "remove_random"
+					},
+					{
+						"direction": "northeast",
+						"dist": 11,
+						"name": "ten_print_maze_3d"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "southwest",
+				"name": "nature_system_demo",
+				"pos": [
+					6,
+					1,
+					8
+				],
+				"steps_from_prev": 2,
+				"total_steps": 14,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 2,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "north",
+						"dist": 4,
+						"name": "clipboard"
+					},
+					{
+						"direction": "southwest",
+						"dist": 9,
+						"name": "ten_print_maze_3d"
+					},
+					{
+						"direction": "northwest",
+						"dist": 10,
+						"name": "pickup_cube_placer"
+					},
+					{
+						"direction": "northwest",
+						"dist": 11,
+						"name": "ten_print_maze_3d"
+					},
+					{
+						"direction": "northeast",
+						"dist": 11,
+						"name": "ten_print_maze_3d"
+					},
+					{
+						"direction": "northwest",
+						"dist": 12,
+						"name": "remove_random"
+					}
+				]
+			},
+			{
+				"approach_from": "southwest",
+				"facing": "northeast",
+				"name": "ten_print_maze_3d",
+				"pos": [
+					1,
+					1,
+					12
+				],
+				"steps_from_prev": 9,
+				"total_steps": 23,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northeast",
+						"dist": 9,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "northeast",
+						"dist": 9,
+						"name": "nature_system_demo"
+					},
+					{
+						"direction": "north",
+						"dist": 11,
+						"name": "remove_random"
+					},
+					{
+						"direction": "north",
+						"dist": 11,
+						"name": "pickup_cube_placer"
+					},
+					{
+						"direction": "northeast",
+						"dist": 13,
+						"name": "clipboard"
+					}
+				]
+			},
+			{
+				"approach_from": "northeast",
+				"facing": "southwest",
+				"name": "ten_print_maze_3d",
+				"pos": [
+					11,
+					1,
+					2
+				],
+				"steps_from_prev": 20,
+				"total_steps": 43,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "southwest",
+						"dist": 11,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "southwest",
+						"dist": 11,
+						"name": "nature_system_demo"
+					}
+				]
+			},
+			{
+				"approach_from": "southwest",
+				"pos": [
+					6,
+					0,
+					7
+				],
+				"reachable": true,
+				"steps_from_prev": 0,
+				"total_steps": 43,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 7,
+			"total_steps": 43,
+			"total_stops": 9
+		}
+	}
+}

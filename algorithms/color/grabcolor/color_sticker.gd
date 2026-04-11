@@ -156,3 +156,6 @@ func _get_closest_web_color_name(target: Color) -> String:
 			closest_name = color_name
 	
 	return closest_name
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

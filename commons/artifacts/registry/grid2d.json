@@ -17,7 +17,20 @@
 			"complexity": "beginner",
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"biology",
+				"grid",
+				"spatial"
+			]
 		},
 		"grid2d_life": {
 			"name": "Grid2D — Game of Life",
@@ -38,8 +51,20 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"cellular_automata",
 				"testmaps"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"biology",
+				"grid",
+				"spatial"
 			]
 		},
 		"grid2d_seeds": {
@@ -60,8 +85,20 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"cellular_automata",
 				"testmaps"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"biology",
+				"grid",
+				"spatial"
 			]
 		},
 		"grid2d_brians_brain": {
@@ -83,6 +120,18 @@
 			"map_ready": true,
 			"map_sequences": [
 				"cellular_automata"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"grid",
+				"spatial"
 			]
 		},
 		"grid2d_rule30": {
@@ -105,6 +154,18 @@
 			"map_ready": true,
 			"map_sequences": [
 				"cellular_automata"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"grid",
+				"spatial"
 			]
 		},
 		"grid2d_rule110": {
@@ -128,6 +189,19 @@
 			"map_ready": true,
 			"map_sequences": [
 				"cellular_automata"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"biology",
+				"grid",
+				"spatial"
 			]
 		},
 		"grid2d_rule90": {
@@ -151,6 +225,18 @@
 			"map_ready": true,
 			"map_sequences": [
 				"cellular_automata"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"grid",
+				"spatial"
 			]
 		},
 		"grid2d_bfs": {
@@ -173,8 +259,19 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"searchpathfinding",
 				"testmaps"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"grid",
+				"spatial"
 			]
 		},
 		"grid2d_dfs_maze": {
@@ -198,6 +295,18 @@
 			"map_ready": true,
 			"map_sequences": [
 				"searchpathfinding"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"grid",
+				"spatial"
 			]
 		},
 		"grid2d_wireworld": {
@@ -219,8 +328,19 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"cellular_automata",
 				"testmaps"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"grid",
+				"spatial"
 			]
 		},
 		"grid2d_langtons_ant": {
@@ -242,8 +362,19 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"cellular_automata",
 				"testmaps"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					2
+				],
+				"size_group": "compact"
+			},
+			"dev_themes": [
+				"grid",
+				"spatial"
 			]
 		}
 	}

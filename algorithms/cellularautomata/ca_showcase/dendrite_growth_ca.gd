@@ -7,7 +7,7 @@ const BRANCHING_FACTOR = 0.15
 
 var growth_centers: Array = []
 
-func initialize_grid():
+func initialize_grid() -> void:
 	# Configure Line Renderer colors
 	color_start = Color(0.0, 0.8, 1.0) # Cyan
 	color_end = Color(0.0, 0.2, 0.8) # Deep Blue
@@ -19,7 +19,7 @@ func initialize_grid():
 	growth_centers.append(center)
 	grid[center.x][center.y][center.z] = 2  # Dendrite state
 
-func update_simulation(_delta):
+func update_simulation(_delta) -> void:
 	# Probabilistic dendrite branching
 	var new_centers = []
 	
@@ -62,7 +62,7 @@ func get_dendrite_count() -> int:
 					count += 1
 	return count
 
-func reset_simulation():
+func reset_simulation() -> void:
 	grid = create_3d_grid()
 	growth_centers.clear()
 	connections.clear()
@@ -71,3 +71,6 @@ func reset_simulation():
 	if immediate_mesh: immediate_mesh.clear_surfaces()
 	initialize_grid()
 	iteration_count = 0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -9,7 +9,7 @@ class_name GardenRenderer
 
 var multi_mesh_instance: MultiMeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	multi_mesh_instance = MultiMeshInstance3D.new()
 	add_child(multi_mesh_instance)
 	
@@ -34,7 +34,7 @@ func _ready():
 	multi_mesh_instance.multimesh.mesh = mesh
 	multi_mesh_instance.multimesh.transform_format = MultiMesh.TRANSFORM_3D
 
-func render(lines: Array):
+func render(lines: Array) -> void:
 	var count = lines.size()
 	if count == 0:
 		multi_mesh_instance.multimesh.instance_count = 0
@@ -79,3 +79,12 @@ func render(lines: Array):
 		t.basis = t.basis.scaled(Vector3(1, length, 1))
 		
 		multi_mesh_instance.multimesh.set_instance_transform(i, t)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

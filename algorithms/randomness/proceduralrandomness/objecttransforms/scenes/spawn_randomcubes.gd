@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Reference to the base cube that will be duplicated
 @onready var cube_base = $CubeBaseStaticBody3D
@@ -27,7 +27,7 @@ var spawn_timer: float = 0.0
 var spawned_cubes: Array = []
 var fragment_scene: PackedScene
 
-func _ready():
+func _ready() -> void:
 	if cube_base:
 		# Hide the original cube as it's just a template
 		cube_base.visible = false
@@ -42,7 +42,7 @@ func _ready():
 		# Create a fallback simple fragment scene if needed
 		create_fallback_fragment_scene()
 
-func create_fallback_fragment_scene():
+func create_fallback_fragment_scene() -> void:
 	# Create a simple fragment scene programmatically as fallback
 	var fragment = RigidBody3D.new()
 	var mesh_instance = MeshInstance3D.new()
@@ -59,7 +59,7 @@ func create_fallback_fragment_scene():
 	
 
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Update spawn timer
 	spawn_timer -= delta
 	
@@ -77,7 +77,7 @@ func _process(delta):
 	# Clean up cubes that have moved too far
 	clean_up_cubes()
 
-func spawn_random_cubes():
+func spawn_random_cubes() -> void:
 	# Only proceed if we have a valid cube base
 	if not cube_base:
 		return
@@ -113,7 +113,7 @@ func spawn_random_cubes():
 		# Add the cube to our tracking array
 		spawned_cubes.append(new_cube)
 
-func setup_cube_area(cube):
+func setup_cube_area(cube) -> void:
 	# Get the Area3D node
 	var area = cube.get_node_or_null("Area3D")
 	
@@ -141,7 +141,7 @@ func setup_cube_area(cube):
 			func(body): _on_cube_hit(body, cube)
 		)
 
-func _on_cube_hit(body, cube):
+func _on_cube_hit(body, cube) -> void:
 	print("Cube hit by: ", body.name)
 	
 	# Check if the body is a torus
@@ -153,7 +153,7 @@ func _on_cube_hit(body, cube):
 		# Break the cube
 		break_cube(cube, hit_pos, hit_normal)
 
-func break_cube(cube, hit_position, _hit_normal):
+func break_cube(cube, hit_position, _hit_normal) -> void:
 	"""
 	Break a cube into multiple fragments
 	"""
@@ -220,7 +220,7 @@ func break_cube(cube, hit_position, _hit_normal):
 		spawned_cubes.erase(cube)
 	cube.queue_free()
 
-func copy_material_to_fragment(source_cube, fragment):
+func copy_material_to_fragment(source_cube, fragment) -> void:
 	"""
 	Copy the material from the source cube to the fragment
 	"""
@@ -254,13 +254,13 @@ func find_mesh_instance(node):
 	
 	return null
 
-func move_spawned_cubes(delta):
+func move_spawned_cubes(delta) -> void:
 	for cube in spawned_cubes:
 		if is_instance_valid(cube):
 			# Move cubes along the Z axis
 			cube.position.z -= movement_speed * delta
 
-func clean_up_cubes():
+func clean_up_cubes() -> void:
 	# Remove cubes that have moved too far
 	var cubes_to_remove = []
 	
@@ -272,3 +272,12 @@ func clean_up_cubes():
 			if is_instance_valid(cube):
 				cube.queue_free()
 			spawned_cubes.remove_at(i)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

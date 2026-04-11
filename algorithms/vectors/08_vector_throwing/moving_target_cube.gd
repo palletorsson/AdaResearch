@@ -98,3 +98,6 @@ func reset() -> void:
 	is_paused = false
 	pause_timer = 0.0
 	global_position = start_position
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

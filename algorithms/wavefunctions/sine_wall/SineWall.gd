@@ -1,5 +1,16 @@
 extends Node3D
 
+
+# @identity
+# essence: z_offset(x, t) = A * sin(omega * x + phi * t) applied to a grid of spheres
+# desire: Stand before a wall of spheres displaced by a traveling sine wave
+# critical_parameter: base_frequency — controls spatial wave density across the wall
+# triggers: time drives phase animation; base_amplitude sets displacement depth
+# emerges: a frozen moment of wave propagation made tangible as displaced matter
+# needs: VR observation [has], frequency/amplitude control [missing]
+# relationships: depends on MultiMesh sphere instancing; contrasts with sine_wall_explanation (immersive vs explanatory); unlocks spatial frequency visualization
+# truth: A wave is not a thing — it is a pattern of displacement that moves through things.
+
 @export_range(4, 96, 1) var columns: int = 48
 @export_range(4, 96, 1) var rows: int = 32
 @export var wall_width: float = 12.0
@@ -107,3 +118,12 @@ func reset_wall() -> void:
 	_phase = 0.0
 	_time = 0.0
 	_update_wall_state()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

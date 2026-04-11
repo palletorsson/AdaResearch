@@ -3,3 +3,5 @@ Sequence role: Ninth map. Disrupts the cumulative confidence built across maps 1
 Technical angle: Procedural generation of diverse primitives, parametric control (radials, rings, resolution), architectural and organic forms, mesh resolution tradeoffs (sphere_low/mid/high), the primitive as API abstraction hiding complexity.
 Critical angle: Socratic ignorance — knowing that you do not know. The primitive catalog reveals that "basic" shapes encode centuries of mathematical convention. Wittgenstein's language games: calling something "primitive" is a move, not a description.
 Key artifacts: platonic_grabbables for hands-on encounter with the five Platonic solids; torus_radials_rings and capsule_radials_rings for parametric control exposure; sphere_low/mid/high for resolution as epistemological choice; hole_with_cones and truncatedtetrahedron for forms that resist easy naming.
+
+Gap: No gap identified.

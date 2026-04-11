@@ -1,0 +1,268 @@
+# Spatial Analysis — WaveFunctions_Effect_Sound (12x14)
+Generated: 2026-03-16T13:13:18
+
+## Artifacts (34)
+- pick_up_cube at (1, 1, 1)
+- AudioContr at (2, 2, 1)
+- pick_up_cube at (4, 1, 1)
+- pick_up_cube at (9, 1, 1)
+- GlassRack at (10, 2, 1)
+- pick_up_cube at (1, 1, 2)
+- AudioContr at (2, 4, 2)
+- RackSineBasic at (4, 2, 2)
+- cable_builder at (9, 1, 2)
+- VRAudioMonitor at (10, 2, 2)
+- pick_up_cube at (6, 1, 3)
+- pick_up_cube at (7, 1, 3)
+- pick_up_cube at (8, 1, 3)
+- dark_sphere at (9, 1, 3)
+- AudioContr at (10, 2, 3)
+- DualBallFMController at (3, 1, 4)
+- Rack303Acid at (4, 2, 4)
+- RackMoogBass at (6, 2, 4)
+- RackDX7Piano at (7, 2, 4)
+- AudioContr at (8, 2, 4)
+- audio_catalog_tablet at (9, 1, 4)
+- AudioContr at (10, 2, 4)
+- harmonic_distance_table at (2, 2, 7)
+- chord_tension_spring at (4, 2, 7)
+- timbre_sculptor at (8, 2, 7)
+- GlassRack at (2, 1, 8)
+- MarioSoundController at (1, 2, 9)
+- mario_test_sound_ui at (8, 2, 9)
+- MarioSoundController at (1, 2, 10)
+- MelodyChaser3D at (4, 2, 10)
+- interactable_demo at (10, 2, 10)
+- MarioSoundController at (1, 2, 11)
+- lab_table at (3, 1, 11)
+- BigPipeSystem at (6, 1, 11)
+
+## Utilities
+- Spawn at (0, 1, 0)
+- Teleporter at (6, 0, 12)
+
+## Visibility from Spawn (0, 1, 0)
+- pick_up_cube: VISIBLE — 1.4m, southeast
+- AudioContr: VISIBLE — 2.2m, southeast
+- pick_up_cube: BLOCKED — 4.1m, east
+- pick_up_cube: BLOCKED — 9.1m, east
+- GlassRack: BLOCKED — 10.0m, east
+- pick_up_cube: VISIBLE — 2.2m, southeast
+- AudioContr: VISIBLE — 2.8m, southeast
+- RackSineBasic: BLOCKED — 4.5m, southeast
+- cable_builder: BLOCKED — 9.2m, east
+- VRAudioMonitor: BLOCKED — 10.2m, east
+- pick_up_cube: BLOCKED — 6.7m, southeast
+- pick_up_cube: BLOCKED — 7.6m, southeast
+- pick_up_cube: BLOCKED — 8.5m, east
+- dark_sphere: BLOCKED — 9.5m, east
+- AudioContr: BLOCKED — 10.4m, east
+- DualBallFMController: VISIBLE — 5.0m, southeast
+- Rack303Acid: BLOCKED — 5.7m, southeast
+- RackMoogBass: BLOCKED — 7.2m, southeast
+- RackDX7Piano: BLOCKED — 8.1m, southeast
+- AudioContr: BLOCKED — 8.9m, southeast
+- audio_catalog_tablet: BLOCKED — 9.8m, southeast
+- AudioContr: BLOCKED — 10.8m, east
+- harmonic_distance_table: BLOCKED — 7.3m, south
+- chord_tension_spring: BLOCKED — 8.1m, southeast
+- timbre_sculptor: BLOCKED — 10.6m, southeast
+- GlassRack: BLOCKED — 8.2m, south
+- MarioSoundController: BLOCKED — 9.1m, south
+- mario_test_sound_ui: BLOCKED — 12.0m, southeast
+- MarioSoundController: BLOCKED — 10.0m, south
+- MelodyChaser3D: BLOCKED — 10.8m, south
+- interactable_demo: BLOCKED — 14.1m, southeast
+- MarioSoundController: BLOCKED — 11.0m, south
+- lab_table: BLOCKED — 11.4m, south
+- BigPipeSystem: BLOCKED — 12.5m, southeast
+
+## Visibility from Junction (0, 0, 1)
+- pick_up_cube: VISIBLE — 1.0m, east
+- AudioContr: VISIBLE — 2.0m, east
+- pick_up_cube: BLOCKED — 4.0m, east
+- pick_up_cube: BLOCKED — 9.0m, east
+- GlassRack: BLOCKED — 10.0m, east
+- pick_up_cube: VISIBLE — 1.4m, southeast
+- AudioContr: VISIBLE — 2.2m, southeast
+- RackSineBasic: BLOCKED — 4.1m, east
+- cable_builder: BLOCKED — 9.1m, east
+- VRAudioMonitor: BLOCKED — 10.0m, east
+- pick_up_cube: BLOCKED — 6.3m, east
+- pick_up_cube: BLOCKED — 7.3m, east
+- pick_up_cube: BLOCKED — 8.2m, east
+- dark_sphere: BLOCKED — 9.2m, east
+- AudioContr: BLOCKED — 10.2m, east
+- DualBallFMController: VISIBLE — 4.2m, southeast
+- Rack303Acid: BLOCKED — 5.0m, southeast
+- RackMoogBass: BLOCKED — 6.7m, southeast
+- RackDX7Piano: BLOCKED — 7.6m, southeast
+- AudioContr: BLOCKED — 8.5m, east
+- audio_catalog_tablet: BLOCKED — 9.5m, east
+- AudioContr: BLOCKED — 10.4m, east
+- harmonic_distance_table: BLOCKED — 6.3m, south
+- chord_tension_spring: BLOCKED — 7.2m, southeast
+- timbre_sculptor: BLOCKED — 10.0m, southeast
+- GlassRack: BLOCKED — 7.3m, south
+- MarioSoundController: BLOCKED — 8.1m, south
+- mario_test_sound_ui: BLOCKED — 11.3m, southeast
+- MarioSoundController: BLOCKED — 9.1m, south
+- MelodyChaser3D: BLOCKED — 9.8m, southeast
+- interactable_demo: BLOCKED — 13.5m, southeast
+- MarioSoundController: BLOCKED — 10.0m, south
+- lab_table: BLOCKED — 10.4m, south
+- BigPipeSystem: BLOCKED — 11.7m, southeast
+
+## Visibility from Junction (0, 0, 2)
+- pick_up_cube: VISIBLE — 1.4m, northeast
+- AudioContr: VISIBLE — 2.2m, northeast
+- pick_up_cube: BLOCKED — 4.1m, east
+- pick_up_cube: BLOCKED — 9.1m, east
+- GlassRack: BLOCKED — 10.0m, east
+- pick_up_cube: VISIBLE — 1.0m, east
+- AudioContr: VISIBLE — 2.0m, east
+- RackSineBasic: BLOCKED — 4.0m, east
+- cable_builder: BLOCKED — 9.0m, east
+- VRAudioMonitor: BLOCKED — 10.0m, east
+- pick_up_cube: BLOCKED — 6.1m, east
+- pick_up_cube: BLOCKED — 7.1m, east
+- pick_up_cube: BLOCKED — 8.1m, east
+- dark_sphere: BLOCKED — 9.1m, east
+- AudioContr: BLOCKED — 10.0m, east
+- DualBallFMController: VISIBLE — 3.6m, southeast
+- Rack303Acid: BLOCKED — 4.5m, southeast
+- RackMoogBass: BLOCKED — 6.3m, east
+- RackDX7Piano: BLOCKED — 7.3m, east
+- AudioContr: BLOCKED — 8.2m, east
+- audio_catalog_tablet: BLOCKED — 9.2m, east
+- AudioContr: BLOCKED — 10.2m, east
+- harmonic_distance_table: BLOCKED — 5.4m, south
+- chord_tension_spring: BLOCKED — 6.4m, southeast
+- timbre_sculptor: BLOCKED — 9.4m, southeast
+- GlassRack: BLOCKED — 6.3m, south
+- MarioSoundController: BLOCKED — 7.1m, south
+- mario_test_sound_ui: BLOCKED — 10.6m, southeast
+- MarioSoundController: BLOCKED — 8.1m, south
+- MelodyChaser3D: BLOCKED — 8.9m, southeast
+- interactable_demo: BLOCKED — 12.8m, southeast
+- MarioSoundController: BLOCKED — 9.1m, south
+- lab_table: BLOCKED — 9.5m, south
+- BigPipeSystem: BLOCKED — 10.8m, southeast
+
+## Visibility from Junction (0, 0, 3)
+- pick_up_cube: VISIBLE — 2.2m, northeast
+- AudioContr: VISIBLE — 2.8m, northeast
+- pick_up_cube: BLOCKED — 4.5m, northeast
+- pick_up_cube: BLOCKED — 9.2m, east
+- GlassRack: BLOCKED — 10.2m, east
+- pick_up_cube: VISIBLE — 1.4m, northeast
+- AudioContr: VISIBLE — 2.2m, northeast
+- RackSineBasic: BLOCKED — 4.1m, east
+- cable_builder: BLOCKED — 9.1m, east
+- VRAudioMonitor: BLOCKED — 10.0m, east
+- pick_up_cube: BLOCKED — 6.0m, east
+- pick_up_cube: BLOCKED — 7.0m, east
+- pick_up_cube: BLOCKED — 8.0m, east
+- dark_sphere: BLOCKED — 9.0m, east
+- AudioContr: BLOCKED — 10.0m, east
+- DualBallFMController: VISIBLE — 3.2m, east
+- Rack303Acid: VISIBLE — 4.1m, east
+- RackMoogBass: BLOCKED — 6.1m, east
+- RackDX7Piano: BLOCKED — 7.1m, east
+- AudioContr: BLOCKED — 8.1m, east
+- audio_catalog_tablet: BLOCKED — 9.1m, east
+- AudioContr: BLOCKED — 10.0m, east
+- harmonic_distance_table: BLOCKED — 4.5m, southeast
+- chord_tension_spring: BLOCKED — 5.7m, southeast
+- timbre_sculptor: BLOCKED — 8.9m, southeast
+- GlassRack: BLOCKED — 5.4m, south
+- MarioSoundController: BLOCKED — 6.1m, south
+- mario_test_sound_ui: BLOCKED — 10.0m, southeast
+- MarioSoundController: BLOCKED — 7.1m, south
+- MelodyChaser3D: BLOCKED — 8.1m, southeast
+- interactable_demo: BLOCKED — 12.2m, southeast
+- MarioSoundController: BLOCKED — 8.1m, south
+- lab_table: BLOCKED — 8.5m, south
+- BigPipeSystem: BLOCKED — 10.0m, southeast
+
+## Visibility from Junction (1, 0, 1)
+- pick_up_cube: VISIBLE — 0.0m, here
+- AudioContr: VISIBLE — 1.0m, east
+- pick_up_cube: BLOCKED — 3.0m, east
+- pick_up_cube: BLOCKED — 8.0m, east
+- GlassRack: BLOCKED — 9.0m, east
+- pick_up_cube: VISIBLE — 1.0m, south
+- AudioContr: VISIBLE — 1.4m, southeast
+- RackSineBasic: BLOCKED — 3.2m, east
+- cable_builder: BLOCKED — 8.1m, east
+- VRAudioMonitor: BLOCKED — 9.1m, east
+- pick_up_cube: BLOCKED — 5.4m, east
+- pick_up_cube: BLOCKED — 6.3m, east
+- pick_up_cube: BLOCKED — 7.3m, east
+- dark_sphere: BLOCKED — 8.2m, east
+- AudioContr: BLOCKED — 9.2m, east
+- DualBallFMController: BLOCKED — 3.6m, southeast
+- Rack303Acid: BLOCKED — 4.2m, southeast
+- RackMoogBass: BLOCKED — 5.8m, southeast
+- RackDX7Piano: BLOCKED — 6.7m, southeast
+- AudioContr: BLOCKED — 7.6m, southeast
+- audio_catalog_tablet: BLOCKED — 8.5m, east
+- AudioContr: BLOCKED — 9.5m, east
+- harmonic_distance_table: BLOCKED — 6.1m, south
+- chord_tension_spring: BLOCKED — 6.7m, southeast
+- timbre_sculptor: BLOCKED — 9.2m, southeast
+- GlassRack: BLOCKED — 7.1m, south
+- MarioSoundController: BLOCKED — 8.0m, south
+- mario_test_sound_ui: BLOCKED — 10.6m, southeast
+- MarioSoundController: BLOCKED — 9.0m, south
+- MelodyChaser3D: BLOCKED — 9.5m, south
+- interactable_demo: BLOCKED — 12.7m, southeast
+- MarioSoundController: BLOCKED — 10.0m, south
+- lab_table: BLOCKED — 10.2m, south
+- BigPipeSystem: BLOCKED — 11.2m, southeast
+
+## Visibility from Junction (1, 0, 2)
+- pick_up_cube: VISIBLE — 1.0m, north
+- AudioContr: VISIBLE — 1.4m, northeast
+- pick_up_cube: BLOCKED — 3.2m, east
+- pick_up_cube: BLOCKED — 8.1m, east
+- GlassRack: BLOCKED — 9.1m, east
+- pick_up_cube: VISIBLE — 0.0m, here
+- AudioContr: VISIBLE — 1.0m, east
+- RackSineBasic: BLOCKED — 3.0m, east
+- cable_builder: BLOCKED — 8.0m, east
+- VRAudioMonitor: BLOCKED — 9.0m, east
+- pick_up_cube: BLOCKED — 5.1m, east
+- pick_up_cube: BLOCKED — 6.1m, east
+- pick_up_cube: BLOCKED — 7.1m, east
+- dark_sphere: BLOCKED — 8.1m, east
+- AudioContr: BLOCKED — 9.1m, east
+- DualBallFMController: VISIBLE — 2.8m, southeast
+- Rack303Acid: BLOCKED — 3.6m, southeast
+- RackMoogBass: BLOCKED — 5.4m, east
+- RackDX7Piano: BLOCKED — 6.3m, east
+- AudioContr: BLOCKED — 7.3m, east
+- audio_catalog_tablet: BLOCKED — 8.2m, east
+- AudioContr: BLOCKED — 9.2m, east
+- harmonic_distance_table: BLOCKED — 5.1m, south
+- chord_tension_spring: BLOCKED — 5.8m, southeast
+- timbre_sculptor: BLOCKED — 8.6m, southeast
+- GlassRack: BLOCKED — 6.1m, south
+- MarioSoundController: BLOCKED — 7.0m, south
+- mario_test_sound_ui: BLOCKED — 9.9m, southeast
+- MarioSoundController: BLOCKED — 8.0m, south
+- MelodyChaser3D: BLOCKED — 8.5m, south
+- interactable_demo: BLOCKED — 12.0m, southeast
+- MarioSoundController: BLOCKED — 9.0m, south
+- lab_table: BLOCKED — 9.2m, south
+- BigPipeSystem: BLOCKED — 10.3m, southeast
+
+## Rooms and Clusters
+- Room A (north, west): pick_up_cube, pick_up_cube, DualBallFMController — 13 tiles
+- Room B (center): pick_up_cube, pick_up_cube, cable_builder, pick_up_cube, pick_up_cube, pick_up_cube, dark_sphere, audio_catalog_tablet, GlassRack, lab_table, BigPipeSystem — 68 tiles
+
+## Height Map
+- Ground (h1): 81 tiles (48%)
+- Walls (h2-h5): 86 tiles
+- Boundary (h6+): 0 tiles
+- Void (h0): 1 tiles

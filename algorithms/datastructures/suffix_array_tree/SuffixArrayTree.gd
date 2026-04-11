@@ -21,12 +21,12 @@ class SuffixNode:
 var suffix_tree_root: SuffixNode
 var current_pattern_index := 0
 
-func _ready():
+func _ready() -> void:
 	build_suffix_array()
 	build_lcp_array()
 	build_suffix_tree()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	pattern_timer += delta
 	
@@ -35,7 +35,7 @@ func _process(delta):
 	demonstrate_pattern_matching()
 	show_string_processing()
 
-func build_suffix_array():
+func build_suffix_array() -> void:
 	var suffixes = []
 	
 	# Generate all suffixes with their starting indices
@@ -50,7 +50,7 @@ func build_suffix_array():
 	for suffix in suffixes:
 		suffix_array.append(suffix[1])
 
-func build_lcp_array():
+func build_lcp_array() -> void:
 	lcp_array.clear()
 	lcp_array.resize(suffix_array.size())
 	lcp_array[0] = 0
@@ -69,7 +69,7 @@ func build_lcp_array():
 		
 		lcp_array[i] = lcp_length
 
-func build_suffix_tree():
+func build_suffix_tree() -> void:
 	# Simplified suffix tree construction
 	suffix_tree_root = SuffixNode.new()
 	suffix_tree_root.start = -1
@@ -79,7 +79,7 @@ func build_suffix_tree():
 	for i in range(text.length()):
 		insert_suffix(suffix_tree_root, i)
 
-func insert_suffix(node: SuffixNode, suffix_start: int):
+func insert_suffix(node: SuffixNode, suffix_start: int) -> void:
 	var suffix = text.substr(suffix_start)
 	
 	if suffix.is_empty():
@@ -133,7 +133,7 @@ func insert_suffix(node: SuffixNode, suffix_start: int):
 			# Continue with child
 			insert_suffix(child, suffix_start + common_length)
 
-func visualize_suffix_array():
+func visualize_suffix_array() -> void:
 	var container = $SuffixArray
 	
 	# Clear previous visualization
@@ -180,7 +180,7 @@ func visualize_suffix_array():
 		var suffix = text.substr(index_value)
 		show_suffix_chars(container, suffix.substr(0, min(3, suffix.length())), Vector3(i * 1.0 - suffix_array.size() * 0.5, -1.5, 0))
 
-func show_suffix_chars(container: Node3D, chars: String, position: Vector3):
+func show_suffix_chars(container: Node3D, chars: String, position: Vector3) -> void:
 	for i in range(chars.length()):
 		var char_cube = CSGBox3D.new()
 		char_cube.size = Vector3(0.2, 0.2, 0.2)
@@ -197,7 +197,7 @@ func show_suffix_chars(container: Node3D, chars: String, position: Vector3):
 		
 		container.add_child(char_cube)
 
-func visualize_suffix_tree():
+func visualize_suffix_tree() -> void:
 	var container = $SuffixTree
 	
 	# Clear previous visualization
@@ -207,7 +207,7 @@ func visualize_suffix_tree():
 	# Visualize suffix tree structure
 	visualize_tree_node(container, suffix_tree_root, Vector3(0, 0, 0), 0, 8.0)
 
-func visualize_tree_node(container: Node3D, node: SuffixNode, position: Vector3, depth: int, spacing: float):
+func visualize_tree_node(container: Node3D, node: SuffixNode, position: Vector3, depth: int, spacing: float) -> void:
 	if not node:
 		return
 	
@@ -253,7 +253,7 @@ func visualize_tree_node(container: Node3D, node: SuffixNode, position: Vector3,
 		
 		child_index += 1
 
-func create_tree_edge(container: Node3D, from: Vector3, to: Vector3, edge_char: String):
+func create_tree_edge(container: Node3D, from: Vector3, to: Vector3, edge_char: String) -> void:
 	var distance = from.distance_to(to)
 	var edge = CSGCylinder3D.new()
 	edge.radius = 0.05
@@ -285,7 +285,7 @@ func create_tree_edge(container: Node3D, from: Vector3, to: Vector3, edge_char: 
 	
 	container.add_child(char_label)
 
-func demonstrate_pattern_matching():
+func demonstrate_pattern_matching() -> void:
 	var container = $PatternMatching
 	
 	# Clear previous visualization
@@ -346,7 +346,7 @@ func demonstrate_pattern_matching():
 		
 		container.add_child(pattern_cube)
 
-func show_string_processing():
+func show_string_processing() -> void:
 	var container = $StringProcessing
 	
 	# Clear previous visualization
@@ -388,3 +388,12 @@ func show_string_processing():
 		indicator.material_override = indicator_material
 		
 		container.add_child(indicator)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

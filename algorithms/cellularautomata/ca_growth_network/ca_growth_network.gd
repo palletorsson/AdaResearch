@@ -1,6 +1,16 @@
 ﻿@tool
 extends Node3D
 
+# @identity
+# essence: growth_tip += attractor_force / distance^2, with stochastic branching
+# desire: To reach — tendrils seeking invisible attractors, branching when the signal is ambiguous
+# critical_parameter: attractor_strength — how powerfully distant goals bend the growth direction
+# triggers: Many attractors → dense bush; few → sparse reaching arms; high branch_probability → fractal explosion
+# emerges: Root-like, vascular networks from simple force-toward-goal logic — no branching pattern was specified
+# needs: VR attractor controls [missing], growth speed slider [missing]
+# relationships: Contrasts with line_network_ca (random vs directed growth). Feeds into CA_BeyondBinary.
+# truth: Growth toward a goal, with noise, is enough to produce every vascular pattern in nature.
+
 # Growth CA with Attractors - Organic root/slime network growth
 # Grows from seed points toward attractors, creating branching networks
 
@@ -39,7 +49,7 @@ var is_growing: bool = false
 
 var multi_mesh_instance: MultiMeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	# Try to get existing MultiMeshInstance3D node, or create one
 	if has_node("MultiMeshInstance3D"):
 		multi_mesh_instance = get_node("MultiMeshInstance3D")
@@ -52,7 +62,7 @@ func _ready():
 	if auto_play and not Engine.is_editor_hint():
 		start_growth()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 
@@ -62,7 +72,7 @@ func _process(delta):
 			timer = 0.0
 			grow_step()
 
-func _setup_multimesh():
+func _setup_multimesh() -> void:
 	multi_mesh_instance = MultiMeshInstance3D.new()
 	multi_mesh_instance.name = "MultiMeshInstance3D"
 	add_child(multi_mesh_instance)
@@ -75,7 +85,7 @@ func _setup_multimesh():
 	multimesh.instance_count = 0
 	multi_mesh_instance.multimesh = multimesh
 
-func _setup_default_gradient():
+func _setup_default_gradient() -> void:
 	gradient = Gradient.new()
 	# Default gradient has 2 points at 0.0 and 1.0
 	gradient.set_offset(0, 0.0)
@@ -84,7 +94,7 @@ func _setup_default_gradient():
 	gradient.set_color(1, color_tip)
 	gradient.add_point(0.5, color_branch)
 
-func start_growth():
+func start_growth() -> void:
 	generation = 0
 	grid.clear()
 	active_tips.clear()
@@ -103,7 +113,7 @@ func start_growth():
 	is_growing = true
 	_update_multimesh()
 
-func _create_obstacle():
+func _create_obstacle() -> void:
 	# Create a cube in the center as an obstacle
 	var half_size = center_obstacle_size / 2
 	var center = grid_size / 2
@@ -118,7 +128,7 @@ func _create_obstacle():
 					"attractors_reached": []
 				}
 
-func _place_attractors():
+func _place_attractors() -> void:
 	# Place attractors in a sphere around the central obstacle
 	var center = Vector3(grid_size / 2.0, grid_size / 2.0, grid_size / 2.0)
 	var radius = grid_size * 0.4
@@ -134,7 +144,7 @@ func _place_attractors():
 
 		attractors.append(Vector3(x, y, z))
 
-func _place_seeds():
+func _place_seeds() -> void:
 	# Place seeds on the surface of the obstacle cube
 	var half_size = center_obstacle_size / 2
 	var center = grid_size / 2
@@ -162,7 +172,7 @@ func _place_seeds():
 			active_tips.append(pos)
 			seeds.append(pos)
 
-func grow_step():
+func grow_step() -> void:
 	if generation >= max_generations or active_tips.is_empty():
 		is_growing = false
 		print("Growth complete. Generation: ", generation, " Cells: ", grid.size())
@@ -310,7 +320,7 @@ func _grid_to_world(pos: Vector3i) -> Vector3:
 		(pos.z - offset) * cell_size
 	)
 
-func _update_multimesh():
+func _update_multimesh() -> void:
 	if not multi_mesh_instance or not multi_mesh_instance.multimesh:
 		return
 
@@ -345,3 +355,12 @@ func _update_multimesh():
 
 		mm.set_instance_color(idx, color)
 		idx += 1
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

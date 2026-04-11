@@ -63,12 +63,12 @@ var memory_states: Array = []
 var form_history: Array = []
 
 # Initialize with random traits
-func _init():
+func _init() -> void:
 	memory_states = []
 	form_history = []
 
 # Randomize all traits
-func randomize_traits():
+func randomize_traits() -> void:
 	# Core traits
 	fluidity = randf()
 	expressiveness = randf()
@@ -183,7 +183,7 @@ func calculate_compatibility(other_traits: QueerTraits) -> float:
 	return clamp(compatibility, 0.0, 1.0)
 
 # Record the current state in memory
-func record_current_state(current_form: Dictionary):
+func record_current_state(current_form: Dictionary) -> void:
 	var state = {
 		"fluidity": fluidity,
 		"expressiveness": expressiveness,
@@ -205,7 +205,7 @@ func record_current_state(current_form: Dictionary):
 		form_history.pop_front()
 
 # Slight random drift in traits over time
-func slight_random_drift():
+func slight_random_drift() -> void:
 	# Core traits drift slightly
 	fluidity += _random_drift_amount()
 	expressiveness += _random_drift_amount()
@@ -235,7 +235,7 @@ func _random_drift_amount() -> float:
 	return randf_range(-0.05, 0.05)
 
 # Adjust traits after a transformation
-func adjust_after_transformation(new_form: Dictionary):
+func adjust_after_transformation(new_form: Dictionary) -> void:
 	# Record the previous state before changing
 	record_current_state(new_form)
 	
@@ -265,7 +265,7 @@ func adjust_after_transformation(new_form: Dictionary):
 						tendencies[trait_name] = clamp(tendencies[trait_name] + modifier, 0.0, 1.0)
 
 # Evolve traits after successfully challenging a boundary
-func evolve_after_challenge(boundary_type: String, impact: float):
+func evolve_after_challenge(boundary_type: String, impact: float) -> void:
 	# Increase boundary pushing always
 	boundary_pushing = min(boundary_pushing + impact * 0.1, 1.0)
 	
@@ -300,7 +300,7 @@ func evolve_after_challenge(boundary_type: String, impact: float):
 			aesthetics["primary_color"] = Color.from_hsv(h, primary.s, primary.v)
 
 # Adapt during crisis events
-func crisis_adaptation():
+func crisis_adaptation() -> void:
 	# Crises increase resilience and adaptability
 	resilience = min(resilience + 0.1, 1.0)
 	adaptability = min(adaptability + 0.08, 1.0)
@@ -391,7 +391,7 @@ static func _blend_colors(color1: Color, color2: Color) -> Color:
 	return Color(r, g, b)
 
 # Generate traits that are very different from typical/normative patterns
-func generate_divergent_traits():
+func generate_divergent_traits() -> void:
 	# Increase traits that encourage divergence
 	fluidity = randf_range(0.7, 1.0)
 	uniqueness = randf_range(0.7, 1.0)

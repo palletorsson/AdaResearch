@@ -3,3 +3,5 @@ Sequence role: Fourth map in QFEP Lab; the experiential core. After isolating F 
 Technical angle: λ as continuous parameter from 0 to 1, crystal_formation at low λ, complexity_pattern at edge λ, dissolving_form at high λ. The bifurcation_walkway maps the bifurcation diagram to physical space. The artifacts are spatially arranged along the spectrum: ordered_grid → edge_particles → chaos_particles.
 Critical angle: The spectrum is not metaphorical — it is the curriculum itself. Primitives (low λ, pure structure) → Randomness (high λ, pure entropy) → the maps where complexity emerged (Cellular Automata, Fractals, L-Systems) → were always at the edge. Walking the spectrum is walking the curriculum's arc in compressed form. The body as λ-probe: you feel the transitions.
 Key artifacts: crystal_formation (λ≈0), complexity_pattern (λ≈0.4), dissolving_form (λ≈1) mark the three regimes; bifurcation_walkway maps the bifurcation diagram to walkable space; ordered_grid and chaos_particles bracket the extremes; edge_particles mark where life happens.
+
+Gap: No gap identified.

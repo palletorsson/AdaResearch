@@ -5,13 +5,18 @@
 			"description": "Gallery of unused artifacts from Randomness and Wavefunctions",
 			"difficulty": "testing",
 			"estimated_time": "variable",
-			"learning_objectives": ["Inspection"],
+			"learning_objectives": [
+				"Inspection"
+			],
 			"maps": [
+				"Disposition_Test_Rooms",
+				"Disposition_Test_Hub",
+				"Disposition_Test_Maze",
+				"Test_Ecosystem",
 				"Grid_Subset_Gallery",
-						"Control_Board_Demo", 
-				
+				"Control_Board_Demo",
 				"Bracelet_Zoo",
-				"Point_Zero", 
+				"Point_Zero",
 				"Test_Panel_Bridge",
 				"Test_1",
 				"Test_2",
@@ -35,13 +40,350 @@
 				"test_gridagent",
 				"test_gridagent_algogun",
 				"Test_Substrates",
-				"test_batch_1",
-
+				"test_batch_1"
 			],
 			"return_to": "lab",
 			"lab_map": "Lab/map_data_init",
 			"unlock_requirements": [],
-			"completion_rewards": []
+			"completion_rewards": [],
+			"artifact_groups": [
+				{
+					"map": "Disposition_Test_Rooms",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 0 artifacts"
+				},
+				{
+					"map": "Disposition_Test_Hub",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 0 artifacts"
+				},
+				{
+					"map": "Disposition_Test_Maze",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 0 artifacts"
+				},
+				{
+					"map": "Test_Ecosystem",
+					"position": "intro",
+					"artifacts": [],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 0 artifacts"
+				},
+				{
+					"map": "Grid_Subset_Gallery",
+					"position": "intro",
+					"artifacts": [
+						"0",
+						"grid_3d_capture"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Introduction with 2 artifacts"
+				},
+				{
+					"map": "Control_Board_Demo",
+					"position": "foundation",
+					"artifacts": [
+						"control_board",
+						"tt"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 2 artifacts"
+				},
+				{
+					"map": "Bracelet_Zoo",
+					"position": "foundation",
+					"artifacts": [
+						"becoming_catalyst",
+						"catalyst_target",
+						"tt"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 3 artifacts"
+				},
+				{
+					"map": "Point_Zero",
+					"position": "foundation",
+					"artifacts": [
+						"CoordinateSystem3M",
+						"dark_sphere",
+						"folding_past",
+						"frame_counter_display",
+						"origin"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 5 artifacts"
+				},
+				{
+					"map": "Test_Panel_Bridge",
+					"position": "foundation",
+					"artifacts": [
+						"panel_bridge_loom"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Building foundations with 1 artifact"
+				},
+				{
+					"map": "Test_1",
+					"position": "foundation",
+					"artifacts": [
+						"ChengSimulationScaled"
+					],
+					"size_budget": "mixed",
+					"rationale": "Building foundations with 1 artifact"
+				},
+				{
+					"map": "Test_2",
+					"position": "foundation",
+					"artifacts": [
+						"closest_pair"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Building foundations with 1 artifact"
+				},
+				{
+					"map": "Test_3",
+					"position": "exploration",
+					"artifacts": [
+						"distance_fields_sdf"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "Test_4",
+					"position": "exploration",
+					"artifacts": [
+						"pathfinding3d"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "Test_5",
+					"position": "exploration",
+					"artifacts": [
+						"modelsynthesis",
+						"random_color_book_page_collection"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 2 artifacts"
+				},
+				{
+					"map": "Test_6",
+					"position": "exploration",
+					"artifacts": [
+						"network_analysis",
+						"pathfinding_visualization"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 2 artifacts"
+				},
+				{
+					"map": "Test_7",
+					"position": "exploration",
+					"artifacts": [
+						"random_plants"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "Test_8",
+					"position": "exploration",
+					"artifacts": [
+						"random_plants"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "Test_9",
+					"position": "exploration",
+					"artifacts": [
+						"graphspace"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deeper exploration through 1 artifact"
+				},
+				{
+					"map": "Test_10",
+					"position": "exploration",
+					"artifacts": [
+						"KonigsbergBridge",
+						"graphspace3d"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Deeper exploration through 2 artifacts"
+				},
+				{
+					"map": "Test_11",
+					"position": "integration",
+					"artifacts": [
+						"graphspace"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "Test_12",
+					"position": "integration",
+					"artifacts": [
+						"pathfinding3d"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "Test_13",
+					"position": "integration",
+					"artifacts": [
+						"modelsynthesis",
+						"random_color_book_page_collection"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 2 artifacts"
+				},
+				{
+					"map": "Test_14",
+					"position": "integration",
+					"artifacts": [
+						"network_analysis",
+						"pathfinding_visualization"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 2 artifacts"
+				},
+				{
+					"map": "Test_15",
+					"position": "integration",
+					"artifacts": [
+						"modelsynthesis",
+						"random_color_book_page_collection"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 2 artifacts"
+				},
+				{
+					"map": "Test_16",
+					"position": "integration",
+					"artifacts": [
+						"network_analysis",
+						"pathfinding_visualization"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Integration combining 2 artifacts"
+				},
+				{
+					"map": "Test_Scene_1",
+					"position": "integration",
+					"artifacts": [
+						"test_scene_1",
+						"test_scene_2"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 2 artifacts"
+				},
+				{
+					"map": "Test_Scene_2",
+					"position": "integration",
+					"artifacts": [
+						"test_scene_2"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Integration combining 1 artifact"
+				},
+				{
+					"map": "test_cctv",
+					"position": "synthesis",
+					"artifacts": [
+						"cctv",
+						"origin"
+					],
+					"size_budget": "environment",
+					"rationale": "Synthesis with 2 artifacts"
+				},
+				{
+					"map": "test_gridagent",
+					"position": "synthesis",
+					"artifacts": [
+						"gridagent"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 1 artifact"
+				},
+				{
+					"map": "test_gridagent_algogun",
+					"position": "synthesis",
+					"artifacts": [
+						"algo_gun",
+						"gridagent"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 2 artifacts"
+				},
+				{
+					"map": "Test_Substrates",
+					"position": "synthesis",
+					"artifacts": [
+						"bar_array_bubble_sort",
+						"bar_array_histogram",
+						"bar_array_merge_sort",
+						"bar_array_prime_sieve",
+						"bar_array_quicksort",
+						"grid2d_bfs",
+						"grid2d_langtons_ant",
+						"grid2d_life",
+						"grid2d_seeds",
+						"grid2d_wireworld",
+						"grid3d_bfs",
+						"grid3d_entropy",
+						"grid3d_force_directed",
+						"grid3d_kruskal",
+						"grid3d_random_graph",
+						"living_paper_levy",
+						"living_paper_life",
+						"living_paper_mandelbrot",
+						"living_paper_random_walk",
+						"living_paper_sierpinski",
+						"profile_bell_curve",
+						"profile_fourier",
+						"profile_gradient_descent",
+						"profile_logistic",
+						"profile_sine"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Synthesis with 25 artifacts"
+				},
+				{
+					"map": "test_batch_1",
+					"position": "synthesis",
+					"artifacts": [
+						"additive_wave_demo",
+						"angle_sum_triangle",
+						"basis_vectors_rig",
+						"chord_tension_spring",
+						"constructive_proof",
+						"curvature_slider",
+						"excluded_middle_demo",
+						"flow_field_painter",
+						"harmonic_distance_table",
+						"random_walk_terrarium",
+						"sentry_turret",
+						"superposition_display",
+						"vector_normalize_demo"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Synthesis with 13 artifacts"
+				}
+			]
 		}
-	}
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
 }

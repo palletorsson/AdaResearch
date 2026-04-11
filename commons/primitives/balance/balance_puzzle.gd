@@ -2,6 +2,16 @@
 extends Node3D
 class_name BalancePuzzle
 
+# @identity
+# essence: stack(8 pieces) until stable for stability_time seconds → creature emerges
+# desire: learner experiences the sublime of physics — patience and precision rewarded with life
+# critical_parameter: stability_time — how long the stack must hold before the reward animation fires
+# triggers: height_threshold reached AND held stable → piece count counts down → creature animation
+# emerges: the creature as reward for embodied patience; the stack as a meditation on balance under gravity
+# needs: [missing VR controls — all interaction is physics-based dropping and stacking]
+# relationships: intro artifact for primitives sequence; thematically connects physics to geometry
+# truth: stability is not a property of any single piece — it emerges from the relationships between all
+
 ## Balance Puzzle - The Sublime Through Physics
 ##
 ## No ghost guides. No templates. Stack freely.

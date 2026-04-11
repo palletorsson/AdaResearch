@@ -1,0 +1,1 @@
+1, 1, 2, 3, 5, 8, 13... The Fibonacci sequence spirals into the golden ratio, and the golden angle of 137.5 degrees arranges seeds and petals. The romanesco cauliflower computes this algorithm in vegetable form. Nature's fractals are grown, not drawn—phyllotaxis as self-similar geometry.

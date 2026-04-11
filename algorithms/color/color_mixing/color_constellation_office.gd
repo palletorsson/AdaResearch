@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: RGB/CMY glass walls at angles — additive color mixing through transparency and emitted light overlap
+# desire: to walk between colored glass partitions and see your shadow split into complementary colors on the floor
+# critical_parameter: transparency — controls how much light passes through each wall; at 0.4 the mixing is visible but walls remain distinct
+# triggers: none — static installation; color mixing happens through player movement and viewing angle
+# emerges: walking through overlapping RGB walls creates white-ish zones where all three primaries combine — additive mixing proven by architecture
+# needs: OmniLight3D per wall [has]; transparency [has]; VR walkthrough [has]; interactive wall rotation [missing]
+# relationships: contrasts with albers_wall_gallery (subtractive paint vs additive light); follows dark_side_prism (spectrum split vs color recombination)
+# truth: color mixing is not a formula — it is what happens when light from different sources arrives at the same place at the same time
+
 ## Color Walls Office - Transparent colored glass walls like office partitions
 ## Spread out and rotated at various angles to create color mixing effects
 
@@ -83,3 +93,12 @@ func _add_glass_wall(pos: Vector3, angle_deg: float, color: Color, size: Vector2
 	wall.add_child(light)
 	
 	return wall
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

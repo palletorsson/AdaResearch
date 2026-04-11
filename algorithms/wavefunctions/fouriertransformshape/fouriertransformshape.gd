@@ -39,13 +39,13 @@ var sound_end_freq: float = 880.0
 var sound_decay: float = 8.0
 const SOUND_DURATION: float = 0.36
 
-func _ready():
+func _ready() -> void:
 	setup_camera()
 	setup_wheels()
 	setup_trace()
 	setup_audio()
 
-func setup_audio():
+func setup_audio() -> void:
 	for i in range(wheels.size()):
 		var wheel_data = wheels[i]
 		var player = AudioStreamPlayer3D.new()
@@ -66,7 +66,7 @@ func setup_audio():
 	
 	setup_theremin()
 
-func setup_theremin():
+func setup_theremin() -> void:
 	theremin_player = AudioStreamPlayer3D.new()
 	add_child(theremin_player)
 	theremin_player.unit_size = 25.0
@@ -80,13 +80,13 @@ func setup_theremin():
 	theremin_player.play()
 	theremin_playback = theremin_player.get_stream_playback()
 
-func setup_camera():
+func setup_camera() -> void:
 	var camera = Camera3D.new()
 	camera.position = Vector3(0, 3, 8)
 	camera.look_at_from_position(camera.position, Vector3.ZERO, Vector3.UP)
 	add_child(camera)
 
-func setup_wheels():
+func setup_wheels() -> void:
 	# Create materials
 	var wheel_material = StandardMaterial3D.new()
 	wheel_material.albedo_color = Color.CYAN
@@ -131,7 +131,7 @@ func setup_wheels():
 		add_child(line_node)
 		connection_lines.append(line_node)
 
-func setup_trace():
+func setup_trace() -> void:
 	trace_material = StandardMaterial3D.new()
 	trace_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	trace_material.albedo_color = Color(1.0, 0.85, 0.2)
@@ -150,7 +150,7 @@ func setup_trace():
 	trace_line.material_override = trace_material
 	add_child(trace_line)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta * 0.5  # Control animation speed
 
 	update_wheels()
@@ -158,7 +158,7 @@ func _process(delta):
 	ensure_trace_lights()
 	_generate_theremin_audio()
 
-func update_wheels():
+func update_wheels() -> void:
 	var current_pos = Vector3.ZERO
 
 	# After 3 cycles, start adding modulation
@@ -238,7 +238,7 @@ func update_wheels():
 		trace_points.pop_front()
 		trace_points.append(current_pos)
 
-func update_trace():
+func update_trace() -> void:
 	trace_line.clear_points()
 
 	if trace_points.size() < 2:
@@ -247,7 +247,7 @@ func update_trace():
 	for i in range(trace_points.size()):
 		trace_line.add_point(trace_points[i])
 
-func ensure_trace_lights():
+func ensure_trace_lights() -> void:
 	if lights_spawned:
 		return
 	if time < LIGHT_SPAWN_TIME:
@@ -272,7 +272,7 @@ func ensure_trace_lights():
 	if light_nodes.size() > 0:
 		lights_spawned = true
 
-func _generate_audio_samples():
+func _generate_audio_samples() -> void:
 	# MATHEMATICAL BEAUTY - Pure, clean harmonic tones
 	# Each wheel represents a Fourier harmonic - pure mathematical relationship
 	# Using perfect fifths and octaves for clean interference patterns
@@ -309,7 +309,7 @@ func _generate_audio_samples():
 
 			playback.push_frame(Vector2(sample, sample))
 
-func _generate_theremin_audio():
+func _generate_theremin_audio() -> void:
 	if not theremin_playback: return
 	var frames = theremin_playback.get_frames_available()
 	if frames <= 0: return
@@ -375,3 +375,11 @@ func _generate_theremin_audio():
 
 		theremin_playback.push_frame(Vector2(sample, sample))
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

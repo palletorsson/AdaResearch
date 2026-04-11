@@ -289,13 +289,53 @@ func set_health(new_health: float) -> void:
 	if player_health < previous_health:
 		var damage := previous_health - player_health
 		emit_signal("player_damaged", damage, player_health)
+		_play_damage_beep()
 		if player_health <= 0.0 and previous_health > 0.0:
 			_handle_player_death()
+
+
+## EKG-style beep on health loss — short sine pulse.
+var _beep_player: AudioStreamPlayer = null
+func _play_damage_beep() -> void:
+	if not _beep_player:
+		_beep_player = AudioStreamPlayer.new()
+		_beep_player.name = "DamageBeep"
+		_beep_player.volume_db = -8.0
+		_beep_player.bus = "Master"
+		add_child(_beep_player)
+		# Generate EKG beep: short 880Hz sine pulse
+		var sample_rate: int = 22050
+		var duration: float = 0.12
+		var samples: int = int(sample_rate * duration)
+		var data := PackedByteArray()
+		data.resize(samples * 2)
+		for i in samples:
+			var t: float = float(i) / float(sample_rate)
+			var env: float = sin(t / duration * PI)  # Envelope: rise and fall
+			var wave: float = sin(t * TAU * 880.0) * env * 0.6
+			var s16: int = clampi(int(wave * 16000.0), -32768, 32767)
+			data[i * 2] = s16 & 0xFF
+			data[i * 2 + 1] = (s16 >> 8) & 0xFF
+		var stream := AudioStreamWAV.new()
+		stream.format = AudioStreamWAV.FORMAT_16_BITS
+		stream.mix_rate = sample_rate
+		stream.data = data
+		_beep_player.stream = stream
+	_beep_player.play()
 
 func apply_health_damage(amount: float) -> void:
 	if amount <= 0.0:
 		return
+	# Skip damage if player is immune (recently hurt)
+	var death_fx = get_node_or_null("/root/DeathEffect")
+	if death_fx and death_fx.has_method("is_immune") and death_fx.is_immune():
+		return
 	set_health(player_health - amount)
+	# Health > 0: red flash + teleport to spawn (try again)
+	# Health <= 0: handled by _handle_player_death (full death + game reset)
+	if player_health > 0.0:
+		if death_fx and death_fx.has_method("hurt"):
+			death_fx.hurt(_get_player_death_position())
 
 func heal_player(amount: float) -> void:
 	if amount <= 0.0:
@@ -329,11 +369,30 @@ func _handle_player_death() -> void:
 	if debug:
 		print("GameManager: Player health depleted at %s" % str(death_position))
 
-	if death_sequence_enabled:
+	# Play visceral death effect (red flash, shake, particles, haptic)
+	var death_fx = get_node_or_null("/root/DeathEffect")
+	if death_fx and death_fx.has_method("play"):
+		death_fx.play(death_position)
+		# Reload map when effect completes
+		if not death_fx.death_effect_complete.is_connected(_on_death_effect_done):
+			death_fx.death_effect_complete.connect(_on_death_effect_done, CONNECT_ONE_SHOT)
+		_death_sequence_running = true
+	elif death_sequence_enabled:
 		_death_sequence_running = true
 		call_deferred("_run_death_sequence", death_position)
 	else:
 		call_deferred("_reload_scene")
+
+
+func _on_death_effect_done() -> void:
+	_death_sequence_running = false
+	reset_level_state()  # Restore health to full
+	# Go to death scene (cross on hill, "You Died", continue → lab)
+	var death_scene_path := "res://commons/scenes/death_scene.tscn"
+	if ResourceLoader.exists(death_scene_path):
+		get_tree().change_scene_to_file(death_scene_path)
+	else:
+		_reload_scene()
 
 func _run_death_sequence(death_position: Vector3) -> void:
 	var tree: SceneTree = get_tree()

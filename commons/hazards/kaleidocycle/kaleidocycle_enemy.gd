@@ -1,4 +1,14 @@
-﻿extends CharacterBody3D
+﻿# @identity
+# essence: rotation_phase → active_face → attack_mode — topology determines combat behavior
+# desire: a tumbling ring of tetrahedra rolls toward you, cycles to reveal fire/ice/spike/shield faces
+# critical_parameter: _rotation_phase — continuous rotation selects which of 4 attack modes activates
+# triggers: _start_cycle() randomly picks AttackMode, sets target rotation to expose that face, then attacks
+# emerges: the shield mode creates damage reduction — the kaleidocycle can randomly become temporarily invincible
+# needs: KaleidocycleGeometry solver [has]; fire_bolt projectile [has]; 4 emissive face materials [has]
+# relationships: contrasts with origami_droideka (continuous rotation vs binary fold); feeds random_game as final boss-tier enemy
+# truth: A kaleidocycle is a closed kinematic chain — every face is always present, only visibility rotates.
+
+extends CharacterBody3D
 class_name KaleidocycleEnemy
 ## Kaleidocycle enemy - tumbling ring of tetrahedra with 4 attack modes.
 ## Each face type triggers a different attack when it becomes active.

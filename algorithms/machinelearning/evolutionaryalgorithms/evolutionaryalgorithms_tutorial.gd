@@ -19,7 +19,7 @@ This tutorial card summarizes how `res://algorithms/machinelearning/evolutionary
 - `[code]create_environment()[/code]` handles a key part of the simulation loop.
 [color=yellow]Code[/color]
 [code]
-func _ready():
+func _ready() -> void:
     # Core behaviour described in the tutorial
     pass
 [/code]

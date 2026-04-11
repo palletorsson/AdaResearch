@@ -10,12 +10,12 @@ const STAGES = [
 
 @export var box_spacing: float = 3.0
 
-func _ready():
+func _ready() -> void:
 	var start_x = -((STAGES.size() - 1) * box_spacing) / 2.0
 	for i in range(STAGES.size()):
 		_add_stage(i, start_x + i * box_spacing)
 
-func _add_stage(i: int, x: float):
+func _add_stage(i: int, x: float) -> void:
 	var data = STAGES[i]
 	var box := MeshInstance3D.new()
 	box.mesh = BoxMesh.new()
@@ -33,3 +33,12 @@ func _add_stage(i: int, x: float):
 	label.position = Vector3(x, 1.8, 0)
 	label.font_size = 36
 	add_child(label)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

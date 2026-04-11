@@ -3,14 +3,14 @@
 
 extends Node3D
 
-func _ready():
+func _ready() -> void:
 	await create_example_sculptures()
 
-func create_example_sculptures():
+func create_example_sculptures() -> void:
 	# Create only the Hollow_Organic sculpture
 	await create_sculpture_variant("Hollow_Organic", Vector3(0, 0, 0), 0.7, 0.8, 0.9)
 
-func create_sculpture_variant(name: String, pos: Vector3, hollow: float, complexity: float, organic: float):
+func create_sculpture_variant(name: String, pos: Vector3, hollow: float, complexity: float, organic: float) -> void:
 	# Create a new sculpture generator
 	var sculpture = WFCSculptureGenerator.new()
 	sculpture.name = name
@@ -36,7 +36,7 @@ func create_sculpture_variant(name: String, pos: Vector3, hollow: float, complex
 	print("Created sculpture: ", name)
 
 # Call this function to regenerate the sculpture with new parameters
-func regenerate_all():
+func regenerate_all() -> void:
 	for child in get_children():
 		if child is WFCSculptureGenerator:
 			child.clear_generated_sculpture()
@@ -44,7 +44,7 @@ func regenerate_all():
 			print("Regenerated sculpture: ", child.name)
 
 # Example of interactive parameter modification
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space key
 		print("Regenerating all sculptures...")
 		await regenerate_all()
@@ -52,7 +52,7 @@ func _input(event):
 	if event.is_action_pressed("ui_select"):  # Enter key
 		await modify_random_sculpture()
 
-func modify_random_sculpture():
+func modify_random_sculpture() -> void:
 	var sculptures = get_children().filter(func(child): return child is WFCSculptureGenerator)
 	if not sculptures.is_empty():
 		var random_sculpture = sculptures[randi() % sculptures.size()]
@@ -67,3 +67,12 @@ func modify_random_sculpture():
 		await random_sculpture.create_hollow_sculpture()
 		
 		print("Modified sculpture: ", random_sculpture.name)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

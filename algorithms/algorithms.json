@@ -7,7 +7,7 @@
 			"history": "Created by Ken Perlin while working on the movie Tron. Later won an Academy Award for Technical Achievement.",
 			"id": "1",
 			"inventor": "Ken Perlin",
-			"name": "Pesrlin Noise",
+			"name": "Perlin Noise",
 			"properties": {
 				"continuity": "C1",
 				"dimensions": "2D/3D",
@@ -20,7 +20,7 @@
 				"2",
 				"3"
 			],
-			"scene_path": "res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scenes/random_edge_profile_grabable.tscn",
+			"scene_path": "res://algorithms/randomness/perlinnoise/perlinnoise.tscn",
 			"tags": [
 				"procedural",
 				"texture",
@@ -48,7 +48,7 @@
 				"1",
 				"3"
 			],
-			"scene_path": "res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scenes/random_edge_profile_grabable.tscn",
+			"scene_path": "res://algorithms/randomness/simplexnoise/simplexnoise.tscn",
 			"tags": [
 				"procedural",
 				"texture",
@@ -60,6 +60,7 @@
 			"category": "Randomness",
 			"complexity": "O(n)",
 			"description": "A simple noise function that interpolates between random values at integer coordinates",
+			"history": "One of the earliest noise functions used in computer graphics, predating Perlin noise in concept though formalized around the same period.",
 			"id": "3",
 			"inventor": "Various",
 			"name": "Value Noise",
@@ -67,11 +68,14 @@
 				"continuity": "C0 to C2 depending on interpolation",
 				"dimensions": "N-dimensional"
 			},
+			"references": [
+				"Ebert, David S., et al. 'Texturing and Modeling: A Procedural Approach.' Morgan Kaufmann (2003)."
+			],
 			"related_algorithms": [
 				"1",
 				"2"
 			],
-			"scene_path": "res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scenes/random_edge_profile_grabable.tscn",
+			"scene_path": "res://algorithms/randomness/noise/valuenoise/value_noise.tscn",
 			"tags": [
 				"procedural",
 				"texture"
@@ -94,7 +98,7 @@
 				"Fourier, J. 'Théorie analytique de la chaleur.' Paris (1822).",
 				"Cooley, James W., and John W. Tukey. 'An algorithm for the machine calculation of complex Fourier series.' Mathematics of computation 19.90 (1965): 297-301."
 			],
-			"scene_path": "res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scenes/random_edge_profile_grabable.tscn",
+			"scene_path": "res://algorithms/wavefunctions/fouriertransform/fouriertransform.tscn",
 			"tags": [
 				"signal processing",
 				"frequency domain",
@@ -118,10 +122,10 @@
 				"Turing, A. M. 'The chemical basis of morphogenesis.' Philosophical Transactions of the Royal Society of London. Series B, Biological Sciences 237.641 (1952): 37-72."
 			],
 			"related_algorithms": [
-				"21",
-				"22"
+				"1",
+				"30"
 			],
-			"scene_path": "res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scenes/random_edge_profile_grabable.tscn",
+			"scene_path": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/reaction_diffusion.tscn",
 			"tags": [
 				"pattern formation",
 				"biological systems",
@@ -144,7 +148,7 @@
 			"references": [
 				"Hart, P. E., Nilsson, N. J., & Raphael, B. 'A formal basis for the heuristic determination of minimum cost paths.' IEEE transactions on Systems Science and Cybernetics 4.2 (1968): 100-107."
 			],
-			"scene_path": "res://adaresearch/Algorithms/Randomness/ProceduralRandomness/GeometryBased/Scenes/random_edge_profile_grabable.tscn",
+			"scene_path": "res://algorithms/searchpathfinding/astar/astar.tscn",
 			"tags": [
 				"pathfinding",
 				"search",
@@ -167,7 +171,7 @@
 			"references": [
 				"Lorensen, William E., and Harvey E. Cline. 'Marching cubes: A high resolution 3D surface construction algorithm.' ACM SIGGRAPH Computer Graphics 21.4 (1987): 163-169."
 			],
-			"scene_path": "res://algorithms/marchingcubes/scenes/marching_cubes_test.tscn",
+			"scene_path": "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_test.tscn",
 			"tags": [
 				"isosurface",
 				"3D rendering",
@@ -194,7 +198,7 @@
 			"related_algorithms": [
 				"40"
 			],
-			"scene_path": "res://algorithms/marchingcubes/scenes/rhizome_cave_demo.tscn",
+			"scene_path": "res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn",
 			"tags": [
 				"cave generation",
 				"rhizomatic growth",

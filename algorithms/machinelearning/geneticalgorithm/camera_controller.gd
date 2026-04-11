@@ -14,12 +14,12 @@ var rotation_start: Vector2
 var target_position: Vector3
 var target_rotation: Vector3
 
-func _ready():
+func _ready() -> void:
 	camera = $Camera3D
 	target_position = global_position
 	target_rotation = rotation_degrees
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			is_rotating = event.pressed
@@ -38,11 +38,11 @@ func _input(event):
 		var delta = event.relative
 		rotate_camera(delta)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	handle_keyboard_input(delta)
 	smooth_camera_movement(delta)
 
-func handle_keyboard_input(delta):
+func handle_keyboard_input(delta) -> void:
 	var input_vector = Vector3.ZERO
 	
 	# Movement input
@@ -65,7 +65,7 @@ func handle_keyboard_input(delta):
 		var movement = transform.basis * input_vector * camera_speed * delta
 		target_position += movement
 
-func rotate_camera(delta: Vector2):
+func rotate_camera(delta: Vector2) -> void:
 	# Horizontal rotation (around Y axis)
 	target_rotation.y -= delta.x * mouse_sensitivity * 100
 	
@@ -73,29 +73,29 @@ func rotate_camera(delta: Vector2):
 	target_rotation.x -= delta.y * mouse_sensitivity * 100
 	target_rotation.x = clamp(target_rotation.x, -80, 80)
 
-func zoom_in():
+func zoom_in() -> void:
 	var forward = -transform.basis.z
 	target_position += forward * zoom_speed
 
-func zoom_out():
+func zoom_out() -> void:
 	var forward = -transform.basis.z
 	target_position -= forward * zoom_speed
 
-func smooth_camera_movement(delta):
+func smooth_camera_movement(delta) -> void:
 	# Smooth position
 	global_position = global_position.lerp(target_position, smooth_factor * delta)
 	
 	# Smooth rotation
 	rotation_degrees = rotation_degrees.lerp(target_rotation, smooth_factor * delta)
 
-func focus_on_position(pos: Vector3, distance: float = 20.0):
+func focus_on_position(pos: Vector3, distance: float = 20.0) -> void:
 	"""Focus camera on a specific position"""
 	var direction = (global_position - pos).normalized()
 	target_position = pos + direction * distance
 	look_at(pos, Vector3.UP)
 	target_rotation = rotation_degrees
 
-func set_camera_mode(mode: String):
+func set_camera_mode(mode: String) -> void:
 	"""Set predefined camera modes"""
 	match mode:
 		"overview":
@@ -110,3 +110,6 @@ func set_camera_mode(mode: String):
 		"top":
 			target_position = Vector3(0, 50, 0)
 			target_rotation = Vector3(-90, 0, 0) 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -18,7 +18,7 @@ var base_cylinder: CSGCylinder3D
 var rotor_assembly: Node3D
 var piston_assembly: Node3D
 
-func setup_mechanism(config: Dictionary):
+func setup_mechanism(config: Dictionary) -> void:
 	"""Configure the Tanguy mechanism with dark, biomechanical aesthetics"""
 	rotation_speed = config.get("rotation_speed", 1.0)
 	piston_amplitude = config.get("piston_amplitude", 2.0)
@@ -31,7 +31,7 @@ func setup_mechanism(config: Dictionary):
 	create_piston_assembly(material, config.get("piston_length", 3.0))
 	connect_assemblies()
 
-func create_base_assembly(material: StandardMaterial3D):
+func create_base_assembly(material: StandardMaterial3D) -> void:
 	"""Create the dark mechanical base"""
 	base_cylinder = CSGCylinder3D.new()
 	base_cylinder.height = 1.5
@@ -49,7 +49,7 @@ func create_base_assembly(material: StandardMaterial3D):
 		detail.material = material
 		base_cylinder.add_child(detail)
 
-func create_rotor_assembly(material: StandardMaterial3D, radius: float):
+func create_rotor_assembly(material: StandardMaterial3D, radius: float) -> void:
 	"""Create the rotating disc mechanism"""
 	rotor_assembly = Node3D.new()
 	rotor_assembly.name = "RotorAssembly"
@@ -80,7 +80,7 @@ func create_rotor_assembly(material: StandardMaterial3D, radius: float):
 		bulge.material = material
 		arm.add_child(bulge)
 
-func create_piston_assembly(material: StandardMaterial3D, length: float):
+func create_piston_assembly(material: StandardMaterial3D, length: float) -> void:
 	"""Create the extending piston mechanism"""
 	piston_assembly = Node3D.new()
 	piston_assembly.name = "PistonAssembly"
@@ -106,7 +106,7 @@ func create_piston_assembly(material: StandardMaterial3D, length: float):
 	tip_sphere.material = material
 	piston_tip.add_child(tip_sphere)
 
-func connect_assemblies():
+func connect_assemblies() -> void:
 	"""Create connecting arm between rotor and piston"""
 	connecting_arm = Node3D.new()
 	connecting_arm.name = "ConnectingArm"
@@ -115,11 +115,11 @@ func connect_assemblies():
 	# Position on rotor edge
 	connecting_arm.position = Vector3(rotor_disc.radius * 0.7, 0, 0)
 
-func start_kinetic_motion():
+func start_kinetic_motion() -> void:
 	"""Begin the kinetic animation"""
 	current_rotation = phase_offset
 
-func update_motion(delta: float):
+func update_motion(delta: float) -> void:
 	"""Update the kinetic motion of the mechanism"""
 	current_rotation += rotation_speed * delta
 	
@@ -144,3 +144,12 @@ func get_motion_data() -> Dictionary:
 		"extension": sin(current_rotation) * piston_amplitude,
 		"speed": rotation_speed
 	}
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

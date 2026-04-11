@@ -4,11 +4,11 @@ var grid: FlowGrid
 var speed: float = 8.0
 var steers_force: float = 20.0
 
-func initialize(g: FlowGrid, start_pos: Vector3):
+func initialize(g: FlowGrid, start_pos: Vector3) -> void:
 	grid = g
 	position = start_pos
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# 1. Bounds Check (Force Return if off-map)
 	# Grid is roughly -20 to +20. If outside, turn back.
 	if position.length() > 22.0: 
@@ -44,3 +44,6 @@ func _get_vector_safe(pos):
 	var v = grid.get_vector(pos)
 	return Vector3(v.x, 0, v.z) # Grid returns Vector3(x,0,z) already? Check FlowGrid.
 	# grid.get_vector returns Vector3(v2.x, 0, v2.y). Correction: v2.y maps to Z. Correct.
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

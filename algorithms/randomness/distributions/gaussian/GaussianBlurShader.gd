@@ -19,7 +19,7 @@ var active: bool = false
 var shader_material: ShaderMaterial
 var visual_frame_root: Node3D
 
-func _ready():
+func _ready() -> void:
 	_setup_visual_frame()
 	_setup_shader_material()
 
@@ -28,7 +28,7 @@ func _ready():
 
 	print("GaussianBlurShader: Initialized (GPU-accelerated)")
 
-func _setup_shader_material():
+func _setup_shader_material() -> void:
 	"""Setup the shader material"""
 	# Create the circle texture
 	var img = Image.create(512, 512, false, Image.FORMAT_RGBA8)
@@ -224,3 +224,12 @@ func _size_from_axes(normal_axis: int, axis_u: int, axis_v: int, depth: float, s
 	out = out + _axis_vector(axis_u) * size_u
 	out = out + _axis_vector(axis_v) * size_v
 	return Vector3(absf(out.x), absf(out.y), absf(out.z))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

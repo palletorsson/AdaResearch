@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: strategy.step(grid) where strategy in {rule_switching, memory, gradient, pure_ca, downward_columns}
+# desire: To grow furniture from rules — watch a chair emerge from a seed through five different CA strategies
+# critical_parameter: strategy_type — each of five strategies produces fundamentally different growth morphologies
+# triggers: Switching strategy → same seed, completely different chair; 30 generations → growth halts, form is final
+# emerges: Chair-like forms from volumetric CA — no furniture geometry was specified, only growth rules
+# needs: VR buttons [has via UI], speed slider [has], strategy switcher [has], Label3D [has]
+# relationships: Feeds into CA_ExpandingSpace. Demonstrates that CA rules can be design tools, not just simulations.
+# truth: A chair is a convergent form — different rules find it because sitting demands it.
+
 const CAStrategy = preload("res://algorithms/cellularautomata/CAchairtests/CAStrategy.gd")
 
 @onready var ca_grid = $CAGrid
@@ -24,27 +34,29 @@ var step_timer: float = 0.0
 var step_interval: float = 0.5
 
 # Camera
+var _xr_active: bool = false
 var camera_rotation: Vector2 = Vector2.ZERO
 var camera_distance: float = 40.0
 var camera_target: Vector3 = Vector3(10, 12, 10)
 
-func _ready():
+func _ready() -> void:
+	_xr_active = XRServer.primary_interface != null
 	setup_camera()
 	setup_ui()
 	reset_simulation()
 
-func setup_camera():
+func setup_camera() -> void:
 	camera.position = camera_target + Vector3(0, 20, -30)
 	camera.look_at_from_position(camera.position, camera_target, Vector3.UP)
 
-func setup_ui():
+func setup_ui() -> void:
 	btn_reset.pressed.connect(_on_reset_pressed)
 	btn_step.pressed.connect(_on_step_pressed)
 	btn_play.pressed.connect(_on_play_pressed)
 	btn_strategy.pressed.connect(_on_strategy_pressed)
 	speed_slider.value_changed.connect(_on_speed_changed)
 
-func reset_simulation():
+func reset_simulation() -> void:
 	ca_grid.reset()
 	
 	if strategy_type == CAStrategy.StrategyType.DOWNWARD_COLUMNS:
@@ -57,7 +69,7 @@ func reset_simulation():
 	update_ui()
 	ca_grid.update_visualization()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	handle_camera(delta)
 	
 	if is_playing:
@@ -66,7 +78,7 @@ func _process(delta):
 			step_timer = 0.0
 			step_simulation()
 
-func step_simulation():
+func step_simulation() -> void:
 	if ca_grid.generation < 30:
 		current_strategy.step()
 		update_ui()
@@ -74,7 +86,7 @@ func step_simulation():
 		is_playing = false
 		btn_play.text = "Play"
 
-func update_ui():
+func update_ui() -> void:
 	gen_label.text = "Generation: %d" % ca_grid.generation
 	cell_label.text = "Cells: %d" % ca_grid.get_occupied_count()
 	
@@ -87,11 +99,13 @@ func update_ui():
 	]
 	strategy_label.text = "Strategy: " + strategy_names[strategy_type]
 
-func handle_camera(delta):
+func handle_camera(delta) -> void:
+	if _xr_active:
+		return
 	# WASD movement
 	var move_speed = 20.0
 	var move = Vector3.ZERO
-	
+
 	if Input.is_key_pressed(KEY_W):
 		move.z -= 1
 	if Input.is_key_pressed(KEY_S):
@@ -100,12 +114,12 @@ func handle_camera(delta):
 		move.x -= 1
 	if Input.is_key_pressed(KEY_D):
 		move.x += 1
-	
+
 	if move != Vector3.ZERO:
 		camera_target += move.normalized() * move_speed * delta
 		camera.position = camera_target + Vector3(0, 20, -30)
 		camera.look_at_from_position(camera.position, camera_target, Vector3.UP)
-	
+
 	# Mouse wheel zoom
 	if Input.is_action_just_released("ui_page_up"):
 		camera_distance = max(20.0, camera_distance - 5.0)
@@ -114,12 +128,14 @@ func handle_camera(delta):
 		camera_distance = min(100.0, camera_distance + 5.0)
 		update_camera_position()
 
-func update_camera_position():
+func update_camera_position() -> void:
 	var offset = Vector3(0, camera_distance * 0.5, -camera_distance)
 	camera.position = camera_target + offset
 	camera.look_at(camera_target)
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
+	if _xr_active:
+		return
 	# Camera rotation with right mouse button
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		camera_rotation.x -= event.relative.y * 0.01
@@ -132,19 +148,22 @@ func _unhandled_input(event):
 		camera.position = camera_target + offset
 		camera.look_at_from_position(camera.position, camera_target, Vector3.UP)
 
-func _on_reset_pressed():
+func _on_reset_pressed() -> void:
 	reset_simulation()
 
-func _on_step_pressed():
+func _on_step_pressed() -> void:
 	step_simulation()
 
-func _on_play_pressed():
+func _on_play_pressed() -> void:
 	is_playing = !is_playing
 	btn_play.text = "Pause" if is_playing else "Play"
 
-func _on_strategy_pressed():
+func _on_strategy_pressed() -> void:
 	strategy_type = (strategy_type + 1) % 5
 	reset_simulation()
 
-func _on_speed_changed(value: float):
+func _on_speed_changed(value: float) -> void:
 	step_interval = 1.0 / value
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

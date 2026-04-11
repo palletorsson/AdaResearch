@@ -1,5 +1,15 @@
 # destructibles_test_scene.gd
 # Test scene for all destructible objects
+#
+# @identity
+# essence: impact → destroy(method). Eight destruction methods: instant, health-based, face-peel, Cantor recursion, Voronoi fracture, planar crack, prism shatter. Topology of breaking.
+# desire: To throw balls at things and watch them break differently — each destructible teaching a different algorithm for decomposing geometry under impact.
+# critical_parameter: The velocity of the thrown ball at impact. It triggers destruction thresholds and determines fragment ejection speeds. Faster throw = more dramatic break.
+# triggers: VR grab + throw → ball hits destructible, each type responds differently (instant/health/recursive-split/voronoi-crack/prism-shatter), stats track throws and destroys
+# emerges: Cantor boxes splitting into 4, then each quarter splitting again (recursive fractal destruction). Voronoi spheres cracking along Voronoi cell boundaries. Each method feels different.
+# needs: Throwable balls [has], 8 destructible types [has], info panel [has]. Missing: VR reset button, slow-motion replay of destruction.
+# relationships: Sandbox for all destruction algorithms in the throwing system. Lives in ForcesArena. Tests subsystems used by VectorThrowing targets.
+# truth: Destruction is topology change. How something breaks reveals how it was built.
 extends "../shared/vector_scene_base.gd"
 
 @export_group("Scene Configuration")
@@ -202,3 +212,12 @@ func _on_prism_destroyed(prism: Node3D, _impact_velocity: Vector3) -> void:
 func _update_info() -> void:
 	if info_label:
 		info_label.text = "Throws: %d | Destroyed: %d" % [throws_count, total_destroyed]
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

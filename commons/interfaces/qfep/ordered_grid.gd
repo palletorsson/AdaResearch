@@ -7,6 +7,16 @@ extends Node3D
 
 class_name QFEPOrderedGrid
 
+# @identity
+# essence: grid(x,y,z) * spacing + synchronized_breathe(sin(t)) -> perfect lattice
+# desire: stand inside pure order — every cube in its place, breathing as one
+# critical_parameter: spacing — the regularity that makes the grid legible as a crystal
+# triggers: breathe_enabled creates synchronized vertical oscillation; add_disorder() breaks the pattern
+# emerges: the uncanny valley of perfect order — too regular to feel alive, yet it breathes
+# needs: VR disorder control [missing], touch-to-displace [missing]
+# relationships: represents F term (free energy = pure order); contrasts random_cubes (E term) and complexity_pattern (edge); depends on grid concept
+# truth: at lambda=0, prediction error is zero — the crystal has no surprises, no freedom, and no life
+
 ## Grid dimensions
 @export var grid_x: int = 4
 @export var grid_y: int = 2

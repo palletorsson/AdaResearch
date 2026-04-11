@@ -49,7 +49,7 @@ func _rebuild_tokens() -> void:
 	create_input_tokens()
 	create_output_tokens()
 
-func _ready():
+func _ready() -> void:
 	# Initialize Transformers visualization
 	print("Transformers Visualization initialized")
 	create_input_tokens()
@@ -58,7 +58,7 @@ func _ready():
 	setup_training_metrics()
 	_create_stats_labels()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	var scaled_delta = delta * animation_speed
 	time += scaled_delta
 	
@@ -75,7 +75,7 @@ func _process(delta):
 	update_training_metrics(scaled_delta)
 	_update_stats_labels()
 
-func create_input_tokens():
+func create_input_tokens() -> void:
 	## Create input sequence tokens with gold metallic materials
 	var input_tokens = $InputSequence/InputTokens
 	for i in range(sequence_length):
@@ -98,7 +98,7 @@ func create_input_tokens():
 		var tween = create_tween()
 		tween.tween_property(token, "scale", Vector3.ONE, 0.3).set_delay(i * 0.05).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
-func create_output_tokens():
+func create_output_tokens() -> void:
 	## Create output sequence tokens with blue metallic materials
 	var output_tokens = $OutputSequence/OutputTokens
 	for i in range(sequence_length):
@@ -121,7 +121,7 @@ func create_output_tokens():
 		var tween = create_tween()
 		tween.tween_property(token, "scale", Vector3.ONE, 0.3).set_delay(i * 0.05).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
-func create_flow_particles():
+func create_flow_particles() -> void:
 	## Create glowing data flow particles that travel through the transformer pipeline
 	var flow_particles_node = $DataFlow/FlowParticles
 	for i in range(20):
@@ -145,7 +145,7 @@ func create_flow_particles():
 		flow_particles_node.add_child(particle)
 		flow_particles.append(particle)
 
-func setup_training_metrics():
+func setup_training_metrics() -> void:
 	# Initialize loss and accuracy meters
 	var loss_indicator = $TrainingMetrics/LossMeter/LossIndicator
 	var accuracy_indicator = $TrainingMetrics/AccuracyMeter/AccuracyIndicator
@@ -154,7 +154,7 @@ func setup_training_metrics():
 	if accuracy_indicator:
 		accuracy_indicator.position.x = 0  # Start at middle
 
-func animate_transformer_layers(delta):
+func animate_transformer_layers(delta) -> void:
 	# --- Encoder Layers: green glow intensifies with training ---
 	var encoder_layers = [$TransformerLayers/EncoderLayer1/EncoderCore1, $TransformerLayers/EncoderLayer2/EncoderCore2]
 	for i in range(encoder_layers.size()):
@@ -181,7 +181,7 @@ func animate_transformer_layers(delta):
 				layer.material_override.emission = color_decoder * intensity
 				layer.material_override.emission_energy_multiplier = 1.0 + training_progress
 
-func animate_attention_heads(delta):
+func animate_attention_heads(delta) -> void:
 	# Animate multi-head attention core
 	var attention_core = $AttentionHeads/MultiHeadAttention/AttentionCore
 	if attention_core:
@@ -200,7 +200,7 @@ func animate_attention_heads(delta):
 			var intensity = 0.3 + attention_activation * 0.7
 			attention_core.material_override.emission = Color(0.2, 0.8, 0.2, 1) * intensity
 
-func animate_positional_encoding(delta):
+func animate_positional_encoding(delta) -> void:
 	# Animate positional encoding core
 	var encoding_core = $PositionalEncoding/EncodingCore
 	if encoding_core:
@@ -219,7 +219,7 @@ func animate_positional_encoding(delta):
 			var intensity = 0.3 + encoding_effectiveness * 0.7
 			encoding_core.material_override.emission = Color(0.2, 0.8, 0.2, 1) * intensity
 
-func animate_data_flow(delta):
+func animate_data_flow(delta) -> void:
 	# Animate flow particles
 	for i in range(flow_particles.size()):
 		var particle = flow_particles[i]
@@ -243,7 +243,7 @@ func animate_data_flow(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * training_progress
 			particle.scale = Vector3.ONE * pulse
 
-func update_training_metrics(delta):
+func update_training_metrics(delta) -> void:
 	# Update loss meter
 	var loss_indicator = $TrainingMetrics/LossMeter/LossIndicator
 	if loss_indicator:
@@ -266,13 +266,13 @@ func update_training_metrics(delta):
 		var red_component = 0.2 + 0.6 * (1.0 - accuracy)
 		accuracy_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
 
-func set_training_progress(progress: float):
+func set_training_progress(progress: float) -> void:
 	training_progress = clamp(progress, 0.0, 1.0)
 
-func set_loss_value(loss: float):
+func set_loss_value(loss: float) -> void:
 	loss_value = clamp(loss, 0.1, 1.0)
 
-func set_accuracy(acc: float):
+func set_accuracy(acc: float) -> void:
 	accuracy = clamp(acc, 0.0, 1.0)
 
 func get_training_progress() -> float:
@@ -284,7 +284,7 @@ func get_loss_value() -> float:
 func get_accuracy() -> float:
 	return accuracy
 
-func reset_training():
+func reset_training() -> void:
 	## Reset all training state and animate the reset with a tween
 	time = 0.0
 	training_progress = 0.0
@@ -341,3 +341,12 @@ func _update_stats_labels() -> void:
 func _clear_children(parent: Node) -> void:
 	for c in parent.get_children():
 		c.queue_free()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

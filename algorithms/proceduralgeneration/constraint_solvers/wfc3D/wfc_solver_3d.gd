@@ -1,4 +1,14 @@
-﻿extends Node3D
+extends Node3D
+
+# @identity
+# essence: 3D Wave Function Collapse — entropy-based cell selection collapsing tile superpositions with socket adjacency propagation
+# desire: To watch a world crystallize from pure possibility: every cell starts as everything, then observation forces a choice
+# critical_parameter: grid_size — the volume to fill; larger grids produce more complex emergent landscapes but risk contradiction
+# triggers: Animated generation shows cells collapsing in real time; base terrain seeds the bottom; propagation ripples outward
+# emerges: Voxel landscapes with grass, dirt, stone, water, sand — all from tile adjacency rules and entropy-minimizing selection
+# needs: Animated generation [has], socket compatibility [has], base terrain seeding [has], VR walkthrough [missing]
+# relationships: Paired with wave_function_collapse in constraint_solvers. Uses prototypes from wfc_3d_tiles.
+# truth: The world does not emerge from randomness — it emerges from the collapse of possibility under constraint.
 
 @export var grid_size: Vector3i = Vector3i(20, 10, 20)
 @export var tile_size: float = 2.0
@@ -20,7 +30,7 @@ var is_running: bool = false
 var cells_collapsed_count: int = 0
 var total_cells: int = 0
 
-func _ready():
+func _ready() -> void:
 	width = grid_size.x
 	height = grid_size.y
 	depth = grid_size.z
@@ -105,7 +115,7 @@ func _load_prototypes() -> bool:
 	print("Loaded %d prototypes." % prototypes.size())
 	return true
 
-func _init_grid():
+func _init_grid() -> void:
 	wave = []
 	collapsed = []
 	wave.resize(total_cells)
@@ -154,7 +164,7 @@ func _run_rest_of_wfc_instant() -> bool:
 			return false
 	return true
 
-func _generate_base_terrain():
+func _generate_base_terrain() -> void:
 	var noise = FastNoiseLite.new()
 	noise.seed = randi()
 	noise.frequency = 0.08
@@ -297,7 +307,7 @@ func _spawn_tile(idx: int, proto_idx: int):
 	tile.name = "Tile_%d_%d_%d" % [pos_i.x, pos_i.y, pos_i.z]
 	add_child(tile)
 
-func _collapse_cell(idx: int):
+func _collapse_cell(idx: int) -> void:
 	var options = wave[idx]
 	var total_weight = 0.0
 	for opt in options:
@@ -424,3 +434,12 @@ func _check_socket(tile_a: int, tile_b: int, dir_a: String, dir_b: String) -> bo
 	var socket_b = meta_b[dir_b]
 	
 	return socket_a == socket_b
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

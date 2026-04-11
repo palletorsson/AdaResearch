@@ -1,6 +1,16 @@
 extends LineSnapPuzzleBase
 class_name QuadLinePuzzle
 
+# @identity
+# essence: quad = 4 edges closing 4 corners — the simplest polygon with a right angle relationship
+# desire: learner assembles a square and feels how four equal lengths and right angles constrain each other
+# critical_parameter: the 4 corner snap targets — all must be occupied for the square to register
+# triggers: snapping all 4 line endpoints to the 4 corner positions in sequence
+# emerges: the quad as two triangles sharing a diagonal — every quad in 3D is secretly two triangles
+# needs: [missing VR controls — all interaction is line-endpoint snapping]
+# relationships: extends LineSnapPuzzleBase; logical predecessor to quad face primitive
+# truth: a square is four equal sides and four right angles — remove any one constraint and it changes
+
 ## QuadLinePuzzle - Interactive puzzle to form a square from four lines
 ## Any endpoint can snap to any of the 4 corner targets
 

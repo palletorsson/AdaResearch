@@ -1,6 +1,16 @@
 @tool
 extends Node3D
 
+# @identity
+# essence: wavelength_to_color(lambda) animated between linear layout (physics) and circular layout (perception) — the spectrum closes into a wheel
+# desire: to watch the visible spectrum bend from a line into a circle, magenta dots filling the gap that physics leaves empty
+# critical_parameter: cycle_duration — controls how long you dwell in physics-mode vs perception-mode, pacing the conceptual shift
+# triggers: time drives a continuous phase animation: 0-40% linear, 40-60% transition, 60-100% circular — no user input needed
+# emerges: magenta dots appearing in the gap reveal that magenta is not a spectral color — it is the brain's invention to close the loop
+# needs: auto-animation [has]; Label3D [missing]; VR pause/scrub [missing]; wavelength labels [missing]
+# relationships: contrasts with spectrum_forest (spatial vs temporal spectrum); follows dark_side_prism (static split vs animated closure)
+# truth: the color wheel is a lie the brain tells to make the spectrum feel complete — magenta is the seam
+
 @export var spectrum_length: float = 10.0
 @export var dot_count: int = 60
 @export var dot_size: float = 0.5
@@ -10,14 +20,14 @@ var time: float = 0.0
 var _dots: Array[MeshInstance3D] = []
 var _magenta_dots: Array[MeshInstance3D] = []
 
-func _ready():
+func _ready() -> void:
 	_create_spectrum()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	_animate()
 
-func _create_spectrum():
+func _create_spectrum() -> void:
 	for child in get_children():
 		child.queue_free()
 	_dots.clear()
@@ -61,7 +71,7 @@ func _create_dot(color: Color) -> MeshInstance3D:
 	
 	return mi
 
-func _animate():
+func _animate() -> void:
 	# 0.0 - 0.4: Linear Mode (Physics)
 	# 0.4 - 0.6: Transition
 	# 0.6 - 1.0: Circular Mode (Perception)
@@ -138,3 +148,12 @@ func _wavelength_to_color(lambda: float) -> Color:
 		b = 0.0
 		
 	return Color(r, g, b)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

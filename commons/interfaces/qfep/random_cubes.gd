@@ -7,6 +7,16 @@ extends Node3D
 
 class_name QFEPRandomCubes
 
+# @identity
+# essence: for i in N: cube(random_pos, random_rot, random_size, random_color) + drift(random_velocity)
+# desire: be surrounded by cubes that have forgotten how to form a grid — pure possibility space
+# critical_parameter: drift_speed — at zero, chaos is frozen; above zero, entropy is visibly restless
+# triggers: regenerate() re-rolls every position, velocity, and color; boundary bouncing prevents escape
+# emerges: temporary alignments and clusters that the eye reads as structure — meaning projected onto noise
+# needs: VR regenerate button [missing], drift speed control [missing]
+# relationships: represents E(S) entropy term; contrasts ordered_grid (F term); paired with particle_chaos; feeds lambda spectrum
+# truth: randomness is not the absence of information but the presence of all possible configurations simultaneously
+
 ## Number of cubes to spawn
 @export var cube_count: int = 20
 

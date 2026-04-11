@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: Proximity-based procedural tree spawner — generates parametric trees around VR camera position with distance culling
+# desire: To populate a forest that grows around the player: trees appear ahead and vanish behind, infinite generated nature
+# critical_parameter: generation_distance — the radius within which new trees spawn; controls forest extent around the player
+# triggers: Walking forward spawns trees ahead; max_trees caps density; min_tree_spacing prevents overlap
+# emerges: An endless procedural forest from a simple spawn/cull loop tied to camera position
+# needs: XR camera reference [has], distance-based generation [has], material system [has], VR walkthrough [has]
+# relationships: Final artifact in biological_growth (BG_Tree_Forms). Synthesizes grammar-driven growth with spatial management.
+# truth: The forest does not exist — it is generated around you, and the generation is the forest.
+
 # Direct reference to XR camera using relative path
 @onready var vr_camera = $"../XROrigin3D/XRCamera3D"
 
@@ -29,7 +39,7 @@ var generation_timer := 0.0
 var primary_material: StandardMaterial3D
 var secondary_material: StandardMaterial3D
 
-func _ready():
+func _ready() -> void:
 	# Create materials
 	create_materials()
 	
@@ -39,7 +49,7 @@ func _ready():
 	else:
 		print("Tree generator initialized with XR camera: " + vr_camera.name)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Skip processing if no camera reference
 	if not vr_camera:
 		return
@@ -52,7 +62,7 @@ func _process(delta):
 		generation_timer = 0.0
 		update_trees()
 
-func update_trees():
+func update_trees() -> void:
 	# Get camera position (player's viewpoint)
 	var camera_pos = vr_camera.global_position
 	
@@ -73,7 +83,7 @@ func update_trees():
 	if active_trees.size() < max_trees:
 		generate_trees_around_camera()
 
-func generate_trees_around_camera():
+func generate_trees_around_camera() -> void:
 	# Get camera position
 	var camera_pos = vr_camera.global_position
 	
@@ -113,7 +123,7 @@ func generate_trees_around_camera():
 		create_tree(new_pos)
 		trees_added += 1
 
-func create_tree(position: Vector3):
+func create_tree(position: Vector3) -> void:
 	# Create a tree at the specified position
 	var tree = Node3D.new()
 	var tree_id = next_tree_id
@@ -141,7 +151,7 @@ func create_tree(position: Vector3):
 	active_trees[tree_id] = tree
 	tree_positions[tree_id] = position
 
-func remove_tree(tree_id: int):
+func remove_tree(tree_id: int) -> void:
 	# Remove a tree
 	if active_trees.has(tree_id):
 		var tree = active_trees[tree_id]
@@ -149,7 +159,7 @@ func remove_tree(tree_id: int):
 		active_trees.erase(tree_id)
 		tree_positions.erase(tree_id)
 
-func create_materials():
+func create_materials() -> void:
 	# Primary material (most blocks)
 	primary_material = StandardMaterial3D.new()
 	primary_material.albedo_color = primary_color
@@ -168,7 +178,7 @@ func create_materials():
 	secondary_material.emission = secondary_color
 	secondary_material.emission_energy_multiplier = emission_strength * 0.7
 
-func generate_simple_block_tree(parent):
+func generate_simple_block_tree(parent) -> void:
 	# Create a simple geometric tree using blocks
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
@@ -246,7 +256,7 @@ func generate_simple_block_tree(parent):
 				
 				block.add_child(detail)
 
-func generate_complex_block_cluster(parent):
+func generate_complex_block_cluster(parent) -> void:
 	# Create a more complex block cluster similar to the reference image
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
@@ -402,3 +412,12 @@ func generate_complex_block_cluster(parent):
 		detail.material_override = secondary_material if rng.randf() > 0.5 else primary_material
 		
 		parent.add_child(detail)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

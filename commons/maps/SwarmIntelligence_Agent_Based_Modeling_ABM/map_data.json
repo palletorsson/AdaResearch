@@ -1,62 +1,63 @@
 {
   "map_info": {
-    "name": "Agent-Based Modeling",
-    "lookup_name": "SwarmIntelligence_Agent_Based_Modeling_ABM",
-    "description": "A grid of corridors and pillars where agents navigate pathways. The regularity mirrors grid-based ABM simulations.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 8,
-      "depth": 8,
-      "max_height": 1
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "swarm_intelligence",
-      "spatial_temperature": 0.5,
-      "design_notes": "Periodic wall pillars create a grid of corridors. Agents navigate intersection choices."
-    }
+      "name": "Agent-Based Modeling",
+      "lookup_name": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "description": "A grid of corridors and pillars where agents navigate pathways. The regularity mirrors grid-based ABM simulations.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 8,
+          "depth": 8,
+          "max_height": 1
+      },
+      "metadata": {
+          "difficulty": "intermediate",
+          "category": "swarm_intelligence",
+          "spatial_temperature": 0.5,
+          "design_notes": "Periodic wall pillars create a grid of corridors. Agents navigate intersection choices."
+      },
+      "title": "Agent-Based Modeling"
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next",
+          "description": "Continue to next step",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
   },
   "layers": {
     "structure": [
-      [ "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "0", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1" ]
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "0", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1"]
     ],
     "utilities": [
-      [ "s", "an", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", "t", " " ],
-      [ " ", " ", " ", " ", " ", " ", "sp", " " ]
+      ["s", "an", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", "t", " "],
+      [" ", " ", " ", " ", " ", " ", "sp", " "]
     ],
     "interactables": [
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", "ant_colony_optimization", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " " ]
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", "ant_colony_optimization", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " "]
     ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
   }
 }

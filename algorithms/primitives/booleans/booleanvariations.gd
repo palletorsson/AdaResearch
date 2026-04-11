@@ -18,12 +18,12 @@ var operation_types = [CSGShape3D.OPERATION_UNION, CSGShape3D.OPERATION_SUBTRACT
 # Materials for visual distinction
 var materials = []
 
-func _ready():
+func _ready() -> void:
 	setup_materials()
 	if auto_generate:
 		generate_csg_grid()
 
-func setup_materials():
+func setup_materials() -> void:
 	# Create different materials for visual variety
 	var base_colors = [
 		Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW, 
@@ -38,7 +38,7 @@ func setup_materials():
 		material.roughness = randf_range(0.1, 0.9)
 		materials.append(material)
 
-func generate_csg_grid():
+func generate_csg_grid() -> void:
 	# Clear existing children
 	for child in get_children():
 		child.queue_free()
@@ -114,7 +114,7 @@ func create_csg_variation(index: int) -> CSGCombiner3D:
 	return combiner
 
 # Variation 0: Basic hollow sphere
-func create_hollow_sphere(combiner: CSGCombiner3D):
+func create_hollow_sphere(combiner: CSGCombiner3D) -> void:
 	var outer_sphere = CSGSphere3D.new()
 	outer_sphere.radius = 1.0
 	combiner.add_child(outer_sphere)
@@ -125,7 +125,7 @@ func create_hollow_sphere(combiner: CSGCombiner3D):
 	combiner.add_child(inner_sphere)
 
 # Variation 1: Sphere with multiple holes and nested spheres
-func create_sphere_with_holes(combiner: CSGCombiner3D):
+func create_sphere_with_holes(combiner: CSGCombiner3D) -> void:
 	var sphere = CSGSphere3D.new()
 	sphere.radius = 1.2
 	combiner.add_child(sphere)
@@ -173,7 +173,7 @@ func create_sphere_with_holes(combiner: CSGCombiner3D):
 		combiner.add_child(torus)
 
 # Variation 2: Perforated cube with multiple boxes and rectangles
-func create_perforated_cube(combiner: CSGCombiner3D):
+func create_perforated_cube(combiner: CSGCombiner3D) -> void:
 	var cube = CSGBox3D.new()
 	cube.size = Vector3(2, 2, 2)
 	combiner.add_child(cube)
@@ -233,7 +233,7 @@ func create_perforated_cube(combiner: CSGCombiner3D):
 		combiner.add_child(rect)
 
 # Variation 3: Torus intersection
-func create_torus_intersection(combiner: CSGCombiner3D):
+func create_torus_intersection(combiner: CSGCombiner3D) -> void:
 	var torus1 = CSGTorus3D.new()
 	torus1.inner_radius = 0.3
 	torus1.outer_radius = 1.0
@@ -247,7 +247,7 @@ func create_torus_intersection(combiner: CSGCombiner3D):
 	combiner.add_child(torus2)
 
 # Variation 4: Cylinder with multiple subtractions and nested cylinders
-func create_cylinder_subtraction(combiner: CSGCombiner3D):
+func create_cylinder_subtraction(combiner: CSGCombiner3D) -> void:
 	var cylinder = CSGCylinder3D.new()
 	cylinder.height = 2.0
 	cylinder.radius = 1.0
@@ -301,7 +301,7 @@ func create_cylinder_subtraction(combiner: CSGCombiner3D):
 		combiner.add_child(horiz_cyl)
 
 # Variation 5: Nested boxes with more complexity
-func create_nested_boxes(combiner: CSGCombiner3D):
+func create_nested_boxes(combiner: CSGCombiner3D) -> void:
 	var sizes = [2.0, 1.6, 1.2, 0.8, 0.6, 0.4, 0.3, 0.2]
 	var operations = [CSGShape3D.OPERATION_UNION, CSGShape3D.OPERATION_SUBTRACTION, 
 					 CSGShape3D.OPERATION_UNION, CSGShape3D.OPERATION_SUBTRACTION,
@@ -359,7 +359,7 @@ func create_nested_boxes(combiner: CSGCombiner3D):
 		combiner.add_child(detail_box)
 
 # Variation 6: Swiss cheese effect with more holes
-func create_swiss_cheese_effect(combiner: CSGCombiner3D):
+func create_swiss_cheese_effect(combiner: CSGCombiner3D) -> void:
 	var base = CSGSphere3D.new()
 	base.radius = 1.3
 	combiner.add_child(base)
@@ -389,7 +389,7 @@ func create_swiss_cheese_effect(combiner: CSGCombiner3D):
 		combiner.add_child(inner_sphere)
 
 # Variation 7: Lattice structure
-func create_lattice_structure(combiner: CSGCombiner3D):
+func create_lattice_structure(combiner: CSGCombiner3D) -> void:
 	var frame_thickness = 0.1
 	
 	# Create frame edges
@@ -409,7 +409,7 @@ func create_lattice_structure(combiner: CSGCombiner3D):
 				combiner.add_child(beam)
 
 # Variation 8: Twisted forms
-func create_twisted_forms(combiner: CSGCombiner3D):
+func create_twisted_forms(combiner: CSGCombiner3D) -> void:
 	for i in range(5):
 		var shape = CSGBox3D.new() if i % 2 == 0 else CSGCylinder3D.new()
 		
@@ -429,7 +429,7 @@ func create_twisted_forms(combiner: CSGCombiner3D):
 		combiner.add_child(shape)
 
 # Add more variations (9-24) with increasing complexity...
-func create_boolean_sculpture(combiner: CSGCombiner3D):
+func create_boolean_sculpture(combiner: CSGCombiner3D) -> void:
 	# Artistic boolean combination
 	var base = CSGTorus3D.new()
 	base.inner_radius = 0.4
@@ -441,7 +441,7 @@ func create_boolean_sculpture(combiner: CSGCombiner3D):
 	intersect.operation = CSGShape3D.OPERATION_INTERSECTION
 	combiner.add_child(intersect)
 
-func create_organic_cavities(combiner: CSGCombiner3D):
+func create_organic_cavities(combiner: CSGCombiner3D) -> void:
 	var base = CSGSphere3D.new()
 	base.radius = 1.2
 	combiner.add_child(base)
@@ -461,46 +461,46 @@ func create_organic_cavities(combiner: CSGCombiner3D):
 		combiner.add_child(cavity)
 
 # Simplified versions for remaining variations
-func create_geometric_cutouts(combiner: CSGCombiner3D):
+func create_geometric_cutouts(combiner: CSGCombiner3D) -> void:
 	create_hollow_sphere(combiner)  # Placeholder - implement unique design
 
-func create_intersecting_cylinders(combiner: CSGCombiner3D):
+func create_intersecting_cylinders(combiner: CSGCombiner3D) -> void:
 	create_cylinder_subtraction(combiner)  # Placeholder
 
-func create_complex_hollow(combiner: CSGCombiner3D):
+func create_complex_hollow(combiner: CSGCombiner3D) -> void:
 	create_nested_boxes(combiner)  # Placeholder
 
-func create_fractal_like(combiner: CSGCombiner3D):
+func create_fractal_like(combiner: CSGCombiner3D) -> void:
 	create_lattice_structure(combiner)  # Placeholder
 
-func create_architectural_form(combiner: CSGCombiner3D):
+func create_architectural_form(combiner: CSGCombiner3D) -> void:
 	create_perforated_cube(combiner)  # Placeholder
 
-func create_abstract_art(combiner: CSGCombiner3D):
+func create_abstract_art(combiner: CSGCombiner3D) -> void:
 	create_boolean_sculpture(combiner)  # Placeholder
 
-func create_mechanical_parts(combiner: CSGCombiner3D):
+func create_mechanical_parts(combiner: CSGCombiner3D) -> void:
 	create_cylinder_subtraction(combiner)  # Placeholder
 
-func create_natural_erosion(combiner: CSGCombiner3D):
+func create_natural_erosion(combiner: CSGCombiner3D) -> void:
 	create_swiss_cheese_effect(combiner)  # Placeholder
 
-func create_crystalline_structure(combiner: CSGCombiner3D):
+func create_crystalline_structure(combiner: CSGCombiner3D) -> void:
 	create_lattice_structure(combiner)  # Placeholder
 
-func create_flowing_forms(combiner: CSGCombiner3D):
+func create_flowing_forms(combiner: CSGCombiner3D) -> void:
 	create_twisted_forms(combiner)  # Placeholder
 
-func create_puzzle_pieces(combiner: CSGCombiner3D):
+func create_puzzle_pieces(combiner: CSGCombiner3D) -> void:
 	create_nested_boxes(combiner)  # Placeholder
 
-func create_minimal_art(combiner: CSGCombiner3D):
+func create_minimal_art(combiner: CSGCombiner3D) -> void:
 	create_torus_intersection(combiner)  # Placeholder
 
-func create_complex_intersection(combiner: CSGCombiner3D):
+func create_complex_intersection(combiner: CSGCombiner3D) -> void:
 	create_boolean_sculpture(combiner)  # Placeholder
 
-func create_random_combination(combiner: CSGCombiner3D):
+func create_random_combination(combiner: CSGCombiner3D) -> void:
 	# Truly random combination
 	var num_shapes = randi_range(2, 5)
 	for i in range(num_shapes):
@@ -548,7 +548,7 @@ func create_random_primitive() -> CSGShape3D:
 	
 	return shape
 
-func apply_material_to_csg(csg_node: Node, material: Material):
+func apply_material_to_csg(csg_node: Node, material: Material) -> void:
 	# Apply material to all CSG children
 	if csg_node is CSGShape3D:
 		csg_node.material_override = material
@@ -586,9 +586,17 @@ func create_grab_cube_wrapper(csg_object: CSGCombiner3D, index: int) -> Node3D:
 		# Don't freeze completely - we want them grabbable but stable
 	
 	# Remove the default mesh from grab_cube and replace with our CSG object
-	var mesh_instance = grab_cube.get_node("MeshInstance3D")
+	var mesh_instance = grab_cube.get_node_or_null("MeshInstance3D")
 	if mesh_instance:
 		mesh_instance.queue_free()
+
+	# Remove HighlightRing immediately — the replacement stability script won't have
+	# XRToolsPickable's highlight_updated signal, so HighlightRing would error.
+	# Must use free() not queue_free() to prevent _ready() from running.
+	var highlight_ring = grab_cube.get_node_or_null("HighlightRing")
+	if highlight_ring:
+		grab_cube.remove_child(highlight_ring)
+		highlight_ring.free()
 	
 	# Add the CSG object as a child of the grab_cube
 	grab_cube.add_child(csg_object)
@@ -602,28 +610,38 @@ func create_grab_cube_wrapper(csg_object: CSGCombiner3D, index: int) -> Node3D:
 		box_shape.size = Vector3(2.0, 2.0, 2.0)  # Adjust based on your CSG object size
 		collision_shape.shape = box_shape
 	
-	# Add a script to handle stability
+	# Add a script to handle stability.
+	# Must include highlight_updated signal so HighlightRing child doesn't error.
 	var stability_script = GDScript.new()
 	stability_script.source_code = """
 extends RigidBody3D
 
-func _ready():
-	# Ensure the object stays stable when not grabbed
+signal highlight_updated(pickable, enable)
+
+func _ready() -> void:
 	gravity_scale = 0.0
 	linear_damp = 5.0
 	angular_damp = 5.0
 
-func _integrate_forces(_state):
-	# Apply additional stability
+func _integrate_forces(_state) -> void:
 	if linear_velocity.length() > 0.1:
-		linear_velocity *= 0.9  # Gradually slow down
+		linear_velocity *= 0.9
 	if angular_velocity.length() > 0.1:
-		angular_velocity *= 0.9  # Gradually slow down rotation
+		angular_velocity *= 0.9
 """
 	grab_cube.set_script(stability_script)
 	
 	return grab_cube
 
 # Public function to regenerate the grid
-func regenerate_grid():
+func regenerate_grid() -> void:
 	generate_csg_grid()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

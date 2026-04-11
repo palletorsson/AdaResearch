@@ -42,10 +42,10 @@ var collision_bodies: Array[StaticBody3D] = []
 signal generation_complete()
 signal generation_progress(percentage: float)
 
-func _init(seed_value: int = -1):
+func _init(seed_value: int = -1) -> void:
 	setup_components(seed_value)
 
-func setup_components(seed_value: int = -1):
+func setup_components(seed_value: int = -1) -> void:
 	"""Initialize terrain generation components"""
 	# Initialize marching cubes
 	marching_cubes = MarchingCubesGenerator.new()
@@ -62,7 +62,7 @@ func setup_components(seed_value: int = -1):
 	
 	print("TerrainGenerator: Components initialized")
 
-func setup_noise_generators(seed_value: int):
+func setup_noise_generators(seed_value: int) -> void:
 	"""Setup multiple noise layers for terrain variation"""
 	var actual_seed = seed_value if seed_value >= 0 else randi()
 	
@@ -89,7 +89,7 @@ func setup_noise_generators(seed_value: int):
 	feature_noise.frequency = noise_frequency * 0.3
 	feature_noise.cellular_return_type = FastNoiseLite.RETURN_CELL_VALUE
 
-func configure_terrain(params: Dictionary):
+func configure_terrain(params: Dictionary) -> void:
 	"""Configure terrain generation parameters"""
 	if params.has("size"):
 		terrain_size = params.size
@@ -144,7 +144,7 @@ func generate_terrain_async() -> Array[MeshInstance3D]:
 	
 	return terrain_meshes
 
-func create_terrain_voxel_grid():
+func create_terrain_voxel_grid() -> void:
 	"""Create voxel chunks for terrain generation - FIXED FOR SEAMLESS BOUNDARIES"""
 	terrain_chunks.clear()
 	
@@ -179,7 +179,7 @@ func create_terrain_voxel_grid():
 	
 	print("Created %d terrain chunks with seamless boundary handling" % terrain_chunks.size())
 
-func setup_chunk_neighbors(chunks_x: int, chunks_y: int, chunks_z: int):
+func setup_chunk_neighbors(chunks_x: int, chunks_y: int, chunks_z: int) -> void:
 	"""Setup neighbor connections between chunks for seamless boundaries (inspired by reference)"""
 	print("TerrainGenerator: Setting up chunk neighbor connections...")
 	
@@ -219,7 +219,7 @@ func setup_chunk_neighbors(chunks_x: int, chunks_y: int, chunks_z: int):
 	
 	print("TerrainGenerator: Chunk neighbor connections established")
 
-func generate_height_field_async():
+func generate_height_field_async() -> void:
 	"""Generate height field data asynchronously"""
 	var chunks_per_frame = max(1, terrain_chunks.size() / 10)
 	var processed = 0
@@ -232,7 +232,7 @@ func generate_height_field_async():
 		if processed % chunks_per_frame == 0:
 			await Engine.get_main_loop().process_frame
 
-func fill_chunk_with_terrain(chunk: VoxelChunk):
+func fill_chunk_with_terrain(chunk: VoxelChunk) -> void:
 	"""Fill a chunk with terrain height field data - HOLE-FREE VERSION"""
 	var chunk_offset = chunk.world_position
 	
@@ -317,7 +317,7 @@ func calculate_surface_height(x: float, z: float) -> float:
 	
 	return (height_base + height_detail + height_features) * terrain_height * 0.5
 
-func generate_terrain_meshes_async():
+func generate_terrain_meshes_async() -> void:
 	"""Generate meshes from terrain chunks asynchronously"""
 	terrain_meshes.clear()
 	
@@ -373,7 +373,7 @@ func create_terrain_material(chunk_index: int) -> StandardMaterial3D:
 	
 	return material
 
-func generate_walkable_collision():
+func generate_walkable_collision() -> void:
 	"""Generate VR-walkable collision for terrain"""
 	collision_bodies.clear()
 	
@@ -425,7 +425,7 @@ func generate_walkable_collision():
 	
 	print("Generated %d collision bodies for terrain" % collision_bodies.size())
 
-func clear_previous_terrain():
+func clear_previous_terrain() -> void:
 	"""Clear previously generated terrain"""
 	# Clean up marching cubes GPU resources if they exist
 	if marching_cubes != null and marching_cubes.has_method("cleanup"):
@@ -460,7 +460,7 @@ func get_terrain_info() -> Dictionary:
 		"height_variation": terrain_height
 	}
 
-func add_terrain_to_scene(parent_node: Node3D):
+func add_terrain_to_scene(parent_node: Node3D) -> void:
 	"""Add generated terrain to scene"""
 	for mesh_instance in terrain_meshes:
 		var old_parent = mesh_instance.get_parent()

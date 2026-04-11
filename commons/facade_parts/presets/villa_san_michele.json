@@ -1,0 +1,70 @@
+{
+  "version": 3,
+  "generator": "ada_facade_builder",
+  "description": "Villa San Michele — Axel Munthe's villa in Anacapri, Mediterranean restraint in warm white stucco",
+  "facade": {
+    "bays": 5,
+    "stories": 4,
+    "symmetry": "bilateral",
+    "total_width": 12.0,
+    "total_height": 10.0,
+    "wall_depth": 0.25
+  },
+  "zones": [
+    { "row": 0, "name": "Pergola",      "height_multiplier": 0.30 },
+    { "row": 1, "name": "UpperFloor",   "height_multiplier": 1.00 },
+    { "row": 2, "name": "StringCourse", "height_multiplier": 0.15 },
+    { "row": 3, "name": "Loggia",       "height_multiplier": 1.50 }
+  ],
+  "materials": {
+    "wall": "#F5F0E8",
+    "zones": {
+      "Pergola":      { "color": "#F5F0E8", "type": "stone" },
+      "UpperFloor":   { "color": "#F5F0E8", "type": "stone" },
+      "StringCourse": { "color": "#E8E0D0", "type": "stone" },
+      "Loggia":       { "color": "#F5F0E8", "type": "stone" }
+    }
+  },
+  "placements": [
+
+    { "col": 0, "row": 0, "part": "cornice_shelf", "col_span": 5,
+      "params": { "projection": 0.02 }
+    },
+
+    { "col": 0, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1,
+      "params": { "frame_width": 0.02, "frame_depth": 0.01, "frame_color": "#E0D8C8" }
+    },
+    { "col": 1, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1,
+      "params": { "frame_width": 0.02, "frame_depth": 0.01, "frame_color": "#E0D8C8" }
+    },
+    { "col": 2, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1,
+      "params": { "frame_width": 0.02, "frame_depth": 0.01, "frame_color": "#E0D8C8" }
+    },
+    { "col": 3, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1,
+      "params": { "frame_width": 0.02, "frame_depth": 0.01, "frame_color": "#E0D8C8" }
+    },
+    { "col": 4, "row": 1, "part": "rect_window", "col_span": 1, "row_span": 1,
+      "params": { "frame_width": 0.02, "frame_depth": 0.01, "frame_color": "#E0D8C8" }
+    },
+
+    { "col": 0, "row": 2, "part": "string_course", "col_span": 5,
+      "params": { "depth": 0.015, "band_height": 0.02 }
+    },
+
+    { "col": 0, "row": 3, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "arch_ratio": 0.45, "glass_color": "#2A2520", "archivolt_depth": 0.02, "frame_color": "#F5F0E8" }
+    },
+    { "col": 1, "row": 3, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "arch_ratio": 0.45, "glass_color": "#2A2520", "archivolt_depth": 0.02, "frame_color": "#F5F0E8" }
+    },
+    { "col": 2, "row": 3, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "arch_ratio": 0.45, "glass_color": "#2A2520", "archivolt_depth": 0.02, "frame_color": "#F5F0E8" }
+    },
+    { "col": 3, "row": 3, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "arch_ratio": 0.45, "glass_color": "#2A2520", "archivolt_depth": 0.02, "frame_color": "#F5F0E8" }
+    },
+    { "col": 4, "row": 3, "part": "arched_window", "col_span": 1, "row_span": 1,
+      "params": { "arch_ratio": 0.45, "glass_color": "#2A2520", "archivolt_depth": 0.02, "frame_color": "#F5F0E8" }
+    }
+  ]
+}

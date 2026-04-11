@@ -5,6 +5,16 @@ extends "res://algorithms/vectors/shared/force_containment_base.gd"
 ## Concept: Vector magnitude affects physical outcome
 ## Agent-PhysicsArchitect: Educational physics demonstration
 ## Protocol: IACP v2.2
+##
+## @identity
+## essence: F = ma. Drag the force vector longer → ball accelerates harder. Magnitude is felt, not read.
+## desire: To make the learner drag a red arrow and feel the ball respond proportionally — bigger arrow, faster ball.
+## critical_parameter: The length of the applied_force_vector. It is the magnitude that drives everything.
+## triggers: Force handle drag → acceleration scales linearly, R key → reset ball to origin, Space → freeze motion
+## emerges: The intuition that force and acceleration are the same shape. The ball's trajectory traces the force's history.
+## needs: VR draggable force arrow [has], info readout [has]. Missing: mass slider to show a = F/m with different m.
+## relationships: Entry point for forces sequence. Feeds into combined_forces_demo (multiple forces). Contrasts with work_energy_demo (same force, different measure).
+## truth: You never feel position or velocity. You feel acceleration. Force is the only thing that reaches your body.
 
 var applied_force_vector: Node3D
 var velocity_vector: Node3D
@@ -19,12 +29,12 @@ var _accel_cache: Dictionary = {}
 var accumulator: float = 0.0
 const UPDATE_INTERVAL = 0.1
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	_setup_demo()
 	print("ForceMagnitudeDemo: Ready - Drag the red force vector!")
 
-func _setup_demo():
+func _setup_demo() -> void:
 	"""Setup force magnitude demonstration"""
 	# Create force vector (user can drag)
 	applied_force_vector = create_force_vector(
@@ -61,7 +71,7 @@ func _setup_demo():
 		"Larger force → larger acceleration"
 	])
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# Update force vector positions to follow ball
 	update_force_vector_position()
 	
@@ -87,7 +97,7 @@ func _physics_process(delta):
 		_update_info(force_logical, accel_logical, velocity_logical)
 		accumulator = 0.0
 
-func _update_info(force: Vector3, accel: Vector3, velocity: Vector3):
+func _update_info(force: Vector3, accel: Vector3, velocity: Vector3) -> void:
 	"""Update info label with current values"""
 	var force_mag = force.length()
 	var accel_mag = accel.length()
@@ -108,7 +118,7 @@ func _update_info(force: Vector3, accel: Vector3, velocity: Vector3):
 	
 	update_info_text(lines)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_R:
 			_reset_demo()
@@ -117,7 +127,7 @@ func _input(event):
 			physics_ball.linear_velocity = Vector3.ZERO
 			physics_ball.angular_velocity = Vector3.ZERO
 
-func _reset_demo():
+func _reset_demo() -> void:
 	"""Reset demonstration to initial state"""
 	reset_ball(Vector3.ZERO)
 	
@@ -130,3 +140,6 @@ func _reset_demo():
 		line_container.refresh_connections()
 	
 	print("ForceMagnitudeDemo: Reset")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

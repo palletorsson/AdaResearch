@@ -5,6 +5,16 @@
 # A 3D Hilbert curve demonstrating space-filling properties using L-Systems
 # License: CC BY-NC-SA 3.0
 # ===========================================================================
+#
+# @identity
+# essence: A → -BF+AFA+FB-, B → +AF-BFB-FA+ in 3D with pitch/roll — a single path visits every point in a cube
+# desire: To fill space with a single unbroken line — watch a path that never crosses itself touch every corner of a cube
+# critical_parameter: generations — each increment multiplies path length by 8, from simple fold to space-saturating curve
+# triggers: Generation 1 → simple bent path; generation 3 → dense space-filling weave; animated drawing → reveals the path order
+# emerges: A continuous path through 3D space that preserves locality — nearby points on the path are nearby in space
+# needs: VR generation controller [has], Label3D [has], animation toggle [has]
+# relationships: Feeds into LSystems_Grammars_And_Curves. Pairs with space_filling_curve_gallery (3D vs 2D gallery).
+# truth: A grammar can visit every point in space without crossing itself — infinity threaded through a cube.
 
 extends Node3D
 
@@ -42,7 +52,7 @@ var info_label: Label3D
 var description_label: Label3D
 var generation_controller: ParameterController3D
 
-func _ready():
+func _ready() -> void:
 	# Create turtle
 	turtle = Turtle3D.new()
 	turtle.use_pink_palette = false
@@ -83,7 +93,7 @@ func _ready():
 	update_info_label()
 	print("Hilbert3D: 3D Space-Filling Curve - Generations: %d" % generations)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	# Handle generation animation
 	if show_generation_animation and current_generation < generations:
 		generation_timer += delta
@@ -112,7 +122,7 @@ func _process(delta):
 			is_animating = false
 			print("Hilbert3D: Animation complete!")
 
-func create_info_labels():
+func create_info_labels() -> void:
 	"""Create info labels"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -132,7 +142,7 @@ func create_info_labels():
 	description_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	add_child(description_label)
 
-func create_controllers():
+func create_controllers() -> void:
 	"""Create 3D controllers"""
 	generation_controller = ParameterController3D.new()
 	generation_controller.parameter_name = "Generations"
@@ -144,7 +154,7 @@ func create_controllers():
 	generation_controller.value_changed.connect(_on_generation_changed)
 	add_child(generation_controller)
 
-func _on_generation_changed(new_gen: float):
+func _on_generation_changed(new_gen: float) -> void:
 	"""Update generation count and redraw"""
 	generations = int(new_gen)
 	reset()
@@ -153,7 +163,7 @@ func _on_generation_changed(new_gen: float):
 	draw_lsystem()
 	update_info_label()
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info labels"""
 	if info_label:
 		var instruction_length = lsystem.get_sentence().length()
@@ -168,13 +178,13 @@ func count_forward_moves(instructions: String) -> int:
 			count += 1
 	return count
 
-func draw_lsystem():
+func draw_lsystem() -> void:
 	"""Draw the L-System using turtle graphics"""
 	if turtle:
 		var instructions = lsystem.get_sentence()
 		turtle.interpret_lsystem(instructions, step_length, turn_angle)
 
-func increase_generations():
+func increase_generations() -> void:
 	"""Increase generation count"""
 	if generations < 4:  # Limit to prevent excessive complexity
 		generations += 1
@@ -185,7 +195,7 @@ func increase_generations():
 			generation_controller.set_value(float(generations))
 		print("Generations increased to: %d" % generations)
 
-func decrease_generations():
+func decrease_generations() -> void:
 	"""Decrease generation count"""
 	if generations > 1:
 		generations -= 1
@@ -198,7 +208,7 @@ func decrease_generations():
 			generation_controller.set_value(float(generations))
 		print("Generations decreased to: %d" % generations)
 
-func reset():
+func reset() -> void:
 	"""Reset L-System and turtle"""
 	current_generation = 0
 	generation_timer = 0.0
@@ -207,7 +217,7 @@ func reset():
 		turtle.reset()
 	update_info_label()
 
-func toggle_animation():
+func toggle_animation() -> void:
 	"""Toggle generation animation"""
 	show_generation_animation = !show_generation_animation
 	if not show_generation_animation:
@@ -218,7 +228,7 @@ func toggle_animation():
 		draw_lsystem()
 		update_info_label()
 
-func compute_segments():
+func compute_segments() -> void:
 	"""Compute all line segments from the L-System instructions"""
 	all_segments.clear()
 
@@ -268,7 +278,7 @@ func compute_segments():
 				if not state_stack.is_empty():
 					cursor_transform = state_stack.pop_back()
 
-func start_animation():
+func start_animation() -> void:
 	"""Start the drawing animation"""
 	clear_animated_objects()
 	current_segment_index = 0
@@ -279,7 +289,7 @@ func start_animation():
 	if all_segments.size() > 0:
 		create_ball(all_segments[0]["start"])
 
-func clear_animated_objects():
+func clear_animated_objects() -> void:
 	"""Clear all animated cylinders and balls"""
 	for cylinder in animated_cylinders:
 		cylinder.queue_free()
@@ -289,7 +299,7 @@ func clear_animated_objects():
 	animated_cylinders.clear()
 	animated_balls.clear()
 
-func create_animated_segment(start: Vector3, end: Vector3):
+func create_animated_segment(start: Vector3, end: Vector3) -> void:
 	"""Create a cylinder segment and balls at corners"""
 	# Create ball at the start point
 	create_ball(start)
@@ -329,7 +339,7 @@ func create_animated_segment(start: Vector3, end: Vector3):
 	# Create ball at the end point
 	create_ball(end)
 
-func create_ball(position: Vector3):
+func create_ball(position: Vector3) -> void:
 	"""Create a small black ball at the given position"""
 	var ball = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
@@ -347,3 +357,12 @@ func create_ball(position: Vector3):
 
 	add_child(ball)
 	animated_balls.append(ball)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

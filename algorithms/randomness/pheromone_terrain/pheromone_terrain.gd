@@ -1,3 +1,13 @@
+# @identity
+# essence: trail(x,y) += deposit; next = argmax(pheromone[neighbors]) with P(random) = 1 - attraction — stigmergy
+# desire: watch random walkers leave glowing trails that attract other walkers, building ridges from nothing
+# critical_parameter: pheromone_attraction — the probability a walker follows pheromone vs moves randomly (0 = pure random, 1 = pure trail-following)
+# triggers: _walk_step() deposits pheromone, raises terrain, then _choose_next_position() balances attraction vs random
+# emerges: path networks self-organize — walkers converge on trails they collectively created without communication
+# needs: PlaneMesh child with dynamic vertex modification [has]; VR observation [has]; controls [missing]
+# relationships: feeds Random_Pheromone map; depends on random walk concept; contrasts with pixel_cloud (self-avoiding vs self-attracting)
+# truth: Stigmergy is memory without a brain — the environment itself becomes the communication channel.
+
 extends Node3D
 
 ## Pheromone Terrain - Walkers that follow pheromone trails
@@ -34,7 +44,7 @@ var walkers: Array = []
 var mesh_instance: MeshInstance3D
 var time_accumulator: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	set_process(false)
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -82,6 +92,7 @@ func _ready():
 	_initialize_grids()
 	_create_walkers()
 	
+	_add_info_label()
 	set_process(true)
 	print("PheromoneeTerrain: Initialized with %d walkers on %dx%d grid" % [walker_count, x_segments, y_segments])
 
@@ -97,7 +108,7 @@ func _find_mesh_instance(node: Node) -> MeshInstance3D:
 			return result
 	return null
 
-func _initialize_grids():
+func _initialize_grids() -> void:
 	"""Initialize vertex and pheromone grids"""
 	# Use dimensions stored as metadata (set during initialization)
 	var plane_width: float = mesh_instance.get_meta("plane_width", 20.0)
@@ -131,7 +142,7 @@ func _initialize_grids():
 	# Build indices
 	_build_indices()
 
-func _build_indices():
+func _build_indices() -> void:
 	"""Build triangle indices"""
 	indices.clear()
 	for j in range(y_segments):
@@ -148,7 +159,7 @@ func _build_indices():
 			indices.append(c)
 			indices.append(d)
 
-func _create_walkers():
+func _create_walkers() -> void:
 	"""Create walkers at random positions (inside border)"""
 	walkers.clear()
 	var min_x = border_size
@@ -163,7 +174,7 @@ func _create_walkers():
 			"active": true
 		})
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not mesh_instance or vertex_grid.is_empty():
 		return
 	
@@ -182,8 +193,9 @@ func _process(delta: float):
 		for i in range(steps_to_run):
 			_walk_step()
 		_update_mesh()
+		_update_info_label()
 
-func _decay_pheromones(delta: float):
+func _decay_pheromones(delta: float) -> void:
 	"""Decay all pheromones over time"""
 	var decay_amount = pheromone_decay_rate * delta
 	for j in range(y_segments + 1):
@@ -191,7 +203,7 @@ func _decay_pheromones(delta: float):
 			if pheromone_grid[j][i] > 0:
 				pheromone_grid[j][i] = max(0.0, pheromone_grid[j][i] - decay_amount)
 
-func _walk_step():
+func _walk_step() -> void:
 	"""Move walkers based on pheromone attraction"""
 	for walker in walkers:
 		if not walker.active:
@@ -262,7 +274,7 @@ func _choose_next_position(x: int, y: int) -> Vector2i:
 		var new_y = clamp(y + dir.y, 0, y_segments)
 		return Vector2i(new_x, new_y)
 
-func _update_mesh():
+func _update_mesh() -> void:
 	"""Update mesh with modified vertices, normals, and colors"""
 	if not mesh_instance:
 		return
@@ -323,7 +335,7 @@ func get_pheromone_at(x: int, y: int) -> float:
 		return 0.0
 	return pheromone_grid[y][x]
 
-func reset_terrain():
+func reset_terrain() -> void:
 	"""Reset terrain and pheromones"""
 	for j in range(y_segments + 1):
 		for i in range(x_segments + 1):
@@ -335,3 +347,34 @@ func _is_in_border(x: int, y: int) -> bool:
 	"""Check if position is in the border area"""
 	return x < border_size or x > x_segments - border_size or \
 		   y < border_size or y > y_segments - border_size
+
+var _info_label: Label3D
+
+func _add_info_label() -> void:
+	_info_label = Label3D.new()
+	_info_label.font_size = 20
+	_info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_info_label.modulate = Color(1.0, 0.5, 1.0, 0.8)
+	_info_label.position = Vector3(0, max_height + 2.0, 0)
+	add_child(_info_label)
+
+	var title := Label3D.new()
+	title.text = "Pheromone Terrain"
+	title.font_size = 24
+	title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	title.modulate = Color(1, 1, 1, 0.8)
+	title.position = Vector3(0, max_height + 3.5, 0)
+	add_child(title)
+
+func _update_info_label() -> void:
+	if _info_label:
+		var total_phero := 0.0
+		for row in pheromone_grid:
+			for val in row:
+				total_phero += val
+		_info_label.text = "walkers: %d  attraction: %.0f%%  pheromone: %.0f" % [
+			walker_count, pheromone_attraction * 100, total_phero
+		]
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

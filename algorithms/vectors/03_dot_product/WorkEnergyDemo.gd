@@ -5,6 +5,16 @@ extends "res://algorithms/vectors/shared/force_containment_base.gd"
 ## Concept: Work depends on force and displacement angle
 ## Agent-PhysicsArchitect: Shows energy transfer
 ## Protocol: IACP v2.2
+##
+## @identity
+## essence: W = F . d = |F||d|cos(theta). Work is the dot product of force and displacement. Perpendicular force does zero work.
+## desire: To let the learner push a ball and see a work meter tick up — then push perpendicular and watch it stay at zero. The dot product made visceral.
+## critical_parameter: The angle between force and displacement. At 0 degrees all force does work; at 90 degrees none does; at 180 degrees work is negative (energy extracted).
+## triggers: Drag force vector → ball moves, work accumulates frame by frame as F.d, meter turns green (positive) / red (negative) / yellow (zero), R → reset total
+## emerges: Total work accumulating as an integral over the path. Negative work when force opposes motion. The work meter as a running dot-product integrator.
+## needs: VR draggable force [has], work meter display [has], angle readout [has]. Missing: kinetic energy comparison (W = delta KE).
+## relationships: Physical application of dot_product_projector. Lives in ForcesComposition. Contrasts with momentum_collision (energy conservation vs work done).
+## truth: Pushing sideways does nothing. Work is the component of force that agrees with motion. Everything else is wasted.
 
 var force_vector: Node3D
 var displacement_vector: Node3D
@@ -20,13 +30,13 @@ const UPDATE_INTERVAL = 0.1
 var last_position: Vector3 = Vector3.ZERO
 var total_work: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	_setup_demo()
 	last_position = physics_ball.global_position / SCENE_SCALE
 	print("WorkEnergyDemo: Ready - Drag force to do work!")
 
-func _setup_demo():
+func _setup_demo() -> void:
 	"""Setup work & energy demonstration"""
 	# Applied force (user can drag) - Red
 	force_vector = create_force_vector(
@@ -64,7 +74,7 @@ func _setup_demo():
 		"Work = Force · Displacement"
 	])
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	update_force_vector_position()
 	
 	# Get force (logical)
@@ -93,7 +103,7 @@ func _physics_process(delta):
 		_update_info(force, displacement, work_this_frame)
 		accumulator = 0.0
 
-func _update_info(force: Vector3, displacement: Vector3, work: float):
+func _update_info(force: Vector3, displacement: Vector3, work: float) -> void:
 	"""Update info display"""
 	var angle = 0.0
 	if force.length() > 0.001 and displacement.length() > 0.001:
@@ -129,7 +139,7 @@ func _update_info(force: Vector3, displacement: Vector3, work: float):
 	else:
 		work_meter.modulate = Color(1.0, 1.0, 0.3, 1.0)  # Yellow (zero work)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_R:
 			_reset_demo()
@@ -137,7 +147,7 @@ func _input(event):
 			physics_ball.linear_velocity = Vector3.ZERO
 			physics_ball.angular_velocity = Vector3.ZERO
 
-func _reset_demo():
+func _reset_demo() -> void:
 	"""Reset to initial state"""
 	reset_ball(Vector3.ZERO)
 	last_position = Vector3.ZERO
@@ -155,3 +165,12 @@ func _reset_demo():
 	work_meter.modulate = Color(1.0, 1.0, 0.3, 1.0)
 	
 	print("WorkEnergyDemo: Reset")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

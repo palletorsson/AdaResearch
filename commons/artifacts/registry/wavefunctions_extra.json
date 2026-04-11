@@ -13,10 +13,33 @@
 			"description": "Model of the cochlea — the spiral organ in the inner ear that performs a biological Fourier transform. Frequency-to-position mapping: high frequencies at the base, low at the apex.",
 			"category": "wavefunctions",
 			"complexity": "intermediate",
-			"tags": ["cochlea", "hearing", "frequency", "fourier", "biology", "wave"],
+			"tags": [
+				"cochlea",
+				"hearing",
+				"frequency",
+				"fourier",
+				"biology",
+				"wave"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["wavefunctions"]
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"parameters": {
+				"footprint": [
+					5,
+					13,
+					19
+				],
+				"size_group": "world_scale"
+			},
+			"dev_themes": [
+				"biology",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"modulor_man": {
 			"lookup_name": "modulor_man",
@@ -25,10 +48,22 @@
 			"description": "Le Corbusier's Modulor proportional system in 3D — the human body as generator of harmonic measurements. Architecture derived from the golden ratio applied to human scale.",
 			"category": "wavefunctions",
 			"complexity": "intermediate",
-			"tags": ["modulor", "le_corbusier", "proportion", "golden_ratio", "architecture", "human_scale"],
+			"tags": [
+				"modulor",
+				"le_corbusier",
+				"proportion",
+				"golden_ratio",
+				"architecture",
+				"human_scale"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"modulor_man_interactive": {
 			"lookup_name": "modulor_man_interactive",
@@ -37,10 +72,21 @@
 			"description": "Interactive Modulor proportional system — adjust body proportions and see how architectural measurements change. The relationship between human form and designed space.",
 			"category": "wavefunctions",
 			"complexity": "intermediate",
-			"tags": ["modulor", "interactive", "proportion", "architecture", "human_scale"],
+			"tags": [
+				"modulor",
+				"interactive",
+				"proportion",
+				"architecture",
+				"human_scale"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": []
+			"map_sequences": [],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"sine_space": {
 			"lookup_name": "sine_space",
@@ -49,10 +95,32 @@
 			"description": "3D space defined by sine waves — walls, floors, and ceilings undulate according to wave parameters. An environment where the sine function becomes architecture.",
 			"category": "wavefunctions",
 			"complexity": "beginner",
-			"tags": ["sine", "wave", "space", "environment", "oscillation", "3d"],
+			"tags": [
+				"sine",
+				"wave",
+				"space",
+				"environment",
+				"oscillation",
+				"3d"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["wavefunctions"]
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"parameters": {
+				"footprint": [
+					17,
+					19,
+					9
+				],
+				"size_group": "world_scale"
+			},
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"sine_wall": {
 			"lookup_name": "sine_wall",
@@ -61,22 +129,62 @@
 			"description": "A wall of oscillating elements driven by sine functions — amplitude, frequency, and phase visible as physical displacement. Wave parameters you can see and feel.",
 			"category": "wavefunctions",
 			"complexity": "beginner",
-			"tags": ["sine", "wall", "oscillation", "amplitude", "frequency", "phase"],
+			"tags": [
+				"sine",
+				"wall",
+				"oscillation",
+				"amplitude",
+				"frequency",
+				"phase"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["wavefunctions"]
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					5,
+					11
+				],
+				"size_group": "world_scale"
+			},
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"sine_oscillation": {
 			"lookup_name": "sine_oscillation",
 			"scene": "res://algorithms/wavefunctions/sineoscillation/sine_oscillation.tscn",
 			"name": "Sine Oscillation",
-			"description": "Pure sine wave oscillation visualization in 2D — the most fundamental periodic motion. Amplitude, frequency, phase, and their relationship to circular motion.",
+			"description": "Expressive 3D sine oscillation — rotating unit circle with sine + cosine wave projection, phase trail, radius arm, color-coded dual waves, and VR parameter sliders for amplitude, frequency, and speed.",
 			"category": "wavefunctions",
 			"complexity": "beginner",
-			"tags": ["sine", "oscillation", "2d", "circular_motion", "amplitude", "frequency"],
+			"tags": [
+				"sine",
+				"cosine",
+				"oscillation",
+				"3d",
+				"unit_circle",
+				"circular_motion",
+				"amplitude",
+				"frequency",
+				"phase",
+				"wavelength"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["wavefunctions"]
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"sound_timeline": {
 			"lookup_name": "sound_timeline",
@@ -85,10 +193,25 @@
 			"description": "Audio timeline controller — visualize and manipulate sound as a waveform in time. Scrub through audio, see frequency content evolve, understand sound as time-domain signal.",
 			"category": "wavefunctions",
 			"complexity": "beginner",
-			"tags": ["sound", "timeline", "audio", "waveform", "time_domain", "controller"],
+			"tags": [
+				"sound",
+				"timeline",
+				"audio",
+				"waveform",
+				"time_domain",
+				"controller"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["wavefunctions"]
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"dev_themes": [
+				"music",
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"vertical_wave_lines": {
 			"lookup_name": "vertical_wave_lines",
@@ -97,10 +220,24 @@
 			"description": "Array of vertical lines displaced by wave functions — interference, standing waves, and superposition made visible as a wall of oscillating rods.",
 			"category": "wavefunctions",
 			"complexity": "beginner",
-			"tags": ["wave", "vertical", "lines", "interference", "standing_wave", "superposition"],
+			"tags": [
+				"wave",
+				"vertical",
+				"lines",
+				"interference",
+				"standing_wave",
+				"superposition"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["wavefunctions"]
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		},
 		"doppler_effect_demo": {
 			"lookup_name": "doppler_effect_demo",
@@ -109,10 +246,25 @@
 			"description": "Moving source emits concentric wave rings — compression ahead (blue shift) and stretching behind (red shift). Rings expand from emission positions, naturally demonstrating how relative motion changes observed frequency.",
 			"category": "wavefunctions",
 			"complexity": "intermediate",
-			"tags": ["doppler", "wave", "frequency", "shift", "red_shift", "blue_shift", "motion"],
+			"tags": [
+				"doppler",
+				"wave",
+				"frequency",
+				"shift",
+				"red_shift",
+				"blue_shift",
+				"motion"
+			],
 			"include_in_map_data": true,
 			"map_ready": true,
-			"map_sequences": ["wavefunctions"]
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			]
 		}
 	}
 }

@@ -5,6 +5,16 @@ extends Node3D
 # removes the middle third, and stacks them using RigidBody3D physics
 # Bars fall and stack on top of each other
 
+# @identity
+# essence: cantor(bar) = [bar.left_third, bar.right_third], remove middle third, repeat. Measure → 0.
+# desire: To watch something disappear — each iteration removes a third, and the bars physically fall into place with RigidBody3D
+# critical_parameter: max_iterations — at 5 iterations, each bar is 1/243 of the original, yet the set is still uncountably infinite
+# triggers: iteration_interval tick → split all current bars → new bars fall with physics → hue shifts per generation
+# emerges: The physical stacking of bars — gravity gives the abstract Cantor set a visceral presence as bars clatter into position
+# needs: VR iteration trigger [missing], physics interaction [missing]
+# relationships: Foundation for sierpinski_triangle (2D Cantor) and menger_sponge (3D Cantor); demonstrates measure-zero sets
+# truth: The Cantor set removes everything and keeps everything — zero length, uncountable points, the paradox made physical.
+
 # Cantor set settings
 @export var iteration_interval: float = 2.0  # Time between iterations in seconds
 @export var max_iterations: int = 5  # Maximum number of iterations
@@ -19,7 +29,7 @@ var iteration_timer: float = 0.0
 var is_generating: bool = false
 var current_bars: Array = []  # Track bars from current iteration
 
-func _ready():
+func _ready() -> void:
 	print("CantorSet: Ready")
 	print("CantorSet: Will create %d iterations" % max_iterations)
 
@@ -31,7 +41,7 @@ func _ready():
 		is_generating = true
 		print("CantorSet: Auto-generation enabled")
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if not is_generating:
 		return
 
@@ -44,7 +54,7 @@ func _process(delta: float):
 		perform_iteration()
 
 # Create the initial bar at the top
-func create_initial_bar():
+func create_initial_bar() -> void:
 	var bar = create_bar(Vector3(0, vertical_spacing * max_iterations, 0), initial_bar_length)
 	current_bars = [bar]
 	print("CantorSet: Created initial bar with length %.2f" % initial_bar_length)
@@ -86,7 +96,7 @@ func create_bar(position: Vector3, length: float) -> RigidBody3D:
 	return rigid_body
 
 # Perform one Cantor set iteration
-func perform_iteration():
+func perform_iteration() -> void:
 	# Check if we've reached the maximum
 	if current_iteration >= max_iterations:
 		print("CantorSet: Reached maximum iterations (%d)" % max_iterations)
@@ -144,16 +154,16 @@ func get_bar_length(bar: RigidBody3D) -> float:
 	return 0.0
 
 # Manual control functions
-func start_generation():
+func start_generation() -> void:
 	is_generating = true
 	iteration_timer = 0.0
 	print("CantorSet: Started manually")
 
-func stop_generation():
+func stop_generation() -> void:
 	is_generating = false
 	print("CantorSet: Stopped manually")
 
-func reset():
+func reset() -> void:
 	# Clear all bars
 	for child in get_children():
 		if child is RigidBody3D:
@@ -170,5 +180,14 @@ func reset():
 	print("CantorSet: Reset")
 
 # Perform a single iteration step
-func step():
+func step() -> void:
 	perform_iteration()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

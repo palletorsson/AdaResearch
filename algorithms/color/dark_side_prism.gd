@@ -1,16 +1,26 @@
 extends Node3D
 
+# @identity
+# essence: Snell's law visualized — white beam enters prism, refracts into 7-color fan by wavelength-dependent angle
+# desire: to stand inside the album cover and watch white light split into a rainbow you can almost touch
+# critical_parameter: fan_length — controls how far the spectrum spreads, making refraction feel gentle or dramatic
+# triggers: none — static sculpture, always present, always splitting
+# emerges: the glow/bloom system makes the beams feel volumetric even though they are 1-pixel ImmediateMesh lines
+# needs: VR interaction [missing]; adjustable prism angle [missing]; Label3D [missing]
+# relationships: contrasts with rainbow (full arc vs linear split); precedes spectrum_forest (spatial color mapping)
+# truth: white light is not the absence of color — it is every color compressed into one, waiting for a boundary to reveal the multiplicity
+
 # Pink Floyd "Dark Side of the Moon" Prism Effect in 3D
 # Generates a procedural prism and light spectrum using standard geometry
 
-func _ready():
+func _ready() -> void:
 	_create_environment()
 	_create_prism()
 	# Disable old beams, use trace lines
 	_create_trace_beams()
 	_create_camera()
 
-func _create_environment():
+func _create_environment() -> void:
 	var env_node = WorldEnvironment.new()
 	var env = Environment.new()
 	env.background_mode = Environment.BG_COLOR
@@ -23,12 +33,12 @@ func _create_environment():
 	env_node.environment = env
 	add_child(env_node)
 
-func _create_camera():
+func _create_camera() -> void:
 	var cam = Camera3D.new()
 	cam.position = Vector3(0, 0, 4)
 	add_child(cam)
 
-func _create_prism():
+func _create_prism() -> void:
 	var prism = MeshInstance3D.new()
 	var mesh = PrismMesh.new()
 	mesh.size = Vector3(2.5, 2.5, 0.5) # Flatter depth
@@ -58,7 +68,7 @@ func _create_prism():
 	# Add subtle edge outlines
 	_add_prism_edges(prism, mesh.size)
 
-func _add_prism_edges(parent, size):
+func _add_prism_edges(parent, size) -> void:
 	# Create a simple wireframe triangle using ImmediateMesh for crisp lines
 	var im = ImmediateMesh.new()
 	var mesh_inst = MeshInstance3D.new()
@@ -85,7 +95,7 @@ func _add_prism_edges(parent, size):
 
 # --- TRACE BEAM SYSTEM (ImmediateMesh Lines) ---
 
-func _create_trace_beams():
+func _create_trace_beams() -> void:
 	var beam_root = MeshInstance3D.new()
 	var im = ImmediateMesh.new()
 	beam_root.mesh = im
@@ -144,8 +154,16 @@ func _create_trace_beams():
 		
 	im.surface_end()
 
-func _draw_line(im: ImmediateMesh, from: Vector3, to: Vector3, color: Color):
+func _draw_line(im: ImmediateMesh, from: Vector3, to: Vector3, color: Color) -> void:
 	im.surface_set_color(color)
 	im.surface_add_vertex(from)
 	im.surface_add_vertex(to)
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

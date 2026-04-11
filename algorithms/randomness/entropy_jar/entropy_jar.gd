@@ -5,6 +5,16 @@
 #
 # QFEP: Irreversibility — mixing is easy, unmixing is impossible.
 # The arrow of time made tangible through embodied interaction.
+#
+# @identity
+# essence: dS/dt >= 0 — the second law of thermodynamics
+# desire: shake the jar and feel time's arrow in your hand — red and blue never separate again
+# critical_parameter: shake_threshold — the velocity at which your hand movement registers as agitation
+# triggers: _agitate_particles() on shake detection via accelerometer-derived velocity
+# emerges: Shannon entropy measured across vertical bins converges to maximum and stays there
+# needs: VR grab + shake [has], XRToolsPickable [has], haptic feedback [missing]
+# relationships: depends on entropy_axiom (conceptual gradient); contrasts with prng_crank_machine (reversible vs irreversible)
+# truth: The second law is not a prohibition — it is the statistical certainty that mixed states outnumber ordered ones.
 
 extends Node3D
 
@@ -552,3 +562,12 @@ func _reset_jar() -> void:
 	_is_held = false
 	_current_entropy = _measure_entropy()
 	_update_display()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

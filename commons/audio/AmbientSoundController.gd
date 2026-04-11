@@ -410,18 +410,20 @@ func resume_ambient():
 func set_volume(volume_db: float):
 	"""Adjust the volume of all ambient sounds"""
 
+	var old_adjustment = volume_adjustment
 	volume_adjustment = volume_db
+	var delta = volume_db - old_adjustment
 
 	# Update all continuous players
 	for player in continuous_players:
 		if player and is_instance_valid(player):
-			# Apply relative volume adjustment
-			player.volume_db += volume_db
+			# Apply delta between new and old adjustment
+			player.volume_db += delta
 
 	# Update all event players
 	for player in event_players:
 		if player and is_instance_valid(player):
-			player.volume_db += volume_db
+			player.volume_db += delta
 
 func crossfade_to_preset(new_preset: String, duration: float = 2.0):
 	"""Crossfade from current preset to a new one"""

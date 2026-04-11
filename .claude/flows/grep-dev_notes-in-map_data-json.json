@@ -1,0 +1,42 @@
+{
+  "id": "grep-dev_notes-in-map_data-json",
+  "title": "grep dev_notes in map_data.json to find maps that need work ",
+  "description": "grep dev_notes in map_data.json to find maps that need work — written from Map Studio editor",
+  "triggers": [
+    "grep",
+    "dev_notes",
+    "in"
+  ],
+  "granularity": "micro",
+  "model_version": "opus-4.6",
+  "created": "2026-04-09",
+  "updated": "2026-04-09",
+  "earned_from": "quick-learn 2026-04-09",
+  "nodes": [
+    {
+      "id": "start",
+      "type": "start",
+      "label": "Problem encountered"
+    },
+    {
+      "id": "fix",
+      "type": "action",
+      "label": "grep dev_notes in map_data.json to find maps that need work — written from Map Studio editor"
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Fixed"
+    }
+  ],
+  "edges": [
+    {
+      "from": "start",
+      "to": "fix"
+    },
+    {
+      "from": "fix",
+      "to": "done"
+    }
+  ]
+}

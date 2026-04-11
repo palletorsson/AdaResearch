@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: 98 procedural Albers "Homage to the Square" paintings — nested squares with golden-ratio hue walks and inset_ratio^i scaling
+# desire: to stand before a gallery wall and see how color relationships change when squares nest inside squares — Albers' life work, proceduralized
+# critical_parameter: inset_ratio — controls how quickly inner squares shrink; at 0.78 the nesting feels balanced, at extremes it collapses or barely nests
+# triggers: palette_seed + index * 31 generates deterministic but varied palettes per canvas; no runtime interaction
+# emerges: the vertical_bias shifts inner squares downward, creating a gravity effect that makes the paintings feel grounded without explicit composition rules
+# needs: spot lighting [has]; framed canvases [has]; VR walkup viewing [has]; interactive palette tuning [missing]
+# relationships: standalone Albers study; contrasts with color_constellation_office (color as light vs color as paint); feeds into color theory understanding
+# truth: a square inside a square is not decoration — it is an experiment in how context changes the perception of every color it touches
+
 @export var total_canvases: int = 98
 @export var columns: int = 14
 @export var rows: int = 7
@@ -274,3 +284,12 @@ func _make_solid_material(color: Color, roughness: float) -> StandardMaterial3D:
 	mat.roughness = roughness
 	mat.metallic = 0.0
 	return mat
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

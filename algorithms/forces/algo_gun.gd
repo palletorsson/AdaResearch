@@ -284,3 +284,6 @@ func _exit_tree() -> void:
 	"""Clean up when gun is removed"""
 	release_all_agents()
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

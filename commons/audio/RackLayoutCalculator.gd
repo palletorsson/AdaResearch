@@ -81,8 +81,8 @@ static func calculate_layout(rack_config: Dictionary) -> LayoutResult:
 	var layout_settings: Dictionary = rack_config.get("layout", {})
 
 	# Get layout parameters
-	var padding_px: float = layout_settings.get("padding_px", 20.0)
-	var gap_px: float = layout_settings.get("gap_px", 15.0)
+	var padding_px: float = layout_settings.get("padding_px", 12.0)
+	var gap_px: float = layout_settings.get("gap_px", 10.0)
 	var vr_scale: float = layout_settings.get("vr_scale", 1.0)
 
 	# Legacy support: convert meter-based values to pixels

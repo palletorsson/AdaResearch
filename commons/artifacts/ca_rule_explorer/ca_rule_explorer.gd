@@ -1,6 +1,16 @@
 # ca_rule_explorer.gd
 # 1×1m horizontal board displaying Wolfram 1D cellular automata
 # VR-enabled with slider and button controls
+#
+# @identity
+# essence: next_cell = (rule >> (left<<2 | center<<1 | right)) & 1 — all 256 Wolfram rules on one board
+# desire: To be dialed — slide through all 256 rules and watch chaos, order, and Turing completeness appear
+# critical_parameter: rule (0-255) — a single 8-bit number that determines the entire visual universe
+# triggers: Rule 30 → chaos from a single seed; Rule 110 → Turing complete computation; Rule 90 → Sierpinski triangle
+# emerges: The full spectrum from death (Rule 0) to chaos (Rule 30) to computation (Rule 110) from one integer
+# needs: VR rule slider [has], speed slider [has], preset buttons [has], reset button [has], Label3D [has]
+# relationships: Central to CA_AgentsCircuits. Extends ca_bridge (single rule, no interaction vs full exploration).
+# truth: An 8-bit number is a universe — Rule 110 proves that three neighbors and one bit can compute anything.
 
 extends Node3D
 
@@ -60,6 +70,9 @@ var _rule_slider: Node
 var _speed_slider: Node
 var _control_panel: Node3D
 
+# Signal tracking for cleanup
+var _signal_connections: Array = []
+
 # Layout constants
 const CELL_HEIGHT := 0.005
 const CELL_ELEVATION := 0.015
@@ -91,10 +104,10 @@ func _ready() -> void:
 	_reset()
 
 func _exit_tree() -> void:
-	if _rule_slider and _rule_slider.slider_moved.is_connected(_on_rule_slider_moved):
-		_rule_slider.slider_moved.disconnect(_on_rule_slider_moved)
-	if _speed_slider and _speed_slider.slider_moved.is_connected(_on_speed_slider_moved):
-		_speed_slider.slider_moved.disconnect(_on_speed_slider_moved)
+	for conn in _signal_connections:
+		if is_instance_valid(conn[0]) and conn[0].is_connected(conn[1], conn[2]):
+			conn[0].disconnect(conn[1], conn[2])
+	_signal_connections.clear()
 	for node in _created_nodes:
 		if is_instance_valid(node):
 			node.queue_free()
@@ -237,6 +250,7 @@ func _create_sliders() -> void:
 		rule_label.text = "RULE"
 	_control_panel.add_child(_rule_slider)
 	_rule_slider.slider_moved.connect(_on_rule_slider_moved)
+	_signal_connections.append([_rule_slider, &"slider_moved", _on_rule_slider_moved])
 
 	_speed_slider = SLIDER_HORIZONTAL.instantiate()
 	_speed_slider.name = "SpeedSlider"
@@ -248,6 +262,7 @@ func _create_sliders() -> void:
 		speed_label.text = "SPEED"
 	_control_panel.add_child(_speed_slider)
 	_speed_slider.slider_moved.connect(_on_speed_slider_moved)
+	_signal_connections.append([_speed_slider, &"slider_moved", _on_speed_slider_moved])
 
 func _create_preset_buttons() -> void:
 	var presets = [30, 90, 110, 184]
@@ -268,7 +283,9 @@ func _create_preset_buttons() -> void:
 		var rule_val = presets[i]
 		var area_btn = btn.get_node_or_null("InteractableAreaButton")
 		if area_btn:
-			area_btn.button_pressed.connect(func(_b): _on_preset_pressed(rule_val))
+			var cb := func(_b): _on_preset_pressed(rule_val)
+			area_btn.button_pressed.connect(cb)
+			_signal_connections.append([area_btn, &"button_pressed", cb])
 
 func _create_reset_button() -> void:
 	var reset_btn = PUSH_BUTTON.instantiate()
@@ -286,7 +303,9 @@ func _create_reset_button() -> void:
 
 	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
 	if reset_area:
-		reset_area.button_pressed.connect(func(_b): _on_reset_pressed())
+		var reset_cb := func(_b): _on_reset_pressed()
+		reset_area.button_pressed.connect(reset_cb)
+		_signal_connections.append([reset_area, &"button_pressed", reset_cb])
 
 func _sync_sliders_deferred() -> void:
 	_sync_rule_slider()

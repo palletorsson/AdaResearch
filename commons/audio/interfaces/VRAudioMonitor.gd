@@ -4,6 +4,17 @@ extends Node3D
 ## Principal VR Audio Monitor
 ## Visualizes audio waves in 3D using a SubViewport and WaveformDisplay
 
+
+# @identity
+# essence: AudioServer.get_bus_peak_volume_left/right -> waveform display
+# desire: See the audio bus activity rendered as a real-time waveform monitor in VR
+# critical_parameter: audio_bus — selects which audio bus to monitor
+# triggers: auto_connect finds and binds to the audio system on ready
+# emerges: visual feedback loop between what you hear and what you see
+# needs: VR viewport display [has], bus selection [missing]
+# relationships: depends on WaveformDisplay 2D scene; contrasts with dual_display_test (monitoring vs spectrum analysis); unlocks audio debugging in VR
+# truth: Sound is invisible force; the monitor makes the waveform a visible object.
+
 @export var monitor_name: String = "PRINCIPAL MONITOR"
 @export var audio_bus: String = "Master"
 @export var auto_connect: bool = true

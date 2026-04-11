@@ -5,7 +5,7 @@ extends Node3D
 
 @onready var mesh_instance = $MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	# Load the shader (make sure the path is correct)
 	var material = ShaderMaterial.new()
 	material.shader = preload("res://algorithms/randomness/proceduralrandomness/movementbased/scenes/verticalblockanimator/SquareWavePattern.gdshader")  # 
@@ -18,7 +18,7 @@ func _ready():
 	if auto_stop_seconds > 0:
 		get_tree().create_timer(auto_stop_seconds).timeout.connect(_stop_animation)
 
-func _stop_animation():
+func _stop_animation() -> void:
 	# Generate a random pattern when stopping
 	if mesh_instance.material_override:
 		# Generate a random number between 1000-10000 to ensure a unique pattern
@@ -31,3 +31,6 @@ func _stop_animation():
 		mesh_instance.material_override.set_shader_parameter("custom_time", random_time)
 		
 		print("Animation stopped with random pattern (time value: ", random_time, ")")
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

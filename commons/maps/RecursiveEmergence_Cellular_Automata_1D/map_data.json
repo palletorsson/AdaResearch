@@ -1,81 +1,98 @@
 {
   "map_info": {
-    "name": "1D Cellular Automata Corridor",
-    "lookup_name": "RecursiveEmergence_Cellular_Automata_1D",
-    "description": "Long corridor where 1D rules scroll left to right",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 13,
-      "depth": 5,
-      "max_height": 1
-    },
-    "metadata": {
-      "difficulty": "advanced",
-      "category": "recursiveemergence",
-      "estimated_time": "5-7 minutes",
-      "spatial_temperature": 0.5,
-      "learning_objectives": []
-    }
+      "name": "1D Cellular Automata Corridor",
+      "lookup_name": "RecursiveEmergence_Cellular_Automata_1D",
+      "description": "Long corridor where 1D rules scroll left to right",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 13,
+          "depth": 5,
+          "max_height": 1
+      },
+      "metadata": {
+          "difficulty": "advanced",
+          "category": "recursiveemergence",
+          "estimated_time": "5-7 minutes",
+          "spatial_temperature": 0.5,
+          "learning_objectives": []
+      },
+      "title": "One Row Infinite Descent"
+  },
+  "utility_definitions": {
+      "s": {
+          "properties": {
+              "height": 5.5
+          }
+      },
+      "t": {
+          "type": "teleporter",
+          "name": "Next",
+          "description": "Continue to next step",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
+  },
+  "lighting": {
+      "ambient_color": [
+          0.4,
+          0.4,
+          0.5
+      ],
+      "ambient_energy": 0.6,
+      "directional_light": {
+          "enabled": true,
+          "direction": [
+              -0.4,
+              -0.7,
+              -0.4
+          ],
+          "color": [
+              1.0,
+              0.9,
+              0.8
+          ],
+          "energy": 1.2
+      }
+  },
+  "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "hidden_except_corners",
+      "background": {
+          "type": "sky",
+          "color": [
+              0.2,
+              0.3,
+              0.7
+          ]
+      }
   },
   "layers": {
     "structure": [
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "0", "0", "0", "0", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ]
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "0", "0", "0", "0", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
     ],
     "utilities": [
-      [ "s", "an:recursiveemergence", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", "sp", "t", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+      ["s", "an:recursiveemergence", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", "sp", "t", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
     ],
     "interactables": [
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", "mirror_cellular_texture_for_3d", " ", " ", " ", " ", "evolutionary_algorithms", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", "cellular_automata_grabable", " ", " ", " ", " ", " ", " ", " " ]
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "science_screen:180:1.5#mode:bars", " "],
+      [" ", " ", " ", "mirror_cellular_texture_for_3d", " ", " ", " ", " ", "evolutionary_algorithms", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "cellular_automata_grabable", " ", " ", " ", " ", " ", " ", " "]
     ]
-  },
-  "utility_definitions": {
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    },
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
-  },
-  "lighting": {
-    "ambient_color": [ 0.4, 0.4, 0.5 ],
-    "ambient_energy": 0.6,
-    "directional_light": {
-      "enabled": true,
-      "direction": [ -0.4, -0.7, -0.4 ],
-      "color": [ 1.0, 0.9, 0.8 ],
-      "energy": 1.2
-    }
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": true,
-    "enable_physics": true,
-    "auto_reveal_on_entry": false,
-    "initial_tile_visibility": "hidden_except_corners",
-    "background": {
-      "type": "sky",
-      "color": [ 0.2, 0.3, 0.7 ]
-    }
   }
 }

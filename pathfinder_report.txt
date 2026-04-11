@@ -1,0 +1,415 @@
+  Rule 2 [WARN] Teleport at (8,8) — no structure row at z=9 to catch player
+  Rule 2 [WARN] Teleport at (9,9) — no structure row at z=10 to catch player
+FAIL  BG_Slime_Mold
+  Rule 2 [WARN] Teleport at (9,9) — no structure row at z=10 to catch player
+  Rule 4 [ERROR] Artifact 'slimemold' at (4,4) h=0 unreachable [on VOID]
+FAIL  BG_Tree_Forms
+  Rule 2 [WARN] Teleport at (9,9) — no structure row at z=10 to catch player
+  Rule 4 [ERROR] Artifact 'tree_gen' at (4,4) h=0 unreachable [on VOID]
+FAIL  Bracelet_Zoo
+  Rule 5 [ERROR] Teleport at (13,6) has height 1, must be 0 (void)
+FAIL  CA_12
+  Rule 3 [ERROR] Teleport at (5,6) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'ca_screen' at (2,2) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'self_organization_ca' at (4,2) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'disease_spread_ca' at (6,2) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'volumetric_fog_ca' at (3,3) h=0 unreachable [on VOID]
+FAIL  CA_4
+  Rule 3 [ERROR] Teleport at (6,0) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'hexagon_ca_vr' at (3,3) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'ca_growth_network' at (2,4) h=0 unreachable [on VOID]
+FAIL  Control_Board_Demo
+  Rule 5 [ERROR] Teleport at (13,5) has height 1, must be 0 (void)
+FAIL  Crisis_Synthesis
+  Rule 4 [ERROR] Artifact 'qfep_formula_3d' at (8,8) h=3 unreachable
+  Rule 2 [WARN] Teleport at (12,24) — no structure row at z=25 to catch player
+  Rule 2 [WARN] Teleport at (9,10) — row z=11 has no floor cubes to catch player
+  Rule 2 [WARN] Teleport at (1,8) — row z=9 has no floor cubes to catch player
+FAIL  Escher_Impossible
+  Rule 3 [ERROR] Teleport at (6,10) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'escher_staircase' at (0,4) h=4 unreachable
+  Rule 4 [ERROR] Artifact 'penrose_triangle' at (10,7) h=3 unreachable
+FAIL  F20_Well
+  Rule 4 [ERROR] Artifact 'spectrum_display' at (3,3) h=0 unreachable [on VOID]
+FAIL  F4_Amphitheater
+  Rule 4 [ERROR] Artifact 'light_sphere' at (3,3) h=1 unreachable
+  Rule 2 [WARN] Teleport at (13,11) — no structure row at z=12 to catch player
+FAIL  Fractals_6
+  Rule 3 [ERROR] Teleport at (6,6) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'menger_sponge' at (6,5) h=0 unreachable [on VOID]
+  Rule 6 [WARN] Map has 2 teleports ((6,6), (11,11)) — normal case is 1
+  Rule 6 [WARN] Map has 2 teleports ((5,12), (7,12)) — normal case is 1
+  Rule 6 [WARN] Map has 2 teleports ((2,0), (11,8)) — normal case is 1
+  Rule 6 [WARN] Map has 3 teleports ((2,0), (6,0), (11,8)) — normal case is 1
+  Rule 2 [WARN] Teleport at (2,6) — no structure row at z=7 to catch player
+FAIL  LSystems_Living
+  Rule 2 [WARN] Teleport at (7,9) — no structure row at z=10 to catch player
+  Rule 5 [ERROR] Teleport at (7,9) has height 1, must be 0 (void)
+FAIL  unknown
+  Rule 3 [ERROR] Teleport at (2,4) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'becoming_catalyst' at (2,2) h=2 unreachable
+  Rule 4 [ERROR] Artifact 'progression_driver' at (5,3) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'cube_lines' at (2,4) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'light_sphere' at (3,4) h=1 unreachable
+  Rule 6 [WARN] Map has 4 teleports ((8,1), (2,4), (8,5), (1,6)) — normal case is 1
+SKIP  Lab/map_data_back — map_data.json not found
+SKIP  Lab/map_data_init — map_data.json not found
+SKIP  Lab/map_data_one — map_data.json not found
+SKIP  Lab/map_data_one_back — map_data.json not found
+SKIP  Lab/map_data_post_advancedlaboratory — map_data.json not found
+SKIP  Lab/map_data_post_array_tutorial — map_data.json not found
+SKIP  Lab/map_data_post_artmathematics — map_data.json not found
+SKIP  Lab/map_data_post_cellularautomata — map_data.json not found
+SKIP  Lab/map_data_post_color — map_data.json not found
+SKIP  Lab/map_data_post_computationalgeometry — map_data.json not found
+SKIP  Lab/map_data_post_criticalalgorithms — map_data.json not found
+SKIP  Lab/map_data_post_datastructures — map_data.json not found
+SKIP  Lab/map_data_post_forces — map_data.json not found
+SKIP  Lab/map_data_post_foundationscrisis — map_data.json not found
+SKIP  Lab/map_data_post_fractals — map_data.json not found
+SKIP  Lab/map_data_post_geometric — map_data.json not found
+SKIP  Lab/map_data_post_graphtheory — map_data.json not found
+SKIP  Lab/map_data_post_lsystems — map_data.json not found
+SKIP  Lab/map_data_post_machinelearning — map_data.json not found
+SKIP  Lab/map_data_post_meshes — map_data.json not found
+SKIP  Lab/map_data_post_morphogenesis — map_data.json not found
+SKIP  Lab/map_data_post_mosaicanalysis — map_data.json not found
+SKIP  Lab/map_data_post_noise — map_data.json not found
+SKIP  Lab/map_data_post_patterngeneration — map_data.json not found
+SKIP  Lab/map_data_post_physicssimulation — map_data.json not found
+SKIP  Lab/map_data_post_primitives — map_data.json not found
+SKIP  Lab/map_data_post_proceduralaudio — map_data.json not found
+SKIP  Lab/map_data_post_proceduralgeneration — map_data.json not found
+SKIP  Lab/map_data_post_qfeplaboratory — map_data.json not found
+SKIP  Lab/map_data_post_randomness — map_data.json not found
+SKIP  Lab/map_data_post_recursiveemergence — map_data.json not found
+SKIP  Lab/map_data_post_resourcemanagement — map_data.json not found
+SKIP  Lab/map_data_post_searchpathfinding — map_data.json not found
+SKIP  Lab/map_data_post_softbodies — map_data.json not found
+SKIP  Lab/map_data_post_speculativecomputation — map_data.json not found
+SKIP  Lab/map_data_post_swarmintelligence — map_data.json not found
+SKIP  Lab/map_data_post_transformation — map_data.json not found
+SKIP  Lab/map_data_post_vectors — map_data.json not found
+SKIP  Lab/map_data_post_wavefunctions — map_data.json not found
+FAIL  ML_Generative
+  Rule 3 [ERROR] Teleport at (6,6) is NOT reachable from spawn
+FAIL  ML_Neural_Networks
+  Rule 3 [ERROR] Teleport at (3,12) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'neural_network_visualization' at (2,5) h=2 unreachable
+  Rule 4 [ERROR] Artifact 'learn_world_stacked' at (1,10) h=2 unreachable
+FAIL  ML_Perception
+  Rule 3 [ERROR] Teleport at (4,6) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'computer_vision_vr' at (5,1) h=2 unreachable
+  Rule 4 [ERROR] Artifact 'convolutional_neural_networks_cnns_vr' at (1,3) h=2 unreachable
+FAIL  ML_Sequence_Memory
+  Rule 3 [ERROR] Teleport at (2,10) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'transformers_vr' at (1,6) h=2 unreachable
+FAIL  ML_Synthesis
+  Rule 4 [ERROR] Artifact 'anomaly_detection' at (0,9) h=2 unreachable
+  Rule 2 [WARN] Teleport at (5,6) — no structure row at z=7 to catch player
+  Rule 2 [WARN] Teleport at (5,6) — no structure row at z=7 to catch player
+  Rule 2 [WARN] Teleport at (5,6) — no structure row at z=7 to catch player
+  Rule 2 [WARN] Teleport at (5,6) — no structure row at z=7 to catch player
+  Rule 2 [WARN] Teleport at (2,3) — no structure row at z=4 to catch player
+  Rule 2 [WARN] Teleport at (2,4) — no structure row at z=5 to catch player
+  Rule 2 [WARN] Teleport at (2,3) — no structure row at z=4 to catch player
+  Rule 2 [WARN] Teleport at (2,3) — no structure row at z=4 to catch player
+  Rule 2 [WARN] Teleport at (2,4) — no structure row at z=5 to catch player
+  Rule 2 [WARN] Teleport at (2,3) — no structure row at z=4 to catch player
+  Rule 2 [WARN] Teleport at (2,3) — no structure row at z=4 to catch player
+FAIL  Noise_6_Wall
+  Rule 4 [ERROR] Artifact 'shader_noise_space' at (5,5) h=0 unreachable [on VOID]
+FAIL  Noise_Inside_Noise
+  Rule 2 [WARN] Teleport at (7,12) — no structure row at z=13 to catch player
+  Rule 3 [ERROR] Teleport at (7,12) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'noisesphere' at (5,6) h=0 unreachable [on VOID]
+FAIL  Noise_One
+  Rule 4 [ERROR] Artifact 'noisetorus' at (5,5) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'noiselayers' at (5,6) h=0 unreachable [on VOID]
+FAIL  Noise_Perlin_Simplex
+  Rule 4 [ERROR] Artifact 'simplex_noise' at (2,3) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'perlin_noise' at (7,3) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'noise_terrain' at (5,6) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'perlin_noise_terrain' at (5,10) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'configurable_portal' at (8,12) h=0 unreachable [on VOID]
+FAIL  Noise_Space_10
+  Rule 3 [ERROR] Teleport at (10,12) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'noise_space' at (5,6) h=1 unreachable
+  Rule 2 [WARN] Teleport at (5,6) — no structure row at z=7 to catch player
+  Rule 2 [WARN] Teleport at (5,6) — no structure row at z=7 to catch player
+  Rule 2 [WARN] Teleport at (5,6) — no structure row at z=7 to catch player
+  Rule 2 [WARN] Teleport at (5,6) — no structure row at z=7 to catch player
+  Rule 2 [WARN] Teleport at (5,6) — no structure row at z=7 to catch player
+  Rule 2 [WARN] Teleport at (5,6) — no structure row at z=7 to catch player
+  Rule 2 [WARN] Teleport at (5,6) — no structure row at z=7 to catch player
+  Rule 2 [WARN] Teleport at (9,12) — no structure row at z=13 to catch player
+  Rule 6 [WARN] Map has 3 teleports ((11,10), (11,11), (9,12)) — normal case is 1
+  Rule 2 [WARN] Teleport at (4,8) — no structure row at z=9 to catch player
+  Rule 2 [WARN] Teleport at (4,10) — no structure row at z=11 to catch player
+  Rule 2 [WARN] Teleport at (4,10) — no structure row at z=11 to catch player
+  Rule 2 [WARN] Teleport at (3,10) — no structure row at z=11 to catch player
+FAIL  Point_Line_Grid
+  Rule 4 [ERROR] Artifact 'grid_lines' at (4,3) h=0 unreachable [on VOID]
+FAIL  Point_Lines
+  Rule 4 [ERROR] Artifact 'perspective_lines' at (1,23) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'scale_lines' at (3,23) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'perspective_lines' at (5,23) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'lightrod' at (3,25) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'dgrid' at (6,26) h=0 unreachable [on VOID]
+FAIL  Point_One
+  Rule 3 [ERROR] Teleport at (1,5) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'static_point' at (4,0) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'interactive_point_origin' at (1,3) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'frame_counter_display' at (0,9) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'CoordinateSystem3M' at (6,9) h=0 unreachable [on VOID]
+FAIL  Point_Zero
+  Rule 3 [ERROR] Teleport at (2,1) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'folding_past' at (2,2) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'frame_counter_display' at (0,8) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'CoordinateSystem3M' at (6,8) h=0 unreachable [on VOID]
+FAIL  Primitives_Ignorance
+  Rule 4 [ERROR] Artifact 'plus' at (1,25) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'plus' at (7,25) h=0 unreachable [on VOID]
+  Rule 6 [WARN] Map has 2 teleports ((1,8), (5,8)) — normal case is 1
+FAIL  Primitives_1
+  Rule 3 [ERROR] Teleport at (5,6) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'pyramid_edit' at (1,7) h=2 unreachable
+FAIL  Primitives_Portals
+  Rule 4 [ERROR] Artifact 'capsule' at (5,2) h=0 unreachable [on VOID]
+  Rule 6 [WARN] Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1
+  Rule 6 [WARN] Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1
+  Rule 6 [WARN] Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1
+  Rule 6 [WARN] Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1
+  Rule 6 [WARN] Map has 2 teleports ((2,0), (15,16)) — normal case is 1
+  Rule 6 [WARN] Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1
+  Rule 6 [WARN] Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1
+  Rule 6 [WARN] Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1
+  Rule 6 [WARN] Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1
+FAIL  QFEP_E_Term
+  Rule 2 [WARN] Teleport at (5,11) — no structure row at z=12 to catch player
+  Rule 4 [ERROR] Artifact 'random_cubes' at (4,3) h=3 unreachable
+  Rule 4 [ERROR] Artifact 'random_cubes' at (7,3) h=3 unreachable
+  Rule 4 [ERROR] Artifact 'particle_chaos' at (5,5) h=3 unreachable
+  Rule 4 [ERROR] Artifact 'random_cubes' at (4,7) h=3 unreachable
+  Rule 4 [ERROR] Artifact 'random_cubes' at (7,7) h=3 unreachable
+FAIL  QFEP_Edge_Of_Chaos
+  Rule 2 [WARN] Teleport at (6,12) — no structure row at z=13 to catch player
+  Rule 4 [ERROR] Artifact 'turing_pattern' at (4,3) h=3 unreachable
+  Rule 4 [ERROR] Artifact 'turing_pattern' at (8,3) h=3 unreachable
+  Rule 4 [ERROR] Artifact 'edge_core' at (6,6) h=4 unreachable
+  Rule 4 [ERROR] Artifact 'emergence_zone' at (4,9) h=3 unreachable
+  Rule 4 [ERROR] Artifact 'emergence_zone' at (8,9) h=3 unreachable
+FAIL  QFEP_F_Term
+  Rule 2 [WARN] Teleport at (4,11) — no structure row at z=12 to catch player
+  Rule 3 [ERROR] Teleport at (4,11) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'crystal_cluster' at (4,4) h=2 unreachable
+  Rule 2 [WARN] Teleport at (4,9) — no structure row at z=10 to catch player
+  Rule 2 [WARN] Teleport at (2,17) — no structure row at z=18 to catch player
+  Rule 2 [WARN] Teleport at (4,9) — no structure row at z=10 to catch player
+FAIL  QFEP_Sandbox
+  Rule 2 [WARN] Teleport at (6,13) — no structure row at z=14 to catch player
+  Rule 4 [ERROR] Artifact 'qfep_reactor' at (6,5) h=3 unreachable
+  Rule 4 [ERROR] Artifact 'reactive_particles' at (4,7) h=3 unreachable
+  Rule 4 [ERROR] Artifact 'reactive_particles' at (8,7) h=3 unreachable
+FAIL  QFEP_Synthesis
+  Rule 2 [WARN] Teleport at (5,11) — no structure row at z=12 to catch player
+  Rule 4 [ERROR] Artifact 'qfep_formula_3d' at (5,5) h=3 unreachable
+FAIL  Random_Game
+  Rule 2 [WARN] Teleport at (6,15) — no structure row at z=16 to catch player
+  Rule 3 [ERROR] Teleport at (7,0) is NOT reachable from spawn
+  Rule 3 [ERROR] Teleport at (6,15) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'r_c' at (1,3) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'r_c' at (2,3) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'r_c' at (3,3) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'r_c' at (1,4) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'r_c' at (2,4) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'r_c' at (3,4) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'armadillo_eggling' at (4,6) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'armadillo_eggling' at (8,6) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'origami_droideka' at (6,7) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'cube_projectile_spawner' at (6,8) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'miura_crawler' at (2,10) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'kresling_spire' at (3,10) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'scissor_stalker' at (4,10) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'kaleidocycle_enemy' at (5,10) h=0 unreachable [on VOID]
+  Rule 6 [WARN] Map has 2 teleports ((7,0), (6,15)) — normal case is 1
+FAIL  Random_Gaussian
+  Rule 4 [ERROR] Artifact 'random_bell_curve' at (6,20) h=0 unreachable [on VOID]
+  Rule 2 [WARN] Teleport at (8,12) — no structure row at z=13 to catch player
+FAIL  Random_Pheromone
+  Rule 2 [WARN] Teleport at (7,7) — row z=8 has no floor cubes to catch player
+  Rule 3 [ERROR] Teleport at (7,7) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'pheromone_terrain' at (5,5) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'clipboard' at (2,6) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'clipboard' at (3,7) h=0 unreachable [on VOID]
+  Rule 6 [WARN] Map has 6 teleports ((1,4), (11,4), (1,10), (11,10), (1,16), (11,16)) — normal case is 1
+  Rule 2 [WARN] Teleport at (6,14) — no structure row at z=15 to catch player
+  Rule 6 [WARN] Map has 2 teleports ((1,22), (10,22)) — normal case is 1
+FAIL  Random_Walk
+  Rule 4 [ERROR] Artifact 'random_walk_128' at (6,6) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'random_walk_leash' at (8,8) h=0 unreachable [on VOID]
+  Rule 6 [WARN] Map has 2 teleports ((0,4), (10,12)) — normal case is 1
+FAIL  Structure_Examples
+  Rule 4 [ERROR] Artifact 'light_sphere' at (13,3) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'crystal_ball' at (3,9) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'spectrum_display' at (19,9) h=0 unreachable [on VOID]
+  Rule 6 [WARN] Map has 2 teleports ((0,3), (16,24)) — normal case is 1
+FAIL  Structure_Examples_VoxelGrammar_Principles
+  Rule 4 [ERROR] Artifact 'cube_scene' at (10,2) h=3 unreachable
+  Rule 4 [ERROR] Artifact 'probability_sphere' at (27,21) h=1 unreachable
+  Rule 6 [WARN] Map has 2 teleports ((3,18), (32,30)) — normal case is 1
+FAIL  Test_1
+  Rule 4 [ERROR] Artifact 'ChengSimulationScaled' at (5,6) h=0 unreachable [on VOID]
+FAIL  Test_10
+  Rule 2 [WARN] Teleport at (9,11) — no structure row at z=12 to catch player
+  Rule 4 [ERROR] Artifact 'graphspace3d' at (5,5) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'KonigsbergBridge' at (5,6) h=0 unreachable [on VOID]
+  Rule 6 [WARN] Map has 2 teleports ((1,1), (9,11)) — normal case is 1
+FAIL  Test_11
+  Rule 2 [WARN] Teleport at (7,12) — no structure row at z=13 to catch player
+  Rule 2 [WARN] Teleport at (8,12) — no structure row at z=13 to catch player
+  Rule 2 [WARN] Teleport at (9,12) — no structure row at z=13 to catch player
+  Rule 4 [ERROR] Artifact 'graphspace' at (3,5) h=0 unreachable [on VOID]
+  Rule 6 [WARN] Map has 4 teleports ((1,1), (7,12), (8,12), (9,12)) — normal case is 1
+FAIL  Test_12
+  Rule 3 [ERROR] Teleport at (7,12) is NOT reachable from spawn
+  Rule 3 [ERROR] Teleport at (8,12) is NOT reachable from spawn
+  Rule 3 [ERROR] Teleport at (9,12) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'pathfinding3d' at (5,6) h=4 unreachable
+  Rule 6 [WARN] Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1
+FAIL  Test_13
+  Rule 4 [ERROR] Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID]
+  Rule 6 [WARN] Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1
+FAIL  Test_14
+  Rule 3 [ERROR] Teleport at (7,12) is NOT reachable from spawn
+  Rule 3 [ERROR] Teleport at (8,12) is NOT reachable from spawn
+  Rule 3 [ERROR] Teleport at (9,12) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'pathfinding_visualization' at (5,6) h=4 unreachable
+  Rule 4 [ERROR] Artifact 'network_analysis' at (2,11) h=7 unreachable
+  Rule 6 [WARN] Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1
+FAIL  Test_15
+  Rule 4 [ERROR] Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID]
+  Rule 6 [WARN] Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1
+FAIL  Test_16
+  Rule 3 [ERROR] Teleport at (7,12) is NOT reachable from spawn
+  Rule 3 [ERROR] Teleport at (8,12) is NOT reachable from spawn
+  Rule 3 [ERROR] Teleport at (9,12) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'pathfinding_visualization' at (5,6) h=4 unreachable
+  Rule 4 [ERROR] Artifact 'network_analysis' at (2,11) h=7 unreachable
+  Rule 6 [WARN] Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1
+FAIL  Test_2
+  Rule 2 [WARN] Teleport at (9,11) — no structure row at z=12 to catch player
+  Rule 4 [ERROR] Artifact 'closest_pair' at (5,5) h=0 unreachable [on VOID]
+  Rule 6 [WARN] Map has 2 teleports ((1,1), (9,11)) — normal case is 1
+FAIL  Test_3
+  Rule 2 [WARN] Teleport at (7,12) — no structure row at z=13 to catch player
+  Rule 2 [WARN] Teleport at (8,12) — no structure row at z=13 to catch player
+  Rule 2 [WARN] Teleport at (9,12) — no structure row at z=13 to catch player
+  Rule 4 [ERROR] Artifact 'distance_fields_sdf' at (3,5) h=0 unreachable [on VOID]
+  Rule 6 [WARN] Map has 4 teleports ((1,1), (7,12), (8,12), (9,12)) — normal case is 1
+FAIL  Test_4
+  Rule 3 [ERROR] Teleport at (7,12) is NOT reachable from spawn
+  Rule 3 [ERROR] Teleport at (8,12) is NOT reachable from spawn
+  Rule 3 [ERROR] Teleport at (9,12) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'pathfinding3d' at (5,6) h=4 unreachable
+  Rule 6 [WARN] Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1
+FAIL  Test_5
+  Rule 4 [ERROR] Artifact 'random_color_book_page_collection' at (1,11) h=0 unreachable [on VOID]
+  Rule 6 [WARN] Map has 4 teleports ((3,0), (7,12), (8,12), (9,12)) — normal case is 1
+FAIL  Test_6
+  Rule 3 [ERROR] Teleport at (7,12) is NOT reachable from spawn
+  Rule 3 [ERROR] Teleport at (8,12) is NOT reachable from spawn
+  Rule 3 [ERROR] Teleport at (9,12) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'pathfinding_visualization' at (5,6) h=4 unreachable
+  Rule 4 [ERROR] Artifact 'network_analysis' at (2,11) h=7 unreachable
+  Rule 6 [WARN] Map has 4 teleports ((2,0), (7,12), (8,12), (9,12)) — normal case is 1
+FAIL  Test_7
+  Rule 4 [ERROR] Artifact 'random_plants' at (3,7) h=1 unreachable
+  Rule 6 [WARN] Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1
+FAIL  Test_8
+  Rule 4 [ERROR] Artifact 'random_plants' at (3,7) h=1 unreachable
+  Rule 6 [WARN] Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1
+FAIL  Test_9
+  Rule 4 [ERROR] Artifact 'graphspace' at (5,6) h=0 unreachable [on VOID]
+  Rule 2 [WARN] Teleport at (7,12) — no structure row at z=13 to catch player
+  Rule 2 [WARN] Teleport at (8,12) — no structure row at z=13 to catch player
+  Rule 2 [WARN] Teleport at (9,12) — no structure row at z=13 to catch player
+  Rule 6 [WARN] Map has 4 teleports ((0,1), (7,12), (8,12), (9,12)) — normal case is 1
+  Rule 2 [WARN] Teleport at (7,12) — no structure row at z=13 to catch player
+  Rule 2 [WARN] Teleport at (8,12) — no structure row at z=13 to catch player
+  Rule 2 [WARN] Teleport at (9,12) — no structure row at z=13 to catch player
+  Rule 6 [WARN] Map has 3 teleports ((7,12), (8,12), (9,12)) — normal case is 1
+  Rule 2 [WARN] Teleport at (5,10) — no structure row at z=11 to catch player
+FAIL  Trans_Intro
+  Rule 3 [ERROR] Teleport at (5,14) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'balance_puzzle' at (5,10) h=2 unreachable
+FAIL  Trans_Rotation_2
+  Rule 4 [ERROR] Artifact 'pick_up_cube' at (2,51) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'carousel_cake' at (3,53) h=0 unreachable [on VOID]
+  Rule 6 [WARN] Map has 3 teleports ((1,14), (5,14), (3,15)) — normal case is 1
+FAIL  Trans_Translate_1
+  Rule 4 [ERROR] Artifact 'player_trace' at (0,0) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'z_translation_cube' at (6,2) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'pick_up_cube' at (5,3) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'y_translation_cube' at (1,11) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'pick_up_cube' at (2,12) h=3 unreachable
+  Rule 4 [ERROR] Artifact 'pick_up_cube' at (4,12) h=2 unreachable
+FAIL  Trans_Translate_2
+  Rule 3 [ERROR] Teleport at (7,8) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'toruscylinder' at (5,2) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'z_translation_cube' at (0,5) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'x_translation_cube' at (2,8) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'pickup_gate' at (6,9) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'translation_cube_demo' at (1,11) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'cube_scene' at (0,12) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'cube_scene' at (1,12) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'cube_scene' at (2,12) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'cube_scene' at (0,13) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'cube_scene' at (2,13) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'cube_scene' at (0,14) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'cube_scene' at (2,14) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'cube_scene' at (0,15) h=1 unreachable
+  Rule 4 [ERROR] Artifact 'pick_up_cube' at (1,15) h=5 unreachable
+  Rule 4 [ERROR] Artifact 'cube_scene' at (2,15) h=1 unreachable
+FAIL  Tutorial_2D_Build
+  Rule 4 [ERROR] Artifact 'gridagent' at (1,21) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'xyz_coordinates' at (7,22) h=0 unreachable [on VOID]
+  Rule 2 [WARN] Teleport at (4,10) — no structure row at z=11 to catch player
+FAIL  WaveFunctions_3D_Wave_Propagation
+  Rule 3 [ERROR] Teleport at (13,16) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'kusama_sine' at (5,6) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'wave_propagation_3d' at (7,8) h=0 unreachable [on VOID]
+FAIL  WaveFunctions_AirMusic
+  Rule 4 [ERROR] Artifact 'SystemsMusicTest' at (5,5) h=0 unreachable [on VOID]
+FAIL  WaveFunctions_John_Cage
+  Rule 4 [ERROR] Artifact 'ruth_asawa_sculpture' at (6,6) h=0 unreachable [on VOID]
+FAIL  WaveFunctions_Sine_Space
+  Rule 3 [ERROR] Teleport at (10,26) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'colorballs' at (5,7) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'colorballs' at (5,12) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'sine_space' at (5,15) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'colorballs' at (5,17) h=0 unreachable [on VOID]
+FAIL  WaveFunctions_Synthesis_Lab
+  Rule 4 [ERROR] Artifact 'SoundscapeRadioRack' at (2,11) h=4 unreachable
+FAIL  WaveFunctions_TrigWalkingPath
+  Rule 3 [ERROR] Teleport at (10,2) is NOT reachable from spawn
+  Rule 4 [ERROR] Artifact 'TrigWalkingPath' at (6,3) h=0 unreachable [on VOID]
+FAIL  WaveFunctions_Unit_Circle
+  Rule 4 [ERROR] Artifact 'unit_circle_advanced' at (6,3) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'colorballs' at (5,6) h=0 unreachable [on VOID]
+FAIL  Wavefunctions_Sky_Stairs
+  Rule 4 [ERROR] Artifact 'math_objects' at (6,11) h=8 unreachable
+FAIL  gridagent_puzzle01_copy
+  Rule 4 [ERROR] Artifact 'gridagent' at (4,4) h=1 unreachable
+FAIL  gridagent_puzzle02_translate
+  Rule 4 [ERROR] Artifact 'gridagent' at (5,4) h=0 unreachable [on VOID]
+FAIL  gridagent_puzzle03_rotate
+  Rule 4 [ERROR] Artifact 'gridagent' at (5,5) h=1 unreachable
+FAIL  test_batch_1
+  Rule 4 [ERROR] Artifact 'constructive_proof' at (4,4) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'flow_field_painter' at (4,6) h=0 unreachable [on VOID]
+  Rule 4 [ERROR] Artifact 'sentry_turret' at (4,8) h=0 unreachable [on VOID]
+  Rule 5 [ERROR] Teleport at (6,14) has height 1, must be 0 (void)
+  Rule 2 [WARN] Teleport at (3,6) — no structure row at z=7 to catch player
+
+=== 432 maps checked: 358 OK, 74 FAIL (198 issues) ===

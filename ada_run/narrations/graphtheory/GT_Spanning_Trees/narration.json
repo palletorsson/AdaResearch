@@ -1,0 +1,154 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": -1,
+				"name": "mst_visualization",
+				"pos": [
+					5,
+					3,
+					4
+				],
+				"reachable": false,
+				"visible_from_spawn": true
+			}
+		],
+		"dead_ends": [
+			[
+				4,
+				0,
+				4
+			]
+		],
+		"issues": [
+			{
+				"description": "Teleporter at (7,0,7) unreachable from spawn",
+				"severity": "critical",
+				"type": "unreachable_teleporter"
+			},
+			{
+				"description": "mst_visualization at (5,3,4) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "GT_Spanning_Trees",
+		"pacing": {
+			"density": 0.0,
+			"reachable_artifacts": 0,
+			"total_artifacts": 1,
+			"walkable_tiles": 20
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			0,
+			1,
+			0
+		],
+		"teleporter": {
+			"dist": -1,
+			"pos": [
+				7,
+				0,
+				7
+			],
+			"reachable": false
+		}
+	},
+	"map_name": "GT_Spanning_Trees",
+	"sequence": "graphtheory",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "mst_visualization",
+				"pos": [
+					5,
+					3,
+					4
+				]
+			}
+		],
+		"dimensions": [
+			9,
+			4,
+			9
+		],
+		"height": {
+			"boundary": 0,
+			"ground": 20,
+			"ground_pct": 24.6913580246914,
+			"void": 48,
+			"walls": 13
+		},
+		"map_name": "GT_Spanning_Trees",
+		"rooms": [
+			{
+				"artifacts": [],
+				"label": "A",
+				"region": "north, west",
+				"tiles": 10
+			},
+			{
+				"artifacts": [],
+				"label": "B",
+				"region": "south, east",
+				"tiles": 10
+			}
+		],
+		"spawn": [
+			0,
+			1,
+			0
+		],
+		"teleporter": [
+			7,
+			0,
+			7
+		]
+	},
+	"timestamp": "2026-03-16T12:16:38",
+	"walkthrough": {
+		"map_name": "GT_Spanning_Trees",
+		"stops": [
+			{
+				"facing": "southeast",
+				"look_at": [
+					7,
+					0,
+					7
+				],
+				"pos": [
+					0,
+					1,
+					0
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": [
+					{
+						"direction": "southeast",
+						"dist": 9,
+						"name": "mst_visualization"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					7,
+					0,
+					7
+				],
+				"reachable": false,
+				"steps_from_prev": 0,
+				"total_steps": 0,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 0,
+			"total_steps": 0,
+			"total_stops": 2
+		}
+	}
+}

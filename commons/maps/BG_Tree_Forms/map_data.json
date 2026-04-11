@@ -1,69 +1,70 @@
 {
   "map_info": {
-    "name": "BG Tree Forms",
-    "lookup_name": "BG_Tree_Forms",
-    "description": "Procedural tree generation — parametric branching with wind response and seasonal variation. Grammar-driven growth produces infinite variety from simple rules.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 10,
-      "depth": 10,
-      "max_height": 3
-    },
-    "metadata": {
-      "difficulty": "intermediate",
-      "category": "biological_growth",
-      "estimated_time": "4-6 minutes",
-      "spatial_temperature": 0.5,
-      "design_notes": "Open grove — slight terrain variation with the tree growing in a sunken center. Player circles the tree at ground level, looking up into the canopy. The void suggests roots below."
-    }
+      "name": "BG Tree Forms",
+      "title": "Grammar Writes a Tree",
+      "lookup_name": "BG_Tree_Forms",
+      "description": "Procedural tree generation â€” parametric branching with wind response and seasonal variation. Grammar-driven growth produces infinite variety from simple rules.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 10,
+          "depth": 10,
+          "max_height": 3
+      },
+      "metadata": {
+          "difficulty": "intermediate",
+          "category": "biological_growth",
+          "estimated_time": "4-6 minutes",
+          "spatial_temperature": 0.5,
+          "design_notes": "Open grove â€” slight terrain variation with the tree growing in a sunken center. Player circles the tree at ground level, looking up into the canopy. The void suggests roots below."
+      }
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next",
+          "description": "Continue to next step",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
   },
   "layers": {
     "structure": [
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "2", "2", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "0", "0", "0", "0", "1", "1", "1" ],
-      [ "1", "2", "1", "0", "0", "0", "0", "1", "2", "1" ],
-      [ "1", "2", "1", "0", "0", "0", "0", "1", "2", "1" ],
-      [ "1", "1", "1", "0", "0", "0", "0", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "2", "2", "1", "1", "1", "1" ],
-      [ "1", "1", "1", "1", "1", "1", "1", "1", "1", "0" ]
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "2", "2", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "0", "0", "0", "0", "1", "1", "1"],
+      ["1", "2", "1", "0", "0", "0", "0", "1", "2", "1"],
+      ["1", "2", "1", "0", "0", "0", "0", "1", "2", "1"],
+      ["1", "1", "1", "0", "0", "0", "0", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "2", "2", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "0"]
     ],
     "utilities": [
-      [ "s", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", "an", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", "sp", " ", " ", " ", " ", " ", " ", " ", "t" ]
+      ["s", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", "an", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", "sp", " ", " ", " ", " ", " ", " ", " ", "t"]
     ],
     "interactables": [
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", "tree_gen:0:2", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", "tree_gen:0:2", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
     ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
   }
 }

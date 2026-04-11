@@ -1,3 +1,13 @@
+# @identity
+# essence: self_reference(t) -> contradiction(t) -- creature that contradicts itself, two ghosts swapping
+# desire: two ghostly forms alternating reality -- the liar paradox given a body and a lunge
+# critical_parameter: _a_is_real -- which ghost is real; swap_timer oscillates; only real ghost can be hit
+# triggers: swap_timer alternates real/ghost; lunge_timer drives attacks; wrong ghost is invulnerable
+# emerges: self-reference as combat -- the paradox is not a puzzle to solve but a state to survive
+# needs: HazardCreatureBase [has]; dual ghost nodes [has]; swap logic [has]; lunge [has]; VR interaction [missing]
+# relationships: embodies foundationscrisis; pairs with escher_stairwalker (logical vs geometric paradox)
+# truth: the creature that contradicts itself cannot be defeated by consistency -- act in paradox.
+
 extends HazardCreatureBase
 class_name ParadoxStalker
 ## Foundations Crisis hazard — a creature that contradicts itself.

@@ -46,7 +46,7 @@ const TETRA_FACES = [
 var face_normals: Array[Vector3] = []
 var face_centroids: Array[Vector3] = []
 
-func _ready():
+func _ready() -> void:
 	if random_seed != 0:
 		seed(random_seed)
 
@@ -58,7 +58,7 @@ func _ready():
 	if auto_generate:
 		generate_crystal()
 
-func _calculate_face_properties():
+func _calculate_face_properties() -> void:
 	"""Calculate normals and centroids for each face"""
 	face_normals.clear()
 	face_centroids.clear()
@@ -84,7 +84,7 @@ func _calculate_face_properties():
 
 		face_normals.append(normal)
 
-func create_tetrahedron_mesh():
+func create_tetrahedron_mesh() -> void:
 	"""Create a regular tetrahedron mesh with flat shading"""
 	var surface_array = []
 	surface_array.resize(Mesh.ARRAY_MAX)
@@ -127,7 +127,7 @@ func create_tetrahedron_mesh():
 	print("Tetrahedron mesh created with ", verts.size(), " vertices (", TETRA_FACES.size(), " faces)")
 	print("Tetrahedron size: ", tetrahedron_size)
 
-func generate_crystal():
+func generate_crystal() -> void:
 	"""Generate the crystal structure"""
 	transforms.clear()
 	colors.clear()
@@ -250,7 +250,7 @@ func _attach_next_tetrahedron(base_transform: Transform3D, face_index: int,
 
 	return new_transform
 
-func create_multimesh():
+func create_multimesh() -> void:
 	"""Create MultiMeshInstance3D from generated transforms"""
 	var mmi = MultiMeshInstance3D.new()
 	var mm = MultiMesh.new()
@@ -290,11 +290,11 @@ func create_multimesh():
 	print("MultiMeshInstance3D added to scene")
 
 ## Public API
-func regenerate():
+func regenerate() -> void:
 	"""Regenerate the crystal with current settings"""
 	generate_crystal()
 
-func set_seed(new_seed: int):
+func set_seed(new_seed: int) -> void:
 	"""Set random seed and regenerate"""
 	random_seed = new_seed
 	seed(new_seed)
@@ -331,3 +331,12 @@ func _calculate_bounds() -> Dictionary:
 	var bounds = {"min": min_pos, "max": max_pos}
 	print("Crystal bounds - Min: ", min_pos, " Max: ", max_pos, " Size: ", max_pos - min_pos)
 	return bounds
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -14,7 +14,7 @@ extends Node3D
 @export_enum("Left to Right", "Right to Left", "Bottom to Top", "Top to Bottom") var randomness_direction: int = 0
 
 # Called when the node enters the scene tree
-func _ready():
+func _ready() -> void:
 	# Hide the original cube - we'll use it as a template
 	base_cube.visible = false
 	
@@ -24,7 +24,7 @@ func _ready():
 	# Generate the wall with increasing randomness
 	generate_increasingly_random_wall()
 
-func generate_increasingly_random_wall():
+func generate_increasingly_random_wall() -> void:
 	for x in range(wall_width):
 		for y in range(wall_height):
 			for z in range(wall_depth):
@@ -101,7 +101,7 @@ func generate_increasingly_random_wall():
 						material.albedo_color = final_color
 
 # Regenerate the wall with a new random seed
-func regenerate():
+func regenerate() -> void:
 	# Remove all previous cubes except the base one
 	for child in get_children():
 		if child != base_cube:
@@ -111,3 +111,6 @@ func regenerate():
 	random_seed = randi()
 	seed(random_seed)
 	generate_increasingly_random_wall()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,0 +1,69 @@
+{
+	"artifacts": {
+		"quantum_superposition": {
+			"name": "Quantum Superposition",
+			"lookup_name": "quantum_superposition",
+			"description": "Visualization of quantum superposition showing qubits in simultaneous states before measurement collapse.",
+			"scene": "res://algorithms/quantumalgorithms/superposition/quantum_superposition.tscn",
+			"category": "quantumalgorithms",
+			"tags": [
+				"quantum",
+				"superposition",
+				"qubit",
+				"measurement"
+			],
+			"include_in_map_data": true,
+			"map_ready": false,
+			"map_sequences": [],
+			"sequence": "quantumalgorithms",
+			"parameters": {
+				"footprint": [
+					1,
+					4,
+					13
+				],
+				"size_group": "world_scale"
+			},
+			"complexity": "expert",
+			"dev_themes": [
+				"algorithms",
+				"quantum"
+			]
+		},
+		"superposition_display": {
+			"name": "Superposition Display",
+			"lookup_name": "superposition_display",
+			"description": "Interactive visualization of quantum superposition |psi> = alpha|0> + beta|1> with VR slider to control the amplitude ratio between basis states.",
+			"scene": "res://commons/artifacts/superposition_display/superposition_display.tscn",
+			"category": "quantumalgorithms",
+			"tags": [
+				"quantum",
+				"superposition",
+				"qubit",
+				"amplitude",
+				"interactive",
+				"slider"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"foundationscrisis",
+				"testmaps"
+			],
+			"sequence": "quantumalgorithms",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"complexity": "expert",
+			"dev_themes": [
+				"algorithms",
+				"quantum"
+			]
+		}
+	}
+}

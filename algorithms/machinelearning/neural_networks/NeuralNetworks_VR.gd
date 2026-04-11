@@ -1,4 +1,14 @@
-﻿extends Node3D
+extends Node3D
+
+# @identity
+# essence: layers of neurons connected by weighted edges; forward pass propagates signal, backward pass propagates error
+# desire: walk through each layer as a physical room, throw data into the input, watch activations cascade and gradients flow back
+# critical_parameter: learning_rate — controls how aggressively weights change during backpropagation
+# triggers: auto_train drives forward/backward passes; backprop particles flow in reverse; data particles enter the network
+# emerges: the spatial intuition that depth creates abstraction — each room transforms the signal further
+# needs: grabbable neurons [has], throwable data [has], visible weight connections [has], backprop particle flow [has]
+# relationships: depends on gradient_descent_visualization (training IS optimization); unlocks lstms_vr (adding memory) and convolutional_neural_networks_cnns_vr (adding spatial structure)
+# truth: a neural network is not a brain — it is a differentiable function that learns by following its own error gradient
 
 # VR-Reimagined Neural Network Visualization
 # Walk through network layers as physical rooms
@@ -47,7 +57,7 @@ var input_data_particles: Array = []
 # Visual elements
 var weight_lines: Array = []
 
-func _ready():
+func _ready() -> void:
 	print("[NeuralNetworks_VR] Initializing interactive neural network")
 	_initialize_network()
 	_create_network_layers()
@@ -58,7 +68,7 @@ func _ready():
 	_create_control_panel()
 	_create_info_panels()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 
 	if auto_train:
@@ -76,7 +86,7 @@ func _process(delta):
 	_animate_weights(delta)
 	_update_control_panel()
 
-func _initialize_network():
+func _initialize_network() -> void:
 	"""Initialize network structure"""
 	# Initialize activations for each layer
 	for layer_size in layer_sizes:
@@ -96,7 +106,7 @@ func _initialize_network():
 			layer_weights.append(neuron_weights)
 		weights.append(layer_weights)
 
-func _create_network_layers():
+func _create_network_layers() -> void:
 	"""Create visual representation of all layers"""
 	for layer_idx in range(layer_sizes.size()):
 		var layer_container = Node3D.new()
@@ -137,6 +147,7 @@ func _create_neuron(layer_idx: int, neuron_idx: int) -> RigidBody3D:
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = neuron_size
+	sphere.height = neuron_size * 2.0
 	mesh.mesh = sphere
 
 	# Color based on layer type
@@ -184,7 +195,7 @@ func _create_neuron(layer_idx: int, neuron_idx: int) -> RigidBody3D:
 
 	return body
 
-func _create_layer_room(layer_container: Node3D, layer_idx: int):
+func _create_layer_room(layer_container: Node3D, layer_idx: int) -> void:
 	"""Create transparent room for each layer"""
 	# Floor
 	var floor_mesh = MeshInstance3D.new()
@@ -208,28 +219,37 @@ func _create_layer_room(layer_container: Node3D, layer_idx: int):
 	ceiling_mesh.position = Vector3(0, room_height / 2.0 + 0.5, 0)
 	layer_container.add_child(ceiling_mesh)
 
-	# Grid lines on floor
-	for i in range(-2, 3):
-		var line = MeshInstance3D.new()
-		var cyl = CylinderMesh.new()
-		cyl.top_radius = 0.02
-		cyl.bottom_radius = 0.02
-		cyl.height = room_height
-		line.mesh = cyl
+	# Grid lines on floor using MultiMesh
+	var grid_cyl = CylinderMesh.new()
+	grid_cyl.top_radius = 0.02
+	grid_cyl.bottom_radius = 0.02
+	grid_cyl.height = room_height
 
-		var line_mat = StandardMaterial3D.new()
-		line_mat.albedo_color = Color(0.5, 0.5, 0.6, 0.4)
-		line_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		line_mat.emission_enabled = true
-		line_mat.emission = Color(0.5, 0.5, 0.6)
-		line_mat.emission_energy_multiplier = 0.3
-		line.material_override = line_mat
+	var line_mat = StandardMaterial3D.new()
+	line_mat.albedo_color = Color(0.5, 0.5, 0.6, 0.4)
+	line_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	line_mat.emission_enabled = true
+	line_mat.emission = Color(0.5, 0.5, 0.6)
+	line_mat.emission_energy_multiplier = 0.3
+	grid_cyl.material = line_mat
 
-		line.rotation.x = PI / 2.0
-		line.position = Vector3(float(i), -room_height / 2.0 - 0.5, 0)
-		layer_container.add_child(line)
+	var grid_mm = MultiMesh.new()
+	grid_mm.transform_format = MultiMesh.TRANSFORM_3D
+	grid_mm.instance_count = 5
+	grid_mm.mesh = grid_cyl
 
-func _create_layer_label(layer_container: Node3D, layer_idx: int):
+	for i in range(5):
+		var t = Transform3D()
+		t.basis = Basis(Vector3(1, 0, 0), PI / 2.0)
+		t.origin = Vector3(float(i - 2), -room_height / 2.0 - 0.5, 0)
+		grid_mm.set_instance_transform(i, t)
+
+	var grid_mmi = MultiMeshInstance3D.new()
+	grid_mmi.name = "GridLines_MM"
+	grid_mmi.multimesh = grid_mm
+	layer_container.add_child(grid_mmi)
+
+func _create_layer_label(layer_container: Node3D, layer_idx: int) -> void:
 	"""Create floating label for layer"""
 	var label = Label3D.new()
 
@@ -250,7 +270,7 @@ func _create_layer_label(layer_container: Node3D, layer_idx: int):
 	label.position = Vector3(0, room_height / 2.0 + 1.5, 0)
 	layer_container.add_child(label)
 
-func _create_weight_connections():
+func _create_weight_connections() -> void:
 	"""Create visual lines showing weights between neurons"""
 	if not show_weights:
 		return
@@ -299,7 +319,7 @@ func _create_weight_connections():
 
 		weight_lines.append(layer_lines)
 
-func _create_data_input_area():
+func _create_data_input_area() -> void:
 	"""Create area with throwable data particles"""
 	if not enable_data_throwing:
 		return
@@ -355,6 +375,7 @@ func _create_data_particle(pos: Vector3) -> RigidBody3D:
 	var mesh = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.15
+	sphere.height = 0.3
 	mesh.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -379,8 +400,8 @@ func _create_data_particle(pos: Vector3) -> RigidBody3D:
 
 	return body
 
-func _create_activation_flow():
-	"""Create particles showing forward propagation"""
+func _create_activation_flow() -> void:
+	"""Create particles showing forward propagation using MultiMesh"""
 	if not show_activations:
 		return
 
@@ -388,31 +409,40 @@ func _create_activation_flow():
 	flow_container.name = "ForwardPropagation"
 	add_child(flow_container)
 
-	# Create particles flowing forward through network
-	for i in range(25):
-		var particle = MeshInstance3D.new()
-		var sphere = SphereMesh.new()
-		sphere.radius = 0.06
-		particle.mesh = sphere
+	var fwd_count = 25
+	var sphere = SphereMesh.new()
+	sphere.radius = 0.06
+	sphere.height = 0.12
 
-		var mat = StandardMaterial3D.new()
-		mat.albedo_color = Color(0.3, 0.9, 0.9, 0.8)
-		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		mat.emission_enabled = true
-		mat.emission = Color(0.3, 0.9, 0.9)
-		mat.emission_energy_multiplier = 1.0
-		mat.metallic = 0.0
-		mat.roughness = 1.0
-		particle.material_override = mat
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color(0.3, 0.9, 0.9, 0.8)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.emission_enabled = true
+	mat.emission = Color(0.3, 0.9, 0.9)
+	mat.emission_energy_multiplier = 1.0
+	mat.metallic = 0.0
+	mat.roughness = 1.0
+	sphere.material = mat
 
-		flow_container.add_child(particle)
-		forward_particles.append({
-			"node": particle,
-			"progress": randf()
-		})
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = fwd_count
+	mm.mesh = sphere
 
-func _create_gradient_flow():
-	"""Create particles showing backpropagation"""
+	for i in range(fwd_count):
+		mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3.ZERO))
+		forward_particles.append({"index": i, "progress": randf()})
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "ForwardParticles_MM"
+	mmi.multimesh = mm
+	flow_container.add_child(mmi)
+
+	# Store ref for animation
+	flow_container.set_meta("multimesh", mm)
+
+func _create_gradient_flow() -> void:
+	"""Create particles showing backpropagation using MultiMesh"""
 	if not show_backprop:
 		return
 
@@ -420,30 +450,38 @@ func _create_gradient_flow():
 	gradient_container.name = "Backpropagation"
 	add_child(gradient_container)
 
-	# Create particles flowing backward through network
-	for i in range(20):
-		var particle = MeshInstance3D.new()
-		var sphere = SphereMesh.new()
-		sphere.radius = 0.05
-		particle.mesh = sphere
+	var bwd_count = 20
+	var sphere = SphereMesh.new()
+	sphere.radius = 0.05
+	sphere.height = 0.1
 
-		var mat = StandardMaterial3D.new()
-		mat.albedo_color = Color(0.9, 0.3, 0.9, 0.7)
-		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		mat.emission_enabled = true
-		mat.emission = Color(0.9, 0.3, 0.9)
-		mat.emission_energy_multiplier = 0.9
-		mat.metallic = 0.0
-		mat.roughness = 1.0
-		particle.material_override = mat
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color(0.9, 0.3, 0.9, 0.7)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.emission_enabled = true
+	mat.emission = Color(0.9, 0.3, 0.9)
+	mat.emission_energy_multiplier = 0.9
+	mat.metallic = 0.0
+	mat.roughness = 1.0
+	sphere.material = mat
 
-		gradient_container.add_child(particle)
-		backward_particles.append({
-			"node": particle,
-			"progress": randf()
-		})
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = bwd_count
+	mm.mesh = sphere
 
-func _create_control_panel():
+	for i in range(bwd_count):
+		mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3.ZERO))
+		backward_particles.append({"index": i, "progress": randf()})
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "BackwardParticles_MM"
+	mmi.multimesh = mm
+	gradient_container.add_child(mmi)
+
+	gradient_container.set_meta("multimesh", mm)
+
+func _create_control_panel() -> void:
 	"""Create VR-accessible control panel"""
 	var controls = Node3D.new()
 	controls.name = "ControlPanel"
@@ -503,7 +541,7 @@ func _create_control_panel():
 	act_label.position = Vector3(0, -1.5, 0.1)
 	controls.add_child(act_label)
 
-func _create_info_panels():
+func _create_info_panels() -> void:
 	"""Create educational info panels"""
 	# Forward propagation
 	_create_info_panel(
@@ -528,7 +566,7 @@ func _create_info_panels():
 			Color(0.6, 0.9, 0.6)
 		)
 
-func _create_info_panel(pos: Vector3, text: String, color: Color):
+func _create_info_panel(pos: Vector3, text: String, color: Color) -> void:
 	"""Create floating info panel"""
 	var label = Label3D.new()
 	label.text = text
@@ -540,7 +578,7 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _animate_neurons(_delta):
+func _animate_neurons(_delta) -> void:
 	"""Animate neurons based on activation"""
 	for layer_idx in range(layers.size()):
 		for neuron_idx in range(layers[layer_idx].size()):
@@ -561,50 +599,51 @@ func _animate_neurons(_delta):
 			if mesh_instance and mesh_instance.material_override:
 				mesh_instance.material_override.emission_energy_multiplier = 0.3 + activation * 1.5
 
-func _animate_forward_prop(delta):
-	"""Animate forward propagation particles"""
+func _animate_forward_prop(delta) -> void:
+	"""Animate forward propagation particles via MultiMesh"""
 	var total_width = (layer_sizes.size() - 1) * layer_spacing
 
+	var flow_container = get_node_or_null("ForwardPropagation")
+	if not flow_container or not flow_container.has_meta("multimesh"):
+		return
+	var mm: MultiMesh = flow_container.get_meta("multimesh")
+
 	for particle_data in forward_particles:
-		var particle = particle_data.node
+		var idx = particle_data.index
 		var progress = particle_data.progress
 
-		# Update progress (move forward)
 		progress = fmod(progress + delta * 0.25, 1.0)
 		particle_data.progress = progress
 
-		# Position along network
 		var x = progress * total_width
-		var layer_progress = progress * (layer_sizes.size() - 1)
-		var layer_idx = int(layer_progress)
-		var sub_progress = fmod(layer_progress, 1.0)
-
-		# Wave motion
 		var y = sin(progress * PI * 3.0) * 1.5
 		var z = cos(progress * PI * 2.0) * 1.0
 
-		particle.position = Vector3(x, y, z)
+		mm.set_instance_transform(idx, Transform3D(Basis.IDENTITY, Vector3(x, y, z)))
 
-func _animate_back_prop(delta):
-	"""Animate backpropagation particles"""
+func _animate_back_prop(delta) -> void:
+	"""Animate backpropagation particles via MultiMesh"""
 	var total_width = (layer_sizes.size() - 1) * layer_spacing
 
+	var gradient_container = get_node_or_null("Backpropagation")
+	if not gradient_container or not gradient_container.has_meta("multimesh"):
+		return
+	var mm: MultiMesh = gradient_container.get_meta("multimesh")
+
 	for particle_data in backward_particles:
-		var particle = particle_data.node
+		var idx = particle_data.index
 		var progress = particle_data.progress
 
-		# Update progress (move backward)
 		progress = fmod(progress + delta * 0.2, 1.0)
 		particle_data.progress = progress
 
-		# Position along network (reversed)
 		var x = total_width - (progress * total_width)
 		var y = sin(progress * PI * 2.5 + PI) * 1.2
 		var z = cos(progress * PI * 1.8) * 0.8
 
-		particle.position = Vector3(x, y, z)
+		mm.set_instance_transform(idx, Transform3D(Basis.IDENTITY, Vector3(x, y, z)))
 
-func _animate_weights(_delta):
+func _animate_weights(_delta) -> void:
 	"""Update weight line visualizations"""
 	if not show_weights:
 		return
@@ -625,7 +664,7 @@ func _animate_weights(_delta):
 
 			immediate_mesh.surface_end()
 
-func _update_control_panel():
+func _update_control_panel() -> void:
 	"""Update control panel displays"""
 	var controls = get_node_or_null("ControlPanel")
 	if not controls:
@@ -636,7 +675,7 @@ func _update_control_panel():
 		metrics.text = "Loss: %.3f\nEpoch: %d\nLR: %.3f" % [loss, epoch, learning_rate]
 
 # Public API
-func forward_propagation():
+func forward_propagation() -> void:
 	"""Simulate one forward pass"""
 	# Simple simulation
 	for layer_idx in range(1, layer_sizes.size()):
@@ -659,11 +698,20 @@ func _apply_activation(x: float) -> float:
 		_:
 			return x
 
-func set_learning_rate(lr: float):
+func set_learning_rate(lr: float) -> void:
 	learning_rate = clamp(lr, 0.001, 1.0)
 
-func reset_training():
+func reset_training() -> void:
 	training_progress = 0.0
 	loss = 1.0
 	epoch = 0
 	time = 0.0
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

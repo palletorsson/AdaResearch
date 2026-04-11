@@ -1,3 +1,13 @@
+# @identity
+# essence: 3 bars, 3 right angles, each corner coherent, the whole impossible -- visual Goedel in 3D
+# desire: a triangle that looks correct from one viewpoint but is geometrically impossible in 3-space
+# critical_parameter: _is_at_sweet_spot -- whether the viewer stands at the one angle where illusion coheres
+# triggers: player position relative to sweet spot; indicator shows when the impossible view aligns
+# emerges: local validity does not guarantee global consistency -- the triangle knows what formal systems learned
+# needs: bar meshes [has]; sweet spot detection [has]; info label [has]; VR viewpoint tracking [missing]
+# relationships: paired with escher_staircase (impossible objects family); feeds Dark_Room_Paradox
+# truth: each corner is valid, the object is not -- incompleteness you can hold in your hands.
+
 # penrose_triangle.gd
 # The impossible triangle - locally coherent, globally impossible
 # A 3D construction that only "works" from specific viewpoints
@@ -27,60 +37,60 @@ func _ready():
 		_create_sweet_spot_indicator()
 
 func _create_impossible_triangle():
-	# The Penrose triangle is built from three bars that appear to connect
-	# but actually don't in 3D space. The illusion works from one viewpoint.
-	
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = Color(0.8, 0.75, 0.65)
-	mat.metallic = 0.3
-	mat.roughness = 0.6
-	
-	# Bar 1 - horizontal bottom
-	var bar1 = _create_bar(Vector3(size, bar_thickness, bar_thickness))
-	bar1.position = Vector3(0, -size * 0.4, 0)
-	bar1.material_override = mat
-	add_child(bar1)
-	_bars.append(bar1)
-	
-	# Bar 2 - vertical right (but positioned to create illusion)
-	var bar2 = _create_bar(Vector3(bar_thickness, size, bar_thickness))
-	bar2.position = Vector3(size * 0.4, 0, -size * 0.3)
-	var mat2 = mat.duplicate()
-	mat2.albedo_color = Color(0.7, 0.65, 0.55)
-	bar2.material_override = mat2
-	add_child(bar2)
-	_bars.append(bar2)
-	
-	# Bar 3 - diagonal connecting (impossible connection)
-	var bar3 = _create_bar(Vector3(bar_thickness, bar_thickness, size))
-	bar3.position = Vector3(-size * 0.35, size * 0.35, -size * 0.15)
-	bar3.rotation_degrees = Vector3(0, 0, -60)
-	var mat3 = mat.duplicate()
-	mat3.albedo_color = Color(0.6, 0.55, 0.45)
-	bar3.material_override = mat3
-	add_child(bar3)
-	_bars.append(bar3)
-	
-	# Corner pieces to sell the illusion
-	_create_corner_piece(Vector3(size * 0.4, -size * 0.4, 0), mat)
-	_create_corner_piece(Vector3(-size * 0.35, -size * 0.4, 0), mat2)
-	_create_corner_piece(Vector3(-size * 0.35, size * 0.35, -size * 0.3), mat3)
+	# Penrose triangle: three beams along the edges of an equilateral triangle.
+	# One joint has a Z-offset so the triangle can't close in 3D,
+	# but from the sweet-spot viewpoint it appears to form a closed shape.
 
-func _create_bar(bar_size: Vector3) -> MeshInstance3D:
+	var h = size * 0.866  # sqrt(3)/2
+	var half = size * 0.5
+
+	# Three vertices of an equilateral triangle in XY plane
+	var v_bl = Vector3(-half, -h / 3.0, 0)       # bottom-left
+	var v_br = Vector3( half, -h / 3.0, 0)       # bottom-right
+	var v_top = Vector3(0, h * 2.0 / 3.0, 0)     # top-center
+
+	# Z-offset at top-center to create the impossible gap
+	var z_gap = size * 0.25
+	var v_top_back = Vector3(v_top.x, v_top.y, -z_gap)
+
+	var mat_a = StandardMaterial3D.new()
+	mat_a.albedo_color = Color(0.85, 0.78, 0.65)
+	mat_a.metallic = 0.35
+	mat_a.roughness = 0.5
+
+	var mat_b = mat_a.duplicate()
+	mat_b.albedo_color = Color(0.72, 0.65, 0.55)
+
+	var mat_c = mat_a.duplicate()
+	mat_c.albedo_color = Color(0.6, 0.55, 0.48)
+
+	# Bar 1 — bottom edge: bottom-left → bottom-right
+	_add_beam(v_bl, v_br, mat_a)
+
+	# Bar 2 — right edge: bottom-right → top-back
+	_add_beam(v_br, v_top_back, mat_b)
+
+	# Bar 3 — left edge: top-front → bottom-left
+	_add_beam(v_top, v_bl, mat_c)
+
+func _add_beam(from: Vector3, to: Vector3, mat: StandardMaterial3D) -> void:
+	var diff = to - from
+	var length = diff.length()
+	if length < 0.001:
+		return
+
 	var mesh_instance = MeshInstance3D.new()
 	var box = BoxMesh.new()
-	box.size = bar_size
+	box.size = Vector3(bar_thickness, bar_thickness, length)
 	mesh_instance.mesh = box
-	return mesh_instance
+	mesh_instance.material_override = mat
 
-func _create_corner_piece(pos: Vector3, mat: StandardMaterial3D):
-	var corner = MeshInstance3D.new()
-	var box = BoxMesh.new()
-	box.size = Vector3(bar_thickness * 1.5, bar_thickness * 1.5, bar_thickness * 1.5)
-	corner.mesh = box
-	corner.position = pos
-	corner.material_override = mat
-	add_child(corner)
+	# Position at midpoint, rotate to align Z-axis with from→to direction
+	mesh_instance.position = (from + to) * 0.5
+	mesh_instance.look_at_from_position(mesh_instance.position, to, Vector3.UP)
+
+	add_child(mesh_instance)
+	_bars.append(mesh_instance)
 
 func _create_info_label():
 	_info_label = Label3D.new()
@@ -132,3 +142,8 @@ func check_viewer_position(viewer_pos: Vector3) -> bool:
 		_info_label.text = "PENROSE TRIANGLE\nLocally coherent\nGlobally impossible"
 	
 	return _is_at_sweet_spot
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

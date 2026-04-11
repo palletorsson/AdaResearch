@@ -63,7 +63,7 @@ var demo_descriptions = [
 ]
 
 # Initialize
-func _ready():
+func _ready() -> void:
 	randomize()
 	
 	# NOTE: Camera3D, DirectionalLight3D, and WorldEnvironment removed —
@@ -85,7 +85,7 @@ func _ready():
 		start_demo(current_demo)
 
 # Create particles for visualization
-func create_particles():
+func create_particles() -> void:
 	# Common material for particles
 	var material = StandardMaterial3D.new()
 	material.metallic = 0.7
@@ -109,7 +109,7 @@ func create_particles():
 		particles.append(particle)
 
 # Create UI elements
-func create_ui():
+func create_ui() -> void:
 	# Create title label
 	var title_label = Label3D.new()
 	title_label.position = Vector3(0, 3.5, 0)
@@ -141,7 +141,7 @@ func create_ui():
 		pass
 
 # Process frame
-func _process(delta):
+func _process(delta: float) -> void:
 	demo_time += delta
 	
 	# Switch demos after display_time
@@ -159,7 +159,7 @@ func _process(delta):
 		4: update_evolutionary_algorithms(delta)
 
 # Start a new demonstration
-func start_demo(demo_index):
+func start_demo(demo_index) -> void:
 	# Update labels
 	labels[0].text = demo_titles[demo_index]
 	labels[1].text = demo_descriptions[demo_index]
@@ -199,7 +199,7 @@ func start_demo(demo_index):
 # Update functions for different randomness demonstrations
 
 # Demo 1: Pure randomness
-func update_pure_random(delta):
+func update_pure_random(delta) -> void:
 	for particle in particles:
 		# Get current velocity
 		var velocity = particle.get_meta("velocity")
@@ -228,7 +228,7 @@ func update_pure_random(delta):
 		material.emission_energy = speed * 0.5
 
 # Demo 2: Perlin noise
-func update_perlin_noise(delta):
+func update_perlin_noise(delta) -> void:
 	var time = Time.get_ticks_msec() / 1000.0
 	
 	for particle in particles:
@@ -258,7 +258,7 @@ func update_perlin_noise(delta):
 		)
 
 # Demo 3: Procedural patterns
-func update_procedural_patterns(delta):
+func update_procedural_patterns(delta) -> void:
 	var time = Time.get_ticks_msec() / 1000.0
 	
 	for i in range(particles.size()):
@@ -298,7 +298,7 @@ func update_procedural_patterns(delta):
 		particle.radius = 0.05 + 0.03 * sin(distance * 2 - time * 2)
 
 # Demo 4: Emergent behavior (flocking/swarming)
-func update_emergent_behavior(delta):
+func update_emergent_behavior(delta) -> void:
 	var time = Time.get_ticks_msec() / 1000.0
 	
 	# First pass: calculate center and average velocity
@@ -441,3 +441,12 @@ func update_evolutionary_algorithms(delta):
 # (Godot 4 has built-in noise functions, but this is provided as an example)
 func noise3(x, y, z):
 	return sin(x * 7 + z * 3) * cos(y * 5 + x * 2) * sin(z * 11 + y * 7)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

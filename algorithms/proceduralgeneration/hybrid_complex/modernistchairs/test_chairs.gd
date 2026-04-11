@@ -2,7 +2,7 @@
 # Simple test script to verify chair generation
 extends Node3D
 
-func _ready():
+func _ready() -> void:
 	print("🪑 Testing Modernist Chair Generation...")
 	
 	# Test material system
@@ -33,101 +33,11 @@ func _ready():
 	print("🎉 All chairs generated successfully!")
 	print("📝 Scene ready for VR exploration")
 
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+func apply_grid_config(config: Dictionary) -> void:
+	pass

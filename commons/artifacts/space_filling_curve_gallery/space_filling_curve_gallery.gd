@@ -1,6 +1,16 @@
 extends Node3D
 class_name SpaceFillingCurveGallery
 
+# @identity
+# essence: three L-systems (Hilbert, Peano, Moore) → turtle → pixel path → floor triptych
+# desire: To lay three space-filling curves side by side on the floor — walk over them, compare their strategies for visiting every point
+# critical_parameter: iteration count per curve — controls density and visual complexity of each panel
+# triggers: Each curve fills its panel differently — Hilbert (recursive quadrants), Peano (9-fold), Moore (closed loop Hilbert variant)
+# emerges: Visual comparison reveals that different grammars can achieve the same goal (space-filling) through different strategies
+# needs: VR iteration controls [missing], Label3D [has per panel]
+# relationships: Pairs with Hilbert3D (2D gallery vs 3D walkthrough). Feeds into LSystems_Grammars_And_Curves.
+# truth: Three grammars, one goal — every point touched, no crossing, each path a different philosophy of exhaustion.
+
 ## Space-filling curve triptych — Hilbert, Peano, and Moore curves side by side
 ## on a floor-lying QuadMesh, generated via L-system rules and turtle graphics.
 

@@ -87,3 +87,6 @@ func _build_basis(frame: Dictionary, previous_frame: Dictionary) -> Basis:
 	var right := normal.cross(tangent).normalized()
 	normal = tangent.cross(right).normalized()
 	return Basis(right, normal, tangent)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

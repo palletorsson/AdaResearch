@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dp16jbaa5uj0v" path="res://commons/scenes/mapobjects/PlayerBoundsCheck.gd" id="4_bounds_script"]
 [ext_resource type="Shader" uid="uid://ojj0l7p4sm21" path="res://commons/resourses/shaders/worldfloor.gdshader" id="5_al13m"]
 [ext_resource type="Script" uid="uid://nwo7del1p6np" path="res://commons/audio/components/AudioLoadingIndicator.gd" id="6_loading"]
+[ext_resource type="PackedScene" uid="uid://b7gpc47eqau2t" path="res://commons/primitives/sphere/dark_sphere.tscn" id="7_darksphere"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_al13m"]
 sky_top_color = Color(0.684412, 0.190585, 0.698947, 1)
@@ -46,6 +47,12 @@ environment = SubResource("Environment_q35sa")
 [node name="XROrigin3D" parent="." index="2" groups=["player_body"]]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.8, 0)
 
+[node name="FunctionPickup" parent="XROrigin3D/LeftHand/XRToolsCollisionHand" parent_id_path=PackedInt32Array(100554498) index="1" unique_id=1366509493]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, -0.05, 0.1)
+
+[node name="FunctionPickup" parent="XROrigin3D/RightHand/XRToolsCollisionHand" parent_id_path=PackedInt32Array(1055388144) index="3" unique_id=1831217974]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, -0.05, 0.1)
+
 [node name="Label3D" parent="." index="3" unique_id=645111340]
 visible = false
 text = "Base - Grid"
@@ -70,3 +77,5 @@ box_bounds = Vector3(100, 50, 100)
 script = ExtResource("6_loading")
 label_offset = Vector3(0, 0.3, -1.2)
 label_font_size = 24
+
+[node name="DarkSphere" parent="." index="10" unique_id=92868398 instance=ExtResource("7_darksphere")]

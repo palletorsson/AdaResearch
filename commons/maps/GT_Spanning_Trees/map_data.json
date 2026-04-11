@@ -1,66 +1,67 @@
 {
   "map_info": {
-    "name": "Spanning Tree Garden",
-    "lookup_name": "GT_Spanning_Trees",
-    "description": "Scattered platforms at varying heights â€” nodes in a minimum spanning tree. The shortest connections between them are the paths you walk.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 9,
-      "depth": 9,
-      "max_height": 4
-    },
-    "metadata": {
-      "difficulty": "advanced",
-      "category": "graphtheory",
-      "estimated_time": "4-6 minutes",
-      "spatial_temperature": 0.75,
-      "design_notes": "Open void floor (h0) with scattered platform islands at heights 1-4. Narrow walkways (h1 width-1) connect them like edges in a spanning tree. Single MST artifact on central elevated platform."
-    }
+      "name": "Spanning Tree Garden",
+      "lookup_name": "GT_Spanning_Trees",
+      "description": "Scattered platforms at varying heights â€” nodes in a minimum spanning tree. The shortest connections between them are the paths you walk.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 9,
+          "depth": 9,
+          "max_height": 4
+      },
+      "metadata": {
+          "difficulty": "advanced",
+          "category": "graphtheory",
+          "estimated_time": "4-6 minutes",
+          "spatial_temperature": 0.75,
+          "design_notes": "Open void floor (h0) with scattered platform islands at heights 1-4. Narrow walkways (h1 width-1) connect them like edges in a spanning tree. Single MST artifact on central elevated platform."
+      },
+      "title": "The Lightest Skeleton"
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next",
+          "description": "Continue to next step",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
   },
   "layers": {
     "structure": [
-      [ "1", "1", "0", "0", "0", "0", "0", "2", "2" ],
-      [ "1", "1", "1", "0", "0", "0", "0", "2", "2" ],
-      [ "0", "0", "1", "0", "0", "0", "0", "0", "0" ],
-      [ "0", "0", "1", "0", "0", "3", "3", "0", "0" ],
-      [ "0", "0", "1", "1", "1", "3", "3", "0", "0" ],
-      [ "0", "0", "0", "0", "0", "3", "0", "0", "0" ],
-      [ "4", "4", "0", "0", "0", "1", "1", "1", "1" ],
-      [ "4", "4", "0", "0", "0", "1", "1", "0", "1" ],
-      [ "0", "0", "0", "0", "0", "0", "1", "1", "1" ]
+      ["1", "1", "0", "0", "0", "0", "0", "2", "2"],
+      ["1", "1", "1", "0", "0", "0", "0", "2", "2"],
+      ["0", "0", "1", "0", "0", "0", "0", "0", "0"],
+      ["0", "0", "1", "0", "0", "3", "3", "0", "0"],
+      ["0", "0", "1", "1", "1", "3", "3", "0", "0"],
+      ["0", "0", "0", "0", "0", "3", "0", "0", "0"],
+      ["4", "4", "0", "0", "0", "1", "1", "1", "1"],
+      ["4", "4", "0", "0", "0", "1", "1", "0", "1"],
+      ["0", "0", "0", "0", "0", "0", "1", "1", "1"]
     ],
     "utilities": [
-      [ "s", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", "an", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", "wp", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", "wp:180", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", "t", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", "sp", " " ]
+      ["s", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", "an", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "wp", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "wp:180", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", "t", " "],
+      [" ", " ", " ", " ", " ", " ", " ", "sp", " "]
     ],
     "interactables": [
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", "mst_visualization:0:2:0.6", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ],
-      [ " ", " ", " ", " ", " ", " ", " ", " ", " " ]
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "mst_visualization:0:2:0.6", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     ]
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
   }
 }

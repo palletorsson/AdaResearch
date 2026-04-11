@@ -1,0 +1,63 @@
+{
+  "map_info": {
+      "name": "Flow Fields",
+      "lookup_name": "SwarmIntelligence_FlowFields",
+      "description": "An open channel with a central ridge suggesting directional flow. Vector fields visualize particle currents.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+          "width": 10,
+          "depth": 8,
+          "max_height": 1
+      },
+      "metadata": {
+          "difficulty": "intermediate",
+          "category": "swarm_intelligence",
+          "spatial_temperature": 0.5,
+          "design_notes": "Wide channel with central elevation ridge. Side walls pinch inward mid-room creating flow feeling."
+      },
+      "title": "Flow Fields"
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next",
+          "description": "Continue to next step",
+          "properties": {
+              "action": "next_in_sequence"
+          }
+      }
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "0", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
+    ],
+    "utilities": [
+      ["s", "an", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "wp", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", "t", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", "sp", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", "FlowFieldMain", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+    ]
+  }
+}

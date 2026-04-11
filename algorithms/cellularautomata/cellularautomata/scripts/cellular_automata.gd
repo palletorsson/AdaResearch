@@ -1,4 +1,14 @@
-﻿extends Node3D
+# @identity
+# essence: 1D elementary cellular automaton on a texture — Wolfram rules applied to a scrolling image. Three-neighbor lookup, 8-bit rule encoding, 256 possible universes. Time flows as pixel rows.
+# desire: To scroll when grabbed — grab_paper signals toggle scroll_on, making the automaton advance. Rules mutate stochastically (rule_change_chance) producing mid-stream phase transitions.
+# critical_parameter: start_rule (Wolfram number 0-255) — determines which of the 256 possible 1D automata runs; rule_change_chance — probability of spontaneous rule mutation per step
+# triggers: grab_paper_grabbed → scroll_on = true, automaton advances; grab_paper_dropped → scroll_on = false; timer → _update_automaton each update_interval
+# emerges: Chaotic or structured patterns depending on the rule — Rule 30 produces noise, Rule 110 produces computation, Rule 90 produces Sierpinski triangles. Rule switches create visible phase boundaries in the scrolling texture.
+# needs: VR grab interaction [has] via GrabPaper parent, rule selector UI [missing], zoom control [missing]
+# relationships: The grabbable paper version of the 1D CA — child of cellular_automata_grabable.tscn, which wraps it in a GrabPaper with edge profile. Sibling to cellular_automata_2d (grid life) and rule_30_110 (gravity visualization).
+# truth: Eight bits encode a universe. The distance between noise and thought is one lookup table — same input format, same three neighbors, radically different outputs.
+
+extends Node3D
 
 # ==============================
 # CONFIGURATION PARAMETERS
@@ -27,7 +37,7 @@ var scroll_on = false  # Ensures scrolling happens only when grabbed
 # INITIALIZATION
 # ==============================
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	_set_rules(start_rule)
 	
@@ -53,7 +63,7 @@ func _ready():
 # AUTOMATA UPDATE LOGIC
 # ==============================
 
-func _set_rules(rule_value: int):
+func _set_rules(rule_value: int) -> void:
 	""" Converts the rule number to an 8-bit binary array. """
 	rule_set.clear()
 	var binary_string = _int_to_binary(rule_value, 8)
@@ -76,7 +86,7 @@ func _update_automaton():
 # ROW GENERATION
 # ==============================
 
-func _generate_next_row():
+func _generate_next_row() -> void:
 	""" Generates the next row of the automaton and scrolls the history. """
 	history.append(current_row.duplicate())
 	if history.size() > img_height:
@@ -147,3 +157,6 @@ func _on_grab_paper_grabbed(_pickable: Variant, by: Variant) -> void:
 func _on_grab_paper_dropped(_pickable: Variant) -> void:
 	""" Stops scrolling when the paper is released. """
 	scroll_on = false
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

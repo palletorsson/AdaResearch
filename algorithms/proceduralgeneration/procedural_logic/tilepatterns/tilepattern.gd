@@ -1,4 +1,4 @@
-extends Node2D
+extends Node3D
 
 # Pattern parameters
 var P = {
@@ -32,256 +32,267 @@ var directions = [
 ]
 
 var points_data = []
+var pattern_timer: Timer = null
+var mesh_instance: MeshInstance3D = null
+var line_material: StandardMaterial3D = null
 
-var pattern_timer = null
+# Panel dimensions (wall-mounted, XY plane)
+var panel_width: float = 0.7
+var panel_height: float = 0.7
 
-func _ready():
+func _ready() -> void:
 	randomize()
+
+	# Create line material — unshaded with vertex colors and emission
+	line_material = StandardMaterial3D.new()
+	line_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	line_material.vertex_color_use_as_albedo = true
+	line_material.emission_enabled = true
+	line_material.emission = Color.WHITE
+	line_material.emission_energy_multiplier = 0.6
+
+	# Create mesh instance for ImmediateMesh line art
+	mesh_instance = MeshInstance3D.new()
+	mesh_instance.name = "TilePatternMesh"
+	add_child(mesh_instance)
+
+	# Label
+	var label = Label3D.new()
+	label.text = "Tile Patterns"
+	label.font_size = 48
+	label.pixel_size = 0.001
+	label.position = Vector3(0.0, panel_height * 0.5 + 0.04, 0.0)
+	label.modulate = Color.WHITE
+	add_child(label)
+
 	generate_points_data()
-	
-	# Set up a timer to shift patterns down
+
+	# Timer to shift patterns down
 	pattern_timer = Timer.new()
 	add_child(pattern_timer)
-	pattern_timer.wait_time = 0.5 # Shift patterns every 3 seconds
+	pattern_timer.wait_time = 0.5
 	pattern_timer.connect("timeout", Callable(self, "shift_patterns_down"))
 	pattern_timer.start()
 
-func _draw():
-	var window_size = get_viewport_rect().size
-	var m = min(window_size.x, window_size.y) * 0.85
-	var canvas_offset = Vector2((window_size.x - m) / 2, (window_size.y - m) / 2)
-	
-	# Draw background
-	draw_rect(Rect2(0, 0, window_size.x, window_size.y), Color("#121212"))
-	
-	var block_step = m / P.tiles
+func _rebuild_mesh() -> void:
+	var im = ImmediateMesh.new()
+
+	var block_step = panel_width / P.tiles
 	var padding = block_step * P.padding
-	var block_size = block_step - padding * 2
-	
+	var block_size = block_step - padding * 2.0
+
+	# Offset so the grid is centred on the node origin
+	var origin_offset = Vector2(-panel_width * 0.5, -panel_height * 0.5)
+
+	im.surface_begin(Mesh.PRIMITIVE_LINES, line_material)
+
 	for i in range(points_data.size()):
-		var x = i % P.tiles
-		var y = floor(i / P.tiles)
-		
+		var col = i % P.tiles
+		var row = int(floor(float(i) / P.tiles))
+
 		var pos = Vector2(
-			canvas_offset.x + x * block_step + padding,
-			canvas_offset.y + y * block_step + padding
-		)
-		
-		draw_mirrored_quadrants(points_data[i], block_size, pos)
-
-func get_points():
-	var x = int(P.startPoint.x)
-	var y = int(P.startPoint.y)
-	var points = [Vector2(x, y)]
-	var edges = {}
-	var x_max = P.innerGrid
-	var y_max = P.innerGrid
-	var colors = []  # Array to store colors for each line segment
-	
-	# Helper function to get or initialize edges for a position
-	var get_edges = func(x, y):
-		var key = str(x) + "-" + str(y)
-		if not edges.has(key):
-			edges[key] = []
-		return edges[key]
-	
-	var i = 0
-	var points_count = 0
-	var need_to_push_point1 = false
-	
-	while i < P.edgesAttempts and points_count < P.edgesMax:
-		var visited = get_edges.call(x, y)
-		var options = []
-		
-		# Filter valid directions
-		for dir in directions:
-			var new_x = x + int(dir.x)
-			var new_y = y + int(dir.y)
-			
-			# Check boundaries
-			if new_x < 0 or new_x > x_max:
-				continue
-			if new_y < 0 or new_y > y_max:
-				continue
-				
-			# Check if already visited
-			var already_visited = false
-			for v_pos in visited:
-				if v_pos.x == new_x and v_pos.y == new_y:
-					already_visited = true
-					break
-					
-			if not already_visited:
-				options.append(dir)
-		
-		if options.size() == 0:
-			x = randi() % (x_max + 1)
-			y = randi() % (y_max + 1)
-			i += 1
-			points.append(null)  # Equivalent to false in the original code
-			points.append(Vector2(x, y))
-			colors.append(null)  # No color for breaks
-			continue
-		
-		if need_to_push_point1:
-			points.append(Vector2(x, y))
-			need_to_push_point1 = false
-			points_count += 1
-		
-		var prev_x = x
-		var prev_y = y
-		var dir = options[randi() % options.size()]
-		x += int(dir.x)
-		y += int(dir.y)
-		
-		visited.append(Vector2(x, y))
-		get_edges.call(x, y).append(Vector2(prev_x, prev_y))
-		
-		points.append(Vector2(x, y))
-		# Add a random color for this line segment
-		colors.append(P.colors[randi() % P.colors.size()])
-		points_count += 1
-		i += 1
-		
-		if i % P.edgesBreak == 0:
-			points.append(null)  # Equivalent to false in the original code
-			colors.append(null)  # No color for breaks
-			x = randi() % (x_max + 1)
-			y = randi() % (y_max + 1)
-			need_to_push_point1 = true
-	
-	return {"points": points, "edges": edges, "colors": colors}
-
-func quadrant(points, colors, size, offset):
-	var step = size / P.innerGrid
-	
-	for i in range(1, points.size()):
-		var p1 = points[i - 1]
-		var p2 = points[i]
-		
-		if p1 == null or p2 == null:
-			continue
-			
-		var x1 = p1.x * step
-		var y1 = p1.y * step
-		var x2 = p2.x * step
-		var y2 = p2.y * step
-		
-		# Use the color assigned to this line segment or default to white if none
-		var line_color = Color.WHITE
-		if i <= colors.size() and colors[i-1] != null:
-			line_color = colors[i-1]
-		
-		draw_line(
-			Vector2(offset.x + x1, offset.y + y1),
-			Vector2(offset.x + x2, offset.y + y2),
-			line_color,
-			3.0
+			origin_offset.x + col * block_step + padding,
+			origin_offset.y + row * block_step + padding
 		)
 
-func draw_mirrored_quadrants(points_data, size, offset):
-	var points = points_data.points
-	var colors = points_data.colors
-	var step = size / 2
+		_draw_mirrored_quadrants_im(im, points_data[i], block_size, pos)
+
+	im.surface_end()
+	mesh_instance.mesh = im
+
+func _draw_mirrored_quadrants_im(im: ImmediateMesh, pd: Dictionary, size: float, offset: Vector2) -> void:
+	var points = pd.points
+	var colors = pd.colors
+	var step = size / 2.0
 	var center = Vector2(offset.x + step, offset.y + step)
-	
+
 	if P.symmetry == "reflect":
-		# Create copies of the points and colors arrays to avoid modifying the originals
 		var points_copy = points.duplicate()
-		
-		# Original quadrant
-		quadrant(points_copy, colors, step, center)
-		
-		# Reflect vertically
+		_quadrant_im(im, points_copy, colors, step, center)
+
 		var points_reflect_v = []
 		for p in points_copy:
 			if p == null:
 				points_reflect_v.append(null)
 			else:
 				points_reflect_v.append(Vector2(p.x, -p.y))
-		quadrant(points_reflect_v, colors, step, center)
-		
-		# Reflect horizontally
+		_quadrant_im(im, points_reflect_v, colors, step, center)
+
 		var points_reflect_h = []
 		for p in points_copy:
 			if p == null:
 				points_reflect_h.append(null)
 			else:
 				points_reflect_h.append(Vector2(-p.x, p.y))
-		quadrant(points_reflect_h, colors, step, center)
-		
-		# Reflect both (diagonal)
+		_quadrant_im(im, points_reflect_h, colors, step, center)
+
 		var points_reflect_both = []
 		for p in points_copy:
 			if p == null:
 				points_reflect_both.append(null)
 			else:
 				points_reflect_both.append(Vector2(-p.x, -p.y))
-		quadrant(points_reflect_both, colors, step, center)
-				
+		_quadrant_im(im, points_reflect_both, colors, step, center)
+
 	elif P.symmetry == "rotate":
-		# Original quadrant
-		quadrant(points, colors, step, center)
-		
-		# Rotate 90 degrees
+		_quadrant_im(im, points, colors, step, center)
+
 		var rotated_points = []
 		for p in points:
 			if p == null:
 				rotated_points.append(null)
 			else:
 				rotated_points.append(Vector2(-p.y, p.x))
-		quadrant(rotated_points, colors, step, center)
-		
-		# Rotate 180 degrees
+		_quadrant_im(im, rotated_points, colors, step, center)
+
 		rotated_points = []
 		for p in points:
 			if p == null:
 				rotated_points.append(null)
 			else:
 				rotated_points.append(Vector2(-p.x, -p.y))
-		quadrant(rotated_points, colors, step, center)
-		
-		# Rotate 270 degrees
+		_quadrant_im(im, rotated_points, colors, step, center)
+
 		rotated_points = []
 		for p in points:
 			if p == null:
 				rotated_points.append(null)
 			else:
 				rotated_points.append(Vector2(p.y, -p.x))
-		quadrant(rotated_points, colors, step, center)
+		_quadrant_im(im, rotated_points, colors, step, center)
 
-func generate_points_data():
+func _quadrant_im(im: ImmediateMesh, points: Array, colors: Array, size: float, offset: Vector2) -> void:
+	var step = size / P.innerGrid
+
+	for i in range(1, points.size()):
+		var p1 = points[i - 1]
+		var p2 = points[i]
+
+		if p1 == null or p2 == null:
+			continue
+
+		var x1 = p1.x * step
+		var y1 = p1.y * step
+		var x2 = p2.x * step
+		var y2 = p2.y * step
+
+		var line_color = Color.WHITE
+		if i <= colors.size() and colors[i - 1] != null:
+			line_color = colors[i - 1]
+
+		# Map 2D offset+point to 3D on XY plane (z=0)
+		im.surface_set_color(line_color)
+		im.surface_add_vertex(Vector3(offset.x + x1, -(offset.y + y1), 0.0))
+		im.surface_set_color(line_color)
+		im.surface_add_vertex(Vector3(offset.x + x2, -(offset.y + y2), 0.0))
+
+func get_points() -> Dictionary:
+	var x = int(P.startPoint.x)
+	var y = int(P.startPoint.y)
+	var points = [Vector2(x, y)]
+	var edges = {}
+	var x_max = P.innerGrid
+	var y_max = P.innerGrid
+	var colors = []
+
+	var get_edges = func(ex, ey):
+		var key = str(ex) + "-" + str(ey)
+		if not edges.has(key):
+			edges[key] = []
+		return edges[key]
+
+	var i = 0
+	var points_count = 0
+	var need_to_push_point1 = false
+
+	while i < P.edgesAttempts and points_count < P.edgesMax:
+		var visited = get_edges.call(x, y)
+		var options = []
+
+		for dir in directions:
+			var new_x = x + int(dir.x)
+			var new_y = y + int(dir.y)
+
+			if new_x < 0 or new_x > x_max:
+				continue
+			if new_y < 0 or new_y > y_max:
+				continue
+
+			var already_visited = false
+			for v_pos in visited:
+				if v_pos.x == new_x and v_pos.y == new_y:
+					already_visited = true
+					break
+
+			if not already_visited:
+				options.append(dir)
+
+		if options.size() == 0:
+			x = randi() % (x_max + 1)
+			y = randi() % (y_max + 1)
+			i += 1
+			points.append(null)
+			points.append(Vector2(x, y))
+			colors.append(null)
+			continue
+
+		if need_to_push_point1:
+			points.append(Vector2(x, y))
+			need_to_push_point1 = false
+			points_count += 1
+
+		var prev_x = x
+		var prev_y = y
+		var dir = options[randi() % options.size()]
+		x += int(dir.x)
+		y += int(dir.y)
+
+		visited.append(Vector2(x, y))
+		get_edges.call(x, y).append(Vector2(prev_x, prev_y))
+
+		points.append(Vector2(x, y))
+		colors.append(P.colors[randi() % P.colors.size()])
+		points_count += 1
+		i += 1
+
+		if i % P.edgesBreak == 0:
+			points.append(null)
+			colors.append(null)
+			x = randi() % (x_max + 1)
+			y = randi() % (y_max + 1)
+			need_to_push_point1 = true
+
+	return {"points": points, "edges": edges, "colors": colors}
+
+func generate_points_data() -> void:
 	points_data = []
 	for i in range(P.tiles * P.tiles):
 		points_data.append(get_points())
-	queue_redraw()
-	
-func shift_patterns_down():
-	# Save the current points data size
+	_rebuild_mesh()
+
+func shift_patterns_down() -> void:
 	var grid_width = P.tiles
 	var grid_height = P.tiles
-	
-	# Shift existing rows down (removing the bottom row)
+
 	var new_points_data = []
-	
+
 	# Generate a new top row
 	for i in range(grid_width):
 		new_points_data.append(get_points())
-	
-	# Add the existing rows (except the bottom row)
+
+	# Add existing rows except the bottom row
 	for y in range(grid_height - 1):
 		for x in range(grid_width):
 			var index = y * grid_width + x
 			new_points_data.append(points_data[index])
-	
-	# Update points data
+
 	points_data = new_points_data
-	queue_redraw()
+	_rebuild_mesh()
 
-func _input(event):
-	if event is InputEventMouseButton and event.pressed:
-		generate_points_data()
+func apply_grid_config(config: Dictionary) -> void:
+	pass
 
-func _notification(what):
-	if what == NOTIFICATION_WM_SIZE_CHANGED:
-		queue_redraw()
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()

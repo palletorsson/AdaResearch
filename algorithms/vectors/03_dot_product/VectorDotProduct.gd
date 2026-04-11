@@ -1,4 +1,4 @@
-﻿extends "res://algorithms/vectors/shared/vector_scene_base.gd"
+extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 const HingePanelScript = preload("res://algorithms/vectors/shared/gadgets/hinge_panel_gadget.gd")
 
@@ -24,7 +24,7 @@ var _cached_rej_nodes: Dictionary = {}
 var _time_since_last_text_update: float = 0.0
 const TEXT_UPDATE_INTERVAL: float = 0.1 # 10Hz
 
-func _ready():
+func _ready() -> void:
 	super._ready()
 	# Half-size for exhibition display
 	scale = Vector3(0.5, 0.5, 0.5)
@@ -57,7 +57,7 @@ func _ready():
 	info_label = create_info_panel("Dot Product", Vector3(0, 2.5, -0.8), Vector2(2.4, 1.0), "A . B = |A||B|cos(theta)", "Projection and angle")
 	angle_label = create_info_panel("theta", Vector3(0.0, 0.22, 0.0))
 
-func _process(delta):
+func _process(delta: float) -> void:
 	var a_vec: Vector3 = _get_vector_fast(vector_a, _cached_vector_a_nodes)
 	var b_vec: Vector3 = _get_vector_fast(vector_b, _cached_vector_b_nodes)
 	var dot: float = a_vec.dot(b_vec)
@@ -104,7 +104,7 @@ func _process(delta):
 		angle_label.text = "theta ~= %.1f deg" % rad_to_deg(theta)
 		_update_info(a_vec, b_vec, dot, proj, rej, theta, cos_theta)
 
-func _update_info(a_vec: Vector3, b_vec: Vector3, dot: float, proj: Vector3, rej: Vector3, theta: float, cos_theta: float):
+func _update_info(a_vec: Vector3, b_vec: Vector3, dot: float, proj: Vector3, rej: Vector3, theta: float, cos_theta: float) -> void:
 	var builder := []
 	builder.append("a = (%.2f, %.2f, %.2f)" % [a_vec.x, a_vec.y, a_vec.z])
 	builder.append("b = (%.2f, %.2f, %.2f)" % [b_vec.x, b_vec.y, b_vec.z])
@@ -137,7 +137,7 @@ func _create_angle_arc() -> MultiMeshInstance3D:
 	mmi.material_override = mat
 	return mmi
 
-func _update_angle_arc(a: Vector3, b: Vector3):
+func _update_angle_arc(a: Vector3, b: Vector3) -> void:
 	var mag_a = a.length()
 	var mag_b = b.length()
 	if mag_a < 0.001 or mag_b < 0.001:
@@ -173,7 +173,7 @@ func _create_projection_dot() -> MeshInstance3D:
 
 # --- Caching Helpers (Local Implementation) ---
 
-func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary):
+func _cache_vector_nodes(arrow: Node3D, cache_dict: Dictionary) -> void:
 	if arrow == null: return
 	cache_dict["start"] = arrow.get_node_or_null("lineContainer/GrabSphere")
 	cache_dict["end"] = arrow.get_node_or_null("lineContainer/GrabSphere2")
@@ -188,10 +188,19 @@ func _get_vector_fast(arrow: Node3D, cache_dict: Dictionary) -> Vector3:
 		return arrow.get_vector()
 	return Vector3.ZERO
 
-func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary):
+func _update_vector_fast(_arrow: Node3D, vector: Vector3, cache_dict: Dictionary) -> void:
 	var end_node: Node3D = cache_dict.get("end")
 	if end_node:
 		end_node.position = vector * SCENE_SCALE
 	var line_container: Node3D = cache_dict.get("line_container")
 	if line_container and line_container.has_method("refresh_connections"):
 		line_container.refresh_connections()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

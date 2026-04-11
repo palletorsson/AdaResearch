@@ -9,7 +9,7 @@ extends Node3D
 
 var noise := FastNoiseLite.new()
 
-func _ready():
+func _ready() -> void:
 	# Configure noise
 	noise.noise_type = FastNoiseLite.TYPE_PERLIN     # or TYPE_SIMPLEX, etc.
 	noise.frequency = frequency
@@ -44,3 +44,6 @@ func _sample_centered_volume() -> PackedFloat32Array:
 				i += 1
 
 	return data
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -18,13 +18,13 @@ var query_right := 3
 var update_index := 0
 var update_value := 0
 
-func _ready():
+func _ready() -> void:
 	# Create necessary containers if they don't exist
 	ensure_containers_exist()
 	build_segment_tree()
 	tree_size = segment_tree.size()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	query_timer += delta
 	update_timer += delta
@@ -34,7 +34,7 @@ func _process(delta):
 	demonstrate_range_queries()
 	show_update_operations()
 
-func ensure_containers_exist():
+func ensure_containers_exist() -> void:
 	"""Ensure all required containers exist in the scene"""
 	var containers = ["TreeStructure", "ArrayRepresentation", "RangeQueries", "UpdateOperations"]
 	
@@ -44,12 +44,12 @@ func ensure_containers_exist():
 			container.name = container_name
 			add_child(container)
 
-func build_segment_tree():
+func build_segment_tree() -> void:
 	var n = array_data.size()
 	segment_tree.resize(4 * n)  # Segment tree needs 4n space
 	build_tree(0, 0, n - 1)
 
-func build_tree(node: int, start: int, end: int):
+func build_tree(node: int, start: int, end: int) -> void:
 	if start == end:
 		# Leaf node
 		segment_tree[node] = array_data[start]
@@ -81,7 +81,7 @@ func range_query(node: int, start: int, end: int, left: int, right: int) -> int:
 	
 	return left_sum + right_sum
 
-func update_tree(node: int, start: int, end: int, index: int, value: int):
+func update_tree(node: int, start: int, end: int, index: int, value: int) -> void:
 	if start == end:
 		# Leaf node
 		array_data[index] = value
@@ -99,7 +99,7 @@ func update_tree(node: int, start: int, end: int, index: int, value: int):
 		# Update internal node
 		segment_tree[node] = segment_tree[left_child] + segment_tree[right_child]
 
-func animate_tree_structure():
+func animate_tree_structure() -> void:
 	var container = get_node_or_null("TreeStructure")
 	
 	# Clear previous visualization
@@ -119,7 +119,7 @@ func get_tree_height() -> int:
 		height += 1
 	return height + 1
 
-func create_tree_nodes(container: Node3D, node_index: int, level: int, position_index: int, max_levels: int, total_width: float):
+func create_tree_nodes(container: Node3D, node_index: int, level: int, position_index: int, max_levels: int, total_width: float) -> void:
 	if node_index >= segment_tree.size() or segment_tree[node_index] == 0:
 		return
 	
@@ -196,7 +196,7 @@ func create_tree_nodes(container: Node3D, node_index: int, level: int, position_
 		
 		create_tree_nodes(container, right_child, level + 1, position_index * 2 + 1, max_levels, total_width)
 
-func create_tree_connection(container: Node3D, from: Vector3, to: Vector3):
+func create_tree_connection(container: Node3D, from: Vector3, to: Vector3) -> void:
 	var distance = from.distance_to(to)
 	var connection = CSGCylinder3D.new()
 	# FIXED: Use proper Godot 4 CSGCylinder3D properties
@@ -213,7 +213,7 @@ func create_tree_connection(container: Node3D, from: Vector3, to: Vector3):
 	
 	container.add_child(connection)
 
-func show_array_representation():
+func show_array_representation() -> void:
 	var container = get_node_or_null("ArrayRepresentation")
 	
 	# Clear previous visualization
@@ -248,7 +248,7 @@ func show_array_representation():
 		
 		container.add_child(index_label)
 
-func demonstrate_range_queries():
+func demonstrate_range_queries() -> void:
 	var container = get_node_or_null("RangeQueries")
 	
 	# Clear previous visualization
@@ -301,7 +301,7 @@ func demonstrate_range_queries():
 	
 	container.add_child(result_display)
 
-func show_update_operations():
+func show_update_operations() -> void:
 	var container = get_node_or_null("UpdateOperations")
 	
 	# Clear previous visualization
@@ -356,3 +356,12 @@ func show_update_operations():
 	propagation_effect.material_override = effect_material
 	
 	container.add_child(propagation_effect)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

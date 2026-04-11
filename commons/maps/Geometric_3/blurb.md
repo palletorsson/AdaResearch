@@ -1,5 +1,5 @@
-Symmetry is gone. The grid remains but refuses to repeat itself. Irregular voids cut through the terrain at odd intervals. Paths wind where they shouldn't. Heights shift without warning — one tile at ground level, the next at four, the drop beside it bottomless.
+Nothing lines up. Heights of one, two, three, four — scattered without symmetry across a 10x10 grid. Voids interrupt the floor at irregular intervals. The paths that remain wind through terrain that refuses to be simple.
 
-This is geometry after the easy cases. No mirrored halves to exploit, no patterns to memorize. Each step requires reading the local structure cold: which surfaces connect, which gaps are jumpable, which heights block line of sight. The terrain is a spatial argument with no shorthand.
+This is geometry after the clean examples. Asymmetric. Ragged. The kind of input that breaks algorithms designed for textbook cases. Your body has to solve the navigation problem in real time — which ramp connects to which platform, which gap is too wide, which height transition requires a different route entirely.
 
-Deterministic space, fully specified, zero ambiguity — and yet it resists quick comprehension. Proof that exact description and immediate legibility are different things. Order doesn't guarantee transparency. Sometimes the most precisely defined structures are the hardest to see through.
+Irregular exactitude: the room is precisely defined, every cell deliberate, but the pattern resists compression. Computational geometry must work here too — not just in the symmetric cases, but in the messy, lopsided, actually-existing world.

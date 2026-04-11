@@ -5,6 +5,17 @@ extends Node3D
 # Parametric curves formed by combining perpendicular harmonic motions
 # X = A * sin(a*t + δ), Y = B * sin(b*t), Z = C * sin(c*t)
 
+
+# @identity
+# essence: (x,y,z) = (A_x*sin(a*t+delta), A_y*sin(b*t), A_z*sin(c*t)) — parametric Lissajous
+# desire: Watch a glowing particle trace beautiful closed curves defined by frequency ratios
+# critical_parameter: freq_ratio_x / freq_ratio_y — rational ratios close the curve, irrational ratios fill space
+# triggers: time drives the parametric position; preset selection switches between classic ratio combinations
+# emerges: complex geometric figures from the interference of perpendicular oscillations
+# needs: VR frequency ratio control [missing], 3D rotation [has]
+# relationships: depends on ImmediateMesh trail rendering; contrasts with SphericalHarmonics (planar vs spherical oscillation); unlocks frequency ratio visualization
+# truth: The ratio of two frequencies determines whether a curve closes or wanders forever.
+
 @export_group("Frequency Ratios")
 @export var freq_ratio_x: float = 3.0  # a in the equation
 @export var freq_ratio_y: float = 2.0  # b in the equation
@@ -209,3 +220,12 @@ func set_preset(preset_name: String) -> void:
 			phase_shift = 0.0
 
 	_generate_full_curve()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

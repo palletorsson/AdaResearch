@@ -61,6 +61,8 @@ func initialize(grid_parent: Node3D, cube_template: Node3D, settings: Dictionary
 	# Only update base_cube if the template is valid
 	if is_instance_valid(cube_template):
 		base_cube = cube_template
+		# Always hide the template cube — it's only used for mesh/material extraction
+		base_cube.visible = false
 
 	# Apply settings
 	cube_size = settings.get("cube_size", 1.0)
@@ -647,20 +649,20 @@ func get_all_cube_positions() -> Array:
 # Get all cubes from the group
 # Returns collision bodies (StaticBody3D) that represent each cube
 func get_all_cubes() -> Array[Node]:
-	"""Returns all cube collision bodies in the grid_cubes group"""
+	## Returns all cube collision bodies in the grid_cubes group
 	if not parent_node or not parent_node.get_tree():
 		return []
 	return parent_node.get_tree().get_nodes_in_group(CUBE_GROUP_NAME)
 
 # Get cubes group name
 func get_cubes_group_name() -> String:
-	"""Returns the group name used for all grid cubes"""
+	## Returns the group name used for all grid cubes
 	return CUBE_GROUP_NAME
 
 # Add a cube dynamically at the specified position
 # This method allows algorithms to add cubes after initial generation
 func add_cube_at(x: int, y: int, z: int) -> bool:
-	"""Add a cube at the specified grid coordinates. Returns true if successful."""
+	## Add a cube at the specified grid coordinates. Returns true if successful.
 	if not _is_valid_xyz(x, y, z):
 		push_warning("GridStructureComponent: Cannot add cube at invalid position (%d, %d, %d)" % [x, y, z])
 		return false
@@ -684,7 +686,7 @@ func add_cube_at(x: int, y: int, z: int) -> bool:
 	return true
 
 func remove_cube_at(x: int, y: int, z: int) -> bool:
-	"""Remove a cube at the specified grid coordinates. Returns true if successful."""
+	## Remove a cube at the specified grid coordinates. Returns true if successful.
 	if not _is_valid_xyz(x, y, z):
 		push_warning("GridStructureComponent: Cannot remove cube at invalid position (%d, %d, %d)" % [x, y, z])
 		return false
@@ -717,8 +719,8 @@ func remove_cube_at(x: int, y: int, z: int) -> bool:
 	return true
 
 func _rebuild_multimesh_from_positions() -> void:
-	"""Rebuild the multimesh transforms from the cube_positions array.
-	This is the nuclear option — simple, correct, no buffer corruption possible."""
+	## Rebuild the multimesh transforms from the cube_positions array.
+	## This is the nuclear option — simple, correct, no buffer corruption possible.
 	if not multimesh:
 		return
 	var count = cube_positions.size()
@@ -740,7 +742,7 @@ func _rebuild_multimesh_from_positions() -> void:
 var _stored_transforms: Array[Transform3D] = []
 
 func snapshot_transforms() -> void:
-	"""Store all current multimesh transforms for later restore."""
+	## Store all current multimesh transforms for later restore.
 	_stored_transforms.clear()
 	if not multimesh:
 		return
@@ -750,7 +752,7 @@ func snapshot_transforms() -> void:
 	print("GridStructureComponent: Snapshot %d transforms" % _stored_transforms.size())
 
 func restore_transforms() -> void:
-	"""Restore transforms from the last snapshot."""
+	## Restore transforms from the last snapshot.
 	if not multimesh or _stored_transforms.is_empty():
 		return
 	var count = mini(multimesh.instance_count, _stored_transforms.size())
@@ -759,8 +761,8 @@ func restore_transforms() -> void:
 	print("GridStructureComponent: Restored %d transforms" % count)
 
 func distort_explode(center: Vector3i, radius: int = 5, strength: float = 3.0) -> bool:
-	"""Explode cubes outward from center — transforms scale + translate away from the origin point.
-	Creates the 'laser wireframe' glitch effect seen in the editor bug."""
+	## Explode cubes outward from center — transforms scale + translate away from the origin point.
+	## Creates the 'laser wireframe' glitch effect seen in the editor bug.
 	if not multimesh or multimesh.instance_count == 0:
 		return false
 
@@ -799,8 +801,8 @@ func distort_explode(center: Vector3i, radius: int = 5, strength: float = 3.0) -
 	return affected > 0
 
 func distort_twist(center: Vector3i, radius: int = 5, angle_per_unit: float = 15.0, axis: String = "y") -> bool:
-	"""Twist transforms around an axis — rotation increases with distance along that axis.
-	Creates a spiraling deformation effect."""
+	## Twist transforms around an axis — rotation increases with distance along that axis.
+	## Creates a spiraling deformation effect.
 	if not multimesh or multimesh.instance_count == 0:
 		return false
 
@@ -841,8 +843,8 @@ func distort_twist(center: Vector3i, radius: int = 5, angle_per_unit: float = 15
 	return affected > 0
 
 func distort_scatter(center: Vector3i, radius: int = 5, scatter_strength: float = 2.0, rotation_strength: float = 45.0) -> bool:
-	"""Randomly scatter cubes — each gets a random offset and rotation.
-	Creates chaotic dissolution effect."""
+	## Randomly scatter cubes — each gets a random offset and rotation.
+	## Creates chaotic dissolution effect.
 	if not multimesh or multimesh.instance_count == 0:
 		return false
 
@@ -881,8 +883,8 @@ func distort_scatter(center: Vector3i, radius: int = 5, scatter_strength: float 
 	return affected > 0
 
 func distort_wave(amplitude: float = 1.5, frequency: float = 0.5, phase: float = 0.0, axis: String = "y") -> bool:
-	"""Apply a sine wave displacement to all transforms.
-	Phase can be animated over time for a flowing wave effect."""
+	## Apply a sine wave displacement to all transforms.
+	## Phase can be animated over time for a flowing wave effect.
 	if not multimesh or multimesh.instance_count == 0:
 		return false
 
@@ -905,3 +907,160 @@ func distort_wave(amplitude: float = 1.5, frequency: float = 0.5, phase: float =
 		multimesh.set_instance_transform(i, t)
 
 	return true
+
+
+# ═══════════════════════════════════════════════════════════════
+# VOXEL EDITING — Runtime cube add/remove for Minecraft-style editors
+# ═══════════════════════════════════════════════════════════════
+
+## Reference to the structure data for editing
+var _editable_layout: Array = []  # 2D array [z][x] of height strings
+var _edit_dimensions: Vector3i = Vector3i.ZERO
+
+## Signal when a cube is added or removed
+signal cube_changed(pos: Vector3i, added: bool)
+
+
+## Enable editing mode — stores a mutable copy of the structure layout.
+func enable_editing(structure_data) -> void:
+	if structure_data and structure_data.layout_data:
+		_editable_layout = []
+		for row in structure_data.layout_data:
+			var new_row: Array = []
+			for cell in row:
+				new_row.append(str(cell))
+			_editable_layout.append(new_row)
+		_edit_dimensions = Vector3i(grid_x, grid_y, grid_z)
+		print("GridStructureComponent: Editing enabled (%dx%d)" % [grid_x, grid_z])
+
+
+## Get height at grid position (x, z).
+func get_height_at(x: int, z: int) -> int:
+	if _editable_layout.is_empty():
+		return 0
+	if z < 0 or z >= _editable_layout.size():
+		return 0
+	if x < 0 or x >= _editable_layout[z].size():
+		return 0
+	var val: String = str(_editable_layout[z][x]).strip_edges()
+	return int(val) if val.is_valid_int() else 0
+
+
+## Add a cube on top of the stack at column (x, z). Returns true if successful.
+func stack_add(x: int, z: int) -> bool:
+	if _editable_layout.is_empty():
+		return false
+	if z < 0 or z >= _editable_layout.size():
+		return false  # Out of bounds
+	if x < 0 or x >= _editable_layout[z].size():
+		return false  # Out of bounds
+	var current: int = get_height_at(x, z)
+	if current >= grid_y:
+		return false  # Max height reached
+
+	_editable_layout[z][x] = str(current + 1)
+	_rebuild_from_layout()
+	cube_changed.emit(Vector3i(x, current, z), true)
+	return true
+
+
+## Remove the top cube at column (x, z). Returns true if successful.
+func stack_remove(x: int, z: int) -> bool:
+	if _editable_layout.is_empty():
+		return false
+	if z < 0 or z >= _editable_layout.size():
+		return false  # Out of bounds
+	if x < 0 or x >= _editable_layout[z].size():
+		return false  # Out of bounds
+	var current: int = get_height_at(x, z)
+	if current <= 0:
+		return false  # Nothing to remove
+
+	_editable_layout[z][x] = str(current - 1)
+	_rebuild_from_layout()
+	cube_changed.emit(Vector3i(x, current - 1, z), false)
+	return true
+
+
+## Set height directly at (x, z).
+func set_height_at(x: int, z: int, height: int) -> void:
+	if _editable_layout.is_empty():
+		return
+	if z < 0 or z >= _editable_layout.size():
+		return
+	if x < 0 or x >= _editable_layout[z].size():
+		return
+	_editable_layout[z][x] = str(clampi(height, 0, grid_y))
+	_rebuild_from_layout()
+
+
+## Get the current editable layout (for saving).
+func get_editable_layout() -> Array:
+	return _editable_layout
+
+
+## Convert a world position to grid coordinates.
+func world_to_grid(world_pos: Vector3) -> Vector3i:
+	var total_size: float = cube_size + gutter
+	return Vector3i(
+		int(floor(world_pos.x / total_size)),
+		int(floor(world_pos.y / total_size)),
+		int(floor(world_pos.z / total_size))
+	)
+
+
+## Convert grid coordinates to world position (center of cube).
+func grid_to_world(grid_pos: Vector3i) -> Vector3:
+	var total_size: float = cube_size + gutter
+	return Vector3(
+		float(grid_pos.x) * total_size,
+		float(grid_pos.y) * total_size,
+		float(grid_pos.z) * total_size
+	)
+
+
+## Rebuild the MultiMesh from the current editable layout.
+func _rebuild_from_layout() -> void:
+	if _editable_layout.is_empty() or not multimesh:
+		return
+
+	# Clear grid state
+	for x in grid_x:
+		for y in grid_y:
+			for z in grid_z:
+				grid[x][y][z] = false
+
+	# Clear old collisions
+	if collision_parent:
+		for child in collision_parent.get_children():
+			child.queue_free()
+
+	# Collect new cube positions
+	var total_size: float = cube_size + gutter
+	var temp_positions: Array = []
+
+	for z in _editable_layout.size():
+		var row = _editable_layout[z]
+		for x in row.size():
+			var height: int = int(str(row[x])) if str(row[x]).is_valid_int() else 0
+			for y in range(0, mini(height, grid_y)):
+				temp_positions.append(Vector3i(x, y, z))
+				if x < grid_x and y < grid_y and z < grid_z:
+					grid[x][y][z] = true
+
+	# Update MultiMesh
+	cube_positions = temp_positions
+	multimesh.instance_count = temp_positions.size()
+
+	for i in temp_positions.size():
+		var pos: Vector3i = temp_positions[i]
+		var world_pos := Vector3(pos.x, pos.y, pos.z) * total_size
+		var transform := Transform3D()
+		transform.origin = world_pos
+		multimesh.set_instance_transform(i, transform)
+
+		# Set default white color
+		multimesh.set_instance_color(i, Color.WHITE)
+
+		# Create collision
+		_create_collision_at(world_pos, cube_size)

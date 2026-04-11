@@ -1,4 +1,14 @@
-﻿extends Node3D
+extends Node3D
+
+# @identity
+# essence: explanation(model, input) → feature importance; three methods: SHAP (game theory), LIME (local surrogate), Grad-CAM (gradient attention)
+# desire: see WHY a model decided — grab feature bars, walk through perturbation clouds, read attention heatmaps
+# critical_parameter: feature_importance — the SHAP values that reveal which inputs the model actually used
+# triggers: switching XAI methods recolors the entire scene; manipulating features changes the explanation
+# emerges: the realization that different explanation methods disagree — there is no single "true" explanation
+# needs: grabbable SHAP bars [has], perturbation cloud [has], heatmap visualization [has], counterfactual path [has]
+# relationships: depends on neural_networks_vr (must have a model to explain); contrasts anomaly_detection (detecting vs explaining)
+# truth: a model that cannot explain itself is not understood — it is merely obeyed
 
 # VR-Reimagined Explainable AI (XAI)
 # Interactive visualization of model explanations
@@ -44,7 +54,7 @@ var perturbation_spheres: Array = []
 var heatmap_points: Array = []
 var counterfactual_path: Array = []
 
-func _ready():
+func _ready() -> void:
 	print("[XAI_VR] Initializing explainable AI workspace")
 	_initialize_model_data()
 	_create_prediction_display()
@@ -55,7 +65,7 @@ func _ready():
 	_create_control_panel()
 	_create_info_panels()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 
 	if animate_explanations:
@@ -65,7 +75,7 @@ func _process(delta):
 
 	_update_confidence_display(delta)
 
-func _initialize_model_data():
+func _initialize_model_data() -> void:
 	"""Initialize feature values and importance scores"""
 	var feature_names = ["Whiskers", "Ears", "Tail", "Fur", "Eyes", "Paws", "Nose", "Size", "Color", "Shape"]
 
@@ -76,7 +86,7 @@ func _initialize_model_data():
 		var importance = randf_range(-0.5, 1.0)
 		feature_importance.append(importance)
 
-func _create_prediction_display():
+func _create_prediction_display() -> void:
 	"""Create central prediction display"""
 	var prediction_container = Node3D.new()
 	prediction_container.name = "PredictionDisplay"
@@ -87,6 +97,7 @@ func _create_prediction_display():
 	var sphere = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 1.0
+	sphere_mesh.height = 2.0
 	sphere.mesh = sphere_mesh
 
 	var mat = StandardMaterial3D.new()
@@ -110,7 +121,7 @@ func _create_prediction_display():
 	label.position = Vector3(0, 1.8, 0)
 	prediction_container.add_child(label)
 
-func _create_shap_zone():
+func _create_shap_zone() -> void:
 	"""Create SHAP values visualization zone"""
 	if not show_shap:
 		return
@@ -227,7 +238,7 @@ func _create_importance_bar(index: int, feature_name: String, importance: float)
 
 	return container
 
-func _create_lime_zone():
+func _create_lime_zone() -> void:
 	"""Create LIME local explanations zone"""
 	if not show_lime:
 		return
@@ -251,6 +262,7 @@ func _create_lime_zone():
 	var center_point = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.3
+	sphere.height = 0.6
 	center_point.mesh = sphere
 
 	var mat = StandardMaterial3D.new()
@@ -278,6 +290,7 @@ func _create_perturbation_point() -> MeshInstance3D:
 	var point = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.15
+	sphere.height = 0.3
 	point.mesh = sphere
 
 	# Random position in local neighborhood
@@ -310,7 +323,7 @@ func _create_perturbation_point() -> MeshInstance3D:
 
 	return point
 
-func _create_decision_boundary(parent: Node3D):
+func _create_decision_boundary(parent: Node3D) -> void:
 	"""Create decision boundary visualization"""
 	var boundary = MeshInstance3D.new()
 	var plane = PlaneMesh.new()
@@ -341,7 +354,7 @@ func _create_decision_boundary(parent: Node3D):
 	label.position = Vector3(0, 0, 3.5)
 	parent.add_child(label)
 
-func _create_grad_cam_zone():
+func _create_grad_cam_zone() -> void:
 	"""Create Grad-CAM attention heatmap zone"""
 	if not show_grad_cam:
 		return
@@ -400,7 +413,7 @@ func _create_heatmap_point(x: int, y: int) -> MeshInstance3D:
 
 	return point
 
-func _create_counterfactual_explorer():
+func _create_counterfactual_explorer() -> void:
 	"""Create counterfactual explanation explorer"""
 	if not enable_counterfactuals:
 		return
@@ -426,6 +439,7 @@ func _create_counterfactual_explorer():
 		var sphere = MeshInstance3D.new()
 		var sphere_mesh = SphereMesh.new()
 		sphere_mesh.radius = 0.2
+		sphere_mesh.height = 0.4
 		sphere.mesh = sphere_mesh
 
 		var t = float(i) / (num_steps - 1)
@@ -460,7 +474,7 @@ func _create_counterfactual_explorer():
 			step_label.position = Vector3(i * 1.0 - 2.0, -0.5, 0)
 			cf_container.add_child(step_label)
 
-func _create_control_panel():
+func _create_control_panel() -> void:
 	"""Create VR control panel"""
 	var controls = Node3D.new()
 	controls.name = "ControlPanel"
@@ -511,7 +525,7 @@ func _create_control_panel():
 	confidence.position = Vector3(0, -1.0, 0.1)
 	controls.add_child(confidence)
 
-func _create_info_panels():
+func _create_info_panels() -> void:
 	"""Create educational info panels"""
 	# SHAP explanation
 	if show_shap:
@@ -537,7 +551,7 @@ func _create_info_panels():
 			Color(0.9, 0.5, 0.3)
 		)
 
-func _create_info_panel(pos: Vector3, text: String, color: Color):
+func _create_info_panel(pos: Vector3, text: String, color: Color) -> void:
 	"""Create floating info panel"""
 	var label = Label3D.new()
 	label.text = text
@@ -549,26 +563,26 @@ func _create_info_panel(pos: Vector3, text: String, color: Color):
 	label.position = pos
 	add_child(label)
 
-func _animate_shap_values(_delta):
+func _animate_shap_values(_delta) -> void:
 	"""Animate SHAP feature bars"""
 	for bar in feature_bars:
 		var pulse = 1.0 + sin(time * 2.0) * 0.05
 		bar.scale = Vector3(pulse, pulse, pulse)
 
-func _animate_perturbations(delta):
+func _animate_perturbations(delta) -> void:
 	"""Animate LIME perturbation points"""
 	for point in perturbation_spheres:
 		# Gentle floating motion
 		var original_y = point.position.y
 		point.position.y += sin(time * 1.5 + point.position.x) * delta * 0.3
 
-func _animate_heatmap(_delta):
+func _animate_heatmap(_delta) -> void:
 	"""Animate Grad-CAM heatmap"""
 	for point in heatmap_points:
 		var pulse = 1.0 + sin(time * 2.0 + point.position.x + point.position.z) * 0.1
 		point.scale = Vector3(pulse, 1.0, pulse)
 
-func _update_confidence_display(_delta):
+func _update_confidence_display(_delta) -> void:
 	"""Update confidence meter"""
 	var controls = get_node_or_null("ControlPanel")
 	if not controls:
@@ -579,11 +593,20 @@ func _update_confidence_display(_delta):
 		confidence_label.text = "Confidence: %.0f%%" % (prediction_confidence * 100)
 
 # Public API
-func set_feature_importance(feature_idx: int, importance: float):
+func set_feature_importance(feature_idx: int, importance: float) -> void:
 	"""Set SHAP value for a feature"""
 	if feature_idx >= 0 and feature_idx < feature_importance.size():
 		feature_importance[feature_idx] = clamp(importance, -1.0, 1.0)
 
-func highlight_feature(feature_idx: int):
+func highlight_feature(feature_idx: int) -> void:
 	"""Highlight a specific feature"""
 	print("[XAI] Highlighting feature %d" % feature_idx)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

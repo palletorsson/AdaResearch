@@ -24,7 +24,7 @@ var koch_material: StandardMaterial3D
 var iter_material: StandardMaterial3D
 var complexity_material: StandardMaterial3D
 
-func _ready():
+func _ready() -> void:
 	"""Initializes the scene, materials, and the base Koch curve."""
 	setup_vr_optimized_scene()
 	setup_materials()
@@ -32,7 +32,7 @@ func _ready():
 	# The first iteration is generated immediately on start.
 	generate_next_iteration()
 
-func setup_vr_optimized_scene():
+func setup_vr_optimized_scene() -> void:
 	"""Setup VR-optimized mesh instances instead of CSG nodes."""
 	
 	# Main Koch curve mesh
@@ -52,7 +52,7 @@ func setup_vr_optimized_scene():
 	complexity_mesh_instance.position = Vector3(6, 0, 0)
 	add_child(complexity_mesh_instance)
 
-func setup_materials():
+func setup_materials() -> void:
 	"""Setup VR-optimized materials."""
 	
 	# Koch curve material
@@ -80,7 +80,7 @@ func setup_materials():
 	complexity_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	complexity_mesh_instance.material_override = complexity_material
 
-func initialize_koch_curve():
+func initialize_koch_curve() -> void:
 	"""Resets the curve to its base equilateral triangle state."""
 	points.clear()
 	# Increase the size of the base triangle for better VR visibility
@@ -98,7 +98,7 @@ func initialize_koch_curve():
 	# Update visual for base state
 	update_vr_optimized_visual()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	"""Main game loop, handles animations and timed iteration advancement."""
 	time += delta
 	iteration_timer += delta
@@ -108,7 +108,7 @@ func _process(delta):
 		print("done")
 
 
-func generate_next_iteration():
+func generate_next_iteration() -> void:
 	"""
 	Applies a single Koch transformation and updates the visual.
 	This prevents the recursive loop that caused the stack overflow.
@@ -125,7 +125,7 @@ func generate_next_iteration():
 	
 	print("🔺 Koch iteration: %d, segments: %d" % [current_iteration, total_segments])
 
-func apply_koch_transformation():
+func apply_koch_transformation() -> void:
 	"""Applies the Koch curve transformation rule to each segment."""
 	var new_points = []
 	
@@ -166,7 +166,7 @@ func generate_koch_segment(start: Vector2, end: Vector2) -> Array:
 	
 	return [p1, p2, p3, p4, p5]
 
-func update_vr_optimized_visual():
+func update_vr_optimized_visual() -> void:
 	"""
 	Creates a single, optimized VR mesh from the generated points.
 	This is much more efficient than using separate meshes for each segment.
@@ -259,7 +259,7 @@ func update_vr_optimized_visual():
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays, [], {}, Mesh.ARRAY_FORMAT_NORMAL | Mesh.ARRAY_FORMAT_COLOR)
 	koch_mesh_instance.mesh = array_mesh
 
-func animate_koch_curve():
+func animate_koch_curve() -> void:
 	"""Animate the Koch curve - VR-safe."""
 	
 	if not koch_mesh_instance or not koch_mesh_instance.mesh:
@@ -274,7 +274,7 @@ func animate_koch_curve():
 		var emission_intensity = 1.0 + sin(time * 3.0) * 0.5
 		koch_material.emission_energy_multiplier = emission_intensity
 
-func animate_indicators():
+func animate_indicators() -> void:
 	"""Animate iteration and complexity indicators with single meshes."""
 	
 	# Create iteration control mesh (cylinder height based on iteration)
@@ -305,7 +305,7 @@ func animate_indicators():
 		)
 		iter_material.emission = iter_material.albedo_color * 0.5
 
-func create_cylinder_mesh(mesh_instance: MeshInstance3D, radius: float, height: float):
+func create_cylinder_mesh(mesh_instance: MeshInstance3D, radius: float, height: float) -> void:
 	"""Creates a simple cylinder mesh without CSG."""
 	
 	var cylinder_mesh = CylinderMesh.new()
@@ -327,7 +327,7 @@ func get_fractal_info() -> Dictionary:
 	}
 
 # Input handling for testing
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handles user input to manually advance the iteration."""
 	if event.is_action_pressed("ui_accept"):  # Space key
 		generate_next_iteration()
@@ -335,3 +335,12 @@ func _input(event):
 	if event.is_action_pressed("ui_select"):  # Enter key
 		var info = get_fractal_info()
 		print("📊 Fractal Info: ", info)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,5 +1,16 @@
 extends Node3D
 
+
+# @identity
+# essence: catenary(x) approximated by cubic spline through grabbable control points
+# desire: Grab control points in VR and sculpt hanging cable curves in real-time
+# critical_parameter: control_point_count — determines degrees of freedom for curve shaping
+# triggers: moving any control point recomputes the spline and regenerates the cable mesh
+# emerges: natural catenary sag from gravity acting on flexible curves between fixed points
+# needs: VR grab on control points [has], cable thickness control [missing]
+# relationships: depends on Curve3D spline interpolation; contrasts with BigPipeSystem (flexible vs rigid segments); unlocks curve intuition
+# truth: A hanging cable finds the shape that minimizes potential energy — nature solves calculus of variations.
+
 @export var point_scene: PackedScene = preload("res://commons/primitives/point/grab_sphere_point.tscn")
 @export var line_material: ShaderMaterial = preload("res://commons/resourses/shaders/line_shader.tres")
 @export var control_point_count: int = 4  # Number of control points
@@ -13,7 +24,7 @@ var control_points: Array[Node3D] = []
 var curve: Curve3D
 var mesh_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	curve = Curve3D.new()
 	mesh_instance = $CableMesh
 	_spawn_control_points()
@@ -22,7 +33,7 @@ func _ready():
 func _process(_delta):
 	_update_cable()
 
-func _spawn_control_points():
+func _spawn_control_points() -> void:
 	var parent = $ControlPoints
 	control_points.clear()
 
@@ -35,7 +46,7 @@ func _spawn_control_points():
 		parent.add_child(point)
 		control_points.append(point)
 
-func _update_cable():
+func _update_cable() -> void:
 	if control_points.size() < 2:
 		return
 
@@ -64,7 +75,7 @@ func _update_cable():
 	# Generate tube mesh from curve
 	_generate_tube_from_curve()
 
-func _generate_tube_from_curve():
+func _generate_tube_from_curve() -> void:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
@@ -140,3 +151,12 @@ func _create_cable_material() -> ShaderMaterial:
 	mat.set_shader_parameter("pulse_frequency", 0.0)
 
 	return mat
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

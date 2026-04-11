@@ -1,5 +1,15 @@
 ﻿extends Node3D
 
+# @identity
+# essence: grabbable board with paginated text/code content, proximity reveal shader, VR page-flip via trigger/grip
+# desire: learner picks up a physical document and reads it in VR — code and theory delivered as held artifact
+# critical_parameter: description_sets — the array of page strings; empty means no content, one means single-page
+# triggers: picking up → shows page navigation hint; trigger/grip buttons flip pages; drop → awards XP/SP
+# emerges: reading as an embodied act — you must hold the clipboard to read it, creating intentional engagement
+# needs: [has grabbable GrabPlane [has], has VR trigger/grip page flip [has], has Label3D page number [has]]
+# relationships: content loaded via apply_grid_config (tutorial ID or page keys); used in nearly every map
+# truth: a text in VR is not passive — the learner must pick it up, hold it, and navigate it with their hands
+
 const CodeSnippetLibrary := preload("res://commons/context/clipboard/code_snippet_library.gd")
 const TutorialTextLibrary := preload("res://commons/context/clipboard/tutorial_text_library.gd")
 

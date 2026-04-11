@@ -18,10 +18,10 @@ var nested_inner_index := 0
 var iteration_count := 0
 var total_operations := 0
 
-func _ready():
+func _ready() -> void:
 	create_loop_visualizations()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	loop_timer += delta * animation_speed
 	
@@ -32,12 +32,12 @@ func _process(delta):
 	demonstrate_loop_control()
 	update_performance_metrics()
 
-func create_loop_visualizations():
+func create_loop_visualizations() -> void:
 	create_for_loop_elements()
 	create_while_loop_elements()
 	create_nested_loop_elements()
 
-func create_for_loop_elements():
+func create_for_loop_elements() -> void:
 	var container = $ForLoopVisualization
 	
 	# Create array elements for for-loop
@@ -70,7 +70,7 @@ func create_for_loop_elements():
 	
 	container.add_child(pointer)
 
-func create_while_loop_elements():
+func create_while_loop_elements() -> void:
 	var container = $WhileLoopVisualization
 	
 	# Create condition checker
@@ -102,7 +102,7 @@ func create_while_loop_elements():
 		
 		container.add_child(element)
 
-func create_nested_loop_elements():
+func create_nested_loop_elements() -> void:
 	var container = $NestedLoopVisualization
 	
 	# Create 2D grid for nested loops
@@ -121,7 +121,7 @@ func create_nested_loop_elements():
 			
 			container.add_child(element)
 
-func animate_for_loop():
+func animate_for_loop() -> void:
 	var container = $ForLoopVisualization
 	var pointer = container.get_node("ForLoopPointer")
 	
@@ -147,7 +147,7 @@ func animate_for_loop():
 			material.albedo_color = Color(0.4, 0.7, 1.0)
 			material.emission_enabled = false
 
-func animate_while_loop():
+func animate_while_loop() -> void:
 	var container = $WhileLoopVisualization
 	var condition_checker = container.get_node("ConditionChecker")
 	
@@ -179,7 +179,7 @@ func animate_while_loop():
 			material.albedo_color = Color(0.2, 1.0, 0.4)
 			element.position.x = 0.0
 
-func animate_nested_loops():
+func animate_nested_loops() -> void:
 	var container = $NestedLoopVisualization
 	
 	# Update nested loop indices
@@ -211,7 +211,7 @@ func animate_nested_loops():
 				material.emission_enabled = false
 				element.scale = Vector3(1.0, 1.0, 1.0)
 
-func show_iterator_patterns():
+func show_iterator_patterns() -> void:
 	var container = $IteratorPatterns
 	
 	# Clear previous elements
@@ -262,7 +262,7 @@ func show_iterator_patterns():
 			element.material_override = material
 			container.add_child(element)
 
-func demonstrate_loop_control():
+func demonstrate_loop_control() -> void:
 	var container = $LoopControl
 	
 	# Clear previous elements
@@ -300,7 +300,7 @@ func demonstrate_loop_control():
 		element.material_override = material
 		container.add_child(element)
 
-func update_performance_metrics():
+func update_performance_metrics() -> void:
 	var container = $PerformanceMetrics
 	
 	# Clear previous elements
@@ -330,3 +330,12 @@ func update_performance_metrics():
 		bar.material_override = material
 		
 		container.add_child(bar)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

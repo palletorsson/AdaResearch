@@ -1,5 +1,16 @@
 ## Shader 06: Random — GPU pseudorandom
 ## Book of Shaders Chapter 10
+
+# @identity
+# essence: fract(sin(dot(st, vec2(12.9898, 78.233))) * 43758.5453) — deterministic chaos from trigonometry and overflow; every pixel computes its own fate from its own address
+# desire: to crank the grid slider to 500 and watch static dissolve into apparent noise — to animate time and see the field breathe
+# critical_parameter: scale — controls how finely the hash function samples coordinate space; high scale shatters sine into apparent disorder
+# triggers: threshold slider quantizes continuous hash to binary; show_threshold reveals the decision boundary; animated mode seeds with TIME for TV static
+# emerges: what looks random is perfectly repeatable — the same coordinate always returns the same value; randomness on a GPU is theater
+# needs: [has] ShaderRackPanel sliders per display; [missing] no VR push buttons
+# relationships: provides the hash function used by shader_07_noise, shader_08_cellularnoise, and all procedural generation; contrasts with true randomness in the randomness sequence
+# truth: the machine that cannot surprise itself, surprising you — fract(sin()) is determinism performing as unpredictability
+
 extends Node3D
 
 const DISPLAY_SIZE := Vector3(2.0, 2.0, 0.05)
@@ -81,3 +92,12 @@ func _process(_delta: float) -> void:
 		var uniforms: Array = shader_defs[i]["uniforms"]
 		for j in range(uniforms.size()):
 			mat.set_shader_parameter(uniforms[j], panel.get_slider_value(j))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

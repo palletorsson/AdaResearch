@@ -1,3 +1,13 @@
+# @identity
+# essence: tripod_stable(t) = triangle(foot_A, foot_B, foot_C) -- the first statically stable polygon
+# desire: three legs forming a triangle of support -- minimum number for static stability
+# critical_parameter: tripod foot positions -- three contacts define support triangle; mass must stay inside
+# triggers: patrol_timer drives movement; tripod gait lifts one leg while two maintain stability
+# emerges: the triangle IS stability -- three legs is where gait becomes geometrically solvable
+# needs: MeshInstance3D [has]; triple IK chains [has]; tripod gait [has]; patrol [has]; VR interaction [missing]
+# relationships: third in leg progression; first stable polygon -- two legs fall, three stand
+# truth: three points define a plane -- the first polygon that does not need to negotiate with falling.
+
 # three_leg_critter.gd
 # Three-legged critter with STEPPING GAIT.
 # Each leg plants on the ground, stays planted while body moves,

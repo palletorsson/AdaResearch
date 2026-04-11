@@ -51,10 +51,10 @@ func _ready() -> void:
 	print("RotationCube: %.2fm cube, mode=%s, pause=%.1fs, y_offset=%.1f" % [cube_size, "step-pause" if mode == RotationMode.STEP_PAUSE else "continuous", pause_duration, y_offset])
 
 func create_cube() -> void:
-	# Create mesh
+	# Create mesh — wall shape: thin on Z (1), wide on X and tall on Y (cube_size)
 	mesh_instance = MeshInstance3D.new()
 	var box_mesh = BoxMesh.new()
-	box_mesh.size = Vector3(cube_size, cube_size, cube_size)
+	box_mesh.size = Vector3(cube_size, cube_size, 1.0)
 	mesh_instance.mesh = box_mesh
 	
 	# Load and apply Grid shader (matching transport_cube parameters)
@@ -81,11 +81,11 @@ func create_cube() -> void:
 	
 	add_child(mesh_instance)
 	
-	# Create static body for collision (walkable)
+	# Create static body for collision — matches wall shape
 	static_body = StaticBody3D.new()
 	collision_shape = CollisionShape3D.new()
 	var box_shape = BoxShape3D.new()
-	box_shape.size = Vector3(cube_size, cube_size, cube_size)
+	box_shape.size = Vector3(cube_size, cube_size, 1.0)
 	collision_shape.shape = box_shape
 	static_body.add_child(collision_shape)
 	add_child(static_body)

@@ -1,5 +1,15 @@
 extends StaticBody3D
 
+# @identity
+# essence: StaticBody3D rotating at constant angular velocity — torque = rotation_speed * delta applied every physics frame
+# desire: to be the unyielding thing that soft bodies must negotiate — a relentless kinematic arm that pushes, drags, and deforms anything compliant
+# critical_parameter: rotation_speed — slow enough to watch deformation happen, fast enough to fling soft bodies across the room
+# triggers: collision with any soft body or rigid body transfers kinetic energy through push_force; the pivot sphere marks the axis of rotation
+# emerges: when paired with SoftBody3D objects, the arm creates rhythmic compression-release cycles that look like breathing
+# needs: slider_horizontal [missing]; push_button [missing]; Label3D [missing]
+# relationships: paired with jelly_cube in SoftBodies_Soft_Body_Deformation; precedes revolving_joy_ride which adds chain dynamics to rotation
+# truth: a rotating arm does not care what it hits — compliance is always the softer body's problem
+
 # Simple rotating arm configuration
 @export var arm_length: float = 3.0
 @export var arm_thickness: float = 0.2
@@ -11,10 +21,10 @@ var arm_mesh: MeshInstance3D
 var arm_collision: CollisionShape3D
 var pivot_sphere: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	create_centered_rotating_arm()
 
-func create_centered_rotating_arm():
+func create_centered_rotating_arm() -> void:
 	"""Create a rotating arm that rotates from its CENTER with visible pivot"""
 	
 	# Create the visual arm (box mesh) - CENTERED at origin
@@ -73,6 +83,15 @@ func create_centered_rotating_arm():
 	collision_layer = 2  # Pusher layer
 	collision_mask = 0   # StaticBody doesn't need to detect anything
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	"""Rotate the arm continuously around its center on Z-axis (negative direction)"""
 	rotation.z += deg_to_rad(rotation_speed) * delta  # Z-axis, negative direction
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

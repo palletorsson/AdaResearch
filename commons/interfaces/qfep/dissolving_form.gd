@@ -7,6 +7,16 @@ extends Node3D
 
 class_name QFEPDissolvingForm
 
+# @identity
+# essence: noise_threshold(world_pos * scale) > dissolve_amount -> discard pixel; edge_glow at boundary
+# desire: watch a solid form erode into nothing — and then watch it return
+# critical_parameter: dissolve_amount (0=solid, 1=gone) — the threshold that eats the mesh
+# triggers: auto_cycle oscillates dissolve via sin(t); dissolve()/reform() methods for scripted transitions
+# emerges: the glowing edge where solid meets void — a moving frontier of destruction/creation
+# needs: VR dissolve slider [missing], mesh type selector [missing]
+# relationships: contrasts rigid_sculpture (permanence vs impermanence); paired with chaos_particles; depends on noise functions
+# truth: form is not permanent — every structure carries its own dissolution encoded in the noise of its material
+
 ## Base mesh type
 @export_enum("Sphere", "Cube", "Torus") var mesh_type: int = 0
 

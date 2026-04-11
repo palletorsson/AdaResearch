@@ -1,3 +1,13 @@
+# @identity
+# essence: hexapod_tripod(t) = alternate_triangles(L1+R2+L3, R1+L2+R3) -- the alternating tripod gait
+# desire: six legs discovering the alternating tripod -- two stable triangles switching in rhythm
+# critical_parameter: alternating tripod sets -- each group of three forms stable triangle; sets alternate
+# triggers: patrol_timer drives movement; gait alternates between two stable tripod configurations
+# emerges: the insect solution -- six legs resolve into two alternating stable triangles
+# needs: MeshInstance3D [has]; 6 IK chains [has]; alternating tripod gait [has]; patrol [has]; VR interaction [missing]
+# relationships: sixth in progression; the hexapod solution discovered by insects over 400 million years
+# truth: six legs is where stability and speed converge -- two alternating tripods, always three on ground.
+
 # six_leg_critter.gd
 # Six-legged critter with STEPPING GAIT.
 # Each leg plants on the ground, stays planted while body moves,

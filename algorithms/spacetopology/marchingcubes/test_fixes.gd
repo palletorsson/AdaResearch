@@ -4,7 +4,7 @@
 
 extends SceneTree
 
-func _ready():
+func _ready() -> void:
 	print("🔧 Testing Marching Cubes HOLE FIXES...")
  
 	

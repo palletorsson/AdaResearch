@@ -1,6 +1,16 @@
 extends SnapPointPuzzleBase
 class_name SnapTetrahedronPuzzle
 
+# @identity
+# essence: tetrahedron = 4 vertices, 6 edges, 4 triangular faces — the minimal 3D solid
+# desire: learner constructs the simplest possible polyhedron from 4 floating snap points
+# critical_parameter: 4 snap target positions — form the unique convex hull of 4 non-coplanar points
+# triggers: snapping all 4 snap points to their targets → puzzle complete signal fires
+# emerges: the tetrahedron as the 3D analog of the triangle — irreducible, minimum faces for enclosure
+# needs: [missing VR controls besides snapping — no label or slider]
+# relationships: extends SnapPointPuzzleBase; logical successor to triangle_line_puzzle in 3D
+# truth: you cannot enclose volume with fewer than 4 faces — the tetrahedron is the minimum
+
 ## Snap Tetrahedron Puzzle Controller
 ## Manages a 4-point tetrahedron puzzle
 ## Extends SnapPointPuzzleBase for common functionality and tag system

@@ -1,4 +1,14 @@
-﻿extends Node3D
+extends Node3D
+
+# @identity
+# essence: SurfaceTool.add_vertex(v) for each face of 9 hand-built polyhedra — diamond, prism, octahedron, rough rock, crystal cluster, bipyramid, truncated tetrahedron, geode, crystal shard — each colored with pride flag palette
+# desire: to see nine queer-colored geometric specimens arranged on a rainbow floor under pride-flag lighting — to hold mathematical form in a space that celebrates identity
+# critical_parameter: pride_colors array — six colors (red/orange/yellow/green/blue/purple) applied to each solid's wireframe shader, making geometry a vehicle for queer visibility
+# triggers: _ready builds all solids, rainbow floor, floating pride/trans banners, and six colored OmniLight3D in a circle; static display with no animation
+# emerges: the combination of hand-built polyhedra, pride lighting, and trans banners creates a mathematical cabinet of curiosities that is also a political statement
+# needs: [missing] no VR interaction — pure display; no sliders, no buttons, no grabbable objects
+# relationships: used in F14_Lab_Bench and F17_Zen_Garden as mathematical specimen; one of the core primitive artifacts alongside rainbow and homagetothesquare
+# truth: geometry does not belong to neutrality — every vertex can carry color, and color is never apolitical
 
 # PlatonicSolids.gd - Queer-themed geometric primitives in Godot 4
 # Based on Ada Research VR project structure
@@ -38,11 +48,11 @@ var positions = [
 	Vector3(2.25, 0, 1.5)   # Shard
 ]
 
-func _ready():
+func _ready() -> void:
 	create_queer_environment()
 	create_all_solids()
 
-func create_queer_environment():
+func create_queer_environment() -> void:
 	# Create rainbow floor
 	create_rainbow_floor()
 	
@@ -52,7 +62,7 @@ func create_queer_environment():
 	# Add colorful lighting
 	create_colorful_lighting()
 
-func create_rainbow_floor():
+func create_rainbow_floor() -> void:
 	var floor = MeshInstance3D.new()
 	floor.name = "RainbowFloor"
 	add_child(floor)
@@ -75,7 +85,7 @@ func create_rainbow_floor():
 	# Apply rainbow colors to vertices
 	apply_rainbow_to_mesh(floor)
 
-func apply_rainbow_to_mesh(mesh_instance: MeshInstance3D):
+func apply_rainbow_to_mesh(mesh_instance: MeshInstance3D) -> void:
 	var mesh = mesh_instance.mesh as PlaneMesh
 	var array_mesh = ArrayMesh.new()
 	var arrays = mesh.surface_get_arrays(0)
@@ -95,7 +105,7 @@ func apply_rainbow_to_mesh(mesh_instance: MeshInstance3D):
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	mesh_instance.mesh = array_mesh
 
-func create_floating_banners():
+func create_floating_banners() -> void:
 	# Create floating pride flag banners
 	for i in range(2):
 		create_pride_banner(Vector3(-3 + i * 6, 2, -2))
@@ -104,7 +114,7 @@ func create_floating_banners():
 	for i in range(2):
 		create_trans_banner(Vector3(-2 + i * 4, 1.5, 2))
 
-func create_pride_banner(pos: Vector3):
+func create_pride_banner(pos: Vector3) -> void:
 	var banner = MeshInstance3D.new()
 	banner.name = "PrideBanner"
 	add_child(banner)
@@ -124,7 +134,7 @@ func create_pride_banner(pos: Vector3):
 	banner.position = pos
 	banner.rotation_degrees = Vector3(0, randf_range(-20, 20), 0)
 
-func create_trans_banner(pos: Vector3):
+func create_trans_banner(pos: Vector3) -> void:
 	var banner = MeshInstance3D.new()
 	banner.name = "TransBanner"
 	add_child(banner)
@@ -144,7 +154,7 @@ func create_trans_banner(pos: Vector3):
 	banner.position = pos
 	banner.rotation_degrees = Vector3(randf_range(-10, 10), randf_range(-30, 30), 0)
 
-func create_colorful_lighting():
+func create_colorful_lighting() -> void:
 	# Create multiple colored lights
 	for i in range(pride_colors.size()):
 		var light = OmniLight3D.new()
@@ -161,7 +171,7 @@ func create_colorful_lighting():
 		light.position = Vector3(cos(angle) * 6, 3, sin(angle) * 6)
 
 # Create all custom primitives
-func create_all_solids():
+func create_all_solids() -> void:
 	var diamond = create_diamond()
 	diamond.position = positions[0]
 	add_child(diamond)
@@ -199,7 +209,7 @@ func create_all_solids():
 	add_child(shard)
 
 # Helper function to add triangle with calculated normal
-func add_triangle_with_normal(st: SurfaceTool, vertices: Array, face: Array):
+func add_triangle_with_normal(st: SurfaceTool, vertices: Array, face: Array) -> void:
 	var v0 = vertices[face[0]]
 	var v1 = vertices[face[1]]  
 	var v2 = vertices[face[2]]
@@ -577,7 +587,7 @@ func create_crystal_shard():
 	apply_queer_material(mesh_instance, pride_colors[4])
 	return mesh_instance
 
-func apply_queer_material(mesh_instance: MeshInstance3D, base_color: Color):
+func apply_queer_material(mesh_instance: MeshInstance3D, base_color: Color) -> void:
 	# Create shader material using the solid wireframe shader
 	var material = ShaderMaterial.new()
 	var shader = load("res://commons/resourses/shaders/grid_solid.gdshader")
@@ -594,4 +604,13 @@ func apply_queer_material(mesh_instance: MeshInstance3D, base_color: Color):
 
 func _process(_delta):
 	# No animation - static display
+	pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
 	pass

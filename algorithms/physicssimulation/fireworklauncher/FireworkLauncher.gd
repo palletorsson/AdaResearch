@@ -5,6 +5,16 @@
 #
 # QFEP: Many from one — a single event creates a statistical population.
 # ===========================================================================
+#
+# @identity
+# essence: launch → ascend → explode(N particles) → each: v += g, v *= drag, life -= dt, fade. One event becomes sixty trajectories.
+# desire: To launch a rocket and watch it bloom — sixty glowing particles inheriting random velocities from a single explosion point, then falling under gravity and drag.
+# critical_parameter: burst_force (1.0-8.0) — the initial speed of exploded particles. It sets the bloom radius. Higher = wider, more dramatic, longer airtime before gravity wins.
+# triggers: Auto-launch every 2.5s, FIRE button → manual launch, preset buttons → color palettes (classic/ocean/garden) and patterns (sphere/ring), burst slider → controls explosion force
+# emerges: Ring patterns from constrained emission (horizontal only). Sphere patterns from uniform random direction. Particle trails tracing parabolas. The moment of bloom as maximum expansion.
+# needs: VR preset buttons [has], fire button [has], burst force slider [has], auto-launch toggle [has]. Missing: height slider, multi-launch choreography.
+# relationships: CPU particle system (contrasts with particle_systems using GPUParticles3D). Lives in ForcesSystems. Each particle is a mini bouncing_ball with drag and lifetime.
+# truth: A firework is a population explosion. One event becomes many independent trajectories, each obeying the same law, each taking a different path.
 extends Node3D
 
 class_name FireworkLauncher
@@ -45,12 +55,12 @@ var _current_preset: int = 0
 const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
-func _ready():
+func _ready() -> void:
 	_create_launch_tube()
 	_create_labels()
 	_create_vr_controls()
 
-func _create_launch_tube():
+func _create_launch_tube() -> void:
 	# Launch tube visual
 	var tube := MeshInstance3D.new()
 	tube.name = "LaunchTube"
@@ -79,7 +89,7 @@ func _create_launch_tube():
 	base.material_override = base_mat
 	add_child(base)
 
-func _launch_firework():
+func _launch_firework() -> void:
 	var preset: Array = _presets[_current_preset]
 	var colors: Array = preset[1]
 
@@ -121,7 +131,7 @@ func _launch_firework():
 
 	_rockets.append(rocket)
 
-func _explode(rocket: Dictionary):
+func _explode(rocket: Dictionary) -> void:
 	var pos: Vector3 = rocket["pos"]
 	var colors: Array = rocket["colors"]
 	var pattern: String = rocket["pattern"]
@@ -179,7 +189,7 @@ func _explode(rocket: Dictionary):
 	if rocket["trail_mesh"]:
 		(rocket["trail_mesh"] as MeshInstance3D).queue_free()
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	# Update rockets
 	var exploded_indices: Array[int] = []
 	for i in range(_rockets.size()):
@@ -247,7 +257,7 @@ func _physics_process(delta: float):
 
 	_update_info()
 
-func _update_trail_mesh(mesh: MeshInstance3D, points: PackedVector3Array, color: Color):
+func _update_trail_mesh(mesh: MeshInstance3D, points: PackedVector3Array, color: Color) -> void:
 	if points.size() < 2:
 		return
 	# Keep last 30 points
@@ -269,14 +279,14 @@ func _update_trail_mesh(mesh: MeshInstance3D, points: PackedVector3Array, color:
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mesh.material_override = mat
 
-func _update_info():
+func _update_info() -> void:
 	_info_label.text = "FIREWORKS — %s\nParticles: %d  Rockets: %d" % [
 		(_presets[_current_preset][0] as String),
 		_particles.size(),
 		_rockets.size()
 	]
 
-func _create_labels():
+func _create_labels() -> void:
 	_info_label = Label3D.new()
 	_info_label.name = "InfoLabel"
 	_info_label.pixel_size = 0.002
@@ -288,7 +298,7 @@ func _create_labels():
 	_info_label.text = "FIREWORK LAUNCHER"
 	add_child(_info_label)
 
-func _create_vr_controls():
+func _create_vr_controls() -> void:
 	_control_panel = Node3D.new()
 	_control_panel.name = "ControlPanel"
 	_control_panel.position = Vector3(0, 0.02, 0.3)
@@ -348,7 +358,7 @@ func _create_vr_controls():
 			burst_force = 1.0 + force_slider.get_normalized_value() * 7.0
 	)
 
-func _add_button_label(btn: Node, text: String):
+func _add_button_label(btn: Node, text: String) -> void:
 	var lbl := Label3D.new()
 	lbl.text = text
 	lbl.pixel_size = 0.0008
@@ -356,7 +366,7 @@ func _add_button_label(btn: Node, text: String):
 	lbl.position = Vector3(0, -0.018, 0)
 	btn.add_child(lbl)
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_SPACE: _launch_firework()
@@ -366,7 +376,7 @@ func _input(event: InputEvent):
 			KEY_4: _current_preset = 3
 			KEY_A: _auto_launch = not _auto_launch
 
-func reset():
+func reset() -> void:
 	# Clean up all particles and rockets
 	for p in _particles:
 		if p["mesh"]:
@@ -378,3 +388,12 @@ func reset():
 		if r["trail_mesh"]:
 			(r["trail_mesh"] as MeshInstance3D).queue_free()
 	_rockets.clear()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

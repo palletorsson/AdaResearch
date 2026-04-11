@@ -31,10 +31,10 @@ class_name PoissonDiskSamplingApplications
 
 var poisson_sampler: Node3D
 
-func _ready():
+func _ready() -> void:
     setup_sampler()
 
-func setup_sampler():
+func setup_sampler() -> void:
     # Create poisson sampler if not exists
     if not poisson_sampler:
         poisson_sampler = Node3D.new()
@@ -45,7 +45,7 @@ func setup_sampler():
         if ResourceLoader.exists(script_path):
             poisson_sampler.set_script(load(script_path))
 
-func generate_application():
+func generate_application() -> void:
     clear_application()
     
     # Configure sampler
@@ -72,7 +72,7 @@ func generate_application():
                 poisson_sampler.generate_samples()
                 create_cell_distribution()
 
-func create_forest():
+func create_forest() -> void:
     if not poisson_sampler.has_method("get_sample_points"):
         return
     
@@ -129,7 +129,7 @@ func create_simple_tree() -> Node3D:
     
     return tree
 
-func create_particles():
+func create_particles() -> void:
     if not poisson_sampler.has_method("get_sample_points"):
         return
     
@@ -154,7 +154,7 @@ func create_particles():
     
     print("Created particle cloud with ", points.size(), " particles")
 
-func create_star_field():
+func create_star_field() -> void:
     if not poisson_sampler.has_method("get_sample_points"):
         return
     
@@ -181,7 +181,7 @@ func create_star_field():
     
     print("Created star field with ", points.size(), " stars")
 
-func create_cell_distribution():
+func create_cell_distribution() -> void:
     if not poisson_sampler.has_method("get_sample_points"):
         return
     
@@ -207,7 +207,16 @@ func create_cell_distribution():
     
     print("Created cell distribution with ", points.size(), " cells")
 
-func clear_application():
+func clear_application() -> void:
     for child in get_children():
         if child != poisson_sampler:
             child.queue_free()
+
+func _exit_tree() -> void:
+    for child in get_children():
+        if not child.owner:
+            child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+    pass

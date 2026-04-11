@@ -52,13 +52,13 @@ class CloudParticle:
 	var last_noise_value: float
 	var distance_to_camera: float
 	
-	func _init(pos: Vector3, s: float, op: float):
+	func _init(pos: Vector3, s: float, op: float) -> void:
 		position = pos
 		scale = s
 		opacity = op
 		velocity = Vector3.ZERO
 
-func _ready():
+func _ready() -> void:
 	# Set quality-based parameters
 	setup_vr_quality()
 	
@@ -84,7 +84,7 @@ func _ready():
 	if enable_adaptive_quality:
 		set_process(true)
 
-func setup_vr_quality():
+func setup_vr_quality() -> void:
 	match vr_quality:
 		VRQuality.HIGH:
 			particle_count = 3000
@@ -102,7 +102,7 @@ func setup_vr_quality():
 			fade_distance = 60.0
 			batch_size = 50
 
-func setup_noise():
+func setup_noise() -> void:
 	noise = FastNoiseLite.new()
 	noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	noise.frequency = noise_scale
@@ -110,7 +110,7 @@ func setup_noise():
 	noise.fractal_type = FastNoiseLite.FRACTAL_FBM
 	noise.seed = randi()
 
-func setup_multimesh_rendering():
+func setup_multimesh_rendering() -> void:
 	# Use MultiMesh for efficient instanced rendering in VR
 	if use_instancing:
 		multimesh_instance = MultiMeshInstance3D.new()
@@ -131,7 +131,7 @@ func setup_multimesh_rendering():
 		
 		cloud_container.add_child(multimesh_instance)
 
-func setup_vr_cloud_material():
+func setup_vr_cloud_material() -> void:
 	cloud_material = StandardMaterial3D.new()
 	
 	# VR-optimized material settings
@@ -149,7 +149,7 @@ func setup_vr_cloud_material():
 	cloud_material.flags_vertex_lighting = true  # Use vertex lighting for performance
 	cloud_material.flags_use_point_size = false
 
-func setup_vr_cloud_mesh():
+func setup_vr_cloud_mesh() -> void:
 	cloud_mesh = SphereMesh.new()
 	cloud_mesh.radius = 1.0
 	cloud_mesh.height = 2.0
@@ -159,7 +159,7 @@ func setup_vr_cloud_mesh():
 	if use_instancing and multimesh:
 		multimesh.mesh = cloud_mesh
 
-func generate_cloud_field():
+func generate_cloud_field() -> void:
 	# Clear existing particles
 	cloud_particles.clear()
 	active_particles.clear()
@@ -210,7 +210,7 @@ func create_cloud_particle(pos: Vector3, noise_value: float) -> CloudParticle:
 	
 	return CloudParticle.new(pos, scale, opacity)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time_offset += delta * animation_speed
 	
 	# Update camera info for VR optimization
@@ -231,7 +231,7 @@ func _process(delta):
 	if randf() < 0.0005:  # Reduced frequency for VR
 		regenerate_random_clouds()
 
-func update_camera_info():
+func update_camera_info() -> void:
 	var camera = get_viewport().get_camera_3d()
 	if camera:
 		camera_position = camera.global_position
@@ -240,7 +240,7 @@ func update_camera_info():
 		if frustum_culling:
 			camera_frustum = camera.get_frustum()
 
-func animate_clouds_batched(delta):
+func animate_clouds_batched(delta) -> void:
 	# Process clouds in batches to spread load across frames
 	var batch_start = current_batch_index
 	var batch_end = min(current_batch_index + batch_size, active_particles.size())
@@ -258,7 +258,7 @@ func animate_clouds_batched(delta):
 	else:
 		current_batch_index = 0  # or handle the empty case appropriately
 		
-func animate_single_particle(particle: CloudParticle, delta):
+func animate_single_particle(particle: CloudParticle, delta) -> void:
 	# Sample noise for movement (cached for performance)
 	var noise_x = noise.get_noise_2d(particle.position.x * 0.01, time_offset * 2.0) * 1.5
 	var noise_z = noise.get_noise_2d(particle.position.z * 0.01, time_offset * 2.0) * 1.5
@@ -299,7 +299,7 @@ func is_in_frustum(pos: Vector3) -> bool:
 			return false
 	return true
 
-func update_multimesh():
+func update_multimesh() -> void:
 	if not use_instancing or not multimesh:
 		return
 	
@@ -331,7 +331,7 @@ func update_multimesh():
 	for i in range(visible_count, particle_count):
 		multimesh.set_instance_color(i, Color.TRANSPARENT)
 
-func monitor_performance(delta):
+func monitor_performance(delta) -> void:
 	frame_time_accumulator += delta * 1000.0  # Convert to milliseconds
 	performance_counter += 1
 	
@@ -350,7 +350,7 @@ func monitor_performance(delta):
 		frame_time_accumulator = 0.0
 		performance_counter = 0
 
-func reduce_quality():
+func reduce_quality() -> void:
 	if current_lod_level < 2:
 		current_lod_level += 1
 		match current_lod_level:
@@ -362,7 +362,7 @@ func reduce_quality():
 				cloud_layers = max(1, cloud_layers - 1)
 				regenerate_clouds()
 
-func increase_quality():
+func increase_quality() -> void:
 	if current_lod_level > 0:
 		current_lod_level -= 1
 		match current_lod_level:
@@ -373,7 +373,7 @@ func increase_quality():
 				setup_vr_quality()  # Reset to original quality
 				regenerate_clouds()
 
-func regenerate_random_clouds():
+func regenerate_random_clouds() -> void:
 	# VR-optimized regeneration
 	var count_to_regen = min(25, cloud_particles.size() / 20.0)  # Reduced for VR
 	
@@ -395,28 +395,28 @@ func regenerate_random_clouds():
 			particle.opacity = new_noise * 0.25 + 0.05
 
 # Public functions for runtime adjustment
-func set_vr_quality(quality: VRQuality):
+func set_vr_quality(quality: VRQuality) -> void:
 	vr_quality = quality
 	setup_vr_quality()
 	regenerate_clouds()
 
-func set_cloud_density(value: float):
+func set_cloud_density(value: float) -> void:
 	cloud_density = clamp(value, 0.0, 1.0)
 	generate_cloud_field()
 
-func set_animation_speed(value: float):
+func set_animation_speed(value: float) -> void:
 	animation_speed = value
 
-func set_noise_scale(value: float):
+func set_noise_scale(value: float) -> void:
 	noise_scale = value
 	noise.frequency = value
 	generate_cloud_field()
 
-func regenerate_clouds():
+func regenerate_clouds() -> void:
 	noise.seed = randi()
 	generate_cloud_field()
 
-func toggle_adaptive_quality(enabled: bool):
+func toggle_adaptive_quality(enabled: bool) -> void:
 	enable_adaptive_quality = enabled
 	if not enabled:
 		current_lod_level = 0
@@ -431,10 +431,19 @@ func get_performance_stats() -> Dictionary:
 		"fade_distance": fade_distance
 	}
 
-func force_quality_level(level: int):
+func force_quality_level(level: int) -> void:
 	current_lod_level = clamp(level, 0, 2)
 	if level == 0:
 		setup_vr_quality()
 	else:
 		for i in range(level):
 			reduce_quality()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

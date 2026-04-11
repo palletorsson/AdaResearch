@@ -121,7 +121,7 @@ var animation_speed = 1.0
 @export var rotate_cubes: bool = false
 @export var wave_height: float = 2.0
 
-func _ready():
+func _ready() -> void:
 	print("🏴󠁧󠁢󠁳󠁣󠁴󠁿 TartanGrid3D: Initializing 3D tartan cube gallery...")
 	
 	# Combine all tartan patterns
@@ -137,7 +137,7 @@ func _ready():
 	print("✅ Generated ", cube_instances.size(), " tartan cubes in 10x10x1 grid")
 	print("🎮 Controls: R=Regenerate, T=Toggle Animation, Space=Wave Effect")
 
-func setup_camera():
+func setup_camera() -> void:
 	# Add a camera if none exists
 	if not get_viewport().get_camera_3d():
 		var camera = Camera3D.new()
@@ -146,7 +146,7 @@ func setup_camera():
 		add_child(camera)
 		print("📷 Added camera for 3D tartan grid view")
 
-func generate_3d_tartan_grid():
+func generate_3d_tartan_grid() -> void:
 	# Clear existing cubes
 	for cube in cube_instances:
 		if is_instance_valid(cube):
@@ -258,7 +258,7 @@ func generate_random_tartan() -> Dictionary:
 		"saturation": 1.5 + randf() * 1.0
 	}
 
-func _process(delta):
+func _process(delta: float) -> void:
 	current_animation_time += delta * animation_speed
 	
 	if animate_colors:
@@ -267,7 +267,7 @@ func _process(delta):
 	if rotate_cubes:
 		rotate_all_cubes(delta)
 
-func update_cube_animations():
+func update_cube_animations() -> void:
 	for i in range(cube_instances.size()):
 		var cube = cube_instances[i]
 		if not is_instance_valid(cube):
@@ -283,14 +283,14 @@ func update_cube_animations():
 			var wave_offset = sin(current_animation_time * 2.0 + i * 0.2) * wave_height * 0.1
 			cube.position.y = original_pos.y + wave_offset
 
-func rotate_all_cubes(delta):
+func rotate_all_cubes(delta) -> void:
 	for i in range(cube_instances.size()):
 		var cube = cube_instances[i]
 		if is_instance_valid(cube):
 			cube.rotation.y += delta * (0.5 + i * 0.01)
 			cube.rotation.x += delta * (0.3 + i * 0.005)
 
-func _on_cube_clicked(_camera, event, position, _normal, _shape_idx, cube: MeshInstance3D):
+func _on_cube_clicked(_camera, event, position, _normal, _shape_idx, cube: MeshInstance3D) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		var tartan_data = cube.get_meta("tartan_data", {})
 		var grid_index = cube.get_meta("grid_index", -1)
@@ -305,18 +305,18 @@ func _on_cube_clicked(_camera, event, position, _normal, _shape_idx, cube: MeshI
 		tween.tween_property(cube, "scale", original_scale * 1.2, 0.1)
 		tween.tween_property(cube, "scale", original_scale, 0.1)
 
-func _on_cube_hover_enter(cube: MeshInstance3D):
+func _on_cube_hover_enter(cube: MeshInstance3D) -> void:
 	# Subtle glow effect on hover
 	var tween = create_tween()
 	tween.tween_property(cube, "scale", cube.scale * 1.05, 0.1)
 
-func _on_cube_hover_exit(cube: MeshInstance3D):
+func _on_cube_hover_exit(cube: MeshInstance3D) -> void:
 	# Remove glow effect
 	var original_scale = Vector3.ONE
 	var tween = create_tween()
 	tween.tween_property(cube, "scale", original_scale, 0.1)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_R:
@@ -335,7 +335,7 @@ func _input(event):
 				animation_speed = speed_level * 0.5
 				print("⚡ Animation speed: ", animation_speed)
 
-func regenerate_grid():
+func regenerate_grid() -> void:
 	# Regenerate random patterns
 	for i in range(clan_tartans.size() + modern_tartans.size(), all_tartans.size()):
 		all_tartans[i] = generate_random_tartan()
@@ -343,7 +343,7 @@ func regenerate_grid():
 	# Regenerate the grid
 	generate_3d_tartan_grid()
 
-func trigger_wave_effect():
+func trigger_wave_effect() -> void:
 	print("🌊 Triggering wave effect...")
 	
 	for i in range(cube_instances.size()):
@@ -358,7 +358,7 @@ func trigger_wave_effect():
 		tween.tween_property(cube, "position:y", cube.position.y + wave_height, 0.3)
 		tween.tween_property(cube, "position:y", cube.position.y, 0.3)
 
-func print_stats():
+func print_stats() -> void:
 	print("\n🏴󠁧󠁢󠁳󠁣󠁴󠁿 3D Tartan Grid Statistics:")
 	print("  Total cubes: ", cube_instances.size())
 	print("  Clan tartans: ", clan_tartans.size())
@@ -367,3 +367,12 @@ func print_stats():
 	print("  Animation active: ", animate_colors)
 	print("  Rotation active: ", rotate_cubes)
 	print("  Wave height: ", wave_height)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

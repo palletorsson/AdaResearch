@@ -226,14 +226,34 @@ python tools/map_pathfinder.py fix --all
 python tools/map_pathfinder.py fix --all --dry-run
 ```
 
-## 8) Repo Gotchas (Important)
+## 8) Encyclopedia Web Editors & API
+
+The Ada Encyclopedia (`ada_encyclopedia/`) provides web-based editors and an API layer. Run `npm run dev` (port 3003).
+
+### Visual Map Editors
+- **Map Builder** — `localhost:3003/map-builder` — 3-layer editor with AI generation, simulation, export
+- **Voxel Editor** — `localhost:3003/voxel-editor` — 3D structural editor with height variation
+
+### Key API Endpoints
+- `GET /api/game/context?format=markdown` — Full game context for AI
+- `GET /api/ai/capabilities?format=markdown` — Complete tool inventory
+- `POST /api/game/generate` — AI map generation (topology, complexity)
+- `POST /api/game/analyze` — Map rule validation
+- `POST /api/game/simulate` — AI pathfinding simulation
+- `GET /api/maps?name=<Name>` — Map data retrieval
+- `POST /api/scenes/capture` — Godot scene screenshot via web
+
+### Full Pipeline
+See `doc/MAP_EDITING_PIPELINE.md` for the end-to-end flow: Discover → Edit → Validate → Capture → Review → Bridge → Iterate.
+
+## 9) Repo Gotchas (Important)
 
 - `addons/*` is gitignored in this repo. Do not rely on committed changes inside `addons/`.
   - If you must extend addon behavior, prefer a wrapper script under `commons/`.
 - The worktree can be dirty. Never revert unrelated user changes.
 - Prefer non-destructive commands and explicit audits before broad map edits.
 
-## 9) Handoff Template (for next agent)
+## 10) Handoff Template (for next agent)
 
 When handing off, include:
 - objective

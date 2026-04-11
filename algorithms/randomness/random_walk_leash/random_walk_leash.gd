@@ -5,6 +5,16 @@
 #
 # QFEP: Embodied randomness — the random walk isn't watched, it's felt.
 # Your arm becomes the accumulator of stochastic impulses.
+#
+# @identity
+# essence: F_tug = impulse_strength · random_unit_vector — stochastic forcing on a tethered body
+# desire: grab the orb and feel randomness pulling your hand — your arm is the integral of noise
+# critical_parameter: impulse_strength — the force per tug; too low and you feel nothing, too high and it escapes
+# triggers: _impulse_timer fires every impulse_interval seconds, applying a random 3D impulse to the orb
+# emerges: RMS displacement tracks sqrt(N) — the fundamental diffusion law felt through proprioception
+# needs: XRToolsPickable grab [has], leash constraint [has], trail visualization [has]
+# relationships: contrasts with random_walk_terrarium (observed vs embodied); depends on entropy_axiom conceptually
+# truth: To hold randomness on a leash is to feel that unpredictability has weight.
 
 extends Node3D
 
@@ -459,3 +469,12 @@ func _reset() -> void:
 	_trail_points.clear()
 	_is_held = false
 	_stats_label.text = "Tugs: 0\n\nGrab the orb!"
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

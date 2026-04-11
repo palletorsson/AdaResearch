@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 ## RotateRandomY.gd
 ## Randomly rotates MultiMesh cube instances around Y axis
 
@@ -12,7 +12,7 @@ var rng := RandomNumberGenerator.new()
 var multimesh_instance: MultiMeshInstance3D = null
 var multimesh: MultiMesh = null
 
-func _ready():
+func _ready() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	rng.randomize()
@@ -43,7 +43,7 @@ func _find_multimesh_instance(node: Node) -> MultiMeshInstance3D:
 			return result
 	return null
 
-func rotate_random_y_safe():
+func rotate_random_y_safe() -> void:
 	if not multimesh:
 		return
 
@@ -72,3 +72,6 @@ func _process(_delta: float) -> void:
 	transform.basis = transform.basis.rotated(Vector3.UP, step_y)
 
 	multimesh.set_instance_transform(instance_index, transform)
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -19,7 +19,7 @@ var noise = FastNoiseLite.new()
 var rng = RandomNumberGenerator.new()
 var mesh_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	# Create a MeshInstance3D child node if not already present
 	mesh_instance = $PoolHoleNoiseMesh
 	if not mesh_instance:
@@ -36,7 +36,7 @@ func _ready():
 	generate_grid()
 	TimerHelper.create_timer(self, 0.5, Callable(self, "_grow_pools"), false)
 
-func apply_height_shader():
+func apply_height_shader() -> void:
 	var shader_material = ShaderMaterial.new()
 	shader_material.shader = create_height_shader()
 	mesh_instance.material_override = shader_material
@@ -102,13 +102,13 @@ func create_height_shader() -> Shader:
 	return shader
 
 
-func create_noise():
+func create_noise() -> void:
 	noise.noise_type = FastNoiseLite.TYPE_CELLULAR
 	noise.fractal_type = FastNoiseLite.FRACTAL_NONE
 	noise.cellular_jitter = 10.0
 	noise.frequency = 1.0 / cell_size
 
-func generate_pools():
+func generate_pools() -> void:
 	pools.clear()
 	for i in range(num_pools):
 		var pool_center = Vector2(rng.randi_range(5, num_cells - 5), rng.randi_range(5, num_cells - 5))
@@ -138,7 +138,7 @@ func generate_circle_packing(pool_center: Vector2, pool_radius: float) -> Array:
 		attempts += 1
 	return circles
 
-func _grow_pools():
+func _grow_pools() -> void:
 	for pool in pools:
 		pool["radius"] = min(pool["radius"] + growth_speed, max_pool_radius)
 		for circle in pool["inner_circles"]:
@@ -162,7 +162,7 @@ func mask_pool_area(x: int, y: int) -> float:
 				min_factor = min(min_factor, 0.3)  # Inner circle influence
 	return min_factor
 
-func generate_grid():
+func generate_grid() -> void:
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var vertices = []
@@ -189,3 +189,12 @@ func generate_grid():
 	
 	st.generate_normals()
 	mesh_instance.mesh = st.commit()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

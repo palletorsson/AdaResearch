@@ -1,0 +1,85 @@
+{
+    "description": "Stage 9: Cellular rhythm patterns. Organic clicking. Things growing. Pulsing. Life finding its rules.",
+    "continuous_layers": [
+        {
+            "sound_id": "AudioSynthesizer.CELLULAR_MELODY",
+            "volume_db": -16,
+            "bus": "Melody"
+        },
+        {
+            "sound_id": "AudioSynthesizer.AUTOMATA_RHYTHM",
+            "volume_db": -14,
+            "bus": "Rhythm"
+        },
+        {
+            "sound_id": "SyntheticSoundGenerator.ambient_sound",
+            "volume_db": -24,
+            "bus": "DeepAmbient",
+            "parameters": {
+                "entropy": 0.35,
+                "queer_factor": 0.25
+            }
+        }
+    ],
+    "random_events": [
+        {
+            "sound_pool": ["AudioSynthesizer.GRID_PULSE"],
+            "interval_range": [6.0, 18.0],
+            "volume_range": [-20, -14],
+            "bus": "Rhythm"
+        },
+        {
+            "sound_pool": ["AudioSynthesizer.GENERATION_SWEEP"],
+            "interval_range": [15.0, 40.0],
+            "volume_range": [-22, -16],
+            "bus": "FX"
+        }
+    ],
+    "buses": {
+        "Melody": {
+            "effects": [
+                {
+                    "type": "Delay",
+                    "delay_ms": 200,
+                    "feedback": 0.25,
+                    "wet": 0.2
+                }
+            ]
+        },
+        "Rhythm": {
+            "effects": [
+                {
+                    "type": "Compressor",
+                    "threshold_db": -12.0,
+                    "ratio": 2.5
+                }
+            ]
+        },
+        "DeepAmbient": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.35,
+                    "wet": 0.25,
+                    "damping": 0.6
+                },
+                {
+                    "type": "EQ",
+                    "low_gain_db": 2.0,
+                    "mid_gain_db": -3.0,
+                    "high_gain_db": -6.0
+                }
+            ]
+        },
+        "FX": {
+            "effects": [
+                {
+                    "type": "Reverb",
+                    "room_size": 0.5,
+                    "wet": 0.35,
+                    "damping": 0.4
+                }
+            ]
+        }
+    }
+}

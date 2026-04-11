@@ -28,7 +28,17 @@ var camera_distance: float = 15.0
 var camera_angle: float = 0.0
 var camera_height: float = 10.0
 
-func _ready():
+# @identity
+# essence: Desktop UI controller for tesseract net space — net type, dimensions, cube size, spacing, color, wireframe, hollow toggles
+# desire: To unfold a 4D hypercube into walkable 3D rooms and let players choose which of 261 possible nets to explore
+# critical_parameter: net_type — Dali Cross, Linear Chain, Folded Chain, Double Cross — different unfoldings of eight cubic cells
+# triggers: Switching net type reorganizes all cubes; hollow toggle reveals adjacency; wireframe shows edge structure
+# emerges: Architectural intuition for the fourth dimension through manipulation of its 3D shadow
+# needs: Desktop UI sliders [has], checkboxes [has], color picker [has], camera orbit [has], VR controls [missing]
+# relationships: Controller for tesseract_net_space_showcase in higher_dimensions. Contrasts with tesseract_tunnel (projection vs unfolding).
+# truth: To unfold a tesseract is to cut the fourth dimension — every net is a wound in hyperspace.
+
+func _ready() -> void:
 	# Connect UI signals
 	net_type_option.item_selected.connect(_on_net_type_selected)
 	space_size_x_slider.value_changed.connect(_on_space_size_x_changed)
@@ -51,7 +61,7 @@ func _ready():
 	_update_camera()
 	_update_stats()
 
-func _setup_ui():
+func _setup_ui() -> void:
 	"""Initialize UI with current net space settings"""
 	# Setup net type options
 	net_type_option.clear()
@@ -102,73 +112,73 @@ func _setup_ui():
 	# Setup color picker
 	base_color_picker.color = net_space.base_color
 
-func _update_camera():
+func _update_camera() -> void:
 	"""Update camera position for optimal viewing"""
 	var x = cos(camera_angle) * camera_distance
 	var z = sin(camera_angle) * camera_distance
 	camera.position = Vector3(x, camera_height, z)
 	camera.look_at(Vector3.ZERO, Vector3.UP)
 
-func _on_net_type_selected(index: int):
+func _on_net_type_selected(index: int) -> void:
 	net_space.net_type = index
 	_update_stats()
 
-func _on_space_size_x_changed(value: float):
+func _on_space_size_x_changed(value: float) -> void:
 	net_space.space_size.x = int(value)
 	_update_stats()
 
-func _on_space_size_y_changed(value: float):
+func _on_space_size_y_changed(value: float) -> void:
 	net_space.space_size.y = int(value)
 	_update_stats()
 
-func _on_space_size_z_changed(value: float):
+func _on_space_size_z_changed(value: float) -> void:
 	net_space.space_size.z = int(value)
 	_update_stats()
 
-func _on_cube_size_changed(value: float):
+func _on_cube_size_changed(value: float) -> void:
 	net_space.cube_size = value
 	_update_stats()
 
-func _on_spacing_changed(value: float):
+func _on_spacing_changed(value: float) -> void:
 	net_space.spacing = value
 	_update_stats()
 
-func _on_hollow_center_toggled(pressed: bool):
+func _on_hollow_center_toggled(pressed: bool) -> void:
 	net_space.create_hollow_center = pressed
 	_update_stats()
 
-func _on_rotation_variety_toggled(pressed: bool):
+func _on_rotation_variety_toggled(pressed: bool) -> void:
 	net_space.rotation_variety = pressed
 	_update_stats()
 
-func _on_offset_pattern_toggled(pressed: bool):
+func _on_offset_pattern_toggled(pressed: bool) -> void:
 	net_space.offset_pattern = pressed
 	_update_stats()
 
-func _on_base_color_changed(color: Color):
+func _on_base_color_changed(color: Color) -> void:
 	net_space.base_color = color
 	_update_stats()
 
-func _on_color_variation_toggled(pressed: bool):
+func _on_color_variation_toggled(pressed: bool) -> void:
 	net_space.color_variation = pressed
 	_update_stats()
 
-func _on_emission_changed(value: float):
+func _on_emission_changed(value: float) -> void:
 	net_space.emission_strength = value
 	_update_stats()
 
-func _on_wireframe_toggled(pressed: bool):
+func _on_wireframe_toggled(pressed: bool) -> void:
 	net_space.show_wireframe = pressed
 	_update_stats()
 
-func _on_regenerate_pressed():
+func _on_regenerate_pressed() -> void:
 	net_space.regenerate()
 	_update_stats()
 
-func _on_randomize_pressed():
+func _on_randomize_pressed() -> void:
 	_randomize_parameters()
 
-func _update_stats():
+func _update_stats() -> void:
 	"""Update statistics display"""
 	if not stats_label:
 		return
@@ -181,7 +191,7 @@ func _update_stats():
 	stats_label.text += "Spacing: " + "%.2f" % stats["spacing"] + "\n"
 	stats_label.text += "Hollow: " + ("Yes" if stats["hollow_center"] else "No")
 
-func _randomize_parameters():
+func _randomize_parameters() -> void:
 	"""Randomize net space parameters for variety"""
 	net_space.net_type = randi() % 4
 	net_space.space_size = Vector3i(
@@ -209,7 +219,7 @@ func _randomize_parameters():
 	net_space.regenerate()
 	_update_stats()
 
-func _update_ui():
+func _update_ui() -> void:
 	"""Update UI to reflect current net space settings"""
 	if net_type_option:
 		net_type_option.selected = net_space.net_type
@@ -238,7 +248,7 @@ func _update_ui():
 	if wireframe_checkbox:
 		wireframe_checkbox.button_pressed = net_space.show_wireframe
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle input for camera control and interactions"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -301,3 +311,6 @@ func _input(event):
 
 
 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

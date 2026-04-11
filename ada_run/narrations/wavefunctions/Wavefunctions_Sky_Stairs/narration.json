@@ -1,0 +1,1018 @@
+{
+	"journey": {
+		"artifacts": [
+			{
+				"dist": 6,
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					3
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 7,
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					4
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 8,
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					5
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 8,
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					6
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 9,
+				"name": "sine_cylinder_staircase",
+				"pos": [
+					5,
+					1,
+					6
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 10,
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					7
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 11,
+				"name": "cube_scene",
+				"pos": [
+					7,
+					1,
+					6
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 11,
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					8
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 12,
+				"name": "cube_scene",
+				"pos": [
+					8,
+					1,
+					6
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 12,
+				"name": "cube_scene",
+				"pos": [
+					7,
+					1,
+					7
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 12,
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					9
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 13,
+				"name": "cube_scene",
+				"pos": [
+					8,
+					1,
+					7
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 13,
+				"name": "cube_scene",
+				"pos": [
+					7,
+					1,
+					8
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 14,
+				"name": "cube_scene",
+				"pos": [
+					8,
+					1,
+					8
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 14,
+				"name": "cube_scene",
+				"pos": [
+					7,
+					1,
+					9
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": 15,
+				"name": "cube_scene",
+				"pos": [
+					8,
+					1,
+					9
+				],
+				"reachable": true,
+				"visible_from_spawn": false
+			},
+			{
+				"dist": -1,
+				"name": "math_objects",
+				"pos": [
+					6,
+					8,
+					11
+				],
+				"reachable": false,
+				"visible_from_spawn": false
+			}
+		],
+		"dead_ends": [
+			[
+				0,
+				0,
+				0
+			],
+			[
+				0,
+				0,
+				3
+			],
+			[
+				0,
+				0,
+				5
+			],
+			[
+				0,
+				0,
+				7
+			],
+			[
+				5,
+				0,
+				1
+			]
+		],
+		"issues": [
+			{
+				"description": "5 dead ends found",
+				"severity": "low",
+				"type": "high_dead_ends"
+			},
+			{
+				"description": "0.9 steps per artifact (very dense)",
+				"severity": "low",
+				"type": "dense_pacing"
+			},
+			{
+				"description": "math_objects at (6,8,11) unreachable",
+				"severity": "high",
+				"type": "unreachable_artifact"
+			}
+		],
+		"map_name": "Wavefunctions_Sky_Stairs",
+		"pacing": {
+			"density": 0.9375,
+			"reachable_artifacts": 16,
+			"total_artifacts": 17,
+			"walkable_tiles": 100
+		},
+		"sequence": "unknown",
+		"spawn_pos": [
+			5,
+			0,
+			1
+		],
+		"teleporter": {
+			"dist": 18,
+			"pos": [
+				9,
+				0,
+				11
+			],
+			"reachable": true
+		}
+	},
+	"map_name": "Wavefunctions_Sky_Stairs",
+	"sequence": "wavefunctions",
+	"spatial": {
+		"artifacts": [
+			{
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					3
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					4
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					5
+				]
+			},
+			{
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					6
+				]
+			},
+			{
+				"name": "sine_cylinder_staircase",
+				"pos": [
+					5,
+					1,
+					6
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					7,
+					1,
+					6
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					8,
+					1,
+					6
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					7
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					7,
+					1,
+					7
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					8,
+					1,
+					7
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					8
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					7,
+					1,
+					8
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					8,
+					1,
+					8
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					9
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					7,
+					1,
+					9
+				]
+			},
+			{
+				"name": "cube_scene",
+				"pos": [
+					8,
+					1,
+					9
+				]
+			},
+			{
+				"name": "math_objects",
+				"pos": [
+					6,
+					8,
+					11
+				]
+			}
+		],
+		"dimensions": [
+			13,
+			10,
+			14
+		],
+		"height": {
+			"boundary": 16,
+			"ground": 99,
+			"ground_pct": 54.3956043956044,
+			"void": 28,
+			"walls": 39
+		},
+		"map_name": "Wavefunctions_Sky_Stairs",
+		"rooms": [
+			{
+				"artifacts": [
+					"cube_scene",
+					"cube_scene",
+					"cube_scene",
+					"dark_sphere",
+					"sine_cylinder_staircase",
+					"cube_scene",
+					"cube_scene",
+					"cube_scene",
+					"cube_scene",
+					"cube_scene",
+					"cube_scene",
+					"cube_scene",
+					"cube_scene",
+					"cube_scene",
+					"cube_scene",
+					"cube_scene"
+				],
+				"label": "A",
+				"region": "center",
+				"tiles": 99
+			}
+		],
+		"spawn": [
+			5,
+			0,
+			1
+		],
+		"teleporter": [
+			9,
+			0,
+			11
+		]
+	},
+	"timestamp": "2026-03-16T12:13:26",
+	"walkthrough": {
+		"map_name": "Wavefunctions_Sky_Stairs",
+		"stops": [
+			{
+				"facing": "south",
+				"look_at": [
+					5,
+					1,
+					3
+				],
+				"pos": [
+					5,
+					0,
+					1
+				],
+				"total_steps": 0,
+				"type": "spawn",
+				"visible": []
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					3
+				],
+				"steps_from_prev": 2,
+				"total_steps": 2,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "south",
+						"dist": 3,
+						"name": "sine_cylinder_staircase"
+					},
+					{
+						"direction": "south",
+						"dist": 4,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					4
+				],
+				"steps_from_prev": 1,
+				"total_steps": 3,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "south",
+						"dist": 2,
+						"name": "sine_cylinder_staircase"
+					},
+					{
+						"direction": "southwest",
+						"dist": 3,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					5
+				],
+				"steps_from_prev": 1,
+				"total_steps": 4,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "south",
+						"dist": 1,
+						"name": "sine_cylinder_staircase"
+					},
+					{
+						"direction": "southwest",
+						"dist": 2,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "west",
+				"name": "sine_cylinder_staircase",
+				"pos": [
+					5,
+					1,
+					6
+				],
+				"steps_from_prev": 1,
+				"total_steps": 5,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 1,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "west",
+						"dist": 1,
+						"name": "dark_sphere"
+					},
+					{
+						"direction": "south",
+						"dist": 1,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "north",
+						"dist": 2,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "east",
+						"dist": 2,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "south",
+						"dist": 2,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "north",
+						"dist": 3,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "east",
+						"dist": 3,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "southeast",
+						"dist": 3,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "south",
+						"dist": 3,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "east",
+						"dist": 4,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "southeast",
+						"dist": 4,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "southeast",
+						"dist": 5,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "southeast",
+						"dist": 5,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "southeast",
+						"dist": 6,
+						"name": "cube_scene"
+					}
+				]
+			},
+			{
+				"approach_from": "west",
+				"facing": "southeast",
+				"name": "dark_sphere",
+				"pos": [
+					4,
+					1,
+					6
+				],
+				"steps_from_prev": 1,
+				"total_steps": 6,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "east",
+						"dist": 1,
+						"name": "sine_cylinder_staircase"
+					},
+					{
+						"direction": "northeast",
+						"dist": 2,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "southeast",
+						"dist": 2,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "northeast",
+						"dist": 3,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "east",
+						"dist": 3,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "southeast",
+						"dist": 3,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "north",
+						"dist": 4,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "east",
+						"dist": 4,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "east",
+						"dist": 4,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "south",
+						"dist": 4,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "east",
+						"dist": 5,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "southeast",
+						"dist": 5,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "southeast",
+						"dist": 6,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "southeast",
+						"dist": 6,
+						"name": "cube_scene"
+					},
+					{
+						"direction": "southeast",
+						"dist": 7,
+						"name": "cube_scene"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"facing": "south",
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					7
+				],
+				"steps_from_prev": 2,
+				"total_steps": 8,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 1,
+						"name": "sine_cylinder_staircase"
+					},
+					{
+						"direction": "northwest",
+						"dist": 2,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					8
+				],
+				"steps_from_prev": 1,
+				"total_steps": 9,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 2,
+						"name": "sine_cylinder_staircase"
+					},
+					{
+						"direction": "northwest",
+						"dist": 3,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "east",
+				"name": "cube_scene",
+				"pos": [
+					5,
+					1,
+					9
+				],
+				"steps_from_prev": 1,
+				"total_steps": 10,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "north",
+						"dist": 3,
+						"name": "sine_cylinder_staircase"
+					},
+					{
+						"direction": "north",
+						"dist": 4,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "north",
+				"name": "cube_scene",
+				"pos": [
+					7,
+					1,
+					9
+				],
+				"steps_from_prev": 2,
+				"total_steps": 12,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 5,
+						"name": "sine_cylinder_staircase"
+					},
+					{
+						"direction": "northwest",
+						"dist": 6,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "north",
+				"facing": "north",
+				"name": "cube_scene",
+				"pos": [
+					7,
+					1,
+					8
+				],
+				"steps_from_prev": 1,
+				"total_steps": 13,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 4,
+						"name": "sine_cylinder_staircase"
+					},
+					{
+						"direction": "northwest",
+						"dist": 5,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "north",
+				"facing": "north",
+				"name": "cube_scene",
+				"pos": [
+					7,
+					1,
+					7
+				],
+				"steps_from_prev": 1,
+				"total_steps": 14,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 3,
+						"name": "sine_cylinder_staircase"
+					},
+					{
+						"direction": "west",
+						"dist": 4,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "north",
+				"facing": "east",
+				"name": "cube_scene",
+				"pos": [
+					7,
+					1,
+					6
+				],
+				"steps_from_prev": 1,
+				"total_steps": 15,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 2,
+						"name": "sine_cylinder_staircase"
+					},
+					{
+						"direction": "west",
+						"dist": 3,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "east",
+				"facing": "south",
+				"name": "cube_scene",
+				"pos": [
+					8,
+					1,
+					6
+				],
+				"steps_from_prev": 1,
+				"total_steps": 16,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 3,
+						"name": "sine_cylinder_staircase"
+					},
+					{
+						"direction": "west",
+						"dist": 4,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "cube_scene",
+				"pos": [
+					8,
+					1,
+					7
+				],
+				"steps_from_prev": 1,
+				"total_steps": 17,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "west",
+						"dist": 4,
+						"name": "sine_cylinder_staircase"
+					},
+					{
+						"direction": "west",
+						"dist": 5,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "south",
+				"name": "cube_scene",
+				"pos": [
+					8,
+					1,
+					8
+				],
+				"steps_from_prev": 1,
+				"total_steps": 18,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 5,
+						"name": "sine_cylinder_staircase"
+					},
+					{
+						"direction": "northwest",
+						"dist": 6,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "south",
+				"facing": "southeast",
+				"name": "cube_scene",
+				"pos": [
+					8,
+					1,
+					9
+				],
+				"steps_from_prev": 1,
+				"total_steps": 19,
+				"type": "artifact",
+				"visible_others": [
+					{
+						"direction": "northwest",
+						"dist": 6,
+						"name": "sine_cylinder_staircase"
+					},
+					{
+						"direction": "northwest",
+						"dist": 7,
+						"name": "dark_sphere"
+					}
+				]
+			},
+			{
+				"approach_from": "southeast",
+				"pos": [
+					9,
+					0,
+					11
+				],
+				"reachable": true,
+				"steps_from_prev": 3,
+				"total_steps": 22,
+				"type": "teleporter"
+			}
+		],
+		"summary": {
+			"artifacts_visited": 16,
+			"total_steps": 22,
+			"total_stops": 18
+		}
+	}
+}

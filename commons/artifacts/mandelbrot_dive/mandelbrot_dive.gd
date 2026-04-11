@@ -1,6 +1,16 @@
 # mandelbrot_dive.gd
 # GPU-accelerated Mandelbrot set on a 1×1m table
 # VR-enabled with slider controls for zoom, pan, and palette
+#
+# @identity
+# essence: z = z² + c, iterated. Escape or stay forever. The boundary between these is infinitely complex.
+# desire: To be zoomed into. To reveal that every magnification contains the whole. To never end.
+# critical_parameter: Zoom depth. At 10x you see the cardioid. At 10000x you see seahorses. At 10^15 you see copies of yourself.
+# triggers: Zoom slider → deeper structure, palette switch → different beauty from same math, auto-dive → the infinite descent
+# emerges: Self-similarity from iteration. The Mandelbrot set from the simplest possible complex map. Beauty from z²+c.
+# needs: VR zoom slider [has], palette selector [has], auto-dive [has]. Could use: Julia set toggle (show connected set for current c).
+# relationships: Contains all Julia sets as slices. Connects to fractals sequence. Demonstrates escape-time algorithms.
+# truth: The simplest equation in complex dynamics produces the most complex object in mathematics.
 
 extends Node3D
 
@@ -91,7 +101,7 @@ const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 const MANDELBROT_SHADER = """
 shader_type spatial;
-render_mode unshaded;
+render_mode unshaded, cull_disabled;
 
 uniform float zoom = 1.0;
 uniform vec2 center = vec2(-0.5, 0.0);
@@ -372,7 +382,8 @@ func _update_info_label() -> void:
 	if not _info_label:
 		return
 	var scheme_names = ["Classic", "Fire", "Ocean", "Neon", "Gray"]
-	_info_label.text = "MANDELBROT\nZoom: %.2e | %s" % [zoom, scheme_names[color_scheme]]
+	var zoom_text: String = "%.1f" % zoom if zoom < 1000 else "%.0f" % zoom
+	_info_label.text = "MANDELBROT\nZoom: %s | %s" % [zoom_text, scheme_names[color_scheme]]
 
 ## Drives the auto-zoom animation, smoothly approaching the target coordinates.
 func _process(delta: float) -> void:

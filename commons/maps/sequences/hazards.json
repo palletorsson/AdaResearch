@@ -2,48 +2,43 @@
 	"sequences": {
 		"hazards": {
 			"name": "Hazards: The Bestiary",
-			"description": "Every creature in the Ada world, assembled in one place. 69 entities across 16 themed sections. The original collection — origami folders, sphere rollers, wall-crawlers, grid agents, procedural legs, companions — now joined by 30 sequence-specific creatures. Each new creature embodies the algorithm of its home sequence through geometry and behavior: a binary search tree that walks on its leaves, a gradient descent predator stuck in local minima, an Escher figure on impossible stairs. Mathematics given teeth.",
-			"qfep_term": "E(S) ↔ F",
-			"qfep_connection": "Hazards embody the tension between entropy and form. Each creature is a topology — a body that folds, rolls, extends, or shapeshifts. The personality progression from foe to friend mirrors the Q-FEP insight: same potential, different relational context, different manifestation. The force field that burns also warms. The plasma that shocks also heals. Constraint determines outcome.",
+			"description": "Every creature in the Ada world, assembled in one place. 69 entities across 16 themed sections. The original collection \u00e2\u20ac\u201d origami folders, sphere rollers, wall-crawlers, grid agents, procedural legs, companions \u00e2\u20ac\u201d now joined by 30 sequence-specific creatures. Each new creature embodies the algorithm of its home sequence through geometry and behavior: a binary search tree that walks on its leaves, a gradient descent predator stuck in local minima, an Escher figure on impossible stairs. Mathematics given teeth.",
+			"qfep_term": "E(S) \u00e2\u2020\u201d F",
+			"qfep_connection": "Hazards embody the tension between entropy and form. Each creature is a topology \u00e2\u20ac\u201d a body that folds, rolls, extends, or shapeshifts. The personality progression from foe to friend mirrors the Q-FEP insight: same potential, different relational context, different manifestation. The force field that burns also warms. The plasma that shocks also heals. Constraint determines outcome.",
 			"difficulty": "exhibition",
 			"estimated_time": "exploration based",
 			"learning_objectives": [
-				"Origami mathematics made physical — Miura-ori, Kresling, waterbomb, kaleidocycle folds",
+				"Origami mathematics made physical \u00e2\u20ac\u201d Miura-ori, Kresling, waterbomb, kaleidocycle folds",
 				"Rigid-foldable tessellations as locomotion systems",
-				"Procedural creature generation — IK chains, limb variants, morphology",
-				"Procedural locomotion progression — from 1 leg to 8, watching gaits emerge",
-				"Grid agent modes — copy, random, CA, sine, array, color, rotate, scale, translate",
-				"Dual-nature design — every hazard contains its own medicine",
-				"Personality progression — foe, wary, neutral, curious, friend",
-				"HazardManager integration — type gating, spawn permission, befriending",
-				"Algorithm embodiment — data structures, physics simulation, growth patterns as creatures",
-				"Spatial field hazards — noise, Voronoi, isosurfaces, constraint satisfaction as zones",
-				"AI and stochastic systems — gradient descent, Markov chains, procedural generation as behavior"
+				"Procedural creature generation \u00e2\u20ac\u201d IK chains, limb variants, morphology",
+				"Procedural locomotion progression \u00e2\u20ac\u201d from 1 leg to 8, watching gaits emerge",
+				"Grid agent modes \u00e2\u20ac\u201d copy, random, CA, sine, array, color, rotate, scale, translate",
+				"Dual-nature design \u00e2\u20ac\u201d every hazard contains its own medicine",
+				"Personality progression \u00e2\u20ac\u201d foe, wary, neutral, curious, friend",
+				"HazardManager integration \u00e2\u20ac\u201d type gating, spawn permission, befriending",
+				"Algorithm embodiment \u00e2\u20ac\u201d data structures, physics simulation, growth patterns as creatures",
+				"Spatial field hazards \u00e2\u20ac\u201d noise, Voronoi, isosurfaces, constraint satisfaction as zones",
+				"AI and stochastic systems \u00e2\u20ac\u201d gradient descent, Markov chains, procedural generation as behavior"
 			],
 			"content": [
-				"Origami Folders: Miura crawler, Kresling spire, Kaleidocycle, Scissor stalker, Pyre plane — creatures built from folding mathematics",
-				"Sphere Rollers: Armadillo droideka, Eggling, Origami droideka, Waterbomb enemy, Sphere droideka — roll compressed, unfold to attack",
-				"Crawlers & Energy: Octapod crawler, Waterbomb hopper, Plasma critter, Force field — surface traversal and dual-nature forms",
-				"Grid Agents: 9 modes — Copy, Random, CA, Sine, Array, Color, Rotate, Scale, Translate",
-				"Procedural Legs: 1 through 8 legs — locomotion emerging from leg count",
-				"Special Creatures: Block Builder, Tech Strider, Tentacle Cube, Falling Blocks",
-				"Items & Companions: Edible mushroom, Stick tool, Proximity spawner, The Catalyst, Loving Triangle",
-				"Math & Data Structures: Index Sentinel (arrays), Data Tree Walker (BST), Graph Weaver (graph theory), Hull Crusher (convex geometry)",
-				"Physics & Simulation: Wave Rider (wave functions), Spring Mass Bouncer (soft bodies), Collision Crasher (impulse physics), Joint Articulator (constraints)",
-				"Nature & Growth: Lifeform Walker (cellular automata), Branching Vine (L-systems), Fractal Hydra (self-similarity), Recursion Spiral (Fibonacci), Swarm Hive (flocking)",
-				"AI & Stochastic: Gradient Hunter (ML descent), Grammar Markov (transition chains), Maze Spinner (PCG), Paradox Stalker (foundations crisis)",
-				"Spatial Fields: Noise Field (Perlin), Chromatic Field (RGB), Spatial Voronoi (partitions), Isosurface Trap (metaballs), Constraint Web (CSP)",
-				"Patterns & Sound: Pattern Mine (SDF contours), Resonance Chamber (standing waves), Particle Emitter (lifecycle pools)",
-				"Higher Math & Art: Tesseract Phaser (4D), Escher Stairwalker (impossible geometry), Mesh Morpher (topology), Bricoleur Golem (improvisation), QFEP Calibrator (parameter space)"
+				"Hazards_Zoo: Origami Folders and Sphere Rollers",
+				"Hazards_Zoo_2: Crawlers, Energy, and Grid Agents",
+				"Hazards_Zoo_3: Procedural Legs and Special Creatures",
+				"Hazards_Zoo_4: Items, Companions, and Data Structures",
+				"Hazards_Zoo_5: Physics Laws and Growth Patterns",
+				"Hazards_Zoo_6: AI Predators and Spatial Fields",
+				"Hazards_Zoo_7: Higher Math Given Teeth",
+				"Folding_Zoo: Origami Bird and Fold System"
 			],
 			"maps": [
-				"Hazards_Zoo",
-				"Hazards_Zoo_2",
-				"Hazards_Zoo_3",
+				"Folding_Zoo",
+				"Bracelet_Zoo",
 				"Hazards_Zoo_4",
 				"Hazards_Zoo_5",
 				"Hazards_Zoo_6",
-				"Hazards_Zoo_7"
+				"Hazards_Zoo_7",
+				"Hazards_Zoo",
+				"Hazards_Zoo_2"
 			],
 			"audio": {
 				"ambient_preset": "dark_industrial",
@@ -54,7 +49,149 @@
 			"completion_rewards": [
 				"bestiary_badge",
 				"creature_observer_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "Hazards_Zoo",
+					"position": "intro",
+					"artifacts": [
+						"armadillo_droideka",
+						"armadillo_eggling",
+						"kaleidocycle_enemy",
+						"kresling_spire",
+						"miura_crawler",
+						"origami_droideka",
+						"origami_pyre_plane",
+						"progression_driver",
+						"scissor_stalker",
+						"soft_stage_dashboard",
+						"sphere_droideka",
+						"tt",
+						"waterbomb_enemy"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Origami bestiary: Miura crawlers, Kresling spires, kaleidocycles, scissor stalkers, sphere droidekas, waterbombs. Mathematics of folding given locomotion — rigid-foldable tessellations as creature bodies."
+				},
+				{
+					"map": "Hazards_Zoo_2",
+					"position": "foundation",
+					"artifacts": [
+						"force_field",
+						"gridagent",
+						"octapod_crawler",
+						"plasma_critter",
+						"progression_driver",
+						"soft_stage_dashboard",
+						"tt",
+						"waterbomb_hopper"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Crawlers and energy creatures: octapod surface traversal, waterbomb hopping, plasma critters, force fields. Grid agents introduce nine behavioral modes — dual-nature forms where the hazard contains its own medicine."
+				},
+				{
+					"map": "Hazards_Zoo_3",
+					"position": "foundation",
+					"artifacts": [
+						"blockbuilderentity",
+						"fallingblocks",
+						"five_leg_critter",
+						"four_leg_critter",
+						"octapod_ik",
+						"one_leg",
+						"progression_driver",
+						"six_leg_critter",
+						"soft_stage_dashboard",
+						"techstrider",
+						"tentacle_cube",
+						"three_leg_critter",
+						"tt",
+						"two_leg_critter"
+					],
+					"size_budget": "mixed",
+					"rationale": "Procedural legs progression: one through eight legs, watching gaits emerge from limb count. Block builders, tech striders, tentacle cubes — special creatures where geometry determines locomotion."
+				},
+				{
+					"map": "Hazards_Zoo_4",
+					"position": "exploration",
+					"artifacts": [
+						"becoming_catalyst",
+						"data_tree_walker",
+						"edible_mushroom",
+						"graph_weaver",
+						"hull_crusher",
+						"index_sentinel",
+						"loving_triangle",
+						"progression_driver",
+						"proximity_spawner",
+						"soft_stage_dashboard",
+						"stick_tool",
+						"tt"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Items, companions, and data structure creatures: index sentinels (arrays), data tree walkers (BST), graph weavers, hull crushers. Plus edible mushroom, stick tool, proximity spawner, and the Catalyst — personality progression from foe to friend."
+				},
+				{
+					"map": "Hazards_Zoo_5",
+					"position": "integration",
+					"artifacts": [
+						"branching_vine",
+						"collision_crasher",
+						"fractal_hydra",
+						"joint_articulator",
+						"lifeform_walker",
+						"progression_driver",
+						"recursion_spiral",
+						"soft_stage_dashboard",
+						"spring_mass_bouncer",
+						"swarm_hive",
+						"tt",
+						"wave_rider"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Physics and nature creatures: wave riders, spring mass bouncers, collision crashers, joint articulators embody physics simulation. Branching vines, fractal hydras, recursion spirals, swarm hives, lifeform walkers — algorithms given teeth."
+				},
+				{
+					"map": "Hazards_Zoo_6",
+					"position": "integration",
+					"artifacts": [
+						"chromatic_field",
+						"constraint_web",
+						"gradient_hunter",
+						"grammar_markov",
+						"isosurface_trap",
+						"maze_spinner",
+						"noise_field",
+						"paradox_stalker",
+						"progression_driver",
+						"soft_stage_dashboard",
+						"spatial_voronoi",
+						"tt"
+					],
+					"size_budget": "compact_only",
+					"rationale": "AI, stochastic, and spatial field creatures: gradient hunters stuck in local minima, grammar Markov chains, maze spinners, paradox stalkers. Noise fields, Voronoi partitions, isosurface traps, constraint webs — space itself becomes hazardous."
+				},
+				{
+					"map": "Hazards_Zoo_7",
+					"position": "synthesis",
+					"artifacts": [
+						"bricoleur_golem",
+						"escher_stairwalker",
+						"mesh_morpher",
+						"particle_emitter_hazard",
+						"pattern_mine",
+						"progression_driver",
+						"qfep_calibrator",
+						"resonance_chamber",
+						"soft_stage_dashboard",
+						"tesseract_phaser",
+						"tt"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Higher math and art creatures: tesseract phasers (4D), Escher stairwalkers (impossible geometry), mesh morphers (topology), bricoleur golems (improvisation), QFEP calibrators. Pattern mines, resonance chambers, particle emitters — the bestiary's conceptual capstone."
+				}
 			]
 		}
-	}
+	},
+	"world_phase": "organic",
+	"artifact_groups": []
 }

@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 @export var left_hand_path: NodePath
 @export var right_hand_path: NodePath
@@ -9,7 +9,7 @@ var _right_hand: Node3D
 var _mesh: ImmediateMesh
 var _mesh_instance: MeshInstance3D
 
-func _ready():
+func _ready() -> void:
 	if left_hand_path:
 		_left_hand = get_node_or_null(left_hand_path)
 	if right_hand_path:
@@ -17,7 +17,7 @@ func _ready():
 		
 	_setup_mesh()
 
-func _setup_mesh():
+func _setup_mesh() -> void:
 	_mesh = ImmediateMesh.new()
 	_mesh_instance = MeshInstance3D.new()
 	_mesh_instance.mesh = _mesh
@@ -65,3 +65,12 @@ func _process(_delta):
 	_mesh.surface_add_vertex(to_local(hip_pos))
 	
 	_mesh.surface_end()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

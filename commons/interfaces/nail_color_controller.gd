@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: f(RGB) -> material.albedo_color on VR hand mesh surfaces — ValueMapper3D maps 3D input to nail/skin color
+# desire: to paint your own hands in VR, watching color flow onto nails or skin as you move sliders through RGB space
+# critical_parameter: target_surface — 0 selects nails (metallic, emissive), 1 selects skin (matte, no glow), completely different aesthetics
+# triggers: ValueMapper3D.values_changed fires on any slider movement; GameManager persists color across scene transitions
+# emerges: the preview cube becomes an accidental color swatch that players use to compare colors side by side
+# needs: ValueMapper3D [has]; color_preview_cube [has]; VR hand tracking [has]; palette picker [missing]
+# relationships: pairs with hand_model (provides the mesh); unlocks color_sets_overview (palette awareness after personal color)
+# truth: choosing your nail color is the first act of digital self-authorship — the body becomes canvas before the world does
+
 # Controls VR hand nail colors using a ValueMapper3D
 # Maps RGB values from the 3D mapper to both left and right hand nail materials
 

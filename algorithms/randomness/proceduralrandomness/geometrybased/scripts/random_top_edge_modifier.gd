@@ -5,7 +5,7 @@ var fnoise = FastNoiseLite.new()  # Noise generator
 var rng = RandomNumberGenerator.new()
 var profile_height = 0.2
 
-func _ready():
+func _ready() -> void:
 	# Wait 1 second before running the next steps to allow height to be set
 	await get_tree().create_timer(1.0).timeout  
 
@@ -16,7 +16,7 @@ func _ready():
 		modify_top_edge_vertices()
 		print("is plane mesh")
 
-func modify_top_edge_vertices():
+func modify_top_edge_vertices() -> void:
 	var mesh = noise_plane.mesh
 
 	# Extracts vertex data from a MeshInstance3D and returns the vertices array.
@@ -44,5 +44,8 @@ func modify_top_edge_vertices():
 
 	print("✅ Top edge modified successfully!")
 
-func set_height(new_height: float):
+func set_height(new_height: float) -> void:
 	profile_height = new_height  # Adjust height	
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

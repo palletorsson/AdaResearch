@@ -11,7 +11,7 @@ func _process(_delta):
 	# Disable per-frame updates for optimal static mesh generation
 	pass
 
-func _create_fallback_mesh():
+func _create_fallback_mesh() -> void:
 	print("TerrainGeneratorGyroid: Creating fallback sphere...")
 	# Just a Sphere for fallback
 	var sphere = SphereMesh.new()
@@ -19,3 +19,6 @@ func _create_fallback_mesh():
 	sphere.height = 40.0
 	mesh = sphere
 	_create_collision()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

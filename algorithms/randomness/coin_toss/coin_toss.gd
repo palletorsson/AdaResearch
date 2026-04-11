@@ -4,6 +4,16 @@
 # A counter tracks the ratio converging to 0.5 over many tosses.
 #
 # QFEP: Bernoulli trial — the atom of probability. p = 0.5 as perfect symmetry.
+#
+# @identity
+# essence: X ~ Bernoulli(0.5) — the atom of all probability
+# desire: grab a coin, toss it, watch H/T ratio crawl toward 0.5000 one flip at a time
+# critical_parameter: the coin's global_transform.basis.y — dot product with world UP determines heads vs tails
+# triggers: _on_coin_dropped() sets thrown=true; velocity settling below threshold for 0.6s reads result
+# emerges: the history ribbon (HHTTHHTHT...) looks random but its running average is a straight line to 0.5
+# needs: XRToolsPickable coins [has]; tray + landing pad [has]; refill button [has]
+# relationships: simplest case of dice_throw (2 faces vs 6); feeds galton_board (each peg is a coin toss)
+# truth: The Bernoulli trial is the hydrogen atom of randomness — everything complex is built from binary choices.
 
 extends Node3D
 
@@ -450,7 +460,7 @@ func _create_labels() -> void:
 	_stats_label.name = "StatsLabel"
 	_stats_label.text = "Flips: 0\n\nGrab a coin\nand toss it!"
 	_stats_label.pixel_size = 0.0012
-	_stats_label.font_size = 10
+	_stats_label.font_size = 16
 	_stats_label.modulate = Color(0.75, 0.75, 0.8)
 	_stats_label.position = Vector3(0.17, pedestal_height + 0.04, -0.15)
 	_stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -461,7 +471,7 @@ func _create_labels() -> void:
 	_history_label.name = "HistoryLabel"
 	_history_label.text = ""
 	_history_label.pixel_size = 0.001
-	_history_label.font_size = 10
+	_history_label.font_size = 16
 	_history_label.modulate = Color(0.5, 0.5, 0.55)
 	_history_label.position = Vector3(0.17, pedestal_height - 0.02, -0.15)
 	_history_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -540,7 +550,7 @@ func _add_button_label(btn: Node, text: String) -> void:
 	var lbl := Label3D.new()
 	lbl.text = text
 	lbl.pixel_size = 0.001
-	lbl.font_size = 8
+	lbl.font_size = 18
 	lbl.position = Vector3(0, -0.02, 0)
 	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	btn.add_child(lbl)
@@ -567,3 +577,12 @@ func _reset_stats() -> void:
 	_result_label.text = ""
 	_stats_label.text = "Flips: 0\n\nGrab a coin\nand toss it!"
 	_history_label.text = ""
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

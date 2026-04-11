@@ -1,40 +1,152 @@
 {
-    "sequences": {
-        "datastructures": {
-            "name": "Data Structures",
-            "description": "Visualizing fundamental data structures in 3D space",
-            "qfep_term": "F",
-            "qfep_connection": "Data structures are entropy management strategies — each one trades different resources to minimize access cost. Trees compress search, hashes scatter for speed, heaps maintain partial order.",
-            "difficulty": "intermediate",
-            "estimated_time": "30-40 minutes",
-            "learning_objectives": [
-                "Tree structures and hierarchy",
-                "Graph connectivity",
-                "Spatial partitioning (Quadtrees/Octrees)",
-                "Linear vs Non-linear data organization"
-            ],
-            "maps": [
-                "DataStructures_Linked_Lists",
-                "DataStructures_Trees",
-                "DataStructures_Hash_Maps",
-                "DataStructures_Heap_Operations",
-                "DataStructures_Graph_Structures",
-                "DataStructures_Union_Find_Disjoint_Set",
-                "DataStructures_Trie_Operations",
-                "DataStructures_Segment_Tree",
-                "DataStructures_Fenwick_Tree_Binary_Indexed_Tree",
-                "DataStructures_Suffix_Array_Tree",
-                "DataStructures_BSP_Trees",
-                "DataStructures_Quadtrees_Octrees"
-            ],
-            "return_to": "lab",
-            "lab_map": "Lab/map_data_post_datastructures",
-            "unlock_requirements": [
-                "proceduralgeneration"
-            ],
-            "completion_rewards": [
-                "struct_architect_badge"
-            ]
-        }
-    }
+	"sequences": {
+		"datastructures": {
+			"name": "Data Structures",
+			"description": "Visualizing fundamental data structures in 3D space",
+			"qfep_term": "F",
+			"qfep_connection": "Data structures are entropy management strategies â€” each one trades different resources to minimize access cost. Trees compress search, hashes scatter for speed, heaps maintain partial order.",
+			"difficulty": "intermediate",
+			"estimated_time": "30-40 minutes",
+			"learning_objectives": [
+				"Tree structures and hierarchy",
+				"Graph connectivity",
+				"Spatial partitioning (Quadtrees/Octrees)",
+				"Linear vs Non-linear data organization"
+			],
+			"maps": [
+				"DataStructures_Linked_Lists: Chains of Address",
+				"DataStructures_Trees: Binary Recursion Made Spatial",
+				"DataStructures_Hash_Maps: Deterministic Scattering",
+				"DataStructures_Heap_Operations: Partial Order Dominance",
+				"DataStructures_Graph_Structures: Pure Relation Without Hierarchy",
+				"DataStructures_Union_Find_Disjoint_Set: Irreversible Merging",
+				"DataStructures_Trie_Operations: Shared Prefix Descent",
+				"DataStructures_Segment_Tree: Recursive Range Memory",
+				"DataStructures_Fenwick_Tree_Binary_Indexed_Tree: Binary Arithmetic Storage",
+				"DataStructures_Suffix_Array_Tree: Sorted Endings",
+				"DataStructures_BSP_Trees: Recursive Volume Partitioning",
+				"DataStructures_Quadtrees_Octrees: Adaptive Spatial Triage"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_datastructures",
+			"unlock_requirements": [
+				"proceduralgeneration"
+			],
+			"completion_rewards": [
+				"struct_architect_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "DataStructures_Linked_Lists",
+					"position": "intro",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Linear chains where nodes know only their next neighbor. Procedural construction mirrors list allocation — each node placed one at a time, pointer by pointer."
+				},
+				{
+					"map": "DataStructures_Trees",
+					"position": "intro",
+					"artifacts": [
+						"recursive_tree"
+					],
+					"size_budget": "world_scale",
+					"rationale": "Binary recursion made spatial: chains fork into subtrees, every branch replicates the whole pattern. Recursive tree artifact embodies the self-similar structure."
+				},
+				{
+					"map": "DataStructures_Hash_Maps",
+					"position": "foundation",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Deterministic scattering: keys destroyed into buckets for O(1) lookup. The cost of speed is lost structure — order traded for instant access."
+				},
+				{
+					"map": "DataStructures_Heap_Operations",
+					"position": "foundation",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Tiered platforms enforcing parent-child dominance: almost-sorted order where the maximum always floats to the top. Priority queue as partial commitment to order."
+				},
+				{
+					"map": "DataStructures_Graph_Structures",
+					"position": "exploration",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Pure relations without hierarchy: any node can link to any other. Chaotic procedural terrain mirrors the graph's refusal to privilege any single path."
+				},
+				{
+					"map": "DataStructures_Union_Find_Disjoint_Set",
+					"position": "exploration",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Disjoint set platforms that merge irreversibly: path compression and rank union optimize the question 'are these connected?' to near-constant time."
+				},
+				{
+					"map": "DataStructures_Trie_Operations",
+					"position": "exploration",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Shared prefix tree: one root branches into twenty-six children, enabling mid-keystroke autocomplete. Storage trades space for retrieval speed."
+				},
+				{
+					"map": "DataStructures_Segment_Tree",
+					"position": "integration",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Recursive array halving: internal nodes store aggregates enabling O(log n) range queries. Lazy propagation defers work until it's truly needed."
+				},
+				{
+					"map": "DataStructures_Fenwick_Tree_Binary_Indexed_Tree",
+					"position": "integration",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Flat array where binary representation encodes reach: bit arithmetic replaces pointers, prefix sums update in O(log n) without tree overhead."
+				},
+				{
+					"map": "DataStructures_Suffix_Array_Tree",
+					"position": "integration",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Sorted suffix indices flattening tree structure: O(log n) pattern search with minimal memory. The suffix array trades construction time for compact representation."
+				},
+				{
+					"map": "DataStructures_BSP_Trees",
+					"position": "synthesis",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Recursive volume partitioning: binary spatial splits create rooms through subtraction rather than construction. The structure that powers Doom's rendering."
+				},
+				{
+					"map": "DataStructures_Quadtrees_Octrees",
+					"position": "synthesis",
+					"artifacts": [
+						"env_one"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Spatial triage: divide space adaptively based on density, ignore uniformity. Quadtrees in 2D, octrees in 3D — resolution follows where the data clusters."
+				}
+			]
+		}
+	},
+	"world_phase": "beyond",
+	"artifact_groups": []
 }

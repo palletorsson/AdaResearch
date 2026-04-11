@@ -1,3 +1,13 @@
+# @identity
+# essence: G(V,E).traverse(algorithm) -> attack(path) -- 8 sphere nodes reconfiguring edges via BFS/DFS
+# desire: a network creature rewiring its graph to hunt -- edges appear and vanish as algorithms execute
+# critical_parameter: _edges / traversal algorithm -- active edges determine attack reach and path
+# triggers: player proximity triggers algorithm selection; BFS/DFS/shortest-path each hunt differently
+# emerges: graph theory as predation -- connectivity IS the attack surface, rewiring IS the strategy
+# needs: HazardCreatureBase [has]; 8-node graph [has]; BFS/DFS/shortest-path [has]; edge viz [has]; VR interaction [missing]
+# relationships: embodies graphtheory sequence; pairs with data_tree_walker (graph vs tree)
+# truth: the graph hunts through its own edges -- connectivity is not abstract, it is the weapon.
+
 extends HazardCreatureBase
 class_name GraphWeaver
 ## Graph theory sequence — network creature with 8 SphereMesh nodes

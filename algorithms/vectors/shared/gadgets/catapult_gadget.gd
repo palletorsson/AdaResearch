@@ -1,4 +1,4 @@
-﻿extends GadgetBase
+extends GadgetBase
 
 # Catapult Gadget â€” Mini launcher driven by force vectors
 # Uses HingeJoint3D with motor and angle limits.
@@ -16,7 +16,7 @@ const UPRIGHT_SIZE := Vector3(0.008, 0.04, 0.04)
 var _target_angle: float = 0.0
 var _target_strength: float = 0.0
 
-func _ready():
+func _ready() -> void:
 	# --- Base ---
 	base_body = create_static_body(
 		Vector3.ZERO,
@@ -105,3 +105,6 @@ func update_from_vectors(a: Vector3, b: Vector3) -> void:
 		_target_angle = clamp(atan2(net.y, net.x), deg_to_rad(-80), deg_to_rad(80))
 	else:
 		_target_angle = 0.0
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

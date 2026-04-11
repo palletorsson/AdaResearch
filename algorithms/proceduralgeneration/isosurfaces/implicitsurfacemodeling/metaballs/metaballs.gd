@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 # Editable parameters
 @export var metaball_count: int = 9
@@ -17,7 +17,7 @@ var metaball_positions = []
 var metaball_strengths = []
 var metaball_radii = []
 
-func _ready():
+func _ready() -> void:
 	# Create a simple cube mesh for ray marching
 	cube_mesh = MeshInstance3D.new()
 	cube_mesh.mesh = BoxMesh.new()
@@ -47,7 +47,7 @@ func _ready():
 	
 	print("Metaball setup complete with strength: ", base_strength)
 
-func initialize_metaballs():
+func initialize_metaballs() -> void:
 	# Clear existing arrays
 	metaball_positions.clear()
 	metaball_strengths.clear()
@@ -106,7 +106,7 @@ func _process(_delta):
 	# Update shader parameters
 	update_shader_parameters()
 
-func update_shader_parameters():
+func update_shader_parameters() -> void:
 	# Update metaball parameters in the shader
 	shader_material.set_shader_parameter("metaball_positions", metaball_positions)
 	shader_material.set_shader_parameter("metaball_strengths", metaball_strengths)
@@ -115,7 +115,7 @@ func update_shader_parameters():
 	shader_material.set_shader_parameter("light_direction", Vector3(1.0, 0.5, 1.0).normalized())
 
 # Public function to update the base strength
-func set_strength(new_strength: float):
+func set_strength(new_strength: float) -> void:
 	base_strength = new_strength
 	
 	# Update all metaball strengths
@@ -128,5 +128,14 @@ func set_strength(new_strength: float):
 	print("Updated metaball strength to:", base_strength)
 
 # Reset metaballs with current parameters
-func reset_metaballs():
+func reset_metaballs() -> void:
 	initialize_metaballs()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

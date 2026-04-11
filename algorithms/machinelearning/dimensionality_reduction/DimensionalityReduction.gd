@@ -37,14 +37,14 @@ var low_dim_particles: Array = []
 # ─── Stats overlay ────────────────────────────────────────────────────────────
 var _stats_label: Label3D = null
 
-func _ready():
+func _ready() -> void:
 	create_high_dimensional_particles()
 	create_low_dimensional_particles()
 	create_flow_particles()
 	setup_reduction_metrics()
 	_create_stats_label()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Simulate reduction progress
@@ -94,7 +94,7 @@ func _rebuild_all_particles() -> void:
 	create_low_dimensional_particles()
 	create_flow_particles()
 
-func create_high_dimensional_particles():
+func create_high_dimensional_particles() -> void:
 	# Create high-dimensional data particles (scattered 3D cloud)
 	var high_dim_particles_node = $HighDimensionalData/HighDimParticles
 	for i in range(particle_count):
@@ -118,7 +118,7 @@ func create_high_dimensional_particles():
 		high_dim_particles_node.add_child(particle)
 		high_dim_particles.append(particle)
 
-func create_low_dimensional_particles():
+func create_low_dimensional_particles() -> void:
 	# Create low-dimensional data particles (flattened 2D projection)
 	var low_dim_particles_node = $LowDimensionalData/LowDimParticles
 	for i in range(particle_count):
@@ -141,7 +141,7 @@ func create_low_dimensional_particles():
 		low_dim_particles_node.add_child(particle)
 		low_dim_particles.append(particle)
 
-func create_flow_particles():
+func create_flow_particles() -> void:
 	# Create data flow particles travelling the projection pipeline
 	var flow_particles_node = $DataFlow/FlowParticles
 	var flow_count := int(max(15, particle_count * 1.2))
@@ -166,7 +166,7 @@ func create_flow_particles():
 		flow_particles_node.add_child(particle)
 		flow_particles.append(particle)
 
-func setup_reduction_metrics():
+func setup_reduction_metrics() -> void:
 	# Initialize reduction metrics
 	var variance_indicator = $ReductionMetrics/VarianceExplained/VarianceIndicator
 	var error_indicator = $ReductionMetrics/ReconstructionError/ErrorIndicator
@@ -175,7 +175,7 @@ func setup_reduction_metrics():
 	if error_indicator:
 		error_indicator.position.x = 0  # Start at middle
 
-func animate_high_dimensional_data(delta):
+func animate_high_dimensional_data(delta) -> void:
 	# Animate high-dimensional particles
 	for i in range(high_dim_particles.size()):
 		var particle = high_dim_particles[i]
@@ -193,7 +193,7 @@ func animate_high_dimensional_data(delta):
 			var pulse = 1.0 + sin(time * 2.0 + i * 0.2) * 0.2 * reduction_progress
 			particle.scale = Vector3.ONE * pulse
 
-func animate_reduction_algorithm(delta):
+func animate_reduction_algorithm(delta) -> void:
 	# Animate reduction algorithm core
 	var algorithm_core = $ReductionAlgorithm/AlgorithmCore
 	if algorithm_core:
@@ -237,7 +237,7 @@ func animate_reduction_algorithm(delta):
 			var intensity = 0.3 + tsne_activation * 0.7
 			tsne_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_low_dimensional_data(delta):
+func animate_low_dimensional_data(delta) -> void:
 	# Animate low-dimensional particles
 	for i in range(low_dim_particles.size()):
 		var particle = low_dim_particles[i]
@@ -253,7 +253,7 @@ func animate_low_dimensional_data(delta):
 			var pulse = 1.0 + sin(time * 2.2 + i * 0.15) * 0.2 * reduction_progress
 			particle.scale = Vector3.ONE * pulse
 
-func animate_data_flow(delta):
+func animate_data_flow(delta) -> void:
 	# Animate flow particles
 	for i in range(flow_particles.size()):
 		var particle = flow_particles[i]
@@ -277,7 +277,7 @@ func animate_data_flow(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * reduction_progress
 			particle.scale = Vector3.ONE * pulse
 
-func update_reduction_metrics(delta):
+func update_reduction_metrics(delta) -> void:
 	# Update variance explained meter
 	var variance_indicator = $ReductionMetrics/VarianceExplained/VarianceIndicator
 	if variance_indicator:
@@ -300,13 +300,13 @@ func update_reduction_metrics(delta):
 		var red_component = 0.2 + 0.6 * reconstruction_error
 		error_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
 
-func set_reduction_progress(progress: float):
+func set_reduction_progress(progress: float) -> void:
 	reduction_progress = clamp(progress, 0.0, 1.0)
 
-func set_variance_explained(variance: float):
+func set_variance_explained(variance: float) -> void:
 	variance_explained = clamp(variance, 0.0, 1.0)
 
-func set_reconstruction_error(error: float):
+func set_reconstruction_error(error: float) -> void:
 	reconstruction_error = clamp(error, 0.1, 1.0)
 
 func get_reduction_progress() -> float:
@@ -318,7 +318,7 @@ func get_variance_explained() -> float:
 func get_reconstruction_error() -> float:
 	return reconstruction_error
 
-func reset_reduction():
+func reset_reduction() -> void:
 	var had_progress := reduction_progress > 0.1
 	time = 0.0
 	reduction_progress = 0.0
@@ -334,3 +334,12 @@ func _flash_reset() -> void:
 		var tw := create_tween()
 		tw.tween_property(core, "scale", Vector3.ONE * 1.5, 0.15)
 		tw.tween_property(core, "scale", Vector3.ONE, 0.3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

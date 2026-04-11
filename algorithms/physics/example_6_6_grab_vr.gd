@@ -24,7 +24,7 @@ var controller_grabbed_object: VRRigidBody = null
 var info_label: Label3D
 var instructions_label: Label3D
 
-func _ready():
+func _ready() -> void:
 
 	# Create UI
 	create_info_labels()
@@ -45,7 +45,7 @@ func _process(_delta):
 	# In actual VR, this would track actual controller position
 	update_simulated_controller()
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Simulate grab/release with mouse click
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if controller_grabbed_object:
@@ -53,7 +53,7 @@ func _input(event):
 		else:
 			attempt_grab()
 
-func create_info_labels():
+func create_info_labels() -> void:
 	"""Create info labels"""
 	info_label = Label3D.new()
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -72,7 +72,7 @@ func create_info_labels():
 	instructions_label.text = "[Click] Grab/Release\n[Move Mouse] Move Hand"
 	add_child(instructions_label)
 
-func create_ground():
+func create_ground() -> void:
 	"""Create static ground"""
 	ground = StaticBody3D.new()
 	ground.position = Vector3(0, -0.45, 0)
@@ -96,7 +96,7 @@ func create_ground():
 
 	add_child(ground)
 
-func create_grabbable_objects():
+func create_grabbable_objects() -> void:
 	"""Create various grabbable objects"""
 	# Box
 	create_box(Vector3(-0.2, 0, 0), Vector3(0.1, 0.1, 0.1))
@@ -113,7 +113,7 @@ func create_grabbable_objects():
 	# Large sphere
 	create_sphere(Vector3(0.1, 0.15, -0.1), 0.08)
 
-func create_box(pos: Vector3, size: Vector3):
+func create_box(pos: Vector3, size: Vector3) -> void:
 	"""Create grabbable box"""
 	var box = VRRigidBody.new()
 	box.position = pos
@@ -132,7 +132,7 @@ func create_box(pos: Vector3, size: Vector3):
 	add_child(box)
 	grabbable_objects.append(box)
 
-func create_sphere(pos: Vector3, radius: float):
+func create_sphere(pos: Vector3, radius: float) -> void:
 	"""Create grabbable sphere"""
 	var sphere = VRRigidBody.new()
 	sphere.position = pos
@@ -152,7 +152,7 @@ func create_sphere(pos: Vector3, radius: float):
 	add_child(sphere)
 	grabbable_objects.append(sphere)
 
-func create_cylinder(pos: Vector3, radius: float, height: float):
+func create_cylinder(pos: Vector3, radius: float, height: float) -> void:
 	"""Create grabbable cylinder"""
 	var cylinder = VRRigidBody.new()
 	cylinder.position = pos
@@ -173,13 +173,14 @@ func create_cylinder(pos: Vector3, radius: float, height: float):
 	add_child(cylinder)
 	grabbable_objects.append(cylinder)
 
-func create_simulated_controller():
+func create_simulated_controller() -> void:
 	"""Create visual controller representation"""
 	simulated_controller = Node3D.new()
 
 	var mesh_instance = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
 	sphere_mesh.radius = 0.03
+	sphere_mesh.height = 0.06
 	mesh_instance.mesh = sphere_mesh
 
 	var material = StandardMaterial3D.new()
@@ -194,7 +195,7 @@ func create_simulated_controller():
 
 	add_child(simulated_controller)
 
-func update_simulated_controller():
+func update_simulated_controller() -> void:
 	"""Update controller position based on mouse (placeholder for VR)"""
 	if not simulated_controller:
 		return
@@ -210,7 +211,7 @@ func update_simulated_controller():
 	if controller_grabbed_object:
 		controller_grabbed_object.grab_update(simulated_controller)
 
-func attempt_grab():
+func attempt_grab() -> void:
 	"""Attempt to grab nearest object"""
 	if not simulated_controller:
 		return
@@ -231,7 +232,7 @@ func attempt_grab():
 		print("Grabbed: %s" % nearest_object.name)
 		update_info_label()
 
-func release_object():
+func release_object() -> void:
 	"""Release currently grabbed object"""
 	if controller_grabbed_object:
 		# Calculate throw velocity (simple version)
@@ -242,7 +243,7 @@ func release_object():
 		controller_grabbed_object = null
 		update_info_label()
 
-func update_info_label():
+func update_info_label() -> void:
 	"""Update info label"""
 	if info_label:
 		if controller_grabbed_object:
@@ -250,7 +251,7 @@ func update_info_label():
 		else:
 			info_label.text = "VR Grabbable Objects\nObjects: %d" % grabbable_objects.size()
 
-func reset():
+func reset() -> void:
 	"""Reset all objects"""
 	if controller_grabbed_object:
 		release_object()
@@ -260,3 +261,12 @@ func reset():
 	grabbable_objects.clear()
 
 	create_grabbable_objects()
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

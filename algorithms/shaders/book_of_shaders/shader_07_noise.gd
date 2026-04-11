@@ -1,5 +1,16 @@
 ## Shader 07: Noise — value, gradient, simplex, warped
 ## Book of Shaders Chapter 11
+
+# @identity
+# essence: noise(p) = interpolate(random(lattice_points)) — randomness with continuity; value noise interpolates random amplitudes, gradient noise interpolates random slopes, simplex uses triangular lattice
+# desire: to slide octaves from 1 to 8 and watch flat static become terrain — to warp the domain and see the landscape hallucinate
+# critical_parameter: warp_strength — feeds noise output back as input coordinates, bending space through its own texture
+# triggers: scale slider zooms frequency; octaves adds detail layers; colorize maps noise to hue; domain warp creates self-referential distortion
+# emerges: four algorithms answer the same question differently — how do you make chaos coherent? — and domain warping reveals that feeding noise into itself produces geological forms
+# needs: [has] ShaderRackPanel sliders per display; [missing] no VR push buttons
+# relationships: depends on shader_06_random (hash function); feeds into shader_09_fbm (layered noise) and all procedural terrain/texture generation
+# truth: controlled chaos is not a paradox — it is the only kind that produces worlds
+
 extends Node3D
 
 const DISPLAY_SIZE := Vector3(2.0, 2.0, 0.05)
@@ -88,3 +99,12 @@ func _process(_delta: float) -> void:
 		var uniforms: Array = shader_defs[i]["uniforms"]
 		for j in range(uniforms.size()):
 			mat.set_shader_parameter(uniforms[j], panel.get_slider_value(j))
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

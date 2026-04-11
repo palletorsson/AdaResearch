@@ -55,7 +55,7 @@ var gravity_controller: ParameterController3D
 var show_orbits: bool = true
 var show_gravity_field: bool = true
 
-func _ready():
+func _ready() -> void:
 	# Scale down for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
@@ -67,7 +67,7 @@ func _ready():
 
 	print("Orbital Challenge VR - Master gravity to achieve perfect orbits!")
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if game_active:
 		time_remaining -= delta
 		if time_remaining <= 0.0:
@@ -96,7 +96,7 @@ func _physics_process(_delta: float):
 	# Check collisions with collectibles
 	check_collectible_collection()
 
-func create_central_attractor():
+func create_central_attractor() -> void:
 	central_attractor = ATTRACTOR_SCENE.instantiate()
 	central_attractor.name = "CentralAttractor"
 	central_attractor.position = central_attractor_pos
@@ -107,7 +107,7 @@ func create_central_attractor():
 		var mesh := central_attractor.get_node("GrabSphere/MeshInstance3D")
 		mesh.scale = Vector3(3, 3, 3)
 
-func create_gravity_field_visualization():
+func create_gravity_field_visualization() -> void:
 	if not show_gravity_field:
 		return
 
@@ -119,7 +119,7 @@ func create_gravity_field_visualization():
 	create_orbit_ring(TARGET_ORBIT_RADIUS_MIN, Color.GREEN)
 	create_orbit_ring(TARGET_ORBIT_RADIUS_MAX, Color.GREEN)
 
-func create_orbit_ring(radius: float, color: Color):
+func create_orbit_ring(radius: float, color: Color) -> void:
 	var ring := MeshInstance3D.new()
 	var torus := TorusMesh.new()
 	torus.inner_radius = radius - 0.01
@@ -139,7 +139,7 @@ func create_orbit_ring(radius: float, color: Color):
 
 	add_child(ring)
 
-func create_launch_platform():
+func create_launch_platform() -> void:
 	var platform := MeshInstance3D.new()
 	var box := BoxMesh.new()
 	box.size = Vector3(0.15, 0.05, 0.15)
@@ -155,7 +155,7 @@ func create_launch_platform():
 
 	add_child(platform)
 
-func setup_level(level_number: int):
+func setup_level(level_number: int) -> void:
 	level = level_number
 	game_active = true
 	time_remaining = LEVEL_TIME_LIMIT
@@ -183,7 +183,7 @@ func setup_level(level_number: int):
 
 	satellite_launch_ready = true
 
-func spawn_collectibles(count: int):
+func spawn_collectibles(count: int) -> void:
 	var rng := RandomNumberGenerator.new()
 	rng.randomize()
 
@@ -232,7 +232,7 @@ func create_collectible(pos: Vector3) -> Node3D:
 
 	return col
 
-func check_collectible_collection():
+func check_collectible_collection() -> void:
 	for i in range(collectibles.size() - 1, -1, -1):
 		var collectible := collectibles[i]
 		if not is_instance_valid(collectible):
@@ -252,7 +252,7 @@ func check_collectible_collection():
 				collectibles_remaining -= 1
 				break
 
-func create_collection_effect(pos: Vector3):
+func create_collection_effect(pos: Vector3) -> void:
 	var particles := CPUParticles3D.new()
 	particles.emitting = true
 	particles.one_shot = true
@@ -274,7 +274,7 @@ func create_collection_effect(pos: Vector3):
 	if is_instance_valid(particles):
 		particles.queue_free()
 
-func launch_satellite(velocity: Vector3):
+func launch_satellite(velocity: Vector3) -> void:
 	if not satellite_launch_ready or satellites.size() >= MAX_SATELLITES:
 		return
 
@@ -311,7 +311,7 @@ func calculate_gravity(satellite: Mover) -> Vector3:
 	var strength := (gravity_strength * attractor_mass * satellite.mass) / (distance * distance)
 	return direction * strength
 
-func update_satellite_orbits():
+func update_satellite_orbits() -> void:
 	satellites_in_orbit = 0
 
 	for satellite in satellites:
@@ -344,7 +344,7 @@ func update_satellite_orbits():
 	if satellites_in_orbit >= required_satellites_in_orbit and collectibles_remaining == 0:
 		complete_level()
 
-func create_orbit_achieved_effect(pos: Vector3):
+func create_orbit_achieved_effect(pos: Vector3) -> void:
 	var ring := MeshInstance3D.new()
 	var torus := TorusMesh.new()
 	torus.inner_radius = 0.05
@@ -405,7 +405,7 @@ func create_force_arrow() -> Node3D:
 	arrow_root.visible = show_orbits
 	return arrow_root
 
-func update_force_arrow(satellite: Mover, force: Vector3):
+func update_force_arrow(satellite: Mover, force: Vector3) -> void:
 	var arrow: Node3D = force_arrows.get(satellite, null)
 	if not arrow or not is_instance_valid(arrow):
 		return
@@ -435,7 +435,7 @@ func update_force_arrow(satellite: Mover, force: Vector3):
 	var basis := Basis().looking_at(direction, up_vector)
 	arrow.transform = Transform3D(basis, Vector3.ZERO)
 
-func create_ui():
+func create_ui() -> void:
 	info_label = Label3D.new()
 	FORCES_UI.style_title_label(info_label, Vector3(0, 0.8, -0.3), 32)
 	add_child(info_label)
@@ -469,7 +469,7 @@ func create_ui():
 	gravity_controller.value_changed.connect(_on_gravity_changed)
 	gravity_controller.set_value(gravity_strength)
 
-func update_ui():
+func update_ui() -> void:
 	if info_label:
 		FORCES_UI.set_label_text(info_label, "ORBITAL CHALLENGE\nLevel %d" % level)
 
@@ -482,10 +482,10 @@ func update_ui():
 	if objective_label:
 		FORCES_UI.set_label_text(objective_label, "Orbits: %d/%d | Collect: %d" % [satellites_in_orbit, required_satellites_in_orbit, collectibles_remaining])
 
-func _on_gravity_changed(value: float):
+func _on_gravity_changed(value: float) -> void:
 	gravity_strength = value
 
-func _input(event: InputEvent):
+func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		match event.keycode:
 			KEY_R:
@@ -497,7 +497,7 @@ func _input(event: InputEvent):
 			KEY_T:
 				show_orbits = !show_orbits
 
-func complete_level():
+func complete_level() -> void:
 	game_active = false
 
 	if info_label:
@@ -506,7 +506,7 @@ func complete_level():
 	await get_tree().create_timer(3.0).timeout
 	setup_level(level + 1)
 
-func fail_level():
+func fail_level() -> void:
 	game_active = false
 
 	if info_label:
@@ -514,3 +514,12 @@ func fail_level():
 
 	await get_tree().create_timer(3.0).timeout
 	setup_level(level)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

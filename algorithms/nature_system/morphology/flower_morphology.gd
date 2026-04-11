@@ -122,8 +122,8 @@ static func _build_single_bloom(dna: CritterDNA, root: Node3D, mapper: CritterTr
 		mmi.name = "Petals"
 		mmi.multimesh = mm
 
-		# Shared material for all petals — base DNA material, no per-instance variation
-		var mat: ShaderMaterial = mapper.create_material_from_dna(dna, base_seed)
+		# Shared petal material — petal surface for soft, translucent look
+		var mat: ShaderMaterial = mapper.create_part_material(dna, CritterTraitMapper.PartType.FOLIAGE, base_seed)
 		mmi.material_override = mat
 
 		root.add_child(mmi)
@@ -212,10 +212,9 @@ static func _build_inflorescence(dna: CritterDNA, root: Node3D, mapper: CritterT
 			var sub_root := Node3D.new()
 			sub_root.name = "SubFlower_%d" % i
 			sub_root.position = head_origin + pos
-			# Point outward from center
-			sub_root.look_at(sub_root.position + pos.normalized(), Vector3.UP)
-
+			# Point outward from center (add to tree first so look_at works)
 			root.add_child(sub_root)
+			sub_root.look_at(sub_root.global_position + pos.normalized(), Vector3.UP)
 			_build_single_bloom(dna, sub_root, mapper, maxi(lod - 2, 0), sub_scale * 0.5)
 
 
@@ -239,8 +238,8 @@ static func _build_stem(dna: CritterDNA, root: Node3D, mapper: CritterTraitMappe
 	stem_node.mesh = stem_mesh
 	stem_node.position = Vector3(0.0, -stem_height * 0.5, 0.0)
 
-	# Stem material: secondary color (green), low pattern
-	var stem_mat := mapper.create_material_from_dna(dna, seed_val + 9999)
+	# Stem material: bark surface for woody stem
+	var stem_mat := mapper.create_part_material(dna, CritterTraitMapper.PartType.TRUNK, seed_val + 9999)
 	# Override colors for stem — use secondary as primary
 	stem_mat.set_shader_parameter("primary_color", dna.secondary_color)
 	stem_mat.set_shader_parameter("secondary_color", dna.secondary_color.darkened(0.3))
@@ -272,8 +271,8 @@ static func _build_center(dna: CritterDNA, root: Node3D, mapper: CritterTraitMap
 	center_node.mesh = center_mesh
 	center_node.position = Vector3(0.0, center_radius * 0.3, 0.0)
 
-	# Center material: tertiary color (stamen color)
-	var center_mat := mapper.create_material_from_dna(dna, seed_val + 5555)
+	# Center material: head surface for stamen/pistil
+	var center_mat := mapper.create_part_material(dna, CritterTraitMapper.PartType.HEAD, seed_val + 5555)
 	center_mat.set_shader_parameter("primary_color", dna.tertiary_color)
 	center_mat.set_shader_parameter("secondary_color", dna.tertiary_color.lightened(0.2))
 	# Slight emission for nectar glow
@@ -383,6 +382,7 @@ static func _generate_petal_mesh(dna: CritterDNA, lod: int) -> Mesh:
 		# Fallback
 		var fallback := SphereMesh.new()
 		fallback.radius = length * 0.1
+		fallback.height = length * 0.1 * 2.0
 		return fallback
 
 	return mesh
@@ -433,3 +433,5 @@ static func _width_at_t(t: float, taper: float) -> float:
 		base_width = lerpf(base_width, width_at_tip, tip_t)
 
 	return clampf(base_width, 0.01, 1.0)
+
+

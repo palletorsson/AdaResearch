@@ -1,0 +1,128 @@
+{
+  "id": "metadata-enrich",
+  "title": "Enrich Registry Metadata from Code",
+  "description": "The flow for filling all 8 registry fields from GDScript source. Read code → extract identity → draft fields → edit JSON → validate.",
+  "triggers": [
+    "fill registry metadata",
+    "enrich artifact",
+    "improve artifact score",
+    "missing description qfep capacity"
+  ],
+  "granularity": "meso",
+  "model_version": "opus-4.6",
+  "created": "2026-04-08",
+  "updated": "2026-04-08",
+  "earned_from": "13 artifacts enriched across joints + biological_growth",
+  "nodes": [
+    {
+      "id": "find_entry",
+      "type": "action",
+      "label": "Find registry entry",
+      "detail": "Search commons/artifacts/registry/*.json for the lookup_name. Note which file and current field state."
+    },
+    {
+      "id": "find_code",
+      "type": "action",
+      "label": "Find and read the GDScript",
+      "detail": "Follow the 'scene' field to the .tscn, find the .gd in the same directory. Read it fully."
+    },
+    {
+      "id": "extract_identity",
+      "type": "decision",
+      "label": "Has @identity block?",
+      "detail": "Look for # @identity in first 15 lines. If present, extract all 8 fields. If not, you'll draft one later."
+    },
+    {
+      "id": "draft_description",
+      "type": "action",
+      "label": "Draft 5-layer description",
+      "detail": "1. Phenomenological (from @identity desire/essence) 2. Algorithmic (what principle) 3. Relational (prepares for/contrasts with) 4. QFEP-structural (where in E=F+λφdE) 5. Capacity (what learner can DO)"
+    },
+    {
+      "id": "draft_qfep",
+      "type": "action",
+      "label": "Draft QFEP connection",
+      "detail": "Category mapping: primitives/transforms→F, randomness/noise→E(S), fractals/lsystems→λ, morphogenesis/swarm→φdE, forces/physics→Classical F, CA→Edge of chaos"
+    },
+    {
+      "id": "draft_rest",
+      "type": "action",
+      "label": "Draft remaining fields",
+      "detail": "gamwell_reference: from theoretical context. interactions: from @identity triggers/needs. capacity: VERB what_learner_can_do. tags: 5-10 keywords. signals: from 'signal' declarations in code."
+    },
+    {
+      "id": "write_script",
+      "type": "action",
+      "label": "Write update script (for batch) or use Edit (for single)",
+      "detail": "For batch: Python script that reads JSON, updates fields, writes back. For single: Edit tool directly on the JSON file. Always json.dump with indent=tab and ensure_ascii=False."
+    },
+    {
+      "id": "validate",
+      "type": "action",
+      "label": "Validate JSON",
+      "detail": "python -c \"import json; json.load(open('path')); print('valid')\"",
+      "code": "python -c \"import json; json.load(open('commons/artifacts/registry/FILE.json', encoding='utf-8')); print('valid')\""
+    },
+    {
+      "id": "rescore",
+      "type": "action",
+      "label": "Re-score to confirm improvement",
+      "detail": "Run the per-field scoring. Should see 6-7/8 (signals often 0 for artifacts without GDScript signal declarations, footprint needs Godot capture)."
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Metadata enriched"
+    }
+  ],
+  "edges": [
+    {
+      "from": "find_entry",
+      "to": "find_code"
+    },
+    {
+      "from": "find_code",
+      "to": "extract_identity"
+    },
+    {
+      "from": "extract_identity",
+      "to": "draft_description",
+      "label": "has @identity"
+    },
+    {
+      "from": "extract_identity",
+      "to": "draft_description",
+      "label": "no @identity — draft from code analysis"
+    },
+    {
+      "from": "draft_description",
+      "to": "draft_qfep"
+    },
+    {
+      "from": "draft_qfep",
+      "to": "draft_rest"
+    },
+    {
+      "from": "draft_rest",
+      "to": "write_script"
+    },
+    {
+      "from": "write_script",
+      "to": "validate"
+    },
+    {
+      "from": "validate",
+      "to": "rescore"
+    },
+    {
+      "from": "rescore",
+      "to": "done"
+    }
+  ],
+  "confidence": "verified",
+  "summary": "Find registry entry → read GDScript → extract @identity → draft 8 fields → edit JSON → validate → re-score.",
+  "links_to": [
+    "identity-writing",
+    "qfep-classification"
+  ]
+}

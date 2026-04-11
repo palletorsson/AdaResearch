@@ -40,4 +40,4 @@ add_child(glitch)
 ## See Also
 
 - `advancedglitch/` — Full glitch system
-- `effects/` — Other visual effects
+- `postprocessing/` — Other visual effects

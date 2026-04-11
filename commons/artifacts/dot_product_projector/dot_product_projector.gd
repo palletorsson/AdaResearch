@@ -6,6 +6,16 @@
 # QFEP: Dot product as "alignment" - how much two directions agree
 #
 # UPGRADED VISUALS - Sleek modern look with glow effects
+#
+# @identity
+# essence: A . B = |A||B|cos(theta). The dot product measures alignment. Positive = same direction, zero = perpendicular, negative = opposed.
+# desire: To let the learner rotate two arrows and watch a number change sign — making orthogonality a felt threshold, not a definition.
+# critical_parameter: The angle between vector_a and vector_b. At 90 degrees the dot product crosses zero — the phase transition of alignment.
+# triggers: Handle drag → projection arrow slides along B, angle arc updates, result panel color-codes (green/yellow/red), preset buttons → aligned/ortho/opposed
+# emerges: The perpendicular drop line from A's tip to the projection. The angle arc sweeping through the sign change at 90 degrees.
+# needs: VR grabbable handles [has], preset buttons [has], angle arc visualization [has]. Missing: audio feedback at the orthogonal crossing.
+# relationships: Foundation for work_energy_demo (W = F.d uses dot product). Feeds into hl_turret_vectors (FOV check = dot product). Contrasts with torque_demo (cross product).
+# truth: The dot product is the question: how much do these two directions agree? The answer is a scalar — dimension collapses by design.
 
 extends Node3D
 
@@ -349,3 +359,8 @@ func get_dot_product() -> float:
 func get_projection() -> Vector3:
 	var dot = vector_a.dot(vector_b)
 	return vector_b.normalized() * (dot / vector_b.length()) if vector_b.length() > 0.001 else Vector3.ZERO
+
+func apply_grid_config(config_data: Dictionary):
+	for key in config_data:
+		if key in self:
+			set(key, config_data[key])

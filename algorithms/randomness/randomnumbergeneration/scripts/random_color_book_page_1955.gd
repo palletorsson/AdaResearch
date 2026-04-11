@@ -19,7 +19,7 @@ var start_index: int = 100 + randi() % 900  # Randomized starting index
 var side_number: int
 
 
-func _ready():
+func _ready() -> void:
 	if font_file == null:
 		push_error("Font file not assigned!")
 		return
@@ -34,7 +34,7 @@ func _ready():
 
 	_create_label_grid()
 
-func _create_label_grid():
+func _create_label_grid() -> void:
 	var current_y_offset = 0.0  # Keeps track of the Y position
 
 	for row in range(grid_height): 
@@ -64,3 +64,6 @@ func _create_label_grid():
 		# Add extra spacing after every 5 rows to simulate a page break
 		if (row + 1) % 5 == 0:
 			current_y_offset += number_spacing_y * 1.2  # Larger spacing after every 5 rows
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -22,7 +22,7 @@ var current_audio_target: AudioStreamPlayer3D
 signal analyzer_activated
 signal analyzer_deactivated
 
-func _ready():
+func _ready() -> void:
 	_setup_references()
 	_setup_interaction()
 	_setup_display()
@@ -30,7 +30,7 @@ func _ready():
 	if auto_activate:
 		activate_analyzer()
 
-func _setup_references():
+func _setup_references() -> void:
 	"""Get references to child nodes"""
 	game_sound_meter = $AudioDisplay/GameSoundMeter
 	spectral_meter = $AudioDisplay/SpectralDisplay
@@ -44,7 +44,7 @@ func _setup_references():
 	if not spectral_meter:
 		print("SpectralAnalyzerController: Warning - SpectralMeter not found")
 
-func _setup_interaction():
+func _setup_interaction() -> void:
 	"""Setup interaction area for player detection"""
 	if interaction_area:
 		# Create collision shape if it doesn't exist
@@ -58,7 +58,7 @@ func _setup_interaction():
 		interaction_area.body_entered.connect(_on_body_entered)
 		interaction_area.body_exited.connect(_on_body_exited)
 
-func _setup_display():
+func _setup_display() -> void:
 	"""Setup the display material and viewport"""
 	if display_viewport and display_material:
 		# Create a material that shows the viewport texture
@@ -77,7 +77,7 @@ func _process(_delta: float):
 		_update_audio_detection()
 		_update_display_visibility()
 
-func _update_audio_detection():
+func _update_audio_detection() -> void:
 	"""Automatically detect and connect to nearby audio sources"""
 	if not current_audio_target:
 		var audio_players = get_tree().get_nodes_in_group("audio_sources")
@@ -91,7 +91,7 @@ func _update_audio_detection():
 			if closest_player:
 				set_audio_target(closest_player)
 
-func _find_audio_players_recursive(node: Node, players: Array):
+func _find_audio_players_recursive(node: Node, players: Array) -> void:
 	"""Recursively find all AudioStreamPlayer3D nodes"""
 	if node is AudioStreamPlayer3D and node.stream:
 		players.append(node)
@@ -113,7 +113,7 @@ func _find_closest_audio_player(players: Array) -> AudioStreamPlayer3D:
 	
 	return closest_player
 
-func _update_display_visibility():
+func _update_display_visibility() -> void:
 	"""Update display based on player proximity"""
 	var should_show = player_in_range or auto_activate
 	
@@ -127,20 +127,20 @@ func _update_display_visibility():
 		var alpha = 1.0 if should_show else 0.3
 		label_3d.modulate = Color(1, 1, 1, alpha)
 
-func _on_body_entered(body: Node3D):
+func _on_body_entered(body: Node3D) -> void:
 	"""Player entered interaction area"""
 	if body.is_in_group("player") or body.name.to_lower().contains("player"):
 		player_in_range = true
 		if not is_active:
 			activate_analyzer()
 
-func _on_body_exited(body: Node3D):
+func _on_body_exited(body: Node3D) -> void:
 	"""Player left interaction area"""
 	if body.is_in_group("player") or body.name.to_lower().contains("player"):
 		player_in_range = false
 
 # Public API
-func activate_analyzer():
+func activate_analyzer() -> void:
 	"""Activate the spectral analyzer"""
 	if is_active:
 		return
@@ -155,7 +155,7 @@ func activate_analyzer():
 	analyzer_activated.emit()
 	print("SpectralAnalyzer: Activated")
 
-func deactivate_analyzer():
+func deactivate_analyzer() -> void:
 	"""Deactivate the spectral analyzer"""
 	if not is_active:
 		return
@@ -170,7 +170,7 @@ func deactivate_analyzer():
 	analyzer_deactivated.emit()
 	print("SpectralAnalyzer: Deactivated")
 
-func set_audio_target(audio_player: AudioStreamPlayer3D):
+func set_audio_target(audio_player: AudioStreamPlayer3D) -> void:
 	"""Set the target audio player for analysis"""
 	current_audio_target = audio_player
 	
@@ -184,10 +184,13 @@ func set_audio_target(audio_player: AudioStreamPlayer3D):
 	
 	print("SpectralAnalyzer: Connected to audio source - %s" % audio_player.name)
 
-func toggle_display_style():
+func toggle_display_style() -> void:
 	"""Toggle between different display styles"""
 	if game_sound_meter:
 		var current_style = game_sound_meter.display_style
 		var new_style = (current_style + 1) % 5  # Cycle through all display styles
 		game_sound_meter.display_style = new_style
 		print("SpectralAnalyzer: Display style changed to %d" % new_style) 
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

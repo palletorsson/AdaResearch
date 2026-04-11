@@ -40,14 +40,14 @@ var agent_particles: Array = []
 # ─── Stats overlay ────────────────────────────────────────────────────────────
 var _stats_label: Label3D = null
 
-func _ready():
+func _ready() -> void:
 	create_environment_particles()
 	create_agent_particles()
 	create_flow_particles()
 	setup_learning_metrics()
 	_create_stats_label()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	time += delta
 	
 	# Simulate learning progress
@@ -102,7 +102,7 @@ func _rebuild_all_particles() -> void:
 	create_agent_particles()
 	create_flow_particles()
 
-func create_environment_particles():
+func create_environment_particles() -> void:
 	# Create environment grid particles representing the state space
 	var environment_grid = $Environment/EnvironmentGrid
 	for i in range(particle_count):
@@ -127,7 +127,7 @@ func create_environment_particles():
 		environment_grid.add_child(particle)
 		environment_particles.append(particle)
 
-func create_agent_particles():
+func create_agent_particles() -> void:
 	# Create agent particles orbiting the agent core
 	var agent_core = $Agent/AgentCore
 	var agent_count := int(max(8, particle_count * 0.6))
@@ -154,7 +154,7 @@ func create_agent_particles():
 		agent_core.add_child(particle)
 		agent_particles.append(particle)
 
-func create_flow_particles():
+func create_flow_particles() -> void:
 	# Create data flow particles that travel the agent→environment loop
 	var flow_particles_node = $DataFlow/FlowParticles
 	var flow_count := int(max(15, particle_count * 1.2))
@@ -179,7 +179,7 @@ func create_flow_particles():
 		flow_particles_node.add_child(particle)
 		flow_particles.append(particle)
 
-func setup_learning_metrics():
+func setup_learning_metrics() -> void:
 	# Initialize learning metrics
 	var reward_indicator = $LearningMetrics/RewardMeter/RewardIndicator
 	var episode_indicator = $LearningMetrics/EpisodeMeter/EpisodeIndicator
@@ -188,7 +188,7 @@ func setup_learning_metrics():
 	if episode_indicator:
 		episode_indicator.position.x = 0  # Start at middle
 
-func animate_environment(delta):
+func animate_environment(delta) -> void:
 	# Animate environment particles
 	for i in range(environment_particles.size()):
 		var particle = environment_particles[i]
@@ -207,7 +207,7 @@ func animate_environment(delta):
 			var pulse = 1.0 + sin(time * 1.8 + i * 0.2) * 0.2 * learning_progress
 			particle.scale = Vector3.ONE * pulse
 
-func animate_agent(delta):
+func animate_agent(delta) -> void:
 	# Animate agent core
 	var agent_core = $Agent/AgentCore
 	if agent_core:
@@ -241,7 +241,7 @@ func animate_agent(delta):
 			var pulse = 1.0 + sin(time * 2.2 + i * 0.3) * 0.3 * learning_progress
 			particle.scale = Vector3.ONE * pulse
 
-func animate_learning_algorithm(delta):
+func animate_learning_algorithm(delta) -> void:
 	# Animate learning algorithm core
 	var algorithm_core = $LearningAlgorithm/AlgorithmCore
 	if algorithm_core:
@@ -297,7 +297,7 @@ func animate_learning_algorithm(delta):
 			var intensity = 0.3 + qnetwork_activation * 0.7
 			qnetwork_core.material_override.emission = Color(0.8, 0.2, 0.2, 1) * intensity
 
-func animate_reward_system(delta):
+func animate_reward_system(delta) -> void:
 	# Animate reward system core
 	var reward_core = $RewardSystem/RewardCore
 	if reward_core:
@@ -313,7 +313,7 @@ func animate_reward_system(delta):
 			var intensity = 0.3 + learning_progress * 0.7
 			reward_core.material_override.emission = Color(0.2, 0.8, 0.2, 1) * intensity
 
-func animate_data_flow(delta):
+func animate_data_flow(delta) -> void:
 	# Animate flow particles
 	for i in range(flow_particles.size()):
 		var particle = flow_particles[i]
@@ -337,7 +337,7 @@ func animate_data_flow(delta):
 			var pulse = 1.0 + sin(time * 2.5 + i * 0.3) * 0.2 * learning_progress
 			particle.scale = Vector3.ONE * pulse
 
-func update_learning_metrics(delta):
+func update_learning_metrics(delta) -> void:
 	# Update reward meter
 	var reward_indicator = $LearningMetrics/RewardMeter/RewardIndicator
 	if reward_indicator:
@@ -360,13 +360,13 @@ func update_learning_metrics(delta):
 		var red_component = 0.2 + 0.6 * (1.0 - episode_count)
 		episode_indicator.material_override.albedo_color = Color(red_component, green_component, 0.2, 1)
 
-func set_learning_progress(progress: float):
+func set_learning_progress(progress: float) -> void:
 	learning_progress = clamp(progress, 0.0, 1.0)
 
-func set_reward_score(reward: float):
+func set_reward_score(reward: float) -> void:
 	reward_score = clamp(reward, 0.0, 1.0)
 
-func set_episode_count(episodes: float):
+func set_episode_count(episodes: float) -> void:
 	episode_count = clamp(episodes, 0.0, 1.0)
 
 func get_learning_progress() -> float:
@@ -378,7 +378,7 @@ func get_reward_score() -> float:
 func get_episode_count() -> float:
 	return episode_count
 
-func reset_learning():
+func reset_learning() -> void:
 	# Animate a brief flash on reset for visual feedback
 	var prev_progress := learning_progress
 	time = 0.0
@@ -395,3 +395,12 @@ func _flash_reset_feedback() -> void:
 		var tw := create_tween()
 		tw.tween_property(agent_core, "scale", Vector3.ONE * 1.6, 0.15)
 		tw.tween_property(agent_core, "scale", Vector3.ONE, 0.3)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

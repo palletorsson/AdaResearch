@@ -35,19 +35,19 @@ var _transformer_box: Node3D
 var _time: float = 0.0
 
 
-func _ready():
+func _ready() -> void:
 	_create_pylons()
 	_create_cables()
 	_create_transformer_box()
 
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if wind_enabled:
 		_time += delta
 		_update_cable_sway()
 
 
-func _create_pylons():
+func _create_pylons() -> void:
 	for i in range(num_pylons):
 		var pylon := _create_single_pylon()
 		pylon.name = "Pylon_%d" % i
@@ -127,7 +127,7 @@ func _create_single_pylon() -> Node3D:
 	return pylon
 
 
-func _add_cross_beams(pylon: Node3D, height: float, width: float, mat: Material):
+func _add_cross_beams(pylon: Node3D, height: float, width: float, mat: Material) -> void:
 	var beam_size := 0.04
 	
 	# X beams
@@ -151,7 +151,7 @@ func _add_cross_beams(pylon: Node3D, height: float, width: float, mat: Material)
 		pylon.add_child(beam)
 
 
-func _create_cables():
+func _create_cables() -> void:
 	# Cables between each pylon pair
 	for i in range(num_pylons - 1):
 		var start_pylon := _pylons[i]
@@ -246,7 +246,7 @@ func _generate_cable_mesh(start: Vector3, end: Vector3, wind_offset: float) -> A
 	return st.commit()
 
 
-func _create_transformer_box():
+func _create_transformer_box() -> void:
 	_transformer_box = Node3D.new()
 	_transformer_box.name = "TransformerBox"
 	
@@ -297,7 +297,7 @@ func _create_transformer_box():
 	})
 
 
-func _update_cable_sway():
+func _update_cable_sway() -> void:
 	for i in range(_cable_meshes.size()):
 		var data: Dictionary = _cable_data[i]
 		var mesh_inst: MeshInstance3D = _cable_meshes[i]
@@ -311,3 +311,12 @@ func _update_cable_sway():
 			wind_offset *= 0.3
 		
 		mesh_inst.mesh = _generate_cable_mesh(data["start"], data["end"], wind_offset)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

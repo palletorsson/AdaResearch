@@ -416,3 +416,12 @@ func load_from_json(file_path: String) -> void:
 			push_error("BeatFrequencies: Failed to parse JSON")
 	else:
 		push_error("BeatFrequencies: Failed to load parameters")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

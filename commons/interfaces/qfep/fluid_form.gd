@@ -7,6 +7,16 @@ extends Node3D
 
 class_name QFEPFluidForm
 
+# @identity
+# essence: vertex_shader(noise_layers * flow_intensity) + fresnel_iridescence -> morphing sphere
+# desire: watch a form that never holds still — always becoming, never arriving
+# critical_parameter: flow_intensity — how much the vertex shader deforms the mesh each frame
+# triggers: _process updates shader time continuously; pulse() temporarily triples flow intensity
+# emerges: iridescent color shifts at glancing angles — the form appears to have an inner light
+# needs: VR flow intensity control [missing], pulse trigger [missing]
+# relationships: contrasts rigid_sculpture (phi<0 frozen vs phi>0 flowing); paired with transforming_pattern; depends on phi concept
+# truth: positive phi means embracing transformation — the fluid form is not broken, it is becoming
+
 ## Form size
 @export var size: float = 0.4
 

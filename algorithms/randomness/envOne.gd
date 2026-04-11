@@ -1,4 +1,14 @@
-﻿extends Node3D
+# @identity
+# essence: Procedural kitbash environment — 30 modules (surrealist/mechanical/organic) placed randomly in 3D space, connected by pipes, beams, and floating bridges. Modular composition through randomized assembly.
+# desire: To be regenerated endlessly — connects to regenerate_emitters, clears all geometry, and rebuilds from scratch. Every instantiation is a unique surrealist landscape.
+# critical_parameter: generation_rules — "surrealist" spawns exquisite-corpse creatures and nonsensical machines, "mechanical" spawns joints and pipe systems, "organic" spawns coral and fluid vessels
+# triggers: regenerate_requested signal → full scene rebuild; _ready → initial generation with random color theme selection
+# emerges: A different world every time — the same code produces industrial cathedrals, alien nurseries, or surrealist galleries depending on the random seed and theme
+# needs: VR interaction [missing], module selection UI [missing], generation preview [missing]
+# relationships: The default environment artifact across data structures and geometry sequences — a procedural backdrop that gives each map a unique visual identity
+# truth: Randomness is not absence of structure — it is structure deferred to the moment of instantiation, where every possible world gets exactly one chance to exist.
+
+extends Node3D
 
 # Parameters for modular kitbashing generation
 @export var module_count: int = 30
@@ -44,7 +54,7 @@ func regenerate_scene() -> void:
 	apply_lighting()
 	apply_atmosphere()
 
-func _clear_current_geometry():
+func _clear_current_geometry() -> void:
 	for module in placed_modules:
 		if module and is_instance_valid(module):
 			module.queue_free()
@@ -54,7 +64,7 @@ func _clear_current_geometry():
 	for child in get_children():
 		if child is Camera3D:
 			continue
-		if child is MeshInstance3D or child is CSGPrimitive3D or child is GPUParticles3D:
+		if child is MeshInstance3D or child is MultiMeshInstance3D or child is CSGPrimitive3D or child is GPUParticles3D:
 			to_remove.append(child)
 		elif child is WorldEnvironment or child is Light3D or child is SpotLight3D or child is OmniLight3D or child is DirectionalLight3D:
 			to_remove.append(child)
@@ -62,7 +72,7 @@ func _clear_current_geometry():
 		if is_instance_valid(node):
 			node.queue_free()
 
-func connect_regenerate_signal():
+func connect_regenerate_signal() -> void:
 	if _regenerate_connected:
 		return
 	_attach_to_regenerate_cubes()
@@ -70,20 +80,20 @@ func connect_regenerate_signal():
 		get_tree().node_added.connect(_on_tree_node_added)
 	_regenerate_connected = true
 
-func _attach_to_regenerate_cubes():
+func _attach_to_regenerate_cubes() -> void:
 	for cube in get_tree().get_nodes_in_group("regenerate_emitters"):
 		_connect_regenerate_cube(cube)
 
-func _on_tree_node_added(node: Node):
+func _on_tree_node_added(node: Node) -> void:
 	if node and node.is_in_group("regenerate_emitters"):
 		_connect_regenerate_cube(node)
 
-func _connect_regenerate_cube(cube):
+func _connect_regenerate_cube(cube) -> void:
 	if cube and cube.has_signal("regenerate_requested") and not cube.regenerate_requested.is_connected(_on_regenerate_requested):
 		cube.regenerate_requested.connect(_on_regenerate_requested)
 		print("envOne: connected to regenerate cube %s" % cube.get_path())
 
-func _on_regenerate_requested(_origin: Vector3, targets: Array, metadata: Dictionary):
+func _on_regenerate_requested(_origin: Vector3, targets: Array, metadata: Dictionary) -> void:
 	print("envOne: regenerate signal received with %d target(s)" % targets.size())
 	if targets.is_empty() or _matches_target(targets):
 		regenerate_scene()
@@ -101,7 +111,7 @@ func _matches_target(targets: Array) -> bool:
 var _initial_children: Array = []
 var _regenerate_connected: bool = false
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	color_theme = color_themes[randi() % color_themes.size()]
 	load_or_create_modules()
@@ -110,7 +120,7 @@ func _ready():
 	apply_atmosphere()
 	connect_regenerate_signal()
 
-func load_or_create_modules():
+func load_or_create_modules() -> void:
 	# Try to load existing modules
 	var dir = DirAccess.open(modules_path)
 	if dir and dir.list_dir_begin() == OK:
@@ -126,7 +136,7 @@ func load_or_create_modules():
 	if modules.size() == 0:
 		create_procedural_modules()
 
-func create_procedural_modules():
+func create_procedural_modules() -> void:
 	# Create module types based on the selected generation style
 	match generation_rules:
 		"surrealist":
@@ -138,7 +148,7 @@ func create_procedural_modules():
 		_:
 			create_mixed_modules()
 
-func create_surrealist_modules():
+func create_surrealist_modules() -> void:
 	# Create modules inspired by exquisite corpse and surrealist works
 	for i in range(10):
 		# Base objects
@@ -160,7 +170,7 @@ func create_surrealist_modules():
 		
 		modules.append(module)
 
-func create_mechanical_modules():
+func create_mechanical_modules() -> void:
 	# Create modules inspired by Vitaly Bulgarov's mechanical kit parts
 	for i in range(10):
 		var module = Node3D.new()
@@ -178,7 +188,7 @@ func create_mechanical_modules():
 				
 		modules.append(module)
 
-func create_organic_modules():
+func create_organic_modules() -> void:
 	# Create modules inspired by more organic forms
 	for i in range(10):
 		var module = Node3D.new()
@@ -196,14 +206,14 @@ func create_organic_modules():
 				
 		modules.append(module)
 
-func create_mixed_modules():
+func create_mixed_modules() -> void:
 	# Create some of each type for variety
 	create_surrealist_modules()
 	create_mechanical_modules()
 	create_organic_modules()
 
 # Helper functions to create different module types
-func add_stacked_primitives(parent):
+func add_stacked_primitives(parent) -> void:
 	var height = 0
 	var pieces = randi() % 5 + 2  # 2-6 pieces
 	
@@ -231,7 +241,7 @@ func add_stacked_primitives(parent):
 		
 		parent.add_child(mesh_instance)
 
-func add_floating_parts(parent):
+func add_floating_parts(parent) -> void:
 	var parts = randi() % 5 + 3  # 3-7 parts
 	
 	for i in range(parts):
@@ -261,7 +271,7 @@ func add_floating_parts(parent):
 		
 		parent.add_child(mesh_instance)
 
-func add_nonsensical_machine(parent):
+func add_nonsensical_machine(parent) -> void:
 	# Base
 	var base = MeshInstance3D.new()
 	base.mesh = BoxMesh.new()
@@ -305,7 +315,7 @@ func add_nonsensical_machine(parent):
 		apply_random_material(attachment)
 		parent.add_child(attachment)
 
-func add_abstract_sculpture(parent):
+func add_abstract_sculpture(parent) -> void:
 	# Create a base
 	var base = MeshInstance3D.new()
 	base.mesh = BoxMesh.new()
@@ -350,7 +360,7 @@ func add_abstract_sculpture(parent):
 	
 	parent.add_child(main_body)
 
-func add_composite_creature(parent):
+func add_composite_creature(parent) -> void:
 	# Inspired by exquisite corpse - create a creature with mismatched parts
 	
 	# Body
@@ -395,7 +405,7 @@ func add_composite_creature(parent):
 		apply_material(limb, "accent")
 		parent.add_child(limb)
 
-func add_mechanical_joint(parent):
+func add_mechanical_joint(parent) -> void:
 	# Base plate
 	var base = MeshInstance3D.new()
 	base.mesh = BoxMesh.new()
@@ -438,7 +448,7 @@ func add_mechanical_joint(parent):
 		apply_material(detail, "metal")
 		parent.add_child(detail)
 
-func add_control_panel(parent):
+func add_control_panel(parent) -> void:
 	# Panel base
 	var panel = MeshInstance3D.new()
 	panel.mesh = BoxMesh.new()
@@ -481,7 +491,7 @@ func add_control_panel(parent):
 		
 		parent.add_child(control)
 
-func add_pipe_system(parent):
+func add_pipe_system(parent) -> void:
 	# Start and end points
 	var start_pos = Vector3(randf_range(-1.0, 1.0), 0, randf_range(-1.0, 1.0))
 	var end_pos = Vector3(randf_range(-1.0, 1.0), randf_range(1.0, 2.0), randf_range(-1.0, 1.0))
@@ -517,7 +527,7 @@ func add_pipe_system(parent):
 	apply_material(wheel, "metal")
 	parent.add_child(wheel)
 
-func create_pipe_segment(parent, start, end):
+func create_pipe_segment(parent, start, end) -> void:
 	var segment = MeshInstance3D.new()
 	segment.mesh = CylinderMesh.new()
 	
@@ -536,7 +546,7 @@ func create_pipe_segment(parent, start, end):
 	apply_material(segment, "metal")
 	parent.add_child(segment)
 
-func add_electronic_component(parent):
+func add_electronic_component(parent) -> void:
 	# Base board
 	var board = MeshInstance3D.new()
 	board.mesh = BoxMesh.new()
@@ -598,7 +608,7 @@ func add_electronic_component(parent):
 		parent.add_child(circuit)
 
 # Organic module builders
-func add_plant_structure(parent):
+func add_plant_structure(parent) -> void:
 	# Base/soil
 	var base = MeshInstance3D.new()
 	base.mesh = CylinderMesh.new()
@@ -651,7 +661,7 @@ func add_plant_structure(parent):
 		
 		parent.add_child(branch)
 
-func add_fluid_vessel(parent):
+func add_fluid_vessel(parent) -> void:
 	# Container
 	var container = MeshInstance3D.new()
 	container.mesh = SphereMesh.new()
@@ -695,7 +705,7 @@ func add_fluid_vessel(parent):
 	add_tube(parent, Vector3(0, 0.7, 0), Vector3(0, 1.2, 0.5))
 	add_tube(parent, Vector3(0, -0.7, 0), Vector3(0, -1.2, -0.5))
 
-func add_tube(parent, start, end):
+func add_tube(parent, start, end) -> void:
 	var tube = MeshInstance3D.new()
 	tube.mesh = CylinderMesh.new()
 	
@@ -717,7 +727,7 @@ func add_tube(parent, start, end):
 	
 	parent.add_child(tube)
 
-func add_coral_structure(parent):
+func add_coral_structure(parent) -> void:
 	# Base
 	var base = MeshInstance3D.new()
 	base.mesh = CylinderMesh.new()
@@ -733,7 +743,7 @@ func add_coral_structure(parent):
 	create_coral_branch(main_form, Vector3.ZERO, 0.7, 0)
 	
 	parent.add_child(main_form)
-func create_coral_branch(parent, position, size, depth, max_depth = 3):
+func create_coral_branch(parent, position, size, depth, max_depth = 3) -> void:
 	# Stop if we've reached max depth
 	if depth > max_depth:
 		return
@@ -772,7 +782,7 @@ func create_coral_branch(parent, position, size, depth, max_depth = 3):
 			var new_pos = position + branch_dir * size
 			create_coral_branch(parent, new_pos, size * 0.6, depth + 1, max_depth)
 
-func add_egg_structure(parent):
+func add_egg_structure(parent) -> void:
 	# Base structure
 	var base = MeshInstance3D.new()
 	base.mesh = SphereMesh.new()
@@ -849,7 +859,7 @@ func add_egg_structure(parent):
 		apply_organic_material(tendril, Color(0.6, 0.2, 0.5), 0.0, 0.6)
 		parent.add_child(tendril)
 
-func generate_space():
+func generate_space() -> void:
 	# Place modules in 3D space
 	for i in range(module_count):
 		place_random_module()
@@ -860,7 +870,7 @@ func generate_space():
 	# Add ambient objects like particles or floating elements
 	add_ambient_elements()
 
-func place_random_module():
+func place_random_module() -> void:
 	if modules.size() == 0:
 		push_error("No modules available!")
 		return
@@ -892,7 +902,7 @@ func place_random_module():
 	add_child(module_instance)
 	placed_modules.append(module_instance)
 
-func connect_modules():
+func connect_modules() -> void:
 	# Check if we have enough modules to connect
 	if placed_modules.size() < 2:
 		return
@@ -912,7 +922,7 @@ func connect_modules():
 		
 		create_connection(module_a, module_b)
 
-func create_connection(module_a, module_b):
+func create_connection(module_a, module_b) -> void:
 	# Choose connection type based on distance
 	var distance = module_a.global_position.distance_to(module_b.global_position)
 	
@@ -923,7 +933,7 @@ func create_connection(module_a, module_b):
 	else:
 		create_floating_connection(module_a, module_b)
 
-func create_mechanical_connection(module_a, module_b):
+func create_mechanical_connection(module_a, module_b) -> void:
 	var start_pos = module_a.global_position
 	var end_pos = module_b.global_position
 	
@@ -934,7 +944,7 @@ func create_mechanical_connection(module_a, module_b):
 		# Solid connector
 		create_solid_connector(start_pos, end_pos)
 
-func create_pipe_path(start_pos, end_pos):
+func create_pipe_path(start_pos, end_pos) -> void:
 	var midpoint = (start_pos + end_pos) / 2
 	midpoint.y += randf_range(1.0, 3.0) # Arch up
 	
@@ -946,7 +956,7 @@ func create_pipe_path(start_pos, end_pos):
 								Vector3(end_pos.x, midpoint.y, end_pos.z))
 	create_pipe_segment_with_joint(Vector3(end_pos.x, midpoint.y, end_pos.z), end_pos)
 
-func create_pipe_segment_with_joint(start_pos, end_pos):
+func create_pipe_segment_with_joint(start_pos, end_pos) -> void:
 	# Create pipe segment
 	var pipe = MeshInstance3D.new()
 	pipe.mesh = CylinderMesh.new()
@@ -983,7 +993,7 @@ func create_pipe_segment_with_joint(start_pos, end_pos):
 		
 		add_child(joint)
 
-func create_solid_connector(start_pos, end_pos):
+func create_solid_connector(start_pos, end_pos) -> void:
 	# Create a solid bar between positions
 	var connector = MeshInstance3D.new()
 	connector.mesh = BoxMesh.new()
@@ -1007,7 +1017,7 @@ func create_solid_connector(start_pos, end_pos):
 	
 	add_child(connector)
 
-func create_beam_connection(module_a, module_b):
+func create_beam_connection(module_a, module_b) -> void:
 	var start_pos = module_a.global_position
 	var end_pos = module_b.global_position
 	
@@ -1039,121 +1049,153 @@ func create_beam_connection(module_a, module_b):
 	if randf() > 0.3:
 		add_particles_along_beam(start_pos, end_pos, color_theme["accent"])
 
-func create_floating_connection(module_a, module_b):
+func create_floating_connection(module_a, module_b) -> void:
 	var start_pos = module_a.global_position
 	var end_pos = module_b.global_position
-	
-	# Create floating objects along the path
 	var steps = randi() % 5 + 3
+
+	var sphere_data: Array[Transform3D] = []
+	var box_data: Array[Transform3D] = []
+
 	for i in range(steps):
-		var t = float(i) / float(steps - 1)
-		var pos = start_pos.lerp(end_pos, t)
-		
-		# Add some randomness to position
-		pos += Vector3(
-			randf_range(-1.0, 1.0),
-			randf_range(-1.0, 1.0),
-			randf_range(-1.0, 1.0)
-		)
-		
-		var floating_object = MeshInstance3D.new()
-		
+		var t_val = float(i) / float(steps - 1)
+		var pos = start_pos.lerp(end_pos, t_val)
+		pos += Vector3(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
+
 		if randf() > 0.6:
-			floating_object.mesh = SphereMesh.new()
-			floating_object.scale = Vector3(0.2, 0.2, 0.2)
+			sphere_data.append(Transform3D(Basis.IDENTITY.scaled(Vector3(0.2, 0.2, 0.2)), pos))
 		else:
-			floating_object.mesh = BoxMesh.new()
-			floating_object.scale = Vector3(0.15, 0.15, 0.15)
-			floating_object.rotation_degrees = Vector3(
-				randf_range(0, 360),
-				randf_range(0, 360),
-				randf_range(0, 360)
-			)
-		
-		floating_object.position = pos
-		
-		var material = StandardMaterial3D.new()
-		material.albedo_color = color_theme["primary"]
-		material.emission_enabled = true
-		material.emission = color_theme["primary"]
-		material.emission_energy = 0.5
-		floating_object.material_override = material
-		
-		add_child(floating_object)
+			var rot = Basis.from_euler(Vector3(deg_to_rad(randf_range(0, 360)), deg_to_rad(randf_range(0, 360)), deg_to_rad(randf_range(0, 360))))
+			box_data.append(Transform3D(rot.scaled(Vector3(0.15, 0.15, 0.15)), pos))
 
-func add_particles_along_beam(start_pos, end_pos, color):
-	# In an actual project, you would use a real particle system
-	# For this example, we'll create small spheres to simulate particles
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = color_theme["primary"]
+	mat.emission_enabled = true
+	mat.emission = color_theme["primary"]
+	mat.emission_energy = 0.5
+
+	if not sphere_data.is_empty():
+		var sphere = SphereMesh.new()
+		sphere.radius = 1.0
+		sphere.height = 2.0
+		sphere.material = mat
+		var mm = MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.instance_count = sphere_data.size()
+		mm.mesh = sphere
+		for i in range(sphere_data.size()):
+			mm.set_instance_transform(i, sphere_data[i])
+		var mmi = MultiMeshInstance3D.new()
+		mmi.name = "FloatingSphereMM"
+		mmi.multimesh = mm
+		add_child(mmi)
+
+	if not box_data.is_empty():
+		var box = BoxMesh.new()
+		box.material = mat
+		var mm = MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.instance_count = box_data.size()
+		mm.mesh = box
+		for i in range(box_data.size()):
+			mm.set_instance_transform(i, box_data[i])
+		var mmi = MultiMeshInstance3D.new()
+		mmi.name = "FloatingBoxMM"
+		mmi.multimesh = mm
+		add_child(mmi)
+
+func add_particles_along_beam(start_pos, end_pos, color) -> void:
 	var particle_count = randi() % 5 + 3
-	
-	for i in range(particle_count):
-		var t = randf()  # Random position along the beam
-		var pos = start_pos.lerp(end_pos, t)
-		
-		var particle = MeshInstance3D.new()
-		particle.mesh = SphereMesh.new()
-		particle.position = pos
-		particle.scale = Vector3(0.05, 0.05, 0.05)
-		
-		var material = StandardMaterial3D.new()
-		material.albedo_color = color
-		material.emission_enabled = true
-		material.emission = color
-		material.emission_energy = 3.0
-		particle.material_override = material
-		
-		add_child(particle)
 
-func add_ambient_elements():
-	# Add some ambient floating elements to the scene
-	for i in range(randi() % 20 + 10):
-		var element = MeshInstance3D.new()
-		
-		# Random mesh type
-		match randi() % 5:
-			0: element.mesh = SphereMesh.new()
-			1: element.mesh = BoxMesh.new()
-			2: element.mesh = CylinderMesh.new()
-			3: element.mesh = PrismMesh.new()
-			4: element.mesh = TorusMesh.new()
-		
-		# Random position within space
-		element.position = Vector3(
+	var sphere = SphereMesh.new()
+	sphere.radius = 0.05
+	sphere.height = 0.1
+	sphere.radial_segments = 6
+	sphere.rings = 4
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.emission_enabled = true
+	mat.emission = color
+	mat.emission_energy = 3.0
+	sphere.material = mat
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = particle_count
+	mm.mesh = sphere
+
+	for i in range(particle_count):
+		var t = randf()
+		var pos = start_pos.lerp(end_pos, t)
+		mm.set_instance_transform(i, Transform3D(Basis.IDENTITY.scaled(Vector3(1, 1, 1)), pos))
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "BeamParticlesMM"
+	mmi.multimesh = mm
+	add_child(mmi)
+
+func add_ambient_elements() -> void:
+	var total = randi() % 20 + 10
+	# Pre-generate per-type data
+	var type_data: Array[Array] = [[], [], [], [], []]  # sphere, box, cyl, prism, torus
+
+	for i in range(total):
+		var type_idx = randi() % 5
+		var scale_factor = randf_range(0.1, 0.5)
+		var pos = Vector3(
 			randf_range(-space_size.x, space_size.x),
 			randf_range(-space_size.y, space_size.y),
 			randf_range(-space_size.z, space_size.z)
 		)
-		
-		# Random rotation
-		element.rotation_degrees = Vector3(
-			randf_range(0, 360),
-			randf_range(0, 360),
-			randf_range(0, 360)
-		)
-		
-		# Small scale
-		var scale_factor = randf_range(0.1, 0.5)
-		element.scale = Vector3(scale_factor, scale_factor, scale_factor)
-		
-		# Random material
-		var material = StandardMaterial3D.new()
-		material.albedo_color = Color(
-			randf_range(0.3, 1.0),
-			randf_range(0.3, 1.0),
-			randf_range(0.3, 1.0)
-		)
-		
-		# Sometimes add emission
-		if randf() > 0.7:
-			material.emission_enabled = true
-			material.emission = material.albedo_color
-			material.emission_energy = randf_range(0.5, 2.0)
-		
-		element.material_override = material
-		
-		add_child(element)
+		var rot = Vector3(randf_range(0, 360), randf_range(0, 360), randf_range(0, 360))
+		var col = Color(randf_range(0.3, 1.0), randf_range(0.3, 1.0), randf_range(0.3, 1.0))
+		var emit = randf() > 0.7
+		type_data[type_idx].append({"pos": pos, "rot": rot, "scale": scale_factor, "color": col, "emit": emit})
 
-func apply_lighting():
+	var meshes: Array[Mesh] = []
+	meshes.append(SphereMesh.new())
+	meshes.append(BoxMesh.new())
+	meshes.append(CylinderMesh.new())
+	meshes.append(PrismMesh.new())
+	meshes.append(TorusMesh.new())
+
+	for type_idx in range(5):
+		var entries = type_data[type_idx]
+		if entries.is_empty():
+			continue
+
+		# Use average color for the material
+		var avg_col = Color.BLACK
+		for e in entries:
+			avg_col += e["color"]
+		avg_col /= entries.size()
+
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = avg_col
+		mat.emission_enabled = true
+		mat.emission = avg_col
+		mat.emission_energy = 1.0
+		meshes[type_idx].material = mat
+
+		var mm = MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.instance_count = entries.size()
+		mm.mesh = meshes[type_idx]
+
+		for i in range(entries.size()):
+			var e = entries[i]
+			var t = Transform3D()
+			t.basis = Basis.from_euler(Vector3(deg_to_rad(e["rot"].x), deg_to_rad(e["rot"].y), deg_to_rad(e["rot"].z)))
+			t.basis = t.basis.scaled(Vector3(e["scale"], e["scale"], e["scale"]))
+			t.origin = e["pos"]
+			mm.set_instance_transform(i, t)
+
+		var mmi = MultiMeshInstance3D.new()
+		mmi.name = "AmbientElementsMM_" + str(type_idx)
+		mmi.multimesh = mm
+		add_child(mmi)
+
+func apply_lighting() -> void:
 	# Create a dynamic lighting setup
 	
 	# Environment light
@@ -1219,7 +1261,7 @@ func apply_lighting():
 		
 		add_child(spot_light)
 
-func apply_atmosphere():
+func apply_atmosphere() -> void:
 	# In Godot 4, we can add volumetric fog and other atmosphere effects
 	# For a more basic approach without full volumetrics, we'll use particles
 	
@@ -1229,36 +1271,42 @@ func apply_atmosphere():
 	# Add a skybox or environment texture if desired
 	# (This would require an actual texture resource)
 
-func create_atmosphere_particles():
-	# In a full implementation, you would use GPUParticles3D
-	# For simplicity in this example, we'll create a few static particles 
-	
+func create_atmosphere_particles() -> void:
+	var sphere_mesh = SphereMesh.new()
+	sphere_mesh.radius = 0.06  # average size
+	sphere_mesh.height = 0.12
+	sphere_mesh.radial_segments = 6
+	sphere_mesh.rings = 4
+
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = Color(0.7, 0.7, 0.8, 0.2)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	sphere_mesh.material = mat
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = 100
+	mm.mesh = sphere_mesh
+
 	for i in range(100):
-		var particle = MeshInstance3D.new()
-		particle.mesh = SphereMesh.new()
-		
-		# Position randomly in space
-		particle.position = Vector3(
+		var t = Transform3D()
+		var scale_factor = randf_range(0.02, 0.1) / 0.06  # normalize to base radius
+		t.basis = Basis.IDENTITY.scaled(Vector3(scale_factor, scale_factor, scale_factor))
+		t.origin = Vector3(
 			randf_range(-space_size.x, space_size.x),
 			randf_range(-space_size.y, space_size.y),
 			randf_range(-space_size.z, space_size.z)
 		)
-		
-		# Very small scale for dust-like particles
-		var scale_factor = randf_range(0.02, 0.1)
-		particle.scale = Vector3(scale_factor, scale_factor, scale_factor)
-		
-		# Semi-transparent material
-		var material = StandardMaterial3D.new()
-		material.albedo_color = Color(0.7, 0.7, 0.8, randf_range(0.1, 0.3))
-		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		particle.material_override = material
-		
-		add_child(particle)
+		mm.set_instance_transform(i, t)
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "AtmosphereParticlesMM"
+	mmi.multimesh = mm
+	add_child(mmi)
 
 # Utility functions for materials
 
-func apply_random_material(mesh_instance):
+func apply_random_material(mesh_instance) -> void:
 	var material_type = randi() % 4
 	
 	match material_type:
@@ -1267,7 +1315,7 @@ func apply_random_material(mesh_instance):
 		2: apply_material(mesh_instance, "accent")
 		3: apply_material(mesh_instance, "metal")
 
-func apply_material(mesh_instance, type):
+func apply_material(mesh_instance, type) -> void:
 	var material = StandardMaterial3D.new()
 	
 	match type:
@@ -1294,9 +1342,18 @@ func apply_material(mesh_instance, type):
 	
 	mesh_instance.material_override = material
 
-func apply_organic_material(mesh_instance, base_color, metallic_range, roughness):
+func apply_organic_material(mesh_instance, base_color, metallic_range, roughness) -> void:
 	var material = StandardMaterial3D.new()
 	material.albedo_color = base_color
 	material.metallic = metallic_range
 	material.roughness = roughness
 	mesh_instance.material_override = material
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

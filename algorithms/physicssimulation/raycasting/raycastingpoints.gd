@@ -153,13 +153,13 @@ void fragment() {
 }
 """
 
-func _ready():
+func _ready() -> void:
 	setup_scene()
 	create_particle_system()
 	create_ray_casters()
 	start_ray_animations()
 
-func setup_scene():
+func setup_scene() -> void:
 	# Create mystical environment
 	var env = Environment.new()
 	env.background_mode = Environment.BG_SKY
@@ -194,7 +194,7 @@ func setup_scene():
 	light.light_color = Color(0.7, 0.8, 1.0)
 	add_child(light)
 
-func create_particle_system():
+func create_particle_system() -> void:
 	# Create GPU particle system
 	particles = GPUParticles3D.new()
 	particles.emitting = true
@@ -231,7 +231,7 @@ func create_particle_system():
 	# Apply custom particle shader
 	apply_custom_particle_shader()
 
-func apply_custom_particle_shader():
+func apply_custom_particle_shader() -> void:
 	# Create shader for particle processing
 	var shader = Shader.new()
 	shader.code = PARTICLE_SHADER
@@ -258,7 +258,7 @@ func apply_custom_particle_shader():
 	
 	particles.process_material = process_material
 
-func create_ray_casters():
+func create_ray_casters() -> void:
 	# Create invisible ray casting points
 	ray_positions.clear()
 	
@@ -278,7 +278,7 @@ func create_ray_casters():
 		# Create visual indicator (optional - can be invisible)
 		create_ray_visualizer(ray_caster, i)
 
-func create_ray_visualizer(ray_caster: Node3D, index: int):
+func create_ray_visualizer(ray_caster: Node3D, index: int) -> void:
 	# Create subtle visual indicator of ray position
 	var sphere = MeshInstance3D.new()
 	var sphere_mesh = SphereMesh.new()
@@ -301,13 +301,13 @@ func create_ray_visualizer(ray_caster: Node3D, index: int):
 	sphere.set_surface_override_material(0, material)
 	ray_caster.add_child(sphere)
 
-func start_ray_animations():
+func start_ray_animations() -> void:
 	# Animate ray casters in complex patterns
 	for i in range(ray_casters.size()):
 		var ray_caster = ray_casters[i]
 		animate_ray_caster(ray_caster, i)
 
-func animate_ray_caster(ray_caster: Node3D, index: int):
+func animate_ray_caster(ray_caster: Node3D, index: int) -> void:
 	var tween = create_tween()
 	tween.set_loops()
 	
@@ -351,7 +351,7 @@ func animate_ray_caster(ray_caster: Node3D, index: int):
 		3:  # Random walk with smooth interpolation
 			create_random_walk_animation(ray_caster)
 
-func create_random_walk_animation(ray_caster: Node3D):
+func create_random_walk_animation(ray_caster: Node3D) -> void:
 	var tween = create_tween()
 	tween.set_loops()
 	
@@ -382,7 +382,7 @@ func _process(_delta):
 	if particles and particles.process_material:
 		update_ray_shader_data()
 
-func update_ray_shader_data():
+func update_ray_shader_data() -> void:
 	var process_material = particles.process_material as ShaderMaterial
 	if not process_material:
 		return
@@ -408,4 +408,13 @@ func update_ray_shader_data():
 func _input(_event):
 	# This could be extended to respond to VR controller input
 	# For now, rays move automatically
+	pass
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
 	pass

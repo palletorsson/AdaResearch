@@ -1,10 +1,21 @@
 ## TilingDemo — Standalone demo scene showcasing the tiling system.
 ## Shows Italian motifs as floor panels with different palettes and border compositions.
 ## Run this scene directly to test the tiling system.
+
+# @identity
+# essence: gallery of TilingSystem instances loaded with Italian historical motifs (checkerboard→meander→perspective cubes→floral cross) displayed as floor panels in two rows: individual motifs and composed floors with borders
+# desire: to walk through a gallery of floors and feel that mathematical tiling has a history — that the same index-based repetition logic underlies Roman mosaics, Cosmatesque pavements, and the array in your pocket
+# critical_parameter: panel_spacing — determines whether the gallery reads as a sequence of individual specimens or as a continuous floor surface; changing it shifts the experience from museum to architecture
+# triggers: the demo calls TilingSystem._demo_setup and _demo_composed_setup via call_deferred — each panel independently loads its motif pack and configures borders; composed floors add border+corner logic on top of field motifs
+# emerges: the Italian site names (Casa del Fauno, Santa Chiara, Certosa) attached to abstract tiling patterns reveal that mathematical structure carries cultural memory — the same p4m symmetry group appears in vastly different historical contexts
+# needs: no VR interactivity [missing]; static gallery with Label3D names [has]; overhead camera [has]; no slider controls for live editing [missing]
+# relationships: uses TilingSystem (the underlying tile engine); contrasts with PatternTilePuzzle (interactive editing vs historical display); connects to array_tutorial's gallery-of-patterns intro
+# truth: a tiling motif is a function from grid index to visual element, and every historical floor pattern is a specific instantiation of the same abstract array-to-image mapping
+
 extends Node3D
 
 @export var panel_size: Vector2 = Vector2(4.0, 4.0)
-@export var panel_spacing: float = 2.0
+@export var panel_spacing: float = 3.0
 
 func _ready() -> void:
 	_create_environment()
@@ -46,9 +57,9 @@ func _create_environment() -> void:
 
 	# Camera — overhead angled view
 	var cam := Camera3D.new()
-	cam.position = Vector3(10, 12, 14)
+	cam.position = Vector3(6, 8, 10)
 	cam.rotation_degrees = Vector3(-45, 0, 0)
-	cam.fov = 50
+	cam.fov = 55
 	add_child(cam)
 
 
@@ -58,7 +69,7 @@ func _create_environment() -> void:
 func _create_floor() -> void:
 	var floor_mesh := MeshInstance3D.new()
 	var plane := PlaneMesh.new()
-	plane.size = Vector2(40, 30)
+	plane.size = Vector2(14, 12)
 	floor_mesh.mesh = plane
 
 	var mat := StandardMaterial3D.new()
@@ -113,7 +124,7 @@ func _spawn_motif_panel(spec: Dictionary, pos: Vector3) -> void:
 	tiling.has_border = false
 	tiling.has_corners = false
 	tiling.has_medallion = false
-	tiling.cell_size = 0.04
+	tiling.cell_size = 0.12
 	tiling.position = pos
 	add_child(tiling)
 
@@ -183,7 +194,7 @@ func _spawn_composed_floor(spec: Dictionary, pos: Vector3) -> void:
 	tiling.has_border = true
 	tiling.has_corners = true
 	tiling.has_medallion = false
-	tiling.cell_size = 0.04
+	tiling.cell_size = 0.12
 	tiling.position = pos
 	add_child(tiling)
 

@@ -23,7 +23,7 @@ const RING_INNER_2 := 0.048
 const RING_OUTER_3 := 0.042
 const RING_INNER_3 := 0.032
 
-func _ready():
+func _ready() -> void:
 	# Pedestal (anchor point)
 	pedestal = create_static_body(
 		Vector3(0, -0.05, 0),
@@ -84,7 +84,7 @@ func _ready():
 	center_mi.material_override = get_emissive_material(Color(0.9, 0.9, 1.0), 2.0)
 	roll_ring.add_child(center_mi)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	_time += delta
 
 	# Each ring oscillates at a different frequency for visual interest
@@ -131,3 +131,12 @@ func _create_ring_body(pos: Vector3, inner_r: float, outer_r: float, color: Colo
 
 	add_child(body)
 	return body
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -23,6 +23,11 @@
 				"searchpathfinding",
 				"randomness",
 				"proceduralgeneration"
+			],
+			"dev_themes": [
+				"3d",
+				"grid",
+				"spatial"
 			]
 		},
 		"grid3d_bfs": {
@@ -44,8 +49,12 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"graphtheory",
 				"testmaps"
+			],
+			"dev_themes": [
+				"3d",
+				"grid",
+				"spatial"
 			]
 		},
 		"grid3d_dfs": {
@@ -69,6 +78,11 @@
 			"map_ready": true,
 			"map_sequences": [
 				"graphtheory"
+			],
+			"dev_themes": [
+				"3d",
+				"grid",
+				"spatial"
 			]
 		},
 		"grid3d_dijkstra": {
@@ -92,6 +106,11 @@
 			"map_ready": true,
 			"map_sequences": [
 				"searchpathfinding"
+			],
+			"dev_themes": [
+				"3d",
+				"grid",
+				"spatial"
 			]
 		},
 		"grid3d_kruskal": {
@@ -115,8 +134,12 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"graphtheory",
 				"testmaps"
+			],
+			"dev_themes": [
+				"3d",
+				"grid",
+				"spatial"
 			]
 		},
 		"grid3d_prim": {
@@ -140,6 +163,11 @@
 			"map_ready": true,
 			"map_sequences": [
 				"graphtheory"
+			],
+			"dev_themes": [
+				"3d",
+				"grid",
+				"spatial"
 			]
 		},
 		"grid3d_force_directed": {
@@ -162,8 +190,12 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"graphtheory",
 				"testmaps"
+			],
+			"dev_themes": [
+				"3d",
+				"grid",
+				"spatial"
 			]
 		},
 		"grid3d_random_graph": {
@@ -185,9 +217,12 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"graphtheory",
-				"randomness",
 				"testmaps"
+			],
+			"dev_themes": [
+				"3d",
+				"grid",
+				"spatial"
 			]
 		},
 		"grid3d_entropy": {
@@ -209,8 +244,12 @@
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
-				"randomness",
 				"testmaps"
+			],
+			"dev_themes": [
+				"3d",
+				"grid",
+				"spatial"
 			]
 		}
 	}

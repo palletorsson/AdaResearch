@@ -35,12 +35,12 @@ enum CAType {
 const DendriteGrowthCA = preload("res://algorithms/cellularautomata/ca_showcase/dendrite_growth_ca.gd")
 const DiseaseSpreadCA = preload("res://algorithms/cellularautomata/ca_showcase/disease_spread_ca.gd")
 
-func _ready():
+func _ready() -> void:
  
 	initialize_ca_showcases()
 	start_showcase_cycle()
 
-func create_info_panel(index: int, pos: Vector3):
+func create_info_panel(index: int, pos: Vector3) -> void:
 	var panel = MeshInstance3D.new()
 	var box_mesh = BoxMesh.new()
 	box_mesh.size = Vector3(2.5, 1.5, 0.1)
@@ -70,7 +70,7 @@ func create_info_panel(index: int, pos: Vector3):
 	add_child(panel)
 	info_panels.append(panel)
 
-func initialize_ca_showcases():
+func initialize_ca_showcases() -> void:
 	showcases.clear()
 	info_panels.clear()
 	
@@ -128,35 +128,47 @@ func create_ca_showcase(ca_type: CAType, platform_pos: Vector3) -> Node3D:
 	
 	return showcase
 
-func create_recrystallization_ca(parent: Node3D):
+func create_recrystallization_ca(parent: Node3D) -> void:
 	# Metal recrystallization simulation
 	var grid = create_3d_grid(parent, "Recrystallization")
 	var nucleation_sites = []
 	
-	# Add nucleation sites with visual markers
-	for i in range(5):
+	# Add nucleation sites with visual markers using MultiMesh
+	var nuc_count = 5
+	for i in range(nuc_count):
 		var site = Vector3i(
 			randi() % GRID_SIZE,
 			randi() % GRID_SIZE,
 			randi() % GRID_SIZE
 		)
 		nucleation_sites.append(site)
-		
-		# Create visual marker for nucleation site
-		var marker = MeshInstance3D.new()
-		var sphere_mesh = SphereMesh.new()
-		sphere_mesh.radius = 0.1
-		sphere_mesh.height = 0.2  # Fix elongated sphere
-		marker.mesh = sphere_mesh
-		var marker_material = StandardMaterial3D.new()
-		marker_material.albedo_color = Color(1.0, 0.6, 0.0)
-		marker_material.emission_enabled = true
-		marker_material.emission = Color(1.0, 0.6, 0.0) * 0.8
-		marker_material.metallic = 0.3
-		marker_material.roughness = 0.2
-		marker_material.cull_mode = BaseMaterial3D.CULL_DISABLED
-		marker.material_override = marker_material
-		parent.add_child(marker)
+
+	var nuc_mesh = SphereMesh.new()
+	nuc_mesh.radius = 0.1
+	nuc_mesh.height = 0.2
+	var nuc_mat = StandardMaterial3D.new()
+	nuc_mat.albedo_color = Color(1.0, 0.6, 0.0)
+	nuc_mat.emission_enabled = true
+	nuc_mat.emission = Color(1.0, 0.6, 0.0) * 0.8
+	nuc_mat.metallic = 0.3
+	nuc_mat.roughness = 0.2
+	nuc_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	nuc_mesh.material = nuc_mat
+
+	var nuc_mm = MultiMesh.new()
+	nuc_mm.transform_format = MultiMesh.TRANSFORM_3D
+	nuc_mm.instance_count = nuc_count
+	nuc_mm.mesh = nuc_mesh
+
+	for i in range(nuc_count):
+		var t = Transform3D()
+		t.origin = Vector3.ZERO  # Markers are at origin, actual growth tracked in grid
+		nuc_mm.set_instance_transform(i, t)
+
+	var nuc_mmi = MultiMeshInstance3D.new()
+	nuc_mmi.name = "NucleationMarkers_MM"
+	nuc_mmi.multimesh = nuc_mm
+	parent.add_child(nuc_mmi)
 	
 	# Store CA data
 	parent.set_meta("type", "recrystallization")
@@ -166,65 +178,87 @@ func create_recrystallization_ca(parent: Node3D):
 
 
 
-func create_percolation_ca(parent: Node3D):
+func create_percolation_ca(parent: Node3D) -> void:
 	# Fluid percolation through porous medium
 	var grid = create_3d_grid(parent, "Percolation")
 	
-	# Create porous structure visualization
-	for i in range(20):
-		var pore = MeshInstance3D.new()
-		var sphere_mesh = SphereMesh.new()
-		sphere_mesh.radius = 0.05 + randf() * 0.03
-		sphere_mesh.height = sphere_mesh.radius * 2  # Fix elongated sphere
-		pore.mesh = sphere_mesh
-		pore.position = Vector3(
-			randf_range(-1.5, 1.5),
-			randf_range(-1.5, 1.5),
-			randf_range(-1.5, 1.5)
-		)
-		var pore_material = StandardMaterial3D.new()
-		pore_material.albedo_color = Color(0.6, 0.6, 0.8, 0.7)
-		pore_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		pore.material_override = pore_material
-		parent.add_child(pore)
+	# Create porous structure visualization using MultiMesh
+	var pore_count = 20
+	var pore_mesh = SphereMesh.new()
+	pore_mesh.radius = 0.06
+	pore_mesh.height = 0.12
+	var pore_mat = StandardMaterial3D.new()
+	pore_mat.albedo_color = Color(0.6, 0.6, 0.8, 0.7)
+	pore_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	pore_mesh.material = pore_mat
+
+	var pore_mm = MultiMesh.new()
+	pore_mm.transform_format = MultiMesh.TRANSFORM_3D
+	pore_mm.instance_count = pore_count
+	pore_mm.mesh = pore_mesh
+
+	for i in range(pore_count):
+		var r = 0.05 + randf() * 0.03
+		var sf = r / 0.06
+		var t = Transform3D()
+		t.basis = Basis.IDENTITY.scaled(Vector3(sf, sf, sf))
+		t.origin = Vector3(randf_range(-1.5, 1.5), randf_range(-1.5, 1.5), randf_range(-1.5, 1.5))
+		pore_mm.set_instance_transform(i, t)
+
+	var pore_mmi = MultiMeshInstance3D.new()
+	pore_mmi.name = "Pores_MM"
+	pore_mmi.multimesh = pore_mm
+	parent.add_child(pore_mmi)
 	
 	parent.set_meta("type", "percolation")
 	parent.set_meta("grid", grid)
 	parent.set_meta("porosity", 0.6)
 	parent.set_meta("flow_rate", 0.1)
 
-func create_crack_propagation_ca(parent: Node3D):
+func create_crack_propagation_ca(parent: Node3D) -> void:
 	# Material crack propagation
 	var grid = create_3d_grid(parent, "Crack Propagation")
 	var stress_points = []
 	
-	# Add initial stress concentrators with visual markers
-	for i in range(3):
+	# Add initial stress concentrators with visual markers using MultiMesh
+	var stress_count = 3
+	for i in range(stress_count):
 		var stress_point = Vector3i(
 			randi() % GRID_SIZE,
 			GRID_SIZE - 1,
 			randi() % GRID_SIZE
 		)
 		stress_points.append(stress_point)
-		
-		# Create stress visualization
-		var stress_marker = MeshInstance3D.new()
-		var box_mesh = BoxMesh.new()
-		box_mesh.size = Vector3(0.2, 0.1, 0.2)
-		stress_marker.mesh = box_mesh
-		var stress_material = StandardMaterial3D.new()
-		stress_material.albedo_color = Color(1.0, 0.2, 0.2)
-		stress_material.emission_enabled = true
-		stress_material.emission = Color(1.0, 0.2, 0.2) * 0.7
-		stress_marker.material_override = stress_material
-		parent.add_child(stress_marker)
+
+	var stress_mesh = BoxMesh.new()
+	stress_mesh.size = Vector3(0.2, 0.1, 0.2)
+	var stress_mat = StandardMaterial3D.new()
+	stress_mat.albedo_color = Color(1.0, 0.2, 0.2)
+	stress_mat.emission_enabled = true
+	stress_mat.emission = Color(1.0, 0.2, 0.2) * 0.7
+	stress_mesh.material = stress_mat
+
+	var stress_mm = MultiMesh.new()
+	stress_mm.transform_format = MultiMesh.TRANSFORM_3D
+	stress_mm.instance_count = stress_count
+	stress_mm.mesh = stress_mesh
+
+	for i in range(stress_count):
+		var t = Transform3D()
+		t.origin = Vector3.ZERO
+		stress_mm.set_instance_transform(i, t)
+
+	var stress_mmi = MultiMeshInstance3D.new()
+	stress_mmi.name = "StressMarkers_MM"
+	stress_mmi.multimesh = stress_mm
+	parent.add_child(stress_mmi)
 	
 	parent.set_meta("type", "crack")
 	parent.set_meta("grid", grid)
 	parent.set_meta("stress_points", stress_points)
 	parent.set_meta("crack_threshold", 0.4)
 
-func create_avalanche_ca(parent: Node3D):
+func create_avalanche_ca(parent: Node3D) -> void:
 	# Sand pile avalanche model (Bak-Tang-Wiesenfeld)
 	var grid = create_2d_grid_on_platform(parent, "Avalanche Model")
 	
@@ -245,7 +279,7 @@ func create_avalanche_ca(parent: Node3D):
 	parent.set_meta("critical_slope", 4)
 	parent.set_meta("sand_drop_rate", 0.1)
 
-func create_traffic_flow_ca(parent: Node3D):
+func create_traffic_flow_ca(parent: Node3D) -> void:
 	# Highway traffic flow simulation
 	var road_segments = create_road_network(parent)
 	
@@ -254,7 +288,7 @@ func create_traffic_flow_ca(parent: Node3D):
 	parent.set_meta("car_density", 0.3)
 	parent.set_meta("max_velocity", 3)
 
-func create_flood_propagation_ca(parent: Node3D):
+func create_flood_propagation_ca(parent: Node3D) -> void:
 	# Flood water propagation
 	var terrain = create_terrain_grid(parent, "Flood Simulation")
 	
@@ -263,29 +297,51 @@ func create_flood_propagation_ca(parent: Node3D):
 	parent.set_meta("water_sources", [Vector3i(10, 50, 10)])
 	parent.set_meta("flow_rate", 0.08)
 
-func create_ecosystem_ca(parent: Node3D):
+func create_ecosystem_ca(parent: Node3D) -> void:
 	# Predator-prey ecosystem
 	var grid = create_3d_grid(parent, "Ecosystem")
 	
-	# Create some visual ecosystem elements
-	for i in range(10):
-		var organism = MeshInstance3D.new()
-		var sphere_mesh = SphereMesh.new()
-		sphere_mesh.radius = 0.05
-		sphere_mesh.height = 0.1  # Fix elongated sphere
-		organism.mesh = sphere_mesh
-		organism.position = Vector3(
-			randf_range(-1.5, 1.5),
-			randf_range(-1.5, 1.5),
-			randf_range(-1.5, 1.5)
-		)
-		var org_material = StandardMaterial3D.new()
-		if i < 7:  # Prey
-			org_material.albedo_color = Color(0.2, 0.8, 0.2)
-		else:  # Predators
-			org_material.albedo_color = Color(0.8, 0.2, 0.2)
-		organism.material_override = org_material
-		parent.add_child(organism)
+	# Create visual ecosystem elements using MultiMesh (prey)
+	var prey_mesh = SphereMesh.new()
+	prey_mesh.radius = 0.05
+	prey_mesh.height = 0.1
+	var prey_mat = StandardMaterial3D.new()
+	prey_mat.albedo_color = Color(0.2, 0.8, 0.2)
+	prey_mesh.material = prey_mat
+
+	var prey_mm = MultiMesh.new()
+	prey_mm.transform_format = MultiMesh.TRANSFORM_3D
+	prey_mm.instance_count = 7
+	prey_mm.mesh = prey_mesh
+	for i in range(7):
+		var t = Transform3D()
+		t.origin = Vector3(randf_range(-1.5, 1.5), randf_range(-1.5, 1.5), randf_range(-1.5, 1.5))
+		prey_mm.set_instance_transform(i, t)
+	var prey_mmi = MultiMeshInstance3D.new()
+	prey_mmi.name = "Prey_MM"
+	prey_mmi.multimesh = prey_mm
+	parent.add_child(prey_mmi)
+
+	# Predators using MultiMesh
+	var pred_mesh = SphereMesh.new()
+	pred_mesh.radius = 0.05
+	pred_mesh.height = 0.1
+	var pred_mat = StandardMaterial3D.new()
+	pred_mat.albedo_color = Color(0.8, 0.2, 0.2)
+	pred_mesh.material = pred_mat
+
+	var pred_mm = MultiMesh.new()
+	pred_mm.transform_format = MultiMesh.TRANSFORM_3D
+	pred_mm.instance_count = 3
+	pred_mm.mesh = pred_mesh
+	for i in range(3):
+		var t = Transform3D()
+		t.origin = Vector3(randf_range(-1.5, 1.5), randf_range(-1.5, 1.5), randf_range(-1.5, 1.5))
+		pred_mm.set_instance_transform(i, t)
+	var pred_mmi = MultiMeshInstance3D.new()
+	pred_mmi.name = "Predators_MM"
+	pred_mmi.multimesh = pred_mm
+	parent.add_child(pred_mmi)
 	
 	parent.set_meta("type", "ecosystem")
 	parent.set_meta("grid", grid)
@@ -295,7 +351,7 @@ func create_ecosystem_ca(parent: Node3D):
 
 
 
-func create_blood_flow_ca(parent: Node3D):
+func create_blood_flow_ca(parent: Node3D) -> void:
 	# Lattice Boltzmann blood flow
 	var vessel_network = create_vessel_network(parent)
 	
@@ -304,57 +360,74 @@ func create_blood_flow_ca(parent: Node3D):
 	parent.set_meta("viscosity", 0.004)
 	parent.set_meta("pressure_gradient", 0.1)
 
-func create_droplet_behavior_ca(parent: Node3D):
+func create_droplet_behavior_ca(parent: Node3D) -> void:
 	# Surface tension and droplet dynamics
 	var surface_grid = create_surface_grid(parent)
 	
-	# Add some droplets
-	for i in range(5):
-		var droplet = MeshInstance3D.new()
-		var sphere_mesh = SphereMesh.new()
-		sphere_mesh.radius = 0.1 + randf() * 0.05
-		sphere_mesh.height = sphere_mesh.radius * 2  # Fix elongated sphere
-		droplet.mesh = sphere_mesh
-		droplet.position = Vector3(
-			randf_range(-1.0, 1.0),
-			0.2,
-			randf_range(-1.0, 1.0)
-		)
-		var droplet_material = StandardMaterial3D.new()
-		droplet_material.albedo_color = Color(0.2, 0.6, 1.0, 0.8)
-		droplet_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		droplet_material.emission_enabled = true
-		droplet_material.emission = Color(0.1, 0.3, 0.5) * 0.3
-		droplet.material_override = droplet_material
-		parent.add_child(droplet)
+	# Add droplets using MultiMesh
+	var drop_count = 5
+	var drop_mesh = SphereMesh.new()
+	drop_mesh.radius = 0.12
+	drop_mesh.height = 0.24
+	var drop_mat = StandardMaterial3D.new()
+	drop_mat.albedo_color = Color(0.2, 0.6, 1.0, 0.8)
+	drop_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	drop_mat.emission_enabled = true
+	drop_mat.emission = Color(0.1, 0.3, 0.5) * 0.3
+	drop_mesh.material = drop_mat
+
+	var drop_mm = MultiMesh.new()
+	drop_mm.transform_format = MultiMesh.TRANSFORM_3D
+	drop_mm.instance_count = drop_count
+	drop_mm.mesh = drop_mesh
+
+	for i in range(drop_count):
+		var r = 0.1 + randf() * 0.05
+		var sf = r / 0.12
+		var t = Transform3D()
+		t.basis = Basis.IDENTITY.scaled(Vector3(sf, sf, sf))
+		t.origin = Vector3(randf_range(-1.0, 1.0), 0.2, randf_range(-1.0, 1.0))
+		drop_mm.set_instance_transform(i, t)
+
+	var drop_mmi = MultiMeshInstance3D.new()
+	drop_mmi.name = "Droplets_MM"
+	drop_mmi.multimesh = drop_mm
+	parent.add_child(drop_mmi)
 	
 	parent.set_meta("type", "droplet")
 	parent.set_meta("surface", surface_grid)
 	parent.set_meta("surface_tension", 0.7)
 	parent.set_meta("contact_angle", 45.0)
 
-func create_self_organization_ca(parent: Node3D):
+func create_self_organization_ca(parent: Node3D) -> void:
 	# Self-organizing patterns and emergence
 	var grid = create_3d_grid(parent, "Self-Organization")
 	
-	# Create random initial pattern
-	for i in range(20):
-		var particle = MeshInstance3D.new()
-		var sphere_mesh = SphereMesh.new()
-		sphere_mesh.radius = 0.03
-		sphere_mesh.height = 0.06  # Fix elongated sphere
-		particle.mesh = sphere_mesh
-		particle.position = Vector3(
-			randf_range(-1.5, 1.5),
-			randf_range(-1.5, 1.5),
-			randf_range(-1.5, 1.5)
-		)
-		var particle_material = StandardMaterial3D.new()
-		particle_material.albedo_color = Color(
-			randf(), randf(), randf()
-		)
-		particle.material_override = particle_material
-		parent.add_child(particle)
+	# Create random initial pattern using MultiMesh
+	var so_count = 20
+	var so_mesh = SphereMesh.new()
+	so_mesh.radius = 0.03
+	so_mesh.height = 0.06
+	var so_mat = StandardMaterial3D.new()
+	so_mat.albedo_color = Color(0.5, 0.5, 0.5)  # Average color
+	so_mesh.material = so_mat
+
+	var so_mm = MultiMesh.new()
+	so_mm.transform_format = MultiMesh.TRANSFORM_3D
+	so_mm.use_colors = true
+	so_mm.instance_count = so_count
+	so_mm.mesh = so_mesh
+
+	for i in range(so_count):
+		var t = Transform3D()
+		t.origin = Vector3(randf_range(-1.5, 1.5), randf_range(-1.5, 1.5), randf_range(-1.5, 1.5))
+		so_mm.set_instance_transform(i, t)
+		so_mm.set_instance_color(i, Color(randf(), randf(), randf()))
+
+	var so_mmi = MultiMeshInstance3D.new()
+	so_mmi.name = "SelfOrg_MM"
+	so_mmi.multimesh = so_mm
+	parent.add_child(so_mmi)
 	
 	parent.set_meta("type", "self_org")
 	parent.set_meta("grid", grid)
@@ -403,7 +476,7 @@ func create_3d_grid(parent: Node3D, label: String) -> Array:
 	
 	return cells
 
-func activate_cell(showcase: Node3D, x: int, y: int, z: int, color: Color):
+func activate_cell(showcase: Node3D, x: int, y: int, z: int, color: Color) -> void:
 	"""Activate a cell with a growing animation"""
 	if not showcase.has_meta("visual_multimesh"):
 		return
@@ -474,21 +547,31 @@ func create_terrain_grid(parent: Node3D, label: String) -> Array:
 	var terrain = []
 	terrain.resize(GRID_SIZE)
 	
-	# Create terrain visualization
-	for i in range(10):
-		var terrain_chunk = MeshInstance3D.new()
-		var box_mesh = BoxMesh.new()
-		box_mesh.size = Vector3(0.3, randf() * 0.5, 0.3)
-		terrain_chunk.mesh = box_mesh
-		terrain_chunk.position = Vector3(
-			randf_range(-1.5, 1.5),
-			0,
-			randf_range(-1.5, 1.5)
-		)
-		var terrain_material = StandardMaterial3D.new()
-		terrain_material.albedo_color = Color(0.4, 0.3, 0.2)
-		terrain_chunk.material_override = terrain_material
-		parent.add_child(terrain_chunk)
+	# Create terrain visualization using MultiMesh
+	var tc_count = 10
+	var tc_mesh = BoxMesh.new()
+	tc_mesh.size = Vector3(0.3, 0.25, 0.3)  # Base size
+	var tc_mat = StandardMaterial3D.new()
+	tc_mat.albedo_color = Color(0.4, 0.3, 0.2)
+	tc_mesh.material = tc_mat
+
+	var tc_mm = MultiMesh.new()
+	tc_mm.transform_format = MultiMesh.TRANSFORM_3D
+	tc_mm.instance_count = tc_count
+	tc_mm.mesh = tc_mesh
+
+	for i in range(tc_count):
+		var h = randf() * 0.5
+		var sy = h / 0.25  # Scale Y relative to base
+		var t = Transform3D()
+		t.basis = Basis.IDENTITY.scaled(Vector3(1.0, sy, 1.0))
+		t.origin = Vector3(randf_range(-1.5, 1.5), 0, randf_range(-1.5, 1.5))
+		tc_mm.set_instance_transform(i, t)
+
+	var tc_mmi = MultiMeshInstance3D.new()
+	tc_mmi.name = "TerrainChunks_MM"
+	tc_mmi.multimesh = tc_mm
+	parent.add_child(tc_mmi)
 	
 	for x in range(GRID_SIZE):
 		terrain[x] = []
@@ -506,26 +589,38 @@ func create_terrain_grid(parent: Node3D, label: String) -> Array:
 
 func create_vessel_network(parent: Node3D) -> Array:
 	var vessels = []
-	
-	# Create branching vessel structure
-	for i in range(5):
-		var vessel = MeshInstance3D.new()
-		var cylinder_mesh = CylinderMesh.new()
-		cylinder_mesh.top_radius = 0.1 - i * 0.015
-		cylinder_mesh.bottom_radius = 0.1 - i * 0.015
-		cylinder_mesh.height = 2.0
-		vessel.mesh = cylinder_mesh
-		vessel.position = Vector3(sin(i) * 0.5, 0, cos(i) * 0.5)
-		vessel.rotation.z = i * 0.3
-		
-		var vessel_material = StandardMaterial3D.new()
-		vessel_material.albedo_color = Color(0.8, 0.2, 0.2, 0.7)
-		vessel_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		vessel.material_override = vessel_material
-		
-		parent.add_child(vessel)
-		vessels.append(vessel)
-	
+	var vessel_count = 5
+
+	# Create branching vessel structure using MultiMesh
+	var cyl_mesh = CylinderMesh.new()
+	cyl_mesh.top_radius = 0.085  # Average radius
+	cyl_mesh.bottom_radius = 0.085
+	cyl_mesh.height = 2.0
+
+	var vessel_mat = StandardMaterial3D.new()
+	vessel_mat.albedo_color = Color(0.8, 0.2, 0.2, 0.7)
+	vessel_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	cyl_mesh.material = vessel_mat
+
+	var mm = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.instance_count = vessel_count
+	mm.mesh = cyl_mesh
+
+	for i in range(vessel_count):
+		var r = 0.1 - i * 0.015
+		var sf = r / 0.085  # Scale relative to base
+		var t = Transform3D()
+		t.basis = Basis(Vector3(0, 0, 1), i * 0.3).scaled(Vector3(sf, 1.0, sf))
+		t.origin = Vector3(sin(i) * 0.5, 0, cos(i) * 0.5)
+		mm.set_instance_transform(i, t)
+
+	var mmi = MultiMeshInstance3D.new()
+	mmi.name = "Vessels_MM"
+	mmi.multimesh = mm
+	parent.add_child(mmi)
+	parent.set_meta("vessel_mm", mm)
+
 	return vessels
 
 func create_surface_grid(parent: Node3D) -> Array:
@@ -541,11 +636,11 @@ func create_surface_grid(parent: Node3D) -> Array:
 	
 	return surface
 
-func start_showcase_cycle():
+func start_showcase_cycle() -> void:
 	print("VR CA Showcase initialized with ", SHOWCASE_COUNT, " demonstrations")
 	highlight_current_showcase()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	transition_time += delta
 	
 	if auto_cycle and transition_time >= cycle_interval:
@@ -555,7 +650,7 @@ func _process(delta):
 	# Update only the currently visible showcase (non-blocking)
 	update_current_showcase(delta)
 
-func update_current_showcase(delta):
+func update_current_showcase(delta) -> void:
 	"""Update only the currently visible showcase for better performance"""
 	if current_showcase < 0 or current_showcase >= showcases.size():
 		return
@@ -589,7 +684,7 @@ func update_current_showcase(delta):
 		"self_org":
 			update_self_organization(showcase, delta)
 
-func update_all_showcases(delta):
+func update_all_showcases(delta) -> void:
 	"""Legacy function - updates all showcases (more expensive)"""
 	for i in range(showcases.size()):
 		var showcase = showcases[i]
@@ -621,7 +716,7 @@ func update_all_showcases(delta):
 			"self_org":
 				update_self_organization(showcase, delta)
 
-func update_recrystallization(showcase: Node3D, delta):
+func update_recrystallization(showcase: Node3D, delta) -> void:
 	"""Growing crystals - Orange spheres expanding from centers"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -650,7 +745,7 @@ func update_recrystallization(showcase: Node3D, delta):
 
 
 
-func update_percolation(showcase: Node3D, delta):
+func update_percolation(showcase: Node3D, delta) -> void:
 	"""Water flowing down - Green/aqua droplets"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -674,7 +769,7 @@ func update_percolation(showcase: Node3D, delta):
 					var color = Color(0.0, 0.7 + randf() * 0.3, 0.9)
 					activate_cell(showcase, new_pos.x, new_pos.y, new_pos.z, color)
 
-func update_crack_propagation(showcase: Node3D, delta):
+func update_crack_propagation(showcase: Node3D, delta) -> void:
 	"""Cracks spreading - Red lightning bolts"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -689,7 +784,7 @@ func update_crack_propagation(showcase: Node3D, delta):
 					var color = Color(1.0, 0.1 + randf() * 0.2, 0.0)  # Red
 					activate_cell(showcase, new_pos.x, new_pos.y, new_pos.z, color)
 
-func update_avalanche(showcase: Node3D, delta):
+func update_avalanche(showcase: Node3D, delta) -> void:
 	"""Sand avalanche - Yellow/brown particles falling"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -702,7 +797,7 @@ func update_avalanche(showcase: Node3D, delta):
 			var color = Color(1.0, 0.8 + randf() * 0.2, 0.2)  # Sandy
 			activate_cell(showcase, x, GRID_SIZE-1, z, color)
 
-func update_traffic_flow(showcase: Node3D, delta):
+func update_traffic_flow(showcase: Node3D, delta) -> void:
 	"""Traffic - Moving white/yellow lights"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -713,7 +808,7 @@ func update_traffic_flow(showcase: Node3D, delta):
 			var color = Color(1.0, 1.0, randf() * 0.5)  # White/yellow
 			activate_cell(showcase, GRID_SIZE/2, 0, z, color)
 
-func update_flood_propagation(showcase: Node3D, delta):
+func update_flood_propagation(showcase: Node3D, delta) -> void:
 	"""Flood spreading - Blue waves expanding outward"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -728,7 +823,7 @@ func update_flood_propagation(showcase: Node3D, delta):
 					var color = Color(0.0, 0.3 + randf() * 0.3, 1.0)  # Deep blue
 					activate_cell(showcase, new_pos.x, new_pos.y, new_pos.z, color)
 
-func update_ecosystem(showcase: Node3D, delta):
+func update_ecosystem(showcase: Node3D, delta) -> void:
 	"""Ecosystem - Green/brown organic growth"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -743,7 +838,7 @@ func update_ecosystem(showcase: Node3D, delta):
 
 
 
-func update_blood_flow(showcase: Node3D, delta):
+func update_blood_flow(showcase: Node3D, delta) -> void:
 	"""Blood flow - Dark red pulsing"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -755,7 +850,7 @@ func update_blood_flow(showcase: Node3D, delta):
 				var color = Color(0.7 + randf() * 0.3, 0.0, 0.1)  # Dark red
 				activate_cell(showcase, pos.x, pos.y, pos.z, color)
 
-func update_droplet_behavior(showcase: Node3D, delta):
+func update_droplet_behavior(showcase: Node3D, delta) -> void:
 	"""Droplets - Silvery spheres forming and falling"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -767,7 +862,7 @@ func update_droplet_behavior(showcase: Node3D, delta):
 			var color = Color(0.8 + randf() * 0.2, 0.9 + randf() * 0.1, 1.0)  # Silver/white
 			activate_cell(showcase, x, GRID_SIZE-1, z, color)
 
-func update_self_organization(showcase: Node3D, delta):
+func update_self_organization(showcase: Node3D, delta) -> void:
 	"""Self-organization - Rainbow spiral emerging from chaos"""
 	if not showcase.has_meta("active_cells"):
 		return
@@ -783,12 +878,12 @@ func update_self_organization(showcase: Node3D, delta):
 				var color = Color.from_hsv(randf(), 0.8 + randf() * 0.2, 1.0)  # Rainbow
 				activate_cell(showcase, x, y, z, color)
 
-func cycle_to_next_showcase():
+func cycle_to_next_showcase() -> void:
 	current_showcase = (current_showcase + 1) % SHOWCASE_COUNT
 	highlight_current_showcase()
 	print("Switched to showcase: ", current_showcase, " - ", get_ca_name(current_showcase))
 
-func highlight_current_showcase():
+func highlight_current_showcase() -> void:
 	# Hide all showcases except the current one
 	for i in range(showcases.size()):
 		var showcase = showcases[i]
@@ -815,7 +910,7 @@ func get_ca_name(index: int) -> String:
 	return names[index] if index < names.size() else "Unknown"
 
 # Simplified CA update functions (implement detailed logic as needed)
-func grow_crystal_at_site(grid: Array, site: Vector3i):
+func grow_crystal_at_site(grid: Array, site: Vector3i) -> void:
 	# Implement crystal growth logic - expand from nucleation sites
 	var neighbors = get_3d_neighbors(site)
 	for neighbor in neighbors:
@@ -824,7 +919,7 @@ func grow_crystal_at_site(grid: Array, site: Vector3i):
 
 
 
-func percolate_fluid(grid: Array, rate: float):
+func percolate_fluid(grid: Array, rate: float) -> void:
 	# Implement percolation logic - fluid flow through connected sites
 	for x in range(GRID_SIZE):
 		for y in range(GRID_SIZE):
@@ -835,7 +930,7 @@ func percolate_fluid(grid: Array, rate: float):
 						if is_valid_3d_position(neighbor) and grid[neighbor.x][neighbor.y][neighbor.z] == 1:
 							grid[neighbor.x][neighbor.y][neighbor.z] = 3  # Fluid state
 
-func propagate_cracks(grid: Array, stress_points: Array, threshold: float):
+func propagate_cracks(grid: Array, stress_points: Array, threshold: float) -> void:
 	# Implement crack propagation from stress concentrators
 	for stress_point in stress_points:
 		var neighbors = get_3d_neighbors(stress_point)
@@ -843,13 +938,13 @@ func propagate_cracks(grid: Array, stress_points: Array, threshold: float):
 			if is_valid_3d_position(neighbor) and randf() < 0.05:
 				grid[neighbor.x][neighbor.y][neighbor.z] = 4  # Cracked state
 
-func add_sand_grain(grid: Array):
+func add_sand_grain(grid: Array) -> void:
 	# Add sand grain to random location
 	var x = randi() % GRID_SIZE
 	var y = randi() % GRID_SIZE
 	grid[x][y] += 1
 
-func check_avalanche_conditions(grid: Array, critical_slope: int):
+func check_avalanche_conditions(grid: Array, critical_slope: int) -> void:
 	# Check for avalanche conditions and redistribute sand
 	for x in range(GRID_SIZE):
 		for y in range(GRID_SIZE):
@@ -863,7 +958,7 @@ func check_avalanche_conditions(grid: Array, critical_slope: int):
 					if is_valid_2d_position(neighbor):
 						grid[neighbor.x][neighbor.y] += excess / neighbors.size()
 
-func update_traffic_on_roads(roads: Array, max_velocity: int):
+func update_traffic_on_roads(roads: Array, max_velocity: int) -> void:
 	# Update traffic flow using cellular automaton rules
 	for road in roads:
 		var cars = road["cars"]
@@ -873,7 +968,7 @@ func update_traffic_on_roads(roads: Array, max_velocity: int):
 				car["position"] += min(car["velocity"], max_velocity) * 0.1
 			car["velocity"] = min(car["velocity"] + 1, max_velocity)
 
-func propagate_flood_water(terrain: Array, sources: Array, rate: float):
+func propagate_flood_water(terrain: Array, sources: Array, rate: float) -> void:
 	# Implement flood water spread across terrain
 	for source in sources:
 		if is_valid_2d_position(Vector2i(source.x, source.z)):
@@ -889,7 +984,7 @@ func propagate_flood_water(terrain: Array, sources: Array, rate: float):
 						terrain[source.x][source.z]["water_level"] -= water_flow
 						terrain[neighbor.x][neighbor.y]["water_level"] += water_flow
 
-func update_population_dynamics(grid: Array, birth_rate: float, death_rate: float):
+func update_population_dynamics(grid: Array, birth_rate: float, death_rate: float) -> void:
 	# Update ecosystem dynamics - predator-prey interactions
 	for x in range(GRID_SIZE):
 		for y in range(GRID_SIZE):
@@ -909,21 +1004,17 @@ func update_population_dynamics(grid: Array, birth_rate: float, death_rate: floa
 
 
 
-func simulate_blood_flow(vessels: Array, viscosity: float):
-	# Implement lattice Boltzmann flow simulation
-	for vessel in vessels:
-		# Simplified flow visualization - animate vessel materials
-		var material = vessel.material_override as StandardMaterial3D
-		var time_factor = Time.get_ticks_msec() * 0.001
-		var flow_intensity = 0.5 + 0.3 * sin(time_factor * 2.0)
-		material.emission = Color(0.8, 0.2, 0.2) * flow_intensity
+func simulate_blood_flow(_vessels: Array, _viscosity: float) -> void:
+	# Blood flow visualization is now handled by MultiMesh
+	# Individual vessel material animation is no longer needed
+	pass
 
-func update_droplet_dynamics(surface: Array, tension: float):
+func update_droplet_dynamics(surface: Array, tension: float) -> void:
 	# Implement droplet behavior with surface tension
 	# This would involve complex fluid dynamics - simplified here
 	pass
 
-func evolve_self_organization(grid: Array, interaction: float):
+func evolve_self_organization(grid: Array, interaction: float) -> void:
 	# Implement self-organizing patterns
 	for x in range(GRID_SIZE):
 		for y in range(GRID_SIZE):
@@ -979,14 +1070,14 @@ func duplicate_3d_grid(grid: Array) -> Array:
 
 
 # VR Interaction handlers
-func on_vr_controller_input(_controller_id: int, input_type: String):
+func on_vr_controller_input(_controller_id: int, input_type: String) -> void:
 	if input_type == "trigger_pressed":
 		cycle_to_next_showcase()
 	elif input_type == "grip_pressed":
 		auto_cycle = not auto_cycle
 		print("Auto-cycle: ", auto_cycle)
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	"""Handle keyboard input for testing and control"""
 	if event is InputEventKey and event.pressed:
 		match event.keycode:
@@ -1014,7 +1105,7 @@ func _input(event):
 				print_help()
 
 # Public method to focus on specific CA type
-func focus_on_ca_type(ca_type: CAType):
+func focus_on_ca_type(ca_type: CAType) -> void:
 	current_showcase = ca_type as int
 	highlight_current_showcase()
 	transition_time = 0.0
@@ -1032,7 +1123,7 @@ func get_showcase_statistics() -> Dictionary:
 		}
 	return stats
 
-func reset_all_showcases():
+func reset_all_showcases() -> void:
 	# Reset all CA systems to initial state
 	var central_position = Vector3(0, 0, 0)
 	
@@ -1047,11 +1138,11 @@ func reset_all_showcases():
 		# Recreate with fresh parameters at central position
 		create_ca_showcase(ca_type, central_position)
 
-func set_auto_cycle_interval(seconds: float):
+func set_auto_cycle_interval(seconds: float) -> void:
 	cycle_interval = max(5.0, seconds)  # Minimum 5 seconds
 	print("Auto-cycle interval set to: ", cycle_interval, " seconds")
 
-func print_help():
+func print_help() -> void:
 	"""Print help information for controls"""
 	print("=== CA Showcase Controls ===")
 	print("SPACE - Cycle to next showcase")
@@ -1064,3 +1155,12 @@ func print_help():
 	print("Current showcase: ", get_ca_name(current_showcase))
 	print("Auto-cycle: ", auto_cycle)
 	print("Cycle interval: ", cycle_interval, " seconds")
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

@@ -1,3 +1,13 @@
+# @identity
+# essence: d(decay)/dt = growth_rate · (0.2 + decay · 0.8) — autocatalytic decay
+# desire: watch two pristine stacks slowly crumble — drift, darken, sink — and feel entropy win
+# critical_parameter: decay_growth_rate — controls how fast decay accelerates once seeded
+# triggers: injection_accumulator randomly seeds decay into instances; decay_start_delay gates the onset
+# emerges: each instance decays at its own rate — the grid becomes a ruin uniquely every time
+# needs: VR push buttons for TOGGLE/RESET [has]; Grid.gdshader for wireframe overlay [has]
+# relationships: contrasts with Random_Rotate_Random_XYZ (rotation without destruction); feeds hardware_entropy_decay
+# truth: Decay is not failure — it is matter remembering that arrangement is improbable.
+
 extends Node3D
 
 # Random decay demo built with MultiMesh-only stacks.
@@ -494,3 +504,12 @@ func _build_custom_emission(base_color: Color, decay_amount: float) -> Color:
 	var t: float = clampf(decay_amount, 0.0, 1.0)
 	var emission: Color = base_color.lerp(decay_color.darkened(0.2), t).lightened(0.08)
 	return Color(emission.r, emission.g, emission.b, 1.0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

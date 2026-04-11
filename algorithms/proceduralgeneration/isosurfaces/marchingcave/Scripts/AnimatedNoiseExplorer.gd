@@ -24,14 +24,14 @@ var time_since_last_gen : float = 0.0
 var is_animating : bool = false
 var array_mesh : ArrayMesh
 
-func _ready():
+func _ready() -> void:
 	array_mesh = ArrayMesh.new()
 	mesh = array_mesh
 	
 	if auto_start:
 		start_animation()
 
-func _process(delta):
+func _process(delta: float) -> void:
 	if not is_animating:
 		return
 	
@@ -47,20 +47,20 @@ func _process(delta):
 		time_since_last_gen = 0.0
 		generate_chunk()
 
-func update_position_label():
+func update_position_label() -> void:
 	"""Update the position display label"""
 	var label = get_node_or_null("../Position")
 	if label:
 		label.text = "Offset: (%.1f, %.1f, %.1f)" % [current_offset.x, current_offset.y, current_offset.z]
 
-func start_animation():
+func start_animation() -> void:
 	is_animating = true
 	generate_chunk()
 
-func stop_animation():
+func stop_animation() -> void:
 	is_animating = false
 
-func generate_chunk():
+func generate_chunk() -> void:
 	"""Generate marching cubes mesh for current position in noise space"""
 	var resolution = 16  # 16x16x16 grid
 	var density_field = generate_density_field(resolution)
@@ -219,10 +219,13 @@ func create_marching_cubes_mesh(density_field: Array, resolution: int) -> Array:
 	
 	return arrays
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	# Space to toggle animation
 	if event.is_action_pressed("ui_accept"):
 		if is_animating:
 			stop_animation()
 		else:
 			start_animation()
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

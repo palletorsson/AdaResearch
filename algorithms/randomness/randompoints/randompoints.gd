@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: blue_noise = dart_throwing — place points rejecting any candidate closer than min_dist to existing points, so emptiness is forbidden
+# desire: to feel the difference between fairness and freedom — blue noise is crowded rooms with social distancing, white noise is a mosh pit
+# critical_parameter: blue_noise_min_dist — the exclusion radius that turns white noise into structured randomness
+# triggers: switching DistributionType between UNIFORM/GAUSSIAN/BLUE_NOISE reveals three fundamentally different relationships with space
+# emerges: the packing limit — blue noise runs out of room before placing all requested points, which becomes visible as a teaching moment about density
+# needs: DistributionType selector [missing]; num_points slider [missing]; area_size control [missing]; all selection is export-only, no VR interaction
+# relationships: contrasts with randompoint (single white noise); prepares for perlin noise (structured randomness with continuity); connects to blue_noise sequence artifact
+# truth: structured randomness is not less random — it is randomness with a constraint, the way jazz improvisation is constrained by harmony
+
 enum DistributionType {
 	UNIFORM,
 	GAUSSIAN,
@@ -14,7 +24,7 @@ enum DistributionType {
 
 var point_scene: PackedScene = preload("res://commons/primitives/point/grab_sphere_point_color_with_text.tscn")
 
-func _ready():
+func _ready() -> void:
 	# Auto-detect type from node name if generic script is used
 	var n = name.to_lower()
 	if "gaussian" in n:
@@ -28,7 +38,7 @@ func _ready():
 	randomize()
 	spawn_points()
 
-func spawn_points():
+func spawn_points() -> void:
 	var points = []
 	var half_extents = area_size * 0.5
 	
@@ -117,3 +127,6 @@ func _randn(mean: float, std: float) -> float:
 	var u2 = randf()
 	var z = sqrt(-2.0 * log(u1)) * cos(TAU * u2)
 	return mean + std * z
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass

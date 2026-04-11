@@ -1,4 +1,4 @@
-﻿extends Node3D
+extends Node3D
 
 ## Destructible Marching Cubes Object
 ## Generates organic geometry using marching cubes, then shatters on impact
@@ -16,7 +16,7 @@ var _hit_area: Area3D
 var _is_destroyed: bool = false
 var _fragments: Array[RigidBody3D] = []
 
-func _ready():
+func _ready() -> void:
 	# Find the terrain generator
 	if terrain_generator_path:
 		_terrain_generator = get_node(terrain_generator_path)
@@ -24,7 +24,7 @@ func _ready():
 	# Setup the destructible
 	call_deferred("_initialize")
 
-func _initialize():
+func _initialize() -> void:
 	# Wait for terrain to generate if needed
 	if _terrain_generator and _terrain_generator.has_method("wait_for_generation"):
 		await _terrain_generator.wait_for_generation()
@@ -38,7 +38,7 @@ func _initialize():
 
 	print("DestructibleMarchingCube: Initialized with ", fragment_count, " potential fragments")
 
-func _setup_base_mesh():
+func _setup_base_mesh() -> void:
 	# Find the MeshInstance3D from terrain generator
 	if _terrain_generator:
 		var mesh_instance = _terrain_generator.find_child("MeshInstance3D", true, false)
@@ -57,7 +57,7 @@ func _setup_base_mesh():
 
 			print("DestructibleMarchingCube: Mesh copied with ", _base_mesh.get_surface_count(), " surfaces")
 
-func _setup_collision():
+func _setup_collision() -> void:
 	# Create static body for collision
 	_collision_body = StaticBody3D.new()
 	_collision_body.name = "CollisionBody"
@@ -72,7 +72,7 @@ func _setup_collision():
 			_collision_body.add_child(collision_shape)
 			print("DestructibleMarchingCube: Collision shape created")
 
-func _setup_hit_detection():
+func _setup_hit_detection() -> void:
 	# Create area to detect projectile hits
 	_hit_area = Area3D.new()
 	_hit_area.name = "HitArea"
@@ -91,7 +91,7 @@ func _setup_hit_detection():
 	# Connect signal
 	_hit_area.body_entered.connect(_on_body_entered)
 
-func _on_body_entered(body: Node3D):
+func _on_body_entered(body: Node3D) -> void:
 	if _is_destroyed:
 		return
 
@@ -118,7 +118,7 @@ func _on_body_entered(body: Node3D):
 	else:
 		_hit_feedback()
 
-func _hit_feedback():
+func _hit_feedback() -> void:
 	# Visual feedback for hit but not destroyed
 	if _base_mesh_instance:
 		var tween = create_tween()
@@ -128,7 +128,7 @@ func _hit_feedback():
 			tween.tween_property(material, "emission_energy_multiplier", 2.0, 0.1)
 			tween.tween_property(material, "emission_energy_multiplier", original_emission, 0.2)
 
-func _destroy(impact_point: Vector3, impact_velocity: Vector3):
+func _destroy(impact_point: Vector3, impact_velocity: Vector3) -> void:
 	if _is_destroyed:
 		return
 
@@ -146,7 +146,7 @@ func _destroy(impact_point: Vector3, impact_velocity: Vector3):
 	# Create fragments
 	_create_fragments(impact_point, impact_velocity)
 
-func _create_fragments(_impact_point: Vector3, impact_velocity: Vector3):
+func _create_fragments(_impact_point: Vector3, impact_velocity: Vector3) -> void:
 	if not _base_mesh:
 		return
 
@@ -195,7 +195,7 @@ func _generate_voronoi_centers(mesh_center: Vector3, count: int) -> Array[Vector
 
 	return centers
 
-func _create_fragment(center: Vector3, mesh_center: Vector3, impact_velocity: Vector3, index: int):
+func _create_fragment(center: Vector3, mesh_center: Vector3, impact_velocity: Vector3, index: int) -> void:
 	# Create a simple box fragment at the voronoi center
 	var fragment = RigidBody3D.new()
 	fragment.name = "Fragment_" + str(index)
@@ -244,7 +244,7 @@ func _create_fragment(center: Vector3, mesh_center: Vector3, impact_velocity: Ve
 
 	_fragments.append(fragment)
 
-func _fade_fragment(mesh_instance: MeshInstance3D):
+func _fade_fragment(mesh_instance: MeshInstance3D) -> void:
 	await get_tree().create_timer(3.0).timeout
 
 	if not is_instance_valid(mesh_instance):
@@ -252,3 +252,12 @@ func _fade_fragment(mesh_instance: MeshInstance3D):
 
 	var tween = create_tween()
 	tween.tween_property(mesh_instance, "scale", Vector3.ZERO, 1.0)
+
+func _exit_tree() -> void:
+	for child in get_children():
+		if not child.owner:
+			child.queue_free()
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	pass
