@@ -65,6 +65,9 @@ var _biome_stages: Dictionary = {}
 var _current_stage: String = ""
 var _biome_mode: bool = false
 var _biome_entities: Array = []
+var _biome_ground: MeshInstance3D = null
+var _biome_foliage: Array = []  # Array of MultiMeshInstance3D
+var _biome_env_original: Dictionary = {}  # Save original env settings to restore
 
 # ── State ─────────────────────────────────────────────────────────
 var _dna: CritterDNA = null
@@ -598,7 +601,8 @@ func _build_biome_controls() -> void:
 	# Stage selector dropdown
 	stage_selector = OptionButton.new()
 	stage_selector.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	var stage_names: Array = _biome_stages.keys()
+	var stages_dict: Dictionary = _biome_stages.get("stages", {})
+	var stage_names: Array = stages_dict.keys()
 	stage_names.sort()
 	for i: int in stage_names.size():
 		var sname: String = stage_names[i] as String
@@ -654,9 +658,10 @@ func _on_stage_selected(idx: int) -> void:
 	_current_stage = sname
 
 	# Update stage info
+	var stages_dict: Dictionary = _biome_stages.get("stages", {})
 	var stage_info: Label = controls.get_node_or_null("StageInfo") as Label
-	if stage_info and _biome_stages.has(sname):
-		var stage: Dictionary = _biome_stages[sname] as Dictionary
+	if stage_info and stages_dict.has(sname):
+		var stage: Dictionary = stages_dict[sname] as Dictionary
 		var kingdoms: Array = stage.get("nature_kingdoms", [])
 		var density: float = stage.get("vegetation_density", 0.0) as float
 		stage_info.text = "Kingdoms: %s | Density: %.0f%%" % [
@@ -678,11 +683,60 @@ func _on_biome_toggled(pressed: bool) -> void:
 
 func _spawn_biome_ring() -> void:
 	_clear_biome_ring()
-	if not _biome_stages.has(_current_stage):
+	var stages_dict: Dictionary = _biome_stages.get("stages", {})
+	if not stages_dict.has(_current_stage):
 		return
 
-	var stage: Dictionary = _biome_stages[_current_stage] as Dictionary
+	var stage: Dictionary = stages_dict[_current_stage] as Dictionary
 	var kingdoms: Array = stage.get("nature_kingdoms", [])
+	var density: float = stage.get("vegetation_density", 0.0) as float
+
+	# ── 1. Ground plane ──────────────────────────────────────────
+	_biome_ground = MeshInstance3D.new()
+	var plane := PlaneMesh.new()
+	plane.size = Vector2(10, 10)
+	plane.subdivide_depth = 16
+	plane.subdivide_width = 16
+	_biome_ground.mesh = plane
+
+	# Try loading the biome shader; fall back to StandardMaterial3D
+	var shader_path: String = "res://commons/resourses/shaders/biome_ground.gdshader"
+	var shader: Shader = null
+	if ResourceLoader.exists(shader_path):
+		shader = load(shader_path) as Shader
+	if shader:
+		var smat := ShaderMaterial.new()
+		smat.shader = shader
+		smat.set_shader_parameter("grid_size", Vector2(2, 2))
+		smat.set_shader_parameter("grid_center", Vector2(0, 0))
+		smat.set_shader_parameter("ring_width", 4.0)
+		smat.set_shader_parameter("fade_width", 2.0)
+		smat.set_shader_parameter("density", density)
+		_biome_ground.material_override = smat
+	else:
+		var mat := StandardMaterial3D.new()
+		# Blend grey → warm brown → green based on density
+		var grey := Color(0.15, 0.15, 0.15)
+		var brown := Color(0.25, 0.18, 0.12)
+		var green := Color(0.15, 0.32, 0.08)
+		if density < 0.5:
+			mat.albedo_color = grey.lerp(brown, density * 2.0)
+		else:
+			mat.albedo_color = brown.lerp(green, (density - 0.5) * 2.0)
+		mat.roughness = 0.9
+		_biome_ground.material_override = mat
+
+	_biome_ground.position = Vector3.ZERO
+	_organism_root.add_child(_biome_ground)
+
+	# ── 2. Atmosphere ────────────────────────────────────────────
+	_apply_biome_atmosphere(density)
+
+	# ── 3. Foliage multimeshes ───────────────────────────────────
+	if density > 0.0:
+		_spawn_biome_foliage(kingdoms, density)
+
+	# ── 4. Creature ring (original behavior) ─────────────────────
 	if kingdoms.is_empty():
 		return
 
@@ -704,11 +758,181 @@ func _spawn_biome_ring() -> void:
 			_biome_entities.append(ent)
 
 
+func _apply_biome_atmosphere(density: float) -> void:
+	# Find the WorldEnvironment in the viewport
+	var we: WorldEnvironment = null
+	for child: Node in viewport.get_children():
+		if child is WorldEnvironment:
+			we = child as WorldEnvironment
+			break
+	if not we or not we.environment:
+		return
+
+	var env: Environment = we.environment
+
+	# Save original settings on first call
+	if _biome_env_original.is_empty():
+		_biome_env_original = {
+			"bg_color": env.background_color,
+			"ambient_color": env.ambient_light_color,
+			"ambient_energy": env.ambient_light_energy,
+			"fog_enabled": env.fog_enabled,
+		}
+
+	# Interpolate atmosphere based on density
+	# density 0.0 → lab feel, 1.0 → deep forest
+	var bg_a := Color(0.1, 0.1, 0.13)
+	var bg_b := Color(0.03, 0.06, 0.04)
+	var amb_a := Color(0.5, 0.5, 0.55)
+	var amb_b := Color(0.35, 0.6, 0.55)
+	var energy_a: float = 0.6
+	var energy_b: float = 0.8
+
+	env.background_color = bg_a.lerp(bg_b, density)
+	env.ambient_light_color = amb_a.lerp(amb_b, density)
+	env.ambient_light_energy = lerpf(energy_a, energy_b, density)
+
+	# Fog when density > 0.2
+	if density > 0.2:
+		env.fog_enabled = true
+		env.fog_density = density * 0.015
+		env.fog_light_color = env.ambient_light_color
+	else:
+		env.fog_enabled = false
+
+
+func _restore_biome_atmosphere() -> void:
+	if _biome_env_original.is_empty():
+		return
+	var we: WorldEnvironment = null
+	for child: Node in viewport.get_children():
+		if child is WorldEnvironment:
+			we = child as WorldEnvironment
+			break
+	if not we or not we.environment:
+		return
+	var env: Environment = we.environment
+	env.background_color = _biome_env_original.get("bg_color", Color(0.1, 0.1, 0.13))
+	env.ambient_light_color = _biome_env_original.get("ambient_color", Color(0.5, 0.5, 0.55))
+	env.ambient_light_energy = _biome_env_original.get("ambient_energy", 0.6)
+	env.fog_enabled = _biome_env_original.get("fog_enabled", false)
+	_biome_env_original.clear()
+
+
+func _spawn_biome_foliage(kingdoms: Array, density: float) -> void:
+	var scale_factor: float = clampf(density, 0.1, 1.0)
+
+	# Always add grass if density > 0
+	_add_foliage_multimesh("grass", int(lerpf(30.0, 60.0, density)), scale_factor)
+
+	for kname: Variant in kingdoms:
+		var k: String = str(kname)
+		match k:
+			"flower":
+				_add_foliage_multimesh("flower", int(lerpf(20.0, 40.0, density)), scale_factor)
+			"tree":
+				_add_foliage_multimesh("tree", int(lerpf(5.0, 10.0, density)), scale_factor)
+			"fungus":
+				_add_foliage_multimesh("fungus", int(lerpf(10.0, 20.0, density)), scale_factor)
+
+
+func _add_foliage_multimesh(kind: String, count: int, scale_factor: float) -> void:
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.instance_count = count
+
+	# Create mesh and base color per kind
+	var mesh: Mesh = null
+	var base_color := Color.WHITE
+	var y_offset: float = 0.0
+
+	match kind:
+		"grass":
+			var quad := QuadMesh.new()
+			quad.size = Vector2(0.06, 0.15)
+			mesh = quad
+			base_color = Color(0.2, 0.5, 0.1)
+			y_offset = 0.07
+		"flower":
+			var sphere := SphereMesh.new()
+			sphere.radius = 0.04
+			sphere.height = 0.08
+			mesh = sphere
+			base_color = Color(0.9, 0.3, 0.4)
+			y_offset = 0.04
+		"tree":
+			var cyl := CylinderMesh.new()
+			cyl.top_radius = 0.15
+			cyl.bottom_radius = 0.03
+			cyl.height = 0.5
+			mesh = cyl
+			base_color = Color(0.15, 0.45, 0.12)
+			y_offset = 0.25
+		"fungus":
+			var cyl := CylinderMesh.new()
+			cyl.top_radius = 0.08
+			cyl.bottom_radius = 0.03
+			cyl.height = 0.12
+			mesh = cyl
+			base_color = Color(0.5, 0.25, 0.6)
+			y_offset = 0.06
+
+	if not mesh:
+		return
+
+	# Apply material with vertex colors
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.roughness = 0.85
+	if kind == "grass":
+		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+
+	mm.mesh = mesh
+
+	# Place instances in ring 1.0–4.0m from center
+	for i: int in count:
+		var angle: float = randf() * TAU
+		var r: float = randf_range(1.0, 4.0)
+		var pos := Vector3(cos(angle) * r, y_offset, sin(angle) * r)
+		var sc: float = randf_range(0.6, 1.2) * scale_factor
+		var rot_y: float = randf() * TAU
+		var xf := Transform3D(Basis.IDENTITY.rotated(Vector3.UP, rot_y).scaled(Vector3(sc, sc, sc)), pos)
+		mm.set_instance_transform(i, xf)
+		# Color variation: hue shift ±0.05
+		var hue_shift: float = randf_range(-0.05, 0.05)
+		var c := base_color
+		var hsv_h: float = fmod(c.h + hue_shift + 1.0, 1.0)
+		var varied := Color.from_hsv(hsv_h, c.s, c.v)
+		mm.set_instance_color(i, varied)
+
+	var mmi := MultiMeshInstance3D.new()
+	mmi.multimesh = mm
+	mmi.material_override = mat
+	_organism_root.add_child(mmi)
+	_biome_foliage.append(mmi)
+
+
 func _clear_biome_ring() -> void:
+	# Clear creature entities
 	for ent: Variant in _biome_entities:
 		if ent is Node and is_instance_valid(ent as Node):
 			(ent as Node).queue_free()
 	_biome_entities.clear()
+
+	# Clear ground plane
+	if _biome_ground and is_instance_valid(_biome_ground):
+		_biome_ground.queue_free()
+	_biome_ground = null
+
+	# Clear foliage multimeshes
+	for mmi: Variant in _biome_foliage:
+		if mmi is Node and is_instance_valid(mmi as Node):
+			(mmi as Node).queue_free()
+	_biome_foliage.clear()
+
+	# Restore atmosphere
+	_restore_biome_atmosphere()
 
 
 func _export_dna() -> void:

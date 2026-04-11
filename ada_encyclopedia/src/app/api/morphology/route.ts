@@ -73,10 +73,15 @@ export async function GET() {
     // No snapshots yet
   }
 
+  // Unwrap soft_stages: file has {_meta, stages: {...}} structure
+  const stagesData = softStages && typeof softStages === "object" && "stages" in (softStages as Record<string, unknown>)
+    ? (softStages as Record<string, unknown>).stages
+    : softStages;
+
   return NextResponse.json({
     taxonomy: FORM_TAXONOMY,
     curriculum: CURRICULUM,
-    softStages,
+    softStages: stagesData,
     snapshots,
   });
 }
