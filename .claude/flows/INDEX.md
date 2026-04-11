@@ -45,6 +45,7 @@ Thinking paths that survive context death. Search: `python tools/flow_query.py <
 - [+] [VR Feedback Bridge](vr-feedback-bridge.json) — Read ada_run/desktop_feedback.md. Timestamped entries with map+artifact context. Bug→fix now, feature→backlog, visual→load visual-upgrade flow.
 
 ## Process & Meta
+- [?] [BREATHE Cycle](breathe-cycle.json) — Self-improving agent loop: Baseline → Read → Evaluate → Act → Test → Harvest → Evolve. Each breath feeds the next via breath_log.json.
 - [+] [Session Handoff](session-handoff.json) — Commit → score baseline → save new flows from discoveries → update handover doc → update memory.
 - [+] [Batch Processing with Parallel Agents](batch-parallel-agents.json) — Do one by hand → extract pattern → spawn 4-5 agents with pattern + specific file → verify all succeeded.
 - [~] [Writing Discovers Gaps](coherence-writing-loop.json) — Write docs → discover gap (concept mentioned, no artifact) → build missing artifact → update docs → capture to verify coherence.

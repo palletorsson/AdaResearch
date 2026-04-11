@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "description": "Computed summary of improvement trends across BREATHE cycles. Updated after each breath's Harvest phase.",
+  "last_updated": "2026-04-11T00:45:00",
+  "total_breaths": 1,
+  "global_avg_history": [
+    {"date": "2026-04-08", "avg": 2.04, "breath_id": "baseline"},
+    {"date": "2026-04-11", "avg": 2.04, "breath_id": "2026-04-11T00:30"}
+  ],
+  "skill_effectiveness_cumulative": {
+    "documentation_writing": {"total_calls": 5, "success_rate": 1.0, "avg_delta": 0},
+    "pathfinder_validation": {"total_calls": 5, "success_rate": 1.0, "avg_delta": 0}
+  },
+  "stall_detected": false,
+  "stall_reason": null
+}

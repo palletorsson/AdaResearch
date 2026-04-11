@@ -1,0 +1,1 @@
+Every hazard type in one corridor. Fire, electric, toxic, vacuum, instant death — each a different damage model, each a different warning. The lab is a catalog of ways the system can reject you: by heat, by shock, by poison, by pressure, by judgment. Mushrooms heal. The exit waits at the end.

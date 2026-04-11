@@ -43,6 +43,12 @@
         "design",
         "study"
       ]
+    },
+    {
+      "timestamp": "2026-04-11T08:34:39.273912+00:00",
+      "topic": "pipeline_scorer_validation_timeout",
+      "insight": "Pipeline scorer validation stage runs pathfinder with 10s subprocess timeout per map. Maps pass individually but batch scoring reports 0% because cumulative processing exceeds limits. Fix: increase timeout or cache validation results.",
+      "lod": 3
     }
   ]
 }
