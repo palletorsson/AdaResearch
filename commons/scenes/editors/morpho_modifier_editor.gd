@@ -9,7 +9,7 @@ func _get_editor_name() -> String:
 func _get_parameter_groups() -> Array:
 	return [
 		{"name": "Primitive", "params": [
-			{"id": "primitive_type", "label": "Type (0=sph 1=cyl 2=box 3=tor)", "min": 0.0, "max": 3.0, "step": 1.0, "default": 0.0},
+			{"id": "primitive_type", "label": "Primitive", "options": ["Sphere", "Cylinder", "Box", "Torus"], "default": 0.0},
 			{"id": "radius", "label": "Radius", "min": 0.1, "max": 2.0, "step": 0.05, "default": 0.5},
 			{"id": "height", "label": "Height", "min": 0.1, "max": 3.0, "step": 0.1, "default": 1.0},
 			{"id": "sides", "label": "Sides", "min": 4.0, "max": 32.0, "step": 1.0, "default": 12.0},

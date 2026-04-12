@@ -9,7 +9,7 @@ func _get_editor_name() -> String:
 func _get_parameter_groups() -> Array:
 	return [
 		{"name": "Shape", "params": [
-			{"id": "shape_type", "label": "Type (0=str 1=crn 2=sbn 3=spi 4=flk 5=bkr)", "min": 0.0, "max": 5.0, "step": 1.0, "default": 0.0},
+			{"id": "shape_type", "label": "Tube Type", "options": ["Straight", "Corner", "S-Bend", "Spiral", "Flask", "Beaker"], "default": 0.0},
 			{"id": "tube_radius", "label": "Radius", "min": 0.01, "max": 0.1, "step": 0.005, "default": 0.015},
 			{"id": "width", "label": "Width", "min": 0.2, "max": 2.0, "step": 0.05, "default": 0.5},
 			{"id": "height", "label": "Height", "min": 0.2, "max": 2.0, "step": 0.05, "default": 0.8},

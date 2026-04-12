@@ -11,7 +11,7 @@ func _get_editor_name() -> String:
 func _get_parameter_groups() -> Array:
 	return [
 		{"name": "Shape", "params": [
-			{"id": "type", "label": "Type (0=mob 1=knot 2=sup 3=harm 4=klein)", "min": 0.0, "max": 4.0, "step": 1.0, "default": 0.0},
+			{"id": "type", "label": "Shape", "options": ["Mobius Strip", "Torus Knot", "Superellipsoid", "Sphere Harmonic", "Klein Bottle"], "default": 0.0},
 		]},
 		{"name": "Geometry", "params": [
 			{"id": "major_radius", "label": "Major Radius", "min": 0.2, "max": 2.0, "step": 0.05, "default": 1.0},

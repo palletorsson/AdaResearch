@@ -23,7 +23,7 @@ func _get_editor_name() -> String:
 func _get_parameter_groups() -> Array:
 	return [
 		{"name": "Pattern", "params": [
-			{"id": "type", "label": "Type (0-9)", "min": 0.0, "max": 9.0, "step": 1.0, "default": 0.0},
+			{"id": "type", "label": "Pattern", "options": ["Basket Weave", "Herringbone", "Honeycomb Hex", "Diamond Lattice", "Tumbling Blocks", "Windmill", "Labyrinth", "Star Rosette", "Spiral Mosaic", "Compass Rose"], "default": 0.0},
 		]},
 		{"name": "Dimensions", "params": [
 			{"id": "floor_width", "label": "Floor Width", "min": 1.0, "max": 5.0, "step": 0.25, "default": 2.0},

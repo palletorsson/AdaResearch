@@ -11,9 +11,9 @@ func _get_editor_name() -> String: return "Boolean CSG"
 func _get_parameter_groups() -> Array:
 	return [
 		{"name": "Shapes", "params": [
-			{"id": "shape_a", "label": "Shape A (0=sph 1=box 2=cyl 3=tor)", "min": 0.0, "max": 3.0, "step": 1.0, "default": 0.0},
-			{"id": "shape_b", "label": "Shape B", "min": 0.0, "max": 3.0, "step": 1.0, "default": 1.0},
-			{"id": "operation", "label": "Op (0=union 1=sub 2=int)", "min": 0.0, "max": 2.0, "step": 1.0, "default": 1.0},
+			{"id": "shape_a", "label": "Shape A", "options": ["Sphere", "Box", "Cylinder", "Torus"], "default": 0.0},
+			{"id": "shape_b", "label": "Shape B", "options": ["Sphere", "Box", "Cylinder", "Torus"], "default": 1.0},
+			{"id": "operation", "label": "Operation", "options": ["Union", "Subtract", "Intersect"], "default": 1.0},
 		]},
 		{"name": "Size", "params": [
 			{"id": "size_a", "label": "Size A", "min": 0.2, "max": 2.0, "step": 0.1, "default": 1.0},

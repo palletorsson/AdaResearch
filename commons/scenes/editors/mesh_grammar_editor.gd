@@ -16,7 +16,7 @@ func _get_editor_name() -> String:
 func _get_parameter_groups() -> Array:
 	return [
 		{"name": "Seed", "params": [
-			{"id": "seed_type", "label": "Seed (0-2)", "min": 0.0, "max": 2.0, "step": 1.0, "default": 1.0},
+			{"id": "seed_type", "label": "Seed", "options": ["Cube", "Icosahedron", "Sphere"], "default": 1.0},
 			{"id": "seed_scale", "label": "Scale", "min": 0.1, "max": 1.5, "step": 0.05, "default": 0.5},
 		]},
 		{"name": "Grammar", "params": [

@@ -11,7 +11,7 @@ func _get_editor_name() -> String:
 func _get_parameter_groups() -> Array:
 	return [
 		{"name": "Sculpture", "params": [
-			{"id": "type", "label": "Type (0-9)", "min": 0.0, "max": 9.0, "step": 1.0, "default": 0.0},
+			{"id": "type", "label": "Sculpture", "options": ["Organic", "Crystal", "Biological", "Mineral", "Fluid", "Spiral", "Fractal", "Cluster", "Cave", "Cellular"], "default": 0.0},
 			{"id": "resolution", "label": "Resolution", "min": 16.0, "max": 48.0, "step": 2.0, "default": 24.0},
 		]},
 		{"name": "Character", "params": [

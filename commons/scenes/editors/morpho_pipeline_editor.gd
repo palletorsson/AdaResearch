@@ -9,13 +9,13 @@ func _get_editor_name() -> String:
 func _get_parameter_groups() -> Array:
 	return [
 		{"name": "Skeleton", "params": [
-			{"id": "skeleton_type", "label": "Type (0=none 1=spine 2=spiral)", "min": 0.0, "max": 2.0, "step": 1.0, "default": 1.0},
+			{"id": "skeleton_type", "label": "Skeleton", "options": ["None", "Spine", "Spiral"], "default": 1.0},
 			{"id": "spine_points", "label": "Points", "min": 2.0, "max": 12.0, "step": 1.0, "default": 4.0},
 			{"id": "curvature", "label": "Curvature", "min": 0.0, "max": 1.0, "step": 0.05, "default": 0.0},
 			{"id": "length", "label": "Length", "min": 0.3, "max": 3.0, "step": 0.1, "default": 1.0},
 		]},
 		{"name": "Surface", "params": [
-			{"id": "surface_type", "label": "Type (0=sweep 1=rev 2=sdf 3=prim)", "min": 0.0, "max": 3.0, "step": 1.0, "default": 0.0},
+			{"id": "surface_type", "label": "Surface", "options": ["Sweep", "Revolution", "SDF", "Primitive"], "default": 0.0},
 			{"id": "sides", "label": "Sides", "min": 4.0, "max": 16.0, "step": 1.0, "default": 8.0},
 			{"id": "start_radius", "label": "Start Radius", "min": 0.02, "max": 0.5, "step": 0.01, "default": 0.1},
 			{"id": "end_radius", "label": "End Radius", "min": 0.01, "max": 0.5, "step": 0.01, "default": 0.05},

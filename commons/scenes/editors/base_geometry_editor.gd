@@ -26,9 +26,10 @@ var content_root: Node3D = null
 var _world_env: WorldEnvironment = null
 var info_label: Label = null
 
-# ── Sliders ───────────────────────────────────────────────────
-var _sliders: Dictionary = {}  # param_id → HSlider
-var _params: Dictionary = {}   # param_id → float (current values)
+# ── Sliders & Dropdowns ───────────────────────────────────────
+var _sliders: Dictionary = {}    # param_id → HSlider
+var _dropdowns: Dictionary = {}  # param_id → OptionButton
+var _params: Dictionary = {}     # param_id → float (current values)
 
 # ── Rebuild throttle ──────────────────────────────────────────
 const REBUILD_THROTTLE: float = 0.15
@@ -199,26 +200,44 @@ func _build_parameter_sliders() -> void:
 			lbl.add_theme_font_size_override("font_size", 11)
 			hbox.add_child(lbl)
 
-			var slider := HSlider.new()
-			slider.min_value = param.get("min", 0.0) as float
-			slider.max_value = param.get("max", 1.0) as float
-			slider.step = param.get("step", 0.05) as float
-			slider.value = param.get("default", (slider.min_value + slider.max_value) * 0.5) as float
-			slider.custom_minimum_size = Vector2(120, 20)
-			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			slider.value_changed.connect(_on_param_changed.bind(param_id))
-			hbox.add_child(slider)
+			# Check if this param has dropdown options
+			var options: Variant = param.get("options")
+			if options is Array and (options as Array).size() > 0:
+				# ── Dropdown (OptionButton) ──────────────────
+				var dropdown := OptionButton.new()
+				dropdown.custom_minimum_size = Vector2(140, 24)
+				dropdown.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				for opt_idx: int in (options as Array).size():
+					dropdown.add_item((options as Array)[opt_idx] as String, opt_idx)
+				var default_idx: int = int(param.get("default", 0.0) as float)
+				dropdown.select(clampi(default_idx, 0, (options as Array).size() - 1))
+				dropdown.item_selected.connect(_on_dropdown_changed.bind(param_id))
+				hbox.add_child(dropdown)
+				_dropdowns[param_id] = dropdown
+				_params[param_id] = float(default_idx)
+			else:
+				# ── Slider (HSlider) ─────────────────────────
+				var slider := HSlider.new()
+				slider.min_value = param.get("min", 0.0) as float
+				slider.max_value = param.get("max", 1.0) as float
+				slider.step = param.get("step", 0.05) as float
+				slider.value = param.get("default", (slider.min_value + slider.max_value) * 0.5) as float
+				slider.custom_minimum_size = Vector2(120, 20)
+				slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				slider.value_changed.connect(_on_param_changed.bind(param_id))
+				hbox.add_child(slider)
 
-			var val_label := Label.new()
-			val_label.name = "Val"
-			val_label.text = "%.2f" % slider.value
-			val_label.custom_minimum_size = Vector2(45, 0)
-			val_label.add_theme_font_size_override("font_size", 10)
-			hbox.add_child(val_label)
+				var val_label := Label.new()
+				val_label.name = "Val"
+				val_label.text = "%.2f" % slider.value
+				val_label.custom_minimum_size = Vector2(45, 0)
+				val_label.add_theme_font_size_override("font_size", 10)
+				hbox.add_child(val_label)
+
+				_sliders[param_id] = slider
+				_params[param_id] = slider.value
 
 			controls.add_child(hbox)
-			_sliders[param_id] = slider
-			_params[param_id] = slider.value
 
 
 func _build_preset_panel() -> void:
@@ -277,6 +296,12 @@ func _on_param_changed(value: float, param_id: String) -> void:
 	_rebuild_timer = 0.0
 
 
+func _on_dropdown_changed(index: int, param_id: String) -> void:
+	_params[param_id] = float(index)
+	_needs_rebuild = true
+	_rebuild_timer = 0.0
+
+
 func _set_defaults() -> void:
 	for group: Dictionary in _get_parameter_groups():
 		for param: Dictionary in group.get("params", []):
@@ -295,6 +320,9 @@ func _sync_sliders_to_params() -> void:
 			var val_label: Label = slider.get_parent().get_node_or_null("Val") as Label
 			if val_label:
 				val_label.text = "%.2f" % _params[pid]
+		elif _dropdowns.has(pid):
+			var dropdown: OptionButton = _dropdowns[pid] as OptionButton
+			dropdown.select(clampi(int(_params[pid]), 0, dropdown.item_count - 1))
 
 
 ## Get a parameter value with a default fallback.

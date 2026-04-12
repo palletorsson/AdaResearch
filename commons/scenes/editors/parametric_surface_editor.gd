@@ -42,7 +42,7 @@ func _get_editor_name() -> String:
 func _get_parameter_groups() -> Array:
 	return [
 		{"name": "Surface", "params": [
-			{"id": "surface_type", "label": "Type (0-13)", "min": 0.0, "max": 13.0, "step": 1.0, "default": 13.0},
+			{"id": "surface_type", "label": "Surface", "options": ["Breather", "Catenoid", "Dini", "Double Enneper", "Enneper Order 3", "Figure Eight Knot", "Helicoid", "Klein Bottle", "Mobius Strip", "Parametric", "Seashell", "Torus Knot", "Trefoil Knot", "Wave Torus"], "default": 13.0},
 			{"id": "scale", "label": "Scale", "min": 0.05, "max": 1.0, "step": 0.01, "default": 0.18},
 		]},
 		{"name": "Resolution", "params": [

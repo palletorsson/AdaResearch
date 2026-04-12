@@ -17,18 +17,18 @@ func _get_editor_name() -> String:
 func _get_parameter_groups() -> Array:
 	return [
 		{"name": "1. Field", "params": [
-			{"id": "field_type", "label": "Type (0=none 1=noise 2=sdf 3=metaball)", "min": 0.0, "max": 3.0, "step": 1.0, "default": 0.0},
+			{"id": "field_type", "label": "Field", "options": ["None", "Noise", "SDF Spheres", "Metaball"], "default": 0.0},
 			{"id": "field_freq", "label": "Frequency", "min": 0.1, "max": 3.0, "step": 0.1, "default": 0.5},
 			{"id": "field_strength", "label": "Strength", "min": 0.1, "max": 3.0, "step": 0.1, "default": 1.0},
 		]},
 		{"name": "2. Skeleton", "params": [
-			{"id": "skel_type", "label": "Type (0=none 1=spine 2=spiral 3=star)", "min": 0.0, "max": 3.0, "step": 1.0, "default": 0.0},
+			{"id": "skel_type", "label": "Skeleton", "options": ["None", "Spine", "Spiral", "Star"], "default": 0.0},
 			{"id": "skel_points", "label": "Points", "min": 2.0, "max": 16.0, "step": 1.0, "default": 6.0},
 			{"id": "skel_length", "label": "Length", "min": 0.3, "max": 3.0, "step": 0.1, "default": 1.5},
 			{"id": "skel_curve", "label": "Curvature", "min": 0.0, "max": 1.0, "step": 0.05, "default": 0.0},
 		]},
 		{"name": "3. Surface", "params": [
-			{"id": "surf_type", "label": "Type (0=auto 1=sweep 2=revolution 3=marching 4=primitive)", "min": 0.0, "max": 4.0, "step": 1.0, "default": 0.0},
+			{"id": "surf_type", "label": "Surface", "options": ["Auto", "Sweep", "Revolution", "Marching Cubes", "Primitive"], "default": 0.0},
 			{"id": "surf_radius", "label": "Radius", "min": 0.02, "max": 0.5, "step": 0.01, "default": 0.1},
 			{"id": "surf_sides", "label": "Sides", "min": 3.0, "max": 16.0, "step": 1.0, "default": 8.0},
 			{"id": "surf_resolution", "label": "Resolution", "min": 8.0, "max": 32.0, "step": 4.0, "default": 16.0},
@@ -41,7 +41,7 @@ func _get_parameter_groups() -> Array:
 			{"id": "mod_wave_amp", "label": "Wave Amp", "min": 0.0, "max": 0.3, "step": 0.01, "default": 0.0},
 		]},
 		{"name": "5. Populate", "params": [
-			{"id": "pop_type", "label": "Type (0=none 1=radial 2=grid 3=scatter)", "min": 0.0, "max": 3.0, "step": 1.0, "default": 0.0},
+			{"id": "pop_type", "label": "Populate", "options": ["None", "Radial", "Grid", "Scatter"], "default": 0.0},
 			{"id": "pop_count", "label": "Count", "min": 1.0, "max": 12.0, "step": 1.0, "default": 6.0},
 			{"id": "pop_radius", "label": "Radius/Spacing", "min": 0.3, "max": 3.0, "step": 0.1, "default": 1.0},
 		]},

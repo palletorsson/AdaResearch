@@ -21,7 +21,7 @@ func _get_parameter_groups() -> Array:
 			{"id": "wind", "label": "Wind", "min": 0.0, "max": 8.0, "step": 0.1, "default": 1.5},
 		]},
 		{"name": "Simulation", "params": [
-			{"id": "pin_mode", "label": "Pin Mode (0-2)", "min": 0.0, "max": 2.0, "step": 1.0, "default": 1.0},
+			{"id": "pin_mode", "label": "Pin Mode", "options": ["Corners", "Top Edge", "Center"], "default": 1.0},
 			{"id": "sim_steps", "label": "Sim Steps", "min": 10.0, "max": 150.0, "step": 5.0, "default": 60.0},
 		]},
 	]

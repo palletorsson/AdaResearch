@@ -31,8 +31,8 @@ func _get_editor_name() -> String:
 func _get_parameter_groups() -> Array:
 	return [
 		{"name": "Column", "params": [
-			{"id": "col_type", "label": "Type (0-9)", "min": 0.0, "max": 9.0, "step": 1.0, "default": 0.0},
-			{"id": "profile_idx", "label": "Profile (0-5)", "min": 0.0, "max": 5.0, "step": 1.0, "default": 0.0},
+			{"id": "col_type", "label": "Column Type", "options": ["Solomonic", "Double Helix", "Straight", "Profile", "Fluted Twist", "Cluster", "Fluted Straight", "Twisted Pair", "Tapered", "Spiral"], "default": 0.0},
+			{"id": "profile_idx", "label": "Profile", "options": ["Entasis", "Baluster", "Vase", "Bamboo", "Bone", "Solomon Smooth"], "default": 0.0},
 		]},
 		{"name": "Dimensions", "params": [
 			{"id": "height", "label": "Height", "min": 0.3, "max": 3.0, "step": 0.05, "default": 1.0},

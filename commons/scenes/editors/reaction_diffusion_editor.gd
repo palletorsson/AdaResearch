@@ -22,7 +22,7 @@ func _get_editor_name() -> String:
 func _get_parameter_groups() -> Array:
 	return [
 		{"name": "Preset", "params": [
-			{"id": "preset", "label": "Preset (0-7)", "min": 0.0, "max": 7.0, "step": 1.0, "default": 2.0},
+			{"id": "preset", "label": "Preset", "options": ["Coral", "Mitosis", "Fingers", "Spots", "Waves", "Maze", "Bubbles", "Worms"], "default": 2.0},
 		]},
 		{"name": "Rates", "params": [
 			{"id": "feed_rate", "label": "Feed Rate", "min": 0.01, "max": 0.08, "step": 0.001, "default": 0.037},
