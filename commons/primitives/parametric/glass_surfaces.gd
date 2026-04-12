@@ -11,7 +11,7 @@ extends Node3D
 
 @export_range(0, 9) var shape_type: int = 0
 @export var u_steps: int = 64
-@export var v_steps: int = 16
+@export var v_steps: int = 24
 @export var tube_radius: float = 0.06
 @export var major_radius: float = 0.5
 @export var height: float = 1.0
