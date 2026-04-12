@@ -34,6 +34,8 @@ const EDITORS: Array[Dictionary] = [
 	 "stage": "Surface", "desc": "Union, subtract, intersect", "color": Color(0.96, 0.62, 0.04)},
 	{"name": "Glass Tubes", "scene": "res://commons/scenes/editors/glass_tube_editor.tscn",
 	 "stage": "Surface", "desc": "Frenet frame tube sweep", "color": Color(0.96, 0.62, 0.04)},
+	{"name": "Generalized Sweep", "scene": "res://commons/scenes/editors/sweep_editor.tscn",
+	 "stage": "Surface", "desc": "Profile × Path × Radius × Twist", "color": Color(0.96, 0.62, 0.04)},
 	{"name": "Sine / Math", "scene": "res://commons/scenes/editors/sine_object_editor.tscn",
 	 "stage": "Surface", "desc": "Mobius, torus knot, Klein bottle", "color": Color(0.96, 0.62, 0.04)},
 
