@@ -18,12 +18,30 @@ const SURFACE_SCENES: Array[String] = [
 	"res://commons/primitives/parametric/torus_knot.tscn",
 	"res://commons/primitives/parametric/trefoil_knot.tscn",
 	"res://commons/primitives/parametric/wave_torus.tscn",
+	# Glass forms as parametric surfaces
+	"res://commons/primitives/parametric/glass_surfaces.tscn",
+	"res://commons/primitives/parametric/glass_surfaces.tscn",
+	"res://commons/primitives/parametric/glass_surfaces.tscn",
+	"res://commons/primitives/parametric/glass_surfaces.tscn",
+	"res://commons/primitives/parametric/glass_surfaces.tscn",
+	"res://commons/primitives/parametric/glass_surfaces.tscn",
+	"res://commons/primitives/parametric/glass_surfaces.tscn",
+	"res://commons/primitives/parametric/glass_surfaces.tscn",
+	"res://commons/primitives/parametric/glass_surfaces.tscn",
+	"res://commons/primitives/parametric/glass_surfaces.tscn",
 ]
 const SURFACE_NAMES: Array[String] = [
 	"Breather", "Catenoid", "Dini", "Double Enneper", "Enneper Order 3",
 	"Figure Eight Knot", "Helicoid", "Klein Bottle", "Mobius Strip",
 	"Parametric", "Seashell", "Torus Knot", "Trefoil Knot", "Wave Torus",
+	# Glass forms
+	"Glass: Straight Tube", "Glass: 90° Corner", "Glass: S-Bend",
+	"Glass: U-Bend", "Glass: Spiral Coil", "Glass: Flask",
+	"Glass: Beaker", "Glass: Y-Junction", "Glass: Torus Ring",
+	"Glass: Twisted Ribbon",
 ]
+# Glass shape_type indices (offset from surface index 14)
+const GLASS_START_IDX: int = 14
 
 # Common @export property names found across the parametric surface scripts.
 # Each surface extends XRToolsPickable with u_steps, v_steps, and surface-specific
@@ -42,7 +60,14 @@ func _get_editor_name() -> String:
 func _get_parameter_groups() -> Array:
 	return [
 		{"name": "Surface", "params": [
-			{"id": "surface_type", "label": "Surface", "options": ["Breather", "Catenoid", "Dini", "Double Enneper", "Enneper Order 3", "Figure Eight Knot", "Helicoid", "Klein Bottle", "Mobius Strip", "Parametric", "Seashell", "Torus Knot", "Trefoil Knot", "Wave Torus"], "default": 13.0},
+			{"id": "surface_type", "label": "Surface", "options": [
+			"Breather", "Catenoid", "Dini", "Double Enneper", "Enneper Order 3",
+			"Figure Eight Knot", "Helicoid", "Klein Bottle", "Mobius Strip",
+			"Parametric", "Seashell", "Torus Knot", "Trefoil Knot", "Wave Torus",
+			"Glass: Straight", "Glass: Corner", "Glass: S-Bend", "Glass: U-Bend",
+			"Glass: Spiral", "Glass: Flask", "Glass: Beaker", "Glass: Y-Junction",
+			"Glass: Ring", "Glass: Twisted Ribbon",
+		], "default": 13.0},
 			{"id": "scale", "label": "Scale", "min": 0.05, "max": 1.0, "step": 0.01, "default": 0.18},
 		]},
 		{"name": "Resolution", "params": [
@@ -87,6 +112,10 @@ func _rebuild() -> void:
 			scale_applied = true
 	if not scale_applied:
 		instance.scale = Vector3.ONE * scale_val
+
+	# Set glass shape_type if this is a glass surface
+	if type_idx >= GLASS_START_IDX:
+		_try_set(instance, "shape_type", type_idx - GLASS_START_IDX)
 
 	# Apply generic params — map param_a/param_b to surface-specific exports
 	var param_a: float = p("param_a", 0.5)
