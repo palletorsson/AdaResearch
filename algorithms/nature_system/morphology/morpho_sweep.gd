@@ -173,9 +173,6 @@ static func sweep(
 	var sides: int = profile.size()
 	var default_radius: float = 0.1
 
-	var st := SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-
 	var ring_verts: Array = []  # Array of Array[Vector3]
 	var prev_normal := Vector3.ZERO
 
@@ -243,36 +240,53 @@ static func sweep(
 	var ring_count: int = ring_verts.size()
 	var connect_count: int = ring_count - 1 if not close_path else ring_count
 
-	# Build quads between adjacent rings — no caps, no fills
-	for ri in connect_count:
-		var ring_a: Array = ring_verts[ri] as Array
-		var ring_b: Array = ring_verts[(ri + 1) % ring_count] as Array
+	# Build as a continuous surface with SHARED vertices so normals smooth properly.
+	# Each vertex is added once, then triangles reference them by index.
 
+	# Step 1: Collect all vertices + UVs into arrays
+	var all_verts := PackedVector3Array()
+	var all_uvs := PackedVector2Array()
+
+	for ri in ring_count:
+		var ring: Array = ring_verts[ri] as Array
+		for si in sides:
+			all_verts.append(ring[si] as Vector3)
+			all_uvs.append(Vector2(
+				float(si) / float(sides),
+				float(ri) / maxf(ring_count - 1.0, 1.0)))
+
+	# Step 2: Build index buffer connecting rings
+	var indices := PackedInt32Array()
+
+	for ri in connect_count:
+		var ri_next: int = (ri + 1) % ring_count
 		for si in sides:
 			var si_next: int = (si + 1) % sides
 
-			var v00: Vector3 = ring_a[si] as Vector3
-			var v01: Vector3 = ring_a[si_next] as Vector3
-			var v10: Vector3 = ring_b[si] as Vector3
-			var v11: Vector3 = ring_b[si_next] as Vector3
+			var i00: int = ri * sides + si
+			var i01: int = ri * sides + si_next
+			var i10: int = ri_next * sides + si
+			var i11: int = ri_next * sides + si_next
 
-			var t0: float = float(ri) / maxf(ring_count - 1.0, 1.0)
-			var t1: float = float(ri + 1) / maxf(ring_count - 1.0, 1.0)
-			var s0: float = float(si) / float(sides)
-			var s1: float = float(si_next) / float(sides)
+			# Two triangles per quad
+			indices.append(i00); indices.append(i10); indices.append(i01)
+			indices.append(i01); indices.append(i10); indices.append(i11)
 
-			# Triangle 1
-			st.set_uv(Vector2(s0, t0)); st.add_vertex(v00)
-			st.set_uv(Vector2(s0, t1)); st.add_vertex(v10)
-			st.set_uv(Vector2(s1, t0)); st.add_vertex(v01)
+	# Step 3: Build ArrayMesh with shared vertices for smooth normals
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = all_verts
+	arrays[Mesh.ARRAY_TEX_UV] = all_uvs
+	arrays[Mesh.ARRAY_INDEX] = indices
 
-			# Triangle 2
-			st.set_uv(Vector2(s1, t0)); st.add_vertex(v01)
-			st.set_uv(Vector2(s0, t1)); st.add_vertex(v10)
-			st.set_uv(Vector2(s1, t1)); st.add_vertex(v11)
+	var array_mesh := ArrayMesh.new()
+	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 
-	st.generate_normals()
-	return st.commit()
+	# Generate smooth normals via SurfaceTool (shares vertices = smooth across rings)
+	var st2 := SurfaceTool.new()
+	st2.create_from(array_mesh, 0)
+	st2.generate_normals()
+	return st2.commit()
 
 
 # ═══════════════════════════════════════════════════════════════
