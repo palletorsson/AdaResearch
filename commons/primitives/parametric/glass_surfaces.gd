@@ -36,45 +36,56 @@ func _build_surface() -> void:
 			remove_child(mesh_instance)
 		mesh_instance.queue_free()
 
-	var surface_tool := SurfaceTool.new()
-	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+	# Build as indexed mesh with shared vertices for smooth normals.
+	# Each vertex exists once — triangles reference by index — so normals
+	# are averaged across all faces sharing a vertex = perfectly smooth.
 
-	# Build vertex grid from parametric equations
-	var vertices: Array = []
+	var all_verts := PackedVector3Array()
+	var all_normals := PackedVector3Array()
+	var all_uvs := PackedVector2Array()
+
+	# Step 1: Compute all vertex positions + analytical normals
 	for i in range(u_steps + 1):
-		var row: Array = []
 		for j in range(v_steps + 1):
 			var u: float = float(i) / float(u_steps)
 			var v: float = float(j) / float(v_steps) * TAU
-
 			var pos: Vector3 = _evaluate(u, v)
-			row.append(pos)
-		vertices.append(row)
+			all_verts.append(pos)
+			all_uvs.append(Vector2(float(i) / float(u_steps), float(j) / float(v_steps)))
 
-	# Triangulate quads — same pattern as seashell, torus_knot
+			# Compute normal via cross product of partial derivatives
+			var du: float = 0.001
+			var dv: float = 0.01
+			var dp_du: Vector3 = _evaluate(u + du, v) - _evaluate(u - du, v)
+			var dp_dv: Vector3 = _evaluate(u, v + dv) - _evaluate(u, v - dv)
+			var normal: Vector3 = dp_du.cross(dp_dv).normalized()
+			if normal.length_squared() < 0.001:
+				normal = Vector3.UP
+			all_normals.append(normal)
+
+	# Step 2: Build index buffer
+	var indices := PackedInt32Array()
+	var cols: int = v_steps + 1
 	for i in range(u_steps):
 		for j in range(v_steps):
-			var v0: Vector3 = vertices[i][j]
-			var v1: Vector3 = vertices[i + 1][j]
-			var v2: Vector3 = vertices[i + 1][j + 1]
-			var v3: Vector3 = vertices[i][j + 1]
+			var i00: int = i * cols + j
+			var i01: int = i * cols + j + 1
+			var i10: int = (i + 1) * cols + j
+			var i11: int = (i + 1) * cols + j + 1
+			# Two triangles per quad
+			indices.append(i00); indices.append(i10); indices.append(i01)
+			indices.append(i01); indices.append(i10); indices.append(i11)
 
-			var uv0 := Vector2(float(i) / u_steps, float(j) / v_steps)
-			var uv1 := Vector2(float(i + 1) / u_steps, float(j) / v_steps)
-			var uv2 := Vector2(float(i + 1) / u_steps, float(j + 1) / v_steps)
-			var uv3 := Vector2(float(i) / u_steps, float(j + 1) / v_steps)
+	# Step 3: Build ArrayMesh with analytical normals
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = all_verts
+	arrays[Mesh.ARRAY_NORMAL] = all_normals
+	arrays[Mesh.ARRAY_TEX_UV] = all_uvs
+	arrays[Mesh.ARRAY_INDEX] = indices
 
-			# Triangle 1
-			surface_tool.set_uv(uv0); surface_tool.add_vertex(v0)
-			surface_tool.set_uv(uv1); surface_tool.add_vertex(v1)
-			surface_tool.set_uv(uv2); surface_tool.add_vertex(v2)
-			# Triangle 2
-			surface_tool.set_uv(uv0); surface_tool.add_vertex(v0)
-			surface_tool.set_uv(uv2); surface_tool.add_vertex(v2)
-			surface_tool.set_uv(uv3); surface_tool.add_vertex(v3)
-
-	surface_tool.generate_normals()
-	var mesh: ArrayMesh = surface_tool.commit()
+	var mesh := ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 
 	mesh_instance = MeshInstance3D.new()
 	mesh_instance.mesh = mesh
