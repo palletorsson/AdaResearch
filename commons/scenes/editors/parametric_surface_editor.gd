@@ -128,7 +128,7 @@ func _rebuild() -> void:
 	content_root.add_child(instance)
 
 	# Apply material override if not "Default"
-	# Deferred because the surface scripts build their mesh in _ready()
+	# Must run AFTER the surface script's _ready() + apply_material()
 	var mat_type: int = int(p("mat_type", 0))
 	if mat_type > 0:
 		var mat := StandardMaterial3D.new()
@@ -147,7 +147,9 @@ func _rebuild() -> void:
 				mat.albedo_color = Color(0.85, 0.75, 0.65)
 				mat.roughness = 0.95
 				mat.metallic = 0.0
-		_apply_material_deferred.call_deferred(instance, mat)
+		# Use a timer to ensure we run after ALL script _ready() + apply_material() calls
+		var timer := get_tree().create_timer(0.1)
+		timer.timeout.connect(_apply_material_deferred.bind(instance, mat))
 
 	# Update info label
 	var surface_name: String = SURFACE_NAMES[type_idx]
