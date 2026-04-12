@@ -7,7 +7,7 @@
 # a straight tube is a cylinder, a corner is a torus quarter,
 # a flask is a sphere-cylinder blend, a spiral is a helical tube.
 
-extends XRToolsPickable
+extends Node3D
 
 @export_range(0, 9) var shape_type: int = 0
 @export var u_steps: int = 64
@@ -27,7 +27,6 @@ var mesh_instance: MeshInstance3D
 
 
 func _ready():
-	super._ready()
 	_build_surface()
 
 
