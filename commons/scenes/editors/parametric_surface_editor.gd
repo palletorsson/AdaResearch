@@ -74,6 +74,9 @@ func _get_parameter_groups() -> Array:
 			{"id": "res_u", "label": "U Steps", "min": 10.0, "max": 100.0, "step": 2.0, "default": 40.0},
 			{"id": "res_v", "label": "V Steps", "min": 10.0, "max": 100.0, "step": 2.0, "default": 24.0},
 		]},
+		{"name": "Material", "params": [
+			{"id": "mat_type", "label": "Material", "options": ["Default", "Glass", "Metal", "Clay"], "default": 0.0},
+		]},
 		{"name": "Surface Params", "params": [
 			{"id": "param_a", "label": "Param A", "min": 0.01, "max": 2.0, "step": 0.01, "default": 0.5},
 			{"id": "param_b", "label": "Param B", "min": 0.01, "max": 2.0, "step": 0.01, "default": 0.5},
@@ -124,9 +127,36 @@ func _rebuild() -> void:
 
 	content_root.add_child(instance)
 
+	# Apply material override if not "Default"
+	var mat_type: int = int(p("mat_type", 0))
+	if mat_type > 0:
+		var mat := StandardMaterial3D.new()
+		match mat_type:
+			1:  # Glass
+				mat.albedo_color = Color(0.85, 0.92, 1.0, 0.4)
+				mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+				mat.roughness = 0.05
+				mat.metallic = 0.1
+				mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+			2:  # Metal
+				mat.albedo_color = Color(0.8, 0.82, 0.85)
+				mat.roughness = 0.15
+				mat.metallic = 0.9
+			3:  # Clay
+				mat.albedo_color = Color(0.85, 0.75, 0.65)
+				mat.roughness = 0.95
+				mat.metallic = 0.0
+		# Apply to all mesh children
+		for child in instance.get_children():
+			if child is MeshInstance3D:
+				(child as MeshInstance3D).material_override = mat
+		if instance is MeshInstance3D:
+			(instance as MeshInstance3D).material_override = mat
+
 	# Update info label
 	var surface_name: String = SURFACE_NAMES[type_idx]
-	info_label.text = "%s | %dv %df" % [surface_name, u_res * v_res, u_res * v_res * 2]
+	var mat_names: Array[String] = ["Default", "Glass", "Metal", "Clay"]
+	info_label.text = "%s | %s | %dv" % [surface_name, mat_names[mat_type], u_res * v_res]
 
 
 ## Try to set a property on an instance, only if it exists.
