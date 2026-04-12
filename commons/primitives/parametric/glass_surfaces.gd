@@ -58,9 +58,14 @@ func _build_surface() -> void:
 			var dv: float = 0.01
 			var dp_du: Vector3 = _evaluate(u + du, v) - _evaluate(u - du, v)
 			var dp_dv: Vector3 = _evaluate(u, v + dv) - _evaluate(u, v - dv)
-			var normal: Vector3 = dp_du.cross(dp_dv).normalized()
+			var normal: Vector3 = dp_dv.cross(dp_du).normalized()
 			if normal.length_squared() < 0.001:
 				normal = Vector3.UP
+			# Ensure normal points outward (away from the tube center line)
+			var center: Vector3 = _evaluate(u, PI)  # Approximate center of cross-section
+			var to_vertex: Vector3 = (pos - center)
+			if to_vertex.length_squared() > 0.001 and normal.dot(to_vertex) < 0:
+				normal = -normal
 			all_normals.append(normal)
 
 	# Step 2: Build index buffer
@@ -91,11 +96,12 @@ func _build_surface() -> void:
 	mesh_instance.mesh = mesh
 
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(base_color.r, base_color.g, base_color.b, 0.5)
+	mat.albedo_color = Color(base_color.r, base_color.g, base_color.b, 0.4)
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mat.roughness = 0.05
-	mat.metallic = 0.1
+	mat.metallic = 0.15
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mat.no_depth_test = true
 	mesh_instance.material_override = mat
 	add_child(mesh_instance)
 
