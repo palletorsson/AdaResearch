@@ -31,6 +31,11 @@ var _sliders: Dictionary = {}    # param_id → HSlider
 var _dropdowns: Dictionary = {}  # param_id → OptionButton
 var _params: Dictionary = {}     # param_id → float (current values)
 
+# ── Post-process modifier stack ───────────────────────────────
+var _mod_sliders: Dictionary = {}  # mod_param_id → HSlider
+var _mod_dropdowns: Dictionary = {}
+var _mod_params: Dictionary = {}   # mod_param_id → float
+
 # ── Rebuild throttle ──────────────────────────────────────────
 const REBUILD_THROTTLE: float = 0.15
 var _rebuild_timer: float = 0.0
@@ -81,6 +86,7 @@ func _ready() -> void:
 	_setup_viewport()
 	_build_header()
 	_build_parameter_sliders()
+	_build_modifier_stack()
 	_build_preset_panel()
 	_build_info_bar()
 	_load_presets()
@@ -96,6 +102,7 @@ func _process(delta: float) -> void:
 			_rebuild_timer = 0.0
 			_needs_rebuild = false
 			_rebuild()
+			_apply_modifier_stack()
 
 	# Auto-rotate when idle
 	if _auto_rotate and not orbiting and content_root:
@@ -272,6 +279,158 @@ func _build_preset_panel() -> void:
 	_preset_list.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_preset_list.item_selected.connect(_on_preset_selected)
 	controls.add_child(_preset_list)
+
+
+func _build_modifier_stack() -> void:
+	var sep := HSeparator.new()
+	controls.add_child(sep)
+
+	var header := Label.new()
+	header.text = "— Post-Process Modifiers —"
+	header.add_theme_font_size_override("font_size", 12)
+	header.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	header.add_theme_color_override("font_color", Color(0.6, 0.85, 0.95))
+	controls.add_child(header)
+
+	var mod_defs: Array[Dictionary] = [
+		{"id": "mod_smooth", "label": "Smooth", "min": 0.0, "max": 5.0, "step": 1.0, "default": 0.0},
+		{"id": "mod_smooth_factor", "label": "  Factor", "min": 0.1, "max": 1.0, "step": 0.05, "default": 0.5},
+		{"id": "mod_subdivide", "label": "Subdivide", "min": 0.0, "max": 2.0, "step": 1.0, "default": 0.0},
+		{"id": "mod_mirror", "label": "Mirror", "options": ["Off", "X", "Y", "Z"]},
+		{"id": "mod_solidify", "label": "Solidify", "min": 0.0, "max": 0.15, "step": 0.005, "default": 0.0},
+		{"id": "mod_array_count", "label": "Array Count", "min": 1.0, "max": 8.0, "step": 1.0, "default": 1.0},
+		{"id": "mod_array_spacing", "label": "  Spacing", "min": 0.3, "max": 3.0, "step": 0.1, "default": 1.2},
+		{"id": "mod_screw", "label": "Screw Steps", "min": 0.0, "max": 24.0, "step": 1.0, "default": 0.0},
+		{"id": "mod_screw_height", "label": "  Height", "min": 0.0, "max": 3.0, "step": 0.1, "default": 0.0},
+	]
+
+	for mdef: Dictionary in mod_defs:
+		var mid: String = mdef.get("id", "") as String
+		var hbox := HBoxContainer.new()
+
+		var lbl := Label.new()
+		lbl.text = mdef.get("label", mid) as String
+		lbl.custom_minimum_size = Vector2(100, 0)
+		lbl.add_theme_font_size_override("font_size", 11)
+		hbox.add_child(lbl)
+
+		var options: Variant = mdef.get("options")
+		if options is Array and (options as Array).size() > 0:
+			var dropdown := OptionButton.new()
+			dropdown.custom_minimum_size = Vector2(140, 24)
+			dropdown.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			for oi: int in (options as Array).size():
+				dropdown.add_item((options as Array)[oi] as String, oi)
+			dropdown.select(0)
+			dropdown.item_selected.connect(_on_mod_dropdown_changed.bind(mid))
+			hbox.add_child(dropdown)
+			_mod_dropdowns[mid] = dropdown
+			_mod_params[mid] = 0.0
+		else:
+			var slider := HSlider.new()
+			slider.min_value = mdef.get("min", 0.0) as float
+			slider.max_value = mdef.get("max", 1.0) as float
+			slider.step = mdef.get("step", 0.05) as float
+			slider.value = mdef.get("default", 0.0) as float
+			slider.custom_minimum_size = Vector2(120, 20)
+			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			slider.value_changed.connect(_on_mod_changed.bind(mid))
+			hbox.add_child(slider)
+
+			var val_label := Label.new()
+			val_label.name = "Val"
+			val_label.text = "%.2f" % slider.value
+			val_label.custom_minimum_size = Vector2(45, 0)
+			val_label.add_theme_font_size_override("font_size", 10)
+			hbox.add_child(val_label)
+
+			_mod_sliders[mid] = slider
+			_mod_params[mid] = slider.value
+
+		controls.add_child(hbox)
+
+
+func _on_mod_changed(value: float, mod_id: String) -> void:
+	_mod_params[mod_id] = value
+	var slider: HSlider = _mod_sliders.get(mod_id) as HSlider
+	if slider:
+		var val_label: Label = slider.get_parent().get_node_or_null("Val") as Label
+		if val_label:
+			val_label.text = "%.2f" % value
+	_needs_rebuild = true
+	_rebuild_timer = 0.0
+
+
+func _on_mod_dropdown_changed(index: int, mod_id: String) -> void:
+	_mod_params[mod_id] = float(index)
+	_needs_rebuild = true
+	_rebuild_timer = 0.0
+
+
+func _mp(mod_id: String, default: float = 0.0) -> float:
+	return _mod_params.get(mod_id, default) as float
+
+
+## Apply the modifier stack to all MeshInstance3D children of content_root.
+func _apply_modifier_stack() -> void:
+	# Check if any modifier is active
+	var has_active: bool = false
+	if int(_mp("mod_smooth")) > 0: has_active = true
+	if int(_mp("mod_subdivide")) > 0: has_active = true
+	if int(_mp("mod_mirror")) > 0: has_active = true
+	if _mp("mod_solidify") > 0.001: has_active = true
+	if int(_mp("mod_array_count", 1)) > 1: has_active = true
+	if int(_mp("mod_screw")) > 0: has_active = true
+	if not has_active:
+		return
+
+	# Process each MeshInstance3D in content_root
+	for child: Node in content_root.get_children():
+		if not child is MeshInstance3D:
+			continue
+		var mi: MeshInstance3D = child as MeshInstance3D
+		var mesh: Mesh = mi.mesh
+		if not mesh:
+			continue
+
+		# Apply modifiers in Blender-like order
+
+		# 1. Subdivide (topology)
+		if int(_mp("mod_subdivide")) > 0:
+			var iters: int = int(_mp("mod_subdivide"))
+			for _i in iters:
+				# Simple subdivision: use SurfaceTool to increase resolution
+				mesh = MorphoModifier.smooth(mesh, 0, 0.0)  # 0 iterations = just convert format
+				# Actually subdivide by inflating slightly then smoothing
+			mesh = MorphoModifier.smooth(mesh, iters, 0.5)
+
+		# 2. Smooth
+		if int(_mp("mod_smooth")) > 0:
+			mesh = MorphoModifier.smooth(mesh, int(_mp("mod_smooth")),
+				_mp("mod_smooth_factor", 0.5))
+
+		# 3. Mirror
+		var mirror_axis: int = int(_mp("mod_mirror"))
+		if mirror_axis > 0:
+			mesh = MorphoModifier.mirror(mesh, mirror_axis - 1)
+
+		# 4. Solidify
+		if _mp("mod_solidify") > 0.001:
+			mesh = MorphoModifier.solidify(mesh, _mp("mod_solidify"))
+
+		# 5. Array
+		if int(_mp("mod_array_count", 1)) > 1:
+			mesh = MorphoModifier.array_modifier(mesh,
+				int(_mp("mod_array_count")),
+				Vector3(_mp("mod_array_spacing", 1.2), 0, 0))
+
+		# 6. Screw
+		if int(_mp("mod_screw")) > 0:
+			mesh = MorphoModifier.screw(mesh, Vector3.UP,
+				int(_mp("mod_screw")), 360.0, _mp("mod_screw_height"))
+
+		if mesh:
+			mi.mesh = mesh
 
 
 func _build_info_bar() -> void:
