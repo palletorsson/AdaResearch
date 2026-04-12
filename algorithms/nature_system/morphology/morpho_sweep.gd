@@ -170,39 +170,38 @@ static func sweep(
 	if profile.is_empty():
 		return null
 
+	# Build as a continuous parametric surface — no segments, no rings.
+	# Every vertex is computed directly from (u, v) like math surfaces do.
+	# u = position along path [0, 1], v = position around cross-section [0, 1]
+
 	var sides: int = profile.size()
 	var default_radius: float = 0.1
+	var u_steps: int = segments
+	var v_steps: int = sides
 
-	var ring_verts: Array = []  # Array of Array[Vector3]
+	# Pre-compute the Frenet frame along the path using parallel transport
+	var frames: Array = []  # [{center, normal, binormal}] per u step
 	var prev_normal := Vector3.ZERO
 
-	var total_segments: int = segments + (0 if close_path else 0)
+	for ui in u_steps + 1:
+		var u: float = float(ui) / float(u_steps)
+		if close_path and ui == u_steps:
+			u = 0.0
 
-	for i in segments + 1:
-		var t: float = float(i) / float(segments)
-		if close_path and i == segments:
-			t = 0.0  # Loop back to start
-
-		# Path position
-		var center: Vector3 = path_func.call(t) as Vector3
-
-		# Tangent (numerical derivative)
-		var dt: float = 0.001
-		var t_next: float = minf(t + dt, 1.0) if not close_path else fmod(t + dt, 1.0)
-		var t_prev: float = maxf(t - dt, 0.0) if not close_path else fmod(t - dt + 1.0, 1.0)
-		var tangent: Vector3 = ((path_func.call(t_next) as Vector3) - (path_func.call(t_prev) as Vector3)).normalized()
+		var center: Vector3 = path_func.call(u) as Vector3
+		var dt: float = 0.0005
+		var u_next: float = minf(u + dt, 1.0) if not close_path else fmod(u + dt, 1.0)
+		var u_prev: float = maxf(u - dt, 0.0) if not close_path else fmod(u - dt + 1.0, 1.0)
+		var tangent: Vector3 = ((path_func.call(u_next) as Vector3) - (path_func.call(u_prev) as Vector3)).normalized()
 		if tangent.length_squared() < 0.001:
 			tangent = Vector3.UP
 
-		# Build perpendicular frame (minimize twist — parallel transport)
 		var normal: Vector3
-		var binormal: Vector3
 		if prev_normal == Vector3.ZERO:
 			var ref := Vector3.RIGHT
 			normal = tangent.cross(ref)
 			if normal.length_squared() < 0.001:
-				ref = Vector3.UP
-				normal = tangent.cross(ref)
+				normal = tangent.cross(Vector3.UP)
 			normal = normal.normalized()
 		else:
 			normal = prev_normal - tangent * tangent.dot(prev_normal)
@@ -210,83 +209,78 @@ static func sweep(
 				normal = prev_normal
 			else:
 				normal = normal.normalized()
-		binormal = tangent.cross(normal).normalized()
+		var binormal: Vector3 = tangent.cross(normal).normalized()
 		prev_normal = normal
 
-		# Radius at this point
+		frames.append({"center": center, "normal": normal, "binormal": binormal})
+
+	# Compute vertex positions + normals directly
+	var all_verts := PackedVector3Array()
+	var all_normals := PackedVector3Array()
+	var all_uvs := PackedVector2Array()
+
+	for ui in u_steps + 1:
+		var u: float = float(ui) / float(u_steps)
+		var frame: Dictionary = frames[ui if ui < frames.size() else frames.size() - 1]
+		var center: Vector3 = frame["center"]
+		var fnormal: Vector3 = frame["normal"]
+		var fbinormal: Vector3 = frame["binormal"]
+
 		var radius: float = default_radius
 		if radius_func.is_valid():
-			radius = radius_func.call(t) as float
+			radius = radius_func.call(u) as float
 
-		# Twist rotation
-		var twist_rad: float = deg_to_rad(twist_degrees * t)
+		var twist_rad: float = deg_to_rad(twist_degrees * u)
+		var cos_tw: float = cos(twist_rad)
+		var sin_tw: float = sin(twist_rad)
 
-		# Build ring from profile
-		var ring: Array = []
-		for si in sides:
-			var pt: Vector2 = profile[si] as Vector2
-			# Rotate profile point by twist
-			var cos_tw: float = cos(twist_rad)
-			var sin_tw: float = sin(twist_rad)
+		for vi in v_steps:
+			var pt: Vector2 = profile[vi] as Vector2
+			# Twist
 			var rotated := Vector2(
 				pt.x * cos_tw - pt.y * sin_tw,
 				pt.x * sin_tw + pt.y * cos_tw)
-			# Map 2D profile to 3D frame
-			var offset: Vector3 = (normal * rotated.x + binormal * rotated.y) * radius
-			ring.append(center + offset)
-		ring_verts.append(ring)
+			# Map to 3D
+			var offset: Vector3 = (fnormal * rotated.x + fbinormal * rotated.y) * radius
+			var vertex: Vector3 = center + offset
+			# Normal points outward from center
+			var vert_normal: Vector3 = offset.normalized()
 
-	# Triangulate between rings
-	var ring_count: int = ring_verts.size()
-	var connect_count: int = ring_count - 1 if not close_path else ring_count
+			all_verts.append(vertex)
+			all_normals.append(vert_normal)
+			all_uvs.append(Vector2(float(vi) / float(v_steps), u))
 
-	# Build as a continuous surface with SHARED vertices so normals smooth properly.
-	# Each vertex is added once, then triangles reference them by index.
-
-	# Step 1: Collect all vertices + UVs into arrays
-	var all_verts := PackedVector3Array()
-	var all_uvs := PackedVector2Array()
-
-	for ri in ring_count:
-		var ring: Array = ring_verts[ri] as Array
-		for si in sides:
-			all_verts.append(ring[si] as Vector3)
-			all_uvs.append(Vector2(
-				float(si) / float(sides),
-				float(ri) / maxf(ring_count - 1.0, 1.0)))
-
-	# Step 2: Build index buffer connecting rings
+	# Build index buffer
 	var indices := PackedInt32Array()
+	var u_count: int = u_steps + 1
+	var connect_u: int = u_steps if not close_path else u_steps + 1
 
-	for ri in connect_count:
-		var ri_next: int = (ri + 1) % ring_count
-		for si in sides:
-			var si_next: int = (si + 1) % sides
+	for ui in connect_u:
+		var ui_next: int = (ui + 1) % u_count if close_path else ui + 1
+		if ui_next >= u_count:
+			continue
+		for vi in v_steps:
+			var vi_next: int = (vi + 1) % v_steps
 
-			var i00: int = ri * sides + si
-			var i01: int = ri * sides + si_next
-			var i10: int = ri_next * sides + si
-			var i11: int = ri_next * sides + si_next
+			var i00: int = ui * v_steps + vi
+			var i01: int = ui * v_steps + vi_next
+			var i10: int = ui_next * v_steps + vi
+			var i11: int = ui_next * v_steps + vi_next
 
-			# Two triangles per quad
 			indices.append(i00); indices.append(i10); indices.append(i01)
 			indices.append(i01); indices.append(i10); indices.append(i11)
 
-	# Step 3: Build ArrayMesh with shared vertices for smooth normals
+	# Build ArrayMesh with computed normals (no generate_normals needed)
 	var arrays := []
 	arrays.resize(Mesh.ARRAY_MAX)
 	arrays[Mesh.ARRAY_VERTEX] = all_verts
+	arrays[Mesh.ARRAY_NORMAL] = all_normals
 	arrays[Mesh.ARRAY_TEX_UV] = all_uvs
 	arrays[Mesh.ARRAY_INDEX] = indices
 
-	var array_mesh := ArrayMesh.new()
-	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-
-	# Generate smooth normals via SurfaceTool (shares vertices = smooth across rings)
-	var st2 := SurfaceTool.new()
-	st2.create_from(array_mesh, 0)
-	st2.generate_normals()
-	return st2.commit()
+	var mesh := ArrayMesh.new()
+	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	return mesh
 
 
 # ═══════════════════════════════════════════════════════════════
