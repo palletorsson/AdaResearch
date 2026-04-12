@@ -128,6 +128,7 @@ func _rebuild() -> void:
 	content_root.add_child(instance)
 
 	# Apply material override if not "Default"
+	# Deferred because the surface scripts build their mesh in _ready()
 	var mat_type: int = int(p("mat_type", 0))
 	if mat_type > 0:
 		var mat := StandardMaterial3D.new()
@@ -146,17 +147,23 @@ func _rebuild() -> void:
 				mat.albedo_color = Color(0.85, 0.75, 0.65)
 				mat.roughness = 0.95
 				mat.metallic = 0.0
-		# Apply to all mesh children
-		for child in instance.get_children():
-			if child is MeshInstance3D:
-				(child as MeshInstance3D).material_override = mat
-		if instance is MeshInstance3D:
-			(instance as MeshInstance3D).material_override = mat
+		_apply_material_deferred.call_deferred(instance, mat)
 
 	# Update info label
 	var surface_name: String = SURFACE_NAMES[type_idx]
 	var mat_names: Array[String] = ["Default", "Glass", "Metal", "Clay"]
 	info_label.text = "%s | %s | %dv" % [surface_name, mat_names[mat_type], u_res * v_res]
+
+
+## Apply material to all MeshInstance3D nodes in the tree (called deferred after _ready).
+func _apply_material_deferred(root_node: Node, mat: Material) -> void:
+	_apply_mat_recursive(root_node, mat)
+
+func _apply_mat_recursive(node: Node, mat: Material) -> void:
+	if node is MeshInstance3D:
+		(node as MeshInstance3D).material_override = mat
+	for child in node.get_children():
+		_apply_mat_recursive(child, mat)
 
 
 ## Try to set a property on an instance, only if it exists.
