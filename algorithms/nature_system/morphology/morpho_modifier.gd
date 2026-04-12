@@ -196,6 +196,208 @@ static func wave(mesh: Mesh, wave_axis: Vector3 = Vector3.RIGHT,
 
 
 # ═══════════════════════════════════════════════════════════════
+# BLENDER-STYLE MODIFIERS
+# ═══════════════════════════════════════════════════════════════
+
+## Laplacian Smooth: iteratively average each vertex toward its neighbors.
+## iterations: number of smooth passes. factor: blend strength per pass.
+static func smooth(mesh: Mesh, iterations: int = 1, factor: float = 0.5) -> ArrayMesh:
+	var mdt := _get_mdt(mesh)
+	if mdt == null:
+		return null
+
+	for _iter in iterations:
+		# Build adjacency: for each vertex, find neighbors via shared faces
+		var vert_count: int = mdt.get_vertex_count()
+		var new_positions: PackedVector3Array = PackedVector3Array()
+		new_positions.resize(vert_count)
+
+		for vi in vert_count:
+			var pos: Vector3 = mdt.get_vertex(vi)
+			var neighbors: Dictionary = {}
+			# Find faces containing this vertex
+			for fi in mdt.get_face_count():
+				for fvi in 3:
+					if mdt.get_face_vertex(fi, fvi) == vi:
+						for fvi2 in 3:
+							var nvi: int = mdt.get_face_vertex(fi, fvi2)
+							if nvi != vi:
+								neighbors[nvi] = true
+						break
+
+			if neighbors.is_empty():
+				new_positions[vi] = pos
+				continue
+
+			var avg := Vector3.ZERO
+			for nvi: int in neighbors:
+				avg += mdt.get_vertex(nvi)
+			avg /= float(neighbors.size())
+			new_positions[vi] = pos.lerp(avg, factor)
+
+		for vi in vert_count:
+			mdt.set_vertex(vi, new_positions[vi])
+
+	return _commit_mdt(mdt)
+
+
+## Mirror: reflect mesh across a plane (axis: 0=X, 1=Y, 2=Z).
+## merge_distance: vertices within this distance from the mirror plane are welded.
+static func mirror(mesh: Mesh, axis: int = 0, merge_distance: float = 0.001) -> ArrayMesh:
+	var mdt := _get_mdt(mesh)
+	if mdt == null:
+		return null
+
+	var vert_count: int = mdt.get_vertex_count()
+	var face_count: int = mdt.get_face_count()
+
+	# Build new mesh with original + mirrored geometry
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	# Copy original faces
+	for fi in face_count:
+		for fvi in 3:
+			var vi: int = mdt.get_face_vertex(fi, fvi)
+			var v: Vector3 = mdt.get_vertex(vi)
+			var n: Vector3 = mdt.get_vertex_normal(vi)
+			st.set_normal(n)
+			st.add_vertex(v)
+
+	# Add mirrored faces (reversed winding for correct normals)
+	for fi in face_count:
+		for fvi_idx in [0, 2, 1]:  # Reverse winding
+			var vi: int = mdt.get_face_vertex(fi, fvi_idx)
+			var v: Vector3 = mdt.get_vertex(vi)
+			# Mirror the position
+			match axis:
+				0: v.x = -v.x
+				1: v.y = -v.y
+				2: v.z = -v.z
+			var n: Vector3 = mdt.get_vertex_normal(vi)
+			match axis:
+				0: n.x = -n.x
+				1: n.y = -n.y
+				2: n.z = -n.z
+			st.set_normal(n)
+			st.add_vertex(v)
+
+	st.generate_normals()
+	return st.commit()
+
+
+## Solidify: give a surface thickness by duplicating it inward/outward.
+## thickness: distance between inner and outer shells.
+static func solidify(mesh: Mesh, thickness: float = 0.05) -> ArrayMesh:
+	var mdt := _get_mdt(mesh)
+	if mdt == null:
+		return null
+
+	var vert_count: int = mdt.get_vertex_count()
+	var face_count: int = mdt.get_face_count()
+
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	var half: float = thickness * 0.5
+
+	# Outer shell (original, pushed outward)
+	for fi in face_count:
+		for fvi in 3:
+			var vi: int = mdt.get_face_vertex(fi, fvi)
+			var v: Vector3 = mdt.get_vertex(vi)
+			var n: Vector3 = mdt.get_vertex_normal(vi)
+			st.set_normal(n)
+			st.add_vertex(v + n * half)
+
+	# Inner shell (reversed winding, pushed inward)
+	for fi in face_count:
+		for fvi_idx in [0, 2, 1]:
+			var vi: int = mdt.get_face_vertex(fi, fvi_idx)
+			var v: Vector3 = mdt.get_vertex(vi)
+			var n: Vector3 = mdt.get_vertex_normal(vi)
+			st.set_normal(-n)
+			st.add_vertex(v - n * half)
+
+	st.generate_normals()
+	return st.commit()
+
+
+## Array: duplicate mesh along a direction with count and offset.
+## Returns a mesh containing all copies merged together.
+static func array_modifier(mesh: Mesh, count: int = 3,
+		offset: Vector3 = Vector3(1.0, 0.0, 0.0),
+		rotation_per_copy: float = 0.0, scale_per_copy: float = 1.0) -> ArrayMesh:
+	var mdt := _get_mdt(mesh)
+	if mdt == null:
+		return null
+
+	var vert_count: int = mdt.get_vertex_count()
+	var face_count: int = mdt.get_face_count()
+
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	for copy_idx in count:
+		var t: float = float(copy_idx)
+		var copy_offset: Vector3 = offset * t
+		var copy_scale: float = pow(scale_per_copy, t)
+		var copy_rotation: float = rotation_per_copy * t
+
+		var basis := Basis.IDENTITY
+		if absf(copy_rotation) > 0.001:
+			basis = basis.rotated(offset.normalized(), deg_to_rad(copy_rotation))
+		basis = basis.scaled(Vector3.ONE * copy_scale)
+
+		for fi in face_count:
+			for fvi in 3:
+				var vi: int = mdt.get_face_vertex(fi, fvi)
+				var v: Vector3 = mdt.get_vertex(vi)
+				var n: Vector3 = mdt.get_vertex_normal(vi)
+				var transformed: Vector3 = basis * v + copy_offset
+				st.set_normal(basis * n)
+				st.add_vertex(transformed)
+
+	st.generate_normals()
+	return st.commit()
+
+
+## Screw: revolve mesh around an axis, creating rotational geometry.
+## Like Blender's Screw modifier.
+static func screw(mesh: Mesh, axis: Vector3 = Vector3.UP,
+		steps: int = 12, angle_degrees: float = 360.0,
+		height: float = 0.0) -> ArrayMesh:
+	var mdt := _get_mdt(mesh)
+	if mdt == null:
+		return null
+
+	var vert_count: int = mdt.get_vertex_count()
+	var face_count: int = mdt.get_face_count()
+	axis = axis.normalized()
+
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	for step in steps:
+		var t: float = float(step) / float(steps)
+		var angle: float = deg_to_rad(angle_degrees * t)
+		var y_offset: float = height * t
+		var basis := Basis().rotated(axis, angle)
+
+		for fi in face_count:
+			for fvi in 3:
+				var vi: int = mdt.get_face_vertex(fi, fvi)
+				var v: Vector3 = mdt.get_vertex(vi)
+				var n: Vector3 = mdt.get_vertex_normal(vi)
+				var transformed: Vector3 = basis * v + axis * y_offset
+				st.set_normal(basis * n)
+				st.add_vertex(transformed)
+
+	st.generate_normals()
+	return st.commit()
+
+
+# ═══════════════════════════════════════════════════════════════
 # MODIFIER PIPELINE — chain multiple modifiers
 # ═══════════════════════════════════════════════════════════════
 

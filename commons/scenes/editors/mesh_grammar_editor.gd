@@ -108,8 +108,12 @@ func _get_parameter_groups() -> Array:
 			{"id": "scatter_shape", "label": "Shape", "options": ["Sphere", "Spike"], "default": 0.0},
 			{"id": "scatter_size", "label": "Size", "min": 0.01, "max": 0.15, "step": 0.005, "default": 0.03},
 		]},
+		{"name": "Subdivision Surface", "params": [
+			{"id": "subdiv_iterations", "label": "Iterations", "min": 0.0, "max": 3.0, "step": 1.0, "default": 0.0},
+			{"id": "subdiv_smoothing", "label": "Smoothing", "min": 0.0, "max": 1.0, "step": 0.05, "default": 0.5},
+		]},
 		{"name": "Other Ops", "params": [
-			{"id": "split", "label": "Subdivide", "min": 0.0, "max": 1.0, "step": 1.0, "default": 0.0},
+			{"id": "split", "label": "Split (no smooth)", "min": 0.0, "max": 1.0, "step": 1.0, "default": 0.0},
 			{"id": "delete_top", "label": "Delete Top", "min": 0.0, "max": 1.0, "step": 1.0, "default": 0.0},
 			{"id": "scale_tile_size", "label": "Scale Tile", "min": 0.0, "max": 0.15, "step": 0.01, "default": 0.0},
 		]},
@@ -289,6 +293,13 @@ func _rebuild() -> void:
 			{"shape": scatter_shape_name, "density": p("scatter_density"),
 			 "min_size": p("scatter_size") * 0.5, "max_size": p("scatter_size"),
 			 "align_to_normal": true}))
+
+	# Subdivision surface (runs as final operation — smooths everything)
+	if int(p("subdiv_iterations")) > 0:
+		grammar.add_rule(SubdivisionSurfaceOp.new(
+			MeshSelector.all_faces(),
+			{"iterations": int(p("subdiv_iterations")),
+			 "smoothing": p("subdiv_smoothing", 0.5)}))
 
 	# Apply generations
 	var gen_count: int = clampi(int(p("generations", 1)), 1, 5)

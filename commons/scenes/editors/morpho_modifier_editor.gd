@@ -35,6 +35,18 @@ func _get_parameter_groups() -> Array:
 			{"id": "spherize", "label": "Spherize", "min": 0.0, "max": 1.0, "step": 0.05, "default": 0.0},
 			{"id": "inflate", "label": "Inflate", "min": -0.2, "max": 0.3, "step": 0.01, "default": 0.0},
 		]},
+		{"name": "Smooth", "params": [
+			{"id": "smooth_iters", "label": "Iterations", "min": 0.0, "max": 10.0, "step": 1.0, "default": 0.0},
+			{"id": "smooth_factor", "label": "Factor", "min": 0.1, "max": 1.0, "step": 0.05, "default": 0.5},
+		]},
+		{"name": "Generate", "params": [
+			{"id": "mirror_axis", "label": "Mirror", "options": ["Off", "X", "Y", "Z"], "default": 0.0},
+			{"id": "solidify", "label": "Solidify", "min": 0.0, "max": 0.2, "step": 0.005, "default": 0.0},
+			{"id": "array_count", "label": "Array Count", "min": 1.0, "max": 8.0, "step": 1.0, "default": 1.0},
+			{"id": "array_offset", "label": "Array Spacing", "min": 0.5, "max": 3.0, "step": 0.1, "default": 1.2},
+			{"id": "screw_steps", "label": "Screw Steps", "min": 0.0, "max": 24.0, "step": 1.0, "default": 0.0},
+			{"id": "screw_height", "label": "Screw Height", "min": 0.0, "max": 3.0, "step": 0.1, "default": 0.0},
+		]},
 	]
 
 
@@ -83,6 +95,30 @@ func _rebuild() -> void:
 
 	if absf(p("inflate")) > 0.005:
 		mesh = MorphoModifier.inflate(mesh, p("inflate"))
+
+	# Smooth (Laplacian)
+	if int(p("smooth_iters")) > 0:
+		mesh = MorphoModifier.smooth(mesh, int(p("smooth_iters")), p("smooth_factor", 0.5))
+
+	# Mirror
+	var mirror_axis: int = int(p("mirror_axis", 0))
+	if mirror_axis > 0 and mesh:
+		mesh = MorphoModifier.mirror(mesh, mirror_axis - 1)
+
+	# Solidify
+	if p("solidify") > 0.001 and mesh:
+		mesh = MorphoModifier.solidify(mesh, p("solidify"))
+
+	# Array
+	if int(p("array_count", 1)) > 1 and mesh:
+		var count: int = int(p("array_count"))
+		var spacing: float = p("array_offset", 1.2)
+		mesh = MorphoModifier.array_modifier(mesh, count, Vector3(spacing, 0, 0))
+
+	# Screw
+	if int(p("screw_steps")) > 0 and mesh:
+		mesh = MorphoModifier.screw(mesh, Vector3.UP, int(p("screw_steps")),
+			360.0, p("screw_height", 0.0))
 
 	if mesh:
 		var mi := MeshInstance3D.new()
