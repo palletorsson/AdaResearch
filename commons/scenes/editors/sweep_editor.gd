@@ -184,7 +184,7 @@ func _rebuild() -> void:
 		mat.albedo_color = Color(0.75, 0.82, 0.9)
 		mat.roughness = 0.3
 		mat.metallic = 0.15
-		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+		mat.cull_mode = BaseMaterial3D.CULL_BACK
 		mi.material_override = mat
 		content_root.add_child(mi)
 

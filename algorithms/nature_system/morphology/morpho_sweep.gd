@@ -243,6 +243,7 @@ static func sweep(
 	var ring_count: int = ring_verts.size()
 	var connect_count: int = ring_count - 1 if not close_path else ring_count
 
+	# Build quads between adjacent rings — no caps, no fills
 	for ri in connect_count:
 		var ring_a: Array = ring_verts[ri] as Array
 		var ring_b: Array = ring_verts[(ri + 1) % ring_count] as Array
@@ -258,17 +259,17 @@ static func sweep(
 			var t0: float = float(ri) / maxf(ring_count - 1.0, 1.0)
 			var t1: float = float(ri + 1) / maxf(ring_count - 1.0, 1.0)
 			var s0: float = float(si) / float(sides)
-			var s1: float = float(si + 1) / float(sides)
+			var s1: float = float(si_next) / float(sides)
 
-			var n1: Vector3 = (v10 - v00).cross(v01 - v00).normalized()
-			st.set_normal(n1); st.set_uv(Vector2(s0, t0)); st.add_vertex(v00)
-			st.set_normal(n1); st.set_uv(Vector2(s0, t1)); st.add_vertex(v10)
-			st.set_normal(n1); st.set_uv(Vector2(s1, t0)); st.add_vertex(v01)
+			# Triangle 1
+			st.set_uv(Vector2(s0, t0)); st.add_vertex(v00)
+			st.set_uv(Vector2(s0, t1)); st.add_vertex(v10)
+			st.set_uv(Vector2(s1, t0)); st.add_vertex(v01)
 
-			var n2: Vector3 = (v11 - v01).cross(v10 - v01).normalized()
-			st.set_normal(n2); st.set_uv(Vector2(s1, t0)); st.add_vertex(v01)
-			st.set_normal(n2); st.set_uv(Vector2(s0, t1)); st.add_vertex(v10)
-			st.set_normal(n2); st.set_uv(Vector2(s1, t1)); st.add_vertex(v11)
+			# Triangle 2
+			st.set_uv(Vector2(s1, t0)); st.add_vertex(v01)
+			st.set_uv(Vector2(s0, t1)); st.add_vertex(v10)
+			st.set_uv(Vector2(s1, t1)); st.add_vertex(v11)
 
 	st.generate_normals()
 	return st.commit()
