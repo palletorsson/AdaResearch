@@ -11816,6 +11816,36 @@
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
 			}
+		},
+		"achilles_tortoise": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "Zeno's paradox of Achilles and the Tortoise. Watch infinite steps converge to a finite limit: A_n = L*(1-1/2^n). Each step halves the gap — infinite steps, finite distance. The paradox dissolves in the limit.",
+			"dev_themes": [
+				"core",
+				"primitives"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "achilles_tortoise",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Achilles and the Tortoise",
+			"scene": "res://commons/primitives/combines/achilles_tortoise.tscn",
+			"size_group": "compact",
+			"tags": [
+				"zeno",
+				"limits",
+				"convergence",
+				"series",
+				"animation"
+			]
 		}
 	},
 	"registry_info": {

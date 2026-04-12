@@ -7419,6 +7419,36 @@
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
 			}
+		},
+		"rotatescalecubes": {
+			"category": "waves",
+			"complexity": "beginner",
+			"description": "Interactive transformation algorithms demonstrating rotation and scaling operations on geometric primitives. Shows how transform matrices compose.",
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"transformation"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"include_in_map_data": true,
+			"lookup_name": "rotatescalecubes",
+			"map_ready": true,
+			"map_sequences": [
+				"wavefunctions"
+			],
+			"name": "Rotate Scale Cubes",
+			"scene": "res://algorithms/transformation/rotatescalecubes/rotatescalecubes.tscn",
+			"size_group": "compact",
+			"tags": [
+				"rotation",
+				"scaling",
+				"transformation",
+				"cubes"
+			]
 		}
 	}
 }

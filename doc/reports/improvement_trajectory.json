@@ -1,16 +1,31 @@
 {
   "version": "1.0",
   "description": "Computed summary of improvement trends across BREATHE cycles. Updated after each breath's Harvest phase.",
-  "last_updated": "2026-04-11T00:45:00",
-  "total_breaths": 1,
+  "last_updated": "2026-04-12T09:30:00",
+  "total_breaths": 2,
   "global_avg_history": [
     {"date": "2026-04-08", "avg": 2.04, "breath_id": "baseline"},
-    {"date": "2026-04-11", "avg": 2.04, "breath_id": "2026-04-11T00:30"}
+    {"date": "2026-04-11", "avg": 2.04, "breath_id": "2026-04-11T00:30"},
+    {"date": "2026-04-12", "avg": 4.37, "breath_id": "2026-04-12T09:00"}
   ],
   "skill_effectiveness_cumulative": {
     "documentation_writing": {"total_calls": 5, "success_rate": 1.0, "avg_delta": 0},
-    "pathfinder_validation": {"total_calls": 5, "success_rate": 1.0, "avg_delta": 0}
+    "pathfinder_validation": {"total_calls": 5, "success_rate": 1.0, "avg_delta": 0},
+    "registry_repair": {"total_calls": 3, "success_rate": 1.0, "avg_delta": 0.21}
   },
   "stall_detected": false,
-  "stall_reason": null
+  "stall_reason": null,
+  "known_tooling_limits": [
+    {
+      "tool": "sequence_pipeline_scorer.py",
+      "limit": "Validation stage runs pathfinder with 10s timeout per map in a batch subprocess. Maps that pass individually (5/5 OK) still report 0% in scorer due to cumulative timeout. Workaround: run pathfinder individually per map, not via pipeline scorer.",
+      "first_seen": "2026-04-11T00:30",
+      "occurrence_count": 1
+    }
+  ],
+  "evening_harvest_notes": {
+    "date": "2026-04-12",
+    "summary": "Morning breath advanced primitives and wavefunctions from stage 3 to stage 5 each. 3 file changes: 2 registry entries added (achilles_tortoise, rotatescalecubes) + 1 typo fixed (ibomagneticresonator→biomagneticresonator). Registry repair is fastest HEAD advance after docs.",
+    "next_breath_recommendation": "Remaining stage-3 sequences: transformation (86%), color (96%), forces (98%), array_tutorial (85%), fractals (95%), qfeplaboratory (45%). Forces and color are closest to 100% — find and register their missing artifacts. qfeplaboratory needs most artifact work."
+  }
 }

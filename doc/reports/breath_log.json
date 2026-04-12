@@ -32,6 +32,33 @@
         "commons/maps/Trans_Pit/intent.md"
       ],
       "duration_minutes": 15
+    },
+    {
+      "breath_id": "2026-04-12T09:00",
+      "mode": "full",
+      "baseline_avg": 4.16,
+      "post_avg": 4.37,
+      "delta": 0.21,
+      "items_attempted": ["primitives_missing_artifact", "wavefunctions_missing_artifacts"],
+      "items_succeeded": ["primitives_missing_artifact", "wavefunctions_missing_artifacts"],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": ["registry_repair"],
+      "skill_effectiveness": {
+        "registry_repair": {"calls": 3, "succeeded": 3, "failed": 0}
+      },
+      "discoveries": [
+        "primitives at 99% artifacts: achilles_tortoise scene exists at commons/primitives/combines/ but was not in any registry. Adding 1 entry to primitives.json advanced sequence from stage 3 to stage 5.",
+        "wavefunctions at 99% artifacts: rotatescalecubes missing from registry (scene exists at algorithms/transformation/rotatescalecubes/). Added to wavefunctions.json. ibomagneticresonator was a typo for biomagneticresonator in WaveFunctions_Synthesis_Lab/map_data.json.",
+        "Two sequences jumped stage 3→5 in one breath: 3 file changes (2 registry additions + 1 typo fix). Registry gaps are the cheapest HEAD advance after documentation.",
+        "Pattern: when scorer reports 99% artifacts, there is exactly 1 artifact in a map not in the registry. Find it with layers.interactables cross-referenced against load_all_registry_scenes()."
+      ],
+      "files_changed": [
+        "commons/artifacts/registry/primitives.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "commons/maps/WaveFunctions_Synthesis_Lab/map_data.json"
+      ],
+      "duration_minutes": 20
     }
   ]
 }

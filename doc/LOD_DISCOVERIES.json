@@ -49,6 +49,12 @@
       "topic": "pipeline_scorer_validation_timeout",
       "insight": "Pipeline scorer validation stage runs pathfinder with 10s subprocess timeout per map. Maps pass individually but batch scoring reports 0% because cumulative processing exceeds limits. Fix: increase timeout or cache validation results.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-04-12T07:13:51.536145+00:00",
+      "topic": "registry_repair",
+      "insight": "When pipeline scorer reports 99% artifacts, exactly 1 artifact token in map_data.json (layers.interactables) is missing from all registries. Fix: cross-reference tokens against load_all_registry_scenes(). 3 repairs advanced 2 sequences from stage 3 to stage 5.",
+      "lod": 3
     }
   ]
 }
