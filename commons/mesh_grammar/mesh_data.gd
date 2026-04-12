@@ -499,6 +499,95 @@ func face_count() -> int:
 func vertex_count() -> int:
 	return vertices.size()
 
+## Count edges in the mesh.
+func edge_count() -> int:
+	_ensure_adjacency()
+	return _edges.size()
+
+## Euler characteristic: V - E + F. For a closed genus-0 surface (sphere), this is 2.
+## For a torus it's 0. For a surface with B boundary loops, it's 2 - 2G - B.
+func euler_characteristic() -> int:
+	return vertex_count() - edge_count() + face_count()
+
+## True if no edge has exactly 1 adjacent face (no boundary/holes).
+func is_closed() -> bool:
+	return get_boundary_edges().is_empty()
+
+## True if every edge has exactly 2 adjacent faces (manifold).
+## Non-manifold = an edge shared by 3+ faces.
+func is_manifold() -> bool:
+	_ensure_adjacency()
+	for edge_key in _edges:
+		var face_count_for_edge: int = (_edges[edge_key]["faces"] as PackedInt32Array).size()
+		if face_count_for_edge > 2:
+			return false
+	return true
+
+## Count boundary loops (connected components of boundary edges).
+func count_boundary_loops() -> int:
+	var boundary: Array[Vector2i] = get_boundary_edges()
+	if boundary.is_empty():
+		return 0
+	# Build adjacency for boundary edges via shared vertices
+	var visited: Dictionary = {}
+	var loops: int = 0
+	for edge in boundary:
+		var key: int = edge.x * 100000 + edge.y
+		if visited.has(key):
+			continue
+		loops += 1
+		# BFS along boundary edges sharing vertices
+		var frontier: Array[Vector2i] = [edge]
+		while not frontier.is_empty():
+			var current: Vector2i = frontier.pop_back()
+			var ckey: int = current.x * 100000 + current.y
+			if visited.has(ckey):
+				continue
+			visited[ckey] = true
+			for other in boundary:
+				var okey: int = other.x * 100000 + other.y
+				if visited.has(okey):
+					continue
+				if other.x == current.x or other.x == current.y or other.y == current.x or other.y == current.y:
+					frontier.append(other)
+	return loops
+
+## Count connected components (how many separate mesh islands).
+func count_components() -> int:
+	if faces.is_empty():
+		return 0
+	_ensure_adjacency()
+	var visited: Dictionary = {}
+	var components: int = 0
+	for fi in faces.size():
+		if visited.has(fi):
+			continue
+		components += 1
+		var frontier: Array[int] = [fi]
+		while not frontier.is_empty():
+			var current: int = frontier.pop_back()
+			if visited.has(current):
+				continue
+			visited[current] = true
+			for neighbor in get_face_neighbors(current):
+				if not visited.has(neighbor):
+					frontier.append(neighbor)
+	return components
+
+## Full topology report as a dictionary.
+func topology_report() -> Dictionary:
+	return {
+		"vertices": vertex_count(),
+		"edges": edge_count(),
+		"faces": face_count(),
+		"euler": euler_characteristic(),
+		"is_closed": is_closed(),
+		"is_manifold": is_manifold(),
+		"boundary_edges": get_boundary_edges().size(),
+		"boundary_loops": count_boundary_loops(),
+		"components": count_components(),
+	}
+
 # ---------------------------------------------------------------------------
 # Seed factory helpers
 # ---------------------------------------------------------------------------

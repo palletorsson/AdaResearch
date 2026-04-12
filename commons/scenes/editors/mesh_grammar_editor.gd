@@ -282,9 +282,21 @@ func _rebuild() -> void:
 	mi.material_override = mat
 	content_root.add_child(mi)
 
-	# Info label
+	# Topology report
+	var topo: Dictionary = mesh_data.topology_report()
 	var seed_names: Array[String] = ["Cube", "Icosahedron", "Sphere"]
+	var topo_status: String = ""
+	if topo["is_closed"] and topo["is_manifold"]:
+		topo_status = "CLOSED"
+	elif not topo["is_closed"]:
+		topo_status = "OPEN (%d holes)" % [topo["boundary_loops"]]
+	elif not topo["is_manifold"]:
+		topo_status = "NON-MANIFOLD"
+	if topo["components"] > 1:
+		topo_status += " %d parts" % [topo["components"]]
+
 	if info_label:
-		info_label.text = "%s | %d rules | %d gen | %dv %df" % [
+		info_label.text = "%s | %d rules %d gen | %dv %de %df | X=%d %s" % [
 			seed_names[seed_idx], grammar.rules.size(), grammar.generation,
-			mesh_data.vertex_count(), mesh_data.face_count()]
+			topo["vertices"], topo["edges"], topo["faces"],
+			topo["euler"], topo_status]
