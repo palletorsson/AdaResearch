@@ -156,12 +156,18 @@ func _rebuild() -> void:
 
 
 ## Apply material to all MeshInstance3D nodes in the tree (called deferred after _ready).
+## Forces override by setting BOTH material_override AND surface materials on the mesh.
 func _apply_material_deferred(root_node: Node, mat: Material) -> void:
 	_apply_mat_recursive(root_node, mat)
 
 func _apply_mat_recursive(node: Node, mat: Material) -> void:
 	if node is MeshInstance3D:
-		(node as MeshInstance3D).material_override = mat
+		var mi: MeshInstance3D = node as MeshInstance3D
+		mi.material_override = mat
+		# Also override surface materials on the mesh itself (some scripts set these)
+		if mi.mesh:
+			for si in mi.mesh.get_surface_count():
+				mi.mesh.surface_set_material(si, mat)
 	for child in node.get_children():
 		_apply_mat_recursive(child, mat)
 
