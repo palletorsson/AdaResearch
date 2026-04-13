@@ -41,7 +41,7 @@ static func create_fader_bank(count: int, labels: Array = [], params: Array = []
 	var start_x := -(count - 1) * gap / 2.0
 	for i in count:
 		var x := start_x + i * gap
-		var slider := load("res://commons/interactables/slider_smooth.tscn").instantiate()
+		var slider: Node = load("res://commons/interactables/slider_smooth.tscn").instantiate()
 		slider.name = "Fader_%d" % i
 		slider.transform.origin = Vector3(x, 0, 0.01)
 		slider.scale = Vector3.ONE * 0.8
@@ -74,7 +74,7 @@ static func create_knob_panel(count: int, labels: Array = []) -> Node3D:
 	var start_x := -(count - 1) * gap / 2.0
 	for i in count:
 		var x := start_x + i * gap
-		var knob := load("res://commons/interactables/dial_smooth.tscn").instantiate()
+		var knob: Node = load("res://commons/interactables/dial_smooth.tscn").instantiate()
 		knob.name = "Knob_%d" % i
 		knob.transform.origin = Vector3(x, -0.01, 0.01)
 		knob.scale = Vector3.ONE * 0.85
@@ -105,7 +105,7 @@ static func create_parameter_panel(count: int, labels: Array = [], defaults: Arr
 	var start_y := (count - 1) * gap / 2.0
 	for i in count:
 		var y := start_y - i * gap
-		var slider := load("res://commons/interactables/slider_horizontal.tscn").instantiate()
+		var slider: Node = load("res://commons/interactables/slider_horizontal.tscn").instantiate()
 		slider.name = "Param_%d" % i
 		slider.transform.origin = Vector3(0.02, y, 0.01)
 		slider.scale = Vector3.ONE * 0.7
@@ -120,9 +120,9 @@ static func create_parameter_panel(count: int, labels: Array = [], defaults: Arr
 			slider.set_normalized_value(defaults[i])
 
 	# Reset button at bottom
-	var btn_scene := load("res://commons/interactables/push_button.tscn")
+	var btn_scene: PackedScene = load("res://commons/interactables/push_button.tscn")
 	if btn_scene:
-		var btn := btn_scene.instantiate()
+		var btn: Node = btn_scene.instantiate()
 		btn.name = "ResetButton"
 		btn.transform.origin = Vector3(0, -panel_h / 2.0 + 0.025, 0.01)
 		btn.scale = Vector3.ONE * 0.6
@@ -146,7 +146,7 @@ static func create_button_grid(cols: int, rows: int, labels: Array = [], colors:
 	_add_panel(module, total_w, panel_h)
 	_add_title(module, "CONTROLS", total_w, panel_h)
 
-	var btn_scene := load("res://commons/interactables/push_button.tscn")
+	var btn_scene: PackedScene = load("res://commons/interactables/push_button.tscn")
 	if not btn_scene:
 		return module
 
@@ -157,7 +157,7 @@ static func create_button_grid(cols: int, rows: int, labels: Array = [], colors:
 		for c in cols:
 			var x := start_x + c * gap_x
 			var y := start_y - r * gap_y
-			var btn := btn_scene.instantiate()
+			var btn: Node = btn_scene.instantiate()
 			btn.name = "Btn_%d" % idx
 			btn.transform.origin = Vector3(x, y, 0.01)
 			btn.scale = Vector3.ONE * 0.7
@@ -184,7 +184,7 @@ static func create_mixer_strip(label: String = "CH") -> Node3D:
 	_add_title(module, label, total_w, panel_h)
 
 	# Fader (vertical)
-	var slider := load("res://commons/interactables/slider_smooth.tscn").instantiate()
+	var slider: Node = load("res://commons/interactables/slider_smooth.tscn").instantiate()
 	slider.name = "Fader"
 	slider.transform.origin = Vector3(0, 0.04, 0.01)
 	slider.scale = Vector3.ONE * 0.65
@@ -193,7 +193,7 @@ static func create_mixer_strip(label: String = "CH") -> Node3D:
 		slider.set_param_name("VOL")
 
 	# Pan knob
-	var knob := load("res://commons/interactables/dial_smooth.tscn").instantiate()
+	var knob: Node = load("res://commons/interactables/dial_smooth.tscn").instantiate()
 	knob.name = "Pan"
 	knob.transform.origin = Vector3(0, -0.06, 0.01)
 	knob.scale = Vector3.ONE * 0.5
@@ -202,9 +202,9 @@ static func create_mixer_strip(label: String = "CH") -> Node3D:
 		knob.set_param_name("PAN")
 
 	# Mute button
-	var btn_scene := load("res://commons/interactables/push_button.tscn")
+	var btn_scene: PackedScene = load("res://commons/interactables/push_button.tscn")
 	if btn_scene:
-		var btn := btn_scene.instantiate()
+		var btn: Node = btn_scene.instantiate()
 		btn.name = "Mute"
 		btn.transform.origin = Vector3(0, -0.12, 0.01)
 		btn.scale = Vector3.ONE * 0.5
@@ -221,14 +221,14 @@ static func create_monitor_faders(fader_count: int, labels: Array = [], mode: St
 	module.name = "MonitorFaders_%d" % fader_count
 
 	var gap := 0.06
-	var total_w := max(fader_count * gap + 0.04, 0.20)
+	var total_w: float = max(fader_count * gap + 0.04, 0.20)
 	var panel_h := 0.34
 
 	_add_panel(module, total_w, panel_h)
 	_add_title(module, "MONITOR", total_w, panel_h)
 
 	# Monitor display on top
-	var RackPassive := load("res://commons/interactables/RackPassiveElements.gd")
+	var RackPassive: GDScript = load("res://commons/interactables/RackPassiveElements.gd")
 	if RackPassive:
 		var monitor_container := Node3D.new()
 		monitor_container.transform.origin = Vector3(0, 0.06, 0.01)
@@ -239,7 +239,7 @@ static func create_monitor_faders(fader_count: int, labels: Array = [], mode: St
 	var start_x := -(fader_count - 1) * gap / 2.0
 	for i in fader_count:
 		var x := start_x + i * gap
-		var slider := load("res://commons/interactables/slider_smooth.tscn").instantiate()
+		var slider: Node = load("res://commons/interactables/slider_smooth.tscn").instantiate()
 		slider.name = "Fader_%d" % i
 		slider.transform.origin = Vector3(x, -0.06, 0.01)
 		slider.scale = Vector3.ONE * 0.55
