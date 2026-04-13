@@ -71,11 +71,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 shape = SubResource("3")
 
 [node name="BarMesh" type="MeshInstance3D" parent="JoystickOrigin/InteractableJoystick/JoystickBody"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0.05)
 mesh = SubResource("CylinderMesh_Stick")
 surface_material_override/0 = ExtResource("MatMetal")
 
 [node name="HandleMesh" type="MeshInstance3D" parent="JoystickOrigin/InteractableJoystick/JoystickBody"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
 mesh = SubResource("SphereMesh_Handle")
 surface_material_override/0 = ExtResource("MatAccent")
 

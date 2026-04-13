@@ -86,7 +86,7 @@ func _enforce_handle_constraints(_delta: float, _is_vertical: bool) -> void:
 	# Handle always moves along X in slider-local space (SliderOrigin rotation
 	# converts this to Y in world space for vertical sliders)
 	var handle_local_pos = _handle.transform.origin
-	var clamped_x = clamp(handle_local_pos.x, s_min - 0.005, s_max + 0.005)
+	var clamped_x = clamp(handle_local_pos.x, s_min, s_max)
 	_handle.transform.origin = Vector3(clamped_x, 0.0, 0.0)
 
 	# Lock rotation

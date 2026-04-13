@@ -1,6 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://hv8nnbkuccxi"]
 
 [ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_slider.gd" id="2"]
+[ext_resource type="Script" path="res://commons/interactables/slider_smooth.gd" id="1_wrapper"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="10_jjlwa"]
 [ext_resource type="Material" uid="uid://d3z4x5c6v7b8n" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
@@ -31,6 +32,7 @@ size = Vector3(0.04, 0.02, 0.03)
 size = Vector3(0.03, 0.002, 0.001)
 
 [node name="SliderZero" type="Node3D"]
+script = ExtResource("1_wrapper")
 
 [node name="Frame" type="StaticBody3D" parent="."]
 
