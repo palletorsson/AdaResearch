@@ -7450,5 +7450,80 @@
 				"cubes"
 			]
 		}
+	},
+	"demo_singles": {
+		"category": "wavefunctions",
+		"complexity": "beginner",
+		"description": "demo_singles — procedural demo element.",
+		"dev_themes": [
+			"commons",
+			"wavefunctions"
+		],
+		"footprint": [
+			3.0,
+			1.0,
+			0.5
+		],
+		"lookup_name": "demo_singles",
+		"map_ready": true,
+		"map_sequences": [
+			"wavefunctions"
+		],
+		"name": "demo_singles",
+		"scene": "res://commons/interactables/demo_singles.tscn",
+		"themes": [
+			"commons",
+			"wavefunctions"
+		]
+	},
+	"demo_passive": {
+		"category": "wavefunctions",
+		"complexity": "beginner",
+		"description": "demo_passive — procedural demo element.",
+		"dev_themes": [
+			"commons",
+			"wavefunctions"
+		],
+		"footprint": [
+			3.0,
+			1.0,
+			0.5
+		],
+		"lookup_name": "demo_passive",
+		"map_ready": true,
+		"map_sequences": [
+			"wavefunctions"
+		],
+		"name": "demo_passive",
+		"scene": "res://commons/interactables/demo_passive.tscn",
+		"themes": [
+			"commons",
+			"wavefunctions"
+		]
+	},
+	"demo_compounds": {
+		"category": "wavefunctions",
+		"complexity": "beginner",
+		"description": "demo_compounds — procedural demo element.",
+		"dev_themes": [
+			"commons",
+			"wavefunctions"
+		],
+		"footprint": [
+			3.0,
+			1.0,
+			0.5
+		],
+		"lookup_name": "demo_compounds",
+		"map_ready": true,
+		"map_sequences": [
+			"wavefunctions"
+		],
+		"name": "demo_compounds",
+		"scene": "res://commons/interactables/demo_compounds.tscn",
+		"themes": [
+			"commons",
+			"wavefunctions"
+		]
 	}
 }
