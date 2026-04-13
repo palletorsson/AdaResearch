@@ -6,19 +6,20 @@ const RackPassiveElementsScript = preload("res://commons/interactables/RackPassi
 ## For inspecting, testing, and improving each VR control element.
 ## Run this scene directly or place as artifact in a map.
 
-## Control definitions — ALL procedural (no scene loading, no RigidBody errors)
+## Control definitions — scenes loaded at runtime (not preload) to avoid
+## RigidBody3D script compilation errors with interactable_handle.gd
 var CONTROLS := [
-	{ "type": "button", "label": "BUTTON", "y": 0.0 },
-	{ "type": "button", "label": "BUTTON\nFRONT", "y": 0.0 },
-	{ "type": "knob", "label": "KNOB", "y": 0.0 },
-	{ "type": "slider_v", "label": "SLIDER V", "y": 0.0 },
-	{ "type": "slider_h", "label": "SLIDER H", "y": 0.0 },
-	{ "type": "slider_v", "label": "SNAP", "y": 0.0 },
-	{ "type": "slider_v", "label": "ZERO", "y": 0.0 },
-	{ "type": "lever", "label": "LEVER", "y": 0.0 },
-	{ "type": "wheel", "label": "WHEEL", "y": 0.0 },
-	{ "type": "joystick", "label": "JOYSTICK", "y": -0.05 },
-	{ "type": "xy_pad", "label": "XY PAD", "y": -0.05 },
+	{ "scene": "res://commons/interactables/push_button.tscn", "label": "BUTTON", "y": 0.0 },
+	{ "scene": "res://commons/interactables/push_button_front.tscn", "label": "BUTTON\nFRONT", "y": 0.0 },
+	{ "scene": "res://commons/interactables/dial_smooth.tscn", "label": "KNOB", "y": 0.0 },
+	{ "scene": "res://commons/interactables/slider_smooth.tscn", "label": "SLIDER V", "y": 0.0 },
+	{ "scene": "res://commons/interactables/slider_horizontal.tscn", "label": "SLIDER H", "y": 0.0 },
+	{ "scene": "res://commons/interactables/slider_snap.tscn", "label": "SNAP", "y": 0.0 },
+	{ "scene": "res://commons/interactables/slider_zero.tscn", "label": "ZERO", "y": 0.0 },
+	{ "scene": "res://commons/interactables/lever_smooth.tscn", "label": "LEVER", "y": 0.0 },
+	{ "scene": "res://commons/interactables/wheel_smooth.tscn", "label": "WHEEL", "y": 0.0 },
+	{ "scene": "res://commons/interactables/joystick_smooth.tscn", "label": "JOYSTICK", "y": -0.05 },
+	{ "scene": "res://commons/interactables/slider_plane.tscn", "label": "XY PAD", "y": -0.05 },
 ]
 
 const SPACING := 0.30  # meters between each control
@@ -98,13 +99,19 @@ func _spawn_controls():
 
 	for i in CONTROLS.size():
 		var def: Dictionary = CONTROLS[i]
-		var ctrl_type: String = def["type"]
+		var scene_path: String = def["scene"]
 		var label_text: String = def["label"]
 		var y_offset: float = def.get("y", 0.0)
 
 		var x_pos: float = start_x + i * SPACING
 
-		# Black accent frame
+		# Load and instantiate control
+		var scene := load(scene_path) as PackedScene
+		if not scene:
+			push_warning("InteractableDemo: Failed to load %s" % scene_path)
+			continue
+
+		# Black accent frame behind each control
 		var frame := MeshInstance3D.new()
 		frame.name = "Frame_%d" % i
 		var frame_box := BoxMesh.new()
@@ -118,12 +125,10 @@ func _spawn_controls():
 		frame.transform.origin = Vector3(x_pos, ROW_Y + y_offset, CONTROL_Z - 0.004)
 		add_child(frame)
 
-		# Build control procedurally (no scene loading)
-		var container := Node3D.new()
-		container.name = "Control_%d" % i
-		container.transform.origin = Vector3(x_pos, ROW_Y + y_offset, CONTROL_Z)
-		add_child(container)
-		_build_procedural_control(container, ctrl_type)
+		var control := scene.instantiate()
+		control.name = "Control_%d" % i
+		control.transform.origin = Vector3(x_pos, ROW_Y + y_offset, CONTROL_Z)
+		add_child(control)
 
 		# Name label below — white text with dark outline for contrast on gray
 		var lbl := Label3D.new()
@@ -311,318 +316,57 @@ func _spawn_compounds():
 		add_child(lbl)
 
 
-## Build a single control type procedurally (no scene loading)
-func _build_procedural_control(container: Node3D, ctrl_type: String) -> void:
-	var copper := Color(0.75, 0.38, 0.13)
-	var dark := Color(0.10, 0.10, 0.10)
-	var cream := Color(0.78, 0.75, 0.67)
-
-	match ctrl_type:
-		"button":
-			# Circle button
-			var house_mat := StandardMaterial3D.new()
-			house_mat.albedo_color = dark
-			var house := MeshInstance3D.new()
-			var hm := CylinderMesh.new()
-			hm.top_radius = 0.025
-			hm.bottom_radius = 0.025
-			hm.height = 0.008
-			hm.radial_segments = 24
-			house.mesh = hm
-			house.material_override = house_mat
-			house.rotation_degrees.x = 90
-			container.add_child(house)
-			var cap_mat := StandardMaterial3D.new()
-			cap_mat.albedo_color = copper
-			cap_mat.emission_enabled = true
-			cap_mat.emission = copper
-			cap_mat.emission_energy_multiplier = 0.3
-			var cap := MeshInstance3D.new()
-			var cm := CylinderMesh.new()
-			cm.top_radius = 0.018
-			cm.bottom_radius = 0.018
-			cm.height = 0.01
-			cm.radial_segments = 24
-			cap.mesh = cm
-			cap.material_override = cap_mat
-			cap.rotation_degrees.x = 90
-			cap.transform.origin.z = 0.006
-			container.add_child(cap)
-
-		"knob":
-			# Knob with indicator
-			var body_mat := StandardMaterial3D.new()
-			body_mat.albedo_color = Color(0.12, 0.12, 0.12)
-			body_mat.metallic = 0.7
-			body_mat.roughness = 0.3
-			var body := MeshInstance3D.new()
-			var bm := CylinderMesh.new()
-			bm.top_radius = 0.025
-			bm.bottom_radius = 0.028
-			bm.height = 0.012
-			bm.radial_segments = 32
-			body.mesh = bm
-			body.material_override = body_mat
-			body.rotation_degrees.x = 90
-			body.transform.origin.z = 0.006
-			container.add_child(body)
-			# Ring
-			var ring_mat := StandardMaterial3D.new()
-			ring_mat.albedo_color = dark
-			var ring := MeshInstance3D.new()
-			var rm := TorusMesh.new()
-			rm.inner_radius = 0.030
-			rm.outer_radius = 0.033
-			rm.rings = 8
-			rm.ring_segments = 24
-			ring.mesh = rm
-			ring.material_override = ring_mat
-			container.add_child(ring)
-			# Indicator
-			var ind_mat := StandardMaterial3D.new()
-			ind_mat.albedo_color = copper
-			ind_mat.emission_enabled = true
-			ind_mat.emission = copper
-			ind_mat.emission_energy_multiplier = 0.5
-			var ind := MeshInstance3D.new()
-			var im := BoxMesh.new()
-			im.size = Vector3(0.002, 0.018, 0.002)
-			ind.mesh = im
-			ind.material_override = ind_mat
-			ind.transform.origin = Vector3(0, 0.015, 0.013)
-			container.add_child(ind)
-
-		"slider_v":
-			_make_slider_v(container, Vector3.ZERO, 1.0)
-
-		"slider_h":
-			_make_slider_h(container, Vector3.ZERO, 1.0)
-
-		"lever":
-			# Slot + bar + ball
-			var slot_mat := StandardMaterial3D.new()
-			slot_mat.albedo_color = Color(0.50, 0.47, 0.42)
-			var slot := MeshInstance3D.new()
-			var sm := BoxMesh.new()
-			sm.size = Vector3(0.008, 0.08, 0.004)
-			slot.mesh = sm
-			slot.material_override = slot_mat
-			container.add_child(slot)
-			var bar_mat := StandardMaterial3D.new()
-			bar_mat.albedo_color = Color(0.55, 0.55, 0.55)
-			bar_mat.metallic = 0.8
-			bar_mat.roughness = 0.2
-			var bar := MeshInstance3D.new()
-			var barm := BoxMesh.new()
-			barm.size = Vector3(0.004, 0.04, 0.004)
-			bar.mesh = barm
-			bar.material_override = bar_mat
-			bar.transform.origin = Vector3(0, 0.01, 0.006)
-			container.add_child(bar)
-			var ball_mat := StandardMaterial3D.new()
-			ball_mat.albedo_color = copper
-			ball_mat.emission_enabled = true
-			ball_mat.emission = copper
-			ball_mat.emission_energy_multiplier = 0.3
-			var ball := MeshInstance3D.new()
-			var ballm := SphereMesh.new()
-			ballm.radius = 0.008
-			ballm.height = 0.016
-			ball.mesh = ballm
-			ball.material_override = ball_mat
-			ball.transform.origin = Vector3(0, 0.035, 0.006)
-			container.add_child(ball)
-
-		"wheel":
-			# Torus ring + dark body
-			var ring_mat := StandardMaterial3D.new()
-			ring_mat.albedo_color = dark
-			var ring := MeshInstance3D.new()
-			var rm := TorusMesh.new()
-			rm.inner_radius = 0.035
-			rm.outer_radius = 0.038
-			rm.rings = 8
-			rm.ring_segments = 32
-			ring.mesh = rm
-			ring.material_override = ring_mat
-			container.add_child(ring)
-			var body_mat := StandardMaterial3D.new()
-			body_mat.albedo_color = Color(0.15, 0.14, 0.13)
-			body_mat.metallic = 0.5
-			body_mat.roughness = 0.4
-			var body := MeshInstance3D.new()
-			var bm := CylinderMesh.new()
-			bm.top_radius = 0.030
-			bm.bottom_radius = 0.030
-			bm.height = 0.015
-			bm.radial_segments = 24
-			body.mesh = bm
-			body.material_override = body_mat
-			body.rotation_degrees.x = 90
-			container.add_child(body)
-			var ind_mat := StandardMaterial3D.new()
-			ind_mat.albedo_color = copper
-			ind_mat.emission_enabled = true
-			ind_mat.emission = copper
-			ind_mat.emission_energy_multiplier = 0.5
-			var ind := MeshInstance3D.new()
-			var im := BoxMesh.new()
-			im.size = Vector3(0.002, 0.015, 0.001)
-			ind.mesh = im
-			ind.material_override = ind_mat
-			ind.transform.origin = Vector3(0, 0.020, 0.009)
-			container.add_child(ind)
-
-		"joystick":
-			# Base + stick + ball
-			var base_mat := StandardMaterial3D.new()
-			base_mat.albedo_color = dark
-			var base := MeshInstance3D.new()
-			var basem := CylinderMesh.new()
-			basem.top_radius = 0.035
-			basem.bottom_radius = 0.035
-			basem.height = 0.006
-			basem.radial_segments = 24
-			base.mesh = basem
-			base.material_override = base_mat
-			base.rotation_degrees.x = 90
-			container.add_child(base)
-			var stick_mat := StandardMaterial3D.new()
-			stick_mat.albedo_color = Color(0.55, 0.55, 0.55)
-			stick_mat.metallic = 0.8
-			stick_mat.roughness = 0.2
-			var stick := MeshInstance3D.new()
-			var stickm := CylinderMesh.new()
-			stickm.top_radius = 0.005
-			stickm.bottom_radius = 0.005
-			stickm.height = 0.05
-			stickm.radial_segments = 8
-			stick.mesh = stickm
-			stick.material_override = stick_mat
-			stick.rotation_degrees.x = 90
-			stick.transform.origin.z = 0.025
-			container.add_child(stick)
-			var ball_mat := StandardMaterial3D.new()
-			ball_mat.albedo_color = copper
-			ball_mat.emission_enabled = true
-			ball_mat.emission = copper
-			ball_mat.emission_energy_multiplier = 0.3
-			var ball := MeshInstance3D.new()
-			var ballm := SphereMesh.new()
-			ballm.radius = 0.012
-			ballm.height = 0.024
-			ball.mesh = ballm
-			ball.material_override = ball_mat
-			ball.transform.origin.z = 0.052
-			container.add_child(ball)
-
-		"xy_pad":
-			# Dark square pad + grid + cursor
-			var pad_mat := StandardMaterial3D.new()
-			pad_mat.albedo_color = Color(0.12, 0.12, 0.12)
-			var pad := MeshInstance3D.new()
-			var pm := BoxMesh.new()
-			pm.size = Vector3(0.08, 0.08, 0.004)
-			pad.mesh = pm
-			pad.material_override = pad_mat
-			container.add_child(pad)
-			var cursor_mat := StandardMaterial3D.new()
-			cursor_mat.albedo_color = copper
-			cursor_mat.emission_enabled = true
-			cursor_mat.emission = copper
-			cursor_mat.emission_energy_multiplier = 0.6
-			var cursor := MeshInstance3D.new()
-			var curm := SphereMesh.new()
-			curm.radius = 0.005
-			curm.height = 0.01
-			cursor.mesh = curm
-			cursor.material_override = cursor_mat
-			cursor.transform.origin = Vector3(0.01, -0.01, 0.005)
-			container.add_child(cursor)
-
-
-## Build a simple procedural slider visual (no XRTools, no scene loading)
-static func _make_slider_v(parent: Node3D, pos: Vector3, sc: float) -> void:
-	var track_mat := StandardMaterial3D.new()
-	track_mat.albedo_color = Color(0.10, 0.10, 0.10)
-	var handle_mat := StandardMaterial3D.new()
-	handle_mat.albedo_color = Color(0.75, 0.38, 0.13)
-	handle_mat.emission_enabled = true
-	handle_mat.emission = Color(0.75, 0.38, 0.13)
-	handle_mat.emission_energy_multiplier = 0.3
-
-	var track := MeshInstance3D.new()
-	var tb := BoxMesh.new()
-	tb.size = Vector3(0.004, 0.12, 0.003) * sc
-	track.mesh = tb
-	track.material_override = track_mat
-	track.transform.origin = pos
-	parent.add_child(track)
-
-	var handle := MeshInstance3D.new()
-	var hb := BoxMesh.new()
-	hb.size = Vector3(0.03, 0.008, 0.01) * sc
-	handle.mesh = hb
-	handle.material_override = handle_mat
-	handle.transform.origin = pos + Vector3(0, 0.02 * sc, 0.005 * sc)
-	parent.add_child(handle)
-
-
-static func _make_slider_h(parent: Node3D, pos: Vector3, sc: float) -> void:
-	var track_mat := StandardMaterial3D.new()
-	track_mat.albedo_color = Color(0.10, 0.10, 0.10)
-	var handle_mat := StandardMaterial3D.new()
-	handle_mat.albedo_color = Color(0.75, 0.38, 0.13)
-	handle_mat.emission_enabled = true
-	handle_mat.emission = Color(0.75, 0.38, 0.13)
-	handle_mat.emission_energy_multiplier = 0.3
-
-	var track := MeshInstance3D.new()
-	var tb := BoxMesh.new()
-	tb.size = Vector3(0.12, 0.004, 0.003) * sc
-	track.mesh = tb
-	track.material_override = track_mat
-	track.transform.origin = pos
-	parent.add_child(track)
-
-	var handle := MeshInstance3D.new()
-	var hb := BoxMesh.new()
-	hb.size = Vector3(0.008, 0.025, 0.01) * sc
-	handle.mesh = hb
-	handle.material_override = handle_mat
-	handle.transform.origin = pos + Vector3(0.02 * sc, 0, 0.005 * sc)
-	parent.add_child(handle)
-
-
 func _build_compound(container: Node3D, comp_type: String, count: int) -> void:
 	match comp_type:
 		"sliders_v":
+			# Multiple vertical sliders side by side
 			var gap := 0.035
 			var offset := -(count - 1) * gap / 2.0
 			for j in count:
-				_make_slider_v(container, Vector3(offset + j * gap, 0, 0), 0.8)
+				var scene := load("res://commons/interactables/slider_smooth.tscn") as PackedScene
+				if scene:
+					var ctrl := scene.instantiate()
+					ctrl.transform.origin = Vector3(offset + j * gap, 0, 0)
+					ctrl.scale = Vector3.ONE * 0.5
+					container.add_child(ctrl)
 
 		"sliders_h":
+			# Multiple horizontal sliders stacked
 			var gap := 0.035
 			var offset := -(count - 1) * gap / 2.0
 			for j in count:
-				_make_slider_h(container, Vector3(0, offset + j * gap, 0), 0.7)
+				var scene := load("res://commons/interactables/slider_horizontal.tscn") as PackedScene
+				if scene:
+					var ctrl := scene.instantiate()
+					ctrl.transform.origin = Vector3(0, offset + j * gap, 0)
+					ctrl.scale = Vector3.ONE * 0.5
+					container.add_child(ctrl)
 
 		"monitor_sliders":
+			# Monitor on top, sliders below
 			RackPassiveElementsScript.build_monitor(container, 0.09, 0.04)
+			# Shift monitor up
 			for child in container.get_children():
 				child.transform.origin.y += 0.03
+			# Add sliders below
 			var gap := 0.03
-			var off := -(count - 1) * gap / 2.0
+			var offset := -(count - 1) * gap / 2.0
 			for j in count:
-				_make_slider_v(container, Vector3(off + j * gap, -0.03, 0), 0.6)
+				var scene := load("res://commons/interactables/slider_smooth.tscn") as PackedScene
+				if scene:
+					var ctrl := scene.instantiate()
+					ctrl.transform.origin = Vector3(offset + j * gap, -0.03, 0)
+					ctrl.scale = Vector3.ONE * 0.4
+					container.add_child(ctrl)
 
 		"speaker_meters":
+			# Speaker on top, meters below
 			var sp := Node3D.new()
 			sp.transform.origin = Vector3(0, 0.025, 0)
 			sp.scale = Vector3.ONE * 0.6
 			container.add_child(sp)
 			RackPassiveElementsScript.build_speaker_dots(sp)
+			# Meters below
 			var gap := 0.035
 			for j in count:
 				var m := Node3D.new()
@@ -632,6 +376,7 @@ func _build_compound(container: Node3D, comp_type: String, count: int) -> void:
 				RackPassiveElementsScript.build_vu_meter_v(m)
 
 		"meters_v":
+			# Multiple VU meters side by side
 			var gap := 0.03
 			var offset := -(count - 1) * gap / 2.0
 			for j in count:
