@@ -10,7 +10,7 @@ const RackPassiveElementsScript = preload("res://commons/interactables/RackPassi
 ## RigidBody3D script compilation errors with interactable_handle.gd
 var CONTROLS := [
 	{ "scene": "res://commons/interactables/push_button.tscn", "label": "BUTTON", "y": 0.0 },
-	{ "scene": "res://commons/interactables/push_button_front.tscn", "label": "BUTTON\nFRONT", "y": 0.0 },
+	{ "scene": "res://commons/interactables/push_button_front.tscn", "label": "BUTTON\nFRONT", "y": 0.0, "rot_y": 180.0 },
 	{ "scene": "res://commons/interactables/dial_smooth.tscn", "label": "KNOB", "y": 0.0 },
 	{ "scene": "res://commons/interactables/slider_smooth.tscn", "label": "SLIDER V", "y": 0.0 },
 	{ "scene": "res://commons/interactables/slider_horizontal.tscn", "label": "SLIDER H", "y": 0.0 },
@@ -20,6 +20,14 @@ var CONTROLS := [
 	{ "scene": "res://commons/interactables/wheel_smooth.tscn", "label": "WHEEL", "y": 0.0 },
 	{ "scene": "res://commons/interactables/joystick_smooth.tscn", "label": "JOYSTICK", "y": -0.05 },
 	{ "scene": "res://commons/interactables/slider_plane.tscn", "label": "XY PAD", "y": -0.05 },
+]
+
+## Additional button types (procedural, added to Row 1 overflow)
+const EXTRA_BUTTONS := [
+	{ "type": "rect_sm", "label": "RECT SM" },
+	{ "type": "rect_wide", "label": "RECT WIDE" },
+	{ "type": "rect_tall", "label": "RECT TALL" },
+	{ "type": "toggle", "label": "TOGGLE" },
 ]
 
 ## Row 4: New prototype modules — procedural versions of the interface_prototypes preset
@@ -238,6 +246,8 @@ func _spawn_controls():
 		var control := scene.instantiate()
 		control.name = "Control_%d" % i
 		control.transform.origin = Vector3(x_pos, ROW_Y + y_offset, CONTROL_Z)
+		if def.has("rot_y"):
+			control.rotation_degrees.y = def["rot_y"]
 		add_child(control)
 
 		# Name label below — white text with dark outline for contrast on gray
@@ -266,6 +276,114 @@ func _spawn_controls():
 		idx_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		idx_lbl.transform.origin = Vector3(x_pos, ROW_Y + 0.20, CONTROL_Z + 0.01)
 		add_child(idx_lbl)
+
+	# Extra procedural buttons after the scene-loaded controls
+	var copper := Color(0.75, 0.38, 0.13)
+	var dark := Color(0.10, 0.10, 0.10)
+	for j in EXTRA_BUTTONS.size():
+		var bdef: Dictionary = EXTRA_BUTTONS[j]
+		var bx: float = start_x + (CONTROLS.size() + j) * SPACING
+		var bc := Node3D.new()
+		bc.name = "ExtraBtn_%d" % j
+		bc.transform.origin = Vector3(bx, ROW_Y, CONTROL_Z)
+		add_child(bc)
+		_build_extra_button(bc, bdef["type"], copper, dark)
+		var blbl := Label3D.new()
+		blbl.text = bdef["label"]
+		blbl.font_size = 28
+		blbl.pixel_size = 0.0006
+		blbl.modulate = Color(1, 1, 1)
+		blbl.outline_size = 5
+		blbl.outline_modulate = Color(0, 0, 0, 0.9)
+		blbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		blbl.transform.origin = Vector3(bx, ROW_Y + LABEL_Y_OFFSET, CONTROL_Z + 0.01)
+		add_child(blbl)
+
+
+func _build_extra_button(c: Node3D, t: String, copper: Color, dark: Color) -> void:
+	match t:
+		"rect_sm":
+			# Small rectangular button (Rams power switch)
+			var btn := MeshInstance3D.new()
+			btn.mesh = BoxMesh.new()
+			btn.mesh.size = Vector3(0.025, 0.015, 0.008)
+			btn.material_override = _make_mat(dark, 0.0)
+			btn.transform.origin.z = 0.004
+			c.add_child(btn)
+			var ind := MeshInstance3D.new()
+			ind.mesh = BoxMesh.new()
+			ind.mesh.size = Vector3(0.008, 0.003, 0.001)
+			ind.material_override = _make_mat(copper, 0.4)
+			ind.transform.origin = Vector3(0, 0, 0.009)
+			c.add_child(ind)
+		"rect_wide":
+			# Wide rectangular rocker
+			var btn := MeshInstance3D.new()
+			btn.mesh = BoxMesh.new()
+			btn.mesh.size = Vector3(0.06, 0.02, 0.008)
+			btn.material_override = _make_mat(dark, 0.0)
+			btn.transform.origin.z = 0.004
+			c.add_child(btn)
+			# Divider line in center
+			var div := MeshInstance3D.new()
+			div.mesh = BoxMesh.new()
+			div.mesh.size = Vector3(0.001, 0.018, 0.001)
+			div.material_override = _make_mat(Color(0.3, 0.3, 0.3), 0.0)
+			div.transform.origin = Vector3(0, 0, 0.009)
+			c.add_child(div)
+			var ind := MeshInstance3D.new()
+			ind.mesh = BoxMesh.new()
+			ind.mesh.size = Vector3(0.005, 0.003, 0.001)
+			ind.material_override = _make_mat(copper, 0.4)
+			ind.transform.origin = Vector3(-0.015, 0, 0.009)
+			c.add_child(ind)
+		"rect_tall":
+			# Tall rectangular slider-button
+			var btn := MeshInstance3D.new()
+			btn.mesh = BoxMesh.new()
+			btn.mesh.size = Vector3(0.02, 0.04, 0.008)
+			btn.material_override = _make_mat(dark, 0.0)
+			btn.transform.origin.z = 0.004
+			c.add_child(btn)
+			var ind := MeshInstance3D.new()
+			ind.mesh = BoxMesh.new()
+			ind.mesh.size = Vector3(0.012, 0.003, 0.001)
+			ind.material_override = _make_mat(copper, 0.4)
+			ind.transform.origin = Vector3(0, 0.012, 0.009)
+			c.add_child(ind)
+		"toggle":
+			# Round toggle with on/off states
+			var ring := MeshInstance3D.new()
+			ring.mesh = TorusMesh.new()
+			ring.mesh.inner_radius = 0.012
+			ring.mesh.outer_radius = 0.015
+			ring.mesh.rings = 8
+			ring.mesh.ring_segments = 24
+			ring.material_override = _make_mat(dark, 0.0)
+			c.add_child(ring)
+			var cap := MeshInstance3D.new()
+			var cm := CylinderMesh.new()
+			cm.top_radius = 0.010
+			cm.bottom_radius = 0.010
+			cm.height = 0.008
+			cm.radial_segments = 24
+			cap.mesh = cm
+			cap.material_override = _make_mat(copper, 0.3)
+			cap.rotation_degrees.x = 90
+			cap.transform.origin.z = 0.005
+			c.add_child(cap)
+
+
+static func _make_mat(color: Color, emission: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = color
+	m.metallic = 0.5
+	m.roughness = 0.4
+	if emission > 0:
+		m.emission_enabled = true
+		m.emission = color
+		m.emission_energy_multiplier = emission
+	return m
 
 
 func _spawn_passive_elements():

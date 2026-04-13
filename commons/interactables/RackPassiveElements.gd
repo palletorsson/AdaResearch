@@ -330,7 +330,7 @@ func _draw() -> void:
 	for gi in 10:
 		draw_line(Vector2(float(gi) / 9.0 * w, 0), Vector2(float(gi) / 9.0 * w, h), grid_c, 0.5)
 	draw_line(Vector2(0, h / 2), Vector2(w, h / 2), Color(0.15, 0.12, 0.10, 0.5), 1.0)
-	var copper: Color = Color(0.75, 0.38, 0.13)
+	var copper: Color = Color(0.2, 0.9, 0.3)
 	if _mode == "spectrum":
 		var si: int = 0
 		while si < int(w):
@@ -346,7 +346,7 @@ func _draw() -> void:
 			var ly: float = sin(_time * 2.1 + t * PI * 6.0) * 0.4 + 0.5
 			var pt: Vector2 = Vector2(lx * w, ly * h)
 			if li > 0:
-				draw_line(prev, pt, copper, 1.5)
+				draw_line(prev, pt, copper, 2.5)
 			prev = pt
 	else:
 		var cycles: float = 3.0 if _mode == "scope" else 2.0
@@ -356,7 +356,7 @@ func _draw() -> void:
 			var yy: float = h / 2.0 + sin(t * PI * 2.0 * cycles + _time * 3.0) * h * 0.35
 			var pt: Vector2 = Vector2(wi, yy)
 			if wi > 0:
-				draw_line(prev, pt, copper, 1.5)
+				draw_line(prev, pt, copper, 2.5)
 			prev = pt
 """ % mode
 	script.reload()
@@ -476,7 +476,7 @@ func _draw() -> void:
 	var total_w: float = text_w + w
 	var offset: float = fmod(_time * scroll_speed, total_w)
 	var x: float = w - offset
-	var copper: Color = Color(0.75, 0.38, 0.13)
+	var copper: Color = Color(0.2, 0.9, 0.3)
 	draw_string(font, Vector2(x, h * 0.65), _text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, copper)
 """ % escaped_text
 	script.reload()
