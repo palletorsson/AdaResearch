@@ -1,5 +1,7 @@
 extends Node3D
 
+const RackPassiveElementsScript = preload("res://commons/interactables/RackPassiveElements.gd")
+
 ## Interactable Demo — one row of every control type with labels.
 ## For inspecting, testing, and improving each VR control element.
 ## Run this scene directly or place as artifact in a map.
@@ -26,11 +28,25 @@ const LABEL_Y_OFFSET := -0.18  # below control center
 const ROW_Y := 1.1  # height of row center
 
 
+const PASSIVE_ELEMENTS = [
+	{ "builder": "build_speaker_dots", "label": "SPEAKER\nDOTS" },
+	{ "builder": "build_speaker_lines", "label": "SPEAKER\nLINES" },
+	{ "builder": "build_speaker_grid", "label": "SPEAKER\nGRID" },
+	{ "builder": "build_vu_meter_v", "label": "VU METER\nV" },
+	{ "builder": "build_vu_meter_h", "label": "VU METER\nH" },
+	{ "builder": "build_monitor_sm", "label": "MONITOR\nSM" },
+	{ "builder": "build_monitor_lg", "label": "MONITOR\nLG" },
+]
+
+const ROW2_Y := 0.65  # Second row below first
+
+
 func _ready():
 	_build_back_panel()
 	_spawn_controls()
+	_spawn_passive_elements()
 	_add_title()
-	print("InteractableDemo: %d controls spawned in a row" % CONTROLS.size())
+	print("InteractableDemo: %d controls + %d passive elements" % [CONTROLS.size(), PASSIVE_ELEMENTS.size()])
 
 
 func _build_back_panel():
@@ -126,6 +142,93 @@ func _spawn_controls():
 		idx_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		idx_lbl.transform.origin = Vector3(x_pos, ROW_Y + 0.20, CONTROL_Z + 0.01)
 		add_child(idx_lbl)
+
+
+func _spawn_passive_elements():
+	var start_x: float = -(PASSIVE_ELEMENTS.size() - 1) * SPACING / 2.0
+
+	# Back panel for row 2
+	var total_w2: float = PASSIVE_ELEMENTS.size() * SPACING + 0.2
+	var panel2 := MeshInstance3D.new()
+	panel2.name = "BackPanel2"
+	var box2 := BoxMesh.new()
+	box2.size = Vector3(total_w2, 0.35, 0.008)
+	panel2.mesh = box2
+	var mat2 := StandardMaterial3D.new()
+	mat2.albedo_color = Color(0.50, 0.48, 0.44)
+	mat2.metallic = 0.3
+	mat2.roughness = 0.6
+	panel2.material_override = mat2
+	panel2.transform.origin = Vector3(0, ROW2_Y, -0.005)
+	add_child(panel2)
+
+	# Title for row 2
+	var title2 := Label3D.new()
+	title2.text = "PASSIVE ELEMENTS"
+	title2.font_size = 30
+	title2.pixel_size = 0.0007
+	title2.modulate = Color(1.0, 1.0, 1.0)
+	title2.outline_size = 5
+	title2.outline_modulate = Color(0.0, 0.0, 0.0, 0.9)
+	title2.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title2.transform.origin = Vector3(0, ROW2_Y + 0.22, CONTROL_Z + 0.01)
+	add_child(title2)
+
+	for i in PASSIVE_ELEMENTS.size():
+		var def: Dictionary = PASSIVE_ELEMENTS[i]
+		var builder: String = def["builder"]
+		var label_text: String = def["label"]
+		var x_pos: float = start_x + i * SPACING
+
+		# Black accent frame
+		var frame := MeshInstance3D.new()
+		frame.name = "PassiveFrame_%d" % i
+		var frame_box := BoxMesh.new()
+		frame_box.size = Vector3(0.12, 0.14, 0.004)
+		frame.mesh = frame_box
+		var frame_mat := StandardMaterial3D.new()
+		frame_mat.albedo_color = Color(0.08, 0.08, 0.08)
+		frame_mat.metallic = 0.3
+		frame_mat.roughness = 0.7
+		frame.material_override = frame_mat
+		frame.transform.origin = Vector3(x_pos, ROW2_Y, CONTROL_Z - 0.004)
+		add_child(frame)
+
+		# Build the element
+		var element := Node3D.new()
+		element.name = "Passive_%d" % i
+		element.transform.origin = Vector3(x_pos, ROW2_Y, CONTROL_Z)
+		add_child(element)
+
+		match builder:
+			"build_speaker_dots":
+				RackPassiveElementsScript.build_speaker_dots(element)
+			"build_speaker_lines":
+				RackPassiveElementsScript.build_speaker_lines(element)
+			"build_speaker_grid":
+				RackPassiveElementsScript.build_speaker_grid(element)
+			"build_vu_meter_v":
+				RackPassiveElementsScript.build_vu_meter_v(element)
+			"build_vu_meter_h":
+				RackPassiveElementsScript.build_vu_meter_h(element)
+			"build_monitor_sm":
+				RackPassiveElementsScript.build_monitor(element, 0.09, 0.06)
+			"build_monitor_lg":
+				RackPassiveElementsScript.build_monitor(element, 0.12, 0.08)
+
+		# Label
+		var lbl := Label3D.new()
+		lbl.name = "PassiveLabel_%d" % i
+		lbl.text = label_text
+		lbl.font_size = 28
+		lbl.pixel_size = 0.0006
+		lbl.modulate = Color(1.0, 1.0, 1.0)
+		lbl.outline_size = 5
+		lbl.outline_modulate = Color(0.0, 0.0, 0.0, 0.9)
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		lbl.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+		lbl.transform.origin = Vector3(x_pos, ROW2_Y - 0.12, CONTROL_Z + 0.01)
+		add_child(lbl)
 
 
 func _add_title():
