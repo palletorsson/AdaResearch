@@ -74,7 +74,7 @@ func _process(delta: float) -> void:
 	# Enforce handle constraints to keep it locked to track
 	_enforce_handle_constraints(delta, is_vertical)
 
-func _enforce_handle_constraints(_delta: float, is_vertical: bool) -> void:
+func _enforce_handle_constraints(_delta: float, _is_vertical: bool) -> void:
 	if not _handle or not _handle_origin:
 		return
 
@@ -83,16 +83,11 @@ func _enforce_handle_constraints(_delta: float, is_vertical: bool) -> void:
 	if s_min == null: s_min = 0.0
 	if s_max == null: s_max = 0.14
 
+	# Handle always moves along X in slider-local space (SliderOrigin rotation
+	# converts this to Y in world space for vertical sliders)
 	var handle_local_pos = _handle.transform.origin
-
-	if is_vertical:
-		# Clamp Y to slider limits + lock X and Z to 0
-		var clamped_y = clamp(handle_local_pos.y, s_min - 0.005, s_max + 0.005)
-		_handle.transform.origin = Vector3(0.0, clamped_y, 0.0)
-	else:
-		# Clamp X to slider limits + lock Y and Z to 0
-		var clamped_x = clamp(handle_local_pos.x, s_min - 0.005, s_max + 0.005)
-		_handle.transform.origin = Vector3(clamped_x, 0.0, 0.0)
+	var clamped_x = clamp(handle_local_pos.x, s_min - 0.005, s_max + 0.005)
+	_handle.transform.origin = Vector3(clamped_x, 0.0, 0.0)
 
 	# Lock rotation
 	_handle.transform.basis = Basis.IDENTITY
