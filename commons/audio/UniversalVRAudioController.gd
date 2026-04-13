@@ -592,7 +592,7 @@ func _spawn_controls_from_json():
 
 	# Cell background material (subtle dark inset per control)
 	var cell_bg_mat := StandardMaterial3D.new()
-	cell_bg_mat.albedo_color = Color(0.55, 0.53, 0.50)
+	cell_bg_mat.albedo_color = Color(0.72, 0.69, 0.62)
 	cell_bg_mat.metallic = 0.5
 	cell_bg_mat.roughness = 0.4
 
@@ -738,7 +738,7 @@ func _build_eurorack_frame(content_w: float, content_h: float) -> void:
 
 	# ── Back panel ──
 	var back_mat := StandardMaterial3D.new()
-	back_mat.albedo_color = Color(0.40, 0.38, 0.35)
+	back_mat.albedo_color = Color(0.65, 0.62, 0.56)
 	back_mat.metallic = 0.2
 	back_mat.roughness = 0.8
 	var back := MeshInstance3D.new()
@@ -759,7 +759,7 @@ func _build_module_panel(content_w: float, content_h: float) -> void:
 
 	# Dark panel face
 	var panel_mat := StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.50, 0.48, 0.44)
+	panel_mat.albedo_color = Color(0.75, 0.72, 0.65)
 	panel_mat.metallic = 0.92
 	panel_mat.roughness = 0.22
 
@@ -1132,6 +1132,22 @@ func _configure_control(control: Node, config: Dictionary, control_type: String)
 			control.ready.connect(func(): control.set_param_name(label), CONNECT_ONE_SHOT)
 	elif "label" in control:
 		control.label = label
+
+	var style_variant: String = str(config.get("style", config.get("style_variant", "")))
+	if not style_variant.is_empty():
+		if control.has_method("set_style_variant"):
+			control.set_style_variant(style_variant)
+		elif "style_variant" in control:
+			control.style_variant = style_variant
+
+	var step_count: int = int(config.get("step_count", 0))
+	if step_count > 0:
+		if control.has_method("set_step_count"):
+			control.set_step_count(step_count)
+		elif "step_count" in control:
+			control.step_count = step_count
+		elif "steps" in control:
+			control.steps = step_count
 
 	# Get range and default values
 	var p_min = config.get("min", 0.0)
@@ -1634,14 +1650,21 @@ func _get_current_values() -> Dictionary:
 				var min_y = config.get("min_y", config.get("min", 0.0))
 				var max_y = config.get("max_y", config.get("max", 1.0))
 
-				# Get stored XY values or read from control
-				var x_val = control_data.get("last_x", 0.0)
-				var y_val = control_data.get("last_y", 0.0)
+				var norm_x = 0.5
+				var norm_y = 0.5
+				if control.has_method("get_normalized_value"):
+					norm_x = control.get_normalized_value()
+				else:
+					var x_val = control_data.get("last_x", 0.0)
+					var size = config.get("size", 0.1)
+					norm_x = remap(x_val, -size, size, 0.0, 1.0)
 
-				# Normalize and remap
-				var size = config.get("size", 0.1)
-				var norm_x = remap(x_val, -size, size, 0.0, 1.0)
-				var norm_y = remap(y_val, -size, size, 0.0, 1.0)
+				if control.has_method("get_normalized_value_y"):
+					norm_y = control.get_normalized_value_y()
+				else:
+					var y_val = control_data.get("last_y", 0.0)
+					var size_y = config.get("size", 0.1)
+					norm_y = remap(y_val, -size_y, size_y, 0.0, 1.0)
 
 				values[param_x] = lerp(min_x, max_x, norm_x)
 				values[param_y] = lerp(min_y, max_y, norm_y)

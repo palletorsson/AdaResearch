@@ -138,7 +138,7 @@ static func build_vu_meter_v(parent: Node3D) -> void:
 	var mh := EL_S
 
 	var bg_mat := StandardMaterial3D.new()
-	bg_mat.albedo_color = Color(0.04, 0.04, 0.04)
+	bg_mat.albedo_color = Color(0.15, 0.14, 0.12)
 	bg_mat.metallic = 0.3
 	bg_mat.roughness = 0.7
 
@@ -184,7 +184,7 @@ static func build_vu_meter_h(parent: Node3D) -> void:
 	var mh := 0.035
 
 	var bg_mat := StandardMaterial3D.new()
-	bg_mat.albedo_color = Color(0.04, 0.04, 0.04)
+	bg_mat.albedo_color = Color(0.15, 0.14, 0.12)
 	bg_mat.metallic = 0.3
 	bg_mat.roughness = 0.7
 
@@ -371,7 +371,7 @@ static func build_text_display_static(parent: Node3D, slots: int, text: String) 
 
 	# Dark bezel
 	var bezel_mat := StandardMaterial3D.new()
-	bezel_mat.albedo_color = Color(0.06, 0.06, 0.06)
+	bezel_mat.albedo_color = Color(0.20, 0.18, 0.16)
 	bezel_mat.metallic = 0.3
 	bezel_mat.roughness = 0.6
 	var bezel := MeshInstance3D.new()
@@ -413,7 +413,7 @@ static func build_text_display_scroll(parent: Node3D, slots: int, text: String) 
 
 	# Dark bezel
 	var bezel_mat := StandardMaterial3D.new()
-	bezel_mat.albedo_color = Color(0.06, 0.06, 0.06)
+	bezel_mat.albedo_color = Color(0.20, 0.18, 0.16)
 	bezel_mat.metallic = 0.3
 	bezel_mat.roughness = 0.6
 	var bezel := MeshInstance3D.new()

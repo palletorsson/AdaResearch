@@ -42,7 +42,7 @@ static var _stripe_material: StandardMaterial3D
 func _init_materials() -> void:
 	if not _panel_material:
 		_panel_material = StandardMaterial3D.new()
-		_panel_material.albedo_color = Color(0.45, 0.43, 0.40)
+		_panel_material.albedo_color = Color(0.75, 0.72, 0.65)  # Rams cream
 		_panel_material.metallic = 0.3
 		_panel_material.roughness = 0.6
 
@@ -116,7 +116,7 @@ func build_from_definition(def: Dictionary, uvac: Node3D) -> void:
 	face.name = "ModuleFace"
 	face.transform.origin = Vector3(0, 0, PANEL_DEPTH * 0.5 + 0.001)
 	add_child(face)
-	face.build(def)
+	face.build(def, uvac, module_id)
 	var _module_face = face
 
 	# --- Mounting screws (4 corners) ---

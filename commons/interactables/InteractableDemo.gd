@@ -103,7 +103,7 @@ func _build_back_panel():
 	panel.mesh = box
 
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(0.50, 0.48, 0.44)  # Warm gray (Rams)
+	mat.albedo_color = Color(0.78, 0.75, 0.67)  # Warm gray (Rams)
 	mat.metallic = 0.3
 	mat.roughness = 0.6
 	panel.material_override = mat
@@ -117,7 +117,7 @@ func _build_back_panel():
 	frame_box.size = Vector3(total_w + 0.02, 0.47, 0.004)
 	frame.mesh = frame_box
 	var frame_mat := StandardMaterial3D.new()
-	frame_mat.albedo_color = Color(0.35, 0.33, 0.30)
+	frame_mat.albedo_color = Color(0.65, 0.62, 0.56)
 	frame_mat.metallic = 0.2
 	frame_mat.roughness = 0.7
 	frame.material_override = frame_mat
@@ -127,7 +127,7 @@ func _build_back_panel():
 
 func _make_frame_material() -> StandardMaterial3D:
 	var frame_mat := StandardMaterial3D.new()
-	frame_mat.albedo_color = Color(0.08, 0.08, 0.08)
+	frame_mat.albedo_color = Color(0.25, 0.23, 0.20)
 	frame_mat.metallic = 0.3
 	frame_mat.roughness = 0.7
 	return frame_mat
@@ -281,7 +281,7 @@ func _spawn_passive_elements():
 	box2.size = Vector3(total_w2, 0.45, 0.008)
 	panel2.mesh = box2
 	var mat2 := StandardMaterial3D.new()
-	mat2.albedo_color = Color(0.50, 0.48, 0.44)
+	mat2.albedo_color = Color(0.78, 0.75, 0.67)
 	mat2.metallic = 0.3
 	mat2.roughness = 0.6
 	panel2.material_override = mat2
@@ -355,7 +355,7 @@ func _spawn_compounds():
 	box3.size = Vector3(total_w3, 0.45, 0.008)
 	panel3.mesh = box3
 	var mat3 := StandardMaterial3D.new()
-	mat3.albedo_color = Color(0.50, 0.48, 0.44)
+	mat3.albedo_color = Color(0.78, 0.75, 0.67)
 	mat3.metallic = 0.3
 	mat3.roughness = 0.6
 	panel3.material_override = mat3
@@ -541,7 +541,7 @@ func _spawn_new_modules():
 	box4.size = Vector3(total_w4, 0.45, 0.008)
 	panel4.mesh = box4
 	var mat4 := StandardMaterial3D.new()
-	mat4.albedo_color = Color(0.50, 0.48, 0.44)
+	mat4.albedo_color = Color(0.78, 0.75, 0.67)
 	mat4.metallic = 0.3
 	mat4.roughness = 0.6
 	panel4.material_override = mat4
@@ -578,7 +578,7 @@ func _spawn_new_modules():
 		frame_box.size = Vector3(elem_width * SPACING - 0.02, COMPOUND_FRAME_HEIGHT, 0.004)
 		frame.mesh = frame_box
 		var frame_mat := StandardMaterial3D.new()
-		frame_mat.albedo_color = Color(0.08, 0.08, 0.08)
+		frame_mat.albedo_color = Color(0.25, 0.23, 0.20)
 		frame_mat.metallic = 0.3
 		frame_mat.roughness = 0.7
 		frame.material_override = frame_mat

@@ -99,7 +99,7 @@ func build(module_def: Dictionary, uvac: Node = null, module_prefix: String = ""
 	# Dark background
 	var bg := ColorRect.new()
 	bg.name = "Background"
-	bg.color = Color(0.52, 0.50, 0.46)  # Warm gray panel (Rams)
+	bg.color = Color(0.78, 0.75, 0.67)  # Rams cream panel (#C6BEAC)
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_panel_control.add_child(bg)
 
