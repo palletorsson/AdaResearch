@@ -39,14 +39,28 @@ const PASSIVE_ELEMENTS = [
 ]
 
 const ROW2_Y := 0.65  # Second row below first
+const ROW3_Y := 0.20  # Third row (compounds)
+
+## Compound layout definitions — each spawns multiple controls programmatically
+const COMPOUNDS = [
+	{ "type": "sliders_v", "count": 2, "label": "2x SLIDER V" },
+	{ "type": "sliders_v", "count": 3, "label": "3x SLIDER V" },
+	{ "type": "sliders_v", "count": 4, "label": "4x SLIDER V" },
+	{ "type": "sliders_h", "count": 2, "label": "2x SLIDER H" },
+	{ "type": "sliders_h", "count": 3, "label": "3x SLIDER H" },
+	{ "type": "monitor_sliders", "count": 3, "label": "MONITOR\n+SLIDERS" },
+	{ "type": "speaker_meters", "count": 2, "label": "SPEAKER\n+METERS" },
+	{ "type": "meters_v", "count": 3, "label": "3x METERS" },
+]
 
 
 func _ready():
 	_build_back_panel()
 	_spawn_controls()
 	_spawn_passive_elements()
+	_spawn_compounds()
 	_add_title()
-	print("InteractableDemo: %d controls + %d passive elements" % [CONTROLS.size(), PASSIVE_ELEMENTS.size()])
+	print("InteractableDemo: %d controls + %d passive + %d compounds" % [CONTROLS.size(), PASSIVE_ELEMENTS.size(), COMPOUNDS.size()])
 
 
 func _build_back_panel():
@@ -229,6 +243,148 @@ func _spawn_passive_elements():
 		lbl.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 		lbl.transform.origin = Vector3(x_pos, ROW2_Y - 0.12, CONTROL_Z + 0.01)
 		add_child(lbl)
+
+
+func _spawn_compounds():
+	var start_x: float = -(COMPOUNDS.size() - 1) * SPACING / 2.0
+
+	# Back panel for row 3
+	var total_w3: float = COMPOUNDS.size() * SPACING + 0.2
+	var panel3 := MeshInstance3D.new()
+	panel3.name = "BackPanel3"
+	var box3 := BoxMesh.new()
+	box3.size = Vector3(total_w3, 0.35, 0.008)
+	panel3.mesh = box3
+	var mat3 := StandardMaterial3D.new()
+	mat3.albedo_color = Color(0.50, 0.48, 0.44)
+	mat3.metallic = 0.3
+	mat3.roughness = 0.6
+	panel3.material_override = mat3
+	panel3.transform.origin = Vector3(0, ROW3_Y, -0.005)
+	add_child(panel3)
+
+	var title3 := Label3D.new()
+	title3.text = "COMPOUND LAYOUTS"
+	title3.font_size = 30
+	title3.pixel_size = 0.0007
+	title3.modulate = Color(1.0, 1.0, 1.0)
+	title3.outline_size = 5
+	title3.outline_modulate = Color(0.0, 0.0, 0.0, 0.9)
+	title3.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title3.transform.origin = Vector3(0, ROW3_Y + 0.22, CONTROL_Z + 0.01)
+	add_child(title3)
+
+	for i in COMPOUNDS.size():
+		var def: Dictionary = COMPOUNDS[i]
+		var comp_type: String = def["type"]
+		var count: int = def.get("count", 2)
+		var label_text: String = def["label"]
+		var x_pos: float = start_x + i * SPACING
+
+		# Black accent frame
+		var frame := MeshInstance3D.new()
+		frame.name = "CompFrame_%d" % i
+		var frame_box := BoxMesh.new()
+		frame_box.size = Vector3(0.12, 0.14, 0.004)
+		frame.mesh = frame_box
+		var frame_mat := StandardMaterial3D.new()
+		frame_mat.albedo_color = Color(0.08, 0.08, 0.08)
+		frame_mat.metallic = 0.3
+		frame_mat.roughness = 0.7
+		frame.material_override = frame_mat
+		frame.transform.origin = Vector3(x_pos, ROW3_Y, CONTROL_Z - 0.004)
+		add_child(frame)
+
+		var container := Node3D.new()
+		container.name = "Compound_%d" % i
+		container.transform.origin = Vector3(x_pos, ROW3_Y, CONTROL_Z)
+		add_child(container)
+
+		_build_compound(container, comp_type, count)
+
+		var lbl := Label3D.new()
+		lbl.name = "CompLabel_%d" % i
+		lbl.text = label_text
+		lbl.font_size = 26
+		lbl.pixel_size = 0.0006
+		lbl.modulate = Color(1.0, 1.0, 1.0)
+		lbl.outline_size = 5
+		lbl.outline_modulate = Color(0.0, 0.0, 0.0, 0.9)
+		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		lbl.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+		lbl.transform.origin = Vector3(x_pos, ROW3_Y - 0.12, CONTROL_Z + 0.01)
+		add_child(lbl)
+
+
+func _build_compound(container: Node3D, comp_type: String, count: int) -> void:
+	match comp_type:
+		"sliders_v":
+			# Multiple vertical sliders side by side
+			var gap := 0.035
+			var offset := -(count - 1) * gap / 2.0
+			for j in count:
+				var scene := load("res://commons/interactables/slider_smooth.tscn") as PackedScene
+				if scene:
+					var ctrl := scene.instantiate()
+					ctrl.transform.origin = Vector3(offset + j * gap, 0, 0)
+					ctrl.scale = Vector3.ONE * 0.5
+					container.add_child(ctrl)
+
+		"sliders_h":
+			# Multiple horizontal sliders stacked
+			var gap := 0.035
+			var offset := -(count - 1) * gap / 2.0
+			for j in count:
+				var scene := load("res://commons/interactables/slider_horizontal.tscn") as PackedScene
+				if scene:
+					var ctrl := scene.instantiate()
+					ctrl.transform.origin = Vector3(0, offset + j * gap, 0)
+					ctrl.scale = Vector3.ONE * 0.5
+					container.add_child(ctrl)
+
+		"monitor_sliders":
+			# Monitor on top, sliders below
+			RackPassiveElementsScript.build_monitor(container, 0.09, 0.04)
+			# Shift monitor up
+			for child in container.get_children():
+				child.transform.origin.y += 0.03
+			# Add sliders below
+			var gap := 0.03
+			var offset := -(count - 1) * gap / 2.0
+			for j in count:
+				var scene := load("res://commons/interactables/slider_smooth.tscn") as PackedScene
+				if scene:
+					var ctrl := scene.instantiate()
+					ctrl.transform.origin = Vector3(offset + j * gap, -0.03, 0)
+					ctrl.scale = Vector3.ONE * 0.4
+					container.add_child(ctrl)
+
+		"speaker_meters":
+			# Speaker on top, meters below
+			var sp := Node3D.new()
+			sp.transform.origin = Vector3(0, 0.025, 0)
+			sp.scale = Vector3.ONE * 0.6
+			container.add_child(sp)
+			RackPassiveElementsScript.build_speaker_dots(sp)
+			# Meters below
+			var gap := 0.035
+			for j in count:
+				var m := Node3D.new()
+				m.transform.origin = Vector3((j - 0.5) * gap, -0.04, 0)
+				m.scale = Vector3.ONE * 0.5
+				container.add_child(m)
+				RackPassiveElementsScript.build_vu_meter_v(m)
+
+		"meters_v":
+			# Multiple VU meters side by side
+			var gap := 0.03
+			var offset := -(count - 1) * gap / 2.0
+			for j in count:
+				var m := Node3D.new()
+				m.transform.origin = Vector3(offset + j * gap, 0, 0)
+				m.scale = Vector3.ONE * 0.7
+				container.add_child(m)
+				RackPassiveElementsScript.build_vu_meter_v(m)
 
 
 func _add_title():
