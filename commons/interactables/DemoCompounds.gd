@@ -73,7 +73,7 @@ func _build(c: Node3D, t: String, count: int, copper: Color, dark: Color) -> voi
 		"monitor_sliders":
 			RackPassiveElementsScript.build_monitor(c, 0.09, 0.04)
 			for child in c.get_children():
-				child.transform.origin.y += 0.03
+				if child is Node3D: child.transform.origin.y += 0.03
 			var gap := 0.03
 			var off := -(count - 1) * gap / 2.0
 			for j in count:
