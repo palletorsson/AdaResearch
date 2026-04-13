@@ -5,6 +5,7 @@ class_name RackPassiveElements
 ## Dieter Rams / Braun aesthetic — cream panels, black patterns, copper accents.
 
 const EL_S := 0.10  # Standard element size (meters)
+const SPEAKER_S := 0.145  # Larger speaker face so it fills a one-slot frame better
 const CREAM := Color(0.78, 0.75, 0.67)
 const BLACK := Color(0.10, 0.10, 0.10)
 const COPPER := Color(0.75, 0.38, 0.13)
@@ -22,7 +23,7 @@ static func build_speaker_dots(parent: Node3D) -> void:
 	var bg := MeshInstance3D.new()
 	bg.name = "SpeakerDotsBg"
 	var box := BoxMesh.new()
-	box.size = Vector3(EL_S, EL_S, 0.004)
+	box.size = Vector3(SPEAKER_S, SPEAKER_S, 0.004)
 	bg.mesh = box
 	bg.material_override = bg_mat
 	parent.add_child(bg)
@@ -38,7 +39,7 @@ static func build_speaker_dots(parent: Node3D) -> void:
 	dot_mesh.radial_segments = 6
 	dot_mesh.rings = 3
 
-	var r := EL_S * 0.42
+	var r := SPEAKER_S * 0.42
 	for ring in range(1, 10):
 		var rr: float = (float(ring) / 9.0) * r
 		var count: int = max(6, ring * 5)
@@ -65,7 +66,7 @@ static func build_speaker_lines(parent: Node3D) -> void:
 	var bg := MeshInstance3D.new()
 	bg.name = "SpeakerLinesBg"
 	var box := BoxMesh.new()
-	box.size = Vector3(EL_S, EL_S, 0.004)
+	box.size = Vector3(SPEAKER_S, SPEAKER_S, 0.004)
 	bg.mesh = box
 	bg.material_override = bg_mat
 	parent.add_child(bg)
@@ -73,7 +74,7 @@ static func build_speaker_lines(parent: Node3D) -> void:
 	var line_mat := StandardMaterial3D.new()
 	line_mat.albedo_color = BLACK
 
-	var r_val := EL_S * 0.44
+	var r_val := SPEAKER_S * 0.44
 	for i in 20:
 		var y: float = -r_val + (float(i) / 19.0) * r_val * 2.0
 		var dy: float = y / r_val
@@ -101,7 +102,7 @@ static func build_speaker_grid(parent: Node3D) -> void:
 	var bg := MeshInstance3D.new()
 	bg.name = "SpeakerGridBg"
 	var box := BoxMesh.new()
-	box.size = Vector3(EL_S, EL_S, 0.004)
+	box.size = Vector3(SPEAKER_S, SPEAKER_S, 0.004)
 	bg.mesh = box
 	bg.material_override = bg_mat
 	parent.add_child(bg)
@@ -116,7 +117,7 @@ static func build_speaker_grid(parent: Node3D) -> void:
 	dot_mesh.rings = 2
 
 	var grid_n := 13
-	var area := EL_S * 0.85
+	var area := SPEAKER_S * 0.85
 	var step := area / float(grid_n)
 	for row in grid_n:
 		for col in grid_n:
@@ -358,5 +359,125 @@ func _draw() -> void:
 				draw_line(prev, pt, copper, 1.5)
 			prev = pt
 """ % mode
+	script.reload()
+	return script
+
+
+## Build a static text display — Rams style dark screen with copper text.
+## slots: 1, 2, or 3 grid slots wide.
+static func build_text_display_static(parent: Node3D, slots: int, text: String) -> void:
+	var w: float = slots * 0.28 - 0.02
+	var h: float = 0.06
+
+	# Dark bezel
+	var bezel_mat := StandardMaterial3D.new()
+	bezel_mat.albedo_color = Color(0.06, 0.06, 0.06)
+	bezel_mat.metallic = 0.3
+	bezel_mat.roughness = 0.6
+	var bezel := MeshInstance3D.new()
+	bezel.name = "TextBezel"
+	bezel.mesh = BoxMesh.new()
+	bezel.mesh.size = Vector3(w + 0.004, h + 0.004, 0.005)
+	bezel.material_override = bezel_mat
+	parent.add_child(bezel)
+
+	# Screen background
+	var screen_mat := StandardMaterial3D.new()
+	screen_mat.albedo_color = Color(0.04, 0.04, 0.04)
+	var screen := MeshInstance3D.new()
+	screen.name = "TextScreen"
+	screen.mesh = BoxMesh.new()
+	screen.mesh.size = Vector3(w, h, 0.001)
+	screen.material_override = screen_mat
+	screen.transform.origin.z = 0.004
+	parent.add_child(screen)
+
+	# Static text label
+	var lbl := Label3D.new()
+	lbl.name = "TextContent"
+	lbl.text = text
+	lbl.font_size = 28
+	lbl.pixel_size = 0.0004
+	lbl.modulate = COPPER
+	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	lbl.transform.origin = Vector3(0, 0, 0.006)
+	parent.add_child(lbl)
+
+
+## Build a scrolling text display — SubViewport with animated 2D text.
+## slots: 1, 2, or 3 grid slots wide.
+static func build_text_display_scroll(parent: Node3D, slots: int, text: String) -> void:
+	var w: float = slots * 0.28 - 0.02
+	var h: float = 0.06
+
+	# Dark bezel
+	var bezel_mat := StandardMaterial3D.new()
+	bezel_mat.albedo_color = Color(0.06, 0.06, 0.06)
+	bezel_mat.metallic = 0.3
+	bezel_mat.roughness = 0.6
+	var bezel := MeshInstance3D.new()
+	bezel.name = "ScrollBezel"
+	bezel.mesh = BoxMesh.new()
+	bezel.mesh.size = Vector3(w + 0.004, h + 0.004, 0.005)
+	bezel.material_override = bezel_mat
+	parent.add_child(bezel)
+
+	# SubViewport for scrolling text
+	var viewport := SubViewport.new()
+	viewport.name = "ScrollViewport"
+	viewport.disable_3d = true
+	viewport.size = Vector2i(int(w * 2000), int(h * 2000))
+	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	viewport.transparent_bg = false
+	parent.add_child(viewport)
+
+	# Scrolling text control
+	var scroll_ctrl := Control.new()
+	scroll_ctrl.name = "ScrollText"
+	scroll_ctrl.set_anchors_preset(Control.PRESET_FULL_RECT)
+	scroll_ctrl.set_script(_create_scroll_text_script(text))
+	viewport.add_child(scroll_ctrl)
+
+	# Textured quad
+	var quad := MeshInstance3D.new()
+	quad.name = "ScrollQuad"
+	var quad_mesh := QuadMesh.new()
+	quad_mesh.size = Vector2(w, h)
+	quad.mesh = quad_mesh
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_texture = viewport.get_texture()
+	quad.material_override = mat
+	quad.transform.origin.z = 0.005
+	parent.add_child(quad)
+
+
+static func _create_scroll_text_script(text: String) -> GDScript:
+	var escaped_text := text.replace('"', '\\"')
+	var script := GDScript.new()
+	script.source_code = """extends Control
+
+var _time: float = 0.0
+var _text: String = "%s"
+
+func _process(delta: float) -> void:
+	_time += delta
+	queue_redraw()
+
+func _draw() -> void:
+	var w: float = size.x
+	var h: float = size.y
+	draw_rect(Rect2(Vector2.ZERO, size), Color(0.04, 0.04, 0.04))
+	var font: Font = get_theme_default_font()
+	var fs: int = int(h * 0.45)
+	var text_w: float = font.get_string_size(_text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
+	var scroll_speed: float = 40.0
+	var total_w: float = text_w + w
+	var offset: float = fmod(_time * scroll_speed, total_w)
+	var x: float = w - offset
+	var copper: Color = Color(0.75, 0.38, 0.13)
+	draw_string(font, Vector2(x, h * 0.65), _text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, copper)
+""" % escaped_text
 	script.reload()
 	return script

@@ -25,10 +25,16 @@ var CONTROLS := [
 ## Row 4: New prototype modules — procedural versions of the interface_prototypes preset
 const ROW4_Y := -0.25
 const NEW_MODULES := [
-	{ "type": "touch_grid", "label": "TOUCH\nGRID" },
-	{ "type": "rotary_selector", "label": "ROTARY\nSELECTOR" },
-	{ "type": "needle_meter", "label": "NEEDLE\nMETER" },
-	{ "type": "patch_matrix", "label": "PATCH\nMATRIX" },
+	{ "type": "touch_grid", "label": "TOUCH\nGRID", "width": 1 },
+	{ "type": "rotary_selector", "label": "ROTARY\nSELECTOR", "width": 1 },
+	{ "type": "needle_meter", "label": "NEEDLE\nMETER", "width": 1 },
+	{ "type": "patch_matrix", "label": "PATCH\nMATRIX", "width": 1 },
+	{ "type": "text_static_1", "label": "TEXT 1", "width": 1 },
+	{ "type": "text_static_2", "label": "TEXT 2", "width": 2 },
+	{ "type": "text_static_3", "label": "TEXT 3", "width": 3 },
+	{ "type": "text_scroll_1", "label": "SCROLL 1", "width": 1 },
+	{ "type": "text_scroll_2", "label": "SCROLL 2", "width": 2 },
+	{ "type": "text_scroll_3", "label": "SCROLL 3", "width": 3 },
 ]
 
 const SPACING := 0.30  # meters between each control
@@ -524,10 +530,11 @@ func _build_compound(container: Node3D, comp_type: String, count: int, frame_wid
 
 
 func _spawn_new_modules():
-	var start_x: float = -(NEW_MODULES.size() - 1) * SPACING / 2.0
-	var total_w4: float = NEW_MODULES.size() * SPACING + 0.2
+	var total_slots: float = 0
+	for def in NEW_MODULES:
+		total_slots += def.get("width", 1)
+	var total_w4: float = total_slots * SPACING + 0.2
 
-	# Back panel
 	var panel4 := MeshInstance3D.new()
 	panel4.name = "BackPanel4"
 	var box4 := BoxMesh.new()
@@ -542,7 +549,7 @@ func _spawn_new_modules():
 	add_child(panel4)
 
 	var title4 := Label3D.new()
-	title4.text = "NEW MODULES"
+	title4.text = "NEW MODULES + TEXT DISPLAYS"
 	title4.font_size = 28
 	title4.pixel_size = 0.0007
 	title4.modulate = Color(1.0, 1.0, 1.0)
@@ -556,17 +563,19 @@ func _spawn_new_modules():
 	var dark := Color(0.10, 0.10, 0.10)
 	var cream := Color(0.78, 0.75, 0.67)
 
+	var x_cursor: float = -total_w4 / 2.0 + 0.1
 	for i in NEW_MODULES.size():
 		var def: Dictionary = NEW_MODULES[i]
 		var mod_type: String = def["type"]
 		var label_text: String = def["label"]
-		var x_pos: float = start_x + i * SPACING
+		var elem_width: int = def.get("width", 1)
+		var x_pos: float = x_cursor + (elem_width * SPACING) / 2.0
 
 		# Black accent frame
 		var frame := MeshInstance3D.new()
 		frame.name = "NewFrame_%d" % i
 		var frame_box := BoxMesh.new()
-		frame_box.size = Vector3(0.12, COMPOUND_FRAME_HEIGHT, 0.004)
+		frame_box.size = Vector3(elem_width * SPACING - 0.02, COMPOUND_FRAME_HEIGHT, 0.004)
 		frame.mesh = frame_box
 		var frame_mat := StandardMaterial3D.new()
 		frame_mat.albedo_color = Color(0.08, 0.08, 0.08)
@@ -595,6 +604,8 @@ func _spawn_new_modules():
 		lbl.vertical_alignment = VERTICAL_ALIGNMENT_TOP
 		lbl.transform.origin = Vector3(x_pos, ROW4_Y - 0.18, CONTROL_Z + 0.01)
 		add_child(lbl)
+
+		x_cursor += elem_width * SPACING
 
 
 func _build_new_module(c: Node3D, t: String, copper: Color, dark: Color, cream: Color) -> void:
@@ -870,6 +881,19 @@ func _build_new_module(c: Node3D, t: String, copper: Color, dark: Color, cream: 
 			in_lbl.modulate = Color(0.27, 0.55, 0.95)
 			in_lbl.transform.origin = Vector3(0, -gap_y / 2.0 - 0.015, 0.005)
 			c.add_child(in_lbl)
+
+		"text_static_1":
+			RackPassiveElementsScript.build_text_display_static(c, 1, "440 Hz")
+		"text_static_2":
+			RackPassiveElementsScript.build_text_display_static(c, 2, "FREQUENCY: 440 Hz")
+		"text_static_3":
+			RackPassiveElementsScript.build_text_display_static(c, 3, "ADA RESEARCH — DIETER RAMS RACK")
+		"text_scroll_1":
+			RackPassiveElementsScript.build_text_display_scroll(c, 1, "SINE 440Hz")
+		"text_scroll_2":
+			RackPassiveElementsScript.build_text_display_scroll(c, 2, "FREQUENCY MODULATION — CARRIER 440Hz — DEPTH 0.5")
+		"text_scroll_3":
+			RackPassiveElementsScript.build_text_display_scroll(c, 3, "ADA RESEARCH — ALGORITHMS THROUGH ARCHITECTURE — DIETER RAMS EURORACK INTERFACE")
 
 
 func _add_title():
