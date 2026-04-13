@@ -8,27 +8,42 @@ extends Node3D
 # Load PickupCube for shared Mario parameter sync
 const PickupCube = preload("res://commons/scenes/mapobjects/pick_up_cube.gd")
 
-# Control scene preloads
-const SLIDER_SCENE = preload("res://commons/interactables/slider_smooth.tscn")
-const SLIDER_HORIZONTAL_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
-const DIAL_SCENE = preload("res://commons/interactables/dial_smooth.tscn")
+# Control scenes — use load() instead of preload() to avoid RigidBody3D script
+# compilation errors when XRTools interactable_handle.gd fails to load
+var SLIDER_SCENE: PackedScene
+var SLIDER_HORIZONTAL_SCENE: PackedScene
+var DIAL_SCENE: PackedScene
+var SLIDER_VERTICAL_SCENE: PackedScene
+var SLIDER_SNAP_SCENE: PackedScene
+var SLIDER_ZERO_SCENE: PackedScene
+var XY_PAD_SCENE: PackedScene
+var BUTTON_SCENE: PackedScene
+var JOYSTICK_SCENE: PackedScene
+var LEVER_SCENE: PackedScene
+var WHEEL_SCENE: PackedScene
+var WAVEFORM_MONITOR_SCENE: PackedScene
+var SPECTRUM_DISPLAY_SCENE: PackedScene
+var WAVEFORM_DISPLAY_SCENE: PackedScene
+var LISSAJOUS_DISPLAY_SCENE: PackedScene
+var SIMPLE_WAVEFORM_SCENE: PackedScene
 
-# Additional Ableton-style controls from interactables
-const SLIDER_VERTICAL_SCENE = preload("res://commons/interactables/slider_axis.tscn")
-const SLIDER_SNAP_SCENE = preload("res://commons/interactables/slider_snap.tscn")
-const SLIDER_ZERO_SCENE = preload("res://commons/interactables/slider_zero.tscn")
-const XY_PAD_SCENE = preload("res://commons/interactables/slider_plane.tscn")
-const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
-const JOYSTICK_SCENE = preload("res://commons/interactables/joystick_smooth.tscn")
-const LEVER_SCENE = preload("res://commons/interactables/lever_smooth.tscn")
-const WHEEL_SCENE = preload("res://commons/interactables/wheel_smooth.tscn")
-
-# Monitors and meters
-const WAVEFORM_MONITOR_SCENE = preload("res://commons/audio/interfaces/VRAudioMonitor.tscn")
-const SPECTRUM_DISPLAY_SCENE = preload("res://commons/audio/interfaces/VRSpectrumDisplay.tscn")
-const WAVEFORM_DISPLAY_SCENE = preload("res://commons/audio/interfaces/VRWaveformDisplay.tscn")
-const LISSAJOUS_DISPLAY_SCENE = preload("res://commons/audio/interfaces/VRLissajousDisplay.tscn")
-const SIMPLE_WAVEFORM_SCENE = preload("res://commons/audio/interfaces/VRSimpleWaveform.tscn")
+func _load_control_scenes() -> void:
+	SLIDER_SCENE = load("res://commons/interactables/slider_smooth.tscn")
+	SLIDER_HORIZONTAL_SCENE = load("res://commons/interactables/slider_horizontal.tscn")
+	DIAL_SCENE = load("res://commons/interactables/dial_smooth.tscn")
+	SLIDER_VERTICAL_SCENE = load("res://commons/interactables/slider_axis.tscn")
+	SLIDER_SNAP_SCENE = load("res://commons/interactables/slider_snap.tscn")
+	SLIDER_ZERO_SCENE = load("res://commons/interactables/slider_zero.tscn")
+	XY_PAD_SCENE = load("res://commons/interactables/slider_plane.tscn")
+	BUTTON_SCENE = load("res://commons/interactables/push_button.tscn")
+	JOYSTICK_SCENE = load("res://commons/interactables/joystick_smooth.tscn")
+	LEVER_SCENE = load("res://commons/interactables/lever_smooth.tscn")
+	WHEEL_SCENE = load("res://commons/interactables/wheel_smooth.tscn")
+	WAVEFORM_MONITOR_SCENE = load("res://commons/audio/interfaces/VRAudioMonitor.tscn")
+	SPECTRUM_DISPLAY_SCENE = load("res://commons/audio/interfaces/VRSpectrumDisplay.tscn")
+	WAVEFORM_DISPLAY_SCENE = load("res://commons/audio/interfaces/VRWaveformDisplay.tscn")
+	LISSAJOUS_DISPLAY_SCENE = load("res://commons/audio/interfaces/VRLissajousDisplay.tscn")
+	SIMPLE_WAVEFORM_SCENE = load("res://commons/audio/interfaces/VRSimpleWaveform.tscn")
 
 # Default spacing by control type (width, height in meters)
 const CONTROL_SIZES = {
@@ -103,8 +118,11 @@ func _ready():
 
 	# Eurorack preset takes priority over JSON config
 	if eurorack_preset_name != "":
+		# Preset mode: ModuleFaceTexture handles everything, no 3D control scenes needed
 		load_eurorack_preset(eurorack_preset_name)
 	elif rack_config_path != "" and FileAccess.file_exists(rack_config_path):
+		# JSON mode: load 3D control scenes (deferred to avoid preload errors)
+		_load_control_scenes()
 		load_rack_config(rack_config_path)
 	elif rack_config_path != "":
 		push_warning("UniversalVRAudioController: Config path set but file not found: %s" % rack_config_path)
@@ -574,7 +592,7 @@ func _spawn_controls_from_json():
 
 	# Cell background material (subtle dark inset per control)
 	var cell_bg_mat := StandardMaterial3D.new()
-	cell_bg_mat.albedo_color = Color(0.09, 0.09, 0.11)
+	cell_bg_mat.albedo_color = Color(0.55, 0.53, 0.50)
 	cell_bg_mat.metallic = 0.5
 	cell_bg_mat.roughness = 0.4
 
@@ -720,7 +738,7 @@ func _build_eurorack_frame(content_w: float, content_h: float) -> void:
 
 	# ── Back panel ──
 	var back_mat := StandardMaterial3D.new()
-	back_mat.albedo_color = Color(0.08, 0.08, 0.10)
+	back_mat.albedo_color = Color(0.40, 0.38, 0.35)
 	back_mat.metallic = 0.2
 	back_mat.roughness = 0.8
 	var back := MeshInstance3D.new()
@@ -741,7 +759,7 @@ func _build_module_panel(content_w: float, content_h: float) -> void:
 
 	# Dark panel face
 	var panel_mat := StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.06, 0.06, 0.08)
+	panel_mat.albedo_color = Color(0.50, 0.48, 0.44)
 	panel_mat.metallic = 0.92
 	panel_mat.roughness = 0.22
 
@@ -1519,7 +1537,7 @@ func _build_sections(layout_result, control_defs: Dictionary) -> void:
 		bg_mesh.size = Vector3(section_w, section_h, 0.004)
 		bg.mesh = bg_mesh
 		var bg_mat := StandardMaterial3D.new()
-		bg_mat.albedo_color = Color(0.10, 0.10, 0.13, 0.9)
+		bg_mat.albedo_color = Color(0.50, 0.48, 0.44, 0.9)
 		bg_mat.roughness = 0.6
 		bg_mat.metallic = 0.3
 		bg_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA

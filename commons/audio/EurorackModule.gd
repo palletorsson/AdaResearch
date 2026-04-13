@@ -15,7 +15,8 @@ const STRIPE_HEIGHT: float = 0.004
 const LABEL_MARGIN_TOP: float = 0.015
 const CTRL_LABEL_OFFSET_Y: float = -0.025  # Below control center
 
-const SLIDER_SCENE = preload("res://commons/interactables/slider_smooth.tscn")
+# SLIDER_SCENE removed — no longer spawning 3D interactables
+# ModuleFaceTexture handles all visuals + interaction via 2D SubViewport
 const ModuleFaceTextureScript = preload("res://commons/audio/rack_controls/vr_wrappers/ModuleFaceTexture.gd")
 const JACK_SLIDER_SCALE: float = 0.22  # Scale down slider to fit beside jack
 const JACK_SLIDER_OFFSET_X: float = 0.020  # Horizontal offset from jack center
@@ -41,9 +42,9 @@ static var _stripe_material: StandardMaterial3D
 func _init_materials() -> void:
 	if not _panel_material:
 		_panel_material = StandardMaterial3D.new()
-		_panel_material.albedo_color = Color(0.06, 0.06, 0.08)
-		_panel_material.metallic = 0.92
-		_panel_material.roughness = 0.22
+		_panel_material.albedo_color = Color(0.45, 0.43, 0.40)
+		_panel_material.metallic = 0.3
+		_panel_material.roughness = 0.6
 
 	if not _screw_material:
 		_screw_material = StandardMaterial3D.new()
@@ -121,15 +122,11 @@ func build_from_definition(def: Dictionary, uvac: Node3D) -> void:
 	# --- Mounting screws (4 corners) ---
 	_add_screws(panel_w, panel_h)
 
-	# --- 3D Controls (invisible, collision only — visuals come from face texture) ---
-	var control_defs: Array = def.get("controls", [])
-	for ctrl_def in control_defs:
-		_spawn_control(ctrl_def, panel_w, panel_h, uvac)
-
-	# --- Jacks ---
-	var jack_defs: Array = def.get("jacks", [])
-	for jack_def in jack_defs:
-		_spawn_jack(jack_def, panel_w, panel_h)
+	# --- No 3D controls ---
+	# ModuleFaceTexture handles ALL visuals AND interaction (both desktop + VR)
+	# via SubViewport + StaticBody3D pointer collision + _gui_input()
+	# This avoids XRTools RigidBody3D script compilation errors entirely.
+	print("EurorackModule: Using 2D face texture for all interaction")
 
 
 func _add_screws(panel_w: float, panel_h: float) -> void:
@@ -259,41 +256,17 @@ func _spawn_jack(jack_def: Dictionary, panel_w: float, panel_h: float) -> void:
 		jack_label.transform.origin = Vector3(x_pos, y_pos + 0.016, PANEL_DEPTH * 0.5 + 0.002)
 		add_child(jack_label)
 
-	# Spawn level slider next to the jack
-	_spawn_jack_level_slider(jack, x_pos, y_pos)
+	# Spawn level slider next to the jack (skip in desktop mode — avoids RigidBody errors)
+	var xr_active: bool = XRServer.primary_interface != null and XRServer.primary_interface.is_initialized()
+	if xr_active:
+		_spawn_jack_level_slider(jack, x_pos, y_pos)
 
 	jacks[jack_id] = jack
 
 
-func _spawn_jack_level_slider(jack: SynthJack, jack_x: float, jack_y: float) -> void:
-	var slider := SLIDER_SCENE.instantiate()
-	slider.name = "LevelSlider_%s" % jack.name
-	add_child(slider)
-
-	# Position: beside the jack, offset to the right, scaled small
-	slider.scale = Vector3.ONE * JACK_SLIDER_SCALE
-	slider.transform.origin = Vector3(
-		jack_x + JACK_SLIDER_OFFSET_X,
-		jack_y,
-		PANEL_DEPTH * 0.5 + CONTROL_Z_OFFSET
-	)
-
-	# Configure range 0–1 (attenuation level)
-	slider.set_range(0.0, 1.0)
-	# Default to full level (1.0)
-	slider.set_normalized_value(1.0)
-	# Label it "LVL"
-	slider.set_param_name("LVL")
-
-	# Darken the panel backplate so it blends with module panel
-	_darken_control_backplate(slider)
-
-	# Connect slider signal to update jack level
-	slider.slider_moved.connect(_on_jack_level_changed.bind(jack, slider))
-
-	# Store reference on the jack
-	jack.level_slider = slider
-	jack.level = 1.0
+func _spawn_jack_level_slider(_jack: SynthJack, _jack_x: float, _jack_y: float) -> void:
+	# Disabled — 3D slider_smooth uses RigidBody3D which causes script errors
+	pass
 
 
 func _on_jack_level_changed(position, jack: SynthJack, slider: Node3D) -> void:
@@ -301,14 +274,23 @@ func _on_jack_level_changed(position, jack: SynthJack, slider: Node3D) -> void:
 	jack.level = norm
 
 
-## Strip all visual meshes from a 3D interactable, keeping only collision shapes.
-## This makes the control invisible — ModuleFaceTexture provides the visuals.
+## Strip all visual meshes AND disable collision shapes from a 3D interactable.
+## ModuleFaceTexture handles both visuals AND pointer interaction.
 func _strip_all_visuals(control: Node) -> void:
 	for child in control.get_children():
 		if child is MeshInstance3D:
 			child.visible = false
 		elif child is Label3D:
 			child.visible = false
+		elif child is CollisionShape3D:
+			child.disabled = true
+		elif child is CollisionObject3D:
+			child.collision_layer = 0
+			child.collision_mask = 0
 		# Recurse into children
 		if child.get_child_count() > 0:
 			_strip_all_visuals(child)
+	# Also disable collision on the control itself if it's a physics body
+	if control is CollisionObject3D:
+		control.collision_layer = 0
+		control.collision_mask = 0

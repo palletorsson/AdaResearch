@@ -1,10 +1,7 @@
 # RackControlBase.gd
 # Base class for all canonical rack 2D controls.
 # Subclasses override _draw_control() to render their specific visual.
-# These Controls define the LOOK — 3D interactables provide the PHYSICS.
-#
-# Drawing primitives used (_draw_rect, _draw_circle, _draw_arc, _draw_line)
-# map 1:1 to SVG elements for pixel-perfect web parity.
+# Now also handles mouse/pointer input for VR 2D-in-3D interaction.
 
 extends Control
 class_name RackControlBase
@@ -30,11 +27,15 @@ var _track_groove: Color = Color.DIM_GRAY
 var _label_color: Color = Color.WHITE
 var _label_dim: Color = Color.GRAY
 
+## Interaction state
+var _is_dragging: bool = false
+
 
 func _ready() -> void:
 	_load_colors()
 	custom_minimum_size = _get_canonical_size()
 	size = custom_minimum_size
+	mouse_filter = Control.MOUSE_FILTER_STOP
 	queue_redraw()
 
 
@@ -55,10 +56,23 @@ func _get_canonical_size() -> Vector2:
 
 
 func _draw_background() -> void:
-	var r := RackDesignTokens.get_layout("corner_radius_px", 4.0)
-	# Rounded rect background
+	# Outer border (dark inset line — Rams recessed panel look)
+	var border_color := Color(0.35, 0.33, 0.30)
 	var bg_rect := Rect2(Vector2.ZERO, size)
-	draw_rect(bg_rect, _cell_bg)
+	draw_rect(bg_rect, border_color)
+
+	# Inner background (cream cell)
+	var inset := 1.5
+	var inner_rect := Rect2(Vector2(inset, inset), size - Vector2(inset * 2, inset * 2))
+	draw_rect(inner_rect, _cell_bg)
+
+	# Subtle inner shadow (top-left darker edge for depth)
+	draw_line(Vector2(inset, inset), Vector2(size.x - inset, inset), Color(0.30, 0.28, 0.26, 0.4), 0.5)
+	draw_line(Vector2(inset, inset), Vector2(inset, size.y - inset), Color(0.30, 0.28, 0.26, 0.4), 0.5)
+
+	# Subtle highlight (bottom-right lighter edge)
+	draw_line(Vector2(inset, size.y - inset), Vector2(size.x - inset, size.y - inset), Color(0.85, 0.82, 0.78, 0.3), 0.5)
+	draw_line(Vector2(size.x - inset, inset), Vector2(size.x - inset, size.y - inset), Color(0.85, 0.82, 0.78, 0.3), 0.5)
 
 
 func _draw_label() -> void:
@@ -94,3 +108,34 @@ func set_normalized_value(val: float) -> void:
 func set_control_label(text: String) -> void:
 	control_label = text
 	queue_redraw()
+
+
+# ── 2D Input Handling (for VR Viewport2Din3D interaction) ──────────
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				_is_dragging = true
+				_on_pointer_pressed(event.position)
+				accept_event()
+			else:
+				_is_dragging = false
+				_on_pointer_released(event.position)
+				accept_event()
+	elif event is InputEventMouseMotion and _is_dragging:
+		_on_pointer_dragged(event.position)
+		accept_event()
+
+
+## Override in subclasses for press behavior
+func _on_pointer_pressed(_pos: Vector2) -> void:
+	pass
+
+## Override in subclasses for drag behavior
+func _on_pointer_dragged(_pos: Vector2) -> void:
+	pass
+
+## Override in subclasses for release behavior
+func _on_pointer_released(_pos: Vector2) -> void:
+	pass

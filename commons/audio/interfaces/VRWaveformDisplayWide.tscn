@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cxngtu8bichtr"]
 
-[ext_resource type="Script" uid="uid://cireqm1d0mna5" path="res://algorithms/wavefunctions/spectralanalysis/WaveformDisplay.gd" id="1_waveform"]
+[ext_resource type="Script" path="res://commons/audio/interfaces/SimpleWaveformDisplay.gd" id="1_waveform"]
 [ext_resource type="Script" path="res://commons/audio/interfaces/VRWaveformDisplay.gd" id="2_controller"]
 [ext_resource type="Material" uid="uid://ada_screen_bezel" path="res://commons/ui/materials/screen_bezel.tres" id="MatBezel"]
 

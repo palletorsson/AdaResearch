@@ -90,7 +90,7 @@ func build(module_def: Dictionary) -> void:
 	# Dark background
 	var bg := ColorRect.new()
 	bg.name = "Background"
-	bg.color = Color(0.06, 0.06, 0.08)
+	bg.color = Color(0.52, 0.50, 0.46)  # Warm gray panel (Rams)
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_panel_control.add_child(bg)
 
@@ -108,7 +108,7 @@ func build(module_def: Dictionary) -> void:
 	name_lbl.text = module_name
 	name_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	name_lbl.add_theme_font_size_override("font_size", int(14 * sf))
-	name_lbl.add_theme_color_override("font_color", Color(0.90, 0.90, 0.93))
+	name_lbl.add_theme_color_override("font_color", Color(0.10, 0.10, 0.10))  # Black text on gray
 	name_lbl.position = Vector2(0, 2 * sf)
 	name_lbl.size = Vector2(vp_w, 18 * sf)
 	_panel_control.add_child(name_lbl)
@@ -186,6 +186,9 @@ func build(module_def: Dictionary) -> void:
 	_face_mesh.mesh = quad
 	add_child(_face_mesh)
 
+	# Add collision body for VR pointer interaction
+	_setup_pointer_collision()
+
 	# Defer texture assignment to after node is in tree
 	call_deferred("_assign_texture")
 
@@ -209,6 +212,98 @@ func sync_control_y(ctrl_id: String, normalized: float) -> void:
 ## Get the 2D control instance for a given id.
 func get_2d_control(ctrl_id: String) -> Control:
 	return _control_instances.get(ctrl_id)
+
+
+var _collision_body: StaticBody3D
+var _is_pointer_pressed: bool = false
+
+
+## Create a StaticBody3D with collision shape matching the panel quad.
+## The body has pointer_event() method so XRToolsPointerEvent.report() finds it.
+func _setup_pointer_collision() -> void:
+	_collision_body = StaticBody3D.new()
+	_collision_body.name = "PanelCollision"
+	# Pointable layer (21) + UI layer (23) — matches XR pointer DEFAULT_MASK
+	_collision_body.collision_layer = (1 << 20) | (1 << 22)
+	_collision_body.collision_mask = 0
+
+	var shape := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = Vector3(_physical_w, _physical_h, 0.005)
+	shape.shape = box
+	_collision_body.add_child(shape)
+
+	# Attach a tiny script that forwards pointer_event to us
+	var script := GDScript.new()
+	script.source_code = """extends StaticBody3D
+
+var _face_texture: Node3D
+
+func pointer_event(event) -> void:
+	if _face_texture and _face_texture.has_method("_on_pointer_event"):
+		_face_texture._on_pointer_event(event)
+"""
+	script.reload()
+	_collision_body.set_script(script)
+	_collision_body.set("_face_texture", self)
+
+	add_child(_collision_body)
+
+
+## Handle XR pointer events — convert 3D hit position to 2D viewport coordinates.
+func pointer_event(event) -> void:
+	_on_pointer_event(event)
+
+
+func _on_pointer_event(event) -> void:
+	if not _viewport or not is_instance_valid(_viewport):
+		return
+
+	var pos_2d := _global_to_viewport(event.position)
+
+	match event.event_type:
+		0:  # ENTERED
+			pass
+		1:  # EXITED
+			if _is_pointer_pressed:
+				_push_mouse_button(pos_2d, false)
+				_is_pointer_pressed = false
+		2:  # PRESSED
+			_is_pointer_pressed = true
+			_push_mouse_button(pos_2d, true)
+		3:  # RELEASED
+			_push_mouse_button(pos_2d, false)
+			_is_pointer_pressed = false
+		4:  # MOVED
+			_push_mouse_motion(pos_2d)
+
+
+## Convert a 3D world position to 2D viewport coordinates.
+func _global_to_viewport(world_pos: Vector3) -> Vector2:
+	var local_pos := global_transform.affine_inverse() * world_pos
+	# Map from local 3D (-w/2..w/2, -h/2..h/2) to viewport pixels (0..vp_w, 0..vp_h)
+	var vp_size := Vector2(_viewport.size)
+	var x := (local_pos.x / _physical_w + 0.5) * vp_size.x
+	var y := (0.5 - local_pos.y / _physical_h) * vp_size.y  # Y flipped
+	return Vector2(clampf(x, 0, vp_size.x), clampf(y, 0, vp_size.y))
+
+
+func _push_mouse_button(pos: Vector2, pressed: bool) -> void:
+	var ev := InputEventMouseButton.new()
+	ev.button_index = MOUSE_BUTTON_LEFT
+	ev.pressed = pressed
+	ev.position = pos
+	ev.global_position = pos
+	_viewport.push_input(ev)
+
+
+func _push_mouse_motion(pos: Vector2) -> void:
+	var ev := InputEventMouseMotion.new()
+	ev.position = pos
+	ev.global_position = pos
+	if _is_pointer_pressed:
+		ev.button_mask = MOUSE_BUTTON_MASK_LEFT
+	_viewport.push_input(ev)
 
 
 func _apply_button_color(ctrl_node: Control, color: Color) -> void:
