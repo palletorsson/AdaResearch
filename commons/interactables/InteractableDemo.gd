@@ -81,6 +81,20 @@ func _spawn_controls():
 			push_warning("InteractableDemo: Failed to load %s" % scene_path)
 			continue
 
+		# Black accent frame behind each control
+		var frame := MeshInstance3D.new()
+		frame.name = "Frame_%d" % i
+		var frame_box := BoxMesh.new()
+		frame_box.size = Vector3(0.12, 0.28, 0.004)
+		frame.mesh = frame_box
+		var frame_mat := StandardMaterial3D.new()
+		frame_mat.albedo_color = Color(0.08, 0.08, 0.08)
+		frame_mat.metallic = 0.3
+		frame_mat.roughness = 0.7
+		frame.material_override = frame_mat
+		frame.transform.origin = Vector3(x_pos, ROW_Y + y_offset, CONTROL_Z - 0.004)
+		add_child(frame)
+
 		var control := scene.instantiate()
 		control.name = "Control_%d" % i
 		control.transform.origin = Vector3(x_pos, ROW_Y + y_offset, CONTROL_Z)

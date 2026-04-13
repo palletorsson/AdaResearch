@@ -80,14 +80,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
 mesh = SubResource("SphereMesh_Handle")
 surface_material_override/0 = ExtResource("MatAccent")
 
-[node name="GrabPointHandLeft" parent="JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh" instance=ExtResource("4_dxrni")]
-transform = Transform3D(-4.37114e-08, 1, -7.53641e-15, -0.707107, -3.09086e-08, -0.707107, -0.707107, -3.09086e-08, 0.707107, 0.05, 0.05, -0.04)
-hand_pose = SubResource("Resource_b7ph4")
-
-[node name="GrabPointHandRight" parent="JoystickOrigin/InteractableJoystick/JoystickBody/HandleMesh" instance=ExtResource("5_xdnkf")]
-transform = Transform3D(-4.37114e-08, -1, -1.02355e-14, 0.642788, -2.80971e-08, -0.766044, 0.766044, -3.34849e-08, 0.642788, -0.05, 0.05, -0.04)
-hand_pose = SubResource("Resource_2v03l")
-
 [node name="HandleOrigin" type="Node3D" parent="JoystickOrigin/InteractableJoystick"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
 

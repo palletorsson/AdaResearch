@@ -77,12 +77,12 @@ hinge_limit_min = -135.0
 hinge_limit_max = 135.0
 
 [node name="KnobMesh" type="MeshInstance3D" parent="DialOrigin/InteractableHinge"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.022)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.022)
 mesh = SubResource("CylinderMesh_Knob")
 surface_material_override/0 = ExtResource("MatKnobBase")
 
 [node name="Indicator" type="MeshInstance3D" parent="DialOrigin/InteractableHinge/KnobMesh"]
-transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0.0125, -0.015)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015, 0.0125)
 mesh = SubResource("CapsuleMesh_Indicator")
 surface_material_override/0 = ExtResource("MatIndicator")
 
