@@ -352,7 +352,8 @@ func _build_compound(container: Node3D, comp_type: String, count: int) -> void:
 			RackPassiveElementsScript.build_monitor(container, 0.09, 0.04)
 			# Shift monitor up
 			for child in container.get_children():
-				child.transform.origin.y += 0.03
+				if child is Node3D:
+					child.transform.origin.y += 0.03
 			# Add sliders below
 			var gap := 0.03
 			var offset := -(count - 1) * gap / 2.0
