@@ -316,57 +316,88 @@ func _spawn_compounds():
 		add_child(lbl)
 
 
+## Build a simple procedural slider visual (no XRTools, no scene loading)
+static func _make_slider_v(parent: Node3D, pos: Vector3, sc: float) -> void:
+	var track_mat := StandardMaterial3D.new()
+	track_mat.albedo_color = Color(0.10, 0.10, 0.10)
+	var handle_mat := StandardMaterial3D.new()
+	handle_mat.albedo_color = Color(0.75, 0.38, 0.13)
+	handle_mat.emission_enabled = true
+	handle_mat.emission = Color(0.75, 0.38, 0.13)
+	handle_mat.emission_energy_multiplier = 0.3
+
+	var track := MeshInstance3D.new()
+	var tb := BoxMesh.new()
+	tb.size = Vector3(0.004, 0.12, 0.003) * sc
+	track.mesh = tb
+	track.material_override = track_mat
+	track.transform.origin = pos
+	parent.add_child(track)
+
+	var handle := MeshInstance3D.new()
+	var hb := BoxMesh.new()
+	hb.size = Vector3(0.03, 0.008, 0.01) * sc
+	handle.mesh = hb
+	handle.material_override = handle_mat
+	handle.transform.origin = pos + Vector3(0, 0.02 * sc, 0.005 * sc)
+	parent.add_child(handle)
+
+
+static func _make_slider_h(parent: Node3D, pos: Vector3, sc: float) -> void:
+	var track_mat := StandardMaterial3D.new()
+	track_mat.albedo_color = Color(0.10, 0.10, 0.10)
+	var handle_mat := StandardMaterial3D.new()
+	handle_mat.albedo_color = Color(0.75, 0.38, 0.13)
+	handle_mat.emission_enabled = true
+	handle_mat.emission = Color(0.75, 0.38, 0.13)
+	handle_mat.emission_energy_multiplier = 0.3
+
+	var track := MeshInstance3D.new()
+	var tb := BoxMesh.new()
+	tb.size = Vector3(0.12, 0.004, 0.003) * sc
+	track.mesh = tb
+	track.material_override = track_mat
+	track.transform.origin = pos
+	parent.add_child(track)
+
+	var handle := MeshInstance3D.new()
+	var hb := BoxMesh.new()
+	hb.size = Vector3(0.008, 0.025, 0.01) * sc
+	handle.mesh = hb
+	handle.material_override = handle_mat
+	handle.transform.origin = pos + Vector3(0.02 * sc, 0, 0.005 * sc)
+	parent.add_child(handle)
+
+
 func _build_compound(container: Node3D, comp_type: String, count: int) -> void:
 	match comp_type:
 		"sliders_v":
-			# Multiple vertical sliders side by side
 			var gap := 0.035
 			var offset := -(count - 1) * gap / 2.0
 			for j in count:
-				var scene := load("res://commons/interactables/slider_smooth.tscn") as PackedScene
-				if scene:
-					var ctrl := scene.instantiate()
-					ctrl.transform.origin = Vector3(offset + j * gap, 0, 0)
-					ctrl.scale = Vector3.ONE * 0.5
-					container.add_child(ctrl)
+				_make_slider_v(container, Vector3(offset + j * gap, 0, 0), 0.8)
 
 		"sliders_h":
-			# Multiple horizontal sliders stacked
 			var gap := 0.035
 			var offset := -(count - 1) * gap / 2.0
 			for j in count:
-				var scene := load("res://commons/interactables/slider_horizontal.tscn") as PackedScene
-				if scene:
-					var ctrl := scene.instantiate()
-					ctrl.transform.origin = Vector3(0, offset + j * gap, 0)
-					ctrl.scale = Vector3.ONE * 0.5
-					container.add_child(ctrl)
+				_make_slider_h(container, Vector3(0, offset + j * gap, 0), 0.7)
 
 		"monitor_sliders":
-			# Monitor on top, sliders below
 			RackPassiveElementsScript.build_monitor(container, 0.09, 0.04)
-			# Shift monitor up
 			for child in container.get_children():
 				child.transform.origin.y += 0.03
-			# Add sliders below
 			var gap := 0.03
-			var offset := -(count - 1) * gap / 2.0
+			var off := -(count - 1) * gap / 2.0
 			for j in count:
-				var scene := load("res://commons/interactables/slider_smooth.tscn") as PackedScene
-				if scene:
-					var ctrl := scene.instantiate()
-					ctrl.transform.origin = Vector3(offset + j * gap, -0.03, 0)
-					ctrl.scale = Vector3.ONE * 0.4
-					container.add_child(ctrl)
+				_make_slider_v(container, Vector3(off + j * gap, -0.03, 0), 0.6)
 
 		"speaker_meters":
-			# Speaker on top, meters below
 			var sp := Node3D.new()
 			sp.transform.origin = Vector3(0, 0.025, 0)
 			sp.scale = Vector3.ONE * 0.6
 			container.add_child(sp)
 			RackPassiveElementsScript.build_speaker_dots(sp)
-			# Meters below
 			var gap := 0.035
 			for j in count:
 				var m := Node3D.new()
@@ -376,7 +407,6 @@ func _build_compound(container: Node3D, comp_type: String, count: int) -> void:
 				RackPassiveElementsScript.build_vu_meter_v(m)
 
 		"meters_v":
-			# Multiple VU meters side by side
 			var gap := 0.03
 			var offset := -(count - 1) * gap / 2.0
 			for j in count:
