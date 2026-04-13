@@ -77,21 +77,24 @@ func _process(delta: float) -> void:
 func _enforce_handle_constraints(_delta: float, is_vertical: bool) -> void:
 	if not _handle or not _handle_origin:
 		return
-	
-	# HARD LOCK: Force non-slider axes to zero EVERY FRAME
-	# This prevents any lifting off the track
+
+	var s_min = _slider.get("slider_limit_min") if _slider else 0.0
+	var s_max = _slider.get("slider_limit_max") if _slider else 0.14
+	if s_min == null: s_min = 0.0
+	if s_max == null: s_max = 0.14
+
 	var handle_local_pos = _handle.transform.origin
-	
+
 	if is_vertical:
-		# Vertical slider: only Y can move, X and Z locked to 0
-		if handle_local_pos.x != 0.0 or handle_local_pos.z != 0.0:
-			_handle.transform.origin = Vector3(0.0, handle_local_pos.y, 0.0)
+		# Clamp Y to slider limits + lock X and Z to 0
+		var clamped_y = clamp(handle_local_pos.y, s_min - 0.005, s_max + 0.005)
+		_handle.transform.origin = Vector3(0.0, clamped_y, 0.0)
 	else:
-		# Horizontal slider: only X can move, Y and Z locked to 0  
-		if handle_local_pos.y != 0.0 or handle_local_pos.z != 0.0:
-			_handle.transform.origin = Vector3(handle_local_pos.x, 0.0, 0.0)
-	
-	# Also lock rotation to prevent drift
+		# Clamp X to slider limits + lock Y and Z to 0
+		var clamped_x = clamp(handle_local_pos.x, s_min - 0.005, s_max + 0.005)
+		_handle.transform.origin = Vector3(clamped_x, 0.0, 0.0)
+
+	# Lock rotation
 	_handle.transform.basis = Basis.IDENTITY
 
 func _connect_slider_signal() -> void:

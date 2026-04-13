@@ -4,7 +4,9 @@ extends Node3D
 ## For inspecting, testing, and improving each VR control element.
 ## Run this scene directly or place as artifact in a map.
 
-const CONTROLS = [
+## Control definitions — scenes loaded at runtime (not preload) to avoid
+## RigidBody3D script compilation errors with interactable_handle.gd
+var CONTROLS := [
 	{ "scene": "res://commons/interactables/push_button.tscn", "label": "BUTTON", "y": 0.0 },
 	{ "scene": "res://commons/interactables/push_button_front.tscn", "label": "BUTTON\nFRONT", "y": 0.0 },
 	{ "scene": "res://commons/interactables/dial_smooth.tscn", "label": "KNOB", "y": 0.0 },
