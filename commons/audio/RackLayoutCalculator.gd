@@ -164,11 +164,11 @@ static func calculate_layout(rack_config: Dictionary) -> LayoutResult:
 				# Convert to 3D coordinates (meters)
 				# X: left to right
 				# Y: top to bottom (inverted, so negative)
-				# Z: forward from rack face
+				# Z: forward from rack panel face
 				var pos_3d = Vector3(
 					center_x_px / PIXELS_PER_METER,
 					-center_y_px / PIXELS_PER_METER,
-					0.03  # Slight forward offset
+					0.008  # Just in front of panel face (panel is 0.008m thick)
 				)
 
 				result.positions[control_id] = pos_3d

@@ -44,7 +44,7 @@ func _setup_visuals():
 	cyl.top_radius = socket_radius
 	cyl.bottom_radius = socket_radius * 0.8
 	cyl.height = socket_depth
-	cyl.radial_segments = 16
+	cyl.radial_segments = 24
 	socket_mesh.mesh = cyl
 	socket_mesh.rotation_degrees.x = 90  # Face forward
 	socket_mesh.position.z = -socket_depth / 2
@@ -64,8 +64,8 @@ func _setup_visuals():
 	var torus = TorusMesh.new()
 	torus.inner_radius = socket_radius
 	torus.outer_radius = socket_radius + 0.006
-	torus.rings = 12
-	torus.ring_segments = 16
+	torus.rings = 16
+	torus.ring_segments = 24
 	ring_mesh.mesh = torus
 	ring_mesh.rotation_degrees.x = 90
 	
@@ -75,15 +75,19 @@ func _setup_visuals():
 	ring_mat.roughness = 0.2
 	ring_mesh.material_override = ring_mat
 	
-	# Type indicator (output = green tint, input = orange tint)
+	# Type indicator — strong distinction: output=orange, input=blue
+	var type_color: Color
 	if jack_type == JackType.OUTPUT:
-		ring_mat.albedo_color = ring_color.lerp(Color(0.2, 0.8, 0.3), 0.3)
+		type_color = Color(0.95, 0.45, 0.15)  # Orange
+		ring_mat.albedo_color = ring_color.lerp(type_color, 0.6)
 	else:
-		ring_mat.albedo_color = ring_color.lerp(Color(0.9, 0.5, 0.2), 0.3)
-	
-	# Type indicator dot (no built-in label — EurorackModule adds its own short label)
-	# Only add a tiny "O"/"I" if no external label is expected
-	pass
+		type_color = Color(0.27, 0.55, 0.95)  # Blue
+		ring_mat.albedo_color = ring_color.lerp(type_color, 0.6)
+
+	# Emissive ring for visibility in VR
+	ring_mat.emission_enabled = true
+	ring_mat.emission = type_color
+	ring_mat.emission_energy_multiplier = 0.4
 
 
 func _setup_detection():

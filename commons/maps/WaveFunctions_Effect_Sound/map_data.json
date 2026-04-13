@@ -82,9 +82,9 @@
   "layers": {
 	"interactables": [
 	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-	  [" ", "pick_up_cube", "AudioContr:-90#config:sine_wave_rack", " ", "pick_up_cube", " ", " ", " ", " ", "pick_up_cube", "GlassRack#config:simple_tube", " "],
+	  [" ", "pick_up_cube", "AudioContr:-90#preset:basic_mono", " ", "pick_up_cube", " ", " ", " ", " ", "pick_up_cube", "GlassRack#config:simple_tube", " "],
 	  [" ", "pick_up_cube", "AudioContr:-90#config:mario_rack", " ", "RackSineBasic:0:1", " ", " ", " ", " ", "cable_builder", "VRAudioMonitor", " "],
-	  [" ", " ", " ", " ", " ", " ", "pick_up_cube", "pick_up_cube", "pick_up_cube", "dark_sphere", "AudioContr:90#config:lab_intro_rack", " "],
+	  [" ", " ", " ", " ", " ", " ", "pick_up_cube", "pick_up_cube", "pick_up_cube", "dark_sphere", "AudioContr:90#preset:full_studio", " "],
 	  [" ", " ", " ", "DualBallFMController", "Rack303Acid:0:1", " ", "RackMoogBass:0:1", "RackDX7Piano:0:1", "AudioContr:-90#config:heartbeat_rack", "audio_catalog_tablet:90", "AudioContr#config:slider_rack", " "],
 	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
 	  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],

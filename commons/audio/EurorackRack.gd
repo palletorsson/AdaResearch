@@ -34,9 +34,9 @@ var _side_material: StandardMaterial3D
 
 func _init_materials() -> void:
 	_rail_material = StandardMaterial3D.new()
-	_rail_material.albedo_color = Color(0.65, 0.65, 0.68)
-	_rail_material.metallic = 0.92
-	_rail_material.roughness = 0.18
+	_rail_material.albedo_color = Color(0.70, 0.70, 0.74)
+	_rail_material.metallic = 0.94
+	_rail_material.roughness = 0.14
 
 	_side_material = StandardMaterial3D.new()
 	_side_material.albedo_color = Color(0.15, 0.12, 0.1)
@@ -173,12 +173,15 @@ func _add_rail_holes(rail: MeshInstance3D, width: float, y: float) -> void:
 	hole_mesh.top_radius = 0.002
 	hole_mesh.bottom_radius = 0.002
 	hole_mesh.height = 0.001
-	hole_mesh.radial_segments = 8
+	hole_mesh.radial_segments = 12
 
 	var hole_mat := StandardMaterial3D.new()
-	hole_mat.albedo_color = Color(0.3, 0.3, 0.32)
-	hole_mat.metallic = 0.9
-	hole_mat.roughness = 0.3
+	hole_mat.albedo_color = Color(0.45, 0.45, 0.48)
+	hole_mat.metallic = 0.92
+	hole_mat.roughness = 0.15
+	hole_mat.emission_enabled = true
+	hole_mat.emission = Color(0.2, 0.2, 0.22)
+	hole_mat.emission_energy_multiplier = 0.05
 
 	# Holes every ~2 HP along the rail
 	var hole_spacing: float = 2.0 * HP_METERS
@@ -207,6 +210,12 @@ func _add_side_panel(x: float, center_y: float, total_height: float) -> void:
 
 
 func _setup_cable_system() -> void:
+	# Skip entire cable system on desktop (avoids RigidBody errors)
+	var xr_active: bool = XRServer.primary_interface != null and XRServer.primary_interface.is_initialized()
+	if not xr_active:
+		print("EurorackRack: Desktop mode — cable system skipped")
+		return
+
 	# Create cable manager
 	cable_manager = SynthCableManager.new()
 	cable_manager.name = "CableManager"
@@ -225,16 +234,16 @@ func _setup_cable_system() -> void:
 	_build_cable_tray()
 
 	# Spawn cable pool
-	var rack_width: float = get_rack_width()
-	var rack_height: float = get_rack_height()
-	var tray_y: float = -(row_count - 1) * (ROW_HEIGHT + ROW_GAP + RAIL_HEIGHT * 2) - ROW_HEIGHT * 0.5 - RAIL_HEIGHT - CABLE_TRAY_HEIGHT - 0.03
-
-	for i in CABLE_POOL_SIZE:
-		var cable_x: float = (float(i) / float(CABLE_POOL_SIZE - 1)) * rack_width * 0.8 + rack_width * 0.1
-		var spawn_pos := Vector3(cable_x, tray_y, 0.02)
-		cable_manager.spawn_cable(spawn_pos)
-
-	print("EurorackRack: Cable system — %d jacks registered, %d cables spawned" % [jack_count, CABLE_POOL_SIZE])
+	if true:  # Only reached when XR is active (early return above for desktop)
+		var rack_width: float = get_rack_width()
+		var tray_y: float = -(row_count - 1) * (ROW_HEIGHT + ROW_GAP + RAIL_HEIGHT * 2) - ROW_HEIGHT * 0.5 - RAIL_HEIGHT - CABLE_TRAY_HEIGHT - 0.03
+		for i in CABLE_POOL_SIZE:
+			var cable_x: float = (float(i) / float(CABLE_POOL_SIZE - 1)) * rack_width * 0.8 + rack_width * 0.1
+			var spawn_pos := Vector3(cable_x, tray_y, 0.02)
+			cable_manager.spawn_cable(spawn_pos)
+		print("EurorackRack: Cable system — %d jacks, %d cables" % [jack_count, CABLE_POOL_SIZE])
+	else:
+		print("EurorackRack: Desktop mode — %d jacks registered, cables skipped" % jack_count)
 
 
 func _build_cable_tray() -> void:
@@ -261,7 +270,8 @@ func _center_rack() -> void:
 	# Offset all children so the rack is centered at origin
 	var offset := Vector3(-rack_width * 0.5, total_height * 0.5 - ROW_HEIGHT * 0.5 - RAIL_HEIGHT, 0)
 	for child in get_children():
-		child.transform.origin += offset
+		if child is Node3D:
+			child.transform.origin += offset
 
 
 func _load_module_library() -> Dictionary:

@@ -16,6 +16,7 @@ const LABEL_MARGIN_TOP: float = 0.015
 const CTRL_LABEL_OFFSET_Y: float = -0.025  # Below control center
 
 const SLIDER_SCENE = preload("res://commons/interactables/slider_smooth.tscn")
+const ModuleFaceTextureScript = preload("res://commons/audio/rack_controls/vr_wrappers/ModuleFaceTexture.gd")
 const JACK_SLIDER_SCALE: float = 0.22  # Scale down slider to fit beside jack
 const JACK_SLIDER_OFFSET_X: float = 0.020  # Horizontal offset from jack center
 
@@ -40,21 +41,24 @@ static var _stripe_material: StandardMaterial3D
 func _init_materials() -> void:
 	if not _panel_material:
 		_panel_material = StandardMaterial3D.new()
-		_panel_material.albedo_color = Color(0.1, 0.1, 0.12)
-		_panel_material.metallic = 0.85
-		_panel_material.roughness = 0.25
+		_panel_material.albedo_color = Color(0.06, 0.06, 0.08)
+		_panel_material.metallic = 0.92
+		_panel_material.roughness = 0.22
 
 	if not _screw_material:
 		_screw_material = StandardMaterial3D.new()
-		_screw_material.albedo_color = Color(0.7, 0.7, 0.72)
+		_screw_material.albedo_color = Color(0.75, 0.75, 0.78)
 		_screw_material.metallic = 0.95
-		_screw_material.roughness = 0.15
+		_screw_material.roughness = 0.12
+		_screw_material.emission_enabled = true
+		_screw_material.emission = Color(0.3, 0.3, 0.32)
+		_screw_material.emission_energy_multiplier = 0.05
 
 	if not _dark_backplate_material:
 		_dark_backplate_material = StandardMaterial3D.new()
-		_dark_backplate_material.albedo_color = Color(0.15, 0.15, 0.18)
-		_dark_backplate_material.metallic = 0.6
-		_dark_backplate_material.roughness = 0.3
+		_dark_backplate_material.albedo_color = Color(0.10, 0.10, 0.13)
+		_dark_backplate_material.metallic = 0.7
+		_dark_backplate_material.roughness = 0.28
 
 
 ## Get the default unscaled size of a control type from UVAC constants.
@@ -106,52 +110,18 @@ func build_from_definition(def: Dictionary, uvac: Node3D) -> void:
 	_panel_mesh.material_override = _panel_material
 	add_child(_panel_mesh)
 
-	# --- Accent stripe ---
-	var accent_color := Color(def.get("color_accent", "#4CAF50"))
-	_stripe_material = StandardMaterial3D.new()
-	_stripe_material.albedo_color = accent_color
-	_stripe_material.emission_enabled = true
-	_stripe_material.emission = accent_color
-	_stripe_material.emission_energy_multiplier = 0.4
-
-	_accent_stripe = MeshInstance3D.new()
-	_accent_stripe.name = "AccentStripe"
-	var stripe_box := BoxMesh.new()
-	stripe_box.size = Vector3(panel_w * 0.85, STRIPE_HEIGHT, PANEL_DEPTH + 0.001)
-	_accent_stripe.mesh = stripe_box
-	_accent_stripe.material_override = _stripe_material
-	_accent_stripe.transform.origin = Vector3(0, panel_h * 0.5 - LABEL_MARGIN_TOP - STRIPE_HEIGHT, 0.001)
-	add_child(_accent_stripe)
-
-	# --- Module name label ---
-	var name_label := Label3D.new()
-	name_label.name = "ModuleName"
-	name_label.text = str(def.get("name", "MOD"))
-	name_label.font_size = 48
-	name_label.pixel_size = 0.001
-	name_label.modulate = Color.WHITE
-	name_label.outline_modulate = Color(0, 0, 0, 0.8)
-	name_label.outline_size = 8
-	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	name_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	name_label.transform.origin = Vector3(0, panel_h * 0.5 - 0.005, PANEL_DEPTH * 0.5 + 0.002)
-	add_child(name_label)
-
-	# --- Full name label (smaller, below accent stripe) ---
-	var full_label := Label3D.new()
-	full_label.name = "FullName"
-	full_label.text = str(def.get("full_name", ""))
-	full_label.font_size = 24
-	full_label.pixel_size = 0.001
-	full_label.modulate = Color(0.5, 0.5, 0.55)
-	full_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	full_label.transform.origin = Vector3(0, panel_h * 0.5 - LABEL_MARGIN_TOP - STRIPE_HEIGHT - 0.008, PANEL_DEPTH * 0.5 + 0.002)
-	add_child(full_label)
+	# --- Module face texture (2D rendered panel with all controls) ---
+	var face := ModuleFaceTextureScript.new()
+	face.name = "ModuleFace"
+	face.transform.origin = Vector3(0, 0, PANEL_DEPTH * 0.5 + 0.001)
+	add_child(face)
+	face.build(def)
+	var _module_face = face
 
 	# --- Mounting screws (4 corners) ---
 	_add_screws(panel_w, panel_h)
 
-	# --- Controls ---
+	# --- 3D Controls (invisible, collision only — visuals come from face texture) ---
 	var control_defs: Array = def.get("controls", [])
 	for ctrl_def in control_defs:
 		_spawn_control(ctrl_def, panel_w, panel_h, uvac)
@@ -167,7 +137,7 @@ func _add_screws(panel_w: float, panel_h: float) -> void:
 	screw_mesh.top_radius = SCREW_RADIUS
 	screw_mesh.bottom_radius = SCREW_RADIUS
 	screw_mesh.height = SCREW_HEIGHT
-	screw_mesh.radial_segments = 12
+	screw_mesh.radial_segments = 24
 
 	var margin_x := 0.008
 	var margin_y := 0.008
@@ -226,8 +196,9 @@ func _spawn_control(ctrl_def: Dictionary, panel_w: float, panel_h: float, uvac: 
 	if uvac.has_method("connect_control_signals"):
 		uvac.connect_control_signals(control, unique_id, ctrl_type, ctrl_def)
 
-	# Darken the control backplate to match module panel
-	_darken_control_backplate(control)
+	# Strip ALL visual meshes — ModuleFaceTexture provides the visuals
+	# Keep only collision shapes for VR/desktop interaction
+	_strip_all_visuals(control)
 
 	# Apply size constraints from width_hp if specified (for displays/monitors)
 	if ctrl_def.has("width_hp"):
@@ -249,18 +220,7 @@ func _spawn_control(ctrl_def: Dictionary, panel_w: float, panel_h: float, uvac: 
 			"type": ctrl_type
 		}
 
-	# Add control label below the control
-	var label_text: String = str(ctrl_def.get("label", ""))
-	if not label_text.is_empty():
-		var ctrl_label := Label3D.new()
-		ctrl_label.name = "%s_Label" % ctrl_id
-		ctrl_label.text = label_text
-		ctrl_label.font_size = 28
-		ctrl_label.pixel_size = 0.001
-		ctrl_label.modulate = Color(0.65, 0.65, 0.7)
-		ctrl_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		ctrl_label.transform.origin = Vector3(x_pos, y_pos + CTRL_LABEL_OFFSET_Y, PANEL_DEPTH * 0.5 + 0.002)
-		add_child(ctrl_label)
+	# Labels rendered by ModuleFaceTexture — no 3D labels needed
 
 	controls[ctrl_id] = control
 
@@ -290,9 +250,11 @@ func _spawn_jack(jack_def: Dictionary, panel_w: float, panel_h: float) -> void:
 		var jack_label := Label3D.new()
 		jack_label.name = "%s_Label" % jack_id
 		jack_label.text = label_text
-		jack_label.font_size = 16
+		jack_label.font_size = 14
 		jack_label.pixel_size = 0.0004
-		jack_label.modulate = Color(0.55, 0.55, 0.6)
+		jack_label.modulate = Color(0.50, 0.50, 0.55)
+		jack_label.outline_size = 2
+		jack_label.outline_modulate = Color(0, 0, 0, 0.5)
 		jack_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		jack_label.transform.origin = Vector3(x_pos, y_pos + 0.016, PANEL_DEPTH * 0.5 + 0.002)
 		add_child(jack_label)
@@ -337,3 +299,16 @@ func _spawn_jack_level_slider(jack: SynthJack, jack_x: float, jack_y: float) -> 
 func _on_jack_level_changed(position, jack: SynthJack, slider: Node3D) -> void:
 	var norm: float = slider.get_normalized_value()
 	jack.level = norm
+
+
+## Strip all visual meshes from a 3D interactable, keeping only collision shapes.
+## This makes the control invisible — ModuleFaceTexture provides the visuals.
+func _strip_all_visuals(control: Node) -> void:
+	for child in control.get_children():
+		if child is MeshInstance3D:
+			child.visible = false
+		elif child is Label3D:
+			child.visible = false
+		# Recurse into children
+		if child.get_child_count() > 0:
+			_strip_all_visuals(child)

@@ -11,8 +11,8 @@ signal connection_changed(output_jack: SynthJack, input_jack: SynthJack)
 @export var plug_length: float = 0.025
 @export var plug_radius: float = 0.01
 @export var gravity_sag: float = 0.15
-@export var tube_sides: int = 8
-@export var curve_segments: int = 16
+@export var tube_sides: int = 16
+@export var curve_segments: int = 24
 
 var plug_a: SynthCablePlug
 var plug_b: SynthCablePlug
@@ -66,8 +66,11 @@ func _create_cable_mesh():
 	
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = cable_color
-	mat.metallic = 0.1
-	mat.roughness = 0.8
+	mat.metallic = 0.4
+	mat.roughness = 0.55
+	mat.emission_enabled = true
+	mat.emission = cable_color
+	mat.emission_energy_multiplier = 0.1
 	cable_mesh.material_override = mat
 
 

@@ -69,3 +69,29 @@ func set_normalized_value(val: float):
 	var angle = remap(val, 0.0, 1.0, h_min, h_max)
 	_hinge.set("hinge_position", angle)
 	_update_label(val)
+
+
+# ── Desktop pointer interaction ──────────────────────────────────────────────
+
+## Degrees of knob rotation per meter of vertical mouse drag
+const POINTER_SENSITIVITY: float = 300.0
+
+var _pointer_dragging: bool = false
+var _pointer_drag_start_y: float = 0.0
+var _pointer_drag_start_angle_deg: float = 0.0
+
+func pointer_event(event: XRToolsPointerEvent) -> void:
+	if not _hinge:
+		return
+	match event.event_type:
+		XRToolsPointerEvent.Type.PRESSED:
+			_pointer_dragging = true
+			_pointer_drag_start_y = event.position.y
+			_pointer_drag_start_angle_deg = _hinge.hinge_position
+		XRToolsPointerEvent.Type.MOVED:
+			if _pointer_dragging:
+				var delta_y := event.position.y - _pointer_drag_start_y
+				var new_angle_rad := deg_to_rad(_pointer_drag_start_angle_deg + delta_y * POINTER_SENSITIVITY)
+				_hinge.move_hinge(new_angle_rad)
+		XRToolsPointerEvent.Type.RELEASED, XRToolsPointerEvent.Type.EXITED:
+			_pointer_dragging = false

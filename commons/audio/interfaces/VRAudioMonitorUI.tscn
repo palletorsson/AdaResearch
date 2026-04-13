@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d3yq8v5gq2r1"]
 
-[ext_resource type="Script" uid="uid://cireqm1d0mna5" path="res://algorithms/wavefunctions/spectralanalysis/WaveformDisplay.gd" id="1_waveform"]
+[ext_resource type="Script" path="res://commons/audio/interfaces/SimpleWaveformDisplay.gd" id="1_waveform"]
 
 [node name="VRAudioMonitorUI" type="Control"]
 layout_mode = 3
@@ -62,9 +62,6 @@ script = ExtResource("1_waveform")
 background_color = Color(0, 0, 0, 0)
 line_color = Color(0.2, 1, 0.4, 1)
 line_width = 3.0
-sample_count = 128
-amplitude_scale = 100.0
-time_scale = 2.0
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

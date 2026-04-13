@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://commons/audio/UniversalVRAudioController.tscn" id="1_uvac"]
+[ext_resource type="Script" path="res://commons/scenes/StaticRackCamera.gd" id="2_cam"]
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
+sky_top_color = Color(0.05, 0.05, 0.1, 1)
+sky_horizon_color = Color(0.15, 0.15, 0.2, 1)
+ground_bottom_color = Color(0.02, 0.02, 0.04, 1)
+ground_horizon_color = Color(0.15, 0.15, 0.2, 1)
+
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("SkyMat")
+
+[sub_resource type="Environment" id="Env_1"]
+background_mode = 2
+sky = SubResource("Sky_1")
+ambient_light_source = 3
+ambient_light_color = Color(0.5, 0.5, 0.55, 1)
+ambient_light_energy = 1.5
+tonemap_mode = 3
+
+[sub_resource type="BoxShape3D" id="FloorShape"]
+size = Vector3(20, 0.1, 20)
+
+[node name="AudioRackDesktop" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866, -0.433, 0.25, 0, 0.5, 0.866, -0.5, 0.75, -0.433, 0, 5, 0)
+shadow_enabled = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 2.5, 0.8)
+light_energy = 3.0
+spot_range = 4.0
+spot_angle = 35.0
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0.9)
+fov = 45.0
+script = ExtResource("2_cam")
+
+[node name="AudioRack" parent="." instance=ExtResource("1_uvac")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+eurorack_preset_name = "basic_mono"
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("FloorShape")
+
+[node name="Instructions" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 1.85, 0.01)
+text = "Audio Rack — Desktop Test
+Left-click: Press buttons
+Click+drag: Move sliders/knobs"
+font_size = 16
+outline_size = 6

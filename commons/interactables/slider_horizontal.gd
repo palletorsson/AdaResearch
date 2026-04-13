@@ -17,6 +17,11 @@ signal slider_moved(value)
 @onready var _label: Label3D = get_node_or_null(label_node)
 var _last_display_text: String = ""
 
+# Desktop pointer drag state
+var _pointer_dragging: bool = false
+var _pointer_drag_start_world: Vector3 = Vector3.ZERO
+var _pointer_drag_start_pos: float = 0.0
+
 func _ready() -> void:
 	# Enforce usage of interactable slider
 	if _slider:
@@ -141,3 +146,30 @@ func _format_vector_value(value: Vector2) -> String:
 	var y_text := String.num(value.x, decimals)
 	var z_text := String.num(value.y, decimals)
 	return "Y: %s Z: %s" % [y_text, z_text]
+
+
+# ── Desktop pointer interaction ──────────────────────────────────────────────
+
+func pointer_event(event: XRToolsPointerEvent) -> void:
+	if not _slider:
+		return
+	match event.event_type:
+		XRToolsPointerEvent.Type.PRESSED:
+			_pointer_dragging = true
+			_pointer_drag_start_world = event.position
+			_pointer_drag_start_pos = _slider.slider_position
+		XRToolsPointerEvent.Type.MOVED:
+			if _pointer_dragging:
+				_handle_pointer_drag(event)
+		XRToolsPointerEvent.Type.RELEASED, XRToolsPointerEvent.Type.EXITED:
+			_pointer_dragging = false
+
+
+func _handle_pointer_drag(event: XRToolsPointerEvent) -> void:
+	var slider_origin := get_node_or_null("SliderOrigin") as Node3D
+	if not slider_origin or not _slider:
+		return
+	var slider_axis_world := slider_origin.global_transform.basis.x.normalized()
+	var delta_world := event.position - _pointer_drag_start_world
+	var projected_offset := delta_world.dot(slider_axis_world)
+	_slider.move_slider(_pointer_drag_start_pos + projected_offset)

@@ -73,6 +73,7 @@ const CONTROL_SIZES = {
 signal sound_played(stream)
 
 @export_file("*.json") var rack_config_path: String = ""
+@export var eurorack_preset_name: String = ""  ## If set, loads a eurorack preset instead of JSON config
 
 @onready var parameter_container = $ParameterGrid
 @onready var preview_player = $AudioStreamPlayer3D
@@ -100,8 +101,10 @@ func _ready():
 	# Setup auto-save timer for parameter syncing
 	_setup_auto_save_timer()
 
-	# Check if we should use JSON config
-	if rack_config_path != "" and FileAccess.file_exists(rack_config_path):
+	# Eurorack preset takes priority over JSON config
+	if eurorack_preset_name != "":
+		load_eurorack_preset(eurorack_preset_name)
+	elif rack_config_path != "" and FileAccess.file_exists(rack_config_path):
 		load_rack_config(rack_config_path)
 	elif rack_config_path != "":
 		push_warning("UniversalVRAudioController: Config path set but file not found: %s" % rack_config_path)
@@ -233,6 +236,13 @@ func apply_grid_config(config_data: Dictionary):
 		load_rack_config_from_dict(config_data)
 		return
 
+	# Load eurorack preset (if specified) — uses ModuleFaceTexture for polished look
+	if config_data.has("preset"):
+		var preset_name = str(config_data["preset"])
+		load_eurorack_preset(preset_name)
+		print("  -> Loaded eurorack preset: %s" % preset_name)
+		return
+
 	# Load rack config first (if specified)
 	if config_data.has("config"):
 		var config_name = str(config_data["config"])
@@ -240,7 +250,7 @@ func apply_grid_config(config_data: Dictionary):
 
 		if FileAccess.file_exists(full_path):
 			load_rack_config(full_path)
-			print("  â†’ Loaded rack config: %s" % config_name)
+			print("  -> Loaded rack config: %s" % config_name)
 		else:
 			push_error("UniversalVRAudioController: Rack config not found: %s" % full_path)
 			_list_available_configs()
@@ -556,16 +566,42 @@ func _spawn_controls_from_json():
 		layout_result.positions.size()
 	])
 
-	# Resize backplate and cable case to match content
-	_resize_rack_panel(layout_result.total_width, layout_result.total_height)
+	# Build proper eurorack frame (rails, side panels, back panel) — no cables
+	_build_eurorack_frame(layout_result.total_width, layout_result.total_height)
 
-	# Spawn controls at calculated positions
+	# Build module panel background (dark metallic)
+	_build_module_panel(layout_result.total_width, layout_result.total_height)
+
+	# Cell background material (subtle dark inset per control)
+	var cell_bg_mat := StandardMaterial3D.new()
+	cell_bg_mat.albedo_color = Color(0.09, 0.09, 0.11)
+	cell_bg_mat.metallic = 0.5
+	cell_bg_mat.roughness = 0.4
+
+	# Spawn controls at calculated positions with cell backgrounds
 	for control_id in layout_result.positions.keys():
 		if not control_defs.has(control_id):
 			continue
 
 		var control_config = control_defs[control_id]
 		var control_type = control_config.get("type", "slider")
+
+		# Skip labels/dividers for cell backgrounds
+		var is_decoration: bool = control_type in ["label", "lbl", "divider", "div", "group", "grp"]
+
+		# Add cell background plate (dark inset behind each control)
+		if not is_decoration and layout_result.sizes.has(control_id):
+			var cell_size: Vector2 = layout_result.sizes[control_id]
+			var cell_pos: Vector3 = layout_result.positions[control_id]
+			var cell_mesh := MeshInstance3D.new()
+			cell_mesh.name = "CellBg_%s" % control_id
+			var cell_box := BoxMesh.new()
+			cell_box.size = Vector3(cell_size.x + 0.008, cell_size.y + 0.008, 0.002)
+			cell_mesh.mesh = cell_box
+			cell_mesh.material_override = cell_bg_mat
+			cell_mesh.transform.origin = Vector3(cell_pos.x, cell_pos.y, 0.003)
+			parameter_container.add_child(cell_mesh)
+
 		var control = _instantiate_control(control_type, control_id)
 		if not control:
 			continue
@@ -582,7 +618,7 @@ func _spawn_controls_from_json():
 		# Connect signals based on control type
 		_connect_control_signals(control, control_id, control_type, control_config)
 
-		# Attach face plate behind physical controls (default: on)
+		# Face plates ON by default for polished look
 		if layout.get("face_plates", true) and not (control is VRRackControl):
 			var plate := _attach_face_plate(control, control_type)
 			if plate:
@@ -599,8 +635,188 @@ func _spawn_controls_from_json():
 			"type": control_type
 		}
 
-	# Build section backgrounds after all controls are placed
-	_build_sections(layout_result, control_defs)
+
+## Build eurorack-style frame with chrome rails, side panels, screw holes.
+## Replaces the old flat RackMesh/PanelMesh/CableCase approach.
+func _build_eurorack_frame(content_w: float, content_h: float) -> void:
+	# Hide old flat panel and cable case
+	var rack_mesh: MeshInstance3D = get_node_or_null("RackMesh")
+	if rack_mesh:
+		rack_mesh.visible = false
+	var cable_case = get_node_or_null("CableCase")
+	if cable_case:
+		cable_case.visible = false
+
+	var frame := Node3D.new()
+	frame.name = "EurorackFrame"
+	parameter_container.add_child(frame)
+
+	var rail_h := 0.016
+	var rail_d := 0.024
+	var side_w := 0.016
+	var pad := 0.015  # padding around content
+
+	var total_w := content_w + pad * 2
+	var total_h := content_h + pad * 2
+
+	# ── Chrome rails (top and bottom) ──
+	var rail_mat := StandardMaterial3D.new()
+	rail_mat.albedo_color = Color(0.70, 0.70, 0.74)
+	rail_mat.metallic = 0.94
+	rail_mat.roughness = 0.14
+
+	for sign in [1.0, -1.0]:
+		var y_pos: float = sign * (total_h / 2.0 + rail_h / 2.0)
+		var rail := MeshInstance3D.new()
+		rail.name = "Rail"
+		var box := BoxMesh.new()
+		box.size = Vector3(total_w + side_w * 2, rail_h, rail_d)
+		rail.mesh = box
+		rail.material_override = rail_mat
+		rail.transform.origin = Vector3(0, y_pos, rail_d / 2.0)
+		frame.add_child(rail)
+
+		# Screw hole dots along rail
+		var dot_mat := StandardMaterial3D.new()
+		dot_mat.albedo_color = Color(0.45, 0.45, 0.48)
+		dot_mat.metallic = 0.92
+		dot_mat.roughness = 0.15
+		var dot_mesh := CylinderMesh.new()
+		dot_mesh.top_radius = 0.002
+		dot_mesh.bottom_radius = 0.002
+		dot_mesh.height = 0.001
+		dot_mesh.radial_segments = 10
+		var dot_spacing := 0.04
+		var dot_count := int(total_w / dot_spacing)
+		for d in dot_count:
+			var mi := MeshInstance3D.new()
+			mi.mesh = dot_mesh
+			mi.material_override = dot_mat
+			mi.transform.origin = Vector3(
+				-total_w / 2.0 + 0.02 + d * dot_spacing,
+				y_pos,
+				rail_d + 0.001
+			)
+			mi.rotation_degrees.x = 90
+			frame.add_child(mi)
+
+	# ── Side panels (left and right) ──
+	var side_mat := StandardMaterial3D.new()
+	side_mat.albedo_color = Color(0.15, 0.12, 0.10)
+	side_mat.metallic = 0.15
+	side_mat.roughness = 0.7
+	var side_total_h := total_h + rail_h * 2
+
+	for sign in [-1.0, 1.0]:
+		var x_pos: float = sign * (total_w / 2.0 + side_w / 2.0)
+		var side := MeshInstance3D.new()
+		side.name = "SidePanel"
+		var side_box := BoxMesh.new()
+		side_box.size = Vector3(side_w, side_total_h, rail_d + 0.004)
+		side.mesh = side_box
+		side.material_override = side_mat
+		side.transform.origin = Vector3(x_pos, 0, rail_d / 2.0)
+		frame.add_child(side)
+
+	# ── Back panel ──
+	var back_mat := StandardMaterial3D.new()
+	back_mat.albedo_color = Color(0.08, 0.08, 0.10)
+	back_mat.metallic = 0.2
+	back_mat.roughness = 0.8
+	var back := MeshInstance3D.new()
+	back.name = "BackPanel"
+	var back_box := BoxMesh.new()
+	back_box.size = Vector3(total_w + side_w * 2, side_total_h, 0.004)
+	back.mesh = back_box
+	back.material_override = back_mat
+	back.transform.origin = Vector3(0, 0, -0.003)
+	frame.add_child(back)
+
+
+## Build dark metallic module panel behind all controls with accent stripe.
+func _build_module_panel(content_w: float, content_h: float) -> void:
+	var pad := 0.012
+	var panel_w := content_w + pad * 2
+	var panel_h := content_h + pad * 2
+
+	# Dark panel face
+	var panel_mat := StandardMaterial3D.new()
+	panel_mat.albedo_color = Color(0.06, 0.06, 0.08)
+	panel_mat.metallic = 0.92
+	panel_mat.roughness = 0.22
+
+	var panel := MeshInstance3D.new()
+	panel.name = "ModulePanel"
+	var box := BoxMesh.new()
+	box.size = Vector3(panel_w, panel_h, 0.008)
+	panel.mesh = box
+	panel.material_override = panel_mat
+	panel.transform.origin = Vector3(0, 0, 0)
+	parameter_container.add_child(panel)
+
+	# Accent stripe at top
+	var rack_name: String = rack_config.get("rack_info", {}).get("name", "")
+	var accent_color := _get_rack_accent_color()
+	var stripe_mat := StandardMaterial3D.new()
+	stripe_mat.albedo_color = accent_color
+	stripe_mat.emission_enabled = true
+	stripe_mat.emission = accent_color
+	stripe_mat.emission_energy_multiplier = 0.9
+
+	var stripe := MeshInstance3D.new()
+	stripe.name = "AccentStripe"
+	var stripe_box := BoxMesh.new()
+	stripe_box.size = Vector3(panel_w * 0.88, 0.003, 0.001)
+	stripe.mesh = stripe_box
+	stripe.material_override = stripe_mat
+	stripe.transform.origin = Vector3(0, panel_h / 2.0 - 0.018, 0.005)
+	parameter_container.add_child(stripe)
+
+	# Rack name label
+	if not rack_name.is_empty():
+		var label := Label3D.new()
+		label.name = "RackNameLabel"
+		label.text = rack_name.to_upper()
+		label.font_size = 40
+		label.pixel_size = 0.0008
+		label.modulate = Color(0.92, 0.92, 0.95)
+		label.outline_modulate = Color(0, 0, 0, 0.9)
+		label.outline_size = 4
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.transform.origin = Vector3(0, panel_h / 2.0 - 0.009, 0.005)
+		parameter_container.add_child(label)
+
+	# Corner screws
+	var screw_mat := StandardMaterial3D.new()
+	screw_mat.albedo_color = Color(0.75, 0.75, 0.78)
+	screw_mat.metallic = 0.95
+	screw_mat.roughness = 0.12
+	var screw_mesh := CylinderMesh.new()
+	screw_mesh.top_radius = 0.0022
+	screw_mesh.bottom_radius = 0.0022
+	screw_mesh.height = 0.003
+	screw_mesh.radial_segments = 24
+	var mx := panel_w / 2.0 - 0.006
+	var my := panel_h / 2.0 - 0.006
+	for pos in [Vector3(-mx, my, 0), Vector3(mx, my, 0), Vector3(-mx, -my, 0), Vector3(mx, -my, 0)]:
+		var mi := MeshInstance3D.new()
+		mi.mesh = screw_mesh
+		mi.material_override = screw_mat
+		mi.transform.origin = Vector3(pos.x, pos.y, 0.005)
+		mi.rotation_degrees.x = 90
+		parameter_container.add_child(mi)
+
+
+## Get accent color from rack config sound type
+func _get_rack_accent_color() -> Color:
+	var sound_type: String = rack_config.get("rack_info", {}).get("sound_type", "")
+	match sound_type:
+		"synth_wave": return Color(0.53, 0.76, 0.20)  # Green
+		"basic_sine_wave": return Color(0.27, 0.55, 0.95)  # Blue
+		"heartbeat": return Color(1.0, 0.20, 0.40)  # Pink/red
+		"lab_hum": return Color(0.0, 0.78, 0.85)  # Cyan
+		"pickup_mario": return Color(1.0, 0.60, 0.0)  # Orange
+		_: return Color(0.95, 0.45, 0.15)  # Default orange
 
 # Legacy spawn method for configs with explicit col_spacing/row_spacing
 func _spawn_controls_legacy():
@@ -889,10 +1105,13 @@ func _get_control_size(control_type: String) -> Vector2:
 
 # Configure control properties based on type and config
 func _configure_control(control: Node, config: Dictionary, control_type: String):
-	# Set label if control supports it
+	# Set label if control supports it (guard against placeholder scripts)
 	var label = config.get("label", "")
 	if control.has_method("set_param_name"):
-		control.set_param_name(label)
+		if control.is_inside_tree():
+			control.set_param_name(label)
+		else:
+			control.ready.connect(func(): control.set_param_name(label), CONNECT_ONE_SHOT)
 	elif "label" in control:
 		control.label = label
 
@@ -944,7 +1163,7 @@ func _configure_control(control: Node, config: Dictionary, control_type: String)
 				if "pressed_color" in control:
 					control.pressed_color = base_color.lightened(0.3)
 				# Force update the visual state with new colors
-				if control.has_method("update_colors"):
+				if control.has_method("update_colors") and control.is_inside_tree():
 					control.update_colors()
 
 		"xy", "xypad", "2df", "pad", "js", "joystick":
@@ -1092,9 +1311,14 @@ func _connect_control_signals(control: Node, control_id: String, control_type: S
 				control.joystick_moved.connect(_on_xy_control_changed.bind(control_id))
 
 		"btn", "button", "trigger":
-			# Buttons emit pressed signal
-			if control.has_signal("pressed"):
+			# Buttons emit pressed signal (defer if not ready)
+			if control.has_signal("pressed") and control.is_inside_tree():
 				control.pressed.connect(_on_button_pressed.bind(control_id))
+			elif control.has_signal("pressed"):
+				control.ready.connect(func():
+					if control.has_signal("pressed"):
+						control.pressed.connect(_on_button_pressed.bind(control_id))
+				, CONNECT_ONE_SHOT)
 			if control.has_signal("button_pressed"):
 				control.button_pressed.connect(_on_button_pressed.bind(control_id))
 
@@ -1226,30 +1450,15 @@ func _clear_controls():
 
 
 func _resize_rack_panel(w: float, h: float) -> void:
-	## Resize the backplate and cable case to match the actual layout size.
+	## Legacy: resize flat backplate. Now mostly unused — _build_eurorack_frame replaces this.
 	var rack_mesh: MeshInstance3D = get_node_or_null("RackMesh")
 	if not rack_mesh:
 		return
-	var panel_mesh: MeshInstance3D = rack_mesh.get_node_or_null("PanelMesh")
+	rack_mesh.visible = false
 	var cable_case = get_node_or_null("CableCase")
-
-	# Resize outer frame (4cm padding around content)
-	var frame_w: float = w + 0.06
-	var frame_h: float = h + 0.06
-	rack_mesh.mesh = BoxMesh.new()
-	rack_mesh.mesh.size = Vector3(frame_w, frame_h, 0.05)
-
-	# Resize front panel (2cm padding)
-	if panel_mesh:
-		panel_mesh.mesh = BoxMesh.new()
-		panel_mesh.mesh.size = Vector3(frame_w - 0.02, frame_h - 0.02, 0.01)
-		panel_mesh.position = Vector3(0, 0, 0.026)
-
-	# Rebuild cable case to match
-	if cable_case and cable_case.has_method("rebuild"):
-		cable_case.rebuild(frame_w + 0.02, frame_h + 0.02)
-
-	print("UVAC: Resized rack panel to %.2fm x %.2fm" % [frame_w, frame_h])
+	if cable_case:
+		cable_case.visible = false
+	print("UVAC: Rack panel hidden — eurorack frame built instead")
 
 
 func _build_sections(layout_result, control_defs: Dictionary) -> void:

@@ -31,13 +31,15 @@ func _draw_control() -> void:
 	if normalized_value > 0.01:
 		draw_arc(center, outer_r, start_rad, value_rad, 64, _accent, 4.0)
 
-	# Tick marks at 0%, 50%, 100%
-	var tick_color := Color(_label_dim, 0.4)
-	for pct: float in [0.0, 0.5, 1.0]:
+	# Tick marks — 11 ticks around arc (more visible)
+	var tick_color := Color(_label_dim, 0.7)
+	for i in 11:
+		var pct := float(i) / 10.0
 		var angle: float = start_rad + sweep_rad * pct
-		var tick_inner := center + Vector2(cos(angle), sin(angle)) * (outer_r + 4.0)
-		var tick_outer := center + Vector2(cos(angle), sin(angle)) * (outer_r + 8.0)
-		draw_line(tick_inner, tick_outer, tick_color, 1.0)
+		var is_major := (i == 0 or i == 5 or i == 10)
+		var tick_inner := center + Vector2(cos(angle), sin(angle)) * (outer_r + 3.0)
+		var tick_outer := center + Vector2(cos(angle), sin(angle)) * (outer_r + (9.0 if is_major else 6.0))
+		draw_line(tick_inner, tick_outer, tick_color, 1.5 if is_major else 1.0)
 
 	# Knob body (filled circle)
 	draw_circle(center, inner_r + 8.0, RackDesignTokens.get_color("panel_dark"))
@@ -46,7 +48,7 @@ func _draw_control() -> void:
 	# Pointer line from center to value angle
 	var pointer_start := center + Vector2(cos(value_rad), sin(value_rad)) * inner_r
 	var pointer_end := center + Vector2(cos(value_rad), sin(value_rad)) * (outer_r - 2.0)
-	draw_line(pointer_start, pointer_end, _accent, 2.5)
+	draw_line(pointer_start, pointer_end, _accent, 3.5)
 
 	# Center dot
 	draw_circle(center, 3.0, _accent)

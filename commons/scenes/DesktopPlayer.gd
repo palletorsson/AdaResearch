@@ -16,6 +16,7 @@ class_name DesktopPlayer
 @onready var head: Node3D = $Head
 @onready var interaction_raycast: RayCast3D = $Head/InteractionRaycast
 @onready var crosshair: ColorRect = $Head/Camera3D/Crosshair
+@onready var desktop_pointer = $Head/DesktopInteractionPointer
 
 # Mouse look
 var mouse_motion: Vector2 = Vector2.ZERO
@@ -90,7 +91,11 @@ func _input(event):
 			else:
 				# Normal mode: left-click interacts (teleport, artifacts)
 				if event.button_index == MOUSE_BUTTON_LEFT:
-					_try_interact()
+					# Let the pointer handle VR interactables (sliders, buttons, knobs)
+					if desktop_pointer and (desktop_pointer.has_hover_target() or desktop_pointer.is_dragging()):
+						pass  # Pointer system handles this via its own _input
+					else:
+						_try_interact()
 
 func _physics_process(delta: float) -> void:
 	# Apply mouse look
@@ -147,6 +152,7 @@ func _apply_camera_rotation(_delta: float):
 
 func _process(_delta: float):
 	_check_for_interactable()
+	_update_crosshair_for_pointer()
 
 	# Update voxel edit controller raycast from camera center
 	if voxel_edit_mode and _voxel_controller and camera:
@@ -297,6 +303,21 @@ func _try_interact():
 		# Try to get artifact ID from metadata
 		var artifact_id = target.get_meta("artifact_id", target.name)
 		print("DesktopPlayer: Activated artifact: %s" % artifact_id)
+
+
+func _update_crosshair_for_pointer() -> void:
+	if not crosshair or not desktop_pointer:
+		return
+	if voxel_edit_mode:
+		return  # Voxel mode has its own crosshair color
+	if desktop_pointer.is_dragging():
+		crosshair.modulate = Color(1.0, 0.6, 0.1)  # Orange while dragging
+	elif desktop_pointer.has_hover_target():
+		crosshair.modulate = Color(1.0, 1.0, 0.2)  # Yellow when hovering a control
+	elif current_interactable:
+		pass  # Green set by _highlight_interactable
+	else:
+		crosshair.modulate = Color(1, 1, 1)
 
 
 # ═══════════════════════════════════════════════════════════════
