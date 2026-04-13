@@ -1,5 +1,12 @@
 # Task: Tweak Interactable Demo Element Sizing
 
+## Context
+This is a VR eurorack synthesizer project in Godot 4.6. We built an interactable demo scene that showcases every control type (sliders, knobs, buttons, speakers, meters, monitors) in three rows on warm gray Dieter Rams-styled panels. The Three.js version at `ada_encyclopedia/src/components/interactable-demo/InteractableDemo3D.tsx` is the visual reference.
+
+The demo scene lives at `commons/interactables/interactable_demo.tscn` with script `InteractableDemo.gd`. It spawns everything programmatically — real interactable scenes for Row 1, procedural meshes for passive elements, and compound layouts.
+
+The Dieter Rams aesthetic: warm cream (#C6BEAC) panels, black controls, copper (#C06020) accents, thin precise lines. Design tokens in `commons/audio/rack_controls/rack_design_tokens.json`.
+
 ## What Needs to Happen
 The `interactable_demo.tscn` has three rows of elements. The compound layouts (Row 3) and passive elements (Row 2) need to be the **same physical height** as the single elements in Row 1, and compounds should take up double/triple footprint width while maintaining that height.
 
