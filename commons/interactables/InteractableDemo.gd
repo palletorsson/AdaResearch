@@ -35,10 +35,10 @@ const PASSIVE_ELEMENTS = [
 	{ "builder": "build_speaker_grid", "label": "SPEAKER GRID", "width": 1 },
 	{ "builder": "build_vu_meter_v", "label": "VU METER V", "width": 1 },
 	{ "builder": "build_vu_meter_h", "label": "VU METER H", "width": 1 },
-	{ "scene": "res://commons/audio/interfaces/VRSimpleWaveform.tscn", "label": "WAVEFORM", "width": 2 },
-	{ "scene": "res://commons/audio/interfaces/VRWaveformDisplayWide.tscn", "label": "WAVEFORM WIDE", "width": 3 },
-	{ "scene": "res://commons/audio/interfaces/VRSpectrumDisplay.tscn", "label": "SPECTRUM", "width": 2 },
-	{ "scene": "res://commons/audio/interfaces/VRAudioMonitor.tscn", "label": "MONITOR", "width": 2 },
+	{ "monitor": "scope", "slots": 2, "label": "SCOPE", "width": 2 },
+	{ "monitor": "scope", "slots": 3, "label": "SCOPE WIDE", "width": 3 },
+	{ "monitor": "spectrum", "slots": 2, "label": "SPECTRUM", "width": 2 },
+	{ "monitor": "lissajous", "slots": 2, "label": "LISSAJOUS", "width": 2 },
 ]
 
 const ROW2_Y := 0.65  # Second row below first
@@ -213,14 +213,13 @@ func _spawn_passive_elements():
 		frame.transform.origin = Vector3(x_pos, ROW2_Y, CONTROL_Z - 0.004)
 		add_child(frame)
 
-		if def.has("scene"):
-			# Load real monitor scene
-			var scene := load(def["scene"]) as PackedScene
-			if scene:
-				var monitor := scene.instantiate()
-				monitor.name = "Monitor_%d" % i
-				monitor.transform.origin = Vector3(x_pos, ROW2_Y, CONTROL_Z)
-				add_child(monitor)
+		if def.has("monitor"):
+			# Rams-styled grid monitor with SubViewport waveform
+			var element := Node3D.new()
+			element.name = "Monitor_%d" % i
+			element.transform.origin = Vector3(x_pos, ROW2_Y, CONTROL_Z)
+			add_child(element)
+			RackPassiveElementsScript.build_monitor_grid(element, def.get("slots", 2), def["monitor"])
 		elif def.has("builder"):
 			var element := Node3D.new()
 			element.name = "Passive_%d" % i
