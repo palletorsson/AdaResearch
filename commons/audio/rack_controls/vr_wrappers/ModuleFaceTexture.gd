@@ -39,6 +39,10 @@ const CONTROL_SCENES: Dictionary = {
 	"lv": "res://commons/audio/rack_controls/RackLever.tscn",
 	"meter": "res://commons/audio/rack_controls/RackMeter.tscn",
 	"mtr": "res://commons/audio/rack_controls/RackMeter.tscn",
+	"lbl": "res://commons/audio/rack_controls/RackLabel.tscn",
+	"label": "res://commons/audio/rack_controls/RackLabel.tscn",
+	"div": "res://commons/audio/rack_controls/RackDivider.tscn",
+	"divider": "res://commons/audio/rack_controls/RackDivider.tscn",
 }
 
 var _viewport: SubViewport
@@ -47,10 +51,15 @@ var _panel_control: Control
 var _control_instances: Dictionary = {}  # ctrl_id -> RackControlBase
 var _physical_w: float = 0.0
 var _physical_h: float = 0.0
+var _uvac: Node = null
+var _module_prefix: String = ""
 
 
 ## Build the module face from a module definition dictionary.
-func build(module_def: Dictionary) -> void:
+func build(module_def: Dictionary, uvac: Node = null, module_prefix: String = "") -> void:
+	_uvac = uvac
+	_module_prefix = module_prefix
+
 	var hp_width: int = int(module_def.get("hp_width", 8))
 	var row_span: int = int(module_def.get("row_span", 1))
 	var module_name: String = str(module_def.get("name", "MOD"))
@@ -145,22 +154,47 @@ func build(module_def: Dictionary) -> void:
 		if not scene:
 			continue
 
-		var ctrl_node := scene.instantiate()
-		if not ctrl_node is Control:
-			ctrl_node.queue_free()
+		var ctrl_node: Control = scene.instantiate() as Control
+		if ctrl_node == null:
 			continue
+
+		var ctrl_size: Vector2 = ctrl_node.custom_minimum_size if ctrl_node.custom_minimum_size != Vector2.ZERO else Vector2(80, 100)
+		if ctrl_def.has("width_hp"):
+			ctrl_size.x = float(ctrl_def.get("width_hp", 0.0)) * HP_PX
+		if ctrl_def.has("height_frac"):
+			ctrl_size.y = float(ctrl_def.get("height_frac", 0.0)) * px_h
+		elif ctrl_def.has("height_px"):
+			ctrl_size.y = float(ctrl_def.get("height_px", 0.0))
+		ctrl_node.custom_minimum_size = ctrl_size
+		ctrl_node.size = ctrl_size
 
 		# Set label and default value
 		if "control_label" in ctrl_node:
 			ctrl_node.control_label = label
+		var style_variant: String = str(ctrl_def.get("style", ctrl_def.get("style_variant", "")))
+		if not style_variant.is_empty() and "style_variant" in ctrl_node:
+			ctrl_node.style_variant = style_variant
+		var step_count: int = int(ctrl_def.get("step_count", 0))
+		if step_count > 0:
+			if "step_count" in ctrl_node:
+				ctrl_node.step_count = step_count
+			elif "steps" in ctrl_node:
+				ctrl_node.steps = step_count
 		if "normalized_value" in ctrl_node:
 			var norm: float = 0.5
 			if max_val != min_val:
 				norm = clampf((default_val - min_val) / (max_val - min_val), 0.0, 1.0)
 			ctrl_node.normalized_value = norm
+		if "normalized_value_y" in ctrl_node:
+			var default_val_y: float = float(ctrl_def.get("default_y", ctrl_def.get("default", 0.5)))
+			var min_val_y: float = float(ctrl_def.get("min_y", ctrl_def.get("min", 0.0)))
+			var max_val_y: float = float(ctrl_def.get("max_y", ctrl_def.get("max", 1.0)))
+			var norm_y: float = 0.5
+			if max_val_y != min_val_y:
+				norm_y = clampf((default_val_y - min_val_y) / (max_val_y - min_val_y), 0.0, 1.0)
+			ctrl_node.normalized_value_y = norm_y
 
 		# Position in viewport pixel space (scaled)
-		var ctrl_size: Vector2 = ctrl_node.custom_minimum_size if ctrl_node.custom_minimum_size != Vector2.ZERO else Vector2(80, 100)
 		var cx: float = x_hp * HP_PX * sf - ctrl_size.x * sf / 2.0
 		var cy: float = y_frac * px_h * sf - ctrl_size.y * sf / 2.0
 
@@ -170,6 +204,7 @@ func build(module_def: Dictionary) -> void:
 
 		_panel_control.add_child(ctrl_node)
 		_control_instances[ctrl_id] = ctrl_node
+		_register_control_with_uvac(ctrl_id, ctrl_type, ctrl_node, ctrl_def)
 
 		# Set button colors — must be deferred so _ready() finishes first
 		var btn_color_str: String = str(ctrl_def.get("color", ""))
@@ -212,6 +247,86 @@ func sync_control_y(ctrl_id: String, normalized: float) -> void:
 ## Get the 2D control instance for a given id.
 func get_2d_control(ctrl_id: String) -> Control:
 	return _control_instances.get(ctrl_id)
+
+
+func _register_control_with_uvac(ctrl_id: String, ctrl_type: String, ctrl_node: Control, ctrl_def: Dictionary) -> void:
+	if _uvac == null or _module_prefix.is_empty():
+		return
+
+	if not ("active_controls" in _uvac):
+		return
+
+	var unique_id := "%s_%s" % [_module_prefix, ctrl_id]
+	_uvac.active_controls[unique_id] = {
+		"instance": ctrl_node,
+		"parameter": ctrl_def.get("parameter", ""),
+		"parameter_x": ctrl_def.get("parameter_x", ""),
+		"parameter_y": ctrl_def.get("parameter_y", ""),
+		"config": ctrl_def,
+		"type": ctrl_type
+	}
+
+	if ctrl_node.has_signal("value_changed"):
+		if ctrl_type in ["xy", "xypad", "2df", "pad", "js", "joystick"]:
+			ctrl_node.value_changed.connect(_on_dual_axis_x_changed.bind(unique_id))
+		elif ctrl_type in ["btn", "button", "trigger"]:
+			ctrl_node.value_changed.connect(_on_button_value_changed.bind(unique_id))
+		else:
+			ctrl_node.value_changed.connect(_on_control_value_changed.bind(unique_id))
+
+	if ctrl_node.has_signal("value_y_changed"):
+		ctrl_node.value_y_changed.connect(_on_dual_axis_y_changed.bind(unique_id))
+
+
+func _on_control_value_changed(_value: float, control_id: String) -> void:
+	if _uvac and _uvac.has_method("_on_parameter_changed_json"):
+		_uvac._on_parameter_changed_json(_value, control_id)
+
+
+func _on_dual_axis_x_changed(value: float, control_id: String) -> void:
+	_store_dual_axis_values(control_id, value, null)
+	_trigger_uvac_update(control_id)
+
+
+func _on_dual_axis_y_changed(value: float, control_id: String) -> void:
+	_store_dual_axis_values(control_id, null, value)
+	_trigger_uvac_update(control_id)
+
+
+func _on_button_value_changed(value: float, control_id: String) -> void:
+	if _uvac and "active_controls" in _uvac and _uvac.active_controls.has(control_id):
+		_uvac.active_controls[control_id]["toggle_state"] = value >= 0.5
+	_trigger_uvac_update(control_id)
+
+
+func _store_dual_axis_values(control_id: String, x_value: Variant, y_value: Variant) -> void:
+	if _uvac == null or not ("active_controls" in _uvac) or not _uvac.active_controls.has(control_id):
+		return
+
+	var control_data: Dictionary = _uvac.active_controls[control_id]
+	if x_value != null:
+		control_data["last_x"] = x_value
+	if y_value != null:
+		control_data["last_y"] = y_value
+
+	var control: Control = control_data.get("instance", null) as Control
+	if control:
+		if control.has_method("get_normalized_value"):
+			control_data["last_x"] = control.get_normalized_value()
+		if control.has_method("get_normalized_value_y"):
+			control_data["last_y"] = control.get_normalized_value_y()
+
+	_uvac.active_controls[control_id] = control_data
+
+
+func _trigger_uvac_update(control_id: String) -> void:
+	if _uvac == null:
+		return
+
+	if _uvac.has_method("_update_waveform_displays"):
+		_uvac._update_waveform_displays()
+	if _uvac.has_method("_on_parameter_changed_json"):
+		_uvac._on_parameter_changed_json(0.0, control_id)
 
 
 var _collision_body: StaticBody3D
