@@ -1,62 +1,56 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcwa500yc5w2p"]
+[gd_scene load_steps=6 format=3 uid="uid://dcwa500yc5w2p"]
 
-[ext_resource type="PackedScene" uid="uid://bvgjfffe0w2uu" path="res://commons/interactables/joystick_smooth.tscn" id="1_5v1m4"]
-[ext_resource type="PackedScene" uid="uid://btb5pw854d8m6" path="res://commons/interactables/slider_plane.tscn" id="1_yww16"]
-[ext_resource type="PackedScene" uid="uid://cs6dxfu5owcgo" path="res://commons/interactables/lever_smooth.tscn" id="4_ojpe8"]
-[ext_resource type="PackedScene" uid="uid://dbv1hvxufc1al" path="res://commons/interactables/push_button.tscn" id="5_lyxvk"]
-[ext_resource type="PackedScene" uid="uid://cpwdvy41fqdua" path="res://commons/interactables/slider_smooth.tscn" id="6_24yqt"]
-[ext_resource type="PackedScene" uid="uid://d2td5hwh2oluy" path="res://commons/interactables/wheel_smooth.tscn" id="7_qiivc"]
+[ext_resource type="Script" path="res://commons/interactables/InteractableDemo.gd" id="1_demo"]
+[ext_resource type="Script" path="res://commons/scenes/StaticRackCamera.gd" id="2_cam"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dark"]
-sky_top_color = Color(0.05, 0.05, 0.05, 1)
-sky_horizon_color = Color(0.1, 0.1, 0.12, 1)
-ground_bottom_color = Color(0.02, 0.02, 0.03, 1)
-ground_horizon_color = Color(0.1, 0.1, 0.12, 1)
+[sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
+sky_top_color = Color(0.6, 0.58, 0.54, 1)
+sky_horizon_color = Color(0.7, 0.68, 0.64, 1)
+ground_bottom_color = Color(0.4, 0.38, 0.35, 1)
+ground_horizon_color = Color(0.6, 0.58, 0.54, 1)
 
-[sub_resource type="Sky" id="Sky_dark"]
-sky_material = SubResource("ProceduralSkyMaterial_dark")
+[sub_resource type="Sky" id="Sky_1"]
+sky_material = SubResource("SkyMat")
 
-[sub_resource type="Environment" id="Environment_dark"]
+[sub_resource type="Environment" id="Env_1"]
 background_mode = 2
-sky = SubResource("Sky_dark")
-ambient_light_source = 2
-ambient_light_color = Color(0.3, 0.3, 0.35, 1)
-tonemap_mode = 2
-glow_enabled = true
-glow_intensity = 0.5
-glow_strength = 0.9
+sky = SubResource("Sky_1")
+ambient_light_source = 3
+ambient_light_color = Color(0.65, 0.63, 0.60, 1)
+ambient_light_energy = 1.8
+tonemap_mode = 3
+
+[sub_resource type="BoxShape3D" id="FloorShape"]
+size = Vector3(10, 0.1, 10)
 
 [node name="InteractableDemo" type="Node3D"]
+script = ExtResource("1_demo")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_dark")
+environment = SubResource("Env_1")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 0, 0)
+transform = Transform3D(-0.866, -0.433, 0.25, 0, 0.5, 0.866, -0.5, 0.75, -0.433, 0, 3, 2)
+light_energy = 1.5
 shadow_enabled = true
 
-[node name="RackMockup" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+[node name="FillLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866, -0.433, -0.25, 0, 0.5, -0.866, 0.5, 0.75, 0.433, 0, 2, -1)
+light_energy = 0.5
 
-[node name="SliderSmooth" parent="RackMockup" instance=ExtResource("6_24yqt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.15, 0)
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 2.5, 1.0)
+light_energy = 2.5
+spot_range = 4.0
+spot_angle = 40.0
 
-[node name="LeverSmooth" parent="RackMockup" instance=ExtResource("4_ojpe8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 1.5)
+fov = 50.0
+script = ExtResource("2_cam")
 
-[node name="PushButton" parent="RackMockup" instance=ExtResource("5_lyxvk")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.2, 0.15, 0)
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 
-[node name="JoystickSmooth" parent="RackMockup" instance=ExtResource("1_5v1m4")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.2, -0.15, 0)
-
-[node name="WheelSmooth" parent="RackMockup" instance=ExtResource("7_qiivc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3543284, 0)
-
-[node name="SliderPlane" parent="RackMockup" instance=ExtResource("1_yww16")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.74582154, -0.14999998, 0)
-
-[node name="Label" type="Label3D" parent="RackMockup"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
-text = "RACK MODULES"
-font_size = 48
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("FloorShape")
