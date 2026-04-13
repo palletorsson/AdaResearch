@@ -28,29 +28,32 @@ const LABEL_Y_OFFSET := -0.18  # below control center
 const ROW_Y := 1.1  # height of row center
 
 
+## Row 2: Passive elements — speakers, meters, working monitors (use real scenes)
 const PASSIVE_ELEMENTS = [
-	{ "builder": "build_speaker_dots", "label": "SPEAKER\nDOTS" },
-	{ "builder": "build_speaker_lines", "label": "SPEAKER\nLINES" },
-	{ "builder": "build_speaker_grid", "label": "SPEAKER\nGRID" },
-	{ "builder": "build_vu_meter_v", "label": "VU METER\nV" },
-	{ "builder": "build_vu_meter_h", "label": "VU METER\nH" },
-	{ "builder": "build_monitor_sm", "label": "MONITOR\nSM" },
-	{ "builder": "build_monitor_lg", "label": "MONITOR\nLG" },
+	{ "builder": "build_speaker_dots", "label": "SPEAKER DOTS", "width": 1 },
+	{ "builder": "build_speaker_lines", "label": "SPEAKER LINES", "width": 1 },
+	{ "builder": "build_speaker_grid", "label": "SPEAKER GRID", "width": 1 },
+	{ "builder": "build_vu_meter_v", "label": "VU METER V", "width": 1 },
+	{ "builder": "build_vu_meter_h", "label": "VU METER H", "width": 1 },
+	{ "scene": "res://commons/audio/interfaces/VRSimpleWaveform.tscn", "label": "WAVEFORM", "width": 2 },
+	{ "scene": "res://commons/audio/interfaces/VRWaveformDisplayWide.tscn", "label": "WAVEFORM WIDE", "width": 3 },
+	{ "scene": "res://commons/audio/interfaces/VRSpectrumDisplay.tscn", "label": "SPECTRUM", "width": 2 },
+	{ "scene": "res://commons/audio/interfaces/VRAudioMonitor.tscn", "label": "MONITOR", "width": 2 },
 ]
 
 const ROW2_Y := 0.65  # Second row below first
 const ROW3_Y := 0.20  # Third row (compounds)
 
-## Compound layout definitions — each spawns multiple controls programmatically
+## Row 3: Compound layouts — double/triple footprint allowed
 const COMPOUNDS = [
-	{ "type": "sliders_v", "count": 2, "label": "2x SLIDER V" },
-	{ "type": "sliders_v", "count": 3, "label": "3x SLIDER V" },
-	{ "type": "sliders_v", "count": 4, "label": "4x SLIDER V" },
-	{ "type": "sliders_h", "count": 2, "label": "2x SLIDER H" },
-	{ "type": "sliders_h", "count": 3, "label": "3x SLIDER H" },
-	{ "type": "monitor_sliders", "count": 3, "label": "MONITOR\n+SLIDERS" },
-	{ "type": "speaker_meters", "count": 2, "label": "SPEAKER\n+METERS" },
-	{ "type": "meters_v", "count": 3, "label": "3x METERS" },
+	{ "type": "sliders_v", "count": 2, "label": "2x SLIDER V", "width": 1 },
+	{ "type": "sliders_v", "count": 3, "label": "3x SLIDER V", "width": 1 },
+	{ "type": "sliders_v", "count": 4, "label": "4x SLIDER V", "width": 2 },
+	{ "type": "sliders_h", "count": 2, "label": "2x SLIDER H", "width": 1 },
+	{ "type": "sliders_h", "count": 3, "label": "3x SLIDER H", "width": 2 },
+	{ "type": "monitor_sliders", "count": 3, "label": "MONITOR+SLIDERS", "width": 2 },
+	{ "type": "speaker_meters", "count": 2, "label": "SPEAKER+METERS", "width": 2 },
+	{ "type": "meters_v", "count": 3, "label": "3x METERS", "width": 1 },
 ]
 
 
@@ -159,10 +162,12 @@ func _spawn_controls():
 
 
 func _spawn_passive_elements():
-	var start_x: float = -(PASSIVE_ELEMENTS.size() - 1) * SPACING / 2.0
+	# Calculate total width accounting for element widths
+	var total_slots: float = 0
+	for def in PASSIVE_ELEMENTS:
+		total_slots += def.get("width", 1)
+	var total_w2: float = total_slots * SPACING + 0.2
 
-	# Back panel for row 2
-	var total_w2: float = PASSIVE_ELEMENTS.size() * SPACING + 0.2
 	var panel2 := MeshInstance3D.new()
 	panel2.name = "BackPanel2"
 	var box2 := BoxMesh.new()
@@ -176,10 +181,9 @@ func _spawn_passive_elements():
 	panel2.transform.origin = Vector3(0, ROW2_Y, -0.005)
 	add_child(panel2)
 
-	# Title for row 2
 	var title2 := Label3D.new()
-	title2.text = "PASSIVE ELEMENTS"
-	title2.font_size = 30
+	title2.text = "PASSIVE ELEMENTS & MONITORS"
+	title2.font_size = 28
 	title2.pixel_size = 0.0007
 	title2.modulate = Color(1.0, 1.0, 1.0)
 	title2.outline_size = 5
@@ -188,17 +192,18 @@ func _spawn_passive_elements():
 	title2.transform.origin = Vector3(0, ROW2_Y + 0.22, CONTROL_Z + 0.01)
 	add_child(title2)
 
+	var x_cursor: float = -total_w2 / 2.0 + 0.1
 	for i in PASSIVE_ELEMENTS.size():
 		var def: Dictionary = PASSIVE_ELEMENTS[i]
-		var builder: String = def["builder"]
 		var label_text: String = def["label"]
-		var x_pos: float = start_x + i * SPACING
+		var elem_width: int = def.get("width", 1)
+		var x_pos: float = x_cursor + (elem_width * SPACING) / 2.0
 
-		# Black accent frame
+		# Black accent frame sized to element width
 		var frame := MeshInstance3D.new()
 		frame.name = "PassiveFrame_%d" % i
 		var frame_box := BoxMesh.new()
-		frame_box.size = Vector3(0.12, 0.14, 0.004)
+		frame_box.size = Vector3(elem_width * SPACING - 0.02, 0.18, 0.004)
 		frame.mesh = frame_box
 		var frame_mat := StandardMaterial3D.new()
 		frame_mat.albedo_color = Color(0.08, 0.08, 0.08)
@@ -208,48 +213,47 @@ func _spawn_passive_elements():
 		frame.transform.origin = Vector3(x_pos, ROW2_Y, CONTROL_Z - 0.004)
 		add_child(frame)
 
-		# Build the element
-		var element := Node3D.new()
-		element.name = "Passive_%d" % i
-		element.transform.origin = Vector3(x_pos, ROW2_Y, CONTROL_Z)
-		add_child(element)
+		if def.has("scene"):
+			# Load real monitor scene
+			var scene := load(def["scene"]) as PackedScene
+			if scene:
+				var monitor := scene.instantiate()
+				monitor.name = "Monitor_%d" % i
+				monitor.transform.origin = Vector3(x_pos, ROW2_Y, CONTROL_Z)
+				add_child(monitor)
+		elif def.has("builder"):
+			var element := Node3D.new()
+			element.name = "Passive_%d" % i
+			element.transform.origin = Vector3(x_pos, ROW2_Y, CONTROL_Z)
+			add_child(element)
+			match def["builder"]:
+				"build_speaker_dots": RackPassiveElementsScript.build_speaker_dots(element)
+				"build_speaker_lines": RackPassiveElementsScript.build_speaker_lines(element)
+				"build_speaker_grid": RackPassiveElementsScript.build_speaker_grid(element)
+				"build_vu_meter_v": RackPassiveElementsScript.build_vu_meter_v(element)
+				"build_vu_meter_h": RackPassiveElementsScript.build_vu_meter_h(element)
 
-		match builder:
-			"build_speaker_dots":
-				RackPassiveElementsScript.build_speaker_dots(element)
-			"build_speaker_lines":
-				RackPassiveElementsScript.build_speaker_lines(element)
-			"build_speaker_grid":
-				RackPassiveElementsScript.build_speaker_grid(element)
-			"build_vu_meter_v":
-				RackPassiveElementsScript.build_vu_meter_v(element)
-			"build_vu_meter_h":
-				RackPassiveElementsScript.build_vu_meter_h(element)
-			"build_monitor_sm":
-				RackPassiveElementsScript.build_monitor(element, 0.09, 0.06)
-			"build_monitor_lg":
-				RackPassiveElementsScript.build_monitor(element, 0.12, 0.08)
-
-		# Label
 		var lbl := Label3D.new()
 		lbl.name = "PassiveLabel_%d" % i
 		lbl.text = label_text
-		lbl.font_size = 28
+		lbl.font_size = 24
 		lbl.pixel_size = 0.0006
 		lbl.modulate = Color(1.0, 1.0, 1.0)
 		lbl.outline_size = 5
 		lbl.outline_modulate = Color(0.0, 0.0, 0.0, 0.9)
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lbl.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-		lbl.transform.origin = Vector3(x_pos, ROW2_Y - 0.12, CONTROL_Z + 0.01)
+		lbl.transform.origin = Vector3(x_pos, ROW2_Y - 0.14, CONTROL_Z + 0.01)
 		add_child(lbl)
+
+		x_cursor += elem_width * SPACING
 
 
 func _spawn_compounds():
-	var start_x: float = -(COMPOUNDS.size() - 1) * SPACING / 2.0
+	var total_slots: float = 0
+	for def in COMPOUNDS:
+		total_slots += def.get("width", 1)
+	var total_w3: float = total_slots * SPACING + 0.2
 
-	# Back panel for row 3
-	var total_w3: float = COMPOUNDS.size() * SPACING + 0.2
 	var panel3 := MeshInstance3D.new()
 	panel3.name = "BackPanel3"
 	var box3 := BoxMesh.new()
@@ -265,7 +269,7 @@ func _spawn_compounds():
 
 	var title3 := Label3D.new()
 	title3.text = "COMPOUND LAYOUTS"
-	title3.font_size = 30
+	title3.font_size = 28
 	title3.pixel_size = 0.0007
 	title3.modulate = Color(1.0, 1.0, 1.0)
 	title3.outline_size = 5
@@ -274,18 +278,19 @@ func _spawn_compounds():
 	title3.transform.origin = Vector3(0, ROW3_Y + 0.22, CONTROL_Z + 0.01)
 	add_child(title3)
 
+	var x_cursor: float = -total_w3 / 2.0 + 0.1
 	for i in COMPOUNDS.size():
 		var def: Dictionary = COMPOUNDS[i]
 		var comp_type: String = def["type"]
 		var count: int = def.get("count", 2)
 		var label_text: String = def["label"]
-		var x_pos: float = start_x + i * SPACING
+		var elem_width: int = def.get("width", 1)
+		var x_pos: float = x_cursor + (elem_width * SPACING) / 2.0
 
-		# Black accent frame
 		var frame := MeshInstance3D.new()
 		frame.name = "CompFrame_%d" % i
 		var frame_box := BoxMesh.new()
-		frame_box.size = Vector3(0.12, 0.14, 0.004)
+		frame_box.size = Vector3(elem_width * SPACING - 0.02, 0.18, 0.004)
 		frame.mesh = frame_box
 		var frame_mat := StandardMaterial3D.new()
 		frame_mat.albedo_color = Color(0.08, 0.08, 0.08)
@@ -305,15 +310,16 @@ func _spawn_compounds():
 		var lbl := Label3D.new()
 		lbl.name = "CompLabel_%d" % i
 		lbl.text = label_text
-		lbl.font_size = 26
+		lbl.font_size = 22
 		lbl.pixel_size = 0.0006
 		lbl.modulate = Color(1.0, 1.0, 1.0)
 		lbl.outline_size = 5
 		lbl.outline_modulate = Color(0.0, 0.0, 0.0, 0.9)
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lbl.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-		lbl.transform.origin = Vector3(x_pos, ROW3_Y - 0.12, CONTROL_Z + 0.01)
+		lbl.transform.origin = Vector3(x_pos, ROW3_Y - 0.14, CONTROL_Z + 0.01)
 		add_child(lbl)
+
+		x_cursor += elem_width * SPACING
 
 
 func _build_compound(container: Node3D, comp_type: String, count: int) -> void:
