@@ -171,7 +171,7 @@ func _spawn_passive_elements():
 	var panel2 := MeshInstance3D.new()
 	panel2.name = "BackPanel2"
 	var box2 := BoxMesh.new()
-	box2.size = Vector3(total_w2, 0.35, 0.008)
+	box2.size = Vector3(total_w2, 0.45, 0.008)
 	panel2.mesh = box2
 	var mat2 := StandardMaterial3D.new()
 	mat2.albedo_color = Color(0.50, 0.48, 0.44)
@@ -203,7 +203,7 @@ func _spawn_passive_elements():
 		var frame := MeshInstance3D.new()
 		frame.name = "PassiveFrame_%d" % i
 		var frame_box := BoxMesh.new()
-		frame_box.size = Vector3(elem_width * SPACING - 0.02, 0.18, 0.004)
+		frame_box.size = Vector3(elem_width * SPACING - 0.02, 0.28, 0.004)
 		frame.mesh = frame_box
 		var frame_mat := StandardMaterial3D.new()
 		frame_mat.albedo_color = Color(0.08, 0.08, 0.08)
@@ -257,7 +257,7 @@ func _spawn_compounds():
 	var panel3 := MeshInstance3D.new()
 	panel3.name = "BackPanel3"
 	var box3 := BoxMesh.new()
-	box3.size = Vector3(total_w3, 0.35, 0.008)
+	box3.size = Vector3(total_w3, 0.45, 0.008)
 	panel3.mesh = box3
 	var mat3 := StandardMaterial3D.new()
 	mat3.albedo_color = Color(0.50, 0.48, 0.44)
@@ -290,7 +290,7 @@ func _spawn_compounds():
 		var frame := MeshInstance3D.new()
 		frame.name = "CompFrame_%d" % i
 		var frame_box := BoxMesh.new()
-		frame_box.size = Vector3(elem_width * SPACING - 0.02, 0.18, 0.004)
+		frame_box.size = Vector3(elem_width * SPACING - 0.02, 0.28, 0.004)
 		frame.mesh = frame_box
 		var frame_mat := StandardMaterial3D.new()
 		frame_mat.albedo_color = Color(0.08, 0.08, 0.08)
