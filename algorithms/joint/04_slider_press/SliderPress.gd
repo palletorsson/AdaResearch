@@ -117,44 +117,28 @@ func _build_demo() -> void:
 
 
 func _setup_controls() -> void:
-	_control_panel = Node3D.new()
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_parameter_panel(
+		2, ["MOTOR SPEED", "MOTOR FORCE"],
+		[motor_speed / 6.0, (motor_impulse - 5.0) / 55.0]
+	)
 	_control_panel.position = Vector3(2.5, 2.0, 0.0)
 	_control_panel.rotation_degrees = Vector3(0, -90, 0)
 	add_child(_control_panel)
 
-	# Speed slider
-	var speed_slider = SLIDER_HORIZONTAL.instantiate()
-	speed_slider.name = "SpeedSlider"
-	speed_slider.position = Vector3(0, 0.15, 0)
-	speed_slider.rotation_degrees.x = -30
-	speed_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var speed_label = speed_slider.get_node_or_null("Frame/LabelName")
-	if speed_label:
-		speed_label.text = "MOTOR SPEED"
-	_control_panel.add_child(speed_slider)
-	speed_slider.slider_moved.connect(func(_pos):
-		if speed_slider.has_method("get_normalized_value"):
-			motor_speed = speed_slider.get_normalized_value() * 6.0
-	)
-	if speed_slider.has_method("set_normalized_value"):
-		speed_slider.set_normalized_value(motor_speed / 6.0)
+	var speed_slider: Node = _control_panel.get_node_or_null("Param_0")
+	var force_slider: Node = _control_panel.get_node_or_null("Param_1")
 
-	# Force slider
-	var force_slider = SLIDER_HORIZONTAL.instantiate()
-	force_slider.name = "ForceSlider"
-	force_slider.position = Vector3(0, -0.15, 0)
-	force_slider.rotation_degrees.x = -30
-	force_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var force_label = force_slider.get_node_or_null("Frame/LabelName")
-	if force_label:
-		force_label.text = "MOTOR FORCE"
-	_control_panel.add_child(force_slider)
-	force_slider.slider_moved.connect(func(_pos):
-		if force_slider.has_method("get_normalized_value"):
-			motor_impulse = 5.0 + force_slider.get_normalized_value() * 55.0
-	)
-	if force_slider.has_method("set_normalized_value"):
-		force_slider.set_normalized_value((motor_impulse - 5.0) / 55.0)
+	if speed_slider and speed_slider.has_signal("slider_moved"):
+		speed_slider.slider_moved.connect(func(_pos):
+			if speed_slider.has_method("get_normalized_value"):
+				motor_speed = speed_slider.get_normalized_value() * 6.0
+		)
+	if force_slider and force_slider.has_signal("slider_moved"):
+		force_slider.slider_moved.connect(func(_pos):
+			if force_slider.has_method("get_normalized_value"):
+				motor_impulse = 5.0 + force_slider.get_normalized_value() * 55.0
+		)
 
 
 func _physics_process(delta: float) -> void:
