@@ -313,51 +313,52 @@ func _update_info() -> void:
 # ------------------------------------------------------------------
 
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
-	_control_panel.position = Vector3(0, -bounds.y / 2.0 - 0.05, bounds.z / 2.0 + 0.14)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
-	add_child(_control_panel)
+	# Use RackTemplates for Rams-styled parameter panel
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var param_panel: Node3D = RackTpl.create_parameter_panel(
+		5,
+		["SEP", "ALIGN", "COH", "SPEED", "RADIUS"],
+		[separation_weight / 5.0, alignment_weight / 5.0, cohesion_weight / 5.0,
+		 (max_speed - 0.1) / 1.4, (perception_radius - 0.05) / 0.45]
+	)
+	param_panel.name = "ControlPanel"
+	param_panel.position = Vector3(0, -bounds.y / 2.0 - 0.05, bounds.z / 2.0 + 0.14)
+	param_panel.rotation_degrees = Vector3(-30, 0, 0)
+	add_child(param_panel)
+	_control_panel = param_panel
 
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.7, 0.15, 0.008)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.06, 0.06, 0.08)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.008
-	_control_panel.add_child(panel_back)
+	# Extract slider references for callbacks
+	_sep_slider = param_panel.get_node_or_null("Param_0")
+	_align_slider = param_panel.get_node_or_null("Param_1")
+	_coh_slider = param_panel.get_node_or_null("Param_2")
+	_speed_slider = param_panel.get_node_or_null("Param_3")
+	_radius_slider = param_panel.get_node_or_null("Param_4")
 
-	# Sliders spaced evenly across the panel
-	var x_start = -0.28
-	var x_step = 0.14
+	# Connect signals
+	if _sep_slider and _sep_slider.has_signal("slider_moved"):
+		_sep_slider.slider_moved.connect(_on_sep_slider)
+		_signal_connections.append([_sep_slider, &"slider_moved", _on_sep_slider])
+	if _align_slider and _align_slider.has_signal("slider_moved"):
+		_align_slider.slider_moved.connect(_on_align_slider)
+		_signal_connections.append([_align_slider, &"slider_moved", _on_align_slider])
+	if _coh_slider and _coh_slider.has_signal("slider_moved"):
+		_coh_slider.slider_moved.connect(_on_coh_slider)
+		_signal_connections.append([_coh_slider, &"slider_moved", _on_coh_slider])
+	if _speed_slider and _speed_slider.has_signal("slider_moved"):
+		_speed_slider.slider_moved.connect(_on_speed_slider)
+		_signal_connections.append([_speed_slider, &"slider_moved", _on_speed_slider])
+	if _radius_slider and _radius_slider.has_signal("slider_moved"):
+		_radius_slider.slider_moved.connect(_on_radius_slider)
+		_signal_connections.append([_radius_slider, &"slider_moved", _on_radius_slider])
 
-	# Separation
-	_sep_slider = _add_slider("SEP", x_start, _on_sep_slider)
-	# Alignment
-	_align_slider = _add_slider("ALIGN", x_start + x_step, _on_align_slider)
-	# Cohesion
-	_coh_slider = _add_slider("COH", x_start + x_step * 2, _on_coh_slider)
-	# Speed
-	_speed_slider = _add_slider("SPEED", x_start + x_step * 3, _on_speed_slider)
-	# Perception radius
-	_radius_slider = _add_slider("RADIUS", x_start + x_step * 4, _on_radius_slider)
-
-	# Reset button
-	var reset_btn = PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetBtn"
-	reset_btn.position = Vector3(0, -0.04, 0)
-	reset_btn.rotation_degrees.x = -30
-	_control_panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RESET")
-	var area = reset_btn.get_node_or_null("InteractableAreaButton")
-	if area:
-		var cb := func(_b): _spawn_boids()
-		area.button_pressed.connect(cb)
-		_signal_connections.append([area, &"button_pressed", cb])
+	# Reset button is already in the template as "ResetButton"
+	var reset_btn: Node = param_panel.get_node_or_null("ResetButton")
+	if reset_btn:
+		var area: Node = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area and area.has_signal("button_pressed"):
+			var cb := func(_b): _spawn_boids()
+			area.button_pressed.connect(cb)
+			_signal_connections.append([area, &"button_pressed", cb])
 
 	call_deferred("_sync_all_sliders")
 
