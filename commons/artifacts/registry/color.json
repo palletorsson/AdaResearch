@@ -1915,6 +1915,16 @@
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
 			}
+		},
+		"color_sets_overview": {
+			"name": "Color Sets Overview",
+			"lookup_name": "color_sets_overview",
+			"description": "Interactive color set grabber — explore color families, hue relationships, and palette structures through physical manipulation.",
+			"scene": "res://algorithms/color/grabcolor/color_sets_overview.tscn",
+			"category": "color",
+			"interaction": "grab",
+			"sequence": "color",
+			"artifact_type": "interactive"
 		}
 	},
 	"registry_info": {

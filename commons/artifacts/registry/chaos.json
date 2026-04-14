@@ -246,6 +246,17 @@
 				"instance_strategy": "few",
 				"vertex_estimate": "~100"
 			}
+		},
+		"box_counting_dimension": {
+			"name": "Box Counting Dimension",
+			"lookup_name": "box_counting_dimension",
+			"description": "Interactive fractal dimension calculator using the box-counting method. Place a grid over a fractal, count boxes touching the boundary, scale down — the scaling ratio IS the fractal dimension.",
+			"scene": "res://algorithms/fractals/box_counting_dimension/box_counting_dimension.tscn",
+			"category": "fractals",
+			"interaction": "observe_interact",
+			"sequence": "fractals",
+			"artifact_type": "demonstration",
+			"qfep_connection": "Fractal dimension measures the complexity of a boundary — the self-similar structure at every scale."
 		}
 	},
 	"registry_info": {

@@ -1088,7 +1088,6 @@
 				"vertex_estimate": "unknown"
 			}
 		},
-		"_comment_aliases": "=== ALIASES TO EXISTING ARTIFACTS ===",
 		"crystal_cluster": {
 			"name": "Crystal Cluster",
 			"lookup_name": "crystal_cluster",
@@ -1376,7 +1375,6 @@
 				"vertex_estimate": "unknown"
 			}
 		},
-		"_comment_new": "=== NEW ARTIFACTS TO BUILD ===",
 		"random_cubes": {
 			"name": "Random Cubes",
 			"lookup_name": "random_cubes",
@@ -2547,6 +2545,30 @@
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~384"
 			}
+		},
+		"snap_tetra_puzzle": {
+			"name": "Snap Tetra Puzzle",
+			"lookup_name": "snap_tetra_puzzle",
+			"description": "Snap-point tetrahedron assembly puzzle. Represents constraint satisfaction and ordered structure — how Free Energy minimization drives systems toward specific geometric configurations.",
+			"scene": "res://commons/primitives/snappoint/puzzles/snap_tetrahedron_puzzle.tscn",
+			"category": "qfep",
+			"interaction": "grab_snap",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "interactive",
+			"qfep_term": "F",
+			"qfep_connection": "Each snapped connection reduces prediction error. The final locked form is minimum free energy."
+		},
+		"snap_cube_puzzle": {
+			"name": "Snap Cube Puzzle",
+			"lookup_name": "snap_cube_puzzle",
+			"description": "Snap-point octahedral assembly puzzle. Represents ordered structure and constraint — the crystalline end state of a system minimizing free energy.",
+			"scene": "res://commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.tscn",
+			"category": "qfep",
+			"interaction": "grab_snap",
+			"sequence": "qfeplaboratory",
+			"artifact_type": "interactive",
+			"qfep_term": "F",
+			"qfep_connection": "The rigid, ordered form that emerges when a system fully minimizes its free energy (F → minimum, S → low)."
 		}
 	}
 }

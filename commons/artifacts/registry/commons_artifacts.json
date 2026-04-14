@@ -8234,6 +8234,25 @@
 			"themes": [
 				"commons"
 			]
+		},
+		"tt": {
+			"name": "Tutorial Text Display",
+			"lookup_name": "tt",
+			"description": "In-world tutorial text panel using codeDisplay scene. Format: tt:tutorial_name[:rotation[:y_offset[:scale]]]. Loads text from tutorial_text_library by key. Used across all sequences for contextual learning text.",
+			"scene": "res://commons/context/clipboard/codeDisplay.tscn",
+			"category": "utilities",
+			"interaction": "read",
+			"artifact_type": "text_display",
+			"notes": "Token processed by GridUtilitiesComponent._parse_tutorial_display_utility(). Can appear in interactables layer with tt: prefix followed by tutorial key."
+		},
+		"3t": {
+			"name": "3D Text Display",
+			"lookup_name": "3t",
+			"description": "In-world 3D text display using TextMesh. Format: 3t:Message_Text (underscores become spaces). Used for short contextual labels in map scenes.",
+			"scene": "res://commons/scenes/mapobjects/word_is.tscn",
+			"category": "utilities",
+			"interaction": "read",
+			"artifact_type": "text_display"
 		}
 	},
 	"registry_info": {

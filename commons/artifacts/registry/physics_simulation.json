@@ -4428,14 +4428,15 @@
 			}
 		},
 		"momentum_collision": {
-			"description": "Elastic and inelastic collisions on a rail — conservation of momentum and kinetic energy",
-			"scene_path": "res://algorithms/physicssimulation/momentum_collision/momentum_collision.tscn",
-			"tags": [
-				"physics",
-				"momentum",
-				"collision",
-				"conservation"
-			]
+			"name": "Momentum Collision",
+			"lookup_name": "momentum_collision",
+			"description": "Physical momentum and collision demonstration. Objects collide with realistic mass transfer — shows conservation of momentum and the invisible forces governing motion.",
+			"scene": "res://algorithms/physicssimulation/momentum_collision/momentum_collision.tscn",
+			"category": "physics",
+			"interaction": "observe_interact",
+			"sequence": "forces",
+			"artifact_type": "demonstration",
+			"qfep_connection": "Force (F) as momentum transfer — the measurable push that changes system state."
 		},
 		"nbody_simulation": {
 			"capacity": "WATCH emergent orbital structure arise from nothing but pairwise gravity",
