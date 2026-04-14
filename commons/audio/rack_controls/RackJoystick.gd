@@ -23,6 +23,10 @@ func set_normalized_value_y(val: float) -> void:
 		queue_redraw()
 
 
+func get_normalized_value_y() -> float:
+	return normalized_value_y
+
+
 func _draw_control() -> void:
 	var label_margin := RackDesignTokens.get_layout("label_bottom_margin_px", 24.0)
 	var center := Vector2(size.x / 2.0, (size.y - label_margin) / 2.0)
@@ -61,3 +65,23 @@ func _draw_control() -> void:
 	# Inner highlight on stick
 	var highlight_pos := stick_pos + Vector2(-2.0, -2.0)
 	draw_circle(highlight_pos, 3.0, Color(1.0, 1.0, 1.0, 0.15))
+
+
+func _on_pointer_pressed(pos: Vector2) -> void:
+	_on_pointer_dragged(pos)
+
+
+func _on_pointer_dragged(pos: Vector2) -> void:
+	var label_margin := RackDesignTokens.get_layout("label_bottom_margin_px", 24.0)
+	var center := Vector2(size.x / 2.0, (size.y - label_margin) / 2.0)
+	var base_r := minf(size.x, size.y - label_margin) / 2.0 - 8.0
+	var stick_r := 10.0
+	var max_deflect := base_r - stick_r - 4.0
+	var offset := pos - center
+	if offset.length() > max_deflect:
+		offset = offset.normalized() * max_deflect
+
+	var norm_x := clampf((offset.x / max_deflect + 1.0) * 0.5, 0.0, 1.0)
+	var norm_y := clampf((-offset.y / max_deflect + 1.0) * 0.5, 0.0, 1.0)
+	set_normalized_value(norm_x)
+	set_normalized_value_y(norm_y)

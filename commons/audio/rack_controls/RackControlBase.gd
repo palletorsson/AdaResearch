@@ -17,6 +17,9 @@ signal value_changed(new_value: float)
 ## Override accent color (token name). Empty = use control_type default.
 @export var accent_color_name: String = ""
 
+## Optional style variant for controls that support multiple visual modes.
+@export var style_variant: String = "" : set = set_style_variant
+
 ## Control type key for token lookups (set by subclass)
 var _control_type: String = "default"
 
@@ -105,8 +108,17 @@ func set_normalized_value(val: float) -> void:
 		queue_redraw()
 
 
+func get_normalized_value() -> float:
+	return normalized_value
+
+
 func set_control_label(text: String) -> void:
 	control_label = text
+	queue_redraw()
+
+
+func set_style_variant(value: String) -> void:
+	style_variant = value
 	queue_redraw()
 
 

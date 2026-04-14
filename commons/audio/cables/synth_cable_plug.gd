@@ -131,9 +131,10 @@ func _try_add_xr_pickable():
 	if ResourceLoader.exists(pickable_script_path):
 		var script = load(pickable_script_path)
 		if script:
-			pickup_component = Node.new()
-			pickup_component.set_script(script)
-			rigid_body.add_child(pickup_component)
+			# XRToolsInteractableHandle extends RigidBody3D, so it must live on the
+			# plug rigid body itself rather than on a child Node.
+			rigid_body.set_script(script)
+			pickup_component = rigid_body
 			
 			# Connect signals if available
 			if pickup_component.has_signal("picked_up"):

@@ -29,6 +29,8 @@ var level: float = 0.0:
 var _viewport: SubViewport
 var _screen_mesh: MeshInstance3D
 var _control_instance: Control
+var _pending_style_variant: String = ""
+var _pending_step_count: int = 0
 
 
 func _ready() -> void:
@@ -48,6 +50,8 @@ func _build() -> void:
 	if not _control_instance:
 		push_warning("VRRackControl: %s root is not a Control" % control_scene_path)
 		return
+
+	_apply_pending_properties()
 
 	# Determine sizes
 	var px_size := _control_instance.custom_minimum_size
@@ -123,6 +127,22 @@ func set_normalized_value(val: float) -> void:
 		_control_instance.normalized_value = val
 
 
+func set_style_variant(value: String) -> void:
+	_pending_style_variant = value
+	if _control_instance and "style_variant" in _control_instance:
+		_control_instance.style_variant = value
+
+
+func set_step_count(value: int) -> void:
+	_pending_step_count = maxi(value, 0)
+	if not _control_instance:
+		return
+	if "step_count" in _control_instance:
+		_control_instance.step_count = _pending_step_count
+	elif "steps" in _control_instance:
+		_control_instance.steps = _pending_step_count
+
+
 ## Convenience: get normalized value
 func get_normalized_value() -> float:
 	if _control_instance and "normalized_value" in _control_instance:
@@ -151,3 +171,15 @@ func set_subtitle(text: String) -> void:
 func set_group_title(text: String) -> void:
 	if _control_instance and "group_title" in _control_instance:
 		_control_instance.group_title = text
+
+
+func _apply_pending_properties() -> void:
+	if not _control_instance:
+		return
+	if not _pending_style_variant.is_empty() and "style_variant" in _control_instance:
+		_control_instance.style_variant = _pending_style_variant
+	if _pending_step_count > 0:
+		if "step_count" in _control_instance:
+			_control_instance.step_count = _pending_step_count
+		elif "steps" in _control_instance:
+			_control_instance.steps = _pending_step_count

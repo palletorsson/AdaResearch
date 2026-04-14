@@ -23,6 +23,10 @@ func set_normalized_value_y(val: float) -> void:
 		queue_redraw()
 
 
+func get_normalized_value_y() -> float:
+	return normalized_value_y
+
+
 func _draw_control() -> void:
 	var label_margin := RackDesignTokens.get_layout("label_bottom_margin_px", 24.0)
 	var pad_margin := 6.0
@@ -64,3 +68,21 @@ func _draw_control() -> void:
 
 	# Border
 	draw_rect(Rect2(pad_x, pad_y, pad_w, pad_h), Color(_track_groove, 0.6), false, 1.0)
+
+
+func _on_pointer_pressed(pos: Vector2) -> void:
+	_on_pointer_dragged(pos)
+
+
+func _on_pointer_dragged(pos: Vector2) -> void:
+	var label_margin := RackDesignTokens.get_layout("label_bottom_margin_px", 24.0)
+	var pad_margin := 6.0
+	var pad_x := pad_margin
+	var pad_y := pad_margin
+	var pad_w := size.x - pad_margin * 2.0
+	var pad_h := size.y - label_margin - pad_margin
+
+	var norm_x := clampf((pos.x - pad_x) / pad_w, 0.0, 1.0)
+	var norm_y := clampf(1.0 - (pos.y - pad_y) / pad_h, 0.0, 1.0)
+	set_normalized_value(norm_x)
+	set_normalized_value_y(norm_y)
