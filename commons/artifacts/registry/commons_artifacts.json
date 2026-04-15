@@ -8259,5 +8259,16 @@
 		"category": "artifacts",
 		"description": "Standalone museum-style artifacts living in commons/artifacts/ — interactive 3D exhibits covering waves, physics, math, biology, fractals, cellular automata, and more.",
 		"name": "commons_artifacts"
+	},
+	"request_note": {
+		"name": "Request Note",
+		"lookup_name": "request_note",
+		"description": "Floating text note for placing requests, bug reports, and todos in maps. Supports inline text via #text: or key-based text from requests.json via #key:",
+		"scene": "res://commons/artifacts/request_note/request_note.tscn",
+		"category": "tools",
+		"include_in_map_data": true,
+		"map_ready": true,
+		"complexity": "beginner",
+		"tags": ["utility", "text", "note", "request"]
 	}
 }
