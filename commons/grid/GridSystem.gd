@@ -640,10 +640,11 @@ func _handle_biome_ring():
 		return
 
 	# Auto-advance ecosystem to the current map's sequence so biome matches context
+	var density_before: float = eco.get_vegetation_density()
 	_sync_ecosystem_to_current_map(eco)
-
 	var density: float = eco.get_vegetation_density()
-	print("GridSystem: Biome check — map='%s' density=%.2f" % [map_name, density])
+	var kingdoms = eco.get_allowed_kingdoms() if eco.has_method("get_allowed_kingdoms") else []
+	print("GridSystem: Biome check — map='%s' density_before=%.2f density_after=%.2f kingdoms=%s" % [map_name, density_before, density, str(kingdoms)])
 	if density < 0.05:
 		print("GridSystem: Density too low (%.2f < 0.05) — no biome ring" % density)
 		return  # No ring for barren maps
