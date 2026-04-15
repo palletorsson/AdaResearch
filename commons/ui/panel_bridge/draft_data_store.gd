@@ -158,6 +158,7 @@ func set_cell(grid_id: String, row: int, col: int, value: int) -> void:
 			return
 	_masks_dirty = true
 	_drawdown_dirty = true
+	print("DraftDataStore: set_cell(%s, %d, %d) = %d → emitting signals" % [grid_id, row, col, value])
 	cell_changed.emit(grid_id)
 	drawdown_changed.emit()
 
@@ -165,6 +166,7 @@ func set_cell(grid_id: String, row: int, col: int, value: int) -> void:
 ## Toggle a cell between 0 and 1.
 func toggle_cell(grid_id: String, row: int, col: int) -> void:
 	var current := get_cell(grid_id, row, col)
+	print("DraftDataStore: toggle_cell(%s, %d, %d) %d→%d" % [grid_id, row, col, current, 1 - current])
 	set_cell(grid_id, row, col, 1 - current)
 
 

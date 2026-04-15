@@ -55,9 +55,9 @@ var _grid_data: PackedByteArray
 
 # ── Visual styling ──────────────────────────────────────────────
 
-var grid_line_color: Color = Color(0.35, 0.37, 0.44, 0.7)
-var hover_color: Color = Color(1.0, 1.0, 1.0, 0.30)
-var selected_outline_color: Color = P.ACCENT_CYAN
+var grid_line_color: Color = Color(0.65, 0.62, 0.56, 0.7)  # Warm grid lines
+var hover_color: Color = Color(0.75, 0.38, 0.13, 0.35)  # Copper hover
+var selected_outline_color: Color = Color(0.75, 0.38, 0.13)  # Copper
 
 # ── Internal state ──────────────────────────────────────────────
 

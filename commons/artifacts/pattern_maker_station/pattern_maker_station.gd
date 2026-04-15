@@ -35,9 +35,10 @@ const PALETTE: Array[Color] = [
 	Color(0.6, 0.3, 0.5)      # Dusty purple
 ]
 
-const COL_PANEL := Color(0.08, 0.08, 0.10)
-const COL_BEZEL := Color(0.15, 0.15, 0.18)
-const COL_GRID_LINE := Color(0.3, 0.3, 0.35, 0.8)
+const COL_PANEL := Color(0.90, 0.87, 0.80)   # Dieter Rams cream
+const COL_BEZEL := Color(0.25, 0.23, 0.20)   # Warm dark frame
+const COL_GRID_LINE := Color(0.65, 0.62, 0.56, 0.8)  # Warm grid lines
+const COL_COPPER := Color(0.75, 0.38, 0.13)   # Copper accent
 
 # ── Config ───────────────────────────────────────────────────────────
 @export var tile_size: int = 4          # Domain NxN (2-8)
@@ -230,7 +231,7 @@ func _build_edit_grid() -> void:
 	title.text = "PATTERN MAKER"
 	title.pixel_size = 0.0008
 	title.font_size = 14
-	title.modulate = Color(0.7, 0.7, 0.7)
+	title.modulate = Color(0.12, 0.12, 0.12)  # Dark on cream
 	title.position = Vector3(0, panel_height - 0.03, 0.01)
 	_panel_root.add_child(title)
 
@@ -288,7 +289,7 @@ func _build_palette() -> void:
 	lbl.text = "COLOR"
 	lbl.pixel_size = 0.0006
 	lbl.font_size = 8
-	lbl.modulate = Color(0.5, 0.5, 0.5)
+	lbl.modulate = Color(0.4, 0.38, 0.35)  # Warm gray on cream
 	lbl.position = Vector3(start_x - 0.02, base_y + 0.04, 0.01)
 	_panel_root.add_child(lbl)
 
@@ -316,7 +317,7 @@ func _build_palette() -> void:
 		ind_mat.emission_enabled = true
 		ind_mat.emission = PALETTE[i]
 		ind_mat.emission_energy_multiplier = 0.0 if i != _selected_color else 2.5
-		ind_mat.albedo_color = PALETTE[i].darkened(0.5)
+		ind_mat.albedo_color = COL_COPPER
 		indicator.material_override = ind_mat
 		indicator.position = Vector3(start_x + i * spacing, base_y - 0.035, 0.02)
 		_panel_root.add_child(indicator)
@@ -331,8 +332,8 @@ func _build_controls() -> void:
 	group_btn.name = "GroupCycle"
 	group_btn.position = Vector3(base_x, base_y, 0.02)
 	group_btn.scale = Vector3(0.6, 0.6, 0.6)
-	group_btn.pressed_color = Color(0.3, 0.6, 0.9)
-	group_btn.released_color = Color(0.15, 0.3, 0.45)
+	group_btn.pressed_color = COL_COPPER
+	group_btn.released_color = Color(0.25, 0.23, 0.20)
 	_panel_root.add_child(group_btn)
 	_connect_btn(group_btn, _cycle_group)
 
@@ -340,7 +341,7 @@ func _build_controls() -> void:
 	_group_label.text = WallpaperGroups.get_group_name(_current_group).to_upper()
 	_group_label.pixel_size = 0.0008
 	_group_label.font_size = 12
-	_group_label.modulate = Color(0.3, 0.7, 1.0)
+	_group_label.modulate = COL_COPPER  # Copper accent text
 	_group_label.position = Vector3(base_x, base_y - 0.04, 0.01)
 	_panel_root.add_child(_group_label)
 
@@ -348,7 +349,7 @@ func _build_controls() -> void:
 	group_lbl.text = "GROUP"
 	group_lbl.pixel_size = 0.0005
 	group_lbl.font_size = 7
-	group_lbl.modulate = Color(0.4, 0.4, 0.4)
+	group_lbl.modulate = Color(0.4, 0.38, 0.35)
 	group_lbl.position = Vector3(base_x, base_y + 0.035, 0.01)
 	_panel_root.add_child(group_lbl)
 
@@ -357,8 +358,8 @@ func _build_controls() -> void:
 	mx_btn.name = "MirrorX"
 	mx_btn.position = Vector3(base_x, base_y - 0.10, 0.02)
 	mx_btn.scale = Vector3(0.5, 0.5, 0.5)
-	mx_btn.pressed_color = Color(0.8, 0.6, 0.2)
-	mx_btn.released_color = Color(0.4, 0.3, 0.1)
+	mx_btn.pressed_color = COL_COPPER
+	mx_btn.released_color = Color(0.25, 0.23, 0.20)
 	_panel_root.add_child(mx_btn)
 	_connect_btn(mx_btn, _mirror_x)
 	_add_btn_label(mx_btn, "FLIP X")
@@ -368,8 +369,8 @@ func _build_controls() -> void:
 	my_btn.name = "MirrorY"
 	my_btn.position = Vector3(base_x, base_y - 0.17, 0.02)
 	my_btn.scale = Vector3(0.5, 0.5, 0.5)
-	my_btn.pressed_color = Color(0.8, 0.6, 0.2)
-	my_btn.released_color = Color(0.4, 0.3, 0.1)
+	my_btn.pressed_color = COL_COPPER
+	my_btn.released_color = Color(0.25, 0.23, 0.20)
 	_panel_root.add_child(my_btn)
 	_connect_btn(my_btn, _mirror_y)
 	_add_btn_label(my_btn, "FLIP Y")
@@ -379,8 +380,8 @@ func _build_controls() -> void:
 	rot_btn.name = "RotateCW"
 	rot_btn.position = Vector3(base_x, base_y - 0.24, 0.02)
 	rot_btn.scale = Vector3(0.5, 0.5, 0.5)
-	rot_btn.pressed_color = Color(0.2, 0.7, 0.5)
-	rot_btn.released_color = Color(0.1, 0.35, 0.25)
+	rot_btn.pressed_color = COL_COPPER
+	rot_btn.released_color = Color(0.25, 0.23, 0.20)
 	_panel_root.add_child(rot_btn)
 	_connect_btn(rot_btn, _rotate_cw)
 	_add_btn_label(rot_btn, "ROTATE")
@@ -390,8 +391,8 @@ func _build_controls() -> void:
 	clr_btn.name = "Clear"
 	clr_btn.position = Vector3(base_x, base_y - 0.31, 0.02)
 	clr_btn.scale = Vector3(0.5, 0.5, 0.5)
-	clr_btn.pressed_color = Color(0.8, 0.2, 0.2)
-	clr_btn.released_color = Color(0.4, 0.1, 0.1)
+	clr_btn.pressed_color = Color(0.8, 0.2, 0.2)  # Red for clear (danger)
+	clr_btn.released_color = Color(0.25, 0.23, 0.20)
 	_panel_root.add_child(clr_btn)
 	_connect_btn(clr_btn, _clear_domain)
 	_add_btn_label(clr_btn, "CLEAR")

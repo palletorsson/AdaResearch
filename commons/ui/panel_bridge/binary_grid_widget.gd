@@ -35,9 +35,9 @@ var click_mode: String = "toggle"
 # ── Visual styling ──────────────────────────────────────────────
 
 var cell_color_on: Color = P.ACCENT_CYAN
-var cell_color_off: Color = Color(0.16, 0.18, 0.24)
-var grid_line_color: Color = Color(0.30, 0.33, 0.40)
-var hover_color: Color = Color(1.0, 1.0, 1.0, 0.25)
+var cell_color_off: Color = Color(0.93, 0.91, 0.85)  # Light cream (off state)
+var grid_line_color: Color = Color(0.65, 0.62, 0.56)  # Warm grid lines
+var hover_color: Color = Color(0.75, 0.38, 0.13, 0.3)  # Copper hover
 
 # ── Internal state ──────────────────────────────────────────────
 

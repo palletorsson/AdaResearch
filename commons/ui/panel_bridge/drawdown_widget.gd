@@ -76,4 +76,5 @@ func _draw() -> void:
 # ── Signal handler ──────────────────────────────────────────────
 
 func _on_drawdown_changed() -> void:
+	print("DrawdownWidget: signal received, queue_redraw()")
 	queue_redraw()

@@ -122,6 +122,7 @@ func _initialize_grid_data() -> void:
 func set_cell(x: int, y: int, color_idx: int) -> void:
 	if x < 0 or x >= GRID_SIZE or y < 0 or y >= GRID_SIZE:
 		return
+	print("PatternPlate: paint cell (%d,%d) color %d" % [x, y, color_idx])
 	_grid_data[y][x] = clampi(color_idx, 0, palette.size() - 1)
 	# Update cell visual
 	var idx: int = y * GRID_SIZE + x
@@ -258,7 +259,7 @@ func _build_paint_grid() -> void:
 			if btn_scene:
 				var btn: Node = btn_scene.instantiate()
 				btn.name = "GridBtn_%d_%d" % [x, y]
-				btn.scale = Vector3.ONE * 0.25
+				btn.scale = Vector3.ONE * 0.35
 				btn.transform.origin = Vector3(
 					start + x * CELL_SIZE,
 					start + y * CELL_SIZE,
@@ -397,9 +398,9 @@ func _build_palette() -> void:
 		if pal_btn_scene:
 			var btn: Node = pal_btn_scene.instantiate()
 			btn.name = "PalBtn_%d" % i
-			btn.scale = Vector3.ONE * 0.2
-			btn.transform.origin = Vector3(cx, cy, 0.005)
-			# Hide visuals — swatch IS the visual
+			btn.scale = Vector3.ONE * 0.35  # Big enough for VR finger press
+			btn.transform.origin = Vector3(cx, cy, 0.008)
+			# Hide all visuals — swatch IS the visual
 			var base_m: Node = btn.find_child("BaseMesh", true, false)
 			if base_m: base_m.visible = false
 			var btn_m: Node = btn.find_child("ButtonMesh", true, false)
@@ -412,21 +413,6 @@ func _build_palette() -> void:
 			var area = btn.get_node_or_null("InteractableAreaButton")
 			if area:
 				area.button_pressed.connect(func(_b): _select_color(color_idx))
-
-		# Touch area for color selection
-		var touch := Area3D.new()
-		touch.name = "PalTouch_%d" % i
-		touch.collision_layer = 0
-		touch.collision_mask = 393216
-		var cshape := CollisionShape3D.new()
-		var cbox := BoxShape3D.new()
-		cbox.size = Vector3(0.032, 0.032, 0.02)
-		cshape.shape = cbox
-		touch.add_child(cshape)
-		touch.transform.origin = Vector3(cx, 0, 0.01)
-		var color_idx: int = i
-		touch.body_entered.connect(func(_body): _select_color(color_idx))
-		palette_root.add_child(touch)
 
 	# Palette label
 	var lbl := Label3D.new()
@@ -565,6 +551,7 @@ func _get_tiled_color(px: int, py: int) -> int:
 
 func _select_color(idx: int) -> void:
 	selected_color = clampi(idx, 0, palette.size() - 1)
+	print("PatternPlate: selected color %d" % selected_color)
 	for i in _palette_indicators.size():
 		var ind: MeshInstance3D = _palette_indicators[i]
 		if ind and ind.material_override:

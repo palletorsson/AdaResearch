@@ -5319,6 +5319,36 @@
 				"interactive",
 				"dieter_rams"
 			]
+		},
+		"pattern_studio_plate": {
+			"name": "Pattern Studio Plate",
+			"lookup_name": "pattern_studio_plate",
+			"description": "Full pattern design studio ported from Three.js PatternMaker3D. Cream plate with 4x4 paint grid, 3x3 palette, 6 sliders (motif, group, period, size, zone, site), control buttons, and real-time carpet output using all 17 wallpaper symmetry groups. 10 Italian motifs and 5 historical period palettes.",
+			"scene": "res://commons/primitives/arrays/pattern_studio_plate.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"mosaicanalysis",
+				"array_tutorial"
+			],
+			"sequence": "array_tutorial",
+			"complexity": "advanced",
+			"tags": [
+				"2d",
+				"pattern",
+				"primitives",
+				"interactive",
+				"dieter_rams",
+				"wallpaper_groups",
+				"sliders"
+			],
+			"dev_themes": [
+				"arrays",
+				"art",
+				"data_structures",
+				"symmetry"
+			]
 		}
 	}
 }

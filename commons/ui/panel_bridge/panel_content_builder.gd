@@ -40,7 +40,7 @@ static func build_panel(panel_def: Dictionary, data_store = null) -> Control:
 	# Panel background — brighter for VR readability
 	var bg := ColorRect.new()
 	bg.name = "Background"
-	bg.color = Color(0.14, 0.15, 0.20)
+	bg.color = Color(0.90, 0.87, 0.80)  # Dieter Rams cream
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root.add_child(bg)
 
@@ -48,11 +48,18 @@ static func build_panel(panel_def: Dictionary, data_store = null) -> Control:
 	var panel_id: String = panel_def.get("id", "panel")
 	var title := Label.new()
 	title.name = "PanelTitle"
-	title.text = _humanize(panel_id)
-	title.add_theme_color_override("font_color", P.ACCENT_CYAN)
+	title.text = _humanize(panel_id).to_upper()
+	title.add_theme_color_override("font_color", Color(0.12, 0.12, 0.12))
 	title.add_theme_font_size_override("font_size", P.FONT_SIZE_SMALL)
 	title.position = Vector2(4, 2)
 	root.add_child(title)
+
+	# Copper accent line below title
+	var accent := ColorRect.new()
+	accent.color = Color(0.75, 0.38, 0.13)  # Copper
+	accent.position = Vector2(4, 18)
+	accent.size = Vector2(vp_w * 0.5, 2)
+	root.add_child(accent)
 
 	# Build each element
 	var elements: Array = panel_def.get("elements", [])
@@ -293,7 +300,7 @@ static func _build_text_input(elem_id: String, metadata: Dictionary,
 	# Label above
 	var label := Label.new()
 	label.text = _humanize(elem_id)
-	label.add_theme_color_override("font_color", P.TEXT_ON_DARK)
+	label.add_theme_color_override("font_color", Color(0.15, 0.15, 0.15))
 	label.add_theme_font_size_override("font_size", P.FONT_SIZE_SMALL)
 	label.position = Vector2(6, 2)
 	container.add_child(label)
@@ -328,7 +335,7 @@ static func _build_form_group(metadata: Dictionary,
 		# Label
 		var label := Label.new()
 		label.text = _humanize(field_name)
-		label.add_theme_color_override("font_color", P.TEXT_ON_DARK)
+		label.add_theme_color_override("font_color", Color(0.15, 0.15, 0.15))
 		label.add_theme_font_size_override("font_size", P.FONT_SIZE_SMALL)
 		label.position = Vector2(6, y_pos + 4)
 		label.size = Vector2(label_w, row_h - 4)
@@ -399,7 +406,7 @@ static func _build_color_palette(metadata: Dictionary,
 		var style := StyleBoxFlat.new()
 		style.bg_color = colors[i]
 		style.set_border_width_all(2)
-		style.border_color = Color(0.3, 0.32, 0.38)
+		style.border_color = Color(0.65, 0.62, 0.56)
 		style.set_corner_radius_all(P.CORNER_RADIUS_SM)
 		btn.add_theme_stylebox_override("normal", style)
 
@@ -478,7 +485,7 @@ static func _build_slider(metadata: Dictionary,
 	# Label
 	var label := Label.new()
 	label.text = "%s: %d" % [_humanize(data_path), int(current)]
-	label.add_theme_color_override("font_color", P.TEXT_ON_DARK)
+	label.add_theme_color_override("font_color", Color(0.15, 0.15, 0.15))
 	label.add_theme_font_size_override("font_size", P.FONT_SIZE_SMALL)
 	label.position = Vector2(6, 0)
 	label.size = Vector2(w - 12, 14)
@@ -546,8 +553,8 @@ static func _build_label_buttons(elem_id: String, metadata: Dictionary,
 	var panel := Panel.new()
 	panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var bg_style := StyleBoxFlat.new()
-	bg_style.bg_color = Color(0.12, 0.14, 0.18, 0.6)
-	bg_style.border_color = Color(0.28, 0.30, 0.38)
+	bg_style.bg_color = Color(0.82, 0.79, 0.72, 0.6)  # Recessed cream
+	bg_style.border_color = Color(0.65, 0.62, 0.56)
 	bg_style.set_border_width_all(1)
 	bg_style.set_corner_radius_all(P.CORNER_RADIUS_SM)
 	panel.add_theme_stylebox_override("panel", bg_style)
@@ -556,7 +563,7 @@ static func _build_label_buttons(elem_id: String, metadata: Dictionary,
 	# Title label
 	var title := Label.new()
 	title.text = _humanize(elem_id)
-	title.add_theme_color_override("font_color", P.ACCENT_CYAN)
+	title.add_theme_color_override("font_color", Color(0.75, 0.38, 0.13))  # Copper accent
 	title.add_theme_font_size_override("font_size", P.FONT_SIZE_SMALL)
 	title.position = Vector2(6, 4)
 	container.add_child(title)
@@ -629,8 +636,8 @@ static func _build_thumbnail_grid(elem_id: String,
 	var bg_panel := Panel.new()
 	bg_panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.12, 0.14, 0.18, 0.8)
-	style.border_color = Color(0.28, 0.30, 0.38)
+	style.bg_color = Color(0.85, 0.82, 0.76, 0.8)  # Cream toggle
+	style.border_color = Color(0.65, 0.62, 0.56)
 	style.set_border_width_all(1)
 	style.set_corner_radius_all(P.CORNER_RADIUS_SM)
 	bg_panel.add_theme_stylebox_override("panel", style)
@@ -668,14 +675,14 @@ static func _build_thumbnail_grid(elem_id: String,
 
 static func _apply_dark_button_style(btn: Button) -> void:
 	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color(0.22, 0.24, 0.32)
-	normal.border_color = Color(0.40, 0.43, 0.52)
+	normal.bg_color = Color(0.85, 0.82, 0.76)  # Cream button
+	normal.border_color = Color(0.65, 0.62, 0.56)  # Warm border
 	normal.set_border_width_all(1)
 	normal.set_corner_radius_all(P.CORNER_RADIUS_SM)
 	normal.set_content_margin_all(4)
 
 	var hover := StyleBoxFlat.new()
-	hover.bg_color = Color(0.28, 0.32, 0.42)
+	hover.bg_color = Color(0.80, 0.76, 0.68)  # Slightly darker cream on hover
 	hover.border_color = P.ACCENT_CYAN
 	hover.set_border_width_all(1)
 	hover.set_corner_radius_all(P.CORNER_RADIUS_SM)
@@ -683,7 +690,7 @@ static func _apply_dark_button_style(btn: Button) -> void:
 
 	btn.add_theme_stylebox_override("normal", normal)
 	btn.add_theme_stylebox_override("hover", hover)
-	btn.add_theme_color_override("font_color", P.TEXT_ON_DARK)
+	btn.add_theme_color_override("font_color", Color(0.15, 0.15, 0.15))
 	btn.add_theme_color_override("font_hover_color", P.ACCENT_CYAN)
 
 
@@ -691,7 +698,7 @@ static func _apply_dark_toggle_style(btn: Button, active: bool) -> void:
 	_apply_dark_button_style(btn)
 	if active:
 		var active_style := StyleBoxFlat.new()
-		active_style.bg_color = Color(0.10, 0.30, 0.38)
+		active_style.bg_color = Color(0.75, 0.38, 0.13)  # Copper when active
 		active_style.border_color = P.ACCENT_CYAN
 		active_style.set_border_width_all(2)
 		active_style.set_corner_radius_all(P.CORNER_RADIUS_SM)
@@ -702,8 +709,8 @@ static func _apply_dark_toggle_style(btn: Button, active: bool) -> void:
 
 static func _apply_dark_lineedit_style(edit: LineEdit) -> void:
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.10, 0.12, 0.18)
-	style.border_color = Color(0.35, 0.38, 0.48)
+	style.bg_color = Color(0.95, 0.93, 0.88)  # Light cream input field
+	style.border_color = Color(0.65, 0.62, 0.56)  # Warm border
 	style.set_border_width_all(1)
 	style.set_corner_radius_all(P.CORNER_RADIUS_SM)
 	style.set_content_margin_all(4)
@@ -713,15 +720,16 @@ static func _apply_dark_lineedit_style(edit: LineEdit) -> void:
 	focus_style.border_color = P.ACCENT_CYAN
 	edit.add_theme_stylebox_override("focus", focus_style)
 
-	edit.add_theme_color_override("font_color", P.TEXT_ON_DARK)
-	edit.add_theme_color_override("font_placeholder_color", Color(0.45, 0.48, 0.55))
+	edit.add_theme_color_override("font_color", Color(0.15, 0.15, 0.15))
+	edit.add_theme_color_override("font_placeholder_color", Color(0.55, 0.52, 0.48))
+	edit.add_theme_color_override("font_color", Color(0.12, 0.12, 0.12))
 	edit.add_theme_color_override("caret_color", P.ACCENT_CYAN)
 	edit.add_theme_font_size_override("font_size", P.FONT_SIZE_SMALL)
 
 
 static func _apply_dark_spinbox_style(spin: SpinBox) -> void:
 	# SpinBox contains a LineEdit as child — style is applied at tree enter
-	spin.add_theme_color_override("font_color", P.TEXT_ON_DARK)
+	spin.add_theme_color_override("font_color", Color(0.15, 0.15, 0.15))
 	spin.add_theme_font_size_override("font_size", P.FONT_SIZE_SMALL)
 
 
@@ -734,8 +742,8 @@ static func _build_placeholder(elem_id: String, elem_type: String,
 
 	# Placeholder background — visible in VR
 	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.18, 0.20, 0.26, 0.9)
-	style.border_color = Color(0.35, 0.38, 0.48)
+	style.bg_color = Color(0.95, 0.93, 0.88, 0.9)  # Light cream
+	style.border_color = Color(0.65, 0.62, 0.56)  # Warm border
 	style.border_width_bottom = 1
 	style.border_width_top = 1
 	style.border_width_left = 1
@@ -750,7 +758,7 @@ static func _build_placeholder(elem_id: String, elem_type: String,
 	label.text = "%s\n[%s]" % [_humanize(elem_id), elem_type]
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.add_theme_color_override("font_color", Color(0.65, 0.68, 0.75))
+	label.add_theme_color_override("font_color", Color(0.25, 0.23, 0.20))  # Dark warm text
 	label.add_theme_font_size_override("font_size", P.FONT_SIZE_SMALL)
 	label.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	container.add_child(label)
