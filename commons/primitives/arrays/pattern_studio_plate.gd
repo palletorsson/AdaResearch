@@ -34,8 +34,8 @@ const CARPET_Z := -1.0
 const GRID_SIZE := 4
 const CELL_SIZE := 0.032
 const GRID_TOTAL := GRID_SIZE * CELL_SIZE
-const CARPET_W := 1.0
-const CARPET_H := 0.7
+const CARPET_W := 3.0
+const CARPET_H := 2.1
 
 # ── Tile palette (9 colors, matching Three.js PALETTE) ───────────────
 var palette: Array[Color] = [
