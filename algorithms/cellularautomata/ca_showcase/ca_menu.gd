@@ -2,8 +2,6 @@
 # Main menu for selecting different CA simulations — VR Node3D version
 extends Node3D
 
-const PushButton = preload("res://commons/interactables/push_button.tscn")
-
 var ca_scenes = {
 	"Recrystallization": "res://algorithms/proceduralgeneration/ca_showcase/recrystallization_ca.tscn",
 	"Dendrite Growth": "res://algorithms/proceduralgeneration/ca_showcase/dendrite_growth_ca.tscn",
@@ -22,49 +20,37 @@ func _ready() -> void:
 	_build_menu()
 
 func _build_menu() -> void:
-	var y_offset := 0.0
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
 
-	# Title
-	var title := Label3D.new()
-	title.text = "Cellular Automata Showcase"
-	title.font_size = 48
-	title.position = Vector3(0, y_offset, 0)
-	add_child(title)
-	y_offset -= 0.1
+	# Build button rows — one button per CA type, plus a Back button
+	var ca_names := ca_scenes.keys()
+	var rows: Array = []
+	for ca_name in ca_names:
+		rows.append([{"type": "button", "label": ca_name}])
+	rows.append([{"type": "spacer"}])
+	rows.append([{"type": "button", "label": "BACK"}])
 
-	# Create a VR push button for each CA type
-	for ca_name in ca_scenes.keys():
-		var btn := PushButton.instantiate()
-		btn.position = Vector3(0, y_offset, 0)
-		add_child(btn)
-		_buttons.append(btn)
+	var panel: Node3D = RackTpl.create_panel("CA MENU", rows)
+	panel.position = Vector3(0, 0, 0)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
 
-		var label_node = btn.get_node_or_null("Frame/LabelName")
-		if label_node:
-			label_node.text = ca_name
+	# Connect CA buttons
+	for i in ca_names.size():
+		var btn_node: Node = panel.find_child("Btn_%d" % i, true, false)
+		if btn_node:
+			_buttons.append(btn_node)
+			var area = btn_node.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(_on_ca_selected.bind(ca_names[i]))
 
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(_on_ca_selected.bind(ca_name))
-
-		y_offset -= 0.08
-
-	# Spacer
-	y_offset -= 0.04
-
-	# Back button
-	var back_btn := PushButton.instantiate()
-	back_btn.position = Vector3(0, y_offset, 0)
-	add_child(back_btn)
-	_buttons.append(back_btn)
-
-	var back_label = back_btn.get_node_or_null("Frame/LabelName")
-	if back_label:
-		back_label.text = "Back"
-
-	var back_area = back_btn.get_node_or_null("InteractableAreaButton")
-	if back_area:
-		back_area.button_pressed.connect(_on_back_pressed)
+	# Connect Back button (last button)
+	var back_btn: Node = panel.find_child("Btn_%d" % ca_names.size(), true, false)
+	if back_btn:
+		_buttons.append(back_btn)
+		var back_area = back_btn.get_node_or_null("InteractableAreaButton")
+		if back_area:
+			back_area.button_pressed.connect(_on_back_pressed)
 
 func _on_ca_selected(ca_name: String) -> void:
 	var scene_path = ca_scenes.get(ca_name, "")

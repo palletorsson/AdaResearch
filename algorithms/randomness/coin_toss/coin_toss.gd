@@ -51,7 +51,6 @@ var _history: Array[String] = []  # Last N results
 
 const MAX_COINS := 8
 const MAX_HISTORY := 30
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 const PICKABLE_SCENE = preload("res://addons/godot-xr-tools/objects/pickable.tscn")
 const HIGHLIGHT_RING_SCENE = preload("res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn")
 
@@ -505,55 +504,30 @@ func _update_display() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _create_vr_controls() -> void:
-	var panel := Node3D.new()
-	panel.name = "ControlPanel"
-	panel.position = Vector3(-0.15, pedestal_height - 0.15, 0)
-	panel.rotation_degrees = Vector3(-20, 30, 0)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("COIN TOSS", [
+		[
+			{"type": "button", "label": "REFILL"},
+			{"type": "button", "label": "CLEAR"},
+		],
+	])
+	panel.position = Vector3(-0.15, pedestal_height + 0.05, 0.12)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(panel)
 
-	var back := MeshInstance3D.new()
-	var back_mesh := BoxMesh.new()
-	back_mesh.size = Vector3(0.15, 0.06, 0.006)
-	back.mesh = back_mesh
-	var back_mat := StandardMaterial3D.new()
-	back_mat.albedo_color = Color(0.06, 0.06, 0.08)
-	back.material_override = back_mat
-	back.position.z = -0.006
-	panel.add_child(back)
+	# REFILL (Btn_0)
+	var refill_btn: Node = panel.find_child("Btn_0", true, false)
+	if refill_btn:
+		var area = refill_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _refill_tray())
 
-	# REFILL button — respawn coins in tray
-	var refill_btn := PUSH_BUTTON.instantiate()
-	refill_btn.name = "RefillBtn"
-	refill_btn.position = Vector3(-0.04, 0.0, 0)
-	refill_btn.scale = Vector3(0.6, 0.6, 0.6)
-	panel.add_child(refill_btn)
-	_add_button_label(refill_btn, "REFILL")
-
-	var refill_area := refill_btn.get_node_or_null("InteractableAreaButton")
-	if refill_area:
-		refill_area.button_pressed.connect(func(_b): _refill_tray())
-
-	# CLEAR button
-	var clear_btn := PUSH_BUTTON.instantiate()
-	clear_btn.name = "ClearBtn"
-	clear_btn.position = Vector3(0.04, 0.0, 0)
-	clear_btn.scale = Vector3(0.6, 0.6, 0.6)
-	panel.add_child(clear_btn)
-	_add_button_label(clear_btn, "CLEAR")
-
-	var clear_area := clear_btn.get_node_or_null("InteractableAreaButton")
-	if clear_area:
-		clear_area.button_pressed.connect(func(_b): _reset_stats())
-
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 18
-	lbl.position = Vector3(0, -0.02, 0)
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	btn.add_child(lbl)
+	# CLEAR (Btn_1)
+	var clear_btn: Node = panel.find_child("Btn_1", true, false)
+	if clear_btn:
+		var area = clear_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _reset_stats())
 
 
 func _refill_tray() -> void:

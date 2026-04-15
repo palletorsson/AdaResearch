@@ -95,12 +95,8 @@ var _mode_label: Label3D
 var _perf_label: Label3D
 
 # VR controls
-const SLIDER_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
-const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
-var _mode_button: Node3D
-var _restart_button: Node3D
-var _count_slider: Node3D
-var _speed_slider: Node3D
+var _control_rack: Node3D
+var _count_slider: Node
 
 # Colors
 const COL_POINT := Color(0.2, 0.65, 1.0)
@@ -238,56 +234,34 @@ func _create_labels() -> void:
 # =========================================================================
 
 func _create_vr_controls() -> void:
-	var panel_y := -field_height * 0.5 - 1.5
-	var panel_z := 0.3
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_rack = RackTpl.create_panel("CLOSEST PAIR", [
+		[{"type": "slider_h", "label": "POINTS", "default": clampf((point_count - 8.0) / 42.0, 0.0, 1.0)}, {"type": "slider_h", "label": "SPEED", "default": clampf((step_speed - 0.2) / 4.8, 0.0, 1.0)}],
+		[{"type": "button", "label": "MODE"}, {"type": "button", "label": "RESTART"}],
+	])
+	_control_rack.position = Vector3(0, -field_height * 0.5 - 1.5, 0.3)
+	_control_rack.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_control_rack)
 
-	# Mode cycle button
-	_mode_button = BUTTON_SCENE.instantiate()
-	_mode_button.position = Vector3(-2.0, panel_y, panel_z)
-	add_child(_mode_button)
-	var mb_area = _mode_button.get_node_or_null("InteractableAreaButton")
-	if mb_area:
-		mb_area.button_pressed.connect(_on_mode_pressed)
-	var mb_label = _mode_button.get_node_or_null("Frame/LabelName")
-	if mb_label == null:
-		mb_label = Label3D.new()
-		mb_label.font_size = 16
-		mb_label.position = Vector3(0, 0.12, 0)
-		mb_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		_mode_button.add_child(mb_label)
-	mb_label.text = "Mode"
+	_count_slider = _control_rack.find_child("Param_0", true, false)
+	if _count_slider and _count_slider.has_signal("slider_moved"):
+		_count_slider.slider_moved.connect(_on_count_changed)
 
-	# Restart button
-	_restart_button = BUTTON_SCENE.instantiate()
-	_restart_button.position = Vector3(-0.5, panel_y, panel_z)
-	add_child(_restart_button)
-	var rb_area = _restart_button.get_node_or_null("InteractableAreaButton")
-	if rb_area:
-		rb_area.button_pressed.connect(_on_restart_pressed)
-	var rb_label = _restart_button.get_node_or_null("Frame/LabelName")
-	if rb_label == null:
-		rb_label = Label3D.new()
-		rb_label.font_size = 16
-		rb_label.position = Vector3(0, 0.12, 0)
-		rb_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		_restart_button.add_child(rb_label)
-	rb_label.text = "Restart"
+	var speed_slider: Node = _control_rack.find_child("Param_1", true, false)
+	if speed_slider and speed_slider.has_signal("slider_moved"):
+		speed_slider.slider_moved.connect(_on_speed_changed)
 
-	# Point count slider
-	_count_slider = SLIDER_SCENE.instantiate()
-	_count_slider.position = Vector3(1.5, panel_y, panel_z)
-	add_child(_count_slider)
-	_count_slider.set_normalized_value(clampf((point_count - 8.0) / 42.0, 0.0, 1.0))
-	_count_slider.set_param_name("Points")
-	_count_slider.slider_moved.connect(_on_count_changed)
+	var mode_btn: Node = _control_rack.find_child("Btn_0", true, false)
+	if mode_btn:
+		var area = mode_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_mode_pressed())
 
-	# Speed slider
-	_speed_slider = SLIDER_SCENE.instantiate()
-	_speed_slider.position = Vector3(3.5, panel_y, panel_z)
-	add_child(_speed_slider)
-	_speed_slider.set_normalized_value(clampf((step_speed - 0.2) / 4.8, 0.0, 1.0))
-	_speed_slider.set_param_name("Speed")
-	_speed_slider.slider_moved.connect(_on_speed_changed)
+	var restart_btn: Node = _control_rack.find_child("Btn_1", true, false)
+	if restart_btn:
+		var area = restart_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_restart_pressed())
 
 func _on_mode_pressed() -> void:
 	_mode = (_mode + 1) % 3
@@ -297,13 +271,15 @@ func _on_restart_pressed() -> void:
 	_restart()
 
 func _on_count_changed(_value: float) -> void:
-	var norm = _count_slider.get_normalized_value()
-	point_count = int(lerpf(8.0, 50.0, norm))
-	_restart()
+	var slider: Node = _control_rack.find_child("Param_0", true, false)
+	if slider and slider.has_method("get_normalized_value"):
+		point_count = int(lerpf(8.0, 50.0, slider.get_normalized_value()))
+		_restart()
 
 func _on_speed_changed(_value: float) -> void:
-	var norm = _speed_slider.get_normalized_value()
-	step_speed = lerpf(0.2, 5.0, norm)
+	var slider: Node = _control_rack.find_child("Param_1", true, false)
+	if slider and slider.has_method("get_normalized_value"):
+		step_speed = lerpf(0.2, 5.0, slider.get_normalized_value())
 
 func _restart() -> void:
 	_generate_points()

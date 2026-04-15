@@ -84,8 +84,6 @@ var _info_label: Label3D
 var _control_panel: Node3D
 var _created_nodes: Array[Node] = []
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
 func _ready() -> void:
 	_create_base()
@@ -216,62 +214,40 @@ func _create_labels() -> void:
 	_created_nodes.append(_info_label)
 
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("FORCE FIELD", [
+		[
+			{"type": "slider_h", "label": "STRENGTH", "default": (field_strength - 0.1) / 4.9},
+		],
+		[
+			{"type": "button", "label": "GRAVITY"},
+			{"type": "button", "label": "CHARGE"},
+			{"type": "button", "label": "DIPOLE"},
+			{"type": "button", "label": "VORTEX"},
+		],
+	])
 	_control_panel.position = Vector3(0, 0.02, field_size / 2.0 + 0.15)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 	_created_nodes.append(_control_panel)
 
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.45, 0.12, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
+	# Strength slider
+	var strength_slider = _control_panel.find_child("Param_0", true, false)
+	if strength_slider and strength_slider.has_signal("slider_moved"):
+		strength_slider.slider_moved.connect(func(_pos):
+			if strength_slider.has_method("get_normalized_value"):
+				field_strength = 0.1 + strength_slider.get_normalized_value() * 4.9
+		)
 
 	# Field type buttons
-	var types = ["GRAVITY", "CHARGE", "DIPOLE", "VORTEX"]
-	for i in range(types.size()):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "Type%d" % i
-		btn.position = Vector3(-0.15 + i * 0.1, 0.025, 0)
-		btn.scale = Vector3(0.65, 0.65, 0.65)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, types[i])
-
-		var type_idx = i
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(func(_b): field_type = type_idx as FieldType)
-
-	# Strength slider
-	var strength_slider = SLIDER_HORIZONTAL.instantiate()
-	strength_slider.name = "StrengthSlider"
-	strength_slider.position = Vector3(0, -0.025, 0)
-	strength_slider.rotation_degrees.x = -30
-	strength_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var strength_label = strength_slider.get_node_or_null("Frame/LabelName")
-	if strength_label:
-		strength_label.text = "STRENGTH"
-	_control_panel.add_child(strength_slider)
-	strength_slider.slider_moved.connect(func(_pos):
-		if strength_slider.has_method("get_normalized_value"):
-			field_strength = 0.1 + strength_slider.get_normalized_value() * 4.9
-	)
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = BUTTON_LABEL_PIXEL_SIZE
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
+	var type_names = ["GRAVITY", "CHARGE", "DIPOLE", "VORTEX"]
+	for i in range(type_names.size()):
+		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var type_idx = i
+			var area = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(func(_b): field_type = type_idx as FieldType)
 
 func _update_field() -> void:
 	if not _shaft_mm:

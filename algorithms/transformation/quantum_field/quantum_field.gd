@@ -72,11 +72,6 @@ var _info_label: Label3D
 var _state_label: Label3D
 
 # VR controls
-const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
-var _mode_button: Node3D
-var _action_button: Node3D
-var _reset_button: Node3D
 var _coupling_slider: Node3D
 var _mass_slider: Node3D
 
@@ -201,40 +196,52 @@ func _create_labels() -> void:
 # =========================================================================
 
 func _create_vr_controls() -> void:
-	_mode_button = BUTTON_SCENE.instantiate()
-	_mode_button.position = Vector3(-1.6, -1.0, 0)
-	add_child(_mode_button)
-	var btn_mode = _mode_button.get_node_or_null("InteractableAreaButton")
-	if btn_mode:
-		btn_mode.button_pressed.connect(_cycle_mode)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("QUANTUM FIELD", [
+		[
+			{"type": "slider_h", "label": "COUPLING", "default": coupling_lambda / 2.0},
+			{"type": "slider_h", "label": "MASS", "default": mass_param / 3.0},
+		],
+		[
+			{"type": "button", "label": "MODE"},
+			{"type": "button", "label": "ACTION"},
+			{"type": "button", "label": "RESET"},
+		],
+	])
+	panel.position = Vector3(0.0, -1.0, 0)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
 
-	_action_button = BUTTON_SCENE.instantiate()
-	_action_button.position = Vector3(-0.8, -1.0, 0)
-	add_child(_action_button)
-	var btn_action = _action_button.get_node_or_null("InteractableAreaButton")
-	if btn_action:
-		btn_action.button_pressed.connect(_on_action_pressed)
+	# Coupling slider (Param_0)
+	_coupling_slider = panel.find_child("Param_0", true, false)
+	if _coupling_slider and _coupling_slider.has_signal("slider_moved"):
+		_coupling_slider.slider_moved.connect(_on_coupling_changed)
 
-	_reset_button = BUTTON_SCENE.instantiate()
-	_reset_button.position = Vector3(0.0, -1.0, 0)
-	add_child(_reset_button)
-	var btn_reset = _reset_button.get_node_or_null("InteractableAreaButton")
-	if btn_reset:
-		btn_reset.button_pressed.connect(_on_reset)
+	# Mass slider (Param_1)
+	_mass_slider = panel.find_child("Param_1", true, false)
+	if _mass_slider and _mass_slider.has_signal("slider_moved"):
+		_mass_slider.slider_moved.connect(_on_mass_changed)
 
-	_coupling_slider = SLIDER_SCENE.instantiate()
-	_coupling_slider.position = Vector3(1.2, -0.8, 0)
-	add_child(_coupling_slider)
-	_coupling_slider.set_param_name("Coupling λ")
-	_coupling_slider.set_normalized_value(coupling_lambda / 2.0)
-	_coupling_slider.slider_moved.connect(_on_coupling_changed)
+	# MODE button (Btn_0)
+	var mode_btn: Node = panel.find_child("Btn_0", true, false)
+	if mode_btn:
+		var area = mode_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _cycle_mode())
 
-	_mass_slider = SLIDER_SCENE.instantiate()
-	_mass_slider.position = Vector3(1.2, -1.2, 0)
-	add_child(_mass_slider)
-	_mass_slider.set_param_name("Mass m")
-	_mass_slider.set_normalized_value(mass_param / 3.0)
-	_mass_slider.slider_moved.connect(_on_mass_changed)
+	# ACTION button (Btn_1)
+	var action_btn: Node = panel.find_child("Btn_1", true, false)
+	if action_btn:
+		var area = action_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_action_pressed())
+
+	# RESET button (Btn_2)
+	var reset_btn: Node = panel.find_child("Btn_2", true, false)
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_reset())
 
 
 func _cycle_mode() -> void:

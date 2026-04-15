@@ -62,7 +62,7 @@ var _created_nodes: Array[Node] = []
 
 const SEGMENTS = 48
 const VALUE_POINTS = 5  # Number of points showing values
-const SLIDER_H = preload("res://commons/interactables/slider_horizontal.tscn")
+var RackTpl = load("res://commons/audio/rack_templates/RackTemplates.gd")
 
 
 func _ready():
@@ -343,25 +343,17 @@ func _create_labels():
 
 
 func _create_frequency_slider():
-	if not SLIDER_H:
-		return
-
-	_freq_slider = SLIDER_H.instantiate()
-	_freq_slider.position = Vector3(display_size * 0.4, 0.05, wall_length / 2 + 0.1)
-	_freq_slider.rotation.y = PI * 0.7
-	add_child(_freq_slider)
-	_created_nodes.append(_freq_slider)
-
-	if _freq_slider.has_method("set_range"):
-		_freq_slider.set_range(frequency_min, frequency_max)
-	if _freq_slider.has_method("set_param_name"):
-		_freq_slider.set_param_name("f")
-
 	var norm = inverse_lerp(frequency_min, frequency_max, frequency)
-	if _freq_slider.has_method("set_normalized_value"):
-		_freq_slider.set_normalized_value(norm)
+	var panel = RackTpl.create_panel("FREQUENCY", [
+		[{"type": "slider_h", "label": "f", "default": norm}],
+	])
+	panel.position = Vector3(display_size * 0.4, 0.05, wall_length / 2 + 0.1)
+	panel.rotation.y = PI * 0.7
+	add_child(panel)
+	_created_nodes.append(panel)
 
-	if _freq_slider.has_signal("slider_moved"):
+	_freq_slider = panel.find_child("Param_0", true, false)
+	if _freq_slider and _freq_slider.has_signal("slider_moved"):
 		_freq_slider.slider_moved.connect(_on_freq_slider_moved)
 
 	_freq_label = Label3D.new()

@@ -7,8 +7,8 @@ extends Node3D
 enum Mode { JPS, THETA, COMPARE }
 enum AlgStep { IDLE, RUNNING, DONE }
 
-const SLIDER_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
-const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
+# Controls built via RackTemplates
+var _control_panel: Node3D
 
 @export var grid_size: int = 20
 @export var obstacle_density: float = 0.25
@@ -176,40 +176,55 @@ func _create_vr_controls() -> void:
 	var panel_y := -0.8
 	var panel_z := total_w * 0.5 + 1.0
 
-	_mode_button = BUTTON_SCENE.instantiate()
-	_mode_button.position = Vector3(-2.5, panel_y, panel_z)
-	add_child(_mode_button)
-	var mb_area = _mode_button.get_node_or_null("InteractableAreaButton")
-	if mb_area:
-		mb_area.button_pressed.connect(_on_mode_pressed)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("A* SEARCH", [
+		[
+			{"type": "slider_h", "label": "WALLS", "default": -1.0},
+			{"type": "slider_h", "label": "SPEED", "default": -1.0},
+			{"type": "slider_h", "label": "GRID", "default": -1.0},
+		],
+		[
+			{"type": "button", "label": "MODE"},
+			{"type": "button", "label": "RESET"},
+		],
+	])
+	_control_panel.position = Vector3(0, panel_y, panel_z)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_control_panel)
 
-	_reset_button = BUTTON_SCENE.instantiate()
-	_reset_button.position = Vector3(-1.0, panel_y, panel_z)
-	add_child(_reset_button)
-	var rb_area = _reset_button.get_node_or_null("InteractableAreaButton")
-	if rb_area:
-		rb_area.button_pressed.connect(_on_reset_pressed)
+	# Extract slider references
+	_density_slider = _control_panel.find_child("Param_0", true, false)
+	_speed_slider = _control_panel.find_child("Param_1", true, false)
+	_size_slider = _control_panel.find_child("Param_2", true, false)
 
-	_density_slider = SLIDER_SCENE.instantiate()
-	_density_slider.position = Vector3(0.5, panel_y, panel_z)
-	add_child(_density_slider)
-	_density_slider.set_normalized_value(obstacle_density / 0.5)
-	_density_slider.set_param_name("Walls")
-	_density_slider.slider_moved.connect(_on_density_changed)
+	# Set initial slider values
+	if _density_slider and _density_slider.has_method("set_normalized_value"):
+		_density_slider.set_normalized_value(obstacle_density / 0.5)
+	if _speed_slider and _speed_slider.has_method("set_normalized_value"):
+		_speed_slider.set_normalized_value(clampf((step_speed - 0.5) / 9.5, 0.0, 1.0))
+	if _size_slider and _size_slider.has_method("set_normalized_value"):
+		_size_slider.set_normalized_value(clampf((grid_size - 10.0) / 30.0, 0.0, 1.0))
 
-	_speed_slider = SLIDER_SCENE.instantiate()
-	_speed_slider.position = Vector3(2.0, panel_y, panel_z)
-	add_child(_speed_slider)
-	_speed_slider.set_normalized_value(clampf((step_speed - 0.5) / 9.5, 0.0, 1.0))
-	_speed_slider.set_param_name("Speed")
-	_speed_slider.slider_moved.connect(_on_speed_changed)
+	# Connect slider signals
+	if _density_slider and _density_slider.has_signal("slider_moved"):
+		_density_slider.slider_moved.connect(_on_density_changed)
+	if _speed_slider and _speed_slider.has_signal("slider_moved"):
+		_speed_slider.slider_moved.connect(_on_speed_changed)
+	if _size_slider and _size_slider.has_signal("slider_moved"):
+		_size_slider.slider_moved.connect(_on_size_changed)
 
-	_size_slider = SLIDER_SCENE.instantiate()
-	_size_slider.position = Vector3(3.5, panel_y, panel_z)
-	add_child(_size_slider)
-	_size_slider.set_normalized_value(clampf((grid_size - 10.0) / 30.0, 0.0, 1.0))
-	_size_slider.set_param_name("Grid")
-	_size_slider.slider_moved.connect(_on_size_changed)
+	# Extract button references
+	_mode_button = _control_panel.find_child("Btn_0", true, false)
+	if _mode_button:
+		var mb_area = _mode_button.get_node_or_null("InteractableAreaButton")
+		if mb_area:
+			mb_area.button_pressed.connect(func(_b): _on_mode_pressed())
+
+	_reset_button = _control_panel.find_child("Btn_1", true, false)
+	if _reset_button:
+		var rb_area = _reset_button.get_node_or_null("InteractableAreaButton")
+		if rb_area:
+			rb_area.button_pressed.connect(func(_b): _on_reset_pressed())
 
 
 # --- VR Callbacks ---

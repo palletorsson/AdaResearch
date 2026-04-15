@@ -14,7 +14,7 @@
 extends Node3D
 class_name GridEditorBoard
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
+var PUSH_BUTTON: PackedScene
 const CBS = preload("res://commons/artifacts/grid_editor_board/control_board_subset.gd")
 
 # ── Colours ────────────────────────────────────────────────────────────
@@ -88,6 +88,7 @@ var _connected_buttons: Array = [] # [{area, callable}]
 # ═══════════════════════════════════════════════════════════════════════
 
 func _ready() -> void:
+	PUSH_BUTTON = load("res://commons/interactables/push_button.tscn")
 	_init_materials()
 	_init_occupancy(default_grid_w, default_grid_h)
 	_build_back_panel()

@@ -28,7 +28,7 @@ const SPIKE_CHANCE := 0.02
 const TRACE_UPDATE_INTERVAL := 3
 const TIME_WRAP := 1000.0
 
-var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
+var RackTpl = load("res://commons/audio/rack_templates/RackTemplates.gd")
 
 ## Width of the instrument base in meters
 @export_group("Dimensions")
@@ -421,19 +421,21 @@ func _create_ventilation_grilles() -> void:
 
 ## Sets up VR interaction sliders for noise and frequency control.
 func _setup_controls() -> void:
-	_noise_slider = SliderScene.instantiate()
-	_noise_slider.position = Vector3(-base_width * 0.3, base_height + 0.02, base_depth / 2 + 0.08)
-	_noise_slider.set_param_name("Noise")
-	_noise_slider.set_normalized_value(noise_intensity / 2.0)
-	_noise_slider.slider_moved.connect(_on_noise_changed)
-	add_child(_noise_slider)
+	var panel = RackTpl.create_panel("SEISMOGRAPH", [
+		[{"type": "slider_h", "label": "Noise", "default": noise_intensity / 2.0},
+		 {"type": "slider_h", "label": "Frequency", "default": trace_frequency / 20.0}],
+	])
+	panel.position = Vector3(0, base_height + 0.02, base_depth / 2 + 0.08)
+	panel.rotation_degrees = Vector3(-30, 0, 0)
+	add_child(panel)
 
-	_freq_slider = SliderScene.instantiate()
-	_freq_slider.position = Vector3(base_width * 0.3, base_height + 0.02, base_depth / 2 + 0.08)
-	_freq_slider.set_param_name("Frequency")
-	_freq_slider.set_normalized_value(trace_frequency / 20.0)
-	_freq_slider.slider_moved.connect(_on_freq_changed)
-	add_child(_freq_slider)
+	_noise_slider = panel.find_child("Param_0", true, false)
+	if _noise_slider and _noise_slider.has_signal("slider_moved"):
+		_noise_slider.slider_moved.connect(_on_noise_changed)
+
+	_freq_slider = panel.find_child("Param_1", true, false)
+	if _freq_slider and _freq_slider.has_signal("slider_moved"):
+		_freq_slider.slider_moved.connect(_on_freq_changed)
 
 func _on_noise_changed() -> void:
 	noise_intensity = _noise_slider.get_normalized_value() * 2.0

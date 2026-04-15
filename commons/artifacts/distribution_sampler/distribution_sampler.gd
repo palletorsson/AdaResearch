@@ -36,8 +36,6 @@ const MARKER_RADIUS := 0.008
 const SAMPLE_SPAWN_OFFSET := 0.05
 const TIMER_WRAP := 1000.0
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
 ## Width of the histogram display area in meters
 @export_range(0.1, 2.0, 0.05) var display_width: float = 0.6
@@ -254,59 +252,31 @@ func _create_labels() -> void:
 
 ## Create VR-interactive buttons for switching distributions and clearing data.
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("DISTRIBUTIONS", [
+		[{"type": "button", "label": "UNIFORM"}, {"type": "button", "label": "GAUSS"}, {"type": "button", "label": "POISSON"}, {"type": "button", "label": "EXPON"}],
+		[{"type": "button", "label": "CLEAR"}],
+	])
 	_control_panel.position = Vector3(0, -0.08, 0.15)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(_control_panel)
 
-	var panel_back := MeshInstance3D.new()
-	var panel_mesh := BoxMesh.new()
-	panel_mesh.size = Vector3(0.45, 0.12, 0.01)
-	panel_back.mesh = panel_mesh
-	var ctrl_mat := StandardMaterial3D.new()
-	ctrl_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	ctrl_mat.metallic = 0.3
-	panel_back.material_override = ctrl_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
+	for i in range(4):
+		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var area = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				var type_idx := i
+				var cb := func(_b): distribution = type_idx as DistType
+				area.button_pressed.connect(cb)
+				_signal_connections.append([area, &"button_pressed", cb])
 
-	var types = ["UNIFORM", "GAUSS", "POISSON", "EXPON"]
-	for i in range(types.size()):
-		var btn := PUSH_BUTTON.instantiate()
-		btn.name = "Dist%d" % i
-		btn.position = Vector3(-0.15 + i * 0.1, 0.025, 0)
-		btn.scale = Vector3(0.65, 0.65, 0.65)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, types[i])
-
-		var type_idx := i
-		var area = btn.get_node_or_null("InteractableAreaButton")
+	var clear_btn: Node = _control_panel.find_child("Btn_4", true, false)
+	if clear_btn:
+		var area = clear_btn.get_node_or_null("InteractableAreaButton")
 		if area:
-			var cb := func(_b): distribution = type_idx as DistType
-			area.button_pressed.connect(cb)
-			_signal_connections.append([area, &"button_pressed", cb])
-
-	var clear_btn := PUSH_BUTTON.instantiate()
-	clear_btn.name = "ClearBtn"
-	clear_btn.position = Vector3(0.15, -0.025, 0)
-	clear_btn.rotation_degrees.x = -30
-	clear_btn.scale = Vector3(0.65, 0.65, 0.65)
-	_control_panel.add_child(clear_btn)
-	_add_button_label(clear_btn, "CLEAR")
-	var clear_area = clear_btn.get_node_or_null("InteractableAreaButton")
-	if clear_area:
-		clear_area.button_pressed.connect(_clear_samples)
-		_signal_connections.append([clear_area, &"button_pressed", _clear_samples])
-
-## Add a small text label beneath a VR button.
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
+			area.button_pressed.connect(func(_b): _clear_samples())
+			_signal_connections.append([area, &"button_pressed", _clear_samples])
 
 ## Reset all bins, samples, and visuals to initial state.
 func _clear_samples(_button = null) -> void:

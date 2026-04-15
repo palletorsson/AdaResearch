@@ -72,7 +72,6 @@ var _result_label: Label3D
 var _stats_label: Label3D
 var _window_frame: Node3D
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -523,86 +522,38 @@ func _update_stats() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _create_vr_controls() -> void:
-	var panel := Node3D.new()
-	panel.name = "ControlPanel"
-	panel.position = Vector3(cabinet_width / 2.0 + 0.04, pedestal_height + cabinet_height * 0.3, -cabinet_depth / 4.0)
-	panel.rotation_degrees = Vector3(-10, -90, 0)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("SLOT MACHINE", [
+		[
+			{"type": "button", "label": "PULL"},
+			{"type": "button", "label": "AUTO"},
+			{"type": "button", "label": "RESET"},
+		],
+	])
+	panel.position = Vector3(0, pedestal_height + cabinet_height + 0.05, cabinet_depth / 2.0 + 0.08)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(panel)
 
-	# PULL lever button
-	var pull_btn := PUSH_BUTTON.instantiate()
-	pull_btn.name = "PullBtn"
-	pull_btn.position = Vector3(0, 0, 0)
-	pull_btn.scale = Vector3(0.8, 0.8, 0.8)
-	panel.add_child(pull_btn)
-	_add_button_label(pull_btn, "PULL")
+	# PULL button (Btn_0)
+	var pull_btn: Node = panel.find_child("Btn_0", true, false)
+	if pull_btn:
+		var area = pull_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _pull_lever())
 
-	var pull_area := pull_btn.get_node_or_null("InteractableAreaButton")
-	if pull_area:
-		pull_area.button_pressed.connect(func(_b): _pull_lever())
+	# AUTO button (Btn_1)
+	var auto_btn: Node = panel.find_child("Btn_1", true, false)
+	if auto_btn:
+		var area = auto_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _toggle_auto())
 
-	# Lever arm visual (decorative stick above button)
-	var lever := MeshInstance3D.new()
-	var lever_cyl := CylinderMesh.new()
-	lever_cyl.top_radius = 0.012
-	lever_cyl.bottom_radius = 0.015
-	lever_cyl.height = 0.15
-	lever.mesh = lever_cyl
-	var lever_mat := StandardMaterial3D.new()
-	lever_mat.albedo_color = Color(0.7, 0.7, 0.75)
-	lever_mat.metallic = 0.8
-	lever_mat.roughness = 0.3
-	lever.material_override = lever_mat
-	lever.position = Vector3(0, 0.09, 0)
-	panel.add_child(lever)
-
-	# Lever knob (ball on top)
-	var knob := MeshInstance3D.new()
-	var sphere := SphereMesh.new()
-	sphere.radius = 0.02
-	sphere.height = 0.04
-	knob.mesh = sphere
-	var knob_mat := StandardMaterial3D.new()
-	knob_mat.albedo_color = Color(0.85, 0.2, 0.15)
-	knob_mat.metallic = 0.5
-	knob_mat.roughness = 0.3
-	knob.material_override = knob_mat
-	knob.position = Vector3(0, 0.17, 0)
-	panel.add_child(knob)
-
-	# AUTO toggle
-	var auto_btn := PUSH_BUTTON.instantiate()
-	auto_btn.name = "AutoBtn"
-	auto_btn.position = Vector3(0, -0.07, 0)
-	auto_btn.scale = Vector3(0.55, 0.55, 0.55)
-	panel.add_child(auto_btn)
-	_add_button_label(auto_btn, "AUTO")
-
-	var auto_area := auto_btn.get_node_or_null("InteractableAreaButton")
-	if auto_area:
-		auto_area.button_pressed.connect(func(_b): _toggle_auto())
-
-	# RESET button
-	var reset_btn := PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetBtn"
-	reset_btn.position = Vector3(0, -0.13, 0)
-	reset_btn.scale = Vector3(0.55, 0.55, 0.55)
-	panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RESET")
-
-	var reset_area := reset_btn.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		reset_area.button_pressed.connect(func(_b): _reset_stats())
-
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 8
-	lbl.position = Vector3(0, -0.02, 0)
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	btn.add_child(lbl)
+	# RESET button (Btn_2)
+	var reset_btn: Node = panel.find_child("Btn_2", true, false)
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _reset_stats())
 
 
 # ── Auto-spin ───────────────────────────────────────────────────────────────

@@ -56,9 +56,6 @@ var _info_label: Label3D
 var _pi_label: Label3D
 var _control_panel: Node3D
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-
 # Signal tracking for cleanup
 var _signal_connections: Array = []
 
@@ -203,70 +200,43 @@ func _create_labels() -> void:
 
 ## Build the VR control panel with speed slider and action buttons
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("MONTE CARLO", [
+		[{"type": "slider_h", "label": "SPEED", "default": (darts_per_second - 1.0) / 99.0}],
+		[
+			{"type": "button", "label": "THROW"},
+			{"type": "button", "label": "x10"},
+			{"type": "button", "label": "x100"},
+			{"type": "button", "label": "CLEAR"},
+		],
+	])
 	_control_panel.position = Vector3(0, -0.05, board_size / 2 + 0.15)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 
-	# Panel backdrop
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.35, 0.12, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
+	# Speed slider (Param_0)
+	var speed_slider: Node = _control_panel.find_child("Param_0", true, false)
+	if speed_slider and speed_slider.has_signal("slider_moved"):
+		var speed_cb := func(_pos):
+			if speed_slider.has_method("get_normalized_value"):
+				darts_per_second = 1.0 + speed_slider.get_normalized_value() * 99.0
+		speed_slider.slider_moved.connect(speed_cb)
+		_signal_connections.append([speed_slider, &"slider_moved", speed_cb])
 
-	# Speed slider
-	var speed_slider = SLIDER_HORIZONTAL.instantiate()
-	speed_slider.name = "SpeedSlider"
-	speed_slider.position = Vector3(0, 0.025, 0)
-	speed_slider.rotation_degrees.x = -30
-	speed_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var speed_label = speed_slider.get_node_or_null("Frame/LabelName")
-	if speed_label:
-		speed_label.text = "SPEED"
-	_control_panel.add_child(speed_slider)
-	var speed_cb := func(_pos):
-		if speed_slider.has_method("get_normalized_value"):
-			darts_per_second = 1.0 + speed_slider.get_normalized_value() * 99.0
-	speed_slider.slider_moved.connect(speed_cb)
-	_signal_connections.append([speed_slider, &"slider_moved", speed_cb])
-
-	# Control buttons
-	var buttons = [
-		["THROW", func(): _throw_dart()],
-		["×10", func(): for i in 10: _throw_dart()],
-		["×100", func(): for i in 100: _throw_dart()],
-		["CLEAR", func(): _clear_darts()]
+	# Buttons: THROW (Btn_0), x10 (Btn_1), x100 (Btn_2), CLEAR (Btn_3)
+	var btn_callbacks := [
+		func(_b): _throw_dart(),
+		func(_b): for ii in 10: _throw_dart(),
+		func(_b): for ii in 100: _throw_dart(),
+		func(_b): _clear_darts(),
 	]
-
-	for i in range(buttons.size()):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "Btn%d" % i
-		btn.position = Vector3(-0.12 + i * 0.08, -0.025, 0)
-		btn.scale = Vector3(0.65, 0.65, 0.65)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, buttons[i][0])
-
-		var callback = buttons[i][1]
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(callback)
-			_signal_connections.append([area, &"button_pressed", callback])
-
-## Add a text label below a VR button
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 7
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
+	for i in range(btn_callbacks.size()):
+		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var area = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(btn_callbacks[i])
+				_signal_connections.append([area, &"button_pressed", btn_callbacks[i]])
 
 func _process(delta: float) -> void:
 	if auto_throw and _total_count < max_darts:

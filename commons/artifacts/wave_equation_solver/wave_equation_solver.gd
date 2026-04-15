@@ -43,8 +43,7 @@ var _control_panel: Node3D
 var _damping_slider: Node
 var _speed_slider: Node
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
+var RackTpl = load("res://commons/audio/rack_templates/RackTemplates.gd")
 
 
 func _ready() -> void:
@@ -266,77 +265,37 @@ func _create_labels() -> void:
 # --- VR Controls ---
 
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	_control_panel = RackTpl.create_panel("WAVE EQUATION", [
+		[{"type": "slider_h", "label": "DAMP", "default": damping / 0.02},
+		 {"type": "slider_h", "label": "SPEED", "default": (wave_speed - 0.5) / 4.5}],
+		[{"type": "button", "label": "STRIKE"},
+		 {"type": "button", "label": "RESET"}],
+	])
 	_control_panel.position = Vector3(0, 0.02, membrane_size / 2.0 + 0.15)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 
-	# Panel backing
-	var panel_back: MeshInstance3D = MeshInstance3D.new()
-	var panel_mesh: BoxMesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.45, 0.16, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat: StandardMaterial3D = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
+	_damping_slider = _control_panel.find_child("Param_0", true, false)
+	if _damping_slider and _damping_slider.has_signal("slider_moved"):
+		_damping_slider.slider_moved.connect(_on_damping_changed)
 
-	# Damping slider
-	_damping_slider = SLIDER_HORIZONTAL.instantiate()
-	_damping_slider.name = "DampingSlider"
-	_damping_slider.position = Vector3(-0.1, 0.04, 0)
-	_damping_slider.rotation_degrees.x = -30
-	_damping_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var damp_label = _damping_slider.get_node_or_null("Frame/LabelName")
-	if damp_label:
-		damp_label.text = "DAMP"
-	_control_panel.add_child(_damping_slider)
-	_damping_slider.slider_moved.connect(_on_damping_changed)
+	_speed_slider = _control_panel.find_child("Param_1", true, false)
+	if _speed_slider and _speed_slider.has_signal("slider_moved"):
+		_speed_slider.slider_moved.connect(_on_speed_changed)
 
-	# Wave speed slider
-	_speed_slider = SLIDER_HORIZONTAL.instantiate()
-	_speed_slider.name = "SpeedSlider"
-	_speed_slider.position = Vector3(0.1, 0.04, 0)
-	_speed_slider.rotation_degrees.x = -30
-	_speed_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var speed_label = _speed_slider.get_node_or_null("Frame/LabelName")
-	if speed_label:
-		speed_label.text = "SPEED"
-	_control_panel.add_child(_speed_slider)
-	_speed_slider.slider_moved.connect(_on_speed_changed)
-
-	# Strike / reset buttons
-	var buttons_data: Array = [
-		["STRIKE", "_on_strike"],
-		["RESET", "_on_reset"],
-	]
-
-	for idx in range(buttons_data.size()):
-		var btn: Node = PUSH_BUTTON.instantiate()
-		btn.name = buttons_data[idx][0]
-		btn.position = Vector3(-0.08 + idx * 0.16, -0.035, 0)
-		btn.scale = Vector3(0.65, 0.65, 0.65)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, buttons_data[idx][0])
-
-		var callback: String = buttons_data[idx][1]
-		var area = btn.get_node_or_null("InteractableAreaButton")
+	var strike_btn = _control_panel.find_child("Btn_0", true, false)
+	if strike_btn:
+		var area = strike_btn.get_node_or_null("InteractableAreaButton")
 		if area:
-			area.button_pressed.connect(Callable(self, callback))
+			area.button_pressed.connect(Callable(self, "_on_strike"))
+
+	var reset_btn = _control_panel.find_child("Btn_1", true, false)
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(Callable(self, "_on_reset"))
 
 	call_deferred("_sync_sliders")
-
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl: Label3D = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
 
 
 func _sync_sliders() -> void:

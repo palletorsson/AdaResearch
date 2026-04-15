@@ -39,7 +39,6 @@ var _dist_label: Label3D
 var _param_label: Label3D
 var _stats_label: Label3D
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 func _ready() -> void:
 	_create_shared_materials()
@@ -110,33 +109,25 @@ func _create_labels() -> void:
 	add_child(_stats_label)
 
 func _create_buttons() -> void:
-	var btn_next = PUSH_BUTTON.instantiate()
-	btn_next.position = Vector3(3.0, -2.5, 3.0)
-	btn_next.scale = Vector3(1.5, 1.5, 1.5)
-	add_child(btn_next)
-	var btn_next_area = btn_next.get_node_or_null("InteractableAreaButton")
-	if btn_next_area:
-		btn_next_area.button_pressed.connect(_on_next_pressed)
-	var btn_next_label = Label3D.new()
-	btn_next_label.text = "NEXT"
-	btn_next_label.font_size = 20
-	btn_next_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	btn_next_label.position = Vector3(0, 0.15, 0)
-	btn_next.add_child(btn_next_label)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("DISTRIBUTION", [
+		[{"type": "button", "label": "PREV"}, {"type": "button", "label": "NEXT"}],
+	])
+	panel.position = Vector3(0, -2.5, 3.0)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
 
-	var btn_prev = PUSH_BUTTON.instantiate()
-	btn_prev.position = Vector3(-3.0, -2.5, 3.0)
-	btn_prev.scale = Vector3(1.5, 1.5, 1.5)
-	add_child(btn_prev)
-	var btn_prev_area = btn_prev.get_node_or_null("InteractableAreaButton")
-	if btn_prev_area:
-		btn_prev_area.button_pressed.connect(_on_prev_pressed)
-	var btn_prev_label = Label3D.new()
-	btn_prev_label.text = "PREV"
-	btn_prev_label.font_size = 20
-	btn_prev_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	btn_prev_label.position = Vector3(0, 0.15, 0)
-	btn_prev.add_child(btn_prev_label)
+	var prev_btn: Node = panel.find_child("Btn_0", true, false)
+	if prev_btn:
+		var area: Node = prev_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_prev_pressed())
+
+	var next_btn: Node = panel.find_child("Btn_1", true, false)
+	if next_btn:
+		var area: Node = next_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_next_pressed())
 
 func _on_next_pressed() -> void:
 	current_distribution = (current_distribution + 1) % DistType.size()

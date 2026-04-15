@@ -18,8 +18,7 @@ var unit_label: Label3D
 var _cached_vector_nodes: Dictionary = {}
 var _cached_unit_nodes: Dictionary = {}
 
-var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
-var _sphere_slider: Node3D
+var _sphere_slider: Node
 
 func _ready():
 	super._ready()
@@ -207,13 +206,16 @@ func _update_unit_label(vec: Vector3):
 		unit_label.visible = false
 
 func _setup_controls():
-	var slider = SliderScene.instantiate()
-	slider.position = Vector3(0, 0.5, 0.6)
-	slider.set_param_name("Sphere")
-	slider.set_normalized_value(0.5)
-	slider.slider_moved.connect(_on_sphere_opacity_changed)
-	add_child(slider)
-	_sphere_slider = slider
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("NORMALIZE", [
+		[{"type": "slider_h", "label": "SPHERE", "default": 0.5}],
+	])
+	panel.position = Vector3(0, 0.5, 0.6)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
+	_sphere_slider = panel.find_child("Param_0", true, false)
+	if _sphere_slider and _sphere_slider.has_signal("slider_moved"):
+		_sphere_slider.slider_moved.connect(_on_sphere_opacity_changed)
 
 func _on_sphere_opacity_changed():
 	var val = _sphere_slider.get_normalized_value()

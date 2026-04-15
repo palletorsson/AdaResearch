@@ -33,7 +33,6 @@ var _speed_labels: Array[Label3D] = []
 var _info_label: Label3D
 var _control_panel: Node3D
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 func _ready() -> void:
 	_create_columns()
@@ -187,53 +186,30 @@ func _create_labels() -> void:
 	add_child(_info_label)
 
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("VISCOSITY", [
+		[
+			{"type": "button", "label": "DROP"},
+			{"type": "button", "label": "RESET"},
+		],
+	])
 	_control_panel.position = Vector3(0, -0.05, 0.35)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 
-	# Panel backing
-	var panel_back := MeshInstance3D.new()
-	var panel_mesh := BoxMesh.new()
-	panel_mesh.size = Vector3(0.3, 0.08, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat := StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
+	# DROP (Btn_0)
+	var drop_btn: Node = _control_panel.find_child("Btn_0", true, false)
+	if drop_btn:
+		var area = drop_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _drop_all())
 
-	# Drop button
-	var drop_btn = PUSH_BUTTON.instantiate()
-	drop_btn.name = "DropBtn"
-	drop_btn.position = Vector3(-0.06, 0, 0)
-	drop_btn.scale = Vector3(0.7, 0.7, 0.7)
-	_control_panel.add_child(drop_btn)
-	_add_button_label(drop_btn, "DROP")
-	var drop_area = drop_btn.get_node_or_null("InteractableAreaButton")
-	if drop_area:
-		drop_area.button_pressed.connect(func(_b): _drop_all())
-
-	# Reset button
-	var reset_btn = PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetBtn"
-	reset_btn.position = Vector3(0.06, 0, 0)
-	reset_btn.scale = Vector3(0.7, 0.7, 0.7)
-	_control_panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RESET")
-	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		reset_area.button_pressed.connect(func(_b): _reset())
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
+	# RESET (Btn_1)
+	var reset_btn: Node = _control_panel.find_child("Btn_1", true, false)
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _reset())
 
 func _reset() -> void:
 	for i in range(fluids.size()):

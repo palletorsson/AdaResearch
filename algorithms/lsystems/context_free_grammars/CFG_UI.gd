@@ -3,10 +3,8 @@ extends Node3D
 ## VR UI panel for ContextFreeGrammars
 ## Provides sliders and buttons to control grammar type, speed, and derivation stepping.
 
-const VRSlider = preload("res://commons/interactables/slider_horizontal.tscn")
-const PushButton = preload("res://commons/interactables/push_button.tscn")
-
 var cfg_node: Node = null
+var _control_panel: Node3D
 var speed_slider: Node = null
 var status_label: Label3D = null
 var grammar_label: Label3D = null
@@ -20,27 +18,36 @@ func _ready() -> void:
 
 
 func _build_ui() -> void:
-	var y_offset := 0.0
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("CFG GRAMMAR", [
+		[
+			{"type": "slider_h", "label": "SPEED", "default": 0.2},
+		],
+		[
+			{"type": "button", "label": "AUTO"},
+			{"type": "button", "label": "STEP"},
+		],
+		[
+			{"type": "button", "label": "GRAMMAR"},
+			{"type": "button", "label": "RESET"},
+		],
+	])
+	_control_panel.position = Vector3(0, 0.0, 0)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_control_panel)
 
-	# Title
-	var title := Label3D.new()
-	title.text = "CFG Controls"
-	title.font_size = 40
-	title.outline_size = 4
-	title.modulate = Color(0.85, 0.9, 1.0)
-	title.position = Vector3(0, y_offset, 0)
-	add_child(title)
-	y_offset -= 0.07
+	speed_slider = _control_panel.find_child("Param_0", true, false)
+	if speed_slider:
+		speed_slider.slider_moved.connect(_on_speed_changed)
 
-	# Status label
+	# Status label above panel
 	status_label = Label3D.new()
 	status_label.text = "Step: 0"
 	status_label.font_size = 32
 	status_label.outline_size = 3
 	status_label.modulate = Color(0.75, 0.85, 0.95)
-	status_label.position = Vector3(0, y_offset, 0)
+	status_label.position = Vector3(0, 0.22, 0)
 	add_child(status_label)
-	y_offset -= 0.07
 
 	# Grammar type label
 	grammar_label = Label3D.new()
@@ -48,65 +55,32 @@ func _build_ui() -> void:
 	grammar_label.font_size = 24
 	grammar_label.outline_size = 3
 	grammar_label.modulate = Color(0.6, 0.8, 1.0)
-	grammar_label.position = Vector3(0, y_offset, 0)
+	grammar_label.position = Vector3(0, 0.17, 0)
 	add_child(grammar_label)
-	y_offset -= 0.09
 
-	# Speed slider
-	speed_slider = VRSlider.instantiate()
-	speed_slider.position = Vector3(0, y_offset, 0)
-	add_child(speed_slider)
-	speed_slider.set_param_name("Speed")
-	speed_slider.set_normalized_value(0.2)
-	speed_slider.slider_moved.connect(_on_speed_changed)
-	y_offset -= 0.09
+	var auto_btn = _control_panel.find_child("Btn_0", true, false)
+	if auto_btn:
+		var area = auto_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_auto_toggled())
 
-	# Auto-play toggle
-	var auto_btn := PushButton.instantiate()
-	auto_btn.position = Vector3(0, y_offset, 0)
-	add_child(auto_btn)
-	var auto_area = auto_btn.get_node_or_null("InteractableAreaButton")
-	if auto_area:
-		auto_area.button_pressed.connect(_on_auto_toggled)
-	var auto_label_node = auto_btn.get_node_or_null("Frame/LabelName")
-	if auto_label_node:
-		auto_label_node.text = "Auto Play"
-	y_offset -= 0.09
+	var step_btn = _control_panel.find_child("Btn_1", true, false)
+	if step_btn:
+		var area = step_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_step_pressed())
 
-	# Step button
-	var step_btn := PushButton.instantiate()
-	step_btn.position = Vector3(0, y_offset, 0)
-	add_child(step_btn)
-	var step_area = step_btn.get_node_or_null("InteractableAreaButton")
-	if step_area:
-		step_area.button_pressed.connect(_on_step_pressed)
-	var step_label_node = step_btn.get_node_or_null("Frame/LabelName")
-	if step_label_node:
-		step_label_node.text = "Step"
-	y_offset -= 0.09
+	var grammar_btn = _control_panel.find_child("Btn_2", true, false)
+	if grammar_btn:
+		var area = grammar_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_grammar_cycle())
 
-	# Grammar cycle button
-	var grammar_btn := PushButton.instantiate()
-	grammar_btn.position = Vector3(0, y_offset, 0)
-	add_child(grammar_btn)
-	var grammar_area = grammar_btn.get_node_or_null("InteractableAreaButton")
-	if grammar_area:
-		grammar_area.button_pressed.connect(_on_grammar_cycle)
-	var grammar_btn_label = grammar_btn.get_node_or_null("Frame/LabelName")
-	if grammar_btn_label:
-		grammar_btn_label.text = "Grammar"
-	y_offset -= 0.09
-
-	# Reset button
-	var reset_btn := PushButton.instantiate()
-	reset_btn.position = Vector3(0, y_offset, 0)
-	add_child(reset_btn)
-	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		reset_area.button_pressed.connect(_on_reset_pressed)
-	var reset_label_node = reset_btn.get_node_or_null("Frame/LabelName")
-	if reset_label_node:
-		reset_label_node.text = "Reset"
+	var reset_btn = _control_panel.find_child("Btn_3", true, false)
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_reset_pressed())
 
 
 func _process(_delta: float) -> void:

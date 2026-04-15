@@ -8,7 +8,7 @@ extends Node3D
 class_name RotationOscillationCube
 
 const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
-var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
+var RackTpl = load("res://commons/audio/rack_templates/RackTemplates.gd")
 
 ## Side length of the cube in meters
 @export_range(0.05, 2.0, 0.05) var cube_size: float = 0.3
@@ -346,13 +346,17 @@ func get_cube_instance() -> Node3D:
 
 ## Add a VR speed slider for interactive frequency control
 func _setup_controls():
-	_speed_slider = SliderScene.instantiate()
-	_speed_slider.position = Vector3(0, 0.5, 0.6)
-	_speed_slider.set_param_name("Speed")
-	_speed_slider.set_normalized_value(frequency / 5.0)
-	_speed_slider.slider_moved.connect(_on_speed_changed)
-	add_child(_speed_slider)
-	_created_nodes.append(_speed_slider)
+	var panel = RackTpl.create_panel("ROTATION", [
+		[{"type": "slider_h", "label": "Speed", "default": frequency / 5.0}],
+	])
+	panel.position = Vector3(0, 0.5, 0.6)
+	panel.rotation_degrees = Vector3(-30, 0, 0)
+	add_child(panel)
+	_created_nodes.append(panel)
+
+	_speed_slider = panel.find_child("Param_0", true, false)
+	if _speed_slider and _speed_slider.has_signal("slider_moved"):
+		_speed_slider.slider_moved.connect(_on_speed_changed)
 
 
 func _on_speed_changed():

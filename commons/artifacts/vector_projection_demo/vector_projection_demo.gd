@@ -94,7 +94,7 @@ var _axes_container: Node3D
 var _frame_mat: StandardMaterial3D
 var _panel_backing_mat: StandardMaterial3D
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
+var _rack_panel: Node3D
 
 ## Builds a labeled panel with backing mesh and frame border
 func _create_text_panel(panel_name: String, text: String, pos: Vector3,
@@ -417,54 +417,37 @@ func _create_labels():
 
 ## Builds the VR preset button panel with FLOOR/WALL/45deg/GLANCE/RESET buttons
 func _create_vr_controls():
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
-	_control_panel.position = Vector3(0, 0.04, max_vector_length + 0.38)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
-	add_child(_control_panel)
-
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.4, 0.1, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_rack_panel = RackTpl.create_panel("PROJECTION", [
+		[
+			{"type": "button", "label": "FLOOR"},
+			{"type": "button", "label": "WALL"},
+			{"type": "button", "label": "45deg"},
+			{"type": "button", "label": "GLANCE"},
+			{"type": "button", "label": "RESET"},
+		],
+	])
+	_rack_panel.position = Vector3(0, 0.04, max_vector_length + 0.38)
+	_rack_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_rack_panel)
+	_control_panel = _rack_panel
 
 	var presets = [
-		["FLOOR", Vector3(0.5, 0.5, 0.2), Vector3(0, 1, 0)],
-		["WALL", Vector3(0.5, 0.3, 0.4), Vector3(1, 0, 0)],
-		["45°", Vector3(0.6, 0.4, 0), Vector3(0.707, 0.707, 0)],
-		["GLANCE", Vector3(0.7, 0.1, 0), Vector3(0, 1, 0)],
-		["RESET", Vector3(0.5, 0.6, 0.2), Vector3(0, 1, 0)]
+		[Vector3(0.5, 0.5, 0.2), Vector3(0, 1, 0)],
+		[Vector3(0.5, 0.3, 0.4), Vector3(1, 0, 0)],
+		[Vector3(0.6, 0.4, 0), Vector3(0.707, 0.707, 0)],
+		[Vector3(0.7, 0.1, 0), Vector3(0, 1, 0)],
+		[Vector3(0.5, 0.6, 0.2), Vector3(0, 1, 0)],
 	]
 
-	# Button signals connect to child nodes (freed with parent, no disconnect needed)
 	for i in range(presets.size()):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.15 + i * 0.075, 0, 0)
-		btn.scale = Vector3(0.7, 0.7, 0.7)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, presets[i][0])
-
-		var va = presets[i][1]
-		var vn = presets[i][2]
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(func(_b): _apply_preset(va, vn))
-
-## Adds a small text label below a push button
-func _add_button_label(btn: Node, text: String):
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = LABEL_PIXEL_SIZE
-	lbl.font_size = 8
-	lbl.position = Vector3(0, -0.025, 0)
-	btn.add_child(lbl)
+		var btn = _rack_panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var va = presets[i][0]
+			var vn = presets[i][1]
+			var area = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(func(_b): _apply_preset(va, vn))
 
 ## Sets vectors to a named preset configuration
 func _apply_preset(va: Vector3, vn: Vector3):

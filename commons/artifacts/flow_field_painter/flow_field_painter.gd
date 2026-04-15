@@ -53,6 +53,7 @@ var _im: ImmediateMesh
 var _trail_mat: StandardMaterial3D
 var _info_label: Label3D
 var _control_panel: Node3D
+var _grid_config: Dictionary = {}
 
 # Node cleanup tracking
 var _created_nodes: Array[Node] = []
@@ -63,8 +64,6 @@ var _speed_slider: Node
 var _reset_area: Node
 var _seed_area: Node
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
 const NOISE_BASE_FREQ := 0.01
 const NOISE_SAMPLE_SCALE := 100.0
@@ -186,71 +185,56 @@ func _create_labels():
 
 ## Build the VR control panel with sliders and buttons.
 func _create_vr_controls():
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
-	_control_panel.position = Vector3(0, -0.05, canvas_size.y / 2.0 + 0.12)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var mount: String = str(_grid_config.get("mount", ""))
+	var use_csg := mount in ["shelf", "wall", "floor"]
+
+	var panel: Node3D = RackTpl.create_panel("FLOW FIELD", [
+		[
+			{"type": "slider_h", "label": "SCALE", "default": (noise_scale - 0.5) / 9.5},
+			{"type": "slider_h", "label": "SPEED", "default": (particle_speed - 0.02) / 0.28},
+		],
+		[
+			{"type": "button", "label": "RESET"},
+			{"type": "button", "label": "SEED"},
+		],
+	], use_csg)
+
+	if use_csg:
+		var tilt := 35.0
+		var color := Color(0.12, 0.12, 0.12)
+		if mount == "wall":
+			tilt = 0.0
+		_control_panel = RackTpl.create_csg_case(0.28, 0.18, 0.16, tilt, panel, color)
+		_control_panel.position = Vector3(0, -0.05, canvas_size.y / 2.0 + 0.12)
+	else:
+		_control_panel = panel
+		_control_panel.position = Vector3(0, -0.05, canvas_size.y / 2.0 + 0.12)
+		_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 	_created_nodes.append(_control_panel)
 
-	# Panel
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.4, 0.12, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
+	_scale_slider = _control_panel.find_child("Param_0", true, false)
+	_speed_slider = _control_panel.find_child("Param_1", true, false)
 
-	# Scale slider
-	_scale_slider = SLIDER_HORIZONTAL.instantiate()
-	_scale_slider.name = "ScaleSlider"
-	_scale_slider.position = Vector3(-0.08, 0.025, 0)
-	_scale_slider.rotation_degrees.x = -30
-	_scale_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var scale_label = _scale_slider.get_node_or_null("Frame/LabelName")
-	if scale_label:
-		scale_label.text = "SCALE"
-	_control_panel.add_child(_scale_slider)
-	_scale_slider.slider_moved.connect(_on_scale_slider_moved)
+	if _scale_slider and _scale_slider.has_signal("slider_moved"):
+		_scale_slider.slider_moved.connect(_on_scale_slider_moved)
+	if _speed_slider and _speed_slider.has_signal("slider_moved"):
+		_speed_slider.slider_moved.connect(_on_speed_slider_moved)
 
-	# Speed slider
-	_speed_slider = SLIDER_HORIZONTAL.instantiate()
-	_speed_slider.name = "SpeedSlider"
-	_speed_slider.position = Vector3(0.08, 0.025, 0)
-	_speed_slider.rotation_degrees.x = -30
-	_speed_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var speed_label = _speed_slider.get_node_or_null("Frame/LabelName")
-	if speed_label:
-		speed_label.text = "SPEED"
-	_control_panel.add_child(_speed_slider)
-	_speed_slider.slider_moved.connect(_on_speed_slider_moved)
+	# Reset button
+	var reset_btn: Node = _control_panel.find_child("Btn_0", true, false)
+	if reset_btn:
+		_reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if _reset_area:
+			_reset_area.button_pressed.connect(_reset_particles)
 
-	# Buttons
-	var reset_btn = PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetBtn"
-	reset_btn.position = Vector3(-0.08, -0.025, 0)
-	reset_btn.rotation_degrees.x = -30
-	reset_btn.scale = Vector3(0.7, 0.7, 0.7)
-	_control_panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RESET")
-	_reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
-	if _reset_area:
-		_reset_area.button_pressed.connect(_reset_particles)
-
-	var seed_btn = PUSH_BUTTON.instantiate()
-	seed_btn.name = "SeedBtn"
-	seed_btn.position = Vector3(0.08, -0.025, 0)
-	seed_btn.rotation_degrees.x = -30
-	seed_btn.scale = Vector3(0.7, 0.7, 0.7)
-	_control_panel.add_child(seed_btn)
-	_add_button_label(seed_btn, "NEW SEED")
-	_seed_area = seed_btn.get_node_or_null("InteractableAreaButton")
-	if _seed_area:
-		_seed_area.button_pressed.connect(_new_seed)
+	# Seed button
+	var seed_btn: Node = _control_panel.find_child("Btn_1", true, false)
+	if seed_btn:
+		_seed_area = seed_btn.get_node_or_null("InteractableAreaButton")
+		if _seed_area:
+			_seed_area.button_pressed.connect(_new_seed)
 
 ## Handle scale slider movement.
 func _on_scale_slider_moved(_pos) -> void:
@@ -261,15 +245,6 @@ func _on_scale_slider_moved(_pos) -> void:
 func _on_speed_slider_moved(_pos) -> void:
 	if _speed_slider and _speed_slider.has_method("get_normalized_value"):
 		particle_speed = 0.02 + _speed_slider.get_normalized_value() * 0.28
-
-## Add a small label below a button.
-func _add_button_label(btn: Node, text: String):
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
 
 ## Randomize all particle positions and clear their trails.
 func _reset_particles(_button = null):  # Accept optional button arg
@@ -369,6 +344,7 @@ func reset() -> void:
 
 ## Grid system integration hook.
 func apply_grid_config(config_data: Dictionary) -> void:
+	_grid_config = config_data
 	if config_data.has("noise_scale"):
 		noise_scale = config_data["noise_scale"]
 	if config_data.has("particle_speed"):

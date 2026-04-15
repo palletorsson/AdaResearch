@@ -55,8 +55,6 @@ var _z_slider: Node
 var _lock_flash_time: float = 0.0
 var _is_locked: bool = false
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 
 func _ready() -> void:
@@ -346,67 +344,31 @@ func _build_labels() -> void:
 # ------------------------------------------------------------------
 
 func _build_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_parameter_panel(
+		3, ["X", "Y", "Z"],
+		[angle_x / 360.0, angle_y / 360.0, angle_z / 360.0]
+	)
 	_control_panel.position = Vector3(0, -0.12, 0.35)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.6, 0.12, 0.008)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.06, 0.06, 0.08)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.008
-	_control_panel.add_child(panel_back)
+	_x_slider = _control_panel.get_node_or_null("Param_0")
+	_y_slider = _control_panel.get_node_or_null("Param_1")
+	_z_slider = _control_panel.get_node_or_null("Param_2")
 
-	var x_start = -0.2
-	var x_step = 0.15
+	if _x_slider and _x_slider.has_signal("slider_moved"):
+		_x_slider.slider_moved.connect(_on_x_slider)
+	if _y_slider and _y_slider.has_signal("slider_moved"):
+		_y_slider.slider_moved.connect(_on_y_slider)
+	if _z_slider and _z_slider.has_signal("slider_moved"):
+		_z_slider.slider_moved.connect(_on_z_slider)
 
-	_x_slider = _add_slider("X", x_start, color_x, _on_x_slider)
-	_y_slider = _add_slider("Y", x_start + x_step, color_y, _on_y_slider)
-	_z_slider = _add_slider("Z", x_start + x_step * 2, color_z, _on_z_slider)
-
-	# Reset button
-	var reset_btn = PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetBtn"
-	reset_btn.position = Vector3(x_start + x_step * 3, 0.0, 0)
-	reset_btn.rotation_degrees.x = -30
-	_control_panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RESET")
-	var area = reset_btn.get_node_or_null("InteractableAreaButton")
-	if area:
-		area.button_pressed.connect(func(_b): _reset_angles())
-
-	call_deferred("_sync_all_sliders")
-
-
-func _add_slider(label_text: String, x_pos: float, color: Color, callback: Callable) -> Node:
-	var slider = SLIDER_HORIZONTAL.instantiate()
-	slider.name = label_text + "Slider"
-	slider.position = Vector3(x_pos, 0.02, 0)
-	slider.rotation_degrees.x = -30
-	slider.scale = Vector3(0.75, 0.75, 0.75)
-	var lbl = slider.get_node_or_null("Frame/LabelName")
-	if lbl:
-		lbl.text = label_text
-		lbl.modulate = color
-	_control_panel.add_child(slider)
-	slider.slider_moved.connect(callback)
-	return slider
-
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
+	var reset_btn: Node = _control_panel.get_node_or_null("ResetButton")
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _reset_angles())
 
 
 func _sync_slider(slider: Node, normalized: float) -> void:

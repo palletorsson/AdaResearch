@@ -8,8 +8,6 @@ extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 class_name VectorMagnitudeDemo
 
-var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
-
 var vector_v: Node3D
 var component_x: Node3D
 var component_y: Node3D
@@ -122,13 +120,17 @@ func _update_length_label(vec: Vector3):
 	length_label.position = vec * 0.5 * SCENE_SCALE + Vector3(0, 0.05, 0.08)
 
 func _setup_controls():
-	_scale_slider = SliderScene.instantiate()
-	_scale_slider.position = Vector3(0, 0.5, 0.6)
-	_scale_slider.set_param_name("Scale")
-	_scale_slider.set_normalized_value(0.5)
-	_scale_slider.slider_moved.connect(_on_scale_changed)
-	add_child(_scale_slider)
-	_created_nodes.append(_scale_slider)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("MAGNITUDE", [
+		[{"type": "slider_h", "label": "SCALE", "default": 0.5}],
+	])
+	panel.position = Vector3(0, 0.5, 0.6)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
+	_created_nodes.append(panel)
+	_scale_slider = panel.find_child("Param_0", true, false)
+	if _scale_slider and _scale_slider.has_signal("slider_moved"):
+		_scale_slider.slider_moved.connect(_on_scale_changed)
 
 func _on_scale_changed():
 	var val = _scale_slider.get_normalized_value()

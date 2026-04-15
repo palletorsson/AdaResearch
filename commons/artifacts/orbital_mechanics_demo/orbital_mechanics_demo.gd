@@ -45,15 +45,12 @@ var _trail_mesh: MeshInstance3D
 var _trail_immediate: ImmediateMesh
 var _trail_mat: StandardMaterial3D
 var _info_label: Label3D
-var _control_panel: Node3D
 var _time_slider: Node
 
 # Throttle info updates
 var _info_update_timer: float = 0.0
 const INFO_UPDATE_INTERVAL: float = 0.1
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
 func _ready():
 	_create_planet()
@@ -171,78 +168,38 @@ func _create_labels():
 	add_child(_info_label)
 
 func _create_vr_controls():
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
-	_control_panel.position = Vector3(0, -0.1, 0.35)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
-	add_child(_control_panel)
-
-	# Panel
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.4, 0.14, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
-
-	# Orbit preset buttons
-	var preset_labels: PackedStringArray = PackedStringArray([
-		"CIRCULAR",
-		"ELLIPSE",
-		"ESCAPE",
-		"DECAY"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("ORBITAL MECHANICS", [
+		[{"type": "slider_h", "label": "SPEED", "default": 0.18}],
+		[
+			{"type": "button", "label": "CIRCULAR"},
+			{"type": "button", "label": "ELLIPSE"},
+		],
+		[
+			{"type": "button", "label": "ESCAPE"},
+			{"type": "button", "label": "DECAY"},
+		],
 	])
-	var preset_radii: PackedFloat32Array = PackedFloat32Array([0.3, 0.3, 0.3, 0.3])
-	var preset_speed_factors: PackedFloat32Array = PackedFloat32Array([1.0, 0.88, 1.42, 0.72])
+	panel.position = Vector3(0, -0.1, 0.35)
+	panel.rotation_degrees = Vector3(-30, 0, 0)
+	add_child(panel)
 
-	for i in range(preset_labels.size()):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.12 + i * 0.08, 0.03, 0)
-		btn.scale = Vector3(0.65, 0.65, 0.65)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, preset_labels[i])
+	_time_slider = panel.find_child("Param_0", true, false)
+	if _time_slider and _time_slider.has_signal("slider_moved"):
+		_time_slider.slider_moved.connect(_on_time_slider_changed)
 
-		var preset_radius: float = preset_radii[i]
-		var preset_speed_factor: float = preset_speed_factors[i]
-		# Connect to the push_button's own "pressed" signal (not internal InteractableAreaButton)
-		btn.pressed.connect(_on_preset_pressed.bind(preset_radius, preset_speed_factor))
-
-	# Time scale slider — add to tree first, then configure via API
-	_time_slider = SLIDER_HORIZONTAL.instantiate()
-	_time_slider.name = "TimeSlider"
-	_time_slider.position = Vector3(0, -0.03, 0)
-	_time_slider.rotation_degrees.x = -30
-	_time_slider.scale = Vector3(0.8, 0.8, 0.8)
-	_control_panel.add_child(_time_slider)
-
-	# Configure slider using its public API (after it's in the tree)
-	if _time_slider.has_method("set_param_name"):
-		_time_slider.set_param_name("SPEED")
-	if _time_slider.has_method("set_range"):
-		_time_slider.set_range(0.1, 5.0)
-	if _time_slider.has_method("set_normalized_value"):
-		_time_slider.set_normalized_value(0.18)  # ~1.0x default
-	_time_slider.slider_moved.connect(_on_time_slider_changed)
+	var preset_speed_factors: Array[float] = [1.0, 0.88, 1.42, 0.72]
+	for i in range(4):
+		var btn: Node = panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var area: Node = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				var factor: float = preset_speed_factors[i]
+				area.button_pressed.connect(func(_b): _set_orbit_preset(0.3, factor))
 
 func _on_time_slider_changed(_pos) -> void:
 	if _time_slider and _time_slider.has_method("get_normalized_value"):
 		time_scale = lerpf(0.1, 5.0, _time_slider.get_normalized_value())
-
-func _add_button_label(btn: Node, text: String):
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
-
-func _on_preset_pressed(radius: float, speed_factor: float):
-	_set_orbit_preset(radius, speed_factor)
 
 func _set_orbit_preset(radius: float, speed_factor: float):
 	var circular_speed = _circular_velocity(radius)

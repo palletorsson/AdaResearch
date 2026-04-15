@@ -75,13 +75,8 @@ var _blend_label: Label3D
 var _mode_label: Label3D
 
 # VR controls
-const SLIDER_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
-const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
-var _mode_button: Node3D
-var _blend_button: Node3D
-var _restart_button: Node3D
-var _smooth_slider: Node3D
-var _res_slider: Node3D
+# VR controls
+var _control_rack: Node3D
 
 # Colors
 const COL_INSIDE := Color(1.0, 0.15, 0.2, 0.7)
@@ -96,6 +91,10 @@ const COL_GRADIENT := Color(0.9, 0.4, 1.0, 0.8)
 const COL_FLOW := Color(0.4, 1.0, 0.8, 0.7)
 const COL_CONTOUR := Color(1.0, 1.0, 1.0, 0.4)
 const COL_GRID := Color(0.3, 0.3, 0.35, 0.15)
+
+# Slider refs for export setter sync
+var _smooth_slider: Node
+var _res_slider: Node
 
 func _ready() -> void:
 	_create_materials()
@@ -206,61 +205,40 @@ func _create_labels() -> void:
 # =========================================================================
 
 func _create_vr_controls() -> void:
-	var panel_y := -field_size * 0.5 - 1.5
-	var panel_z := 0.3
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_rack = RackTpl.create_panel("SDF FIELDS", [
+		[{"type": "slider_h", "label": "SMOOTH", "default": clampf(smooth_k / 2.0, 0.0, 1.0)}, {"type": "slider_h", "label": "RES", "default": clampf((field_resolution - 15.0) / 45.0, 0.0, 1.0)}],
+		[{"type": "button", "label": "MODE"}, {"type": "button", "label": "BLEND"}, {"type": "button", "label": "RESTART"}],
+	])
+	_control_rack.position = Vector3(0, -field_size * 0.5 - 1.5, 0.3)
+	_control_rack.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_control_rack)
 
-	# Mode cycle button
-	_mode_button = BUTTON_SCENE.instantiate()
-	_mode_button.position = Vector3(-3.0, panel_y, panel_z)
-	add_child(_mode_button)
-	var mb_area = _mode_button.get_node_or_null("InteractableAreaButton")
-	if mb_area:
-		mb_area.button_pressed.connect(_on_mode_pressed)
-	_set_button_label(_mode_button, "Mode")
+	_smooth_slider = _control_rack.find_child("Param_0", true, false)
+	if _smooth_slider and _smooth_slider.has_signal("slider_moved"):
+		_smooth_slider.slider_moved.connect(_on_smooth_changed)
 
-	# Blend cycle button
-	_blend_button = BUTTON_SCENE.instantiate()
-	_blend_button.position = Vector3(-1.5, panel_y, panel_z)
-	add_child(_blend_button)
-	var bb_area = _blend_button.get_node_or_null("InteractableAreaButton")
-	if bb_area:
-		bb_area.button_pressed.connect(_on_blend_pressed)
-	_set_button_label(_blend_button, "Blend")
+	_res_slider = _control_rack.find_child("Param_1", true, false)
+	if _res_slider and _res_slider.has_signal("slider_moved"):
+		_res_slider.slider_moved.connect(_on_res_changed)
 
-	# Restart button
-	_restart_button = BUTTON_SCENE.instantiate()
-	_restart_button.position = Vector3(0.0, panel_y, panel_z)
-	add_child(_restart_button)
-	var rb_area = _restart_button.get_node_or_null("InteractableAreaButton")
-	if rb_area:
-		rb_area.button_pressed.connect(_on_restart_pressed)
-	_set_button_label(_restart_button, "Restart")
+	var mode_btn: Node = _control_rack.find_child("Btn_0", true, false)
+	if mode_btn:
+		var area = mode_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_mode_pressed())
 
-	# Smooth K slider
-	_smooth_slider = SLIDER_SCENE.instantiate()
-	_smooth_slider.position = Vector3(1.5, panel_y, panel_z)
-	add_child(_smooth_slider)
-	_smooth_slider.set_normalized_value(clampf(smooth_k / 2.0, 0.0, 1.0))
-	_smooth_slider.set_param_name("Smooth K")
-	_smooth_slider.slider_moved.connect(_on_smooth_changed)
+	var blend_btn: Node = _control_rack.find_child("Btn_1", true, false)
+	if blend_btn:
+		var area = blend_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_blend_pressed())
 
-	# Resolution slider
-	_res_slider = SLIDER_SCENE.instantiate()
-	_res_slider.position = Vector3(3.5, panel_y, panel_z)
-	add_child(_res_slider)
-	_res_slider.set_normalized_value(clampf((field_resolution - 15.0) / 45.0, 0.0, 1.0))
-	_res_slider.set_param_name("Resolution")
-	_res_slider.slider_moved.connect(_on_res_changed)
-
-func _set_button_label(button: Node3D, text: String) -> void:
-	var lbl = button.get_node_or_null("Frame/LabelName")
-	if lbl == null:
-		lbl = Label3D.new()
-		lbl.font_size = 16
-		lbl.position = Vector3(0, 0.12, 0)
-		lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		button.add_child(lbl)
-	lbl.text = text
+	var restart_btn: Node = _control_rack.find_child("Btn_2", true, false)
+	if restart_btn:
+		var area = restart_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_restart_pressed())
 
 func _on_mode_pressed() -> void:
 	_mode = (_mode + 1) % 3
@@ -274,10 +252,14 @@ func _on_restart_pressed() -> void:
 	_init_mode()
 
 func _on_smooth_changed(_value: float) -> void:
-	smooth_k = _smooth_slider.get_normalized_value() * 2.0
+	var slider: Node = _control_rack.find_child("Param_0", true, false)
+	if slider and slider.has_method("get_normalized_value"):
+		smooth_k = slider.get_normalized_value() * 2.0
 
 func _on_res_changed(_value: float) -> void:
-	field_resolution = int(lerpf(15.0, 60.0, _res_slider.get_normalized_value()))
+	var slider: Node = _control_rack.find_child("Param_1", true, false)
+	if slider and slider.has_method("get_normalized_value"):
+		field_resolution = int(lerpf(15.0, 60.0, slider.get_normalized_value()))
 
 # =========================================================================
 # Shape creation

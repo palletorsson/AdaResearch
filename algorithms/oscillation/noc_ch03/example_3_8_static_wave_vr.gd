@@ -16,8 +16,7 @@
 extends Node3D
 const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
-const SLIDER_HORIZONTAL := preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON := preload("res://commons/interactables/push_button.tscn")
+var RackTpl = load("res://commons/audio/rack_templates/RackTemplates.gd")
 
 # --- Configurable parameters ---
 @export var wavelength_a: float = 0.12
@@ -162,84 +161,46 @@ func _setup_labels() -> void:
 
 
 func _setup_vr_controls() -> void:
-	_control_panel = Node3D.new()
+	_control_panel = RackTpl.create_panel("WAVE CONTROLS", [
+		[{"type": "slider_h", "label": "λ WAVE A", "default": (wavelength_a - 0.04) / 0.36}],
+		[{"type": "slider_h", "label": "λ WAVE B", "default": (wavelength_b - 0.04) / 0.36}],
+		[{"type": "slider_h", "label": "SPEED", "default": wave_speed / 0.8}],
+		[{"type": "slider_h", "label": "DAMPING", "default": damping / 0.02}],
+		[{"type": "button", "label": "RESET"}],
+	])
 	_control_panel.position = Vector3(0.48, 0.35, 0.18)
 	_control_panel.rotation_degrees = Vector3(-20, -25, 0)
 	add_child(_control_panel)
 
-	# Wavelength A slider
-	var wl_a_slider := SLIDER_HORIZONTAL.instantiate()
-	wl_a_slider.position = Vector3(0, 0.08, 0)
-	wl_a_slider.scale = Vector3(0.6, 0.6, 0.6)
-	var wl_a_label := wl_a_slider.get_node_or_null("Frame/LabelName")
-	if wl_a_label:
-		wl_a_label.text = "λ WAVE A"
-	_control_panel.add_child(wl_a_slider)
-	wl_a_slider.set_normalized_value((wavelength_a - 0.04) / 0.36)
-	wl_a_slider.slider_moved.connect(func(_n: String) -> void:
-		wavelength_a = 0.04 + wl_a_slider.get_normalized_value() * 0.36
-	)
+	var wl_a_slider = _control_panel.find_child("Param_0", true, false)
+	if wl_a_slider and wl_a_slider.has_signal("slider_moved"):
+		wl_a_slider.slider_moved.connect(func(_n: String) -> void:
+			wavelength_a = 0.04 + wl_a_slider.get_normalized_value() * 0.36
+		)
 
-	# Wavelength B slider
-	var wl_b_slider := SLIDER_HORIZONTAL.instantiate()
-	wl_b_slider.position = Vector3(0, 0.0, 0)
-	wl_b_slider.scale = Vector3(0.6, 0.6, 0.6)
-	var wl_b_label := wl_b_slider.get_node_or_null("Frame/LabelName")
-	if wl_b_label:
-		wl_b_label.text = "λ WAVE B"
-	_control_panel.add_child(wl_b_slider)
-	wl_b_slider.set_normalized_value((wavelength_b - 0.04) / 0.36)
-	wl_b_slider.slider_moved.connect(func(_n: String) -> void:
-		wavelength_b = 0.04 + wl_b_slider.get_normalized_value() * 0.36
-	)
+	var wl_b_slider = _control_panel.find_child("Param_1", true, false)
+	if wl_b_slider and wl_b_slider.has_signal("slider_moved"):
+		wl_b_slider.slider_moved.connect(func(_n: String) -> void:
+			wavelength_b = 0.04 + wl_b_slider.get_normalized_value() * 0.36
+		)
 
-	# Wave speed slider
-	var speed_slider := SLIDER_HORIZONTAL.instantiate()
-	speed_slider.position = Vector3(0, -0.08, 0)
-	speed_slider.scale = Vector3(0.6, 0.6, 0.6)
-	var speed_label := speed_slider.get_node_or_null("Frame/LabelName")
-	if speed_label:
-		speed_label.text = "SPEED"
-	_control_panel.add_child(speed_slider)
-	speed_slider.set_normalized_value(wave_speed / 0.8)
-	speed_slider.slider_moved.connect(func(_n: String) -> void:
-		wave_speed = speed_slider.get_normalized_value() * 0.8
-	)
+	var speed_slider = _control_panel.find_child("Param_2", true, false)
+	if speed_slider and speed_slider.has_signal("slider_moved"):
+		speed_slider.slider_moved.connect(func(_n: String) -> void:
+			wave_speed = speed_slider.get_normalized_value() * 0.8
+		)
 
-	# Damping slider
-	var damp_slider := SLIDER_HORIZONTAL.instantiate()
-	damp_slider.position = Vector3(0, -0.16, 0)
-	damp_slider.scale = Vector3(0.6, 0.6, 0.6)
-	var damp_label := damp_slider.get_node_or_null("Frame/LabelName")
-	if damp_label:
-		damp_label.text = "DAMPING"
-	_control_panel.add_child(damp_slider)
-	damp_slider.set_normalized_value(damping / 0.02)
-	damp_slider.slider_moved.connect(func(_n: String) -> void:
-		damping = damp_slider.get_normalized_value() * 0.02
-	)
+	var damp_slider = _control_panel.find_child("Param_3", true, false)
+	if damp_slider and damp_slider.has_signal("slider_moved"):
+		damp_slider.slider_moved.connect(func(_n: String) -> void:
+			damping = damp_slider.get_normalized_value() * 0.02
+		)
 
-	# Reset button
-	var reset_btn := PUSH_BUTTON.instantiate()
-	reset_btn.position = Vector3(0.18, -0.04, 0)
-	reset_btn.scale = Vector3(0.55, 0.55, 0.55)
-	_control_panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RESET")
-	var area := reset_btn.get_node_or_null("InteractableAreaButton")
-	if area:
-		area.button_pressed.connect(func(_b: bool) -> void: _reset_all())
-
-
-func _add_button_label(btn: Node3D, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.font_size = 18
-	lbl.pixel_size = 0.001
-	lbl.position = Vector3(0, 0.025, 0)
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	lbl.modulate = Color(0.9, 0.9, 0.95)
-	lbl.outline_size = 3
-	btn.add_child(lbl)
+	var reset_btn = _control_panel.find_child("Btn_0", true, false)
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b: bool) -> void: _reset_all())
 
 
 # ---- 2D Wave Equation (finite difference PDE) ----

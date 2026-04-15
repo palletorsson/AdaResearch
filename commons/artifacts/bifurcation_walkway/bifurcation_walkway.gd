@@ -56,8 +56,6 @@ var _control_panel: Node3D
 # Signal tracking for cleanup
 var _signal_connections: Array = []
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 func _ready():
 	_create_frame()
@@ -175,84 +173,45 @@ func _create_labels():
 	add_child(x_label_1)
 
 func _create_vr_controls():
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("BIFURCATION", [
+		[
+			{"type": "slider_h", "label": "R MIN", "default": (r_min - 0.5) / 3.5},
+			{"type": "slider_h", "label": "R MAX", "default": (r_max - 0.5) / 3.5},
+		],
+		[
+			{"type": "button", "label": "FULL"},
+			{"type": "button", "label": "CHAOS"},
+			{"type": "button", "label": "BIFUR"},
+		],
+	])
 	_control_panel.position = Vector3(0, -0.15, 0.12)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
-	
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.5, 0.12, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
-	
-	# R min slider (0.5 to r_max)
-	_r_min_slider = SLIDER_HORIZONTAL.instantiate()
-	_r_min_slider.name = "RMinSlider"
-	_r_min_slider.position = Vector3(-0.12, 0.01, 0)
-	_r_min_slider.rotation_degrees.x = -30
-	var min_label = _r_min_slider.get_node_or_null("Frame/LabelName")
-	if min_label:
-		min_label.text = "R MIN"
-	_control_panel.add_child(_r_min_slider)
-	_r_min_slider.slider_moved.connect(_on_r_min_slider_moved)
-	_signal_connections.append([_r_min_slider, &"slider_moved", _on_r_min_slider_moved])
 
-	# R max slider (r_min to 4.0)
-	_r_max_slider = SLIDER_HORIZONTAL.instantiate()
-	_r_max_slider.name = "RMaxSlider"
-	_r_max_slider.position = Vector3(0.12, 0.01, 0)
-	_r_max_slider.rotation_degrees.x = -30
-	var max_label = _r_max_slider.get_node_or_null("Frame/LabelName")
-	if max_label:
-		max_label.text = "R MAX"
-	_control_panel.add_child(_r_max_slider)
-	_r_max_slider.slider_moved.connect(_on_r_max_slider_moved)
-	_signal_connections.append([_r_max_slider, &"slider_moved", _on_r_max_slider_moved])
+	# R min slider (Param_0)
+	_r_min_slider = _control_panel.find_child("Param_0", true, false)
+	if _r_min_slider and _r_min_slider.has_signal("slider_moved"):
+		_r_min_slider.slider_moved.connect(_on_r_min_slider_moved)
+		_signal_connections.append([_r_min_slider, &"slider_moved", _on_r_min_slider_moved])
 
-	# Preset buttons
-	var preset_btn1 = PUSH_BUTTON.instantiate()
-	preset_btn1.name = "PresetFull"
-	preset_btn1.position = Vector3(-0.1, -0.035, 0)
-	preset_btn1.scale = Vector3(0.8, 0.8, 0.8)
-	_control_panel.add_child(preset_btn1)
-	_add_button_label(preset_btn1, "FULL")
-	var area1 = preset_btn1.get_node_or_null("InteractableAreaButton")
-	if area1:
-		var cb1 := func(_b): _set_r_range(0.5, 4.0)
-		area1.button_pressed.connect(cb1)
-		_signal_connections.append([area1, &"button_pressed", cb1])
-	
-	var preset_btn2 = PUSH_BUTTON.instantiate()
-	preset_btn2.name = "PresetChaos"
-	preset_btn2.position = Vector3(0, -0.035, 0)
-	preset_btn2.scale = Vector3(0.8, 0.8, 0.8)
-	_control_panel.add_child(preset_btn2)
-	_add_button_label(preset_btn2, "CHAOS")
-	var area2 = preset_btn2.get_node_or_null("InteractableAreaButton")
-	if area2:
-		var cb2 := func(_b): _set_r_range(3.5, 4.0)
-		area2.button_pressed.connect(cb2)
-		_signal_connections.append([area2, &"button_pressed", cb2])
-	
-	var preset_btn3 = PUSH_BUTTON.instantiate()
-	preset_btn3.name = "PresetBifurc"
-	preset_btn3.position = Vector3(0.1, -0.035, 0)
-	preset_btn3.scale = Vector3(0.8, 0.8, 0.8)
-	_control_panel.add_child(preset_btn3)
-	_add_button_label(preset_btn3, "BIFUR")
-	var area3 = preset_btn3.get_node_or_null("InteractableAreaButton")
-	if area3:
-		var cb3 := func(_b): _set_r_range(2.8, 3.6)
-		area3.button_pressed.connect(cb3)
-		_signal_connections.append([area3, &"button_pressed", cb3])
+	# R max slider (Param_1)
+	_r_max_slider = _control_panel.find_child("Param_1", true, false)
+	if _r_max_slider and _r_max_slider.has_signal("slider_moved"):
+		_r_max_slider.slider_moved.connect(_on_r_max_slider_moved)
+		_signal_connections.append([_r_max_slider, &"slider_moved", _on_r_max_slider_moved])
+
+	# Preset buttons: FULL (Btn_0), CHAOS (Btn_1), BIFUR (Btn_2)
+	var preset_ranges := [[0.5, 4.0], [3.5, 4.0], [2.8, 3.6]]
+	for i in range(preset_ranges.size()):
+		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var area = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				var rng: Array = preset_ranges[i]
+				var cb := func(_b): _set_r_range(rng[0], rng[1])
+				area.button_pressed.connect(cb)
+				_signal_connections.append([area, &"button_pressed", cb])
 
 	call_deferred("_sync_sliders_deferred")
 
@@ -261,14 +220,6 @@ func _exit_tree() -> void:
 		if is_instance_valid(conn[0]) and conn[0].is_connected(conn[1], conn[2]):
 			conn[0].disconnect(conn[1], conn[2])
 	_signal_connections.clear()
-
-func _add_button_label(btn: Node, text: String):
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 9
-	lbl.position = Vector3(0, -0.03, 0.012)
-	btn.add_child(lbl)
 
 func _sync_sliders_deferred():
 	_sync_r_min_slider()

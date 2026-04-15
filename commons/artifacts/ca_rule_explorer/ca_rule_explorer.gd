@@ -69,6 +69,7 @@ var _created_nodes: Array[Node] = []
 var _rule_slider: Node
 var _speed_slider: Node
 var _control_panel: Node3D
+var _grid_config: Dictionary = {}
 
 # Signal tracking for cleanup
 var _signal_connections: Array = []
@@ -92,8 +93,6 @@ const FAMOUS_RULES = {
 	255: "Life"
 }
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 func _ready() -> void:
 	_cell_size = Vector2(board_size / maxi(cells_x, 1), board_size / maxi(rows_visible, 1))
@@ -211,105 +210,79 @@ func _create_rule_display() -> void:
 	_created_nodes.append(_rule_label)
 	_update_rule_display()
 
-## Build the VR control panel with sliders and preset buttons
+## Build the VR control panel with sliders and preset buttons.
+## Uses CSG boolean case when mount type is specified.
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
-	_control_panel.position = Vector3(0, 0.04, board_size / 2 + 0.15)
-	_control_panel.rotation_degrees = Vector3(PANEL_TILT_DEG, 0, 0)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var mount: String = str(_grid_config.get("mount", ""))
+
+	# Build controls (frameless when using CSG case)
+	var use_csg := mount in ["shelf", "wall", "floor"]
+	var panel: Node3D = RackTpl.create_panel("CA RULES", [
+		[
+			{"type": "slider_h", "label": "RULE", "default": float(rule) / 255.0},
+			{"type": "slider_h", "label": "SPEED", "default": (generations_per_second - 1.0) / 29.0},
+		],
+		[
+			{"type": "button", "label": "30"},
+			{"type": "button", "label": "90"},
+			{"type": "button", "label": "110"},
+			{"type": "button", "label": "184"},
+			{"type": "button", "label": "RST"},
+		],
+	], use_csg)
+
+	if use_csg:
+		# CSG boolean case — size and style from mount type
+		var case_w := 0.30
+		var case_h := 0.20
+		var case_d := 0.16
+		var tilt := 35.0
+		var color := Color(0.12, 0.12, 0.12)
+		match mount:
+			"wall":
+				case_d = 0.04
+				tilt = 0.0
+			"floor":
+				case_h = 0.25
+				tilt = 25.0
+				color = Color(0.55, 0.38, 0.22)
+		_control_panel = RackTpl.create_csg_case(case_w, case_h, case_d, tilt, panel, color)
+		_control_panel.position = Vector3(0, 0.04, board_size / 2 + 0.15)
+	else:
+		# Standalone framed panel (backward compatible)
+		_control_panel = panel
+		_control_panel.position = Vector3(0, 0.04, board_size / 2 + 0.15)
+		_control_panel.rotation_degrees = Vector3(PANEL_TILT_DEG, 0, 0)
+
 	add_child(_control_panel)
 	_created_nodes.append(_control_panel)
 
-	_create_panel_backing()
-	_create_sliders()
-	_create_preset_buttons()
-	_create_reset_button()
+	# Find controls (may be deep in CSG hierarchy)
+	_rule_slider = _control_panel.find_child("Param_0", true, false)
+	_speed_slider = _control_panel.find_child("Param_1", true, false)
 
-	call_deferred("_sync_sliders_deferred")
+	if _rule_slider and _rule_slider.has_signal("slider_moved"):
+		_rule_slider.slider_moved.connect(_on_rule_slider_moved)
+	if _speed_slider and _speed_slider.has_signal("slider_moved"):
+		_speed_slider.slider_moved.connect(_on_speed_slider_moved)
 
-func _create_panel_backing() -> void:
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.5, 0.2, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
+	# Preset buttons: 30, 90, 110, 184
+	var presets := [30, 90, 110, 184]
+	for i in presets.size():
+		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var rule_val: int = presets[i]
+			var area = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(func(_b): _on_preset_pressed(rule_val))
 
-func _create_sliders() -> void:
-	_rule_slider = SLIDER_HORIZONTAL.instantiate()
-	_rule_slider.name = "RuleSlider"
-	_rule_slider.position = Vector3(-0.12, 0.05, 0)
-	_rule_slider.rotation_degrees.x = PANEL_TILT_DEG
-	_rule_slider.set_range(0, 255)
-	var rule_label = _rule_slider.get_node_or_null("Frame/LabelName")
-	if rule_label:
-		rule_label.text = "RULE"
-	_control_panel.add_child(_rule_slider)
-	_rule_slider.slider_moved.connect(_on_rule_slider_moved)
-	_signal_connections.append([_rule_slider, &"slider_moved", _on_rule_slider_moved])
-
-	_speed_slider = SLIDER_HORIZONTAL.instantiate()
-	_speed_slider.name = "SpeedSlider"
-	_speed_slider.position = Vector3(0.12, 0.05, 0)
-	_speed_slider.rotation_degrees.x = PANEL_TILT_DEG
-	_speed_slider.set_range(1, 30)
-	var speed_label = _speed_slider.get_node_or_null("Frame/LabelName")
-	if speed_label:
-		speed_label.text = "SPEED"
-	_control_panel.add_child(_speed_slider)
-	_speed_slider.slider_moved.connect(_on_speed_slider_moved)
-	_signal_connections.append([_speed_slider, &"slider_moved", _on_speed_slider_moved])
-
-func _create_preset_buttons() -> void:
-	var presets = [30, 90, 110, 184]
-	var btn_x_start = -0.18
-	for i in range(presets.size()):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "Preset%d" % presets[i]
-		btn.position = Vector3(btn_x_start + i * 0.07, -0.05, 0)
-		_control_panel.add_child(btn)
-
-		var btn_label = Label3D.new()
-		btn_label.text = str(presets[i])
-		btn_label.pixel_size = 0.001
-		btn_label.font_size = 14
-		btn_label.position = Vector3(0, -0.025, 0)
-		btn.add_child(btn_label)
-
-		var rule_val = presets[i]
-		var area_btn = btn.get_node_or_null("InteractableAreaButton")
-		if area_btn:
-			var cb := func(_b): _on_preset_pressed(rule_val)
-			area_btn.button_pressed.connect(cb)
-			_signal_connections.append([area_btn, &"button_pressed", cb])
-
-func _create_reset_button() -> void:
-	var reset_btn = PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetButton"
-	reset_btn.position = Vector3(0.18, -0.05, 0)
-	reset_btn.rotation_degrees.x = PANEL_TILT_DEG
-	_control_panel.add_child(reset_btn)
-
-	var reset_label = Label3D.new()
-	reset_label.text = "RST"
-	reset_label.pixel_size = 0.001
-	reset_label.font_size = 14
-	reset_label.position = Vector3(0, -0.025, 0)
-	reset_btn.add_child(reset_label)
-
-	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		var reset_cb := func(_b): _on_reset_pressed()
-		reset_area.button_pressed.connect(reset_cb)
-		_signal_connections.append([reset_area, &"button_pressed", reset_cb])
-
-func _sync_sliders_deferred() -> void:
-	_sync_rule_slider()
-	_sync_speed_slider()
+	# RST button (Btn_4)
+	var rst_btn: Node = _control_panel.find_child("Btn_4", true, false)
+	if rst_btn:
+		var rst_area = rst_btn.get_node_or_null("InteractableAreaButton")
+		if rst_area:
+			rst_area.button_pressed.connect(func(_b): _on_reset_pressed())
 
 func _sync_rule_slider() -> void:
 	if _rule_slider and _rule_slider.has_method("set_normalized_value"):
@@ -440,4 +413,8 @@ func step() -> void:
 	_advance()
 
 func apply_grid_config(config_data: Dictionary) -> void:
-	pass
+	_grid_config = config_data
+	if config_data.has("rule"):
+		rule = clampi(int(config_data["rule"]), 0, 255)
+	if config_data.has("speed"):
+		generations_per_second = clampf(float(config_data["speed"]), 1.0, 30.0)

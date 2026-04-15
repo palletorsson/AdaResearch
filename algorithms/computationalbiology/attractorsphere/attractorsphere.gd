@@ -79,11 +79,7 @@ var _info_label: Label3D
 var _phase_label: Label3D
 
 # VR controls
-const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
-var _mode_button: Node3D
-var _feed_slider: Node3D
-var _kill_slider: Node3D
+var _control_rack: Node3D
 
 # Colors
 const COL_U_HIGH := Color(0.15, 0.4, 0.95, 0.85)
@@ -204,29 +200,28 @@ func _create_labels() -> void:
 # =========================================================================
 
 func _create_vr_controls() -> void:
-	# Mode cycle button
-	_mode_button = BUTTON_SCENE.instantiate()
-	_mode_button.position = Vector3(-1.4, -sphere_radius - 0.4, 0)
-	add_child(_mode_button)
-	var btn_area = _mode_button.get_node_or_null("InteractableAreaButton")
-	if btn_area:
-		btn_area.button_pressed.connect(_cycle_mode)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_rack = RackTpl.create_panel("ATTRACTOR", [
+		[{"type": "slider_h", "label": "FEED", "default": feed_rate / 0.1}, {"type": "slider_h", "label": "KILL", "default": kill_rate / 0.1}],
+		[{"type": "button", "label": "MODE"}],
+	])
+	_control_rack.position = Vector3(0, -sphere_radius - 0.4, 0)
+	_control_rack.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_control_rack)
 
-	# Feed rate slider
-	_feed_slider = SLIDER_SCENE.instantiate()
-	_feed_slider.position = Vector3(1.2, -sphere_radius - 0.2, 0)
-	add_child(_feed_slider)
-	_feed_slider.set_param_name("Feed")
-	_feed_slider.set_normalized_value(feed_rate / 0.1)
-	_feed_slider.slider_moved.connect(_on_feed_changed)
+	var feed_slider: Node = _control_rack.find_child("Param_0", true, false)
+	if feed_slider and feed_slider.has_signal("slider_moved"):
+		feed_slider.slider_moved.connect(_on_feed_changed)
 
-	# Kill rate slider
-	_kill_slider = SLIDER_SCENE.instantiate()
-	_kill_slider.position = Vector3(1.2, -sphere_radius - 0.6, 0)
-	add_child(_kill_slider)
-	_kill_slider.set_param_name("Kill")
-	_kill_slider.set_normalized_value(kill_rate / 0.1)
-	_kill_slider.slider_moved.connect(_on_kill_changed)
+	var kill_slider: Node = _control_rack.find_child("Param_1", true, false)
+	if kill_slider and kill_slider.has_signal("slider_moved"):
+		kill_slider.slider_moved.connect(_on_kill_changed)
+
+	var mode_btn: Node = _control_rack.find_child("Btn_0", true, false)
+	if mode_btn:
+		var area = mode_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _cycle_mode())
 
 
 func _cycle_mode() -> void:
@@ -235,11 +230,15 @@ func _cycle_mode() -> void:
 
 
 func _on_feed_changed(_value: float) -> void:
-	feed_rate = _feed_slider.get_normalized_value() * 0.1
+	var slider: Node = _control_rack.find_child("Param_0", true, false)
+	if slider and slider.has_method("get_normalized_value"):
+		feed_rate = slider.get_normalized_value() * 0.1
 
 
 func _on_kill_changed(_value: float) -> void:
-	kill_rate = _kill_slider.get_normalized_value() * 0.1
+	var slider: Node = _control_rack.find_child("Param_1", true, false)
+	if slider and slider.has_method("get_normalized_value"):
+		kill_rate = slider.get_normalized_value() * 0.1
 
 
 func _init_mode() -> void:

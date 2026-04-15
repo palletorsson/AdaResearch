@@ -64,9 +64,8 @@ var _info_label: Label3D
 var _threshold_slider: Node
 var _scale_slider: Node
 var _control_panel: Node3D
+var _grid_config: Dictionary = {}
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 func _ready():
 	add_to_group("perlin_terrain_sculptors")
@@ -153,88 +152,55 @@ func _create_labels():
 
 func _create_vr_controls():
 	var total_size = grid_size * voxel_size
-	
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
-	_control_panel.position = Vector3(0, 0.04, total_size/2 + 0.15)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var mount: String = str(_grid_config.get("mount", ""))
+	var use_csg := mount in ["shelf", "wall", "floor"]
+
+	var panel: Node3D = RackTpl.create_panel("TERRAIN", [
+		[
+			{"type": "slider_h", "label": "THRESH", "default": (threshold + 1.0) / 2.0},
+			{"type": "slider_h", "label": "SCALE", "default": (noise_scale - 0.5) / 19.5},
+		],
+		[
+			{"type": "button", "label": "SEED"},
+		],
+	], use_csg)
+
+	if use_csg:
+		var tilt := 35.0
+		var color := Color(0.12, 0.12, 0.12)
+		if mount == "wall":
+			tilt = 0.0
+		elif mount == "floor":
+			tilt = 25.0
+			color = Color(0.55, 0.38, 0.22)
+		_control_panel = RackTpl.create_csg_case(0.28, 0.18, 0.16, tilt, panel, color)
+		_control_panel.position = Vector3(0, 0.04, total_size / 2 + 0.15)
+	else:
+		_control_panel = panel
+		_control_panel.position = Vector3(0, 0.04, total_size / 2 + 0.15)
+		_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
-	
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.5, 0.18, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
-	
-	# Threshold slider (-1 to 1)
-	_threshold_slider = SLIDER_HORIZONTAL.instantiate()
-	_threshold_slider.name = "ThresholdSlider"
-	_threshold_slider.position = Vector3(-0.12, 0.04, 0)
-	_threshold_slider.rotation_degrees.x = -30
-	var thresh_label = _threshold_slider.get_node_or_null("Frame/LabelName")
-	if thresh_label:
-		thresh_label.text = "THRESH"
-	_control_panel.add_child(_threshold_slider)
-	_threshold_slider.slider_moved.connect(_on_threshold_slider_moved)
-	
-	# Scale slider (0.5 to 20)
-	_scale_slider = SLIDER_HORIZONTAL.instantiate()
-	_scale_slider.name = "ScaleSlider"
-	_scale_slider.position = Vector3(0.12, 0.04, 0)
-	_scale_slider.rotation_degrees.x = -30
-	var scale_label = _scale_slider.get_node_or_null("Frame/LabelName")
-	if scale_label:
-		scale_label.text = "SCALE"
-	_control_panel.add_child(_scale_slider)
-	_scale_slider.slider_moved.connect(_on_scale_slider_moved)
-	
-	# New Seed button
-	var seed_btn = PUSH_BUTTON.instantiate()
-	seed_btn.name = "SeedButton"
-	seed_btn.position = Vector3(-0.08, -0.04, 0)
-	seed_btn.rotation_degrees.x = -30
-	_control_panel.add_child(seed_btn)
-	_add_button_label(seed_btn, "SEED")
-	var seed_area = seed_btn.get_node_or_null("InteractableAreaButton")
-	if seed_area:
-		seed_area.button_pressed.connect(_on_new_seed)
-	
-	# Reset button
-	var reset_btn = PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetButton"
-	reset_btn.position = Vector3(0.08, -0.04, 0)
-	reset_btn.rotation_degrees.x = -30
-	_control_panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RST")
-	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		reset_area.button_pressed.connect(reset)
-	
-	call_deferred("_sync_sliders_deferred")
 
-func _add_button_label(btn: Node, text: String):
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 12
-	lbl.position = Vector3(0, -0.025, 0)
-	btn.add_child(lbl)
+	_threshold_slider = _control_panel.find_child("Param_0", true, false)
+	_scale_slider = _control_panel.find_child("Param_1", true, false)
 
-func _sync_sliders_deferred():
-	_sync_threshold_slider()
-	_sync_scale_slider()
+	if _threshold_slider and _threshold_slider.has_signal("slider_moved"):
+		_threshold_slider.slider_moved.connect(_on_threshold_slider_moved)
+	if _scale_slider and _scale_slider.has_signal("slider_moved"):
+		_scale_slider.slider_moved.connect(_on_scale_slider_moved)
 
-func _sync_threshold_slider():
+	var seed_btn: Node = _control_panel.find_child("Btn_0", true, false)
+	if seed_btn:
+		var area = seed_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_new_seed)
+
+func _sync_threshold_slider() -> void:
 	if _threshold_slider and _threshold_slider.has_method("set_normalized_value"):
 		_threshold_slider.set_normalized_value((threshold + 1.0) / 2.0)
 
-func _sync_scale_slider():
+func _sync_scale_slider() -> void:
 	if _scale_slider and _scale_slider.has_method("set_normalized_value"):
 		_scale_slider.set_normalized_value((noise_scale - 0.5) / 19.5)
 
@@ -353,6 +319,7 @@ func _broadcast_controls_to_voxelnoise() -> void:
 		get_tree().call_group("voxelnoise_receivers", "apply_perlin_terrain_controls", payload)
 
 func apply_grid_config(config_data: Dictionary):
+	_grid_config = config_data
 	for key in config_data:
 		if key in self:
 			set(key, config_data[key])

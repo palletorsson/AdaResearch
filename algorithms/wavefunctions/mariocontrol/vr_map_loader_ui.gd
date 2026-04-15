@@ -10,7 +10,6 @@ const ALL_SEQUENCES_LABEL := "All sequences"
 const ALL_ALGORITHMS_LABEL := "All map algorithms"
 const STATE_FILE_PATH := "user://vr_map_loader_ui_state.cfg"
 
-const VR_BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
 
 # VR UI elements
 var _sequence_cycle_btn: Node3D
@@ -54,69 +53,53 @@ func _ready() -> void:
 	_reload_data()
 
 func _build_vr_ui() -> void:
-	var y_pos := 0.48
-	var spacing := 0.12
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("MAP LOADER", [
+		[{"type": "button", "label": "SEQ"}],
+		[{"type": "button", "label": "ALGO"}],
+		[{"type": "button", "label": "MAP"}],
+		[{"type": "button", "label": "PREV"}, {"type": "button", "label": "NEXT"},
+		 {"type": "button", "label": "LOAD"}, {"type": "button", "label": "LOAD+"},
+		 {"type": "button", "label": "START"}],
+		[{"type": "button", "label": "REFRESH"}],
+	])
+	panel.position = Vector3(0, 0.3, 0)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
 
-	# Title
-	var title = Label3D.new()
-	title.text = "VR Map Loader"
-	title.font_size = 48
-	title.modulate = Color(0.3, 0.7, 1.0)
-	title.position = Vector3(0, y_pos + 0.08, 0)
-	add_child(title)
-
-	# Sequence cycle
-	_sequence_label = _make_label(ALL_SEQUENCES_LABEL, Vector3(-0.15, y_pos, 0))
-	_sequence_cycle_btn = _make_button("Seq", Vector3(0.2, y_pos, 0))
+	# Connect cycle buttons
+	_sequence_cycle_btn = panel.find_child("Btn_0", true, false)
 	_connect_button(_sequence_cycle_btn, _on_sequence_cycle)
-	y_pos -= spacing
-
-	# Algorithm cycle
-	_algorithm_label = _make_label(ALL_ALGORITHMS_LABEL, Vector3(-0.15, y_pos, 0))
-	_algorithm_cycle_btn = _make_button("Algo", Vector3(0.2, y_pos, 0))
+	_algorithm_cycle_btn = panel.find_child("Btn_1", true, false)
 	_connect_button(_algorithm_cycle_btn, _on_algorithm_cycle)
-	y_pos -= spacing
-
-	# Map cycle
-	_map_label = _make_label("-", Vector3(-0.15, y_pos, 0))
-	_map_cycle_btn = _make_button("Map", Vector3(0.2, y_pos, 0))
+	_map_cycle_btn = panel.find_child("Btn_2", true, false)
 	_connect_button(_map_cycle_btn, _on_map_cycle)
-	y_pos -= spacing
 
-	# Count label
-	_count_label = _make_label("0 maps", Vector3(0, y_pos, 0))
+	# Nav buttons
+	_prev_btn = panel.find_child("Btn_3", true, false)
+	_connect_button(_prev_btn, _on_prev_pressed)
+	_next_btn = panel.find_child("Btn_4", true, false)
+	_connect_button(_next_btn, _on_next_pressed)
+	_load_btn = panel.find_child("Btn_5", true, false)
+	_connect_button(_load_btn, _on_load_pressed)
+	_load_next_btn = panel.find_child("Btn_6", true, false)
+	_connect_button(_load_next_btn, _on_load_next_pressed)
+	_start_sequence_btn = panel.find_child("Btn_7", true, false)
+	_connect_button(_start_sequence_btn, _on_start_sequence_pressed)
+	_refresh_btn = panel.find_child("Btn_8", true, false)
+	_connect_button(_refresh_btn, _on_refresh_pressed)
+
+	# Info labels below panel
+	var label_y := -0.2
+	_sequence_label = _make_label(ALL_SEQUENCES_LABEL, Vector3(0, label_y, 0))
+	_algorithm_label = _make_label(ALL_ALGORITHMS_LABEL, Vector3(0, label_y - 0.04, 0))
+	_map_label = _make_label("-", Vector3(0, label_y - 0.08, 0))
+	_count_label = _make_label("0 maps", Vector3(0, label_y - 0.12, 0))
 	_count_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	y_pos -= spacing * 0.7
-
-	# Context label
-	_context_label = _make_label("", Vector3(0, y_pos, 0))
+	_context_label = _make_label("", Vector3(0, label_y - 0.16, 0))
 	_context_label.font_size = 18
 	_context_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	y_pos -= spacing * 0.7
-
-	# Navigation buttons row
-	_prev_btn = _make_button("Prev", Vector3(-0.3, y_pos, 0))
-	_connect_button(_prev_btn, _on_prev_pressed)
-
-	_next_btn = _make_button("Next", Vector3(-0.15, y_pos, 0))
-	_connect_button(_next_btn, _on_next_pressed)
-
-	_load_btn = _make_button("Load", Vector3(0.0, y_pos, 0))
-	_connect_button(_load_btn, _on_load_pressed)
-
-	_load_next_btn = _make_button("Load+", Vector3(0.15, y_pos, 0))
-	_connect_button(_load_next_btn, _on_load_next_pressed)
-
-	_start_sequence_btn = _make_button("Start", Vector3(0.3, y_pos, 0))
-	_connect_button(_start_sequence_btn, _on_start_sequence_pressed)
-	y_pos -= spacing
-
-	_refresh_btn = _make_button("Refresh", Vector3(0, y_pos, 0))
-	_connect_button(_refresh_btn, _on_refresh_pressed)
-	y_pos -= spacing
-
-	# Status label
-	_status_label = _make_label("", Vector3(0, y_pos, 0))
+	_status_label = _make_label("", Vector3(0, label_y - 0.20, 0))
 	_status_label.font_size = 18
 	_status_label.modulate = Color(0.5, 0.5, 0.5)
 	_status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -131,19 +114,9 @@ func _make_label(text: String, pos: Vector3) -> Label3D:
 	add_child(label)
 	return label
 
-func _make_button(text: String, pos: Vector3) -> Node3D:
-	var btn = VR_BUTTON_SCENE.instantiate()
-	btn.position = pos
-	add_child(btn)
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.font_size = 18
-	lbl.modulate = Color(0.9, 0.9, 0.7)
-	lbl.position = Vector3(0, 0.03, 0)
-	btn.add_child(lbl)
-	return btn
-
 func _connect_button(btn: Node3D, callback: Callable) -> void:
+	if not btn:
+		return
 	var area = btn.get_node_or_null("InteractableAreaButton")
 	if area:
 		area.button_pressed.connect(callback)

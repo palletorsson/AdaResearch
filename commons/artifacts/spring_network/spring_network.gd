@@ -39,9 +39,9 @@ var _im: ImmediateMesh               # Reused each frame for spring lines
 var _title_label: Label3D
 
 # VR interaction
-var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
 var _stiffness_slider: Node
 var _damping_slider: Node
+var _control_panel: Node3D
 
 # Colors
 var _mass_color: Color = Color(0.95, 0.55, 0.2)
@@ -209,29 +209,43 @@ func _create_label() -> void:
 # VR interaction
 # ------------------------------------------------------------------
 
-## Adds VR sliders for stiffness and damping control.
+## Adds VR control panel for stiffness and damping.
 func _setup_controls() -> void:
-	_stiffness_slider = SliderScene.instantiate()
-	_stiffness_slider.position = Vector3(-0.15, -0.2, 0.05)
-	_stiffness_slider.set_param_name("Stiffness")
-	_stiffness_slider.set_normalized_value(stiffness / 500.0)
-	_stiffness_slider.slider_moved.connect(_on_stiffness_changed)
-	add_child(_stiffness_slider)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("SPRING NETWORK", [
+		[
+			{"type": "slider_h", "label": "STIFFNESS", "default": stiffness / 500.0},
+			{"type": "slider_h", "label": "DAMPING", "default": (damping - 0.8) / 0.2},
+		],
+		[{"type": "button", "label": "PERTURB"}],
+	])
+	_control_panel.position = Vector3(0, -0.15, 0.15)
+	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
+	add_child(_control_panel)
 
-	_damping_slider = SliderScene.instantiate()
-	_damping_slider.position = Vector3(0.15, -0.2, 0.05)
-	_damping_slider.set_param_name("Damping")
-	_damping_slider.set_normalized_value((damping - 0.8) / 0.2)
-	_damping_slider.slider_moved.connect(_on_damping_changed)
-	add_child(_damping_slider)
+	_stiffness_slider = _control_panel.find_child("Param_0", true, false)
+	_damping_slider = _control_panel.find_child("Param_1", true, false)
+
+	if _stiffness_slider and _stiffness_slider.has_signal("slider_moved"):
+		_stiffness_slider.slider_moved.connect(_on_stiffness_changed)
+	if _damping_slider and _damping_slider.has_signal("slider_moved"):
+		_damping_slider.slider_moved.connect(_on_damping_changed)
+
+	var perturb_btn: Node = _control_panel.find_child("Btn_0", true, false)
+	if perturb_btn:
+		var area = perturb_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _apply_perturbation())
 
 
-func _on_stiffness_changed() -> void:
-	stiffness = _stiffness_slider.get_normalized_value() * 500.0
+func _on_stiffness_changed(_val = null) -> void:
+	if _stiffness_slider and _stiffness_slider.has_method("get_normalized_value"):
+		stiffness = _stiffness_slider.get_normalized_value() * 500.0
 
 
-func _on_damping_changed() -> void:
-	damping = 0.8 + _damping_slider.get_normalized_value() * 0.2
+func _on_damping_changed(_val = null) -> void:
+	if _damping_slider and _damping_slider.has_method("get_normalized_value"):
+		damping = 0.8 + _damping_slider.get_normalized_value() * 0.2
 
 
 # ------------------------------------------------------------------

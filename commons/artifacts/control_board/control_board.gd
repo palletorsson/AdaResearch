@@ -6,8 +6,8 @@
 extends Node3D
 class_name ControlBoard
 
-const SLIDER_H = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
+var SLIDER_H: PackedScene
+var PUSH_BUTTON: PackedScene
 
 # ── Palette ──────────────────────────────────────────────────────────
 const COL_PANEL     := Color(0.08, 0.08, 0.10)
@@ -38,6 +38,8 @@ var _time: float = 0.0
 var _signal_connections: Array = []
 
 func _ready() -> void:
+	SLIDER_H = load("res://commons/interactables/slider_horizontal.tscn")
+	PUSH_BUTTON = load("res://commons/interactables/push_button.tscn")
 	_build_back_plate()
 	_build_monitors()
 	_build_meters()

@@ -72,11 +72,9 @@ var _info_label: Label3D
 var _phase_label: Label3D
 
 # VR controls
-const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
-var _mode_button: Node3D
-var _heat_slider: Node3D
-var _drought_slider: Node3D
+var _mode_button: Node
+var _heat_slider: Node
+var _drought_slider: Node
 
 # Tulip colors — common cultivar palette
 const TULIP_COLORS: Array[Color] = [
@@ -688,26 +686,31 @@ func _update_labels() -> void:
 # =========================================================================
 
 func _create_vr_controls() -> void:
-	_mode_button = BUTTON_SCENE.instantiate()
-	_mode_button.position = Vector3(-0.7, -bucket_height * 0.5 - 0.15, 0)
-	add_child(_mode_button)
-	var btn_area = _mode_button.get_node_or_null("InteractableAreaButton")
-	if btn_area:
-		btn_area.button_pressed.connect(_cycle_mode)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("TULIPS", [
+		[{"type": "button", "label": "MODE"}],
+		[
+			{"type": "slider_h", "label": "HEAT", "default": 0.0},
+			{"type": "slider_h", "label": "DROUGHT", "default": 0.0},
+		],
+	])
+	panel.position = Vector3(0, -bucket_height * 0.5 - 0.1, 0)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
 
-	_heat_slider = SLIDER_SCENE.instantiate()
-	_heat_slider.position = Vector3(0.65, -bucket_height * 0.5 - 0.05, 0)
-	add_child(_heat_slider)
-	_heat_slider.set_param_name("Heat")
-	_heat_slider.set_normalized_value(0.0)
-	_heat_slider.slider_moved.connect(_on_heat_changed)
+	_mode_button = panel.find_child("Btn_0", true, false)
+	if _mode_button:
+		var area: Node = _mode_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _cycle_mode())
 
-	_drought_slider = SLIDER_SCENE.instantiate()
-	_drought_slider.position = Vector3(0.65, -bucket_height * 0.5 - 0.30, 0)
-	add_child(_drought_slider)
-	_drought_slider.set_param_name("Drought")
-	_drought_slider.set_normalized_value(0.0)
-	_drought_slider.slider_moved.connect(_on_drought_changed)
+	_heat_slider = panel.find_child("Param_0", true, false)
+	if _heat_slider and _heat_slider.has_signal("slider_moved"):
+		_heat_slider.slider_moved.connect(_on_heat_changed)
+
+	_drought_slider = panel.find_child("Param_1", true, false)
+	if _drought_slider and _drought_slider.has_signal("slider_moved"):
+		_drought_slider.slider_moved.connect(_on_drought_changed)
 
 
 func _on_heat_changed(_value: float) -> void:

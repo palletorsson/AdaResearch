@@ -1,13 +1,9 @@
 extends Node3D
 
-const PushButton = preload("res://commons/interactables/push_button.tscn")
-
 var tree_node: Node = null
-var auto_toggle_btn: Node = null
-var grow_btn: Node = null
-var reset_btn: Node = null
 var status_label: Label3D = null
 var auto_enabled := false
+var _control_panel: Node3D
 
 func _ready() -> void:
 	tree_node = get_node_or_null("../../TreeGeneration")
@@ -15,58 +11,42 @@ func _ready() -> void:
 	_update_ui()
 
 func _build_ui() -> void:
-	var y_offset := 0.0
-
 	# Title
 	var title := Label3D.new()
 	title.text = "Tree Generation"
 	title.font_size = 48
-	title.position = Vector3(0, y_offset, 0)
+	title.position = Vector3(0, 0, 0)
 	add_child(title)
-	y_offset -= 0.08
 
 	# Status label
 	status_label = Label3D.new()
 	status_label.text = "Generation: 0 / 0"
 	status_label.font_size = 36
-	status_label.position = Vector3(0, y_offset, 0)
+	status_label.position = Vector3(0, -0.08, 0)
 	add_child(status_label)
-	y_offset -= 0.1
 
-	# Auto-grow toggle button
-	auto_toggle_btn = PushButton.instantiate()
-	auto_toggle_btn.position = Vector3(0, y_offset, 0)
-	add_child(auto_toggle_btn)
-	var auto_area = auto_toggle_btn.get_node_or_null("InteractableAreaButton")
-	if auto_area:
-		auto_area.button_pressed.connect(_on_auto_toggled)
-	var auto_label = auto_toggle_btn.get_node_or_null("Frame/LabelName")
-	if auto_label:
-		auto_label.text = "Auto Grow"
-	y_offset -= 0.1
+	# Button grid: AUTO, GROW, RESET
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_button_grid(3, 1, ["AUTO", "GROW", "RESET"])
+	_control_panel.position = Vector3(0, -0.22, 0)
+	add_child(_control_panel)
 
-	# Grow button
-	grow_btn = PushButton.instantiate()
-	grow_btn.position = Vector3(0, y_offset, 0)
-	add_child(grow_btn)
-	var grow_area = grow_btn.get_node_or_null("InteractableAreaButton")
-	if grow_area:
-		grow_area.button_pressed.connect(_on_grow_pressed)
-	var grow_label = grow_btn.get_node_or_null("Frame/LabelName")
-	if grow_label:
-		grow_label.text = "Grow"
-	y_offset -= 0.1
+	var auto_btn: Node = _control_panel.get_node_or_null("Btn_0")
+	var grow_btn: Node = _control_panel.get_node_or_null("Btn_1")
+	var reset_btn: Node = _control_panel.get_node_or_null("Btn_2")
 
-	# Reset button
-	reset_btn = PushButton.instantiate()
-	reset_btn.position = Vector3(0, y_offset, 0)
-	add_child(reset_btn)
-	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		reset_area.button_pressed.connect(_on_reset_pressed)
-	var reset_label = reset_btn.get_node_or_null("Frame/LabelName")
-	if reset_label:
-		reset_label.text = "Reset"
+	if auto_btn:
+		var area = auto_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_auto_toggled())
+	if grow_btn:
+		var area = grow_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_grow_pressed())
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_reset_pressed())
 
 func _process(_delta: float) -> void:
 	if tree_node and status_label:

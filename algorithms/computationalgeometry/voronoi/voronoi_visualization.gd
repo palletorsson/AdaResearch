@@ -80,10 +80,7 @@ var _sweep_label: Label3D
 var _equity_label: Label3D
 
 # VR controls
-const SLIDER_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
-const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
-var _mode_button: Node3D
-var _restart_button: Node3D
+var _control_panel: Node3D
 var _count_slider: Node3D
 var _speed_slider: Node3D
 
@@ -213,36 +210,43 @@ func _create_labels() -> void:
 # =========================================================================
 
 func _create_vr_controls() -> void:
-	var panel_y := -field_height * 0.5 - 0.5
-	var panel_x := -field_width * 0.3
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("VORONOI", [
+		[
+			{"type": "slider_h", "label": "SITES", "default": clampf(float(site_count - 4) / 36.0, 0.0, 1.0)},
+			{"type": "slider_h", "label": "SPEED", "default": clampf(sweep_speed / 3.0, 0.0, 1.0)},
+		],
+		[
+			{"type": "button", "label": "MODE"},
+			{"type": "button", "label": "RESTART"},
+		],
+	])
+	_control_panel.position = Vector3(-field_width * 0.3, -field_height * 0.5 - 0.5, 0.05)
+	add_child(_control_panel)
 
-	_count_slider = SLIDER_SCENE.instantiate()
-	_count_slider.position = Vector3(panel_x, panel_y, 0.05)
-	_count_slider.set_param_name("Sites")
-	_count_slider.set_normalized_value(clampf(float(site_count - 4) / 36.0, 0.0, 1.0))
-	_count_slider.slider_moved.connect(_on_count_slider)
-	add_child(_count_slider)
+	# SITES slider (Param_0)
+	_count_slider = _control_panel.find_child("Param_0", true, false)
+	if _count_slider and _count_slider.has_signal("slider_moved"):
+		_count_slider.slider_moved.connect(_on_count_slider)
 
-	_speed_slider = SLIDER_SCENE.instantiate()
-	_speed_slider.position = Vector3(panel_x + 1.5, panel_y, 0.05)
-	_speed_slider.set_param_name("Speed")
-	_speed_slider.set_normalized_value(clampf(sweep_speed / 3.0, 0.0, 1.0))
-	_speed_slider.slider_moved.connect(_on_speed_slider)
-	add_child(_speed_slider)
+	# SPEED slider (Param_1)
+	_speed_slider = _control_panel.find_child("Param_1", true, false)
+	if _speed_slider and _speed_slider.has_signal("slider_moved"):
+		_speed_slider.slider_moved.connect(_on_speed_slider)
 
-	_mode_button = BUTTON_SCENE.instantiate()
-	_mode_button.position = Vector3(panel_x + 3.0, panel_y, 0.05)
-	var area = _mode_button.get_node_or_null("InteractableAreaButton")
-	if area:
-		area.button_pressed.connect(_on_mode_pressed)
-	add_child(_mode_button)
+	# MODE (Btn_0)
+	var mode_btn: Node = _control_panel.find_child("Btn_0", true, false)
+	if mode_btn:
+		var area = mode_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_mode_pressed)
 
-	_restart_button = BUTTON_SCENE.instantiate()
-	_restart_button.position = Vector3(panel_x + 4.2, panel_y, 0.05)
-	var area2 = _restart_button.get_node_or_null("InteractableAreaButton")
-	if area2:
-		area2.button_pressed.connect(_on_restart_pressed)
-	add_child(_restart_button)
+	# RESTART (Btn_1)
+	var restart_btn: Node = _control_panel.find_child("Btn_1", true, false)
+	if restart_btn:
+		var area2 = restart_btn.get_node_or_null("InteractableAreaButton")
+		if area2:
+			area2.button_pressed.connect(_on_restart_pressed)
 
 func _on_count_slider(_val: float) -> void:
 	var nv: float = _count_slider.get_normalized_value()

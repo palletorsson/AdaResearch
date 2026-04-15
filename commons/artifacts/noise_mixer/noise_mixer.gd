@@ -43,12 +43,10 @@ var _octaves_slider: Node
 var _lacunarity_slider: Node
 var _persistence_slider: Node
 var _rng: RandomNumberGenerator
+var _grid_config: Dictionary = {}  # Stored for case fitting
 
 # Random offsets per octave for variety
 var _octave_offsets: Array[Vector2] = []
-
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 
 func _ready() -> void:
@@ -210,68 +208,53 @@ func _update_info() -> void:
 # --- VR Controls ---
 
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
-	_control_panel.position = Vector3(0, 0.02, quad_size.y / 2.0 + 0.15)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var mount: String = str(_grid_config.get("mount", ""))
+	var use_csg := mount in ["shelf", "wall", "floor"]
+
+	var panel: Node3D = RackTpl.create_panel("NOISE MIXER", [
+		[
+			{"type": "slider_h", "label": "OCT", "default": float(octaves - 1) / 7.0},
+			{"type": "slider_h", "label": "LAC", "default": (lacunarity - 1.5) / 1.5},
+			{"type": "slider_h", "label": "PER", "default": (persistence - 0.3) / 0.4},
+		],
+		[
+			{"type": "button", "label": "SEED"},
+		],
+	], use_csg)
+
+	if use_csg:
+		var tilt := 35.0
+		var color := Color(0.12, 0.12, 0.12)
+		if mount == "wall":
+			tilt = 0.0
+		elif mount == "floor":
+			tilt = 25.0
+			color = Color(0.55, 0.38, 0.22)
+		_control_panel = RackTpl.create_csg_case(0.28, 0.18, 0.16, tilt, panel, color)
+		_control_panel.position = Vector3(0, 0.02, quad_size.y / 2.0 + 0.15)
+	else:
+		_control_panel = panel
+		_control_panel.position = Vector3(0, 0.02, quad_size.y / 2.0 + 0.15)
+		_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 
-	# Panel backing
-	var panel_back := MeshInstance3D.new()
-	var panel_mesh := BoxMesh.new()
-	panel_mesh.size = Vector3(0.52, 0.16, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat := StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
+	_octaves_slider = _control_panel.find_child("Param_0", true, false)
+	_lacunarity_slider = _control_panel.find_child("Param_1", true, false)
+	_persistence_slider = _control_panel.find_child("Param_2", true, false)
 
-	# Octaves slider (1–8, integer steps)
-	_octaves_slider = _add_slider("OCT", -0.16, _on_octaves_changed)
+	if _octaves_slider and _octaves_slider.has_signal("slider_moved"):
+		_octaves_slider.slider_moved.connect(_on_octaves_changed)
+	if _lacunarity_slider and _lacunarity_slider.has_signal("slider_moved"):
+		_lacunarity_slider.slider_moved.connect(_on_lacunarity_changed)
+	if _persistence_slider and _persistence_slider.has_signal("slider_moved"):
+		_persistence_slider.slider_moved.connect(_on_persistence_changed)
 
-	# Lacunarity slider (1.5–3.0)
-	_lacunarity_slider = _add_slider("LAC", 0.0, _on_lacunarity_changed)
-
-	# Persistence slider (0.3–0.7)
-	_persistence_slider = _add_slider("PER", 0.16, _on_persistence_changed)
-
-	# Randomise button
-	var rand_btn := PUSH_BUTTON.instantiate()
-	rand_btn.name = "RandomBtn"
-	rand_btn.position = Vector3(0, -0.035, 0)
-	rand_btn.scale = Vector3(0.65, 0.65, 0.65)
-	_control_panel.add_child(rand_btn)
-	_add_button_label(rand_btn, "SEED")
-	var area = rand_btn.get_node_or_null("InteractableAreaButton")
-	if area:
-		area.button_pressed.connect(_on_randomise)
-
-	call_deferred("_sync_sliders")
-
-
-func _add_slider(label_text: String, x_pos: float, callback: Callable) -> Node:
-	var slider := SLIDER_HORIZONTAL.instantiate()
-	slider.name = label_text + "Slider"
-	slider.position = Vector3(x_pos, 0.04, 0)
-	slider.rotation_degrees.x = -30
-	slider.scale = Vector3(0.8, 0.8, 0.8)
-	var lbl = slider.get_node_or_null("Frame/LabelName")
-	if lbl:
-		lbl.text = label_text
-	_control_panel.add_child(slider)
-	slider.slider_moved.connect(callback)
-	return slider
-
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
+	var seed_btn: Node = _control_panel.find_child("Btn_0", true, false)
+	if seed_btn:
+		var area = seed_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_randomise)
 
 
 func _sync_sliders() -> void:
@@ -319,7 +302,9 @@ func _regenerate() -> void:
 
 
 ## Grid system integration — accept configuration from map data.
+## Supports: mount, tilt, case_style for grid-fitted case housing.
 func apply_grid_config(config_data: Dictionary) -> void:
+	_grid_config = config_data
 	if config_data.has("octaves"):
 		octaves = clampi(int(config_data["octaves"]), 1, 8)
 	if config_data.has("lacunarity"):

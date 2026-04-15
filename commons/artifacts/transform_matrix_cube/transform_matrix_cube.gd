@@ -71,8 +71,6 @@ const MIN_EDGE_LENGTH := 0.001
 const MIN_ARROW_LENGTH := 0.01
 const DET_THRESHOLD := 0.01
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
 func _ready() -> void:
 	_init_shared_materials()
@@ -237,54 +235,38 @@ func _create_labels() -> void:
 	_add_node(_det_label)
 
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("MATRIX", [
+		[
+			{"type": "button", "label": "IDENTITY"},
+			{"type": "button", "label": "SCALE 2X"},
+			{"type": "button", "label": "SHEAR"},
+		],
+		[
+			{"type": "button", "label": "ROT 45"},
+			{"type": "button", "label": "REFLECT"},
+			{"type": "button", "label": "SQUISH"},
+		],
+	])
 	_control_panel.position = Vector3(0, 0.04, cube_size + 0.35)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
 	_add_node(_control_panel)
 
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.5, 0.15, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
-
-	# Transform presets
-	var presets = [
-		["IDENTITY", Basis.IDENTITY],
-		["SCALE 2X", Basis.from_scale(Vector3(2, 2, 2))],
-		["SHEAR", Basis(Vector3(1, 0.5, 0), Vector3(0, 1, 0), Vector3(0, 0, 1))],
-		["ROT 45°", Basis(Vector3.UP, deg_to_rad(45))],
-		["REFLECT", Basis(Vector3(-1, 0, 0), Vector3(0, 1, 0), Vector3(0, 0, 1))],
-		["SQUISH", Basis.from_scale(Vector3(2, 0.5, 1))]
+	var presets: Array[Basis] = [
+		Basis.IDENTITY,
+		Basis.from_scale(Vector3(2, 2, 2)),
+		Basis(Vector3(1, 0.5, 0), Vector3(0, 1, 0), Vector3(0, 0, 1)),
+		Basis(Vector3.UP, deg_to_rad(45)),
+		Basis(Vector3(-1, 0, 0), Vector3(0, 1, 0), Vector3(0, 0, 1)),
+		Basis.from_scale(Vector3(2, 0.5, 1)),
 	]
-
 	for i in range(presets.size()):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.2 + (i % 3) * 0.13, 0.035 - (i / 3) * 0.06, 0)
-		btn.scale = Vector3(0.6, 0.6, 0.6)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, presets[i][0])
-
-		var m = presets[i][1]
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(func(_b): _apply_matrix(m))
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 7
-	lbl.position = Vector3(0, -0.022, 0)
-	btn.add_child(lbl)
+		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var m: Basis = presets[i]
+			var area: Node = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(func(_b): _apply_matrix(m))
 
 func _apply_matrix(m: Basis) -> void:
 	matrix = m

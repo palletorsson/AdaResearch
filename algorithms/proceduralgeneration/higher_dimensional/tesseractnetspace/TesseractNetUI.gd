@@ -1,9 +1,7 @@
 extends Node3D
 
-const SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
-const ButtonScene = preload("res://commons/interactables/push_button.tscn")
-
 var net_node: Node = null
+var _control_panel: Node3D
 var size_slider: Node = null
 var spacing_slider: Node = null
 var type_label: Label3D = null
@@ -16,68 +14,61 @@ var type_names := ["Cross", "T-Shape", "L-Shape", "Zigzag"]
 func _ready() -> void:
 	net_node = get_node_or_null("../../TesseractNetSpace")
 
-	# Stats label
+	# Stats label above panel
 	stats_label = Label3D.new()
 	stats_label.position = Vector3(0, 0.5, 0)
 	stats_label.font_size = 32
 	stats_label.text = "Tesseract Net Space"
 	add_child(stats_label)
 
-	# Type cycle label + button
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("TESSERACT", [
+		[
+			{"type": "slider_h", "label": "SIZE", "default": 0.5},
+			{"type": "slider_h", "label": "SPACING", "default": 0.5},
+		],
+		[
+			{"type": "button", "label": "TYPE"},
+			{"type": "button", "label": "HOLLOW"},
+			{"type": "button", "label": "REGEN"},
+		],
+	])
+	_control_panel.position = Vector3(0, 0.25, 0)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_control_panel)
+
+	# Type label
 	type_label = Label3D.new()
-	type_label.position = Vector3(-0.25, 0.3, 0)
+	type_label.position = Vector3(0, 0.15, 0)
 	type_label.font_size = 24
 	type_label.text = "Type: %s" % type_names[type_index]
 	add_child(type_label)
 
-	var type_btn = ButtonScene.instantiate()
-	type_btn.position = Vector3(0.25, 0.3, 0)
-	add_child(type_btn)
-	var type_area = type_btn.get_node_or_null("InteractableAreaButton")
-	if type_area:
-		type_area.button_pressed.connect(_on_type_next)
+	size_slider = _control_panel.find_child("Param_0", true, false)
+	spacing_slider = _control_panel.find_child("Param_1", true, false)
 
-	# Size slider
-	size_slider = SliderScene.instantiate()
-	size_slider.position = Vector3(0, 0.18, 0)
-	add_child(size_slider)
-	size_slider.set_param_name("Size")
-	size_slider.set_normalized_value(0.5)
-	size_slider.slider_moved.connect(_on_size_slider_moved)
+	if size_slider:
+		size_slider.slider_moved.connect(_on_size_slider_moved)
+	if spacing_slider:
+		spacing_slider.slider_moved.connect(_on_spacing_slider_moved)
 
-	# Spacing slider
-	spacing_slider = SliderScene.instantiate()
-	spacing_slider.position = Vector3(0, 0.06, 0)
-	add_child(spacing_slider)
-	spacing_slider.set_param_name("Spacing")
-	spacing_slider.set_normalized_value(0.5)
-	spacing_slider.slider_moved.connect(_on_spacing_slider_moved)
+	var type_btn = _control_panel.find_child("Btn_0", true, false)
+	if type_btn:
+		var area = type_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_type_next())
 
-	# Hollow toggle button
-	var hollow_btn = ButtonScene.instantiate()
-	hollow_btn.position = Vector3(0, -0.06, 0)
-	add_child(hollow_btn)
-	var hollow_area = hollow_btn.get_node_or_null("InteractableAreaButton")
-	if hollow_area:
-		hollow_area.button_pressed.connect(_on_hollow_pressed)
-	var hollow_lbl = Label3D.new()
-	hollow_lbl.position = Vector3(0, -0.12, 0)
-	hollow_lbl.font_size = 20
-	hollow_lbl.text = "Hollow"
-	add_child(hollow_lbl)
+	var hollow_btn = _control_panel.find_child("Btn_1", true, false)
+	if hollow_btn:
+		var area = hollow_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_hollow_pressed())
 
-	# Regenerate button
-	var regen_btn = ButtonScene.instantiate()
-	regen_btn.position = Vector3(0, -0.24, 0)
-	add_child(regen_btn)
-	var regen_area = regen_btn.get_node_or_null("InteractableAreaButton")
-	if regen_area:
-		regen_area.button_pressed.connect(_on_regenerate_pressed)
-	var regen_lbl = Label3D.new()
-	regen_lbl.position = Vector3(0, -0.30, 0)
-	regen_lbl.font_size = 20
-	regen_lbl.text = "Regenerate"
-	add_child(regen_lbl)
+	var regen_btn = _control_panel.find_child("Btn_2", true, false)
+	if regen_btn:
+		var area = regen_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_regenerate_pressed())
 
 	_update_stats()
 

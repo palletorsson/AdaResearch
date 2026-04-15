@@ -20,7 +20,6 @@ extends Node3D
 @export var wind_strength: float = 3.0
 @export var gravity_strength: float = 9.8
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
 class ClothNode:
 	var position: Vector3
@@ -244,39 +243,47 @@ func _setup_labels() -> void:
 
 
 func _setup_controls() -> void:
-	var panel := Node3D.new()
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("CLOTH SIM", [
+		[
+			{"type": "slider_h", "label": "WIND", "default": wind_strength / 10.0},
+			{"type": "slider_h", "label": "STIFFNESS", "default": (cloth_stiffness - 20.0) / 180.0},
+		],
+		[
+			{"type": "slider_h", "label": "DAMPING", "default": cloth_damping / 10.0},
+			{"type": "slider_h", "label": "GRAVITY", "default": gravity_strength / 20.0},
+		],
+		[{"type": "button", "label": "RESET"}],
+	])
 	panel.position = Vector3(0.0, 1.0, 3.5)
+	panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(panel)
 
-	# Wind slider
-	var wind_slider = SLIDER_HORIZONTAL.instantiate()
-	wind_slider.name = "WindSlider"
-	wind_slider.position = Vector3(-0.8, 0, 0)
-	wind_slider.rotation_degrees.x = -45
-	wind_slider.scale = Vector3(0.7, 0.7, 0.7)
-	var wlabel = wind_slider.get_node_or_null("Frame/LabelName")
-	if wlabel:
-		wlabel.text = "WIND"
-	panel.add_child(wind_slider)
-	wind_slider.slider_moved.connect(func(_pos):
-		if wind_slider.has_method("get_normalized_value"):
-			wind_strength = wind_slider.get_normalized_value() * 10.0
-	)
+	var wind_slider: Node = panel.find_child("Param_0", true, false)
+	var stiff_slider: Node = panel.find_child("Param_1", true, false)
+	var damp_slider: Node = panel.find_child("Param_2", true, false)
+	var grav_slider: Node = panel.find_child("Param_3", true, false)
 
-	# Stiffness slider
-	var stiff_slider = SLIDER_HORIZONTAL.instantiate()
-	stiff_slider.name = "StiffnessSlider"
-	stiff_slider.position = Vector3(0.8, 0, 0)
-	stiff_slider.rotation_degrees.x = -45
-	stiff_slider.scale = Vector3(0.7, 0.7, 0.7)
-	var slabel = stiff_slider.get_node_or_null("Frame/LabelName")
-	if slabel:
-		slabel.text = "STIFFNESS"
-	panel.add_child(stiff_slider)
-	stiff_slider.slider_moved.connect(func(_pos):
-		if stiff_slider.has_method("get_normalized_value"):
-			cloth_stiffness = 20.0 + stiff_slider.get_normalized_value() * 180.0
-	)
+	if wind_slider and wind_slider.has_signal("slider_moved"):
+		wind_slider.slider_moved.connect(func(_pos):
+			if wind_slider.has_method("get_normalized_value"):
+				wind_strength = wind_slider.get_normalized_value() * 10.0
+		)
+	if stiff_slider and stiff_slider.has_signal("slider_moved"):
+		stiff_slider.slider_moved.connect(func(_pos):
+			if stiff_slider.has_method("get_normalized_value"):
+				cloth_stiffness = 20.0 + stiff_slider.get_normalized_value() * 180.0
+		)
+	if damp_slider and damp_slider.has_signal("slider_moved"):
+		damp_slider.slider_moved.connect(func(_pos):
+			if damp_slider.has_method("get_normalized_value"):
+				cloth_damping = damp_slider.get_normalized_value() * 10.0
+		)
+	if grav_slider and grav_slider.has_signal("slider_moved"):
+		grav_slider.slider_moved.connect(func(_pos):
+			if grav_slider.has_method("get_normalized_value"):
+				gravity_strength = grav_slider.get_normalized_value() * 20.0
+		)
 
 
 func _setup_vr() -> void:

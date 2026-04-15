@@ -37,8 +37,6 @@ class_name FlowerLab
 # ── Preloaded scenes ──────────────────────────────────────────────────
 
 const BOTANICAL_FLOWER := preload("res://commons/flora/botanical_flower.tscn")
-const SLIDER_HORIZONTAL := preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON := preload("res://commons/interactables/push_button.tscn")
 
 
 # ── Parameter ranges ─────────────────────────────────────────────────
@@ -79,7 +77,6 @@ const SLIDER_ORDER := [
 var _flower: Node3D = null
 var _control_panel: Node3D = null
 var _sliders: Dictionary = {}       # param_name -> slider node
-var _title_label: Label3D = null
 var _info_label: Label3D = null
 var _symmetry_radial: bool = true    # true = radial, false = bilateral
 var _current_params: Dictionary = {} # current flower config values
@@ -92,7 +89,6 @@ func _ready() -> void:
 	_rng.randomize()
 	_init_params()
 	_build_flower()
-	_create_title()
 	_create_info_label()
 	_create_vr_controls()
 	call_deferred("_sync_sliders")
@@ -148,23 +144,6 @@ func _build_flower_config() -> Dictionary:
 	return config
 
 
-# ── Title label ───────────────────────────────────────────────────────
-
-func _create_title() -> void:
-	_title_label = Label3D.new()
-	_title_label.name = "TitleLabel"
-	_title_label.text = "Flower Lab"
-	_title_label.font_size = 48
-	_title_label.pixel_size = 0.001
-	_title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	# Float above the tallest possible flower
-	_title_label.position = Vector3(0, 1.2, 0)
-	_title_label.modulate = Color(0.95, 0.92, 0.85)
-	_title_label.outline_size = 8
-	_title_label.outline_modulate = Color(0.15, 0.12, 0.1)
-	add_child(_title_label)
-
-
 # ── Info label ────────────────────────────────────────────────────────
 # Shows current parameter values as text below the control panel
 
@@ -198,115 +177,66 @@ func _update_info() -> void:
 
 
 # ── VR Controls ──────────────────────────────────────────────────────
-# Arranged in two rows on an angled panel in front of the flower.
-# Top row: 4 sliders    Bottom row: 3 sliders + 2 buttons
+# Built via RackTemplates for Dieter Rams aesthetic.
 
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+
+	# Row 1: 4 sliders, Row 2: 3 sliders, Row 3: 3 buttons
+	var defaults := {}
+	for param_name in SLIDER_ORDER:
+		var def: Dictionary = PARAM_DEFS[param_name]
+		defaults[param_name] = inverse_lerp(def["min"], def["max"], _current_params[param_name])
+
+	_control_panel = RackTpl.create_panel("FLOWER LAB", [
+		[
+			{"type": "slider_h", "label": SLIDER_LABELS["petal_count"],  "default": defaults["petal_count"]},
+			{"type": "slider_h", "label": SLIDER_LABELS["petal_length"], "default": defaults["petal_length"]},
+			{"type": "slider_h", "label": SLIDER_LABELS["petal_width"],  "default": defaults["petal_width"]},
+			{"type": "slider_h", "label": SLIDER_LABELS["petal_curve"],  "default": defaults["petal_curve"]},
+		],
+		[
+			{"type": "slider_h", "label": SLIDER_LABELS["stem_height"], "default": defaults["stem_height"]},
+			{"type": "slider_h", "label": SLIDER_LABELS["color_hue"],   "default": defaults["color_hue"]},
+			{"type": "slider_h", "label": SLIDER_LABELS["leaf_count"],  "default": defaults["leaf_count"]},
+		],
+		[
+			{"type": "button", "label": "SYM"},
+			{"type": "button", "label": "RANDOM"},
+			{"type": "button", "label": "SAVE"},
+		],
+	])
 	_control_panel.position = Vector3(0, 0.35, 0.45)
 	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(_control_panel)
 
-	# Dark backing panel for visual grouping
-	var panel_back := MeshInstance3D.new()
-	var panel_mesh := BoxMesh.new()
-	panel_mesh.size = Vector3(0.72, 0.22, 0.008)
-	panel_back.mesh = panel_mesh
-	var panel_mat := StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.06, 0.07, 0.08)
-	panel_mat.metallic = 0.2
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.008
-	_control_panel.add_child(panel_back)
+	# Map slider references by param order
+	var slider_index := 0
+	for param_name in SLIDER_ORDER:
+		var slider = _control_panel.find_child("Param_%d" % slider_index, true, false)
+		if slider:
+			_sliders[param_name] = slider
+			slider.slider_moved.connect(_make_slider_callback(param_name))
+		slider_index += 1
 
-	# Create sliders in two rows
-	# Row 1 (top): petal_count, petal_length, petal_width, petal_curve
-	# Row 2 (bottom): stem_height, color_hue, leaf_count
-	var row1 := SLIDER_ORDER.slice(0, 4)
-	var row2 := SLIDER_ORDER.slice(4, 7)
+	# Button callbacks
+	var sym_btn = _control_panel.find_child("Btn_0", true, false)
+	if sym_btn:
+		var area = sym_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_symmetry_toggle)
 
-	var x_start_row1 := -0.27
-	var x_spacing := 0.18
-	var y_top := 0.05
-	var y_bottom := -0.03
+	var rand_btn = _control_panel.find_child("Btn_1", true, false)
+	if rand_btn:
+		var area = rand_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_randomize)
 
-	for i in range(row1.size()):
-		var param_name: String = row1[i]
-		var x := x_start_row1 + i * x_spacing
-		_sliders[param_name] = _add_slider(
-			SLIDER_LABELS[param_name], Vector3(x, y_top, 0),
-			_make_slider_callback(param_name)
-		)
-
-	var x_start_row2 := -0.18
-	for i in range(row2.size()):
-		var param_name: String = row2[i]
-		var x := x_start_row2 + i * x_spacing
-		_sliders[param_name] = _add_slider(
-			SLIDER_LABELS[param_name], Vector3(x, y_bottom, 0),
-			_make_slider_callback(param_name)
-		)
-
-	# Symmetry toggle button (radial / bilateral)
-	# Bilateral symmetry is a key evolutionary innovation — most advanced
-	# flowers develop it for specialized pollinator relationships (e.g. orchids)
-	var sym_btn := PUSH_BUTTON.instantiate()
-	sym_btn.name = "SymmetryBtn"
-	sym_btn.position = Vector3(0.26, y_bottom, 0)
-	sym_btn.scale = Vector3(0.55, 0.55, 0.55)
-	_control_panel.add_child(sym_btn)
-	_add_button_label(sym_btn, "SYM")
-	var sym_area = sym_btn.get_node_or_null("InteractableAreaButton")
-	if sym_area:
-		sym_area.button_pressed.connect(_on_symmetry_toggle)
-
-	# Randomize button — generates a random flower by sampling all params
-	var rand_btn := PUSH_BUTTON.instantiate()
-	rand_btn.name = "RandomBtn"
-	rand_btn.position = Vector3(-0.30, -0.09, 0)
-	rand_btn.scale = Vector3(0.55, 0.55, 0.55)
-	_control_panel.add_child(rand_btn)
-	_add_button_label(rand_btn, "RANDOM")
-	var rand_area = rand_btn.get_node_or_null("InteractableAreaButton")
-	if rand_area:
-		rand_area.button_pressed.connect(_on_randomize)
-
-	# Save Preset button — writes current config to user:// JSON
-	var save_btn := PUSH_BUTTON.instantiate()
-	save_btn.name = "SaveBtn"
-	save_btn.position = Vector3(-0.12, -0.09, 0)
-	save_btn.scale = Vector3(0.55, 0.55, 0.55)
-	_control_panel.add_child(save_btn)
-	_add_button_label(save_btn, "SAVE")
-	var save_area = save_btn.get_node_or_null("InteractableAreaButton")
-	if save_area:
-		save_area.button_pressed.connect(_on_save_preset)
-
-
-## Create a single VR slider and add it to the control panel.
-func _add_slider(label_text: String, pos: Vector3, callback: Callable) -> Node:
-	var slider := SLIDER_HORIZONTAL.instantiate()
-	slider.name = label_text.replace(".", "") + "Slider"
-	slider.position = pos
-	slider.rotation_degrees.x = -30
-	slider.scale = Vector3(0.7, 0.7, 0.7)
-	var lbl = slider.get_node_or_null("Frame/LabelName")
-	if lbl:
-		lbl.text = label_text
-	_control_panel.add_child(slider)
-	slider.slider_moved.connect(callback)
-	return slider
-
-
-## Add a small text label beneath a push button.
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
+	var save_btn = _control_panel.find_child("Btn_2", true, false)
+	if save_btn:
+		var area = save_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_save_preset)
 
 
 # ── Slider sync ──────────────────────────────────────────────────────

@@ -1,62 +1,57 @@
 extends Node3D
 
-const VRSlider = preload("res://commons/interactables/slider_horizontal.tscn")
-const VRButton = preload("res://commons/interactables/push_button.tscn")
-
 var maze_node: Node
-var width_slider: Node3D
-var height_slider: Node3D
-var speed_slider: Node3D
-var status_label: Label3D
+var _control_panel: Node3D
+var width_slider: Node
+var height_slider: Node
+var speed_slider: Node
 
 func _ready() -> void:
 	maze_node = get_node_or_null("../../MazeGenerator")
 
-	# Status label
-	status_label = Label3D.new()
-	status_label.position = Vector3(0, 0.5, 0)
-	status_label.text = "Maze Generator"
-	status_label.font_size = 48
-	status_label.modulate = Color.WHITE
-	add_child(status_label)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("MAZE GEN", [
+		[
+			{"type": "slider_h", "label": "WIDTH", "default": 0.5},
+			{"type": "slider_h", "label": "HEIGHT", "default": 0.5},
+			{"type": "slider_h", "label": "SPEED", "default": 0.5},
+		],
+		[
+			{"type": "button", "label": "GENERATE"},
+		],
+	])
+	_control_panel.position = Vector3(0, 0.35, 0)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_control_panel)
 
-	# Width slider
-	width_slider = VRSlider.instantiate()
-	width_slider.position = Vector3(0, 0.3, 0)
-	add_child(width_slider)
-	width_slider.set_param_name("Width")
-	width_slider.slider_moved.connect(_on_width_changed)
+	width_slider = _control_panel.find_child("Param_0", true, false)
+	height_slider = _control_panel.find_child("Param_1", true, false)
+	speed_slider = _control_panel.find_child("Param_2", true, false)
 
-	# Height slider
-	height_slider = VRSlider.instantiate()
-	height_slider.position = Vector3(0, 0.18, 0)
-	add_child(height_slider)
-	height_slider.set_param_name("Height")
-	height_slider.slider_moved.connect(_on_height_changed)
+	if width_slider:
+		width_slider.slider_moved.connect(_on_width_changed)
+	if height_slider:
+		height_slider.slider_moved.connect(_on_height_changed)
+	if speed_slider:
+		speed_slider.slider_moved.connect(_on_speed_changed)
 
-	# Speed slider
-	speed_slider = VRSlider.instantiate()
-	speed_slider.position = Vector3(0, 0.06, 0)
-	add_child(speed_slider)
-	speed_slider.set_param_name("Speed")
-	speed_slider.slider_moved.connect(_on_speed_changed)
-
-	# Generate button
-	var gen_btn = VRButton.instantiate()
-	gen_btn.position = Vector3(0, -0.1, 0)
-	add_child(gen_btn)
-	var gen_area = gen_btn.get_node_or_null("InteractableAreaButton")
-	if gen_area:
-		gen_area.button_pressed.connect(_on_restart_pressed)
+	var gen_btn = _control_panel.find_child("Btn_0", true, false)
+	if gen_btn:
+		var area = gen_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_restart_pressed())
 
 	_update_ui()
 
 func _update_ui() -> void:
 	if not maze_node:
 		return
-	width_slider.set_normalized_value(remap(maze_node.maze_width, 3, 30, 0.0, 1.0))
-	height_slider.set_normalized_value(remap(maze_node.maze_height, 3, 30, 0.0, 1.0))
-	speed_slider.set_normalized_value(remap(maze_node.generation_speed, 0.01, 0.54, 0.0, 1.0))
+	if width_slider:
+		width_slider.set_normalized_value(remap(maze_node.maze_width, 3, 30, 0.0, 1.0))
+	if height_slider:
+		height_slider.set_normalized_value(remap(maze_node.maze_height, 3, 30, 0.0, 1.0))
+	if speed_slider:
+		speed_slider.set_normalized_value(remap(maze_node.generation_speed, 0.01, 0.54, 0.0, 1.0))
 
 func _on_restart_pressed() -> void:
 	if not maze_node:

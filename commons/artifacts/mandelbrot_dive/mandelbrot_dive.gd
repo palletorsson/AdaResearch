@@ -96,9 +96,6 @@ var _zoom_slider: Node
 var _palette_slider: Node
 var _control_panel: Node3D
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-
 const MANDELBROT_SHADER = """
 shader_type spatial;
 render_mode unshaded, cull_disabled;
@@ -236,106 +233,57 @@ func _create_info_label() -> void:
 	_created_nodes.append(_info_label)
 	_update_info_label()
 
-## Assembles VR control panel with sliders and buttons for zoom, palette, and navigation.
+## Assembles VR control panel with sliders and buttons via RackTemplates.
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var log_zoom_norm := (log(zoom) / log(10) - ZOOM_LOG_MIN) / ZOOM_LOG_RANGE
+	_control_panel = RackTpl.create_panel("MANDELBROT", [
+		[
+			{"type": "slider_h", "label": "ZOOM", "default": clampf(log_zoom_norm, 0, 1)},
+			{"type": "slider_h", "label": "COLOR", "default": float(color_scheme) / float(PALETTE_COUNT - 1)},
+		],
+		[
+			{"type": "button", "label": "+"},
+			{"type": "button", "label": "-"},
+			{"type": "button", "label": "DIVE"},
+			{"type": "button", "label": "RST"},
+		],
+	])
 	_control_panel.position = Vector3(0, 0.04, table_size / 2.0 + 0.15)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 	_created_nodes.append(_control_panel)
 
-	_create_panel_backing()
-	_create_sliders()
-	_create_buttons()
+	# Extract slider references
+	_zoom_slider = _control_panel.find_child("Param_0", true, false)
+	_palette_slider = _control_panel.find_child("Param_1", true, false)
+
+	if _zoom_slider and _zoom_slider.has_signal("slider_moved"):
+		_zoom_slider.slider_moved.connect(_on_zoom_slider_moved)
+	if _palette_slider and _palette_slider.has_signal("slider_moved"):
+		_palette_slider.slider_moved.connect(_on_palette_slider_moved)
+
+	# Extract button references and connect callbacks
+	var btn_zoom_in: Node = _control_panel.find_child("Btn_0", true, false)
+	var btn_zoom_out: Node = _control_panel.find_child("Btn_1", true, false)
+	var btn_dive: Node = _control_panel.find_child("Btn_2", true, false)
+	var btn_reset: Node = _control_panel.find_child("Btn_3", true, false)
+
+	_connect_button(btn_zoom_in, func(_b): zoom *= BUTTON_ZOOM_STEP)
+	_connect_button(btn_zoom_out, func(_b): zoom /= BUTTON_ZOOM_STEP)
+	_connect_button(btn_dive, func(_b): auto_zoom = not auto_zoom)
+	_connect_button(btn_reset, _reset)
 
 	call_deferred("_sync_sliders_deferred")
 
-## Adds the dark background mesh behind the control panel.
-func _create_panel_backing() -> void:
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.5, 0.18, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
 
-## Creates zoom and palette VR sliders on the control panel.
-func _create_sliders() -> void:
-	_zoom_slider = SLIDER_HORIZONTAL.instantiate()
-	_zoom_slider.name = "ZoomSlider"
-	_zoom_slider.position = Vector3(-0.12, 0.04, 0)
-	_zoom_slider.rotation_degrees.x = -30
-	var zoom_label = _zoom_slider.get_node_or_null("Frame/LabelName")
-	if zoom_label:
-		zoom_label.text = "ZOOM"
-	_control_panel.add_child(_zoom_slider)
-	_zoom_slider.slider_moved.connect(_on_zoom_slider_moved)
-
-	_palette_slider = SLIDER_HORIZONTAL.instantiate()
-	_palette_slider.name = "PaletteSlider"
-	_palette_slider.position = Vector3(0.12, 0.04, 0)
-	_palette_slider.rotation_degrees.x = -30
-	var palette_label = _palette_slider.get_node_or_null("Frame/LabelName")
-	if palette_label:
-		palette_label.text = "COLOR"
-	_control_panel.add_child(_palette_slider)
-	_palette_slider.slider_moved.connect(_on_palette_slider_moved)
-
-## Creates zoom in/out, dive, and reset push buttons on the control panel.
-func _create_buttons() -> void:
-	var zoom_in_btn = PUSH_BUTTON.instantiate()
-	zoom_in_btn.name = "ZoomInButton"
-	zoom_in_btn.position = Vector3(-0.15, -0.04, 0)
-	zoom_in_btn.rotation_degrees.x = -30
-	_control_panel.add_child(zoom_in_btn)
-	_add_button_label(zoom_in_btn, "+")
-	var zoom_in_area = zoom_in_btn.get_node_or_null("InteractableAreaButton")
-	if zoom_in_area:
-		zoom_in_area.button_pressed.connect(func(_b): zoom *= BUTTON_ZOOM_STEP)
-
-	var zoom_out_btn = PUSH_BUTTON.instantiate()
-	zoom_out_btn.name = "ZoomOutButton"
-	zoom_out_btn.position = Vector3(-0.08, -0.04, 0)
-	zoom_out_btn.rotation_degrees.x = -30
-	_control_panel.add_child(zoom_out_btn)
-	_add_button_label(zoom_out_btn, "-")
-	var zoom_out_area = zoom_out_btn.get_node_or_null("InteractableAreaButton")
-	if zoom_out_area:
-		zoom_out_area.button_pressed.connect(func(_b): zoom /= BUTTON_ZOOM_STEP)
-
-	var dive_btn = PUSH_BUTTON.instantiate()
-	dive_btn.name = "DiveButton"
-	dive_btn.position = Vector3(0.02, -0.04, 0)
-	dive_btn.rotation_degrees.x = -30
-	_control_panel.add_child(dive_btn)
-	_add_button_label(dive_btn, "DIVE")
-	var dive_area = dive_btn.get_node_or_null("InteractableAreaButton")
-	if dive_area:
-		dive_area.button_pressed.connect(func(_b): auto_zoom = not auto_zoom)
-
-	var reset_btn = PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetButton"
-	reset_btn.position = Vector3(0.12, -0.04, 0)
-	reset_btn.rotation_degrees.x = -30
-	_control_panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RST")
-	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		reset_area.button_pressed.connect(_reset)
-
-## Adds a small text label below a push button.
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 12
-	lbl.position = Vector3(0, -0.025, 0)
-	btn.add_child(lbl)
+## Connects a RackTemplates button's InteractableAreaButton to a callback.
+func _connect_button(btn: Node, callback: Callable) -> void:
+	if not btn:
+		return
+	var area: Node = btn.get_node_or_null("InteractableAreaButton")
+	if area and area.has_signal("button_pressed"):
+		area.button_pressed.connect(callback)
 
 ## Deferred call to sync both sliders after scene tree is ready.
 func _sync_sliders_deferred() -> void:

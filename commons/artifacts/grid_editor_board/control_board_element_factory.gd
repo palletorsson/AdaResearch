@@ -14,8 +14,14 @@
 extends RefCounted
 class_name ControlBoardElementFactory
 
-const PUSH_BUTTON  = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_H     = preload("res://commons/interactables/slider_horizontal.tscn")
+static var PUSH_BUTTON: PackedScene
+static var SLIDER_H: PackedScene
+
+static func _ensure_loaded() -> void:
+	if not PUSH_BUTTON:
+		PUSH_BUTTON = load("res://commons/interactables/push_button.tscn")
+	if not SLIDER_H:
+		SLIDER_H = load("res://commons/interactables/slider_horizontal.tscn")
 
 # ── Palette (from control_board.gd) ─────────────────────────────────
 const COL_BEZEL     := Color(0.12, 0.12, 0.14)
@@ -48,6 +54,7 @@ const ANIMATED := [
 # ═════════════════════════════════════════════════════════════════════
 
 static func build_element_3d(element_id: String, cell_size: float) -> Node3D:
+	_ensure_loaded()
 	var CBS = load("res://commons/artifacts/grid_editor_board/control_board_subset.gd")
 	var el: Dictionary = CBS.get_element(element_id)
 	if el.is_empty():

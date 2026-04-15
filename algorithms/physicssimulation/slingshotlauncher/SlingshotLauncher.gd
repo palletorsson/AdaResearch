@@ -51,8 +51,6 @@ var _detection_area: Area3D
 # Arrow showing launch direction
 var _launch_arrow: Node3D
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
 func _ready() -> void:
 	_create_base()
@@ -390,81 +388,49 @@ func _create_labels() -> void:
 	add_child(_info_label)
 
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("SLINGSHOT", [
+		[
+			{"type": "slider_h", "label": "POWER", "default": (launch_force - 5.0) / 35.0},
+			{"type": "slider_h", "label": "ANGLE", "default": (launch_angle_deg - 15.0) / 70.0},
+		],
+		[{"type": "button", "label": "LAUNCH!"}],
+	])
 	_control_panel.position = Vector3(0.7, 0.8, 0)
 	_control_panel.rotation_degrees = Vector3(0, -90, 0)
 	add_child(_control_panel)
 
-	# Panel
-	var panel_back := MeshInstance3D.new()
-	var panel_mesh := BoxMesh.new()
-	panel_mesh.size = Vector3(0.4, 0.18, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat := StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
-
-	# Manual launch button
-	var launch_btn = PUSH_BUTTON.instantiate()
-	launch_btn.name = "LaunchBtn"
-	launch_btn.position = Vector3(0, 0.04, 0)
-	launch_btn.scale = Vector3(0.8, 0.8, 0.8)
-	_control_panel.add_child(launch_btn)
-	_add_button_label(launch_btn, "LAUNCH!")
-	var launch_area = launch_btn.get_node_or_null("InteractableAreaButton")
-	if launch_area:
-		launch_area.button_pressed.connect(func(_b):
-			if _state == State.IDLE or _state == State.CHARGING:
-				_charge_progress = 1.0
-				_state = State.READY
-				_launch()
+	# POWER slider (Param_0)
+	var power_slider: Node = _control_panel.find_child("Param_0", true, false)
+	if power_slider and power_slider.has_signal("slider_moved"):
+		power_slider.slider_moved.connect(func(_pos):
+			if power_slider.has_method("get_normalized_value"):
+				launch_force = 5.0 + power_slider.get_normalized_value() * 35.0
+				_update_trajectory()
+				_update_launch_arrow()
 		)
 
-	# Power slider
-	var power_slider = SLIDER_HORIZONTAL.instantiate()
-	power_slider.name = "PowerSlider"
-	power_slider.position = Vector3(0, -0.02, 0)
-	power_slider.rotation_degrees.x = -30
-	power_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var power_label = power_slider.get_node_or_null("Frame/LabelName")
-	if power_label:
-		power_label.text = "POWER"
-	_control_panel.add_child(power_slider)
-	power_slider.slider_moved.connect(func(_pos):
-		if power_slider.has_method("get_normalized_value"):
-			launch_force = 5.0 + power_slider.get_normalized_value() * 35.0
-			_update_trajectory()
-			_update_launch_arrow()
-	)
+	# ANGLE slider (Param_1)
+	var angle_slider: Node = _control_panel.find_child("Param_1", true, false)
+	if angle_slider and angle_slider.has_signal("slider_moved"):
+		angle_slider.slider_moved.connect(func(_pos):
+			if angle_slider.has_method("get_normalized_value"):
+				launch_angle_deg = 15.0 + angle_slider.get_normalized_value() * 70.0
+				_update_trajectory()
+				_update_launch_arrow()
+		)
 
-	# Angle slider
-	var angle_slider = SLIDER_HORIZONTAL.instantiate()
-	angle_slider.name = "AngleSlider"
-	angle_slider.position = Vector3(0, -0.06, 0)
-	angle_slider.rotation_degrees.x = -30
-	angle_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var angle_label = angle_slider.get_node_or_null("Frame/LabelName")
-	if angle_label:
-		angle_label.text = "ANGLE"
-	_control_panel.add_child(angle_slider)
-	angle_slider.slider_moved.connect(func(_pos):
-		if angle_slider.has_method("get_normalized_value"):
-			launch_angle_deg = 15.0 + angle_slider.get_normalized_value() * 70.0
-			_update_trajectory()
-			_update_launch_arrow()
-	)
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 8
-	lbl.position = Vector3(0, -0.025, 0)
-	btn.add_child(lbl)
+	# LAUNCH button (Btn_0)
+	var launch_btn: Node = _control_panel.find_child("Btn_0", true, false)
+	if launch_btn:
+		var launch_area = launch_btn.get_node_or_null("InteractableAreaButton")
+		if launch_area:
+			launch_area.button_pressed.connect(func(_b):
+				if _state == State.IDLE or _state == State.CHARGING:
+					_charge_progress = 1.0
+					_state = State.READY
+					_launch()
+			)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:

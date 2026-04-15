@@ -49,7 +49,6 @@ var _stats_label: Label3D
 var _accuracy_label: Label3D
 var _circle_mesh: MeshInstance3D
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -358,67 +357,38 @@ func _update_display() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _create_vr_controls() -> void:
-	var panel := Node3D.new()
-	panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("DARTBOARD", [
+		[
+			{"type": "button", "label": "THROW"},
+			{"type": "button", "label": "AUTO"},
+			{"type": "button", "label": "RESET"},
+		],
+	])
 	panel.position = Vector3(0, board_height - board_size / 2.0 - 0.18, 0.12)
 	panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(panel)
 
-	var back := MeshInstance3D.new()
-	var back_mesh := BoxMesh.new()
-	back_mesh.size = Vector3(0.35, 0.07, 0.006)
-	back.mesh = back_mesh
-	var back_mat := StandardMaterial3D.new()
-	back_mat.albedo_color = Color(0.06, 0.06, 0.08)
-	back.material_override = back_mat
-	back.position.z = -0.006
-	panel.add_child(back)
+	# THROW button (Btn_0)
+	var throw_btn: Node = panel.find_child("Btn_0", true, false)
+	if throw_btn:
+		var area = throw_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _throw_dart())
 
-	# THROW button
-	var throw_btn := PUSH_BUTTON.instantiate()
-	throw_btn.name = "ThrowBtn"
-	throw_btn.position = Vector3(-0.1, 0.0, 0)
-	throw_btn.scale = Vector3(0.75, 0.75, 0.75)
-	panel.add_child(throw_btn)
-	_add_button_label(throw_btn, "THROW")
+	# AUTO button (Btn_1)
+	var auto_btn: Node = panel.find_child("Btn_1", true, false)
+	if auto_btn:
+		var area = auto_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): auto_throw = not auto_throw)
 
-	var throw_area := throw_btn.get_node_or_null("InteractableAreaButton")
-	if throw_area:
-		throw_area.button_pressed.connect(func(_b): _throw_dart())
-
-	# AUTO toggle
-	var auto_btn := PUSH_BUTTON.instantiate()
-	auto_btn.name = "AutoBtn"
-	auto_btn.position = Vector3(0.0, 0.0, 0)
-	auto_btn.scale = Vector3(0.65, 0.65, 0.65)
-	panel.add_child(auto_btn)
-	_add_button_label(auto_btn, "AUTO")
-
-	var auto_area := auto_btn.get_node_or_null("InteractableAreaButton")
-	if auto_area:
-		auto_area.button_pressed.connect(func(_b): auto_throw = not auto_throw)
-
-	# RESET button
-	var reset_btn := PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetBtn"
-	reset_btn.position = Vector3(0.1, 0.0, 0)
-	reset_btn.scale = Vector3(0.65, 0.65, 0.65)
-	panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RESET")
-
-	var reset_area := reset_btn.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		reset_area.button_pressed.connect(func(_b): _reset())
-
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 8
-	lbl.position = Vector3(0, -0.022, 0)
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	btn.add_child(lbl)
+	# RESET button (Btn_2)
+	var reset_btn: Node = panel.find_child("Btn_2", true, false)
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _reset())
 
 
 func _reset() -> void:

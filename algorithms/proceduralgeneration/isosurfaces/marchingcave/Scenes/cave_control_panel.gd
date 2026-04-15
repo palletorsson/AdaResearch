@@ -7,14 +7,10 @@ signal chunk_scale_changed(value: float)
 signal next_preset_pressed()
 signal previous_preset_pressed()
 
-const SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
-const ButtonScene = preload("res://commons/interactables/push_button.tscn")
-
 var noise_slider: Node = null
 var iso_slider: Node = null
 var scale_slider: Node = null
 var preset_label: Label3D = null
-var title_label: Label3D = null
 
 # Slider ranges for denormalization
 var noise_min := 1.0
@@ -28,69 +24,48 @@ var scale_max := 150.0
 var scale_default := 100.0
 
 func _ready() -> void:
-	# Title label
-	title_label = Label3D.new()
-	title_label.position = Vector3(0, 0.5, 0)
-	title_label.font_size = 32
-	title_label.text = "Cave Controls"
-	add_child(title_label)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("CAVE SCULPT", [
+		[{"type": "slider_h", "label": "NOISE", "default": inverse_lerp(noise_min, noise_max, noise_default)}],
+		[{"type": "slider_h", "label": "ISO", "default": inverse_lerp(iso_min, iso_max, iso_default)}],
+		[{"type": "slider_h", "label": "SCALE", "default": inverse_lerp(scale_min, scale_max, scale_default)}],
+		[{"type": "button", "label": "PREV"}, {"type": "button", "label": "NEXT"}],
+	])
+	panel.position = Vector3(0, 0.2, 0)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
 
-	# Noise scale slider
-	noise_slider = SliderScene.instantiate()
-	noise_slider.position = Vector3(0, 0.3, 0)
-	add_child(noise_slider)
-	noise_slider.set_param_name("Noise Scale")
-	noise_slider.set_normalized_value(inverse_lerp(noise_min, noise_max, noise_default))
-	noise_slider.slider_moved.connect(_on_noise_slider_moved)
+	# Extract slider refs
+	noise_slider = panel.find_child("Param_0", true, false)
+	iso_slider = panel.find_child("Param_1", true, false)
+	scale_slider = panel.find_child("Param_2", true, false)
 
-	# Iso level slider
-	iso_slider = SliderScene.instantiate()
-	iso_slider.position = Vector3(0, 0.18, 0)
-	add_child(iso_slider)
-	iso_slider.set_param_name("Iso Level")
-	iso_slider.set_normalized_value(inverse_lerp(iso_min, iso_max, iso_default))
-	iso_slider.slider_moved.connect(_on_iso_slider_moved)
+	if noise_slider:
+		noise_slider.slider_moved.connect(_on_noise_slider_moved)
+	if iso_slider:
+		iso_slider.slider_moved.connect(_on_iso_slider_moved)
+	if scale_slider:
+		scale_slider.slider_moved.connect(_on_scale_slider_moved)
 
-	# Chunk scale slider
-	scale_slider = SliderScene.instantiate()
-	scale_slider.position = Vector3(0, 0.06, 0)
-	add_child(scale_slider)
-	scale_slider.set_param_name("Chunk Scale")
-	scale_slider.set_normalized_value(inverse_lerp(scale_min, scale_max, scale_default))
-	scale_slider.slider_moved.connect(_on_scale_slider_moved)
+	# Preset buttons
+	var prev_btn: Node = panel.find_child("Btn_0", true, false)
+	if prev_btn:
+		var prev_area = prev_btn.get_node_or_null("InteractableAreaButton")
+		if prev_area:
+			prev_area.button_pressed.connect(_on_prev_button_pressed)
 
-	# Preset label
+	var next_btn: Node = panel.find_child("Btn_1", true, false)
+	if next_btn:
+		var next_area = next_btn.get_node_or_null("InteractableAreaButton")
+		if next_area:
+			next_area.button_pressed.connect(_on_next_button_pressed)
+
+	# Preset label below panel
 	preset_label = Label3D.new()
 	preset_label.position = Vector3(0, -0.06, 0)
 	preset_label.font_size = 24
 	preset_label.text = "Preset: Default"
-	add_child(preset_label)
-
-	# Previous preset button
-	var prev_btn = ButtonScene.instantiate()
-	prev_btn.position = Vector3(-0.15, -0.18, 0)
-	add_child(prev_btn)
-	var prev_area = prev_btn.get_node_or_null("InteractableAreaButton")
-	if prev_area:
-		prev_area.button_pressed.connect(_on_prev_button_pressed)
-	var prev_lbl = Label3D.new()
-	prev_lbl.position = Vector3(-0.15, -0.24, 0)
-	prev_lbl.font_size = 20
-	prev_lbl.text = "Prev"
-	add_child(prev_lbl)
-
-	# Next preset button
-	var next_btn = ButtonScene.instantiate()
-	next_btn.position = Vector3(0.15, -0.18, 0)
-	add_child(next_btn)
-	var next_area = next_btn.get_node_or_null("InteractableAreaButton")
-	if next_area:
-		next_area.button_pressed.connect(_on_next_button_pressed)
-	var next_lbl = Label3D.new()
-	next_lbl.position = Vector3(0.15, -0.24, 0)
-	next_lbl.font_size = 20
-	next_lbl.text = "Next"
-	add_child(next_lbl)
+	panel.add_child(preset_label)
 
 func _on_noise_slider_moved(_name: String, value: float) -> void:
 	var actual = lerp(noise_min, noise_max, value)

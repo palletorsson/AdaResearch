@@ -79,8 +79,6 @@ var _alignment_slider: Node
 var _cohesion_slider: Node
 var _control_panel: Node3D
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 class BoidData:
 	var position: Vector3
@@ -182,83 +180,37 @@ func _create_labels():
 	_created_nodes.append(_info_label)
 
 func _create_vr_controls():
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("BOIDS", [
+		[
+			{"type": "slider_h", "label": "SEP", "default": separation_weight / 5.0},
+			{"type": "slider_h", "label": "ALIGN", "default": alignment_weight / 5.0},
+			{"type": "slider_h", "label": "COH", "default": cohesion_weight / 5.0},
+		],
+		[{"type": "button", "label": "RESET"}],
+	])
 	_control_panel.position = Vector3(0, -tank_size.y/2 - 0.08, tank_size.z/2 + 0.12)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 	_created_nodes.append(_control_panel)
-	
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.45, 0.15, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
-	
-	# Separation slider (0-5)
-	_separation_slider = SLIDER_HORIZONTAL.instantiate()
-	_separation_slider.name = "SeparationSlider"
-	_separation_slider.position = Vector3(-0.14, 0.02, 0)
-	_separation_slider.rotation_degrees.x = -30
-	var sep_label = _separation_slider.get_node_or_null("Frame/LabelName")
-	if sep_label:
-		sep_label.text = "SEP"
-	_control_panel.add_child(_separation_slider)
-	_separation_slider.slider_moved.connect(_on_separation_slider_moved)
-	
-	# Alignment slider (0-5)
-	_alignment_slider = SLIDER_HORIZONTAL.instantiate()
-	_alignment_slider.name = "AlignmentSlider"
-	_alignment_slider.position = Vector3(0, 0.02, 0)
-	_alignment_slider.rotation_degrees.x = -30
-	var align_label = _alignment_slider.get_node_or_null("Frame/LabelName")
-	if align_label:
-		align_label.text = "ALIGN"
-	_control_panel.add_child(_alignment_slider)
-	_alignment_slider.slider_moved.connect(_on_alignment_slider_moved)
-	
-	# Cohesion slider (0-5)
-	_cohesion_slider = SLIDER_HORIZONTAL.instantiate()
-	_cohesion_slider.name = "CohesionSlider"
-	_cohesion_slider.position = Vector3(0.14, 0.02, 0)
-	_cohesion_slider.rotation_degrees.x = -30
-	var coh_label = _cohesion_slider.get_node_or_null("Frame/LabelName")
-	if coh_label:
-		coh_label.text = "COH"
-	_control_panel.add_child(_cohesion_slider)
-	_cohesion_slider.slider_moved.connect(_on_cohesion_slider_moved)
-	
-	# Reset button
-	var reset_btn = PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetButton"
-	reset_btn.position = Vector3(0, -0.04, 0)
-	reset_btn.rotation_degrees.x = -30
-	_control_panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RESET")
-	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		reset_area.button_pressed.connect(_respawn_boids)
-	
-	call_deferred("_sync_sliders_deferred")
 
-func _add_button_label(btn: Node, text: String):
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 10
-	lbl.position = Vector3(0, -0.025, 0)
-	btn.add_child(lbl)
+	_separation_slider = _control_panel.find_child("Param_0", true, false)
+	if _separation_slider and _separation_slider.has_signal("slider_moved"):
+		_separation_slider.slider_moved.connect(_on_separation_slider_moved)
 
-func _sync_sliders_deferred():
-	_sync_separation_slider()
-	_sync_alignment_slider()
-	_sync_cohesion_slider()
+	_alignment_slider = _control_panel.find_child("Param_1", true, false)
+	if _alignment_slider and _alignment_slider.has_signal("slider_moved"):
+		_alignment_slider.slider_moved.connect(_on_alignment_slider_moved)
+
+	_cohesion_slider = _control_panel.find_child("Param_2", true, false)
+	if _cohesion_slider and _cohesion_slider.has_signal("slider_moved"):
+		_cohesion_slider.slider_moved.connect(_on_cohesion_slider_moved)
+
+	var reset_btn: Node = _control_panel.find_child("Btn_0", true, false)
+	if reset_btn:
+		var area: Node = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_respawn_boids)
 
 func _sync_separation_slider():
 	if _separation_slider and _separation_slider.has_method("set_normalized_value"):

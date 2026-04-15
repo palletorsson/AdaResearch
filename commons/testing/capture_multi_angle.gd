@@ -280,16 +280,7 @@ func _run_artifact_capture() -> void:
 		if child is WorldEnvironment:
 			has_own_env = true
 			break
-	if not has_own_env:
-		var ground := MeshInstance3D.new()
-		var ground_mesh := PlaneMesh.new()
-		ground_mesh.size = Vector2(16, 16)
-		ground.mesh = ground_mesh
-		var ground_mat := StandardMaterial3D.new()
-		ground_mat.albedo_color = Color(0.13, 0.13, 0.16)
-		ground_mat.roughness = 0.95
-		ground.material_override = ground_mat
-		scene_root.add_child(ground)
+	# Ground plane removed — was clipping interactive panels at low Y positions
 
 	# Compute AABB for framing
 	var aabb: AABB = _get_combined_aabb(artifact as Node3D)

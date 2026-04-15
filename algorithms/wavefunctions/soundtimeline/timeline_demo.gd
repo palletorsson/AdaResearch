@@ -8,8 +8,6 @@ var demo_sounds: Array[Dictionary] = []
 @onready var timeline_scene = preload("res://algorithms/wavefunctions/soundtimeline/sound_timeline.tscn")
 var timeline_instance: Node3D
 
-# VR push button scene
-const PushButtonScene = preload("res://commons/interactables/push_button.tscn")
 
 # Label3D nodes
 var _title_label: Label3D
@@ -56,57 +54,34 @@ func create_timeline() -> void:
 	timeline_instance.position = Vector3(0, -0.15, 0)
 
 func setup_demo_ui() -> void:
-	"""Create VR-compatible demo UI with Label3D and push buttons"""
-	# Title
-	_title_label = Label3D.new()
-	_title_label.text = "Sound Timeline Demo"
-	_title_label.font_size = 72
-	_title_label.pixel_size = 0.001
-	_title_label.no_depth_test = false
-	_title_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	_title_label.modulate = Color.WHITE
-	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	_title_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	_title_label.position = Vector3(0.02, 0, 0)
-	add_child(_title_label)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
 
-	# Instructions
+	# Instructions label above panel
 	_instructions_label = Label3D.new()
-	_instructions_label.text = "Press buttons to generate audio patterns and see them visualized."
-	_instructions_label.font_size = 42
-	_instructions_label.pixel_size = 0.001
-	_instructions_label.no_depth_test = false
-	_instructions_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_instructions_label.text = "Press buttons to generate audio patterns."
+	_instructions_label.font_size = 20
 	_instructions_label.modulate = Color.YELLOW
-	_instructions_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	_instructions_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	_instructions_label.position = Vector3(0.02, -0.04, 0)
+	_instructions_label.position = Vector3(0, 0.12, 0)
 	add_child(_instructions_label)
 
-	# Create push buttons for each demo sound
-	var button_spacing = 0.1
+	# Build button row from demo sound names
+	var btn_row: Array = []
 	for i in range(demo_sounds.size()):
-		var btn = PushButtonScene.instantiate()
-		btn.position = Vector3(0.02 + i * button_spacing, -0.08, 0)
-		add_child(btn)
-		_demo_buttons.append(btn)
+		btn_row.append({"type": "button", "label": demo_sounds[i]["name"].substr(0, 8).to_upper()})
 
-		# Add label to button
-		var lbl = Label3D.new()
-		lbl.text = demo_sounds[i]["name"]
-		lbl.font_size = 28
-		lbl.pixel_size = 0.001
-		lbl.no_depth_test = false
-		lbl.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-		lbl.modulate = Color.WHITE
-		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lbl.position = Vector3(0, 0.03, 0.01)
-		btn.add_child(lbl)
+	var panel: Node3D = RackTpl.create_panel("TIMELINE DEMO", [btn_row])
+	panel.position = Vector3(0, 0, 0)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
 
-		# Connect button press
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(_on_demo_button_pressed.bind(i))
+	# Connect demo buttons
+	for i in range(demo_sounds.size()):
+		var btn: Node = panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			_demo_buttons.append(btn)
+			var area = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(_on_demo_button_pressed.bind(i))
 
 func _on_demo_button_pressed(demo_index: int) -> void:
 	if demo_index < demo_sounds.size():

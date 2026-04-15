@@ -5,11 +5,10 @@ class_name GeneticProgrammingInterface
 
 @export var evolution_engine: NodePath
 
-const VRButton = preload("res://commons/interactables/push_button.tscn")
-
 var engine: Node3D
 var selected_genome_index: int = -1
 var status_label: Label3D
+var _control_panel: Node3D
 
 func _ready() -> void:
 	if evolution_engine:
@@ -18,37 +17,32 @@ func _ready() -> void:
 	setup_ui()
 
 func setup_ui() -> void:
-	# Title label
-	var title = Label3D.new()
-	title.position = Vector3(0, 0.5, 0)
-	title.text = "Interactive Evolution"
-	title.font_size = 48
-	title.modulate = Color.WHITE
-	add_child(title)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("GENETIC PROG", [
+		[
+			{"type": "label", "label": "Click forms to select"},
+		],
+		[
+			{"type": "button", "label": "EVOLVE"},
+			{"type": "button", "label": "RANDOM"},
+		],
+	])
+	_control_panel.position = Vector3(0, 0.3, 0.3)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_control_panel)
 
-	# Info label
-	var info = Label3D.new()
-	info.position = Vector3(0, 0.38, 0)
-	info.text = "Click on forms to select favorites"
-	info.font_size = 32
-	info.modulate = Color.LIGHT_GRAY
-	add_child(info)
+	# Connect button signals
+	var evolve_btn = _control_panel.find_child("Btn_0", true, false)
+	if evolve_btn:
+		var evolve_area = evolve_btn.get_node_or_null("InteractableAreaButton")
+		if evolve_area:
+			evolve_area.button_pressed.connect(func(_b): _on_evolve_selected())
 
-	# Evolve Selected button
-	var evolve_btn = VRButton.instantiate()
-	evolve_btn.position = Vector3(-0.1, 0.2, 0)
-	add_child(evolve_btn)
-	var evolve_area = evolve_btn.get_node_or_null("InteractableAreaButton")
-	if evolve_area:
-		evolve_area.button_pressed.connect(_on_evolve_selected)
-
-	# Random Evolution button
-	var random_btn = VRButton.instantiate()
-	random_btn.position = Vector3(0.1, 0.2, 0)
-	add_child(random_btn)
-	var random_area = random_btn.get_node_or_null("InteractableAreaButton")
-	if random_area:
-		random_area.button_pressed.connect(_on_random_evolution)
+	var random_btn = _control_panel.find_child("Btn_1", true, false)
+	if random_btn:
+		var random_area = random_btn.get_node_or_null("InteractableAreaButton")
+		if random_area:
+			random_area.button_pressed.connect(func(_b): _on_random_evolution())
 
 	# Stats label
 	status_label = Label3D.new()

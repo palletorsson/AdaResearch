@@ -28,8 +28,6 @@ class_name AirMusicDisplayCase
 ## Scale of content inside the case relative to case size
 @export_range(0.1, 1.0, 0.05) var inner_scale: float = 0.35
 
-var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
-
 var air_music_instance: Node3D
 var _volume_slider: Node3D
 
@@ -124,14 +122,19 @@ func _adjust_audio():
 			# Make the intensity cycle longer for more ambient feel
 			intensity.set("period", 90.0)
 
-## Adds a VR volume slider below the display case.
+## Adds a VR volume slider below the display case via RackTemplates.
 func _setup_controls():
-	_volume_slider = SliderScene.instantiate()
-	_volume_slider.position = Vector3(0, (-0.5 * case_scale) - base_height - 0.05, 0.3)
-	_volume_slider.set_param_name("Volume")
-	_volume_slider.set_normalized_value(remap(audio_volume_db, -40.0, 0.0, 0.0, 1.0))
-	_volume_slider.slider_moved.connect(_on_volume_changed)
-	add_child(_volume_slider)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("AIR MUSIC", [
+		[{"type": "slider_h", "label": "VOLUME", "default": remap(audio_volume_db, -40.0, 0.0, 0.0, 1.0)}],
+	])
+	panel.position = Vector3(0, (-0.5 * case_scale) - base_height - 0.05, 0.3)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
+
+	_volume_slider = panel.find_child("Param_0", true, false)
+	if _volume_slider:
+		_volume_slider.slider_moved.connect(_on_volume_changed)
 
 func _on_volume_changed():
 	var val = _volume_slider.get_normalized_value()

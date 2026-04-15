@@ -111,8 +111,6 @@ var _control_panel: Node3D
 var _temp_slider: Node
 var _rate_slider: Node
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 
 func _init() -> void:
@@ -593,87 +591,40 @@ func _update_labels() -> void:
 # ═══════════════════════════════════════════════════
 
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("ANNEALING", [
+		[
+			{"type": "slider_h", "label": "TEMP", "default": initial_temperature / 200.0},
+			{"type": "slider_h", "label": "COOL", "default": (cooling_rate - 0.8) / 0.19},
+		],
+		[
+			{"type": "button", "label": "RESET"},
+			{"type": "button", "label": "HOP"},
+		],
+	])
 	_control_panel.position = Vector3(0, 0.02, surface_size / 2.0 + 0.2)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.55, 0.14, 0.008)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.12)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.008
-	_control_panel.add_child(panel_back)
+	_temp_slider = _control_panel.find_child("Param_0", true, false)
+	_rate_slider = _control_panel.find_child("Param_1", true, false)
 
-	# Temperature slider
-	_temp_slider = SLIDER_HORIZONTAL.instantiate()
-	_temp_slider.name = "TempSlider"
-	_temp_slider.position = Vector3(-0.15, 0.02, 0)
-	_temp_slider.rotation_degrees.x = -30
-	_temp_slider.scale = Vector3(0.7, 0.7, 0.7)
-	var temp_label = _temp_slider.get_node_or_null("Frame/LabelName")
-	if temp_label:
-		temp_label.text = "TEMP"
-	_control_panel.add_child(_temp_slider)
-	_temp_slider.slider_moved.connect(_on_temp_changed)
+	if _temp_slider and _temp_slider.has_signal("slider_moved"):
+		_temp_slider.slider_moved.connect(_on_temp_changed)
+	if _rate_slider and _rate_slider.has_signal("slider_moved"):
+		_rate_slider.slider_moved.connect(_on_rate_changed)
 
-	# Cooling rate slider
-	_rate_slider = SLIDER_HORIZONTAL.instantiate()
-	_rate_slider.name = "RateSlider"
-	_rate_slider.position = Vector3(0.0, 0.02, 0)
-	_rate_slider.rotation_degrees.x = -30
-	_rate_slider.scale = Vector3(0.7, 0.7, 0.7)
-	var rate_label = _rate_slider.get_node_or_null("Frame/LabelName")
-	if rate_label:
-		rate_label.text = "COOL"
-	_control_panel.add_child(_rate_slider)
-	_rate_slider.slider_moved.connect(_on_rate_changed)
+	var reset_btn: Node = _control_panel.find_child("Btn_0", true, false)
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _reset_optimization())
 
-	# Reset button
-	var reset_btn = PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetBtn"
-	reset_btn.position = Vector3(0.16, 0.02, 0)
-	reset_btn.scale = Vector3(0.6, 0.6, 0.6)
-	_control_panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RESET")
-	var area = reset_btn.get_node_or_null("InteractableAreaButton")
-	if area:
-		area.button_pressed.connect(func(_b): _reset_optimization())
-
-	# Basin hop button
-	var hop_btn = PUSH_BUTTON.instantiate()
-	hop_btn.name = "HopBtn"
-	hop_btn.position = Vector3(0.24, 0.02, 0)
-	hop_btn.scale = Vector3(0.6, 0.6, 0.6)
-	_control_panel.add_child(hop_btn)
-	_add_button_label(hop_btn, "HOP")
-	var hop_area = hop_btn.get_node_or_null("InteractableAreaButton")
-	if hop_area:
-		hop_area.button_pressed.connect(func(_b): _perform_basin_hop())
-
-	call_deferred("_sync_sliders")
-
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
-
-
-func _sync_sliders() -> void:
-	if _temp_slider and _temp_slider.has_method("set_normalized_value"):
-		_temp_slider.set_normalized_value(initial_temperature / 200.0)
-	if _rate_slider and _rate_slider.has_method("set_normalized_value"):
-		_rate_slider.set_normalized_value((cooling_rate - 0.8) / 0.19)
+	var hop_btn: Node = _control_panel.find_child("Btn_1", true, false)
+	if hop_btn:
+		var hop_area = hop_btn.get_node_or_null("InteractableAreaButton")
+		if hop_area:
+			hop_area.button_pressed.connect(func(_b): _perform_basin_hop())
 
 
 func _on_temp_changed(_pos) -> void:

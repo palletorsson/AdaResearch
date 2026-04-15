@@ -83,12 +83,7 @@ var _info_label: Label3D
 var _stats_label: Label3D
 
 # VR controls
-const SLIDER_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
-const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
-var _mode_button: Node3D
-var _reset_button: Node3D
-var _noise_slider: Node3D
-var _coupling_slider: Node3D
+var _control_rack: Node3D
 
 # Colors
 const COL_AGENT_ALIGNED := Color(0.2, 0.85, 0.95)
@@ -240,51 +235,34 @@ func _create_labels() -> void:
 # =========================================================================
 
 func _create_vr_controls() -> void:
-	var ctrl_y := -field_size * 0.5 - 1.0
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_rack = RackTpl.create_panel("SELF-ORG", [
+		[{"type": "slider_h", "label": "NOISE", "default": noise_level}, {"type": "slider_h", "label": "COUPLING", "default": coupling_strength / 3.0}],
+		[{"type": "button", "label": "MODE"}, {"type": "button", "label": "RESET"}],
+	])
+	_control_rack.position = Vector3(0, -field_size * 0.5 - 1.0, 0)
+	_control_rack.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_control_rack)
 
-	# Mode cycle button
-	_mode_button = BUTTON_SCENE.instantiate()
-	_mode_button.position = Vector3(-2.0, ctrl_y, 0)
-	add_child(_mode_button)
-	var mb_area = _mode_button.get_node_or_null("InteractableAreaButton")
-	if mb_area:
-		mb_area.button_pressed.connect(_on_mode_pressed)
-	var mb_label = _mode_button.get_node_or_null("Frame/LabelName")
-	if mb_label:
-		mb_label.text = "Mode"
+	var noise_slider: Node = _control_rack.find_child("Param_0", true, false)
+	if noise_slider and noise_slider.has_signal("slider_moved"):
+		noise_slider.slider_moved.connect(_on_noise_changed)
 
-	# Reset button
-	_reset_button = BUTTON_SCENE.instantiate()
-	_reset_button.position = Vector3(-0.5, ctrl_y, 0)
-	add_child(_reset_button)
-	var rb_area = _reset_button.get_node_or_null("InteractableAreaButton")
-	if rb_area:
-		rb_area.button_pressed.connect(_on_reset_pressed)
-	var rb_label = _reset_button.get_node_or_null("Frame/LabelName")
-	if rb_label:
-		rb_label.text = "Reset"
+	var coupling_slider: Node = _control_rack.find_child("Param_1", true, false)
+	if coupling_slider and coupling_slider.has_signal("slider_moved"):
+		coupling_slider.slider_moved.connect(_on_coupling_changed)
 
-	# Noise/temperature slider
-	_noise_slider = SLIDER_SCENE.instantiate()
-	_noise_slider.position = Vector3(1.2, ctrl_y, 0)
-	add_child(_noise_slider)
-	if _noise_slider.has_method("set_param_name"):
-		_noise_slider.set_param_name("Noise")
-	if _noise_slider.has_method("set_normalized_value"):
-		_noise_slider.set_normalized_value(noise_level)
-	if _noise_slider.has_signal("slider_moved"):
-		_noise_slider.slider_moved.connect(_on_noise_changed)
+	var mode_btn: Node = _control_rack.find_child("Btn_0", true, false)
+	if mode_btn:
+		var area = mode_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_mode_pressed())
 
-	# Coupling strength slider
-	_coupling_slider = SLIDER_SCENE.instantiate()
-	_coupling_slider.position = Vector3(3.0, ctrl_y, 0)
-	add_child(_coupling_slider)
-	if _coupling_slider.has_method("set_param_name"):
-		_coupling_slider.set_param_name("Coupling")
-	if _coupling_slider.has_method("set_normalized_value"):
-		_coupling_slider.set_normalized_value(coupling_strength / 3.0)
-	if _coupling_slider.has_signal("slider_moved"):
-		_coupling_slider.slider_moved.connect(_on_coupling_changed)
+	var reset_btn: Node = _control_rack.find_child("Btn_1", true, false)
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_reset_pressed())
 
 
 func _on_mode_pressed() -> void:
@@ -302,16 +280,18 @@ func _on_reset_pressed() -> void:
 
 
 func _on_noise_changed(_val: float) -> void:
-	if _noise_slider.has_method("get_normalized_value"):
-		noise_level = _noise_slider.get_normalized_value()
+	var slider: Node = _control_rack.find_child("Param_0", true, false)
+	if slider and slider.has_method("get_normalized_value"):
+		noise_level = slider.get_normalized_value()
 		if _mode == Mode.PHASE_TRANSITION:
 			_phase_sweep_active = false
 			_temperature = noise_level * 2.0
 
 
 func _on_coupling_changed(_val: float) -> void:
-	if _coupling_slider.has_method("get_normalized_value"):
-		coupling_strength = _coupling_slider.get_normalized_value() * 3.0
+	var slider: Node = _control_rack.find_child("Param_1", true, false)
+	if slider and slider.has_method("get_normalized_value"):
+		coupling_strength = slider.get_normalized_value() * 3.0
 
 
 # =========================================================================

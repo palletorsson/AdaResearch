@@ -26,9 +26,8 @@ enum Mode { STRAIN, COLLISION, VOLUME }
 
 const MODE_NAMES := ["Strain Energy", "Collision Forces", "Volume Preservation"]
 
-# ── Preloads ─────────────────────────────────────────────────────────
-const SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
-const ButtonScene = preload("res://commons/interactables/push_button.tscn")
+# Controls built via RackTemplates
+var _rack_panel: Node3D
 
 # ── Colors ───────────────────────────────────────────────────────────
 const COL_LOW_STRAIN := Color(0.15, 0.55, 0.95)     # blue — relaxed
@@ -379,47 +378,48 @@ func _create_labels() -> void:
 # ── Controls ─────────────────────────────────────────────────────────
 
 func _create_controls() -> void:
-	var x0 := -0.9
-	var y0 := -0.3
-	var sp := 0.35
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_rack_panel = RackTpl.create_panel("SOFT BODY", [
+		[
+			{"type": "slider_h", "label": "STIFFNESS", "default": -1.0},
+			{"type": "slider_h", "label": "PRESSURE", "default": -1.0},
+			{"type": "slider_h", "label": "SQUEEZE", "default": -1.0},
+		],
+		[
+			{"type": "button", "label": "MODE"},
+		],
+	])
+	_rack_panel.position = Vector3(-0.5, -0.3, 0.3)
+	_rack_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_rack_panel)
+
+	# Extract slider references
+	_slider_stiffness = _rack_panel.find_child("Param_0", true, false)
+	_slider_pressure = _rack_panel.find_child("Param_1", true, false)
+	_slider_squeeze = _rack_panel.find_child("Param_2", true, false)
+
+	# Set initial values
+	if _slider_stiffness and _slider_stiffness.has_method("set_normalized_value"):
+		_slider_stiffness.set_normalized_value(_stiffness)
+	if _slider_pressure and _slider_pressure.has_method("set_normalized_value"):
+		_slider_pressure.set_normalized_value(remap(_pressure, -1.0, 2.0, 0.0, 1.0))
+	if _slider_squeeze and _slider_squeeze.has_method("set_normalized_value"):
+		_slider_squeeze.set_normalized_value(remap(_squeeze_strength, 0.0, 5.0, 0.0, 1.0))
+
+	# Connect slider signals
+	if _slider_stiffness and _slider_stiffness.has_signal("slider_moved"):
+		_slider_stiffness.slider_moved.connect(_on_stiffness_changed)
+	if _slider_pressure and _slider_pressure.has_signal("slider_moved"):
+		_slider_pressure.slider_moved.connect(_on_pressure_changed)
+	if _slider_squeeze and _slider_squeeze.has_signal("slider_moved"):
+		_slider_squeeze.slider_moved.connect(_on_squeeze_changed)
 
 	# Mode button
-	_mode_button = ButtonScene.instantiate()
-	_mode_button.position = Vector3(x0, y0 - 0.15, 0)
-	add_child(_mode_button)
-	var btn_area = _mode_button.get_node_or_null("InteractableAreaButton")
-	if btn_area:
-		btn_area.button_pressed.connect(_cycle_mode)
-	var btn_label = _mode_button.get_node_or_null("Frame/LabelName")
-	if btn_label:
-		btn_label.text = "Mode"
-
-	# Stiffness slider
-	_slider_stiffness = SliderScene.instantiate()
-	_slider_stiffness.position = Vector3(x0 + sp, y0, 0)
-	_slider_stiffness.scale = Vector3(0.3, 0.3, 0.3)
-	add_child(_slider_stiffness)
-	_slider_stiffness.set_param_name("Stiffness")
-	_slider_stiffness.set_normalized_value(_stiffness)
-	_slider_stiffness.slider_moved.connect(_on_stiffness_changed)
-
-	# Pressure slider
-	_slider_pressure = SliderScene.instantiate()
-	_slider_pressure.position = Vector3(x0 + sp * 2, y0, 0)
-	_slider_pressure.scale = Vector3(0.3, 0.3, 0.3)
-	add_child(_slider_pressure)
-	_slider_pressure.set_param_name("Pressure")
-	_slider_pressure.set_normalized_value(remap(_pressure, -1.0, 2.0, 0.0, 1.0))
-	_slider_pressure.slider_moved.connect(_on_pressure_changed)
-
-	# Squeeze strength slider
-	_slider_squeeze = SliderScene.instantiate()
-	_slider_squeeze.position = Vector3(x0 + sp * 3, y0, 0)
-	_slider_squeeze.scale = Vector3(0.3, 0.3, 0.3)
-	add_child(_slider_squeeze)
-	_slider_squeeze.set_param_name("Squeeze")
-	_slider_squeeze.set_normalized_value(remap(_squeeze_strength, 0.0, 5.0, 0.0, 1.0))
-	_slider_squeeze.slider_moved.connect(_on_squeeze_changed)
+	_mode_button = _rack_panel.find_child("Btn_0", true, false)
+	if _mode_button:
+		var btn_area = _mode_button.get_node_or_null("InteractableAreaButton")
+		if btn_area:
+			btn_area.button_pressed.connect(func(_b): _cycle_mode())
 
 
 func _cycle_mode() -> void:

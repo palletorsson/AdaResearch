@@ -85,8 +85,6 @@ var _control_panel: Node3D
 # Signal connections for cleanup
 var _signal_connections: Array[Dictionary] = []
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 const JELLY_COLORS = [
 	Color(0.2, 0.9, 0.5, 0.8),   # Green
@@ -209,99 +207,51 @@ func _create_labels() -> void:
 	_track_node(_info_label)
 
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("JELLY CUBE", [
+		[
+			{"type": "slider_h", "label": "STIFF", "default": stiffness},
+			{"type": "slider_h", "label": "DAMP", "default": damping / 0.1},
+			{"type": "slider_h", "label": "PRESS", "default": pressure / 5.0},
+		],
+		[
+			{"type": "button", "label": "COLOR"},
+			{"type": "button", "label": "RESET"},
+		],
+	])
 	_control_panel.position = Vector3(0, 0.04, cube_size * 0.7 + 0.15)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 	_track_node(_control_panel)
 
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.45, 0.18, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
+	_stiffness_slider = _control_panel.find_child("Param_0", true, false)
+	if _stiffness_slider and _stiffness_slider.has_signal("slider_moved"):
+		_stiffness_slider.slider_moved.connect(_on_stiffness_slider_moved)
+		_track_signal(_stiffness_slider, "slider_moved", _on_stiffness_slider_moved)
 
-	# Stiffness slider (0-1)
-	_stiffness_slider = SLIDER_HORIZONTAL.instantiate()
-	_stiffness_slider.name = "StiffnessSlider"
-	_stiffness_slider.position = Vector3(-0.14, 0.04, 0)
-	_stiffness_slider.rotation_degrees.x = -30
-	var stiff_label = _stiffness_slider.get_node_or_null("Frame/LabelName")
-	if stiff_label:
-		stiff_label.text = "STIFF"
-	_control_panel.add_child(_stiffness_slider)
-	_stiffness_slider.slider_moved.connect(_on_stiffness_slider_moved)
-	_track_signal(_stiffness_slider, "slider_moved", _on_stiffness_slider_moved)
+	_damping_slider = _control_panel.find_child("Param_1", true, false)
+	if _damping_slider and _damping_slider.has_signal("slider_moved"):
+		_damping_slider.slider_moved.connect(_on_damping_slider_moved)
+		_track_signal(_damping_slider, "slider_moved", _on_damping_slider_moved)
 
-	# Damping slider (0-0.1)
-	_damping_slider = SLIDER_HORIZONTAL.instantiate()
-	_damping_slider.name = "DampingSlider"
-	_damping_slider.position = Vector3(0, 0.04, 0)
-	_damping_slider.rotation_degrees.x = -30
-	var damp_label = _damping_slider.get_node_or_null("Frame/LabelName")
-	if damp_label:
-		damp_label.text = "DAMP"
-	_control_panel.add_child(_damping_slider)
-	_damping_slider.slider_moved.connect(_on_damping_slider_moved)
-	_track_signal(_damping_slider, "slider_moved", _on_damping_slider_moved)
+	_pressure_slider = _control_panel.find_child("Param_2", true, false)
+	if _pressure_slider and _pressure_slider.has_signal("slider_moved"):
+		_pressure_slider.slider_moved.connect(_on_pressure_slider_moved)
+		_track_signal(_pressure_slider, "slider_moved", _on_pressure_slider_moved)
 
-	# Pressure slider (0-5)
-	_pressure_slider = SLIDER_HORIZONTAL.instantiate()
-	_pressure_slider.name = "PressureSlider"
-	_pressure_slider.position = Vector3(0.14, 0.04, 0)
-	_pressure_slider.rotation_degrees.x = -30
-	var press_label = _pressure_slider.get_node_or_null("Frame/LabelName")
-	if press_label:
-		press_label.text = "PRESS"
-	_control_panel.add_child(_pressure_slider)
-	_pressure_slider.slider_moved.connect(_on_pressure_slider_moved)
-	_track_signal(_pressure_slider, "slider_moved", _on_pressure_slider_moved)
+	var color_btn: Node = _control_panel.find_child("Btn_0", true, false)
+	if color_btn:
+		var color_area: Node = color_btn.get_node_or_null("InteractableAreaButton")
+		if color_area:
+			color_area.button_pressed.connect(_on_color_pressed)
+			_track_signal(color_area, "button_pressed", _on_color_pressed)
 
-	# Color cycle button
-	var color_btn = PUSH_BUTTON.instantiate()
-	color_btn.name = "ColorButton"
-	color_btn.position = Vector3(-0.08, -0.04, 0)
-	color_btn.rotation_degrees.x = -30
-	_control_panel.add_child(color_btn)
-	_add_button_label(color_btn, "COLOR")
-	var color_area = color_btn.get_node_or_null("InteractableAreaButton")
-	if color_area:
-		color_area.button_pressed.connect(_on_color_pressed)
-		_track_signal(color_area, "button_pressed", _on_color_pressed)
-
-	# Reset button
-	var reset_btn = PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetButton"
-	reset_btn.position = Vector3(0.08, -0.04, 0)
-	reset_btn.rotation_degrees.x = -30
-	_control_panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RST")
-	var reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		reset_area.button_pressed.connect(_reset_physics)
-		_track_signal(reset_area, "button_pressed", _reset_physics)
-
-	call_deferred("_sync_sliders_deferred")
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 10
-	lbl.position = Vector3(0, -0.025, 0)
-	btn.add_child(lbl)
-
-func _sync_sliders_deferred() -> void:
-	_sync_stiffness_slider()
-	_sync_damping_slider()
-	_sync_pressure_slider()
+	var reset_btn: Node = _control_panel.find_child("Btn_1", true, false)
+	if reset_btn:
+		var reset_area: Node = reset_btn.get_node_or_null("InteractableAreaButton")
+		if reset_area:
+			reset_area.button_pressed.connect(_reset_physics)
+			_track_signal(reset_area, "button_pressed", _reset_physics)
 
 func _sync_stiffness_slider() -> void:
 	if _stiffness_slider and _stiffness_slider.has_method("set_normalized_value"):

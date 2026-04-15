@@ -1,9 +1,6 @@
 # TimelineController.gd - VR timeline controls using push buttons
 extends Node3D
 
-# VR push button scene
-const PushButtonScene = preload("res://commons/interactables/push_button.tscn")
-
 # Button references
 var record_button: Node3D
 var play_button: Node3D
@@ -30,77 +27,36 @@ func _ready() -> void:
 	timeline_visualizer.start_recording()
 
 func _create_buttons() -> void:
-	"""Create VR push button instances for transport controls"""
-	var button_spacing = 0.08
-	var button_y = 0.0
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("TIMELINE", [
+		[{"type": "button", "label": "REC"}, {"type": "button", "label": "PLAY"},
+		 {"type": "button", "label": "STOP"}, {"type": "button", "label": "CLEAR"}],
+	])
+	panel.position = Vector3(0, 0, 0)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
 
-	# Record button
-	record_button = PushButtonScene.instantiate()
-	record_button.position = Vector3(0, button_y, 0)
-	add_child(record_button)
-	_record_label = Label3D.new()
-	_record_label.text = "REC"
-	_record_label.font_size = 32
-	_record_label.pixel_size = 0.001
-	_record_label.no_depth_test = false
-	_record_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	_record_label.modulate = Color.RED
-	_record_label.position = Vector3(0, 0.03, 0.01)
-	record_button.add_child(_record_label)
-	var rec_area = record_button.get_node_or_null("InteractableAreaButton")
-	if rec_area:
-		rec_area.button_pressed.connect(_on_record_pressed)
+	record_button = panel.find_child("Btn_0", true, false)
+	play_button = panel.find_child("Btn_1", true, false)
+	stop_button = panel.find_child("Btn_2", true, false)
+	clear_button = panel.find_child("Btn_3", true, false)
 
-	# Play button
-	play_button = PushButtonScene.instantiate()
-	play_button.position = Vector3(button_spacing, button_y, 0)
-	add_child(play_button)
-	_play_label = Label3D.new()
-	_play_label.text = "PLAY"
-	_play_label.font_size = 32
-	_play_label.pixel_size = 0.001
-	_play_label.no_depth_test = false
-	_play_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	_play_label.modulate = Color.GREEN
-	_play_label.position = Vector3(0, 0.03, 0.01)
-	play_button.add_child(_play_label)
-	var play_area = play_button.get_node_or_null("InteractableAreaButton")
-	if play_area:
-		play_area.button_pressed.connect(_on_play_pressed)
-
-	# Stop button
-	stop_button = PushButtonScene.instantiate()
-	stop_button.position = Vector3(button_spacing * 2, button_y, 0)
-	add_child(stop_button)
-	var stop_label = Label3D.new()
-	stop_label.text = "STOP"
-	stop_label.font_size = 32
-	stop_label.pixel_size = 0.001
-	stop_label.no_depth_test = false
-	stop_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	stop_label.modulate = Color.WHITE
-	stop_label.position = Vector3(0, 0.03, 0.01)
-	stop_button.add_child(stop_label)
-	var stop_area = stop_button.get_node_or_null("InteractableAreaButton")
-	if stop_area:
-		stop_area.button_pressed.connect(_on_stop_pressed)
-
-	# Clear button
-	clear_button = PushButtonScene.instantiate()
-	clear_button.position = Vector3(button_spacing * 3, button_y, 0)
-	add_child(clear_button)
-	var clear_label = Label3D.new()
-	clear_label.text = "CLEAR"
-	clear_label.font_size = 32
-	clear_label.pixel_size = 0.001
-	clear_label.no_depth_test = false
-	clear_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	clear_label.modulate = Color.YELLOW
-	clear_label.position = Vector3(0, 0.03, 0.01)
-	clear_button.add_child(clear_label)
-	var clear_area = clear_button.get_node_or_null("InteractableAreaButton")
-	if clear_area:
-		clear_area.button_pressed.connect(_on_clear_pressed)
+	if record_button:
+		var area = record_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_record_pressed)
+	if play_button:
+		var area = play_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_play_pressed)
+	if stop_button:
+		var area = stop_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_stop_pressed)
+	if clear_button:
+		var area = clear_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_clear_pressed)
 
 func _on_record_pressed() -> void:
 	if timeline_visualizer.is_recording:

@@ -39,7 +39,7 @@ const _P = preload("res://commons/ui/ada_palette.gd")
 
 # ── Preloads for VR components ──
 const SLIDER_V_SCENE = preload("res://commons/audio/interfaces/VRAudioControlSliderVertical.tscn")
-const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
+var BUTTON_SCENE: PackedScene
 const SIMPLE_WAVE_SCENE = preload("res://commons/audio/interfaces/VRSimpleWaveform.tscn")
 const SPECTRUM_SCENE = preload("res://commons/audio/interfaces/VRSpectrumDisplay.tscn")
 
@@ -126,6 +126,7 @@ var _panel_mesh: MeshInstance3D
 var _components: Node3D
 
 func _ready() -> void:
+	BUTTON_SCENE = load("res://commons/interactables/push_button.tscn")
 	# Initialize amplitudes to sine preset
 	harmonic_amplitudes.resize(NUM_HARMONICS)
 	target_amplitudes.resize(NUM_HARMONICS)

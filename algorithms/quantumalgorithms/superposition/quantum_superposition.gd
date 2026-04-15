@@ -79,11 +79,6 @@ var _info_label: Label3D
 var _state_label: Label3D
 
 # VR controls
-const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
-var _mode_button: Node3D
-var _gate_button: Node3D  # Cycles gates in GATES mode / steps in TELEPORT
-var _reset_button: Node3D
 var _theta_slider: Node3D
 var _phi_slider: Node3D
 
@@ -215,45 +210,52 @@ func _create_labels() -> void:
 # =========================================================================
 
 func _create_vr_controls() -> void:
-	# Mode cycle button
-	_mode_button = BUTTON_SCENE.instantiate()
-	_mode_button.position = Vector3(-1.6, -1.0, 0)
-	add_child(_mode_button)
-	var btn_mode = _mode_button.get_node_or_null("InteractableAreaButton")
-	if btn_mode:
-		btn_mode.button_pressed.connect(_cycle_mode)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("QUANTUM", [
+		[
+			{"type": "slider_h", "label": "THETA", "default": 0.0},
+			{"type": "slider_h", "label": "PHI", "default": 0.0},
+		],
+		[
+			{"type": "button", "label": "MODE"},
+			{"type": "button", "label": "GATE"},
+			{"type": "button", "label": "RESET"},
+		],
+	])
+	panel.position = Vector3(0.0, -1.0, 0)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
 
-	# Gate / step button
-	_gate_button = BUTTON_SCENE.instantiate()
-	_gate_button.position = Vector3(-0.8, -1.0, 0)
-	add_child(_gate_button)
-	var btn_gate = _gate_button.get_node_or_null("InteractableAreaButton")
-	if btn_gate:
-		btn_gate.button_pressed.connect(_on_gate_pressed)
+	# Theta slider (Param_0)
+	_theta_slider = panel.find_child("Param_0", true, false)
+	if _theta_slider and _theta_slider.has_signal("slider_moved"):
+		_theta_slider.slider_moved.connect(_on_theta_changed)
 
-	# Reset button
-	_reset_button = BUTTON_SCENE.instantiate()
-	_reset_button.position = Vector3(0.0, -1.0, 0)
-	add_child(_reset_button)
-	var btn_reset = _reset_button.get_node_or_null("InteractableAreaButton")
-	if btn_reset:
-		btn_reset.button_pressed.connect(_on_reset)
+	# Phi slider (Param_1)
+	_phi_slider = panel.find_child("Param_1", true, false)
+	if _phi_slider and _phi_slider.has_signal("slider_moved"):
+		_phi_slider.slider_moved.connect(_on_phi_changed)
 
-	# Theta slider (Bloch polar angle)
-	_theta_slider = SLIDER_SCENE.instantiate()
-	_theta_slider.position = Vector3(1.2, -0.8, 0)
-	add_child(_theta_slider)
-	_theta_slider.set_param_name("Theta")
-	_theta_slider.set_normalized_value(0.0)
-	_theta_slider.slider_moved.connect(_on_theta_changed)
+	# MODE button (Btn_0)
+	var mode_btn: Node = panel.find_child("Btn_0", true, false)
+	if mode_btn:
+		var area = mode_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _cycle_mode())
 
-	# Phi slider (Bloch azimuthal angle)
-	_phi_slider = SLIDER_SCENE.instantiate()
-	_phi_slider.position = Vector3(1.2, -1.2, 0)
-	add_child(_phi_slider)
-	_phi_slider.set_param_name("Phi")
-	_phi_slider.set_normalized_value(0.0)
-	_phi_slider.slider_moved.connect(_on_phi_changed)
+	# GATE button (Btn_1)
+	var gate_btn: Node = panel.find_child("Btn_1", true, false)
+	if gate_btn:
+		var area = gate_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_gate_pressed())
+
+	# RESET button (Btn_2)
+	var reset_btn: Node = panel.find_child("Btn_2", true, false)
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_reset())
 
 
 func _cycle_mode() -> void:

@@ -76,7 +76,6 @@ var _peg_area_bottom: float = 0.0
 var _bin_floor_y: float = 0.0
 var _funnel_top_y: float = 0.0
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -768,81 +767,44 @@ func _create_labels() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("GALTON BOARD", [
+		[
+			{"type": "button", "label": "DROP"},
+			{"type": "button", "label": "AUTO"},
+		],
+		[
+			{"type": "button", "label": "RESET"},
+			{"type": "button", "label": "SPEED"},
+		],
+	])
 	_control_panel.position = Vector3(0, -0.06, board_depth / 2.0 + 0.15)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 
-	# Panel backing
-	var panel_back := MeshInstance3D.new()
-	var panel_mesh := BoxMesh.new()
-	panel_mesh.size = Vector3(0.38, 0.08, 0.008)
-	panel_back.mesh = panel_mesh
-	var panel_mat := StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.06, 0.06, 0.08)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.008
-	_control_panel.add_child(panel_back)
+	var drop_btn: Node = _control_panel.find_child("Btn_0", true, false)
+	if drop_btn:
+		var area: Node = drop_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _spawn_ball())
 
-	# DROP button
-	var drop_btn := PUSH_BUTTON.instantiate()
-	drop_btn.name = "DropBtn"
-	drop_btn.position = Vector3(-0.12, 0.0, 0)
-	drop_btn.scale = Vector3(0.7, 0.7, 0.7)
-	_control_panel.add_child(drop_btn)
-	_add_button_label(drop_btn, "DROP")
+	var auto_btn: Node = _control_panel.find_child("Btn_1", true, false)
+	if auto_btn:
+		var area2: Node = auto_btn.get_node_or_null("InteractableAreaButton")
+		if area2:
+			area2.button_pressed.connect(func(_b): auto_drop = not auto_drop)
 
-	var drop_area := drop_btn.get_node_or_null("InteractableAreaButton")
-	if drop_area:
-		drop_area.button_pressed.connect(func(_b): _spawn_ball())
+	var reset_btn: Node = _control_panel.find_child("Btn_2", true, false)
+	if reset_btn:
+		var area3: Node = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area3:
+			area3.button_pressed.connect(func(_b): _reset_board())
 
-	# AUTO toggle
-	var auto_btn := PUSH_BUTTON.instantiate()
-	auto_btn.name = "AutoBtn"
-	auto_btn.position = Vector3(-0.04, 0.0, 0)
-	auto_btn.scale = Vector3(0.7, 0.7, 0.7)
-	_control_panel.add_child(auto_btn)
-	_add_button_label(auto_btn, "AUTO")
-
-	var auto_area := auto_btn.get_node_or_null("InteractableAreaButton")
-	if auto_area:
-		auto_area.button_pressed.connect(func(_b): auto_drop = not auto_drop)
-
-	# RESET button
-	var reset_btn := PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetBtn"
-	reset_btn.position = Vector3(0.04, 0.0, 0)
-	reset_btn.scale = Vector3(0.7, 0.7, 0.7)
-	_control_panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RESET")
-
-	var reset_area := reset_btn.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		reset_area.button_pressed.connect(func(_b): _reset_board())
-
-	# SPEED button (cycle speed)
-	var speed_btn := PUSH_BUTTON.instantiate()
-	speed_btn.name = "SpeedBtn"
-	speed_btn.position = Vector3(0.12, 0.0, 0)
-	speed_btn.scale = Vector3(0.7, 0.7, 0.7)
-	_control_panel.add_child(speed_btn)
-	_add_button_label(speed_btn, "SPEED")
-
-	var speed_area := speed_btn.get_node_or_null("InteractableAreaButton")
-	if speed_area:
-		speed_area.button_pressed.connect(func(_b): _cycle_speed())
-
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 18
-	lbl.position = Vector3(0, -0.022, 0)
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	btn.add_child(lbl)
+	var speed_btn: Node = _control_panel.find_child("Btn_3", true, false)
+	if speed_btn:
+		var area4: Node = speed_btn.get_node_or_null("InteractableAreaButton")
+		if area4:
+			area4.button_pressed.connect(func(_b): _cycle_speed())
 
 
 func _cycle_speed() -> void:

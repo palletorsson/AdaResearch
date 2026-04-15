@@ -2219,7 +2219,7 @@
 			"lookup_name": "grid_snapper",
 			"name": "grid_snapper",
 			"description": "grid_snapper",
-			"scene": "res://algorithms/array/grid_snapper.tscn",
+			"scene": "res://algorithms/arrays/grid_snapper.tscn",
 			"category": "unknown",
 			"include_in_map_data": true,
 			"map_ready": true,
@@ -2251,7 +2251,7 @@
 			"lookup_name": "mondrian_run",
 			"name": "mondrian_run",
 			"description": "mondrian_run",
-			"scene": "res://algorithms/array/mondrian_grid/mondrian_run.tscn",
+			"scene": "res://algorithms/arrays/mondrian_grid/mondrian_run.tscn",
 			"category": "unknown",
 			"include_in_map_data": true,
 			"map_ready": true,
@@ -2283,7 +2283,7 @@
 			"lookup_name": "grid_editor_main",
 			"name": "grid_editor_main",
 			"description": "grid_editor_main",
-			"scene": "res://algorithms/array/grid_editor/grid_editor_main.tscn",
+			"scene": "res://algorithms/arrays/grid_editor/grid_editor_main.tscn",
 			"category": "unknown",
 			"include_in_map_data": true,
 			"map_ready": true,
@@ -5247,6 +5247,78 @@
 				"instance_strategy": "array",
 				"vertex_estimate": "~16"
 			}
+		},
+		"grid_model": {
+			"name": "Grid Model",
+			"lookup_name": "grid_model",
+			"description": "Miniature interactive model of the map grid — grab cubes to reshape terrain. Teaches layout_data[z][x] = height as a physical 2D array.",
+			"scene": "res://algorithms/arrays/grid_model/grid_model.tscn",
+			"category": "interactive",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"sequence": "array_tutorial",
+			"complexity": "beginner",
+			"tags": [
+				"arrays",
+				"2d_array",
+				"grid",
+				"data_structure",
+				"map_editing"
+			],
+			"dev_themes": [
+				"arrays",
+				"data_structures",
+				"spatial_computing"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_closed",
+				"construction": {
+					"method": "procedural",
+					"primitives": [
+						"box"
+					],
+					"operations": [
+						"stack",
+						"snap_grid"
+					]
+				},
+				"material": {
+					"type": "shader",
+					"shading_model": "custom"
+				},
+				"animation": {
+					"type": "interactive",
+					"driven_by": "user_input",
+					"affects": [
+						"position",
+						"color"
+					]
+				},
+				"instance_strategy": "dynamic",
+				"vertex_estimate": "~200-2000"
+			}
+		},
+		"pattern_tile_plate": {
+			"name": "Pattern Tile Plate",
+			"lookup_name": "pattern_tile_plate",
+			"description": "Dieter Rams-styled pattern studio. Paint a 4x4 grid, see it tile into a carpet using 17 wallpaper symmetry groups. Integrated cream plate with palette, preview, and symmetry controls.",
+			"scene": "res://commons/primitives/arrays/pattern_tile_plate.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"sequence": "array_tutorial",
+			"complexity": "intermediate",
+			"tags": [
+				"2d",
+				"pattern",
+				"primitives",
+				"interactive",
+				"dieter_rams"
+			]
 		}
 	}
 }

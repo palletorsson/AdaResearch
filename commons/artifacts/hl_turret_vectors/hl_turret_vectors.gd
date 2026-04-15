@@ -170,9 +170,6 @@ var _turret_yaw: float = 0.0
 var _turret_pitch: float = 0.0
 
 # Preloads
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-
 # Ball colors for cycling
 const BALL_COLORS = [
 	Color(0.2, 0.8, 1.0),   # Cyan
@@ -1135,92 +1132,47 @@ func _create_info_panels():
 #region VR Controls
 ## Build the VR control panel with sliders and buttons
 func _create_vr_controls():
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("TURRET VECTORS", [
+		[
+			{"type": "slider_h", "label": "FOV", "default": inverse_lerp(30.0, 180.0, field_of_view_degrees)},
+			{"type": "slider_h", "label": "RATE", "default": inverse_lerp(0.5, 10.0, fire_rate)},
+		],
+		[
+			{"type": "slider_h", "label": "SPEED", "default": inverse_lerp(1.0, 10.0, bullet_speed)},
+		],
+		[
+			{"type": "button", "label": "NEW BALL"},
+			{"type": "button", "label": "FIRE"},
+		],
+	])
 	_control_panel.position = Vector3(0, 0.08, max_range + 0.5)
-	_control_panel.rotation_degrees = Vector3(-35, 0, 0)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(_control_panel)
 
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.65, 0.28, 0.015)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.06, 0.06, 0.08)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
+	_fov_slider = _control_panel.find_child("Param_0", true, false)
+	if _fov_slider and _fov_slider.has_signal("slider_moved"):
+		_fov_slider.slider_moved.connect(func(_n): _on_fov_changed(_fov_slider.get_normalized_value()))
 
-	var title = Label3D.new()
-	title.text = "TURRET CONTROLS"
-	title.pixel_size = 0.001
-	title.font_size = 14
-	title.position = Vector3(0, 0.11, 0.01)
-	_control_panel.add_child(title)
+	_fire_rate_slider = _control_panel.find_child("Param_1", true, false)
+	if _fire_rate_slider and _fire_rate_slider.has_signal("slider_moved"):
+		_fire_rate_slider.slider_moved.connect(func(_n): _on_fire_rate_changed(_fire_rate_slider.get_normalized_value()))
 
-	_fov_slider = _create_control_slider("FOVSlider", "FOV", Vector3(-0.2, 0.05, 0.01), _on_fov_changed)
-	_fire_rate_slider = _create_control_slider("FireRateSlider", "RATE", Vector3(-0.2, 0.0, 0.01), _on_fire_rate_changed)
-	_bullet_speed_slider = _create_control_slider("BulletSpeedSlider", "SPEED", Vector3(-0.2, -0.05, 0.01), _on_bullet_speed_changed)
+	_bullet_speed_slider = _control_panel.find_child("Param_2", true, false)
+	if _bullet_speed_slider and _bullet_speed_slider.has_signal("slider_moved"):
+		_bullet_speed_slider.slider_moved.connect(func(_n): _on_bullet_speed_changed(_bullet_speed_slider.get_normalized_value()))
 
-	_spawn_ball_button = _create_control_button("SpawnBallButton", "NEW BALL", Vector3(0.18, 0.03, 0.01), _spawn_new_ball)
-	_toggle_shooting_button = _create_control_button("ToggleShootingButton", "FIRE: ON", Vector3(0.18, -0.05, 0.01), _toggle_shooting)
+	_spawn_ball_button = _control_panel.find_child("Btn_0", true, false)
+	if _spawn_ball_button:
+		var area: Node = _spawn_ball_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _spawn_new_ball())
 
-## Helper: instantiate a slider, label it, connect signal
-func _create_control_slider(slider_name: String, label_text: String, pos: Vector3, callback: Callable) -> Node:
-	var slider = SLIDER_HORIZONTAL.instantiate()
-	slider.name = slider_name
-	slider.position = pos
-	slider.scale = Vector3(0.8, 0.8, 0.8)
-	_control_panel.add_child(slider)
-	_add_slider_label(slider, label_text, -0.12)
-	_connect_slider(slider, callback)
-	return slider
-
-## Helper: instantiate a push button, label it, connect signal
-func _create_control_button(btn_name: String, label_text: String, pos: Vector3, callback: Callable) -> Node:
-	var btn = PUSH_BUTTON.instantiate()
-	btn.name = btn_name
-	btn.position = pos
-	_control_panel.add_child(btn)
-	_add_button_label(btn, label_text)
-	_connect_button(btn, callback)
-	return btn
-
-## Add a label to a slider
-func _add_slider_label(slider: Node, text: String, x_offset: float):
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 10
-	lbl.position = Vector3(x_offset, 0, 0)
-	slider.add_child(lbl)
-
-## Add a label below a button
-func _add_button_label(btn: Node, text: String):
-	var lbl = Label3D.new()
-	lbl.name = "ButtonLabel"
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 9
-	lbl.position = Vector3(0, -0.03, 0)
-	btn.add_child(lbl)
-
-## Connect slider's value_changed signal after one frame
-func _connect_slider(slider: Node, callback: Callable):
-	await get_tree().process_frame
-	var interactable = slider.get_node_or_null("SliderHorizontal")
-	if interactable and interactable.has_signal("value_changed"):
-		interactable.value_changed.connect(callback)
-
-## Connect push button's pressed signal after one frame
-func _connect_button(btn: Node, callback: Callable):
-	await get_tree().process_frame
-	var interactable = btn.get_node_or_null("InteractableAreaButton")
-	if interactable and interactable.has_signal("button_pressed"):
-		interactable.button_pressed.connect(func(_b): callback.call())
-	if btn.has_signal("pressed"):
-		btn.pressed.connect(callback)
+	_toggle_shooting_button = _control_panel.find_child("Btn_1", true, false)
+	if _toggle_shooting_button:
+		var area: Node = _toggle_shooting_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _toggle_shooting())
 
 func _on_fov_changed(value: float):
 	field_of_view_degrees = lerp(30.0, 180.0, value)
@@ -1231,33 +1183,24 @@ func _on_fire_rate_changed(value: float):
 func _on_bullet_speed_changed(value: float):
 	bullet_speed = lerp(1.0, 10.0, value)
 
-## Toggle shooting on/off and update button label
+## Toggle shooting on/off
 func _toggle_shooting():
 	shooting_enabled = not shooting_enabled
-	var label = _toggle_shooting_button.get_node_or_null("ButtonLabel")
-	if label:
-		label.text = "FIRE: ON" if shooting_enabled else "FIRE: OFF"
 
 ## Sync FOV slider position to current value
 func _sync_fov_slider():
-	if _fov_slider:
-		var interactable = _fov_slider.get_node_or_null("SliderHorizontal")
-		if interactable and interactable.has_method("set_value"):
-			interactable.set_value(inverse_lerp(30.0, 180.0, field_of_view_degrees))
+	if _fov_slider and _fov_slider.has_method("set_normalized_value"):
+		_fov_slider.set_normalized_value(inverse_lerp(30.0, 180.0, field_of_view_degrees))
 
 ## Sync fire rate slider position to current value
 func _sync_fire_rate_slider():
-	if _fire_rate_slider:
-		var interactable = _fire_rate_slider.get_node_or_null("SliderHorizontal")
-		if interactable and interactable.has_method("set_value"):
-			interactable.set_value(inverse_lerp(0.5, 10.0, fire_rate))
+	if _fire_rate_slider and _fire_rate_slider.has_method("set_normalized_value"):
+		_fire_rate_slider.set_normalized_value(inverse_lerp(0.5, 10.0, fire_rate))
 
 ## Sync bullet speed slider position to current value
 func _sync_bullet_speed_slider():
-	if _bullet_speed_slider:
-		var interactable = _bullet_speed_slider.get_node_or_null("SliderHorizontal")
-		if interactable and interactable.has_method("set_value"):
-			interactable.set_value(inverse_lerp(1.0, 10.0, bullet_speed))
+	if _bullet_speed_slider and _bullet_speed_slider.has_method("set_normalized_value"):
+		_bullet_speed_slider.set_normalized_value(inverse_lerp(1.0, 10.0, bullet_speed))
 #endregion
 
 #region Update Logic

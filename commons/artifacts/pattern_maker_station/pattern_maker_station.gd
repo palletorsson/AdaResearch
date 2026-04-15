@@ -20,8 +20,7 @@
 extends Node3D
 class_name PatternMakerStation
 
-const SLIDER_H = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
+var PUSH_BUTTON: PackedScene
 
 # ── Palette ──────────────────────────────────────────────────────────
 # Italian textile palette (matches PatternTilePuzzle / ArrayCarpet)
@@ -97,6 +96,7 @@ var _last_painted_cell: Vector2i = Vector2i(-1, -1)
 # ═══════════════════════════════════════════════════════════════════
 
 func _ready() -> void:
+	PUSH_BUTTON = load("res://commons/interactables/push_button.tscn")
 	_init_grid_data()
 
 	# Panel root — rotated 180 to face the player, raised up

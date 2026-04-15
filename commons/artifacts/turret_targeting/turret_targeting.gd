@@ -44,7 +44,6 @@ var auto_label: Label3D
 
 const TURRET_SCENE = preload("res://commons/artifacts/turret_targeting/laser_turret.tscn")
 const DROPPER_SCENE = preload("res://commons/artifacts/turret_targeting/ball_dropper.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 func _ready() -> void:
 	session_start = Time.get_ticks_msec() / 1000.0
@@ -91,79 +90,33 @@ func _create_stats_display() -> void:
 	add_child(stats_label)
 
 func _create_vr_controls() -> void:
-	control_panel = Node3D.new()
-	control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	control_panel = RackTpl.create_panel("TURRET", [
+		[{"type": "button", "label": "DROP BALL"}],
+		[{"type": "button", "label": "RESET"}],
+		[{"type": "button", "label": "AUTO"}],
+	])
 	control_panel.position = turret_position + Vector3(1.2, 0.8, 0)
-	control_panel.rotation_degrees = Vector3(0, -30, 0)
+	control_panel.rotation_degrees = Vector3(-25, -30, 0)
 	add_child(control_panel)
-	
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.4, 0.35, 0.02)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.05, 0.05, 0.08, 0.95)
-	panel_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.015
-	control_panel.add_child(panel_back)
-	
-	# Title
-	var title = Label3D.new()
-	title.text = "TURRET CONTROLS"
-	title.pixel_size = 0.001
-	title.font_size = 14
-	title.position = Vector3(0, 0.13, 0.01)
-	control_panel.add_child(title)
-	
-	# Drop Ball Button
-	drop_button = PUSH_BUTTON.instantiate()
-	drop_button.name = "DropBallButton"
-	drop_button.position = Vector3(0, 0.05, 0.01)
-	control_panel.add_child(drop_button)
-	_add_button_label(drop_button, "DROP BALL")
-	_connect_button(drop_button, drop_ball_now)
-	
-	# Reset Button
-	reset_button = PUSH_BUTTON.instantiate()
-	reset_button.name = "ResetButton"
-	reset_button.position = Vector3(0, -0.02, 0.01)
-	control_panel.add_child(reset_button)
-	_add_button_label(reset_button, "RESET")
-	_connect_button(reset_button, reset)
-	
-	# Auto-Drop Toggle Button
-	auto_toggle_button = PUSH_BUTTON.instantiate()
-	auto_toggle_button.name = "AutoToggleButton"
-	auto_toggle_button.position = Vector3(0, -0.09, 0.01)
-	control_panel.add_child(auto_toggle_button)
-	auto_label = _add_button_label(auto_toggle_button, "AUTO: ON" if auto_drop else "AUTO: OFF")
-	_connect_button(auto_toggle_button, _toggle_auto_drop)
 
-func _add_button_label(btn: Node, text: String) -> Label3D:
-	var lbl = Label3D.new()
-	lbl.name = "ButtonLabel"
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 10
-	lbl.position = Vector3(0, -0.025, 0)
-	btn.add_child(lbl)
-	return lbl
+	drop_button = control_panel.find_child("Btn_0", true, false)
+	if drop_button:
+		var area: Node = drop_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): drop_ball_now())
 
-func _connect_button(btn: Node, callback: Callable) -> void:
-	# Wait a frame for button to initialize
-	await get_tree().process_frame
-	
-	# Try InteractableAreaButton (XR Tools style)
-	var interactable = btn.get_node_or_null("InteractableAreaButton")
-	if interactable and interactable.has_signal("button_pressed"):
-		interactable.button_pressed.connect(func(_b): callback.call())
-	
-	# Also try direct pressed signal
-	if btn.has_signal("pressed"):
-		btn.pressed.connect(callback)
+	reset_button = control_panel.find_child("Btn_1", true, false)
+	if reset_button:
+		var area: Node = reset_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): reset())
+
+	auto_toggle_button = control_panel.find_child("Btn_2", true, false)
+	if auto_toggle_button:
+		var area: Node = auto_toggle_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _toggle_auto_drop())
 
 func _toggle_auto_drop() -> void:
 	auto_drop = not auto_drop

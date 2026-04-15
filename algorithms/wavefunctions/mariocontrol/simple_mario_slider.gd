@@ -3,9 +3,6 @@ extends Node3D
 
 class_name SimpleMarioSlider
 
-# VR slider scene
-const VR_SLIDER_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
-const VR_BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
 
 # VR UI Elements
 var freq1_slider: Node3D
@@ -89,125 +86,90 @@ func _ready() -> void:
 	update_waveform()
 
 func _build_vr_ui() -> void:
-	var y_pos := 0.48
-	var spacing := 0.12
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("MARIO CTRL", [
+		[{"type": "slider_h", "label": "FREQ1", "default": _normalize("freq1", freq1)}],
+		[{"type": "slider_h", "label": "FREQ2", "default": _normalize("freq2", freq2)}],
+		[{"type": "slider_h", "label": "VOL", "default": _normalize("volume", volume)}],
+		[{"type": "slider_h", "label": "LEN", "default": _normalize("length", sound_length)}],
+		[{"type": "slider_h", "label": "ATK", "default": _normalize("attack", attack_time)}],
+		[{"type": "slider_h", "label": "REL", "default": _normalize("release", release_time)}],
+		[{"type": "slider_h", "label": "NOISE", "default": _normalize("noise", noise_amount)}],
+		[{"type": "button", "label": "SPARKLE"}, {"type": "button", "label": "TEST"},
+		 {"type": "button", "label": "RANDOM"}, {"type": "button", "label": "RESET"}],
+	])
+	panel.position = Vector3(0, 0.2, 0)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
 
-	# Title
-	var title = Label3D.new()
-	title.text = "Mario Sound Slider"
-	title.font_size = 48
-	title.modulate = Color(0.3, 0.9, 0.6)
-	title.position = Vector3(0, y_pos + 0.08, 0)
-	add_child(title)
+	# Extract slider refs
+	freq1_slider = panel.find_child("Param_0", true, false)
+	freq2_slider = panel.find_child("Param_1", true, false)
+	volume_slider = panel.find_child("Param_2", true, false)
+	length_slider = panel.find_child("Param_3", true, false)
+	attack_slider = panel.find_child("Param_4", true, false)
+	release_slider = panel.find_child("Param_5", true, false)
+	noise_slider = panel.find_child("Param_6", true, false)
 
-	# Freq1
-	freq1_label = _make_label("Frequency 1: %.0f Hz" % freq1, Vector3(-0.25, y_pos, 0))
-	freq1_slider = _make_slider("Freq1", Vector3(0.15, y_pos, 0))
-	freq1_slider.get_node_or_null("InteractableAreaButton").slider_moved.connect(_on_freq1_slider_moved) if freq1_slider.get_node_or_null("InteractableAreaButton") else null
-	_connect_slider(freq1_slider, _on_freq1_slider_moved)
-	_set_slider_value(freq1_slider, _normalize("freq1", freq1))
-	y_pos -= spacing
+	# Connect slider signals
+	if freq1_slider and freq1_slider.has_signal("slider_moved"):
+		freq1_slider.slider_moved.connect(_on_freq1_slider_moved)
+	if freq2_slider and freq2_slider.has_signal("slider_moved"):
+		freq2_slider.slider_moved.connect(_on_freq2_slider_moved)
+	if volume_slider and volume_slider.has_signal("slider_moved"):
+		volume_slider.slider_moved.connect(_on_volume_slider_moved)
+	if length_slider and length_slider.has_signal("slider_moved"):
+		length_slider.slider_moved.connect(_on_length_slider_moved)
+	if attack_slider and attack_slider.has_signal("slider_moved"):
+		attack_slider.slider_moved.connect(_on_attack_slider_moved)
+	if release_slider and release_slider.has_signal("slider_moved"):
+		release_slider.slider_moved.connect(_on_release_slider_moved)
+	if noise_slider and noise_slider.has_signal("slider_moved"):
+		noise_slider.slider_moved.connect(_on_noise_slider_moved)
 
-	# Freq2
-	freq2_label = _make_label("Frequency 2: %.0f Hz" % freq2, Vector3(-0.25, y_pos, 0))
-	freq2_slider = _make_slider("Freq2", Vector3(0.15, y_pos, 0))
-	_connect_slider(freq2_slider, _on_freq2_slider_moved)
-	_set_slider_value(freq2_slider, _normalize("freq2", freq2))
-	y_pos -= spacing
+	# Connect buttons
+	sparkle_toggle_btn = panel.find_child("Btn_0", true, false)
+	if sparkle_toggle_btn:
+		var area = sparkle_toggle_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_sparkle_pressed)
 
-	# Volume
-	volume_label = _make_label("Volume: %.2f" % volume, Vector3(-0.25, y_pos, 0))
-	volume_slider = _make_slider("Volume", Vector3(0.15, y_pos, 0))
-	_connect_slider(volume_slider, _on_volume_slider_moved)
-	_set_slider_value(volume_slider, _normalize("volume", volume))
-	y_pos -= spacing
+	test_button = panel.find_child("Btn_1", true, false)
+	if test_button:
+		var area = test_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_test_pressed)
 
-	# Length
-	length_label = _make_label("Length: %.2fs" % sound_length, Vector3(-0.25, y_pos, 0))
-	length_slider = _make_slider("Length", Vector3(0.15, y_pos, 0))
-	_connect_slider(length_slider, _on_length_slider_moved)
-	_set_slider_value(length_slider, _normalize("length", sound_length))
-	y_pos -= spacing
+	randomize_button = panel.find_child("Btn_2", true, false)
+	if randomize_button:
+		var area = randomize_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_randomize_pressed)
 
-	# Attack
-	attack_label = _make_label("Attack: %s" % _format_ms(attack_time), Vector3(-0.25, y_pos, 0))
-	attack_slider = _make_slider("Attack", Vector3(0.15, y_pos, 0))
-	_connect_slider(attack_slider, _on_attack_slider_moved)
-	_set_slider_value(attack_slider, _normalize("attack", attack_time))
-	y_pos -= spacing
+	reset_button = panel.find_child("Btn_3", true, false)
+	if reset_button:
+		var area = reset_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_reset_pressed)
 
-	# Release
-	release_label = _make_label("Release: %s" % _format_ms(release_time), Vector3(-0.25, y_pos, 0))
-	release_slider = _make_slider("Release", Vector3(0.15, y_pos, 0))
-	_connect_slider(release_slider, _on_release_slider_moved)
-	_set_slider_value(release_slider, _normalize("release", release_time))
-	y_pos -= spacing
+	# Value labels
+	freq1_label = _make_label("Frequency 1: %.0f Hz" % freq1)
+	freq2_label = _make_label("Frequency 2: %.0f Hz" % freq2)
+	volume_label = _make_label("Volume: %.2f" % volume)
+	length_label = _make_label("Length: %.2fs" % sound_length)
+	attack_label = _make_label("Attack: %s" % _format_ms(attack_time))
+	release_label = _make_label("Release: %s" % _format_ms(release_time))
+	noise_label = _make_label("Noise Sparkle: %d%%" % int(round(noise_amount * 100.0)))
+	sparkle_label = _make_label("Sparkle: ON" if sparkle_enabled else "Sparkle: OFF")
 
-	# Noise
-	noise_label = _make_label("Noise Sparkle: %d%%" % int(round(noise_amount * 100.0)), Vector3(-0.25, y_pos, 0))
-	noise_slider = _make_slider("Noise", Vector3(0.15, y_pos, 0))
-	_connect_slider(noise_slider, _on_noise_slider_moved)
-	_set_slider_value(noise_slider, _normalize("noise", noise_amount))
-	y_pos -= spacing
-
-	# Sparkle toggle (button-based)
-	sparkle_label = _make_label("Sparkle: ON" if sparkle_enabled else "Sparkle: OFF", Vector3(-0.25, y_pos, 0))
-	sparkle_toggle_btn = VR_BUTTON_SCENE.instantiate()
-	sparkle_toggle_btn.position = Vector3(0.15, y_pos, 0)
-	add_child(sparkle_toggle_btn)
-	var sparkle_area = sparkle_toggle_btn.get_node_or_null("InteractableAreaButton")
-	if sparkle_area:
-		sparkle_area.button_pressed.connect(_on_sparkle_pressed)
-	y_pos -= spacing
-
-	# Buttons row
-	test_button = _make_button("Test", Vector3(-0.2, y_pos, 0))
-	_connect_button(test_button, _on_test_pressed)
-
-	randomize_button = _make_button("Random", Vector3(0.0, y_pos, 0))
-	_connect_button(randomize_button, _on_randomize_pressed)
-
-	reset_button = _make_button("Reset", Vector3(0.2, y_pos, 0))
-	_connect_button(reset_button, _on_reset_pressed)
-
-func _make_label(text: String, pos: Vector3) -> Label3D:
+func _make_label(text: String) -> Label3D:
 	var label = Label3D.new()
 	label.text = text
 	label.font_size = 24
 	label.modulate = Color(0.85, 0.9, 1.0)
-	label.position = pos
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	label.visible = false  # Labels tracked internally for update_all_labels
 	add_child(label)
 	return label
-
-func _make_slider(param_name: String, pos: Vector3) -> Node3D:
-	var slider = VR_SLIDER_SCENE.instantiate()
-	slider.position = pos
-	slider.set_param_name(param_name) if slider.has_method("set_param_name") else null
-	add_child(slider)
-	return slider
-
-func _make_button(text: String, pos: Vector3) -> Node3D:
-	var btn = VR_BUTTON_SCENE.instantiate()
-	btn.position = pos
-	add_child(btn)
-	# Add label above button
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.font_size = 20
-	lbl.modulate = Color(0.9, 0.9, 0.7)
-	lbl.position = Vector3(0, 0.03, 0)
-	btn.add_child(lbl)
-	return btn
-
-func _connect_slider(slider: Node3D, callback: Callable) -> void:
-	if slider.has_signal("slider_moved"):
-		slider.slider_moved.connect(callback)
-
-func _connect_button(btn: Node3D, callback: Callable) -> void:
-	var area = btn.get_node_or_null("InteractableAreaButton")
-	if area:
-		area.button_pressed.connect(callback)
 
 func _set_slider_value(slider: Node3D, norm_value: float) -> void:
 	if slider.has_method("set_normalized_value"):

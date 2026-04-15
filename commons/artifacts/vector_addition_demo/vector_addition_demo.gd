@@ -68,8 +68,6 @@ var _control_panel: Node3D
 # Animation
 var _time: float = 0.0
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
 func _ready():
 	# Use the visual helper
@@ -128,56 +126,28 @@ func _create_labels():
 	_label_result = VectorVisuals.create_vector_label(self, "LabelResult", "Aâƒ—+Bâƒ—", color_result)
 
 func _create_vr_controls():
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("VECTOR ADD", [
+		[{"type": "button", "label": "ORTHO"}, {"type": "button", "label": "ACUTE"}, {"type": "button", "label": "3D"}, {"type": "button", "label": "RESET"}],
+	])
 	_control_panel.position = Vector3(0, 0.08, max_vector_length + 0.45)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)  # Tilted up, facing +Z toward player
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(_control_panel)
-	
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.42, 0.12, 0.012)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.04, 0.04, 0.06, 0.95)
-	panel_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	panel_mat.metallic = 0.2
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.008
-	_control_panel.add_child(panel_back)
-	
-	# Preset buttons
-	var presets = [
-		["ORTHO", Vector3(0.9, 0, 0), Vector3(0, 0.8, 0)],
-		["ACUTE", Vector3(0.7, 0.3, 0), Vector3(0.3, 0.7, 0)],
-		["3D", Vector3(0.6, 0.3, 0.3), Vector3(0.2, 0.5, 0.4)],
-		["RESET", Vector3(0.8, 0.3, 0), Vector3(0.2, 0.6, 0.3)]
-	]
-	
-	for i in range(presets.size()):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.14 + i * 0.09, 0, 0.01)
-		btn.scale = Vector3(0.85, 0.85, 0.85)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, presets[i][0])
-		
-		var va = presets[i][1]
-		var vb = presets[i][2]
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(func(_b): _apply_preset(va, vb))
 
-func _add_button_label(btn: Node, text: String):
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 9
-	lbl.outline_size = 3
-	lbl.outline_modulate = Color(0, 0, 0, 0.5)
-	lbl.position = Vector3(0, -0.028, 0.01)
-	btn.add_child(lbl)
+	var presets = [
+		[Vector3(0.9, 0, 0), Vector3(0, 0.8, 0)],
+		[Vector3(0.7, 0.3, 0), Vector3(0.3, 0.7, 0)],
+		[Vector3(0.6, 0.3, 0.3), Vector3(0.2, 0.5, 0.4)],
+		[Vector3(0.8, 0.3, 0), Vector3(0.2, 0.6, 0.3)],
+	]
+	for i in range(presets.size()):
+		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var area = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				var va = presets[i][0]
+				var vb = presets[i][1]
+				area.button_pressed.connect(func(_b): _apply_preset(va, vb))
 
 func _apply_preset(va: Vector3, vb: Vector3):
 	vector_a = va

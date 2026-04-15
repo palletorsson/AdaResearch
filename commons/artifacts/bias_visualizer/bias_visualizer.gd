@@ -94,7 +94,6 @@ var _control_panel: Node3D
 var _rotation_enabled: bool = false
 var _created_nodes: Array[Node] = []
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 func _ready():
 	_create_base()
@@ -250,57 +249,33 @@ func _create_connections():
 	_created_nodes.append(_connection_instance)
 
 func _create_vr_controls():
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("BIAS", [
+		[
+			{"type": "button", "label": "PROF"},
+			{"type": "button", "label": "TRAIT"},
+			{"type": "button", "label": "REDLN"},
+			{"type": "button", "label": "ROT"},
+		],
+	])
 	_control_panel.position = Vector3(0, 0.04, display_size * 0.6 + 0.12)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(_control_panel)
 	_created_nodes.append(_control_panel)
 
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.4, 0.1, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
-	
-	# Three analogy buttons
-	var labels = ["PROF", "TRAIT", "REDLN"]
 	for i in range(3):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "AnalogyButton%d" % i
-		btn.position = Vector3(-0.12 + i * 0.12, 0, 0)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, labels[i])
-		
-		var idx = i
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(func(_b): analogy_type = idx)
-	
-	# Rotate toggle button
-	var rotate_btn = PUSH_BUTTON.instantiate()
-	rotate_btn.name = "RotateButton"
-	rotate_btn.position = Vector3(0.16, 0, 0)
-	rotate_btn.rotation_degrees.x = -30
-	_control_panel.add_child(rotate_btn)
-	_add_button_label(rotate_btn, "ROT")
-	var rotate_area = rotate_btn.get_node_or_null("InteractableAreaButton")
-	if rotate_area:
-		rotate_area.button_pressed.connect(func(_b): _rotation_enabled = not _rotation_enabled)
+		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var idx := i
+			var area: Node = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(func(_b): analogy_type = idx)
 
-func _add_button_label(btn: Node, text: String):
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 10
-	lbl.position = Vector3(0, -0.025, 0)
-	btn.add_child(lbl)
+	var rot_btn: Node = _control_panel.find_child("Btn_3", true, false)
+	if rot_btn:
+		var rot_area: Node = rot_btn.get_node_or_null("InteractableAreaButton")
+		if rot_area:
+			rot_area.button_pressed.connect(func(_b): _rotation_enabled = not _rotation_enabled)
 
 func _show_analogy():
 	# Hide all: zero-scale transform and hide labels

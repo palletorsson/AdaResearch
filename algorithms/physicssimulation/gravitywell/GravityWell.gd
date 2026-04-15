@@ -38,12 +38,9 @@ var _mass_pos: Vector3 = Vector3.ZERO  # XZ position of mass on sheet
 var _particles: Array = []  # [{pos: Vector3, vel: Vector3, mesh: MeshInstance3D}]
 
 var _info_label: Label3D
-var _control_panel: Node3D
 var _grid_verts: PackedVector3Array  # flat grid
 var _grid_normals: PackedVector3Array
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
 func _ready() -> void:
 	_create_sheet()
@@ -243,68 +240,36 @@ func _create_labels() -> void:
 	add_child(_info_label)
 
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
-	_control_panel.position = Vector3(0, -0.1, grid_size / 2.0 + 0.2)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
-	add_child(_control_panel)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("GRAVITY WELL", [
+		[{"type": "slider_h", "label": "MASS", "default": (mass_strength - 0.1) / 2.9}],
+		[
+			{"type": "button", "label": "SCATTER"},
+			{"type": "button", "label": "CENTER"},
+		],
+	])
+	panel.position = Vector3(0, -0.1, grid_size / 2.0 + 0.2)
+	panel.rotation_degrees = Vector3(-30, 0, 0)
+	add_child(panel)
 
-	# Panel
-	var panel_back := MeshInstance3D.new()
-	var panel_mesh := BoxMesh.new()
-	panel_mesh.size = Vector3(0.4, 0.12, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat := StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
+	var mass_slider: Node = panel.find_child("Param_0", true, false)
+	if mass_slider and mass_slider.has_signal("slider_moved"):
+		mass_slider.slider_moved.connect(func(_pos):
+			if mass_slider.has_method("get_normalized_value"):
+				mass_strength = 0.1 + mass_slider.get_normalized_value() * 2.9
+		)
 
-	# Scatter button
-	var scatter_btn = PUSH_BUTTON.instantiate()
-	scatter_btn.name = "ScatterBtn"
-	scatter_btn.position = Vector3(-0.08, 0.025, 0)
-	scatter_btn.scale = Vector3(0.65, 0.65, 0.65)
-	_control_panel.add_child(scatter_btn)
-	_add_button_label(scatter_btn, "SCATTER")
-	var scatter_area = scatter_btn.get_node_or_null("InteractableAreaButton")
-	if scatter_area:
-		scatter_area.button_pressed.connect(func(_b): _scatter_particles())
+	var scatter_btn: Node = panel.find_child("Btn_0", true, false)
+	if scatter_btn:
+		var area: Node = scatter_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _scatter_particles())
 
-	# Center mass button
-	var center_btn = PUSH_BUTTON.instantiate()
-	center_btn.name = "CenterBtn"
-	center_btn.position = Vector3(0.08, 0.025, 0)
-	center_btn.scale = Vector3(0.65, 0.65, 0.65)
-	_control_panel.add_child(center_btn)
-	_add_button_label(center_btn, "CENTER")
-	var center_area = center_btn.get_node_or_null("InteractableAreaButton")
-	if center_area:
-		center_area.button_pressed.connect(func(_b): _move_mass(Vector3.ZERO))
-
-	# Mass strength slider
-	var strength_slider = SLIDER_HORIZONTAL.instantiate()
-	strength_slider.name = "StrengthSlider"
-	strength_slider.position = Vector3(0, -0.025, 0)
-	strength_slider.rotation_degrees.x = -30
-	strength_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var strength_label = strength_slider.get_node_or_null("Frame/LabelName")
-	if strength_label:
-		strength_label.text = "MASS"
-	_control_panel.add_child(strength_slider)
-	strength_slider.slider_moved.connect(func(_pos):
-		if strength_slider.has_method("get_normalized_value"):
-			mass_strength = 0.1 + strength_slider.get_normalized_value() * 2.9
-	)
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
+	var center_btn: Node = panel.find_child("Btn_1", true, false)
+	if center_btn:
+		var area2: Node = center_btn.get_node_or_null("InteractableAreaButton")
+		if area2:
+			area2.button_pressed.connect(func(_b): _move_mass(Vector3.ZERO))
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:

@@ -15,8 +15,6 @@
 extends Node3D
 const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
-const SLIDER_HORIZONTAL := preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON := preload("res://commons/interactables/push_button.tscn")
 
 # --- Configurable parameters ---
 @export var amplitude: float = 0.2
@@ -183,71 +181,40 @@ func _setup_labels() -> void:
 
 
 func _setup_vr_controls() -> void:
-	_control_panel = Node3D.new()
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_parameter_panel(
+		3, ["DAMPING", "COUPLING", "FREQ B"],
+		[damping_coeff / 0.5, coupling_strength, (frequency_b - 0.5) / 3.5]
+	)
 	_control_panel.position = Vector3(0.45, 0.35, 0.18)
 	_control_panel.rotation_degrees = Vector3(-20, -25, 0)
 	add_child(_control_panel)
 
-	# Damping slider
-	var damp_slider := SLIDER_HORIZONTAL.instantiate()
-	damp_slider.position = Vector3(0, 0.06, 0)
-	damp_slider.scale = Vector3(0.65, 0.65, 0.65)
-	var damp_label_node := damp_slider.get_node_or_null("Frame/LabelName")
-	if damp_label_node:
-		damp_label_node.text = "DAMPING"
-	_control_panel.add_child(damp_slider)
-	damp_slider.set_normalized_value(damping_coeff / 0.5)
-	damp_slider.slider_moved.connect(func(_n: String) -> void:
-		damping_coeff = damp_slider.get_normalized_value() * 0.5
-	)
+	var damp_slider: Node = _control_panel.get_node_or_null("Param_0")
+	var couple_slider: Node = _control_panel.get_node_or_null("Param_1")
+	var freq_slider: Node = _control_panel.get_node_or_null("Param_2")
 
-	# Coupling slider
-	var couple_slider := SLIDER_HORIZONTAL.instantiate()
-	couple_slider.position = Vector3(0, -0.02, 0)
-	couple_slider.scale = Vector3(0.65, 0.65, 0.65)
-	var couple_label_node := couple_slider.get_node_or_null("Frame/LabelName")
-	if couple_label_node:
-		couple_label_node.text = "COUPLING"
-	_control_panel.add_child(couple_slider)
-	couple_slider.set_normalized_value(coupling_strength)
-	couple_slider.slider_moved.connect(func(_n: String) -> void:
-		coupling_strength = couple_slider.get_normalized_value()
-	)
+	if damp_slider and damp_slider.has_signal("slider_moved"):
+		damp_slider.slider_moved.connect(func(_n) -> void:
+			if damp_slider.has_method("get_normalized_value"):
+				damping_coeff = damp_slider.get_normalized_value() * 0.5
+		)
+	if couple_slider and couple_slider.has_signal("slider_moved"):
+		couple_slider.slider_moved.connect(func(_n) -> void:
+			if couple_slider.has_method("get_normalized_value"):
+				coupling_strength = couple_slider.get_normalized_value()
+		)
+	if freq_slider and freq_slider.has_signal("slider_moved"):
+		freq_slider.slider_moved.connect(func(_n) -> void:
+			if freq_slider.has_method("get_normalized_value"):
+				frequency_b = 0.5 + freq_slider.get_normalized_value() * 3.5
+		)
 
-	# Frequency B slider
-	var freq_slider := SLIDER_HORIZONTAL.instantiate()
-	freq_slider.position = Vector3(0, -0.10, 0)
-	freq_slider.scale = Vector3(0.65, 0.65, 0.65)
-	var freq_label_node := freq_slider.get_node_or_null("Frame/LabelName")
-	if freq_label_node:
-		freq_label_node.text = "FREQ B"
-	_control_panel.add_child(freq_slider)
-	freq_slider.set_normalized_value((frequency_b - 0.5) / 3.5)
-	freq_slider.slider_moved.connect(func(_n: String) -> void:
-		frequency_b = 0.5 + freq_slider.get_normalized_value() * 3.5
-	)
-
-	# Reset button
-	var reset_btn := PUSH_BUTTON.instantiate()
-	reset_btn.position = Vector3(0.18, -0.02, 0)
-	reset_btn.scale = Vector3(0.55, 0.55, 0.55)
-	_control_panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RESET")
-	var area := reset_btn.get_node_or_null("InteractableAreaButton")
-	if area:
-		area.button_pressed.connect(func(_b: bool) -> void: _reset_oscillators())
-
-
-func _add_button_label(btn: Node3D, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.font_size = 18
-	lbl.pixel_size = 0.001
-	lbl.position = Vector3(0, 0.025, 0)
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	lbl.modulate = Color(0.9, 0.9, 0.95)
-	lbl.outline_size = 3
-	btn.add_child(lbl)
+	var reset_btn: Node = _control_panel.get_node_or_null("ResetButton")
+	if reset_btn:
+		var area := reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b: bool) -> void: _reset_oscillators())
 
 
 func _reset_oscillators() -> void:

@@ -52,8 +52,6 @@ var _presets := [
 ]
 var _current_preset: int = 0
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
 func _ready() -> void:
 	_create_launch_tube()
@@ -299,72 +297,46 @@ func _create_labels() -> void:
 	add_child(_info_label)
 
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("FIREWORKS", [
+		[
+			{"type": "button", "label": "CLASSIC"},
+			{"type": "button", "label": "OCEAN"},
+			{"type": "button", "label": "GARDEN"},
+			{"type": "button", "label": "RING"},
+		],
+		[
+			{"type": "button", "label": "FIRE!"},
+			{"type": "slider_h", "label": "BURST", "default": 0.5},
+		],
+	])
 	_control_panel.position = Vector3(0, 0.02, 0.3)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 
-	# Panel
-	var panel_back := MeshInstance3D.new()
-	var panel_mesh := BoxMesh.new()
-	panel_mesh.size = Vector3(0.45, 0.14, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat := StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
-
 	# Preset buttons
-	var preset_names := ["CLASSIC", "OCEAN", "GARDEN", "RING"]
-	for i in range(preset_names.size()):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.15 + i * 0.1, 0.035, 0)
-		btn.scale = Vector3(0.6, 0.6, 0.6)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, preset_names[i])
+	for i in 4:
+		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var idx: int = i
+			var area = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(func(_b): _current_preset = idx)
 
-		var idx := i
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(func(_b): _current_preset = idx)
+	# Fire button (Btn_4)
+	var fire_btn: Node = _control_panel.find_child("Btn_4", true, false)
+	if fire_btn:
+		var fire_area = fire_btn.get_node_or_null("InteractableAreaButton")
+		if fire_area:
+			fire_area.button_pressed.connect(func(_b): _launch_firework())
 
-	# Launch button (manual fire)
-	var launch_btn = PUSH_BUTTON.instantiate()
-	launch_btn.name = "LaunchBtn"
-	launch_btn.position = Vector3(-0.15, -0.02, 0)
-	launch_btn.scale = Vector3(0.7, 0.7, 0.7)
-	_control_panel.add_child(launch_btn)
-	_add_button_label(launch_btn, "FIRE!")
-	var launch_area = launch_btn.get_node_or_null("InteractableAreaButton")
-	if launch_area:
-		launch_area.button_pressed.connect(func(_b): _launch_firework())
-
-	# Burst force slider
-	var force_slider = SLIDER_HORIZONTAL.instantiate()
-	force_slider.name = "ForceSlider"
-	force_slider.position = Vector3(0.05, -0.025, 0)
-	force_slider.rotation_degrees.x = -30
-	force_slider.scale = Vector3(0.7, 0.7, 0.7)
-	var force_label = force_slider.get_node_or_null("Frame/LabelName")
-	if force_label:
-		force_label.text = "BURST"
-	_control_panel.add_child(force_slider)
-	force_slider.slider_moved.connect(func(_pos):
-		if force_slider.has_method("get_normalized_value"):
-			burst_force = 1.0 + force_slider.get_normalized_value() * 7.0
-	)
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 5
-	lbl.position = Vector3(0, -0.018, 0)
-	btn.add_child(lbl)
+	# Burst slider
+	var force_slider: Node = _control_panel.find_child("Param_0", true, false)
+	if force_slider and force_slider.has_signal("slider_moved"):
+		force_slider.slider_moved.connect(func(_pos):
+			if force_slider.has_method("get_normalized_value"):
+				burst_force = 1.0 + force_slider.get_normalized_value() * 7.0
+		)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:

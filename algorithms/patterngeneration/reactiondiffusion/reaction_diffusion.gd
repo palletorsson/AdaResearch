@@ -5,7 +5,6 @@ extends Node3D
 # Converted from Control to Node3D for VR compatibility
 # SubViewports remain for computation; result is displayed on a 3D QuadMesh
 
-const ButtonScene = preload("res://commons/interactables/push_button.tscn")
 
 # --- SubViewports for computation (created procedurally) ---
 var buffer_a: SubViewport
@@ -101,27 +100,22 @@ void fragment() {
 	add_child(title)
 
 func _create_vr_controls() -> void:
-	# Arrange VR push buttons below the display
-	var button_configs := [
-		{"label": "Add Noise", "callback": _on_add_noise, "x": -0.20},
-		{"label": "Reset", "callback": _on_reset, "x": -0.07},
-		{"label": "Seed Points", "callback": _on_add_seeds, "x": 0.07},
-		{"label": "Big Blast", "callback": _on_big_blast, "x": 0.20},
-	]
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("RD SURFACE", [
+		[{"type": "button", "label": "NOISE"}, {"type": "button", "label": "RESET"},
+		 {"type": "button", "label": "SEEDS"}, {"type": "button", "label": "BLAST"}],
+	])
+	panel.position = Vector3(0, -0.05, 0)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
 
-	for cfg in button_configs:
-		var btn := ButtonScene.instantiate()
-		btn.position = Vector3(cfg.x, -0.05, 0)
-		btn.scale = Vector3(0.2, 0.2, 0.2)
-		add_child(btn)
-
-		var label_node := btn.get_node_or_null("Frame/LabelName")
-		if label_node:
-			label_node.text = cfg.label
-
-		var area := btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(cfg.callback)
+	var callbacks := [_on_add_noise, _on_reset, _on_add_seeds, _on_big_blast]
+	for i in callbacks.size():
+		var btn: Node = panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var area := btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(callbacks[i])
 
 func _setup_simulation() -> void:
 	# 1. Create ShaderMaterial and load the reaction-diffusion shader

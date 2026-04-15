@@ -70,8 +70,6 @@ var _basis: Basis = Basis.IDENTITY
 # Animation
 var _time: float = 0.0
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-
 func _ready():
 	_init_material_templates()
 	_create_ground()
@@ -265,72 +263,53 @@ func _create_labels():
 	_coords_panel.rotation_degrees = Vector3(0, -90, 0)
 
 func _create_vr_controls():
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("BASIS", [
+		[
+			{"type": "button", "label": "PURE X"},
+			{"type": "button", "label": "PURE Y"},
+			{"type": "button", "label": "PURE Z"},
+			{"type": "button", "label": "XY"},
+			{"type": "button", "label": "XYZ"},
+		],
+		[
+			{"type": "button", "label": "RESET"},
+			{"type": "button", "label": "TILT"},
+			{"type": "button", "label": "SPIN"},
+		],
+	])
 	_control_panel.position = Vector3(0, 0.06, axis_length + 0.35)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.5, 0.14, PANEL_DEPTH)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.04, 0.04, 0.06, 0.95)
-	panel_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.008
-	_control_panel.add_child(panel_back)
-
-	var point_presets = [
-		["PURE X", Vector3(0.4, 0, 0)],
-		["PURE Y", Vector3(0, 0.4, 0)],
-		["PURE Z", Vector3(0, 0, 0.4)],
-		["XY", Vector3(0.3, 0.3, 0)],
-		["XYZ", Vector3(0.25, 0.3, 0.2)]
+	# Point preset buttons (row 0: Btn_0 .. Btn_4)
+	var point_presets: Array[Vector3] = [
+		Vector3(0.4, 0, 0), Vector3(0, 0.4, 0), Vector3(0, 0, 0.4),
+		Vector3(0.3, 0.3, 0), Vector3(0.25, 0.3, 0.2),
 	]
-
 	for i in range(point_presets.size()):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "PointPreset%d" % i
-		btn.position = Vector3(-0.17 + i * 0.085, 0.03, 0.01)
-		btn.scale = Vector3(0.7, 0.7, 0.7)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, point_presets[i][0])
+		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
+		var pt: Vector3 = point_presets[i]
+		_connect_button(btn, func(_b): _set_target_point(pt))
 
-		var pt = point_presets[i][1]
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(func(_b): _set_target_point(pt))
-
-	var rotation_presets = [
-		["RESET", Basis.IDENTITY],
-		["TILT", Basis(Vector3.RIGHT, deg_to_rad(30))],
-		["SPIN", Basis(Vector3.UP, deg_to_rad(45))],
+	# Rotation preset buttons (row 1: Btn_5 .. Btn_7)
+	var rotation_presets: Array[Basis] = [
+		Basis.IDENTITY,
+		Basis(Vector3.RIGHT, deg_to_rad(30)),
+		Basis(Vector3.UP, deg_to_rad(45)),
 	]
-
 	for i in range(rotation_presets.size()):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "RotationPreset%d" % i
-		btn.position = Vector3(-0.12 + i * 0.12, -0.03, 0.01)
-		btn.scale = Vector3(0.7, 0.7, 0.7)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, rotation_presets[i][0])
+		var btn: Node = _control_panel.find_child("Btn_%d" % (i + 5), true, false)
+		var b: Basis = rotation_presets[i]
+		_connect_button(btn, func(_b): _set_basis(b))
 
-		var b = rotation_presets[i][1]
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(func(_b): _set_basis(b))
 
-func _add_button_label(btn: Node, text: String):
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 8
-	lbl.outline_size = 3
-	lbl.outline_modulate = Color(0, 0, 0, 0.5)
-	lbl.position = Vector3(0, -0.025, 0.01)
-	btn.add_child(lbl)
+func _connect_button(btn: Node, callback: Callable) -> void:
+	if not btn:
+		return
+	var area: Node = btn.get_node_or_null("InteractableAreaButton")
+	if area and area.has_signal("button_pressed"):
+		area.button_pressed.connect(callback)
 
 func _set_target_point(p: Vector3):
 	target_point = p

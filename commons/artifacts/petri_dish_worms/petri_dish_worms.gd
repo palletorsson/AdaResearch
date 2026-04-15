@@ -45,7 +45,6 @@ var _worm_ims: Array[ImmediateMesh] = []
 var _time: float = 0.0
 var _speed_scale: float = 1.0
 
-var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
 var _speed_slider: Node = null
 
 @onready var dish: MeshInstance3D = $Dish
@@ -131,13 +130,27 @@ func _spawn_worms() -> void:
 		_worm_ims[i] = im
 
 func _setup_controls() -> void:
-	var slider = SliderScene.instantiate()
-	slider.position = Vector3(0, 0.5, 0.6)
-	slider.set_param_name("Speed")
-	slider.set_normalized_value(0.5)
-	slider.slider_moved.connect(_on_speed_changed)
-	add_child(slider)
-	_speed_slider = slider
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("PETRI DISH", [
+		[
+			{"type": "slider_h", "label": "SPEED", "default": 0.5},
+			{"type": "slider_h", "label": "WIGGLE", "default": oscillation_speed / 10.0},
+		],
+	])
+	panel.position = Vector3(0, 0.5, 0.6)
+	panel.rotation_degrees = Vector3(-30, 0, 0)
+	add_child(panel)
+
+	_speed_slider = panel.find_child("Param_0", true, false)
+	if _speed_slider and _speed_slider.has_signal("slider_moved"):
+		_speed_slider.slider_moved.connect(_on_speed_changed)
+
+	var wiggle_slider: Node = panel.find_child("Param_1", true, false)
+	if wiggle_slider and wiggle_slider.has_signal("slider_moved"):
+		wiggle_slider.slider_moved.connect(func(_pos):
+			if wiggle_slider.has_method("get_normalized_value"):
+				oscillation_speed = wiggle_slider.get_normalized_value() * 10.0
+		)
 
 func _on_speed_changed() -> void:
 	if _speed_slider:

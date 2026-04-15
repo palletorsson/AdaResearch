@@ -75,8 +75,7 @@ var _heights: Array[float] = []
 # Track created nodes for cleanup
 var _created_nodes: Array[Node] = []
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
+var RackTpl = load("res://commons/audio/rack_templates/RackTemplates.gd")
 
 func _ready() -> void:
 	_create_tank()
@@ -217,80 +216,37 @@ func _create_labels() -> void:
 
 ## Builds the VR control panel with frequency/separation sliders and phase preset buttons.
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	_control_panel = RackTpl.create_panel("INTERFERENCE", [
+		[{"type": "slider_h", "label": "FREQ", "default": (wave_frequency - 0.5) / 9.5},
+		 {"type": "slider_h", "label": "SEP", "default": (source_separation - 0.1) / 0.7}],
+		[{"type": "button", "label": "IN PHASE"},
+		 {"type": "button", "label": "OPPOSITE"},
+		 {"type": "button", "label": "QUARTER"},
+		 {"type": "button", "label": "EIGHTH"}],
+	])
 	_control_panel.position = Vector3(0, 0.02, tank_size / 2 + 0.15)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 	_created_nodes.append(_control_panel)
 
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.45, 0.16, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
+	_freq_slider = _control_panel.find_child("Param_0", true, false)
+	if _freq_slider and _freq_slider.has_signal("slider_moved"):
+		_freq_slider.slider_moved.connect(_on_freq_changed)
 
-	# Frequency slider
-	_freq_slider = SLIDER_HORIZONTAL.instantiate()
-	_freq_slider.name = "FreqSlider"
-	_freq_slider.position = Vector3(-0.1, 0.04, 0)
-	_freq_slider.rotation_degrees.x = -30
-	_freq_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var freq_label = _freq_slider.get_node_or_null("Frame/LabelName")
-	if freq_label:
-		freq_label.text = "FREQ"
-	_control_panel.add_child(_freq_slider)
-	_freq_slider.slider_moved.connect(_on_freq_changed)
+	_sep_slider = _control_panel.find_child("Param_1", true, false)
+	if _sep_slider and _sep_slider.has_signal("slider_moved"):
+		_sep_slider.slider_moved.connect(_on_sep_changed)
 
-	# Separation slider
-	_sep_slider = SLIDER_HORIZONTAL.instantiate()
-	_sep_slider.name = "SepSlider"
-	_sep_slider.position = Vector3(0.1, 0.04, 0)
-	_sep_slider.rotation_degrees.x = -30
-	_sep_slider.scale = Vector3(0.8, 0.8, 0.8)
-	var sep_label = _sep_slider.get_node_or_null("Frame/LabelName")
-	if sep_label:
-		sep_label.text = "SEP"
-	_control_panel.add_child(_sep_slider)
-	_sep_slider.slider_moved.connect(_on_sep_changed)
-
-	# Phase/pattern buttons
-	var presets = [
-		["IN PHASE", 0.0],
-		["OPPOSITE", PI],
-		["QUARTER", PI / 2],
-		["EIGHTH", PI / 4]
-	]
-
-	for i in range(presets.size()):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "Phase%d" % i
-		btn.position = Vector3(-0.15 + i * 0.1, -0.035, 0)
-		btn.scale = Vector3(0.65, 0.65, 0.65)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, presets[i][0])
-
-		var phase = presets[i][1]
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(func(_b): phase_difference = phase)
+	var phase_values = [0.0, PI, PI / 2, PI / 4]
+	for i in range(4):
+		var btn = _control_panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var phase = phase_values[i]
+			var area = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(func(_b): phase_difference = phase)
 
 	call_deferred("_sync_sliders")
-
-## Adds a small Label3D beneath a button node.
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
 
 ## Syncs both slider positions to current parameter values.
 func _sync_sliders() -> void:

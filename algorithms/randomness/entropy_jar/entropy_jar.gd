@@ -56,7 +56,6 @@ var _initial_entropy: float = 0.0
 var _current_entropy: float = 0.0
 
 const PICKABLE_SCENE = preload("res://addons/godot-xr-tools/objects/pickable.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 const HIGHLIGHT_RING_SCENE = preload("res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn")
 
 
@@ -483,44 +482,20 @@ func _on_jar_dropped(_pickable) -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _create_vr_controls() -> void:
-	var panel := Node3D.new()
-	panel.name = "ControlPanel"
-	panel.position = Vector3(-jar_radius * 2.5, pedestal_height * 0.6, 0)
-	panel.rotation_degrees = Vector3(-15, 90, 0)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("ENTROPY JAR", [
+		[{"type": "button", "label": "RESET"}],
+	])
+	panel.position = Vector3(0, pedestal_height + 0.05, jar_radius + 0.12)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(panel)
 
-	# Panel backing
-	var back := MeshInstance3D.new()
-	var back_mesh := BoxMesh.new()
-	back_mesh.size = Vector3(0.12, 0.06, 0.006)
-	back.mesh = back_mesh
-	var back_mat := StandardMaterial3D.new()
-	back_mat.albedo_color = Color(0.06, 0.06, 0.08)
-	back.material_override = back_mat
-	back.position.z = -0.006
-	panel.add_child(back)
-
-	# RESET button
-	var reset_btn := PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetBtn"
-	reset_btn.position = Vector3(0.0, 0.0, 0)
-	reset_btn.scale = Vector3(0.65, 0.65, 0.65)
-	panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RESET")
-
-	var reset_area := reset_btn.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		reset_area.button_pressed.connect(func(_b): _reset_jar())
-
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 8
-	lbl.position = Vector3(0, -0.02, 0)
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	btn.add_child(lbl)
+	# RESET button (Btn_0)
+	var reset_btn: Node = panel.find_child("Btn_0", true, false)
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _reset_jar())
 
 
 func _reset_jar() -> void:

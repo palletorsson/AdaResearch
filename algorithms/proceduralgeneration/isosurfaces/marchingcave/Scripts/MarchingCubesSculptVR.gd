@@ -17,9 +17,6 @@ extends Node3D
 @export var volume_size: float = 2.0  # Size of the sculpting volume in meters
 @export var volume_resolution: int = 64  # Voxels per axis (affects detail)
 
-# VR interactables
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
 # References
 var terrain_generator: Node  # TerrainGeneratorSculpt
@@ -147,115 +144,49 @@ func _create_volume_bounds() -> void:
 	add_child(volume_bounds)
 
 func _build_vr_controls() -> void:
-	# Create a control panel floating beside the sculpting volume
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
-	# Position to the right of the volume, slightly angled toward user
-	_control_panel.position = Vector3(volume_size * 0.75, 0.0, -volume_size * 0.3)
-	add_child(_control_panel)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("MARCHING CUBES", [
+		[{"type": "button", "label": "REGEN"}],
+		[{"type": "button", "label": "CLEAR"}],
+		[{"type": "button", "label": "ERASE"}],
+		[{"type": "button", "label": "BRUSH +"}],
+		[{"type": "button", "label": "BRUSH -"}],
+	])
+	panel.position = Vector3(volume_size * 0.75, 0.0, -volume_size * 0.3)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
+	_control_panel = panel
 
-	if not PUSH_BUTTON:
-		print("MarchingCubesSculptVR: push_button.tscn not found, skipping VR controls")
-		return
+	# Connect buttons
+	_btn_regen = panel.find_child("Btn_0", true, false)
+	if _btn_regen:
+		var area = _btn_regen.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _regenerate_sculpture())
 
-	var btn_scale := Vector3(0.4, 0.4, 0.4)
-	var spacing := 0.18
+	_btn_clear = panel.find_child("Btn_1", true, false)
+	if _btn_clear:
+		var area = _btn_clear.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): clear_sculpture())
 
-	# --- REGENERATE button ---
-	_btn_regen = PUSH_BUTTON.instantiate()
-	_btn_regen.name = "RegenBtn"
-	_btn_regen.position = Vector3(0, spacing * 2, 0)
-	_btn_regen.scale = btn_scale
-	_control_panel.add_child(_btn_regen)
-	if _btn_regen.has_signal("button_pressed"):
-		_btn_regen.button_pressed.connect(func(_b): _regenerate_sculpture())
+	_btn_erase_toggle = panel.find_child("Btn_2", true, false)
+	if _btn_erase_toggle:
+		var area = _btn_erase_toggle.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _toggle_erase())
 
-	var lbl_regen := Label3D.new()
-	lbl_regen.text = "REGEN"
-	lbl_regen.font_size = 32
-	lbl_regen.pixel_size = 0.001
-	lbl_regen.position = Vector3(0.12, 0, 0)
-	lbl_regen.modulate = Color(0.4, 1.0, 0.4)
-	_btn_regen.add_child(lbl_regen)
+	_btn_brush_up = panel.find_child("Btn_3", true, false)
+	if _btn_brush_up:
+		var area = _btn_brush_up.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _change_brush_size(0.03))
 
-	# --- CLEAR button ---
-	_btn_clear = PUSH_BUTTON.instantiate()
-	_btn_clear.name = "ClearBtn"
-	_btn_clear.position = Vector3(0, spacing, 0)
-	_btn_clear.scale = btn_scale
-	_control_panel.add_child(_btn_clear)
-	if _btn_clear.has_signal("button_pressed"):
-		_btn_clear.button_pressed.connect(func(_b): clear_sculpture())
-
-	var lbl_clear := Label3D.new()
-	lbl_clear.text = "CLEAR"
-	lbl_clear.font_size = 32
-	lbl_clear.pixel_size = 0.001
-	lbl_clear.position = Vector3(0.12, 0, 0)
-	lbl_clear.modulate = Color(1.0, 0.5, 0.2)
-	_btn_clear.add_child(lbl_clear)
-
-	# --- ERASE TOGGLE button ---
-	_btn_erase_toggle = PUSH_BUTTON.instantiate()
-	_btn_erase_toggle.name = "EraseToggleBtn"
-	_btn_erase_toggle.position = Vector3(0, 0, 0)
-	_btn_erase_toggle.scale = btn_scale
-	_control_panel.add_child(_btn_erase_toggle)
-	if _btn_erase_toggle.has_signal("button_pressed"):
-		_btn_erase_toggle.button_pressed.connect(func(_b): _toggle_erase())
-
-	var lbl_erase := Label3D.new()
-	lbl_erase.name = "EraseLabel"
-	lbl_erase.text = "ERASE: OFF"
-	lbl_erase.font_size = 32
-	lbl_erase.pixel_size = 0.001
-	lbl_erase.position = Vector3(0.12, 0, 0)
-	lbl_erase.modulate = Color(0.7, 0.7, 0.7)
-	_btn_erase_toggle.add_child(lbl_erase)
-
-	# --- BRUSH SIZE + button ---
-	_btn_brush_up = PUSH_BUTTON.instantiate()
-	_btn_brush_up.name = "BrushUpBtn"
-	_btn_brush_up.position = Vector3(0, -spacing, 0)
-	_btn_brush_up.scale = btn_scale
-	_control_panel.add_child(_btn_brush_up)
-	if _btn_brush_up.has_signal("button_pressed"):
-		_btn_brush_up.button_pressed.connect(func(_b): _change_brush_size(0.03))
-
-	var lbl_brush_up := Label3D.new()
-	lbl_brush_up.text = "BRUSH +"
-	lbl_brush_up.font_size = 32
-	lbl_brush_up.pixel_size = 0.001
-	lbl_brush_up.position = Vector3(0.12, 0, 0)
-	lbl_brush_up.modulate = Color(0.6, 0.8, 1.0)
-	_btn_brush_up.add_child(lbl_brush_up)
-
-	# --- BRUSH SIZE - button ---
-	_btn_brush_down = PUSH_BUTTON.instantiate()
-	_btn_brush_down.name = "BrushDownBtn"
-	_btn_brush_down.position = Vector3(0, -spacing * 2, 0)
-	_btn_brush_down.scale = btn_scale
-	_control_panel.add_child(_btn_brush_down)
-	if _btn_brush_down.has_signal("button_pressed"):
-		_btn_brush_down.button_pressed.connect(func(_b): _change_brush_size(-0.03))
-
-	var lbl_brush_down := Label3D.new()
-	lbl_brush_down.text = "BRUSH -"
-	lbl_brush_down.font_size = 32
-	lbl_brush_down.pixel_size = 0.001
-	lbl_brush_down.position = Vector3(0.12, 0, 0)
-	lbl_brush_down.modulate = Color(0.6, 0.8, 1.0)
-	_btn_brush_down.add_child(lbl_brush_down)
-
-	# Panel title label
-	var title_label := Label3D.new()
-	title_label.text = "SCULPT CONTROLS"
-	title_label.font_size = 24
-	title_label.pixel_size = 0.001
-	title_label.position = Vector3(0, spacing * 3, 0)
-	title_label.modulate = Color(1.0, 1.0, 1.0, 0.7)
-	title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_control_panel.add_child(title_label)
+	_btn_brush_down = panel.find_child("Btn_4", true, false)
+	if _btn_brush_down:
+		var area = _btn_brush_down.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _change_brush_size(-0.03))
 
 func _build_status_label() -> void:
 	_status_label = Label3D.new()
@@ -301,13 +232,6 @@ func _toggle_erase() -> void:
 	erase_mode = !erase_mode
 	_update_brush_color()
 	_update_status_label()
-	# Update erase button label
-	if _btn_erase_toggle:
-		for child in _btn_erase_toggle.get_children():
-			if child is Label3D and child.name == "EraseLabel":
-				child.text = "ERASE: ON" if erase_mode else "ERASE: OFF"
-				child.modulate = Color(1.0, 0.3, 0.3) if erase_mode else Color(0.7, 0.7, 0.7)
-				break
 	print("Erase mode: ", "ON" if erase_mode else "OFF")
 
 func _change_brush_size(delta: float) -> void:
@@ -528,13 +452,6 @@ func reset() -> void:
 	_update_brush_size()
 	_update_brush_color()
 	_update_status_label()
-	# Reset erase button label
-	if _btn_erase_toggle:
-		for child in _btn_erase_toggle.get_children():
-			if child is Label3D and child.name == "EraseLabel":
-				child.text = "ERASE: OFF"
-				child.modulate = Color(0.7, 0.7, 0.7)
-				break
 
 func _exit_tree() -> void:
 	for child in get_children():

@@ -43,7 +43,7 @@ var _created_nodes: Array[Node] = []
 var _frame_root: Node3D
 var _frame_scale_slider: Node
 
-var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
+var _rack_panel: Node3D
 
 
 func _ready() -> void:
@@ -416,12 +416,17 @@ func _build_insight_label() -> void:
 
 ## Sets up VR slider to control coordinate frame scale.
 func _setup_controls() -> void:
-	_frame_scale_slider = SliderScene.instantiate()
-	_frame_scale_slider.position = Vector3(0.38, -0.15, 0.03)
-	_frame_scale_slider.set_param_name("Frame Scale")
-	_frame_scale_slider.set_normalized_value(0.5)
-	_frame_scale_slider.slider_moved.connect(_on_frame_scale_changed)
-	_add_node(_frame_scale_slider)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_rack_panel = RackTpl.create_panel("COORDINATES", [
+		[{"type": "slider_h", "label": "FRAME SCALE", "default": 0.5}],
+	])
+	_rack_panel.position = Vector3(0.38, -0.15, 0.03)
+	_rack_panel.rotation_degrees = Vector3(-25, 0, 0)
+	_add_node(_rack_panel)
+
+	_frame_scale_slider = _rack_panel.find_child("Param_0", true, false)
+	if _frame_scale_slider and _frame_scale_slider.has_signal("slider_moved"):
+		_frame_scale_slider.slider_moved.connect(_on_frame_scale_changed)
 
 
 func _on_frame_scale_changed() -> void:

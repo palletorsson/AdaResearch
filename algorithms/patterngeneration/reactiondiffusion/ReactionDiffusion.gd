@@ -4,8 +4,6 @@ extends Node3D
 
 enum Mode { BIFURCATION, SURFACE_3D, SPIRAL }
 
-const SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
-const ButtonScene = preload("res://commons/interactables/push_button.tscn")
 
 # ─── Tunable parameters ───
 @export var grid_size: int = 48
@@ -186,60 +184,44 @@ func _create_labels() -> void:
 # ─── VR Controls ───
 
 func _create_controls() -> void:
-	var x0 := -0.5
-	var y0 := -0.85
-	var spacing := 0.14
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("REACTION DIFFUSION", [
+		[
+			{"type": "slider_h", "label": "FEED", "default": _remap(feed_rate, 0.01, 0.08, 0.0, 1.0)},
+			{"type": "slider_h", "label": "KILL", "default": _remap(kill_rate, 0.03, 0.07, 0.0, 1.0)},
+			{"type": "slider_h", "label": "SPEED", "default": 0.5},
+		],
+		[
+			{"type": "button", "label": "MODE"},
+			{"type": "button", "label": "RESET"},
+		],
+	])
+	panel.position = Vector3(-0.5, -0.85, 0)
+	add_child(panel)
 
-	# Mode button
-	_btn_mode = ButtonScene.instantiate()
-	_btn_mode.position = Vector3(x0, y0, 0)
-	_btn_mode.scale = Vector3(0.2, 0.2, 0.2)
-	add_child(_btn_mode)
-	var mode_label = _btn_mode.get_node_or_null("Frame/LabelName")
-	if mode_label:
-		mode_label.text = "Mode"
-	var mode_area = _btn_mode.get_node_or_null("InteractableAreaButton")
-	if mode_area:
-		mode_area.button_pressed.connect(_on_mode_pressed)
+	_slider_feed = panel.find_child("Param_0", true, false)
+	if _slider_feed and _slider_feed.has_signal("slider_moved"):
+		_slider_feed.slider_moved.connect(_on_feed_changed)
 
-	# Reset button
-	_btn_reset = ButtonScene.instantiate()
-	_btn_reset.position = Vector3(x0 + spacing, y0, 0)
-	_btn_reset.scale = Vector3(0.2, 0.2, 0.2)
-	add_child(_btn_reset)
-	var reset_label = _btn_reset.get_node_or_null("Frame/LabelName")
-	if reset_label:
-		reset_label.text = "Reset"
-	var reset_area = _btn_reset.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		reset_area.button_pressed.connect(_on_reset_pressed)
+	_slider_kill = panel.find_child("Param_1", true, false)
+	if _slider_kill and _slider_kill.has_signal("slider_moved"):
+		_slider_kill.slider_moved.connect(_on_kill_changed)
 
-	# Feed rate slider
-	_slider_feed = SliderScene.instantiate()
-	_slider_feed.position = Vector3(x0 + spacing * 2.5, y0, 0)
-	_slider_feed.scale = Vector3(0.3, 0.3, 0.3)
-	add_child(_slider_feed)
-	_slider_feed.set_param_name("Feed")
-	_slider_feed.set_normalized_value(_remap(feed_rate, 0.01, 0.08, 0.0, 1.0))
-	_slider_feed.slider_moved.connect(_on_feed_changed)
+	_slider_speed = panel.find_child("Param_2", true, false)
+	if _slider_speed and _slider_speed.has_signal("slider_moved"):
+		_slider_speed.slider_moved.connect(_on_speed_changed)
 
-	# Kill rate slider
-	_slider_kill = SliderScene.instantiate()
-	_slider_kill.position = Vector3(x0 + spacing * 4.0, y0, 0)
-	_slider_kill.scale = Vector3(0.3, 0.3, 0.3)
-	add_child(_slider_kill)
-	_slider_kill.set_param_name("Kill")
-	_slider_kill.set_normalized_value(_remap(kill_rate, 0.03, 0.07, 0.0, 1.0))
-	_slider_kill.slider_moved.connect(_on_kill_changed)
+	_btn_mode = panel.find_child("Btn_0", true, false)
+	if _btn_mode:
+		var mode_area: Node = _btn_mode.get_node_or_null("InteractableAreaButton")
+		if mode_area:
+			mode_area.button_pressed.connect(_on_mode_pressed)
 
-	# Speed slider
-	_slider_speed = SliderScene.instantiate()
-	_slider_speed.position = Vector3(x0 + spacing * 5.5, y0, 0)
-	_slider_speed.scale = Vector3(0.3, 0.3, 0.3)
-	add_child(_slider_speed)
-	_slider_speed.set_param_name("Speed")
-	_slider_speed.set_normalized_value(0.5)
-	_slider_speed.slider_moved.connect(_on_speed_changed)
+	_btn_reset = panel.find_child("Btn_1", true, false)
+	if _btn_reset:
+		var reset_area: Node = _btn_reset.get_node_or_null("InteractableAreaButton")
+		if reset_area:
+			reset_area.button_pressed.connect(_on_reset_pressed)
 
 
 func _on_mode_pressed() -> void:

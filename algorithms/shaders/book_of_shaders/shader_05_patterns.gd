@@ -15,8 +15,8 @@ extends Node3D
 
 enum Mode { CLASSIC, WANG_VORONOI, NOISE }
 
-const SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
-const ButtonScene = preload("res://commons/interactables/push_button.tscn")
+# Mode/Reset buttons built via RackTemplates
+var _button_panel: Node3D
 
 const MODE_NAMES := ["Classic Patterns", "Wang + Voronoi", "Noise Synthesis"]
 
@@ -156,29 +156,28 @@ func _create_labels() -> void:
 # ─── VR Controls ───
 
 func _create_controls() -> void:
-	# Mode button — left side
-	_btn_mode = ButtonScene.instantiate()
-	_btn_mode.position = Vector3(-3.5, 0.4, PANEL_OFFSET_Z)
-	_btn_mode.scale = Vector3(0.25, 0.25, 0.25)
-	add_child(_btn_mode)
-	var mode_label = _btn_mode.get_node_or_null("Frame/LabelName")
-	if mode_label:
-		mode_label.text = "Mode"
-	var mode_area = _btn_mode.get_node_or_null("InteractableAreaButton")
-	if mode_area:
-		mode_area.button_pressed.connect(_on_mode_pressed)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_button_panel = RackTpl.create_panel("SHADER PATTERN", [
+		[
+			{"type": "button", "label": "MODE"},
+			{"type": "button", "label": "RESET"},
+		],
+	])
+	_button_panel.position = Vector3(-3.5, 0.3, PANEL_OFFSET_Z)
+	_button_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_button_panel)
 
-	# Reset button — below mode
-	_btn_reset = ButtonScene.instantiate()
-	_btn_reset.position = Vector3(-3.5, 0.15, PANEL_OFFSET_Z)
-	_btn_reset.scale = Vector3(0.25, 0.25, 0.25)
-	add_child(_btn_reset)
-	var reset_label = _btn_reset.get_node_or_null("Frame/LabelName")
-	if reset_label:
-		reset_label.text = "Reset"
-	var reset_area = _btn_reset.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		reset_area.button_pressed.connect(_on_reset_pressed)
+	_btn_mode = _button_panel.find_child("Btn_0", true, false)
+	if _btn_mode:
+		var mode_area = _btn_mode.get_node_or_null("InteractableAreaButton")
+		if mode_area:
+			mode_area.button_pressed.connect(func(_b): _on_mode_pressed())
+
+	_btn_reset = _button_panel.find_child("Btn_1", true, false)
+	if _btn_reset:
+		var reset_area = _btn_reset.get_node_or_null("InteractableAreaButton")
+		if reset_area:
+			reset_area.button_pressed.connect(func(_b): _on_reset_pressed())
 
 
 func _on_mode_pressed() -> void:

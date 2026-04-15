@@ -72,33 +72,47 @@ func _setup_materials() -> void:
 	trail_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 
 func _setup_sliders() -> void:
-	amplitude_slider = get_node_or_null(amplitude_slider_path)
-	if amplitude_slider:
-		amplitude_slider.set_range(0.1, 2.0)
-		amplitude_slider.set_param_name("AMP")
-		amplitude_slider.set_normalized_value(0.5)
+	# Remove old tscn-placed sliders if they exist
+	var old_panel: Node = get_node_or_null("ControlPanel")
+	if old_panel:
+		old_panel.queue_free()
+
+	# Build new RackTemplates panel
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("HARMONIC MOTION", [
+		[
+			{"type": "slider_h", "label": "AMP", "default": 0.5},
+			{"type": "slider_h", "label": "FREQ", "default": 0.25},
+		],
+		[
+			{"type": "slider_h", "label": "PHASE", "default": 0.0},
+			{"type": "slider_h", "label": "DAMP", "default": 0.0},
+		],
+		[{"type": "button", "label": "RESET"}],
+	])
+	panel.position = Vector3(0.45, 0.1, 0.15)
+	panel.rotation_degrees = Vector3(-20, -25, 0)
+	add_child(panel)
+
+	amplitude_slider = panel.find_child("Param_0", true, false)
+	frequency_slider = panel.find_child("Param_1", true, false)
+	phase_slider = panel.find_child("Param_2", true, false)
+	damping_slider = panel.find_child("Param_3", true, false)
+
+	if amplitude_slider and amplitude_slider.has_signal("slider_moved"):
 		amplitude_slider.slider_moved.connect(_on_amplitude_changed)
-	
-	frequency_slider = get_node_or_null(frequency_slider_path)
-	if frequency_slider:
-		frequency_slider.set_range(0.2, 4.0)
-		frequency_slider.set_param_name("FREQ")
-		frequency_slider.set_normalized_value(0.25)
+	if frequency_slider and frequency_slider.has_signal("slider_moved"):
 		frequency_slider.slider_moved.connect(_on_frequency_changed)
-	
-	phase_slider = get_node_or_null(phase_slider_path)
-	if phase_slider:
-		phase_slider.set_range(0.0, 360.0)
-		phase_slider.set_param_name("PHASE")
-		phase_slider.set_normalized_value(0.0)
+	if phase_slider and phase_slider.has_signal("slider_moved"):
 		phase_slider.slider_moved.connect(_on_phase_changed)
-	
-	damping_slider = get_node_or_null(damping_slider_path)
-	if damping_slider:
-		damping_slider.set_range(0.0, 1.0)
-		damping_slider.set_param_name("DAMP")
-		damping_slider.set_normalized_value(0.0)
+	if damping_slider and damping_slider.has_signal("slider_moved"):
 		damping_slider.slider_moved.connect(_on_damping_changed)
+
+	var reset_btn: Node = panel.find_child("Btn_0", true, false)
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _update_visualization())
 
 func _setup_curve() -> void:
 	if sine_curve:

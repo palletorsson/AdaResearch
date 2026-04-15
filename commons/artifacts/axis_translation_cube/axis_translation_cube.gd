@@ -19,7 +19,6 @@ extends Node3D
 class_name AxisTranslationCube
 
 const GRID_SHADER = preload("res://commons/resourses/shaders/Grid.gdshader")
-var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
 
 enum Axis { X, Y, Z }
 enum State { MOVING_POSITIVE, WAIT_POSITIVE, MOVING_NEGATIVE, WAIT_NEGATIVE }
@@ -259,13 +258,17 @@ func _create_trail_ghosts():
 
 
 func _setup_controls():
-	_speed_slider = SliderScene.instantiate()
-	_speed_slider.position = Vector3(0, 0.5, 0.6)
-	_speed_slider.set_param_name("Speed")
-	_speed_slider.set_normalized_value(travel_speed / 5.0)
-	_speed_slider.slider_moved.connect(_on_speed_changed)
-	add_child(_speed_slider)
-	_created_nodes.append(_speed_slider)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("TRANSLATION", [
+		[{"type": "slider_h", "label": "SPEED", "default": travel_speed / 5.0}],
+	])
+	panel.position = Vector3(0, 0.5, 0.6)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
+	_created_nodes.append(panel)
+	_speed_slider = panel.find_child("Param_0", true, false)
+	if _speed_slider and _speed_slider.has_signal("slider_moved"):
+		_speed_slider.slider_moved.connect(_on_speed_changed)
 
 
 func _on_speed_changed():

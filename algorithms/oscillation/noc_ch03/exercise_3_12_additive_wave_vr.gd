@@ -1,7 +1,6 @@
 extends Node3D
 const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
-const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_WAVE := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres")
 
 @export var num_waves: int = 3
@@ -11,12 +10,13 @@ var _sim_root: Node3D
 var _wave_mesh: MeshInstance3D
 var _waves: Array[Dictionary] = []
 var _status_label: Label3D
-var _controller_root: Node3D
+var _control_panel: Node3D
 
 func _ready() -> void:
 	_setup_environment()
 	_init_waves()
 	_spawn_wave()
+	_setup_controls()
 	call_deferred("_apply_standard_presentation")
 	set_process(true)
 
@@ -32,21 +32,34 @@ func _setup_environment() -> void:
 	_status_label.position = Vector3(0, 0.82, 0)
 	_sim_root.add_child(_status_label)
 
-	_controller_root = Node3D.new()
-	_controller_root.position = Vector3(0.75, 0.45, 0)
-	add_child(_controller_root)
 
-	var speed_controller := CONTROLLER_SCENE.instantiate()
-	speed_controller.parameter_name = "Speed"
-	speed_controller.min_value = 0.01
-	speed_controller.max_value = 0.1
-	speed_controller.default_value = wave_speed
-	speed_controller.rotation_degrees = Vector3(0, 90, 0)
-	_controller_root.add_child(speed_controller)
-	speed_controller.value_changed.connect(func(v: float) -> void:
-		wave_speed = v
-	)
-	speed_controller.set_value(wave_speed)
+func _setup_controls() -> void:
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("ADDITIVE WAVES", [
+		[
+			{"type": "slider_h", "label": "WAVES", "default": float(num_waves - 1) / 7.0},
+			{"type": "slider_h", "label": "SPEED", "default": (wave_speed - 0.01) / 0.09},
+		],
+	])
+	_control_panel.position = Vector3(0.3, 0.15, 0.1)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_control_panel)
+
+	var waves_slider: Node = _control_panel.find_child("Param_0", true, false)
+	var spd_slider: Node = _control_panel.find_child("Param_1", true, false)
+
+	if waves_slider and waves_slider.has_signal("slider_moved"):
+		waves_slider.slider_moved.connect(func(_n: String) -> void:
+			var new_count: int = 1 + int(waves_slider.get_normalized_value() * 7.0)
+			if new_count != num_waves:
+				num_waves = new_count
+				_init_waves()
+		)
+	if spd_slider and spd_slider.has_signal("slider_moved"):
+		spd_slider.slider_moved.connect(func(_n: String) -> void:
+			wave_speed = 0.01 + spd_slider.get_normalized_value() * 0.09
+		)
+
 
 func _init_waves() -> void:
 	_waves.clear()

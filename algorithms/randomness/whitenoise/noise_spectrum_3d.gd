@@ -62,7 +62,6 @@ var _brown_state := 0.0
 var _blue_lowpass := 0.0
 var _previous_white := 0.0
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 # Color mapping for each noise type
 var noise_colors = {
@@ -238,79 +237,45 @@ func _setup_audio_player() -> void:
 	_audio_player.stream = _audio_generator
 
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "NoiseAudioControls"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("NOISE 3D", [
+		[
+			{"type": "button", "label": "WHITE"},
+			{"type": "button", "label": "PINK"},
+			{"type": "button", "label": "BROWN"},
+		],
+		[
+			{"type": "button", "label": "BLUE"},
+			{"type": "button", "label": "VIOLET"},
+			{"type": "button", "label": "STOP"},
+		],
+	])
 	_control_panel.position = Vector3(0, 0.25, 6.2)
-	_control_panel.rotation_degrees = Vector3(-28, 0, 0)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(_control_panel)
 
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.52, 0.2, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.11, 0.95)
-	panel_mat.metallic = 0.2
-	panel_mat.roughness = 0.85
-	panel_back.material_override = panel_mat
-	panel_back.position = Vector3(0, -0.005, -0.01)
-	_control_panel.add_child(panel_back)
+	var noise_types: Array = [NoiseType.WHITE, NoiseType.PINK, NoiseType.BROWN, NoiseType.BLUE, NoiseType.VIOLET]
+	for i in range(noise_types.size()):
+		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var selected_type: NoiseType = noise_types[i]
+			var area: Node = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(func(_b): _play_noise_preview(selected_type))
 
-	_add_panel_label(_control_panel, "NOISE AUDIO PREVIEW", Vector3(0, 0.08, 0.01), 7, Color(0.85, 0.92, 1.0))
-
-	var button_data = [
-		{"label": "WHITE", "type": NoiseType.WHITE},
-		{"label": "PINK", "type": NoiseType.PINK},
-		{"label": "BROWN", "type": NoiseType.BROWN},
-		{"label": "BLUE", "type": NoiseType.BLUE},
-		{"label": "VIOLET", "type": NoiseType.VIOLET}
-	]
-
-	for i in range(button_data.size()):
-		var data = button_data[i]
-		var btn = PUSH_BUTTON.instantiate()
-		var row = int(i / 3)
-		var col = i % 3
-		btn.name = "%sButton" % data["label"]
-		btn.position = Vector3(-0.14 + col * 0.14, 0.03 - row * 0.06, 0.0)
-		btn.scale = Vector3(0.72, 0.72, 0.72)
-		_control_panel.add_child(btn)
-
-		var accent: Color = noise_colors[int(data["type"])]
-		btn.set("pressed_color", accent)
-		btn.set("released_color", accent.darkened(0.78))
-		btn.call("update_colors")
-		_add_panel_label(btn, data["label"], Vector3(0, -0.024, 0), 7, Color(0.96, 0.96, 0.96))
-
-		var selected_type: NoiseType = int(data["type"])
-		var area = btn.get_node_or_null("InteractableAreaButton")
+	var stop_btn: Node = _control_panel.find_child("Btn_5", true, false)
+	if stop_btn:
+		var area: Node = stop_btn.get_node_or_null("InteractableAreaButton")
 		if area:
-			area.button_pressed.connect(func(_b): _play_noise_preview(selected_type))
+			area.button_pressed.connect(func(_b): _stop_audio_preview())
 
-	var stop_btn = PUSH_BUTTON.instantiate()
-	stop_btn.name = "StopButton"
-	stop_btn.position = Vector3(0.21, -0.03, 0.0)
-	stop_btn.scale = Vector3(0.72, 0.72, 0.72)
-	_control_panel.add_child(stop_btn)
-	stop_btn.set("pressed_color", Color(1.0, 0.24, 0.24))
-	stop_btn.set("released_color", Color(0.2, 0.08, 0.08))
-	stop_btn.call("update_colors")
-	_add_panel_label(stop_btn, "STOP", Vector3(0, -0.024, 0), 7, Color(1.0, 0.95, 0.95))
-	var stop_area = stop_btn.get_node_or_null("InteractableAreaButton")
-	if stop_area:
-		stop_area.button_pressed.connect(_stop_audio_preview)
-
-	_status_label = _add_panel_label(_control_panel, "Audio: stopped", Vector3(0, -0.08, 0.01), 7, Color(0.82, 0.86, 0.94))
-
-func _add_panel_label(parent: Node3D, text: String, local_pos: Vector3, size: int, color: Color) -> Label3D:
-	var label = Label3D.new()
-	label.text = text
-	label.pixel_size = 0.001
-	label.font_size = size
-	label.position = local_pos
-	label.modulate = color
-	parent.add_child(label)
-	return label
+	_status_label = Label3D.new()
+	_status_label.text = "Audio: stopped"
+	_status_label.pixel_size = 0.001
+	_status_label.font_size = 7
+	_status_label.position = Vector3(0, -0.08, 0.01)
+	_status_label.modulate = Color(0.82, 0.86, 0.94)
+	_control_panel.add_child(_status_label)
 
 func _play_noise_preview(type: NoiseType) -> void:
 	if not _audio_player:

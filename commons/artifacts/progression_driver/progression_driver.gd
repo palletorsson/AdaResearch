@@ -5,9 +5,6 @@ class_name ProgressionDriver
 ## and reset progression on all three managers. Slider selects sequence,
 ## buttons trigger force_advance_to or reset_progression.
 
-# --- Preloads ---
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 # --- Configuration ---
 @export var panel_width: float = 0.9
@@ -146,20 +143,19 @@ func _build_sequence_section() -> void:
 	_make_label("SEQUENCE", 16, COL_LABEL,
 		Vector3(-panel_width / 2.0 + 0.04, section_y, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
 
-	# Slider — placed as child of a control node for positioning
-	_control_panel = Node3D.new()
+	# RackTemplates slider panel
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("PROGRESSION", [
+		[{"type": "slider_h", "label": "STAGE", "default": 0.0}],
+	])
 	_control_panel.position = Vector3(0, section_y - 0.04, 0.01)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(_control_panel)
 
-	_sequence_slider = SLIDER_HORIZONTAL.instantiate()
-	_sequence_slider.position = Vector3(0, 0, 0)
-	_sequence_slider.scale = Vector3(1.2, 1.2, 1.2)
-	var slider_label = _sequence_slider.get_node_or_null("Frame/LabelName")
-	if slider_label:
-		slider_label.text = "STAGE"
-	_control_panel.add_child(_sequence_slider)
-	_sequence_slider.slider_moved.connect(_on_sequence_slider_moved)
-	_signal_connections.append([_sequence_slider, &"slider_moved", _on_sequence_slider_moved])
+	_sequence_slider = _control_panel.find_child("Param_0", true, false)
+	if _sequence_slider and _sequence_slider.has_signal("slider_moved"):
+		_sequence_slider.slider_moved.connect(_on_sequence_slider_moved)
+		_signal_connections.append([_sequence_slider, &"slider_moved", _on_sequence_slider_moved])
 
 	# Current sequence label below slider
 	_sequence_label = _make_label("→ — (0/%d)" % _sequence_order.size(), 20, COL_VALUE,
@@ -191,19 +187,21 @@ func _build_action_buttons() -> void:
 
 	_add_section_divider(btn_y + 0.02)
 
-	var x_positions := [-0.25, 0.0, 0.25]
-	var labels := ["ADVANCE", "RESET", "UNLOCK ALL"]
-	var callbacks := [_on_advance, _on_reset, _on_unlock_all]
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var action_panel: Node3D = RackTpl.create_panel("ACTIONS", [
+		[
+			{"type": "button", "label": "ADVANCE"},
+			{"type": "button", "label": "RESET"},
+			{"type": "button", "label": "UNLOCK ALL"},
+		],
+	], true)  # frameless — we already have the panel background
+	action_panel.position = Vector3(0, btn_y - 0.02, 0.015)
+	add_child(action_panel)
 
+	var callbacks := [_on_advance, _on_reset, _on_unlock_all]
 	for i in range(3):
-		var btn := PUSH_BUTTON.instantiate()
-		btn.position = Vector3(x_positions[i], btn_y - 0.02, 0.015)
-		add_child(btn)
-		_add_button_label(btn, labels[i])
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(callbacks[i])
-			_signal_connections.append([area, &"button_pressed", callbacks[i]])
+		var btn: Node = action_panel.find_child("Btn_%d" % i, true, false)
+		_connect_button(btn, callbacks[i])
 
 
 func _on_advance(_b) -> void:
@@ -282,32 +280,23 @@ func _build_befriend_section() -> void:
 			Vector3(-panel_width / 2.0 + 0.04, section_y - 0.03, 0.003), HORIZONTAL_ALIGNMENT_LEFT)
 		return
 
+	# Build button labels for the grid
 	var cols := 4
-	var x_start := -panel_width / 2.0 + 0.12
-	var x_step := 0.20
-	var y_start := section_y - 0.05
-	var y_step := 0.055
+	var rows_needed := ceili(float(_all_hazard_types.size()) / float(cols))
+	var btn_labels: Array[String] = []
+	for hazard_type in _all_hazard_types:
+		btn_labels.append(_short_name(hazard_type))
+
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var befriend_panel: Node3D = RackTpl.create_button_grid(cols, rows_needed, btn_labels)
+	befriend_panel.position = Vector3(0, section_y - 0.05, 0.015)
+	add_child(befriend_panel)
 
 	for i in range(_all_hazard_types.size()):
-		var col := i % cols
-		var row := i / cols
-		var hazard_type := _all_hazard_types[i]
-
-		var btn := PUSH_BUTTON.instantiate()
-		btn.position = Vector3(x_start + col * x_step, y_start - row * y_step, 0.015)
-		btn.scale = Vector3(0.7, 0.7, 0.7)
-		add_child(btn)
-
-		# Short label — first part of name, max 10 chars
-		var short := _short_name(hazard_type)
-		_add_button_label(btn, short)
-
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			var type_ref := hazard_type  # Capture for closure
-			var cb := func(_b): _on_befriend(type_ref)
-			area.button_pressed.connect(cb)
-			_signal_connections.append([area, &"button_pressed", cb])
+		var btn: Node = befriend_panel.find_child("Btn_%d" % i, true, false)
+		var type_ref := _all_hazard_types[i]
+		var cb := func(_b): _on_befriend(type_ref)
+		_connect_button(btn, cb)
 
 
 func _on_befriend(hazard_type: String) -> void:
@@ -352,13 +341,13 @@ func _make_label(text: String, size: int, color: Color, pos: Vector3, align: int
 	return lbl
 
 
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
+func _connect_button(btn: Node, callback: Callable) -> void:
+	if not btn:
+		return
+	var area: Node = btn.get_node_or_null("InteractableAreaButton")
+	if area and area.has_signal("button_pressed"):
+		area.button_pressed.connect(callback)
+		_signal_connections.append([area, &"button_pressed", callback])
 
 
 func _add_section_divider(y: float) -> void:

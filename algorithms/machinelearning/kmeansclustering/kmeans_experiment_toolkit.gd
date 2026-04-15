@@ -4,8 +4,8 @@ extends Node3D
 # Advanced educational experiments and comparative analysis
 # Converted from Control to Node3D for VR compatibility
 
-const SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
-const ButtonScene = preload("res://commons/interactables/push_button.tscn")
+var SliderScene: PackedScene
+var ButtonScene: PackedScene
 
 @export var kmeans_visualization: Node3D
 @export var enable_advanced_experiments: bool = true
@@ -47,6 +47,8 @@ enum ExperimentType {
 }
 
 func _ready() -> void:
+	SliderScene = load("res://commons/interactables/slider_horizontal.tscn")
+	ButtonScene = load("res://commons/interactables/push_button.tscn")
 	setup_experiment_layout()
 	connect_to_visualization()
 

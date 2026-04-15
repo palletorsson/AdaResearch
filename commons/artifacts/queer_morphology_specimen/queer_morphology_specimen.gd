@@ -73,8 +73,6 @@ const STATES = {
 	"dissolving": "DISSOLVING\nEntropy wins\nForm releasing"
 }
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 const FLUID_SHADER = """
 shader_type spatial;
@@ -313,75 +311,41 @@ func _create_labels():
 	add_child(_state_label)
 
 func _create_vr_controls():
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("MORPHOLOGY", [
+		[
+			{"type": "slider_h", "label": "LAMBDA", "default": lambda},
+			{"type": "slider_h", "label": "PHI", "default": (phi + 1.0) / 2.0},
+		],
+		[
+			{"type": "button", "label": "CRYST"},
+			{"type": "button", "label": "EDGE"},
+			{"type": "button", "label": "FLUID"},
+		],
+	])
 	_control_panel.position = Vector3(0, 0.05, jar_radius + 0.2)
-	_control_panel.rotation_degrees = Vector3(20, 0, 0)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(_control_panel)
-	
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.35, 0.15, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.06, 0.06, 0.08)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
-	
-	# Lambda slider (edge of chaos: 0-1)
-	_lambda_slider = SLIDER_HORIZONTAL.instantiate()
-	_lambda_slider.name = "LambdaSlider"
-	_lambda_slider.position = Vector3(-0.08, 0.025, 0)
-	_lambda_slider.rotation_degrees.x = -30
-	var lambda_label = _lambda_slider.get_node_or_null("Frame/LabelName")
-	if lambda_label:
-		lambda_label.text = "λ EDGE"
-	_control_panel.add_child(_lambda_slider)
-	_lambda_slider.slider_moved.connect(_on_lambda_slider_moved)
-	
-	# Phi slider (becoming: -1 to 1)
-	_phi_slider = SLIDER_HORIZONTAL.instantiate()
-	_phi_slider.name = "PhiSlider"
-	_phi_slider.position = Vector3(0.08, 0.025, 0)
-	_phi_slider.rotation_degrees.x = -30
-	var phi_label = _phi_slider.get_node_or_null("Frame/LabelName")
-	if phi_label:
-		phi_label.text = "φ BECOME"
-	_control_panel.add_child(_phi_slider)
-	_phi_slider.slider_moved.connect(_on_phi_slider_moved)
-	
-	# Preset buttons
-	var presets = [
-		["CRYST", 0.1, -0.8],  # Crystalline
-		["EDGE", 0.5, 0.0],    # Edge of chaos
-		["FLUID", 0.8, 0.6],   # Fluid becoming
-	]
-	
-	for i in range(presets.size()):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.1 + i * 0.1, -0.04, 0)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, presets[i][0])
-		
-		var l = presets[i][1]
-		var p = presets[i][2]
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(func(_b): _apply_preset(l, p))
-	
-	call_deferred("_sync_sliders_deferred")
 
-func _add_button_label(btn: Node, text: String):
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 9
-	lbl.position = Vector3(0, -0.025, 0)
-	btn.add_child(lbl)
+	_lambda_slider = _control_panel.find_child("Param_0", true, false)
+	if _lambda_slider and _lambda_slider.has_signal("slider_moved"):
+		_lambda_slider.slider_moved.connect(_on_lambda_slider_moved)
+
+	_phi_slider = _control_panel.find_child("Param_1", true, false)
+	if _phi_slider and _phi_slider.has_signal("slider_moved"):
+		_phi_slider.slider_moved.connect(_on_phi_slider_moved)
+
+	var preset_data := [[0.1, -0.8], [0.5, 0.0], [0.8, 0.6]]
+	for i in range(preset_data.size()):
+		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var l: float = preset_data[i][0]
+			var p: float = preset_data[i][1]
+			var area: Node = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(func(_b): _apply_preset(l, p))
+
+	call_deferred("_sync_sliders_deferred")
 
 func _sync_sliders_deferred():
 	_sync_lambda_slider()

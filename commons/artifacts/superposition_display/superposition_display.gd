@@ -14,7 +14,7 @@ class_name SuperpositionDisplay
 # relationships: paired with schrodinger_box (abstract vs physical superposition); contrasts florensky_sphere (quantum vs paraconsistent logic)
 # truth: superposition is not uncertainty about which state the system is in — it is the system genuinely being in both
 
-var SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
+var RackTpl = load("res://commons/audio/rack_templates/RackTemplates.gd")
 
 var _state_0: MeshInstance3D
 var _state_1: MeshInstance3D
@@ -106,12 +106,16 @@ func _process(delta):
 	mat1.albedo_color.a = 0.3 + 0.4 * beta
 
 func _setup_controls():
-	_slider = SliderScene.instantiate()
-	_slider.position = Vector3(0, 0.5, 0.6)
-	_slider.set_param_name("Speed")
-	_slider.set_normalized_value(0.25)
-	_slider.slider_moved.connect(_on_speed_changed)
-	add_child(_slider)
+	var panel = RackTpl.create_panel("SUPERPOSITION", [
+		[{"type": "slider_h", "label": "Speed", "default": 0.25}],
+	])
+	panel.position = Vector3(0, 0.5, 0.6)
+	panel.rotation_degrees = Vector3(-30, 0, 0)
+	add_child(panel)
+
+	_slider = panel.find_child("Param_0", true, false)
+	if _slider and _slider.has_signal("slider_moved"):
+		_slider.slider_moved.connect(_on_speed_changed)
 
 func _on_speed_changed():
 	var val = _slider.get_normalized_value()

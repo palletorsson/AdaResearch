@@ -20,7 +20,6 @@ extends Node3D
 ##
 ## Place in the grid and the player's own movements become the entropy source.
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 const DECAY_SHADER = preload("res://algorithms/randomness/hardware_entropy_decay/hardware_decay.gdshader")
 
 # --- Export tunables ---
@@ -487,61 +486,34 @@ func _build_source_indicator() -> void:
 
 
 func _build_vr_controls() -> void:
-	var panel := Node3D.new()
-	panel.name = "VRControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("ENTROPY DECAY", [
+		[
+			{"type": "button", "label": "RESET"},
+			{"type": "button", "label": "PAUSE"},
+		],
+	])
 	var panel_x := -float(panel_count) * panel_spacing * 0.5 - 0.8
 	panel.position = Vector3(panel_x, pedestal_height + 0.3, 0.5)
 	panel.rotation_degrees = Vector3(-25, 20, 0)
 	add_child(panel)
 
-	# Panel backing
-	var back := MeshInstance3D.new()
-	var back_mesh := BoxMesh.new()
-	back_mesh.size = Vector3(0.36, 0.12, 0.008)
-	back.mesh = back_mesh
-	var back_mat := StandardMaterial3D.new()
-	back_mat.albedo_color = Color(0.06, 0.06, 0.08)
-	back_mat.metallic = 0.3
-	back.material_override = back_mat
-	back.position.z = -0.008
-	panel.add_child(back)
+	# RESET button (Btn_0)
+	var reset_btn: Node = panel.find_child("Btn_0", true, false)
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _reset())
 
-	# RESET button
-	var reset_btn := PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetBtn"
-	reset_btn.position = Vector3(-0.1, 0.0, 0)
-	reset_btn.scale = Vector3(0.7, 0.7, 0.7)
-	panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RESET")
-
-	var reset_area := reset_btn.get_node_or_null("InteractableAreaButton")
-	if reset_area:
-		reset_area.button_pressed.connect(func(_b): _reset())
-
-	# PAUSE button
-	var pause_btn := PUSH_BUTTON.instantiate()
-	pause_btn.name = "PauseBtn"
-	pause_btn.position = Vector3(0.1, 0.0, 0)
-	pause_btn.scale = Vector3(0.7, 0.7, 0.7)
-	panel.add_child(pause_btn)
-	_add_button_label(pause_btn, "PAUSE")
-
-	var pause_area := pause_btn.get_node_or_null("InteractableAreaButton")
-	if pause_area:
-		pause_area.button_pressed.connect(func(_b):
-			_paused = not _paused
-			_update_source_indicator()
-		)
-
-
-func _add_button_label(btn: Node3D, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 8
-	lbl.position = Vector3(0, -0.022, 0)
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	btn.add_child(lbl)
+	# PAUSE button (Btn_1)
+	var pause_btn: Node = panel.find_child("Btn_1", true, false)
+	if pause_btn:
+		var area = pause_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b):
+				_paused = not _paused
+				_update_source_indicator()
+			)
 
 
 # ============================================================

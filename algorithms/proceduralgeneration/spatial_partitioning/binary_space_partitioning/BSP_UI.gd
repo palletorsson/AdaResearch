@@ -1,77 +1,73 @@
 extends Node3D
 
-const VRSlider = preload("res://commons/interactables/slider_horizontal.tscn")
-const VRButton = preload("res://commons/interactables/push_button.tscn")
-
 var bsp_node: Node
-var depth_slider: Node3D
-var min_size_slider: Node3D
-var gradient_slider: Node3D
-var falloff_slider: Node3D
-var bias_slider: Node3D
+var _control_panel: Node3D
+var depth_slider: Node
+var min_size_slider: Node
+var gradient_slider: Node
+var falloff_slider: Node
+var bias_slider: Node
 var status_label: Label3D
 
 func _ready() -> void:
 	bsp_node = get_node_or_null("../..")
 
-	# Stats label
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("BSP ROOMS", [
+		[
+			{"type": "slider_h", "label": "DEPTH", "default": 0.5},
+			{"type": "slider_h", "label": "MIN SIZE", "default": 0.5},
+			{"type": "slider_h", "label": "GRADIENT", "default": 0.5},
+		],
+		[
+			{"type": "slider_h", "label": "FALLOFF", "default": 0.5},
+			{"type": "slider_h", "label": "BIAS", "default": 0.5},
+		],
+		[
+			{"type": "button", "label": "PARTITION"},
+			{"type": "button", "label": "RANDOM"},
+		],
+	])
+	_control_panel.position = Vector3(0, 0.35, 0)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_control_panel)
+
+	# Status label above panel
 	status_label = Label3D.new()
 	status_label.position = Vector3(0, 0.5, 0)
+	status_label.font_size = 32
 	status_label.text = "BSP Partitioning"
-	status_label.font_size = 48
 	status_label.modulate = Color.WHITE
 	add_child(status_label)
 
-	# Depth slider
-	depth_slider = VRSlider.instantiate()
-	depth_slider.position = Vector3(0, 0.3, 0)
-	add_child(depth_slider)
-	depth_slider.set_param_name("Max Depth")
-	depth_slider.slider_moved.connect(_on_depth_changed)
+	depth_slider = _control_panel.find_child("Param_0", true, false)
+	min_size_slider = _control_panel.find_child("Param_1", true, false)
+	gradient_slider = _control_panel.find_child("Param_2", true, false)
+	falloff_slider = _control_panel.find_child("Param_3", true, false)
+	bias_slider = _control_panel.find_child("Param_4", true, false)
 
-	# Min cell size slider
-	min_size_slider = VRSlider.instantiate()
-	min_size_slider.position = Vector3(0, 0.18, 0)
-	add_child(min_size_slider)
-	min_size_slider.set_param_name("Min Cell Size")
-	min_size_slider.slider_moved.connect(_on_min_size_changed)
+	if depth_slider:
+		depth_slider.slider_moved.connect(_on_depth_changed)
+	if min_size_slider:
+		min_size_slider.slider_moved.connect(_on_min_size_changed)
+	if gradient_slider:
+		gradient_slider.slider_moved.connect(_on_gradient_type_changed)
+	if falloff_slider:
+		falloff_slider.slider_moved.connect(_on_falloff_changed)
+	if bias_slider:
+		bias_slider.slider_moved.connect(_on_bias_changed)
 
-	# Gradient type slider
-	gradient_slider = VRSlider.instantiate()
-	gradient_slider.position = Vector3(0, 0.06, 0)
-	add_child(gradient_slider)
-	gradient_slider.set_param_name("Gradient Type")
-	gradient_slider.slider_moved.connect(_on_gradient_type_changed)
+	var part_btn = _control_panel.find_child("Btn_0", true, false)
+	if part_btn:
+		var area = part_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_regenerate_pressed())
 
-	# Falloff slider
-	falloff_slider = VRSlider.instantiate()
-	falloff_slider.position = Vector3(0, -0.06, 0)
-	add_child(falloff_slider)
-	falloff_slider.set_param_name("Falloff")
-	falloff_slider.slider_moved.connect(_on_falloff_changed)
-
-	# Bias slider
-	bias_slider = VRSlider.instantiate()
-	bias_slider.position = Vector3(0, -0.18, 0)
-	add_child(bias_slider)
-	bias_slider.set_param_name("Center Bias")
-	bias_slider.slider_moved.connect(_on_bias_changed)
-
-	# Partition button
-	var partition_btn = VRButton.instantiate()
-	partition_btn.position = Vector3(-0.1, -0.34, 0)
-	add_child(partition_btn)
-	var part_area = partition_btn.get_node_or_null("InteractableAreaButton")
-	if part_area:
-		part_area.button_pressed.connect(_on_regenerate_pressed)
-
-	# Random button
-	var random_btn = VRButton.instantiate()
-	random_btn.position = Vector3(0.1, -0.34, 0)
-	add_child(random_btn)
-	var rand_area = random_btn.get_node_or_null("InteractableAreaButton")
-	if rand_area:
-		rand_area.button_pressed.connect(_on_random_pressed)
+	var rand_btn = _control_panel.find_child("Btn_1", true, false)
+	if rand_btn:
+		var area = rand_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_random_pressed())
 
 	_update_ui_from_node()
 	if bsp_node:
@@ -81,11 +77,16 @@ func _ready() -> void:
 func _update_ui_from_node() -> void:
 	if not bsp_node:
 		return
-	depth_slider.set_normalized_value(remap(bsp_node.max_depth, 1, 10, 0.0, 1.0))
-	min_size_slider.set_normalized_value(remap(bsp_node.min_cell_size, 0.5, 5.0, 0.0, 1.0))
-	gradient_slider.set_normalized_value(remap(bsp_node.gradient_type, 0, 3, 0.0, 1.0))
-	falloff_slider.set_normalized_value(bsp_node.gradient_falloff)
-	bias_slider.set_normalized_value(bsp_node.center_bias)
+	if depth_slider:
+		depth_slider.set_normalized_value(remap(bsp_node.max_depth, 1, 10, 0.0, 1.0))
+	if min_size_slider:
+		min_size_slider.set_normalized_value(remap(bsp_node.min_cell_size, 0.5, 5.0, 0.0, 1.0))
+	if gradient_slider:
+		gradient_slider.set_normalized_value(remap(bsp_node.gradient_type, 0, 3, 0.0, 1.0))
+	if falloff_slider:
+		falloff_slider.set_normalized_value(bsp_node.gradient_falloff)
+	if bias_slider:
+		bias_slider.set_normalized_value(bsp_node.center_bias)
 
 func _on_regenerate_pressed() -> void:
 	if not bsp_node:
@@ -96,8 +97,10 @@ func _on_regenerate_pressed() -> void:
 func _on_random_pressed() -> void:
 	if not bsp_node:
 		return
-	depth_slider.set_normalized_value(randf())
-	min_size_slider.set_normalized_value(randf())
+	if depth_slider:
+		depth_slider.set_normalized_value(randf())
+	if min_size_slider:
+		min_size_slider.set_normalized_value(randf())
 	_on_depth_changed(0.0)
 	_on_min_size_changed(0.0)
 	bsp_node.generate_bsp()

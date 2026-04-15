@@ -17,8 +17,6 @@ extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 ## relationships: Applied extension of vector_addition_demo and VectorFieldFlow. Demonstrates the same addition in a narrative (weather) context. Contrasts with force_field_visualizer (abstract vs applied).
 ## truth: Wind is a vector field. Rain is a particle advected through two fields at once. Weather is superposition you can stand in.
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
 # ── Grabbable wind vectors ──
 var wind_a: Node3D
@@ -439,58 +437,49 @@ func _create_decomp_arrow(color: Color) -> MeshInstance3D:
 
 
 func _build_controls() -> void:
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("WEATHER FIELD", [
+		[
+			{"type": "button", "label": "MODE"},
+			{"type": "button", "label": "GRID"},
+			{"type": "button", "label": "RESET"},
+		],
+		[
+			{"type": "slider_h", "label": "GRAVITY", "default": gravity_strength / 2.0},
+			{"type": "slider_h", "label": "PRESSURE", "default": pressure_intensity},
+		],
+	])
 	var sc := SCENE_SCALE
 	var control_base := Vector3(-3.5, 1.5, -2.5)
+	panel.position = control_base * sc
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
 
-	# Mode button
-	mode_button = PUSH_BUTTON.instantiate()
-	mode_button.name = "ModeButton"
-	mode_button.position = control_base * sc
-	mode_button.scale = Vector3.ONE * 0.3
-	add_child(mode_button)
-	if mode_button.has_signal("button_pressed"):
-		mode_button.connect("button_pressed", _on_mode_pressed)
-	_set_button_label(mode_button, "Mode")
+	mode_button = panel.find_child("Btn_0", true, false)
+	if mode_button:
+		var area: Node = mode_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_mode_pressed())
 
-	# Grid toggle button
-	grid_button = PUSH_BUTTON.instantiate()
-	grid_button.name = "GridButton"
-	grid_button.position = (control_base + Vector3(0, -0.6, 0)) * sc
-	grid_button.scale = Vector3.ONE * 0.3
-	add_child(grid_button)
-	if grid_button.has_signal("button_pressed"):
-		grid_button.connect("button_pressed", _on_grid_pressed)
-	_set_button_label(grid_button, "Grid")
+	grid_button = panel.find_child("Btn_1", true, false)
+	if grid_button:
+		var area: Node = grid_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_grid_pressed())
 
-	# Reset button
-	reset_button = PUSH_BUTTON.instantiate()
-	reset_button.name = "ResetButton"
-	reset_button.position = (control_base + Vector3(0, -1.2, 0)) * sc
-	reset_button.scale = Vector3.ONE * 0.3
-	add_child(reset_button)
-	if reset_button.has_signal("button_pressed"):
-		reset_button.connect("button_pressed", _on_reset_pressed)
-	_set_button_label(reset_button, "Reset")
+	reset_button = panel.find_child("Btn_2", true, false)
+	if reset_button:
+		var area: Node = reset_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_reset_pressed())
 
-	# Gravity slider
-	gravity_slider = SLIDER_HORIZONTAL.instantiate()
-	gravity_slider.name = "GravitySlider"
-	gravity_slider.position = (control_base + Vector3(2.0, 0, 0)) * sc
-	gravity_slider.scale = Vector3.ONE * 0.3
-	add_child(gravity_slider)
-	if gravity_slider.has_signal("value_changed"):
-		gravity_slider.connect("value_changed", _on_gravity_changed)
-	_set_slider_label(gravity_slider, "Gravity")
+	gravity_slider = panel.find_child("Param_0", true, false)
+	if gravity_slider and gravity_slider.has_signal("slider_moved"):
+		gravity_slider.slider_moved.connect(func(_n): _on_gravity_changed(gravity_slider.get_normalized_value()))
 
-	# Pressure slider
-	pressure_slider = SLIDER_HORIZONTAL.instantiate()
-	pressure_slider.name = "PressureSlider"
-	pressure_slider.position = (control_base + Vector3(2.0, -0.6, 0)) * sc
-	pressure_slider.scale = Vector3.ONE * 0.3
-	add_child(pressure_slider)
-	if pressure_slider.has_signal("value_changed"):
-		pressure_slider.connect("value_changed", _on_pressure_changed)
-	_set_slider_label(pressure_slider, "Pressure")
+	pressure_slider = panel.find_child("Param_1", true, false)
+	if pressure_slider and pressure_slider.has_signal("slider_moved"):
+		pressure_slider.slider_moved.connect(func(_n): _on_pressure_changed(pressure_slider.get_normalized_value()))
 
 	# Status label
 	status_label = Label3D.new()
@@ -842,22 +831,6 @@ func _on_pressure_changed(value: float) -> void:
 #  BUTTON/SLIDER HELPERS
 # ════════════════════════════════════════════════════════════════════
 
-func _set_button_label(button: Node3D, text: String) -> void:
-	var label := button.get_node_or_null("Label3D")
-	if label:
-		label.text = text
-	else:
-		# Try setting property
-		if button.has_method("set_button_text"):
-			button.set_button_text(text)
-
-
-func _set_slider_label(slider: Node3D, text: String) -> void:
-	var label := slider.get_node_or_null("Label3D")
-	if label:
-		label.text = text
-	else:
-		if slider.has_method("set_slider_text"):
 			slider.set_slider_text(text)
 
 func _exit_tree() -> void:

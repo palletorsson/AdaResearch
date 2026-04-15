@@ -66,8 +66,7 @@ var _btn_b: Node
 var _btn_both: Node
 var _btn_anim: Node
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
+var _rack_panel: Node3D
 
 
 func _ready() -> void:
@@ -351,74 +350,60 @@ func _update_info() -> void:
 # ------------------------------------------------------------------
 
 func _build_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
-	_control_panel.position = Vector3(0, -0.02, 0.35)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
-	add_child(_control_panel)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_rack_panel = RackTpl.create_panel("TRANSFORMS", [
+		[
+			{"type": "slider_h", "label": "ROT", "default": -1.0},
+			{"type": "slider_h", "label": "DIST", "default": -1.0},
+		],
+		[
+			{"type": "button", "label": "A"},
+			{"type": "button", "label": "B"},
+			{"type": "button", "label": "A+B"},
+			{"type": "button", "label": "PLAY"},
+		],
+	])
+	_rack_panel.position = Vector3(0, -0.02, 0.35)
+	_rack_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_rack_panel)
+	_control_panel = _rack_panel
 
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.65, 0.14, 0.008)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.06, 0.06, 0.08)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.008
-	_control_panel.add_child(panel_back)
+	# Extract slider references
+	_rot_slider = _rack_panel.find_child("Param_0", true, false)
+	_dist_slider = _rack_panel.find_child("Param_1", true, false)
 
-	# Sliders
-	var x_start = -0.25
+	# Connect slider signals
+	if _rot_slider and _rot_slider.has_signal("slider_moved"):
+		_rot_slider.slider_moved.connect(_on_rot_slider)
+	if _dist_slider and _dist_slider.has_signal("slider_moved"):
+		_dist_slider.slider_moved.connect(_on_dist_slider)
 
-	_rot_slider = _add_slider("ROT", x_start, _on_rot_slider)
-	_dist_slider = _add_slider("DIST", x_start + 0.14, _on_dist_slider)
+	# Extract and connect button references
+	_btn_a = _rack_panel.find_child("Btn_0", true, false)
+	if _btn_a:
+		var area = _btn_a.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _set_display(true, false))
 
-	# Buttons
-	var btn_x = x_start + 0.30
-	var btn_step = 0.08
+	_btn_b = _rack_panel.find_child("Btn_1", true, false)
+	if _btn_b:
+		var area = _btn_b.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _set_display(false, true))
 
-	_btn_a = _add_button("A", btn_x, func(_b): _set_display(true, false))
-	_btn_b = _add_button("B", btn_x + btn_step, func(_b): _set_display(false, true))
-	_btn_both = _add_button("A+B", btn_x + btn_step * 2, func(_b): _set_display(true, true))
-	_btn_anim = _add_button("PLAY", btn_x + btn_step * 3, func(_b): _start_animation())
+	_btn_both = _rack_panel.find_child("Btn_2", true, false)
+	if _btn_both:
+		var area = _btn_both.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _set_display(true, true))
+
+	_btn_anim = _rack_panel.find_child("Btn_3", true, false)
+	if _btn_anim:
+		var area = _btn_anim.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _start_animation())
 
 	call_deferred("_sync_all_sliders")
-
-
-func _add_slider(label_text: String, x_pos: float, callback: Callable) -> Node:
-	var slider = SLIDER_HORIZONTAL.instantiate()
-	slider.name = label_text + "Slider"
-	slider.position = Vector3(x_pos, 0.02, 0)
-	slider.rotation_degrees.x = -30
-	slider.scale = Vector3(0.75, 0.75, 0.75)
-	var lbl = slider.get_node_or_null("Frame/LabelName")
-	if lbl:
-		lbl.text = label_text
-	_control_panel.add_child(slider)
-	slider.slider_moved.connect(callback)
-	return slider
-
-
-func _add_button(label_text: String, x_pos: float, callback: Callable) -> Node:
-	var btn = PUSH_BUTTON.instantiate()
-	btn.name = label_text + "Btn"
-	btn.position = Vector3(x_pos, -0.02, 0)
-	btn.rotation_degrees.x = -30
-	_control_panel.add_child(btn)
-
-	var lbl = Label3D.new()
-	lbl.text = label_text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
-
-	var area = btn.get_node_or_null("InteractableAreaButton")
-	if area:
-		area.button_pressed.connect(callback)
-	return btn
 
 
 func _sync_slider(slider: Node, normalized: float) -> void:

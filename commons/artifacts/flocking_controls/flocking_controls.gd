@@ -97,9 +97,6 @@ var _coh_slider: Node
 var _speed_slider: Node
 var _radius_slider: Node
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-
 # Signal tracking for cleanup
 var _signal_connections: Array = []
 
@@ -361,30 +358,6 @@ func _create_vr_controls() -> void:
 			_signal_connections.append([area, &"button_pressed", cb])
 
 	call_deferred("_sync_all_sliders")
-
-
-func _add_slider(label_text: String, x_pos: float, callback: Callable) -> Node:
-	var slider = SLIDER_HORIZONTAL.instantiate()
-	slider.name = label_text.to_upper() + "Slider"
-	slider.position = Vector3(x_pos, 0.02, 0)
-	slider.rotation_degrees.x = -30
-	slider.scale = Vector3(0.75, 0.75, 0.75)
-	var lbl = slider.get_node_or_null("Frame/LabelName")
-	if lbl:
-		lbl.text = label_text
-	_control_panel.add_child(slider)
-	slider.slider_moved.connect(callback)
-	_signal_connections.append([slider, &"slider_moved", callback])
-	return slider
-
-
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
 
 
 # --- Slider sync helpers ---

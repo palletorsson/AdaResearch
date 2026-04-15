@@ -64,8 +64,6 @@ var _gen_slider: Node
 var _angle_slider: Node
 var _control_panel: Node3D
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 func _ready():
 	_create_display()
@@ -117,63 +115,28 @@ func _create_labels():
 	add_child(_info_label)
 
 func _create_vr_controls():
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("L-SYSTEM", [
+		[{"type": "slider_h", "label": "PRESET", "default": float(preset) / 6.0}],
+		[
+			{"type": "slider_h", "label": "GEN", "default": float(generations - 1) / 9.0},
+			{"type": "slider_h", "label": "ANGLE", "default": (angle_degrees - 5.0) / 85.0},
+		],
+	])
 	_control_panel.position = Vector3(0, 0.04, display_size * 0.5 + 0.15)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
-	
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.5, 0.2, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
-	
-	# Preset slider (0-6)
-	_preset_slider = SLIDER_HORIZONTAL.instantiate()
-	_preset_slider.name = "PresetSlider"
-	_preset_slider.position = Vector3(0, 0.055, 0)
-	_preset_slider.rotation_degrees.x = -30
-	var preset_label = _preset_slider.get_node_or_null("Frame/LabelName")
-	if preset_label:
-		preset_label.text = "PRESET"
-	_control_panel.add_child(_preset_slider)
-	_preset_slider.slider_moved.connect(_on_preset_slider_moved)
-	
-	# Generation slider (1-10)
-	_gen_slider = SLIDER_HORIZONTAL.instantiate()
-	_gen_slider.name = "GenSlider"
-	_gen_slider.position = Vector3(-0.12, -0.02, 0)
-	_gen_slider.rotation_degrees.x = -30
-	var gen_label = _gen_slider.get_node_or_null("Frame/LabelName")
-	if gen_label:
-		gen_label.text = "GEN"
-	_control_panel.add_child(_gen_slider)
-	_gen_slider.slider_moved.connect(_on_gen_slider_moved)
-	
-	# Angle slider (5-90)
-	_angle_slider = SLIDER_HORIZONTAL.instantiate()
-	_angle_slider.name = "AngleSlider"
-	_angle_slider.position = Vector3(0.12, -0.02, 0)
-	_angle_slider.rotation_degrees.x = -30
-	var angle_label = _angle_slider.get_node_or_null("Frame/LabelName")
-	if angle_label:
-		angle_label.text = "ANGLE"
-	_control_panel.add_child(_angle_slider)
-	_angle_slider.slider_moved.connect(_on_angle_slider_moved)
-	
-	call_deferred("_sync_sliders_deferred")
 
-func _sync_sliders_deferred():
-	_sync_preset_slider()
-	_sync_gen_slider()
-	_sync_angle_slider()
+	_preset_slider = _control_panel.find_child("Param_0", true, false)
+	_gen_slider = _control_panel.find_child("Param_1", true, false)
+	_angle_slider = _control_panel.find_child("Param_2", true, false)
+
+	if _preset_slider and _preset_slider.has_signal("slider_moved"):
+		_preset_slider.slider_moved.connect(_on_preset_slider_moved)
+	if _gen_slider and _gen_slider.has_signal("slider_moved"):
+		_gen_slider.slider_moved.connect(_on_gen_slider_moved)
+	if _angle_slider and _angle_slider.has_signal("slider_moved"):
+		_angle_slider.slider_moved.connect(_on_angle_slider_moved)
 
 func _sync_preset_slider():
 	if _preset_slider and _preset_slider.has_method("set_normalized_value"):

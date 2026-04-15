@@ -8,8 +8,6 @@ class_name SpaceDystopiaPopMain
 
 const SAMPLE_RATE = 44100
 
-const VR_BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
-
 var _player: AudioStreamPlayer
 var _current_track: int = -1
 var _is_generating: bool = false
@@ -55,87 +53,48 @@ func _setup_audio() -> void:
 
 
 func _setup_ui() -> void:
-	var y_pos := 0.7
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
 
-	# Title
-	_title_label = Label3D.new()
-	_title_label.text = "S P A C E\nD Y S T O P I A"
-	_title_label.font_size = 42
-	_title_label.modulate = Color(0.3, 0.5, 0.9)
-	_title_label.position = Vector3(-0.25, y_pos, 0)
-	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	add_child(_title_label)
-	y_pos -= 0.12
-
-	# Subtitle
-	var subtitle = Label3D.new()
-	subtitle.text = "A Procedural Album"
-	subtitle.font_size = 20
-	subtitle.modulate = Color(0.4, 0.4, 0.5)
-	subtitle.position = Vector3(-0.25, y_pos, 0)
-	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	add_child(subtitle)
-	y_pos -= 0.1
-
-	# Track buttons (left column)
-	var tracks = [
-		[1, "01 - Post-Singularity Drift"],
-		[2, "02 - Interdimensional Gate"],
-		[3, "03 - The Automated Foundry"],
-		[4, "04 - Augmented Noir"],
-		[5, "05 - Stellar Cathedral"],
-		[6, "06 - Neon Rain"],
-		[7, "07 - Elegiac Skyline"],
-		[8, "08 - Martian Bazaar"],
-		[9, "09 - Celestial Symphony"],
-		[10, "10 - The Singularity Event"]
+	# Build track buttons — 10 tracks + stop, one per row
+	var track_labels_text := [
+		"01 DRIFT", "02 GATE", "03 FOUNDRY", "04 NOIR", "05 CATHEDRAL",
+		"06 RAIN", "07 SKYLINE", "08 BAZAAR", "09 SYMPHONY", "10 SINGULAR"
 	]
+	var rows: Array = []
+	for tl in track_labels_text:
+		rows.append([{"type": "button", "label": tl}])
+	rows.append([{"type": "spacer"}])
+	rows.append([{"type": "button", "label": "STOP"}])
 
-	for t in tracks:
-		var btn = VR_BUTTON_SCENE.instantiate()
-		btn.position = Vector3(-0.25, y_pos, 0)
-		add_child(btn)
+	var panel: Node3D = RackTpl.create_panel("SPACE POP", rows)
+	panel.position = Vector3(-0.25, 0.4, 0)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
 
-		var lbl = Label3D.new()
-		lbl.text = t[1]
-		lbl.font_size = 16
-		lbl.modulate = Color(0.75, 0.78, 0.85)
-		lbl.position = Vector3(0.08, 0, 0)
-		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-		btn.add_child(lbl)
+	# Connect track buttons
+	for i in 10:
+		var btn: Node = panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			_track_buttons.append(btn)
+			var area = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(_on_track_selected.bind(i + 1))
 
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(_on_track_selected.bind(t[0]))
+	# Connect stop button (Btn_10)
+	_stop_btn = panel.find_child("Btn_10", true, false)
+	if _stop_btn:
+		var stop_area = _stop_btn.get_node_or_null("InteractableAreaButton")
+		if stop_area:
+			stop_area.button_pressed.connect(_stop_track)
 
-		_track_buttons.append(btn)
-		_track_labels.append(lbl)
-		y_pos -= 0.065
-
-	y_pos -= 0.04
-
-	# Controls row
-	_stop_btn = VR_BUTTON_SCENE.instantiate()
-	_stop_btn.position = Vector3(-0.25, y_pos, 0)
-	add_child(_stop_btn)
-	var stop_lbl = Label3D.new()
-	stop_lbl.text = "STOP"
-	stop_lbl.font_size = 18
-	stop_lbl.modulate = Color(0.8, 0.3, 0.3)
-	stop_lbl.position = Vector3(0, 0.03, 0)
-	_stop_btn.add_child(stop_lbl)
-	var stop_area = _stop_btn.get_node_or_null("InteractableAreaButton")
-	if stop_area:
-		stop_area.button_pressed.connect(_stop_track)
-
+	# Status label
 	_status_label = Label3D.new()
 	_status_label.text = ""
 	_status_label.font_size = 18
 	_status_label.modulate = Color(0.5, 0.5, 0.5)
-	_status_label.position = Vector3(-0.05, y_pos, 0)
+	_status_label.position = Vector3(-0.05, -0.1, 0)
 	_status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	add_child(_status_label)
-	y_pos -= 0.1
 
 	# Concept / description panel (right side)
 	_concept_label = Label3D.new()
@@ -204,15 +163,11 @@ func _generate_and_play(track_id: int) -> void:
 		_status_label.text = "Playing"
 		_status_label.modulate = Color(0.3, 0.9, 0.5)
 
-	for i in range(_track_labels.size()):
-		_track_labels[i].modulate = Color(0.5, 0.5, 0.5) if (i + 1) != track_id else Color(1.0, 1.0, 1.0)
 
 
 func _stop_track() -> void:
 	_player.stop()
 	_status_label.text = ""
-	for lbl in _track_labels:
-		lbl.modulate = Color(0.75, 0.78, 0.85)
 
 
 func _on_track_finished() -> void:

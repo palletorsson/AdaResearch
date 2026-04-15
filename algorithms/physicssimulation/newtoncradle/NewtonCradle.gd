@@ -33,10 +33,7 @@ var _balls: Array[MeshInstance3D] = []
 var _strings: Array[MeshInstance3D] = []
 var _pivot_y: float = 0.0
 var _info_label: Label3D
-var _control_panel: Node3D
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
 
 func _ready() -> void:
 	_pivot_y = string_length + ball_radius + 0.1
@@ -222,52 +219,44 @@ func _create_labels() -> void:
 	add_child(_info_label)
 
 func _create_vr_controls() -> void:
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
-	_control_panel.position = Vector3(0, -0.05, 0.35)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
-	add_child(_control_panel)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("NEWTON CRADLE", [
+		[
+			{"type": "button", "label": "1 BALL"},
+			{"type": "button", "label": "2 BALLS"},
+		],
+		[
+			{"type": "button", "label": "BOTH"},
+			{"type": "button", "label": "RESET"},
+		],
+	])
+	panel.position = Vector3(0, -0.05, 0.35)
+	panel.rotation_degrees = Vector3(-30, 0, 0)
+	add_child(panel)
 
-	# Panel backing
-	var panel_back := MeshInstance3D.new()
-	var panel_mesh := BoxMesh.new()
-	panel_mesh.size = Vector3(0.45, 0.12, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat := StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
-
-	# Preset buttons
-	var presets = ["1 BALL", "2 BALLS", "BOTH", "RESET"]
-	for i in range(presets.size()):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.12 + i * 0.08, 0.025, 0)
-		btn.scale = Vector3(0.65, 0.65, 0.65)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, presets[i])
-
-		var idx := i
-		var area = btn.get_node_or_null("InteractableAreaButton")
+	var btn_1ball: Node = panel.find_child("Btn_0", true, false)
+	if btn_1ball:
+		var area: Node = btn_1ball.get_node_or_null("InteractableAreaButton")
 		if area:
-			area.button_pressed.connect(func(_b):
-				match idx:
-					0: _release_left(1)
-					1: _release_left(2)
-					2: _release_both()
-					3: _reset_all()
-			)
+			area.button_pressed.connect(func(_b): _release_left(1))
 
-func _add_button_label(btn: Node, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0008
-	lbl.font_size = 6
-	lbl.position = Vector3(0, -0.02, 0)
-	btn.add_child(lbl)
+	var btn_2balls: Node = panel.find_child("Btn_1", true, false)
+	if btn_2balls:
+		var area2: Node = btn_2balls.get_node_or_null("InteractableAreaButton")
+		if area2:
+			area2.button_pressed.connect(func(_b): _release_left(2))
+
+	var btn_both: Node = panel.find_child("Btn_2", true, false)
+	if btn_both:
+		var area3: Node = btn_both.get_node_or_null("InteractableAreaButton")
+		if area3:
+			area3.button_pressed.connect(func(_b): _release_both())
+
+	var btn_reset: Node = panel.find_child("Btn_3", true, false)
+	if btn_reset:
+		var area4: Node = btn_reset.get_node_or_null("InteractableAreaButton")
+		if area4:
+			area4.button_pressed.connect(func(_b): _reset_all())
 
 func _update_info() -> void:
 	var total_ke := 0.0

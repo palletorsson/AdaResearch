@@ -88,7 +88,6 @@ var _stats_label: Label3D
 var _control_panel: Node3D
 var _reset_area: Node
 
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 func _ready():
 	_create_terrarium()
@@ -219,59 +218,34 @@ func _create_labels():
 
 ## Creates the VR button panel with mode-switch and reset buttons.
 func _create_vr_controls():
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("RANDOM WALK", [
+		[
+			{"type": "button", "label": "2D"},
+			{"type": "button", "label": "3D"},
+			{"type": "button", "label": "LEVY"},
+		],
+		[{"type": "button", "label": "RESET"}],
+	])
 	_control_panel.position = Vector3(0, -0.08, terrarium_size.z / 2.0 + 0.15)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
 
-	# Panel background
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = PANEL_SIZE
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
+	# Mode buttons: 2D (Btn_0), 3D (Btn_1), LEVY (Btn_2)
+	for i in range(3):
+		var btn: Node = _control_panel.find_child("Btn_%d" % i, true, false)
+		if btn:
+			var mode_idx := i
+			var area = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(func(_b): walk_mode = mode_idx as WalkMode)
 
-	# Mode buttons
-	var modes = ["2D", "3D", "LÉVY"]
-	for i in range(modes.size()):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "Mode%d" % i
-		btn.position = Vector3(-0.1 + i * 0.1, 0.02, 0)
-		btn.scale = BTN_SCALE
-		_control_panel.add_child(btn)
-		_add_button_label(btn, modes[i])
-
-		var mode_idx = i
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(func(_b): walk_mode = mode_idx as WalkMode)
-
-	# Reset button
-	var reset_btn = PUSH_BUTTON.instantiate()
-	reset_btn.name = "ResetBtn"
-	reset_btn.position = Vector3(0, -0.025, 0)
-	reset_btn.rotation_degrees.x = -30
-	reset_btn.scale = BTN_SCALE
-	_control_panel.add_child(reset_btn)
-	_add_button_label(reset_btn, "RESET")
-	_reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
-	if _reset_area:
-		_reset_area.button_pressed.connect(_reset_walkers)
-
-## Attaches a small Label3D beneath a push button.
-func _add_button_label(btn: Node, text: String):
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = BTN_LABEL_PIXEL_SIZE
-	lbl.font_size = 8
-	lbl.position = Vector3(0, BTN_LABEL_Y_OFFSET, 0)
-	btn.add_child(lbl)
+	# RESET (Btn_3)
+	var reset_btn: Node = _control_panel.find_child("Btn_3", true, false)
+	if reset_btn:
+		_reset_area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if _reset_area:
+			_reset_area.button_pressed.connect(_reset_walkers)
 
 func _reset_walkers():
 	if _walker_positions.is_empty():

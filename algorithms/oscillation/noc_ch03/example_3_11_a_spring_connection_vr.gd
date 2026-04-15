@@ -10,7 +10,6 @@
 extends Node3D
 const ARTIFACT_SCENE_PRESENTER := preload("res://commons/artifacts/ArtifactScenePresenter.gd")
 
-const CONTROLLER_SCENE := preload("res://spatial_ui/parameter_controller_3d.tscn")
 const MAT_SPRING := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_secondary.tres")
 const MAT_BOB := preload("res://commons/resourses/materials/noc_vr/noc_vr_pink_accent.tres")
 
@@ -23,11 +22,13 @@ var _anchor_pos: Vector3 = Vector3(0, 0.85, 0)
 var _bob: Bob
 var _spring_mesh: MeshInstance3D
 var _status_label: Label3D
-var _controller_root: Node3D
+var _control_panel: Node3D
+var _initial_bob_pos: Vector3 = Vector3(0, 0.5, 0)
 
 func _ready() -> void:
 	_setup_environment()
 	_spawn_scene()
+	_setup_controls()
 	call_deferred("_apply_standard_presentation")
 	set_process(true)
 
@@ -43,34 +44,6 @@ func _setup_environment() -> void:
 	_status_label.position = Vector3(0, 0.82, 0)
 	_sim_root.add_child(_status_label)
 
-	_controller_root = Node3D.new()
-	_controller_root.position = Vector3(0.75, 0.45, 0)
-	add_child(_controller_root)
-
-	var k_controller := CONTROLLER_SCENE.instantiate()
-	k_controller.parameter_name = "Spring K"
-	k_controller.min_value = 0.02
-	k_controller.max_value = 0.3
-	k_controller.default_value = spring_constant
-	k_controller.rotation_degrees = Vector3(0, 90, 0)
-	_controller_root.add_child(k_controller)
-	k_controller.value_changed.connect(func(v: float) -> void:
-		spring_constant = v
-	)
-	k_controller.set_value(spring_constant)
-
-	var damping_controller := CONTROLLER_SCENE.instantiate()
-	damping_controller.parameter_name = "Damping"
-	damping_controller.min_value = 0.9
-	damping_controller.max_value = 0.999
-	damping_controller.default_value = damping
-	damping_controller.position = Vector3(0, -0.18, 0)
-	damping_controller.rotation_degrees = Vector3(0, 90, 0)
-	_controller_root.add_child(damping_controller)
-	damping_controller.value_changed.connect(func(v: float) -> void:
-		damping = v
-	)
-	damping_controller.set_value(damping)
 
 func _spawn_scene() -> void:
 	_bob = Bob.new()
@@ -79,6 +52,49 @@ func _spawn_scene() -> void:
 
 	_spring_mesh = MeshInstance3D.new()
 	_sim_root.add_child(_spring_mesh)
+
+func _setup_controls() -> void:
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("SPRING", [
+		[
+			{"type": "slider_h", "label": "K", "default": (spring_constant - 0.01) / 0.49},
+			{"type": "slider_h", "label": "DAMP", "default": (damping - 0.9) / 0.1},
+		],
+		[
+			{"type": "slider_h", "label": "REST", "default": (rest_length - 0.05) / 0.45},
+		],
+		[{"type": "button", "label": "RESET"}],
+	])
+	_control_panel.position = Vector3(0.3, 0.15, 0.1)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_control_panel)
+
+	var k_slider: Node = _control_panel.find_child("Param_0", true, false)
+	var damp_slider: Node = _control_panel.find_child("Param_1", true, false)
+	var rest_slider: Node = _control_panel.find_child("Param_2", true, false)
+
+	if k_slider and k_slider.has_signal("slider_moved"):
+		k_slider.slider_moved.connect(func(_n: String) -> void:
+			spring_constant = 0.01 + k_slider.get_normalized_value() * 0.49
+		)
+	if damp_slider and damp_slider.has_signal("slider_moved"):
+		damp_slider.slider_moved.connect(func(_n: String) -> void:
+			damping = 0.9 + damp_slider.get_normalized_value() * 0.1
+		)
+	if rest_slider and rest_slider.has_signal("slider_moved"):
+		rest_slider.slider_moved.connect(func(_n: String) -> void:
+			rest_length = 0.05 + rest_slider.get_normalized_value() * 0.45
+		)
+
+	var reset_btn: Node = _control_panel.find_child("Btn_0", true, false)
+	if reset_btn:
+		var area: Node = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b: bool) -> void:
+				_bob.position = _initial_bob_pos
+				_bob.velocity = Vector3.ZERO
+			)
+
 
 func _process(delta: float) -> void:
 	var spring_dir := _anchor_pos - _bob.position

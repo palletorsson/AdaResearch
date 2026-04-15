@@ -56,8 +56,6 @@ var _coupling_slider: Node
 # Separation between pendulums
 var _separation: float = 0.3
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-const PUSH_BUTTON = preload("res://commons/interactables/push_button.tscn")
 
 func _ready():
 	_create_frame()
@@ -220,67 +218,35 @@ func _create_labels():
 	add_child(_info_label)
 
 func _create_vr_controls():
-	_control_panel = Node3D.new()
-	_control_panel.name = "ControlPanel"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_preset_bar(
+		["BEATS", "SYNC", "WEAK", "CHAOS"],
+		[], "COUPLING", coupling_strength / 10.0
+	)
 	_control_panel.position = Vector3(0, -0.15, 0.25)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
-	
-	# Panel backing
-	var panel_back = MeshInstance3D.new()
-	var panel_mesh = BoxMesh.new()
-	panel_mesh.size = Vector3(0.4, 0.14, 0.01)
-	panel_back.mesh = panel_mesh
-	var panel_mat = StandardMaterial3D.new()
-	panel_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	panel_mat.metallic = 0.3
-	panel_back.material_override = panel_mat
-	panel_back.position.z = -0.01
-	_control_panel.add_child(panel_back)
-	
-	# Coupling slider
-	_coupling_slider = SLIDER_HORIZONTAL.instantiate()
-	_coupling_slider.name = "CouplingSlider"
-	_coupling_slider.position = Vector3(0, 0.03, 0)
-	_coupling_slider.rotation_degrees.x = -30
-	var coupling_label = _coupling_slider.get_node_or_null("Frame/LabelName")
-	if coupling_label:
-		coupling_label.text = "COUPLING"
-	_control_panel.add_child(_coupling_slider)
-	_coupling_slider.slider_moved.connect(_on_coupling_changed)
-	
-	# Preset buttons
-	var presets = [
-		["BEATS", 30.0, 0.0, 2.0],
-		["SYNC", 20.0, 20.0, 5.0],
-		["WEAK", 45.0, 0.0, 0.5],
-		["CHAOS", 30.0, 15.0, 8.0]
-	]
-	
-	for i in range(presets.size()):
-		var btn = PUSH_BUTTON.instantiate()
-		btn.name = "Preset%d" % i
-		btn.position = Vector3(-0.12 + i * 0.08, -0.035, 0)
-		btn.scale = Vector3(0.7, 0.7, 0.7)
-		_control_panel.add_child(btn)
-		_add_button_label(btn, presets[i][0])
-		
-		var a1 = presets[i][1]
-		var a2 = presets[i][2]
-		var k = presets[i][3]
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(func(_b): _apply_preset(a1, a2, k))
-	
-	call_deferred("_sync_coupling_slider")
 
-func _add_button_label(btn: Node, text: String):
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.001
-	lbl.font_size = 7
-	lbl.position = Vector3(0, -0.022, 0)
-	btn.add_child(lbl)
+	_coupling_slider = _control_panel.get_node_or_null("Slider")
+	if _coupling_slider and _coupling_slider.has_signal("slider_moved"):
+		_coupling_slider.slider_moved.connect(_on_coupling_changed)
+
+	# Wire preset buttons
+	var presets = [
+		[30.0, 0.0, 2.0],
+		[20.0, 20.0, 5.0],
+		[45.0, 0.0, 0.5],
+		[30.0, 15.0, 8.0],
+	]
+	for i in range(presets.size()):
+		var btn: Node = _control_panel.get_node_or_null("Preset_%d" % i)
+		if btn:
+			var a1 = presets[i][0]
+			var a2 = presets[i][1]
+			var k = presets[i][2]
+			var area = btn.get_node_or_null("InteractableAreaButton")
+			if area:
+				area.button_pressed.connect(func(_b): _apply_preset(a1, a2, k))
 
 func _sync_coupling_slider():
 	if _coupling_slider and _coupling_slider.has_method("set_normalized_value"):

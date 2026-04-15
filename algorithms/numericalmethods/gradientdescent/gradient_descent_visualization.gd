@@ -17,8 +17,6 @@ extends Node3D
 enum Mode { OPTIMIZERS, CONVERGENCE, HESSIAN }
 
 # ── constants ──────────────────────────────────────────────────────────
-const SLIDER_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
-const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
 
 const COL_SGD       := Color(0.9, 0.3, 0.3, 1.0)   # red
 const COL_MOMENTUM  := Color(0.3, 0.9, 0.3, 1.0)   # green
@@ -197,51 +195,47 @@ func _create_labels() -> void:
 # ════════════════════════════════════════════════════════════════════════
 
 func _create_controls() -> void:
-	# Mode button
-	_mode_button = BUTTON_SCENE.instantiate()
-	_mode_button.position = Vector3(-2.4, -1.0, 0)
-	add_child(_mode_button)
-	var btn_area = _mode_button.get_node_or_null("InteractableAreaButton")
-	if btn_area:
-		btn_area.button_pressed.connect(_cycle_mode)
-	var btn_label = _mode_button.get_node_or_null("Frame/LabelName")
-	if btn_label:
-		btn_label.text = "Mode"
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("GRADIENT", [
+		[
+			{"type": "button", "label": "MODE"},
+			{"type": "button", "label": "FUNCTION"},
+		],
+		[
+			{"type": "slider_h", "label": "LEARN RATE", "default": learning_rate / 0.2},
+			{"type": "slider_h", "label": "MOMENTUM", "default": momentum_beta},
+		],
+		[
+			{"type": "slider_h", "label": "SPEED", "default": step_speed / 5.0},
+		],
+	])
+	panel.position = Vector3(0, -1.0, 0)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(panel)
 
-	# Function preset button
-	_fn_button = BUTTON_SCENE.instantiate()
-	_fn_button.position = Vector3(-1.6, -1.0, 0)
-	add_child(_fn_button)
-	var fn_area = _fn_button.get_node_or_null("InteractableAreaButton")
-	if fn_area:
-		fn_area.button_pressed.connect(_cycle_function)
-	var fn_label = _fn_button.get_node_or_null("Frame/LabelName")
-	if fn_label:
-		fn_label.text = "Function"
+	_mode_button = panel.find_child("Btn_0", true, false)
+	if _mode_button:
+		var area: Node = _mode_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _cycle_mode())
 
-	# Learning rate slider
-	_lr_slider = SLIDER_SCENE.instantiate()
-	_lr_slider.position = Vector3(-0.4, -1.0, 0)
-	add_child(_lr_slider)
-	_lr_slider.set_param_name("Learn Rate")
-	_lr_slider.set_normalized_value(learning_rate / 0.2)
-	_lr_slider.slider_moved.connect(_on_lr_changed)
+	_fn_button = panel.find_child("Btn_1", true, false)
+	if _fn_button:
+		var area: Node = _fn_button.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _cycle_function())
 
-	# Momentum beta slider
-	_beta_slider = SLIDER_SCENE.instantiate()
-	_beta_slider.position = Vector3(0.8, -1.0, 0)
-	add_child(_beta_slider)
-	_beta_slider.set_param_name("Momentum β")
-	_beta_slider.set_normalized_value(momentum_beta)
-	_beta_slider.slider_moved.connect(_on_beta_changed)
+	_lr_slider = panel.find_child("Param_0", true, false)
+	if _lr_slider and _lr_slider.has_signal("slider_moved"):
+		_lr_slider.slider_moved.connect(_on_lr_changed)
 
-	# Speed slider
-	_speed_slider = SLIDER_SCENE.instantiate()
-	_speed_slider.position = Vector3(2.0, -1.0, 0)
-	add_child(_speed_slider)
-	_speed_slider.set_param_name("Speed")
-	_speed_slider.set_normalized_value(step_speed / 5.0)
-	_speed_slider.slider_moved.connect(_on_speed_changed)
+	_beta_slider = panel.find_child("Param_1", true, false)
+	if _beta_slider and _beta_slider.has_signal("slider_moved"):
+		_beta_slider.slider_moved.connect(_on_beta_changed)
+
+	_speed_slider = panel.find_child("Param_2", true, false)
+	if _speed_slider and _speed_slider.has_signal("slider_moved"):
+		_speed_slider.slider_moved.connect(_on_speed_changed)
 
 func _cycle_mode() -> void:
 	_mode = (_mode + 1) % 3

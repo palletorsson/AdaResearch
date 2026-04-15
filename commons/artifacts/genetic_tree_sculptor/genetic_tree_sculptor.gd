@@ -15,9 +15,6 @@ class_name GeneticTreeSculptor
 ## live preview regenerates via TreeMorphology. The designed DNA is stored
 ## globally so the branching catalyst can plant copies in the world.
 
-const SliderScene := preload("res://commons/interactables/slider_horizontal.tscn")
-const ButtonScene := preload("res://commons/interactables/push_button.tscn")
-
 # --- slider definitions: [gene_name, label, default_normalized] ---
 const GENE_SLIDERS: Array[Array] = [
 	["segments",    "Depth",      0.4],   # generations 2-5
@@ -34,6 +31,7 @@ var _dna: CritterDNA
 var _mapper: CritterTraitMapper
 var _tree_root: Node3D
 var _sliders: Dictionary = {}   # gene_name → slider_instance
+var _control_panel: Node3D
 var _rebuild_queued := false
 var _rebuild_timer := 0.0
 const REBUILD_COOLDOWN := 0.3   # debounce slider scrubbing
@@ -55,48 +53,51 @@ func _process(delta: float) -> void:
 # ── UI construction ──────────────────────────────────────────────
 
 func _build_ui() -> void:
-	# Sliders in two columns behind the tree preview
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+
+	# Build rows: 2 columns of 4 sliders each, then a button row
+	var row1 := []
+	var row2 := []
 	for i in GENE_SLIDERS.size():
 		var def: Array = GENE_SLIDERS[i]
-		var gene_name: String = def[0]
-		var label: String = def[1]
-		var default_val: float = def[2]
+		var entry := {"type": "slider_h", "label": def[1], "default": def[2]}
+		if i < 4:
+			row1.append(entry)
+		else:
+			row2.append(entry)
 
-		var slider: Node3D = SliderScene.instantiate()
-		add_child(slider)
+	_control_panel = RackTpl.create_panel("GENETIC TREE", [
+		row1,
+		row2,
+		[
+			{"type": "button", "label": "RANDOM"},
+			{"type": "button", "label": "PLANT"},
+		],
+	])
+	_control_panel.position = Vector3(0, 0.85, 1.2)
+	_control_panel.rotation_degrees = Vector3(-25, 0, 0)
+	add_child(_control_panel)
 
-		# Layout: 2 columns, 4 rows, behind the tree (positive Z)
-		var col := i % 2
-		var row := i / 2
-		var x_offset := -0.6 + col * 1.2
-		var z_offset := 1.2 + row * 0.35
-		slider.position = Vector3(x_offset, 0.85 + row * 0.0, z_offset)
-		slider.rotation_degrees.y = 180.0
+	# Wire up sliders
+	for i in GENE_SLIDERS.size():
+		var gene_name: String = GENE_SLIDERS[i][0]
+		var slider = _control_panel.find_child("Param_%d" % i, true, false)
+		if slider:
+			_sliders[gene_name] = slider
+			slider.slider_moved.connect(_on_slider_moved.bind(gene_name))
 
-		slider.set_param_name(label)
-		slider.set_normalized_value(default_val)
-		slider.slider_moved.connect(_on_slider_moved.bind(gene_name))
-		_sliders[gene_name] = slider
+	# Wire up buttons
+	var rand_btn = _control_panel.find_child("Btn_0", true, false)
+	if rand_btn:
+		var area = rand_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_randomize())
 
-	# Randomize button
-	var rand_btn: Node3D = ButtonScene.instantiate()
-	add_child(rand_btn)
-	rand_btn.position = Vector3(-0.6, 0.85, 2.7)
-	rand_btn.rotation_degrees.y = 180.0
-	var rand_area = rand_btn.get_node_or_null("InteractableAreaButton")
-	if rand_area:
-		rand_area.button_pressed.connect(_on_randomize)
-	_label_button(rand_btn, "Random")
-
-	# Export button — stores DNA for catalyst use
-	var export_btn: Node3D = ButtonScene.instantiate()
-	add_child(export_btn)
-	export_btn.position = Vector3(0.6, 0.85, 2.7)
-	export_btn.rotation_degrees.y = 180.0
-	var export_area = export_btn.get_node_or_null("InteractableAreaButton")
-	if export_area:
-		export_area.button_pressed.connect(_on_export_dna)
-	_label_button(export_btn, "Plant")
+	var export_btn = _control_panel.find_child("Btn_1", true, false)
+	if export_btn:
+		var area = export_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(func(_b): _on_export_dna())
 
 	# Pedestal for tree preview
 	var pedestal := MeshInstance3D.new()
@@ -111,13 +112,6 @@ func _build_ui() -> void:
 	pedestal.material_override = mat
 	add_child(pedestal)
 	pedestal.position = Vector3(0.0, 0.0, 0.0)
-
-func _label_button(btn: Node3D, text: String) -> void:
-	var lbl := btn.get_node_or_null("Frame/LabelName")
-	if lbl == null:
-		lbl = btn.get_node_or_null("Label3D")
-	if lbl and lbl is Label3D:
-		lbl.text = text
 
 # ── Slider → DNA ─────────────────────────────────────────────────
 

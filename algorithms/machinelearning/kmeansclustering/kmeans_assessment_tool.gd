@@ -4,8 +4,6 @@ extends Node3D
 # Advanced educational experiments and comparative analysis
 # Converted from Control to Node3D for VR compatibility
 
-const SliderScene = preload("res://commons/interactables/slider_horizontal.tscn")
-const ButtonScene = preload("res://commons/interactables/push_button.tscn")
 
 @export var kmeans_visualization: Node3D
 @export var enable_advanced_experiments: bool = true
@@ -236,27 +234,29 @@ func _add_label(parent: Node3D, text: String, font_size: int, pos: Vector3) -> L
 	return label
 
 func _add_slider(parent: Node3D, pos: Vector3, param_name: String) -> Node:
-	var slider := SliderScene.instantiate()
-	slider.position = pos
-	slider.scale = Vector3(0.3, 0.3, 0.3)
-	parent.add_child(slider)
-	slider.set_param_name(param_name)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("", [
+		[{"type": "slider_h", "label": param_name, "default": 0.5}],
+	], true)
+	panel.position = pos
+	panel.scale = Vector3(0.3, 0.3, 0.3)
+	parent.add_child(panel)
+	var slider: Node = panel.find_child("Param_0", true, false)
 	return slider
 
 func _add_button(parent: Node3D, pos: Vector3, label_text: String, callback: Callable) -> void:
-	var btn := ButtonScene.instantiate()
-	btn.position = pos
-	btn.scale = Vector3(0.25, 0.25, 0.25)
-	parent.add_child(btn)
-
-	# Set label if available
-	var label_node := btn.get_node_or_null("Frame/LabelName")
-	if label_node:
-		label_node.text = label_text
-
-	var area := btn.get_node_or_null("InteractableAreaButton")
-	if area:
-		area.button_pressed.connect(callback)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("", [
+		[{"type": "button", "label": label_text}],
+	], true)
+	panel.position = pos
+	panel.scale = Vector3(0.25, 0.25, 0.25)
+	parent.add_child(panel)
+	var btn: Node = panel.find_child("Btn_0", true, false)
+	if btn:
+		var area := btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(callback)
 
 func _update_results(text: String) -> void:
 	if results_label:

@@ -81,12 +81,7 @@ var _info_label: Label3D
 var _stats_label: Label3D
 
 # VR controls
-const SLIDER_SCENE = preload("res://commons/interactables/slider_horizontal.tscn")
-const BUTTON_SCENE = preload("res://commons/interactables/push_button.tscn")
-var _mode_button: Node3D
-var _reset_button: Node3D
-var _evap_slider: Node3D
-var _count_slider: Node3D
+var _control_panel: Node3D
 
 # Colors
 const COL_NEST := Color(0.6, 0.4, 0.2)
@@ -241,51 +236,53 @@ func _create_labels() -> void:
 # =========================================================================
 
 func _create_vr_controls() -> void:
-	var ctrl_y := -field_size * 0.5 - 1.0
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	_control_panel = RackTpl.create_panel("ANT COLONY", [
+		[
+			{"type": "slider_h", "label": "EVAPORATE", "default": evaporation_rate / 0.1},
+			{"type": "slider_h", "label": "ANTS", "default": float(ant_count) / 80.0},
+		],
+		[
+			{"type": "button", "label": "MODE"},
+			{"type": "button", "label": "RESET"},
+		],
+	])
+	_control_panel.position = Vector3(-2.0, -field_size * 0.5 - 1.0, 0)
+	add_child(_control_panel)
 
-	# Mode cycle button
-	_mode_button = BUTTON_SCENE.instantiate()
-	_mode_button.position = Vector3(-2.0, ctrl_y, 0)
-	add_child(_mode_button)
-	var mb_area = _mode_button.get_node_or_null("InteractableAreaButton")
-	if mb_area:
-		mb_area.button_pressed.connect(_on_mode_pressed)
-	var mb_label = _mode_button.get_node_or_null("Frame/LabelName")
-	if mb_label:
-		mb_label.text = "Mode"
+	# EVAPORATE slider (Param_0)
+	var evap_slider: Node = _control_panel.find_child("Param_0", true, false)
+	if evap_slider and evap_slider.has_signal("slider_moved"):
+		evap_slider.slider_moved.connect(func(_val):
+			if evap_slider.has_method("get_normalized_value"):
+				evaporation_rate = evap_slider.get_normalized_value() * 0.1
+		)
 
-	# Reset button
-	_reset_button = BUTTON_SCENE.instantiate()
-	_reset_button.position = Vector3(-0.5, ctrl_y, 0)
-	add_child(_reset_button)
-	var rb_area = _reset_button.get_node_or_null("InteractableAreaButton")
-	if rb_area:
-		rb_area.button_pressed.connect(_on_reset_pressed)
-	var rb_label = _reset_button.get_node_or_null("Frame/LabelName")
-	if rb_label:
-		rb_label.text = "Reset"
+	# ANTS slider (Param_1)
+	var count_slider: Node = _control_panel.find_child("Param_1", true, false)
+	if count_slider and count_slider.has_signal("slider_moved"):
+		count_slider.slider_moved.connect(func(_val):
+			if count_slider.has_method("get_normalized_value"):
+				var new_count := int(count_slider.get_normalized_value() * 80.0)
+				new_count = clampi(new_count, 5, 80)
+				if new_count != ant_count:
+					ant_count = new_count
+					_spawn_ants()
+		)
 
-	# Evaporation rate slider
-	_evap_slider = SLIDER_SCENE.instantiate()
-	_evap_slider.position = Vector3(1.2, ctrl_y, 0)
-	add_child(_evap_slider)
-	if _evap_slider.has_method("set_param_name"):
-		_evap_slider.set_param_name("Evaporation")
-	if _evap_slider.has_method("set_normalized_value"):
-		_evap_slider.set_normalized_value(evaporation_rate / 0.1)
-	if _evap_slider.has_signal("slider_moved"):
-		_evap_slider.slider_moved.connect(_on_evap_changed)
+	# MODE (Btn_0)
+	var mode_btn: Node = _control_panel.find_child("Btn_0", true, false)
+	if mode_btn:
+		var area = mode_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_mode_pressed)
 
-	# Ant count slider
-	_count_slider = SLIDER_SCENE.instantiate()
-	_count_slider.position = Vector3(3.0, ctrl_y, 0)
-	add_child(_count_slider)
-	if _count_slider.has_method("set_param_name"):
-		_count_slider.set_param_name("Ants")
-	if _count_slider.has_method("set_normalized_value"):
-		_count_slider.set_normalized_value(float(ant_count) / 80.0)
-	if _count_slider.has_signal("slider_moved"):
-		_count_slider.slider_moved.connect(_on_count_changed)
+	# RESET (Btn_1)
+	var reset_btn: Node = _control_panel.find_child("Btn_1", true, false)
+	if reset_btn:
+		var area = reset_btn.get_node_or_null("InteractableAreaButton")
+		if area:
+			area.button_pressed.connect(_on_reset_pressed)
 
 
 func _on_mode_pressed() -> void:
@@ -297,18 +294,6 @@ func _on_reset_pressed() -> void:
 	_reset_colony()
 
 
-func _on_evap_changed(_val: float) -> void:
-	if _evap_slider.has_method("get_normalized_value"):
-		evaporation_rate = _evap_slider.get_normalized_value() * 0.1
-
-
-func _on_count_changed(_val: float) -> void:
-	if _count_slider.has_method("get_normalized_value"):
-		var new_count := int(_count_slider.get_normalized_value() * 80.0)
-		new_count = clampi(new_count, 5, 80)
-		if new_count != ant_count:
-			ant_count = new_count
-			_spawn_ants()
 
 
 # =========================================================================

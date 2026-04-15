@@ -220,62 +220,27 @@ func _build_labels() -> void:
 
 # --- Slider setup ---
 
-var _slider_scene = preload("res://commons/interactables/slider_horizontal.tscn")
-
 func _setup_sliders() -> void:
-	var panel = Node3D.new()
-	panel.name = "ControlPanel"
-	panel.position = Vector3(plot_size * 0.5 + 0.2, 0.0, 0.0)
+	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+	var panel: Node3D = RackTpl.create_panel("CLASSIFIER WEIGHTS", [
+		[{"type": "slider_h", "label": "W1", "default": remap(w1, -3.0, 3.0, 0.0, 1.0)}],
+		[{"type": "slider_h", "label": "W2", "default": remap(w2, -3.0, 3.0, 0.0, 1.0)}],
+		[{"type": "slider_h", "label": "BIAS", "default": remap(bias, -2.0, 2.0, 0.0, 1.0)}],
+	])
+	panel.position = Vector3(plot_size * 0.5 + 0.15, 0.0, 0.0)
+	panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(panel)
 
-	# W1 slider
-	_w1_slider = _slider_scene.instantiate()
-	_w1_slider.name = "W1Slider"
-	_w1_slider.position = Vector3(0, 0.1, 0)
-	panel.add_child(_w1_slider)
-	_w1_slider.set_param_name("w1")
-	_w1_slider.set_normalized_value(remap(w1, -3.0, 3.0, 0.0, 1.0))
-	_w1_slider.slider_moved.connect(_on_w1_changed)
-	var w1_lbl = _w1_slider.get_node_or_null("Frame/LabelName")
-	if w1_lbl:
-		w1_lbl.text = "w1"
+	_w1_slider = panel.find_child("Param_0", true, false)
+	_w2_slider = panel.find_child("Param_1", true, false)
+	_bias_slider = panel.find_child("Param_2", true, false)
 
-	# W2 slider
-	_w2_slider = _slider_scene.instantiate()
-	_w2_slider.name = "W2Slider"
-	_w2_slider.position = Vector3(0, 0.0, 0)
-	panel.add_child(_w2_slider)
-	_w2_slider.set_param_name("w2")
-	_w2_slider.set_normalized_value(remap(w2, -3.0, 3.0, 0.0, 1.0))
-	_w2_slider.slider_moved.connect(_on_w2_changed)
-	var w2_lbl = _w2_slider.get_node_or_null("Frame/LabelName")
-	if w2_lbl:
-		w2_lbl.text = "w2"
-
-	# Bias slider
-	_bias_slider = _slider_scene.instantiate()
-	_bias_slider.name = "BiasSlider"
-	_bias_slider.position = Vector3(0, -0.1, 0)
-	panel.add_child(_bias_slider)
-	_bias_slider.set_param_name("bias")
-	_bias_slider.set_normalized_value(remap(bias, -2.0, 2.0, 0.0, 1.0))
-	_bias_slider.slider_moved.connect(_on_bias_changed)
-	var bias_lbl = _bias_slider.get_node_or_null("Frame/LabelName")
-	if bias_lbl:
-		bias_lbl.text = "bias"
-
-	# Panel title
-	var panel_label = Label3D.new()
-	panel_label.name = "PanelLabel"
-	panel_label.text = "CLASSIFIER WEIGHTS"
-	panel_label.font_size = 12
-	panel_label.pixel_size = 0.001
-	panel_label.position = Vector3(0, 0.22, 0.01)
-	panel_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	panel_label.outline_size = 2
-	panel_label.modulate = Color(0.85, 0.85, 0.9)
-	panel_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	panel.add_child(panel_label)
+	if _w1_slider and _w1_slider.has_signal("slider_moved"):
+		_w1_slider.slider_moved.connect(_on_w1_changed)
+	if _w2_slider and _w2_slider.has_signal("slider_moved"):
+		_w2_slider.slider_moved.connect(_on_w2_changed)
+	if _bias_slider and _bias_slider.has_signal("slider_moved"):
+		_bias_slider.slider_moved.connect(_on_bias_changed)
 
 
 # --- Slider callbacks ---
