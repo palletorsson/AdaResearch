@@ -811,7 +811,7 @@ func _generate_structure() -> void:
 	var exit_code := OS.execute("python", args, output, true)
 	if exit_code == 0:
 		# Reload the map data from disk
-		_load_map(paths[list.get_selected_items()[0]] if list.get_selected_items().size() > 0 else "")
+		_load(paths[list.get_selected_items()[0]] if list.get_selected_items().size() > 0 else "")
 		_reload_3d()
 		status.text = "Structure generated (G=corridor, edit to refine)"
 	else:
