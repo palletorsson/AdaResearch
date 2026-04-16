@@ -1,151 +1,157 @@
 {
-  "sequences": {
-	"transformation": {
-	  "name": "Transformation: What Stays the Same When Everything Changes",
-	  "truth": "Identity preserved under transformation. What stays the same when everything changes? Invariants define structure; transformations reveal what matters.",
-	  "qfep_term": "S",
-	  "qfep_connection": "Transformations modify system states while preserving essential structure. In QFEP, transformations are the operations that change S while maintaining coherent identity. They are the grammar of change.",
-	  "formula": "T(v) = M Ã— v, where M is a 4Ã—4 matrix encoding translate, rotate, scale",
-	  "demonstration": "Translate: move without changing. Rotate: spin without deforming. Scale: grow without breaking. Combine transformations and see order matters.",
-	  "description": "Affine transformations in 3D space. Translation, rotation, and scaleâ€”the three fundamental ways to change position, orientation, and size while preserving shape. Matrix math makes this possible.",
-	  "layer": "properties",
-	  "prerequisites": [
-		"primitives",
-        "vectors"
-	  ],
-	  "unlocks": [
-		"fractals",
-        "proceduralgeneration"
-	  ],
-	  "difficulty": "beginner",
-	  "estimated_time": "15-20 minutes",
-	  "learning_objectives": [
-		"Translation: moving objects in space (T_x, T_y, T_z)",
-		"Rotation: changing orientation around axes",
-		"Scale: changing size uniformly or non-uniformly",
-		"Matrix representation: transformations as 4Ã—4 matrices",
-		"Composition: combining transformations (order matters!)",
-        "Invariants: what properties are preserved under each transformation"
-	  ],
-	  "content": [
-		"Trans_Introduction: Three cubes, three transformation types — translate, rotate, scale",
-		"Trans_Translation: Translation as navigational infrastructure — displacement across voids",
-		"Trans_AxisDecomposition: Translation deconstructed into X, Y, Z axes",
-		"Trans_Rotation: Rotation as non-commutative composition — order matters",
-		"Trans_RotationSpectacle: Processional corridors converging on layered rotational finale",
-        "Trans_Scale: Scaling uniformly and non-uniformly against reference geometry"
-	  ],
-	  "maps": [
-		"Trans_Introduction",
-		"Trans_Translation",
-		"Trans_AxisDecomposition",
-		"Trans_Rotation",
-		"Trans_RotationSpectacle",
-		"Trans_Scale",
-		"Trans_Pit",
-        "Chamber_Transformation"
-	  ],
-	  "axiom_files": [
-		"res://commons/context/clipboard/tutorial_text/transformation_axioms.md",
-		"res://commons/context/clipboard/tutorial_text/matrix_axioms.md",
-        "res://commons/context/clipboard/tutorial_text/rotation_axioms.md"
-	  ],
-	  "algorithm_paths": {
-		"Transformation_Intro": "res://algorithms/transformations/",
-		"Trans_Rotation": "res://algorithms/transformations/rotation/",
-		"Trans_Composition": "res://commons/primitives/furniture/"
-	  },
-	  "return_to": "lab",
-	  "lab_map": "Lab/map_data_post_transformation",
-	  "unlock_requirements": [],
-	  "completion_rewards": [
-		"transformer_badge",
-        "matrix_master_badge"
-	  ],
-	  "artifact_groups": [
-		{
-		  "map": "Trans_Introduction",
-		  "position": "intro",
-		  "artifacts": [
-			"balance_puzzle",
-            "dark_sphere"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Three cubes, three transformation types. Introduces translate, rotate, scale through transport cubes as navigational infrastructure."
-		},
-		{
-		  "map": "Trans_Translation",
-		  "position": "foundation",
-		  "artifacts": [
-			"player_trace",
-			"z_translation_cube",
-			"y_translation_cube",
-			"pick_up_cube",
-			"dark_sphere",
-            "pickup_gate"
-		  ],
-		  "size_budget": "mixed",
-		  "rationale": "Translation as navigational infrastructure: axis-constrained movement, transport cubes, pickup collection gates."
-		},
-		{
-		  "map": "Trans_AxisDecomposition",
-		  "position": "foundation",
-		  "artifacts": [
-			"toruscylinder",
-			"z_translation_cube",
-			"x_translation_cube",
-			"dark_sphere",
-			"pickup_gate",
-			"translation_cube_demo",
-			"cube_scene",
-            "pick_up_cube"
-		  ],
-		  "size_budget": "mixed",
-		  "rationale": "Translation deconstructed into X, Y, Z axes with sliding obstacles and demo objects."
-		},
-		{
-		  "map": "Trans_Rotation",
-		  "position": "exploration",
-		  "artifacts": [
-			"rotate_grid_cubes",
-			"dark_sphere",
-			"spin",
-			"pick_up_cube",
-            "pickup_gate"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Rotation as non-commutative composition: same operations in different orders produce different outcomes."
-		},
-		{
-		  "map": "Trans_RotationSpectacle",
-		  "position": "integration",
-		  "artifacts": [
-			"boolean_tunnel",
-			"righttriangle",
-			"dark_sphere",
-			"pick_up_cube",
-            "carousel_cake"
-		  ],
-		  "size_budget": "environment",
-		  "rationale": "Long processional corridor with rotation-carved geometry and layered rotational finale. Integration of rotation concepts."
-		},
-		{
-		  "map": "Trans_Scale",
-		  "position": "synthesis",
-		  "artifacts": [
-			"scale_me",
-			"clipboard",
-			"chair_assembly_puzzle",
-			"prism_block",
-			"cube_scene",
-            "dark_sphere"
-		  ],
-		  "size_budget": "mixed",
-		  "rationale": "Scale as relational change: interactive scaling against reference geometry. Callbacks to prism_block and cube_scene from primitives."
+	"sequences": {
+		"transformation": {
+			"name": "Transformation: What Stays the Same When Everything Changes",
+			"truth": "Identity preserved under transformation. What stays the same when everything changes? Invariants define structure; transformations reveal what matters.",
+			"qfep_term": "S",
+			"qfep_connection": "Transformations modify system states while preserving essential structure. In QFEP, transformations are the operations that change S while maintaining coherent identity. They are the grammar of change.",
+			"formula": "T(v) = M Ã— v, where M is a 4Ã—4 matrix encoding translate, rotate, scale",
+			"demonstration": "Translate: move without changing. Rotate: spin without deforming. Scale: grow without breaking. Combine transformations and see order matters.",
+			"description": "Affine transformations in 3D space. Translation, rotation, and scaleâ€”the three fundamental ways to change position, orientation, and size while preserving shape. Matrix math makes this possible.",
+			"layer": "properties",
+			"prerequisites": [
+				"primitives",
+				"vectors"
+			],
+			"unlocks": [
+				"fractals",
+				"proceduralgeneration"
+			],
+			"difficulty": "beginner",
+			"estimated_time": "15-20 minutes",
+			"learning_objectives": [
+				"Translation: moving objects in space (T_x, T_y, T_z)",
+				"Rotation: changing orientation around axes",
+				"Scale: changing size uniformly or non-uniformly",
+				"Matrix representation: transformations as 4Ã—4 matrices",
+				"Composition: combining transformations (order matters!)",
+				"Invariants: what properties are preserved under each transformation"
+			],
+			"content": [
+				"Trans_Introduction: Three cubes, three transformation types — translate, rotate, scale",
+				"Trans_Translation: Translation as navigational infrastructure — displacement across voids",
+				"Trans_AxisDecomposition: Translation deconstructed into X, Y, Z axes",
+				"Trans_Rotation: Rotation as non-commutative composition — order matters",
+				"Trans_RotationSpectacle: Processional corridors converging on layered rotational finale",
+				"Trans_Scale: Scaling uniformly and non-uniformly against reference geometry"
+			],
+			"maps": [
+				"Trans_Introduction",
+				"Trans_Translation",
+				"Trans_AxisDecomposition",
+				"Trans_Rotation",
+				"Trans_RotationSpectacle",
+				"Trans_Scale",
+				"Trans_Pit",
+				"Chamber_Transformation"
+			],
+			"axiom_files": [
+				"res://commons/context/clipboard/tutorial_text/transformation_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/matrix_axioms.md",
+				"res://commons/context/clipboard/tutorial_text/rotation_axioms.md"
+			],
+			"algorithm_paths": {
+				"Transformation_Intro": "res://algorithms/transformations/",
+				"Trans_Rotation": "res://algorithms/transformations/rotation/",
+				"Trans_Composition": "res://commons/primitives/furniture/"
+			},
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_transformation",
+			"unlock_requirements": [],
+			"completion_rewards": [
+				"transformer_badge",
+				"matrix_master_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "Trans_Introduction",
+					"position": "intro",
+					"artifacts": [
+						"balance_puzzle",
+						"dark_sphere"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Three cubes, three transformation types. Introduces translate, rotate, scale through transport cubes as navigational infrastructure.",
+					"grammar": "linear"
+				},
+				{
+					"map": "Trans_Translation",
+					"position": "foundation",
+					"artifacts": [
+						"player_trace",
+						"z_translation_cube",
+						"y_translation_cube",
+						"pick_up_cube",
+						"dark_sphere",
+						"pickup_gate"
+					],
+					"size_budget": "mixed",
+					"rationale": "Translation as navigational infrastructure: axis-constrained movement, transport cubes, pickup collection gates.",
+					"grammar": "linear"
+				},
+				{
+					"map": "Trans_AxisDecomposition",
+					"position": "foundation",
+					"artifacts": [
+						"toruscylinder",
+						"z_translation_cube",
+						"x_translation_cube",
+						"dark_sphere",
+						"pickup_gate",
+						"translation_cube_demo",
+						"cube_scene",
+						"pick_up_cube"
+					],
+					"size_budget": "mixed",
+					"rationale": "Translation deconstructed into X, Y, Z axes with sliding obstacles and demo objects.",
+					"grammar": "florence"
+				},
+				{
+					"map": "Trans_Rotation",
+					"position": "exploration",
+					"artifacts": [
+						"rotate_grid_cubes",
+						"dark_sphere",
+						"spin",
+						"pick_up_cube",
+						"pickup_gate"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Rotation as non-commutative composition: same operations in different orders produce different outcomes.",
+					"grammar": "zelda"
+				},
+				{
+					"map": "Trans_RotationSpectacle",
+					"position": "integration",
+					"artifacts": [
+						"boolean_tunnel",
+						"righttriangle",
+						"dark_sphere",
+						"pick_up_cube",
+						"carousel_cake"
+					],
+					"size_budget": "environment",
+					"rationale": "Long processional corridor with rotation-carved geometry and layered rotational finale. Integration of rotation concepts.",
+					"grammar": "zelda"
+				},
+				{
+					"map": "Trans_Scale",
+					"position": "synthesis",
+					"artifacts": [
+						"scale_me",
+						"clipboard",
+						"chair_assembly_puzzle",
+						"prism_block",
+						"cube_scene",
+						"dark_sphere"
+					],
+					"size_budget": "mixed",
+					"rationale": "Scale as relational change: interactive scaling against reference geometry. Callbacks to prism_block and cube_scene from primitives.",
+					"grammar": "zelda"
+				}
+			]
 		}
-	  ]
-	}
-  },
-  "world_phase": "grid",
-  "artifact_groups": []
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
 }

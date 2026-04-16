@@ -1,135 +1,142 @@
 {
-  "sequences": {
-    "array_tutorial": {
-      "name": "Array Tutorial Sequence",
-      "description": "Progressive tutorial introducing array concepts through VR navigation",
-      "qfep_term": "F",
-      "qfep_connection": "Arrays are pure order â€” every element at a known index, zero access entropy. The F-baseline: structure before complexity, the grid before the noise.",
-      "difficulty": "beginner",
-      "estimated_time": "15-20 minutes",
-      "learning_objectives": [
-        "Basic VR navigation",
-        "Single element interaction",
-        "Linear array traversal",
-        "2D grid understanding",
-        "Pattern recognition"
-      ],
-      "maps": [
-        "Tutorial_Pattern",
-        "Array_Patterns",
-        "Tutorial_Single",
-        "Tutorial_Row",
-        "Tutorial_2D_Build",
-        "Tutorial_3D",
-        "Tutorial_Disco",
-        "Chamber_Arrays"
-      ],
-      "return_to": "lab",
-      "lab_map": "Lab/map_data_post_array_tutorial",
-      "unlock_requirements": [],
-      "completion_rewards": [
-        "array_explorer_badge",
-        "grid_navigator_badge"
-      ],
-      "artifact_groups": [
-        {
-          "map": "Array_Patterns",
-          "position": "intro",
-          "artifacts": [
-            "pattern_tile_4x4",
-            "vr_tile_editor_mirror",
-            "pattern_tile_mirror",
-            "tiling_demo",
-            "dark_sphere",
-            "facade_grammar_demo",
-            "pattern_tile_brick",
-            "pattern_tile_herringbone"
-          ],
-          "size_budget": "mixed",
-          "rationale": "Gallery of pattern stations from simple repeat to complex tiling. Introduces array structure through visual patterns."
-        },
-        {
-          "map": "Tutorial_Single",
-          "position": "intro",
-          "artifacts": [
-            "pick_up_cube",
-            "dark_sphere",
-            "xyz_coordinates"
-          ],
-          "size_budget": "compact_only",
-          "rationale": "Minimal first interaction: one cube to grab, one exit to find. Pure intro to VR navigation."
-        },
-        {
-          "map": "Tutorial_Row",
-          "position": "foundation",
-          "artifacts": [
-            "column_3_z",
-            "xyz_coordinates",
-            "dark_sphere"
-          ],
-          "size_budget": "compact_only",
-          "rationale": "Linear array traversal: row completion with coordinate reference."
-        },
-        {
-          "map": "Tutorial_2D_Build",
-          "position": "foundation",
-          "artifacts": [
-            "grid_2d_4x4",
-            "pick_up_cube",
-            "dark_sphere",
-            "pulsar_visualizer",
-            "xyz_coordinates",
-            "gridagent"
-          ],
-          "size_budget": "mixed",
-          "rationale": "2D array navigation: X and Y axes in a grid structure with active hazard introduction."
-        },
-        {
-          "map": "Tutorial_3D",
-          "position": "exploration",
-          "artifacts": [
-            "grid_3d_4x4x4",
-            "dark_sphere"
-          ],
-          "size_budget": "compact_only",
-          "rationale": "Vertical navigation and volumetric thinking: 3D array as spatial cube."
-        },
-        {
-          "map": "Tutorial_Pattern",
-          "position": "exploration",
-          "artifacts": [
-            "script_runner#array",
-            "pattern_tile_puzzle",
-            "pattern_tile_puzzle#p4m",
-            "pattern_tile_mirror",
-            "dark_sphere",
-            "pulsar_compact"
-          ],
-          "size_budget": "mixed",
-          "rationale": "Pattern recognition: checkerboard indexing, wave patterns, wallpaper groups. Arrays as function: index to value."
-        },
-        {
-          "map": "Tutorial_Disco",
-          "position": "synthesis",
-          "artifacts": [
-            "standalone_disco",
-            "dark_sphere"
-          ],
-          "size_budget": "environment",
-          "rationale": "Large reactive disco floor: audio-step interaction and spatial pattern reading. Culmination of array concepts at scale."
-        }
-      ],
-      "content": [
-        "Array_Patterns: Tiles, Carpets, Wallpaper Groups",
-        "Tutorial_Single: One Cube, One Grab",
-        "Tutorial_Row: Linear Array Traversal",
-        "Tutorial_2D_Build: Two-Dimensional Grid Navigation",
-        "Tutorial_3D: Volumetric Three-Index Arrays",
-        "Tutorial_Pattern: Patterns as Array Equations",
-        "Tutorial_Disco: Reactive Disco Floor at Scale"
-      ]
-    }
-  },
-  "world_phase": "grid",
-  "artifact_groups": []
+	"sequences": {
+		"array_tutorial": {
+			"name": "Array Tutorial Sequence",
+			"description": "Progressive tutorial introducing array concepts through VR navigation",
+			"qfep_term": "F",
+			"qfep_connection": "Arrays are pure order â€” every element at a known index, zero access entropy. The F-baseline: structure before complexity, the grid before the noise.",
+			"difficulty": "beginner",
+			"estimated_time": "15-20 minutes",
+			"learning_objectives": [
+				"Basic VR navigation",
+				"Single element interaction",
+				"Linear array traversal",
+				"2D grid understanding",
+				"Pattern recognition"
+			],
+			"maps": [
+				"Tutorial_Pattern",
+				"Array_Patterns",
+				"Tutorial_Single",
+				"Tutorial_Row",
+				"Tutorial_2D_Build",
+				"Tutorial_3D",
+				"Tutorial_Disco",
+				"Chamber_Arrays"
+			],
+			"return_to": "lab",
+			"lab_map": "Lab/map_data_post_array_tutorial",
+			"unlock_requirements": [],
+			"completion_rewards": [
+				"array_explorer_badge",
+				"grid_navigator_badge"
+			],
+			"artifact_groups": [
+				{
+					"map": "Array_Patterns",
+					"position": "intro",
+					"artifacts": [
+						"pattern_tile_4x4",
+						"vr_tile_editor_mirror",
+						"pattern_tile_mirror",
+						"tiling_demo",
+						"dark_sphere",
+						"facade_grammar_demo",
+						"pattern_tile_brick",
+						"pattern_tile_herringbone"
+					],
+					"size_budget": "mixed",
+					"rationale": "Gallery of pattern stations from simple repeat to complex tiling. Introduces array structure through visual patterns.",
+					"grammar": "linear"
+				},
+				{
+					"map": "Tutorial_Single",
+					"position": "intro",
+					"artifacts": [
+						"pick_up_cube",
+						"dark_sphere",
+						"xyz_coordinates"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Minimal first interaction: one cube to grab, one exit to find. Pure intro to VR navigation.",
+					"grammar": "florence"
+				},
+				{
+					"map": "Tutorial_Row",
+					"position": "foundation",
+					"artifacts": [
+						"column_3_z",
+						"xyz_coordinates",
+						"dark_sphere"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Linear array traversal: row completion with coordinate reference.",
+					"grammar": "zelda"
+				},
+				{
+					"map": "Tutorial_2D_Build",
+					"position": "foundation",
+					"artifacts": [
+						"grid_2d_4x4",
+						"pick_up_cube",
+						"dark_sphere",
+						"pulsar_visualizer",
+						"xyz_coordinates",
+						"gridagent"
+					],
+					"size_budget": "mixed",
+					"rationale": "2D array navigation: X and Y axes in a grid structure with active hazard introduction.",
+					"grammar": "zelda"
+				},
+				{
+					"map": "Tutorial_3D",
+					"position": "exploration",
+					"artifacts": [
+						"grid_3d_4x4x4",
+						"dark_sphere"
+					],
+					"size_budget": "compact_only",
+					"rationale": "Vertical navigation and volumetric thinking: 3D array as spatial cube.",
+					"grammar": "zelda"
+				},
+				{
+					"map": "Tutorial_Pattern",
+					"position": "exploration",
+					"artifacts": [
+						"script_runner#array",
+						"pattern_tile_puzzle",
+						"pattern_tile_puzzle#p4m",
+						"pattern_tile_mirror",
+						"dark_sphere",
+						"pulsar_compact"
+					],
+					"size_budget": "mixed",
+					"rationale": "Pattern recognition: checkerboard indexing, wave patterns, wallpaper groups. Arrays as function: index to value.",
+					"grammar": "linear"
+				},
+				{
+					"map": "Tutorial_Disco",
+					"position": "synthesis",
+					"artifacts": [
+						"standalone_disco",
+						"dark_sphere"
+					],
+					"size_budget": "environment",
+					"rationale": "Large reactive disco floor: audio-step interaction and spatial pattern reading. Culmination of array concepts at scale.",
+					"grammar": "vatican"
+				}
+			],
+			"content": [
+				"Array_Patterns: Tiles, Carpets, Wallpaper Groups",
+				"Tutorial_Single: One Cube, One Grab",
+				"Tutorial_Row: Linear Array Traversal",
+				"Tutorial_2D_Build: Two-Dimensional Grid Navigation",
+				"Tutorial_3D: Volumetric Three-Index Arrays",
+				"Tutorial_Pattern: Patterns as Array Equations",
+				"Tutorial_Disco: Reactive Disco Floor at Scale"
+			]
+		}
+	},
+	"world_phase": "grid",
+	"artifact_groups": []
 }
