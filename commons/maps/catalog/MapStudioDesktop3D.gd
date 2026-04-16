@@ -795,16 +795,16 @@ func _unhandled_input(ev: InputEvent) -> void:
 
 
 func _generate_structure() -> void:
-	if sl.is_empty() or map_name == "":
+	if sl.is_empty() or map_path == "":
 		status.text = "No map loaded"
 		return
-	_save()  # Save current state first
+	var current_map_name: String = map_path.get_base_dir().get_file()
+	_save()
 	status.text = "Generating structure..."
 
-	# Run Python generator as subprocess
 	var args := [
 		"tools/generate_structure.py",
-		"--map", map_name,
+		"--map", current_map_name,
 		"--mode", "corridor",
 	]
 	var output := []

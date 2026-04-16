@@ -38,7 +38,7 @@ func _process(_delta):
 		return
 
 	if _current_idx >= RACK_CONFIGS.size():
-		print("capture_rack_configs: Done — %d configs captured to %s" % [RACK_CONFIGS.size(), _output_dir])
+		print("capture_rack_configs: Done - %d configs captured to %s" % [RACK_CONFIGS.size(), _output_dir])
 		quit()
 		return
 
@@ -121,4 +121,4 @@ func _capture_current():
 	var img = _viewport.get_texture().get_image()
 	var path = _output_dir + config_name + ".png"
 	img.save_png(path)
-	print("capture_rack_configs: ✅ %s -> %s" % [config_name, path])
+	print("capture_rack_configs: OK %s -> %s" % [config_name, path])

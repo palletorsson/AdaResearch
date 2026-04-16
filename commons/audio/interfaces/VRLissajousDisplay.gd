@@ -40,14 +40,14 @@ func _ready() -> void:
 	print("VRLissajousDisplay: Ready with freq_x=%.1f, freq_y=%.1f" % [freq_x, freq_y])
 
 func _initialize_display():
-	"""Initialize display geometry"""
+	##Initialize display geometry##
 	display_rect = Rect2(Vector2.ZERO, size)
 	center = size / 2.0
 	radius = min(size.x, size.y) * 0.4
 	is_initialized = true
 
 func _process(delta: float):
-	"""Update animation and redraw"""
+	##Update animation and redraw##
 	if not is_initialized:
 		return
 	
@@ -58,24 +58,24 @@ func _process(delta: float):
 	queue_redraw()
 
 func set_frequency_x(freq: float):
-	"""Set the X-axis frequency (e.g., start_freq)"""
+	##Set the X-axis frequency (e.g., start_freq)##
 	freq_x = clamp(freq, 20.0, 5000.0)
 
 func set_frequency_y(freq: float):
-	"""Set the Y-axis frequency (e.g., end_freq)"""
+	##Set the Y-axis frequency (e.g., end_freq)##
 	freq_y = clamp(freq, 20.0, 5000.0)
 
 func set_frequencies(freq1: float, freq2: float):
-	"""Set both frequencies at once"""
+	##Set both frequencies at once##
 	freq_x = clamp(freq1, 20.0, 5000.0)
 	freq_y = clamp(freq2, 20.0, 5000.0)
 
 func set_amplitude(amp: float):
-	"""Set display amplitude"""
+	##Set display amplitude##
 	amplitude = clamp(amp, 0.0, 1.0)
 
 func _draw():
-	"""Draw the Lissajous figure"""
+	##Draw the Lissajous figure##
 	if not is_initialized:
 		return
 	
@@ -109,7 +109,7 @@ func _draw():
 	_draw_info()
 
 func _generate_lissajous_points() -> PackedVector2Array:
-	"""Generate points for the Lissajous figure"""
+	##Generate points for the Lissajous figure##
 	var points = PackedVector2Array()
 	
 	# Normalize frequencies to create ratio
@@ -138,7 +138,7 @@ func _generate_lissajous_points() -> PackedVector2Array:
 	return points
 
 func _draw_curve(points: PackedVector2Array, color: Color, width: float):
-	"""Draw a curve from points with antialiasing"""
+	##Draw a curve from points with antialiasing##
 	if points.size() < 2:
 		return
 	
@@ -146,7 +146,7 @@ func _draw_curve(points: PackedVector2Array, color: Color, width: float):
 		draw_line(points[i], points[i + 1], color, width, true)
 
 func _draw_grid():
-	"""Draw oscilloscope-style grid"""
+	##Draw oscilloscope-style grid##
 	var grid_divisions = 4
 	
 	# Draw circular guides
@@ -166,7 +166,7 @@ func _draw_grid():
 	draw_line(center + Vector2(-radius, radius), center + Vector2(radius, -radius), diag_color, 1.0)
 
 func _draw_info():
-	"""Draw frequency information"""
+	##Draw frequency information##
 	var font = get_theme_default_font()
 	var info_color = Color(0.6, 0.8, 0.9, 0.9)
 	var value_color = Color(0, 1, 1, 1)
@@ -188,7 +188,7 @@ func _draw_info():
 	draw_string(font, Vector2(8, size.y - 8), freq_y_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, Color(1, 0.5, 1, 0.9))
 
 func _on_resized():
-	"""Handle resize"""
+	##Handle resize##
 	if is_initialized:
 		_initialize_display()
 		print("VRLissajousDisplay: Resized to ", size)
