@@ -9965,6 +9965,32 @@
 				"cluster_with": [],
 				"preferred_zone": "entry"
 			}
+		},
+		"beat_frequency_demo": {
+			"name": "Beat Frequency Demo",
+			"lookup_name": "beat_frequency_demo",
+			"description": "Visual beat frequency demonstration — two sine waves at adjustable frequencies and their sum, showing the characteristic pulsing envelope when frequencies are close. Three rows of 64 animated spheres (blue, green, orange) with sliders for each frequency.",
+			"scene": "res://algorithms/wavefunctions/beat_frequency/beat_frequency_demo.tscn",
+			"category": "waves",
+			"complexity": "beginner",
+			"tags": ["wave", "beat", "frequency", "interference", "envelope", "interactive"],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"map_sequences": [],
+			"dev_themes": ["oscillation", "physics", "waves"],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"wall_backing": false,
+				"isolation": 0,
+				"preferred_zone": "middle"
+			}
 		}
 	}
 }

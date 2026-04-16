@@ -458,6 +458,32 @@
 				],
 				"preferred_zone": "any"
 			}
+		},
+		"vector_reflection_demo": {
+			"name": "Vector Reflection Demo",
+			"lookup_name": "vector_reflection_demo",
+			"description": "Interactive vector reflection off a rotatable surface. An incoming vector (blue), surface normal (green), and reflected vector (red) update in real time as sliders control the surface angle and incoming direction. Demonstrates r = v - 2(v·n)n.",
+			"scene": "res://algorithms/vectors/vector_reflection/vector_reflection_demo.tscn",
+			"category": "vectors",
+			"complexity": "beginner",
+			"tags": ["vector", "reflection", "mirror", "dot_product", "interactive", "linear_algebra"],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"map_sequences": [],
+			"dev_themes": ["linear_algebra", "math", "vectors", "optics"],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"wall_backing": false,
+				"isolation": 0,
+				"preferred_zone": "middle"
+			}
 		}
 	}
 }

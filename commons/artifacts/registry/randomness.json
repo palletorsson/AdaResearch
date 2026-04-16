@@ -8326,6 +8326,25 @@
 				"cluster_with": [],
 				"preferred_zone": "entry"
 			}
+		},
+		"seed_replay_demo": {
+			"name": "Seed Replay Demo",
+			"lookup_name": "seed_replay_demo",
+			"description": "Demonstrates seed reproducibility — an 8x8 grid of colored cubes generated from a seed. Same seed always produces the same pattern. Slider changes seed, Replay regenerates identically, Random picks a new seed.",
+			"scene": "res://algorithms/randomness/seed_replay/seed_replay_demo.tscn",
+			"category": "randomness",
+			"complexity": "beginner",
+			"tags": ["seed", "prng", "reproducibility", "determinism"],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"wall_backing": false,
+				"isolation": 0,
+				"preferred_zone": "entry"
+			}
 		}
 	}
 }

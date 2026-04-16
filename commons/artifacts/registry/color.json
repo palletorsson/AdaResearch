@@ -2499,6 +2499,44 @@
 				],
 				"preferred_zone": "any"
 			}
+		},
+		"subpixel_display": {
+			"name": "Subpixel Display",
+			"lookup_name": "subpixel_display",
+			"description": "Shows how screens create color from RGB subpixels. Three vertical bars (R, G, B) with adjustable intensity via sliders. A combined swatch above shows the mixed color with hex value.",
+			"scene": "res://algorithms/color/subpixel_display/subpixel_display.tscn",
+			"category": "color",
+			"complexity": "beginner",
+			"tags": ["rgb", "subpixel", "additive_mixing", "display"],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"wall_backing": false,
+				"isolation": 0,
+				"preferred_zone": "teaching"
+			}
+		},
+		"gradient_interpolator": {
+			"name": "Gradient Interpolator",
+			"lookup_name": "gradient_interpolator",
+			"description": "Shows gradient interpolation between two colors using RGB and HSV color spaces. 16 cubes display the gradient. Toggle mode to see how the interpolation path changes between color spaces.",
+			"scene": "res://algorithms/color/gradient_interpolator/gradient_interpolator.tscn",
+			"category": "color",
+			"complexity": "beginner",
+			"tags": ["gradient", "interpolation", "rgb", "hsv", "lerp"],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"wall_backing": false,
+				"isolation": 0,
+				"preferred_zone": "exploration"
+			}
 		}
 	},
 	"registry_info": {
