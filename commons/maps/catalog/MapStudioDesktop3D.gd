@@ -69,7 +69,7 @@ func _ready() -> void:
 	filter.text_changed.connect(_on_filter)
 	$MapList/NavRow/PrevBtn.pressed.connect(_on_prev_map)
 	$MapList/NavRow/NextBtn.pressed.connect(_on_next_map)
-	# All palette sections visible at once — no tabs
+	# All palette sections visible at once -no tabs
 	save_btn.pressed.connect(_save)
 	canvas.gui_input.connect(_on_canvas_input)
 	notes_edit.text_changed.connect(_on_notes_changed)
@@ -93,7 +93,7 @@ func _scan() -> void:
 	_seq_maps.clear()
 	_all_map_names.clear()
 
-	# Load sequences — format: { "sequences": { "name": { "maps": [...] } } }
+	# Load sequences -format: { "sequences": { "name": { "maps": [...] } } }
 	var seq_dir := DirAccess.open("res://commons/maps/sequences/")
 	if seq_dir:
 		seq_dir.list_dir_begin()
@@ -160,7 +160,7 @@ func _scan() -> void:
 
 	for seq_name in SPINE:
 		if seq_name not in _seq_maps: continue
-		list.add_item("── %s ──" % seq_name)
+		list.add_item("-- %s --" % seq_name)
 		list.set_item_disabled(list.item_count - 1, true)
 		list.set_item_custom_fg_color(list.item_count - 1, Color(0.5, 0.7, 1.0))
 		paths.append("")
@@ -174,7 +174,7 @@ func _scan() -> void:
 	# Non-spine sequences
 	for seq_name in _seq_maps:
 		if seq_name in SPINE: continue
-		list.add_item("── %s ──" % seq_name)
+		list.add_item("-- %s --" % seq_name)
 		list.set_item_disabled(list.item_count - 1, true)
 		list.set_item_custom_fg_color(list.item_count - 1, Color(0.7, 0.5, 0.3))
 		paths.append("")
@@ -191,7 +191,7 @@ func _scan() -> void:
 			ungrouped.append(m)
 	if ungrouped.size() > 0:
 		ungrouped.sort()
-		list.add_item("── other ──")
+		list.add_item("-- other --")
 		list.set_item_disabled(list.item_count - 1, true)
 		list.set_item_custom_fg_color(list.item_count - 1, Color(0.5, 0.5, 0.5))
 		paths.append("")
@@ -293,7 +293,7 @@ const UTIL_DEFS := {
 }
 
 func _build_palette() -> void:
-	# Eraser — clears utility + artifact from selected cell
+	# Eraser -clears utility + artifact from selected cell
 	var eraser := Button.new()
 	eraser.text = "Eraser (clear cell)"
 	eraser.pressed.connect(func():
@@ -341,7 +341,7 @@ func _build_palette() -> void:
 
 	for code in UTIL_DEFS:
 		var lbl: String = code if code != " " else "x"
-		_util_list.add_item("%s — %s" % [lbl, UTIL_DEFS[code]])
+		_util_list.add_item("%s -%s" % [lbl, UTIL_DEFS[code]])
 		_util_list.set_item_metadata(_util_list.item_count - 1, code)
 		if code in U_COLORS:
 			_util_list.set_item_custom_fg_color(_util_list.item_count - 1, U_COLORS[code])
@@ -524,7 +524,7 @@ func _drag_drop(pos: Vector2) -> void:
 	var x := int(pos.x / CELL)
 	var z := int(pos.y / CELL)
 	if x < 0 or x >= gw or z < 0 or z >= gd_val:
-		# Dropped outside — put it back
+		# Dropped outside -put it back
 		if _drag_layer == 2:
 			il[_drag_from.y][_drag_from.x] = _drag_value
 		elif _drag_layer == 1:
@@ -629,14 +629,14 @@ func _update_insp_detail() -> void:
 		else:
 			t += "[color=red]Not in registry[/color]\n"
 	else:
-		t += "[color=gray]No artifact — select from Artifacts tab or type name above[/color]\n"
+		t += "[color=gray]No artifact -select from Artifacts tab or type name above[/color]\n"
 
 	t += "\n[color=gray]Left-click: paint | Right-drag: move | Ctrl+S: save[/color]"
 	detail.text = t
 
-# 3D PREVIEW — uses the real GridSystem for accurate VR representation
+# 3D PREVIEW -uses the real GridSystem for accurate VR representation
 func _request_3d_reload() -> void:
-	# Only full-reload on map load — too expensive per paint stroke
+	# Only full-reload on map load -too expensive per paint stroke
 	# For live editing, just auto-save and let user press R to reload 3D
 	pass
 
@@ -684,10 +684,10 @@ func _sync_ecosystem_to_map(map_name: String) -> void:
 			eco.force_advance_to(seq_name)
 			print("[MapStudio] Ecosystem synced to '%s' for map '%s'" % [seq_name, map_name])
 			return
-	# Map not in any sequence — reset ecosystem to clean state
+	# Map not in any sequence -reset ecosystem to clean state
 	if eco.has_method("reset_progression"):
 		eco.reset_progression()
-		print("[MapStudio] Ecosystem reset — map '%s' not in any sequence" % map_name)
+		print("[MapStudio] Ecosystem reset -map '%s' not in any sequence" % map_name)
 
 func _disable_grid_cams() -> void:
 	if not _grid_system or not is_instance_valid(_grid_system): return
