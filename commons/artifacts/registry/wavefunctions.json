@@ -9991,6 +9991,52 @@
 				"isolation": 0,
 				"preferred_zone": "middle"
 			}
+		},
+		"wave_interference_3d": {
+			"category": "waves",
+			"complexity": "intermediate",
+			"description": "Two wave sources on a 16x16 sphere grid. Each sphere rises and falls as the sum of two circular sine waves. Constructive interference builds peaks; destructive interference flattens nodes. Adjust frequency, source separation, and amplitude to reshape the pattern.",
+			"dev_themes": ["oscillation", "physics", "waves", "interference"],
+			"include_in_map_data": true,
+			"lookup_name": "wave_interference_3d",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Wave Interference 3D",
+			"qfep_connection": "Superposition as co-existence — two F-models occupy the same space and the result is richer than either alone. Constructive interference is resonance; destructive is cancellation. Neither wave is destroyed, only the observation changes.",
+			"scene": "res://algorithms/wavefunctions/wave_interference_3d/wave_interference_3d.tscn",
+			"tags": ["waves", "interference", "superposition", "physics"],
+			"geometry_spec": {
+				"mesh_type": "instanced_grid",
+				"topology": "scattered",
+				"construction": {
+					"method": "procedural_scripted",
+					"primitives": ["sphere"],
+					"operations": ["grid_layout", "wave_displacement", "color_by_value"]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": ["emission", "albedo_color"]
+				},
+				"animation": {
+					"type": "continuous",
+					"driven_by": "cpu_simulation",
+					"affects": ["transform", "color"]
+				},
+				"instance_strategy": "direct",
+				"vertex_estimate": "medium"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": ["WaveInterference", "standing_waves"],
+				"preferred_zone": "teaching"
+			}
 		}
 	}
 }

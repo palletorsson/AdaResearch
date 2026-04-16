@@ -8369,6 +8369,64 @@
 				"cluster_with": ["seed_replay_demo", "monte_carlo_dartboard"],
 				"preferred_zone": "teaching"
 			}
+		},
+		"perlin_noise_bridge": {
+			"category": "procedural",
+			"complexity": "beginner",
+			"description": "Side-by-side 16x16 heightfield grids comparing white noise (chaotic) and Perlin noise (terrain-like). Shows how gradient noise transforms raw randomness into coherent structure through spatial memory.",
+			"dev_themes": ["noise", "procedural", "terrain"],
+			"include_in_map_data": true,
+			"lookup_name": "perlin_noise_bridge",
+			"map_ready": true,
+			"map_sequences": ["randomness"],
+			"name": "Perlin Noise Bridge",
+			"parameters": {
+				"footprint": [4, 3, 2],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.tscn",
+			"sequence": "randomness",
+			"tags": ["noise", "perlin", "heightfield", "comparison"],
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 3,
+				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": ["white_noise_spectrum", "noise_spectrum_3d"],
+				"preferred_zone": "teaching"
+			}
+		},
+		"reaction_diffusion_intro": {
+			"category": "emergence",
+			"complexity": "intermediate",
+			"description": "A 32x32 Gray-Scott reaction-diffusion simulation rendered as an ImageTexture. Two chemicals U and V interact to produce spots, stripes, or coral patterns from random initial conditions — Turing morphogenesis made visible.",
+			"dev_themes": ["emergence", "morphogenesis", "simulation"],
+			"include_in_map_data": true,
+			"lookup_name": "reaction_diffusion_intro",
+			"map_ready": true,
+			"map_sequences": ["randomness"],
+			"name": "Reaction-Diffusion Intro",
+			"parameters": {
+				"footprint": [3, 3, 2],
+				"size_group": "room_scale"
+			},
+			"scene": "res://algorithms/randomness/reaction_diffusion_intro/reaction_diffusion_intro.tscn",
+			"sequence": "randomness",
+			"tags": ["reaction-diffusion", "gray-scott", "turing", "morphogenesis", "emergence"],
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": ["perlin_noise_bridge"],
+				"preferred_zone": "exploration"
+			}
 		}
 	}
 }

@@ -1600,6 +1600,52 @@
 				"cluster_with": ["homogeneous_coordinates", "transform_composition"],
 				"preferred_zone": "teaching"
 			}
+		},
+		"invariants_demo": {
+			"category": "transforms",
+			"complexity": "intermediate",
+			"description": "A triangle with labeled measurements — side lengths, angles, area. Apply translation, rotation, scale, or shear and watch which properties survive. Preserved measurements glow green; changed ones glow red. Each transform has a signature: what it cannot touch defines it.",
+			"dev_themes": ["geometry", "math", "transforms", "invariance"],
+			"include_in_map_data": true,
+			"lookup_name": "invariants_demo",
+			"map_ready": true,
+			"map_sequences": [],
+			"name": "Invariants Demo",
+			"qfep_connection": "Invariance is the core of identity under transformation — what remains when everything else changes is the essence. Translation preserves all F; shear destroys it. The invariant set IS the transformation's character.",
+			"scene": "res://algorithms/transforms/invariants/invariants_demo.tscn",
+			"tags": ["transforms", "invariance", "geometry", "linear_algebra"],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "procedural_scripted",
+					"primitives": ["cylinder", "sphere"],
+					"operations": ["orient_between_points", "recolor_by_invariance"]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": ["emission", "albedo_color"]
+				},
+				"animation": {
+					"type": "triggered",
+					"driven_by": "button_press",
+					"affects": ["transform", "color"]
+				},
+				"instance_strategy": "direct",
+				"vertex_estimate": "low"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": ["matrix_4x4_viewer", "homogeneous_coordinates"],
+				"preferred_zone": "teaching"
+			}
 		}
 	}
 }
