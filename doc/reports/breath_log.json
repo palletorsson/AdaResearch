@@ -8,16 +8,36 @@
       "baseline_avg": 2.04,
       "post_avg": 2.04,
       "delta": 0,
-      "items_attempted": ["primitives_documentation", "transformation_documentation", "validation_investigation"],
-      "items_succeeded": ["primitives_documentation", "transformation_documentation"],
-      "items_failed": ["validation_investigation"],
+      "items_attempted": [
+        "primitives_documentation",
+        "transformation_documentation",
+        "validation_investigation"
+      ],
+      "items_succeeded": [
+        "primitives_documentation",
+        "transformation_documentation"
+      ],
+      "items_failed": [
+        "validation_investigation"
+      ],
       "failure_reasons": {
         "validation_investigation": "pathfinder passes individually (5/5 maps OK) but pipeline scorer reports 0% — likely timeout issue in batch subprocess (10s per map). Maps ARE valid but scorer can't confirm in time."
       },
-      "skills_used": ["documentation_writing", "pathfinder_validation"],
+      "skills_used": [
+        "documentation_writing",
+        "pathfinder_validation"
+      ],
       "skill_effectiveness": {
-        "documentation_writing": {"calls": 5, "succeeded": 5, "failed": 0},
-        "pathfinder_validation": {"calls": 5, "succeeded": 5, "failed": 0}
+        "documentation_writing": {
+          "calls": 5,
+          "succeeded": 5,
+          "failed": 0
+        },
+        "pathfinder_validation": {
+          "calls": 5,
+          "succeeded": 5,
+          "failed": 0
+        }
       },
       "discoveries": [
         "Pipeline scorer validation stage runs pathfinder with 10s timeout per map — maps pass individually but fail in batch due to cumulative timeout. The scorer reports 0% validation even for structurally valid maps.",
@@ -39,13 +59,25 @@
       "baseline_avg": 4.16,
       "post_avg": 4.37,
       "delta": 0.21,
-      "items_attempted": ["primitives_missing_artifact", "wavefunctions_missing_artifacts"],
-      "items_succeeded": ["primitives_missing_artifact", "wavefunctions_missing_artifacts"],
+      "items_attempted": [
+        "primitives_missing_artifact",
+        "wavefunctions_missing_artifacts"
+      ],
+      "items_succeeded": [
+        "primitives_missing_artifact",
+        "wavefunctions_missing_artifacts"
+      ],
       "items_failed": [],
       "failure_reasons": {},
-      "skills_used": ["registry_repair"],
+      "skills_used": [
+        "registry_repair"
+      ],
       "skill_effectiveness": {
-        "registry_repair": {"calls": 3, "succeeded": 3, "failed": 0}
+        "registry_repair": {
+          "calls": 3,
+          "succeeded": 3,
+          "failed": 0
+        }
       },
       "discoveries": [
         "primitives at 99% artifacts: achilles_tortoise scene exists at commons/primitives/combines/ but was not in any registry. Adding 1 entry to primitives.json advanced sequence from stage 3 to stage 5.",
@@ -59,6 +91,216 @@
         "commons/maps/WaveFunctions_Synthesis_Lab/map_data.json"
       ],
       "duration_minutes": 20
+    },
+    {
+      "breath_id": "2026-04-14T07:30",
+      "mode": "full",
+      "baseline_avg": 3.37,
+      "post_avg": 4.0,
+      "delta": 0.63,
+      "items_attempted": [
+        "qfeplaboratory_registry",
+        "transformation_registry",
+        "color_registry",
+        "forces_registry",
+        "array_tutorial_registry",
+        "fractals_registry"
+      ],
+      "items_succeeded": [
+        "qfeplaboratory_registry",
+        "transformation_registry",
+        "color_registry",
+        "forces_registry",
+        "array_tutorial_registry",
+        "fractals_registry"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "registry_repair"
+      ],
+      "skill_effectiveness": {
+        "registry_repair": {
+          "calls": 6,
+          "succeeded": 6,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "Registry files with _comment_* string values (not dicts) cause silent load failure in pipeline scorer — entire file skipped. qfep.json and transforms.json both had this. Fix: remove string-valued keys from artifacts dict.",
+        "Wrong res:// paths are common: array vs arrays directory, recursiveemergence vs fractals, light vs postprocessing. Pattern: scorer shows 95-99% for a sequence — 1-4 artifacts have stale paths from renames.",
+        "tt and 3t are grid utilities (codeDisplay.tscn, word_is.tscn) appearing in interactables layer. Registering them in commons_artifacts.json allows scorer to count them as present artifacts.",
+        "Single breathe session advanced ALL 6 stage-3 sequences to stage 5 — 19/19 sequences now at stage 5. Registry repair is the highest-leverage action when sequences are stuck at stage 3."
+      ],
+      "files_changed": [
+        "commons/artifacts/registry/qfep.json",
+        "commons/artifacts/registry/transforms.json",
+        "commons/artifacts/registry/algorithms_misc.json",
+        "commons/artifacts/registry/arrays.json",
+        "commons/artifacts/registry/shaders.json",
+        "commons/artifacts/registry/color.json",
+        "commons/artifacts/registry/physics_simulation.json",
+        "commons/artifacts/registry/chaos.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/artifacts/registry/primitives.json"
+      ],
+      "duration_minutes": 18
+    },
+    {
+      "breath_id": "2026-04-15T09:30",
+      "mode": "full",
+      "baseline_avg": 4.05,
+      "post_avg": 4.05,
+      "delta": 0.0,
+      "items_attempted": [
+        "Art_History_Gallery_grade_F",
+        "Point_Zero_grade_F",
+        "registry_unresolved_scenes"
+      ],
+      "items_succeeded": [
+        "Art_History_Gallery_grade_F",
+        "Point_Zero_grade_F",
+        "registry_unresolved_scenes"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "direct_file_edit",
+        "pathfinder_validate",
+        "release_gates"
+      ],
+      "skill_effectiveness": {
+        "direct_file_edit": {
+          "calls": 5,
+          "succeeded": 5,
+          "failed": 0
+        },
+        "pathfinder_validate": {
+          "calls": 2,
+          "succeeded": 2,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "grade-F maps come from validate_map.py --all --json, not pathfinder --all. grade_F = json_valid failure OR has_required_fields failure.",
+        "Art_History_Gallery used OLD flat format (name/gridWidth/structure at top level) — missing map_info and layers wrapper. Validator requires new format. Fix: wrap in map_info + layers.",
+        "Point_Zero had trailing comma after last structure row + blank line — standard trailing-comma JSON error. Fix: strip trailing commas iteratively before ] or }.",
+        "Registry scene path key is \"scene\" not \"scene_path\" — workbench audit uses value.get(\"scene\") to build scene_path. Previous attempt to fix via scene_path key did nothing.",
+        "algorithms_misc.json paths for context_free_grammars, tree_generation were already correct. rorschach_* paths were already correct but files resolve and exist — workbench still flags them (bug or cache).",
+        "arrays.json used array/ (singular) prefix, actual files are in arrays/ (plural). 3 entries fixed. Pattern: directory renames leave stale registry paths.",
+        "Release gate improvement: Gate C (Map Validation) went from FAIL to PASS. Gate D was already passing. 2/4 gates now pass (was 1/4). grade_F: 2->0, unresolved_scene_files: 62->55.",
+        "Pipeline scorer avg unchanged at 4.05 — validation stage 0% is a known timeout artifact, not actual validation failures. Maps structurally valid."
+      ],
+      "files_changed": [
+        "commons/maps/Art_History_Gallery/map_data.json",
+        "commons/maps/Point_Zero/map_data.json",
+        "commons/artifacts/registry/algorithms_misc.json",
+        "commons/artifacts/registry/arrays.json"
+      ],
+      "duration_minutes": 35,
+      "release_gate_before": {
+        "A": false,
+        "B": false,
+        "C": false,
+        "D": true,
+        "passing": 1
+      },
+      "release_gate_after": {
+        "A": false,
+        "B": false,
+        "C": true,
+        "D": true,
+        "passing": 2
+      }
+    },
+    {
+      "breath_id": "2026-04-16T09:30",
+      "mode": "full",
+      "baseline_avg": 4.05,
+      "post_avg": 4.05,
+      "delta": 0.0,
+      "items_attempted": [
+        "gate_b_missing_scene_path",
+        "gate_b_missing_map_ready",
+        "gate_b_missing_include_in_map_data",
+        "gate_a_duplicate_entries"
+      ],
+      "items_succeeded": [
+        "gate_b_missing_scene_path",
+        "gate_b_missing_map_ready",
+        "gate_b_missing_include_in_map_data",
+        "gate_a_duplicate_entries"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "registry_repair",
+        "direct_file_edit"
+      ],
+      "skill_effectiveness": {
+        "registry_repair": {
+          "calls": 4,
+          "succeeded": 4,
+          "failed": 0
+        },
+        "direct_file_edit": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "6 physics_simulation.json and 1 procgen_extra.json entries used scene_path key instead of scene key — workbench.py reads value.get('scene') only. Fix: add scene key copying from scene_path. All 7 files existed on disk.",
+        "14 missing_map_ready and 19 missing_include_in_map_data entries resolved by adding false defaults. These are curation metadata — false means unreviewed, not broken.",
+        "array_tutorial.json had Tutorial_Pattern at indices [0,6] — removed index 6. Gate A duplicate_entries_within_sequence: 1→0.",
+        "Gate B remaining blocker: 55 unresolved_scene_files are aspirational artifacts in commons_artifacts.json that point to .tscn files not yet built. Not fixable by registry repair — requires building scenes.",
+        "Pattern: scene_path vs scene key mismatch is a common entry-format inconsistency. Check physics_simulation.json and procgen_extra.json for future entries."
+      ],
+      "files_changed": [
+        "commons/artifacts/registry/physics_simulation.json",
+        "commons/artifacts/registry/procgen_extra.json",
+        "commons/artifacts/registry/color.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/artifacts/registry/qfep.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "commons/artifacts/registry/chaos.json",
+        "commons/artifacts/registry/algorithms_misc.json",
+        "commons/maps/sequences/array_tutorial.json",
+        "doc/reports/breath_log.json"
+      ],
+      "duration_minutes": 20,
+      "release_gate_before": {
+        "A": false,
+        "B": false,
+        "C": true,
+        "D": true,
+        "passing": 2,
+        "gate_b_detail": {
+          "unresolved_scene_files": 55,
+          "missing_scene_path": 6,
+          "missing_map_ready": 14,
+          "missing_include_in_map_data": 19
+        },
+        "gate_a_detail": {
+          "duplicate_entries_within_sequence": 1
+        }
+      },
+      "release_gate_after": {
+        "A": false,
+        "B": false,
+        "C": true,
+        "D": true,
+        "passing": 2,
+        "gate_b_detail": {
+          "unresolved_scene_files": 55,
+          "missing_scene_path": 0,
+          "missing_map_ready": 0,
+          "missing_include_in_map_data": 0
+        },
+        "gate_a_detail": {
+          "duplicate_entries_within_sequence": 0
+        }
+      }
     }
   ]
 }

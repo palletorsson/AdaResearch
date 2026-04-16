@@ -1,2574 +1,2578 @@
 {
-	"artifacts": {
-		"lambda_slider": {
-			"name": "Lambda Slider",
-			"lookup_name": "lambda_slider",
-			"description": "QFEP λ parameter controller. The entropy drive dial: λ=0 (pure order) → λ=0.4 (edge of chaos) → λ=1 (dissolution). Grab and slide to tune how much a system values disorder vs order. Life exists at λ ≈ 0.3-0.5.",
-			"scene": "res://commons/interfaces/qfep/lambda_slider.tscn",
-			"category": "qfep",
-			"interaction": "grab_slide",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_controller",
-			"qfep_term": "λ",
-			"capacity": "TUNE entropy drive",
-			"dev_themes": [
-				"qfep",
-				"tools"
-			],
-			"dev_category": "qfep_controller",
-			"complexity": "intermediate",
-			"tags": [
-				"interactive",
-				"slider",
-				"parameter_control",
-				"entropy"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"foundationscrisis",
-				"qfeplaboratory"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box",
-						"sphere"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "particles",
-				"vertex_estimate": "~0"
-			}
-		},
-		"phi_slider": {
-			"name": "Phi Slider",
-			"lookup_name": "phi_slider",
-			"description": "QFEP φ parameter controller. Rate of entropy change sensitivity: φ<0 (resists change) → φ=0 (neutral) → φ>0 (embraces change). Positive φ is the queer signature—valuing becoming over being.",
-			"scene": "res://commons/interfaces/qfep/phi_slider.tscn",
-			"category": "qfep",
-			"interaction": "grab_slide",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_controller",
-			"qfep_term": "φΔE(S,t)",
-			"capacity": "TUNE rate sensitivity",
-			"dev_themes": [
-				"qfep",
-				"tools"
-			],
-			"dev_category": "qfep_controller",
-			"complexity": "advanced",
-			"tags": [
-				"interactive",
-				"slider",
-				"parameter_control",
-				"change_rate",
-				"queer_theory"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"foundationscrisis",
-				"qfeplaboratory"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box",
-						"sphere"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "particles",
-				"vertex_estimate": "~0"
-			}
-		},
-		"qfep_formula_3d": {
-			"name": "QFEP Formula 3D",
-			"lookup_name": "qfep_formula_3d",
-			"description": "3D visualization of the complete QFEP formula: QFE = F − λE(S) + φΔE(S,t). Each term glows with its signature color. Responds to lambda and phi slider changes. The theoretical anchor.",
-			"scene": "res://commons/interfaces/qfep/formula_display/qfep_formula_3d.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "all",
-			"capacity": "SEE the theory",
-			"dev_themes": [
-				"qfep",
-				"philosophy"
-			],
-			"dev_category": "qfep_visualization",
-			"complexity": "intermediate",
-			"tags": [
-				"visualization",
-				"formula",
-				"theory",
-				"3d"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"foundationscrisis",
-				"qfeplaboratory"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"qfep_sandbox_console": {
-			"name": "QFEP Sandbox Console",
-			"lookup_name": "qfep_sandbox_console",
-			"description": "Full QFEP parameter control panel combining lambda_slider, phi_slider, F meter, E(S) meter, and real-time visualization. Find the edge of chaos. You have earned the force.",
-			"scene": "res://commons/interfaces/qfep/qfep_sandbox_console.tscn",
-			"category": "qfep",
-			"interaction": "full_control",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_controller",
-			"qfep_term": "all",
-			"capacity": "CONTROL everything",
-			"status": "planned",
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "advanced",
-			"tags": [
-				"animation",
-				"chaos",
-				"graph",
-				"physics",
-				"qfep",
-				"searching"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box",
-						"sphere"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "particle_system",
-					"affects": [
-						"transform",
-						"color",
-						"visibility"
-					]
-				},
-				"instance_strategy": "particles",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"bifurcation_walkway": {
-			"name": "Bifurcation Walkway",
-			"lookup_name": "bifurcation_walkway",
-			"description": "A corridor where your position = r parameter in the logistic map. Walk through the phase transition: stable → period doubling → chaos → windows of order. The bifurcation diagram made walkable.",
-			"scene": "res://commons/interfaces/qfep/bifurcation_walkway.tscn",
-			"category": "qfep",
-			"interaction": "walk_through",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "λ",
-			"capacity": "WALK phase transition",
-			"status": "planned",
-			"dev_themes": [
-				"qfep",
-				"emergence"
-			],
-			"dev_category": "qfep_visualization",
-			"complexity": "advanced",
-			"tags": [
-				"walkable",
-				"chaos",
-				"phase_transition",
-				"embodied_learning"
-			],
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"interactions": [
-				"walk_through"
-			],
-			"parameters": {
-				"footprint": [
-					2,
-					3,
-					10
-				],
-				"size_group": "environment"
-			},
-			"qfep_connection": "The logistic map's r parameter IS the Î» drive. At râ‰ˆ3.57, chaos begins â€” this is Î»_edge, where life exists. You walk through the phase space of orderâ†’chaos.",
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box",
-						"sphere"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "vertex_color",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~36"
-			}
-		},
-		"edge_of_chaos_orb": {
-			"name": "Edge of Chaos Orb",
-			"lookup_name": "edge_of_chaos_orb",
-			"description": "A sphere that visualizes the current QFEP state. Color and behavior shift based on global λ and φ values. Green and dancing when at the edge of chaos (λ≈0.4, φ>0).",
-			"scene": "res://commons/interfaces/qfep/edge_of_chaos_orb.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "all",
-			"capacity": "SEE current state",
-			"status": "planned",
-			"dev_themes": [
-				"qfep",
-				"emergence"
-			],
-			"dev_category": "qfep_visualization",
-			"complexity": "intermediate",
-			"tags": [
-				"visualization",
-				"realtime",
-				"state_indicator",
-				"edge_of_chaos"
-			],
-			"include_in_map_data": false,
-			"map_ready": false,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"sphere",
-						"torus"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "particle_system",
-					"affects": [
-						"transform",
-						"color",
-						"visibility"
-					]
-				},
-				"instance_strategy": "particles",
-				"vertex_estimate": "~768"
-			}
-		},
-		"grab_sphere_F": {
-			"name": "F Term Sphere",
-			"lookup_name": "grab_sphere_F",
-			"description": "Grabbable sphere representing F (Free Energy) - the order-seeking, pattern-finding drive. Blue glow.",
-			"scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
-			"category": "qfep",
-			"default_params": {
-				"color": "4080FF"
-			},
-			"interaction": "grab",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_term",
-			"qfep_term": "F",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"geometry",
-				"pattern",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "delegated_scene",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "scene_instantiation",
-					"primitives": [],
-					"operations": [
-						"load_scene",
-						"instantiate",
-						"configure"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "varies"
-			}
-		},
-		"grab_sphere_E": {
-			"name": "E Term Sphere",
-			"lookup_name": "grab_sphere_E",
-			"description": "Grabbable sphere representing E(S) (Entropy) - the freedom and possibility space. Red glow.",
-			"scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
-			"category": "qfep",
-			"default_params": {
-				"color": "FF6060"
-			},
-			"interaction": "grab",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_term",
-			"qfep_term": "E(S)",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"compression",
-				"geometry",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "delegated_scene",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "scene_instantiation",
-					"primitives": [],
-					"operations": [
-						"load_scene",
-						"instantiate",
-						"configure"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "varies"
-			}
-		},
-		"grab_sphere_lambda": {
-			"name": "Lambda Term Sphere",
-			"lookup_name": "grab_sphere_lambda",
-			"description": "Grabbable sphere representing λ (lambda) - the entropy drive parameter. Green glow.",
-			"scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
-			"category": "qfep",
-			"default_params": {
-				"color": "40FF80"
-			},
-			"interaction": "grab",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_term",
-			"qfep_term": "λ",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"compression",
-				"geometry",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "delegated_scene",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "scene_instantiation",
-					"primitives": [],
-					"operations": [
-						"load_scene",
-						"instantiate",
-						"configure"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "varies"
-			}
-		},
-		"grab_sphere_phi": {
-			"name": "Phi Term Sphere",
-			"lookup_name": "grab_sphere_phi",
-			"description": "Grabbable sphere representing φ (phi) - the rate sensitivity, the queer signature. Magenta glow.",
-			"scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
-			"category": "qfep",
-			"default_params": {
-				"color": "FF80FF"
-			},
-			"interaction": "grab",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_term",
-			"qfep_term": "φ",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					2
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"tags": [
-				"geometry",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "delegated_scene",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "scene_instantiation",
-					"primitives": [],
-					"operations": [
-						"load_scene",
-						"instantiate",
-						"configure"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "varies"
-			}
-		},
-		"qfep_reactor": {
-			"name": "QFEP Reactor",
-			"lookup_name": "qfep_reactor",
-			"description": "Central orb that visualizes the current QFEP state. Pulses and glows based on lambda and phi. Blue=order, green=edge of chaos, red=dissolution. The heart of the laboratory.",
-			"scene": "res://commons/interfaces/qfep/qfep_reactor.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "all",
-			"capacity": "SEE system state",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"chaos",
-				"graph",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "custom_fragment",
-					"key_properties": [
-						"emission",
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "particle_system",
-					"affects": [
-						"transform",
-						"color",
-						"visibility"
-					]
-				},
-				"instance_strategy": "particles",
-				"vertex_estimate": "~1024"
-			}
-		},
-		"entropy_meter": {
-			"name": "Entropy Meter",
-			"lookup_name": "entropy_meter",
-			"description": "Visual gauge showing current E(S) entropy level. A filling tube that responds to lambda. Low=blue, medium=green, high=red. Classic lab instrument aesthetic.",
-			"scene": "res://commons/interfaces/qfep/entropy_meter.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_instrument",
-			"qfep_term": "E(S)",
-			"capacity": "MEASURE entropy",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"compression",
-				"qfep",
-				"visualization"
-			],
-			"dev_themes": [
-				"art",
-				"music",
-				"philosophy",
-				"qfep"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"cylinder"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~512"
-			}
-		},
-		"edge_detector": {
-			"name": "Edge Detector",
-			"lookup_name": "edge_detector",
-			"description": "Handheld tool that detects edge of chaos. Beeps faster and glows brighter as lambda approaches 0.4. The antenna vibrates at the sweet spot. A tricorder for QFEP.",
-			"scene": "res://commons/interfaces/qfep/edge_detector.tscn",
-			"category": "qfep",
-			"interaction": "grab",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_tool",
-			"qfep_term": "λ",
-			"capacity": "DETECT edge of chaos",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"chaos",
-				"graph",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"sphere",
-						"cylinder"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"phase_cube": {
-			"name": "Phase Cube",
-			"lookup_name": "phase_cube",
-			"description": "A cube that shows phase transitions. SOLID (crystal, λ<0.25) → COMPLEX (edge, 0.25<λ<0.55) → GAS (dissolution, λ>0.55). Visual metaphor for matter states as QFEP states.",
-			"scene": "res://commons/interfaces/qfep/phase_cube.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "λ",
-			"capacity": "SEE phase transitions",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"graph",
-				"qfep",
-				"visualization"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box",
-						"sphere"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "particle_system",
-					"affects": [
-						"transform",
-						"color",
-						"visibility"
-					]
-				},
-				"instance_strategy": "particles",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"qfep_oscilloscope": {
-			"name": "QFEP Oscilloscope",
-			"lookup_name": "qfep_oscilloscope",
-			"description": "Real-time waveform display showing F (blue) and E(S) (red) over time. Watch the oscillation between order and entropy. Classic lab monitor aesthetic.",
-			"scene": "res://commons/interfaces/qfep/qfep_oscilloscope.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_instrument",
-			"qfep_term": "F, E(S)",
-			"capacity": "SEE oscillation",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"animation",
-				"compression",
-				"qfep",
-				"visualization"
-			],
-			"dev_themes": [
-				"art",
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "procedural_line",
-				"topology": "non_manifold",
-				"construction": {
-					"method": "vertex_line_strip",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"compute_vertices",
-						"connect_lines"
-					]
-				},
-				"material": {
-					"type": "unlit",
-					"shading_model": "unshaded",
-					"key_properties": [
-						"emission",
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "vertex",
-					"driven_by": "per_frame_rebuild",
-					"affects": [
-						"vertex_positions"
-					]
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"reactive_particle_field": {
-			"name": "Reactive Particle Field",
-			"lookup_name": "reactive_particle_field",
-			"description": "A field of 100 particles that respond to lambda and phi. Low λ: ordered grid. Edge λ: swirling dance. High λ: chaotic swarm. Phi affects dynamics. The formula made physical.",
-			"scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "all",
-			"capacity": "SEE emergence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "intermediate",
-			"tags": [
-				"2d",
-				"graph",
-				"math",
-				"particle",
-				"qfep",
-				"swarm"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "physics",
-					"driven_by": "physics_engine",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"crystal_cluster": {
-			"name": "Crystal Cluster",
-			"lookup_name": "crystal_cluster",
-			"description": "Ordered crystalline formation representing λ=0 (pure order). Alias for crystalcluster primitive.",
-			"scene": "res://commons/primitives/crystalcluster/crystalcluster.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "F",
-			"capacity": "SEE order",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "beginner",
-			"tags": [
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "wireframe",
-					"key_properties": [
-						"emission",
-						"grid_overlay"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"reactive_particles": {
-			"name": "Reactive Particles",
-			"lookup_name": "reactive_particles",
-			"description": "Alias for reactive_particle_field. Particles that respond to λ and φ parameters.",
-			"scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "all",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "intermediate",
-			"tags": [
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "physics",
-					"driven_by": "physics_engine",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"crystal_formation": {
-			"name": "Crystal Formation",
-			"lookup_name": "crystal_formation",
-			"description": "Ordered crystal cluster for λ=0 zone. Pure order, frozen pattern.",
-			"scene": "res://commons/primitives/crystalcluster/crystalcluster.tscn",
-			"category": "qfep",
-			"default_params": {
-				"color": "4080FF"
-			},
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "F",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "intermediate",
-			"tags": [
-				"pattern",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "wireframe",
-					"key_properties": [
-						"emission",
-						"grid_overlay"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"edge_particles": {
-			"name": "Edge Particles",
-			"lookup_name": "edge_particles",
-			"description": "Particles at the edge of chaos (λ≈0.4). Dancing, self-organizing, alive.",
-			"scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
-			"category": "qfep",
-			"default_params": {
-				"lambda": 0.4
-			},
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "λ",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "advanced",
-			"tags": [
-				"chaos",
-				"graph",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "physics",
-					"driven_by": "physics_engine",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"emergence_zone": {
-			"name": "Emergence Zone",
-			"lookup_name": "emergence_zone",
-			"description": "A zone where complexity emerges. Particles self-organize at the edge of chaos.",
-			"scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
-			"category": "qfep",
-			"default_params": {
-				"lambda": 0.4,
-				"phi": 0.3
-			},
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "all",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "advanced",
-			"tags": [
-				"chaos",
-				"graph",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "physics",
-					"driven_by": "physics_engine",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"random_cubes": {
-			"name": "Random Cubes",
-			"lookup_name": "random_cubes",
-			"description": "Chaotically arranged cubes representing high entropy. Random positions, rotations, scales.",
-			"scene": "res://commons/interfaces/qfep/random_cubes.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "E(S)",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "advanced",
-			"tags": [
-				"compression",
-				"probability",
-				"procedural",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"particle_chaos": {
-			"name": "Particle Chaos",
-			"lookup_name": "particle_chaos",
-			"description": "High-entropy particle system. Maximum spread, random velocities, dissolution.",
-			"scene": "res://commons/interfaces/qfep/particle_chaos.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "E(S)",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "advanced",
-			"tags": [
-				"chaos",
-				"compression",
-				"particle",
-				"probability",
-				"procedural",
-				"qfep",
-				"simulation"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "particles",
-				"vertex_estimate": "~64"
-			}
-		},
-		"ordered_grid": {
-			"name": "Ordered Grid",
-			"lookup_name": "ordered_grid",
-			"description": "Perfectly aligned cube grid representing low λ. Order, predictability, rigidity.",
-			"scene": "res://commons/interfaces/qfep/ordered_grid.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "F",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "beginner",
-			"tags": [
-				"2d",
-				"grid",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"chaos_particles": {
-			"name": "Chaos Particles",
-			"lookup_name": "chaos_particles",
-			"description": "λ=1 dissolution zone. Particles exploding outward, no coherence, pure entropy.",
-			"scene": "res://commons/interfaces/qfep/chaos_particles.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "E(S)",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "advanced",
-			"tags": [
-				"chaos",
-				"compression",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "particles",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"dissolving_form": {
-			"name": "Dissolving Form",
-			"lookup_name": "dissolving_form",
-			"description": "A mesh that appears to dissolve/disintegrate. High λ territory.",
-			"scene": "res://commons/interfaces/qfep/dissolving_form.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "E(S)",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "intermediate",
-			"tags": [
-				"3d",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"sphere",
-						"torus"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "custom_fragment",
-					"key_properties": [
-						"emission",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"complexity_pattern": {
-			"name": "Complexity Pattern",
-			"lookup_name": "complexity_pattern",
-			"description": "Game of Life cellular automata at edge of chaos. Self-organizing complexity.",
-			"scene": "res://commons/interfaces/qfep/complexity_pattern.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "λ",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "advanced",
-			"tags": [
-				"cellular_automata",
-				"chaos",
-				"graph",
-				"pattern",
-				"qfep"
-			],
-			"dev_themes": [
-				"biology",
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~0"
-			}
-		},
-		"turing_pattern": {
-			"name": "Turing Pattern",
-			"lookup_name": "turing_pattern",
-			"description": "Reaction-diffusion Turing pattern. Spots, stripes, labyrinths.",
-			"scene": "res://commons/interfaces/qfep/turing_pattern.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "λ",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"pattern",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "shader_driven",
-				"topology": "planar",
-				"construction": {
-					"method": "shader_rendering",
-					"primitives": [
-						"plane"
-					],
-					"operations": [
-						"create_base_mesh",
-						"apply_shader",
-						"set_parameters"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "custom_fragment",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~4-24 (base mesh)"
-			}
-		},
-		"edge_core": {
-			"name": "Edge Core",
-			"lookup_name": "edge_core",
-			"description": "Central orb for edge of chaos. Pulsing, alive, responsive to λ.",
-			"scene": "res://commons/interfaces/qfep/edge_core.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "all",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "advanced",
-			"tags": [
-				"chaos",
-				"graph",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"transparency",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "particle_system",
-					"affects": [
-						"transform",
-						"color",
-						"visibility"
-					]
-				},
-				"instance_strategy": "particles",
-				"vertex_estimate": "~1024"
-			}
-		},
-		"rigid_sculpture": {
-			"name": "Rigid Sculpture",
-			"lookup_name": "rigid_sculpture",
-			"description": "Static crystalline form for φ<0 zone. Resists change.",
-			"scene": "res://commons/interfaces/qfep/rigid_sculpture.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "φ",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "advanced",
-			"tags": [
-				"physics",
-				"qfep"
-			],
-			"dev_themes": [
-				"art",
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [
-						"prism"
-					],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"fluid_form": {
-			"name": "Fluid Form",
-			"lookup_name": "fluid_form",
-			"description": "Morphing iridescent form for φ>0 zone. Embraces becoming.",
-			"scene": "res://commons/interfaces/qfep/fluid_form.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "φ",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "advanced",
-			"tags": [
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "shader_driven",
-				"topology": "planar",
-				"construction": {
-					"method": "shader_rendering",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"create_base_mesh",
-						"apply_shader",
-						"set_parameters"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "custom_fragment",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "shader_time",
-					"driven_by": "shader_uniform",
-					"affects": [
-						"visual"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~4-24 (base mesh)"
-			}
-		},
-		"preserved_pattern": {
-			"name": "Preserved Pattern",
-			"lookup_name": "preserved_pattern",
-			"description": "Static checkerboard that never changes. Conservative φ<0.",
-			"scene": "res://commons/interfaces/qfep/preserved_pattern.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "φ",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "intermediate",
-			"tags": [
-				"pattern",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"transforming_pattern": {
-			"name": "Transforming Pattern",
-			"lookup_name": "transforming_pattern",
-			"description": "Constantly evolving wave pattern. Queer φ>0 signature.",
-			"scene": "res://commons/interfaces/qfep/transforming_pattern.tscn",
-			"category": "qfep",
-			"interaction": "observe",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "φ",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"complexity": "intermediate",
-			"tags": [
-				"pattern",
-				"qfep",
-				"wave"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"earths_delight": {
-			"lookup_name": "earths_delight",
-			"name": "earths_delight",
-			"description": "Procedurally sculpts noise terrain and scatters mutated Bosch-inspired plants across it.",
-			"scene": "res://algorithms/criticaltheory/earthsdelight/earths_delight.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"procedural",
-				"terrain"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "hybrid",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "unknown",
-					"primitives": [
-						"box",
-						"sphere",
-						"cylinder",
-						"torus",
-						"plane",
-						"prism",
-						"capsule"
-					],
-					"operations": []
-				},
-				"material": {
-					"type": "vertex_color",
-					"shading_model": "custom_fragment",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~20000"
-			}
-		},
-		"PipilottiRistWorld": {
-			"lookup_name": "PipilottiRistWorld",
-			"name": "PipilottiRistWorld",
-			"description": "Immersive projection space with animated color grading, floating sculptures, and video-mapped surfaces.",
-			"scene": "res://algorithms/criticaltheory/pipilottiristworld/PipilottiRistWorld.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				10,
-				1,
-				20
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					10,
-					1,
-					20
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"tags": [
-				"color",
-				"vr"
-			],
-			"dev_themes": [
-				"art",
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"sphere",
-						"plane",
-						"capsule"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "custom_fragment",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "vertex",
-					"driven_by": "per_frame_rebuild",
-					"affects": [
-						"vertex_positions"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~400"
-			}
-		},
-		"science_desk": {
-			"lookup_name": "science_desk",
-			"name": "science_desk",
-			"description": "a lab workstation with cabinets, countertop equipment, and built-in lighting.",
-			"scene": "res://algorithms/criticaltheory/sciencedesk/science_desk.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				2,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					2,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"tags": [
-				"qfep"
-			],
-			"geometry_spec": {
-				"mesh_type": "boolean_composition",
-				"topology": "volumetric",
-				"construction": {
-					"method": "csg_boolean",
-					"primitives": [
-						"box",
-						"cylinder"
-					],
-					"operations": [
-						"create_primitives",
-						"position_primitives",
-						"boolean_combine"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": [
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"science_glasses": {
-			"lookup_name": "science_glasses",
-			"name": "science_glasses",
-			"description": "Generates a full suite of laboratory glassware, adapters, and accessories with translucent materials.",
-			"scene": "res://algorithms/criticaltheory/scienceglasses/science_glasses.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"tags": [
-				"qfep"
-			],
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [
-						"cylinder"
-					],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"fuzzy_cloud": {
-			"lookup_name": "fuzzy_cloud",
-			"name": "fuzzy_cloud",
-			"description": "fuzzy_cloud",
-			"scene": "res://algorithms/criticaltheory/fuzzycloud/fuzzy_cloud.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				4,
-				1,
-				4
-			],
-			"size_group": "room_scale",
-			"parameters": {
-				"footprint": [
-					4,
-					1,
-					4
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"tags": [
-				"qfep"
-			],
-			"geometry_spec": {
-				"mesh_type": "hybrid",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "unknown",
-					"primitives": [
-						"sphere",
-						"cylinder",
-						"plane"
-					],
-					"operations": []
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~16"
-			}
-		},
-		"edge_of_chaos_unlocked": {
-			"name": "Edge of Chaos Unlocked",
-			"lookup_name": "edge_of_chaos_unlocked",
-			"description": "Reaction-diffusion system with the UNLOCKED lambda slider that the QFEP_Edge_Of_Chaos map withheld. Drag lambda from 0 (frozen crystal) through 0.4 (Turing patterns emerge) to 1.0 (pure noise). The artifact answers the critical text's question: adjusting IS knowledge. Witnessing IS knowledge. Different kinds.",
-			"scene": "res://commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.tscn",
-			"category": "qfep",
-			"interaction": "grab_slide",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "qfep_visualization",
-			"qfep_term": "lambda",
-			"capacity": "CONTROL lambda directly",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"qfeplaboratory"
-			],
-			"parameters": {
-				"footprint": [
-					2,
-					2,
-					2
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"reaction_diffusion",
-				"turing_pattern",
-				"lambda",
-				"edge_of_chaos",
-				"critical_theory",
-				"qfep"
-			],
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory",
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "texture_plane",
-				"topology": "planar",
-				"construction": {
-					"method": "pixel_computation",
-					"primitives": [
-						"box",
-						"plane"
-					],
-					"operations": [
-						"create_image",
-						"compute_pixels",
-						"apply_texture"
-					]
-				},
-				"material": {
-					"type": "generated_texture",
-					"shading_model": "unshaded",
-					"key_properties": [
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~4 (quad)"
-			}
-		},
-		"AnickaYiLab": {
-			"lookup_name": "AnickaYiLab",
-			"name": "AnickaYiLab",
-			"description": "AnickaYiLab",
-			"scene": "res://algorithms/criticaltheory/anickayilab/AnickaYiLab.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"philosophy",
-				"qfep",
-				"theory"
-			],
-			"tags": [
-				"qfep"
-			],
-			"geometry_spec": {
-				"mesh_type": "hybrid",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "unknown",
-					"primitives": [
-						"box",
-						"sphere",
-						"cylinder",
-						"capsule"
-					],
-					"operations": []
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "custom_fragment",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~384"
-			}
-		},
-		"snap_tetra_puzzle": {
-			"name": "Snap Tetra Puzzle",
-			"lookup_name": "snap_tetra_puzzle",
-			"description": "Snap-point tetrahedron assembly puzzle. Represents constraint satisfaction and ordered structure — how Free Energy minimization drives systems toward specific geometric configurations.",
-			"scene": "res://commons/primitives/snappoint/puzzles/snap_tetrahedron_puzzle.tscn",
-			"category": "qfep",
-			"interaction": "grab_snap",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "interactive",
-			"qfep_term": "F",
-			"qfep_connection": "Each snapped connection reduces prediction error. The final locked form is minimum free energy."
-		},
-		"snap_cube_puzzle": {
-			"name": "Snap Cube Puzzle",
-			"lookup_name": "snap_cube_puzzle",
-			"description": "Snap-point octahedral assembly puzzle. Represents ordered structure and constraint — the crystalline end state of a system minimizing free energy.",
-			"scene": "res://commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.tscn",
-			"category": "qfep",
-			"interaction": "grab_snap",
-			"sequence": "qfeplaboratory",
-			"artifact_type": "interactive",
-			"qfep_term": "F",
-			"qfep_connection": "The rigid, ordered form that emerges when a system fully minimizes its free energy (F → minimum, S → low)."
-		}
-	}
+  "artifacts": {
+    "lambda_slider": {
+      "name": "Lambda Slider",
+      "lookup_name": "lambda_slider",
+      "description": "QFEP λ parameter controller. The entropy drive dial: λ=0 (pure order) → λ=0.4 (edge of chaos) → λ=1 (dissolution). Grab and slide to tune how much a system values disorder vs order. Life exists at λ ≈ 0.3-0.5.",
+      "scene": "res://commons/interfaces/qfep/lambda_slider.tscn",
+      "category": "qfep",
+      "interaction": "grab_slide",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_controller",
+      "qfep_term": "λ",
+      "capacity": "TUNE entropy drive",
+      "dev_themes": [
+        "qfep",
+        "tools"
+      ],
+      "dev_category": "qfep_controller",
+      "complexity": "intermediate",
+      "tags": [
+        "interactive",
+        "slider",
+        "parameter_control",
+        "entropy"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "foundationscrisis",
+        "qfeplaboratory"
+      ],
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box",
+            "sphere"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "particles",
+        "vertex_estimate": "~0"
+      }
+    },
+    "phi_slider": {
+      "name": "Phi Slider",
+      "lookup_name": "phi_slider",
+      "description": "QFEP φ parameter controller. Rate of entropy change sensitivity: φ<0 (resists change) → φ=0 (neutral) → φ>0 (embraces change). Positive φ is the queer signature—valuing becoming over being.",
+      "scene": "res://commons/interfaces/qfep/phi_slider.tscn",
+      "category": "qfep",
+      "interaction": "grab_slide",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_controller",
+      "qfep_term": "φΔE(S,t)",
+      "capacity": "TUNE rate sensitivity",
+      "dev_themes": [
+        "qfep",
+        "tools"
+      ],
+      "dev_category": "qfep_controller",
+      "complexity": "advanced",
+      "tags": [
+        "interactive",
+        "slider",
+        "parameter_control",
+        "change_rate",
+        "queer_theory"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "foundationscrisis",
+        "qfeplaboratory"
+      ],
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box",
+            "sphere"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "particles",
+        "vertex_estimate": "~0"
+      }
+    },
+    "qfep_formula_3d": {
+      "name": "QFEP Formula 3D",
+      "lookup_name": "qfep_formula_3d",
+      "description": "3D visualization of the complete QFEP formula: QFE = F − λE(S) + φΔE(S,t). Each term glows with its signature color. Responds to lambda and phi slider changes. The theoretical anchor.",
+      "scene": "res://commons/interfaces/qfep/formula_display/qfep_formula_3d.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "all",
+      "capacity": "SEE the theory",
+      "dev_themes": [
+        "qfep",
+        "philosophy"
+      ],
+      "dev_category": "qfep_visualization",
+      "complexity": "intermediate",
+      "tags": [
+        "visualization",
+        "formula",
+        "theory",
+        "3d"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "foundationscrisis",
+        "qfeplaboratory"
+      ],
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "qfep_sandbox_console": {
+      "name": "QFEP Sandbox Console",
+      "lookup_name": "qfep_sandbox_console",
+      "description": "Full QFEP parameter control panel combining lambda_slider, phi_slider, F meter, E(S) meter, and real-time visualization. Find the edge of chaos. You have earned the force.",
+      "scene": "res://commons/interfaces/qfep/qfep_sandbox_console.tscn",
+      "category": "qfep",
+      "interaction": "full_control",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_controller",
+      "qfep_term": "all",
+      "capacity": "CONTROL everything",
+      "status": "planned",
+      "include_in_map_data": false,
+      "map_ready": false,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "advanced",
+      "tags": [
+        "animation",
+        "chaos",
+        "graph",
+        "physics",
+        "qfep",
+        "searching"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box",
+            "sphere"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "particle_system",
+          "affects": [
+            "transform",
+            "color",
+            "visibility"
+          ]
+        },
+        "instance_strategy": "particles",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "bifurcation_walkway": {
+      "name": "Bifurcation Walkway",
+      "lookup_name": "bifurcation_walkway",
+      "description": "A corridor where your position = r parameter in the logistic map. Walk through the phase transition: stable → period doubling → chaos → windows of order. The bifurcation diagram made walkable.",
+      "scene": "res://commons/interfaces/qfep/bifurcation_walkway.tscn",
+      "category": "qfep",
+      "interaction": "walk_through",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "λ",
+      "capacity": "WALK phase transition",
+      "status": "planned",
+      "dev_themes": [
+        "qfep",
+        "emergence"
+      ],
+      "dev_category": "qfep_visualization",
+      "complexity": "advanced",
+      "tags": [
+        "walkable",
+        "chaos",
+        "phase_transition",
+        "embodied_learning"
+      ],
+      "include_in_map_data": false,
+      "map_ready": false,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "interactions": [
+        "walk_through"
+      ],
+      "parameters": {
+        "footprint": [
+          2,
+          3,
+          10
+        ],
+        "size_group": "environment"
+      },
+      "qfep_connection": "The logistic map's r parameter IS the Î» drive. At râ‰ˆ3.57, chaos begins â€” this is Î»_edge, where life exists. You walk through the phase space of orderâ†’chaos.",
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box",
+            "sphere"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "vertex_color",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~36"
+      }
+    },
+    "edge_of_chaos_orb": {
+      "name": "Edge of Chaos Orb",
+      "lookup_name": "edge_of_chaos_orb",
+      "description": "A sphere that visualizes the current QFEP state. Color and behavior shift based on global λ and φ values. Green and dancing when at the edge of chaos (λ≈0.4, φ>0).",
+      "scene": "res://commons/interfaces/qfep/edge_of_chaos_orb.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "all",
+      "capacity": "SEE current state",
+      "status": "planned",
+      "dev_themes": [
+        "qfep",
+        "emergence"
+      ],
+      "dev_category": "qfep_visualization",
+      "complexity": "intermediate",
+      "tags": [
+        "visualization",
+        "realtime",
+        "state_indicator",
+        "edge_of_chaos"
+      ],
+      "include_in_map_data": false,
+      "map_ready": false,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "sphere",
+            "torus"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "particle_system",
+          "affects": [
+            "transform",
+            "color",
+            "visibility"
+          ]
+        },
+        "instance_strategy": "particles",
+        "vertex_estimate": "~768"
+      }
+    },
+    "grab_sphere_F": {
+      "name": "F Term Sphere",
+      "lookup_name": "grab_sphere_F",
+      "description": "Grabbable sphere representing F (Free Energy) - the order-seeking, pattern-finding drive. Blue glow.",
+      "scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
+      "category": "qfep",
+      "default_params": {
+        "color": "4080FF"
+      },
+      "interaction": "grab",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_term",
+      "qfep_term": "F",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          2
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "advanced",
+      "tags": [
+        "geometry",
+        "pattern",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "delegated_scene",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "scene_instantiation",
+          "primitives": [],
+          "operations": [
+            "load_scene",
+            "instantiate",
+            "configure"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "varies"
+      }
+    },
+    "grab_sphere_E": {
+      "name": "E Term Sphere",
+      "lookup_name": "grab_sphere_E",
+      "description": "Grabbable sphere representing E(S) (Entropy) - the freedom and possibility space. Red glow.",
+      "scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
+      "category": "qfep",
+      "default_params": {
+        "color": "FF6060"
+      },
+      "interaction": "grab",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_term",
+      "qfep_term": "E(S)",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          2
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "beginner",
+      "tags": [
+        "compression",
+        "geometry",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "delegated_scene",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "scene_instantiation",
+          "primitives": [],
+          "operations": [
+            "load_scene",
+            "instantiate",
+            "configure"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "varies"
+      }
+    },
+    "grab_sphere_lambda": {
+      "name": "Lambda Term Sphere",
+      "lookup_name": "grab_sphere_lambda",
+      "description": "Grabbable sphere representing λ (lambda) - the entropy drive parameter. Green glow.",
+      "scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
+      "category": "qfep",
+      "default_params": {
+        "color": "40FF80"
+      },
+      "interaction": "grab",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_term",
+      "qfep_term": "λ",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          2
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "beginner",
+      "tags": [
+        "compression",
+        "geometry",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "delegated_scene",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "scene_instantiation",
+          "primitives": [],
+          "operations": [
+            "load_scene",
+            "instantiate",
+            "configure"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "varies"
+      }
+    },
+    "grab_sphere_phi": {
+      "name": "Phi Term Sphere",
+      "lookup_name": "grab_sphere_phi",
+      "description": "Grabbable sphere representing φ (phi) - the rate sensitivity, the queer signature. Magenta glow.",
+      "scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
+      "category": "qfep",
+      "default_params": {
+        "color": "FF80FF"
+      },
+      "interaction": "grab",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_term",
+      "qfep_term": "φ",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          2
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "beginner",
+      "tags": [
+        "geometry",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "delegated_scene",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "scene_instantiation",
+          "primitives": [],
+          "operations": [
+            "load_scene",
+            "instantiate",
+            "configure"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "varies"
+      }
+    },
+    "qfep_reactor": {
+      "name": "QFEP Reactor",
+      "lookup_name": "qfep_reactor",
+      "description": "Central orb that visualizes the current QFEP state. Pulses and glows based on lambda and phi. Blue=order, green=edge of chaos, red=dissolution. The heart of the laboratory.",
+      "scene": "res://commons/interfaces/qfep/qfep_reactor.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "all",
+      "capacity": "SEE system state",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "advanced",
+      "tags": [
+        "chaos",
+        "graph",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "custom_fragment",
+          "key_properties": [
+            "emission",
+            "metallic"
+          ]
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "particle_system",
+          "affects": [
+            "transform",
+            "color",
+            "visibility"
+          ]
+        },
+        "instance_strategy": "particles",
+        "vertex_estimate": "~1024"
+      }
+    },
+    "entropy_meter": {
+      "name": "Entropy Meter",
+      "lookup_name": "entropy_meter",
+      "description": "Visual gauge showing current E(S) entropy level. A filling tube that responds to lambda. Low=blue, medium=green, high=red. Classic lab instrument aesthetic.",
+      "scene": "res://commons/interfaces/qfep/entropy_meter.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "qfep_term": "E(S)",
+      "capacity": "MEASURE entropy",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "advanced",
+      "tags": [
+        "compression",
+        "qfep",
+        "visualization"
+      ],
+      "dev_themes": [
+        "art",
+        "music",
+        "philosophy",
+        "qfep"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "cylinder"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "~512"
+      }
+    },
+    "edge_detector": {
+      "name": "Edge Detector",
+      "lookup_name": "edge_detector",
+      "description": "Handheld tool that detects edge of chaos. Beeps faster and glows brighter as lambda approaches 0.4. The antenna vibrates at the sweet spot. A tricorder for QFEP.",
+      "scene": "res://commons/interfaces/qfep/edge_detector.tscn",
+      "category": "qfep",
+      "interaction": "grab",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_tool",
+      "qfep_term": "λ",
+      "capacity": "DETECT edge of chaos",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "advanced",
+      "tags": [
+        "chaos",
+        "graph",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "sphere",
+            "cylinder"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "phase_cube": {
+      "name": "Phase Cube",
+      "lookup_name": "phase_cube",
+      "description": "A cube that shows phase transitions. SOLID (crystal, λ<0.25) → COMPLEX (edge, 0.25<λ<0.55) → GAS (dissolution, λ>0.55). Visual metaphor for matter states as QFEP states.",
+      "scene": "res://commons/interfaces/qfep/phase_cube.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "λ",
+      "capacity": "SEE phase transitions",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "advanced",
+      "tags": [
+        "graph",
+        "qfep",
+        "visualization"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box",
+            "sphere"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "particle_system",
+          "affects": [
+            "transform",
+            "color",
+            "visibility"
+          ]
+        },
+        "instance_strategy": "particles",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "qfep_oscilloscope": {
+      "name": "QFEP Oscilloscope",
+      "lookup_name": "qfep_oscilloscope",
+      "description": "Real-time waveform display showing F (blue) and E(S) (red) over time. Watch the oscillation between order and entropy. Classic lab monitor aesthetic.",
+      "scene": "res://commons/interfaces/qfep/qfep_oscilloscope.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_instrument",
+      "qfep_term": "F, E(S)",
+      "capacity": "SEE oscillation",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "parameters": {
+        "footprint": [
+          2,
+          2,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "advanced",
+      "tags": [
+        "animation",
+        "compression",
+        "qfep",
+        "visualization"
+      ],
+      "dev_themes": [
+        "art",
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "procedural_line",
+        "topology": "non_manifold",
+        "construction": {
+          "method": "vertex_line_strip",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "compute_vertices",
+            "connect_lines"
+          ]
+        },
+        "material": {
+          "type": "unlit",
+          "shading_model": "unshaded",
+          "key_properties": [
+            "emission",
+            "metallic"
+          ]
+        },
+        "animation": {
+          "type": "vertex",
+          "driven_by": "per_frame_rebuild",
+          "affects": [
+            "vertex_positions"
+          ]
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "reactive_particle_field": {
+      "name": "Reactive Particle Field",
+      "lookup_name": "reactive_particle_field",
+      "description": "A field of 100 particles that respond to lambda and phi. Low λ: ordered grid. Edge λ: swirling dance. High λ: chaotic swarm. Phi affects dynamics. The formula made physical.",
+      "scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "all",
+      "capacity": "SEE emergence",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "intermediate",
+      "tags": [
+        "2d",
+        "graph",
+        "math",
+        "particle",
+        "qfep",
+        "swarm"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "physics",
+          "driven_by": "physics_engine",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "crystal_cluster": {
+      "name": "Crystal Cluster",
+      "lookup_name": "crystal_cluster",
+      "description": "Ordered crystalline formation representing λ=0 (pure order). Alias for crystalcluster primitive.",
+      "scene": "res://commons/primitives/crystalcluster/crystalcluster.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "F",
+      "capacity": "SEE order",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "beginner",
+      "tags": [
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "parametric_surface",
+        "topology": "manifold_open",
+        "construction": {
+          "method": "uv_grid_triangulation",
+          "primitives": [],
+          "operations": [
+            "compute_vertices",
+            "generate_triangles",
+            "compute_normals"
+          ]
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "wireframe",
+          "key_properties": [
+            "emission",
+            "grid_overlay"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "reactive_particles": {
+      "name": "Reactive Particles",
+      "lookup_name": "reactive_particles",
+      "description": "Alias for reactive_particle_field. Particles that respond to λ and φ parameters.",
+      "scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "all",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "intermediate",
+      "tags": [
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "physics",
+          "driven_by": "physics_engine",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "crystal_formation": {
+      "name": "Crystal Formation",
+      "lookup_name": "crystal_formation",
+      "description": "Ordered crystal cluster for λ=0 zone. Pure order, frozen pattern.",
+      "scene": "res://commons/primitives/crystalcluster/crystalcluster.tscn",
+      "category": "qfep",
+      "default_params": {
+        "color": "4080FF"
+      },
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "F",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "intermediate",
+      "tags": [
+        "pattern",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "parametric_surface",
+        "topology": "manifold_open",
+        "construction": {
+          "method": "uv_grid_triangulation",
+          "primitives": [],
+          "operations": [
+            "compute_vertices",
+            "generate_triangles",
+            "compute_normals"
+          ]
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "wireframe",
+          "key_properties": [
+            "emission",
+            "grid_overlay"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "edge_particles": {
+      "name": "Edge Particles",
+      "lookup_name": "edge_particles",
+      "description": "Particles at the edge of chaos (λ≈0.4). Dancing, self-organizing, alive.",
+      "scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
+      "category": "qfep",
+      "default_params": {
+        "lambda": 0.4
+      },
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "λ",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "advanced",
+      "tags": [
+        "chaos",
+        "graph",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "physics",
+          "driven_by": "physics_engine",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "emergence_zone": {
+      "name": "Emergence Zone",
+      "lookup_name": "emergence_zone",
+      "description": "A zone where complexity emerges. Particles self-organize at the edge of chaos.",
+      "scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
+      "category": "qfep",
+      "default_params": {
+        "lambda": 0.4,
+        "phi": 0.3
+      },
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "all",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "advanced",
+      "tags": [
+        "chaos",
+        "graph",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "physics",
+          "driven_by": "physics_engine",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "random_cubes": {
+      "name": "Random Cubes",
+      "lookup_name": "random_cubes",
+      "description": "Chaotically arranged cubes representing high entropy. Random positions, rotations, scales.",
+      "scene": "res://commons/interfaces/qfep/random_cubes.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "E(S)",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "advanced",
+      "tags": [
+        "compression",
+        "probability",
+        "procedural",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "particle_chaos": {
+      "name": "Particle Chaos",
+      "lookup_name": "particle_chaos",
+      "description": "High-entropy particle system. Maximum spread, random velocities, dissolution.",
+      "scene": "res://commons/interfaces/qfep/particle_chaos.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "E(S)",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "advanced",
+      "tags": [
+        "chaos",
+        "compression",
+        "particle",
+        "probability",
+        "procedural",
+        "qfep",
+        "simulation"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "particles",
+        "vertex_estimate": "~64"
+      }
+    },
+    "ordered_grid": {
+      "name": "Ordered Grid",
+      "lookup_name": "ordered_grid",
+      "description": "Perfectly aligned cube grid representing low λ. Order, predictability, rigidity.",
+      "scene": "res://commons/interfaces/qfep/ordered_grid.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "F",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "beginner",
+      "tags": [
+        "2d",
+        "grid",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "chaos_particles": {
+      "name": "Chaos Particles",
+      "lookup_name": "chaos_particles",
+      "description": "λ=1 dissolution zone. Particles exploding outward, no coherence, pure entropy.",
+      "scene": "res://commons/interfaces/qfep/chaos_particles.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "E(S)",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "advanced",
+      "tags": [
+        "chaos",
+        "compression",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "particles",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "dissolving_form": {
+      "name": "Dissolving Form",
+      "lookup_name": "dissolving_form",
+      "description": "A mesh that appears to dissolve/disintegrate. High λ territory.",
+      "scene": "res://commons/interfaces/qfep/dissolving_form.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "E(S)",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "intermediate",
+      "tags": [
+        "3d",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "sphere",
+            "torus"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "custom_fragment",
+          "key_properties": [
+            "emission",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "complexity_pattern": {
+      "name": "Complexity Pattern",
+      "lookup_name": "complexity_pattern",
+      "description": "Game of Life cellular automata at edge of chaos. Self-organizing complexity.",
+      "scene": "res://commons/interfaces/qfep/complexity_pattern.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "λ",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "advanced",
+      "tags": [
+        "cellular_automata",
+        "chaos",
+        "graph",
+        "pattern",
+        "qfep"
+      ],
+      "dev_themes": [
+        "biology",
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "~0"
+      }
+    },
+    "turing_pattern": {
+      "name": "Turing Pattern",
+      "lookup_name": "turing_pattern",
+      "description": "Reaction-diffusion Turing pattern. Spots, stripes, labyrinths.",
+      "scene": "res://commons/interfaces/qfep/turing_pattern.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "λ",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "advanced",
+      "tags": [
+        "pattern",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "shader_driven",
+        "topology": "planar",
+        "construction": {
+          "method": "shader_rendering",
+          "primitives": [
+            "plane"
+          ],
+          "operations": [
+            "create_base_mesh",
+            "apply_shader",
+            "set_parameters"
+          ]
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "custom_fragment",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "~4-24 (base mesh)"
+      }
+    },
+    "edge_core": {
+      "name": "Edge Core",
+      "lookup_name": "edge_core",
+      "description": "Central orb for edge of chaos. Pulsing, alive, responsive to λ.",
+      "scene": "res://commons/interfaces/qfep/edge_core.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "all",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "advanced",
+      "tags": [
+        "chaos",
+        "graph",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "transparency",
+            "double_sided"
+          ]
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "particle_system",
+          "affects": [
+            "transform",
+            "color",
+            "visibility"
+          ]
+        },
+        "instance_strategy": "particles",
+        "vertex_estimate": "~1024"
+      }
+    },
+    "rigid_sculpture": {
+      "name": "Rigid Sculpture",
+      "lookup_name": "rigid_sculpture",
+      "description": "Static crystalline form for φ<0 zone. Resists change.",
+      "scene": "res://commons/interfaces/qfep/rigid_sculpture.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "φ",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "advanced",
+      "tags": [
+        "physics",
+        "qfep"
+      ],
+      "dev_themes": [
+        "art",
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "parametric_surface",
+        "topology": "manifold_open",
+        "construction": {
+          "method": "uv_grid_triangulation",
+          "primitives": [
+            "prism"
+          ],
+          "operations": [
+            "compute_vertices",
+            "generate_triangles",
+            "compute_normals"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "fluid_form": {
+      "name": "Fluid Form",
+      "lookup_name": "fluid_form",
+      "description": "Morphing iridescent form for φ>0 zone. Embraces becoming.",
+      "scene": "res://commons/interfaces/qfep/fluid_form.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "φ",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "advanced",
+      "tags": [
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "shader_driven",
+        "topology": "planar",
+        "construction": {
+          "method": "shader_rendering",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "create_base_mesh",
+            "apply_shader",
+            "set_parameters"
+          ]
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "custom_fragment",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "shader_time",
+          "driven_by": "shader_uniform",
+          "affects": [
+            "visual"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "~4-24 (base mesh)"
+      }
+    },
+    "preserved_pattern": {
+      "name": "Preserved Pattern",
+      "lookup_name": "preserved_pattern",
+      "description": "Static checkerboard that never changes. Conservative φ<0.",
+      "scene": "res://commons/interfaces/qfep/preserved_pattern.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "φ",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "intermediate",
+      "tags": [
+        "pattern",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "transforming_pattern": {
+      "name": "Transforming Pattern",
+      "lookup_name": "transforming_pattern",
+      "description": "Constantly evolving wave pattern. Queer φ>0 signature.",
+      "scene": "res://commons/interfaces/qfep/transforming_pattern.tscn",
+      "category": "qfep",
+      "interaction": "observe",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "φ",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "complexity": "intermediate",
+      "tags": [
+        "pattern",
+        "qfep",
+        "wave"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "earths_delight": {
+      "lookup_name": "earths_delight",
+      "name": "earths_delight",
+      "description": "Procedurally sculpts noise terrain and scatters mutated Bosch-inspired plants across it.",
+      "scene": "res://algorithms/criticaltheory/earthsdelight/earths_delight.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "intermediate",
+      "tags": [
+        "procedural",
+        "terrain"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "hybrid",
+        "topology": "manifold_open",
+        "construction": {
+          "method": "unknown",
+          "primitives": [
+            "box",
+            "sphere",
+            "cylinder",
+            "torus",
+            "plane",
+            "prism",
+            "capsule"
+          ],
+          "operations": []
+        },
+        "material": {
+          "type": "vertex_color",
+          "shading_model": "custom_fragment",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency",
+            "double_sided"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~20000"
+      }
+    },
+    "PipilottiRistWorld": {
+      "lookup_name": "PipilottiRistWorld",
+      "name": "PipilottiRistWorld",
+      "description": "Immersive projection space with animated color grading, floating sculptures, and video-mapped surfaces.",
+      "scene": "res://algorithms/criticaltheory/pipilottiristworld/PipilottiRistWorld.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        10,
+        1,
+        20
+      ],
+      "size_group": "world_scale",
+      "parameters": {
+        "footprint": [
+          10,
+          1,
+          20
+        ],
+        "size_group": "world_scale"
+      },
+      "complexity": "intermediate",
+      "tags": [
+        "color",
+        "vr"
+      ],
+      "dev_themes": [
+        "art",
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "sphere",
+            "plane",
+            "capsule"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "custom_fragment",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "vertex",
+          "driven_by": "per_frame_rebuild",
+          "affects": [
+            "vertex_positions"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "~400"
+      }
+    },
+    "science_desk": {
+      "lookup_name": "science_desk",
+      "name": "science_desk",
+      "description": "a lab workstation with cabinets, countertop equipment, and built-in lighting.",
+      "scene": "res://algorithms/criticaltheory/sciencedesk/science_desk.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        2,
+        1,
+        1
+      ],
+      "size_group": "compact",
+      "parameters": {
+        "footprint": [
+          2,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "beginner",
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "tags": [
+        "qfep"
+      ],
+      "geometry_spec": {
+        "mesh_type": "boolean_composition",
+        "topology": "volumetric",
+        "construction": {
+          "method": "csg_boolean",
+          "primitives": [
+            "box",
+            "cylinder"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_primitives",
+            "boolean_combine"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": [
+            "metallic"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "science_glasses": {
+      "lookup_name": "science_glasses",
+      "name": "science_glasses",
+      "description": "Generates a full suite of laboratory glassware, adapters, and accessories with translucent materials.",
+      "scene": "res://algorithms/criticaltheory/scienceglasses/science_glasses.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "beginner",
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "tags": [
+        "qfep"
+      ],
+      "geometry_spec": {
+        "mesh_type": "parametric_surface",
+        "topology": "manifold_open",
+        "construction": {
+          "method": "uv_grid_triangulation",
+          "primitives": [
+            "cylinder"
+          ],
+          "operations": [
+            "compute_vertices",
+            "generate_triangles",
+            "compute_normals"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency",
+            "double_sided"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "fuzzy_cloud": {
+      "lookup_name": "fuzzy_cloud",
+      "name": "fuzzy_cloud",
+      "description": "fuzzy_cloud",
+      "scene": "res://algorithms/criticaltheory/fuzzycloud/fuzzy_cloud.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        4,
+        1,
+        4
+      ],
+      "size_group": "room_scale",
+      "parameters": {
+        "footprint": [
+          4,
+          1,
+          4
+        ],
+        "size_group": "room_scale"
+      },
+      "complexity": "beginner",
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "tags": [
+        "qfep"
+      ],
+      "geometry_spec": {
+        "mesh_type": "hybrid",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "unknown",
+          "primitives": [
+            "sphere",
+            "cylinder",
+            "plane"
+          ],
+          "operations": []
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency",
+            "double_sided"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~16"
+      }
+    },
+    "edge_of_chaos_unlocked": {
+      "name": "Edge of Chaos Unlocked",
+      "lookup_name": "edge_of_chaos_unlocked",
+      "description": "Reaction-diffusion system with the UNLOCKED lambda slider that the QFEP_Edge_Of_Chaos map withheld. Drag lambda from 0 (frozen crystal) through 0.4 (Turing patterns emerge) to 1.0 (pure noise). The artifact answers the critical text's question: adjusting IS knowledge. Witnessing IS knowledge. Different kinds.",
+      "scene": "res://commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.tscn",
+      "category": "qfep",
+      "interaction": "grab_slide",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "qfep_visualization",
+      "qfep_term": "lambda",
+      "capacity": "CONTROL lambda directly",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "parameters": {
+        "footprint": [
+          2,
+          2,
+          2
+        ],
+        "size_group": "room_scale"
+      },
+      "complexity": "advanced",
+      "tags": [
+        "reaction_diffusion",
+        "turing_pattern",
+        "lambda",
+        "edge_of_chaos",
+        "critical_theory",
+        "qfep"
+      ],
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory",
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "texture_plane",
+        "topology": "planar",
+        "construction": {
+          "method": "pixel_computation",
+          "primitives": [
+            "box",
+            "plane"
+          ],
+          "operations": [
+            "create_image",
+            "compute_pixels",
+            "apply_texture"
+          ]
+        },
+        "material": {
+          "type": "generated_texture",
+          "shading_model": "unshaded",
+          "key_properties": [
+            "metallic"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "~4 (quad)"
+      }
+    },
+    "AnickaYiLab": {
+      "lookup_name": "AnickaYiLab",
+      "name": "AnickaYiLab",
+      "description": "AnickaYiLab",
+      "scene": "res://algorithms/criticaltheory/anickayilab/AnickaYiLab.tscn",
+      "category": "unknown",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "beginner",
+      "dev_themes": [
+        "philosophy",
+        "qfep",
+        "theory"
+      ],
+      "tags": [
+        "qfep"
+      ],
+      "geometry_spec": {
+        "mesh_type": "hybrid",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "unknown",
+          "primitives": [
+            "box",
+            "sphere",
+            "cylinder",
+            "capsule"
+          ],
+          "operations": []
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "custom_fragment",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~384"
+      }
+    },
+    "snap_tetra_puzzle": {
+      "name": "Snap Tetra Puzzle",
+      "lookup_name": "snap_tetra_puzzle",
+      "description": "Snap-point tetrahedron assembly puzzle. Represents constraint satisfaction and ordered structure — how Free Energy minimization drives systems toward specific geometric configurations.",
+      "scene": "res://commons/primitives/snappoint/puzzles/snap_tetrahedron_puzzle.tscn",
+      "category": "qfep",
+      "interaction": "grab_snap",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "interactive",
+      "qfep_term": "F",
+      "qfep_connection": "Each snapped connection reduces prediction error. The final locked form is minimum free energy.",
+      "map_ready": false,
+      "include_in_map_data": false
+    },
+    "snap_cube_puzzle": {
+      "name": "Snap Cube Puzzle",
+      "lookup_name": "snap_cube_puzzle",
+      "description": "Snap-point octahedral assembly puzzle. Represents ordered structure and constraint — the crystalline end state of a system minimizing free energy.",
+      "scene": "res://commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.tscn",
+      "category": "qfep",
+      "interaction": "grab_snap",
+      "sequence": "qfeplaboratory",
+      "artifact_type": "interactive",
+      "qfep_term": "F",
+      "qfep_connection": "The rigid, ordered form that emerges when a system fully minimizes its free energy (F → minimum, S → low).",
+      "map_ready": false,
+      "include_in_map_data": false
+    }
+  }
 }

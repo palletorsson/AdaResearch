@@ -1,268 +1,270 @@
 {
-	"artifacts": {
-		"lyapunov_exponents": {
-			"category": "chaos",
-			"complexity": "advanced",
-			"description": "Visualization of Lyapunov exponents — the rate at which nearby trajectories diverge in phase space. Positive exponents mean chaos: small differences amplify exponentially, making long-term prediction impossible.",
-			"dev_themes": [
-				"chaos",
-				"dynamical_systems"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "lyapunov_exponents",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Lyapunov Exponents",
-			"qfep_connection": "Lyapunov exponents measure φΔE(S,t) — the rate at which nearby trajectories diverge. Positive exponent = high sensitivity, the system amplifies small differences. This IS the sensitivity term: how fast entropy changes.",
-			"scene": "res://algorithms/chaos/lyapunovexponents/lyapunov_exponents.tscn",
-			"tags": [
-				"lyapunov",
-				"chaos",
-				"divergence",
-				"sensitivity",
-				"dynamical_systems",
-				"exponent"
-			],
-			"geometry_spec": {
-				"mesh_type": "procedural_line",
-				"topology": "non_manifold",
-				"construction": {
-					"method": "vertex_line_strip",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"compute_vertices",
-						"connect_lines"
-					]
-				},
-				"material": {
-					"type": "vertex_color",
-					"shading_model": "unshaded",
-					"key_properties": [
-						"emission",
-						"transparency",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "vertex",
-					"driven_by": "per_frame_rebuild",
-					"affects": [
-						"vertex_positions"
-					]
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "~100"
-			}
-		},
-		"lyapunov_fractal": {
-			"category": "chaos",
-			"complexity": "intermediate",
-			"description": "Lyapunov fractal from alternating logistic map parameters — for each point (a,b) in parameter space [2,4]x[2,4], iterate x=r*x*(1-x) alternating r between a and b in pattern AABB. The Lyapunov exponent λ colors the plane: blue for stable orbits (λ<0), yellow-red for chaos (λ>0), black at the boundary. The result resembles alien calligraphy.",
-			"dev_themes": [
-				"chaos",
-				"dynamical_systems"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "lyapunov_fractal",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Lyapunov Fractal",
-			"qfep_connection": "Maps regions of parameter space by stability — blue = ordered (λ→0), warm = chaotic (λ→1). The fractal boundary between them IS the edge of chaos rendered as image. The alien calligraphy traces exactly where F-minimization fails.",
-			"scene": "res://commons/artifacts/lyapunov_fractal/lyapunov_fractal.tscn",
-			"tags": [
-				"lyapunov",
-				"fractal",
-				"logistic_map",
-				"chaos",
-				"stability",
-				"parameter_space",
-				"exponent"
-			],
-			"geometry_spec": {
-				"mesh_type": "texture_plane",
-				"topology": "planar",
-				"construction": {
-					"method": "pixel_computation",
-					"primitives": [
-						"plane"
-					],
-					"operations": [
-						"create_image",
-						"compute_pixels",
-						"apply_texture"
-					]
-				},
-				"material": {
-					"type": "generated_texture",
-					"shading_model": "pbr",
-					"key_properties": [
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~4 (quad)"
-			}
-		},
-		"mandelbrot_dive": {
-			"category": "fractals",
-			"complexity": "intermediate",
-			"description": "GPU-accelerated Mandelbrot set on a 1x1m table. Infinite zoom into self-similar fractal structure. 5 color schemes, auto-dive mode to famous coordinates. The boundary between order and chaos, infinitely complex.",
-			"dev_themes": [
-				"chaos",
-				"dynamical_systems",
-				"fractals"
-			],
-			"footprint": [
-				2,
-				1,
-				2
-			],
-			"include_in_map_data": true,
-			"interaction": "observe",
-			"interactions": [
-				"observe"
-			],
-			"lookup_name": "mandelbrot_dive",
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"name": "Mandelbrot Dive",
-			"parameters": {
-				"footprint": [
-					2,
-					1,
-					2
-				],
-				"size_group": "standard"
-			},
-			"qfep_connection": "The Mandelbrot boundary is exactly lambda_edge — infinite complexity at the border between convergence (F) and divergence (E). Self-similarity across all scales.",
-			"scene": "res://commons/artifacts/mandelbrot_dive/mandelbrot_dive.tscn",
-			"sequence": "fractals",
-			"size_group": "standard",
-			"tags": [
-				"mandelbrot",
-				"fractal",
-				"self_similarity",
-				"infinite_detail",
-				"shader",
-				"interactive",
-				"zoom"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"cylinder",
-						"plane"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "custom_fragment",
-					"key_properties": [
-						"emission",
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "unknown"
-			}
-		},
-		"strange_attractors": {
-			"category": "chaos",
-			"complexity": "intermediate",
-			"description": "Gallery of strange attractors — Lorenz, Rössler, and others. Deterministic systems that never repeat yet stay bounded, tracing fractal paths through phase space forever.",
-			"dev_themes": [
-				"art",
-				"chaos",
-				"dynamical_systems"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "strange_attractors",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Strange Attractors",
-			"qfep_connection": "Systems that never repeat but never escape — bounded chaos. The attractor IS the edge of chaos geometry: infinite complexity E(S) confined to finite structure F. Same equations, different initial conditions yield different trajectories but the same attractor shape.",
-			"scene": "res://algorithms/chaos/strangeattractors/strange_attractors.tscn",
-			"tags": [
-				"strange_attractor",
-				"lorenz",
-				"rossler",
-				"chaos",
-				"fractal",
-				"phase_space"
-			],
-			"geometry_spec": {
-				"mesh_type": "procedural_line",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "vertex_line_strip",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"compute_vertices",
-						"connect_lines"
-					]
-				},
-				"material": {
-					"type": "vertex_color",
-					"shading_model": "unshaded",
-					"key_properties": [
-						"emission",
-						"transparency",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "vertex",
-					"driven_by": "per_frame_rebuild",
-					"affects": [
-						"vertex_positions"
-					]
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "~100"
-			}
-		},
-		"box_counting_dimension": {
-			"name": "Box Counting Dimension",
-			"lookup_name": "box_counting_dimension",
-			"description": "Interactive fractal dimension calculator using the box-counting method. Place a grid over a fractal, count boxes touching the boundary, scale down — the scaling ratio IS the fractal dimension.",
-			"scene": "res://algorithms/fractals/box_counting_dimension/box_counting_dimension.tscn",
-			"category": "fractals",
-			"interaction": "observe_interact",
-			"sequence": "fractals",
-			"artifact_type": "demonstration",
-			"qfep_connection": "Fractal dimension measures the complexity of a boundary — the self-similar structure at every scale."
-		}
-	},
-	"registry_info": {
-		"category": "chaos",
-		"description": "Chaos theory artifacts — Lyapunov exponents, strange attractors, and the sensitive dependence on initial conditions that makes deterministic systems unpredictable.",
-		"name": "chaos",
-		"theoretical_grounding": "Dynamical systems theory, Lyapunov stability, strange attractors (Lorenz, Rössler), fractal dimension, ergodic theory"
-	}
+  "artifacts": {
+    "lyapunov_exponents": {
+      "category": "chaos",
+      "complexity": "advanced",
+      "description": "Visualization of Lyapunov exponents — the rate at which nearby trajectories diverge in phase space. Positive exponents mean chaos: small differences amplify exponentially, making long-term prediction impossible.",
+      "dev_themes": [
+        "chaos",
+        "dynamical_systems"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "lyapunov_exponents",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "Lyapunov Exponents",
+      "qfep_connection": "Lyapunov exponents measure φΔE(S,t) — the rate at which nearby trajectories diverge. Positive exponent = high sensitivity, the system amplifies small differences. This IS the sensitivity term: how fast entropy changes.",
+      "scene": "res://algorithms/chaos/lyapunovexponents/lyapunov_exponents.tscn",
+      "tags": [
+        "lyapunov",
+        "chaos",
+        "divergence",
+        "sensitivity",
+        "dynamical_systems",
+        "exponent"
+      ],
+      "geometry_spec": {
+        "mesh_type": "procedural_line",
+        "topology": "non_manifold",
+        "construction": {
+          "method": "vertex_line_strip",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "compute_vertices",
+            "connect_lines"
+          ]
+        },
+        "material": {
+          "type": "vertex_color",
+          "shading_model": "unshaded",
+          "key_properties": [
+            "emission",
+            "transparency",
+            "double_sided"
+          ]
+        },
+        "animation": {
+          "type": "vertex",
+          "driven_by": "per_frame_rebuild",
+          "affects": [
+            "vertex_positions"
+          ]
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "~100"
+      }
+    },
+    "lyapunov_fractal": {
+      "category": "chaos",
+      "complexity": "intermediate",
+      "description": "Lyapunov fractal from alternating logistic map parameters — for each point (a,b) in parameter space [2,4]x[2,4], iterate x=r*x*(1-x) alternating r between a and b in pattern AABB. The Lyapunov exponent λ colors the plane: blue for stable orbits (λ<0), yellow-red for chaos (λ>0), black at the boundary. The result resembles alien calligraphy.",
+      "dev_themes": [
+        "chaos",
+        "dynamical_systems"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "lyapunov_fractal",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "Lyapunov Fractal",
+      "qfep_connection": "Maps regions of parameter space by stability — blue = ordered (λ→0), warm = chaotic (λ→1). The fractal boundary between them IS the edge of chaos rendered as image. The alien calligraphy traces exactly where F-minimization fails.",
+      "scene": "res://commons/artifacts/lyapunov_fractal/lyapunov_fractal.tscn",
+      "tags": [
+        "lyapunov",
+        "fractal",
+        "logistic_map",
+        "chaos",
+        "stability",
+        "parameter_space",
+        "exponent"
+      ],
+      "geometry_spec": {
+        "mesh_type": "texture_plane",
+        "topology": "planar",
+        "construction": {
+          "method": "pixel_computation",
+          "primitives": [
+            "plane"
+          ],
+          "operations": [
+            "create_image",
+            "compute_pixels",
+            "apply_texture"
+          ]
+        },
+        "material": {
+          "type": "generated_texture",
+          "shading_model": "pbr",
+          "key_properties": [
+            "metallic"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "~4 (quad)"
+      }
+    },
+    "mandelbrot_dive": {
+      "category": "fractals",
+      "complexity": "intermediate",
+      "description": "GPU-accelerated Mandelbrot set on a 1x1m table. Infinite zoom into self-similar fractal structure. 5 color schemes, auto-dive mode to famous coordinates. The boundary between order and chaos, infinitely complex.",
+      "dev_themes": [
+        "chaos",
+        "dynamical_systems",
+        "fractals"
+      ],
+      "footprint": [
+        2,
+        1,
+        2
+      ],
+      "include_in_map_data": true,
+      "interaction": "observe",
+      "interactions": [
+        "observe"
+      ],
+      "lookup_name": "mandelbrot_dive",
+      "map_ready": true,
+      "map_sequences": [
+        "fractals"
+      ],
+      "name": "Mandelbrot Dive",
+      "parameters": {
+        "footprint": [
+          2,
+          1,
+          2
+        ],
+        "size_group": "standard"
+      },
+      "qfep_connection": "The Mandelbrot boundary is exactly lambda_edge — infinite complexity at the border between convergence (F) and divergence (E). Self-similarity across all scales.",
+      "scene": "res://commons/artifacts/mandelbrot_dive/mandelbrot_dive.tscn",
+      "sequence": "fractals",
+      "size_group": "standard",
+      "tags": [
+        "mandelbrot",
+        "fractal",
+        "self_similarity",
+        "infinite_detail",
+        "shader",
+        "interactive",
+        "zoom"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "cylinder",
+            "plane"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "custom_fragment",
+          "key_properties": [
+            "emission",
+            "metallic"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "unknown"
+      }
+    },
+    "strange_attractors": {
+      "category": "chaos",
+      "complexity": "intermediate",
+      "description": "Gallery of strange attractors — Lorenz, Rössler, and others. Deterministic systems that never repeat yet stay bounded, tracing fractal paths through phase space forever.",
+      "dev_themes": [
+        "art",
+        "chaos",
+        "dynamical_systems"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "strange_attractors",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "Strange Attractors",
+      "qfep_connection": "Systems that never repeat but never escape — bounded chaos. The attractor IS the edge of chaos geometry: infinite complexity E(S) confined to finite structure F. Same equations, different initial conditions yield different trajectories but the same attractor shape.",
+      "scene": "res://algorithms/chaos/strangeattractors/strange_attractors.tscn",
+      "tags": [
+        "strange_attractor",
+        "lorenz",
+        "rossler",
+        "chaos",
+        "fractal",
+        "phase_space"
+      ],
+      "geometry_spec": {
+        "mesh_type": "procedural_line",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "vertex_line_strip",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "compute_vertices",
+            "connect_lines"
+          ]
+        },
+        "material": {
+          "type": "vertex_color",
+          "shading_model": "unshaded",
+          "key_properties": [
+            "emission",
+            "transparency",
+            "double_sided"
+          ]
+        },
+        "animation": {
+          "type": "vertex",
+          "driven_by": "per_frame_rebuild",
+          "affects": [
+            "vertex_positions"
+          ]
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "~100"
+      }
+    },
+    "box_counting_dimension": {
+      "name": "Box Counting Dimension",
+      "lookup_name": "box_counting_dimension",
+      "description": "Interactive fractal dimension calculator using the box-counting method. Place a grid over a fractal, count boxes touching the boundary, scale down — the scaling ratio IS the fractal dimension.",
+      "scene": "res://algorithms/fractals/box_counting_dimension/box_counting_dimension.tscn",
+      "category": "fractals",
+      "interaction": "observe_interact",
+      "sequence": "fractals",
+      "artifact_type": "demonstration",
+      "qfep_connection": "Fractal dimension measures the complexity of a boundary — the self-similar structure at every scale.",
+      "map_ready": false,
+      "include_in_map_data": false
+    }
+  },
+  "registry_info": {
+    "category": "chaos",
+    "description": "Chaos theory artifacts — Lyapunov exponents, strange attractors, and the sensitive dependence on initial conditions that makes deterministic systems unpredictable.",
+    "name": "chaos",
+    "theoretical_grounding": "Dynamical systems theory, Lyapunov stability, strange attractors (Lorenz, Rössler), fractal dimension, ergodic theory"
+  }
 }

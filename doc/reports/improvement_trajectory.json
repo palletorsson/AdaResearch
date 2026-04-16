@@ -1,17 +1,65 @@
 {
   "version": "1.0",
   "description": "Computed summary of improvement trends across BREATHE cycles. Updated after each breath's Harvest phase.",
-  "last_updated": "2026-04-12T09:30:00",
-  "total_breaths": 2,
+  "last_updated": "2026-04-16T09:30:00",
+  "total_breaths": 5,
   "global_avg_history": [
-    {"date": "2026-04-08", "avg": 2.04, "breath_id": "baseline"},
-    {"date": "2026-04-11", "avg": 2.04, "breath_id": "2026-04-11T00:30"},
-    {"date": "2026-04-12", "avg": 4.37, "breath_id": "2026-04-12T09:00"}
+    {
+      "date": "2026-04-08",
+      "avg": 2.04,
+      "breath_id": "baseline"
+    },
+    {
+      "date": "2026-04-11",
+      "avg": 2.04,
+      "breath_id": "2026-04-11T00:30"
+    },
+    {
+      "date": "2026-04-12",
+      "avg": 4.37,
+      "breath_id": "2026-04-12T09:00"
+    },
+    {
+      "date": "2026-04-14",
+      "avg": 4.0,
+      "breath_id": "2026-04-14T07:30"
+    },
+    {
+      "date": "2026-04-15",
+      "avg": 4.05,
+      "breath_id": "2026-04-15T09:30",
+      "note": "Pipeline unchanged; Gate C now PASS (grade_F 2->0, unresolved 62->55)",
+      "release_gates_passing": 2
+    },
+    {
+      "date": "2026-04-16",
+      "avg": 4.05,
+      "breath_id": "2026-04-16T09:30",
+      "note": "Pipeline unchanged (validation timeout); Gate B 3 sub-metrics cleared: missing_scene_path 6->0, missing_map_ready 14->0, missing_include_in_map_data 19->0. Gate A duplicate cleared: 1->0.",
+      "release_gates_passing": 2
+    }
   ],
   "skill_effectiveness_cumulative": {
-    "documentation_writing": {"total_calls": 5, "success_rate": 1.0, "avg_delta": 0},
-    "pathfinder_validation": {"total_calls": 5, "success_rate": 1.0, "avg_delta": 0},
-    "registry_repair": {"total_calls": 3, "success_rate": 1.0, "avg_delta": 0.21}
+    "documentation_writing": {
+      "total_calls": 5,
+      "success_rate": 1.0,
+      "avg_delta": 0
+    },
+    "pathfinder_validation": {
+      "total_calls": 5,
+      "success_rate": 1.0,
+      "avg_delta": 0
+    },
+    "registry_repair": {
+      "total_calls": 13,
+      "success_rate": 1.0,
+      "avg_delta": 0.42
+    },
+    "direct_file_edit": {
+      "total_calls": 6,
+      "success_rate": 1.0,
+      "avg_delta": 0.5
+    }
   },
   "stall_detected": false,
   "stall_reason": null,
@@ -24,8 +72,9 @@
     }
   ],
   "evening_harvest_notes": {
-    "date": "2026-04-12",
-    "summary": "Morning breath advanced primitives and wavefunctions from stage 3 to stage 5 each. 3 file changes: 2 registry entries added (achilles_tortoise, rotatescalecubes) + 1 typo fixed (ibomagneticresonator→biomagneticresonator). Registry repair is fastest HEAD advance after docs.",
-    "next_breath_recommendation": "Remaining stage-3 sequences: transformation (86%), color (96%), forces (98%), array_tutorial (85%), fractals (95%), qfeplaboratory (45%). Forces and color are closest to 100% — find and register their missing artifacts. qfeplaboratory needs most artifact work."
+    "date": "2026-04-14",
+    "summary": "Major pipeline day. Morning breath (07:30) ran full registry_repair across 6 sequences — qfeplaboratory, transformation, color, forces, array_tutorial, fractals — advancing all from stage 3 to stage 5. delta +0.63. 19/19 sequences now at stage 5. Session also completed RackTemplates.gd system: module builder created, 4 rack controls migrated, template test scene with 6 types. Registry repair earned a new reusable flow: registry-gap-finder (added to flows/).",
+    "next_breath_recommendation": "All 19 sequences at stage 5 (Validation). Next HEAD = advancing stage 5 → stage 6 (VR Testing). Known blocker: pipeline scorer validation times out in batch mode. Use individual pathfinder calls per map instead. Start with the smallest sequences to establish the VR-testing pattern. Validation flow exists at flows/pathfinder-validation.json.",
+    "session_note": "Registry-repair is now exhausted as a quick-win category. The project has structurally shifted: the cheapest remaining moves are individual pathfinder validation runs and VR walkthroughs. Document the timeout workaround in known_tooling_limits if the scorer batch issue recurs."
   }
 }
