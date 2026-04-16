@@ -311,8 +311,8 @@ def generate_structure(
 
     # Get dimensions
     dims = map_data.get("map_info", {}).get("dimensions", {})
-    grid_rows = dims.get("depth", len(utilities))
-    grid_cols = dims.get("width", len(utilities[0]) if utilities else 11)
+    grid_rows = int(dims.get("depth", len(utilities)))
+    grid_cols = int(dims.get("width", len(utilities[0]) if utilities else 11))
 
     # Also check spacer config in map_data
     spacer = map_data.get("spacer", {})
