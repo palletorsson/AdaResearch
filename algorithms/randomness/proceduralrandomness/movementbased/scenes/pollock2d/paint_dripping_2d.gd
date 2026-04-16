@@ -1,4 +1,4 @@
-extends Node3D
+extends Node2D
 
 # Pollock Action Painting — 3D VR Version
 # Paints to an Image texture applied to a wall-mounted QuadMesh canvas.

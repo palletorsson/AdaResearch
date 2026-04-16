@@ -1,5 +1,5 @@
 # simulation.gd
-extends Node3D
+extends Node2D
 
 # Reaction-Diffusion simulation using SubViewport ping-pong buffer + shader
 # Converted from Control to Node3D for VR compatibility

@@ -51,6 +51,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"9_2_smart_rockets_basic_vr": {
@@ -105,6 +121,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"9_3_smart_rockets_vr": {
@@ -171,6 +203,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 3,
+				"cluster_with": [
+					"unlocks",
+					"gradient_descent_visualization",
+					"optimization",
+					"gradient",
+					"depends"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"9_4_interactive_selection_vr": {
@@ -230,6 +284,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"9_5_evolving_bloops_vr": {
@@ -293,6 +363,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"contrasts",
+					"directed",
+					"ended",
+					"unlocks",
+					"evolved_creatures"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"9_6_ga_shakespeare_annotated_vr": {
@@ -346,6 +438,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"anomaly_detection": {
@@ -416,6 +524,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"attention_mechanisms": {
@@ -481,6 +605,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"axiom_garden": {
@@ -540,6 +680,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"clustering_algorithms": {
@@ -604,6 +760,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~144"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"computer_vision": {
@@ -672,6 +844,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"computer_vision_vr": {
@@ -740,6 +928,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"unlocks",
+					"convolutional_neural_networks_cnns_vr",
+					"learned",
+					"kernels",
+					"designed"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"convolutional_neural_networks": {
@@ -808,6 +1018,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"convolutional_neural_networks_cnns_vr": {
@@ -877,6 +1103,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"computer_vision_vr",
+					"designed",
+					"learned",
+					"kernels"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"decision_boundary_viewer": {
@@ -929,6 +1177,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"dimensionality_reduction": {
@@ -995,6 +1259,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"enhanced_kmeans": {
@@ -1071,6 +1351,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"svm_visualization",
+					"supervised",
+					"boundaries",
+					"unsupervised"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"ensemble_methods": {
@@ -1139,6 +1441,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"evolved_creatures": {
@@ -1212,6 +1530,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"evolved_creatures_v2": {
@@ -1268,6 +1602,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"evolving_creatures_ea": {
@@ -1327,6 +1677,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"evolving_flowers": {
@@ -1389,6 +1755,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"shared",
+					"pattern",
+					"unlocks",
+					"evolved_creatures"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"evolvingflowers": {
@@ -1458,6 +1846,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"shared",
+					"pattern",
+					"unlocks",
+					"evolved_creatures"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"explainable_ai": {
@@ -1524,6 +1934,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"explainable_ai_xai_vr": {
@@ -1591,6 +2017,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~25"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"neural_networks_vr",
+					"model",
+					"explain",
+					"contrasts"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"feature_engineering": {
@@ -1656,6 +2104,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"fine_tuning": {
@@ -1716,6 +2180,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~8"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"fine_tuning_vr": {
@@ -1783,6 +2263,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~8"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"gans": {
@@ -1850,6 +2346,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"generative_adversarial_networks_gans_vr": {
@@ -1915,6 +2427,28 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"neural_networks_vr",
+					"discriminative",
+					"generative",
+					"depends"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"genetic_algorithm": {
@@ -1985,6 +2519,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~5000"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"gradient_descent": {
@@ -2046,6 +2596,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"gradient_descent_landscape": {
@@ -2105,6 +2671,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~144"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"joint_learn_walk": {
@@ -2171,6 +2753,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"evolved_creatures",
+					"adapts",
+					"behavior",
+					"adapts"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"kmeans_simple": {
@@ -2204,7 +2808,23 @@
 				"clustering",
 				"unsupervised",
 				"simple"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"learn_world_stacked": {
 			"category": "machinelearning",
@@ -2275,6 +2895,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"loss_function_comparator": {
@@ -2350,6 +2986,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~144"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"gradient_descent_landscape",
+					"single",
+					"optimization_algorithms",
+					"optimizer",
+					"comparison"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"lstms": {
@@ -2417,6 +3075,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"lstms_vr": {
@@ -2487,6 +3161,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"unlocks",
+					"transformers_vr",
+					"attention",
+					"replaces",
+					"recurrence"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"neural_network_visualization": {
@@ -2552,6 +3248,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"gradient_descent_visualization",
+					"backprop",
+					"gradient",
+					"descent"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"neural_networks": {
@@ -2619,6 +3337,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"neural_networks_vr": {
@@ -2685,6 +3419,28 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~5 instances"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"gradient_descent_visualization",
+					"training",
+					"optimization",
+					"unlocks"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"nlp": {
@@ -2751,6 +3507,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"non_teleological_evolution": {
@@ -2827,6 +3599,28 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 3,
+				"cluster_with": [
+					"evolved_creatures",
+					"fitness",
+					"driven",
+					"counterpart",
+					"similar"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"optimization_algorithms": {
@@ -2895,6 +3689,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"pca_visualization": {
@@ -2966,6 +3776,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"unlocks",
+					"gradient_descent_visualization",
+					"optimization",
+					"without",
+					"gradient"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"perceptron_playground": {
@@ -3029,6 +3861,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"random_forest_visualization": {
@@ -3098,6 +3946,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"depends",
+					"enhanced_kmeans",
+					"trees",
+					"split",
+					"clustering"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"random_walker_machine": {
@@ -3162,6 +4032,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"recommendation_systems": {
@@ -3226,6 +4112,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"reinforcement_learning": {
@@ -3292,6 +4194,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"shape_learner_2d": {
@@ -3347,6 +4265,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~0 instances"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"shape_learner_3d": {
@@ -3403,6 +4337,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~0 instances"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"spotlight_attention": {
@@ -3465,6 +4415,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"svm_visualization": {
@@ -3537,6 +4503,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"enhanced_kmeans",
+					"supervised",
+					"unsupervised",
+					"contrasts"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"switchboard_attention": {
@@ -3591,6 +4579,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"time_series_analysis": {
@@ -3657,6 +4661,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"transformers": {
@@ -3724,6 +4744,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"transformers_vr": {
@@ -3791,6 +4827,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"supersedes",
+					"lstms_vr",
+					"attention",
+					"replaces",
+					"recurrence"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"vaes": {
@@ -3859,6 +4917,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"variational_autoencoders_vaes_vr": {
@@ -3927,6 +5001,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"adaboost": {
@@ -4008,6 +5098,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"sequential",
+					"parallel",
+					"ensemble",
+					"methods",
+					"opposite"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"random_forest": {
@@ -4090,6 +5202,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"parallel",
+					"sequential",
+					"ensembles",
+					"bagging",
+					"feature"
+				],
+				"preferred_zone": "any"
 			}
 		}
 	}

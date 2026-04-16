@@ -48,6 +48,8 @@ var _grid_system: Node3D = null
 @onready var view3d: SubViewportContainer = $CenterRight/Center/View3D
 @onready var cell_label: Label = $CenterRight/Inspector/CellLabel
 @onready var art_input: LineEdit = $CenterRight/Inspector/ArtRow/Input
+@onready var util_input: LineEdit = $CenterRight/Inspector/UtilRow/Input
+@onready var height_input: LineEdit = $CenterRight/Inspector/HeightRow/Input
 @onready var detail: RichTextLabel = $CenterRight/Inspector/Detail
 @onready var status: Label = $CenterRight/Inspector/Status
 
@@ -74,6 +76,9 @@ func _ready() -> void:
 	canvas.draw.connect(_on_canvas_draw)
 	art_input.text_submitted.connect(_on_art_submit)
 	art_input.text_changed.connect(_on_art_changed)
+	util_input.text_submitted.connect(_on_util_submit)
+	util_input.text_changed.connect(_on_util_changed)
+	height_input.text_submitted.connect(_on_height_submit)
 	view3d.gui_input.connect(_on_3d_input)
 
 	_scan()
@@ -553,15 +558,43 @@ func _apply_art_text(t: String) -> void:
 	_update_insp_detail()
 	_auto_save()
 
+func _on_util_submit(t: String) -> void:
+	_apply_util_text(t)
+
+func _on_util_changed(t: String) -> void:
+	_apply_util_text(t)
+
+func _apply_util_text(t: String) -> void:
+	if sel.x < 0 or sel.y < 0: return
+	ul[sel.y][sel.x] = t if t != "" else " "
+	canvas.queue_redraw()
+	_request_3d_reload()
+	_update_insp_detail()
+	_auto_save()
+
+func _on_height_submit(t: String) -> void:
+	if sel.x < 0 or sel.y < 0: return
+	sl[sel.y][sel.x] = t if t != "" else "0"
+	canvas.queue_redraw()
+	_request_3d_reload()
+	_update_insp_detail()
+	_auto_save()
+
 func _update_insp() -> void:
 	if sel.x < 0:
 		cell_label.text = "No cell selected"
 		detail.text = ""
 		art_input.text = ""
+		util_input.text = ""
+		height_input.text = ""
 		return
 	cell_label.text = "Cell [%d, %d]" % [sel.x, sel.y]
 	var a: String = str(il[sel.y][sel.x]).strip_edges()
+	var u: String = str(ul[sel.y][sel.x]).strip_edges()
+	var h: String = str(sl[sel.y][sel.x]).strip_edges()
 	art_input.text = a if a != " " else ""
+	util_input.text = u if u != " " else ""
+	height_input.text = h if h != "0" and h != "" else h
 	_update_insp_detail()
 
 func _update_insp_detail() -> void:
@@ -756,3 +789,32 @@ func _unhandled_input(ev: InputEvent) -> void:
 		elif ev.keycode == KEY_R and not ev.ctrl_pressed:
 			_reload_3d()
 			status.text = "3D reloaded"
+		elif ev.keycode == KEY_G and not ev.ctrl_pressed:
+			_generate_structure()
+			get_viewport().set_input_as_handled()
+
+
+func _generate_structure() -> void:
+	if sl.is_empty() or map_name == "":
+		status.text = "No map loaded"
+		return
+	_save()  # Save current state first
+	status.text = "Generating structure..."
+
+	# Run Python generator as subprocess
+	var args := [
+		"tools/generate_structure.py",
+		"--map", map_name,
+		"--mode", "corridor",
+	]
+	var output := []
+	var exit_code := OS.execute("python", args, output, true)
+	if exit_code == 0:
+		# Reload the map data from disk
+		_load_map(paths[list.get_selected_items()[0]] if list.get_selected_items().size() > 0 else "")
+		_reload_3d()
+		status.text = "Structure generated (G=corridor, edit to refine)"
+	else:
+		var err_text := "\n".join(output) if output.size() > 0 else "unknown error"
+		status.text = "Generate failed: %s" % err_text.substr(0, 80)
+		print("Generate structure error: ", err_text)

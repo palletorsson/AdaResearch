@@ -168,13 +168,13 @@ func create_axes(parent: Node3D) -> void:
 	"""Create coordinate axes for probability plots"""
 	# X-axis (probability)
 	var x_axis = MeshInstance3D.new()
-	var x_points = [Vector3(-1.0, 0, 0), Vector3(1.0, 0, 0)]
+	var x_points: Array[Vector3] = [Vector3(-1.0, 0, 0), Vector3(1.0, 0, 0)]
 	create_line_mesh(x_axis, x_points, Color.WHITE)
 	parent.add_child(x_axis)
-	
+
 	# Y-axis (density)
 	var y_axis = MeshInstance3D.new()
-	var y_points = [Vector3(0, 0, 0), Vector3(0, 1.5, 0)]
+	var y_points: Array[Vector3] = [Vector3(0, 0, 0), Vector3(0, 1.5, 0)]
 	create_line_mesh(y_axis, y_points, Color.WHITE)
 	parent.add_child(y_axis)
 	
@@ -190,7 +190,7 @@ func create_true_value_line(parent: Node3D, value: float, color: Color) -> void:
 	"""Create vertical line showing true parameter value"""
 	var line = MeshInstance3D.new()
 	var x_pos = (value - 0.5) * 2.0
-	var line_points = [Vector3(x_pos, 0, 0.01), Vector3(x_pos, 1.5, 0.01)]
+	var line_points: Array[Vector3] = [Vector3(x_pos, 0, 0.01), Vector3(x_pos, 1.5, 0.01)]
 	create_line_mesh(line, line_points, color)
 	parent.add_child(line)
 

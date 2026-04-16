@@ -8,7 +8,6 @@
 # relationships: Contrasts with AdaBoost (parallel vs sequential). Both are ensembles but Random Forest uses bagging + feature randomness instead of sample weighting.
 # truth: A random forest is democracy applied to prediction. Each tree votes from its own limited perspective. The majority is usually right.
 
-class_name RandomForestVisualization
 extends Node3D
 
 const N_SAMPLES := 80

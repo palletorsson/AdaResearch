@@ -1,5 +1,5 @@
 ## Cave Control Panel - VR UI for controlling marching cubes parameters
-extends Node3D
+extends Control
 
 signal noise_scale_changed(value: float)
 signal iso_level_changed(value: float)

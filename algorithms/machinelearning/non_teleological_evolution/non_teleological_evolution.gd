@@ -16,7 +16,6 @@
 #   truth: there is no ladder of progress — only a bush of persistence
 
 extends Node3D
-class_name NonTeleologicalEvolution
 
 # --- Configuration ---
 @export var world_size: float = 2.0

@@ -1,7 +1,7 @@
 # VRLissajousDisplay.gd - Lissajous figure visualization from two frequency parameters
 # Creates an XY plot where X = sin(freq1*t) and Y = sin(freq2*t) with phase offset
 # Uses Ada palette constants for display colors
-extends Control
+extends Node3D
 class_name VRLissajousDisplay
 
 const _P = preload("res://commons/ui/ada_palette.gd")

@@ -1,4 +1,4 @@
-extends Node3D
+extends Control
 
 var markov_node: Node
 var height_slider: Node3D

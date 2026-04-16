@@ -12,7 +12,6 @@
 # - Color-coded neurons: green=input, blue=hidden, red=output
 # ============================================================================
 extends Node3D
-class_name NeuralNetworkVisualizationShowcase
 
 # @identity
 # essence: a(l) = σ(W(l)·a(l-1) + b(l)); ∂L/∂W = δ·a(T); backpropagation through layers

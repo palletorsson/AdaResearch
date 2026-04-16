@@ -5,7 +5,6 @@
 # Uses MultiMesh for efficient rendering of large grids.
 # ============================================================================
 extends Node3D
-class_name ConvolutionalNeuralNetworkShowcase
 
 # --- Network Architecture Controls ---
 @export_category("Network Architecture")

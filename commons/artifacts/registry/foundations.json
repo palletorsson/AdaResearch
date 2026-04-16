@@ -81,6 +81,28 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"unlocks",
+					"escher_staircase",
+					"visual",
+					"contrasts",
+					"russell_set_box"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"russell_set_box": {
@@ -159,6 +181,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"contrasts",
+					"godel_statement_plaque",
+					"arithmetic",
+					"theoretic",
+					"reference"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"magritte_pipe": {
@@ -236,6 +280,28 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"foundational",
+					"artmathematics",
+					"sequence",
+					"signified",
+					"extends"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"escher_staircase": {
@@ -315,6 +381,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"visualizes",
+					"godel_statement_plaque",
+					"local",
+					"proof",
+					"steps"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"florensky_sphere": {
@@ -395,6 +483,28 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"schrodinger_box",
+					"quantum",
+					"logical",
+					"superposition"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"bifurcation_diagram": {
@@ -476,6 +586,28 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"unlocks",
+					"lambda_slider",
+					"lambda",
+					"contrasts",
+					"florensky_sphere"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"euclid_postulates_plaque": {
@@ -551,6 +683,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"unlocks",
+					"hyperbolic_surface",
+					"elliptic_surface",
+					"happens",
+					"fifth"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"penrose_triangle": {
@@ -630,6 +784,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"escher_staircase",
+					"impossible",
+					"objects",
+					"family"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"poincare_disk": {
@@ -708,6 +884,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~1024"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"models",
+					"geometry",
+					"hyperbolic_surface",
+					"different",
+					"representation"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"schrodinger_box": {
@@ -788,6 +986,28 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"florensky_sphere",
+					"quantum",
+					"paraconsistent",
+					"superposition"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"angle_sum_triangle": {
@@ -855,6 +1075,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"hyperbolic_surface",
+					"angle",
+					"elliptic_surface",
+					"angle"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"hilbert_hotel": {
@@ -926,6 +1168,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"constructive_proof": {
@@ -992,6 +1250,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"excluded_middle_demo",
+					"rejecting",
+					"forces",
+					"constructive"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"brouwer_choice_sequence": {
@@ -1061,6 +1341,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"excluded_middle_demo",
+					"rejection",
+					"enables",
+					"choice"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"excluded_middle_demo": {
@@ -1132,6 +1434,28 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"unlocks",
+					"constructive_proof",
+					"rejected",
+					"constructive",
+					"proofs"
+				],
+				"preferred_zone": "any"
 			}
 		}
 	},

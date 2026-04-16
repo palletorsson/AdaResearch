@@ -112,6 +112,8 @@ func create_sphere_instance() -> Node3D:
 
 # Function to generate sparks from the current positions of the start_node and end_node
 func _generate_spark_from_nodes():
+	if not start_node or not end_node:
+		return
 	var new_start = start_node.global_transform.origin - self.global_transform.origin
 	var new_end = end_node.global_transform.origin - self.global_transform.origin
 	_generate_spark(new_start, new_end)

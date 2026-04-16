@@ -3,7 +3,7 @@
 # 10 tracks exploring AI awakening, cyberpunk noir, and cosmic transcendence
 # Each track tells a story through sound
 
-extends Node3D
+extends Control
 class_name SpaceDystopiaPopMain
 
 const SAMPLE_RATE = 44100

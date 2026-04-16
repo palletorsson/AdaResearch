@@ -1,4 +1,4 @@
-extends Node3D
+extends Control
 
 # Sample sheet demonstrating k-means color quantization
 # with Ada Lovelace image across three educational rows

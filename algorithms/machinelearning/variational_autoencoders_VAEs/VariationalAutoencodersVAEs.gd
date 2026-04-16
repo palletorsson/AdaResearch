@@ -5,7 +5,6 @@
 # with live training metrics for reconstruction loss and KL divergence.
 # ============================================================================
 extends Node3D
-class_name VAEShowcase
 
 # --- Runtime UI Controls ---
 @export_category("Data Settings")

@@ -1,6 +1,6 @@
 # CAMenu.gd
 # Main menu for selecting different CA simulations — VR Node3D version
-extends Node3D
+extends Control
 
 var ca_scenes = {
 	"Recrystallization": "res://algorithms/proceduralgeneration/ca_showcase/recrystallization_ca.tscn",

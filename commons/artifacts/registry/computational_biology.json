@@ -59,6 +59,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"limbgrowth": {
@@ -113,6 +129,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"monte_carlo_protein": {
@@ -172,6 +204,22 @@
 				},
 				"instance_strategy": "particles",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"morphobody": {
@@ -225,6 +273,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~576"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"radiolaria": {
@@ -297,6 +361,22 @@
 				},
 				"instance_strategy": "particles",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"ten_tulip_buckets": {
@@ -345,6 +425,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"MolecularDesigner": {
@@ -411,6 +507,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"unlocks",
+					"reductionist",
+					"design",
+					"thinking",
+					"depends"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"attractorsphere": {
@@ -483,6 +601,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		}
 	}

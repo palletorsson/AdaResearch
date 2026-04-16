@@ -1,4 +1,4 @@
-extends Node3D
+extends Control
 
 @export var color_palette_resource: Resource = preload("res://algorithms/color/color_palettes.tres")
 

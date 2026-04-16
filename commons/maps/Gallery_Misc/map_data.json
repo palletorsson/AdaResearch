@@ -1,0 +1,709 @@
+{
+  "map_info": {
+    "name": "Gallery: Misc",
+    "lookup_name": "Gallery_Misc",
+    "description": "Showcase of 24 unplaced artifacts from Misc. Walk through to browse available artifacts.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 11,
+      "depth": 16,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "gallery",
+      "category": "gallery",
+      "estimated_time": "8-12 minutes",
+      "learning_objectives": [
+        "Browse 24 Misc artifacts",
+        "Identify artifacts for placement in curriculum maps",
+        "Observe artifact visual and interaction patterns"
+      ]
+    },
+    "title": "Misc Artifact Gallery"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Back",
+      "description": "Return to sequence",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "type": "spawn",
+      "properties": {
+        "height": 1.5
+      }
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.3,
+        0.3,
+        0.35
+      ]
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.5,
+      0.5,
+      0.55
+    ],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "color": [
+        1.0,
+        0.95,
+        0.9
+      ],
+      "energy": 0.8
+    }
+  },
+  "layers": {
+    "structure": [
+      [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "2"
+      ],
+      [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ]
+    ],
+    "utilities": [
+      [
+        " ",
+        "sp",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "t",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "interactables": [
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:affect theory visualization",
+        " ",
+        "request_note:0:1.5#text:algorithmic bias",
+        " ",
+        "request_note:0:1.5#text:algorithmic bias visualization",
+        " ",
+        "request_note:0:1.5#text:astar",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "affect_theory_visualization:0:-0.5",
+        " ",
+        "algorithmic_bias:0:-0.5",
+        " ",
+        "algorithmic_bias_visualization:0:-0.5",
+        " ",
+        "astar:0:-0.5",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:audio effects",
+        " ",
+        "request_note:0:1.5#text:booleans",
+        " ",
+        "request_note:0:1.5#text:booleanvariations",
+        " ",
+        "request_note:0:1.5#text:boyer moore",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "audio_effects:0:-0.5",
+        " ",
+        "booleans:0:-0.5",
+        " ",
+        "booleanvariations:0:-0.5",
+        " ",
+        "boyer_moore:0:-0.5",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:cave system",
+        " ",
+        "request_note:0:1.5#text:ecosystem simulation 2",
+        " ",
+        "request_note:0:1.5#text:fetishtorus",
+        " ",
+        "request_note:0:1.5#text:graph coloring",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "cave_system:0:-0.5",
+        " ",
+        "ecosystem_simulation_2:0:-0.5",
+        " ",
+        "fetishtorus:0:-0.5",
+        " ",
+        "graph_coloring:0:-0.5",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:kitbashing",
+        " ",
+        "request_note:0:1.5#text:levenshtein distance",
+        " ",
+        "request_note:0:1.5#text:newton raphson visualization",
+        " ",
+        "request_note:0:1.5#text:playground of joy",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "kitbashing:0:-0.5",
+        " ",
+        "levenshtein_distance:0:-0.5",
+        " ",
+        "newton_raphson_visualization:0:-0.5",
+        " ",
+        "playground_of_joy:0:-0.5",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:pokemon studio",
+        " ",
+        "request_note:0:1.5#text:remains to be seen",
+        " ",
+        "request_note:0:1.5#text:rorschach monitor",
+        " ",
+        "request_note:0:1.5#text:rorschach scan",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "pokemon_studio:0:-0.5",
+        " ",
+        "remains_to_be_seen:0:-0.5",
+        " ",
+        "rorschach_monitor:0:-0.5",
+        " ",
+        "rorschach_scan:0:-0.5",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:rsa visualization",
+        " ",
+        "request_note:0:1.5#text:running text display",
+        " ",
+        "request_note:0:1.5#text:simulated annealing",
+        " ",
+        "request_note:0:1.5#text:voronoi visualization",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "rsa_visualization:0:-0.5",
+        " ",
+        "running_text_display:0:-0.5",
+        " ",
+        "simulated_annealing:0:-0.5",
+        " ",
+        "voronoi_visualization:0:-0.5",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ]
+  }
+}

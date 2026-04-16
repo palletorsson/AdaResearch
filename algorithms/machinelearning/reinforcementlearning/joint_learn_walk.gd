@@ -15,7 +15,6 @@ extends Node3D
 ## Joint torques are discovered through exploration / exploitation,
 ## and a live HUD tracks episodes, distance, and reward.
 
-class_name RLCreature
 
 # ─── Body generation settings ─────────────────────────────────────────────────
 @export_group("Body Generation")

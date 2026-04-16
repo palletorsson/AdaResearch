@@ -39,7 +39,9 @@ func _ready() -> void:
 			body_entered.connect(_on_debug_body_entered)
 
 	# Get the original material
-	_original_material = $MeshInstance3D.get_active_material(0)
+	var mesh_inst = get_node_or_null("MeshInstance3D")
+	if mesh_inst:
+		_original_material = mesh_inst.get_active_material(0)
 
 	# Listen for when this object is picked up or dropped
 	picked_up.connect(_on_picked_up)

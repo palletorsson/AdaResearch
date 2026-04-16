@@ -18,9 +18,9 @@
 			"name": "2D in 3D Randomness Visualization",
 			"parameters": {
 				"footprint": [
-					4.0,
-					3.0,
-					1.0
+					4,
+					3,
+					1
 				],
 				"size_group": "room_scale"
 			},
@@ -58,6 +58,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"GaussianBlurCircle": {
@@ -78,9 +94,9 @@
 			"name": "Gaussian Blur Circle",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					1.0
+					2,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -115,6 +131,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"GaussianBlurShader": {
@@ -127,9 +159,9 @@
 				"randomness"
 			],
 			"footprint": [
-				3.0,
-				3.0,
-				1.0
+				3,
+				3,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "GaussianBlurShader",
@@ -178,6 +210,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"GaussianPaintSplatter": {
@@ -190,9 +238,9 @@
 				"randomness"
 			],
 			"footprint": [
-				4.0,
-				3.0,
-				4.0
+				4,
+				3,
+				4
 			],
 			"include_in_map_data": true,
 			"lookup_name": "GaussianPaintSplatter",
@@ -203,9 +251,9 @@
 			"name": "Gaussian Paint Splatter",
 			"parameters": {
 				"footprint": [
-					4.0,
-					3.0,
-					4.0
+					4,
+					3,
+					4
 				],
 				"size_group": "xlarge"
 			},
@@ -243,6 +291,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"MeltingBerniniScene": {
@@ -310,6 +374,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~1"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"NoiseColors3D": {
@@ -381,6 +461,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"RandomGaussianTexture": {
@@ -402,9 +498,9 @@
 			"name": "Random Gaussian Texture",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					1.0
+					2,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -442,6 +538,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"Random_Rotate_Random_XYZ": {
@@ -493,6 +605,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"RotateGridCubes": {
@@ -542,6 +670,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"VoxelNoiseROIs": {
@@ -563,9 +707,9 @@
 			"name": "Voxel Noise ROIs",
 			"parameters": {
 				"footprint": [
-					25.0,
-					25.0,
-					25.0
+					25,
+					25,
+					25
 				],
 				"size_group": "world_scale"
 			},
@@ -598,6 +742,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"WhiteNoiseGallery": {
@@ -668,6 +828,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"bell_alley": {
@@ -718,6 +894,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"blue_noise": {
@@ -738,9 +930,9 @@
 			"name": "Blue Noise",
 			"parameters": {
 				"footprint": [
-					21.0,
-					21.0,
-					1.0
+					21,
+					21,
+					1
 				],
 				"size_group": "world_scale"
 			},
@@ -783,6 +975,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"bubble_particles": {
@@ -842,6 +1050,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"bubbles_random": {
@@ -854,9 +1078,9 @@
 				"randomness"
 			],
 			"footprint": [
-				7.0,
-				2.0,
-				7.0
+				7,
+				2,
+				7
 			],
 			"include_in_map_data": true,
 			"lookup_name": "bubbles_random",
@@ -867,9 +1091,9 @@
 			"name": "Random Bubbles",
 			"parameters": {
 				"footprint": [
-					7.0,
-					2.0,
-					7.0
+					7,
+					2,
+					7
 				],
 				"size_group": "xlarge"
 			},
@@ -915,6 +1139,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"cloudvolume": {
@@ -935,9 +1175,9 @@
 			"name": "Cloud Volume",
 			"parameters": {
 				"footprint": [
-					5.0,
-					5.0,
-					5.0
+					5,
+					5,
+					5
 				],
 				"size_group": "environment"
 			},
@@ -973,6 +1213,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"coin_toss": {
@@ -1034,6 +1290,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~1152"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"simplest",
+					"dice_throw",
+					"faces",
+					"feeds",
+					"galton_board"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"crystal_random_walk_demo": {
@@ -1054,9 +1332,9 @@
 			"name": "Crystal Random Walk Demo",
 			"parameters": {
 				"footprint": [
-					7.0,
-					7.0,
-					7.0
+					7,
+					7,
+					7
 				],
 				"size_group": "environment"
 			},
@@ -1088,6 +1366,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"curl_noise_particles": {
@@ -1148,6 +1442,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~36"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"dice_throw": {
@@ -1210,6 +1520,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~192"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"contrasts",
+					"coin_toss",
+					"outcomes",
+					"feeds",
+					"slot_machine"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"digital_materiality_glitch": {
@@ -1223,9 +1555,9 @@
 				"randomness"
 			],
 			"footprint": [
-				11.0,
-				10007.0,
-				7.0
+				11,
+				10007,
+				7
 			],
 			"include_in_map_data": true,
 			"lookup_name": "digital_materiality_glitch",
@@ -1236,9 +1568,9 @@
 			"name": "Digital Materiality Glitch",
 			"parameters": {
 				"footprint": [
-					11.0,
-					10007.0,
-					7.0
+					11,
+					10007,
+					7
 				],
 				"size_group": "xlarge"
 			},
@@ -1278,6 +1610,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"distribution_visualization": {
@@ -1298,9 +1646,9 @@
 			"name": "Distribution Visualization",
 			"parameters": {
 				"footprint": [
-					7.0,
-					4.0,
-					2.0
+					7,
+					4,
+					2
 				],
 				"size_group": "environment"
 			},
@@ -1341,6 +1689,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"entropy_axiom": {
@@ -1353,9 +1717,9 @@
 				"randomness"
 			],
 			"footprint": [
-				3.0,
-				3.0,
-				8.0
+				3,
+				3,
+				8
 			],
 			"include_in_map_data": true,
 			"lookup_name": "entropy_axiom",
@@ -1408,6 +1772,27 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"anchors",
+					"random_butterflies",
+					"unlocks",
+					"entropy_jar"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"entropy_jar": {
@@ -1474,6 +1859,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~1152"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"entropy_axiom",
+					"conceptual",
+					"gradient",
+					"contrasts"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"env_one": {
@@ -1486,9 +1893,9 @@
 				"randomness"
 			],
 			"footprint": [
-				58.0,
-				31.0,
-				59.0
+				58,
+				31,
+				59
 			],
 			"include_in_map_data": true,
 			"lookup_name": "env_one",
@@ -1541,6 +1948,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~72"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"evolutionary_algorithms": {
@@ -1592,6 +2015,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"extreme_randomness": {
@@ -1646,6 +2085,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"galton_board": {
@@ -1708,6 +2163,28 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~384"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"contrasts",
+					"slot_machine",
+					"uniform",
+					"feeds",
+					"gaussian_random"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"gaussian_random": {
@@ -1756,6 +2233,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"hardware_entropy_decay": {
@@ -1767,9 +2260,9 @@
 				"randomness"
 			],
 			"footprint": [
-				6.0,
-				2.0,
-				2.0
+				6,
+				2,
+				2
 			],
 			"include_in_map_data": true,
 			"interaction": "immersive",
@@ -1830,6 +2323,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~3456"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"random_decay_multimesh",
+					"conceptual",
+					"contrasts",
+					"entropy_jar"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"height_random": {
@@ -1882,6 +2397,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"instancingscatter": {
@@ -1932,6 +2463,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~5000"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"marchingcubes_voxel_noise_demo": {
@@ -1953,9 +2500,9 @@
 			"name": "Marching Cubes Voxel Noise",
 			"parameters": {
 				"footprint": [
-					33.0,
-					33.0,
-					33.0
+					33,
+					33,
+					33
 				],
 				"size_group": "world_scale"
 			},
@@ -1993,6 +2540,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"monte_carlo_dartboard": {
@@ -2053,6 +2616,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~768"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"galton_board",
+					"integration",
+					"distribution",
+					"feeds"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"neon_wave_grid": {
@@ -2114,6 +2699,22 @@
 				},
 				"instance_strategy": "particles",
 				"vertex_estimate": "~100"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"noise_mixer": {
@@ -2175,6 +2776,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"noise_space": {
@@ -2239,6 +2856,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"noise_terrain": {
@@ -2307,6 +2940,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"precedes",
+					"terrain_generator",
+					"animated",
+					"displayed",
+					"domain"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"noise_terrain_with_blobs": {
@@ -2328,9 +2983,9 @@
 			"name": "Noise Terrain with Animated Blobs",
 			"parameters": {
 				"footprint": [
-					50.0,
-					25.0,
-					50.0
+					50,
+					25,
+					50
 				],
 				"size_group": "world_scale"
 			},
@@ -2341,7 +2996,23 @@
 				"noise",
 				"procedural",
 				"terrain"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			}
 		},
 		"noiselayers": {
 			"category": "procedural",
@@ -2406,6 +3077,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"implements",
+					"noisetorus",
+					"shows",
+					"abstractly",
+					"precedes"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"noisesphere": {
@@ -2435,7 +3128,23 @@
 			"size_group": "xlarge",
 			"tags": [
 				"procedural"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			}
 		},
 		"noisetext": {
 			"category": "procedural",
@@ -2456,9 +3165,9 @@
 			"name": "noisetext",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					1.0
+					2,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2468,7 +3177,23 @@
 				"3d",
 				"procedural",
 				"string"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			}
 		},
 		"noisetorus": {
 			"category": "procedural",
@@ -2509,7 +3234,23 @@
 				"color",
 				"geometry",
 				"procedural"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			}
 		},
 		"omoss": {
 			"category": "procedural",
@@ -2565,6 +3306,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~1536"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"particle_randomness_emergent": {
@@ -2621,6 +3378,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"particle_randomness_evolutionary": {
@@ -2669,6 +3442,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"particle_randomness_patterns": {
@@ -2727,6 +3516,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"particle_randomness_perlin": {
@@ -2785,6 +3590,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"particle_randomness_pure": {
@@ -2844,6 +3665,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"perlin_noise": {
@@ -2905,6 +3742,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"gradient",
+					"simplex",
+					"basis",
+					"shares"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"perlin_noise_clouds": {
@@ -2926,9 +3785,9 @@
 			"name": "Perlin Noise Clouds",
 			"parameters": {
 				"footprint": [
-					50.0,
-					21.0,
-					50.0
+					50,
+					21,
+					50
 				],
 				"size_group": "world_scale"
 			},
@@ -2971,6 +3830,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~16"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"perlin_noise_terrain": {
@@ -3034,6 +3909,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~800"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"perlinvolume": {
@@ -3054,9 +3945,9 @@
 			"name": "Perlin Volume",
 			"parameters": {
 				"footprint": [
-					5.0,
-					5.0,
-					5.0
+					5,
+					5,
+					5
 				],
 				"size_group": "environment"
 			},
@@ -3065,7 +3956,23 @@
 			"tags": [
 				"3d",
 				"procedural"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			}
 		},
 		"pheromone_terrain": {
 			"category": "emergence",
@@ -3077,9 +3984,9 @@
 				"emergence"
 			],
 			"footprint": [
-				20.0,
-				1.0,
-				20.0
+				20,
+				1,
+				20
 			],
 			"include_in_map_data": true,
 			"lookup_name": "pheromone_terrain",
@@ -3125,6 +4032,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~20000"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"feeds",
+					"depends",
+					"random",
+					"concept",
+					"contrasts"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"pickup_cube_placer": {
@@ -3174,6 +4103,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"pipe_dream": {
@@ -3186,9 +4131,9 @@
 				"randomness"
 			],
 			"footprint": [
-				3.0,
-				1.0,
-				5.0
+				3,
+				1,
+				5
 			],
 			"include_in_map_data": true,
 			"lookup_name": "pipe_dream",
@@ -3236,6 +4181,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~648"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"pixel_cloud": {
@@ -3248,9 +4209,9 @@
 				"emergence"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "pixel_cloud",
@@ -3261,9 +4222,9 @@
 			"name": "pixel_cloud",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3301,6 +4262,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"feeds",
+					"contrasts",
+					"random_walk_terrarium",
+					"unbounded",
+					"avoiding"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"plane_manipulator": {
@@ -3354,6 +4337,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~20000"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"plane_random": {
@@ -3409,6 +4408,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"pollock_3d": {
@@ -3463,6 +4478,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"pollock_painting_in_3d": {
@@ -3520,6 +4551,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"feeds",
+					"contrasts",
+					"monte_carlo_dartboard",
+					"aesthetic",
+					"computational"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"pool_hole_noise": {
@@ -3542,9 +4595,9 @@
 			"name": "Pool Hole Noise",
 			"parameters": {
 				"footprint": [
-					2.0,
-					1.0,
-					2.0
+					2,
+					1,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -3579,6 +4632,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"prng_crank_machine": {
@@ -3640,6 +4709,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"trng_vs_prng",
+					"feeds",
+					"slot_machine",
+					"understanding"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"probability_distributions_3d": {
@@ -3696,6 +4787,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"random_bell_curve": {
@@ -3708,9 +4815,9 @@
 				"randomness"
 			],
 			"footprint": [
-				20.0,
-				5.0,
-				21.0
+				20,
+				5,
+				21
 			],
 			"include_in_map_data": true,
 			"lookup_name": "random_bell_curve",
@@ -3758,6 +4865,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"random_butterflies": {
@@ -3814,6 +4937,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"random_color_book_page_collection": {
@@ -3834,9 +4973,9 @@
 			"name": "Random Color Book Page Collection",
 			"parameters": {
 				"footprint": [
-					9.0,
-					5.0,
-					2.0
+					9,
+					5,
+					2
 				],
 				"size_group": "environment"
 			},
@@ -3846,7 +4985,23 @@
 				"color",
 				"probability",
 				"procedural"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			}
 		},
 		"random_decay_multimesh": {
 			"category": "emergence",
@@ -3866,9 +5021,9 @@
 			"name": "Random Decay MultiMesh",
 			"parameters": {
 				"footprint": [
-					6.0,
-					5.0,
-					2.0
+					6,
+					5,
+					2
 				],
 				"size_group": "environment"
 			},
@@ -3915,6 +5070,28 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"rotation",
+					"without",
+					"destruction",
+					"feeds"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"random_decay_objects": {
@@ -3935,9 +5112,9 @@
 			"name": "Random Decay Objects",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					2.0
+					2,
+					2,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -3973,6 +5150,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"random_edge_profile": {
@@ -3985,9 +5178,9 @@
 				"randomness"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				1.0
+				1,
+				2,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "random_edge_profile",
@@ -4029,6 +5222,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"random_edge_profile_collection": {
@@ -4053,7 +5262,23 @@
 				"graph",
 				"probability",
 				"procedural"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			}
 		},
 		"random_gaussian_texture": {
 			"category": "emergence",
@@ -4073,9 +5298,9 @@
 			"name": "Random Gaussian Texture",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					1.0
+					2,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4112,6 +5337,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"random_number_book_page_1955": {
@@ -4133,9 +5374,9 @@
 			"name": "Random Number Book Page 1955",
 			"parameters": {
 				"footprint": [
-					2.0,
-					5.0,
-					1.0
+					2,
+					5,
+					1
 				],
 				"size_group": "environment"
 			},
@@ -4173,6 +5414,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"random_number_book_page_collection": {
@@ -4203,7 +5460,23 @@
 				"RAND_corporation",
 				"stock_ticker",
 				"freeze"
-			]
+			],
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"random_plants": {
 			"category": "procedural",
@@ -4255,6 +5528,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"random_transformations": {
@@ -4274,9 +5563,9 @@
 			"name": "Random Transformations",
 			"parameters": {
 				"footprint": [
-					17.0,
-					24.0,
-					21.0
+					17,
+					24,
+					21
 				],
 				"size_group": "world_scale"
 			},
@@ -4319,6 +5608,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"random_transformations_geometric": {
@@ -4340,9 +5645,9 @@
 			"name": "Random Transformations - Geometric",
 			"parameters": {
 				"footprint": [
-					11.0,
-					5.0,
-					11.0
+					11,
+					5,
+					11
 				],
 				"size_group": "world_scale"
 			},
@@ -4385,6 +5690,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"random_transformations_matrices": {
@@ -4406,9 +5727,9 @@
 			"name": "Random Transformations - Matrices",
 			"parameters": {
 				"footprint": [
-					11.0,
-					13.0,
-					11.0
+					11,
+					13,
+					11
 				],
 				"size_group": "world_scale"
 			},
@@ -4452,6 +5773,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"random_transformations_noise": {
@@ -4475,9 +5812,9 @@
 			"name": "Random Transformations - Noise",
 			"parameters": {
 				"footprint": [
-					11.0,
-					5.0,
-					11.0
+					11,
+					5,
+					11
 				],
 				"size_group": "world_scale"
 			},
@@ -4521,6 +5858,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"random_transformations_stochastic": {
@@ -4543,9 +5896,9 @@
 			"name": "Random Transformations - Stochastic",
 			"parameters": {
 				"footprint": [
-					11.0,
-					13.0,
-					11.0
+					11,
+					13,
+					11
 				],
 				"size_group": "world_scale"
 			},
@@ -4588,6 +5941,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"random_walk_128": {
@@ -4639,6 +6008,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"random_walk_collection": {
@@ -4651,9 +6036,9 @@
 				"randomness"
 			],
 			"footprint": [
-				6.0,
-				6.0,
-				1.0
+				6,
+				6,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "random_walk_collection",
@@ -4664,9 +6049,9 @@
 			"name": "Random Walk Grab Paper",
 			"parameters": {
 				"footprint": [
-					6.0,
-					6.0,
-					1.0
+					6,
+					6,
+					1
 				],
 				"size_group": "large"
 			},
@@ -4703,6 +6088,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"random_walk_grab_paper": {
@@ -4755,6 +6156,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"random_walk_leash": {
@@ -4817,6 +6234,28 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "~384"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"random_walk_terrarium",
+					"observed",
+					"embodied",
+					"depends"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"randomize_cubes_over_Z": {
@@ -4863,6 +6302,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"randomlines": {
@@ -4875,9 +6330,9 @@
 				"statistics"
 			],
 			"footprint": [
-				2.0,
-				2.0,
-				2.0
+				2,
+				2,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "randomlines",
@@ -4888,9 +6343,9 @@
 			"name": "Random Lines",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					2.0
+					2,
+					2,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -4930,6 +6385,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"randompoint": {
@@ -4984,6 +6455,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"contrasts",
+					"randompoints",
+					"noise",
+					"enforces",
+					"spacing"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"randompoints": {
@@ -5066,6 +6559,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"contrasts",
+					"randompoint",
+					"single",
+					"white",
+					"noise"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"randompoints_gaussian": {
@@ -5117,6 +6632,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"randompoints_uniform": {
@@ -5166,6 +6697,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"randomup": {
@@ -5214,6 +6761,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"rejection_sampling_demo": {
@@ -5270,6 +6833,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"remove_random": {
@@ -5321,6 +6900,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"rotate_grid_cubes": {
@@ -5384,6 +6979,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"rotate_random_y": {
@@ -5435,6 +7046,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"sculpt_one": {
@@ -5491,6 +7118,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~1536"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"shader_07_noise": {
@@ -5663,6 +7306,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"demonstrates",
+					"noise",
+					"distinct",
+					"noise",
+					"noiselayers"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"shannon_entropy_meter": {
@@ -5720,6 +7385,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"simplex_noise": {
@@ -5781,6 +7462,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"scene",
+					"architecture",
+					"different",
+					"algorithm"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"slot_machine": {
@@ -5842,6 +7545,28 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"galton_board",
+					"binomial",
+					"uniform",
+					"unlocks"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"spawn_randomcubes": {
@@ -5863,9 +7588,9 @@
 			"name": "spawn_randomcubes",
 			"parameters": {
 				"footprint": [
-					21.0,
-					6.0,
-					50.0
+					21,
+					6,
+					50
 				],
 				"size_group": "world_scale"
 			},
@@ -5903,6 +7628,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"ten_print": {
@@ -5923,9 +7664,9 @@
 			"name": "10 PRINT",
 			"parameters": {
 				"footprint": [
-					11.0,
-					3.0,
-					11.0
+					11,
+					3,
+					11
 				],
 				"size_group": "world_scale"
 			},
@@ -5966,6 +7707,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"ten_print_maze_3d": {
@@ -5978,9 +7735,9 @@
 				"emergence"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				2.0
+				1,
+				2,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "ten_print_maze_3d",
@@ -6031,6 +7788,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"tessellation_lattice_demo": {
@@ -6051,9 +7824,9 @@
 			"name": "Tessellation Lattice Demo",
 			"parameters": {
 				"footprint": [
-					17.0,
-					17.0,
-					17.0
+					17,
+					17,
+					17
 				],
 				"size_group": "world_scale"
 			},
@@ -6089,6 +7862,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"trng_vs_prng": {
@@ -6108,9 +7897,9 @@
 			"name": "TRNG vs PRNG",
 			"parameters": {
 				"footprint": [
-					17.0,
-					24.0,
-					21.0
+					17,
+					24,
+					21
 				],
 				"size_group": "world_scale"
 			},
@@ -6156,6 +7945,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"value_noise": {
@@ -6177,9 +7982,9 @@
 			"name": "Value Noise",
 			"parameters": {
 				"footprint": [
-					11.0,
-					6.0,
-					11.0
+					11,
+					6,
+					11
 				],
 				"size_group": "world_scale"
 			},
@@ -6212,6 +8017,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"voxelnoise": {
@@ -6269,6 +8090,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"perlin_terrain_sculptor",
+					"interactive",
+					"control",
+					"discretizes"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"walk_random": {
@@ -6317,6 +8160,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"walkingsphere": {
@@ -6376,6 +8235,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"worley_noise": {
@@ -6434,6 +8309,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		}
 	}

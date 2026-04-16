@@ -1,4 +1,4 @@
-extends Node3D
+extends Control
 class_name AlgorithmFlowChart3D
 
 # Visual settings — VR scale (meters)

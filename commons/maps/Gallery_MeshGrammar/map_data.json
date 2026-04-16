@@ -1,0 +1,709 @@
+{
+  "map_info": {
+    "name": "Gallery: MeshGrammar",
+    "lookup_name": "Gallery_MeshGrammar",
+    "description": "Showcase of 21 unplaced artifacts from MeshGrammar. Walk through to browse available artifacts.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 11,
+      "depth": 16,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "gallery",
+      "category": "gallery",
+      "estimated_time": "7-10 minutes",
+      "learning_objectives": [
+        "Browse 21 MeshGrammar artifacts",
+        "Identify artifacts for placement in curriculum maps",
+        "Observe artifact visual and interaction patterns"
+      ]
+    },
+    "title": "MeshGrammar Artifact Gallery"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Back",
+      "description": "Return to sequence",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "type": "spawn",
+      "properties": {
+        "height": 1.5
+      }
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.3,
+        0.3,
+        0.35
+      ]
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.5,
+      0.5,
+      0.55
+    ],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "color": [
+        1.0,
+        0.95,
+        0.9
+      ],
+      "energy": 0.8
+    }
+  },
+  "layers": {
+    "structure": [
+      [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "2"
+      ],
+      [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ]
+    ],
+    "utilities": [
+      [
+        " ",
+        "sp",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "t",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "interactables": [
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:mesh grammar",
+        " ",
+        "request_note:0:1.5#text:mesh grammar barnacle",
+        " ",
+        "request_note:0:1.5#text:mesh grammar blooming bulge",
+        " ",
+        "request_note:0:1.5#text:mesh grammar branching coral",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "mesh_grammar:0:-0.5",
+        " ",
+        "mesh_grammar_barnacle:0:-0.5",
+        " ",
+        "mesh_grammar_blooming_bulge:0:-0.5",
+        " ",
+        "mesh_grammar_branching_coral:0:-0.5",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:mesh grammar budding",
+        " ",
+        "request_note:0:1.5#text:mesh grammar ca growth",
+        " ",
+        "request_note:0:1.5#text:mesh grammar coral fingers",
+        " ",
+        "request_note:0:1.5#text:mesh grammar crumpled",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "mesh_grammar_budding:0:-0.5",
+        " ",
+        "mesh_grammar_ca_growth:0:-0.5",
+        " ",
+        "mesh_grammar_coral_fingers:0:-0.5",
+        " ",
+        "mesh_grammar_crumpled:0:-0.5",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:mesh grammar detailed bulge",
+        " ",
+        "request_note:0:1.5#text:mesh grammar extruded spire",
+        " ",
+        "request_note:0:1.5#text:mesh grammar inset pattern",
+        " ",
+        "request_note:0:1.5#text:mesh grammar inset towers",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "mesh_grammar_detailed_bulge:0:-0.5",
+        " ",
+        "mesh_grammar_extruded_spire:0:-0.5",
+        " ",
+        "mesh_grammar_inset_pattern:0:-0.5",
+        " ",
+        "mesh_grammar_inset_towers:0:-0.5",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:mesh grammar lsystem tree",
+        " ",
+        "request_note:0:1.5#text:mesh grammar nodule sphere",
+        " ",
+        "request_note:0:1.5#text:mesh grammar noise sculpture",
+        " ",
+        "request_note:0:1.5#text:mesh grammar petal flower",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "mesh_grammar_lsystem_tree:0:-0.5",
+        " ",
+        "mesh_grammar_nodule_sphere:0:-0.5",
+        " ",
+        "mesh_grammar_noise_sculpture:0:-0.5",
+        " ",
+        "mesh_grammar_petal_flower:0:-0.5",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:mesh grammar riveted",
+        " ",
+        "request_note:0:1.5#text:mesh grammar scale armor",
+        " ",
+        "request_note:0:1.5#text:mesh grammar seed",
+        " ",
+        "request_note:0:1.5#text:mesh grammar spike ball",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "mesh_grammar_riveted:0:-0.5",
+        " ",
+        "mesh_grammar_scale_armor:0:-0.5",
+        " ",
+        "mesh_grammar_seed:0:-0.5",
+        " ",
+        "mesh_grammar_spike_ball:0:-0.5",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:mesh grammar subdivided",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "mesh_grammar_subdivided:0:-0.5",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ]
+  }
+}

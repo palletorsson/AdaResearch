@@ -78,6 +78,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"markov_chains_tree": {
@@ -153,6 +169,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"variant",
+					"markov_chains",
+					"grammar_systems",
+					"system",
+					"trees"
+				],
+				"preferred_zone": "end"
 			}
 		}
 	},

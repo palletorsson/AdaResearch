@@ -131,20 +131,20 @@ func create_coordinate_axes() -> void:
 	
 	# X-axis (red)
 	var x_axis = MeshInstance3D.new()
-	var x_points = [Vector3(-2.0, 0, 0), Vector3(2.0, 0, 0)]
+	var x_points: Array[Vector3] = [Vector3(-2.0, 0, 0), Vector3(2.0, 0, 0)]
 	create_line_mesh(x_axis, x_points, Color.RED)
 	axes.add_child(x_axis)
-	
+
 	# Y-axis (green)
 	var y_axis = MeshInstance3D.new()
-	var y_points = [Vector3(0, -2.0, 0), Vector3(0, 2.0, 0)]
+	var y_points: Array[Vector3] = [Vector3(0, -2.0, 0), Vector3(0, 2.0, 0)]
 	create_line_mesh(y_axis, y_points, Color.GREEN)
 	axes.add_child(y_axis)
-	
+
 	# Z-axis (blue) - for multiple regression
 	if regression_type == RegressionType.MULTIPLE:
 		var z_axis = MeshInstance3D.new()
-		var z_points = [Vector3(0, 0, -2.0), Vector3(0, 0, 2.0)]
+		var z_points: Array[Vector3] = [Vector3(0, 0, -2.0), Vector3(0, 0, 2.0)]
 		create_line_mesh(z_axis, z_points, Color.BLUE)
 		axes.add_child(z_axis)
 	
@@ -979,7 +979,7 @@ func create_linear_line() -> void:
 	var y_min = slope * x_min + intercept
 	var y_max = slope * x_max + intercept
 	
-	var line_points = [Vector3(x_min, y_min, 0), Vector3(x_max, y_max, 0)]
+	var line_points: Array[Vector3] = [Vector3(x_min, y_min, 0), Vector3(x_max, y_max, 0)]
 	create_line_mesh(line_mesh, line_points, Color.RED)
 	regression_line.add_child(line_mesh)
 

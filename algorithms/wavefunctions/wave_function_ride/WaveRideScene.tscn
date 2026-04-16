@@ -51,7 +51,7 @@ range = 0.5
 
 [node name="PlayerBody" parent="XROrigin3D" instance=ExtResource("2_player_body")]
 
-[node name="MovementClimb" type="Node" parent="XROrigin3D"]
+[node name="MovementClimb" type="Node3D" parent="XROrigin3D"]
 script = ExtResource("3_climb_move")
 left_pickup = NodePath("../LeftHand/FunctionPickup")
 right_pickup = NodePath("../RightHand/FunctionPickup")

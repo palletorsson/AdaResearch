@@ -5,7 +5,6 @@
 # and data flow with live training metrics.
 # ============================================================================
 extends Node3D
-class_name TransformersShowcase
 
 # --- Runtime UI Controls ---
 @export_category("Sequence Settings")

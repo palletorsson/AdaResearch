@@ -1,5 +1,5 @@
 # TimelineController.gd - VR timeline controls using push buttons
-extends Node3D
+extends Control
 
 # Button references
 var record_button: Node3D

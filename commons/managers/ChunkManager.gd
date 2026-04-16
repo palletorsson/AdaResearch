@@ -207,10 +207,13 @@ func _process(delta: float) -> void:
 
 func _find_player() -> void:
 	# Follow the project's established pattern for finding the VR player
+	# Note: VR uses group "player_body", desktop also uses "player_body"
 	for candidate in [
+		get_tree().get_first_node_in_group("player_body"),
 		get_tree().get_first_node_in_group("player"),
 		get_tree().get_first_node_in_group("xr_origin"),
 		get_tree().current_scene.find_child("XROrigin3D", true, false) if get_tree().current_scene else null,
+		get_tree().current_scene.find_child("DesktopPlayer", true, false) if get_tree().current_scene else null,
 		get_tree().current_scene.find_child("Player", true, false) if get_tree().current_scene else null,
 	]:
 		if candidate is Node3D:
@@ -370,7 +373,9 @@ func _rebuild_population() -> void:
 	if coords.is_empty():
 		return
 
-	# Distribute population across chunks with distance-based density
+	# Distribute population across chunks with distance-based density.
+	# Strategy: sort chunks by distance to player (nearest first), then assign
+	# organisms using a fractional accumulator so small quotas don't round to 0.
 	var total_weight: float = 0.0
 	var chunk_tiers: Dictionary = {}  # Vector2i → tier
 
@@ -380,26 +385,46 @@ func _rebuild_population() -> void:
 		chunk_tiers[coord] = tier
 		total_weight += TIER_DENSITY[tier]
 
-	# Queue spawn jobs per chunk (no meshes built yet — just DNA + positions)
+	# Sort chunks nearest-to-player first so organisms cluster where visible
+	var sorted_coords := coords.duplicate()
+	sorted_coords.sort_custom(func(a: Vector2i, b: Vector2i) -> bool:
+		var ca := _chunk_center(a)
+		var cb := _chunk_center(b)
+		var da := Vector2(ca.x - _player_position.x, ca.z - _player_position.z).length_squared()
+		var db := Vector2(cb.x - _player_position.x, cb.z - _player_position.z).length_squared()
+		return da < db
+	)
+
+	# Queue spawn jobs per chunk using fractional accumulator
+	# (prevents rounding every chunk to 0 when population < chunk count)
 	var queued_total: int = 0
-	for coord in coords:
+	var fractional_acc: float = 0.0  # Carries fractional organisms between chunks
+
+	for coord in sorted_coords:
 		var tier: int = chunk_tiers[coord]
 		var center := _chunk_center(coord)
 
-		# Allocate organisms to this chunk proportional to its weight
-		var chunk_target: int = 0
-		if total_weight > 0.0:
-			chunk_target = roundi(target_total * TIER_DENSITY[tier] / total_weight)
-		chunk_target = maxi(chunk_target, 0)
-
 		# Create chunk data
-		var chunk := ChunkData.new()
-		chunk.coord = coord
-		chunk.center = center
-		chunk.current_lod_tier = tier
-		_chunks[coord] = chunk
+		var chunk_data := ChunkData.new()
+		chunk_data.coord = coord
+		chunk_data.center = center
+		chunk_data.current_lod_tier = tier
+		_chunks[coord] = chunk_data
 
-		if chunk_target == 0:
+		# Allocate organisms — accumulate fractional parts
+		var exact_share: float = 0.0
+		if total_weight > 0.0:
+			exact_share = float(target_total) * TIER_DENSITY[tier] / total_weight
+		fractional_acc += exact_share
+		var chunk_target: int = int(fractional_acc)
+		fractional_acc -= float(chunk_target)
+
+		if chunk_target <= 0:
+			continue
+
+		# Cap to remaining budget
+		chunk_target = mini(chunk_target, target_total - queued_total)
+		if chunk_target <= 0:
 			continue
 
 		# Distribute across kingdoms
@@ -426,9 +451,9 @@ func _rebuild_population() -> void:
 				var offset_x: float = rng.randf_range(-half_chunk, half_chunk)
 				var offset_z: float = rng.randf_range(-half_chunk, half_chunk)
 				var pos := Vector3(
-					chunk.center.x + offset_x,
+					chunk_data.center.x + offset_x,
 					_spawn_center.y,
-					chunk.center.z + offset_z
+					chunk_data.center.z + offset_z
 				)
 				# Reject outside spawn radius
 				var dist_xz := Vector2(pos.x - _spawn_center.x, pos.z - _spawn_center.z).length()

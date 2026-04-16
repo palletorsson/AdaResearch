@@ -1,4 +1,4 @@
-extends Node3D
+extends Node2D
 
 # @identity
 # essence: population(t+1) = reproduce(survive(eat(move(population(t))))) with DNA crossover and mutation at each birth — evolution in a closed box

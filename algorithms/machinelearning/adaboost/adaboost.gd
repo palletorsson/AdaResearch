@@ -8,7 +8,6 @@
 # relationships: Contrasts with RandomForest (sequential vs parallel). Both are ensemble methods but with opposite strategies — boosting vs bagging.
 # truth: AdaBoost is a conversation between failure and focus. Each mistake makes the next learner pay more attention to what was missed.
 
-class_name AdaBoostVisualization
 extends Node3D
 
 const N_SAMPLES := 60

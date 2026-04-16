@@ -170,7 +170,7 @@ func setup_convergence_chart() -> void:
 	
 	# π reference line
 	var pi_line = MeshInstance3D.new()
-	var pi_points = [Vector3(-1.0, 0.0, 0.01), Vector3(1.0, 0.0, 0.01)]
+	var pi_points: Array[Vector3] = [Vector3(-1.0, 0.0, 0.01), Vector3(1.0, 0.0, 0.01)]
 	create_line_mesh(pi_line, pi_points, Color.RED)
 	convergence_chart.add_child(pi_line)
 

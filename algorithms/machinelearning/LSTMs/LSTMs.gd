@@ -5,7 +5,6 @@
 # with live training metrics.
 # ============================================================================
 extends Node3D
-class_name LSTMShowcase
 
 # --- Runtime UI Controls ---
 @export_category("Sequence Settings")

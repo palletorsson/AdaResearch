@@ -55,8 +55,9 @@ func _setup_dropper() -> void:
 	dropper = DROPPER_SCENE.instantiate()
 	dropper.name = "BallDropper"
 	dropper.position = turret_position + dropper_offset
-	dropper.drop_interval = drop_interval
-	dropper.max_balls = max_balls
+	dropper.drop_interval_min = drop_interval
+	dropper.drop_interval_max = drop_interval * 1.5
+	dropper.total_balls = max_balls
 	dropper.auto_drop = auto_drop
 	dropper.initial_velocity = Vector3(0, 0, -0.5)
 	add_child(dropper)

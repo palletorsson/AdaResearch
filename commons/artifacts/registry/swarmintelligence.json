@@ -47,6 +47,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "~20000"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"ant_agent": {
@@ -97,6 +113,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"particle_swarm_optimization_legacy": {
@@ -152,6 +184,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~800"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"ant_colony_v2": {
@@ -214,6 +262,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"simpler",
+					"predecessor",
+					"quality",
+					"weighting",
+					"tandem"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"physarum_colony": {
@@ -276,6 +346,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"unlocks",
+					"ant_colony_optimization",
+					"contrasts",
+					"external",
+					"field"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"ant_colony_optimization": {
@@ -402,6 +494,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"particle_swarm_optimization": {
@@ -466,6 +574,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~25"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"boids_aquarium": {
@@ -542,6 +666,28 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"shares",
+					"rules",
+					"boid_manager",
+					"glass",
+					"scale"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"stigmergy_grid": {
@@ -599,6 +745,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"demonstrates",
+					"environmental",
+					"memory",
+					"mechanism",
+					"pathfinding"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"AntColonyV2": {
@@ -664,6 +832,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"simpler",
+					"predecessor",
+					"quality",
+					"weighting",
+					"tandem"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"fitness_landscape_politics": {
@@ -734,6 +924,28 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"placed",
+					"alongside",
+					"self_organizing_patterns",
+					"responds",
+					"critical"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"PhysarumColony": {
@@ -799,6 +1011,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"unlocks",
+					"ant_colony_optimization",
+					"contrasts",
+					"external",
+					"field"
+				],
+				"preferred_zone": "entry"
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-extends Node3D
+extends Control
 class_name SpaceDystopiaMain
 
 # The "App" for the Space Dystopia Album.

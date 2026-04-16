@@ -1,5 +1,5 @@
 # GameSoundMeter.gd - Universal sound meter system for game objects (VR/3D)
-extends Node3D
+extends Control
 class_name GameSoundMeter
 
 # Core configuration

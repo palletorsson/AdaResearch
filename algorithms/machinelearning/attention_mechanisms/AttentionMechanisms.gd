@@ -5,7 +5,6 @@
 # Supports live query index selection and attention falloff tuning.
 # ============================================================================
 extends Node3D
-class_name AttentionMechanismsShowcase
 
 # --- Token Settings ---
 @export_category("Token Settings")
@@ -188,7 +187,10 @@ func _update_query_and_keys() -> void:
 	if _input_tokens.get_child_count() == 0:
 		return
 
-	query_index = clamp(query_index, 0, _input_tokens.get_child_count() - 1)
+	var clamped := clampi(query_index, 0, _input_tokens.get_child_count() - 1)
+	if clamped != query_index:
+		query_index = clamped
+		return  # setter will re-call _update_query_and_keys
 	
 	_key_tokens.clear()
 	for i in range(_input_tokens.get_child_count()):

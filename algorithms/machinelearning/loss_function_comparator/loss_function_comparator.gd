@@ -17,7 +17,6 @@
 #   truth: the landscape is not given — it is authored
 
 extends Node3D
-class_name LossFunctionComparator
 
 # --- Configuration ---
 @export var terrain_resolution: int = 32

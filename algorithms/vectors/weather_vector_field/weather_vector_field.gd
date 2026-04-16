@@ -827,12 +827,6 @@ func _on_pressure_changed(value: float) -> void:
 	pressure_intensity = lerpf(0.0, 1.0, value)
 
 
-# ════════════════════════════════════════════════════════════════════
-#  BUTTON/SLIDER HELPERS
-# ════════════════════════════════════════════════════════════════════
-
-			slider.set_slider_text(text)
-
 func _exit_tree() -> void:
 	for child in get_children():
 		if not child.owner:

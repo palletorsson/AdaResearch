@@ -5,7 +5,6 @@ extends Node3D
 ## frequency, phase) through genetic algorithms. Fitness is measured by forward
 ## locomotion distance. The best creatures pass their genes to the next generation.
 
-class_name CarlsimsEvolution
 
 const POPULATION_SIZE: int = 20
 const GENERATION_DURATION: float = 20.0

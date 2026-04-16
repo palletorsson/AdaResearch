@@ -1,4 +1,4 @@
-extends Node3D
+extends Node2D
 
 ## Sine Oscillation — Expressive 3D VR Visualization
 ## Unit circle with rotating point, sine + cosine waves along X axis,

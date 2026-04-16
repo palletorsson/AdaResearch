@@ -10,9 +10,9 @@
 				"visual"
 			],
 			"footprint": [
-				8.0,
-				6.0,
-				6.0
+				8,
+				6,
+				6
 			],
 			"include_in_map_data": true,
 			"lookup_name": "Shader_Gallery",
@@ -23,9 +23,9 @@
 			"name": "Shader_Gallery",
 			"parameters": {
 				"footprint": [
-					8.0,
-					6.0,
-					6.0
+					8,
+					6,
+					6
 				],
 				"size_group": "environment"
 			},
@@ -33,7 +33,23 @@
 			"size_group": "environment",
 			"tags": [
 				"shader"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"alphahash": {
 			"category": "unknown",
@@ -44,9 +60,9 @@
 				"visual"
 			],
 			"footprint": [
-				2.0,
-				2.0,
-				2.0
+				2,
+				2,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "alphahash",
@@ -57,9 +73,9 @@
 			"name": "Alpha Hash",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					2.0
+					2,
+					2,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -98,6 +114,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"art_history_gallery": {
@@ -155,6 +187,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"buffer_geometry_particles": {
@@ -207,6 +255,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"buffergeometryparticles": {
@@ -218,9 +282,9 @@
 				"visual"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "buffergeometryparticles",
@@ -231,9 +295,9 @@
 			"name": "Buffer Geometry Particles",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -271,6 +335,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"carpet_cove_gallery": {
@@ -326,6 +406,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"clippingplanes": {
@@ -337,9 +433,9 @@
 				"visual"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "clippingplanes",
@@ -350,9 +446,9 @@
 			"name": "Clipping Planes",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -360,7 +456,23 @@
 			"size_group": "compact",
 			"tags": [
 				"shader"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			}
 		},
 		"cove_display": {
 			"category": "shaders",
@@ -409,6 +521,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"degrading_shader_demo": {
@@ -428,9 +556,9 @@
 			"name": "Degrading Shader Demo",
 			"parameters": {
 				"footprint": [
-					1.0,
-					5.0,
-					5.0
+					1,
+					5,
+					5
 				],
 				"size_group": "environment"
 			},
@@ -441,7 +569,23 @@
 				"decay",
 				"time",
 				"shaders"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"dynamic_cubemap": {
 			"category": "shaders",
@@ -495,6 +639,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~2560"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"dynamiccubemap": {
@@ -506,9 +666,9 @@
 				"visual"
 			],
 			"footprint": [
-				4.0,
-				4.0,
-				4.0
+				4,
+				4,
+				4
 			],
 			"include_in_map_data": true,
 			"lookup_name": "dynamiccubemap",
@@ -517,9 +677,9 @@
 			"name": "Dynamic Cube Map",
 			"parameters": {
 				"footprint": [
-					4.0,
-					4.0,
-					4.0
+					4,
+					4,
+					4
 				],
 				"size_group": "room_scale"
 			},
@@ -559,6 +719,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~2560"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"filter_screen": {
@@ -577,9 +753,9 @@
 			"name": "Filter Screen",
 			"parameters": {
 				"footprint": [
-					3.0,
-					2.0,
-					1.0
+					3,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -627,6 +803,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"flashlight_demo": {
@@ -638,9 +830,9 @@
 				"visual"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "flashlight_demo",
@@ -651,9 +843,9 @@
 			"name": "flashlight_demo",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -661,7 +853,23 @@
 			"size_group": "compact",
 			"tags": [
 				"shader"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"materials_transmission": {
 			"category": "shaders",
@@ -718,6 +926,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"materialstransmission": {
@@ -729,9 +953,9 @@
 				"visual"
 			],
 			"footprint": [
-				2.0,
-				2.0,
-				2.0
+				2,
+				2,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "materialstransmission",
@@ -740,9 +964,9 @@
 			"name": "Materials Transmission",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					2.0
+					2,
+					2,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -785,6 +1009,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"pattern_compositor": {
@@ -843,6 +1083,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"pixel_carpet_gallery": {
@@ -898,6 +1154,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"postprocessing_bloom": {
@@ -909,9 +1181,9 @@
 				"visual"
 			],
 			"footprint": [
-				2.0,
-				2.0,
-				2.0
+				2,
+				2,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "postprocessing_bloom",
@@ -922,9 +1194,9 @@
 			"name": "Post-Processing Bloom",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					2.0
+					2,
+					2,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -970,6 +1242,22 @@
 				},
 				"instance_strategy": "particles",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"queer_collection_gallery_a": {
@@ -988,9 +1276,9 @@
 			"name": "Queer Collection Gallery A",
 			"parameters": {
 				"footprint": [
-					9.0,
-					6.0,
-					7.0
+					9,
+					6,
+					7
 				],
 				"size_group": "environment"
 			},
@@ -1002,7 +1290,23 @@
 				"collection",
 				"art",
 				"shaders"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"science_screen": {
 			"category": "shaders",
@@ -1086,6 +1390,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"shader_01_shaping": {
@@ -1140,6 +1460,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"foundation",
+					"subsequent",
+					"shader",
+					"colors",
+					"shapes"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"shader_02_colors": {
@@ -1193,6 +1535,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"builds",
+					"shader_01_shaping",
+					"smoothstep",
+					"feeds",
+					"shader_03_shapes"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"shader_03_shapes": {
@@ -1246,6 +1610,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"depends",
+					"shader_01_shaping",
+					"smoothstep",
+					"aliasing",
+					"feeds"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"shader_04_matrices": {
@@ -1299,6 +1685,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"builds",
+					"shader_03_shapes",
+					"transforms",
+					"applied",
+					"shapes"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"shader_05_patterns": {
@@ -1358,6 +1766,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"synthesizes",
+					"shader_01",
+					"through",
+					"shader_04",
+					"gateway"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"shader_06_random": {
@@ -1413,6 +1843,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"provides",
+					"function",
+					"shader_07_noise",
+					"shader_08_cellularnoise",
+					"procedural"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"shader_07_noise": {
@@ -1466,6 +1918,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"shader_06_random",
+					"function",
+					"feeds",
+					"shader_09_fbm"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"shader_08_cellularnoise": {
@@ -1520,6 +1994,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"shader_07_noise",
+					"spatial",
+					"partitioning",
+					"connects"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"shader_09_fbm": {
@@ -1574,6 +2070,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"shader_07_noise",
+					"powers",
+					"every",
+					"procedural"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"shader_10_reactiondiffusion": {
@@ -1627,6 +2145,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"culmination",
+					"shader_06",
+					"through",
+					"shader_09",
+					"noise"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"shader_11_queerrubber": {
@@ -1686,6 +2226,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~3072"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"applies",
+					"shader",
+					"techniques",
+					"question",
+					"surface"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"shader_12_pinkextravaganza": {
@@ -1743,6 +2305,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~6144"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"finale",
+					"entire",
+					"shader",
+					"sequence",
+					"stacks"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"shader_arch_gallery": {
@@ -1799,6 +2383,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"culmination",
+					"patterngeneration",
+					"sequence",
+					"synthesizes",
+					"wallpaper"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"shader_bibliotek": {
@@ -1822,9 +2428,9 @@
 			"sequence": "shaders",
 			"spatial_footprint": {
 				"grid_cells": [
-					4.0,
-					1.0,
-					3.0
+					4,
+					1,
+					3
 				],
 				"size_group": "medium"
 			},
@@ -1867,6 +2473,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"substrates",
+					"artifact",
+					"indexes",
+					"dictionary",
+					"indexes"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"shader_gallery": {
@@ -1885,9 +2513,9 @@
 			"name": "Shader Gallery",
 			"parameters": {
 				"footprint": [
-					8.0,
-					6.0,
-					6.0
+					8,
+					6,
+					6
 				],
 				"size_group": "environment"
 			},
@@ -1897,7 +2525,23 @@
 				"gallery",
 				"showcase",
 				"shaders"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			}
 		},
 		"tiles_explained": {
 			"category": "shaders",
@@ -1916,9 +2560,9 @@
 			"name": "Tiles Explained",
 			"parameters": {
 				"footprint": [
-					4.0,
-					1.0,
-					4.0
+					4,
+					1,
+					4
 				],
 				"size_group": "room_scale"
 			},
@@ -1956,6 +2600,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"wall_cove": {
@@ -2007,6 +2667,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"wall_pattern_colorizer": {
@@ -2061,6 +2737,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"wall_pattern_gallery": {
@@ -2118,6 +2810,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"architectural",
+					"showcase",
+					"complement",
+					"pattern_maker_station",
+					"interactive"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"wall_shader_showcase": {
@@ -2172,6 +2886,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		}
 	}

@@ -341,13 +341,13 @@ func rotate_left(node: RBNode) -> void:
 	
 	right_child.parent = node.parent
 	
-	if node.parent == nil_node:
+	if not node.parent or node.parent == nil_node:
 		root = right_child
 	elif node == node.parent.left:
 		node.parent.left = right_child
 	else:
 		node.parent.right = right_child
-	
+
 	right_child.left = node
 	node.parent = right_child
 	
@@ -371,13 +371,13 @@ func rotate_right(node: RBNode) -> void:
 	
 	left_child.parent = node.parent
 	
-	if node.parent == nil_node:
+	if not node.parent or node.parent == nil_node:
 		root = left_child
 	elif node == node.parent.right:
 		node.parent.right = left_child
 	else:
 		node.parent.left = left_child
-	
+
 	left_child.right = node
 	node.parent = left_child
 	

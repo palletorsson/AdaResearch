@@ -1,5 +1,5 @@
 # timeline_demo.gd - Demo controller for audio timeline (VR/3D)
-extends Node3D
+extends Control
 
 # Demo audio sources
 var audio_generators: Array[AudioStreamPlayer] = []

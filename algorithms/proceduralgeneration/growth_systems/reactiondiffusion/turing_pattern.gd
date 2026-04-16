@@ -1,4 +1,4 @@
-extends Node3D
+extends Node2D
 
 # @identity
 # essence: dA/dt = D_a*nabla^2(A) - A*B^2 + f*(1-A); dB/dt = D_b*nabla^2(B) + A*B^2 - (k+f)*B

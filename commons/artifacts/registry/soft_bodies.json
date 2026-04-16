@@ -59,6 +59,28 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~36"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"mass_spring_damper",
+					"single",
+					"spring",
+					"springs",
+					"soft_bodies"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"flagdancer": {
@@ -119,6 +141,28 @@
 				},
 				"instance_strategy": "particles",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"cloth_straps",
+					"static",
+					"draping",
+					"animated"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"softbody3d": {
@@ -174,6 +218,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"squishy_ball_pit": {
@@ -222,6 +282,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"soft_trampoline": {
@@ -272,6 +348,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~200"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"breathing_room": {
@@ -301,7 +393,29 @@
 			"dev_themes": [
 				"physics",
 				"soft_body"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"static",
+					"demos",
+					"jelly_cube",
+					"cloth_straps"
+				],
+				"preferred_zone": "any"
+			}
 		},
 		"soft_mushrooms": {
 			"name": "Soft Mushrooms",
@@ -346,6 +460,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"jelly_cube",
+					"single",
+					"object",
+					"deformation"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"cloth_straps": {
@@ -402,6 +538,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"follows",
+					"jelly_cube",
+					"softmill",
+					"cloth",
+					"specific"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"revolving_joy_ride": {
@@ -462,6 +620,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"builds",
+					"jelly_cube",
+					"spring",
+					"intro",
+					"adding"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"pendulum_slap": {
@@ -519,6 +699,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"softbody_gallery_part1": {
@@ -579,6 +775,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "~128"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"softbody_gallery_part2": {
@@ -642,6 +854,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "~128"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"softbody_gallery_part3": {
@@ -705,6 +933,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "~128"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"rounded_softbody_test": {
@@ -742,7 +986,23 @@
 				"physics",
 				"soft_body",
 				"visualization"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			}
 		},
 		"jelly_cube": {
 			"name": "Jelly Cube",
@@ -813,6 +1073,28 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"introduces",
+					"spring",
+					"foundation",
+					"before",
+					"cloth_straps"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"softbodytest": {
@@ -878,6 +1160,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "~128"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"soft_mushroom": {
@@ -939,6 +1237,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"jelly_cube",
+					"single",
+					"object",
+					"deformation"
+				],
+				"preferred_zone": "entry"
 			}
 		}
 	}

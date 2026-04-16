@@ -1,11 +1,12 @@
-extends ScrollContainer
+extends VBoxContainer
 
 @onready var infoboard_check = $VBoxContainer/InfoboardCheck
 @onready var game_mode_option = $VBoxContainer/GameModeOption
 
 func _ready():
 	if GameManager:
-		infoboard_check.button_pressed = GameManager.show_infoboard
+		if infoboard_check:
+			infoboard_check.button_pressed = GameManager.show_infoboard
 		_setup_game_mode_option()
 
 func _setup_game_mode_option():

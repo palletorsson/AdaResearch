@@ -55,6 +55,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"serves",
+					"pattern_tile",
+					"variants",
+					"mirror",
+					"brick"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"pattern_tile_4x4": {
@@ -114,6 +136,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"serves",
+					"pattern_tile",
+					"variants",
+					"mirror",
+					"brick"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"pattern_tile_mirror": {
@@ -174,6 +218,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"serves",
+					"pattern_tile",
+					"variants",
+					"mirror",
+					"brick"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"pattern_tile_8x8": {
@@ -230,6 +296,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"serves",
+					"pattern_tile",
+					"variants",
+					"mirror",
+					"brick"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"pattern_tile_brick": {
@@ -290,6 +378,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"serves",
+					"pattern_tile",
+					"variants",
+					"mirror",
+					"brick"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"pattern_tile_herringbone": {
@@ -349,6 +459,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"serves",
+					"pattern_tile",
+					"variants",
+					"mirror",
+					"brick"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"index_visualizer": {
@@ -394,6 +526,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"pattern_tile_cube": {
@@ -442,6 +590,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"step_sequencer": {
@@ -493,6 +657,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"arrays",
+					"music",
+					"synthesis",
+					"house"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"step_sequencer_trap": {
@@ -547,6 +733,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"arrays",
+					"music",
+					"synthesis",
+					"house"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"step_sequencer_synth": {
@@ -598,6 +806,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"arrays",
+					"music",
+					"synthesis",
+					"house"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"step_sequencer_house": {
@@ -653,6 +883,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"arrays",
+					"music",
+					"synthesis",
+					"house"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"step_sequencer_pads": {
@@ -704,6 +956,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"arrays",
+					"music",
+					"synthesis",
+					"house"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"step_sequencer_kraftwerk": {
@@ -760,6 +1034,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"arrays",
+					"music",
+					"synthesis",
+					"house"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"step_sequencer_disco": {
@@ -811,6 +1107,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"arrays",
+					"music",
+					"synthesis",
+					"house"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"step_sequencer_ambient": {
@@ -866,6 +1184,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"arrays",
+					"music",
+					"synthesis",
+					"house"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"step_sequencer_jazz": {
@@ -921,6 +1261,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"arrays",
+					"music",
+					"synthesis",
+					"house"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"step_sequencer_chiptune": {
@@ -972,6 +1334,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"arrays",
+					"music",
+					"synthesis",
+					"house"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"step_sequencer_scifi": {
@@ -1022,6 +1406,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"arrays",
+					"music",
+					"synthesis",
+					"house"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"step_sequencer_cinematic": {
@@ -1072,6 +1478,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"arrays",
+					"music",
+					"synthesis",
+					"house"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"step_sequencer_breakbeat": {
@@ -1122,6 +1550,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"arrays",
+					"music",
+					"synthesis",
+					"house"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"step_sequencer_cosmic": {
@@ -1172,6 +1622,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"arrays",
+					"music",
+					"synthesis",
+					"house"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"step_sequencer_lofi": {
@@ -1224,6 +1696,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"paired",
+					"arrays",
+					"music",
+					"synthesis",
+					"house"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"binary_table": {
@@ -1273,6 +1767,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"pulsar_glass_tubes": {
@@ -1327,6 +1837,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~48"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"compact",
+					"pulsar_visualizer",
+					"which",
+					"shows",
+					"binary"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"pulsar_visualizer": {
@@ -1387,6 +1919,28 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"static",
+					"class",
+					"signal",
+					"generation",
+					"pairs"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"pulsar_compact": {
@@ -1444,6 +1998,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~48"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"compact",
+					"pulsar_visualizer",
+					"which",
+					"shows",
+					"binary"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"pulsar_lines": {
@@ -1501,6 +2077,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~48"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"compact",
+					"pulsar_visualizer",
+					"which",
+					"shows",
+					"binary"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"tiling_demo": {
@@ -1554,6 +2152,28 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"underlying",
+					"engine",
+					"contrasts",
+					"interactive",
+					"editing"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"facade_grammar_demo": {
@@ -1582,7 +2202,23 @@
 				"arrays",
 				"art",
 				"data_structures"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"vr_tile_editor": {
 			"name": "VR Tile Editor",
@@ -1632,6 +2268,28 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"wraps",
+					"editing",
+					"logic",
+					"vr_tile_editor_mirror",
+					"token"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"vr_tile_editor_mirror": {
@@ -1690,6 +2348,28 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"wraps",
+					"editing",
+					"logic",
+					"token",
+					"repeat"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"array_carpet": {
@@ -1744,6 +2424,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"wfc_tile_mosaic": {
@@ -1799,6 +2495,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"pattern_maker_station": {
@@ -1860,6 +2572,28 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"hands",
+					"synthesis",
+					"station",
+					"entire",
+					"patterngeneration"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"grid_editor_board": {
@@ -1919,6 +2653,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"grid_editor_board_3d": {
@@ -1978,6 +2728,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"grid_3d_capture": {
@@ -2024,6 +2790,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"facade_builder": {
@@ -2076,6 +2858,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"artifact",
+					"facades",
+					"sequence",
+					"alongside",
+					"facade_grammar_demo"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"row_3_x": {
@@ -2110,7 +2914,29 @@
 			],
 			"tags": [
 				"array"
-			]
+			],
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"architecture",
+					"column_3_z",
+					"oriented",
+					"along",
+					"instead"
+				],
+				"preferred_zone": "entry"
+			}
 		},
 		"column_3_z": {
 			"lookup_name": "column_3_z",
@@ -2144,7 +2970,29 @@
 			],
 			"tags": [
 				"array"
-			]
+			],
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"simpler",
+					"grid_2d_4x4",
+					"dimension",
+					"appears",
+					"alongside"
+				],
+				"preferred_zone": "entry"
+			}
 		},
 		"grid_2d_4x4": {
 			"lookup_name": "grid_2d_4x4",
@@ -2179,7 +3027,29 @@
 			"dev_themes": [
 				"arrays",
 				"data_structures"
-			]
+			],
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"column_3_z",
+					"dimensions",
+					"precedes",
+					"grid_3d_4x4x4"
+				],
+				"preferred_zone": "entry"
+			}
 		},
 		"grid_3d_4x4x4": {
 			"lookup_name": "grid_3d_4x4x4",
@@ -2213,7 +3083,29 @@
 			"dev_themes": [
 				"arrays",
 				"data_structures"
-			]
+			],
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"grid_2d_4x4",
+					"dimensions",
+					"final",
+					"spatial"
+				],
+				"preferred_zone": "entry"
+			}
 		},
 		"grid_snapper": {
 			"lookup_name": "grid_snapper",
@@ -2245,7 +3137,23 @@
 			"dev_themes": [
 				"arrays",
 				"data_structures"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"mondrian_run": {
 			"lookup_name": "mondrian_run",
@@ -2277,7 +3185,23 @@
 			],
 			"tags": [
 				"array"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"grid_editor_main": {
 			"lookup_name": "grid_editor_main",
@@ -2309,7 +3233,23 @@
 			"dev_themes": [
 				"arrays",
 				"data_structures"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"IndexVisualizer": {
 			"lookup_name": "IndexVisualizer",
@@ -2367,6 +3307,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"pompeii_mosaic_floor": {
@@ -2426,6 +3382,27 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"pattern_maker_station",
+					"editor",
+					"mosaic_editor",
+					"composition"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"octagon_square_floor": {
@@ -2487,6 +3464,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"pattern",
+					"pattern_maker_station",
+					"editor"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"tumbling_blocks_floor": {
@@ -2547,6 +3546,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"pattern",
+					"pattern_maker_station",
+					"editor"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"perspective_cubes_floor": {
@@ -2607,6 +3628,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"tumbling_blocks_floor",
+					"sibling",
+					"offset",
+					"pompeii_mosaic_floor",
+					"family"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"diamonds_squares_floor": {
@@ -2666,6 +3709,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"pattern",
+					"pattern_maker_station",
+					"editor"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"nested_diamonds_floor": {
@@ -2725,6 +3790,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"pattern",
+					"diamonds_squares_floor",
+					"single"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"swastika_meander_floor": {
@@ -2786,6 +3873,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"truchet",
+					"pattern",
+					"mosaic_palette"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"solomons_knot_floor": {
@@ -2847,6 +3956,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"truchet",
+					"swastika_meander_floor",
+					"sibling"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"stepped_zigzag_floor": {
@@ -2908,6 +4039,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"tumbling_blocks_floor",
+					"sibling",
+					"illusion",
+					"swastika_meander_floor",
+					"sibling"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"flower_of_life_floor": {
@@ -2970,6 +4123,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"pattern",
+					"pattern_maker_station",
+					"editor"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"polka_dot_field_floor": {
@@ -3030,6 +4205,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"pattern",
+					"pattern_maker_station",
+					"editor"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"meander_threshold_floor": {
@@ -3091,6 +4288,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"swastika_meander_floor",
+					"sibling",
+					"meander",
+					"polka_dot_field_floor",
+					"logic"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"pompeii_meander_floor": {
@@ -3127,6 +4346,26 @@
 					0
 				],
 				"size_group": "compact"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"san_michele_mosaic_floor",
+					"boundary",
+					"meander"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"exact_meander_floor": {
@@ -3188,6 +4427,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"meander_threshold_floor",
+					"similar",
+					"motif",
+					"different",
+					"proportions"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"double_snake_meander": {
@@ -3250,6 +4511,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"exact_meander_floor",
+					"single",
+					"approach",
+					"meander_threshold_floor",
+					"tiled"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"free_meander_floor": {
@@ -3312,6 +4595,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"exact_meander_floor",
+					"bitmap",
+					"approach",
+					"double_snake_meander",
+					"approach"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"mirror_snake_meander": {
@@ -3374,6 +4679,27 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"free_meander_floor",
+					"engine",
+					"exact_meander_floor",
+					"bitmap"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"braid_meander_floor": {
@@ -3437,6 +4763,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"double_snake_meander",
+					"approach",
+					"exact_meander_floor",
+					"bitmap",
+					"approach"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"star_rosette_floor": {
@@ -3498,6 +4846,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"pattern",
+					"pattern_maker_station",
+					"editor"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"floor_plan_space": {
@@ -3561,6 +4931,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 3,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"radial_mandala_floor": {
@@ -3622,6 +5008,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "around",
+				"wall_backing": false,
+				"orientation": "any",
+				"isolation": 2,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"pattern",
+					"mosaic_palette",
+					"shared"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"guilloche_border_floor": {
@@ -3683,6 +5091,27 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "around",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"border_motifs",
+					"library"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"honeycomb_hex_floor": {
@@ -3744,6 +5173,27 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pattern_maker_station",
+					"editor",
+					"mosaic_editor",
+					"composition"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"diamond_lattice_floor": {
@@ -3805,6 +5255,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"parent",
+					"pattern",
+					"nested_diamonds_floor",
+					"cousin"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"multi_zone_carpet_floor": {
@@ -3866,6 +5338,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "around",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"parent",
+					"pattern",
+					"border_motifs",
+					"shared"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"wave_scale_floor": {
@@ -3929,6 +5423,27 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"pattern_maker_station",
+					"editor",
+					"pompeii_mosaic_floor",
+					"sibling"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"pelta_shield_floor": {
@@ -3992,6 +5507,27 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"wave_scale_floor",
+					"sibling",
+					"pattern_maker_station",
+					"editor"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"basket_weave_floor": {
@@ -4053,6 +5589,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"pattern",
+					"pattern_maker_station",
+					"editor"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"herringbone_floor": {
@@ -4114,6 +5672,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"pattern",
+					"basket_weave_floor",
+					"cousin"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"labyrinth_floor": {
@@ -4175,6 +5755,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 3,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"parent",
+					"pattern",
+					"swastika_meander_floor",
+					"cousin"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"san_michele_mosaic_floor": {
@@ -4238,6 +5840,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"labyrinth_floor",
+					"labyrinth",
+					"logic",
+					"star_rosette_floor",
+					"rosette"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"tile_meander_floor": {
@@ -4300,6 +5924,27 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"san_michele_mosaic_floor",
+					"pompeii_meander_floor",
+					"boundary",
+					"meander"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"dense_carpet_floor": {
@@ -4362,6 +6007,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"pattern",
+					"polka_dot_field_floor",
+					"simpler"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"opus_sectile_floor": {
@@ -4424,6 +6091,27 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"pattern_maker_station",
+					"editor"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"spiral_mosaic_floor": {
@@ -4486,6 +6174,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"pattern",
+					"mosaic_palette",
+					"shared"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"interlocking_t_floor": {
@@ -4548,6 +6258,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"pattern",
+					"basket_weave_floor",
+					"weave"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"compass_rose_floor": {
@@ -4609,6 +6341,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "around",
+				"wall_backing": false,
+				"orientation": "any",
+				"isolation": 0,
+				"cluster_with": [
+					"radial_mandala_floor",
+					"sibling",
+					"radial",
+					"pattern",
+					"mosaic_palette"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"windmill_floor": {
@@ -4671,6 +6425,27 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "around",
+				"wall_backing": false,
+				"orientation": "any",
+				"isolation": 0,
+				"cluster_with": [
+					"pattern_maker_station",
+					"editor",
+					"mosaic_editor",
+					"composition"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"chain_link_floor": {
@@ -4734,6 +6509,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"flower_of_life_floor",
+					"sibling",
+					"pompeii_mosaic_floor",
+					"parent",
+					"pattern"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"pixel_invader_floor": {
@@ -4798,6 +6595,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"structural",
+					"sibling",
+					"glitch_grid_floor",
+					"aesthetic"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"neon_chevron_floor": {
@@ -4862,6 +6681,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pixel_invader_floor",
+					"aesthetic",
+					"sibling",
+					"rainbow_checker_floor",
+					"color"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"glitch_grid_floor": {
@@ -4926,6 +6767,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pixel_invader_floor",
+					"aesthetic",
+					"sibling",
+					"memphis_floor",
+					"scattered"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"memphis_floor": {
@@ -4990,6 +6853,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"glitch_grid_floor",
+					"scattered",
+					"aesthetic",
+					"cousin",
+					"neon_chevron_floor"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"rainbow_checker_floor": {
@@ -5054,6 +6939,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"neon_chevron_floor",
+					"color",
+					"cycling",
+					"sibling",
+					"pixel_cross_floor"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"pixel_cross_floor": {
@@ -5118,6 +7025,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pixel_invader_floor",
+					"pixel",
+					"sibling",
+					"rainbow_checker_floor",
+					"pattern"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"turtle_meander_floor": {
@@ -5181,6 +7110,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"pompeii_mosaic_floor",
+					"sibling",
+					"meander_threshold_floor",
+					"related",
+					"motif"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"space_filling_floor": {
@@ -5246,6 +7197,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~16"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"turtle_meander_floor",
+					"sibling",
+					"turtle",
+					"approach",
+					"labyrinth_floor"
+				],
+				"preferred_zone": "end"
 			}
 		},
 		"grid_model": {
@@ -5297,6 +7270,28 @@
 				},
 				"instance_strategy": "dynamic",
 				"vertex_estimate": "~200-2000"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"builds",
+					"grid_2d_4x4",
+					"array",
+					"labels",
+					"extends"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"pattern_tile_plate": {
@@ -5318,7 +7313,23 @@
 				"primitives",
 				"interactive",
 				"dieter_rams"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			}
 		},
 		"pattern_studio_plate": {
 			"name": "Pattern Studio Plate",
@@ -5348,7 +7359,23 @@
 				"art",
 				"data_structures",
 				"symmetry"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			}
 		}
 	}
 }

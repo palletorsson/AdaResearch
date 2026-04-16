@@ -103,7 +103,7 @@ func initialize_swarm() -> void:
 			randf_range(-search_space_size/2, search_space_size/2)
 		)
 		
-		var particle = Particle.new(start_pos)
+		var particle = Particles.new(start_pos)
 		particles.append(particle)
 		
 		# Create visual representation
@@ -112,7 +112,7 @@ func initialize_swarm() -> void:
 	# Initialize global best
 	evaluate_all_particles()
 
-func create_particle_visual(particle: Particle, index: int) -> void:
+func create_particle_visual(particle, index: int) -> void:
 	particle.mesh_instance = MeshInstance3D.new()
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.1
@@ -160,7 +160,7 @@ func update_swarm(delta: float) -> void:
 	if diversity_preservation > 0:
 		apply_diversity_preservation()
 
-func update_particle_velocity(particle: Particle) -> void:
+func update_particle_velocity(particle) -> void:
 	# Standard PSO velocity update with queer modifications
 	var r1 = randf()
 	var r2 = randf()
@@ -184,7 +184,7 @@ func update_particle_velocity(particle: Particle) -> void:
 	if particle.velocity.length() > max_velocity:
 		particle.velocity = particle.velocity.normalized() * max_velocity
 
-func update_particle_position(particle: Particle, delta: float) -> void:
+func update_particle_position(particle, delta: float) -> void:
 	particle.position += particle.velocity * delta
 	
 	# Boundary handling - reflective boundaries that preserve exploration
@@ -201,7 +201,7 @@ func update_particle_position(particle: Particle, delta: float) -> void:
 	if particle.trail_positions.size() > particle_trail_length:
 		particle.trail_positions.pop_front()
 
-func apply_non_binary_exploration(particle: Particle) -> void:
+func apply_non_binary_exploration(particle) -> void:
 	# Particles can exist in superposition of states, exploring multiple solutions
 	if randf() < mutation_rate * particle.identity_fluidity:
 		var quantum_jump = Vector3(
@@ -211,7 +211,7 @@ func apply_non_binary_exploration(particle: Particle) -> void:
 		) * search_space_size * 0.1
 		particle.position += quantum_jump
 
-func apply_collective_memory(particle: Particle) -> void:
+func apply_collective_memory(particle) -> void:
 	# Influence from collective memory of good solutions
 	if collective_memory.size() > 0 and randf() < particle.collective_influence:
 		var memory_solution = collective_memory[randi() % collective_memory.size()]
@@ -358,7 +358,7 @@ func update_visuals(_delta: float) -> void:
 			
 			# Pulse effect for high-performing diverse particles
 			if fitness_normalized > 0.7 and diversity_factor > 0.5:
-				brightness += sin(Time.get_time_dict_from_system()["unix"] * 4) * 0.2
+				brightness += sin(Time.get_unix_time_from_system() * 4.0) * 0.2
 			
 			material.albedo_color = Color.from_hsv(hue, saturation, brightness)
 			material.emission = material.albedo_color * 0.4

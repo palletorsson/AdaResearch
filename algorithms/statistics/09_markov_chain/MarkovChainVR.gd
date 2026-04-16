@@ -548,7 +548,7 @@ func update_info_display() -> void:
 		for i in range(num_states):
 			text += "%s: %.3f\n" % [state_names[i], state_probabilities[i]]
 	
-	if show_steady_state:
+	if show_steady_state and steady_state_probs.size() == num_states:
 		text += "\nSteady State:\n"
 		for i in range(num_states):
 			text += "%s: %.3f\n" % [state_names[i], steady_state_probs[i]]

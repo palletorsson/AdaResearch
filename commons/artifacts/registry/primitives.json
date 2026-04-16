@@ -9,9 +9,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "PipeLayout",
@@ -20,9 +20,9 @@
 			"name": "PipeLayout",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -60,6 +60,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"SDFDrawTool": {
@@ -71,9 +87,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "SDFDrawTool",
@@ -82,9 +98,9 @@
 			"name": "SDFDrawTool",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -118,6 +134,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"aalto_vase": {
@@ -129,9 +161,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "aalto_vase",
@@ -140,9 +172,9 @@
 			"name": "aalto_vase",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -178,6 +210,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"alessi_tree": {
@@ -189,9 +237,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "alessi_tree",
@@ -200,9 +248,9 @@
 			"name": "alessi_tree",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -238,6 +286,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"animated_cube": {
@@ -249,9 +313,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "animated_cube",
@@ -263,9 +327,9 @@
 			"name": "Animated Cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -273,7 +337,23 @@
 			"size_group": "compact",
 			"tags": [
 				"simulation"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			}
 		},
 		"animatedcubebuilder": {
 			"category": "unknown",
@@ -284,9 +364,9 @@
 				"primitives"
 			],
 			"footprint": [
-				3.0,
-				2.0,
-				2.0
+				3,
+				2,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "animatedcubebuilder",
@@ -297,14 +377,14 @@
 			"name": "animatedcubebuilder",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 3.0,
+					"radius": 3,
 					"type": "omni"
 				},
 				"size_group": "room_scale"
@@ -350,6 +430,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"triangle",
+					"faces",
+					"edges",
+					"concepts"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"arch": {
@@ -361,9 +463,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "arch",
@@ -372,9 +474,9 @@
 			"name": "Arch",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -410,6 +512,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"array_rotate": {
@@ -421,9 +539,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "array_rotate",
@@ -432,9 +550,9 @@
 			"name": "array_rotate",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -468,6 +586,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"array_scale": {
@@ -479,9 +613,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "array_scale",
@@ -490,9 +624,9 @@
 			"name": "array_scale",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -526,6 +660,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"array_translate": {
@@ -537,9 +687,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "array_translate",
@@ -548,9 +698,9 @@
 			"name": "array_translate",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -584,6 +734,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"array_visualizer": {
@@ -595,9 +761,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "array_visualizer",
@@ -609,9 +775,9 @@
 			"name": "Array Visualizer",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -619,7 +785,23 @@
 			"size_group": "compact",
 			"tags": [
 				"array"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			}
 		},
 		"arrow": {
 			"category": "unknown",
@@ -630,9 +812,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				4.0
+				1,
+				1,
+				4
 			],
 			"include_in_map_data": true,
 			"lookup_name": "arrow",
@@ -641,9 +823,9 @@
 			"name": "arrow",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					4.0
+					1,
+					1,
+					4
 				],
 				"size_group": "room_scale"
 			},
@@ -651,7 +833,23 @@
 			"size_group": "room_scale",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"bigframe": {
 			"category": "unknown",
@@ -662,9 +860,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "bigframe",
@@ -675,14 +873,14 @@
 			"name": "bigframe",
 			"parameters": {
 				"footprint": [
-					3.0,
-					1.0,
-					1.0
+					3,
+					1,
+					1
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 3.0,
+					"radius": 3,
 					"type": "omni"
 				},
 				"size_group": "compact"
@@ -722,6 +920,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"bipyramid": {
@@ -733,9 +947,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "bipyramid",
@@ -746,9 +960,9 @@
 			"name": "bipyramid",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -780,6 +994,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"bucket_of_tulips": {
@@ -791,9 +1021,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "bucket_of_tulips",
@@ -802,9 +1032,9 @@
 			"name": "Bucket of Tulips",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -812,7 +1042,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			}
 		},
 		"capsule": {
 			"category": "unknown",
@@ -823,9 +1069,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				3.0
+				1,
+				2,
+				3
 			],
 			"include_in_map_data": true,
 			"lookup_name": "capsule",
@@ -836,14 +1082,14 @@
 			"name": "capsule",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					1.0
+					1,
+					2,
+					1
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 2.0,
+					"radius": 2,
 					"type": "omni"
 				},
 				"size_group": "room_scale"
@@ -878,6 +1124,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"capsule_radials_rings": {
@@ -889,9 +1151,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "capsule_radials_rings",
@@ -902,14 +1164,14 @@
 			"name": "Capsule Radials Rings",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 2.0,
+					"radius": 2,
 					"type": "omni"
 				},
 				"size_group": "compact"
@@ -944,6 +1206,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sibling",
+					"torus_radials_rings",
+					"configurable",
+					"family",
+					"support"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"capsules": {
@@ -955,9 +1239,9 @@
 				"primitives"
 			],
 			"footprint": [
-				2.0,
-				2.0,
-				1.0
+				2,
+				2,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "capsules",
@@ -966,9 +1250,9 @@
 			"name": "capsules",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					1.0
+					2,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -976,7 +1260,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"cavetest": {
 			"category": "unknown",
@@ -987,9 +1287,9 @@
 				"primitives"
 			],
 			"footprint": [
-				44.0,
-				15.0,
-				9.0
+				44,
+				15,
+				9
 			],
 			"include_in_map_data": true,
 			"lookup_name": "cavetest",
@@ -998,9 +1298,9 @@
 			"name": "cavetest",
 			"parameters": {
 				"footprint": [
-					44.0,
-					15.0,
-					9.0
+					44,
+					15,
+					9
 				],
 				"size_group": "world_scale"
 			},
@@ -1035,6 +1335,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"chaos_attractor": {
@@ -1046,9 +1362,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "chaos_attractor",
@@ -1059,9 +1375,9 @@
 			"name": "Chaos Attractor",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -1069,7 +1385,23 @@
 			"size_group": "compact",
 			"tags": [
 				"chaos"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			}
 		},
 		"combine_capsule": {
 			"category": "unknown",
@@ -1080,9 +1412,9 @@
 				"primitives"
 			],
 			"footprint": [
-				2.0,
-				2.0,
-				2.0
+				2,
+				2,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "combine_capsule",
@@ -1091,9 +1423,9 @@
 			"name": "combine_capsule",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					2.0
+					2,
+					2,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -1132,6 +1464,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"combine_portals": {
@@ -1143,9 +1491,9 @@
 				"primitives"
 			],
 			"footprint": [
-				2.0,
-				2.0,
-				10.0
+				2,
+				2,
+				10
 			],
 			"include_in_map_data": true,
 			"lookup_name": "combine_portals",
@@ -1156,9 +1504,9 @@
 			"name": "combine_portals",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					10.0
+					2,
+					2,
+					10
 				],
 				"size_group": "environment"
 			},
@@ -1192,6 +1540,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"demonstrates",
+					"combine",
+					"instantiation",
+					"pattern",
+					"related"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"combine_primitives": {
@@ -1203,9 +1573,9 @@
 				"primitives"
 			],
 			"footprint": [
-				2.0,
-				1.0,
-				2.0
+				2,
+				1,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "combine_primitives",
@@ -1214,9 +1584,9 @@
 			"name": "combine_primitives",
 			"parameters": {
 				"footprint": [
-					2.0,
-					1.0,
-					2.0
+					2,
+					1,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -1225,7 +1595,23 @@
 			"tags": [
 				"geometry",
 				"procedural"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"combine_sphere": {
 			"category": "unknown",
@@ -1236,9 +1622,9 @@
 				"primitives"
 			],
 			"footprint": [
-				2.0,
-				2.0,
-				2.0
+				2,
+				2,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "combine_sphere",
@@ -1247,9 +1633,9 @@
 			"name": "combine_sphere",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					2.0
+					2,
+					2,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -1288,6 +1674,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"combine_torus": {
@@ -1299,9 +1701,9 @@
 				"primitives"
 			],
 			"footprint": [
-				2.0,
-				2.0,
-				2.0
+				2,
+				2,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "combine_torus",
@@ -1310,9 +1712,9 @@
 			"name": "combine_torus",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					2.0
+					2,
+					2,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -1352,6 +1754,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"combo_cube_visual": {
@@ -1363,9 +1781,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "combo_cube_visual",
@@ -1374,9 +1792,9 @@
 			"name": "Transformation Rotation Scale Cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -1410,6 +1828,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"concept_synthesizer": {
@@ -1421,9 +1855,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "concept_synthesizer",
@@ -1432,9 +1866,9 @@
 			"name": "Concept Synthesizer",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -1442,7 +1876,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"coordinate_axes_xy": {
 			"category": "unknown",
@@ -1453,9 +1903,9 @@
 				"primitives"
 			],
 			"footprint": [
-				2.0,
-				2.0,
-				3.0
+				2,
+				2,
+				3
 			],
 			"include_in_map_data": true,
 			"lookup_name": "coordinate_axes_xy",
@@ -1464,9 +1914,9 @@
 			"name": "coordinate_axes_xy",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					3.0
+					2,
+					2,
+					3
 				],
 				"size_group": "room_scale"
 			},
@@ -1474,7 +1924,23 @@
 			"size_group": "room_scale",
 			"tags": [
 				"sorting"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"coordinate_lines": {
 			"category": "unknown",
@@ -1485,9 +1951,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				2.0
+				1,
+				1,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "coordinate_lines",
@@ -1496,9 +1962,9 @@
 			"name": "coordinate_lines",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					2.0
+					1,
+					1,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -1506,7 +1972,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			}
 		},
 		"cross_line_puzzle": {
 			"category": "unknown",
@@ -1517,9 +1999,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				1.0
+				1,
+				2,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "cross_line_puzzle",
@@ -1528,9 +2010,9 @@
 			"name": "Cross Line Puzzle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					1.0
+					1,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -1562,6 +2044,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"cross_lines": {
@@ -1573,9 +2071,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				2.0
+				1,
+				2,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "cross_lines",
@@ -1584,9 +2082,9 @@
 			"name": "cross_lines",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					2.0
+					1,
+					2,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -1618,6 +2116,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"crystal": {
@@ -1629,9 +2143,9 @@
 				"primitives"
 			],
 			"footprint": [
-				2.0,
-				1.0,
-				2.0
+				2,
+				1,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "crystal",
@@ -1640,9 +2154,9 @@
 			"name": "crystal",
 			"parameters": {
 				"footprint": [
-					2.0,
-					1.0,
-					2.0
+					2,
+					1,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -1679,6 +2193,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"crystalcluster": {
@@ -1690,9 +2220,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "crystalcluster",
@@ -1701,9 +2231,9 @@
 			"name": "crystalcluster",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -1739,6 +2269,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"cube": {
@@ -1750,9 +2296,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "cube",
@@ -1763,9 +2309,9 @@
 			"name": "cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -1797,6 +2343,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"cube_lines": {
@@ -1808,9 +2370,9 @@
 				"primitives"
 			],
 			"footprint": [
-				2.0,
-				1.0,
-				3.0
+				2,
+				1,
+				3
 			],
 			"include_in_map_data": true,
 			"lookup_name": "cube_lines",
@@ -1821,9 +2383,9 @@
 			"name": "cube_lines",
 			"parameters": {
 				"footprint": [
-					2.0,
-					1.0,
-					3.0
+					2,
+					1,
+					3
 				],
 				"size_group": "room_scale"
 			},
@@ -1855,6 +2417,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"cube_projectile_spawner": {
@@ -1866,9 +2444,9 @@
 				"primitives"
 			],
 			"footprint": [
-				8.0,
-				8.0,
-				8.0
+				8,
+				8,
+				8
 			],
 			"include_in_map_data": true,
 			"lookup_name": "cube_projectile_spawner",
@@ -1877,9 +2455,9 @@
 			"name": "cube_projectile_spawner",
 			"parameters": {
 				"footprint": [
-					8.0,
-					8.0,
-					8.0
+					8,
+					8,
+					8
 				],
 				"size_group": "xlarge"
 			},
@@ -1917,6 +2495,22 @@
 				},
 				"instance_strategy": "particles",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"cube_scene": {
@@ -1930,9 +2524,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"gamwell_reference": "",
 			"include_in_map_data": true,
@@ -1956,9 +2550,9 @@
 			"name": "Basic Cube Scene",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -1973,7 +2567,23 @@
 				"interaction",
 				"geometry",
 				"2d"
-			]
+			],
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"cube_scene_drag_points": {
 			"category": "unknown",
@@ -1984,9 +2594,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				4.0
+				1,
+				1,
+				4
 			],
 			"include_in_map_data": true,
 			"lookup_name": "cube_scene_drag_points",
@@ -1995,9 +2605,9 @@
 			"name": "cube_scene_drag_points",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					4.0
+					1,
+					1,
+					4
 				],
 				"size_group": "room_scale"
 			},
@@ -2034,6 +2644,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"cube_with_shader": {
@@ -2045,9 +2671,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "cube_with_shader",
@@ -2056,9 +2682,9 @@
 			"name": "Cube with shader",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2096,6 +2722,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"cylinder": {
@@ -2107,9 +2749,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "cylinder",
@@ -2118,9 +2760,9 @@
 			"name": "cylinder",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2129,7 +2771,23 @@
 			"tags": [
 				"2d",
 				"sorting"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"cylinder_low": {
 			"category": "unknown",
@@ -2140,9 +2798,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "cylinder_low",
@@ -2151,9 +2809,9 @@
 			"name": "cylinder_low",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2187,6 +2845,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"cylinder_mid": {
@@ -2198,9 +2872,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "cylinder_mid",
@@ -2209,9 +2883,9 @@
 			"name": "cylinder_mid",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2245,6 +2919,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"cylinder_radials_rings": {
@@ -2256,9 +2946,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "cylinder_radials_rings",
@@ -2267,9 +2957,9 @@
 			"name": "Cylinder Radials Rings",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2304,6 +2994,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"dgrid": {
@@ -2315,9 +3021,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "dgrid",
@@ -2328,9 +3034,9 @@
 			"name": "DÃ¼rer Grid",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2365,6 +3071,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~16"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"diamond": {
@@ -2376,9 +3098,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "diamond",
@@ -2387,9 +3109,9 @@
 			"name": "diamond",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2426,6 +3148,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"diamonds": {
@@ -2438,9 +3176,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "diamonds",
@@ -2451,14 +3189,14 @@
 			"name": "diamonds",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					1.0
+					1,
+					2,
+					1
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 3.0,
+					"radius": 3,
 					"type": "omni"
 				},
 				"size_group": "compact"
@@ -2492,6 +3230,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"octahedron",
+					"sibling",
+					"combine_portals",
+					"combines",
+					"category"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"dimension_lens": {
@@ -2503,9 +3263,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "dimension_lens",
@@ -2514,9 +3274,9 @@
 			"name": "Dimension Lens",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2524,7 +3284,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"dodecahedron": {
 			"category": "unknown",
@@ -2535,9 +3311,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "dodecahedron",
@@ -2548,9 +3324,9 @@
 			"name": "dodecahedron",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2585,6 +3361,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"dome": {
@@ -2596,9 +3388,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				21.0,
-				11.0
+				1,
+				21,
+				11
 			],
 			"include_in_map_data": true,
 			"lookup_name": "dome",
@@ -2610,9 +3402,9 @@
 			"name": "dome",
 			"parameters": {
 				"footprint": [
-					1.0,
-					21.0,
-					11.0
+					1,
+					21,
+					11
 				],
 				"size_group": "world_scale"
 			},
@@ -2620,7 +3412,23 @@
 			"size_group": "world_scale",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"doublestick": {
 			"category": "unknown",
@@ -2631,9 +3439,9 @@
 				"primitives"
 			],
 			"footprint": [
-				2.0,
-				1.0,
-				2.0
+				2,
+				1,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "doublestick",
@@ -2642,9 +3450,9 @@
 			"name": "doublestick",
 			"parameters": {
 				"footprint": [
-					2.0,
-					1.0,
-					2.0
+					2,
+					1,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -2681,6 +3489,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"draw_dot": {
@@ -2692,9 +3516,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "draw_dot",
@@ -2705,14 +3529,14 @@
 			"name": "draw_dot",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 1.0,
+					"radius": 1,
 					"type": "omni"
 				},
 				"size_group": "compact"
@@ -2752,6 +3576,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"contrasts",
+					"static_point",
+					"fixed",
+					"dynamic",
+					"pairs"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"draw_dot_time_domain": {
@@ -2763,9 +3609,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "draw_dot_time_domain",
@@ -2776,9 +3622,9 @@
 			"name": "draw_dot_time_domain",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2812,6 +3658,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"draw_dot",
+					"contrasts",
+					"manual",
+					"algorithmic"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"draw_triangle_faces": {
@@ -2823,9 +3691,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "draw_triangle_faces",
@@ -2836,14 +3704,14 @@
 			"name": "draw_triangle_faces",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 3.0,
+					"radius": 3,
 					"type": "omni"
 				},
 				"size_group": "compact"
@@ -2883,6 +3751,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"draw_dot",
+					"prerequisite",
+					"understanding",
+					"triangle"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"dynamic_rock": {
@@ -2894,9 +3784,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "dynamic_rock",
@@ -2905,9 +3795,9 @@
 			"name": "Dynamic Rock",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2946,6 +3836,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"editable_bezier": {
@@ -2957,9 +3863,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "editable_bezier",
@@ -2968,9 +3874,9 @@
 			"name": "editable_bezier",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3009,6 +3915,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"editable_catmull_rom": {
@@ -3020,9 +3942,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "editable_catmull_rom",
@@ -3031,9 +3953,9 @@
 			"name": "editable_catmull_rom",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3072,6 +3994,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"editable_curve": {
@@ -3083,9 +4021,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "editable_curve",
@@ -3094,9 +4032,9 @@
 			"name": "editable_curve",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3135,6 +4073,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"elevator_platform": {
@@ -3147,9 +4101,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "elevator_platform",
@@ -3158,9 +4112,9 @@
 			"name": "Elevator Platform",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3199,6 +4153,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"falling_cube": {
@@ -3210,9 +4180,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "falling_cube",
@@ -3221,9 +4191,9 @@
 			"name": "Falling Cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3231,7 +4201,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"folded_strip": {
 			"category": "unknown",
@@ -3242,9 +4228,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "folded_strip",
@@ -3255,14 +4241,14 @@
 			"name": "1.2: folded_strip",
 			"parameters": {
 				"footprint": [
-					3.0,
-					1.0,
-					1.0
+					3,
+					1,
+					1
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 3.0,
+					"radius": 3,
 					"type": "omni"
 				},
 				"size_group": "compact"
@@ -3300,6 +4286,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"triangleprofiles",
+					"shows",
+					"strip",
+					"topology"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"foldedpaper": {
@@ -3311,9 +4319,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "foldedpaper",
@@ -3322,9 +4330,9 @@
 			"name": "1.2: A foldedpaper",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3364,6 +4372,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"folding_cube": {
@@ -3375,9 +4399,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "folding_cube",
@@ -3386,9 +4410,9 @@
 			"name": "folding_cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3423,6 +4447,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"folding_cube_interactive": {
@@ -3434,9 +4474,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "folding_cube_interactive",
@@ -3445,9 +4485,9 @@
 			"name": "folding_cube_interactive",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3487,6 +4527,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"folding_past": {
@@ -3498,9 +4554,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "folding_past",
@@ -3512,14 +4568,14 @@
 			"name": "Folding Past",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					3.0
+					1,
+					1,
+					3
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 3.0,
+					"radius": 3,
 					"type": "omni"
 				},
 				"size_group": "compact"
@@ -3556,6 +4612,22 @@
 				},
 				"instance_strategy": "multimesh",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"geometric_crystal": {
@@ -3567,9 +4639,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "geometric_crystal",
@@ -3578,9 +4650,9 @@
 			"name": "Geometric Crystal",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3588,7 +4660,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			}
 		},
 		"glass_planes_2_5d": {
 			"category": "unknown",
@@ -3599,9 +4687,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "glass_planes_2_5d",
@@ -3610,9 +4698,9 @@
 			"name": "glass_planes_2_5d",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3650,6 +4738,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"glass_planes_empty": {
@@ -3661,9 +4765,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "glass_planes_empty",
@@ -3672,9 +4776,9 @@
 			"name": "glass_planes_empty",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3711,6 +4815,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"grab_aalto_vase": {
@@ -3722,9 +4842,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_aalto_vase",
@@ -3733,9 +4853,9 @@
 			"name": "grab_aalto_vase",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3771,6 +4891,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"grab_alessi_tree": {
@@ -3782,9 +4918,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_alessi_tree",
@@ -3793,9 +4929,9 @@
 			"name": "grab_alessi_tree",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3830,6 +4966,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"grab_cube": {
@@ -3841,9 +4993,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_cube",
@@ -3852,9 +5004,9 @@
 			"name": "grab_cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3888,6 +5040,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"grab_cube_show": {
@@ -3899,9 +5067,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_cube_show",
@@ -3910,9 +5078,9 @@
 			"name": "grab_cube_show",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3947,6 +5115,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"grab_dodecahedron": {
@@ -3958,9 +5142,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_dodecahedron",
@@ -3969,9 +5153,9 @@
 			"name": "grab_dodecahedron",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4007,6 +5191,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"grab_icosahedron": {
@@ -4018,9 +5218,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_icosahedron",
@@ -4029,9 +5229,9 @@
 			"name": "grab_icosahedron",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4065,6 +5265,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"grab_line": {
@@ -4076,9 +5292,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_line",
@@ -4087,9 +5303,9 @@
 			"name": "grab_line",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4129,6 +5345,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"grab_line_drawer": {
@@ -4140,9 +5372,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_line_drawer",
@@ -4151,9 +5383,9 @@
 			"name": "grab_line_drawer",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4194,6 +5426,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"grab_line_music": {
@@ -4206,9 +5454,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_line_music",
@@ -4217,9 +5465,9 @@
 			"name": "grab_line_music",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4258,6 +5506,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"grab_line_pusher": {
@@ -4269,9 +5533,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_line_pusher",
@@ -4280,9 +5544,9 @@
 			"name": "grab_line_pusher",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4319,6 +5583,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"grab_long_stick": {
@@ -4330,9 +5610,9 @@
 				"primitives"
 			],
 			"footprint": [
-				3.0,
-				1.0,
-				1.0
+				3,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_long_stick",
@@ -4343,9 +5623,9 @@
 			"name": "grab_long_stick",
 			"parameters": {
 				"footprint": [
-					3.0,
-					1.0,
-					1.0
+					3,
+					1,
+					1
 				],
 				"size_group": "room_scale"
 			},
@@ -4379,6 +5659,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"grab_octahedron": {
@@ -4390,9 +5686,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_octahedron",
@@ -4403,9 +5699,9 @@
 			"name": "grab_octahedron",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4439,6 +5735,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sibling",
+					"grab_trihedron",
+					"origin",
+					"spinning",
+					"decoration"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"grab_rainbow_stick": {
@@ -4450,9 +5768,9 @@
 				"primitives"
 			],
 			"footprint": [
-				3.0,
-				1.0,
-				1.0
+				3,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_rainbow_stick",
@@ -4463,9 +5781,9 @@
 			"name": "grab_rainbow_stick",
 			"parameters": {
 				"footprint": [
-					3.0,
-					1.0,
-					1.0
+					3,
+					1,
+					1
 				],
 				"size_group": "room_scale"
 			},
@@ -4499,6 +5817,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"grab_sphere_point": {
@@ -4510,9 +5844,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_sphere_point",
@@ -4523,9 +5857,9 @@
 			"name": "grab_sphere_point",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4561,6 +5895,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"grab_sphere_point_color_with_text": {
@@ -4572,9 +5922,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_sphere_point_color_with_text",
@@ -4583,9 +5933,9 @@
 			"name": "grab_sphere_point_color_with_text",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4621,6 +5971,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"grab_sphere_point_snap": {
@@ -4632,9 +5998,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_sphere_point_snap",
@@ -4645,9 +6011,9 @@
 			"name": "grab_sphere_point_snap",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4684,6 +6050,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sibling",
+					"draw_dot",
+					"continuous",
+					"discrete",
+					"foundation"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"grab_sphere_point_with_color": {
@@ -4695,9 +6083,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				2.0
+				1,
+				1,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_sphere_point_with_color",
@@ -4706,9 +6094,9 @@
 			"name": "grab_sphere_point_with_color_text",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					2.0
+					1,
+					1,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -4743,6 +6131,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"grab_sphere_point_with_text": {
@@ -4754,9 +6158,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_sphere_point_with_text",
@@ -4765,9 +6169,9 @@
 			"name": "grab_sphere_point_with_text",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4802,6 +6206,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"grab_tetrahedron": {
@@ -4813,9 +6233,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_tetrahedron",
@@ -4824,9 +6244,9 @@
 			"name": "grab_tetrahedron",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4860,6 +6280,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"grab_trihedron": {
@@ -4871,9 +6307,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grab_trihedron",
@@ -4884,9 +6320,9 @@
 			"name": "grab_trihedron",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4922,6 +6358,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sibling",
+					"grab_octahedron",
+					"teach",
+					"polyhedra",
+					"button"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"grid_lines": {
@@ -4933,9 +6391,9 @@
 				"primitives"
 			],
 			"footprint": [
-				5.0,
-				6.0,
-				5.0
+				5,
+				6,
+				5
 			],
 			"include_in_map_data": true,
 			"lookup_name": "grid_lines",
@@ -4946,9 +6404,9 @@
 			"name": "grid_lines",
 			"parameters": {
 				"footprint": [
-					5.0,
-					6.0,
-					5.0
+					5,
+					6,
+					5
 				],
 				"size_group": "environment"
 			},
@@ -4985,6 +6443,26 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"subscribes",
+					"player_trace",
+					"primitive"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"halocube": {
@@ -4996,9 +6474,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "halocube",
@@ -5009,9 +6487,9 @@
 			"name": "Halo Cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -5047,6 +6525,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"hole_with_cones": {
@@ -5058,9 +6552,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "hole_with_cones",
@@ -5071,14 +6565,14 @@
 			"name": "Hole With Cones",
 			"parameters": {
 				"footprint": [
-					3.0,
-					1.0,
-					3.0
+					3,
+					1,
+					3
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 3.0,
+					"radius": 3,
 					"type": "omni"
 				},
 				"size_group": "compact"
@@ -5112,6 +6606,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~576"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"demonstrates",
+					"difference",
+					"concept",
+					"precursor",
+					"boolean_tunnel"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"hollowrock": {
@@ -5123,9 +6639,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "hollowrock",
@@ -5134,9 +6650,9 @@
 			"name": "Hollow Rock",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -5174,6 +6690,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"horizon_plumb_lines": {
@@ -5185,9 +6717,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "horizon_plumb_lines",
@@ -5196,9 +6728,9 @@
 			"name": "horizon_plumb_lines",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -5206,7 +6738,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"icosahedron": {
 			"category": "unknown",
@@ -5217,9 +6765,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "icosahedron",
@@ -5230,9 +6778,9 @@
 			"name": "icosahedron",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -5265,6 +6813,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"interactive_point_origin": {
@@ -5276,9 +6840,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "interactive_point_origin",
@@ -5289,14 +6853,14 @@
 			"name": "1.0.1 Interactive Point with Origin Line",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 2.0,
+					"radius": 2,
 					"type": "omni"
 				},
 				"size_group": "compact"
@@ -5336,6 +6900,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~36"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"origin",
+					"alongside",
+					"static_point",
+					"pickable"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"interactivetriangle": {
@@ -5347,9 +6933,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				6.0
+				1,
+				2,
+				6
 			],
 			"include_in_map_data": true,
 			"lookup_name": "interactivetriangle",
@@ -5360,14 +6946,14 @@
 			"name": "1.2: A triangle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					1.0
+					1,
+					2,
+					1
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 1.0,
+					"radius": 1,
 					"type": "omni"
 				},
 				"size_group": "environment"
@@ -5407,6 +6993,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"lighter",
+					"sibling",
+					"alongside",
+					"other",
+					"primitives"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"knowledge_prism": {
@@ -5418,9 +7026,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "knowledge_prism",
@@ -5429,9 +7037,9 @@
 			"name": "Knowledge Prism",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -5439,7 +7047,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			}
 		},
 		"kochsnowflake": {
 			"category": "unknown",
@@ -5450,9 +7074,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "kochsnowflake",
@@ -5461,9 +7085,9 @@
 			"name": "kochsnowflake",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -5497,6 +7121,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"laser_measure": {
@@ -5508,9 +7148,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				2.0
+				1,
+				1,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "laser_measure",
@@ -5521,9 +7161,9 @@
 			"name": "laser_measure",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					2.0
+					1,
+					1,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -5563,6 +7203,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"lefttriangle": {
@@ -5574,9 +7230,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "lefttriangle",
@@ -5585,9 +7241,9 @@
 			"name": "lefttriangle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -5623,6 +7279,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"level_entrance": {
@@ -5634,9 +7306,9 @@
 				"primitives"
 			],
 			"footprint": [
-				2.0,
-				4.0,
-				2.0
+				2,
+				4,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "level_entrance",
@@ -5645,9 +7317,9 @@
 			"name": "Level Entrance",
 			"parameters": {
 				"footprint": [
-					2.0,
-					4.0,
-					2.0
+					2,
+					4,
+					2
 				],
 				"size_group": "room_scale"
 			},
@@ -5682,6 +7354,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"light_sphere": {
@@ -5693,9 +7381,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "light_sphere",
@@ -5708,9 +7396,9 @@
 			"name": "light_sphere",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -5718,7 +7406,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"lightrod": {
 			"category": "unknown",
@@ -5729,9 +7433,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "lightrod",
@@ -5742,9 +7446,9 @@
 			"name": "Light Rod",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -5780,6 +7484,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"line": {
@@ -5791,9 +7511,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				2.0
+				1,
+				1,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "line",
@@ -5804,14 +7524,14 @@
 			"name": "1.1 A Line",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 2.0,
+					"radius": 2,
 					"type": "omni"
 				},
 				"size_group": "compact"
@@ -5854,6 +7574,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~16"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"static_points",
+					"unlocks",
+					"polygon",
+					"primitives"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"line_collection": {
@@ -5865,9 +7607,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "line_collection",
@@ -5876,9 +7618,9 @@
 			"name": "line_collection",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -5886,7 +7628,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			}
 		},
 		"line_demo": {
 			"category": "unknown",
@@ -5897,9 +7655,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "line_demo",
@@ -5910,9 +7668,9 @@
 			"name": "line_demo",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -5945,6 +7703,27 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"depends",
+					"shows",
+					"engine",
+					"snap_tetrahedron_puzzle"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"lshape": {
@@ -5956,9 +7735,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "lshape",
@@ -5970,9 +7749,9 @@
 			"name": "L Shape",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -6008,6 +7787,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"sibling",
+					"shape",
+					"vocabulary",
+					"demonstrate",
+					"combined"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"mengersponge": {
@@ -6019,9 +7820,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "mengersponge",
@@ -6030,9 +7831,9 @@
 			"name": "Menger Sponge",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -6069,6 +7870,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"menu": {
@@ -6080,9 +7897,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "menu",
@@ -6091,9 +7908,9 @@
 			"name": "menu",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -6126,6 +7943,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"modernchair": {
@@ -6137,9 +7970,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "modernchair",
@@ -6148,9 +7981,9 @@
 			"name": "Modern Chair",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -6187,6 +8020,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"modernpolysolid": {
@@ -6199,9 +8048,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "modernpolysolid",
@@ -6210,9 +8059,9 @@
 			"name": "modernpolysolid",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -6249,6 +8098,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"noisetorus_ex_1": {
@@ -6260,9 +8125,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "noisetorus_ex_1",
@@ -6271,9 +8136,9 @@
 			"name": "noisetorus_ex_1",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -6283,7 +8148,23 @@
 				"3d",
 				"geometry",
 				"procedural"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			}
 		},
 		"octahedron": {
 			"category": "unknown",
@@ -6294,9 +8175,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "octahedron",
@@ -6307,9 +8188,9 @@
 			"name": "octahedron",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -6341,6 +8222,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"one_meter_line": {
@@ -6352,9 +8249,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				2.0
+				1,
+				1,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "one_meter_line",
@@ -6363,9 +8260,9 @@
 			"name": "one_meter_line",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					2.0
+					1,
+					1,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -6397,6 +8294,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"origin": {
@@ -6408,9 +8321,9 @@
 				"primitives"
 			],
 			"footprint": [
-				2.0,
-				2.0,
-				2.0
+				2,
+				2,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "origin",
@@ -6422,9 +8335,9 @@
 			"name": "Point Zero",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					2.0
+					2,
+					2,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -6461,6 +8374,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"prerequisite",
+					"spatial",
+					"reasoning",
+					"every",
+					"other"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"oscillation_cube": {
@@ -6472,9 +8407,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "oscillation_cube",
@@ -6483,9 +8418,9 @@
 			"name": "Oscillation Cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -6519,6 +8454,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"parallel_line_puzzle": {
@@ -6530,9 +8481,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				1.0
+				1,
+				2,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "parallel_line_puzzle",
@@ -6543,9 +8494,9 @@
 			"name": "Parallel Line Puzzle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					1.0
+					1,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -6577,6 +8528,27 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"contrasts",
+					"plus_line_puzzle",
+					"perpendicular"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"parallel_lines": {
@@ -6588,9 +8560,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				3.0
+				1,
+				2,
+				3
 			],
 			"include_in_map_data": true,
 			"lookup_name": "parallel_lines",
@@ -6601,9 +8573,9 @@
 			"name": "parallel_lines",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					3.0
+					1,
+					2,
+					3
 				],
 				"size_group": "room_scale"
 			},
@@ -6611,7 +8583,23 @@
 			"size_group": "room_scale",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"parametric_surface": {
 			"category": "unknown",
@@ -6622,9 +8610,9 @@
 				"primitives"
 			],
 			"footprint": [
-				3.0,
-				1.0,
-				3.0
+				3,
+				1,
+				3
 			],
 			"include_in_map_data": true,
 			"lookup_name": "parametric_surface",
@@ -6633,9 +8621,9 @@
 			"name": "Parametric Surface",
 			"parameters": {
 				"footprint": [
-					3.0,
-					1.0,
-					3.0
+					3,
+					1,
+					3
 				],
 				"size_group": "room_scale"
 			},
@@ -6672,6 +8660,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"perspective_lines": {
@@ -6683,9 +8687,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				3.0
+				1,
+				1,
+				3
 			],
 			"include_in_map_data": true,
 			"lookup_name": "perspective_lines",
@@ -6696,9 +8700,9 @@
 			"name": "perspective_lines",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					3.0
+					1,
+					1,
+					3
 				],
 				"size_group": "room_scale"
 			},
@@ -6730,6 +8734,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"sibling",
+					"scale_lines",
+					"special",
+					"configurations",
+					"primitive"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"pickup_cube_combo": {
@@ -6741,9 +8767,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				1.0
+				1,
+				2,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "pickup_cube_combo",
@@ -6752,9 +8778,9 @@
 			"name": "Combo Pickup Cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					1.0
+					1,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -6786,6 +8812,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"pickup_cube_rotating": {
@@ -6844,6 +8886,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"pickup_cube_scaling": {
@@ -6855,9 +8913,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				1.0
+				1,
+				2,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "pickup_cube_scaling",
@@ -6866,9 +8924,9 @@
 			"name": "Scaling Pickup Cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					1.0
+					1,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -6900,6 +8958,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"pickup_cube_static": {
@@ -6958,6 +9032,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"pickup_cube_transforming": {
@@ -7016,6 +9106,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"plane": {
@@ -7027,9 +9133,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "plane",
@@ -7038,9 +9144,9 @@
 			"name": "plane",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7075,6 +9181,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"platonic_demo": {
@@ -7086,9 +9208,9 @@
 				"primitives"
 			],
 			"footprint": [
-				6.0,
-				4.0,
-				6.0
+				6,
+				4,
+				6
 			],
 			"include_in_map_data": true,
 			"lookup_name": "platonic_demo",
@@ -7097,9 +9219,9 @@
 			"name": "platonic_demo",
 			"parameters": {
 				"footprint": [
-					6.0,
-					4.0,
-					6.0
+					6,
+					4,
+					6
 				],
 				"size_group": "environment"
 			},
@@ -7107,7 +9229,23 @@
 			"size_group": "environment",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"platonic_grabbables": {
 			"category": "unknown",
@@ -7118,9 +9256,9 @@
 				"primitives"
 			],
 			"footprint": [
-				6.0,
-				1.0,
-				3.0
+				6,
+				1,
+				3
 			],
 			"include_in_map_data": true,
 			"lookup_name": "platonic_grabbables",
@@ -7131,9 +9269,9 @@
 			"name": "platonic_grabbables",
 			"parameters": {
 				"footprint": [
-					6.0,
-					1.0,
-					3.0
+					6,
+					1,
+					3
 				],
 				"size_group": "environment"
 			},
@@ -7141,7 +9279,23 @@
 			"size_group": "environment",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"player_trace": {
 			"capacity": "SEE your own motion become a drawable path through time.",
@@ -7153,9 +9307,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"gamwell_reference": "",
 			"include_in_map_data": true,
@@ -7174,9 +9328,9 @@
 			"name": "player_trace",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7220,6 +9374,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"alongside",
+					"grid_lines",
+					"replay",
+					"traces",
+					"complement"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"plus": {
@@ -7231,9 +9407,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "plus",
@@ -7244,9 +9420,9 @@
 			"name": "Plus",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7282,6 +9458,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"sibling",
+					"lshape",
+					"convex",
+					"combined",
+					"shapes"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"plus_line_puzzle": {
@@ -7293,9 +9491,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				1.0
+				1,
+				2,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "plus_line_puzzle",
@@ -7306,9 +9504,9 @@
 			"name": "Plus Line Puzzle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					1.0
+					1,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7340,6 +9538,26 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"contrasts",
+					"parallel_line_puzzle"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"plus_lines": {
@@ -7351,9 +9569,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "plus_lines",
@@ -7362,9 +9580,9 @@
 			"name": "plus_lines",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7372,7 +9590,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"point": {
 			"category": "unknown",
@@ -7383,9 +9617,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "point",
@@ -7394,9 +9628,9 @@
 			"name": "1.0 A Point",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7432,6 +9666,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"point_collection": {
@@ -7443,9 +9693,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "point_collection",
@@ -7454,9 +9704,9 @@
 			"name": "point_collection",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7464,7 +9714,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"portal_frame": {
 			"category": "unknown",
@@ -7475,9 +9741,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "portal_frame",
@@ -7486,9 +9752,9 @@
 			"name": "Portal Frame",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7524,6 +9790,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"prism": {
@@ -7535,9 +9817,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "prism",
@@ -7548,9 +9830,9 @@
 			"name": "prism",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7559,7 +9841,23 @@
 			"tags": [
 				"2d",
 				"3d"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			}
 		},
 		"prism_block": {
 			"capacity": "COMPARE how a non-cubic primitive responds to rotation and scaling.",
@@ -7571,9 +9869,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"gamwell_reference": "",
 			"include_in_map_data": true,
@@ -7593,9 +9891,9 @@
 			"name": "prism_block",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7611,7 +9909,23 @@
 				"rotation",
 				"2d",
 				"physics"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
+			}
 		},
 		"prismblock": {
 			"category": "unknown",
@@ -7622,9 +9936,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "prismblock",
@@ -7633,9 +9947,9 @@
 			"name": "prismblock",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7672,6 +9986,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "end"
 			}
 		},
 		"probability_sphere": {
@@ -7683,9 +10013,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "probability_sphere",
@@ -7697,9 +10027,9 @@
 			"name": "Probability Sphere",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7707,7 +10037,23 @@
 			"size_group": "compact",
 			"tags": [
 				"geometry"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"proceduralrock": {
 			"category": "unknown",
@@ -7718,9 +10064,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "proceduralrock",
@@ -7729,9 +10075,9 @@
 			"name": "Procedural Rock",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7768,6 +10114,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"profile_chair": {
@@ -7779,9 +10141,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "profile_chair",
@@ -7790,9 +10152,9 @@
 			"name": "Profile Chair",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7828,6 +10190,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"pyramid": {
@@ -7839,9 +10217,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "pyramid",
@@ -7853,9 +10231,9 @@
 			"name": "pyramid",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7890,6 +10268,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"static",
+					"sibling",
+					"pyramid_edit",
+					"reference",
+					"geometry"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"pyramid_edit": {
@@ -7901,9 +10301,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "pyramid_edit",
@@ -7914,9 +10314,9 @@
 			"name": "pyramid_edit",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7955,6 +10355,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"interactive",
+					"version",
+					"pyramid",
+					"sibling",
+					"animatedcubebuilder"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"pyramidlong": {
@@ -7966,9 +10388,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "pyramidlong",
@@ -7979,9 +10401,9 @@
 			"name": "pyramidlong",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -8017,6 +10439,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sibling",
+					"pyramid",
+					"demonstrates",
+					"uniform",
+					"scaling"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"pythagorean_proof": {
@@ -8028,9 +10472,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				3.0,
-				6.0
+				1,
+				3,
+				6
 			],
 			"include_in_map_data": true,
 			"lookup_name": "pythagorean_proof",
@@ -8039,9 +10483,9 @@
 			"name": "pythagorean_proof",
 			"parameters": {
 				"footprint": [
-					1.0,
-					3.0,
-					6.0
+					1,
+					3,
+					6
 				],
 				"size_group": "environment"
 			},
@@ -8078,6 +10522,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"pythagorean_triangle": {
@@ -8089,9 +10549,9 @@
 				"primitives"
 			],
 			"footprint": [
-				2.0,
-				2.0,
-				6.0
+				2,
+				2,
+				6
 			],
 			"include_in_map_data": true,
 			"lookup_name": "pythagorean_triangle",
@@ -8100,9 +10560,9 @@
 			"name": "pythagorean_triangle",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					6.0
+					2,
+					2,
+					6
 				],
 				"size_group": "environment"
 			},
@@ -8133,6 +10593,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~100"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"pythagorean_triangle_angles": {
@@ -8144,9 +10620,9 @@
 				"primitives"
 			],
 			"footprint": [
-				2.0,
-				2.0,
-				6.0
+				2,
+				2,
+				6
 			],
 			"include_in_map_data": true,
 			"lookup_name": "pythagorean_triangle_angles",
@@ -8157,14 +10633,14 @@
 			"name": "1.2: A pythagorean_triangle_angles",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					1.0
+					1,
+					2,
+					1
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 1.0,
+					"radius": 1,
 					"type": "omni"
 				},
 				"size_group": "environment"
@@ -8200,6 +10676,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~100"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sibling",
+					"triangle",
+					"depends",
+					"understanding",
+					"length"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"quad": {
@@ -8211,9 +10709,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "quad",
@@ -8224,9 +10722,9 @@
 			"name": "quad",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -8263,6 +10761,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "table",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [
+					"extends",
+					"triangle",
+					"concept",
+					"vertices",
+					"every"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"quad_line_puzzle": {
@@ -8274,9 +10794,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				1.0
+				1,
+				2,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "quad_line_puzzle",
@@ -8285,9 +10805,9 @@
 			"name": "Quad Line Puzzle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					1.0
+					1,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -8319,6 +10839,27 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"logical",
+					"predecessor",
+					"primitive"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"quantum_dice": {
@@ -8330,9 +10871,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "quantum_dice",
@@ -8341,9 +10882,9 @@
 			"name": "Quantum Dice",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -8351,7 +10892,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			}
 		},
 		"queer_cylinder_target": {
 			"category": "unknown",
@@ -8362,9 +10919,9 @@
 				"primitives"
 			],
 			"footprint": [
-				8.0,
-				8.0,
-				8.0
+				8,
+				8,
+				8
 			],
 			"include_in_map_data": true,
 			"lookup_name": "queer_cylinder_target",
@@ -8375,9 +10932,9 @@
 			"name": "queer_cylinder_target",
 			"parameters": {
 				"footprint": [
-					8.0,
-					8.0,
-					8.0
+					8,
+					8,
+					8
 				],
 				"size_group": "xlarge"
 			},
@@ -8419,6 +10976,22 @@
 				},
 				"instance_strategy": "particles",
 				"vertex_estimate": "~1024"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"quest_controller": {
@@ -8431,9 +11004,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "quest_controller",
@@ -8442,9 +11015,9 @@
 			"name": "Quest Controller",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -8486,6 +11059,22 @@
 				},
 				"instance_strategy": "few",
 				"vertex_estimate": "~144"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"random_object_spawner": {
@@ -8497,9 +11086,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "random_object_spawner",
@@ -8510,9 +11099,9 @@
 			"name": "Random Object Spawner",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -8547,6 +11136,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"feeds",
+					"contrasts",
+					"remove_random",
+					"subtraction",
+					"replacement"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"reality_modifier": {
@@ -8558,9 +11169,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "reality_modifier",
@@ -8569,9 +11180,9 @@
 			"name": "Reality Modifier",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -8579,7 +11190,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"rectcube": {
 			"category": "unknown",
@@ -8590,9 +11217,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "rectcube",
@@ -8601,9 +11228,9 @@
 			"name": "Rectangular Cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -8635,6 +11262,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"right_triangle_lines": {
@@ -8646,9 +11289,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "right_triangle_lines",
@@ -8657,9 +11300,9 @@
 			"name": "right_triangle_lines",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -8691,6 +11334,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"righttriangle": {
@@ -8703,9 +11362,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"gamwell_reference": "",
 			"include_in_map_data": true,
@@ -8724,9 +11383,9 @@
 			"name": "righttriangle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -8769,6 +11428,25 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sibling",
+					"pythagorean_triangle_angles"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"rock_primitive": {
@@ -8780,9 +11458,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "rock_primitive",
@@ -8791,9 +11469,9 @@
 			"name": "Rock",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -8829,6 +11507,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"rock_scanner": {
@@ -8840,9 +11534,9 @@
 				"primitives"
 			],
 			"footprint": [
-				4.0,
-				1.0,
-				4.0
+				4,
+				1,
+				4
 			],
 			"include_in_map_data": true,
 			"lookup_name": "rock_scanner",
@@ -8851,9 +11545,9 @@
 			"name": "Rock Scanner",
 			"parameters": {
 				"footprint": [
-					4.0,
-					1.0,
-					4.0
+					4,
+					1,
+					4
 				],
 				"size_group": "room_scale"
 			},
@@ -8896,6 +11590,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "~4 (quad)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"rock_spawner": {
@@ -8907,9 +11617,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "rock_spawner",
@@ -8918,9 +11628,9 @@
 			"name": "Rock Spawner",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -8953,6 +11663,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"rockfactory": {
@@ -8964,9 +11690,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "rockfactory",
@@ -8975,9 +11701,9 @@
 			"name": "Rock Factory",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9012,6 +11738,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"rockfactory_gravity": {
@@ -9023,9 +11765,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "rockfactory_gravity",
@@ -9034,9 +11776,9 @@
 			"name": "Rock Factory (Gravity)",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9069,6 +11811,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"rotating_cube": {
@@ -9081,9 +11839,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "rotating_cube",
@@ -9097,9 +11855,9 @@
 			"name": "Rotating Cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9133,6 +11891,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"rotation_match_puzzle": {
@@ -9144,9 +11918,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "rotation_match_puzzle",
@@ -9155,9 +11929,9 @@
 			"name": "Rotation Match Puzzle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9195,6 +11969,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"roughrock": {
@@ -9206,9 +11996,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "roughrock",
@@ -9220,9 +12010,9 @@
 			"name": "roughrock",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9258,6 +12048,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sibling",
+					"other",
+					"static",
+					"primitives",
+					"conceptual"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"scale_lines": {
@@ -9269,9 +12081,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				7.0,
-				21.0
+				1,
+				7,
+				21
 			],
 			"include_in_map_data": true,
 			"lookup_name": "scale_lines",
@@ -9282,9 +12094,9 @@
 			"name": "scale_lines",
 			"parameters": {
 				"footprint": [
-					1.0,
-					7.0,
-					21.0
+					1,
+					7,
+					21
 				],
 				"size_group": "world_scale"
 			},
@@ -9316,6 +12128,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sibling",
+					"perspective_lines",
+					"configure",
+					"existing",
+					"nodes"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"scifi_panel_wall": {
@@ -9327,9 +12161,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "scifi_panel_wall",
@@ -9338,9 +12172,9 @@
 			"name": "Sci-Fi Panel Wall",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9348,7 +12182,23 @@
 			"size_group": "compact",
 			"tags": [
 				"procedural"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			}
 		},
 		"simple_rock": {
 			"category": "unknown",
@@ -9359,9 +12209,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "simple_rock",
@@ -9370,9 +12220,9 @@
 			"name": "Simple Dynamic Rock",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9410,6 +12260,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"sliding_door": {
@@ -9422,9 +12288,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "sliding_door",
@@ -9433,9 +12299,9 @@
 			"name": "Sliding Door",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9474,6 +12340,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 2,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"small_subdivision_cube": {
@@ -9485,9 +12367,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "small_subdivision_cube",
@@ -9498,9 +12380,9 @@
 			"name": "small_subdivision_cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9537,6 +12419,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~4-24 (base mesh)"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"interactive",
+					"fractal",
+					"primitive",
+					"tactile",
+					"recursion"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"snap_demo": {
@@ -9548,9 +12452,9 @@
 				"primitives"
 			],
 			"footprint": [
-				2.0,
-				2.0,
-				1.0
+				2,
+				2,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "snap_demo",
@@ -9559,9 +12463,9 @@
 			"name": "snap_demo",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					1.0
+					2,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9594,6 +12498,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "varies"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"snap_octahedron_puzzle": {
@@ -9605,9 +12525,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				1.0
+				1,
+				2,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "snap_octahedron_puzzle",
@@ -9618,9 +12538,9 @@
 			"name": "Snap Octahedron Puzzle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					1.0
+					1,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9656,6 +12576,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"sibling",
+					"snap_tetrahedron_puzzle",
+					"grab_octahedron",
+					"version"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"snap_pyramid_puzzle": {
@@ -9667,9 +12609,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "snap_pyramid_puzzle",
@@ -9680,9 +12622,9 @@
 			"name": "Snap Pyramid Puzzle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9718,6 +12660,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"sibling",
+					"snap_tetrahedron_puzzle",
+					"pyramid",
+					"static"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"snap_tetrahedron_puzzle": {
@@ -9729,9 +12693,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "snap_tetrahedron_puzzle",
@@ -9742,9 +12706,9 @@
 			"name": "Snap Tetrahedron Puzzle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9780,6 +12744,27 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"logical",
+					"successor",
+					"triangle_line_puzzle"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"snap_triangle_puzzle": {
@@ -9791,9 +12776,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "snap_triangle_puzzle",
@@ -9802,9 +12787,9 @@
 			"name": "Snap Triangle Puzzle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9836,6 +12821,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"snap_wedge_puzzle": {
@@ -9847,9 +12848,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "snap_wedge_puzzle",
@@ -9858,9 +12859,9 @@
 			"name": "Snap Wedge Puzzle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9896,6 +12897,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~0"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"spatial_compass": {
@@ -9907,9 +12924,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "spatial_compass",
@@ -9918,9 +12935,9 @@
 			"name": "Spatial Compass",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9928,7 +12945,23 @@
 			"size_group": "compact",
 			"tags": [
 				"primitive"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
+			}
 		},
 		"sphere": {
 			"category": "unknown",
@@ -9939,9 +12972,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "sphere",
@@ -9952,9 +12985,9 @@
 			"name": "sphere",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -9963,7 +12996,23 @@
 			"tags": [
 				"2d",
 				"geometry"
-			]
+			],
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"sphere_high": {
 			"category": "unknown",
@@ -9974,9 +13023,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "sphere_high",
@@ -9987,9 +13036,9 @@
 			"name": "sphere_high",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10023,6 +13072,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~512"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"comparison",
+					"sphere_low",
+					"sphere_mid",
+					"material",
+					"makes"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"sphere_low": {
@@ -10034,9 +13105,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "sphere_low",
@@ -10047,9 +13118,9 @@
 			"name": "sphere_low",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10083,6 +13154,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~200"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"first",
+					"sphere_mid",
+					"sphere_high",
+					"material",
+					"makes"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"sphere_mid": {
@@ -10094,9 +13187,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "sphere_mid",
@@ -10107,9 +13200,9 @@
 			"name": "sphere_mid",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10143,6 +13236,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~98"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"middle",
+					"sphere_low",
+					"sphere_high",
+					"color",
+					"distinguishes"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"square_pyramid": {
@@ -10154,9 +13269,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "square_pyramid",
@@ -10165,9 +13280,9 @@
 			"name": "square_pyramid",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10199,6 +13314,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"star_primitive": {
@@ -10210,9 +13341,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "star_primitive",
@@ -10223,9 +13354,9 @@
 			"name": "Star",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10261,6 +13392,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"static_point": {
@@ -10272,9 +13419,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "static_point",
@@ -10285,9 +13432,9 @@
 			"name": "Static Point",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10325,6 +13472,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~256"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"prerequisite",
+					"contrasts",
+					"interactive_point_origin",
+					"grabbable",
+					"version"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"steppedpyramid": {
@@ -10336,9 +13505,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "steppedpyramid",
@@ -10347,9 +13516,9 @@
 			"name": "Stepped Pyramid",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10386,6 +13555,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"tetrahedron": {
@@ -10397,9 +13582,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "tetrahedron",
@@ -10408,9 +13593,9 @@
 			"name": "tetrahedron",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10444,6 +13629,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"tetrahedron_edit": {
@@ -10455,9 +13656,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "tetrahedron_edit",
@@ -10466,9 +13667,9 @@
 			"name": "Editable Tetrahedron",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10508,6 +13709,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"torus": {
@@ -10519,9 +13736,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "torus",
@@ -10530,9 +13747,9 @@
 			"name": "torus",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10541,7 +13758,23 @@
 			"tags": [
 				"2d",
 				"geometry"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
+			}
 		},
 		"torus_low": {
 			"category": "unknown",
@@ -10552,9 +13785,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "torus_low",
@@ -10563,9 +13796,9 @@
 			"name": "torus_low",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10601,6 +13834,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"torus_radials_rings": {
@@ -10612,9 +13861,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "torus_radials_rings",
@@ -10625,9 +13874,9 @@
 			"name": "Torus Radials Rings",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10663,6 +13912,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"combine_portals",
+					"diamondtoruscollection",
+					"shares",
+					"config",
+					"pattern"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"trafficcone": {
@@ -10674,9 +13945,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "trafficcone",
@@ -10685,9 +13956,9 @@
 			"name": "Traffic Cone",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10720,6 +13991,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"transform_staircase_dna": {
@@ -10732,9 +14019,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "transform_staircase_dna",
@@ -10743,9 +14030,9 @@
 			"name": "transform_staircase_dna",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10782,6 +14069,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"transform_staircase_fibonacci": {
@@ -10793,9 +14096,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "transform_staircase_fibonacci",
@@ -10804,9 +14107,9 @@
 			"name": "transform_staircase_fibonacci",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10844,6 +14147,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"transform_staircase_mobius": {
@@ -10855,9 +14174,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "transform_staircase_mobius",
@@ -10866,9 +14185,9 @@
 			"name": "transform_staircase_mobius",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -10905,6 +14224,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"transform_staircase_showcase": {
@@ -10917,9 +14252,9 @@
 				"primitives"
 			],
 			"footprint": [
-				7.0,
-				1.0,
-				5.0
+				7,
+				1,
+				5
 			],
 			"include_in_map_data": true,
 			"lookup_name": "transform_staircase_showcase",
@@ -10928,9 +14263,9 @@
 			"name": "transform_staircase_showcase",
 			"parameters": {
 				"footprint": [
-					7.0,
-					1.0,
-					5.0
+					7,
+					1,
+					5
 				],
 				"size_group": "environment"
 			},
@@ -10968,6 +14303,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"transform_staircase_spiral": {
@@ -10979,9 +14330,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "transform_staircase_spiral",
@@ -10990,9 +14341,9 @@
 			"name": "transform_staircase_spiral",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -11029,6 +14380,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"transformation_cube": {
@@ -11041,9 +14408,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "transformation_cube",
@@ -11055,9 +14422,9 @@
 			"name": "transformation_cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -11091,6 +14458,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"translation_demo": {
@@ -11102,9 +14485,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "translation_demo",
@@ -11113,9 +14496,9 @@
 			"name": "Translation Demo",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -11156,6 +14539,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"triangle": {
@@ -11167,9 +14566,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				6.0
+				1,
+				2,
+				6
 			],
 			"include_in_map_data": true,
 			"lookup_name": "triangle",
@@ -11180,9 +14579,9 @@
 			"name": "triangle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					6.0
+					1,
+					2,
+					6
 				],
 				"size_group": "environment"
 			},
@@ -11220,6 +14619,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"atomic",
+					"meshes",
+					"logical",
+					"predecessor",
+					"folded_strip"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"parasol_triangle": {
@@ -11274,6 +14695,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "~64"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"child",
+					"triangle",
+					"concept",
+					"placed",
+					"landmark"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"triangle_line_puzzle": {
@@ -11285,9 +14728,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				2.0,
-				1.0
+				1,
+				2,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "triangle_line_puzzle",
@@ -11298,9 +14741,9 @@
 			"name": "Triangle Line Puzzle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					1.0
+					1,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -11332,6 +14775,27 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"extends",
+					"logical",
+					"predecessor",
+					"snap_tetrahedron_puzzle"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"triangleprofiles": {
@@ -11343,9 +14807,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "triangleprofiles",
@@ -11356,14 +14820,14 @@
 			"name": "1.2: A triangleprofilese",
 			"parameters": {
 				"footprint": [
-					5.0,
-					1.0,
-					5.0
+					5,
+					1,
+					5
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 6.0,
+					"radius": 6,
 					"type": "omni"
 				},
 				"size_group": "compact"
@@ -11400,6 +14864,28 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sibling",
+					"triangle",
+					"demonstrates",
+					"profiles",
+					"extrusions"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"triangular_cupola": {
@@ -11411,9 +14897,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "triangular_cupola",
@@ -11422,9 +14908,9 @@
 			"name": "triangular_cupola",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -11456,6 +14942,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"triangularblock": {
@@ -11467,9 +14969,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "triangularblock",
@@ -11478,9 +14980,9 @@
 			"name": "triangularblock",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -11517,6 +15019,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"trihedron": {
@@ -11528,9 +15046,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "trihedron",
@@ -11539,9 +15057,9 @@
 			"name": "trihedron",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -11573,6 +15091,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"truncatedtetrahedron": {
@@ -11584,9 +15118,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "truncatedtetrahedron",
@@ -11598,9 +15132,9 @@
 			"name": "truncatedtetrahedron",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -11636,6 +15170,28 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"sibling",
+					"grab_tetrahedron",
+					"snap_tetrahedron_puzzle",
+					"shows",
+					"topology"
+				],
+				"preferred_zone": "entry"
 			}
 		},
 		"unitcube": {
@@ -11647,9 +15203,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "unitcube",
@@ -11658,9 +15214,9 @@
 			"name": "Unit Cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -11693,6 +15249,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"wood_cube": {
@@ -11704,9 +15276,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "wood_cube",
@@ -11715,9 +15287,9 @@
 			"name": "wood_cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -11751,6 +15323,22 @@
 				},
 				"instance_strategy": "single",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [],
+				"preferred_zone": "entry"
 			}
 		},
 		"zigzagprofile": {
@@ -11762,9 +15350,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "zigzagprofile",
@@ -11773,9 +15361,9 @@
 			"name": "1.2: A zigzagprofile",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -11815,6 +15403,22 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
+			},
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 1,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [],
+				"preferred_zone": "any"
 			}
 		},
 		"achilles_tortoise": {
@@ -11826,9 +15430,9 @@
 				"primitives"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "achilles_tortoise",
@@ -11845,7 +15449,29 @@
 				"convergence",
 				"series",
 				"animation"
-			]
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"primitives",
+					"illustrate",
+					"infinite",
+					"series",
+					"pedagogically"
+				],
+				"preferred_zone": "entry"
+			}
 		}
 	},
 	"registry_info": {

@@ -379,7 +379,7 @@ func update_test_statistic_display() -> void:
 	# Show test statistic as vertical line on null distribution
 	var t_line = MeshInstance3D.new()
 	var x_pos = clamp(test_statistic / 5.0, -1.0, 1.0)
-	var line_points = [Vector3(x_pos, 0, 0.01), Vector3(x_pos, 1.5, 0.01)]
+	var line_points: Array[Vector3] = [Vector3(x_pos, 0, 0.01), Vector3(x_pos, 1.5, 0.01)]
 	create_line_mesh(t_line, line_points, Color.YELLOW)
 	test_statistic_display.add_child(t_line)
 	
@@ -415,7 +415,7 @@ func update_p_value_display() -> void:
 	# Add alpha level reference line
 	var alpha_line = MeshInstance3D.new()
 	var alpha_x = 2.0 * alpha_level - 1.0
-	var alpha_points = [Vector3(alpha_x, -0.2, 0), Vector3(alpha_x, 0.2, 0)]
+	var alpha_points: Array[Vector3] = [Vector3(alpha_x, -0.2, 0), Vector3(alpha_x, 0.2, 0)]
 	create_line_mesh(alpha_line, alpha_points, Color.WHITE)
 	p_value_display.add_child(alpha_line)
 	

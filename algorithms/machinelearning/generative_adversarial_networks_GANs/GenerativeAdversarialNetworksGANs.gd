@@ -5,7 +5,6 @@
 # distribution, and feedback loops with live training metrics.
 # ============================================================================
 extends Node3D
-class_name GANShowcase
 
 # --- Runtime UI Controls ---
 @export_category("Data Settings")

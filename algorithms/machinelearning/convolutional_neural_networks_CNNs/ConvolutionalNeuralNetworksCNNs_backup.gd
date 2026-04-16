@@ -1,5 +1,4 @@
 extends Node3D
-class_name ConvolutionalNeuralNetworkShowcaseBack
 
 @export_range(6, 16, 1) var grid_size: int = 8
 @export_range(3, 5, 1) var kernel_size: int = 3

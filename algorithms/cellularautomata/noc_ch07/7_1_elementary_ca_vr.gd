@@ -125,6 +125,8 @@ func _scroll_rows() -> void:
 		_rows[r] = _rows[r + 1].duplicate()
 
 func _update_all_visuals() -> void:
+	if not _multi_mesh:
+		return
 	var mm = _multi_mesh.multimesh
 	var idx = 0
 	var active_color = Color(1.0, 0.7, 0.95)

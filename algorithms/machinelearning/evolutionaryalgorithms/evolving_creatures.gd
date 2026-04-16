@@ -4,7 +4,6 @@ extends Node3D
 ## Uses Q-learning to train creatures with different morphologies (quadruped, biped, snake)
 ## to move across a ground plane. Joint torques are the action space; joint angles form the state.
 
-class_name SimplifiedCreature
 
 # ──────────────────────────────────────────────
 # Body settings

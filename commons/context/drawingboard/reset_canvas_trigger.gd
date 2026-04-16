@@ -4,4 +4,5 @@
 
 # Called when the area is entered
 func _on_area_entered(_area: Area3D) -> void:
-	paper_surface._next_page()
+	if paper_surface and paper_surface.has_method("reset_canvas"):
+		paper_surface.reset_canvas()

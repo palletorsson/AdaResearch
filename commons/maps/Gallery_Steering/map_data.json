@@ -1,0 +1,553 @@
+{
+  "map_info": {
+    "name": "Gallery: Steering",
+    "lookup_name": "Gallery_Steering",
+    "description": "Showcase of 15 unplaced artifacts from Steering. Walk through to browse available artifacts.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 11,
+      "depth": 12,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "gallery",
+      "category": "gallery",
+      "estimated_time": "5-7 minutes",
+      "learning_objectives": [
+        "Browse 15 Steering artifacts",
+        "Identify artifacts for placement in curriculum maps",
+        "Observe artifact visual and interaction patterns"
+      ]
+    },
+    "title": "Steering Artifact Gallery"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Back",
+      "description": "Return to sequence",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    },
+    "s": {
+      "type": "spawn",
+      "properties": {
+        "height": 1.5
+      }
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.3,
+        0.3,
+        0.35
+      ]
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.5,
+      0.5,
+      0.55
+    ],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "color": [
+        1.0,
+        0.95,
+        0.9
+      ],
+      "energy": 0.8
+    }
+  },
+  "layers": {
+    "structure": [
+      [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "2"
+      ],
+      [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ]
+    ],
+    "utilities": [
+      [
+        " ",
+        "sp",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "t",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ],
+    "interactables": [
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:example 5 12 sine cosine lo...",
+        " ",
+        "request_note:0:1.5#text:example 5 9 flocking",
+        " ",
+        "request_note:0:1.5#text:example 5 9 flocking with b...",
+        " ",
+        "request_note:0:1.5#text:exercise 5 13 crowd path fo...",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "example_5_12_sine_cosine_lookup:0:-0.5",
+        " ",
+        "example_5_9_flocking:0:-0.5",
+        " ",
+        "example_5_9_flocking_with_binning:0:-0.5",
+        " ",
+        "exercise_5_13_crowd_path_following:0:-0.5",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:exercise 5 2 pursuit",
+        " ",
+        "request_note:0:1.5#text:exercise 5 4 wander",
+        " ",
+        "request_note:0:1.5#text:exercise 5 9 angle between",
+        " ",
+        "request_note:0:1.5#text:noc 5 01 seek",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "exercise_5_2_pursuit:0:-0.5",
+        " ",
+        "exercise_5_4_wander:0:-0.5",
+        " ",
+        "exercise_5_9_angle_between:0:-0.5",
+        " ",
+        "noc_5_01_seek:0:-0.5",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:noc 5 02 arrive",
+        " ",
+        "request_note:0:1.5#text:noc 5 03 stay within walls",
+        " ",
+        "request_note:0:1.5#text:noc 5 04 flow field",
+        " ",
+        "request_note:0:1.5#text:noc 5 05 path following simple",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "noc_5_02_arrive:0:-0.5",
+        " ",
+        "noc_5_03_stay_within_walls:0:-0.5",
+        " ",
+        "noc_5_04_flow_field:0:-0.5",
+        " ",
+        "noc_5_05_path_following_simple:0:-0.5",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "request_note:0:1.5#text:noc 5 07 separation",
+        " ",
+        "request_note:0:1.5#text:noc 5 08 path following",
+        " ",
+        "request_note:0:1.5#text:noc 5 08 separation and seek",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "noc_5_07_separation:0:-0.5",
+        " ",
+        "noc_5_08_path_following:0:-0.5",
+        " ",
+        "noc_5_08_separation_and_seek:0:-0.5",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ]
+  }
+}
