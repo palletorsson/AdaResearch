@@ -1576,6 +1576,30 @@
 				"cluster_with": [],
 				"preferred_zone": "entry"
 			}
+		},
+		"matrix_4x4_viewer": {
+			"name": "Matrix 4x4 Viewer",
+			"lookup_name": "matrix_4x4_viewer",
+			"description": "Interactive 4x4 transformation matrix viewer. A wireframe cube is transformed live by sliders controlling translate X/Y/Z, rotate Y, and uniform scale. The 4x4 matrix values update in real time as a color-coded Label3D grid — rotation/scale in cyan, translation in green, homogeneous row in gray.",
+			"scene": "res://algorithms/transforms/matrix_viewer/matrix_4x4_viewer.tscn",
+			"category": "transforms",
+			"complexity": "intermediate",
+			"tags": ["linear_algebra", "matrix", "transforms", "interactive", "4x4", "visualization"],
+			"dev_themes": ["geometry", "math", "transforms"],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"qfep_connection": "The matrix IS the F-model of spatial state — 16 numbers encode every possible affine transformation. Watching cells change as you slide makes the invisible scaffolding of geometry visible and manipulable.",
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": ["homogeneous_coordinates", "transform_composition"],
+				"preferred_zone": "teaching"
+			}
 		}
 	}
 }

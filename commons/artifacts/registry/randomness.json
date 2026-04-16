@@ -8345,6 +8345,30 @@
 				"isolation": 0,
 				"preferred_zone": "entry"
 			}
+		},
+		"distribution_comparator": {
+			"name": "Distribution Comparator",
+			"lookup_name": "distribution_comparator",
+			"description": "Side-by-side comparison of 3 probability distributions — Uniform (blue), Gaussian (green), Exponential (orange). Three columns of 16 histogram bars generated from the same sample count. Slider scales samples from 100 to 10000; resample button regenerates all three.",
+			"scene": "res://algorithms/randomness/distribution_comparator/distribution_comparator.tscn",
+			"category": "randomness",
+			"complexity": "intermediate",
+			"tags": ["distribution", "probability", "histogram", "gaussian", "exponential", "uniform", "sampling"],
+			"dev_themes": ["probability", "randomness", "statistics"],
+			"map_ready": true,
+			"include_in_map_data": true,
+			"qfep_connection": "Three distributions from one random source — the channeling rule (F) determines shape. Uniform is maximum entropy; Gaussian is the attractor of summation; Exponential is memoryless decay. Same randomness, different constraints, different forms.",
+			"spatial_needs": {
+				"platform": "pedestal",
+				"footprint_cells": 2,
+				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": ["seed_replay_demo", "monte_carlo_dartboard"],
+				"preferred_zone": "teaching"
+			}
 		}
 	}
 }

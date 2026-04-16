@@ -15472,6 +15472,80 @@
 				],
 				"preferred_zone": "entry"
 			}
+		},
+		"mesh_builder_demo": {
+			"name": "Mesh Builder Demo",
+			"lookup_name": "mesh_builder_demo",
+			"description": "Interactive mesh construction from primitives. Add vertices as spheres, connect them with edges, fill triangles as colored faces. Shows how meshes are built from points, lines, and faces.",
+			"scene": "res://algorithms/primitives/mesh_builder/mesh_builder_demo.tscn",
+			"category": "primitives",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"sequence": "",
+			"complexity": "beginner",
+			"tags": [
+				"mesh",
+				"topology",
+				"construction",
+				"3d",
+				"primitives"
+			],
+			"dev_themes": [
+				"primitives",
+				"geometry",
+				"mesh_construction"
+			],
+			"geometry_spec": {
+				"mesh_type": "hybrid",
+				"topology": "manifold_open",
+				"construction": {
+					"method": "surface_tool",
+					"primitives": [
+						"sphere",
+						"cylinder"
+					],
+					"operations": [
+						"create_primitives",
+						"surface_tool_faces"
+					]
+				},
+				"material": {
+					"type": "standard",
+					"shading_model": "emissive",
+					"key_properties": [
+						"emission",
+						"transparency"
+					]
+				},
+				"animation": {
+					"type": "procedural",
+					"driven_by": "user_input",
+					"affects": [
+						"mesh_topology"
+					]
+				},
+				"instance_strategy": "incremental",
+				"vertex_estimate": "~200"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 2,
+				"clearance": {
+					"front": 1,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 1,
+				"cluster_with": [
+					"platonicsolids"
+				],
+				"preferred_zone": "teaching"
+			}
 		}
 	},
 	"registry_info": {
