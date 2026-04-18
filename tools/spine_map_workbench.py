@@ -158,6 +158,11 @@ def map_has_data(map_name: str) -> bool:
     if (MAPS_DIR / map_name / "map_data.json").exists():
         return True
 
+    # Strip display title suffix (format: "MapName: Display Title")
+    bare_name = map_name.split(":")[0].strip() if ":" in map_name else map_name
+    if bare_name != map_name and (MAPS_DIR / bare_name / "map_data.json").exists():
+        return True
+
     # Legacy/special-case contract used by Lab progression:
     # sequence entries can point at explicit map_data json files under commons/maps.
     direct_json = MAPS_DIR / f"{map_name}.json"

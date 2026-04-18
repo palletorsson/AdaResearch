@@ -170,7 +170,7 @@ def score_sequence(seq_id, maps, registry_scenes):
                     capture_output=True, text=True, timeout=10,
                     cwd=str(ROOT)
                 ).stdout
-                if "OK" in result_text and "FAIL" not in result_text:
+                if " 0 FAIL" in result_text:
                     s5_done += 1
             except Exception:
                 pass

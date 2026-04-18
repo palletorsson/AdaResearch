@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://ow18e0rccxku"]
+[gd_scene format=3 uid="uid://ow18e0rccxku"]
 
 [ext_resource type="Script" uid="uid://bjro5dpk0bkpl" path="res://commons/primitives/line/line.gd" id="1_ejps8"]
 [ext_resource type="PackedScene" uid="uid://byjc8qr2f5wvf" path="res://commons/primitives/snappoint/snap_point.tscn" id="2_snap"]
 
-[node name="Line" type="Node3D"]
+[node name="Line" type="Node3D" unique_id=1393586202]
 
-[node name="lineContainer" type="Node3D" parent="."]
+[node name="lineContainer" type="Node3D" parent="." unique_id=686250304]
 script = ExtResource("1_ejps8")
 line_thickness = 0.01
 line_color = Color(0.788235, 0.462745, 0.996078, 1)
 
-[node name="GrabSphere" parent="lineContainer" instance=ExtResource("2_snap")]
+[node name="GrabSphere" parent="lineContainer" unique_id=1163242789 instance=ExtResource("2_snap")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12, 0, 0)
 
-[node name="GrabSphere2" parent="lineContainer" instance=ExtResource("2_snap")]
+[node name="GrabSphere2" parent="lineContainer" unique_id=1574542291 instance=ExtResource("2_snap")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0, 0)

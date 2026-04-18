@@ -1,12 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://bmfemsd8pptdt"]
 
-[ext_resource type="Script" path="res://commons/primitives/line/light_rod.gd" id="1_lightrod"]
+[ext_resource type="Script" uid="uid://ilfsito53024" path="res://commons/primitives/line/light_rod.gd" id="1_lightrod"]
 
-[node name="LightRod" type="Node3D"]
+[node name="LightRod" type="Node3D" unique_id=17845947]
 script = ExtResource("1_lightrod")
-count = 1
-spacing = 1.0
-rod_height = 2.0
-rod_radius = 0.02
-rod_color = Color(0.3, 0.5, 1.0, 1)
-emission_strength = 2.0
