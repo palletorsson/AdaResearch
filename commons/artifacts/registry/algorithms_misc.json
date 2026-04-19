@@ -6031,6 +6031,38 @@
 			],
 			"scene": "res://algorithms/graphtheory/topological_sort/topological_sort.tscn"
 		},
+		"wiki_fragment": {
+			"category": "critical",
+			"complexity": "basic",
+			"description": "A deliberately incomplete reading panel. Each fragment ends with a cross-reference to another fragment elsewhere in the room — and the chain cycles. No one panel carries the thesis. Walking the four of them does. Enacts the commons as response to incompleteness: what one editor cannot hold, the ledger can.",
+			"include_in_map_data": true,
+			"interaction": "read",
+			"lookup_name": "wiki_fragment",
+			"map_ready": true,
+			"map_sequences": [
+				"postfoundationscrisis"
+			],
+			"name": "Wiki Fragment",
+			"parameters": {
+				"footprint": [1.4, 1.6, 0.1],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/artifacts/wiki_fragment/wiki_fragment.tscn",
+			"sequence": "postfoundationscrisis",
+			"tags": [
+				"commons",
+				"distributed_cognition",
+				"wiki",
+				"incompleteness",
+				"critical_algorithms",
+				"collective_knowledge"
+			],
+			"identity": {
+				"essence": "A claim that admits it needs the others",
+				"desire": "To be read as one of four, never alone",
+				"truth": "No node is true alone. A wiki is not consistent; it is corrigible — which is more honest."
+			}
+		},
 		"situated_readout": {
 			"category": "critical",
 			"complexity": "basic",

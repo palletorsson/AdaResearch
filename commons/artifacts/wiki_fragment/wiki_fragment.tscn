@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwikifragment0001"]
+
+[ext_resource type="Script" path="res://commons/artifacts/wiki_fragment/wiki_fragment.gd" id="1_script"]
+
+[node name="WikiFragment" type="Node3D"]
+script = ExtResource("1_script")

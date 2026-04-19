@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Hand/AI-maintained quality signals for final-arc maps. Read by ada_encyclopedia /api/final-lap. Scores are 0-5 or null=unknown.",
-    "updated": "2026-04-19 (postfoundationscrisis — Situated_Computation landed with bespoke situated_readout artifact; only Collective_Knowledge remains a bare scaffold)",
+    "updated": "2026-04-19 (postfoundationscrisis COMPLETE — both bespoke artifacts shipped; arc is whole end-to-end)",
     "rubric": {
       "thesis": "Does blurb + intent + artifacts land the sequence's truth statement? 0=off, 5=lands",
       "helper": "Hub present? Close-body text? Readable cues? 0=bare grid, 5=full",
@@ -22,11 +22,8 @@
   },
   "scaffolded_maps_awaiting_artifacts": {
     "postfoundationscrisis": [
-      { "map": "CriticalAlgorithms_Applied_Ethics", "phase": 2, "needs": "ethical-design clipboard, excluded-class visualizer, room-shape demonstrator" },
-      { "map": "SpeculativeComputation_Paraconsistent_Engineering", "phase": 2, "needs": "merge-conflict visualizer, CAP-theorem walk, Florensky-in-production demonstrator" },
-      { "map": "SpeculativeComputation_Situated_Computation", "phase": 2, "needs": "situated-sensor demo, position-dependent output station" },
-      { "map": "SpeculativeComputation_Collective_Knowledge", "phase": 2, "needs": "wiki-fragment station, peer-edit ledger, citation-graph node" },
-      { "map": "PostCrisis_Synthesis", "phase": 2, "needs": "capstone — 7 stations recalling each prior map + edge-as-ground central artifact" }
+      { "map": "CriticalAlgorithms_Applied_Ethics", "phase": 3, "needs": "bespoke room-shape-as-ethics artifact would lift thesis further; currently reusing bias_from_inside + godel plaque" },
+      { "map": "SpeculativeComputation_Paraconsistent_Engineering", "phase": 3, "needs": "engineering-specific merge-conflict or CAP-theorem artifact would lift further; currently reusing foundations Florensky/superposition/Schrödinger" }
     ]
   },
   "maps": {
@@ -52,7 +49,7 @@
     "CriticalAlgorithms_Applied_Ethics":                 { "thesis": 3, "helper": 3, "aesthetic": 2, "note": "PHASE 2a 2026-04-19 — placed bias_from_inside + godel_statement_plaque + 3 3t labels + tt:qfep_critical. Fresh artifacts for room-shape/excluded-class still needed." },
     "SpeculativeComputation_Paraconsistent_Engineering": { "thesis": 3, "helper": 3, "aesthetic": 2, "note": "PHASE 2a 2026-04-19 — placed florensky_sphere + superposition_display + schrodinger_box + 3 3t labels + tt:qfep_application. Engineering-specific artifacts (merge conflict, CAP walk) still needed for full thesis." },
     "SpeculativeComputation_Situated_Computation":       { "thesis": 4, "helper": 3, "aesthetic": 3, "note": "PHASE 2b 2026-04-19 — built situated_readout artifact, placed 4 instances (NW/NE/SW/SE), added 2 3t labels (NO VIEW FROM NOWHERE / SAME SUBJECT. FOUR VERDICTS.). Artifact enacts the thesis literally: same SUBJECT #4729, four incompatible 'objective' verdicts determined by panel position." },
-    "SpeculativeComputation_Collective_Knowledge":       { "thesis": 2, "helper": 0, "aesthetic": 1, "note": "SCAFFOLD 2026-04-19 — blurb + empty room. No existing artifact fits; needs bespoke creation." },
+    "SpeculativeComputation_Collective_Knowledge":       { "thesis": 4, "helper": 3, "aesthetic": 3, "note": "PHASE 2b 2026-04-19 — built wiki_fragment artifact, placed 4 instances (NORTH/EAST/SOUTH/WEST) as a cycling cross-reference chain, added 2 3t labels (NO NODE IS TRUE ALONE / THE LEDGER HOLDS WHAT ONE CANNOT). Each fragment is deliberately incomplete and points at the next — walking all four never closes. Commons-as-response enacted." },
     "SpeculativeComputation_Rhizome_Network":            { "thesis": 2, "helper": null, "aesthetic": null, "note": "only 1 artifact — thin for a thesis-landing map" },
     "AdvancedLaboratory_Lab_Equipment_Simulation":       { "thesis": 2, "helper": null, "aesthetic": null, "note": "only 1 artifact; unclear how it lands post-crisis" },
     "PostCrisis_Synthesis":                              { "thesis": 4, "helper": 4, "aesthetic": 3, "note": "PHASE 2a 2026-04-19 — central qfep_formula_3d on raised platform + 7 3t labels naming prior practices + bias_from_inside/florensky_sphere mementos + 2 tt boards. Capstone now coherent." }
