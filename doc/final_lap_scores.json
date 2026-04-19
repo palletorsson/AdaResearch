@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Hand/AI-maintained quality signals for final-arc maps. Read by ada_encyclopedia /api/final-lap. Scores are 0-5 or null=unknown.",
-    "updated": "2026-04-19 (postfoundationscrisis COMPLETE — both bespoke artifacts shipped; arc is whole end-to-end)",
+    "updated": "2026-04-19 (phase 2c — helper-layer lift on 4 under-developed maps: Russell, Gödel, Rhizome, Lab. Under-developed count: 4 → 2. Russell + Gödel cleared (T=3→4). Rhizome + Lab remain flagged — well-scaffolded now but still only 1 artifact each at T=3; honest signal that they'd benefit from a second artifact or a content pass.)",
     "rubric": {
       "thesis": "Does blurb + intent + artifacts land the sequence's truth statement? 0=off, 5=lands",
       "helper": "Hub present? Close-body text? Readable cues? 0=bare grid, 5=full",
@@ -29,8 +29,8 @@
   "maps": {
     "Euclid_Parallel":                    { "thesis": 4, "helper": null, "aesthetic": null },
     "NonEuclidean_Spaces":                { "thesis": 4, "helper": null, "aesthetic": null },
-    "Russell_Paradox":                    { "thesis": 3, "helper": null, "aesthetic": null, "note": "only 1 artifact; risks feeling thin" },
-    "Godel_Incompleteness":               { "thesis": 3, "helper": null, "aesthetic": null, "note": "only 1 artifact" },
+    "Russell_Paradox":                    { "thesis": 4, "helper": 3, "aesthetic": 2, "note": "PHASE 2c 2026-04-19 — 4 3t labels walking the paradox: SET OF ALL SETS / THAT DO NOT CONTAIN THEMSELVES / IF IT DOES→IT DOESN'T / IF IT DOESN'T→IT DOES. Still only 1 artifact (russell_set_box) but now the paradox structure is readable from the room." },
+    "Godel_Incompleteness":               { "thesis": 4, "helper": 3, "aesthetic": 2, "note": "PHASE 2c 2026-04-19 — 5 3t labels narrating the argument: EVERY FORMAL SYSTEM / CAN NAME ITSELF / G—I AM UNPROVABLE / TRUE BUT UNDECIDABLE / SELF-REFERENCE IS THE EDGE. The plaque now has a reading path." },
     "Escher_Impossible":                  { "thesis": 4, "helper": null, "aesthetic": null },
     "Brouwer_Intuitionism":               { "thesis": 4, "helper": null, "aesthetic": null },
     "Florensky_Paraconsistent":           { "thesis": 4, "helper": null, "aesthetic": null },
@@ -50,8 +50,8 @@
     "SpeculativeComputation_Paraconsistent_Engineering": { "thesis": 3, "helper": 3, "aesthetic": 2, "note": "PHASE 2a 2026-04-19 — placed florensky_sphere + superposition_display + schrodinger_box + 3 3t labels + tt:qfep_application. Engineering-specific artifacts (merge conflict, CAP walk) still needed for full thesis." },
     "SpeculativeComputation_Situated_Computation":       { "thesis": 4, "helper": 3, "aesthetic": 3, "note": "PHASE 2b 2026-04-19 — built situated_readout artifact, placed 4 instances (NW/NE/SW/SE), added 2 3t labels (NO VIEW FROM NOWHERE / SAME SUBJECT. FOUR VERDICTS.). Artifact enacts the thesis literally: same SUBJECT #4729, four incompatible 'objective' verdicts determined by panel position." },
     "SpeculativeComputation_Collective_Knowledge":       { "thesis": 4, "helper": 3, "aesthetic": 3, "note": "PHASE 2b 2026-04-19 — built wiki_fragment artifact, placed 4 instances (NORTH/EAST/SOUTH/WEST) as a cycling cross-reference chain, added 2 3t labels (NO NODE IS TRUE ALONE / THE LEDGER HOLDS WHAT ONE CANNOT). Each fragment is deliberately incomplete and points at the next — walking all four never closes. Commons-as-response enacted." },
-    "SpeculativeComputation_Rhizome_Network":            { "thesis": 2, "helper": null, "aesthetic": null, "note": "only 1 artifact — thin for a thesis-landing map" },
-    "AdvancedLaboratory_Lab_Equipment_Simulation":       { "thesis": 2, "helper": null, "aesthetic": null, "note": "only 1 artifact; unclear how it lands post-crisis" },
+    "SpeculativeComputation_Rhizome_Network":            { "thesis": 3, "helper": 3, "aesthetic": 2, "note": "PHASE 2c 2026-04-19 — 4 3t labels: ANY POINT CONNECTS TO ANY OTHER / NO CENTER / NO HIERARCHY / THE MAP IS NOT THE TERRITORY. Deleuze/Guattari principles now stated in the room alongside the cave demo." },
+    "AdvancedLaboratory_Lab_Equipment_Simulation":       { "thesis": 3, "helper": 3, "aesthetic": 2, "note": "PHASE 2c 2026-04-19 — 4 3t labels: BUILD FROM VALENCE / GEOMETRY IS CONSTRAINT / DESIGN WITH LIMITS / POST-REDUCTIONIST PRACTICE. Utilities block reformatted to compact style." },
     "PostCrisis_Synthesis":                              { "thesis": 4, "helper": 4, "aesthetic": 3, "note": "PHASE 2a 2026-04-19 — central qfep_formula_3d on raised platform + 7 3t labels naming prior practices + bias_from_inside/florensky_sphere mementos + 2 tt boards. Capstone now coherent." }
   }
 }
