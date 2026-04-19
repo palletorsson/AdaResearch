@@ -6018,6 +6018,50 @@
 				"cluster_with": [],
 				"preferred_zone": "entry"
 			}
+		},
+		"topological_sort": {
+			"category": "graphtheory",
+			"complexity": "intermediate",
+			"description": "Topological sort — linear ordering of vertices in a directed acyclic graph",
+			"include_in_map_data": true,
+			"lookup_name": "topological_sort",
+			"map_ready": true,
+			"map_sequences": [
+				"graphtheory"
+			],
+			"scene": "res://algorithms/graphtheory/topological_sort/topological_sort.tscn"
+		},
+		"situated_readout": {
+			"category": "critical",
+			"complexity": "basic",
+			"description": "A flat display panel showing a classification verdict for the same SUBJECT #4729. The verdict is determined by the panel's own world position — place four instances in four quadrants and the player sees four incompatible 'objective' answers to the same query. Haraway's situated knowledge, enacted spatially: the view always comes from somewhere.",
+			"include_in_map_data": true,
+			"interaction": "read",
+			"lookup_name": "situated_readout",
+			"map_ready": true,
+			"map_sequences": [
+				"postfoundationscrisis"
+			],
+			"name": "Situated Readout",
+			"parameters": {
+				"footprint": [1.2, 1.4, 0.1],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/artifacts/situated_readout/situated_readout.tscn",
+			"sequence": "postfoundationscrisis",
+			"tags": [
+				"situated_knowledge",
+				"haraway",
+				"critical_algorithms",
+				"perspective",
+				"position_dependent",
+				"bias"
+			],
+			"identity": {
+				"essence": "A verdict that changes with where it speaks from",
+				"desire": "To be read alongside three siblings showing incompatible answers to the same input",
+				"truth": "There is no view from nowhere — the classification belongs to the location, not the subject"
+			}
 		}
 	},
 	"registry_info": {
