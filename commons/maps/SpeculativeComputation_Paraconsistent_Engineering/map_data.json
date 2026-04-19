@@ -1,0 +1,71 @@
+{
+  "map_info": {
+      "name": "Paraconsistent Engineering",
+      "lookup_name": "SpeculativeComputation_Paraconsistent_Engineering",
+      "description": "What Florensky observed, the engineer applies: systems that hold A and not-A without collapsing. Version control. Eventual consistency. Schrödinger's build.",
+      "version": "0.1",
+      "format": "json",
+      "dimensions": {
+          "width": 10,
+          "depth": 10,
+          "max_height": 3
+      },
+      "metadata": {
+          "difficulty": "advanced",
+          "category": "speculative_computation",
+          "status": "scaffold",
+          "design_notes": "SCAFFOLD — two overlapping zones with contradictory states coexisting. Artifacts TBD (merge-conflict visualizer, version tree, CAP-theorem walk)."
+      },
+      "title": "Holding Contradiction in Production"
+  },
+  "utility_definitions": {
+      "t": {
+          "type": "teleporter",
+          "name": "Next",
+          "description": "Continue to next step",
+          "properties": { "action": "next_in_sequence" }
+      }
+  },
+  "audio": {
+      "ambient_preset": "minimal_drone",
+      "volume": -10.0
+  },
+  "layers": {
+    "structure": [
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+      ["1", "1", "1", "1", "0", "1", "1", "1", "1", "1"]
+    ],
+    "utilities": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", "sub:map", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", "t", " ", " ", " ", " ", " "]
+    ],
+    "interactables": [
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+    ]
+  }
+}

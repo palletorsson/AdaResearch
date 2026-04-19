@@ -5,8 +5,8 @@
 	  "truth": "Knowing the limits of formalization, what do we build?",
 	  "qfep_term": "Edge",
 	  "qfep_connection": "After the foundations crisis, these maps explore what happens when incompleteness, bias, and rhizomatic thinking become design materials rather than problems to solve.",
-	  "formula": "limits â†’ critical practice â†’ new structures",
-	  "description": "Collected maps from deferred sequences â€” each a standalone exploration that extends the foundations crisis into contemporary territory. Algorithmic bias as lived incompleteness. Rhizomatic networks as alternatives to hierarchical formalization. Molecular design as post-reductionist practice.",
+	  "formula": "limits → critical practice → new structures",
+	  "description": "The sequence that lands the thesis. The foundations crisis showed that every formal system has an outside. These maps walk what becomes possible once you stop demanding completeness: ethics as architecture, paraconsistent engineering, situated computation, the commons as a response to incompleteness, rhizomatic networks, molecular design, and a synthesis that treats the edge as ground rather than limit.",
 	  "layer": "integration",
 	  "prerequisites": [
         "foundationscrisis"
@@ -15,21 +15,36 @@
         "qfeplaboratory"
 	  ],
 	  "difficulty": "advanced",
-	  "estimated_time": "15-20 minutes",
+	  "estimated_time": "30-40 minutes",
 	  "learning_objectives": [
 		"Algorithmic bias as structural incompleteness in classification systems",
+		"Ethics as the shape of the room, not a post-processing filter",
+		"Paraconsistent engineering — holding contradiction without collapse",
+		"Situated computation — knowledge always has a body, a place, a time",
+		"Collective knowledge and the commons as responses to incompleteness",
 		"Rhizomatic networks as non-hierarchical alternatives to tree structures",
-        "Molecular design as embodied formal systems"
+		"Molecular design as embodied formal systems",
+		"Synthesis: the edge is the ground, not the limit"
 	  ],
 	  "content": [
 		"CriticalAlgorithms_Algorithmic_Bias_Visualization: Bias as Structural Incompleteness",
+		"CriticalAlgorithms_Applied_Ethics: Ethical Design After Incompleteness",
+		"SpeculativeComputation_Paraconsistent_Engineering: Holding Contradiction in Production",
+		"SpeculativeComputation_Situated_Computation: Knowledge With a Body",
+		"SpeculativeComputation_Collective_Knowledge: The Commons as Response",
 		"SpeculativeComputation_Rhizome_Network: Networks Without Hierarchy",
-        "AdvancedLaboratory_Lab_Equipment_Simulation: Molecular Design After Crisis"
+		"AdvancedLaboratory_Lab_Equipment_Simulation: Molecular Design After Crisis",
+		"PostCrisis_Synthesis: The Edge Is the Ground"
 	  ],
 	  "maps": [
 		"CriticalAlgorithms_Algorithmic_Bias_Visualization",
+		"CriticalAlgorithms_Applied_Ethics",
+		"SpeculativeComputation_Paraconsistent_Engineering",
+		"SpeculativeComputation_Situated_Computation",
+		"SpeculativeComputation_Collective_Knowledge",
 		"SpeculativeComputation_Rhizome_Network",
-        "AdvancedLaboratory_Lab_Equipment_Simulation"
+		"AdvancedLaboratory_Lab_Equipment_Simulation",
+		"PostCrisis_Synthesis"
 	  ],
 	  "audio": {
 		"ambient_preset": "minimal_drone",
@@ -43,29 +58,58 @@
 		{
 		  "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
 		  "position": "intro",
-		  "artifacts": [
-            "bias_visualizer"
-		  ],
+		  "artifacts": [ "bias_visualizer" ],
 		  "size_budget": "compact_only",
 		  "rationale": "Single artifact in divided room; spatial inequality of the architecture carries the lesson about bias"
 		},
 		{
+		  "map": "CriticalAlgorithms_Applied_Ethics",
+		  "position": "response",
+		  "artifacts": [],
+		  "size_budget": "compact_only",
+		  "rationale": "SCAFFOLD — phase 2 will add ethics-after-Gödel artifacts (ethical-design clipboard, excluded-class visualizer, room-shape demonstrator)"
+		},
+		{
+		  "map": "SpeculativeComputation_Paraconsistent_Engineering",
+		  "position": "principle",
+		  "artifacts": [],
+		  "size_budget": "compact_only",
+		  "rationale": "SCAFFOLD — phase 2 will add paraconsistent-logic artifacts (merge-conflict visualizer, CAP-theorem walk, Florensky-in-production demonstrator)"
+		},
+		{
+		  "map": "SpeculativeComputation_Situated_Computation",
+		  "position": "principle",
+		  "artifacts": [],
+		  "size_budget": "compact_only",
+		  "rationale": "SCAFFOLD — phase 2 will add position-dependent computation artifacts (situated-sensor demo, locatable-knowledge station)"
+		},
+		{
+		  "map": "SpeculativeComputation_Collective_Knowledge",
+		  "position": "principle",
+		  "artifacts": [],
+		  "size_budget": "compact_only",
+		  "rationale": "SCAFFOLD — phase 2 will add commons/distributed-cognition artifacts (wiki-fragment station, peer-edit ledger, citation-graph node)"
+		},
+		{
 		  "map": "SpeculativeComputation_Rhizome_Network",
-		  "position": "exploration",
-		  "artifacts": [
-            "rhizome_cave_demo"
-		  ],
+		  "position": "applied_form",
+		  "artifacts": [ "rhizome_cave_demo" ],
 		  "size_budget": "compact_only",
 		  "rationale": "Single artifact in four-chamber rhizomatic cave; non-hierarchical layout enacts Deleuze/Guattari spatial logic"
 		},
 		{
 		  "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
-		  "position": "synthesis",
-		  "artifacts": [
-            "MolecularDesigner"
-		  ],
+		  "position": "applied_form",
+		  "artifacts": [ "MolecularDesigner" ],
 		  "size_budget": "compact_only",
 		  "rationale": "Single artifact on clean lab benches; molecular design as constructive post-reductionist practice"
+		},
+		{
+		  "map": "PostCrisis_Synthesis",
+		  "position": "synthesis",
+		  "artifacts": [],
+		  "size_budget": "compact_only",
+		  "rationale": "SCAFFOLD — phase 2 will add the capstone: central raised platform with 7 stations ringing it, each recalling one prior map; the edge-as-ground artifact"
 		}
 	  ]
 	}

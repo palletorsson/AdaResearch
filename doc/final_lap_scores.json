@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Hand/AI-maintained quality signals for final-arc maps. Read by ada_encyclopedia /api/final-lap. Scores are 0-5 or null=unknown.",
-    "updated": "2026-04-19 (helper labels across QFEP Introduction/F_Term/E_Term/Synthesis)",
+    "updated": "2026-04-19 (postfoundationscrisis scaffolded 3→8 maps; all 5 new maps are SCAFFOLD pending phase-2 artifacts)",
     "rubric": {
       "thesis": "Does blurb + intent + artifacts land the sequence's truth statement? 0=off, 5=lands",
       "helper": "Hub present? Close-body text? Readable cues? 0=bare grid, 5=full",
@@ -18,12 +18,15 @@
     { "sequence": "qfeplaboratory", "issue": "Annotation boards scattered without a central reading hub; cognitive load to reconstruct the narrative arc mid-journey" }
   ],
   "missing_maps": {
+    "postfoundationscrisis": []
+  },
+  "scaffolded_maps_awaiting_artifacts": {
     "postfoundationscrisis": [
-      { "slot": "post_crisis_applied_ethics", "why": "bias_from_inside exists, but no map on ethical design after Gödel" },
-      { "slot": "post_crisis_paraconsistent_engineering", "why": "Florensky in foundations is observed; post-crisis needs applied paraconsistent system" },
-      { "slot": "post_crisis_situated_computation", "why": "situated/embodied knowledge as design constraint — missing" },
-      { "slot": "post_crisis_collective_knowledge", "why": "wiki/commons/distributed cognition as response to incompleteness" },
-      { "slot": "post_crisis_synthesis", "why": "no synthesis map exists; arc ends mid-sentence" }
+      { "map": "CriticalAlgorithms_Applied_Ethics", "phase": 2, "needs": "ethical-design clipboard, excluded-class visualizer, room-shape demonstrator" },
+      { "map": "SpeculativeComputation_Paraconsistent_Engineering", "phase": 2, "needs": "merge-conflict visualizer, CAP-theorem walk, Florensky-in-production demonstrator" },
+      { "map": "SpeculativeComputation_Situated_Computation", "phase": 2, "needs": "situated-sensor demo, position-dependent output station" },
+      { "map": "SpeculativeComputation_Collective_Knowledge", "phase": 2, "needs": "wiki-fragment station, peer-edit ledger, citation-graph node" },
+      { "map": "PostCrisis_Synthesis", "phase": 2, "needs": "capstone — 7 stations recalling each prior map + edge-as-ground central artifact" }
     ]
   },
   "maps": {
@@ -46,7 +49,12 @@
     "QFEP_Synthesis":                     { "thesis": 4, "helper": 4, "aesthetic": 3, "note": "added 8 3t labels: F / E(S) / λ / φ term signposts + THE FORMULA COMPLETE / THE FORCE EARNED / RETURN TRANSFORMED spine. Still could use dedicated reading bench." },
 
     "CriticalAlgorithms_Algorithmic_Bias_Visualization": { "thesis": 3, "helper": null, "aesthetic": null, "note": "2 artifacts; needs to land bias-as-structural-incompleteness" },
+    "CriticalAlgorithms_Applied_Ethics":                 { "thesis": 2, "helper": 0, "aesthetic": 1, "note": "SCAFFOLD 2026-04-19 — blurb + empty room. Phase 2 artifacts pending." },
+    "SpeculativeComputation_Paraconsistent_Engineering": { "thesis": 2, "helper": 0, "aesthetic": 1, "note": "SCAFFOLD 2026-04-19 — blurb + empty room. Phase 2 artifacts pending." },
+    "SpeculativeComputation_Situated_Computation":       { "thesis": 2, "helper": 0, "aesthetic": 1, "note": "SCAFFOLD 2026-04-19 — blurb + empty room. Phase 2 artifacts pending." },
+    "SpeculativeComputation_Collective_Knowledge":       { "thesis": 2, "helper": 0, "aesthetic": 1, "note": "SCAFFOLD 2026-04-19 — blurb + empty room. Phase 2 artifacts pending." },
     "SpeculativeComputation_Rhizome_Network":            { "thesis": 2, "helper": null, "aesthetic": null, "note": "only 1 artifact — thin for a thesis-landing map" },
-    "AdvancedLaboratory_Lab_Equipment_Simulation":       { "thesis": 2, "helper": null, "aesthetic": null, "note": "only 1 artifact; unclear how it lands post-crisis" }
+    "AdvancedLaboratory_Lab_Equipment_Simulation":       { "thesis": 2, "helper": null, "aesthetic": null, "note": "only 1 artifact; unclear how it lands post-crisis" },
+    "PostCrisis_Synthesis":                              { "thesis": 3, "helper": 0, "aesthetic": 2, "note": "SCAFFOLD 2026-04-19 — central raised platform + blurb land the intent; artifacts pending. Thesis scored higher because the blurb and spatial frame carry real synthesis intent." }
   }
 }
