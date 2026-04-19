@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Hand/AI-maintained quality signals for final-arc maps. Read by ada_encyclopedia /api/final-lap. Scores are 0-5 or null=unknown.",
-    "updated": "2026-04-19 (helper labels added to QFEP_Introduction/F_Term/E_Term)",
+    "updated": "2026-04-19 (helper labels across QFEP Introduction/F_Term/E_Term/Synthesis)",
     "rubric": {
       "thesis": "Does blurb + intent + artifacts land the sequence's truth statement? 0=off, 5=lands",
       "helper": "Hub present? Close-body text? Readable cues? 0=bare grid, 5=full",
@@ -43,7 +43,7 @@
     "QFEP_Phi_Term":                      { "thesis": 4, "helper": 3, "aesthetic": 3, "note": "phi slider isolated in middle; no info surfaces for the queer-signature concept" },
     "QFEP_Edge_Of_Chaos":                 { "thesis": 4, "helper": 2, "aesthetic": 4, "note": "strong atmosphere but no floating labels to interpret Turing patterns in real time" },
     "QFEP_Sandbox":                       { "thesis": 4, "helper": 2, "aesthetic": 3, "note": "full control but pedagogically underdeveloped — no guide for how λ/φ interact live" },
-    "QFEP_Synthesis":                     { "thesis": 4, "helper": 3, "aesthetic": 3, "note": "feels like an epilogue without a reflective hub tying the arc together" },
+    "QFEP_Synthesis":                     { "thesis": 4, "helper": 4, "aesthetic": 3, "note": "added 8 3t labels: F / E(S) / λ / φ term signposts + THE FORMULA COMPLETE / THE FORCE EARNED / RETURN TRANSFORMED spine. Still could use dedicated reading bench." },
 
     "CriticalAlgorithms_Algorithmic_Bias_Visualization": { "thesis": 3, "helper": null, "aesthetic": null, "note": "2 artifacts; needs to land bias-as-structural-incompleteness" },
     "SpeculativeComputation_Rhizome_Network":            { "thesis": 2, "helper": null, "aesthetic": null, "note": "only 1 artifact — thin for a thesis-landing map" },
