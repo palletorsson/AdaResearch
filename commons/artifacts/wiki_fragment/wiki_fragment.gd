@@ -151,7 +151,7 @@ func _resolve_fragment_key() -> String:
 # Grid system calls this when the artifact is placed. Accepts:
 #   fragment: one of NORTH, EAST, SOUTH, WEST — authorial identity.
 func apply_grid_config(config_data: Dictionary) -> void:
-	var raw := config_data.get("fragment", "")
+	var raw: Variant = config_data.get("fragment", "")
 	if typeof(raw) == TYPE_STRING:
 		_fragment_key = String(raw).strip_edges().to_upper()
 	if _title_label != null:

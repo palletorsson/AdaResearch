@@ -134,7 +134,7 @@ func _resolve_quadrant_key(pos: Vector3) -> String:
 # Grid system calls this when the artifact is placed. Accepts:
 #   verdict: one of NW, NE, SW, SE — explicit quadrant override.
 func apply_grid_config(config_data: Dictionary) -> void:
-	var raw := config_data.get("verdict", "")
+	var raw: Variant = config_data.get("verdict", "")
 	if typeof(raw) == TYPE_STRING:
 		_verdict_override = String(raw).strip_edges().to_upper()
 	# Re-populate if config arrives after _ready() already ran.
