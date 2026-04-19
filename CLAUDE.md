@@ -235,6 +235,16 @@ See `doc/MAP_BUILDING_GUIDE.md` for full details. Key points:
 Run `python tools/heat_map_generator.py` to see what needs work.
 The `/continue` skill reads this to pick the next task.
 
+## Final Lap (thesis-landing readiness)
+
+When working on final-arc sequences (`foundationscrisis`, `qfeplaboratory`, `postfoundationscrisis`), start with:
+
+```
+curl http://localhost:3003/api/final-lap?format=markdown
+```
+
+Returns underdeveloped maps, missing-map slots, unwalked maps, and recent VR feedback — context-enhancing at session start. Page: `localhost:3003/final-lap`. Scores live in `doc/final_lap_scores.json` — update at end of sessions that touch final-arc maps.
+
 ## Artifact Creation Pattern
 
 3 files: `<token>.gd`, `<token>.tscn`, registry JSON entry.

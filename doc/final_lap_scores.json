@@ -1,0 +1,52 @@
+{
+  "_meta": {
+    "description": "Hand/AI-maintained quality signals for final-arc maps. Read by ada_encyclopedia /api/final-lap. Scores are 0-5 or null=unknown.",
+    "updated": "2026-04-19 (helper labels added to QFEP_Introduction/F_Term/E_Term)",
+    "rubric": {
+      "thesis": "Does blurb + intent + artifacts land the sequence's truth statement? 0=off, 5=lands",
+      "helper": "Hub present? Close-body text? Readable cues? 0=bare grid, 5=full",
+      "aesthetic": "Substrate/biome applied and appropriate to sequence stage? 0=grey, 5=full"
+    }
+  },
+  "focus_sequences": [
+    "foundationscrisis",
+    "qfeplaboratory",
+    "postfoundationscrisis"
+  ],
+  "cross_sequence_issues": [
+    { "sequence": "qfeplaboratory", "issue": "Every map spawns at column 1 (far west) — player consistently disoriented, never faces the thematic centerpiece on entry" },
+    { "sequence": "qfeplaboratory", "issue": "Annotation boards scattered without a central reading hub; cognitive load to reconstruct the narrative arc mid-journey" }
+  ],
+  "missing_maps": {
+    "postfoundationscrisis": [
+      { "slot": "post_crisis_applied_ethics", "why": "bias_from_inside exists, but no map on ethical design after Gödel" },
+      { "slot": "post_crisis_paraconsistent_engineering", "why": "Florensky in foundations is observed; post-crisis needs applied paraconsistent system" },
+      { "slot": "post_crisis_situated_computation", "why": "situated/embodied knowledge as design constraint — missing" },
+      { "slot": "post_crisis_collective_knowledge", "why": "wiki/commons/distributed cognition as response to incompleteness" },
+      { "slot": "post_crisis_synthesis", "why": "no synthesis map exists; arc ends mid-sentence" }
+    ]
+  },
+  "maps": {
+    "Euclid_Parallel":                    { "thesis": 4, "helper": null, "aesthetic": null },
+    "NonEuclidean_Spaces":                { "thesis": 4, "helper": null, "aesthetic": null },
+    "Russell_Paradox":                    { "thesis": 3, "helper": null, "aesthetic": null, "note": "only 1 artifact; risks feeling thin" },
+    "Godel_Incompleteness":               { "thesis": 3, "helper": null, "aesthetic": null, "note": "only 1 artifact" },
+    "Escher_Impossible":                  { "thesis": 4, "helper": null, "aesthetic": null },
+    "Brouwer_Intuitionism":               { "thesis": 4, "helper": null, "aesthetic": null },
+    "Florensky_Paraconsistent":           { "thesis": 4, "helper": null, "aesthetic": null },
+    "Crisis_Synthesis":                   { "thesis": 4, "helper": null, "aesthetic": null },
+
+    "QFEP_Introduction":                  { "thesis": 4, "helper": 3, "aesthetic": 3, "note": "added 3t labels: THE FORMULA / TUNE λ AND φ / GRAB THE TERMS. Still needs central hub." },
+    "QFEP_F_Term":                        { "thesis": 4, "helper": 3, "aesthetic": 3, "note": "added 3t labels: F — FREE ENERGY / PATTERNS SATISFY / λ=0 PURE ORDER" },
+    "QFEP_E_Term":                        { "thesis": 4, "helper": 3, "aesthetic": 3, "note": "added 3t labels: E — ENTROPY / POSSIBILITY SPACE / λ=1 DISSOLUTION. λ-forced-to-1 still feels artificial." },
+    "QFEP_Lambda_Spectrum":               { "thesis": 4, "helper": 3, "aesthetic": 5, "note": "strongest map in the sequence — color gradient + 3D labels work" },
+    "QFEP_Phi_Term":                      { "thesis": 4, "helper": 3, "aesthetic": 3, "note": "phi slider isolated in middle; no info surfaces for the queer-signature concept" },
+    "QFEP_Edge_Of_Chaos":                 { "thesis": 4, "helper": 2, "aesthetic": 4, "note": "strong atmosphere but no floating labels to interpret Turing patterns in real time" },
+    "QFEP_Sandbox":                       { "thesis": 4, "helper": 2, "aesthetic": 3, "note": "full control but pedagogically underdeveloped — no guide for how λ/φ interact live" },
+    "QFEP_Synthesis":                     { "thesis": 4, "helper": 3, "aesthetic": 3, "note": "feels like an epilogue without a reflective hub tying the arc together" },
+
+    "CriticalAlgorithms_Algorithmic_Bias_Visualization": { "thesis": 3, "helper": null, "aesthetic": null, "note": "2 artifacts; needs to land bias-as-structural-incompleteness" },
+    "SpeculativeComputation_Rhizome_Network":            { "thesis": 2, "helper": null, "aesthetic": null, "note": "only 1 artifact — thin for a thesis-landing map" },
+    "AdvancedLaboratory_Lab_Equipment_Simulation":       { "thesis": 2, "helper": null, "aesthetic": null, "note": "only 1 artifact; unclear how it lands post-crisis" }
+  }
+}
