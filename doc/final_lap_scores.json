@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Hand/AI-maintained quality signals for final-arc maps. Read by ada_encyclopedia /api/final-lap. Scores are 0-5 or null=unknown.",
-    "updated": "2026-04-19 (postfoundationscrisis scaffolded 3→8 maps; all 5 new maps are SCAFFOLD pending phase-2 artifacts)",
+    "updated": "2026-04-19 (postfoundationscrisis — 3 scaffolds populated with existing artifacts; 2 remain needing bespoke creation)",
     "rubric": {
       "thesis": "Does blurb + intent + artifacts land the sequence's truth statement? 0=off, 5=lands",
       "helper": "Hub present? Close-body text? Readable cues? 0=bare grid, 5=full",
@@ -49,12 +49,12 @@
     "QFEP_Synthesis":                     { "thesis": 4, "helper": 4, "aesthetic": 3, "note": "added 8 3t labels: F / E(S) / λ / φ term signposts + THE FORMULA COMPLETE / THE FORCE EARNED / RETURN TRANSFORMED spine. Still could use dedicated reading bench." },
 
     "CriticalAlgorithms_Algorithmic_Bias_Visualization": { "thesis": 3, "helper": null, "aesthetic": null, "note": "2 artifacts; needs to land bias-as-structural-incompleteness" },
-    "CriticalAlgorithms_Applied_Ethics":                 { "thesis": 2, "helper": 0, "aesthetic": 1, "note": "SCAFFOLD 2026-04-19 — blurb + empty room. Phase 2 artifacts pending." },
-    "SpeculativeComputation_Paraconsistent_Engineering": { "thesis": 2, "helper": 0, "aesthetic": 1, "note": "SCAFFOLD 2026-04-19 — blurb + empty room. Phase 2 artifacts pending." },
-    "SpeculativeComputation_Situated_Computation":       { "thesis": 2, "helper": 0, "aesthetic": 1, "note": "SCAFFOLD 2026-04-19 — blurb + empty room. Phase 2 artifacts pending." },
-    "SpeculativeComputation_Collective_Knowledge":       { "thesis": 2, "helper": 0, "aesthetic": 1, "note": "SCAFFOLD 2026-04-19 — blurb + empty room. Phase 2 artifacts pending." },
+    "CriticalAlgorithms_Applied_Ethics":                 { "thesis": 3, "helper": 3, "aesthetic": 2, "note": "PHASE 2a 2026-04-19 — placed bias_from_inside + godel_statement_plaque + 3 3t labels + tt:qfep_critical. Fresh artifacts for room-shape/excluded-class still needed." },
+    "SpeculativeComputation_Paraconsistent_Engineering": { "thesis": 3, "helper": 3, "aesthetic": 2, "note": "PHASE 2a 2026-04-19 — placed florensky_sphere + superposition_display + schrodinger_box + 3 3t labels + tt:qfep_application. Engineering-specific artifacts (merge conflict, CAP walk) still needed for full thesis." },
+    "SpeculativeComputation_Situated_Computation":       { "thesis": 2, "helper": 0, "aesthetic": 1, "note": "SCAFFOLD 2026-04-19 — blurb + empty room. No existing artifact fits; needs bespoke creation." },
+    "SpeculativeComputation_Collective_Knowledge":       { "thesis": 2, "helper": 0, "aesthetic": 1, "note": "SCAFFOLD 2026-04-19 — blurb + empty room. No existing artifact fits; needs bespoke creation." },
     "SpeculativeComputation_Rhizome_Network":            { "thesis": 2, "helper": null, "aesthetic": null, "note": "only 1 artifact — thin for a thesis-landing map" },
     "AdvancedLaboratory_Lab_Equipment_Simulation":       { "thesis": 2, "helper": null, "aesthetic": null, "note": "only 1 artifact; unclear how it lands post-crisis" },
-    "PostCrisis_Synthesis":                              { "thesis": 3, "helper": 0, "aesthetic": 2, "note": "SCAFFOLD 2026-04-19 — central raised platform + blurb land the intent; artifacts pending. Thesis scored higher because the blurb and spatial frame carry real synthesis intent." }
+    "PostCrisis_Synthesis":                              { "thesis": 4, "helper": 4, "aesthetic": 3, "note": "PHASE 2a 2026-04-19 — central qfep_formula_3d on raised platform + 7 3t labels naming prior practices + bias_from_inside/florensky_sphere mementos + 2 tt boards. Capstone now coherent." }
   }
 }
