@@ -1,5 +1,14 @@
 {
-  "version": "1.0",
-  "description": "Proposed skill improvements from the BREATHE Evolve phase. Human reviews and applies via /ada-skill-updater.",
-  "proposals": []
+  "proposals": [
+    {
+      "id": "prop-001",
+      "created": "2026-04-20T09:00:00",
+      "skill": "ada-breather",
+      "status": "proposed",
+      "evidence": "In breath 2026-04-20, selected gradient_descent_landscape and particle_swarm_optimization as targets to advance machinelearning/swarmintelligence garden sequences. Both had @identity added successfully, but garden diagnosis counts did NOT change for those sequences. Root cause: garden_listener --diagnosis groups by MAP sequence, not artifact registry category. These artifacts appear in gallery maps (counted as 'gallery'), not content sequence maps. Success rate for this specific task type (advancing SCATTERED content sequences via gallery artifact identity) was 0/2.",
+      "proposed_change": "In the Evaluate phase, when selecting garden_identity_leverage items, add a pre-check step: for each candidate voiceless artifact, verify it appears in the TARGET SEQUENCE'S maps (not just in a gallery map for that sequence). Use: check the map_data.json files in commons/maps/<MAP_NAME>/ for maps belonging to the sequence, verify the artifact lookup_name appears in those maps' interactables layer. Only target artifacts placed in sequence-specific maps. For gallery-placed artifacts, note that @identity improves the 'gallery' sequence count, not the content sequence count.",
+      "expected_improvement": "Eliminate 0-effect garden work. When targeting machinelearning sequence, only count artifacts in ML_* maps. When targeting swarmintelligence, only count artifacts in SwarmIntelligence_* maps. This changes success rate for sequence-specific garden targeting from ~50% to ~90%+.",
+      "breath_refs": ["2026-04-20T09:00"]
+    }
+  ]
 }

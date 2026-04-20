@@ -55,6 +55,84 @@
       "topic": "registry_repair",
       "insight": "When pipeline scorer reports 99% artifacts, exactly 1 artifact token in map_data.json (layers.interactables) is missing from all registries. Fix: cross-reference tokens against load_all_registry_scenes(). 3 repairs advanced 2 sequences from stage 3 to stage 5.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-04-14T05:39:27.631743+00:00",
+      "topic": "registry_repair",
+      "insight": "Two registry files (qfep.json, transforms.json) had _comment_* string values in artifacts dict causing 'str object has no attribute get' — entire files silently skipped by pipeline scorer. Fix: remove comment keys. This pattern may exist in other registry files.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-14T05:39:27.727898+00:00",
+      "topic": "registry_repair",
+      "insight": "Wrong res:// paths are common: array vs arrays directory, recursiveemergence vs fractals directory, light vs postprocessing directory. When scorer shows 95-99% artifacts, check disk paths against registry scene values.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-14T05:39:27.837962+00:00",
+      "topic": "registry_repair",
+      "insight": "tt (tutorial text) and 3t (word_is text display) are grid utilities placed in interactables layer. Registering them with their scene files allows pipeline scorer to count them as present. Add to commons_artifacts.json.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-15T07:17:15.112352+00:00",
+      "topic": "map_data_format",
+      "insight": "Old flat format (name/gridWidth/structure at top level) fails validate_map.py has_required_fields check. New format requires map_info + layers wrapper. Convert by wrapping existing data.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-15T07:17:15.223717+00:00",
+      "topic": "release_gates",
+      "insight": "Grade-F maps come from JSON validity failures OR missing has_required_fields (map_info + layers). Gate C (Map Validation) now passes at grade_F=0. Gate B still fails on 55 unresolved scene files.",
+      "lod": 2
+    },
+    {
+      "timestamp": "2026-04-16T07:10:26.462992+00:00",
+      "topic": "registry_repair",
+      "insight": "scene_path key vs scene key mismatch: workbench reads value.get('scene') but some entries were written with 'scene_path' key. Fix: add 'scene' key = scene_path value. Affects physics_simulation.json and procgen_extra.json.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-17T07:12:43.802508+00:00",
+      "topic": "artifact_lookup_patterns",
+      "insight": "laser_sward in Point_Lines was a typo for laser_sword. Pattern: when scorer shows 99% artifacts, check for misspellings in map_data.json interactables — the scorer does exact string matching against registry keys.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-17T07:12:46.219054+00:00",
+      "topic": "registry_alias_pattern",
+      "insight": "When an artifact file is named X but the registry entry is named X_algorithm, maps that use X as the lookup will score as missing. Fix by adding a registry alias entry X pointing to the same scene as X_algorithm. topological_sort vs topological_sort_algorithm was this pattern in graphtheory.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-18T08:48:50.963618+00:00",
+      "topic": "pipeline_scoring",
+      "insight": "Validation scorer had 'FAIL not in text' bug — pathfinder always outputs '0 FAIL' so all maps failed. Fix: check ' 0 FAIL' in result_text. All 19 sequences advanced stage 5→6.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-18T08:48:51.083406+00:00",
+      "topic": "release_gates",
+      "insight": "All 4 gates pass for first time. Gate B: 55 tscn stubs in commons/artifacts/. Gate A: map_has_data() now strips ': Display Title' colon suffix before folder lookup.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-19T10:09:52.192680+00:00",
+      "topic": "garden_identity_leverage",
+      "insight": "Dark_sphere and shared commons artifacts multiply garden health: voicing 1 .gd file voices it N times (once per map it appears in). Focus @identity work on artifacts used across many maps for max garden coverage.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-19T10:09:52.298121+00:00",
+      "topic": "primitives_garden_threshold",
+      "insight": "Primitives garden state: SCATTERED->GROWING at 70% voiced threshold. 64/91 artifacts voiced after adding @identity to 9 files. Next: add @identity to grab_octahedron, laser_measure, triangle, vectorline to push toward LIVING.",
+      "lod": 2
+    },
+    {
+      "timestamp": "2026-04-20T07:14:43.143039+00:00",
+      "topic": "garden_identity_leverage",
+      "insight": "garden_listener --diagnosis groups artifacts by MAP sequence not artifact registry category. Gallery maps count toward 'gallery' sequence, not machinelearning/swarmintelligence. To advance ML/swarm sequences: place voiced artifacts in sequence maps or create missing .gd files.",
+      "lod": 3
     }
   ]
 }
