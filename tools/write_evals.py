@@ -404,6 +404,21 @@ RD_EVALS = {
     "rd08_chaos_heightmap":    E(3, "working",    "Chaotic (F, K) never equilibrates — 5000 iterations produces a perpetually-morphing ridge landscape. Parameters that don't settle."),
 }
 
+# ─── Wallpaper patterns — 17 mathematical tilings ─────────────
+
+PATTERN_EVALS = {
+    "pt01_p1_bauhaus":    E(3, "working",     "p1 — translation only. Simplest group. Bauhaus palette reveals the raw motif tiling without symmetry ornament."),
+    "pt02_p2_escher":     E(3, "working",     "p2 — 180° rotation. Monochrome palette emphasizes figure-ground flipping between tile halves."),
+    "pt03_p4m_alhambra":  E(4, "winner",      "p4m with dot-motif and Alhambra palette. 90° rotation + reflections produce ceramic-tile aesthetic. The most common Alhambra group."),
+    "pt04_p6m_persian":   E(5, "crown_jewel", "p6m — hexagonal rotation + reflections, the richest of all 17 groups. Persian palette turns the dot motif into carpet medallions. Textbook output of wallpaper mathematics."),
+    "pt05_p3_memphis":    E(3, "working",     "p3 — 120° rotation only, no reflection. Triangular chirality. Memphis palette reads as confetti-scale postmodern textile."),
+    "pt06_pmm_tatami":    E(4, "winner",      "pmm — two perpendicular reflections on a rectangular lattice. Tatami palette turns the weave into literal straw matting."),
+    "pt07_p4g_pastel":    E(3, "working",     "p4g — 90° rotation + reflections NOT through centers. Pastel palette softens the chirality distinction from p4m."),
+    "pt08_p6_monochrome": E(3, "working",     "p6 — 60° rotation only, no reflection. Hexagonal chirality. Monochrome reduces to pure geometry."),
+    "pt09_pgg_bauhaus":   E(3, "working",     "pgg — two perpendicular glides, no reflection. Chiral zig-zag. Bauhaus palette."),
+    "pt10_p3m1_alhambra": E(4, "winner",      "p3m1 — 120° rotation + reflection through rotation centers. Classic Moorish tessellation emerges from Alhambra palette + dot motif."),
+}
+
 SB_LSYSTEM_BRIDGE_EVALS = {
     "sb_ls01_plant_skeleton":       E(4, "winner", "DNA BRIDGE: L-system plant as spring-mass skeleton. Upper tree stands, lower portion collapsed to floor. Visible L-system branching structure with physics consequence."),
     "sb_ls02_plant_wind_collapse":  E(5, "crown_jewel", "DNA BRIDGE: Same L-system plant, low stiffness + diagonal wind + 140 steps. Tree bent sideways almost to ground. 'Fallen tree after storm' from pure DNA + force."),
@@ -448,9 +463,11 @@ def main() -> int:
     write_gallery_evals("soft-body-gallery",       sb_full)
     write_gallery_evals("lsystem-gallery",         LSYSTEM_EVALS)
     write_gallery_evals("rd-gallery",              RD_EVALS)
+    write_gallery_evals("pattern-gallery",         PATTERN_EVALS)
     total = (len(graph_full) + len(MESH_EVALS) + len(FORM_EVALS)
-             + len(ps_full) + len(sb_full) + len(LSYSTEM_EVALS) + len(RD_EVALS))
-    print(f"Total: {total} evals across 7 galleries")
+             + len(ps_full) + len(sb_full) + len(LSYSTEM_EVALS)
+             + len(RD_EVALS) + len(PATTERN_EVALS))
+    print(f"Total: {total} evals across 8 galleries")
     return 0
 
 
