@@ -1,3 +1,13 @@
+# @identity
+# essence: a 128×128 Gray-Scott reaction-diffusion simulation displayed on a 3D mesh plane — two chemical species U and V diffuse at different rates, react, and self-organize into spots, stripes, and branching coral-like patterns from uniform random noise
+# desire: to show that pattern is a property of dynamics, not of design — the spots and stripes are not drawn; they are consequences of how two competing processes balance across a field
+# critical_parameter: feed/kill ratio — small changes cross phase boundaries, switching the system from spots to stripes to mazes to corals; different regions of (feed, kill) parameter space are literally different morphological regimes
+# triggers: _ready initializes U/V arrays, creates ImageTexture on a flat MeshInstance3D, starts movement_timer; each tick runs Laplacian convolution + Gray-Scott reaction term on every cell, then pushes the result to the texture
+# emerges: the simulation is sensitive to initial conditions — same feed/kill with different random seeds produces morphologically identical but spatially unique patterns; the "species" is the parameter pair, not the seed
+# needs: VR controls for live feed/kill parameter tuning [missing — currently export vars only]; apply_grid_config [missing]
+# relationships: turing_pattern_generator also implements Gray-Scott but with VR controls; queer_morphology_specimen grows morphological forms using different rules; all three appear in the morphogenesis "Pattern from Noise" map
+# truth: you don't need a blueprint — the pattern that looks designed emerges from two numbers: how fast each chemical diffuses relative to the other; Turing's morphogenesis is not a metaphor, it is a mechanism
+
 extends Node3D
 
 # ==============================

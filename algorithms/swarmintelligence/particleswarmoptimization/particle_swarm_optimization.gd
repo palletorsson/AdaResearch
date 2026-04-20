@@ -1,3 +1,13 @@
+# @identity
+# essence: 50 particles orbiting a 3D fitness landscape, each pulled between their own best remembered position and the swarm's global best — trails trace the collective negotiation between individual memory and social pressure
+# desire: to show that optimization is a political act — the diversity_preservation parameter is a literal resistance to premature convergence; the swarm that stays diverse finds more of the landscape
+# critical_parameter: social_coefficient vs cognitive_coefficient balance (both 1.5 default) — high social pulls the swarm toward consensus, high cognitive keeps particles near their own history; together they define how collective the intelligence is
+# triggers: each particle updates velocity using inertia + cognitive pull (toward personal best) + social pull (toward global best) + queer_resistance (mutation and diversity preservation); global_best updates whenever any particle finds a better fitness
+# emerges: particles with high identity_fluidity resist the global best and continue exploring — they function as scouts; when a scout finds a new basin, the social coefficient pulls the rest of the swarm toward it
+# needs: apply_grid_config [missing]; VR interaction to adjust inertia/social/cognitive live [missing]; objective function switching [has via export_enum]
+# relationships: appears in SwarmIntelligence gallery alongside ant_colony artifacts; the queer_landscape objective function (option 4) explicitly models resistance to a single optimum; contrast with gradient_descent_landscape (deterministic, single path)
+# truth: a swarm that never converges finds more — diversity_preservation is not inefficiency but epistemological humility about whether you have found the right answer or just an answer
+
 extends Node3D
 class_name ParticleSwarmOptimization
 

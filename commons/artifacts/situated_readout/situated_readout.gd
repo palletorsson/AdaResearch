@@ -10,6 +10,16 @@
 #
 # Registry: commons/artifacts/registry/algorithms_misc.json (category=critical)
 
+# @identity
+# essence: four flat display panels in a room each show a different "objective" verdict about identical subject ID #4729 — ORDERLY, CREATIVE, DANGEROUS, IRRELEVANT — all equally confident, all from the same input
+# desire: to make Haraway's situated knowledge tangible — the player literally walks across the room and watches the system's certainty flip, without any input changing
+# critical_parameter: global_position determines the verdict — there is no query; the coordinate IS the classification; the view always comes from somewhere
+# triggers: _ready builds panel + labels; _populate_from_position() hashes cell coordinates to NW/NE/SW/SE quadrant and picks verdict; apply_grid_config accepts explicit #verdict override for authorial placement
+# emerges: four panels placed 2×2 create a debate the player stands inside — from the center, all four verdicts are visible simultaneously, not sequentially
+# needs: apply_grid_config [has]; VR walk-through so the verdict-flip is felt as you cross from one quadrant to another [missing — currently static display]
+# relationships: pairs with wiki_fragment (both postfoundationscrisis "knowledge with a body" series); four instances fill one map; echoes bias_visualizer which shows the same effect at the dataset level
+# truth: objectivity is not a view from nowhere — it is always from somewhere; four panels, one subject, four incompatible verdicts, zero input changes
+
 extends Node3D
 class_name SituatedReadout
 

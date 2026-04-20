@@ -1,3 +1,13 @@
+# @identity
+# essence: a 3D loss surface colored green (low) through yellow to red (high), with a white ball descending step by step along the negative gradient and leaving a blue trail of breadcrumbs
+# desire: to make the invisible landscape of optimization tangible — the learner sees the ball get trapped in a local minimum and understands that optimization finds AN answer, not THE answer
+# critical_parameter: learning_rate (0.08, range 0.005–0.3) — too large and the ball overshoots and oscillates; too small and convergence takes forever; the live slider makes this relationship visible immediately
+# triggers: _ready builds surface (ImmediateMesh per frame), ball (SphereMesh), trail (capped array of breadcrumb spheres), VR control panel; _process() steps gradient descent every step_interval seconds
+# emerges: when the ball converges, the frozen trail reveals the full descent path — starting position determines which local minimum is found; hitting reset with the same learning rate often finds a different minimum
+# needs: VR learning rate slider [has via RackTemplates]; VR reset button [has]; apply_grid_config with explicit start_x/start_y [has]
+# relationships: pairs with gradient_descent_visualization (simpler 2D version placed in ML_Gradient_Landscape); appears in machinelearning gallery; echoes loss_function_comparator (shows three loss functions side by side vs one animated descent)
+# truth: gradient descent finds a nearby valley, not the deepest one — the starting point and learning rate determine which minimum you land in, making optimization an act of situated exploration rather than guaranteed discovery
+
 extends Node3D
 class_name GradientDescentLandscape
 

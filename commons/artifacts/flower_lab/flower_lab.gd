@@ -30,6 +30,16 @@
 #   instance directly in a scene. VR users can grab sliders and press
 #   buttons to explore flower space.
 
+# @identity
+# essence: a procedural flower generator with VR sliders for petal count, length, width, curve, stem height, color hue, leaf count, and symmetry — turn one number and watch the entire anatomy respond
+# desire: to make botanical morphospace walkable — petal count 5 is Fibonacci and feels "natural"; petal count 7 is rare and feels alien; the learner discovers the constraint without being told
+# critical_parameter: petal count — Fibonacci numbers (3, 5, 8, 13) dominate in nature via golden angle packing; non-Fibonacci counts create visually distinct flowers that reveal the optimization pressure underlying plant form
+# triggers: sliders connected to BotanicalFlower generator parameters; each slider_moved signal regenerates the mesh in real time; VR grip lets learners pull sliders while watching the flower reshape
+# emerges: bilateral symmetry (orchid-style) creates forms that look purposeful and specialized; radial symmetry (daisy-style) looks more open and ancestral — toggling the symmetry parameter makes evolutionary divergence visible as a shape change
+# needs: VR slider interaction [has]; apply_grid_config [has]; seed randomization per-load [missing — same seed each time]
+# relationships: placed in morphogenesis map alongside turing_pattern_generator and queer_morphology_specimen; evolvingflowers (machinelearning) applies selection pressure to this same parameter space — flower_lab is manual exploration, evolvingflowers is evolution
+# truth: the golden angle that makes Fibonacci petal counts dominant is not a design rule — it is what selection pressure looks like when the archive of solutions is the plant kingdom itself
+
 extends Node3D
 class_name FlowerLab
 

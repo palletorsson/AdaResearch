@@ -11,6 +11,16 @@
 #
 # Registry: commons/artifacts/registry/algorithms_misc.json (category=critical)
 
+# @identity
+# essence: four reading panels arranged in a room, each carrying one fragment of an argument — On Gödel, On Margins, On the Commons, On Incompleteness — each ending in a cross-reference to the next, cycling without resolution
+# desire: to enact incompleteness architecturally — you can read all four panels and still not reach the thesis, because the thesis IS the walking; a wiki is not a system but a ledger of incompletenesses that route
+# critical_parameter: the cross-reference footer on each panel ("→ see EAST · On Margins") — this directed cycle prevents any single panel from being a conclusion; removing it would make it just four quotes
+# triggers: _ready builds panel with fragment from _fragment_key or cell-position hash; _populate_from_fragment() sets title/body/cf/footer and tints the panel per fragment color; apply_grid_config accepts explicit #fragment:NORTH|EAST|SOUTH|WEST
+# emerges: walking the four panels in order returns you to the starting point — WEST cross-references NORTH, closing the loop; incompleteness becomes experiential rather than declarative
+# needs: apply_grid_config [has]; VR walk-through with panels in cardinal positions so the cross-references are spatially directional [missing — any arrangement works but cardinal is the intent]
+# relationships: pairs with situated_readout (same postfoundationscrisis map series); echoes godel_statement_plaque (declarative) — wiki_fragment makes the same point architectural; the 47/62/84/103 editor counts create a sense of accumulated, contested knowledge
+# truth: what one panel cannot hold, the ledger can — a wiki is not consistent, it is corrigible, and corrigibility is more honest than completeness
+
 extends Node3D
 class_name WikiFragment
 
