@@ -419,6 +419,39 @@ PATTERN_EVALS = {
     "pt10_p3m1_alhambra": E(4, "winner",      "p3m1 — 120° rotation + reflection through rotation centers. Classic Moorish tessellation emerges from Alhambra palette + dot motif."),
 }
 
+# ─── Facade presets — 9th substrate ───────────────────────────
+# Each preset IS the DNA; notes describe what the rendered image shows,
+# not what the style "should" be.
+
+FACADE_EVALS = {
+    "classical":                  E(5, "crown_jewel", "Symmetric 5-bay with dentil cornice, arched piano-nobile windows, columns flanking the base, portholes and checkerboard rustication. Textbook classical composition — the reference all others are measured against."),
+    "baroque":                    E(5, "crown_jewel", "Solomonic (twisted) columns + broken pediments + arched windows with ornamental keystone + checkerboard base. Reads unmistakably 17th-century Italian."),
+    "gothic_portal":              E(4, "winner",      "Pointed arches, tracery window, vertical emphasis. Reads as cathedral-front."),
+    "capri_whitewash":            E(3, "working",     "Mediterranean vernacular — small windows, flat roof, white stucco. Minimal but recognizably Capri."),
+    "florence_marble":            E(4, "winner",      "Polychrome marble facade with alternating stone bands. Florentine 14th-15th century."),
+    "florentine_polychrome":      E(4, "winner",      "Giotto-tradition polychrome: alternating marble courses + arched openings."),
+    "bernini_colonnade":          E(4, "winner",      "Curved colonnade, piazza-embracing form. The Bernini Vatican gesture compressed into a facade."),
+    "galleria_vittorio_emanuele": E(3, "working",     "Iron-and-glass arcade silhouette. Reads as 19th-century Milan shopping gallery."),
+    "continuous_monument":        E(3, "working",     "Superstudio-style rationalist grid — endless gridded surface. Cold by design."),
+    "decon_fragment":             E(3, "working",     "Deconstructivist tilted planes. Intentional dissonance; abstract."),
+    "memphis_totem":              E(4, "winner",      "Sottsass 1980s postmodernism — scattered geometric shapes, pastel accents, graphic irregular composition."),
+    "naples_diamond_rustication": E(4, "winner",      "Diamond-point rusticated stone base — distinctive Neapolitan palazzo vocabulary."),
+    "nyc_tenement":               E(3, "working",     "19th-century walk-up tenement with regular fenestration. Reads as NYC Lower East Side."),
+    "painted_vault":              E(3, "working",     "Pompeii-style trompe-l'oeil painted architectural framing."),
+    "pompeii_black_room":         E(3, "working",     "Pompeii Fourth Style black ground with classical architectural motifs."),
+    "pompeii_ceiling_coffers":    E(3, "working",     "Deep-relief coffered ceiling composition."),
+    "pompeii_ceiling_medallion":  E(3, "working",     "Central medallion with radiating panels — classical ceiling."),
+    "pompeii_fourth_style":       E(3, "working",     "Theatrical fantasy architecture — Pompeii's final wall style."),
+    "pompeii_red_room":           E(4, "winner",      "Rich Pompeii red ground with classical architectural framing. The canonical Pompeii color."),
+    "pompeii_second_style":       E(3, "working",     "Illusionistic architecture opening flat walls into depicted depth. Second-Style perspective trick."),
+    "superstudio_grid":           E(3, "working",     "Superstudio's rationalist grid. Modernist critique in facade form."),
+    "venetian_gothic":            E(4, "winner",      "Venetian Gothic with bifora (two-arched) windows and Moorish arch forms. Reads as Ca' d'Oro descendant."),
+    "villa_boscoreale":           E(3, "working",     "Pompeii-adjacent Roman villa — Boscoreale wall paintings compositional framing."),
+    "villa_mysteries":            E(3, "working",     "Villa of the Mysteries reference — Dionysian frieze composition."),
+    "villa_san_michele":          E(3, "working",     "Axel Munthe's Capri villa reference. Mediterranean classical."),
+    "villa_san_michele_exact":    E(3, "working",     "More literal Villa San Michele reconstruction. Same source, tighter fit."),
+}
+
 SB_LSYSTEM_BRIDGE_EVALS = {
     "sb_ls01_plant_skeleton":       E(4, "winner", "DNA BRIDGE: L-system plant as spring-mass skeleton. Upper tree stands, lower portion collapsed to floor. Visible L-system branching structure with physics consequence."),
     "sb_ls02_plant_wind_collapse":  E(5, "crown_jewel", "DNA BRIDGE: Same L-system plant, low stiffness + diagonal wind + 140 steps. Tree bent sideways almost to ground. 'Fallen tree after storm' from pure DNA + force."),
@@ -464,10 +497,11 @@ def main() -> int:
     write_gallery_evals("lsystem-gallery",         LSYSTEM_EVALS)
     write_gallery_evals("rd-gallery",              RD_EVALS)
     write_gallery_evals("pattern-gallery",         PATTERN_EVALS)
+    write_gallery_evals("facade-gallery",          FACADE_EVALS)
     total = (len(graph_full) + len(MESH_EVALS) + len(FORM_EVALS)
              + len(ps_full) + len(sb_full) + len(LSYSTEM_EVALS)
-             + len(RD_EVALS) + len(PATTERN_EVALS))
-    print(f"Total: {total} evals across 8 galleries")
+             + len(RD_EVALS) + len(PATTERN_EVALS) + len(FACADE_EVALS))
+    print(f"Total: {total} evals across 9 galleries")
     return 0
 
 
