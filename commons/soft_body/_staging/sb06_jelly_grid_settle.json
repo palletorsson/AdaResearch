@@ -1,0 +1,41 @@
+{
+  "id": "sb06_jelly_grid_settle",
+  "topology": "jelly_grid_3d",
+  "nx": 5,
+  "ny": 5,
+  "nz": 5,
+  "cell": 0.22,
+  "stiffness": 0.6,
+  "damping": 0.99,
+  "gravity": [
+    0,
+    -9.8,
+    0
+  ],
+  "floor_y": -1.5,
+  "steps": 280,
+  "origin": [
+    0,
+    1.0,
+    0
+  ],
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.2,
+  "render": {
+    "color": [
+      0.35,
+      0.7,
+      0.55
+    ],
+    "roughness": 0.5,
+    "particle_radius": 0.06,
+    "show_wires": true,
+    "wire_color": [
+      0.1,
+      0.2,
+      0.15
+    ]
+  },
+  "layout": "verlet_jelly",
+  "notes": "5x5x5 jelly grid \u2014 low stiffness, settles into squashed lattice on ground."
+}

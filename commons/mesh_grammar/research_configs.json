@@ -1,0 +1,1345 @@
+{
+  "version": 1,
+  "description": "Seed library of mesh grammar configs for the auto-research loop. Each config becomes a render + a JSON saved alongside. The tool varies params to produce batches the AI evaluates.",
+  "configs": [
+    {
+      "id": "gen00_tower_plain",
+      "notes": "Inset-then-extrude the top face only. Stacked tower.",
+      "seed": "cube",
+      "seed_scale": 0.6,
+      "generations": 4,
+      "rules": [
+        {
+          "op": "inset",
+          "selector": "up",
+          "params": {
+            "amount": 0.2
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "up",
+          "params": {
+            "distance": 0.4,
+            "scale": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen00_tower_taper",
+      "notes": "Inset + extrude with scale<1 \u2014 tapering stepped pyramid.",
+      "seed": "cube",
+      "seed_scale": 0.6,
+      "generations": 4,
+      "rules": [
+        {
+          "op": "inset",
+          "selector": "up",
+          "params": {
+            "amount": 0.15
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "up",
+          "params": {
+            "distance": 0.35,
+            "scale": 0.85
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen00_coral_random",
+      "notes": "Random 30% of faces get small bumps \u2014 coral-like.",
+      "seed": "sphere",
+      "seed_scale": 0.6,
+      "generations": 2,
+      "rules": [
+        {
+          "op": "inset",
+          "selector": "random_30",
+          "params": {
+            "amount": 0.15
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:inset_inner",
+          "params": {
+            "distance": 0.18,
+            "scale": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen00_spikes_iso",
+      "notes": "Icosphere with random face extrusions \u2014 spiky organism.",
+      "seed": "icosahedron",
+      "seed_scale": 0.5,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "random_30",
+          "params": {
+            "distance": 0.5,
+            "scale": 0.35
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen00_mushroom",
+      "notes": "Three-step mushroom \u2014 stem, neck, cap.",
+      "seed": "cube",
+      "seed_scale": 0.35,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "up",
+          "params": {
+            "distance": 0.8,
+            "scale": 1.0
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.1,
+            "scale": 1.6
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.15,
+            "scale": 0.6
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen00_bulge_sphere",
+      "notes": "Sphere with random bulge inflation \u2014 organic blob.",
+      "seed": "sphere",
+      "seed_scale": 0.6,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "bulge",
+          "selector": "random_50",
+          "params": {
+            "amount": 0.25
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen00_noise_sphere",
+      "notes": "Sphere with noise displacement.",
+      "seed": "sphere",
+      "seed_scale": 0.6,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "noise",
+          "selector": "all",
+          "params": {
+            "amount": 0.12,
+            "frequency": 2.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen00_petals",
+      "notes": "Icosphere top faces splayed like petals.",
+      "seed": "icosahedron",
+      "seed_scale": 0.5,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "petal_splay",
+          "selector": "up",
+          "params": {
+            "splay": 0.4,
+            "length": 0.6
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen00_cellular",
+      "notes": "Cellular subdivision across surface.",
+      "seed": "cube",
+      "seed_scale": 0.6,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "cellular",
+          "selector": "all",
+          "params": {
+            "density": 0.5,
+            "depth": 0.12
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen00_scale_alt",
+      "notes": "Alternating extrude with scale jitter on sides.",
+      "seed": "cube",
+      "seed_scale": 0.6,
+      "generations": 3,
+      "rules": [
+        {
+          "op": "inset",
+          "selector": "side",
+          "params": {
+            "amount": 0.08
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:inset_inner",
+          "params": {
+            "distance": 0.12,
+            "scale": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen00_tube_branches",
+      "notes": "Tube-like branching off random faces.",
+      "seed": "icosahedron",
+      "seed_scale": 0.4,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "tube_branch",
+          "selector": "random_30",
+          "params": {
+            "length": 0.5,
+            "radius": 0.08,
+            "segments": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen00_hybrid",
+      "notes": "Inset + extrude + noise on alternating faces.",
+      "seed": "cube",
+      "seed_scale": 0.55,
+      "generations": 2,
+      "rules": [
+        {
+          "op": "inset",
+          "selector": "all",
+          "params": {
+            "amount": 0.12
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:inset_inner",
+          "params": {
+            "distance": 0.2,
+            "scale": 0.9
+          }
+        },
+        {
+          "op": "noise",
+          "selector": "all",
+          "params": {
+            "amount": 0.03,
+            "frequency": 4.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_petals_wide",
+      "notes": "Petals with wider splay \u2014 agave-like rosette.",
+      "seed": "icosahedron",
+      "seed_scale": 0.4,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "petal_splay",
+          "selector": "up",
+          "params": {
+            "splay": 0.7,
+            "length": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_petals_long",
+      "notes": "Petals with long length \u2014 grass tuft.",
+      "seed": "icosahedron",
+      "seed_scale": 0.35,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "petal_splay",
+          "selector": "up",
+          "params": {
+            "splay": 0.25,
+            "length": 1.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_petals_all",
+      "notes": "Petals on ALL faces \u2014 sea urchin.",
+      "seed": "icosahedron",
+      "seed_scale": 0.35,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "petal_splay",
+          "selector": "all",
+          "params": {
+            "splay": 0.35,
+            "length": 0.55
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_mushroom_tall",
+      "notes": "Mushroom with longer stem \u2014 taller cap.",
+      "seed": "cube",
+      "seed_scale": 0.25,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "up",
+          "params": {
+            "distance": 1.2,
+            "scale": 1.0
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.05,
+            "scale": 2.0
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.25,
+            "scale": 0.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_mushroom_cluster",
+      "notes": "Four-step cascade \u2014 cluster of caps.",
+      "seed": "cube",
+      "seed_scale": 0.3,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "up",
+          "params": {
+            "distance": 0.4,
+            "scale": 1.0
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.08,
+            "scale": 1.8
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.3,
+            "scale": 0.3
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.08,
+            "scale": 2.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_spikes_dense",
+      "notes": "Dense spikes \u2014 70% of faces extruded tall and thin.",
+      "seed": "icosahedron",
+      "seed_scale": 0.45,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "random_50",
+          "params": {
+            "distance": 0.5,
+            "scale": 0.3
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.15,
+            "scale": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_spikes_sphere",
+      "notes": "Dense spike field on sphere instead of icosphere.",
+      "seed": "sphere",
+      "seed_scale": 0.5,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "random_30",
+          "params": {
+            "distance": 0.4,
+            "scale": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_bulge_big",
+      "notes": "Bigger bulges \u2014 chubby organism.",
+      "seed": "sphere",
+      "seed_scale": 0.55,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "bulge",
+          "selector": "random_50",
+          "params": {
+            "amount": 0.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_bulge_all",
+      "notes": "Bulge every face \u2014 lumpy stone.",
+      "seed": "icosahedron",
+      "seed_scale": 0.45,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "bulge",
+          "selector": "all",
+          "params": {
+            "amount": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_tube_branches_dense",
+      "notes": "Many tube branches \u2014 coral-like.",
+      "seed": "icosahedron",
+      "seed_scale": 0.35,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "tube_branch",
+          "selector": "random_50",
+          "params": {
+            "length": 0.4,
+            "radius": 0.05,
+            "segments": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_tube_sphere",
+      "notes": "Tubes from a sphere seed \u2014 soft branching creature.",
+      "seed": "sphere",
+      "seed_scale": 0.4,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "tube_branch",
+          "selector": "random_30",
+          "params": {
+            "length": 0.5,
+            "radius": 0.08,
+            "segments": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_tower_aggressive",
+      "notes": "Tower with aggressive scale taper \u2014 pyramid-like.",
+      "seed": "cube",
+      "seed_scale": 0.7,
+      "generations": 5,
+      "rules": [
+        {
+          "op": "inset",
+          "selector": "up",
+          "params": {
+            "amount": 0.12
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "up",
+          "params": {
+            "distance": 0.3,
+            "scale": 0.7
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_coral_fixed",
+      "notes": "Coral with correct tag \u2014 inset then extrude the inner face.",
+      "seed": "sphere",
+      "seed_scale": 0.55,
+      "generations": 2,
+      "rules": [
+        {
+          "op": "inset",
+          "selector": "random_30",
+          "params": {
+            "amount": 0.12
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:inset",
+          "params": {
+            "distance": 0.2,
+            "scale": 1.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_hybrid_fixed",
+      "notes": "Inset+extrude+noise on a cube with the correct tag.",
+      "seed": "cube",
+      "seed_scale": 0.55,
+      "generations": 2,
+      "rules": [
+        {
+          "op": "inset",
+          "selector": "all",
+          "params": {
+            "amount": 0.12
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:inset",
+          "params": {
+            "distance": 0.22,
+            "scale": 0.85
+          }
+        },
+        {
+          "op": "noise",
+          "selector": "all",
+          "params": {
+            "amount": 0.04,
+            "frequency": 4.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_compound_petals",
+      "notes": "Spike base then petals on top \u2014 composed recipe.",
+      "seed": "icosahedron",
+      "seed_scale": 0.35,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "random_30",
+          "params": {
+            "distance": 0.3,
+            "scale": 0.5
+          }
+        },
+        {
+          "op": "petal_splay",
+          "selector": "up",
+          "params": {
+            "splay": 0.45,
+            "length": 0.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_compound_mushroom_bulge",
+      "notes": "Mushroom with bulged cap.",
+      "seed": "cube",
+      "seed_scale": 0.3,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "up",
+          "params": {
+            "distance": 0.8,
+            "scale": 1.0
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.1,
+            "scale": 1.8
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.15,
+            "scale": 0.5
+          }
+        },
+        {
+          "op": "bulge",
+          "selector": "all",
+          "params": {
+            "amount": 0.08
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen02_petals_layered",
+      "notes": "Petals on all faces, then small petals on the petal tips \u2014 fractal frond.",
+      "seed": "icosahedron",
+      "seed_scale": 0.3,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "petal_splay",
+          "selector": "all",
+          "params": {
+            "splay": 0.35,
+            "length": 0.5
+          }
+        },
+        {
+          "op": "petal_splay",
+          "selector": "up",
+          "params": {
+            "splay": 0.5,
+            "length": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen02_petals_sphere",
+      "notes": "Petals on all faces of a SPHERE (smoother base than icosphere).",
+      "seed": "sphere",
+      "seed_scale": 0.35,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "petal_splay",
+          "selector": "all",
+          "params": {
+            "splay": 0.35,
+            "length": 0.45
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen02_petals_tall",
+      "notes": "Long thin petals on all faces \u2014 grass burst.",
+      "seed": "icosahedron",
+      "seed_scale": 0.3,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "petal_splay",
+          "selector": "all",
+          "params": {
+            "splay": 0.15,
+            "length": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen02_petals_short_fat",
+      "notes": "Short fat petals \u2014 scales / armor.",
+      "seed": "icosahedron",
+      "seed_scale": 0.5,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "petal_splay",
+          "selector": "all",
+          "params": {
+            "splay": 0.55,
+            "length": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen02_petals_on_bulge",
+      "notes": "Bulge base then petals \u2014 pincushion organism.",
+      "seed": "icosahedron",
+      "seed_scale": 0.4,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "bulge",
+          "selector": "all",
+          "params": {
+            "amount": 0.2
+          }
+        },
+        {
+          "op": "petal_splay",
+          "selector": "all",
+          "params": {
+            "splay": 0.3,
+            "length": 0.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen02_petals_on_spikes",
+      "notes": "Spikes first then petals on the up faces \u2014 dragon.",
+      "seed": "icosahedron",
+      "seed_scale": 0.35,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "random_50",
+          "params": {
+            "distance": 0.4,
+            "scale": 0.6
+          }
+        },
+        {
+          "op": "petal_splay",
+          "selector": "up",
+          "params": {
+            "splay": 0.4,
+            "length": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen02_coral_deep",
+      "notes": "Coral with deeper inset + taller extrude \u2014 visible bumps.",
+      "seed": "sphere",
+      "seed_scale": 0.5,
+      "generations": 2,
+      "rules": [
+        {
+          "op": "inset",
+          "selector": "random_50",
+          "params": {
+            "amount": 0.2
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:inset",
+          "params": {
+            "distance": 0.3,
+            "scale": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen02_coral_polyps",
+      "notes": "Inset + extrude + bulge \u2014 lumpy coral polyps.",
+      "seed": "sphere",
+      "seed_scale": 0.5,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "inset",
+          "selector": "random_50",
+          "params": {
+            "amount": 0.18
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:inset",
+          "params": {
+            "distance": 0.25,
+            "scale": 0.85
+          }
+        },
+        {
+          "op": "bulge",
+          "selector": "tag:extruded_top",
+          "params": {
+            "amount": 0.18
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen02_spikes_layered",
+      "notes": "Spikes then more spikes on the tips \u2014 crystal cluster.",
+      "seed": "icosahedron",
+      "seed_scale": 0.35,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "random_50",
+          "params": {
+            "distance": 0.4,
+            "scale": 0.5
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.25,
+            "scale": 0.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen02_spikes_tower",
+      "notes": "Stepped tower with spike crown \u2014 fantasy castle.",
+      "seed": "cube",
+      "seed_scale": 0.5,
+      "generations": 3,
+      "rules": [
+        {
+          "op": "inset",
+          "selector": "up",
+          "params": {
+            "amount": 0.15
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "up",
+          "params": {
+            "distance": 0.35,
+            "scale": 0.8
+          }
+        },
+        {
+          "op": "petal_splay",
+          "selector": "tag:extruded_top",
+          "params": {
+            "splay": 0.5,
+            "length": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen02_mushroom_forest",
+      "notes": "Multi-cap mushroom \u2014 5-step cascade with alternating scale.",
+      "seed": "cube",
+      "seed_scale": 0.25,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "up",
+          "params": {
+            "distance": 0.4,
+            "scale": 0.9
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.08,
+            "scale": 1.6
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.3,
+            "scale": 0.4
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.08,
+            "scale": 1.8
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.12,
+            "scale": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen02_mushroom_petaled",
+      "notes": "Mushroom with petal underside.",
+      "seed": "cube",
+      "seed_scale": 0.3,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "up",
+          "params": {
+            "distance": 0.7,
+            "scale": 1.0
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "tag:extruded_top",
+          "params": {
+            "distance": 0.08,
+            "scale": 1.9
+          }
+        },
+        {
+          "op": "petal_splay",
+          "selector": "down",
+          "params": {
+            "splay": 0.4,
+            "length": 0.35
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_rd01_coral_extruded",
+      "notes": "DNA BRIDGE: RD coral \u2192 mesh-grammar. Gray-Scott coral heightmap becomes the starting mesh; extrude-up extends ridges into vertical coral structures.",
+      "seed": {
+        "rd": {
+          "preset": "coral",
+          "grid_size": 48,
+          "iterations": 3000,
+          "seed": 17,
+          "world_size": 0.7,
+          "height_amp": 0.12
+        }
+      },
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "up",
+          "params": {
+            "distance": 0.15,
+            "scale": 0.92
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_rd02_stripes_insetting",
+      "notes": "DNA BRIDGE: RD stripes \u2192 mesh-grammar. Brain-ridge heightmap gets inset + extruded on upward faces; ridges become raised tiled ramparts.",
+      "seed": {
+        "rd": {
+          "preset": "stripes",
+          "grid_size": 48,
+          "iterations": 3000,
+          "seed": 3,
+          "world_size": 0.7,
+          "height_amp": 0.15
+        }
+      },
+      "generations": 2,
+      "rules": [
+        {
+          "op": "inset",
+          "selector": "up",
+          "params": {
+            "amount": 0.12
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "up",
+          "params": {
+            "distance": 0.1,
+            "scale": 0.95
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_rd03_mitosis_bulged",
+      "notes": "DNA BRIDGE: RD mitosis \u2192 mesh-grammar. Self-replicating RD cells as heightmap, then bulge operation on up-facing faces \u2014 Turing dots become inflated bubble-clusters.",
+      "seed": {
+        "rd": {
+          "preset": "mitosis",
+          "grid_size": 48,
+          "iterations": 3000,
+          "seed": 5,
+          "world_size": 0.7,
+          "height_amp": 0.18
+        }
+      },
+      "generations": 1,
+      "rules": [
+        {
+          "op": "bulge",
+          "selector": "up",
+          "params": {
+            "amount": 0.08
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_ls01_tree_extruded",
+      "notes": "DNA BRIDGE: L-system plant as box-prism mesh seed. Each turtle segment becomes a thin oriented box; mesh-grammar extrudes up-facing faces to thicken branches.",
+      "seed": {
+        "lsystem": {
+          "axiom": "F",
+          "rules": {
+            "F": "F[+F]F[-F]F"
+          },
+          "iterations": 3,
+          "angle_deg": 25.7,
+          "step_len": 0.18,
+          "step_shrink": 0.72,
+          "base_width": 0.012,
+          "width_shrink": 0.75
+        }
+      },
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "up",
+          "params": {
+            "distance": 0.05,
+            "scale": 0.8
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_ls02_tree_bulged",
+      "notes": "Same L-system plant, bulge op on up-facing faces \u2014 branches get knobby nodes where mesh-grammar inflates the boxes.",
+      "seed": {
+        "lsystem": {
+          "axiom": "F",
+          "rules": {
+            "F": "F[+F]F[-F]F"
+          },
+          "iterations": 3,
+          "angle_deg": 25.7,
+          "step_len": 0.18,
+          "step_shrink": 0.72,
+          "base_width": 0.015,
+          "width_shrink": 0.75
+        }
+      },
+      "generations": 1,
+      "rules": [
+        {
+          "op": "bulge",
+          "selector": "up",
+          "params": {
+            "amount": 0.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_ca01_conway_city_meshed",
+      "notes": "DNA BRIDGE: Conway Life pattern as extruded-box mesh seed. Mesh-grammar then insets the top faces \u2014 blocks get classical buildings with stepped tops.",
+      "seed": {
+        "ca": {
+          "rule": "conway",
+          "grid_size": 14,
+          "iterations": 8,
+          "density": 0.45,
+          "seed": 3,
+          "cell_size": 0.08,
+          "base_height": 0.1,
+          "height_scale": 0.04
+        }
+      },
+      "generations": 2,
+      "rules": [
+        {
+          "op": "inset",
+          "selector": "up",
+          "params": {
+            "amount": 0.2
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "up",
+          "params": {
+            "distance": 0.08,
+            "scale": 0.85
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_ca02_life_without_death_meshed",
+      "notes": "DNA BRIDGE: Life-without-Death (geological accumulation) as mesh seed. Dense mesh gets subtle surface treatment \u2014 reads as a mineral crust.",
+      "seed": {
+        "ca": {
+          "rule": "life_without_death",
+          "grid_size": 14,
+          "iterations": 10,
+          "density": 0.32,
+          "seed": 11,
+          "cell_size": 0.08,
+          "base_height": 0.06,
+          "height_scale": 0.02
+        }
+      },
+      "generations": 1,
+      "rules": [
+        {
+          "op": "bulge",
+          "selector": "up",
+          "params": {
+            "amount": 0.02
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_prim01_dodecahedron_extruded",
+      "notes": "PRIMITIVE-AS-SEED: Dodecahedron from Ada primitive library + extrude on all faces. Twelve pentagonal faces each grow outward \u2014 reads as a blooming crystal.",
+      "seed": "dodecahedron",
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "all",
+          "params": {
+            "distance": 0.15,
+            "scale": 0.7
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_prim02_octahedron_inset",
+      "notes": "PRIMITIVE-AS-SEED: Octahedron seed + inset + extrude. Triangular faces recess then poke through \u2014 star-like geometry.",
+      "seed": "octahedron",
+      "generations": 1,
+      "rules": [
+        {
+          "op": "inset",
+          "selector": "all",
+          "params": {
+            "amount": 0.2
+          }
+        },
+        {
+          "op": "extrude",
+          "selector": "all",
+          "params": {
+            "distance": 0.18,
+            "scale": 0.75
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_prim03_torus_bulged",
+      "notes": "PRIMITIVE-AS-SEED: Godot TorusMesh as seed + bulge. The donut surface bumps outward uniformly.",
+      "seed": "torus",
+      "seed_scale": 0.7,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "bulge",
+          "selector": "all",
+          "params": {
+            "amount": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_prim04_cylinder_split",
+      "notes": "PRIMITIVE-AS-SEED: Cylinder seed + split_face on up-facing caps + extrude. The top and bottom discs fracture into tiled facets.",
+      "seed": "cylinder",
+      "seed_scale": 0.6,
+      "generations": 2,
+      "rules": [
+        {
+          "op": "split",
+          "selector": "up",
+          "params": {}
+        },
+        {
+          "op": "extrude",
+          "selector": "up",
+          "params": {
+            "distance": 0.05,
+            "scale": 0.85
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_prim05_tetrahedron_scallop",
+      "notes": "PRIMITIVE-AS-SEED: Tetrahedron + scallop edges + bulge. Simplest polyhedron gets elaborate edge decoration \u2014 from 4 faces to an ornamented form.",
+      "seed": "tetrahedron",
+      "generations": 2,
+      "rules": [
+        {
+          "op": "bulge",
+          "selector": "all",
+          "params": {
+            "amount": 0.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_prim06_bipyramid_bulged",
+      "notes": "PRIMITIVE-AS-SEED: Bipyramid from Ada library + bulge. Two-pointed seed gets all faces inflated \u2014 becomes a lozenge.",
+      "seed": "bipyramid",
+      "generations": 1,
+      "rules": [
+        {
+          "op": "bulge",
+          "selector": "all",
+          "params": {
+            "amount": 0.06
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_prim07_crystal_extruded",
+      "notes": "PRIMITIVE-AS-SEED: Ada crystal + extrude on all faces. Gem-like seed becomes an exploded crystal cluster.",
+      "seed": "crystal",
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "all",
+          "params": {
+            "distance": 0.08,
+            "scale": 0.7
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_prim08_diamond_inset",
+      "notes": "PRIMITIVE-AS-SEED: Diamond with inset + bulge. Jeweled seed gets recessed facets and bulged surface \u2014 reads as cut gem.",
+      "seed": "diamond",
+      "generations": 1,
+      "rules": [
+        {
+          "op": "inset",
+          "selector": "all",
+          "params": {
+            "amount": 0.12
+          }
+        },
+        {
+          "op": "bulge",
+          "selector": "all",
+          "params": {
+            "amount": 0.03
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_prim09_capsule_scalloped",
+      "notes": "PRIMITIVE-AS-SEED: Godot CapsuleMesh + noise displacement. The pill gets organic surface texture.",
+      "seed": "capsule",
+      "seed_scale": 0.7,
+      "generations": 1,
+      "rules": [
+        {
+          "op": "noise_displace",
+          "selector": "all",
+          "params": {
+            "amplitude": 0.04,
+            "frequency": 3.0,
+            "seed": 7
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_prim10_arch_subdivided",
+      "notes": "PRIMITIVE-AS-SEED: Ada architectural arch + extrude. The semicircle-arch becomes a ribbed archway with visible face extensions.",
+      "seed": "arch",
+      "generations": 1,
+      "rules": [
+        {
+          "op": "extrude",
+          "selector": "all",
+          "params": {
+            "distance": 0.06,
+            "scale": 0.88
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "id": "sb_ls01_plant_skeleton",
+  "topology": "lsystem",
+  "lsystem": {
+    "axiom": "F",
+    "rules": {
+      "F": "F[+F]F[-F]F"
+    },
+    "iterations": 3,
+    "angle_deg": 25.7,
+    "step_len": 0.2,
+    "step_shrink": 0.72
+  },
+  "stiffness": 0.85,
+  "damping": 0.995,
+  "gravity": [
+    0,
+    -9.8,
+    0
+  ],
+  "floor_y": -0.5,
+  "constraint_passes": 6,
+  "steps": 60,
+  "origin": [
+    0,
+    0,
+    0
+  ],
+  "camera_yaw": 0.3,
+  "camera_pitch": 0.15,
+  "render": {
+    "color": [
+      0.4,
+      0.55,
+      0.3
+    ],
+    "roughness": 0.5,
+    "particle_radius": 0.03,
+    "show_wires": true,
+    "wire_color": [
+      0.3,
+      0.2,
+      0.12
+    ]
+  },
+  "layout": "lsystem_bridge",
+  "notes": "DNA BRIDGE: L-system plant (F->F[+F]F[-F]F) as spring-mass skeleton. Pinned at base, high stiffness, 60 steps \u2014 stands upright with slight settle. Same DNA as lsystem-gallery ls03, now a soft structure."
+}

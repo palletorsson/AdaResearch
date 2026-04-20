@@ -1,0 +1,30 @@
+{
+  "id": "sbN01_balloon_inflate",
+  "topology": "native_balloon",
+  "radius": 0.6,
+  "radial_segments": 28,
+  "rings": 14,
+  "total_mass": 0.3,
+  "linear_stiffness": 0.7,
+  "pressure_coefficient": 12.0,
+  "damping_coefficient": 0.03,
+  "drag_coefficient": 0.0,
+  "simulation_precision": 8,
+  "origin": [
+    0,
+    1.2,
+    0
+  ],
+  "steps": 180,
+  "color": [
+    0.92,
+    0.3,
+    0.35
+  ],
+  "roughness": 0.25,
+  "floor_y": -0.5,
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.15,
+  "layout": "native_balloon",
+  "notes": "Pressurized sphere \u00e2\u20ac\u201d inflates and gently bounces. Pressure coefficient 12 makes it a proper balloon."
+}

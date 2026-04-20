@@ -1,0 +1,1942 @@
+{
+  "version": 1,
+  "description": "Primitive-stack grammar \u2014 Bauhaus-descended compositions of geometric primitives. Covers Siedhoff-Buscher (totems), Coco Reynolds (pendant), Vignelli (under-plate), Becker (wall-grid), Lady Lamp (pyramid + sphere).",
+  "configs": [
+    {
+      "id": "ps01_bauhaus_totem_green",
+      "notes": "Siedhoff-Buscher Bauspiel (1923) \u2014 green-sphere totem. Sphere on cube on stepped base.",
+      "layout": "vertical_stack",
+      "palette": "bauhaus",
+      "base_scale": 0.25,
+      "sequence": [
+        {
+          "shape": "cuboid",
+          "color": "#d6a85e",
+          "scale": 1.3
+        },
+        {
+          "shape": "cube",
+          "color": "#e8a846",
+          "scale": 1.0
+        },
+        {
+          "shape": "sphere",
+          "color": "#4a6b5e",
+          "scale": 1.3
+        }
+      ]
+    },
+    {
+      "id": "ps01_bauhaus_totem_red",
+      "notes": "Second Bauspiel totem \u2014 yellow cube, black hemisphere, big red sphere, small red sphere on top.",
+      "layout": "vertical_stack",
+      "palette": "bauhaus",
+      "base_scale": 0.2,
+      "sequence": [
+        {
+          "shape": "cylinder",
+          "color": "#4a6b5e",
+          "scale": 0.9
+        },
+        {
+          "shape": "disc",
+          "color": "#1f2327",
+          "scale": 1.3
+        },
+        {
+          "shape": "cube",
+          "color": "#e8a846",
+          "scale": 1.0
+        },
+        {
+          "shape": "sphere",
+          "color": "#c0392b",
+          "scale": 1.4
+        },
+        {
+          "shape": "hemisphere",
+          "color": "#1f2327",
+          "scale": 1.0
+        },
+        {
+          "shape": "sphere",
+          "color": "#c0392b",
+          "scale": 0.7
+        }
+      ]
+    },
+    {
+      "id": "ps01_random_totem_bauhaus",
+      "notes": "Random 5-primitive Bauhaus totem. Pure DNA exploration \u2014 seed only.",
+      "layout": "vertical_stack",
+      "alphabet": [
+        "sphere",
+        "cube",
+        "cylinder",
+        "cone",
+        "hemisphere",
+        "disc"
+      ],
+      "palette": "bauhaus",
+      "count": 5,
+      "base_scale": 0.22,
+      "scale_variation": 0.3,
+      "seed": 11
+    },
+    {
+      "id": "ps02_coco_pendant",
+      "notes": "Coco Reynolds Art Pendant Light (2010) \u2014 threaded wooden beads on cord with Edison bulb.",
+      "layout": "pendant_thread",
+      "alphabet": [
+        "disc",
+        "bipyramid",
+        "sphere"
+      ],
+      "palette": "wood",
+      "count": 14,
+      "base_scale": 0.05,
+      "cord_length": 2.4,
+      "bulb_radius": 0.14,
+      "seed": 5
+    },
+    {
+      "id": "ps02_pendant_bauhaus_beads",
+      "notes": "Pendant grammar with Bauhaus palette \u2014 same structure, different colors.",
+      "layout": "pendant_thread",
+      "alphabet": [
+        "disc",
+        "bipyramid",
+        "cube",
+        "sphere"
+      ],
+      "palette": "bauhaus",
+      "count": 16,
+      "base_scale": 0.05,
+      "cord_length": 2.4,
+      "bulb_radius": 0.12,
+      "seed": 17
+    },
+    {
+      "id": "ps03_vignelli_metafora",
+      "notes": "Lella Vignelli Metafora Coffee Table #1 (1979) \u2014 sphere / cylinder / cube / wedge as legs under glass plate.",
+      "layout": "under_plate",
+      "palette": "metafora",
+      "leg_size": 0.24,
+      "plate_radius": 0.75,
+      "plate_color": [
+        0.95,
+        0.95,
+        0.93
+      ],
+      "legs": [
+        {
+          "shape": "sphere",
+          "color": "#5a3b25"
+        },
+        {
+          "shape": "cylinder",
+          "color": "#d4b896"
+        },
+        {
+          "shape": "cube",
+          "color": "#1a1a1a"
+        },
+        {
+          "shape": "wedge",
+          "color": "#1a1a1a"
+        }
+      ]
+    },
+    {
+      "id": "ps03_metafora_bauhaus",
+      "notes": "Same plate grammar with Bauhaus primary palette \u2014 3 legs.",
+      "layout": "under_plate",
+      "palette": "bauhaus",
+      "leg_size": 0.24,
+      "plate_radius": 0.7,
+      "plate_color": [
+        0.95,
+        0.95,
+        0.9
+      ],
+      "legs": [
+        {
+          "shape": "sphere",
+          "color": "#c0392b"
+        },
+        {
+          "shape": "cube",
+          "color": "#f0c94f"
+        },
+        {
+          "shape": "cylinder",
+          "color": "#14364a"
+        }
+      ]
+    },
+    {
+      "id": "ps04_utensilo_mono",
+      "notes": "Dorothee Becker Uten.Silo (1969) \u2014 wall grid of primitive containers. White-monochrome.",
+      "layout": "wall_grid",
+      "cols": 6,
+      "rows": 5,
+      "cell_size": 0.2,
+      "alphabet": [
+        "cube",
+        "cylinder",
+        "hemisphere",
+        "wedge",
+        "cuboid",
+        "disc"
+      ],
+      "palette": "mono",
+      "seed": 7,
+      "camera_pitch": 0.0,
+      "camera_yaw": 0.0
+    },
+    {
+      "id": "ps05_lady_lamp",
+      "notes": "Lady Lamp \u2014 tall black tapered pyramid with a single glowing glass sphere balanced at the apex. The primitive_stack grammar handles this as a 2-item vertical stack with big scale contrast.",
+      "layout": "vertical_stack",
+      "palette": "mono",
+      "base_scale": 0.6,
+      "sequence": [
+        {
+          "shape": "cone",
+          "color": "#14141a",
+          "scale": 3.2
+        },
+        {
+          "shape": "sphere",
+          "color": "#fff4d8",
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "id": "ps05_lady_lamp_tall",
+      "notes": "Taller Lady Lamp variant \u2014 narrower pyramid, smaller bulb.",
+      "layout": "vertical_stack",
+      "palette": "mono",
+      "base_scale": 0.5,
+      "sequence": [
+        {
+          "shape": "cone",
+          "color": "#18181d",
+          "scale": 4.0
+        },
+        {
+          "shape": "sphere",
+          "color": "#ffe8b0",
+          "scale": 0.5
+        }
+      ]
+    },
+    {
+      "id": "ps04_utensilo_pastel",
+      "notes": "Uten.Silo grammar with pastel palette \u2014 same wall-grid layout, warmer colors.",
+      "layout": "wall_grid",
+      "cols": 6,
+      "rows": 4,
+      "cell_size": 0.2,
+      "alphabet": [
+        "cube",
+        "cylinder",
+        "hemisphere",
+        "wedge",
+        "cuboid"
+      ],
+      "palette": "pastel",
+      "seed": 13,
+      "camera_pitch": 0.0,
+      "camera_yaw": 0.0
+    },
+    {
+      "id": "ps06_grawunder_xxx_warm",
+      "notes": "Johanna Grawunder XXX Table (2001) \u2014 two translucent colored panels crossing in X, round colored disc top. Subtractive mixing where panels overlap.",
+      "layout": "table_cross",
+      "height": 0.42,
+      "width": 0.85,
+      "top_radius": 0.5,
+      "top_color": [
+        1.0,
+        0.45,
+        0.25
+      ],
+      "top_alpha": 0.55,
+      "panels": [
+        {
+          "color": "#ff6b3d",
+          "alpha": 0.55
+        },
+        {
+          "color": "#d63384",
+          "alpha": 0.55
+        }
+      ],
+      "camera_pitch": 0.35,
+      "camera_yaw": 0.65
+    },
+    {
+      "id": "ps06_grawunder_xxx_cool",
+      "notes": "Grawunder grammar with blue/magenta \u2014 subtractive mix toward purple at overlap.",
+      "layout": "table_cross",
+      "height": 0.4,
+      "width": 0.8,
+      "top_radius": 0.45,
+      "top_color": [
+        0.35,
+        0.7,
+        0.9
+      ],
+      "top_alpha": 0.5,
+      "panels": [
+        {
+          "color": "#2d8bd1",
+          "alpha": 0.55
+        },
+        {
+          "color": "#cf3dd6",
+          "alpha": 0.55
+        }
+      ],
+      "camera_pitch": 0.35,
+      "camera_yaw": 0.65
+    },
+    {
+      "id": "ps06_grawunder_cmy",
+      "notes": "Three panels \u2014 cyan + magenta + yellow. Maximum subtractive darkening at triple overlap.",
+      "layout": "table_cross",
+      "height": 0.45,
+      "width": 0.85,
+      "top_radius": 0.5,
+      "top_color": [
+        0.7,
+        0.5,
+        0.2
+      ],
+      "top_alpha": 0.45,
+      "panels": [
+        {
+          "color": "#26c4c4",
+          "alpha": 0.5
+        },
+        {
+          "color": "#d82b7a",
+          "alpha": 0.5
+        },
+        {
+          "color": "#e8cf3f",
+          "alpha": 0.5
+        }
+      ],
+      "camera_pitch": 0.35,
+      "camera_yaw": 0.65
+    },
+    {
+      "id": "ps07_kras_slon_round",
+      "notes": "Ana Kra\u0161 Slon Round Table (2015) \u2014 maple top on pedestal with black-and-white vertical stripes.",
+      "layout": "table_pedestal",
+      "height": 0.72,
+      "top_radius": 0.45,
+      "top_thickness": 0.05,
+      "top_color": [
+        0.82,
+        0.58,
+        0.4
+      ],
+      "pedestal_radius": 0.22,
+      "stripe_count": 24,
+      "stripe_colors": [
+        [
+          0.08,
+          0.08,
+          0.1
+        ],
+        [
+          0.96,
+          0.96,
+          0.94
+        ]
+      ],
+      "camera_pitch": 0.25,
+      "camera_yaw": 0.5
+    },
+    {
+      "id": "ps07_kras_red_cream",
+      "notes": "Kra\u0161 grammar with red-and-cream stripes. Same form, recolored.",
+      "layout": "table_pedestal",
+      "height": 0.72,
+      "top_radius": 0.45,
+      "top_color": [
+        0.93,
+        0.87,
+        0.75
+      ],
+      "pedestal_radius": 0.22,
+      "stripe_count": 28,
+      "stripe_colors": [
+        [
+          0.75,
+          0.2,
+          0.15
+        ],
+        [
+          0.96,
+          0.92,
+          0.85
+        ]
+      ],
+      "camera_pitch": 0.25,
+      "camera_yaw": 0.5
+    },
+    {
+      "id": "ps07_kras_rainbow",
+      "notes": "6-color rotating stripe palette \u2014 kinetic-op-art variant of the Kra\u0161 grammar.",
+      "layout": "table_pedestal",
+      "height": 0.72,
+      "top_radius": 0.45,
+      "top_color": [
+        0.2,
+        0.2,
+        0.22
+      ],
+      "pedestal_radius": 0.22,
+      "stripe_count": 30,
+      "stripe_colors": [
+        [
+          0.85,
+          0.25,
+          0.25
+        ],
+        [
+          0.95,
+          0.65,
+          0.2
+        ],
+        [
+          0.95,
+          0.85,
+          0.3
+        ],
+        [
+          0.35,
+          0.75,
+          0.4
+        ],
+        [
+          0.3,
+          0.55,
+          0.85
+        ],
+        [
+          0.55,
+          0.35,
+          0.75
+        ]
+      ],
+      "camera_pitch": 0.25,
+      "camera_yaw": 0.5
+    },
+    {
+      "id": "ps08_chrysalis_ribbed",
+      "notes": "Flos Chrysalis cocoon floor lamp \u2014 tall ribbed solid of revolution. Profile bulges at top, narrows at waist, tapers to base. 10 vertical flutes.",
+      "layout": "revolution",
+      "profile": [
+        [
+          0,
+          0.1
+        ],
+        [
+          0.1,
+          0.15
+        ],
+        [
+          0.3,
+          0.15
+        ],
+        [
+          0.5,
+          0.18
+        ],
+        [
+          0.65,
+          0.25
+        ],
+        [
+          0.75,
+          0.32
+        ],
+        [
+          0.82,
+          0.4
+        ],
+        [
+          0.88,
+          0.4
+        ],
+        [
+          0.93,
+          0.3
+        ],
+        [
+          0.97,
+          0.28
+        ],
+        [
+          1.0,
+          0.26
+        ]
+      ],
+      "segments": 60,
+      "height_samples": 40,
+      "ribs": 10,
+      "rib_amount": 0.08,
+      "color": [
+        0.93,
+        0.92,
+        0.88
+      ],
+      "alpha": 0.9,
+      "emission": 0.4,
+      "camera_pitch": 0.05,
+      "camera_yaw": 0.3
+    },
+    {
+      "id": "ps08_blue_mushroom_donut",
+      "notes": "Enzo Mari Nesso-style blue mushroom \u2014 dimpled donut profile revolved. Top has central depression via profile returning to narrow radius.",
+      "layout": "revolution",
+      "profile": [
+        [
+          0,
+          0.05
+        ],
+        [
+          0.05,
+          0.15
+        ],
+        [
+          0.08,
+          0.16
+        ],
+        [
+          0.3,
+          0.42
+        ],
+        [
+          0.45,
+          0.48
+        ],
+        [
+          0.55,
+          0.48
+        ],
+        [
+          0.6,
+          0.42
+        ],
+        [
+          0.62,
+          0.35
+        ],
+        [
+          0.63,
+          0.32
+        ],
+        [
+          0.65,
+          0.32
+        ]
+      ],
+      "segments": 72,
+      "height_samples": 40,
+      "color": [
+        0.18,
+        0.25,
+        0.95
+      ],
+      "alpha": 0.85,
+      "emission": 0.6,
+      "camera_pitch": 0.15,
+      "camera_yaw": 0.5
+    },
+    {
+      "id": "ps08_aalto_a330_ribbed",
+      "notes": "Aalto A330-style pendant \u2014 smooth revolution with subtle horizontal ribs (radial amount low, many ribs).",
+      "layout": "revolution",
+      "profile": [
+        [
+          0,
+          0.15
+        ],
+        [
+          0.1,
+          0.28
+        ],
+        [
+          0.3,
+          0.33
+        ],
+        [
+          0.6,
+          0.3
+        ],
+        [
+          0.85,
+          0.22
+        ],
+        [
+          1.0,
+          0.14
+        ]
+      ],
+      "segments": 64,
+      "height_samples": 40,
+      "ribs": 24,
+      "rib_amount": 0.04,
+      "color": [
+        0.95,
+        0.9,
+        0.7
+      ],
+      "alpha": 0.95,
+      "emission": 0.5,
+      "camera_pitch": 0.1,
+      "camera_yaw": 0.5
+    },
+    {
+      "id": "ps08_globe_smooth",
+      "notes": "Smooth frosted globe pendant \u2014 simple revolution, no ribs. Classic bauhaus ball pendant.",
+      "layout": "revolution",
+      "profile": [
+        [
+          0,
+          0.02
+        ],
+        [
+          0.05,
+          0.22
+        ],
+        [
+          0.2,
+          0.35
+        ],
+        [
+          0.5,
+          0.4
+        ],
+        [
+          0.8,
+          0.35
+        ],
+        [
+          0.95,
+          0.22
+        ],
+        [
+          1.0,
+          0.02
+        ]
+      ],
+      "segments": 64,
+      "height_samples": 32,
+      "color": [
+        0.98,
+        0.95,
+        0.88
+      ],
+      "alpha": 0.8,
+      "emission": 0.8,
+      "camera_pitch": 0.1,
+      "camera_yaw": 0.4
+    },
+    {
+      "id": "ps08_stepped_lamp",
+      "notes": "Stepped cylindrical lamp \u2014 profile zig-zags to create horizontal ledges. Mid-century modern silhouette.",
+      "layout": "revolution",
+      "profile": [
+        [
+          0,
+          0.1
+        ],
+        [
+          0.2,
+          0.12
+        ],
+        [
+          0.22,
+          0.28
+        ],
+        [
+          0.5,
+          0.28
+        ],
+        [
+          0.52,
+          0.42
+        ],
+        [
+          0.75,
+          0.42
+        ],
+        [
+          0.77,
+          0.32
+        ],
+        [
+          1.0,
+          0.32
+        ]
+      ],
+      "segments": 48,
+      "height_samples": 30,
+      "color": [
+        0.88,
+        0.85,
+        0.8
+      ],
+      "alpha": 1.0,
+      "camera_pitch": 0.1,
+      "camera_yaw": 0.4
+    },
+    {
+      "id": "ps09_pipistrello",
+      "notes": "Gae Aulenti Pipistrello \u2014 chrome tulip stem + 4 curved glass petals. Petal profile swells then narrows at top.",
+      "layout": "revolution_petals",
+      "profile": [
+        [
+          0,
+          0.05
+        ],
+        [
+          0.15,
+          0.28
+        ],
+        [
+          0.4,
+          0.4
+        ],
+        [
+          0.65,
+          0.4
+        ],
+        [
+          0.82,
+          0.3
+        ],
+        [
+          0.95,
+          0.12
+        ]
+      ],
+      "petal_count": 4,
+      "petal_arc": 0.78,
+      "segments": 20,
+      "height_samples": 30,
+      "color": [
+        0.97,
+        0.96,
+        0.94
+      ],
+      "alpha": 0.95,
+      "emission": 0.6,
+      "base_color": [
+        0.1,
+        0.1,
+        0.12
+      ],
+      "base_radius": 0.07,
+      "base_height": 0.35,
+      "camera_pitch": 0.12,
+      "camera_yaw": 0.5
+    },
+    {
+      "id": "ps09_pipistrello_6petal",
+      "notes": "Pipistrello grammar with 6 petals instead of 4 \u2014 denser flower form.",
+      "layout": "revolution_petals",
+      "profile": [
+        [
+          0,
+          0.05
+        ],
+        [
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.42
+        ],
+        [
+          0.75,
+          0.38
+        ],
+        [
+          0.95,
+          0.15
+        ]
+      ],
+      "petal_count": 6,
+      "petal_arc": 0.85,
+      "segments": 20,
+      "height_samples": 26,
+      "color": [
+        0.95,
+        0.88,
+        0.82
+      ],
+      "alpha": 0.95,
+      "emission": 0.5,
+      "base_color": [
+        0.18,
+        0.14,
+        0.12
+      ],
+      "base_radius": 0.07,
+      "base_height": 0.3,
+      "camera_pitch": 0.12,
+      "camera_yaw": 0.5
+    },
+    {
+      "id": "psI_pipistrello_fixed",
+      "notes": "Iteration: Pipistrello with narrower petal_arc 0.55 \u2014 distinct petals visible with gaps.",
+      "layout": "revolution_petals",
+      "profile": [
+        [
+          0,
+          0.05
+        ],
+        [
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          0.42
+        ],
+        [
+          0.75,
+          0.38
+        ],
+        [
+          0.95,
+          0.15
+        ]
+      ],
+      "petal_count": 4,
+      "petal_arc": 0.55,
+      "segments": 20,
+      "height_samples": 26,
+      "color": [
+        0.97,
+        0.96,
+        0.94
+      ],
+      "alpha": 0.95,
+      "emission": 0.6,
+      "base_color": [
+        0.1,
+        0.1,
+        0.12
+      ],
+      "base_radius": 0.07,
+      "base_height": 0.3,
+      "camera_pitch": 0.12,
+      "camera_yaw": 0.5
+    },
+    {
+      "id": "psI_blue_donut_fixed",
+      "notes": "Iteration: blue mushroom profile returns to small radius at top \u2014 creates the dimple/donut hole.",
+      "layout": "revolution",
+      "profile": [
+        [
+          0,
+          0.05
+        ],
+        [
+          0.08,
+          0.16
+        ],
+        [
+          0.3,
+          0.44
+        ],
+        [
+          0.5,
+          0.5
+        ],
+        [
+          0.62,
+          0.44
+        ],
+        [
+          0.66,
+          0.25
+        ],
+        [
+          0.68,
+          0.1
+        ]
+      ],
+      "segments": 72,
+      "height_samples": 40,
+      "color": [
+        0.18,
+        0.25,
+        0.95
+      ],
+      "alpha": 0.85,
+      "emission": 0.6,
+      "camera_pitch": 0.15,
+      "camera_yaw": 0.5
+    },
+    {
+      "id": "psI_revolution_vase",
+      "notes": "Iteration: tall slender vase profile. Same grammar, different silhouette.",
+      "layout": "revolution",
+      "profile": [
+        [
+          0,
+          0.2
+        ],
+        [
+          0.1,
+          0.18
+        ],
+        [
+          0.3,
+          0.22
+        ],
+        [
+          0.55,
+          0.35
+        ],
+        [
+          0.7,
+          0.3
+        ],
+        [
+          0.85,
+          0.15
+        ],
+        [
+          1.0,
+          0.22
+        ]
+      ],
+      "segments": 64,
+      "height_samples": 40,
+      "color": [
+        0.22,
+        0.18,
+        0.14
+      ],
+      "alpha": 1.0,
+      "camera_pitch": 0.1,
+      "camera_yaw": 0.3
+    },
+    {
+      "id": "psI_revolution_pear_lamp",
+      "notes": "Iteration: pear-shaped lamp shade. Teardrop profile, 8 gentle ribs.",
+      "layout": "revolution",
+      "profile": [
+        [
+          0,
+          0.05
+        ],
+        [
+          0.2,
+          0.22
+        ],
+        [
+          0.45,
+          0.32
+        ],
+        [
+          0.6,
+          0.33
+        ],
+        [
+          0.78,
+          0.28
+        ],
+        [
+          1.0,
+          0.14
+        ]
+      ],
+      "segments": 64,
+      "height_samples": 36,
+      "ribs": 8,
+      "rib_amount": 0.03,
+      "color": [
+        1.0,
+        0.95,
+        0.82
+      ],
+      "alpha": 0.85,
+      "emission": 0.8,
+      "camera_pitch": 0.1,
+      "camera_yaw": 0.4
+    },
+    {
+      "id": "psI_revolution_wide_bell",
+      "notes": "Iteration: wide bell shade \u2014 plate-like outer rim.",
+      "layout": "revolution",
+      "profile": [
+        [
+          0,
+          0.08
+        ],
+        [
+          0.15,
+          0.15
+        ],
+        [
+          0.45,
+          0.3
+        ],
+        [
+          0.7,
+          0.5
+        ],
+        [
+          0.82,
+          0.55
+        ],
+        [
+          0.85,
+          0.5
+        ]
+      ],
+      "segments": 64,
+      "height_samples": 30,
+      "color": [
+        0.88,
+        0.82,
+        0.7
+      ],
+      "alpha": 0.85,
+      "emission": 0.5,
+      "camera_pitch": 0.15,
+      "camera_yaw": 0.4
+    },
+    {
+      "id": "psI_petals_red",
+      "notes": "Iteration: Pipistrello-style flower with red glass petals. Different palette, same grammar.",
+      "layout": "revolution_petals",
+      "profile": [
+        [
+          0,
+          0.05
+        ],
+        [
+          0.2,
+          0.32
+        ],
+        [
+          0.5,
+          0.44
+        ],
+        [
+          0.8,
+          0.35
+        ],
+        [
+          0.95,
+          0.15
+        ]
+      ],
+      "petal_count": 5,
+      "petal_arc": 0.6,
+      "segments": 22,
+      "height_samples": 28,
+      "color": [
+        0.85,
+        0.2,
+        0.2
+      ],
+      "alpha": 0.75,
+      "emission": 0.8,
+      "base_color": [
+        0.7,
+        0.55,
+        0.3
+      ],
+      "base_radius": 0.08,
+      "base_height": 0.3,
+      "camera_pitch": 0.12,
+      "camera_yaw": 0.5
+    },
+    {
+      "id": "psI_totem_tall",
+      "notes": "Iteration: tall 8-primitive Bauhaus totem with varied scales.",
+      "layout": "vertical_stack",
+      "base_scale": 0.18,
+      "sequence": [
+        {
+          "shape": "cuboid",
+          "color": "#3a4b5c",
+          "scale": 1.4
+        },
+        {
+          "shape": "cylinder",
+          "color": "#e8a846",
+          "scale": 0.8
+        },
+        {
+          "shape": "sphere",
+          "color": "#c0392b",
+          "scale": 1.1
+        },
+        {
+          "shape": "disc",
+          "color": "#1f2327",
+          "scale": 1.3
+        },
+        {
+          "shape": "cube",
+          "color": "#4a6b5e",
+          "scale": 0.9
+        },
+        {
+          "shape": "cone",
+          "color": "#e8a846",
+          "scale": 1.0
+        },
+        {
+          "shape": "hemisphere",
+          "color": "#1f2327",
+          "scale": 0.85
+        },
+        {
+          "shape": "sphere",
+          "color": "#c0392b",
+          "scale": 0.6
+        }
+      ]
+    },
+    {
+      "id": "psI_totem_wood",
+      "notes": "Iteration: totem in wood palette \u2014 warm hand-turned character.",
+      "layout": "vertical_stack",
+      "palette": "wood",
+      "alphabet": [
+        "sphere",
+        "cylinder",
+        "cuboid",
+        "hemisphere",
+        "disc"
+      ],
+      "count": 6,
+      "base_scale": 0.22,
+      "scale_variation": 0.4,
+      "seed": 23
+    },
+    {
+      "id": "psI_grawunder_four_panels",
+      "notes": "Iteration: 4-panel cross table \u2014 darker overlaps, denser intersection.",
+      "layout": "table_cross",
+      "height": 0.42,
+      "width": 0.85,
+      "top_radius": 0.5,
+      "top_color": [
+        0.9,
+        0.4,
+        0.5
+      ],
+      "top_alpha": 0.5,
+      "panels": [
+        {
+          "color": "#ff6b3d",
+          "alpha": 0.5
+        },
+        {
+          "color": "#d63384",
+          "alpha": 0.5
+        },
+        {
+          "color": "#3dd6c4",
+          "alpha": 0.5
+        },
+        {
+          "color": "#f5c842",
+          "alpha": 0.5
+        }
+      ],
+      "camera_pitch": 0.35,
+      "camera_yaw": 0.65
+    },
+    {
+      "id": "psI_kras_narrow_tall",
+      "notes": "Iteration: tall narrow Kra\u0161 pedestal \u2014 thin column, small top.",
+      "layout": "table_pedestal",
+      "height": 1.1,
+      "top_radius": 0.32,
+      "top_color": [
+        0.75,
+        0.55,
+        0.38
+      ],
+      "pedestal_radius": 0.15,
+      "stripe_count": 20,
+      "stripe_colors": [
+        [
+          0.08,
+          0.08,
+          0.1
+        ],
+        [
+          0.96,
+          0.96,
+          0.94
+        ]
+      ],
+      "camera_pitch": 0.2,
+      "camera_yaw": 0.4
+    },
+    {
+      "id": "psX_lamp_on_striped_pedestal",
+      "notes": "CROSS: revolution lamp shade perched on a striped Kra\u0161-style pedestal. Table lamp.",
+      "layout": "compose",
+      "camera_pitch": 0.15,
+      "camera_yaw": 0.5,
+      "parts": [
+        {
+          "y": 0,
+          "config": {
+            "layout": "table_pedestal",
+            "height": 0.5,
+            "top_radius": 0.25,
+            "top_thickness": 0.03,
+            "top_color": [
+              0.18,
+              0.18,
+              0.2
+            ],
+            "pedestal_radius": 0.12,
+            "stripe_count": 18,
+            "stripe_colors": [
+              [
+                0.08,
+                0.08,
+                0.1
+              ],
+              [
+                0.96,
+                0.96,
+                0.94
+              ]
+            ]
+          }
+        },
+        {
+          "y": 0.5,
+          "config": {
+            "layout": "revolution",
+            "profile": [
+              [
+                0,
+                0.04
+              ],
+              [
+                0.1,
+                0.12
+              ],
+              [
+                0.3,
+                0.24
+              ],
+              [
+                0.55,
+                0.28
+              ],
+              [
+                0.78,
+                0.22
+              ],
+              [
+                1.0,
+                0.08
+              ]
+            ],
+            "segments": 48,
+            "height_samples": 28,
+            "color": [
+              1.0,
+              0.93,
+              0.75
+            ],
+            "alpha": 0.85,
+            "emission": 0.8
+          }
+        }
+      ]
+    },
+    {
+      "id": "psX_totem_on_plate",
+      "notes": "CROSS: Bauhaus totem standing in the middle of a Vignelli Metafora-style plate arrangement.",
+      "layout": "compose",
+      "camera_pitch": 0.35,
+      "camera_yaw": 0.55,
+      "parts": [
+        {
+          "y": 0,
+          "config": {
+            "layout": "under_plate",
+            "palette": "metafora",
+            "leg_size": 0.22,
+            "plate_radius": 0.7,
+            "plate_color": [
+              0.95,
+              0.92,
+              0.88
+            ],
+            "legs": [
+              {
+                "shape": "sphere",
+                "color": "#5a3b25"
+              },
+              {
+                "shape": "cube",
+                "color": "#1a1a1a"
+              },
+              {
+                "shape": "wedge",
+                "color": "#d4b896"
+              }
+            ]
+          }
+        },
+        {
+          "y": 0.25,
+          "config": {
+            "layout": "vertical_stack",
+            "base_scale": 0.15,
+            "sequence": [
+              {
+                "shape": "cylinder",
+                "color": "#4a6b5e",
+                "scale": 0.8
+              },
+              {
+                "shape": "cube",
+                "color": "#e8a846",
+                "scale": 1.0
+              },
+              {
+                "shape": "sphere",
+                "color": "#c0392b",
+                "scale": 1.2
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "psX_petals_on_pedestal",
+      "notes": "CROSS: Pipistrello petals on a striped pedestal \u2014 Kra\u0161-meets-Aulenti.",
+      "layout": "compose",
+      "camera_pitch": 0.12,
+      "camera_yaw": 0.5,
+      "parts": [
+        {
+          "y": 0,
+          "config": {
+            "layout": "table_pedestal",
+            "height": 0.6,
+            "top_radius": 0.18,
+            "top_thickness": 0.02,
+            "top_color": [
+              0.1,
+              0.1,
+              0.12
+            ],
+            "pedestal_radius": 0.12,
+            "stripe_count": 16,
+            "stripe_colors": [
+              [
+                0.08,
+                0.08,
+                0.1
+              ],
+              [
+                0.96,
+                0.96,
+                0.94
+              ]
+            ]
+          }
+        },
+        {
+          "y": 0.6,
+          "config": {
+            "layout": "revolution_petals",
+            "profile": [
+              [
+                0,
+                0.05
+              ],
+              [
+                0.2,
+                0.3
+              ],
+              [
+                0.5,
+                0.42
+              ],
+              [
+                0.8,
+                0.35
+              ],
+              [
+                0.95,
+                0.15
+              ]
+            ],
+            "petal_count": 4,
+            "petal_arc": 0.55,
+            "color": [
+              0.97,
+              0.96,
+              0.94
+            ],
+            "alpha": 0.95,
+            "emission": 0.7,
+            "base_color": [
+              0.1,
+              0.1,
+              0.12
+            ],
+            "base_radius": 0.06,
+            "base_height": 0.08
+          }
+        }
+      ]
+    },
+    {
+      "id": "psX_pendant_with_shade",
+      "notes": "CROSS: Coco Reynolds pendant beads ending in a revolution lamp shade instead of a bare bulb.",
+      "layout": "compose",
+      "camera_pitch": 0.0,
+      "camera_yaw": 0.45,
+      "parts": [
+        {
+          "y": 1.5,
+          "config": {
+            "layout": "pendant_thread",
+            "alphabet": [
+              "disc",
+              "bipyramid"
+            ],
+            "palette": "wood",
+            "count": 10,
+            "base_scale": 0.05,
+            "cord_length": 1.8,
+            "bulb_radius": 0.01,
+            "seed": 9
+          }
+        },
+        {
+          "y": -0.5,
+          "config": {
+            "layout": "revolution",
+            "profile": [
+              [
+                0,
+                0.02
+              ],
+              [
+                0.15,
+                0.18
+              ],
+              [
+                0.4,
+                0.24
+              ],
+              [
+                0.7,
+                0.22
+              ],
+              [
+                0.95,
+                0.08
+              ]
+            ],
+            "segments": 48,
+            "height_samples": 28,
+            "color": [
+              1.0,
+              0.93,
+              0.75
+            ],
+            "alpha": 0.85,
+            "emission": 0.9
+          }
+        }
+      ]
+    },
+    {
+      "id": "psX_three_globes_on_plate",
+      "notes": "CROSS: three revolution globes arranged as legs under a plate \u2014 alien modernist coffee table.",
+      "layout": "compose",
+      "camera_pitch": 0.3,
+      "camera_yaw": 0.55,
+      "parts": [
+        {
+          "y": 0,
+          "config": {
+            "layout": "under_plate",
+            "leg_size": 0.3,
+            "plate_radius": 0.7,
+            "plate_color": [
+              0.92,
+              0.92,
+              0.9
+            ],
+            "legs": [
+              {
+                "shape": "sphere",
+                "color": "#c0392b"
+              },
+              {
+                "shape": "sphere",
+                "color": "#14364a"
+              },
+              {
+                "shape": "sphere",
+                "color": "#f0c94f"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "psY_flower_5petal",
+      "notes": "FLOWER-DNA mapped to primitive grammar. 5-petal bloom with stamen cluster \u2014 the revolution_petals grammar IS the flower.symmetry grammar when you add stamens.",
+      "layout": "compose",
+      "camera_pitch": 0.2,
+      "camera_yaw": 0.5,
+      "parts": [
+        {
+          "y": 0,
+          "config": {
+            "layout": "revolution_petals",
+            "profile": [
+              [
+                0,
+                0.05
+              ],
+              [
+                0.25,
+                0.3
+              ],
+              [
+                0.55,
+                0.42
+              ],
+              [
+                0.8,
+                0.34
+              ],
+              [
+                0.95,
+                0.12
+              ]
+            ],
+            "petal_count": 5,
+            "petal_arc": 0.62,
+            "segments": 24,
+            "height_samples": 28,
+            "color": [
+              0.95,
+              0.45,
+              0.6
+            ],
+            "alpha": 0.88,
+            "emission": 0.4,
+            "base_color": [
+              0.3,
+              0.45,
+              0.25
+            ],
+            "base_radius": 0.05,
+            "base_height": 0.4
+          }
+        },
+        {
+          "y": 0.78,
+          "config": {
+            "layout": "scatter",
+            "alphabet": [
+              "sphere"
+            ],
+            "count": 7,
+            "palette": "bauhaus",
+            "extent": 0.08,
+            "seed": 31
+          }
+        }
+      ]
+    },
+    {
+      "id": "psY_flower_7petal_daisy",
+      "notes": "7-petal daisy \u2014 narrow profile, white petals, yellow stamen disc.",
+      "layout": "compose",
+      "camera_pitch": 0.2,
+      "camera_yaw": 0.5,
+      "parts": [
+        {
+          "y": 0,
+          "config": {
+            "layout": "revolution_petals",
+            "profile": [
+              [
+                0,
+                0.04
+              ],
+              [
+                0.2,
+                0.25
+              ],
+              [
+                0.5,
+                0.4
+              ],
+              [
+                0.85,
+                0.32
+              ],
+              [
+                0.97,
+                0.08
+              ]
+            ],
+            "petal_count": 7,
+            "petal_arc": 0.6,
+            "segments": 20,
+            "height_samples": 26,
+            "color": [
+              0.98,
+              0.97,
+              0.92
+            ],
+            "alpha": 0.85,
+            "emission": 0.3,
+            "base_color": [
+              0.25,
+              0.4,
+              0.2
+            ],
+            "base_radius": 0.04,
+            "base_height": 0.35
+          }
+        },
+        {
+          "y": 0.7,
+          "config": {
+            "layout": "vertical_stack",
+            "base_scale": 0.12,
+            "sequence": [
+              {
+                "shape": "disc",
+                "color": "#e8a846",
+                "scale": 1.0
+              },
+              {
+                "shape": "sphere",
+                "color": "#d89a3b",
+                "scale": 0.5
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "psY_flower_3petal_iris",
+      "notes": "3-petal iris/orchid \u2014 wider arc per petal, deep purple, tall narrow stamen.",
+      "layout": "compose",
+      "camera_pitch": 0.25,
+      "camera_yaw": 0.5,
+      "parts": [
+        {
+          "y": 0,
+          "config": {
+            "layout": "revolution_petals",
+            "profile": [
+              [
+                0,
+                0.06
+              ],
+              [
+                0.15,
+                0.28
+              ],
+              [
+                0.4,
+                0.42
+              ],
+              [
+                0.7,
+                0.38
+              ],
+              [
+                0.95,
+                0.15
+              ]
+            ],
+            "petal_count": 3,
+            "petal_arc": 0.85,
+            "segments": 24,
+            "height_samples": 28,
+            "color": [
+              0.45,
+              0.2,
+              0.7
+            ],
+            "alpha": 0.85,
+            "emission": 0.6,
+            "base_color": [
+              0.25,
+              0.45,
+              0.2
+            ],
+            "base_radius": 0.045,
+            "base_height": 0.5
+          }
+        },
+        {
+          "y": 0.88,
+          "config": {
+            "layout": "vertical_stack",
+            "base_scale": 0.06,
+            "sequence": [
+              {
+                "shape": "cylinder",
+                "color": "#f5dc30",
+                "scale": 1.3
+              },
+              {
+                "shape": "sphere",
+                "color": "#e8a846",
+                "scale": 0.8
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "psX_pipistrello_forest",
+      "notes": "CROSS: three Pipistrello-style flowers arranged as an odd triangle \u2014 flower colony on display.",
+      "layout": "compose",
+      "camera_pitch": 0.2,
+      "camera_yaw": 0.5,
+      "parts": [
+        {
+          "y": 0,
+          "config": {
+            "layout": "revolution_petals",
+            "profile": [
+              [
+                0,
+                0.05
+              ],
+              [
+                0.2,
+                0.28
+              ],
+              [
+                0.5,
+                0.38
+              ],
+              [
+                0.8,
+                0.3
+              ],
+              [
+                0.95,
+                0.12
+              ]
+            ],
+            "petal_count": 4,
+            "petal_arc": 0.55,
+            "color": [
+              0.9,
+              0.7,
+              0.5
+            ],
+            "alpha": 0.95,
+            "emission": 0.6,
+            "base_color": [
+              0.1,
+              0.1,
+              0.12
+            ],
+            "base_radius": 0.06,
+            "base_height": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "ps_ls01_bauhaus_tree",
+      "layout": "lsystem_scatter",
+      "lsystem": {
+        "axiom": "F",
+        "rules": {
+          "F": "F[+F]F[-F]F"
+        },
+        "iterations": 3,
+        "angle_deg": 25.7,
+        "step_len": 0.25,
+        "step_shrink": 0.72
+      },
+      "segment_shape": "cube",
+      "branch_shape": "sphere",
+      "leaf_shape": "bipyramid",
+      "palette": "bauhaus",
+      "primitive_size": 0.05,
+      "size_by_depth": true,
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.1,
+      "notes": "DNA BRIDGE: L-system plant (F->F[+F]F[-F]F at 25.7\u00b0) as Bauhaus-primitive sculpture. Cubes on branches, spheres at branch points, bipyramid tips. Same DNA as lsystem-gallery ls03, now a Bauspiel totem."
+    },
+    {
+      "id": "ps_ls02_wood_tree",
+      "layout": "lsystem_scatter",
+      "lsystem": {
+        "axiom": "F",
+        "rules": {
+          "F": "F[+F]F[-F]F"
+        },
+        "iterations": 3,
+        "angle_deg": 25.7,
+        "step_len": 0.25,
+        "step_shrink": 0.72
+      },
+      "segment_shape": "sphere",
+      "branch_shape": "cylinder",
+      "leaf_shape": "sphere",
+      "palette": "wood",
+      "primitive_size": 0.05,
+      "size_by_depth": true,
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.1,
+      "notes": "Same L-system plant DNA, wood palette \u2014 reads as a carved totem pole variant. Palette and alphabet change the character; structure stays the same."
+    },
+    {
+      "id": "ps_ca01_conway_city",
+      "layout": "ca_scatter",
+      "ca": {
+        "rule": "conway",
+        "grid_size": 18,
+        "iterations": 10,
+        "density": 0.45,
+        "seed": 3,
+        "cell_size": 0.08
+      },
+      "shape": "cube",
+      "palette": "mono",
+      "primitive_size": 0.06,
+      "height_from_neighbors": true,
+      "height_scale": 0.8,
+      "camera_yaw": 0.6,
+      "camera_pitch": 0.4,
+      "notes": "DNA BRIDGE: Conway Life as a monochrome city. Cubes at alive cells, height scaled by live-neighbor count \u2014 clusters become towers, isolated cells become squat blocks. Emergent skyline."
+    },
+    {
+      "id": "ps_ca02_highlife_bauhaus",
+      "layout": "ca_scatter",
+      "ca": {
+        "rule": "highlife",
+        "grid_size": 20,
+        "iterations": 12,
+        "density": 0.4,
+        "seed": 9,
+        "cell_size": 0.08
+      },
+      "shape": "sphere",
+      "palette": "bauhaus",
+      "primitive_size": 0.05,
+      "height_from_neighbors": false,
+      "camera_yaw": 0.5,
+      "camera_pitch": 0.5,
+      "notes": "DNA BRIDGE: HighLife CA with Bauhaus palette. Spheres placed on CA pattern \u2014 Bauspiel meets Conway."
+    },
+    {
+      "id": "ps_noise01_jiggled_city",
+      "layout": "ca_scatter",
+      "ca": {
+        "rule": "conway",
+        "grid_size": 18,
+        "iterations": 10,
+        "density": 0.45,
+        "seed": 3,
+        "cell_size": 0.08
+      },
+      "shape": "cube",
+      "palette": "mono",
+      "primitive_size": 0.06,
+      "height_from_neighbors": true,
+      "height_scale": 0.8,
+      "post_ops": [
+        {
+          "op": "noise_displace",
+          "amplitude": 0.04,
+          "frequency": 4.0,
+          "octaves": 2,
+          "seed": 15,
+          "noise_type": "simplex",
+          "mode": "vector"
+        }
+      ],
+      "camera_yaw": 0.6,
+      "camera_pitch": 0.4,
+      "notes": "DNA BRIDGE: Conway-city (ps_ca01) + simplex-noise post-op. The grid city gets jiggled \u2014 towers lean, blocks offset. From modernist rectilinear to drunk modernist."
+    },
+    {
+      "id": "ps_rd01_coral_garden",
+      "layout": "rd_scatter",
+      "rd": {
+        "preset": "coral",
+        "grid_size": 48,
+        "iterations": 3500,
+        "seed": 17,
+        "threshold": 0.28,
+        "cell_size": 0.07
+      },
+      "shape": "cylinder",
+      "palette": "wood",
+      "primitive_size": 0.04,
+      "height_from_v": true,
+      "height_amp": 0.6,
+      "camera_yaw": 0.55,
+      "camera_pitch": 0.45,
+      "notes": "DNA BRIDGE: Gray-Scott coral \u2192 cylinder garden. Above-threshold cells place beige/brown wood-palette cylinders, height scaled by V. Reads as a tree-stump forest following the coral ridges."
+    },
+    {
+      "id": "ps_rd02_mitosis_cells",
+      "layout": "rd_scatter",
+      "rd": {
+        "preset": "mitosis",
+        "grid_size": 48,
+        "iterations": 3500,
+        "seed": 5,
+        "threshold": 0.25,
+        "cell_size": 0.07
+      },
+      "shape": "sphere",
+      "palette": "pastel",
+      "primitive_size": 0.04,
+      "height_from_v": true,
+      "height_amp": 0.4,
+      "camera_yaw": 0.5,
+      "camera_pitch": 0.4,
+      "notes": "DNA BRIDGE: Gray-Scott mitosis \u2192 pastel sphere field. Self-replicating RD cells as pastel spheres, height lightly modulated by V. Reads as a colony of soap-bubble organisms."
+    }
+  ]
+}

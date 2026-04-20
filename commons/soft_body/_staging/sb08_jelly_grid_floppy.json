@@ -1,0 +1,41 @@
+{
+  "id": "sb08_jelly_grid_floppy",
+  "topology": "jelly_grid_3d",
+  "nx": 6,
+  "ny": 3,
+  "nz": 6,
+  "cell": 0.2,
+  "stiffness": 0.35,
+  "damping": 0.985,
+  "gravity": [
+    0,
+    -9.8,
+    0
+  ],
+  "floor_y": -1.5,
+  "steps": 320,
+  "origin": [
+    0,
+    1.8,
+    0
+  ],
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.3,
+  "render": {
+    "color": [
+      0.85,
+      0.75,
+      0.35
+    ],
+    "roughness": 0.55,
+    "particle_radius": 0.06,
+    "show_wires": true,
+    "wire_color": [
+      0.2,
+      0.15,
+      0.08
+    ]
+  },
+  "layout": "verlet_jelly",
+  "notes": "Floppy pancake \u2014 low stiffness wide grid spreads out on landing, loses shape."
+}

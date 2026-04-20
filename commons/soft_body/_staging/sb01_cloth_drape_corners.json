@@ -1,0 +1,35 @@
+{
+  "id": "sb01_cloth_drape_corners",
+  "topology": "cloth_grid",
+  "cols": 16,
+  "rows": 16,
+  "cell_size": 0.16,
+  "pin_mode": "top_corners",
+  "stiffness": 0.85,
+  "damping": 0.995,
+  "gravity": [
+    0,
+    -9.8,
+    0
+  ],
+  "floor_y": -2.0,
+  "steps": 240,
+  "origin": [
+    0,
+    1.8,
+    0
+  ],
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.15,
+  "render": {
+    "color": [
+      0.72,
+      0.35,
+      0.32
+    ],
+    "roughness": 0.6,
+    "double_sided": true
+  },
+  "layout": "verlet_cloth",
+  "notes": "Classic hanging cloth \u2014 two top corners pinned, gravity pulls the middle into a catenary sag."
+}

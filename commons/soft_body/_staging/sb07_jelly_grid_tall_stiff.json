@@ -1,0 +1,41 @@
+{
+  "id": "sb07_jelly_grid_tall_stiff",
+  "topology": "jelly_grid_3d",
+  "nx": 3,
+  "ny": 8,
+  "nz": 3,
+  "cell": 0.25,
+  "stiffness": 0.92,
+  "damping": 0.995,
+  "gravity": [
+    0,
+    -9.8,
+    0
+  ],
+  "floor_y": -1.5,
+  "steps": 240,
+  "origin": [
+    0,
+    1.5,
+    0
+  ],
+  "camera_yaw": 0.4,
+  "camera_pitch": 0.1,
+  "render": {
+    "color": [
+      0.55,
+      0.4,
+      0.8
+    ],
+    "roughness": 0.45,
+    "particle_radius": 0.07,
+    "show_wires": true,
+    "wire_color": [
+      0.15,
+      0.1,
+      0.2
+    ]
+  },
+  "layout": "verlet_jelly",
+  "notes": "Tall stiff column \u2014 stays upright with minor wobble, structural integrity preserved."
+}

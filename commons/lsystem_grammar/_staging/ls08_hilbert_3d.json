@@ -1,0 +1,34 @@
+{
+  "id": "ls08_hilbert_3d",
+  "axiom": "A",
+  "rules": {
+    "A": "B-F+CFC+F-D&F^D-F+&&CFC+F+B\\\\",
+    "B": "A&F^CFB^F^D^^-F-D^|F^B|FC^F^A\\\\",
+    "C": "|D^|F^B-F+C^F^A&&FA&F^C+F+B^F^D\\\\",
+    "D": "|CFB-F+B|FA&F^A&&FB-F+B|FC\\\\"
+  },
+  "iterations": 2,
+  "angle_deg": 90,
+  "step_len": 0.08,
+  "interpretation": "tubes",
+  "base_width": 0.01,
+  "width_shrink": 1.0,
+  "tube_sides": 4,
+  "color_trunk": [
+    0.2,
+    0.3,
+    0.6
+  ],
+  "color_tip": [
+    0.8,
+    0.5,
+    0.2
+  ],
+  "camera_yaw": 0.7,
+  "camera_pitch": 0.4,
+  "layout": "space_filling",
+  "dna_connections": [
+    "mesh_grammar"
+  ],
+  "notes": "3D Hilbert space-filling curve \u00e2\u20ac\u201d four non-terminals (A/B/C/D) encode 3D orientation. Rendered as tubes so the recursive structure reads."
+}

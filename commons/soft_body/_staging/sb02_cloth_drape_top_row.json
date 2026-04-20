@@ -1,0 +1,35 @@
+{
+  "id": "sb02_cloth_drape_top_row",
+  "topology": "cloth_grid",
+  "cols": 18,
+  "rows": 12,
+  "cell_size": 0.15,
+  "pin_mode": "top_row",
+  "stiffness": 0.9,
+  "damping": 0.995,
+  "gravity": [
+    0,
+    -9.8,
+    0
+  ],
+  "floor_y": -2.0,
+  "steps": 200,
+  "origin": [
+    0,
+    1.4,
+    0
+  ],
+  "camera_yaw": 0.4,
+  "camera_pitch": 0.1,
+  "render": {
+    "color": [
+      0.25,
+      0.35,
+      0.55
+    ],
+    "roughness": 0.65,
+    "double_sided": true
+  },
+  "layout": "verlet_cloth",
+  "notes": "Curtain with entire top row pinned \u2014 flat hang, slight side curl where grid ends."
+}

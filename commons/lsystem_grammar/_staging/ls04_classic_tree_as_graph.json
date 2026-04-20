@@ -1,0 +1,30 @@
+{
+  "id": "ls04_classic_tree_as_graph",
+  "axiom": "F",
+  "rules": {
+    "F": "F[+F]F[-F]F"
+  },
+  "iterations": 4,
+  "angle_deg": 25.7,
+  "step_len": 0.08,
+  "step_shrink": 0.72,
+  "interpretation": "graph",
+  "node_radius": 0.015,
+  "color_trunk": [
+    0.3,
+    0.2,
+    0.4
+  ],
+  "color_tip": [
+    0.8,
+    0.6,
+    0.3
+  ],
+  "camera_yaw": 0.3,
+  "camera_pitch": 0.15,
+  "layout": "tree",
+  "dna_connections": [
+    "graph_grammar"
+  ],
+  "notes": "Same canonical plant DNA as ls03 \u00e2\u20ac\u201d but rendered as graph (nodes + edges). Cross-substrate twin. Could be post-processed with CA-prune or Modulor-fold."
+}

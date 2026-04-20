@@ -1,0 +1,47 @@
+{
+  "id": "sb_ca01_conway_cloth",
+  "topology": "ca_grid",
+  "ca": {
+    "rule": "conway",
+    "grid_size": 22,
+    "iterations": 8,
+    "density": 0.5,
+    "seed": 7,
+    "cell_size": 0.1,
+    "pin_mode": "top_row"
+  },
+  "stiffness": 0.75,
+  "damping": 0.995,
+  "gravity": [
+    0,
+    -9.8,
+    0
+  ],
+  "floor_y": -3.0,
+  "constraint_passes": 5,
+  "steps": 80,
+  "origin": [
+    0,
+    1.5,
+    0
+  ],
+  "camera_yaw": 0.3,
+  "camera_pitch": 0.15,
+  "render": {
+    "color": [
+      0.4,
+      0.5,
+      0.7
+    ],
+    "roughness": 0.55,
+    "particle_radius": 0.03,
+    "show_wires": true,
+    "wire_color": [
+      0.15,
+      0.2,
+      0.35
+    ]
+  },
+  "layout": "ca_bridge",
+  "notes": "DNA BRIDGE: Conway Life cloth. 8 CA steps produce a sparse pattern; alive cells become particles, 4-neighbors become springs, top row pinned. Hangs as a tattered lattice."
+}

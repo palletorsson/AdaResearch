@@ -1,3602 +1,3721 @@
 {
-	"artifacts": {
-		"7_1_elementary_ca_vr": {
-			"category": "unknown",
-			"complexity": "beginner",
-			"description": "7_1_elementary_ca_vr",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				1.0,
-				1.0,
-				21.0
-			],
-			"include_in_map_data": true,
-			"lookup_name": "7_1_elementary_ca_vr",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "7_1_elementary_ca_vr",
-			"parameters": {
-				"footprint": [
-					1.0,
-					1.0,
-					21.0
-				],
-				"size_group": "world_scale"
-			},
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_1_elementary_ca_vr.tscn",
-			"size_group": "world_scale",
-			"tags": [
-				"cellular_automata"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry"
-			}
-		},
-		"7_2_game_of_life_vr": {
-			"category": "unknown",
-			"complexity": "beginner",
-			"description": "7_2_game_of_life_vr",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				22.0,
-				22.0,
-				22.0
-			],
-			"include_in_map_data": true,
-			"lookup_name": "7_2_game_of_life_vr",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "7_2_game_of_life_vr",
-			"parameters": {
-				"footprint": [
-					22.0,
-					22.0,
-					22.0
-				],
-				"size_group": "world_scale"
-			},
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_2_game_of_life_vr.tscn",
-			"size_group": "world_scale",
-			"tags": [
-				"cellular_automata"
-			],
-			"geometry_spec": {
-				"mesh_type": "delegated_scene",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "scene_instantiation",
-					"primitives": [],
-					"operations": [
-						"load_scene",
-						"instantiate",
-						"configure"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "vertex",
-					"driven_by": "per_frame_rebuild",
-					"affects": [
-						"vertex_positions"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "varies"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry"
-			}
-		},
-		"7_3_game_of_life_oop_vr": {
-			"category": "unknown",
-			"complexity": "beginner",
-			"description": "7_3_game_of_life_oop_vr",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				1.0,
-				1.0,
-				1.0
-			],
-			"include_in_map_data": true,
-			"lookup_name": "7_3_game_of_life_oop_vr",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "7_3_game_of_life_oop_vr",
-			"parameters": {
-				"footprint": [
-					1.0,
-					1.0,
-					1.0
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_3_game_of_life_oop_vr.tscn",
-			"size_group": "compact",
-			"tags": [
-				"cellular_automata"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry"
-			}
-		},
-		"7_8_hexagon_ca_vr": {
-			"category": "unknown",
-			"complexity": "beginner",
-			"description": "7_8_hexagon_ca_vr",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				32.0,
-				32.0,
-				32.0
-			],
-			"include_in_map_data": true,
-			"lookup_name": "7_8_hexagon_ca_vr",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "7_8_hexagon_ca_vr",
-			"parameters": {
-				"footprint": [
-					32.0,
-					32.0,
-					32.0
-				],
-				"size_group": "world_scale"
-			},
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.tscn",
-			"size_group": "world_scale",
-			"tags": [
-				"cellular_automata"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"cylinder"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "custom_fragment",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~36"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"square"
-				],
-				"preferred_zone": "entry"
-			}
-		},
-		"CA_sphere": {
-			"category": "unknown",
-			"complexity": "beginner",
-			"description": "CA_sphere",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				2.0,
-				2.0,
-				2.0
-			],
-			"include_in_map_data": true,
-			"lookup_name": "CA_sphere",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "CA_sphere",
-			"parameters": {
-				"footprint": [
-					2.0,
-					2.0,
-					2.0
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://algorithms/cellularautomata/CA_sphere/CA_sphere.tscn",
-			"size_group": "compact",
-			"tags": [
-				"cellular_automata"
-			],
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~0"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"planar",
-					"topology",
-					"contrasts",
-					"automata"
-				],
-				"preferred_zone": "entry"
-			}
-		},
-		"CellularAutomata3DStacked": {
-			"category": "unknown",
-			"complexity": "intermediate",
-			"description": "CellularAutomata3DStacked",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"include_in_map_data": true,
-			"lookup_name": "CellularAutomata3DStacked",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "CellularAutomata3DStacked",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://algorithms/cellularautomata/cellular_automata_3d_stacked/CellularAutomata3DStacked.tscn",
-			"size_group": "compact",
-			"tags": [
-				"cellular_automata"
-			],
-			"geometry_spec": {
-				"mesh_type": "delegated_scene",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "scene_instantiation",
-					"primitives": [],
-					"operations": [
-						"load_scene",
-						"instantiate",
-						"configure"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "varies"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"ca_columns",
-					"implicit",
-					"stacking",
-					"explicit",
-					"phase"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"CellularAutomata3DTree": {
-			"category": "unknown",
-			"complexity": "intermediate",
-			"description": "CellularAutomata3DTree",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				1.0,
-				6.0,
-				11.0
-			],
-			"include_in_map_data": true,
-			"lookup_name": "CellularAutomata3DTree",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "CellularAutomata3DTree",
-			"parameters": {
-				"footprint": [
-					1.0,
-					6.0,
-					11.0
-				],
-				"size_group": "world_scale"
-			},
-			"scene": "res://algorithms/cellularautomata/cellular_automata_3d_tree/CellularAutomata3DTree.tscn",
-			"size_group": "world_scale",
-			"tags": [
-				"cellular_automata"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~0 instances"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"lsystem_tree",
-					"subtractive",
-					"additive",
-					"grammar"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"CrosswayCA": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Each row obeys a different Wolfram rule number. Where rule regimes collide at row boundaries, interference patterns emerge — moire-like zones of order in the chaos. Every 10 turns all rules re-randomize and the entire pattern language shifts. A crossroads of computational grammars where the boundaries become the most interesting places.",
-			"qfep_connection": "Critical lambda — each row is a different lambda value (rule number). The boundaries between rows are the edges of chaos, where different computational regimes interfere and produce emergent structure.",
-			"gamwell_reference": "Cellular automata, Wolfram classification, emergence",
-			"capacity": "SEE that when different rules collide, the boundaries between them produce more complexity than either rule alone",
-			"interactions": [
-				"observe rule collisions at row boundaries",
-				"watch re-randomization every 10 turns",
-				"toggle collision walkability"
-			],
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				1.0,
-				1.0,
-				1.0
-			],
-			"include_in_map_data": true,
-			"lookup_name": "CrosswayCA",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "CrosswayCA",
-			"parameters": {
-				"footprint": [
-					1.0,
-					1.0,
-					1.0
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://algorithms/cellularautomata/crossway_ca/CrosswayCA.tscn",
-			"size_group": "compact",
-			"tags": [
-				"cellular_automata",
-				"wolfram",
-				"multi_rule",
-				"interference",
-				"emergence",
-				"boundary"
-			],
-			"geometry_spec": {
-				"mesh_type": "delegated_scene",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "scene_instantiation",
-					"primitives": [],
-					"operations": [
-						"load_scene",
-						"instantiate",
-						"configure"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "varies"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"ca_bridge",
-					"single",
-					"rules"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"ca_bridge": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Cellular Automata Bridge.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"include_in_map_data": true,
-			"lookup_name": "ca_bridge",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata",
-				"testmaps"
-			],
-			"name": "CA Bridge",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://algorithms/cellularautomata/ca_bridge/ca_bridge.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "compact",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "delegated_scene",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "scene_instantiation",
-					"primitives": [],
-					"operations": [
-						"load_scene",
-						"instantiate",
-						"configure"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "varies"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"ca_columns",
-					"bridge",
-					"towers",
-					"ca_rule_explorer"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"ca_chair_test": {
-			"category": "emergence",
-			"complexity": "beginner",
-			"description": "Cellular Automata Chair Test.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "ca_chair_test",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "CA Chair Test",
-			"parameters": {
-				"footprint": [
-					11.0,
-					1.0,
-					31.0
-				],
-				"size_group": "world_scale"
-			},
-			"scene": "res://algorithms/cellularautomata/CAchairtests/Main.tscn",
-			"sequence": "cellularautomata",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"rules",
-					"design",
-					"tools",
-					"simulations"
-				],
-				"preferred_zone": "entry"
-			}
-		},
-		"ca_columns": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Cellular Automata Columns Sculpture.",
-			"dev_themes": [
-				"art",
-				"biology",
-				"cellular_automata",
-				"computation"
-			],
-			"footprint": [
-				9,
-				1,
-				9
-			],
-			"include_in_map_data": true,
-			"lookup_name": "ca_columns",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "CA Columns",
-			"parameters": {
-				"footprint": [
-					9,
-					1,
-					9
-				],
-				"size_group": "xlarge"
-			},
-			"scene": "res://algorithms/cellularautomata/ca_columns/ca_columns.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "xlarge",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "vertex_color",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~0 instances"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"ca_bridge",
-					"bridge",
-					"columns"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"ca_growth_network": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Network structure that grows using cellular automata rules, forming organic branching patterns through local neighbor interactions.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				2,
-				2,
-				2
-			],
-			"include_in_map_data": true,
-			"lookup_name": "ca_growth_network",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "CA Growth Network",
-			"scene": "res://algorithms/cellularautomata/ca_growth_network/ca_growth_network.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "standard",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"graph"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~0 instances"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"line_network_ca",
-					"random",
-					"directed",
-					"growth"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"ca_screen": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Cellular Automata Screen.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "ca_screen",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "CA Screen",
-			"scene": "res://algorithms/cellularautomata/ca_screen/ca_screen.tscn",
-			"sequence": "cellularautomata",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": true,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any"
-			}
-		},
-		"ca_showcase": {
-			"category": "emergence",
-			"complexity": "advanced",
-			"description": "A collection of various cellular automata demonstrations.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "ca_showcase",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "CA Showcase",
-			"parameters": {
-				"footprint": [
-					7.0,
-					7.0,
-					7.0
-				],
-				"size_group": "environment"
-			},
-			"qfep_connection": "Survey of CA behavior classes — each class maps to a λ value. Class I (death) = λ=0, Class II (static) = low λ, Class IV (complex) = λ≈0.4, Class III (chaotic) = λ→1. The full spectrum rendered.",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/ca_showcase.tscn",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "hybrid",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "unknown",
-					"primitives": [
-						"box",
-						"sphere",
-						"cylinder"
-					],
-					"operations": []
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~7 instances"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "end"
-			}
-		},
-		"ca_sphere": {
-			"category": "emergence",
-			"complexity": "beginner",
-			"description": "Cellular Automata on a sphere surface.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				2,
-				2,
-				2
-			],
-			"include_in_map_data": true,
-			"lookup_name": "ca_sphere",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "CA Sphere",
-			"scene": "res://algorithms/cellularautomata/CA_sphere/CA_sphere.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "standard",
-			"tags": [
-				"3d",
-				"cellular_automata",
-				"emergence",
-				"geometry"
-			],
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~0"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"planar",
-					"topology",
-					"contrasts",
-					"automata"
-				],
-				"preferred_zone": "entry"
-			}
-		},
-		"cellular_automata_1d": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "1D Cellular Automata.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "cellular_automata_1d",
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation"
-			],
-			"name": "Cellular Automata 1D",
-			"parameters": {
-				"footprint": [
-					11.0,
-					11.0,
-					9.0
-				],
-				"size_group": "world_scale"
-			},
-			"scene": "res://algorithms/cellularautomata/cellular_automata_1d/cellular_automata_1d.tscn",
-			"sequence": "physicssimulation",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any"
-			}
-		},
-		"cellular_automata_2d": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "2D Cellular Automata.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "cellular_automata_2d",
-			"map_ready": true,
-			"map_sequences": [
-				"recursiveemergence"
-			],
-			"name": "Cellular Automata 2D",
-			"parameters": {
-				"footprint": [
-					17.0,
-					21.0,
-					16.0
-				],
-				"size_group": "world_scale"
-			},
-			"scene": "res://algorithms/cellularautomata/cellular_automata_2d/cellular_automata_2D.tscn",
-			"sequence": "recursiveemergence",
-			"tags": [
-				"2d",
-				"cellular_automata",
-				"emergence"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any"
-			}
-		},
-		"cellular_automata_3d": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "General 3D Cellular Automata.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "cellular_automata_3d",
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation",
-				"recursiveemergence"
-			],
-			"name": "Cellular Automata 3D",
-			"parameters": {
-				"footprint": [
-					12.0,
-					12.0,
-					12.0
-				],
-				"size_group": "world_scale"
-			},
-			"scene": "res://algorithms/cellularautomata/cellular_automata_3d/cellular_automata_3d.tscn",
-			"sequence": "physicssimulation",
-			"tags": [
-				"3d",
-				"cellular_automata",
-				"emergence"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any"
-			}
-		},
-		"cellular_automata_3d_stacked": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Stacked 3D Cellular Automata.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "cellular_automata_3d_stacked",
-			"map_ready": true,
-			"map_sequences": [
-				"fractals",
-				"recursiveemergence"
-			],
-			"name": "Cellular Automata 3D Stacked",
-			"scene": "res://algorithms/cellularautomata/cellular_automata_3d_stacked/CellularAutomata3DStacked.tscn",
-			"sequence": "fractals",
-			"tags": [
-				"3d",
-				"cellular_automata",
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "delegated_scene",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "scene_instantiation",
-					"primitives": [],
-					"operations": [
-						"load_scene",
-						"instantiate",
-						"configure"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "varies"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"ca_columns",
-					"implicit",
-					"stacking",
-					"explicit",
-					"phase"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"cellular_automata_3d_tree": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Tree-like structure growth using 3D CA.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				4,
-				7,
-				4
-			],
-			"include_in_map_data": true,
-			"lookup_name": "cellular_automata_3d_tree",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata",
-				"grammar_systems"
-			],
-			"name": "Cellular Automata 3D Tree",
-			"parameters": {
-				"footprint": [
-					4,
-					7,
-					4
-				],
-				"size_group": "xlarge"
-			},
-			"scene": "res://algorithms/cellularautomata/cellular_automata_3d_tree/CellularAutomata3DTree.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "xlarge",
-			"tags": [
-				"3d",
-				"cellular_automata",
-				"emergence",
-				"tree"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~0 instances"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"lsystem_tree",
-					"subtractive",
-					"additive",
-					"grammar"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"cellular_automata_basic": {
-			"category": "emergence",
-			"complexity": "beginner",
-			"description": "Basic Cellular Automata.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "cellular_automata_basic",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Cellular Automata Basic",
-			"scene": "res://algorithms/cellularautomata/cellularautomata/scenes/cellular_automata.tscn",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "texture_plane",
-				"topology": "planar",
-				"construction": {
-					"method": "pixel_computation",
-					"primitives": [],
-					"operations": [
-						"create_image",
-						"compute_pixels",
-						"apply_texture"
-					]
-				},
-				"material": {
-					"type": "generated_texture",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~4 (quad)"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry"
-			}
-		},
-		"cellular_automata_grabable": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Grabable Cellular Automata.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "cellular_automata_grabable",
-			"map_ready": true,
-			"map_sequences": [
-				"recursiveemergence"
-			],
-			"name": "Cellular Automata Grabable",
-			"parameters": {
-				"footprint": [
-					1.0,
-					1.0,
-					1.0
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://algorithms/cellularautomata/cellularautomata/scenes/cellular_automata_grabable.tscn",
-			"sequence": "recursiveemergence",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "pedestal",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any"
-			}
-		},
-		"crack_propagation_ca": {
-			"category": "emergence",
-			"complexity": "beginner",
-			"description": "Simulation of crack propagation in materials.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "crack_propagation_ca",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Crack Propagation CA",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/crack_propagation_ca.tscn",
-			"tags": [
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~18"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry"
-			}
-		},
-		"crossway_ca": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Crossway Cellular Automata.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"include_in_map_data": true,
-			"lookup_name": "crossway_ca",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "Crossway CA",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://algorithms/cellularautomata/crossway_ca/CrosswayCA.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "compact",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "delegated_scene",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "scene_instantiation",
-					"primitives": [],
-					"operations": [
-						"load_scene",
-						"instantiate",
-						"configure"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "varies"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"ca_bridge",
-					"single",
-					"rules"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"decaying_bridge": {
-			"category": "emergence",
-			"complexity": "beginner",
-			"description": "A bridge that decays when stepped on.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				5,
-				1,
-				30
-			],
-			"include_in_map_data": true,
-			"lookup_name": "decaying_bridge",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "Decaying Bridge",
-			"scene": "res://algorithms/cellularautomata/living_architecture/decaying_bridge.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "xlarge",
-			"tags": [
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": [
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~0"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"ca_bridge",
-					"static",
-					"structure",
-					"responsive",
-					"architecture"
-				],
-				"preferred_zone": "entry"
-			}
-		},
-		"dendrite_growth_ca": {
-			"category": "emergence",
-			"complexity": "beginner",
-			"description": "Simulation of crystal dendrite growth.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "dendrite_growth_ca",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Dendrite Growth CA",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/dendrite_growth_ca.tscn",
-			"tags": [
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~0"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry"
-			}
-		},
-		"disease_spread_ca": {
-			"category": "emergence",
-			"complexity": "advanced",
-			"description": "SIR model simulation of disease spread.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				25,
-				20,
-				20
-			],
-			"include_in_map_data": true,
-			"lookup_name": "disease_spread_ca",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "Disease Spread CA",
-			"qfep_connection": "SIR epidemic dynamics as entropy propagation — infection spreads E(S) through a network, recovery restores local F. The transmission rate IS λ: how fast disorder propagates through structure.",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/disease_spread_ca.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "xlarge",
-			"tags": [
-				"emergence",
-				"simulation"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~16"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"pulsing",
-					"spheres",
-					"visual",
-					"drama"
-				],
-				"preferred_zone": "end"
-			}
-		},
-		"ecosystem_ca": {
-			"category": "emergence",
-			"complexity": "beginner",
-			"description": "Predator-prey ecosystem simulation.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "ecosystem_ca",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Ecosystem CA",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/ecosystem_ca.tscn",
-			"tags": [
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~32"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry"
-			}
-		},
-		"elementary_ca_vr": {
-			"category": "emergence",
-			"complexity": "advanced",
-			"description": "1D Elementary Cellular Automata in VR (Rule 30, etc).",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "elementary_ca_vr",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Elementary CA VR",
-			"parameters": {
-				"footprint": [
-					1.0,
-					1.0,
-					20.0
-				],
-				"size_group": "world_scale"
-			},
-			"qfep_connection": "Wolfram's 256 rules as a complete λ-spectrum. Rule 30 produces chaos from order, Rule 110 is Turing-complete at the edge of chaos — the simplest system that can compute anything.",
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_1_elementary_ca_vr.tscn",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"vr"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "end"
-			}
-		},
-		"game_of_life_oop_vr": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Object-Oriented Game of Life in VR.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "game_of_life_oop_vr",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Game of Life OOP VR",
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_3_game_of_life_oop_vr.tscn",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"vr"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any"
-			}
-		},
-		"game_of_life_vr": {
-			"category": "emergence",
-			"complexity": "advanced",
-			"description": "Conway's Game of Life in VR.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "game_of_life_vr",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Game of Life VR",
-			"qfep_connection": "Emergent gliders and oscillators are persistent low-F structures surviving in high-E(S) space. Life exists at Langton's λ ≈ 0.27 — just below the edge of chaos, where complex computation emerges from two rules.",
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_2_game_of_life_vr.tscn",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"vr"
-			],
-			"geometry_spec": {
-				"mesh_type": "delegated_scene",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "scene_instantiation",
-					"primitives": [],
-					"operations": [
-						"load_scene",
-						"instantiate",
-						"configure"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "vertex",
-					"driven_by": "per_frame_rebuild",
-					"affects": [
-						"vertex_positions"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "varies"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "end"
-			}
-		},
-		"hexagon_ca_vr": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Cellular Automata on a hexagonal grid.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				36,
-				3,
-				31
-			],
-			"include_in_map_data": true,
-			"lookup_name": "hexagon_ca_vr",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "Hexagon CA VR",
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "xlarge",
-			"tags": [
-				"2d",
-				"cellular_automata",
-				"emergence",
-				"vr"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"cylinder"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "custom_fragment",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~36"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"square"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"hexagon_cave_vr": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Hexagonal CA generating a cave-like structure with varying radius.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "hexagon_cave_vr",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Hexagon Cave VR",
-			"scene": "res://algorithms/cellularautomata/noc_ch07/7_9_hexagon_cave_vr.tscn",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"vr"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"cylinder"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "custom_fragment",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~36"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any"
-			}
-		},
-		"lattice_gas_automata": {
-			"category": "emergence",
-			"complexity": "advanced",
-			"description": "Fluid dynamics simulation using Lattice Gas Automata.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "lattice_gas_automata",
-			"map_ready": true,
-			"map_sequences": [
-				"physicssimulation",
-				"recursiveemergence"
-			],
-			"name": "Lattice Gas Automata",
-			"parameters": {
-				"footprint": [
-					9.0,
-					24.0,
-					21.0
-				],
-				"size_group": "world_scale"
-			},
-			"qfep_connection": "Discrete particles on a lattice reproducing continuous fluid dynamics — microscopic F (collision rules) generates macroscopic E(S) (turbulence, flow). The Navier-Stokes equations emerge from local interactions.",
-			"scene": "res://algorithms/cellularautomata/lattice_gas_automata/lattice_gas_automata.tscn",
-			"sequence": "physicssimulation",
-			"tags": [
-				"emergence"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "end"
-			}
-		},
-		"lenia_continuous": {
-			"category": "emergence",
-			"complexity": "advanced",
-			"description": "Continuous cellular automaton (Lenia) — smooth lifelike organisms emerge from a ring-shaped kernel, bell-curve growth function, and continuous [0,1] states. The 'wow' artifact for cellular automata: watch amorphous blobs self-organize into gliding, pulsing creatures on a glowing floor display.",
-			"dev_themes": [
-				"art",
-				"biology",
-				"cellular_automata",
-				"computation"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "lenia_continuous",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "Lenia Continuous",
-			"qfep_connection": "Continuous CA with smooth λ-variation. Creatures self-maintain through continuous F-minimization — they persist by predicting their own next state. Lenia lives at the edge of chaos in continuous space.",
-			"scene": "res://commons/artifacts/lenia_continuous/lenia_continuous.tscn",
-			"sequence": "cellularautomata",
-			"tags": [
-				"2d",
-				"cellular_automata",
-				"emergence",
-				"visualization"
-			],
-			"geometry_spec": {
-				"mesh_type": "texture_plane",
-				"topology": "planar",
-				"construction": {
-					"method": "pixel_computation",
-					"primitives": [
-						"plane"
-					],
-					"operations": [
-						"create_image",
-						"compute_pixels",
-						"apply_texture"
-					]
-				},
-				"material": {
-					"type": "generated_texture",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~4 (quad)"
-			},
-			"spatial_needs": {
-				"platform": "sunken",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": true,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "end"
-			}
-		},
-		"line_network_ca": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Base class visualization for line-based cellular automata.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				8,
-				6,
-				6
-			],
-			"include_in_map_data": true,
-			"lookup_name": "line_network_ca",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "Line Network CA",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/LineNetworkCA.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "xlarge",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"graph"
-			],
-			"geometry_spec": {
-				"mesh_type": "procedural_line",
-				"topology": "non_manifold",
-				"construction": {
-					"method": "vertex_line_strip",
-					"primitives": [],
-					"operations": [
-						"compute_vertices",
-						"connect_lines"
-					]
-				},
-				"material": {
-					"type": "vertex_color",
-					"shading_model": "unshaded",
-					"key_properties": [
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"ca_growth_network",
-					"attractor",
-					"directed",
-					"random"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"mirrored_cellular_automata": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Symmetric cellular automata pattern generator.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				4,
-				1,
-				4
-			],
-			"include_in_map_data": true,
-			"lookup_name": "mirrored_cellular_automata",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "Mirrored Cellular Automata",
-			"parameters": {
-				"footprint": [
-					4,
-					1,
-					4
-				],
-				"size_group": "xlarge"
-			},
-			"scene": "res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "xlarge",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"pattern"
-			],
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"persian_rug",
-					"deterministic",
-					"symmetry",
-					"stochastic"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"mold_network": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Slime mold network generation.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				3,
-				4,
-				3
-			],
-			"include_in_map_data": true,
-			"lookup_name": "mold_network",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "Mold Network",
-			"scene": "res://algorithms/cellularautomata/cellular_automata_3d/MoldNetwork.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "large",
-			"tags": [
-				"emergence",
-				"graph"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "vertex_color",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~0 instances"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any"
-			}
-		},
-		"percolation_ca": {
-			"category": "emergence",
-			"complexity": "beginner",
-			"description": "Fluid percolation through porous media.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "percolation_ca",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Percolation CA",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/percolation_ca.tscn",
-			"tags": [
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~32"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry"
-			}
-		},
-		"persian_rug": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Persian Rug Cellular Automata.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				3,
-				1,
-				4
-			],
-			"include_in_map_data": true,
-			"lookup_name": "persian_rug",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata",
-				"testmaps"
-			],
-			"name": "Persian Rug",
-			"parameters": {
-				"footprint": [
-					3,
-					1,
-					4
-				],
-				"size_group": "xlarge"
-			},
-			"scene": "res://algorithms/cellularautomata/persian_rug/persian_rug.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "xlarge",
-			"tags": [
-				"2d",
-				"cellular_automata",
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "texture_plane",
-				"topology": "planar",
-				"construction": {
-					"method": "pixel_computation",
-					"primitives": [],
-					"operations": [
-						"create_image",
-						"compute_pixels",
-						"apply_texture"
-					]
-				},
-				"material": {
-					"type": "generated_texture",
-					"shading_model": "unshaded",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~4 (quad)"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"mirrored_cellular_automata",
-					"stochastic",
-					"symmetry",
-					"deterministic"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"pulsing_ca": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Base class visualization for pulsing sphere cellular automata.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "pulsing_ca",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Pulsing CA",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/PulsingCA.tscn",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"geometry"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~256"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any"
-			}
-		},
-		"recrystallization_ca": {
-			"category": "emergence",
-			"complexity": "beginner",
-			"description": "Simulation of metal recrystallization.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "recrystallization_ca",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Recrystallization CA",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/recrystallization_ca.tscn",
-			"tags": [
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~32"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry"
-			}
-		},
-		"rule_30_110": {
-			"category": "emergence",
-			"complexity": "advanced",
-			"description": "Visualization of Rule 30 and Rule 110.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "rule_30_110",
-			"map_ready": true,
-			"map_sequences": [
-				"proceduralgeneration",
-				"proceduralgeneration_all"
-			],
-			"name": "Rule 30/110",
-			"parameters": {
-				"footprint": [
-					13.0,
-					24.0,
-					21.0
-				],
-				"size_group": "world_scale"
-			},
-			"qfep_connection": "Rule 30: deterministic chaos (high λ, unpredictable from initial conditions). Rule 110: Turing-complete at λ≈0.4, the exact edge where F-minimization and E(S)-generation balance.",
-			"scene": "res://algorithms/cellularautomata/rule_30_110/rule_30_110.tscn",
-			"sequence": "proceduralgeneration_all",
-			"tags": [
-				"cellular_automata",
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "boolean_composition",
-				"topology": "volumetric",
-				"construction": {
-					"method": "csg_boolean",
-					"primitives": [
-						"box",
-						"sphere"
-					],
-					"operations": [
-						"create_primitives",
-						"position_primitives",
-						"boolean_combine"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "end"
-			}
-		},
-		"rule_30_110_gravity": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "Rule 30/110 with gravity effects.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"include_in_map_data": true,
-			"lookup_name": "rule_30_110_gravity",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata",
-				"recursiveemergence"
-			],
-			"name": "Rule 30/110 Gravity",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://algorithms/cellularautomata/rule_30_110/rule_30_110_gravity.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "compact",
-			"tags": [
-				"cellular_automata",
-				"emergence",
-				"physics"
-			],
-			"geometry_spec": {
-				"mesh_type": "boolean_composition",
-				"topology": "volumetric",
-				"construction": {
-					"method": "csg_boolean",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"create_primitives",
-						"position_primitives",
-						"boolean_combine"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "physics",
-					"driven_by": "physics_engine",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any"
-			}
-		},
-		"self_organization_ca": {
-			"category": "emergence",
-			"complexity": "advanced",
-			"description": "Self-organizing patterns simulation.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				7,
-				1004,
-				7
-			],
-			"include_in_map_data": true,
-			"lookup_name": "self_organization_ca",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "Self Organization CA",
-			"qfep_connection": "Self-organization IS F-minimization made visible — local interactions spontaneously produce global order. The system finds its own low-F configuration without external instruction.",
-			"scene": "res://algorithms/cellularautomata/ca_showcase/self_organization_ca.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "xlarge",
-			"tags": [
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~18"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"organization",
-					"analogue",
-					"social",
-					"consensus"
-				],
-				"preferred_zone": "end"
-			}
-		},
-		"sierpinski_pyramid": {
-			"category": "emergence",
-			"complexity": "advanced",
-			"description": "Recursive Sierpinski Pyramid construction using cubes.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				1.0,
-				1.0,
-				1.0
-			],
-			"include_in_map_data": true,
-			"lookup_name": "sierpinski_pyramid",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata",
-				"fractals",
-				"recursiveemergence"
-			],
-			"name": "Sierpinski Pyramid",
-			"parameters": {
-				"footprint": [
-					1.0,
-					1.0,
-					1.0
-				],
-				"size_group": "compact"
-			},
-			"qfep_connection": "Fractal self-similarity as infinite F-compression — the same pattern at every scale. Sierpinski's triangle emerges from Rule 90 (a CA), showing how recursive structure achieves maximum order with minimum description length.",
-			"scene": "res://algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "compact",
-			"tags": [
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "delegated_scene",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "scene_instantiation",
-					"primitives": [],
-					"operations": [
-						"load_scene",
-						"instantiate",
-						"configure"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "varies"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"fractals",
-					"sequence",
-					"cellularautomata",
-					"recursion",
-					"rules"
-				],
-				"preferred_zone": "end"
-			}
-		},
-		"structure_growth": {
-			"category": "emergence",
-			"complexity": "beginner",
-			"description": "3D structure growth simulation.",
-			"dev_themes": [
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"footprint": [
-				8,
-				8,
-				7
-			],
-			"include_in_map_data": true,
-			"lookup_name": "structure_growth",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "Structure Growth",
-			"parameters": {
-				"footprint": [
-					8,
-					8,
-					7
-				],
-				"size_group": "xlarge"
-			},
-			"scene": "res://algorithms/cellularautomata/cellular_automata_3d/StructureGrowth.tscn",
-			"sequence": "cellularautomata",
-			"size_group": "xlarge",
-			"tags": [
-				"3d",
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "vertex_color",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~0 instances"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry"
-			}
-		},
-		"volumetric_fog_ca": {
-			"category": "emergence",
-			"complexity": "intermediate",
-			"description": "3D Cellular Automata driving a volumetric fog.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "volumetric_fog_ca",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "Volumetric Fog CA",
-			"scene": "res://algorithms/cellularautomata/volumetric_fog/volumetric_fog_ca.tscn",
-			"sequence": "cellularautomata",
-			"tags": [
-				"3d",
-				"cellular_automata",
-				"emergence"
-			],
-			"geometry_spec": {
-				"mesh_type": "texture_plane",
-				"topology": "planar",
-				"construction": {
-					"method": "pixel_computation",
-					"primitives": [],
-					"operations": [
-						"create_image",
-						"compute_pixels",
-						"apply_texture"
-					]
-				},
-				"material": {
-					"type": "generated_texture",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~4 (quad)"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"using",
-					"drive",
-					"system",
-					"directly"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"wireworld_circuit": {
-			"category": "emergence",
-			"complexity": "advanced",
-			"description": "Wireworld cellular automaton — 4-state CA for logic gates and signal routing. Displays an OR gate with clock inputs on a floor display, demonstrating how simple state-transition rules produce computational behavior.",
-			"dev_themes": [
-				"biology",
-				"cellular_automata",
-				"computation",
-				"emergence"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "wireworld_circuit",
-			"map_ready": true,
-			"map_sequences": [
-				"cellularautomata"
-			],
-			"name": "Wireworld Circuit",
-			"qfep_connection": "Computation as signal propagation through constraint — pure F-minimization in a cellular medium. Electrons flow through wire topology; the circuit IS the F-model that channels E(S).",
-			"scene": "res://commons/artifacts/wireworld_circuit/wireworld_circuit.tscn",
-			"sequence": "cellularautomata",
-			"tags": [
-				"2d",
-				"cellular_automata",
-				"emergence",
-				"visualization"
-			],
-			"geometry_spec": {
-				"mesh_type": "texture_plane",
-				"topology": "planar",
-				"construction": {
-					"method": "pixel_computation",
-					"primitives": [
-						"plane"
-					],
-					"operations": [
-						"create_image",
-						"compute_pixels",
-						"apply_texture"
-					]
-				},
-				"material": {
-					"type": "generated_texture",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~4 (quad)"
-			},
-			"spatial_needs": {
-				"platform": "sunken",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": true,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "end"
-			}
-		}
-	}
+  "artifacts": {
+    "7_1_elementary_ca_vr": {
+      "category": "unknown",
+      "complexity": "beginner",
+      "description": "7_1_elementary_ca_vr",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        1.0,
+        1.0,
+        21.0
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "7_1_elementary_ca_vr",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "7_1_elementary_ca_vr",
+      "parameters": {
+        "footprint": [
+          1.0,
+          1.0,
+          21.0
+        ],
+        "size_group": "world_scale"
+      },
+      "scene": "res://algorithms/cellularautomata/noc_ch07/7_1_elementary_ca_vr.tscn",
+      "size_group": "world_scale",
+      "tags": [
+        "cellular_automata"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 5,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry"
+      }
+    },
+    "7_2_game_of_life_vr": {
+      "category": "unknown",
+      "complexity": "beginner",
+      "description": "7_2_game_of_life_vr",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        22.0,
+        22.0,
+        22.0
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "7_2_game_of_life_vr",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "7_2_game_of_life_vr",
+      "parameters": {
+        "footprint": [
+          22.0,
+          22.0,
+          22.0
+        ],
+        "size_group": "world_scale"
+      },
+      "scene": "res://algorithms/cellularautomata/noc_ch07/7_2_game_of_life_vr.tscn",
+      "size_group": "world_scale",
+      "tags": [
+        "cellular_automata"
+      ],
+      "geometry_spec": {
+        "mesh_type": "delegated_scene",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "scene_instantiation",
+          "primitives": [],
+          "operations": [
+            "load_scene",
+            "instantiate",
+            "configure"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "vertex",
+          "driven_by": "per_frame_rebuild",
+          "affects": [
+            "vertex_positions"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "varies"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 5,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry"
+      }
+    },
+    "7_3_game_of_life_oop_vr": {
+      "category": "unknown",
+      "complexity": "beginner",
+      "description": "7_3_game_of_life_oop_vr",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "7_3_game_of_life_oop_vr",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "7_3_game_of_life_oop_vr",
+      "parameters": {
+        "footprint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "size_group": "compact"
+      },
+      "scene": "res://algorithms/cellularautomata/noc_ch07/7_3_game_of_life_oop_vr.tscn",
+      "size_group": "compact",
+      "tags": [
+        "cellular_automata"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry"
+      }
+    },
+    "7_8_hexagon_ca_vr": {
+      "category": "unknown",
+      "complexity": "beginner",
+      "description": "7_8_hexagon_ca_vr",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        32.0,
+        32.0,
+        32.0
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "7_8_hexagon_ca_vr",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "7_8_hexagon_ca_vr",
+      "parameters": {
+        "footprint": [
+          32.0,
+          32.0,
+          32.0
+        ],
+        "size_group": "world_scale"
+      },
+      "scene": "res://algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.tscn",
+      "size_group": "world_scale",
+      "tags": [
+        "cellular_automata"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "cylinder"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "custom_fragment",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~36"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 5,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "square"
+        ],
+        "preferred_zone": "entry"
+      }
+    },
+    "CA_sphere": {
+      "category": "unknown",
+      "complexity": "beginner",
+      "description": "CA_sphere",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "CA_sphere",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "CA_sphere",
+      "parameters": {
+        "footprint": [
+          2.0,
+          2.0,
+          2.0
+        ],
+        "size_group": "compact"
+      },
+      "scene": "res://algorithms/cellularautomata/CA_sphere/CA_sphere.tscn",
+      "size_group": "compact",
+      "tags": [
+        "cellular_automata"
+      ],
+      "geometry_spec": {
+        "mesh_type": "parametric_surface",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "uv_grid_triangulation",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "compute_vertices",
+            "generate_triangles",
+            "compute_normals"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "~0"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "planar",
+          "topology",
+          "contrasts",
+          "automata"
+        ],
+        "preferred_zone": "entry"
+      }
+    },
+    "CellularAutomata3DStacked": {
+      "category": "unknown",
+      "complexity": "intermediate",
+      "description": "CellularAutomata3DStacked",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "CellularAutomata3DStacked",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "CellularAutomata3DStacked",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "scene": "res://algorithms/cellularautomata/cellular_automata_3d_stacked/CellularAutomata3DStacked.tscn",
+      "size_group": "compact",
+      "tags": [
+        "cellular_automata"
+      ],
+      "geometry_spec": {
+        "mesh_type": "delegated_scene",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "scene_instantiation",
+          "primitives": [],
+          "operations": [
+            "load_scene",
+            "instantiate",
+            "configure"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "varies"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "ca_columns",
+          "implicit",
+          "stacking",
+          "explicit",
+          "phase"
+        ],
+        "preferred_zone": "any"
+      }
+    },
+    "CellularAutomata3DTree": {
+      "category": "unknown",
+      "complexity": "intermediate",
+      "description": "CellularAutomata3DTree",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        1.0,
+        6.0,
+        11.0
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "CellularAutomata3DTree",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "CellularAutomata3DTree",
+      "parameters": {
+        "footprint": [
+          1.0,
+          6.0,
+          11.0
+        ],
+        "size_group": "world_scale"
+      },
+      "scene": "res://algorithms/cellularautomata/cellular_automata_3d_tree/CellularAutomata3DTree.tscn",
+      "size_group": "world_scale",
+      "tags": [
+        "cellular_automata"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~0 instances"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 5,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "lsystem_tree",
+          "subtractive",
+          "additive",
+          "grammar"
+        ],
+        "preferred_zone": "any"
+      }
+    },
+    "CrosswayCA": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Each row obeys a different Wolfram rule number. Where rule regimes collide at row boundaries, interference patterns emerge \u2014 moire-like zones of order in the chaos. Every 10 turns all rules re-randomize and the entire pattern language shifts. A crossroads of computational grammars where the boundaries become the most interesting places.",
+      "qfep_connection": "Critical lambda \u2014 each row is a different lambda value (rule number). The boundaries between rows are the edges of chaos, where different computational regimes interfere and produce emergent structure.",
+      "gamwell_reference": "Cellular automata, Wolfram classification, emergence",
+      "capacity": "SEE that when different rules collide, the boundaries between them produce more complexity than either rule alone",
+      "interactions": [
+        "observe rule collisions at row boundaries",
+        "watch re-randomization every 10 turns",
+        "toggle collision walkability"
+      ],
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "CrosswayCA",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "CrosswayCA",
+      "parameters": {
+        "footprint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "size_group": "compact"
+      },
+      "scene": "res://algorithms/cellularautomata/crossway_ca/CrosswayCA.tscn",
+      "size_group": "compact",
+      "tags": [
+        "cellular_automata",
+        "wolfram",
+        "multi_rule",
+        "interference",
+        "emergence",
+        "boundary"
+      ],
+      "geometry_spec": {
+        "mesh_type": "delegated_scene",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "scene_instantiation",
+          "primitives": [],
+          "operations": [
+            "load_scene",
+            "instantiate",
+            "configure"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "varies"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "ca_bridge",
+          "single",
+          "rules"
+        ],
+        "preferred_zone": "any"
+      }
+    },
+    "ca_bridge": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Cellular Automata Bridge.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "ca_bridge",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata",
+        "testmaps"
+      ],
+      "name": "CA Bridge",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "scene": "res://algorithms/cellularautomata/ca_bridge/ca_bridge.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "compact",
+      "tags": [
+        "cellular_automata",
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "delegated_scene",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "scene_instantiation",
+          "primitives": [],
+          "operations": [
+            "load_scene",
+            "instantiate",
+            "configure"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "varies"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "ca_columns",
+          "bridge",
+          "towers",
+          "ca_rule_explorer"
+        ],
+        "preferred_zone": "any"
+      }
+    },
+    "ca_chair_test": {
+      "category": "emergence",
+      "complexity": "beginner",
+      "description": "Cellular Automata Chair Test.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "ca_chair_test",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "CA Chair Test",
+      "parameters": {
+        "footprint": [
+          11.0,
+          1.0,
+          31.0
+        ],
+        "size_group": "world_scale"
+      },
+      "scene": "res://algorithms/cellularautomata/CAchairtests/Main.tscn",
+      "sequence": "cellularautomata",
+      "tags": [
+        "cellular_automata",
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 5,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "rules",
+          "design",
+          "tools",
+          "simulations"
+        ],
+        "preferred_zone": "entry"
+      }
+    },
+    "ca_columns": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Cellular Automata Columns Sculpture.",
+      "dev_themes": [
+        "art",
+        "biology",
+        "cellular_automata",
+        "computation"
+      ],
+      "footprint": [
+        9,
+        1,
+        9
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "ca_columns",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "CA Columns",
+      "parameters": {
+        "footprint": [
+          9,
+          1,
+          9
+        ],
+        "size_group": "xlarge"
+      },
+      "scene": "res://algorithms/cellularautomata/ca_columns/ca_columns.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "xlarge",
+      "tags": [
+        "cellular_automata",
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "vertex_color",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~0 instances"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 5,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "ca_bridge",
+          "bridge",
+          "columns"
+        ],
+        "preferred_zone": "any"
+      }
+    },
+    "ca_growth_network": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Network structure that grows using cellular automata rules, forming organic branching patterns through local neighbor interactions.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        2,
+        2,
+        2
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "ca_growth_network",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "CA Growth Network",
+      "scene": "res://algorithms/cellularautomata/ca_growth_network/ca_growth_network.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "standard",
+      "tags": [
+        "cellular_automata",
+        "emergence",
+        "graph"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~0 instances"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "line_network_ca",
+          "random",
+          "directed",
+          "growth"
+        ],
+        "preferred_zone": "any"
+      }
+    },
+    "ca_screen": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Cellular Automata Screen.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "ca_screen",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "CA Screen",
+      "scene": "res://algorithms/cellularautomata/ca_screen/ca_screen.tscn",
+      "sequence": "cellularautomata",
+      "tags": [
+        "cellular_automata",
+        "emergence"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": true,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any"
+      }
+    },
+    "ca_showcase": {
+      "category": "emergence",
+      "complexity": "advanced",
+      "description": "A collection of various cellular automata demonstrations.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "ca_showcase",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "CA Showcase",
+      "parameters": {
+        "footprint": [
+          7.0,
+          7.0,
+          7.0
+        ],
+        "size_group": "environment"
+      },
+      "qfep_connection": "Survey of CA behavior classes \u2014 each class maps to a \u03bb value. Class I (death) = \u03bb=0, Class II (static) = low \u03bb, Class IV (complex) = \u03bb\u22480.4, Class III (chaotic) = \u03bb\u21921. The full spectrum rendered.",
+      "scene": "res://algorithms/cellularautomata/ca_showcase/ca_showcase.tscn",
+      "tags": [
+        "cellular_automata",
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "hybrid",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "unknown",
+          "primitives": [
+            "box",
+            "sphere",
+            "cylinder"
+          ],
+          "operations": []
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency",
+            "double_sided"
+          ]
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~7 instances"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 5,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "end"
+      }
+    },
+    "ca_sphere": {
+      "category": "emergence",
+      "complexity": "beginner",
+      "description": "Cellular Automata on a sphere surface.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        2,
+        2,
+        2
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "ca_sphere",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "CA Sphere",
+      "scene": "res://algorithms/cellularautomata/CA_sphere/CA_sphere.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "standard",
+      "tags": [
+        "3d",
+        "cellular_automata",
+        "emergence",
+        "geometry"
+      ],
+      "geometry_spec": {
+        "mesh_type": "parametric_surface",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "uv_grid_triangulation",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "compute_vertices",
+            "generate_triangles",
+            "compute_normals"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "~0"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "planar",
+          "topology",
+          "contrasts",
+          "automata"
+        ],
+        "preferred_zone": "entry"
+      }
+    },
+    "cellular_automata_1d": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "1D Cellular Automata.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "cellular_automata_1d",
+      "map_ready": true,
+      "map_sequences": [
+        "physicssimulation"
+      ],
+      "name": "Cellular Automata 1D",
+      "parameters": {
+        "footprint": [
+          11.0,
+          11.0,
+          9.0
+        ],
+        "size_group": "world_scale"
+      },
+      "scene": "res://algorithms/cellularautomata/cellular_automata_1d/cellular_automata_1d.tscn",
+      "sequence": "physicssimulation",
+      "tags": [
+        "cellular_automata",
+        "emergence"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 5,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any"
+      }
+    },
+    "cellular_automata_2d": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "2D Cellular Automata.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "cellular_automata_2d",
+      "map_ready": true,
+      "map_sequences": [
+        "recursiveemergence"
+      ],
+      "name": "Cellular Automata 2D",
+      "parameters": {
+        "footprint": [
+          17.0,
+          21.0,
+          16.0
+        ],
+        "size_group": "world_scale"
+      },
+      "scene": "res://algorithms/cellularautomata/cellular_automata_2d/cellular_automata_2D.tscn",
+      "sequence": "recursiveemergence",
+      "tags": [
+        "2d",
+        "cellular_automata",
+        "emergence"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 5,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any"
+      }
+    },
+    "cellular_automata_3d": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "General 3D Cellular Automata.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "cellular_automata_3d",
+      "map_ready": true,
+      "map_sequences": [
+        "physicssimulation",
+        "recursiveemergence"
+      ],
+      "name": "Cellular Automata 3D",
+      "parameters": {
+        "footprint": [
+          12.0,
+          12.0,
+          12.0
+        ],
+        "size_group": "world_scale"
+      },
+      "scene": "res://algorithms/cellularautomata/cellular_automata_3d/cellular_automata_3d.tscn",
+      "sequence": "physicssimulation",
+      "tags": [
+        "3d",
+        "cellular_automata",
+        "emergence"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 5,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any"
+      }
+    },
+    "cellular_automata_3d_stacked": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Stacked 3D Cellular Automata.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "cellular_automata_3d_stacked",
+      "map_ready": true,
+      "map_sequences": [
+        "fractals",
+        "recursiveemergence"
+      ],
+      "name": "Cellular Automata 3D Stacked",
+      "scene": "res://algorithms/cellularautomata/cellular_automata_3d_stacked/CellularAutomata3DStacked.tscn",
+      "sequence": "fractals",
+      "tags": [
+        "3d",
+        "cellular_automata",
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "delegated_scene",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "scene_instantiation",
+          "primitives": [],
+          "operations": [
+            "load_scene",
+            "instantiate",
+            "configure"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "varies"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "ca_columns",
+          "implicit",
+          "stacking",
+          "explicit",
+          "phase"
+        ],
+        "preferred_zone": "any"
+      }
+    },
+    "cellular_automata_3d_tree": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Tree-like structure growth using 3D CA.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        4,
+        7,
+        4
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "cellular_automata_3d_tree",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata",
+        "grammar_systems"
+      ],
+      "name": "Cellular Automata 3D Tree",
+      "parameters": {
+        "footprint": [
+          4,
+          7,
+          4
+        ],
+        "size_group": "xlarge"
+      },
+      "scene": "res://algorithms/cellularautomata/cellular_automata_3d_tree/CellularAutomata3DTree.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "xlarge",
+      "tags": [
+        "3d",
+        "cellular_automata",
+        "emergence",
+        "tree"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~0 instances"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "lsystem_tree",
+          "subtractive",
+          "additive",
+          "grammar"
+        ],
+        "preferred_zone": "any"
+      }
+    },
+    "cellular_automata_basic": {
+      "category": "emergence",
+      "complexity": "beginner",
+      "description": "Basic Cellular Automata.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "cellular_automata_basic",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "Cellular Automata Basic",
+      "scene": "res://algorithms/cellularautomata/cellularautomata/scenes/cellular_automata.tscn",
+      "tags": [
+        "cellular_automata",
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "texture_plane",
+        "topology": "planar",
+        "construction": {
+          "method": "pixel_computation",
+          "primitives": [],
+          "operations": [
+            "create_image",
+            "compute_pixels",
+            "apply_texture"
+          ]
+        },
+        "material": {
+          "type": "generated_texture",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "~4 (quad)"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry"
+      }
+    },
+    "cellular_automata_grabable": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Grabable Cellular Automata.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "cellular_automata_grabable",
+      "map_ready": true,
+      "map_sequences": [
+        "recursiveemergence"
+      ],
+      "name": "Cellular Automata Grabable",
+      "parameters": {
+        "footprint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "size_group": "compact"
+      },
+      "scene": "res://algorithms/cellularautomata/cellularautomata/scenes/cellular_automata_grabable.tscn",
+      "sequence": "recursiveemergence",
+      "tags": [
+        "cellular_automata",
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "pedestal",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any"
+      }
+    },
+    "crack_propagation_ca": {
+      "category": "emergence",
+      "complexity": "beginner",
+      "description": "Simulation of crack propagation in materials.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "crack_propagation_ca",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "Crack Propagation CA",
+      "scene": "res://algorithms/cellularautomata/ca_showcase/crack_propagation_ca.tscn",
+      "tags": [
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~18"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry"
+      }
+    },
+    "crossway_ca": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Crossway Cellular Automata.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "crossway_ca",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "Crossway CA",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "scene": "res://algorithms/cellularautomata/crossway_ca/CrosswayCA.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "compact",
+      "tags": [
+        "cellular_automata",
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "delegated_scene",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "scene_instantiation",
+          "primitives": [],
+          "operations": [
+            "load_scene",
+            "instantiate",
+            "configure"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "varies"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "ca_bridge",
+          "single",
+          "rules"
+        ],
+        "preferred_zone": "any"
+      }
+    },
+    "decaying_bridge": {
+      "category": "emergence",
+      "complexity": "beginner",
+      "description": "A bridge that decays when stepped on.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        5,
+        1,
+        30
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "decaying_bridge",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "Decaying Bridge",
+      "scene": "res://algorithms/cellularautomata/living_architecture/decaying_bridge.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "xlarge",
+      "tags": [
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": [
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "~0"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "ca_bridge",
+          "static",
+          "structure",
+          "responsive",
+          "architecture"
+        ],
+        "preferred_zone": "entry"
+      }
+    },
+    "dendrite_growth_ca": {
+      "category": "emergence",
+      "complexity": "beginner",
+      "description": "Simulation of crystal dendrite growth.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "dendrite_growth_ca",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "Dendrite Growth CA",
+      "scene": "res://algorithms/cellularautomata/ca_showcase/dendrite_growth_ca.tscn",
+      "tags": [
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "~0"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry"
+      }
+    },
+    "disease_spread_ca": {
+      "category": "emergence",
+      "complexity": "advanced",
+      "description": "SIR model simulation of disease spread.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        25,
+        20,
+        20
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "disease_spread_ca",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "Disease Spread CA",
+      "qfep_connection": "SIR epidemic dynamics as entropy propagation \u2014 infection spreads E(S) through a network, recovery restores local F. The transmission rate IS \u03bb: how fast disorder propagates through structure.",
+      "scene": "res://algorithms/cellularautomata/ca_showcase/disease_spread_ca.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "xlarge",
+      "tags": [
+        "emergence",
+        "simulation"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "~16"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "pulsing",
+          "spheres",
+          "visual",
+          "drama"
+        ],
+        "preferred_zone": "end"
+      }
+    },
+    "ecosystem_ca": {
+      "category": "emergence",
+      "complexity": "beginner",
+      "description": "Predator-prey ecosystem simulation.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "ecosystem_ca",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "Ecosystem CA",
+      "scene": "res://algorithms/cellularautomata/ca_showcase/ecosystem_ca.tscn",
+      "tags": [
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~32"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry"
+      }
+    },
+    "elementary_ca_vr": {
+      "category": "emergence",
+      "complexity": "advanced",
+      "description": "1D Elementary Cellular Automata in VR (Rule 30, etc).",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "elementary_ca_vr",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "Elementary CA VR",
+      "parameters": {
+        "footprint": [
+          1.0,
+          1.0,
+          20.0
+        ],
+        "size_group": "world_scale"
+      },
+      "qfep_connection": "Wolfram's 256 rules as a complete \u03bb-spectrum. Rule 30 produces chaos from order, Rule 110 is Turing-complete at the edge of chaos \u2014 the simplest system that can compute anything.",
+      "scene": "res://algorithms/cellularautomata/noc_ch07/7_1_elementary_ca_vr.tscn",
+      "tags": [
+        "cellular_automata",
+        "emergence",
+        "vr"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 5,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "end"
+      }
+    },
+    "game_of_life_oop_vr": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Object-Oriented Game of Life in VR.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "game_of_life_oop_vr",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "Game of Life OOP VR",
+      "scene": "res://algorithms/cellularautomata/noc_ch07/7_3_game_of_life_oop_vr.tscn",
+      "tags": [
+        "cellular_automata",
+        "emergence",
+        "vr"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any"
+      }
+    },
+    "game_of_life_vr": {
+      "category": "emergence",
+      "complexity": "advanced",
+      "description": "Conway's Game of Life in VR.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "game_of_life_vr",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "Game of Life VR",
+      "qfep_connection": "Emergent gliders and oscillators are persistent low-F structures surviving in high-E(S) space. Life exists at Langton's \u03bb \u2248 0.27 \u2014 just below the edge of chaos, where complex computation emerges from two rules.",
+      "scene": "res://algorithms/cellularautomata/noc_ch07/7_2_game_of_life_vr.tscn",
+      "tags": [
+        "cellular_automata",
+        "emergence",
+        "vr"
+      ],
+      "geometry_spec": {
+        "mesh_type": "delegated_scene",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "scene_instantiation",
+          "primitives": [],
+          "operations": [
+            "load_scene",
+            "instantiate",
+            "configure"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "vertex",
+          "driven_by": "per_frame_rebuild",
+          "affects": [
+            "vertex_positions"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "varies"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "end"
+      }
+    },
+    "hexagon_ca_vr": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Cellular Automata on a hexagonal grid.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        36,
+        3,
+        31
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "hexagon_ca_vr",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "Hexagon CA VR",
+      "scene": "res://algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "xlarge",
+      "tags": [
+        "2d",
+        "cellular_automata",
+        "emergence",
+        "vr"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "cylinder"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "custom_fragment",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~36"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "square"
+        ],
+        "preferred_zone": "any"
+      }
+    },
+    "hexagon_cave_vr": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Hexagonal CA generating a cave-like structure with varying radius.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "hexagon_cave_vr",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "Hexagon Cave VR",
+      "scene": "res://algorithms/cellularautomata/noc_ch07/7_9_hexagon_cave_vr.tscn",
+      "tags": [
+        "cellular_automata",
+        "emergence",
+        "vr"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "cylinder"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "shader",
+          "shading_model": "custom_fragment",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~36"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any"
+      }
+    },
+    "lattice_gas_automata": {
+      "category": "emergence",
+      "complexity": "advanced",
+      "description": "Fluid dynamics simulation using Lattice Gas Automata.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "lattice_gas_automata",
+      "map_ready": true,
+      "map_sequences": [
+        "physicssimulation",
+        "recursiveemergence"
+      ],
+      "name": "Lattice Gas Automata",
+      "parameters": {
+        "footprint": [
+          9.0,
+          24.0,
+          21.0
+        ],
+        "size_group": "world_scale"
+      },
+      "qfep_connection": "Discrete particles on a lattice reproducing continuous fluid dynamics \u2014 microscopic F (collision rules) generates macroscopic E(S) (turbulence, flow). The Navier-Stokes equations emerge from local interactions.",
+      "scene": "res://algorithms/cellularautomata/lattice_gas_automata/lattice_gas_automata.tscn",
+      "sequence": "physicssimulation",
+      "tags": [
+        "emergence"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 5,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "end"
+      }
+    },
+    "lenia_continuous": {
+      "category": "emergence",
+      "complexity": "advanced",
+      "description": "Continuous cellular automaton (Lenia) \u2014 smooth lifelike organisms emerge from a ring-shaped kernel, bell-curve growth function, and continuous [0,1] states. The 'wow' artifact for cellular automata: watch amorphous blobs self-organize into gliding, pulsing creatures on a glowing floor display.",
+      "dev_themes": [
+        "art",
+        "biology",
+        "cellular_automata",
+        "computation"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "lenia_continuous",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "Lenia Continuous",
+      "qfep_connection": "Continuous CA with smooth \u03bb-variation. Creatures self-maintain through continuous F-minimization \u2014 they persist by predicting their own next state. Lenia lives at the edge of chaos in continuous space.",
+      "scene": "res://commons/artifacts/lenia_continuous/lenia_continuous.tscn",
+      "sequence": "cellularautomata",
+      "tags": [
+        "2d",
+        "cellular_automata",
+        "emergence",
+        "visualization"
+      ],
+      "geometry_spec": {
+        "mesh_type": "texture_plane",
+        "topology": "planar",
+        "construction": {
+          "method": "pixel_computation",
+          "primitives": [
+            "plane"
+          ],
+          "operations": [
+            "create_image",
+            "compute_pixels",
+            "apply_texture"
+          ]
+        },
+        "material": {
+          "type": "generated_texture",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "~4 (quad)"
+      },
+      "spatial_needs": {
+        "platform": "sunken",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": true,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "end"
+      }
+    },
+    "line_network_ca": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Base class visualization for line-based cellular automata.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        8,
+        6,
+        6
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "line_network_ca",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "Line Network CA",
+      "scene": "res://algorithms/cellularautomata/ca_showcase/LineNetworkCA.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "xlarge",
+      "tags": [
+        "cellular_automata",
+        "emergence",
+        "graph"
+      ],
+      "geometry_spec": {
+        "mesh_type": "procedural_line",
+        "topology": "non_manifold",
+        "construction": {
+          "method": "vertex_line_strip",
+          "primitives": [],
+          "operations": [
+            "compute_vertices",
+            "connect_lines"
+          ]
+        },
+        "material": {
+          "type": "vertex_color",
+          "shading_model": "unshaded",
+          "key_properties": [
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "ca_growth_network",
+          "attractor",
+          "directed",
+          "random"
+        ],
+        "preferred_zone": "any"
+      }
+    },
+    "mirrored_cellular_automata": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Symmetric cellular automata pattern generator.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        4,
+        1,
+        4
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "mirrored_cellular_automata",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "Mirrored Cellular Automata",
+      "parameters": {
+        "footprint": [
+          4,
+          1,
+          4
+        ],
+        "size_group": "xlarge"
+      },
+      "scene": "res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "xlarge",
+      "tags": [
+        "cellular_automata",
+        "emergence",
+        "pattern"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "persian_rug",
+          "deterministic",
+          "symmetry",
+          "stochastic"
+        ],
+        "preferred_zone": "any"
+      }
+    },
+    "mold_network": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Slime mold network generation.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        3,
+        4,
+        3
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "mold_network",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "Mold Network",
+      "scene": "res://algorithms/cellularautomata/cellular_automata_3d/MoldNetwork.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "large",
+      "tags": [
+        "emergence",
+        "graph"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "vertex_color",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~0 instances"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any"
+      }
+    },
+    "percolation_ca": {
+      "category": "emergence",
+      "complexity": "beginner",
+      "description": "Fluid percolation through porous media.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "percolation_ca",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "Percolation CA",
+      "scene": "res://algorithms/cellularautomata/ca_showcase/percolation_ca.tscn",
+      "tags": [
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~32"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry"
+      }
+    },
+    "persian_rug": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Persian Rug Cellular Automata.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        3,
+        1,
+        4
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "persian_rug",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata",
+        "testmaps"
+      ],
+      "name": "Persian Rug",
+      "parameters": {
+        "footprint": [
+          3,
+          1,
+          4
+        ],
+        "size_group": "xlarge"
+      },
+      "scene": "res://algorithms/cellularautomata/persian_rug/persian_rug.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "xlarge",
+      "tags": [
+        "2d",
+        "cellular_automata",
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "texture_plane",
+        "topology": "planar",
+        "construction": {
+          "method": "pixel_computation",
+          "primitives": [],
+          "operations": [
+            "create_image",
+            "compute_pixels",
+            "apply_texture"
+          ]
+        },
+        "material": {
+          "type": "generated_texture",
+          "shading_model": "unshaded",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "~4 (quad)"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "mirrored_cellular_automata",
+          "stochastic",
+          "symmetry",
+          "deterministic"
+        ],
+        "preferred_zone": "any"
+      }
+    },
+    "pulsing_ca": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Base class visualization for pulsing sphere cellular automata.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "pulsing_ca",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "Pulsing CA",
+      "scene": "res://algorithms/cellularautomata/ca_showcase/PulsingCA.tscn",
+      "tags": [
+        "cellular_automata",
+        "emergence",
+        "geometry"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "~256"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any"
+      }
+    },
+    "recrystallization_ca": {
+      "category": "emergence",
+      "complexity": "beginner",
+      "description": "Simulation of metal recrystallization.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "recrystallization_ca",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "Recrystallization CA",
+      "scene": "res://algorithms/cellularautomata/ca_showcase/recrystallization_ca.tscn",
+      "tags": [
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~32"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry"
+      }
+    },
+    "rule_30_110": {
+      "category": "emergence",
+      "complexity": "advanced",
+      "description": "Visualization of Rule 30 and Rule 110.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "rule_30_110",
+      "map_ready": true,
+      "map_sequences": [
+        "proceduralgeneration",
+        "proceduralgeneration_all"
+      ],
+      "name": "Rule 30/110",
+      "parameters": {
+        "footprint": [
+          13.0,
+          24.0,
+          21.0
+        ],
+        "size_group": "world_scale"
+      },
+      "qfep_connection": "Rule 30: deterministic chaos (high \u03bb, unpredictable from initial conditions). Rule 110: Turing-complete at \u03bb\u22480.4, the exact edge where F-minimization and E(S)-generation balance.",
+      "scene": "res://algorithms/cellularautomata/rule_30_110/rule_30_110.tscn",
+      "sequence": "proceduralgeneration_all",
+      "tags": [
+        "cellular_automata",
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "boolean_composition",
+        "topology": "volumetric",
+        "construction": {
+          "method": "csg_boolean",
+          "primitives": [
+            "box",
+            "sphere"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_primitives",
+            "boolean_combine"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 5,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "end"
+      }
+    },
+    "rule_30_110_gravity": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "Rule 30/110 with gravity effects.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "rule_30_110_gravity",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata",
+        "recursiveemergence"
+      ],
+      "name": "Rule 30/110 Gravity",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "scene": "res://algorithms/cellularautomata/rule_30_110/rule_30_110_gravity.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "compact",
+      "tags": [
+        "cellular_automata",
+        "emergence",
+        "physics"
+      ],
+      "geometry_spec": {
+        "mesh_type": "boolean_composition",
+        "topology": "volumetric",
+        "construction": {
+          "method": "csg_boolean",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_primitives",
+            "boolean_combine"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "physics",
+          "driven_by": "physics_engine",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any"
+      }
+    },
+    "self_organization_ca": {
+      "category": "emergence",
+      "complexity": "advanced",
+      "description": "Self-organizing patterns simulation.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        7,
+        1004,
+        7
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "self_organization_ca",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "Self Organization CA",
+      "qfep_connection": "Self-organization IS F-minimization made visible \u2014 local interactions spontaneously produce global order. The system finds its own low-F configuration without external instruction.",
+      "scene": "res://algorithms/cellularautomata/ca_showcase/self_organization_ca.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "xlarge",
+      "tags": [
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~18"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "organization",
+          "analogue",
+          "social",
+          "consensus"
+        ],
+        "preferred_zone": "end"
+      }
+    },
+    "sierpinski_pyramid": {
+      "category": "emergence",
+      "complexity": "advanced",
+      "description": "Recursive Sierpinski Pyramid construction using cubes.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "sierpinski_pyramid",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata",
+        "fractals",
+        "recursiveemergence"
+      ],
+      "name": "Sierpinski Pyramid",
+      "parameters": {
+        "footprint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "size_group": "compact"
+      },
+      "qfep_connection": "Fractal self-similarity as infinite F-compression \u2014 the same pattern at every scale. Sierpinski's triangle emerges from Rule 90 (a CA), showing how recursive structure achieves maximum order with minimum description length.",
+      "scene": "res://algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "compact",
+      "tags": [
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "delegated_scene",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "scene_instantiation",
+          "primitives": [],
+          "operations": [
+            "load_scene",
+            "instantiate",
+            "configure"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "varies"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "fractals",
+          "sequence",
+          "cellularautomata",
+          "recursion",
+          "rules"
+        ],
+        "preferred_zone": "end"
+      }
+    },
+    "structure_growth": {
+      "category": "emergence",
+      "complexity": "beginner",
+      "description": "3D structure growth simulation.",
+      "dev_themes": [
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "footprint": [
+        8,
+        8,
+        7
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "structure_growth",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "Structure Growth",
+      "parameters": {
+        "footprint": [
+          8,
+          8,
+          7
+        ],
+        "size_group": "xlarge"
+      },
+      "scene": "res://algorithms/cellularautomata/cellular_automata_3d/StructureGrowth.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "xlarge",
+      "tags": [
+        "3d",
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "instanced_particles",
+        "topology": "scattered",
+        "construction": {
+          "method": "multimesh_instancing",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "allocate_instances",
+            "set_transforms",
+            "update_per_frame"
+          ]
+        },
+        "material": {
+          "type": "vertex_color",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "cpu_simulation",
+          "affects": [
+            "transform",
+            "color"
+          ]
+        },
+        "instance_strategy": "multimesh",
+        "vertex_estimate": "~0 instances"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 5,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry"
+      }
+    },
+    "volumetric_fog_ca": {
+      "category": "emergence",
+      "complexity": "intermediate",
+      "description": "3D Cellular Automata driving a volumetric fog.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "volumetric_fog_ca",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "Volumetric Fog CA",
+      "scene": "res://algorithms/cellularautomata/volumetric_fog/volumetric_fog_ca.tscn",
+      "sequence": "cellularautomata",
+      "tags": [
+        "3d",
+        "cellular_automata",
+        "emergence"
+      ],
+      "geometry_spec": {
+        "mesh_type": "texture_plane",
+        "topology": "planar",
+        "construction": {
+          "method": "pixel_computation",
+          "primitives": [],
+          "operations": [
+            "create_image",
+            "compute_pixels",
+            "apply_texture"
+          ]
+        },
+        "material": {
+          "type": "generated_texture",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "~4 (quad)"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "using",
+          "drive",
+          "system",
+          "directly"
+        ],
+        "preferred_zone": "any"
+      }
+    },
+    "wireworld_circuit": {
+      "category": "emergence",
+      "complexity": "advanced",
+      "description": "Wireworld cellular automaton \u2014 4-state CA for logic gates and signal routing. Displays an OR gate with clock inputs on a floor display, demonstrating how simple state-transition rules produce computational behavior.",
+      "dev_themes": [
+        "biology",
+        "cellular_automata",
+        "computation",
+        "emergence"
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "wireworld_circuit",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "Wireworld Circuit",
+      "qfep_connection": "Computation as signal propagation through constraint \u2014 pure F-minimization in a cellular medium. Electrons flow through wire topology; the circuit IS the F-model that channels E(S).",
+      "scene": "res://commons/artifacts/wireworld_circuit/wireworld_circuit.tscn",
+      "sequence": "cellularautomata",
+      "tags": [
+        "2d",
+        "cellular_automata",
+        "emergence",
+        "visualization"
+      ],
+      "geometry_spec": {
+        "mesh_type": "texture_plane",
+        "topology": "planar",
+        "construction": {
+          "method": "pixel_computation",
+          "primitives": [
+            "plane"
+          ],
+          "operations": [
+            "create_image",
+            "compute_pixels",
+            "apply_texture"
+          ]
+        },
+        "material": {
+          "type": "generated_texture",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "~4 (quad)"
+      },
+      "spatial_needs": {
+        "platform": "sunken",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": true,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "end"
+      }
+    },
+    "ca_conway_city": {
+      "lookup_name": "ca_conway_city",
+      "name": "Conway Emergent City",
+      "description": "Walkable modernist skyline emerging from Conway's Game of Life. B=[3], S=[2,3] run for 10 steps; surviving cells become cubes, height driven by live-neighbor count. No urban planner \u2014 the rule is the architect. Change the rule string and the city becomes a different kind of thing.",
+      "scene": "res://commons/artifacts/ca_conway_city/ca_conway_city.tscn",
+      "category": "cellular_automata",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "sequence": "cellularautomata",
+      "parameters": {
+        "footprint": [
+          7,
+          1,
+          7
+        ],
+        "size_group": "world_scale"
+      },
+      "footprint": [
+        7,
+        1,
+        7
+      ],
+      "size_group": "world_scale",
+      "complexity": "intermediate",
+      "tags": [
+        "cellular_automata",
+        "conway",
+        "emergent",
+        "walkable",
+        "procedural"
+      ],
+      "dev_themes": [
+        "cellular_automata",
+        "emergence",
+        "dna_bridge"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 7,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "center",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 1,
+        "cluster_with": [
+          "rd_coral_garden",
+          "ca_bridge",
+          "ca_chair_test"
+        ],
+        "preferred_zone": "end"
+      }
+    },
+    "ca_rule_comparison": {
+      "lookup_name": "ca_rule_comparison",
+      "name": "CA Rule Comparison Garden",
+      "description": "Five mini-cities arranged in a cross, each running the same initial density+seed through a different CA rule: Conway B3/S23, HighLife B36/S23, Seeds B2/S, Day-and-Night B3678/S34678, Life-without-Death B3/S012345678. Walking between them teaches rule-sensitivity: the seed is identical, only the acceptance function changed, and the cities are entirely different.",
+      "scene": "res://commons/artifacts/ca_rule_comparison/ca_rule_comparison.tscn",
+      "category": "cellular_automata",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "sequence": "cellularautomata",
+      "parameters": {
+        "footprint": [
+          13,
+          1,
+          13
+        ],
+        "size_group": "world_scale"
+      },
+      "footprint": [
+        13,
+        1,
+        13
+      ],
+      "size_group": "world_scale",
+      "complexity": "intermediate",
+      "tags": [
+        "cellular_automata",
+        "comparison",
+        "pedagogical",
+        "walkable"
+      ],
+      "dev_themes": [
+        "cellular_automata",
+        "emergence",
+        "pedagogy",
+        "dna_bridge"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 16,
+        "clearance": {
+          "front": 3,
+          "back": 3,
+          "left": 3,
+          "right": 3
+        },
+        "player_position": "center",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 2,
+        "cluster_with": [
+          "ca_conway_city",
+          "gray_scott_comparison"
+        ],
+        "preferred_zone": "end"
+      }
+    }
+  }
 }

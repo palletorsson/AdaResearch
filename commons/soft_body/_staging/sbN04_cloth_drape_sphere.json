@@ -1,0 +1,39 @@
+{
+  "id": "sbN04_cloth_drape_sphere",
+  "topology": "native_drape",
+  "cloth_size": 2.0,
+  "subdivide": 20,
+  "drape_shape": "sphere",
+  "drape_size": 0.55,
+  "drape_offset": [
+    0,
+    -0.4,
+    0
+  ],
+  "drape_color": [
+    0.25,
+    0.25,
+    0.28
+  ],
+  "total_mass": 0.35,
+  "linear_stiffness": 0.4,
+  "damping_coefficient": 0.025,
+  "simulation_precision": 6,
+  "origin": [
+    0,
+    1.4,
+    0
+  ],
+  "steps": 220,
+  "color": [
+    0.35,
+    0.55,
+    0.75
+  ],
+  "roughness": 0.5,
+  "floor_y": -1.2,
+  "camera_yaw": 0.45,
+  "camera_pitch": 0.2,
+  "layout": "native_drape",
+  "notes": "Cloth over sphere \u00e2\u20ac\u201d textbook soft-body demo. Smooth curvature, ruffled hem."
+}

@@ -1,0 +1,27 @@
+{
+  "id": "ls07_dragon_curve",
+  "axiom": "FX",
+  "rules": {
+    "X": "X+YF+",
+    "Y": "-FX-Y"
+  },
+  "iterations": 12,
+  "angle_deg": 90,
+  "step_len": 0.015,
+  "interpretation": "lines",
+  "color_trunk": [
+    0.55,
+    0.12,
+    0.3
+  ],
+  "color_tip": [
+    0.95,
+    0.55,
+    0.25
+  ],
+  "camera_yaw": 0.001,
+  "camera_pitch": 1.4,
+  "layout": "fractal_curve",
+  "dna_connections": [],
+  "notes": "Heighway dragon curve \u00e2\u20ac\u201d two non-terminal rules X and Y encode the folding. 12 iterations = full dragon."
+}

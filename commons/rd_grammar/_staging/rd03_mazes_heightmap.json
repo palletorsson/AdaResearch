@@ -1,0 +1,23 @@
+{
+  "id": "rd03_mazes_heightmap",
+  "preset": "mazes",
+  "grid_size": 96,
+  "iterations": 3500,
+  "seed": 11,
+  "render_mode": "heightmap",
+  "height_amp": 0.9,
+  "color_lo": [
+    0.2,
+    0.2,
+    0.35
+  ],
+  "color_hi": [
+    0.4,
+    0.85,
+    0.7
+  ],
+  "camera_yaw": 0.4,
+  "camera_pitch": 0.55,
+  "layout": "rd_field",
+  "notes": "Maze pattern (F=0.029, K=0.057). Interconnected channels and walls \u00e2\u20ac\u201d coral labyrinth."
+}
