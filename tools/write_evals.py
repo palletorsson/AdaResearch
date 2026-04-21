@@ -226,6 +226,16 @@ MESH_EVALS = {
     "gen02_spikes_tower":     E(5, "crown_jewel","Fantasy castle with spiked crown. Tower + petals = castle."),
     "gen02_mushroom_forest":  E(4, "strong",     "Multi-cap mushroom from 5-step cascade."),
     "gen02_mushroom_petaled": E(5, "crown_jewel","PALM TREE with crown fronds and roots. Mushroom + petals on down-faces."),
+    "mg_op11_twist_spire_cone": E(3, "working",   "Transform-stack test is visible now: a stepped twisted turret rather than a clean spire. Valuable because it shows rotate/scale working, but the geometry still kinks instead of flowing."),
+    "mg_op12_cylinder_split_crown": E(4, "strong","Split used as a true faceting operator. The crystal becomes a fractured pyramid with a believable carved-core reading."),
+    "mg_op13_arch_scalloped_gate": E(4, "strong", "Best recovery of the retune pass. Edge-decorate finally reads: the arch turns into a dense block-built portal or voxel shrine."),
+    "mg_op14_torus_riveted_halo": E(4, "strong",  "Beaded torus ring works as a halo or mechanical gasket. Good proof that edge_decorate can ornament closed meshes if boundary-only is disabled."),
+    "mg_op15_icosa_scale_pod": E(3, "working",    "ScaleTileOp definitely fires, but the result is still sparse. More pod than pinecone. Useful operator proof, weaker silhouette."),
+    "mg_op16_sphere_barnacle_field": E(4, "strong","Scatter produces a convincing barnacle/urchin crust without relying on extrusion. One of the clearer new surface-texture recipes."),
+    "mg_op17_capsule_blossom_bonsai": E(4, "strong","Branch operator made legible by the pedestal base. Reads as a tiny altar bonsai with blossom clusters instead of a random spray of branches."),
+    "mg_op18_cellular_perforated_shell": E(4, "strong","CA + delete + edge decor works. The shell becomes a punctured dome with beaded hole boundaries, which is conceptually richer than a plain perforation."),
+    "mg_op19_daynight_ziggurat": E(5, "winner",   "Strongest architecture of the batch. Day-and-Night CA seed plus stepped inset/extrude yields a readable citadel or ruin cluster."),
+    "mg_op20_delta_bead_sheet": E(4, "strong",    "RD ornament finally reads after the retune. The delta sheet becomes a studded relief panel rather than staying a flat terrain sample."),
 }
 
 
@@ -512,6 +522,13 @@ TRAJECTORY_EVALS = {
     "br04_stepped_cascade":          E(4, "winner",      "Six tilted plates in staircase. Ball enters top-left, cascades diagonally along each step, decays into a rest at the bottom. Clean waterfall-down-stairs read — the force sequence IS the choreography."),
     "br05_curved_funnel":            E(2, "broken",      "V-funnel + catch bowl. Ball escaped the plate field or Z-extrusion moved it off-camera — output empty. Illustrates that plate layouts with gaps fail closed-system tests.", ["remove extrude_rate for first iteration", "widen funnel arms to prevent escape", "add containment floor wall"]),
     "br06_pattern_writer_s_curve":   E(2, "broken",      "Attempt at reverse-engineering an S-curve via 8 hand-placed plates. Only 2 trail fragments visible — ball escaped. Honest proof that hand-tuned reverse engineering is actually hard; this is Tier 3 (optimization) in disguise, not Tier 1 (hand-tune).", ["this confirms reverse-engineering needs a genetic algorithm or differentiable simulator, not hand placement"]),
+    # FROZEN POINTS — sampling pattern + mould collision
+    "fz01_circle_beat_dodecagon":      E(5, "crown_jewel", "Unit circle strobed 12 times at integer beats = dodecagon vertices with blue-to-tan color gradient marking time. Same motion as tr01 spiral, different sampling → polygon. The sampling pattern IS the form."),
+    "fz02_circle_golden_constellation":E(4, "winner",      "Rising spiral sampled at 60 golden-ratio intervals. Low-discrepancy phyllotactic distribution — 'sunflower seed' arrangement floating in air. Same rising motion, irregular but balanced sampling."),
+    "fz03_lorenz_curvature_scatter":   E(4, "winner",      "Lorenz attractor sampled where curvature is highest. Points cluster at wing-switch transitions — the chaotic 'events' get more weight. Y-silhouette reveals where dynamics become interesting. Sampling bias as a lens on dynamics."),
+    "fz04_spiral_meets_sphere":        E(5, "crown_jewel", "Rising spiral of radius 2.5 pressed into a containing sphere of radius 1.5. The spiral cannot escape; it clamps to the sphere's surface. The frozen form is part free helix, part surface-tracing hemisphere. Glass pressed into a mould — literally rendered."),
+    "fz05_lissajous_meets_cylinder":   E(5, "crown_jewel", "3D Lissajous knot pressed into cylinder mould radius 1.0. Horizontal oscillation clamped, vertical stays free. Reads as label printed on a can or calligraphic drum inscription. Different mould geometry = different frozen pattern from same motion."),
+    "fz06_bouncing_against_dome":      E(3, "working",     "Bouncing ball + sphere-exclude mould. Trajectory can't pass through the dome region — gets snapped to its surface. Visible as skim-arc pattern across horizon. Subtle at this scale.", ["larger relative dome radius", "try contain mode to make it a ceiling"]),
 }
 
 SB_LSYSTEM_BRIDGE_EVALS = {

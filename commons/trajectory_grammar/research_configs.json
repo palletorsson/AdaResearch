@@ -1111,6 +1111,238 @@
       "camera_yaw": 0.001,
       "camera_pitch": 1.25,
       "notes": "Eight hand-placed plates curving left-right-left-right down the fall. Target shape: a rough S-curve. The ball traces the S because the plates force it to \u2014 reverse-engineered form. This is the 'plates choreograph the fall' case in its simplest form."
+    },
+    {
+      "id": "fz01_circle_beat_dodecagon",
+      "force": "uniform_circular",
+      "params": {
+        "radius": 1.0,
+        "omega": 1.0,
+        "rise": 0.0
+      },
+      "initial": {
+        "phase": 0.0
+      },
+      "duration": 6.2832,
+      "dt": 0.005,
+      "sample_pattern": "beat",
+      "sample_count": 12,
+      "interpretation": "particles",
+      "particle_radius": 0.08,
+      "color_start": [
+        0.25,
+        0.5,
+        0.85
+      ],
+      "color_end": [
+        0.95,
+        0.5,
+        0.3
+      ],
+      "camera_yaw": 0.001,
+      "camera_pitch": 1.3,
+      "notes": "Unit circle strobed 12 times at integer beats. Result: dodecagon vertices. Same motion as tr01 but sampling pattern DNA changed from 'uniform dense' to '12 beats' \u2014 form IS the sampling."
+    },
+    {
+      "id": "fz02_circle_golden_constellation",
+      "force": "uniform_circular",
+      "params": {
+        "radius": 1.0,
+        "omega": 1.0,
+        "rise": 0.2
+      },
+      "initial": {
+        "phase": 0.0
+      },
+      "duration": 30.0,
+      "dt": 0.01,
+      "sample_pattern": "golden",
+      "sample_count": 60,
+      "interpretation": "particles",
+      "particle_radius": 0.06,
+      "color_start": [
+        0.5,
+        0.3,
+        0.85
+      ],
+      "color_end": [
+        0.95,
+        0.8,
+        0.3
+      ],
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.25,
+      "notes": "Rising spiral sampled at golden-ratio intervals. Low-discrepancy sequence \u2014 irregular but balanced. Reads as a Fibonacci phyllotaxis ring rising over time."
+    },
+    {
+      "id": "fz03_lorenz_curvature_scatter",
+      "force": "lorenz_attractor",
+      "params": {
+        "sigma": 10.0,
+        "rho": 28.0,
+        "beta": 2.6667,
+        "scale": 0.04
+      },
+      "initial": {
+        "pos": [
+          0.1,
+          0.0,
+          0.0
+        ]
+      },
+      "duration": 40.0,
+      "dt": 0.005,
+      "sample_pattern": "curvature",
+      "sample_count": 180,
+      "interpretation": "particles",
+      "particle_radius": 0.025,
+      "color_start": [
+        0.2,
+        0.55,
+        0.95
+      ],
+      "color_end": [
+        0.95,
+        0.4,
+        0.5
+      ],
+      "camera_yaw": 0.6,
+      "camera_pitch": 0.3,
+      "notes": "Lorenz attractor sampled where curvature is HIGH. Points cluster at the wing-switching transitions \u2014 the chaos 'events' get more samples than the smooth orbits. The scatter reveals where the dynamics become interesting."
+    },
+    {
+      "id": "fz04_spiral_meets_sphere",
+      "force": "uniform_circular",
+      "params": {
+        "radius": 2.5,
+        "omega": 1.5,
+        "rise": 0.25
+      },
+      "initial": {
+        "phase": 0.0
+      },
+      "duration": 14.0,
+      "dt": 0.01,
+      "mould": {
+        "type": "sphere",
+        "mode": "contain",
+        "center": [
+          0,
+          1.2,
+          0
+        ],
+        "radius": 1.5
+      },
+      "interpretation": "tube",
+      "tube_radius": 0.04,
+      "color_start": [
+        0.25,
+        0.5,
+        0.85
+      ],
+      "color_end": [
+        0.95,
+        0.5,
+        0.3
+      ],
+      "camera_yaw": 0.55,
+      "camera_pitch": 0.25,
+      "notes": "Rising spiral of radius 2.5 pressed into a containing sphere of radius 1.5. The spiral cannot exit; where it tries, it gets clamped to the sphere's surface. The frozen form is where the path met the mould \u2014 part helix, part constrained spherical tracing."
+    },
+    {
+      "id": "fz05_lissajous_meets_cylinder",
+      "force": "lissajous_3d",
+      "params": {
+        "fx": 3,
+        "fy": 2,
+        "fz": 5,
+        "ax": 1.5,
+        "ay": 0.8,
+        "az": 1.5,
+        "phase_y": 1.5708,
+        "phase_z": 0.7854
+      },
+      "initial": {},
+      "duration": 6.2832,
+      "dt": 0.005,
+      "mould": {
+        "type": "cylinder",
+        "mode": "contain",
+        "center": [
+          0,
+          0,
+          0
+        ],
+        "radius": 1.0
+      },
+      "interpretation": "tube",
+      "tube_radius": 0.045,
+      "color_start": [
+        0.45,
+        0.15,
+        0.6
+      ],
+      "color_end": [
+        0.95,
+        0.55,
+        0.3
+      ],
+      "camera_yaw": 0.55,
+      "camera_pitch": 0.3,
+      "notes": "3D Lissajous knot pressed into a cylinder mould of radius 1.0. The horizontal oscillation gets clamped; the vertical stays. Closed curve becomes a pattern of horizontal traces wrapping a cylinder \u2014 like a label printed on a can."
+    },
+    {
+      "id": "fz06_bouncing_against_dome",
+      "force": "bouncing_gravity",
+      "params": {
+        "gravity": 9.8,
+        "walls": [
+          {
+            "axis": "y",
+            "pos": -1.8,
+            "side": "below",
+            "restitution": 0.85
+          }
+        ],
+        "plates": []
+      },
+      "initial": {
+        "pos": [
+          -2.2,
+          2.5
+        ],
+        "vel": [
+          2.8,
+          0.0
+        ]
+      },
+      "duration": 12.0,
+      "dt": 0.005,
+      "mould": {
+        "type": "sphere",
+        "mode": "exclude",
+        "center": [
+          0,
+          -0.5,
+          0
+        ],
+        "radius": 0.9
+      },
+      "interpretation": "tube",
+      "tube_radius": 0.022,
+      "color_start": [
+        0.95,
+        0.55,
+        0.25
+      ],
+      "color_end": [
+        0.15,
+        0.3,
+        0.55
+      ],
+      "camera_yaw": 0.001,
+      "camera_pitch": 1.25,
+      "notes": "Bouncing ball with a sphere mould at center \u2014 the ball's trajectory is EXCLUDED from the sphere's interior. Where the parabolas pass through that region, they get snapped to the sphere's surface. Reads as parabolas arcing over a dome, as if bouncing on invisible stones."
     }
   ]
 }

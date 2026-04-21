@@ -78,6 +78,18 @@ static func simulate(cfg: Dictionary) -> Dictionary:
 		_:
 			push_warning("trajectory_sim: unknown force '%s'" % force)
 
+	# ─── Post-process: mould constraint + non-uniform sampling ────
+	var mould: Dictionary = cfg.get("mould", {})
+	if not mould.is_empty():
+		for i in trajectories.size():
+			trajectories[i] = _apply_mould(trajectories[i], mould)
+
+	var sample_pattern: String = String(cfg.get("sample_pattern", "uniform"))
+	var sample_count: int = int(cfg.get("sample_count", 0))
+	if sample_pattern != "uniform" and sample_count > 0:
+		for i in trajectories.size():
+			trajectories[i] = _resample(trajectories[i], sample_pattern, sample_count, cfg)
+
 	return {
 		"trajectories": trajectories,
 		"sample_count": n_samples,
@@ -386,3 +398,140 @@ static func _segment_crossed(p0: Vector2, p1: Vector2,
 			nrm = -nrm
 		return {"hit": true, "point": hit_point, "normal": nrm, "t": t}
 	return {"hit": false}
+
+
+# ─── Mould constraint ─────────────────────────────────────────
+#
+# Clamp trajectory points to stay inside/outside a mould surface.
+# When the path tries to cross the surface, the point is snapped to it —
+# the record preserves the interaction, not the motion. Like pressing
+# glass into a mould: the frozen form is where material met constraint.
+static func _apply_mould(trail: PackedVector3Array, mould: Dictionary) -> PackedVector3Array:
+	var kind: String = String(mould.get("type", "sphere"))
+	var mode: String = String(mould.get("mode", "contain"))   # contain | exclude
+	var center_arr = mould.get("center", [0, 0, 0])
+	var center := Vector3(float(center_arr[0]), float(center_arr[1]), float(center_arr[2]))
+	var out := PackedVector3Array()
+	out.resize(trail.size())
+	for i in trail.size():
+		var p: Vector3 = trail[i]
+		match kind:
+			"sphere":
+				var r: float = float(mould.get("radius", 1.0))
+				var d: Vector3 = p - center
+				var dist: float = d.length()
+				if mode == "contain" and dist > r:
+					p = center + d * (r / max(dist, 1e-6))
+				elif mode == "exclude" and dist < r:
+					if dist < 1e-6: d = Vector3.UP
+					p = center + d.normalized() * r
+			"plane":
+				# Plane defined by normal + offset along normal from origin
+				var nrm_arr = mould.get("normal", [0, 1, 0])
+				var nrm := Vector3(float(nrm_arr[0]), float(nrm_arr[1]), float(nrm_arr[2])).normalized()
+				var plane_pos: float = float(mould.get("plane_pos", 0.0))
+				var d_plane: float = (p - center).dot(nrm) - plane_pos
+				if mode == "contain":
+					# "contain" = must stay on negative side
+					if d_plane > 0.0: p = p - nrm * d_plane
+				else:
+					if d_plane < 0.0: p = p - nrm * d_plane
+			"cylinder":
+				# Cylinder axis along Y, infinite height
+				var cr: float = float(mould.get("radius", 1.0))
+				var rel: Vector3 = p - center
+				var horizontal := Vector2(rel.x, rel.z)
+				var h_dist: float = horizontal.length()
+				if mode == "contain" and h_dist > cr:
+					horizontal = horizontal * (cr / max(h_dist, 1e-6))
+					p = center + Vector3(horizontal.x, rel.y, horizontal.y)
+				elif mode == "exclude" and h_dist < cr:
+					if h_dist < 1e-6: horizontal = Vector2(1, 0)
+					horizontal = horizontal.normalized() * cr
+					p = center + Vector3(horizontal.x, rel.y, horizontal.y)
+			"box":
+				var size_arr = mould.get("size", [1.0, 1.0, 1.0])
+				var bs := Vector3(float(size_arr[0]), float(size_arr[1]), float(size_arr[2]))
+				var rel2: Vector3 = p - center
+				if mode == "contain":
+					p = center + Vector3(
+						clampf(rel2.x, -bs.x, bs.x),
+						clampf(rel2.y, -bs.y, bs.y),
+						clampf(rel2.z, -bs.z, bs.z))
+		out[i] = p
+	return out
+
+
+# ─── Non-uniform sampling — sampling pattern as DNA ───────────
+#
+# Pick N samples from the dense trail using various patterns. The
+# *sampling times* become part of the form: same motion, different
+# strobe, different frozen pattern.
+static func _resample(trail: PackedVector3Array, pattern: String,
+		count: int, cfg: Dictionary) -> PackedVector3Array:
+	var n_src: int = trail.size()
+	if n_src == 0 or count < 2: return trail
+	var out := PackedVector3Array()
+	var indices: Array = []
+
+	match pattern:
+		"golden":
+			# Golden-ratio low-discrepancy sampling — t_i = (i * φ) mod 1
+			var phi: float = (sqrt(5.0) + 1.0) * 0.5  # 1.618...
+			var t: float = 0.0
+			for i in count:
+				t = fmod(t + phi, 1.0)
+				indices.append(int(t * float(n_src - 1)))
+		"fibonacci":
+			# Fibonacci-spaced: log-like rhythm, denser early
+			var fibs: Array = [1, 1]
+			while fibs[-1] < n_src: fibs.append(fibs[-1] + fibs[-2])
+			indices = fibs.slice(0, count)
+			for i in indices.size():
+				indices[i] = clampi(int(indices[i]) - 1, 0, n_src - 1)
+		"log":
+			# Logarithmic: dense early, sparse late
+			for i in count:
+				var u: float = float(i) / float(count - 1)
+				var t2: float = pow(u, 2.5)
+				indices.append(int(t2 * float(n_src - 1)))
+		"beat":
+			# Strobe at integer beats (uniform in time → regular polygon for circle)
+			for i in count:
+				var t3: float = float(i) / float(count)
+				indices.append(int(t3 * float(n_src - 1)))
+		"curvature":
+			# Sample more densely where curvature is high (angle changes)
+			var weights: PackedFloat32Array = PackedFloat32Array()
+			weights.resize(n_src)
+			var total: float = 0.0
+			for i in range(1, n_src - 1):
+				var a: Vector3 = trail[i] - trail[i - 1]
+				var b: Vector3 = trail[i + 1] - trail[i]
+				var la: float = a.length(); var lb: float = b.length()
+				if la < 1e-6 or lb < 1e-6:
+					weights[i] = 0.001
+				else:
+					var cos_angle: float = a.dot(b) / (la * lb)
+					# Low cos = high curvature
+					weights[i] = (1.0 - cos_angle) + 0.05
+				total += weights[i]
+			# Build CDF, sample uniformly in [0, total]
+			for i in count:
+				var target: float = (float(i) + 0.5) * total / float(count)
+				var acc: float = 0.0
+				var picked: int = 0
+				for k in n_src:
+					acc += weights[k]
+					if acc >= target:
+						picked = k; break
+				indices.append(picked)
+		_:
+			# Fallback: uniform
+			for i in count:
+				indices.append(int(float(i) * float(n_src - 1) / float(count - 1)))
+
+	for idx in indices:
+		var ii: int = clampi(int(idx), 0, n_src - 1)
+		out.append(trail[ii])
+	return out
