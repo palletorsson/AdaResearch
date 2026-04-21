@@ -390,6 +390,11 @@ SB_RD_BRIDGE_EVALS = {
     "gl03_wide_bowl":      E(4, "winner",      "Rounded orange urn/egg. Wide top-pin ring (28%) + high pre-inflation + weak gravity = pressure dominates, gravity mild. Shows that force balance determines vessel proportions."),
     "gl04_lopsided_vase":  E(5, "crown_jewel", "Magenta vessel slumped off-axis. Non-axial gravity (sideways + down) produces a lopsided hand-crafted look — as if the glass sagged sideways while cooling. Gravity direction as aesthetic choice."),
     "gl05_collapsed_sag":  E(4, "winner",      "Over-cooked tall brown collapse. Very low stiffness + strong gravity + 500 steps = vessel fails into a long teardrop. Documents what breaks the vessel pattern; the failure state is itself a legible form."),
+    # GLASS MEETS MOULD — industrial glass-blowing process rendered
+    "gm01_bottle_in_cylinder_mould": E(4, "winner",      "Glass pre-inflated 70%, pressed into a cylinder mould radius 0.55. The expanding sphere hits the cylinder walls and takes its uniform-radius shape. Elongated bottle with visibly vertical sides — the mould imprinted on the vessel."),
+    "gm02_vase_in_tapered_mould":    E(3, "working",     "Glass in a tapered mould (narrow top, wide bottom). Amphora-like silhouette but taper is subtler than intended; the mould effect is there but not dramatic at these mould radii. Increase the taper ratio or use higher preinflate for stronger mould contact.", ["taper radii 0.2→0.8 not 0.25→0.7", "higher preinflate (1.2+) to force glass into mould contours"]),
+    "gm03_box_in_cube_mould":        E(5, "crown_jewel", "Sphere glass pressed into a box mould 0.9×1.4×0.9. Clearly RECTANGULAR silhouette — the round glass became a square bottle. Flat faces visible where expansion was stopped by box walls. The clearest 'mould imprinted on vessel' render in the batch."),
+    "gm04_pressed_onto_sphere":      E(3, "working",     "External mould (exclude mode): glass drapes over a solid sphere obstruction mid-vessel. The vessel shape shows the obstacle's influence — subtle bulge around y=0.9 where the sphere sits. Would read more dramatically with a larger/more asymmetric external form."),
 }
 
 PS_RD_BRIDGE_EVALS = {

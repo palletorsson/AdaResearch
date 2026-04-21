@@ -98,7 +98,16 @@ func _run() -> void:
 		push_error("render_soft_body: bad topology"); quit(1); return
 	var steps: int = int(cfg.get("steps", 240))
 	var dt: float = float(cfg.get("dt", 0.0166667))
-	sim.simulate(steps, dt)
+	# If a mould is configured, simulate step-by-step and clamp each step —
+	# glass pressing into a mould, the particles conform to the mould surface
+	# where they try to violate it.
+	var mould: Dictionary = cfg.get("mould", {})
+	if not mould.is_empty():
+		for _i in steps:
+			sim.step(dt)
+			_apply_mould_clamp(sim, mould)
+	else:
+		sim.simulate(steps, dt)
 	# Universal post-ops: noise displace acts on sim.positions post-simulation
 	var post_ops: Array = cfg.get("post_ops", [])
 	if post_ops.size() > 0:
@@ -445,3 +454,82 @@ func _build_glass_blow_sim(cfg: Dictionary, stiffness: float, origin: Vector3):
 		verts.size(), sim.springs.size(), preinflate
 	])
 	return sim
+
+
+# ─── Glass meets mould — per-step particle clamping ───────────
+#
+# During simulation, each particle that tries to violate the mould is
+# projected onto the mould surface. The final vessel IS the mould — up
+# to the limits of what glass + gravity + pressure will fill.
+# Same mould vocabulary as the trajectory substrate: sphere / plane /
+# cylinder / box, each in contain or exclude mode.
+func _apply_mould_clamp(sim, mould: Dictionary) -> void:
+	var kind: String = String(mould.get("type", "cylinder"))
+	var mode: String = String(mould.get("mode", "contain"))
+	var center_arr = mould.get("center", [0, 1.5, 0])
+	var center := Vector3(float(center_arr[0]), float(center_arr[1]), float(center_arr[2]))
+
+	for i in sim.positions.size():
+		if sim.pinned[i]: continue
+		var p: Vector3 = sim.positions[i]
+		var new_p: Vector3 = p
+		match kind:
+			"sphere":
+				var r: float = float(mould.get("radius", 1.0))
+				var d: Vector3 = p - center
+				var dist: float = d.length()
+				if mode == "contain" and dist > r:
+					new_p = center + d * (r / max(dist, 1e-6))
+				elif mode == "exclude" and dist < r:
+					if dist < 1e-6: d = Vector3.UP
+					new_p = center + d.normalized() * r
+			"cylinder":
+				# Vertical cylinder (axis = Y)
+				var cr: float = float(mould.get("radius", 0.5))
+				var rel: Vector3 = p - center
+				var horiz := Vector2(rel.x, rel.z)
+				var hdist: float = horiz.length()
+				if mode == "contain" and hdist > cr:
+					horiz = horiz * (cr / max(hdist, 1e-6))
+					new_p = center + Vector3(horiz.x, rel.y, horiz.y)
+				elif mode == "exclude" and hdist < cr:
+					if hdist < 1e-6: horiz = Vector2(1, 0)
+					horiz = horiz.normalized() * cr
+					new_p = center + Vector3(horiz.x, rel.y, horiz.y)
+			"box":
+				var size_arr = mould.get("size", [0.5, 1.0, 0.5])
+				var bs := Vector3(float(size_arr[0]), float(size_arr[1]), float(size_arr[2]))
+				var rel2: Vector3 = p - center
+				if mode == "contain":
+					new_p = center + Vector3(
+						clampf(rel2.x, -bs.x, bs.x),
+						clampf(rel2.y, -bs.y, bs.y),
+						clampf(rel2.z, -bs.z, bs.z))
+			"tapered_cylinder":
+				# Cylinder whose radius varies with height — for bottle/vase
+				# moulds. Params: radius_at_top, radius_at_bottom, y_top, y_bottom.
+				var rt: float = float(mould.get("radius_top", 0.25))
+				var rb: float = float(mould.get("radius_bottom", 0.55))
+				var yt: float = float(mould.get("y_top", 1.6))
+				var yb: float = float(mould.get("y_bottom", 0.0))
+				var yy: float = p.y
+				var tt: float = clampf((yy - yb) / max(yt - yb, 1e-6), 0.0, 1.0)
+				var local_r: float = lerp(rb, rt, tt)
+				var rel3: Vector3 = p - center
+				var horiz2 := Vector2(rel3.x, rel3.z)
+				var hd2: float = horiz2.length()
+				if mode == "contain" and hd2 > local_r:
+					horiz2 = horiz2 * (local_r / max(hd2, 1e-6))
+					new_p = center + Vector3(horiz2.x, rel3.y, horiz2.y)
+		if new_p != p:
+			# Zero out the velocity component normal to the mould so the
+			# particle doesn't "drive into" the wall every step.
+			var n_vec: Vector3 = (new_p - p)
+			if n_vec.length_squared() > 1e-10:
+				n_vec = n_vec.normalized()
+				var v: Vector3 = (new_p - sim.prev_positions[i])
+				var vn: float = v.dot(n_vec)
+				if vn < 0.0:
+					v = v - n_vec * vn
+				sim.prev_positions[i] = new_p - v
+			sim.positions[i] = new_p
