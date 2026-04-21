@@ -8,16 +8,17 @@ extends Control
 signal dna_changed(substrate: String, config_id: String)
 
 # ─── Substrate registry ────────────────────────────────────────
-# Maps display name → (config file path, live-renderable flag)
+# default_index = starting config to show (skips documented-broken entries
+# like ls01_algae which have no rotations and produce no visible geometry).
 const SUBSTRATES := [
-	{"name": "L-system",         "key": "lsystem",       "path": "res://commons/lsystem_grammar/research_configs.json",       "live": true},
-	{"name": "Trajectory",       "key": "trajectory",    "path": "res://commons/trajectory_grammar/research_configs.json",    "live": true},
-	{"name": "Wallpaper pattern","key": "pattern",       "path": "res://commons/pattern_grammar/research_configs.json",       "live": true},
-	{"name": "Reaction-Diffusion","key": "rd",           "path": "res://commons/rd_grammar/research_configs.json",            "live": true},
-	{"name": "Primitive stack",  "key": "primitive_stack","path": "res://commons/primitive_grammar/research_configs.json",    "live": true},
-	{"name": "Soft body / glass","key": "soft_body",     "path": "res://commons/soft_body/research_configs.json",             "live": true},
-	{"name": "Graph grammar",    "key": "graph_grammar", "path": "res://commons/graph_grammar/research_configs.json",         "live": false},
-	{"name": "Mesh grammar",     "key": "mesh_grammar",  "path": "res://commons/mesh_grammar/research_configs.json",          "live": false},
+	{"name": "L-system",         "key": "lsystem",       "path": "res://commons/lsystem_grammar/research_configs.json",       "live": true, "default_index": 2},
+	{"name": "Trajectory",       "key": "trajectory",    "path": "res://commons/trajectory_grammar/research_configs.json",    "live": true, "default_index": 0},
+	{"name": "Wallpaper pattern","key": "pattern",       "path": "res://commons/pattern_grammar/research_configs.json",       "live": true, "default_index": 3},
+	{"name": "Reaction-Diffusion","key": "rd",           "path": "res://commons/rd_grammar/research_configs.json",            "live": true, "default_index": 3},
+	{"name": "Primitive stack",  "key": "primitive_stack","path": "res://commons/primitive_grammar/research_configs.json",    "live": true, "default_index": 0},
+	{"name": "Soft body / glass","key": "soft_body",     "path": "res://commons/soft_body/research_configs.json",             "live": true, "default_index": 0},
+	{"name": "Graph grammar",    "key": "graph_grammar", "path": "res://commons/graph_grammar/research_configs.json",         "live": false, "default_index": 0},
+	{"name": "Mesh grammar",     "key": "mesh_grammar",  "path": "res://commons/mesh_grammar/research_configs.json",          "live": false, "default_index": 0},
 ]
 
 var _substrate_list: ItemList
@@ -72,10 +73,26 @@ func _ready() -> void:
 	add_child(_config_list)
 	_config_list.item_selected.connect(_on_config_selected)
 
-	# Select first substrate by default
+	# Select first substrate. _on_substrate_selected handles picking a
+	# sensible default config via SUBSTRATES[idx].default_index.
 	if SUBSTRATES.size() > 0:
 		_substrate_list.select(0)
 		_on_substrate_selected(0)
+
+
+## Called by the 3D workstation after it connects — returns the currently-
+## selected (substrate, config_id) so the first variant can load.
+func get_current_selection() -> Dictionary:
+	if _current_substrate_index < 0 or _current_substrate_index >= SUBSTRATES.size():
+		return {}
+	if _current_configs.is_empty(): return {}
+	var sel: PackedInt32Array = _config_list.get_selected_items()
+	var ci: int = sel[0] if sel.size() > 0 else 0
+	if ci < 0 or ci >= _current_configs.size(): return {}
+	return {
+		"substrate": SUBSTRATES[_current_substrate_index]["key"],
+		"config_id": str(_current_configs[ci].get("id", "")),
+	}
 
 
 func _on_substrate_selected(idx: int) -> void:
@@ -97,6 +114,13 @@ func _on_substrate_selected(idx: int) -> void:
 	for c in configs:
 		var id: String = str(c.get("id", "?"))
 		_config_list.add_item(id)
+	# Auto-select a sensible default config (skips documented-broken
+	# entries like algae with no rotations)
+	if _current_configs.size() > 0:
+		var default_idx: int = int(SUBSTRATES[idx].get("default_index", 0))
+		default_idx = clampi(default_idx, 0, _current_configs.size() - 1)
+		_config_list.select(default_idx)
+		_on_config_selected(default_idx)
 
 
 func _on_config_selected(idx: int) -> void:

@@ -20,6 +20,7 @@ extends Node3D
 
 const VIEWPORT_2D_3D = preload("res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn")
 const UI_SCENE = preload("res://commons/artifacts/dna_workstation/dna_workstation_ui.tscn")
+const HAND_POSE_AREA = preload("res://addons/godot-xr-tools/objects/hand_pose_area.tscn")
 
 const LSystemSim     = preload("res://commons/lsystem_grammar/lsystem_sim.gd")
 const LSystemTurtle  = preload("res://commons/lsystem_grammar/lsystem_turtle.gd")
@@ -67,6 +68,23 @@ func _build_kiosk() -> void:
 	viewport.viewport_size = Vector2(800, 420)
 	add_child(viewport)
 
+	# VR hand-pose area — so XR controllers can point at the 2D panel
+	if ResourceLoader.exists("res://addons/godot-xr-tools/objects/hand_pose_area.tscn"):
+		var hand_area := HAND_POSE_AREA.instantiate()
+		hand_area.transform = Transform3D(
+			Basis(Vector3.RIGHT, deg_to_rad(-25)),
+			Vector3(0, panel_y, kiosk_z))
+		if ResourceLoader.exists("res://addons/godot-xr-tools/hands/poses/pose_point_left.tres"):
+			hand_area.left_pose = load("res://addons/godot-xr-tools/hands/poses/pose_point_left.tres")
+		if ResourceLoader.exists("res://addons/godot-xr-tools/hands/poses/pose_point_right.tres"):
+			hand_area.right_pose = load("res://addons/godot-xr-tools/hands/poses/pose_point_right.tres")
+		add_child(hand_area)
+		var collision := CollisionShape3D.new()
+		var shape := BoxShape3D.new()
+		shape.size = Vector3(0.9, 0.25, 0.6)
+		collision.shape = shape
+		hand_area.add_child(collision)
+
 	call_deferred("_connect_ui", viewport)
 
 
@@ -79,6 +97,15 @@ func _connect_ui(viewport: Node) -> void:
 	if _ui_instance and _ui_instance.has_signal("dna_changed"):
 		_ui_instance.dna_changed.connect(_on_dna_changed)
 		print("DNAWorkstation: UI connected")
+		# Load whatever's currently selected — the UI auto-selected the first
+		# substrate + first config in its _ready(), but that signal fired before
+		# we connected. Pull the current selection now.
+		if _ui_instance.has_method("get_current_selection"):
+			var sel: Dictionary = _ui_instance.get_current_selection()
+			if not sel.is_empty():
+				_on_dna_changed(str(sel.get("substrate", "")), str(sel.get("config_id", "")))
+	else:
+		print("DNAWorkstation: UI not found or missing dna_changed signal")
 
 
 func _build_presentation_area() -> void:
@@ -186,6 +213,8 @@ func _build_lsystem(cfg: Dictionary) -> Node3D:
 		"base_width":   float(cfg.get("base_width", 0.02)),
 		"width_shrink": float(cfg.get("width_shrink", 0.75)),
 	})
+	var segments: Array = walk.get("segments", [])
+	print("DNAWorkstation: L-system %s → %d segments" % [cfg.get("id", "?"), segments.size()])
 	var ct := _c(cfg.get("color_trunk", [0.45, 0.28, 0.12]))
 	var cp := _c(cfg.get("color_tip",   [0.2, 0.65, 0.15]))
 	return LSystemTurtle.to_tubes(walk, ct, cp, int(cfg.get("tube_sides", 6)))
