@@ -22,6 +22,11 @@ const VIEWPORT_2D_3D = preload("res://addons/godot-xr-tools/objects/viewport_2d_
 const UI_SCENE = preload("res://commons/artifacts/dna_workstation/dna_workstation_ui.tscn")
 const HAND_POSE_AREA = preload("res://addons/godot-xr-tools/objects/hand_pose_area.tscn")
 
+## VR-preview caps: applied to configs before live-rendering in the workstation.
+## Same DNA, reduced fidelity, faster build. Gallery-side renders use full
+## resolution by running tools/<sub>_research.py instead.
+@export var vr_preview: bool = true
+
 const LSystemSim     = preload("res://commons/lsystem_grammar/lsystem_sim.gd")
 const LSystemTurtle  = preload("res://commons/lsystem_grammar/lsystem_turtle.gd")
 const TrajSim        = preload("res://commons/trajectory_grammar/trajectory_sim.gd")
@@ -145,6 +150,18 @@ func _build_presentation_area() -> void:
 func _on_dna_changed(substrate: String, config_id: String) -> void:
 	_info_label.text = "%s · %s" % [substrate, config_id]
 	_load_variant(substrate, config_id)
+	# After a brief deferral (so the artifact has entered the tree), count
+	# draw calls and append to the label. Visible pedagogical feedback.
+	call_deferred("_update_draw_call_label")
+
+
+func _update_draw_call_label() -> void:
+	if _info_label == null: return
+	if _current_artifact == null: return
+	var dc: int = _count_draw_calls(_current_artifact)
+	_info_label.text = "%s   ·   %d draw call%s" % [
+		_info_label.text, dc, "" if dc == 1 else "s"
+	]
 
 
 func _load_variant(substrate: String, config_id: String) -> void:
@@ -159,6 +176,8 @@ func _load_variant(substrate: String, config_id: String) -> void:
 	if cfg.is_empty():
 		_show_placeholder("config not found: %s/%s" % [substrate, config_id])
 		return
+	if vr_preview:
+		cfg = _apply_vr_caps(substrate, cfg)
 
 	var node: Node3D = null
 	match substrate:
@@ -372,6 +391,48 @@ func _build_soft_body(cfg: Dictionary) -> Node3D:
 	# skip simulation and just show a placeholder noting the compute cost.
 	_show_placeholder("Soft-body live-sim is slow — run via tools/soft_body_research.py and view PNG in gallery")
 	return null
+
+
+# ─── VR-preview caps + draw-call counter ─────────────────────
+#
+# Applied to the cfg dict before the builder runs. Caps iterations,
+# grid sizes, sample counts to values that build in <500ms so the
+# workstation feels responsive in VR. Same DNA; lower fidelity.
+
+func _apply_vr_caps(substrate: String, cfg_in: Dictionary) -> Dictionary:
+	var cfg: Dictionary = cfg_in.duplicate(true)
+	match substrate:
+		"rd":
+			# 3000 iterations × 96×96 grid ≈ 3-5s. Cap to 32×32 × 800 ≈ 200ms.
+			cfg["grid_size"] = mini(int(cfg.get("grid_size", 96)), 32)
+			cfg["iterations"] = mini(int(cfg.get("iterations", 3000)), 800)
+		"trajectory":
+			# Trajectories at dt=0.005 with 40s duration produce 8000 samples —
+			# 8000 cylinder instances is fine (MultiMesh), but RD/Lorenz sim
+			# iterates 8000×. Cap by halving sample density.
+			cfg["dt"] = maxf(float(cfg.get("dt", 0.02)) * 2.0, 0.01)
+		"pattern":
+			# Canvas 512×512 × 17 wallpaper-group lookups per pixel is borderline.
+			# Drop to 256×256 for preview — still reads as the pattern.
+			cfg["canvas_size"] = mini(int(cfg.get("canvas_size", 512)), 256)
+		"lsystem":
+			# Iterations above 4 produce huge strings. Cap at 4 for preview.
+			cfg["iterations"] = mini(int(cfg.get("iterations", 4)), 4)
+	return cfg
+
+
+# Counts draw calls for a built artifact: each MeshInstance3D = 1 call;
+# each MultiMeshInstance3D = 1 call regardless of how many instances.
+func _count_draw_calls(node: Node3D) -> int:
+	var count := 0
+	var stack: Array = [node]
+	while not stack.is_empty():
+		var n = stack.pop_back()
+		if n is MeshInstance3D or n is MultiMeshInstance3D:
+			count += 1
+		for c in n.get_children():
+			if c is Node3D: stack.append(c)
+	return count
 
 
 # ─── Helpers ──────────────────────────────────────────────────
