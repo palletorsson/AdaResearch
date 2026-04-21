@@ -179,6 +179,11 @@ func _build_sim(cfg: Dictionary):
 			# DNA bridge: Gray-Scott RD → spring-mass cloth.
 			# Above-threshold cells become particles; 4-neighbors become springs.
 			sim = _build_rd_sim(cfg, stiffness, origin)
+		"glass_blow":
+			# FROZEN PROCESSED FORM — sphere under gravity + top pin + optional
+			# pre-inflation. After N settle steps, the frozen pose IS the vessel.
+			# The bottle shape is the record of gravity × stiffness × duration.
+			sim = _build_glass_blow_sim(cfg, stiffness, origin)
 		_:
 			return null
 	if sim == null: return null
@@ -371,3 +376,72 @@ func _combined_aabb(node: Node3D) -> AABB:
 	if first:
 		return AABB(Vector3(-1, 0, -1), Vector3(2, 2, 2))
 	return total
+
+
+## FROZEN PROCESSED FORM — glass-vessel blowing.
+##
+## Build a sphere mesh, pin a ring of top vertices (the blowpipe attachment),
+## optionally pre-inflate (simulate internal pressure by pushing verts outward
+## from centroid), then let gravity + spring tension settle for N steps. The
+## frozen pose is the vessel — a drooping bulb, a hanging drop, a sagging
+## bottle. Different stiffness × gravity × duration = different vessel.
+func _build_glass_blow_sim(cfg: Dictionary, stiffness: float, origin: Vector3):
+	var radius: float = float(cfg.get("radius", 0.5))
+	var rings: int = int(cfg.get("rings", 12))
+	var segments: int = int(cfg.get("segments", 20))
+	# Which fraction of the top rings to pin (the blowpipe attachment):
+	var pin_top_fraction: float = float(cfg.get("pin_top_fraction", 0.15))
+	# Pre-inflation: push all non-pinned verts outward by this factor BEFORE sim.
+	# Simulates an initial pressure pulse.
+	var preinflate: float = float(cfg.get("preinflate", 0.3))
+
+	# Build sphere vertices (ring-and-segment parameterization).
+	var verts := PackedVector3Array()
+	var ring_ys: PackedFloat32Array = PackedFloat32Array()
+	ring_ys.resize(rings + 1)
+	for i in rings + 1:
+		var phi: float = PI * float(i) / float(rings)   # 0 at top pole → PI at bottom
+		ring_ys[i] = cos(phi) * radius
+		var r_ring: float = sin(phi) * radius
+		for j in segments:
+			var theta: float = TAU * float(j) / float(segments)
+			verts.append(Vector3(r_ring * cos(theta), ring_ys[i], r_ring * sin(theta)))
+
+	var sim = SoftBodySimScript.new()
+	sim.topology = "generic"
+	sim.stiffness = stiffness
+
+	# Pin: any vertex whose y is above (1 - pin_top_fraction) of the radius
+	var pin_y: float = radius * (1.0 - pin_top_fraction * 2.0)
+	for i in verts.size():
+		var v: Vector3 = verts[i]
+		# Pre-inflate non-pinned verts outward from centroid (which is origin of sphere).
+		var pinned: bool = v.y > pin_y
+		if not pinned and preinflate > 0.0:
+			var dir: Vector3 = v
+			if dir.length() > 1e-6:
+				v = dir * (1.0 + preinflate)
+		sim.add_particle(v + origin, pinned)
+
+	# Springs: for each quad of the sphere grid, add 4 edges + 1 diagonal for shear.
+	var stride: int = segments
+	for i in rings:
+		for j in segments:
+			var jn: int = (j + 1) % segments
+			var a: int = i * stride + j
+			var b: int = i * stride + jn
+			var c: int = (i + 1) * stride + j
+			var d: int = (i + 1) * stride + jn
+			sim.add_spring(a, b)
+			sim.add_spring(a, c)
+			sim.add_spring(a, d)   # diagonal shear
+	# Close the bottom ring by connecting ring_n segments horizontally:
+	var bot_ring_start: int = rings * stride
+	for j in segments:
+		var jn: int = (j + 1) % segments
+		sim.add_spring(bot_ring_start + j, bot_ring_start + jn)
+
+	print("render_soft_body: glass_blow -> %d particles (pinned top ring), %d springs, preinflate=%.2f" % [
+		verts.size(), sim.springs.size(), preinflate
+	])
+	return sim

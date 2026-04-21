@@ -638,6 +638,226 @@
       },
       "layout": "rd_bridge",
       "notes": "DNA BRIDGE: Gray-Scott stripes pattern \u2192 soft-body flag. Brain-ridge cloth pinned top-row, side wind. The Turing pattern as a waving banner."
+    },
+    {
+      "id": "gl01_classic_bulb",
+      "topology": "glass_blow",
+      "radius": 0.5,
+      "rings": 14,
+      "segments": 22,
+      "pin_top_fraction": 0.12,
+      "preinflate": 0.2,
+      "stiffness": 0.6,
+      "damping": 0.995,
+      "gravity": [
+        0,
+        -9.8,
+        0
+      ],
+      "floor_y": -3.5,
+      "constraint_passes": 5,
+      "steps": 200,
+      "origin": [
+        0,
+        1.5,
+        0
+      ],
+      "camera_yaw": 0.35,
+      "camera_pitch": 0.12,
+      "render": {
+        "color": [
+          0.7,
+          0.8,
+          0.85
+        ],
+        "roughness": 0.35,
+        "particle_radius": 0.02,
+        "show_wires": true,
+        "wire_color": [
+          0.2,
+          0.25,
+          0.3
+        ],
+        "double_sided": true
+      },
+      "layout": "frozen_form",
+      "notes": "Classic glass bulb \u2014 sphere with small top-pin ring, moderate pressure, 200 settle steps under gravity. Settles into a drooping bulb that tapers toward the pin. The whole vessel is a record of pressure \u00d7 gravity \u00d7 duration."
+    },
+    {
+      "id": "gl02_long_bottle",
+      "topology": "glass_blow",
+      "radius": 0.45,
+      "rings": 16,
+      "segments": 24,
+      "pin_top_fraction": 0.08,
+      "preinflate": 0.08,
+      "stiffness": 0.4,
+      "damping": 0.992,
+      "gravity": [
+        0,
+        -12.0,
+        0
+      ],
+      "floor_y": -4.0,
+      "constraint_passes": 4,
+      "steps": 380,
+      "origin": [
+        0,
+        2.0,
+        0
+      ],
+      "camera_yaw": 0.35,
+      "camera_pitch": 0.1,
+      "render": {
+        "color": [
+          0.55,
+          0.72,
+          0.65
+        ],
+        "roughness": 0.4,
+        "particle_radius": 0.018,
+        "show_wires": true,
+        "wire_color": [
+          0.15,
+          0.25,
+          0.22
+        ],
+        "double_sided": true
+      },
+      "layout": "frozen_form",
+      "notes": "Long drooping bottle. Smaller top pin, low stiffness, stronger gravity, 380 steps. Lets the vessel stretch vertically \u2014 the longer the simulation runs, the longer the neck becomes. Frozen at the moment chosen by steps param."
+    },
+    {
+      "id": "gl03_wide_bowl",
+      "topology": "glass_blow",
+      "radius": 0.55,
+      "rings": 12,
+      "segments": 24,
+      "pin_top_fraction": 0.28,
+      "preinflate": 0.4,
+      "stiffness": 0.75,
+      "damping": 0.996,
+      "gravity": [
+        0,
+        -6.0,
+        0
+      ],
+      "floor_y": -3.0,
+      "constraint_passes": 6,
+      "steps": 120,
+      "origin": [
+        0,
+        1.2,
+        0
+      ],
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.35,
+      "render": {
+        "color": [
+          0.88,
+          0.68,
+          0.45
+        ],
+        "roughness": 0.45,
+        "particle_radius": 0.022,
+        "show_wires": true,
+        "wire_color": [
+          0.3,
+          0.2,
+          0.15
+        ],
+        "double_sided": true
+      },
+      "layout": "frozen_form",
+      "notes": "Wide bowl. Large top pin ring (28% of top), high preinflate (+40%), strong stiffness, weak gravity. Settles into a shallow squat vessel \u2014 pressure dominates, gravity mild. Different force balance \u2192 different vessel."
+    },
+    {
+      "id": "gl04_lopsided_vase",
+      "topology": "glass_blow",
+      "radius": 0.5,
+      "rings": 14,
+      "segments": 22,
+      "pin_top_fraction": 0.12,
+      "preinflate": 0.2,
+      "stiffness": 0.5,
+      "damping": 0.994,
+      "gravity": [
+        1.2,
+        -9.0,
+        0.3
+      ],
+      "floor_y": -3.5,
+      "constraint_passes": 5,
+      "steps": 260,
+      "origin": [
+        0,
+        1.5,
+        0
+      ],
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.12,
+      "render": {
+        "color": [
+          0.85,
+          0.45,
+          0.5
+        ],
+        "roughness": 0.4,
+        "particle_radius": 0.02,
+        "show_wires": true,
+        "wire_color": [
+          0.3,
+          0.15,
+          0.2
+        ],
+        "double_sided": true
+      },
+      "layout": "frozen_form",
+      "notes": "Lopsided vase. Non-axial gravity (sideways + down) causes the vessel to droop off-center \u2014 reads like a handcrafted organic piece that slumped to one side while cooling. Gravity direction as design parameter."
+    },
+    {
+      "id": "gl05_collapsed_sag",
+      "topology": "glass_blow",
+      "radius": 0.5,
+      "rings": 14,
+      "segments": 22,
+      "pin_top_fraction": 0.1,
+      "preinflate": 0.0,
+      "stiffness": 0.22,
+      "damping": 0.99,
+      "gravity": [
+        0,
+        -15.0,
+        0
+      ],
+      "floor_y": -3.5,
+      "constraint_passes": 4,
+      "steps": 500,
+      "origin": [
+        0,
+        2.0,
+        0
+      ],
+      "camera_yaw": 0.35,
+      "camera_pitch": 0.12,
+      "render": {
+        "color": [
+          0.65,
+          0.55,
+          0.4
+        ],
+        "roughness": 0.55,
+        "particle_radius": 0.018,
+        "show_wires": true,
+        "wire_color": [
+          0.2,
+          0.15,
+          0.1
+        ],
+        "double_sided": true
+      },
+      "layout": "frozen_form",
+      "notes": "Over-cooked collapse. Very low stiffness, no pre-inflation, strong gravity, 500 steps. Vessel fails \u2014 stretches into a long teardrop hanging from the pin. Reads as 'left too long in the kiln.' Documents what breaks the vessel pattern."
     }
   ]
 }

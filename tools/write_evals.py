@@ -374,6 +374,12 @@ GRAPH_LSYSTEM_BRIDGE_EVALS = {
 SB_RD_BRIDGE_EVALS = {
     "sb_rd01_coral_cloth":  E(3, "working", "DNA BRIDGE: Gray-Scott coral → soft-body cloth. Coral cells become particles pinned at top corners. Hangs as a tattered coral-lace banner.", ["longer steps for full settle", "bigger particle_radius for visibility"]),
     "sb_rd02_stripes_flag": E(2, "broken", "DNA BRIDGE: Gray-Scott stripes → soft-body flag. Flag pinned top-row, side wind — but rendered near-empty. Camera AABB missed the fluttering banner.", ["lower stiffness", "reduce wind strength", "fix AABB to use sim.positions post-sim"]),
+    # FROZEN PROCESSED FORM — glass vessel
+    "gl01_classic_bulb":   E(5, "crown_jewel", "Drooping amphora teardrop. Sphere under gravity + small top pin + moderate pressure + 200 steps = a fully-formed vessel that no one designed. Wireframe visible, silhouette reads unmistakably as hand-blown glass. The canonical frozen-processed-form artifact."),
+    "gl02_long_bottle":    E(5, "crown_jewel", "Elongated olive-green bottle pod. Low stiffness + stronger gravity + 380 steps = vertical stretch. The longer you simulate, the longer the neck. Duration as design parameter made literal."),
+    "gl03_wide_bowl":      E(4, "winner",      "Rounded orange urn/egg. Wide top-pin ring (28%) + high pre-inflation + weak gravity = pressure dominates, gravity mild. Shows that force balance determines vessel proportions."),
+    "gl04_lopsided_vase":  E(5, "crown_jewel", "Magenta vessel slumped off-axis. Non-axial gravity (sideways + down) produces a lopsided hand-crafted look — as if the glass sagged sideways while cooling. Gravity direction as aesthetic choice."),
+    "gl05_collapsed_sag":  E(4, "winner",      "Over-cooked tall brown collapse. Very low stiffness + strong gravity + 500 steps = vessel fails into a long teardrop. Documents what breaks the vessel pattern; the failure state is itself a legible form."),
 }
 
 PS_RD_BRIDGE_EVALS = {
