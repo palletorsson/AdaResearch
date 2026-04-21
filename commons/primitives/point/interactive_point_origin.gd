@@ -13,6 +13,20 @@ extends XRToolsPickable
 
 ## Interactive point that shows position and draws line to origin when held
 
+
+# Spine-corridor contract — see doc/SPINE_HINTS_CONTRACT.md
+func spine_hints() -> Dictionary:
+	return {
+		"role":         "primary",
+		"footprint":    Vector2i(2, 2),
+		"approach":     "south",
+		"reading_dist": 2.0,
+		"height":       1.0,
+		"budget_ms":    1.2,
+		"tags":         ["vector", "interactive", "grouped"],
+	}
+
+
 # Visual feedback
 @export var glow_color: Color = Color(1.0, 0.6, 1.0)
 @export var glow_emission_energy: float = 2.0

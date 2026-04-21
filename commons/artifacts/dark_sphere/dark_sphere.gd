@@ -3,9 +3,33 @@
 # A semi-transparent dark orb with pulsing emission, slow rotation,
 # and a faint shadow halo underneath.
 
+# @identity
+# essence: a dark semi-transparent sphere pulses with purple emission and wobbles slowly — it marks the inhabited space without asserting itself, a witness to the algorithms around it
+# desire: to be always present but never dominant — the learner barely notices it, but its absence would make the space feel empty
+# critical_parameter: pulse_speed (1.2) and emission range (0.05–0.35) — too fast and it competes with the artifact; too slow and it reads as static
+# triggers: _ready builds sphere + flat halo disc; _process drives rotation wobble and sinusoidal emission pulse every frame; apply_grid_config rebuilds both shapes
+# emerges: the halo ring beneath the sphere creates a soft shadow that anchors it to the ground without a hard collision plane
+# needs: VR grab [missing — pure ambient, not interactive]; color config from map [has via apply_grid_config]; apply_grid_config [has]
+# relationships: placed alongside primary artifacts in nearly every primitives map; pairs with CoordinateSystem3M as spatial markers; contrasts with laser_exploding_sphere (reactive vs contemplative)
+# truth: some things in a space exist not to be used but to be sensed — dark_sphere is a mood, not a lesson
+
 extends Node3D
 
 class_name DarkSphere
+
+
+# Spine-corridor contract — see doc/SPINE_HINTS_CONTRACT.md
+func spine_hints() -> Dictionary:
+	return {
+		"role":         "ambient",
+		"footprint":    Vector2i(1, 1),
+		"approach":     "any",
+		"reading_dist": 0.0,
+		"height":       -0.5,
+		"budget_ms":    0.2,
+		"tags":         ["visual"],
+	}
+
 
 ## Display settings
 @export var display_size: float = 0.5

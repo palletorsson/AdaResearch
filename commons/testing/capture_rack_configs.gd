@@ -69,7 +69,7 @@ func _setup_viewport():
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	env.ambient_light_color = Color(0.4, 0.4, 0.5)
 	env.ambient_light_energy = 2.0
-	env.tonemap_mode = Environment.TONE_MAP_FILMIC
+	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	var world_env = WorldEnvironment.new()
 	world_env.environment = env
 	_viewport.add_child(world_env)

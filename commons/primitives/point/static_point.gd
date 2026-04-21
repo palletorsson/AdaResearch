@@ -12,6 +12,20 @@ extends Node3D
 # relationships: prerequisite for line; contrasts with interactive_point_origin (grabbable version)
 # truth: position exists independently of any object occupying it
 
+
+# Spine-corridor contract — see doc/SPINE_HINTS_CONTRACT.md
+func spine_hints() -> Dictionary:
+	return {
+		"role":         "supporting",
+		"footprint":    Vector2i(1, 1),
+		"approach":     "any",
+		"reading_dist": 1.5,
+		"height":       1.0,
+		"budget_ms":    0.3,
+		"tags":         ["vector", "static", "isolated"],
+	}
+
+
 @export var point_color: Color = Color(0.0, 1.0, 1.0, 1.0)  # Cyan default
 @export var point_radius: float = 0.04
 @export var show_label: bool = true

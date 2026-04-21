@@ -16,8 +16,34 @@
 ##   highlight      - Highlight color as "r,g,b" (0–1 floats)
 ##   border         - Border color as "r,g,b"
 ##   bg             - Background color as "r,g,b"
+
+# @identity
+# essence: a SubViewport renders the grid-state of nearby artifacts as a 2D pixel-map on a large wall-mounted screen — you stand in the 3D world and see its cellular logic flattened beside you
+# desire: to make the abstract legible without leaving the embodied — the learner walks the algorithm and simultaneously reads it; the gap between 3D experience and 2D representation IS the research question made visible
+# critical_parameter: scan_radius (8.0m) — determines which artifacts the screen can detect and mirror; too small and it misses wall-placed artifacts, too large and it picks up unrelated neighbors
+# triggers: periodic scan_interval timer scans for nearby artifacts with get_grid_data(); _draw_grid() on SubViewport renders colored cells; point_mode activates when a pickable point is grabbed nearby
+# emerges: point_mode transforms the screen into a live coordinate tracker — it shows the trajectory of a grabbed point in relative space, turning a simple grab into a navigation display
+# needs: VR interaction for changing scan_radius [missing]; multi-artifact switching [missing — always shows nearest]; apply_grid_config [has]
+# relationships: placed next to primary teaching artifacts in primitives/color/array maps; pairs with player_trace (records path) and interactive_point_origin (shows position); depends on artifacts implementing get_grid_data()
+# truth: the map is not the territory — science_screen shows a flattened version of the algorithm you are already inside, and the difference between the two is where understanding lives
+
 extends Node3D
 class_name ScienceScreen
+
+
+# Spine-corridor contract — see doc/SPINE_HINTS_CONTRACT.md
+func spine_hints() -> Dictionary:
+	return {
+		"role":         "reflection",
+		"footprint":    Vector2i(2, 1),
+		"approach":     "south",
+		"reading_dist": 1.0,
+		"height":       2.0,
+		"rotation_y":   180,   # face south so player reads while walking north
+		"budget_ms":    0.4,
+		"tags":         ["label", "static"],
+	}
+
 
 ## Physical dimensions
 @export var screen_width: float = 3.0

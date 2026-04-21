@@ -24,6 +24,21 @@
 extends Node3D
 class_name LibraryRack
 
+
+# Spine-corridor contract — the library rack instantiates an entire artifact
+# registry as children (default 6x4 = 24 scenes), each a full artifact scene
+# with its own init cost. ~14m tall, hundreds of nodes. Never fits a corridor.
+func spine_hints() -> Dictionary:
+	return {
+		"role":         "primary",
+		"footprint":    Vector2i(3, 4),
+		"approach":     "south",
+		"reading_dist": 2.0,
+		"budget_ms":    8.0,
+		"tags":         ["oversized", "corridor_incompatible", "gallery"],
+	}
+
+
 @export var columns: int = 6
 @export var rows: int = 4
 @export var cube_size: float = 1.0

@@ -1,0 +1,96 @@
+{
+  "_doc": "Per-sequence style contracts for the spine corridor generator. Each sequence declares a structure recipe (from tools/structure_recipes.py), optional recipe params, lighting preset, ambient color, and biome density. The generator consumes this alongside the sequence's artifact list to build each map's corridor.",
+  "version": 1,
+
+  "corridor_blacklist": [
+    "_doc: Tokens that are always skipped in corridor mode, regardless of spine_hints().",
+    "_doc: Use this for artifacts without a root GDScript or ones that spawn entire galleries.",
+    "library_rack",
+    "durer_scene",
+    "diamondtoruscollection",
+    "combine_portals",
+    "combine_capsule",
+    "pyramid_edit",
+    "snap_pyramid_puzzle",
+    "rhizomatic_maze_space",
+    "gyroid_cheese_vr",
+    "entropy_morphogenesis_vr",
+    "non_euclidean_space_demo",
+    "terrain_demo"
+  ],
+
+  "defaults": {
+    "structure_recipe": "flat_corridor",
+    "structure_params": {},
+    "lighting_preset":  "neutral",
+    "ambient_color":    [0.55, 0.58, 0.66],
+    "biome_density":    0.0,
+    "fog_density":      0.0
+  },
+
+  "sequences": {
+    "primitives": {
+      "structure_recipe": "flat_corridor",
+      "lighting_preset":  "lab_sterile",
+      "ambient_color":    [0.68, 0.70, 0.74],
+      "biome_density":    0.0,
+      "fog_density":      0.01,
+      "per_map_overrides": {
+        "Chamber_Primitives": {
+          "structure_recipe": "amphitheater",
+          "structure_params": {"center_row": 9, "radius": 3.0, "depth": 1}
+        },
+        "Primitives_Melencolia": {
+          "structure_recipe": "split_level",
+          "structure_params": {"split_row": 10, "upper_height": 2}
+        },
+        "Primitives_Portals": {
+          "structure_recipe": "island_chain",
+          "structure_params": {"count": 4, "island_size": 3}
+        }
+      }
+    },
+
+    "transformation": {
+      "structure_recipe": "split_level",
+      "structure_params": {"split_row": 8, "upper_height": 2},
+      "lighting_preset":  "lab_neutral",
+      "ambient_color":    [0.60, 0.62, 0.70],
+      "biome_density":    0.0
+    },
+
+    "cellularautomata": {
+      "structure_recipe": "platform_over_pit",
+      "structure_params": {"pit_center_row": 9, "pit_size": 4, "pit_cols": [2, 3, 4, 5]},
+      "lighting_preset":  "lab_blueprint",
+      "ambient_color":    [0.50, 0.58, 0.72],
+      "biome_density":    0.0
+    },
+
+    "lsystems": {
+      "structure_recipe": "flat_corridor",
+      "lighting_preset":  "garden",
+      "ambient_color":    [0.55, 0.72, 0.50],
+      "biome_density":    0.5,
+      "fog_density":      0.02
+    },
+
+    "softbodies": {
+      "structure_recipe": "amphitheater",
+      "structure_params": {"center_row": 8, "radius": 3.5, "depth": 1},
+      "lighting_preset":  "wet_light",
+      "ambient_color":    [0.60, 0.68, 0.72],
+      "biome_density":    0.2,
+      "fog_density":      0.03
+    },
+
+    "qfeplaboratory": {
+      "structure_recipe": "narrow_corridor",
+      "structure_params": {"width": 4},
+      "lighting_preset":  "entropy_soup",
+      "ambient_color":    [0.72, 0.55, 0.45],
+      "biome_density":    0.8,
+      "fog_density":      0.05
+    }
+  }
+}

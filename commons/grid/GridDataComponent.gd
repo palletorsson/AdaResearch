@@ -10,6 +10,9 @@ const MAPS_PATH = "res://commons/maps/"
 
 # Configuration
 @export var prefer_json_format: bool = true
+# When true, and a sibling map_data.corridor.json exists, load THAT instead.
+# Used by SpineRunner to consume procedurally-generated 16x8 layouts.
+@export var prefer_corridor_variant: bool = false
 
 # Loaded data
 var json_loader: JsonMapLoader
@@ -67,6 +70,16 @@ func _load_json_map() -> bool:
 		json_path = MAPS_PATH + map_name + "/map_data.json"
 		print("🔍 DEBUG: Regular map")
 		print("🔍 DEBUG: json_path = '%s'" % json_path)
+
+	# Spine-runner corridor variant: prefer map_data.corridor.json when present
+	# and prefer_corridor_variant is set. Falls back silently if not generated yet.
+	if prefer_corridor_variant and not map_name.begins_with("Lab"):
+		var corridor_path = MAPS_PATH + map_name + "/map_data.corridor.json"
+		if FileAccess.file_exists(corridor_path):
+			print("GridDataComponent: loading CORRIDOR variant: %s" % corridor_path)
+			json_path = corridor_path
+		else:
+			print("GridDataComponent: corridor variant not found, using base map_data.json")
 	
 	print("🔍 DEBUG: Final json_path = '%s'" % json_path)
 	print("🔍 DEBUG: File exists check: %s" % FileAccess.file_exists(json_path))

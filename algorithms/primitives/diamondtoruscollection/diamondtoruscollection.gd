@@ -2,6 +2,21 @@
 @tool
 extends Node3D
 
+
+# Spine-corridor contract — auto-ground logged a 1.25m shift, indicating
+# vertical extent larger than a cell. Hanging diamonds + torus ring in all
+# directions. Skip in corridor mode.
+func spine_hints() -> Dictionary:
+	return {
+		"role":         "primary",
+		"footprint":    Vector2i(2, 2),
+		"approach":     "any",
+		"reading_dist": 1.5,
+		"budget_ms":    2.0,
+		"tags":         ["oversized", "corridor_incompatible"],
+	}
+
+
 # @identity
 # essence: diamonds[i].position = (cos(2πi/n)*r, -cylinder_length, sin(2πi/n)*r) — radial distribution on a torus
 # desire: learner feels the torus as a path — walking around it reveals equally-spaced hanging elements

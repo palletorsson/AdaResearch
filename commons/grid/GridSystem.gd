@@ -21,6 +21,8 @@ const FloorPlanLoader = preload("res://commons/grid/FloorPlanLoader.gd")
 @export var cube_size: float = 1.0
 @export var gutter: float = 0.0
 @export var map_name: String = "Tutorial_Start"
+# Spine-corridor mode: when set, prefer map_data.corridor.json over map_data.json
+@export var prefer_corridor_variant: bool = false
 @export var reload_map: bool = false : set = reload_map_setter
 @export var auto_load_map_on_ready: bool = true
 @export var cache_artifact_registry_between_maps: bool = true
@@ -141,6 +143,7 @@ func _initialize_components():
 	# Create and add components as children
 	data_component = DataComponentScript.new()
 	data_component.name = "GridDataComponent"
+	data_component.prefer_corridor_variant = prefer_corridor_variant
 	add_child(data_component)
 
 	structure_component = StructureComponentScript.new()
@@ -645,6 +648,20 @@ func _handle_biome_ring():
 	var density: float = eco.get_vegetation_density()
 	var kingdoms = eco.get_allowed_kingdoms() if eco.has_method("get_allowed_kingdoms") else []
 	print("GridSystem: Biome check — map='%s' density_before=%.2f density_after=%.2f kingdoms=%s" % [map_name, density_before, density, str(kingdoms)])
+	# Accrual stack runs regardless of density — the old density gate is
+	# a property of BiomeRingComponent, not the curriculum. Abstract layers
+	# (floating_primitives) must render even at density 0.
+	var accrual_early = get_node_or_null("/root/BiomeAccrualManager")
+	if accrual_early and accrual_early.has_method("apply"):
+		var dims_early: Vector3i = data_component.get_grid_dimensions()
+		accrual_early.apply(self, {
+			"grid_dims": dims_early,
+			"grid_center": Vector3(float(dims_early.x) * cube_size * 0.5, 0.0, float(dims_early.z) * cube_size * 0.5),
+			"cube_size": cube_size,
+			"rng_seed": hash(map_name),
+			"map_name": map_name,
+		})
+
 	if density < 0.05:
 		print("GridSystem: Density too low (%.2f < 0.05) — no biome ring" % density)
 		return  # No ring for barren maps
@@ -668,38 +685,15 @@ func _handle_biome_ring():
 
 
 ## Advance EcosystemManager to the sequence that owns the current map.
-## This ensures biome density/kingdoms match the map's position in the curriculum.
+## Uses EcosystemManager's cached map→sequence index (built once at boot).
 func _sync_ecosystem_to_current_map(eco) -> void:
+	if eco.has_method("sync_to_map"):
+		if eco.sync_to_map(map_name):
+			print("GridSystem: Ecosystem synced to '%s' for map '%s'" % [eco.get_sequence_for_map(map_name), map_name])
+		return
+	# Fallback for older EcosystemManager without cached index
 	if not eco.has_method("force_advance_to"):
 		return
-	# Scan sequence files to find which sequence owns this map
-	var seq_dir := DirAccess.open("res://commons/maps/sequences/")
-	if not seq_dir:
-		return
-	seq_dir.list_dir_begin()
-	var fname := seq_dir.get_next()
-	while fname != "":
-		if fname.ends_with(".json"):
-			var sf := FileAccess.open("res://commons/maps/sequences/" + fname, FileAccess.READ)
-			if sf:
-				var sj := JSON.new()
-				if sj.parse(sf.get_as_text()) == OK and sj.data is Dictionary:
-					var seqs_raw = sj.data.get("sequences", {})
-					if seqs_raw is Dictionary:
-						for seq_name in seqs_raw:
-							var seq_data = seqs_raw[seq_name]
-							if not seq_data is Dictionary:
-								continue
-							var maps: Array = seq_data.get("maps", [])
-							for m in maps:
-								var mn: String = str(m.get("name", m)) if m is Dictionary else str(m)
-								if mn == map_name:
-									eco.force_advance_to(str(seq_name))
-									print("GridSystem: Ecosystem synced to '%s' for map '%s'" % [seq_name, map_name])
-									sf.close()
-									return
-				sf.close()
-		fname = seq_dir.get_next()
 
 
 ## Notify NatureRenderer of per-map environment overrides + trigger living ground.
@@ -777,8 +771,10 @@ func _handle_teleporter_activation(position: Vector3, data: Dictionary):
 		elif destination.is_empty():
 			action = "next"
 			print("GridSystem: ⚠️ No action specified, using 'next' action as fallback")
-		# Check if destination is a sequence name
-		elif destination in ["primitives", "tests", "array_tutorial", "meshestextures", "randomness", "wavefunctions", "noise", "forces", "proceduralaudio", "physicssimulation", "softbodies", "recursiveemergence", "lsystems", "swarmintelligence", "patterngeneration", "mosaicanalysis", "proceduralgeneration", "searchpathfinding", "graphtheory", "computationalgeometry", "machinelearning", "criticalalgorithms", "speculativecomputation", "resourcemanagement", "advancedlaboratory", "qfeplaboratory", "grammar_systems", "spatial_partitioning", "constraint_solvers", "isosurfaces", "higher_dimensions", "morphogenesis"]:
+		# Check if destination is a sequence name — dynamically via
+		# MapProgressionManager so new sequences (atlas, etc.) work without
+		# editing this list. Falls back to hardcoded list if MPM unavailable.
+		elif _is_known_sequence(destination):
 			action = "start_sequence"
 			sequence = destination
 			destination = ""
@@ -816,6 +812,33 @@ func _handle_teleporter_activation(position: Vector3, data: Dictionary):
 		print("GridSystem: ❌ WARNING - No SceneManager found for teleporter transition")
 		print("GridSystem: 🔍 Available autoloads:")
 		_debug_print_autoloads()
+
+## Is `name` a registered sequence? Asks MapProgressionManager first (which
+## auto-loads every sequences/*.json at boot, so new sequences like atlas
+## just work). Falls back to a static list for safety when MPM isn't ready.
+func _is_known_sequence(name: String) -> bool:
+	var mpm = get_node_or_null("/root/MapProgressionManager")
+	if mpm and mpm.has_method("has_sequence"):
+		return mpm.has_sequence(name)
+	if mpm and "sequences" in mpm:
+		var seqs = mpm.get("sequences")
+		if seqs is Dictionary:
+			return seqs.has(name)
+	# Fallback — the pre-existing hardcoded list plus new sequences
+	return name in [
+		"primitives", "tests", "array_tutorial", "meshestextures", "randomness",
+		"wavefunctions", "noise", "forces", "proceduralaudio", "physicssimulation",
+		"softbodies", "recursiveemergence", "lsystems", "swarmintelligence",
+		"patterngeneration", "mosaicanalysis", "proceduralgeneration",
+		"searchpathfinding", "graphtheory", "computationalgeometry",
+		"machinelearning", "criticalalgorithms", "speculativecomputation",
+		"resourcemanagement", "advancedlaboratory", "qfeplaboratory",
+		"grammar_systems", "spatial_partitioning", "constraint_solvers",
+		"isosurfaces", "higher_dimensions", "morphogenesis",
+		# Newer cross-cutting sequences — keep in sync with sequences/*.json
+		"atlas",
+	]
+
 
 # Find SceneManager (check autoloads first, then scene tree)
 func _find_scene_manager():

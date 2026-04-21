@@ -6,6 +6,16 @@
 		"theoretical_grounding": "Embodied instrumentation and interface literacy in AdaResearch lab environments"
 	},
 	"artifacts": {
+		"spine_portal": {
+			"lookup_name": "spine_portal",
+			"scene": "res://commons/artifacts/spine_portal/spine_portal.tscn",
+			"class_name": "SpinePortal",
+			"name": "Spine Corridor Portal",
+			"description": "Step into this pillar of light to enter the spine-runner corridor mode. Loads vr_spine_runner.tscn via VRStaging's standard scene transition.",
+			"category": "navigation",
+			"complexity": "advanced",
+			"tags": ["portal", "navigation", "spine", "corridor"]
+		},
 		"control_board": {
 			"lookup_name": "control_board",
 			"scene": "res://commons/artifacts/control_board/control_board.tscn",
