@@ -170,11 +170,20 @@ func _load_variant(substrate: String, config_id: String) -> void:
 		"soft_body":      node = _build_soft_body(cfg)
 		_:                _show_placeholder("%s · config only — see /dna" % substrate); return
 	if node == null:
-		_show_placeholder("build failed")
+		_show_placeholder("build failed: %s/%s" % [substrate, config_id])
+		print("DNAWorkstation: %s/%s returned null" % [substrate, config_id])
 		return
 	_current_artifact = node
-	_presentation_area.add_child(node)
+	# Always wrap the artifact in a container Node3D so _fit_artifact can
+	# translate without fighting per-builder transforms, and so _get_aabb
+	# can walk INTO the container to find VisualInstance3D children.
+	var container := Node3D.new()
+	container.name = "ArtifactContainer"
+	container.add_child(node)
+	_presentation_area.add_child(container)
+	_current_artifact = container
 	call_deferred("_fit_artifact")
+	print("DNAWorkstation: loaded %s/%s" % [substrate, config_id])
 
 
 func _find_config(substrate: String, config_id: String) -> Dictionary:
@@ -234,6 +243,10 @@ func _build_lsystem(cfg: Dictionary) -> Node3D:
 func _build_trajectory(cfg: Dictionary) -> Node3D:
 	var result: Dictionary = TrajSim.simulate(cfg)
 	var trails: Array = result["trajectories"]
+	var sample_total: int = 0
+	for t in trails: sample_total += (t as PackedVector3Array).size()
+	print("DNAWorkstation: Trajectory %s → %d trail(s), %d samples" % [
+		cfg.get("id", "?"), trails.size(), sample_total])
 	var root := Node3D.new()
 	var cs := _c(cfg.get("color_start", [0.2, 0.3, 0.5]))
 	var ce := _c(cfg.get("color_end",   [0.9, 0.55, 0.2]))
@@ -280,6 +293,9 @@ func _build_trajectory(cfg: Dictionary) -> Node3D:
 
 func _build_pattern(cfg: Dictionary) -> Node3D:
 	var img: Image = PatternSim.render_to_image(cfg)
+	print("DNAWorkstation: Pattern %s → image %s" % [
+		cfg.get("id", "?"),
+		"null" if img == null else str(img.get_size())])
 	if img == null: return null
 	var tex := ImageTexture.create_from_image(img)
 	var root := Node3D.new()
@@ -299,7 +315,10 @@ func _build_pattern(cfg: Dictionary) -> Node3D:
 
 func _build_rd(cfg: Dictionary) -> Node3D:
 	var N: int = int(cfg.get("grid_size", 96))
+	print("DNAWorkstation: RD %s → simulating %d×%d, %d iterations…" % [
+		cfg.get("id", "?"), N, N, int(cfg.get("iterations", 3000))])
 	var field: PackedFloat32Array = RDSim.simulate(cfg)
+	print("DNAWorkstation: RD %s → field length %d" % [cfg.get("id", "?"), field.size()])
 	var color_lo := _c(cfg.get("color_lo", [0.15, 0.2, 0.3]))
 	var color_hi := _c(cfg.get("color_hi", [0.9, 0.8, 0.5]))
 	var world_size: float = 1.5
@@ -342,7 +361,10 @@ func _build_rd(cfg: Dictionary) -> Node3D:
 
 
 func _build_primitive_stack(cfg: Dictionary) -> Node3D:
-	return PrimStack.build(cfg)
+	var n := PrimStack.build(cfg)
+	print("DNAWorkstation: PrimStack %s → %d children" % [
+		cfg.get("id", "?"), n.get_child_count() if n else -1])
+	return n
 
 
 func _build_soft_body(cfg: Dictionary) -> Node3D:
@@ -392,6 +414,9 @@ func _fit_artifact() -> void:
 
 
 func _get_aabb(node: Node3D) -> AABB:
+	# Recursive walk: any VisualInstance3D (MeshInstance3D, MultiMeshInstance3D)
+	# contributes its world-space AABB. Called after the node enters the tree
+	# so global_transform is valid.
 	var result := AABB()
 	var first := true
 	var stack: Array = [node]
@@ -399,11 +424,17 @@ func _get_aabb(node: Node3D) -> AABB:
 		var n = stack.pop_back()
 		if n is VisualInstance3D:
 			var vi := n as VisualInstance3D
-			var a: AABB = vi.global_transform * vi.get_aabb()
-			if first: result = a; first = false
-			else: result = result.merge(a)
+			var a_local: AABB = vi.get_aabb()
+			if a_local.size.length() > 1e-6:
+				var a: AABB = vi.global_transform * a_local
+				if first: result = a; first = false
+				else: result = result.merge(a)
 		for c in n.get_children():
 			if c is Node3D: stack.append(c)
+	if first:
+		# Fallback — no renderable children found. Return a 1m cube at origin
+		# so _fit_artifact has SOMETHING to work with rather than bailing out.
+		return AABB(Vector3(-0.5, 0, -0.5), Vector3(1, 1, 1))
 	return result
 
 
