@@ -30,7 +30,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 ENCYCLOPEDIA_DIR = REPO_ROOT.parent / "ada_encyclopedia"
 
-TODAY = "2026-04-20"
+TODAY = "2026-04-21"
 AUTHOR = "claude"
 
 
@@ -321,6 +321,7 @@ LSYSTEM_EVALS = {
     "ls01_algae":                    E(2, "broken",   "Lindenmayer's original algae (A->AB, B->A) — but primitive_shape=cube with step_len=0.05 and no rotations leaves the turtle in one spot. Renders empty.", ["use interpretation='text' or render string directly", "algae is a string-DNA pattern, not a spatial one"]),
     "ls02_koch_curve":               E(3, "working",  "Koch island curve from above — 90° angles produce the self-similar coastline. Camera pitch too extreme, shape floats in corner.", ["camera pitch 0.9 not 1.4", "more iterations for finer detail"]),
     "ls03_classic_tree":             E(5, "crown_jewel", "Lindenmayer's canonical plant F->F[+F]F[-F]F at 25.7°, rendered as brown-to-green tapered tubes. The textbook tree made visible. Perfect DNA demonstration."),
+    "ls03b_denser_angle":            E(4, "winner",   "Denser canopy at 22.5° (Prusinkiewicz value). Same F->F[+F]F[-F]F rule as ls03 but with a closer branching angle — reads as cypress vs pine."),
     "ls04_classic_tree_as_graph":    E(2, "broken",   "Same plant DNA with graph interpretation — nodes too tiny (radius 0.015) against large AABB, rendered near-invisible.", ["bigger node radius 0.04+", "or render in graph-grammar-gallery via seed:{lsystem:...}"]),
     "ls05_classic_tree_as_softbody": E(2, "broken",   "Same plant DNA as softbody — camera AABB uses pre-sim walk segments, not post-sim positions. Tree falls out of frame.", ["compute AABB from sim.positions post-step", "or use sb_ls01 in soft-body-gallery instead"]),
     "ls06_bush_stochastic":          E(4, "winner",   "Stochastic production — three alt rules at weighted probabilities. Same seed = same bush. Handsome tube-rendered plant."),
@@ -328,6 +329,27 @@ LSYSTEM_EVALS = {
     "ls08_hilbert_3d":               E(2, "broken",   "3D Hilbert curve — the turtle alphabet with 4 non-terminals (A/B/C/D) produces spike artifacts. Either rule is miscoded or turtle needs more operators.", ["audit Hilbert 3D rules character-by-character", "verify & ^ / \\ all dispatch correctly"]),
     "ls09_fractal_plant_3d":         E(5, "crown_jewel", "Dense fractal plant — two sub-branches per F at 22.5°. Lush cypress-like green crown. The gallery's prettiest tree."),
     "ls10_sympodial_tree_3d":        E(4, "winner",   "Prusinkiewicz sympodial branching — 3 branches per node with rolls between. Reads as a palm tree or agave.", ["slightly larger step_len for proportion"]),
+    "ls11_wiki_fractal_plant":       E(4, "winner",   "Canonical fractal plant from the L-system literature: F doubles into FF while X only steers branching. Nested bracket fans produce a delicate fern-like crown with visible recursive tiers.", ["try iteration 6 for denser foliage", "try graph interpretation to bridge this DNA into graph-grammar"]),
+    "ls12_koch_snowflake_classic":  E(4, "winner",   "Classic Koch snowflake at 60?. Triangular axiom plus F->F-F++F-F produces a crisp crystalline coastline.", ["try iteration 5 for finer lace", "try tubes to thicken the snowflake into a coral loop"]),
+    "ls13_dragon_cpfg_leftfold":    E(4, "winner",   "CPFG-style dragon curve using non-drawing L/R steering symbols. Tight paper-fold path with clear recursive elbows.", ["try mirrored axiom to compare handedness", "try a warmer palette to emphasize folding rhythm"]),
+    "ls14_levy_c_curve":            E(4, "strong",   "Levy C curve at 45?. Repeated +F--F+ replacement creates a dense lightning-fold ribbon.", ["try iteration 12 for fuller fill", "try graph interpretation for a node-edge reading"]),
+    "ls15_quadratic_island":        E(4, "strong",   "Quadratic island style curve with right-angle bays and nested inlets. Reads as a blocky shoreline or circuit trace.", ["try one extra iteration if framing holds", "try starting from a single segment for a less enclosed form"]),
+    "ls16_koch_square_dense":       E(3, "working",  "Dense right-angle Koch variant. Familiar square-wave DNA pushed one generation deeper into woven lattice territory.", ["compare against ls02 for density", "try a slightly larger step length if the frame feels too tight"]),
+    "ls17_binary_tree_grogra":      E(4, "winner",   "Simple binary tree from the classic X->F[+X][-X] family. Clean bifurcating scaffold with readable recursive tiers.", ["try graph interpretation for pruning experiments", "raise angle slightly for a broader crown"]),
+    "ls18_two_dimensional_plant_grogra": E(4, "winner", "Grogra's two-dimensional plant grammar. Alternating trunk continuation and side branches create a convincing botanical silhouette from very little DNA.", ["try one more iteration", "compare 20? versus 25? branching angle"]),
+    "ls19_cpfg_fan_plant":          E(4, "strong",   "Fan-like plant from the CPFG example family. The extra [F] branch fills the crown and makes the rule read less like a tree and more like a frond.", ["try greener tip gradient", "bridge this into mesh-grammar for leaf-pocket extrusion"]),
+    "ls20_cpfg_bushy_fx":           E(4, "winner",   "Bushy X-driven plant with repeated side branching and trunk continuation. Reads as a compact shrub rather than a single-stem tree.", ["increase iterations to 6 for saturation", "test stochastic alternatives on X for species variation"]),
+    "ls21_cpfg_weeping_plant":      E(5, "crown_jewel", "Nested-canopy plant from the well-known X->F-[[X]+X]+F[+FX]-X grammar. Delicate, fern-like tiers with clear recursive depth.", ["make a graph twin", "try a denser 6th iteration if framing stays readable"]),
+    "ls22_stochastic_balanced_seed13": E(4, "winner", "Balanced stochastic tree using equal-probability branching choices. One plausible specimen of the CPFG stochastic family.", ["render more seeds from the same grammar", "compare with ls23 to study specimen variance"]),
+    "ls23_stochastic_balanced_seed77": E(4, "winner", "Same stochastic grammar as ls22 with a different seed. The species identity holds while the local branching decisions change.", ["pick the stronger specimen for walkable promotion", "try graph conversion to inspect topology differences"]),
+    "ls24_stochastic_left_heavy":   E(4, "strong",   "Left-heavy stochastic plant. Probability mass shifted toward + branches produces a noticeable directional lean.", ["weaken the bias for subtler asymmetry", "pair with a mirrored right-heavy twin for pedagogy"]),
+    "ls25_stochastic_right_heavy":  E(4, "strong",   "Right-heavy stochastic plant. A good control image against ls24: same family, opposite directional bias.", ["compare both in a two-up gallery card", "try slightly lower angle for willow-like droop"]),
+    "ls26_stochastic_sparse_retention": E(3, "working", "Sparse stochastic plant with an identity option that leaves some segments unbranched. Opens negative space through the crown.", ["reduce the retention weight if it feels too bare", "try one extra iteration to re-densify while keeping gaps"]),
+    "ls27_tripod_crown_3d":         E(4, "winner",   "Three-way radial 3D crown using pitch plus repeated roll. Reads as a tripod sapling or chandelier skeleton.", ["try graph interpretation to inspect the radial topology", "increase angle slightly for a wider crown"]),
+    "ls28_candelabra_3d":           E(4, "strong",   "3D candelabra with branches distributed across pitch-up, pitch-down, and roll. Good evidence that the local frame is behaving volumetrically.", ["try a darker trunk material", "increase step length for a taller candelabrum"]),
+    "ls29_spiral_pine_3d":          E(4, "winner",   "Spiral conifer built from alternating roll-left and roll-right branches. The trunk continues while the crown wraps around it.", ["one more iteration for denser spiral", "try a colder evergreen palette"]),
+    "ls30_pitchfork_canopy_3d":     E(4, "strong",   "Mixed 3D/planar canopy combining pitched and yawed branches. Reads as a pragmatic test of hybrid crown construction.", ["increase pitch angle for more vertical spread", "compare against ls27 to isolate the effect of yaw branches"]),
+    "ls31_radial_quadbush_3d":      E(4, "winner",   "Four-way radial bush created by rolling the same pitched branch around the trunk. Symmetry reads clearly without collapsing to a flat silhouette.", ["try five-way radial spacing", "bridge this DNA into graph-grammar for chandelier conversion"]),
 }
 
 # Cross-gallery DNA bridges — L-system feeding into other substrates
@@ -402,6 +424,16 @@ RD_EVALS = {
     "rd06_coral_pillars":      E(5, "crown_jewel","Coral pattern rendered as beige polyp-pillar forest. 3D forest of thousands of stubs following the RD ridges. Most architectural RD render."),
     "rd07_stripes_plate":      E(4, "winner",     "High-res stripes rendered as a flat textured plate viewed top-down. Pure pattern — brain fingerprint as image, no geometry. The RD DNA at full resolution."),
     "rd08_chaos_heightmap":    E(3, "working",    "Chaotic (F, K) never equilibrates — 5000 iterations produces a perpetually-morphing ridge landscape. Parameters that don't settle."),
+    "rd09_delta_turing_plate": E(4, "strong",     "δ-class Turing-like negatons rendered top-down. Clear hex-lattice intent and a good demonstration that Gray-Scott can stabilize into grain-bounded cellular order."),
+    "rd10_theta_ring_heightmap": E(4, "strong",   "θ-class ring growth translated into terrain. Reads as a looping ridge network rather than simple stripes."),
+    "rd11_iota_negaton_plate": E(3, "working",    "ι-class molecule-like clustering. More diagrammatic than lush, but valuable because it shows the negaton regime rather than the usual positive ridges."),
+    "rd12_kappa_hedgerow_pillars": E(4, "strong", "κ-class hedgerow rendered as pillars. Architectural, hedge-maze reading comes through well in 3D."),
+    "rd13_lambda_hex_heightmap": E(5, "winner",   "λ-class mitosis field settling toward hex packing. One of the clearest demonstrations of self-replication becoming spatial order."),
+    "rd14_lambda_grain_plate": E(4, "strong",     "Second λ sample with denser grain boundaries. Useful as a side-by-side DNA variant of the same class."),
+    "rd15_mu_worm_heightmap":  E(4, "strong",     "μ-class worm lanes. Distinct from κ because the channels stay more separated and directional."),
+    "rd16_zeta_spots_pillars": E(4, "strong",     "ζ-class stable spots as a pillar meadow. Good bridge from spot biology to small architectural field conditions."),
+    "rd17_eta_spotworm_heightmap": E(4, "strong", "η-class mix of spots and short worms. Nicely occupies the in-between regime rather than collapsing to pure ridges or pure cells."),
+    "rd18_beta_void_plate":    E(3, "working",    "β-class void-ocean behavior. More turbulent than decorative, but important as a contrast case in the parameter map."),
 }
 
 # ─── Wallpaper patterns — 17 mathematical tilings ─────────────
@@ -452,6 +484,23 @@ FACADE_EVALS = {
     "villa_san_michele_exact":    E(3, "working",     "More literal Villa San Michele reconstruction. Same source, tighter fit."),
 }
 
+# ─── Trajectory (force → form) — 10th substrate ───────────────
+# The time axis used as a spatial axis. Circle becomes spiral, Lorenz
+# becomes butterfly, double pendulum becomes chaotic ribbon.
+
+TRAJECTORY_EVALS = {
+    "tr01_unit_circle_spiral":      E(5, "crown_jewel", "The canonical example. Unit circle (cos t, sin t) + constant rise → clean tubular helix, blue-to-tan gradient showing time progression. The question 'can we save the time domain in the spatial domain?' rendered directly."),
+    "tr02_lissajous_knot_3d":       E(5, "crown_jewel", "3D Lissajous with 3:2:5 frequency ratios — closed interlocking curve rendered as pink/purple tubes. Three orthogonal sine waves conspire into a knot. Signal-processing math as sculpture."),
+    "tr03_pendulum_extruded":       E(4, "winner",      "1D damped pendulum extruded along Z. Sine-like oscillation visibly decays along the time axis — damping made spatially legible."),
+    "tr04_double_pendulum_chaos":   E(3, "working",     "Double pendulum tip trajectory — tangled chaos. Camera frames it tight; the chaotic ribbon is there but reads as knotted mass rather than legible fractal. Needs bigger camera pull-back."),
+    "tr05_lorenz_butterfly":        E(5, "crown_jewel", "Lorenz attractor at canonical (σ=10, ρ=28, β=8/3). Two orbit wings visible, blue-pink gradient tracing time. The iconic strange-attractor butterfly made into a standalone sculptural object."),
+    "tr06_kepler_precessing_orbit": E(4, "winner",      "Keplerian orbit with precession — rosette pattern from top-down. Orbital mechanics + slow rotation → apsidal-precession flower."),
+    "tr07_magnetic_helix":          E(5, "crown_jewel", "Charged particle in uniform B-field along Y. Cyclotron motion + vertical velocity → gorgeous tapering tornado helix, tan-to-teal gradient. Reads as a literal tornado or slinky."),
+    "tr08_damped_spiral":           E(4, "winner",      "2D damped oscillator extruded along Z. Spirals inward as amplitude decays — the time axis makes the decay visible."),
+    "tr09_lissajous_fan":           E(3, "working",     "Fan of 12 parallel circular spirals with phase-spread π — tight stacked composition, reads as a woven ring. Camera too close."),
+    "tr10_lorenz_fan":              E(4, "winner",      "Six Lorenz attractors from initial conditions differing by 0.002. Chaos amplifies the gap — six butterflies diverge into distinct silhouettes. Sensitivity to initial conditions made spatial."),
+}
+
 SB_LSYSTEM_BRIDGE_EVALS = {
     "sb_ls01_plant_skeleton":       E(4, "winner", "DNA BRIDGE: L-system plant as spring-mass skeleton. Upper tree stands, lower portion collapsed to floor. Visible L-system branching structure with physics consequence."),
     "sb_ls02_plant_wind_collapse":  E(5, "crown_jewel", "DNA BRIDGE: Same L-system plant, low stiffness + diagonal wind + 140 steps. Tree bent sideways almost to ground. 'Fallen tree after storm' from pure DNA + force."),
@@ -498,10 +547,12 @@ def main() -> int:
     write_gallery_evals("rd-gallery",              RD_EVALS)
     write_gallery_evals("pattern-gallery",         PATTERN_EVALS)
     write_gallery_evals("facade-gallery",          FACADE_EVALS)
+    write_gallery_evals("trajectory-gallery",      TRAJECTORY_EVALS)
     total = (len(graph_full) + len(MESH_EVALS) + len(FORM_EVALS)
              + len(ps_full) + len(sb_full) + len(LSYSTEM_EVALS)
-             + len(RD_EVALS) + len(PATTERN_EVALS) + len(FACADE_EVALS))
-    print(f"Total: {total} evals across 9 galleries")
+             + len(RD_EVALS) + len(PATTERN_EVALS) + len(FACADE_EVALS)
+             + len(TRAJECTORY_EVALS))
+    print(f"Total: {total} evals across 10 galleries")
     return 0
 
 

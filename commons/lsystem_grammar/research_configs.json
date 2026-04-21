@@ -1,45 +1,70 @@
 {
   "version": 1,
-  "description": "L-system research — axiom + production rules + iterations + interpretation = DNA. The throughline is the connection: each L-system string can render via lines, tubes, graph, softbody, or primitive-placement. Same DNA, different substrate.",
+  "description": "L-system research \u2014 axiom + production rules + iterations + interpretation = DNA. The throughline is the connection: each L-system string can render via lines, tubes, graph, softbody, or primitive-placement. Same DNA, different substrate.",
   "configs": [
     {
       "id": "ls01_algae",
       "axiom": "A",
-      "rules": { "A": "AB", "B": "A" },
+      "rules": {
+        "A": "AB",
+        "B": "A"
+      },
       "iterations": 8,
       "angle_deg": 0,
       "step_len": 0.05,
       "interpretation": "primitives",
       "primitive_shape": "cube",
       "primitive_size": 0.03,
-      "color_trunk": [0.2, 0.4, 0.3],
-      "color_tip":   [0.6, 0.85, 0.4],
+      "color_trunk": [
+        0.2,
+        0.4,
+        0.3
+      ],
+      "color_tip": [
+        0.6,
+        0.85,
+        0.4
+      ],
       "camera_yaw": 0.0,
       "camera_pitch": 0.05,
       "layout": "linear",
-      "dna_connections": ["primitive_stack"],
-      "notes": "Lindenmayer's original algae model (1968). A -> AB, B -> A. Renders as a row of cubes — the linear DNA of cell division. Fibonacci length growth."
+      "dna_connections": [
+        "primitive_stack"
+      ],
+      "notes": "Lindenmayer's original algae model (1968). A -> AB, B -> A. Renders as a row of cubes \u2014 the linear DNA of cell division. Fibonacci length growth."
     },
     {
       "id": "ls02_koch_curve",
       "axiom": "F",
-      "rules": { "F": "F+F-F-F+F" },
+      "rules": {
+        "F": "F+F-F-F+F"
+      },
       "iterations": 4,
       "angle_deg": 90,
       "step_len": 0.04,
       "interpretation": "lines",
-      "color_trunk": [0.15, 0.2, 0.3],
-      "color_tip":   [0.4, 0.5, 0.7],
+      "color_trunk": [
+        0.15,
+        0.2,
+        0.3
+      ],
+      "color_tip": [
+        0.4,
+        0.5,
+        0.7
+      ],
       "camera_yaw": 0.001,
       "camera_pitch": 1.4,
       "layout": "fractal_curve",
       "dna_connections": [],
-      "notes": "Koch island curve — 90° angles, self-similar coastline. Rendered from above."
+      "notes": "Koch island curve \u2014 90\u00b0 angles, self-similar coastline. Rendered from above."
     },
     {
       "id": "ls03_classic_tree",
       "axiom": "F",
-      "rules": { "F": "F[+F]F[-F]F" },
+      "rules": {
+        "F": "F[+F]F[-F]F"
+      },
       "iterations": 4,
       "angle_deg": 25.7,
       "step_len": 0.08,
@@ -48,60 +73,139 @@
       "base_width": 0.025,
       "width_shrink": 0.75,
       "tube_sides": 8,
-      "color_trunk": [0.4, 0.25, 0.1],
-      "color_tip":   [0.25, 0.7, 0.2],
+      "color_trunk": [
+        0.4,
+        0.25,
+        0.1
+      ],
+      "color_tip": [
+        0.25,
+        0.7,
+        0.2
+      ],
       "camera_yaw": 0.3,
       "camera_pitch": 0.15,
       "layout": "tree",
-      "dna_connections": ["mesh_grammar"],
-      "notes": "Lindenmayer's canonical plant at 25.7° — rendered as tubes instead of lines. Same DNA, mesh-grammar substrate."
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Lindenmayer's canonical plant at 25.7\u00b0 \u2014 rendered as tubes instead of lines. Same DNA, mesh-grammar substrate."
+    },
+    {
+      "id": "ls03b_denser_angle",
+      "axiom": "F",
+      "rules": {
+        "F": "F[+F]F[-F]F"
+      },
+      "iterations": 4,
+      "angle_deg": 22.5,
+      "step_len": 0.08,
+      "step_shrink": 0.72,
+      "interpretation": "tubes",
+      "base_width": 0.025,
+      "width_shrink": 0.75,
+      "tube_sides": 8,
+      "color_trunk": [
+        0.4,
+        0.25,
+        0.1
+      ],
+      "color_tip": [
+        0.25,
+        0.7,
+        0.2
+      ],
+      "camera_yaw": 0.3,
+      "camera_pitch": 0.15,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Canonical ls03 plant DNA with the branching angle reduced to 22.5\u00c2\u00b0. Same rule and iteration count, but denser cypress-like canopy."
     },
     {
       "id": "ls04_classic_tree_as_graph",
       "axiom": "F",
-      "rules": { "F": "F[+F]F[-F]F" },
+      "rules": {
+        "F": "F[+F]F[-F]F"
+      },
       "iterations": 4,
       "angle_deg": 25.7,
       "step_len": 0.08,
       "step_shrink": 0.72,
       "interpretation": "graph",
       "node_radius": 0.015,
-      "color_trunk": [0.3, 0.2, 0.4],
-      "color_tip":   [0.8, 0.6, 0.3],
+      "color_trunk": [
+        0.3,
+        0.2,
+        0.4
+      ],
+      "color_tip": [
+        0.8,
+        0.6,
+        0.3
+      ],
       "camera_yaw": 0.3,
       "camera_pitch": 0.15,
       "layout": "tree",
-      "dna_connections": ["graph_grammar"],
-      "notes": "Same canonical plant DNA as ls03 — but rendered as graph (nodes + edges). Cross-substrate twin. Could be post-processed with CA-prune or Modulor-fold."
+      "dna_connections": [
+        "graph_grammar"
+      ],
+      "notes": "Same canonical plant DNA as ls03 \u2014 but rendered as graph (nodes + edges). Cross-substrate twin. Could be post-processed with CA-prune or Modulor-fold."
     },
     {
       "id": "ls05_classic_tree_as_softbody",
       "axiom": "F",
-      "rules": { "F": "F[+F]F[-F]F" },
+      "rules": {
+        "F": "F[+F]F[-F]F"
+      },
       "iterations": 3,
       "angle_deg": 25.7,
       "step_len": 0.12,
       "step_shrink": 0.72,
       "interpretation": "softbody",
       "sb_stiffness": 0.6,
-      "sb_gravity": [0.3, -9.8, 0],
+      "sb_gravity": [
+        0.3,
+        -9.8,
+        0
+      ],
       "sb_steps": 100,
-      "color_trunk": [0.3, 0.25, 0.15],
-      "color_tip":   [0.6, 0.7, 0.2],
+      "color_trunk": [
+        0.3,
+        0.25,
+        0.15
+      ],
+      "color_tip": [
+        0.6,
+        0.7,
+        0.2
+      ],
       "camera_yaw": 0.3,
       "camera_pitch": 0.15,
       "layout": "tree",
-      "dna_connections": ["soft_body"],
-      "notes": "Same plant DNA fed as spring-mass topology into soft_body_sim. Side wind pulls the tree — L-system as physical skeleton."
+      "dna_connections": [
+        "soft_body"
+      ],
+      "notes": "Same plant DNA fed as spring-mass topology into soft_body_sim. Side wind pulls the tree \u2014 L-system as physical skeleton."
     },
     {
       "id": "ls06_bush_stochastic",
       "axiom": "F",
       "rules": {
         "F": [
-          ["F[+F]F[-F]F", 0.5],
-          ["F[+F]F",      0.25],
-          ["F[-F]F",      0.25]
+          [
+            "F[+F]F[-F]F",
+            0.5
+          ],
+          [
+            "F[+F]F",
+            0.25
+          ],
+          [
+            "F[-F]F",
+            0.25
+          ]
         ]
       },
       "iterations": 4,
@@ -113,13 +217,23 @@
       "base_width": 0.022,
       "width_shrink": 0.72,
       "tube_sides": 6,
-      "color_trunk": [0.35, 0.2, 0.1],
-      "color_tip":   [0.2, 0.6, 0.25],
+      "color_trunk": [
+        0.35,
+        0.2,
+        0.1
+      ],
+      "color_tip": [
+        0.2,
+        0.6,
+        0.25
+      ],
       "camera_yaw": 0.4,
       "camera_pitch": 0.2,
       "layout": "tree",
-      "dna_connections": ["mesh_grammar"],
-      "notes": "Stochastic production — three alt rules at weighted probabilities. Same seed = same bush. DNA is genuinely non-deterministic but reproducible."
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Stochastic production \u2014 three alt rules at weighted probabilities. Same seed = same bush. DNA is genuinely non-deterministic but reproducible."
     },
     {
       "id": "ls07_dragon_curve",
@@ -132,13 +246,21 @@
       "angle_deg": 90,
       "step_len": 0.015,
       "interpretation": "lines",
-      "color_trunk": [0.55, 0.12, 0.3],
-      "color_tip":   [0.95, 0.55, 0.25],
+      "color_trunk": [
+        0.55,
+        0.12,
+        0.3
+      ],
+      "color_tip": [
+        0.95,
+        0.55,
+        0.25
+      ],
       "camera_yaw": 0.001,
       "camera_pitch": 1.4,
       "layout": "fractal_curve",
       "dna_connections": [],
-      "notes": "Heighway dragon curve — two non-terminal rules X and Y encode the folding. 12 iterations = full dragon."
+      "notes": "Heighway dragon curve \u2014 two non-terminal rules X and Y encode the folding. 12 iterations = full dragon."
     },
     {
       "id": "ls08_hilbert_3d",
@@ -156,18 +278,30 @@
       "base_width": 0.01,
       "width_shrink": 1.0,
       "tube_sides": 4,
-      "color_trunk": [0.2, 0.3, 0.6],
-      "color_tip":   [0.8, 0.5, 0.2],
+      "color_trunk": [
+        0.2,
+        0.3,
+        0.6
+      ],
+      "color_tip": [
+        0.8,
+        0.5,
+        0.2
+      ],
       "camera_yaw": 0.7,
       "camera_pitch": 0.4,
       "layout": "space_filling",
-      "dna_connections": ["mesh_grammar"],
-      "notes": "3D Hilbert space-filling curve — four non-terminals (A/B/C/D) encode 3D orientation. Rendered as tubes so the recursive structure reads."
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "3D Hilbert space-filling curve \u2014 four non-terminals (A/B/C/D) encode 3D orientation. Rendered as tubes so the recursive structure reads."
     },
     {
       "id": "ls09_fractal_plant_3d",
       "axiom": "F",
-      "rules": { "F": "FF-[-F+F+F]+[+F-F-F]" },
+      "rules": {
+        "F": "FF-[-F+F+F]+[+F-F-F]"
+      },
       "iterations": 4,
       "angle_deg": 22.5,
       "step_len": 0.04,
@@ -176,13 +310,23 @@
       "base_width": 0.012,
       "width_shrink": 0.75,
       "tube_sides": 6,
-      "color_trunk": [0.3, 0.2, 0.1],
-      "color_tip":   [0.25, 0.75, 0.25],
+      "color_trunk": [
+        0.3,
+        0.2,
+        0.1
+      ],
+      "color_tip": [
+        0.25,
+        0.75,
+        0.25
+      ],
       "camera_yaw": 0.3,
       "camera_pitch": 0.15,
       "layout": "tree",
-      "dna_connections": ["mesh_grammar"],
-      "notes": "Dense fractal plant — two sub-branches per F. 22.5° produces a denser canopy than 25.7°."
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Dense fractal plant \u2014 two sub-branches per F. 22.5\u00b0 produces a denser canopy than 25.7\u00b0."
     },
     {
       "id": "ls10_sympodial_tree_3d",
@@ -200,13 +344,758 @@
       "base_width": 0.02,
       "width_shrink": 0.85,
       "tube_sides": 6,
-      "color_trunk": [0.35, 0.22, 0.12],
-      "color_tip":   [0.2, 0.55, 0.25],
+      "color_trunk": [
+        0.35,
+        0.22,
+        0.12
+      ],
+      "color_tip": [
+        0.2,
+        0.55,
+        0.25
+      ],
       "camera_yaw": 0.3,
       "camera_pitch": 0.2,
       "layout": "tree",
-      "dna_connections": ["mesh_grammar"],
-      "notes": "Prusinkiewicz sympodial branching — 3 branches per node at 22.5° with rolls between them. Produces a 3D crown."
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Prusinkiewicz sympodial branching \u2014 3 branches per node at 22.5\u00b0 with rolls between them. Produces a 3D crown."
+    },
+    {
+      "id": "ls11_wiki_fractal_plant",
+      "axiom": "-X",
+      "rules": {
+        "X": "F+[[X]-X]-F[-FX]+X",
+        "F": "FF"
+      },
+      "iterations": 5,
+      "angle_deg": 25.0,
+      "step_len": 0.045,
+      "step_shrink": 0.72,
+      "interpretation": "tubes",
+      "base_width": 0.014,
+      "width_shrink": 0.78,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.28,
+        0.22,
+        0.12
+      ],
+      "color_tip": [
+        0.45,
+        0.82,
+        0.32
+      ],
+      "camera_yaw": 0.22,
+      "camera_pitch": 0.2,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Canonical fractal plant from the Wikipedia L-system page. X is a non-drawing growth symbol, F draws and doubles via F->FF, and nested brackets fork the crown."
+    },
+    {
+      "id": "ls12_koch_snowflake_classic",
+      "axiom": "F++F++F",
+      "rules": {
+        "F": "F-F++F-F"
+      },
+      "iterations": 4,
+      "angle_deg": 60,
+      "step_len": 0.02,
+      "interpretation": "lines",
+      "color_trunk": [
+        0.18,
+        0.28,
+        0.55
+      ],
+      "color_tip": [
+        0.42,
+        0.78,
+        0.92
+      ],
+      "camera_yaw": 0.001,
+      "camera_pitch": 1.4,
+      "layout": "fractal_curve",
+      "dna_connections": [],
+      "notes": "Koch snowflake family from the Grogra L-system overview: triangle axiom with F->F-F++F-F at 60 degrees."
+    },
+    {
+      "id": "ls13_dragon_cpfg_leftfold",
+      "axiom": "FL",
+      "rules": {
+        "L": "L+RF+",
+        "R": "-FL-R"
+      },
+      "iterations": 10,
+      "angle_deg": 90,
+      "step_len": 0.012,
+      "interpretation": "lines",
+      "color_trunk": [
+        0.48,
+        0.16,
+        0.34
+      ],
+      "color_tip": [
+        0.96,
+        0.62,
+        0.22
+      ],
+      "camera_yaw": 0.001,
+      "camera_pitch": 1.4,
+      "layout": "fractal_curve",
+      "dna_connections": [],
+      "notes": "Dragon curve using the CPFG manual L/R non-drawing symbols. F draws, L and R steer recursive left/right folding."
+    },
+    {
+      "id": "ls14_levy_c_curve",
+      "axiom": "F",
+      "rules": {
+        "F": "+F--F+"
+      },
+      "iterations": 11,
+      "angle_deg": 45,
+      "step_len": 0.01,
+      "interpretation": "lines",
+      "color_trunk": [
+        0.2,
+        0.32,
+        0.2
+      ],
+      "color_tip": [
+        0.72,
+        0.9,
+        0.54
+      ],
+      "camera_yaw": 0.001,
+      "camera_pitch": 1.4,
+      "layout": "fractal_curve",
+      "dna_connections": [],
+      "notes": "Levy C curve from the standard L-system construction: start F, rule F->+F--F+, angle 45 degrees."
+    },
+    {
+      "id": "ls15_quadratic_island",
+      "axiom": "F+F+F+F",
+      "rules": {
+        "F": "F+F-F-FF+F+F-F"
+      },
+      "iterations": 3,
+      "angle_deg": 90,
+      "step_len": 0.015,
+      "interpretation": "lines",
+      "color_trunk": [
+        0.22,
+        0.2,
+        0.46
+      ],
+      "color_tip": [
+        0.76,
+        0.74,
+        0.98
+      ],
+      "camera_yaw": 0.001,
+      "camera_pitch": 1.4,
+      "layout": "fractal_curve",
+      "dna_connections": [],
+      "notes": "Quadratic island-style right-angle curve from Paul Bourke's L-system notes, using a square axiom and a denser F replacement."
+    },
+    {
+      "id": "ls16_koch_square_dense",
+      "axiom": "F",
+      "rules": {
+        "F": "F+F-F-F+F"
+      },
+      "iterations": 5,
+      "angle_deg": 90,
+      "step_len": 0.012,
+      "interpretation": "lines",
+      "color_trunk": [
+        0.12,
+        0.26,
+        0.42
+      ],
+      "color_tip": [
+        0.92,
+        0.86,
+        0.58
+      ],
+      "camera_yaw": 0.001,
+      "camera_pitch": 1.4,
+      "layout": "fractal_curve",
+      "dna_connections": [],
+      "notes": "Right-angle Koch curve variant from Wikipedia's square Koch example, pushed to a denser derivation depth."
+    },
+    {
+      "id": "ls17_binary_tree_grogra",
+      "axiom": "X",
+      "rules": {
+        "X": "F[+X][-X]",
+        "F": "FF"
+      },
+      "iterations": 6,
+      "angle_deg": 25,
+      "step_len": 0.03,
+      "step_shrink": 0.78,
+      "interpretation": "tubes",
+      "base_width": 0.011,
+      "width_shrink": 0.8,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.34,
+        0.22,
+        0.12
+      ],
+      "color_tip": [
+        0.36,
+        0.72,
+        0.28
+      ],
+      "camera_yaw": 0.28,
+      "camera_pitch": 0.22,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Simple binary tree adapted from the Grogra L-systems page: X->F[+X][-X]. X is non-drawing, F doubles trunk length."
+    },
+    {
+      "id": "ls18_two_dimensional_plant_grogra",
+      "axiom": "X",
+      "rules": {
+        "X": "F[+X]F[-X]+X",
+        "F": "FF"
+      },
+      "iterations": 5,
+      "angle_deg": 22.5,
+      "step_len": 0.035,
+      "step_shrink": 0.76,
+      "interpretation": "tubes",
+      "base_width": 0.012,
+      "width_shrink": 0.8,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.32,
+        0.2,
+        0.1
+      ],
+      "color_tip": [
+        0.3,
+        0.8,
+        0.34
+      ],
+      "camera_yaw": 0.3,
+      "camera_pitch": 0.18,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Two-dimensional plant-like structure quoted by Grogra: X->F[+X]F[-X]+X with F->FF. A classic bracketed growth grammar."
+    },
+    {
+      "id": "ls19_cpfg_fan_plant",
+      "axiom": "F",
+      "rules": {
+        "F": "F[+F]F[-F][F]"
+      },
+      "iterations": 4,
+      "angle_deg": 20,
+      "step_len": 0.055,
+      "step_shrink": 0.74,
+      "interpretation": "tubes",
+      "base_width": 0.016,
+      "width_shrink": 0.78,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.38,
+        0.25,
+        0.12
+      ],
+      "color_tip": [
+        0.48,
+        0.82,
+        0.34
+      ],
+      "camera_yaw": 0.26,
+      "camera_pitch": 0.18,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Plant-like branching structure from the CPFG manual figure set: F->F[+F]F[-F][F], rendered as a radial fan."
+    },
+    {
+      "id": "ls20_cpfg_bushy_fx",
+      "axiom": "X",
+      "rules": {
+        "X": "F[+X][-X]FX",
+        "F": "FF"
+      },
+      "iterations": 5,
+      "angle_deg": 24,
+      "step_len": 0.03,
+      "step_shrink": 0.76,
+      "interpretation": "tubes",
+      "base_width": 0.012,
+      "width_shrink": 0.79,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.35,
+        0.21,
+        0.11
+      ],
+      "color_tip": [
+        0.22,
+        0.7,
+        0.24
+      ],
+      "camera_yaw": 0.34,
+      "camera_pitch": 0.2,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Bushy deterministic plant from the CPFG manual examples: X->F[+X][-X]FX with F->FF for trunk extension."
+    },
+    {
+      "id": "ls21_cpfg_weeping_plant",
+      "axiom": "X",
+      "rules": {
+        "X": "F-[[X]+X]+F[+FX]-X",
+        "F": "FF"
+      },
+      "iterations": 5,
+      "angle_deg": 22.5,
+      "step_len": 0.03,
+      "step_shrink": 0.74,
+      "interpretation": "tubes",
+      "base_width": 0.011,
+      "width_shrink": 0.79,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.3,
+        0.19,
+        0.1
+      ],
+      "color_tip": [
+        0.42,
+        0.76,
+        0.3
+      ],
+      "camera_yaw": 0.22,
+      "camera_pitch": 0.2,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Weeping, nested-canopy plant from the CPFG manual: X->F-[[X]+X]+F[+FX]-X with F->FF."
+    },
+    {
+      "id": "ls22_stochastic_balanced_seed13",
+      "axiom": "F",
+      "rules": {
+        "F": [
+          [
+            "F[+F]F[-F]F",
+            0.34
+          ],
+          [
+            "F[+F]F",
+            0.33
+          ],
+          [
+            "F[-F]F",
+            0.33
+          ]
+        ]
+      },
+      "iterations": 4,
+      "seed": 13,
+      "angle_deg": 24,
+      "step_len": 0.05,
+      "step_shrink": 0.75,
+      "interpretation": "tubes",
+      "base_width": 0.014,
+      "width_shrink": 0.78,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.36,
+        0.23,
+        0.12
+      ],
+      "color_tip": [
+        0.3,
+        0.72,
+        0.28
+      ],
+      "camera_yaw": 0.3,
+      "camera_pitch": 0.18,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Balanced stochastic plant based on the CPFG manual's equal-probability branching example. Different seed = different specimen."
+    },
+    {
+      "id": "ls23_stochastic_balanced_seed77",
+      "axiom": "F",
+      "rules": {
+        "F": [
+          [
+            "F[+F]F[-F]F",
+            0.34
+          ],
+          [
+            "F[+F]F",
+            0.33
+          ],
+          [
+            "F[-F]F",
+            0.33
+          ]
+        ]
+      },
+      "iterations": 4,
+      "seed": 77,
+      "angle_deg": 24,
+      "step_len": 0.05,
+      "step_shrink": 0.75,
+      "interpretation": "tubes",
+      "base_width": 0.014,
+      "width_shrink": 0.78,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.36,
+        0.23,
+        0.12
+      ],
+      "color_tip": [
+        0.3,
+        0.72,
+        0.28
+      ],
+      "camera_yaw": 0.3,
+      "camera_pitch": 0.18,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Same stochastic grammar as ls22, but a different seed to produce a second specimen of the same notional species."
+    },
+    {
+      "id": "ls24_stochastic_left_heavy",
+      "axiom": "F",
+      "rules": {
+        "F": [
+          [
+            "F[+F]F[-F]F",
+            0.2
+          ],
+          [
+            "F[+F]F",
+            0.55
+          ],
+          [
+            "F[-F]F",
+            0.15
+          ],
+          [
+            "FF",
+            0.1
+          ]
+        ]
+      },
+      "iterations": 4,
+      "seed": 24,
+      "angle_deg": 26,
+      "step_len": 0.05,
+      "step_shrink": 0.75,
+      "interpretation": "tubes",
+      "base_width": 0.014,
+      "width_shrink": 0.78,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.34,
+        0.22,
+        0.1
+      ],
+      "color_tip": [
+        0.36,
+        0.78,
+        0.26
+      ],
+      "camera_yaw": 0.34,
+      "camera_pitch": 0.18,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Left-heavy stochastic specimen: a weighted variant of the CPFG stochastic grammar with extra probability on the + branch."
+    },
+    {
+      "id": "ls25_stochastic_right_heavy",
+      "axiom": "F",
+      "rules": {
+        "F": [
+          [
+            "F[+F]F[-F]F",
+            0.2
+          ],
+          [
+            "F[+F]F",
+            0.15
+          ],
+          [
+            "F[-F]F",
+            0.55
+          ],
+          [
+            "FF",
+            0.1
+          ]
+        ]
+      },
+      "iterations": 4,
+      "seed": 25,
+      "angle_deg": 26,
+      "step_len": 0.05,
+      "step_shrink": 0.75,
+      "interpretation": "tubes",
+      "base_width": 0.014,
+      "width_shrink": 0.78,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.34,
+        0.22,
+        0.1
+      ],
+      "color_tip": [
+        0.36,
+        0.78,
+        0.26
+      ],
+      "camera_yaw": 0.26,
+      "camera_pitch": 0.18,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Right-heavy stochastic specimen: the same stochastic family as ls24, but with probability shifted toward the - branch."
+    },
+    {
+      "id": "ls26_stochastic_sparse_retention",
+      "axiom": "F",
+      "rules": {
+        "F": [
+          [
+            "F[+F]F[-F]F",
+            0.25
+          ],
+          [
+            "F[+F]F",
+            0.2
+          ],
+          [
+            "F[-F]F",
+            0.2
+          ],
+          [
+            "F",
+            0.35
+          ]
+        ]
+      },
+      "iterations": 4,
+      "seed": 26,
+      "angle_deg": 23,
+      "step_len": 0.05,
+      "step_shrink": 0.77,
+      "interpretation": "tubes",
+      "base_width": 0.013,
+      "width_shrink": 0.8,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.32,
+        0.2,
+        0.1
+      ],
+      "color_tip": [
+        0.44,
+        0.74,
+        0.3
+      ],
+      "camera_yaw": 0.3,
+      "camera_pitch": 0.16,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Sparse stochastic specimen inspired by Wikipedia's stochastic grammar discussion: one branch of the probability mass leaves F unchanged, opening gaps in the canopy."
+    },
+    {
+      "id": "ls27_tripod_crown_3d",
+      "axiom": "X",
+      "rules": {
+        "X": "F[&X]////[&X]////[&X]",
+        "F": "FF"
+      },
+      "iterations": 4,
+      "angle_deg": 22.5,
+      "step_len": 0.04,
+      "step_shrink": 0.76,
+      "interpretation": "tubes",
+      "base_width": 0.013,
+      "width_shrink": 0.8,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.3,
+        0.22,
+        0.12
+      ],
+      "color_tip": [
+        0.32,
+        0.78,
+        0.34
+      ],
+      "camera_yaw": 0.5,
+      "camera_pitch": 0.24,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "3D tripod crown using pitch and roll. The current turtle's & and / operators distribute three raised branches around the trunk."
+    },
+    {
+      "id": "ls28_candelabra_3d",
+      "axiom": "X",
+      "rules": {
+        "X": "F[&X][^X][/X]",
+        "F": "FF"
+      },
+      "iterations": 4,
+      "angle_deg": 25,
+      "step_len": 0.04,
+      "step_shrink": 0.77,
+      "interpretation": "tubes",
+      "base_width": 0.013,
+      "width_shrink": 0.8,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.34,
+        0.24,
+        0.14
+      ],
+      "color_tip": [
+        0.28,
+        0.72,
+        0.3
+      ],
+      "camera_yaw": 0.58,
+      "camera_pitch": 0.26,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "3D candelabra plant: one branch pitches down, one up, one rolls sideways. This family exploits the local 3D turtle frame."
+    },
+    {
+      "id": "ls29_spiral_pine_3d",
+      "axiom": "X",
+      "rules": {
+        "X": "F[/X]F[\\X]////X",
+        "F": "FF"
+      },
+      "iterations": 4,
+      "angle_deg": 20,
+      "step_len": 0.04,
+      "step_shrink": 0.78,
+      "interpretation": "tubes",
+      "base_width": 0.012,
+      "width_shrink": 0.81,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.28,
+        0.2,
+        0.12
+      ],
+      "color_tip": [
+        0.3,
+        0.66,
+        0.24
+      ],
+      "camera_yaw": 0.46,
+      "camera_pitch": 0.22,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Spiral conifer built from alternating roll-left / roll-right branches and a continuing trunk, using the current turtle's 3D frame."
+    },
+    {
+      "id": "ls30_pitchfork_canopy_3d",
+      "axiom": "X",
+      "rules": {
+        "X": "F[&X]F[^X]F[+X][-X]",
+        "F": "FF"
+      },
+      "iterations": 4,
+      "angle_deg": 18,
+      "step_len": 0.038,
+      "step_shrink": 0.78,
+      "interpretation": "tubes",
+      "base_width": 0.012,
+      "width_shrink": 0.81,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.32,
+        0.22,
+        0.12
+      ],
+      "color_tip": [
+        0.4,
+        0.8,
+        0.32
+      ],
+      "camera_yaw": 0.42,
+      "camera_pitch": 0.24,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Pitchfork canopy that mixes 3D pitch branches with planar yaw branches. Good for testing whether the crown reads volumetrically."
+    },
+    {
+      "id": "ls31_radial_quadbush_3d",
+      "axiom": "X",
+      "rules": {
+        "X": "F[&X]////[&X]////[&X]////[&X]",
+        "F": "FF"
+      },
+      "iterations": 4,
+      "angle_deg": 20,
+      "step_len": 0.038,
+      "step_shrink": 0.77,
+      "interpretation": "tubes",
+      "base_width": 0.012,
+      "width_shrink": 0.81,
+      "tube_sides": 6,
+      "color_trunk": [
+        0.29,
+        0.21,
+        0.11
+      ],
+      "color_tip": [
+        0.38,
+        0.76,
+        0.3
+      ],
+      "camera_yaw": 0.56,
+      "camera_pitch": 0.24,
+      "layout": "tree",
+      "dna_connections": [
+        "mesh_grammar"
+      ],
+      "notes": "Four-way radial 3D bush. A single pitched branch pattern is rolled around the trunk to test rotational repetition in the local frame."
     }
   ]
 }

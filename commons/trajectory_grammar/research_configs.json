@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "description": "Trajectory research — forces integrated over time, with the time axis used as a spatial axis. The circle becomes a spiral; the double pendulum becomes a chaotic ribbon; Lorenz becomes a butterfly sculpture. DNA = (force, params, initial_conditions, duration, dt, interpretation).",
+  "configs": [
+    {
+      "id": "tr01_unit_circle_spiral",
+      "force": "uniform_circular",
+      "params": { "radius": 1.0, "omega": 2.2, "rise": 0.18 },
+      "initial": { "phase": 0.0, "origin": [0, 0, 0] },
+      "duration": 20.0, "dt": 0.02,
+      "interpretation": "tube",
+      "tube_radius": 0.03,
+      "color_start": [0.2, 0.35, 0.55], "color_end": [0.95, 0.55, 0.2],
+      "camera_yaw": 0.6, "camera_pitch": 0.25,
+      "notes": "The canonical example. Unit circle with constant vertical rise. The circle's time parameterization becomes the spiral's height axis."
+    },
+    {
+      "id": "tr02_lissajous_knot_3d",
+      "force": "lissajous_3d",
+      "params": { "fx": 3, "fy": 2, "fz": 5, "ax": 1, "ay": 1, "az": 1, "phase_y": 1.5708, "phase_z": 0.7854 },
+      "initial": {},
+      "duration": 6.2832, "dt": 0.008,
+      "interpretation": "tube",
+      "tube_radius": 0.04,
+      "color_start": [0.3, 0.15, 0.5], "color_end": [0.95, 0.45, 0.6],
+      "camera_yaw": 0.7, "camera_pitch": 0.4,
+      "notes": "3D Lissajous — three orthogonal sine oscillators with integer frequency ratios 3:2:5. Closed interlocking curve, reads as a knot."
+    },
+    {
+      "id": "tr03_pendulum_extruded",
+      "force": "pendulum_1d",
+      "params": { "length": 1.0, "gravity": 9.8, "damping": 0.05, "extrude_rate": 0.25 },
+      "initial": { "theta": 1.4, "theta_dot": 0.0 },
+      "duration": 12.0, "dt": 0.01,
+      "interpretation": "tube",
+      "tube_radius": 0.025,
+      "color_start": [0.85, 0.5, 0.15], "color_end": [0.2, 0.4, 0.55],
+      "camera_yaw": 0.4, "camera_pitch": 0.15,
+      "notes": "1D damped pendulum with time axis extruded along Z. The sine-like oscillation decays visibly along the time axis — damping made spatial."
+    },
+    {
+      "id": "tr04_double_pendulum_chaos",
+      "force": "double_pendulum",
+      "params": { "L1": 1.0, "L2": 1.0, "m1": 1.0, "m2": 1.0, "gravity": 9.8, "extrude_rate": 0.12 },
+      "initial": { "theta1": 1.57, "theta2": 1.57, "omega1": 0, "omega2": 0 },
+      "duration": 30.0, "dt": 0.005,
+      "interpretation": "tube",
+      "tube_radius": 0.015,
+      "color_start": [0.95, 0.25, 0.35], "color_end": [0.2, 0.6, 0.75],
+      "camera_yaw": 0.5, "camera_pitch": 0.2,
+      "notes": "Double pendulum tip trajectory — chaotic. Same initial conditions always produce same output (determinism), but the path is unpredictable (sensitivity). Reads as fractal ribbon."
+    },
+    {
+      "id": "tr05_lorenz_butterfly",
+      "force": "lorenz_attractor",
+      "params": { "sigma": 10.0, "rho": 28.0, "beta": 2.6667, "scale": 0.04 },
+      "initial": { "pos": [0.1, 0.0, 0.0] },
+      "duration": 40.0, "dt": 0.005,
+      "interpretation": "tube",
+      "tube_radius": 0.012,
+      "color_start": [0.2, 0.5, 0.95], "color_end": [0.95, 0.3, 0.55],
+      "camera_yaw": 0.6, "camera_pitch": 0.3,
+      "notes": "Lorenz attractor at canonical (σ=10, ρ=28, β=8/3). The iconic butterfly — two orbit wings with unpredictable switching. Strange-attractor sculpture."
+    },
+    {
+      "id": "tr06_kepler_precessing_orbit",
+      "force": "kepler_orbit",
+      "params": { "mu": 1.0, "precess_rate": 0.3 },
+      "initial": { "pos": [1.0, 0, 0], "vel": [0, 0, 0.9] },
+      "duration": 30.0, "dt": 0.02,
+      "interpretation": "tube",
+      "tube_radius": 0.015,
+      "color_start": [0.1, 0.15, 0.4], "color_end": [0.95, 0.85, 0.35],
+      "camera_yaw": 0.001, "camera_pitch": 1.2,
+      "notes": "Keplerian orbit with precession — orbital ellipse rotates slowly, tracing a rosette pattern. Viewed top-down."
+    },
+    {
+      "id": "tr07_magnetic_helix",
+      "force": "magnetic_dipole",
+      "params": { "q_over_m": 1.0, "B": [0, 2.5, 0], "E": [0, 0, 0] },
+      "initial": { "pos": [1.0, 0, 0], "vel": [0, 0.25, 1.0] },
+      "duration": 30.0, "dt": 0.02,
+      "interpretation": "tube",
+      "tube_radius": 0.028,
+      "color_start": [0.2, 0.65, 0.5], "color_end": [0.95, 0.45, 0.15],
+      "camera_yaw": 0.5, "camera_pitch": 0.2,
+      "notes": "Charged particle drifting in uniform magnetic field along Y. Cyclotron motion produces a helix; the vertical velocity component stretches it."
+    },
+    {
+      "id": "tr08_damped_spiral",
+      "force": "damped_spring",
+      "params": { "k": 4.0, "damping": 0.15, "mass": 1.0, "extrude_rate": 0.12 },
+      "initial": { "pos": [1.0, 0], "vel": [0, 1.0] },
+      "duration": 30.0, "dt": 0.01,
+      "interpretation": "tube",
+      "tube_radius": 0.02,
+      "color_start": [0.95, 0.55, 0.25], "color_end": [0.15, 0.3, 0.5],
+      "camera_yaw": 0.55, "camera_pitch": 0.3,
+      "notes": "2D damped oscillator extruded along Z. Spirals inward as damping reduces amplitude — the time axis makes the decay visible."
+    },
+    {
+      "id": "tr09_lissajous_fan",
+      "force": "fan",
+      "params": {
+        "count": 12,
+        "spread": 3.14159,
+        "inner_force": "uniform_circular",
+        "inner_params": { "radius": 1.0, "omega": 2.0, "rise": 0.15 }
+      },
+      "initial": { "phase": 0.0, "origin": [0, 0, 0] },
+      "duration": 18.0, "dt": 0.02,
+      "interpretation": "tube",
+      "tube_radius": 0.02,
+      "color_start": [0.3, 0.2, 0.55], "color_end": [0.95, 0.75, 0.35],
+      "camera_yaw": 0.6, "camera_pitch": 0.3,
+      "notes": "Fan of 12 uniform-circular spirals with phase spread of π — same force, different initial conditions. The ensemble traces a weave."
+    },
+    {
+      "id": "tr10_lorenz_fan",
+      "force": "fan",
+      "params": {
+        "count": 6,
+        "spread": 0.002,
+        "inner_force": "lorenz_attractor",
+        "inner_params": { "sigma": 10.0, "rho": 28.0, "beta": 2.6667, "scale": 0.04 }
+      },
+      "initial": { "pos": [0.1, 0.0, 0.0] },
+      "duration": 40.0, "dt": 0.005,
+      "interpretation": "tube",
+      "tube_radius": 0.008,
+      "color_start": [0.4, 0.65, 0.95], "color_end": [0.95, 0.4, 0.65],
+      "camera_yaw": 0.6, "camera_pitch": 0.3,
+      "notes": "Six Lorenz attractors from infinitesimally-different initial conditions (spread 0.002). The chaos amplifies the difference; the six trails diverge into distinct butterflies. Sensitivity to initial conditions made spatial."
+    }
+  ]
+}

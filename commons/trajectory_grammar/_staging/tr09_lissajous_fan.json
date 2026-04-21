@@ -1,0 +1,39 @@
+{
+  "id": "tr09_lissajous_fan",
+  "force": "fan",
+  "params": {
+    "count": 12,
+    "spread": 3.14159,
+    "inner_force": "uniform_circular",
+    "inner_params": {
+      "radius": 1.0,
+      "omega": 2.0,
+      "rise": 0.15
+    }
+  },
+  "initial": {
+    "phase": 0.0,
+    "origin": [
+      0,
+      0,
+      0
+    ]
+  },
+  "duration": 18.0,
+  "dt": 0.02,
+  "interpretation": "tube",
+  "tube_radius": 0.02,
+  "color_start": [
+    0.3,
+    0.2,
+    0.55
+  ],
+  "color_end": [
+    0.95,
+    0.75,
+    0.35
+  ],
+  "camera_yaw": 0.6,
+  "camera_pitch": 0.3,
+  "notes": "Fan of 12 uniform-circular spirals with phase spread of \u03c0 \u2014 same force, different initial conditions. The ensemble traces a weave."
+}

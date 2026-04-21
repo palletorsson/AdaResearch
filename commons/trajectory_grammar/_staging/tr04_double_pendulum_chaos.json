@@ -1,0 +1,35 @@
+{
+  "id": "tr04_double_pendulum_chaos",
+  "force": "double_pendulum",
+  "params": {
+    "L1": 1.0,
+    "L2": 1.0,
+    "m1": 1.0,
+    "m2": 1.0,
+    "gravity": 9.8,
+    "extrude_rate": 0.12
+  },
+  "initial": {
+    "theta1": 1.57,
+    "theta2": 1.57,
+    "omega1": 0,
+    "omega2": 0
+  },
+  "duration": 30.0,
+  "dt": 0.005,
+  "interpretation": "tube",
+  "tube_radius": 0.015,
+  "color_start": [
+    0.95,
+    0.25,
+    0.35
+  ],
+  "color_end": [
+    0.2,
+    0.6,
+    0.75
+  ],
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.2,
+  "notes": "Double pendulum tip trajectory \u2014 chaotic. Same initial conditions always produce same output (determinism), but the path is unpredictable (sensitivity). Reads as fractal ribbon."
+}
