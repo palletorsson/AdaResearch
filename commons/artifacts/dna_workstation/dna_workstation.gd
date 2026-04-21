@@ -42,8 +42,17 @@ func _ready() -> void:
 
 
 func _build_kiosk() -> void:
-	var kiosk_z := 2.2
-	var panel_y := 1.2
+	# Kiosk offset to the side (+x) so it doesn't block the view of the
+	# generated artifact at origin. Player stands at -Z looking toward +Z;
+	# artifact is center-front, kiosk is right-front at waist height.
+	var kiosk_x := 1.5
+	var kiosk_z := -1.0      # slightly toward the player, easy to reach
+	var panel_y := 1.05
+	# Rotate kiosk to face the player at origin (kiosk is right of origin,
+	# so it needs to turn toward -X as well as tilt back)
+	var kiosk_yaw: float = deg_to_rad(-40)
+	var kiosk_pitch: float = deg_to_rad(-25)
+	var kiosk_basis := Basis.from_euler(Vector3(kiosk_pitch, kiosk_yaw, 0))
 
 	# Screen backing
 	var screen := MeshInstance3D.new()
@@ -53,16 +62,16 @@ func _build_kiosk() -> void:
 	var screen_mat := StandardMaterial3D.new()
 	screen_mat.albedo_color = Color(0.05, 0.05, 0.08)
 	screen.material_override = screen_mat
-	screen.transform = Transform3D(
-		Basis(Vector3.RIGHT, deg_to_rad(-25)),
-		Vector3(0, panel_y, kiosk_z))
+	screen.transform = Transform3D(kiosk_basis, Vector3(kiosk_x, panel_y, kiosk_z))
 	add_child(screen)
 
 	# Viewport2Din3D → renders the 2D UI onto the screen
 	var viewport := VIEWPORT_2D_3D.instantiate()
-	viewport.transform = Transform3D(
-		Basis(Vector3.RIGHT, deg_to_rad(-25)),
-		Vector3(0, panel_y, kiosk_z + 0.01))
+	# Tiny forward offset along the panel's surface normal so the UI
+	# sits just in front of the backing (not fighting z-buffer)
+	var fwd_offset: Vector3 = kiosk_basis * Vector3(0, 0, 0.01)
+	viewport.transform = Transform3D(kiosk_basis,
+		Vector3(kiosk_x, panel_y, kiosk_z) + fwd_offset)
 	viewport.screen_size = Vector2(0.8, 0.44)
 	viewport.scene = UI_SCENE
 	viewport.viewport_size = Vector2(800, 420)
@@ -71,9 +80,8 @@ func _build_kiosk() -> void:
 	# VR hand-pose area — so XR controllers can point at the 2D panel
 	if ResourceLoader.exists("res://addons/godot-xr-tools/objects/hand_pose_area.tscn"):
 		var hand_area := HAND_POSE_AREA.instantiate()
-		hand_area.transform = Transform3D(
-			Basis(Vector3.RIGHT, deg_to_rad(-25)),
-			Vector3(0, panel_y, kiosk_z))
+		hand_area.transform = Transform3D(kiosk_basis,
+			Vector3(kiosk_x, panel_y, kiosk_z))
 		if ResourceLoader.exists("res://addons/godot-xr-tools/hands/poses/pose_point_left.tres"):
 			hand_area.left_pose = load("res://addons/godot-xr-tools/hands/poses/pose_point_left.tres")
 		if ResourceLoader.exists("res://addons/godot-xr-tools/hands/poses/pose_point_right.tres"):
@@ -109,9 +117,12 @@ func _connect_ui(viewport: Node) -> void:
 
 
 func _build_presentation_area() -> void:
+	# Presentation at artifact origin (0,0,0). Player stands to the -Z side,
+	# faces +Z — sees the generated geometry first, with the kiosk visible
+	# further beyond it. Matches ArtifactWorkstationVR's layout.
 	_presentation_area = Node3D.new()
 	_presentation_area.name = "PresentationArea"
-	_presentation_area.position = Vector3(0, 0.8, -1.0)
+	_presentation_area.position = Vector3(0, 0, 0)
 	add_child(_presentation_area)
 
 	var title := Label3D.new()
@@ -119,7 +130,7 @@ func _build_presentation_area() -> void:
 	title.font_size = 32
 	title.modulate = Color(1, 1, 1, 0.55)
 	title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	title.position = Vector3(0, 3.2, -1.0)
+	title.position = Vector3(0, 3.5, 0)
 	add_child(title)
 
 	_info_label = Label3D.new()
@@ -127,7 +138,7 @@ func _build_presentation_area() -> void:
 	_info_label.font_size = 18
 	_info_label.modulate = Color(0.78, 0.82, 0.9, 0.75)
 	_info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_info_label.position = Vector3(0, 2.7, -1.0)
+	_info_label.position = Vector3(0, 3.0, 0)
 	add_child(_info_label)
 
 
@@ -360,16 +371,24 @@ func _show_placeholder(msg: String) -> void:
 
 
 func _fit_artifact() -> void:
+	# Center artifact on origin, lift so base sits at y=0.2 (just above floor),
+	# and scale to fit roughly 2m cube so it reads well for a standing player.
 	if not _current_artifact or not _current_artifact is Node3D:
 		return
 	var n3d := _current_artifact as Node3D
 	var aabb := _get_aabb(n3d)
 	if aabb.size.length() < 0.01: return
-	n3d.position -= aabb.get_center()
-	n3d.position.y += aabb.size.y * 0.5 + 0.3
+	# Reset any transform the builder applied
+	n3d.position = Vector3.ZERO
+	n3d.scale = Vector3.ONE
+	# Scale to fit a 2m box
 	var max_dim: float = maxf(maxf(aabb.size.x, aabb.size.y), aabb.size.z)
-	if max_dim > 2.5:
-		n3d.scale = Vector3.ONE * (2.5 / max_dim)
+	if max_dim > 2.0:
+		var s: float = 2.0 / max_dim
+		n3d.scale = Vector3(s, s, s)
+		aabb = AABB(aabb.position * s, aabb.size * s)
+	# Re-center horizontally, shift so base sits at y=0.2
+	n3d.position = Vector3(-aabb.get_center().x, 0.2 - aabb.position.y, -aabb.get_center().z)
 
 
 func _get_aabb(node: Node3D) -> AABB:
