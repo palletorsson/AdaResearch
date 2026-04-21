@@ -1,0 +1,71 @@
+{
+  "id": "br03_pinball_triangle",
+  "force": "bouncing_gravity",
+  "params": {
+    "gravity": 9.8,
+    "extrude_rate": 0.0,
+    "walls": [],
+    "plates": [
+      {
+        "a": [
+          -1.8,
+          -1.5588
+        ],
+        "b": [
+          1.8,
+          -1.5588
+        ],
+        "restitution": 0.92
+      },
+      {
+        "a": [
+          -1.8,
+          -1.5588
+        ],
+        "b": [
+          0.0,
+          1.5588
+        ],
+        "restitution": 0.92
+      },
+      {
+        "a": [
+          1.8,
+          -1.5588
+        ],
+        "b": [
+          0.0,
+          1.5588
+        ],
+        "restitution": 0.92
+      }
+    ]
+  },
+  "initial": {
+    "pos": [
+      0.1,
+      1.0
+    ],
+    "vel": [
+      1.5,
+      1.8
+    ]
+  },
+  "duration": 20.0,
+  "dt": 0.005,
+  "interpretation": "tube",
+  "tube_radius": 0.015,
+  "color_start": [
+    0.35,
+    0.2,
+    0.55
+  ],
+  "color_end": [
+    0.95,
+    0.65,
+    0.2
+  ],
+  "camera_yaw": 0.001,
+  "camera_pitch": 1.25,
+  "notes": "Three plates form a closed triangle. Ball bounces inside \u2014 high restitution preserves energy, chaotic orbit trail fills the triangular boundary. Pinball as sculpture."
+}

@@ -429,11 +429,11 @@ RD_EVALS = {
     "rd11_iota_negaton_plate": E(3, "working",    "ι-class molecule-like clustering. More diagrammatic than lush, but valuable because it shows the negaton regime rather than the usual positive ridges."),
     "rd12_kappa_hedgerow_pillars": E(4, "strong", "κ-class hedgerow rendered as pillars. Architectural, hedge-maze reading comes through well in 3D."),
     "rd13_lambda_hex_heightmap": E(5, "winner",   "λ-class mitosis field settling toward hex packing. One of the clearest demonstrations of self-replication becoming spatial order."),
-    "rd14_lambda_grain_plate": E(4, "strong",     "Second λ sample with denser grain boundaries. Useful as a side-by-side DNA variant of the same class."),
+    "rd14_epsilon_overcrowd_plate": E(4, "strong","ε-class overcrowding rendered top-down. More turbulent than λ: spot mitosis, die-out, and rapid refilling all stay visible in one image."),
     "rd15_mu_worm_heightmap":  E(4, "strong",     "μ-class worm lanes. Distinct from κ because the channels stay more separated and directional."),
-    "rd16_zeta_spots_pillars": E(4, "strong",     "ζ-class stable spots as a pillar meadow. Good bridge from spot biology to small architectural field conditions."),
+    "rd16_zeta_stable_heightmap": E(4, "strong",  "ζ-class stable-spot terrain. Calmer and more symmetric than ε, while still avoiding the static regularity of λ."),
     "rd17_eta_spotworm_heightmap": E(4, "strong", "η-class mix of spots and short worms. Nicely occupies the in-between regime rather than collapsing to pure ridges or pure cells."),
-    "rd18_beta_void_plate":    E(3, "working",    "β-class void-ocean behavior. More turbulent than decorative, but important as a contrast case in the parameter map."),
+    "rd18_gamma_branch_heightmap": E(4, "strong", "γ-class unstable stripe terrain. Branching ridges and local breakdown events make it a stronger dynamic counterpoint than the flatter void-field attempt."),
 }
 
 # ─── Wallpaper patterns — 17 mathematical tilings ─────────────
@@ -499,6 +499,13 @@ TRAJECTORY_EVALS = {
     "tr08_damped_spiral":           E(4, "winner",      "2D damped oscillator extruded along Z. Spirals inward as amplitude decays — the time axis makes the decay visible."),
     "tr09_lissajous_fan":           E(3, "working",     "Fan of 12 parallel circular spirals with phase-spread π — tight stacked composition, reads as a woven ring. Camera too close."),
     "tr10_lorenz_fan":              E(4, "winner",      "Six Lorenz attractors from initial conditions differing by 0.002. Chaos amplifies the gap — six butterflies diverge into distinct silhouettes. Sensitivity to initial conditions made spatial."),
+    # FROZEN PROCESSED FORM — bouncing ball with walls + plates
+    "br01_ball_in_box":              E(5, "crown_jewel", "Ball bouncing in rectangular box. 16 seconds of gravity + wall reflections traced as gradient parabolas — large blue arcs on the left decay to small tan arcs on the right. The whole life of one bouncing ball as a single drawing. The clearest 'frozen processed form' in the gallery."),
+    "br02_galton_board":             E(3, "working",     "Angled-peg zigzag. Ball hooks off one diagonal peg then curves down. Only 1-2 collisions register reliably — peg density + ball size balance isn't finding the full cascading-scatter behavior.", ["tighter peg spacing", "larger initial horizontal velocity", "peg as crossing-X (two segments) instead of single-angle"]),
+    "br03_pinball_triangle":         E(4, "winner",      "Closed triangle of three plates, ball bouncing inside at high restitution. Chaotic scribble fills the triangular boundary — reads as purple pinball pocket. The energy preservation is visible; this is an almost-elastic-limit render."),
+    "br04_stepped_cascade":          E(4, "winner",      "Six tilted plates in staircase. Ball enters top-left, cascades diagonally along each step, decays into a rest at the bottom. Clean waterfall-down-stairs read — the force sequence IS the choreography."),
+    "br05_curved_funnel":            E(2, "broken",      "V-funnel + catch bowl. Ball escaped the plate field or Z-extrusion moved it off-camera — output empty. Illustrates that plate layouts with gaps fail closed-system tests.", ["remove extrude_rate for first iteration", "widen funnel arms to prevent escape", "add containment floor wall"]),
+    "br06_pattern_writer_s_curve":   E(2, "broken",      "Attempt at reverse-engineering an S-curve via 8 hand-placed plates. Only 2 trail fragments visible — ball escaped. Honest proof that hand-tuned reverse engineering is actually hard; this is Tier 3 (optimization) in disguise, not Tier 1 (hand-tune).", ["this confirms reverse-engineering needs a genetic algorithm or differentiable simulator, not hand placement"]),
 }
 
 SB_LSYSTEM_BRIDGE_EVALS = {

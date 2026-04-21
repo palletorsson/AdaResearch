@@ -1,102 +1,292 @@
 {
   "version": 1,
-  "description": "Trajectory research — forces integrated over time, with the time axis used as a spatial axis. The circle becomes a spiral; the double pendulum becomes a chaotic ribbon; Lorenz becomes a butterfly sculpture. DNA = (force, params, initial_conditions, duration, dt, interpretation).",
+  "description": "Trajectory research \u2014 forces integrated over time, with the time axis used as a spatial axis. The circle becomes a spiral; the double pendulum becomes a chaotic ribbon; Lorenz becomes a butterfly sculpture. DNA = (force, params, initial_conditions, duration, dt, interpretation).",
   "configs": [
     {
       "id": "tr01_unit_circle_spiral",
       "force": "uniform_circular",
-      "params": { "radius": 1.0, "omega": 2.2, "rise": 0.18 },
-      "initial": { "phase": 0.0, "origin": [0, 0, 0] },
-      "duration": 20.0, "dt": 0.02,
+      "params": {
+        "radius": 1.0,
+        "omega": 2.2,
+        "rise": 0.18
+      },
+      "initial": {
+        "phase": 0.0,
+        "origin": [
+          0,
+          0,
+          0
+        ]
+      },
+      "duration": 20.0,
+      "dt": 0.02,
       "interpretation": "tube",
       "tube_radius": 0.03,
-      "color_start": [0.2, 0.35, 0.55], "color_end": [0.95, 0.55, 0.2],
-      "camera_yaw": 0.6, "camera_pitch": 0.25,
+      "color_start": [
+        0.2,
+        0.35,
+        0.55
+      ],
+      "color_end": [
+        0.95,
+        0.55,
+        0.2
+      ],
+      "camera_yaw": 0.6,
+      "camera_pitch": 0.25,
       "notes": "The canonical example. Unit circle with constant vertical rise. The circle's time parameterization becomes the spiral's height axis."
     },
     {
       "id": "tr02_lissajous_knot_3d",
       "force": "lissajous_3d",
-      "params": { "fx": 3, "fy": 2, "fz": 5, "ax": 1, "ay": 1, "az": 1, "phase_y": 1.5708, "phase_z": 0.7854 },
+      "params": {
+        "fx": 3,
+        "fy": 2,
+        "fz": 5,
+        "ax": 1,
+        "ay": 1,
+        "az": 1,
+        "phase_y": 1.5708,
+        "phase_z": 0.7854
+      },
       "initial": {},
-      "duration": 6.2832, "dt": 0.008,
+      "duration": 6.2832,
+      "dt": 0.008,
       "interpretation": "tube",
       "tube_radius": 0.04,
-      "color_start": [0.3, 0.15, 0.5], "color_end": [0.95, 0.45, 0.6],
-      "camera_yaw": 0.7, "camera_pitch": 0.4,
-      "notes": "3D Lissajous — three orthogonal sine oscillators with integer frequency ratios 3:2:5. Closed interlocking curve, reads as a knot."
+      "color_start": [
+        0.3,
+        0.15,
+        0.5
+      ],
+      "color_end": [
+        0.95,
+        0.45,
+        0.6
+      ],
+      "camera_yaw": 0.7,
+      "camera_pitch": 0.4,
+      "notes": "3D Lissajous \u2014 three orthogonal sine oscillators with integer frequency ratios 3:2:5. Closed interlocking curve, reads as a knot."
     },
     {
       "id": "tr03_pendulum_extruded",
       "force": "pendulum_1d",
-      "params": { "length": 1.0, "gravity": 9.8, "damping": 0.05, "extrude_rate": 0.25 },
-      "initial": { "theta": 1.4, "theta_dot": 0.0 },
-      "duration": 12.0, "dt": 0.01,
+      "params": {
+        "length": 1.0,
+        "gravity": 9.8,
+        "damping": 0.05,
+        "extrude_rate": 0.25
+      },
+      "initial": {
+        "theta": 1.4,
+        "theta_dot": 0.0
+      },
+      "duration": 12.0,
+      "dt": 0.01,
       "interpretation": "tube",
       "tube_radius": 0.025,
-      "color_start": [0.85, 0.5, 0.15], "color_end": [0.2, 0.4, 0.55],
-      "camera_yaw": 0.4, "camera_pitch": 0.15,
-      "notes": "1D damped pendulum with time axis extruded along Z. The sine-like oscillation decays visibly along the time axis — damping made spatial."
+      "color_start": [
+        0.85,
+        0.5,
+        0.15
+      ],
+      "color_end": [
+        0.2,
+        0.4,
+        0.55
+      ],
+      "camera_yaw": 0.4,
+      "camera_pitch": 0.15,
+      "notes": "1D damped pendulum with time axis extruded along Z. The sine-like oscillation decays visibly along the time axis \u2014 damping made spatial."
     },
     {
       "id": "tr04_double_pendulum_chaos",
       "force": "double_pendulum",
-      "params": { "L1": 1.0, "L2": 1.0, "m1": 1.0, "m2": 1.0, "gravity": 9.8, "extrude_rate": 0.12 },
-      "initial": { "theta1": 1.57, "theta2": 1.57, "omega1": 0, "omega2": 0 },
-      "duration": 30.0, "dt": 0.005,
+      "params": {
+        "L1": 1.0,
+        "L2": 1.0,
+        "m1": 1.0,
+        "m2": 1.0,
+        "gravity": 9.8,
+        "extrude_rate": 0.12
+      },
+      "initial": {
+        "theta1": 1.57,
+        "theta2": 1.57,
+        "omega1": 0,
+        "omega2": 0
+      },
+      "duration": 30.0,
+      "dt": 0.005,
       "interpretation": "tube",
       "tube_radius": 0.015,
-      "color_start": [0.95, 0.25, 0.35], "color_end": [0.2, 0.6, 0.75],
-      "camera_yaw": 0.5, "camera_pitch": 0.2,
-      "notes": "Double pendulum tip trajectory — chaotic. Same initial conditions always produce same output (determinism), but the path is unpredictable (sensitivity). Reads as fractal ribbon."
+      "color_start": [
+        0.95,
+        0.25,
+        0.35
+      ],
+      "color_end": [
+        0.2,
+        0.6,
+        0.75
+      ],
+      "camera_yaw": 0.5,
+      "camera_pitch": 0.2,
+      "notes": "Double pendulum tip trajectory \u2014 chaotic. Same initial conditions always produce same output (determinism), but the path is unpredictable (sensitivity). Reads as fractal ribbon."
     },
     {
       "id": "tr05_lorenz_butterfly",
       "force": "lorenz_attractor",
-      "params": { "sigma": 10.0, "rho": 28.0, "beta": 2.6667, "scale": 0.04 },
-      "initial": { "pos": [0.1, 0.0, 0.0] },
-      "duration": 40.0, "dt": 0.005,
+      "params": {
+        "sigma": 10.0,
+        "rho": 28.0,
+        "beta": 2.6667,
+        "scale": 0.04
+      },
+      "initial": {
+        "pos": [
+          0.1,
+          0.0,
+          0.0
+        ]
+      },
+      "duration": 40.0,
+      "dt": 0.005,
       "interpretation": "tube",
       "tube_radius": 0.012,
-      "color_start": [0.2, 0.5, 0.95], "color_end": [0.95, 0.3, 0.55],
-      "camera_yaw": 0.6, "camera_pitch": 0.3,
-      "notes": "Lorenz attractor at canonical (σ=10, ρ=28, β=8/3). The iconic butterfly — two orbit wings with unpredictable switching. Strange-attractor sculpture."
+      "color_start": [
+        0.2,
+        0.5,
+        0.95
+      ],
+      "color_end": [
+        0.95,
+        0.3,
+        0.55
+      ],
+      "camera_yaw": 0.6,
+      "camera_pitch": 0.3,
+      "notes": "Lorenz attractor at canonical (\u03c3=10, \u03c1=28, \u03b2=8/3). The iconic butterfly \u2014 two orbit wings with unpredictable switching. Strange-attractor sculpture."
     },
     {
       "id": "tr06_kepler_precessing_orbit",
       "force": "kepler_orbit",
-      "params": { "mu": 1.0, "precess_rate": 0.3 },
-      "initial": { "pos": [1.0, 0, 0], "vel": [0, 0, 0.9] },
-      "duration": 30.0, "dt": 0.02,
+      "params": {
+        "mu": 1.0,
+        "precess_rate": 0.3
+      },
+      "initial": {
+        "pos": [
+          1.0,
+          0,
+          0
+        ],
+        "vel": [
+          0,
+          0,
+          0.9
+        ]
+      },
+      "duration": 30.0,
+      "dt": 0.02,
       "interpretation": "tube",
       "tube_radius": 0.015,
-      "color_start": [0.1, 0.15, 0.4], "color_end": [0.95, 0.85, 0.35],
-      "camera_yaw": 0.001, "camera_pitch": 1.2,
-      "notes": "Keplerian orbit with precession — orbital ellipse rotates slowly, tracing a rosette pattern. Viewed top-down."
+      "color_start": [
+        0.1,
+        0.15,
+        0.4
+      ],
+      "color_end": [
+        0.95,
+        0.85,
+        0.35
+      ],
+      "camera_yaw": 0.001,
+      "camera_pitch": 1.2,
+      "notes": "Keplerian orbit with precession \u2014 orbital ellipse rotates slowly, tracing a rosette pattern. Viewed top-down."
     },
     {
       "id": "tr07_magnetic_helix",
       "force": "magnetic_dipole",
-      "params": { "q_over_m": 1.0, "B": [0, 2.5, 0], "E": [0, 0, 0] },
-      "initial": { "pos": [1.0, 0, 0], "vel": [0, 0.25, 1.0] },
-      "duration": 30.0, "dt": 0.02,
+      "params": {
+        "q_over_m": 1.0,
+        "B": [
+          0,
+          2.5,
+          0
+        ],
+        "E": [
+          0,
+          0,
+          0
+        ]
+      },
+      "initial": {
+        "pos": [
+          1.0,
+          0,
+          0
+        ],
+        "vel": [
+          0,
+          0.25,
+          1.0
+        ]
+      },
+      "duration": 30.0,
+      "dt": 0.02,
       "interpretation": "tube",
       "tube_radius": 0.028,
-      "color_start": [0.2, 0.65, 0.5], "color_end": [0.95, 0.45, 0.15],
-      "camera_yaw": 0.5, "camera_pitch": 0.2,
+      "color_start": [
+        0.2,
+        0.65,
+        0.5
+      ],
+      "color_end": [
+        0.95,
+        0.45,
+        0.15
+      ],
+      "camera_yaw": 0.5,
+      "camera_pitch": 0.2,
       "notes": "Charged particle drifting in uniform magnetic field along Y. Cyclotron motion produces a helix; the vertical velocity component stretches it."
     },
     {
       "id": "tr08_damped_spiral",
       "force": "damped_spring",
-      "params": { "k": 4.0, "damping": 0.15, "mass": 1.0, "extrude_rate": 0.12 },
-      "initial": { "pos": [1.0, 0], "vel": [0, 1.0] },
-      "duration": 30.0, "dt": 0.01,
+      "params": {
+        "k": 4.0,
+        "damping": 0.15,
+        "mass": 1.0,
+        "extrude_rate": 0.12
+      },
+      "initial": {
+        "pos": [
+          1.0,
+          0
+        ],
+        "vel": [
+          0,
+          1.0
+        ]
+      },
+      "duration": 30.0,
+      "dt": 0.01,
       "interpretation": "tube",
       "tube_radius": 0.02,
-      "color_start": [0.95, 0.55, 0.25], "color_end": [0.15, 0.3, 0.5],
-      "camera_yaw": 0.55, "camera_pitch": 0.3,
-      "notes": "2D damped oscillator extruded along Z. Spirals inward as damping reduces amplitude — the time axis makes the decay visible."
+      "color_start": [
+        0.95,
+        0.55,
+        0.25
+      ],
+      "color_end": [
+        0.15,
+        0.3,
+        0.5
+      ],
+      "camera_yaw": 0.55,
+      "camera_pitch": 0.3,
+      "notes": "2D damped oscillator extruded along Z. Spirals inward as damping reduces amplitude \u2014 the time axis makes the decay visible."
     },
     {
       "id": "tr09_lissajous_fan",
@@ -105,15 +295,37 @@
         "count": 12,
         "spread": 3.14159,
         "inner_force": "uniform_circular",
-        "inner_params": { "radius": 1.0, "omega": 2.0, "rise": 0.15 }
+        "inner_params": {
+          "radius": 1.0,
+          "omega": 2.0,
+          "rise": 0.15
+        }
       },
-      "initial": { "phase": 0.0, "origin": [0, 0, 0] },
-      "duration": 18.0, "dt": 0.02,
+      "initial": {
+        "phase": 0.0,
+        "origin": [
+          0,
+          0,
+          0
+        ]
+      },
+      "duration": 18.0,
+      "dt": 0.02,
       "interpretation": "tube",
       "tube_radius": 0.02,
-      "color_start": [0.3, 0.2, 0.55], "color_end": [0.95, 0.75, 0.35],
-      "camera_yaw": 0.6, "camera_pitch": 0.3,
-      "notes": "Fan of 12 uniform-circular spirals with phase spread of π — same force, different initial conditions. The ensemble traces a weave."
+      "color_start": [
+        0.3,
+        0.2,
+        0.55
+      ],
+      "color_end": [
+        0.95,
+        0.75,
+        0.35
+      ],
+      "camera_yaw": 0.6,
+      "camera_pitch": 0.3,
+      "notes": "Fan of 12 uniform-circular spirals with phase spread of \u03c0 \u2014 same force, different initial conditions. The ensemble traces a weave."
     },
     {
       "id": "tr10_lorenz_fan",
@@ -122,15 +334,783 @@
         "count": 6,
         "spread": 0.002,
         "inner_force": "lorenz_attractor",
-        "inner_params": { "sigma": 10.0, "rho": 28.0, "beta": 2.6667, "scale": 0.04 }
+        "inner_params": {
+          "sigma": 10.0,
+          "rho": 28.0,
+          "beta": 2.6667,
+          "scale": 0.04
+        }
       },
-      "initial": { "pos": [0.1, 0.0, 0.0] },
-      "duration": 40.0, "dt": 0.005,
+      "initial": {
+        "pos": [
+          0.1,
+          0.0,
+          0.0
+        ]
+      },
+      "duration": 40.0,
+      "dt": 0.005,
       "interpretation": "tube",
       "tube_radius": 0.008,
-      "color_start": [0.4, 0.65, 0.95], "color_end": [0.95, 0.4, 0.65],
-      "camera_yaw": 0.6, "camera_pitch": 0.3,
+      "color_start": [
+        0.4,
+        0.65,
+        0.95
+      ],
+      "color_end": [
+        0.95,
+        0.4,
+        0.65
+      ],
+      "camera_yaw": 0.6,
+      "camera_pitch": 0.3,
       "notes": "Six Lorenz attractors from infinitesimally-different initial conditions (spread 0.002). The chaos amplifies the difference; the six trails diverge into distinct butterflies. Sensitivity to initial conditions made spatial."
+    },
+    {
+      "id": "br01_ball_in_box",
+      "force": "bouncing_gravity",
+      "params": {
+        "gravity": 9.8,
+        "extrude_rate": 0.0,
+        "walls": [
+          {
+            "axis": "y",
+            "pos": -2.5,
+            "side": "below",
+            "restitution": 0.85
+          },
+          {
+            "axis": "y",
+            "pos": 3.0,
+            "side": "above",
+            "restitution": 0.85
+          },
+          {
+            "axis": "x",
+            "pos": -3.0,
+            "side": "below",
+            "restitution": 0.85
+          },
+          {
+            "axis": "x",
+            "pos": 3.0,
+            "side": "above",
+            "restitution": 0.85
+          }
+        ],
+        "plates": []
+      },
+      "initial": {
+        "pos": [
+          -2.5,
+          2.5
+        ],
+        "vel": [
+          2.2,
+          0.0
+        ]
+      },
+      "duration": 16.0,
+      "dt": 0.005,
+      "interpretation": "tube",
+      "tube_radius": 0.025,
+      "color_start": [
+        0.25,
+        0.4,
+        0.75
+      ],
+      "color_end": [
+        0.95,
+        0.55,
+        0.25
+      ],
+      "camera_yaw": 0.001,
+      "camera_pitch": 1.25,
+      "notes": "Ball bouncing in a rectangular box for 16 seconds. Gravity straight down, restitution 0.85. Trajectory traces the full piecewise-parabolic lattice \u2014 each parabola a step in the ball's decaying life. Top-down view."
+    },
+    {
+      "id": "br02_galton_board",
+      "force": "bouncing_gravity",
+      "params": {
+        "gravity": 9.8,
+        "extrude_rate": 0.0,
+        "walls": [
+          {
+            "axis": "y",
+            "pos": -3.5,
+            "side": "below",
+            "restitution": 0.4
+          }
+        ],
+        "plates": [
+          {
+            "a": [
+              -0.1344,
+              -0.22
+            ],
+            "b": [
+              0.1344,
+              0.22
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -0.3444,
+              -0.13699999999999998
+            ],
+            "b": [
+              -0.0756,
+              -0.577
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              0.0756,
+              -0.577
+            ],
+            "b": [
+              0.3444,
+              -0.13699999999999998
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -0.5544,
+              -0.9339999999999999
+            ],
+            "b": [
+              -0.28559999999999997,
+              -0.494
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -0.1344,
+              -0.494
+            ],
+            "b": [
+              0.1344,
+              -0.9339999999999999
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              0.28559999999999997,
+              -0.9339999999999999
+            ],
+            "b": [
+              0.5544,
+              -0.494
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -0.7644,
+              -0.851
+            ],
+            "b": [
+              -0.49560000000000004,
+              -1.291
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -0.3444,
+              -1.291
+            ],
+            "b": [
+              -0.0756,
+              -0.851
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              0.0756,
+              -0.851
+            ],
+            "b": [
+              0.3444,
+              -1.291
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              0.49560000000000004,
+              -1.291
+            ],
+            "b": [
+              0.7644,
+              -0.851
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -0.9743999999999999,
+              -1.648
+            ],
+            "b": [
+              -0.7056,
+              -1.208
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -0.5544,
+              -1.208
+            ],
+            "b": [
+              -0.28559999999999997,
+              -1.648
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -0.1344,
+              -1.648
+            ],
+            "b": [
+              0.1344,
+              -1.208
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              0.28559999999999997,
+              -1.208
+            ],
+            "b": [
+              0.5544,
+              -1.648
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              0.7056,
+              -1.648
+            ],
+            "b": [
+              0.9743999999999999,
+              -1.208
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -1.1844000000000001,
+              -1.565
+            ],
+            "b": [
+              -0.9156000000000001,
+              -2.005
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -0.7644,
+              -2.005
+            ],
+            "b": [
+              -0.49560000000000004,
+              -1.565
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -0.3444,
+              -1.565
+            ],
+            "b": [
+              -0.0756,
+              -2.005
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              0.0756,
+              -2.005
+            ],
+            "b": [
+              0.3444,
+              -1.565
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              0.49560000000000004,
+              -1.565
+            ],
+            "b": [
+              0.7644,
+              -2.005
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              0.9156000000000001,
+              -2.005
+            ],
+            "b": [
+              1.1844000000000001,
+              -1.565
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -2.5,
+              -3.0
+            ],
+            "b": [
+              -0.4,
+              -3.4
+            ],
+            "restitution": 0.3
+          },
+          {
+            "a": [
+              2.5,
+              -3.0
+            ],
+            "b": [
+              0.4,
+              -3.4
+            ],
+            "restitution": 0.3
+          }
+        ]
+      },
+      "initial": {
+        "pos": [
+          0.0,
+          3.5
+        ],
+        "vel": [
+          0.01,
+          0.0
+        ]
+      },
+      "duration": 8.0,
+      "dt": 0.003,
+      "interpretation": "tube",
+      "tube_radius": 0.012,
+      "color_start": [
+        0.2,
+        0.5,
+        0.85
+      ],
+      "color_end": [
+        0.95,
+        0.4,
+        0.35
+      ],
+      "camera_yaw": 0.001,
+      "camera_pitch": 1.25,
+      "notes": "Angled-peg zigzag \u2014 each peg is a tiny diagonal (\\ or /) alternating across rows. Ball falls from top, deflects sideways off angled pegs, cascades down in a branching path. Physical realization of Pascal's-triangle-style path distribution."
+    },
+    {
+      "id": "br03_pinball_triangle",
+      "force": "bouncing_gravity",
+      "params": {
+        "gravity": 9.8,
+        "extrude_rate": 0.0,
+        "walls": [],
+        "plates": [
+          {
+            "a": [
+              -1.8,
+              -1.5588
+            ],
+            "b": [
+              1.8,
+              -1.5588
+            ],
+            "restitution": 0.92
+          },
+          {
+            "a": [
+              -1.8,
+              -1.5588
+            ],
+            "b": [
+              0.0,
+              1.5588
+            ],
+            "restitution": 0.92
+          },
+          {
+            "a": [
+              1.8,
+              -1.5588
+            ],
+            "b": [
+              0.0,
+              1.5588
+            ],
+            "restitution": 0.92
+          }
+        ]
+      },
+      "initial": {
+        "pos": [
+          0.1,
+          1.0
+        ],
+        "vel": [
+          1.5,
+          1.8
+        ]
+      },
+      "duration": 20.0,
+      "dt": 0.005,
+      "interpretation": "tube",
+      "tube_radius": 0.015,
+      "color_start": [
+        0.35,
+        0.2,
+        0.55
+      ],
+      "color_end": [
+        0.95,
+        0.65,
+        0.2
+      ],
+      "camera_yaw": 0.001,
+      "camera_pitch": 1.25,
+      "notes": "Three plates form a closed triangle. Ball bounces inside \u2014 high restitution preserves energy, chaotic orbit trail fills the triangular boundary. Pinball as sculpture."
+    },
+    {
+      "id": "br04_stepped_cascade",
+      "force": "bouncing_gravity",
+      "params": {
+        "gravity": 9.8,
+        "extrude_rate": 0.0,
+        "walls": [
+          {
+            "axis": "y",
+            "pos": -3.0,
+            "side": "below",
+            "restitution": 0.3
+          }
+        ],
+        "plates": [
+          {
+            "a": [
+              -2.5,
+              2.0
+            ],
+            "b": [
+              -1.9,
+              1.95
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -1.8,
+              1.5
+            ],
+            "b": [
+              -1.2000000000000002,
+              1.45
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -1.1,
+              1.0
+            ],
+            "b": [
+              -0.5000000000000001,
+              0.95
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -0.40000000000000036,
+              0.5
+            ],
+            "b": [
+              0.19999999999999962,
+              0.45
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              0.2999999999999998,
+              0.0
+            ],
+            "b": [
+              0.8999999999999998,
+              -0.05
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              1.0,
+              -0.5
+            ],
+            "b": [
+              1.6,
+              -0.55
+            ],
+            "restitution": 0.55
+          }
+        ]
+      },
+      "initial": {
+        "pos": [
+          -2.2,
+          2.8
+        ],
+        "vel": [
+          0.4,
+          0.0
+        ]
+      },
+      "duration": 8.0,
+      "dt": 0.004,
+      "interpretation": "tube",
+      "tube_radius": 0.014,
+      "color_start": [
+        0.25,
+        0.6,
+        0.85
+      ],
+      "color_end": [
+        0.95,
+        0.55,
+        0.25
+      ],
+      "camera_yaw": 0.001,
+      "camera_pitch": 1.25,
+      "notes": "Staircase of six slightly-tilted plates. Ball enters top-left, cascades diagonally down \u2014 each plate bounces it to the next. Waterfall path frozen as trail."
+    },
+    {
+      "id": "br05_curved_funnel",
+      "force": "bouncing_gravity",
+      "params": {
+        "gravity": 9.8,
+        "extrude_rate": 0.25,
+        "walls": [],
+        "plates": [
+          {
+            "a": [
+              -1.2,
+              1.2
+            ],
+            "b": [
+              -0.15,
+              -0.2
+            ],
+            "restitution": 0.7
+          },
+          {
+            "a": [
+              1.2,
+              1.2
+            ],
+            "b": [
+              0.15,
+              -0.2
+            ],
+            "restitution": 0.7
+          },
+          {
+            "a": [
+              -0.3,
+              -0.3
+            ],
+            "b": [
+              0.3,
+              -0.3
+            ],
+            "restitution": 0.7
+          }
+        ]
+      },
+      "initial": {
+        "pos": [
+          0.1,
+          2.5
+        ],
+        "vel": [
+          0.05,
+          0.0
+        ]
+      },
+      "duration": 12.0,
+      "dt": 0.005,
+      "interpretation": "tube",
+      "tube_radius": 0.02,
+      "color_start": [
+        0.25,
+        0.35,
+        0.6
+      ],
+      "color_end": [
+        0.95,
+        0.5,
+        0.25
+      ],
+      "camera_yaw": 0.45,
+      "camera_pitch": 0.15,
+      "notes": "Two angled plates form a V-funnel; ball enters top, ricochets between walls, settles into a bowl at the bottom. Time axis extruded along Z so the bouncing history stacks vertically \u2014 frozen process visible as 3D sculpture."
+    },
+    {
+      "id": "br06_pattern_writer_s_curve",
+      "force": "bouncing_gravity",
+      "params": {
+        "gravity": 9.8,
+        "extrude_rate": 0.0,
+        "walls": [
+          {
+            "axis": "y",
+            "pos": -4.0,
+            "side": "below",
+            "restitution": 0.3
+          }
+        ],
+        "plates": [
+          {
+            "a": [
+              -0.845435441562641,
+              2.6913919732900937
+            ],
+            "b": [
+              0.845435441562641,
+              3.3086080267099063
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              0.16432974020683466,
+              2.7586080267099065
+            ],
+            "b": [
+              1.8552006233321168,
+              2.141391973290094
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              0.24572147062817695,
+              1.5913919732900936
+            ],
+            "b": [
+              1.936592353753459,
+              2.208608026709906
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -0.6760914318908005,
+              1.6586080267099061
+            ],
+            "b": [
+              1.0147794512344817,
+              1.0413919732900936
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -1.7535984359321548,
+              0.4913919732900936
+            ],
+            "b": [
+              -0.0627275528068727,
+              1.108608026709906
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -1.9961445711584072,
+              0.5586080267099063
+            ],
+            "b": [
+              -0.30527368803312505,
+              -0.058608026709906225
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -1.1807340394013521,
+              -0.6086080267099065
+            ],
+            "b": [
+              0.51013684372393,
+              0.008608026709905958
+            ],
+            "restitution": 0.55
+          },
+          {
+            "a": [
+              -0.057051523100094204,
+              -0.5413919732900943
+            ],
+            "b": [
+              1.6338193600251878,
+              -1.1586080267099068
+            ],
+            "restitution": 0.55
+          }
+        ]
+      },
+      "initial": {
+        "pos": [
+          0.0,
+          4.0
+        ],
+        "vel": [
+          0.1,
+          0.0
+        ]
+      },
+      "duration": 10.0,
+      "dt": 0.004,
+      "interpretation": "tube",
+      "tube_radius": 0.014,
+      "color_start": [
+        0.3,
+        0.55,
+        0.85
+      ],
+      "color_end": [
+        0.95,
+        0.45,
+        0.35
+      ],
+      "camera_yaw": 0.001,
+      "camera_pitch": 1.25,
+      "notes": "Eight hand-placed plates curving left-right-left-right down the fall. Target shape: a rough S-curve. The ball traces the S because the plates force it to \u2014 reverse-engineered form. This is the 'plates choreograph the fall' case in its simplest form."
     }
   ]
 }

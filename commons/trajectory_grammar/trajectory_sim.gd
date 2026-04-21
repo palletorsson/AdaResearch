@@ -53,6 +53,8 @@ static func simulate(cfg: Dictionary) -> Dictionary:
 			trajectories.append(_trace_magnetic(params, initial, n_samples, dt))
 		"damped_spring":
 			trajectories.append(_trace_damped_spring(params, initial, n_samples, dt))
+		"bouncing_gravity":
+			trajectories.append(_trace_bouncing_gravity(params, initial, n_samples, dt))
 		"fan":
 			var n: int = int(params.get("count", 8))
 			var spread: float = float(params.get("spread", 0.3))
@@ -271,3 +273,116 @@ static func _trace_damped_spring(p: Dictionary, init: Dictionary,
 		vel += a * dt
 		pos += vel * dt
 	return out
+
+
+# ─── Bouncing gravity — FROZEN PROCESSED FORM ─────────────────
+#
+# Point particle under constant gravity, colliding with:
+#   - axis-aligned walls (infinite lines)
+#   - line-segment plates (pegs / obstacles / deflectors)
+# Each collision reflects velocity across the surface normal, scaled by
+# restitution. Motion is 2D in the xy plane; z optionally extrudes time.
+#
+# This is where the trajectory substrate meets "frozen processed form":
+# the sculpture IS the record of every bounce. The plate layout IS the
+# choreography. Pachinko, Galton boards, pinball, steel-ball labyrinths
+# — all of these are already this function with different plate configs.
+static func _trace_bouncing_gravity(p: Dictionary, init: Dictionary,
+		n: int, dt: float) -> PackedVector3Array:
+	var g: float = float(p.get("gravity", 9.8))
+	var extrude: float = float(p.get("extrude_rate", 0.0))   # 0 = flat 2D
+	var pos_arr = init.get("pos", [0.0, 5.0])
+	var vel_arr = init.get("vel", [0.3, 0.0])
+	var pos := Vector2(float(pos_arr[0]), float(pos_arr[1]))
+	var vel := Vector2(float(vel_arr[0]), float(vel_arr[1]))
+
+	var walls: Array = p.get("walls", [])
+	var plates: Array = p.get("plates", [])
+
+	# Pre-parse walls to typed structs for speed
+	var walls_parsed: Array = []
+	for w in walls:
+		walls_parsed.append({
+			"axis":     String(w.get("axis", "y")),
+			"pos":      float(w.get("pos", 0.0)),
+			"side":     String(w.get("side", "below")),   # "below" = reflect when going past
+			"restitution": float(w.get("restitution", 0.9)),
+		})
+	# Plates as 2D line segments
+	var plates_parsed: Array = []
+	for pl in plates:
+		var a_arr = pl.get("a", [0.0, 0.0])
+		var b_arr = pl.get("b", [1.0, 0.0])
+		plates_parsed.append({
+			"a": Vector2(float(a_arr[0]), float(a_arr[1])),
+			"b": Vector2(float(b_arr[0]), float(b_arr[1])),
+			"restitution": float(pl.get("restitution", 0.8)),
+		})
+
+	var out := PackedVector3Array()
+	out.resize(n)
+	for i in n:
+		out[i] = Vector3(pos.x, pos.y, float(i) * dt * extrude)
+		# Integrate
+		vel.y -= g * dt
+		var new_pos := pos + vel * dt
+
+		# Wall collisions (axis-aligned)
+		for w in walls_parsed:
+			var axis: String = w["axis"]
+			var wp: float = w["pos"]
+			var side: String = w["side"]
+			var restit: float = w["restitution"]
+			if axis == "y":
+				if side == "below" and new_pos.y < wp and vel.y < 0:
+					new_pos.y = wp + (wp - new_pos.y)  # reflect
+					vel.y = -vel.y * restit
+				elif side == "above" and new_pos.y > wp and vel.y > 0:
+					new_pos.y = wp - (new_pos.y - wp)
+					vel.y = -vel.y * restit
+			elif axis == "x":
+				if side == "below" and new_pos.x < wp and vel.x < 0:
+					new_pos.x = wp + (wp - new_pos.x)
+					vel.x = -vel.x * restit
+				elif side == "above" and new_pos.x > wp and vel.x > 0:
+					new_pos.x = wp - (new_pos.x - wp)
+					vel.x = -vel.x * restit
+
+		# Plate collisions (line segments)
+		for pl in plates_parsed:
+			var hit := _segment_crossed(pos, new_pos, pl["a"], pl["b"])
+			if hit["hit"]:
+				var n_vec: Vector2 = hit["normal"]
+				# Reflect velocity across normal, apply restitution
+				var vn: float = vel.dot(n_vec)
+				if vn < 0:
+					vel = (vel - 2.0 * vn * n_vec) * pl["restitution"]
+					# Nudge position to the hit point + small offset along normal
+					new_pos = hit["point"] + n_vec * 0.005
+
+		pos = new_pos
+	return out
+
+
+# ─── Segment-vs-segment intersection with normal ──────────────
+#
+# Returns whether moving from p0 to p1 crosses the plate segment [a,b].
+# If yes, returns the hit point and the plate's normal (pointing toward p0).
+static func _segment_crossed(p0: Vector2, p1: Vector2,
+		a: Vector2, b: Vector2) -> Dictionary:
+	var r: Vector2 = p1 - p0
+	var s: Vector2 = b - a
+	var denom: float = r.x * s.y - r.y * s.x
+	if absf(denom) < 1e-9:
+		return {"hit": false}
+	var qp: Vector2 = a - p0
+	var t: float = (qp.x * s.y - qp.y * s.x) / denom
+	var u: float = (qp.x * r.y - qp.y * r.x) / denom
+	if t >= 0.0 and t <= 1.0 and u >= 0.0 and u <= 1.0:
+		var hit_point: Vector2 = p0 + r * t
+		# Plate normal: perpendicular to s, pointing toward p0
+		var nrm := Vector2(-s.y, s.x).normalized()
+		if (p0 - hit_point).dot(nrm) < 0:
+			nrm = -nrm
+		return {"hit": true, "point": hit_point, "normal": nrm, "t": t}
+	return {"hit": false}

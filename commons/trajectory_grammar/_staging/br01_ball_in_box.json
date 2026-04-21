@@ -1,0 +1,62 @@
+{
+  "id": "br01_ball_in_box",
+  "force": "bouncing_gravity",
+  "params": {
+    "gravity": 9.8,
+    "extrude_rate": 0.0,
+    "walls": [
+      {
+        "axis": "y",
+        "pos": -2.5,
+        "side": "below",
+        "restitution": 0.85
+      },
+      {
+        "axis": "y",
+        "pos": 3.0,
+        "side": "above",
+        "restitution": 0.85
+      },
+      {
+        "axis": "x",
+        "pos": -3.0,
+        "side": "below",
+        "restitution": 0.85
+      },
+      {
+        "axis": "x",
+        "pos": 3.0,
+        "side": "above",
+        "restitution": 0.85
+      }
+    ],
+    "plates": []
+  },
+  "initial": {
+    "pos": [
+      -2.5,
+      2.5
+    ],
+    "vel": [
+      2.2,
+      0.0
+    ]
+  },
+  "duration": 16.0,
+  "dt": 0.005,
+  "interpretation": "tube",
+  "tube_radius": 0.025,
+  "color_start": [
+    0.25,
+    0.4,
+    0.75
+  ],
+  "color_end": [
+    0.95,
+    0.55,
+    0.25
+  ],
+  "camera_yaw": 0.001,
+  "camera_pitch": 1.25,
+  "notes": "Ball bouncing in a rectangular box for 16 seconds. Gravity straight down, restitution 0.85. Trajectory traces the full piecewise-parabolic lattice \u2014 each parabola a step in the ball's decaying life. Top-down view."
+}
