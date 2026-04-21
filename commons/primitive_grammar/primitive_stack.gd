@@ -355,6 +355,51 @@ static func _make_primitive(shape: String, size: float, color: Color) -> Diction
 	return {"mesh": mi, "height": height}
 
 
+# ─── VR-budget helpers: unit meshes for MultiMesh scatter layouts ──
+#
+# Each scatter layout places many instances of the same shape. Using
+# individual MeshInstance3D nodes costs one draw call per instance —
+# prohibitive in VR (100+ instances = 100+ draw calls). MultiMeshInstance3D
+# collapses N instances into a single draw call.
+#
+# _make_unit_mesh(shape) returns a size=1.0 Mesh for the shape; scatter
+# builders then per-instance-scale via set_instance_transform.
+
+static func _make_unit_mesh(shape: String) -> Mesh:
+	var entry: Dictionary = _make_primitive(shape, 1.0, Color.WHITE)
+	var mi: MeshInstance3D = entry["mesh"]
+	var mesh: Mesh = mi.mesh
+	mi.queue_free()   # discard the wrapper MeshInstance3D; keep the Mesh
+	return mesh
+
+
+# Build a single-shape MultiMeshInstance3D.
+# instances = Array of {pos: Vector3, scale: Vector3, color: Color}
+static func _make_multimesh_scatter(shape: String, instances: Array,
+		node_name: String = "Scatter") -> MultiMeshInstance3D:
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = node_name
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_colors = true
+	mm.mesh = _make_unit_mesh(shape)
+	mm.instance_count = instances.size()
+	for i in instances.size():
+		var inst: Dictionary = instances[i]
+		var pos: Vector3 = inst["pos"]
+		var sc: Vector3 = inst.get("scale", Vector3.ONE)
+		var col: Color = inst.get("color", Color.WHITE)
+		mm.set_instance_transform(i, Transform3D(Basis().scaled(sc), pos))
+		mm.set_instance_color(i, col)
+	mmi.multimesh = mm
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.roughness = 0.55
+	mat.metallic = 0.0
+	mmi.material_override = mat
+	return mmi
+
+
 static func _wedge_mesh(size: float) -> ArrayMesh:
 	# Right triangular prism lying on its side — like a slice of cheese
 	var h: float = size * 0.5
@@ -839,7 +884,11 @@ static func _build_lsystem_scatter(cfg: Dictionary) -> Node3D:
 	for seg in segments:
 		max_depth = max(max_depth, int(seg[2]))
 
-	# Place a primitive at the midpoint of each segment
+	# Bucket instances by shape. Three shapes (segment / branch / leaf) →
+	# three MultiMeshInstance3D nodes → 3 draw calls total regardless of
+	# how many turtle segments the L-system emits. Previously: 1 draw
+	# call per segment + per branch point + per leaf (often 200+).
+	var seg_instances: Array = []
 	for seg in segments:
 		var a: Vector3 = seg[0]
 		var b: Vector3 = seg[1]
@@ -849,28 +898,34 @@ static func _build_lsystem_scatter(cfg: Dictionary) -> Node3D:
 		var sz := base_size
 		if size_by_depth:
 			sz *= lerp(1.0, 0.35, t)
-		var p: Vector3 = (a + b) * 0.5
-		var e: Dictionary = _make_primitive(seg_shape, sz, col)
-		var prim: MeshInstance3D = e["mesh"]
-		prim.position = p
-		root.add_child(prim)
+		seg_instances.append({
+			"pos": (a + b) * 0.5,
+			"scale": Vector3(sz, sz, sz),
+			"color": col,
+		})
+	if seg_instances.size() > 0:
+		root.add_child(_make_multimesh_scatter(seg_shape, seg_instances, "Segments"))
 
-	# Place a different primitive at each branch point
+	var branch_color: Color = _to_color(palette[min(1, palette.size() - 1)])
+	var branch_instances: Array = []
 	for bp in branch_pts:
-		var bp3: Vector3 = bp
-		var eb: Dictionary = _make_primitive(branch_shape, base_size * 0.9,
-			_to_color(palette[min(1, palette.size() - 1)]))
-		var bprim: MeshInstance3D = eb["mesh"]
-		bprim.position = bp3
-		root.add_child(bprim)
+		branch_instances.append({
+			"pos": bp,
+			"scale": Vector3.ONE * (base_size * 0.9),
+			"color": branch_color,
+		})
+	if branch_instances.size() > 0:
+		root.add_child(_make_multimesh_scatter(branch_shape, branch_instances, "BranchPoints"))
 
-	# Place a leaf primitive at each leaf marker
+	var leaf_instances: Array = []
 	for lp in leaves:
-		var lp3: Vector3 = lp
-		var el: Dictionary = _make_primitive(leaf_shape, base_size * 1.1, tip_color)
-		var lprim: MeshInstance3D = el["mesh"]
-		lprim.position = lp3
-		root.add_child(lprim)
+		leaf_instances.append({
+			"pos": lp,
+			"scale": Vector3.ONE * (base_size * 1.1),
+			"color": tip_color,
+		})
+	if leaf_instances.size() > 0:
+		root.add_child(_make_multimesh_scatter(leaf_shape, leaf_instances, "Leaves"))
 
 	return root
 
@@ -922,10 +977,13 @@ static func _build_ca_scatter(cfg: Dictionary) -> Node3D:
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_val
 
+	# Collect instance specs first, then emit as a single MultiMeshInstance3D.
+	# VR budget: this layout used to produce N individual MeshInstance3D nodes,
+	# one draw call each. Now: 1 draw call total.
+	var instances: Array = []
 	for row in N:
 		for col in N:
 			if grid[row * N + col] == 0: continue
-			# Optional extrude by live neighbor count (cluster mountains)
 			var h: float = base_size
 			if height_from_neighbors:
 				var n: int = 0
@@ -939,14 +997,13 @@ static func _build_ca_scatter(cfg: Dictionary) -> Node3D:
 			var color: Color = palette[rng.randi() % palette.size()]
 			var x: float = (float(col) - float(N - 1) * 0.5) * cell
 			var z: float = (float(row) - float(N - 1) * 0.5) * cell
-			var e: Dictionary = _make_primitive(shape, base_size, color)
-			var prim: MeshInstance3D = e["mesh"]
-			prim.position = Vector3(x, h * 0.5, z)
-			# Stretch vertically for the neighbor-driven height
-			if height_from_neighbors:
-				var sy: float = h / max(base_size, 0.001)
-				prim.scale = Vector3(1, sy, 1)
-			root.add_child(prim)
+			var sy: float = (h / max(base_size, 0.001)) if height_from_neighbors else 1.0
+			instances.append({
+				"pos": Vector3(x, h * 0.5, z),
+				"scale": Vector3(base_size, base_size * sy, base_size),
+				"color": color,
+			})
+	root.add_child(_make_multimesh_scatter(shape, instances, "CACells"))
 	return root
 
 
@@ -972,6 +1029,8 @@ static func _build_rd_scatter(cfg: Dictionary) -> Node3D:
 	var height_from_v: bool = bool(cfg.get("height_from_v", true))
 	var height_amp: float = float(cfg.get("height_amp", 0.6))
 
+	# Collect + emit as single MultiMeshInstance3D. VR-budget: 1 draw call.
+	var instances: Array = []
 	for row in N:
 		for col in N:
 			var v: float = field[row * N + col]
@@ -980,12 +1039,13 @@ static func _build_rd_scatter(cfg: Dictionary) -> Node3D:
 			var col_c: Color = palette[0].lerp(palette[-1], t)
 			var x: float = (float(col) - float(N - 1) * 0.5) * cell
 			var z: float = (float(row) - float(N - 1) * 0.5) * cell
-			var h: float = v * height_amp if height_from_v else base_size
-			var e: Dictionary = _make_primitive(shape, base_size, col_c)
-			var prim: MeshInstance3D = e["mesh"]
-			prim.position = Vector3(x, h * 0.5 if height_from_v else 0, z)
-			if height_from_v:
-				var sy: float = max(h / max(base_size, 0.001), 0.05)
-				prim.scale = Vector3(1, sy, 1)
-			root.add_child(prim)
+			var h: float = (v * height_amp) if height_from_v else base_size
+			var sy: float = max(h / max(base_size, 0.001), 0.05) if height_from_v else 1.0
+			var pos_y: float = (h * 0.5) if height_from_v else 0.0
+			instances.append({
+				"pos": Vector3(x, pos_y, z),
+				"scale": Vector3(base_size, base_size * sy, base_size),
+				"color": col_c,
+			})
+	root.add_child(_make_multimesh_scatter(shape, instances, "RDCells"))
 	return root
