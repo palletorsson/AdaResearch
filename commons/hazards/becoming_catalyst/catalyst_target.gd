@@ -1,3 +1,13 @@
+# @identity
+# essence: a destructible practice target for catalyst projectiles — 7 configurable shapes (cube, fireball, apple, banana, barrel, crystal, ring) that explode on hit and respawn after a delay
+# desire: to give the player something to hit — practice targets make the catalyst bracelet legible by providing immediate feedback: you fire, the target breaks, it returns, you try again
+# critical_parameter: shape (via apply_grid_config) — changes mesh, collision, and color palette at runtime; hits_to_destroy controls difficulty; moving/orbit enable patrol patterns
+# triggers: _ready() builds visual + collision + explosion particles; hit_by_projectile() drives flash→explode→respawn cycle; _rebuild_after_config() called deferred after shape change
+# emerges: the return — targets respawn with an elastic bounce animation that reads as resilience, not reset; the player learns that the system is cyclical, not final
+# needs: apply_grid_config [has]; projectile collision [has via collision_layer 2]; shape variants [has — 7 shapes]; moving patrol [has]; orbit mode [has]
+# relationships: placed in Chamber_* maps (one per sequence end); receives projectiles from becoming_catalyst; groups under "catalyst_target" for GameManager collision routing
+# truth: a target is not an enemy — it is a question; catalyst_target asks whether you can place a projectile in space, and answers with color, destruction, and return
+
 # catalyst_target.gd
 # Destructible practice target for catalyst projectiles.
 # Supports multiple shapes via grid config: cube, fireball, apple, banana, default.

@@ -42,13 +42,24 @@ def _build_cache():
         if not search_dir.exists():
             continue
         for gd in search_dir.rglob("*.gd"):
-            _GD_CACHE[gd.stem.lower()] = gd
+            key = gd.stem.lower()
+            _GD_CACHE[key] = gd
+            # Also register a normalized key (no underscores) for PascalCase
+            # files whose lookup name uses snake_case (e.g. NeuralNetworks_VR
+            # vs neural_networks_vr). Exact match wins; this is fallback only.
+            norm = key.replace("_", "")
+            if norm not in _GD_CACHE:
+                _GD_CACHE[norm] = gd
 
 
 def find_gd(artifact_name):
     """Find a .gd file for an artifact name."""
     _build_cache()
-    return _GD_CACHE.get(artifact_name.lower())
+    key = artifact_name.lower()
+    result = _GD_CACHE.get(key)
+    if result is None:
+        result = _GD_CACHE.get(key.replace("_", ""))
+    return result
 
 
 def read_identity(gd_path):

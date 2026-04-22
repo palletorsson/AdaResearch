@@ -1,3 +1,13 @@
+# @identity
+# essence: a universal vector workbench — two draggable 3D vectors with live computed outputs for addition, subtraction, dot product, cross product, and projection
+# desire: to make linear algebra touchable — the player grabs Vector A and Vector B in VR, moves them through space, and watches the dot product change as the angle between them changes; the formula is not read, it is felt
+# critical_parameter: current_mode (Mode enum) — switches the display to highlight one operation at a time; ALL shows every result vector simultaneously, focused modes hide the others so the learner sees one relationship clearly
+# triggers: _ready() spawns two draggable vectors + four result vectors + sliders + buttons; _process() reads current vector positions every frame and updates all five operations; slider_moved signals drive VR input path
+# emerges: the parallelogram — when cross product mode is active, a filled parallelogram appears between A and B showing the magnitude of A×B as an area; the geometric interpretation of the cross product becomes visible space
+# needs: apply_grid_config [has — stub]; VR slider controls [has — 6 component sliders]; mode buttons [has — 5 mode buttons]; keyboard mode switching [has — keys 1-5]; grab interaction [has via vector_scene_base]
+# relationships: vectors sequence companion to vector_magnitude_demo; extends vector_scene_base (shared spawning, axes, floor); placed in Vectors_Intro map
+# truth: a vector is not a number — it is a direction with commitment; VectorWorkbench proves this by making the commitment graspable and showing what two directions do to each other
+
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 ## Vector Workbench - Universal vector operation visualizer

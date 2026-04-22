@@ -1,3 +1,13 @@
+# @identity
+# essence: a navigable 3D color space — RGB cube with wireframe edges, 8 corner spheres for primary/secondary colors, and ~500 sample points filling the interior; optional HSL cylinder shown alongside
+# desire: to make color theory spatial — the player stands inside the RGB cube and sees every achievable color as a point in space; the abstract three-channel model becomes a room you can walk through
+# critical_parameter: cube_size (0.7m default) — scales the entire color space; sample_count controls point density; show_hsl_cylinder toggles the HSL companion model beside the RGB cube
+# triggers: _ready() builds RGB cube (edges, corner spheres, sample MultiMesh) then optionally builds HSL cylinder; apply_grid_config() allows runtime reconfiguration of cube_size, sample_count, show_hsl
+# emerges: the companion — when show_hsl_cylinder is true, both models appear side by side, making the transformation between color spaces a spatial comparison rather than a formula
+# needs: apply_grid_config [has]; VR navigation through the space [missing — no grab/highlight on sample points]; HSL toggle control [missing VR button, has config flag]; RGB corner labels [has]
+# relationships: color sequence capstone map Color_Walls; conceptual pair with science_screen (2D color formula) vs this (3D color space); MultiMesh for performance at 500+ points
+# truth: a color is a position — color_space_navigator proves this by placing every achievable hue at its exact coordinate in a cube you can inhabit
+
 extends Node3D
 class_name ColorSpaceNavigator
 

@@ -1,4 +1,14 @@
-﻿# vector_magnitude_demo.gd
+﻿# @identity
+# essence: an interactive 3D demonstration of vector magnitude — one draggable vector with live display of the Pythagorean formula |V| = √(x² + y² + z²), with RGB component decomposition
+# desire: to make the Pythagorean theorem three-dimensional — the player grabs the vector tip and moves it; the formula updates in real time showing each squared component summing to the magnitude, making √ a lived experience not a symbol
+# critical_parameter: vector_v (draggable Node3D) — drives _update_components() to decompose into Vx/Vy/Vz and _update_info() to rebuild the formula display; scale slider sets magnitude directly for VR users
+# triggers: _ready() spawns the main vector + 3 RGB component vectors + info panel + floating length_label; _process() reads current position every frame and redraws all derived displays
+# emerges: the floating label — |V| = %.2f tracks the tip of the vector in world space, always readable; the formula becomes a shadow that follows the vector wherever it goes
+# needs: apply_grid_config [has — stub]; VR scale slider [has via RackTemplates panel]; drag interaction [has via vector_scene_base]; keyboard input [inherited]
+# relationships: vectors sequence intro artifact alongside VectorWorkbench; extends vector_scene_base; placed in Vectors_Intro map
+# truth: magnitude is not length — it is the distance from origin to commitment; vector_magnitude_demo makes this visible by showing the decomposition path your commitment took
+
+# vector_magnitude_demo.gd
 # Interactive vector magnitude visualization
 # Same style as VectorBasics - uses vector_scene_base
 #
