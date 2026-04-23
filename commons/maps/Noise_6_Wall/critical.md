@@ -1,0 +1,15 @@
+# Six octaves, one shader — fractal Brownian motion and the politics of parallel rendering
+
+Fractal Brownian motion is a sum of noise layers at different frequencies. Each layer is the same noise function evaluated at a doubled frequency and halved amplitude. The sum reads as a multi-scale texture: broad features from the low octaves, fine grain from the high ones. Summing six octaves produces the characteristic weathered-stone appearance that reads as natural.
+
+Wendy Chun's work on the politics of software argues that the invisibility of computation is a political achievement. A shader that runs on every pixel simultaneously is not doing less work than a sequential CPU loop; it is doing the same work in a different way. The appearance of instantaneity is produced by massive parallelism, and the parallelism is the infrastructure the shader depends on.
+
+The central wall displays the six octaves as a stacked demonstration. The top strip shows a single low-frequency noise field — broad, slow features. Each strip below it doubles the frequency and halves the amplitude. By the bottom of the wall, the signal reads as cloth or weathered stone: a texture built by repeated self-similar addition. The strips make the composition visible, so the learner can see how the final appearance is the sum of six partial views.
+
+The computation runs as a shader. A fragment program samples a hash-based noise function at each pixel, loops over the six octaves, and writes the summed result. The map names the shift explicitly on a side panel: the same function that took thousands of CPU frames to render fills the wall once per frame on the GPU because every pixel evaluates in parallel. Chun would note that the CPU-to-GPU shift is not a speedup; it is a change in infrastructure, and the change carries its own politics.
+
+A second display mirrors the wall at a different scale, so the learner can compare how fBm reads at high and low frequency without tuning sliders. The comparison is pedagogical: the same formula produces different characteristic textures at different base frequencies, and the texture that counts as natural depends on which frequency range the observer's eye is calibrated to.
+
+The politics of parallel rendering are in the substrate. A CPU is a small number of general-purpose cores running sequential programs. A GPU is a large number of specialised cores running the same program on different data. The shift from CPU to GPU is a shift in what kinds of computation are cheap: embarrassingly parallel problems become free, while sequential problems stay expensive. Procedural graphics has migrated to the GPU because noise is embarrassingly parallel, and the migration has shaped what procedural graphics looks like.
+
+Within the sequence, Noise_6_Wall argues that noise is a resolution-independent resource rather than a texture to bake. The wall redraws itself at every frame from scratch; there is no baked texture, no precomputed asset. The learner leaves knowing that procedural textures are not pre-made objects but active computations that depend on continuously available infrastructure.
