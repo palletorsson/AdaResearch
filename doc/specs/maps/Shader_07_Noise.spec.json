@@ -1,0 +1,51 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Shader_07_Noise",
+  "home_sequence": "patterngeneration",
+  "dimensions": {
+    "w": 14,
+    "d": 10
+  },
+  "signature": null,
+  "style": "bauhaus",
+  "echoes": [
+    "randomness",
+    "noise"
+  ],
+  "density": 0.014,
+  "breath_zones": [
+    {
+      "size": 136,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 14,
+        "d": 10
+      },
+      "centroid": [
+        6.522058823529412,
+        4.507352941176471
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 6,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 6,
+      "z": 5,
+      "token": "shader_07_noise"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 139,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

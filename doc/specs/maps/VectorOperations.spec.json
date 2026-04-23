@@ -1,0 +1,124 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "VectorOperations",
+  "home_sequence": "forces",
+  "dimensions": {
+    "w": 22,
+    "d": 17
+  },
+  "signature": "VectorDotProduct lets the learner drag two vectors and watch A dot B change sign as they cross perpendicularity \u2014 the scalar product as a continuous measure of alignment. VectorCrossProduct produces a third vector perpendicular to both inputs",
+  "style": "kusama",
+  "echoes": [],
+  "density": 0.066,
+  "breath_zones": [
+    {
+      "size": 60,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 8
+      },
+      "centroid": [
+        3.533333333333333,
+        3.5166666666666666
+      ]
+    },
+    {
+      "size": 58,
+      "bounds": {
+        "x": 14,
+        "z": 0,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        17.413793103448278,
+        3.413793103448276
+      ]
+    },
+    {
+      "size": 50,
+      "bounds": {
+        "x": 14,
+        "z": 9,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        17.02,
+        12.48
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 1,
+      "token": "VectorDotProduct"
+    },
+    {
+      "x": 3,
+      "z": 2,
+      "token": "VectorCrossProduct"
+    },
+    {
+      "x": 5,
+      "z": 3,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 16,
+      "z": 3,
+      "token": "VectorBasics"
+    },
+    {
+      "x": 18,
+      "z": 3,
+      "token": "basis_vectors_rig"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "dot_product_projector"
+    },
+    {
+      "x": 18,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 15,
+      "z": 8,
+      "token": "vector_projection_demo"
+    },
+    {
+      "x": 18,
+      "z": 8,
+      "token": "normal_force_demo"
+    },
+    {
+      "x": 16,
+      "z": 12,
+      "token": "VectorBasics"
+    },
+    {
+      "x": 18,
+      "z": 12,
+      "token": "basis_vectors_rig"
+    },
+    {
+      "x": 18,
+      "z": 13,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 12,
+    "walkable_cells": 181,
+    "breath_zone_count": 3,
+    "unique_tokens": 8
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ForcesFoundations",
+  "home_sequence": "forces",
+  "dimensions": {
+    "w": 22,
+    "d": 17
+  },
+  "signature": "example_2_1_forces_vr",
+  "style": null,
+  "echoes": [],
+  "density": 0.077,
+  "breath_zones": [
+    {
+      "size": 60,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 8
+      },
+      "centroid": [
+        3.6166666666666667,
+        3.5166666666666666
+      ]
+    },
+    {
+      "size": 52,
+      "bounds": {
+        "x": 14,
+        "z": 0,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        17.78846153846154,
+        3.1923076923076925
+      ]
+    },
+    {
+      "size": 52,
+      "bounds": {
+        "x": 14,
+        "z": 9,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        17.73076923076923,
+        12.384615384615385
+      ]
+    }
+  ],
+  "hard_constraints": [
+    {
+      "x": 14,
+      "z": 9,
+      "token": "example_2_1_forces_vr",
+      "role": "signature"
+    }
+  ],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 0,
+      "token": "newtons_laws"
+    },
+    {
+      "x": 15,
+      "z": 1,
+      "token": "friction_ramp"
+    },
+    {
+      "x": 2,
+      "z": 3,
+      "token": "VectorBasics"
+    },
+    {
+      "x": 4,
+      "z": 3,
+      "token": "basis_vectors_rig"
+    },
+    {
+      "x": 16,
+      "z": 3,
+      "token": "VectorBasics"
+    },
+    {
+      "x": 18,
+      "z": 3,
+      "token": "basis_vectors_rig"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 18,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 16,
+      "z": 5,
+      "token": "bouncing_ball"
+    },
+    {
+      "x": 16,
+      "z": 6,
+      "token": "example_2_5_fluid_resistance_vr"
+    },
+    {
+      "x": 16,
+      "z": 9,
+      "token": "example_2_2_forces_mass_variation_vr"
+    },
+    {
+      "x": 17,
+      "z": 10,
+      "token": "example_2_3_gravity_scaled_by_mass_vr"
+    },
+    {
+      "x": 18,
+      "z": 13,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 14,
+    "walkable_cells": 182,
+    "breath_zone_count": 3,
+    "unique_tokens": 10
+  }
+}

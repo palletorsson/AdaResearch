@@ -1,0 +1,98 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Pattern_Maker_Showcase",
+  "home_sequence": "patterngeneration",
+  "dimensions": {
+    "w": 12,
+    "d": 10
+  },
+  "signature": null,
+  "style": "pompeii",
+  "echoes": [],
+  "density": 0.101,
+  "breath_zones": [
+    {
+      "size": 106,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 10
+      },
+      "centroid": [
+        5.679245283018868,
+        4.89622641509434
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "pattern_tile_puzzle"
+    },
+    {
+      "x": 2,
+      "z": 0,
+      "token": "pattern_tile_4x4"
+    },
+    {
+      "x": 4,
+      "z": 0,
+      "token": "pattern_tile_mirror"
+    },
+    {
+      "x": 6,
+      "z": 0,
+      "token": "pattern_tile_8x8"
+    },
+    {
+      "x": 0,
+      "z": 1,
+      "token": "pattern_tile_brick"
+    },
+    {
+      "x": 2,
+      "z": 1,
+      "token": "pattern_tile_herringbone"
+    },
+    {
+      "x": 4,
+      "z": 1,
+      "token": "pattern_tile_cube"
+    },
+    {
+      "x": 6,
+      "z": 1,
+      "token": "array_carpet"
+    },
+    {
+      "x": 0,
+      "z": 2,
+      "token": "wfc_tile_mosaic"
+    },
+    {
+      "x": 2,
+      "z": 2,
+      "token": "pattern_maker_station"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "vr_tile_editor"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "vr_tile_editor_mirror"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 12,
+    "walkable_cells": 119,
+    "breath_zone_count": 1,
+    "unique_tokens": 12
+  }
+}

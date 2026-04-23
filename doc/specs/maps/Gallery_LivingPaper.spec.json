@@ -1,0 +1,178 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_LivingPaper",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 18
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.142,
+  "breath_zones": [
+    {
+      "size": 141,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 18
+      },
+      "centroid": [
+        4.971631205673759,
+        8.843971631205674
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "living_paper_bfs"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "living_paper_brians_brain"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "living_paper_brownian"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "living_paper_bubble_sort"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "living_paper_dfs_maze"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "living_paper_dla"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "living_paper_dragon"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "living_paper_fern"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "living_paper_fourier"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "living_paper_heat"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "living_paper_insertion_sort"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "living_paper_julia"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "living_paper_kmeans"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "living_paper_koch"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "living_paper_lissajous"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "living_paper_merge_sort"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "living_paper_noise_octaves"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "living_paper_perlin"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "living_paper_quadtree"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "living_paper_quick_sort"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "living_paper_reaction_diffusion"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "living_paper_rule110"
+    },
+    {
+      "x": 6,
+      "z": 12,
+      "token": "living_paper_rule30"
+    },
+    {
+      "x": 8,
+      "z": 12,
+      "token": "living_paper_seeds"
+    },
+    {
+      "x": 2,
+      "z": 14,
+      "token": "living_paper_self_avoiding"
+    },
+    {
+      "x": 4,
+      "z": 14,
+      "token": "living_paper_sine"
+    },
+    {
+      "x": 6,
+      "z": 14,
+      "token": "living_paper_tree"
+    },
+    {
+      "x": 8,
+      "z": 14,
+      "token": "living_paper_voronoi"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 28,
+    "walkable_cells": 197,
+    "breath_zone_count": 1,
+    "unique_tokens": 28
+  }
+}

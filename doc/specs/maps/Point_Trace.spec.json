@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Point_Trace",
+  "home_sequence": "primitives",
+  "dimensions": {
+    "w": 7,
+    "d": 14
+  },
+  "signature": "draw_dot as the primary embodied drawing tool; dark_sphere as persistent spatial anchor; cube_scene as the volume within which traces accumulate.",
+  "style": null,
+  "echoes": [],
+  "density": 0.014,
+  "breath_zones": [
+    {
+      "size": 69,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 12
+      },
+      "centroid": [
+        2.9565217391304346,
+        5.521739130434782
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 74,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

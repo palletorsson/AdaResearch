@@ -1,0 +1,93 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Folding_Zoo",
+  "home_sequence": "fold_system",
+  "dimensions": {
+    "w": 14,
+    "d": 16
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.049,
+  "breath_zones": [
+    {
+      "size": 213,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 14,
+        "d": 16
+      },
+      "centroid": [
+        6.652582159624413,
+        7.492957746478873
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "deltahedron_stages"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "helix_fold"
+    },
+    {
+      "x": 7,
+      "z": 4,
+      "token": "helix_cylinder"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "fibonacci_snake_stages"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "origami_bird"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "origami_bird"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "origami_bird"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "origami_bird"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "fold_demo_critter"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "inflate_flock"
+    },
+    {
+      "x": 2,
+      "z": 14,
+      "token": "fold_wall"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 11,
+    "walkable_cells": 224,
+    "breath_zone_count": 1,
+    "unique_tokens": 8
+  }
+}

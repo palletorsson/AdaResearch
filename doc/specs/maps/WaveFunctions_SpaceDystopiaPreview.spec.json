@@ -1,0 +1,46 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "WaveFunctions_SpaceDystopiaPreview",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 13,
+    "d": 19
+  },
+  "signature": null,
+  "style": "rams",
+  "echoes": [
+    "primitives",
+    "noise"
+  ],
+  "density": 0.004,
+  "breath_zones": [
+    {
+      "size": 233,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 19
+      },
+      "centroid": [
+        6.111587982832618,
+        9.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 5,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 244,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

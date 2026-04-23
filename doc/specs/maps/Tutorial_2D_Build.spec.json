@@ -1,0 +1,78 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Tutorial_2D_Build",
+  "home_sequence": "array_tutorial",
+  "dimensions": {
+    "w": 8,
+    "d": 23
+  },
+  "signature": "grid_2d_4x4 is the central 2D structure; row_3_x and column_3_z decompose axes; gridagent provides algorithmic navigation; pulsar_visualizer gives spatial feedback; pick_up_cube returns as the addressable element; xyz_coordinates labels the coordinate system; dark_sphere anchors.",
+  "style": null,
+  "echoes": [],
+  "density": 0.051,
+  "breath_zones": [
+    {
+      "size": 152,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 20
+      },
+      "centroid": [
+        3.4934210526315788,
+        9.526315789473685
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 2,
+      "z": 3,
+      "token": "row_3_x"
+    },
+    {
+      "x": 6,
+      "z": 5,
+      "token": "column_3_z"
+    },
+    {
+      "x": 3,
+      "z": 7,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 2,
+      "z": 11,
+      "token": "grid_2d_4x4"
+    },
+    {
+      "x": 3,
+      "z": 17,
+      "token": "pulsar_visualizer"
+    },
+    {
+      "x": 1,
+      "z": 21,
+      "token": "gridagent"
+    },
+    {
+      "x": 7,
+      "z": 22,
+      "token": "xyz_coordinates"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 8,
+    "walkable_cells": 158,
+    "breath_zone_count": 1,
+    "unique_tokens": 8
+  }
+}

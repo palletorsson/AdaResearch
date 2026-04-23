@@ -551,6 +551,146 @@
       },
       "release_gates_passing": 4,
       "duration_minutes": 30
+    },
+    {
+      "breath_id": "2026-04-21T09:00",
+      "mode": "full",
+      "baseline_avg": 5.05,
+      "post_avg": 5.05,
+      "delta": 0.0,
+      "note": "Pipeline avg unchanged (VR testing bottleneck). Qualitative: patterngeneration SCATTERED->REACHING, mosaicanalysis SCATTERED->REACHING. 6 @identity blocks added.",
+      "items_attempted": [
+        "floor_plan_space_identity",
+        "array_carpet_identity",
+        "wfc_tile_mosaic_identity",
+        "diffusion_limited_aggregation_identity",
+        "animatematerial_identity",
+        "pattern_tile_cube_identity"
+      ],
+      "items_succeeded": [
+        "floor_plan_space_identity",
+        "array_carpet_identity",
+        "wfc_tile_mosaic_identity",
+        "diffusion_limited_aggregation_identity",
+        "animatematerial_identity",
+        "pattern_tile_cube_identity"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "direct_file_edit"
+      ],
+      "skill_effectiveness": {
+        "direct_file_edit": {
+          "calls": 6,
+          "succeeded": 6,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "floor_plan_space is a cross-sequence ultra-high-leverage artifact: it appears in museum maps belonging to both patterngeneration AND mosaicanalysis. One @identity write voiced it in 28+ artifact-map appearances across two sequences simultaneously.",
+        "mosaicanalysis jumped SCATTERED->REACHING (17->40 voiced = 93%) without being a planned target — collateral from floor_plan_space. Garden improvements cascade across sequence boundaries when shared infrastructure artifacts are voiced.",
+        "patterngeneration crossed 70% threshold: 32->38/53 voiced = REACHING (71.7%). But embodiment rate is 3/53 (5.7%) — GROWING requires >=20% embodied, which needs VR work, not just @identity.",
+        "Infrastructure artifacts (floor_plan_space, array_carpet) that serve as spatial containers for multiple maps have dramatically higher @identity leverage than algorithm-specific artifacts. Prioritize by map-appearance multiplier.",
+        "Pattern: REACHING state is the new ceiling for AI-only work. SCATTERED->REACHING = add @identity. REACHING->GROWING = add VR controls (apply_grid_config enhancements). GROWING->LIVING = VR test + embody. The three transitions require different interventions."
+      ],
+      "files_changed": [
+        "commons/artifacts/floor_plan_space/floor_plan_space.gd",
+        "commons/artifacts/array_carpet/array_carpet.gd",
+        "commons/artifacts/wfc_tile_mosaic/wfc_tile_mosaic.gd",
+        "algorithms/patterngeneration/diffusion_limited_aggregation/DiffusionLimitedAggregation.gd",
+        "algorithms/patterngeneration/animalpatterns/animatematerial.gd",
+        "commons/primitives/arrays/pattern_tile_cube.gd"
+      ],
+      "garden_before": {
+        "patterngeneration": "SCATTERED (32/53 voiced = 60.4%)",
+        "mosaicanalysis": "SCATTERED (17/43 voiced = 39.5%)"
+      },
+      "garden_after": {
+        "patterngeneration": "REACHING (38/53 voiced = 71.7%)",
+        "mosaicanalysis": "REACHING (40/43 voiced = 93.0%)"
+      },
+      "release_gates_passing": 4,
+      "duration_minutes": 35
+    },
+    {
+      "breath_id": "2026-04-22T09:00",
+      "mode": "full",
+      "baseline_avg": 5.05,
+      "post_avg": 5.05,
+      "delta": 0.0,
+      "note": "Pipeline avg unchanged (VR testing bottleneck). Qualitative: +98 voiced artifacts, 6 sequences advanced (vectors LIVING, machinelearning GROWING, cellularautomata/grammar_systems/proceduralaudio/spatial_partitioning REACHING). Gate A restored from FAIL.",
+      "items_attempted": [
+        "primitives_json_syntax_fix",
+        "garden_listener_pascalcase_lookup",
+        "catalyst_target_identity",
+        "vectorworkbench_identity",
+        "vector_magnitude_demo_identity",
+        "color_space_navigator_identity"
+      ],
+      "items_succeeded": [
+        "primitives_json_syntax_fix",
+        "garden_listener_pascalcase_lookup",
+        "catalyst_target_identity",
+        "vectorworkbench_identity",
+        "vector_magnitude_demo_identity",
+        "color_space_navigator_identity"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "direct_file_edit",
+        "tool_bug_fix"
+      ],
+      "skill_effectiveness": {
+        "direct_file_edit": {
+          "calls": 5,
+          "succeeded": 5,
+          "failed": 0
+        },
+        "tool_bug_fix": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "primitives.json had a trailing comma after the last maps[] entry — invalid JSON causing Gate A to return -1 for all metrics AND garden_listener to crash on sequence scan. One-line fix restored Gate A to PASS.",
+        "garden_listener cache keyed by gd.stem.lower() — PascalCase filenames like NeuralNetworks_VR.gd produce key 'neuralnetworks_vr', but map lookups use snake_case 'neural_networks_vr'. The _ between 'Neural' and 'Networks' is absent in the cache key. Fix: register normalized key (lowercase, underscores stripped) as fallback. This revealed 25 previously-invisible voiced ML artifacts in one fix.",
+        "catalyst_target is in SKIP_ARTS in garden_listener.py — voicing it does not improve garden counts but still provides pedagogical documentation value.",
+        "All 7 'missing' machinelearning artifacts (neural_networks_vr, learn_world_stacked, computer_vision_vr, etc.) already had @identity blocks — they were invisible only because of the cache key mismatch. The cache fix, not @identity writing, was the breakthrough.",
+        "PascalCase → snake_case lookup mismatch is systemic: machinelearning, cellularautomata, grammar_systems, proceduralaudio, spatial_partitioning all benefited from the normalization fix. Pattern: when garden shows a sequence 'stuck' with no obvious unvoiced files, check if filenames use PascalCase while map lookups use snake_case.",
+        "Garden cascade from single tool fix: 98 voices unlocked, 6 sequences advanced states. Infrastructure bugs hide progress more than missing content does."
+      ],
+      "files_changed": [
+        "commons/maps/sequences/primitives.json",
+        "tools/garden_listener.py",
+        "commons/hazards/becoming_catalyst/catalyst_target.gd",
+        "algorithms/vectors/vector_workbench/VectorWorkbench.gd",
+        "commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.gd",
+        "commons/artifacts/color_space_navigator/color_space_navigator.gd"
+      ],
+      "garden_before": {
+        "total_voiced": 763,
+        "machinelearning": "SCATTERED (18/26 voiced = 69.2%)",
+        "vectors": "SCATTERED (3/5 voiced = 60%)",
+        "cellularautomata": "SCATTERED (15/27 voiced = 55.6%)",
+        "color": "SCATTERED (18/30 voiced = 60%)",
+        "release_gates": "3/4 PASS (Gate A FAIL due to primitives.json JSON error)"
+      },
+      "garden_after": {
+        "total_voiced": 861,
+        "machinelearning": "GROWING (25/26 voiced = 96.2%)",
+        "vectors": "LIVING (5/5 voiced, 3 embodied)",
+        "cellularautomata": "REACHING (20/27 voiced = 74%)",
+        "color": "SCATTERED (20/30 voiced = 66.7%)",
+        "spatial_partitioning": "GROWING (5/5 voiced)",
+        "grammar_systems": "REACHING (7/9 voiced)",
+        "proceduralaudio": "REACHING (9/9 voiced)",
+        "release_gates": "4/4 PASS"
+      },
+      "release_gates_passing": 4,
+      "duration_minutes": 40
     }
   ]
 }

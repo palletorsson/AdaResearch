@@ -1,0 +1,123 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Directionality_Examples",
+  "home_sequence": "unused",
+  "dimensions": {
+    "w": 25,
+    "d": 25
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.027,
+  "breath_zones": [
+    {
+      "size": 604,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 25,
+        "d": 25
+      },
+      "centroid": [
+        12.06953642384106,
+        11.908940397350994
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 8,
+      "z": 3,
+      "token": "platonicsolids"
+    },
+    {
+      "x": 14,
+      "z": 3,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 20,
+      "z": 3,
+      "token": "rotating_cube"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "clipboard"
+    },
+    {
+      "x": 5,
+      "z": 8,
+      "token": "infokiosk"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "algorithm_overview"
+    },
+    {
+      "x": 13,
+      "z": 11,
+      "token": "code_display"
+    },
+    {
+      "x": 2,
+      "z": 16,
+      "token": "cube_scene"
+    },
+    {
+      "x": 5,
+      "z": 16,
+      "token": "cube_scene"
+    },
+    {
+      "x": 8,
+      "z": 16,
+      "token": "cube_scene"
+    },
+    {
+      "x": 11,
+      "z": 16,
+      "token": "cube_scene"
+    },
+    {
+      "x": 19,
+      "z": 18,
+      "token": "coloredlines"
+    },
+    {
+      "x": 8,
+      "z": 22,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 15,
+      "z": 22,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 18,
+      "z": 22,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 21,
+      "z": 22,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 17,
+    "walkable_cells": 624,
+    "breath_zone_count": 1,
+    "unique_tokens": 10
+  }
+}

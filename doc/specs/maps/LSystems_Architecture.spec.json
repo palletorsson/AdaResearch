@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "LSystems_Architecture",
+  "home_sequence": "lsystems",
+  "dimensions": {
+    "w": 8,
+    "d": 10
+  },
+  "signature": "CityGenerator demonstrates urban-scale grammar application with street networks and block subdivision; lsystem_dungeon generates navigable dungeon layouts from production rules with room and corridor semantics; dark_sphere anchors the research space.",
+  "style": null,
+  "echoes": [],
+  "density": 0.038,
+  "breath_zones": [
+    {
+      "size": 76,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 10
+      },
+      "centroid": [
+        3.486842105263158,
+        4.5
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 1,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 2,
+      "z": 3,
+      "token": "CityGenerator"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "lsystem_dungeon"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 79,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

@@ -133,6 +133,18 @@
       "topic": "garden_identity_leverage",
       "insight": "garden_listener --diagnosis groups artifacts by MAP sequence not artifact registry category. Gallery maps count toward 'gallery' sequence, not machinelearning/swarmintelligence. To advance ML/swarm sequences: place voiced artifacts in sequence maps or create missing .gd files.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-04-21T07:17:01.899891+00:00",
+      "topic": "garden_identity_leverage",
+      "insight": "floor_plan_space is a cross-sequence ultra-high-leverage artifact — one @identity voiced it 28+ times across patterngeneration AND mosaicanalysis simultaneously. Infrastructure artifacts serving as spatial containers for multiple maps have far higher leverage than algorithm-specific artifacts.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-22T07:16:00.196075+00:00",
+      "topic": "garden_listener_cache",
+      "insight": "PascalCase .gd filenames produce cache keys without the underscores between words (NeuralNetworks_VR -> neuralnetworksvr not neural_networks_vr). Fix: normalize both cache key and lookup by stripping underscores as fallback. Revealed 98 previously-invisible voiced artifacts across machinelearning, cellularautomata, grammar_systems, proceduralaudio, spatial_partitioning.",
+      "lod": 3
     }
   ]
 }

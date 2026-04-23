@@ -1,0 +1,63 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Disposition_Test_Rooms",
+  "home_sequence": "testmaps",
+  "dimensions": {
+    "w": 14,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.139,
+  "breath_zones": [
+    {
+      "size": 31,
+      "bounds": {
+        "x": 1,
+        "z": 3,
+        "w": 10,
+        "d": 6
+      },
+      "centroid": [
+        6.32258064516129,
+        5.838709677419355
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 9,
+      "z": 4,
+      "token": "small_world_network"
+    },
+    {
+      "x": 4,
+      "z": 5,
+      "token": "pattern_tile_puzzle"
+    },
+    {
+      "x": 1,
+      "z": 7,
+      "token": "gradient_descent_visualization"
+    },
+    {
+      "x": 3,
+      "z": 8,
+      "token": "entropy_axiom"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "konigsberg_bridge"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 36,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

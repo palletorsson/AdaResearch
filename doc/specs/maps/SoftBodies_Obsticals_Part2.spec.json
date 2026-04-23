@@ -1,0 +1,68 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "SoftBodies_Obsticals_Part2",
+  "home_sequence": "softbodies",
+  "dimensions": {
+    "w": 30,
+    "d": 11
+  },
+  "signature": "softbody_gallery_part2 contains the twelve obstacle-soft body test scenarios; grab_long_stick and pick_up_cube provide interactive perturbation within the gallery.",
+  "style": null,
+  "echoes": [],
+  "density": 0.018,
+  "breath_zones": [
+    {
+      "size": 323,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 30,
+        "d": 11
+      },
+      "centroid": [
+        14.808049535603715,
+        5.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "softbody_gallery_part2"
+    },
+    {
+      "x": 0,
+      "z": 3,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 0,
+      "z": 4,
+      "token": "grab_long_stick"
+    },
+    {
+      "x": 0,
+      "z": 5,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 0,
+      "z": 6,
+      "token": "grab_long_stick"
+    },
+    {
+      "x": 0,
+      "z": 7,
+      "token": "pick_up_cube"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 329,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

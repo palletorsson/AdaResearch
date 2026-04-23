@@ -1,0 +1,45 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "DataStructures_Suffix_Array_Tree",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 14,
+    "d": 5
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.016,
+  "breath_zones": [
+    {
+      "size": 62,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 14,
+        "d": 5
+      },
+      "centroid": [
+        6.612903225806452,
+        1.9838709677419355
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 2,
+      "token": "env_one"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 63,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Point_Zero_",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 7,
+    "d": 9
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.235,
+  "breath_zones": [
+    {
+      "size": 14,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 5,
+        "d": 4
+      },
+      "centroid": [
+        2.0,
+        1.4285714285714286
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "origin"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 0,
+      "z": 8,
+      "token": "frame_counter_display"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "CoordinateSystem3M"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 17,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

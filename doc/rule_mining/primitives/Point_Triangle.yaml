@@ -1,0 +1,118 @@
+map: Point_Triangle
+sequence: primitives
+dimensions:
+  rows: 9
+  cols: 7
+base_recipe: void_canvas
+base_recipe_match_pct: 81.8
+residual_cells: 2
+residual_pct: 18.2
+vocabulary_coverage_pct: 81.8
+cells_masked_void_envelope: 52
+operator_groups: 2
+operator_kinds:
+  @floor: 1
+  @h:2: 1
+operators_declarative:
+  - "@floor at (3,0)"
+  - "@h:2 at (4,0)"
+utilities:
+  -
+    token: sp
+    at:
+      - 0
+      - 0
+    raw: sp
+  -
+    token: an
+    at:
+      - 6
+      - 0
+    raw: "an:-90"
+  -
+    token: t
+    at:
+      - 3
+      - 7
+    raw: t
+  -
+    token: 3t
+    at:
+      - 3
+      - 8
+    raw: "3t:Everything triangle"
+artifacts:
+  -
+    token: dark_sphere
+    at:
+      - 0
+      - 0
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 1
+      - 1
+  -
+    token: triangle_line_puzzle
+    at:
+      - 3
+      - 3
+    rotation: 0
+    y_offset: 1.2
+    footprint_inferred:
+      - 3
+      - 3
+    config: "#fillhole:remove"
+  -
+    token: parasol_triangle
+    at:
+      - 5
+      - 4
+    rotation: ""
+    y_offset: ""
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: cube_scene
+    at:
+      - 3
+      - 5
+    rotation: 0
+    y_offset: 0
+    footprint_inferred:
+      - 3
+      - 3
+    config: "#group:fillhole"
+  -
+    token: triangle
+    at:
+      - 3
+      - 6
+    rotation: 0
+    y_offset: 1.0
+    footprint_inferred:
+      - 3
+      - 1
+  -
+    token: triangleprofiles
+    at:
+      - 3
+      - 7
+    rotation: 0
+    y_offset: 2
+    footprint_inferred:
+      - 1
+      - 1
+  -
+    token: science_screen
+    at:
+      - 5
+      - 7
+    rotation: 180
+    y_offset: 1.5
+    footprint_inferred:
+      - 3
+      - 1
+    config: "#mode:triangle"
+artifact_count: 7

@@ -1,0 +1,116 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ForcesChaos",
+  "home_sequence": "forces",
+  "dimensions": {
+    "w": 22,
+    "d": 19
+  },
+  "signature": "three_body_problem simulates three gravitationally interacting masses with no closed-form solution \u2014 deterministic chaos from the simplest force law. nbody_simulation extends gravitational interaction to N bodies with O(N^2) pairwise force calculations per frame. example_2_8_two_body_attraction_vr demonstrates the two-body case where Kepler's closed orbits are possible",
+  "style": null,
+  "echoes": [
+    "randomness"
+  ],
+  "density": 0.047,
+  "breath_zones": [
+    {
+      "size": 83,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 9
+      },
+      "centroid": [
+        4.481927710843373,
+        4.072289156626506
+      ]
+    },
+    {
+      "size": 59,
+      "bounds": {
+        "x": 14,
+        "z": 0,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        17.508474576271187,
+        3.559322033898305
+      ]
+    },
+    {
+      "size": 54,
+      "bounds": {
+        "x": 14,
+        "z": 11,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        17.703703703703702,
+        14.203703703703704
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 1,
+      "token": "three_body_problem"
+    },
+    {
+      "x": 6,
+      "z": 1,
+      "token": "nbody_simulation"
+    },
+    {
+      "x": 15,
+      "z": 2,
+      "token": "chaos_attractor"
+    },
+    {
+      "x": 18,
+      "z": 2,
+      "token": "forcedirected3d"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "example_2_8_two_body_attraction_vr"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "particle_systems"
+    },
+    {
+      "x": 15,
+      "z": 5,
+      "token": "spring_system"
+    },
+    {
+      "x": 18,
+      "z": 5,
+      "token": "vector_field_visualizer"
+    },
+    {
+      "x": 15,
+      "z": 13,
+      "token": "example_2_9_n_body_attraction_vr"
+    },
+    {
+      "x": 17,
+      "z": 16,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 10,
+    "walkable_cells": 213,
+    "breath_zone_count": 3,
+    "unique_tokens": 10
+  }
+}

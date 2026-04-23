@@ -1,0 +1,66 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Random_Rotate_Random_XYZ",
+  "home_sequence": "randomness",
+  "dimensions": {
+    "w": 13,
+    "d": 16
+  },
+  "signature": "Random_Rotate_Random_XYZ is the core demonstration \u2014 three independent random rotations composed into one orientation; hardware_entropy_decay bridges from PRNG to physical entropy sources; random_decay_multimesh scales random rotation to hundreds of instances",
+  "style": null,
+  "echoes": [
+    "transformation",
+    "noise"
+  ],
+  "density": 0.024,
+  "breath_zones": [
+    {
+      "size": 202,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 16
+      },
+      "centroid": [
+        6.024752475247524,
+        7.465346534653466
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "Random_Rotate_Random_XYZ"
+    },
+    {
+      "x": 5,
+      "z": 8,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 9,
+      "token": "random_decay_multimesh"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "RotateGridCubes"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "hardware_entropy_decay"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 207,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

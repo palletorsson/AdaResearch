@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_Chaos",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 6
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.015,
+  "breath_zones": [
+    {
+      "size": 63,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 6
+      },
+      "centroid": [
+        5.031746031746032,
+        2.507936507936508
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "lyapunov_exponents"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 65,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

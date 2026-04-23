@@ -1,0 +1,75 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Randomness_10_PRINT_Algorithm",
+  "home_sequence": "randomness",
+  "dimensions": {
+    "w": 13,
+    "d": 14
+  },
+  "signature": "ten_print_maze_3d is the central artifact \u2014 the algorithm made spatial and navigable; clipboard#ten_print_axioms provides the formal statement; pickup_cube_placer enables additive modification of the maze; remove_random enables subtractive modification; nature_system_demo overlays organic randomness onto algorithmic randomness; dark_sphere anchors.",
+  "style": null,
+  "echoes": [
+    "noise"
+  ],
+  "density": 0.039,
+  "breath_zones": [
+    {
+      "size": 172,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 14
+      },
+      "centroid": [
+        6.058139534883721,
+        6.598837209302325
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "remove_random"
+    },
+    {
+      "x": 1,
+      "z": 2,
+      "token": "ten_print_maze_3d"
+    },
+    {
+      "x": 2,
+      "z": 2,
+      "token": "pickup_cube_placer"
+    },
+    {
+      "x": 11,
+      "z": 2,
+      "token": "ten_print_maze_3d"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "nature_system_demo"
+    },
+    {
+      "x": 1,
+      "z": 12,
+      "token": "ten_print_maze_3d"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 7,
+    "walkable_cells": 181,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

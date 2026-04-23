@@ -1,0 +1,68 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "SoftBodies_Obsticals_Part3",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 20,
+    "d": 20
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.015,
+  "breath_zones": [
+    {
+      "size": 391,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 20,
+        "d": 20
+      },
+      "centroid": [
+        9.654731457800512,
+        9.560102301790282
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "softbody_gallery_part3"
+    },
+    {
+      "x": 0,
+      "z": 3,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 0,
+      "z": 4,
+      "token": "grab_long_stick"
+    },
+    {
+      "x": 0,
+      "z": 5,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 0,
+      "z": 6,
+      "token": "grab_long_stick"
+    },
+    {
+      "x": 0,
+      "z": 7,
+      "token": "pick_up_cube"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 397,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

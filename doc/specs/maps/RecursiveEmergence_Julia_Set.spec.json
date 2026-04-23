@@ -1,0 +1,48 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "RecursiveEmergence_Julia_Set",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 9,
+    "d": 11
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.022,
+  "breath_zones": [
+    {
+      "size": 90,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 11
+      },
+      "centroid": [
+        3.977777777777778,
+        5.033333333333333
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "sierpinski_pyramid"
+    },
+    {
+      "x": 6,
+      "z": 7,
+      "token": "julia_set"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 92,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

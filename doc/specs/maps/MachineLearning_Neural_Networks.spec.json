@@ -1,0 +1,55 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "MachineLearning_Neural_Networks",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 12,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "randomness"
+  ],
+  "density": 0.018,
+  "breath_zones": [
+    {
+      "size": 164,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 14
+      },
+      "centroid": [
+        5.512195121951219,
+        6.445121951219512
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 2,
+      "token": "neural_networks_vr"
+    },
+    {
+      "x": 9,
+      "z": 10,
+      "token": "transformers_vr"
+    },
+    {
+      "x": 1,
+      "z": 11,
+      "token": "variational_autoencoders_vaes_vr"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 167,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Pattern_Walls_Gallery",
+  "home_sequence": "mosaicanalysis",
+  "dimensions": {
+    "w": 40,
+    "d": 40
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.001,
+  "breath_zones": [
+    {
+      "size": 1598,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 40,
+        "d": 40
+      },
+      "centroid": [
+        19.52127659574468,
+        19.52127659574468
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "floor_plan_space"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 1599,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

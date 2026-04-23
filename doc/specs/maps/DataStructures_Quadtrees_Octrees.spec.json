@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "DataStructures_Quadtrees_Octrees",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 8,
+    "d": 10
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.014,
+  "breath_zones": [
+    {
+      "size": 70,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 10
+      },
+      "centroid": [
+        3.4857142857142858,
+        4.571428571428571
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 4,
+      "token": "env_one"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 71,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Euclid_Parallel",
+  "home_sequence": "foundationscrisis",
+  "dimensions": {
+    "w": 11,
+    "d": 15
+  },
+  "signature": "euclid_parallel_demo demonstrates the postulate interactively; parallel_line_demo provides the geometric construction.",
+  "style": "bauhaus",
+  "echoes": [],
+  "density": 0.017,
+  "breath_zones": [
+    {
+      "size": 116,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 15
+      },
+      "centroid": [
+        4.9655172413793105,
+        6.482758620689655
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 5,
+      "token": "parallel_lines"
+    },
+    {
+      "x": 7,
+      "z": 5,
+      "token": "angle_sum_triangle"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 119,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

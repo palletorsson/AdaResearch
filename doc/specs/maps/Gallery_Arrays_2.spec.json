@@ -1,0 +1,188 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_Arrays_2",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 20
+  },
+  "signature": null,
+  "style": "pompeii",
+  "echoes": [],
+  "density": 0.137,
+  "breath_zones": [
+    {
+      "size": 159,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 20
+      },
+      "centroid": [
+        5.0251572327044025,
+        10.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "pompeii_meander_floor"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "pulsar_compact"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "pulsar_glass_tubes"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "pulsar_lines"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "radial_mandala_floor"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "rainbow_checker_floor"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "san_michele_mosaic_floor"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "solomons_knot_floor"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "space_filling_floor"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "spiral_mosaic_floor"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "star_rosette_floor"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "step_sequencer_ambient"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "step_sequencer_breakbeat"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "step_sequencer_chiptune"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "step_sequencer_cinematic"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "step_sequencer_cosmic"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "step_sequencer_disco"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "step_sequencer_house"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "step_sequencer_jazz"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "step_sequencer_kraftwerk"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "step_sequencer_lofi"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "step_sequencer_pads"
+    },
+    {
+      "x": 6,
+      "z": 12,
+      "token": "step_sequencer_scifi"
+    },
+    {
+      "x": 8,
+      "z": 12,
+      "token": "step_sequencer_synth"
+    },
+    {
+      "x": 2,
+      "z": 14,
+      "token": "step_sequencer_trap"
+    },
+    {
+      "x": 4,
+      "z": 14,
+      "token": "stepped_zigzag_floor"
+    },
+    {
+      "x": 6,
+      "z": 14,
+      "token": "swastika_meander_floor"
+    },
+    {
+      "x": 8,
+      "z": 14,
+      "token": "tile_meander_floor"
+    },
+    {
+      "x": 2,
+      "z": 16,
+      "token": "turtle_meander_floor"
+    },
+    {
+      "x": 4,
+      "z": 16,
+      "token": "wave_scale_floor"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 30,
+    "walkable_cells": 219,
+    "breath_zone_count": 1,
+    "unique_tokens": 30
+  }
+}

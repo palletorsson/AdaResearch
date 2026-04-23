@@ -1,0 +1,57 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Mosaic_Pattern_Maker",
+  "home_sequence": "mosaicanalysis",
+  "dimensions": {
+    "w": 5,
+    "d": 5
+  },
+  "signature": "pattern_maker_station",
+  "style": "pompeii",
+  "echoes": [
+    "transformation"
+  ],
+  "density": 0.13,
+  "breath_zones": [
+    {
+      "size": 21,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 5,
+        "d": 5
+      },
+      "centroid": [
+        2.0,
+        1.9523809523809523
+      ]
+    }
+  ],
+  "hard_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "pattern_maker_station",
+      "role": "signature"
+    }
+  ],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 1,
+      "token": "pattern_tile_puzzle"
+    },
+    {
+      "x": 2,
+      "z": 3,
+      "token": "tessellation_lattice_demo"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 23,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

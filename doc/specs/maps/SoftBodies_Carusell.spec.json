@@ -1,0 +1,83 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "SoftBodies_Carusell",
+  "home_sequence": "softbodies",
+  "dimensions": {
+    "w": 20,
+    "d": 20
+  },
+  "signature": "cloth_straps simulate fabric strips hanging from the rotating hub; soft_mushroom demonstrates volumetric soft body behavior under rotation; revolving_joy_ride is the carousel mechanism itself; grab_long_stick and pick_up_cube provide interactive soft body manipulation.",
+  "style": null,
+  "echoes": [],
+  "density": 0.023,
+  "breath_zones": [
+    {
+      "size": 390,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 20,
+        "d": 20
+      },
+      "centroid": [
+        9.65128205128205,
+        9.551282051282051
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 3,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 0,
+      "z": 4,
+      "token": "grab_long_stick"
+    },
+    {
+      "x": 0,
+      "z": 5,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 0,
+      "z": 6,
+      "token": "grab_long_stick"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "revolving_joy_ride"
+    },
+    {
+      "x": 0,
+      "z": 7,
+      "token": "pick_up_cube"
+    },
+    {
+      "x": 5,
+      "z": 9,
+      "token": "cloth_straps"
+    },
+    {
+      "x": 5,
+      "z": 11,
+      "token": "cloth_straps"
+    },
+    {
+      "x": 10,
+      "z": 12,
+      "token": "soft_mushroom"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 9,
+    "walkable_cells": 399,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

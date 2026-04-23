@@ -1,0 +1,123 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "WaveFunctions_Unit_Circle",
+  "home_sequence": "wavefunctions",
+  "dimensions": {
+    "w": 13,
+    "d": 17
+  },
+  "signature": "OscillationCurve",
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.129,
+  "breath_zones": [
+    {
+      "size": 110,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 17
+      },
+      "centroid": [
+        5.963636363636364,
+        6.590909090909091
+      ]
+    }
+  ],
+  "hard_constraints": [
+    {
+      "x": 1,
+      "z": 13,
+      "token": "OscillationCurve",
+      "role": "signature"
+    },
+    {
+      "x": 11,
+      "z": 13,
+      "token": "OscillationCurve",
+      "role": "signature"
+    }
+  ],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 0,
+      "token": "cube_scene"
+    },
+    {
+      "x": 3,
+      "z": 0,
+      "token": "cube_scene"
+    },
+    {
+      "x": 4,
+      "z": 0,
+      "token": "cube_scene"
+    },
+    {
+      "x": 5,
+      "z": 0,
+      "token": "cube_scene"
+    },
+    {
+      "x": 6,
+      "z": 0,
+      "token": "cube_scene"
+    },
+    {
+      "x": 7,
+      "z": 0,
+      "token": "cube_scene"
+    },
+    {
+      "x": 8,
+      "z": 0,
+      "token": "cube_scene"
+    },
+    {
+      "x": 9,
+      "z": 0,
+      "token": "cube_scene"
+    },
+    {
+      "x": 10,
+      "z": 0,
+      "token": "cube_scene"
+    },
+    {
+      "x": 6,
+      "z": 3,
+      "token": "unit_circle_advanced"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "colorballs"
+    },
+    {
+      "x": 0,
+      "z": 13,
+      "token": "SimpleOscillatingBridge"
+    },
+    {
+      "x": 6,
+      "z": 13,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 12,
+      "z": 13,
+      "token": "SimpleOscillatingBridge"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 16,
+    "walkable_cells": 124,
+    "breath_zone_count": 1,
+    "unique_tokens": 6
+  }
+}

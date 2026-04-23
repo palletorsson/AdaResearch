@@ -1,0 +1,188 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_Primitives_3",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 20
+  },
+  "signature": null,
+  "style": "bauhaus",
+  "echoes": [],
+  "density": 0.137,
+  "breath_zones": [
+    {
+      "size": 159,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 20
+      },
+      "centroid": [
+        5.0251572327044025,
+        10.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "parametric_surface"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "pickup_cube_combo"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "pickup_cube_scaling"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "plane"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "platonic_demo"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "plus_lines"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "point"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "point_collection"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "portal_frame"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "prismblock"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "proceduralrock"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "profile_chair"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "pythagorean_proof"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "pythagorean_triangle"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "quantum_dice"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "quest_controller"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "reality_modifier"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "rectcube"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "right_triangle_lines"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "rock_primitive"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "rockfactory"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "rockfactory_gravity"
+    },
+    {
+      "x": 6,
+      "z": 12,
+      "token": "rotation_match_puzzle"
+    },
+    {
+      "x": 8,
+      "z": 12,
+      "token": "scifi_panel_wall"
+    },
+    {
+      "x": 2,
+      "z": 14,
+      "token": "simple_rock"
+    },
+    {
+      "x": 4,
+      "z": 14,
+      "token": "sliding_door"
+    },
+    {
+      "x": 6,
+      "z": 14,
+      "token": "snap_demo"
+    },
+    {
+      "x": 8,
+      "z": 14,
+      "token": "snap_triangle_puzzle"
+    },
+    {
+      "x": 2,
+      "z": 16,
+      "token": "snap_wedge_puzzle"
+    },
+    {
+      "x": 4,
+      "z": 16,
+      "token": "spatial_compass"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 30,
+    "walkable_cells": 219,
+    "breath_zone_count": 1,
+    "unique_tokens": 30
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "PhysicsSimulation_Verlet_Integration",
+  "home_sequence": "physicssimulation",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": null,
+  "style": "rams",
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.018,
+  "breath_zones": [
+    {
+      "size": 54,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.0185185185185186,
+        3.462962962962963
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "verlet_integration"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 55,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

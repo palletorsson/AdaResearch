@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "MachineLearning_Evolving_Creatures",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 12,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.006,
+  "breath_zones": [
+    {
+      "size": 165,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 14
+      },
+      "centroid": [
+        5.448484848484848,
+        6.4363636363636365
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 6,
+      "token": "evolved_creatures"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 167,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

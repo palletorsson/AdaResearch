@@ -1,0 +1,63 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Tutorial_2D",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 6,
+    "d": 8
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.106,
+  "breath_zones": [
+    {
+      "size": 42,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 6,
+        "d": 8
+      },
+      "centroid": [
+        2.5238095238095237,
+        3.5476190476190474
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "grid_snapper"
+    },
+    {
+      "x": 1,
+      "z": 1,
+      "token": "grid_2d_4x4"
+    },
+    {
+      "x": 2,
+      "z": 3,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 3,
+      "token": "game_time_display"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "player_position"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 47,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

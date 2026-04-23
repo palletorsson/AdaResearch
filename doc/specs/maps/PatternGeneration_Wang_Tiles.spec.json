@@ -1,0 +1,45 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "PatternGeneration_Wang_Tiles",
+  "home_sequence": "patterngeneration",
+  "dimensions": {
+    "w": 8,
+    "d": 8
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.016,
+  "breath_zones": [
+    {
+      "size": 62,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        3.5,
+        3.467741935483871
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 3,
+      "token": "env_one"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 63,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

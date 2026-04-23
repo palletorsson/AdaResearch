@@ -1,0 +1,48 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Noise_6_Wall",
+  "home_sequence": "noise",
+  "dimensions": {
+    "w": 11,
+    "d": 11
+  },
+  "signature": "shader_noise_space is the six-octave wall itself \u2014 a real-time procedural texture surface demonstrating GPU noise generation",
+  "style": null,
+  "echoes": [],
+  "density": 0.048,
+  "breath_zones": [
+    {
+      "size": 42,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 11
+      },
+      "centroid": [
+        4.857142857142857,
+        5.023809523809524
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 5,
+      "token": "shader_noise_space"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 42,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

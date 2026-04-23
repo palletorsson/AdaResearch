@@ -1,0 +1,80 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Forces_Drone_Game",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 15,
+    "d": 19
+  },
+  "signature": "vector_drone is the playable force-composition vehicle; gravity_gun_test_scene adds interactive force application; health_display and hits_reset_display provide game feedback; queer_cylinder_target provides precision goals that demand fine force control.",
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.028,
+  "breath_zones": [
+    {
+      "size": 276,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 15,
+        "d": 19
+      },
+      "centroid": [
+        7.0144927536231885,
+        8.93840579710145
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 0,
+      "token": "hits_reset_display"
+    },
+    {
+      "x": 7,
+      "z": 0,
+      "token": "health_display"
+    },
+    {
+      "x": 1,
+      "z": 8,
+      "token": "queer_cylinder_target"
+    },
+    {
+      "x": 11,
+      "z": 8,
+      "token": "queer_cylinder_target"
+    },
+    {
+      "x": 6,
+      "z": 11,
+      "token": "gravity_gun_test_scene"
+    },
+    {
+      "x": 10,
+      "z": 17,
+      "token": "vector_drone"
+    },
+    {
+      "x": 3,
+      "z": 18,
+      "token": "hits_reset_display"
+    },
+    {
+      "x": 5,
+      "z": 18,
+      "token": "health_display"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 8,
+    "walkable_cells": 284,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

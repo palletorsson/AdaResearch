@@ -1,0 +1,69 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Test_13",
+  "home_sequence": "testmaps",
+  "dimensions": {
+    "w": 22,
+    "d": 22
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.008,
+  "breath_zones": [
+    {
+      "size": 117,
+      "bounds": {
+        "x": 1,
+        "z": 1,
+        "w": 17,
+        "d": 19
+      },
+      "centroid": [
+        7.410256410256411,
+        8.145299145299145
+      ]
+    },
+    {
+      "size": 7,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 3,
+        "d": 3
+      },
+      "centroid": [
+        1.1428571428571428,
+        0.7142857142857143
+      ]
+    },
+    {
+      "size": 6,
+      "bounds": {
+        "x": 19,
+        "z": 12,
+        "w": 3,
+        "d": 2
+      },
+      "centroid": [
+        20.0,
+        12.5
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 11,
+      "token": "random_color_book_page_collection"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 132,
+    "breath_zone_count": 3,
+    "unique_tokens": 1
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Trans_RotationSpectacle",
+  "home_sequence": "transformation",
+  "dimensions": {
+    "w": 10,
+    "d": 54
+  },
+  "signature": "carousel_cake demonstrates layered rotation with independent speeds and axes \u2014 a compound transformation built from simple ones; boolean_tunnel shows rotation as spatial subtraction",
+  "style": null,
+  "echoes": [],
+  "density": 0.008,
+  "breath_zones": [
+    {
+      "size": 368,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 50
+      },
+      "centroid": [
+        5.0271739130434785,
+        24.744565217391305
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "boolean_tunnel"
+    },
+    {
+      "x": 3,
+      "z": 6,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 2,
+      "z": 51,
+      "token": "pick_up_cube"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 373,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

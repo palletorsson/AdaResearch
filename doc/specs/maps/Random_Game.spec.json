@@ -1,0 +1,92 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Random_Game",
+  "home_sequence": "randomness",
+  "dimensions": {
+    "w": 13,
+    "d": 16
+  },
+  "signature": "cube_projectile_spawner#mode is the core hazard system \u2014 falling cubes with configurable random behavior; kaleidocycle_enemy",
+  "style": null,
+  "echoes": [
+    "color",
+    "forces",
+    "noise"
+  ],
+  "density": 0.059,
+  "breath_zones": [
+    {
+      "size": 162,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 15
+      },
+      "centroid": [
+        6.407407407407407,
+        7.345679012345679
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "r_c"
+    },
+    {
+      "x": 3,
+      "z": 2,
+      "token": "r_c"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "r_c"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "r_c"
+    },
+    {
+      "x": 1,
+      "z": 4,
+      "token": "r_c"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "r_c"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "miura_crawler"
+    },
+    {
+      "x": 3,
+      "z": 10,
+      "token": "kresling_spire"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "scissor_stalker"
+    },
+    {
+      "x": 5,
+      "z": 10,
+      "token": "kaleidocycle_enemy"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 10,
+    "walkable_cells": 169,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

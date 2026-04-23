@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ProceduralGenerationMarchingCubesVovelNoise",
+  "home_sequence": "proceduralgeneration_all",
+  "dimensions": {
+    "w": 13,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "noise"
+  ],
+  "density": 0.011,
+  "breath_zones": [
+    {
+      "size": 179,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 14
+      },
+      "centroid": [
+        6.022346368715084,
+        6.5307262569832405
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 6,
+      "token": "marchingcubes_voxel_noise_demo"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 181,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Fractal_JuliaSet",
+  "home_sequence": "fractals",
+  "dimensions": {
+    "w": 9,
+    "d": 9
+  },
+  "signature": "julia_set implements the classic escape-time Julia set visualization; julia_set_explorer provides interactive c-parameter navigation through Julia space; fibonacci_terrain#preset bridges from Fractals_7's growth patterns; dark_sphere anchors.",
+  "style": null,
+  "echoes": [],
+  "density": 0.041,
+  "breath_zones": [
+    {
+      "size": 70,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 9
+      },
+      "centroid": [
+        4.1571428571428575,
+        3.6
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "julia_set"
+    },
+    {
+      "x": 4,
+      "z": 3,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 1,
+      "z": 7,
+      "token": "lyapunov_fractal"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 74,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

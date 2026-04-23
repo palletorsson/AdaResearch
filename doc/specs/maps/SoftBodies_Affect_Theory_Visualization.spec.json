@@ -1,0 +1,46 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "SoftBodies_Affect_Theory_Visualization",
+  "home_sequence": "softbodies",
+  "dimensions": {
+    "w": 7,
+    "d": 9
+  },
+  "signature": "radiolaria models the intricate silica exoskeleton of a radiolarian",
+  "style": "escher",
+  "echoes": [
+    "forces",
+    "proceduralgeneration"
+  ],
+  "density": 0.016,
+  "breath_zones": [
+    {
+      "size": 61,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 9
+      },
+      "centroid": [
+        3.0,
+        3.9344262295081966
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 5,
+      "token": "radiolaria"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 62,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

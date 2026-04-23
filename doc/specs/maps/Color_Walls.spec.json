@@ -1,0 +1,63 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Color_Walls",
+  "home_sequence": "color",
+  "dimensions": {
+    "w": 11,
+    "d": 31
+  },
+  "signature": "rainbow_hallway is the immersive centerpiece \u2014 color as continuous field rather than discrete assignment; color_constellation_office provides a spatial model of color relationships",
+  "style": null,
+  "echoes": [],
+  "density": 0.015,
+  "breath_zones": [
+    {
+      "size": 334,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 31
+      },
+      "centroid": [
+        5.026946107784431,
+        15.152694610778443
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 0,
+      "token": "color_space_navigator"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "subpixel_display"
+    },
+    {
+      "x": 3,
+      "z": 5,
+      "token": "gradient_interpolator"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "rainbow_hallway"
+    },
+    {
+      "x": 5,
+      "z": 8,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 340,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

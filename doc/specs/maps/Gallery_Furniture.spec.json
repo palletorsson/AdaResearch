@@ -1,0 +1,128 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_Furniture",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.118,
+  "breath_zones": [
+    {
+      "size": 117,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 14
+      },
+      "centroid": [
+        5.034188034188034,
+        6.897435897435898
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "albers_relief"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "analysis_station_puzzle"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "artifact_catalog_kiosk"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "attachable_wood_cube"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "constructivist_relief"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "diagnostic_station_puzzle"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "equipment_assembly_puzzle"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "lab_assembly_puzzle"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "measurement_station_puzzle"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "mondrian_relief"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "scalable_wood_cube"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "scientific_assembly_puzzle"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "score_display"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "shelf_assembly_puzzle"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "snappable_wood_cube"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "storage_station_puzzle"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "table_assembly_puzzle"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "vr_component_demo"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 18,
+    "walkable_cells": 153,
+    "breath_zone_count": 1,
+    "unique_tokens": 18
+  }
+}

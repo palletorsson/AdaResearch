@@ -1,0 +1,58 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Point_Line_Grid",
+  "home_sequence": "primitives",
+  "dimensions": {
+    "w": 8,
+    "d": 14
+  },
+  "signature": "player_trace records movement as gridded history; grid_lines provides the fixed frame; grab_sphere_point_snap demonstrates the snap constraint \u2014 agency within imposed structure.",
+  "style": null,
+  "echoes": [],
+  "density": 0.085,
+  "breath_zones": [
+    {
+      "size": 43,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 10
+      },
+      "centroid": [
+        3.116279069767442,
+        4.744186046511628
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "player_trace"
+    },
+    {
+      "x": 1,
+      "z": 0,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 4,
+      "z": 3,
+      "token": "grid_lines"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "grab_sphere_point_snap"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 47,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

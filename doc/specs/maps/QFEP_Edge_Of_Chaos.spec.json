@@ -1,0 +1,71 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "QFEP_Edge_Of_Chaos",
+  "home_sequence": "qfeplaboratory",
+  "dimensions": {
+    "w": 14,
+    "d": 13
+  },
+  "signature": "edge_core generates emergent behavior at critical \u03bb; emergence_zone visualizes the narrow band where complexity lives; turing_pattern connects to reaction-diffusion morphogenesis; lambda_slider provides continuous parameter control; tt for navigation.",
+  "style": null,
+  "echoes": [
+    "noise",
+    "softbodies"
+  ],
+  "density": 0.033,
+  "breath_zones": [
+    {
+      "size": 172,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 14,
+        "d": 13
+      },
+      "centroid": [
+        6.546511627906977,
+        5.8604651162790695
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 3,
+      "token": "turing_pattern"
+    },
+    {
+      "x": 8,
+      "z": 3,
+      "token": "turing_pattern"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "edge_core"
+    },
+    {
+      "x": 3,
+      "z": 8,
+      "token": "edge_of_chaos_unlocked"
+    },
+    {
+      "x": 4,
+      "z": 9,
+      "token": "emergence_zone"
+    },
+    {
+      "x": 8,
+      "z": 9,
+      "token": "emergence_zone"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 180,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

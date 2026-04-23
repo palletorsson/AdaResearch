@@ -72,6 +72,13 @@ Tags aren't enforced. They're a soft channel the scoring function reads:
 - `isolated`, `grouped` — placement preference (`isolated` softly prefers
   empty cells around it; `grouped` softly prefers proximity to same-sequence
   artifacts)
+- `gallery`, `corridor_incompatible`, `oversized` — see above (validity).
+
+> **Note (step 2a consolidation).** The old `floats_in_void` tag was
+> removed. The same fact is now carried by the registry entry's
+> `spatial_needs.platform = "sunken"` (per-artifact) or the sequence's
+> `gallery: true` flag in `commons/maps/spine_styles.json` (whole-sequence).
+> One source of truth, no duplicated signal.
 
 Over time the scoring function reads the existing hand-placed maps, learns
 which tag combinations cluster, and encodes that as soft constraints. Tags

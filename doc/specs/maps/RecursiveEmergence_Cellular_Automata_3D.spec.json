@@ -1,0 +1,48 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "RecursiveEmergence_Cellular_Automata_3D",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 8,
+    "d": 10
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.025,
+  "breath_zones": [
+    {
+      "size": 77,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 10
+      },
+      "centroid": [
+        3.4675324675324677,
+        4.454545454545454
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "cellular_automata_3d"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "cellular_automata_3d_stacked"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 79,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

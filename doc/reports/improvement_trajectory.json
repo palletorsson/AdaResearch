@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "description": "Computed summary of improvement trends across BREATHE cycles. Updated after each breath's Harvest phase.",
-  "last_updated": "2026-04-20T09:00:00",
-  "total_breaths": 11,
+  "last_updated": "2026-04-22T09:00:00",
+  "total_breaths": 13,
   "global_avg_history": [
     {
       "date": "2026-04-08",
@@ -61,6 +61,18 @@
       "date": "2026-04-20",
       "avg": 5.05,
       "breath_id": "2026-04-20T09:00"
+    },
+    {
+      "date": "2026-04-21",
+      "avg": 5.05,
+      "breath_id": "2026-04-21T09:00",
+      "garden_delta": "patterngeneration SCATTERED->REACHING (+6 voiced), mosaicanalysis SCATTERED->REACHING (+23 voiced via floor_plan_space)"
+    },
+    {
+      "date": "2026-04-22",
+      "avg": 5.05,
+      "breath_id": "2026-04-22T09:00",
+      "garden_delta": "+98 voiced (763->861). Gate A restored. vectors LIVING, machinelearning GROWING, cellularautomata/grammar_systems/proceduralaudio/spatial_partitioning REACHING. Root cause: PascalCase gd filename cache key mismatch in garden_listener + primitives.json trailing comma."
     }
   ],
   "skill_effectiveness_cumulative": {
@@ -98,7 +110,7 @@
     }
   },
   "stall_detected": true,
-  "stall_reason": "Pipeline stuck at stage 6 (VR testing) \u2014 requires human VR sessions to advance. Garden health is the active improvement area.",
+  "stall_reason": "Pipeline stuck at stage 6 (VR testing) \u2014 requires human VR sessions to advance. Garden health is the active improvement area. Most SCATTERED sequences now blocked by missing .gd files (stubs) rather than missing @identity.",
   "known_tooling_limits": [
     {
       "tool": "sequence_pipeline_scorer.py",
@@ -111,13 +123,14 @@
     }
   ],
   "evening_harvest_notes": {
-    "date": "2026-04-19",
-    "summary": "Today's morning breath (2026-04-19T08:00) shifted the project into its qualitative improvement phase. With all 19 spine sequences at stage 6 (VR testing) and all 4 release gates passing, AI-actionable structural work is exhausted. The breath pivoted to garden health: @identity added to 9 artifacts in the primitives sequence, advancing its garden state from SCATTERED to GROWING (64/91 = 70.3% voiced). Total voiced artifact-map appearances rose from 652 to 719 (+67). Key tactical discovery: shared ambient artifacts that appear in many maps are the highest-leverage @identity targets \u00e2\u20ac\u201d writing dark_sphere voiced it 13 times simultaneously.",
-    "next_breath_recommendation": "Continue @identity work, prioritizing by map-appearance multiplier. Identify sequences closest to the GROWING threshold (70% voiced) that haven't crossed it yet. A sequence at 65% voiced may only need 4-5 identity blocks to flip states. The new 'garden-multiplier-triage' flow captures this prioritization pattern. VR testing is the only path to advance pipeline stages \u00e2\u20ac\u201d garden health is the productive AI focus until sessions resume.",
-    "skill_evolution_proposals": "NONE \u00e2\u20ac\u201d no skill has failed 3+ times on the same pattern. Across 9 breaths, only 1 failure exists (validation_investigation 2026-04-11 \u00e2\u20ac\u201d itself a tooling bug now fixed). All tracked skills at 100% success rate. No proposals warranted.",
-    "trajectory_note": "global_avg has grown from 2.04 (baseline) to 5.05 in 9 breaths: +3.01 total. The project has entered a qualitative plateau \u00e2\u20ac\u201d flat pipeline scores are correct and expected (VR bottleneck), not a regression. Garden health is now the primary measurable dimension of improvement.",
+    "date": "2026-04-21",
+    "summary": "Today's morning breath (2026-04-21T09:00) achieved a cascade effect via infrastructure artifact targeting: floor_plan_space appears in 28+ maps across two sequences, so one @identity write advanced patterngeneration (SCATTERED->REACHING, 60.4%->71.7%) and mosaicanalysis (SCATTERED->REACHING, 39.5%->93.0%) simultaneously. Six artifacts voiced, all correctly placed in sequence-specific maps. The garden-multiplier-triage flow referenced in Apr-19 harvest was never written to disk — created it this evening. Global avg stable at 5.05 (VR bottleneck), garden health is the active improvement front.",
+    "next_breath_recommendation": "Target SCATTERED sequences: machinelearning and swarmintelligence are stuck because their artifacts are counted under gallery maps, not sequence maps. Either build new sequence-specific maps or skip until map building resumes. Consider softbodies or fractals if below 70% threshold. patterngeneration REACHING needs embodiment work (VR controls) to reach GROWING — this requires code changes, not just @identity.",
+    "skill_evolution_proposals": "prop-001 still has 1 breath of evidence (2026-04-20 gallery-map failure). Today was counter-evidence: correctly targeted sequence maps. 3+ failure threshold not reached. No new proposals warranted.",
+    "trajectory_note": "global_avg stable at 5.05 for 4 consecutive breaths (Apr-18 to Apr-21). Expected: VR testing is the only pipeline advancement path. Garden health is the shadow metric: SCATTERED->REACHING via @identity (AI-actionable), REACHING->GROWING via VR controls (code change required), GROWING->LIVING via VR test sessions (human-required). All 4 release gates passing since Apr-18.",
     "new_flows_added": [
       "garden-multiplier-triage"
-    ]
+    ],
+    "missing_flow_recovered": "garden-multiplier-triage was listed in Apr-19 harvest notes but file was never created on disk — written this evening"
   }
 }

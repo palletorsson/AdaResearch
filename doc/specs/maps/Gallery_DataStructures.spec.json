@@ -1,0 +1,113 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_DataStructures",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 12
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.115,
+  "breath_zones": [
+    {
+      "size": 101,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 12
+      },
+      "centroid": [
+        5.01980198019802,
+        5.811881188118812
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "binary_trees"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "bsp_trees"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "bst_visualization"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "btree_visualization"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "fenwick_tree"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "graph_structures"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "hash_maps"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "heap_operations"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "linked_lists"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "quadtrees_octrees"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "redblack_visualization"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "segment_tree"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "suffix_array_tree"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "trie_operations"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "union_find"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 15,
+    "walkable_cells": 131,
+    "breath_zone_count": 1,
+    "unique_tokens": 15
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Bricolage_Sculpture",
+  "home_sequence": "bricolage",
+  "dimensions": {
+    "w": 13,
+    "d": 13
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.036,
+  "breath_zones": [
+    {
+      "size": 162,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 13
+      },
+      "centroid": [
+        6.0,
+        5.981481481481482
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "balanced_sculpture_1"
+    },
+    {
+      "x": 10,
+      "z": 2,
+      "token": "balanced_sculpture_2"
+    },
+    {
+      "x": 6,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 6,
+      "z": 7,
+      "token": "sculpture_builder"
+    },
+    {
+      "x": 2,
+      "z": 9,
+      "token": "counterweight_demo"
+    },
+    {
+      "x": 10,
+      "z": 9,
+      "token": "tension_demo"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 168,
+    "breath_zone_count": 1,
+    "unique_tokens": 6
+  }
+}

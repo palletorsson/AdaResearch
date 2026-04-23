@@ -1,0 +1,45 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "SwarmIntelligence_Ant_Colony_Optimization",
+  "home_sequence": "swarmintelligence",
+  "dimensions": {
+    "w": 10,
+    "d": 7
+  },
+  "signature": "AntColony implements Dorigo's ACO algorithm within the branching corridor network",
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.014,
+  "breath_zones": [
+    {
+      "size": 68,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 7
+      },
+      "centroid": [
+        4.4411764705882355,
+        2.9705882352941178
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 3,
+      "token": "AntColonyV2"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 69,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

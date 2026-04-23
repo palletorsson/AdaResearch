@@ -1,0 +1,37 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "LSystems_AnimatedTree",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 10,
+    "d": 6
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 59,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 6
+      },
+      "centroid": [
+        4.491525423728813,
+        2.4745762711864407
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 59,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

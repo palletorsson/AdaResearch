@@ -1,0 +1,78 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Random_Walk",
+  "home_sequence": "randomness",
+  "dimensions": {
+    "w": 13,
+    "d": 14
+  },
+  "signature": "random_walk_128 is the primary walk visualization; random_walk_collection shows population-level walk behavior; random_walk_leash introduces boundaries and constraint; random_walk_terrarium provides an ecological framing for bounded walks; pixel_cloud maps walk endpoints into spatial density; dark_sphere anchors.",
+  "style": null,
+  "echoes": [],
+  "density": 0.081,
+  "breath_zones": [
+    {
+      "size": 94,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 14
+      },
+      "centroid": [
+        5.98936170212766,
+        6.9787234042553195
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 1,
+      "token": "random_walk_terrarium"
+    },
+    {
+      "x": 5,
+      "z": 1,
+      "token": "random_walk_collection"
+    },
+    {
+      "x": 12,
+      "z": 1,
+      "token": "pixel_cloud"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "random_walk_128"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "random_walk_leash"
+    },
+    {
+      "x": 0,
+      "z": 11,
+      "token": "pixel_cloud"
+    },
+    {
+      "x": 12,
+      "z": 11,
+      "token": "pixel_cloud"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 8,
+    "walkable_cells": 99,
+    "breath_zone_count": 1,
+    "unique_tokens": 6
+  }
+}

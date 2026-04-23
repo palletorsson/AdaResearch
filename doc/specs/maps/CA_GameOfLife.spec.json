@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "CA_GameOfLife",
+  "home_sequence": "cellularautomata",
+  "dimensions": {
+    "w": 10,
+    "d": 16
+  },
+  "signature": "7_2_game_of_life_vr",
+  "style": null,
+  "echoes": [],
+  "density": 0.019,
+  "breath_zones": [
+    {
+      "size": 150,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 16
+      },
+      "centroid": [
+        4.54,
+        7.173333333333333
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 12,
+      "token": "mirrored_cellular_automata"
+    },
+    {
+      "x": 4,
+      "z": 15,
+      "token": "ca_bridge"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 154,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

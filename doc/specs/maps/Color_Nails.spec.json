@@ -1,0 +1,80 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Color_Nails",
+  "home_sequence": "color",
+  "dimensions": {
+    "w": 7,
+    "d": 13
+  },
+  "signature": "nail_color_controller and hand_color_controller drive the interaction loop; colorballs provide a tactile color palette; dark_side_prism foreshadows the spectrum work ahead; grab_stick_scanner introduces color as readable data.",
+  "style": null,
+  "echoes": [
+    "transformation"
+  ],
+  "density": 0.089,
+  "breath_zones": [
+    {
+      "size": 80,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 13
+      },
+      "centroid": [
+        3.025,
+        5.925
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 2,
+      "z": 5,
+      "token": "nail_color_controller"
+    },
+    {
+      "x": 4,
+      "z": 5,
+      "token": "hand_color_controller"
+    },
+    {
+      "x": 3,
+      "z": 7,
+      "token": "dark_side_prism"
+    },
+    {
+      "x": 1,
+      "z": 8,
+      "token": "grab_stick_scanner"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "colorballs"
+    },
+    {
+      "x": 0,
+      "z": 9,
+      "token": "brick_wall_factory"
+    },
+    {
+      "x": 2,
+      "z": 9,
+      "token": "colorballs"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 8,
+    "walkable_cells": 90,
+    "breath_zone_count": 1,
+    "unique_tokens": 7
+  }
+}

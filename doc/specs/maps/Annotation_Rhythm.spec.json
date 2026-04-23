@@ -1,0 +1,112 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Annotation_Rhythm",
+  "home_sequence": "annotations",
+  "dimensions": {
+    "w": 12,
+    "d": 10
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 120,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 10
+      },
+      "centroid": [
+        5.5,
+        4.5
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [
+    {
+      "x": 0,
+      "z": 0,
+      "code": "@style",
+      "params": [
+        "kusama"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "kusama"
+    },
+    {
+      "x": 11,
+      "z": 0,
+      "code": "@seed",
+      "params": [
+        "20260417"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": null
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "code": "@breath",
+      "params": [],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": null
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "code": "@breath",
+      "params": [],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": null
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "code": "@echo",
+      "params": [
+        "primitives"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "primitives"
+    },
+    {
+      "x": 0,
+      "z": 9,
+      "code": "@dense",
+      "params": [
+        "0.3"
+      ],
+      "footprint": {
+        "w": 1,
+        "d": 1
+      },
+      "key": "0.3"
+    }
+  ],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 120,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

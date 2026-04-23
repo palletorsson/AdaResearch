@@ -1,0 +1,46 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Pattern_Generation_Four",
+  "home_sequence": "unused",
+  "dimensions": {
+    "w": 13,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "color",
+    "randomness"
+  ],
+  "density": 0.006,
+  "breath_zones": [
+    {
+      "size": 179,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 14
+      },
+      "centroid": [
+        5.955307262569832,
+        6.446927374301676
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 6,
+      "z": 6,
+      "token": "fabrics"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 180,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Wavefunctions_Sky_Stairs",
+  "home_sequence": "wavefunctions",
+  "dimensions": {
+    "w": 12,
+    "d": 13
+  },
+  "signature": "sine_cylinder_staircase generates the wave-shaped stairs; math_objects provide formal mathematical reference; cube_scene frames the floating sample fields; dark_sphere anchors the vertical space.",
+  "style": null,
+  "echoes": [],
+  "density": 0.11,
+  "breath_zones": [
+    {
+      "size": 137,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 13
+      },
+      "centroid": [
+        5.394160583941606,
+        5.875912408759124
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 3,
+      "token": "cube_scene"
+    },
+    {
+      "x": 5,
+      "z": 4,
+      "token": "cube_scene"
+    },
+    {
+      "x": 5,
+      "z": 5,
+      "token": "cube_scene"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "sine_cylinder_staircase"
+    },
+    {
+      "x": 7,
+      "z": 6,
+      "token": "cube_scene"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "cube_scene"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "cube_scene"
+    },
+    {
+      "x": 7,
+      "z": 7,
+      "token": "cube_scene"
+    },
+    {
+      "x": 8,
+      "z": 7,
+      "token": "cube_scene"
+    },
+    {
+      "x": 5,
+      "z": 8,
+      "token": "cube_scene"
+    },
+    {
+      "x": 7,
+      "z": 8,
+      "token": "cube_scene"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "cube_scene"
+    },
+    {
+      "x": 5,
+      "z": 9,
+      "token": "cube_scene"
+    },
+    {
+      "x": 7,
+      "z": 9,
+      "token": "cube_scene"
+    },
+    {
+      "x": 8,
+      "z": 9,
+      "token": "cube_scene"
+    },
+    {
+      "x": 6,
+      "z": 11,
+      "token": "math_objects"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 17,
+    "walkable_cells": 154,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

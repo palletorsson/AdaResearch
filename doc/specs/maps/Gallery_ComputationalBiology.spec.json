@@ -1,0 +1,63 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_ComputationalBiology",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 8
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.057,
+  "breath_zones": [
+    {
+      "size": 77,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 8
+      },
+      "centroid": [
+        5.025974025974026,
+        3.675324675324675
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "growslimbs"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "limbgrowth"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "monte_carlo_protein"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "morphobody"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "ten_tulip_buckets"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 87,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

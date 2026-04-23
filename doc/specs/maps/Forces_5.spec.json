@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Forces_5",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": "force_field_visualizer maps drag force across the space; force_fields and vector_fields provide the continuous field representation of fluid resistance.",
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.039,
+  "breath_zones": [
+    {
+      "size": 48,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.0833333333333335,
+        3.2708333333333335
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 1,
+      "token": "vector_fields"
+    },
+    {
+      "x": 4,
+      "z": 1,
+      "token": "force_field_visualizer"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 51,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

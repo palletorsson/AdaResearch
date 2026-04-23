@@ -1,0 +1,61 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Random_Space_Geometry",
+  "home_sequence": "randomness",
+  "dimensions": {
+    "w": 12,
+    "d": 24
+  },
+  "signature": "random_transformations_geometric is the core mechanism \u2014 geometric operations driven by random parameters; sculpt_one provides a sculptural interface for random spatial modification; env_one frames the randomized geometry as environment rather than object; dark_sphere anchors the map within the sequence.",
+  "style": null,
+  "echoes": [
+    "transformation",
+    "noise"
+  ],
+  "density": 0.014,
+  "breath_zones": [
+    {
+      "size": 280,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 24
+      },
+      "centroid": [
+        5.510714285714286,
+        11.446428571428571
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 6,
+      "z": 15,
+      "token": "curl_noise_particles"
+    },
+    {
+      "x": 6,
+      "z": 17,
+      "token": "sculpt_one"
+    },
+    {
+      "x": 6,
+      "z": 18,
+      "token": "perlin_noise_bridge"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 286,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

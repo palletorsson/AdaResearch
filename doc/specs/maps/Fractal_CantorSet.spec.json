@@ -1,0 +1,68 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Fractal_CantorSet",
+  "home_sequence": "fractals",
+  "dimensions": {
+    "w": 17,
+    "d": 21
+  },
+  "signature": "cantor_set implements the classic middle-third removal; example_8_4_cantor_pagoda_vr maps Cantor deletion into 3D pagoda form; example_8_4_cantor_set_vr demonstrates radial Cantor construction; stochastic_tree_separated bridges from Fractals_2's organic recursion; dark_sphere anchors.",
+  "style": null,
+  "echoes": [],
+  "density": 0.017,
+  "breath_zones": [
+    {
+      "size": 337,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 17,
+        "d": 21
+      },
+      "centroid": [
+        8.094955489614243,
+        9.611275964391691
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 3,
+      "token": "cantor_set"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "example_8_4_cantor_set_vr"
+    },
+    {
+      "x": 3,
+      "z": 17,
+      "token": "stochastic_tree_separated"
+    },
+    {
+      "x": 8,
+      "z": 17,
+      "token": "stochastic_tree_separated"
+    },
+    {
+      "x": 12,
+      "z": 17,
+      "token": "stochastic_tree_separated"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 344,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "goal_id": "fix_ordering",
+  "goal_title": "Fix pedagogical ordering issues flagged by audits",
+  "why": "Four sequences have map-order bugs where the JSON ordering contradicts the intended concept flow. These are low-effort / high-impact fixes.",
+  "success_criteria": [
+    "wavefunctions: Unit_Circle precedes Sine_Space",
+    "array_tutorial: Tutorial_Single precedes Array_Patterns",
+    "cellularautomata: CA_GameOfLife precedes CA_ElementaryRules",
+    "swarmintelligence: Physarum moved later in sequence",
+    "All maps still pass pathfinder",
+    "Each fix documented with reasoning in commit message"
+  ],
+  "prerequisites": [],
+  "tasks": [
+    {
+      "id": "fix_ordering.001",
+      "title": "wavefunctions: swap Sine_Space and Unit_Circle",
+      "spec": "In commons/maps/sequences/wavefunctions.json, move WaveFunctions_Unit_Circle before WaveFunctions_Sine_Space in the maps[] array. Per doc/curriculum_audit/wavefunctions.md, Unit_Circle is the conceptual keystone and should precede spatialization. Update artifact_groups order if needed.",
+      "effort": "15min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-04-17",
+      "sequence_refs": [
+        "wavefunctions"
+      ],
+      "verification": "python -c \"import json; d=json.load(open('commons/maps/sequences/wavefunctions.json')); m=d.get('sequences',{}).get('wavefunctions',d).get('maps',[]); assert m.index('WaveFunctions_Unit_Circle') < m.index('WaveFunctions_Sine_Space')\"",
+      "contexts": [
+        "curriculum_spine",
+        "sequence_audit_dir",
+        "pathfinder_validate"
+      ]
+    },
+    {
+      "id": "fix_ordering.002",
+      "title": "array_tutorial: dimension ladder before patterns",
+      "spec": "Edit commons/maps/sequences/array_tutorial.json. Reorder sequences.array_tutorial.maps from the current order [Tutorial_Pattern, Array_Patterns, Tutorial_Single, Tutorial_Row, Tutorial_2D_Build, Tutorial_3D, Tutorial_Disco, Chamber_Arrays] to [Tutorial_Single, Tutorial_Row, Tutorial_2D_Build, Tutorial_3D, Tutorial_Pattern, Array_Patterns, Tutorial_Disco, Chamber_Arrays]. This matches the audit in doc/curriculum_audit/array_tutorial.md: teach the dimension ladder first, then array-as-function and pattern maps, then room-scale synthesis.",
+      "effort": "30min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "sequence_refs": [
+        "array_tutorial"
+      ],
+      "verification": "python -c \"import json; d=json.load(open('commons/maps/sequences/array_tutorial.json')); m=d['sequences']['array_tutorial']['maps']; assert m == ['Tutorial_Single','Tutorial_Row','Tutorial_2D_Build','Tutorial_3D','Tutorial_Pattern','Array_Patterns','Tutorial_Disco','Chamber_Arrays']\"",
+      "contexts": [
+        "array_tutorial_ordering",
+        "curriculum_spine",
+        "sequence_audit_dir",
+        "pathfinder_validate"
+      ]
+    },
+    {
+      "id": "fix_ordering.003",
+      "title": "cellularautomata: GameOfLife before ElementaryRules",
+      "spec": "Edit commons/maps/sequences/cellularautomata.json. Reorder sequences.cellularautomata.maps from [CA_Introduction, CA_ElementaryRules, CA_GameOfLife, CA_BeyondBinary, CA_ExpandingSpace, CA_SoftRules, CA_AgentsCircuits, CA_EdgeOfChaos, Chamber_CA] to [CA_Introduction, CA_GameOfLife, CA_ElementaryRules, CA_BeyondBinary, CA_ExpandingSpace, CA_SoftRules, CA_EdgeOfChaos, CA_AgentsCircuits, Chamber_CA]. The audit in doc/curriculum_audit/cellularautomata.md frames the concept flow as substrate -> canonical 2D Life -> 1D systematization -> generalization -> classification -> computation.",
+      "effort": "15min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "python -c \"import json; d=json.load(open('commons/maps/sequences/cellularautomata.json')); m=d['sequences']['cellularautomata']['maps']; assert m == ['CA_Introduction','CA_GameOfLife','CA_ElementaryRules','CA_BeyondBinary','CA_ExpandingSpace','CA_SoftRules','CA_EdgeOfChaos','CA_AgentsCircuits','Chamber_CA']\"",
+      "contexts": [
+        "cellularautomata_ordering",
+        "curriculum_spine",
+        "sequence_audit_dir",
+        "pathfinder_validate"
+      ]
+    },
+    {
+      "id": "fix_ordering.004",
+      "title": "swarmintelligence: move Physarum later",
+      "spec": "Edit commons/maps/sequences/swarmintelligence.json. Reorder sequences.swarmintelligence.maps from [SwarmIntelligence_PhysarumColony, SwarmIntelligence_FlowFields, SwarmIntelligence_Boids_Algorithm, SwarmIntelligence_Agent_Based_Modeling_ABM, SwarmIntelligence_Ant_Colony_Optimization, SwarmIntelligence_Particle_Swarm_Optimization, SwarmIntelligence_Swarm_Intelligence_Algorithms, Chamber_Swarm] to [SwarmIntelligence_FlowFields, SwarmIntelligence_Boids_Algorithm, SwarmIntelligence_Agent_Based_Modeling_ABM, SwarmIntelligence_Ant_Colony_Optimization, SwarmIntelligence_Particle_Swarm_Optimization, SwarmIntelligence_PhysarumColony, SwarmIntelligence_Swarm_Intelligence_Algorithms, Chamber_Swarm]. The audit in doc/curriculum_audit/swarmintelligence.md argues Physarum should land as the radical late boundary case, not as the opener.",
+      "effort": "30min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "sequence_refs": [
+        "swarmintelligence"
+      ],
+      "verification": "python -c \"import json; d=json.load(open('commons/maps/sequences/swarmintelligence.json')); m=d['sequences']['swarmintelligence']['maps']; assert m == ['SwarmIntelligence_FlowFields','SwarmIntelligence_Boids_Algorithm','SwarmIntelligence_Agent_Based_Modeling_ABM','SwarmIntelligence_Ant_Colony_Optimization','SwarmIntelligence_Particle_Swarm_Optimization','SwarmIntelligence_PhysarumColony','SwarmIntelligence_Swarm_Intelligence_Algorithms','Chamber_Swarm']\"",
+      "contexts": [
+        "swarmintelligence_ordering",
+        "curriculum_spine",
+        "sequence_audit_dir",
+        "pathfinder_validate"
+      ]
+    },
+    {
+      "id": "fix_ordering.005",
+      "title": "Fix Point_Lines structure row 27 unreachable platforms",
+      "spec": "Discovery is complete: commons/maps/Point_Lines/map_data.json currently passes python tools/map_pathfinder.py check Point_Lines, but python tools/map_pathfinder.py show Point_Lines still reports one unreachable artifact: dgrid at (6,26) on void row 26. Decide which of two outcomes is correct: (a) add reachable floor or bridge structure so the late-map dgrid island is intentionally visitable, or (b) keep it display-only and document or mark that choice so future audits stop treating it as a latent bug.",
+      "effort": "20min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Point_Lines"
+      ],
+      "verification": "python tools/map_pathfinder.py check Point_Lines && python tools/map_pathfinder.py show Point_Lines",
+      "contexts": [
+        "point_lines_reachability",
+        "curriculum_spine",
+        "sequence_audit_dir",
+        "pathfinder_validate"
+      ]
+    }
+  ]
+}

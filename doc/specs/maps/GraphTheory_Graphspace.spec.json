@@ -1,0 +1,48 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "GraphTheory_Graphspace",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 12,
+    "d": 13
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.013,
+  "breath_zones": [
+    {
+      "size": 151,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 13
+      },
+      "centroid": [
+        5.4635761589403975,
+        5.860927152317881
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 6,
+      "token": "graphspace"
+    },
+    {
+      "x": 4,
+      "z": 9,
+      "token": "KonigsbergBridge"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 153,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

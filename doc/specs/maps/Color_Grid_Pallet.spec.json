@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Color_Grid_Pallet",
+  "home_sequence": "color",
+  "dimensions": {
+    "w": 11,
+    "d": 13
+  },
+  "signature": "gridcolorizer is the primary tool \u2014 it transforms the floor into a programmable surface; spectrum_forest extends color assignment vertically",
+  "style": null,
+  "echoes": [],
+  "density": 0.021,
+  "breath_zones": [
+    {
+      "size": 137,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 13
+      },
+      "centroid": [
+        4.956204379562044,
+        6.072992700729927
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "gridcolorizer"
+    },
+    {
+      "x": 5,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "spectrum_forest"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 141,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

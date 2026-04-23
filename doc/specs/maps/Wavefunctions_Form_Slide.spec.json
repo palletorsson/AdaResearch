@@ -1,0 +1,58 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Wavefunctions_Form_Slide",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 12,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.024,
+  "breath_zones": [
+    {
+      "size": 163,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 14
+      },
+      "centroid": [
+        5.50920245398773,
+        6.447852760736196
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 2,
+      "token": "lissajous_curves"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 4,
+      "z": 9,
+      "token": "water_land_ride"
+    },
+    {
+      "x": 5,
+      "z": 12,
+      "token": "segment_slide"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 167,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

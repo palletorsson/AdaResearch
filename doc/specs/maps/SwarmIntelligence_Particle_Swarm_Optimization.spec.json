@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+  "home_sequence": "swarmintelligence",
+  "dimensions": {
+    "w": 9,
+    "d": 9
+  },
+  "signature": "PSOVisualization implements particle swarm optimization over a visible fitness landscape",
+  "style": null,
+  "echoes": [
+    "randomness"
+  ],
+  "density": 0.025,
+  "breath_zones": [
+    {
+      "size": 78,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 9
+      },
+      "centroid": [
+        3.9871794871794872,
+        3.9743589743589745
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 3,
+      "token": "fitness_landscape_politics"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "self_organizing_patterns"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 80,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

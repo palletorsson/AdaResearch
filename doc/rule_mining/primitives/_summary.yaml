@@ -1,0 +1,86 @@
+sequence: primitives
+maps_mined: 12
+average_coverage_pct: 69.9
+recipe_usage:
+  void_canvas: 5
+  flat_corridor: 6
+  island_chain: 1
+total_operator_kinds:
+  @void: 18
+  @h:4: 2
+  @h:2: 7
+  @floor: 20
+  @h:3: 2
+per_map:
+  -
+    map: Point_One
+    base_recipe: void_canvas
+    coverage_pct: 100.0
+    operators: 0
+    artifacts: 11
+  -
+    map: Point_Line
+    base_recipe: flat_corridor
+    coverage_pct: 51.3
+    operators: 4
+    artifacts: 4
+  -
+    map: Point_Lines
+    base_recipe: flat_corridor
+    coverage_pct: 50.0
+    operators: 4
+    artifacts: 28
+  -
+    map: Point_Trace
+    base_recipe: flat_corridor
+    coverage_pct: 50.0
+    operators: 8
+    artifacts: 4
+  -
+    map: Point_Line_Grid
+    base_recipe: void_canvas
+    coverage_pct: 74.1
+    operators: 6
+    artifacts: 4
+  -
+    map: Point_Triangle
+    base_recipe: void_canvas
+    coverage_pct: 81.8
+    operators: 2
+    artifacts: 7
+  -
+    map: Point_Triangle_Context
+    base_recipe: void_canvas
+    coverage_pct: 72.2
+    operators: 5
+    artifacts: 8
+  -
+    map: Primitives_Polythedra
+    base_recipe: island_chain
+    coverage_pct: 75.0
+    operators: 2
+    artifacts: 7
+  -
+    map: Point_Animatedcube
+    base_recipe: flat_corridor
+    coverage_pct: 63.2
+    operators: 3
+    artifacts: 7
+  -
+    map: Primitives_Ignorance
+    base_recipe: flat_corridor
+    coverage_pct: 64.4
+    operators: 4
+    artifacts: 39
+  -
+    map: Primitives_Portals
+    base_recipe: void_canvas
+    coverage_pct: 89.8
+    operators: 9
+    artifacts: 4
+  -
+    map: Primitives_Melencolia
+    base_recipe: flat_corridor
+    coverage_pct: 66.7
+    operators: 2
+    artifacts: 18

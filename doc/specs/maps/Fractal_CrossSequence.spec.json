@@ -1,0 +1,70 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Fractal_CrossSequence",
+  "home_sequence": "fractals",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": "fractal_stochastic_tree is the culminating recursive-stochastic tree",
+  "style": null,
+  "echoes": [
+    "randomness"
+  ],
+  "density": 0.118,
+  "breath_zones": [
+    {
+      "size": 45,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.088888888888889,
+        3.1333333333333333
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 1,
+      "token": "space_filling_curve_gallery"
+    },
+    {
+      "x": 3,
+      "z": 2,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "fractal_stochastic_tree"
+    },
+    {
+      "x": 5,
+      "z": 4,
+      "token": "Hilbert3D"
+    },
+    {
+      "x": 3,
+      "z": 5,
+      "token": "evolutionary_algorithms"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "cellular_automata_3d_stacked"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 51,
+    "breath_zone_count": 1,
+    "unique_tokens": 6
+  }
+}

@@ -1,0 +1,107 @@
+# Artifact: Grid Agent
+
+> CharacterBody3D with a NavigationAgent3D that wanders grids, transitions between WANDERING→FEEDING→WORKING→CAPTURED→DIRECTED states, and applies EvolutionTiers operations to the grid cells it traverses
+
+## Context
+
+**Category:** hazards | **Complexity:** beginner
+**Tags:** 2d, hazard, simulation | **Themes:** gameplay, hazards
+
+Grid-traversing hazard agent spawned from map tokens like `gridagent:copy`.
+
+*an agent inside an array reveals that data structures are not passive containers — they are environments that agents inhabit, and the grid's indexed structure determines what moves are possible*
+
+## Design
+
+- **Visual:** material: standard, animation: static
+- **Interaction:** to encounter something that has agency inside an array — to watch a grid agent wander through a 2D grid, consume cubes, and evolve tier by tier, making the array feel like a habitat rather than a data structure
+- **Critical Parameter:** operation_radius — the number of cells the agent affects when in WORKING state; a small radius makes the agent precise and surgical; a large radius makes it chaotic and territorial
+- **What Emerges:** multiple agents interacting on the same grid create emergent territorial behavior — they unintentionally avoid each other through the physical grid topology rather than any explicit collision logic
+- **Triggers:** the agent tier (TIER_1_COPY through higher tiers) determines which GridOperations the agent applies when working; capturing it with the algo-gun (CAPTURED state) interrupts its autonomous behavior and lets the player direct it
+
+## Architecture
+
+| | |
+|---|---|
+| **File** | `commons/hazards/gridagent/grid_agent_base.gd` (680 lines) |
+| **Scene** | `res://commons/hazards/gridagent/grid_agent_base.tscn` |
+| **Registry** | `hazards.json` |
+| **Class** | `GridAgent` extends `CharacterBody3D` |
+| **Pattern** | procedural |
+
+### Exports
+
+| Name | Type | Default |
+|------|------|---------|
+| `movement_speed` | float | 2.0 |
+| `detection_radius` | float | 10.0 |
+| `operation_radius` | int | 3 |
+| `operation_interval` | float | 2.0 |
+| `wander_change_interval` | float | 3.0 |
+| `show_thoughts` | bool | true |
+
+### Key Methods
+
+- `_ready()` -- Initialize components
+- `_setup_components()` -- Create NavigationAgent3D
+- `_setup_visuals()` -- Create material for mesh
+- `_update_visual_tier()` -- Update appearance based on tier
+- `_physics_process(delta)` -- Update timers
+- `_process_wandering(_delta)` -- Random walk behavior
+- `_process_feeding(_delta)` -- Consume nearby cubes for energy
+- `_process_working(_delta)` -- Apply tier-specific operation
+- `_process_captured(_delta)` -- Agent is held by algo-gun, awaiting direction
+- `_process_directed(_delta)` -- Following player-assigned task
+- `_execute_tier_operation()`
+- `_operation_copy()` -- Find a nearby cube and copy it
+- `_operation_translate()` -- Move a nearby cube
+- `_operation_rotate()` -- Rotate structure around current position
+- `_operation_scale()` -- Scale structure at current position
+
+## Curriculum Position
+
+### Sequences
+
+- **Array Tutorial Sequence** (array_tutorial) -- map: Tutorial_2D_Build
+- **Dev Examples** (devexamples) -- map: gridagent_puzzle01_copy
+- **Dev Examples** (devexamples) -- map: gridagent_puzzle02_translate
+- **Dev Examples** (devexamples) -- map: gridagent_puzzle03_rotate
+- **Hazards: The Bestiary** (hazards) -- map: Hazards_Zoo_2
+- **Soft Bodies & Morphogenesis: Matter That Finds Its Shape** (softbodies) -- map: SoftBodies_Playground_of_Joy
+- **Unused Artifacts Test** (testmaps) -- map: test_gridagent
+- **Unused Artifacts Test** (testmaps) -- map: test_gridagent_algogun
+
+### Map Placements
+
+| Map | Cell | Config |
+|-----|------|--------|
+| gridagent_puzzle01_copy | [4,4] | `:copy` |
+| gridagent_puzzle02_translate | [4,5] | `:translate` |
+| gridagent_puzzle03_rotate | [5,5] | `:rotate` |
+| Hazards_Zoo_2 | [7,1] | `:copy` |
+| Hazards_Zoo_2 | [7,3] | `:random` |
+| Hazards_Zoo_2 | [7,5] | `:ca` |
+| Hazards_Zoo_2 | [7,7] | `:sine` |
+| Hazards_Zoo_2 | [8,1] | `:array` |
+| Hazards_Zoo_2 | [8,3] | `:color` |
+| Hazards_Zoo_2 | [8,5] | `:rotate` |
+| Hazards_Zoo_2 | [8,7] | `:scale` |
+| Hazards_Zoo_2 | [8,9] | `:translate` |
+| SoftBodies_Playground_of_Joy | [1,2] | `-` |
+| test_gridagent | [4,4] | `:copy` |
+| test_gridagent_algogun | [5,5] | `:copy` |
+| Tutorial_2D_Build | [21,1] | `:copy` |
+
+### Relationships
+
+- used in Tutorial_2D_Build alongside grid_2d_4x4 as a hazard that modifies the grid; depends on EvolutionTiers, GridInterface, GridOperations helper classes; connects to gridagent_puzzle maps
+- Needs: NavigationAgent3D [has]; mesh sphere visual [has]; thought_label Label3D [has]; show_thoughts flag [has]; algo-gun capture mechanism [has when CAPTURED]; VR interaction for directing [has via DIRECTED state]
+
+## Verification
+
+- [ ] Run scene directly
+- [ ] Place in map, check interaction
+- [ ] Capture screenshot
+
+---
+*Generated by generate_artifact_plans.py on 2026-04-15*

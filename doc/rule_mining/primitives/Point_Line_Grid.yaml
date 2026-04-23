@@ -1,0 +1,95 @@
+map: Point_Line_Grid
+sequence: primitives
+dimensions:
+  rows: 14
+  cols: 8
+base_recipe: void_canvas
+base_recipe_match_pct: 74.1
+residual_cells: 14
+residual_pct: 25.9
+vocabulary_coverage_pct: 74.1
+cells_masked_void_envelope: 58
+operator_groups: 6
+operator_kinds:
+  @h:2: 4
+  @floor: 2
+operators_declarative:
+  - "@h:2:1:3 at (0,3)"
+  - "@floor:1:3 at (1,3)"
+  - "@h:2 at (5,6)"
+  - "@floor:1:3 at (5,7)"
+  - "@h:2:1:3 at (6,7)"
+  - "@h:2 at (5,10)"
+utilities:
+  -
+    token: m
+    at:
+      - 0
+      - 0
+    raw: "m:0:3:-0.5:0.1"
+  -
+    token: s
+    at:
+      - 0
+      - 1
+    raw: s
+  -
+    token: t
+    at:
+      - 4
+      - 8
+    raw: t
+  -
+    token: an
+    at:
+      - 7
+      - 8
+    raw: "an:-90"
+  -
+    token: 3t
+    at:
+      - 4
+      - 12
+    raw: "3t:the_grid/the_trace"
+artifacts:
+  -
+    token: player_trace
+    at:
+      - 0
+      - 0
+    rotation: 0
+    y_offset: 0.35
+    footprint_inferred:
+      - 1
+      - 1
+  -
+    token: dark_sphere
+    at:
+      - 1
+      - 0
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 1
+      - 1
+  -
+    token: grid_lines
+    at:
+      - 4
+      - 3
+    rotation: ""
+    y_offset: ""
+    footprint_inferred:
+      - 1
+      - 1
+  -
+    token: grab_sphere_point_snap
+    at:
+      - 2
+      - 8
+    rotation: ""
+    y_offset: ""
+    footprint_inferred:
+      - 3
+      - 1
+artifact_count: 4

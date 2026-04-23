@@ -1,0 +1,65 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Vectors_5",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": "VectorTorque demonstrates rotational force; VectorFieldFlow provides the field context; example_1_9 (random acceleration) and exercise_1_3 (3D bouncing ball) show motion under varying conditions; dark_sphere anchors the space.",
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.098,
+  "breath_zones": [
+    {
+      "size": 46,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.0652173913043477,
+        3.152173913043478
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 1,
+      "token": "VectorFieldFlow"
+    },
+    {
+      "x": 4,
+      "z": 3,
+      "token": "VectorTorque"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "exercise_1_3_solution_3_d_bouncing_ball_vr"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 4,
+      "z": 5,
+      "token": "example_1_9_motion_101_velocity_and_random_acceleration_vr"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 51,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

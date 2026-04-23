@@ -1,0 +1,55 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Point_Line",
+  "home_sequence": "primitives",
+  "dimensions": {
+    "w": 7,
+    "d": 15
+  },
+  "signature": "line",
+  "style": null,
+  "echoes": [],
+  "density": 0.051,
+  "breath_zones": [
+    {
+      "size": 55,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 10
+      },
+      "centroid": [
+        2.7636363636363637,
+        5.0181818181818185
+      ]
+    }
+  ],
+  "hard_constraints": [
+    {
+      "x": 3,
+      "z": 8,
+      "token": "line",
+      "role": "signature"
+    }
+  ],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 1,
+      "token": "line_demo"
+    },
+    {
+      "x": 6,
+      "z": 3,
+      "token": "vectorline"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 59,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+  "home_sequence": "postfoundationscrisis",
+  "dimensions": {
+    "w": 9,
+    "d": 8
+  },
+  "signature": "MolecularDesigner implements chemical formalization as interactive construction \u2014 atoms snapping to rules",
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.02,
+  "breath_zones": [
+    {
+      "size": 49,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 8
+      },
+      "centroid": [
+        4.183673469387755,
+        3.36734693877551
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 3,
+      "token": "MolecularDesigner"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 50,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

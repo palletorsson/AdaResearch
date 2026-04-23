@@ -1,0 +1,58 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "QFEP_F_Term",
+  "home_sequence": "qfeplaboratory",
+  "dimensions": {
+    "w": 10,
+    "d": 12
+  },
+  "signature": "crystal_cluster demonstrates F-minimization as crystallization from chaos; snap_cube_puzzle and snap_tetra_puzzle require pattern-finding (error reduction); lambda_slider contextualizes F within the full formula; dark_sphere as the ambient constant; tt for navigation.",
+  "style": null,
+  "echoes": [],
+  "density": 0.034,
+  "breath_zones": [
+    {
+      "size": 110,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 12
+      },
+      "centroid": [
+        4.463636363636364,
+        5.390909090909091
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "snap_cube_puzzle"
+    },
+    {
+      "x": 7,
+      "z": 2,
+      "token": "snap_tetra_puzzle"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "crystal_cluster"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 117,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

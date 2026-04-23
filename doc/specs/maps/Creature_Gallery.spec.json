@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Creature_Gallery",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 7,
+    "d": 7
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.02,
+  "breath_zones": [
+    {
+      "size": 48,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 7
+      },
+      "centroid": [
+        3.0,
+        3.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "creature_gallery"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 49,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

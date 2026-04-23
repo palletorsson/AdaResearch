@@ -1,0 +1,55 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Color_Sphere",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 10,
+    "d": 11
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.042,
+  "breath_zones": [
+    {
+      "size": 70,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 11
+      },
+      "centroid": [
+        4.514285714285714,
+        5.4714285714285715
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "ball_painting_demo"
+    },
+    {
+      "x": 1,
+      "z": 6,
+      "token": "pick_up_cube"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 71,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

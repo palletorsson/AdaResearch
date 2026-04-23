@@ -1,0 +1,37 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "GT_Matching",
+  "home_sequence": "graphtheory",
+  "dimensions": {
+    "w": 8,
+    "d": 8
+  },
+  "signature": "edmonds_algorithm implements blossom contraction and augmenting path discovery \u2014 the complete maximum matching algorithm for general graphs",
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 62,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        3.467741935483871,
+        3.4516129032258065
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 63,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Primitives_2",
+  "home_sequence": "unused",
+  "dimensions": {
+    "w": 7,
+    "d": 13
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.116,
+  "breath_zones": [
+    {
+      "size": 73,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 13
+      },
+      "centroid": [
+        3.0136986301369864,
+        5.835616438356165
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 2,
+      "token": "octahedron"
+    },
+    {
+      "x": 1,
+      "z": 4,
+      "token": "dodecahedron"
+    },
+    {
+      "x": 5,
+      "z": 4,
+      "token": "icosahedron"
+    },
+    {
+      "x": 3,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 1,
+      "z": 6,
+      "token": "lshape"
+    },
+    {
+      "x": 3,
+      "z": 6,
+      "token": "bipyramid"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "halocube"
+    },
+    {
+      "x": 1,
+      "z": 8,
+      "token": "roughrock"
+    },
+    {
+      "x": 3,
+      "z": 8,
+      "token": "prism_block"
+    },
+    {
+      "x": 5,
+      "z": 8,
+      "token": "truncatedtetrahedron"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 10,
+    "walkable_cells": 86,
+    "breath_zone_count": 1,
+    "unique_tokens": 10
+  }
+}

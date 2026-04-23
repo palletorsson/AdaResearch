@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "RecursiveEmergence_Lattice_Gas_Automata",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 8,
+    "d": 10
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.014,
+  "breath_zones": [
+    {
+      "size": 72,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 10
+      },
+      "centroid": [
+        3.5,
+        4.541666666666667
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 4,
+      "token": "lattice_gas_automata"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 73,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

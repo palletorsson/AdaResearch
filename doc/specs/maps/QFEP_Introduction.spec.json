@@ -1,0 +1,78 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "QFEP_Introduction",
+  "home_sequence": "qfeplaboratory",
+  "dimensions": {
+    "w": 9,
+    "d": 10
+  },
+  "signature": "qfep_formula_3d",
+  "style": null,
+  "echoes": [
+    "primitives",
+    "transformation",
+    "color",
+    "forces",
+    "wavefunctions",
+    "randomness",
+    "noise"
+  ],
+  "density": 0.067,
+  "breath_zones": [
+    {
+      "size": 80,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 10
+      },
+      "centroid": [
+        3.9625,
+        4.3375
+      ]
+    }
+  ],
+  "hard_constraints": [
+    {
+      "x": 4,
+      "z": 2,
+      "token": "qfep_formula_3d",
+      "role": "signature"
+    }
+  ],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 4,
+      "token": "lambda_slider"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "phi_slider"
+    },
+    {
+      "x": 1,
+      "z": 6,
+      "token": "grab_sphere_F"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "grab_sphere_E"
+    },
+    {
+      "x": 7,
+      "z": 6,
+      "token": "grab_sphere_lambda"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 89,
+    "breath_zone_count": 1,
+    "unique_tokens": 6
+  }
+}

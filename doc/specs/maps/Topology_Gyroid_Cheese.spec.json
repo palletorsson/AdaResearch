@@ -1,0 +1,45 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Topology_Gyroid_Cheese",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 12,
+    "d": 13
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "transformation"
+  ],
+  "density": 0.024,
+  "breath_zones": [
+    {
+      "size": 42,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 13
+      },
+      "centroid": [
+        5.214285714285714,
+        5.428571428571429
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 7,
+      "token": "gyroid_cheese"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 42,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

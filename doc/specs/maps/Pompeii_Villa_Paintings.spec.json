@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Pompeii_Villa_Paintings",
+  "home_sequence": "mosaicanalysis",
+  "dimensions": {
+    "w": 25,
+    "d": 25
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.002,
+  "breath_zones": [
+    {
+      "size": 623,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 25,
+        "d": 25
+      },
+      "centroid": [
+        12.030497592295346,
+        12.030497592295346
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "floor_plan_space"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 624,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

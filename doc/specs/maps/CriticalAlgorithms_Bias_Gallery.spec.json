@@ -1,0 +1,63 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "CriticalAlgorithms_Bias_Gallery",
+  "home_sequence": "criticalalgorithms",
+  "dimensions": {
+    "w": 5,
+    "d": 5
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.208,
+  "breath_zones": [
+    {
+      "size": 19,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 5,
+        "d": 5
+      },
+      "centroid": [
+        1.894736842105263,
+        1.894736842105263
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "bias_from_inside"
+    },
+    {
+      "x": 3,
+      "z": 1,
+      "token": "surveillance_panopticon"
+    },
+    {
+      "x": 2,
+      "z": 2,
+      "token": "data_labor_counter"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "attention_economy_sim"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "filter_bubble_demo"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 24,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

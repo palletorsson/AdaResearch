@@ -1,0 +1,93 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Hazards_Zoo_4",
+  "home_sequence": "hazards",
+  "dimensions": {
+    "w": 15,
+    "d": 11
+  },
+  "signature": null,
+  "style": "bauhaus",
+  "echoes": [],
+  "density": 0.067,
+  "breath_zones": [
+    {
+      "size": 151,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 15,
+        "d": 11
+      },
+      "centroid": [
+        7.19205298013245,
+        5.125827814569536
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 0,
+      "token": "soft_stage_dashboard"
+    },
+    {
+      "x": 9,
+      "z": 0,
+      "token": "progression_driver"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "edible_mushroom"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "stick_tool"
+    },
+    {
+      "x": 5,
+      "z": 3,
+      "token": "proximity_spawner"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "token": "becoming_catalyst"
+    },
+    {
+      "x": 9,
+      "z": 3,
+      "token": "loving_triangle"
+    },
+    {
+      "x": 1,
+      "z": 7,
+      "token": "index_sentinel"
+    },
+    {
+      "x": 3,
+      "z": 7,
+      "token": "data_tree_walker"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "graph_weaver"
+    },
+    {
+      "x": 7,
+      "z": 7,
+      "token": "hull_crusher"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 11,
+    "walkable_cells": 165,
+    "breath_zone_count": 1,
+    "unique_tokens": 11
+  }
+}

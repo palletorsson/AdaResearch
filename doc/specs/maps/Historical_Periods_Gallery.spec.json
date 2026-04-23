@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Historical_Periods_Gallery",
+  "home_sequence": "mosaicanalysis",
+  "dimensions": {
+    "w": 55,
+    "d": 55
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 3022,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 55,
+        "d": 55
+      },
+      "centroid": [
+        27.00727994705493,
+        27.025148908007942
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "floor_plan_space"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 3024,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

@@ -1,0 +1,176 @@
+map: Point_One
+sequence: primitives
+dimensions:
+  rows: 12
+  cols: 7
+base_recipe: void_canvas
+base_recipe_match_pct: 100.0
+residual_cells: 0
+residual_pct: 0.0
+vocabulary_coverage_pct: 100.0
+cells_masked_void_envelope: 79
+operator_groups: 0
+operator_kinds: {}
+operators_declarative: []
+utilities:
+  -
+    token: m
+    at:
+      - 0
+      - 0
+    raw: "m:0:3:-0.5:0.1"
+  -
+    token: @void
+    at:
+      - 5
+      - 0
+    raw: "@void:2:11"
+  -
+    token: @hold
+    at:
+      - 4
+      - 1
+    raw: "@hold:1:2"
+  -
+    token: sub
+    at:
+      - 1
+      - 2
+    raw: "sub:point_zero"
+  -
+    token: an
+    at:
+      - 4
+      - 2
+    raw: "an:-90"
+  -
+    token: @signature
+    at:
+      - 1
+      - 4
+    raw: "@signature:interactive_point_origin"
+  -
+    token: t
+    at:
+      - 1
+      - 10
+    raw: t
+  -
+    token: @hold
+    at:
+      - 5
+      - 11
+    raw: "@hold:1:1"
+artifacts:
+  -
+    token: origin
+    at:
+      - 0
+      - 0
+    rotation: 180
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 1
+      - 1
+  -
+    token: folding_past
+    at:
+      - 1
+      - 0
+    rotation: 0
+    y_offset: 0
+    footprint_inferred:
+      - 1
+      - 1
+  -
+    token: dark_sphere
+    at:
+      - 2
+      - 0
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 1
+      - 1
+  -
+    token: mesh_builder_demo
+    at:
+      - 1
+      - 1
+    rotation: 0
+    y_offset: 1.2
+    footprint_inferred:
+      - 3
+      - 1
+  -
+    token: xyz_slider_plate
+    at:
+      - 2
+      - 2
+    rotation: 90
+    y_offset: 1
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: static_point
+    at:
+      - 4
+      - 2
+    rotation: 0
+    y_offset: 1
+    footprint_inferred:
+      - 1
+      - 1
+  -
+    token: interactive_point_origin
+    at:
+      - 1
+      - 4
+    rotation: 0
+    y_offset: 1
+    footprint_inferred:
+      - 3
+      - 1
+  -
+    token: CoordinateSystem3M
+    at:
+      - 1
+      - 5
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 3
+      - 1
+  -
+    token: code_evolution_screen
+    at:
+      - 3
+      - 5
+    rotation: "-90"
+    y_offset: 0.7
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: science_screen
+    at:
+      - 2
+      - 9
+    rotation: 180
+    y_offset: 2.0
+    footprint_inferred:
+      - 3
+      - 1
+    config: "#mode:point"
+  -
+    token: frame_counter_display
+    at:
+      - 5
+      - 11
+    rotation: "-90"
+    y_offset: ""
+    footprint_inferred:
+      - 1
+      - 1
+artifact_count: 11

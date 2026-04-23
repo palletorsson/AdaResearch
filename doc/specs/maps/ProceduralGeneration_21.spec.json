@@ -1,0 +1,45 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ProceduralGeneration_21",
+  "home_sequence": "proceduralgeneration_all",
+  "dimensions": {
+    "w": 13,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "randomness"
+  ],
+  "density": 0.006,
+  "breath_zones": [
+    {
+      "size": 178,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 14
+      },
+      "centroid": [
+        5.97191011235955,
+        6.410112359550562
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 6,
+      "token": "sixteen_cell_net_space_showcase"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 179,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ProceduralGeneration_Wave_Function_Collapse",
+  "home_sequence": "constraint_solvers",
+  "dimensions": {
+    "w": 13,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "forces"
+  ],
+  "density": 0.011,
+  "breath_zones": [
+    {
+      "size": 179,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 14
+      },
+      "centroid": [
+        5.966480446927374,
+        6.446927374301676
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 6,
+      "token": "wave_function_collapse"
+    },
+    {
+      "x": 10,
+      "z": 11,
+      "token": "wfc_3d_demo"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 181,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

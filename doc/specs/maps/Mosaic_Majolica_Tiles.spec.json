@@ -1,0 +1,46 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Mosaic_Majolica_Tiles",
+  "home_sequence": "mosaicanalysis",
+  "dimensions": {
+    "w": 18,
+    "d": 18
+  },
+  "signature": "pattern_maker_station is the hands-on synthesis station \u2014 paint a small NxN grid of cells",
+  "style": null,
+  "echoes": [
+    "color",
+    "noise"
+  ],
+  "density": 0.003,
+  "breath_zones": [
+    {
+      "size": 322,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 18,
+        "d": 18
+      },
+      "centroid": [
+        8.537267080745341,
+        8.537267080745341
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "floor_plan_space"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 323,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

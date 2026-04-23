@@ -1,0 +1,51 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Noise_Columns",
+  "home_sequence": "noise",
+  "dimensions": {
+    "w": 12,
+    "d": 14
+  },
+  "signature": "MeltingBerniniScene is the central demonstration \u2014 classical columns undergoing continuous Perlin displacement with reversible animation",
+  "style": null,
+  "echoes": [
+    "transformation",
+    "randomness"
+  ],
+  "density": 0.012,
+  "breath_zones": [
+    {
+      "size": 165,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 14
+      },
+      "centroid": [
+        5.484848484848484,
+        6.484848484848484
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "MeltingBerniniScene"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 167,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

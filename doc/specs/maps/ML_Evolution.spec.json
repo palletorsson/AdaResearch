@@ -1,0 +1,37 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ML_Evolution",
+  "home_sequence": "machinelearning",
+  "dimensions": {
+    "w": 12,
+    "d": 10
+  },
+  "signature": "evolutionary_algorithms demonstrates population-based search with configurable mutation",
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 112,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 10
+      },
+      "centroid": [
+        5.5,
+        4.526785714285714
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 119,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

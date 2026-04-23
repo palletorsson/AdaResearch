@@ -1,0 +1,48 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "CA_ElementaryRules",
+  "home_sequence": "cellularautomata",
+  "dimensions": {
+    "w": 7,
+    "d": 10
+  },
+  "signature": "structure_growth demonstrates how elementary CA patterns develop over successive generations",
+  "style": null,
+  "echoes": [],
+  "density": 0.04,
+  "breath_zones": [
+    {
+      "size": 48,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 10
+      },
+      "centroid": [
+        3.2708333333333335,
+        4.104166666666667
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "structure_growth"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 50,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

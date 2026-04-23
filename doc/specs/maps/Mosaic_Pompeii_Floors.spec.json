@@ -1,0 +1,66 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Mosaic_Pompeii_Floors",
+  "home_sequence": "mosaicanalysis",
+  "dimensions": {
+    "w": 6,
+    "d": 6
+  },
+  "signature": "pattern_tile_puzzle lets the learner isolate the fundamental domain from a mosaic photograph",
+  "style": "pompeii",
+  "echoes": [
+    "color",
+    "noise"
+  ],
+  "density": 0.147,
+  "breath_zones": [
+    {
+      "size": 30,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 6,
+        "d": 6
+      },
+      "centroid": [
+        2.6333333333333333,
+        2.5
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "pompeii_mosaic_floor"
+    },
+    {
+      "x": 3,
+      "z": 1,
+      "token": "tumbling_blocks_floor"
+    },
+    {
+      "x": 0,
+      "z": 2,
+      "token": "free_meander_floor"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "octagon_square_floor"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "diamonds_squares_floor"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 34,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

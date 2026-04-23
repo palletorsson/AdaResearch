@@ -1,0 +1,163 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Test_Substrates",
+  "home_sequence": "testmaps",
+  "dimensions": {
+    "w": 11,
+    "d": 11
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.208,
+  "breath_zones": [
+    {
+      "size": 93,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 11
+      },
+      "centroid": [
+        4.89247311827957,
+        5.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "grid2d_life"
+    },
+    {
+      "x": 3,
+      "z": 1,
+      "token": "grid2d_wireworld"
+    },
+    {
+      "x": 5,
+      "z": 1,
+      "token": "grid2d_bfs"
+    },
+    {
+      "x": 7,
+      "z": 1,
+      "token": "grid2d_seeds"
+    },
+    {
+      "x": 9,
+      "z": 1,
+      "token": "grid2d_langtons_ant"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "living_paper_random_walk"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "living_paper_levy"
+    },
+    {
+      "x": 5,
+      "z": 3,
+      "token": "living_paper_mandelbrot"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "token": "living_paper_life"
+    },
+    {
+      "x": 9,
+      "z": 3,
+      "token": "living_paper_sierpinski"
+    },
+    {
+      "x": 1,
+      "z": 5,
+      "token": "bar_array_bubble_sort"
+    },
+    {
+      "x": 3,
+      "z": 5,
+      "token": "bar_array_quicksort"
+    },
+    {
+      "x": 5,
+      "z": 5,
+      "token": "bar_array_merge_sort"
+    },
+    {
+      "x": 7,
+      "z": 5,
+      "token": "bar_array_histogram"
+    },
+    {
+      "x": 9,
+      "z": 5,
+      "token": "bar_array_prime_sieve"
+    },
+    {
+      "x": 1,
+      "z": 7,
+      "token": "grid3d_bfs"
+    },
+    {
+      "x": 3,
+      "z": 7,
+      "token": "grid3d_kruskal"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "grid3d_force_directed"
+    },
+    {
+      "x": 7,
+      "z": 7,
+      "token": "grid3d_random_graph"
+    },
+    {
+      "x": 9,
+      "z": 7,
+      "token": "grid3d_entropy"
+    },
+    {
+      "x": 1,
+      "z": 9,
+      "token": "profile_sine"
+    },
+    {
+      "x": 3,
+      "z": 9,
+      "token": "profile_fourier"
+    },
+    {
+      "x": 5,
+      "z": 9,
+      "token": "profile_gradient_descent"
+    },
+    {
+      "x": 7,
+      "z": 9,
+      "token": "profile_bell_curve"
+    },
+    {
+      "x": 9,
+      "z": 9,
+      "token": "profile_logistic"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 25,
+    "walkable_cells": 120,
+    "breath_zone_count": 1,
+    "unique_tokens": 25
+  }
+}

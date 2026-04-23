@@ -1,0 +1,188 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_Commons_3",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 20
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.137,
+  "breath_zones": [
+    {
+      "size": 159,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 20
+      },
+      "centroid": [
+        5.0251572327044025,
+        10.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "overfitting_demo"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "pickable_showcase"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "player_position_to_console"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "player_presence_indicator"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "point_is"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "pop_music_demo"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "pressure_soft_body"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "profiler_flame_graph"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "reset_area"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "reset_cube"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "schlegel_diagram"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "sequencer"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "settings_ui"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "sine_wave_controller"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "soft_body_slicer"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "sol_lewitt_wall_drawing"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "sparse_array_demo"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "speed_display"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "spit_text_3d"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "spring_chain"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "tesla_sparks"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "tesla_sphere"
+    },
+    {
+      "x": 6,
+      "z": 12,
+      "token": "text_display"
+    },
+    {
+      "x": 8,
+      "z": 12,
+      "token": "transform_matrix_cube"
+    },
+    {
+      "x": 2,
+      "z": 14,
+      "token": "tts_test"
+    },
+    {
+      "x": 4,
+      "z": 14,
+      "token": "value_mapper_example"
+    },
+    {
+      "x": 6,
+      "z": 14,
+      "token": "vera_molnar_des_ordres"
+    },
+    {
+      "x": 8,
+      "z": 14,
+      "token": "viscous_fluid_blob"
+    },
+    {
+      "x": 2,
+      "z": 16,
+      "token": "wave_equation_solver"
+    },
+    {
+      "x": 4,
+      "z": 16,
+      "token": "wave_interference_tank"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 30,
+    "walkable_cells": 219,
+    "breath_zone_count": 1,
+    "unique_tokens": 30
+  }
+}

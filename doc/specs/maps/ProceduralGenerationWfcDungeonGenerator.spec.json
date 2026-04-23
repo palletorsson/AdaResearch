@@ -1,0 +1,48 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ProceduralGenerationWfcDungeonGenerator",
+  "home_sequence": "constraint_solvers",
+  "dimensions": {
+    "w": 13,
+    "d": 14
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.011,
+  "breath_zones": [
+    {
+      "size": 179,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 14
+      },
+      "centroid": [
+        6.016759776536313,
+        6.5363128491620115
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 1,
+      "token": "wfc_dungeon_generator"
+    },
+    {
+      "x": 8,
+      "z": 11,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 181,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

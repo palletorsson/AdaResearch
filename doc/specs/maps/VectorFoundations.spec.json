@@ -1,0 +1,127 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "VectorFoundations",
+  "home_sequence": "forces",
+  "dimensions": {
+    "w": 22,
+    "d": 16
+  },
+  "signature": "VectorBasics is the entry point \u2014 drag an arrow",
+  "style": "kusama",
+  "echoes": [
+    "primitives",
+    "transformation"
+  ],
+  "density": 0.066,
+  "breath_zones": [
+    {
+      "size": 65,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 8
+      },
+      "centroid": [
+        4.046153846153846,
+        3.5076923076923077
+      ]
+    },
+    {
+      "size": 57,
+      "bounds": {
+        "x": 14,
+        "z": 0,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        17.473684210526315,
+        3.43859649122807
+      ]
+    },
+    {
+      "size": 44,
+      "bounds": {
+        "x": 14,
+        "z": 9,
+        "w": 7,
+        "d": 7
+      },
+      "centroid": [
+        17.045454545454547,
+        12.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "vector_reflection_demo"
+    },
+    {
+      "x": 16,
+      "z": 1,
+      "token": "VectorAddition"
+    },
+    {
+      "x": 2,
+      "z": 3,
+      "token": "VectorBasics"
+    },
+    {
+      "x": 5,
+      "z": 3,
+      "token": "basis_vectors_rig"
+    },
+    {
+      "x": 16,
+      "z": 3,
+      "token": "vector_addition_demo"
+    },
+    {
+      "x": 19,
+      "z": 3,
+      "token": "ForceMagnitudeDemo"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 4,
+      "z": 5,
+      "token": "cross_product_demo"
+    },
+    {
+      "x": 16,
+      "z": 10,
+      "token": "VectorSubtraction"
+    },
+    {
+      "x": 18,
+      "z": 11,
+      "token": "vector_subtraction_demo"
+    },
+    {
+      "x": 17,
+      "z": 12,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 15,
+      "z": 13,
+      "token": "coordinate_system_switcher"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 12,
+    "walkable_cells": 182,
+    "breath_zone_count": 3,
+    "unique_tokens": 11
+  }
+}

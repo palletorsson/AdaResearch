@@ -1,0 +1,121 @@
+# Map: Gallery: Commons_2
+
+> Commons_2 Artifact Gallery
+
+## Overview
+
+**Dimensions:** 11 x 20 (max height: 2)
+**Difficulty:** gallery | **Time:** 10-15 minutes
+
+Showcase of 30 unplaced artifacts from Commons_2. Walk through to browse available artifacts.
+
+## Learning Objectives
+
+- Browse 30 Commons_2 artifacts
+- Identify artifacts for placement in curriculum maps
+- Observe artifact visual and interaction patterns
+
+## Layout
+
+**Grid:** 20 rows x 11 columns
+**Cube Size:** 1.0 | **Gutter:** 0.0
+**Background:** sky
+
+### Artifacts
+
+| Cell | Artifact | Category | Config |
+|------|----------|----------|--------|
+| [1,2] | request_note | tools | `:0:1.5#text:frames display` |
+| [1,4] | request_note | tools | `:0:1.5#text:garbage collector demo` |
+| [1,6] | request_note | tools | `:0:1.5#text:grabable agnes` |
+| [1,8] | request_note | tools | `:0:1.5#text:grabable mondrian` |
+| [2,2] | frames_display | unknown | `:0:-0.5` |
+| [2,4] | garbage_collector_demo | algorithms | `:0:-0.5` |
+| [2,6] | grabable_agnes | unknown | `:0:-0.5` |
+| [2,8] | grabable_mondrian | unknown | `:0:-0.5` |
+| [3,2] | request_note | tools | `:0:1.5#text:graphics monitor` |
+| [3,4] | request_note | tools | `:0:1.5#text:graphics slideshow` |
+| [3,6] | request_note | tools | `:0:1.5#text:graphics slideshow 2d` |
+| [3,8] | request_note | tools | `:0:1.5#text:graphics slideshow all` |
+| [4,2] | graphics_monitor | unknown | `:0:-0.5` |
+| [4,4] | graphics_slideshow | unknown | `:0:-0.5` |
+| [4,6] | graphics_slideshow_2d | unknown | `:0:-0.5` |
+| [4,8] | graphics_slideshow_all | unknown | `:0:-0.5` |
+| [5,2] | request_note | tools | `:0:1.5#text:grid eye` |
+| [5,4] | request_note | tools | `:0:1.5#text:harmonic motion demo` |
+| [5,6] | request_note | tools | `:0:1.5#text:helper arm` |
+| [5,8] | request_note | tools | `:0:1.5#text:hypercube rotation` |
+| [6,2] | grid_eye | unknown | `:0:-0.5` |
+| [6,4] | harmonic_motion_demo | waves | `:0:-0.5` |
+| [6,6] | helper_arm | unknown | `:0:-0.5` |
+| [6,8] | hypercube_rotation | higher_dimensional | `:0:-0.5` |
+| [7,2] | request_note | tools | `:0:1.5#text:impulse collision demo` |
+| [7,4] | request_note | tools | `:0:1.5#text:index map puzzle` |
+| [7,6] | request_note | tools | `:0:1.5#text:info display` |
+| [7,8] | request_note | tools | `:0:1.5#text:jelly variants` |
+| [8,2] | impulse_collision_demo | physics | `:0:-0.5` |
+| [8,4] | index_map_puzzle | arrays | `:0:-0.5` |
+| [8,6] | info_display | unknown | `:0:-0.5` |
+| [8,8] | jelly_variants | physics | `:0:-0.5` |
+| [9,2] | request_note | tools | `:0:1.5#text:kitbash station` |
+| [9,4] | request_note | tools | `:0:1.5#text:latent space walk` |
+| [9,6] | request_note | tools | `:0:1.5#text:line interface` |
+| [9,8] | request_note | tools | `:0:1.5#text:magnifying glass` |
+| [10,2] | kitbash_station | design | `:0:-0.5` |
+| [10,4] | latent_space_walk | machinelearning | `:0:-0.5` |
+| [10,6] | line_interface | unknown | `:0:-0.5` |
+| [10,8] | magnifying_glass | unknown | `:0:-0.5` |
+| [11,2] | request_note | tools | `:0:1.5#text:magnifying glass red` |
+| [11,4] | request_note | tools | `:0:1.5#text:magnifying glass tool` |
+| [11,6] | request_note | tools | `:0:1.5#text:matrix multiply visual` |
+| [11,8] | request_note | tools | `:0:1.5#text:memory display` |
+| [12,2] | magnifying_glass_red | unknown | `:0:-0.5` |
+| [12,4] | magnifying_glass_tool | unknown | `:0:-0.5` |
+| [12,6] | matrix_multiply_visual | arrays | `:0:-0.5` |
+| [12,8] | memory_display | unknown | `:0:-0.5` |
+| [13,2] | request_note | tools | `:0:1.5#text:mondrian 2d` |
+| [13,4] | request_note | tools | `:0:1.5#text:mondrian 3d display` |
+| [13,6] | request_note | tools | `:0:1.5#text:monitorsystem` |
+| [13,8] | request_note | tools | `:0:1.5#text:monte carlo estimator` |
+| [14,2] | mondrian_2d | unknown | `:0:-0.5` |
+| [14,4] | mondrian_3d_display | unknown | `:0:-0.5` |
+| [14,6] | monitorsystem | unknown | `:0:-0.5` |
+| [14,8] | monte_carlo_estimator | emergence | `:0:-0.5` |
+| [15,2] | request_note | tools | `:0:1.5#text:orbital mechanics demo` |
+| [15,4] | request_note | tools | `:0:1.5#text:oscilloscope artifact` |
+| [16,2] | orbital_mechanics_demo | physics | `:0:-0.5` |
+| [16,4] | oscilloscope_artifact | waves | `:0:-0.5` |
+
+### Utilities
+
+| Cell | Value |
+|------|-------|
+| [0,1] | `sp` |
+| [18,9] | `t` |
+
+### Utility Definitions
+
+- `t`: teleporter -- Back
+- `s`: spawn -- 
+
+## Lighting
+
+- **Ambient:** rgb([0.5, 0.5, 0.55]) energy 0.7
+- **Directional:** dir=[-0.3, -0.8, -0.3], color=[1.0, 0.95, 0.9], energy=0.8
+
+## Text Coverage
+
+| blurb | technical | critical | intent | summary |
+|-------|-----------|----------|--------|---------|
+| **no** | **no** | **no** | **no** | **no** |
+
+## Verification
+
+- [ ] Load in Godot
+- [ ] Walk through all artifacts
+- [ ] Test teleporters
+- [ ] Check atmosphere and lighting
+- [ ] Verify text files written
+
+---
+*Generated by generate_map_plans.py on 2026-04-15*

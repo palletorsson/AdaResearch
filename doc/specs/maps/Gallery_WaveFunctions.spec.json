@@ -1,0 +1,223 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_WaveFunctions",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 24
+  },
+  "signature": null,
+  "style": "rams",
+  "echoes": [],
+  "density": 0.141,
+  "breath_zones": [
+    {
+      "size": 189,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 24
+      },
+      "centroid": [
+        5.01058201058201,
+        12.121693121693122
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "BigPipe"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "BigPipe_LBend"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "BigPipe_StraightRun"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "BigPipe_VerticalBypass"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "CircleSpiral"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "ElphabaDemo"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "GlassRack_BranchingCondenser"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "GlassRack_BreakingBadCoffee"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "GlassRack_DistillationY"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "GlassRack_RefluxApparatus"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "GlassRack_SbendManifold"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "GlassRack_SimpleTube"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "GlassRack_SpiralTube"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "HarmonicBuilder"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "MelodySoundBoard"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "OscillatingWave"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "OscillationDriver"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "PendulumCircle"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "PendulumGrid3x3"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "PhonemeCloud"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "Rack808Drums"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "RackMario"
+    },
+    {
+      "x": 6,
+      "z": 12,
+      "token": "SoundBoxLong"
+    },
+    {
+      "x": 8,
+      "z": 12,
+      "token": "SoundBoxShort"
+    },
+    {
+      "x": 2,
+      "z": 14,
+      "token": "WaveRideScene"
+    },
+    {
+      "x": 4,
+      "z": 14,
+      "token": "circle_spiral_scene"
+    },
+    {
+      "x": 6,
+      "z": 14,
+      "token": "doppler_effect_demo"
+    },
+    {
+      "x": 8,
+      "z": 14,
+      "token": "double_helix_oscillator"
+    },
+    {
+      "x": 2,
+      "z": 16,
+      "token": "modulor_man"
+    },
+    {
+      "x": 4,
+      "z": 16,
+      "token": "modulor_man_interactive"
+    },
+    {
+      "x": 6,
+      "z": 16,
+      "token": "noir_sequencer"
+    },
+    {
+      "x": 8,
+      "z": 16,
+      "token": "sine_oscillation"
+    },
+    {
+      "x": 2,
+      "z": 18,
+      "token": "sine_wall"
+    },
+    {
+      "x": 4,
+      "z": 18,
+      "token": "sound_timeline"
+    },
+    {
+      "x": 6,
+      "z": 18,
+      "token": "static_reference_cube"
+    },
+    {
+      "x": 8,
+      "z": 18,
+      "token": "vertical_wave_lines"
+    },
+    {
+      "x": 2,
+      "z": 20,
+      "token": "vr_map_loader_kiosk"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 37,
+    "walkable_cells": 263,
+    "breath_zone_count": 1,
+    "unique_tokens": 37
+  }
+}

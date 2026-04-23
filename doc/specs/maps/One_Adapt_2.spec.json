@@ -1,0 +1,48 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "One_Adapt_2",
+  "home_sequence": "unused",
+  "dimensions": {
+    "w": 7,
+    "d": 7
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.042,
+  "breath_zones": [
+    {
+      "size": 46,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 7
+      },
+      "centroid": [
+        2.9782608695652173,
+        2.9565217391304346
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 2,
+      "token": "raycastingpoint"
+    },
+    {
+      "x": 2,
+      "z": 3,
+      "token": "clippingplanes"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 48,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

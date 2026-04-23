@@ -1,0 +1,58 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "WaveFunctions_3D_Wave_Propagation",
+  "home_sequence": "wavefunctions",
+  "dimensions": {
+    "w": 16,
+    "d": 18
+  },
+  "signature": "wave_propagation_3d demonstrates distance-based phase",
+  "style": "kusama",
+  "echoes": [],
+  "density": 0.039,
+  "breath_zones": [
+    {
+      "size": 100,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 15,
+        "d": 18
+      },
+      "centroid": [
+        6.94,
+        9.27
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 4,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "kusama_sine"
+    },
+    {
+      "x": 7,
+      "z": 8,
+      "token": "wave_propagation_3d"
+    },
+    {
+      "x": 8,
+      "z": 13,
+      "token": "coupled_oscillator_lattice"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 102,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

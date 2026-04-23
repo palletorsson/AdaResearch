@@ -1,0 +1,139 @@
+# Biome Wiring Audit
+
+**Task:** biome_engine.001
+**Date:** 2026-04-17
+**Question:** Which maps have biome wiring active? Which sequence-specific settings actually apply? What is declared vs what is hooked up?
+
+## TL;DR
+
+The biome system is already wired end-to-end through a single call site in `GridSystem._handle_biome_ring()`. Every map that loads via GridSystem gets biome-ring treatment **automatically**, driven by `soft_stages.json` via `EcosystemManager`. There is no per-map config gating it.
+
+The real gaps are:
+
+1. **`grammar_operations.json` is declarative only** — zero `.gd` files read it. It describes operations per sequence but does not gate anything at runtime.
+2. **`nature_layer.json` coverage is 183/745 (25%)** — generated floor-tile layer exists for a minority of maps.
+3. **Progression advance depends on `MapProgressionManager.sequence_completed`** signal — in a fresh session, players start at stage 0 until they complete a sequence, so density is 0 unless `force_advance_to` runs.
+4. **Per-map sequence lookup scans all sequence JSONs on every map load** (`_sync_ecosystem_to_current_map`). O(sequences × maps_per_sequence) per map load. Fine at current scale, wasteful.
+
+## The Three Systems
+
+### 1. `soft_stages.json` — the declaration
+
+Path: `commons/maps/soft_stages.json`
+Reads: 4 managers (`EcosystemManager`, `CatalystCapabilityManager`, `HazardManager`, `MovementCapabilityGate`)
+
+Every sequence (primitives…graphtheory, 19 total) declares:
+- `ecosystem.allow_flags`
+- `ecosystem.nature_kingdoms` (flower/tree/fungus/creature)
+- `ecosystem.vegetation_density` (0.0→1.0)
+- `ecosystem.terrain_mode` (flat/hilly/self_generating)
+- `ecosystem.ambient_preset`
+- `hazards.unlock_types`, `spawner_behavior`, `personality_shift`
+- `movement_abilities` (gated by `MovementCapabilityGate`)
+
+### 2. `EcosystemManager` (autoload) — the runtime
+
+Path: `commons/managers/EcosystemManager.gd`
+
+- Reads `soft_stages.json` at `_ready()`
+- Tracks `_completed_sequences` → rebuilds `_current_vegetation_density`, `_current_kingdoms`, etc.
+- Public API: `get_vegetation_density()`, `get_allowed_kingdoms()`, `get_terrain_mode()`, `get_ambient_preset()`, `is_allowed(flag)`
+- Advances on `MapProgressionManager.sequence_completed` signal
+- `force_advance_to(sequence_name)` — debug/manual jump
+
+### 3. `BiomeRingComponent` — the renderer
+
+Path: `commons/grid/BiomeRingComponent.gd`
+Referenced by: **only** `GridSystem.gd` (one call site)
+
+- Generates three concentric zones: transition strip → wild ring → fog fade
+- `ring_width` scales with density (3m → 10m)
+- Spawns foliage via MultiMesh (background fill) + DNA organisms via `ChunkManager` (if density ≥ 0.1)
+- Early return if `density < 0.05` — barren maps get no ring
+
+## The Wire
+
+```
+GridSystem._ready()
+  └─ call_deferred("_handle_biome_ring")
+      └─ eco = /root/EcosystemManager
+      └─ _sync_ecosystem_to_current_map(eco)         ← scans sequences/*.json to find owning sequence
+      │     └─ eco.force_advance_to(sequence_name)
+      └─ density = eco.get_vegetation_density()
+      └─ if density < 0.05: return
+      └─ ring = BiomeRingComponent.new()
+      └─ ring.generate(grid_dims, cube_size, terrain_mode, kingdoms, density)
+```
+
+**This means every map loaded through GridSystem automatically gets the biome matching its sequence.** No per-map opt-in.
+
+## What's Actually Hooked Up
+
+| System | Declared in | Wired to runtime? |
+|---|---|---|
+| vegetation_density | soft_stages.json | ✅ BiomeRingComponent |
+| nature_kingdoms | soft_stages.json | ✅ BiomeRingComponent foliage mapping |
+| terrain_mode | soft_stages.json | ✅ BiomeRingComponent._build_ring_ground |
+| ambient_preset | soft_stages.json | ✅ NatureRenderer.load_map_overrides + per-map overrides |
+| allow_flags | soft_stages.json | ✅ EcosystemManager.is_allowed |
+| movement_abilities | soft_stages.json | ✅ MovementCapabilityGate |
+| hazards.unlock_types | soft_stages.json | ✅ HazardManager |
+| catalyst modes | soft_stages.json | ✅ CatalystCapabilityManager |
+| **grammar_operations.json** | commons/artifacts/ | ❌ **zero runtime consumers** |
+
+## What's Not Hooked Up
+
+### grammar_operations.json is orphaned from gameplay
+
+`commons/artifacts/grammar_operations.json` declares 80 operations across 19 form types, each with `taught_by: <artifact_lookup>`. It is referenced only by:
+
+- `doc/tasks/biome_engine.json` (task spec)
+- `doc/tasks/_contexts.json` (context declaration)
+- `README.md`, `CLAUDE.md` (docs)
+- `commons/maps/*/evolution.json` (`grammar_alignment` block, declarative)
+
+**No `.gd` file reads it.** Grammar operations are not currently gating biome spawn, creature behavior, or anything else. This is the core of `biome_engine.003` (Wire grammar_operations.json into biome spawn).
+
+### nature_layer.json coverage is partial
+
+- 745 maps have `map_data.json`
+- 183 maps have `nature_layer.json` (25%)
+- Appears to be generated by `generate_nature_layers.py` based on `_meta.generator` field
+- Maps without it presumably use defaults — worth confirming what the fallback behavior is
+
+### Progression starts at zero
+
+`EcosystemManager` rebuilds state from `_completed_sequences`. A fresh save has zero completed → `_current_vegetation_density = 0` → `density < 0.05` → no biome ring **anywhere**.
+
+`_sync_ecosystem_to_current_map` saves the day: it calls `force_advance_to(sequence_name)` on every map load, which pushes the completed set up to the map's sequence. But this means:
+
+- Fresh session: first map load advances ecosystem to that sequence; good.
+- Jumping backwards (later map → earlier map): `force_advance_to` does **not decrement** (the loop only ADDS to `_completed_sequences`). Walking from QFEP back to primitives keeps max density. Whether that's the desired behavior is a pedagogical question.
+
+## Recommendations for Subsequent Tasks
+
+### biome_engine.002 — "Make biome auto-load sequence stage"
+
+**Mostly already works.** The wire exists via `_sync_ecosystem_to_current_map`. What's worth doing:
+
+- Cache the map→sequence lookup (build a dict once on EcosystemManager boot instead of scanning every load)
+- Decide whether `force_advance_to` should allow going **backwards** for pedagogical purposes (currently monotonic)
+- Document the wire in a single comment block so future-me doesn't re-audit
+
+### biome_engine.003 — "Wire grammar_operations.json into biome spawn"
+
+This is the **real work**. Options:
+
+1. **BiomeRing reads grammar ops for the current sequence**, uses them to bias which foliage types appear. E.g., `connect` operation in graphtheory could spawn edge-vines between rooms.
+2. **CritterSpawner reads grammar ops** to gate which creature behaviors/DNA are allowed at each sequence.
+3. **NatureRenderer reads grammar ops** to choose ambient shaders.
+
+Cheapest win: add a new `GrammarOperationsManager` autoload that loads the JSON, exposes `get_operations_for_sequence(seq_name) → Array`, and let BiomeRing consult it for spawn biasing.
+
+### biome_engine.004 — "Visible sequence-crossing difference"
+
+Already present in principle (density/kingdoms/ambient shift across sequences). Needs a **capture test**: load one map per sequence headless, screenshot the biome ring, assemble a strip. If the progression looks flat in screenshots, the tuning is wrong even if the wire is right.
+
+## One-Line Summary
+
+**The biome engine is 80% wired; the missing 20% is `grammar_operations.json` having zero runtime consumers. That's the actual infrastructure gap.**

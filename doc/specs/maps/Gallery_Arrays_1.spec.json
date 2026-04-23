@@ -1,0 +1,188 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_Arrays_1",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 20
+  },
+  "signature": null,
+  "style": "kusama",
+  "echoes": [],
+  "density": 0.137,
+  "breath_zones": [
+    {
+      "size": 159,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 20
+      },
+      "centroid": [
+        5.0251572327044025,
+        10.0
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "basket_weave_floor"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "binary_table"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "braid_meander_floor"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "chain_link_floor"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "compass_rose_floor"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "dense_carpet_floor"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "diamond_lattice_floor"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "double_snake_meander"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "exact_meander_floor"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "flower_of_life_floor"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "glitch_grid_floor"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "grid_editor_main"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "guilloche_border_floor"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "herringbone_floor"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "honeycomb_hex_floor"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "index_visualizer"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "interlocking_t_floor"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "labyrinth_floor"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "meander_threshold_floor"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "memphis_floor"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "mirror_snake_meander"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "multi_zone_carpet_floor"
+    },
+    {
+      "x": 6,
+      "z": 12,
+      "token": "neon_chevron_floor"
+    },
+    {
+      "x": 8,
+      "z": 12,
+      "token": "nested_diamonds_floor"
+    },
+    {
+      "x": 2,
+      "z": 14,
+      "token": "opus_sectile_floor"
+    },
+    {
+      "x": 4,
+      "z": 14,
+      "token": "pelta_shield_floor"
+    },
+    {
+      "x": 6,
+      "z": 14,
+      "token": "perspective_cubes_floor"
+    },
+    {
+      "x": 8,
+      "z": 14,
+      "token": "pixel_cross_floor"
+    },
+    {
+      "x": 2,
+      "z": 16,
+      "token": "pixel_invader_floor"
+    },
+    {
+      "x": 4,
+      "z": 16,
+      "token": "polka_dot_field_floor"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 30,
+    "walkable_cells": 219,
+    "breath_zone_count": 1,
+    "unique_tokens": 30
+  }
+}

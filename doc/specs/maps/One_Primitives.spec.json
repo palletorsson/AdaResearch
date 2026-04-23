@@ -1,0 +1,48 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "One_Primitives",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 7,
+    "d": 7
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.042,
+  "breath_zones": [
+    {
+      "size": 45,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 7
+      },
+      "centroid": [
+        3.066666666666667,
+        2.977777777777778
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 0,
+      "token": "radiolaria"
+    },
+    {
+      "x": 0,
+      "z": 5,
+      "token": "platonicsolids"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 48,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

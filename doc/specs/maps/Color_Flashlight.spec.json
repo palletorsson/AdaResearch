@@ -1,0 +1,56 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Color_Flashlight",
+  "home_sequence": "color",
+  "dimensions": {
+    "w": 11,
+    "d": 12
+  },
+  "signature": "flashlight_color",
+  "style": null,
+  "echoes": [
+    "forces",
+    "wavefunctions"
+  ],
+  "density": 0.023,
+  "breath_zones": [
+    {
+      "size": 128,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 12
+      },
+      "centroid": [
+        5.0078125,
+        5.4765625
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 4,
+      "token": "flashlight_demo"
+    },
+    {
+      "x": 4,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "prism"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 131,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

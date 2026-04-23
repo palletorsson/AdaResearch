@@ -1,0 +1,96 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Fractal_RecursiveTrees",
+  "home_sequence": "fractals",
+  "dimensions": {
+    "w": 15,
+    "d": 12
+  },
+  "signature": "inverted_tree_cloud shows recursive branching reflected into cloud form; mobius_world introduces topological self-reference; cube_desk and small_subdivision_cube maintain the geometric recursion thread; dark_sphere anchors.",
+  "style": null,
+  "echoes": [
+    "randomness",
+    "noise"
+  ],
+  "density": 0.066,
+  "breath_zones": [
+    {
+      "size": 155,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 15,
+        "d": 12
+      },
+      "centroid": [
+        7.077419354838709,
+        5.135483870967742
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 6,
+      "z": 0,
+      "token": "living_paper"
+    },
+    {
+      "x": 10,
+      "z": 0,
+      "token": "fractal_lsystem_tree"
+    },
+    {
+      "x": 8,
+      "z": 1,
+      "token": "recursive_tree_2"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "small_subdivision_cube"
+    },
+    {
+      "x": 2,
+      "z": 3,
+      "token": "small_subdivision_cube"
+    },
+    {
+      "x": 10,
+      "z": 3,
+      "token": "inverted_tree_cloud"
+    },
+    {
+      "x": 7,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 1,
+      "z": 6,
+      "token": "cube_desk"
+    },
+    {
+      "x": 10,
+      "z": 7,
+      "token": "inverted_tree_cloud"
+    },
+    {
+      "x": 4,
+      "z": 9,
+      "token": "fractal_scene"
+    },
+    {
+      "x": 2,
+      "z": 11,
+      "token": "mobius_world"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 11,
+    "walkable_cells": 167,
+    "breath_zone_count": 1,
+    "unique_tokens": 9
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "PhysicsSim_Springs",
+  "home_sequence": "physicssimulation",
+  "dimensions": {
+    "w": 7,
+    "d": 11
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.053,
+  "breath_zones": [
+    {
+      "size": 72,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 11
+      },
+      "centroid": [
+        3.0,
+        4.902777777777778
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 2,
+      "token": "mass_spring_damper"
+    },
+    {
+      "x": 5,
+      "z": 4,
+      "token": "spring_mass_system"
+    },
+    {
+      "x": 1,
+      "z": 7,
+      "token": "spring_system"
+    },
+    {
+      "x": 5,
+      "z": 9,
+      "token": "cloth_simulation"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 76,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Fractal_MengerSponge",
+  "home_sequence": "fractals",
+  "dimensions": {
+    "w": 13,
+    "d": 13
+  },
+  "signature": "menger_sponge implements the 3D iterative center-removal construction",
+  "style": null,
+  "echoes": [],
+  "density": 0.038,
+  "breath_zones": [
+    {
+      "size": 76,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 13
+      },
+      "centroid": [
+        6.171052631578948,
+        5.223684210526316
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 0,
+      "token": "diffusion_limited_aggregation"
+    },
+    {
+      "x": 6,
+      "z": 5,
+      "token": "menger_sponge"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 79,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

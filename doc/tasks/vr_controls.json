@@ -1,0 +1,112 @@
+{
+  "goal_id": "vr_controls",
+  "goal_title": "Add VR interactive controls to artifacts that currently only display",
+  "why": "Many artifacts across the project render but can't be poked. Their @identity blocks explicitly say 'slider_horizontal [missing]' etc. This is the 'dioramas, not instruments' problem named by multiple audits. Adding sliders/buttons to the most important artifacts converts passive observation into embodied parameter exploration.",
+  "success_criteria": [
+    "Procgen artifacts (mutation_rate, percolation threshold) have sliders",
+    "Forces artifacts have applicable parameter controls",
+    "Noise artifacts have octave + amplitude sliders",
+    "ML artifacts have learning-rate / population sliders",
+    "Each addition follows the slider_horizontal pattern from turing_pattern_generator"
+  ],
+  "prerequisites": [],
+  "tasks": [
+    {
+      "id": "vr_controls.001",
+      "title": "Add sliders to PG_Genetic_Evolution artifacts",
+      "spec": "Using the RackTemplates.create_panel pattern from commons/audio/rack_templates/RackTemplates.gd (see turing_pattern_generator.gd for example usage), add mutation_rate and population_size sliders to the PG_Genetic_Evolution anchor artifact. Panel should be tilted toward player.",
+      "effort": "half-day",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "contexts": [
+        "rams_slider_panel",
+        "artifact_three_files",
+        "vr_text_readability"
+      ]
+    },
+    {
+      "id": "vr_controls.002",
+      "title": "Add slider to PG_Percolation_Network",
+      "spec": "Percolation probability threshold slider — the whole point of the map is feeling the phase transition. Find the percolation artifact and attach a slider_horizontal driving probability.",
+      "effort": "half-day",
+      "skill": "build",
+      "depends_on": [
+        "vr_controls.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "sequence_refs": [
+        "proceduralgeneration"
+      ],
+      "contexts": [
+        "rams_slider_panel",
+        "artifact_three_files",
+        "vr_text_readability"
+      ]
+    },
+    {
+      "id": "vr_controls.003",
+      "title": "Add octave + amplitude sliders to noise artifacts",
+      "spec": "Perlin/simplex artifacts should let the player feel what octaves do. Add two sliders per anchor noise artifact following the Rams-plate pattern.",
+      "effort": "half-day",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "sequence_refs": [
+        "noise"
+      ],
+      "contexts": [
+        "rams_slider_panel",
+        "artifact_three_files",
+        "vr_text_readability"
+      ]
+    },
+    {
+      "id": "vr_controls.004",
+      "title": "Add force-magnitude slider to ForcesFoundations Newton artifacts",
+      "spec": "example_2_1/2/3/4 should each have a force/mass/gravity slider as applicable.",
+      "effort": "half-day",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "sequence_refs": [
+        "forces"
+      ],
+      "contexts": [
+        "rams_slider_panel",
+        "artifact_three_files",
+        "vr_text_readability"
+      ]
+    },
+    {
+      "id": "vr_controls.005",
+      "title": "Add learning-rate slider to ML_Gradient_Landscape",
+      "spec": "The gradient descent visualization becomes pedagogical only when the player can feel how learning rate affects convergence. Add the slider.",
+      "effort": "half-day",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "sequence_refs": [
+        "machinelearning"
+      ],
+      "contexts": [
+        "rams_slider_panel",
+        "artifact_three_files",
+        "vr_text_readability"
+      ]
+    }
+  ]
+}

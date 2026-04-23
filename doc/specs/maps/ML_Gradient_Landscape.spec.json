@@ -1,0 +1,37 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ML_Gradient_Landscape",
+  "home_sequence": "machinelearning",
+  "dimensions": {
+    "w": 9,
+    "d": 10
+  },
+  "signature": "gradient_descent_visualization",
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 86,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 10
+      },
+      "centroid": [
+        3.9767441860465116,
+        4.465116279069767
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 89,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

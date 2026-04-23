@@ -1,0 +1,37 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ProceduralGeneration_Maze",
+  "home_sequence": "proceduralgeneration_all",
+  "dimensions": {
+    "w": 18,
+    "d": 18
+  },
+  "signature": null,
+  "style": "rams",
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 321,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 18,
+        "d": 18
+      },
+      "centroid": [
+        8.523364485981308,
+        8.526479750778817
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 322,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_QFEP",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 12
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.099,
+  "breath_zones": [
+    {
+      "size": 105,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 12
+      },
+      "centroid": [
+        5.019047619047619,
+        5.876190476190477
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "AnickaYiLab"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "PipilottiRistWorld"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "earths_delight"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "edge_detector"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "edge_of_chaos_orb"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "entropy_meter"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "fuzzy_cloud"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "phase_cube"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "qfep_oscilloscope"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "qfep_sandbox_console"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "reactive_particle_field"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "science_desk"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "science_glasses"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 13,
+    "walkable_cells": 131,
+    "breath_zone_count": 1,
+    "unique_tokens": 13
+  }
+}

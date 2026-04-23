@@ -1,0 +1,68 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Disposition_Test_Hub",
+  "home_sequence": "testmaps",
+  "dimensions": {
+    "w": 12,
+    "d": 12
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.081,
+  "breath_zones": [
+    {
+      "size": 68,
+      "bounds": {
+        "x": 1,
+        "z": 1,
+        "w": 10,
+        "d": 10
+      },
+      "centroid": [
+        5.955882352941177,
+        5.823529411764706
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 7,
+      "z": 1,
+      "token": "dijkstra_algorithm"
+    },
+    {
+      "x": 3,
+      "z": 2,
+      "token": "network_flow_visualization"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "grid_editor_board"
+    },
+    {
+      "x": 9,
+      "z": 4,
+      "token": "persian_rug"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "armadillo_eggling"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "pattern_tile_mirror"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 6,
+    "walkable_cells": 74,
+    "breath_zone_count": 1,
+    "unique_tokens": 6
+  }
+}

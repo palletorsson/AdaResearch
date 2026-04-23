@@ -1,0 +1,56 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Wavefunctions_Bernini",
+  "home_sequence": "wavefunctions",
+  "dimensions": {
+    "w": 15,
+    "d": 15
+  },
+  "signature": "bernini_columns implements the solomonic spiral via vertex displacement; ElphabaDress extends wave-driven deformation to fabric; vowel_sound_board connects oscillation to vocal resonance; dark_sphere anchors the space.",
+  "style": null,
+  "echoes": [
+    "primitives",
+    "noise"
+  ],
+  "density": 0.013,
+  "breath_zones": [
+    {
+      "size": 220,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 15,
+        "d": 15
+      },
+      "centroid": [
+        7.004545454545455,
+        6.972727272727273
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 7,
+      "z": 4,
+      "token": "ElphabaDress"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 7,
+      "z": 6,
+      "token": "bernini_columns"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 224,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

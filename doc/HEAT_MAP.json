@@ -1,18 +1,30 @@
 {
-  "generated": "2026-04-11T10:29:17.800634",
+  "generated": "2026-04-22T09:04:43.310824",
   "description": "Auto-generated heat map from project signals",
   "items": [
     {
-      "item": "lod",
+      "item": "pattern",
+      "temperature": 70,
+      "reason": "active (2 recent commits)",
+      "action": "continue"
+    },
+    {
+      "item": "primitive",
       "temperature": 65,
       "reason": "active (1 recent commits)",
       "action": "continue"
     },
     {
-      "item": "shader",
+      "item": "facade",
       "temperature": 65,
       "reason": "active (1 recent commits)",
       "action": "continue"
+    },
+    {
+      "item": "garden_identity_leverage",
+      "temperature": 60,
+      "reason": "deep discovery: Dark_sphere and shared commons artifacts",
+      "action": "follow up"
     },
     {
       "item": "sequence:resourcemanagement",

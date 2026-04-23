@@ -1,0 +1,66 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "QFEP_E_Term",
+  "home_sequence": "qfeplaboratory",
+  "dimensions": {
+    "w": 12,
+    "d": 12
+  },
+  "signature": "particle_chaos demonstrates maximum entropy (no structure",
+  "style": null,
+  "echoes": [
+    "randomness",
+    "noise"
+  ],
+  "density": 0.036,
+  "breath_zones": [
+    {
+      "size": 133,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 12
+      },
+      "centroid": [
+        5.511278195488722,
+        5.3007518796992485
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 3,
+      "token": "random_cubes"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "token": "random_cubes"
+    },
+    {
+      "x": 5,
+      "z": 5,
+      "token": "particle_chaos"
+    },
+    {
+      "x": 4,
+      "z": 7,
+      "token": "random_cubes"
+    },
+    {
+      "x": 7,
+      "z": 7,
+      "token": "random_cubes"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 140,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

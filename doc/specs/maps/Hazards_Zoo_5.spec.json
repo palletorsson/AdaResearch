@@ -1,0 +1,93 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Hazards_Zoo_5",
+  "home_sequence": "hazards",
+  "dimensions": {
+    "w": 15,
+    "d": 11
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.067,
+  "breath_zones": [
+    {
+      "size": 151,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 15,
+        "d": 11
+      },
+      "centroid": [
+        7.19205298013245,
+        5.099337748344371
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 0,
+      "token": "soft_stage_dashboard"
+    },
+    {
+      "x": 9,
+      "z": 0,
+      "token": "progression_driver"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "wave_rider"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "spring_mass_bouncer"
+    },
+    {
+      "x": 5,
+      "z": 3,
+      "token": "collision_crasher"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "token": "joint_articulator"
+    },
+    {
+      "x": 1,
+      "z": 7,
+      "token": "lifeform_walker"
+    },
+    {
+      "x": 3,
+      "z": 7,
+      "token": "branching_vine"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "fractal_hydra"
+    },
+    {
+      "x": 7,
+      "z": 7,
+      "token": "recursion_spiral"
+    },
+    {
+      "x": 9,
+      "z": 7,
+      "token": "swarm_hive"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 11,
+    "walkable_cells": 165,
+    "breath_zone_count": 1,
+    "unique_tokens": 11
+  }
+}

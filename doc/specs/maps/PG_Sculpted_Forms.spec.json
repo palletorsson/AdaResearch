@@ -1,0 +1,57 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "PG_Sculpted_Forms",
+  "home_sequence": "proceduralgeneration",
+  "dimensions": {
+    "w": 12,
+    "d": 12
+  },
+  "signature": "cube_mound_scene generates terrain through voxel stacking and height-field accumulation; dome constructs curved shell geometry through parametric arc subdivision; layered_membrane produces stratified folded surfaces through iterative sheet displacement.",
+  "style": null,
+  "echoes": [
+    "primitives",
+    "color",
+    "lsystems"
+  ],
+  "density": 0.029,
+  "breath_zones": [
+    {
+      "size": 99,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 12
+      },
+      "centroid": [
+        5.484848484848484,
+        5.424242424242424
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 1,
+      "token": "cube_mound_scene"
+    },
+    {
+      "x": 8,
+      "z": 1,
+      "token": "dome"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "layered_membrane"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 102,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

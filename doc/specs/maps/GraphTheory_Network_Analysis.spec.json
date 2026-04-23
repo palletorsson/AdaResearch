@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "GraphTheory_Network_Analysis",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 12,
+    "d": 13
+  },
+  "signature": null,
+  "style": "rams",
+  "echoes": [
+    "randomness"
+  ],
+  "density": 0.013,
+  "breath_zones": [
+    {
+      "size": 151,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 13
+      },
+      "centroid": [
+        5.470198675496689,
+        5.874172185430464
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 6,
+      "token": "networkflow3d"
+    },
+    {
+      "x": 3,
+      "z": 7,
+      "token": "network_analysis"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 153,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

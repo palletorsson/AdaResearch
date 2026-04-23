@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "oscillation_6",
+  "home_sequence": "unused",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.059,
+  "breath_zones": [
+    {
+      "size": 48,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.0833333333333335,
+        3.2291666666666665
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 1,
+      "token": "exercise_3_11_oop_wave_vr"
+    },
+    {
+      "x": 3,
+      "z": 2,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "exercise_3_12_additive_wave_vr"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 51,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

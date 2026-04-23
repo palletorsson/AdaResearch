@@ -1,0 +1,111 @@
+map: Point_Animatedcube
+sequence: primitives
+dimensions:
+  rows: 14
+  cols: 7
+base_recipe: flat_corridor
+base_recipe_match_pct: 63.2
+residual_cells: 7
+residual_pct: 36.8
+vocabulary_coverage_pct: 63.2
+cells_masked_void_envelope: 79
+operator_groups: 3
+operator_kinds:
+  @void: 3
+operators_declarative:
+  - "@void:1:2 at (5,0)"
+  - "@void at (6,1)"
+  - "@void:4:1 at (0,13)"
+utilities:
+  -
+    token: sp
+    at:
+      - 0
+      - 0
+    raw: sp
+  -
+    token: an
+    at:
+      - 6
+      - 0
+    raw: "an:-90"
+  -
+    token: t
+    at:
+      - 5
+      - 12
+    raw: t
+artifacts:
+  -
+    token: dark_sphere
+    at:
+      - 0
+      - 0
+    rotation: 0
+    y_offset: "-0.5"
+    footprint_inferred:
+      - 1
+      - 1
+  -
+    token: animatedcubebuilder
+    at:
+      - 2
+      - 4
+    rotation: 0
+    y_offset: 0
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: animatedcubebuilder
+    at:
+      - 4
+      - 4
+    rotation: 0
+    y_offset: 0
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: science_screen
+    at:
+      - 5
+      - 6
+    rotation: 180
+    y_offset: 1.5
+    footprint_inferred:
+      - 3
+      - 3
+    config: "#mode:net"
+  -
+    token: animatedcubebuilder
+    at:
+      - 2
+      - 8
+    rotation: 0
+    y_offset: 0
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: animatedcubebuilder
+    at:
+      - 4
+      - 8
+    rotation: 0
+    y_offset: 0
+    footprint_inferred:
+      - 3
+      - 3
+  -
+    token: polyhedron_nets_cube
+    at:
+      - 3
+      - 10
+    rotation: 0
+    y_offset: 1
+    footprint_inferred:
+      - 3
+      - 3
+    config: "#loop_fold:true"
+artifact_count: 7

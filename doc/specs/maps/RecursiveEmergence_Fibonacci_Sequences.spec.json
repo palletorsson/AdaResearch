@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "RecursiveEmergence_Fibonacci_Sequences",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 9,
+    "d": 11
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.012,
+  "breath_zones": [
+    {
+      "size": 85,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 9,
+        "d": 11
+      },
+      "centroid": [
+        3.976470588235294,
+        5.105882352941176
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 4,
+      "token": "fibonacci_sequences"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 86,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

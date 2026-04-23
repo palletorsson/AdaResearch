@@ -1,0 +1,55 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ISO_Caves",
+  "home_sequence": "isosurfaces",
+  "dimensions": {
+    "w": 14,
+    "d": 10
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "noise"
+  ],
+  "density": 0.022,
+  "breath_zones": [
+    {
+      "size": 136,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 14,
+        "d": 10
+      },
+      "centroid": [
+        6.470588235294118,
+        4.485294117647059
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "mc_portal_landscape"
+    },
+    {
+      "x": 10,
+      "z": 3,
+      "token": "mc_inside_cave"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "queer_marching_cave"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 139,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

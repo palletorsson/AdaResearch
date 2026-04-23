@@ -1,0 +1,56 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Random_Noise_Types",
+  "home_sequence": "noise",
+  "dimensions": {
+    "w": 7,
+    "d": 9
+  },
+  "signature": "NoiseColors3D maps the full noise spectrum into 3D color space",
+  "style": null,
+  "echoes": [
+    "color",
+    "randomness"
+  ],
+  "density": 0.059,
+  "breath_zones": [
+    {
+      "size": 46,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.0652173913043477,
+        3.239130434782609
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 4,
+      "z": 0,
+      "token": "randompoint"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "randompoints"
+    },
+    {
+      "x": 3,
+      "z": 4,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 51,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

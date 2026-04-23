@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Flower_Water",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 10,
+    "d": 10
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.031,
+  "breath_zones": [
+    {
+      "size": 95,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 10
+      },
+      "centroid": [
+        4.442105263157894,
+        4.473684210526316
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "water_flowers"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "botanical_flower"
+    },
+    {
+      "x": 3,
+      "z": 7,
+      "token": "botanical_flower"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 98,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

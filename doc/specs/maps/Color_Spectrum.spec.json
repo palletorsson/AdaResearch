@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Color_Spectrum",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 11,
+    "d": 13
+  },
+  "signature": null,
+  "style": "kusama",
+  "echoes": [],
+  "density": 0.021,
+  "breath_zones": [
+    {
+      "size": 138,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 13
+      },
+      "centroid": [
+        4.971014492753623,
+        6.0144927536231885
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "color_constellation_office"
+    },
+    {
+      "x": 5,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "SpectrumVisualizer"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 141,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

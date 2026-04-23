@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "PatternGeneration_Narrative_Generation",
+  "home_sequence": "patterngeneration",
+  "dimensions": {
+    "w": 4,
+    "d": 12
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.021,
+  "breath_zones": [
+    {
+      "size": 46,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 4,
+        "d": 12
+      },
+      "centroid": [
+        1.5217391304347827,
+        5.413043478260869
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 5,
+      "token": "markov_chains"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 47,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

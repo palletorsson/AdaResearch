@@ -1,0 +1,37 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ML_Classification",
+  "home_sequence": "machinelearning",
+  "dimensions": {
+    "w": 10,
+    "d": 8
+  },
+  "signature": "classification_demo provides interactive 2D classification with adjustable decision boundaries",
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 76,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 10,
+        "d": 8
+      },
+      "centroid": [
+        4.4605263157894735,
+        3.526315789473684
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 79,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

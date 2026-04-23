@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "TestMap_Unused_1",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 5,
+    "d": 5
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.042,
+  "breath_zones": [
+    {
+      "size": 23,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 5,
+        "d": 5
+      },
+      "centroid": [
+        1.9565217391304348,
+        1.8695652173913044
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "MarioSoundController"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 24,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

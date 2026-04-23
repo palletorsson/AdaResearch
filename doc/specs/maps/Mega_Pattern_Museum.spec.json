@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Mega_Pattern_Museum",
+  "home_sequence": "mosaicanalysis",
+  "dimensions": {
+    "w": 50,
+    "d": 50
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 2497,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 50,
+        "d": 50
+      },
+      "centroid": [
+        24.507809371245493,
+        24.527432919503404
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "floor_plan_space"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 2499,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

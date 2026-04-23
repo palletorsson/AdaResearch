@@ -1,0 +1,40 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "ML_Neural_Networks",
+  "home_sequence": "machinelearning",
+  "dimensions": {
+    "w": 5,
+    "d": 14
+  },
+  "signature": "neural_network_3d provides a three-dimensional visualization of network architecture",
+  "style": null,
+  "echoes": [
+    "forces",
+    "noise"
+  ],
+  "density": 0.0,
+  "breath_zones": [
+    {
+      "size": 66,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 5,
+        "d": 14
+      },
+      "centroid": [
+        2.015151515151515,
+        6.46969696969697
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 0,
+    "walkable_cells": 69,
+    "breath_zone_count": 1,
+    "unique_tokens": 0
+  }
+}

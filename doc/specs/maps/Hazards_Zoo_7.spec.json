@@ -1,0 +1,88 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Hazards_Zoo_7",
+  "home_sequence": "hazards",
+  "dimensions": {
+    "w": 15,
+    "d": 11
+  },
+  "signature": null,
+  "style": "escher",
+  "echoes": [],
+  "density": 0.061,
+  "breath_zones": [
+    {
+      "size": 152,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 15,
+        "d": 11
+      },
+      "centroid": [
+        7.190789473684211,
+        5.0855263157894735
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 0,
+      "token": "soft_stage_dashboard"
+    },
+    {
+      "x": 9,
+      "z": 0,
+      "token": "progression_driver"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "pattern_mine"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "resonance_chamber"
+    },
+    {
+      "x": 5,
+      "z": 3,
+      "token": "particle_emitter_hazard"
+    },
+    {
+      "x": 1,
+      "z": 7,
+      "token": "tesseract_phaser"
+    },
+    {
+      "x": 3,
+      "z": 7,
+      "token": "escher_stairwalker"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "mesh_morpher"
+    },
+    {
+      "x": 7,
+      "z": 7,
+      "token": "bricoleur_golem"
+    },
+    {
+      "x": 9,
+      "z": 7,
+      "token": "qfep_calibrator"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 10,
+    "walkable_cells": 165,
+    "breath_zone_count": 1,
+    "unique_tokens": 10
+  }
+}

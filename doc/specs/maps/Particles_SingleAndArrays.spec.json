@@ -1,0 +1,58 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Particles_SingleAndArrays",
+  "home_sequence": "particles",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.078,
+  "breath_zones": [
+    {
+      "size": 46,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 8
+      },
+      "centroid": [
+        3.0869565217391304,
+        3.1956521739130435
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 2,
+      "token": "example_4_1_single_particle_vr"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "0"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "example_4_2_array_particles_vr"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 51,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

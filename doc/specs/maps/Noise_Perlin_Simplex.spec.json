@@ -1,0 +1,49 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Noise_Perlin_Simplex",
+  "home_sequence": "noise",
+  "dimensions": {
+    "w": 12,
+    "d": 13
+  },
+  "signature": "perlin_noise_bridge",
+  "style": null,
+  "echoes": [],
+  "density": 1.25,
+  "breath_zones": [],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 3,
+      "token": "simplex_noise"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "token": "perlin_noise"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "noise_terrain"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 10,
+      "token": "perlin_noise_terrain"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 4,
+    "breath_zone_count": 0,
+    "unique_tokens": 5
+  }
+}

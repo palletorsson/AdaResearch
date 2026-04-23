@@ -1,0 +1,58 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "SpeculativeComputation_Queer_Machines",
+  "home_sequence": "speculativecomputation",
+  "dimensions": {
+    "w": 5,
+    "d": 5
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.167,
+  "breath_zones": [
+    {
+      "size": 20,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 5,
+        "d": 5
+      },
+      "centroid": [
+        1.9,
+        1.9
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "glitch_body"
+    },
+    {
+      "x": 3,
+      "z": 1,
+      "token": "non_binary_classifier"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "fluid_taxonomy_tree"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "rhizome_navigator"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 24,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

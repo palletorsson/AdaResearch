@@ -1,0 +1,53 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "NonEuclidean_Spaces",
+  "home_sequence": "foundationscrisis",
+  "dimensions": {
+    "w": 15,
+    "d": 13
+  },
+  "signature": "curvature_slider parametrizes the geometry continuously; hyperbolic_surface and elliptic_surface provide immersive examples; poincare_disk shows the hyperbolic plane in finite form; riemann_sphere shows the elliptic model.",
+  "style": "pompeii",
+  "echoes": [],
+  "density": 0.021,
+  "breath_zones": [
+    {
+      "size": 141,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 15,
+        "d": 13
+      },
+      "centroid": [
+        7.0,
+        5.553191489361702
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 7,
+      "z": 6,
+      "token": "curvature_slider"
+    },
+    {
+      "x": 3,
+      "z": 8,
+      "token": "poincare_disk"
+    },
+    {
+      "x": 11,
+      "z": 8,
+      "token": "riemann_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 3,
+    "walkable_cells": 146,
+    "breath_zone_count": 1,
+    "unique_tokens": 3
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "CA_BeyondBinary",
+  "home_sequence": "cellularautomata",
+  "dimensions": {
+    "w": 7,
+    "d": 8
+  },
+  "signature": "ca_growth_network tracks population dynamics of active cells; hexagon_ca_vr places CA on a hexagonal lattice in virtual reality; dark_sphere anchors the research space.",
+  "style": null,
+  "echoes": [],
+  "density": 0.174,
+  "breath_zones": [
+    {
+      "size": 17,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 7,
+        "d": 4
+      },
+      "centroid": [
+        2.9411764705882355,
+        1.2352941176470589
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 0,
+      "token": "mold_network"
+    },
+    {
+      "x": 3,
+      "z": 2,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "hexagon_ca_vr"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "ca_growth_network"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 23,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}

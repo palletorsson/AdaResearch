@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "PG_Percolation_Network",
+  "home_sequence": "proceduralgeneration",
+  "dimensions": {
+    "w": 12,
+    "d": 15
+  },
+  "signature": "percolationnetwork_ca implements site percolation with cluster detection",
+  "style": null,
+  "echoes": [
+    "randomness"
+  ],
+  "density": 0.011,
+  "breath_zones": [
+    {
+      "size": 176,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 15
+      },
+      "centroid": [
+        5.471590909090909,
+        6.931818181818182
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 5,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "percolationnetwork_ca"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 178,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_CellularAutomata",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 16
+  },
+  "signature": null,
+  "style": "rams",
+  "echoes": [],
+  "density": 0.126,
+  "breath_zones": [
+    {
+      "size": 131,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 16
+      },
+      "centroid": [
+        5.030534351145038,
+        7.938931297709924
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "7_1_elementary_ca_vr"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "7_2_game_of_life_vr"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "7_3_game_of_life_oop_vr"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "7_8_hexagon_ca_vr"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "CA_sphere"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "CellularAutomata3DTree"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "CrosswayCA"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "ca_showcase"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "cellular_automata_1d"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "cellular_automata_basic"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "crack_propagation_ca"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "dendrite_growth_ca"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "ecosystem_ca"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "elementary_ca_vr"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "game_of_life_oop_vr"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "game_of_life_vr"
+    },
+    {
+      "x": 2,
+      "z": 10,
+      "token": "hexagon_cave_vr"
+    },
+    {
+      "x": 4,
+      "z": 10,
+      "token": "lenia_continuous"
+    },
+    {
+      "x": 6,
+      "z": 10,
+      "token": "percolation_ca"
+    },
+    {
+      "x": 8,
+      "z": 10,
+      "token": "pulsing_ca"
+    },
+    {
+      "x": 2,
+      "z": 12,
+      "token": "recrystallization_ca"
+    },
+    {
+      "x": 4,
+      "z": 12,
+      "token": "wireworld_circuit"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 22,
+    "walkable_cells": 175,
+    "breath_zone_count": 1,
+    "unique_tokens": 22
+  }
+}

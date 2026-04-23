@@ -1,0 +1,118 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_PhysicsSimulation",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 12
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.122,
+  "breath_zones": [
+    {
+      "size": 99,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 12
+      },
+      "centroid": [
+        4.959595959595959,
+        5.777777777777778
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "example_1_10_accelerating_towards_the_mouse_vr"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "example_2_4_friction_vr"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "example_3_4_polar_to_cartesian_vr"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "example_6_8_collision_layers_vr"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "gravity_well"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "newton_cradle"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "raycastingpoints"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "slingshot_launcher"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "soft_mushrooms"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "soft_trampoline"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "softbody3d"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "softbodytest"
+    },
+    {
+      "x": 2,
+      "z": 8,
+      "token": "squishy_ball_pit"
+    },
+    {
+      "x": 4,
+      "z": 8,
+      "token": "tscn_joint"
+    },
+    {
+      "x": 6,
+      "z": 8,
+      "token": "viscosity_layers"
+    },
+    {
+      "x": 8,
+      "z": 8,
+      "token": "waterone"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 16,
+    "walkable_cells": 131,
+    "breath_zone_count": 1,
+    "unique_tokens": 16
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "WaveFunctions_Kusama",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 12,
+    "d": 13
+  },
+  "signature": null,
+  "style": "kusama",
+  "echoes": [],
+  "density": 0.033,
+  "breath_zones": [
+    {
+      "size": 60,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 12,
+        "d": 13
+      },
+      "centroid": [
+        4.216666666666667,
+        6.633333333333334
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 5,
+      "token": "kusama_sine"
+    },
+    {
+      "x": 5,
+      "z": 6,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 61,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Primitives_Platonic",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 7,
+    "d": 6
+  },
+  "signature": null,
+  "style": "bauhaus",
+  "echoes": [],
+  "density": 0.333,
+  "breath_zones": [
+    {
+      "size": 7,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 6,
+        "d": 2
+      },
+      "centroid": [
+        2.142857142857143,
+        0.14285714285714285
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 1,
+      "z": 1,
+      "token": "tetrahedron"
+    },
+    {
+      "x": 2,
+      "z": 1,
+      "token": "cube"
+    },
+    {
+      "x": 3,
+      "z": 1,
+      "token": "octahedron"
+    },
+    {
+      "x": 4,
+      "z": 1,
+      "token": "dodecahedron"
+    },
+    {
+      "x": 5,
+      "z": 1,
+      "token": "icosahedron"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 5,
+    "walkable_cells": 15,
+    "breath_zone_count": 1,
+    "unique_tokens": 5
+  }
+}

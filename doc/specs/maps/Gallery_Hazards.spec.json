@@ -1,0 +1,93 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Gallery_Hazards",
+  "home_sequence": "gallery",
+  "dimensions": {
+    "w": 11,
+    "d": 10
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.101,
+  "breath_zones": [
+    {
+      "size": 87,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 10
+      },
+      "centroid": [
+        5.022988505747127,
+        4.758620689655173
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 2,
+      "z": 2,
+      "token": "deltahedron_creature"
+    },
+    {
+      "x": 4,
+      "z": 2,
+      "token": "fibonacci_snake"
+    },
+    {
+      "x": 6,
+      "z": 2,
+      "token": "flora_landscape"
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "token": "folding_zoo"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "foliage_showcase"
+    },
+    {
+      "x": 4,
+      "z": 4,
+      "token": "goomba_box"
+    },
+    {
+      "x": 6,
+      "z": 4,
+      "token": "helix_cylinder_creature"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "shell_roller"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "token": "spring_hopper"
+    },
+    {
+      "x": 4,
+      "z": 6,
+      "token": "sweeper_block"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "wedge_skill_pickup"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 11,
+    "walkable_cells": 109,
+    "breath_zone_count": 1,
+    "unique_tokens": 11
+  }
+}

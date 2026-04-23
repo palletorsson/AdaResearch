@@ -1,0 +1,43 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+  "home_sequence": "swarmintelligence",
+  "dimensions": {
+    "w": 8,
+    "d": 8
+  },
+  "signature": "ABMSimulation implements a general agent-based model in the two-platform arena environment",
+  "style": null,
+  "echoes": [],
+  "density": 0.016,
+  "breath_zones": [
+    {
+      "size": 62,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 8,
+        "d": 8
+      },
+      "centroid": [
+        3.467741935483871,
+        3.467741935483871
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 3,
+      "token": "ant_colony_optimization"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 1,
+    "walkable_cells": 63,
+    "breath_zone_count": 1,
+    "unique_tokens": 1
+  }
+}

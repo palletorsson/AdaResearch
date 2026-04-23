@@ -1,0 +1,78 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Fractal_KochSierpinski",
+  "home_sequence": "fractals",
+  "dimensions": {
+    "w": 11,
+    "d": 9
+  },
+  "signature": "fractal_koch_curve implements the 2D Koch snowflake construction; koch_curve_3d extends Koch into three dimensions; sierpinski_pyramid previews Fractals_5 with the 3D Sierpinski analog; cube_cabin applies recursive geometry to architectural space; dark_sphere anchors.",
+  "style": "bauhaus",
+  "echoes": [],
+  "density": 0.088,
+  "breath_zones": [
+    {
+      "size": 82,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 11,
+        "d": 9
+      },
+      "centroid": [
+        5.048780487804878,
+        3.5853658536585367
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 2,
+      "token": "cube_cabin"
+    },
+    {
+      "x": 5,
+      "z": 2,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 5,
+      "z": 3,
+      "token": "fractal_koch_curve"
+    },
+    {
+      "x": 5,
+      "z": 4,
+      "token": "koch_curve_3d"
+    },
+    {
+      "x": 9,
+      "z": 5,
+      "token": "sierpinski_triangle"
+    },
+    {
+      "x": 3,
+      "z": 6,
+      "token": "cube_bookshelf"
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "token": "box_counting_dimension"
+    },
+    {
+      "x": 5,
+      "z": 8,
+      "token": "sierpinski_pyramid"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 8,
+    "walkable_cells": 91,
+    "breath_zone_count": 1,
+    "unique_tokens": 8
+  }
+}

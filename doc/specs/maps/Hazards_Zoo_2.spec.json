@@ -1,0 +1,115 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Hazards_Zoo_2",
+  "home_sequence": "hazards",
+  "dimensions": {
+    "w": 15,
+    "d": 11
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.091,
+  "breath_zones": [
+    {
+      "size": 148,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 15,
+        "d": 11
+      },
+      "centroid": [
+        7.324324324324325,
+        4.97972972972973
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 0,
+      "token": "soft_stage_dashboard"
+    },
+    {
+      "x": 9,
+      "z": 0,
+      "token": "progression_driver"
+    },
+    {
+      "x": 1,
+      "z": 3,
+      "token": "octapod_crawler"
+    },
+    {
+      "x": 3,
+      "z": 3,
+      "token": "waterbomb_hopper"
+    },
+    {
+      "x": 5,
+      "z": 3,
+      "token": "plasma_critter"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "token": "force_field"
+    },
+    {
+      "x": 1,
+      "z": 7,
+      "token": "gridagent"
+    },
+    {
+      "x": 3,
+      "z": 7,
+      "token": "gridagent"
+    },
+    {
+      "x": 5,
+      "z": 7,
+      "token": "gridagent"
+    },
+    {
+      "x": 7,
+      "z": 7,
+      "token": "gridagent"
+    },
+    {
+      "x": 1,
+      "z": 8,
+      "token": "gridagent"
+    },
+    {
+      "x": 3,
+      "z": 8,
+      "token": "gridagent"
+    },
+    {
+      "x": 5,
+      "z": 8,
+      "token": "gridagent"
+    },
+    {
+      "x": 7,
+      "z": 8,
+      "token": "gridagent"
+    },
+    {
+      "x": 9,
+      "z": 8,
+      "token": "gridagent"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 15,
+    "walkable_cells": 165,
+    "breath_zone_count": 1,
+    "unique_tokens": 7
+  }
+}

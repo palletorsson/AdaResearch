@@ -1,0 +1,190 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Color_Context",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 15,
+    "d": 34
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [
+    "color"
+  ],
+  "density": 0.059,
+  "breath_zones": [
+    {
+      "size": 478,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 15,
+        "d": 34
+      },
+      "centroid": [
+        6.968619246861925,
+        16.47489539748954
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 11,
+      "z": 1,
+      "token": "SimultaneousContrast"
+    },
+    {
+      "x": 7,
+      "z": 3,
+      "token": "dark_sphere"
+    },
+    {
+      "x": 2,
+      "z": 5,
+      "token": "disco_lights"
+    },
+    {
+      "x": 12,
+      "z": 5,
+      "token": "coloredlines"
+    },
+    {
+      "x": 4,
+      "z": 7,
+      "token": "MetamerismLab"
+    },
+    {
+      "x": 10,
+      "z": 7,
+      "token": "colorsheets"
+    },
+    {
+      "x": 2,
+      "z": 9,
+      "token": "k_means_color"
+    },
+    {
+      "x": 12,
+      "z": 9,
+      "token": "colorcheckerfloor"
+    },
+    {
+      "x": 4,
+      "z": 11,
+      "token": "colortruchetfloor"
+    },
+    {
+      "x": 10,
+      "z": 11,
+      "token": "colortrails"
+    },
+    {
+      "x": 2,
+      "z": 13,
+      "token": "advancedglitch"
+    },
+    {
+      "x": 12,
+      "z": 13,
+      "token": "glitchcolor"
+    },
+    {
+      "x": 4,
+      "z": 15,
+      "token": "minimalglitch"
+    },
+    {
+      "x": 10,
+      "z": 15,
+      "token": "textureglitch"
+    },
+    {
+      "x": 2,
+      "z": 17,
+      "token": "RotatingLaser"
+    },
+    {
+      "x": 12,
+      "z": 17,
+      "token": "strobe_lasers"
+    },
+    {
+      "x": 4,
+      "z": 19,
+      "token": "spherecolors"
+    },
+    {
+      "x": 10,
+      "z": 19,
+      "token": "colorwall"
+    },
+    {
+      "x": 2,
+      "z": 21,
+      "token": "interactive_color_mixing"
+    },
+    {
+      "x": 10,
+      "z": 21,
+      "token": "advanced_mixing_examples"
+    },
+    {
+      "x": 2,
+      "z": 23,
+      "token": "2d_in_3d_k_means_color"
+    },
+    {
+      "x": 12,
+      "z": 23,
+      "token": "colorscannercontext"
+    },
+    {
+      "x": 4,
+      "z": 25,
+      "token": "color_scanner"
+    },
+    {
+      "x": 10,
+      "z": 25,
+      "token": "grab_stick"
+    },
+    {
+      "x": 2,
+      "z": 27,
+      "token": "shelf"
+    },
+    {
+      "x": 12,
+      "z": 27,
+      "token": "shelf_with_stickers"
+    },
+    {
+      "x": 4,
+      "z": 29,
+      "token": "gridcolorizer_demo"
+    },
+    {
+      "x": 10,
+      "z": 29,
+      "token": "simple_color_test"
+    },
+    {
+      "x": 2,
+      "z": 31,
+      "token": "laser_turret"
+    },
+    {
+      "x": 12,
+      "z": 31,
+      "token": "turret_demo"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 30,
+    "walkable_cells": 509,
+    "breath_zone_count": 1,
+    "unique_tokens": 30
+  }
+}

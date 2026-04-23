@@ -1,0 +1,50 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Pattern_Generation_Five",
+  "home_sequence": "patterngeneration",
+  "dimensions": {
+    "w": 13,
+    "d": 13
+  },
+  "signature": null,
+  "style": "kusama",
+  "echoes": [
+    "randomness"
+  ],
+  "density": 0.013,
+  "breath_zones": [
+    {
+      "size": 157,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 13,
+        "d": 13
+      },
+      "centroid": [
+        5.8152866242038215,
+        5.796178343949045
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 5,
+      "z": 5,
+      "token": "Shader_Gallery"
+    },
+    {
+      "x": 6,
+      "z": 6,
+      "token": "waves"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 159,
+    "breath_zone_count": 1,
+    "unique_tokens": 2
+  }
+}

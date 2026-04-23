@@ -1,0 +1,34 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Random_Random_Bell_Curve",
+  "home_sequence": "",
+  "dimensions": {
+    "w": 13,
+    "d": 16
+  },
+  "signature": null,
+  "style": null,
+  "echoes": [],
+  "density": 0.667,
+  "breath_zones": [],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 0,
+      "z": 1,
+      "token": "random_bell_curve"
+    },
+    {
+      "x": 5,
+      "z": 8,
+      "token": "dark_sphere"
+    }
+  ],
+  "authorial_annotations": [],
+  "stats": {
+    "artifact_count": 2,
+    "walkable_cells": 3,
+    "breath_zone_count": 0,
+    "unique_tokens": 2
+  }
+}

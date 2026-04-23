@@ -1,0 +1,77 @@
+{
+  "timestamp": "2026-04-19T11:54:42.831769",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "global_avg": 5.05,
+    "sequences_scored": 19,
+    "randomness": {
+      "head": 7,
+      "label": "polish",
+      "stages_complete": 6
+    },
+    "all_others_18": {
+      "head": 6,
+      "label": "vr_testing",
+      "stages_complete": 5
+    }
+  },
+  "heat_map_top_5": [
+    {
+      "item": "pattern",
+      "temp": 70,
+      "reason": "active (2 recent commits)"
+    },
+    {
+      "item": "registry_alias_pattern",
+      "temp": 60,
+      "reason": "deep discovery"
+    },
+    {
+      "item": "pipeline_scoring",
+      "temp": 60,
+      "reason": "deep discovery"
+    },
+    {
+      "item": "release_gates",
+      "temp": 60,
+      "reason": "deep discovery"
+    },
+    {
+      "item": "sequence:resourcemanagement",
+      "temp": 50,
+      "reason": "empty sequence"
+    }
+  ],
+  "garden_health": {
+    "total_artifacts": 2006,
+    "voiced": 652,
+    "embodied": 250,
+    "reaching": 301,
+    "phantom_limbs": 410,
+    "voice_coverage_pct": 32,
+    "embodiment_rate_pct": 38,
+    "LIVING": [
+      "grammar_gallery",
+      "joints"
+    ],
+    "GROWING": [
+      "foundationscrisis",
+      "lsystems",
+      "fold_system",
+      "bodyprogression"
+    ],
+    "REACHING": [
+      "hazards",
+      "graphtheory",
+      "artmathematics",
+      "meshes"
+    ]
+  },
+  "release_gates": {
+    "A": "PASS",
+    "B": "PASS",
+    "C": "PASS",
+    "D": "PASS",
+    "all_passing": true
+  }
+}

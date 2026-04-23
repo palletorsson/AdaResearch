@@ -1,0 +1,117 @@
+{
+  "schema": "adaresearch.map_spec.v1",
+  "map": "Annotation_Hold_Sample",
+  "home_sequence": "annotations",
+  "dimensions": {
+    "w": 14,
+    "d": 10
+  },
+  "signature": null,
+  "style": "rams",
+  "echoes": [],
+  "density": 0.029,
+  "breath_zones": [
+    {
+      "size": 136,
+      "bounds": {
+        "x": 0,
+        "z": 0,
+        "w": 14,
+        "d": 10
+      },
+      "centroid": [
+        6.529411764705882,
+        4.544117647058823
+      ]
+    }
+  ],
+  "hard_constraints": [],
+  "soft_constraints": [
+    {
+      "x": 3,
+      "z": 2,
+      "token": "push_button"
+    },
+    {
+      "x": 9,
+      "z": 2,
+      "token": "slider_horizontal"
+    },
+    {
+      "x": 2,
+      "z": 4,
+      "token": "rotation_gimbal"
+    },
+    {
+      "x": 8,
+      "z": 4,
+      "token": "example_2_1_forces_vr"
+    }
+  ],
+  "authorial_annotations": [
+    {
+      "x": 2,
+      "z": 2,
+      "code": "@hold",
+      "params": [
+        "3",
+        "3"
+      ],
+      "footprint": {
+        "w": 3,
+        "d": 3
+      },
+      "key": null
+    },
+    {
+      "x": 8,
+      "z": 2,
+      "code": "@sample",
+      "params": [
+        "pedestal_cluster",
+        "3",
+        "3"
+      ],
+      "footprint": {
+        "w": 3,
+        "d": 3
+      },
+      "key": "pedestal_cluster"
+    },
+    {
+      "x": 2,
+      "z": 6,
+      "code": "@hold",
+      "params": [
+        "2",
+        "1"
+      ],
+      "footprint": {
+        "w": 2,
+        "d": 1
+      },
+      "key": null
+    },
+    {
+      "x": 8,
+      "z": 6,
+      "code": "@sample",
+      "params": [
+        "single_pedestal",
+        "2",
+        "1"
+      ],
+      "footprint": {
+        "w": 2,
+        "d": 1
+      },
+      "key": "single_pedestal"
+    }
+  ],
+  "stats": {
+    "artifact_count": 4,
+    "walkable_cells": 140,
+    "breath_zone_count": 1,
+    "unique_tokens": 4
+  }
+}
