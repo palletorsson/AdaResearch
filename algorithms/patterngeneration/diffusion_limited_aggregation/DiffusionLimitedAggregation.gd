@@ -1,3 +1,13 @@
+# @identity
+# essence: a Brownian-motion crystal that grows one sticking particle at a time — random walkers launched from a circle drift inward and freeze the moment they touch the aggregate, building a fractal dendrite in real time
+# desire: to make visible the invisible physics beneath frost on glass, lightning paths, mineral veins, and river deltas — these shapes are all frozen random walks; DLA is the proof
+# critical_parameter: sticking_radius (0.3) — smaller values produce denser aggregates, larger values allow walkers to approach closer before sticking; the fractal dimension of the result changes with this one number
+# triggers: particle_timer fires every 0.1s, launching a random walker from spawn_radius (6m out); each walker drifts in 0.1-unit steps until touching the aggregate or escaping kill_radius (8m)
+# emerges: branching structure self-organizes from purely local decisions — no particle knows the global shape it is building; the fractal arm is the aggregate's own shadow blocking new growth
+# needs: VR interaction to add particles manually [missing]; speed control slider [missing]; apply_grid_config [missing]
+# relationships: placed in PatternGeneration_Diffusion_Limited_Aggregation_DLA; conceptually pairs with reaction_diffusion (both are Turing-class morphogenesis); DLA is the dry limit of Laplacian growth — same equation, no chemistry
+# truth: the fractal was always there — a random walk in two dimensions will eventually touch any convex seed, and the branching arm it builds is a literal drawing of probability space
+
 extends Node3D
 
 var time = 0.0

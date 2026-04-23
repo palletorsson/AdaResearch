@@ -18,8 +18,6 @@ extends "res://algorithms/joint/shared/joint_demo_base.gd"
 ##
 ## The opposite of a hinge: hinge allows rotation, slider allows translation.
 
-const SLIDER_HORIZONTAL = preload("res://commons/interactables/slider_horizontal.tscn")
-
 var slider_joint: SliderJoint3D
 var piston: RigidBody3D
 var frame_body: StaticBody3D

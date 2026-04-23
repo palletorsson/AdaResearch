@@ -1,6 +1,16 @@
 extends Node3D
 class_name FetishTorus
 
+# @identity
+# essence: two parametric toruses share the same major/minor radii — one runs a fluid color shader cycling through hue offsets, the other is mirror-black; they counter-rotate to show the same surface differently
+# desire: to stand before two intersecting rings and feel how the same geometry reads as warm or cold, alive or inert, depending only on material
+# critical_parameter: second_torus_tilt (75°) — the angle between the two rings determines whether they read as companion or collision; near 90° they become a Villarceau-circle pair
+# triggers: _ready builds both meshes; _process drives counter-rotation so the fluid torus spins forward while the black torus precesses; apply_grid_config rebuilds geometry live
+# emerges: the fluid shader mixes two oscillating RGB triples via UV-distance gradient — the pattern is not painted but computed; no two frames are identical
+# needs: VR grab interaction [missing — static rotating display]; dual_torus toggle slider [has via apply_grid_config but no VR UI]
+# relationships: uses Godot's built-in TorusMesh; pairs with torus_radials_rings (structural torus) and diamondtoruscollection (torus as path); contrasts with grab_trihedron (tactile vs contemplative)
+# truth: a torus is a circle of circles — the two radii each describe a separate rotational symmetry, and their ratio determines whether the shape reads as ring, donut, or sphere
+
 ## Fetish Torus — Parametric torus primitive with fluid shader-driven color effects.
 ##
 ## Demonstrates how a torus is defined by its major and minor radii, and how

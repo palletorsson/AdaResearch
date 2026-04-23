@@ -207,8 +207,8 @@ func _add_next_vertex() -> void:
 func _connect_last_two() -> void:
 	if _placed_vertices.size() < 2:
 		return
-	var a := _placed_vertices[_placed_vertices.size() - 2]
-	var b := _placed_vertices[_placed_vertices.size() - 1]
+	var a: int = _placed_vertices[_placed_vertices.size() - 2]
+	var b: int = _placed_vertices[_placed_vertices.size() - 1]
 	_add_edge(a, b)
 
 func _add_edge(a: int, b: int) -> void:
@@ -257,9 +257,9 @@ func _add_edge(a: int, b: int) -> void:
 func _fill_last_three() -> void:
 	if _placed_vertices.size() < 3:
 		return
-	var a := _placed_vertices[_placed_vertices.size() - 3]
-	var b := _placed_vertices[_placed_vertices.size() - 2]
-	var c := _placed_vertices[_placed_vertices.size() - 1]
+	var a: int = _placed_vertices[_placed_vertices.size() - 3]
+	var b: int = _placed_vertices[_placed_vertices.size() - 2]
+	var c: int = _placed_vertices[_placed_vertices.size() - 1]
 	_add_face(a, b, c)
 
 func _add_face(a: int, b: int, c: int) -> void:

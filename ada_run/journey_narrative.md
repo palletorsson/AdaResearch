@@ -1,67 +1,39 @@
-# Player Journey — Trans_Scale
+# Player Journey — LSystems_Grammar_Lab
 Sequence: unknown | Position: ?
 
 ## Walk-Through
-1. **Spawn** at (0, 1, 0)
-   Visible: chair_assembly_puzzle, clipboard, science_screen, scale_me, prism_block, prism_block, cube_scene, cube_scene, dark_sphere, prism_block, prism_block, prism_block
+1. **Spawn** at (5, 1, 9)
+   Visible: science_screen, lsystem_editor, grammar_provenance, lsystem_tree, fractal_lsystem_string, dark_sphere
 
-2. **10 steps southeast** to (6, 1, 4)
-   Encounter: science_screen
-   Also visible: clipboard, scale_me, prism_block, prism_block, cube_scene, cube_scene, cube_scene, prism_block, prism_block, dark_sphere, prism_block, prism_block, prism_block
-
-3. **10 steps southwest** to (0, 1, 10)
-   Encounter: prism_block
-   Also visible: chair_assembly_puzzle, clipboard, science_screen, scale_me, cube_scene, cube_scene, cube_scene, dark_sphere
-
-4. **11 steps northeast** to (3, 1, 8)
-   Encounter: scale_me
-   Also visible: chair_assembly_puzzle, clipboard, science_screen, prism_block, prism_block, cube_scene, cube_scene, cube_scene, prism_block, prism_block, dark_sphere, prism_block, prism_block, prism_block
-
-5. **11 steps southwest** to (1, 1, 10)
-   Encounter: prism_block
-   Also visible: chair_assembly_puzzle, clipboard, science_screen, scale_me, cube_scene, cube_scene, cube_scene, dark_sphere
-
-6. **12 steps east** to (2, 1, 10)
-   Encounter: cube_scene
-   Also visible: chair_assembly_puzzle, clipboard, science_screen, scale_me, prism_block, prism_block, prism_block, prism_block, dark_sphere, prism_block, prism_block, prism_block
-
-7. **13 steps east** to (3, 1, 10)
-   Encounter: cube_scene
-   Also visible: chair_assembly_puzzle, clipboard, science_screen, scale_me, prism_block, prism_block, prism_block, prism_block, dark_sphere, prism_block, prism_block, prism_block
-
-8. **14 steps east** to (4, 1, 10)
-   Encounter: cube_scene
-   Also visible: chair_assembly_puzzle, clipboard, science_screen, scale_me, prism_block, prism_block, prism_block, prism_block, dark_sphere, prism_block, prism_block, prism_block
-
-9. **15 steps east** to (5, 1, 10)
-   Encounter: prism_block
-   Also visible: chair_assembly_puzzle, clipboard, science_screen, scale_me, cube_scene, cube_scene, cube_scene, dark_sphere
-
-10. **15 steps southwest** to (2, 1, 13)
+2. **3 steps northwest** to (4, 1, 7)
    Encounter: dark_sphere
-   Also visible: chair_assembly_puzzle, clipboard, science_screen, scale_me, prism_block, prism_block, cube_scene, cube_scene, cube_scene, prism_block, prism_block, prism_block, prism_block, prism_block
+   Also visible: science_screen, lsystem_editor, grammar_provenance, lsystem_tree, fractal_lsystem_string
 
-11. **16 steps northeast** to (6, 1, 10)
-   Encounter: prism_block
-   Also visible: chair_assembly_puzzle, clipboard, science_screen, scale_me, cube_scene, cube_scene, cube_scene, dark_sphere
+3. **5 steps northeast** to (6, 1, 5)
+   Encounter: fractal_lsystem_string
+   Also visible: science_screen, lsystem_editor, grammar_provenance, lsystem_tree, dark_sphere
 
-12. **16 steps southwest** to (1, 1, 15)
-   Encounter: prism_block
-   Also visible: chair_assembly_puzzle, clipboard, science_screen, scale_me, cube_scene, cube_scene, cube_scene, dark_sphere
+4. **7 steps northwest** to (4, 1, 3)
+   Encounter: lsystem_editor
+   Also visible: science_screen, grammar_provenance, lsystem_tree, fractal_lsystem_string, dark_sphere
 
-13. **19 steps southeast** to (3, 1, 16)
-   Encounter: prism_block
-   Also visible: chair_assembly_puzzle, clipboard, science_screen, scale_me, cube_scene, cube_scene, cube_scene, dark_sphere
+5. **7 steps southwest** to (2, 1, 5)
+   Encounter: lsystem_tree
+   Also visible: science_screen, lsystem_editor, grammar_provenance, fractal_lsystem_string, dark_sphere
 
-14. **20 steps northeast** to (5, 1, 15)
-   Encounter: prism_block
-   Also visible: chair_assembly_puzzle, clipboard, science_screen, scale_me, cube_scene, cube_scene, cube_scene, dark_sphere
+6. **9 steps northeast** to (7, 1, 2)
+   Encounter: science_screen
+   Also visible: lsystem_editor, grammar_provenance, lsystem_tree, fractal_lsystem_string, dark_sphere
 
-15. **Teleporter** at (1, 0, 14) — 15 steps from spawn
+7. **9 steps west** to (1, 1, 4)
+   Encounter: grammar_provenance
+   Also visible: science_screen, lsystem_editor, lsystem_tree, fractal_lsystem_string, dark_sphere
+
+8. **Teleporter** at (4, 0, 8) — 2 steps from spawn
 
 ## Pacing Assessment
 - Artifact density: 1 per 1.5 steps
-- Total walkable tiles: 131
-- Artifacts reachable from spawn: 13 / 15
+- Total walkable tiles: 63
+- Artifacts reachable from spawn: 6 / 6
 - Dead ends: 0
-- WARNING: 2 artifact(s) unreachable from spawn
+- All artifacts reachable from spawn
