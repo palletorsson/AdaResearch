@@ -1,0 +1,15 @@
+# The first index — a corridor as array and the politics of linear traversal
+
+An array's most basic form is the row. Values stored in sequence, indexed by a single integer, accessed by the same operation across every position. Tutorial_Row converts this into architecture: a corridor seven columns wide, nine rows deep, with a single lane running forward through the centre. Movement along the lane is equivalent to incrementing an integer index.
+
+Michel de Certeau's work on walking-as-reading argues that moving through urban space is a way of producing the space's meaning. A walker enacts a particular trajectory through a city that was designed for many possible trajectories, and the walker's trajectory is one of many legitimate readings. The corridor here stages a deliberately narrow case. There is only one lane. The walking and the reading are the same operation, and the array is what the operation addresses.
+
+A rig along the central lane constrains the learner's movement to the Z axis. The rig is visible as a subtle track on the floor, but its effect is felt rather than seen: lateral movement is restrained, and the body naturally aligns with the lane as it walks. A simple counter on the wall shows the learner's current index along the lane, incrementing as they step forward and decrementing as they step back. The lane is the array; the step is the access.
+
+A small wall panel shows the equivalent code: `cell = row[i]`, with `i` tied to the live counter. As the learner moves, the code's highlight moves too, so traversal and indexing share a display. The equivalence is deliberate. Walking forward and accessing `row[i+1]` are the same operation at different levels of description, and the map refuses to privilege one description over the other.
+
+De Certeau's politics of walking applies here with a caveat. De Certeau was writing about cities whose architecture supported many possible walks. The corridor supports only one, and the single-lane constraint flattens the trajectory diversity that de Certeau valued. The map acknowledges this by keeping the corridor short and the lesson explicit: a 1D array is a minimal data structure, and reading it linearly is the only operation it supports. The flattening is the feature; richer traversals will come in the later maps.
+
+The politics of linear traversal are in the contract between the learner and the data structure. A 1D array promises order: the first cell is before the second, which is before the third, and there is no way to reach the third without passing the second. The corridor enacts this contract physically. You cannot skip cells, because the rig does not allow it. The contract is restrictive, and the restrictiveness is what makes the operation legible.
+
+Within the sequence, Tutorial_Row is the first array dimension. Tutorial_2D_Build will next add the second, and the grid will support richer traversals that the row cannot. The sequence progresses by serially adding dimensions, and each addition loosens one of the earlier constraints.

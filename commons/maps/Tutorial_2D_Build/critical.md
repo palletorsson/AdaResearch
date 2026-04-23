@@ -1,0 +1,15 @@
+# The grid is a politics — row and column helpers and the decision to address a point
+
+A 1D array needs one index. A 2D grid needs two. The jump from line to grid is the jump from sequence to space, and the map stages the jump carefully: four cells by four cells, small enough to comprehend at a glance and large enough to require a systematic addressing scheme.
+
+Benedict Anderson's work on imagined communities argues that census, map, and grid are the state's tools for making populations governable. The grid assigns each subject a coordinate, and the coordinate is the hook that bureaucratic operations hang on. Tutorial_2D_Build stages this at pedagogical scale. The four-by-four grid is a small census; the row and column helpers are the operations that decompose the two-index address into its components; the grid agent is the bureaucratic subject that visits every cell in order.
+
+The grid lies flat on the floor. Each cell is labelled with its row and column indices. A row helper and a column helper sit at two sides of the grid. Pressing the row helper highlights every cell in a chosen row; pressing the column helper highlights every cell in a chosen column. The two helpers decompose the two-index address into its components, so the learner can see why a coordinate pair matters before being asked to use one.
+
+A small grid agent stands at one corner. Starting it triggers a programmatic traversal: the agent visits every cell in row-major order, then in column-major order, then in a diagonal. Its steps are visible, and a side panel names each step as an update to a pair of indices. The traversal is the first algorithmic movement the learner has seen; previous maps moved under the learner's feet, and this map moves under an agent's.
+
+Anderson's argument about census and grid lands here as a question about who is doing the addressing. In the map, the learner addresses cells via helpers, and the agent addresses cells via a traversal algorithm. Both are legitimate, but they differ in authority: the learner's addressing is exploratory, while the agent's is systematic. A real census would resemble the agent's traversal more than the learner's exploration, and the political weight of the grid would be the systematic addressing rather than the exploratory one.
+
+The politics of two-index addressing are in the coupling. Once a grid is addressable by (row, column), operations can be written against the coupling: "apply this to every cell in row 2", "swap column 1 and column 3", "sort diagonals". The coupling is productive and dangerous. It produces the rich vocabulary of 2D array operations that underpins everything from image processing to spreadsheet analysis; it also produces the conditions under which grid-addressable populations become governable targets of those operations.
+
+Within the sequence, Tutorial_2D_Build is the jump from line to grid. Tutorial_3D will next add the third dimension, and the volume will expose further possibilities the grid cannot. The sequence continues its dimensional progression, and each added dimension brings both new computational power and new questions about who the operations are serving.
