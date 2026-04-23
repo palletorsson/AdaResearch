@@ -1,23 +1,9 @@
-# Trans_Intro — The Three Transformations
+# Trans Introduction — Summary
 
-## Overview
-This introductory map presents the three fundamental spatial transformations side by side, each embodied as an interactive cube:
+Trans_Introduction is the opening map of the Transformation sequence. It puts the three fundamental spatial transformations — translation, rotation, and scaling — next to each other as parallel physical demonstrations so the learner can compare them before the rest of the sequence layers them together.
 
-- **Transport Cube (Cyan)** — Translation, additive (+3 units)
-- **Rotation Cube (Orange)** — Rotation, angular (90°)  
-- **Scale Cube (Green)** — Scale, multiplicative (×2)
+The room is arranged as three lanes running side by side, each separated from the next by a void gap. Each lane carries one transformation cube, and each cube demonstrates how its particular transformation can close the gap and let the learner continue forward.
 
-## Layout
-Three parallel lanes separated by void gaps. Each lane features one transformation cube that demonstrates how that transformation "closes" the gap.
+The first lane holds a cyan transport cube. Activating it translates the learner three units along the lane, closing the gap as additive displacement: the cube treats the learner as a point and moves that point across space. The second lane holds an orange rotation cube. Activating it rotates the learner ninety degrees around a central axis, reorienting without translating; the cube treats the learner as a solid with faces, so the relationship with the far side changes by angle rather than position. The third lane holds a green scale cube. Activating it doubles the learner's reach; the cube treats the learner as a volume, so the gap is closed by growing rather than by moving or turning.
 
-## Learning Objectives
-1. Understand that transformations are *modes of being*, not just operations
-2. Experience the ontological difference between moving, turning, and growing
-3. Recognize that gaps can be bridged through position, alignment, or presence
-
-## Key Insight
-Translation treats the cube as a point (it goes somewhere).
-Rotation treats the cube as a solid with faces (it has orientation).
-Scale treats the cube as a volume (it takes up space).
-
-Same object. Three different relationships to space.
+Within the sequence, Trans_Introduction is the vocabulary map. The learner leaves the room having felt three different relationships to the same spatial problem. Later maps will combine the transformations and ask when each one is the right tool.

@@ -6,4 +6,6 @@ The gallery enables direct comparison along three axes. Coordination mechanism: 
 
 The multi-level map uses three platform heights as ecological layers — ground-level alcoves for 2D surface algorithms, mid-level for 3D spatial algorithms, upper platforms for abstract optimization. The ground floor connects everything, making the walk between alcoves a walk between paradigms of collective intelligence.
 
-This is the final map in the Swarm Intelligence sequence. Seven maps have demonstrated one thesis: intelligence does not require centralized control. It requires a population of simple agents, a coordination mechanism, and time. The specific mechanism determines the kind of intelligence — but the pattern is invariant. Local rules. Global behavior. No leader. No plan. The gallery makes this invariance visible by showing that radically different algorithms share the same architecture, producing collective behavior that no individual computed.
+This is the final map in the Swarm Intelligence sequence. Seven maps have demonstrated one thesis: intelligence does not require centralised control. It requires a population of simple agents, a coordination mechanism, and time.
+
+The specific mechanism determines the kind of intelligence, but the pattern is invariant. Local rules. Global behaviour. No leader, no plan. The gallery makes this invariance visible by showing that radically different algorithms share the same architecture, producing collective behaviour that no individual computed.

@@ -1,34 +1,9 @@
-# WaveFunctions Intro - The Control Room
+# WaveFunctions Intro — Summary
 
-A small, intimate space where oscillation concepts are introduced through interactive displays.
+The Wavefunctions sequence opens in a small control room. The walls carry four oscilloscopes, each sweeping a different signature of the same principle: sine, square, sawtooth, and a Lissajous curve. Green traces move left to right. The room is dim. The effect is laboratory rather than gallery.
 
-## Layout
-- 9×11 room with raised walls
-- Dark ambient lighting (control room feel)
-- Central area with demo tables
-- Wall-mounted oscilloscope displays
+The centre of the room holds three interactive demos. A harmonic motion rig puts a ball on a track and exposes sliders for amplitude, angular frequency, phase, and damping. A spring demo lets you pull a mass against Hooke's law and watch the restoring force bring it back. An additive wave station lets you pile harmonics on top of one another and see the compound waveform assemble in real time.
 
-## Key Elements
+A set of clipboards along one wall carries the oscillation axioms the sequence will lean on — periodicity, amplitude, frequency, phase — written in plain language next to their symbols.
 
-### Oscilloscope Bank (North Wall)
-Four oscilloscopes showing different waveforms:
-- Sine wave (mode 0)
-- Lissajous pattern (mode 1)
-- Square wave (mode 0, wave 1)
-- Sawtooth wave (mode 0, wave 2)
-
-### Interactive Demos (Center)
-- **harmonic_motion_demo** - Ball on track, sliders for A, ω, φ, damping
-- **spring_demo** - Hooke's Law F = -kx, sliders for k, mass, damping
-- **additive_wave_demo** - Build waveforms from harmonics
-
-### Reference
-- Clipboards with oscillation and wavefunction axioms
-- Dark sphere ambient element
-
-## Learning Flow
-1. Enter the control room
-2. Observe oscilloscopes showing different wave types
-3. Interact with demos to feel parameters
-4. Read axioms for theory
-5. Exit to begin the wave journey
+Within the sequence, this map is the glossary. Every later map assumes you can read a waveform and name its parameters. Pendulums will make oscillation physical, the unit circle will make it rotational, the sine-space corridor will make it architectural, and the Synthesis Lab will reassemble signals from their Fourier components. Before any of that, the control room hands you the vocabulary and lets you turn each dial until it means something in your body.
