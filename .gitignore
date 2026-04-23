@@ -298,3 +298,13 @@ icon.png.import
 _android/.build_version
 nul
 temp_errors.yaml
+
+# Python compile artifacts
+__pycache__/
+*.pyc
+
+# Claude local state
+.claude/scheduled_tasks.lock
+
+# Next.js build artifacts (nested encyclopedia clone)
+ada_encyclopedia/.next/
