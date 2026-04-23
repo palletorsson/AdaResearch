@@ -45,6 +45,7 @@ class ServerConfig:
     permission_mode: str
     add_dir: list[str]
     no_session_persistence: bool
+    context_file: Path
 
 
 CONFIG: ServerConfig | None = None
@@ -54,6 +55,52 @@ def require_config() -> ServerConfig:
     if CONFIG is None:
         raise RuntimeError("Server config not initialized")
     return CONFIG
+
+
+def read_json_file(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def write_json_file(path: Path, data: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(data, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+
+def get_saved_context_record() -> dict[str, Any]:
+    cfg = require_config()
+    data = read_json_file(cfg.context_file)
+    if not isinstance(data, dict):
+        return {}
+    return data
+
+
+def get_saved_context() -> Any:
+    return get_saved_context_record().get("context")
+
+
+def set_saved_context(context: Any, source: str | None = None) -> dict[str, Any]:
+    cfg = require_config()
+    record = {
+        "updated_at": int(time.time()),
+        "source": source or "api",
+        "context": context,
+    }
+    write_json_file(cfg.context_file, record)
+    return record
+
+
+def clear_saved_context() -> None:
+    cfg = require_config()
+    if cfg.context_file.exists():
+        cfg.context_file.unlink()
 
 
 def resolve_token(cli_token: str | None) -> str:
@@ -85,6 +132,19 @@ def normalize_context(context: Any) -> str:
     if isinstance(context, dict):
         return json.dumps(context, indent=2, ensure_ascii=False)
     return str(context).strip()
+
+
+def compose_context(saved_context: Any, request_context: Any) -> Any:
+    if saved_context is None and request_context is None:
+        return None
+    if saved_context is None:
+        return request_context
+    if request_context is None:
+        return saved_context
+    return [
+        {"saved_context": saved_context},
+        {"request_context": request_context},
+    ]
 
 
 def build_prompt(question: str, context: Any = None) -> str:
@@ -217,8 +277,20 @@ class ClaudeHttpHandler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:
         cfg = require_config()
         if self.path != "/status":
+            if self.path == "/context":
+                if not self._authorized():
+                    self._respond(401, {"ok": False, "error": "unauthorized"})
+                    return
+                record = get_saved_context_record()
+                self._respond(200, {
+                    "ok": True,
+                    "has_context": bool(record.get("context")),
+                    "record": record,
+                })
+                return
             self._respond(404, {"ok": False, "error": "not found"})
             return
+        record = get_saved_context_record()
         self._respond(200, {
             "ok": True,
             "status": "running",
@@ -227,10 +299,12 @@ class ClaudeHttpHandler(BaseHTTPRequestHandler):
             "repo_root": str(cfg.repo_root),
             "model": cfg.model,
             "machine": os.environ.get("COMPUTERNAME") or os.uname().nodename,
+            "has_saved_context": bool(record.get("context")),
+            "context_updated_at": record.get("updated_at"),
         })
 
     def do_POST(self) -> None:
-        if self.path != "/ask":
+        if self.path not in ("/ask", "/context"):
             self._respond(404, {"ok": False, "error": "not found"})
             return
         if not self._authorized():
@@ -242,12 +316,33 @@ class ClaudeHttpHandler(BaseHTTPRequestHandler):
             self._respond(400, {"ok": False, "error": body["_error"]})
             return
 
+        cfg = require_config()
+        if self.path == "/context":
+            context = body.get("context") if isinstance(body, dict) else None
+            source = body.get("source") if isinstance(body, dict) else None
+            context_text = normalize_context(context)
+            if not context_text:
+                self._respond(400, {"ok": False, "error": "context is required"})
+                return
+            if len(context_text) > cfg.max_context_chars:
+                self._respond(400, {
+                    "ok": False,
+                    "error": f"context exceeds {cfg.max_context_chars} chars",
+                })
+                return
+            record = set_saved_context(context, source=source)
+            self._respond(200, {
+                "ok": True,
+                "saved": True,
+                "record": record,
+            })
+            return
+
         question = (body.get("question") or "").strip() if isinstance(body, dict) else ""
         if not question:
             self._respond(400, {"ok": False, "error": "question is required"})
             return
 
-        cfg = require_config()
         if len(question) > cfg.max_question_chars:
             self._respond(400, {
                 "ok": False,
@@ -255,7 +350,12 @@ class ClaudeHttpHandler(BaseHTTPRequestHandler):
             })
             return
 
-        context = body.get("context") if isinstance(body, dict) else None
+        request_context = body.get("context") if isinstance(body, dict) else None
+        use_saved_context = True
+        if isinstance(body, dict) and body.get("use_saved_context") is False:
+            use_saved_context = False
+        saved_context = get_saved_context() if use_saved_context else None
+        context = compose_context(saved_context, request_context)
         context_text = normalize_context(context)
         if len(context_text) > cfg.max_context_chars:
             self._respond(400, {
@@ -282,6 +382,16 @@ class ClaudeHttpHandler(BaseHTTPRequestHandler):
             return
         code = 200 if result.get("ok") else 500
         self._respond(code, result)
+
+    def do_DELETE(self) -> None:
+        if self.path != "/context":
+            self._respond(404, {"ok": False, "error": "not found"})
+            return
+        if not self._authorized():
+            self._respond(401, {"ok": False, "error": "unauthorized"})
+            return
+        clear_saved_context()
+        self._respond(200, {"ok": True, "cleared": True})
 
     def _authorized(self) -> bool:
         cfg = require_config()
@@ -335,6 +445,8 @@ def parse_args() -> argparse.Namespace:
                     help="Extra directories to grant Claude access to")
     ap.add_argument("--allow-session-persistence", action="store_true",
                     help="Do not pass --no-session-persistence")
+    ap.add_argument("--context-file",
+                    help="Path to saved context JSON file")
     return ap.parse_args()
 
 
@@ -348,6 +460,9 @@ def main() -> int:
         resolved = str(Path(item).resolve())
         if resolved not in add_dir:
             add_dir.append(resolved)
+    context_file = Path(args.context_file).resolve() if args.context_file else (
+        repo_root / "tools" / "claude_http_context.json"
+    )
     CONFIG = ServerConfig(
         host=args.host,
         port=args.port,
@@ -360,6 +475,7 @@ def main() -> int:
         permission_mode=args.permission_mode,
         add_dir=add_dir,
         no_session_persistence=not args.allow_session_persistence,
+        context_file=context_file,
     )
 
     server = ThreadingHTTPServer((args.host, args.port), ClaudeHttpHandler)
@@ -368,9 +484,13 @@ def main() -> int:
     print("  Endpoints:")
     print("    GET  /status")
     print("    POST /ask")
+    print("    GET  /context")
+    print("    POST /context")
+    print("    DELETE /context")
     print(f"  Repo:   {repo_root}")
     print(f"  Model:  {args.model}")
     print(f"  Token:  {token}")
+    print(f"  Context file: {context_file}")
     print("")
     try:
         server.serve_forever()

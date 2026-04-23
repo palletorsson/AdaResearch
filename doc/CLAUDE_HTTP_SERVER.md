@@ -6,6 +6,9 @@ API:
 
 - `GET /status`
 - `POST /ask`
+- `GET /context`
+- `POST /context`
+- `DELETE /context`
 
 Auth:
 
@@ -52,6 +55,22 @@ Response body:
   "answer": "...",
   "elapsed_s": 2.4,
   "model": "sonnet"
+}
+```
+
+Saved-context API:
+
+```json
+{
+  "context": {
+    "task": "Distribute text rewriting to helper machines",
+    "current_goal": "Use remote Claude when local quota is exhausted",
+    "notes": [
+      "The helper machine has its own synced clone",
+      "Grounded files should be skipped"
+    ]
+  },
+  "source": "local-codex-session"
 }
 ```
 
@@ -118,6 +137,57 @@ Invoke-RestMethod -Uri http://192.168.0.112:8766/ask `
   -Body $body
 ```
 
+## Save session context once, then ask repeatedly
+
+```powershell
+$token = "ba22d61d11dc2260633c3c44440ae213eb6565db964481db95e72e7fc5dd25fd"
+
+$contextBody = @{
+  context = @{
+    task = "Use helper machines for Claude Code overflow work"
+    repo = "AdaResearch_46"
+    current_goal = "Route bounded repo questions to remote /ask"
+    important_files = @(
+      "tools/claude_cli_rewriter.py",
+      "doc/TEXT_WORKER_SETUP.md",
+      "tools/claude_http_server.py"
+    )
+    constraints = @(
+      "Do not assume hidden chat memory",
+      "Prefer grounded answers from repo files",
+      "Ask for clarification only if the prompt is ambiguous"
+    )
+  }
+  source = "local-session-summary"
+} | ConvertTo-Json -Depth 8
+
+Invoke-RestMethod -Uri http://192.168.0.112:8766/context `
+  -Method Post `
+  -Headers @{ Authorization = "Bearer $token"; "Content-Type" = "application/json" } `
+  -Body $contextBody
+
+$askBody = @{
+  question = "What should this helper machine work on next?"
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri http://192.168.0.112:8766/ask `
+  -Method Post `
+  -Headers @{ Authorization = "Bearer $token"; "Content-Type" = "application/json" } `
+  -Body $askBody
+```
+
+## Read or clear saved context
+
+```powershell
+Invoke-RestMethod -Uri http://192.168.0.112:8766/context `
+  -Method Get `
+  -Headers @{ Authorization = "Bearer $token" }
+
+Invoke-RestMethod -Uri http://192.168.0.112:8766/context `
+  -Method Delete `
+  -Headers @{ Authorization = "Bearer $token" }
+```
+
 ## curl example
 
 ```bash
@@ -130,8 +200,10 @@ curl -X POST http://192.168.0.112:8766/ask \
 ## Notes
 
 - The server runs `claude -p` in the repo root, so Claude can inspect and edit the local clone on that machine.
-- The helper machine does not inherit this chat session automatically. If you want relevant answers, include `context` in the request.
+- The helper machine does not inherit this chat session automatically.
+- `POST /context` gives you a way to serialize a session summary once and have future `/ask` requests include it by default.
 - `context` can be a string, list, or object. The server serializes it into the prompt before the question.
+- `/ask` uses saved context by default. Pass `"use_saved_context": false` if you want a one-off stateless request.
 - `cwd` lets you choose the working directory for the remote Claude run, as long as it stays inside an allowed directory.
 - `add_dirs` lets you grant the remote Claude access to additional repo roots for that request.
 - Default permission mode is `bypassPermissions` so requests do not block on interactive approval.
