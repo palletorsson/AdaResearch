@@ -26,7 +26,7 @@ This is the integration phase thesis made structural: intelligence does not resi
 
 The perception radius is the simulation's most politically loaded parameter. A large radius means the agent can sense most of the environment — it approximates a panoptic observer, one who sees all and can optimize globally. A small radius means the agent operates in near-blindness — it can respond only to its immediate vicinity, groping through the grid without overview.
 
-Moten's critique of the university as an institution that claims to see everything — to survey, classify, and manage all knowledge — resonates here. The large-radius agent is the institutional subject: maximally informed, strategically rational, capable of planning. The small-radius agent is the fugitive: locally responsive, socially dependent on encounters it cannot predict, navigating by feel rather than by plan.
+Moten's critique of the university as an institution that claims to see everything — to survey, classify, and manage all knowledge — resonates here. The large-radius agent is the institutional subject: maximally informed, strategically rational, capable of planning. The small-radius agent is the fugitive: locally responsive, socially dependent on encounters it cannot predict, moving by feel rather than by plan.
 
 The simulation's interesting behavior — emergence, surprise, self-organization — occurs predominantly in the small-radius regime. When agents can see everything, they optimize individually and the collective pattern is merely the sum of individual optima. When agents are nearly blind, they must rely on environmental signals and chance encounters, and the collective pattern is genuinely novel — a structure that no agent computed and no designer intended.
 

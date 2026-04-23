@@ -109,7 +109,7 @@ The recursive chair demonstrates tuned λ: subdivide broadly at first (explorati
 
 ### Algorithms as Capabilities
 
-This reveals why learning algorithms matters: **each algorithm is a new search strategy**, a new way of navigating possibility space.
+This reveals why learning algorithms matters: **each algorithm is a new search strategy**, a new way of moving through possibility space.
 
 A designer who knows subdivision can **imagine forms** that a non-algorithmic designer cannot conceive. The algorithm doesn't just solve problems—it **expands what problems you can see**.
 

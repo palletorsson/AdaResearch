@@ -119,7 +119,9 @@ Looking back at the complete randomness sequence:
 4. **Random_Cubes**: Objects in space (application)
 5. **Random_Rotate_XYZ**: 3D randomness (dimensionality)
 6. **Random_Walk**: Motion through chaos (dynamics)
-7. **Random_Gaussian**: Distribution shapes (statistics)
+7.
+
+**Random_Gaussian**: Distribution shapes (statistics)
 8. **Random_Bell_Curve**: Central tendency (probability)
 9. **Random_Pheromone**: Emergence from chaos (complexity)
 10. **Random_Mushrooms**: Biology/history (context)

@@ -2,11 +2,15 @@
 
 ## The Crisis Was Never the Problem
 
-Seven maps. The parallel postulate revealed as a choice. Geometry displaced from its throne. Self-reference breaking set theory. Self-reference breaking provability. Local validity composing into global impossibility. Construction as the only honest assertion. Contradiction held without collapse. The sequence has systematically dismantled every claim to mathematical certainty — and mathematics has not died. It has proliferated. The crisis did not destroy the foundations. It revealed that the foundations were always plural, always contested, always more interesting than the monolith they were mistaken for.
+Seven maps. The parallel postulate revealed as a choice. Geometry displaced from its throne. Self-reference breaking set theory. Self-reference breaking provability. Local validity composing into global impossibility.
+
+Construction as the only honest assertion. Contradiction held without collapse. The sequence has systematically dismantled every claim to mathematical certainty — and mathematics has not died. It has proliferated. The crisis did not destroy the foundations. It revealed that the foundations were always plural, always contested, always more interesting than the monolith they were mistaken for.
 
 Wittgenstein, late in his life, wrote: "The sickness of a time is cured by an alteration in the mode of life of human beings." The foundationscrisis was not a sickness of mathematics. It was a sickness of the demand that mathematics be certain, complete, and singular. The cure was not a new axiom system. The cure was a new mode of mathematical life: one that could inhabit incompleteness, navigate multiple geometries, hold contradictions, construct rather than merely assert. The QFEP formula at the summit — `QFE = F - lambda*E(S) + phi*delta_E(S,t)` — is not a solution to the crisis. It is a notation for the mode of life that the crisis made possible.
 
-The formula floats at the highest point in the sequence. Below it, four wings stretch outward, each containing an artifact from an earlier map: Godel's plaque, Russell's box, Escher's staircase, Florensky's sphere. They are not resolved. They are not reconciled. They radiate from the same center without merging. The plaque still cycles through self-referential sentences. The box still nests infinitely. The staircase still ascends to where it started. The sphere still breathes between assertion and negation. The synthesis does not silence them. It places them in relation.
+The formula floats at the highest point in the sequence. Below it, four wings stretch outward, each containing an artifact from an earlier map: Godel's plaque, Russell's box, Escher's staircase, Florensky's sphere. They are not resolved. They are not reconciled. They radiate from the same center without merging.
+
+The plaque still cycles through self-referential sentences. The box still nests infinitely. The staircase still ascends to where it started. The sphere still breathes between assertion and negation. The synthesis does not silence them. It places them in relation.
 
 ## The State of Exception Becomes the State
 

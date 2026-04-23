@@ -50,7 +50,7 @@ This is as close as computation gets to rhizomatic thinking: not implementing th
 ## Questions for Exploration
 
 - Where does this cave system begin? Can you find the "root"?
-- How would you give directions to someone navigating inside?
+- How would you give directions to someone moving through the inside?
 - What would it mean to *own* a rhizomatic space?
 - How does the density threshold change what connections are possible?
 

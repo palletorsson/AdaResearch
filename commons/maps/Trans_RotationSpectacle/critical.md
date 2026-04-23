@@ -62,7 +62,7 @@ Each layer different from the others: different size, different speed, different
 
 Procedural art works this way. One algorithm, many outputs. One structure, many instances. The carousel demonstrates that rotation parameters - speed, direction, phase - create inexhaustible variation from minimal means.
 
-The individual layer is boring. The stack of layers is fascinating. Composition creates emergence. The whole exceeds the sum of parts.
+The individual layer is boring. The stack of layers is compelling. Composition creates emergence. The whole exceeds the sum of parts.
 
 ## Return Without Arrival
 

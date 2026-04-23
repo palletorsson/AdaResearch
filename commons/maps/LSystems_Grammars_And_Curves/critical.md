@@ -12,7 +12,9 @@ Yuk Hui insists that technology is never universal. Every technical practice med
 
 The Hilbert curve subdivides in quadrants, mirroring a recursive partitioning logic that Western computer science uses for database indexing and cache-coherent memory access. The Peano curve subdivides in nines, a denser tiling that serves different computational purposes. The Moore curve closes into a loop, returning to its origin — a topology the other two lack. Each grammar answers the same question (how to visit every point) with a different spatial philosophy. The `space_filling_curve_gallery` places them side by side on the floor, and the visual comparison makes the cosmotechnical point physically: there is more than one way to exhaust a space.
 
-The `Hilbert3D` artifact extends this into volume. The 2D turtle needs two rotation commands. The 3D turtle needs six — yaw, pitch, roll and their inverses. The alphabet grows. The grammar grows. The principle does not change. But the technical milieu changes radically. A 3D turtle maintains a full orientation frame — heading, left, and up vectors that must stay orthogonal. The Frenet frame of differential geometry, embedded in a grammar. This is not the same technology as 2D turtle graphics extended by one axis. It is a different cosmotechnics — a different way of relating symbolic manipulation to spatial experience.
+The `Hilbert3D` artifact extends this into volume. The 2D turtle needs two rotation commands. The 3D turtle needs six — yaw, pitch, roll and their inverses. The alphabet grows. The grammar grows.
+
+The principle does not change. But the technical milieu changes radically. A 3D turtle maintains a full orientation frame — heading, left, and up vectors that must stay orthogonal. The Frenet frame of differential geometry, embedded in a grammar. This is not the same technology as 2D turtle graphics extended by one axis. It is a different cosmotechnics — a different way of relating symbolic manipulation to spatial experience.
 
 ## The Associated Milieu of the Grammar
 

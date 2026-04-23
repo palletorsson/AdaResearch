@@ -47,3 +47,7 @@ But the gap is also potential. Space for movement, for breath, for difference. T
 What would it mean to rest in the gap? To neither cross it, nor rotate into it, nor fill it — but simply to be with it?
 
 The cubes cannot answer. They are tools. But the player, standing at the edge, might pause before stepping on.
+
+The three cubes are not equivalent solutions to a single problem. They are three different ontological commitments about what a body is in space. Translation treats the body as a point — all that matters is where the point is, and the point's identity is preserved under displacement. Rotation treats the body as a solid — it has faces, it has a facing, and changing orientation changes which face of the body meets the world. Scale treats the body as a volume — it has presence, it has a footprint, and changing size changes how much of the world it occupies.
+
+Each reading carries political stakes. Translation privileges mobility and treats location as incidental. Rotation privileges orientation and treats the body's edges as meaningful. Scale privileges presence and treats occupancy as the primary fact. The map does not rank these; it asks the learner to feel the difference between them by crossing the same gap three times.

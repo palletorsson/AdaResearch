@@ -44,7 +44,9 @@ Looking back across fourteen maps:
 4. **Fractals_4**: Deletion can generate structure (Cantor)
 5. **Fractals_5**: Infinite perimeter can enclose finite area (Koch)
 6. **Fractals_6**: Form needs no blueprint, only rule
-7. **Fractals_7-8**: The Cantor principle scales across dimensions
+7.
+
+**Fractals_7-8**: The Cantor principle scales across dimensions
 8. **Fractals_9**: Addition (Fibonacci) and subtraction (Sierpinski) both lead to fractals
 9. **Fractals_10**: Parameter space contains infinite different dynamics (Julia)
 10. **Fractals_11**: Direction is arbitrary; pattern is essential

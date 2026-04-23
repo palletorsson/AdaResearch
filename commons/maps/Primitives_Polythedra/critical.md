@@ -112,7 +112,7 @@ The tetrahedron is **geometry of enforcement** - it holds space in fixed configu
 
 From primitives_axioms: "At each vertex, identical faces must meet. The interior angles must sum to less than 360°, or the form collapses into a plane."
 
-This **angular constraint** is fascinating because it **closes the system through necessity**.
+This **angular constraint** is compelling because it **closes the system through necessity**.
 
 It's not that five Platonic solids were discovered and we stopped looking. It's that **only five are geometrically possible** - the constraint exhausts the possibilities.
 

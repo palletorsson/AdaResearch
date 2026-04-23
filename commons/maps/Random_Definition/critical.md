@@ -78,7 +78,7 @@ The player walks a constrained path while contemplating liberation. The infrastr
 
 ## The Edge of Chaos
 
-Random_Definition introduces the vocabulary for navigating the edge of chaos:
+Random_Definition introduces the vocabulary for working at the edge of chaos:
 - **Low entropy**: Order, predictability, stasis
 - **High entropy**: Chaos, unpredictability, possibility
 - **The edge**: Where complexity lives, where adaptation happens, where the QFEP oscillates

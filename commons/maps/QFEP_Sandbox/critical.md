@@ -6,7 +6,9 @@ Preciado argues that the pharmacopornographic regime does not prohibit pleasure 
 
 The slider rails are the pharmacopornographic infrastructure. Lambda cannot go negative. Phi cannot exceed 1.0. The formula QFE = F - lambda E(S) + phi delta E(S,t) is fixed — the learner adjusts parameters within it, not the equation itself. The Sandbox does not ask: what if the formula is wrong? It asks: what can you do with the formula as given? Preciado would call this the difference between political freedom (changing the system) and pharmacological freedom (adjusting your state within the system).
 
-The qfep_reactor is the managed body responding to its dosage. Adjust lambda: the particle behavior changes. Adjust phi: the temporal response shifts. The reactor does not choose. It obeys the sliders the way the pharmacological body obeys its regimen. The learner is the prescriber. The system is the patient. The question Preciado raises — who prescribed the prescriber? — goes unasked. The sliders were designed. Their ranges were chosen. The default values (0.5, 0.5) place the learner at a particular starting point that is itself a decision. The Sandbox's freedom is real and bounded, which is the only kind that exists.
+The qfep_reactor is the managed body responding to its dosage. Adjust lambda: the particle behavior changes. Adjust phi: the temporal response shifts. The reactor does not choose. It obeys the sliders the way the pharmacological body obeys its regimen. The learner is the prescriber.
+
+The system is the patient. The question Preciado raises — who prescribed the prescriber? — goes unasked. The sliders were designed. Their ranges were chosen. The default values (0.5, 0.5) place the learner at a particular starting point that is itself a decision. The Sandbox's freedom is real and bounded, which is the only kind that exists.
 
 ## Reparative Play
 
