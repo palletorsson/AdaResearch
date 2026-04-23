@@ -1,1 +1,3 @@
 No new weapon. Instead you watch the grid agent traverse, copy, pattern. You place obstacles. The agent adapts.
+
+This is the catalyst chamber for the Array Tutorial sequence — the only chamber without a projection mode. The `gridagent:copy` moves cell by cell, writing its position into an array of cells that remembers where it has been. You arrange; it responds. The Science Screen renders the adaptation as a grid readout rather than a scatter plot, because the lesson is not force applied but pattern emerging. Arrays organize; the agent occupies the organization; the map becomes the behavior. Here mathematics is arrangement, not projection, and the creature is your collaborator in composing a 2D world.

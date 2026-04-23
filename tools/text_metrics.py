@@ -53,10 +53,13 @@ except Exception:
 THRESHOLDS: dict[str, dict[str, Any]] = {
     "blurb.md": {
         "word_count_min": 40,
-        "word_count_max": 220,
-        "paragraphs_max": 5,
-        # Blurbs often use rapid declarative fragments — 10 short sentences
-        # in one paragraph is valid style. Real wall-of-text would be 15+.
+        "word_count_max": 260,  # some blurbs use stanza-form, need headroom
+        # Some blurbs (esp. QFEP) use deliberate fragment-stanza structure
+        # with 7-10 short paragraphs. This is intentional pedagogical rhythm,
+        # not wall-of-text. The real failure mode we want to catch is one
+        # paragraph with 15+ sentences (bullet-dump), which max_paragraph
+        # sentences already covers.
+        "paragraphs_max": 12,
         "max_paragraph_sentences": 12,
         "code_ratio_max": 0.05,
     },

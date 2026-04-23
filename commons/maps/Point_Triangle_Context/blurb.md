@@ -1,1 +1,3 @@
-Three points close a boundary. For the first time: inside and outside. The triangle is the GPU's atom — all surfaces decompose here. Enclosure begins. Territory begins.
+Three points close a boundary, and now: rigidity. The triangle does not flex without breaking. Three distances mutually constrain three angles; move one vertex, the others resist. This is where measurement stabilizes, where the Pythagorean theorem first has somewhere to live.
+
+`interactivetriangle` lets you drag a vertex and feel the constraint. `pythagorean_triangle_angles` makes the algebra visible — one right angle, two others that must sum to its complement. The `folded_strip` shows how quads decompose into paired triangles, flexible where the triangle is fixed. Rigidity and flexibility are competing spatial ethics. The triangle chose: no deformation without rupture.

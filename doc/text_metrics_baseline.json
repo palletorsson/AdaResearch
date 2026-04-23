@@ -1,8 +1,8 @@
 {
   "summary": {
     "total": 1074,
-    "pass": 452,
-    "fail": 263,
+    "pass": 523,
+    "fail": 192,
     "missing": 359
   },
   "maps": [
@@ -14,14 +14,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 39,
-            "char_count_no_ws": 228,
+            "word_count": 97,
+            "char_count_no_ws": 555,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
+            "paragraphs": 2,
             "max_paragraph_sentences": 5,
-            "avg_paragraph_sentences": 5.0,
+            "avg_paragraph_sentences": 4.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -32,33 +32,32 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 39 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 39 (need ≤220)",
+              "word_count_min: 97 (need ≥40)",
+              "word_count_max: 97 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Point_One\\technical.md",
           "role": "technical.md",
           "exists": true,
           "metrics": {
-            "word_count": 317,
-            "char_count_no_ws": 1887,
-            "code_blocks": 3,
-            "code_char_count": 288,
-            "code_ratio": 0.1526,
-            "paragraphs": 16,
-            "max_paragraph_sentences": 6,
-            "avg_paragraph_sentences": 1.75,
+            "word_count": 2309,
+            "char_count_no_ws": 12814,
+            "code_blocks": 8,
+            "code_char_count": 3797,
+            "code_ratio": 0.2963,
+            "paragraphs": 46,
+            "max_paragraph_sentences": 8,
+            "avg_paragraph_sentences": 3.46,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -69,19 +68,18 @@
             "starts_with_heading": true
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 317 (need ≥700)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 317 (need ≤3500)",
-              "code_ratio_min: 0.15 (need ≥0.15)",
-              "code_ratio_max: 0.15 (need ≤0.80)",
-              "max_paragraph_sentences: 6 (need ≤8)",
+              "word_count_min: 2309 (need ≥700)",
+              "word_count_max: 2309 (need ≤3500)",
+              "code_ratio_min: 0.30 (need ≥0.15)",
+              "code_ratio_max: 0.30 (need ≤0.80)",
+              "max_paragraph_sentences: 8 (need ≤8)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Point_One\\tutorial.md",
@@ -203,14 +201,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 39,
-            "char_count_no_ws": 227,
+            "word_count": 101,
+            "char_count_no_ws": 562,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 4,
-            "avg_paragraph_sentences": 4.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 5,
+            "avg_paragraph_sentences": 4.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -221,33 +219,32 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 39 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 39 (need ≤220)",
+              "word_count_min: 101 (need ≥40)",
+              "word_count_max: 101 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 5 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Point_Line\\technical.md",
           "role": "technical.md",
           "exists": true,
           "metrics": {
-            "word_count": 189,
-            "char_count_no_ws": 1277,
-            "code_blocks": 2,
-            "code_char_count": 307,
-            "code_ratio": 0.2404,
-            "paragraphs": 10,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 1.4,
+            "word_count": 2163,
+            "char_count_no_ws": 12130,
+            "code_blocks": 10,
+            "code_char_count": 2640,
+            "code_ratio": 0.2176,
+            "paragraphs": 55,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 2.87,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -258,19 +255,18 @@
             "starts_with_heading": true
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 189 (need ≥700)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 189 (need ≤3500)",
-              "code_ratio_min: 0.24 (need ≥0.15)",
-              "code_ratio_max: 0.24 (need ≤0.80)",
-              "max_paragraph_sentences: 3 (need ≤8)",
+              "word_count_min: 2163 (need ≥700)",
+              "word_count_max: 2163 (need ≤3500)",
+              "code_ratio_min: 0.22 (need ≥0.15)",
+              "code_ratio_max: 0.22 (need ≤0.80)",
+              "max_paragraph_sentences: 7 (need ≤8)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Point_Line\\tutorial.md",
@@ -413,10 +409,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 60 (need ≥40)",
-              "word_count_max: 60 (need ≤220)",
+              "word_count_max: 60 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 9 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -577,12 +573,12 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 33,
-            "char_count_no_ws": 182,
+            "word_count": 99,
+            "char_count_no_ws": 503,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
+            "paragraphs": 2,
             "max_paragraph_sentences": 5,
             "avg_paragraph_sentences": 5.0,
             "captions_total": 0,
@@ -595,19 +591,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 33 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 33 (need ≤220)",
+              "word_count_min: 99 (need ≥40)",
+              "word_count_max: 99 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Point_Trace\\technical.md",
@@ -763,14 +758,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 32,
-            "char_count_no_ws": 167,
+            "word_count": 104,
+            "char_count_no_ws": 591,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 4,
-            "avg_paragraph_sentences": 4.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 5.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -781,33 +776,32 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 32 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 32 (need ≤220)",
+              "word_count_min: 104 (need ≥40)",
+              "word_count_max: 104 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Point_Line_Grid\\technical.md",
           "role": "technical.md",
           "exists": true,
           "metrics": {
-            "word_count": 1083,
-            "char_count_no_ws": 6851,
-            "code_blocks": 8,
-            "code_char_count": 4728,
-            "code_ratio": 0.6901,
-            "paragraphs": 16,
-            "max_paragraph_sentences": 2,
-            "avg_paragraph_sentences": 1.56,
+            "word_count": 2239,
+            "char_count_no_ws": 13064,
+            "code_blocks": 11,
+            "code_char_count": 3392,
+            "code_ratio": 0.2596,
+            "paragraphs": 55,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 2.82,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -821,11 +815,11 @@
             "status": "pass",
             "failures": [],
             "passes": [
-              "word_count_min: 1083 (need ≥700)",
-              "word_count_max: 1083 (need ≤3500)",
-              "code_ratio_min: 0.69 (need ≥0.15)",
-              "code_ratio_max: 0.69 (need ≤0.80)",
-              "max_paragraph_sentences: 2 (need ≤8)",
+              "word_count_min: 2239 (need ≥700)",
+              "word_count_max: 2239 (need ≤3500)",
+              "code_ratio_min: 0.26 (need ≥0.15)",
+              "code_ratio_max: 0.26 (need ≤0.80)",
+              "max_paragraph_sentences: 6 (need ≤8)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -950,14 +944,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 27,
-            "char_count_no_ws": 142,
+            "word_count": 94,
+            "char_count_no_ws": 519,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 5,
-            "avg_paragraph_sentences": 5.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 5.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -968,19 +962,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 27 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 27 (need ≤220)",
+              "word_count_min: 94 (need ≥40)",
+              "word_count_max: 94 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Point_Triangle\\technical.md",
@@ -1136,14 +1129,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 27,
-            "char_count_no_ws": 142,
+            "word_count": 96,
+            "char_count_no_ws": 582,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
+            "paragraphs": 2,
             "max_paragraph_sentences": 5,
-            "avg_paragraph_sentences": 5.0,
+            "avg_paragraph_sentences": 4.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -1154,33 +1147,32 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 27 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 27 (need ≤220)",
+              "word_count_min: 96 (need ≥40)",
+              "word_count_max: 96 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Point_Triangle_Context\\technical.md",
           "role": "technical.md",
           "exists": true,
           "metrics": {
-            "word_count": 861,
-            "char_count_no_ws": 4867,
-            "code_blocks": 8,
-            "code_char_count": 2927,
-            "code_ratio": 0.6014,
-            "paragraphs": 19,
-            "max_paragraph_sentences": 2,
-            "avg_paragraph_sentences": 1.32,
+            "word_count": 2270,
+            "char_count_no_ws": 12550,
+            "code_blocks": 10,
+            "code_char_count": 3089,
+            "code_ratio": 0.2461,
+            "paragraphs": 53,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 2.81,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -1194,11 +1186,11 @@
             "status": "pass",
             "failures": [],
             "passes": [
-              "word_count_min: 861 (need ≥700)",
-              "word_count_max: 861 (need ≤3500)",
-              "code_ratio_min: 0.60 (need ≥0.15)",
-              "code_ratio_max: 0.60 (need ≤0.80)",
-              "max_paragraph_sentences: 2 (need ≤8)",
+              "word_count_min: 2270 (need ≥700)",
+              "word_count_max: 2270 (need ≤3500)",
+              "code_ratio_min: 0.25 (need ≥0.15)",
+              "code_ratio_max: 0.25 (need ≤0.80)",
+              "max_paragraph_sentences: 7 (need ≤8)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -1344,10 +1336,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 40 (need ≥40)",
-              "word_count_max: 40 (need ≤220)",
+              "word_count_max: 40 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 2 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -1532,10 +1524,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 48 (need ≥40)",
-              "word_count_max: 48 (need ≤220)",
+              "word_count_max: 48 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -1546,14 +1538,14 @@
           "role": "technical.md",
           "exists": true,
           "metrics": {
-            "word_count": 536,
-            "char_count_no_ws": 3111,
-            "code_blocks": 5,
-            "code_char_count": 2465,
-            "code_ratio": 0.7923,
-            "paragraphs": 3,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 1.67,
+            "word_count": 1931,
+            "char_count_no_ws": 10914,
+            "code_blocks": 10,
+            "code_char_count": 3094,
+            "code_ratio": 0.2835,
+            "paragraphs": 39,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 3.28,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -1564,19 +1556,18 @@
             "starts_with_heading": true
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 536 (need ≥700)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 536 (need ≤3500)",
-              "code_ratio_min: 0.79 (need ≥0.15)",
-              "code_ratio_max: 0.79 (need ≤0.80)",
-              "max_paragraph_sentences: 3 (need ≤8)",
+              "word_count_min: 1931 (need ≥700)",
+              "word_count_max: 1931 (need ≤3500)",
+              "code_ratio_min: 0.28 (need ≥0.15)",
+              "code_ratio_max: 0.28 (need ≤0.80)",
+              "max_paragraph_sentences: 7 (need ≤8)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Point_Animatedcube\\tutorial.md",
@@ -1718,10 +1709,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 103 (need ≥40)",
-              "word_count_max: 103 (need ≤220)",
+              "word_count_max: 103 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 2 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -1732,14 +1723,14 @@
           "role": "technical.md",
           "exists": true,
           "metrics": {
-            "word_count": 382,
-            "char_count_no_ws": 2709,
-            "code_blocks": 5,
-            "code_char_count": 1607,
-            "code_ratio": 0.5932,
-            "paragraphs": 8,
-            "max_paragraph_sentences": 2,
-            "avg_paragraph_sentences": 1.25,
+            "word_count": 2596,
+            "char_count_no_ws": 14876,
+            "code_blocks": 11,
+            "code_char_count": 3103,
+            "code_ratio": 0.2086,
+            "paragraphs": 40,
+            "max_paragraph_sentences": 8,
+            "avg_paragraph_sentences": 4.1,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -1750,19 +1741,18 @@
             "starts_with_heading": true
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 382 (need ≥700)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 382 (need ≤3500)",
-              "code_ratio_min: 0.59 (need ≥0.15)",
-              "code_ratio_max: 0.59 (need ≤0.80)",
-              "max_paragraph_sentences: 2 (need ≤8)",
+              "word_count_min: 2596 (need ≥700)",
+              "word_count_max: 2596 (need ≤3500)",
+              "code_ratio_min: 0.21 (need ≥0.15)",
+              "code_ratio_max: 0.21 (need ≤0.80)",
+              "max_paragraph_sentences: 8 (need ≤8)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Primitives_Ignorance\\tutorial.md",
@@ -1904,10 +1894,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 96 (need ≥40)",
-              "word_count_max: 96 (need ≤220)",
+              "word_count_max: 96 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 2 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -1918,14 +1908,14 @@
           "role": "technical.md",
           "exists": true,
           "metrics": {
-            "word_count": 504,
-            "char_count_no_ws": 3180,
-            "code_blocks": 3,
-            "code_char_count": 1547,
-            "code_ratio": 0.4865,
-            "paragraphs": 11,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 1.55,
+            "word_count": 2158,
+            "char_count_no_ws": 11899,
+            "code_blocks": 5,
+            "code_char_count": 1935,
+            "code_ratio": 0.1626,
+            "paragraphs": 48,
+            "max_paragraph_sentences": 8,
+            "avg_paragraph_sentences": 3.79,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -1936,19 +1926,18 @@
             "starts_with_heading": true
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 504 (need ≥700)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 504 (need ≤3500)",
-              "code_ratio_min: 0.49 (need ≥0.15)",
-              "code_ratio_max: 0.49 (need ≤0.80)",
-              "max_paragraph_sentences: 3 (need ≤8)",
+              "word_count_min: 2158 (need ≥700)",
+              "word_count_max: 2158 (need ≤3500)",
+              "code_ratio_min: 0.16 (need ≥0.15)",
+              "code_ratio_max: 0.16 (need ≤0.80)",
+              "max_paragraph_sentences: 8 (need ≤8)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Primitives_Portals\\tutorial.md",
@@ -2090,10 +2079,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 151 (need ≥40)",
-              "word_count_max: 151 (need ≤220)",
+              "word_count_max: 151 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 7 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -2104,14 +2093,14 @@
           "role": "technical.md",
           "exists": true,
           "metrics": {
-            "word_count": 380,
-            "char_count_no_ws": 2256,
-            "code_blocks": 4,
-            "code_char_count": 1143,
-            "code_ratio": 0.5066,
-            "paragraphs": 9,
-            "max_paragraph_sentences": 2,
-            "avg_paragraph_sentences": 1.11,
+            "word_count": 2305,
+            "char_count_no_ws": 13327,
+            "code_blocks": 12,
+            "code_char_count": 2554,
+            "code_ratio": 0.1916,
+            "paragraphs": 56,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 2.8,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -2122,19 +2111,18 @@
             "starts_with_heading": true
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 380 (need ≥700)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 380 (need ≤3500)",
-              "code_ratio_min: 0.51 (need ≥0.15)",
-              "code_ratio_max: 0.51 (need ≤0.80)",
-              "max_paragraph_sentences: 2 (need ≤8)",
+              "word_count_min: 2305 (need ≥700)",
+              "word_count_max: 2305 (need ≤3500)",
+              "code_ratio_min: 0.19 (need ≥0.15)",
+              "code_ratio_max: 0.19 (need ≤0.80)",
+              "max_paragraph_sentences: 7 (need ≤8)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Primitives_Melencolia\\tutorial.md",
@@ -2276,10 +2264,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 83 (need ≥40)",
-              "word_count_max: 83 (need ≤220)",
+              "word_count_max: 83 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 5 (need ≤5)",
+              "paragraphs_max: 5 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -2290,14 +2278,14 @@
           "role": "technical.md",
           "exists": true,
           "metrics": {
-            "word_count": 299,
-            "char_count_no_ws": 2009,
-            "code_blocks": 4,
-            "code_char_count": 750,
-            "code_ratio": 0.3733,
-            "paragraphs": 10,
-            "max_paragraph_sentences": 5,
-            "avg_paragraph_sentences": 1.4,
+            "word_count": 2085,
+            "char_count_no_ws": 12124,
+            "code_blocks": 10,
+            "code_char_count": 708,
+            "code_ratio": 0.0584,
+            "paragraphs": 56,
+            "max_paragraph_sentences": 13,
+            "avg_paragraph_sentences": 3.45,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -2310,13 +2298,13 @@
           "evaluation": {
             "status": "fail",
             "failures": [
-              "word_count_min: 299 (need ≥700)"
+              "code_ratio_min: 0.06 (need ≥0.15)",
+              "max_paragraph_sentences: 13 (need ≤8)"
             ],
             "passes": [
-              "word_count_max: 299 (need ≤3500)",
-              "code_ratio_min: 0.37 (need ≥0.15)",
-              "code_ratio_max: 0.37 (need ≤0.80)",
-              "max_paragraph_sentences: 5 (need ≤8)",
+              "word_count_min: 2085 (need ≥700)",
+              "word_count_max: 2085 (need ≤3500)",
+              "code_ratio_max: 0.06 (need ≤0.80)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -2464,10 +2452,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 54 (need ≥40)",
-              "word_count_max: 54 (need ≤220)",
+              "word_count_max: 54 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -2478,14 +2466,14 @@
           "role": "technical.md",
           "exists": true,
           "metrics": {
-            "word_count": 646,
-            "char_count_no_ws": 4123,
+            "word_count": 2452,
+            "char_count_no_ws": 14578,
             "code_blocks": 10,
-            "code_char_count": 3008,
-            "code_ratio": 0.7296,
-            "paragraphs": 7,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 1.43,
+            "code_char_count": 3266,
+            "code_ratio": 0.224,
+            "paragraphs": 54,
+            "max_paragraph_sentences": 8,
+            "avg_paragraph_sentences": 3.26,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -2496,19 +2484,18 @@
             "starts_with_heading": true
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 646 (need ≥700)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 646 (need ≤3500)",
-              "code_ratio_min: 0.73 (need ≥0.15)",
-              "code_ratio_max: 0.73 (need ≤0.80)",
-              "max_paragraph_sentences: 3 (need ≤8)",
+              "word_count_min: 2452 (need ≥700)",
+              "word_count_max: 2452 (need ≤3500)",
+              "code_ratio_min: 0.22 (need ≥0.15)",
+              "code_ratio_max: 0.22 (need ≤0.80)",
+              "max_paragraph_sentences: 8 (need ≤8)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Trans_Translation\\tutorial.md",
@@ -2650,10 +2637,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 49 (need ≥40)",
-              "word_count_max: 49 (need ≤220)",
+              "word_count_max: 49 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -2836,10 +2823,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 49 (need ≥40)",
-              "word_count_max: 49 (need ≤220)",
+              "word_count_max: 49 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -3021,10 +3008,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 47 (need ≥40)",
-              "word_count_max: 47 (need ≤220)",
+              "word_count_max: 47 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -3209,10 +3196,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 50 (need ≥40)",
-              "word_count_max: 50 (need ≤220)",
+              "word_count_max: 50 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -3395,10 +3382,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 57 (need ≥40)",
-              "word_count_max: 57 (need ≤220)",
+              "word_count_max: 57 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -3472,14 +3459,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 23,
-            "char_count_no_ws": 112,
+            "word_count": 119,
+            "char_count_no_ws": 623,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 4,
-            "avg_paragraph_sentences": 4.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 5.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -3490,19 +3477,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 23 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 23 (need ≤220)",
+              "word_count_min: 119 (need ≥40)",
+              "word_count_max: 119 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_Transformation\\technical.md",
@@ -3594,10 +3580,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 54 (need ≥40)",
-              "word_count_max: 54 (need ≤220)",
+              "word_count_max: 54 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -3780,10 +3766,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 50 (need ≥40)",
-              "word_count_max: 50 (need ≤220)",
+              "word_count_max: 50 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -3966,10 +3952,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 46 (need ≥40)",
-              "word_count_max: 46 (need ≤220)",
+              "word_count_max: 46 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -4152,10 +4138,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 55 (need ≥40)",
-              "word_count_max: 55 (need ≤220)",
+              "word_count_max: 55 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -4338,10 +4324,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 47 (need ≥40)",
-              "word_count_max: 47 (need ≤220)",
+              "word_count_max: 47 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -4524,10 +4510,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 55 (need ≥40)",
-              "word_count_max: 55 (need ≤220)",
+              "word_count_max: 55 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -4688,12 +4674,12 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 39,
-            "char_count_no_ws": 237,
+            "word_count": 123,
+            "char_count_no_ws": 670,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
+            "paragraphs": 2,
             "max_paragraph_sentences": 4,
             "avg_paragraph_sentences": 4.0,
             "captions_total": 0,
@@ -4706,19 +4692,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 39 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 39 (need ≤220)",
+              "word_count_min: 123 (need ≥40)",
+              "word_count_max: 123 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Color_Flashlight\\technical.md",
@@ -4875,14 +4860,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 20,
-            "char_count_no_ws": 110,
+            "word_count": 100,
+            "char_count_no_ws": 587,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 2,
-            "avg_paragraph_sentences": 2.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 4.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -4893,19 +4878,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 20 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 20 (need ≤220)",
+              "word_count_min: 100 (need ≥40)",
+              "word_count_max: 100 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 2 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_Color\\technical.md",
@@ -4997,10 +4981,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 104 (need ≥40)",
-              "word_count_max: 104 (need ≤220)",
+              "word_count_max: 104 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 2 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -5095,10 +5079,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 58 (need ≥40)",
-              "word_count_max: 58 (need ≤220)",
+              "word_count_max: 58 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -5193,10 +5177,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 111 (need ≥40)",
-              "word_count_max: 111 (need ≤220)",
+              "word_count_max: 111 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 2 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -5291,10 +5275,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 57 (need ≥40)",
-              "word_count_max: 57 (need ≤220)",
+              "word_count_max: 57 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -5389,10 +5373,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 54 (need ≥40)",
-              "word_count_max: 54 (need ≤220)",
+              "word_count_max: 54 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -5487,10 +5471,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 149 (need ≥40)",
-              "word_count_max: 149 (need ≤220)",
+              "word_count_max: 149 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -5585,10 +5569,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 54 (need ≥40)",
-              "word_count_max: 54 (need ≤220)",
+              "word_count_max: 54 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -5683,10 +5667,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 51 (need ≥40)",
-              "word_count_max: 51 (need ≤220)",
+              "word_count_max: 51 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -5781,10 +5765,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 60 (need ≥40)",
-              "word_count_max: 60 (need ≤220)",
+              "word_count_max: 60 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 2 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -5857,14 +5841,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 11,
-            "char_count_no_ws": 65,
+            "word_count": 111,
+            "char_count_no_ws": 590,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 5.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -5875,19 +5859,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 11 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 11 (need ≤220)",
+              "word_count_min: 111 (need ≥40)",
+              "word_count_max: 111 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 7 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_Forces\\technical.md",
@@ -5979,10 +5962,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 133 (need ≥40)",
-              "word_count_max: 133 (need ≤220)",
+              "word_count_max: 133 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -6077,10 +6060,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 44 (need ≥40)",
-              "word_count_max: 44 (need ≤220)",
+              "word_count_max: 44 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -6296,10 +6279,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 115 (need ≥40)",
-              "word_count_max: 115 (need ≤220)",
+              "word_count_max: 115 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 8 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -6394,10 +6377,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 137 (need ≥40)",
-              "word_count_max: 137 (need ≤220)",
+              "word_count_max: 137 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -6492,10 +6475,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 118 (need ≥40)",
-              "word_count_max: 118 (need ≤220)",
+              "word_count_max: 118 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -6590,10 +6573,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 130 (need ≥40)",
-              "word_count_max: 130 (need ≤220)",
+              "word_count_max: 130 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -6688,10 +6671,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 133 (need ≥40)",
-              "word_count_max: 133 (need ≤220)",
+              "word_count_max: 133 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -6764,14 +6747,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 18,
-            "char_count_no_ws": 94,
+            "word_count": 114,
+            "char_count_no_ws": 596,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 4,
-            "avg_paragraph_sentences": 4.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 5.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -6782,19 +6765,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 18 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 18 (need ≤220)",
+              "word_count_min: 114 (need ≥40)",
+              "word_count_max: 114 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_Arrays\\technical.md",
@@ -6886,10 +6868,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 138 (need ≥40)",
-              "word_count_max: 138 (need ≤220)",
+              "word_count_max: 138 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 8 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -7052,14 +7034,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 33,
-            "char_count_no_ws": 199,
+            "word_count": 115,
+            "char_count_no_ws": 669,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 4.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -7070,19 +7052,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 33 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 33 (need ≤220)",
+              "word_count_min: 115 (need ≥40)",
+              "word_count_max: 115 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\WaveFunctions_Pendulum\\technical.md",
@@ -7182,14 +7163,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 33,
-            "char_count_no_ws": 181,
+            "word_count": 123,
+            "char_count_no_ws": 632,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 5,
+            "avg_paragraph_sentences": 4.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -7200,19 +7181,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 33 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 33 (need ≤220)",
+              "word_count_min: 123 (need ≥40)",
+              "word_count_max: 123 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 5 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\WaveFunctions_Unit_Circle\\technical.md",
@@ -7312,14 +7292,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 31,
-            "char_count_no_ws": 181,
+            "word_count": 112,
+            "char_count_no_ws": 624,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 5,
+            "avg_paragraph_sentences": 4.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -7330,19 +7310,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 31 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 31 (need ≤220)",
+              "word_count_min: 112 (need ≥40)",
+              "word_count_max: 112 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 5 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\WaveFunctions_Sine_Space\\technical.md",
@@ -7444,14 +7423,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 36,
-            "char_count_no_ws": 212,
+            "word_count": 129,
+            "char_count_no_ws": 694,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 5,
+            "avg_paragraph_sentences": 4.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -7462,19 +7441,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 36 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 36 (need ≤220)",
+              "word_count_min: 129 (need ≥40)",
+              "word_count_max: 129 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 5 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\WaveFunctions_3D_Wave_Propagation\\technical.md",
@@ -7543,14 +7521,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 35,
-            "char_count_no_ws": 192,
+            "word_count": 120,
+            "char_count_no_ws": 733,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 4.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -7561,19 +7539,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 35 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 35 (need ≤220)",
+              "word_count_min: 120 (need ≥40)",
+              "word_count_max: 120 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\WaveFunctions_Effect_Sound\\technical.md",
@@ -7642,14 +7619,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 32,
-            "char_count_no_ws": 198,
+            "word_count": 121,
+            "char_count_no_ws": 739,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 5,
+            "avg_paragraph_sentences": 4.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -7660,19 +7637,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 32 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 32 (need ≤220)",
+              "word_count_min: 121 (need ≥40)",
+              "word_count_max: 121 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 5 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Wavefunctions_Bernini\\technical.md",
@@ -7763,10 +7739,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 42 (need ≥40)",
-              "word_count_max: 42 (need ≤220)",
+              "word_count_max: 42 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -7861,10 +7837,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 121 (need ≥40)",
-              "word_count_max: 121 (need ≤220)",
+              "word_count_max: 121 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -7937,14 +7913,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 33,
-            "char_count_no_ws": 189,
+            "word_count": 130,
+            "char_count_no_ws": 741,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 5.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -7955,19 +7931,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 33 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 33 (need ≤220)",
+              "word_count_min: 130 (need ≥40)",
+              "word_count_max: 130 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 7 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Wavefunctions_Sky_Stairs\\technical.md",
@@ -8058,10 +8033,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 129 (need ≥40)",
-              "word_count_max: 129 (need ≤220)",
+              "word_count_max: 129 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -8156,10 +8131,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 155 (need ≥40)",
-              "word_count_max: 155 (need ≤220)",
+              "word_count_max: 155 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 8 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -8265,14 +8240,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 20,
-            "char_count_no_ws": 116,
+            "word_count": 116,
+            "char_count_no_ws": 670,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 4.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -8283,19 +8258,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 20 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 20 (need ≤220)",
+              "word_count_min: 116 (need ≥40)",
+              "word_count_max: 116 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_Waves\\technical.md",
@@ -8365,14 +8339,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 26,
-            "char_count_no_ws": 171,
+            "word_count": 113,
+            "char_count_no_ws": 754,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 2,
-            "avg_paragraph_sentences": 2.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 4.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -8383,19 +8357,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 26 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 26 (need ≤220)",
+              "word_count_min: 113 (need ≥40)",
+              "word_count_max: 113 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 2 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Random_Definition\\technical.md",
@@ -8577,10 +8550,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 113 (need ≥40)",
-              "word_count_max: 113 (need ≤220)",
+              "word_count_max: 113 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 8 (need ≤12)",
-              "paragraphs_max: 2 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -8686,14 +8659,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 32,
-            "char_count_no_ws": 169,
+            "word_count": 123,
+            "char_count_no_ws": 680,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 4,
-            "avg_paragraph_sentences": 4.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 5.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -8704,19 +8677,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 32 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 32 (need ≤220)",
+              "word_count_min: 123 (need ≥40)",
+              "word_count_max: 123 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 7 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Randomness_10_PRINT_Algorithm\\technical.md",
@@ -8873,14 +8845,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 32,
-            "char_count_no_ws": 164,
+            "word_count": 126,
+            "char_count_no_ws": 722,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 4.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -8891,19 +8863,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 32 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 32 (need ≤220)",
+              "word_count_min: 126 (need ≥40)",
+              "word_count_max: 126 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Random_Cubes\\technical.md",
@@ -9063,14 +9034,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 30,
-            "char_count_no_ws": 149,
+            "word_count": 115,
+            "char_count_no_ws": 752,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 2,
-            "avg_paragraph_sentences": 2.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 4.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -9081,19 +9052,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 30 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 30 (need ≤220)",
+              "word_count_min: 115 (need ≥40)",
+              "word_count_max: 115 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 2 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Random_Rotate_Random_XYZ\\technical.md",
@@ -9250,14 +9220,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 31,
-            "char_count_no_ws": 183,
+            "word_count": 124,
+            "char_count_no_ws": 762,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 4.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -9268,19 +9238,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 31 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 31 (need ≤220)",
+              "word_count_min: 124 (need ≥40)",
+              "word_count_max: 124 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Random_Walk\\technical.md",
@@ -9439,14 +9408,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 29,
-            "char_count_no_ws": 147,
+            "word_count": 124,
+            "char_count_no_ws": 766,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 2,
-            "avg_paragraph_sentences": 2.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 4.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -9457,19 +9426,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 29 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 29 (need ≤220)",
+              "word_count_min: 124 (need ≥40)",
+              "word_count_max: 124 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 2 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 7 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Random_Gaussian\\technical.md",
@@ -9626,14 +9594,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 30,
-            "char_count_no_ws": 192,
+            "word_count": 125,
+            "char_count_no_ws": 815,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 2,
-            "avg_paragraph_sentences": 2.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 4.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -9644,19 +9612,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 30 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 30 (need ≤220)",
+              "word_count_min: 125 (need ≥40)",
+              "word_count_max: 125 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 2 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Random_Mushrooms\\technical.md",
@@ -9813,14 +9780,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 27,
-            "char_count_no_ws": 150,
+            "word_count": 120,
+            "char_count_no_ws": 729,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 5.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -9831,19 +9798,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 27 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 27 (need ≤220)",
+              "word_count_min: 120 (need ≥40)",
+              "word_count_max: 120 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 7 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Random_Space_Geometry\\technical.md",
@@ -9999,14 +9965,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 27,
-            "char_count_no_ws": 153,
+            "word_count": 125,
+            "char_count_no_ws": 819,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 2,
-            "avg_paragraph_sentences": 2.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 9,
+            "avg_paragraph_sentences": 5.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -10017,19 +9983,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 27 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 27 (need ≤220)",
+              "word_count_min: 125 (need ≥40)",
+              "word_count_max: 125 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 2 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 9 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Randomness_Examples_of_Randomness\\technical.md",
@@ -10186,14 +10151,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 27,
-            "char_count_no_ws": 192,
+            "word_count": 125,
+            "char_count_no_ws": 830,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 4.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -10204,19 +10169,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 27 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 27 (need ≤220)",
+              "word_count_min: 125 (need ≥40)",
+              "word_count_max: 125 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Random_Pheromone\\technical.md",
@@ -10373,14 +10337,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 31,
-            "char_count_no_ws": 190,
+            "word_count": 130,
+            "char_count_no_ws": 759,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 5,
+            "avg_paragraph_sentences": 4.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -10391,19 +10355,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 31 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 31 (need ≤220)",
+              "word_count_min: 130 (need ≥40)",
+              "word_count_max: 130 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 5 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Random_Space\\technical.md",
@@ -10583,10 +10546,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 134 (need ≥40)",
-              "word_count_max: 134 (need ≤220)",
+              "word_count_max: 134 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -10659,14 +10622,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 13,
-            "char_count_no_ws": 83,
+            "word_count": 114,
+            "char_count_no_ws": 653,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 4.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -10677,19 +10640,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 13 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 13 (need ≤220)",
+              "word_count_min: 114 (need ≥40)",
+              "word_count_max: 114 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_Random\\technical.md",
@@ -10759,14 +10721,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 29,
-            "char_count_no_ws": 188,
+            "word_count": 139,
+            "char_count_no_ws": 849,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 8,
+            "avg_paragraph_sentences": 5.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -10777,19 +10739,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 29 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 29 (need ≤220)",
+              "word_count_min: 139 (need ≥40)",
+              "word_count_max: 139 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 8 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Random_Noise_Types\\technical.md",
@@ -10968,10 +10929,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 41 (need ≥40)",
-              "word_count_max: 41 (need ≤220)",
+              "word_count_max: 41 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -11074,12 +11035,12 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 38,
-            "char_count_no_ws": 233,
+            "word_count": 126,
+            "char_count_no_ws": 771,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
+            "paragraphs": 2,
             "max_paragraph_sentences": 6,
             "avg_paragraph_sentences": 6.0,
             "captions_total": 0,
@@ -11092,19 +11053,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 38 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 38 (need ≤220)",
+              "word_count_min: 126 (need ≥40)",
+              "word_count_max: 126 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Noise_One\\technical.md",
@@ -11234,14 +11194,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 35,
-            "char_count_no_ws": 228,
+            "word_count": 126,
+            "char_count_no_ws": 770,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 5,
-            "avg_paragraph_sentences": 5.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 5.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -11252,19 +11212,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 35 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 35 (need ≤220)",
+              "word_count_min: 126 (need ≥40)",
+              "word_count_max: 126 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Noise_Voxel\\technical.md",
@@ -11386,10 +11345,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 43 (need ≥40)",
-              "word_count_max: 43 (need ≤220)",
+              "word_count_max: 43 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -11493,14 +11452,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 37,
-            "char_count_no_ws": 217,
+            "word_count": 138,
+            "char_count_no_ws": 855,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 6,
-            "avg_paragraph_sentences": 6.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 6.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -11511,19 +11470,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 37 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 37 (need ≤220)",
+              "word_count_min: 138 (need ≥40)",
+              "word_count_max: 138 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 7 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Noise_Inside_Noise\\technical.md",
@@ -11623,14 +11581,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 39,
-            "char_count_no_ws": 236,
+            "word_count": 137,
+            "char_count_no_ws": 768,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 6,
-            "avg_paragraph_sentences": 6.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 6.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -11641,19 +11599,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 39 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 39 (need ≤220)",
+              "word_count_min: 137 (need ≥40)",
+              "word_count_max: 137 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 7 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Noise_Space_10\\technical.md",
@@ -11777,10 +11734,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 43 (need ≥40)",
-              "word_count_max: 43 (need ≤220)",
+              "word_count_max: 43 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -11905,10 +11862,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 137 (need ≥40)",
-              "word_count_max: 137 (need ≤220)",
+              "word_count_max: 137 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 7 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -11981,14 +11938,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 21,
-            "char_count_no_ws": 100,
+            "word_count": 120,
+            "char_count_no_ws": 630,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 4,
-            "avg_paragraph_sentences": 4.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 5.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -11999,19 +11956,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 21 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 21 (need ≤220)",
+              "word_count_min: 120 (need ≥40)",
+              "word_count_max: 120 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 7 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_Noise\\technical.md",
@@ -12103,10 +12059,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 43 (need ≥40)",
-              "word_count_max: 43 (need ≤220)",
+              "word_count_max: 43 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -12212,14 +12168,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 39,
-            "char_count_no_ws": 248,
+            "word_count": 137,
+            "char_count_no_ws": 759,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 5,
-            "avg_paragraph_sentences": 5.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 5.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -12230,19 +12186,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 39 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 39 (need ≤220)",
+              "word_count_min: 137 (need ≥40)",
+              "word_count_max: 137 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\CA_ElementaryRules\\technical.md",
@@ -12364,10 +12319,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 40 (need ≥40)",
-              "word_count_max: 40 (need ≤220)",
+              "word_count_max: 40 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -12492,10 +12447,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 70 (need ≥40)",
-              "word_count_max: 70 (need ≤220)",
+              "word_count_max: 70 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 2 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -12620,10 +12575,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 78 (need ≥40)",
-              "word_count_max: 78 (need ≤220)",
+              "word_count_max: 78 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 2 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -12748,10 +12703,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 74 (need ≥40)",
-              "word_count_max: 74 (need ≤220)",
+              "word_count_max: 74 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 7 (need ≤12)",
-              "paragraphs_max: 2 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -12877,10 +12832,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 77 (need ≥40)",
-              "word_count_max: 77 (need ≤220)",
+              "word_count_max: 77 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 2 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -13038,10 +12993,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 42 (need ≥40)",
-              "word_count_max: 42 (need ≤220)",
+              "word_count_max: 42 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -13145,14 +13100,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 23,
-            "char_count_no_ws": 99,
+            "word_count": 129,
+            "char_count_no_ws": 655,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 4,
-            "avg_paragraph_sentences": 4.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 5.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -13163,19 +13118,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 23 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 23 (need ≤220)",
+              "word_count_min: 129 (need ≥40)",
+              "word_count_max: 129 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 7 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_CA\\technical.md",
@@ -13245,14 +13199,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 34,
-            "char_count_no_ws": 203,
+            "word_count": 122,
+            "char_count_no_ws": 777,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 4.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -13263,19 +13217,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 34 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 34 (need ≤220)",
+              "word_count_min: 122 (need ≥40)",
+              "word_count_max: 122 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Fractal_Recursion\\technical.md",
@@ -13457,10 +13410,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 54 (need ≥40)",
-              "word_count_max: 54 (need ≤220)",
+              "word_count_max: 54 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -13642,10 +13595,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 40 (need ≥40)",
-              "word_count_max: 40 (need ≤220)",
+              "word_count_max: 40 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -13828,10 +13781,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 63 (need ≥40)",
-              "word_count_max: 63 (need ≤220)",
+              "word_count_max: 63 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -14013,10 +13966,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 42 (need ≥40)",
-              "word_count_max: 42 (need ≤220)",
+              "word_count_max: 42 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -14203,10 +14156,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 48 (need ≥40)",
-              "word_count_max: 48 (need ≤220)",
+              "word_count_max: 48 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -14389,10 +14342,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 42 (need ≥40)",
-              "word_count_max: 42 (need ≤220)",
+              "word_count_max: 42 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -14575,10 +14528,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 46 (need ≥40)",
-              "word_count_max: 46 (need ≤220)",
+              "word_count_max: 46 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -14761,10 +14714,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 50 (need ≥40)",
-              "word_count_max: 50 (need ≤220)",
+              "word_count_max: 50 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -14947,10 +14900,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 54 (need ≥40)",
-              "word_count_max: 54 (need ≤220)",
+              "word_count_max: 54 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 1 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -15112,14 +15065,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 20,
-            "char_count_no_ws": 98,
+            "word_count": 128,
+            "char_count_no_ws": 674,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 5,
-            "avg_paragraph_sentences": 5.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 5.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -15130,19 +15083,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 20 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 20 (need ≤220)",
+              "word_count_min: 128 (need ≥40)",
+              "word_count_max: 128 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_Fractals\\technical.md",
@@ -15234,10 +15186,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 125 (need ≥40)",
-              "word_count_max: 125 (need ≤220)",
+              "word_count_max: 125 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 10 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -15422,10 +15374,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 135 (need ≥40)",
-              "word_count_max: 135 (need ≤220)",
+              "word_count_max: 135 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 7 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -15609,10 +15561,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 120 (need ≥40)",
-              "word_count_max: 120 (need ≤220)",
+              "word_count_max: 120 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -15796,10 +15748,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 129 (need ≥40)",
-              "word_count_max: 129 (need ≤220)",
+              "word_count_max: 129 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -15982,10 +15934,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 156 (need ≥40)",
-              "word_count_max: 156 (need ≤220)",
+              "word_count_max: 156 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 4 (need ≤5)",
+              "paragraphs_max: 4 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -16168,10 +16120,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 129 (need ≥40)",
-              "word_count_max: 129 (need ≤220)",
+              "word_count_max: 129 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -16333,14 +16285,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 16,
-            "char_count_no_ws": 102,
+            "word_count": 123,
+            "char_count_no_ws": 675,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 4.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -16351,19 +16303,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 16 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 16 (need ≤220)",
+              "word_count_min: 123 (need ≥40)",
+              "word_count_max: 123 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_LSystems\\technical.md",
@@ -16455,10 +16406,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 134 (need ≥40)",
-              "word_count_max: 134 (need ≤220)",
+              "word_count_max: 134 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 7 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -16642,10 +16593,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 126 (need ≥40)",
-              "word_count_max: 126 (need ≤220)",
+              "word_count_max: 126 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 7 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -16829,10 +16780,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 131 (need ≥40)",
-              "word_count_max: 131 (need ≤220)",
+              "word_count_max: 131 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -17016,10 +16967,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 136 (need ≥40)",
-              "word_count_max: 136 (need ≤220)",
+              "word_count_max: 136 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 4 (need ≤5)",
+              "paragraphs_max: 4 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -17203,10 +17154,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 132 (need ≥40)",
-              "word_count_max: 132 (need ≤220)",
+              "word_count_max: 132 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 4 (need ≤5)",
+              "paragraphs_max: 4 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -17390,10 +17341,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 115 (need ≥40)",
-              "word_count_max: 115 (need ≤220)",
+              "word_count_max: 115 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 7 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -17577,10 +17528,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 128 (need ≥40)",
-              "word_count_max: 128 (need ≤220)",
+              "word_count_max: 128 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -17745,14 +17696,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 22,
-            "char_count_no_ws": 110,
+            "word_count": 124,
+            "char_count_no_ws": 677,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 5.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -17763,19 +17714,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 22 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 22 (need ≤220)",
+              "word_count_min: 124 (need ≥40)",
+              "word_count_max: 124 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 7 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_ProcGen\\technical.md",
@@ -17867,10 +17817,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 111 (need ≥40)",
-              "word_count_max: 111 (need ≤220)",
+              "word_count_max: 111 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -18056,10 +18006,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 141 (need ≥40)",
-              "word_count_max: 141 (need ≤220)",
+              "word_count_max: 141 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 8 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -18241,10 +18191,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 128 (need ≥40)",
-              "word_count_max: 128 (need ≤220)",
+              "word_count_max: 128 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -18426,10 +18376,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 118 (need ≥40)",
-              "word_count_max: 118 (need ≤220)",
+              "word_count_max: 118 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 4 (need ≤5)",
+              "paragraphs_max: 4 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -18612,10 +18562,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 134 (need ≥40)",
-              "word_count_max: 134 (need ≤220)",
+              "word_count_max: 134 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -18798,10 +18748,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 130 (need ≥40)",
-              "word_count_max: 130 (need ≤220)",
+              "word_count_max: 130 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -18983,10 +18933,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 129 (need ≥40)",
-              "word_count_max: 129 (need ≤220)",
+              "word_count_max: 129 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -19171,10 +19121,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 50 (need ≥40)",
-              "word_count_max: 50 (need ≤220)",
+              "word_count_max: 50 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 4 (need ≤5)",
+              "paragraphs_max: 4 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -19360,10 +19310,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 202 (need ≥40)",
-              "word_count_max: 202 (need ≤220)",
+              "word_count_max: 202 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 4 (need ≤5)",
+              "paragraphs_max: 4 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -19524,14 +19474,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 17,
-            "char_count_no_ws": 100,
+            "word_count": 128,
+            "char_count_no_ws": 712,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 4,
-            "avg_paragraph_sentences": 4.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 5.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -19542,19 +19492,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 17 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 17 (need ≤220)",
+              "word_count_min: 128 (need ≥40)",
+              "word_count_max: 128 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 7 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_SoftBodies\\technical.md",
@@ -19624,14 +19573,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 38,
-            "char_count_no_ws": 236,
+            "word_count": 131,
+            "char_count_no_ws": 820,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 5,
-            "avg_paragraph_sentences": 5.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 6.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -19642,19 +19591,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 38 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 38 (need ≤220)",
+              "word_count_min: 131 (need ≥40)",
+              "word_count_max: 131 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 7 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\SwarmIntelligence_PhysarumColony\\technical.md",
@@ -19811,12 +19759,12 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 39,
-            "char_count_no_ws": 208,
+            "word_count": 124,
+            "char_count_no_ws": 710,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
+            "paragraphs": 2,
             "max_paragraph_sentences": 5,
             "avg_paragraph_sentences": 5.0,
             "captions_total": 0,
@@ -19829,19 +19777,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 39 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 39 (need ≤220)",
+              "word_count_min: 124 (need ≥40)",
+              "word_count_max: 124 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\SwarmIntelligence_FlowFields\\technical.md",
@@ -19998,12 +19945,12 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 37,
-            "char_count_no_ws": 236,
+            "word_count": 131,
+            "char_count_no_ws": 741,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
+            "paragraphs": 2,
             "max_paragraph_sentences": 5,
             "avg_paragraph_sentences": 5.0,
             "captions_total": 0,
@@ -20016,19 +19963,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 37 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 37 (need ≤220)",
+              "word_count_min: 131 (need ≥40)",
+              "word_count_max: 131 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\SwarmIntelligence_Boids_Algorithm\\technical.md",
@@ -20186,14 +20132,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 38,
-            "char_count_no_ws": 220,
+            "word_count": 123,
+            "char_count_no_ws": 726,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 5,
-            "avg_paragraph_sentences": 5.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 5.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -20204,19 +20150,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 38 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 38 (need ≤220)",
+              "word_count_min: 123 (need ≥40)",
+              "word_count_max: 123 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\SwarmIntelligence_Agent_Based_Modeling_ABM\\technical.md",
@@ -20375,14 +20320,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 37,
-            "char_count_no_ws": 227,
+            "word_count": 118,
+            "char_count_no_ws": 754,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
+            "paragraphs": 2,
             "max_paragraph_sentences": 6,
-            "avg_paragraph_sentences": 6.0,
+            "avg_paragraph_sentences": 5.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -20393,19 +20338,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 37 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 37 (need ≤220)",
+              "word_count_min: 118 (need ≥40)",
+              "word_count_max: 118 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\SwarmIntelligence_Ant_Colony_Optimization\\technical.md",
@@ -20562,14 +20506,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 36,
-            "char_count_no_ws": 226,
+            "word_count": 127,
+            "char_count_no_ws": 778,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 5,
-            "avg_paragraph_sentences": 5.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 5.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -20580,19 +20524,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 36 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 36 (need ≤220)",
+              "word_count_min: 127 (need ≥40)",
+              "word_count_max: 127 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\SwarmIntelligence_Particle_Swarm_Optimization\\technical.md",
@@ -20754,14 +20697,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 37,
-            "char_count_no_ws": 256,
+            "word_count": 126,
+            "char_count_no_ws": 817,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
+            "paragraphs": 2,
             "max_paragraph_sentences": 7,
-            "avg_paragraph_sentences": 7.0,
+            "avg_paragraph_sentences": 6.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -20772,19 +20715,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 37 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 37 (need ≤220)",
+              "word_count_min: 126 (need ≥40)",
+              "word_count_max: 126 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 7 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\SwarmIntelligence_Swarm_Intelligence_Algorithms\\technical.md",
@@ -20942,14 +20884,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 22,
-            "char_count_no_ws": 95,
+            "word_count": 124,
+            "char_count_no_ws": 656,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 4,
-            "avg_paragraph_sentences": 4.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 5.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -20960,19 +20902,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 22 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 22 (need ≤220)",
+              "word_count_min: 124 (need ≥40)",
+              "word_count_max: 124 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_Swarm\\technical.md",
@@ -21064,10 +21005,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 128 (need ≥40)",
-              "word_count_max: 128 (need ≤220)",
+              "word_count_max: 128 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 7 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -21251,10 +21192,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 170 (need ≥40)",
-              "word_count_max: 170 (need ≤220)",
+              "word_count_max: 170 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 4 (need ≤5)",
+              "paragraphs_max: 4 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -21441,10 +21382,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 129 (need ≥40)",
-              "word_count_max: 129 (need ≤220)",
+              "word_count_max: 129 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -21629,10 +21570,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 140 (need ≥40)",
-              "word_count_max: 140 (need ≤220)",
+              "word_count_max: 140 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 7 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -21816,10 +21757,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 137 (need ≥40)",
-              "word_count_max: 137 (need ≤220)",
+              "word_count_max: 137 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 8 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -22004,10 +21945,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 136 (need ≥40)",
-              "word_count_max: 136 (need ≤220)",
+              "word_count_max: 136 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 7 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -22194,10 +22135,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 133 (need ≥40)",
-              "word_count_max: 133 (need ≤220)",
+              "word_count_max: 133 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 7 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -22382,10 +22323,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 153 (need ≥40)",
-              "word_count_max: 153 (need ≤220)",
+              "word_count_max: 153 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 4 (need ≤5)",
+              "paragraphs_max: 4 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -22551,14 +22492,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 18,
-            "char_count_no_ws": 91,
+            "word_count": 132,
+            "char_count_no_ws": 691,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 3,
-            "avg_paragraph_sentences": 3.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 5.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -22569,19 +22510,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 18 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 18 (need ≤220)",
+              "word_count_min: 132 (need ≥40)",
+              "word_count_max: 132 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 7 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_ML\\technical.md",
@@ -22673,10 +22613,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 141 (need ≥40)",
-              "word_count_max: 141 (need ≤220)",
+              "word_count_max: 141 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 10 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -22859,10 +22799,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 145 (need ≥40)",
-              "word_count_max: 145 (need ≤220)",
+              "word_count_max: 145 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 9 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -23047,10 +22987,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 149 (need ≥40)",
-              "word_count_max: 149 (need ≤220)",
+              "word_count_max: 149 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 7 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -23233,10 +23173,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 162 (need ≥40)",
-              "word_count_max: 162 (need ≤220)",
+              "word_count_max: 162 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 8 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -23419,10 +23359,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 131 (need ≥40)",
-              "word_count_max: 131 (need ≤220)",
+              "word_count_max: 131 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 10 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -23605,10 +23545,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 141 (need ≥40)",
-              "word_count_max: 141 (need ≤220)",
+              "word_count_max: 141 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -23792,10 +23732,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 140 (need ≥40)",
-              "word_count_max: 140 (need ≤220)",
+              "word_count_max: 140 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 7 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -23978,10 +23918,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 136 (need ≥40)",
-              "word_count_max: 136 (need ≤220)",
+              "word_count_max: 136 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -24143,14 +24083,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 17,
-            "char_count_no_ws": 95,
+            "word_count": 129,
+            "char_count_no_ws": 654,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 4,
-            "avg_paragraph_sentences": 4.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 6,
+            "avg_paragraph_sentences": 5.0,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -24161,19 +24101,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 17 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 17 (need ≤220)",
+              "word_count_min: 129 (need ≥40)",
+              "word_count_max: 129 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_Foundations\\technical.md",
@@ -24261,19 +24200,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "paragraphs_max: 7 (need ≤5)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
               "word_count_min: 84 (need ≥40)",
-              "word_count_max: 84 (need ≤220)",
+              "word_count_max: 84 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 3 (need ≤12)",
+              "paragraphs_max: 7 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\QFEP_Introduction\\technical.md",
@@ -24448,19 +24386,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "paragraphs_max: 6 (need ≤5)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
               "word_count_min: 80 (need ≥40)",
-              "word_count_max: 80 (need ≤220)",
+              "word_count_max: 80 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
+              "paragraphs_max: 6 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\QFEP_F_Term\\technical.md",
@@ -24635,19 +24572,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "paragraphs_max: 7 (need ≤5)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
               "word_count_min: 88 (need ≥40)",
-              "word_count_max: 88 (need ≤220)",
+              "word_count_max: 88 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 7 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\QFEP_E_Term\\technical.md",
@@ -24822,19 +24758,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "paragraphs_max: 6 (need ≤5)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
               "word_count_min: 101 (need ≥40)",
-              "word_count_max: 101 (need ≤220)",
+              "word_count_max: 101 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 12 (need ≤12)",
+              "paragraphs_max: 6 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\QFEP_Lambda_Spectrum\\technical.md",
@@ -25009,19 +24944,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "paragraphs_max: 6 (need ≤5)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
               "word_count_min: 111 (need ≥40)",
-              "word_count_max: 111 (need ≤220)",
+              "word_count_max: 111 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 8 (need ≤12)",
+              "paragraphs_max: 6 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\QFEP_Phi_Term\\technical.md",
@@ -25196,19 +25130,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "paragraphs_max: 7 (need ≤5)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
               "word_count_min: 91 (need ≥40)",
-              "word_count_max: 91 (need ≤220)",
+              "word_count_max: 91 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 3 (need ≤12)",
+              "paragraphs_max: 7 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\QFEP_Edge_Of_Chaos\\technical.md",
@@ -25383,19 +25316,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "paragraphs_max: 6 (need ≤5)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
               "word_count_min: 108 (need ≥40)",
-              "word_count_max: 108 (need ≤220)",
+              "word_count_max: 108 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 3 (need ≤12)",
+              "paragraphs_max: 6 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\QFEP_Sandbox\\technical.md",
@@ -25573,19 +25505,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "paragraphs_max: 7 (need ≤5)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
               "word_count_min: 95 (need ≥40)",
-              "word_count_max: 95 (need ≤220)",
+              "word_count_max: 95 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
+              "paragraphs_max: 7 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\QFEP_Synthesis\\technical.md",
@@ -25742,14 +25673,14 @@
           "role": "blurb.md",
           "exists": true,
           "metrics": {
-            "word_count": 23,
-            "char_count_no_ws": 119,
+            "word_count": 139,
+            "char_count_no_ws": 709,
             "code_blocks": 0,
             "code_char_count": 0,
             "code_ratio": 0.0,
-            "paragraphs": 1,
-            "max_paragraph_sentences": 4,
-            "avg_paragraph_sentences": 4.0,
+            "paragraphs": 2,
+            "max_paragraph_sentences": 7,
+            "avg_paragraph_sentences": 5.5,
             "captions_total": 0,
             "captions_missing": 0,
             "captions_over_limit": 0,
@@ -25760,19 +25691,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "word_count_min: 23 (need ≥40)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
-              "word_count_max: 23 (need ≤220)",
+              "word_count_min: 139 (need ≥40)",
+              "word_count_max: 139 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
-              "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 1 (need ≤5)",
+              "max_paragraph_sentences: 7 (need ≤12)",
+              "paragraphs_max: 2 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\Chamber_QFEP\\technical.md",
@@ -25864,10 +25794,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 130 (need ≥40)",
-              "word_count_max: 130 (need ≤220)",
+              "word_count_max: 130 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 8 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -26058,10 +25988,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 122 (need ≥40)",
-              "word_count_max: 122 (need ≤220)",
+              "word_count_max: 122 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 3 (need ≤12)",
-              "paragraphs_max: 4 (need ≤5)",
+              "paragraphs_max: 4 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -26129,10 +26059,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 145 (need ≥40)",
-              "word_count_max: 145 (need ≤220)",
+              "word_count_max: 145 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 4 (need ≤12)",
-              "paragraphs_max: 5 (need ≤5)",
+              "paragraphs_max: 5 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -26200,10 +26130,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 159 (need ≥40)",
-              "word_count_max: 159 (need ≤220)",
+              "word_count_max: 159 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 5 (need ≤5)",
+              "paragraphs_max: 5 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -26271,10 +26201,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 170 (need ≥40)",
-              "word_count_max: 170 (need ≤220)",
+              "word_count_max: 170 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 5 (need ≤5)",
+              "paragraphs_max: 5 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -26342,10 +26272,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 126 (need ≥40)",
-              "word_count_max: 126 (need ≤220)",
+              "word_count_max: 126 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -26531,10 +26461,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 128 (need ≥40)",
-              "word_count_max: 128 (need ≤220)",
+              "word_count_max: 128 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 10 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -26713,19 +26643,18 @@
             "starts_with_heading": false
           },
           "evaluation": {
-            "status": "fail",
-            "failures": [
-              "paragraphs_max: 6 (need ≤5)"
-            ],
+            "status": "pass",
+            "failures": [],
             "passes": [
               "word_count_min: 131 (need ≥40)",
-              "word_count_max: 131 (need ≤220)",
+              "word_count_max: 131 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
+              "paragraphs_max: 6 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
-          "status": "fail"
+          "status": "pass"
         },
         {
           "path": "commons\\maps\\PostCrisis_Synthesis\\technical.md",
@@ -26789,10 +26718,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 142 (need ≥40)",
-              "word_count_max: 142 (need ≤220)",
+              "word_count_max: 142 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 8 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -26977,10 +26906,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 134 (need ≥40)",
-              "word_count_max: 134 (need ≤220)",
+              "word_count_max: 134 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 10 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -27164,10 +27093,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 141 (need ≥40)",
-              "word_count_max: 141 (need ≤220)",
+              "word_count_max: 141 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 10 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -27354,10 +27283,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 134 (need ≥40)",
-              "word_count_max: 134 (need ≤220)",
+              "word_count_max: 134 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 4 (need ≤5)",
+              "paragraphs_max: 4 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -27542,10 +27471,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 142 (need ≥40)",
-              "word_count_max: 142 (need ≤220)",
+              "word_count_max: 142 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 5 (need ≤12)",
-              "paragraphs_max: 4 (need ≤5)",
+              "paragraphs_max: 4 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -27729,10 +27658,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 140 (need ≥40)",
-              "word_count_max: 140 (need ≤220)",
+              "word_count_max: 140 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -27917,10 +27846,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 158 (need ≥40)",
-              "word_count_max: 158 (need ≤220)",
+              "word_count_max: 158 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 6 (need ≤12)",
-              "paragraphs_max: 4 (need ≤5)",
+              "paragraphs_max: 4 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },
@@ -28104,10 +28033,10 @@
             "failures": [],
             "passes": [
               "word_count_min: 131 (need ≥40)",
-              "word_count_max: 131 (need ≤220)",
+              "word_count_max: 131 (need ≤260)",
               "code_ratio_max: 0.00 (need ≤0.05)",
               "max_paragraph_sentences: 8 (need ≤12)",
-              "paragraphs_max: 3 (need ≤5)",
+              "paragraphs_max: 3 (need ≤12)",
               "forbidden_words: 0 hits"
             ]
           },

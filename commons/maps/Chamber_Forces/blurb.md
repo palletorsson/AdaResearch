@@ -1,1 +1,3 @@
 The calming mortar slows the kresling. Amber warmth. Physics as gentleness.
+
+This is the catalyst chamber for Forces — where Newton's third law becomes a mode of contact. You project a force field; the `kresling_spire` registers the force not as damage but as deceleration, slowing its spiral, letting its tension resolve toward rest. The Science Screen scatters the impulses across a magnitude axis. Force here is not what breaks things. It is what touches them. The catalyst turns the physics engine into a language for approach — gravity as invitation, spring as negotiation, damping as care. The same equations that accelerate projectiles in the Forces sequence here calm a creature into stillness.

@@ -1,1 +1,3 @@
 No weapon, no creature. You sculpt the terrain with Perlin noise. The landscape rises and falls. You are making a world.
+
+This is the catalyst chamber for the Noise sequence — the only chamber where you do not shoot and nothing pursues you. The catalyst mode is field: your gesture modulates a Perlin noise function that deforms the ground under your feet. The Science Screen renders the noise as heightfield so you can read what your hand is doing to the terrain. Here mathematics ceases to be weapon or adversary and becomes infrastructure. The chamber transforms the player-creature boundary by removing the creature entirely. What remains is the environment itself as interlocutor. World-building as peaceful encounter with stochastic structure.
