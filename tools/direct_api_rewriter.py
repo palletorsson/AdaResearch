@@ -58,11 +58,9 @@ import text_metrics  # noqa: E402
 import code_grounding_validator as cgv  # noqa: E402
 
 try:
-    import anthropic
+    import anthropic as anthropic_sdk
 except ImportError:
-    print("ERROR: anthropic SDK not installed.\n"
-          "  pip install anthropic", file=sys.stderr)
-    sys.exit(1)
+    anthropic_sdk = None
 
 
 # ── Per-role prompt templates ───────────────────────────────────────────
@@ -294,19 +292,39 @@ def build_context(map_name: str, file_role: str) -> str:
 
 # ── API call ────────────────────────────────────────────────────────────
 
-_client: "anthropic.Anthropic | None" = None
+_client: Any | None = None
 
 
-def client() -> "anthropic.Anthropic":
+def require_anthropic() -> Any:
+    if anthropic_sdk is None:
+        print("ERROR: anthropic SDK not installed.\n"
+              "  pip install anthropic", file=sys.stderr)
+        sys.exit(1)
+    return anthropic_sdk
+
+
+def client() -> Any:
     global _client
     if _client is None:
+        anth = require_anthropic()
         api_key = os.environ.get("ANTHROPIC_API_KEY")
         if not api_key:
             print("ERROR: ANTHROPIC_API_KEY not set in environment.",
                   file=sys.stderr)
             sys.exit(2)
-        _client = anthropic.Anthropic(api_key=api_key)
+        _client = anth.Anthropic(api_key=api_key)
     return _client
+
+
+def build_task_prompt(map_name: str, file_role: str) -> str:
+    spec = FILE_SPECS.get(file_role)
+    if not spec:
+        raise ValueError(f"No spec for {file_role}")
+
+    display_name = map_name.replace("_", " ")
+    spec_text = spec.replace("{MapDisplayName}", display_name)
+    ctx = build_context(map_name, file_role)
+    return f"{ctx}\n\n---\n\n# Task\n\n{spec_text}"
 
 
 def call_api(
@@ -316,15 +334,11 @@ def call_api(
     max_tokens: int = 4000,
 ) -> dict[str, Any]:
     """Single-shot generation via Anthropic API. Returns {text, usage} or {error}."""
-    spec = FILE_SPECS.get(file_role)
-    if not spec:
-        return {"error": f"No spec for {file_role}"}
-
-    display_name = map_name.replace("_", " ")
-    spec_text = spec.replace("{MapDisplayName}", display_name)
-
-    ctx = build_context(map_name, file_role)
-    user_prompt = f"{ctx}\n\n---\n\n# Task\n\n{spec_text}"
+    anth = require_anthropic()
+    try:
+        user_prompt = build_task_prompt(map_name, file_role)
+    except ValueError as e:
+        return {"error": str(e)}
 
     try:
         t0 = time.time()
@@ -348,9 +362,9 @@ def call_api(
             "elapsed_s": round(elapsed, 1),
             "stop_reason": resp.stop_reason,
         }
-    except anthropic.RateLimitError as e:
+    except anth.RateLimitError as e:
         return {"error": f"rate_limit: {str(e)[:200]}"}
-    except anthropic.APIError as e:
+    except anth.APIError as e:
         return {"error": f"api_error: {str(e)[:200]}"}
     except Exception as e:
         return {"error": f"other: {type(e).__name__}: {str(e)[:200]}"}
