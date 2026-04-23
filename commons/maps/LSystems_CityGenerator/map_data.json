@@ -1,65 +1,65 @@
 {
   "map_info": {
-      "name": "City Generator",
-      "lookup_name": "LSystems_CityGenerator",
-      "description": "An urban grid of building blocks at varying heights. Streets form a regular network between procedural city blocks.",
-      "version": "1.0",
-      "format": "json",
-      "dimensions": {
-          "width": 9,
-          "depth": 9,
-          "max_height": 1
-      },
-      "metadata": {
-          "difficulty": "intermediate",
-          "category": "l_systems",
-          "spatial_temperature": 0.6,
-          "design_notes": "Grid streets (h1) with building blocks (h2-h4) in a city-block pattern. Architectural grammar made spatial."
-      }
+    "name": "City Generator",
+    "lookup_name": "LSystems_CityGenerator",
+    "description": "An urban grid of building blocks at varying heights. Streets form a regular network between procedural city blocks.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 9,
+      "depth": 9,
+      "max_height": 1
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "l_systems",
+      "spatial_temperature": 0.6,
+      "design_notes": "Grid streets (h1) with building blocks (h2-h4) in a city-block pattern. Architectural grammar made spatial."
+    }
   },
   "utility_definitions": {
-      "t": {
-          "type": "teleporter",
-          "name": "Next",
-          "description": "Continue to next step",
-          "properties": {
-              "action": "next_in_sequence"
-          }
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
       }
+    }
   },
   "layers": {
     "structure": [
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "0", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"]
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","0","1"],
+      ["1","1","1","1","1","1","1","1","1"]
     ],
     "utilities": [
-      ["s", "an", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", "t", " "],
-      [" ", " ", " ", " ", " ", " ", " ", "sp", " "]
+      ["s","an"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," ","sp"," "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "CityGenerator", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","CityGenerator"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "]
     ]
   }
 }

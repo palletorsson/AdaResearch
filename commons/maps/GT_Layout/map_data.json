@@ -1,67 +1,67 @@
 {
   "map_info": {
-      "name": "Force-Directed Layout",
-      "lookup_name": "GT_Layout",
-      "description": "Nodes scatter at different heights in an asymmetric space â€” force-directed algorithms find equilibrium. The room itself is a graph trying to settle.",
-      "version": "1.0",
-      "format": "json",
-      "dimensions": {
-          "width": 9,
-          "depth": 9,
-          "max_height": 5
-      },
-      "metadata": {
-          "difficulty": "advanced",
-          "category": "graphtheory",
-          "estimated_time": "4-6 minutes",
-          "spatial_temperature": 0.7,
-          "design_notes": "Asymmetric room with platforms at irregular heights â€” nodes scattered like a force-directed graph. Heights 1-4 create organic elevation variety. No symmetry, no grid. Two artifacts on elevated platforms."
-      },
-      "title": "Force-Directed Graph Equilibrium"
+    "name": "Force-Directed Layout",
+    "lookup_name": "GT_Layout",
+    "description": "Nodes scatter at different heights in an asymmetric space â€” force-directed algorithms find equilibrium. The room itself is a graph trying to settle.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 9,
+      "depth": 9,
+      "max_height": 5
+    },
+    "metadata": {
+      "difficulty": "advanced",
+      "category": "graphtheory",
+      "estimated_time": "4-6 minutes",
+      "spatial_temperature": 0.7,
+      "design_notes": "Asymmetric room with platforms at irregular heights â€” nodes scattered like a force-directed graph. Heights 1-4 create organic elevation variety. No symmetry, no grid. Two artifacts on elevated platforms."
+    },
+    "title": "Force-Directed Graph Equilibrium"
   },
   "utility_definitions": {
-      "t": {
-          "type": "teleporter",
-          "name": "Next",
-          "description": "Continue to next step",
-          "properties": {
-              "action": "next_in_sequence"
-          }
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
       }
+    }
   },
   "layers": {
     "structure": [
-      ["1", "1", "2", "5", "5", "5", "5", "5", "5"],
-      ["1", "1", "2", "3", "5", "5", "5", "5", "5"],
-      ["1", "1", "1", "2", "3", "5", "3", "3", "5"],
-      ["5", "1", "1", "1", "2", "5", "3", "3", "5"],
-      ["5", "5", "1", "1", "1", "1", "2", "5", "5"],
-      ["5", "2", "2", "1", "1", "1", "1", "5", "5"],
-      ["5", "3", "3", "5", "1", "1", "1", "1", "1"],
-      ["5", "5", "5", "5", "2", "1", "1", "0", "1"],
-      ["5", "5", "5", "5", "5", "1", "1", "1", "1"]
+      ["1","1","2","5","5","5","5","5","5"],
+      ["1","1","2","3","5","5","5","5","5"],
+      ["1","1","1","2","3","5","3","3","5"],
+      ["5","1","1","1","2","5","3","3","5"],
+      ["5","5","1","1","1","1","2","5","5"],
+      ["5","2","2","1","1","1","1","5","5"],
+      ["5","3","3","5","1","1","1","1","1"],
+      ["5","5","5","5","2","1","1","0","1"],
+      ["5","5","5","5","5","1","1","1","1"]
     ],
     "utilities": [
-      ["s", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "an", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", "t", " "],
-      [" ", " ", " ", " ", " ", " ", " ", "sp", " "]
+      ["s"," "," "," "," "," "," "," "," "],
+      [" ","an"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," ","sp"," "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", "force_directed_layout:0:0:0.6", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," ","force_directed_layout:0:0:0.6"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "]
     ]
   }
 }

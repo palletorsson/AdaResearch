@@ -1,0 +1,104 @@
+{
+  "map_info": {
+    "description": "Protect the core: a signature artifact on a pedestal, surrounded by @must slots for required supporting cast, @block exclusions on the periphery, and a @void frame around the pedestal so the generator cannot dress the sacred cell.",
+    "dimensions": {
+      "depth": 10,
+      "max_height": 6,
+      "width": 10
+    },
+    "format": "json",
+    "lookup_name": "Annotation_Signature",
+    "name": "Annotation: Signature",
+    "version": "1.0",
+    "title": "Protect the Core"
+  },
+  "utility_definitions": {
+    "s": {
+      "properties": {
+        "height": 1.5
+      }
+    },
+    "t": {
+      "description": "Return",
+      "name": "Exit",
+      "properties": {
+        "action": "next_in_sequence"
+      },
+      "type": "teleporter"
+    }
+  },
+  "lighting": {
+    "ambient_color": [
+      0.38,
+      0.4,
+      0.5
+    ],
+    "ambient_energy": 0.6,
+    "directional_light": {
+      "color": [
+        1,
+        0.9,
+        0.8
+      ],
+      "direction": [
+        -0.35,
+        -0.75,
+        -0.35
+      ],
+      "enabled": true,
+      "energy": 1.3
+    }
+  },
+  "settings": {
+    "background": {
+      "color": [
+        0.14,
+        0.12,
+        0.18
+      ],
+      "type": "sky"
+    },
+    "cube_size": 1,
+    "enable_physics": true,
+    "gutter": 0,
+    "show_grid": true
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","2","2","1","1","1","1"],
+      ["1","1","1","1","2","3","1","1","1","1"],
+      ["1","1","1","1","2","2","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"]
+    ],
+    "utilities": [
+      ["@block:dark_sphere"," "," "," "," "," "," "," "," ","@block:dark_sphere"],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," ","@void:5:1"," "," "," "," "," "," "," "],
+      [" ","s"," "," ","@signature:rotation_gimbal"," ","@must:slider_horizontal"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," ","@must:push_button"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," ","@void:5:1"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      ["@block:dark_sphere"," "," "," "," "," "," "," "," ","t"]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","rotation_gimbal"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

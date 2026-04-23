@@ -1,0 +1,253 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://commons/maps/catalog/MapCorridorCompare.gd" id="1_script"]
+
+[sub_resource type="Environment" id="Env_1"]
+background_mode = 1
+background_color = Color(0.06, 0.07, 0.10, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.55, 0.58, 0.66, 1)
+ambient_light_energy = 1.4
+tonemap_mode = 3
+
+[node name="MapCorridorCompare" type="HSplitContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+dragging_enabled = true
+script = ExtResource("1_script")
+
+[node name="MapList" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MapList"]
+layout_mode = 2
+text = "Corridor Compare"
+horizontal_alignment = 1
+
+[node name="Filter" type="LineEdit" parent="MapList"]
+layout_mode = 2
+placeholder_text = "Filter..."
+
+[node name="Summary" type="Label" parent="MapList"]
+layout_mode = 2
+text = "Select a map"
+autowrap_mode = 2
+
+[node name="List" type="ItemList" parent="MapList"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CompareArea" type="HSplitContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LeftPanel" type="VBoxContainer" parent="CompareArea"]
+layout_mode = 2
+custom_minimum_size = Vector2(320, 0)
+size_flags_horizontal = 3
+
+[node name="Header" type="Label" parent="CompareArea/LeftPanel"]
+layout_mode = 2
+text = "ORIGINAL"
+horizontal_alignment = 1
+
+[node name="LayerRow" type="HBoxContainer" parent="CompareArea/LeftPanel"]
+layout_mode = 2
+
+[node name="LayerStructure" type="Button" parent="CompareArea/LeftPanel/LayerRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_pressed = true
+text = "Structure"
+
+[node name="LayerUtilities" type="Button" parent="CompareArea/LeftPanel/LayerRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Utilities"
+
+[node name="LayerInteractables" type="Button" parent="CompareArea/LeftPanel/LayerRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Artifacts"
+
+[node name="LayerJson" type="Button" parent="CompareArea/LeftPanel/LayerRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "JSON"
+
+[node name="Toolbar" type="HBoxContainer" parent="CompareArea/LeftPanel"]
+layout_mode = 2
+
+[node name="Palette" type="HBoxContainer" parent="CompareArea/LeftPanel/Toolbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spacer" type="Control" parent="CompareArea/LeftPanel/Toolbar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SaveBtn" type="Button" parent="CompareArea/LeftPanel/Toolbar"]
+layout_mode = 2
+text = "Save"
+
+[node name="RegenBtn" type="Button" parent="CompareArea/LeftPanel/Toolbar"]
+layout_mode = 2
+text = "Regen →"
+
+[node name="EditArea" type="VBoxContainer" parent="CompareArea/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CanvasScroll" type="ScrollContainer" parent="CompareArea/LeftPanel/EditArea"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Canvas" type="Control" parent="CompareArea/LeftPanel/EditArea/CanvasScroll"]
+custom_minimum_size = Vector2(400, 700)
+layout_mode = 2
+
+[node name="JsonPane" type="VBoxContainer" parent="CompareArea/LeftPanel/EditArea"]
+layout_mode = 2
+size_flags_vertical = 3
+visible = false
+
+[node name="JsonHeader" type="HBoxContainer" parent="CompareArea/LeftPanel/EditArea/JsonPane"]
+layout_mode = 2
+
+[node name="JsonTitle" type="Label" parent="CompareArea/LeftPanel/EditArea/JsonPane/JsonHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "map_data.json"
+
+[node name="JsonApplyBtn" type="Button" parent="CompareArea/LeftPanel/EditArea/JsonPane/JsonHeader"]
+layout_mode = 2
+text = "Apply"
+
+[node name="JsonReloadBtn" type="Button" parent="CompareArea/LeftPanel/EditArea/JsonPane/JsonHeader"]
+layout_mode = 2
+text = "Reload"
+
+[node name="JsonCompactBtn" type="Button" parent="CompareArea/LeftPanel/EditArea/JsonPane/JsonHeader"]
+layout_mode = 2
+text = "Compact"
+
+[node name="JsonEdit" type="TextEdit" parent="CompareArea/LeftPanel/EditArea/JsonPane"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "map_data.json content"
+
+[node name="MidRightArea" type="HSplitContainer" parent="CompareArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RulesPanel" type="VBoxContainer" parent="CompareArea/MidRightArea"]
+layout_mode = 2
+custom_minimum_size = Vector2(240, 0)
+
+[node name="Header" type="Label" parent="CompareArea/MidRightArea/RulesPanel"]
+layout_mode = 2
+text = "RULES"
+horizontal_alignment = 1
+
+[node name="ValidationHeader" type="Label" parent="CompareArea/MidRightArea/RulesPanel"]
+layout_mode = 2
+text = "— validation —"
+horizontal_alignment = 1
+
+[node name="PathStatus" type="Label" parent="CompareArea/MidRightArea/RulesPanel"]
+layout_mode = 2
+text = "path sp→t: —"
+autowrap_mode = 2
+
+[node name="FootprintStatus" type="Label" parent="CompareArea/MidRightArea/RulesPanel"]
+layout_mode = 2
+text = "footprints: —"
+autowrap_mode = 2
+
+[node name="OverlayRow" type="HBoxContainer" parent="CompareArea/MidRightArea/RulesPanel"]
+layout_mode = 2
+
+[node name="ShowPath" type="CheckBox" parent="CompareArea/MidRightArea/RulesPanel/OverlayRow"]
+layout_mode = 2
+button_pressed = true
+text = "path"
+
+[node name="ShowFootprints" type="CheckBox" parent="CompareArea/MidRightArea/RulesPanel/OverlayRow"]
+layout_mode = 2
+button_pressed = true
+text = "footprints"
+
+[node name="RuleIssues" type="RichTextLabel" parent="CompareArea/MidRightArea/RulesPanel"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+bbcode_enabled = true
+scroll_active = true
+text = "no issues"
+
+[node name="RecipeHeader" type="Label" parent="CompareArea/MidRightArea/RulesPanel"]
+layout_mode = 2
+text = "— base shape —"
+horizontal_alignment = 1
+
+[node name="SelectedLabel" type="Label" parent="CompareArea/MidRightArea/RulesPanel"]
+layout_mode = 2
+text = "current: —"
+autowrap_mode = 2
+
+[node name="RecipeList" type="ItemList" parent="CompareArea/MidRightArea/RulesPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RecipeInfo" type="Label" parent="CompareArea/MidRightArea/RulesPanel"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+autowrap_mode = 2
+text = "Pick a recipe."
+
+[node name="ApplyBtn" type="Button" parent="CompareArea/MidRightArea/RulesPanel"]
+layout_mode = 2
+text = "Apply + Regen →"
+
+[node name="ClearBtn" type="Button" parent="CompareArea/MidRightArea/RulesPanel"]
+layout_mode = 2
+text = "Clear override"
+
+[node name="RightPanel" type="VBoxContainer" parent="CompareArea/MidRightArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Header" type="Label" parent="CompareArea/MidRightArea/RightPanel"]
+layout_mode = 2
+text = "CORRIDOR"
+horizontal_alignment = 1
+
+[node name="RightView3D" type="SubViewportContainer" parent="CompareArea/MidRightArea/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+
+[node name="RightViewport" type="SubViewport" parent="CompareArea/MidRightArea/RightPanel/RightView3D"]
+handle_input_locally = false
+size = Vector2i(500, 700)
+render_target_update_mode = 4
+
+[node name="Camera" type="Camera3D" parent="CompareArea/MidRightArea/RightPanel/RightView3D/RightViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.866, 0.5, 0, -0.5, 0.866, 5, 10, 18)
+current = true
+fov = 50.0
+
+[node name="KeyLight" type="DirectionalLight3D" parent="CompareArea/MidRightArea/RightPanel/RightView3D/RightViewport"]
+transform = Transform3D(0.866, -0.25, 0.433, 0, 0.866, 0.5, -0.5, -0.433, 0.75, 2, 8, 2)
+light_energy = 1.1
+shadow_enabled = true
+
+[node name="WorldEnv" type="WorldEnvironment" parent="CompareArea/MidRightArea/RightPanel/RightView3D/RightViewport"]
+environment = SubResource("Env_1")
+
+[node name="MapContainer" type="Node3D" parent="CompareArea/MidRightArea/RightPanel/RightView3D/RightViewport"]

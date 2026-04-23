@@ -1,113 +1,113 @@
 {
   "map_info": {
-	  "description": "Explore vector magnitude and direction with a raised observation platform",
-	  "dimensions": {
-		  "depth": 9,
-		  "max_height": 6,
-		  "width": 9
-	  },
-	  "format": "json",
-	  "lookup_name": "VectorBasics",
-	  "metadata": {
-		  "category": "vectors",
-		  "difficulty": "beginner",
-		  "estimated_time": "5-10 minutes",
-		  "learning_objectives": [
-			  "Vector magnitude",
-			  "Vector direction",
-              "Basis vectors"
-		  ],
-		  "spatial_temperature": 0.3
-	  },
-	  "name": "Explore vector magnitude and direction with a raised observa",
-	  "version": "1.0"
+	"description": "Explore vector magnitude and direction with a raised observation platform",
+	"dimensions": {
+	  "depth": 9,
+	  "max_height": 6,
+	  "width": 9
+	},
+	"format": "json",
+	"lookup_name": "VectorBasics",
+	"metadata": {
+	  "category": "vectors",
+	  "difficulty": "beginner",
+	  "estimated_time": "5-10 minutes",
+	  "learning_objectives": [
+		"Vector magnitude",
+		"Vector direction",
+        "Basis vectors"
+	  ],
+	  "spatial_temperature": 0.3
+	},
+	"name": "Explore vector magnitude and direction with a raised observa",
+	"version": "1.0"
   },
   "utility_definitions": {
-	  "s": {
-		  "properties": {
-			  "height": 5.5
-		  }
-	  },
-	  "t": {
-		  "description": "Continue to next step",
-		  "name": "Next",
-		  "properties": {
-			  "action": "next_in_sequence"
-		  },
-		  "type": "teleporter"
+	"s": {
+	  "properties": {
+		"height": 5.5
 	  }
+	},
+	"t": {
+	  "description": "Continue to next step",
+	  "name": "Next",
+	  "properties": {
+		"action": "next_in_sequence"
+	  },
+	  "type": "teleporter"
+	}
   },
   "lighting": {
-	  "ambient_color": [
-		  0.4,
-		  0.4,
-		  0.5
+	"ambient_color": [
+	  0.4,
+	  0.4,
+	  0.5
+	],
+	"ambient_energy": 0.6,
+	"directional_light": {
+	  "color": [
+		1.0,
+		0.9,
+		0.8
 	  ],
-	  "ambient_energy": 0.6,
-	  "directional_light": {
-		  "color": [
-			  1.0,
-			  0.9,
-			  0.8
-		  ],
-		  "direction": [
-			  -0.4,
-			  -0.7,
-			  -0.4
-		  ],
-		  "enabled": true,
-		  "energy": 1.2
-	  }
+	  "direction": [
+		-0.4,
+		-0.7,
+		-0.4
+	  ],
+	  "enabled": true,
+	  "energy": 1.2
+	}
   },
   "settings": {
-	  "auto_reveal_on_entry": false,
-	  "background": {
-		  "color": [
-			  0.2,
-			  0.3,
-			  0.7
-		  ],
-		  "type": "sky"
-	  },
-	  "cube_size": 1.0,
-	  "enable_physics": true,
-	  "gutter": 0.0,
-	  "initial_tile_visibility": "hidden_except_corners",
-	  "show_grid": true
+	"auto_reveal_on_entry": false,
+	"background": {
+	  "color": [
+		0.2,
+		0.3,
+		0.7
+	  ],
+	  "type": "sky"
+	},
+	"cube_size": 1.0,
+	"enable_physics": true,
+	"gutter": 0.0,
+	"initial_tile_visibility": "hidden_except_corners",
+	"show_grid": true
   },
   "layers": {
 	"interactables": [
-	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-	  [" ", " ", "", " ", " ", " ", " ", " ", " "],
-	  [" ", " ", "VectorBasics:180", " ", "basis_vectors_rig:180:-0.5 ", " ", " ", " ", " "],
-	  [" ", " ", " ", " ", "dark_sphere", " ", " ", " ", " "],
-	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-	  [" ", " ", " ", " ", " ", " ", "", " ", " "],
-	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-	  [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+	  [" "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "],
+	  [" "," ",""," "," "," "," "," "," "],
+	  [" "," ","VectorBasics:180"," ","basis_vectors_rig:180:-0.5 "," "," "," "," "],
+	  [" "," "," "," ","dark_sphere"," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," ",""," "," "],
+	  [" "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "]
 	],
 	"structure": [
-	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-	  ["1", "1", "2", "2", "2", "2", "1", "1", "1"],
-	  ["1", "1", "1", "3", "3", "3", "1", "1", "1"],
-	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-	  ["1", "1", "1", "1", "0", "1", "1", "1", "1"],
-	  ["1", "1", "1", "1", "1", "1", "1", "1", "1"]
+	  ["1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1"],
+	  ["1","1","2","2","2","2","1","1","1"],
+	  ["1","1","1","3","3","3","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","0","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","1","1"]
 	],
 	"utilities": [
-	  [" ", " ", " ", " ", " ", " ", " ", " ", "an.-90"],
-	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-	  [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-	  [" ", " ", " ", " ", " ", " ", " ", "sp", " "],
-	  [" ", " ", " ", " ", "t", " ", " ", " ", " "],
-	  [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+	  [" "," "," "," "," "," "," "," ","an.-90"],
+	  [" "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," ","sp"," "],
+	  [" "," "," "," ","t"," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "]
 	]
   }
 }

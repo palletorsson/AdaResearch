@@ -1,71 +1,73 @@
 {
   "map_info": {
-      "name": "Situated Computation",
-      "lookup_name": "SpeculativeComputation_Situated_Computation",
-      "description": "The view from nowhere was always a view from somewhere. Haraway's situated knowledge, wired into the machine: every computation has a body, a place, a time.",
-      "version": "0.1",
-      "format": "json",
-      "dimensions": {
-          "width": 10,
-          "depth": 10,
-          "max_height": 3
-      },
-      "metadata": {
-          "difficulty": "advanced",
-          "category": "speculative_computation",
-          "status": "scaffold",
-          "design_notes": "SCAFFOLD — the same computation returns different results in different parts of the room. Artifacts TBD (embodied-sensor walk, position-dependent output)."
-      },
-      "title": "Knowledge With a Body"
+    "name": "Situated Computation",
+    "lookup_name": "SpeculativeComputation_Situated_Computation",
+    "description": "The view from nowhere was always a view from somewhere. Haraway's situated knowledge, wired into the machine: every computation has a body, a place, a time.",
+    "version": "0.1",
+    "format": "json",
+    "dimensions": {
+      "width": 10,
+      "depth": 10,
+      "max_height": 3
+    },
+    "metadata": {
+      "difficulty": "advanced",
+      "category": "speculative_computation",
+      "status": "scaffold",
+      "design_notes": "SCAFFOLD — the same computation returns different results in different parts of the room. Artifacts TBD (embodied-sensor walk, position-dependent output)."
+    },
+    "title": "Knowledge With a Body"
   },
   "utility_definitions": {
-      "t": {
-          "type": "teleporter",
-          "name": "Next",
-          "description": "Continue to next step",
-          "properties": { "action": "next_in_sequence" }
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
       }
+    }
   },
   "audio": {
-      "ambient_preset": "minimal_drone",
-      "volume": -10.0
+    "ambient_preset": "minimal_drone",
+    "volume": -10.0
   },
   "layers": {
     "structure": [
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "0", "1", "1", "1", "1", "1"]
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","0","1","1","1","1","1"]
     ],
     "utilities": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "sub:map", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "3t:NO VIEW FROM NOWHERE", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "3t:SAME SUBJECT. FOUR VERDICTS.", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "t", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","sub:map"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" ","3t:NO VIEW FROM NOWHERE"," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" ","3t:SAME SUBJECT. FOUR VERDICTS."," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","t"," "," "," "," "," "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", "situated_readout:0:0.3#verdict:NW", " ", " ", " ", " ", "situated_readout:0:0.3#verdict:NE", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", "situated_readout:0:0.3#verdict:SW", " ", " ", " ", " ", "situated_readout:0:0.3#verdict:SE", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," ","situated_readout:0:0.3#verdict:NW"," "," "," "," ","situated_readout:0:0.3#verdict:NE"," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," ","situated_readout:0:0.3#verdict:SW"," "," "," "," ","situated_readout:0:0.3#verdict:SE"," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "]
     ]
   }
 }

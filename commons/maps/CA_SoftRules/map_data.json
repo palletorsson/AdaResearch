@@ -1,105 +1,105 @@
 {
   "map_info": {
-      "title": "Soft Rules",
-      "name": "CA_SoftRules",
-      "lookup_name": "CA_SoftRules",
-      "description": "Soft rules â€” stochastic automata, Rule 30/110 gravity simulation, and CA on spherical topology",
-      "version": "1.0",
-      "format": "json",
-      "dimensions": {
-          "width": 7,
-          "depth": 9,
-          "max_height": 2
-      },
-      "metadata": {
-          "difficulty": "intermediate",
-          "category": "cellular_automata",
-          "estimated_time": "5 minutes",
-          "learning_objectives": [
-              "Fluid dynamics",
-              "Elementary rules",
-              "Computational universality"
-          ]
-      }
+    "title": "Soft Rules",
+    "name": "CA_SoftRules",
+    "lookup_name": "CA_SoftRules",
+    "description": "Soft rules â€” stochastic automata, Rule 30/110 gravity simulation, and CA on spherical topology",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 7,
+      "depth": 9,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "cellular_automata",
+      "estimated_time": "5 minutes",
+      "learning_objectives": [
+        "Fluid dynamics",
+        "Elementary rules",
+        "Computational universality"
+      ]
+    }
   },
   "utility_definitions": {
-      "t": {
-          "type": "teleporter",
-          "name": "Next",
-          "description": "Continue to next step",
-          "properties": {
-              "action": "next_in_sequence"
-          }
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
       }
+    }
   },
   "lighting": {
-      "ambient_color": [
-          0.4,
-          0.4,
-          0.5
+    "ambient_color": [
+      0.4,
+      0.4,
+      0.5
+    ],
+    "ambient_energy": 0.6,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.4,
+        -0.7,
+        -0.4
       ],
-      "ambient_energy": 0.6,
-      "directional_light": {
-          "enabled": true,
-          "direction": [
-              -0.4,
-              -0.7,
-              -0.4
-          ],
-          "color": [
-              1.0,
-              0.9,
-              0.8
-          ],
-          "energy": 1.2
-      }
+      "color": [
+        1.0,
+        0.9,
+        0.8
+      ],
+      "energy": 1.2
+    }
   },
   "settings": {
-      "cube_size": 1.0,
-      "gutter": 0.0,
-      "show_grid": true,
-      "enable_physics": true,
-      "auto_reveal_on_entry": false,
-      "initial_tile_visibility": "hidden_except_corners",
-      "background": {
-          "type": "sky",
-          "color": [
-              0.2,
-              0.3,
-              0.7
-          ]
-      }
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "auto_reveal_on_entry": false,
+    "initial_tile_visibility": "hidden_except_corners",
+    "background": {
+      "type": "sky",
+      "color": [
+        0.2,
+        0.3,
+        0.7
+      ]
+    }
   },
   "layers": {
     "structure": [
-      ["1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "0", "1"],
-      ["1", "1", "1", "1", "1", "1", "1"]
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","0","1"],
+      ["1","1","1","1","1","1","1"]
     ],
     "utilities": [
-      ["sp", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", "t", " "],
-      [" ", " ", " ", " ", " ", " ", " "]
+      ["sp"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", "ca_sphere", " ", "", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", "rule_30_110_gravity", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," ","ca_sphere"," ",""," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," ","rule_30_110_gravity"," "," "," "," "]
     ]
   }
 }

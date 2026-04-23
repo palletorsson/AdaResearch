@@ -1,0 +1,65 @@
+{
+  "artifact": "example_2_1_forces_vr",
+  "title": "Building Forces \u2014 From Push to Kepler in One Artifact",
+  "concept_layer": "forces change motion via F=ma; gravity, wind, drag, and attraction as additive vector fields; same equation, different worlds",
+  "technique_first": ["Mover class with velocity/acceleration", "apply_force() accumulator", "quadratic drag F = -\u00bdCd|v|\u00b2v\u0302", "inverse-square attraction", "ImmediateMesh arrow grid", "Kepler equal-area sweep triangles", "mode toggle pattern"],
+  "technique_reference": ["Node3D + MeshInstance3D (Point_One)", "ImmediateMesh (Trans_Translation)", "Basis and direction vectors (Point_Line)", "Vector3 operations (Trans_Rotation)", "SpotLight3D light_color pattern (Color_Flashlight)", "RackTemplates sliders (rotation_gimbal)"],
+  "domain_deferred": ["angular momentum \u2192 wavefunctions", "n-body chaos \u2192 cellularautomata / swarm", "deformable bodies \u2192 softbodies", "gradient-descent-as-force \u2192 machinelearning"],
+  "capture_leaks": {
+    "rigid_body": "Mover treats each body as a point with mass. Rotation, internal structure, deformation \u2014 all deferred to later sequences.",
+    "instantaneous_force_application": "The model assumes forces apply continuously but Euler integration ticks discretely; small errors accumulate.",
+    "closed_system": "Energy should be conserved (minus drag), but numerical integration leaks energy; orbital stability requires corrections.",
+    "deterministic_predictability": "Three bodies is enough for chaos. The orbital mode with three movers hints; swarm + n-body push further."
+  },
+  "limit": "Forces are modeled as vectors that accumulate. This works for a falling ball and for a planet orbiting the sun because they share the same equation. What it cannot hold: deformable matter, quantum uncertainty, relativistic speeds, systems where the observer is entangled with the observed. This map is classical mechanics made touchable.",
+  "stages": [
+    {
+      "title": "From color to motion",
+      "thinking": "Color_Flashlight taught that color is not added to the world \u2014 it is revealed by choosing which wavelengths are offered. Now motion: not added to space, revealed by choosing which forces accumulate. Both hinge on what a source GIVES. The world then responds.",
+      "code": "# Color_Flashlight:\n#   light_color = chosen subset of wavelengths\n#   surface response = filtering by material albedo\n#\n# Now:\n#   force = chosen vector in R\u00b3\n#   body response = F = m\u00b7a\n#\n# Both start with choosing what to offer.\n# The world answers with what it does.\n\nextends Node3D\n\n# The foundational equation of classical mechanics:\n#   F = m \u00b7 a\n#   a = F / m\n#   v += a \u00b7 \u0394t\n#   p += v \u00b7 \u0394t",
+      "concepts": ["F = ma", "force as vector", "equation-first pedagogy"]
+    },
+    {
+      "title": "A body is (mass, position, velocity, acceleration)",
+      "thinking": "Before forces, define what is being pushed. Nature of Code calls it a Mover. Four fields. Mass is scalar (how heavy). Position is Vector3 (where). Velocity is Vector3 (how fast, which way). Acceleration is the buffer where forces accumulate before being applied. The whole physics of this map reduces to these four.",
+      "code": "class Mover:\n\tvar mass: float = 1.0\n\tvar position_v: Vector3 = Vector3.ZERO\n\tvar velocity: Vector3 = Vector3.ZERO\n\tvar acceleration: Vector3 = Vector3.ZERO\n\tvar bounce_damping: float = 0.5\n\n# Configure several at once\nconst MOVER_CONFIGS := [\n\t{ \"mass\": 0.6, \"pos\": Vector3(-0.25, 0.35, 0.0), \"vel\": Vector3.ZERO },\n\t{ \"mass\": 1.0, \"pos\": Vector3(-0.08, 0.35, -0.1), \"vel\": Vector3.ZERO },\n\t{ \"mass\": 1.8, \"pos\": Vector3(0.12, 0.35, 0.05), \"vel\": Vector3.ZERO },\n\t{ \"mass\": 2.5, \"pos\": Vector3(0.28, 0.35, -0.05), \"vel\": Vector3.ZERO },\n]\n# Different masses, same forces \u2014 see different responses",
+      "concepts": ["Mover pattern", "state as four fields", "Nature of Code heritage", "mass as scalar"]
+    },
+    {
+      "title": "Forces accumulate, then apply",
+      "thinking": "apply_force(force) is not 'move this body.' It is 'add this to the acceleration buffer, divided by mass.' Many forces in one frame. At the end of the frame, acceleration becomes velocity becomes position. Then acceleration resets. This separation \u2014 accumulate, integrate, reset \u2014 is the heart of rigid-body physics.",
+      "code": "# On Mover (conceptually):\nfunc apply_force(force: Vector3) -> void:\n\tacceleration += force / mass  # F = m\u00b7a  \u2192  a += F/m\n\nfunc update(delta: float) -> void:\n\tvelocity += acceleration * delta\n\tposition_v += velocity * delta\n\tacceleration = Vector3.ZERO  # reset after applying\n\n# In _step_physics:\nfor mover in _movers:\n\t# Gravity (mass-dependent \u2014 heavier = stronger pull)\n\tvar gravity = Vector3(0, -gravity_strength, 0) * mover.mass\n\tmover.apply_force(gravity)\n\t\n\t# Wind (mass-independent \u2014 uniform push)\n\tif wind_enabled:\n\t\tmover.apply_force(Vector3(wind_strength, 0, 0))\n\t\n\t# Air resistance (velocity-dependent drag)\n\tmover.apply_force(_compute_drag(mover))\n\t\n\tmover.update(delta)  # then integrate",
+      "concepts": ["force accumulation", "Euler integration", "mass-dependent vs mass-independent forces", "accumulate-apply-reset cycle"]
+    },
+    {
+      "title": "Drag opposes velocity, scales with v\u00b2",
+      "thinking": "Quadratic drag is where the physics stops being linear. The drag force points opposite to velocity (decelerating the body) and grows with the square of speed. Slow bodies barely feel it; fast bodies slow dramatically. This is why cars have terminal velocity, why rain doesn't accelerate indefinitely, why a paratrooper\u2019s terminal velocity is ~200 km/h.",
+      "code": "# F_drag = -\u00bd \u00b7 Cd \u00b7 |v|\u00b2 \u00b7 v\u0302\n#   Cd = drag coefficient (shape + medium)\n#   |v| = speed (magnitude of velocity)\n#   v\u0302 = unit vector in direction of motion\n#   minus sign: opposes motion\n\nfunc _compute_drag(mover: Mover) -> Vector3:\n\tvar speed = mover.velocity.length()\n\tif speed < 0.001:\n\t\treturn Vector3.ZERO\n\tvar drag_mag = 0.5 * drag_coefficient * speed * speed\n\treturn -mover.velocity.normalized() * drag_mag",
+      "concepts": ["quadratic drag", "velocity-dependent force", "terminal velocity", "unit vector and magnitude"]
+    },
+    {
+      "title": "Switch to orbital \u2014 same math, different world",
+      "thinking": "A mode toggle. Same movers, same apply_force, same update loop. But now the force is Newton's law of gravitation: F = G\u00b7m\u2081\u00b7m\u2082/r\u00b2, pointing from the body toward the central mass. One equation does terrestrial physics (ball falls down) AND celestial mechanics (planet orbits sun). The same F=ma that lets the mover fall through wind and drag also sends planets around the star. Universality is the lesson.",
+      "code": "elif _mode == Mode.ORBITAL:\n\t# Gravitational attraction to central body\n\tvar dir: Vector3 = -mover.position_v\n\tvar dist: float = dir.length()\n\tdist = clamp(dist, 0.04, 1.0)\n\tdir = dir.normalized()\n\tvar strength: float = (orbital_G * central_mass * mover.mass) / (dist * dist)\n\tmover.apply_force(dir * strength)\n\t\n\t# Light drag for stability (numerical integration is leaky)\n\tmover.apply_force(_compute_drag(mover) * 0.3)\n\n# Newton's law:  F = G \u00b7 M \u00b7 m / r\u00b2\n# Direction: toward the massive body (attractive)\n# This SAME equation gives: apples falling, moons orbiting, \n# galaxies colliding. Scale invariance is not a coincidence.",
+      "concepts": ["inverse-square law", "Newton gravitation", "universality", "mode toggle as variation-on-theme"]
+    },
+    {
+      "title": "Draw the force field as arrows",
+      "thinking": "Forces are invisible. We make them visible by sampling space: at each point in a grid, compute what force would act on a unit mass there, draw an arrow. ImmediateMesh with PRIMITIVE_LINES renders dozens of arrows per frame. In forces mode: arrows point down-and-right (gravity + wind). In orbital mode: arrows point radially inward, with length varying by 1/r\u00b2. The field IS the theory, made geometric.",
+      "code": "func _draw_force_field() -> void:\n\tvar im := ImmediateMesh.new()\n\tvar half := (FIELD_GRID_SIZE - 1) * FIELD_SPACING * 0.5\n\t\n\tfor xi in range(FIELD_GRID_SIZE):\n\t\tfor yi in range(FIELD_GRID_SIZE):\n\t\t\tvar gx = xi * FIELD_SPACING - half\n\t\t\tvar gy = yi * FIELD_SPACING - half + 0.15\n\t\t\tvar origin = Vector3(gx, gy, -0.15)\n\t\t\t\n\t\t\tvar force = Vector3(0, -gravity_strength, 0)\n\t\t\tif wind_enabled:\n\t\t\t\tforce += Vector3(wind_strength, 0, 0)\n\t\t\t\n\t\t\t_draw_arrow(im, origin, force, Color(0.45, 0.65, 0.95, 0.35))\n\t\n\t_field_mesh_inst.mesh = im\n\nfunc _draw_arrow(im: ImmediateMesh, origin: Vector3, force: Vector3, color: Color) -> void:\n\tvar dir = force.normalized()\n\tvar length = clamp(force.length() * ARROW_SCALE, 0.01, 0.06)\n\tvar tip = origin + dir * length\n\t\n\tim.surface_begin(Mesh.PRIMITIVE_LINES)\n\tim.surface_set_color(color)\n\tim.surface_add_vertex(origin)\n\tim.surface_set_color(color)\n\tim.surface_add_vertex(tip)\n\tim.surface_end()\n\t# ...plus arrowhead as two short lines",
+      "concepts": ["force field sampling", "ImmediateMesh arrows", "field vs particle view", "vector field visualization"]
+    },
+    {
+      "title": "Kepler's law visible \u2014 equal areas in equal time",
+      "thinking": "In orbital mode, draw triangles from the central body to the mover's position at fixed intervals. Kepler's second law: the line from sun to planet sweeps equal areas in equal time. Fast near periapsis, slow near apoapsis \u2014 the triangles compensate. This is not added as a teaching overlay. It is an emergent visualization: run physics, record positions at intervals, draw triangles. The law reveals itself.",
+      "code": "const SWEEP_INTERVAL := 0.5\n\nfunc _update_sweep(delta: float) -> void:\n\t_sweep_timer += delta\n\tif _sweep_timer < SWEEP_INTERVAL:\n\t\treturn\n\t_sweep_timer = 0.0\n\t\n\tfor mover in _movers:\n\t\tvar prev = _sweep_prev_pos.get(mover, null)\n\t\tif prev != null:\n\t\t\t_sweep_triangles.append({\n\t\t\t\t\"a\": Vector3.ZERO,\n\t\t\t\t\"b\": Vector3(prev),\n\t\t\t\t\"c\": Vector3(mover.position_v),\n\t\t\t\t\"color\": mover.primary_color,\n\t\t\t})\n\t\t_sweep_prev_pos[mover] = Vector3(mover.position_v)\n\n# Equal intervals, unequal triangles by shape \u2014\n# but EQUAL by area. That's Kepler's discovery.\n# The physics produces it; the visualization\n# confirms it.",
+      "concepts": ["Kepler's second law", "emergent visualization", "triangle area proxy", "angular momentum conservation"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "A forces artifact knows what it is. Not a physics engine \u2014 a classical-mechanics demonstrator. F=ma does terrestrial and celestial work with the same line of code because Newton's universality is real. Drag teaches terminal velocity. The orbital toggle teaches scale invariance. The field arrows make the invisible visible. Kepler sweeps confirm the invariant. What this artifact refuses: deformation, chaos beyond n=3, quantum uncertainty, relativistic speeds. Those are doors to later sequences.",
+      "code": "# @identity\n# essence: forces accumulate on Mover bodies via apply_force(); gravity, wind, drag, and attraction share F=ma\n# desire: learner feels that the same equation that drops a ball orbits a planet \u2014 universality of classical mechanics\n# critical_parameter: mode toggle \u2014 FORCES (terrestrial with wind+drag) vs ORBITAL (celestial with inverse-square)\n# triggers: sliders adjust gravity/wind/drag; mover positions record trails; sweep triangles reveal Kepler's second law\n# emerges: the force field as a sampled invisible object; terminal velocity from v\u00b2 drag; scale invariance of F=ma\n# needs: 3 force sliders [has]; 4 movers [has]; trail rendering [has]; force-field arrows [has]; Kepler sweep [has]\n# relationships: builds on Trans_Rotation (vectors in 3D); bridges to softbodies (when bodies deform) and swarm (when movers couple)\n# truth: F = m \u00b7 a is the simplest equation that still describes the fall of an apple and the orbit of the moon",
+      "concepts": ["@identity", "classical mechanics", "universality of F=ma", "truth"]
+    }
+  ]
+}

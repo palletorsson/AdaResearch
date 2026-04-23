@@ -1,0 +1,80 @@
+{
+  "artifact": "gradient_descent_visualization",
+  "title": "Building Four Optimizers Racing Down the Same Hill",
+  "concept_layer": "gradient descent: \u03b8(t+1) = \u03b8(t) - \u03b7\u2207f(\u03b8); learning as descending a landscape; optimizer variants as different descent strategies",
+  "technique_first": ["partial derivative approximation via finite differences", "parameter update rule", "momentum (velocity accumulator)", "Nesterov lookahead", "Adam adaptive learning rates", "3D loss surface as heightmap", "optimizer race as visualization"],
+  "technique_reference": ["Mover pattern (ForcesFoundations)", "Noise terrain (Noise_Perlin_Simplex)", "Fitness landscape (GeneticProgramming)", "Swarm particle (Boids)", "Vector field sampling (ForcesFoundations)"],
+  "domain_deferred": ["backpropagation through networks \u2192 ML_Neural_Networks", "stochastic mini-batch variance \u2192 ML_Classification", "second-order methods (Newton, natural gradient) \u2192 later ML maps", "non-differentiable optimization \u2192 swarm (already covered) + genetic (already covered)", "information geometry \u2192 QFEP"],
+  "capture_leaks": {
+    "two_dimensional_loss": "We visualize 2D loss (\u03b8\u2081, \u03b8\u2082) as a 3D surface. Real ML has millions of dimensions; intuition from 2D is partial \u2014 saddle points dominate high-D.",
+    "smooth_differentiable_surface": "The surfaces here are nice polynomials. Real loss landscapes have cliffs, plateaus, discontinuities \u2014 which is why modern optimizers use clipping, warmup, schedules.",
+    "fixed_loss_function": "Each run optimizes a static function. Real ML has STOCHASTIC loss (mini-batches give noisy gradients). The artifact hints at this but doesn't demonstrate it.",
+    "no_regularization": "We descend pure loss. Real training adds regularization (L2, dropout) whose effect on the landscape is profound. Deferred.",
+    "single_basin_thinking": "Players will see optimizers converge to A minimum and think 'solved.' In practice, most losses have many comparable minima and WHICH one you reach matters. Mode connectivity is deep \u2014 deferred."
+  },
+  "limit": "Four colored particles race down a hill. They all reach the bottom eventually. But they take different routes, different times, different directions \u2014 and those differences are the history of 70 years of numerical optimization. What the artifact refuses: high-dimensional reality, stochasticity, regularization, the politics of loss functions. Each is a door. This is where the 'optimization' word becomes tangible.",
+  "grammar_alignment": {
+    "sequence": "machinelearning",
+    "operations_taught": ["optimize_gradient"],
+    "operations_deferred_to_sequence": ["classify (ML_Classification)", "evolve (ML_Evolution)", "remember (ML_Memory)", "generate_learned (ML_Generative)"],
+    "note": "gradient_descent_visualization teaches optimize_gradient \u2014 the core atom of modern ML. Classification is gradient descent with a specific loss. Evolution is gradient-free variant. Generation is gradient descent on a generative model. All ML operations compose from this one \u2014 plus the specific loss you choose."
+  },
+  "biome_alignment": {
+    "sequence": "machinelearning",
+    "density_at_entry": 0.9,
+    "kingdoms_unlocked": ["flower", "tree", "fungus", "creature"],
+    "hand_verbs_gained": ["descend_gradient", "train_model"],
+    "catalyst_mode": "adaptive",
+    "note": "The 'adaptive' catalyst turns static forms into forms that optimize themselves toward a fitness. Creatures in the biome now learn from encounters \u2014 repeated interactions improve their behavior. This is the sequence where the world gets smart."
+  },
+  "stages": [
+    {
+      "title": "From flock to gradient",
+      "thinking": "SwarmIntelligence_Boids taught that coordination is geometry \u2014 many agents with local rules yielding collective behavior. Now one agent, no neighbors, but with a 'local rule' of a different kind: follow the slope. If you can feel which direction goes DOWN, you can reach the bottom. That\u2019s it. Optimization. No neighbors, no fitness evaluation over a population \u2014 just the local derivative and the step.",
+      "code": "# Boids: many agents, local neighbor rules \u2192 collective flock\n# Gradient descent: ONE agent, local slope rule \u2192 finds valleys\n#\n# Rule: go downhill.\n# What you know locally: the gradient (slope vector).\n# What you don't know: the global shape of the landscape.\n#\n# \u03b8(t+1) = \u03b8(t) - \u03b7 \u00b7 \u2207f(\u03b8)\n#   \u03b8    parameters (position on landscape)\n#   f(\u03b8) loss function (elevation)\n#   \u2207f    gradient (direction of steepest ascent)\n#   \u03b7    learning rate (step size)\n#\n# This equation trained every neural network you've used.",
+      "concepts": ["gradient descent", "local slope", "learning rate \u03b7", "parameter update rule"]
+    },
+    {
+      "title": "The loss surface \u2014 terrain you cannot fully see",
+      "thinking": "We need something to descend. A loss function: f(\u03b8\u2081, \u03b8\u2082). Build a 3D surface where height = f(x, y). For this artifact, multiple test surfaces cycle: a bowl (easy), a saddle (hard), a nonlinear bumpy landscape, Rosenbrock\u2019s banana valley (classic). The player sees the surface from above AND walks on it. Colors encode height. The surface IS the problem.",
+      "code": "enum Surface { BOWL, SADDLE, ROSENBROCK, HIMMELBLAU }\n\nfunc _compute_loss(x: float, y: float, surface: int) -> float:\n\tmatch surface:\n\t\tSurface.BOWL:\n\t\t\treturn x * x + y * y\n\t\tSurface.SADDLE:\n\t\t\treturn x * x - y * y\n\t\tSurface.ROSENBROCK:\n\t\t\tvar a = 1.0 - x\n\t\t\tvar b = y - x * x\n\t\t\treturn a * a + 100.0 * b * b\n\t\tSurface.HIMMELBLAU:\n\t\t\tvar u = x * x + y - 11.0\n\t\t\tvar v = x + y * y - 7.0\n\t\t\treturn u * u + v * v\n\t_:\n\t\treturn 0.0\n\n# Each function teaches a different lesson:\n#   BOWL \u2192 convex, one minimum, easy\n#   SADDLE \u2192 saddle point, SGD gets stuck\n#   ROSENBROCK \u2192 narrow curved valley\n#   HIMMELBLAU \u2192 four minima, which do you reach?",
+      "concepts": ["loss function", "convex vs nonconvex", "test surfaces", "heightmap = problem"]
+    },
+    {
+      "title": "Compute the gradient \u2014 finite differences",
+      "thinking": "The gradient is the vector of partial derivatives. We could compute it analytically (since we know the surface formula) but for generality we use finite differences: evaluate the surface at (x+h, y) and (x-h, y), subtract, divide by 2h. This gives the partial with respect to x. Do the same for y. The gradient points in the direction of steepest ASCENT. We go in the OPPOSITE direction \u2014 downhill.",
+      "code": "const H := 0.01  # finite-difference step size\n\nfunc _gradient(x: float, y: float, surface: int) -> Vector2:\n\tvar df_dx = (_compute_loss(x + H, y, surface) - _compute_loss(x - H, y, surface)) / (2.0 * H)\n\tvar df_dy = (_compute_loss(x, y + H, surface) - _compute_loss(x, y - H, surface)) / (2.0 * H)\n\treturn Vector2(df_dx, df_dy)\n\n# Finite differences: numerical gradient\n# Analytic gradient is faster and more precise\n# but FD works for ANY function where you can evaluate points.\n# This is why FD is the teaching choice here.",
+      "concepts": ["finite differences", "partial derivatives", "numerical vs analytic gradient", "central difference formula"]
+    },
+    {
+      "title": "Vanilla SGD \u2014 the simplest optimizer",
+      "thinking": "Stochastic Gradient Descent (SGD) in its simplest form: compute the gradient, step against it, scaled by learning rate. That\u2019s the whole algorithm. Works great on the bowl. Slow in narrow valleys (Rosenbrock). Gets stuck at saddle points. But it\u2019s the baseline. Every optimizer variant is 'SGD plus a trick to fix some specific failure mode.'",
+      "code": "class SGD:\n\tvar position: Vector2\n\tvar learning_rate: float = 0.01\n\t\n\tfunc step(grad: Vector2) -> void:\n\t\tposition -= grad * learning_rate\n\n# \u03b8(t+1) = \u03b8(t) - \u03b7 \u00b7 \u2207f(\u03b8)\n# No memory. No adaptation. Just: here's the slope, step against it.\n#\n# SGD failures the other optimizers fix:\n#   - slow in long narrow valleys   \u2192 Momentum\n#   - overshoots at bottom           \u2192 Nesterov\n#   - different scales per parameter \u2192 Adam",
+      "concepts": ["SGD", "parameter update", "learning_rate", "baseline optimizer"]
+    },
+    {
+      "title": "Momentum \u2014 accumulate velocity",
+      "thinking": "SGD forgets where it was going. Momentum remembers: velocity accumulates between steps. Like a ball rolling downhill, it gains speed in consistent directions and resists direction changes. In narrow valleys (like Rosenbrock\u2019s banana), momentum lets the optimizer COAST along the bottom instead of zigzagging between walls. The price: it can overshoot the minimum, which is why the next optimizer (Nesterov) adds a lookahead correction.",
+      "code": "class Momentum:\n\tvar position: Vector2\n\tvar velocity: Vector2 = Vector2.ZERO\n\tvar learning_rate: float = 0.01\n\tvar beta: float = 0.9  # momentum coefficient\n\t\n\tfunc step(grad: Vector2) -> void:\n\t\tvelocity = velocity * beta - grad * learning_rate\n\t\tposition += velocity\n\n# velocity is the exponentially-decayed average of past gradients\n#   beta = 0.0  \u2192 same as SGD\n#   beta = 0.9  \u2192 strong memory of past direction\n#   beta = 0.99 \u2192 can oscillate, overshoot\n#\n# 'Heavy ball' metaphor: accumulated momentum pushes through saddles.",
+      "concepts": ["momentum", "velocity accumulation", "exponential decay", "heavy ball analogy"]
+    },
+    {
+      "title": "Nesterov \u2014 lookahead momentum",
+      "thinking": "Momentum pushes you forward, but you only compute the gradient AT your current position. Nesterov\u2019s trick: compute the gradient at the position you\u2019re ABOUT to reach given your momentum. This is a lookahead. If the momentum is carrying you into an upslope, Nesterov notices earlier and corrects earlier. Convergence is faster on curved paths. It\u2019s the same algorithm as Momentum with one line changed \u2014 and that one line gave Nesterov his name.",
+      "code": "class Nesterov:\n\tvar position: Vector2\n\tvar velocity: Vector2 = Vector2.ZERO\n\tvar learning_rate: float = 0.01\n\tvar beta: float = 0.9\n\t\n\tfunc step_nesterov(f_callable: Callable) -> void:\n\t\t# Look ahead: where will we be after momentum?\n\t\tvar lookahead_pos = position + velocity * beta\n\t\t# Compute gradient AT the lookahead position\n\t\tvar grad = f_callable.call(lookahead_pos)\n\t\t# Now update as momentum\n\t\tvelocity = velocity * beta - grad * learning_rate\n\t\tposition += velocity\n\n# The lookahead lets you 'see' your future position\n# before committing. One line of difference. Massive improvement.",
+      "concepts": ["Nesterov lookahead", "predictive gradient", "correction before commit", "acceleration"]
+    },
+    {
+      "title": "Adam \u2014 adapt learning rate per parameter",
+      "thinking": "Adam combines momentum (first moment) with per-parameter learning rates (second moment). It scales each update by the inverse square root of an exponentially-averaged squared-gradient. Parameters with large recent gradients get SMALLER updates; parameters with small gradients get LARGER updates. Adaptive. Robust. The default optimizer for most of deep learning since 2015. In the race, it usually wins.",
+      "code": "class Adam:\n\tvar position: Vector2\n\tvar m: Vector2 = Vector2.ZERO  # first moment (momentum)\n\tvar v: Vector2 = Vector2.ZERO  # second moment (variance)\n\tvar t: int = 0\n\tvar learning_rate: float = 0.01\n\tvar beta1: float = 0.9\n\tvar beta2: float = 0.999\n\tvar eps: float = 1e-8\n\t\n\tfunc step(grad: Vector2) -> void:\n\t\tt += 1\n\t\tm = m * beta1 + grad * (1.0 - beta1)\n\t\tv = v * beta2 + grad * grad * (1.0 - beta2)\n\t\t\n\t\t# Bias correction for early steps\n\t\tvar m_hat = m / (1.0 - pow(beta1, t))\n\t\tvar v_hat = v / (1.0 - pow(beta2, t))\n\t\t\n\t\t# Per-parameter adaptive step\n\t\tposition -= learning_rate * m_hat / (v_hat.sqrt() + eps)",
+      "concepts": ["Adam optimizer", "first moment", "second moment", "per-parameter adaptation", "bias correction"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "Four racers on one hill. All obey the local-gradient rule. None can see the full landscape. SGD is honest and slow. Momentum is energetic but impulsive. Nesterov is careful. Adam is smart. In 30 seconds of visualization, the player sees why the 2010s were Adam\u2019s decade. The critical parameter is learning_rate because it sits between two failure modes: too small, endless creep; too large, wild oscillation. That balance is the whole game.",
+      "code": "# @identity\n# essence: \u03b8(t+1) = \u03b8(t) - \u03b7\u2207f(\u03b8) \u2014 follow the negative gradient downhill; four variants racing on the same surface\n# desire: watch SGD, Momentum, Nesterov, and Adam race down a loss landscape, each with its own strategy\n# critical_parameter: learning_rate (\u03b7) \u2014 too small creeps, too large oscillates, just right converges\n# triggers: mode button switches between optimizer race, convergence analysis, and Hessian eigenvalue display; function button cycles loss surfaces\n# emerges: Adam's adaptive superiority on most surfaces; saddle points that trap SGD; Nesterov's look-ahead advantage\n# needs: VR push button for mode [has], sliders for learning rate, momentum, speed [has]\n# relationships: unlocks neural_network_visualization (gradient descent IS the training loop); contrasts 9_3_smart_rockets_vr (gradient-free vs gradient-based optimization)\n# truth: learning is descending a landscape you cannot fully see \u2014 the gradient is the only local truth available",
+      "concepts": ["@identity", "optimizer race", "local-slope pedagogy", "learning_rate sweet spot", "truth"]
+    }
+  ]
+}

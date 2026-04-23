@@ -1,104 +1,104 @@
 {
   "map_info": {
-      "name": "Tutorial_Start",
-      "lookup_name": "Tutorial_Start",
-      "description": "The absolute beginning - just one cube and an exit. Learn to exist in VR space.",
-      "version": "1.0",
-      "format": "json",
-      "created_from": "new_minimal_design",
-      "dimensions": {
-          "width": 3,
-          "depth": 3,
-          "max_height": 1
-      },
-      "metadata": {
-          "difficulty": "absolute_beginner",
-          "category": "onboarding",
-          "estimated_time": "30 seconds",
-          "learning_objectives": [
-              "Understand VR spatial presence",
-              "Learn basic movement",
-              "Concept of world progression"
-          ]
-      }
+    "name": "Tutorial_Start",
+    "lookup_name": "Tutorial_Start",
+    "description": "The absolute beginning - just one cube and an exit. Learn to exist in VR space.",
+    "version": "1.0",
+    "format": "json",
+    "created_from": "new_minimal_design",
+    "dimensions": {
+      "width": 3,
+      "depth": 3,
+      "max_height": 1
+    },
+    "metadata": {
+      "difficulty": "absolute_beginner",
+      "category": "onboarding",
+      "estimated_time": "30 seconds",
+      "learning_objectives": [
+        "Understand VR spatial presence",
+        "Learn basic movement",
+        "Concept of world progression"
+      ]
+    }
   },
   "utility_definitions": {
-      "t": {
-          "type": "teleporter",
-          "name": "Next",
-          "description": "Continue to next step",
-          "properties": {
-              "action": "next_in_sequence"
-          }
-      },
-      "s": {
-          "properties": {
-              "height": 5.5
-          }
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
       }
+    },
+    "s": {
+      "properties": {
+        "height": 5.5
+      }
+    }
   },
   "documentation": {
-      "summary": "Tutorial_Start - Motion Showcase",
-      "layout": "3x3 entry plate featuring three animated cubes directly in front of the teleporter.",
-      "objective": "Demonstrate rotating and oscillating cube behaviors right after spawning.",
-      "key_elements": [
-          "Spawn `s` at (0,0)",
-          "Animated trio: `rotating_cube`, `oscillation_cube`, `rotation_oscillation_cube` across the south row",
-          "Teleporter `t` at (1,2) to move into the next tutorial"
-      ]
+    "summary": "Tutorial_Start - Motion Showcase",
+    "layout": "3x3 entry plate featuring three animated cubes directly in front of the teleporter.",
+    "objective": "Demonstrate rotating and oscillating cube behaviors right after spawning.",
+    "key_elements": [
+      "Spawn `s` at (0,0)",
+      "Animated trio: `rotating_cube`, `oscillation_cube`, `rotation_oscillation_cube` across the south row",
+      "Teleporter `t` at (1,2) to move into the next tutorial"
+    ]
   },
   "lighting": {
-      "ambient_color": [
-          0.4,
-          0.4,
-          0.5
+    "ambient_color": [
+      0.4,
+      0.4,
+      0.5
+    ],
+    "ambient_energy": 0.8,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.2,
+        -0.8,
+        -0.1
       ],
-      "ambient_energy": 0.8,
-      "directional_light": {
-          "enabled": true,
-          "direction": [
-              -0.2,
-              -0.8,
-              -0.1
-          ],
-          "color": [
-              1.0,
-              1.0,
-              1.0
-          ],
-          "energy": 1.2
-      }
+      "color": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "energy": 1.2
+    }
   },
   "settings": {
-      "cube_size": 1.0,
-      "gutter": 0.0,
-      "show_grid": false,
-      "enable_physics": true,
-      "background": {
-          "type": "sky",
-          "color": [
-              0.2,
-              0.3,
-              0.5
-          ]
-      },
-      "special_instructions": "This is the absolute minimal VR experience - just exist in space and move forward"
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": false,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.2,
+        0.3,
+        0.5
+      ]
+    },
+    "special_instructions": "This is the absolute minimal VR experience - just exist in space and move forward"
   },
   "layers": {
     "structure": [
-      ["1", "1", "2"],
-      ["2", "1", "2"],
-      ["2", "0", "2"]
+      ["1","1","2"],
+      ["2","1","2"],
+      ["2","0","2"]
     ],
     "utilities": [
-      ["s", " ", " "],
-      [" ", " ", " "],
-      [" ", "t", " "]
+      ["s"," "," "],
+      [" "," "," "],
+      [" ","t"," "]
     ],
     "interactables": [
-      [" ", " ", " "],
-      [" ", " ", " "],
-      ["rotating_cube", "oscillation_cube", "rotation_oscillation_cube"]
+      [" "," "," "],
+      [" "," "," "],
+      ["rotating_cube","oscillation_cube","rotation_oscillation_cube"]
     ]
   }
 }

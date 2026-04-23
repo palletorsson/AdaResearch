@@ -1,0 +1,28 @@
+{
+  "sequences": {
+    "annotations": {
+      "name": "Authorial Annotations",
+      "truth": "A map can tell the generator what it is — not just what it contains. The @ codes are where the author speaks.",
+      "qfep_term": "meta",
+      "description": "Reference sequence demonstrating the @-prefixed authorial annotations used by the map pipeline. Not pedagogy — tooling example. Each map focuses on one family of codes so you can read them in isolation before seeing them composed.",
+      "layer": "tooling",
+      "prerequisites": [],
+      "unlocks": [],
+      "difficulty": "reference",
+      "estimated_time": "5 minutes",
+      "learning_objectives": [
+        "Read the @-code vocabulary at a glance",
+        "See how size parameters (:W:D) render as footprints",
+        "See how keys (@sample:key) attach semantic handles",
+        "Understand the strength ladder: @void (forbid placement) → @hold (freeze region) → @sample (golden reference)"
+      ],
+      "maps": [
+        "Annotation_Demo",
+        "Annotation_Void",
+        "Annotation_Signature",
+        "Annotation_Hold_Sample",
+        "Annotation_Rhythm"
+      ]
+    }
+  }
+}

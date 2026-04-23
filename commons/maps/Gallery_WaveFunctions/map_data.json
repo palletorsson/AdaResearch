@@ -1,8 +1,79 @@
 {
-  "map_info": {"description":"Showcase of 37 unplaced artifacts from WaveFunctions. Walk through to browse available artifacts.","dimensions":{"depth":24.0,"max_height":2.0,"width":11.0},"format":"json","lookup_name":"Gallery_WaveFunctions","metadata":{"category":"gallery","difficulty":"gallery","estimated_time":"12-18 minutes","learning_objectives":["Browse 37 WaveFunctions artifacts","Identify artifacts for placement in curriculum maps","Observe artifact visual and interaction patterns"]},"name":"Gallery: WaveFunctions","title":"WaveFunctions Artifact Gallery","version":"1.0"},
-  "utility_definitions": {"s":{"properties":{"height":1.5},"type":"spawn"},"t":{"description":"Return to sequence","name":"Back","properties":{"action":"next_in_sequence"},"type":"teleporter"}},
-  "settings": {"background":{"color":[0.3,0.3,0.35],"type":"sky"},"cube_size":1.0,"enable_physics":true,"gutter":0.0,"show_grid":true},
-  "lighting": {"ambient_color":[0.5,0.5,0.55],"ambient_energy":0.7,"directional_light":{"color":[1.0,0.95,0.9],"direction":[-0.3,-0.8,-0.3],"enabled":true,"energy":0.8}},
+  "map_info": {
+    "description": "Showcase of 37 unplaced artifacts from WaveFunctions. Walk through to browse available artifacts.",
+    "dimensions": {
+      "depth": 24.0,
+      "max_height": 2.0,
+      "width": 11.0
+    },
+    "format": "json",
+    "lookup_name": "Gallery_WaveFunctions",
+    "metadata": {
+      "category": "gallery",
+      "difficulty": "gallery",
+      "estimated_time": "12-18 minutes",
+      "learning_objectives": [
+        "Browse 37 WaveFunctions artifacts",
+        "Identify artifacts for placement in curriculum maps",
+        "Observe artifact visual and interaction patterns"
+      ]
+    },
+    "name": "Gallery: WaveFunctions",
+    "title": "WaveFunctions Artifact Gallery",
+    "version": "1.0"
+  },
+  "utility_definitions": {
+    "s": {
+      "properties": {
+        "height": 1.5
+      },
+      "type": "spawn"
+    },
+    "t": {
+      "description": "Return to sequence",
+      "name": "Back",
+      "properties": {
+        "action": "next_in_sequence"
+      },
+      "type": "teleporter"
+    }
+  },
+  "settings": {
+    "background": {
+      "color": [
+        0.3,
+        0.3,
+        0.35
+      ],
+      "type": "sky"
+    },
+    "cube_size": 1.0,
+    "enable_physics": true,
+    "gutter": 0.0,
+    "show_grid": true
+  },
+  "lighting": {
+    "ambient_color": [
+      0.5,
+      0.5,
+      0.55
+    ],
+    "ambient_energy": 0.7,
+    "directional_light": {
+      "color": [
+        1.0,
+        0.95,
+        0.9
+      ],
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
+      ],
+      "enabled": true,
+      "energy": 0.8
+    }
+  },
   "layers": {
     "structure": [
       ["2","2","2","2","2","2","2","2","2","2","2"],

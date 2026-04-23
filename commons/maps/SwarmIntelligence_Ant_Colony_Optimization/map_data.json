@@ -1,60 +1,60 @@
 {
   "map_info": {
-      "name": "Ant Colony Optimization",
-      "lookup_name": "SwarmIntelligence_Ant_Colony_Optimization",
-      "description": "A branching corridor system with forking paths. Pheromone trails diverge at decision points.",
-      "version": "1.0",
-      "format": "json",
-      "dimensions": {
-          "width": 10,
-          "depth": 7,
-          "max_height": 1
-      },
-      "metadata": {
-          "difficulty": "intermediate",
-          "category": "swarm_intelligence",
-          "spatial_temperature": 0.6,
-          "design_notes": "Y-shaped corridor system. Two paths diverge from spawn to exit, mimicking ant trail bifurcation."
-      },
-      "title": "Ant Colony Optimization"
+    "name": "Ant Colony Optimization",
+    "lookup_name": "SwarmIntelligence_Ant_Colony_Optimization",
+    "description": "A branching corridor system with forking paths. Pheromone trails diverge at decision points.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 10,
+      "depth": 7,
+      "max_height": 1
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "swarm_intelligence",
+      "spatial_temperature": 0.6,
+      "design_notes": "Y-shaped corridor system. Two paths diverge from spawn to exit, mimicking ant trail bifurcation."
+    },
+    "title": "Ant Colony Optimization"
   },
   "utility_definitions": {
-      "t": {
-          "type": "teleporter",
-          "name": "Next",
-          "description": "Continue to next step",
-          "properties": {
-              "action": "next_in_sequence"
-          }
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
       }
+    }
   },
   "layers": {
     "structure": [
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "0", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","0","1"],
+      ["1","1","1","1","1","1","1","1","1","1"]
     ],
     "utilities": [
-      ["s", "an", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", "t", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", "sp", " "]
+      ["s","an"," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," ","sp"," "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", "AntColonyV2", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","AntColonyV2"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "]
     ]
   }
 }

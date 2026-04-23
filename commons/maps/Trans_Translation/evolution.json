@@ -1,0 +1,67 @@
+{
+  "artifact": "translation_cube_demo",
+  "title": "Building a Door That Teaches Translation",
+  "description": "From Point_One you learned position. Now watch how movement is built \u2014 not as free motion, but as constrained displacement along axes.",
+  "concept_layer": "displacement, translation, axis constraint, sequential phases",
+  "technique_first": ["ImmediateMesh", "PRIMITIVE_LINES", "phase state machine", "puzzle completion signal", "wireframe edges"],
+  "technique_reference": ["Vector3 addition (Point_One)", "direction (Point_Line)", "CylinderMesh (Point_One)"],
+  "domain_deferred": [],
+  "capture_leaks": {
+    "rotation": "Trans_Rotation \u2014 translation changes position without changing orientation; rotation is a different beast",
+    "scale": "Trans_Scale \u2014 translation preserves size; scale transforms extent",
+    "composition": "Trans_AxisDecomposition \u2014 sequential constraint is not general transform composition; matrices compose differently",
+    "path_vs_displacement": "forces, swarmintelligence \u2014 translation is the end state, not the journey; trajectories, paths, and flows need different representation",
+    "reversibility_assumption": "foundationscrisis \u2014 translation is invertible (you can undo it); many real transformations are not"
+  },
+  "limit": "Translation moves without turning, without growing, without remembering the path. Each axis is independent only because we chose it so. In the real world, your arm cannot move along X without rotating at the shoulder. The abstraction isolates what life entangles.",
+  "stages": [
+    {
+      "title": "Position can be changed",
+      "thinking": "In Point_One, you held a point and saw its coordinates. But the point only moved because your hand moved it. What if the code moves it? Translation is position + displacement. A Vector3 added to a Vector3.",
+      "code": "# A point has position\nvar position: Vector3 = Vector3(5.0, 2.0, 3.0)\n\n# Translation is adding a displacement\nvar displacement: Vector3 = Vector3(1.0, 0.0, 0.0)\n\n# The new position\nposition += displacement  # Vector3(6.0, 2.0, 3.0)\n\n# Displacement is not a place. It has no address.\n# It exists only as difference, as change.",
+      "concepts": ["displacement", "Vector3 addition", "position vs direction"]
+    },
+    {
+      "title": "Give it a body to move",
+      "thinking": "Just like the point needed a sphere to be seen, translation needs a physical object to be felt. We build a door \u2014 a panel you can grab and slide. The door makes displacement tangible.",
+      "code": "extends Node3D\nclass_name TranslationCubeDemo\n\n@export var door_width: float = 0.5\n@export var door_height: float = 1.0\n@export var door_depth: float = 0.04\n\nfunc _ready() -> void:\n\t_create_doors()\n\nfunc _create_doors() -> void:\n\tvar door = Node3D.new()\n\t\n\t# The door panel \u2014 a flat BoxMesh\n\tvar panel = MeshInstance3D.new()\n\tvar box = BoxMesh.new()\n\tbox.size = Vector3(door_width, door_height, door_depth)\n\tpanel.mesh = box\n\t\n\tvar mat = StandardMaterial3D.new()\n\tmat.albedo_color = Color(0.8, 0.3, 0.3)  # Red\n\tpanel.material_override = mat\n\tdoor.add_child(panel)\n\tadd_child(door)",
+      "concepts": ["Node3D", "BoxMesh", "physical representation"]
+    },
+    {
+      "title": "Constrain to one axis",
+      "thinking": "Free movement teaches nothing. If the door could go anywhere, there would be no lesson. By constraining motion to the Y axis first, then X, the player discovers that translation has direction. You cannot open this door by pushing sideways \u2014 only by pulling up.",
+      "code": "extends Node3D\n\nsignal goal_reached\n\n@export var target_y: float = 0.25\n@export var target_x: float = -0.5\n\nvar _phase: int = 0  # 0=locked, 1=slide_up, 2=slide_sideways\nvar _start_pos: Vector3\nvar _is_grabbed := false\n\nfunc _on_knob_grabbed() -> void:\n\t_is_grabbed = true\n\t_start_pos = position\n\tif _phase == 0:\n\t\t_phase = 1  # Begin upward phase\n\nfunc _process(_delta: float) -> void:\n\tif not _is_grabbed:\n\t\treturn\n\t\n\tmatch _phase:\n\t\t1:  # Only Y movement allowed\n\t\t\tposition.x = _start_pos.x  # Lock X\n\t\t\tposition.z = _start_pos.z  # Lock Z\n\t\t\tif position.y >= target_y:\n\t\t\t\t_phase = 2  # Unlock sideways\n\t\t2:  # Only X movement allowed\n\t\t\tposition.y = target_y  # Lock Y at target\n\t\t\tposition.z = _start_pos.z  # Lock Z",
+      "concepts": ["axis constraint", "phase sequence", "match statement", "signals"]
+    },
+    {
+      "title": "Show the path",
+      "thinking": "The player needs to see where the door wants to go before they grab it. Arrow indicators drawn with ImmediateMesh show the two-phase path: up first, then sideways. The arrows are the displacement vector made visible \u2014 direction and magnitude as geometry.",
+      "code": "func _create_path_indicators() -> void:\n\tvar arrow_z = door_depth + 0.08\n\t\n\t# Phase 1: UP arrow\n\t_create_path_arrow(\n\t\tVector3(0, knob_height, arrow_z),\n\t\tVector3(0, knob_height + target_y, arrow_z),\n\t\tColor(0.8, 0.3, 0.3, 0.7)\n\t)\n\t_create_label(\"1.Up\", Vector3(0.15, knob_height + target_y/2, arrow_z))\n\t\n\t# Phase 2: SIDEWAYS arrow\n\t_create_path_arrow(\n\t\tVector3(0, knob_height + target_y, arrow_z),\n\t\tVector3(-door_width, knob_height + target_y, arrow_z),\n\t\tColor(0.8, 0.3, 0.3, 0.7)\n\t)\n\t_create_label(\"2.Slide\", Vector3(-door_width/2, knob_height + target_y + 0.1, arrow_z))\n\nfunc _create_path_arrow(from: Vector3, to: Vector3, color: Color) -> void:\n\tvar mesh_instance = MeshInstance3D.new()\n\tvar immediate_mesh = ImmediateMesh.new()\n\timmediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)\n\timmediate_mesh.surface_add_vertex(from)\n\timmediate_mesh.surface_add_vertex(to)\n\timmediate_mesh.surface_end()\n\tmesh_instance.mesh = immediate_mesh",
+      "concepts": ["ImmediateMesh", "PRIMITIVE_LINES", "visual guides", "displacement as arrow"]
+    },
+    {
+      "title": "Two doors mirror each other",
+      "thinking": "One door teaches constraint. Two doors teach symmetry. The left door slides up then left. The right door slides up then right. Same operation, opposite displacement. Translation doesn\u2019t care about position \u2014 only about the vector you add.",
+      "code": "func _create_doors() -> void:\n\tvar door_gap = 0.02\n\tvar door_offset = door_width / 2 + door_gap\n\t\n\t# Left door: slides UP then LEFT\n\t_left_door = _create_constrained_door(\n\t\t\"LeftDoor\",\n\t\tVector3(-door_offset, 0.0, 0.0),\n\t\tColor(0.8, 0.3, 0.3),  # Red\n\t\ttarget_y,\n\t\t-(door_width + door_gap)  # Negative X = left\n\t)\n\t\n\t# Right door: slides UP then RIGHT\n\t_right_door = _create_constrained_door(\n\t\t\"RightDoor\",\n\t\tVector3(door_offset, 0.0, 0.0),\n\t\tColor(0.3, 0.3, 0.8),  # Blue\n\t\ttarget_y,\n\t\t(door_width + door_gap)  # Positive X = right\n\t)",
+      "concepts": ["symmetry", "mirrored displacement", "sign of vector", "color coding"]
+    },
+    {
+      "title": "The wireframe container",
+      "thinking": "The doors live inside a wireframe cube \u2014 visible edges, invisible faces. The container defines the space that translation operates within. Without boundaries, displacement would have no reference. The cube is the coordinate system the doors move inside.",
+      "code": "func _setup_container() -> void:\n\t_container = Node3D.new()\n\tadd_child(_container)\n\t\n\t# 12 edges of a cube\n\tvar edges = [\n\t\t[Vector3(-0.5, 0, -0.5), Vector3(0.5, 0, -0.5)],\n\t\t[Vector3(0.5, 0, -0.5), Vector3(0.5, 0, 0.5)],\n\t\t[Vector3(0.5, 0, 0.5), Vector3(-0.5, 0, 0.5)],\n\t\t[Vector3(-0.5, 0, 0.5), Vector3(-0.5, 0, -0.5)],\n\t\t# ... 4 top edges, 4 vertical edges ...\n\t]\n\t\n\tfor edge in edges:\n\t\t_create_edge_line(edge[0] * cube_size, edge[1] * cube_size)\n\nfunc _create_edge_line(from: Vector3, to: Vector3) -> void:\n\tvar material = StandardMaterial3D.new()\n\tmaterial.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED\n\tmaterial.albedo_color = Color(0.5, 0.5, 0.5, 0.3)\n\tmaterial.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA",
+      "concepts": ["wireframe", "ImmediateMesh edges", "coordinate frame", "boundary as reference"]
+    },
+    {
+      "title": "Completion as event",
+      "thinking": "Both doors must open for the puzzle to complete. This is the first time code reacts to the player finishing something \u2014 a signal fires when each door reaches its target, and a check function tests if both are done. Translation becomes a goal, not just a motion.",
+      "code": "func _on_door_goal_reached(door_name: String) -> void:\n\tprint(\"Translation Demo: %s opened!\" % door_name)\n\t_check_both_complete()\n\nfunc _check_both_complete() -> void:\n\tif _both_reached:\n\t\treturn\n\t\n\tvar left_done = _left_door.is_goal_reached()\n\tvar right_done = _right_door.is_goal_reached()\n\t\n\tif left_done and right_done:\n\t\t_both_reached = true\n\t\tprint(\"Both doors open! Puzzle complete!\")",
+      "concepts": ["signal connection", "completion check", "puzzle state", "event-driven design"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "The code is complete. Two constrained doors inside a wireframe cube. The identity tells us what it knows about itself: translation requires both a direction and a magnitude. Constraint is what makes it meaningful. Without the lock on axes, there would be nothing to learn.",
+      "code": "# @identity\n# essence: constrained_translation \u2014 move only on allowed axis\n# desire: learner physically discovers that translation is axis-specific\n# critical_parameter: the axis sequence constraint \u2014 UP must complete before SIDEWAYS unlocks\n# triggers: grabbing the knob and moving; axis deviation is corrected\n# emerges: the idea that translation has direction \u2014 not all displacement is allowed\n# needs: two grabbable door knobs [has]\n# relationships: precursor to axis_translation_cube\n# truth: a translation requires both a direction and a magnitude \u2014 constraint is what makes it meaningful",
+      "concepts": ["@identity", "constraint as pedagogy", "direction + magnitude", "truth"]
+    }
+  ]
+}

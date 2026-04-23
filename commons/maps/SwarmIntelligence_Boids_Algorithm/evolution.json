@@ -1,0 +1,80 @@
+{
+  "artifact": "boid_manager",
+  "title": "Building a Flock from Three Local Rules",
+  "concept_layer": "swarm intelligence; Reynolds' boids (separation, alignment, cohesion); local rules \u2192 collective behavior; coordination without centralization",
+  "technique_first": ["agent-based spawning", "neighbor query via distance", "three-rule summation", "velocity steering (acceleration clamped)", "per-agent local perception radius", "VR controller as attractor/repulsor"],
+  "technique_reference": ["Vector3 operations (Trans_Translation, ForcesFoundations)", "Mover pattern (ForcesFoundations)", "Population array (GeneticProgramming)", "Spawn area with randf (Random_Definition)", "Self-body deform (SoftBodies)", "Soft body contact (SoftBodies)"],
+  "domain_deferred": ["ant colony stigmergy \u2192 ant_colony_optimization", "particle swarm optimization \u2192 particle_swarm_optimization", "physarum mold networks \u2192 PhysarumColony", "neural agent decision-making \u2192 machinelearning", "multi-species flock dynamics \u2192 later swarm maps"],
+  "capture_leaks": {
+    "homogeneous_agents": "Every boid has identical weights and perception. Heterogeneous swarms (leaders, roles) emerge differently.",
+    "euclidean_perception": "Boids see any neighbor within radius regardless of direction. Real animals have visual cones; blind spots matter.",
+    "no_memory": "Each boid acts purely on current neighbor state. Memory (past positions, learned routes) requires state per agent \u2014 deferred to ML.",
+    "no_energy_or_hunger": "Boids never tire, don\u2019t need food, don\u2019t die. Ecosystem-level dynamics (predation, starvation, reproduction) need agent-based modeling (ABM) which sibling artifacts cover.",
+    "newtonian_physics_only": "Steering + velocity + position. No flocking-through-fluid (drag varies), no quantum-like correlation, no signal delay. Real biological swarms (starlings) have astonishing low-latency \u2014 Reynolds boids are an approximation."
+  },
+  "limit": "Fifty particles, three rules, one flock. The artifact captures that coordination is not agreement \u2014 it is geometry. A boid doesn\u2019t decide to join the flock; it is IN the flock by virtue of neighbor relations. What it refuses: hierarchy, memory, energetics, heterogeneity. Each is a door that later swarm or ML maps open.",
+  "grammar_alignment": {
+    "sequence": "swarmintelligence",
+    "operations_taught": ["flock"],
+    "operations_deferred_to_sequence": ["stigmergy (ant_colony_optimization)", "physarum (PhysarumColony)", "optimize_swarm (particle_swarm_optimization)"],
+    "note": "boid_manager teaches 'flock' \u2014 the foundational swarm operation with three local rules. Other swarm operations are specialized: stigmergy replaces direct perception with trail-reading; physarum uses slime-mold rules; PSO optimizes a function via swarm dynamics. All are variations of local-rules \u2192 collective."
+  },
+  "biome_alignment": {
+    "sequence": "swarmintelligence",
+    "density_at_entry": 0.9,
+    "kingdoms_unlocked": ["flower", "tree", "fungus", "creature"],
+    "hand_verbs_gained": ["flock", "disturb_swarm"],
+    "catalyst_mode": "swarm",
+    "note": "Biome density 0.9 \u2014 the world is near-fully alive. Creatures now exhibit flocking behavior naturally. The player\u2019s 'disturb_swarm' verb lets them reach into any swarm and watch it reform around their arm. The 'swarm' catalyst turns solo creatures into collectives."
+  },
+  "stages": [
+    {
+      "title": "From soft body to social body",
+      "thinking": "SoftBodies_Soft_Body_Deformation taught that matter is a spring-mass lattice \u2014 vertices connected by springs that respond to force. What if we take the lattice apart? Each vertex becomes an independent agent, each spring becomes a RULE rather than a constraint. Boids are a soft body dissolved into social agents. The same neighbor-coupling logic, but now each agent DECIDES based on its neighbors instead of being mechanically tied to them.",
+      "code": "# SoftBody: vertex_i.position mechanically constrained by springs to neighbors\n# Boid:     agent_i.velocity deliberately steered based on neighbor state\n#\n# The shift:\n#   MECHANICAL constraint \u2192 BEHAVIORAL rule\n#   rest-length springs \u2192 alignment/cohesion/separation\n#   involuntary \u2192 voluntary (each agent is the agent of its motion)\n#\n# Social physics.\n# The spring-mass graph is still there \u2014 but now each node chooses.",
+      "concepts": ["agent-based modeling", "mechanical \u2192 behavioral constraint", "local rules as choices", "social lattice"]
+    },
+    {
+      "title": "Reynolds' three rules (1987)",
+      "thinking": "Craig Reynolds defined three rules for each boid: SEPARATION (steer away from neighbors that are too close), ALIGNMENT (match neighbor heading), COHESION (steer toward neighbor center). Each rule is a local computation \u2014 the boid looks only at neighbors within perception radius. The three vectors are weighted and summed into a steering force. From these three rules: birds, fish, bats. From these three rules: traffic, crowds, markets. From these three rules: much of collective behavior.",
+      "code": "# 1. SEPARATION \u2014 avoid crowding\nfunc _separate(neighbors: Array) -> Vector3:\n\tvar steer = Vector3.ZERO\n\tfor n in neighbors:\n\t\tvar diff = position - n.position\n\t\tvar d = diff.length()\n\t\tif d > 0.0 and d < separation_radius:\n\t\t\tsteer += diff.normalized() / d  # inverse-square-ish push\n\treturn steer.normalized() * separation_weight\n\n# 2. ALIGNMENT \u2014 match neighbor heading\nfunc _align(neighbors: Array) -> Vector3:\n\tvar avg_vel = Vector3.ZERO\n\tfor n in neighbors:\n\t\tavg_vel += n.velocity\n\tif neighbors.size() > 0:\n\t\tavg_vel /= neighbors.size()\n\treturn (avg_vel - velocity).normalized() * alignment_weight\n\n# 3. COHESION \u2014 steer toward neighbor center\nfunc _cohere(neighbors: Array) -> Vector3:\n\tvar center = Vector3.ZERO\n\tfor n in neighbors:\n\t\tcenter += n.position\n\tif neighbors.size() > 0:\n\t\tcenter /= neighbors.size()\n\treturn (center - position).normalized() * cohesion_weight",
+      "concepts": ["separation", "alignment", "cohesion", "weighted steering", "Reynolds 1987"]
+    },
+    {
+      "title": "Each boid is a mover with a perception radius",
+      "thinking": "A boid is conceptually simple: position, velocity, acceleration (the Mover pattern from ForcesFoundations). What\u2019s new is perception: every frame, the boid finds all neighbors within radius r. That neighbor list feeds the three rules. The perception radius is THE critical parameter. Too small: each boid is alone (no flock). Too large: every boid averages the entire population (no flock, just slow drift toward the center). Between the two extremes: flocking emerges.",
+      "code": "class Boid:\n\tvar position: Vector3\n\tvar velocity: Vector3\n\tvar acceleration: Vector3\n\tvar perception_radius: float = 2.0\n\t\n\tfunc find_neighbors(all_boids: Array) -> Array:\n\t\tvar result = []\n\t\tfor other in all_boids:\n\t\t\tif other == self: continue\n\t\t\tif position.distance_to(other.position) < perception_radius:\n\t\t\t\tresult.append(other)\n\t\treturn result\n\t\n\tfunc update(all_boids: Array, delta: float) -> void:\n\t\tvar neighbors = find_neighbors(all_boids)\n\t\tacceleration = _separate(neighbors) + _align(neighbors) + _cohere(neighbors)\n\t\tvelocity += acceleration * delta\n\t\tvelocity = velocity.limit_length(max_speed)\n\t\tposition += velocity * delta",
+      "concepts": ["perception radius", "neighbor query", "Mover class reuse", "velocity clamping"]
+    },
+    {
+      "title": "Spawn many in a volume",
+      "thinking": "BoidManager spawns 50 boids in a 20\u00d710\u00d720 volume. Positions are randomized. Initial velocities are small random vectors. Within a few seconds, the rules take over: clumps form, clumps align, clumps merge into a flock. The manager owns the boid array and calls update() on each per frame. Nothing coordinates them centrally \u2014 all coordination emerges.",
+      "code": "extends Node3D\nclass_name BoidManager\n\n@export var boid_scene: PackedScene\n@export var num_boids = 50\n@export var spawn_area_size = Vector3(20, 10, 20)\n\nvar _boids: Array[Node3D] = []\n\nfunc _ready() -> void:\n\tfor i in num_boids:\n\t\tvar b = boid_scene.instantiate()\n\t\tb.position = Vector3(\n\t\t\trandf_range(-spawn_area_size.x / 2, spawn_area_size.x / 2),\n\t\t\trandf_range(-spawn_area_size.y / 2, spawn_area_size.y / 2),\n\t\t\trandf_range(-spawn_area_size.z / 2, spawn_area_size.z / 2)\n\t\t)\n\t\tb.velocity = Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1))\n\t\tadd_child(b)\n\t\t_boids.append(b)\n\nfunc _process(delta: float) -> void:\n\tfor b in _boids:\n\t\tb.update(_boids, delta)",
+      "concepts": ["agent spawning", "flat array of agents", "per-agent update", "no-central-controller pattern"]
+    },
+    {
+      "title": "The VR hand as attractor/repulsor",
+      "thinking": "Left trigger: boids steer toward controller. Right trigger: boids steer away. Your hand becomes an invisible presence \u2014 a boulder in a river. Reach into the flock: it parts around your arm. Pull back: it reforms. This is the moment the artifact becomes unforgettable. Abstract emergence becomes embodied relation. You are a boid that happens to be bigger and smarter than the others, temporarily steering them.",
+      "code": "@export var left_controller_path: NodePath\n@export var right_controller_path: NodePath\n@export var interaction_radius = 3.0\n\nfunc _apply_vr_interaction(b: Boid) -> void:\n\tvar left = get_node_or_null(left_controller_path)\n\tvar right = get_node_or_null(right_controller_path)\n\t\n\tif left and left.is_button_pressed(\"trigger_click\"):\n\t\tvar d = b.position.distance_to(left.global_position)\n\t\tif d < interaction_radius:\n\t\t\t# Attract\n\t\t\tb.acceleration += (left.global_position - b.position).normalized() * 5.0\n\t\n\tif right and right.is_button_pressed(\"trigger_click\"):\n\t\tvar d = b.position.distance_to(right.global_position)\n\t\tif d < interaction_radius:\n\t\t\t# Repel\n\t\t\tb.acceleration += (b.position - right.global_position).normalized() * 5.0",
+      "concepts": ["VR controller input", "body-as-attractor", "local intervention in emergent system", "tactile feedback on swarm"]
+    },
+    {
+      "title": "Tune the weights \u2014 find different flocks",
+      "thinking": "Separation, alignment, cohesion each have a weight. Different weight combinations produce different swarm personalities. Heavy separation, light cohesion: particle cloud, barely coheres. Balanced: recognizable flock. Heavy alignment: stream of agents all moving in parallel. Heavy cohesion: clump that tries to collapse into a point. The three-weight space is a parameter atlas of flocking styles. Starlings occupy a specific region; bees occupy another.",
+      "code": "@export_range(0.0, 3.0, 0.1) var separation_weight: float = 1.5\n@export_range(0.0, 3.0, 0.1) var alignment_weight: float = 1.0\n@export_range(0.0, 3.0, 0.1) var cohesion_weight: float = 1.0\n\n# Different regimes:\n#   (high, low, low)  \u2192 anti-social particle gas\n#   (1.5, 1.0, 1.0)   \u2192 starling-like flock (default)\n#   (low, high, high) \u2192 dense column, moves as a snake\n#   (low, low, high)  \u2192 collapsing blob, ends as a point\n#   (low, high, low)  \u2192 parallel streams, no aggregation\n#\n# Same three rules. Infinite collective behaviors.",
+      "concepts": ["weight space", "parameter atlas of behaviors", "species-as-region-in-parameter-space", "tuning the rule mix"]
+    },
+    {
+      "title": "Wall wrap or bounce \u2014 boundary conditions matter",
+      "thinking": "The boids live in a finite box. When they hit a wall: either wrap (toroidal world) or bounce (reflection) or get repelled (soft boundary). Each choice changes long-run behavior. Wrap: a boid leaving the right comes in the left, creating infinite-world illusion. Bounce: boids accumulate near walls, creating eddies. Repel: keeps flock centered. The artifact uses a soft repulsion to keep the flock visible. Boundary conditions are not trivia; they are half the physics.",
+      "code": "@export var bounds_size = Vector3(20, 10, 20)\n@export var boundary_strength = 5.0\n\nfunc _apply_boundary(b: Boid) -> void:\n\tvar half = bounds_size * 0.5\n\tvar repulsion = Vector3.ZERO\n\t\n\tif b.position.x > half.x:  repulsion.x -= boundary_strength\n\tif b.position.x < -half.x: repulsion.x += boundary_strength\n\tif b.position.y > half.y:  repulsion.y -= boundary_strength\n\tif b.position.y < -half.y: repulsion.y += boundary_strength\n\tif b.position.z > half.z:  repulsion.z -= boundary_strength\n\tif b.position.z < -half.z: repulsion.z += boundary_strength\n\t\n\tb.acceleration += repulsion\n\n# Soft repulsion:\n#   - boids don't bounce off walls (unrealistic)\n#   - they gently redirect as they approach (natural)\n#   - this encourages flock to stay central without hard boundaries",
+      "concepts": ["boundary conditions", "soft repulsion vs hard bounce", "finite-world compromise", "emergent eddies from walls"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "The boid manager knows what it is. Not a flock simulator \u2014 a DEMONSTRATION that coordination is geometry. No boid knows the flock exists. No rule mentions 'stay together.' Yet the flock emerges and holds together and bends around obstacles and reforms around your hand. Because each agent does three small things with its neighbors, the collective does amazing things none of them can name. The critical parameter is interaction_radius because perception IS the flock. Below a threshold: dust. Above: a body with no skin.",
+      "code": "# @identity\n# essence: f_i = \u03a3(neighbor_j)[separate(i,j) + align(vel_j) + cohere(pos_j)] \u2014 three weighted averages over a local neighborhood\n# desire: to reach out a VR hand and feel the flock split and reform around your arm \u2014 to be a boulder in a river of agency\n# critical_parameter: interaction_radius \u2014 at zero, it's a particle cloud; past a threshold, a coherent organism crystallizes from the randomness\n# triggers: left trigger attracts boids toward controller; right trigger repels \u2014 learner's body becomes a temporary leader with no followers bound by loyalty\n# emerges: coordinated lane reversals, vortex rings, and split-rejoin events that no rule specifies \u2014 the flock invents maneuvers\n# needs: [has] VR controller attract/repel via trigger; [missing] no sliders for separation/alignment/cohesion weights; no on-screen parameter display\n# relationships: boids_aquarium wraps the same physics in a compact glass tank with sliders; boid_flocking adds the documentation UI; contrasts with FlowFieldMain (rules vs. field)\n# truth: coordination is not agreement \u2014 it is geometry; close enough means you are already the same",
+      "concepts": ["@identity", "coordination as geometry", "Reynolds 1987", "emergent organism", "truth"]
+    }
+  ]
+}

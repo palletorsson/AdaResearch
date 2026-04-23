@@ -1,123 +1,123 @@
 {
   "map_info": {
-      "name": "Taking Shape",
-      "title": "Taking Shape",
-      "lookup_name": "BodyProg_Torso",
-      "description": "Torso mesh appears via 3-point estimation. QFEP: the body as estimated, not given.",
-      "version": "1.0",
-      "format": "json",
-      "dimensions": {
-          "width": 10,
-          "depth": 10,
-          "max_height": 2
-      },
-      "metadata": {
-          "difficulty": "intermediate",
-          "category": "bodyprogression",
-          "estimated_time": "3-5 minutes",
-          "learning_objectives": [
-              "3-point body estimation",
-              "Torso mesh generation",
-              "Estimation vs given form"
-          ]
-      }
+    "name": "Taking Shape",
+    "title": "Taking Shape",
+    "lookup_name": "BodyProg_Torso",
+    "description": "Torso mesh appears via 3-point estimation. QFEP: the body as estimated, not given.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 10,
+      "depth": 10,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "bodyprogression",
+      "estimated_time": "3-5 minutes",
+      "learning_objectives": [
+        "3-point body estimation",
+        "Torso mesh generation",
+        "Estimation vs given form"
+      ]
+    }
   },
   "utility_definitions": {
-      "s": {
-          "type": "spawn",
-          "properties": {
-              "height": 1.5
-          }
-      },
-      "t": {
-          "type": "teleporter",
-          "name": "Next",
-          "description": "Continue to Dressed to Kill",
-          "properties": {
-              "action": "next_in_sequence"
-          }
+    "s": {
+      "type": "spawn",
+      "properties": {
+        "height": 1.5
       }
+    },
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to Dressed to Kill",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
   },
   "documentation": {
-      "summary": "BodyProg_Torso - Torso appears through estimation from tracking points",
-      "layout": "Room with central torso estimation visualization",
-      "objective": "Watch the torso form from three tracking points (head, left hand, right hand). The body is estimated, never given whole.",
-      "key_elements": [
-          "torso_estimation_vis - 3-point torso estimation visualization"
-      ]
+    "summary": "BodyProg_Torso - Torso appears through estimation from tracking points",
+    "layout": "Room with central torso estimation visualization",
+    "objective": "Watch the torso form from three tracking points (head, left hand, right hand). The body is estimated, never given whole.",
+    "key_elements": [
+      "torso_estimation_vis - 3-point torso estimation visualization"
+    ]
   },
   "lighting": {
-      "ambient_color": [
-          0.25,
-          0.2,
-          0.3
+    "ambient_color": [
+      0.25,
+      0.2,
+      0.3
+    ],
+    "ambient_energy": 0.65,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.2,
+        -0.9,
+        -0.3
       ],
-      "ambient_energy": 0.65,
-      "directional_light": {
-          "enabled": true,
-          "direction": [
-              -0.2,
-              -0.9,
-              -0.3
-          ],
-          "color": [
-              0.9,
-              0.88,
-              1.0
-          ],
-          "energy": 0.85
-      }
+      "color": [
+        0.9,
+        0.88,
+        1.0
+      ],
+      "energy": 0.85
+    }
   },
   "settings": {
-      "cube_size": 1.0,
-      "gutter": 0.0,
-      "show_grid": false,
-      "enable_physics": true,
-      "background": {
-          "type": "sky",
-          "color": [
-              0.12,
-              0.08,
-              0.18
-          ]
-      }
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": false,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.12,
+        0.08,
+        0.18
+      ]
+    }
   },
   "layers": {
     "structure": [
-      ["2", "2", "2", "2", "2", "2", "2", "2", "2", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "0", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "2", "2", "2", "2", "2", "2", "2", "2", "2"]
+      ["2","2","2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","0","1","1","1","1","1","1","1","2"],
+      ["2","2","2","2","2","2","2","2","2","2"]
     ],
     "utilities": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "t", " ", " ", " ", " ", " ", " ", "s", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" ","t"," "," "," "," "," "," ","s"," "],
+      [" "," "," "," "," "," "," "," "," "," "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "torso_estimation_vis", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","torso_estimation_vis"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "]
     ]
   }
 }

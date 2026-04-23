@@ -126,28 +126,28 @@ text = "Inspector"
 layout_mode = 2
 text = "No cell"
 
-[node name="HeightRow" type="HBoxContainer" parent="CenterRight/Inspector"]
+[node name="HeightRow" type="HBoxContainer" parent="CenterRight/Inspector" unique_id=660827582]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterRight/Inspector/HeightRow"]
-layout_mode = 2
+[node name="Label" type="Label" parent="CenterRight/Inspector/HeightRow" unique_id=1089473933]
 custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
 text = "Height:"
 
-[node name="Input" type="LineEdit" parent="CenterRight/Inspector/HeightRow"]
+[node name="Input" type="LineEdit" parent="CenterRight/Inspector/HeightRow" unique_id=330883046]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "0-5"
 
-[node name="UtilRow" type="HBoxContainer" parent="CenterRight/Inspector"]
+[node name="UtilRow" type="HBoxContainer" parent="CenterRight/Inspector" unique_id=1798584197]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterRight/Inspector/UtilRow"]
-layout_mode = 2
+[node name="Label" type="Label" parent="CenterRight/Inspector/UtilRow" unique_id=301885237]
 custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
 text = "Utility:"
 
-[node name="Input" type="LineEdit" parent="CenterRight/Inspector/UtilRow"]
+[node name="Input" type="LineEdit" parent="CenterRight/Inspector/UtilRow" unique_id=1266448928]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "sp, t, ds, r:90, m, an"
@@ -156,8 +156,8 @@ placeholder_text = "sp, t, ds, r:90, m, an"
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CenterRight/Inspector/ArtRow" unique_id=60670992]
-layout_mode = 2
 custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
 text = "Artifact:"
 
 [node name="Input" type="LineEdit" parent="CenterRight/Inspector/ArtRow" unique_id=1218476435]

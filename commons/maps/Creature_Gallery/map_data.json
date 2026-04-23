@@ -1,7 +1,45 @@
 {
-  "map_info": {"description":"DNA organism gallery — all presets and kingdoms at full detail.","dimensions":{"depth":7,"max_height":3,"width":7},"format":"json","lookup_name":"Creature_Gallery","name":"Creature Gallery","title":"Creature Gallery","version":"1.0"},
-  "lighting": {"ambient_color":[0.4,0.4,0.5],"ambient_energy":0.5,"directional_light":{"color":[0.9,0.85,0.8],"direction":[-0.4,-0.7,-0.4],"enabled":true,"energy":0.8}},
-  "settings": {"cube_size":1.0,"enable_physics":true,"gutter":0.0,"show_grid":true},
+  "map_info": {
+    "description": "DNA organism gallery — all presets and kingdoms at full detail.",
+    "dimensions": {
+      "depth": 7,
+      "max_height": 3,
+      "width": 7
+    },
+    "format": "json",
+    "lookup_name": "Creature_Gallery",
+    "name": "Creature Gallery",
+    "title": "Creature Gallery",
+    "version": "1.0"
+  },
+  "lighting": {
+    "ambient_color": [
+      0.4,
+      0.4,
+      0.5
+    ],
+    "ambient_energy": 0.5,
+    "directional_light": {
+      "color": [
+        0.9,
+        0.85,
+        0.8
+      ],
+      "direction": [
+        -0.4,
+        -0.7,
+        -0.4
+      ],
+      "enabled": true,
+      "energy": 0.8
+    }
+  },
+  "settings": {
+    "cube_size": 1.0,
+    "enable_physics": true,
+    "gutter": 0.0,
+    "show_grid": true
+  },
   "dev_notes": "Small grid map that loads creature_gallery.tscn as a scene overlay. The gallery builds itself procedurally — 12 preset pedestals in a ring + 5 kingdom clusters in the center.",
   "layers": {
     "structure": [

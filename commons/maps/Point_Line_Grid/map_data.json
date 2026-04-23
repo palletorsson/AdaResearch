@@ -160,11 +160,11 @@
         "1",
         "1",
         "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
+        "0",
+        "0",
+        "0",
+        "0",
+        "0"
       ],
       [
         "1",
@@ -174,7 +174,7 @@
         "0",
         "0",
         "0",
-        "1"
+        "0"
       ],
       [
         "1",
@@ -184,56 +184,56 @@
         "0",
         "0",
         "0",
-        "1"
+        "0"
       ],
       [
+        "2",
         "1",
-        "1",
         "0",
         "0",
         "0",
         "0",
         "0",
-        "1"
+        "0"
       ],
       [
+        "2",
         "1",
-        "1",
         "0",
         "0",
         "0",
         "0",
         "0",
-        "1"
+        "0"
       ],
       [
+        "2",
         "1",
-        "1",
         "0",
         "0",
         "0",
         "0",
         "0",
-        "1"
+        "0"
       ],
       [
+        "2",
         "1",
         "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1"
+        "2",
+        "2",
+        "2",
+        "0",
+        "0"
       ],
       [
+        "2",
         "1",
         "1",
         "1",
         "1",
         "1",
-        "1",
-        "0",
+        "2",
         "0"
       ],
       [
@@ -243,8 +243,8 @@
         "1",
         "0",
         "1",
-        "0",
-        "1"
+        "2",
+        "0"
       ],
       [
         "0",
@@ -253,16 +253,16 @@
         "1",
         "1",
         "1",
-        "0",
+        "2",
         "0"
       ],
       [
         "0",
         "0",
         "0",
-        "0",
-        "0",
-        "0",
+        "2",
+        "2",
+        "2",
         "0",
         "0"
       ],
@@ -449,7 +449,7 @@
     "ambient_energy": 0.6,
     "directional_light": {
       "color": [
-        1.0,
+        1,
         0.9,
         0.8
       ],
@@ -466,9 +466,9 @@
     "description": "The Grid provides the stable structure of space; the Trace records what happens within it. Where the Line reduces movement to an efficient relation, the Trace accumulates duration—sequence, hesitation, deviation. As a body moves, positions are recorded against the grid, forming a temporary history. Yet this history is bounded: memory is finite, motion is sampled, and deviation is measured relative to fixed frames. The Trace resists reduction, but only from within the grid that enables its capture, leaving a remainder that cannot be fully contained.",
     "description_2": "The Grid formalizes space into a system of addressability. By overlaying a coordinate structure, the map reveals how free space becomes indexed, repeatable, and computable. The player navigates a tension between embodied movement and numerical position, experiencing how grids enable calculation while simultaneously erasing local irregularities. This map exposes the political and technical consequences of choosing a coordinate system.",
     "dimensions": {
-      "depth": 14.0,
-      "max_height": 3.0,
-      "width": 8.0
+      "depth": 14,
+      "max_height": 3,
+      "width": 8
     },
     "format": "json",
     "lookup_name": "Point_Line_Grid",
@@ -496,10 +496,10 @@
       ],
       "type": "sky"
     },
-    "cube_size": 1.0,
+    "cube_size": 1,
     "enable_physics": true,
     "enter_type": "I",
-    "gutter": 0.0,
+    "gutter": 0,
     "initial_tile_visibility": "hidden_except_corners",
     "show_grid": true
   },

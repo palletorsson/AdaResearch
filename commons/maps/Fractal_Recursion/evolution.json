@@ -1,0 +1,80 @@
+{
+  "artifact": "recursive_tree",
+  "title": "Building a Tree That Is Its Own Blueprint",
+  "concept_layer": "recursion as a form-generating function applied to its own output; self-similarity; depth as the bounded parameter of an otherwise infinite structure",
+  "technique_first": ["recursive function (calls itself)", "depth parameter as termination condition", "Transform3D.rotated_local for branch orientation", "seeded RNG for deterministic chaos", "branch factor vs depth trade-off"],
+  "technique_reference": ["Node3D hierarchy (Point_One)", "preload + instantiate (Tutorial_Single)", "Basis and rotation (Trans_Rotation)", "@export parameters (Noise_Perlin_Simplex)", "seed() for reproducibility (Random_Definition)"],
+  "domain_deferred": ["deletion-based fractals (Cantor, Sierpinski) \u2192 Fractal_CantorSet, Fractal_KochSierpinski", "complex-plane fractals \u2192 Fractal_JuliaSet, Fractal_MandelbrotSet", "fractal dimension measurement \u2192 box_counting_dimension", "stochastic L-systems \u2192 lsystems sequence", "growth simulation \u2192 proceduralgeneration (PG_Space_Colonization)"],
+  "capture_leaks": {
+    "finite_depth": "Real fractals are infinite by definition. Depth 3 is practical; depth 20 crashes the engine. The map fakes infinity by implying it.",
+    "discrete_branching": "A real tree doesn\u2019t choose between 2 branches \u2014 it produces however many buds a meristem activates. Procgen tree artifacts handle continuous branching.",
+    "no_physics": "Branches can't sag, bend, snap, or grow. They are geometry, not matter. Softbodies addresses deformation; lsystems adds growth time.",
+    "deterministic_randomness": "Same seed = same tree. This is a gift (reproducible art) and a lie (real trees are not algorithmic). Stochastic L-systems soften this; true biological variance is never reached.",
+    "scale_invariance_myth": "Conceptually self-similar but not measurably so \u2014 the artifact has 3 levels, not a continuum. box_counting_dimension exposes the issue explicitly."
+  },
+  "limit": "Three levels of recursion, five main branches, four sub-branches each. The resulting geometry looks fractal; mathematically it\u2019s just a finite tree. What this artifact captures: that recursion is a verb (call yourself), self-similarity is a consequence (child resembles parent), and bounded depth is the lie we tell to make infinity finite. What it cannot hold: true infinite fractals, physical growth, biological randomness, or fractal dimension as a measurable quantity. Each of those leaks has a home later.",
+  "grammar_alignment": {
+    "sequence": "fractals",
+    "operations_taught": ["recurse", "subdivide"],
+    "operations_deferred_to_sequence": ["delete (Cantor, Sierpinski)", "iterate_complex (Mandelbrot, Julia)", "measure_dimension (box_counting_dimension)"],
+    "note": "recursive_tree teaches the meta-operation (call yourself with decremented depth) and subdivide-via-branching. The other three fractals operations are variations: delete (subtract at each level), iterate_complex (apply f to z), measure_dimension (count boxes across scales). This artifact is the genesis of all of them."
+  },
+  "biome_alignment": {
+    "sequence": "fractals",
+    "density_at_entry": 0.6,
+    "kingdoms_unlocked": ["flower", "tree", "fungus"],
+    "hand_verbs_gained": ["recurse", "grow_depth"],
+    "catalyst_mode": "fractal",
+    "note": "Biome density 0.6 \u2014 life is visibly abundant. 'fractal' catalyst mode lets the player recurse on any form they pick up (a cube becomes a cube-of-cubes). 'grow_depth' verb dials depth up or down in real time. Trees in the biome now use real recursive generation; forest density has meaningful self-similarity."
+  },
+  "stages": [
+    {
+      "title": "From local rule to self-reference",
+      "thinking": "CA_GameOfLife taught that simple local rules produce complex global behavior. Each cell looks only at its neighbors; emergent patterns come for free. Now a different move. Instead of many cells each following a local rule, ONE rule that calls ITSELF. No grid, no timestep. A function that produces form by asking: 'what would a smaller version of me produce?' Recursion is the mirror that turns a single rule into infinite structure.",
+      "code": "# CA:\n#   each cell: look at 8 neighbors, apply rule\n#   complexity from many local decisions\n#\n# Recursion:\n#   one function: generate_branch(length, depth)\n#   which calls: generate_branch(length * 0.7, depth - 1)\n#   which calls: generate_branch(length * 0.49, depth - 2)\n#   ...\n#   complexity from a function that remembers itself\n#\n# Two paths to emergence: distributed locality, vs self-reference.\n# Both produce structures bigger than their rules.",
+      "concepts": ["recursion vs iteration", "self-similarity", "depth parameter", "complexity from self-reference"]
+    },
+    {
+      "title": "The trunk is the zeroth branch",
+      "thinking": "Start with the trunk: a single box mesh, rooted at origin, growing upward. This is the seed. In a tree of any depth, the trunk is the node that has no parent. Every other branch is a child. The code that draws the trunk is nearly identical to the code that draws any branch \u2014 which is why the next step can be recursive.",
+      "code": "extends Node3D\n\n@export_category(\"Tree Structure\")\n@export var num_main_branches := 5\n@export var max_sub_branches := 4\n@export var trunk_height := 5.0\n@export var trunk_width := 1.5\n@export var random_seed := 42\n\nfunc _ready() -> void:\n\tseed(random_seed)  # deterministic chaos\n\t_create_materials()\n\t_build_trunk()\n\t_generate_branches_from(Vector3(0, trunk_height, 0), trunk_height * 0.7, 3)\n\nfunc _build_trunk() -> void:\n\tvar trunk = _make_box(trunk_width, trunk_height, trunk_width, trunk_material)\n\ttrunk.position = Vector3(0, trunk_height * 0.5, 0)\n\tadd_child(trunk)",
+      "concepts": ["trunk-as-root", "mesh generation", "seed() for reproducibility", "position and size"]
+    },
+    {
+      "title": "The recursive call \u2014 the function becomes the tree",
+      "thinking": "generate_branches_from(origin, length, depth). For each sub-branch: compute its endpoint via rotated vector, create a box mesh between origin and endpoint, then call the same function from the endpoint with shorter length and decremented depth. The base case is depth == 0 (stop branching). Every tree is the trunk plus recursive calls from the top of the trunk. The function IS the tree.",
+      "code": "func _generate_branches_from(origin: Vector3, length: float, depth: int) -> void:\n\tif depth <= 0:\n\t\treturn  # base case: stop branching\n\t\n\tvar branch_count = num_main_branches if depth == 3 else max_sub_branches\n\t\n\tfor i in range(branch_count):\n\t\t# Each branch points in a random direction tilted from vertical\n\t\tvar angle = randf() * TAU\n\t\tvar tilt = randf_range(0.3, 0.9)  # radians from vertical\n\t\tvar direction = Vector3(\n\t\t\tsin(tilt) * cos(angle),\n\t\t\tcos(tilt),\n\t\t\tsin(tilt) * sin(angle)\n\t\t)\n\t\tvar end_point = origin + direction * length\n\t\t\n\t\t_make_branch_mesh(origin, end_point)\n\t\t\n\t\t# RECURSE: call self from the endpoint with shrunken params\n\t\t_generate_branches_from(end_point, length * 0.7, depth - 1)",
+      "concepts": ["recursive call", "base case", "shrinking parameters", "branching factor"]
+    },
+    {
+      "title": "Deterministic chaos \u2014 seed makes reproducible trees",
+      "thinking": "The branches rotate at random angles \u2014 but if we call randf() repeatedly with no seed, every run produces a different tree. That\u2019s fine for generative art, brutal for teaching. seed(42) at the start fixes the random sequence. Same seed, same tree, every time. Change the seed and you get a different tree from the exact same code. Seed 42 and seed 43 are two different forests that share a rule.",
+      "code": "@export var random_seed := 42\n\nfunc _ready() -> void:\n\tseed(random_seed)  # CRITICAL: must come before any randf()\n\t_build_trunk()\n\t_generate_branches_from(...)\n\n# With the seed fixed, randf() is no longer random.\n# It's a reproducible pseudo-random sequence.\n# The tree becomes an expression of:\n#   generate_branch(trunk_height * 0.7, depth=3) | seed=42\n#\n# Change seed to 7, to 1337, to int(Time.get_unix_time_from_system()):\n# you get a gallery of trees from the same rule.",
+      "concepts": ["seed() function", "deterministic randomness", "reproducibility", "rule + seed = instance"]
+    },
+    {
+      "title": "Materials in three shades \u2014 trunk, branch, leaf",
+      "thinking": "Three StandardMaterial3D with emission: trunk_color (deep red), primary_color (brighter red for branches), secondary_color (red variation). Depth maps to material. The pedagogical effect: as your eye traces from trunk to canopy, color shifts subtly. The hierarchy is color-coded. Referenced from the Color sequence \u2014 we already know emission is glow, albedo is base, metallic is shine.",
+      "code": "var primary_material: StandardMaterial3D\nvar secondary_material: StandardMaterial3D\nvar trunk_material: StandardMaterial3D\n\nfunc _create_materials() -> void:\n\ttrunk_material = StandardMaterial3D.new()\n\ttrunk_material.albedo_color = trunk_color       # 0.8, 0.3, 0.3\n\ttrunk_material.emission_enabled = true\n\ttrunk_material.emission = trunk_color\n\ttrunk_material.emission_energy_multiplier = emission_strength\n\t\n\tprimary_material = StandardMaterial3D.new()\n\tprimary_material.albedo_color = primary_color   # 0.95, 0.3, 0.3\n\t# ... emission, metallic, roughness same pattern\n\n# Use material_depth_map:\nfunc _material_for_depth(depth: int) -> StandardMaterial3D:\n\tmatch depth:\n\t\t3: return trunk_material\n\t\t2: return primary_material\n\t\t_: return secondary_material",
+      "concepts": ["material hierarchy", "emission", "depth \u2192 color mapping", "Color sequence reference"]
+    },
+    {
+      "title": "Rebuild on parameter change",
+      "thinking": "apply_grid_config or a slider modifies num_main_branches / max_sub_branches / random_seed. When that happens, clear all children and regenerate. The tree is not animated into existence; it is destroyed and reborn. This is the simplest correct pattern for deeply parameterized structures \u2014 rebuild is cheap at depth 3, and animation would require a separate system (deferred to L-systems sequence).",
+      "code": "func rebuild_tree() -> void:\n\t# Clear everything\n\tfor child in get_children():\n\t\tif not child.owner:\n\t\t\tchild.queue_free()\n\tawait get_tree().process_frame\n\t\n\t# Regenerate from scratch\n\tseed(random_seed)\n\t_create_materials()\n\t_build_trunk()\n\t_generate_branches_from(\n\t\tVector3(0, trunk_height, 0),\n\t\ttrunk_height * 0.7,\n\t\t3\n\t)\n\nfunc apply_grid_config(config: Dictionary) -> void:\n\tif config.has(\"num_main_branches\"):\n\t\tnum_main_branches = int(config[\"num_main_branches\"])\n\tif config.has(\"random_seed\"):\n\t\trandom_seed = int(config[\"random_seed\"])\n\t# ...\n\trebuild_tree()",
+      "concepts": ["destroy-and-rebuild pattern", "apply_grid_config", "queue_free() hygiene"]
+    },
+    {
+      "title": "Every subtree is a complete tree",
+      "thinking": "Here is the fractal property made explicit. Any branch in this tree, viewed in isolation, is itself a small tree: it has a root (where it attaches), a trunk (its own segment), and children (the sub-branches). The whole pattern repeats at every node. This is what self-similarity MEANS. Not 'looks the same' \u2014 literally IS the same thing, at a smaller scale. Zoom into any branch; you see a tree. Zoom further; you see a tree. Zoom enough (at infinite depth); you never find a 'last' tree.",
+      "code": "# Consider the branch at depth 2:\n#   it was created by _generate_branches_from(\n#     origin = where its parent branch ended,\n#     length = parent_length * 0.7,\n#     depth = 2\n#   )\n#\n# That call will create a mini-tree with depth-1 and depth-0 children.\n#\n# So the subtree rooted at any branch IS\n# the same structure as the full tree \u2014 shrunk.\n#\n# SELF-SIMILARITY = the subtree is a complete tree.\n# This is the definition of a fractal.",
+      "concepts": ["self-similarity as literal identity", "subtree = tree", "scale invariance (up to depth limit)"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "The recursive tree knows what it is. Not a geometric sculpture \u2014 a rule that grows when asked. The critical parameter is num_main_branches (and by extension max_sub_branches) because branching factor is what makes the tree dense or sparse, lush or skeletal. The seed is the story. The depth is the lie. Each branch claims to be a tree and proves it by branching. What the artifact refuses: infinite depth, organic physics, biological variance, measurable fractal dimension. All of those are doors that open later.",
+      "code": "# @identity\n# essence: Procedural binary tree \u2014 a trunk forks into branches, each branch forks again, recursion depth 3. Box meshes with emission materials create a geometric canopy. Self-similar at every level.\n# desire: To grow by halving \u2014 generate_branches calls itself with decremented depth, producing sub-branches from each endpoint. The tree is its own blueprint.\n# critical_parameter: num_main_branches / max_sub_branches \u2014 control branching factor; random_seed \u2014 deterministic chaos, same seed same tree\n# triggers: _ready \u2192 seed + material creation + full tree generation; rebuild_tree \u2192 clear all children, regenerate from parameters\n# emerges: A geometric sculpture where every subtree is a complete tree \u2014 hierarchy from constraint, not command. Each node knows only its children yet the whole structure self-organizes.\n# needs: VR branch manipulation [missing], growth animation [missing], parameter sliders [missing]\n# relationships: Appears in DataStructures_Trees (binary recursion) and RecursiveEmergence_Tail_Recursion_Memoization (call stack visualization). The tree that teaches both data structure and recursion.\n# truth: A tree is a list that learned to decide \u2014 left or right, less or greater. Hierarchy emerges not from authority but from the constraint of binary choice repeated.",
+      "concepts": ["@identity", "self-similarity", "bounded infinity", "hierarchy from constraint", "truth"]
+    }
+  ]
+}

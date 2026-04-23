@@ -1,71 +1,73 @@
 {
   "map_info": {
-      "name": "Applied Ethics After Gödel",
-      "lookup_name": "CriticalAlgorithms_Applied_Ethics",
-      "description": "If every formal system has an outside, every classifier has someone it misreads. Ethics isn't a postprocessing step — it's the shape of the room.",
-      "version": "0.1",
-      "format": "json",
-      "dimensions": {
-          "width": 9,
-          "depth": 10,
-          "max_height": 3
-      },
-      "metadata": {
-          "difficulty": "advanced",
-          "category": "critical_algorithms",
-          "status": "scaffold",
-          "design_notes": "SCAFFOLD — walls carve an off-center path, forcing the player through the 'outside' of the otherwise symmetric grid. Artifacts TBD in phase 2."
-      },
-      "title": "Ethical Design After Incompleteness"
+    "name": "Applied Ethics After Gödel",
+    "lookup_name": "CriticalAlgorithms_Applied_Ethics",
+    "description": "If every formal system has an outside, every classifier has someone it misreads. Ethics isn't a postprocessing step — it's the shape of the room.",
+    "version": "0.1",
+    "format": "json",
+    "dimensions": {
+      "width": 9,
+      "depth": 10,
+      "max_height": 3
+    },
+    "metadata": {
+      "difficulty": "advanced",
+      "category": "critical_algorithms",
+      "status": "scaffold",
+      "design_notes": "SCAFFOLD — walls carve an off-center path, forcing the player through the 'outside' of the otherwise symmetric grid. Artifacts TBD in phase 2."
+    },
+    "title": "Ethical Design After Incompleteness"
   },
   "utility_definitions": {
-      "t": {
-          "type": "teleporter",
-          "name": "Next",
-          "description": "Continue to next step",
-          "properties": { "action": "next_in_sequence" }
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
       }
+    }
   },
   "audio": {
-      "ambient_preset": "minimal_drone",
-      "volume": -10.0
+    "ambient_preset": "minimal_drone",
+    "volume": -10.0
   },
   "layers": {
     "structure": [
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "0", "1", "1", "1", "1"]
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","0","1","1","1","1"]
     ],
     "utilities": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "sub:map", " ", " ", " ", " "],
-      [" ", "3t:THE OUTSIDE", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "3t:EVERY CLASSIFIER HAS ONE", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "3t:ETHICS IS ARCHITECTURE", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "t", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","sub:map"," "," "," "," "],
+      [" ","3t:THE OUTSIDE"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" ","3t:EVERY CLASSIFIER HAS ONE"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" ","3t:ETHICS IS ARCHITECTURE"," "," "," "," "," "," "," "],
+      [" "," "," "," ","t"," "," "," "," "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", "bias_from_inside:0:0.3", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "godel_statement_plaque:180:0.5", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", "tt:qfep_critical:180:0.5", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","bias_from_inside:0:0.3"," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","godel_statement_plaque:180:0.5"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","tt:qfep_critical:180:0.5"," "," "],
+      [" "," "," "," "," "," "," "," "," "]
     ]
   }
 }

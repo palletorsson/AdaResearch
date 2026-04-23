@@ -1,119 +1,119 @@
 {
   "map_info": {
-      "name": "Societal Impact",
-      "lookup_name": "CriticalAlgorithms_Societal_Impact",
-      "description": "Explore the societal impact of algorithmic systems. Scaffold map — awaiting content.",
-      "version": "1.0",
-      "format": "json",
-      "dimensions": {
-          "width": 10,
-          "depth": 10,
-          "max_height": 2
-      },
-      "metadata": {
-          "difficulty": "advanced",
-          "category": "criticalalgorithms",
-          "estimated_time": "5-7 minutes",
-          "learning_objectives": [
-              "Societal impact of algorithms",
-              "Algorithmic accountability"
-          ]
-      }
+    "name": "Societal Impact",
+    "lookup_name": "CriticalAlgorithms_Societal_Impact",
+    "description": "Explore the societal impact of algorithmic systems. Scaffold map — awaiting content.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 10,
+      "depth": 10,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "advanced",
+      "category": "criticalalgorithms",
+      "estimated_time": "5-7 minutes",
+      "learning_objectives": [
+        "Societal impact of algorithms",
+        "Algorithmic accountability"
+      ]
+    }
   },
   "utility_definitions": {
-      "s": {
-          "type": "spawn",
-          "properties": {
-              "height": 1.5
-          }
-      },
-      "t": {
-          "type": "teleporter",
-          "name": "Next",
-          "description": "Continue to next map",
-          "properties": {
-              "action": "next_in_sequence"
-          }
+    "s": {
+      "type": "spawn",
+      "properties": {
+        "height": 1.5
       }
+    },
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next map",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
   },
   "documentation": {
-      "summary": "CriticalAlgorithms_Societal_Impact - Scaffold map for societal impact content",
-      "layout": "Simple 10x10 room with spawn and teleporter",
-      "objective": "Placeholder — build out societal impact artifacts and interactions.",
-      "key_elements": []
+    "summary": "CriticalAlgorithms_Societal_Impact - Scaffold map for societal impact content",
+    "layout": "Simple 10x10 room with spawn and teleporter",
+    "objective": "Placeholder — build out societal impact artifacts and interactions.",
+    "key_elements": []
   },
   "lighting": {
-      "ambient_color": [
-          0.3,
-          0.3,
-          0.4
+    "ambient_color": [
+      0.3,
+      0.3,
+      0.4
+    ],
+    "ambient_energy": 0.5,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        0.0,
+        -1.0,
+        -0.3
       ],
-      "ambient_energy": 0.5,
-      "directional_light": {
-          "enabled": true,
-          "direction": [
-              0.0,
-              -1.0,
-              -0.3
-          ],
-          "color": [
-              1.0,
-              0.95,
-              0.9
-          ],
-          "energy": 0.8
-      }
+      "color": [
+        1.0,
+        0.95,
+        0.9
+      ],
+      "energy": 0.8
+    }
   },
   "settings": {
-      "cube_size": 1.0,
-      "gutter": 0.0,
-      "show_grid": true,
-      "enable_physics": true,
-      "background": {
-          "type": "sky",
-          "color": [
-              0.15,
-              0.2,
-              0.3
-          ]
-      }
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.15,
+        0.2,
+        0.3
+      ]
+    }
   },
   "layers": {
     "structure": [
-      ["2", "2", "2", "2", "2", "2", "2", "2", "2", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "0", "2"],
-      ["2", "2", "2", "2", "2", "2", "2", "2", "2", "2"]
+      ["2","2","2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","0","2"],
+      ["2","2","2","2","2","2","2","2","2","2"]
     ],
     "utilities": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "s", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", "t", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" ","s"," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," "," "," "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "]
     ]
   }
 }

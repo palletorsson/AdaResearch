@@ -30,8 +30,8 @@
 			"content": [
 				"WaveFunctions_Intro: Oscillation Control Room",
 				"WaveFunctions_Pendulum: Gravity Creates Rhythm",
-				"WaveFunctions_Sine_Space: Walking Through Sine",
 				"WaveFunctions_Unit_Circle: Rotation Becomes Oscillation",
+				"WaveFunctions_Sine_Space: Walking Through Sine",
 				"WaveFunctions_3D_Wave_Propagation: Waves Through Space",
 				"WaveFunctions_Effect_Sound: Sound as Waveform",
 				"Wavefunctions_Bernini: Baroque Helical Columns",
@@ -44,8 +44,8 @@
 			"maps": [
 				"WaveFunctions_Intro",
 				"WaveFunctions_Pendulum",
-				"WaveFunctions_Sine_Space",
 				"WaveFunctions_Unit_Circle",
+				"WaveFunctions_Sine_Space",
 				"WaveFunctions_3D_Wave_Propagation",
 				"WaveFunctions_Effect_Sound",
 				"Wavefunctions_Bernini",
@@ -128,21 +128,6 @@
 					"grammar": "linear"
 				},
 				{
-					"map": "WaveFunctions_Sine_Space",
-					"position": "foundation",
-					"artifacts": [
-						"colorballs",
-						"dark_sphere",
-						"sine_space",
-						"sine_space_explanation",
-						"sine_wall_corridor",
-						"sine_wall_explanation"
-					],
-					"size_budget": "world_scale",
-					"rationale": "Building foundations with 6 artifacts",
-					"grammar": "florence"
-				},
-				{
 					"map": "WaveFunctions_Unit_Circle",
 					"position": "foundation",
 					"artifacts": [
@@ -154,6 +139,21 @@
 						"unit_circle_advanced"
 					],
 					"size_budget": "environment",
+					"rationale": "Building foundations with 6 artifacts",
+					"grammar": "florence"
+				},
+				{
+					"map": "WaveFunctions_Sine_Space",
+					"position": "foundation",
+					"artifacts": [
+						"colorballs",
+						"dark_sphere",
+						"sine_space",
+						"sine_space_explanation",
+						"sine_wall_corridor",
+						"sine_wall_explanation"
+					],
+					"size_budget": "world_scale",
 					"rationale": "Building foundations with 6 artifacts",
 					"grammar": "florence"
 				},

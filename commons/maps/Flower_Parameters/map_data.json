@@ -1,127 +1,127 @@
 {
   "map_info": {
-      "name": "Tuning Growth",
-      "title": "Tuning Growth",
-      "lookup_name": "Flower_Parameters",
-      "description": "Interactive BotanicalFlower with VR sliders for petal count, length, and curve. Learn procedural generation parameters.",
-      "version": "1.0",
-      "format": "json",
-      "dimensions": {
-          "width": 10,
-          "depth": 10,
-          "max_height": 2
-      },
-      "metadata": {
-          "difficulty": "beginner",
-          "category": "flowers",
-          "estimated_time": "5-8 minutes",
-          "learning_objectives": [
-              "Procedural parameters",
-              "Petal count and shape",
-              "Real-time parameter tuning"
-          ]
-      }
+    "name": "Tuning Growth",
+    "title": "Tuning Growth",
+    "lookup_name": "Flower_Parameters",
+    "description": "Interactive BotanicalFlower with VR sliders for petal count, length, and curve. Learn procedural generation parameters.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 10,
+      "depth": 10,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "beginner",
+      "category": "flowers",
+      "estimated_time": "5-8 minutes",
+      "learning_objectives": [
+        "Procedural parameters",
+        "Petal count and shape",
+        "Real-time parameter tuning"
+      ]
+    }
   },
   "utility_definitions": {
-      "t": {
-          "type": "teleporter",
-          "name": "Next",
-          "description": "Continue to evolution",
-          "properties": {
-              "action": "next_in_sequence"
-          }
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to evolution",
+      "properties": {
+        "action": "next_in_sequence"
       }
+    }
   },
   "documentation": {
-      "summary": "Flower_Parameters - Interactive parameter exploration with VR sliders",
-      "layout": "Open room with interactive BotanicalFlower at center",
-      "objective": "Use VR sliders to change petal count, petal length, and petal curve. See how parameters shape procedural form.",
-      "key_elements": [
-          "botanical_flower - interactive with slider controls"
-      ]
+    "summary": "Flower_Parameters - Interactive parameter exploration with VR sliders",
+    "layout": "Open room with interactive BotanicalFlower at center",
+    "objective": "Use VR sliders to change petal count, petal length, and petal curve. See how parameters shape procedural form.",
+    "key_elements": [
+      "botanical_flower - interactive with slider controls"
+    ]
   },
   "interactable_config": {
-      "botanical_flower": {
-          "interactive": true,
-          "sliders": [
-              "petal_count",
-              "petal_length",
-              "petal_curve"
-          ]
-      }
+    "botanical_flower": {
+      "interactive": true,
+      "sliders": [
+        "petal_count",
+        "petal_length",
+        "petal_curve"
+      ]
+    }
   },
   "lighting": {
-      "ambient_color": [
-          0.6,
-          0.75,
-          0.6
+    "ambient_color": [
+      0.6,
+      0.75,
+      0.6
+    ],
+    "ambient_energy": 0.9,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.3,
+        -0.8,
+        -0.3
       ],
-      "ambient_energy": 0.9,
-      "directional_light": {
-          "enabled": true,
-          "direction": [
-              -0.3,
-              -0.8,
-              -0.3
-          ],
-          "color": [
-              1.0,
-              0.98,
-              0.9
-          ],
-          "energy": 1.0
-      }
+      "color": [
+        1.0,
+        0.98,
+        0.9
+      ],
+      "energy": 1.0
+    }
   },
   "settings": {
-      "cube_size": 1.0,
-      "gutter": 0.0,
-      "show_grid": true,
-      "enable_physics": true,
-      "background": {
-          "type": "sky",
-          "color": [
-              0.55,
-              0.7,
-              0.55
-          ]
-      }
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "background": {
+      "type": "sky",
+      "color": [
+        0.55,
+        0.7,
+        0.55
+      ]
+    }
   },
   "layers": {
     "structure": [
-      ["2", "2", "2", "2", "2", "2", "2", "2", "2", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "0", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "1", "2"],
-      ["2", "1", "1", "1", "1", "1", "1", "1", "0", "2"],
-      ["2", "2", "2", "2", "2", "2", "2", "2", "1", "2"]
+      ["2","2","2","2","2","2","2","2","2","2"],
+      ["2","1","1","1","1","1","1","1","0","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","1","2"],
+      ["2","1","1","1","1","1","1","1","0","2"],
+      ["2","2","2","2","2","2","2","2","1","2"]
     ],
     "utilities": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", "t", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", "botanical_flower", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","botanical_flower"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "]
     ]
   }
 }

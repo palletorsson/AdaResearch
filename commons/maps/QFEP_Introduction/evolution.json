@@ -1,0 +1,98 @@
+{
+  "artifact": "qfep_formula_3d",
+  "title": "Building QFE = F − λE(S) + φΔE(S,t) One Term at a Time",
+  "concept_layer": "QFEP as a tunable lens for reading any system; order, entropy, and rate of change as three terms; the formula not as an equation to solve but a parameterization of becoming",
+  "technique_first": [
+    "TextMesh per-symbol construction with positional x_offset",
+    "per-term color coding tied to conceptual role",
+    "highlight_term() pulse animation to foreground one piece",
+    "signal-based term selection (term_highlighted, term_selected)",
+    "live parameter binding (on_lambda_changed, on_phi_changed) to shift color saturation with slider state"
+  ],
+  "technique_reference": [
+    "signal-based observation (russell_set_box paradox_observed)",
+    "live parameter sliders (jelly_cube stiffness, boid_manager weights, gradient_descent rate)",
+    "@identity truth statement (all prior artifacts)",
+    "color-as-semantic-channel (flashlight_color, OscillationCurve)",
+    "formula-as-form (recursive_tree, lsystem_tree, entropy_axiom)"
+  ],
+  "domain_deferred": [
+    "QFEP applied to a specific system → QFEP_Sandbox",
+    "tuning λ across extremes → QFEP_Lambda_Spectrum",
+    "tuning φ (rate sensitivity) → QFEP_Phi_Spectrum",
+    "closure into a graph of all relations → graphtheory (next sequence)",
+    "philosophical foundations (Deleuze, Barad) → critical.md / blog"
+  ],
+  "capture_leaks": {
+    "symbols_not_dynamics": "The formula floats in space as text. QFEP is actually a dynamical reading — a system evolving in time under these terms. The static formula cannot show becoming; only the sandbox can.",
+    "three_terms_look_separable": "Rendering QFE, F, λE(S), φΔE(S,t) as discrete colored symbols suggests they can be understood piecewise. In a real system they interact — λ amplifies E(S), φ modulates ΔE(S,t), and changing one shifts the meaning of the others. The visualization separates what is actually entangled.",
+    "formula_as_answer": "A formula rendered in 3D looks like a final result. QFEP is not a result — it is a posture for reading systems. The display risks reifying into 'the QFEP equation' when the point is: every system you have touched in this curriculum can be re-read through these three terms.",
+    "lambda_phi_as_numbers": "λ and φ appear as Greek letters. The sliders make them numbers on [0,1]. But conceptually λ is an ontological commitment (how much entropy is allowed to drive) and φ is a temporal sensitivity (how fast the system responds to entropy change). Numbers flatten this.",
+    "closed_expression": "Written as F − λE(S) + φΔE(S,t), the formula looks closed — three terms, done. But E(S) itself requires a choice of S (what is the state space?) and a measure (Shannon, Boltzmann, Kolmogorov?). The parentheses hide the whole curriculum."
+  },
+  "limit": "A formula floating in space with per-term color and pulse animation. What it captures: the visceral experience that meaning lives in the RELATIONSHIP between terms, and that highlighting one term changes the reading of the whole. What it refuses: the actual dynamics (→ QFEP_Sandbox), the spectrum of λ values (→ QFEP_Lambda_Spectrum), the spectrum of φ values (→ QFEP_Phi_Spectrum), the philosophical genealogy (Prigogine, Deleuze, Barad → critical.md), the application to any specific system the player has walked through. The floating formula is a LENS in its holder — the sandbox is where you look through it.",
+  "grammar_alignment": {
+    "sequence": "qfeplaboratory",
+    "operations_taught": ["tune_lambda", "tune_phi", "compose_qfep"],
+    "operations_deferred_to_sequence": [],
+    "note": "qfep_formula_3d is the taught_by anchor for compose_qfep — the operation that takes any form from any prior sequence and re-reads it through (F, λ, E, φ, Δ). tune_lambda and tune_phi are parallel operations taught by QFEP_Lambda_Spectrum and QFEP_Phi_Spectrum. The QFEP sequence is unique: it does not introduce a new form type — it introduces a TUNABLE reading of every form type introduced before. Every prior sequence feeds into this one."
+  },
+  "biome_alignment": {
+    "sequence": "qfeplaboratory",
+    "density_at_entry": 1.0,
+    "kingdoms_unlocked": ["flower", "tree", "fungus", "creature"],
+    "hand_verbs_gained": ["tune_parameter", "re_read_system"],
+    "catalyst_mode": "tunable_becoming",
+    "note": "The biome is at maximum density with the ambient_preset 'tunable_becoming' — everything alive, everything responsive to parameter change. The catalyst no longer places blocks or breaks forms; it tunes them. Turn λ up: the biome drifts toward chaos (creatures diverge, vegetation mutates faster). Turn λ down: the biome freezes into crystalline order. φ controls how fast the system responds to entropy change. The player is no longer building, breaking, or encountering — the player is PARAMETERIZING a living world."
+  },
+  "stages": [
+    {
+      "title": "From paradox to parameter",
+      "thinking": "Russell_Paradox taught that a formal system can contain statements that break it. The response is not to abandon formalism but to ACCEPT that no single system holds everything — and instead work with many systems, tuning the lens for the job. QFEP is that move made explicit. Rather than 'what is THE equation for this system?', ask 'what are F, E, λ, φ for this system, and what happens as I tune them?' The paradox becomes a feature: every formalism is local, every reading is a choice.",
+      "code": "# Russell: the set S = { x | x ∉ x } breaks naive set theory.\n# Response: stop seeking THE consistent theory of everything.\n#\n# Instead: pick a lens. Tune it. Read the system through it.\n# Change the tuning — read the same system differently.\n#\n# QFEP is that lens:\n#   QFE = F − λ·E(S) + φ·ΔE(S,t)\n#\n#   F      = the form / order / structure you've built\n#   E(S)   = the entropy of its current state\n#   λ      = how much entropy is allowed to drive\n#   ΔE(S,t)= how entropy is changing in time\n#   φ      = how sensitive the system is to that change\n#\n# QFE is not a number to compute. It is a POSTURE for reading.",
+      "concepts": ["from paradox to parameter", "lens vs theory-of-everything", "local formalism", "tunable reading", "posture for systems"]
+    },
+    {
+      "title": "The formula is a form",
+      "thinking": "Start with the smallest move: render the formula as a Node3D. Every term is a TextMesh. Every term gets a color that will carry its meaning for the rest of the sequence. No dynamics yet, no sliders — just the words in space, with color already doing semantic work. White = result (QFE). Blue = order (F). Green = entropy drive (λ). Red = entropy (E). Magenta = rate (φ). Gray = operators. Color is the first teaching — before any equation is 'understood', the eye learns which symbol carries which meaning.",
+      "code": "extends Node3D\nclass_name QFEPFormula3D\n\nconst COLOR_QFE := Color(1.0, 1.0, 1.0)     # White - result\nconst COLOR_F := Color(0.4, 0.6, 1.0)        # Blue - order\nconst COLOR_LAMBDA := Color(0.3, 1.0, 0.5)   # Green - entropy drive\nconst COLOR_E := Color(1.0, 0.4, 0.4)        # Red - entropy\nconst COLOR_PHI := Color(1.0, 0.5, 1.0)      # Magenta - rate term\nconst COLOR_OPERATOR := Color(0.7, 0.7, 0.7) # Gray\n\nfunc _ready():\n\t_create_formula()\n\t_setup_materials()\n\tadd_to_group(\"interactable\")\n\tadd_to_group(\"qfep_display\")",
+      "concepts": ["formula-as-Node3D", "color-as-semantic-channel", "symbol-before-meaning", "per-term coloring"]
+    },
+    {
+      "title": "F — the order term",
+      "thinking": "F is the first and simplest term. It names what the player has spent 16 sequences building: forms. A point, a line, a triangle, a rotation, a wave, a noise field, a fractal, an L-system tree, a genetic program, a soft body, a swarm, a gradient landscape. All are F. When the formula foregrounds F alone (highlighted_term = 'F'), the reading is: this system is structured, it has order, the form dominates. This matches the early sequences — primitives, waves, noise had low entropy, high F.",
+      "code": "# F appears blue. Position it after the '=' with spacing.\n\nvar x_offset: float = 0.0\nvar spacing: float = 0.02\n\nx_offset = _add_term(\"QFE\", \"QFE\", x_offset, COLOR_QFE)\nx_offset += spacing\nx_offset = _add_term(\"equals\", \"=\", x_offset, COLOR_OPERATOR)\nx_offset += spacing\nx_offset = _add_term(\"F\", \"F\", x_offset, COLOR_F)\nx_offset += spacing\n\n# Highlighting F means: look at the form.\n# Every prior sequence was teaching F.",
+      "concepts": ["F as order/form", "retroactive reading of prior sequences", "blue as structural channel", "per-term addition with x_offset"]
+    },
+    {
+      "title": "−λE(S) — the entropy drive",
+      "thinking": "The minus sign matters. Entropy SUBTRACTS from order. λ is the coefficient: how strongly the system is driven toward disorder. E(S) is the entropy of the current state — requires choosing a state space S (what counts as a microstate?) and a measure (Shannon bits, thermodynamic, algorithmic). The artifact renders λ (green) and E(S) (red) side by side with a subtraction operator. Color choice is deliberate: green drives red, and red subtracts from blue F.",
+      "code": "# − λ E(S)\n\nx_offset = _add_term(\"minus1\", \"−\", x_offset, COLOR_OPERATOR)\nx_offset += spacing\nx_offset = _add_term(\"lambda\", \"λ\", x_offset, COLOR_LAMBDA)\nx_offset = _add_term(\"E1\", \"E\", x_offset, COLOR_E)\nx_offset = _add_term(\"openparen1\", \"(\", x_offset, COLOR_OPERATOR)\nx_offset = _add_term(\"S1\", \"S\", x_offset, COLOR_E)\nx_offset = _add_term(\"closeparen1\", \")\", x_offset, COLOR_OPERATOR)\nx_offset += spacing\n\n# At λ=0: no entropy drive. Pure form. Crystalline.\n# At λ=1: entropy dominates. Form dissolves into noise.\n# The edge of chaos lives between these — λ ≈ 0.3 to 0.5.",
+      "concepts": ["entropy as subtraction from order", "λ as driving coefficient", "E(S) requires choice of state space", "edge of chaos tuning", "green drives red"]
+    },
+    {
+      "title": "+φΔE(S,t) — the rate term",
+      "thinking": "The third term is where time enters. ΔE(S,t) is how entropy is CHANGING — not its absolute level, but its derivative. φ is the sensitivity coefficient. Added (not subtracted) because a system that responds to change is more alive, more tunable, more QFE-positive. Magenta for φ signals that this is the 'becoming' term — the difference between a static balance of order-minus-entropy and a system that senses its own drift.",
+      "code": "# + φ ΔE(S, t)\n\nx_offset = _add_term(\"plus\", \"+\", x_offset, COLOR_OPERATOR)\nx_offset += spacing\nx_offset = _add_term(\"phi\", \"φ\", x_offset, COLOR_PHI)\nx_offset = _add_term(\"delta\", \"Δ\", x_offset, COLOR_PHI)\nx_offset = _add_term(\"E2\", \"E\", x_offset, COLOR_E)\nx_offset = _add_term(\"openparen2\", \"(\", x_offset, COLOR_OPERATOR)\nx_offset = _add_term(\"S2\", \"S\", x_offset, COLOR_E)\nx_offset = _add_term(\"comma\", \",\", x_offset, COLOR_OPERATOR)\nx_offset = _add_term(\"t\", \"t\", x_offset, COLOR_E)\nx_offset = _add_term(\"closeparen2\", \")\", x_offset, COLOR_OPERATOR)\n\n# At φ=0: system ignores entropy change. Deaf to drift.\n# At φ=1: system responds immediately. Highly adaptive.\n# ΔE means the formula reads TIME, not just state.",
+      "concepts": ["rate term as temporal sensitivity", "φ as responsiveness coefficient", "derivative of entropy", "addition signals becoming", "magenta as rate channel"]
+    },
+    {
+      "title": "highlight_term — foregrounding changes meaning",
+      "thinking": "Now the interaction. highlight_term(name) makes one symbol pulse brighter than the rest. The reading of the whole formula changes depending on which term is foregrounded. Highlight F: the system reads as 'structure with corrections'. Highlight λE(S): it reads as 'entropy-dominated, order barely holding'. Highlight φΔE(S,t): it reads as 'a system responding to its own change'. The SAME formula, three different readings. This is the pedagogical climax: meaning lives in focus, not in symbols.",
+      "code": "signal term_highlighted(term_name: String)\n\nvar highlighted_term := \"\"\n\nfunc highlight_term(term_name: String) -> void:\n\thighlighted_term = term_name\n\tfor key in term_nodes.keys():\n\t\tvar mat: StandardMaterial3D = materials[key]\n\t\tif key == term_name:\n\t\t\tmat.emission_energy_multiplier = 2.0\n\t\telse:\n\t\t\tmat.emission_energy_multiplier = 0.3\n\tterm_highlighted.emit(term_name)\n\nfunc _process(delta: float) -> void:\n\tif animate and highlighted_term != \"\":\n\t\tvar pulse = 1.0 + sin(Time.get_ticks_msec() * 0.001 * pulse_speed) * 0.3\n\t\tmaterials[highlighted_term].emission_energy_multiplier = 2.0 * pulse",
+      "concepts": ["highlight as focus operator", "same formula, multiple readings", "pulse animation for emphasis", "meaning-via-foregrounding", "emission_energy as attention channel"]
+    },
+    {
+      "title": "on_lambda_changed / on_phi_changed — live tuning",
+      "thinking": "The formula listens to the world. When a λ slider (in QFEP_Lambda_Spectrum) moves, the formula's λ symbol shifts color saturation — brighter at high λ, dimmer at low. Same for φ. The formula is no longer just text — it is a DISPLAY that shows the current tuning state of the whole QFEP reading. Walk to the sandbox, turn λ up, look back at the formula: λ is glowing brighter. The formula and the parameter sliders are one instrument.",
+      "code": "func on_lambda_changed(value: float) -> void:\n\t# value in [0, 1]\n\tvar mat: StandardMaterial3D = materials[\"lambda\"]\n\tmat.albedo_color = COLOR_LAMBDA.lerp(Color(1, 1, 0.5), value * 0.5)\n\tmat.emission = mat.albedo_color * (0.5 + value * 0.8)\n\nfunc on_phi_changed(value: float) -> void:\n\tvar mat: StandardMaterial3D = materials[\"phi\"]\n\tmat.albedo_color = COLOR_PHI.lerp(Color(1, 0.8, 1), value * 0.5)\n\tmat.emission = mat.albedo_color * (0.5 + value * 0.8)\n\n# Connect in QFEP_Introduction.tscn:\n#   lambda_slider.value_changed → formula.on_lambda_changed\n#   phi_slider.value_changed → formula.on_phi_changed",
+      "concepts": ["formula-as-display", "live parameter binding", "color saturation as state indicator", "formula and sliders as one instrument", "tuning is visible"]
+    },
+    {
+      "title": "term_selected — the formula becomes interactive",
+      "thinking": "Final move: VR ray selection. The player reaches out, points at φ, pulls the trigger. term_selected('phi') fires. A panel appears explaining what φ is — its role in the formula, its range, its effect on the system in the sandbox. Every symbol is a door. The formula is now a MENU for navigating QFEP's conceptual space. @identity: QFE = F − λ·E(S) + φ·ΔE(S,t) is not an equation to solve but a lens through which to see every system. This is the truth of the entire curriculum — every form the player has built, every motion, every random draw, every evolved creature, every paradox — can be re-read through (F, λ, E, φ, Δ). The formula closes the curriculum and opens the next sequence: graphs, where we ask how all these lenses connect.",
+      "code": "signal term_selected(term_name: String)\n\nfunc _on_term_interacted(term_name: String) -> void:\n\thighlight_term(term_name)\n\tterm_selected.emit(term_name)\n\t# QFEP_Introduction listens and shows explanation panel\n\n# @identity\n# truth: QFE = F - lambda*E(S) + phi*delta_E(S,t)\n#        is not an equation to solve but a lens\n#        through which to see every system.\n#\n# Every form from primitives through ML — F.\n# Every random draw, every noise field — λE(S).\n# Every evolution, every learning, every becoming — φΔE(S,t).\n# The curriculum WAS the formula being built, term by term,\n# sequence by sequence. Now the lens is assembled.\n# Next: graphtheory — how all the lenses connect.",
+      "concepts": ["term-as-door", "formula-as-menu", "truth: QFEP is a lens, not an equation", "curriculum-as-formula-construction", "closure into graphtheory"]
+    }
+  ]
+}

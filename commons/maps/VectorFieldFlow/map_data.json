@@ -1,114 +1,114 @@
 {
   "map_info": {
-      "description": "Directional flow corridor for vector field visualization",
-      "dimensions": {
-          "depth": 10.0,
-          "max_height": 6.0,
-          "width": 6.0
-      },
-      "format": "json",
-      "lookup_name": "VectorFieldFlow",
-      "metadata": {
-          "category": "vectors",
-          "difficulty": "beginner",
-          "estimated_time": "5-10 minutes",
-          "learning_objectives": [
-              "Vector fields",
-              "Flow patterns",
-              "Streamlines"
-          ],
-          "spatial_temperature": 0.2
-      },
-      "name": "Directional flow corridor for vector field visualization",
-      "version": "1.0"
+    "description": "Directional flow corridor for vector field visualization",
+    "dimensions": {
+      "depth": 10.0,
+      "max_height": 6.0,
+      "width": 6.0
+    },
+    "format": "json",
+    "lookup_name": "VectorFieldFlow",
+    "metadata": {
+      "category": "vectors",
+      "difficulty": "beginner",
+      "estimated_time": "5-10 minutes",
+      "learning_objectives": [
+        "Vector fields",
+        "Flow patterns",
+        "Streamlines"
+      ],
+      "spatial_temperature": 0.2
+    },
+    "name": "Directional flow corridor for vector field visualization",
+    "version": "1.0"
   },
   "utility_definitions": {
-      "s": {
-          "properties": {
-              "height": 5.5
-          }
-      },
-      "t": {
-          "description": "Continue to next step",
-          "name": "Next",
-          "properties": {
-              "action": "next_in_sequence"
-          },
-          "type": "teleporter"
+    "s": {
+      "properties": {
+        "height": 5.5
       }
+    },
+    "t": {
+      "description": "Continue to next step",
+      "name": "Next",
+      "properties": {
+        "action": "next_in_sequence"
+      },
+      "type": "teleporter"
+    }
   },
   "lighting": {
-      "ambient_color": [
-          0.4,
-          0.4,
-          0.5
+    "ambient_color": [
+      0.4,
+      0.4,
+      0.5
+    ],
+    "ambient_energy": 0.6,
+    "directional_light": {
+      "color": [
+        1.0,
+        0.9,
+        0.8
       ],
-      "ambient_energy": 0.6,
-      "directional_light": {
-          "color": [
-              1.0,
-              0.9,
-              0.8
-          ],
-          "direction": [
-              -0.4,
-              -0.7,
-              -0.4
-          ],
-          "enabled": true,
-          "energy": 1.2
-      }
+      "direction": [
+        -0.4,
+        -0.7,
+        -0.4
+      ],
+      "enabled": true,
+      "energy": 1.2
+    }
   },
   "settings": {
-      "auto_reveal_on_entry": false,
-      "background": {
-          "color": [
-              0.2,
-              0.3,
-              0.7
-          ],
-          "type": "sky"
-      },
-      "cube_size": 1.0,
-      "enable_physics": true,
-      "gutter": 0.0,
-      "initial_tile_visibility": "hidden_except_corners",
-      "show_grid": true
+    "auto_reveal_on_entry": false,
+    "background": {
+      "color": [
+        0.2,
+        0.3,
+        0.7
+      ],
+      "type": "sky"
+    },
+    "cube_size": 1.0,
+    "enable_physics": true,
+    "gutter": 0.0,
+    "initial_tile_visibility": "hidden_except_corners",
+    "show_grid": true
   },
   "layers": {
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", "", " ", " ", " ", " ", " ", " "],
-      [" ", " ", "VectorFieldFlow", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "dark_sphere", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", "", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," ",""," "," "," "," "," "," "],
+      [" "," ","VectorFieldFlow"," "," "," "," "," "," "],
+      [" "," "," "," ","dark_sphere"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ",""," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "]
     ],
     "structure": [
-      ["1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "2", "1", "1"],
-      ["1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1"],
-      ["1", "1", "0", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1"]
+      ["1","1","1","1","1","1"],
+      ["1","1","1","1","1","1"],
+      ["1","1","1","1","1","1"],
+      ["1","1","1","2","1","1"],
+      ["1","1","1","1","1","1"],
+      ["1","1","1","1","1","1"],
+      ["1","1","1","1","1","1"],
+      ["1","1","1","1","1","1"],
+      ["1","1","0","1","1","1"],
+      ["1","1","1","1","1","1"]
     ],
     "utilities": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", "an.-90"],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", "sp", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", "t", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," ","an.-90"],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","sp"," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," ","t"," "," "," "," "," "," "]
     ]
   }
 }

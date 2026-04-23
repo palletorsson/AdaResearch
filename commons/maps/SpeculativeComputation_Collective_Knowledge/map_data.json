@@ -1,74 +1,76 @@
 {
   "map_info": {
-      "name": "Collective Knowledge",
-      "lookup_name": "SpeculativeComputation_Collective_Knowledge",
-      "description": "No single formal system is complete. But a commons — a wiki, a peer review, a distributed cognition — can route around any one system's blind spots.",
-      "version": "0.1",
-      "format": "json",
-      "dimensions": {
-          "width": 11,
-          "depth": 11,
-          "max_height": 3
-      },
-      "metadata": {
-          "difficulty": "advanced",
-          "category": "speculative_computation",
-          "status": "scaffold",
-          "design_notes": "SCAFFOLD — many small reading stations, none complete on its own. Artifacts TBD (wiki fragment, peer-edit ledger, citation graph node)."
-      },
-      "title": "The Commons as Response"
+    "name": "Collective Knowledge",
+    "lookup_name": "SpeculativeComputation_Collective_Knowledge",
+    "description": "No single formal system is complete. But a commons — a wiki, a peer review, a distributed cognition — can route around any one system's blind spots.",
+    "version": "0.1",
+    "format": "json",
+    "dimensions": {
+      "width": 11,
+      "depth": 11,
+      "max_height": 3
+    },
+    "metadata": {
+      "difficulty": "advanced",
+      "category": "speculative_computation",
+      "status": "scaffold",
+      "design_notes": "SCAFFOLD — many small reading stations, none complete on its own. Artifacts TBD (wiki fragment, peer-edit ledger, citation graph node)."
+    },
+    "title": "The Commons as Response"
   },
   "utility_definitions": {
-      "t": {
-          "type": "teleporter",
-          "name": "Next",
-          "description": "Continue to next step",
-          "properties": { "action": "next_in_sequence" }
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
       }
+    }
   },
   "audio": {
-      "ambient_preset": "minimal_drone",
-      "volume": -10.0
+    "ambient_preset": "minimal_drone",
+    "volume": -10.0
   },
   "layers": {
     "structure": [
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "0", "1", "1", "1", "1", "1"]
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","0","1","1","1","1","1"]
     ],
     "utilities": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", "sub:map", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", "3t:NO NODE IS TRUE ALONE", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", "3t:THE LEDGER HOLDS WHAT ONE CANNOT", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", "t", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","sub:map"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","3t:NO NODE IS TRUE ALONE"," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","3t:THE LEDGER HOLDS WHAT ONE CANNOT"," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","t"," "," "," "," "," "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", "wiki_fragment:0:0.3#fragment:NORTH", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", "wiki_fragment:90:0.3#fragment:WEST", " ", " ", " ", " ", " ", " ", " ", "wiki_fragment:270:0.3#fragment:EAST", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", "wiki_fragment:180:0.3#fragment:SOUTH", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","wiki_fragment:0:0.3#fragment:NORTH"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" ","wiki_fragment:90:0.3#fragment:WEST"," "," "," "," "," "," "," ","wiki_fragment:270:0.3#fragment:EAST"," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","wiki_fragment:180:0.3#fragment:SOUTH"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
     ]
   }
 }

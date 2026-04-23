@@ -1,0 +1,80 @@
+{
+  "artifact": "jelly_cube",
+  "title": "Building a Cube That Remembers Being Pushed",
+  "concept_layer": "soft bodies as spring-mass lattices; stiffness, damping, pressure as the three knobs of elasticity; deformation as negotiation",
+  "technique_first": ["SoftBody3D", "stiffness / damping / pressure_coefficient", "per-vertex deformation", "@export_range for bounded parameters", "color with alpha for translucency", "spring-mass lattice topology"],
+  "technique_reference": ["Recursion / mesh subdivision (Fractal_Recursion)", "Fitness-landscape optimization mindset (GeneticProgramming)", "apply_force pattern (ForcesFoundations)", "RackTemplates sliders (rotation_gimbal, Noise_Perlin_Simplex)"],
+  "domain_deferred": ["cloth simulation \u2192 SoftBodies_Cloth_Physics", "reaction-diffusion patterns \u2192 turing_pattern_generator (in softbodies sequence)", "morphogenesis \u2192 later softbodies maps", "muscle simulation / inverse kinematics \u2192 swarm + ML sequences", "destruction / fracture \u2192 procgen"],
+  "capture_leaks": {
+    "rigid_topology": "The mesh topology doesn\u2019t change \u2014 vertices move but connectivity is fixed. Tearing, splitting, merging all require changing topology at runtime, which SoftBody3D can\u2019t do.",
+    "homogeneous_material": "One stiffness value covers the entire cube. Real bodies have variable stiffness (bone vs muscle vs skin). Composite materials need multiple SoftBody3Ds or a custom solver.",
+    "no_rest_shape_memory": "The cube remembers its original shape via spring rest-lengths, but it doesn\u2019t remember deformation history. Plastic deformation (clay) requires updating rest-lengths mid-simulation.",
+    "no_self_collision": "This jelly passes through itself. Bunching, compression, or folding into itself breaks down. Self-collision requires spatial hashing, deferred.",
+    "explicit_integration": "The solver uses explicit time integration, which becomes unstable at high stiffness. Implicit solvers (used in real VFX) are outside the scope."
+  },
+  "limit": "A cube that jiggles. Three sliders control the physics. The artifact captures elasticity as a felt, tunable property \u2014 rigid vs liquid is a continuum, not a binary. What it refuses: topology change, material heterogeneity, plastic memory, self-collision, large deformations at high speed. Each is a door that opens later in the sequence.",
+  "grammar_alignment": {
+    "sequence": "softbodies",
+    "operations_taught": ["deform", "spring_mass"],
+    "operations_deferred_to_sequence": ["cloth (SoftBodies_Cloth_Physics)", "reaction_diffusion (turing_pattern_generator)"],
+    "note": "jelly_cube teaches deform (change shape under force) and spring_mass (the underlying mesh topology). Cloth is an anisotropic spring_mass; reaction_diffusion is a chemical analog of deformation. All softbodies operations are variations on 'respond to local perturbation.'"
+  },
+  "biome_alignment": {
+    "sequence": "softbodies",
+    "density_at_entry": 0.8,
+    "kingdoms_unlocked": ["flower", "tree", "fungus", "creature"],
+    "hand_verbs_gained": ["squish", "inflate"],
+    "catalyst_mode": "soft",
+    "note": "The 'soft' catalyst lets the player turn any rigid form in the biome into a soft body. Vegetation now bends under contact. Creatures have squishy contact with the world. This is where the biome stops feeling like infrastructure and starts feeling like a body."
+  },
+  "stages": [
+    {
+      "title": "From generation to response",
+      "thinking": "Procgen generated populations; genetic programming bred them toward fitness. But every creature was still a rigid piece of geometry. Now we give those bodies the ability to yield. Not 'what shape am I' but 'how do I respond when touched.' Softness is not a shape \u2014 it\u2019s a behavior. This sequence adds the behavioral layer to everything that came before.",
+      "code": "# Fractal_Recursion: geometry from self-calls\n# PG_Genetic_Evolution: geometry from evolved genomes\n# Both produce rigid forms \u2014 geometry that is.\n#\n# Soft bodies: geometry that RESPONDS.\n# Push it, it yields.\n# Let go, it recovers.\n# Squeeze it, it squishes.\n#\n# The form is no longer a noun \u2014 it's a verb.\n# What it IS is less important than what it DOES when touched.",
+      "concepts": ["behavior vs shape", "response as identity", "elasticity", "touch-reactive form"]
+    },
+    {
+      "title": "SoftBody3D \u2014 Godot's built-in cloth-mesh physics",
+      "thinking": "Godot provides SoftBody3D: a mesh where every vertex is a particle connected to neighbors by springs. Pinned points stay fixed; free points swing under forces (gravity, collisions). This is the primitive we build on. Not implementing the springs ourselves \u2014 using the engine's solver \u2014 so the map is about TUNING the physics, not writing it.",
+      "code": "extends Node3D\nclass_name JellyCube\n\n@export_range(0.1, 1.0, 0.01) var cube_size: float = 0.3\n@export_range(1, 8) var subdivisions: int = 4\n\nvar _soft_body: SoftBody3D\nvar _mesh_instance: MeshInstance3D\nvar _material: StandardMaterial3D\n\nfunc _ready() -> void:\n\t_setup_soft_body()\n\nfunc _setup_soft_body() -> void:\n\t_soft_body = SoftBody3D.new()\n\t_soft_body.mesh = _create_cube_mesh(cube_size, subdivisions)\n\t_soft_body.total_mass = 0.5\n\tadd_child(_soft_body)",
+      "concepts": ["SoftBody3D node", "mesh subdivision for resolution", "built-in solver use", "topology from subdivisions"]
+    },
+    {
+      "title": "Stiffness \u2014 rigid to liquid",
+      "thinking": "Stiffness is the spring constant between vertices. Near 0: springs are weak, the cube collapses under its own weight into a puddle. Near 1: springs are rigid, the cube barely yields. The sweet spot \u2014 where jelly lives \u2014 is around 0.3 to 0.6. This is the critical parameter. Change it with a slider, feel the material change from solid to slime without touching the geometry. One number. Infinite materials.",
+      "code": "@export_range(0.0, 1.0, 0.01) var stiffness: float = 0.5:\n\tset(value):\n\t\tstiffness = value\n\t\tif _soft_body:\n\t\t\t_soft_body.linear_stiffness = value\n\n# linear_stiffness maps directly to spring constants\n#   0.0 \u2192 puddle\n#   0.2 \u2192 tofu\n#   0.5 \u2192 jelly\n#   0.8 \u2192 rubber\n#   1.0 \u2192 nearly rigid\n#\n# One property, a whole spectrum of material.",
+      "concepts": ["linear_stiffness", "property as spectrum", "material from parameter", "setter pattern"]
+    },
+    {
+      "title": "Damping \u2014 how fast oscillation dies",
+      "thinking": "Without damping, a poke causes the cube to jiggle forever (in theory). Real materials dissipate energy \u2014 that\u2019s damping. Low damping: long, playful wobbles. High damping: thick, sluggish response like thick honey. Damping and stiffness together define the feel. The same stiffness with different damping gives different characters \u2014 trampoline vs mattress vs mud.",
+      "code": "@export_range(0.0, 1.0, 0.01) var damping: float = 0.1:\n\tset(value):\n\t\tdamping = value\n\t\tif _soft_body:\n\t\t\t_soft_body.damping_coefficient = value\n\n# damping_coefficient is energy loss per frame\n#   0.01 \u2192 long wobble (trampoline)\n#   0.1  \u2192 natural settle (jelly)\n#   0.5  \u2192 sluggish (honey)\n#   0.9  \u2192 instant death (sand)\n#\n# Damping is the material's memory of fatigue.",
+      "concepts": ["damping_coefficient", "energy dissipation", "temporal feel", "perceptual material type"]
+    },
+    {
+      "title": "Pressure \u2014 inflate to balloon, deflate to cloth",
+      "thinking": "SoftBody3D has a pressure_coefficient that simulates internal gas. Positive pressure inflates \u2014 the cube becomes a balloon straining outward. Zero pressure: the cube is free to collapse if stiffness is low. Negative (or the absence of inflation): it drapes like cloth. With three sliders (stiffness, damping, pressure) you cover trampolines, balloons, jellyfish, pillows, slime, and sheets. Three knobs, a material library.",
+      "code": "@export_range(0.0, 5.0, 0.05) var pressure: float = 1.0:\n\tset(value):\n\t\tpressure = value\n\t\tif _soft_body:\n\t\t\t_soft_body.pressure_coefficient = value\n\n# Combined material space (stiffness, damping, pressure):\n#   (0.6, 0.1, 2.5)  \u2192 bouncy balloon\n#   (0.5, 0.1, 1.0)  \u2192 default jelly\n#   (0.2, 0.3, 0.0)  \u2192 drapey cloth\n#   (0.9, 0.7, 0.0)  \u2192 rigid with slight give\n#   (0.0, 0.5, 0.0)  \u2192 collapsing puddle",
+      "concepts": ["pressure_coefficient", "three-parameter material space", "named regions of parameter space", "balloon vs cloth continuum"]
+    },
+    {
+      "title": "Translucent material \u2014 see what you\u2019re deforming",
+      "thinking": "The cube is colored with alpha < 1 so you can see through it. Touch it and watch the near vertices displace while the far vertices follow through the spring network. Without translucency, you\u2019d only see the surface wiggle; with it, you see the propagation. Color as transparency is a teaching tool: it makes invisible physics visible.",
+      "code": "@export var jelly_color: Color = Color(0.2, 0.9, 0.5, 0.8):\n\tset(value):\n\t\tjelly_color = value\n\t\tif _material:\n\t\t\t_material.albedo_color = value\n\nfunc _make_material() -> StandardMaterial3D:\n\tvar m = StandardMaterial3D.new()\n\tm.albedo_color = jelly_color  # alpha < 1\n\tm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA\n\tm.metallic = 0.2\n\tm.roughness = 0.3\n\treturn m\n\n# The translucent cube reveals the elastic network.\n# Poke one side \u2014 see the wave propagate through.\n# Physics made visible.",
+      "concepts": ["TRANSPARENCY_ALPHA", "translucent material", "pedagogy through visibility", "see-through deformation"]
+    },
+    {
+      "title": "Three sliders + color cycle button",
+      "thinking": "RackTemplates panel with sliders for stiffness, damping, pressure. A push button for color cycling (green \u2192 pink \u2192 blue \u2192 green) so the player can taste different palette moods. A reset button restores defaults. The panel is the interface to the physics. Each slider tick triggers the setter that updates the live SoftBody3D \u2014 no rebuild, no pause. The jelly jiggles during your tune.",
+      "code": "func _create_controls() -> void:\n\tvar RackTpl = load(\"res://commons/audio/rack_templates/RackTemplates.gd\")\n\tvar panel = RackTpl.create_panel(\"JELLY PHYSICS\", [\n\t\t[{\"type\": \"slider_h\", \"label\": \"STIFF\", \"default\": stiffness}],\n\t\t[{\"type\": \"slider_h\", \"label\": \"DAMP\",  \"default\": damping}],\n\t\t[{\"type\": \"slider_h\", \"label\": \"PRESS\", \"default\": pressure / 5.0}],\n\t\t[{\"type\": \"button\", \"label\": \"COLOR\"}, {\"type\": \"button\", \"label\": \"RESET\"}],\n\t])\n\tpanel.position = Vector3(0, -0.2, 0.4)\n\tpanel.rotation_degrees.x = -25\n\tadd_child(panel)",
+      "concepts": ["RackTemplates panel", "live physics tuning", "multi-slider interface", "reset pattern"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "The jelly cube knows what it is. Not a toy \u2014 a demonstration that elasticity is a NEGOTIATION. The cube has internal forces (springs); your hands have external forces (collision); the deformation is where they meet. The artifact refuses topology change, plastic memory, self-collision. But what it offers \u2014 tunable softness, visible propagation, three-parameter material space \u2014 is enough to teach that matter is not rigid-or-liquid but a field of responses.",
+      "code": "# @identity\n# essence: SoftBody3D with spring-mass physics \u2014 stiffness, damping, and pressure_coefficient govern deformation response\n# desire: to let you poke a translucent cube and feel its resistance change under your hands as you drag sliders between rigid and liquid\n# critical_parameter: stiffness \u2014 at 0 the cube collapses into a puddle, at 1 it barely yields, the sweet spot between is where jelly lives\n# triggers: hand collision with the SoftBody3D surface causes real-time vertex displacement; pressure slider inflates or deflates the volume\n# emerges: at low stiffness and high pressure the cube becomes a breathing balloon; at low pressure it drapes over the pedestal like cloth\n# needs: slider_horizontal [has] (stiffness, damping, pressure); push_button [has] (color cycle, reset); Label3D [has]\n# relationships: introduces spring-mass foundation before cloth_straps and soft_mushroom; contrasts with rounded_softbody_test which adds strain visualization\n# truth: elasticity is not a property of the object \u2014 it is a negotiation between the object's internal forces and whatever touches it",
+      "concepts": ["@identity", "elasticity as negotiation", "tunable material", "three-parameter continuum", "truth"]
+    }
+  ]
+}

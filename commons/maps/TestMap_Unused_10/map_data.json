@@ -1,45 +1,45 @@
 {
   "map_info": {
-      "name": "TestMap_Unused_10",
-      "lookup_name": "TestMap_Unused_10",
-      "description": "Test map for artifacts: neon_wave_grid, noir_sequencer, noise_terrain, noise_terrain_with_blobs",
-      "dimensions": {
-          "width": 5,
-          "depth": 5,
-          "max_height": 5
-      }
+    "name": "TestMap_Unused_10",
+    "lookup_name": "TestMap_Unused_10",
+    "description": "Test map for artifacts: neon_wave_grid, noir_sequencer, noise_terrain, noise_terrain_with_blobs",
+    "dimensions": {
+      "width": 5,
+      "depth": 5,
+      "max_height": 5
+    }
   },
   "utility_definitions": {
-      "t": {
-          "type": "teleporter",
-          "name": "Next Lesson",
-          "description": "Continue to the next algorithm demonstration",
-          "properties": {
-              "action": "next_in_sequence"
-          }
+    "t": {
+      "type": "teleporter",
+      "name": "Next Lesson",
+      "description": "Continue to the next algorithm demonstration",
+      "properties": {
+        "action": "next_in_sequence"
       }
+    }
   },
   "layers": {
     "structure": [
-      ["1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1"],
-      ["1", "1", "0", "1", "1"]
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","0","1","1"]
     ],
     "utilities": [
-      [" ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " "],
-      [" ", " ", "s", " ", " "],
-      [" ", " ", " ", " ", " "],
-      [" ", " ", "t", " ", " "]
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," ","s"," "," "],
+      [" "," "," "," "," "],
+      [" "," ","t"," "," "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " "],
-      [" ", "neon_wave_grid:0:2", " ", " ", " "],
-      [" ", " ", " ", " ", " "],
-      [" ", " ", " ", "noise_terrain_with_blobs", " "],
-      [" ", " ", " ", " ", " "]
+      [" "," "," "," "," "],
+      [" ","neon_wave_grid:0:2"," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," ","noise_terrain_with_blobs"," "],
+      [" "," "," "," "," "]
     ]
   }
 }

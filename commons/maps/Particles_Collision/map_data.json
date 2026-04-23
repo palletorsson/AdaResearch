@@ -1,111 +1,111 @@
 {
   "map_info": {
-      "name": "Particles_Collision",
-      "lookup_name": "Particles_Collision",
-      "title": "Collision and Synthesis",
-      "description": "Particles bounce off surfaces, stick to geometry, slide along walls. From ghost to inhabitant, the particle enters the world.",
-      "version": "1.0",
-      "format": "json",
-      "dimensions": {
-          "width": 7,
-          "depth": 9,
-          "max_height": 2
-      },
-      "metadata": {
-          "difficulty": "beginner",
-          "category": "tutorial",
-          "estimated_time": "3-4 minutes",
-          "learning_objectives": [
-              "Particle collision",
-              "Repeller forces",
-              "Bounce and response",
-              "Spatial awareness"
-          ]
-      }
+    "name": "Particles_Collision",
+    "lookup_name": "Particles_Collision",
+    "title": "Collision and Synthesis",
+    "description": "Particles bounce off surfaces, stick to geometry, slide along walls. From ghost to inhabitant, the particle enters the world.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 7,
+      "depth": 9,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "beginner",
+      "category": "tutorial",
+      "estimated_time": "3-4 minutes",
+      "learning_objectives": [
+        "Particle collision",
+        "Repeller forces",
+        "Bounce and response",
+        "Spatial awareness"
+      ]
+    }
   },
   "utility_definitions": {
-      "t": {
-          "type": "teleporter",
-          "name": "Next",
-          "description": "Continue to next step",
-          "properties": {
-              "action": "next_in_sequence"
-          }
-      },
-      "s": {
-          "properties": {
-              "height": 5.5
-          }
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
       }
+    },
+    "s": {
+      "properties": {
+        "height": 5.5
+      }
+    }
   },
   "lighting": {
-      "ambient_color": [
-          0.4,
-          0.4,
-          0.5
+    "ambient_color": [
+      0.4,
+      0.4,
+      0.5
+    ],
+    "ambient_energy": 0.6,
+    "directional_light": {
+      "enabled": true,
+      "direction": [
+        -0.4,
+        -0.7,
+        -0.4
       ],
-      "ambient_energy": 0.6,
-      "directional_light": {
-          "enabled": true,
-          "direction": [
-              -0.4,
-              -0.7,
-              -0.4
-          ],
-          "color": [
-              1.0,
-              0.9,
-              0.8
-          ],
-          "energy": 1.2
-      }
+      "color": [
+        1.0,
+        0.9,
+        0.8
+      ],
+      "energy": 1.2
+    }
   },
   "settings": {
-      "cube_size": 1.0,
-      "gutter": 0.0,
-      "show_grid": true,
-      "enable_physics": true,
-      "auto_reveal_on_entry": false,
-      "initial_tile_visibility": "hidden_except_corners",
-      "background": {
-          "type": "sky",
-          "color": [
-              0.2,
-              0.3,
-              0.7
-          ]
-      }
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "enable_physics": true,
+    "auto_reveal_on_entry": false,
+    "initial_tile_visibility": "hidden_except_corners",
+    "background": {
+      "type": "sky",
+      "color": [
+        0.2,
+        0.3,
+        0.7
+      ]
+    }
   },
   "layers": {
     "structure": [
-      ["1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "2", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "0", "1"],
-      ["0", "0", "0", "0", "1", "1", "1"]
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","2","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","0","1"],
+      ["0","0","0","0","1","1","1"]
     ],
     "utilities": [
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", "t", " "],
-      [" ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," ","t"," "],
+      [" "," "," "," "," "," "," "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", "dark_sphere", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", "example_4_6_particle_repeller_vr", " ", " ", " "],
-      [" ", " ", " ", " ", " ", "particle_campfire", " "],
-      [" ", " ", "0", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," ","dark_sphere"," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," ","example_4_6_particle_repeller_vr"," "," "," "],
+      [" "," "," "," "," ","particle_campfire"," "],
+      [" "," ","0"," "," "," "," "],
+      [" "," "," "," "," "," "," "]
     ]
   }
 }

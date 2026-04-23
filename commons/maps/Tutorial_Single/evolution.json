@@ -1,0 +1,80 @@
+{
+  "artifact": "column_3_z",
+  "title": "Building a Column That Makes Index Into Position",
+  "concept_layer": "array as indexed memory; index = distance; for-loop as space-walk",
+  "technique_first": ["for i in range(n)", "preload + instantiate", "Label3D billboard", "apply_grid_config pattern", "soft pink labeling convention"],
+  "technique_reference": ["Node3D + child hierarchy (Point_One)", "Vector3 arithmetic (Trans_Translation)", "@identity block (all prior)"],
+  "domain_deferred": ["sorting + algorithmic complexity \u2192 proceduralgeneration", "hash maps and associative indexing \u2192 graphtheory / DataStructures", "2D and 3D grids \u2192 later in arrays sequence (grid_2d_4x4, grid_3d_4x4x4)"],
+  "capture_leaks": {
+    "contiguity": "This array looks continuous \u2014 the cubes touch. But an array is logically a sequence of addressable slots; 'next to' is a property of the rendering, not of the index.",
+    "fixed_size": "range(4) is hardcoded. Dynamic-size arrays, resizing costs, and memory layout are deferred to later sequences.",
+    "flat_addressing": "A 1D array can represent a 2D grid via i = row*width + col. This encoding trick is invisible here; grid_2d_4x4 makes it explicit.",
+    "linear_traversal": "for-loop walks 0\u21921\u21922\u21923. But arrays also support binary search, hash lookup, jumps \u2014 the linearity of the loop is a convention, not the only path.",
+    "homogeneous_cells": "Every cube is identical. Heterogeneous arrays (different types per index) require more machinery \u2014 structs, tuples, tagged unions."
+  },
+  "limit": "Four cubes in a line. A ruler made of objects. What it captures beautifully: that an index IS a position, that a for-loop IS a walk, that [0] and [1] are not abstractions but places you can stand next to. What it refuses: dynamic resizing, non-linear access, associative keys, variable types per cell. Later maps take those up; this one makes countable space touchable.",
+  "grammar_alignment": {
+    "sequence": "arrays",
+    "operations_taught": ["repeat"],
+    "operations_deferred_to_sequence": ["grid (grid_2d_4x4)", "tile (wallpaper_groups)", "index (IndexVisualizer)"],
+    "note": "column_3_z teaches only `repeat` \u2014 the simplest operation. The other three arrays operations are taught by sibling artifacts later in the sequence."
+  },
+  "biome_alignment": {
+    "sequence": "array_tutorial",
+    "density_at_entry": 0.2,
+    "kingdoms_unlocked": ["flower", "tree"],
+    "hand_verbs_gained": ["snap_place", "reorder"],
+    "hazard_type": "gridagent",
+    "note": "The biome now has first vegetation AND gridagents roaming. Array concepts unlock the verbs 'snap_place' (put a thing at an index) and 'reorder' (rearrange indices). The world is still mostly sterile but beginning to populate \u2014 density 0.2."
+  },
+  "stages": [
+    {
+      "title": "From force to formation",
+      "thinking": "ForcesFoundations taught that F = m\u00b7a is the same equation for falling apples and orbiting planets. Forces accumulate into motion. Now a question that forces can't answer: if I want four objects in a row, how do I say 'four' to code? Not how they move \u2014 how they are organized. The answer is the array. Position was one Vector3. An array is many of them, addressed by index.",
+      "code": "# Previous sequences:\n#   primitives \u2014 one thing at a time (Vector3, line, triangle)\n#   transformation \u2014 how to move one thing\n#   color \u2014 how one thing looks\n#   forces \u2014 how one thing reacts\n#\n# Now: many things, addressed by number.\n#\n# position = Vector3(0, 0, 0)    # one location\n# positions = [Vector3(0,0,0), Vector3(0,0,1), ...]\n# positions[0]   \u2192 the first one\n# positions[i]   \u2192 the i-th one\n#\n# Index is a new kind of parameter.\n# Not spatial, not temporal \u2014 ORDINAL.",
+      "concepts": ["ordinal vs cardinal", "index as address", "collection vs instance"]
+    },
+    {
+      "title": "The for-loop as a walk",
+      "thinking": "GDScript's for-loop is the primary tool for creating an array. `for i in range(4)` runs the body four times, with i taking values 0, 1, 2, 3 in order. This is not 'iteration' as an abstraction \u2014 it is a walk. The map will literally be a walk alongside four cubes, so the loop that creates them is a walk in code. Structure mirrors experience.",
+      "code": "extends Node3D\n\nfunc _ready() -> void:\n\tcreate_column()\n\nfunc create_column() -> void:\n\tvar pickup_cube_scene = preload(\"res://commons/scenes/mapobjects/pick_up_cube.tscn\")\n\t\n\t# The loop: i counts 0, 1, 2, 3\n\tfor i in range(4):\n\t\tvar cube_instance = pickup_cube_scene.instantiate()\n\t\tcube_instance.name = \"Cube_\" + str(i)\n\t\t# ... position + label in next stages\n\t\tadd_child(cube_instance)",
+      "concepts": ["for-in loop", "range()", "preload + instantiate", "scene reuse"]
+    },
+    {
+      "title": "Index becomes distance",
+      "thinking": "Here is the move that makes the whole map work: i * 1.0 along the Z axis. The mathematical abstraction (i is an index) becomes a physical fact (i is a distance in meters). Cube[0] sits at z=0. Cube[1] sits at z=1. The player can walk from [0] to [1] and feel that distance IS the step from one index to the next. Indexing is no longer abstract.",
+      "code": "for i in range(4):\n\tvar cube_instance = pickup_cube_scene.instantiate()\n\tcube_instance.name = \"Cube_\" + str(i)\n\t\n\t# Position cubes `spacing` units apart in Z direction\n\t# index becomes distance\n\tcube_instance.position = Vector3(0, 0, i * 1.0)\n\t\n\tadd_child(cube_instance)\n\n# When the player walks from z=0 to z=3,\n# they are walking the array from [0] to [3].\n# The body learns what index means.",
+      "concepts": ["index \u2194 position", "spacing parameter", "embodied enumeration"]
+    },
+    {
+      "title": "Label each slot with its index",
+      "thinking": "Without labels, four cubes is just four cubes. With [0] [1] [2] [3] floating above them, the cubes become an array. Label3D with billboard mode ensures the label faces the player from any angle. Pink is the color \u2014 specifically Color(1.0, 0.7, 0.8). In Ada Research, pink codes 'soft' rather than 'rigid.' An array is a structure, but the structure is not hard; it's a convention the world agrees to.",
+      "code": "var label = Label3D.new()\nlabel.text = \"[%d]\" % i\nlabel.font_size = 24\nlabel.pixel_size = 0.003\nlabel.outline_size = 0\nlabel.position = Vector3(0, 1.0, 0)  # floats above cube\nlabel.billboard = BaseMaterial3D.BILLBOARD_ENABLED\nlabel.modulate = Color(1.0, 0.7, 0.8)  # soft pink\ncube_instance.add_child(label)\n\n# [0] is not a number above a cube.\n# It is the NAME of that cube.\n# The cube BECOMES its index.",
+      "concepts": ["Label3D billboard", "string formatting %d", "color as aesthetic code", "slot naming"]
+    },
+    {
+      "title": "Pick up = remove from array",
+      "thinking": "The cubes are pickable. When the player grabs one and walks away with it, what happens? The array has a hole. The slot remains (no cube-shift to fill it). This is array semantics: indices are addresses, not ranks. Remove index 2, and the array still has [0], [1], null, [3]. This is the first implicit lesson about associative vs sequential thinking.",
+      "code": "# pickup_cube.tscn is an XRToolsPickable\n# When picked, the cube leaves its parent hierarchy\n# in practice \u2014 it's carried by the player's hand.\n# The column_3_z remains, but [2] is visibly missing.\n#\n# This is NOT:\n#   cubes.remove(2)   # would shift [3] into slot 2\n# \n# This IS:\n#   cubes[2] = null   # slot stays, content gone\n#\n# Later sequences will teach:\n#   - shifting (linked lists) \u2192 data structures\n#   - resizing (dynamic arrays) \u2192 procgen\n#   - associative arrays (hash maps) \u2192 graph theory",
+      "concepts": ["remove vs shift", "slot vs rank", "sparse arrays", "address semantics"]
+    },
+    {
+      "title": "Parameterize via apply_grid_config",
+      "thinking": "The artifact accepts configuration at placement time: count (how many cubes), spacing (how far apart), label_size, label_color. This pattern \u2014 apply_grid_config(config: Dictionary) \u2014 is project-wide. Any artifact can be parameterized by the map that places it. Same artifact, different parameters, different lessons. column_3_z:count=8:spacing=0.5 teaches density; count=2:spacing=3.0 teaches sparsity.",
+      "code": "func apply_grid_config(config: Dictionary) -> void:\n\tif config.is_empty():\n\t\treturn\n\t# Rebuild with new settings\n\tfor child in get_children():\n\t\tif not child.owner:\n\t\t\tchild.queue_free()\n\tawait get_tree().process_frame\n\t\n\tvar count = int(config[\"count\"]) if config.has(\"count\") else 4\n\tvar spacing = float(config[\"spacing\"]) if config.has(\"spacing\") else 1.0\n\tvar label_size = int(config[\"label_size\"]) if config.has(\"label_size\") else 24\n\tvar label_color = Color.from_string(\n\t\tconfig[\"label_color\"], Color(1.0, 0.7, 0.8)\n\t) if config.has(\"label_color\") else Color(1.0, 0.7, 0.8)\n\t\n\tvar pickup_cube_scene = preload(\"res://commons/scenes/mapobjects/pick_up_cube.tscn\")\n\tfor i in range(count):\n\t\tvar cube = pickup_cube_scene.instantiate()\n\t\tcube.position = Vector3(0, 0, i * spacing)\n\t\t# ... label as before\n\t\tadd_child(cube)",
+      "concepts": ["apply_grid_config pattern", "runtime reconfiguration", "parameter dictionary", "instance-as-variant"]
+    },
+    {
+      "title": "Clean up cubes that weren't auto-parented",
+      "thinking": "A small but telling detail. `for child in get_children(): if not child.owner: child.queue_free()`. When an artifact dies (exits tree or is rebuilt), any children without an owner \u2014 i.e., ones we created procedurally in code \u2014 need to be freed explicitly. Children with an owner came from a .tscn scene and get cleaned up automatically. This distinction shows up everywhere in procedural Godot code.",
+      "code": "func _exit_tree() -> void:\n\tfor child in get_children():\n\t\tif not child.owner:\n\t\t\tchild.queue_free()\n\n# child.owner is set when loaded from a .tscn scene\n# child.owner is null when created in code via .new()\n#\n# This pattern: 'free what I made, let the scene clean what it loaded.'\n# A convention that scales to every artifact in the project.",
+      "concepts": ["Node.owner semantics", "scene vs procedural children", "queue_free() hygiene", "exit_tree cleanup"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "An array column knows what it is. Not four cubes \u2014 an ordered sequence of addresses made spatial. The soft pink label color is not decoration; it is the project's signal that structure is not the enemy of softness. The spacing parameter is not adjustable just for layout; it is the critical parameter because it controls whether the array feels continuous (spacing=1, cubes touch) or separate (spacing>1, gaps visible). When you walk from [0] to [3], you are doing what a for-loop does. You are the iteration.",
+      "code": "# @identity\n# essence: for i in range(4): cube.position = Vector3(0, 0, i \u00d7 spacing) \u2014 four pickup cubes arranged as a linear array in the Z direction, each labeled [i]\n# desire: to walk alongside an array \u2014 to see [0], [1], [2], [3] as physical objects in space and understand that an index is a distance, that traversal is movement\n# critical_parameter: spacing \u2014 at 1.0 the cubes are adjacent and the array feels compact; at 2.0 they feel like separate objects; the default 1.0 makes index=position visible\n# triggers: picking up a cube removes it from the array visualization, making the gap visible \u2014 the array has a hole where the index used to be\n# emerges: the pink label color (Color(1.0, 0.7, 0.8)) subtly codes the array as soft rather than rigid, echoing the project's queer aesthetic\n# needs: pickup cubes [has]; Label3D index labels [has]; apply_grid_config supports count/spacing/label overrides [has]\n# relationships: simpler than grid_2d_4x4 (one dimension vs two); appears in Tutorial_Row alongside xyz_coordinates; precedes grid_2d_4x4\n# truth: an array is space made countable \u2014 column_3_z makes the abstract concept of an index into a physical position you can walk to",
+      "concepts": ["@identity", "countable space", "embodied iteration", "soft structure", "truth"]
+    }
+  ]
+}
