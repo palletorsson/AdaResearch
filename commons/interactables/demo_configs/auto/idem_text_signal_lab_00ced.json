@@ -1,0 +1,142 @@
+{
+  "demo_info": {
+    "name": "Text Signal Lab 00ced",
+    "description": "Auto-generated text_signal_lab board composed from the InteractableDemo vocabulary.",
+    "family": "text_signal_lab",
+    "auto_generated": true,
+    "auto_score": 86.08,
+    "selection_rank": 1
+  },
+  "titles": {
+    "main": "TEXT SIGNAL LAB",
+    "row2": "PASSIVE + MONITORS",
+    "row3": "COMPOUND ARRANGEMENTS",
+    "row4": "PROTOTYPE MODULES"
+  },
+  "layout": {
+    "panel_color": [
+      0.64,
+      0.6,
+      0.56,
+      1.0
+    ],
+    "frame_color": [
+      0.2,
+      0.16,
+      0.15,
+      1.0
+    ],
+    "accent_color": [
+      0.86,
+      0.25,
+      0.48,
+      1.0
+    ],
+    "dark_color": [
+      0.12,
+      0.1,
+      0.11,
+      1.0
+    ],
+    "cream_color": [
+      0.8,
+      0.76,
+      0.7,
+      1.0
+    ],
+    "spacing": 0.281,
+    "control_z": 0.02,
+    "label_y_offset": -0.18,
+    "row_y": 1.124,
+    "row2_y": 0.711,
+    "row3_y": 0.292,
+    "row4_y": -0.138
+  },
+  "controls": [
+    {
+      "scene": "res://commons/interactables/wheel_smooth.tscn",
+      "label": "WHEEL",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/push_button_front.tscn",
+      "label": "BUTTON\nFRONT",
+      "y": 0.0,
+      "rot_y": 180.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_horizontal.tscn",
+      "label": "SLIDER H",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/push_button.tscn",
+      "label": "BUTTON",
+      "y": 0.0
+    }
+  ],
+  "extra_buttons": [
+    {
+      "type": "rect_tall",
+      "label": "RECT TALL"
+    },
+    {
+      "type": "rect_wide",
+      "label": "RECT WIDE"
+    }
+  ],
+  "passive_elements": [
+    {
+      "builder": "build_vu_meter_v",
+      "label": "VU METER V",
+      "width": 1
+    },
+    {
+      "builder": "build_speaker_grid",
+      "label": "SPEAKER GRID",
+      "width": 1
+    },
+    {
+      "monitor": "lissajous",
+      "slots": 2,
+      "label": "LISSAJOUS",
+      "width": 2
+    }
+  ],
+  "compounds": [
+    {
+      "type": "speaker_meters",
+      "count": 2,
+      "label": "SPEAKER+METERS",
+      "width": 2
+    },
+    {
+      "type": "monitor_sliders",
+      "count": 3,
+      "label": "MONITOR+SLIDERS",
+      "width": 2
+    }
+  ],
+  "new_modules": [
+    {
+      "type": "text_scroll_1",
+      "label": "SCROLL 1",
+      "width": 1
+    },
+    {
+      "type": "text_static_2",
+      "label": "TEXT 2",
+      "width": 2
+    },
+    {
+      "type": "text_static_1",
+      "label": "TEXT 1",
+      "width": 1
+    },
+    {
+      "type": "patch_matrix",
+      "label": "PATCH\nMATRIX",
+      "width": 1
+    }
+  ]
+}

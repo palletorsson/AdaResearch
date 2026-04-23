@@ -1,0 +1,111 @@
+{
+  "demo_info": {
+    "name": "Control Survey 2e0ca",
+    "description": "Auto-generated control_survey board composed from the InteractableDemo vocabulary.",
+    "family": "control_survey",
+    "auto_generated": true,
+    "auto_score": 61.64,
+    "selection_rank": 1
+  },
+  "titles": {
+    "main": "CONTROL SURVEY",
+    "row2": "PASSIVE + MONITORS",
+    "row3": "COMPOUND ARRANGEMENTS",
+    "row4": "PROTOTYPE MODULES"
+  },
+  "layout": {
+    "panel_color": [
+      0.66,
+      0.69,
+      0.72,
+      1.0
+    ],
+    "frame_color": [
+      0.18,
+      0.22,
+      0.27,
+      1.0
+    ],
+    "accent_color": [
+      0.94,
+      0.48,
+      0.19,
+      1.0
+    ],
+    "dark_color": [
+      0.07,
+      0.08,
+      0.1,
+      1.0
+    ],
+    "cream_color": [
+      0.82,
+      0.84,
+      0.88,
+      1.0
+    ],
+    "spacing": 0.247,
+    "control_z": 0.02,
+    "label_y_offset": -0.18,
+    "row_y": 1.11,
+    "row2_y": 0.694,
+    "row3_y": 0.244,
+    "row4_y": -0.206
+  },
+  "controls": [
+    {
+      "scene": "res://commons/interactables/push_button_front.tscn",
+      "label": "BUTTON\nFRONT",
+      "y": 0.0,
+      "rot_y": 180.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_snap.tscn",
+      "label": "SNAP",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "label": "KNOB",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/joystick_smooth.tscn",
+      "label": "JOYSTICK",
+      "y": -0.05
+    },
+    {
+      "scene": "res://commons/interactables/slider_smooth.tscn",
+      "label": "SLIDER V",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_plane.tscn",
+      "label": "XY PAD",
+      "y": -0.05
+    },
+    {
+      "scene": "res://commons/interactables/slider_zero.tscn",
+      "label": "ZERO",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/wheel_smooth.tscn",
+      "label": "WHEEL",
+      "y": 0.0
+    }
+  ],
+  "extra_buttons": [
+    {
+      "type": "rect_wide",
+      "label": "RECT WIDE"
+    },
+    {
+      "type": "rect_sm",
+      "label": "RECT SM"
+    }
+  ],
+  "passive_elements": [],
+  "compounds": [],
+  "new_modules": []
+}

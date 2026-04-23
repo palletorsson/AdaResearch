@@ -1,0 +1,30 @@
+{
+  "rack_info": {
+    "name": "Glass_cold_trap (glass)",
+    "description": "Auto-generated glass_cold_trap turtle-path for glass system. path='flask,f,u,f,corner45,f,condenser,ubend,f,d,f,d,f,drip'",
+    "system": "glass",
+    "archetype": "glass_cold_trap",
+    "auto_generated": true
+  },
+  "layout": {
+    "segment_length": 0.152,
+    "pipe_radius": 0.02,
+    "tube_radius": 0.016
+  },
+  "path": "flask,f,u,f,corner45,f,condenser,ubend,f,d,f,d,f,drip",
+  "materials": {
+    "glass_color": [
+      0.88,
+      0.94,
+      1.0,
+      0.24
+    ],
+    "liquid_color": [
+      0.05,
+      0.7,
+      1.0,
+      0.52
+    ],
+    "show_liquid": true
+  }
+}

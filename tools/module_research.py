@@ -140,6 +140,14 @@ MODULES: dict[str, dict] = {
         "stage_dir":    "perfect_shots",
         "description":  "Composite demo scenes — interactable_demo + demo_passive + demo_compounds + demo_singles. Captures the full procedural-module set inline (rect buttons, toggle, touch_grid, rotary_selector, needle_meter, patch_matrix, text).",
     },
+    "interactable-layouts-auto": {
+        "config_glob":  "commons/interactables/demo_configs/auto/*.json",
+        "godot_script": "res://commons/testing/capture_interactable_demo_config.gd",
+        "gallery":      "interactable-layouts-gallery",
+        "arg_scheme":   "config_out",
+        "stage_dir":    "interactable_layouts_gallery",
+        "description":  "Auto-generated composite InteractableDemo boards. Same controls/passives/compounds/prototypes as interactable_demo.tscn, reorganized via JSON configs.",
+    },
     "pipes-auto": {
         # Unified turtle-graphics pipe system — covers both GlassRackController
         # (lab glass, pipe_radius=0.02) and BigPipeSystem (drain pipes,

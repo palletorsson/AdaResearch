@@ -1,0 +1,30 @@
+{
+  "rack_info": {
+    "name": "Glass_reflux_loop (glass)",
+    "description": "Auto-generated glass_reflux_loop turtle-path for glass system. path='flask,f,u,f,condenser,ubend,d,f,beaker'",
+    "system": "glass",
+    "archetype": "glass_reflux_loop",
+    "auto_generated": true
+  },
+  "layout": {
+    "segment_length": 0.121,
+    "pipe_radius": 0.02,
+    "tube_radius": 0.016
+  },
+  "path": "flask,f,u,f,condenser,ubend,d,f,beaker",
+  "materials": {
+    "glass_color": [
+      0.85,
+      0.92,
+      1.0,
+      0.28
+    ],
+    "liquid_color": [
+      0.2,
+      0.8,
+      0.4,
+      0.6
+    ],
+    "show_liquid": true
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "demo_info": {
+    "name": "Compound Bench 6df70",
+    "description": "Auto-generated compound_bench board composed from the InteractableDemo vocabulary.",
+    "family": "compound_bench",
+    "auto_generated": true,
+    "auto_score": 45.73,
+    "selection_rank": 2
+  },
+  "titles": {
+    "main": "COMPOUND BENCH",
+    "row2": "PASSIVE + MONITORS",
+    "row3": "COMPOUND ARRANGEMENTS",
+    "row4": "PROTOTYPE MODULES"
+  },
+  "layout": {
+    "panel_color": [
+      0.78,
+      0.75,
+      0.67,
+      1.0
+    ],
+    "frame_color": [
+      0.25,
+      0.23,
+      0.2,
+      1.0
+    ],
+    "accent_color": [
+      0.75,
+      0.38,
+      0.13,
+      1.0
+    ],
+    "dark_color": [
+      0.1,
+      0.1,
+      0.1,
+      1.0
+    ],
+    "cream_color": [
+      0.78,
+      0.75,
+      0.67,
+      1.0
+    ],
+    "spacing": 0.28,
+    "control_z": 0.02,
+    "label_y_offset": -0.18,
+    "row_y": 1.018,
+    "row2_y": 0.55,
+    "row3_y": 0.1,
+    "row4_y": -0.336
+  },
+  "controls": [
+    {
+      "scene": "res://commons/interactables/slider_plane.tscn",
+      "label": "XY PAD",
+      "y": -0.05
+    },
+    {
+      "scene": "res://commons/interactables/push_button_front.tscn",
+      "label": "BUTTON\nFRONT",
+      "y": 0.0,
+      "rot_y": 180.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_zero.tscn",
+      "label": "ZERO",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/wheel_smooth.tscn",
+      "label": "WHEEL",
+      "y": 0.0
+    }
+  ],
+  "extra_buttons": [],
+  "passive_elements": [
+    {
+      "monitor": "lissajous",
+      "slots": 2,
+      "label": "LISSAJOUS",
+      "width": 2
+    }
+  ],
+  "compounds": [
+    {
+      "type": "sliders_v",
+      "count": 3,
+      "label": "3x SLIDER V",
+      "width": 2
+    },
+    {
+      "type": "sliders_h",
+      "count": 4,
+      "label": "4x SLIDER H",
+      "width": 2
+    },
+    {
+      "type": "speaker_meters",
+      "count": 2,
+      "label": "SPEAKER+METERS",
+      "width": 2
+    },
+    {
+      "type": "monitor_sliders",
+      "count": 3,
+      "label": "MONITOR+SLIDERS",
+      "width": 2
+    }
+  ],
+  "new_modules": []
+}

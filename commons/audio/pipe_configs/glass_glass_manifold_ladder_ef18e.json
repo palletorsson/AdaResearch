@@ -1,0 +1,30 @@
+{
+  "rack_info": {
+    "name": "Glass_manifold_ladder (glass)",
+    "description": "Auto-generated glass_manifold_ladder turtle-path for glass system. path='f,sbend,f,cross,[,l,f,drip,],[,r,f,drip,],f,sbend,f,[,l,f,drip,],[,r,f,drip,],f,sbend,f,[,l,f,drip,],[,r,f,drip,],f,sbend,f,cap'",
+    "system": "glass",
+    "archetype": "glass_manifold_ladder",
+    "auto_generated": true
+  },
+  "layout": {
+    "segment_length": 0.142,
+    "pipe_radius": 0.02,
+    "tube_radius": 0.013
+  },
+  "path": "f,sbend,f,cross,[,l,f,drip,],[,r,f,drip,],f,sbend,f,[,l,f,drip,],[,r,f,drip,],f,sbend,f,[,l,f,drip,],[,r,f,drip,],f,sbend,f,cap",
+  "materials": {
+    "glass_color": [
+      0.88,
+      0.94,
+      1.0,
+      0.24
+    ],
+    "liquid_color": [
+      0.05,
+      0.7,
+      1.0,
+      0.52
+    ],
+    "show_liquid": true
+  }
+}

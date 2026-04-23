@@ -1,0 +1,135 @@
+{
+  "demo_info": {
+    "name": "Compound Bench 45cc7",
+    "description": "Auto-generated compound_bench board composed from the InteractableDemo vocabulary.",
+    "family": "compound_bench",
+    "auto_generated": true,
+    "auto_score": 62.38,
+    "selection_rank": 1
+  },
+  "titles": {
+    "main": "COMPOUND BENCH",
+    "row2": "PASSIVE + MONITORS",
+    "row3": "COMPOUND ARRANGEMENTS",
+    "row4": "PROTOTYPE MODULES"
+  },
+  "layout": {
+    "panel_color": [
+      0.56,
+      0.64,
+      0.61,
+      1.0
+    ],
+    "frame_color": [
+      0.16,
+      0.2,
+      0.19,
+      1.0
+    ],
+    "accent_color": [
+      0.27,
+      0.73,
+      0.9,
+      1.0
+    ],
+    "dark_color": [
+      0.06,
+      0.08,
+      0.08,
+      1.0
+    ],
+    "cream_color": [
+      0.77,
+      0.81,
+      0.79,
+      1.0
+    ],
+    "spacing": 0.263,
+    "control_z": 0.02,
+    "label_y_offset": -0.18,
+    "row_y": 1.06,
+    "row2_y": 0.587,
+    "row3_y": 0.11,
+    "row4_y": -0.292
+  },
+  "controls": [
+    {
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "label": "KNOB",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/joystick_smooth.tscn",
+      "label": "JOYSTICK",
+      "y": -0.05
+    },
+    {
+      "scene": "res://commons/interactables/push_button_front.tscn",
+      "label": "BUTTON\nFRONT",
+      "y": 0.0,
+      "rot_y": 180.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_plane.tscn",
+      "label": "XY PAD",
+      "y": -0.05
+    },
+    {
+      "scene": "res://commons/interactables/push_button.tscn",
+      "label": "BUTTON",
+      "y": 0.0
+    }
+  ],
+  "extra_buttons": [],
+  "passive_elements": [
+    {
+      "builder": "build_speaker_lines",
+      "label": "SPEAKER LINES",
+      "width": 1
+    },
+    {
+      "monitor": "lissajous",
+      "slots": 2,
+      "label": "LISSAJOUS",
+      "width": 2
+    }
+  ],
+  "compounds": [
+    {
+      "type": "sliders_h",
+      "count": 2,
+      "label": "2x SLIDER H",
+      "width": 2
+    },
+    {
+      "type": "sliders_v",
+      "count": 4,
+      "label": "4x SLIDER V",
+      "width": 2
+    },
+    {
+      "type": "meters_v",
+      "count": 3,
+      "label": "3x METERS",
+      "width": 1
+    },
+    {
+      "type": "sliders_v",
+      "count": 3,
+      "label": "3x SLIDER V",
+      "width": 2
+    }
+  ],
+  "new_modules": [
+    {
+      "type": "text_scroll_3",
+      "label": "SCROLL 3",
+      "width": 3
+    },
+    {
+      "type": "text_static_1",
+      "label": "TEXT 1",
+      "width": 1
+    }
+  ]
+}

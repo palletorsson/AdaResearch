@@ -1,0 +1,141 @@
+{
+  "demo_info": {
+    "name": "Prototype Wall 98b0a",
+    "description": "Auto-generated prototype_wall board composed from the InteractableDemo vocabulary.",
+    "family": "prototype_wall",
+    "auto_generated": true,
+    "auto_score": 66.16,
+    "selection_rank": 1
+  },
+  "titles": {
+    "main": "PROTOTYPE WALL",
+    "row2": "PASSIVE + MONITORS",
+    "row3": "COMPOUND ARRANGEMENTS",
+    "row4": "PROTOTYPE MODULES"
+  },
+  "layout": {
+    "panel_color": [
+      0.78,
+      0.75,
+      0.67,
+      1.0
+    ],
+    "frame_color": [
+      0.25,
+      0.23,
+      0.2,
+      1.0
+    ],
+    "accent_color": [
+      0.75,
+      0.38,
+      0.13,
+      1.0
+    ],
+    "dark_color": [
+      0.1,
+      0.1,
+      0.1,
+      1.0
+    ],
+    "cream_color": [
+      0.78,
+      0.75,
+      0.67,
+      1.0
+    ],
+    "spacing": 0.263,
+    "control_z": 0.02,
+    "label_y_offset": -0.18,
+    "row_y": 1.131,
+    "row2_y": 0.679,
+    "row3_y": 0.248,
+    "row4_y": -0.171
+  },
+  "controls": [
+    {
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "label": "KNOB",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_smooth.tscn",
+      "label": "SLIDER V",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_zero.tscn",
+      "label": "ZERO",
+      "y": 0.0
+    }
+  ],
+  "extra_buttons": [
+    {
+      "type": "rect_wide",
+      "label": "RECT WIDE"
+    },
+    {
+      "type": "toggle",
+      "label": "TOGGLE"
+    }
+  ],
+  "passive_elements": [
+    {
+      "monitor": "scope",
+      "slots": 3,
+      "label": "SCOPE WIDE",
+      "width": 3
+    },
+    {
+      "builder": "build_speaker_lines",
+      "label": "SPEAKER LINES",
+      "width": 1
+    }
+  ],
+  "compounds": [
+    {
+      "type": "sliders_h",
+      "count": 3,
+      "label": "3x SLIDER H",
+      "width": 2
+    },
+    {
+      "type": "sliders_v",
+      "count": 2,
+      "label": "2x SLIDER V",
+      "width": 2
+    }
+  ],
+  "new_modules": [
+    {
+      "type": "text_scroll_3",
+      "label": "SCROLL 3",
+      "width": 3
+    },
+    {
+      "type": "patch_matrix",
+      "label": "PATCH\nMATRIX",
+      "width": 1
+    },
+    {
+      "type": "touch_grid",
+      "label": "TOUCH\nGRID",
+      "width": 1
+    },
+    {
+      "type": "needle_meter",
+      "label": "NEEDLE\nMETER",
+      "width": 1
+    },
+    {
+      "type": "text_static_1",
+      "label": "TEXT 1",
+      "width": 1
+    },
+    {
+      "type": "text_scroll_1",
+      "label": "SCROLL 1",
+      "width": 1
+    }
+  ]
+}

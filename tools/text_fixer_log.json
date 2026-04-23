@@ -272,6 +272,4779 @@
           "action": "fixed"
         }
       ]
+    },
+    {
+      "meta": {
+        "timestamp": 1776929553,
+        "file_role": "technical.md",
+        "dry_run": false,
+        "limit": 12,
+        "min_composite": 0.85,
+        "maps_processed": 12,
+        "elapsed_s": 1844.5
+      },
+      "results": [
+        {
+          "map": "Point_One",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 317 (need ≥700)"
+            ],
+            "word_count": 317,
+            "code_ratio": 0.1526,
+            "code_blocks": 3,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.925
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.989,
+              "elapsed_s": 151.2,
+              "metrics_pass": true,
+              "grounding_ratio": 0.978
+            }
+          ],
+          "best": {
+            "label": "populate_1",
+            "composite": 0.989
+          },
+          "action": "fixed"
+        },
+        {
+          "map": "Point_Line",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 189 (need ≥700)"
+            ],
+            "word_count": 189,
+            "code_ratio": 0.2404,
+            "code_blocks": 2,
+            "grounding_ratio": 0.75,
+            "unknown_references": 1,
+            "composite": 0.8
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.861,
+              "elapsed_s": 146.6,
+              "metrics_pass": true,
+              "grounding_ratio": 0.722
+            }
+          ],
+          "best": {
+            "label": "populate_1",
+            "composite": 0.861
+          },
+          "action": "fixed"
+        },
+        {
+          "map": "Point_Lines",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 200 (need ≥700)",
+              "code_ratio_min: 0.15 (need ≥0.15)"
+            ],
+            "word_count": 200,
+            "code_ratio": 0.149,
+            "code_blocks": 1,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.787,
+              "elapsed_s": 135.6,
+              "metrics_pass": true,
+              "grounding_ratio": 0.574
+            },
+            {
+              "label": "populate_2",
+              "status": "error",
+              "error": "timed out",
+              "elapsed_s": 300.2
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.85
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Point_Trace",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "pass",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 871,
+            "code_ratio": 0.7121,
+            "code_blocks": 7,
+            "grounding_ratio": 0.95,
+            "unknown_references": 1,
+            "composite": 0.975
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_ok"
+        },
+        {
+          "map": "Point_Line_Grid",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 1083,
+            "code_ratio": 0.6901,
+            "code_blocks": 8,
+            "grounding_ratio": 0.862,
+            "unknown_references": 4,
+            "composite": 0.931
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 1.0,
+              "elapsed_s": 131.7,
+              "metrics_pass": true,
+              "grounding_ratio": 1.0
+            }
+          ],
+          "best": {
+            "label": "populate_1",
+            "composite": 1.0
+          },
+          "action": "fixed"
+        },
+        {
+          "map": "Point_Triangle",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "pass",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 1117,
+            "code_ratio": 0.5962,
+            "code_blocks": 10,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 1.0
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_ok"
+        },
+        {
+          "map": "Point_Triangle_Context",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 861,
+            "code_ratio": 0.6014,
+            "code_blocks": 8,
+            "grounding_ratio": 0.65,
+            "unknown_references": 7,
+            "composite": 0.825
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.943,
+              "elapsed_s": 109.8,
+              "metrics_pass": true,
+              "grounding_ratio": 0.886
+            }
+          ],
+          "best": {
+            "label": "populate_1",
+            "composite": 0.943
+          },
+          "action": "fixed"
+        },
+        {
+          "map": "Primitives_Polythedra",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "pass",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 912,
+            "code_ratio": 0.6585,
+            "code_blocks": 9,
+            "grounding_ratio": 0.933,
+            "unknown_references": 1,
+            "composite": 0.967
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_ok"
+        },
+        {
+          "map": "Point_Animatedcube",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 2340,
+            "code_ratio": 0.2183,
+            "code_blocks": 7,
+            "grounding_ratio": 0.75,
+            "unknown_references": 9,
+            "composite": 0.875
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.84,
+              "elapsed_s": 193.3,
+              "metrics_pass": true,
+              "grounding_ratio": 0.68
+            },
+            {
+              "label": "populate_2",
+              "status": "ok",
+              "composite": 0.853,
+              "elapsed_s": 178.0,
+              "metrics_pass": true,
+              "grounding_ratio": 0.707
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.875
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Primitives_Ignorance",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 382 (need ≥700)"
+            ],
+            "word_count": 382,
+            "code_ratio": 0.5932,
+            "code_blocks": 5,
+            "grounding_ratio": 0.571,
+            "unknown_references": 6,
+            "composite": 0.71
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.959,
+              "elapsed_s": 173.4,
+              "metrics_pass": true,
+              "grounding_ratio": 0.918
+            }
+          ],
+          "best": {
+            "label": "populate_1",
+            "composite": 0.959
+          },
+          "action": "fixed"
+        },
+        {
+          "map": "Primitives_Portals",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 504 (need ≥700)"
+            ],
+            "word_count": 504,
+            "code_ratio": 0.4865,
+            "code_blocks": 3,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.925
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.97,
+              "elapsed_s": 135.1,
+              "metrics_pass": true,
+              "grounding_ratio": 0.939
+            }
+          ],
+          "best": {
+            "label": "populate_1",
+            "composite": 0.97
+          },
+          "action": "fixed"
+        },
+        {
+          "map": "Primitives_Melencolia",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 380 (need ≥700)"
+            ],
+            "word_count": 380,
+            "code_ratio": 0.5066,
+            "code_blocks": 4,
+            "grounding_ratio": 0.833,
+            "unknown_references": 1,
+            "composite": 0.841
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.919,
+              "elapsed_s": 188.4,
+              "metrics_pass": true,
+              "grounding_ratio": 0.839
+            }
+          ],
+          "best": {
+            "label": "populate_1",
+            "composite": 0.919
+          },
+          "action": "fixed"
+        }
+      ]
+    },
+    {
+      "meta": {
+        "timestamp": 1776930630,
+        "file_role": "technical.md",
+        "dry_run": false,
+        "limit": 0,
+        "min_composite": 0.85,
+        "maps_processed": 1,
+        "elapsed_s": 434.4
+      },
+      "results": [
+        {
+          "map": "Point_Lines",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 200 (need ≥700)",
+              "code_ratio_min: 0.15 (need ≥0.15)"
+            ],
+            "word_count": 200,
+            "code_ratio": 0.149,
+            "code_blocks": 1,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.679,
+              "elapsed_s": 160.8,
+              "metrics_pass": false,
+              "grounding_ratio": 0.508,
+              "routed_tags": []
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "ok",
+              "composite": 0.654,
+              "elapsed_s": 272.4,
+              "metrics_pass": false,
+              "grounding_ratio": 0.459,
+              "routed_tags": [
+                "word_count_min",
+                "code_ratio_min"
+              ]
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.85
+          },
+          "action": "no_improvement"
+        }
+      ]
+    },
+    {
+      "meta": {
+        "timestamp": 1776933198,
+        "file_role": "technical.md",
+        "dry_run": false,
+        "limit": 0,
+        "min_composite": 0.85,
+        "maps_processed": 133,
+        "elapsed_s": 2479.3
+      },
+      "results": [
+        {
+          "map": "Point_One",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "pass",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 2309,
+            "code_ratio": 0.2963,
+            "code_blocks": 8,
+            "grounding_ratio": 0.978,
+            "unknown_references": 1,
+            "composite": 0.989
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_ok"
+        },
+        {
+          "map": "Point_Line",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 2296,
+            "code_ratio": 0.2876,
+            "code_blocks": 12,
+            "grounding_ratio": 0.722,
+            "unknown_references": 22,
+            "composite": 0.861
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.907,
+              "elapsed_s": 104.8,
+              "metrics_pass": true,
+              "grounding_ratio": 0.815,
+              "routed_tags": []
+            }
+          ],
+          "best": {
+            "label": "populate_1",
+            "composite": 0.907
+          },
+          "action": "fixed"
+        },
+        {
+          "map": "Point_Lines",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 200 (need ≥700)",
+              "code_ratio_min: 0.15 (need ≥0.15)"
+            ],
+            "word_count": 200,
+            "code_ratio": 0.149,
+            "code_blocks": 1,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "Point_Trace",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "pass",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 871,
+            "code_ratio": 0.7121,
+            "code_blocks": 7,
+            "grounding_ratio": 0.95,
+            "unknown_references": 1,
+            "composite": 0.975
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_ok"
+        },
+        {
+          "map": "Point_Line_Grid",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "pass",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 2239,
+            "code_ratio": 0.2596,
+            "code_blocks": 11,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 1.0
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_ok"
+        },
+        {
+          "map": "Point_Triangle",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "pass",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 1117,
+            "code_ratio": 0.5962,
+            "code_blocks": 10,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 1.0
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_ok"
+        },
+        {
+          "map": "Point_Triangle_Context",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 2469,
+            "code_ratio": 0.1847,
+            "code_blocks": 9,
+            "grounding_ratio": 0.886,
+            "unknown_references": 4,
+            "composite": 0.943
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.925,
+              "elapsed_s": 93.9,
+              "metrics_pass": false,
+              "grounding_ratio": 1.0,
+              "routed_tags": []
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.943
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Primitives_Polythedra",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "pass",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 912,
+            "code_ratio": 0.6585,
+            "code_blocks": 9,
+            "grounding_ratio": 0.933,
+            "unknown_references": 1,
+            "composite": 0.967
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_ok"
+        },
+        {
+          "map": "Point_Animatedcube",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 2340,
+            "code_ratio": 0.2183,
+            "code_blocks": 7,
+            "grounding_ratio": 0.75,
+            "unknown_references": 9,
+            "composite": 0.875
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.827,
+              "elapsed_s": 120.7,
+              "metrics_pass": true,
+              "grounding_ratio": 0.654,
+              "routed_tags": []
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "ok",
+              "composite": 0.808,
+              "elapsed_s": 206.8,
+              "metrics_pass": false,
+              "grounding_ratio": 0.766,
+              "routed_tags": [
+                "low_grounding"
+              ]
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.875
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Primitives_Ignorance",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "pass",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 2596,
+            "code_ratio": 0.2086,
+            "code_blocks": 11,
+            "grounding_ratio": 0.918,
+            "unknown_references": 4,
+            "composite": 0.959
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_ok"
+        },
+        {
+          "map": "Primitives_Portals",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "pass",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 2158,
+            "code_ratio": 0.1626,
+            "code_blocks": 5,
+            "grounding_ratio": 0.939,
+            "unknown_references": 2,
+            "composite": 0.97
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_ok"
+        },
+        {
+          "map": "Primitives_Melencolia",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 1927,
+            "code_ratio": 0.3027,
+            "code_blocks": 10,
+            "grounding_ratio": 0.839,
+            "unknown_references": 9,
+            "composite": 0.919
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.6,
+              "elapsed_s": 179.8,
+              "metrics_pass": true,
+              "grounding_ratio": 0.2,
+              "routed_tags": []
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "ok",
+              "composite": 0.962,
+              "elapsed_s": 201.5,
+              "metrics_pass": true,
+              "grounding_ratio": 0.923,
+              "routed_tags": []
+            }
+          ],
+          "best": {
+            "label": "populate_2_routed",
+            "composite": 0.962
+          },
+          "action": "fixed"
+        },
+        {
+          "map": "Trans_Introduction",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 299 (need ≥700)"
+            ],
+            "word_count": 299,
+            "code_ratio": 0.3733,
+            "code_blocks": 4,
+            "grounding_ratio": 0.462,
+            "unknown_references": 7,
+            "composite": 0.656
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.772,
+              "elapsed_s": 169.4,
+              "metrics_pass": true,
+              "grounding_ratio": 0.544,
+              "routed_tags": []
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "ok",
+              "composite": 0.85,
+              "elapsed_s": 195.6,
+              "metrics_pass": false,
+              "grounding_ratio": 1.0,
+              "routed_tags": [
+                "word_count_min",
+                "low_grounding"
+              ]
+            }
+          ],
+          "best": {
+            "label": "populate_2_routed",
+            "composite": 0.85
+          },
+          "action": "fixed"
+        },
+        {
+          "map": "Trans_Translation",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 646 (need ≥700)"
+            ],
+            "word_count": 646,
+            "code_ratio": 0.7296,
+            "code_blocks": 10,
+            "grounding_ratio": 0.5,
+            "unknown_references": 11,
+            "composite": 0.675
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.732,
+              "elapsed_s": 140.5,
+              "metrics_pass": false,
+              "grounding_ratio": 0.613,
+              "routed_tags": []
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "ok",
+              "composite": 0.851,
+              "elapsed_s": 272.5,
+              "metrics_pass": true,
+              "grounding_ratio": 0.702,
+              "routed_tags": [
+                "word_count_min",
+                "low_grounding"
+              ]
+            }
+          ],
+          "best": {
+            "label": "populate_2_routed",
+            "composite": 0.851
+          },
+          "action": "fixed"
+        },
+        {
+          "map": "Trans_AxisDecomposition",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 558 (need ≥700)"
+            ],
+            "word_count": 558,
+            "code_ratio": 0.7315,
+            "code_blocks": 6,
+            "grounding_ratio": 0.762,
+            "unknown_references": 5,
+            "composite": 0.806
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.745,
+              "elapsed_s": 138.3,
+              "metrics_pass": true,
+              "grounding_ratio": 0.49,
+              "routed_tags": []
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "ok",
+              "composite": 0.768,
+              "elapsed_s": 234.4,
+              "metrics_pass": true,
+              "grounding_ratio": 0.536,
+              "routed_tags": [
+                "word_count_min",
+                "low_grounding"
+              ]
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.806
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Trans_Rotation",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 748,
+            "code_ratio": 0.7739,
+            "code_blocks": 11,
+            "grounding_ratio": 0.744,
+            "unknown_references": 10,
+            "composite": 0.872
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.825,
+              "elapsed_s": 163.8,
+              "metrics_pass": false,
+              "grounding_ratio": 0.8,
+              "routed_tags": []
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.872
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Trans_RotationSpectacle",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 730,
+            "code_ratio": 0.7905,
+            "code_blocks": 9,
+            "grounding_ratio": 0.686,
+            "unknown_references": 11,
+            "composite": 0.843
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 2.2
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.843
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Trans_Scale",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_max: 0.81 (need ≤0.80)"
+            ],
+            "word_count": 879,
+            "code_ratio": 0.8114,
+            "code_blocks": 12,
+            "grounding_ratio": 0.714,
+            "unknown_references": 10,
+            "composite": 0.782
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.782
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Color_Nails",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 579 (need ≥700)",
+              "code_ratio_max: 0.80 (need ≤0.80)"
+            ],
+            "word_count": 579,
+            "code_ratio": 0.8033,
+            "code_blocks": 8,
+            "grounding_ratio": 0.909,
+            "unknown_references": 2,
+            "composite": 0.804
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "Color_Grid_Pallet",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 695 (need ≥700)",
+              "code_ratio_max: 0.83 (need ≤0.80)"
+            ],
+            "word_count": 695,
+            "code_ratio": 0.8324,
+            "code_blocks": 8,
+            "grounding_ratio": 0.862,
+            "unknown_references": 4,
+            "composite": 0.781
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.781
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Color_Rainbow",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 650 (need ≥700)",
+              "code_ratio_max: 0.82 (need ≤0.80)"
+            ],
+            "word_count": 650,
+            "code_ratio": 0.8177,
+            "code_blocks": 8,
+            "grounding_ratio": 0.76,
+            "unknown_references": 6,
+            "composite": 0.73
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.8
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.8
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.73
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Color_Pillar",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 682 (need ≥700)",
+              "code_ratio_max: 0.86 (need ≤0.80)"
+            ],
+            "word_count": 682,
+            "code_ratio": 0.8607,
+            "code_blocks": 7,
+            "grounding_ratio": 0.905,
+            "unknown_references": 4,
+            "composite": 0.802
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "Color_Paint",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 613 (need ≥700)",
+              "code_ratio_max: 0.85 (need ≤0.80)"
+            ],
+            "word_count": 613,
+            "code_ratio": 0.8502,
+            "code_blocks": 7,
+            "grounding_ratio": 0.787,
+            "unknown_references": 10,
+            "composite": 0.744
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.744
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Color_Walls",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_max: 0.83 (need ≤0.80)"
+            ],
+            "word_count": 724,
+            "code_ratio": 0.8306,
+            "code_blocks": 7,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.925
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "Color_Flashlight",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 542 (need ≥700)"
+            ],
+            "word_count": 542,
+            "code_ratio": 0.4503,
+            "code_blocks": 6,
+            "grounding_ratio": 0.727,
+            "unknown_references": 3,
+            "composite": 0.788
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.788
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Array_Patterns",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 10 (need ≤8)"
+            ],
+            "word_count": 3024,
+            "code_ratio": 0.223,
+            "code_blocks": 10,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.925
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "WaveFunctions_Intro",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 10 (need ≤8)"
+            ],
+            "word_count": 2648,
+            "code_ratio": 0.2424,
+            "code_blocks": 15,
+            "grounding_ratio": 0.679,
+            "unknown_references": 17,
+            "composite": 0.764
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.764
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "WaveFunctions_Pendulum",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 9 (need ≤8)"
+            ],
+            "word_count": 2864,
+            "code_ratio": 0.2655,
+            "code_blocks": 10,
+            "grounding_ratio": 0.783,
+            "unknown_references": 10,
+            "composite": 0.817
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.817
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "WaveFunctions_Unit_Circle",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 12 (need ≤8)"
+            ],
+            "word_count": 2867,
+            "code_ratio": 0.1746,
+            "code_blocks": 15,
+            "grounding_ratio": 0.627,
+            "unknown_references": 31,
+            "composite": 0.738
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.8
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.738
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "WaveFunctions_Sine_Space",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 9 (need ≤8)",
+              "forbidden_words: 1 hit — {'landscape of': 1}"
+            ],
+            "word_count": 2815,
+            "code_ratio": 0.2027,
+            "code_blocks": 20,
+            "grounding_ratio": 0.625,
+            "unknown_references": 33,
+            "composite": 0.662
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 2.7
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.662
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "WaveFunctions_Synthesis_Lab",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 13 (need ≤8)",
+              "forbidden_words: 1 hit — {'intricate': 1}"
+            ],
+            "word_count": 2942,
+            "code_ratio": 0.158,
+            "code_blocks": 20,
+            "grounding_ratio": 0.845,
+            "unknown_references": 16,
+            "composite": 0.772
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.8
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.772
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Random_Definition",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 10 (need ≤8)"
+            ],
+            "word_count": 2790,
+            "code_ratio": 0.186,
+            "code_blocks": 9,
+            "grounding_ratio": 0.625,
+            "unknown_references": 9,
+            "composite": 0.738
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.738
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Random_Remove",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 12 (need ≤8)",
+              "forbidden_words: 1 hit — {'landscape of': 1}"
+            ],
+            "word_count": 2690,
+            "code_ratio": 0.213,
+            "code_blocks": 10,
+            "grounding_ratio": 0.962,
+            "unknown_references": 1,
+            "composite": 0.831
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "Randomness_10_PRINT_Algorithm",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 486 (need ≥700)"
+            ],
+            "word_count": 486,
+            "code_ratio": 0.431,
+            "code_blocks": 5,
+            "grounding_ratio": 0.7,
+            "unknown_references": 6,
+            "composite": 0.775
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.9
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 2.2
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.775
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Random_Cubes",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 564 (need ≥700)"
+            ],
+            "word_count": 564,
+            "code_ratio": 0.6114,
+            "code_blocks": 5,
+            "grounding_ratio": 0.765,
+            "unknown_references": 8,
+            "composite": 0.807
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.807
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Random_Rotate_Random_XYZ",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 462 (need ≥700)"
+            ],
+            "word_count": 462,
+            "code_ratio": 0.5846,
+            "code_blocks": 4,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.925
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "Random_Walk",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 544 (need ≥700)",
+              "forbidden_words: 1 hit — {'intricate': 1}"
+            ],
+            "word_count": 544,
+            "code_ratio": 0.5743,
+            "code_blocks": 7,
+            "grounding_ratio": 0.875,
+            "unknown_references": 2,
+            "composite": 0.787
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.787
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Random_Gaussian",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 544 (need ≥700)"
+            ],
+            "word_count": 544,
+            "code_ratio": 0.5499,
+            "code_blocks": 6,
+            "grounding_ratio": 0.938,
+            "unknown_references": 1,
+            "composite": 0.894
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "Random_Mushrooms",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 589 (need ≥700)"
+            ],
+            "word_count": 589,
+            "code_ratio": 0.7252,
+            "code_blocks": 5,
+            "grounding_ratio": 0.724,
+            "unknown_references": 8,
+            "composite": 0.787
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.787
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Random_Space_Geometry",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "pass",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 705,
+            "code_ratio": 0.7455,
+            "code_blocks": 5,
+            "grounding_ratio": 0.938,
+            "unknown_references": 2,
+            "composite": 0.969
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_ok"
+        },
+        {
+          "map": "Randomness_Examples_of_Randomness",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_max: 0.81 (need ≤0.80)"
+            ],
+            "word_count": 734,
+            "code_ratio": 0.8149,
+            "code_blocks": 4,
+            "grounding_ratio": 0.828,
+            "unknown_references": 5,
+            "composite": 0.839
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.839
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Random_Pheromone",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 595 (need ≥700)"
+            ],
+            "word_count": 595,
+            "code_ratio": 0.7349,
+            "code_blocks": 4,
+            "grounding_ratio": 0.783,
+            "unknown_references": 5,
+            "composite": 0.817
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.817
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Random_Space",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 642 (need ≥700)"
+            ],
+            "word_count": 642,
+            "code_ratio": 0.7594,
+            "code_blocks": 6,
+            "grounding_ratio": 0.581,
+            "unknown_references": 18,
+            "composite": 0.716
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.716
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Random_Noise_Types",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 579 (need ≥700)"
+            ],
+            "word_count": 579,
+            "code_ratio": 0.5515,
+            "code_blocks": 5,
+            "grounding_ratio": 0.714,
+            "unknown_references": 6,
+            "composite": 0.782
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.9
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.782
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Noise_Columns",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 2939,
+            "code_ratio": 0.1619,
+            "code_blocks": 11,
+            "grounding_ratio": 0.515,
+            "unknown_references": 16,
+            "composite": 0.758
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.758
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Noise_One",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 11 (need ≤8)"
+            ],
+            "word_count": 2897,
+            "code_ratio": 0.2162,
+            "code_blocks": 16,
+            "grounding_ratio": 0.425,
+            "unknown_references": 23,
+            "composite": 0.637
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 2.1
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.637
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Noise_Voxel",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 11 (need ≤8)"
+            ],
+            "word_count": 2990,
+            "code_ratio": 0.162,
+            "code_blocks": 16,
+            "grounding_ratio": 0.696,
+            "unknown_references": 17,
+            "composite": 0.773
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.773
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Noise_6_Wall",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_min: 0.14 (need ≥0.15)"
+            ],
+            "word_count": 2986,
+            "code_ratio": 0.1422,
+            "code_blocks": 10,
+            "grounding_ratio": 0.389,
+            "unknown_references": 22,
+            "composite": 0.619
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.619
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Noise_Inside_Noise",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 9 (need ≤8)"
+            ],
+            "word_count": 3005,
+            "code_ratio": 0.2087,
+            "code_blocks": 12,
+            "grounding_ratio": 0.818,
+            "unknown_references": 2,
+            "composite": 0.834
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.834
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Noise_Space_10",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "forbidden_words: 2 hit — {'navigating': 2}"
+            ],
+            "word_count": 2912,
+            "code_ratio": 0.1878,
+            "code_blocks": 11,
+            "grounding_ratio": 0.5,
+            "unknown_references": 8,
+            "composite": 0.675
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.675
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Noise_Perlin_Simplex",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 2944,
+            "code_ratio": 0.1666,
+            "code_blocks": 9,
+            "grounding_ratio": 0.857,
+            "unknown_references": 3,
+            "composite": 0.928
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.928
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "CA_Introduction",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 12 (need ≤8)",
+              "forbidden_words: 1 hit — {'intricate': 1}"
+            ],
+            "word_count": 2724,
+            "code_ratio": 0.1848,
+            "code_blocks": 9,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "CA_ElementaryRules",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 9 (need ≤8)"
+            ],
+            "word_count": 3009,
+            "code_ratio": 0.1651,
+            "code_blocks": 10,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.925
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "CA_GameOfLife",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "pass",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 2722,
+            "code_ratio": 0.1778,
+            "code_blocks": 8,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 1.0
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_ok"
+        },
+        {
+          "map": "CA_BeyondBinary",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 3052,
+            "code_ratio": 0.1801,
+            "code_blocks": 10,
+            "grounding_ratio": 0.882,
+            "unknown_references": 2,
+            "composite": 0.941
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.941
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "CA_ExpandingSpace",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 2972,
+            "code_ratio": 0.1889,
+            "code_blocks": 15,
+            "grounding_ratio": 0.278,
+            "unknown_references": 39,
+            "composite": 0.639
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.9
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.639
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "CA_SoftRules",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 12 (need ≤8)"
+            ],
+            "word_count": 2955,
+            "code_ratio": 0.2106,
+            "code_blocks": 9,
+            "grounding_ratio": 0.657,
+            "unknown_references": 12,
+            "composite": 0.754
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.754
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "CA_AgentsCircuits",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 15 (need ≤8)"
+            ],
+            "word_count": 3270,
+            "code_ratio": 0.1987,
+            "code_blocks": 9,
+            "grounding_ratio": 0.731,
+            "unknown_references": 7,
+            "composite": 0.79
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.79
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "CA_EdgeOfChaos",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 13 (need ≤8)"
+            ],
+            "word_count": 3030,
+            "code_ratio": 0.2459,
+            "code_blocks": 9,
+            "grounding_ratio": 0.583,
+            "unknown_references": 20,
+            "composite": 0.716
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.716
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Fractal_Recursion",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 10 (need ≤8)"
+            ],
+            "word_count": 2931,
+            "code_ratio": 0.2383,
+            "code_blocks": 10,
+            "grounding_ratio": 0.641,
+            "unknown_references": 14,
+            "composite": 0.746
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.746
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Fractal_RecursiveTrees",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 2995,
+            "code_ratio": 0.2378,
+            "code_blocks": 9,
+            "grounding_ratio": 0.88,
+            "unknown_references": 3,
+            "composite": 0.94
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.94
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Fractal_CantorSet",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_max: 0.81 (need ≤0.80)"
+            ],
+            "word_count": 720,
+            "code_ratio": 0.8061,
+            "code_blocks": 7,
+            "grounding_ratio": 0.649,
+            "unknown_references": 13,
+            "composite": 0.75
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.75
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Fractal_KochSierpinski",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "pass",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 740,
+            "code_ratio": 0.7524,
+            "code_blocks": 8,
+            "grounding_ratio": 0.95,
+            "unknown_references": 1,
+            "composite": 0.975
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_ok"
+        },
+        {
+          "map": "Fractal_MengerSponge",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_max: 0.83 (need ≤0.80)"
+            ],
+            "word_count": 726,
+            "code_ratio": 0.8293,
+            "code_blocks": 8,
+            "grounding_ratio": 0.783,
+            "unknown_references": 5,
+            "composite": 0.817
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.8
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.817
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Fractal_GoldenSpiral",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 688 (need ≥700)"
+            ],
+            "word_count": 688,
+            "code_ratio": 0.7534,
+            "code_blocks": 7,
+            "grounding_ratio": 0.68,
+            "unknown_references": 8,
+            "composite": 0.765
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.765
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Fractal_JuliaSet",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 597 (need ≥700)"
+            ],
+            "word_count": 597,
+            "code_ratio": 0.7999,
+            "code_blocks": 7,
+            "grounding_ratio": 0.519,
+            "unknown_references": 13,
+            "composite": 0.684
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.684
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Fractal_MandelbrotSet",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_max: 0.81 (need ≤0.80)"
+            ],
+            "word_count": 805,
+            "code_ratio": 0.8098,
+            "code_blocks": 12,
+            "grounding_ratio": 0.788,
+            "unknown_references": 7,
+            "composite": 0.819
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.819
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Fractal_Synthesis",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_max: 0.83 (need ≤0.80)"
+            ],
+            "word_count": 815,
+            "code_ratio": 0.8331,
+            "code_blocks": 8,
+            "grounding_ratio": 0.595,
+            "unknown_references": 15,
+            "composite": 0.722
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.8
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.722
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Fractal_CrossSequence",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_max: 0.85 (need ≤0.80)"
+            ],
+            "word_count": 748,
+            "code_ratio": 0.8474,
+            "code_blocks": 9,
+            "grounding_ratio": 0.444,
+            "unknown_references": 15,
+            "composite": 0.647
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.647
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "LSystems_Grammar_Lab",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 10 (need ≤8)",
+              "forbidden_words: 1 hit — {'intricate': 1}"
+            ],
+            "word_count": 2593,
+            "code_ratio": 0.2242,
+            "code_blocks": 9,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "LSystems_Growth",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 10 (need ≤8)"
+            ],
+            "word_count": 2772,
+            "code_ratio": 0.2221,
+            "code_blocks": 10,
+            "grounding_ratio": 0.731,
+            "unknown_references": 7,
+            "composite": 0.79
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 2.1
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.79
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "LSystems_Grammars_And_Curves",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 11 (need ≤8)"
+            ],
+            "word_count": 3063,
+            "code_ratio": 0.2066,
+            "code_blocks": 11,
+            "grounding_ratio": 0.944,
+            "unknown_references": 1,
+            "composite": 0.897
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "LSystems_Architecture",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 10 (need ≤8)"
+            ],
+            "word_count": 1570,
+            "code_ratio": 0.2806,
+            "code_blocks": 6,
+            "grounding_ratio": 0.714,
+            "unknown_references": 6,
+            "composite": 0.782
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.782
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "LSystems_Competition",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 10 (need ≤8)"
+            ],
+            "word_count": 1407,
+            "code_ratio": 0.3428,
+            "code_blocks": 6,
+            "grounding_ratio": 0.444,
+            "unknown_references": 15,
+            "composite": 0.647
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.647
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "LSystems_Living",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 9 (need ≤8)"
+            ],
+            "word_count": 1304,
+            "code_ratio": 0.2873,
+            "code_blocks": 5,
+            "grounding_ratio": 0.444,
+            "unknown_references": 10,
+            "composite": 0.647
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.647
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "PG_Genetic_Evolution",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "PG_Space_Colonization",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "PG_Percolation_Network",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "PG_Branching_Growth",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "PG_Caves_Mazes",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "PG_Sculpted_Forms",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "PG_Mirrored_Patterns",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "SoftBodies_Soft_Body_Deformation",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 9 (need ≤8)"
+            ],
+            "word_count": 2798,
+            "code_ratio": 0.2068,
+            "code_blocks": 11,
+            "grounding_ratio": 0.55,
+            "unknown_references": 9,
+            "composite": 0.7
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.7
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "SoftBodies_Carusell",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 1765,
+            "code_ratio": 0.2001,
+            "code_blocks": 9,
+            "grounding_ratio": 0.5,
+            "unknown_references": 12,
+            "composite": 0.75
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.75
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "SoftBodies_Obsticals",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 1509,
+            "code_ratio": 0.2994,
+            "code_blocks": 8,
+            "grounding_ratio": 0.588,
+            "unknown_references": 7,
+            "composite": 0.794
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.794
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "SoftBodies_Obsticals_Part2",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 13 (need ≤8)"
+            ],
+            "word_count": 1141,
+            "code_ratio": 0.2801,
+            "code_blocks": 7,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.925
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "SoftBodies_Cloth_Physics",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 2409,
+            "code_ratio": 0.309,
+            "code_blocks": 13,
+            "grounding_ratio": 0.607,
+            "unknown_references": 11,
+            "composite": 0.803
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.803
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "SoftBodies_Playground_of_Joy",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 1282,
+            "code_ratio": 0.2771,
+            "code_blocks": 6,
+            "grounding_ratio": 0.286,
+            "unknown_references": 10,
+            "composite": 0.643
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.643
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "SoftBodies_Affect_Theory_Visualization",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 1311,
+            "code_ratio": 0.216,
+            "code_blocks": 6,
+            "grounding_ratio": 0.5,
+            "unknown_references": 10,
+            "composite": 0.75
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.75
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 581 (need ≥700)",
+              "code_ratio_max: 0.89 (need ≤0.80)"
+            ],
+            "word_count": 581,
+            "code_ratio": 0.8872,
+            "code_blocks": 5,
+            "grounding_ratio": 0.333,
+            "unknown_references": 6,
+            "composite": 0.516
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.516
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Topology_Entropy_Morphogenesis",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 1594,
+            "code_ratio": 0.194,
+            "code_blocks": 6,
+            "grounding_ratio": 0.636,
+            "unknown_references": 8,
+            "composite": 0.818
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.818
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "SwarmIntelligence_PhysarumColony",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 9 (need ≤8)"
+            ],
+            "word_count": 2467,
+            "code_ratio": 0.2143,
+            "code_blocks": 6,
+            "grounding_ratio": 0.955,
+            "unknown_references": 1,
+            "composite": 0.902
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "SwarmIntelligence_FlowFields",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 9 (need ≤8)"
+            ],
+            "word_count": 1476,
+            "code_ratio": 0.3113,
+            "code_blocks": 5,
+            "grounding_ratio": 0.792,
+            "unknown_references": 5,
+            "composite": 0.821
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.8
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.821
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "SwarmIntelligence_Boids_Algorithm",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 10 (need ≤8)"
+            ],
+            "word_count": 2757,
+            "code_ratio": 0.2247,
+            "code_blocks": 7,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.925
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": true,
+            "metrics_failures": 0,
+            "metrics_failure_list": [],
+            "word_count": 1117,
+            "code_ratio": 0.3733,
+            "code_blocks": 5,
+            "grounding_ratio": 0.444,
+            "unknown_references": 15,
+            "composite": 0.722
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.9
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.722
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "SwarmIntelligence_Ant_Colony_Optimization",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 10 (need ≤8)"
+            ],
+            "word_count": 2930,
+            "code_ratio": 0.1862,
+            "code_blocks": 7,
+            "grounding_ratio": 0.656,
+            "unknown_references": 11,
+            "composite": 0.753
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.753
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 9 (need ≤8)",
+              "forbidden_words: 1 hit — {'landscape of': 1}"
+            ],
+            "word_count": 1340,
+            "code_ratio": 0.2629,
+            "code_blocks": 5,
+            "grounding_ratio": 0.75,
+            "unknown_references": 4,
+            "composite": 0.725
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.725
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 9 (need ≤8)"
+            ],
+            "word_count": 1229,
+            "code_ratio": 0.4913,
+            "code_blocks": 5,
+            "grounding_ratio": 0.413,
+            "unknown_references": 27,
+            "composite": 0.631
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.631
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "ML_Evolution",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "ML_Gradient_Landscape",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "ML_Classification",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "ML_Neural_Networks",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "ML_Perception",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "ML_Sequence_Memory",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "ML_Generative",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "ML_Synthesis",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "Euclid_Parallel",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "fail",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 1365,
+            "code_ratio": 0.0045,
+            "code_blocks": 1,
+            "grounding_ratio": 0.143,
+            "unknown_references": 6,
+            "composite": 0.496
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.496
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "NonEuclidean_Spaces",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "code_ratio_min: 0.03 (need ≥0.15)",
+              "forbidden_words: 1 hit — {'navigating': 1}"
+            ],
+            "word_count": 1418,
+            "code_ratio": 0.034,
+            "code_blocks": 7,
+            "grounding_ratio": 0.302,
+            "unknown_references": 30,
+            "composite": 0.501
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.9
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.501
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Russell_Paradox",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_min: 0.02 (need ≥0.15)"
+            ],
+            "word_count": 1313,
+            "code_ratio": 0.0212,
+            "code_blocks": 3,
+            "grounding_ratio": 0.364,
+            "unknown_references": 7,
+            "composite": 0.607
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.607
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Godel_Incompleteness",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "fail",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "code_ratio_min: 0.05 (need ≥0.15)",
+              "max_paragraph_sentences: 10 (need ≤8)"
+            ],
+            "word_count": 1493,
+            "code_ratio": 0.0525,
+            "code_blocks": 3,
+            "grounding_ratio": 0.1,
+            "unknown_references": 27,
+            "composite": 0.4
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.8
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.4
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Escher_Impossible",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "fail",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_min: 0.03 (need ≥0.15)"
+            ],
+            "word_count": 1434,
+            "code_ratio": 0.0313,
+            "code_blocks": 2,
+            "grounding_ratio": 0.077,
+            "unknown_references": 12,
+            "composite": 0.463
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.463
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Brouwer_Intuitionism",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "fail",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_min: 0.03 (need ≥0.15)"
+            ],
+            "word_count": 1632,
+            "code_ratio": 0.0257,
+            "code_blocks": 2,
+            "grounding_ratio": 0.125,
+            "unknown_references": 14,
+            "composite": 0.487
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.487
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Florensky_Paraconsistent",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_min: 0.08 (need ≥0.15)"
+            ],
+            "word_count": 1536,
+            "code_ratio": 0.0827,
+            "code_blocks": 6,
+            "grounding_ratio": 0.24,
+            "unknown_references": 19,
+            "composite": 0.545
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.545
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "Crisis_Synthesis",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "fail",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "code_ratio_min: 0.04 (need ≥0.15)",
+              "max_paragraph_sentences: 11 (need ≤8)"
+            ],
+            "word_count": 1552,
+            "code_ratio": 0.0411,
+            "code_blocks": 4,
+            "grounding_ratio": 0.154,
+            "unknown_references": 22,
+            "composite": 0.427
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.427
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "QFEP_Introduction",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 11 (need ≤8)"
+            ],
+            "word_count": 2818,
+            "code_ratio": 0.2717,
+            "code_blocks": 12,
+            "grounding_ratio": 0.553,
+            "unknown_references": 21,
+            "composite": 0.702
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 2.2
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.702
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "QFEP_F_Term",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 12 (need ≤8)"
+            ],
+            "word_count": 3036,
+            "code_ratio": 0.196,
+            "code_blocks": 16,
+            "grounding_ratio": 0.641,
+            "unknown_references": 23,
+            "composite": 0.746
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.746
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "QFEP_E_Term",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "code_ratio_min: 0.14 (need ≥0.15)",
+              "max_paragraph_sentences: 10 (need ≤8)"
+            ],
+            "word_count": 3236,
+            "code_ratio": 0.1363,
+            "code_blocks": 16,
+            "grounding_ratio": 0.333,
+            "unknown_references": 36,
+            "composite": 0.516
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.516
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "QFEP_Lambda_Spectrum",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 10 (need ≤8)"
+            ],
+            "word_count": 3017,
+            "code_ratio": 0.2265,
+            "code_blocks": 10,
+            "grounding_ratio": 0.463,
+            "unknown_references": 22,
+            "composite": 0.656
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.8
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.656
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "QFEP_Phi_Term",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 10 (need ≤8)"
+            ],
+            "word_count": 2949,
+            "code_ratio": 0.1928,
+            "code_blocks": 9,
+            "grounding_ratio": 0.333,
+            "unknown_references": 28,
+            "composite": 0.592
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 2.1
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.592
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "QFEP_Edge_Of_Chaos",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_min: 0.15 (need ≥0.15)"
+            ],
+            "word_count": 2983,
+            "code_ratio": 0.1488,
+            "code_blocks": 9,
+            "grounding_ratio": 0.314,
+            "unknown_references": 35,
+            "composite": 0.582
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 2.0
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 2.0
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.582
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "QFEP_Sandbox",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "forbidden_words: 1 hit — {'navigating': 1}"
+            ],
+            "word_count": 1681,
+            "code_ratio": 0.2529,
+            "code_blocks": 7,
+            "grounding_ratio": 0.317,
+            "unknown_references": 28,
+            "composite": 0.584
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.584
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "QFEP_Synthesis",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "fail",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 9 (need ≤8)"
+            ],
+            "word_count": 1636,
+            "code_ratio": 0.1672,
+            "code_blocks": 6,
+            "grounding_ratio": 0.125,
+            "unknown_references": 21,
+            "composite": 0.487
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.7
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.487
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "fail",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 9 (need ≤8)",
+              "forbidden_words: 1 hit — {'navigating': 1}"
+            ],
+            "word_count": 1583,
+            "code_ratio": 0.1529,
+            "code_blocks": 4,
+            "grounding_ratio": 0.222,
+            "unknown_references": 21,
+            "composite": 0.461
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.6
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.461
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "SpeculativeComputation_Rhizome_Network",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "max_paragraph_sentences: 16 (need ≤8)"
+            ],
+            "word_count": 1679,
+            "code_ratio": 0.2231,
+            "code_blocks": 6,
+            "grounding_ratio": 0.333,
+            "unknown_references": 30,
+            "composite": 0.592
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.592
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "fail",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "code_ratio_min: 0.15 (need ≥0.15)",
+              "max_paragraph_sentences: 10 (need ≤8)"
+            ],
+            "word_count": 1699,
+            "code_ratio": 0.1492,
+            "code_blocks": 5,
+            "grounding_ratio": 0.25,
+            "unknown_references": 21,
+            "composite": 0.475
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            },
+            {
+              "label": "populate_2_routed",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 1.5
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.475
+          },
+          "action": "no_improvement"
+        },
+        {
+          "map": "GT_Foundations",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "GT_Layout",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "GT_Pathfinding",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "GT_Network_Analysis",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "GT_Connectivity",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "GT_Spanning_Trees",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "GT_Flow",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        },
+        {
+          "map": "GT_Matching",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 2,
+            "metrics_failure_list": [
+              "word_count_min: 12 (need ≥700)",
+              "code_ratio_min: 0.00 (need ≥0.15)"
+            ],
+            "word_count": 12,
+            "code_ratio": 0.0,
+            "code_blocks": 0,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.85
+          },
+          "variations_tried": [],
+          "best": null,
+          "action": "skip_grounded"
+        }
+      ]
     }
   ]
 }

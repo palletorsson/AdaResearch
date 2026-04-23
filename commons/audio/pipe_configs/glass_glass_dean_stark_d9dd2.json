@@ -1,0 +1,30 @@
+{
+  "rack_info": {
+    "name": "Glass_dean_stark (glass)",
+    "description": "Auto-generated glass_dean_stark turtle-path for glass system. path='flask,f,u,f,f,ypipe,[,l,condenser,f,beaker,],f,ubend,d,f,drip'",
+    "system": "glass",
+    "archetype": "glass_dean_stark",
+    "auto_generated": true
+  },
+  "layout": {
+    "segment_length": 0.13,
+    "pipe_radius": 0.02,
+    "tube_radius": 0.017
+  },
+  "path": "flask,f,u,f,f,ypipe,[,l,condenser,f,beaker,],f,ubend,d,f,drip",
+  "materials": {
+    "glass_color": [
+      0.85,
+      0.92,
+      1.0,
+      0.28
+    ],
+    "liquid_color": [
+      0.2,
+      0.8,
+      0.4,
+      0.6
+    ],
+    "show_liquid": true
+  }
+}
