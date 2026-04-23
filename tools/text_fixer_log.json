@@ -1,0 +1,277 @@
+{
+  "runs": [
+    {
+      "meta": {
+        "timestamp": 1776923673,
+        "file_role": "tutorial.md",
+        "dry_run": false,
+        "limit": 0,
+        "min_composite": 0.85,
+        "maps_processed": 1,
+        "elapsed_s": 245.2
+      },
+      "results": [
+        {
+          "map": "Array_Patterns",
+          "file": "tutorial.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "code_ratio_min: 0.41 (need ≥0.45)"
+            ],
+            "word_count": 737,
+            "code_ratio": 0.4146,
+            "code_blocks": 12,
+            "grounding_ratio": 1.0,
+            "unknown_references": 0,
+            "composite": 0.925
+          },
+          "variations_tried": [
+            {
+              "label": "default",
+              "status": "error",
+              "error": "timed out",
+              "elapsed_s": 180.0
+            },
+            {
+              "label": "stricter_code",
+              "status": "ok",
+              "composite": 0.925,
+              "elapsed_s": 64.4,
+              "metrics_pass": false,
+              "grounding_ratio": 1.0
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.925
+          },
+          "action": "no_improvement"
+        }
+      ]
+    },
+    {
+      "meta": {
+        "timestamp": 1776924485,
+        "file_role": "technical.md",
+        "dry_run": false,
+        "limit": 0,
+        "min_composite": 0.85,
+        "maps_processed": 1,
+        "elapsed_s": 540.8
+      },
+      "results": [
+        {
+          "map": "Point_Animatedcube",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 536 (need ≥700)"
+            ],
+            "word_count": 536,
+            "code_ratio": 0.7923,
+            "code_blocks": 5,
+            "grounding_ratio": 0.545,
+            "unknown_references": 10,
+            "composite": 0.698
+          },
+          "variations_tried": [
+            {
+              "label": "default",
+              "status": "error",
+              "error": "timed out",
+              "elapsed_s": 180.0
+            },
+            {
+              "label": "step_flow",
+              "status": "error",
+              "error": "timed out",
+              "elapsed_s": 180.0
+            },
+            {
+              "label": "artifact_first",
+              "status": "error",
+              "error": "timed out",
+              "elapsed_s": 180.0
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.698
+          },
+          "action": "no_improvement"
+        }
+      ]
+    },
+    {
+      "meta": {
+        "timestamp": 1776925232,
+        "file_role": "technical.md",
+        "dry_run": false,
+        "limit": 0,
+        "min_composite": 0.85,
+        "maps_processed": 1,
+        "elapsed_s": 714.8
+      },
+      "results": [
+        {
+          "map": "Point_Animatedcube",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 536 (need ≥700)"
+            ],
+            "word_count": 536,
+            "code_ratio": 0.7923,
+            "code_blocks": 5,
+            "grounding_ratio": 0.545,
+            "unknown_references": 10,
+            "composite": 0.698
+          },
+          "variations_tried": [
+            {
+              "label": "default",
+              "status": "error",
+              "error": "HTTP 500",
+              "elapsed_s": 173.5
+            },
+            {
+              "label": "step_flow",
+              "status": "error",
+              "error": "HTTP 500",
+              "elapsed_s": 338.7
+            },
+            {
+              "label": "artifact_first",
+              "status": "error",
+              "error": "HTTP 500",
+              "elapsed_s": 201.2
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.698
+          },
+          "action": "no_improvement"
+        }
+      ]
+    },
+    {
+      "meta": {
+        "timestamp": 1776925318,
+        "file_role": "technical.md",
+        "dry_run": false,
+        "limit": 0,
+        "min_composite": 0.85,
+        "maps_processed": 1,
+        "elapsed_s": 2.1
+      },
+      "results": [
+        {
+          "map": "Point_Animatedcube",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 536 (need ≥700)"
+            ],
+            "word_count": 536,
+            "code_ratio": 0.7923,
+            "code_blocks": 5,
+            "grounding_ratio": 0.545,
+            "unknown_references": 10,
+            "composite": 0.698
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 0.8
+            },
+            {
+              "label": "populate_2",
+              "status": "error",
+              "error": "no done event in stream",
+              "elapsed_s": 0.1
+            }
+          ],
+          "best": {
+            "label": "initial",
+            "composite": 0.698
+          },
+          "action": "no_improvement"
+        }
+      ]
+    },
+    {
+      "meta": {
+        "timestamp": 1776925753,
+        "file_role": "technical.md",
+        "dry_run": false,
+        "limit": 0,
+        "min_composite": 0.85,
+        "maps_processed": 1,
+        "elapsed_s": 368.5
+      },
+      "results": [
+        {
+          "map": "Point_Animatedcube",
+          "file": "technical.md",
+          "initial": {
+            "exists": true,
+            "status": "warn",
+            "metrics_pass": false,
+            "metrics_failures": 1,
+            "metrics_failure_list": [
+              "word_count_min: 536 (need ≥700)"
+            ],
+            "word_count": 536,
+            "code_ratio": 0.7923,
+            "code_blocks": 5,
+            "grounding_ratio": 0.545,
+            "unknown_references": 10,
+            "composite": 0.698
+          },
+          "variations_tried": [
+            {
+              "label": "populate_1",
+              "status": "ok",
+              "composite": 0.847,
+              "elapsed_s": 181.2,
+              "metrics_pass": true,
+              "grounding_ratio": 0.694
+            },
+            {
+              "label": "populate_2",
+              "status": "ok",
+              "composite": 0.875,
+              "elapsed_s": 186.5,
+              "metrics_pass": true,
+              "grounding_ratio": 0.75
+            }
+          ],
+          "best": {
+            "label": "populate_2",
+            "composite": 0.875
+          },
+          "action": "fixed"
+        }
+      ]
+    }
+  ]
+}
