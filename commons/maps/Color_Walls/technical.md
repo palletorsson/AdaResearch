@@ -29,37 +29,6 @@ func get_spectrum_color_at_position(z_position: float) -> Color:
 
 ### Rainbow Hallway Shader
 
-```glsl
-shader_type spatial;
-
-uniform float hallway_length = 20.0;
-uniform float saturation = 1.0;
-uniform float value = 1.0;
-
-varying vec3 world_position;
-
-void vertex() {
-    world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-}
-
-vec3 hsv_to_rgb(float h, float s, float v) {
-    vec3 c = vec3(h, s, v);
-    vec3 rgb = clamp(abs(mod(c.x * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
-    return c.z * mix(vec3(1.0), rgb, c.y);
-}
-
-void fragment() {
-    // Use Z position for hue
-    float hue = world_position.z / hallway_length;
-    hue = fract(hue);  // Repeat if longer than one cycle
-
-    vec3 color = hsv_to_rgb(hue * 0.8, saturation, value);
-
-    ALBEDO = color;
-    EMISSION = color * 0.5;
-}
-```
-
 ### Emissive Gradient Walls
 
 ```gdscript
@@ -75,33 +44,6 @@ func create_gradient_material():
 ```
 
 ### Multi-Stop Gradient
-
-```gdscript
-# Define specific color stops along the hallway
-var color_stops = [
-    {"position": 0.0, "color": Color.RED},
-    {"position": 0.15, "color": Color.ORANGE},
-    {"position": 0.3, "color": Color.YELLOW},
-    {"position": 0.45, "color": Color.GREEN},
-    {"position": 0.6, "color": Color.CYAN},
-    {"position": 0.75, "color": Color.BLUE},
-    {"position": 0.9, "color": Color.PURPLE},
-    {"position": 1.0, "color": Color.MAGENTA}
-]
-
-func get_gradient_color(t: float) -> Color:
-    # Find which segment we're in
-    for i in range(color_stops.size() - 1):
-        var start = color_stops[i]
-        var end = color_stops[i + 1]
-
-        if t >= start.position and t <= end.position:
-            # Interpolate within segment
-            var segment_t = (t - start.position) / (end.position - start.position)
-            return start.color.lerp(end.color, segment_t)
-
-    return color_stops[-1].color
-```
 
 ### The Gradient Class (Godot Resource)
 
@@ -130,30 +72,6 @@ func sample_gradient(t: float) -> Color:
 ```
 
 ### Dynamic Lighting Gradient
-
-```gdscript
-# Lights along hallway that change color with position
-extends Node3D
-
-var lights: Array[OmniLight3D] = []
-
-func create_gradient_lights(count: int):
-    for i in range(count):
-        var light = OmniLight3D.new()
-        light.position.z = (float(i) / count) * hallway_length
-
-        # Color from position
-        var t = float(i) / count
-        light.light_color = Color.from_hsv(t * 0.8, 1.0, 1.0)
-        light.light_energy = 1.5
-        light.omni_range = hallway_length / count * 2.0  # Overlap for smoothness
-
-        lights.append(light)
-        add_child(light)
-
-# Many overlapping colored lights approximate continuous gradient
-# More lights = smoother transition
-```
 
 ### Perceptual vs. Linear Interpolation
 
@@ -190,3 +108,13 @@ func hsv_lerp(a: Color, b: Color, t: float) -> Color:
 ## Key Takeaway
 
 The gradient hallway reveals that **color is continuous**. The discrete color names (red, orange, yellow) are arbitrary divisions imposed on smooth transition. By walking through unbroken chromatic change, you experience the spectrum as it actually is: a seamless flow where one hue becomes another without boundary. The categories we use to name colors are linguistic convenience, not perceptual reality.
+
+## Implementation Notes and Complexity
+
+The wall artifacts are flat panels with an albedo set per instance. Rendering a wall is a single draw call per unique material; walls sharing a material are batched automatically by Godot's renderer. A gallery of N walls with N unique colours produces N draw calls, and the cost scales linearly with the wall count until GPU-side batching limits are reached.
+
+The wall's reflective properties are controlled by the material's roughness and metallic parameters. A roughness of 0 produces a mirror; a roughness of 1 produces a matte diffuse surface. Between these extremes, the wall reflects with a Gaussian specular lobe whose width is controlled by the roughness value. Real-time reflection on arbitrary geometry requires either a reflection probe (a cubemap captured from a representative point in the scene) or a screen-space approximation. Godot's default pipeline uses both: a scene-wide probe for coarse reflections and screen-space reflections for fine detail when the ray stays on-screen.
+
+Lighting interacts with colour in ways that are easy to get wrong. A red wall under blue light appears dark because the red pigment absorbs blue wavelengths. The naive multiplication of light colour by material albedo produces this correctly. Lighting shaders that use summed colour components instead of multiplied ones produce unrealistic results where a red wall glows under blue light. Godot's physically-based shader uses the multiplicative convention by default.
+
+Within the sequence, Color_Walls makes colour architectural. The walls are not just tinted backdrops; they are first-class artifacts whose albedo, roughness, and metallic properties interact with the scene's lighting to produce a room with a specific character. The map argues that colour is not a property of objects in isolation but a property of their interaction with the lighting environment, and the learner walks through the argument by moving between differently-lit regions of the room.

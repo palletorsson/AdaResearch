@@ -27,35 +27,6 @@ func julia_iterate(z: Vector2, c: Vector2, max_iterations: int) -> int:
 
 ### Rendering the Julia Set
 
-```gdscript
-func render_julia(c: Vector2, width: int, height: int, zoom: float) -> Image:
-    var image = Image.create(width, height, false, Image.FORMAT_RGB8)
-
-    for px in range(width):
-        for py in range(height):
-            # Map pixel to complex plane
-            var z = Vector2(
-                (px - width / 2.0) / (width / 4.0) / zoom,
-                (py - height / 2.0) / (height / 4.0) / zoom
-            )
-
-            var iterations = julia_iterate(z, c, 100)
-
-            # Color based on escape time
-            var color = escape_time_color(iterations, 100)
-            image.set_pixel(px, py, color)
-
-    return image
-
-func escape_time_color(iterations: int, max_iter: int) -> Color:
-    if iterations == max_iter:
-        return Color.BLACK  # In set
-
-    # Smooth coloring
-    var t = float(iterations) / float(max_iter)
-    return Color.from_hsv(t * 0.7, 0.8, 1.0)
-```
-
 ### Famous Julia Sets
 
 ```gdscript
@@ -80,35 +51,6 @@ func render_gallery():
 ```
 
 ### Julia-Mandelbrot Relationship
-
-```gdscript
-func mandelbrot_iterate(c: Vector2, max_iterations: int) -> int:
-    var z = Vector2.ZERO  # Always start at z=0
-
-    for i in range(max_iterations):
-        var z_new = Vector2(
-            z.x * z.x - z.y * z.y + c.x,
-            2.0 * z.x * z.y + c.y
-        )
-        z = z_new
-
-        if z.length_squared() > 4.0:
-            return i
-
-    return max_iterations
-
-# Key relationship:
-# If c is IN the Mandelbrot set → Julia set for c is CONNECTED
-# If c is OUT of the Mandelbrot set → Julia set for c is DISCONNECTED (Cantor dust)
-# If c is ON the Mandelbrot boundary → Julia set has maximum complexity
-
-func julia_connectivity(c: Vector2) -> String:
-    var mandel_result = mandelbrot_iterate(c, 1000)
-    if mandel_result == 1000:
-        return "connected"
-    else:
-        return "disconnected"
-```
 
 ### Interactive Parameter Exploration
 
@@ -139,31 +81,6 @@ func update_julia():
 
 ### 3D Julia Visualization
 
-```gdscript
-func julia_heightmap(c: Vector2, resolution: int, max_height: float) -> PackedFloat32Array:
-    var heights = PackedFloat32Array()
-    heights.resize(resolution * resolution)
-
-    for x in range(resolution):
-        for y in range(resolution):
-            var z = Vector2(
-                (x - resolution / 2.0) / (resolution / 4.0),
-                (y - resolution / 2.0) / (resolution / 4.0)
-            )
-
-            var iterations = julia_iterate(z, c, 50)
-            var height = (float(iterations) / 50.0) * max_height
-
-            heights[x + y * resolution] = height
-
-    return heights
-
-func create_julia_terrain(c: Vector2):
-    var heights = julia_heightmap(c, 64, 5.0)
-    var terrain_mesh = generate_terrain_mesh(heights, 64)
-    $TerrainMesh.mesh = terrain_mesh
-```
-
 ### Smooth Iteration Count
 
 ```gdscript
@@ -189,28 +106,17 @@ func julia_smooth(z: Vector2, c: Vector2, max_iterations: int) -> float:
 ### GPU Acceleration
 Julia sets are embarrassingly parallel—each pixel is independent:
 
-```gdscript
-# Compute shader for Julia set
-shader_type canvas_item;
-
-uniform vec2 c;
-uniform int max_iterations;
-uniform float zoom;
-
-void fragment() {
-    vec2 z = (UV - 0.5) * 4.0 / zoom;
-
-    int iterations = 0;
-    for (int i = 0; i < max_iterations; i++) {
-        if (dot(z, z) > 4.0) break;
-        z = vec2(z.x * z.x - z.y * z.y, 2.0 * z.x * z.y) + c;
-        iterations++;
-    }
-
-    float t = float(iterations) / float(max_iterations);
-    COLOR = vec4(hsv_to_rgb(vec3(t * 0.7, 0.8, iterations == max_iterations ? 0.0 : 1.0)), 1.0);
-}
-```
-
 ## Key Takeaway
 The Julia set is the Mandelbrot's complement—same formula (z² + c), different question. Mandelbrot asks "which c values are bounded?"; Julia asks "which z values are bounded for fixed c?". Each point in the Mandelbrot set indexes a connected Julia set; each point outside indexes disconnected dust. **Parameter space and dynamic space are dual views of the same underlying mathematics.**
+
+## Implementation Notes and Complexity
+
+The synthesis map assembles the sequence's fractal techniques into a single composable system. Each fractal — Cantor subtraction, Koch addition, Mandelbrot iteration, Sierpinski removal — is represented as a generator whose output can be composed with the outputs of the others. The composition graph is a small DAG; nodes are generators, edges carry geometry or colour data.
+
+Generators are O(1) to instantiate and O(structure size) to evaluate. A Koch snowflake at depth 5 produces 3 times 4 to the 5 equals 3072 line segments; a Sierpinski triangle at depth 5 produces 3 to the 5 equals 243 filled triangles. The composition cost depends on how outputs are combined: overlaying is O(sum of sizes), intersecting requires spatial data structures and is O(N log N) for N combined elements.
+
+The map's combinator set is deliberately small. Overlay, intersect, mask, and scale-offset are the four operations. Each operation has a clear geometric interpretation, and the small vocabulary means that the learner can compose complex structures without a combinatorial explosion of options. Larger combinator vocabularies tend to produce more expressive systems but harder-to-predict results, and the map prioritises predictability.
+
+Memory management matters at deep composition. A tree with multiple generators at depth 5 or higher can produce tens of thousands of geometric primitives. Godot's scene-tree representation becomes a bottleneck at this scale; the map uses MultiMeshInstance3D for repeated primitives and batches draws aggressively.
+
+Within the sequence, Synthesis closes the fractals arc. Previous maps introduced individual fractals; this map treats them as primitives in a compositional algebra. The algebra's expressive power is the sequence's closing argument: fractals are not only individually beautiful but compositionally productive, and the combinations produce structures that no single fractal could have generated alone.

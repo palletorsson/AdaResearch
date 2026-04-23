@@ -29,42 +29,6 @@ func recursive_circles(center: Vector2, radius: float, depth: int):
 ### Apollonian Gasket
 A classical circular fractal where circles pack to fill space:
 
-```gdscript
-func apollonian_gasket(c1: Circle, c2: Circle, c3: Circle, depth: int):
-    if depth <= 0:
-        return
-
-    # Find the fourth circle tangent to all three
-    var c4 = descartes_circle(c1, c2, c3)
-
-    if c4.radius < MIN_RADIUS:
-        return
-
-    draw_circle(c4.center, c4.radius)
-
-    # Recurse on the three new triangular gaps
-    apollonian_gasket(c1, c2, c4, depth - 1)
-    apollonian_gasket(c2, c3, c4, depth - 1)
-    apollonian_gasket(c1, c3, c4, depth - 1)
-
-func descartes_circle(c1: Circle, c2: Circle, c3: Circle) -> Circle:
-    # Descartes' Circle Theorem
-    # If k = 1/r (curvature), then:
-    # k4 = k1 + k2 + k3 + 2*sqrt(k1*k2 + k2*k3 + k1*k3)
-
-    var k1 = 1.0 / c1.radius
-    var k2 = 1.0 / c2.radius
-    var k3 = 1.0 / c3.radius
-
-    var k4 = k1 + k2 + k3 + 2.0 * sqrt(k1*k2 + k2*k3 + k1*k3)
-
-    # Center calculation requires complex arithmetic
-    # Simplified: average weighted by curvature
-    var center = (c1.center * k1 + c2.center * k2 + c3.center * k3) / (k1 + k2 + k3)
-
-    return Circle.new(center, 1.0 / k4)
-```
-
 ### 3D Recursive Circles
 For the VR visualization, circles become 3D toruses or rings:
 
@@ -102,27 +66,6 @@ func recursive_circles_3d(center: Vector3, radius: float, normal: Vector3, depth
 ### Inward Spiraling
 Circles that spiral toward center:
 
-```gdscript
-func spiral_circles(center: Vector2, radius: float, angle: float, depth: int):
-    if depth <= 0 or radius < MIN_RADIUS:
-        return
-
-    # Draw current circle
-    draw_circle(center, radius)
-
-    # Next circle: smaller, rotated, moved toward center
-    var shrink_factor = 0.85
-    var rotation = 0.3  # radians per iteration
-    var inward_factor = 0.1
-
-    var new_radius = radius * shrink_factor
-    var new_angle = angle + rotation
-    var inward_offset = Vector2(cos(angle), sin(angle)) * radius * inward_factor
-    var new_center = center - inward_offset  # Move toward center
-
-    spiral_circles(new_center, new_radius, new_angle, depth - 1)
-```
-
 ### Fractal Dimension of Circle Packings
 The Apollonian gasket has dimension ≈ 1.3057:
 
@@ -152,19 +95,6 @@ func estimate_apollonian_dimension(max_depth: int) -> float:
 ### Depth vs. Iterations
 The map uses 40 iterations, which produces fine detail:
 
-```gdscript
-@export var iterations: int = 40
-@export var min_radius: float = 0.01  # Stop when circles get too small
-
-func recursive_circles_bounded(center: Vector2, radius: float, remaining: int):
-    if remaining <= 0 or radius < min_radius:
-        return
-
-    draw_circle(center, radius)
-
-    # ... generate children with remaining - 1
-```
-
 ### Performance: Instance Rendering
 Many small circles can use GPU instancing:
 
@@ -193,3 +123,15 @@ func render_all_circles():
 
 ## Key Takeaway
 Circular recursion demonstrates that self-similarity operates in any geometry. The key insight: **different recursion topologies produce different aesthetics** (branching trees vs. spiraling mandalas) while sharing the same mathematical foundation (self-application of rules).
+
+## Implementation Notes and Complexity
+
+The Cantor set is constructed by repeated middle-third removal. Starting from the unit interval, each step removes the open middle third of every remaining interval. After N steps, the remaining structure consists of 2 to the N intervals, each of length 3 to the minus N. The total length tends to zero; the total number of endpoints tends to infinity; the fractal dimension is log(2) over log(3), approximately 0.631.
+
+The recursive construction has straightforward time and space complexity. Each step multiplies the interval count by 2, so generating N steps requires O(2 to the N) storage for the interval list. Naive implementations allocate a new list at each step; a more efficient implementation stores only the endpoints and reconstructs intervals on demand, giving O(N) memory for the recursion depth plus O(2 to the N) time to enumerate the intervals.
+
+Rendering the Cantor set is limited by what can actually be displayed. At eight iterations the structure has 256 intervals, each too narrow to be distinct on a normal display. Beyond ten iterations the visualisation collapses visually, even though the mathematical construction continues. The map caps visible depth at a threshold that produces legible geometry, and a side panel tracks the mathematical depth separately.
+
+The Cantor dust — the 2D analogue — is constructed similarly but with 8 of 9 squares retained instead of 2 of 3 intervals. The fractal dimension is log(8) over log(3), approximately 1.893. The Cantor carpet uses 8 of 9 squares as well but colours them differently; Sierpinski's carpet removes the centre of each square instead, producing dimension log(8) over log(3), the same value.
+
+Within the sequence, Cantor is the one-dimensional entry point to the fractals sequence. Sierpinski, Koch, and Menger all generalise Cantor's subtractive logic to higher dimensions, and the dimensional ladder from Cantor to Menger runs through this map's construction.

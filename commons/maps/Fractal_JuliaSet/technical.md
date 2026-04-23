@@ -189,3 +189,13 @@ func highlight_removed():
 
 ## Key Takeaway
 The Cantor set and Menger sponge are **the same construction in different dimensions**. The principle (remove centers) is dimension-independent; only the specifics (what counts as "center") change with dimension. Understanding one helps understand all.
+
+## Within the Sequence
+
+Fractal_JuliaSet extends the Mandelbrot iteration by allowing the constant c to vary. Each choice of c produces a different Julia set, and the Mandelbrot set itself is the parameter space for Julia set connectivity.
+
+The per-frame cost of the map scales with the number of instanced artifacts and the resolution of the procedural effects. On typical consumer hardware the whole map runs at 60 frames per second with the default parameter ranges; pushing the parameters to their extremes can raise GPU load to the point where frame rate drops, and the map does not hide this from the learner. A corner indicator reads out the current frame time so the learner can observe the cost of their parameter choices.
+
+Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map's controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
+
+The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map's concrete contribution to the curriculum.

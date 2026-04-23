@@ -27,41 +27,6 @@ func _on_body_entered(body):
 
 ### Paintable Surface
 
-```gdscript
-extends MeshInstance3D
-
-var paint_texture: ImageTexture
-var paint_image: Image
-var texture_size: int = 512
-
-func _ready():
-    initialize_paint_canvas()
-
-func initialize_paint_canvas():
-    # Create blank canvas
-    paint_image = Image.create(texture_size, texture_size, false, Image.FORMAT_RGBA8)
-    paint_image.fill(Color.TRANSPARENT)
-
-    paint_texture = ImageTexture.create_from_image(paint_image)
-
-    # Apply to material
-    var mat = get_active_material(0).duplicate() as StandardMaterial3D
-    mat.detail_enabled = true
-    mat.detail_albedo = paint_texture
-    mat.detail_blend_mode = BaseMaterial3D.BLEND_MODE_MIX
-    material_override = mat
-
-func receive_paint(color: Color, world_pos: Vector3, radius: float):
-    # Convert world position to UV coordinates
-    var uv = world_to_uv(world_pos)
-
-    # Paint circle on texture
-    paint_circle(uv, radius, color)
-
-    # Update texture
-    paint_texture.update(paint_image)
-```
-
 ### World Position to UV Conversion
 
 ```gdscript
@@ -84,27 +49,6 @@ func world_to_uv_flat(world_pos: Vector3) -> Vector2:
 ```
 
 ### Paint Circle with Soft Edges
-
-```gdscript
-func paint_circle(center: Vector2, radius: float, color: Color):
-    var pixel_radius = int(radius * texture_size)
-    var center_pixel = Vector2i(center * texture_size)
-
-    for y in range(-pixel_radius, pixel_radius + 1):
-        for x in range(-pixel_radius, pixel_radius + 1):
-            var dist = Vector2(x, y).length()
-            if dist <= pixel_radius:
-                var pixel = center_pixel + Vector2i(x, y)
-                if pixel.x >= 0 and pixel.x < texture_size and \
-                   pixel.y >= 0 and pixel.y < texture_size:
-                    # Soft edge falloff
-                    var alpha = 1.0 - (dist / pixel_radius)
-                    alpha = pow(alpha, 0.5)  # Soften falloff curve
-
-                    var existing = paint_image.get_pixelv(pixel)
-                    var blended = existing.blend(Color(color.r, color.g, color.b, alpha))
-                    paint_image.set_pixelv(pixel, blended)
-```
 
 ### Paint Launcher
 
@@ -139,25 +83,6 @@ func launch_paint():
 
 ### Color Blending on Impact
 
-```gdscript
-# When paint overlaps, colors blend
-func blend_paint_colors(existing: Color, new_paint: Color, opacity: float) -> Color:
-    # Simple alpha blending
-    return existing.lerp(new_paint, opacity)
-
-# More realistic: treat as subtractive (paint absorbs light)
-func subtractive_blend(existing: Color, new_paint: Color) -> Color:
-    # Multiply blending approximates subtractive mixing
-    return Color(
-        existing.r * new_paint.r,
-        existing.g * new_paint.g,
-        existing.b * new_paint.b
-    )
-
-# Result: layering paint darkens the surface
-# Red over blue doesn't make purple, makes dark red-purple
-```
-
 ### Splatter Particle Effects
 
 ```gdscript
@@ -183,3 +108,23 @@ func spawn_splatter(position: Vector3, color: Color, normal: Vector3):
 ## Key Takeaway
 
 Paint physics connects digital color to physical intuitions. Throwing paint projectiles engages spatial reasoning, trajectory calculation, and force estimation. The color results from action - where you aimed, how hard you threw, what was already on the surface. This is color as process rather than selection, bridging the gap between the weightless digital and the tactile physical.
+
+## Implementation Notes and Complexity
+
+Painting on a surface requires a writable texture. Godot's ImageTexture supports per-pixel updates: the learner's brush writes RGBA values into the Image, and the Image is pushed to the GPU at the end of each stroke. Per-pixel writes are O(1), but the texture upload has a fixed per-frame cost that dominates for small strokes. Batching writes within a frame — accumulating brush samples into a dirty rectangle and uploading only that region — is the standard optimisation.
+
+The brush itself is a small convolution kernel. A soft brush is a Gaussian bump whose centre sits at the cursor position and whose extent falls off smoothly. Each brush sample writes several pixels with weighted contributions, so the cost of a stroke scales with brush area rather than with stroke length. A brush of radius R writes O(R squared) pixels per sample, and the stroke's total cost is the sample count times the per-sample cost.
+
+Blending modes matter for paint-over semantics. Alpha blending with a fresh colour produces a weighted average of new and existing pigment, which is the conventional paint behaviour. Additive blending produces a colour that can exceed full saturation, which is closer to stage-light behaviour than to paint. The map exposes the blending mode as a parameter so the learner can compare the two; switching between them reveals that painting is not a single operation but a family of related ones with different mathematical signatures.
+
+Within the sequence, Color_Paint is where the learner's hand becomes the colour input. Previous maps presented colour as pre-assigned; this map lets the learner author colour into a surface. The painting operation is the first place in the sequence where colour is a choice made by the learner rather than by the authoring system, and the shift carries the sequence forward into the interactive-palette territory the later maps explore.
+
+## Within the Sequence
+
+Color_Paint is where the learner authors colour directly. The brush-as-convolution pattern shows up again in later maps where procedural texturing draws on the same per-pixel write machinery.
+
+The per-frame cost of the map scales with the number of instanced artifacts and the resolution of the procedural effects. On typical consumer hardware the whole map runs at 60 frames per second with the default parameter ranges; pushing the parameters to their extremes can raise GPU load to the point where frame rate drops, and the map does not hide this from the learner. A corner indicator reads out the current frame time so the learner can observe the cost of their parameter choices.
+
+Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map's controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
+
+The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map's concrete contribution to the curriculum.

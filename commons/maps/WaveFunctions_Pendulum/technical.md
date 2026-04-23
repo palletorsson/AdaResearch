@@ -2,7 +2,9 @@
 
 The Intro gave us the equation x = A·sin(wt + phi). A cube on a rail, driven by three parameters — amplitude, frequency, phase. The motion was pure mathematics: a function of time producing displacement. But the equation came from nowhere. It was handed down and parametrized. The question this map answers is: where does that equation come from physically?
 
-The answer hangs from the ceiling. A weight on a string, displaced and released. Gravity pulls it back toward center. It accelerates, arrives at equilibrium, but carries momentum — so it overshoots. Now displaced on the other side, gravity pulls it back again. No sine function was invoked. No omega was specified. The pendulum oscillates because the restoring force is proportional to displacement. That proportionality — that single structural fact — is the origin of every sine wave in the physical world.
+The answer hangs from the ceiling. A weight on a string, displaced and released. Gravity pulls it back toward center. It accelerates, arrives at equilibrium, but carries momentum — so it overshoots.
+
+Now displaced on the other side, gravity pulls it back again. No sine function was invoked. No omega was specified. The pendulum oscillates because the restoring force is proportional to displacement. That proportionality — that single structural fact — is the origin of every sine wave in the physical world.
 
 ## The Restoring Force
 

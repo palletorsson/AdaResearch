@@ -2,7 +2,9 @@
 
 Physarum agents coordinated through trail — chemical substance deposited and sensed, persisting across time, accumulated through reinforcement. The trail map was both output and input: agents wrote to it, and agents read from it. The coordination was indirect, mediated by a substance in the environment.
 
-Flow fields abstract this. Instead of trail that agents deposit and sense, a vector field assigns a direction to every point in space before any agent arrives. The field is the program. Agents are the execution. Each particle reads the local vector at its position and moves accordingly. No deposit. No memory. No agent-to-agent interaction. Just a pre-existing field of arrows and particles that follow them.
+Flow fields abstract this. Instead of trail that agents deposit and sense, a vector field assigns a direction to every point in space before any agent arrives. The field is the program. Agents are the execution.
+
+Each particle reads the local vector at its position and moves accordingly. No deposit. No memory. No agent-to-agent interaction. Just a pre-existing field of arrows and particles that follow them.
 
 This is the mathematical substrate underlying all the swarm phenomena that follow. Physarum's trail gradient is a vector field. Boids' steering forces compute local vectors. Ant pheromone gradients define vector fields on graphs. The flow field map makes the abstraction explicit by stripping away the agent-generated feedback loop and presenting the field itself as the primary object.
 

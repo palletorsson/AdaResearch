@@ -1,6 +1,8 @@
 # Electrons flow through conductor wires on a four-state grid where the simplest possible circuit proves that cellular automata literally compute
 
-CA_10 introduced the agent. One ant, one grid, two rules — and a highway that nobody programmed. The emergence was powerful but narrow. The ant built a single repeating structure. It could not store a bit, route a signal, or evaluate a condition. The highway proved that simple rules produce complex output. It did not prove that simple rules compute. CA_11 closes that gap. Wireworld replaces the ant's binary grid with four cell states — empty, electron head, electron tail, conductor — and the result is not emergence. It is engineering. Logic gates, clocks, diodes, memory, arithmetic. A cellular automaton that runs programs. The sequence truth arrives in its most literal form: local rules, applied uniformly, are sufficient for universal computation. The ca_rule_explorer then hands the learner the keys. After eleven maps of observing predefined rules, the learner writes their own.
+CA_10 introduced the agent. One ant, one grid, two rules — and a highway that nobody programmed. The emergence was powerful but narrow. The ant built a single repeating structure. It could not store a bit, route a signal, or evaluate a condition. The highway proved that simple rules produce complex output. It did not prove that simple rules compute.
+
+CA_11 closes that gap. Wireworld replaces the ant's binary grid with four cell states — empty, electron head, electron tail, conductor — and the result is not emergence. It is engineering. Logic gates, clocks, diodes, memory, arithmetic. A cellular automaton that runs programs. The sequence truth arrives in its most literal form: local rules, applied uniformly, are sufficient for universal computation. The ca_rule_explorer then hands the learner the keys. After eleven maps of observing predefined rules, the learner writes their own.
 
 ## Four States, Three Rules
 
@@ -8,6 +10,7 @@ Wireworld (Brian Silverman, 1987) operates on a 2D grid. Each cell holds one of 
 
 1. Empty stays empty.
 2. Electron head becomes electron tail.
+
 3. Electron tail becomes conductor.
 4. Conductor becomes electron head if exactly 1 or 2 of its eight Moore neighbors are electron heads. Otherwise it remains conductor.
 
@@ -77,7 +80,9 @@ func create_wire(grid: Array, start_x: int, y: int, length: int) -> void:
 
 The signal advances one cell per generation, leaving a trail of tail then conductor behind it. The pulse moves right at speed 1. It cannot reverse because the trailing tail is not a head — the refractory state blocks backward excitation.
 
-This is not an analogy to electrical signal propagation. It is signal propagation. The conductor path is a wire. The electron head is a voltage pulse. The tail is the recovery period. Propagation speed is fixed at one cell per generation — the automaton's speed of light. Timing is deterministic and distance-dependent: a signal traveling 5 cells arrives exactly 5 generations after injection. Wire length is delay. Delay is computable.
+This is not an analogy to electrical signal propagation. It is signal propagation. The conductor path is a wire. The electron head is a voltage pulse.
+
+The tail is the recovery period. Propagation speed is fixed at one cell per generation — the automaton's speed of light. Timing is deterministic and distance-dependent: a signal traveling 5 cells arrives exactly 5 generations after injection. Wire length is delay. Delay is computable.
 
 ## Logic Gates from Geometry
 
@@ -150,7 +155,9 @@ AND, OR, and NOT are functionally complete. Any Boolean function can be construc
 
 The leap to universal computation requires unbounded memory. A Wireworld computer built by David Moore and Mark Owen demonstrates this in practice: a full CPU with arithmetic logic unit, program counter, instruction register, and addressable memory, implemented entirely in Wireworld cells. The computer executes a stored program. It adds, subtracts, branches, loops. It is slow — one instruction takes thousands of Wireworld generations. It is large — the circuit occupies tens of thousands of cells. But it computes.
 
-This is the sequence's capstone claim. CA_1 showed that a 1D binary automaton (Rule 110) is Turing complete — capable of universal computation. The proof was theoretical, relying on the equivalence between Rule 110 dynamics and tag systems. Wireworld makes the claim visceral. The logic gates are visible. The signals are traceable. The clock pulses are countable. The computation is not hidden inside an abstract equivalence proof. It is running on the grid, and the learner can watch the electrons flow through the wires, merge at junctions, and produce output.
+This is the sequence's capstone claim. CA_1 showed that a 1D binary automaton (Rule 110) is Turing complete — capable of universal computation. The proof was theoretical, relying on the equivalence between Rule 110 dynamics and tag systems. Wireworld makes the claim visceral.
+
+The logic gates are visible. The signals are traceable. The clock pulses are countable. The computation is not hidden inside an abstract equivalence proof. It is running on the grid, and the learner can watch the electrons flow through the wires, merge at junctions, and produce output.
 
 ## The ca_rule_explorer Artifact
 
@@ -191,7 +198,9 @@ func generate_spacetime(initial: Array[int]) -> Array:
     return spacetime
 ```
 
-The spacetime diagram is a 2D grid where the horizontal axis is space and the vertical axis is time. Each row is one generation. The complete diagram is the automaton's history — its trajectory through configuration space rendered as a static image. Rule 30 produces chaos. Rule 110 produces gliders and localized structures. Rule 90 produces the Sierpinski triangle. Rule 0 kills everything. Rule 255 fills everything. The 256 rules span the full range of dynamical behavior, from death to order to chaos to computation.
+The spacetime diagram is a 2D grid where the horizontal axis is space and the vertical axis is time. Each row is one generation. The complete diagram is the automaton's history — its trajectory through configuration space rendered as a static image. Rule 30 produces chaos.
+
+Rule 110 produces gliders and localized structures. Rule 90 produces the Sierpinski triangle. Rule 0 kills everything. Rule 255 fills everything. The 256 rules span the full range of dynamical behavior, from death to order to chaos to computation.
 
 The explorer makes the rule space navigable. The learner types a number, watches the result, adjusts, repeats. The feedback loop is immediate. Patterns that took Wolfram years to catalog become discoverable in minutes.
 
@@ -237,7 +246,9 @@ Together they close the sequence. CA_1 through CA_10 presented cellular automata
 
 The learner's role shifts from spectator to architect. The passive verb — "watch the automaton evolve" — gives way to the active — "build a circuit," "choose a rule," "test a hypothesis." The tools exist. The understanding exists. What remains is agency.
 
-The shift resolves a tension that has built across eleven maps. Every previous map demonstrated emergence — complex behavior from simple rules that nobody designed. Wireworld inverts this. The rules are still simple. The micro behavior is still emergent — each electron steps according to four states and three transitions. But the macro behavior is designed. The circuit layout is intentional. Emergence and design coexist. Transistors obey physics. Chips are engineered. The two scales cooperate.
+The shift resolves a tension that has built across eleven maps. Every previous map demonstrated emergence — complex behavior from simple rules that nobody designed. Wireworld inverts this. The rules are still simple. The micro behavior is still emergent — each electron steps according to four states and three transitions.
+
+But the macro behavior is designed. The circuit layout is intentional. Emergence and design coexist. Transistors obey physics. Chips are engineered. The two scales cooperate.
 
 The learner leaves CA_11 with two capabilities: the understanding that four cell states suffice for digital logic, and the tools to define and test arbitrary rules. The sequence truth is no longer a claim to be accepted. It is a fact to be verified, a tool to be wielded, and a sandbox to be explored.
 

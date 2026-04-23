@@ -2,7 +2,9 @@
 
 Boids coordinated through direct perception. Each boid read its neighbors' positions and velocities, computed three steering forces, and adjusted. The communication channel was peer-to-peer — instant, memoryless, erased every frame. No boid left a trace. The flock existed only in the present tense.
 
-Ant colony optimization restores the environment as medium. An ant does not perceive other ants. It perceives pheromone — a chemical substance deposited on the ground by previous walkers. The trail persists after the ant that laid it has moved on. It accumulates when many ants walk the same path. It evaporates when neglected. The environment carries the message across time. This is stigmergy again, the same principle that drove Physarum, but formalized into an optimization algorithm by Marco Dorigo in 1992. Where boids coordinated in space, ants coordinate through time. Where boids produced flocking, ants produce solutions to combinatorial problems that resist brute-force search.
+Ant colony optimization restores the environment as medium. An ant does not perceive other ants. It perceives pheromone — a chemical substance deposited on the ground by previous walkers. The trail persists after the ant that laid it has moved on. It accumulates when many ants walk the same path.
+
+It evaporates when neglected. The environment carries the message across time. This is stigmergy again, the same principle that drove Physarum, but formalized into an optimization algorithm by Marco Dorigo in 1992. Where boids coordinated in space, ants coordinate through time. Where boids produced flocking, ants produce solutions to combinatorial problems that resist brute-force search.
 
 The branching corridor network in this map is the problem made physical. Corridors are edges. Junctions are nodes. The colony must find the shortest route through a graph — a constrained version of the traveling salesman problem, NP-hard in its general form. No ant solves it. The pheromone gradient solves it, and the ants are the gradient's hands.
 

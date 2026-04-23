@@ -1,6 +1,8 @@
 # Nature solved optimization before we did — a gallery of swarm algorithms side by side, each a different answer to the same question
 
-Six maps. Six mechanisms. Physarum's stigmergic trail networks. Flow fields' pre-built vector navigation. Boids' three-rule flocking. ABM's general agent framework. Ant colony's pheromone-guided graph optimization. Particle swarm's socially-informed landscape search. Each map demonstrated one approach to the same problem: how do simple agents produce intelligent collective behavior without centralized control?
+Six maps. Six mechanisms. Physarum's stigmergic trail networks. Flow fields' pre-built vector navigation.
+
+Boids' three-rule flocking. ABM's general agent framework. Ant colony's pheromone-guided graph optimization. Particle swarm's socially-informed landscape search. Each map demonstrated one approach to the same problem: how do simple agents produce intelligent collective behavior without centralized control?
 
 This gallery places them side by side. The `SwarmShowcase` artifact implements multiple swarm algorithms within a unified visualization framework, allowing direct comparison. Each algorithm runs in its own alcove, but the spatial proximity makes the family resemblance visible: all are populations of simple agents, all rely on local interactions, all produce emergent global behavior. The differences lie in the coordination mechanism.
 

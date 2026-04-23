@@ -4,7 +4,9 @@ Cellular automata established a principle: local rules on a grid produce global 
 
 Forces established another principle: agents move. A particle with position and velocity responds to acceleration — drifts, collides, orbits. But those agents left no trace. A particle that passed through a region of space changed nothing about that region. The space was passive — a stage, not a medium.
 
-Physarum polycephalum — a single-celled slime mold — collapses this divide. It moves through space like a force-driven agent. It modifies space like a cellular automaton updating its grid. It deposits chemical trail wherever it travels, then senses that trail to decide where to travel next. The agent writes to the environment. The environment writes to the agent. The feedback loop between motion and medium produces networks that approximate optimal solutions — shortest paths, Steiner trees connecting multiple food sources. No neuron, no centralized planner. Just agents, trail, and time.
+Physarum polycephalum — a single-celled slime mold — collapses this divide. It moves through space like a force-driven agent. It modifies space like a cellular automaton updating its grid. It deposits chemical trail wherever it travels, then senses that trail to decide where to travel next.
+
+The agent writes to the environment. The environment writes to the agent. The feedback loop between motion and medium produces networks that approximate optimal solutions — shortest paths, Steiner trees connecting multiple food sources. No neuron, no centralized planner. Just agents, trail, and time.
 
 This is stigmergy — coordination through environmental modification. Ants do it with pheromones. Termites with mud pellets. Physarum with chemical gradients on its own body. The simulation that follows models this process: thousands of virtual agents on a 2D trail map, each executing the same sense-turn-deposit loop, producing emergent networks from nothing but local interaction.
 

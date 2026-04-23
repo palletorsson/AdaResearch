@@ -148,7 +148,7 @@ var height := fbm(world_x, world_z, config) * config["amplitude"]
 
 Low frequency with high amplitude: vast rolling hills. High frequency with low amplitude: fine surface ripple. The same fBM sum scaled to different physical regimes by two multipliers.
 
-Frequency and amplitude form another two-dimensional subspace — the plane of physical scale. Navigating this plane reveals that "zooming in" on noise is not the same as "increasing frequency." Zooming in reveals the same features at higher magnification. Increasing frequency creates new features at smaller scale. A game that zooms into terrain needs level-of-detail frequency scaling, not magnification of a fixed field.
+Frequency and amplitude form another two-dimensional subspace — the plane of physical scale. Moving through this plane reveals that "zooming in" on noise is not the same as "increasing frequency." Zooming in reveals the same features at higher magnification. Increasing frequency creates new features at smaller scale. A game that zooms into terrain needs level-of-detail frequency scaling, not magnification of a fixed field.
 
 ## Seed: The Discrete Axis
 
@@ -167,7 +167,7 @@ This is the deepest conceptual point the map carries. The E term in QFEP describ
 
 Dragging persistence smoothly transforms the terrain. Dragging the seed slider discontinuously replaces it. Continuous parameters morph the landscape; the seed teleports to a new one. The learner feels the difference between changing the rules and rerolling the dice.
 
-## Navigating by Projection
+## Traversing by Projection
 
 Ten dimensions cannot be visualized simultaneously. The noise_space artifact presents them as ten sliders controlling a single three-dimensional visualization — a projection of the ten-dimensional parameter space into the three spatial dimensions of the rendered output.
 

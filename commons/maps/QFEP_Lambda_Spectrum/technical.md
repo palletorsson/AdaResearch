@@ -1,6 +1,8 @@
 # A corridor where the floor shifts from crystal to fog and the learner's position along its length is the lambda value itself
 
-The Edge of Chaos pinned lambda at the sweet spot and held it there. The learner stood inside the narrow green band — lambda between 0.3 and 0.5 — watching Turing patterns ripple and emergence condense from noise. The edge felt alive. But it felt local. The map placed the learner at the overlook without making them climb. The Lambda Spectrum removes the guide. It builds the entire gradient as physical space — a corridor from lambda zero at the north wall to lambda one at the south gap — and asks the learner to walk. Every step changes the world. Every position is a parameter value. The body is the slider.
+The Edge of Chaos pinned lambda at the sweet spot and held it there. The learner stood inside the narrow green band — lambda between 0.3 and 0.5 — watching Turing patterns ripple and emergence condense from noise. The edge felt alive. But it felt local. The map placed the learner at the overlook without making them climb.
+
+The Lambda Spectrum removes the guide. It builds the entire gradient as physical space — a corridor from lambda zero at the north wall to lambda one at the south gap — and asks the learner to walk. Every step changes the world. Every position is a parameter value. The body is the slider.
 
 The F_Term built the crystal and locked lambda at zero. The E_Term dissolved it and drove lambda to one. Both demonstrated extremes. Neither let the learner choose. The corridor restores agency. Lambda, which until now has been a locked slider or an imposed constant, becomes a spatial coordinate the learner controls by walking.
 
@@ -149,7 +151,9 @@ func _process(delta: float) -> void:
     _update_mesh()
 ```
 
-Each frame, noise displaces every vertex further from its origin. The displacement scales with dissolve_t, which accumulates over time. The object melts. Edges stretch. Faces warp. The mesh that once held a shape loses it incrementally, vertex by vertex, each wandering along its own noise trajectory. The offset constants (0, 50, 100) decorrelate the axes — without decorrelation, all vertices would drift in unison, an ordered dissolution that contradicts the point. With decorrelation, each vertex finds its own path. The form dies in three dimensions simultaneously.
+Each frame, noise displaces every vertex further from its origin. The displacement scales with dissolve_t, which accumulates over time. The object melts. Edges stretch.
+
+Faces warp. The mesh that once held a shape loses it incrementally, vertex by vertex, each wandering along its own noise trajectory. The offset constants (0, 50, 100) decorrelate the axes — without decorrelation, all vertices would drift in unison, an ordered dissolution that contradicts the point. With decorrelation, each vertex finds its own path. The form dies in three dimensions simultaneously.
 
 The `chaos_particles` bracket the far south end at row fifteen — the corridor's terminus before the floor drops away. Full spread. No gravity. Maximum scatter.
 
@@ -162,7 +166,9 @@ _material.initial_velocity_min = 1.0
 _material.initial_velocity_max = 3.0
 ```
 
-Zero direction. Maximum spread. Zero gravity. High velocity. This is the E_Term's particle_chaos revisited — the same configuration from two maps ago, now positioned at the far end of a gradient the learner walked to reach. The repetition is deliberate. The chaos particles are the same. The learner's understanding is not. Having walked the full spectrum, lambda-one reads not as an isolated extreme but as the terminus of a continuous parameter — where the gradient exhausts its structural budget and spends entirely on freedom.
+Zero direction. Maximum spread. Zero gravity. High velocity.
+
+This is the E_Term's particle_chaos revisited — the same configuration from two maps ago, now positioned at the far end of a gradient the learner walked to reach. The repetition is deliberate. The chaos particles are the same. The learner's understanding is not. Having walked the full spectrum, lambda-one reads not as an isolated extreme but as the terminus of a continuous parameter — where the gradient exhausts its structural budget and spends entirely on freedom.
 
 ## The Corridor as Sensory Gradient
 

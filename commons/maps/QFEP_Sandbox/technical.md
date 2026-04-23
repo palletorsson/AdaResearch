@@ -34,7 +34,7 @@ Four corners of this space produce four qualitatively distinct regimes:
 
 4. **High lambda, positive phi** (chaos + becoming): Maximum dissolution with maximum amplification of change. The system cascades — entropy rises and the positive phi accelerates the rise. Runaway dissolution. The formula's output swings wildly.
 
-The edge of chaos with positive phi — lambda near 0.4, phi positive — occupies the center-right of this plane. It is the regime the curriculum has been building toward: enough structure to cohere, enough entropy to explore, and a disposition that leans into transformation. Finding it requires navigating both axes simultaneously.
+The edge of chaos with positive phi — lambda near 0.4, phi positive — occupies the center-right of this plane. It is the regime the curriculum has been building toward: enough structure to cohere, enough entropy to explore, and a disposition that leans into transformation. Finding it requires working both axes simultaneously.
 
 ## The QFEP Reactor: The System That Responds
 

@@ -1,6 +1,6 @@
 # A divided room where the left half is spacious and the right half cramped — algorithmic bias made architectural before it is mathematical
 
-The QFEP Laboratory gave the learner a formula for navigating between order and chaos: QFE = F - lambda E(S) + phi delta E(S,t). The formula describes adaptive systems in general. This map asks: what happens when the adaptive system is a classifier deployed on people?
+The QFEP Laboratory gave the learner a formula for working between order and chaos: QFE = F - lambda E(S) + phi delta E(S,t). The formula describes adaptive systems in general. This map asks: what happens when the adaptive system is a classifier deployed on people?
 
 The answer is architectural. An 8x9 grid where a wall of height-5 blocks at column 6 divides the room into two halves. The left half: six columns wide, spacious, room to move. The right half: two columns, cramped, the same floor but less of it. The wall narrows at rows 4-5, where the height-5 blocks extend inward, squeezing the passage. The bias is spatial before it is mathematical.
 
@@ -83,7 +83,9 @@ The void at grid position (6,7) — height 0, the floor removed — sits in the 
 
 The teleporter at (6,7) leads to the next map in the sequence. To exit, the learner must stand on the void — must literally step into the gap in the classification system, the space where the boundary does not hold. The passage out of bias goes through the structural incompleteness, not around it. The exit strategy is not to fix the classifier. It is to inhabit its failure point.
 
-The spawn point at (0,0) with an announcement board at (1,0) places the learner firmly in the privileged half. They begin where the space is generous. The walk to the cramped side is optional — no artifact requires it. The curriculum does not force the learner to experience the cramped half. It presents the option and waits. Some learners will walk through. Some will stay on the spacious side and observe the visualizer from comfort. The map does not judge. It documents.
+The spawn point at (0,0) with an announcement board at (1,0) places the learner firmly in the privileged half. They begin where the space is generous. The walk to the cramped side is optional — no artifact requires it. The curriculum does not force the learner to experience the cramped half.
+
+It presents the option and waits. Some learners will walk through. Some will stay on the spacious side and observe the visualizer from comfort. The map does not judge. It documents.
 
 ## From QFEP to Bias
 

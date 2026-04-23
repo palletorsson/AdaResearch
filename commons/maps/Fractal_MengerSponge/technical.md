@@ -30,37 +30,6 @@ func recursive_tree(start: Vector3, direction: Vector3, length: float, depth: in
 ### Parameterized Tree
 Expose key parameters for experimentation:
 
-```gdscript
-@export var branch_angle: float = 25.0  # degrees
-@export var length_ratio: float = 0.7   # child/parent length
-@export var thickness_ratio: float = 0.6  # child/parent thickness
-@export var max_depth: int = 8
-
-func recursive_tree_parameterized(
-    start: Vector3,
-    direction: Vector3,
-    length: float,
-    thickness: float,
-    depth: int
-):
-    if depth <= 0 or length < 0.01:
-        return
-
-    var end = start + direction * length
-    draw_branch_cylinder(start, end, thickness)
-
-    var child_length = length * length_ratio
-    var child_thickness = thickness * thickness_ratio
-    var angle_rad = deg_to_rad(branch_angle)
-
-    # 3D branching: rotate around multiple axes
-    var left_dir = direction.rotated(Vector3.FORWARD, angle_rad)
-    var right_dir = direction.rotated(Vector3.FORWARD, -angle_rad)
-
-    recursive_tree_parameterized(end, left_dir, child_length, child_thickness, depth - 1)
-    recursive_tree_parameterized(end, right_dir, child_length, child_thickness, depth - 1)
-```
-
 ### 3D Tree with Rotation
 For more natural 3D trees, rotate branch plane at each level:
 
@@ -98,33 +67,6 @@ func tree_3d(
 ### Leonardo's Rule (Pipe Model)
 Natural trees follow area-preserving branching:
 
-```gdscript
-func tree_leonardo(
-    start: Vector3,
-    direction: Vector3,
-    radius: float,  # Branch cross-section radius
-    depth: int
-):
-    if depth <= 0 or radius < 0.01:
-        return
-
-    var length = radius * 10.0  # Length proportional to radius
-    var end = start + direction * length
-    draw_branch_cylinder(start, end, radius)
-
-    # Leonardo's rule: sum of child areas = parent area
-    # πr² = πr₁² + πr₂²
-    # For symmetric binary: r₁ = r₂ = r / √2
-    var child_radius = radius / sqrt(2.0)
-    var branch_angle = deg_to_rad(25)
-
-    var left_dir = direction.rotated(Vector3.FORWARD, branch_angle)
-    var right_dir = direction.rotated(Vector3.FORWARD, -branch_angle)
-
-    tree_leonardo(end, left_dir, child_radius, depth - 1)
-    tree_leonardo(end, right_dir, child_radius, depth - 1)
-```
-
 ### Asymmetric Branching
 More natural trees have unequal branches:
 
@@ -157,29 +99,6 @@ func tree_asymmetric(
 
 ### Tree Statistics
 
-```gdscript
-func tree_statistics(depth: int, branch_ratio: float) -> Dictionary:
-    # Number of branches (binary tree)
-    var total_branches = pow(2, depth + 1) - 1
-
-    # Number of tips (leaves)
-    var num_leaves = pow(2, depth)
-
-    # Total length (geometric series)
-    var total_length = (1.0 - pow(branch_ratio, depth + 1)) / (1.0 - branch_ratio)
-
-    # Approximate fractal dimension
-    # D = log(N) / log(S) where N = branches per node, S = length scale
-    var D = log(2) / log(1.0 / branch_ratio)
-
-    return {
-        "branches": total_branches,
-        "leaves": num_leaves,
-        "total_length": total_length,
-        "dimension": D
-    }
-```
-
 ## Implementation Notes
 
 ### Mesh Generation
@@ -205,17 +124,17 @@ func generate_branch_mesh(start: Vector3, end: Vector3, radius: float) -> ArrayM
 ### LOD System
 Trees get complex quickly:
 
-```gdscript
-func calculate_tree_lod(camera_distance: float) -> int:
-    if camera_distance < 5.0:
-        return 8  # Full detail
-    elif camera_distance < 15.0:
-        return 6
-    elif camera_distance < 30.0:
-        return 4
-    else:
-        return 2  # Minimal detail
-```
-
 ## Key Takeaway
 Recursive trees demonstrate **form without memory**. No database stores the tree's shape—only the rule (branch, reduce, repeat) and parameters (angle, ratio, depth). This is emergence: complex organic form arising from simple algorithmic specification.
+
+## Implementation Notes and Complexity
+
+The Menger sponge is constructed by recursive subdivision and selective removal. Start with a unit cube. Divide it into 27 sub-cubes. Remove the centre sub-cube and the six face-centre sub-cubes, leaving 20 sub-cubes. Apply the same procedure to each remaining sub-cube. After N iterations, the structure has 20 to the N sub-cubes, and the fractal dimension is log(20) over log(3), approximately 2.727.
+
+The recursion's time complexity is O(20 to the N), and memory scales identically unless the structure is computed on demand rather than stored. A naive implementation that materialises every sub-cube as a scene tree node runs out of memory at around N equals 5 on consumer hardware. The map caps rendering depth at N equals 4 and uses instanced rendering: a single small cube mesh is drawn many times with different transforms, avoiding per-sub-cube allocation.
+
+Face culling becomes important at high iteration depths. Many of the sub-cubes are partially or fully occluded by their neighbours, and rendering them wastes GPU time. Godot's occlusion culling helps, but the sponge's characteristic self-similarity means that many sub-cubes are geometrically distinct at sub-pixel scale and cannot be collapsed. The rendering cost becomes the dominant constraint at high depths, not the recursion.
+
+The Menger sponge has the universal curve property: every compact one-dimensional curve is homeomorphic to a subset of the Menger sponge. This is a surprising theoretical result with direct pedagogical consequences: the sponge is, in a formal sense, a library of all possible one-dimensional curves. The side panel in the map notes this without attempting to demonstrate it, since a demonstration would require searching a high-dimensional embedding space.
+
+Within the sequence, Menger is the three-dimensional climax of the deletion arc. Cantor, Sierpinski, and Menger climb the dimensional ladder by the same recursive mechanism, and Menger is the top rung.

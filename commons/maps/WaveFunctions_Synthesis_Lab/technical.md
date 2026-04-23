@@ -80,7 +80,7 @@ var jitter = Vector3(
 
 The pattern self-organizes from chaos. Random initial positions converge into geometric lines within seconds.
 
-The plate auto-cycles through mode pairs: (2,3), (3,4), (4,5), (2,5), and others. Each pair produces a distinct geometry. Low mode numbers create simple patterns — a few broad nodal lines. High mode numbers create dense, intricate lattices. The complexity scales with frequency, not with any new physics. The same equation, the same particles, the same gradient descent — only the numbers change. Pattern emerges from parameter.
+The plate auto-cycles through mode pairs: (2,3), (3,4), (4,5), (2,5), and others. Each pair produces a distinct geometry. Low mode numbers create simple patterns — a few broad nodal lines. High mode numbers create dense, finely patterned lattices. The complexity scales with frequency, not with any new physics. The same equation, the same particles, the same gradient descent — only the numbers change. Pattern emerges from parameter.
 
 Every question about resonance lives on this plate. Why does a wine glass shatter at a specific pitch? Because that pitch excites the glass's natural mode, and the amplitude at the antinodes exceeds what the material can absorb. Antinodes vibrate maximally. Nodes stand still. The boundary between them concentrates the energy.
 
@@ -249,7 +249,9 @@ sine_ball.position = Vector3(radius + projection_offset, y, 0)
 cosine_ball.position = Vector3(x, -radius - projection_offset, 0)
 ```
 
-The unit circle generates every wave in this room. The additive demo sums sines. The Chladni plate multiplies cosines. The Lissajous curves combine sines across axes. The spring oscillates at a frequency determined by sqrt(k/m). The DNA helix winds two sinusoidal strands. The worms undulate laterally by sin(). The vials pulse by sin(). The seismograph traces sin(). The unit circle is the source function. Rotation becomes oscillation. Oscillation becomes signal. Signal decomposes back into rotation.
+The unit circle generates every wave in this room. The additive demo sums sines. The Chladni plate multiplies cosines. The Lissajous curves combine sines across axes. The spring oscillates at a frequency determined by sqrt(k/m). The DNA helix winds two sinusoidal strands.
+
+The worms undulate laterally by sin(). The vials pulse by sin(). The seismograph traces sin(). The unit circle is the source function. Rotation becomes oscillation. Oscillation becomes signal. Signal decomposes back into rotation.
 
 Fourier's theorem closes the loop. Any periodic function — no matter how complex, how jagged, how biological — equals a sum of circular motions at integer frequencies. The sequence began with a point on a circle. It ends with the proof that the circle was always sufficient.
 

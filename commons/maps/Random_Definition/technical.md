@@ -96,7 +96,9 @@ for i in range(10):
     assert(a_val == b_val)  # never fails
 ```
 
-This is the "pseudo" in pseudo-random. The output passes statistical tests for randomness — uniform distribution, no autocorrelation, long period before repetition — but it is entirely determined by the seed. Change the seed and the sequence changes. Fix the seed and the sequence freezes. Reproducibility is a feature, not a flaw. Game replays, procedural generation, scientific simulations — all depend on seed determinism. The `random_number_book_page_1955` artifact in this map references the RAND Corporation's famous publication: one million random digits generated from electronic noise and printed in a physical book. Scientists would look up random numbers by page and column. The book was a seed made material — a fixed sequence anyone could reference, shared across laboratories, reproducible by reading.
+This is the "pseudo" in pseudo-random. The output passes statistical tests for randomness — uniform distribution, no autocorrelation, long period before repetition — but it is entirely determined by the seed. Change the seed and the sequence changes. Fix the seed and the sequence freezes.
+
+Reproducibility is a feature, not a flaw. Game replays, procedural generation, scientific simulations — all depend on seed determinism. The `random_number_book_page_1955` artifact in this map references the RAND Corporation's famous publication: one million random digits generated from electronic noise and printed in a physical book. Scientists would look up random numbers by page and column. The book was a seed made material — a fixed sequence anyone could reference, shared across laboratories, reproducible by reading.
 
 Before PRNGs existed, randomness was infrastructure. Physical, slow, embodied in paper. The RAND book was published because generating random numbers was expensive. Electronic noise sources were rare. Dice were unreliable at scale. The book industrialized randomness — turned it into a commodity that could be shipped and shelved. The `random_number_book_page_1955` artifact renders a page from this book as a grid of digits, each cell holding a number that was once measured from voltage fluctuations in a vacuum tube.
 
@@ -179,7 +181,9 @@ Three entropy levels emerge as distinct regimes. Low entropy — every particle 
 
 The `trng_vs_prng` artifact places two generators side by side. On the left, a pseudo-random stream — deterministic, fast, reproducible. On the right, a representation of true randomness — sourced from physical processes that no algorithm can predict.
 
-True random number generators harvest entropy from the physical world. Thermal noise in resistors. Radioactive decay timing. Atmospheric electromagnetic interference. Photon arrival times at a detector. These processes are quantum-mechanical at their root — governed by probability amplitudes that are fundamentally irreducible. No seed. No state. No algorithm. The next number does not exist until the measurement occurs.
+True random number generators harvest entropy from the physical world. Thermal noise in resistors. Radioactive decay timing. Atmospheric electromagnetic interference. Photon arrival times at a detector.
+
+These processes are quantum-mechanical at their root — governed by probability amplitudes that are fundamentally irreducible. No seed. No state. No algorithm. The next number does not exist until the measurement occurs.
 
 ```gdscript
 # Conceptual comparison — both produce floats, but from different universes

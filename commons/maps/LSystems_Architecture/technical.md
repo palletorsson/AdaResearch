@@ -162,7 +162,9 @@ func interpret_as_city(s: String, angle: float) -> Dictionary:
     # F = place street segment, [/] = push/pop, +/- = rotate by angle on XZ
 ```
 
-Three functions. Three interpretations. The same string — the same sequence of characters produced by the same rewriting engine — becomes a tree, a dungeon, or a city depending on which function reads it. The grammar computes topology. The interpreter assigns meaning. This separation is the L-system's deepest architectural feature. It means that any new domain — music, circuit layout, narrative structure — can be reached by writing a new interpreter. The grammar is domain-agnostic. It produces strings. Strings become whatever the reader decides they are.
+Three functions. Three interpretations. The same string — the same sequence of characters produced by the same rewriting engine — becomes a tree, a dungeon, or a city depending on which function reads it. The grammar computes topology. The interpreter assigns meaning.
+
+This separation is the L-system's deepest architectural feature. It means that any new domain — music, circuit layout, narrative structure — can be reached by writing a new interpreter. The grammar is domain-agnostic. It produces strings. Strings become whatever the reader decides they are.
 
 ## The Map Layout as Urban Grid
 
@@ -172,6 +174,8 @@ The two artifacts demonstrate the same mechanism at different scales. The dungeo
 
 ## From Architecture to Ecology
 
-Grammar Lab showed that a sentence becomes a tree. Growth showed that the tree depends on its environment. Grammars_And_Curves showed that the grammar's formal class determines its expressive power. This map shows that the grammar's interpretation determines its domain. The grammar has escaped biology. It was never biological — it was always formal. The tree was one reading. The dungeon is another. The city is a third.
+Grammar Lab showed that a sentence becomes a tree. Growth showed that the tree depends on its environment. Grammars_And_Curves showed that the grammar's formal class determines its expressive power. This map shows that the grammar's interpretation determines its domain.
+
+The grammar has escaped biology. It was never biological — it was always formal. The tree was one reading. The dungeon is another. The city is a third.
 
 The next map — LSystems_Competition — brings the grammar back to biology, but with a difference. Multiple grammars will share a single world. The single-grammar demonstrations are over. Architecture prepared the ground: if one grammar can build a city, what happens when several grammars build in the same space? The answer is ecology — not designed, but emerged from the intersection of competing rule systems.

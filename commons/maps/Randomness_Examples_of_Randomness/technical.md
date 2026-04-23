@@ -83,60 +83,6 @@ func random_air_resistance() -> Vector3:
 
 ### Pipe Dream
 
-```gdscript
-extends Node3D
-
-@export var segment_length := 1.0
-@export var max_segments := 100
-@export var pipe_radius := 0.1
-
-var current_pos := Vector3.ZERO
-var current_dir := Vector3.FORWARD
-var rng := RandomNumberGenerator.new()
-
-func _ready():
-    rng.randomize()
-    generate_pipes()
-
-func generate_pipes():
-    for i in range(max_segments):
-        create_segment()
-        if should_turn():
-            turn_random_direction()
-        else:
-            current_pos += current_dir * segment_length
-
-func create_segment():
-    var pipe = CSGCylinder3D.new()
-    pipe.radius = pipe_radius
-    pipe.height = segment_length
-
-    # Orient along current direction
-    pipe.position = current_pos + current_dir * segment_length / 2
-    pipe.look_at(pipe.position + current_dir, Vector3.UP)
-    pipe.rotate_object_local(Vector3.RIGHT, PI/2)
-
-    add_child(pipe)
-
-func should_turn() -> bool:
-    return rng.randf() < 0.3  # 30% chance to turn
-
-func turn_random_direction():
-    var options = [Vector3.UP, Vector3.DOWN, Vector3.LEFT, Vector3.RIGHT]
-    # Remove opposite direction (no 180° turns)
-    options.erase(-current_dir)
-    current_dir = options[rng.randi() % options.size()]
-
-    # Add elbow joint
-    create_elbow()
-
-func create_elbow():
-    var sphere = CSGSphere3D.new()
-    sphere.radius = pipe_radius * 1.5
-    sphere.position = current_pos
-    add_child(sphere)
-```
-
 ### Random Butterflies
 
 ```gdscript
@@ -199,38 +145,6 @@ func animate_wings():
 
 ### Extreme Randomness
 
-```gdscript
-extends Node3D
-
-@export var particle_count := 1000
-@export var chaos_level := 1.0
-
-var particles := []
-var rng := RandomNumberGenerator.new()
-
-func _ready():
-    rng.randomize()
-    create_particles()
-
-func _process(delta):
-    for p in particles:
-        # Maximum chaos: completely random position each frame
-        p.position = Vector3(
-            rng.randfn(0, chaos_level),
-            rng.randfn(0, chaos_level),
-            rng.randfn(0, chaos_level)
-        )
-        # Random color
-        p.material_override.albedo_color = Color(
-            rng.randf(),
-            rng.randf(),
-            rng.randf()
-        )
-        # Random scale
-        var s = rng.randf_range(0.01, 0.1)
-        p.scale = Vector3(s, s, s)
-```
-
 ## Map-Specific Configuration
 
 ### Structure Analysis
@@ -258,3 +172,13 @@ func _process(delta):
 - ImmediateMesh for procedural geometry
 - CSG for constructive solid geometry
 - Noise functions for organic variation
+
+## Implementation Notes and Complexity
+
+Each example in the gallery is a small standalone demonstration that samples Godot's randf, randi, or randf_range and uses the samples to drive a visible behaviour. The underlying pseudo-random number generator is a Mersenne Twister with a 2 to the 19937 minus 1 period, which is effectively infinite for any realistic number of samples. Samples are O(1) to draw, and the cost of each demonstration is dominated by the rendering rather than by the random generation.
+
+Seeding is the operation that makes a random sequence reproducible. Calling seed(value) resets the PRNG's state; subsequent calls to the sampling functions produce a deterministic sequence conditional on the seed. The map's gallery exposes a seed control so the learner can save a configuration and replay it. Without seeding, each run of the game produces a different gallery, which is often the desired behaviour; with seeding, the gallery becomes a fixed artifact for a given seed.
+
+Distribution shape is the next concern. randf samples uniformly from zero to one; randf_range samples uniformly from an interval. Neither produces Gaussian samples; Gaussian requires either the Box-Muller transform applied to two uniform samples or a rejection-sampling approach, both of which the map demonstrates. The Box-Muller approach is O(1) per sample but involves a logarithm and a sine, which are expensive compared to a uniform draw.
+
+Within the sequence, Examples_of_Randomness is the orientation map. It introduces the sampling primitives the rest of the Randomness sequence will use, and it demonstrates that the primitives are themselves composed of implementation decisions — seed, distribution, range. The map's gallery is a catalogue of primitives, and the catalogue is the vocabulary the sequence will exercise.

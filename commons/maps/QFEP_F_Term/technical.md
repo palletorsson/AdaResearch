@@ -2,7 +2,9 @@
 
 The Introduction laid the full equation on the table — QFE = F - λE(S) + φΔE(S,t) — and let the learner grab each term as a weighted sphere, feeling structure as mass and entropy as drift. The formula existed as architecture: walkable, touchable, spatially distributed across a laboratory. But the terms were peers there. Equal in presentation. The Introduction did not take sides.
 
-This map takes sides. It isolates F — the free energy term, the prediction error, the drive toward order — and gives it the entire space. The lambda slider locks at zero. Entropy contributes nothing. The formula collapses to QFE = F + φΔE(S,t), and without the entropic counterweight, structure becomes absolute. Crystals grow. Puzzles resolve. Patterns emerge from chaos with the inevitability of a proof reaching its conclusion. The map feels good. It should. F-minimization is the pleasure of understanding. The danger is that it feels too good, and the dark room at the end of the corridor exists to demonstrate what happens when a system pursues prediction error reduction as its only goal.
+This map takes sides. It isolates F — the free energy term, the prediction error, the drive toward order — and gives it the entire space. The lambda slider locks at zero. Entropy contributes nothing. The formula collapses to QFE = F + φΔE(S,t), and without the entropic counterweight, structure becomes absolute. Crystals grow.
+
+Puzzles resolve. Patterns emerge from chaos with the inevitability of a proof reaching its conclusion. The map feels good. It should. F-minimization is the pleasure of understanding. The danger is that it feels too good, and the dark room at the end of the corridor exists to demonstrate what happens when a system pursues prediction error reduction as its only goal.
 
 ## Prediction Error: The Gap Between Model and World
 
@@ -228,11 +230,15 @@ The offset creates a phase relationship — the halo sometimes brightens when th
 
 The spatial layout of `QFEP_F_Term` traces a corridor from satisfaction to stasis. The learner enters at the north, passing the subtitle board and spawn point. Immediately ahead: the snap puzzles, one cube and one tetrahedron, flanking the central path. The puzzles are satisfying. Grab points, connect edges, hear the system validate the shape. F drops. Pattern emerges from scattered components. The reward circuitry fires.
 
-Beyond the puzzles, the crystal cluster occupies the raised central platform — elevation 2 in the structure layer, a 4x4 block of heightened geometry. The crystals are beautiful. Blue wireframe on dark substrate. Deterministic arrangement. Each prism tapers to its apex with mathematical precision. The learner cannot interact with the cluster the way they interact with the puzzles, but the visual statement is clear: this is what pure F-minimization produces. Frozen geometry. Perfect prediction. Zero surprise.
+Beyond the puzzles, the crystal cluster occupies the raised central platform — elevation 2 in the structure layer, a 4x4 block of heightened geometry. The crystals are beautiful. Blue wireframe on dark substrate. Deterministic arrangement.
+
+Each prism tapers to its apex with mathematical precision. The learner cannot interact with the cluster the way they interact with the puzzles, but the visual statement is clear: this is what pure F-minimization produces. Frozen geometry. Perfect prediction. Zero surprise.
 
 The elevator at position `(4, 4)` lifts the learner to height 3 — the highest point in the map. From above, the ordered grid reads as a checkerboard of regular blocks. The puzzles below are symmetric. The crystal cluster sits centered. The composition is clean. This is the F-term vista: structure visible at every scale, no element out of place.
 
-The south corridor descends. Heights drop from 2 back to 1, then to 0 — the floor falls away. The dark sphere waits at the terminal position. No puzzles here. No crystals. Just the sphere, pulsing in its constrained loop, the halo breathing beneath it. The teleporter beside it reads "Escape the Dark Room" — an explicit statement that this endpoint is not the destination. Pure order is a trap. Continue to entropy.
+The south corridor descends. Heights drop from 2 back to 1, then to 0 — the floor falls away. The dark sphere waits at the terminal position. No puzzles here.
+
+No crystals. Just the sphere, pulsing in its constrained loop, the halo breathing beneath it. The teleporter beside it reads "Escape the Dark Room" — an explicit statement that this endpoint is not the destination. Pure order is a trap. Continue to entropy.
 
 ## Determinism and the Seed
 

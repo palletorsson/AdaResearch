@@ -135,6 +135,7 @@ The synthesis argument, technically:
 
 1. **F-minimization alone fails** (Godel): No consistent system achieves zero surprise. There are always truths the system cannot predict.
 2. **Pure entropy is trivial** (Russell's explosion): Allow everything and you get nothing meaningful.
+
 3. **Restriction works but costs** (Brouwer): Avoid the dangerous tools and you lose half of mathematics.
 4. **Holding contradiction works** (Florensky): Accept the tension and you gain robustness.
 5. **The productive zone is the edge** (bifurcation diagram): Between r = 3 (order) and r = 4 (chaos), the system exhibits the most complex, interesting, computationally powerful behavior.

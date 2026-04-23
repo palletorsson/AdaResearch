@@ -1,6 +1,8 @@
 # Continuous noise hardens into blocks on a three-dimensional sampling lattice
 
-Noise_One stacked octaves into composite fields. Noise_Perlin_Simplex compared the algorithms that generate those fields. Both maps treated noise as a continuous function — a value at every point, smooth gradients between neighbors, no hard edges. The output was always a float. This map introduces the operation that turns floats into worlds: thresholding. A single comparison — `noise(x, y, z) > T` — collapses the continuous gradient into a binary decision. Solid or void. Block or air. The voxel grid is the spatial container for that decision, repeated at every cell of a regular lattice. The result is architecture that no heightmap can produce: caves, overhangs, floating islands, interior volumes. Discretization is where noise stops being a texture and starts being a place.
+Noise_One stacked octaves into composite fields. Noise_Perlin_Simplex compared the algorithms that generate those fields. Both maps treated noise as a continuous function — a value at every point, smooth gradients between neighbors, no hard edges. The output was always a float. This map introduces the operation that turns floats into worlds: thresholding.
+
+A single comparison — `noise(x, y, z) > T` — collapses the continuous gradient into a binary decision. Solid or void. Block or air. The voxel grid is the spatial container for that decision, repeated at every cell of a regular lattice. The result is architecture that no heightmap can produce: caves, overhangs, floating islands, interior volumes. Discretization is where noise stops being a texture and starts being a place.
 
 ## The Voxel Grid as Sampling Lattice
 
@@ -240,7 +242,9 @@ This is the information cost of discretization. The continuous field contains in
 
 The dark_sphere sits in this map as the unvoxelized constant — continuous geometry amid discretized space. Its surface is smooth. Its emission pulses along a continuous sine wave. It belongs to the world before the threshold, where every value between 0 and 1 still exists. The terrain surrounding it has been reduced to binary. The contrast is the lesson.
 
-Thresholding is an act of decision. Where does solid end and void begin? The answer is arbitrary — a parameter on a slider — yet the resulting topology feels natural. Caves form where noise dips below the cut. Overhangs emerge where the bias tilts the field. Floating islands persist where isolated pockets of high noise survive above the threshold. None of these features are designed. They are the emergent consequence of a smooth function meeting a sharp boundary. Structured disorder producing spaces that appear inevitable despite depending entirely on a number someone chose. Noise_6_Wall takes this further — moving the threshold logic into shaders, where discretization happens per-pixel rather than per-voxel, and the lattice finally disappears.
+Thresholding is an act of decision. Where does solid end and void begin? The answer is arbitrary — a parameter on a slider — yet the resulting topology feels natural. Caves form where noise dips below the cut. Overhangs emerge where the bias tilts the field.
+
+Floating islands persist where isolated pockets of high noise survive above the threshold. None of these features are designed. They are the emergent consequence of a smooth function meeting a sharp boundary. Structured disorder producing spaces that appear inevitable despite depending entirely on a number someone chose. Noise_6_Wall takes this further — moving the threshold logic into shaders, where discretization happens per-pixel rather than per-voxel, and the lattice finally disappears.
 
 ## Possible Artifacts
 

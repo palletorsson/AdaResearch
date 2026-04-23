@@ -2,7 +2,9 @@
 
 Every sequence has been building toward this equation, whether you knew it or not.
 
-Vectors taught components — how to decompose a thing into independent axes. Forces taught accumulation — how small pushes compound into trajectories. Wavefunctions taught oscillation — how states evolve under operators. Randomness taught entropy — how systems diffuse when structure loosens its grip. Noise taught continuity within disorder. Cellular automata taught emergence from rules. Fractals taught self-similarity across scale. L-systems taught growth. Swarm intelligence taught collective computation. Machine learning taught optimization under uncertainty. Graph theory taught connection.
+Vectors taught components — how to decompose a thing into independent axes. Forces taught accumulation — how small pushes compound into trajectories. Wavefunctions taught oscillation — how states evolve under operators. Randomness taught entropy — how systems diffuse when structure loosens its grip. Noise taught continuity within disorder.
+
+Cellular automata taught emergence from rules. Fractals taught self-similarity across scale. L-systems taught growth. Swarm intelligence taught collective computation. Machine learning taught optimization under uncertainty. Graph theory taught connection.
 
 None of those were isolated lessons. They were terms in a formula that hadn't been written yet.
 

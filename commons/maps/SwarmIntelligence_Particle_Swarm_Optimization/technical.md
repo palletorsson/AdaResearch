@@ -2,7 +2,9 @@
 
 Ant colony optimization solved combinatorial problems through environmental memory — pheromone trails on edges, accumulated by the colony, read by individuals. No ant remembered its own history beyond the current tour's visited set. The intelligence was in the trail, not the agent.
 
-Particle swarm optimization inverts this. The intelligence is in the agents. Each particle carries a personal memory — its own best position ever visited. The swarm shares a global memory — the best position any particle has ever found. The environment carries no information. No trail. No pheromone. The fitness landscape is read but never written. Optimization happens through social learning: particles adjust their velocity toward their personal best and toward the global best, with randomness preventing premature convergence.
+Particle swarm optimization inverts this. The intelligence is in the agents. Each particle carries a personal memory — its own best position ever visited. The swarm shares a global memory — the best position any particle has ever found.
+
+The environment carries no information. No trail. No pheromone. The fitness landscape is read but never written. Optimization happens through social learning: particles adjust their velocity toward their personal best and toward the global best, with randomness preventing premature convergence.
 
 ## The Particle
 
@@ -62,7 +64,7 @@ func evaluate_ackley(pos: Vector3) -> float:
            exp(0.5 * (cos(TAU * x) + cos(TAU * z))) + E + 20.0
 ```
 
-The Rastrigin function produces a landscape of concentric ridges with many local minima and one global minimum at the origin. The Ackley function produces a deceptive landscape with a broad, nearly flat valley surrounding a narrow global minimum. Both are standard test functions for optimization algorithms, chosen because they are difficult — gradient descent gets trapped in local minima, and the global minimum requires global search.
+The Rastrigin function produces a surface of concentric ridges with many local minima and one global minimum at the origin. The Ackley function produces a deceptive surface with a broad, nearly flat valley surrounding a narrow global minimum. Both are standard test functions for optimization algorithms, chosen because they are difficult — gradient descent gets trapped in local minima, and the global minimum requires global search.
 
 The terrain rendering maps fitness to height: the global minimum is the valley floor, local minima are small depressions in the surrounding hills. Particles are rendered as spheres swooping through this landscape, their vertical position tracking the terrain's elevation at each point.
 

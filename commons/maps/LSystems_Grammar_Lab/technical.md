@@ -64,7 +64,9 @@ The alphabet:
 
 That is the entire language. Five symbols. The push and pop create branching — the turtle saves its place, explores a side path, then returns to where it was. Without the stack, the turtle can only draw continuous curves. With it, the turtle can draw trees.
 
-Consider the string `F[+F][-F]`. The turtle draws forward. Hits `[` — saves position and heading. Turns left, draws forward. Hits `]` — snaps back to the saved state. Turns right, draws forward. Hits `]` — snaps back again. The result is a Y-shape: one trunk, two branches. The brackets mean "explore, then return." Every tree, every fern in an L-System is built from nested instances of this push-pop pattern.
+Consider the string `F[+F][-F]`. The turtle draws forward. Hits `[` — saves position and heading. Turns left, draws forward.
+
+Hits `]` — snaps back to the saved state. Turns right, draws forward. Hits `]` — snaps back again. The result is a Y-shape: one trunk, two branches. The brackets mean "explore, then return." Every tree, every fern in an L-System is built from nested instances of this push-pop pattern.
 
 ```gdscript
 func interpret(lstring: String, angle_deg: float, step_length: float) -> Array[Dictionary]:
@@ -125,7 +127,7 @@ var plant_rules := { "X": "F+[[X]-X]-F[-FX]+X", "F": "FF" }
 var plant_angle := 25.0
 ```
 
-The Koch snowflake starts with a triangle (`F--F--F` at 60 degrees draws three sides) and replaces each straight segment with a kinked version. After four generations, the boundary is a continuous curve of intricate detail. This is the same Koch curve from the fractals map, generated symbolically instead of geometrically. Same shape, different engine.
+The Koch snowflake starts with a triangle (`F--F--F` at 60 degrees draws three sides) and replaces each straight segment with a kinked version. After four generations, the boundary is a continuous curve of fine detail. This is the same Koch curve from the fractals map, generated symbolically instead of geometrically. Same shape, different engine.
 
 The Sierpinski triangle uses two symbols — `F` and `G` — that both draw forward but follow different replacement rules. `G` simply doubles (`GG`), while `F` follows a more complex path. After six generations at 120 degrees, the familiar triangle-of-triangles appears. The fractal dimension of 1.585 has not changed — only the method of construction.
 
@@ -262,7 +264,9 @@ This is what distinguishes L-Systems from the recursive fractals of the previous
 
 The `dark_sphere` anchors the environment — a visual center of gravity while string visualizations and tree renderings orbit the concept. The sphere's slow pulse is the room's resting state. The L-System artifacts are the room's active exploration.
 
-The next map — LSystems_Growth — adds time. Instead of generating all generations at once, growth applies them incrementally. The plant develops. Branches extend. New branches emerge from existing ones. The static grammar becomes a dynamic process — but the grammar itself does not change. The axiom and rules defined here carry forward unchanged. What changes is the relationship between generation and frame. The grammar is the seed. Growth is the unfolding.
+The next map — LSystems_Growth — adds time. Instead of generating all generations at once, growth applies them incrementally. The plant develops. Branches extend. New branches emerge from existing ones.
+
+The static grammar becomes a dynamic process — but the grammar itself does not change. The axiom and rules defined here carry forward unchanged. What changes is the relationship between generation and frame. The grammar is the seed. Growth is the unfolding.
 
 ## Possible Artifacts
 

@@ -16,78 +16,6 @@ Where:
 
 ## Basic Implementation
 
-```gdscript
-extends Node
-
-var width = 256
-var height = 256
-var U: Array = []
-var V: Array = []
-var nextU: Array = []
-var nextV: Array = []
-
-# Parameters
-var Du = 1.0      # U diffusion rate
-var Dv = 0.5      # V diffusion rate
-var feed = 0.037  # Feed rate
-var kill = 0.06   # Kill rate
-var dt = 1.0      # Time step
-
-func _ready():
-    initialize()
-
-func initialize():
-    U.resize(width * height)
-    V.resize(width * height)
-    nextU.resize(width * height)
-    nextV.resize(width * height)
-    
-    # Start with U=1, V=0 everywhere
-    for i in range(width * height):
-        U[i] = 1.0
-        V[i] = 0.0
-    
-    # Seed some V in the center
-    seed_center()
-
-func seed_center():
-    var cx = width / 2
-    var cy = height / 2
-    for dx in range(-10, 10):
-        for dy in range(-10, 10):
-            var i = (cy + dy) * width + (cx + dx)
-            V[i] = 1.0
-
-func _process(delta):
-    for step in range(10):  # Multiple steps per frame
-        simulate_step()
-    update_texture()
-
-func simulate_step():
-    for y in range(1, height - 1):
-        for x in range(1, width - 1):
-            var i = y * width + x
-            
-            # Laplacian (5-point stencil)
-            var lapU = U[i-1] + U[i+1] + U[i-width] + U[i+width] - 4*U[i]
-            var lapV = V[i-1] + V[i+1] + V[i-width] + V[i+width] - 4*V[i]
-            
-            # Reaction term
-            var uvv = U[i] * V[i] * V[i]
-            
-            # Update
-            nextU[i] = U[i] + dt * (Du * lapU - uvv + feed * (1.0 - U[i]))
-            nextV[i] = V[i] + dt * (Dv * lapV + uvv - (feed + kill) * V[i])
-    
-    # Swap buffers
-    var tmp = U
-    U = nextU
-    nextU = tmp
-    tmp = V
-    V = nextV
-    nextV = tmp
-```
-
 ## Pattern Presets
 
 ```gdscript
@@ -105,48 +33,6 @@ var presets = {
 
 ## GPU Shader Version
 
-```glsl
-#[compute]
-#version 450
-
-layout(local_size_x = 16, local_size_y = 16) in;
-
-layout(set = 0, binding = 0, rgba32f) uniform image2D current;
-layout(set = 0, binding = 1, rgba32f) uniform image2D next;
-
-layout(push_constant) uniform Params {
-    float Du, Dv, feed, kill, dt;
-};
-
-void main() {
-    ivec2 pos = ivec2(gl_GlobalInvocationID.xy);
-    ivec2 size = imageSize(current);
-    
-    // Sample neighbors
-    vec4 c = imageLoad(current, pos);
-    vec4 l = imageLoad(current, pos + ivec2(-1, 0));
-    vec4 r = imageLoad(current, pos + ivec2(1, 0));
-    vec4 u = imageLoad(current, pos + ivec2(0, -1));
-    vec4 d = imageLoad(current, pos + ivec2(0, 1));
-    
-    float U = c.r;
-    float V = c.g;
-    
-    // Laplacian
-    float lapU = l.r + r.r + u.r + d.r - 4.0 * U;
-    float lapV = l.g + r.g + u.g + d.g - 4.0 * V;
-    
-    // Reaction
-    float uvv = U * V * V;
-    
-    // Update
-    float newU = U + dt * (Du * lapU - uvv + feed * (1.0 - U));
-    float newV = V + dt * (Dv * lapV + uvv - (feed + kill) * V);
-    
-    imageStore(next, pos, vec4(newU, newV, 0.0, 1.0));
-}
-```
-
 ## 3D Extension
 
 ```gdscript
@@ -159,3 +45,25 @@ func laplacian_3d(field, x, y, z):
         6 * field[x][y][z]
     )
 ```
+
+## Implementation Notes and Complexity
+
+The Gray-Scott reaction-diffusion model simulates two coupled chemicals on a 2D grid. The update rule for each cell consults its own concentration and the concentrations of its four or eight neighbours, computes the Laplacian (a discrete second derivative), and integrates the two coupled partial differential equations forward by a small time step. The per-cell cost is O(1); the per-step cost for a W times H grid is O(W times H).
+
+Real-time simulation at visible resolution requires careful attention to numerical stability. The time step must satisfy a CFL-style condition: time step less than spatial step squared divided by four times the larger diffusion coefficient. Violating this condition produces instability where the concentrations diverge to infinity within a few frames. The map uses a fixed time step chosen to be safe for the full parameter range the learner can set, at the cost of slower apparent dynamics.
+
+The feed rate f and kill rate k parameters define a phase space. Different regions produce different pattern types: spots, stripes, labyrinths, and mitosis-like cell division. The parameter map is continuous — small changes produce small changes in output — but the boundaries between regions are sharp, so a slider that crosses a boundary shows a visible shift in behaviour.
+
+GPU evaluation is the conventional implementation. A compute shader loads the current concentration grid, computes the update, and writes to a second grid; the two grids swap each frame. The cost on a modern GPU is a fraction of a millisecond for a 512 by 512 grid, leaving plenty of frame budget for interactive parameter tuning.
+
+Within the sequence, Reaction_Diffusion is the chemistry chapter of the procedural generation arc. Previous maps produced structure through geometric operations (branching, subdivision); this map produces structure through chemical dynamics. The map argues that procedural generation is not tied to any single computational paradigm, and chemistry is a legitimate primary substrate.
+
+## Within the Sequence
+
+The map is a chemistry-based entry point to procedural generation. Subsequent maps in the sequence will extend the reaction-diffusion machinery to 3D voxel fields and to coupled multi-species simulations.
+
+The per-frame cost of the map scales with the number of instanced artifacts and the resolution of the procedural effects. On typical consumer hardware the whole map runs at 60 frames per second with the default parameter ranges; pushing the parameters to their extremes can raise GPU load to the point where frame rate drops, and the map does not hide this from the learner. A corner indicator reads out the current frame time so the learner can observe the cost of their parameter choices.
+
+Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map's controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
+
+The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map's concrete contribution to the curriculum.

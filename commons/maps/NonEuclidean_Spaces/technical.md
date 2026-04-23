@@ -126,7 +126,7 @@ ds^2 = 4(dx^2 + dy^2) / (1 - x^2 - y^2)^2
 ds^2 = d(theta)^2 + sin^2(theta) d(phi)^2
 ```
 
-The metric tensor is the engine that converts the parallel postulate from a logical axiom into a lived spatial experience. When the learner walks the hyperbolic bowl and feels space expanding, they are navigating a metric where distances grow near boundaries. When they climb the elliptic dome and feel convergence, they are in a metric where great circles pull together. The map's height gradients are a crude but effective proxy for these metric effects.
+The metric tensor is the engine that converts the parallel postulate from a logical axiom into a lived spatial experience. When the learner walks the hyperbolic bowl and feels space expanding, they are traversing a metric where distances grow near boundaries. When they climb the elliptic dome and feel convergence, they are in a metric where great circles pull together. The map's height gradients are a crude but effective proxy for these metric effects.
 
 ## Independence and Consistency
 

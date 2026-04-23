@@ -1,6 +1,8 @@
 # A fully populated grid where stochastic selection decides what survives
 
-Random_Definition established what randomness IS — incompressibility, pseudo-random generators, seeds, uniform distributions, entropy as accumulated disorder. Now: what randomness DOES. The 12x12 grid begins full. Every tile occupied. Maximum order, minimum entropy. Then the algorithm arrives — not to build, but to subtract. `randi_range()` picks an index. `remove_at()` erases it. `queue_free()` destroys the node. The cube vanishes. The gap remains. The grid becomes a landscape shaped by what was taken away.
+Random_Definition established what randomness IS — incompressibility, pseudo-random generators, seeds, uniform distributions, entropy as accumulated disorder. Now: what randomness DOES. The 12x12 grid begins full. Every tile occupied. Maximum order, minimum entropy. Then the algorithm arrives — not to build, but to subtract.
+
+`randi_range()` picks an index. `remove_at()` erases it. `queue_free()` destroys the node. The cube vanishes. The gap remains. The grid becomes a landscape shaped by what was taken away.
 
 Where Random_Definition filled an entropy jar to visualize disorder, Random_Remove empties a grid to demonstrate it. The direction reverses — from accumulation to deletion — but the thermodynamic arrow points the same way. Entropy increases. Order dissolves. The process does not run backward.
 
@@ -233,9 +235,11 @@ The percolation threshold lurks here. For a square grid with random site removal
 
 This is where randomness acquires consequence. In `remove_random`, deletion is abstract — cubes vanish and the grid changes shape. In `hazards_demo`, deletion is spatial risk. The same stochastic process that sculpted an interesting pattern now sculpts a deadly one. The distribution is indifferent. What changes is the interpretation — and in a game engine, interpretation means physics, collision, traversal, survival.
 
-## The Grid as Landscape of Absence
+## The Grid as Record of Absence
 
-Stand on the perimeter. Look inward. The 8x8 region is no longer a uniform field. It is terrain — defined not by what rises but by what is missing. After column removal, vertical trenches. After row removal, horizontal channels. After range removal, circular craters. After Gaussian removal, a central basin tapering to intact edges. After a random walk, a worm trail. After uniform removal, a pockmarked plain.
+Stand on the perimeter. Look inward. The 8x8 region is no longer a uniform field. It is terrain — defined not by what rises but by what is missing. After column removal, vertical trenches.
+
+After row removal, horizontal channels. After range removal, circular craters. After Gaussian removal, a central basin tapering to intact edges. After a random walk, a worm trail. After uniform removal, a pockmarked plain.
 
 Each mode leaves a signature. A forensic exercise: given a partially destroyed grid, infer the removal process that produced it. Uniform removal leaves no spatial correlation — each absence is independent. Gaussian clusters gaps near a center. Column creates vertical lines. The walk produces connected paths. The pattern is evidence. The absence is data.
 

@@ -27,33 +27,6 @@ func get_tile_color(x: int, y: int) -> Color:
 
 ### The GridColorizer Implementation
 
-```gdscript
-extends Node3D
-
-signal tile_colored(x: int, y: int, color: Color)
-
-@export var grid_reference: GridMap
-@export var current_color: Color = Color.RED
-
-var selected_tile: Vector2i = Vector2i(-1, -1)
-
-func _on_tile_selected(world_pos: Vector3):
-    # Convert world position to grid coordinates
-    var grid_pos = grid_reference.local_to_map(world_pos)
-    selected_tile = Vector2i(grid_pos.x, grid_pos.z)
-    highlight_tile(selected_tile)
-
-func apply_color():
-    if selected_tile.x >= 0:
-        emit_signal("tile_colored", selected_tile.x, selected_tile.y, current_color)
-        color_tile_mesh(selected_tile, current_color)
-
-func color_tile_mesh(pos: Vector2i, color: Color):
-    # Access the specific tile's material
-    var cell_item = grid_reference.get_cell_item(Vector3i(pos.x, 0, pos.y))
-    # Apply color through material override or shader
-```
-
 ### Images as Color Grids
 
 ```gdscript
@@ -72,33 +45,6 @@ var pixel_color = image.get_pixel(x, y)
 ```
 
 ### Spectrum Forest: 3D Color Space
-
-```gdscript
-# The spectrum forest visualizes color in 3D
-extends Node3D
-
-func create_spectrum_forest():
-    var spacing = 0.5
-
-    for h in range(10):  # Hue variation (X axis)
-        for s in range(10):  # Saturation variation (Y axis)
-            for v in range(10):  # Value variation (Z axis)
-                var tree = create_colored_tree()
-                tree.position = Vector3(h, v, s) * spacing
-
-                # Color from position
-                var color = Color.from_hsv(
-                    h / 10.0,  # Hue
-                    s / 10.0,  # Saturation
-                    v / 10.0   # Value
-                )
-                tree.set_color(color)
-                add_child(tree)
-
-# Walking through the forest = walking through color space
-# X = hue, Y = value, Z = saturation
-# Position encodes color
-```
 
 ### Color Palette Management
 
@@ -127,22 +73,6 @@ func select_from_palette(palette_name: String, index: int) -> Color:
 ```
 
 ### Real-Time Grid Updates
-
-```gdscript
-# Efficient grid coloring with MultiMesh
-extends MultiMeshInstance3D
-
-func update_tile_color(index: int, color: Color):
-    # Use custom data to pass color to shader
-    multimesh.set_instance_custom_data(index, color)
-
-# Shader receives color per instance
-# shader_type spatial;
-# instance uniform vec4 instance_color : source_color;
-# void fragment() {
-#     ALBEDO = instance_color.rgb;
-# }
-```
 
 ### Additive Color Mixing on Grid
 
@@ -173,20 +103,16 @@ func mix_tile_colors(x: int, y: int, new_color: Color, blend_mode: String):
 
 ### Export Grid as Image
 
-```gdscript
-# Save your grid painting as an image file
-func export_grid_to_image(filename: String):
-    var width = color_grid[0].size()
-    var height = color_grid.size()
-    var image = Image.create(width, height, false, Image.FORMAT_RGBA8)
-
-    for y in range(height):
-        for x in range(width):
-            image.set_pixel(x, y, color_grid[y][x])
-
-    image.save_png("user://" + filename + ".png")
-```
-
 ## Key Takeaway
 
 The grid colorizer reveals that **images are color grids**. Every digital image is a 2D array of color values at indexed positions. When you color a grid tile, you are doing exactly what image editing software does: setting pixel values at coordinates. The spectrum forest extends this to 3D, showing that color itself is a three-dimensional space (HSV or RGB) that can be navigated spatially.
+
+## Implementation Notes and Complexity
+
+The palette grid is a 2D array of colour cells whose contents can be edited in place. Each cell holds an RGBA quadruple. The grid's dimensions are fixed at load, but the cell values are mutable, so the whole palette can be retoned without reallocating. The edit operation is O(1) per cell; a full-palette retone is O(W times H) where W and H are the grid's dimensions.
+
+The grid is backed by an ImageTexture in Godot. Editing a cell writes to the underlying Image, and the Image must be pushed back to the texture for the GPU to see the change. This push is not free: it triggers a texture upload, which in the worst case stalls the render thread briefly. For interactive editing at palette scale (16 by 16 or smaller), the stall is imperceptible. For larger grids, batching multiple cell edits between pushes is necessary to maintain frame rate.
+
+The palette's content is referenced by other nodes via palette-index lookups. When the palette changes, those nodes do not automatically redraw; they have to be notified and re-render. Godot's signal system is the conventional plumbing. The palette emits a palette_changed signal, and interested nodes connect to it. The signal is cheap — a few function calls — but the downstream redraw can be expensive depending on how many nodes are listening and how much geometry each has to refresh.
+
+Within the sequence, Color_Grid_Pallet introduces the palette as a first-class artifact the learner can edit. Previous maps treated colour as assignment; this map treats it as collection. The grid's cells can be rearranged, retoned, or replaced wholesale, and the changes propagate to whatever art is referencing them. The sequence's later maps extend this with interactive palette composition and wavelength-based response.

@@ -47,7 +47,9 @@ G <-> not(exists p: Proves(p, g))
 In words: G says "there is no proof of the formula with Godel number g" — but g IS the Godel number of G itself. So G says: "I am not provable."
 
 **Stage 3: The incompleteness argument.**
-- Suppose F proves G. Then there exists a proof p, so `Proves(p, g)` is true. But G says `not(exists p: Proves(p, g))`. So G is false. But F proved G, so F proves a false statement, meaning F is inconsistent. Contradiction (assuming F is consistent).
+- Suppose F proves G. Then there exists a proof p, so `Proves(p, g)` is true. But G says `not(exists p: Proves(p, g))`. So G is false. But F proved G, so F proves a false statement, meaning F is inconsistent.
+
+Contradiction (assuming F is consistent).
 - Therefore F does not prove G. This means `not(exists p: Proves(p, g))` is true. But that IS G. So G is true.
 
 G is true and unprovable in F. The system is incomplete.
@@ -85,7 +87,9 @@ A plaque that cycles through nine statements of increasing self-reference, each 
 2. "This system is consistent." (Expressible but unprovable, by the second theorem)
 3. "The set of truths exceeds the set of proofs." (An informal statement of incompleteness)
 4. "I am a statement in this formal system." (Self-reference begins)
-5. "I am statement number 5 on this plaque." (Self-reference intensifies — at this index, the plaque begins pulsing gold)
+5.
+
+"I am statement number 5 on this plaque." (Self-reference intensifies — at this index, the plaque begins pulsing gold)
 6. "The Godel number of this sentence is g." (Godel numbering enters)
 7. "There is no proof in this system whose conclusion has Godel number g." (The incompleteness sentence, formal)
 8. "I am true and unprovable." (The incompleteness sentence, plain language)

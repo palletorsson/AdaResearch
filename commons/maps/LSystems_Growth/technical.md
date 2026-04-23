@@ -1,8 +1,12 @@
 # The same axiom planted in a walled corridor and an open clearing grows into two different trees
 
-Grammar Lab built the full pipeline — axiom, rules, string, turtle, tree — in a single instant. One click generated all generations. The string exploded, the turtle walked, the shape appeared. Time was absent. A five-generation plant arrived fully formed, as if printed from a blueprint. But organisms do not arrive fully formed. They develop. Generation 1 precedes generation 2. Branches extend before sub-branches fork. Growth has sequence, and sequence has consequences.
+Grammar Lab built the full pipeline — axiom, rules, string, turtle, tree — in a single instant. One click generated all generations. The string exploded, the turtle walked, the shape appeared. Time was absent. A five-generation plant arrived fully formed, as if printed from a blueprint.
 
-This map adds time. The same rewriting engine runs, but now each generation renders as a distinct phase. The string does not explode all at once. It lengthens step by step. The tree does not appear — it grows. And because growth happens inside space, the space shapes what grows. A corridor constrains. A clearing permits. Two trees diverge not because their grammars differ but because their environments do.
+But organisms do not arrive fully formed. They develop. Generation 1 precedes generation 2. Branches extend before sub-branches fork. Growth has sequence, and sequence has consequences.
+
+This map adds time. The same rewriting engine runs, but now each generation renders as a distinct phase. The string does not explode all at once. It lengthens step by step.
+
+The tree does not appear — it grows. And because growth happens inside space, the space shapes what grows. A corridor constrains. A clearing permits. Two trees diverge not because their grammars differ but because their environments do.
 
 ## Animated Generation: Making Time Visible
 

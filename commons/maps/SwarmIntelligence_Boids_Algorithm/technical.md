@@ -2,9 +2,13 @@
 
 Physarum agents coordinated through the environment. They deposited trail, sensed trail, and the grid carried every message. No agent ever perceived another agent. The medium was the channel — stigmergy, indirect communication, the world as shared memory.
 
-Boids break that indirection. A boid perceives its neighbors directly. It reads their positions and velocities without any intermediary substance. The coordination channel shifts from environment to peer — from trail on a grid to vectors between agents. The three rules Craig Reynolds published in 1987 formalize this: separation, alignment, cohesion. Each computes a steering force from the local neighborhood. The weighted sum of those forces drives the boid's velocity. No leader assigns headings. No global planner routes the flock. Each individual runs the same three calculations, and the collective motion — wheeling, splitting, reforming — is a side effect.
+Boids break that indirection. A boid perceives its neighbors directly. It reads their positions and velocities without any intermediary substance. The coordination channel shifts from environment to peer — from trail on a grid to vectors between agents. The three rules Craig Reynolds published in 1987 formalize this: separation, alignment, cohesion.
 
-The shift matters. Physarum's trail persisted — agents communicated across time. Boids communicate across space but not across time. A boid has no memory of where its neighbors were last frame. It reacts to the present configuration every frame, from scratch. The flock's coherence is maintained not by accumulated history but by continuous, instantaneous mutual adjustment. Remove the trail map. Replace it with neighbor queries. The computation changes. The principle — local rules producing global order — stays.
+Each computes a steering force from the local neighborhood. The weighted sum of those forces drives the boid's velocity. No leader assigns headings. No global planner routes the flock. Each individual runs the same three calculations, and the collective motion — wheeling, splitting, reforming — is a side effect.
+
+The shift matters. Physarum's trail persisted — agents communicated across time. Boids communicate across space but not across time. A boid has no memory of where its neighbors were last frame. It reacts to the present configuration every frame, from scratch.
+
+The flock's coherence is maintained not by accumulated history but by continuous, instantaneous mutual adjustment. Remove the trail map. Replace it with neighbor queries. The computation changes. The principle — local rules producing global order — stays.
 
 ## The Boid
 
@@ -246,7 +250,9 @@ The three forces are three prediction errors, measured against three different e
 
 This maps directly onto the free energy principle's formulation of active inference. The boid does not passively observe and react. It steers — it acts on the world to bring sensory input into alignment with its generative model. The generative model is implicit: "neighbors should be at moderate distance, moving in similar directions, not too close." The steering forces are the actions that minimize the divergence between this model and reality. The flock is the collective fixed point where every agent's model is simultaneously satisfied.
 
-No boid represents the flock. No boid stores a model of the flock's shape or trajectory. The flock is a higher-order structure that exists only in the aggregate — an attractor in the joint state space of all boids. Reynolds demonstrated that this attractor requires only three local forces and a handful of parameters. The gap between the simplicity of the rules and the complexity of the emergent motion is the central lesson. Physarum computed with trail. Boids compute with proximity. The substrate differs. The principle — local error minimization producing global coordination — persists.
+No boid represents the flock. No boid stores a model of the flock's shape or trajectory. The flock is a higher-order structure that exists only in the aggregate — an attractor in the joint state space of all boids. Reynolds demonstrated that this attractor requires only three local forces and a handful of parameters.
+
+The gap between the simplicity of the rules and the complexity of the emergent motion is the central lesson. Physarum computed with trail. Boids compute with proximity. The substrate differs. The principle — local error minimization producing global coordination — persists.
 
 ## From Flocking to General Agent Models
 

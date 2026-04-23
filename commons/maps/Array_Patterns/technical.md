@@ -1,8 +1,12 @@
 # A tile editor and patterned floor where small arrays replicate by translation, rotation, reflection, and glide — symmetry operations made visible
 
-Array_Basics established the grid — indexed cells, sequential access, the 2D array as a container with integer addresses. Now the grid becomes a canvas, and repetition becomes design. A single 4x4 tile, painted by hand, stamps itself across a floor. Change one cell in the tile and every copy changes. Mirror the tile and a kaleidoscope unfolds. Offset alternate rows and bricks appear. Rotate and interleave and herringbone emerges. The operations are few. The patterns are inexhaustible.
+Array_Basics established the grid — indexed cells, sequential access, the 2D array as a container with integer addresses. Now the grid becomes a canvas, and repetition becomes design. A single 4x4 tile, painted by hand, stamps itself across a floor. Change one cell in the tile and every copy changes.
 
-This is not decoration. This is the oldest computational thinking on the planet. The Jacquard loom encoded patterns as punched cards a half-century before Babbage built his engine. Warp threads up or down — binary. A card per row — sequential instruction. The cloth — output. When Ada Lovelace recognized the Analytical Engine's potential, she recognized it because she already understood the loom. Every carpet is an algorithm. Every algorithm can be a carpet.
+Mirror the tile and a kaleidoscope unfolds. Offset alternate rows and bricks appear. Rotate and interleave and herringbone emerges. The operations are few. The patterns are inexhaustible.
+
+This is not decoration. This is the oldest computational thinking on the planet. The Jacquard loom encoded patterns as punched cards a half-century before Babbage built his engine. Warp threads up or down — binary.
+
+A card per row — sequential instruction. The cloth — output. When Ada Lovelace recognized the Analytical Engine's potential, she recognized it because she already understood the loom. Every carpet is an algorithm. Every algorithm can be a carpet.
 
 ## The Tile as Unit Cell
 
@@ -21,7 +25,9 @@ func _ready() -> void:
             tile[y][x] = 0
 ```
 
-Sixteen zeros. A blank tile. The learner paints cells — tapping to cycle through colors — and the tile fills in. Nothing here exceeds what Array_Basics covered. Same `[y][x]` indexing. Same resize-and-fill initialization. The difference is intent. In Array_Basics, the array stored data. Here, the array stores a design. The data is the design.
+Sixteen zeros. A blank tile. The learner paints cells — tapping to cycle through colors — and the tile fills in. Nothing here exceeds what Array_Basics covered. Same `[y][x]` indexing.
+
+Same resize-and-fill initialization. The difference is intent. In Array_Basics, the array stored data. Here, the array stores a design. The data is the design.
 
 Crystallographers call this the unit cell — the smallest fragment that, through repetition, generates the entire crystal lattice. In textiles, it is the pattern repeat. In game development, it is the texture tile. In all cases, the logic is identical: define the small thing, then specify the rule that replicates it.
 
@@ -246,7 +252,9 @@ func generate_facade(stories: int, bays: int) -> Array[Array]:
     return facade
 ```
 
-Each story is a row. Each bay is a column. The facade is a 2D array — the same data structure as the tile, the same data structure as the cellular automaton grid. The grammar is the rule. The facade is the output. The parallel to textiles is direct: warp (vertical structure) and weft (horizontal repetition) produce a fabric. Columns (vertical structure) and bays (horizontal repetition) produce a building. The substrate differs. The operation — array-based repetition governed by rules — is identical.
+Each story is a row. Each bay is a column. The facade is a 2D array — the same data structure as the tile, the same data structure as the cellular automaton grid. The grammar is the rule.
+
+The facade is the output. The parallel to textiles is direct: warp (vertical structure) and weft (horizontal repetition) produce a fabric. Columns (vertical structure) and bays (horizontal repetition) produce a building. The substrate differs. The operation — array-based repetition governed by rules — is identical.
 
 ## Pattern as Order, Variation as Entropy
 
@@ -260,7 +268,9 @@ This is the connection to the larger curriculum. Pattern repetition is F-order �
 
 The Jacquard loom, patented in 1804, used punched cards to control which warp threads were raised for each pass of the shuttle. Each card encoded one row of the pattern. The stack of cards was the program. The loom was the processor. The cloth was the output.
 
-The parallel to a 2D array is exact. Each card is a row. Each hole position is a column. Hole or no-hole is 1 or 0. The Jacquard loom operated on a binary 2D array, stored externally on cards, processed row by row, producing a physical output. Charles Babbage visited the loom. He adopted punched cards for his Analytical Engine. Ada Lovelace understood the Engine by analogy to the loom — and extended it, recognizing that the Engine could manipulate symbols, not just numbers. The loom wove patterns in silk. The Engine, she wrote, could weave algebraic patterns.
+The parallel to a 2D array is exact. Each card is a row. Each hole position is a column. Hole or no-hole is 1 or 0. The Jacquard loom operated on a binary 2D array, stored externally on cards, processed row by row, producing a physical output.
+
+Charles Babbage visited the loom. He adopted punched cards for his Analytical Engine. Ada Lovelace understood the Engine by analogy to the loom — and extended it, recognizing that the Engine could manipulate symbols, not just numbers. The loom wove patterns in silk. The Engine, she wrote, could weave algebraic patterns.
 
 The GPU continues the lineage. A fragment shader evaluates a function at every pixel — a 2D grid of cells, each computing its color from its coordinates. The symmetry operations coded in this map — modulo for translation, index reversal for reflection, index swap for rotation — are the same operations a shader uses to generate tiling textures. The substrate moved from thread to vacuum tube to transistor. The operation — replicate a small pattern across a plane using symmetry — has not changed in two centuries.
 

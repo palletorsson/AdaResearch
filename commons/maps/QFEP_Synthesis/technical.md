@@ -1,6 +1,8 @@
 # A reflective chamber where all four QFEP terms return as grabbable spheres and the complete formula floats at center
 
-The Sandbox gave full control. Lambda and phi unlocked, the reactor responding in real time, the learner discovering their personal edge of chaos through parametric exploration. The Synthesis does not extend that control. It compresses it. The sliders are gone. The reactor is gone. In their place: four grabbable spheres — F, E, lambda, phi — the qfep_formula_3d at the center of an elevated platform, and the queer_morphology_specimen as the sequence's final artifact. The map is not an exam. It is a return.
+The Sandbox gave full control. Lambda and phi unlocked, the reactor responding in real time, the learner discovering their personal edge of chaos through parametric exploration. The Synthesis does not extend that control. It compresses it.
+
+The sliders are gone. The reactor is gone. In their place: four grabbable spheres — F, E, lambda, phi — the qfep_formula_3d at the center of an elevated platform, and the queer_morphology_specimen as the sequence's final artifact. The map is not an exam. It is a return.
 
 ## The Four Spheres: Integration Through Touch
 
@@ -14,7 +16,9 @@ grab_sphere_lambda:0:0.4   # position (2,8), scale 0.4
 grab_sphere_phi:0:0.4      # position (8,8), scale 0.4
 ```
 
-Each sphere at scale 0.4 — larger than their 0.15 radius in the Introduction. The spheres have grown. Or more precisely: the learner's relationship to them has changed. In the Introduction, the spheres were mysterious — heavy objects representing terms the learner was encountering for the first time. Now they are familiar instruments. The F sphere is heavy because structure requires effort. The E sphere drifts because entropy is the default. The lambda sphere sits between. The phi sphere pulses because disposition is temporal.
+Each sphere at scale 0.4 — larger than their 0.15 radius in the Introduction. The spheres have grown. Or more precisely: the learner's relationship to them has changed. In the Introduction, the spheres were mysterious — heavy objects representing terms the learner was encountering for the first time.
+
+Now they are familiar instruments. The F sphere is heavy because structure requires effort. The E sphere drifts because entropy is the default. The lambda sphere sits between. The phi sphere pulses because disposition is temporal.
 
 The formula_3d at scale 2.0 — double the Introduction's size — dominates the central platform:
 

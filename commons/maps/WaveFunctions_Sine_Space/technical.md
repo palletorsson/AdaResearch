@@ -1,6 +1,8 @@
 # A corridor of frozen sine waves where oscillation becomes floor, wall, and architecture the learner walks through
 
-The Pendulum map ended with a promise: the oscillation that swings in time extends into space. The pendulum bob traces displacement as a function of t — a single variable, a single axis, a single curve scrolling across a seismograph. Sine Space fulfills that promise by taking the same sin(t) and replacing the temporal variable with spatial coordinates. The wave no longer swings. It stands. Amplitude is height. Frequency is compression. Phase is shift. The function that produced motion now produces geometry — terrain you can walk, walls you can touch, surfaces whose every vertex is calculable from its position.
+The Pendulum map ended with a promise: the oscillation that swings in time extends into space. The pendulum bob traces displacement as a function of t — a single variable, a single axis, a single curve scrolling across a seismograph. Sine Space fulfills that promise by taking the same sin(t) and replacing the temporal variable with spatial coordinates. The wave no longer swings.
+
+It stands. Amplitude is height. Frequency is compression. Phase is shift. The function that produced motion now produces geometry — terrain you can walk, walls you can touch, surfaces whose every vertex is calculable from its position.
 
 This is not metaphor. The sine_space artifact generates a 25x25 grid of spheres whose y-positions are determined entirely by `sin(f*x) * sin(f*z)`. The sine_wall_corridor constructs mesh walls whose x-displacement follows `A*sin(f*z + phi)` summed across multiple frequency layers. The learner stands inside the equation. The abstract curve from the Intro — `x = A*sin(wt + phi)` — has become the shape of the room.
 
@@ -60,7 +62,7 @@ Frequency determines how many oscillations fit within a given spatial interval. 
 frequency = 1.0 + sin(time * 0.3) * 0.5
 ```
 
-Frequency oscillates between 0.5 and 1.5. At the low end, the terrain smooths out — fewer hills, broader curves, a landscape of gentle undulations. At the high end, the surface crumples — more hills packed into the same area, each narrower and steeper. The grid_size remains 25x25. The resolution does not change. Only the mathematical compression does. Frequency is zoom applied to the wave, not to the viewport.
+Frequency oscillates between 0.5 and 1.5. At the low end, the terrain smooths out — fewer hills, broader curves, an expanse of gentle undulations. At the high end, the surface crumples — more hills packed into the same area, each narrower and steeper. The grid_size remains 25x25. The resolution does not change. Only the mathematical compression does. Frequency is zoom applied to the wave, not to the viewport.
 
 The relationship between frequency and spatial wavelength is inverse:
 

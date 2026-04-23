@@ -1,6 +1,8 @@
 # An amphitheater sunk into the void where a spinning point on a circle casts its shadow as the sine wave the learner already knows
 
-Sine Space froze the wave in architecture — amplitude as height, frequency as compression, phase as shift. The learner walked through the equation's output. But the equation itself remained unexplained. Where does sine come from? Why does it oscillate? Why that particular shape and no other? The Unit Circle map answers by rewinding to the origin: a point traveling at constant speed around a circle. Watch it from the side and the vertical position traces a sine wave. Watch from above and the horizontal position traces cosine. The wave is not a fundamental shape. It is a shadow — the projection of uniform circular motion onto a line. Every oscillation the learner encountered in previous maps reduces to this: something spinning, seen from a constrained angle.
+Sine Space froze the wave in architecture — amplitude as height, frequency as compression, phase as shift. The learner walked through the equation's output. But the equation itself remained unexplained. Where does sine come from? Why does it oscillate? Why that particular shape and no other?
+
+The Unit Circle map answers by rewinding to the origin: a point traveling at constant speed around a circle. Watch it from the side and the vertical position traces a sine wave. Watch from above and the horizontal position traces cosine. The wave is not a fundamental shape. It is a shadow — the projection of uniform circular motion onto a line. Every oscillation the learner encountered in previous maps reduces to this: something spinning, seen from a constrained angle.
 
 The amphitheater layout encodes the revelation spatially. Elevated ramparts ring a central void. The unit_circle_advanced artifact floats in that void, rotating its point, drawing its projections. Below, at the base, SimpleOscillatingBridge artifacts make the resulting wave physical — platforms rising and falling under the learner's feet. The architecture descends from observation to embodiment: see the circle, then stand on its consequence.
 
@@ -24,7 +26,9 @@ func _process(delta: float) -> void:
 
 Each frame, `angle` advances by `rotation_speed * delta`. The position `p` is computed from `cos(angle)` and `sin(angle)`, scaled by `radius`. The point moves along the circle at constant angular velocity. No explicit path is stored. No waypoints are defined. The circle emerges entirely from evaluating two trigonometric functions at the same angle and assigning the results to x and y. The parametric equation `(cos(theta), sin(theta))` is the circle.
 
-When `radius` equals 1.0, the point traces the unit circle exactly. The x-coordinate oscillates between -1 and 1. The y-coordinate oscillates between -1 and 1. At `angle = 0`, the point sits at `(1, 0)` — rightmost. At `angle = PI/2`, it reaches `(0, 1)` — topmost. At `angle = PI`, it arrives at `(-1, 0)` — leftmost. At `angle = 3*PI/2`, it drops to `(0, -1)` — bottommost. One full revolution — `2*PI` radians, or `TAU` — returns it to the start. The journey is periodic because the circle is closed.
+When `radius` equals 1.0, the point traces the unit circle exactly. The x-coordinate oscillates between -1 and 1. The y-coordinate oscillates between -1 and 1. At `angle = 0`, the point sits at `(1, 0)` — rightmost.
+
+At `angle = PI/2`, it reaches `(0, 1)` — topmost. At `angle = PI`, it arrives at `(-1, 0)` — leftmost. At `angle = 3*PI/2`, it drops to `(0, -1)` — bottommost. One full revolution — `2*PI` radians, or `TAU` — returns it to the start. The journey is periodic because the circle is closed.
 
 ## Projection: From Circle to Wave
 
@@ -67,7 +71,9 @@ func _create_unit_circle_outline() -> void:
         mm.set_instance_transform(i, Transform3D(Basis.IDENTITY, p))
 ```
 
-Sixty-four sphere instances, each placed at `(cos(th), sin(th))` for evenly spaced values of `th`. The MultiMesh renders all 64 in a single draw call. The circle appears continuous to the eye, but the code knows it is sampled. This is the fundamental tension of digital simulation: continuous mathematics approximated by discrete steps. The `res` variable controls fidelity. At 64, the dots merge into a ring. At 8, the circle becomes an octagon. The underlying equation does not change. The sampling resolution does.
+Sixty-four sphere instances, each placed at `(cos(th), sin(th))` for evenly spaced values of `th`. The MultiMesh renders all 64 in a single draw call. The circle appears continuous to the eye, but the code knows it is sampled. This is the fundamental tension of digital simulation: continuous mathematics approximated by discrete steps.
+
+The `res` variable controls fidelity. At 64, the dots merge into a ring. At 8, the circle becomes an octagon. The underlying equation does not change. The sampling resolution does.
 
 The color wheel option maps each dot's hue to its angular position:
 
@@ -145,7 +151,9 @@ func update_platform_positions():
 
 Each platform stores a phase offset set at creation: `index * phase_offset_per_platform`. The oscillation angle for each platform is `time + phase`. Cosine drives horizontal displacement. Sine drives vertical displacement. Each platform traces an ellipse in the x-y plane — the same circular motion the unit circle demonstrates, stretched by independent amplitude parameters.
 
-The phase offset between platforms creates a traveling wave. No platform moves along the z-axis. Each one oscillates in place. But because neighboring platforms are phase-shifted, the peaks and troughs propagate spatially. The learner standing on platform 5 sees platform 6 begin its ascent a fraction of a second later, then platform 7, then 8. The wave appears to travel down the bridge. It does not. The motion is local. The pattern is emergent.
+The phase offset between platforms creates a traveling wave. No platform moves along the z-axis. Each one oscillates in place. But because neighboring platforms are phase-shifted, the peaks and troughs propagate spatially.
+
+The learner standing on platform 5 sees platform 6 begin its ascent a fraction of a second later, then platform 7, then 8. The wave appears to travel down the bridge. It does not. The motion is local. The pattern is emergent.
 
 This is the spatial consequence of phase that Sine Space introduced through wall offsets. The corridor walls differed by a fixed phase and breathed asymmetrically. The oscillating bridge distributes phase incrementally across twenty platforms, producing wave propagation from individual oscillation. The phi term in QFEP's state evolution operates similarly — phase relationships between field contributions create coherent patterns from independently oscillating components. The bridge is a mechanical demonstration of constructive interference along a single spatial axis.
 

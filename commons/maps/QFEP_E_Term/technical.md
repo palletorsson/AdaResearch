@@ -122,7 +122,9 @@ cube.rotation = Vector3(
 )
 ```
 
-Every spatial parameter is randomized. Position draws from a uniform volume. Rotation spans the full circle on all three axes. Scale varies between 0.05 and 0.15. The result is a cluster that defies description — no two arrangements alike, no pattern to extract, no compression possible. The cubes are a Kolmogorov-incompressible configuration. To describe the cluster, you must list every cube's position, rotation, scale, and color. There is no shorter encoding. That incompressibility is the definition of maximum entropy.
+Every spatial parameter is randomized. Position draws from a uniform volume. Rotation spans the full circle on all three axes. Scale varies between 0.05 and 0.15.
+
+The result is a cluster that defies description — no two arrangements alike, no pattern to extract, no compression possible. The cubes are a Kolmogorov-incompressible configuration. To describe the cluster, you must list every cube's position, rotation, scale, and color. There is no shorter encoding. That incompressibility is the definition of maximum entropy.
 
 The cubes drift. Each carries an independent velocity vector:
 
@@ -208,7 +210,9 @@ func _get_lambda_color(value: float) -> Color:
         return COLOR_EDGE.lerp(COLOR_CHAOS, t)
 ```
 
-The transition from order to edge occupies 40% of the slider's range. The transition from edge to chaos occupies 60%. The edge of chaos is not centered — it sits closer to the order end. This reflects the empirical observation from cellular automata studies: complex behavior occupies a narrow band near the low end of the entropy spectrum. Most of the parameter space above 0.5 is various shades of dissolution. The green zone is small. The red zone is vast. Order is a pinpoint. Chaos is an ocean. The gradient encodes this asymmetry in color so the learner sees it before understanding it mathematically.
+The transition from order to edge occupies 40% of the slider's range. The transition from edge to chaos occupies 60%. The edge of chaos is not centered — it sits closer to the order end. This reflects the empirical observation from cellular automata studies: complex behavior occupies a narrow band near the low end of the entropy spectrum. Most of the parameter space above 0.5 is various shades of dissolution.
+
+The green zone is small. The red zone is vast. Order is a pinpoint. Chaos is an ocean. The gradient encodes this asymmetry in color so the learner sees it before understanding it mathematically.
 
 The learner can drag the slider leftward, toward order, and watch the room contract. But the map begins at 1.0. The pedagogical intention is clear: experience the extreme before seeking the balance.
 
@@ -216,7 +220,9 @@ The learner can drag the slider leftward, toward order, and watch the room contr
 
 The map geometry tells its own story. The structure layer shows a field of floor tiles with a central raised area — heights escalating from 1 to 2 to 3 as the learner moves inward. But unlike the tight, ordered platforms of the F-term map, this terrain serves as a stage for chaos. The `random_pop` grid animation, with elastic easing and random order, means the floor itself assembles unpredictably. Tiles pop in without sequence. The ground emerges through entropy.
 
-The lighting is warm red: ambient at `(0.3, 0.15, 0.15)`, directional at `(1.0, 0.7, 0.6)`. The audio preset is `noise_wash` — not the steady hum of a structured space but the continuous scatter of broadband noise. Every sensory channel carries the same message. The room is dissolving. Not dangerously — there is no cliff to fall from, no enemy to fight. But the coherence that defined the F-term map is gone. Surfaces ripple. Light fluctuates. Sound smears.
+The lighting is warm red: ambient at `(0.3, 0.15, 0.15)`, directional at `(1.0, 0.7, 0.6)`. The audio preset is `noise_wash` — not the steady hum of a structured space but the continuous scatter of broadband noise. Every sensory channel carries the same message. The room is dissolving.
+
+Not dangerously — there is no cliff to fall from, no enemy to fight. But the coherence that defined the F-term map is gone. Surfaces ripple. Light fluctuates. Sound smears.
 
 The south edge of the map drops to height 0 — the floor falls away in a four-tile gap, exposing the void beneath the grid. The teleporter sits in this gap, named "Find the Balance" with the description "Neither pure order nor pure chaos. Continue to the spectrum." The name is the map's own commentary on its content. The E-term alone is insufficient, just as the F-term alone was insufficient. The crystal was a trap; so is the fog. The teleporter points toward QFEP_Lambda_Spectrum, where the learner walks physically through the λ gradient and discovers where life operates.
 

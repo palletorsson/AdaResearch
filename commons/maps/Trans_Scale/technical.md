@@ -16,19 +16,6 @@ node.scale = Vector3(2, 1, 0.5)  # Wide and flat
 
 ### Scale vs Size
 
-```gdscript
-# Scale is multiplicative, relative to original size
-var original_size = Vector3(1, 1, 1)
-node.scale = Vector3(3, 3, 3)
-# Visual size is now 3 × original = 3, 3, 3
-
-# To set absolute size, calculate required scale
-func set_absolute_size(target_size: Vector3):
-    var mesh = $MeshInstance3D.mesh
-    var original = mesh.get_aabb().size
-    node.scale = target_size / original
-```
-
 ### The Cube Law: Volume Scales Exponentially
 
 When you double linear scale, volume increases 8-fold (2³):
@@ -55,24 +42,6 @@ var volume_after = pow(scale_factor, 3)  # 27x the volume!
 ### Alice's Problem: Relative Size
 
 Like Alice in Wonderland, size only has meaning relative to context:
-
-```gdscript
-# Alice's scale
-var alice_scale = 1.0  # Normal size
-
-# Doorway height (constant)
-var doorway_height = 2.0
-
-# Alice drinks shrinking potion
-alice_scale = 0.1  # 1/10 size
-
-# Doorway now seems 20x taller (relative to Alice)
-var relative_height = doorway_height / alice_scale  # 20.0
-
-# The world has not changed
-# Alice's relationship to it has transformed
-# "Big" and "small" are relations, not intrinsic properties
-```
 
 ### Interactive Scaling with VR Gestures
 
@@ -117,35 +86,6 @@ func get_hand_distance() -> float:
 
 ### Pinch-to-Scale Gesture
 
-```gdscript
-# Using XR hand tracking
-extends XRController3D
-
-signal pinch_started
-signal pinch_scale_changed(factor: float)
-signal pinch_ended
-
-var pinch_threshold: float = 0.02  # Meters
-var is_pinching: bool = false
-var initial_pinch_distance: float
-
-func _process(delta):
-    var thumb = get_finger_position("thumb_tip")
-    var index = get_finger_position("index_tip")
-    var distance = thumb.distance_to(index)
-
-    if distance < pinch_threshold and not is_pinching:
-        is_pinching = true
-        initial_pinch_distance = distance
-        emit_signal("pinch_started")
-    elif distance >= pinch_threshold and is_pinching:
-        is_pinching = false
-        emit_signal("pinch_ended")
-    elif is_pinching:
-        var factor = distance / initial_pinch_distance
-        emit_signal("pinch_scale_changed", factor)
-```
-
 ### Scale and Collision
 
 Scaling affects physics:
@@ -169,23 +109,6 @@ func scale_with_collision(new_scale: Vector3):
 
 ### Scale Inheritance
 
-```gdscript
-# Child nodes inherit parent scale
-var parent = Node3D.new()
-parent.scale = Vector3(2, 2, 2)
-
-var child = MeshInstance3D.new()
-child.scale = Vector3(0.5, 0.5, 0.5)  # Local scale
-parent.add_child(child)
-
-# Child's effective world scale:
-var world_scale = child.global_transform.basis.get_scale()
-# Result: (1, 1, 1) - parent's 2x times child's 0.5x
-
-# To get independent scaling:
-child.top_level = true  # Disconnects from parent transform
-```
-
 ### Prism Reference Geometry
 
 The prism blocks provide scale reference:
@@ -207,21 +130,6 @@ func _ready():
 
 ### Animated Scaling
 
-```gdscript
-# Smooth scale transitions
-func scale_to(target: Vector3, duration: float):
-    var tween = create_tween()
-    tween.tween_property(self, "scale", target, duration)
-    tween.set_ease(Tween.EASE_OUT)
-    tween.set_trans(Tween.TRANS_ELASTIC)  # Bouncy effect
-
-# Pulsing scale animation
-func pulse_scale(base: float, amplitude: float, speed: float):
-    var time = Time.get_ticks_msec() / 1000.0
-    var pulse = base + sin(time * speed) * amplitude
-    scale = Vector3.ONE * pulse
-```
-
 ### Scale in Transform Matrix
 
 ```gdscript
@@ -242,21 +150,18 @@ var extracted_scale = Vector3(scale_x, scale_y, scale_z)
 
 Scale can be negative, which mirrors the object:
 
-```gdscript
-# Mirror across YZ plane (flip X axis)
-cube.scale.x = -1.0
-
-# The cube is now reflected
-# Right becomes left, left becomes right
-# This is chirality inversion - rotation cannot do this
-
-# Scale to zero collapses dimensions:
-cube.scale.z = 0.0
-# 3D object becomes 2D plane - dimension lost
-```
-
 ## Key Takeaway
 
 Scale changes size while preserving proportions (for uniform scale) or distorts proportions (for non-uniform scale). Unlike translation and rotation, scale is **immediately visible** - objects look bigger or smaller.
 
 Interactive scaling empowers the player to control transformation directly. "Scale me" is an invitation: you are the agent of change.
+
+## Implementation Notes and Complexity
+
+Scaling a Node3D in Godot is O(1) — the operation writes three floats into the transform basis. The cost of the operation is not in the scale itself but in the downstream propagation: every child's world transform must be recomputed when the parent's scale changes. For a tree of N nodes, a single scale on the root triggers O(N) transform updates on the next frame.
+
+Non-uniform scale is where the practical complexity arrives. A uniform scale commutes with rotation; a non-uniform scale does not. The basis matrix that would represent rotation followed by non-uniform scale cannot generally be decomposed back into clean rotation and scale components — the decomposition produces shear. Code that intermixes the two operations often ends up with nodes whose children inherit unintended skew, and the skew is not easy to remove after the fact because it was encoded in the basis when the scale was applied.
+
+Collision shapes follow the parent's scale automatically in Godot, but physics properties do not. A rigid body with its scale doubled will still have its original mass unless the author adjusts it explicitly. The scale_with_collision routine above shows the cubic law applied to mass; real applications frequently forget to apply it and end up with rigid bodies that punch through walls because their inertia is wrong for their new size.
+
+Within the sequence, Trans_Scale sits between translation and rotation as the third of three fundamental geometric transformations. The scale_me artifact lets the learner control the operation directly with their hands, so the cubic volume law becomes a body-level experience rather than an equation. The prism blocks provide scale reference because their angular geometry is unambiguous at every size, and human perception automatically compares angles across scales even when it cannot compare lengths reliably.

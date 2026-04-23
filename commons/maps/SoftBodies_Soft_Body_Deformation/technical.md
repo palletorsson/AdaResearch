@@ -4,7 +4,9 @@ In Forces we applied F=ma to rigid objects — balls that bounced but never defo
 
 Now the objects themselves yield.
 
-A soft body is a collection of mass points connected by springs. The vertices of a mesh become particles with position and velocity. The edges become elastic constraints — springs that pull neighboring particles toward their rest distance. Drop the mesh, and gravity acts on every particle independently. The springs resist, stretch, compress, propagate forces through the topology. The shape deforms. It lands on a platform, flattens under its own weight, then recovers — partially, imperfectly — as the springs haul the vertices back toward their remembered positions. Form is not a given property. It is a dynamic equilibrium between external forces and internal constraints.
+A soft body is a collection of mass points connected by springs. The vertices of a mesh become particles with position and velocity. The edges become elastic constraints — springs that pull neighboring particles toward their rest distance. Drop the mesh, and gravity acts on every particle independently.
+
+The springs resist, stretch, compress, propagate forces through the topology. The shape deforms. It lands on a platform, flattens under its own weight, then recovers — partially, imperfectly — as the springs haul the vertices back toward their remembered positions. Form is not a given property. It is a dynamic equilibrium between external forces and internal constraints.
 
 The jelly cube is this idea made visible. Eight vertices, twelve edges, internal diagonals — a cube-shaped spring-mass system that wobbles, compresses, and oscillates when disturbed. The bouncy room provides the test environment: a flat arena with elevated platforms to drop from, collide against, and slide across.
 

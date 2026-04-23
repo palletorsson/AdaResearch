@@ -201,3 +201,13 @@ func randf() -> float:
 - `RandomNumberGenerator` - Godot's PRNG
 - Particle systems - Random emission and behavior
 - Procedural placement - Random positioning with constraints
+
+## Within the Sequence
+
+Random_Mushrooms demonstrates Poisson-disc distribution — random placement that refuses to cluster. The map argues that randomness can be shaped to produce specific statistical properties, and blue-noise-style distributions are a standard tool the sequence continues to develop.
+
+The per-frame cost of the map scales with the number of instanced artifacts and the resolution of the procedural effects. On typical consumer hardware the whole map runs at 60 frames per second with the default parameter ranges; pushing the parameters to their extremes can raise GPU load to the point where frame rate drops, and the map does not hide this from the learner. A corner indicator reads out the current frame time so the learner can observe the cost of their parameter choices.
+
+Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map's controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
+
+The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map's concrete contribution to the curriculum.

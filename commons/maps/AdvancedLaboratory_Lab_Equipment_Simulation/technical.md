@@ -55,7 +55,9 @@ The `MolecularDesigner` artifact sits at grid position (4,3) — adjacent to the
 }
 ```
 
-Five atom types. Three bond types. A valence dictionary that constrains construction. Carbon forms four bonds. Hydrogen forms one. Oxygen forms two. Nitrogen forms three. Sulfur forms two. The rules are not arbitrary — they encode the electron shell structure of each element. The formal system (valence theory) predicts molecular geometry with high accuracy for most simple molecules.
+Five atom types. Three bond types. A valence dictionary that constrains construction. Carbon forms four bonds. Hydrogen forms one.
+
+Oxygen forms two. Nitrogen forms three. Sulfur forms two. The rules are not arbitrary — they encode the electron shell structure of each element. The formal system (valence theory) predicts molecular geometry with high accuracy for most simple molecules.
 
 ```gdscript
 func _try_add_bond(atom_a: Node3D, atom_b: Node3D, bond_type: String) -> bool:
@@ -102,7 +104,9 @@ The waypoint at (6,6) with 180-degree rotation redirects the learner's gaze towa
 
 The teleporter at (7,7) and secondary spawn at (7,7) occupy the southeastern corner. The exit point is on solid ground — height 1, away from the void. The sequence does not end in the gap. It ends on a floor that knows the gap is there.
 
-The teleporter label is "Next" with a generic "Continue to next step" description. The Post-Foundations Crisis does not end with a grand synthesis. It ends with an ordinary exit from an ordinary laboratory. The lesson is in the ordinariness: after the crisis, after the bias, after the rhizome, what remains is the practice of building formal systems while knowing their limits. The laboratory is not a triumph. It is a workspace. The molecular designer is not a revelation. It is a tool. The void pit is not a metaphor. It is a structural fact.
+The teleporter label is "Next" with a generic "Continue to next step" description. The Post-Foundations Crisis does not end with a grand synthesis. It ends with an ordinary exit from an ordinary laboratory. The lesson is in the ordinariness: after the crisis, after the bias, after the rhizome, what remains is the practice of building formal systems while knowing their limits. The laboratory is not a triumph.
+
+It is a workspace. The molecular designer is not a revelation. It is a tool. The void pit is not a metaphor. It is a structural fact.
 
 The map's spatial temperature is 0.8 — high, indicating a warm, populated feel. Despite its small grid (9x8), the room contains enough structural variation (three bench positions, the void pit, the secondary void) to feel occupied. The laboratory is full of things. The formalization is active. The incompleteness is acknowledged but does not prevent work.
 

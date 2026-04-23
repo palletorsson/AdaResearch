@@ -2,7 +2,9 @@
 
 In Forces we watched springs oscillate and pendulums swing. Those were side effects — objects under force happened to repeat. A spring compressed, overshot equilibrium, compressed again. A pendulum traced an arc because gravity and tension conspired. The oscillation was real, but it was downstream of something else. This map treats oscillation as the primary event. Not a consequence of force — the phenomenon itself, isolated and controllable.
 
-The room is small and deliberately closed. Oscilloscopes line the walls, green traces sweeping left to right — sine, square, sawtooth, triangle. Each one a different signature of the same principle: periodic motion between extremes. Four cubes sit on vertical rails at the center. The first is still. The second oscillates. The third rotates. The fourth transforms under external control. Together they build the grammar of oscillation from rest to parametric expression.
+The room is small and deliberately closed. Oscilloscopes line the walls, green traces sweeping left to right — sine, square, sawtooth, triangle. Each one a different signature of the same principle: periodic motion between extremes. Four cubes sit on vertical rails at the center.
+
+The first is still. The second oscillates. The third rotates. The fourth transforms under external control. Together they build the grammar of oscillation from rest to parametric expression.
 
 ## The Sine Function as Universal Oscillator
 
@@ -19,7 +21,9 @@ func _process(delta: float) -> void:
     position.y = sin(time)
 ```
 
-That's it. A node whose y-position follows `sin(time)`. At t = 0, position is 0. At t = π/2, position is 1. At t = π, back to 0. At t = 3π/2, down to -1. At t = 2π, the cycle completes and begins again. The object never leaves. It never arrives. It oscillates.
+That's it. A node whose y-position follows `sin(time)`. At t = 0, position is 0. At t = π/2, position is 1. At t = π, back to 0.
+
+At t = 3π/2, down to -1. At t = 2π, the cycle completes and begins again. The object never leaves. It never arrives. It oscillates.
 
 Why sine and not some other repeating function? Because sine is the projection of uniform circular motion onto a line. Imagine a point moving at constant speed around a circle. Its shadow on the wall traces a sine wave. This is not a metaphor — it is the geometric definition. The `rotating_cube_demo` artifact in this map makes this connection visible: a cube spinning at constant angular velocity, its vertical shadow tracing the same curve as the `y_oscillation_cube` below it.
 
@@ -78,7 +82,9 @@ func _process(delta: float) -> void:
     # amplitude is 0, so position.y is always 0
 ```
 
-The first cube in the room sits still. Not because it lacks a sine function — it has one. Its amplitude is zero. Stillness is not the absence of oscillation. It is oscillation with zero amplitude. The equation still runs. The output is just a flatline. This matters because the oscilloscope beside it shows exactly that: a horizontal green trace at y = 0. The equation and the trace agree. Zero is a valid amplitude, and the system handles it without special cases.
+The first cube in the room sits still. Not because it lacks a sine function — it has one. Its amplitude is zero. Stillness is not the absence of oscillation. It is oscillation with zero amplitude.
+
+The equation still runs. The output is just a flatline. This matters because the oscilloscope beside it shows exactly that: a horizontal green trace at y = 0. The equation and the trace agree. Zero is a valid amplitude, and the system handles it without special cases.
 
 Amplitude is always positive by convention. A negative amplitude flips the wave — but that is equivalent to a phase shift of π. The system has redundancy: `A · sin(ωt)` and `-A · sin(ωt)` produce the same motion, just started from opposite sides. Phase absorbs the sign.
 

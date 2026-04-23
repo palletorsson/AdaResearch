@@ -34,7 +34,9 @@ func wolfram_rule(rule_number: int, left: int, center: int, right: int) -> int:
     return (rule_number >> index) & 1
 ```
 
-Three cells become a 3-bit index. The rule number's bit at that position is the output. No branching. No conditionals. A single bitwise extraction. Rule 30 in binary is `00011110`. Rule 110 is `01101110`. Rule 0 is `00000000` — every neighborhood maps to 0, the automaton dies instantly. Rule 255 is `11111111` — every neighborhood maps to 1, the grid fills and freezes.
+Three cells become a 3-bit index. The rule number's bit at that position is the output. No branching. No conditionals.
+
+A single bitwise extraction. Rule 30 in binary is `00011110`. Rule 110 is `01101110`. Rule 0 is `00000000` — every neighborhood maps to 0, the automaton dies instantly. Rule 255 is `11111111` — every neighborhood maps to 1, the grid fills and freezes.
 
 The encoding collapses specification into arithmetic. The rule is not a program. It is a number. Change the number, change the universe. This is what makes the elementary CA space a laboratory: 256 universes, exhaustively enumerable, each derivable from a single integer by bit extraction.
 

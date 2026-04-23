@@ -145,4 +145,6 @@ The lighting shifts to warm tones — `recursive_world` ambient with amber direc
 
 The sequence closes by dissolving its own boundaries. Grammar was presented as a specific technique — string rewriting, turtle interpretation, production rules. But the forest is not just grammar. It is grammar plus resource dynamics, competition, tropism, evolution, and learner authorship. The formal mechanism has merged with ecological and social systems.
 
-The next sequence — Procedural Generation — generalizes this merger. If grammar can build worlds, what else can? Noise fields. Evolutionary algorithms. Wave function collapse. Stochastic processes. The L-Systems sequence established that local rules produce global form. The Procedural Generation sequence will explore how many different kinds of local rules can serve as world-building substrates. The forest is the bridge: a world made of grammar that is already more than grammar.
+The next sequence — Procedural Generation — generalizes this merger. If grammar can build worlds, what else can? Noise fields. Evolutionary algorithms.
+
+Wave function collapse. Stochastic processes. The L-Systems sequence established that local rules produce global form. The Procedural Generation sequence will explore how many different kinds of local rules can serve as world-building substrates. The forest is the bridge: a world made of grammar that is already more than grammar.

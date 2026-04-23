@@ -149,7 +149,9 @@ The six principles of the rhizome, articulated in A Thousand Plateaus, map onto 
 1. **Connection**: Any chamber connects to any other through multiple paths.
 2. **Heterogeneity**: The corridors pass through different structural conditions — height-5 walls, height-0 voids, height-1 floors — encountering diverse terrain.
 3. **Multiplicity**: The network cannot be reduced to a single description. Four chambers, multiple corridors, varying passage widths — no summary captures the topology without loss.
-4. **Asignifying rupture**: Break a corridor and the network reroutes. The redundant connectivity means no single passage is critical.
+4.
+
+**Asignifying rupture**: Break a corridor and the network reroutes. The redundant connectivity means no single passage is critical.
 5. **Cartography**: The map is always being made. The density field produces the surface; the surface produces the walkable space; the learner produces the path through walking.
 6. **Decalcomania**: The rhizome is not a tracing of a pre-existing structure. It is a production — the density field generates the cave, the cave generates the connections, the connections generate the navigation.
 

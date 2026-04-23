@@ -63,7 +63,9 @@ func subdivide_cube(position: Vector3, size: float, depth: int) -> void:
 
 Eight sub-cubes per cube. Three nested loops — x, y, z — each iterating over `[-1, 1]`. The product is 2 * 2 * 2 = 8 positions. Each sub-cube is half the size of its parent, offset by a quarter of the parent's size in each axis. The parent vanishes — only leaves of the recursion tree become visible geometry.
 
-The numbers escalate. Depth 1 produces 8 cubes. Depth 2: each of those 8 produces 8 more — 64 cubes. Depth 3: 512. Depth 4: 4,096. Depth 5: 32,768. The pattern is 8^n, where n is the depth. This is exponential growth — the defining characteristic of recursive subdivision. The rule is trivially simple. The output is not.
+The numbers escalate. Depth 1 produces 8 cubes. Depth 2: each of those 8 produces 8 more — 64 cubes. Depth 3: 512. Depth 4: 4,096.
+
+Depth 5: 32,768. The pattern is 8^n, where n is the depth. This is exponential growth — the defining characteristic of recursive subdivision. The rule is trivially simple. The output is not.
 
 The `cube_subdivision` artifact in the map implements exactly this function. At depth 1, the result looks like a Rubik's cube — eight blocks with visible gaps. At depth 3, the structure is a solid-looking mass of 512 tiny cubes. At depth 5, the geometry starts to strain the GPU. The same three nested loops, the same halving of size — the only variable is depth, and depth changes everything.
 

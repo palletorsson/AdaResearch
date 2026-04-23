@@ -126,7 +126,9 @@ Each scenario isolates one variable:
 3. Surface curvature (multi-normal contact)
 4. Bilateral symmetry (soft-soft collision)
 5. Drop height (impact energy)
-6. Channel geometry (sequential deformation)
+6.
+
+Channel geometry (sequential deformation)
 7. Rounded vs sharp edges (collision stability)
 8. Mass ratio (asymmetric collision)
 9. Stiffness mismatch (different materials)

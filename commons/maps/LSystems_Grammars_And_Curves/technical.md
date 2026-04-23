@@ -106,7 +106,9 @@ func turtle_interpret(instruction_string: String, angle_deg: float,
 
 `F` means "move forward and draw." `+` and `-` mean "turn." `[` means "save position and heading." `]` means "restore." Non-terminals like `A` and `B` are invisible to the turtle — they exist only during derivation and vanish from the final string (or persist as no-ops that the turtle skips). The grammar computes topology. The turtle computes geometry. Different grammars can share a turtle. Different turtles can interpret the same grammar. The two layers are independent.
 
-This independence is what enables space-filling curves. The grammar that produces the Hilbert curve uses the same turtle alphabet — `F`, `+`, `-` — as the grammar that produces a branching tree. The symbols mean the same thing. The production rules differ. The resulting strings differ. The resulting geometry is unrecognizably different. Trees branch. Curves fold. Same interpreter, different instructions.
+This independence is what enables space-filling curves. The grammar that produces the Hilbert curve uses the same turtle alphabet — `F`, `+`, `-` — as the grammar that produces a branching tree. The symbols mean the same thing. The production rules differ.
+
+The resulting strings differ. The resulting geometry is unrecognizably different. Trees branch. Curves fold. Same interpreter, different instructions.
 
 ## The Hilbert Curve: A Grammar That Fills a Plane
 
@@ -121,7 +123,9 @@ var hilbert_rules := {
 var hilbert_angle := 90.0
 ```
 
-At generation 0, the string is `A` — a single non-terminal. The turtle sees no drawing commands. Nothing renders. At generation 1, `A` becomes `-BF+AFA+FB-`. The turtle encounters one `F` among the turns and non-terminals. A single line segment. At generation 2, every `A` and `B` in the string expand further. The path bends into a U-shape. At generation 3, the U subdivides. At generation 4, the path weaves through a 16-cell grid, visiting each cell exactly once.
+At generation 0, the string is `A` — a single non-terminal. The turtle sees no drawing commands. Nothing renders. At generation 1, `A` becomes `-BF+AFA+FB-`. The turtle encounters one `F` among the turns and non-terminals.
+
+A single line segment. At generation 2, every `A` and `B` in the string expand further. The path bends into a U-shape. At generation 3, the U subdivides. At generation 4, the path weaves through a 16-cell grid, visiting each cell exactly once.
 
 ```gdscript
 func generate_hilbert(generations: int) -> Array[Dictionary]:
@@ -167,7 +171,9 @@ func build_curve_gallery(generations: int) -> Dictionary:
     }
 ```
 
-The gallery artifact positions each curve in its own floor panel. Same generation depth, same cell size, same rendering style. The visual comparison is immediate: Hilbert serpentines, Peano zigzags tighter, Moore forms a closed loop. Different topologies, different aesthetics, identical coverage. The grammar determines the path's shape — how it folds, where it turns, which cells it visits in what order. The grammar does not determine whether the path fills the plane. All three do. Coverage is a property of the curve family, not the individual grammar. Any space-filling curve grammar, iterated sufficiently, saturates its region.
+The gallery artifact positions each curve in its own floor panel. Same generation depth, same cell size, same rendering style. The visual comparison is immediate: Hilbert serpentines, Peano zigzags tighter, Moore forms a closed loop. Different topologies, different aesthetics, identical coverage.
+
+The grammar determines the path's shape — how it folds, where it turns, which cells it visits in what order. The grammar does not determine whether the path fills the plane. All three do. Coverage is a property of the curve family, not the individual grammar. Any space-filling curve grammar, iterated sufficiently, saturates its region.
 
 ## Hilbert3D: The Curve Enters Volume
 
@@ -234,7 +240,9 @@ The `Hilbert3D` artifact floats at position (3,3) in the map grid, rendering gen
 
 The space-filling curve dissolves intuition about dimension. A line is one-dimensional. A square is two-dimensional. These categories feel like physical law. But the Hilbert curve is a continuous, one-dimensional object that completely fills a two-dimensional region. Its topological dimension is 1. Its Hausdorff dimension is 2. The curve exists between categories — or rather, it reveals that categories are human labels applied to a continuum.
 
-The grammar does not "know" it is producing a space-filling curve. The production rules `A -> -BF+AFA+FB-` and `B -> +AF-BFB-FA+` are local substitutions. No rule references global coverage. No rule checks whether the path has visited a cell. The global property — total saturation of the plane — emerges from local rules iterated to depth. This is the same principle the Growth map demonstrated with trees: global form from local grammar. But trees merely suggest complexity. Space-filling curves prove it. The emergence is mathematically exact. In the limit, coverage is not approximate. It is complete.
+The grammar does not "know" it is producing a space-filling curve. The production rules `A -> -BF+AFA+FB-` and `B -> +AF-BFB-FA+` are local substitutions. No rule references global coverage. No rule checks whether the path has visited a cell. The global property — total saturation of the plane — emerges from local rules iterated to depth.
+
+This is the same principle the Growth map demonstrated with trees: global form from local grammar. But trees merely suggest complexity. Space-filling curves prove it. The emergence is mathematically exact. In the limit, coverage is not approximate. It is complete.
 
 This matters for computation. Space-filling curves provide a way to linearize multi-dimensional data — to impose a one-dimensional ordering on a two- or three-dimensional grid such that spatially nearby cells tend to be nearby in the linear sequence. Database indexing, texture mapping, cache-coherent memory access — all exploit this property. The grammar is not an abstraction. It is a data structure.
 

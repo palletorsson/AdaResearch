@@ -34,48 +34,6 @@ func phi_delta_ES(depth: int, phi_param: float) -> float:
 
 ### Complete QFEP Tree
 
-```gdscript
-class QFEPTree:
-    var lambda_param: float = 0.3  # Entropy modulator
-    var phi_param: float = 0.1     # Entropy change rate
-    var base_angle: float = 30.0   # Deterministic angle (F)
-    var base_ratio: float = 0.7    # Deterministic ratio (F)
-
-    func generate_branch(
-        start: Vector3,
-        direction: Vector3,
-        length: float,
-        depth: int,
-        max_depth: int
-    ):
-        if depth >= max_depth:
-            return
-
-        var end = start + direction * length
-        draw_branch(start, end)
-
-        # Calculate effective lambda at this depth
-        var effective_lambda = lambda_param + phi_delta_ES(depth, phi_param)
-        effective_lambda = clamp(effective_lambda, 0.0, 1.0)
-
-        # F component: deterministic branching
-        var child_length = length * base_ratio
-        var left_angle = deg_to_rad(base_angle)
-        var right_angle = deg_to_rad(-base_angle)
-
-        # λE(S) component: entropy injection
-        left_angle += randf_range(-1, 1) * effective_lambda * deg_to_rad(15)
-        right_angle += randf_range(-1, 1) * effective_lambda * deg_to_rad(15)
-        child_length *= 1.0 + randf_range(-1, 1) * effective_lambda * 0.2
-
-        # Generate children
-        var left_dir = direction.rotated(Vector3.FORWARD, left_angle)
-        var right_dir = direction.rotated(Vector3.FORWARD, right_angle)
-
-        generate_branch(end, left_dir, child_length, depth + 1, max_depth)
-        generate_branch(end, right_dir, child_length, depth + 1, max_depth)
-```
-
 ### Parameter Exploration
 
 ```gdscript
@@ -96,31 +54,6 @@ func demonstrate_lambda_spectrum():
 
 ### The Edge of Chaos
 
-```gdscript
-# Find the λ value that produces maximum complexity
-func measure_tree_complexity(tree: QFEPTree) -> float:
-    # Complexity metrics:
-    # - Branching diversity
-    # - Angular distribution entropy
-    # - Self-similarity preservation
-
-    var angles = collect_branch_angles(tree)
-    var angle_entropy = calculate_entropy(angles)
-
-    var lengths = collect_branch_lengths(tree)
-    var length_entropy = calculate_entropy(lengths)
-
-    var self_similarity = measure_self_similarity(tree)
-
-    # Complexity is high when:
-    # - Moderate entropy (not too uniform, not too random)
-    # - High self-similarity preservation
-    return angle_entropy * self_similarity
-
-# The "edge of chaos" is where complexity peaks
-# This typically occurs around λ ≈ 0.3-0.4
-```
-
 ### Time Evolution (φ component)
 
 ```gdscript
@@ -140,27 +73,6 @@ func _process(delta):
 ```
 
 ### Comparison: Pure F vs. Full QFEP
-
-```gdscript
-func demonstrate_comparison():
-    # Pure F (λ = 0, φ = 0): Deterministic tree
-    var deterministic_tree = QFEPTree.new()
-    deterministic_tree.lambda_param = 0.0
-    deterministic_tree.phi_param = 0.0
-    deterministic_tree.position = Vector3(-5, 0, 0)
-    deterministic_tree.generate()
-
-    # Full QFEP: Natural tree
-    var natural_tree = QFEPTree.new()
-    natural_tree.lambda_param = 0.35
-    natural_tree.phi_param = 0.1
-    natural_tree.position = Vector3(5, 0, 0)
-    natural_tree.generate()
-
-    # The difference is visible:
-    # Deterministic: symmetric, predictable, artificial
-    # QFEP: asymmetric, varied, natural
-```
 
 ### Synthesis with Other Fractals
 
@@ -187,17 +99,6 @@ func demonstrate_comparison():
 
 ### Seeded Randomness for Reproducibility
 
-```gdscript
-var tree_seed: int = 12345
-
-func generate_reproducible():
-    seed(tree_seed)
-    generate_tree()
-
-# Same seed → same tree
-# Different seeds → different trees from same rules
-```
-
 ### Interactive λ Control
 
 ```gdscript
@@ -209,3 +110,15 @@ func generate_reproducible():
 
 ## Key Takeaway
 The stochastic tree embodies the **Queer Free Energy Principle** in botanical form. The deterministic branching rule is F. The random variation is λE(S). The temporal unfolding through iterations is φΔE(S,t). Understanding this equation is understanding why natural forms look the way they do: **order and entropy in dynamic equilibrium**.
+
+## Implementation Notes and Complexity
+
+CrossSequence pulls together the fractal arc's connections to earlier sequences in the curriculum. Noise, cellular automata, L-systems, and recursive geometry all share a common substrate: rules applied repeatedly to produce self-similar or scale-invariant outputs. The map stages this commonality as a gallery where equivalent structures from different sequences are displayed side by side.
+
+The rendering cost is dominated by the sheer number of comparison artifacts the map displays. Each comparison pair requires two independent generators running at matched parameter values, and the gallery holds a dozen such pairs. The per-pair cost is O(1) at spawn and O(render size) at display; the aggregate is manageable because each individual artifact is modest.
+
+The matching problem — which noise parameter corresponds to which L-system parameter when the outputs look similar — is not a solved problem in the abstract. The map's approach is pragmatic: matched pairs are hand-tuned by the authoring system, and the learner compares the pairs visually rather than algorithmically. A different approach would use statistical signatures such as power spectra or correlation functions to match outputs automatically, but the hand-tuned matching preserves the authoring intent the sequence's pedagogy depends on.
+
+The cross-sequence connections the map demonstrates are structural rather than merely visual. Both fractals and noise produce structures with fractal dimension between integers; both L-systems and cellular automata produce structures through repeated local rewriting; both noise and cellular automata operate on grids. The map's side panels name the structural connections explicitly, so the visual comparisons are grounded in shared mathematics rather than in surface resemblance.
+
+Within the sequence, CrossSequence is the bridge. It situates the fractals arc within the broader curriculum and prepares the learner to recognise the fractal logic in later sequences. The map's argument is that self-similarity is a widely shared property, and the recognition is part of the curriculum's synthesis work.

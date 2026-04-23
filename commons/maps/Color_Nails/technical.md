@@ -21,19 +21,6 @@ var from_hsv = Color.from_hsv(0.5, 0.8, 1.0)  # Hue, Saturation, Value
 
 ### RGB: Three Numbers, Millions of Colors
 
-```gdscript
-# Every pixel stores three values
-var red_intensity = 0.8    # How much red light (0.0 to 1.0)
-var green_intensity = 0.3  # How much green light
-var blue_intensity = 0.1   # How much blue light
-
-var color = Color(red_intensity, green_intensity, blue_intensity)
-
-# Three numbers create millions of perceived hues
-# But the screen only emits three wavelengths
-# The rest is perceptual construction
-```
-
 ### Nail Color Controller Implementation
 
 ```gdscript
@@ -66,25 +53,6 @@ func update_preview():
 
 ### HSV vs RGB Color Models
 
-```gdscript
-# RGB - additive primaries (how screens work)
-var rgb_red = Color(1, 0, 0)
-var rgb_yellow = Color(1, 1, 0)  # Red + Green = Yellow
-
-# HSV - perceptual model (how we think about color)
-# Hue: 0.0-1.0 = color wheel position (red→yellow→green→cyan→blue→magenta)
-# Saturation: 0.0 = gray, 1.0 = vivid
-# Value: 0.0 = black, 1.0 = bright
-
-var hsv_red = Color.from_hsv(0.0, 1.0, 1.0)      # Hue 0 = red
-var hsv_yellow = Color.from_hsv(0.167, 1.0, 1.0) # Hue 1/6 = yellow
-var hsv_gray = Color.from_hsv(0.0, 0.0, 0.5)     # Any hue, zero saturation
-
-# HSV is more intuitive for color selection
-# "Make it more blue" = increase hue toward 0.67
-# "Make it less saturated" = decrease S
-```
-
 ### Applying Color to Materials
 
 ```gdscript
@@ -107,24 +75,6 @@ func apply_nail_color(color: Color):
 
 ### Color Balls as Grabbable Samples
 
-```gdscript
-extends RigidBody3D
-
-@export var sample_color: Color = Color.RED
-
-func _ready():
-    # Set visual color
-    $MeshInstance3D.material_override.albedo_color = sample_color
-
-func get_color() -> Color:
-    return sample_color
-
-# When grabbed and used with scanner
-func _on_scanned():
-    # Return this ball's color to the scanning system
-    return sample_color
-```
-
 ### The Grab Stick Scanner
 
 ```gdscript
@@ -145,21 +95,26 @@ func sample_color_from(target: Node3D):
 
 ### Color Interpolation
 
-```gdscript
-# Smooth color transitions
-func blend_colors(from: Color, to: Color, t: float) -> Color:
-    return from.lerp(to, t)
-
-# Animated color change
-var target_color: Color
-var current_color: Color
-var blend_speed: float = 2.0
-
-func _process(delta):
-    current_color = current_color.lerp(target_color, delta * blend_speed)
-    apply_color(current_color)
-```
-
 ## Key Takeaway
 
 Color selection interfaces translate between **perceptual models** (HSV - how we think about color) and **computational models** (RGB - how screens display color). The nail salon metaphor makes color personal: not just a property to observe, but a choice to wear. Three sliders control millions of possible hues - the dimensionality of color compressed into simple interaction.
+
+## Implementation Notes and Complexity
+
+The color_nails artifact renders an array of small spike meshes, each with a material whose albedo is driven by an index into a palette. Instantiating N nails produces N MeshInstance3D nodes and N material assignments; the cost is O(N) on setup and effectively zero at runtime once the nails are placed. The per-frame cost is one draw call per nail unless the engine batches them automatically, in which case the cost collapses to the number of unique materials.
+
+The palette is the organising data structure. A small JSON file maps palette indices to RGB triples, and the nails reference the palette by index rather than by colour directly. This indirection is deliberate: changing the palette at runtime retones every nail simultaneously without touching the per-nail data. The indirection also enables palette swaps — a common technique in retro graphics where a single asset is reused under different colour schemes.
+
+Colour space matters more than it usually does in procedural graphics. Godot's default colour space is linear sRGB for shaders and gamma sRGB for the output framebuffer. Mixing the two produces the wrong result: a linear-space interpolation between two gamma-space colours lands on a different point than the gamma-space interpolation between the same two colours. The nail palette is defined in gamma space, and the shader converts to linear on read, which is the convention Godot's built-in materials follow.
+
+Within the sequence, Color_Nails is an early exploration of colour-as-data. The palette indirection argues that colour is not a property of the object but an assignment of one of several possible tones, and the assignment can change. Later maps in the sequence will extend this: Color_Flashlight detaches colour from the object entirely, and Color_Grid_Pallet makes the palette itself a grid the learner can edit.
+
+## Within the Sequence
+
+Color_Nails sits early in the Color sequence. Palette-as-data becomes the sequence's continuing concern, and this map is where the concept enters the learner's vocabulary.
+
+The per-frame cost of the map scales with the number of instanced artifacts and the resolution of the procedural effects. On typical consumer hardware the whole map runs at 60 frames per second with the default parameter ranges; pushing the parameters to their extremes can raise GPU load to the point where frame rate drops, and the map does not hide this from the learner. A corner indicator reads out the current frame time so the learner can observe the cost of their parameter choices.
+
+Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map's controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
+
+The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map's concrete contribution to the curriculum.

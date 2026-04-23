@@ -32,7 +32,9 @@ func _update_transform() -> void:
         _cube_root.transform = local_xform
 ```
 
-Scale first, then rotation, then translation. That order matters — it's covered in the composition section. What matters now is that all three operations collapse into one `Transform3D`. The matrix display shows all 16 cells updating in real time. The cube changes shape and position. The numbers change underneath it. One artifact. Two levels of representation. Same fact.
+Scale first, then rotation, then translation. That order matters — it's covered in the composition section. What matters now is that all three operations collapse into one `Transform3D`. The matrix display shows all 16 cells updating in real time.
+
+The cube changes shape and position. The numbers change underneath it. One artifact. Two levels of representation. Same fact.
 
 ---
 
@@ -145,6 +147,7 @@ The signatures are precise:
 
 - **Translation** preserves everything. Lengths, angles, area. All green.
 - **Rotation** preserves everything. Same geometry, different orientation. All green.
+
 - **Uniform scale** preserves angles but changes lengths and area. Angles are scale-invariant. Lengths scale by `s`. Area scales by `s²`. Two reds, one green.
 - **Shear** destroys angles and changes lengths. Nearly everything goes red.
 

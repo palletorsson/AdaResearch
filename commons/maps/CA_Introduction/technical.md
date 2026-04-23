@@ -1,6 +1,8 @@
 # A grid of cells where each reads its neighbors and rewrites itself — local rules, global pattern
 
-Everything until now has been continuous. Vectors slide through real-valued space. Forces accumulate as smooth curves. Sine waves oscillate without gaps. The mathematics assumed infinitely divisible quantities — position could be 3.7 or 3.71 or 3.714159, and the simulation didn't care. Cellular automata abandon that assumption entirely. Space is a grid. Time advances in ticks. Each cell holds one of a finite set of states. No gradients, no interpolation, no smooth transitions. Discrete space, discrete time, discrete state. The simplest possible substrate for computation — and from it, complexity that rivals anything the continuous world produced.
+Everything until now has been continuous. Vectors slide through real-valued space. Forces accumulate as smooth curves. Sine waves oscillate without gaps. The mathematics assumed infinitely divisible quantities — position could be 3.7 or 3.71 or 3.714159, and the simulation didn't care. Cellular automata abandon that assumption entirely.
+
+Space is a grid. Time advances in ticks. Each cell holds one of a finite set of states. No gradients, no interpolation, no smooth transitions. Discrete space, discrete time, discrete state. The simplest possible substrate for computation — and from it, complexity that rivals anything the continuous world produced.
 
 A cellular automaton is a grid of cells. Each cell has a state. Each cell has neighbors. Each cell applies a rule — the same rule, everywhere, simultaneously — that reads the current neighbor states and produces the next state. One generation becomes the next. The automaton steps forward. That is the entire mechanism.
 
@@ -24,7 +26,9 @@ func _ready() -> void:
 
 A flat allocation. Every cell starts at zero — a dead field. The grid is indexed `[y][x]` because rows come first, columns second. This matches how screens draw: top to bottom, left to right. It also matches how matrices are stored. The convention matters when reading neighbor offsets.
 
-The grid is the entire world. There is no coordinate system beyond integer indices. No floating-point position, no subpixel precision. Cell `(12, 7)` exists. Cell `(12.5, 7.3)` does not. This discreteness is not a limitation — it is the point. Continuous systems approximate. Cellular automata enumerate. Every possible state of a 64×64 binary grid is one of 2^4096 configurations. Astronomical, but finite. The automaton walks through that space one tick at a time.
+The grid is the entire world. There is no coordinate system beyond integer indices. No floating-point position, no subpixel precision. Cell `(12, 7)` exists. Cell `(12.5, 7.3)` does not.
+
+This discreteness is not a limitation — it is the point. Continuous systems approximate. Cellular automata enumerate. Every possible state of a 64×64 binary grid is one of 2^4096 configurations. Astronomical, but finite. The automaton walks through that space one tick at a time.
 
 ## The Neighborhood
 
@@ -135,7 +139,9 @@ func wolfram_rule(rule_number: int, left: int, center: int, right: int) -> int:
     return (rule_number >> index) & 1
 ```
 
-Three cells. Three bits. An index from 0 to 7. The rule number's bit at that index is the output. Rule 30 in binary is `00011110`. Index 0 (neighborhood `000`) maps to 0. Index 1 (`001`) maps to 1. Index 2 (`010`) maps to 1. Index 3 (`011`) maps to 1. Index 4 (`100`) maps to 1. The rest map to 0.
+Three cells. Three bits. An index from 0 to 7. The rule number's bit at that index is the output. Rule 30 in binary is `00011110`.
+
+Index 0 (neighborhood `000`) maps to 0. Index 1 (`001`) maps to 1. Index 2 (`010`) maps to 1. Index 3 (`011`) maps to 1. Index 4 (`100`) maps to 1. The rest map to 0.
 
 ```gdscript
 func step_1d(cells: Array[int], rule_number: int) -> Array[int]:
@@ -171,7 +177,7 @@ func initialize_symmetric(grid: Array[Array], w: int, h: int) -> void:
 
 Four quadrants. One random, three reflected. The initial grid has four-fold symmetry. Now apply a rule that depends only on neighbor count — not on direction. The Moore neighborhood is symmetric: it treats all eight neighbors equally. The count does not distinguish left from right, up from down. So the rule output inherits the input symmetry.
 
-Generation after generation, the symmetry propagates. The pattern evolves, grows in complexity, but the mirror axes never break. Randomness fills in the details — no two runs produce the same pattern — but the structure remains balanced. The result resembles a persian rug: ornate, intricate, unmistakably symmetric. The automaton does not know about symmetry. It knows about neighbor counts. Symmetry is emergent — a consequence of symmetric inputs processed by symmetric rules.
+Generation after generation, the symmetry propagates. The pattern evolves, grows in complexity, but the mirror axes never break. Randomness fills in the details — no two runs produce the same pattern — but the structure remains balanced. The result resembles a persian rug: ornate, finely detailed, unmistakably symmetric. The automaton does not know about symmetry. It knows about neighbor counts. Symmetry is emergent — a consequence of symmetric inputs processed by symmetric rules.
 
 This is the automaton as pattern amplifier. Feed it structure, and it elaborates. Feed it disorder, and it complexifies. The rule does not create the symmetry or the chaos. It propagates whatever the initial conditions contain.
 
@@ -208,7 +214,9 @@ Yet from Rule 30 — a single integer — comes structure that resists compressi
 
 Entropy in this context is not thermodynamic. It is informational. The initial state has a certain amount of structure — its entropy can be measured by how compressible it is. The rule transforms that entropy. Some rules increase disorder: simple patterns dissolve into noise. Some rules decrease it: random soups crystallize into repeating structures. Some rules — the interesting ones — sit at the boundary, producing neither order nor chaos but persistent, evolving complexity.
 
-The previous sequences — vectors, forces, waves — described systems where global behavior follows from global equations. F = ma is a law that applies to every particle, but each particle carries its own position, its own velocity. Cellular automata invert this. There is no global equation. There are only cells, each executing the same local rule, each ignorant of the global state. The global pattern is a side effect. No one is in charge. No one designed the output. The automaton simply runs, and structure appears.
+The previous sequences — vectors, forces, waves — described systems where global behavior follows from global equations. F = ma is a law that applies to every particle, but each particle carries its own position, its own velocity. Cellular automata invert this. There is no global equation.
+
+There are only cells, each executing the same local rule, each ignorant of the global state. The global pattern is a side effect. No one is in charge. No one designed the output. The automaton simply runs, and structure appears.
 
 ## Possible Artifacts
 

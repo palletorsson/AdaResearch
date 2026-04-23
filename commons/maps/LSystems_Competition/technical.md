@@ -159,4 +159,6 @@ At the south of the map, the `dark_sphere` marks a transition. In earlier maps i
 
 The map's open field layout — height 1 throughout, with void clearings as ecological niches — gives the forest room to demonstrate its dynamics. The learner watches trees grow, compete, shade each other, specialize into vertical or horizontal strategies, and partition the available space. The ForestCompetition artifact runs the simulation continuously. Trees that find open niches thrive. Trees hemmed by neighbors stunt.
 
-The sequence arc becomes visible in retrospect. Grammar Lab: one grammar, one tree. Growth: one grammar, shaped by walls. Architecture: one grammar, multiple interpretations. Competition: multiple grammars, one world. Each map added a dimension of complexity without replacing the fundamental mechanism. The production rules still fire. The turtle still walks. The string still rewrites. What changed is the social context — from solo performance to ensemble, from monologue to parliament.
+The sequence arc becomes visible in retrospect. Grammar Lab: one grammar, one tree. Growth: one grammar, shaped by walls. Architecture: one grammar, multiple interpretations. Competition: multiple grammars, one world.
+
+Each map added a dimension of complexity without replacing the fundamental mechanism. The production rules still fire. The turtle still walks. The string still rewrites. What changed is the social context — from solo performance to ensemble, from monologue to parliament.

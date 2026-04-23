@@ -27,42 +27,6 @@ var white = additive_mix([Color.RED, Color.GREEN, Color.BLUE])
 
 ### Visual Color Mixing Implementation
 
-```gdscript
-extends Node3D
-
-@export var light_colors: Array[Color] = [Color.RED, Color.GREEN, Color.BLUE]
-
-var lights: Array[SpotLight3D] = []
-var overlap_area: MeshInstance3D
-
-func _ready():
-    setup_lights()
-    setup_overlap_detector()
-
-func setup_lights():
-    for i in range(light_colors.size()):
-        var light = SpotLight3D.new()
-        light.light_color = light_colors[i]
-        light.light_energy = 2.0
-        light.spot_angle = 30.0
-        # Position lights to overlap at center
-        light.position = Vector3(cos(i * TAU/3) * 2, 3, sin(i * TAU/3) * 2)
-        light.look_at(Vector3.ZERO)
-        lights.append(light)
-        add_child(light)
-
-func _process(delta):
-    # Calculate mixed color at overlap point
-    var mixed = calculate_overlap_color()
-    update_overlap_display(mixed)
-
-func calculate_overlap_color() -> Color:
-    # Where all three lights hit: white
-    # Where two hit: secondary color
-    # Actual calculation depends on light falloff
-    return additive_mix(get_active_lights())
-```
-
 ### Flashlight Demo: Revealing Color
 
 ```gdscript
@@ -85,29 +49,6 @@ func _on_trigger_pressed():
 ```
 
 ### Why Colored Light Changes Object Appearance
-
-```gdscript
-# Surface color = reflected wavelengths
-# If light doesn't contain those wavelengths, surface appears dark
-
-func calculate_surface_appearance(
-    surface_color: Color,
-    light_color: Color
-) -> Color:
-    # Surface can only reflect what light provides
-    return Color(
-        surface_color.r * light_color.r,
-        surface_color.g * light_color.g,
-        surface_color.b * light_color.b
-    )
-
-# Blue ball under red light:
-var blue_surface = Color(0, 0, 1)
-var red_light = Color(1, 0, 0)
-var appearance = calculate_surface_appearance(blue_surface, red_light)
-# Result: Color(0, 0, 0) - appears black!
-# No blue wavelengths in red light to reflect
-```
 
 ### Grabbable Color Collection
 
@@ -132,46 +73,6 @@ func get_color() -> Color:
 ```
 
 ### Pillar Color Collection
-
-```gdscript
-extends Node3D
-
-@export var pillar_height: float = 3.0
-@export var color_segments: int = 6
-
-var collected_colors: Array[Color] = []
-
-func _ready():
-    create_color_segments()
-
-func create_color_segments():
-    var segment_height = pillar_height / color_segments
-
-    for i in range(color_segments):
-        var segment = MeshInstance3D.new()
-        var mesh = CylinderMesh.new()
-        mesh.height = segment_height
-        mesh.top_radius = 0.3
-        mesh.bottom_radius = 0.3
-        segment.mesh = mesh
-
-        # Each segment gets spectrum color
-        var hue = float(i) / color_segments
-        var color = Color.from_hsv(hue, 1.0, 1.0)
-
-        var mat = StandardMaterial3D.new()
-        mat.albedo_color = color
-        mat.emission_enabled = true
-        mat.emission = color
-        segment.material_override = mat
-
-        segment.position.y = i * segment_height + segment_height / 2
-        add_child(segment)
-
-func collect_segment(index: int):
-    var color = Color.from_hsv(float(index) / color_segments, 1.0, 1.0)
-    collected_colors.append(color)
-```
 
 ### Spectrum Visualizer
 
@@ -212,3 +113,13 @@ func create_spectrum_bars():
 ## Key Takeaway
 
 Color_Pillar teaches **additive color mixing** - how light combines. Red + Green = Yellow (surprising if you learned paint mixing). The flashlight demo reveals that object color depends on both surface properties AND illumination. Colored light can make objects appear to change color, disappear into darkness, or reveal hidden patterns.
+
+## Implementation Notes and Complexity
+
+The pillar artifact renders a vertical stack of coloured cylinders, each tinted by a distinct material. The stack's height maps to a palette dimension, and the pillar as a whole reads as a legible sample of the palette's gradient. Constructing the pillar requires N MeshInstance3D nodes for a stack of height N, and N material instances because each cylinder's albedo is unique. The per-instance cost is O(1); the full pillar setup is O(N).
+
+Rendering the pillar at runtime is dominated by the draw-call count. Godot batches instances of the same mesh with the same material automatically; the pillar defeats this optimisation because every cylinder has a unique material. A pillar of height 32 produces 32 draw calls. Modern hardware handles this comfortably at 60 frames per second, but dense scenes with many pillars can become CPU-bound on draw submission. The conventional optimisation is to bake the pillar's colour variation into a single texture and render the pillar as a single cylinder with that texture, collapsing 32 draw calls to one.
+
+The pillar's material properties extend beyond albedo. Each cylinder can carry its own metallic, roughness, and emission values, and the stack can be used as a live material sampler: a learner picks a height and the corresponding cylinder's full material assignment becomes the active paint. The sampler is not free — reading the material properties requires a node lookup — but the cost is O(1) per sample and runs at interactive rates.
+
+Within the sequence, Color_Pillar is the vertical counterpart to the horizontal palette. The stack's height dimension gives the palette a third axis of legibility: the learner can see the whole gradient at once, from eye level down, rather than having to scan a horizontal strip. The pillar's architecture makes the palette a standing object rather than a tablet, and the embodied vertical reading is the map's small contribution to the colour vocabulary the sequence is building.

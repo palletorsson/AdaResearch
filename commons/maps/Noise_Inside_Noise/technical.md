@@ -1,6 +1,8 @@
 # Space folds when noise samples itself and the coordinate grid forgets where it started
 
-In Noise_One, octaves stacked by amplitude — frequency doubled, amplitude halved, the sum converging toward organic complexity. In Noise_Columns, a Perlin field displaced vertices along normals. In Noise_Voxel, continuous fields hardened into discrete geometry through thresholding. In Noise_6_Wall, computation moved to the GPU. Every one of those maps treated noise as an endpoint: evaluate at a position, use the result. This map inverts that relationship. The result of one noise evaluation becomes the input position of the next. Noise feeds noise. The coordinate system itself warps, and what emerges is qualitatively different from anything summation can produce.
+In Noise_One, octaves stacked by amplitude — frequency doubled, amplitude halved, the sum converging toward organic complexity. In Noise_Columns, a Perlin field displaced vertices along normals. In Noise_Voxel, continuous fields hardened into discrete geometry through thresholding. In Noise_6_Wall, computation moved to the GPU.
+
+Every one of those maps treated noise as an endpoint: evaluate at a position, use the result. This map inverts that relationship. The result of one noise evaluation becomes the input position of the next. Noise feeds noise. The coordinate system itself warps, and what emerges is qualitatively different from anything summation can produce.
 
 Domain warping is the technique. The name is precise: the domain — the input space, the coordinate grid — gets warped by a noise function before the final noise evaluation occurs. Simple noise maps a position to a value. Domain-warped noise maps a position to a distorted position, then maps that distorted position to a value. The distortion is the entire point.
 
