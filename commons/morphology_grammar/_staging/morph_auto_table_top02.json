@@ -1,0 +1,40 @@
+{
+  "id": "morph_auto_table_top02",
+  "family": "table",
+  "notes": "Auto-researched table variant: 20 support legs under a single tabletop mass.",
+  "camera_yaw": 0.664,
+  "camera_pitch": 0.306,
+  "seed": {
+    "type": "flat_box",
+    "size": [
+      1.538,
+      0.229,
+      0.927
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 1,
+  "rules": [
+    {
+      "id": "tabletop_to_legs",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.8
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2,
+        "rows": 2,
+        "select": "corners",
+        "length": 1.222,
+        "scale": 0.235
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.56
+    }
+  ],
+  "render_mode": "wireframe"
+}

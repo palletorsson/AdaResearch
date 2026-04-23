@@ -1,0 +1,52 @@
+{
+  "rack_info": {
+    "name": "3x SLIDER H",
+    "description": "3x SLIDER H — auto-generated UVAC composition. sound_type=pickup_mario, composition_type=sliders_h.",
+    "version": "auto-1",
+    "sound_type": "pickup_mario",
+    "auto_generated": true,
+    "composition_type": "sliders_h",
+    "composition_count": 3
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "sh_0"
+    ],
+    [
+      "sh_1"
+    ],
+    [
+      "sh_2"
+    ]
+  ],
+  "control_definitions": {
+    "sh_0": {
+      "type": "slh",
+      "label": "CUT",
+      "parameter": "cutoff",
+      "min": 20.0,
+      "max": 12000.0,
+      "default": 1000.0
+    },
+    "sh_1": {
+      "type": "slh",
+      "label": "ATK",
+      "parameter": "attack",
+      "min": 0.001,
+      "max": 2.0,
+      "default": 0.05
+    },
+    "sh_2": {
+      "type": "slh",
+      "label": "TONE",
+      "parameter": "tone",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    }
+  }
+}

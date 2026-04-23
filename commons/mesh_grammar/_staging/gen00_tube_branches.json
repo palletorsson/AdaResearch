@@ -1,0 +1,18 @@
+{
+  "id": "gen00_tube_branches",
+  "notes": "Tube-like branching off random faces.",
+  "seed": "icosahedron",
+  "seed_scale": 0.4,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "tube_branch",
+      "selector": "random_30",
+      "params": {
+        "length": 0.5,
+        "radius": 0.08,
+        "segments": 3
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "rack_info": {
+    "name": "auto_dial_dial_mix_531967",
+    "description": "DIAL — mix bipolar(-1-1) step_7, color #88ff44",
+    "version": "auto-1",
+    "sound_type": "basic_sine_wave",
+    "auto_generated": true,
+    "family": "interactable"
+  },
+  "layout": {
+    "padding_px": 30,
+    "gap_px": 10,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "ctrl"
+    ]
+  ],
+  "control_definitions": {
+    "ctrl": {
+      "type": "dial",
+      "label": "MIX",
+      "color": "#88ff44",
+      "parameter": "mix",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0,
+      "step": 0.143
+    }
+  }
+}

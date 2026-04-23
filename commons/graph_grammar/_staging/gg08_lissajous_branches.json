@@ -1,0 +1,39 @@
+{
+  "id": "gg08_lissajous_branches",
+  "notes": "Branching tree + lissajous curve displacement \u00e2\u20ac\u201d each branch bends through an interference pattern.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.15
+  },
+  "iterations": 4,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.7,
+        "spread_deg": 30,
+        "radius_decay": 0.7
+      }
+    },
+    {
+      "op": "parametric_displace",
+      "selector": "all",
+      "params": {
+        "curve": "lissajous",
+        "t_source": "depth",
+        "t_scale": 0.5,
+        "amp": 0.25
+      }
+    }
+  ]
+}

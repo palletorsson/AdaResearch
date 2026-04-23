@@ -1,0 +1,170 @@
+{
+  "id": "morph_auto_mixed_top03",
+  "family": "mixed_forms",
+  "notes": "Auto-researched mixed-family variant: roles body, cushion, hair, support, wall, 46 total volumes, bbox 1.11\u00d71.59\u00d71.92.",
+  "camera_yaw": 0.844,
+  "camera_pitch": 0.388,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.763,
+      0.978,
+      0.593
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 6,
+  "rules": [
+    {
+      "id": "mixed_02_01_airlock_grazer_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.396,
+        "scale": 0.654,
+        "normal_bias": 0.733,
+        "world_bias": [
+          0.031,
+          -0.07,
+          0.224
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.096
+    },
+    {
+      "id": "mixed_02_02_mermaid_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.212,
+        "scale": 0.544
+      },
+      "child_role": "hair",
+      "budget_factor": 0.503
+    },
+    {
+      "id": "mixed_02_03_deco_back",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.962,
+        "scale": 0.748,
+        "normal_bias": 0.753,
+        "world_bias": [
+          0.032,
+          1.005,
+          -0.052
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.041
+    },
+    {
+      "id": "mixed_02_04_postmodern_base",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.118,
+        "scale": 1.452
+      },
+      "child_role": "support",
+      "budget_factor": 0.004
+    },
+    {
+      "id": "mixed_02_05_console_crab_legs",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "finger_array",
+      "params": {
+        "count": 4.432,
+        "length": 0.362,
+        "fill": 1.088
+      },
+      "child_role": "support",
+      "budget_factor": 0.148
+    },
+    {
+      "id": "mixed_02_06_bloom_petals_front",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front|back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.323,
+        "scale": 0.757,
+        "normal_bias": 1.235,
+        "world_bias": [
+          0.012,
+          0.392,
+          -0.029
+        ]
+      },
+      "child_role": "garment",
+      "budget_factor": 0.059
+    },
+    {
+      "id": "mixed_transform_01_move_panel",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.631
+      },
+      "selector": "right",
+      "op": "move_panel",
+      "params": {
+        "normal_offset": -0.014,
+        "tangent_offset": 0.177,
+        "bitangent_offset": 0.02
+      },
+      "child_role": "body",
+      "budget_factor": 0.289
+    },
+    {
+      "id": "mixed_transform_02_move_panel",
+      "when": {
+        "role": "body",
+        "max_depth": 1,
+        "min_budget": 0.33
+      },
+      "selector": "right",
+      "op": "move_panel",
+      "params": {
+        "normal_offset": 0.083,
+        "tangent_offset": 0.138,
+        "bitangent_offset": -0.071
+      },
+      "child_role": "body",
+      "budget_factor": 0.278
+    }
+  ],
+  "render_mode": "wireframe"
+}

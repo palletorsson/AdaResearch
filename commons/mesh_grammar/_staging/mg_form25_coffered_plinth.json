@@ -1,0 +1,38 @@
+{
+  "id": "mg_form25_coffered_plinth",
+  "notes": "FORM STUDY: top face gets nested insets and a small central lift. More about roof/floor articulation than height.",
+  "seed": "cube",
+  "seed_scale": 0.76,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "up",
+      "params": {
+        "amount": 0.14,
+        "inner_tag": "coffer_a",
+        "border_tag": "coffer_rim_a"
+      }
+    },
+    {
+      "op": "inset",
+      "selector": "tag:coffer_a",
+      "params": {
+        "amount": 0.18,
+        "inner_tag": "coffer_b",
+        "border_tag": "coffer_rim_b"
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:coffer_b",
+      "params": {
+        "distance": 0.05,
+        "scale": 0.82,
+        "top_tag": "coffer_peak",
+        "side_tag": "coffer_peak_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

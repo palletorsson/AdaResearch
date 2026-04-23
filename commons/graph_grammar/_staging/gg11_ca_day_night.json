@@ -1,0 +1,53 @@
+{
+  "id": "gg11_ca_day_night",
+  "notes": "Day-and-night rule \u00e2\u20ac\u201d symmetric patterns, produces stable islands and continents of growth.",
+  "seed": {
+    "scatter": {
+      "count": 60,
+      "region_size": 2.2,
+      "min_dist": 0.2,
+      "shape": "disk",
+      "radius": 0.07,
+      "seed": 23
+    }
+  },
+  "iterations": 2,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_red"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 2,
+        "length": 0.35,
+        "spread_deg": 30,
+        "radius_decay": 0.72
+      }
+    },
+    {
+      "op": "ca_prune",
+      "selector": "all",
+      "params": {
+        "rule": "day_and_night",
+        "iterations": 20,
+        "grid_size": 32,
+        "world_size": 5.0,
+        "seed_density": 0.5,
+        "seed": 42
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 10,
+        "length": 0.13,
+        "radius": 0.016,
+        "splay": 0.9
+      }
+    }
+  ]
+}

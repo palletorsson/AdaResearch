@@ -1,0 +1,28 @@
+{
+  "id": "mg_ls02_tree_bulged",
+  "notes": "Same L-system plant, bulge op on up-facing faces \u2014 branches get knobby nodes where mesh-grammar inflates the boxes.",
+  "seed": {
+    "lsystem": {
+      "axiom": "F",
+      "rules": {
+        "F": "F[+F]F[-F]F"
+      },
+      "iterations": 3,
+      "angle_deg": 25.7,
+      "step_len": 0.18,
+      "step_shrink": 0.72,
+      "base_width": 0.015,
+      "width_shrink": 0.75
+    }
+  },
+  "generations": 1,
+  "rules": [
+    {
+      "op": "bulge",
+      "selector": "up",
+      "params": {
+        "amount": 0.04
+      }
+    }
+  ]
+}

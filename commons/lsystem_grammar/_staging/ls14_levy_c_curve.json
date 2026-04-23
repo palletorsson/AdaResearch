@@ -1,0 +1,26 @@
+{
+  "id": "ls14_levy_c_curve",
+  "axiom": "F",
+  "rules": {
+    "F": "+F--F+"
+  },
+  "iterations": 11,
+  "angle_deg": 45,
+  "step_len": 0.01,
+  "interpretation": "lines",
+  "color_trunk": [
+    0.2,
+    0.32,
+    0.2
+  ],
+  "color_tip": [
+    0.72,
+    0.9,
+    0.54
+  ],
+  "camera_yaw": 0.001,
+  "camera_pitch": 1.4,
+  "layout": "fractal_curve",
+  "dna_connections": [],
+  "notes": "Levy C curve from the standard L-system construction: start F, rule F->+F--F+, angle 45 degrees."
+}

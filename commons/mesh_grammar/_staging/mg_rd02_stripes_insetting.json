@@ -1,0 +1,32 @@
+{
+  "id": "mg_rd02_stripes_insetting",
+  "notes": "DNA BRIDGE: RD stripes \u2192 mesh-grammar. Brain-ridge heightmap gets inset + extruded on upward faces; ridges become raised tiled ramparts.",
+  "seed": {
+    "rd": {
+      "preset": "stripes",
+      "grid_size": 48,
+      "iterations": 3000,
+      "seed": 3,
+      "world_size": 0.7,
+      "height_amp": 0.15
+    }
+  },
+  "generations": 2,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "up",
+      "params": {
+        "amount": 0.12
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.1,
+        "scale": 0.95
+      }
+    }
+  ]
+}

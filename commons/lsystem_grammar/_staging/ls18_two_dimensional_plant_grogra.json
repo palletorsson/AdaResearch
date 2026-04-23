@@ -1,0 +1,33 @@
+{
+  "id": "ls18_two_dimensional_plant_grogra",
+  "axiom": "X",
+  "rules": {
+    "X": "F[+X]F[-X]+X",
+    "F": "FF"
+  },
+  "iterations": 5,
+  "angle_deg": 22.5,
+  "step_len": 0.035,
+  "step_shrink": 0.76,
+  "interpretation": "tubes",
+  "base_width": 0.012,
+  "width_shrink": 0.8,
+  "tube_sides": 6,
+  "color_trunk": [
+    0.32,
+    0.2,
+    0.1
+  ],
+  "color_tip": [
+    0.3,
+    0.8,
+    0.34
+  ],
+  "camera_yaw": 0.3,
+  "camera_pitch": 0.18,
+  "layout": "tree",
+  "dna_connections": [
+    "mesh_grammar"
+  ],
+  "notes": "Two-dimensional plant-like structure quoted by Grogra: X->F[+X]F[-X]+X with F->FF. A classic bracketed growth grammar."
+}

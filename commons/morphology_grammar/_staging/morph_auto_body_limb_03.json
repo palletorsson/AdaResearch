@@ -1,0 +1,89 @@
+{
+  "id": "morph_auto_body_limb_03",
+  "family": "body_limb",
+  "notes": "Auto-generated body-limb candidate.",
+  "camera_yaw": 0.269,
+  "camera_pitch": 0.333,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.705,
+      1.193,
+      0.561
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "body_to_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.206,
+        "scale": 0.56
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "body_to_arms",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "extrude",
+      "params": {
+        "length": 0.444,
+        "scale": 0.32
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.64
+    },
+    {
+      "id": "arm_to_forearm",
+      "when": {
+        "role": "trunk",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.32
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.283,
+        "scale": 0.575
+      },
+      "child_role": "tip",
+      "budget_factor": 0.42
+    },
+    {
+      "id": "hand_terminal_split",
+      "when": {
+        "role": "tip",
+        "min_depth": 2,
+        "max_depth": 2,
+        "min_budget": 0.12
+      },
+      "selector": "up",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2,
+        "rows": 1,
+        "select": "all",
+        "length": 0.074,
+        "scale": 0.689
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    }
+  ]
+}

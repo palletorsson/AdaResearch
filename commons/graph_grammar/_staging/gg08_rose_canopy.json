@@ -1,0 +1,67 @@
+{
+  "id": "gg08_rose_canopy",
+  "notes": "Space-colonized canopy displaced by a 4-petal rose curve in XZ \u00e2\u20ac\u201d radial petaled silhouette.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.15
+  },
+  "iterations": 1,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_red"
+  },
+  "rules": [
+    {
+      "op": "space_colonize",
+      "selector": "all",
+      "params": {
+        "iterations": 40,
+        "attractor_count": 180,
+        "cloud_shape": "ellipsoid",
+        "cloud_size": [
+          1.5,
+          0.8,
+          1.5
+        ],
+        "cloud_center": [
+          0,
+          1.7,
+          0
+        ],
+        "influence_radius": 1.0,
+        "kill_radius": 0.22,
+        "step": 0.14,
+        "radius_decay": 0.97
+      }
+    },
+    {
+      "op": "parametric_displace",
+      "selector": "all",
+      "params": {
+        "curve": "rose",
+        "t_source": "radial",
+        "t_scale": 1.2,
+        "amp": 0.25,
+        "axes": [
+          1,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 8,
+        "length": 0.15,
+        "radius": 0.02,
+        "splay": 0.9
+      }
+    }
+  ]
+}

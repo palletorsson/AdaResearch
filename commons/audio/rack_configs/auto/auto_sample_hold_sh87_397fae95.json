@@ -1,0 +1,80 @@
+{
+  "rack_info": {
+    "name": "Sample & Hold",
+    "description": "Clock triggers random sample × amount × smoothing. Arvo Pärt tintinnabuli via chance.",
+    "version": "auto-1",
+    "sound_type": "synth_wave",
+    "auto_generated": true,
+    "archetype": "sample_hold",
+    "seed": 964669077
+  },
+  "layout": {
+    "padding_px": 18,
+    "gap_px": 14,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "lbl"
+    ],
+    [
+      "clock",
+      "amt"
+    ],
+    [
+      "smooth",
+      "range"
+    ],
+    [
+      "trig",
+      ""
+    ]
+  ],
+  "control_definitions": {
+    "lbl": {
+      "type": "label",
+      "text": "S&H",
+      "font_size": 18
+    },
+    "clock": {
+      "type": "slv",
+      "label": "CLK",
+      "parameter": "clock_rate",
+      "min": 0.1,
+      "max": 16.0,
+      "default": 2.0
+    },
+    "amt": {
+      "type": "knob",
+      "label": "AMT",
+      "parameter": "amount",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.6
+    },
+    "smooth": {
+      "type": "knob",
+      "label": "SMTH",
+      "parameter": "smoothing",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.1
+    },
+    "range": {
+      "type": "knob",
+      "label": "RNG",
+      "parameter": "range",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 1.0
+    },
+    "trig": {
+      "type": "btn",
+      "label": "TRIG",
+      "parameter": "manual_trig",
+      "action": "trigger",
+      "color": "#44ffaa"
+    }
+  }
+}

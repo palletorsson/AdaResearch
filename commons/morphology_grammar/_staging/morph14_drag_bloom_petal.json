@@ -1,0 +1,115 @@
+{
+  "id": "morph14_drag_bloom_petal",
+  "family": "drag_pageant",
+  "notes": "Reference-driven bloom silhouette: petal shoulders and a ballooning upper dress grow from the torso while the body stays legible underneath.",
+  "camera_yaw": 0.78,
+  "camera_pitch": 0.33,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.72,
+      1.2,
+      0.52
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "bloom_skirt",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.54,
+        "scale": 0.96
+      },
+      "child_role": "garment",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "bloom_petals_side",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.56,
+        "scale": 0.62,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.28,
+          0.12
+        ]
+      },
+      "child_role": "garment",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "bloom_petals_front",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front|back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.44,
+        "scale": 0.76,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.34,
+          0.0
+        ]
+      },
+      "child_role": "garment",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "bloom_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.18,
+        "scale": 0.46
+      },
+      "child_role": "hair",
+      "budget_factor": 0.42
+    },
+    {
+      "id": "bloom_topper",
+      "when": {
+        "role": "hair",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.16
+      },
+      "selector": "up",
+      "op": "cluster_cap",
+      "params": {
+        "count": 3,
+        "length": 0.12,
+        "scale": 1.18
+      },
+      "child_role": "hair",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

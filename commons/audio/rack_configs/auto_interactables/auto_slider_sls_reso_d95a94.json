@@ -1,0 +1,32 @@
+{
+  "rack_info": {
+    "name": "auto_slider_sls_reso_d95a94",
+    "description": "SLS — reso hz_low(20-200) smooth, color #ff8844",
+    "version": "auto-1",
+    "sound_type": "basic_sine_wave",
+    "auto_generated": true,
+    "family": "interactable"
+  },
+  "layout": {
+    "padding_px": 30,
+    "gap_px": 10,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "ctrl"
+    ]
+  ],
+  "control_definitions": {
+    "ctrl": {
+      "type": "sls",
+      "label": "RESO",
+      "color": "#ff8844",
+      "parameter": "reso",
+      "min": 20.0,
+      "max": 200.0,
+      "default": 110.0
+    }
+  }
+}

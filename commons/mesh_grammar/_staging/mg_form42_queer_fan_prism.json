@@ -1,0 +1,48 @@
+{
+  "id": "mg_form42_queer_fan_prism",
+  "notes": "EXTREME QUEER REACH: prism is pulled tall, pinched, then reopened as a projecting fan. The point is theatrical flare after compression.",
+  "seed": "prism",
+  "seed_scale": 0.38,
+  "generations": 2,
+  "camera_pitch": 0.3,
+  "camera_focus_y_bias": -0.16,
+  "camera_fit_padding": 0.62,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.28,
+        "scale": 0.86,
+        "top_tag": "fan_top",
+        "side_tag": "fan_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "scale",
+      "selector": "tag:fan_top",
+      "params": {
+        "scale": 1.24
+      }
+    },
+    {
+      "op": "rotate",
+      "selector": "tag:fan_top",
+      "params": {
+        "angle_degrees": 22
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:fan_top",
+      "params": {
+        "distance": 0.16,
+        "scale": 1.08,
+        "top_tag": "fan_tip",
+        "side_tag": "fan_tip_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

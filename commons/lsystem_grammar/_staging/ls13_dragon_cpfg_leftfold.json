@@ -1,0 +1,27 @@
+{
+  "id": "ls13_dragon_cpfg_leftfold",
+  "axiom": "FL",
+  "rules": {
+    "L": "L+RF+",
+    "R": "-FL-R"
+  },
+  "iterations": 10,
+  "angle_deg": 90,
+  "step_len": 0.012,
+  "interpretation": "lines",
+  "color_trunk": [
+    0.48,
+    0.16,
+    0.34
+  ],
+  "color_tip": [
+    0.96,
+    0.62,
+    0.22
+  ],
+  "camera_yaw": 0.001,
+  "camera_pitch": 1.4,
+  "layout": "fractal_curve",
+  "dna_connections": [],
+  "notes": "Dragon curve using the CPFG manual L/R non-drawing symbols. F draws, L and R steer recursive left/right folding."
+}

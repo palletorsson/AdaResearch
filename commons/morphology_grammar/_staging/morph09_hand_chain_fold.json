@@ -1,0 +1,72 @@
+{
+  "id": "morph09_hand_chain_fold",
+  "family": "hand_chain",
+  "notes": "Palm mass allocates five fingers, then each finger extends one more phalange step so the scale ladder stays visible from palm to fingertip.",
+  "camera_yaw": 0.86,
+  "camera_pitch": 0.34,
+  "seed": {
+    "type": "flat_box",
+    "size": [
+      1.42,
+      0.24,
+      0.78
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "palm_to_fingers_chain",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.75
+      },
+      "selector": "front",
+      "op": "finger_array",
+      "params": {
+        "count": 5,
+        "length": 0.52,
+        "fill": 0.88,
+        "thickness_scale": 1.0
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.68
+    },
+    {
+      "id": "finger_to_phalange",
+      "when": {
+        "role": "trunk",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.28
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.24,
+        "scale": 0.76
+      },
+      "child_role": "tip",
+      "budget_factor": 0.36
+    },
+    {
+      "id": "palm_to_wrist_chain",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.75
+      },
+      "selector": "back",
+      "op": "extrude",
+      "params": {
+        "length": 0.24,
+        "scale": 0.44
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

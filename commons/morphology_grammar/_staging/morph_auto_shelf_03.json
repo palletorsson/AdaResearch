@@ -1,0 +1,40 @@
+{
+  "id": "morph_auto_shelf_03",
+  "family": "shelf",
+  "notes": "Auto-generated shelf candidate.",
+  "camera_yaw": 0.66,
+  "camera_pitch": 0.283,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.773,
+      2.081,
+      0.622
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 3,
+  "rules": [
+    {
+      "id": "shelf_front_bays",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.75
+      },
+      "selector": "front",
+      "op": "aperture_grid",
+      "params": {
+        "cols": 3,
+        "rows": 4,
+        "length": 0.146,
+        "scale": 0.775,
+        "door_col": 1,
+        "door_height_scale": 1.0
+      },
+      "child_role": "aperture",
+      "budget_factor": 0.0
+    }
+  ]
+}

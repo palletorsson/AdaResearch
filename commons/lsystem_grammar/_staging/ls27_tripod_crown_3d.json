@@ -1,0 +1,33 @@
+{
+  "id": "ls27_tripod_crown_3d",
+  "axiom": "X",
+  "rules": {
+    "X": "F[&X]////[&X]////[&X]",
+    "F": "FF"
+  },
+  "iterations": 4,
+  "angle_deg": 22.5,
+  "step_len": 0.04,
+  "step_shrink": 0.76,
+  "interpretation": "tubes",
+  "base_width": 0.013,
+  "width_shrink": 0.8,
+  "tube_sides": 6,
+  "color_trunk": [
+    0.3,
+    0.22,
+    0.12
+  ],
+  "color_tip": [
+    0.32,
+    0.78,
+    0.34
+  ],
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.24,
+  "layout": "tree",
+  "dna_connections": [
+    "mesh_grammar"
+  ],
+  "notes": "3D tripod crown using pitch and roll. The current turtle's & and / operators distribute three raised branches around the trunk."
+}

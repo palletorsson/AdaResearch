@@ -1,0 +1,16 @@
+{
+  "id": "gen01_bulge_big",
+  "notes": "Bigger bulges \u2014 chubby organism.",
+  "seed": "sphere",
+  "seed_scale": 0.55,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "bulge",
+      "selector": "random_50",
+      "params": {
+        "amount": 0.5
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "ls28_candelabra_3d",
+  "axiom": "X",
+  "rules": {
+    "X": "F[&X][^X][/X]",
+    "F": "FF"
+  },
+  "iterations": 4,
+  "angle_deg": 25,
+  "step_len": 0.04,
+  "step_shrink": 0.77,
+  "interpretation": "tubes",
+  "base_width": 0.013,
+  "width_shrink": 0.8,
+  "tube_sides": 6,
+  "color_trunk": [
+    0.34,
+    0.24,
+    0.14
+  ],
+  "color_tip": [
+    0.28,
+    0.72,
+    0.3
+  ],
+  "camera_yaw": 0.58,
+  "camera_pitch": 0.26,
+  "layout": "tree",
+  "dna_connections": [
+    "mesh_grammar"
+  ],
+  "notes": "3D candelabra plant: one branch pitches down, one up, one rolls sideways. This family exploits the local 3D turtle frame."
+}

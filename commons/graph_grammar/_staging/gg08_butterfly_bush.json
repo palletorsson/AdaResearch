@@ -1,0 +1,49 @@
+{
+  "id": "gg08_butterfly_bush",
+  "notes": "Dense bush + Fay butterfly-curve displacement \u00e2\u20ac\u201d chaotic wing-like spread on the XY plane.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.15
+  },
+  "iterations": 3,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_bright"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 4,
+        "length": 0.5,
+        "spread_deg": 55,
+        "radius_decay": 0.62
+      }
+    },
+    {
+      "op": "parametric_displace",
+      "selector": "all",
+      "params": {
+        "curve": "butterfly",
+        "t_source": "depth",
+        "t_scale": 0.6,
+        "amp": 0.35
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 8,
+        "length": 0.15,
+        "radius": 0.018,
+        "splay": 0.9
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "rack_info": {
+    "name": "MON+4 SLIDERS",
+    "description": "MON+4 SLIDERS — auto-generated UVAC composition. sound_type=heartbeat, composition_type=monitor_sliders.",
+    "version": "auto-1",
+    "sound_type": "heartbeat",
+    "auto_generated": true,
+    "composition_type": "monitor_sliders",
+    "composition_count": 4
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "mon",
+      "mon",
+      "mon",
+      "mon"
+    ],
+    [
+      "sv_0",
+      "sv_1",
+      "sv_2",
+      "sv_3"
+    ]
+  ],
+  "control_definitions": {
+    "mon": {
+      "type": "simple_waveform",
+      "label": "OUT",
+      "parameter": "output"
+    },
+    "sv_0": {
+      "type": "slv",
+      "label": "REL",
+      "parameter": "release",
+      "min": 0.001,
+      "max": 4.0,
+      "default": 0.3
+    },
+    "sv_1": {
+      "type": "slv",
+      "label": "PAN",
+      "parameter": "pan",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    "sv_2": {
+      "type": "slv",
+      "label": "TONE",
+      "parameter": "tone",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    },
+    "sv_3": {
+      "type": "slv",
+      "label": "DEPTH",
+      "parameter": "depth",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    }
+  }
+}

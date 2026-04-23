@@ -1,0 +1,35 @@
+{
+  "rack_info": {
+    "name": "2x XY",
+    "description": "2x XY — auto-generated UVAC composition. sound_type=pickup_mario, composition_type=xy_row.",
+    "version": "auto-1",
+    "sound_type": "pickup_mario",
+    "auto_generated": true,
+    "composition_type": "xy_row",
+    "composition_count": 2
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "xy_0",
+      "xy_1"
+    ]
+  ],
+  "control_definitions": {
+    "xy_0": {
+      "type": "xy",
+      "label": "DEPTH/MIX",
+      "parameter_x": "depth",
+      "parameter_y": "mix"
+    },
+    "xy_1": {
+      "type": "xy",
+      "label": "TONE/RATE",
+      "parameter_x": "tone",
+      "parameter_y": "rate"
+    }
+  }
+}

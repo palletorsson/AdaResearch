@@ -1,0 +1,32 @@
+{
+  "id": "mg_op18_cellular_perforated_shell",
+  "notes": "UNDERUSED-OPS PASS: sphere runs face-cellular automata, deletes the dead cells, then beads the new open boundaries. This directly tests CA-as-surface selector plus delete.",
+  "seed": "sphere",
+  "seed_scale": 0.62,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "cellular",
+      "selector": "all",
+      "params": {
+        "ca_steps": 4,
+        "rule": "coral",
+        "initial_density": 0.58,
+        "seed_value": 21,
+        "tag_only": false
+      }
+    },
+    {
+      "op": "edge_decorate",
+      "selector": "all",
+      "params": {
+        "shape": "sphere",
+        "size": 0.018,
+        "spacing": 0.11,
+        "offset": 0.008,
+        "segments": 4,
+        "boundary_only": true
+      }
+    }
+  ]
+}

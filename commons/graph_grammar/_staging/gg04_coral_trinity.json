@@ -1,0 +1,56 @@
+{
+  "id": "gg04_coral_trinity",
+  "notes": "Three seeds in an equilateral triangle \u00e2\u20ac\u201d trinity organism.",
+  "seed": {
+    "roots": [
+      {
+        "pos": [
+          -0.55,
+          0,
+          0.32
+        ],
+        "radius": 0.11
+      },
+      {
+        "pos": [
+          0.55,
+          0,
+          0.32
+        ],
+        "radius": 0.11
+      },
+      {
+        "pos": [
+          0.0,
+          0,
+          -0.63
+        ],
+        "radius": 0.11
+      }
+    ]
+  },
+  "iterations": 3,
+  "render_mode": "metaball",
+  "metaball_smoothness": 0.22,
+  "metaball_resolution": 72,
+  "materials": {
+    "default": [
+      0.72,
+      0.34,
+      0.32
+    ]
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.5,
+        "spread_deg": 55,
+        "radius_decay": 0.72,
+        "jitter": 0.5
+      }
+    }
+  ]
+}

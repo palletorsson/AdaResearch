@@ -1,0 +1,24 @@
+{
+  "id": "rd11_iota_negaton_plate",
+  "F": 0.046,
+  "K": 0.0594,
+  "grid_size": 128,
+  "iterations": 5800,
+  "seed": 31,
+  "render_mode": "plate",
+  "color_lo": [
+    0.1,
+    0.12,
+    0.2
+  ],
+  "color_hi": [
+    0.92,
+    0.54,
+    0.3
+  ],
+  "camera_yaw": 0.001,
+  "camera_pitch": 1.28,
+  "world_size": 2.1,
+  "layout": "rd_plate",
+  "notes": "\u00ce\u00b9-class molecule regime (F=0.046, K=0.0594): negatons interact like clustered molecules, a useful bridge between spots and stripe-bearing classes."
+}

@@ -1,0 +1,43 @@
+{
+  "id": "gg00_colonize_cone",
+  "notes": "Space colonization toward a cone \u00e2\u20ac\u201d cypress/pyramid silhouette.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.15
+  },
+  "iterations": 1,
+  "color": [
+    0.35,
+    0.45,
+    0.22
+  ],
+  "rules": [
+    {
+      "op": "space_colonize",
+      "selector": "all",
+      "params": {
+        "iterations": 80,
+        "attractor_count": 350,
+        "cloud_shape": "cone",
+        "cloud_size": [
+          1.2,
+          2.5,
+          1.2
+        ],
+        "cloud_center": [
+          0,
+          1.5,
+          0
+        ],
+        "influence_radius": 0.9,
+        "kill_radius": 0.2,
+        "step": 0.12,
+        "radius_decay": 0.97
+      }
+    }
+  ]
+}

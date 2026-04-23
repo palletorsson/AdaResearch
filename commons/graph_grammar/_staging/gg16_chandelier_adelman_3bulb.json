@@ -1,0 +1,64 @@
+{
+  "id": "gg16_chandelier_adelman_3bulb",
+  "notes": "Lindsey Adelman Branching Bubble Chandelier (2006) \u00e2\u20ac\u201d single trunk splits into 3 Y-branches, frosted glass bulbs at tips.",
+  "seed": {
+    "pos": [
+      0,
+      2.0,
+      0
+    ],
+    "radius": 0.015
+  },
+  "iterations": 1,
+  "render_mode": "chandelier",
+  "camera_pitch": 0.1,
+  "camera_yaw": 0.6,
+  "chandelier": {
+    "edge_radius": 0.012,
+    "edge_color": [
+      0.1,
+      0.08,
+      0.07
+    ],
+    "bulb_radius": 0.13,
+    "bulb_color": [
+      1.0,
+      0.94,
+      0.82
+    ],
+    "bulb_emission": 2.0
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 1,
+        "length": 0.6,
+        "spread_deg": 5,
+        "radius_decay": 0.95,
+        "pitch": 3.14
+      }
+    },
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 1,
+        "length": 0.25,
+        "spread_deg": 15,
+        "radius_decay": 0.95
+      }
+    },
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.45,
+        "spread_deg": 55,
+        "radius_decay": 0.95
+      }
+    }
+  ]
+}

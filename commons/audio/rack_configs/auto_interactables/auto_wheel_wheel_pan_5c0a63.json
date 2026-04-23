@@ -1,0 +1,32 @@
+{
+  "rack_info": {
+    "name": "auto_wheel_wheel_pan_5c0a63",
+    "description": "WHEEL — pan hz_mid(200-2000) smooth, color #88ff44",
+    "version": "auto-1",
+    "sound_type": "basic_sine_wave",
+    "auto_generated": true,
+    "family": "interactable"
+  },
+  "layout": {
+    "padding_px": 30,
+    "gap_px": 10,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "ctrl"
+    ]
+  ],
+  "control_definitions": {
+    "ctrl": {
+      "type": "wheel",
+      "label": "PAN",
+      "color": "#88ff44",
+      "parameter": "pan",
+      "min": 200.0,
+      "max": 2000.0,
+      "default": 1100.0
+    }
+  }
+}

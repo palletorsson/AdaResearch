@@ -1,0 +1,45 @@
+{
+  "id": "mg_form54_hydra_rearing",
+  "notes": "HYDRA TEST: taller rearing body with asymmetrical branching. Less crown, more monster lifting upward before splitting into heads.",
+  "seed": "icosahedron",
+  "seed_scale": 0.17,
+  "generations": 1,
+  "camera_pitch": 0.22,
+  "camera_yaw": 0.68,
+  "camera_focus_y_bias": -0.12,
+  "camera_fit_padding": 0.72,
+  "floor_clearance": 0.03,
+  "rules": [
+    {
+      "op": "lsystem_branch",
+      "selector": "index:0",
+      "params": {
+        "axiom": "FFF[+F+F][-F][&F+F]",
+        "rules": {
+          "F": "FF"
+        },
+        "lsystem_generations": 2,
+        "step_length": 0.085,
+        "step_taper": 0.976,
+        "start_radius": 0.048,
+        "angle_degrees": 20,
+        "tube_segments": 6,
+        "tube_rings": 4,
+        "max_branches": 56,
+        "branch_tag": "hydra_body",
+        "tip_tag": "hydra_tip"
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:hydra_tip",
+      "params": {
+        "distance": 0.024,
+        "scale": 1.32,
+        "top_tag": "hydra_head",
+        "side_tag": "hydra_head_side",
+        "min_area": 5e-05
+      }
+    }
+  ]
+}

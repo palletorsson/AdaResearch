@@ -1,0 +1,35 @@
+{
+  "id": "gg02_tree_metaball",
+  "notes": "The classic tree but marching-cubes smooth. Branches fuse at forks like molten metal.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.18
+  },
+  "iterations": 4,
+  "render_mode": "metaball",
+  "metaball_smoothness": 0.12,
+  "metaball_resolution": 96,
+  "materials": {
+    "default": [
+      0.45,
+      0.3,
+      0.2
+    ]
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.9,
+        "spread_deg": 35,
+        "radius_decay": 0.65
+      }
+    }
+  ]
+}

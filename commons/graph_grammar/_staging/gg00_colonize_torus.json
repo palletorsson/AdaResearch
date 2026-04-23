@@ -1,0 +1,43 @@
+{
+  "id": "gg00_colonize_torus",
+  "notes": "Attractors arranged in a torus \u00e2\u20ac\u201d ring/crown topology.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.15
+  },
+  "iterations": 1,
+  "color": [
+    0.5,
+    0.35,
+    0.2
+  ],
+  "rules": [
+    {
+      "op": "space_colonize",
+      "selector": "all",
+      "params": {
+        "iterations": 60,
+        "attractor_count": 250,
+        "cloud_shape": "torus",
+        "cloud_size": [
+          2.0,
+          2.0,
+          2.0
+        ],
+        "cloud_center": [
+          0,
+          1.8,
+          0
+        ],
+        "influence_radius": 1.0,
+        "kill_radius": 0.25,
+        "step": 0.13,
+        "radius_decay": 0.96
+      }
+    }
+  ]
+}

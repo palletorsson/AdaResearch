@@ -1,0 +1,32 @@
+{
+  "id": "mg_op13_arch_scalloped_gate",
+  "notes": "UNDERUSED-OPS PASS: arch seed with scalloped open boundaries and bead-caps along the rim. Intended as a decorative portal rather than a solid extrusion test.",
+  "seed": "arch",
+  "generations": 1,
+  "rules": [
+    {
+      "op": "edge_decorate",
+      "selector": "all",
+      "params": {
+        "shape": "cube",
+        "size": 0.06,
+        "spacing": 0.07,
+        "offset": 0.025,
+        "segments": 5,
+        "boundary_only": false
+      }
+    },
+    {
+      "op": "scallop",
+      "selector": "all",
+      "params": {
+        "lobes": 4,
+        "amplitude": 0.06,
+        "depth": 0.035,
+        "segments_per_lobe": 4,
+        "style": "pointed",
+        "direction": "outward"
+      }
+    }
+  ]
+}

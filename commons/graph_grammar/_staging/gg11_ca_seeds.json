@@ -1,0 +1,53 @@
+{
+  "id": "gg11_ca_seeds",
+  "notes": "Seeds rule (B2/S) \u00e2\u20ac\u201d explosive growth pattern prunes forest into quickly-filling clusters.",
+  "seed": {
+    "scatter": {
+      "count": 50,
+      "region_size": 2.5,
+      "min_dist": 0.22,
+      "shape": "disk",
+      "radius": 0.08,
+      "seed": 9
+    }
+  },
+  "iterations": 2,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_bright"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 2,
+        "length": 0.35,
+        "spread_deg": 30,
+        "radius_decay": 0.72
+      }
+    },
+    {
+      "op": "ca_prune",
+      "selector": "all",
+      "params": {
+        "rule": "seeds",
+        "iterations": 10,
+        "grid_size": 32,
+        "world_size": 5.0,
+        "seed_density": 0.15,
+        "seed": 5
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 10,
+        "length": 0.13,
+        "radius": 0.015,
+        "splay": 0.9
+      }
+    }
+  ]
+}

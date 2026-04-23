@@ -1,0 +1,65 @@
+{
+  "id": "gg15_modulor_nested_rooms",
+  "notes": "Room containing 3 smaller rooms (fold category OVERRIDE). Architectural nesting.",
+  "seed": {
+    "modulor": {
+      "level": 0,
+      "category": "room",
+      "pos": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "iterations": 1,
+  "render_mode": "boxes",
+  "camera_pitch": 0.7,
+  "camera_yaw": 0.65,
+  "rules": [
+    {
+      "op": "modulor_fold",
+      "selector": "tag:room",
+      "params": {
+        "count": 3,
+        "category_child": "table",
+        "spread_rad": 2.5,
+        "pitch": 1.3,
+        "distance_factor": 0.6
+      }
+    },
+    {
+      "op": "modulor_fold",
+      "selector": "tag:table",
+      "params": {
+        "count": 2,
+        "category_child": "shelf",
+        "spread_rad": 1.8,
+        "pitch": 1.2,
+        "distance_factor": 0.65
+      }
+    },
+    {
+      "op": "modulor_fold",
+      "selector": "tag:shelf",
+      "params": {
+        "count": 4,
+        "category_child": "book",
+        "spread_rad": 1.0,
+        "pitch": 1.1,
+        "distance_factor": 0.55
+      }
+    },
+    {
+      "op": "modulor_fold",
+      "selector": "tag:book",
+      "params": {
+        "count": 1,
+        "category_child": "pen",
+        "spread_rad": 0.3,
+        "pitch": 0.6,
+        "distance_factor": 0.4
+      }
+    }
+  ]
+}

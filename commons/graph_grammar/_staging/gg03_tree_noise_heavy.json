@@ -1,0 +1,39 @@
+{
+  "id": "gg03_tree_noise_heavy",
+  "notes": "Same tree with aggressive noise \u00e2\u20ac\u201d gnarled wind-beaten form.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.18
+  },
+  "iterations": 4,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.9,
+        "spread_deg": 35,
+        "radius_decay": 0.65
+      }
+    },
+    {
+      "op": "noise_displace",
+      "selector": "all",
+      "params": {
+        "amp": 0.35,
+        "freq": 0.9,
+        "seed": 17,
+        "preserve_root": true
+      }
+    }
+  ]
+}

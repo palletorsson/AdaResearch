@@ -1,0 +1,25 @@
+{
+  "id": "gen02_spikes_layered",
+  "notes": "Spikes then more spikes on the tips \u2014 crystal cluster.",
+  "seed": "icosahedron",
+  "seed_scale": 0.35,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "random_50",
+      "params": {
+        "distance": 0.4,
+        "scale": 0.5
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:extruded_top",
+      "params": {
+        "distance": 0.25,
+        "scale": 0.4
+      }
+    }
+  ]
+}

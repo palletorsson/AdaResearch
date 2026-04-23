@@ -1,0 +1,57 @@
+{
+  "id": "gg16_chandelier_brass_7bulb",
+  "notes": "Brass-toned chandelier with 7 bulbs \u00e2\u20ac\u201d richer, more ornate variant.",
+  "seed": {
+    "pos": [
+      0,
+      2.0,
+      0
+    ],
+    "radius": 0.015
+  },
+  "iterations": 1,
+  "render_mode": "chandelier",
+  "camera_pitch": 0.1,
+  "camera_yaw": 0.6,
+  "chandelier": {
+    "edge_radius": 0.014,
+    "edge_color": [
+      0.48,
+      0.35,
+      0.18
+    ],
+    "edge_metallic": 1.0,
+    "edge_roughness": 0.25,
+    "bulb_radius": 0.09,
+    "bulb_color": [
+      1.0,
+      0.95,
+      0.85
+    ],
+    "bulb_emission": 1.8,
+    "show_joints": true
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 1,
+        "length": 0.5,
+        "spread_deg": 5,
+        "radius_decay": 0.95,
+        "pitch": 3.14
+      }
+    },
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 7,
+        "length": 0.4,
+        "spread_deg": 70,
+        "radius_decay": 0.95
+      }
+    }
+  ]
+}

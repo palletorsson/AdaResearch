@@ -1,0 +1,38 @@
+{
+  "id": "gg09_figure_eight_vine",
+  "notes": "Chain displaced by the figure-eight knot curve \u00e2\u20ac\u201d complex looping structure.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.09
+  },
+  "iterations": 18,
+  "materials": {
+    "default": "bark"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 1,
+        "length": 0.25,
+        "spread_deg": 5,
+        "radius_decay": 0.95
+      }
+    },
+    {
+      "op": "parametric_displace",
+      "selector": "all",
+      "params": {
+        "curve": "figure_eight",
+        "t_source": "depth",
+        "t_scale": 0.4,
+        "amp": 0.5
+      }
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "id": "morph35_scifi_cryo_pod",
+  "family": "scifi_props",
+  "notes": "Sci-fi props pass: a cryo pod or med-bay sarcophagus with a thick plinth, raised bed, and one large lid slab.",
+  "camera_yaw": 0.82,
+  "camera_pitch": 0.28,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.42,
+      0.42,
+      0.86
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 6,
+  "rules": [
+    {
+      "id": "cryo_base",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.18,
+        "scale": 1.3
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "cryo_bed",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.12,
+        "scale": 0.84,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.08,
+          0.02
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "cryo_lid",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 1.12,
+        "scale": 0.86,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.88,
+          -0.16
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "cryo_foot_panel",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 1,
+        "rows": 3,
+        "select": "all",
+        "length": 0.12,
+        "scale": 0.58
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

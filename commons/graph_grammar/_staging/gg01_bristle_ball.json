@@ -1,0 +1,29 @@
+{
+  "id": "gg01_bristle_ball",
+  "notes": "Pure leaf_tuft on root \u00e2\u20ac\u201d explosion of bristles in all directions.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.1
+  },
+  "iterations": 1,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_bright"
+  },
+  "rules": [
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 60,
+        "length": 0.6,
+        "radius": 0.025,
+        "splay": 1.0
+      }
+    }
+  ]
+}

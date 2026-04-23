@@ -1,3 +1,13 @@
+# @identity
+# essence: a small grabbable colored cube — the physical pixel in a VR pattern editor; each cube IS one cell of color that the player places by hand onto the tile grid
+# desire: to make the act of programming a pattern embodied — the player doesn't click, they reach; the tile is made by hands, not cursor; the pattern is the player's gesture made permanent
+# critical_parameter: color_index — each cube carries one color from the puzzle's palette; placing it in a grid cell is a single bit of the pattern decision; the tile is the sum of all placements
+# triggers: dropped signal fires when player releases grip; _on_dropped() checks proximity to grid cells and snaps to the nearest valid slot; picked_up() lifts cube back to hand space
+# emerges: the constraint of physical placement — you can only hold one cube at a time, which makes pattern-making a sequence of decisions rather than a batch paint-fill; the slowness is the lesson
+# needs: VR grab and release [has — XRToolsPickable]; color switching [missing — cube color is fixed at spawn]; multi-cube grab [missing]; apply_grid_config [missing]
+# relationships: spawned by PatternTilePuzzle into a palette rack; snaps to PatternTilePuzzle.grid_cells; the placed pattern is saved to TraceData and read by ArrayCarpet; the three form one system
+# truth: a pixel is a decision — the pattern_tile_cube proves this by making you pick up each color and place it; the tile is not drawn, it is assembled
+
 @tool
 extends XRToolsPickable
 class_name PatternTileCube

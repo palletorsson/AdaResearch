@@ -1,0 +1,24 @@
+{
+  "id": "gen00_coral_random",
+  "notes": "Random 30% of faces get small bumps \u2014 coral-like.",
+  "seed": "sphere",
+  "seed_scale": 0.6,
+  "generations": 2,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "random_30",
+      "params": {
+        "amount": 0.15
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:inset_inner",
+      "params": {
+        "distance": 0.18,
+        "scale": 1.0
+      }
+    }
+  ]
+}

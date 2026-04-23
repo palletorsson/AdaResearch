@@ -1,0 +1,52 @@
+{
+  "id": "gg01_colonize_tree_shaded",
+  "notes": "Space colonization ellipsoid canopy with bark+plant shaders.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.18
+  },
+  "iterations": 1,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_bright"
+  },
+  "rules": [
+    {
+      "op": "space_colonize",
+      "selector": "all",
+      "params": {
+        "iterations": 50,
+        "attractor_count": 250,
+        "cloud_shape": "ellipsoid",
+        "cloud_size": [
+          1.6,
+          1.0,
+          1.6
+        ],
+        "cloud_center": [
+          0,
+          2.0,
+          0
+        ],
+        "influence_radius": 1.0,
+        "kill_radius": 0.22,
+        "step": 0.13,
+        "radius_decay": 0.97
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 8,
+        "length": 0.15,
+        "radius": 0.02,
+        "splay": 0.9
+      }
+    }
+  ]
+}

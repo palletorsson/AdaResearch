@@ -1,0 +1,24 @@
+{
+  "id": "rd15_mu_worm_heightmap",
+  "F": 0.046,
+  "K": 0.065,
+  "grid_size": 112,
+  "iterations": 5600,
+  "seed": 47,
+  "render_mode": "heightmap",
+  "height_amp": 0.8,
+  "color_lo": [
+    0.14,
+    0.16,
+    0.2
+  ],
+  "color_hi": [
+    0.9,
+    0.68,
+    0.42
+  ],
+  "camera_yaw": 0.46,
+  "camera_pitch": 0.58,
+  "layout": "rd_field",
+  "notes": "\u00ce\u00bc-class worm regime (F=0.046, K=0.065): stripes elongate from their ends and reorganize into disconnected lane systems."
+}

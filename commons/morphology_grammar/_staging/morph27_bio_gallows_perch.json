@@ -1,0 +1,129 @@
+{
+  "id": "morph27_bio_gallows_perch",
+  "family": "bio_furniture",
+  "notes": "Extreme gallows perch: a tiny operative seat under a very large overhanging arm and a severe rear shell, more device than chair.",
+  "camera_yaw": 0.72,
+  "camera_pitch": 0.36,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.86,
+      0.82,
+      0.7
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 7,
+  "rules": [
+    {
+      "id": "gallows_steps",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 1,
+        "rows": 4,
+        "select": "all",
+        "length": 0.18,
+        "scale": 0.62
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "gallows_shell",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 1.02,
+        "scale": 0.72,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.92,
+          -0.12
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "gallows_arm",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 1.42,
+        "scale": 0.08,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.62,
+          0.82,
+          0.28
+        ]
+      },
+      "child_role": "support",
+      "budget_factor": 0.28
+    },
+    {
+      "id": "gallows_arm_hook",
+      "when": {
+        "role": "support",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.1
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.44,
+        "scale": 0.16,
+        "normal_bias": 1.0,
+        "world_bias": [
+          -0.26,
+          -0.22,
+          -0.1
+        ]
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "gallows_side_shell",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.42,
+        "scale": 0.48,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.2,
+          0.14
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

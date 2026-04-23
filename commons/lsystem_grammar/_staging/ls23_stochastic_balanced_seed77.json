@@ -1,0 +1,46 @@
+{
+  "id": "ls23_stochastic_balanced_seed77",
+  "axiom": "F",
+  "rules": {
+    "F": [
+      [
+        "F[+F]F[-F]F",
+        0.34
+      ],
+      [
+        "F[+F]F",
+        0.33
+      ],
+      [
+        "F[-F]F",
+        0.33
+      ]
+    ]
+  },
+  "iterations": 4,
+  "seed": 77,
+  "angle_deg": 24,
+  "step_len": 0.05,
+  "step_shrink": 0.75,
+  "interpretation": "tubes",
+  "base_width": 0.014,
+  "width_shrink": 0.78,
+  "tube_sides": 6,
+  "color_trunk": [
+    0.36,
+    0.23,
+    0.12
+  ],
+  "color_tip": [
+    0.3,
+    0.72,
+    0.28
+  ],
+  "camera_yaw": 0.3,
+  "camera_pitch": 0.18,
+  "layout": "tree",
+  "dna_connections": [
+    "mesh_grammar"
+  ],
+  "notes": "Same stochastic grammar as ls22, but a different seed to produce a second specimen of the same notional species."
+}

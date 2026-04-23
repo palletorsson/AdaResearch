@@ -1,0 +1,22 @@
+{
+  "id": "mg_prim08_diamond_inset",
+  "notes": "PRIMITIVE-AS-SEED: Diamond with inset + bulge. Jeweled seed gets recessed facets and bulged surface \u2014 reads as cut gem.",
+  "seed": "diamond",
+  "generations": 1,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "all",
+      "params": {
+        "amount": 0.12
+      }
+    },
+    {
+      "op": "bulge",
+      "selector": "all",
+      "params": {
+        "amount": 0.03
+      }
+    }
+  ]
+}

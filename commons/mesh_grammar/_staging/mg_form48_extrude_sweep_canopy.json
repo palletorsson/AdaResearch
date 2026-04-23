@@ -1,0 +1,59 @@
+{
+  "id": "mg_form48_extrude_sweep_canopy",
+  "notes": "EXTRUDE PASS: cube canopy is built almost entirely by repeated outward pulls. The point is maximum overhang from stacked extrusion events.",
+  "seed": "cube",
+  "seed_scale": 0.5,
+  "generations": 2,
+  "camera_pitch": 0.34,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "up",
+      "params": {
+        "amount": 0.14,
+        "inner_tag": "canopy_core",
+        "border_tag": "canopy_rim"
+      }
+    },
+    {
+      "op": "rotate",
+      "selector": "tag:canopy_core",
+      "params": {
+        "angle_degrees": 18
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:canopy_core",
+      "params": {
+        "distance": 0.14,
+        "scale": 1.06,
+        "top_tag": "canopy_mid",
+        "side_tag": "canopy_mid_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:canopy_mid",
+      "params": {
+        "distance": 0.14,
+        "scale": 1.04,
+        "top_tag": "canopy_outer",
+        "side_tag": "canopy_outer_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:canopy_outer",
+      "params": {
+        "distance": 0.1,
+        "scale": 1.02,
+        "top_tag": "canopy_tip",
+        "side_tag": "canopy_tip_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

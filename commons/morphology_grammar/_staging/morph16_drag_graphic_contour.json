@@ -1,0 +1,163 @@
+{
+  "id": "morph16_drag_graphic_contour",
+  "family": "drag_club_kid",
+  "notes": "Reference-driven contour suit: platform legs, a tight central body, angular hip fins, and a rigid shoulder line push the silhouette into graphic club territory.",
+  "camera_yaw": 0.94,
+  "camera_pitch": 0.33,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.74,
+      1.26,
+      0.58
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "contour_platforms",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2,
+        "rows": 2,
+        "select": "corners",
+        "length": 0.86,
+        "scale": 0.28
+      },
+      "child_role": "heel",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "contour_hips",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.48,
+        "scale": 0.2,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          -0.14,
+          0.24
+        ]
+      },
+      "child_role": "garment",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "contour_shoulders",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.56,
+        "scale": 0.18,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.4,
+          0.08
+        ]
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.34
+    },
+    {
+      "id": "contour_spines",
+      "when": {
+        "role": "ornament",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.1
+      },
+      "selector": "up",
+      "op": "cluster_cap",
+      "params": {
+        "count": 4,
+        "length": 0.18,
+        "scale": 1.2
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "contour_corset",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.16,
+        "scale": 0.62,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.1,
+          0.08
+        ]
+      },
+      "child_role": "garment",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "contour_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.18,
+        "scale": 0.48
+      },
+      "child_role": "hair",
+      "budget_factor": 0.38
+    },
+    {
+      "id": "contour_headpiece",
+      "when": {
+        "role": "hair",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.12
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.28,
+        "scale": 0.36,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.26,
+          0.42,
+          0.0
+        ]
+      },
+      "child_role": "ornament",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

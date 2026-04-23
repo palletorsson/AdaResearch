@@ -1,0 +1,17 @@
+{
+  "id": "gen00_cellular",
+  "notes": "Cellular subdivision across surface.",
+  "seed": "cube",
+  "seed_scale": 0.6,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "cellular",
+      "selector": "all",
+      "params": {
+        "density": 0.5,
+        "depth": 0.12
+      }
+    }
+  ]
+}

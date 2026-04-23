@@ -1,0 +1,55 @@
+{
+  "id": "gm04_pressed_onto_sphere",
+  "topology": "glass_blow",
+  "radius": 0.7,
+  "rings": 14,
+  "segments": 22,
+  "pin_top_fraction": 0.1,
+  "preinflate": 0.2,
+  "stiffness": 0.4,
+  "damping": 0.993,
+  "gravity": [
+    0,
+    -9.8,
+    0
+  ],
+  "floor_y": -3.5,
+  "constraint_passes": 5,
+  "steps": 300,
+  "origin": [
+    0,
+    2.0,
+    0
+  ],
+  "mould": {
+    "type": "sphere",
+    "mode": "exclude",
+    "center": [
+      0,
+      0.9,
+      0
+    ],
+    "radius": 0.4
+  },
+  "camera_yaw": 0.4,
+  "camera_pitch": 0.12,
+  "render": {
+    "color": [
+      0.88,
+      0.65,
+      0.5,
+      0.9
+    ],
+    "roughness": 0.4,
+    "particle_radius": 0.018,
+    "show_wires": true,
+    "wire_color": [
+      0.3,
+      0.2,
+      0.12
+    ],
+    "double_sided": true
+  },
+  "layout": "frozen_form",
+  "notes": "GLASS MEETS EXTERNAL FORM: hot glass sagging under gravity meets a solid sphere below (exclude mode \u2014 glass can't pass through the sphere). The glass drapes OVER the obstacle, taking its shape. Like fabric over a sculpture, or pottery slumped onto a form. The final vessel wraps around the obstruction."
+}

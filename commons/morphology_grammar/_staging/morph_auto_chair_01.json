@@ -1,0 +1,58 @@
+{
+  "id": "morph_auto_chair_01",
+  "family": "chair",
+  "notes": "Auto-generated chair candidate.",
+  "camera_yaw": 0.841,
+  "camera_pitch": 0.43,
+  "seed": {
+    "type": "flat_box",
+    "size": [
+      1.274,
+      0.218,
+      0.872
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 4,
+  "rules": [
+    {
+      "id": "seat_to_legs",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.8
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2,
+        "rows": 2,
+        "select": "corners",
+        "length": 0.761,
+        "scale": 0.196
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.58
+    },
+    {
+      "id": "seat_to_backrest",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.8
+      },
+      "selector": "up",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 1,
+        "rows": 2,
+        "select": "back_row",
+        "length": 0.803,
+        "scale": 0.905
+      },
+      "child_role": "wall",
+      "budget_factor": 0.42
+    }
+  ]
+}

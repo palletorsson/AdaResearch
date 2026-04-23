@@ -1,0 +1,152 @@
+{
+  "id": "morph_auto_mixed_top02",
+  "family": "mixed_forms",
+  "notes": "Auto-researched mixed-family variant: roles body, cushion, support, wall, 197 total volumes, bbox 1.90\u00d71.41\u00d71.86.",
+  "camera_yaw": 0.774,
+  "camera_pitch": 0.322,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.94,
+      0.87,
+      0.844
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 6,
+  "rules": [
+    {
+      "id": "mixed_06_01_deco_back",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.982,
+        "scale": 0.495,
+        "normal_bias": 0.996,
+        "world_bias": [
+          -0.031,
+          0.95,
+          -0.067
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.062
+    },
+    {
+      "id": "mixed_06_02_daybed_guard",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.536,
+        "scale": 0.266,
+        "normal_bias": 1.125,
+        "world_bias": [
+          0.093,
+          0.284,
+          0.161
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "mixed_06_03_daybed_plinth",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.161,
+        "scale": 1.306
+      },
+      "child_role": "support",
+      "budget_factor": 0.044
+    },
+    {
+      "id": "mixed_06_04_memphis_base",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.137,
+        "scale": 0.953
+      },
+      "child_role": "support",
+      "budget_factor": 0.082
+    },
+    {
+      "id": "mixed_06_05_memphis_wing_left",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.381,
+        "scale": 0.273,
+        "normal_bias": 1.003,
+        "world_bias": [
+          -0.076,
+          0.193,
+          0.128
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "mixed_transform_01_inset_panel",
+      "when": {
+        "role": "body",
+        "max_depth": 1,
+        "min_budget": 0.27
+      },
+      "selector": "front",
+      "op": "inset_panel",
+      "params": {
+        "scale": 0.678,
+        "depth": 0.101
+      },
+      "child_role": "body",
+      "budget_factor": 0.645
+    },
+    {
+      "id": "mixed_transform_02_move_panel",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.23
+      },
+      "selector": "up",
+      "op": "move_panel",
+      "params": {
+        "normal_offset": 0.016,
+        "tangent_offset": -0.147,
+        "bitangent_offset": 0.151
+      },
+      "child_role": "body",
+      "budget_factor": 0.274
+    }
+  ],
+  "render_mode": "wireframe"
+}

@@ -1,0 +1,54 @@
+{
+  "id": "gg14_julia_forest",
+  "notes": "Julia set (c = -0.7 + 0.27i) \u00e2\u20ac\u201d dragon-like fractal shape in the forest.",
+  "seed": {
+    "scatter": {
+      "count": 200,
+      "region_size": 2.0,
+      "min_dist": 0.12,
+      "shape": "disk",
+      "radius": 0.06,
+      "seed": 7
+    }
+  },
+  "iterations": 2,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_bright"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 2,
+        "length": 0.28,
+        "spread_deg": 25,
+        "radius_decay": 0.75
+      }
+    },
+    {
+      "op": "fractal_prune",
+      "selector": "all",
+      "params": {
+        "fractal": "julia",
+        "julia_c": [
+          -0.7,
+          0.27
+        ],
+        "max_iter": 30,
+        "scale": 1.3
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 8,
+        "length": 0.1,
+        "radius": 0.013,
+        "splay": 0.9
+      }
+    }
+  ]
+}

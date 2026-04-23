@@ -1,0 +1,59 @@
+{
+  "id": "gg03_dense_chaos",
+  "notes": "Dense branching + heavy noise on positions and radii \u00e2\u20ac\u201d bramble.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.18
+  },
+  "iterations": 3,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_red"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 5,
+        "length": 0.45,
+        "spread_deg": 55,
+        "radius_decay": 0.6,
+        "jitter": 0.4
+      }
+    },
+    {
+      "op": "noise_displace",
+      "selector": "all",
+      "params": {
+        "amp": 0.25,
+        "freq": 1.5,
+        "seed": 88
+      }
+    },
+    {
+      "op": "noise_radii",
+      "selector": "all",
+      "params": {
+        "amp": 0.5,
+        "freq": 2.8,
+        "seed": 99,
+        "floor": 0.3
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 10,
+        "length": 0.15,
+        "radius": 0.015,
+        "splay": 0.9
+      }
+    }
+  ]
+}

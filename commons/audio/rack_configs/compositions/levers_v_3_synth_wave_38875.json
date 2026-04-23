@@ -1,0 +1,48 @@
+{
+  "rack_info": {
+    "name": "3x LEVER",
+    "description": "3x LEVER — auto-generated UVAC composition. sound_type=synth_wave, composition_type=levers_v.",
+    "version": "auto-1",
+    "sound_type": "synth_wave",
+    "auto_generated": true,
+    "composition_type": "levers_v",
+    "composition_count": 3
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "lv_0",
+      "lv_1",
+      "lv_2"
+    ]
+  ],
+  "control_definitions": {
+    "lv_0": {
+      "type": "lever",
+      "label": "PAN",
+      "parameter": "pan",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    "lv_1": {
+      "type": "lever",
+      "label": "RES",
+      "parameter": "reso",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.3
+    },
+    "lv_2": {
+      "type": "lever",
+      "label": "TONE",
+      "parameter": "tone",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    }
+  }
+}

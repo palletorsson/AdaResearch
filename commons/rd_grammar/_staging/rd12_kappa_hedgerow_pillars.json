@@ -1,0 +1,24 @@
+{
+  "id": "rd12_kappa_hedgerow_pillars",
+  "F": 0.05,
+  "K": 0.063,
+  "grid_size": 80,
+  "iterations": 5200,
+  "seed": 37,
+  "render_mode": "pillars",
+  "threshold": 0.2,
+  "color_lo": [
+    0.18,
+    0.18,
+    0.16
+  ],
+  "color_hi": [
+    0.84,
+    0.74,
+    0.46
+  ],
+  "camera_yaw": 0.52,
+  "camera_pitch": 0.42,
+  "layout": "rd_pillars",
+  "notes": "\u00ce\u00ba-class hedgerow maze (F=0.050, K=0.063): width-wise growing stripes and coral-like irregular shapes, rendered as a low architectural pillar field."
+}

@@ -1,0 +1,17 @@
+{
+  "id": "gen02_petals_tall",
+  "notes": "Long thin petals on all faces \u2014 grass burst.",
+  "seed": "icosahedron",
+  "seed_scale": 0.3,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "petal_splay",
+      "selector": "all",
+      "params": {
+        "splay": 0.15,
+        "length": 0.9
+      }
+    }
+  ]
+}

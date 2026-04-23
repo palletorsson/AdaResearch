@@ -24,10 +24,50 @@ var _current_idx: int = 0
 var _frame_count: int = 0
 var _uvac_instance: Node3D = null
 
+# When --config=<res://path.json> is passed as a user arg, the script
+# renders ONLY that config and writes one PNG. Otherwise it batches the
+# hardcoded RACK_CONFIGS list. This lets module_research.py drive
+# per-config rendering of auto-generated racks under rack_configs/auto/.
+var _single_config_path: String = ""
+var _single_config_name: String = ""
+var _single_out_abs: String = ""
+
 
 func _init():
-	# Ensure output directory
-	DirAccess.make_dir_recursive_absolute(_output_dir)
+	_parse_args()
+	# Ensure output directory — globalize so user:// works on Windows
+	var abs_dir: String = _output_dir
+	if abs_dir.begins_with("user://"):
+		abs_dir = ProjectSettings.globalize_path(_output_dir)
+	DirAccess.make_dir_recursive_absolute(abs_dir)
+
+
+func _parse_args() -> void:
+	for raw in OS.get_cmdline_user_args():
+		var arg := String(raw).strip_edges()
+		if not arg.begins_with("--"):
+			continue
+		var eq := arg.find("=")
+		if eq <= 2:
+			continue
+		var key := arg.substr(2, eq - 2)
+		var value := arg.substr(eq + 1).strip_edges()
+		match key:
+			"config":
+				# Accept res:// path OR bare config name
+				_single_config_path = value
+				if _single_config_path.begins_with("res://"):
+					_single_config_name = _single_config_path.get_file().get_basename()
+				else:
+					_single_config_name = value
+			"out":
+				# When --out is a specific .png, honor it verbatim; else treat as dir
+				if value.ends_with(".png"):
+					_single_out_abs = value
+					if _single_out_abs.begins_with("user://"):
+						_single_out_abs = ProjectSettings.globalize_path(_single_out_abs)
+				else:
+					_output_dir = value if value.ends_with("/") else value + "/"
 
 
 func _process(_delta):
@@ -37,6 +77,18 @@ func _process(_delta):
 	if _frame_count < 5:
 		return
 
+	# Single-config mode: render one and quit
+	if not _single_config_path.is_empty():
+		if _frame_count == 5:
+			_setup_viewport()
+			_load_specific_config(_single_config_path, _single_config_name)
+			return
+		if _frame_count == 20:
+			_capture_single()
+			quit()
+		return
+
+	# Batch mode — original behavior
 	if _current_idx >= RACK_CONFIGS.size():
 		print("capture_rack_configs: Done - %d configs captured to %s" % [RACK_CONFIGS.size(), _output_dir])
 		quit()
@@ -53,6 +105,38 @@ func _process(_delta):
 		_current_idx += 1
 		if _current_idx < RACK_CONFIGS.size():
 			_load_next_config()
+
+
+func _load_specific_config(config_path: String, config_name: String) -> void:
+	if _uvac_instance:
+		_uvac_instance.queue_free()
+		_uvac_instance = null
+	print("capture_rack_configs: Loading single %s..." % config_path)
+	_uvac_instance = UVAC_SCENE.instantiate()
+	_uvac_instance.rack_config_path = config_path
+	_viewport.add_child(_uvac_instance)
+	_camera.transform.origin = Vector3(0, 0, 1.0)
+
+
+func _capture_single() -> void:
+	var img = _viewport.get_texture().get_image()
+	var out_path: String = _single_out_abs
+	if out_path.is_empty():
+		# Fall back to output_dir + name.png
+		var abs_dir: String = _output_dir
+		if abs_dir.begins_with("user://"):
+			abs_dir = ProjectSettings.globalize_path(_output_dir)
+		if not abs_dir.ends_with("/"):
+			abs_dir += "/"
+		out_path = abs_dir + _single_config_name + ".png"
+	# Ensure parent dir exists
+	var parent := out_path.get_base_dir()
+	DirAccess.make_dir_recursive_absolute(parent)
+	var err := img.save_png(out_path)
+	if err == OK:
+		print("capture_rack_configs: OK %s -> %s" % [_single_config_name, out_path])
+	else:
+		push_warning("capture_rack_configs: save failed err=%d for %s" % [err, out_path])
 
 
 func _setup_viewport():

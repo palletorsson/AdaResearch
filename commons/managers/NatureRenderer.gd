@@ -44,6 +44,15 @@ func _ready() -> void:
 
 
 func _deferred_init() -> void:
+	# Capture-mode guard: when `--no-bridges` is passed, skip all ecosystem
+	# hookup, particle allocation, and living-ground init. These need a
+	# populated EcosystemManager + WorldEnvironment that the capture
+	# scaffold doesn't provide, and the resulting null derefs were
+	# blocking glass-rack / interactable-scenes / big-pipe renders.
+	if "--no-bridges" in OS.get_cmdline_user_args() or "--no-bridges" in OS.get_cmdline_args():
+		print("NatureRenderer: disabled by --no-bridges")
+		return
+
 	_eco = get_node_or_null("/root/EcosystemManager")
 	if _eco == null:
 		push_warning("NatureRenderer: EcosystemManager not found — rendering disabled.")

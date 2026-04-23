@@ -1,6 +1,16 @@
 extends XRToolsPickable
 class_name GrabLine
 
+# @identity
+# essence: XRToolsPickable cylinder with a second pickable tip sphere — grab the handle to move the line, grab the glowing tip to stretch or shrink it; length label updates live
+# desire: to make the learner feel that a line is not a fixed thing but an interval — two endpoints with a distance between them, and that distance is something you can change with your hands
+# critical_parameter: min_length/max_length (0.05–5.0m) — the range defines how abstract or concrete the line can be; at 0.05m it's a point, at 5m it spans a room
+# triggers: _on_tip_picked_up begins resize mode; _process checks tip grab offset and updates line_length; length label updates every frame; dropped ends resize mode
+# emerges: the live length label creates a feedback loop — you feel the stretch and read the number, binding proprioception to metric distance
+# needs: VR grab [has]; resize via tip grab [has]; length display [has]; color config [missing — hardcoded magenta]; apply_grid_config [missing]
+# relationships: extends XRToolsPickable for VR physics; used in parallel_line_puzzle as the draggable component; simpler than line (which connects two independent spheres)
+# truth: a line is defined by its endpoints — every other property (length, direction, slope) is derived; grab_line makes this literal by putting both endpoints in your hands
+
 ## Grabbable stick with draggable tip for resizing
 ## Grab the handle to move, grab the tip sphere to resize
 

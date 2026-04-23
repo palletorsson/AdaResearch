@@ -1,0 +1,36 @@
+{
+  "rack_info": {
+    "name": "3x METER",
+    "description": "3x METER — auto-generated UVAC composition. sound_type=heartbeat, composition_type=meters_v.",
+    "version": "auto-1",
+    "sound_type": "heartbeat",
+    "auto_generated": true,
+    "composition_type": "meters_v",
+    "composition_count": 3
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "mt_0",
+      "mt_1",
+      "mt_2"
+    ]
+  ],
+  "control_definitions": {
+    "mt_0": {
+      "type": "mtr",
+      "label": "METER 1"
+    },
+    "mt_1": {
+      "type": "mtr",
+      "label": "METER 2"
+    },
+    "mt_2": {
+      "type": "mtr",
+      "label": "METER 3"
+    }
+  }
+}

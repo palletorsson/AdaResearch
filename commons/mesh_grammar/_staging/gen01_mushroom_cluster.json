@@ -1,0 +1,41 @@
+{
+  "id": "gen01_mushroom_cluster",
+  "notes": "Four-step cascade \u2014 cluster of caps.",
+  "seed": "cube",
+  "seed_scale": 0.3,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.4,
+        "scale": 1.0
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:extruded_top",
+      "params": {
+        "distance": 0.08,
+        "scale": 1.8
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:extruded_top",
+      "params": {
+        "distance": 0.3,
+        "scale": 0.3
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:extruded_top",
+      "params": {
+        "distance": 0.08,
+        "scale": 2.2
+      }
+    }
+  ]
+}

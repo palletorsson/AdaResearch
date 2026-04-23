@@ -1,0 +1,71 @@
+{
+  "id": "morph_auto_hand_chain_04",
+  "family": "hand_chain",
+  "notes": "Auto-generated hand-chain candidate.",
+  "camera_yaw": 0.797,
+  "camera_pitch": 0.385,
+  "seed": {
+    "type": "flat_box",
+    "size": [
+      1.676,
+      0.28,
+      0.887
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "palm_to_fingers_chain",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.75
+      },
+      "selector": "front",
+      "op": "finger_array",
+      "params": {
+        "count": 6,
+        "length": 0.458,
+        "fill": 0.787,
+        "thickness_scale": 1.0
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.68
+    },
+    {
+      "id": "finger_to_phalange",
+      "when": {
+        "role": "trunk",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.28
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.268,
+        "scale": 0.759
+      },
+      "child_role": "tip",
+      "budget_factor": 0.36
+    },
+    {
+      "id": "palm_to_wrist_chain",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.75
+      },
+      "selector": "back",
+      "op": "extrude",
+      "params": {
+        "length": 0.205,
+        "scale": 0.439
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    }
+  ]
+}

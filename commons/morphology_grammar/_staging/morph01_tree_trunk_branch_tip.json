@@ -1,0 +1,74 @@
+{
+  "id": "morph01_tree_trunk_branch_tip",
+  "family": "tree",
+  "notes": "Body cube extrudes into a trunk, fans into three branches, then caps tips with clustered leaves.",
+  "camera_yaw": 0.62,
+  "camera_pitch": 0.44,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.34,
+      0.16,
+      0.34
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "body_to_trunk",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.8
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 1.15,
+        "scale": 0.52
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.82
+    },
+    {
+      "id": "trunk_to_branch_fan",
+      "when": {
+        "role": "trunk",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.45
+      },
+      "selector": "up",
+      "op": "subdivide_extrude_fan",
+      "params": {
+        "count": 3,
+        "length": 0.72,
+        "scale": 0.52,
+        "splay_deg": 24,
+        "lateral_spread": 0.65
+      },
+      "child_role": "branch",
+      "budget_factor": 0.62
+    },
+    {
+      "id": "branch_to_tip",
+      "when": {
+        "role": "branch",
+        "min_depth": 2,
+        "max_depth": 2,
+        "min_budget": 0.2
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.34,
+        "scale": 0.7
+      },
+      "child_role": "tip",
+      "budget_factor": 0.38
+    }
+  ],
+  "render_mode": "wireframe"
+}

@@ -508,53 +508,10 @@ func _on_utility_activated(utility_type: String, position: Vector3, data: Dictio
 # SEQUENCE MANAGEMENT HELPERS
 
 func _is_sequence_name(name: String) -> bool:
-	"""Check if the name is a sequence name rather than a map name"""
-	var known_sequences = [
-		"primitives",
-		"transformation",
-		"color",
-		"tests",
-		"array_tutorial",
-		"meshestextures",
-		"randomness",
-		"wavefunctions",
-		"vectors",
-		"fractals",
-		"cellularautomata",
-		"joints",
-		"noise",
-		"forces",
-		"particles",
-		"oscillation",
-		"physics",
-		"proceduralaudio",
-		"physicssimulation",
-		"softbodies",
-		"recursiveemergence",
-		"lsystems",
-		"swarmintelligence",
-		"patterngeneration",
-		"mosaicanalysis",
-		"proceduralgeneration",
-		"searchpathfinding",
-		"topology",
-		"graphtheory",
-		"computationalgeometry",
-		"machinelearning",
-		"criticalalgorithms",
-		"speculativecomputation",
-		"resourcemanagement",
-		"advancedlaboratory",
-		"qfeplaboratory",
-		"testmaps",
-		"grammar_systems",
-		"spatial_partitioning",
-		"constraint_solvers",
-		"isosurfaces",
-		"higher_dimensions",
-		"morphogenesis"
-	]
-	return name in known_sequences
+	"""Check if the name is a sequence name rather than a map name.
+	Delegates to GridSystem's dynamic discovery (scans commons/maps/sequences/*.json)
+	so new sequences are auto-recognized without code changes."""
+	return super._is_sequence_name(name)
 
 func _get_sequence_for_map(map_name: String) -> String:
 	"""Determine which sequence a map belongs to based on map_sequences.json"""

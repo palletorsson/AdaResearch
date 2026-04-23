@@ -1,0 +1,24 @@
+{
+  "id": "gen00_tower_plain",
+  "notes": "Inset-then-extrude the top face only. Stacked tower.",
+  "seed": "cube",
+  "seed_scale": 0.6,
+  "generations": 4,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "up",
+      "params": {
+        "amount": 0.2
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.4,
+        "scale": 1.0
+      }
+    }
+  ]
+}

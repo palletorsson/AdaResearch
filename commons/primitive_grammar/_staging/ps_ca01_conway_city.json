@@ -1,0 +1,20 @@
+{
+  "id": "ps_ca01_conway_city",
+  "layout": "ca_scatter",
+  "ca": {
+    "rule": "conway",
+    "grid_size": 18,
+    "iterations": 10,
+    "density": 0.45,
+    "seed": 3,
+    "cell_size": 0.08
+  },
+  "shape": "cube",
+  "palette": "mono",
+  "primitive_size": 0.06,
+  "height_from_neighbors": true,
+  "height_scale": 0.8,
+  "camera_yaw": 0.6,
+  "camera_pitch": 0.4,
+  "notes": "DNA BRIDGE: Conway Life as a monochrome city. Cubes at alive cells, height scaled by live-neighbor count \u2014 clusters become towers, isolated cells become squat blocks. Emergent skyline."
+}

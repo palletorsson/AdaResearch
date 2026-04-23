@@ -1,0 +1,44 @@
+{
+  "id": "gg03_rhizome_noise",
+  "notes": "Horizontal rhizome + XZ-only displacement \u00e2\u20ac\u201d wild meander along the ground.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.12
+  },
+  "iterations": 4,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 2,
+        "length": 0.8,
+        "spread_deg": 85,
+        "radius_decay": 0.82,
+        "jitter": 0.5
+      }
+    },
+    {
+      "op": "noise_displace",
+      "selector": "all",
+      "params": {
+        "amp": 0.4,
+        "freq": 0.6,
+        "seed": 9,
+        "axis_mask": [
+          1.0,
+          0.1,
+          1.0
+        ]
+      }
+    }
+  ]
+}

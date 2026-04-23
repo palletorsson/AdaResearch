@@ -1,0 +1,38 @@
+{
+  "id": "gg09_seashell_vine",
+  "notes": "Seashell logarithmic spiral \u00e2\u20ac\u201d tightens as it grows, organic fossil shape.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.1
+  },
+  "iterations": 18,
+  "materials": {
+    "default": "bark"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 1,
+        "length": 0.22,
+        "spread_deg": 5,
+        "radius_decay": 0.94
+      }
+    },
+    {
+      "op": "parametric_displace",
+      "selector": "all",
+      "params": {
+        "curve": "seashell",
+        "t_source": "depth",
+        "t_scale": 0.4,
+        "amp": 1.2
+      }
+    }
+  ]
+}

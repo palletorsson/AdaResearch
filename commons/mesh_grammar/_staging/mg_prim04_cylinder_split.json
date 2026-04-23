@@ -1,0 +1,22 @@
+{
+  "id": "mg_prim04_cylinder_split",
+  "notes": "PRIMITIVE-AS-SEED: Cylinder seed + split_face on up-facing caps + extrude. The top and bottom discs fracture into tiled facets.",
+  "seed": "cylinder",
+  "seed_scale": 0.6,
+  "generations": 2,
+  "rules": [
+    {
+      "op": "split",
+      "selector": "up",
+      "params": {}
+    },
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.05,
+        "scale": 0.85
+      }
+    }
+  ]
+}

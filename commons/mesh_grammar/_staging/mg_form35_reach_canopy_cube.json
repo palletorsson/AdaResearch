@@ -1,0 +1,48 @@
+{
+  "id": "mg_form35_reach_canopy_cube",
+  "notes": "REACH PASS: top plane is inset, enlarged, then pushed farther out in two stages. The goal is a real overhang/canopy throw rather than a compact roof event.",
+  "seed": "cube",
+  "seed_scale": 0.58,
+  "generations": 2,
+  "camera_pitch": 0.32,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "up",
+      "params": {
+        "amount": 0.16,
+        "inner_tag": "reach_core",
+        "border_tag": "reach_rim"
+      }
+    },
+    {
+      "op": "scale",
+      "selector": "tag:reach_core",
+      "params": {
+        "scale": 1.18
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:reach_core",
+      "params": {
+        "distance": 0.14,
+        "scale": 1.05,
+        "top_tag": "reach_top",
+        "side_tag": "reach_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:reach_top",
+      "params": {
+        "distance": 0.12,
+        "scale": 1.02,
+        "top_tag": "reach_tip",
+        "side_tag": "reach_tip_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

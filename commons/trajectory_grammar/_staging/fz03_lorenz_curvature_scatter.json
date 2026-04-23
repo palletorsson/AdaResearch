@@ -1,0 +1,36 @@
+{
+  "id": "fz03_lorenz_curvature_scatter",
+  "force": "lorenz_attractor",
+  "params": {
+    "sigma": 10.0,
+    "rho": 28.0,
+    "beta": 2.6667,
+    "scale": 0.04
+  },
+  "initial": {
+    "pos": [
+      0.1,
+      0.0,
+      0.0
+    ]
+  },
+  "duration": 40.0,
+  "dt": 0.005,
+  "sample_pattern": "curvature",
+  "sample_count": 180,
+  "interpretation": "particles",
+  "particle_radius": 0.025,
+  "color_start": [
+    0.2,
+    0.55,
+    0.95
+  ],
+  "color_end": [
+    0.95,
+    0.4,
+    0.5
+  ],
+  "camera_yaw": 0.6,
+  "camera_pitch": 0.3,
+  "notes": "Lorenz attractor sampled where curvature is HIGH. Points cluster at the wing-switching transitions \u2014 the chaos 'events' get more samples than the smooth orbits. The scatter reveals where the dynamics become interesting."
+}

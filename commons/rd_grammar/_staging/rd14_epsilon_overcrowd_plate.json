@@ -1,0 +1,24 @@
+{
+  "id": "rd14_epsilon_overcrowd_plate",
+  "F": 0.022,
+  "K": 0.059,
+  "grid_size": 128,
+  "iterations": 5600,
+  "seed": 43,
+  "render_mode": "plate",
+  "color_lo": [
+    0.08,
+    0.1,
+    0.16
+  ],
+  "color_hi": [
+    0.98,
+    0.72,
+    0.44
+  ],
+  "camera_yaw": 0.001,
+  "camera_pitch": 1.3,
+  "world_size": 2.05,
+  "layout": "rd_plate",
+  "notes": "\u00ce\u00b5-class overcrowding field (F=0.022, K=0.059): unstable spots, ring growth, die-outs, and refilling make a more turbulent companion to the steadier \u00ce\u00bb-class outputs."
+}

@@ -1,0 +1,39 @@
+{
+  "id": "gg01_autumn_tree",
+  "notes": "Tree with red-orange foliage.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.2
+  },
+  "iterations": 3,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_red"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.85,
+        "spread_deg": 40,
+        "radius_decay": 0.65
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 16,
+        "length": 0.22,
+        "radius": 0.02,
+        "splay": 0.8
+      }
+    }
+  ]
+}

@@ -2,6 +2,16 @@
 extends Node3D
 class_name GlassPlanes25D
 
+# @identity
+# essence: N transparent planes stacked along Z with equal spacing (total_depth/N) — each gets a noise texture offset by plane_index * noise_offset_per_plane, creating a parallax cloud effect as the learner moves
+# desire: to show how discrete stacking approximates continuous volume — 10 flat panes look like fog, 3 look like layers; the number of planes IS the resolution of the approximation
+# critical_parameter: plane_count (3–24) — at 3 you see individual planes, at 24 the eye integrates them into depth; this is the Shannon sampling theorem made visible in transparency
+# triggers: _rebuild() clears all planes and reconstructs from scratch when any export changes; _update_noise() refreshes noise textures without rebuilding geometry; @tool enables live editor preview
+# emerges: the noise_offset_per_plane parameter animates the appearance of depth with no camera movement — the learner can stand still and feel the cloud shift by looking at it from different angles
+# needs: VR walk-through to feel parallax [has]; plane_count slider [has in editor via @export_range]; animation mode (scrolling noise over time) [missing]; apply_grid_config [missing]
+# relationships: demonstrates array + noise coupling as a system; used in Primitives_Ignorance to show limits of flat geometry; connects to voxelnoise (3D threshold) and noise sequence (continuous fields)
+# truth: depth is not a property of space but of sampling — more planes means more depth, not because more exist but because the eye believes more dimensions when given more discrete steps
+
 ## Glass Planes 2.5D - Layered transparency creating depth illusion
 ## Array + Noise = Volumetric look at flat render cost
 ## The discrete framing the continuous

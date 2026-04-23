@@ -1,0 +1,101 @@
+{
+  "id": "morph34_scifi_command_console",
+  "family": "scifi_props",
+  "notes": "Sci-fi props pass: a command console with a low pedestal, recessed front panel grid, and a tilted readout slab.",
+  "camera_yaw": 0.78,
+  "camera_pitch": 0.3,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.08,
+      0.66,
+      0.72
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 6,
+  "rules": [
+    {
+      "id": "console_base",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.16,
+        "scale": 1.24
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "console_panels",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "aperture_grid",
+      "params": {
+        "cols": 2,
+        "rows": 3,
+        "length": 0.1,
+        "scale": 0.72,
+        "door_col": 0,
+        "door_height_scale": 1.0
+      },
+      "child_role": "aperture",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "console_screen",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.84,
+        "scale": 0.62,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.62,
+          -0.26
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "console_cheeks",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.22,
+        "scale": 0.38,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.12,
+          -0.06
+        ]
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "gen02_coral_polyps",
+  "notes": "Inset + extrude + bulge \u2014 lumpy coral polyps.",
+  "seed": "sphere",
+  "seed_scale": 0.5,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "random_50",
+      "params": {
+        "amount": 0.18
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:inset",
+      "params": {
+        "distance": 0.25,
+        "scale": 0.85
+      }
+    },
+    {
+      "op": "bulge",
+      "selector": "tag:extruded_top",
+      "params": {
+        "amount": 0.18
+      }
+    }
+  ]
+}

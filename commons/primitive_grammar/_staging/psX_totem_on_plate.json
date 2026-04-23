@@ -1,0 +1,61 @@
+{
+  "id": "psX_totem_on_plate",
+  "notes": "CROSS: Bauhaus totem standing in the middle of a Vignelli Metafora-style plate arrangement.",
+  "layout": "compose",
+  "camera_pitch": 0.35,
+  "camera_yaw": 0.55,
+  "parts": [
+    {
+      "y": 0,
+      "config": {
+        "layout": "under_plate",
+        "palette": "metafora",
+        "leg_size": 0.22,
+        "plate_radius": 0.7,
+        "plate_color": [
+          0.95,
+          0.92,
+          0.88
+        ],
+        "legs": [
+          {
+            "shape": "sphere",
+            "color": "#5a3b25"
+          },
+          {
+            "shape": "cube",
+            "color": "#1a1a1a"
+          },
+          {
+            "shape": "wedge",
+            "color": "#d4b896"
+          }
+        ]
+      }
+    },
+    {
+      "y": 0.25,
+      "config": {
+        "layout": "vertical_stack",
+        "base_scale": 0.15,
+        "sequence": [
+          {
+            "shape": "cylinder",
+            "color": "#4a6b5e",
+            "scale": 0.8
+          },
+          {
+            "shape": "cube",
+            "color": "#e8a846",
+            "scale": 1.0
+          },
+          {
+            "shape": "sphere",
+            "color": "#c0392b",
+            "scale": 1.2
+          }
+        ]
+      }
+    }
+  ]
+}

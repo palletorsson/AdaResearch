@@ -1,0 +1,164 @@
+{
+  "id": "morph_auto_mixed_05",
+  "family": "mixed_forms",
+  "notes": "Auto-generated mixed-family candidate from bio_furniture, scifi_props, shelf.",
+  "camera_yaw": 0.777,
+  "camera_pitch": 0.345,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.42,
+      1.653,
+      0.895
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "mixed_05_01_petal_seat_bowl",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.327,
+        "scale": 1.302,
+        "normal_bias": 0.768,
+        "world_bias": [
+          -0.014,
+          0.144,
+          0.081
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.067
+    },
+    {
+      "id": "mixed_05_02_perch_head_arm",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.826,
+        "scale": 0.109,
+        "normal_bias": 1.101,
+        "world_bias": [
+          0.353,
+          0.686,
+          0.183
+        ]
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "mixed_05_03_harness_wrap_return",
+      "when": {
+        "role": "cushion",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.12
+      },
+      "selector": "front",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.538,
+        "scale": 0.16,
+        "normal_bias": 0.908,
+        "world_bias": [
+          0.033,
+          -0.127,
+          0.327
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.103
+    },
+    {
+      "id": "mixed_05_04_beacon_spine",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 1.295,
+        "scale": 0.309,
+        "normal_bias": 1.045,
+        "world_bias": [
+          0.015,
+          0.343,
+          0.032
+        ]
+      },
+      "child_role": "support",
+      "budget_factor": 0.159
+    },
+    {
+      "id": "mixed_05_05_cryo_lid",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 1.382,
+        "scale": 0.859,
+        "normal_bias": 1.111,
+        "world_bias": [
+          -0.02,
+          0.65,
+          -0.19
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.017
+    },
+    {
+      "id": "mixed_transform_01_rotate_panel",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.273
+      },
+      "selector": "back",
+      "op": "rotate_panel",
+      "params": {
+        "axis": "normal",
+        "angle_deg": 0.386,
+        "normal_offset": -0.004
+      },
+      "child_role": "body",
+      "budget_factor": 0.53
+    },
+    {
+      "id": "mixed_transform_02_inset_panel",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.391
+      },
+      "selector": "up",
+      "op": "inset_panel",
+      "params": {
+        "scale": 0.698,
+        "depth": 0.043
+      },
+      "child_role": "body",
+      "budget_factor": 0.487
+    }
+  ]
+}

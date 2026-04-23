@@ -2,6 +2,16 @@
 extends Node3D
 class_name FoldingCube
 
+# @identity
+# essence: 6 square faces arranged in a cross net rotate around hinge axes — fold_progress (0→1) interpolates each face from its flat position to its final cube orientation; on complete, optionally drops as a RigidBody3D and spawns a fresh net
+# desire: to make the learner feel the moment when a flat shape becomes a volume — when 2D possibility collapses into 3D fact and you watch the final edge close
+# critical_parameter: fold_duration (2.0s) — controls the pace of the fold; too fast and the hinge animation is illegible; the spawn_new_on_complete flag creates an infinite folding stack
+# triggers: animate_fold() sets state FOLDING and runs a Tween; fold_progress setter drives _apply_fold() each step; on completion, face converts to RigidBody3D and drops by drop_height
+# emerges: the stack of dropped cubes accumulates as evidence of all previous folds — the floor becomes a record of learning, each cube identical in shape but distinct in its moment of closure
+# needs: VR trigger to start fold animation [has via auto_fold]; fold_progress slider [has in editor via @export_range]; audio on fold-complete [missing]; VR grab of completed cube [has via RigidBody3D conversion]
+# relationships: used in Point_Animatedcube alongside animatedcubebuilder; pairs with polyhedron_nets_cube (shows net layout) and grab_trihedron (corner assembly); contrasts with instant-geometry primitives
+# truth: a net is a cube that hasn't decided yet — fold_progress is the variable that transforms possibility into fact, and that transformation is irreversible
+
 ## Folding Cube - Animates from flat net to 3D cube
 ## Shows how 6 squares with hinges become a volume
 ## Interactive or automatic folding

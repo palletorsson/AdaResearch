@@ -60,6 +60,8 @@ const EDITORS: Array[Dictionary] = [
 	# ── ORGANISM ───────────────────────────────────────────
 	{"name": "Creature Editor", "scene": "res://commons/scenes/creature_editor/creature_editor.tscn",
 	 "stage": "Organism", "desc": "55+ DNA genes, biome preview", "color": Color(0.93, 0.46, 0.14)},
+	{"name": "Form Editor", "scene": "res://commons/scenes/editors/form_editor.tscn",
+	 "stage": "Organism", "desc": "9 body recipes — flower, fungus, column, amphora…", "color": Color(0.93, 0.46, 0.14)},
 ]
 
 const STAGE_ORDER: Array[String] = ["Field", "Skeleton", "Surface", "Modify", "Populate", "Pipeline", "Organism"]
@@ -115,7 +117,7 @@ func _build_menu() -> void:
 	main_vbox.add_child(title)
 
 	var subtitle := Label.new()
-	subtitle.text = "18 editors exploring every approach to making form"
+	subtitle.text = "19 editors exploring every approach to making form"
 	subtitle.add_theme_font_size_override("font_size", 13)
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	subtitle.add_theme_color_override("font_color", Color(0.5, 0.5, 0.55))

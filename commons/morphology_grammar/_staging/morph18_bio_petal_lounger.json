@@ -1,0 +1,103 @@
+{
+  "id": "morph18_bio_petal_lounger",
+  "family": "bio_furniture",
+  "notes": "Reference-driven petal lounger: a low chaise with a carved plinth, a side fin, and a thickened seat bowl assembled from a few large mass decisions.",
+  "camera_yaw": 0.82,
+  "camera_pitch": 0.3,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.36,
+      0.52,
+      0.98
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "petal_plinth",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.18,
+        "scale": 1.28
+      },
+      "child_role": "body",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "petal_seat_bowl",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.28,
+        "scale": 1.12,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.18,
+          0.06
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "petal_back_fin",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.74,
+        "scale": 0.76,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.12,
+          0.48,
+          -0.32
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "petal_side_fin",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.54,
+        "scale": 0.34,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.18,
+          0.18,
+          0.1
+        ]
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

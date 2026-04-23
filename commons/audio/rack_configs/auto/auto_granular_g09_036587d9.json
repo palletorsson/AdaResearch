@@ -1,0 +1,89 @@
+{
+  "rack_info": {
+    "name": "Granular",
+    "description": "Density × grain size × pitch × position. Jean Garnier-style pad substrate.",
+    "version": "auto-1",
+    "sound_type": "synth_wave",
+    "auto_generated": true,
+    "archetype": "granular",
+    "seed": 56985561
+  },
+  "layout": {
+    "padding_px": 18,
+    "gap_px": 14,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "lbl"
+    ],
+    [
+      "density",
+      "size"
+    ],
+    [
+      "pitch",
+      "pos"
+    ],
+    [
+      "spread",
+      "mix"
+    ]
+  ],
+  "control_definitions": {
+    "lbl": {
+      "type": "label",
+      "text": "GRANULAR",
+      "font_size": 18
+    },
+    "density": {
+      "type": "slv",
+      "label": "DENS",
+      "parameter": "density",
+      "min": 1.0,
+      "max": 60.0,
+      "default": 12.0
+    },
+    "size": {
+      "type": "slv",
+      "label": "SIZE",
+      "parameter": "grain_size",
+      "min": 10.0,
+      "max": 500.0,
+      "default": 80.0
+    },
+    "pitch": {
+      "type": "knob",
+      "label": "PITCH",
+      "parameter": "pitch",
+      "min": -12.0,
+      "max": 12.0,
+      "default": 0.0
+    },
+    "pos": {
+      "type": "slh",
+      "label": "POS",
+      "parameter": "position",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    },
+    "spread": {
+      "type": "knob",
+      "label": "SPREAD",
+      "parameter": "spread",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.3
+    },
+    "mix": {
+      "type": "knob",
+      "label": "MIX",
+      "parameter": "mix",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    }
+  }
+}

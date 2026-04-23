@@ -1,0 +1,17 @@
+{
+  "id": "gen01_petals_wide",
+  "notes": "Petals with wider splay \u2014 agave-like rosette.",
+  "seed": "icosahedron",
+  "seed_scale": 0.4,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "petal_splay",
+      "selector": "up",
+      "params": {
+        "splay": 0.7,
+        "length": 0.5
+      }
+    }
+  ]
+}

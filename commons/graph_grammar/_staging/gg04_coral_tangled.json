@@ -1,0 +1,36 @@
+{
+  "id": "gg04_coral_tangled",
+  "notes": "Coral metaball with high jitter \u00e2\u20ac\u201d limbs cross and fuse in unexpected ways.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.15
+  },
+  "iterations": 3,
+  "render_mode": "metaball",
+  "metaball_smoothness": 0.2,
+  "metaball_resolution": 64,
+  "materials": {
+    "default": [
+      0.72,
+      0.36,
+      0.34
+    ]
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.55,
+        "spread_deg": 55,
+        "radius_decay": 0.72,
+        "jitter": 0.85
+      }
+    }
+  ]
+}

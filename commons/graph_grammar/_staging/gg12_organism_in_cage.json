@@ -1,0 +1,37 @@
+{
+  "id": "gg12_organism_in_cage",
+  "notes": "Coral creature inside a convex hull 'cage' \u00e2\u20ac\u201d wireframe membrane around the form.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.12
+  },
+  "iterations": 3,
+  "materials": {
+    "default": "bark"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.5,
+        "spread_deg": 50,
+        "radius_decay": 0.72,
+        "jitter": 0.4
+      }
+    },
+    {
+      "op": "hull_shell",
+      "selector": "all",
+      "params": {
+        "shell_scale": 1.3,
+        "shell_radius": 0.02
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "id": "gg03_tree_both",
+  "notes": "Position AND radius noise \u00e2\u20ac\u201d full organic variation.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.2
+  },
+  "iterations": 4,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.9,
+        "spread_deg": 35,
+        "radius_decay": 0.68
+      }
+    },
+    {
+      "op": "noise_displace",
+      "selector": "all",
+      "params": {
+        "amp": 0.2,
+        "freq": 1.0,
+        "seed": 33
+      }
+    },
+    {
+      "op": "noise_radii",
+      "selector": "all",
+      "params": {
+        "amp": 0.5,
+        "freq": 2.5,
+        "seed": 44,
+        "floor": 0.4
+      }
+    }
+  ]
+}

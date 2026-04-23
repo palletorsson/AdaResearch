@@ -1,0 +1,39 @@
+{
+  "rack_info": {
+    "name": "2x KNOB",
+    "description": "2x KNOB — auto-generated UVAC composition. sound_type=lab_hum, composition_type=knobs.",
+    "version": "auto-1",
+    "sound_type": "lab_hum",
+    "auto_generated": true,
+    "composition_type": "knobs",
+    "composition_count": 2
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "kn_0",
+      "kn_1"
+    ]
+  ],
+  "control_definitions": {
+    "kn_0": {
+      "type": "knob",
+      "label": "DRIVE",
+      "parameter": "drive",
+      "min": 0.0,
+      "max": 10.0,
+      "default": 1.0
+    },
+    "kn_1": {
+      "type": "knob",
+      "label": "FBK",
+      "parameter": "feedback",
+      "min": 0.0,
+      "max": 0.95,
+      "default": 0.3
+    }
+  }
+}

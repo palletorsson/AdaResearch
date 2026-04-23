@@ -1,0 +1,42 @@
+{
+  "id": "gg06_rd_spots",
+  "notes": "Dense tree with RD-spots displacement \u00e2\u20ac\u201d Turing dots modulate Y-position, giving dappled canopy.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.18
+  },
+  "iterations": 3,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 4,
+        "length": 0.55,
+        "spread_deg": 50,
+        "radius_decay": 0.65,
+        "jitter": 0.3
+      }
+    },
+    {
+      "op": "rd_displace",
+      "selector": "tag:leaf",
+      "params": {
+        "pattern": "spots",
+        "amp": 0.35,
+        "iterations": 2500,
+        "grid_size": 80,
+        "world_size": 3.0,
+        "seed": 4
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "mg_form28_bastion_ring",
+  "notes": "FORM STUDY: courtyard massing on a square block. Nested roof inset and keep extrusion make a compact fortress or bastion plan.",
+  "seed": "cube",
+  "seed_scale": 0.74,
+  "generations": 2,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "up",
+      "params": {
+        "amount": 0.22,
+        "inner_tag": "court_floor",
+        "border_tag": "court_ring"
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:court_floor",
+      "params": {
+        "distance": 0.1,
+        "scale": 0.62,
+        "top_tag": "keep_top",
+        "side_tag": "keep_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

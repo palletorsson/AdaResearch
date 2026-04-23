@@ -1,0 +1,17 @@
+{
+  "id": "gen02_petals_sphere",
+  "notes": "Petals on all faces of a SPHERE (smoother base than icosphere).",
+  "seed": "sphere",
+  "seed_scale": 0.35,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "petal_splay",
+      "selector": "all",
+      "params": {
+        "splay": 0.35,
+        "length": 0.45
+      }
+    }
+  ]
+}

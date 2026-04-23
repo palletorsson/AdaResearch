@@ -1,0 +1,103 @@
+{
+  "id": "morph22_bio_blossom_bed",
+  "family": "bio_furniture",
+  "notes": "Extreme blossom bed: a low central cushion is engulfed by oversized petal walls and a wide service plinth.",
+  "camera_yaw": 0.82,
+  "camera_pitch": 0.28,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.42,
+      0.44,
+      1.08
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 6,
+  "rules": [
+    {
+      "id": "blossom_plinth",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.22,
+        "scale": 1.42
+      },
+      "child_role": "body",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "blossom_core",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.18,
+        "scale": 0.88,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.12,
+          0.06
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "blossom_side_petals",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.92,
+        "scale": 0.54,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.54,
+          0.22
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "blossom_rear_petals",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back|front",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.78,
+        "scale": 0.7,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.68,
+          0.0
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "mg_form52_hydra_tripod",
+  "notes": "HYDRA TEST: one trunk splitting into three serpent necks with widened tips. Minimal hydra body plan inside mesh grammar.",
+  "seed": "icosahedron",
+  "seed_scale": 0.18,
+  "generations": 1,
+  "camera_pitch": 0.24,
+  "camera_yaw": 0.74,
+  "camera_focus_y_bias": -0.08,
+  "camera_fit_padding": 0.72,
+  "floor_clearance": 0.03,
+  "rules": [
+    {
+      "op": "lsystem_branch",
+      "selector": "index:0",
+      "params": {
+        "axiom": "F[+F+F][-F-F][&F+F]",
+        "rules": {
+          "F": "FF"
+        },
+        "lsystem_generations": 2,
+        "step_length": 0.08,
+        "step_taper": 0.975,
+        "start_radius": 0.05,
+        "angle_degrees": 22,
+        "tube_segments": 6,
+        "tube_rings": 4,
+        "max_branches": 48,
+        "branch_tag": "hydra_body",
+        "tip_tag": "hydra_tip"
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:hydra_tip",
+      "params": {
+        "distance": 0.022,
+        "scale": 1.34,
+        "top_tag": "hydra_head",
+        "side_tag": "hydra_head_side",
+        "min_area": 5e-05
+      }
+    }
+  ]
+}

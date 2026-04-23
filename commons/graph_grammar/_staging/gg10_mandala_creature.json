@@ -1,0 +1,44 @@
+{
+  "id": "gg10_mandala_creature",
+  "notes": "Coral recipe + 5-fold symmetry + metaball \u00e2\u20ac\u201d starfish creature. Reduced depth for rendering feasibility.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0.4
+    ],
+    "radius": 0.12
+  },
+  "iterations": 2,
+  "render_mode": "metaball",
+  "metaball_smoothness": 0.22,
+  "metaball_resolution": 56,
+  "materials": {
+    "default": [
+      0.72,
+      0.36,
+      0.34
+    ]
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.4,
+        "spread_deg": 50,
+        "radius_decay": 0.72,
+        "jitter": 0.3
+      }
+    },
+    {
+      "op": "symmetry",
+      "selector": "all",
+      "params": {
+        "count": 5,
+        "axis": "y"
+      }
+    }
+  ]
+}

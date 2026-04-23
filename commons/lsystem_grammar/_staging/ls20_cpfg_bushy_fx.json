@@ -1,0 +1,33 @@
+{
+  "id": "ls20_cpfg_bushy_fx",
+  "axiom": "X",
+  "rules": {
+    "X": "F[+X][-X]FX",
+    "F": "FF"
+  },
+  "iterations": 5,
+  "angle_deg": 24,
+  "step_len": 0.03,
+  "step_shrink": 0.76,
+  "interpretation": "tubes",
+  "base_width": 0.012,
+  "width_shrink": 0.79,
+  "tube_sides": 6,
+  "color_trunk": [
+    0.35,
+    0.21,
+    0.11
+  ],
+  "color_tip": [
+    0.22,
+    0.7,
+    0.24
+  ],
+  "camera_yaw": 0.34,
+  "camera_pitch": 0.2,
+  "layout": "tree",
+  "dna_connections": [
+    "mesh_grammar"
+  ],
+  "notes": "Bushy deterministic plant from the CPFG manual examples: X->F[+X][-X]FX with F->FF for trunk extension."
+}

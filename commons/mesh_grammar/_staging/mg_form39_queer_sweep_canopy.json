@@ -1,0 +1,55 @@
+{
+  "id": "mg_form39_queer_sweep_canopy",
+  "notes": "EXTREME QUEER REACH: top plane is enlarged, twisted, then thrown outward twice. The goal is not a roof but a sweeping drag-cape canopy that overreaches the body below.",
+  "seed": "cube",
+  "seed_scale": 0.52,
+  "generations": 2,
+  "camera_pitch": 0.34,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "up",
+      "params": {
+        "amount": 0.14,
+        "inner_tag": "sweep_core",
+        "border_tag": "sweep_rim"
+      }
+    },
+    {
+      "op": "scale",
+      "selector": "tag:sweep_core",
+      "params": {
+        "scale": 1.28
+      }
+    },
+    {
+      "op": "rotate",
+      "selector": "tag:sweep_core",
+      "params": {
+        "angle_degrees": 24
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:sweep_core",
+      "params": {
+        "distance": 0.18,
+        "scale": 1.08,
+        "top_tag": "sweep_top",
+        "side_tag": "sweep_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:sweep_top",
+      "params": {
+        "distance": 0.14,
+        "scale": 1.04,
+        "top_tag": "sweep_tip",
+        "side_tag": "sweep_tip_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

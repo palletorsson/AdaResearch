@@ -1,0 +1,122 @@
+{
+  "id": "morph39_creature_console_crab",
+  "family": "scifi_creatures",
+  "notes": "Creature pass: the command console becomes a low crab-like rover with four legs, a blunt sensor face, and folded side shields.",
+  "camera_yaw": 0.82,
+  "camera_pitch": 0.3,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.08,
+      0.42,
+      0.84
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 7,
+  "rules": [
+    {
+      "id": "console_crab_legs",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "finger_array",
+      "params": {
+        "count": 4,
+        "length": 0.46,
+        "fill": 0.88
+      },
+      "child_role": "support",
+      "budget_factor": 0.22
+    },
+    {
+      "id": "console_crab_feet",
+      "when": {
+        "role": "support",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.1
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.16,
+        "scale": 0.34,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          -0.06,
+          0.12
+        ]
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "console_crab_face",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.36,
+        "scale": 0.46,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.12,
+          0.16
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "console_crab_shields",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.18,
+        "scale": 0.32,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.08,
+          -0.04
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "console_crab_eyes",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "cluster_cap",
+      "params": {
+        "count": 2,
+        "length": 0.12,
+        "scale": 0.82
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

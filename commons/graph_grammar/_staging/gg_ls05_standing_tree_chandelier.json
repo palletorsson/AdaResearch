@@ -1,0 +1,55 @@
+{
+  "id": "gg_ls05_standing_tree_chandelier",
+  "notes": "TRIPLE DNA BRIDGE: Same L-system plant, but stiff + gentle gravity \u2014 60 steps, mostly stands. Chandelier traces a more vertical tree shape.",
+  "seed": {
+    "soft_body_pose": {
+      "topology": "lsystem",
+      "lsystem": {
+        "axiom": "F",
+        "rules": {
+          "F": "F[+F]F[-F]F"
+        },
+        "iterations": 3,
+        "angle_deg": 25.7,
+        "step_len": 0.22,
+        "step_shrink": 0.72
+      },
+      "stiffness": 0.85,
+      "steps": 60,
+      "gravity": [
+        0,
+        -9.8,
+        0
+      ],
+      "damping": 0.995,
+      "floor_y": -0.5,
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "node_radius": 0.04
+    }
+  },
+  "iterations": 0,
+  "rules": [],
+  "render_mode": "chandelier",
+  "chandelier": {
+    "edge_color": [
+      0.12,
+      0.1,
+      0.08
+    ],
+    "leaf_color": [
+      0.92,
+      0.95,
+      1.0
+    ],
+    "leaf_emission": 1.8,
+    "edge_radius": 0.005,
+    "leaf_radius": 0.06
+  },
+  "camera_yaw": 0.4,
+  "camera_pitch": 0.1,
+  "max_nodes": 3000
+}

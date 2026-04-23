@@ -1,0 +1,64 @@
+{
+  "id": "gg16_chandelier_2gen",
+  "notes": "Two branching generations \u00e2\u20ac\u201d 6 final bulbs, richer tree.",
+  "seed": {
+    "pos": [
+      0,
+      2.0,
+      0
+    ],
+    "radius": 0.015
+  },
+  "iterations": 1,
+  "render_mode": "chandelier",
+  "camera_pitch": 0.15,
+  "camera_yaw": 0.6,
+  "chandelier": {
+    "edge_radius": 0.01,
+    "edge_color": [
+      0.1,
+      0.08,
+      0.07
+    ],
+    "bulb_radius": 0.08,
+    "bulb_color": [
+      0.95,
+      0.88,
+      0.7
+    ],
+    "bulb_emission": 2.2
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 1,
+        "length": 0.4,
+        "spread_deg": 5,
+        "radius_decay": 0.95,
+        "pitch": 3.14
+      }
+    },
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 2,
+        "length": 0.35,
+        "spread_deg": 45,
+        "radius_decay": 0.95
+      }
+    },
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.3,
+        "spread_deg": 60,
+        "radius_decay": 0.95
+      }
+    }
+  ]
+}

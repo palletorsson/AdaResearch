@@ -1,0 +1,122 @@
+{
+  "id": "morph41_creature_reactor_idol",
+  "family": "scifi_creatures",
+  "notes": "Creature pass: the reactor pedestal becomes an idol-like tower beast with a narrow head, side fins, and a ritual crown.",
+  "camera_yaw": 0.74,
+  "camera_pitch": 0.36,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.9,
+      1.14,
+      0.72
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 7,
+  "rules": [
+    {
+      "id": "reactor_idol_feet",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2,
+        "rows": 2,
+        "select": "corners",
+        "length": 0.2,
+        "scale": 0.22
+      },
+      "child_role": "support",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "reactor_idol_fins",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.26,
+        "scale": 0.22,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.24,
+          0.04
+        ]
+      },
+      "child_role": "wall",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "reactor_idol_head",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.72,
+        "scale": 0.28,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.34,
+          0.08
+        ]
+      },
+      "child_role": "support",
+      "budget_factor": 0.24
+    },
+    {
+      "id": "reactor_idol_crown",
+      "when": {
+        "role": "support",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.1
+      },
+      "selector": "up",
+      "op": "cluster_cap",
+      "params": {
+        "count": 3,
+        "length": 0.18,
+        "scale": 1.1
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "reactor_idol_face",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "front",
+      "op": "aperture_grid",
+      "params": {
+        "cols": 2,
+        "rows": 3,
+        "length": 0.08,
+        "scale": 0.64,
+        "door_col": 0,
+        "door_height_scale": 1.0
+      },
+      "child_role": "aperture",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

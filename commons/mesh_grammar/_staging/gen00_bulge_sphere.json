@@ -1,0 +1,16 @@
+{
+  "id": "gen00_bulge_sphere",
+  "notes": "Sphere with random bulge inflation \u2014 organic blob.",
+  "seed": "sphere",
+  "seed_scale": 0.6,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "bulge",
+      "selector": "random_50",
+      "params": {
+        "amount": 0.25
+      }
+    }
+  ]
+}

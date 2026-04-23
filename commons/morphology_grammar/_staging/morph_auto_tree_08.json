@@ -1,0 +1,73 @@
+{
+  "id": "morph_auto_tree_08",
+  "family": "tree",
+  "notes": "Auto-generated tree candidate.",
+  "camera_yaw": 0.54,
+  "camera_pitch": 0.36,
+  "seed": {
+    "type": "box",
+    "size": [
+      0.392,
+      0.114,
+      0.438
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "body_to_trunk",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.8
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 1.251,
+        "scale": 0.579
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.863
+    },
+    {
+      "id": "trunk_to_branch_fan",
+      "when": {
+        "role": "trunk",
+        "min_depth": 1,
+        "max_depth": 1,
+        "min_budget": 0.45
+      },
+      "selector": "up",
+      "op": "subdivide_extrude_fan",
+      "params": {
+        "count": 2,
+        "length": 0.767,
+        "scale": 0.579,
+        "splay_deg": 15.36,
+        "lateral_spread": 0.59
+      },
+      "child_role": "branch",
+      "budget_factor": 0.655
+    },
+    {
+      "id": "branch_to_tip",
+      "when": {
+        "role": "branch",
+        "min_depth": 2,
+        "max_depth": 2,
+        "min_budget": 0.2
+      },
+      "selector": "up",
+      "op": "extrude",
+      "params": {
+        "length": 0.318,
+        "scale": 0.611
+      },
+      "child_role": "tip",
+      "budget_factor": 0.33
+    }
+  ]
+}

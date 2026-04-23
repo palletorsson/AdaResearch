@@ -1,0 +1,31 @@
+{
+  "id": "ps_noise01_jiggled_city",
+  "layout": "ca_scatter",
+  "ca": {
+    "rule": "conway",
+    "grid_size": 18,
+    "iterations": 10,
+    "density": 0.45,
+    "seed": 3,
+    "cell_size": 0.08
+  },
+  "shape": "cube",
+  "palette": "mono",
+  "primitive_size": 0.06,
+  "height_from_neighbors": true,
+  "height_scale": 0.8,
+  "post_ops": [
+    {
+      "op": "noise_displace",
+      "amplitude": 0.04,
+      "frequency": 4.0,
+      "octaves": 2,
+      "seed": 15,
+      "noise_type": "simplex",
+      "mode": "vector"
+    }
+  ],
+  "camera_yaw": 0.6,
+  "camera_pitch": 0.4,
+  "notes": "DNA BRIDGE: Conway-city (ps_ca01) + simplex-noise post-op. The grid city gets jiggled \u2014 towers lean, blocks offset. From modernist rectilinear to drunk modernist."
+}

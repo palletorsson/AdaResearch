@@ -1,0 +1,36 @@
+{
+  "id": "mg_form36_long_frame_arch",
+  "notes": "REACH PASS: arch band is thickened into a longer projecting frame. This tests whether the portal logic survives when the extrusion gets much deeper.",
+  "seed": "arch",
+  "generations": 1,
+  "camera_pitch": 0.28,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "all",
+      "params": {
+        "amount": 0.12,
+        "inner_tag": "frame_band",
+        "border_tag": "frame_skin"
+      }
+    },
+    {
+      "op": "scale",
+      "selector": "tag:frame_band",
+      "params": {
+        "scale": 1.06
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:frame_band",
+      "params": {
+        "distance": 0.16,
+        "scale": 0.99,
+        "top_tag": "frame_core",
+        "side_tag": "frame_core_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

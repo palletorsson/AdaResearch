@@ -1,0 +1,45 @@
+{
+  "id": "mg_form55_hydra_crown",
+  "notes": "HYDRA TEST: compact central trunk with a clustered head crown. Intended as the most mythic, crown-like hydra silhouette.",
+  "seed": "icosahedron",
+  "seed_scale": 0.15,
+  "generations": 1,
+  "camera_pitch": 0.28,
+  "camera_yaw": 0.78,
+  "camera_focus_y_bias": -0.08,
+  "camera_fit_padding": 0.76,
+  "floor_clearance": 0.03,
+  "rules": [
+    {
+      "op": "lsystem_branch",
+      "selector": "index:0",
+      "params": {
+        "axiom": "FF[+F][+F-F][-F][&F][^F]",
+        "rules": {
+          "F": "FF"
+        },
+        "lsystem_generations": 2,
+        "step_length": 0.07,
+        "step_taper": 0.98,
+        "start_radius": 0.046,
+        "angle_degrees": 26,
+        "tube_segments": 6,
+        "tube_rings": 4,
+        "max_branches": 64,
+        "branch_tag": "hydra_body",
+        "tip_tag": "hydra_tip"
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:hydra_tip",
+      "params": {
+        "distance": 0.022,
+        "scale": 1.3,
+        "top_tag": "hydra_head",
+        "side_tag": "hydra_head_side",
+        "min_area": 5e-05
+      }
+    }
+  ]
+}

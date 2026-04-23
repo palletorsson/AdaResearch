@@ -1,0 +1,44 @@
+{
+  "id": "gl01_classic_bulb",
+  "topology": "glass_blow",
+  "radius": 0.5,
+  "rings": 14,
+  "segments": 22,
+  "pin_top_fraction": 0.12,
+  "preinflate": 0.2,
+  "stiffness": 0.6,
+  "damping": 0.995,
+  "gravity": [
+    0,
+    -9.8,
+    0
+  ],
+  "floor_y": -3.5,
+  "constraint_passes": 5,
+  "steps": 200,
+  "origin": [
+    0,
+    1.5,
+    0
+  ],
+  "camera_yaw": 0.35,
+  "camera_pitch": 0.12,
+  "render": {
+    "color": [
+      0.7,
+      0.8,
+      0.85
+    ],
+    "roughness": 0.35,
+    "particle_radius": 0.02,
+    "show_wires": true,
+    "wire_color": [
+      0.2,
+      0.25,
+      0.3
+    ],
+    "double_sided": true
+  },
+  "layout": "frozen_form",
+  "notes": "Classic glass bulb \u2014 sphere with small top-pin ring, moderate pressure, 200 settle steps under gravity. Settles into a drooping bulb that tapers toward the pin. The whole vessel is a record of pressure \u00d7 gravity \u00d7 duration."
+}

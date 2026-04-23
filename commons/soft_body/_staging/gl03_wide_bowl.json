@@ -1,0 +1,44 @@
+{
+  "id": "gl03_wide_bowl",
+  "topology": "glass_blow",
+  "radius": 0.55,
+  "rings": 12,
+  "segments": 24,
+  "pin_top_fraction": 0.28,
+  "preinflate": 0.4,
+  "stiffness": 0.75,
+  "damping": 0.996,
+  "gravity": [
+    0,
+    -6.0,
+    0
+  ],
+  "floor_y": -3.0,
+  "constraint_passes": 6,
+  "steps": 120,
+  "origin": [
+    0,
+    1.2,
+    0
+  ],
+  "camera_yaw": 0.4,
+  "camera_pitch": 0.35,
+  "render": {
+    "color": [
+      0.88,
+      0.68,
+      0.45
+    ],
+    "roughness": 0.45,
+    "particle_radius": 0.022,
+    "show_wires": true,
+    "wire_color": [
+      0.3,
+      0.2,
+      0.15
+    ],
+    "double_sided": true
+  },
+  "layout": "frozen_form",
+  "notes": "Wide bowl. Large top pin ring (28% of top), high preinflate (+40%), strong stiffness, weak gravity. Settles into a shallow squat vessel \u2014 pressure dominates, gravity mild. Different force balance \u2192 different vessel."
+}

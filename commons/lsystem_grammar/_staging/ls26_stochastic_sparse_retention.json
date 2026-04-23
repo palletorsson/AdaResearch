@@ -1,0 +1,50 @@
+{
+  "id": "ls26_stochastic_sparse_retention",
+  "axiom": "F",
+  "rules": {
+    "F": [
+      [
+        "F[+F]F[-F]F",
+        0.25
+      ],
+      [
+        "F[+F]F",
+        0.2
+      ],
+      [
+        "F[-F]F",
+        0.2
+      ],
+      [
+        "F",
+        0.35
+      ]
+    ]
+  },
+  "iterations": 4,
+  "seed": 26,
+  "angle_deg": 23,
+  "step_len": 0.05,
+  "step_shrink": 0.77,
+  "interpretation": "tubes",
+  "base_width": 0.013,
+  "width_shrink": 0.8,
+  "tube_sides": 6,
+  "color_trunk": [
+    0.32,
+    0.2,
+    0.1
+  ],
+  "color_tip": [
+    0.44,
+    0.74,
+    0.3
+  ],
+  "camera_yaw": 0.3,
+  "camera_pitch": 0.16,
+  "layout": "tree",
+  "dna_connections": [
+    "mesh_grammar"
+  ],
+  "notes": "Sparse stochastic specimen inspired by Wikipedia's stochastic grammar discussion: one branch of the probability mass leaves F unchanged, opening gaps in the canopy."
+}

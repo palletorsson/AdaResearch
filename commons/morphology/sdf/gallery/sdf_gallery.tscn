@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsdfgallery0001"]
+
+[ext_resource type="Script" path="res://commons/morphology/sdf/gallery/sdf_gallery.gd" id="1_gallery"]
+
+[sub_resource type="ProceduralSkyMaterial" id="Sky_gal"]
+sky_top_color = Color(0.1, 0.12, 0.16, 1)
+sky_horizon_color = Color(0.16, 0.18, 0.2, 1)
+ground_bottom_color = Color(0.05, 0.05, 0.07, 1)
+ground_horizon_color = Color(0.1, 0.1, 0.12, 1)
+
+[sub_resource type="Sky" id="Sky_main_gal"]
+sky_material = SubResource("Sky_gal")
+
+[sub_resource type="Environment" id="Env_gal"]
+background_mode = 2
+sky = SubResource("Sky_main_gal")
+ambient_light_source = 3
+ambient_light_color = Color(0.6, 0.6, 0.65, 1)
+ambient_light_energy = 0.55
+tonemap_mode = 2
+
+[node name="SDFGallery" type="Node3D"]
+script = ExtResource("1_gallery")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env_gal")
+
+[node name="KeyLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866, -0.354, 0.354, 0, 0.707, 0.707, -0.5, -0.612, 0.612, 5, 8, 0)
+light_energy = 1.3
+shadow_enabled = true
+
+[node name="FillLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707, 0.354, -0.612, 0, 0.866, 0.5, 0.707, -0.354, 0.612, -6, 5, 0)
+light_color = Color(0.75, 0.82, 1, 1)
+light_energy = 0.35
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.94, 0.342, 0, -0.342, 0.94, 0, 3.5, -4.5)
+current = true
+fov = 55.0

@@ -1,0 +1,49 @@
+{
+  "rack_info": {
+    "name": "4x XY",
+    "description": "4x XY — auto-generated UVAC composition. sound_type=pickup_mario, composition_type=xy_row.",
+    "version": "auto-1",
+    "sound_type": "pickup_mario",
+    "auto_generated": true,
+    "composition_type": "xy_row",
+    "composition_count": 4
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "xy_0",
+      "xy_1",
+      "xy_2",
+      "xy_3"
+    ]
+  ],
+  "control_definitions": {
+    "xy_0": {
+      "type": "xy",
+      "label": "FBK/MIX",
+      "parameter_x": "feedback",
+      "parameter_y": "mix"
+    },
+    "xy_1": {
+      "type": "xy",
+      "label": "DEPTH/FREQ",
+      "parameter_x": "depth",
+      "parameter_y": "freq"
+    },
+    "xy_2": {
+      "type": "xy",
+      "label": "REL/DRIVE",
+      "parameter_x": "release",
+      "parameter_y": "drive"
+    },
+    "xy_3": {
+      "type": "xy",
+      "label": "FBK/RES",
+      "parameter_x": "feedback",
+      "parameter_y": "reso"
+    }
+  }
+}

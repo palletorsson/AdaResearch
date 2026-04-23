@@ -1,0 +1,48 @@
+{
+  "id": "gg04_coral_paired",
+  "notes": "Two seed roots offset 0.8m apart \u00e2\u20ac\u201d two creatures fusing at the hip.",
+  "seed": {
+    "roots": [
+      {
+        "pos": [
+          -0.5,
+          0,
+          0
+        ],
+        "radius": 0.12
+      },
+      {
+        "pos": [
+          0.5,
+          0,
+          0
+        ],
+        "radius": 0.12
+      }
+    ]
+  },
+  "iterations": 3,
+  "render_mode": "metaball",
+  "metaball_smoothness": 0.2,
+  "metaball_resolution": 72,
+  "materials": {
+    "default": [
+      0.7,
+      0.36,
+      0.34
+    ]
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.5,
+        "spread_deg": 55,
+        "radius_decay": 0.72,
+        "jitter": 0.55
+      }
+    }
+  ]
+}

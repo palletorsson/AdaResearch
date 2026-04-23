@@ -1,0 +1,24 @@
+{
+  "id": "rd17_eta_spotworm_heightmap",
+  "F": 0.034,
+  "K": 0.063,
+  "grid_size": 112,
+  "iterations": 5600,
+  "seed": 59,
+  "render_mode": "heightmap",
+  "height_amp": 0.78,
+  "color_lo": [
+    0.16,
+    0.14,
+    0.24
+  ],
+  "color_hi": [
+    0.94,
+    0.7,
+    0.36
+  ],
+  "camera_yaw": 0.44,
+  "camera_pitch": 0.57,
+  "layout": "rd_field",
+  "notes": "\u00ce\u00b7-class spot-and-worm mixture (F=0.034, K=0.063): short worms, spots, and low-level ongoing activity between pure stripe and pure mitosis regimes."
+}

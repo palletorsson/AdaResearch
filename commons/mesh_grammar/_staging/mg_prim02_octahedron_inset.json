@@ -1,0 +1,23 @@
+{
+  "id": "mg_prim02_octahedron_inset",
+  "notes": "PRIMITIVE-AS-SEED: Octahedron seed + inset + extrude. Triangular faces recess then poke through \u2014 star-like geometry.",
+  "seed": "octahedron",
+  "generations": 1,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "all",
+      "params": {
+        "amount": 0.2
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "all",
+      "params": {
+        "distance": 0.18,
+        "scale": 0.75
+      }
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "gg09_torus_knot",
+  "notes": "Torus (2,3) knot \u00e2\u20ac\u201d classic pretzel traced by a capsule chain.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.08
+  },
+  "iterations": 22,
+  "materials": {
+    "default": "bark"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 1,
+        "length": 0.2,
+        "spread_deg": 2,
+        "radius_decay": 0.96
+      }
+    },
+    {
+      "op": "parametric_displace",
+      "selector": "all",
+      "params": {
+        "curve": "torus_knot",
+        "t_source": "depth",
+        "t_scale": 0.3,
+        "amp": 0.6
+      }
+    }
+  ]
+}

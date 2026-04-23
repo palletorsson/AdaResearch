@@ -1,0 +1,29 @@
+{
+  "id": "mg_ls01_tree_extruded",
+  "notes": "DNA BRIDGE: L-system plant as box-prism mesh seed. Each turtle segment becomes a thin oriented box; mesh-grammar extrudes up-facing faces to thicken branches.",
+  "seed": {
+    "lsystem": {
+      "axiom": "F",
+      "rules": {
+        "F": "F[+F]F[-F]F"
+      },
+      "iterations": 3,
+      "angle_deg": 25.7,
+      "step_len": 0.18,
+      "step_shrink": 0.72,
+      "base_width": 0.012,
+      "width_shrink": 0.75
+    }
+  },
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.05,
+        "scale": 0.8
+      }
+    }
+  ]
+}

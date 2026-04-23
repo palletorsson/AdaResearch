@@ -1,0 +1,38 @@
+{
+  "id": "gg05_bamboo",
+  "notes": "Sine radii along depth \u00e2\u20ac\u201d bamboo/reed segments.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.12
+  },
+  "iterations": 6,
+  "materials": {
+    "default": "bark"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 1,
+        "length": 0.5,
+        "spread_deg": 10,
+        "radius_decay": 0.85
+      }
+    },
+    {
+      "op": "sine_radii",
+      "selector": "all",
+      "params": {
+        "amp": 0.55,
+        "freq": 0.5,
+        "along_axis": "depth",
+        "floor": 0.4
+      }
+    }
+  ]
+}

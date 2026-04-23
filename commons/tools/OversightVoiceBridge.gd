@@ -53,6 +53,15 @@ var _next_controller_scan_msec := 0
 var _missing_input_actions_reported: Dictionary = {}
 
 func _ready() -> void:
+	# Capture mode — when the caller passes `--no-bridges` as a user arg,
+	# don't wire up audio input, HTTP calls, or status labels. Capture
+	# scripts and the open-catalog flow use this to keep their output
+	# clean and fast. Enforced before any bridge state is touched.
+	if "--no-bridges" in OS.get_cmdline_user_args() or "--no-bridges" in OS.get_cmdline_args():
+		enabled = false
+		print("OversightVoiceBridge: disabled by --no-bridges")
+		return
+
 	var root_singleton := get_node_or_null("/root/OversightVoiceBridge")
 	if root_singleton != null and root_singleton != self:
 		enabled = false

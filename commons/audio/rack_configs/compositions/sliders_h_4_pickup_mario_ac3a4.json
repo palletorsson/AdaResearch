@@ -1,0 +1,63 @@
+{
+  "rack_info": {
+    "name": "4x SLIDER H",
+    "description": "4x SLIDER H — auto-generated UVAC composition. sound_type=pickup_mario, composition_type=sliders_h.",
+    "version": "auto-1",
+    "sound_type": "pickup_mario",
+    "auto_generated": true,
+    "composition_type": "sliders_h",
+    "composition_count": 4
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "sh_0"
+    ],
+    [
+      "sh_1"
+    ],
+    [
+      "sh_2"
+    ],
+    [
+      "sh_3"
+    ]
+  ],
+  "control_definitions": {
+    "sh_0": {
+      "type": "slh",
+      "label": "RES",
+      "parameter": "reso",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.3
+    },
+    "sh_1": {
+      "type": "slh",
+      "label": "TONE",
+      "parameter": "tone",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    },
+    "sh_2": {
+      "type": "slh",
+      "label": "DEC",
+      "parameter": "decay",
+      "min": 0.001,
+      "max": 2.0,
+      "default": 0.2
+    },
+    "sh_3": {
+      "type": "slh",
+      "label": "DEPTH",
+      "parameter": "depth",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    }
+  }
+}

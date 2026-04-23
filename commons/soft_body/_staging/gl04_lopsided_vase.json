@@ -1,0 +1,44 @@
+{
+  "id": "gl04_lopsided_vase",
+  "topology": "glass_blow",
+  "radius": 0.5,
+  "rings": 14,
+  "segments": 22,
+  "pin_top_fraction": 0.12,
+  "preinflate": 0.2,
+  "stiffness": 0.5,
+  "damping": 0.994,
+  "gravity": [
+    1.2,
+    -9.0,
+    0.3
+  ],
+  "floor_y": -3.5,
+  "constraint_passes": 5,
+  "steps": 260,
+  "origin": [
+    0,
+    1.5,
+    0
+  ],
+  "camera_yaw": 0.4,
+  "camera_pitch": 0.12,
+  "render": {
+    "color": [
+      0.85,
+      0.45,
+      0.5
+    ],
+    "roughness": 0.4,
+    "particle_radius": 0.02,
+    "show_wires": true,
+    "wire_color": [
+      0.3,
+      0.15,
+      0.2
+    ],
+    "double_sided": true
+  },
+  "layout": "frozen_form",
+  "notes": "Lopsided vase. Non-axial gravity (sideways + down) causes the vessel to droop off-center \u2014 reads like a handcrafted organic piece that slumped to one side while cooling. Gravity direction as design parameter."
+}

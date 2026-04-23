@@ -1,0 +1,20 @@
+{
+  "id": "ps_rd02_mitosis_cells",
+  "layout": "rd_scatter",
+  "rd": {
+    "preset": "mitosis",
+    "grid_size": 48,
+    "iterations": 3500,
+    "seed": 5,
+    "threshold": 0.25,
+    "cell_size": 0.07
+  },
+  "shape": "sphere",
+  "palette": "pastel",
+  "primitive_size": 0.04,
+  "height_from_v": true,
+  "height_amp": 0.4,
+  "camera_yaw": 0.5,
+  "camera_pitch": 0.4,
+  "notes": "DNA BRIDGE: Gray-Scott mitosis \u2192 pastel sphere field. Self-replicating RD cells as pastel spheres, height lightly modulated by V. Reads as a colony of soap-bubble organisms."
+}

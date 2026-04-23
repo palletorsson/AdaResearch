@@ -1,0 +1,15 @@
+{
+  "id": "mg_prim06_bipyramid_bulged",
+  "notes": "PRIMITIVE-AS-SEED: Bipyramid from Ada library + bulge. Two-pointed seed gets all faces inflated \u2014 becomes a lozenge.",
+  "seed": "bipyramid",
+  "generations": 1,
+  "rules": [
+    {
+      "op": "bulge",
+      "selector": "all",
+      "params": {
+        "amount": 0.06
+      }
+    }
+  ]
+}

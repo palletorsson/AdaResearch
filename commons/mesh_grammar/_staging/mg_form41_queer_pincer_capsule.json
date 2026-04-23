@@ -1,0 +1,44 @@
+{
+  "id": "mg_form41_queer_pincer_capsule",
+  "notes": "EXTREME QUEER REACH: side mass on a capsule seed is enlarged before a long outward throw. Tests whether a softer seed can hold a dramatic side-reach better than the cube bastions.",
+  "seed": "capsule",
+  "seed_scale": 0.5,
+  "generations": 2,
+  "camera_pitch": 0.32,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "side",
+      "params": {
+        "amount": 0.12,
+        "inner_tag": "pincer_core",
+        "border_tag": "pincer_rim"
+      }
+    },
+    {
+      "op": "scale",
+      "selector": "tag:pincer_core",
+      "params": {
+        "scale": 1.22
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:pincer_core",
+      "params": {
+        "distance": 0.2,
+        "scale": 1.03,
+        "top_tag": "pincer_top",
+        "side_tag": "pincer_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "rotate",
+      "selector": "tag:pincer_top",
+      "params": {
+        "angle_degrees": 14
+      }
+    }
+  ]
+}

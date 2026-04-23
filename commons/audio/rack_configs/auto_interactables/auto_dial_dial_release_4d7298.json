@@ -1,0 +1,32 @@
+{
+  "rack_info": {
+    "name": "auto_dial_dial_release_4d7298",
+    "description": "DIAL — release unit(0-1) smooth, color #ff8844",
+    "version": "auto-1",
+    "sound_type": "basic_sine_wave",
+    "auto_generated": true,
+    "family": "interactable"
+  },
+  "layout": {
+    "padding_px": 30,
+    "gap_px": 10,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "ctrl"
+    ]
+  ],
+  "control_definitions": {
+    "ctrl": {
+      "type": "dial",
+      "label": "RELEAS",
+      "color": "#ff8844",
+      "parameter": "release",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    }
+  }
+}

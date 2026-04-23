@@ -1,0 +1,37 @@
+{
+  "id": "gg00_tree_with_segments",
+  "notes": "Branches get subdivided after spawning \u00e2\u20ac\u201d gives visible kinks/joints.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.16
+  },
+  "iterations": 3,
+  "color": [
+    0.45,
+    0.3,
+    0.2
+  ],
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 1.0,
+        "spread_deg": 30,
+        "radius_decay": 0.7
+      }
+    },
+    {
+      "op": "subdivide_edge",
+      "selector": "all",
+      "params": {
+        "min_length": 0.7
+      }
+    }
+  ]
+}

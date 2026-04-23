@@ -33,7 +33,12 @@ var _captured: int = 0
 
 func _initialize() -> void:
 	_parse_args()
-	DirAccess.make_dir_recursive_absolute(_output_dir)
+	# make_dir_recursive_absolute does not handle `user://` URLs.
+	# Globalize first so the OS-native absolute path is what we create.
+	var abs_dir: String = _output_dir
+	if abs_dir.begins_with("user://"):
+		abs_dir = ProjectSettings.globalize_path(_output_dir)
+	DirAccess.make_dir_recursive_absolute(abs_dir)
 	call_deferred("_run_all")
 
 
@@ -146,7 +151,12 @@ func _capture_one(type_key: String, control_def: Dictionary) -> void:
 	if image:
 		var abs_path: String
 		if _output_dir.begins_with("user://"):
-			abs_path = OS.get_user_data_dir() + _output_dir.substr(7) + type_key + ".png"
+			# globalize_path handles the `user://` → native-OS path conversion
+			# including the separator between the data dir and our subpath.
+			var base: String = ProjectSettings.globalize_path(_output_dir)
+			if not base.ends_with("/") and not base.ends_with("\\"):
+				base += "/"
+			abs_path = base + type_key + ".png"
 		else:
 			abs_path = _output_dir + type_key + ".png"
 		var err := image.save_png(abs_path)

@@ -1,5 +1,22 @@
 extends Node3D
 
+
+# Spine-corridor contract — see doc/SPINE_HINTS_CONTRACT.md.
+# grid_lines reads as "a lattice floating in void" — the cells around it
+# should STAY void to preserve that design intent. That signal now lives
+# in the registry as `spatial_needs.platform = "sunken"` (step 2a: one
+# source of truth). No tag needed here.
+func spine_hints() -> Dictionary:
+	return {
+		"role":         "primary",
+		"footprint":    Vector2i(5, 5),     # 5x5 lattice from grid_size default
+		"approach":     "any",
+		"reading_dist": 1.0,
+		"budget_ms":    0.6,
+		"tags":         ["visual", "static", "isolated"],
+	}
+
+
 # @identity
 # essence: grid = {x=i*step, z=j*step : i,j ∈ ℤ} — the XZ plane made legible as a lattice of lines
 # desire: learner experiences space as structured and measurable, not infinite and featureless

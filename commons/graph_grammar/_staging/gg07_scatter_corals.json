@@ -1,0 +1,38 @@
+{
+  "id": "gg07_scatter_corals",
+  "notes": "8 scatter seeds + coral recipe + metaball \u00e2\u20ac\u201d colony of fused creatures.",
+  "seed": {
+    "scatter": {
+      "count": 8,
+      "region_size": 1.8,
+      "min_dist": 0.5,
+      "shape": "disk",
+      "radius": 0.1,
+      "seed": 13
+    }
+  },
+  "iterations": 2,
+  "render_mode": "metaball",
+  "metaball_smoothness": 0.18,
+  "metaball_resolution": 72,
+  "materials": {
+    "default": [
+      0.7,
+      0.36,
+      0.33
+    ]
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.5,
+        "spread_deg": 55,
+        "radius_decay": 0.7,
+        "jitter": 0.5
+      }
+    }
+  ]
+}

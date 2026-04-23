@@ -43,10 +43,15 @@ const UTILITY_TYPES = {
 		"supports_parameters": true  # x, y, z, delay
 	},
 	"s": {
-		"name": "spawn_point", 
-		"file": "spawn_point_scene.tscn", 
+		"name": "spawn_point",
+		"file": "spawn_point_scene.tscn",
 		"category": "transport",
-		"description": "Player starting position and respawn location",
+		# OPTIONAL. When absent, GridSpawnComponent places the player at the
+		# centroid of floor cells, facing the centroid of interactables.
+		# See the SPAWN POLICY doc block at the top of GridSpawnComponent.gd.
+		# Add `s` only to override position; add map_data.json
+		# `spawn_points.default.rotation` to override facing.
+		"description": "Optional — explicit player start. Defaults to floor centroid facing interactables.",
 		"supports_parameters": true  # spawn_name, rotation, priority
 	},
 	"cp": {
@@ -302,6 +307,97 @@ const UTILITY_TYPES = {
 		"category": "empty",
 		"description": "Empty grid space",
 		"supports_parameters": false
+	},
+
+	# ─────────────────────────────────────────────────────────────
+	# AUTHORIAL ANNOTATIONS (@-prefixed)
+	# Invisible at runtime. Read by the map pipeline (validation,
+	# reverse-extraction, differential capture, constraint solver).
+	# They declare authorial intent the generator must respect.
+	# ─────────────────────────────────────────────────────────────
+	"@void": {
+		"name": "annotation_void",
+		"file": "",
+		"category": "authorial",
+		"description": "Argued emptiness — this cell (or W:D region anchored here) MUST stay empty. Stronger than absence. Generator, placement rules, and biome layers all skip. Params: W:D footprint extending +x/+z from anchor (default 1:1).",
+		"supports_parameters": true  # W:D (e.g. "@void:3:2")
+	},
+	"@look": {
+		"name": "annotation_look",
+		"file": "",
+		"category": "authorial",
+		"description": "Change-detection region anchor. Params: W:D cell footprint. Capture pipeline diffs this zone between runs and surfaces deltas.",
+		"supports_parameters": true  # W:D (e.g. "@look:3:2")
+	},
+	"@sample": {
+		"name": "annotation_sample",
+		"file": "",
+		"category": "authorial",
+		"description": "Named golden reference region. Generator copies verbatim when scoring similarity. Params: key:W:D — `key` identifies the sample for cross-map reuse (e.g. @sample:pedestal_single:3:3).",
+		"supports_parameters": true  # key:W:D
+	},
+	"@hold": {
+		"name": "annotation_hold",
+		"file": "",
+		"category": "authorial",
+		"description": "Frozen region — generator cannot modify ANY cell inside this W:D footprint, whatever the cells contain. Stronger than @void (which forbids placement) and @sample (which reads but doesn't lock).",
+		"supports_parameters": true  # W:D
+	},
+	"@must": {
+		"name": "annotation_must",
+		"file": "",
+		"category": "authorial",
+		"description": "Required artifact slot — generator must place the named token here. Params: token name (e.g. @must:rotation_gimbal).",
+		"supports_parameters": true
+	},
+	"@block": {
+		"name": "annotation_block",
+		"file": "",
+		"category": "authorial",
+		"description": "Exclusion — the named token may not appear on this map. Params: token name.",
+		"supports_parameters": true
+	},
+	"@signature": {
+		"name": "annotation_signature",
+		"file": "",
+		"category": "authorial",
+		"description": "Load-bearing artifact — protected from dimming/shuffling by composition passes. Params: token name.",
+		"supports_parameters": true
+	},
+	"@breath": {
+		"name": "annotation_breath",
+		"file": "",
+		"category": "authorial",
+		"description": "Intentional sparse zone — biome layers dim here. Authored breath in a dense sequence.",
+		"supports_parameters": false
+	},
+	"@echo": {
+		"name": "annotation_echo",
+		"file": "",
+		"category": "authorial",
+		"description": "Sequence-echo marker — run an earlier sequence's biome layers at this stage. Params: sequence name (e.g. @echo:primitives).",
+		"supports_parameters": true
+	},
+	"@style": {
+		"name": "annotation_style",
+		"file": "",
+		"category": "authorial",
+		"description": "Style hint for biome palette/density. Params: style token (kusama|rams|bauhaus|escher|pompeii).",
+		"supports_parameters": true
+	},
+	"@seed": {
+		"name": "annotation_seed",
+		"file": "",
+		"category": "authorial",
+		"description": "Deterministic seed override for generation around this cell. Params: integer.",
+		"supports_parameters": true
+	},
+	"@dense": {
+		"name": "annotation_dense",
+		"file": "",
+		"category": "authorial",
+		"description": "Per-map density multiplier hint, applied by surrounding generation. Params: float 0..1.",
+		"supports_parameters": true
 	}
 }
 
@@ -312,6 +408,7 @@ const CATEGORIES = {
 	"structure": "Structural elements and barriers",
 	"furniture": "Furniture and static objects",
 	"interactive": "Interactive and grabbable objects",
+	"authorial": "Authorial annotations — invisible at runtime, read by the pipeline",
 	"ui": "User interface elements",
 	"educational": "Educational and informational content",
 	"navigation": "Navigation aids and indicators",

@@ -1,0 +1,44 @@
+{
+  "id": "gg13_ca_seeder_day_night",
+  "notes": "Day-and-Night CA \u00e2\u20ac\u201d symmetric rules produce large stable islands and continents.",
+  "seed": {
+    "ca_scatter": {
+      "rule": "day_and_night",
+      "iterations": 40,
+      "grid_size": 24,
+      "region_size": 3.0,
+      "y": 0,
+      "density": 0.5,
+      "seed": 42,
+      "radius": 0.08,
+      "jitter": 0.2
+    }
+  },
+  "iterations": 2,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_red"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.35,
+        "spread_deg": 25,
+        "radius_decay": 0.72
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 9,
+        "length": 0.12,
+        "radius": 0.015,
+        "splay": 0.9
+      }
+    }
+  ]
+}

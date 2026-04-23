@@ -1,0 +1,43 @@
+{
+  "id": "mg_form40_queer_wing_arch",
+  "notes": "EXTREME QUEER REACH: portal band is grown into a projecting wing-frame rather than a respectable arch. More camp entrance than architectural opening.",
+  "seed": "arch",
+  "generations": 1,
+  "camera_pitch": 0.3,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "all",
+      "params": {
+        "amount": 0.1,
+        "inner_tag": "wing_band",
+        "border_tag": "wing_skin"
+      }
+    },
+    {
+      "op": "scale",
+      "selector": "tag:wing_band",
+      "params": {
+        "scale": 1.1
+      }
+    },
+    {
+      "op": "rotate",
+      "selector": "tag:wing_band",
+      "params": {
+        "angle_degrees": 18
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:wing_band",
+      "params": {
+        "distance": 0.22,
+        "scale": 1.02,
+        "top_tag": "wing_core",
+        "side_tag": "wing_core_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

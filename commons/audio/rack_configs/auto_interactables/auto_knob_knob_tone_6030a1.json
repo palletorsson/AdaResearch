@@ -1,0 +1,32 @@
+{
+  "rack_info": {
+    "name": "auto_knob_knob_tone_6030a1",
+    "description": "KNOB — tone db(-60-12) smooth, color #ff8844",
+    "version": "auto-1",
+    "sound_type": "basic_sine_wave",
+    "auto_generated": true,
+    "family": "interactable"
+  },
+  "layout": {
+    "padding_px": 30,
+    "gap_px": 10,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "ctrl"
+    ]
+  ],
+  "control_definitions": {
+    "ctrl": {
+      "type": "knob",
+      "label": "TONE",
+      "color": "#ff8844",
+      "parameter": "tone",
+      "min": -60.0,
+      "max": 12.0,
+      "default": 0.0
+    }
+  }
+}

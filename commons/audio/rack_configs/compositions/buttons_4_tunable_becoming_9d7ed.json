@@ -1,0 +1,49 @@
+{
+  "rack_info": {
+    "name": "4x BUTTON",
+    "description": "4x BUTTON — auto-generated UVAC composition. sound_type=tunable_becoming, composition_type=buttons.",
+    "version": "auto-1",
+    "sound_type": "tunable_becoming",
+    "auto_generated": true,
+    "composition_type": "buttons",
+    "composition_count": 4
+  },
+  "layout": {
+    "padding_px": 20,
+    "gap_px": 14
+  },
+  "grid": [
+    [
+      "bt_0",
+      "bt_1",
+      "bt_2",
+      "bt_3"
+    ]
+  ],
+  "control_definitions": {
+    "bt_0": {
+      "type": "btn",
+      "label": "TRIG 1",
+      "parameter": "trigger_0",
+      "action": "trigger"
+    },
+    "bt_1": {
+      "type": "btn",
+      "label": "TRIG 2",
+      "parameter": "trigger_1",
+      "action": "trigger"
+    },
+    "bt_2": {
+      "type": "btn",
+      "label": "TRIG 3",
+      "parameter": "trigger_2",
+      "action": "trigger"
+    },
+    "bt_3": {
+      "type": "btn",
+      "label": "TRIG 4",
+      "parameter": "trigger_3",
+      "action": "trigger"
+    }
+  }
+}

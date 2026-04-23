@@ -1,0 +1,28 @@
+{
+  "id": "mg_form44_lowres_sphere_crown",
+  "notes": "LOW-RES SPHERE EXPANSION: all faces first enlarge, then extrude. This tries to make the low-res sphere feel like a crowned swollen body rather than a spiky mine.",
+  "seed": "icosahedron",
+  "seed_scale": 0.32,
+  "generations": 1,
+  "camera_pitch": 0.32,
+  "rules": [
+    {
+      "op": "scale",
+      "selector": "all",
+      "params": {
+        "scale": 1.18
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "all",
+      "params": {
+        "distance": 0.28,
+        "scale": 1.1,
+        "top_tag": "crown_top",
+        "side_tag": "crown_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

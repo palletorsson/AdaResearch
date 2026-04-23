@@ -1,0 +1,56 @@
+{
+  "id": "gg_noise01_plant_perturbed",
+  "notes": "DNA BRIDGE: L-system plant + universal noise-displace post-op. Every node jitters by 3D simplex noise \u2014 straight branches become organic wobbly branches. Same DNA plus noise as modifier.",
+  "seed": {
+    "lsystem": {
+      "axiom": "F",
+      "rules": {
+        "F": "F[+F]F[-F]F"
+      },
+      "iterations": 4,
+      "angle_deg": 25.7,
+      "step_len": 0.25,
+      "step_shrink": 0.72,
+      "base_radius": 0.09,
+      "radius_shrink": 0.78,
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "iterations": 0,
+  "rules": [],
+  "post_ops": [
+    {
+      "op": "noise_displace",
+      "amplitude": 0.08,
+      "frequency": 1.5,
+      "octaves": 3,
+      "persistence": 0.5,
+      "seed": 42,
+      "noise_type": "simplex",
+      "mode": "vector"
+    }
+  ],
+  "render_mode": "chandelier",
+  "chandelier": {
+    "edge_color": [
+      0.14,
+      0.1,
+      0.08
+    ],
+    "leaf_color": [
+      0.95,
+      0.88,
+      0.75
+    ],
+    "leaf_emission": 1.6,
+    "edge_radius": 0.006,
+    "leaf_radius": 0.06
+  },
+  "camera_yaw": 0.4,
+  "camera_pitch": 0.12,
+  "max_nodes": 3000
+}

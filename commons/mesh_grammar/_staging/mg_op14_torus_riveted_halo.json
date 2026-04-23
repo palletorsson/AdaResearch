@@ -1,0 +1,21 @@
+{
+  "id": "mg_op14_torus_riveted_halo",
+  "notes": "UNDERUSED-OPS PASS: torus seed with all edges riveted. Uses edge_decorate without boundary-only mode so the whole ring becomes a bead-studded halo.",
+  "seed": "torus",
+  "seed_scale": 0.78,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "edge_decorate",
+      "selector": "all",
+      "params": {
+        "shape": "sphere",
+        "size": 0.032,
+        "spacing": 0.16,
+        "offset": 0.015,
+        "segments": 4,
+        "boundary_only": false
+      }
+    }
+  ]
+}

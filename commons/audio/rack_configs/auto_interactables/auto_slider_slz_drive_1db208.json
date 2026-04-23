@@ -1,0 +1,32 @@
+{
+  "rack_info": {
+    "name": "auto_slider_slz_drive_1db208",
+    "description": "SLZ — drive hz_high(2000-20000) smooth, color #ff44aa",
+    "version": "auto-1",
+    "sound_type": "basic_sine_wave",
+    "auto_generated": true,
+    "family": "interactable"
+  },
+  "layout": {
+    "padding_px": 30,
+    "gap_px": 10,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "ctrl"
+    ]
+  ],
+  "control_definitions": {
+    "ctrl": {
+      "type": "slz",
+      "label": "DRIVE",
+      "color": "#ff44aa",
+      "parameter": "drive",
+      "min": 2000.0,
+      "max": 20000.0,
+      "default": 11000.0
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "psX_three_globes_on_plate",
+  "notes": "CROSS: three revolution globes arranged as legs under a plate \u00e2\u20ac\u201d alien modernist coffee table.",
+  "layout": "compose",
+  "camera_pitch": 0.3,
+  "camera_yaw": 0.55,
+  "parts": [
+    {
+      "y": 0,
+      "config": {
+        "layout": "under_plate",
+        "leg_size": 0.3,
+        "plate_radius": 0.7,
+        "plate_color": [
+          0.92,
+          0.92,
+          0.9
+        ],
+        "legs": [
+          {
+            "shape": "sphere",
+            "color": "#c0392b"
+          },
+          {
+            "shape": "sphere",
+            "color": "#14364a"
+          },
+          {
+            "shape": "sphere",
+            "color": "#f0c94f"
+          }
+        ]
+      }
+    }
+  ]
+}

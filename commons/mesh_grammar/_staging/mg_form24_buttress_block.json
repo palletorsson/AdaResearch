@@ -1,0 +1,29 @@
+{
+  "id": "mg_form24_buttress_block",
+  "notes": "FORM STUDY: side-face selection only. Cube gets inset side panels that push outward into buttresses or ribs.",
+  "seed": "cube",
+  "seed_scale": 0.58,
+  "generations": 2,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "side",
+      "params": {
+        "amount": 0.14,
+        "inner_tag": "side_panel",
+        "border_tag": "side_frame"
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:side_panel",
+      "params": {
+        "distance": 0.08,
+        "scale": 0.94,
+        "top_tag": "buttress_face",
+        "side_tag": "buttress_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

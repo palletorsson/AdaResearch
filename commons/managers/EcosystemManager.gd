@@ -6,11 +6,14 @@
 extends Node
 
 const STAGES_FILE = "res://commons/maps/soft_stages.json"
+const SEQUENCES_DIR = "res://commons/maps/sequences/"
 const SAVE_FILE = "user://ecosystem_progression.json"
 
 # Current state — rebuilt from completed sequences + soft_stages.json
 var _all_stages: Dictionary = {}
 var _completed_sequences: Array[String] = []
+# map_name -> sequence_name, built once from commons/maps/sequences/*.json
+var _map_to_sequence: Dictionary = {}
 var _allowed_flags: Dictionary = {}  # flag_name -> true (acts as Set)
 var _current_kingdoms: Array[String] = []
 var _current_vegetation_density: float = 0.0
@@ -28,11 +31,12 @@ signal ecosystem_stage_advanced(sequence_name: String)
 
 func _ready():
 	_load_stages()
+	_load_map_sequence_index()
 	_load_saved_progress()
 	_rebuild_state()
 	call_deferred("_connect_progression_signals")
-	print("EcosystemManager: Initialized with %d stages, %d completed sequences, %d flags active" % [
-		_all_stages.size(), _completed_sequences.size(), _allowed_flags.size()
+	print("EcosystemManager: Initialized with %d stages, %d maps indexed, %d completed sequences, %d flags active" % [
+		_all_stages.size(), _map_to_sequence.size(), _completed_sequences.size(), _allowed_flags.size()
 	])
 
 # ---------------------------------------------------------------------------
@@ -75,6 +79,21 @@ func get_ambient_preset() -> String:
 
 func get_current_stage_order() -> int:
 	return _current_stage_order
+
+## Return the sequence that owns a given map, or "" if not indexed.
+## Index is built once at boot from commons/maps/sequences/*.json.
+func get_sequence_for_map(map_name: String) -> String:
+	return _map_to_sequence.get(map_name, "")
+
+## Auto-advance ecosystem to the sequence that owns the given map.
+## Called by GridSystem on every map load so biome matches context.
+## Monotonic: never walks backwards (walking from QFEP → primitives keeps max density).
+func sync_to_map(map_name: String) -> bool:
+	var seq: String = get_sequence_for_map(map_name)
+	if seq == "":
+		return false
+	force_advance_to(seq)
+	return true
 
 func get_ecosystem_config() -> Dictionary:
 	return {
@@ -234,6 +253,43 @@ func _load_stages() -> void:
 
 	var data: Dictionary = json.data
 	_all_stages = data.get("stages", {})
+
+## Build map_name -> sequence_name index from commons/maps/sequences/*.json.
+## Done once at boot so GridSystem doesn't scan every map load.
+func _load_map_sequence_index() -> void:
+	_map_to_sequence.clear()
+	var seq_dir := DirAccess.open(SEQUENCES_DIR)
+	if not seq_dir:
+		push_warning("EcosystemManager: Could not open " + SEQUENCES_DIR)
+		return
+	seq_dir.list_dir_begin()
+	var fname := seq_dir.get_next()
+	while fname != "":
+		if fname.ends_with(".json"):
+			_index_sequence_file(SEQUENCES_DIR + fname)
+		fname = seq_dir.get_next()
+	seq_dir.list_dir_end()
+
+func _index_sequence_file(path: String) -> void:
+	var file = FileAccess.open(path, FileAccess.READ)
+	if not file:
+		return
+	var text: String = file.get_as_text()
+	file.close()
+	var json := JSON.new()
+	if json.parse(text) != OK or not json.data is Dictionary:
+		return
+	var seqs = json.data.get("sequences", {})
+	if not seqs is Dictionary:
+		return
+	for seq_name in seqs:
+		var seq_data = seqs[seq_name]
+		if not seq_data is Dictionary:
+			continue
+		for m in seq_data.get("maps", []):
+			var mn: String = str(m.get("name", m)) if m is Dictionary else str(m)
+			if mn != "" and not _map_to_sequence.has(mn):
+				_map_to_sequence[mn] = str(seq_name)
 
 # ---------------------------------------------------------------------------
 # Save / Load

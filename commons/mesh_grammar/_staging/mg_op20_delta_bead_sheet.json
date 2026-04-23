@@ -1,0 +1,40 @@
+{
+  "id": "mg_op20_delta_bead_sheet",
+  "notes": "DNA BRIDGE + UNDERUSED-OPS PASS: a Gray-Scott delta-class sheet used as a mesh seed, then tiled with scales and dotted with beads so the RD ridges become a real ornamental surface.",
+  "seed": {
+    "rd": {
+      "F": 0.03,
+      "K": 0.055,
+      "grid_size": 56,
+      "iterations": 3200,
+      "seed": 23,
+      "world_size": 0.8,
+      "height_amp": 0.15
+    }
+  },
+  "generations": 1,
+  "rules": [
+    {
+      "op": "scatter",
+      "selector": "all",
+      "params": {
+        "shape": "cube",
+        "density": 0.6,
+        "min_size": 0.018,
+        "max_size": 0.04,
+        "offset": 0.018,
+        "align_to_normal": true,
+        "seed_value": 23
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.035,
+        "scale": 0.88,
+        "min_area": 0.0002
+      }
+    }
+  ]
+}

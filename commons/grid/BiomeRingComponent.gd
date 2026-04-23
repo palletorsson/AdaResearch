@@ -254,6 +254,20 @@ func _place_foliage(grid_w: float, grid_d: float, grid_center: Vector3,
 			if t not in types:
 				types.append(t as String)
 
+	# Gate by grammar — drop foliage whose required form_type is not yet unlocked.
+	# Before L-systems (seq 11), no trees or bushes. Before CA (seq 8), no mushrooms.
+	# Before wavefunctions (seq 5), no reeds. Before swarm (seq 13), no creatures.
+	var grammar = get_node_or_null("/root/GrammarOperationsManager")
+	if grammar and grammar.has_method("filter_foliage_types"):
+		var before: Array[String] = types.duplicate()
+		types = grammar.filter_foliage_types(types)
+		if types.size() < before.size():
+			var dropped: Array[String] = []
+			for t in before:
+				if not types.has(t):
+					dropped.append(t)
+			print("[BiomeRing] Grammar gated foliage — dropped: %s" % str(dropped))
+
 	if types.is_empty():
 		types = ["grass"]
 

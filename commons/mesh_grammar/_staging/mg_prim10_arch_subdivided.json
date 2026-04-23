@@ -1,0 +1,16 @@
+{
+  "id": "mg_prim10_arch_subdivided",
+  "notes": "PRIMITIVE-AS-SEED: Ada architectural arch + extrude. The semicircle-arch becomes a ribbed archway with visible face extensions.",
+  "seed": "arch",
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "all",
+      "params": {
+        "distance": 0.06,
+        "scale": 0.88
+      }
+    }
+  ]
+}

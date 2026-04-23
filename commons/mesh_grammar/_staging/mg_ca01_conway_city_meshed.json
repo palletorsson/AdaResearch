@@ -1,0 +1,34 @@
+{
+  "id": "mg_ca01_conway_city_meshed",
+  "notes": "DNA BRIDGE: Conway Life pattern as extruded-box mesh seed. Mesh-grammar then insets the top faces \u2014 blocks get classical buildings with stepped tops.",
+  "seed": {
+    "ca": {
+      "rule": "conway",
+      "grid_size": 14,
+      "iterations": 8,
+      "density": 0.45,
+      "seed": 3,
+      "cell_size": 0.08,
+      "base_height": 0.1,
+      "height_scale": 0.04
+    }
+  },
+  "generations": 2,
+  "rules": [
+    {
+      "op": "inset",
+      "selector": "up",
+      "params": {
+        "amount": 0.2
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.08,
+        "scale": 0.85
+      }
+    }
+  ]
+}

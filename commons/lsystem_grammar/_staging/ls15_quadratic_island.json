@@ -1,0 +1,26 @@
+{
+  "id": "ls15_quadratic_island",
+  "axiom": "F+F+F+F",
+  "rules": {
+    "F": "F+F-F-FF+F+F-F"
+  },
+  "iterations": 3,
+  "angle_deg": 90,
+  "step_len": 0.015,
+  "interpretation": "lines",
+  "color_trunk": [
+    0.22,
+    0.2,
+    0.46
+  ],
+  "color_tip": [
+    0.76,
+    0.74,
+    0.98
+  ],
+  "camera_yaw": 0.001,
+  "camera_pitch": 1.4,
+  "layout": "fractal_curve",
+  "dna_connections": [],
+  "notes": "Quadratic island-style right-angle curve from Paul Bourke's L-system notes, using a square axiom and a denser F replacement."
+}

@@ -1,0 +1,35 @@
+{
+  "id": "gg02_urchin_metaball_soft",
+  "notes": "The red urchin \u00e2\u20ac\u201d same topology, rendered as marching-cubes smooth union. Soft fusion at roots, bristles remain distinct.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.1
+  },
+  "iterations": 1,
+  "render_mode": "metaball",
+  "metaball_smoothness": 0.08,
+  "metaball_resolution": 96,
+  "materials": {
+    "default": [
+      0.72,
+      0.4,
+      0.38
+    ]
+  },
+  "rules": [
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 200,
+        "length": 0.35,
+        "radius": 0.02,
+        "splay": 1.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "gg00_rhizome_horizontal",
+  "notes": "Sideways-growing rhizome \u00e2\u20ac\u201d root direction flipped to horizontal by tweaking initial spread past 90.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.12
+  },
+  "iterations": 4,
+  "color": [
+    0.55,
+    0.45,
+    0.3
+  ],
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 2,
+        "length": 0.8,
+        "spread_deg": 85,
+        "radius_decay": 0.8,
+        "jitter": 0.5
+      }
+    }
+  ]
+}

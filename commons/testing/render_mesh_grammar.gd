@@ -131,7 +131,7 @@ func _run() -> void:
 	var gmat := StandardMaterial3D.new()
 	gmat.albedo_color = Color(0.12, 0.13, 0.16); gmat.roughness = 0.95
 	ground.material_override = gmat
-	ground.position = Vector3(0, -0.01, 0)
+	ground.position = Vector3(0, -0.05, 0)
 	scene.add_child(ground)
 
 	# Camera placeholder — refined after we know AABB
@@ -208,16 +208,29 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 
+	# Seat the generated form on the floor plane so the ground does not cut through it.
+	var prelift_aabb := _combined_aabb(mg_node)
+	var floor_clearance: float = float(config.get("floor_clearance", 0.05))
+	var target_min_y := ground.position.y + floor_clearance
+	if prelift_aabb.position.y < target_min_y:
+		mg_node.position.y += target_min_y - prelift_aabb.position.y
+		await process_frame
+
 	# Frame camera on the result
 	var aabb := _combined_aabb(mg_node)
 	var center: Vector3 = aabb.get_center()
-	var max_dim: float = maxf(maxf(aabb.size.x, aabb.size.y), aabb.size.z)
-	var dist: float = maxf(max_dim * 2.2, 1.5)
+	var focus_y_bias: float = float(config.get("camera_focus_y_bias", -0.08))
+	var fit_padding: float = float(config.get("camera_fit_padding", 0.72))
+	var focus: Vector3 = center + Vector3(0.0, aabb.size.y * focus_y_bias, 0.0)
 	var yaw: float = float(config.get("camera_yaw", 0.55))
 	var pitch: float = float(config.get("camera_pitch", 0.35))   # positive = looking down from above
-	var offset := Vector3(sin(yaw) * cos(pitch), sin(pitch), cos(yaw) * cos(pitch)) * dist
-	cam.global_position = center + offset
-	cam.look_at(center, Vector3.UP)
+	var orbit_dir := Vector3(sin(yaw) * cos(pitch), sin(pitch), cos(yaw) * cos(pitch)).normalized()
+	var forward := -orbit_dir
+	var basis := _camera_basis_from_forward(forward)
+	var dist: float = _fit_distance_for_aabb(aabb, focus, basis, deg_to_rad(cam.fov), 1.0, fit_padding)
+	var offset := orbit_dir * maxf(dist, 1.8)
+	cam.global_position = focus + offset
+	cam.look_at(focus, Vector3.UP)
 
 	# Viewport size
 	root.content_scale_size = Vector2i(_size, _size)
@@ -286,6 +299,17 @@ func _parse_selector(s: String) -> MeshSelector:
 	if s.begins_with("depth:"):
 		var d := int(s.substr(6))
 		return MeshSelector.by_depth(d, d)
+	if s.begins_with("index:"):
+		var idx := int(s.substr(6))
+		return MeshSelector.by_index(PackedInt32Array([idx]))
+	if s.begins_with("indices:"):
+		var raw := s.substr(8).split(",", false)
+		var indices := PackedInt32Array()
+		for part in raw:
+			var p := String(part).strip_edges()
+			if p.is_valid_int():
+				indices.append(int(p))
+		return MeshSelector.by_index(indices)
 	return MeshSelector.all_faces()
 
 
@@ -305,6 +329,58 @@ func _combined_aabb(node: Node3D) -> AABB:
 	if first:
 		return AABB(Vector3(-1, -1, -1), Vector3(2, 2, 2))
 	return total
+
+
+func _camera_basis_from_forward(forward: Vector3) -> Dictionary:
+	var world_up := Vector3.UP
+	if abs(forward.dot(world_up)) > 0.98:
+		world_up = Vector3.FORWARD
+	var right := forward.cross(world_up).normalized()
+	var up := right.cross(forward).normalized()
+	return {
+		"forward": forward,
+		"right": right,
+		"up": up,
+	}
+
+
+func _fit_distance_for_aabb(
+		aabb: AABB,
+		focus: Vector3,
+		basis: Dictionary,
+		vfov: float,
+		aspect: float,
+		padding: float) -> float:
+	var tan_v: float = tan(vfov * 0.5) * padding
+	var tan_h: float = tan(atan(tan(vfov * 0.5) * aspect)) * padding
+	var forward: Vector3 = basis["forward"]
+	var right: Vector3 = basis["right"]
+	var up: Vector3 = basis["up"]
+	var required_dist: float = 0.0
+	for corner in _aabb_corners(aabb):
+		var rel: Vector3 = corner - focus
+		var x: float = abs(rel.dot(right))
+		var y: float = abs(rel.dot(up))
+		var z_offset: float = rel.dot(forward)
+		required_dist = maxf(required_dist, x / maxf(tan_h, 0.001) - z_offset)
+		required_dist = maxf(required_dist, y / maxf(tan_v, 0.001) - z_offset)
+	var max_dim: float = maxf(maxf(aabb.size.x, aabb.size.y), aabb.size.z)
+	return maxf(required_dist + max_dim * 0.12, 1.8)
+
+
+func _aabb_corners(aabb: AABB) -> Array[Vector3]:
+	var p: Vector3 = aabb.position
+	var s: Vector3 = aabb.size
+	return [
+		Vector3(p.x, p.y, p.z),
+		Vector3(p.x + s.x, p.y, p.z),
+		Vector3(p.x, p.y + s.y, p.z),
+		Vector3(p.x, p.y, p.z + s.z),
+		Vector3(p.x + s.x, p.y + s.y, p.z),
+		Vector3(p.x + s.x, p.y, p.z + s.z),
+		Vector3(p.x, p.y + s.y, p.z + s.z),
+		Vector3(p.x + s.x, p.y + s.y, p.z + s.z),
+	]
 
 
 ## DNA BRIDGE — build a heightmap MeshData from a Gray-Scott RD simulation.

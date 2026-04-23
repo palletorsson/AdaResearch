@@ -1,0 +1,17 @@
+{
+  "id": "gen00_petals",
+  "notes": "Icosphere top faces splayed like petals.",
+  "seed": "icosahedron",
+  "seed_scale": 0.5,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "petal_splay",
+      "selector": "up",
+      "params": {
+        "splay": 0.4,
+        "length": 0.6
+      }
+    }
+  ]
+}

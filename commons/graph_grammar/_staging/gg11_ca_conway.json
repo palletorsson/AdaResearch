@@ -1,0 +1,53 @@
+{
+  "id": "gg11_ca_conway",
+  "notes": "Scatter forest + Conway's Game of Life pruning \u00e2\u20ac\u201d trees survive only in CA-alive cells.",
+  "seed": {
+    "scatter": {
+      "count": 40,
+      "region_size": 2.2,
+      "min_dist": 0.25,
+      "shape": "disk",
+      "radius": 0.08,
+      "seed": 3
+    }
+  },
+  "iterations": 2,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 2,
+        "length": 0.4,
+        "spread_deg": 30,
+        "radius_decay": 0.7
+      }
+    },
+    {
+      "op": "ca_prune",
+      "selector": "all",
+      "params": {
+        "rule": "conway",
+        "iterations": 15,
+        "grid_size": 28,
+        "world_size": 5.0,
+        "seed_density": 0.4,
+        "seed": 11
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 8,
+        "length": 0.13,
+        "radius": 0.015,
+        "splay": 0.9
+      }
+    }
+  ]
+}

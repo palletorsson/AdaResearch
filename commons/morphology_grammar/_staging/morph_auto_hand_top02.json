@@ -1,0 +1,55 @@
+{
+  "id": "morph_auto_hand_top02",
+  "family": "hand",
+  "notes": "Auto-researched hand variant: 25 finger extrusions, palm kept flat and contiguous.",
+  "camera_yaw": 0.765,
+  "camera_pitch": 0.344,
+  "seed": {
+    "type": "flat_box",
+    "size": [
+      1.468,
+      0.261,
+      0.759
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 5,
+  "rules": [
+    {
+      "id": "palm_to_fingers",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.75
+      },
+      "selector": "front",
+      "op": "finger_array",
+      "params": {
+        "count": 5,
+        "length": 0.524,
+        "fill": 0.912,
+        "thickness_scale": 1.013
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.8
+    },
+    {
+      "id": "palm_to_wrist",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.75
+      },
+      "selector": "back",
+      "op": "extrude",
+      "params": {
+        "length": 0.238,
+        "scale": 0.48
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

@@ -1,4 +1,15 @@
 extends Node3D
+
+# @identity
+# essence: monitors distance from player each physics frame; spawns enemy_type when player enters spawn_radius, despawns when past despawn_radius, and waits respawn_delay seconds before trying again
+# desire: to make the world feel inhabited — the learner never knows exactly when a creature will appear, so proximity itself becomes a kind of alertness
+# critical_parameter: spawn_radius vs despawn_radius (15m vs 30m) — the asymmetry creates a hysteresis zone where the creature stays alive even as the player backs away; avoids the flickering of a symmetric threshold
+# triggers: _physics_process polls distance every frame; _deferred_init finds the player node after scene load; _spawn_enemy() instantiates from ENEMY_SCENES dictionary by type name
+# emerges: respawn_delay creates rhythm — after a creature dies, there is a 2-second silence before the next appears; that gap is where the learner exhales
+# needs: VR visual feedback on spawn [missing — no sound, no flash]; enemy_type selector in VR [missing]; apply_grid_config [missing]
+# relationships: used in LSystems_Competition and LSystems_Living to place folding hazard creatures; works with miura_crawler, kresling_spire, scissor_stalker, and origami_droideka; relies on GameManager to find player node
+# truth: presence is not a property of the creature — it is a function of distance; the spawner makes explicit what is always true: things only exist for you within a radius
+
 class_name ProximitySpawner
 ## Spawns enemies when player enters radius, respawns after death.
 

@@ -1,0 +1,16 @@
+{
+  "id": "gen01_bulge_all",
+  "notes": "Bulge every face \u2014 lumpy stone.",
+  "seed": "icosahedron",
+  "seed_scale": 0.45,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "bulge",
+      "selector": "all",
+      "params": {
+        "amount": 0.3
+      }
+    }
+  ]
+}

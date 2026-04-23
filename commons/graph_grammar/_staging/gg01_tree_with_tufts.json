@@ -1,0 +1,39 @@
+{
+  "id": "gg01_tree_with_tufts",
+  "notes": "Tree with leaf_tuft foliage at the tips.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.2
+  },
+  "iterations": 3,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.9,
+        "spread_deg": 35,
+        "radius_decay": 0.65
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 12,
+        "length": 0.25,
+        "radius": 0.02,
+        "splay": 0.65
+      }
+    }
+  ]
+}

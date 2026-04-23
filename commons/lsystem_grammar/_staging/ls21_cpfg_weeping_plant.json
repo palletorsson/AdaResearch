@@ -1,0 +1,33 @@
+{
+  "id": "ls21_cpfg_weeping_plant",
+  "axiom": "X",
+  "rules": {
+    "X": "F-[[X]+X]+F[+FX]-X",
+    "F": "FF"
+  },
+  "iterations": 5,
+  "angle_deg": 22.5,
+  "step_len": 0.03,
+  "step_shrink": 0.74,
+  "interpretation": "tubes",
+  "base_width": 0.011,
+  "width_shrink": 0.79,
+  "tube_sides": 6,
+  "color_trunk": [
+    0.3,
+    0.19,
+    0.1
+  ],
+  "color_tip": [
+    0.42,
+    0.76,
+    0.3
+  ],
+  "camera_yaw": 0.22,
+  "camera_pitch": 0.2,
+  "layout": "tree",
+  "dna_connections": [
+    "mesh_grammar"
+  ],
+  "notes": "Weeping, nested-canopy plant from the CPFG manual: X->F-[[X]+X]+F[+FX]-X with F->FF."
+}

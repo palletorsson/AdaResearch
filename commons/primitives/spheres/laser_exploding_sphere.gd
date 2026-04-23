@@ -1,6 +1,16 @@
 ﻿@tool
 extends StaticBody3D
 
+# @identity
+# essence: StaticBody3D sphere on collision layer 21 — when a laser pointer ray hits it, the sphere disappears and fires 30 particle instances outward with procedurally-synthesized explosion audio (noise burst + 60Hz rumble, 0.3s)
+# desire: to give the learner a small violent feedback loop — point the laser, make the sphere vanish; it rewards precision with a little chaos and teaches that the laser is a tool that transforms things
+# critical_parameter: explosion_particle_count (30) — more particles feel more satisfying but are heavier; the audio synthesis uses randf() noise with exponential decay, so every explosion sounds slightly different
+# triggers: StaticBody3D collision layer 21 catches the laser raycast; trigger_explosion() spawns particles in random outward directions, plays audio, then hides the sphere; particles queue_free after explosion_lifetime
+# emerges: the sphere resets after the explosion (it is a static teaching object, not a consumable) — the reset reveals that destruction here is a demonstration, not a consequence
+# needs: VR laser pointer interaction [has via StaticBody3D layer 21]; explosion particles [has]; explosion audio [has]; respawn delay for reset [missing — appears to hide permanently after explosion]
+# relationships: placed in Point_Lines alongside laser_measure — both are objects that the laser interacts with, but one measures and one destroys; the contrast makes the laser feel like a tool with different modes
+# truth: a laser pointer is not a cursor — it is a ray that either measures distance or triggers a reaction; the sphere teaches the second possibility
+
 ## Laser Exploding Sphere
 ## A simple sphere that explodes and disappears when hit by a laser pointer
 

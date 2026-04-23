@@ -1,0 +1,39 @@
+{
+  "id": "morph_auto_table_01",
+  "family": "table",
+  "notes": "Auto-generated table candidate.",
+  "camera_yaw": 0.729,
+  "camera_pitch": 0.295,
+  "seed": {
+    "type": "flat_box",
+    "size": [
+      1.776,
+      0.19,
+      1.151
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 1,
+  "rules": [
+    {
+      "id": "tabletop_to_legs",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.8
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2,
+        "rows": 2,
+        "select": "corners",
+        "length": 1.356,
+        "scale": 0.299
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.56
+    }
+  ]
+}

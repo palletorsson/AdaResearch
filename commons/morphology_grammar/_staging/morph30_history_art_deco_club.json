@@ -1,0 +1,103 @@
+{
+  "id": "morph30_history_art_deco_club",
+  "family": "history_furniture",
+  "notes": "History-modernism pass: an Art Deco club chair with a heavy plinth, rounded side blocks, and a tall stepped back.",
+  "camera_yaw": 0.76,
+  "camera_pitch": 0.29,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.02,
+      0.62,
+      0.9
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 6,
+  "rules": [
+    {
+      "id": "deco_plinth",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "down",
+      "op": "extrude",
+      "params": {
+        "length": 0.16,
+        "scale": 1.28
+      },
+      "child_role": "body",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "deco_back",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "back",
+      "op": "steered_extrude",
+      "params": {
+        "length": 1.06,
+        "scale": 0.66,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.88,
+          -0.08
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "deco_arms",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "left|right",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.54,
+        "scale": 0.54,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.22,
+          0.08
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "deco_seat_pad",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.78
+      },
+      "selector": "up",
+      "op": "steered_extrude",
+      "params": {
+        "length": 0.12,
+        "scale": 0.84,
+        "normal_bias": 1.0,
+        "world_bias": [
+          0.0,
+          0.08,
+          0.02
+        ]
+      },
+      "child_role": "cushion",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

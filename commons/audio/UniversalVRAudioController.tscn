@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://8h74vbx77sgg"]
+[gd_scene format=3 uid="uid://8h74vbx77sgg"]
 
-[ext_resource type="Script" path="res://commons/audio/UniversalVRAudioController.gd" id="1_v4m4"]
-[ext_resource type="Script" path="res://commons/audio/audio_controller_cable_case.gd" id="2_cable"]
+[ext_resource type="Script" uid="uid://c3sa7t0hveneg" path="res://commons/audio/UniversalVRAudioController.gd" id="1_v4m4"]
+[ext_resource type="Script" uid="uid://brek2sn82cmcf" path="res://commons/audio/audio_controller_cable_case.gd" id="2_cable"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rack"]
 size = Vector3(0.5, 0.5, 0.05)
@@ -18,25 +18,25 @@ size = Vector3(0.48, 0.48, 0.01)
 albedo_color = Color(0.07, 0.07, 0.09, 1)
 roughness = 0.3
 
-[node name="UniversalVRAudioController" type="Node3D"]
+[node name="UniversalVRAudioController" type="Node3D" unique_id=165801534]
 script = ExtResource("1_v4m4")
 
-[node name="RackMesh" type="MeshInstance3D" parent="."]
+[node name="RackMesh" type="MeshInstance3D" parent="." unique_id=360651404]
 mesh = SubResource("BoxMesh_rack")
 surface_material_override/0 = SubResource("StandardMaterial3D_metal")
 
-[node name="PanelMesh" type="MeshInstance3D" parent="RackMesh"]
+[node name="PanelMesh" type="MeshInstance3D" parent="RackMesh" unique_id=1986951275]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.026)
 mesh = SubResource("BoxMesh_panel")
 surface_material_override/0 = SubResource("StandardMaterial3D_panel")
 
-[node name="CableCase" type="Node3D" parent="."]
+[node name="CableCase" type="Node3D" parent="." unique_id=2104768883]
 script = ExtResource("2_cable")
-accent_color = Color(0.2, 0.6, 0.9, 1)
 
-[node name="ParameterGrid" type="Node3D" parent="."]
+[node name="ParameterGrid" type="Node3D" parent="." unique_id=550704856]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0.035)
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=997911449]
 unit_size = 2.0
 max_db = 0.0
+bus = &"RackBus_1518049732094295"

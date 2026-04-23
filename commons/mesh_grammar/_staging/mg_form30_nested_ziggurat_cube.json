@@ -1,0 +1,40 @@
+{
+  "id": "mg_form30_nested_ziggurat_cube",
+  "notes": "FORM STUDY: cube-based massing study using repeated roof inset + keep extrusion. More about nested hierarchy than a single tower silhouette.",
+  "seed": "cube",
+  "seed_scale": 0.62,
+  "generations": 3,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.12,
+        "scale": 1.0,
+        "top_tag": "mass_top",
+        "side_tag": "mass_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "inset",
+      "selector": "tag:mass_top",
+      "params": {
+        "amount": 0.2,
+        "inner_tag": "keep_core",
+        "border_tag": "terrace_ring"
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:keep_core",
+      "params": {
+        "distance": 0.06,
+        "scale": 0.78,
+        "top_tag": "keep_top",
+        "side_tag": "keep_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

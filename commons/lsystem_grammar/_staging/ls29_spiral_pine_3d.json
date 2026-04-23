@@ -1,0 +1,33 @@
+{
+  "id": "ls29_spiral_pine_3d",
+  "axiom": "X",
+  "rules": {
+    "X": "F[/X]F[\\X]////X",
+    "F": "FF"
+  },
+  "iterations": 4,
+  "angle_deg": 20,
+  "step_len": 0.04,
+  "step_shrink": 0.78,
+  "interpretation": "tubes",
+  "base_width": 0.012,
+  "width_shrink": 0.81,
+  "tube_sides": 6,
+  "color_trunk": [
+    0.28,
+    0.2,
+    0.12
+  ],
+  "color_tip": [
+    0.3,
+    0.66,
+    0.24
+  ],
+  "camera_yaw": 0.46,
+  "camera_pitch": 0.22,
+  "layout": "tree",
+  "dna_connections": [
+    "mesh_grammar"
+  ],
+  "notes": "Spiral conifer built from alternating roll-left / roll-right branches and a continuing trunk, using the current turtle's 3D frame."
+}

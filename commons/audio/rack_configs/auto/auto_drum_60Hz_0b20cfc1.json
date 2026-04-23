@@ -1,0 +1,79 @@
+{
+  "rack_info": {
+    "name": "Drum 60Hz",
+    "description": "One-shot drum voice. Trigger sweeps pitch from 240Hz to 60Hz with a transient click.",
+    "version": "auto-1",
+    "sound_type": "heartbeat",
+    "auto_generated": true,
+    "archetype": "drum",
+    "seed": 186699713
+  },
+  "layout": {
+    "padding_px": 18,
+    "gap_px": 14,
+    "hide_selection": true,
+    "hide_buttons": true
+  },
+  "grid": [
+    [
+      "lbl"
+    ],
+    [
+      "trig"
+    ],
+    [
+      "pitch",
+      "click"
+    ],
+    [
+      "decay",
+      "body"
+    ]
+  ],
+  "control_definitions": {
+    "lbl": {
+      "type": "label",
+      "text": "DRUM",
+      "font_size": 18
+    },
+    "trig": {
+      "type": "btn",
+      "label": "TRIG",
+      "parameter": "trigger",
+      "action": "trigger",
+      "color": "#ff4444"
+    },
+    "pitch": {
+      "type": "knob",
+      "label": "PITCH",
+      "parameter": "base_freq",
+      "min": 30.0,
+      "max": 200.0,
+      "default": 60.0
+    },
+    "click": {
+      "type": "knob",
+      "label": "CLICK",
+      "parameter": "click",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.5
+    },
+    "decay": {
+      "type": "knob",
+      "label": "DECAY",
+      "parameter": "decay",
+      "min": 0.05,
+      "max": 2.0,
+      "default": 0.3
+    },
+    "body": {
+      "type": "knob",
+      "label": "BODY",
+      "parameter": "body_amt",
+      "min": 0.0,
+      "max": 1.0,
+      "default": 0.7
+    }
+  }
+}

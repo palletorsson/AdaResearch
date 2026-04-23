@@ -1,0 +1,25 @@
+{
+  "id": "gen01_compound_petals",
+  "notes": "Spike base then petals on top \u2014 composed recipe.",
+  "seed": "icosahedron",
+  "seed_scale": 0.35,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "random_30",
+      "params": {
+        "distance": 0.3,
+        "scale": 0.5
+      }
+    },
+    {
+      "op": "petal_splay",
+      "selector": "up",
+      "params": {
+        "splay": 0.45,
+        "length": 0.4
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "gen00_mushroom",
+  "notes": "Three-step mushroom \u2014 stem, neck, cap.",
+  "seed": "cube",
+  "seed_scale": 0.35,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.8,
+        "scale": 1.0
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:extruded_top",
+      "params": {
+        "distance": 0.1,
+        "scale": 1.6
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:extruded_top",
+      "params": {
+        "distance": 0.15,
+        "scale": 0.6
+      }
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "gg05_pulsing_tree",
+  "notes": "Full tree with pulse-wave radii \u00e2\u20ac\u201d rhythmic thickness along every branch.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.18
+  },
+  "iterations": 4,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.8,
+        "spread_deg": 35,
+        "radius_decay": 0.7
+      }
+    },
+    {
+      "op": "sine_radii",
+      "selector": "all",
+      "params": {
+        "amp": 0.4,
+        "freq": 1.5,
+        "along_axis": "depth",
+        "floor": 0.5
+      }
+    }
+  ]
+}

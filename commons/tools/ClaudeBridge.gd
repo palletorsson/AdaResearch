@@ -63,6 +63,13 @@ var _last_voice_tick: int = -1
 
 
 func _ready() -> void:
+	# Capture mode — caller passes `--no-bridges` to silence HTTP / fs
+	# chatter during screenshots. Same flag honored by OversightVoiceBridge.
+	if "--no-bridges" in OS.get_cmdline_user_args() or "--no-bridges" in OS.get_cmdline_args():
+		enabled = false
+		print("ClaudeBridge: disabled by --no-bridges")
+		return
+
 	if not enabled:
 		return
 

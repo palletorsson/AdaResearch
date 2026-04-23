@@ -1,6 +1,16 @@
 # RockFactory.gd - Generates collections of irregular rocks to demonstrate gaps
 extends Node3D
 
+# @identity
+# essence: generates N rocks from a shared SphereMesh base — each rock gets random scale noise (deformation 3–7 iterations), position variation per spawn_mode (box/pile/grid/ring/cluster), and a color close to base_color; all built at _ready()
+# desire: to fill a space with irregular mass that reads as geological rather than computational — the learner should feel that rocks have weight and history even though each is a deformed sphere
+# critical_parameter: deformation_min/max (3–7 noise iterations) — below 3 the rocks look like potatoes, above 7 they become spiky; this range is the sweet spot between smooth and geological
+# triggers: auto_generate calls generate() in _ready(); generate() clears previous rocks, seeds RNG, then calls _create_rock() N times with spawn_mode-dependent position; use_pride_colors cycles through 6 pride flag colors
+# emerges: the pride colors mode transforms a geological simulator into a queer presence — the same irregular forms, the same physics, but the colors declare something about who placed them here
+# needs: VR grab for individual rocks [has via StaticBody3D or RigidBody3D]; enable_gravity for falling rocks [has]; regenerate button [missing — only at _ready]; apply_grid_config [missing]
+# relationships: used in Primitives_Ignorance map to demonstrate procedural generation of irregular forms; contrasts with capsule and combine_sphere (smooth geometry vs deformed); color variation ties to MosaicPalette pattern
+# truth: a rock is a sphere that forgot its symmetry — every deformation iteration is a memory of force, and the result looks geological because geology IS iterated deformation applied to an original sphere
+
 class_name RockFactory
 
 @export_group("Rock Generation")

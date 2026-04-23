@@ -1,0 +1,24 @@
+{
+  "id": "rd09_delta_turing_plate",
+  "F": 0.03,
+  "K": 0.055,
+  "grid_size": 128,
+  "iterations": 6000,
+  "seed": 23,
+  "render_mode": "plate",
+  "color_lo": [
+    0.08,
+    0.14,
+    0.24
+  ],
+  "color_hi": [
+    0.96,
+    0.84,
+    0.42
+  ],
+  "camera_yaw": 0.001,
+  "camera_pitch": 1.28,
+  "world_size": 2.1,
+  "layout": "rd_plate",
+  "notes": "Munafo/Pearson \u00ce\u00b4-class region (F=0.030, K=0.055): Turing-like hexagonal negatons and grain boundaries, rendered top-down so the lattice reads clearly."
+}

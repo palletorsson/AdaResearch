@@ -1,0 +1,32 @@
+{
+  "id": "mg_form46_lowres_sphere_halo",
+  "notes": "LOW-RES SPHERE EXPANSION: a smaller first extrusion creates a halo band, then the halo is pulled farther out. The point is layered reach from a spherical core.",
+  "seed": "icosahedron",
+  "seed_scale": 0.32,
+  "generations": 2,
+  "camera_pitch": 0.33,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "all",
+      "params": {
+        "distance": 0.18,
+        "scale": 1.08,
+        "top_tag": "halo_top",
+        "side_tag": "halo_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:halo_top",
+      "params": {
+        "distance": 0.2,
+        "scale": 1.12,
+        "top_tag": "halo_tip",
+        "side_tag": "halo_tip_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

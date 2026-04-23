@@ -1,0 +1,48 @@
+{
+  "id": "gg10_mandala_4fold",
+  "notes": "Branch recipe + 4-fold symmetry = 4-arm mandala topology.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0.6
+    ],
+    "radius": 0.12
+  },
+  "iterations": 3,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 2,
+        "length": 0.5,
+        "spread_deg": 35,
+        "radius_decay": 0.7
+      }
+    },
+    {
+      "op": "symmetry",
+      "selector": "all",
+      "params": {
+        "count": 4,
+        "axis": "y",
+        "include_original": true
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 10,
+        "length": 0.15,
+        "radius": 0.018,
+        "splay": 0.9
+      }
+    }
+  ]
+}

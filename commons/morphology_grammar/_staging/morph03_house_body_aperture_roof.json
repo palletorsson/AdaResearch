@@ -1,0 +1,58 @@
+{
+  "id": "morph03_house_body_aperture_roof",
+  "family": "house",
+  "notes": "Main body box subdivides its front wall into door and window apertures, then caps the top with a pitched roof.",
+  "camera_yaw": 0.7,
+  "camera_pitch": 0.34,
+  "seed": {
+    "type": "box",
+    "size": [
+      1.62,
+      0.98,
+      1.16
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 4,
+  "rules": [
+    {
+      "id": "front_apertures",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.7
+      },
+      "selector": "front",
+      "op": "aperture_grid",
+      "params": {
+        "cols": 3,
+        "rows": 2,
+        "length": 0.07,
+        "scale": 0.66,
+        "door_col": 1,
+        "door_height_scale": 1.52
+      },
+      "child_role": "aperture",
+      "budget_factor": 0.0
+    },
+    {
+      "id": "roof_cap",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.7
+      },
+      "selector": "up",
+      "op": "gable_cap",
+      "params": {
+        "pitch_deg": 30,
+        "thickness": 0.09,
+        "overhang": 1.1
+      },
+      "child_role": "cap",
+      "budget_factor": 0.0
+    }
+  ],
+  "render_mode": "wireframe"
+}

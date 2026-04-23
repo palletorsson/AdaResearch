@@ -1,0 +1,49 @@
+{
+  "id": "gg09_wave_torus_canopy",
+  "notes": "Tree with 8-fold wave-torus displacement \u00e2\u20ac\u201d radial flanged structure.",
+  "seed": {
+    "pos": [
+      0,
+      0,
+      0
+    ],
+    "radius": 0.16
+  },
+  "iterations": 3,
+  "materials": {
+    "default": "bark",
+    "leaf": "plant_bright"
+  },
+  "rules": [
+    {
+      "op": "spawn_branch",
+      "selector": "leaves",
+      "params": {
+        "count": 3,
+        "length": 0.7,
+        "spread_deg": 40,
+        "radius_decay": 0.7
+      }
+    },
+    {
+      "op": "parametric_displace",
+      "selector": "all",
+      "params": {
+        "curve": "wave_torus",
+        "t_source": "radial",
+        "t_scale": 1.0,
+        "amp": 0.25
+      }
+    },
+    {
+      "op": "leaf_tuft",
+      "selector": "leaves",
+      "params": {
+        "count": 8,
+        "length": 0.15,
+        "radius": 0.02,
+        "splay": 0.9
+      }
+    }
+  ]
+}

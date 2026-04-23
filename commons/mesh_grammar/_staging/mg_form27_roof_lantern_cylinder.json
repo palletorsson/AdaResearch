@@ -1,0 +1,41 @@
+{
+  "id": "mg_form27_roof_lantern_cylinder",
+  "notes": "FORM STUDY: roof-stack on a cube mass. Extrude to a roof drum, inset the cap, then raise a smaller lantern volume from the center.",
+  "seed": "cube",
+  "seed_scale": 0.56,
+  "generations": 1,
+  "camera_pitch": 0.28,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.18,
+        "scale": 0.76,
+        "top_tag": "roof_top",
+        "side_tag": "roof_side",
+        "min_area": 0.0005
+      }
+    },
+    {
+      "op": "inset",
+      "selector": "tag:roof_top",
+      "params": {
+        "amount": 0.18,
+        "inner_tag": "lantern_core",
+        "border_tag": "lantern_rim"
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:lantern_core",
+      "params": {
+        "distance": 0.14,
+        "scale": 0.42,
+        "top_tag": "lantern_top",
+        "side_tag": "lantern_side",
+        "min_area": 0.0005
+      }
+    }
+  ]
+}

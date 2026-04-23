@@ -1,0 +1,49 @@
+{
+  "id": "gen02_mushroom_forest",
+  "notes": "Multi-cap mushroom \u2014 5-step cascade with alternating scale.",
+  "seed": "cube",
+  "seed_scale": 0.25,
+  "generations": 1,
+  "rules": [
+    {
+      "op": "extrude",
+      "selector": "up",
+      "params": {
+        "distance": 0.4,
+        "scale": 0.9
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:extruded_top",
+      "params": {
+        "distance": 0.08,
+        "scale": 1.6
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:extruded_top",
+      "params": {
+        "distance": 0.3,
+        "scale": 0.4
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:extruded_top",
+      "params": {
+        "distance": 0.08,
+        "scale": 1.8
+      }
+    },
+    {
+      "op": "extrude",
+      "selector": "tag:extruded_top",
+      "params": {
+        "distance": 0.12,
+        "scale": 0.3
+      }
+    }
+  ]
+}

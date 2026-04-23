@@ -1,0 +1,59 @@
+{
+  "id": "morph_auto_desk_03",
+  "family": "desk",
+  "notes": "Auto-generated desk candidate.",
+  "camera_yaw": 0.718,
+  "camera_pitch": 0.354,
+  "seed": {
+    "type": "box",
+    "size": [
+      2.007,
+      0.811,
+      1.023
+    ],
+    "role": "body",
+    "budget": 1.0
+  },
+  "iterations": 4,
+  "rules": [
+    {
+      "id": "desk_to_legs",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.8
+      },
+      "selector": "down",
+      "op": "grid_extrude",
+      "params": {
+        "cols": 2,
+        "rows": 2,
+        "select": "corners",
+        "length": 0.709,
+        "scale": 0.226
+      },
+      "child_role": "trunk",
+      "budget_factor": 0.52
+    },
+    {
+      "id": "desk_front_drawers",
+      "when": {
+        "role": "body",
+        "max_depth": 0,
+        "min_budget": 0.8
+      },
+      "selector": "front",
+      "op": "aperture_grid",
+      "params": {
+        "cols": 2,
+        "rows": 3,
+        "length": 0.075,
+        "scale": 0.728,
+        "door_col": 0,
+        "door_height_scale": 1.0
+      },
+      "child_role": "aperture",
+      "budget_factor": 0.0
+    }
+  ]
+}
