@@ -1,4 +1,7 @@
-Concept: Goedel embodied — a creature that proves the limits of your formal system.
-Sequence role: Catalyst chamber for foundationscrisis. Last map before returning to Lab.
-Technical angle: Catalyst mode none, creature paradox_stalker, Science Screen scatter.
-Critical angle: The chamber is where mathematics becomes relationship. The catalyst transforms the player-creature boundary.
+Concept: Gödel embodied — a creature whose behaviour enacts the limits of the formal system the learner is holding. The chamber's lesson is a constraint rather than a method: some questions cannot be answered from inside the system that poses them.
+Sequence role: Catalyst chamber for the Foundations Crisis sequence, the last map before returning to the Lab. The chamber is the first in the curriculum whose teaching is a limit, and it hands the limit to the learner as an experience rather than as a theorem. Follows the sequence's incompleteness and diagonalisation maps; precedes the Lab return.
+Technical angle: Catalyst mode none, because no available projection can break the chamber's symmetry. Creature paradox_stalker exists in two overlapping ghost states that share position, silhouette, and behaviour; only one inflicts damage, and the other is undetectable from inside the chamber. Science Screen scatter plots each attempt and its outcome, and the running hit rate converges on exactly one half.
+Critical angle: The chamber takes Gödel's incompleteness out of the metamathematical register and places it in the learner's hands as a felt constraint. The curriculum's argument — that formal systems have outsides — becomes a body-level condition the learner cannot strategise their way around.
+Key artifacts: paradox_stalker embodies the two indistinguishable states; the Science Screen's scatter plot makes the hit-rate convergence visible; the absent catalyst is itself the teaching instrument.
+
+Gap: No gap identified.

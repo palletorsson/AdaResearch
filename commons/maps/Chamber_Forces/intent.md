@@ -1,4 +1,7 @@
-Concept: Force as calming influence — Newton applied to creature relationships.
-Sequence role: Catalyst chamber for forces. Last map before returning to Lab.
-Technical angle: Catalyst mode forces, creature kresling_spire, Science Screen scatter.
-Critical angle: The chamber is where mathematics becomes relationship. The catalyst transforms the player-creature boundary.
+Concept: Force as calming influence — Newton's laws applied to creature relationships, where the catalyst projects a steady field rather than an impulse and contact becomes negotiation instead of impact.
+Sequence role: Catalyst chamber for the Forces sequence, the last map before returning to the Lab. After Forces_Arena tested the learner's accumulated vector-and-forces toolkit under pressure, this chamber inverts the posture: no targets, no enemies, only a creature whose defensive stance relaxes as the learner's field stabilises. Follows ForcesArena; hands the learner back to the Lab with the forces catalyst in their kit.
+Technical angle: Catalyst mode forces, emitting a sustained field rather than discrete projectiles. Creature kresling_spire, a folded origami form whose defensive twist eases as the applied field's magnitude and direction stay steady. Science Screen scatter plots position and force pairs over time, revealing the two bodies as a small two-body system.
+Critical angle: The chamber reframes Newton's third law as a practice of contact. The learner's projection pulls on the creature; the creature's mass pulls back; the equality is a mutual grip rather than a mechanical identity. Force stops being a one-way input and becomes a shared condition between two bodies in the same field.
+Key artifacts: kresling_spire embodies the calming posture the chamber rewards; the forces catalyst projects a sustained field whose parameters are tunable; the Science Screen renders the encounter as a two-body plot so the mutuality of the force pair is legible.
+
+Gap: No gap identified.

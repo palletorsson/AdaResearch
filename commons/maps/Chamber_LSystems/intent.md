@@ -1,4 +1,7 @@
-Concept: Grammar as shared language — L-system projectiles and L-system creatures growing together.
-Sequence role: Catalyst chamber for lsystems. Last map before returning to Lab.
-Technical angle: Catalyst mode branching, creature branching_vine, Science Screen trace.
-Critical angle: The chamber is where mathematics becomes relationship. The catalyst transforms the player-creature boundary.
+Concept: Grammar as shared language — the learner's L-system projectiles and the creature's L-system body grow into one another through their respective production rules, making the encounter a botanical dialogue rather than a fight.
+Sequence role: Catalyst chamber for the L-Systems sequence, the last map before returning to the Lab. After the sequence introduced axioms, rewrite rules, and spatial interpretation, this chamber converts the formal pipeline into a two-body system in which each side runs its own grammar and the result belongs to neither side alone.
+Technical angle: Catalyst mode branching, firing a short axiom that expands recursively on impact according to a fixed production rule. Creature branching_vine runs its own L-system and responds to incoming structure by sprouting laterals whose angles mirror the learner's branch angles. Science Screen trace records the rewrite history of both grammars in parallel, highlighting intersection points.
+Critical angle: The chamber replaces the combat register with syntactic collaboration. A grammar is a formalism for describing growth, and when two grammars share a volume the joint geometry is a co-authored text rather than a contest. Structure emerges from mutual rewriting rather than from either side's authority.
+Key artifacts: branching_vine carries the creature-side grammar; the branching catalyst carries the player-side grammar; the Science Screen's trace display reads the encounter as two rewrite histories sharing a page.
+
+Gap: No gap identified.

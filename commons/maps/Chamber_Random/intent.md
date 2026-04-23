@@ -1,4 +1,7 @@
-Concept: Unpredictability as equality — neither player nor creature controls the outcome.
-Sequence role: Catalyst chamber for randomness. Last map before returning to Lab.
-Technical angle: Catalyst mode chaos, creature octapod_crawler, Science Screen scatter.
-Critical angle: The chamber is where mathematics becomes relationship. The catalyst transforms the player-creature boundary.
+Concept: Unpredictability as equality — neither player nor creature controls the outcome, because both sides draw their next action from noise drawn against the same distribution. No strategy dominates, because strategy itself is random.
+Sequence role: Catalyst chamber for the Randomness sequence, the last map before returning to the Lab. After the sequence walked the learner from independent coin flips through distributions, removal, and the stochastic game arena, this chamber closes Randomness by making entropy the shared condition of an encounter.
+Technical angle: Catalyst mode chaos, firing projectiles whose trajectories are drawn from a pseudo-random number generator seeded fresh each frame. Creature octapod_crawler moves with noise-perturbed direction and speed, so its pursuit logic cannot rely on a legible target trajectory. Science Screen scatter plots hit-miss distributions as clouds rather than curves.
+Critical angle: The chamber reframes entropy as relational rather than as error. When both sides of an encounter are noise sources, unpredictability becomes a shared field rather than an individual weakness. The player-creature boundary becomes a pair of emitters responding to the same entropy.
+Key artifacts: octapod_crawler carries the creature-side noise; the chaos catalyst carries the player-side noise; the Science Screen's scatter display reads the mutual distribution over time and names the encounter as a statistical footprint rather than as an event log.
+
+Gap: No gap identified.

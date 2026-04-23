@@ -1,0 +1,1 @@
+The room is driven by `gallery_winner_showcase`, which reads a generated manifest at `res://commons/generated/gallery_best_of/manifest.json`. A build script copies the winning PNG from each web gallery into the AdaResearch repo so Godot can display it locally in VR.

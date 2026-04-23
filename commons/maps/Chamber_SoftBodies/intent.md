@@ -1,4 +1,7 @@
-Concept: Soft interaction — no rigid boundaries between player force and creature response.
-Sequence role: Catalyst chamber for softbodies. Last map before returning to Lab.
-Technical angle: Catalyst mode none, creature spring_hopper, Science Screen field.
-Critical angle: The chamber is where mathematics becomes relationship. The catalyst transforms the player-creature boundary.
+Concept: Soft interaction — no rigid boundaries between player force and creature response. Contact is the interaction, and pushing a deformable body produces a travelling wave of displacement rather than a collision event.
+Sequence role: Catalyst chamber for the Soft Bodies sequence, the last map before returning to the Lab. After the sequence relaxed the rigid-body assumptions of earlier physics maps, this chamber closes Soft Bodies by removing the projection catalyst entirely. The lesson is that when both sides of a contact are soft, the boundary between actor and receiver blurs.
+Technical angle: Catalyst mode none — no projectile, only physical push. Creature spring_hopper built from a mass-spring lattice whose internal constraints absorb force and redistribute it across the mesh. Science Screen field rather than scatter, rendering displacement as a continuous surface in space with colour tracking magnitude.
+Critical angle: Rigidity was the simplifying assumption of the earlier sequences; here it is named as a design choice rather than a fact. Soft contact reframes force as a shared wave in a shared medium, and the chamber argues that the player-creature distinction itself softens when pushes and rebounds share the same elastic surface.
+Key artifacts: spring_hopper carries the deformable body the chamber is organised around; the Science Screen's field display names the encounter as a wave rather than an impact; the chamber's empty catalyst slot is itself part of the teaching.
+
+Gap: No gap identified.

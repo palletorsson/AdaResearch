@@ -1,4 +1,7 @@
-Concept: Resonance — wave-particle duality as creature interaction.
-Sequence role: Catalyst chamber for wavefunctions. Last map before returning to Lab.
-Technical angle: Catalyst mode waveform, creature waterbomb_enemy, Science Screen wave.
-Critical angle: The chamber is where mathematics becomes relationship. The catalyst transforms the player-creature boundary.
+Concept: Resonance as contact — wave-particle duality staged as creature interaction, where the learner's frequency and the creature's frequency align or beat, and matching is felt rather than computed.
+Sequence role: Catalyst chamber for the Wavefunctions sequence, the last map before returning to the Lab. After the sequence walked the learner through sine, pendulum, unit circle, propagation, sound, silence, and Fourier synthesis, this chamber closes Wavefunctions by making oscillation the shared variable of an encounter between two bodies.
+Technical angle: Catalyst mode waveform, firing spiralling helix projectiles at a chosen frequency. Creature waterbomb_enemy bounces around the chamber at its own steady frequency. Science Screen wave plots both frequencies as a live waveform and draws their product so alignment reads as amplitude and mismatch reads as a beating envelope.
+Critical angle: The chamber stages tuning as a practice of care. Matching the creature's frequency is not a puzzle to solve but an attention to offer, and resonance becomes the shape that mutual attention leaves in the shared medium. Wave-particle duality is reframed as relational rather than metaphysical.
+Key artifacts: waterbomb_enemy carries the creature-side oscillation; the waveform catalyst carries the player-side oscillation; the Science Screen's wave display reads the coupling as a product waveform whose amplitude tracks phase alignment.
+
+Gap: No gap identified.

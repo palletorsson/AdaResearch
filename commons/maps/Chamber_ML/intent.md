@@ -1,4 +1,7 @@
-Concept: Adversarial learning — the creature improves by studying you.
-Sequence role: Catalyst chamber for machinelearning. Last map before returning to Lab.
-Technical angle: Catalyst mode none, creature gradient_hunter, Science Screen scatter.
-Critical angle: The chamber is where mathematics becomes relationship. The catalyst transforms the player-creature boundary.
+Concept: Adversarial learning — the creature improves by studying the learner's movements. The encounter is mutual training: the learner is the distribution, and the creature's policy refines only to the extent that the distribution is legible.
+Sequence role: Catalyst chamber for the Machine Learning sequence, the last map before returning to the Lab. After the sequence walked the learner through evolution, gradient descent, classification, neural networks, perception, recurrence, and generative models, this chamber stages the sequence's thesis — learning is search under uncertainty — as a two-body encounter.
+Technical angle: Catalyst mode none, because the learner's behaviour is the training signal. Creature gradient_hunter samples the learner's movement each frame and updates its prediction of the next position. Science Screen scatter plots the hunter's loss over time and shows the predicted-versus-actual trajectory as a pair of traces.
+Critical angle: The chamber reframes optimisation as relational rather than as solitary. The hunter is an optimiser; the learner is its training set; the encounter's dynamic depends on how much gradient the learner offers. Unpredictable movement withholds gradient and starves the model; regular movement feeds it and is learned quickly.
+Key artifacts: gradient_hunter carries the creature-side optimiser; the learner's own movement is the training signal; the Science Screen's loss plot reads the encounter as an optimisation curve rather than as a combat log.
+
+Gap: No gap identified.

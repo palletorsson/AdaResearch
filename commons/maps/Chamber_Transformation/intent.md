@@ -1,4 +1,7 @@
-Concept: First creature encounter — transformation as non-destructive change.
-Sequence role: Catalyst chamber for transformation. Last map before returning to Lab.
-Technical angle: Catalyst mode transformation, creature miura_crawler, Science Screen scatter.
-Critical angle: The chamber is where mathematics becomes relationship. The catalyst transforms the player-creature boundary.
+Concept: First creature encounter in the curriculum — transformation as non-destructive change, where the catalyst induces a state transition rather than inflicting damage, and the folded creature is a different state of the same being.
+Sequence role: Catalyst chamber for the Transformation sequence, the last map before returning to the Lab. The chamber introduces the creature-encounter pattern that every subsequent chamber will extend, and it establishes the curriculum's framing move: a catalyst projection changes a creature's state rather than ending it.
+Technical angle: Catalyst mode transformation, firing projectiles tagged with a folding operator. Creature miura_crawler inherits the Miura crease pattern from the sequence's earlier folding primitive and responds to catalyst hits by folding its panels flat along the crease. Science Screen scatter logs fold depth and compression ratio against time so each induction reads as a data point.
+Critical angle: The chamber argues that mathematical operations — rotation, translation, scaling, folding — are ways of relating to a body rather than ways of acting on it. The transformation catalyst is not a weapon but a vocabulary of state transitions, and the creature's folded rest is a different mode of presence rather than an absence.
+Key artifacts: miura_crawler carries the folding grammar the sequence introduced; the transformation catalyst emits the folding operator as a projectile; the Science Screen's scatter plot reads each induction as a point in a small transformation dataset.
+
+Gap: No gap identified.

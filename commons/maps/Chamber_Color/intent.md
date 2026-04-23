@@ -1,4 +1,7 @@
-Concept: Color as communication — each hue triggers a different creature response.
-Sequence role: Catalyst chamber for color. Last map before returning to Lab.
-Technical angle: Catalyst mode chromatic, creature kaleidocycle_enemy, Science Screen scatter.
-Critical angle: The chamber is where mathematics becomes relationship. The catalyst transforms the player-creature boundary.
+Concept: Color as communication — each hue triggers a different creature response, turning the learner's colour projections into a channel rather than a property. The catalyst completes colour's transformation from attribute to grammar.
+Sequence role: Catalyst chamber for the Color sequence, the last map before returning to the Lab. After Color_Flashlight stripped colour from the object and Color_Grid_Pallet staged it as a palette operation, this chamber closes the sequence by making hue a way of speaking with a creature. Follows Color_Grid_Pallet; hands the learner back to the Lab with the chromatic catalyst in their kit.
+Technical angle: Catalyst mode chromatic, projecting hue-tagged bursts that drive distinct creature state transitions. Creature kaleidocycle_enemy cycles through four colour-tagged attack faces — fire, ice, spike, shield — each unlocked by a different wavelength. Science Screen scatter plots the response events across a chromatic axis.
+Critical angle: The chamber is where mathematics becomes relationship. Colour has been studied in the sequence as frequency, pigment, and perception; here it is a shared signalling layer between two bodies. The boundary between player and creature is a boundary between emitters tuned to the same spectrum.
+Key artifacts: kaleidocycle_enemy exposes the four-face chromatic grammar; the chromatic catalyst emits hue-tagged projectiles; the Science Screen scatters the exchange across the spectrum so the creature's responses are legible as frequency rather than as personality.
+
+Gap: No gap identified.

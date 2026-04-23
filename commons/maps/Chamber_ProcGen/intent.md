@@ -1,4 +1,7 @@
-Concept: Bricolage — destruction feeds reconstruction.
-Sequence role: Catalyst chamber for proceduralgeneration. Last map before returning to Lab.
-Technical angle: Catalyst mode none, creature bricoleur_golem, Science Screen grid.
-Critical angle: The chamber is where mathematics becomes relationship. The catalyst transforms the player-creature boundary.
+Concept: Bricolage — destruction feeds reconstruction. The creature cannot be defeated in the ordinary sense, because every piece the learner knocks off becomes material for the next version of the body.
+Sequence role: Catalyst chamber for the Procedural Generation sequence, the last map before returning to the Lab. After the sequence argued that structure can arise from rules rather than from design, this chamber runs that claim through the player-creature relationship: the creature is a bricoleur, and its body is ongoing composition rather than a finished form.
+Technical angle: Catalyst mode none in the projection sense; the interaction is physical striking. Creature bricoleur_golem picks up nearby fragments and attaches them according to a small procedural rule, so each strike produces a new body configuration rather than damage. Science Screen grid tracks the golem's current body as a small graph of connected parts.
+Critical angle: The chamber reframes destruction as a productive phase of composition rather than as an endpoint. The curriculum's argument — that rules can substitute for designers — becomes a creaturely practice rather than an abstract claim. No finished form is implied; only ongoing reassembly.
+Key artifacts: bricoleur_golem carries the rebuild rule; loose scattered geometry across the chamber floor provides the available material; the Science Screen's graph display reads the body as an evolving structure.
+
+Gap: No gap identified.
