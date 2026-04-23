@@ -28,8 +28,16 @@ from dataclasses import dataclass
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
+from secrets import compare_digest
 
 REPO = Path(__file__).resolve().parent.parent
+READ_ONLY_TOOLS = ["Read", "Glob", "Grep", "WebFetch", "WebSearch"]
+READ_ONLY_APPEND_SYSTEM_PROMPT = (
+    "This server is running in read-only mode. "
+    "Do not modify files, run shell commands, or attempt side effects. "
+    "Answer using inspection, search, and retrieval only."
+)
+_CLAUDE_BINARY: str | None = None
 
 
 @dataclass
@@ -39,6 +47,7 @@ class ServerConfig:
     token: str
     repo_root: Path
     model: str
+    mode: str
     timeout_s: int
     max_question_chars: int
     max_context_chars: int
@@ -46,6 +55,8 @@ class ServerConfig:
     add_dir: list[str]
     no_session_persistence: bool
     context_file: Path
+    allow_request_add_dirs: bool
+    allow_request_system_prompt: bool
 
 
 CONFIG: ServerConfig | None = None
@@ -114,10 +125,14 @@ def resolve_token(cli_token: str | None) -> str:
 
 
 def claude_binary() -> str:
+    global _CLAUDE_BINARY
+    if _CLAUDE_BINARY:
+        return _CLAUDE_BINARY
     path = shutil.which("claude")
     if not path:
         print("ERROR: `claude` not found on PATH.", file=sys.stderr)
         sys.exit(1)
+    _CLAUDE_BINARY = path
     return path
 
 
@@ -171,8 +186,13 @@ def build_command(
         claude_binary(),
         "-p",
         "--output-format", "text",
-        "--permission-mode", cfg.permission_mode,
     ]
+    if cfg.mode == "readonly":
+        cmd.extend(["--permission-mode", "plan"])
+        cmd.extend(["--tools", ",".join(READ_ONLY_TOOLS)])
+        cmd.extend(["--append-system-prompt", READ_ONLY_APPEND_SYSTEM_PROMPT])
+    else:
+        cmd.extend(["--permission-mode", cfg.permission_mode])
     if cfg.no_session_persistence:
         cmd.append("--no-session-persistence")
     chosen_model = model or cfg.model
@@ -192,6 +212,8 @@ def resolve_allowed_dirs(extra_dirs: Any = None) -> list[str]:
     dirs = list(cfg.add_dir)
     if not extra_dirs:
         return dirs
+    if not cfg.allow_request_add_dirs:
+        raise ValueError("request add_dirs are disabled for this server")
     if not isinstance(extra_dirs, list):
         raise ValueError("add_dirs must be a list of paths")
     for item in extra_dirs:
@@ -225,6 +247,8 @@ def ask_claude(
     add_dirs: Any = None,
 ) -> dict[str, Any]:
     cfg = require_config()
+    if system_prompt and not cfg.allow_request_system_prompt:
+        raise ValueError("request system_prompt is disabled for this server")
     prompt = build_prompt(question, context=context)
     allowed_dirs = resolve_allowed_dirs(add_dirs)
     run_cwd = resolve_cwd(cwd, allowed_dirs)
@@ -298,9 +322,14 @@ class ClaudeHttpHandler(BaseHTTPRequestHandler):
             "port": cfg.port,
             "repo_root": str(cfg.repo_root),
             "model": cfg.model,
+            "mode": cfg.mode,
+            "permission_mode": "plan" if cfg.mode == "readonly" else cfg.permission_mode,
+            "tools": READ_ONLY_TOOLS if cfg.mode == "readonly" else "default",
             "machine": os.environ.get("COMPUTERNAME") or os.uname().nodename,
             "has_saved_context": bool(record.get("context")),
             "context_updated_at": record.get("updated_at"),
+            "allow_request_add_dirs": cfg.allow_request_add_dirs,
+            "allow_request_system_prompt": cfg.allow_request_system_prompt,
         })
 
     def do_POST(self) -> None:
@@ -397,7 +426,7 @@ class ClaudeHttpHandler(BaseHTTPRequestHandler):
         cfg = require_config()
         auth = self.headers.get("Authorization", "")
         prefix = "Bearer "
-        return auth.startswith(prefix) and auth[len(prefix):] == cfg.token
+        return auth.startswith(prefix) and compare_digest(auth[len(prefix):], cfg.token)
 
     def _read_json(self) -> dict[str, Any]:
         length = int(self.headers.get("Content-Length", "0") or 0)
@@ -433,6 +462,8 @@ def parse_args() -> argparse.Namespace:
                     help="Repo root / working directory for claude")
     ap.add_argument("--model", default="sonnet",
                     help="Default Claude model (default sonnet)")
+    ap.add_argument("--mode", choices=["readonly", "full"], default="readonly",
+                    help="Server safety mode (default readonly)")
     ap.add_argument("--timeout-s", type=int, default=900,
                     help="Per-request Claude timeout in seconds")
     ap.add_argument("--max-question-chars", type=int, default=20000,
@@ -440,13 +471,17 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--max-context-chars", type=int, default=40000,
                     help="Reject larger serialized context payloads")
     ap.add_argument("--permission-mode", default="bypassPermissions",
-                    help="Claude permission mode (default bypassPermissions)")
+                    help="Claude permission mode for --mode full (default bypassPermissions)")
     ap.add_argument("--add-dir", action="append", default=[],
                     help="Extra directories to grant Claude access to")
     ap.add_argument("--allow-session-persistence", action="store_true",
                     help="Do not pass --no-session-persistence")
     ap.add_argument("--context-file",
                     help="Path to saved context JSON file")
+    ap.add_argument("--allow-request-add-dirs", action="store_true",
+                    help="Allow callers to extend add_dirs per request (disabled by default)")
+    ap.add_argument("--allow-request-system-prompt", action="store_true",
+                    help="Allow callers to set system_prompt per request (disabled by default)")
     return ap.parse_args()
 
 
@@ -469,6 +504,7 @@ def main() -> int:
         token=token,
         repo_root=repo_root,
         model=args.model,
+        mode=args.mode,
         timeout_s=args.timeout_s,
         max_question_chars=args.max_question_chars,
         max_context_chars=args.max_context_chars,
@@ -476,6 +512,8 @@ def main() -> int:
         add_dir=add_dir,
         no_session_persistence=not args.allow_session_persistence,
         context_file=context_file,
+        allow_request_add_dirs=args.allow_request_add_dirs,
+        allow_request_system_prompt=args.allow_request_system_prompt,
     )
 
     server = ThreadingHTTPServer((args.host, args.port), ClaudeHttpHandler)
@@ -489,7 +527,19 @@ def main() -> int:
     print("    DELETE /context")
     print(f"  Repo:   {repo_root}")
     print(f"  Model:  {args.model}")
-    print(f"  Token:  {token}")
+    print(f"  Mode:   {args.mode}")
+    if args.mode == "readonly":
+        print(f"  Tools:  {', '.join(READ_ONLY_TOOLS)}")
+    else:
+        print(f"  Permission mode: {args.permission_mode}")
+    print(
+        "  Token:  "
+        + (
+            "[generated; see stderr]"
+            if not args.token and not os.environ.get("CLAUDE_HTTP_TOKEN")
+            else "[configured]"
+        )
+    )
     print(f"  Context file: {context_file}")
     print("")
     try:

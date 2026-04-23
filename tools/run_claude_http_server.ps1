@@ -3,7 +3,9 @@ param(
     [int]$Port = 8766,
     [string]$Token = "",
     [string]$Model = "sonnet",
-    [int]$TimeoutSeconds = 900
+    [int]$TimeoutSeconds = 900,
+    [ValidateSet("readonly", "full")]
+    [string]$Mode = "readonly"
 )
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -26,15 +28,15 @@ $argsList = @(
     "--port", "$Port",
     "--repo-root", $repoRoot,
     "--model", $Model,
-    "--timeout-s", "$TimeoutSeconds"
+    "--timeout-s", "$TimeoutSeconds",
+    "--mode", $Mode
 )
-
-if ($Token) {
-    $argsList += @("--token", $Token)
-}
 
 Push-Location $repoRoot
 try {
+    if ($Token) {
+        $env:CLAUDE_HTTP_TOKEN = $Token
+    }
     if ($runner.Length -eq 1) {
         & $runner[0] @argsList
     } else {

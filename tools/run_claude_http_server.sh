@@ -18,6 +18,7 @@ PORT="8766"
 MODEL="sonnet"
 TOKEN=""
 TIMEOUT_SECONDS="900"
+MODE="readonly"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -26,6 +27,7 @@ while [[ $# -gt 0 ]]; do
     --model) MODEL="$2"; shift 2 ;;
     --token) TOKEN="$2"; shift 2 ;;
     --timeout-s) TIMEOUT_SECONDS="$2"; shift 2 ;;
+    --mode) MODE="$2"; shift 2 ;;
     *)
       echo "Unknown arg: $1" >&2
       exit 2
@@ -40,10 +42,11 @@ ARGS=(
   --repo-root "$REPO_ROOT"
   --model "$MODEL"
   --timeout-s "$TIMEOUT_SECONDS"
+  --mode "$MODE"
 )
 
 if [[ -n "$TOKEN" ]]; then
-  ARGS+=(--token "$TOKEN")
+  export CLAUDE_HTTP_TOKEN="$TOKEN"
 fi
 
 cd "$REPO_ROOT"

@@ -2,6 +2,8 @@
 
 Tiny LAN HTTP wrapper around `claude -p` for helper machines.
 
+Default mode is `readonly`.
+
 API:
 
 - `GET /status`
@@ -40,10 +42,7 @@ Context-rich request body:
     ],
     "notes": "Assume the helper machine has a synced clone of AdaResearch_46."
   },
-  "cwd": "C:/Users/palle/Documents/GitHub/AdaResearch_46",
-  "add_dirs": [
-    "C:/Users/palle/Documents/GitHub/AdaResearch_46"
-  ]
+  "cwd": "C:/Users/palle/Documents/GitHub/AdaResearch_46"
 }
 ```
 
@@ -76,9 +75,12 @@ Saved-context API:
 
 ## Start the server
 
+Recommended: set the token in an environment variable so it does not appear in process lists.
+
 Windows:
 
 ```powershell
+$env:CLAUDE_HTTP_TOKEN = "your-long-random-token"
 .\tools\run_claude_http_server.ps1 -Port 8766 -Token "your-long-random-token"
 ```
 
@@ -86,16 +88,40 @@ Mac:
 
 ```bash
 chmod +x tools/run_claude_http_server.sh
+export CLAUDE_HTTP_TOKEN="your-long-random-token"
 ./tools/run_claude_http_server.sh --port 8766 --token "your-long-random-token"
 ```
 
 Direct Python:
 
 ```bash
-python tools/claude_http_server.py --host 0.0.0.0 --port 8766 --token "your-long-random-token"
+export CLAUDE_HTTP_TOKEN="your-long-random-token"
+python tools/claude_http_server.py --host 0.0.0.0 --port 8766
 ```
 
 If `--token` is omitted, the server generates one for that process and prints it on startup.
+
+## Modes
+
+`readonly` is the default and recommended mode.
+
+- uses `--permission-mode plan`
+- fixes the available tools to `Read, Glob, Grep, WebFetch, WebSearch`
+- rejects caller-supplied `add_dirs`
+- rejects caller-supplied `system_prompt`
+
+Explicit full-access mode:
+
+```bash
+export CLAUDE_HTTP_TOKEN="your-long-random-token"
+python tools/claude_http_server.py \
+  --host 0.0.0.0 \
+  --port 8766 \
+  --mode full \
+  --permission-mode bypassPermissions \
+  --allow-request-add-dirs \
+  --allow-request-system-prompt
+```
 
 ## PowerShell client example
 
@@ -128,7 +154,6 @@ $body = @{
     )
   }
   cwd = "C:\Users\palle\Documents\GitHub\AdaResearch_46"
-  add_dirs = @("C:\Users\palle\Documents\GitHub\AdaResearch_46")
 } | ConvertTo-Json -Depth 8
 
 Invoke-RestMethod -Uri http://192.168.0.112:8766/ask `
@@ -199,13 +224,13 @@ curl -X POST http://192.168.0.112:8766/ask \
 
 ## Notes
 
-- The server runs `claude -p` in the repo root, so Claude can inspect and edit the local clone on that machine.
+- The server runs `claude -p` in the repo root, so Claude can inspect the local clone on that machine.
 - The helper machine does not inherit this chat session automatically.
 - `POST /context` gives you a way to serialize a session summary once and have future `/ask` requests include it by default.
 - `context` can be a string, list, or object. The server serializes it into the prompt before the question.
 - `/ask` uses saved context by default. Pass `"use_saved_context": false` if you want a one-off stateless request.
 - `cwd` lets you choose the working directory for the remote Claude run, as long as it stays inside an allowed directory.
-- `add_dirs` lets you grant the remote Claude access to additional repo roots for that request.
-- Default permission mode is `bypassPermissions` so requests do not block on interactive approval.
-- Keep the token private. Anyone with the token can ask that machine's Claude session to inspect or modify the repo.
+- Request-level `add_dirs` and `system_prompt` are disabled by default. They are only available in explicit full-access mode.
+- Read-only mode is the safe default. Use full mode only on a trusted LAN and only when you intentionally want remote editing/execution.
+- Keep the token private. Anyone with the token can query that machine's Claude session.
 - Prefer one repo clone per machine. Do not point multiple machines at the same writable working tree.
