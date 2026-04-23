@@ -7,6 +7,16 @@ class_name NoiseMixer
 ## Floor display with 128x128 procedural texture and earth-tone color mapping.
 ## VR sliders let you explore how octave stacking builds complexity from simple waves.
 
+# @identity
+# essence: total(p) = Σ(i=0..octaves) persistence^i * noise(base_frequency * lacunarity^i * p) — each octave doubles frequency, halves amplitude, adds finer detail
+# desire: to see how terrain emerges from iteration — one octave is a hill, four octaves is a landscape, and the only difference is repetition at scale
+# critical_parameter: octaves — at 1 the texture is a single smooth wave; at 4 it resembles aerial geology; the transition between them is the lesson
+# triggers: _ready → _generate_texture → per pixel sum octaves → clamp [0,1] → earth-tone color ramp (deep water → forest → rock → peak)
+# emerges: altitude-colored terrain — the low-frequency base octave creates large valleys, high-frequency octaves texture the ridges; color reveals the hierarchy
+# needs: real-time slider regeneration [missing], octave count control [has via export]
+# relationships: 2D cross-section of what fractal_clouds does in 3D volume; explains the parameter space that perlin_terrain_sculptor sculpts in; parent concept to lyapunov_fractal
+# truth: Complexity is layered repetition. The same simple wave, run at four frequencies simultaneously, looks like land.
+
 # --- Configuration ---
 
 @export var quad_size: Vector2 = Vector2(0.8, 0.8)

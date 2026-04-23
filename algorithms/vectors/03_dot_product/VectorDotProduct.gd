@@ -1,5 +1,15 @@
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
+# @identity
+# essence: a·b = |a||b|cos(θ) = a.x*b.x + a.y*b.y + a.z*b.z — a scalar measuring how much two vectors agree in direction
+# desire: to make alignment visible — the projection vector shows exactly how much of a lands on b, and the hinge_gadget makes the angle between them physical
+# critical_parameter: angle θ — at 0° the dot product equals |a||b| (full agreement), at 90° it is zero (pure perpendicularity), at 180° it is negative (opposition)
+# triggers: hinge_gadget tilts vector_b → angle between a and b changes → projection_vector = (a·b/|b|²)*b recomputed each frame → rejection_vector = a - projection
+# emerges: projection and rejection — the dot product splits a into two components: one along b (the agreement) and one perpendicular to b (the independence)
+# needs: VR grab to explore angle space [missing], hinge panel interaction [has], projection length readout [has]
+# relationships: prerequisite to VectorCrossProduct (cross uses sin, dot uses cos, together they measure all of angle); used in VectorForces to project forces onto axes
+# truth: The dot product does not measure length — it measures how much two directions agree. At 90°, they are strangers.
+
 const HingePanelScript = preload("res://algorithms/vectors/shared/gadgets/hinge_panel_gadget.gd")
 
 var vector_a: Node3D

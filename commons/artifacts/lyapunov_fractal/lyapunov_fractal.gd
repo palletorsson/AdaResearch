@@ -7,6 +7,16 @@ class_name LyapunovFractal
 ## λ = (1/N)Σ log|r*(1-2x)|. Stable (λ<0) = blue, chaotic (λ>0) = yellow/red,
 ## boundary (λ≈0) = black. The result resembles alien calligraphy.
 
+# @identity
+# essence: λ(a,b) = (1/N)Σ log|r(1-2x)|, alternating r between a and b in AABB pattern. Stable regions blue (λ<0), chaotic regions yellow/red (λ>0), boundary black.
+# desire: to lay alien calligraphy on the floor — the Lyapunov landscape is a map of two parameters against each other, where the boundary between order and chaos draws itself
+# critical_parameter: PATTERN array — changing "AABB" to "AB" or "AAAB" morphs the fractal into different alien script, same math, different handwriting
+# triggers: _ready → _generate_texture → per-pixel (a,b) iterate WARMUP+COMPUTE logistic maps → sum log|r(1-2x)| → color blue/black/red by sign
+# emerges: the thin black curves of λ≈0 — the exact edge where each parameter combination teeters between repeating and diverging, drawn without any explicit curve equation
+# needs: VR parameter walk [missing], PATTERN selector [missing], floor scale control [missing]
+# relationships: sibling to cantor_set (both explore what zero looks like); twin to fractal_clouds (both render a scalar field as visual texture); foundation for strange_attractors
+# truth: The Lyapunov fractal does not show space — it shows the stability of time. Every pixel is a different universe asking: does this rule converge, or does it spiral into chaos?
+
 # --- Configuration ---
 
 @export var quad_size: Vector2 = Vector2(0.8, 0.8)

@@ -1,5 +1,15 @@
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
+# @identity
+# essence: F_net = gravity + thrust + drag; drag = -DRAG_COEFFICIENT * velocity; a = F_net / mass; velocity integrates acceleration each frame
+# desire: to see Newton's second law in real time — gravity pulls, thrust fights back, drag resists motion, and the ball trajectory shows what the sum decides
+# critical_parameter: DRAG_COEFFICIENT (0.8) — too high and the ball stops immediately; zero and it goes parabolic; the visible drag arrow shows the invisible resistance
+# triggers: catapult_gadget launches ball → each frame: compute gravity/thrust/drag vectors → sum to F_net → update RigidBody3D → render all 6 vectors simultaneously
+# emerges: the visible taxonomy of forces — five simultaneous arrows (gravity, thrust, drag, velocity, acceleration) let you watch how each contributes before they combine
+# needs: VR catapult launch [has via catapult_gadget], thrust magnitude control [missing], drag coefficient slider [missing]
+# relationships: the applied combination of VectorAddition (force superposition) and VectorDotProduct (drag opposes velocity direction); prerequisite to VectorTorque
+# truth: A force is a direction with a claim. When two forces disagree, the net force is the argument they settle at.
+
 const DRAG_COEFFICIENT := 0.8
 const CatapultGadgetScript = preload("res://algorithms/vectors/shared/gadgets/catapult_gadget.gd")
 

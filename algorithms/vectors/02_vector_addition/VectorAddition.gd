@@ -1,5 +1,15 @@
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
+# @identity
+# essence: (a + b)[i] = a[i] + b[i] — add each component; geometrically: place b's tail at a's tip, the result reaches from origin to b's new tip
+# desire: to make the parallelogram visible — the two vectors from origin, the sum along the diagonal, the invisible shape that proves tip-to-tail and component addition are the same thing
+# critical_parameter: piston_gadget — dragging either vector updates the sum in real time, making addition tactile rather than symbolic
+# triggers: VectorWorkbench spawns scene → vectors initialized → _process updates sum_vector each frame as a.target + b.target
+# emerges: the parallelogram — dotted lines project a and b's paths, framing the sum vector as their shared diagonal
+# needs: VR grab to drag vector tips [missing], component readout labels [has], real-time sum update [has]
+# relationships: prerequisite to VectorSubtraction (subtraction is addition of negative); foundational to VectorForces where vectors combine as physical forces
+# truth: Vector addition is not about arrows — it is about the fact that two displacements taken sequentially are equivalent to one displacement.
+
 const PistonGadgetScript = preload("res://algorithms/vectors/shared/gadgets/piston_gadget.gd")
 
 var vector_a: Node3D

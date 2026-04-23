@@ -4,6 +4,16 @@ extends Node3D
 # Creates volumetric clouds using fractal noise (fBm - fractional Brownian motion)
 # Multiple octaves of noise combined for natural-looking clouds
 
+# @identity
+# essence: cloud(point) = Σ(k=0..octaves) persistence^k * simplex(lacunarity^k * freq * point + wind*t), threshold clips to cloud/void
+# desire: to fill volume with weather — fBm gives the cloud its turbulent self-similar density, and wind_speed carries it like it has mass and direction
+# critical_parameter: density_threshold — too high makes the sky clear, too low makes the world grey fog; at 0.45 you get discrete cloud islands
+# triggers: _ready → _generate_cloud → per point in resolution³ → fBm sample → MultiMesh instance if above threshold → _process animates wind_speed*time offset
+# emerges: heavy-bottomed thin-topped cloud silhouettes — the noise threshold clips symmetrically but gravity shapes how we read the result as a cloud rather than a blob
+# needs: VR wind control [missing], density_threshold slider [missing], turbulence interaction [missing]
+# relationships: the 3D application of fBm that noise_mixer shows in 2D; shares the octaves/lacunarity/persistence pattern with perlin_terrain_sculptor; ambient partner to dark_sphere in open maps
+# truth: A cloud is not a thing — it is a threshold. The same noise field with different cutoff is sky, cloud, or fog. Only the cutoff decides.
+
 @export_group("Cloud Shape")
 @export var cloud_size := Vector3(20.0, 5.0, 20.0)
 @export var resolution := 32  # Points per axis

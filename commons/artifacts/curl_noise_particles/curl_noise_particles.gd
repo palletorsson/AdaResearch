@@ -6,6 +6,16 @@ class_name CurlNoiseParticles
 ## guaranteeing incompressible (solenoidal) flow. Particles color-shift from cool
 ## blue at rest to hot white at speed.
 
+# @identity
+# essence: velocity(p) = curl(noise(p)) = ∇×noise — the cross product of noise gradients; divergence-free by construction, particles flow forever without sinking or spreading
+# desire: to watch 300 particles trace incompressible flow — swirling blue-to-white ribbons that never converge to a point because the math forbids it
+# critical_parameter: flow_speed — at 0.1 particles drift in wide lazy loops; at 0.5 they spiral tight; the range shows how the same topology varies in tempo
+# triggers: _ready → initialize particle positions randomly inside bounds → _process: per particle sample curl(noise(pos + time*flow_speed)) → integrate velocity → wrap bounds
+# emerges: ribbon-like streaming — particles take different paths but never cross because divergence-free fields are globally consistent; no two particles occupy the same streamline
+# needs: VR flow_speed slider [missing], bounds expansion [missing], particle count control [has via export]
+# relationships: the incompressible fluid to VectorField's static field visualization; neighbor to noise_mixer (both use multi-octave noise structure); applies VectorCrossProduct in 3D
+# truth: Curl noise is water without a container — it swirls forever because the mathematics of incompressibility has no room for endings.
+
 # --- Configuration ---
 
 @export var particle_count: int = 300

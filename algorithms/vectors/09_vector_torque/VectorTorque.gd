@@ -1,5 +1,15 @@
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
+# @identity
+# essence: τ = r × F; |τ| = |r||F|sin(θ); moment arm r_perp = r - (r·F̂)F̂; torque is the rotational force around a pivot, magnitude proportional to the moment arm length
+# desire: to feel why a long wrench works better — radius_vector and force_vector combine via cross product to show how distance from pivot multiplies the turning power
+# critical_parameter: the angle between r and F — at 90° torque is maximum (force fully perpendicular to lever arm); at 0° it is zero (pushing along the arm does nothing)
+# triggers: radius_vector and force_vector spawned → _process: torque_vector = r.cross(F) → moment_arm = r - r.project(F̂) → all three rendered with live readout
+# emerges: the moment arm r_perp — visible as the green vector, it is the part of r that is perpendicular to F, and its length is what actually determines the torque magnitude
+# needs: VR pivot grab [missing], interactive radius drag [has via GrabSphere], force direction control [missing]
+# relationships: applies VectorCrossProduct to physics; the rotational equivalent of VectorForces (linear); appears in the forces sequence after understanding basic force composition
+# truth: Torque is leverage made mathematical — the cross product measures how much of your force is wasted pushing toward the pivot, and gives you only the turning remainder.
+
 var radius_vector: Node3D
 var force_vector: Node3D
 var torque_vector: Node3D

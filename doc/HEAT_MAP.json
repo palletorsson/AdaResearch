@@ -1,15 +1,15 @@
 {
-  "generated": "2026-04-22T09:04:43.310824",
+  "generated": "2026-04-23T09:04:05.675966",
   "description": "Auto-generated heat map from project signals",
   "items": [
     {
-      "item": "pattern",
+      "item": "primitive",
       "temperature": 70,
       "reason": "active (2 recent commits)",
       "action": "continue"
     },
     {
-      "item": "primitive",
+      "item": "encyclopedia",
       "temperature": 65,
       "reason": "active (1 recent commits)",
       "action": "continue"
@@ -21,9 +21,27 @@
       "action": "continue"
     },
     {
+      "item": "capture",
+      "temperature": 65,
+      "reason": "active (1 recent commits)",
+      "action": "continue"
+    },
+    {
+      "item": "pattern",
+      "temperature": 65,
+      "reason": "active (1 recent commits)",
+      "action": "continue"
+    },
+    {
       "item": "garden_identity_leverage",
       "temperature": 60,
-      "reason": "deep discovery: Dark_sphere and shared commons artifacts",
+      "reason": "deep discovery: garden_listener --diagnosis groups artif",
+      "action": "follow up"
+    },
+    {
+      "item": "garden_listener_cache",
+      "temperature": 60,
+      "reason": "deep discovery: PascalCase .gd filenames produce cache k",
       "action": "follow up"
     },
     {

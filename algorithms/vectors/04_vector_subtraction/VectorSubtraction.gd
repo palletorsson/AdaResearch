@@ -1,5 +1,15 @@
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
+# @identity
+# essence: a - b = a + (-b) — flip b to its negative, then add; difference_vector points from b's tip to a's tip
+# desire: to show that subtraction is relabeled addition — -b is b reversed, and the balance_beam gadget makes the equivalence felt rather than memorized
+# critical_parameter: negative_b — the negated vector rendered in parallel shows why a-b ≠ b-a; switching which is negated flips the direction of the result
+# triggers: VectorWorkbench spawns → negative_b = -b computed → difference_vector = a + negative_b → tip_tail_neg_b positions negative_b at a's tip
+# emerges: the direction between two tips — a-b always points from b's tip to a's tip, making it the vector "from B to A" and giving subtraction spatial meaning
+# needs: VR grab to drag vector tips [missing], balance beam interaction [has via balance_gadget]
+# relationships: inverse of VectorAddition; reveals dot product geometry (a-b magnitude appears in the law of cosines)
+# truth: Subtraction is directional memory — a-b is the vector that, if you followed b, would tell you where a is.
+
 const BalanceBeamScript = preload("res://algorithms/vectors/shared/gadgets/balance_beam_gadget.gd")
 
 var vector_a: Node3D

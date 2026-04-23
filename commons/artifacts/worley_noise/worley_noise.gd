@@ -6,6 +6,16 @@ class_name WorleyNoise
 ## nearest (F1) and second-nearest (F2) seeds. Renders F2-F1 for the classic
 ## cell boundary look, complementing Perlin/Simplex noise artifacts.
 
+# @identity
+# essence: for each pixel: F1=nearest seed distance, F2=second nearest; render (F2-F1) → bright thin edges on dark cell interiors; Voronoi tessellation as texture
+# desire: to make cellular structure visible — the same distance function that divides a map into postal zones also generates skin texture, stone, and cell membranes
+# critical_parameter: num_seeds — few seeds create large cells (stone slab); many seeds create tight cells (skin, scales); the count IS the cell density
+# triggers: _ready → scatter num_seeds at random positions → per pixel: compute distances to all seeds → sort → F1=first, F2=second → color = clamp(F2-F1)
+# emerges: cells with razor-thin bright edges — the Voronoi tessellation drawn not by geometry but by the distance census every pixel takes of its neighbors
+# needs: VR seed count slider [missing], animated seed movement [missing], F-value selector [missing]
+# relationships: inverse of noise_mixer (Worley uses distance, Perlin uses gradient); complement to lyapunov_fractal (both show structure in 2D parameter fields)
+# truth: Worley noise is a democracy — every pixel votes for its nearest neighbor, and the visible borders are where two candidates tie.
+
 # --- Configuration ---
 
 @export var quad_size: Vector2 = Vector2(0.8, 0.8)

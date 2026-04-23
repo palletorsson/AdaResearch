@@ -1,5 +1,15 @@
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
+# @identity
+# essence: a×b = [a.y*b.z - a.z*b.y, a.z*b.x - a.x*b.z, a.x*b.y - a.y*b.x] — a vector perpendicular to both, magnitude |a||b|sin(θ), direction by right-hand rule
+# desire: to feel rotation emerge from two directions — the cross product lives in the axis of the rotation that would carry a into b, and the paddle_wheel makes this visceral
+# critical_parameter: the right-hand rule — cross product is anti-commutative (a×b = -(b×a)), and the paddle wheel visualizes this as clockwise vs counterclockwise spin
+# triggers: vector_a and vector_b positions → cross_vector = a.cross(b) computed each frame → parallelogram mesh spans both vectors → paddle_gadget spins proportional to magnitude
+# emerges: the parallelogram area — |a×b| is exactly the area of the parallelogram formed by a and b, making the cross product a measurement of 2D span embedded in 3D
+# needs: VR grab to explore plane configurations [missing], paddle wheel interaction [has], parallelogram area display [has]
+# relationships: complement to VectorDotProduct (dot=cos, cross=sin, both needed for full angle); used in VectorTorque where torque = radius × force
+# truth: The cross product does not live in the plane of its inputs — it lives perpendicular to it, measuring how much rotation is implied by two directions.
+
 const PaddleWheelScript = preload("res://algorithms/vectors/shared/gadgets/paddle_wheel_gadget.gd")
 
 var vector_a: Node3D

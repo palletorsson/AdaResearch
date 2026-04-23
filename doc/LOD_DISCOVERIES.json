@@ -145,6 +145,18 @@
       "topic": "garden_listener_cache",
       "insight": "PascalCase .gd filenames produce cache keys without the underscores between words (NeuralNetworks_VR -> neuralnetworksvr not neural_networks_vr). Fix: normalize both cache key and lookup by stripping underscores as fallback. Revealed 98 previously-invisible voiced artifacts across machinelearning, cellularautomata, grammar_systems, proceduralaudio, spatial_partitioning.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-04-23T07:26:22.309766+00:00",
+      "topic": "garden identity",
+      "insight": "garden_listener --silent distinguishes 'no @identity' (has .gd file, actionable) vs 'no .gd file' (no file, blocked). Run --silent first to scope what's actually actionable before planning identity work.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-23T07:26:35.423937+00:00",
+      "topic": "duplicate artifact files",
+      "insight": "branching_growth_algorithm exists in two dirs (branchinggrowthalgorithm/ and branchinggrowthalgorithmcontinued/). garden_listener cache last-write-wins — the latter file shadows the former. Always check for duplicate .gd filenames when a file has @identity but garden still shows it as voiceless.",
+      "lod": 3
     }
   ]
 }
