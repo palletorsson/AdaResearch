@@ -1,3 +1,13 @@
+# @identity
+# essence: a 16×16 floor panel solved by Wave Function Collapse — each cell's terrain type (ground, water, sand, grass, stone, path) was chosen by constraint propagation, not random assignment
+# desire: to show that local rules produce global coherence — the mosaic looks designed because every tile honored its neighbors' constraints, and the result is the only map that could have existed
+# critical_parameter: grid_size (16) and the adjacency rules — water may only neighbor water or sand, never stone; changing one adjacency rule cascades through every cell that depended on it
+# triggers: _ready() calls _solve_wfc() which runs constraint propagation until every cell collapses to one tile type, then renders via ArrayMesh pixel geometry
+# emerges: landscape-like patterns without a landscape designer — rivers, shores, and paths appear because ecology IS a local-constraint system; the algorithm finds the same shapes biology does
+# needs: VR standing on the mosaic [has — StaticBody3D]; live re-solving with player input [missing]; grid_size variation [missing]; apply_grid_config [has]
+# relationships: placed with pattern_tile_puzzle and array_carpet — the three form a progression: draw (puzzle) → repeat (carpet) → constrain (WFC); each is a different theory of pattern formation
+# truth: Wave Function Collapse is not random — it is maximum constraint at every step; the map it produces is the only map that could exist given its adjacency rules, which makes it identical to how cities grow
+
 extends Node3D
 class_name WfcTileMosaic
 

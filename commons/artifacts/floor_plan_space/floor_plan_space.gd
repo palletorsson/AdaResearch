@@ -1,3 +1,13 @@
+# @identity
+# essence: a self-assembling 3D room that grows from a JSON floor plan — walls appear from cardinal adjacency, floors from mosaic patterns, and Italian facades clothe the inner surfaces without GridSystem dependency
+# desire: to make a floor plan legible by walking it — the player inhabits the parsed structure and feels the difference between reading a room description and standing inside one
+# critical_parameter: plan_path — the floor_plan.json determines every room boundary, wall orientation, and floor tile; the artifact is a JSON interpreter that builds space from grammar
+# triggers: _ready() defers to _deferred_build(); apply_grid_config() triggers _load_and_build(); rooms constructed by iterating wall edges from room corner lists
+# emerges: museum corridors with facade walls — a floor plan designed as data becomes an exhibition space that feels handmade; the grammar of rooms is the architecture
+# needs: VR walking through each room [has — walkable static bodies]; wall preset switching [missing]; floor pattern variation per room [has via floor_plan.json]; apply_grid_config [has]
+# relationships: spatial container for every museum map; pairs with FacadeComposer (wall surfaces) and MosaicFloorBuilder (floor tiles); governs Wallpaper_Groups_Gallery, Tile_Shapes_Gallery, Pixel_Art_Gallery
+# truth: a room is not a boundary — it is a grammar of connections; floor_plan_space proves this by collapsing the difference between a JSON description and an inhabitable space
+
 # floor_plan_space.gd
 # Standalone artifact that loads a floor_plan.json and builds the complete 3D
 # space (walls + floors) without any GridSystem dependency.

@@ -1499,6 +1499,22 @@
 				"preferred_zone": "entry"
 			}
 		},
+		"example_2_1_forces_vr": {
+			"category": "forces",
+			"complexity": "beginner",
+			"description": "Force application demo — applying a force vector to a body and watching F=ma unfold. Nature of Code chapter 2.1.",
+			"dev_themes": ["physics", "simulation", "newton"],
+			"footprint": [1.0, 1.0, 1.0],
+			"include_in_map_data": true,
+			"lookup_name": "example_2_1_forces_vr",
+			"map_ready": true,
+			"map_sequences": ["forces"],
+			"name": "Forces (2.1)",
+			"parameters": {"footprint": [1.0, 1.0, 1.0], "size_group": "compact"},
+			"scene": "res://algorithms/forces/example_2_1_forces_vr.tscn",
+			"size_group": "compact",
+			"tags": ["physics", "newton", "force", "acceleration"]
+		},
 		"example_2_2_forces_mass_variation_vr": {
 			"category": "unknown",
 			"complexity": "beginner",

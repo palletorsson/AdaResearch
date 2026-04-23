@@ -1,1280 +1,1280 @@
 {
   "artifacts": {
-    "ContextFreeGrammars": {
-      "category": "lsystems",
-      "complexity": "intermediate",
-      "description": "Context-Free Grammars visualizer \u2014 animated parse trees showing Chomsky hierarchy (regular \u2192 context-free \u2192 context-sensitive \u2192 unrestricted) with leftmost derivation step-by-step.",
-      "dev_themes": [
-        "grammar",
-        "parsing",
+	"ContextFreeGrammars": {
+	  "category": "lsystems",
+	  "complexity": "intermediate",
+	  "description": "Context-Free Grammars visualizer \u2014 animated parse trees showing Chomsky hierarchy (regular \u2192 context-free \u2192 context-sensitive \u2192 unrestricted) with leftmost derivation step-by-step.",
+	  "dev_themes": [
+		"grammar",
+		"parsing",
         "formal_languages"
-      ],
-      "footprint": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "ContextFreeGrammars",
-      "map_ready": true,
-      "map_sequences": [
+	  ],
+	  "footprint": [
+		1.0,
+		1.0,
+		1.0
+	  ],
+	  "include_in_map_data": true,
+	  "lookup_name": "ContextFreeGrammars",
+	  "map_ready": true,
+	  "map_sequences": [
         "lsystems"
-      ],
-      "name": "Context-Free Grammars",
-      "parameters": {
-        "footprint": [
-          1.0,
-          1.0,
-          1.0
-        ],
-        "size_group": "compact"
-      },
-      "scene": "res://algorithms/lsystems/context_free_grammars/context_free_grammars.tscn",
-      "size_group": "compact",
-      "tags": [
-        "grammar",
-        "chomsky",
-        "parse_tree",
+	  ],
+	  "name": "Context-Free Grammars",
+	  "parameters": {
+		"footprint": [
+		  1.0,
+		  1.0,
+		  1.0
+		],
+		"size_group": "compact"
+	  },
+	  "scene": "res://algorithms/lsystems/context_free_grammars/context_free_grammars.tscn",
+	  "size_group": "compact",
+	  "tags": [
+		"grammar",
+		"chomsky",
+		"parse_tree",
         "formal_language"
-      ],
-      "qfep_connection": "The formal hierarchy of grammars \u2014 L-systems are a subset of parallel grammars; this artifact locates where rewriting rules sit in the Chomsky tower."
-    },
-    "AnimatedTree": {
-      "category": "procedural",
-      "complexity": "advanced",
-      "description": "Time-sliced L-System interpretation showing organic growth animation",
-      "dev_themes": [
-        "grammar",
-        "l_systems",
+	  ],
+	  "qfep_connection": "The formal hierarchy of grammars \u2014 L-systems are a subset of parallel grammars; this artifact locates where rewriting rules sit in the Chomsky tower."
+	},
+	"AnimatedTree": {
+	  "category": "procedural",
+	  "complexity": "advanced",
+	  "description": "Time-sliced L-System interpretation showing organic growth animation",
+	  "dev_themes": [
+		"grammar",
+		"l_systems",
         "procedural"
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "AnimatedTree",
-      "map_ready": true,
-      "map_sequences": [
+	  ],
+	  "include_in_map_data": true,
+	  "lookup_name": "AnimatedTree",
+	  "map_ready": true,
+	  "map_sequences": [
         "lsystems"
-      ],
-      "name": "Animated Tree Growth",
-      "parameters": {
-        "footprint": [
-          1.0,
-          8.0,
-          9.0
-        ],
-        "size_group": "environment"
-      },
-      "qfep_connection": "Grammar rules as F generating E(S) over time \u2014 a tiny production rule unfolds into a branching tree. Branching angle IS the \u03bb parameter: small angle = ordered growth, large angle = sprawling chaos.",
-      "scene": "res://algorithms/lsystems/Growth/AnimatedTree.tscn",
-      "tags": [
-        "l_system",
-        "procedural",
-        "simulation",
+	  ],
+	  "name": "Animated Tree Growth",
+	  "parameters": {
+		"footprint": [
+		  1.0,
+		  8.0,
+		  9.0
+		],
+		"size_group": "environment"
+	  },
+	  "qfep_connection": "Grammar rules as F generating E(S) over time \u2014 a tiny production rule unfolds into a branching tree. Branching angle IS the \u03bb parameter: small angle = ordered growth, large angle = sprawling chaos.",
+	  "scene": "res://algorithms/lsystems/Growth/AnimatedTree.tscn",
+	  "tags": [
+		"l_system",
+		"procedural",
+		"simulation",
         "tree"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 5,
-        "clearance": {
-          "front": 2,
-          "back": 2,
-          "left": 2,
-          "right": 2
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "lsystem_tree",
-          "static",
-          "animated",
+	  ],
+	  "spatial_needs": {
+		"platform": "none",
+		"footprint_cells": 5,
+		"clearance": {
+		  "front": 2,
+		  "back": 2,
+		  "left": 2,
+		  "right": 2
+		},
+		"player_position": "front",
+		"wall_backing": false,
+		"orientation": "face_approach",
+		"isolation": 0,
+		"cluster_with": [
+		  "lsystem_tree",
+		  "static",
+		  "animated",
           "create_fractal_plant"
-        ],
-        "preferred_zone": "end"
-      }
-    },
-    "CityGenerator": {
-      "category": "procedural",
-      "complexity": "advanced",
-      "description": "Procedural pipe network using orthogonal L-System rules",
-      "dev_themes": [
-        "grammar",
-        "l_systems",
+		],
+		"preferred_zone": "end"
+	  }
+	},
+	"CityGenerator": {
+	  "category": "procedural",
+	  "complexity": "advanced",
+	  "description": "Procedural pipe network using orthogonal L-System rules",
+	  "dev_themes": [
+		"grammar",
+		"l_systems",
         "procedural"
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "CityGenerator",
-      "map_ready": true,
-      "map_sequences": [
-        "grammar_systems",
+	  ],
+	  "include_in_map_data": true,
+	  "lookup_name": "CityGenerator",
+	  "map_ready": true,
+	  "map_sequences": [
+		"grammar_systems",
         "lsystems"
-      ],
-      "name": "City Generator",
-      "parameters": {
-        "footprint": [
-          1.0,
-          6.0,
-          11.0
-        ],
-        "size_group": "world_scale"
-      },
-      "scene": "res://algorithms/lsystems/Architecture/CityGenerator.tscn",
-      "sequence": "grammar_systems",
-      "tags": [
-        "graph",
-        "l_system",
-        "procedural",
+	  ],
+	  "name": "City Generator",
+	  "parameters": {
+		"footprint": [
+		  1.0,
+		  6.0,
+		  11.0
+		],
+		"size_group": "world_scale"
+	  },
+	  "scene": "res://algorithms/lsystems/Architecture/CityGenerator.tscn",
+	  "sequence": "grammar_systems",
+	  "tags": [
+		"graph",
+		"l_system",
+		"procedural",
         "simulation"
-      ],
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [],
-          "operations": [
-            "create_primitives",
+	  ],
+	  "geometry_spec": {
+		"mesh_type": "composed_primitives",
+		"topology": "manifold_closed",
+		"construction": {
+		  "method": "primitive_assembly",
+		  "primitives": [],
+		  "operations": [
+			"create_primitives",
             "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "emissive",
-          "key_properties": [
-            "emission",
+		  ]
+		},
+		"material": {
+		  "type": "standard",
+		  "shading_model": "emissive",
+		  "key_properties": [
+			"emission",
             "metallic"
-          ]
-        },
-        "animation": {
-          "type": "transform",
-          "driven_by": "per_frame_update",
-          "affects": [
+		  ]
+		},
+		"animation": {
+		  "type": "transform",
+		  "driven_by": "per_frame_update",
+		  "affects": [
             "transform"
-          ]
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 5,
-        "clearance": {
-          "front": 2,
-          "back": 2,
-          "left": 2,
-          "right": 2
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "lsystem_dungeon",
-          "growth",
+		  ]
+		},
+		"instance_strategy": "single",
+		"vertex_estimate": "unknown"
+	  },
+	  "spatial_needs": {
+		"platform": "none",
+		"footprint_cells": 5,
+		"clearance": {
+		  "front": 2,
+		  "back": 2,
+		  "left": 2,
+		  "right": 2
+		},
+		"player_position": "front",
+		"wall_backing": false,
+		"orientation": "face_approach",
+		"isolation": 0,
+		"cluster_with": [
+		  "lsystem_dungeon",
+		  "growth",
           "floor"
-        ],
-        "preferred_zone": "end"
-      }
-    },
-    "ContextSensitiveTree": {
-      "category": "procedural",
-      "complexity": "advanced",
-      "description": "L-System tree with physics-based environmental awareness and branch pruning",
-      "dev_themes": [
-        "grammar",
-        "l_systems",
+		],
+		"preferred_zone": "end"
+	  }
+	},
+	"ContextSensitiveTree": {
+	  "category": "procedural",
+	  "complexity": "advanced",
+	  "description": "L-System tree with physics-based environmental awareness and branch pruning",
+	  "dev_themes": [
+		"grammar",
+		"l_systems",
         "procedural"
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "ContextSensitiveTree",
-      "map_ready": true,
-      "map_sequences": [
-        "grammar_systems",
+	  ],
+	  "include_in_map_data": true,
+	  "lookup_name": "ContextSensitiveTree",
+	  "map_ready": true,
+	  "map_sequences": [
+		"grammar_systems",
         "lsystems"
-      ],
-      "name": "Context-Sensitive Tree",
-      "qfep_connection": "Context-sensitive rules mean the system's F-model adapts to its environment \u2014 branches grow toward light, prune in shadow. Local-to-global coherence: each module responds to context while maintaining grammatical structure.",
-      "scene": "res://algorithms/lsystems/ContextSensitive/ContextSensitiveTree.tscn",
-      "sequence": "grammar_systems",
-      "tags": [
-        "l_system",
-        "procedural",
-        "simulation",
+	  ],
+	  "name": "Context-Sensitive Tree",
+	  "qfep_connection": "Context-sensitive rules mean the system's F-model adapts to its environment \u2014 branches grow toward light, prune in shadow. Local-to-global coherence: each module responds to context while maintaining grammatical structure.",
+	  "scene": "res://algorithms/lsystems/ContextSensitive/ContextSensitiveTree.tscn",
+	  "sequence": "grammar_systems",
+	  "tags": [
+		"l_system",
+		"procedural",
+		"simulation",
         "tree"
-      ],
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_open",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "box",
+	  ],
+	  "geometry_spec": {
+		"mesh_type": "composed_primitives",
+		"topology": "manifold_open",
+		"construction": {
+		  "method": "primitive_assembly",
+		  "primitives": [
+			"box",
             "cylinder"
-          ],
-          "operations": [
-            "create_primitives",
+		  ],
+		  "operations": [
+			"create_primitives",
             "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": [
-            "transparency",
+		  ]
+		},
+		"material": {
+		  "type": "standard",
+		  "shading_model": "pbr",
+		  "key_properties": [
+			"transparency",
             "double_sided"
-          ]
-        },
-        "animation": {
-          "type": "static",
-          "driven_by": null,
-          "affects": []
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "lsystem_tree",
-          "blind",
-          "growth",
-          "environmentally",
+		  ]
+		},
+		"animation": {
+		  "type": "static",
+		  "driven_by": null,
+		  "affects": []
+		},
+		"instance_strategy": "few",
+		"vertex_estimate": "unknown"
+	  },
+	  "spatial_needs": {
+		"platform": "none",
+		"footprint_cells": 2,
+		"clearance": {
+		  "front": 1,
+		  "back": 1,
+		  "left": 1,
+		  "right": 1
+		},
+		"player_position": "front",
+		"wall_backing": false,
+		"orientation": "face_approach",
+		"isolation": 0,
+		"cluster_with": [
+		  "lsystem_tree",
+		  "blind",
+		  "growth",
+		  "environmentally",
           "aware"
-        ],
-        "preferred_zone": "end"
-      }
-    },
-    "ForestCompetition": {
-      "category": "procedural",
-      "complexity": "advanced",
-      "description": "Multiple L-System trees with competing growth strategies and health mechanics",
-      "dev_themes": [
-        "grammar",
-        "l_systems",
+		],
+		"preferred_zone": "end"
+	  }
+	},
+	"ForestCompetition": {
+	  "category": "procedural",
+	  "complexity": "advanced",
+	  "description": "Multiple L-System trees with competing growth strategies and health mechanics",
+	  "dev_themes": [
+		"grammar",
+		"l_systems",
         "procedural"
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "ForestCompetition",
-      "map_ready": true,
-      "map_sequences": [
+	  ],
+	  "include_in_map_data": true,
+	  "lookup_name": "ForestCompetition",
+	  "map_ready": true,
+	  "map_sequences": [
         "lsystems"
-      ],
-      "name": "Forest Ecosystem",
-      "parameters": {
-        "footprint": [
-          4.0,
-          6.0,
-          6.0
-        ],
-        "size_group": "environment"
-      },
-      "qfep_connection": "Competition as multi-agent F-minimization \u2014 each tree's growth strategy (its F-model) competes for shared resources. The ecosystem emerges from local growth rules interacting through environmental constraints.",
-      "scene": "res://algorithms/lsystems/Ecosystem/ForestCompetition.tscn",
-      "tags": [
-        "l_system",
-        "procedural",
+	  ],
+	  "name": "Forest Ecosystem",
+	  "parameters": {
+		"footprint": [
+		  4.0,
+		  6.0,
+		  6.0
+		],
+		"size_group": "environment"
+	  },
+	  "qfep_connection": "Competition as multi-agent F-minimization \u2014 each tree's growth strategy (its F-model) competes for shared resources. The ecosystem emerges from local growth rules interacting through environmental constraints.",
+	  "scene": "res://algorithms/lsystems/Ecosystem/ForestCompetition.tscn",
+	  "tags": [
+		"l_system",
+		"procedural",
         "simulation"
-      ],
-      "geometry_spec": {
-        "mesh_type": "procedural_line",
-        "topology": "non_manifold",
-        "construction": {
-          "method": "l_system_turtle",
-          "primitives": [],
-          "operations": [
-            "string_rewrite",
-            "turtle_interpret",
+	  ],
+	  "geometry_spec": {
+		"mesh_type": "procedural_line",
+		"topology": "non_manifold",
+		"construction": {
+		  "method": "l_system_turtle",
+		  "primitives": [],
+		  "operations": [
+			"string_rewrite",
+			"turtle_interpret",
             "emit_lines"
-          ]
-        },
-        "material": {
-          "type": "vertex_color",
-          "shading_model": "unshaded",
-          "key_properties": [
-            "transparency",
+		  ]
+		},
+		"material": {
+		  "type": "vertex_color",
+		  "shading_model": "unshaded",
+		  "key_properties": [
+			"transparency",
             "double_sided"
-          ]
-        },
-        "animation": {
-          "type": "vertex",
-          "driven_by": "per_frame_rebuild",
-          "affects": [
+		  ]
+		},
+		"animation": {
+		  "type": "vertex",
+		  "driven_by": "per_frame_rebuild",
+		  "affects": [
             "vertex_positions"
-          ]
-        },
-        "instance_strategy": "array",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 5,
-        "clearance": {
-          "front": 2,
-          "back": 2,
-          "left": 2,
-          "right": 2
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "lsystem_tree",
-          "single",
-          "competing",
-          "forest",
+		  ]
+		},
+		"instance_strategy": "array",
+		"vertex_estimate": "unknown"
+	  },
+	  "spatial_needs": {
+		"platform": "none",
+		"footprint_cells": 5,
+		"clearance": {
+		  "front": 2,
+		  "back": 2,
+		  "left": 2,
+		  "right": 2
+		},
+		"player_position": "front",
+		"wall_backing": false,
+		"orientation": "face_approach",
+		"isolation": 0,
+		"cluster_with": [
+		  "lsystem_tree",
+		  "single",
+		  "competing",
+		  "forest",
           "allometric"
-        ],
-        "preferred_zone": "end"
-      }
-    },
-    "Hilbert3D": {
-      "category": "procedural",
-      "complexity": "advanced",
-      "description": "Space-filling curve visualization demonstrating efficient 3D traversal",
-      "dev_themes": [
-        "grammar",
-        "l_systems",
+		],
+		"preferred_zone": "end"
+	  }
+	},
+	"Hilbert3D": {
+	  "category": "procedural",
+	  "complexity": "advanced",
+	  "description": "Space-filling curve visualization demonstrating efficient 3D traversal",
+	  "dev_themes": [
+		"grammar",
+		"l_systems",
         "procedural"
-      ],
-      "footprint": [
-        6,
-        8,
-        6
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "Hilbert3D",
-      "map_ready": true,
-      "map_sequences": [
+	  ],
+	  "footprint": [
+		6,
+		8,
+		6
+	  ],
+	  "include_in_map_data": true,
+	  "lookup_name": "Hilbert3D",
+	  "map_ready": true,
+	  "map_sequences": [
         "lsystems"
-      ],
-      "name": "3D Hilbert Curve",
-      "parameters": {
-        "footprint": [
-          6,
-          8,
-          6
-        ],
-        "size_group": "xlarge"
-      },
-      "qfep_connection": "A 1D path that visits every point in 3D space \u2014 maximum E(S) coverage from minimum F-description. The curve's grammar rule is tiny; the space it fills is infinite. Recursion as F-compression of complexity.",
-      "scene": "res://algorithms/lsystems/Hilbert3D.tscn",
-      "size_group": "xlarge",
-      "tags": [
-        "3d",
+	  ],
+	  "name": "3D Hilbert Curve",
+	  "parameters": {
+		"footprint": [
+		  6,
+		  8,
+		  6
+		],
+		"size_group": "xlarge"
+	  },
+	  "qfep_connection": "A 1D path that visits every point in 3D space \u2014 maximum E(S) coverage from minimum F-description. The curve's grammar rule is tiny; the space it fills is infinite. Recursion as F-compression of complexity.",
+	  "scene": "res://algorithms/lsystems/Hilbert3D.tscn",
+	  "size_group": "xlarge",
+	  "tags": [
+		"3d",
         "procedural"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 5,
-        "clearance": {
-          "front": 2,
-          "back": 2,
-          "left": 2,
-          "right": 2
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 2,
-        "cluster_with": [
-          "space_filling_curve_gallery",
+	  ],
+	  "spatial_needs": {
+		"platform": "none",
+		"footprint_cells": 5,
+		"clearance": {
+		  "front": 2,
+		  "back": 2,
+		  "left": 2,
+		  "right": 2
+		},
+		"player_position": "front",
+		"wall_backing": false,
+		"orientation": "face_approach",
+		"isolation": 2,
+		"cluster_with": [
+		  "space_filling_curve_gallery",
           "gallery"
-        ],
-        "preferred_zone": "end"
-      }
-    },
-    "branching_coral": {
-      "category": "procedural",
-      "complexity": "intermediate",
-      "description": "Marine L-system coral colony \u2014 multiple shoots with wide branching angles produce organic fan and staghorn forms. Color gradient from deep purple-brown base to bright pink coral tips on a rock base.",
-      "dev_themes": [
-        "grammar",
-        "l_systems",
+		],
+		"preferred_zone": "end"
+	  }
+	},
+	"branching_coral": {
+	  "category": "procedural",
+	  "complexity": "intermediate",
+	  "description": "Marine L-system coral colony \u2014 multiple shoots with wide branching angles produce organic fan and staghorn forms. Color gradient from deep purple-brown base to bright pink coral tips on a rock base.",
+	  "dev_themes": [
+		"grammar",
+		"l_systems",
         "procedural"
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "branching_coral",
-      "map_ready": true,
-      "map_sequences": [
+	  ],
+	  "include_in_map_data": true,
+	  "lookup_name": "branching_coral",
+	  "map_ready": true,
+	  "map_sequences": [
         "lsystems"
-      ],
-      "name": "Branching Coral",
-      "scene": "res://commons/artifacts/branching_coral/branching_coral.tscn",
-      "tags": [
-        "color",
-        "l_system",
-        "procedural",
-        "simulation",
+	  ],
+	  "name": "Branching Coral",
+	  "scene": "res://commons/artifacts/branching_coral/branching_coral.tscn",
+	  "tags": [
+		"color",
+		"l_system",
+		"procedural",
+		"simulation",
         "swarm"
-      ],
-      "geometry_spec": {
-        "mesh_type": "procedural_line",
-        "topology": "non_manifold",
-        "construction": {
-          "method": "l_system_turtle",
-          "primitives": [
+	  ],
+	  "geometry_spec": {
+		"mesh_type": "procedural_line",
+		"topology": "non_manifold",
+		"construction": {
+		  "method": "l_system_turtle",
+		  "primitives": [
             "box"
-          ],
-          "operations": [
-            "string_rewrite",
-            "turtle_interpret",
+		  ],
+		  "operations": [
+			"string_rewrite",
+			"turtle_interpret",
             "emit_lines"
-          ]
-        },
-        "material": {
-          "type": "vertex_color",
-          "shading_model": "unshaded",
-          "key_properties": [
+		  ]
+		},
+		"material": {
+		  "type": "vertex_color",
+		  "shading_model": "unshaded",
+		  "key_properties": [
             "metallic"
-          ]
-        },
-        "animation": {
-          "type": "static",
-          "driven_by": null,
-          "affects": []
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "lsystem_tree",
-          "single",
-          "trunk",
-          "multi",
+		  ]
+		},
+		"animation": {
+		  "type": "static",
+		  "driven_by": null,
+		  "affects": []
+		},
+		"instance_strategy": "single",
+		"vertex_estimate": "unknown"
+	  },
+	  "spatial_needs": {
+		"platform": "none",
+		"footprint_cells": 2,
+		"clearance": {
+		  "front": 1,
+		  "back": 1,
+		  "left": 1,
+		  "right": 1
+		},
+		"player_position": "front",
+		"wall_backing": false,
+		"orientation": "face_approach",
+		"isolation": 0,
+		"cluster_with": [
+		  "lsystem_tree",
+		  "single",
+		  "trunk",
+		  "multi",
           "shoot"
-        ],
-        "preferred_zone": "any"
-      }
-    },
-    "dark_sphere": {
-      "category": "procedural",
-      "complexity": "intermediate",
-      "description": "A simple dark sphere used as an atmospheric and geometric reference. Its silhouette, rotation, and low-emission surface make nearby shifts in scale, position, and lighting easier to perceive. Because it changes very little itself, it stabilizes the viewer's sense of what other transformed objects are doing. It functions as a neutral anchor.",
-      "dev_themes": [
-        "grammar",
-        "l_systems",
+		],
+		"preferred_zone": "any"
+	  }
+	},
+	"dark_sphere": {
+	  "category": "procedural",
+	  "complexity": "intermediate",
+	  "description": "A simple dark sphere used as an atmospheric and geometric reference. Its silhouette, rotation, and low-emission surface make nearby shifts in scale, position, and lighting easier to perceive. Because it changes very little itself, it stabilizes the viewer's sense of what other transformed objects are doing. It functions as a neutral anchor.",
+	  "dev_themes": [
+		"grammar",
+		"l_systems",
         "procedural"
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "dark_sphere",
-      "map_ready": true,
-      "map_sequences": [
-        "array_tutorial",
-        "bricolage",
-        "cellularautomata",
-        "color",
-        "constraint_solvers",
-        "forces",
-        "fractals",
-        "isosurfaces",
-        "lsystems",
-        "noise",
-        "particles",
-        "patterngeneration",
-        "physicssimulation",
-        "primitives",
-        "proceduralgeneration",
-        "proceduralgeneration_all",
-        "qfeplaboratory",
-        "randomness",
-        "testmaps",
-        "transformation",
-        "unused",
+	  ],
+	  "include_in_map_data": true,
+	  "lookup_name": "dark_sphere",
+	  "map_ready": true,
+	  "map_sequences": [
+		"array_tutorial",
+		"bricolage",
+		"cellularautomata",
+		"color",
+		"constraint_solvers",
+		"forces",
+		"fractals",
+		"isosurfaces",
+		"lsystems",
+		"noise",
+		"particles",
+		"patterngeneration",
+		"physicssimulation",
+		"primitives",
+		"proceduralgeneration",
+		"proceduralgeneration_all",
+		"qfeplaboratory",
+		"randomness",
+		"testmaps",
+		"transformation",
+		"unused",
         "wavefunctions"
-      ],
-      "name": "Dark Sphere",
-      "parameters": {
-        "footprint": [
-          1.0,
-          1.0,
-          1.0
-        ],
-        "size_group": "compact"
-      },
-      "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
-      "tags": [
-        "reference",
-        "atmosphere",
-        "sphere",
-        "scale_marker",
-        "lighting",
-        "geometry",
+	  ],
+	  "name": "Dark Sphere",
+	  "parameters": {
+		"footprint": [
+		  1.0,
+		  1.0,
+		  1.0
+		],
+		"size_group": "compact"
+	  },
+	  "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+	  "tags": [
+		"reference",
+		"atmosphere",
+		"sphere",
+		"scale_marker",
+		"lighting",
+		"geometry",
         "procedural"
-      ],
-      "qfep_connection": "Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding changes in S can be felt against it.",
-      "gamwell_reference": "",
-      "capacity": "USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.",
-      "interactions": [
-        "observe the pulsing sphere against transformed geometry",
-        "use it as a scale and occlusion reference in the room",
-        "compare its stable silhouette with more dynamic artifacts nearby",
+	  ],
+	  "qfep_connection": "Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding changes in S can be felt against it.",
+	  "gamwell_reference": "",
+	  "capacity": "USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.",
+	  "interactions": [
+		"observe the pulsing sphere against transformed geometry",
+		"use it as a scale and occlusion reference in the room",
+		"compare its stable silhouette with more dynamic artifacts nearby",
         "treat it as an atmospheric marker when reading spatial change"
-      ],
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "sphere",
+	  ],
+	  "geometry_spec": {
+		"mesh_type": "composed_primitives",
+		"topology": "manifold_closed",
+		"construction": {
+		  "method": "primitive_assembly",
+		  "primitives": [
+			"sphere",
             "cylinder"
-          ],
-          "operations": [
-            "create_primitives",
+		  ],
+		  "operations": [
+			"create_primitives",
             "position_children"
-          ]
-        },
-        "material": {
-          "type": "unlit",
-          "shading_model": "unshaded",
-          "key_properties": [
-            "emission",
-            "metallic",
-            "transparency",
+		  ]
+		},
+		"material": {
+		  "type": "unlit",
+		  "shading_model": "unshaded",
+		  "key_properties": [
+			"emission",
+			"metallic",
+			"transparency",
             "double_sided"
-          ]
-        },
-        "animation": {
-          "type": "transform",
-          "driven_by": "per_frame_update",
-          "affects": [
+		  ]
+		},
+		"animation": {
+		  "type": "transform",
+		  "driven_by": "per_frame_update",
+		  "affects": [
             "transform"
-          ]
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "~1536"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [],
-        "preferred_zone": "any"
-      }
-    },
-    "fractal_lsystem_string": {
-      "category": "procedural",
-      "complexity": "advanced",
-      "description": "Visualizes the L-system rewriting process \u2014 shows how the axiom string expands through each generation, making the grammar visible as text.",
-      "dev_themes": [
-        "grammar",
-        "l_systems",
+		  ]
+		},
+		"instance_strategy": "single",
+		"vertex_estimate": "~1536"
+	  },
+	  "spatial_needs": {
+		"platform": "none",
+		"footprint_cells": 1,
+		"clearance": {
+		  "front": 1,
+		  "back": 1,
+		  "left": 1,
+		  "right": 1
+		},
+		"player_position": "front",
+		"wall_backing": false,
+		"orientation": "face_approach",
+		"isolation": 0,
+		"cluster_with": [],
+		"preferred_zone": "any"
+	  }
+	},
+	"fractal_lsystem_string": {
+	  "category": "procedural",
+	  "complexity": "advanced",
+	  "description": "Visualizes the L-system rewriting process \u2014 shows how the axiom string expands through each generation, making the grammar visible as text.",
+	  "dev_themes": [
+		"grammar",
+		"l_systems",
         "procedural"
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "fractal_lsystem_string",
-      "map_ready": true,
-      "map_sequences": [
+	  ],
+	  "include_in_map_data": true,
+	  "lookup_name": "fractal_lsystem_string",
+	  "map_ready": true,
+	  "map_sequences": [
         "lsystems"
-      ],
-      "name": "L-System String Expansion",
-      "parameters": {
-        "footprint": [
-          1.0,
-          3.0,
-          3.0
-        ],
-        "size_group": "room_scale"
-      },
-      "qfep_connection": "The F-description made visible: each generation shows the string growing exponentially from a tiny axiom. You see the compression ratio directly \u2014 one rule produces pages of instructions.",
-      "scene": "res://commons/artifacts/fractal_lsystem_string/fractal_lsystem_string.tscn",
-      "tags": [
-        "fractal",
-        "l_system",
-        "procedural",
-        "simulation",
+	  ],
+	  "name": "L-System String Expansion",
+	  "parameters": {
+		"footprint": [
+		  1.0,
+		  3.0,
+		  3.0
+		],
+		"size_group": "room_scale"
+	  },
+	  "qfep_connection": "The F-description made visible: each generation shows the string growing exponentially from a tiny axiom. You see the compression ratio directly \u2014 one rule produces pages of instructions.",
+	  "scene": "res://commons/artifacts/fractal_lsystem_string/fractal_lsystem_string.tscn",
+	  "tags": [
+		"fractal",
+		"l_system",
+		"procedural",
+		"simulation",
         "string"
-      ],
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
+	  ],
+	  "geometry_spec": {
+		"mesh_type": "composed_primitives",
+		"topology": "manifold_closed",
+		"construction": {
+		  "method": "primitive_assembly",
+		  "primitives": [
             "box"
-          ],
-          "operations": [
-            "create_primitives",
+		  ],
+		  "operations": [
+			"create_primitives",
             "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": [
+		  ]
+		},
+		"material": {
+		  "type": "standard",
+		  "shading_model": "pbr",
+		  "key_properties": [
             "metallic"
-          ]
-        },
-        "animation": {
-          "type": "static",
-          "driven_by": null,
-          "affects": []
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 3,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "lsystem_tree",
-          "string",
+		  ]
+		},
+		"animation": {
+		  "type": "static",
+		  "driven_by": null,
+		  "affects": []
+		},
+		"instance_strategy": "single",
+		"vertex_estimate": "unknown"
+	  },
+	  "spatial_needs": {
+		"platform": "none",
+		"footprint_cells": 3,
+		"clearance": {
+		  "front": 1,
+		  "back": 1,
+		  "left": 1,
+		  "right": 1
+		},
+		"player_position": "front",
+		"wall_backing": false,
+		"orientation": "face_approach",
+		"isolation": 0,
+		"cluster_with": [
+		  "lsystem_tree",
+		  "string",
           "geometry"
-        ],
-        "preferred_zone": "end"
-      }
-    },
-    "genetic_tree_sculptor": {
-      "category": "procedural",
-      "complexity": "advanced",
-      "description": "Evolutionary L-system tree that uses genetic algorithm selection to sculpt tree forms \u2014 combines grammar-based growth with fitness-driven optimization.",
-      "dev_themes": [
-        "biology",
-        "grammar",
-        "l_systems",
+		],
+		"preferred_zone": "end"
+	  }
+	},
+	"genetic_tree_sculptor": {
+	  "category": "procedural",
+	  "complexity": "advanced",
+	  "description": "Evolutionary L-system tree that uses genetic algorithm selection to sculpt tree forms \u2014 combines grammar-based growth with fitness-driven optimization.",
+	  "dev_themes": [
+		"biology",
+		"grammar",
+		"l_systems",
         "procedural"
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "genetic_tree_sculptor",
-      "map_ready": true,
-      "map_sequences": [
+	  ],
+	  "include_in_map_data": true,
+	  "lookup_name": "genetic_tree_sculptor",
+	  "map_ready": true,
+	  "map_sequences": [
         "lsystems"
-      ],
-      "name": "Genetic Tree Sculptor",
-      "qfep_connection": "Evolution as F-search: genetic algorithms explore the space of possible L-system parameters, selecting trees by fitness criteria. Natural selection as a meta-grammar operating on grammars.",
-      "scene": "res://commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.tscn",
-      "tags": [
-        "l_system",
-        "procedural",
-        "simulation",
-        "sorting",
+	  ],
+	  "name": "Genetic Tree Sculptor",
+	  "qfep_connection": "Evolution as F-search: genetic algorithms explore the space of possible L-system parameters, selecting trees by fitness criteria. Natural selection as a meta-grammar operating on grammars.",
+	  "scene": "res://commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.tscn",
+	  "tags": [
+		"l_system",
+		"procedural",
+		"simulation",
+		"sorting",
         "tree"
-      ],
-      "geometry_spec": {
-        "mesh_type": "delegated_scene",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "scene_instantiation",
-          "primitives": [
+	  ],
+	  "geometry_spec": {
+		"mesh_type": "delegated_scene",
+		"topology": "manifold_closed",
+		"construction": {
+		  "method": "scene_instantiation",
+		  "primitives": [
             "cylinder"
-          ],
-          "operations": [
-            "load_scene",
-            "instantiate",
+		  ],
+		  "operations": [
+			"load_scene",
+			"instantiate",
             "configure"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": []
-        },
-        "animation": {
-          "type": "transform",
-          "driven_by": "per_frame_update",
-          "affects": [
+		  ]
+		},
+		"material": {
+		  "type": "standard",
+		  "shading_model": "pbr",
+		  "key_properties": []
+		},
+		"animation": {
+		  "type": "transform",
+		  "driven_by": "per_frame_update",
+		  "affects": [
             "transform"
-          ]
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "varies"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "systems",
-          "evolution",
+		  ]
+		},
+		"instance_strategy": "single",
+		"vertex_estimate": "varies"
+	  },
+	  "spatial_needs": {
+		"platform": "none",
+		"footprint_cells": 2,
+		"clearance": {
+		  "front": 1,
+		  "back": 1,
+		  "left": 1,
+		  "right": 1
+		},
+		"player_position": "front",
+		"wall_backing": false,
+		"orientation": "face_approach",
+		"isolation": 0,
+		"cluster_with": [
+		  "systems",
+		  "evolution",
           "concepts"
-        ],
-        "preferred_zone": "end"
-      }
-    },
-    "grammar_provenance": {
-      "category": "procedural",
-      "complexity": "advanced",
-      "description": "Side-by-side L-system trees from three cultural/historical sources \u2014 Lindenmayer 1968 botanical, Islamic geometric subdivision, Aboriginal kinship recursion. Same engine, different axioms, different worlds. Asks: whose grammar?",
-      "dev_themes": [
-        "grammar",
-        "l_systems",
-        "procedural",
+		],
+		"preferred_zone": "end"
+	  }
+	},
+	"grammar_provenance": {
+	  "category": "procedural",
+	  "complexity": "advanced",
+	  "description": "Side-by-side L-system trees from three cultural/historical sources \u2014 Lindenmayer 1968 botanical, Islamic geometric subdivision, Aboriginal kinship recursion. Same engine, different axioms, different worlds. Asks: whose grammar?",
+	  "dev_themes": [
+		"grammar",
+		"l_systems",
+		"procedural",
         "philosophy"
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "grammar_provenance",
-      "map_ready": true,
-      "map_sequences": [
+	  ],
+	  "include_in_map_data": true,
+	  "lookup_name": "grammar_provenance",
+	  "map_ready": true,
+	  "map_sequences": [
         "lsystems"
-      ],
-      "name": "Grammar Provenance",
-      "parameters": {
-        "footprint": [
-          4.0,
-          2.0,
-          2.0
-        ],
-        "size_group": "room_scale"
-      },
-      "qfep_connection": "The axiom is never neutral \u2014 every grammar encodes a worldview. Three F-descriptions produce three radically different E(S) landscapes. The engine is the same; the politics are in the rules.",
-      "scene": "res://commons/artifacts/grammar_provenance/grammar_provenance.tscn",
-      "tags": [
-        "l_system",
-        "procedural",
-        "critical_theory",
-        "provenance",
+	  ],
+	  "name": "Grammar Provenance",
+	  "parameters": {
+		"footprint": [
+		  4.0,
+		  2.0,
+		  2.0
+		],
+		"size_group": "room_scale"
+	  },
+	  "qfep_connection": "The axiom is never neutral \u2014 every grammar encodes a worldview. Three F-descriptions produce three radically different E(S) landscapes. The engine is the same; the politics are in the rules.",
+	  "scene": "res://commons/artifacts/grammar_provenance/grammar_provenance.tscn",
+	  "tags": [
+		"l_system",
+		"procedural",
+		"critical_theory",
+		"provenance",
         "comparison"
-      ],
-      "geometry_spec": {
-        "mesh_type": "procedural_line",
-        "topology": "non_manifold",
-        "construction": {
-          "method": "l_system_turtle",
-          "primitives": [
+	  ],
+	  "geometry_spec": {
+		"mesh_type": "procedural_line",
+		"topology": "non_manifold",
+		"construction": {
+		  "method": "l_system_turtle",
+		  "primitives": [
             "cylinder"
-          ],
-          "operations": [
-            "string_rewrite",
-            "turtle_interpret",
+		  ],
+		  "operations": [
+			"string_rewrite",
+			"turtle_interpret",
             "emit_lines"
-          ]
-        },
-        "material": {
-          "type": "vertex_color",
-          "shading_model": "unshaded",
-          "key_properties": [
+		  ]
+		},
+		"material": {
+		  "type": "vertex_color",
+		  "shading_model": "unshaded",
+		  "key_properties": [
             "metallic"
-          ]
-        },
-        "animation": {
-          "type": "static",
-          "driven_by": null,
-          "affects": []
-        },
-        "instance_strategy": "array",
-        "vertex_estimate": "~1"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 3,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "placed",
-          "alongside",
-          "lsystem_editor",
-          "lsystem_tree",
+		  ]
+		},
+		"animation": {
+		  "type": "static",
+		  "driven_by": null,
+		  "affects": []
+		},
+		"instance_strategy": "array",
+		"vertex_estimate": "~1"
+	  },
+	  "spatial_needs": {
+		"platform": "none",
+		"footprint_cells": 3,
+		"clearance": {
+		  "front": 1,
+		  "back": 1,
+		  "left": 1,
+		  "right": 1
+		},
+		"player_position": "front",
+		"wall_backing": false,
+		"orientation": "face_approach",
+		"isolation": 0,
+		"cluster_with": [
+		  "placed",
+		  "alongside",
+		  "lsystem_editor",
+		  "lsystem_tree",
           "responds"
-        ],
-        "preferred_zone": "end"
-      }
-    },
-    "lsystem_dungeon": {
-      "category": "procedural",
-      "complexity": "advanced",
-      "description": "Procedural dungeon floor plan generated from L-system grammar rules \u2014 corridors and rooms emerge from string rewriting, rendered as a miniature architectural model.",
-      "dev_themes": [
-        "grammar",
-        "l_systems",
+		],
+		"preferred_zone": "end"
+	  }
+	},
+	"lsystem_dungeon": {
+	  "category": "procedural",
+	  "complexity": "advanced",
+	  "description": "Procedural dungeon floor plan generated from L-system grammar rules \u2014 corridors and rooms emerge from string rewriting, rendered as a miniature architectural model.",
+	  "dev_themes": [
+		"grammar",
+		"l_systems",
         "procedural"
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "lsystem_dungeon",
-      "map_ready": true,
-      "map_sequences": [
+	  ],
+	  "include_in_map_data": true,
+	  "lookup_name": "lsystem_dungeon",
+	  "map_ready": true,
+	  "map_sequences": [
         "lsystems"
-      ],
-      "name": "L-System Dungeon",
-      "parameters": {
-        "footprint": [
-          1.0,
-          1.0,
-          1.0
-        ],
-        "size_group": "compact"
-      },
-      "qfep_connection": "Architecture from grammar: the dungeon layout emerges from rewriting rules on the XZ plane. Rooms and corridors are emergent properties of the string \u2014 spatial E(S) from textual F-description.",
-      "scene": "res://commons/artifacts/lsystem_dungeon/lsystem_dungeon.tscn",
-      "tags": [
-        "2d",
-        "l_system",
-        "procedural",
-        "simulation",
+	  ],
+	  "name": "L-System Dungeon",
+	  "parameters": {
+		"footprint": [
+		  1.0,
+		  1.0,
+		  1.0
+		],
+		"size_group": "compact"
+	  },
+	  "qfep_connection": "Architecture from grammar: the dungeon layout emerges from rewriting rules on the XZ plane. Rooms and corridors are emergent properties of the string \u2014 spatial E(S) from textual F-description.",
+	  "scene": "res://commons/artifacts/lsystem_dungeon/lsystem_dungeon.tscn",
+	  "tags": [
+		"2d",
+		"l_system",
+		"procedural",
+		"simulation",
         "string"
-      ],
-      "geometry_spec": {
-        "mesh_type": "composed_primitives",
-        "topology": "manifold_closed",
-        "construction": {
-          "method": "primitive_assembly",
-          "primitives": [
-            "box",
+	  ],
+	  "geometry_spec": {
+		"mesh_type": "composed_primitives",
+		"topology": "manifold_closed",
+		"construction": {
+		  "method": "primitive_assembly",
+		  "primitives": [
+			"box",
             "cylinder"
-          ],
-          "operations": [
-            "create_primitives",
+		  ],
+		  "operations": [
+			"create_primitives",
             "position_children"
-          ]
-        },
-        "material": {
-          "type": "standard",
-          "shading_model": "pbr",
-          "key_properties": [
+		  ]
+		},
+		"material": {
+		  "type": "standard",
+		  "shading_model": "pbr",
+		  "key_properties": [
             "metallic"
-          ]
-        },
-        "animation": {
-          "type": "static",
-          "driven_by": null,
-          "affects": []
-        },
-        "instance_strategy": "few",
-        "vertex_estimate": "~1"
-      },
-      "spatial_needs": {
-        "platform": "sunken",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "growth",
+		  ]
+		},
+		"animation": {
+		  "type": "static",
+		  "driven_by": null,
+		  "affects": []
+		},
+		"instance_strategy": "few",
+		"vertex_estimate": "~1"
+	  },
+	  "spatial_needs": {
+		"platform": "sunken",
+		"footprint_cells": 1,
+		"clearance": {
+		  "front": 1,
+		  "back": 1,
+		  "left": 1,
+		  "right": 1
+		},
+		"player_position": "front",
+		"wall_backing": false,
+		"orientation": "face_approach",
+		"isolation": 0,
+		"cluster_with": [
+		  "growth",
           "proceduralgeneration"
-        ],
-        "preferred_zone": "end"
-      }
-    },
-    "lsystem_tree": {
-      "category": "procedural",
-      "complexity": "advanced",
-      "description": "Classic deterministic L-system tree \u2014 the foundational teaching example showing how a simple grammar rule produces organic branching structure.",
-      "dev_themes": [
-        "education",
-        "grammar",
-        "l_systems",
+		],
+		"preferred_zone": "end"
+	  }
+	},
+	"lsystem_tree": {
+	  "category": "procedural",
+	  "complexity": "advanced",
+	  "description": "Classic deterministic L-system tree \u2014 the foundational teaching example showing how a simple grammar rule produces organic branching structure.",
+	  "dev_themes": [
+		"education",
+		"grammar",
+		"l_systems",
         "procedural"
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "lsystem_tree",
-      "map_ready": true,
-      "map_sequences": [
-        "lsystems",
-        "proceduralgeneration",
+	  ],
+	  "include_in_map_data": true,
+	  "lookup_name": "lsystem_tree",
+	  "map_ready": true,
+	  "map_sequences": [
+		"lsystems",
+		"proceduralgeneration",
         "proceduralgeneration_all"
-      ],
-      "name": "L-System Tree",
-      "parameters": {
-        "footprint": [
-          1.0,
-          1.0,
-          1.0
-        ],
-        "size_group": "compact"
-      },
-      "qfep_connection": "The simplest demonstration of F generating E(S): one rule F->F[+F]F[-F]F unfolds a single line into a complex branching tree. Minimal description, maximum emergent structure.",
-      "scene": "res://commons/artifacts/lsystem_tree/lsystem_tree.tscn",
-      "tags": [
-        "l_system",
-        "procedural",
-        "simulation",
+	  ],
+	  "name": "L-System Tree",
+	  "parameters": {
+		"footprint": [
+		  1.0,
+		  1.0,
+		  1.0
+		],
+		"size_group": "compact"
+	  },
+	  "qfep_connection": "The simplest demonstration of F generating E(S): one rule F->F[+F]F[-F]F unfolds a single line into a complex branching tree. Minimal description, maximum emergent structure.",
+	  "scene": "res://commons/artifacts/lsystem_tree/lsystem_tree.tscn",
+	  "tags": [
+		"l_system",
+		"procedural",
+		"simulation",
         "tree"
-      ],
-      "geometry_spec": {
-        "mesh_type": "procedural_line",
-        "topology": "non_manifold",
-        "construction": {
-          "method": "l_system_turtle",
-          "primitives": [
+	  ],
+	  "geometry_spec": {
+		"mesh_type": "procedural_line",
+		"topology": "non_manifold",
+		"construction": {
+		  "method": "l_system_turtle",
+		  "primitives": [
             "cylinder"
-          ],
-          "operations": [
-            "string_rewrite",
-            "turtle_interpret",
+		  ],
+		  "operations": [
+			"string_rewrite",
+			"turtle_interpret",
             "emit_lines"
-          ]
-        },
-        "material": {
-          "type": "vertex_color",
-          "shading_model": "unshaded",
-          "key_properties": [
+		  ]
+		},
+		"material": {
+		  "type": "vertex_color",
+		  "shading_model": "unshaded",
+		  "key_properties": [
             "metallic"
-          ]
-        },
-        "animation": {
-          "type": "static",
-          "driven_by": null,
-          "affects": []
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "reference",
-          "whole",
+		  ]
+		},
+		"animation": {
+		  "type": "static",
+		  "driven_by": null,
+		  "affects": []
+		},
+		"instance_strategy": "single",
+		"vertex_estimate": "unknown"
+	  },
+	  "spatial_needs": {
+		"platform": "none",
+		"footprint_cells": 1,
+		"clearance": {
+		  "front": 1,
+		  "back": 1,
+		  "left": 1,
+		  "right": 1
+		},
+		"player_position": "front",
+		"wall_backing": false,
+		"orientation": "face_approach",
+		"isolation": 0,
+		"cluster_with": [
+		  "reference",
+		  "whole",
           "sequence"
-        ],
-        "preferred_zone": "end"
-      }
-    },
-    "parametric_lsystem": {
-      "category": "procedural",
-      "complexity": "advanced",
-      "description": "L-system with continuous angle and length parameters \u2014 branch depth controls parametric decay for organic, naturalistic tree and plant forms. More organic than discrete rules.",
-      "dev_themes": [
-        "grammar",
-        "l_systems",
+		],
+		"preferred_zone": "end"
+	  }
+	},
+	"parametric_lsystem": {
+	  "category": "procedural",
+	  "complexity": "advanced",
+	  "description": "L-system with continuous angle and length parameters \u2014 branch depth controls parametric decay for organic, naturalistic tree and plant forms. More organic than discrete rules.",
+	  "dev_themes": [
+		"grammar",
+		"l_systems",
         "procedural"
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "parametric_lsystem",
-      "map_ready": true,
-      "map_sequences": [
+	  ],
+	  "include_in_map_data": true,
+	  "lookup_name": "parametric_lsystem",
+	  "map_ready": true,
+	  "map_sequences": [
         "lsystems"
-      ],
-      "name": "Parametric L-System",
-      "scene": "res://commons/artifacts/parametric_lsystem/parametric_lsystem.tscn",
-      "tags": [
-        "l_system",
-        "procedural",
-        "simulation",
+	  ],
+	  "name": "Parametric L-System",
+	  "scene": "res://commons/artifacts/parametric_lsystem/parametric_lsystem.tscn",
+	  "tags": [
+		"l_system",
+		"procedural",
+		"simulation",
         "tree"
-      ],
-      "geometry_spec": {
-        "mesh_type": "procedural_line",
-        "topology": "non_manifold",
-        "construction": {
-          "method": "l_system_turtle",
-          "primitives": [
+	  ],
+	  "geometry_spec": {
+		"mesh_type": "procedural_line",
+		"topology": "non_manifold",
+		"construction": {
+		  "method": "l_system_turtle",
+		  "primitives": [
             "cylinder"
-          ],
-          "operations": [
-            "string_rewrite",
-            "turtle_interpret",
+		  ],
+		  "operations": [
+			"string_rewrite",
+			"turtle_interpret",
             "emit_lines"
-          ]
-        },
-        "material": {
-          "type": "vertex_color",
-          "shading_model": "unshaded",
-          "key_properties": [
+		  ]
+		},
+		"material": {
+		  "type": "vertex_color",
+		  "shading_model": "unshaded",
+		  "key_properties": [
             "metallic"
-          ]
-        },
-        "animation": {
-          "type": "static",
-          "driven_by": null,
-          "affects": []
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "unknown"
-      },
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "lsystem_tree",
-          "fixed",
-          "angle",
-          "parametric",
+		  ]
+		},
+		"animation": {
+		  "type": "static",
+		  "driven_by": null,
+		  "affects": []
+		},
+		"instance_strategy": "single",
+		"vertex_estimate": "unknown"
+	  },
+	  "spatial_needs": {
+		"platform": "none",
+		"footprint_cells": 2,
+		"clearance": {
+		  "front": 1,
+		  "back": 1,
+		  "left": 1,
+		  "right": 1
+		},
+		"player_position": "front",
+		"wall_backing": false,
+		"orientation": "face_approach",
+		"isolation": 0,
+		"cluster_with": [
+		  "lsystem_tree",
+		  "fixed",
+		  "angle",
+		  "parametric",
           "decay"
-        ],
-        "preferred_zone": "end"
-      }
-    },
-    "space_filling_curve_gallery": {
-      "category": "procedural",
-      "complexity": "advanced",
-      "description": "Triptych of classic space-filling curves \u2014 Hilbert, Peano, and Moore \u2014 generated via L-system rules and turtle graphics on a floor display. Curves that visit every point in a 2D region.",
-      "dev_themes": [
-        "art",
-        "grammar",
-        "l_systems",
+		],
+		"preferred_zone": "end"
+	  }
+	},
+	"space_filling_curve_gallery": {
+	  "category": "procedural",
+	  "complexity": "advanced",
+	  "description": "Triptych of classic space-filling curves \u2014 Hilbert, Peano, and Moore \u2014 generated via L-system rules and turtle graphics on a floor display. Curves that visit every point in a 2D region.",
+	  "dev_themes": [
+		"art",
+		"grammar",
+		"l_systems",
         "procedural"
-      ],
-      "footprint": [
-        4,
-        1,
-        2
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "space_filling_curve_gallery",
-      "map_ready": true,
-      "map_sequences": [
+	  ],
+	  "footprint": [
+		4,
+		1,
+		2
+	  ],
+	  "include_in_map_data": true,
+	  "lookup_name": "space_filling_curve_gallery",
+	  "map_ready": true,
+	  "map_sequences": [
         "lsystems"
-      ],
-      "name": "Space-Filling Curve Gallery",
-      "qfep_connection": "Space-filling curves achieve maximum E(S) coverage \u2014 a 1D line that touches every point in 2D space. The grammar that generates them is minimal (low F); the pattern they produce is total (high E(S)). Dimension-transcending order.",
-      "scene": "res://commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.tscn",
-      "size_group": "large",
-      "tags": [
-        "2d",
-        "l_system",
-        "procedural",
-        "simulation",
+	  ],
+	  "name": "Space-Filling Curve Gallery",
+	  "qfep_connection": "Space-filling curves achieve maximum E(S) coverage \u2014 a 1D line that touches every point in 2D space. The grammar that generates them is minimal (low F); the pattern they produce is total (high E(S)). Dimension-transcending order.",
+	  "scene": "res://commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.tscn",
+	  "size_group": "large",
+	  "tags": [
+		"2d",
+		"l_system",
+		"procedural",
+		"simulation",
         "visualization"
-      ],
-      "geometry_spec": {
-        "mesh_type": "texture_plane",
-        "topology": "planar",
-        "construction": {
-          "method": "pixel_computation",
-          "primitives": [
+	  ],
+	  "geometry_spec": {
+		"mesh_type": "texture_plane",
+		"topology": "planar",
+		"construction": {
+		  "method": "pixel_computation",
+		  "primitives": [
             "plane"
-          ],
-          "operations": [
-            "create_image",
-            "compute_pixels",
+		  ],
+		  "operations": [
+			"create_image",
+			"compute_pixels",
             "apply_texture"
-          ]
-        },
-        "material": {
-          "type": "generated_texture",
-          "shading_model": "emissive",
-          "key_properties": [
-            "emission",
+		  ]
+		},
+		"material": {
+		  "type": "generated_texture",
+		  "shading_model": "emissive",
+		  "key_properties": [
+			"emission",
             "metallic"
-          ]
-        },
-        "animation": {
-          "type": "static",
-          "driven_by": null,
-          "affects": []
-        },
-        "instance_strategy": "single",
-        "vertex_estimate": "~4 (quad)"
-      },
-      "spatial_needs": {
-        "platform": "sunken",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 1,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": true,
-        "orientation": "face_approach",
-        "isolation": 0,
-        "cluster_with": [
-          "gallery",
+		  ]
+		},
+		"animation": {
+		  "type": "static",
+		  "driven_by": null,
+		  "affects": []
+		},
+		"instance_strategy": "single",
+		"vertex_estimate": "~4 (quad)"
+	  },
+	  "spatial_needs": {
+		"platform": "sunken",
+		"footprint_cells": 2,
+		"clearance": {
+		  "front": 1,
+		  "back": 1,
+		  "left": 1,
+		  "right": 1
+		},
+		"player_position": "front",
+		"wall_backing": true,
+		"orientation": "face_approach",
+		"isolation": 0,
+		"cluster_with": [
+		  "gallery",
           "walkthrough"
-        ],
-        "preferred_zone": "end"
-      }
-    },
-    "lindenmayer_tube_tree": {
-      "lookup_name": "lindenmayer_tube_tree",
-      "name": "Lindenmayer Tube Tree",
-      "description": "Walkable L-system plant rendered as volumetric tubes. Uses commons/lsystem_grammar/ substrate \u2014 the same DNA that seeds the chandelier, the wind-collapsed softbody, and the Bauhaus primitive version in the research galleries. Circle it in VR to see branch tapering from width_shrink in action.",
-      "scene": "res://commons/artifacts/lindenmayer_tube_tree/lindenmayer_tube_tree.tscn",
-      "category": "lsystems",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
+		],
+		"preferred_zone": "end"
+	  }
+	},
+	"lindenmayer_tube_tree": {
+	  "lookup_name": "lindenmayer_tube_tree",
+	  "name": "Lindenmayer Tube Tree",
+	  "description": "Walkable L-system plant rendered as volumetric tubes. Uses commons/lsystem_grammar/ substrate \u2014 the same DNA that seeds the chandelier, the wind-collapsed softbody, and the Bauhaus primitive version in the research galleries. Circle it in VR to see branch tapering from width_shrink in action.",
+	  "scene": "res://commons/artifacts/lindenmayer_tube_tree/lindenmayer_tube_tree.tscn",
+	  "category": "lsystems",
+	  "include_in_map_data": true,
+	  "map_ready": true,
+	  "map_sequences": [
         "lsystems"
-      ],
-      "sequence": "lsystems",
-      "parameters": {
-        "footprint": [
-          3,
-          3,
-          3
-        ],
-        "size_group": "medium"
-      },
-      "footprint": [
-        3,
-        3,
-        3
-      ],
-      "size_group": "medium",
-      "complexity": "beginner",
-      "tags": [
-        "lsystems",
-        "lindenmayer",
-        "tree",
-        "walkable",
-        "procedural",
+	  ],
+	  "sequence": "lsystems",
+	  "parameters": {
+		"footprint": [
+		  3,
+		  3,
+		  3
+		],
+		"size_group": "medium"
+	  },
+	  "footprint": [
+		3,
+		3,
+		3
+	  ],
+	  "size_group": "medium",
+	  "complexity": "beginner",
+	  "tags": [
+		"lsystems",
+		"lindenmayer",
+		"tree",
+		"walkable",
+		"procedural",
         "dna_bridge"
-      ],
-      "dev_themes": [
-        "lsystems",
-        "procedural",
+	  ],
+	  "dev_themes": [
+		"lsystems",
+		"procedural",
         "dna_bridge"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 3,
-        "clearance": {
-          "front": 2,
-          "back": 2,
-          "left": 2,
-          "right": 2
-        },
-        "player_position": "around",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 1,
-        "cluster_with": [
-          "lsystem_tree",
+	  ],
+	  "spatial_needs": {
+		"platform": "none",
+		"footprint_cells": 3,
+		"clearance": {
+		  "front": 2,
+		  "back": 2,
+		  "left": 2,
+		  "right": 2
+		},
+		"player_position": "around",
+		"wall_backing": false,
+		"orientation": "face_approach",
+		"isolation": 1,
+		"cluster_with": [
+		  "lsystem_tree",
           "genetic_tree_sculptor"
-        ],
-        "preferred_zone": "entry"
-      }
-    },
-    "modulor_cypress": {
-      "lookup_name": "modulor_cypress",
-      "name": "Modulor Cypress",
-      "description": "Walkable composition of TWO substrates: L-system plant produces the branching skeleton, Modulor-fold drops a golden-ratio-scaled cone at every leaf tip. Walkable twin of gg_ls02_plant_modulor_folded from the graph-grammar gallery. Circle it to see how composition of grammars produces density.",
-      "scene": "res://commons/artifacts/modulor_cypress/modulor_cypress.tscn",
-      "category": "lsystems",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "lsystems",
+		],
+		"preferred_zone": "entry"
+	  }
+	},
+	"modulor_cypress": {
+	  "lookup_name": "modulor_cypress",
+	  "name": "Modulor Cypress",
+	  "description": "Walkable composition of TWO substrates: L-system plant produces the branching skeleton, Modulor-fold drops a golden-ratio-scaled cone at every leaf tip. Walkable twin of gg_ls02_plant_modulor_folded from the graph-grammar gallery. Circle it to see how composition of grammars produces density.",
+	  "scene": "res://commons/artifacts/modulor_cypress/modulor_cypress.tscn",
+	  "category": "lsystems",
+	  "include_in_map_data": true,
+	  "map_ready": true,
+	  "map_sequences": [
+		"lsystems",
         "fractals"
-      ],
-      "sequence": "lsystems",
-      "parameters": {
-        "footprint": [
-          3,
-          3,
-          3
-        ],
-        "size_group": "medium"
-      },
-      "footprint": [
-        3,
-        3,
-        3
-      ],
-      "size_group": "medium",
-      "complexity": "intermediate",
-      "tags": [
-        "lsystems",
-        "modulor",
-        "composition",
-        "walkable",
-        "fractal",
+	  ],
+	  "sequence": "lsystems",
+	  "parameters": {
+		"footprint": [
+		  3,
+		  3,
+		  3
+		],
+		"size_group": "medium"
+	  },
+	  "footprint": [
+		3,
+		3,
+		3
+	  ],
+	  "size_group": "medium",
+	  "complexity": "intermediate",
+	  "tags": [
+		"lsystems",
+		"modulor",
+		"composition",
+		"walkable",
+		"fractal",
         "dna_bridge"
-      ],
-      "dev_themes": [
-        "lsystems",
-        "modulor",
-        "dna_bridge",
+	  ],
+	  "dev_themes": [
+		"lsystems",
+		"modulor",
+		"dna_bridge",
         "composition"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 3,
-        "clearance": {
-          "front": 2,
-          "back": 2,
-          "left": 2,
-          "right": 2
-        },
-        "player_position": "around",
-        "wall_backing": false,
-        "orientation": "face_approach",
-        "isolation": 1,
-        "cluster_with": [
-          "lindenmayer_tube_tree",
+	  ],
+	  "spatial_needs": {
+		"platform": "none",
+		"footprint_cells": 3,
+		"clearance": {
+		  "front": 2,
+		  "back": 2,
+		  "left": 2,
+		  "right": 2
+		},
+		"player_position": "around",
+		"wall_backing": false,
+		"orientation": "face_approach",
+		"isolation": 1,
+		"cluster_with": [
+		  "lindenmayer_tube_tree",
           "lsystem_tree"
-        ],
-        "preferred_zone": "end"
-      }
-    }
+		],
+		"preferred_zone": "end"
+	  }
+	}
   }
 }

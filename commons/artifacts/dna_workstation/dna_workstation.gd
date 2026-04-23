@@ -187,6 +187,7 @@ func _load_variant(substrate: String, config_id: String) -> void:
 		"rd":             node = _build_rd(cfg)
 		"primitive_stack":node = _build_primitive_stack(cfg)
 		"soft_body":      node = _build_soft_body(cfg)
+		"morphology":     node = _build_morphology(cfg)
 		_:                _show_placeholder("%s · config only — see /dna" % substrate); return
 	if node == null:
 		_show_placeholder("build failed: %s/%s" % [substrate, config_id])
@@ -213,6 +214,7 @@ func _find_config(substrate: String, config_id: String) -> Dictionary:
 		"rd":             "res://commons/rd_grammar/research_configs.json",
 		"primitive_stack":"res://commons/primitive_grammar/research_configs.json",
 		"soft_body":      "res://commons/soft_body/research_configs.json",
+		"morphology":     "res://commons/morphology_grammar/research_configs.json",
 		"graph_grammar":  "res://commons/graph_grammar/research_configs.json",
 		"mesh_grammar":   "res://commons/mesh_grammar/research_configs.json",
 	}
@@ -391,6 +393,45 @@ func _build_soft_body(cfg: Dictionary) -> Node3D:
 	# skip simulation and just show a placeholder noting the compute cost.
 	_show_placeholder("Soft-body live-sim is slow — run via tools/soft_body_research.py and view PNG in gallery")
 	return null
+
+
+func _build_morphology(cfg: Dictionary) -> Node3D:
+	# Role-based recursive grammar: seed → select panels → extrude/subdivide → recurse.
+	# Builds an ArrayMesh with per-role surfaces. One draw call per role surface.
+	var MorphologySim = load("res://commons/morphology_grammar/morphology_sim.gd")
+	if MorphologySim == null:
+		_show_placeholder("morphology_sim.gd missing")
+		return null
+	var sim = MorphologySim.new()
+	var result: Dictionary = sim.simulate(cfg)
+	var mesh: ArrayMesh = result.get("mesh")
+	var surface_names: Array = result.get("surface_names", [])
+	if mesh == null or mesh.get_surface_count() == 0:
+		print("DNAWorkstation: Morphology %s → empty mesh" % cfg.get("id", "?"))
+		return null
+	print("DNAWorkstation: Morphology %s → %d surfaces (%s)" % [
+		cfg.get("id", "?"), mesh.get_surface_count(), str(surface_names)])
+	var root := Node3D.new()
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	# Per-role color by surface name
+	var role_colors := {
+		"body":    Color(0.72, 0.66, 0.58),
+		"trunk":   Color(0.48, 0.32, 0.18),
+		"branch":  Color(0.42, 0.30, 0.18),
+		"tip":     Color(0.32, 0.62, 0.22),
+		"cap":     Color(0.58, 0.30, 0.22),
+		"aperture":Color(0.12, 0.14, 0.18),
+	}
+	for i in range(mesh.get_surface_count()):
+		var sname: String = str(surface_names[i]) if i < surface_names.size() else ""
+		var role := sname.trim_prefix("role:")
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = role_colors.get(role, Color(0.7, 0.7, 0.75))
+		mat.roughness = 0.72
+		mi.set_surface_override_material(i, mat)
+	root.add_child(mi)
+	return root
 
 
 # ─── VR-preview caps + draw-call counter ─────────────────────

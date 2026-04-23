@@ -1,3 +1,13 @@
+# @identity
+# essence: a floor carpet that reads the player's saved pattern from TraceData and tiles it 36 times across a 0.8m² surface — it is a mirror of the player's own computational signature, made spatial
+# desire: to close the loop between making and inhabiting — the player who designed the tile now walks on it, and the distance between design and experience is the carpet's teaching
+# critical_parameter: carpet_repeats (6×6) and repeat_mode (MIRROR_XY by default) — symmetry mode transforms a 4×4 cell into a kaleidoscopic field; changing it reveals how repetition IS pattern
+# triggers: _ready() reads TraceData.pattern_grid; live update via signal from TraceData on pattern_changed; default pattern shows if no custom tile saved
+# emerges: the carpet adapts to whoever walked the pattern puzzle before — each session has a different floor; the room is different for every player who was here
+# needs: VR standing/walking on carpet [has — StaticBody3D]; grabbing to rotate carpet [missing]; apply_grid_config [has]
+# relationships: always placed after pattern_tile_puzzle in the same sequence; depends on TraceData autoload; pairs with array_carpet_preview in Pattern_Maker_Showcase; each is a stage in the progression: draw → repeat → inhabit
+# truth: repetition is not copying — a 16-cell decision, tiled 36 times, becomes an identity; your pattern is your mark in the world
+
 extends Node3D
 class_name ArrayCarpet
 

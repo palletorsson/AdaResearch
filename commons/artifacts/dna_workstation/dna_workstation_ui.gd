@@ -17,6 +17,7 @@ const SUBSTRATES := [
 	{"name": "Reaction-Diffusion","key": "rd",           "path": "res://commons/rd_grammar/research_configs.json",            "live": true, "default_index": 3},
 	{"name": "Primitive stack",  "key": "primitive_stack","path": "res://commons/primitive_grammar/research_configs.json",    "live": true, "default_index": 0},
 	{"name": "Soft body / glass","key": "soft_body",     "path": "res://commons/soft_body/research_configs.json",             "live": true, "default_index": 0},
+	{"name": "Morphology",       "key": "morphology",    "path": "res://commons/morphology_grammar/research_configs.json",    "live": true, "default_index": 0},
 	{"name": "Graph grammar",    "key": "graph_grammar", "path": "res://commons/graph_grammar/research_configs.json",         "live": false, "default_index": 0},
 	{"name": "Mesh grammar",     "key": "mesh_grammar",  "path": "res://commons/mesh_grammar/research_configs.json",          "live": false, "default_index": 0},
 ]
@@ -38,7 +39,7 @@ func _ready() -> void:
 
 	# Title
 	_title = Label.new()
-	_title.text = "DNA Workstation · 10 substrates"
+	_title.text = "DNA Workstation · 11 substrates"
 	_title.add_theme_font_size_override("font_size", 20)
 	_title.add_theme_color_override("font_color", Color(0.9, 0.9, 0.95))
 	_title.position = Vector2(14, 10)

@@ -1,6 +1,6 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://ck46psjp2j77u"]
 
-[ext_resource type="Script" path="res://commons/artifacts/dna_workstation/dna_workstation.gd" id="1"]
+[ext_resource type="Script" uid="uid://cw48uimo2ny0m" path="res://commons/artifacts/dna_workstation/dna_workstation.gd" id="1"]
 
-[node name="DNAWorkstation" type="Node3D"]
+[node name="DNAWorkstation" type="Node3D" unique_id=1246351135]
 script = ExtResource("1")

@@ -53,7 +53,7 @@
 		"FlowFieldMain": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "FlowFieldMain",
+			"description": "v_i(t+1) = field[grid(pos_i)] — each agent reads one arrow and moves; the entire \"decision\" is a lookup",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -1022,7 +1022,7 @@
 		"boid_manager": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "boid_manager",
+			"description": "f_i = Σ(neighbor_j)[separate(i,j) + align(vel_j) + cohere(pos_j)] — three weighted averages over a local neighborhood",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -2508,7 +2508,7 @@
 		"forcedirected3d": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "forcedirected3d",
+			"description": "F_repel = k/r^2 (all pairs), F_spring = -k*(L-L0) (edges only). Repulsion spreads nodes apart; springs hold connected nodes together. Layout is equilibrium.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -6044,7 +6044,11 @@
 			],
 			"name": "Wiki Fragment",
 			"parameters": {
-				"footprint": [1.4, 1.6, 0.1],
+				"footprint": [
+					1.4,
+					1.6,
+					0.1
+				],
 				"size_group": "compact"
 			},
 			"scene": "res://commons/artifacts/wiki_fragment/wiki_fragment.tscn",
@@ -6076,7 +6080,11 @@
 			],
 			"name": "Situated Readout",
 			"parameters": {
-				"footprint": [1.2, 1.4, 0.1],
+				"footprint": [
+					1.2,
+					1.4,
+					0.1
+				],
 				"size_group": "compact"
 			},
 			"scene": "res://commons/artifacts/situated_readout/situated_readout.tscn",

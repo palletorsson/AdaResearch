@@ -424,7 +424,7 @@
 		"brick_wall_factory": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "brick_wall_factory",
+			"description": "grid(width, height) of BoxMesh bricks colored sequentially from a named palette — running bond pattern",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -819,7 +819,7 @@
 		"colorballs": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "colorballs",
+			"description": "N rigid spheres sampled from named color palettes — physics + palette = chromatic rain",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -1143,7 +1143,7 @@
 		"dark_side_prism": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "dark_side_prism",
+			"description": "Snell's law visualized — white beam enters prism, refracts into 7-color fan by wavelength-dependent angle",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -2067,7 +2067,7 @@
 		"spectrum_forest": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "spectrum_forest.",
+			"description": "hue(x) = remap(x, bounds) — 5000 vertical lines colored by x-position across the visible spectrum",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -2507,13 +2507,23 @@
 			"scene": "res://algorithms/color/subpixel_display/subpixel_display.tscn",
 			"category": "color",
 			"complexity": "beginner",
-			"tags": ["rgb", "subpixel", "additive_mixing", "display"],
+			"tags": [
+				"rgb",
+				"subpixel",
+				"additive_mixing",
+				"display"
+			],
 			"map_ready": true,
 			"include_in_map_data": true,
 			"spatial_needs": {
 				"platform": "pedestal",
 				"footprint_cells": 2,
-				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
 				"wall_backing": false,
 				"isolation": 0,
 				"preferred_zone": "teaching"
@@ -2526,13 +2536,24 @@
 			"scene": "res://algorithms/color/gradient_interpolator/gradient_interpolator.tscn",
 			"category": "color",
 			"complexity": "beginner",
-			"tags": ["gradient", "interpolation", "rgb", "hsv", "lerp"],
+			"tags": [
+				"gradient",
+				"interpolation",
+				"rgb",
+				"hsv",
+				"lerp"
+			],
 			"map_ready": true,
 			"include_in_map_data": true,
 			"spatial_needs": {
 				"platform": "pedestal",
 				"footprint_cells": 2,
-				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
 				"wall_backing": false,
 				"isolation": 0,
 				"preferred_zone": "exploration"

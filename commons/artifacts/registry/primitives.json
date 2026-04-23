@@ -1,5 +1,165 @@
 {
 	"artifacts": {
+		"xyz_slider_plate": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "Dieter Rams plate with three sliders (X, Y, Z) that move a glowing point through space. Live coordinate display and line to origin. Teaches axis independence — moving one slider doesn't affect the others.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"education"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "xyz_slider_plate",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "XYZ Slider Plate",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/point/xyz_slider_plate.tscn",
+			"size_group": "compact",
+			"tags": [
+				"point",
+				"coordinates",
+				"slider",
+				"xyz",
+				"interactive",
+				"dieter_rams"
+			],
+			"qfep_connection": "Axis independence as felt experience — the hand learns that three degrees of freedom are orthogonal by moving each one alone."
+		},
+		"laser_sword": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "Grabbable glowing blade on a Rams handle — pick it up and the blade ignites with a layered hum. Swing speed modulates pitch and glow intensity. Teaches directed line segment as embodied intention.",
+			"dev_themes": [
+				"commons",
+				"primitives"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "laser_sword",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Laser Sword",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/laser_sword.tscn",
+			"size_group": "compact",
+			"tags": [
+				"line",
+				"direction",
+				"grabbable",
+				"laser",
+				"sword",
+				"interactive"
+			],
+			"qfep_connection": "Direction as embodied will — the blade points where you point, making directed line segment a felt experience before a mathematical concept."
+		},
+		"grabbable_line": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "A line segment you grab as one object — pick up anywhere along its length to move it through space. Fixed length, visible endpoints, integer-resistance glitch. Complements the endpoint-first line by teaching whole-before-parts.",
+			"dev_themes": [
+				"commons",
+				"primitives"
+			],
+			"footprint": [
+				1,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "grabbable_line",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Grabbable Line",
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			},
+			"scene": "res://commons/primitives/line/grabbable_line.tscn",
+			"size_group": "compact",
+			"tags": [
+				"line",
+				"grabbable",
+				"distance",
+				"measurement",
+				"resistance"
+			],
+			"qfep_connection": "Holding a line whole before decomposing it into endpoints — unity precedes analysis, the body grasps the relation before the mind names the parts."
+		},
+		"code_evolution_screen": {
+			"category": "primitives",
+			"complexity": "beginner",
+			"description": "Dual-panel VR code viewer — watch code build up stage by stage with parallel thinking narration. Uses SubViewport + RichTextLabel with Catppuccin Mocha syntax highlighting.",
+			"dev_themes": [
+				"commons",
+				"primitives",
+				"education"
+			],
+			"footprint": [
+				2,
+				1,
+				1
+			],
+			"include_in_map_data": true,
+			"lookup_name": "code_evolution_screen",
+			"map_ready": true,
+			"map_sequences": [
+				"primitives"
+			],
+			"name": "Code Evolution Screen",
+			"parameters": {
+				"footprint": [
+					2,
+					1,
+					1
+				],
+				"size_group": "wide"
+			},
+			"scene": "res://commons/artifacts/code_evolution_screen/code_evolution_screen.tscn",
+			"size_group": "wide",
+			"tags": [
+				"code",
+				"tutorial",
+				"evolution",
+				"2d_in_3d",
+				"subviewport"
+			],
+			"qfep_connection": "Code as temporal process — each line is a decision, each stage is a conceptual leap. Understanding emerges from watching construction, not reading completion."
+		},
 		"PipeLayout": {
 			"category": "unknown",
 			"complexity": "beginner",
@@ -3510,7 +3670,7 @@
 		"draw_dot": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "draw_dot.",
+			"description": "sample(hand_position) → ImmediateMesh trail — the hand writes points in 3D space",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -3685,7 +3845,7 @@
 		"draw_triangle_faces": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "draw_triangle_faces.",
+			"description": "fan_triangulate(loop) → colored mesh face — closed point loops become surfaces",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -4222,7 +4382,7 @@
 		"folded_strip": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "pfolded_strip",
+			"description": "triangle_strip(24) — alternating-height vertices forming a pleated ribbon of connected faces",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -5680,7 +5840,7 @@
 		"grab_octahedron": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "grab_octahedron.",
+			"description": "octahedron — 6 vertices, 12 edges, 8 triangular faces: dual of the cube, Platonic solid",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -5992,7 +6152,7 @@
 		"grab_sphere_point_snap": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "grab_sphere_point_snap.",
+			"description": "snap(position) = round(position / grid_size) * grid_size — discretise continuous space",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -6301,7 +6461,7 @@
 		"grab_trihedron": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "grab_trihedron",
+			"description": "trihedron — 4 vertices, 3 triangular faces and 1 quad base: the wedge as 3D primitive",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -6385,7 +6545,7 @@
 		"grid_lines": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "grid_lines.",
+			"description": "grid = {x=i*step, z=j*step : i,j ∈ ℤ} — the XZ plane made legible as a lattice of lines",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -6412,6 +6572,26 @@
 			},
 			"scene": "res://commons/primitives/line/grid_lines.tscn",
 			"size_group": "environment",
+			"spatial_needs": {
+				"platform": "sunken",
+				"footprint_cells": 5,
+				"clearance": {
+					"front": 2,
+					"back": 2,
+					"left": 2,
+					"right": 2
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"subscribes",
+					"player_trace",
+					"primitive"
+				],
+				"preferred_zone": "entry"
+			},
 			"tags": [
 				"grid"
 			],
@@ -6443,26 +6623,6 @@
 				},
 				"instance_strategy": "array",
 				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 5,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"subscribes",
-					"player_trace",
-					"primitive"
-				],
-				"preferred_zone": "entry"
 			}
 		},
 		"halocube": {
@@ -6903,7 +7063,7 @@
 			},
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 1,
+				"footprint_cells": 3,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -7649,7 +7809,7 @@
 		"line_demo": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "line_demo.",
+			"description": "snap_connection(pointA, pointB) → line — demonstrate the SnapConnectionManager wiring",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -8315,7 +8475,7 @@
 		"origin": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "origin",
+			"description": "(0, 0, 0) — the reference from which all coordinates are measured",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -8681,7 +8841,7 @@
 		"perspective_lines": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "perspective_lines.",
+			"description": "all lines → (0,0,0) — convergence to a single vanishing point as perspective law",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -10614,7 +10774,7 @@
 		"pythagorean_triangle_angles": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "pythagorean_triangle_angles",
+			"description": "a² + b² = c² — the Pythagorean theorem made spatial: three squares grown from triangle sides",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -11893,7 +12053,7 @@
 				"vertex_estimate": "unknown"
 			},
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
@@ -12075,7 +12235,7 @@
 		"scale_lines": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "scale_lines.",
+			"description": "[100m, 10m, 1m, 10cm, 1mm] — a logarithmic ladder of reference lengths made tangible",
 			"dev_themes": [
 				"core",
 				"primitives"
@@ -14460,7 +14620,7 @@
 				"vertex_estimate": "unknown"
 			},
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
@@ -15112,7 +15272,7 @@
 		"truncatedtetrahedron": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "A truncatedtetrahedron",
+			"description": "tetrahedron with corners cut — each vertex replaced by a triangular face, adding 4 new faces",
 			"dev_themes": [
 				"core",
 				"primitives"

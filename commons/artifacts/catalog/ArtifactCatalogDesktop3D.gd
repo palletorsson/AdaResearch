@@ -425,8 +425,14 @@ func _is_text_input_focused() -> bool:
 	return focused is LineEdit or focused is TextEdit
 
 
-## Claude Bridge — send selection events to local Claude Code session
+## Claude Bridge — send selection events to local Claude Code session.
+## No-op when --no-bridges is passed (capture flow) or when the 9876
+## listener isn't reachable. Early-exits silently in capture mode; that's
+## the point — a clean capture session should make zero HTTP noise.
 func _send_to_claude(event_type: String, value: String) -> void:
+	if "--no-bridges" in OS.get_cmdline_user_args() or "--no-bridges" in OS.get_cmdline_args():
+		return
+
 	var http := HTTPRequest.new()
 	http.name = "ClaudeBridgeHTTP"
 	add_child(http)

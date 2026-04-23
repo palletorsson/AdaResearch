@@ -11,9 +11,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"gamwell_reference": "Linear algebra fundamentals, 3D graphics programming",
 			"include_in_map_data": true,
@@ -31,9 +31,9 @@
 			"name": "CoordinateSystem3M",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -113,9 +113,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"gamwell_reference": "Linear algebra fundamentals, physics simulation",
 			"include_in_map_data": true,
@@ -132,9 +132,9 @@
 			"name": "ForceMagnitudeDemo",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -209,9 +209,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"gamwell_reference": "Linear algebra fundamentals, vector spaces",
 			"include_in_map_data": true,
@@ -231,9 +231,9 @@
 			"name": "VectorAddition",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -309,9 +309,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"gamwell_reference": "Linear algebra fundamentals, vector decomposition",
 			"include_in_map_data": true,
@@ -330,9 +330,9 @@
 			"name": "VectorBasics",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -415,9 +415,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"gamwell_reference": "Linear algebra fundamentals, cross product, angular momentum",
 			"include_in_map_data": true,
@@ -436,9 +436,9 @@
 			"name": "VectorCrossProduct",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -514,9 +514,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"gamwell_reference": "Linear algebra fundamentals, dot product, work-energy theorem",
 			"include_in_map_data": true,
@@ -534,9 +534,9 @@
 			"name": "VectorDotProduct",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -606,16 +606,16 @@
 		"VectorFieldFlow": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "VectorFieldFlow",
+			"description": "F(p) = swirl(p) - radial(p). A vector field assigns a direction to every point. The particle reads the field and follows.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "VectorFieldFlow",
@@ -627,9 +627,9 @@
 			"name": "VectorFieldFlow",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -704,9 +704,9 @@
 				"vectors"
 			],
 			"footprint": [
-				20.0,
-				1.0,
-				20.0
+				20,
+				1,
+				20
 			],
 			"include_in_map_data": true,
 			"lookup_name": "VectorForces",
@@ -717,9 +717,9 @@
 			"name": "VectorForces",
 			"parameters": {
 				"footprint": [
-					20.0,
-					1.0,
-					20.0
+					20,
+					1,
+					20
 				],
 				"size_group": "world_scale"
 			},
@@ -781,9 +781,9 @@
 				"vectors"
 			],
 			"footprint": [
-				4.0,
-				4.0,
-				4.0
+				4,
+				4,
+				4
 			],
 			"include_in_map_data": true,
 			"lookup_name": "VectorMotion",
@@ -792,9 +792,9 @@
 			"name": "VectorMotion",
 			"parameters": {
 				"footprint": [
-					4.0,
-					4.0,
-					4.0
+					4,
+					4,
+					4
 				],
 				"size_group": "room_scale"
 			},
@@ -859,9 +859,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "VectorProjectionReflection",
@@ -870,9 +870,9 @@
 			"name": "VectorProjectionReflection",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -939,9 +939,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "VectorSubtraction",
@@ -953,9 +953,9 @@
 			"name": "VectorSubtraction",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -1016,16 +1016,16 @@
 		"VectorThrowing": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "VectorThrowing",
+			"description": "p(t) = p0 + v0*t + 0.5*g*t^2. Projectile motion. Horizontal = constant velocity; vertical = constant acceleration. Your hand writes the initial conditions.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				4.0,
-				5.0
+				1,
+				4,
+				5
 			],
 			"include_in_map_data": true,
 			"lookup_name": "VectorThrowing",
@@ -1036,9 +1036,9 @@
 			"name": "VectorThrowing",
 			"parameters": {
 				"footprint": [
-					1.0,
-					4.0,
-					5.0
+					1,
+					4,
+					5
 				],
 				"size_group": "environment"
 			},
@@ -1109,9 +1109,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "VectorTorque",
@@ -1122,9 +1122,9 @@
 			"name": "VectorTorque",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -1186,9 +1186,9 @@
 				"vectors"
 			],
 			"footprint": [
-				4.0,
-				2.0,
-				3.0
+				4,
+				2,
+				3
 			],
 			"include_in_map_data": true,
 			"interaction": "grab",
@@ -1203,9 +1203,9 @@
 			"name": "Vector Workbench",
 			"parameters": {
 				"footprint": [
-					4.0,
-					2.0,
-					3.0
+					4,
+					2,
+					3
 				],
 				"size_group": "room_scale"
 			},
@@ -1392,9 +1392,9 @@
 			"parameters": {
 				"axis_length": "Length of basis arrows",
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact",
 				"target_point": "Point to decompose into basis components"
@@ -1559,9 +1559,9 @@
 				"vectors"
 			],
 			"footprint": [
-				5.0,
-				5.0,
-				5.0
+				5,
+				5,
+				5
 			],
 			"include_in_map_data": true,
 			"lookup_name": "coordinates",
@@ -1570,9 +1570,9 @@
 			"name": "coordinates",
 			"parameters": {
 				"footprint": [
-					5.0,
-					5.0,
-					5.0
+					5,
+					5,
+					5
 				],
 				"size_group": "environment"
 			},
@@ -1645,9 +1645,9 @@
 			"name": "Cross Product Demo",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					1.0
+					2,
+					2,
+					1
 				],
 				"size_group": "compact",
 				"vector_a": "First vector",
@@ -1725,9 +1725,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "destructible_marching_cube",
@@ -1736,9 +1736,9 @@
 			"name": "destructible_marching_cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -1796,16 +1796,16 @@
 		"destructibles_test_scene": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "destructibles_test_scene",
+			"description": "impact → destroy(method). Eight destruction methods: instant, health-based, face-peel, Cantor recursion, Voronoi fracture, planar crack, prism shatter. Topology of breaking.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
 				"vectors"
 			],
 			"footprint": [
-				20.0,
-				20.0,
-				20.0
+				20,
+				20,
+				20
 			],
 			"include_in_map_data": true,
 			"lookup_name": "destructibles_test_scene",
@@ -1816,9 +1816,9 @@
 			"name": "destructibles_test_scene",
 			"parameters": {
 				"footprint": [
-					20.0,
-					20.0,
-					20.0
+					20,
+					20,
+					20
 				],
 				"size_group": "world_scale"
 			},
@@ -1898,9 +1898,9 @@
 			"name": "Dot Product Projector",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					1.0
+					2,
+					2,
+					1
 				],
 				"size_group": "compact",
 				"vector_a": "Vector being projected",
@@ -1983,9 +1983,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "example_1_1_bouncing_ball_with_no_vectors_vr",
@@ -1996,9 +1996,9 @@
 			"name": "Bouncing Ball with No Vectors VR",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2065,9 +2065,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "example_1_2_bouncing_ball_with_vectors_vr",
@@ -2076,9 +2076,9 @@
 			"name": "Bouncing Ball with Vectors VR",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2145,9 +2145,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "example_1_3_vector_subtraction_vr",
@@ -2158,9 +2158,9 @@
 			"name": "Vector Subtraction VR",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2227,9 +2227,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "example_1_4_vector_multiplication_vr",
@@ -2240,9 +2240,9 @@
 			"name": "Vector Multiplication VR",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2309,9 +2309,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "example_1_5_vector_magnitude_vr",
@@ -2322,9 +2322,9 @@
 			"name": "Vector Magnitude VR",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2391,9 +2391,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "example_1_6_vector_normalize_vr",
@@ -2404,9 +2404,9 @@
 			"name": "Vector Normalize VR",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2473,9 +2473,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "example_1_7_motion_101_velocity_vr",
@@ -2486,9 +2486,9 @@
 			"name": "Motion 101 Velocity VR",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2554,9 +2554,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
@@ -2567,9 +2567,9 @@
 			"name": "Motion 101 Velocity and Constant Acceleration VR",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2636,9 +2636,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
@@ -2650,9 +2650,9 @@
 			"name": "Motion 101 Velocity and Random Acceleration VR",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3433,16 +3433,16 @@
 		"sphere_splitting_showcase": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "sphere_splitting_showcase.",
+			"description": "sphere → fragments(method). Five fracture algorithms: planar cut, octree division, orange-peel sectors, CSG boolean, pre-segmented mesh. One sphere, five deaths.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
 				"vectors"
 			],
 			"footprint": [
-				18.0,
-				18.0,
-				18.0
+				18,
+				18,
+				18
 			],
 			"include_in_map_data": true,
 			"lookup_name": "sphere_splitting_showcase",
@@ -3453,9 +3453,9 @@
 			"name": "sphere_splitting_showcase",
 			"parameters": {
 				"footprint": [
-					18.0,
-					18.0,
-					18.0
+					18,
+					18,
+					18
 				],
 				"size_group": "world_scale"
 			},
@@ -3524,9 +3524,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "throw_ball",
@@ -3537,9 +3537,9 @@
 			"name": "throw_ball",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3707,9 +3707,9 @@
 				"drop_interval": "Seconds between ball drops (default 2.5)",
 				"dropper_offset": "Offset of ball dropper from turret (default 0,3,2)",
 				"footprint": [
-					2.0,
-					3.0,
-					3.0
+					2,
+					3,
+					3
 				],
 				"laser_color": "Color of laser beam (default red)",
 				"max_balls": "Maximum balls alive at once (default 4)",
@@ -3984,16 +3984,16 @@
 		"vector_drone": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "vector_drone",
+			"description": "desired = (target - position).normalized() * speed. Chase, prepare, shoot, cooldown. A state machine driven by vector subtraction.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "vector_drone",
@@ -4004,9 +4004,9 @@
 			"name": "vector_drone",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4168,9 +4168,9 @@
 			"name": "Vector-Joint Playground",
 			"parameters": {
 				"footprint": [
-					18.0,
-					2.0,
-					18.0
+					18,
+					2,
+					18
 				],
 				"size_group": "world_scale"
 			},
@@ -4354,9 +4354,9 @@
 			"name": "Vector Normalization",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					1.0
+					2,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4631,9 +4631,9 @@
 			"name": "Vector Translation",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					1.0
+					2,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4700,9 +4700,9 @@
 				"vectors"
 			],
 			"footprint": [
-				2.0,
-				1.0,
-				1.0
+				2,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "vectorline",
@@ -4711,9 +4711,9 @@
 			"name": "vectorline",
 			"parameters": {
 				"footprint": [
-					2.0,
-					1.0,
-					1.0
+					2,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4780,9 +4780,9 @@
 				"vectors"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "vectorpoint",
@@ -4791,9 +4791,9 @@
 			"name": "VectorPoint",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},

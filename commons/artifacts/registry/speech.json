@@ -137,7 +137,7 @@
 		"vowel_sound_board": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "vowel_sound_board",
+			"description": "vowel(formant1, formant2) -> pulse_train filtered through formant resonances",
 			"dev_themes": [
 				"audio",
 				"language",

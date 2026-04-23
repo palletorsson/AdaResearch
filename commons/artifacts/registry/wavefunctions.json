@@ -16,9 +16,9 @@
 			"name": "Beat Frequencies",
 			"parameters": {
 				"footprint": [
-					3.0,
-					1.0,
-					1.0
+					3,
+					1,
+					1
 				],
 				"size_group": "room_scale"
 			},
@@ -89,9 +89,9 @@
 				"waves"
 			],
 			"footprint": [
-				2.0,
-				1.0,
-				2.0
+				2,
+				1,
+				2
 			],
 			"include_in_map_data": true,
 			"lookup_name": "BigPipe",
@@ -100,9 +100,9 @@
 			"name": "BigPipe",
 			"parameters": {
 				"footprint": [
-					2.0,
-					1.0,
-					2.0
+					2,
+					1,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -687,9 +687,9 @@
 			"name": "Circle Spiral",
 			"parameters": {
 				"footprint": [
-					5.0,
-					3.0,
-					5.0
+					5,
+					3,
+					5
 				],
 				"size_group": "environment"
 			},
@@ -900,9 +900,9 @@
 			"name": "Double Pendulum",
 			"parameters": {
 				"footprint": [
-					6.0,
-					7.0,
-					16.0
+					6,
+					7,
+					16
 				],
 				"size_group": "world_scale"
 			},
@@ -1069,9 +1069,9 @@
 			"name": "Elphaba Demo",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					4.0
+					1,
+					1,
+					4
 				],
 				"size_group": "room_scale"
 			},
@@ -1224,9 +1224,9 @@
 			"name": "Glass Rack",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -2057,9 +2057,9 @@
 			"name": "Harmonic Builder",
 			"parameters": {
 				"footprint": [
-					6.0,
-					2.0,
-					1.0
+					6,
+					2,
+					1
 				],
 				"size_group": "environment"
 			},
@@ -2132,9 +2132,9 @@
 			"name": "Lissajous3D",
 			"parameters": {
 				"footprint": [
-					6.0,
-					2.0,
-					6.0
+					6,
+					2,
+					6
 				],
 				"size_group": "environment"
 			},
@@ -2191,7 +2191,7 @@
 		"MarioSoundController": {
 			"category": "waves",
 			"complexity": "beginner",
-			"description": "MarioSoundController.",
+			"description": "waveform(t) = generator(p1, p2, p3, t) where generator in {sweep, noise, square, FM}",
 			"dev_themes": [
 				"music",
 				"oscillation",
@@ -2424,9 +2424,9 @@
 			"name": "Oscillating Wave",
 			"parameters": {
 				"footprint": [
-					7.0,
-					8.0,
-					9.0
+					7,
+					8,
+					9
 				],
 				"size_group": "environment"
 			},
@@ -2505,9 +2505,9 @@
 			"name": "OscillationCurve",
 			"parameters": {
 				"footprint": [
-					6.0,
-					8.0,
-					6.0
+					6,
+					8,
+					6
 				],
 				"size_group": "environment"
 			},
@@ -2581,9 +2581,9 @@
 			"name": "OscillationDriver",
 			"parameters": {
 				"footprint": [
-					6.0,
-					7.0,
-					6.0
+					6,
+					7,
+					6
 				],
 				"size_group": "environment"
 			},
@@ -2650,9 +2650,9 @@
 			"name": "PendulumCircle",
 			"parameters": {
 				"footprint": [
-					6.0,
-					8.0,
-					16.0
+					6,
+					8,
+					16
 				],
 				"size_group": "world_scale"
 			},
@@ -2720,9 +2720,9 @@
 			"name": "Pendulum Grid 3x3",
 			"parameters": {
 				"footprint": [
-					11.0,
-					9.0,
-					19.0
+					11,
+					9,
+					19
 				],
 				"size_group": "world_scale"
 			},
@@ -2792,9 +2792,9 @@
 			"name": "PendulumWave",
 			"parameters": {
 				"footprint": [
-					6.0,
-					9.0,
-					8.0
+					6,
+					9,
+					8
 				],
 				"size_group": "environment"
 			},
@@ -2868,9 +2868,9 @@
 			"name": "PhonemeCloud",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					1.0
+					1,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3368,9 +3368,9 @@
 			"name": "Sine Wave Rack",
 			"parameters": {
 				"footprint": [
-					2.0,
-					1.0,
-					1.0
+					2,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3527,9 +3527,9 @@
 			"name": "Sound Box (Long)",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					1.0
+					2,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3597,9 +3597,9 @@
 			"name": "Sound Box (Short)",
 			"parameters": {
 				"footprint": [
-					2.0,
-					2.0,
-					1.0
+					2,
+					2,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -3809,7 +3809,7 @@
 				"vertex_estimate": "unknown"
 			},
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "pedestal",
 				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
@@ -3847,9 +3847,9 @@
 			"name": "Spline Cables",
 			"parameters": {
 				"footprint": [
-					9.0,
-					6.0,
-					16.0
+					9,
+					6,
+					16
 				],
 				"size_group": "world_scale"
 			},
@@ -3919,9 +3919,9 @@
 			"name": "StaticCables",
 			"parameters": {
 				"footprint": [
-					1.0,
-					3.0,
-					16.0
+					1,
+					3,
+					16
 				],
 				"size_group": "world_scale"
 			},
@@ -3993,9 +3993,9 @@
 			"name": "Systems Music Test",
 			"parameters": {
 				"footprint": [
-					1.0,
-					3.0,
-					6.0
+					1,
+					3,
+					6
 				],
 				"size_group": "environment"
 			},
@@ -4067,9 +4067,9 @@
 			"name": "TrigWalkingPath",
 			"parameters": {
 				"footprint": [
-					6.0,
-					11.0,
-					26.0
+					6,
+					11,
+					26
 				],
 				"size_group": "world_scale"
 			},
@@ -4147,9 +4147,9 @@
 			"name": "UnitCircleTrig",
 			"parameters": {
 				"footprint": [
-					6.0,
-					6.0,
-					8.0
+					6,
+					6,
+					8
 				],
 				"size_group": "environment"
 			},
@@ -4226,9 +4226,9 @@
 			"name": "VR Audio Monitor",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -4303,9 +4303,9 @@
 			"name": "Vitruvian Man",
 			"parameters": {
 				"footprint": [
-					3.0,
-					1.0,
-					5.0
+					3,
+					1,
+					5
 				],
 				"size_group": "environment"
 			},
@@ -4466,9 +4466,9 @@
 			"name": "WaveRideScene",
 			"parameters": {
 				"footprint": [
-					1.0,
-					9.0,
-					1.0
+					1,
+					9,
+					1
 				],
 				"size_group": "environment"
 			},
@@ -4991,9 +4991,9 @@
 			"name": "Chladni Plate",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -5197,9 +5197,9 @@
 			"name": "coshlea",
 			"parameters": {
 				"footprint": [
-					5.0,
-					13.0,
-					19.0
+					5,
+					13,
+					19
 				],
 				"size_group": "world_scale"
 			},
@@ -5322,9 +5322,9 @@
 			"name": "Double Helix Oscillator",
 			"parameters": {
 				"footprint": [
-					7.0,
-					6.0,
-					6.0
+					7,
+					6,
+					6
 				],
 				"size_group": "environment"
 			},
@@ -5393,9 +5393,9 @@
 			"name": "double_helix_scene",
 			"parameters": {
 				"footprint": [
-					1.0,
-					7.0,
-					1.0
+					1,
+					7,
+					1
 				],
 				"size_group": "environment"
 			},
@@ -5735,9 +5735,9 @@
 			"name": "Fourier Transform",
 			"parameters": {
 				"footprint": [
-					17.0,
-					21.0,
-					16.0
+					17,
+					21,
+					16
 				],
 				"size_group": "world_scale"
 			},
@@ -5805,9 +5805,9 @@
 			"name": "Advanced Fourier Transform",
 			"parameters": {
 				"footprint": [
-					17.0,
-					25.0,
-					16.0
+					17,
+					25,
+					16
 				],
 				"size_group": "world_scale"
 			},
@@ -5882,9 +5882,9 @@
 			"name": "fouriertransformshape",
 			"parameters": {
 				"footprint": [
-					1.0,
-					3.0,
-					9.0
+					1,
+					3,
+					9
 				],
 				"size_group": "environment"
 			},
@@ -5959,9 +5959,9 @@
 			"name": "hallway_scene",
 			"parameters": {
 				"footprint": [
-					1.0,
-					6.0,
-					26.0
+					1,
+					6,
+					26
 				],
 				"size_group": "world_scale"
 			},
@@ -6456,14 +6456,14 @@
 			"name": "Line Builder 3D",
 			"parameters": {
 				"footprint": [
-					3.0,
-					1.0,
-					1.0
+					3,
+					1,
+					1
 				],
 				"reading_light": {
-					"cone": 360.0,
+					"cone": 360,
 					"direction": "+z",
-					"radius": 3.0,
+					"radius": 3,
 					"type": "omni"
 				}
 			},
@@ -6611,9 +6611,9 @@
 			"name": "liturgicalambientgenera",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					3.0
+					1,
+					2,
+					3
 				],
 				"size_group": "room_scale"
 			},
@@ -6879,9 +6879,9 @@
 				"waves"
 			],
 			"footprint": [
-				3.0,
-				4.0,
-				1.0
+				3,
+				4,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "modulor_man_demo",
@@ -6892,9 +6892,9 @@
 			"name": "modulor_man_demo",
 			"parameters": {
 				"footprint": [
-					3.0,
-					4.0,
-					1.0
+					3,
+					4,
+					1
 				],
 				"size_group": "room_scale"
 			},
@@ -7242,9 +7242,9 @@
 			"name": "Parametric Shapes",
 			"parameters": {
 				"footprint": [
-					17.0,
-					23.0,
-					11.0
+					17,
+					23,
+					11
 				],
 				"size_group": "world_scale"
 			},
@@ -7386,9 +7386,9 @@
 			"name": "rainbow_hallway",
 			"parameters": {
 				"footprint": [
-					1.0,
-					8.0,
-					13.0
+					1,
+					8,
+					13
 				],
 				"size_group": "world_scale"
 			},
@@ -7668,7 +7668,7 @@
 				"vertex_estimate": "~1024"
 			},
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
@@ -7706,9 +7706,9 @@
 			"name": "Rotation Oscillation Cube",
 			"parameters": {
 				"footprint": [
-					1.0,
-					1.0,
-					1.0
+					1,
+					1,
+					1
 				],
 				"size_group": "compact"
 			},
@@ -7785,9 +7785,9 @@
 			"name": "Ruth Asawa Sculpture",
 			"parameters": {
 				"footprint": [
-					1.0,
-					7.0,
-					7.0
+					1,
+					7,
+					7
 				],
 				"size_group": "environment"
 			},
@@ -8090,9 +8090,9 @@
 			"name": "Sine Art Monitor",
 			"parameters": {
 				"footprint": [
-					14.0,
-					7.0,
-					9.0
+					14,
+					7,
+					9
 				],
 				"size_group": "world_scale"
 			},
@@ -8162,9 +8162,9 @@
 			"name": "sine_cylinder_staircase",
 			"parameters": {
 				"footprint": [
-					3.0,
-					9.0,
-					6.0
+					3,
+					9,
+					6
 				],
 				"size_group": "environment"
 			},
@@ -8324,9 +8324,9 @@
 			"name": "Sine Wall Corridor",
 			"parameters": {
 				"footprint": [
-					11.0,
-					8.0,
-					14.0
+					11,
+					8,
+					14
 				],
 				"size_group": "world_scale"
 			},
@@ -8478,9 +8478,9 @@
 			"name": "Sine Wall (Static)",
 			"parameters": {
 				"footprint": [
-					1.0,
-					5.0,
-					10.0
+					1,
+					5,
+					10
 				],
 				"size_group": "environment"
 			},
@@ -8549,9 +8549,9 @@
 				"physics"
 			],
 			"footprint": [
-				10.0,
-				10.0,
-				10.0
+				10,
+				10,
+				10
 			],
 			"include_in_map_data": true,
 			"lookup_name": "soundboxes",
@@ -8560,9 +8560,9 @@
 			"name": "Dynamic Sound Box",
 			"parameters": {
 				"footprint": [
-					10.0,
-					10.0,
-					10.0
+					10,
+					10,
+					10
 				],
 				"size_group": "environment"
 			},
@@ -8632,9 +8632,9 @@
 			"name": "Spectral Analyzer",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					2.0
+					1,
+					2,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -8703,9 +8703,9 @@
 			"name": "Spectral Sine Wave",
 			"parameters": {
 				"footprint": [
-					1.0,
-					2.0,
-					2.0
+					1,
+					2,
+					2
 				],
 				"size_group": "compact"
 			},
@@ -8907,9 +8907,9 @@
 			"name": "Standing Waves",
 			"parameters": {
 				"footprint": [
-					13.0,
-					19.0,
-					13.0
+					13,
+					19,
+					13
 				],
 				"size_group": "world_scale"
 			},
@@ -9208,9 +9208,9 @@
 			"name": "Unit Circle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					8.0,
-					6.0
+					1,
+					8,
+					6
 				],
 				"size_group": "environment"
 			},
@@ -9289,9 +9289,9 @@
 			"name": "Advanced Unit Circle",
 			"parameters": {
 				"footprint": [
-					1.0,
-					8.0,
-					6.0
+					1,
+					8,
+					6
 				],
 				"size_group": "environment"
 			},
@@ -9563,9 +9563,9 @@
 			"name": "Wave Interference",
 			"parameters": {
 				"footprint": [
-					11.0,
-					23.0,
-					16.0
+					11,
+					23,
+					16
 				],
 				"size_group": "world_scale"
 			},
@@ -9643,9 +9643,9 @@
 			"name": "3D Wave Propagation",
 			"parameters": {
 				"footprint": [
-					14.0,
-					24.0,
-					11.0
+					14,
+					24,
+					11
 				],
 				"size_group": "world_scale"
 			},
@@ -9766,7 +9766,7 @@
 				"vertex_estimate": "unknown"
 			},
 			"spatial_needs": {
-				"platform": "none",
+				"platform": "table",
 				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
@@ -9798,9 +9798,9 @@
 				"transformation"
 			],
 			"footprint": [
-				1.0,
-				1.0,
-				1.0
+				1,
+				1,
+				1
 			],
 			"include_in_map_data": true,
 			"lookup_name": "rotatescalecubes",
@@ -9849,8 +9849,8 @@
 				"wavefunctions"
 			],
 			"footprint": [
-				3.0,
-				1.0,
+				3,
+				1,
 				0.5
 			],
 			"lookup_name": "demo_singles",
@@ -9891,8 +9891,8 @@
 				"wavefunctions"
 			],
 			"footprint": [
-				3.0,
-				1.0,
+				3,
+				1,
 				0.5
 			],
 			"lookup_name": "demo_passive",
@@ -9933,8 +9933,8 @@
 				"wavefunctions"
 			],
 			"footprint": [
-				3.0,
-				1.0,
+				3,
+				1,
 				0.5
 			],
 			"lookup_name": "demo_compounds",
@@ -9973,11 +9973,22 @@
 			"scene": "res://algorithms/wavefunctions/beat_frequency/beat_frequency_demo.tscn",
 			"category": "waves",
 			"complexity": "beginner",
-			"tags": ["wave", "beat", "frequency", "interference", "envelope", "interactive"],
+			"tags": [
+				"wave",
+				"beat",
+				"frequency",
+				"interference",
+				"envelope",
+				"interactive"
+			],
 			"map_ready": true,
 			"include_in_map_data": true,
 			"map_sequences": [],
-			"dev_themes": ["oscillation", "physics", "waves"],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves"
+			],
 			"spatial_needs": {
 				"platform": "none",
 				"footprint_cells": 2,
@@ -9996,7 +10007,12 @@
 			"category": "waves",
 			"complexity": "intermediate",
 			"description": "Two wave sources on a 16x16 sphere grid. Each sphere rises and falls as the sum of two circular sine waves. Constructive interference builds peaks; destructive interference flattens nodes. Adjust frequency, source separation, and amplitude to reshape the pattern.",
-			"dev_themes": ["oscillation", "physics", "waves", "interference"],
+			"dev_themes": [
+				"oscillation",
+				"physics",
+				"waves",
+				"interference"
+			],
 			"include_in_map_data": true,
 			"lookup_name": "wave_interference_3d",
 			"map_ready": true,
@@ -10004,24 +10020,41 @@
 			"name": "Wave Interference 3D",
 			"qfep_connection": "Superposition as co-existence — two F-models occupy the same space and the result is richer than either alone. Constructive interference is resonance; destructive is cancellation. Neither wave is destroyed, only the observation changes.",
 			"scene": "res://algorithms/wavefunctions/wave_interference_3d/wave_interference_3d.tscn",
-			"tags": ["waves", "interference", "superposition", "physics"],
+			"tags": [
+				"waves",
+				"interference",
+				"superposition",
+				"physics"
+			],
 			"geometry_spec": {
 				"mesh_type": "instanced_grid",
 				"topology": "scattered",
 				"construction": {
 					"method": "procedural_scripted",
-					"primitives": ["sphere"],
-					"operations": ["grid_layout", "wave_displacement", "color_by_value"]
+					"primitives": [
+						"sphere"
+					],
+					"operations": [
+						"grid_layout",
+						"wave_displacement",
+						"color_by_value"
+					]
 				},
 				"material": {
 					"type": "standard",
 					"shading_model": "emissive",
-					"key_properties": ["emission", "albedo_color"]
+					"key_properties": [
+						"emission",
+						"albedo_color"
+					]
 				},
 				"animation": {
 					"type": "continuous",
 					"driven_by": "cpu_simulation",
-					"affects": ["transform", "color"]
+					"affects": [
+						"transform",
+						"color"
+					]
 				},
 				"instance_strategy": "direct",
 				"vertex_estimate": "medium"
@@ -10029,12 +10062,20 @@
 			"spatial_needs": {
 				"platform": "none",
 				"footprint_cells": 2,
-				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
 				"player_position": "front",
 				"wall_backing": false,
 				"orientation": "face_approach",
 				"isolation": 1,
-				"cluster_with": ["WaveInterference", "standing_waves"],
+				"cluster_with": [
+					"WaveInterference",
+					"standing_waves"
+				],
 				"preferred_zone": "teaching"
 			}
 		}

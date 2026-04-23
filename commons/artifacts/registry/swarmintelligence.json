@@ -772,7 +772,7 @@
 		"AntColonyV2": {
 			"lookup_name": "AntColonyV2",
 			"name": "AntColonyV2",
-			"description": "AntColonyV2",
+			"description": "ant.move() = gradient_ascent(pheromone_grid) + wander; pheromone_grid *= decay + diffuse — ant and environment co-evolve",
 			"scene": "res://algorithms/swarmintelligence/ants_v2/AntColonyV2.tscn",
 			"category": "unknown",
 			"include_in_map_data": true,
@@ -951,7 +951,7 @@
 		"PhysarumColony": {
 			"lookup_name": "PhysarumColony",
 			"name": "PhysarumColony",
-			"description": "PhysarumColony",
+			"description": "trail(x,y) = deposit(agent_positions) * diffuse - evaporate — no neurons, no memory, just chemistry",
 			"scene": "res://algorithms/swarmintelligence/physarum/PhysarumColony.tscn",
 			"category": "unknown",
 			"include_in_map_data": true,

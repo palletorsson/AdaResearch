@@ -1,0 +1,696 @@
+{
+  "schema": "adaresearch.grammar_operations.v1",
+  "title": "Geometry Grammar Operations",
+  "description": "The generative layer of Ada Research. Each sequence unlocks operations that transform forms into other forms. Operations compose freely with all previously-unlocked operations. The biome applies these operations to manifest the world. The curriculum teaches the operations; the grammar registers them; the biome composes them.",
+  "form_types": {
+    "atom": { "description": "The minimal unit — a position with no extent", "emerges_in": "primitives", "example": "Vector3" },
+    "segment": { "description": "A bounded 1D stroke between two atoms", "emerges_in": "primitives", "example": "CylinderMesh between two points" },
+    "polygon": { "description": "A closed 2D region bounded by segments", "emerges_in": "primitives", "example": "Triangle, n-gon" },
+    "surface": { "description": "A 2D manifold, possibly curved", "emerges_in": "primitives", "example": "Disc, plane" },
+    "solid": { "description": "A 3D bounded region", "emerges_in": "primitives", "example": "Cube, sphere, cylinder" },
+    "lattice": { "description": "A regular arrangement of forms in a grid", "emerges_in": "arrays", "example": "3x3x3 cube grid" },
+    "pattern": { "description": "A tile-able arrangement with symmetry", "emerges_in": "arrays", "example": "Wallpaper group" },
+    "wave": { "description": "An oscillating form — position + time", "emerges_in": "wavefunctions", "example": "Sine wave" },
+    "field": { "description": "A function from space to value", "emerges_in": "noise", "example": "Perlin noise field" },
+    "terrain": { "description": "A displaced surface driven by a field", "emerges_in": "noise", "example": "Heightmap landscape" },
+    "automaton": { "description": "A form that evolves under local rules", "emerges_in": "cellularautomata", "example": "Game of Life grid" },
+    "fractal": { "description": "A form self-similar at every scale", "emerges_in": "fractals", "example": "Sierpinski triangle" },
+    "growth": { "description": "A form produced by rewriting rules", "emerges_in": "lsystems", "example": "L-system tree" },
+    "generated": { "description": "A form produced by a procedural system", "emerges_in": "proceduralgeneration", "example": "WFC-generated room" },
+    "softbody": { "description": "A deformable form with constraints", "emerges_in": "softbodies", "example": "Spring-mass cloth" },
+    "swarm": { "description": "Many forms acting as one", "emerges_in": "swarmintelligence", "example": "Boids flock" },
+    "adaptive": { "description": "A form that learns/changes from experience", "emerges_in": "machinelearning", "example": "Evolved creature" },
+    "paradoxical": { "description": "A form whose existence is self-contradictory", "emerges_in": "foundationscrisis", "example": "Penrose triangle, Klein bottle" },
+    "tunable": { "description": "A form whose parameters the player can tune live", "emerges_in": "qfeplaboratory", "example": "QFEP-parameterized ecosystem" }
+  },
+  "sequences": {
+    "primitives": {
+      "order": 1,
+      "operations": {
+        "materialize": {
+          "description": "Bring an atom into existence at a position",
+          "input": null,
+          "output": "atom",
+          "parameters": ["position"],
+          "taught_by": "interactive_point_origin"
+        },
+        "extrude": {
+          "description": "Stretch an atom along a direction to create a segment",
+          "input": "atom",
+          "output": "segment",
+          "parameters": ["direction", "length"],
+          "taught_by": "line"
+        },
+        "close": {
+          "description": "Connect segments into a bounded polygon",
+          "input": "segment*",
+          "output": "polygon",
+          "parameters": ["vertex_count"],
+          "taught_by": "triangle"
+        },
+        "revolve": {
+          "description": "Rotate a segment or polygon around an axis to create a surface or solid",
+          "input": "segment|polygon",
+          "output": "surface|solid",
+          "parameters": ["axis", "angle"],
+          "taught_by": "Point_Circle",
+          "status": "deferred"
+        },
+        "sweep": {
+          "description": "Move a polygon along a path to create a solid",
+          "input": "polygon",
+          "output": "solid",
+          "parameters": ["path"],
+          "taught_by": "Point_Polygon",
+          "status": "deferred"
+        },
+        "mirror": {
+          "description": "Reflect a form across an axis",
+          "input": "any",
+          "output": "same",
+          "parameters": ["axis"],
+          "taught_by": "plus_line_puzzle"
+        }
+      }
+    },
+    "transformation": {
+      "order": 2,
+      "operations": {
+        "translate": {
+          "description": "Move a form by a displacement vector",
+          "input": "any",
+          "output": "same",
+          "parameters": ["displacement"],
+          "taught_by": "translation_cube_demo"
+        },
+        "rotate": {
+          "description": "Rotate a form around an axis",
+          "input": "any",
+          "output": "same",
+          "parameters": ["axis", "angle"],
+          "taught_by": "rotation_gimbal"
+        },
+        "scale": {
+          "description": "Resize a form along axes",
+          "input": "any",
+          "output": "same",
+          "parameters": ["factor_xyz"],
+          "taught_by": "Trans_Scale",
+          "status": "needs_evolution"
+        },
+        "compose": {
+          "description": "Chain transformations into a single transform",
+          "input": "transform*",
+          "output": "transform",
+          "parameters": ["transforms"],
+          "taught_by": "transform_composition"
+        },
+        "invert": {
+          "description": "Undo a transformation",
+          "input": "transform",
+          "output": "transform",
+          "parameters": [],
+          "taught_by": "invariants_demo"
+        }
+      }
+    },
+    "color": {
+      "order": 3,
+      "operations": {
+        "paint": {
+          "description": "Assign a color to a form",
+          "input": "any",
+          "output": "same",
+          "parameters": ["color"],
+          "taught_by": "ball_painting_demo"
+        },
+        "emit": {
+          "description": "Make a form self-luminous",
+          "input": "any",
+          "output": "same",
+          "parameters": ["color", "energy"],
+          "taught_by": "flashlight_demo"
+        },
+        "mix": {
+          "description": "Combine two colors into a new color",
+          "input": "color color",
+          "output": "color",
+          "parameters": ["blend_mode"],
+          "taught_by": "color_mixing"
+        },
+        "palette_sample": {
+          "description": "Select a color from a ordered set",
+          "input": "palette",
+          "output": "color",
+          "parameters": ["index"],
+          "taught_by": "Color_Grid_Pallet"
+        },
+        "contrast": {
+          "description": "Perceive a color as shifted by its neighbor",
+          "input": "color color",
+          "output": "perceived_color",
+          "parameters": [],
+          "taught_by": "SimultaneousContrast"
+        }
+      }
+    },
+    "forces": {
+      "order": 4,
+      "operations": {
+        "push": {
+          "description": "Apply a force vector to a form",
+          "input": "any",
+          "output": "trajectory",
+          "parameters": ["force"],
+          "taught_by": "example_2_1_forces_vr"
+        },
+        "fall": {
+          "description": "Subject a form to gravity",
+          "input": "any",
+          "output": "trajectory",
+          "parameters": ["gravity"],
+          "taught_by": "example_2_3_gravity_scaled_by_mass_vr"
+        },
+        "friction": {
+          "description": "Oppose motion with a damping force",
+          "input": "trajectory",
+          "output": "damped_trajectory",
+          "parameters": ["coefficient"],
+          "taught_by": "friction_ramp"
+        },
+        "attract": {
+          "description": "Pull forms toward a center",
+          "input": "any*",
+          "output": "bound_orbit",
+          "parameters": ["center", "strength"],
+          "taught_by": "example_2_6_single_attractor_vr"
+        },
+        "spring": {
+          "description": "Return a form toward a rest position",
+          "input": "any",
+          "output": "oscillation",
+          "parameters": ["k", "rest"],
+          "taught_by": "spring_demo",
+          "status": "needs_evolution"
+        }
+      }
+    },
+    "arrays": {
+      "order": 5,
+      "operations": {
+        "repeat": {
+          "description": "Copy a form n times along a direction",
+          "input": "any",
+          "output": "lattice",
+          "parameters": ["count", "spacing", "direction"],
+          "taught_by": "column_3_z"
+        },
+        "grid": {
+          "description": "Arrange forms in a regular 2D or 3D grid",
+          "input": "any",
+          "output": "lattice",
+          "parameters": ["dims", "spacing"],
+          "taught_by": "grid_2d_4x4"
+        },
+        "tile": {
+          "description": "Cover a surface with a repeating pattern unit",
+          "input": "polygon",
+          "output": "pattern",
+          "parameters": ["wallpaper_group"],
+          "taught_by": "wallpaper_groups"
+        },
+        "index": {
+          "description": "Access a form by its position in an ordered set",
+          "input": "lattice",
+          "output": "any",
+          "parameters": ["i"],
+          "taught_by": "IndexVisualizer"
+        }
+      }
+    },
+    "wavefunctions": {
+      "order": 6,
+      "operations": {
+        "oscillate": {
+          "description": "Animate a form with a sine function",
+          "input": "any",
+          "output": "wave",
+          "parameters": ["amplitude", "frequency", "phase"],
+          "taught_by": "kusama_sine"
+        },
+        "interfere": {
+          "description": "Superpose two waves",
+          "input": "wave wave",
+          "output": "wave",
+          "parameters": [],
+          "taught_by": "wave_interference_3d"
+        },
+        "resonate": {
+          "description": "Amplify a wave at its natural frequency",
+          "input": "wave",
+          "output": "wave",
+          "parameters": ["driver_frequency"],
+          "taught_by": "coupled_oscillator_lattice"
+        },
+        "propagate": {
+          "description": "Transmit a wave through a medium",
+          "input": "wave medium",
+          "output": "wave_field",
+          "parameters": ["speed"],
+          "taught_by": "wave_propagation_3d"
+        },
+        "fourier_compose": {
+          "description": "Build a complex wave by summing sines",
+          "input": "wave*",
+          "output": "wave",
+          "parameters": ["harmonics"],
+          "taught_by": "WaveFunctions_Synthesis_Lab"
+        }
+      }
+    },
+    "randomness": {
+      "order": 7,
+      "operations": {
+        "sample": {
+          "description": "Pick a value from a distribution",
+          "input": "distribution",
+          "output": "value",
+          "parameters": ["distribution_type"],
+          "taught_by": "Random_Definition"
+        },
+        "jitter": {
+          "description": "Perturb a form's parameters randomly",
+          "input": "any",
+          "output": "same",
+          "parameters": ["magnitude"],
+          "taught_by": "Random_Cubes"
+        },
+        "scatter": {
+          "description": "Distribute many forms in random positions",
+          "input": "any",
+          "output": "any*",
+          "parameters": ["count", "region", "distribution"],
+          "taught_by": "Random_Space"
+        },
+        "walk": {
+          "description": "Accumulate random steps into a trajectory",
+          "input": "atom",
+          "output": "trajectory",
+          "parameters": ["step_size", "step_count"],
+          "taught_by": "brownian_motion",
+          "status": "needs_evolution"
+        }
+      }
+    },
+    "noise": {
+      "order": 8,
+      "operations": {
+        "perturb": {
+          "description": "Displace positions via a noise field",
+          "input": "any",
+          "output": "same",
+          "parameters": ["noise_type", "amplitude"],
+          "taught_by": "perlin_noise_bridge"
+        },
+        "warp": {
+          "description": "Deform space itself via noise",
+          "input": "field",
+          "output": "field",
+          "parameters": ["warp_function"],
+          "taught_by": "domain_warp",
+          "status": "needs_evolution"
+        },
+        "terrain": {
+          "description": "Displace a flat surface by a noise field",
+          "input": "surface",
+          "output": "terrain",
+          "parameters": ["noise_octaves", "amplitude"],
+          "taught_by": "perlin_terrain_sculptor"
+        },
+        "octaves": {
+          "description": "Sum noise at multiple frequencies",
+          "input": "field",
+          "output": "field",
+          "parameters": ["count", "persistence"],
+          "taught_by": "Noise_Perlin_Simplex"
+        }
+      }
+    },
+    "cellularautomata": {
+      "order": 9,
+      "operations": {
+        "step": {
+          "description": "Advance an automaton one generation",
+          "input": "automaton",
+          "output": "automaton",
+          "parameters": [],
+          "taught_by": "7_2_game_of_life_vr"
+        },
+        "rule": {
+          "description": "Define a local neighborhood update function",
+          "input": "neighborhood",
+          "output": "cell_state",
+          "parameters": ["rule_number"],
+          "taught_by": "7_1_elementary_ca_vr"
+        },
+        "seed": {
+          "description": "Initialize an automaton with a starting configuration",
+          "input": "lattice",
+          "output": "automaton",
+          "parameters": ["pattern"],
+          "taught_by": "CA_Introduction"
+        },
+        "evolve": {
+          "description": "Run an automaton for many steps",
+          "input": "automaton",
+          "output": "automaton_history",
+          "parameters": ["steps"],
+          "taught_by": "CA_GameOfLife"
+        }
+      }
+    },
+    "fractals": {
+      "order": 10,
+      "operations": {
+        "recurse": {
+          "description": "Apply a form-generating function to its own output",
+          "input": "any",
+          "output": "fractal",
+          "parameters": ["depth", "rule"],
+          "taught_by": "recursive_tree"
+        },
+        "subdivide": {
+          "description": "Break a form into smaller self-similar copies",
+          "input": "any",
+          "output": "fractal",
+          "parameters": ["rule"],
+          "taught_by": "sierpinski_triangle"
+        },
+        "delete": {
+          "description": "Remove self-similar sub-parts to expose structure",
+          "input": "any",
+          "output": "fractal",
+          "parameters": ["rule"],
+          "taught_by": "cantor_set"
+        },
+        "iterate_complex": {
+          "description": "Iterate z \u2192 f(z) on the complex plane",
+          "input": "function",
+          "output": "fractal",
+          "parameters": ["function", "iterations"],
+          "taught_by": "mandelbrot_dive"
+        },
+        "measure_dimension": {
+          "description": "Compute fractal dimension by box counting",
+          "input": "fractal",
+          "output": "dimension",
+          "parameters": ["method"],
+          "taught_by": "box_counting_dimension"
+        }
+      }
+    },
+    "lsystems": {
+      "order": 11,
+      "operations": {
+        "rewrite": {
+          "description": "Replace a symbol with a string of symbols",
+          "input": "string",
+          "output": "string",
+          "parameters": ["rule"],
+          "taught_by": "LSystems_Grammar_Lab"
+        },
+        "turtle_interpret": {
+          "description": "Translate a symbol string into a 3D drawing",
+          "input": "string",
+          "output": "growth",
+          "parameters": ["angle", "step"],
+          "taught_by": "lsystem_tree"
+        },
+        "branch": {
+          "description": "Split a growing form into multiple daughters",
+          "input": "growth",
+          "output": "growth",
+          "parameters": ["angle", "factor"],
+          "taught_by": "lsystem_tree"
+        },
+        "parametric_rewrite": {
+          "description": "Rewrite with parameters on symbols",
+          "input": "string",
+          "output": "string",
+          "parameters": ["rule"],
+          "taught_by": "genetic_tree_sculptor"
+        }
+      }
+    },
+    "proceduralgeneration": {
+      "order": 12,
+      "operations": {
+        "generate": {
+          "description": "Produce new content from a seed and rules",
+          "input": "seed",
+          "output": "generated",
+          "parameters": ["rules"],
+          "taught_by": "PG_Genetic_Evolution"
+        },
+        "percolate": {
+          "description": "Grow connected components until a phase change",
+          "input": "lattice",
+          "output": "generated",
+          "parameters": ["probability"],
+          "taught_by": "PG_Percolation_Network"
+        },
+        "colonize": {
+          "description": "Grow structure toward target points",
+          "input": "seed target*",
+          "output": "growth",
+          "parameters": ["radius"],
+          "taught_by": "PG_Space_Colonization"
+        },
+        "wfc": {
+          "description": "Wave function collapse \u2014 generate consistent tilings",
+          "input": "tile_set",
+          "output": "pattern",
+          "parameters": ["constraints"],
+          "taught_by": "wfc_demo",
+          "status": "needs_evolution"
+        }
+      }
+    },
+    "softbodies": {
+      "order": 13,
+      "operations": {
+        "deform": {
+          "description": "Change a form's shape under force",
+          "input": "any",
+          "output": "softbody",
+          "parameters": ["stiffness"],
+          "taught_by": "rounded_softbody_test"
+        },
+        "spring_mass": {
+          "description": "Build a form from masses connected by springs",
+          "input": "lattice",
+          "output": "softbody",
+          "parameters": ["stiffness", "damping"],
+          "taught_by": "SoftBodies_Soft_Body_Deformation"
+        },
+        "cloth": {
+          "description": "Simulate a 2D spring-mass network",
+          "input": "lattice",
+          "output": "softbody",
+          "parameters": ["weave"],
+          "taught_by": "SoftBodies_Cloth_Physics"
+        },
+        "reaction_diffusion": {
+          "description": "Grow patterns via coupled chemistry",
+          "input": "surface",
+          "output": "pattern",
+          "parameters": ["feed", "kill"],
+          "taught_by": "turing_pattern_generator"
+        }
+      }
+    },
+    "swarmintelligence": {
+      "order": 14,
+      "operations": {
+        "flock": {
+          "description": "Many agents, each with local rules, act as one",
+          "input": "agent*",
+          "output": "swarm",
+          "parameters": ["separation", "alignment", "cohesion"],
+          "taught_by": "boids_3d"
+        },
+        "stigmergy": {
+          "description": "Agents leave traces others respond to",
+          "input": "agent* field",
+          "output": "swarm trail",
+          "parameters": ["deposit", "evaporate"],
+          "taught_by": "ant_colony_optimization"
+        },
+        "physarum": {
+          "description": "Slime-mold network optimization",
+          "input": "source target*",
+          "output": "network",
+          "parameters": ["sensor_angle"],
+          "taught_by": "PhysarumColony"
+        },
+        "optimize_swarm": {
+          "description": "Swarm searches parameter space",
+          "input": "fitness",
+          "output": "best_params",
+          "parameters": ["particles"],
+          "taught_by": "particle_swarm_optimization"
+        }
+      }
+    },
+    "machinelearning": {
+      "order": 15,
+      "operations": {
+        "classify": {
+          "description": "Assign a category to an input",
+          "input": "features",
+          "output": "label",
+          "parameters": ["model"],
+          "taught_by": "ML_Classification"
+        },
+        "optimize_gradient": {
+          "description": "Minimize a loss function by following the gradient",
+          "input": "loss",
+          "output": "parameters",
+          "parameters": ["learning_rate"],
+          "taught_by": "gradient_descent_visualization"
+        },
+        "evolve": {
+          "description": "Optimize via variation + selection",
+          "input": "population fitness",
+          "output": "adaptive",
+          "parameters": ["mutation_rate"],
+          "taught_by": "ML_Evolution"
+        },
+        "remember": {
+          "description": "Store experience for later retrieval",
+          "input": "experience*",
+          "output": "memory",
+          "parameters": ["capacity"],
+          "taught_by": "ML_Memory",
+          "status": "needs_evolution"
+        },
+        "generate_learned": {
+          "description": "Sample from a learned distribution",
+          "input": "latent",
+          "output": "generated",
+          "parameters": ["model"],
+          "taught_by": "ML_Generative"
+        }
+      }
+    },
+    "foundationscrisis": {
+      "order": 16,
+      "operations": {
+        "non_euclidean": {
+          "description": "Construct geometry that violates the parallel postulate",
+          "input": "space",
+          "output": "space",
+          "parameters": ["curvature"],
+          "taught_by": "NonEuclidean_Spaces"
+        },
+        "paradox": {
+          "description": "Construct a form whose premises contradict",
+          "input": "any",
+          "output": "paradoxical",
+          "parameters": ["type"],
+          "taught_by": "Russell_Paradox"
+        },
+        "self_reference": {
+          "description": "A form that describes itself",
+          "input": "any",
+          "output": "paradoxical",
+          "parameters": [],
+          "taught_by": "Godel_Incompleteness"
+        },
+        "impossible": {
+          "description": "Compose locally-valid pieces into a globally-impossible whole",
+          "input": "any*",
+          "output": "paradoxical",
+          "parameters": [],
+          "taught_by": "Escher_Impossible"
+        }
+      }
+    },
+    "qfeplaboratory": {
+      "order": 17,
+      "operations": {
+        "tune_lambda": {
+          "description": "Adjust the entropy drive \u2014 where the system sits between order and chaos",
+          "input": "any",
+          "output": "tunable",
+          "parameters": ["lambda"],
+          "taught_by": "QFEP_Lambda_Spectrum"
+        },
+        "tune_phi": {
+          "description": "Adjust sensitivity to entropy change",
+          "input": "any",
+          "output": "tunable",
+          "parameters": ["phi"],
+          "taught_by": "QFEP_Phi"
+        },
+        "dissolve": {
+          "description": "Return a form to its parameter state",
+          "input": "any",
+          "output": "parameters",
+          "parameters": [],
+          "taught_by": "dissolving_form"
+        },
+        "re_become": {
+          "description": "Generate a form from tuned parameters",
+          "input": "parameters",
+          "output": "tunable",
+          "parameters": ["lambda", "phi", "F", "E"],
+          "taught_by": "qfep_formula_3d"
+        }
+      }
+    },
+    "graphtheory": {
+      "order": 19,
+      "operations": {
+        "connect": {
+          "description": "Add an edge between two atoms",
+          "input": "atom atom",
+          "output": "graph",
+          "parameters": ["weight"],
+          "taught_by": "GT_Foundations"
+        },
+        "traverse": {
+          "description": "Walk edges between nodes",
+          "input": "graph",
+          "output": "path",
+          "parameters": ["strategy"],
+          "taught_by": "GT_Pathfinding"
+        },
+        "layout": {
+          "description": "Position graph nodes via force simulation",
+          "input": "graph",
+          "output": "graph",
+          "parameters": [],
+          "taught_by": "GT_Layout"
+        },
+        "flow": {
+          "description": "Route maximum capacity through a graph",
+          "input": "graph source sink",
+          "output": "flow",
+          "parameters": [],
+          "taught_by": "GT_Flow"
+        }
+      }
+    }
+  },
+  "composition_rules": {
+    "description": "Any operation can compose with any form in its input domain, regardless of which sequence produced that form. A fractal (sequence 10) can be deformed (sequence 13) by a flock (sequence 14) of learning creatures (sequence 15) in non-Euclidean space (sequence 16). The biome is the compositional closure of all unlocked operations.",
+    "rules": [
+      "Operations compose in the order they are applied; composition is not commutative",
+      "An operation can consume any form of its declared input type, regardless of origin sequence",
+      "Operations from sequence N are available in all maps of sequences N..19",
+      "The biome applies only operations available at the current sequence",
+      "Cross-sequence composition is the primary evidence of understanding"
+    ]
+  }
+}
