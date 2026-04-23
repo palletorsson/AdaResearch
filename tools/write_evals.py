@@ -30,7 +30,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 ENCYCLOPEDIA_DIR = REPO_ROOT.parent / "ada_encyclopedia"
 
-TODAY = "2026-04-21"
+TODAY = "2026-04-22"
 AUTHOR = "claude"
 
 
@@ -236,6 +236,94 @@ MESH_EVALS = {
     "mg_op18_cellular_perforated_shell": E(4, "strong","CA + delete + edge decor works. The shell becomes a punctured dome with beaded hole boundaries, which is conceptually richer than a plain perforation."),
     "mg_op19_daynight_ziggurat": E(5, "winner",   "Strongest architecture of the batch. Day-and-Night CA seed plus stepped inset/extrude yields a readable citadel or ruin cluster."),
     "mg_op20_delta_bead_sheet": E(4, "strong",    "RD ornament finally reads after the retune. The delta sheet becomes a studded relief panel rather than staying a flat terrain sample."),
+    "mg_form21_stepped_dais_cube": E(4, "strong", "Cleanest basic massing result in the form pass. Repeated top inset/extrude gives a readable stepped podium with almost no ornamental baggage."),
+    "mg_form22_obelisk_prism": E(3, "working",    "Faceted obelisk/shard. The core tower logic is visible, though prism triangulation keeps it from feeling monolithic."),
+    "mg_form23_column_capital_cylinder": E(3, "working", "After repurposing to a cube shaft, the capital flare finally reads. Still blunt, but it proves the extrude-inset-extrude stack can articulate top-heavy form."),
+    "mg_form24_buttress_block": E(4, "strong",    "Side-face selection works and matters. The block reads as a ribbed or buttressed mass instead of a generic extruded cube."),
+    "mg_form25_coffered_plinth": E(3, "working",  "Subtle roof/floor articulation study. Better as a vocabulary piece than as a standalone object."),
+    "mg_form26_archivolt_gate": E(4, "strong",    "One of the best form-first outputs. The arch becomes visibly layered without relying on scatter, beads, or cellular tricks."),
+    "mg_form27_roof_lantern_cylinder": E(3, "working", "Compact roof-stack / lantern massing. Small but legible once the seed was switched away from the cylinder-cap failure mode."),
+    "mg_form28_bastion_ring": E(3, "working",     "Courtyard keep logic comes through, though it competes with the cube's triangulated roof facets. Useful as a hierarchy test."),
+    "mg_form29_faceted_shrine_crystal": E(3, "working", "Whole-form inset/extrude makes the crystal seed read like a pavilion shell. More diagrammatic than spatial, but valid."),
+    "mg_form30_nested_ziggurat_cube": E(4, "strong", "Good nested hierarchy study: terrace, keep, terrace again. This is the clearest cube-based fortress recipe besides the stepped dais."),
+    "mg_form31_slipped_canopy_cube": E(4, "strong", "Best proof of the transfer. The top no longer just rises; it slips and tilts into a canopy relation. This is closer to morphology's select-transform-articulate logic."),
+    "mg_form32_tilted_frame_arch": E(4, "strong", "The arch gains a new read once the inner band is rotated before extrusion. It feels like a shifted frame rather than a uniformly thickened gate."),
+    "mg_form33_pinched_lantern_prism": E(4, "strong", "This one shows why scale matters as its own move. The prism pinches before the lantern emerges, so the form has a real sequence instead of one repeated tower step."),
+    "mg_form34_side_shift_bastion": E(3, "working", "Useful side-bias study. The massing is more relational than the older buttress block, though still less clean than the canopy and arch results."),
+    "mg_form35_reach_canopy_cube": E(4, "strong", "The reach pass works best here. The canopy now throws outward in two clear stages, so the top mass finally reads as overhang rather than just roof thickness."),
+    "mg_form36_long_frame_arch": E(4, "strong", "Good long-reach portal. The arch keeps its basic legibility even when the frame projects much farther forward."),
+    "mg_form37_reach_spire_prism": E(3, "working", "Vertical reach is visible, but the prism still risks collapsing into a harsh shard instead of a clean spire. Useful limit case."),
+    "mg_form38_side_throw_bastion": E(3, "working", "Better side throw than the earlier bastion study. The outward push is legible, though the triangulated shell still makes the side mass rough."),
+    "mg_form39_queer_sweep_canopy": E(4, "strong", "Best of the extreme queer reach pass if it holds. The top becomes a real theatrical sweep rather than a polite roof event."),
+    "mg_form40_queer_wing_arch": E(4, "strong", "A camp portal instead of a respectable arch. The projection reads as a winged frame, which is exactly the right kind of overstatement."),
+    "mg_form41_queer_pincer_capsule": E(3, "working", "Useful test of a softer seed under side-reach. The capsule helps, but the pincer may still read as armored hardware more than pure flourish."),
+    "mg_form42_queer_fan_prism": E(3, "working", "The flare-after-pinch idea is good, but prism reach remains close to the shard limit. Strong if it opens, weak if it just spikes."),
+    "mg_form43_lowres_sphere_bloom": E(4, "strong", "Good proof that the low-res spherical seed can overexpand while still holding one-body logic. Reads as a bloom rather than a mere spike ball."),
+    "mg_form44_lowres_sphere_crown": E(3, "working", "The swollen-crown strategy is useful, though it may still tip toward armored polyhedron instead of truly opened sphere."),
+    "mg_form45_lowres_sphere_petalfan": E(4, "strong", "Best theatrical expansion if it holds. The icosahedron becomes a giant petal fan, which is exactly the kind of overreach this seed can support."),
+    "mg_form46_lowres_sphere_halo": E(3, "working", "Layered reach idea is right, but the second pull can either make a good halo or just a louder first extrusion depending on the read."),
+    "mg_form47_extrude_wing_arch": E(4, "strong", "Good answer to 'use more extrude'. The arch projects by stacked pulls rather than decorative tricks, and the overreach is legible."),
+    "mg_form48_extrude_sweep_canopy": E(4, "strong", "The canopy gets a stronger overhang from repeated extrusion than from scale alone. Clearer reach logic."),
+    "mg_form49_extrude_lowres_sphere": E(3, "working", "Repeated extrusion makes the low-res sphere louder, but it risks turning into a radial mine. Useful boundary test."),
+    "mg_form50_extrude_fan_prism": E(3, "working", "The accumulative push is visible, though prism reach still sits close to shard/fan ambiguity."),
+    "mg_form51_snake_serpent": E(3, "working", "Useful proof that mesh grammar can make a one-body serpent at all. The body should read as a tube-grown snake, though the head is still minimal and the pose language is limited."),
+    "mg_form52_hydra_tripod": E(4, "strong", "Good first hydra. Three clear necks from one trunk is enough to flip the serpent into mythic creature territory."),
+    "mg_form53_hydra_fivehead": E(4, "strong", "Best head-count read if it holds. More crown-like and more unmistakably hydra than the tripod."),
+    "mg_form54_hydra_rearing": E(3, "working", "Useful monster pose. Taller and more dramatic, but the asymmetry may weaken the hydra read compared with the clearer head-crown variants."),
+    "mg_form55_hydra_crown": E(4, "strong", "Likely the most mythic silhouette of the set. Compact trunk with a clustered head crown is the right direction."),
+}
+
+
+# ─── Morphology grammar evals ───────────────────────────────────────
+
+MORPHOLOGY_EVALS = {
+    "morph01_tree_trunk_branch_tip": E(4, "strong", "The minimal morphology thesis reads immediately: root mass, one trunk decision, three branch children, clustered tips. It proves that role-tagged recursion can stay legible instead of collapsing into detail noise."),
+    "morph02_hand_palm_fingers": E(4, "winner", "Five-finger allocation works as a body plan rather than a decorative mesh. Palm → finger zone → phalange extension makes the recursive search-tree idea concrete."),
+    "morph03_house_body_aperture_roof": E(4, "strong", "Body, apertures, and pitched cap are clearly separated into roles. It shows the same dispatch logic can describe architecture, not just plant morphology."),
+    "morph04_table_modulor_fold": E(4, "strong", "The table proves the new grid-extrude op is useful: one broad slab allocates four tapered supports without leaving the single-body morphology language."),
+    "morph05_chair_recursive_seat": E(3, "working", "Seat, legs, and backrest now read as one folded body. Still blunt and over-faceted, but it is recognisably chair logic rather than appended furniture parts.", ["add a dedicated rear-band extrude op", "separate seat thickness from backrest thickness"]),
+    "morph06_shelf_bay_stack": E(5, "winner", "This is the clearest furniture result in the batch. Frame first, bays second, storage implied third - exactly the kind of scale ladder the morphology grammar should deliver."),
+    "morph07_desk_drawer_mass": E(4, "strong", "Desk body, support legs, and drawer recesses all come from one mass. Strong proof that work surfaces and storage can share the same recursive dispatch."),
+    "morph08_body_limb_chain": E(3, "working", "The limb-chain idea is present but still too compressed by the current boxy geometry and camera dependence. Useful as a body-scale probe, not yet a convincing anatomical artefact.", ["improve side-limb camera framing", "add a dedicated paired-limb branching template", "separate torso taper from limb taper"]),
+    "morph09_hand_chain_fold": E(4, "strong", "This extends the original hand by making the phalange ladder visible again. Palm to finger to smaller finger-segment reads as a clean recursive fold."),
+    "morph10_drag_pageant_silhouette": E(4, "strong", "Pageant works as a silhouette family even with minimal means: tall wig, narrow torso, and a strong gown flare. It proves the morphology grammar can move from anatomy into presentation."),
+    "morph11_drag_clubkid_platform": E(4, "strong", "Club-kid reads as a different grammar from pageant: platform legs, shoulder rigs, and a compact torso shell. The silhouette is chunkier and more synthetic by design."),
+    "morph12_drag_avantgarde_cape": E(5, "winner", "The avant-garde cape is the strongest of the three drag archetypes. The rear plane creates a real performance silhouette instead of only modifying the body volume."),
+    "morph13_drag_pageant_mermaid": E(4, "strong", "This one gets closer to the old-Hollywood mermaid logic in the references: tight through the lower body, then a late trumpet release. It reads as silhouette control rather than generic gown mass."),
+    "morph14_drag_bloom_petal": E(4, "strong", "The bloom look proves the grammar can produce a costume that interrupts the body with petal volumes instead of only dressing it. That is a useful step toward more referential drag morphology."),
+    "morph15_drag_spike_armor": E(4, "strong", "Spike armor pushes the system into sharper character drag. The shoulders and hostile crown work better here because the body remains simple and the violence stays concentrated at the edges."),
+    "morph16_drag_graphic_contour": E(4, "strong", "Graphic contour is the best body-suit translation so far. The central column stays tight while the hips, shoulders, and platforms do the exaggeration work."),
+    "morph44_drag_pageant_slip_train": E(4, "strong", "The slipped train is a real improvement. The transform layer lets the gown fall sideways instead of only flaring outward, which makes the look feel staged and queer rather than merely elegant."),
+    "morph45_drag_clubkid_cutout_frame": E(4, "strong", "This is the clearest use of inset as drag logic. The body becomes a framed cutout with displaced shoulder hardware, which pushes the system toward club performance instead of costume mass."),
+    "morph46_drag_avantgarde_folded_veil": E(5, "winner", "Best of the new pass. The rear veil reads as folded plane rather than cape blob, and the off-axis headpiece keeps the whole silhouette unstable in the right way."),
+    "morph47_drag_pageant_chapel_break": E(4, "strong", "Ceremonial and broken at once. Halo fragments and the shifted train make the look feel like devotional pageant drag rather than conservative glam."),
+    "morph17_bio_cradle_chair": E(3, "working", "The cradle chair is still more study than finish, but it proves the drag-derived shell logic can be redirected into apparatus seating. The side padding and rear shell are the useful parts; the overhead arm still needs a stronger read."),
+    "morph18_bio_petal_lounger": E(4, "strong", "This is the clearest furniture translation from the reference set. The heavy plinth, offset side fin, and soft top pad read as a sculptural chaise instead of a generic block."),
+    "morph19_bio_step_perch": E(4, "strong", "The step perch captures the medical-device vibe best. Front step bands plus the tall instrument arm make it read as specialised furniture rather than ordinary seating."),
+    "morph20_bio_orbit_rocker": E(3, "working", "Useful as a ring-frame furniture probe, but still too restrained to compete with the stronger chaise and perch silhouettes. The support chassis reads; the orbit frame wants another iteration."),
+    "morph21_bio_gantry_throne": E(4, "strong", "This is the clearest extreme apparatus chair of the new pass. The rear fin and twin service arms turn the seat into a ritual or medical station instead of a conventional throne."),
+    "morph22_bio_blossom_bed": E(4, "strong", "The blossom bed pushes the petal logic much further than the earlier lounger. It reads as furniture swallowed by an envelope of soft walls, which is exactly the right kind of excess."),
+    "morph23_bio_harness_lounger": E(4, "strong", "Harness lounger gets closest to the suspended-reference logic. The wrapped side bands and hanging service arm make it feel occupied even when empty."),
+    "morph24_bio_cathedral_perch": E(4, "strong", "Cathedral perch is the most architectural of the furniture batch. Buttress, steps, and surveillance arm make it feel like a piece of procedural liturgical equipment."),
+    "morph25_bio_shrine_bed": E(4, "strong", "Shrine bed leans into furniture-as-architecture. The big rear wall and offset side slab make the bed feel more like a sleeping niche than a normal object."),
+    "morph26_bio_pincer_chair": E(4, "strong", "Pincer chair is the best clamp-like seat so far. The opposing side jaws make the body feel gripped rather than merely supported, which is exactly the right kind of discomfort."),
+    "morph27_bio_gallows_perch": E(4, "strong", "Gallows perch is severe and useful. The overhanging arm and narrow seat push the batch further toward instrument furniture instead of domestic furniture."),
+    "morph28_bio_triptych_bed": E(4, "strong", "Triptych bed turns the leaf-panel idea into a stage. The three-panel envelope makes the bed read as a mechanical flower or liturgical display system."),
+    "morph29_history_bauhaus_cantilever": E(4, "strong", "Best reduction of the history pass. The sled-base logic, slim arm bars, and upright back make the chair read as modernist seating instead of another shell."),
+    "morph30_history_art_deco_club": E(4, "strong", "Heavy plinth, swollen arms, and a tall back block give this one a credible Deco club-chair massing. Useful proof that the grammar can do upholstered monumentality."),
+    "morph31_history_memphis_divider": E(4, "strong", "Asymmetrical bays finally push the system toward a Sottsass-like room object. It reads less as chair and more as postmodern shelving, which is exactly right."),
+    "morph32_history_modernist_daybed": E(4, "strong", "Low plinth and one-sided guard plane make the daybed read as a horizontal modernist object rather than a bed swallowed by petals. Good control of restraint."),
+    "morph33_history_postmodern_shelf": E(4, "strong", "This is the clearest furniture-as-display-object in the new batch. The stacked bays and one exaggerated side blade give it the right postmodern imbalance."),
+    "morph34_scifi_command_console": E(4, "strong", "The console reads immediately: dark panel recesses, low body, and one tilted slab are enough to turn furniture grammar into control-room equipment."),
+    "morph35_scifi_cryo_pod": E(4, "strong", "Best translation of the batch. The plinth, bed, and lid slab produce a believable med-bay or stasis object with very little geometry."),
+    "morph36_scifi_reactor_pedestal": E(4, "strong", "A useful power-core pedestal. Vertical body, side fins, and the crowned emitter push it out of furniture and into prop-space cleanly."),
+    "morph37_scifi_airlock_frame": E(4, "strong", "This one reads as a portal or hatch frame rather than a cabinet because the whole silhouette is tall, flat, and front-loaded with recesses."),
+    "morph38_scifi_beacon_tower": E(4, "strong", "A compact beacon mast. The stepped base and clustered head give it the right unattended-infrastructure feeling."),
+    "morph39_creature_console_crab": E(4, "strong", "The prop-to-creature bridge works immediately here. Four legs, a low chassis, and a blunt face are enough to make the console read as a rover-crab."),
+    "morph40_creature_pod_beetle": E(4, "strong", "The dorsal cover and six short legs push the cryo pod into beetle territory cleanly. This is one of the best object-to-animal conversions so far."),
+    "morph41_creature_reactor_idol": E(4, "strong", "Reads as a standing machine-animal or shrine beast. The narrow head and crown keep it from collapsing back into pure architecture."),
+    "morph42_creature_airlock_grazer": E(4, "strong", "Tall plate body plus planted legs makes this feel like a grazing walker or sentry herbivore. Good conversion of frame logic into anatomy."),
+    "morph43_creature_beacon_heron": E(4, "strong", "A useful long-legged sentinel. Neck, tiny head cluster, and tail panel produce a recognisable bird-machine silhouette."),
 }
 
 
@@ -575,6 +663,7 @@ def main() -> int:
     ps_full    = {**PRIMITIVE_STACK_EVALS, **PS_LSYSTEM_BRIDGE_EVALS, **PS_NOISE_BRIDGE_EVALS, **PS_RD_BRIDGE_EVALS}
     write_gallery_evals("graph-grammar-gallery",   graph_full)
     write_gallery_evals("mesh-grammar-gallery",    {**MESH_EVALS, **MESH_RD_BRIDGE_EVALS})
+    write_gallery_evals("morphology-gallery",      MORPHOLOGY_EVALS)
     write_gallery_evals("form-gallery",            FORM_EVALS)
     write_gallery_evals("primitive-stack-gallery", ps_full)
     write_gallery_evals("soft-body-gallery",       sb_full)
@@ -583,11 +672,11 @@ def main() -> int:
     write_gallery_evals("pattern-gallery",         PATTERN_EVALS)
     write_gallery_evals("facade-gallery",          FACADE_EVALS)
     write_gallery_evals("trajectory-gallery",      TRAJECTORY_EVALS)
-    total = (len(graph_full) + len(MESH_EVALS) + len(FORM_EVALS)
+    total = (len(graph_full) + len(MESH_EVALS) + len(MORPHOLOGY_EVALS) + len(FORM_EVALS)
              + len(ps_full) + len(sb_full) + len(LSYSTEM_EVALS)
              + len(RD_EVALS) + len(PATTERN_EVALS) + len(FACADE_EVALS)
              + len(TRAJECTORY_EVALS))
-    print(f"Total: {total} evals across 10 galleries")
+    print(f"Total: {total} evals across 11 galleries")
     return 0
 
 

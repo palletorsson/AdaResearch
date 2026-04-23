@@ -35,6 +35,14 @@ def flat_corridor(params: dict | None = None) -> list[list[str]]:
     return _blank("1")
 
 
+def void_canvas(params: dict | None = None) -> list[list[str]]:
+    """Everything is void ("0"). Walkability gets carved in by @floor
+    operators or artifact footprints. The right base when the design
+    reads as "islands floating in nothing" — void is the subject, not
+    the absence."""
+    return _blank("0")
+
+
 def narrow_corridor(params: dict | None = None) -> list[list[str]]:
     """Only middle 4 cols walkable, side cols void -- claustrophobic path."""
     params = params or {}
@@ -188,6 +196,7 @@ def guarantee_walkable(grid: list[list[str]], cells: list[tuple[int, int]]) -> l
 
 RECIPES: dict[str, Callable[[dict | None], list[list[str]]]] = {
     "flat_corridor":     flat_corridor,
+    "void_canvas":       void_canvas,
     "narrow_corridor":   narrow_corridor,
     "platform_over_pit": platform_over_pit,
     "stepped_descent":   stepped_descent,

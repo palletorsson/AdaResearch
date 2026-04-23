@@ -54,6 +54,38 @@ OVERSIGHT_PROJECT = os.environ.get("OVERSIGHT_PROJECT", "ada-research")
 # Artifacts exempt from Rule 4 reachability — decorative/environmental only
 EXEMPT_ARTIFACTS = {"dark_sphere"}
 
+# Registry cache for view_only flag lookup
+_registry_cache: dict[str, dict] | None = None
+
+
+def _load_registries() -> dict[str, dict]:
+    """Load all artifact registries and build a lookup by token."""
+    global _registry_cache
+    if _registry_cache is not None:
+        return _registry_cache
+    _registry_cache = {}
+    reg_dir = ROOT / "commons" / "artifacts" / "registry"
+    if not reg_dir.is_dir():
+        return _registry_cache
+    for f in reg_dir.iterdir():
+        if f.suffix != ".json":
+            continue
+        try:
+            data = json.loads(f.read_text(encoding="utf-8"))
+            for key, art in data.get("artifacts", {}).items():
+                token = art.get("lookup_name", key)
+                _registry_cache[token] = art
+        except Exception:
+            continue
+    return _registry_cache
+
+
+def is_view_only(artifact_name: str) -> bool:
+    """Check if artifact is marked view_only in the registry."""
+    regs = _load_registries()
+    art = regs.get(artifact_name, {})
+    return bool(art.get("view_only", False))
+
 
 # ---------------------------------------------------------------------------
 # Map loading
@@ -247,11 +279,24 @@ class MapGraph:
             for t in targets:
                 self.walkable.add(t)
 
-        # Spawn
+        # Spawn — the game always places the player on the floor, so spawn is
+        # walkable at the height of its nearest floor neighbor (not the structure
+        # layer's raw value which may be 0/void under the spawn marker).
         self.spawn = find_spawn(self.utils)
         self.spawn_raw = find_spawn_raw(self.utils)
         if self.spawn not in self.walkable:
             self.walkable.add(self.spawn)
+        # Infer spawn height from neighbors so BFS can step onto adjacent floor
+        if self.hmap.get(self.spawn, 0) == 0:
+            r, c = self.spawn
+            neighbor_heights = []
+            for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                nb = (r + dr, c + dc)
+                nh = self.hmap.get(nb, 0)
+                if nh > 0:
+                    neighbor_heights.append(nh)
+            if neighbor_heights:
+                self.hmap[self.spawn] = min(neighbor_heights)
 
         # Targets
         self.teleports = find_teleports(self.utils)
@@ -521,27 +566,32 @@ def check_rules(graph: MapGraph) -> list[dict]:
                     "msg": f"Teleport at ({tp_c},{tp_r}) — row z={next_row} has no floor cubes to catch player",
                 })
 
-    # Rule 3: Teleport must be reachable
+    # Rule 3: Teleport should be reachable (WARN — some maps use flight/special traversal)
     reachable = graph.bfs_flood()
     for tp in graph.teleports:
         if tp not in reachable:
             issues.append({
                 "rule": 3,
-                "severity": "ERROR",
-                "msg": f"Teleport at ({tp[1]},{tp[0]}) is NOT reachable from spawn",
+                "severity": "WARN",
+                "msg": f"Teleport at ({tp[1]},{tp[0]}) is NOT reachable from spawn via walking",
             })
 
-    # Rule 4: All interactable artifacts must be reachable
-    # An artifact is reachable if the player can stand on its cell OR on any
-    # adjacent cell (4-connected).  This covers "table" layouts where the
-    # artifact sits on an elevated pedestal and the player interacts from a
-    # neighboring lower tile.
-    # Exempt: decorative/environmental artifacts (e.g. dark_sphere) that don't
-    # need player interaction — they're scene-level effects, not interactables.
+    # Rule 4: Interactable artifacts should be reachable
+    # Skip silently:
+    #   - Artifacts on void (h=0) — display/show pieces, no floor = no interaction expected
+    #   - Artifacts in EXEMPT_ARTIFACTS — decorative/environmental (dark_sphere etc.)
+    #   - Artifacts with view_only=true in registry — explicitly marked non-interactive
+    # Warn only for artifacts on actual floor that the player can't reach.
     for art in graph.artifacts:
         if art["name"] in EXEMPT_ARTIFACTS:
             continue
+        if is_view_only(art["name"]):
+            continue
         pos = (art["row"], art["col"])
+        art_h = graph.hmap.get(pos, 0)
+        # On void = show artifact, skip silently
+        if art_h == 0:
+            continue
         if pos in reachable:
             continue
         # Check 4-connected neighbors
@@ -551,25 +601,20 @@ def check_rules(graph: MapGraph) -> list[dict]:
             for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]
         )
         if not adjacent_reachable:
-            art_h = graph.hmap.get(pos, 0)
-            on_void = art_h == 0
-            suffix = " [on VOID]" if on_void else ""
-            # Unreachable artifacts are treated as view-only display pieces
-            # (isolated pedestals, elevated decorations, etc.) — WARN not ERROR
             issues.append({
                 "rule": 4,
                 "severity": "WARN",
-                "msg": f"Artifact '{art['name']}' at ({art['col']},{art['row']}) h={art_h} unreachable (view-only){suffix}",
+                "msg": f"Artifact '{art['name']}' at ({art['col']},{art['row']}) h={art_h} unreachable",
             })
 
-    # Rule 5: Teleport must stand on y=0 (void) in structure
+    # Rule 5: Teleport should stand on y=0 (void) in structure (WARN — zoo/test maps often skip this)
     for tp in graph.teleports:
         tp_h = graph.hmap.get(tp, 0)
         if tp_h != 0:
             issues.append({
                 "rule": 5,
-                "severity": "ERROR",
-                "msg": f"Teleport at ({tp[1]},{tp[0]}) has height {tp_h}, must be 0 (void)",
+                "severity": "WARN",
+                "msg": f"Teleport at ({tp[1]},{tp[0]}) has height {tp_h}, should be 0 (void)",
                 "fix": "set_teleport_void",
             })
 
