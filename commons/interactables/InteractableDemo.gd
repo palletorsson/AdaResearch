@@ -8,7 +8,7 @@ const RackPassiveElementsScript = preload("res://commons/interactables/RackPassi
 
 ## Control definitions — scenes loaded at runtime (not preload) to avoid
 ## RigidBody3D script compilation errors with interactable_handle.gd
-var CONTROLS := [
+const DEFAULT_CONTROLS := [
 	{ "scene": "res://commons/interactables/push_button.tscn", "label": "BUTTON", "y": 0.0 },
 	{ "scene": "res://commons/interactables/push_button_front.tscn", "label": "BUTTON\nFRONT", "y": 0.0, "rot_y": 180.0 },
 	{ "scene": "res://commons/interactables/dial_smooth.tscn", "label": "KNOB", "y": 0.0 },
@@ -23,7 +23,7 @@ var CONTROLS := [
 ]
 
 ## Additional button types (procedural, added to Row 1 overflow)
-const EXTRA_BUTTONS := [
+const DEFAULT_EXTRA_BUTTONS := [
 	{ "type": "rect_sm", "label": "RECT SM" },
 	{ "type": "rect_wide", "label": "RECT WIDE" },
 	{ "type": "rect_tall", "label": "RECT TALL" },
@@ -31,8 +31,7 @@ const EXTRA_BUTTONS := [
 ]
 
 ## Row 4: New prototype modules — procedural versions of the interface_prototypes preset
-const ROW4_Y := -0.25
-const NEW_MODULES := [
+const DEFAULT_NEW_MODULES := [
 	{ "type": "touch_grid", "label": "TOUCH\nGRID", "width": 1 },
 	{ "type": "rotary_selector", "label": "ROTARY\nSELECTOR", "width": 1 },
 	{ "type": "needle_meter", "label": "NEEDLE\nMETER", "width": 1 },
@@ -45,15 +44,17 @@ const NEW_MODULES := [
 	{ "type": "text_scroll_3", "label": "SCROLL 3", "width": 3 },
 ]
 
-const SPACING := 0.30  # meters between each control
-const CONTROL_Z := 0.02  # forward from back panel
-const LABEL_Y_OFFSET := -0.18  # below control center
-const ROW_Y := 1.1  # height of row center
+const DEFAULT_SPACING := 0.30  # meters between each control
+const DEFAULT_CONTROL_Z := 0.02  # forward from back panel
+const DEFAULT_LABEL_Y_OFFSET := -0.18  # below control center
+const DEFAULT_ROW_Y := 1.1  # height of row center
 const COMPOUND_FRAME_HEIGHT := 0.28
 const COMPOUND_INNER_MARGIN := 0.015
 const FRAME_BAR_THICKNESS := 0.008
 const FRAME_BAR_DEPTH := 0.004
 const FRAME_Z_OFFSET := -0.004
+const CONTENT_FRAME_MARGIN_X := 0.012
+const CONTENT_FRAME_MARGIN_Y := 0.012
 const VERTICAL_SLIDER_SIZE := Vector2(0.08, 0.22)
 const HORIZONTAL_SLIDER_SIZE := Vector2(0.22, 0.08)
 const VERTICAL_SLIDER_GAP := 0.04
@@ -63,7 +64,7 @@ const SLIDER_HORIZONTAL_SCENE := "res://commons/interactables/slider_horizontal.
 
 
 ## Row 2: Passive elements — speakers, meters, working monitors (use real scenes)
-const PASSIVE_ELEMENTS = [
+const DEFAULT_PASSIVE_ELEMENTS = [
 	{ "builder": "build_speaker_dots", "label": "SPEAKER DOTS", "width": 1 },
 	{ "builder": "build_speaker_lines", "label": "SPEAKER LINES", "width": 1 },
 	{ "builder": "build_speaker_grid", "label": "SPEAKER GRID", "width": 1 },
@@ -75,11 +76,11 @@ const PASSIVE_ELEMENTS = [
 	{ "monitor": "lissajous", "slots": 2, "label": "LISSAJOUS", "width": 2 },
 ]
 
-const ROW2_Y := 0.65  # Second row below first
-const ROW3_Y := 0.20  # Third row (compounds)
+const DEFAULT_ROW2_Y := 0.65  # Second row below first
+const DEFAULT_ROW3_Y := 0.20  # Third row (compounds)
 
 ## Row 3: Compound layouts — double/triple footprint allowed
-const COMPOUNDS = [
+const DEFAULT_COMPOUNDS = [
 	{ "type": "sliders_v", "count": 2, "label": "2x SLIDER V", "width": 2 },
 	{ "type": "sliders_v", "count": 3, "label": "3x SLIDER V", "width": 2 },
 	{ "type": "sliders_v", "count": 4, "label": "4x SLIDER V", "width": 2 },
@@ -91,19 +92,134 @@ const COMPOUNDS = [
 	{ "type": "meters_v", "count": 3, "label": "3x METERS", "width": 1 },
 ]
 
+@export var auto_build: bool = true
+
+var controls: Array = []
+var extra_buttons: Array = []
+var passive_elements: Array = []
+var compounds: Array = []
+var new_modules: Array = []
+
+var spacing: float = DEFAULT_SPACING
+var control_z: float = DEFAULT_CONTROL_Z
+var label_y_offset: float = DEFAULT_LABEL_Y_OFFSET
+var row_y: float = DEFAULT_ROW_Y
+var row2_y: float = DEFAULT_ROW2_Y
+var row3_y: float = DEFAULT_ROW3_Y
+var row4_y: float = -0.25
+
+var panel_color: Color = Color(0.78, 0.75, 0.67)
+var frame_color: Color = Color(0.25, 0.23, 0.20)
+var accent_color: Color = Color(0.75, 0.38, 0.13)
+var dark_color: Color = Color(0.10, 0.10, 0.10)
+var cream_color: Color = Color(0.78, 0.75, 0.67)
+
+var main_title_text: String = "INTERACTABLE CONTROLS"
+var row2_title_text: String = "PASSIVE ELEMENTS & MONITORS"
+var row3_title_text: String = "COMPOUND LAYOUTS"
+var row4_title_text: String = "NEW MODULES + TEXT DISPLAYS"
+var demo_info: Dictionary = {}
+
+
+func _init() -> void:
+	_restore_defaults()
+
+
+func _restore_defaults() -> void:
+	controls = DEFAULT_CONTROLS.duplicate(true)
+	extra_buttons = DEFAULT_EXTRA_BUTTONS.duplicate(true)
+	passive_elements = DEFAULT_PASSIVE_ELEMENTS.duplicate(true)
+	compounds = DEFAULT_COMPOUNDS.duplicate(true)
+	new_modules = DEFAULT_NEW_MODULES.duplicate(true)
+	spacing = DEFAULT_SPACING
+	control_z = DEFAULT_CONTROL_Z
+	label_y_offset = DEFAULT_LABEL_Y_OFFSET
+	row_y = DEFAULT_ROW_Y
+	row2_y = DEFAULT_ROW2_Y
+	row3_y = DEFAULT_ROW3_Y
+	row4_y = -0.25
+	panel_color = Color(0.78, 0.75, 0.67)
+	frame_color = Color(0.25, 0.23, 0.20)
+	accent_color = Color(0.75, 0.38, 0.13)
+	dark_color = Color(0.10, 0.10, 0.10)
+	cream_color = Color(0.78, 0.75, 0.67)
+	main_title_text = "INTERACTABLE CONTROLS"
+	row2_title_text = "PASSIVE ELEMENTS & MONITORS"
+	row3_title_text = "COMPOUND LAYOUTS"
+	row4_title_text = "NEW MODULES + TEXT DISPLAYS"
+	demo_info = {}
+
 
 func _ready():
+	if not auto_build:
+		return
 	_build_back_panel()
 	_spawn_controls()
 	_spawn_passive_elements()
 	_spawn_compounds()
 	_spawn_new_modules()
 	_add_title()
-	print("InteractableDemo: %d controls + %d passive + %d compounds + %d new modules" % [CONTROLS.size(), PASSIVE_ELEMENTS.size(), COMPOUNDS.size(), NEW_MODULES.size()])
+	print("InteractableDemo: %d controls + %d passive + %d compounds + %d new modules" % [controls.size(), passive_elements.size(), compounds.size(), new_modules.size()])
+
+
+func load_demo_config_from_dict(data: Dictionary) -> void:
+	_restore_defaults()
+	if data.has("demo_info") and data["demo_info"] is Dictionary:
+		demo_info = data["demo_info"]
+	if data.has("controls") and data["controls"] is Array:
+		controls = data["controls"].duplicate(true)
+	if data.has("extra_buttons") and data["extra_buttons"] is Array:
+		extra_buttons = data["extra_buttons"].duplicate(true)
+	if data.has("passive_elements") and data["passive_elements"] is Array:
+		passive_elements = data["passive_elements"].duplicate(true)
+	if data.has("compounds") and data["compounds"] is Array:
+		compounds = data["compounds"].duplicate(true)
+	if data.has("new_modules") and data["new_modules"] is Array:
+		new_modules = data["new_modules"].duplicate(true)
+	if data.has("titles") and data["titles"] is Dictionary:
+		var titles: Dictionary = data["titles"]
+		main_title_text = str(titles.get("main", main_title_text))
+		row2_title_text = str(titles.get("row2", row2_title_text))
+		row3_title_text = str(titles.get("row3", row3_title_text))
+		row4_title_text = str(titles.get("row4", row4_title_text))
+	if data.has("layout") and data["layout"] is Dictionary:
+		_apply_layout_dict(data["layout"])
+
+
+func _apply_layout_dict(layout: Dictionary) -> void:
+	if layout.has("spacing"):
+		spacing = float(layout["spacing"])
+	if layout.has("control_z"):
+		control_z = float(layout["control_z"])
+	if layout.has("label_y_offset"):
+		label_y_offset = float(layout["label_y_offset"])
+	if layout.has("row_y"):
+		row_y = float(layout["row_y"])
+	if layout.has("row2_y"):
+		row2_y = float(layout["row2_y"])
+	if layout.has("row3_y"):
+		row3_y = float(layout["row3_y"])
+	if layout.has("row4_y"):
+		row4_y = float(layout["row4_y"])
+	panel_color = _color_from_value(layout.get("panel_color", panel_color), panel_color)
+	frame_color = _color_from_value(layout.get("frame_color", frame_color), frame_color)
+	accent_color = _color_from_value(layout.get("accent_color", accent_color), accent_color)
+	dark_color = _color_from_value(layout.get("dark_color", dark_color), dark_color)
+	cream_color = _color_from_value(layout.get("cream_color", cream_color), cream_color)
+
+
+func _color_from_value(value: Variant, fallback: Color) -> Color:
+	if value is Color:
+		return value
+	if value is Array:
+		var c: Array = value
+		if c.size() >= 3:
+			return Color(float(c[0]), float(c[1]), float(c[2]), float(c[3]) if c.size() > 3 else 1.0)
+	return fallback
 
 
 func _build_back_panel():
-	var total_w: float = CONTROLS.size() * SPACING + 0.2
+	var total_w: float = (controls.size() + extra_buttons.size()) * spacing + 0.2
 	var panel := MeshInstance3D.new()
 	panel.name = "BackPanel"
 	var box := BoxMesh.new()
@@ -111,11 +227,11 @@ func _build_back_panel():
 	panel.mesh = box
 
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(0.78, 0.75, 0.67)  # Warm gray (Rams)
+	mat.albedo_color = panel_color
 	mat.metallic = 0.3
 	mat.roughness = 0.6
 	panel.material_override = mat
-	panel.transform.origin = Vector3(0, ROW_Y, -0.005)
+	panel.transform.origin = Vector3(0, row_y, -0.005)
 	add_child(panel)
 
 	# Subtle border frame
@@ -125,17 +241,17 @@ func _build_back_panel():
 	frame_box.size = Vector3(total_w + 0.02, 0.47, 0.004)
 	frame.mesh = frame_box
 	var frame_mat := StandardMaterial3D.new()
-	frame_mat.albedo_color = Color(0.65, 0.62, 0.56)
+	frame_mat.albedo_color = panel_color.darkened(0.16)
 	frame_mat.metallic = 0.2
 	frame_mat.roughness = 0.7
 	frame.material_override = frame_mat
-	frame.transform.origin = Vector3(0, ROW_Y, -0.008)
+	frame.transform.origin = Vector3(0, row_y, -0.008)
 	add_child(frame)
 
 
 func _make_frame_material() -> StandardMaterial3D:
 	var frame_mat := StandardMaterial3D.new()
-	frame_mat.albedo_color = Color(0.25, 0.23, 0.20)
+	frame_mat.albedo_color = frame_color
 	frame_mat.metallic = 0.3
 	frame_mat.roughness = 0.7
 	return frame_mat
@@ -169,6 +285,38 @@ func _add_outline_frame(frame_name: String, center: Vector3, width: float, heigh
 		frame_root.add_child(mesh_instance)
 
 
+func _measure_local_visual_aabb(root_node: Node3D) -> AABB:
+	var total := AABB()
+	var first := true
+	var stack: Array = [{ "node": root_node, "xf": Transform3D.IDENTITY }]
+	while not stack.is_empty():
+		var item: Dictionary = stack.pop_back()
+		var current: Node3D = item["node"]
+		var current_xf: Transform3D = item["xf"]
+		if current is MeshInstance3D and current.mesh:
+			var mesh_aabb: AABB = current_xf * current.get_aabb()
+			if first:
+				total = mesh_aabb
+				first = false
+			else:
+				total = total.merge(mesh_aabb)
+		for child in current.get_children():
+			if child is Node3D:
+				stack.append({ "node": child, "xf": current_xf * child.transform })
+	if first:
+		return AABB(Vector3(-0.04, -0.04, 0), Vector3(0.08, 0.08, 0.01))
+	return total
+
+
+func _frame_container_content(frame_name: String, container: Node3D, min_size: Vector2 = Vector2.ZERO, margin: Vector2 = Vector2(CONTENT_FRAME_MARGIN_X, CONTENT_FRAME_MARGIN_Y)) -> void:
+	var local_aabb := _measure_local_visual_aabb(container)
+	var local_center := local_aabb.get_center()
+	var width := maxf(local_aabb.size.x + margin.x * 2.0, min_size.x)
+	var height := maxf(local_aabb.size.y + margin.y * 2.0, min_size.y)
+	var center := container.transform.origin + local_center
+	_add_outline_frame(frame_name, center, width, height)
+
+
 func _get_control_frame_size(scene_path: String) -> Vector2:
 	if "slider_horizontal" in scene_path:
 		return Vector2(0.25, 0.10)
@@ -189,7 +337,7 @@ func _get_control_frame_size(scene_path: String) -> Vector2:
 
 func _get_passive_frame_size(def: Dictionary, elem_width: int) -> Vector2:
 	if def.has("monitor"):
-		return Vector2(elem_width * SPACING - 0.05, 0.21)
+		return Vector2(elem_width * spacing - 0.05, 0.21)
 
 	match String(def.get("builder", "")):
 		"build_speaker_dots", "build_speaker_lines", "build_speaker_grid":
@@ -224,15 +372,16 @@ func _get_compound_frame_size(comp_type: String, count: int, frame_width: float)
 
 
 func _spawn_controls():
-	var start_x: float = -(CONTROLS.size() - 1) * SPACING / 2.0
+	var total_controls: int = controls.size() + extra_buttons.size()
+	var start_x: float = -(total_controls - 1) * spacing / 2.0
 
-	for i in CONTROLS.size():
-		var def: Dictionary = CONTROLS[i]
+	for i in controls.size():
+		var def: Dictionary = controls[i]
 		var scene_path: String = def["scene"]
 		var label_text: String = def["label"]
 		var y_offset: float = def.get("y", 0.0)
 
-		var x_pos: float = start_x + i * SPACING
+		var x_pos: float = start_x + i * spacing
 
 		# Load and instantiate control
 		var scene := load(scene_path) as PackedScene
@@ -241,11 +390,11 @@ func _spawn_controls():
 			continue
 
 		var frame_size := _get_control_frame_size(scene_path)
-		_add_outline_frame("Frame_%d" % i, Vector3(x_pos, ROW_Y + y_offset, CONTROL_Z), frame_size.x, frame_size.y)
+		_add_outline_frame("Frame_%d" % i, Vector3(x_pos, row_y + y_offset, control_z), frame_size.x, frame_size.y)
 
 		var control := scene.instantiate()
 		control.name = "Control_%d" % i
-		control.transform.origin = Vector3(x_pos, ROW_Y + y_offset, CONTROL_Z)
+		control.transform.origin = Vector3(x_pos, row_y + y_offset, control_z)
 		if def.has("rot_y"):
 			control.rotation_degrees.y = def["rot_y"]
 		add_child(control)
@@ -261,7 +410,7 @@ func _spawn_controls():
 		lbl.outline_modulate = Color(0.0, 0.0, 0.0, 0.9)
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		lbl.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-		lbl.transform.origin = Vector3(x_pos, ROW_Y + LABEL_Y_OFFSET, CONTROL_Z + 0.01)
+		lbl.transform.origin = Vector3(x_pos, row_y + label_y_offset, control_z + 0.01)
 		add_child(lbl)
 
 		# Index number above — bright copper with dark outline
@@ -274,20 +423,18 @@ func _spawn_controls():
 		idx_lbl.outline_size = 4
 		idx_lbl.outline_modulate = Color(0.0, 0.0, 0.0, 0.8)
 		idx_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		idx_lbl.transform.origin = Vector3(x_pos, ROW_Y + 0.20, CONTROL_Z + 0.01)
+		idx_lbl.transform.origin = Vector3(x_pos, row_y + 0.20, control_z + 0.01)
 		add_child(idx_lbl)
 
 	# Extra procedural buttons after the scene-loaded controls
-	var copper := Color(0.75, 0.38, 0.13)
-	var dark := Color(0.10, 0.10, 0.10)
-	for j in EXTRA_BUTTONS.size():
-		var bdef: Dictionary = EXTRA_BUTTONS[j]
-		var bx: float = start_x + (CONTROLS.size() + j) * SPACING
+	for j in extra_buttons.size():
+		var bdef: Dictionary = extra_buttons[j]
+		var bx: float = start_x + (controls.size() + j) * spacing
 		var bc := Node3D.new()
 		bc.name = "ExtraBtn_%d" % j
-		bc.transform.origin = Vector3(bx, ROW_Y, CONTROL_Z)
+		bc.transform.origin = Vector3(bx, row_y, control_z)
 		add_child(bc)
-		_build_extra_button(bc, bdef["type"], copper, dark)
+		_build_extra_button(bc, bdef["type"], accent_color, dark_color)
 		var blbl := Label3D.new()
 		blbl.text = bdef["label"]
 		blbl.font_size = 28
@@ -296,7 +443,7 @@ func _spawn_controls():
 		blbl.outline_size = 5
 		blbl.outline_modulate = Color(0, 0, 0, 0.9)
 		blbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		blbl.transform.origin = Vector3(bx, ROW_Y + LABEL_Y_OFFSET, CONTROL_Z + 0.01)
+		blbl.transform.origin = Vector3(bx, row_y + label_y_offset, control_z + 0.01)
 		add_child(blbl)
 
 
@@ -387,11 +534,13 @@ static func _make_mat(color: Color, emission: float) -> StandardMaterial3D:
 
 
 func _spawn_passive_elements():
+	if passive_elements.is_empty():
+		return
 	# Calculate total width accounting for element widths
 	var total_slots: float = 0
-	for def in PASSIVE_ELEMENTS:
+	for def in passive_elements:
 		total_slots += def.get("width", 1)
-	var total_w2: float = total_slots * SPACING + 0.2
+	var total_w2: float = total_slots * spacing + 0.2
 
 	var panel2 := MeshInstance3D.new()
 	panel2.name = "BackPanel2"
@@ -399,52 +548,46 @@ func _spawn_passive_elements():
 	box2.size = Vector3(total_w2, 0.45, 0.008)
 	panel2.mesh = box2
 	var mat2 := StandardMaterial3D.new()
-	mat2.albedo_color = Color(0.78, 0.75, 0.67)
+	mat2.albedo_color = panel_color
 	mat2.metallic = 0.3
 	mat2.roughness = 0.6
 	panel2.material_override = mat2
-	panel2.transform.origin = Vector3(0, ROW2_Y, -0.005)
+	panel2.transform.origin = Vector3(0, row2_y, -0.005)
 	add_child(panel2)
 
 	var title2 := Label3D.new()
-	title2.text = "PASSIVE ELEMENTS & MONITORS"
+	title2.text = row2_title_text
 	title2.font_size = 28
 	title2.pixel_size = 0.0007
 	title2.modulate = Color(1.0, 1.0, 1.0)
 	title2.outline_size = 5
 	title2.outline_modulate = Color(0.0, 0.0, 0.0, 0.9)
 	title2.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title2.transform.origin = Vector3(0, ROW2_Y + 0.22, CONTROL_Z + 0.01)
+	title2.transform.origin = Vector3(0, row2_y + 0.22, control_z + 0.01)
 	add_child(title2)
 
 	var x_cursor: float = -total_w2 / 2.0 + 0.1
-	for i in PASSIVE_ELEMENTS.size():
-		var def: Dictionary = PASSIVE_ELEMENTS[i]
+	for i in passive_elements.size():
+		var def: Dictionary = passive_elements[i]
 		var label_text: String = def["label"]
 		var elem_width: int = def.get("width", 1)
-		var x_pos: float = x_cursor + (elem_width * SPACING) / 2.0
+		var x_pos: float = x_cursor + (elem_width * spacing) / 2.0
 
-		var frame_size := _get_passive_frame_size(def, elem_width)
-		_add_outline_frame("PassiveFrame_%d" % i, Vector3(x_pos, ROW2_Y, CONTROL_Z), frame_size.x, frame_size.y)
-
+		var element := Node3D.new()
+		element.name = "Passive_%d" % i
+		element.transform.origin = Vector3(x_pos, row2_y, control_z)
+		add_child(element)
 		if def.has("monitor"):
-			# Rams-styled grid monitor with SubViewport waveform
-			var element := Node3D.new()
-			element.name = "Monitor_%d" % i
-			element.transform.origin = Vector3(x_pos, ROW2_Y, CONTROL_Z)
-			add_child(element)
 			RackPassiveElementsScript.build_monitor_grid(element, def.get("slots", 2), def["monitor"])
 		elif def.has("builder"):
-			var element := Node3D.new()
-			element.name = "Passive_%d" % i
-			element.transform.origin = Vector3(x_pos, ROW2_Y, CONTROL_Z)
-			add_child(element)
 			match def["builder"]:
 				"build_speaker_dots": RackPassiveElementsScript.build_speaker_dots(element)
 				"build_speaker_lines": RackPassiveElementsScript.build_speaker_lines(element)
 				"build_speaker_grid": RackPassiveElementsScript.build_speaker_grid(element)
 				"build_vu_meter_v": RackPassiveElementsScript.build_vu_meter_v(element)
 				"build_vu_meter_h": RackPassiveElementsScript.build_vu_meter_h(element)
+
+		_frame_container_content("PassiveFrame_%d" % i, element, Vector2(0.05, 0.05))
 
 		var lbl := Label3D.new()
 		lbl.name = "PassiveLabel_%d" % i
@@ -455,17 +598,19 @@ func _spawn_passive_elements():
 		lbl.outline_size = 5
 		lbl.outline_modulate = Color(0.0, 0.0, 0.0, 0.9)
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lbl.transform.origin = Vector3(x_pos, ROW2_Y - 0.14, CONTROL_Z + 0.01)
+		lbl.transform.origin = Vector3(x_pos, row2_y - 0.14, control_z + 0.01)
 		add_child(lbl)
 
-		x_cursor += elem_width * SPACING
+		x_cursor += elem_width * spacing
 
 
 func _spawn_compounds():
+	if compounds.is_empty():
+		return
 	var total_slots: float = 0
-	for def in COMPOUNDS:
+	for def in compounds:
 		total_slots += def.get("width", 1)
-	var total_w3: float = total_slots * SPACING + 0.2
+	var total_w3: float = total_slots * spacing + 0.2
 
 	var panel3 := MeshInstance3D.new()
 	panel3.name = "BackPanel3"
@@ -473,43 +618,41 @@ func _spawn_compounds():
 	box3.size = Vector3(total_w3, 0.45, 0.008)
 	panel3.mesh = box3
 	var mat3 := StandardMaterial3D.new()
-	mat3.albedo_color = Color(0.78, 0.75, 0.67)
+	mat3.albedo_color = panel_color
 	mat3.metallic = 0.3
 	mat3.roughness = 0.6
 	panel3.material_override = mat3
-	panel3.transform.origin = Vector3(0, ROW3_Y, -0.005)
+	panel3.transform.origin = Vector3(0, row3_y, -0.005)
 	add_child(panel3)
 
 	var title3 := Label3D.new()
-	title3.text = "COMPOUND LAYOUTS"
+	title3.text = row3_title_text
 	title3.font_size = 28
 	title3.pixel_size = 0.0007
 	title3.modulate = Color(1.0, 1.0, 1.0)
 	title3.outline_size = 5
 	title3.outline_modulate = Color(0.0, 0.0, 0.0, 0.9)
 	title3.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title3.transform.origin = Vector3(0, ROW3_Y + 0.22, CONTROL_Z + 0.01)
+	title3.transform.origin = Vector3(0, row3_y + 0.22, control_z + 0.01)
 	add_child(title3)
 
 	var x_cursor: float = -total_w3 / 2.0 + 0.1
-	for i in COMPOUNDS.size():
-		var def: Dictionary = COMPOUNDS[i]
+	for i in compounds.size():
+		var def: Dictionary = compounds[i]
 		var comp_type: String = def["type"]
 		var count: int = def.get("count", 2)
 		var label_text: String = def["label"]
 		var elem_width: int = def.get("width", 1)
-		var x_pos: float = x_cursor + (elem_width * SPACING) / 2.0
+		var x_pos: float = x_cursor + (elem_width * spacing) / 2.0
 
-		var frame_width := elem_width * SPACING - 0.02
-		var frame_size := _get_compound_frame_size(comp_type, count, frame_width)
-		_add_outline_frame("CompFrame_%d" % i, Vector3(x_pos, ROW3_Y, CONTROL_Z), frame_size.x, frame_size.y)
-
+		var frame_width := elem_width * spacing - 0.02
 		var container := Node3D.new()
 		container.name = "Compound_%d" % i
-		container.transform.origin = Vector3(x_pos, ROW3_Y, CONTROL_Z)
+		container.transform.origin = Vector3(x_pos, row3_y, control_z)
 		add_child(container)
 
 		_build_compound(container, comp_type, count, frame_width)
+		_frame_container_content("CompFrame_%d" % i, container, Vector2(0.08, 0.08))
 
 		var lbl := Label3D.new()
 		lbl.name = "CompLabel_%d" % i
@@ -520,10 +663,10 @@ func _spawn_compounds():
 		lbl.outline_size = 5
 		lbl.outline_modulate = Color(0.0, 0.0, 0.0, 0.9)
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lbl.transform.origin = Vector3(x_pos, ROW3_Y - 0.14, CONTROL_Z + 0.01)
+		lbl.transform.origin = Vector3(x_pos, row3_y - 0.14, control_z + 0.01)
 		add_child(lbl)
 
-		x_cursor += elem_width * SPACING
+		x_cursor += elem_width * spacing
 
 
 func _instantiate_compound_control(scene_path: String) -> Node3D:
@@ -648,10 +791,12 @@ func _build_compound(container: Node3D, comp_type: String, count: int, frame_wid
 
 
 func _spawn_new_modules():
+	if new_modules.is_empty():
+		return
 	var total_slots: float = 0
-	for def in NEW_MODULES:
+	for def in new_modules:
 		total_slots += def.get("width", 1)
-	var total_w4: float = total_slots * SPACING + 0.2
+	var total_w4: float = total_slots * spacing + 0.2
 
 	var panel4 := MeshInstance3D.new()
 	panel4.name = "BackPanel4"
@@ -659,56 +804,39 @@ func _spawn_new_modules():
 	box4.size = Vector3(total_w4, 0.45, 0.008)
 	panel4.mesh = box4
 	var mat4 := StandardMaterial3D.new()
-	mat4.albedo_color = Color(0.78, 0.75, 0.67)
+	mat4.albedo_color = panel_color
 	mat4.metallic = 0.3
 	mat4.roughness = 0.6
 	panel4.material_override = mat4
-	panel4.transform.origin = Vector3(0, ROW4_Y, -0.005)
+	panel4.transform.origin = Vector3(0, row4_y, -0.005)
 	add_child(panel4)
 
 	var title4 := Label3D.new()
-	title4.text = "NEW MODULES + TEXT DISPLAYS"
+	title4.text = row4_title_text
 	title4.font_size = 28
 	title4.pixel_size = 0.0007
 	title4.modulate = Color(1.0, 1.0, 1.0)
 	title4.outline_size = 5
 	title4.outline_modulate = Color(0.0, 0.0, 0.0, 0.9)
 	title4.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title4.transform.origin = Vector3(0, ROW4_Y + 0.28, CONTROL_Z + 0.01)
+	title4.transform.origin = Vector3(0, row4_y + 0.28, control_z + 0.01)
 	add_child(title4)
 
-	var copper := Color(0.75, 0.38, 0.13)
-	var dark := Color(0.10, 0.10, 0.10)
-	var cream := Color(0.78, 0.75, 0.67)
-
 	var x_cursor: float = -total_w4 / 2.0 + 0.1
-	for i in NEW_MODULES.size():
-		var def: Dictionary = NEW_MODULES[i]
+	for i in new_modules.size():
+		var def: Dictionary = new_modules[i]
 		var mod_type: String = def["type"]
 		var label_text: String = def["label"]
 		var elem_width: int = def.get("width", 1)
-		var x_pos: float = x_cursor + (elem_width * SPACING) / 2.0
-
-		# Black accent frame
-		var frame := MeshInstance3D.new()
-		frame.name = "NewFrame_%d" % i
-		var frame_box := BoxMesh.new()
-		frame_box.size = Vector3(elem_width * SPACING - 0.02, COMPOUND_FRAME_HEIGHT, 0.004)
-		frame.mesh = frame_box
-		var frame_mat := StandardMaterial3D.new()
-		frame_mat.albedo_color = Color(0.25, 0.23, 0.20)
-		frame_mat.metallic = 0.3
-		frame_mat.roughness = 0.7
-		frame.material_override = frame_mat
-		frame.transform.origin = Vector3(x_pos, ROW4_Y, CONTROL_Z - 0.004)
-		add_child(frame)
+		var x_pos: float = x_cursor + (elem_width * spacing) / 2.0
 
 		var container := Node3D.new()
 		container.name = "NewModule_%d" % i
-		container.transform.origin = Vector3(x_pos, ROW4_Y, CONTROL_Z)
+		container.transform.origin = Vector3(x_pos, row4_y, control_z)
 		add_child(container)
 
-		_build_new_module(container, mod_type, copper, dark, cream)
+		_build_new_module(container, mod_type, accent_color, dark_color, cream_color)
+		_frame_container_content("NewFrame_%d" % i, container, Vector2(0.06, 0.06), Vector2(0.01, 0.01))
 
 		var lbl := Label3D.new()
 		lbl.name = "NewLabel_%d" % i
@@ -720,10 +848,10 @@ func _spawn_new_modules():
 		lbl.outline_modulate = Color(0.0, 0.0, 0.0, 0.9)
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		lbl.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-		lbl.transform.origin = Vector3(x_pos, ROW4_Y - 0.18, CONTROL_Z + 0.01)
+		lbl.transform.origin = Vector3(x_pos, row4_y - 0.18, control_z + 0.01)
 		add_child(lbl)
 
-		x_cursor += elem_width * SPACING
+		x_cursor += elem_width * spacing
 
 
 func _build_new_module(c: Node3D, t: String, copper: Color, dark: Color, cream: Color) -> void:
@@ -1015,16 +1143,18 @@ func _build_new_module(c: Node3D, t: String, copper: Color, dark: Color, cream: 
 
 
 func _add_title():
+	if main_title_text.is_empty():
+		return
 	var title := Label3D.new()
 	title.name = "Title"
-	title.text = "INTERACTABLE CONTROLS"
+	title.text = main_title_text
 	title.font_size = 36
 	title.pixel_size = 0.0008
 	title.modulate = Color(0.10, 0.10, 0.10)
 	title.outline_size = 3
 	title.outline_modulate = Color(0.7, 0.68, 0.64, 0.4)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.transform.origin = Vector3(0, ROW_Y + 0.28, CONTROL_Z + 0.005)
+	title.transform.origin = Vector3(0, row_y + 0.28, control_z + 0.005)
 	add_child(title)
 
 

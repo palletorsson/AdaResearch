@@ -1,132 +1,119 @@
 # 06 The Quad
 
-In Primitives_Polythedra, you watched three triangular faces converge at a single vertex — a trihedron, a corner of space, volume beginning to form but not yet closed. The triangle is the GPU's atomic unit: three points, one plane, irreducible. Three triangles at a vertex give you a corner. Six give you a tetrahedron. But the triangle's rigidity is its defining constraint. Every face must be flat. Every surface becomes a tessellation of minimal units, rigid by construction.
+## From Three Points to Eight
 
-The cube breaks from this. Eight vertices. Twelve edges. Six faces — not triangles, but quads. A quad is not atomic; it can be non-planar, flexible, deformable. It introduces a category of geometry that can be touched and perturbed without collapsing — a shape with agency baked into its structure.
+In Primitives_Polythedra we met the trihedron: three triangular faces meeting at a single vertex, a corner of space that gestures at volume without completing it. A cube completes it. Eight vertices, twelve edges, six faces — the minimum structure that can contain.
 
-This map assembles that cube from scratch, step by step, in front of you.
+This map shows that completion happening in real time. Four `animatedcubebuilder` instances run simultaneously at positions (2,4), (4,4), (2,8), and (4,8), each stepping through the same construction sequence: vertices first, then edges, then faces, then final mesh. Watching them in parallel makes something visible that a single instance obscures: the construction is a protocol. Every cube that has ever been built follows the same steps.
 
----
-
-## Eight Points
-
-The cube starts where everything starts: a point. Eight of them, arranged to mark the corners of a volume that doesn't yet exist.
-
-The `animatedcubebuilder` constructs these first, in `create_vertex_spheres()`. Eight `Vector3` positions define the cube's corners at unit scale:
+The sequence starts at the bottom of the scene hierarchy and works upward. Vertices are just positions — eight `Vector3` values at the corners of a unit cube:
 
 ```gdscript
-var vertices = [
-    Vector3(-0.5, -0.5, -0.5),
-    Vector3( 0.5, -0.5, -0.5),
-    Vector3( 0.5,  0.5, -0.5),
-    Vector3(-0.5,  0.5, -0.5),
-    Vector3(-0.5, -0.5,  0.5),
-    Vector3( 0.5, -0.5,  0.5),
-    Vector3( 0.5,  0.5,  0.5),
-    Vector3(-0.5,  0.5,  0.5),
+var vertices: Array[Vector3] = [
+    Vector3(-0.5, -0.5, -0.5),  # 0: left-bottom-back
+    Vector3( 0.5, -0.5, -0.5),  # 1: right-bottom-back
+    Vector3( 0.5,  0.5, -0.5),  # 2: right-top-back
+    Vector3(-0.5,  0.5, -0.5),  # 3: left-top-back
+    Vector3(-0.5, -0.5,  0.5),  # 4: left-bottom-front
+    Vector3( 0.5, -0.5,  0.5),  # 5: right-bottom-front
+    Vector3( 0.5,  0.5,  0.5),  # 6: right-top-front
+    Vector3(-0.5,  0.5,  0.5),  # 7: left-top-front
 ]
 ```
 
-Eight positions in 3D space. No edges yet. No faces. Just presence — the geometric minimum needed to imply a cube without constructing one.
+These eight positions define the cube completely. Everything that follows — edges, faces, normals, UVs — is derived from them. The vertices are the only thing the cube _is_. The rest is how it _appears_.
 
-This is what the sequence has been building toward. A point is `Vector3(x, y, z)`: position without extension. Here, eight points occupy positions that a cube would fill. The cube is already latent in their arrangement. The assembly reveals what is structurally implied.
+## The Construction Sequence
 
-The animation begins in `animate_vertices()`. Spheres appear at each corner — small, bright, marking existence in void. The mind draws the cube before the edges arrive.
+The `animatedcubebuilder` steps through four stages: `animate_vertices`, `animate_edges`, `animate_triangles`, then `create_final_mesh`. Each stage reveals a different layer of the same structure.
 
----
+Stage one: eight spheres placed at corners. The shape is already implied. You can read "cube" from eight arranged dots because the topology is latent in the geometry even before edges exist.
 
-## Twelve Edges
-
-Connection transforms isolated points into topology. `create_edge_lines()` draws twelve line segments between the eight vertices — four along the bottom face, four along the top, four vertical. Each edge is a mesh built by `create_line_mesh()`:
+Stage two adds edges. Each edge is a line mesh connecting two vertices. The builder constructs them procedurally — a cylinder stretched between two points:
 
 ```gdscript
 func create_line_mesh(start: Vector3, end: Vector3) -> MeshInstance3D:
-    var mesh = ImmediateMesh.new()
-    mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-    mesh.surface_add_vertex(start)
-    mesh.surface_add_vertex(end)
-    mesh.surface_end()
-
-    var mat = StandardMaterial3D.new()
-    mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-    mat.albedo_color = Color(0.9, 0.9, 1.0)
-
-    var instance = MeshInstance3D.new()
-    instance.mesh = mesh
-    instance.material_override = mat
-    return instance
+    var direction = end - start
+    var length = direction.length()
+    var mesh = CylinderMesh.new()
+    mesh.height = length
+    mesh.top_radius = 0.01
+    mesh.bottom_radius = 0.01
+    var line = MeshInstance3D.new()
+    line.mesh = mesh
+    line.position = (start + end) * 0.5
+    line.look_at(start, Vector3.UP)
+    line.rotate_object_local(Vector3.RIGHT, PI * 0.5)
+    return line
 ```
 
-`Mesh.PRIMITIVE_LINES` is the key. The GPU doesn't know about edges — it knows about vertices and primitives. A line is two vertices connected by the simplest possible primitive: no fill, no normal, just direction. The edge is topology made visible.
+A cube has twelve edges. This function doesn't know that. It only knows two points. The topology — which vertices connect to which — is a separate fact encoded in an edge list, not in this function. Geometry and topology are always distinct, even when they appear merged.
 
-Twelve is not arbitrary. It is the minimum required to enclose a cube without redundancy. Remove one edge and the cube opens. Add one and you have a cycle that loops somewhere it doesn't need to go. Twelve is the exact number of constraints required to define a cube as a graph without over-determining it.
+Stage three adds triangle pairs as faces. Stage four collapses everything into a single optimized `ArrayMesh`. The individual edge and face objects disappear. What remains is indistinguishable from a cube built any other way.
 
-`animate_edges()` introduces these twelve sequentially, or in groups. What you see in the VR space is a wire frame emerging — the skeleton before the skin. At this stage, the cube has structure but no surface. It encloses space by implication, not by material fact.
+## The Quad Is Two Triangles
 
----
+Primitives_Polythedra worked entirely in triangles. The trihedron's faces are equilateral triangles — the GPU's native unit. A cube's faces are squares, and squares don't exist in the GPU's vocabulary.
 
-## Triangles and the Face Problem
-
-After edges, `create_triangle_meshes()` introduces faces — but not as quads. Under the hood, every face of the cube is two triangles. This is the GPU's requirement, not the cube's.
+Every rectangular face is two triangles:
 
 ```gdscript
-# Front face vertices: 0,1,2,3 (a planar quad)
-# GPU requires triangles: split into (0,1,2) and (0,2,3)
-# For a planar quad, both triangulations are equivalent
-# For a non-planar quad, the diagonal determines the fold
-
-func create_triangle_meshes():
-    var surface_tool = SurfaceTool.new()
-    surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
-    # Front face — two triangles sharing diagonal 0→2
-    surface_tool.add_vertex(vertices[0])
-    surface_tool.add_vertex(vertices[1])
-    surface_tool.add_vertex(vertices[2])
-    surface_tool.add_vertex(vertices[0])
-    surface_tool.add_vertex(vertices[2])
-    surface_tool.add_vertex(vertices[3])
-    # ... remaining five faces
+# One face of a cube, as the GPU sees it
+var face_verts: Array[Vector3] = [
+    Vector3(-0.5, -0.5, 0),  # bottom-left
+    Vector3( 0.5, -0.5, 0),  # bottom-right
+    Vector3( 0.5,  0.5, 0),  # top-right
+    Vector3(-0.5,  0.5, 0),  # top-left
+]
+# Triangle 1: bottom-left → bottom-right → top-right
+# Triangle 2: bottom-left → top-right → top-left
+var indices: Array[int] = [0, 1, 2,   0, 2, 3]
 ```
 
-Here is the first moment where technical reality diverges from geometric ideal. A quad face — say, the front of the cube — is defined by four coplanar vertices. It's a flat square. But the GPU's rasterizer only fills triangles, so every quad is tessellated: split along a diagonal into two triangles, then rendered.
+The quad is an abstraction that modeling software provides and the GPU discards. When you drag a corner vertex, both triangles sharing that vertex move. The face deforms as a unit, but it's still two independent triangle responses to one displacement.
 
-For a cube, this is invisible. All four vertices of each face are coplanar, so the diagonal creates no fold. The quad and its triangulated representation are identical. But this breaks for non-planar quads — the kind that appear in organic modeling, cloth simulation, terrain meshes. When a quad's four corners are not coplanar, the triangulation diagonal determines which fold you get. Geometry becomes contingent on an algorithm's arbitrary choice.
-
-The cube hides this contingency. It is the cleanest possible quad surface: six faces, all perfectly planar. Later maps show what happens when planarity breaks.
-
----
-
-## The Net: Two Dimensions Proving Three
-
-The `polyhedron_nets_cube` artifact runs a different argument. It doesn't assemble the cube from vertices — it folds it from a flat pattern.
-
-A net is a 2D unfolding of a 3D surface. Cut a cube along seven of its twelve edges and lay it flat. The result is a cross of six squares — the cube's faces rearranged into a plane. Fold it back and the cube re-emerges. `_create_cube_faces()` builds this from six `PlaneMesh` instances, each mounted on a hinge node:
+`polyhedron_nets_cube` makes this explicit from another angle. It constructs each face as a `PlaneMesh` — Godot's quad primitive — before any folding occurs:
 
 ```gdscript
-func _create_cube_faces():
-    var s = edge_length
-    _cube_root = Node3D.new()
-    add_child(_cube_root)
-
-    # Center face — the base, never moves
-    var center_face = _make_face(material)
-    _cube_root.add_child(center_face)
-
-    # Top face: hinge positioned at the fold line between center and top
-    var top_hinge = Node3D.new()
-    top_hinge.position = Vector3(0, 0, s * 0.5)
-    _cube_root.add_child(top_hinge)
-
-    var top_face = _make_face(material)
-    top_face.position = Vector3(0, 0, s * 0.5)
-    top_hinge.add_child(top_face)
-    _cube_hinges["top"] = top_hinge
+func _make_face(material: Material) -> MeshInstance3D:
+    var mesh = PlaneMesh.new()
+    mesh.size = Vector2(edge_length, edge_length)
+    var face = MeshInstance3D.new()
+    face.mesh = mesh
+    face.material_override = material
+    return face
 ```
 
-The hinge node is the key abstraction. Each face is parented to a hinge positioned at the fold line. When the hinge rotates, the face rotates around it. `_apply_fold()` drives all hinges simultaneously from a single `fold_progress` value:
+Six calls to `_make_face`. Six squares. One cube waiting to happen.
+
+## The Net and Its Hinges
+
+The cube net is a cross: one center square, four squares extending from each cardinal edge, one more attached to an arm. Six faces, unfolded flat. The net is the cube's surface without its volume — topology preserved, spatial relations deferred.
+
+`polyhedron_nets_cube` builds this with explicit hinge nodes, one per folding edge:
+
+```gdscript
+# Pivot lives at the shared edge between center and top face
+var top_hinge = Node3D.new()
+top_hinge.name = "TopHinge"
+top_hinge.position = Vector3(0, 0, s * 0.5)
+_cube_root.add_child(top_hinge)
+
+# Face hangs from the pivot, extends outward
+var top_face = _make_face(material)
+top_face.position = Vector3(0, 0, s * 0.5)
+top_hinge.add_child(top_face)
+_cube_hinges["top"] = top_hinge
+```
+
+The hinge is at the edge. The face extends outward. Rotating the hinge rotates the face around that edge — exactly the motion of folding a physical net. The code structure mirrors the physical structure.
+
+Folding is driven by a single float: `fold_progress`. At 0.0, flat. At 1.0, cube. `_apply_fold` reads that value and sets rotation on every hinge simultaneously:
 
 ```gdscript
 func _apply_fold():
+    if _cube_hinges.is_empty():
+        return
     var angle = deg_to_rad(90.0) * fold_progress
     if _cube_hinges.has("top"):
         _cube_hinges["top"].rotation.x = angle
@@ -137,16 +124,15 @@ func _apply_fold():
     if _cube_hinges.has("right"):
         _cube_hinges["right"].rotation.z = -angle
     if _cube_hinges.has("back"):
-        # Back face must wait for the right face to clear — otherwise collision
+        # Back face follows right — delayed so it closes last
         var back_progress = clamp((fold_progress - 0.15) / 0.85, 0.0, 1.0)
-        _cube_hinges["back"].rotation.z = -deg_to_rad(90.0) * back_progress
+        var back_angle = deg_to_rad(90.0) * back_progress
+        _cube_hinges["back"].rotation.z = -back_angle
 ```
 
-`fold_progress` runs from 0.0 (flat net) to 1.0 (closed cube). Each face folds ninety degrees. The back face is delayed — `(fold_progress - 0.15) / 0.85` — because it must wait for the right face to begin moving, or they collide in space.
+The back face is delayed. `clamp((fold_progress - 0.15) / 0.85, 0.0, 1.0)` remaps the 0–1 range so back doesn't start moving until fold_progress reaches 0.15. The structural constraint of how a real net must fold — the back face can't close until the right arm has swung up — is encoded as a numeric offset in a lerp. Physics becomes arithmetic.
 
-This sequencing is not an implementation detail. It encodes the order-dependency of folding: some faces cannot move until others are out of the way. Origami has the same constraint. The fold order is structural.
-
-`_play_fold_animation()` drives the whole sequence through a Tween:
+The animation is a tween over that one float:
 
 ```gdscript
 func _play_fold_animation():
@@ -158,83 +144,79 @@ func _play_fold_animation():
         .set_ease(Tween.EASE_IN_OUT)
 ```
 
-`TRANS_SINE` with `EASE_IN_OUT` gives the fold a biological quality — it accelerates in, decelerates out. The faces arrive rather than snap. A linear fold reads as mechanical; a sine fold reads as intentional. The easing is a claim about how form comes into being.
+One property. Everything else follows from `_apply_fold`. This is what a well-designed setter does: isolate the state change so it propagates correctly regardless of what caused it.
 
----
+## Volume and the Invariant Reference
 
-## Volume and Enclosure
+The cube is the first shape in this sequence that encloses space. A point has position. A line has length. A triangle has area. A cube has volume — which means it has an inside. You can be inside a cube or outside it. That distinction doesn't exist for any primitive below it.
 
-The net proves something the vertex assembly doesn't: the cube's surface is continuous. Six faces, properly folded, enclose a volume completely. No gaps. The surface is an exact boundary between inside and outside.
-
-This is the cube's ontological claim. The tetrahedron from Primitives_Polythedra has four faces — the minimum for a closed 3D solid. The cube has six. It encloses more volume relative to its surface area, and its faces align perpendicular to the coordinate axes — which is why so much of 3D graphics defaults to cube-based reasoning. Bounding boxes, voxels, octrees, shadow maps, skyboxes. The cube is Cartesian space made solid.
-
-It doesn't occur in nature. Crystals approach it; perfect cubes require manufacturing. It's a shape that belongs to mathematics and to machines.
-
-When `create_final_mesh()` generates the completed solid, the construction scaffolding — the vertex spheres, the wire edges, the translucent triangles — gives way to an opaque mesh. The process disappears into the product. What you see in VR is a cube that wasn't there at the start of the animation and now is. Assembly as argument. The cube didn't arrive — it was built.
-
----
-
-## The Dark Sphere as Invariant
-
-The `dark_sphere` at grid position `(3,4)` — the center of the layout — stays constant while the cube assembles around it. Its `_process` loop is deliberate in its restraint:
+The `dark_sphere` at (3,4) serves as perceptual anchor for this. Its emission pulses on a sine curve. Its rotation wobbles slightly. It changes very little:
 
 ```gdscript
 func _process(delta: float) -> void:
     _time_elapsed += delta
-
-    # Slow rotation with minimal wobble — never urgent
     if _sphere_mesh:
         _sphere_mesh.rotation.y += rotation_speed * delta
         _sphere_mesh.rotation.x = sin(_time_elapsed * 0.4) * 0.05
-
-    # Sinusoidal emission pulse — barely perceptible
     if _sphere_material:
         var pulse_t := (sin(_time_elapsed * pulse_speed) + 1.0) * 0.5
         _sphere_material.emission_energy_multiplier = lerpf(pulse_min, pulse_max, pulse_t)
 ```
 
-`rotation_speed` defaults to 0.15. `pulse_speed` to 1.2. `pulse_min` to 0.05. The sphere barely moves. Its emission barely fluctuates. It marks the inhabited space without competing for attention.
+The X rotation wobble is `sin(_time_elapsed * 0.4) * 0.05` — barely perceptible on its own, but the slight motion makes it read as present rather than frozen. The sphere doesn't teach volume. It creates the perceptual conditions for the cubes to teach it.
 
-In VR, it serves a perceptual function: it provides a stable reference against which the cube's assembly registers as change. Without a fixed point, transformation is harder to perceive — the eye has nothing to compare against. The sphere is the invariant that makes the cube's becoming legible.
+Invariant references don't require complexity. The dark sphere works because it changes less than everything around it.
 
-This is a design principle, not decoration. When building interactive geometry, you often need one element that doesn't change — not because it's unimportant, but because its constancy makes everything else readable. The sphere stays simple so the cube's structure can be felt against it.
+## Constraint as Interface
 
----
+The fold mechanism demonstrates something beyond net-to-cube transformation. A hinge is a constraint — it allows rotation around one axis and prohibits all other motion. The cube corner grab handles work the same way: they allow translation along permitted degrees of freedom while the enclosure holds.
 
-## Interactive Constraint: Agency Within a System
+`fold_progress` is the parameter that expresses this. It doesn't say which face rotates or how much each hinge moves. It says only: "how folded is this?" The individual hinge behaviors are encoded separately. The learner interacts with one float. The geometry responds as a system.
 
-The `animatedcubebuilder` includes grab handles — interactive points on the assembled cube that you can take in VR and pull. The cube doesn't collapse when you perturb it. It deforms within limits, then holds its new configuration.
+The `apply_grid_config` function exposes this parameter publicly, letting the map file configure behavior without touching implementation:
 
-This is the map's central argument.
+```gdscript
+func apply_grid_config(config_data: Dictionary) -> void:
+    if config_data.has("fold_duration"):
+        fold_duration = float(config_data.fold_duration)
+    if config_data.has("fold_delay"):
+        fold_delay = float(config_data.fold_delay)
+    if config_data.has("auto_fold"):
+        auto_fold = _parse_bool(config_data.auto_fold)
+    if net_type == "cube" and auto_fold:
+        _play_fold_animation()
+```
 
-A triangle is rigid. Three vertices, three edges — fully determined. You cannot deform a triangle without changing edge lengths or breaking connections. It is the minimal rigid polygon.
+Write `#fold_duration:6` in the map string and the net folds more slowly. The constraint structure stays the same. The timing changes. This is the difference between a parameter and a control — a parameter maps to intention ("how folded"), a control maps to action ("rotate this face"). Parameters are higher-abstraction interfaces over lower-level mechanisms.
 
-A quad is not rigid. Four vertices, four edges — one degree of freedom remains. In 2D, a quad can be sheared into a parallelogram without changing edge lengths. In 3D, a quad's four corners can be pulled out of plane, creating a saddle shape — a non-planar configuration that a triangle cannot express. The quad admits deformation.
+## Motion Curves Are Statements
 
-The cube's faces are quads. When you grab a corner in the VR space and drag, you exercise that degree of freedom. The system constrains you — edges resist, opposite corners respond — but within those constraints, the shape yields. Agency is real; the system bounds it.
+One detail in `_play_fold_animation` worth sitting with:
 
-This is the QFEP signature of the map. The cube's enclosure is stable because its constraints are sufficient — but not over-determined. There is exactly enough structure to hold the shape, and exactly enough slack to allow touch. A perfectly rigid solid wouldn't feel interactive. A structureless volume wouldn't feel like a cube. The quad mesh sits at the productive edge between closure and openness — a local manifestation of λ ≈ 0.3–0.5: ordered enough to maintain identity, flexible enough to respond.
+```gdscript
+tween.tween_property(self, "fold_progress", 1.0, fold_duration) \
+    .set_trans(Tween.TRANS_SINE) \
+    .set_ease(Tween.EASE_IN_OUT)
+```
 
-Later sequences return to this. Cloth simulation is a quad mesh under gravity and wind. Soft bodies are quad lattices with spring constraints. Physics engines for organics are built on the deformability this map introduces. The cube is the simplest possible introduction to geometry that yields.
+`TRANS_SINE` means the fold doesn't move at constant speed. It accelerates at the start, decelerates at the end. `EASE_IN_OUT` applies this to both endpoints. The cube assembles with a breathiness that purely linear motion lacks.
 
----
+This is not an aesthetic choice. Human perception of motion is nonlinear. A fold that arrives with the right deceleration reads as physically plausible — as if something with mass settled into position. The sine curve is a kinematic lie that produces a truer visual experience than the mathematically correct linear interpolation.
 
-## Toward Ignorance
+Every animation curve makes a claim about what kind of thing you're watching. `TRANS_SINE` + `EASE_IN_OUT` says: something soft, something with mass, something that belongs to physics. Not a data transaction. A physical event.
 
-Primitives_Ignorance, the next map, performs a reversal. After this sequence has built up a vocabulary — points, lines, triangles, tetrahedra, cubes — it asks you to unknow it. The primitive is no longer the simplest unit of geometry; it becomes the simplest unit of assumption.
+## Simultaneity and Protocol
 
-The cube you assembled here is already a construct. Its perpendicularity to the coordinate axes, its equal-length edges, its planar faces — these are not properties of space. They are decisions. The cube is a specific solution to the problem of enclosure, not the only one.
+The four `animatedcubebuilder` instances run synchronized. Watching four cubes assemble in parallel exposes what a single instance hides: each is doing the same thing, governed by the same functions, producing identical results. That's not a coincidence. It's how procedural construction works.
 
-The net shows this obliquely: there are eleven valid nets for a cube. Eleven different ways to unfold the same surface. The cube is not a unique unfolding; it is a family of decisions about where to cut. Primitives_Ignorance asks what happens when you stop treating those decisions as natural.
+The builder doesn't store the cube — it generates it. `create_vertex_spheres`, `create_edge_lines`, `create_triangle_meshes`, `create_final_mesh` are called in sequence, driven by `_process(delta)`. Every frame tests where in the animation timeline the builder sits. The geometry emerges from time, not from a stored description.
 
-This map ends with a complete solid assembled in front of you. The next begins by asking whether you know what you're looking at.
-
----
+This gap — between the data that drives construction and the visual state you see — is preparation for what comes next. In Primitives_Ignorance, the familiar shapes from this sequence (points, lines, cubes) are re-encountered as constructs rather than givens. The map asks whether formal mastery of the protocol means you understand what you've built. The cube you can fold and manipulate here is not the cube as concept. This map teaches you to make one. The next asks you to question it.
 
 ## Possible Artifacts
 
-**corner_constraint_visualizer** — Draws the manifold of valid positions for a single quad corner as you drag it, given that connected edges must maintain their length. Makes the deformation space of a quad legible as geometry rather than as behavior. The current map shows that quads flex; this would show exactly how.
+**vertex_displacement_demo** — A single cube where each corner vertex is grabbable, watching edge lengths and face angles change in real time as a vertex is displaced. The `animatedcubebuilder` shows construction; this shows deformation. The link between vertex position and face shape becomes tactile rather than observed.
 
-**cube_stability_comparison** — Side-by-side display of a triangle, a quad, and a cube face under the same perturbation force. The triangle holds. The quad shears. The cube face deforms within its neighbors' constraints. The rigidity gradient from simplex to quad mesh is the map's core argument — it currently lives in the assembly animation and the grab handles, but not as explicit comparison.
+**fold_manual** — An instance of `polyhedron_nets_cube` with `auto_fold: false` and a physical lever or slider driving `fold_progress` directly. The learner closes the net by hand. The delay in the back hinge — the constraint that prevents it from closing before the right arm has swung — becomes something felt, not watched.
 
-**net_selection** — An interactable displaying all eleven valid cube nets laid flat, with the ability to fold any of them into the same cube. Currently only one net is shown. The eleven-net space makes the argument that the cube is not its unfolding but its result — the surface topology is invariant; its planar representation is not. This connects directly to Primitives_Ignorance's theme of assumption made visible.
+**inside_out_cube** — A cube rendered with inverted normals, faces culled inward so only interior surfaces are visible. The learner steps into it. Inside/outside as an embodied distinction, not a diagrammatic one.

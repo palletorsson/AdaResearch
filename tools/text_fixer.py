@@ -175,7 +175,162 @@ def composite_score(map_name: str, file_role: str,
 
 # ── Writer Pro interaction ──────────────────────────────────────────────
 
+# ── Rule routing: failure pattern → theorist directives ────────────────
+# The populate prompt is generic per-file-role. When a file fails specific
+# metrics, we inject supplementary directives drawn from the curriculum's
+# theoretical commitments. Each directive is written in the voice of the
+# theorist's central concept — not a quote, a compressed operational rule.
+#
+# Keys are the failure-tag prefixes returned by text_metrics.evaluate_thresholds.
+# Values are directive strings that will be concatenated into directionText.
+
+FAILURE_DIRECTIVES: dict[str, str] = {
+    "max_paragraph_sentences": (
+        "BARTHES + PLATEAUS — paragraph length. Break every paragraph longer "
+        "than three sentences. Prefer fragments over continuous explanation. "
+        "If you can cut the connective 'and so', 'thus', 'therefore', cut it. "
+        "The reader finds the rhythm; the author does not impose it."
+    ),
+    "paragraphs_max": (
+        "BARTHES — too many paragraphs. Prose is not a list. Consolidate "
+        "adjacent paragraphs that say one thing. Keep only the paragraph breaks "
+        "that carry a real shift in thought."
+    ),
+    "word_count_min": (
+        "TECHNICAL — the text is too short. Expand by grounding each concept "
+        "in a concrete operation from one of the listed artifacts: name the "
+        "function, name the variable, show what changes when it runs. No "
+        "generic padding."
+    ),
+    "word_count_max": (
+        "AGAMBEN — remove everything whose removal does not destroy an argument. "
+        "The reader does not need connective tissue they can supply themselves."
+    ),
+    "code_ratio_min": (
+        "ARTIFACT + HARAWAY — more code, less prose about code. Every prose "
+        "paragraph must be replaced with the actual GDScript it describes or "
+        "cut entirely. Situated knowledge means showing the mechanism, not "
+        "glossing it."
+    ),
+    "code_ratio_max": (
+        "CRITICAL — too much code, too little argument. Keep only the code "
+        "blocks that carry teaching weight. Add one short paragraph of "
+        "conceptual framing per section."
+    ),
+    "forbidden_words": (
+        "VOICE — strip AI-register vocabulary on sight. No 'delves', 'tapestry', "
+        "'fascinating', 'comprehensive', 'furthermore', 'moreover', 'landscape of', "
+        "'navigating', 'intricate', 'essence of'. Replace with a concrete verb."
+    ),
+    "caption_max_words": (
+        "WITTGENSTEIN — every caption is an imperative of fifteen words or fewer. "
+        "If the caption cannot be spoken as a command, rewrite it until it can."
+    ),
+    "captions_missing": (
+        "VALIDATION — every code block must be preceded by exactly one caption "
+        "line. No naked code blocks. The caption is the teaching."
+    ),
+}
+
+# Baseline directives per file role, always included when fixing that role.
+FILE_ROLE_BASELINE: dict[str, str] = {
+    "technical.md": (
+        "HARAWAY — this tutorial is situated. Every function, variable, and "
+        "behavior described must exist in one of the listed artifacts. Cite the "
+        "function by name. If you cannot point to the real code, do not invent "
+        "an API: name the absence instead ('this map does not yet visualize X')."
+    ),
+    "tutorial.md": (
+        "HARAWAY + AHMED — code-first, situated. Each block cites a real export, "
+        "function, or signal from a listed artifact. The caption orients the "
+        "reader toward what the block does, not what the concept is."
+    ),
+    "critical.md": (
+        "BARAD + AHMED — critical reflection must anchor in a specific scene or "
+        "artifact named in map_data.json. Abstraction without anchor is not "
+        "criticism, it is drift. Keep the theoretical tension visible."
+    ),
+    "blurb.md": (
+        "AHMED — orientation in two or three short paragraphs. What does the "
+        "learner encounter? What crack does the encounter open? Name the "
+        "artifact. Do not describe 'the map' in the abstract."
+    ),
+}
+
+
+def extract_failure_tags(metrics_result: dict[str, Any]) -> list[str]:
+    """Given a text_metrics evaluation, return the list of failure tag keys
+    that we have routing directives for."""
+    if not metrics_result.get("exists", False):
+        return []
+    failures = metrics_result.get("metrics_failure_list") or metrics_result.get(
+        "evaluation", {}).get("failures", [])
+    tags: list[str] = []
+    for f in failures:
+        key = str(f).split(":")[0].strip()
+        if key in FAILURE_DIRECTIVES and key not in tags:
+            tags.append(key)
+    # Low grounding is not a metrics failure, it comes from the grounding scorer
+    if metrics_result.get("grounding_ratio", 1.0) < 0.8:
+        if "low_grounding" not in tags:
+            tags.append("low_grounding")
+    return tags
+
+
+def build_direction_text(file_role: str, failure_tags: list[str]) -> str:
+    """Compose a directionText payload from baseline + routed directives."""
+    chunks: list[str] = []
+    base = FILE_ROLE_BASELINE.get(file_role)
+    if base:
+        chunks.append(base)
+    # Special-case low_grounding — uses the baseline grounding directive
+    routed = [t for t in failure_tags if t in FAILURE_DIRECTIVES]
+    for tag in routed:
+        chunks.append(FAILURE_DIRECTIVES[tag])
+    if "low_grounding" in failure_tags:
+        chunks.append(
+            "HARAWAY — the previous draft referenced functions and classes that "
+            "do not exist in any listed artifact. Do not invent APIs. If an "
+            "artifact has no GDScript for a concept, name that gap explicitly "
+            "instead of describing a non-existent interface."
+        )
+    return "\n\n".join(chunks)
+
+
+# ── Rate-limit detection ────────────────────────────────────────────────
+# Anthropic API has burst limits. When hit, populate's LLM call throws fast,
+# the SSE stream closes without a progress 'done' event, and our caller
+# sees `no done event in stream` in ~1.5-2s. Track this pattern across
+# sequential calls and back off exponentially when it recurs.
+
+_fast_fail_streak = 0
+_rate_limit_pause_s = 600  # 10 min initial pause
+
+
+def record_call_result(elapsed_s: float, had_done_event: bool) -> None:
+    """Update rate-limit streak counter after each populate call."""
+    global _fast_fail_streak, _rate_limit_pause_s
+    is_fast_failure = elapsed_s < 5.0 and not had_done_event
+    if is_fast_failure:
+        _fast_fail_streak += 1
+    else:
+        _fast_fail_streak = 0
+        _rate_limit_pause_s = 600  # reset back to 10 min on recovery
+
+
+def should_pause_for_rate_limit() -> int:
+    """Return seconds to sleep if we've hit a rate limit, else 0."""
+    global _rate_limit_pause_s
+    if _fast_fail_streak >= 3:
+        pause = _rate_limit_pause_s
+        # Exponential backoff: next pause is longer
+        _rate_limit_pause_s = min(_rate_limit_pause_s * 2, 3600)  # cap at 1h
+        return pause
+    return 0
+
+
 def call_populate(map_name: str, file_role: str,
+                  direction_text: str | None = None,
                   timeout: int = 300) -> dict[str, Any]:
     """POST /api/maps/populate — regenerate the file from the map's artifacts.
 
@@ -189,11 +344,13 @@ def call_populate(map_name: str, file_role: str,
     is read through completion."""
     # NOTE: populate preserves non-scaffold files by design. Callers must
     # delete the target file first to force regeneration.
-    payload = {
+    payload: dict[str, Any] = {
         "fileType": file_role,
         "mapNames": [map_name],
         "skipScaffold": True,  # process missing + scaffold files (default)
     }
+    if direction_text:
+        payload["directionText"] = direction_text
     url = f"{WRITER_PRO}/api/maps/populate"
     req = urllib.request.Request(
         url,
@@ -263,6 +420,22 @@ def fix_one(map_name: str, file_role: str, dry_run: bool = False,
         result["action"] = "skip_ok"
         return result
 
+    # Protect high-grounding files from regeneration damage.
+    # If the existing text cites real code correctly (grounding ≥ 0.9),
+    # populate's from-scratch regeneration is likely to erode that ground
+    # truth even when the metrics directive is correct. Those files need
+    # REWRITE tooling (not yet available) — not regeneration.
+    #
+    # Only applies to files that actually have code to ground against. Files
+    # without fenced code blocks get a synthetic grounding of 1.0 that
+    # should not gate regeneration (blurb, summary, most critical, most intent).
+    has_real_code = initial.get("code_blocks", 0) > 0
+    if (has_real_code
+            and initial.get("grounding_ratio", 0.0) >= 0.9
+            and initial.get("composite", 0.0) >= 0.75):
+        result["action"] = "skip_grounded"
+        return result
+
     if dry_run:
         result["action"] = "would_fix"
         return result
@@ -272,6 +445,12 @@ def fix_one(map_name: str, file_role: str, dry_run: bool = False,
     best_score = initial["composite"] if initial["exists"] else 0.0
     best_label = "initial"
     best_text = original_text
+
+    # Compute failure-routed direction text on first pass. If baseline
+    # populate doesn't improve, retry with routed directives.
+    failure_tags = extract_failure_tags(initial)
+    routed_direction = build_direction_text(file_role, failure_tags)
+    print(f"  routed tags: {failure_tags if failure_tags else '(none)'}")
 
     # Populate-based strategy: one shot per file. The populate endpoint
     # preserves non-scaffold files, so we delete the target first to force
@@ -283,15 +462,28 @@ def fix_one(map_name: str, file_role: str, dry_run: bool = False,
         # Delete file to force populate to regenerate it
         if text_path.exists():
             text_path.unlink()
-        print(f"  [attempt {attempt}] populate → {file_role}",
+        # Attempt 1: no directives, let the generic prompt produce its best.
+        # Attempt 2: inject routed directives to correct attempt 1's specific
+        # failures. This gives populate two chances with increasing guidance.
+        use_direction = routed_direction if attempt > 1 else None
+        label = f"populate_{attempt}" + ("_routed" if use_direction else "")
+        print(f"  [attempt {attempt}] populate"
+              f"{' (+ routed direction)' if use_direction else ''}",
               end=" ... ", flush=True)
         t0 = time.time()
-        response = call_populate(map_name, file_role)
+        response = call_populate(map_name, file_role, direction_text=use_direction)
         elapsed = time.time() - t0
+        had_done = "error" not in response
+        record_call_result(elapsed, had_done)
+        pause_s = should_pause_for_rate_limit()
+        if pause_s:
+            print(f"\n  [rate-limit] {_fast_fail_streak} fast failures — "
+                  f"pausing {pause_s}s", flush=True)
+            time.sleep(pause_s)
         if "error" in response:
             print(f"error: {str(response['error'])[:80]} ({elapsed:.1f}s)")
             result["variations_tried"].append({
-                "label": f"populate_{attempt}", "status": "error",
+                "label": label, "status": "error",
                 "error": str(response["error"]), "elapsed_s": round(elapsed, 1),
             })
             continue
@@ -304,14 +496,15 @@ def fix_one(map_name: str, file_role: str, dry_run: bool = False,
               f"g={score.get('grounding_ratio', 0.0):.2f}) "
               f"({elapsed:.1f}s)")
         result["variations_tried"].append({
-            "label": f"populate_{attempt}", "status": "ok",
+            "label": label, "status": "ok",
             "composite": score["composite"], "elapsed_s": round(elapsed, 1),
             "metrics_pass": score["metrics_pass"],
             "grounding_ratio": score["grounding_ratio"],
+            "routed_tags": failure_tags if use_direction else [],
         })
         if score["composite"] > best_score:
             best_score = score["composite"]
-            best_label = f"populate_{attempt}"
+            best_label = label
             best_text = text_path.read_text(encoding="utf-8", errors="replace")
         if score["composite"] >= min_composite:
             break
@@ -346,7 +539,7 @@ def walk(map_names: list[str], file_role: str, dry_run: bool,
         r = fix_one(m, file_role, dry_run=dry_run, min_composite=min_composite)
         init = r["initial"]
         if dry_run:
-            marker = "would_fix" if r["action"] == "would_fix" else "skip_ok"
+            marker = r["action"]
             print(f"  {marker}: composite={init.get('composite', 0.0):.2f}"
                   f"  metrics_pass={init.get('metrics_pass')}"
                   f"  grounding={init.get('grounding_ratio', 0.0):.2f}")
@@ -422,20 +615,21 @@ def main() -> int:
     # Summary
     print(f"\n{'-' * 60}")
     if args.dry_run:
-        counts = {"skip_ok": 0, "would_fix": 0, "missing": 0}
+        counts: dict[str, int] = {}
         for r in results:
             counts[r["action"]] = counts.get(r["action"], 0) + 1
         print(f"dry-run: {counts.get('would_fix', 0)} would fix,"
               f" {counts.get('skip_ok', 0)} already pass,"
+              f" {counts.get('skip_grounded', 0)} grounded (skip),"
               f" {counts.get('missing', 0)} missing"
               f" — {elapsed:.1f}s")
     else:
-        counts = {"skip_ok": 0, "fixed": 0, "no_improvement": 0,
-                  "error": 0, "no_variations": 0}
+        counts = {}
         for r in results:
             counts[r["action"]] = counts.get(r["action"], 0) + 1
         print(f"done: {counts.get('fixed', 0)} fixed,"
               f" {counts.get('skip_ok', 0)} already pass,"
+              f" {counts.get('skip_grounded', 0)} grounded (skip),"
               f" {counts.get('no_improvement', 0)} stuck"
               f" — {elapsed:.1f}s")
         save_log(results, {
