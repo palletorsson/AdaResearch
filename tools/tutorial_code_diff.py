@@ -171,6 +171,14 @@ def build_code_index(roots: list[Path]) -> CodeIndex:
 
 # ── Per-map diff ────────────────────────────────────────────────────────
 
+CHAMBER_PREFIX = "Chamber_"
+
+
+def is_chamber(map_name: str) -> bool:
+    """Chamber_* maps are test harnesses, not shipped content."""
+    return map_name.startswith(CHAMBER_PREFIX)
+
+
 @dataclass
 class MapDiff:
     sequence: str
@@ -238,20 +246,11 @@ def summary_dict(diffs: list[MapDiff]) -> dict[str, Any]:
     }
 
 
-def print_markdown(diffs: list[MapDiff]) -> None:
-    summary = summary_dict(diffs)
-    print("# Tutorial ↔ Code Divergence Report\n")
-    print(f"- Maps scanned: **{summary['maps']}**")
-    print(f"- Symbols declared in tutorials: **{summary['total_declared_symbols']}**")
-    print(f"- Symbols not found in code: **{summary['total_divergences']}**")
-    print(f"- Match ratio: **{summary['match_ratio'] * 100:.1f}%**\n")
-
-    # Worst first
-    ordered = sorted(diffs, key=lambda d: -d.divergence_count)
-    print("## Top divergences (worst first)\n")
+def _rank_table(rows: list[MapDiff], limit: int = 40) -> None:
     print("| Map | Declared | Missing | class_name | func | @export | preload |")
     print("|---|---:|---:|---:|---:|---:|---:|")
-    for d in ordered[:40]:
+    shown = 0
+    for d in rows:
         if d.divergence_count == 0:
             continue
         print(
@@ -261,11 +260,51 @@ def print_markdown(diffs: list[MapDiff]) -> None:
             f"| {len(d.exports.get('missing', []))} "
             f"| {len(d.preloads.get('missing', []))} |"
         )
-    print("\n## Maps with zero divergence\n")
-    clean = [d.map for d in diffs if d.divergence_count == 0 and d.tutorial_exists]
-    print(f"**{len(clean)} maps** — tutorial declarations all found in code.\n")
-    for name in clean:
+        shown += 1
+        if shown >= limit:
+            break
+
+
+def print_markdown(diffs: list[MapDiff]) -> None:
+    content = [d for d in diffs if not is_chamber(d.map)]
+    chambers = [d for d in diffs if is_chamber(d.map)]
+
+    all_summary = summary_dict(diffs)
+    content_summary = summary_dict(content)
+    chamber_summary = summary_dict(chambers)
+
+    print("# Tutorial ↔ Code Divergence Report\n")
+    print("Chambers (Chamber_*) are test harnesses, not shipped content — their")
+    print("mechanics will migrate into regular sequence maps. They appear in a")
+    print("separate section below; the primary ranking covers content maps only.\n")
+
+    print("## Overall summary\n")
+    print(f"| Set | Maps | Declared | Missing | Match |")
+    print(f"|---|---:|---:|---:|---:|")
+    print(
+        f"| **Content** | {content_summary['maps']} | {content_summary['total_declared_symbols']} "
+        f"| {content_summary['total_divergences']} | **{content_summary['match_ratio'] * 100:.1f}%** |"
+    )
+    print(
+        f"| Chambers | {chamber_summary['maps']} | {chamber_summary['total_declared_symbols']} "
+        f"| {chamber_summary['total_divergences']} | {chamber_summary['match_ratio'] * 100:.1f}% |"
+    )
+    print(
+        f"| All | {all_summary['maps']} | {all_summary['total_declared_symbols']} "
+        f"| {all_summary['total_divergences']} | {all_summary['match_ratio'] * 100:.1f}% |"
+    )
+    print()
+
+    print("## Content maps — top divergences (worst first)\n")
+    _rank_table(sorted(content, key=lambda d: -d.divergence_count))
+
+    clean_content = [d.map for d in content if d.divergence_count == 0 and d.tutorial_exists]
+    print(f"\n## Content maps with zero divergence ({len(clean_content)})\n")
+    for name in clean_content:
         print(f"- {name}")
+
+    print("\n## Chambers (informational — not a worklist)\n")
+    _rank_table(sorted(chambers, key=lambda d: -d.divergence_count), limit=40)
 
 
 def print_verbose_map(d: MapDiff) -> None:
@@ -303,6 +342,11 @@ def main() -> int:
         default="markdown",
         help="Output format for full-spine run",
     )
+    ap.add_argument(
+        "--include-chambers",
+        action="store_true",
+        help="Include Chamber_* maps in the primary ranking (default: separate section)",
+    )
     args = ap.parse_args()
 
     print("Indexing codebase…", file=sys.stderr)
@@ -330,11 +374,19 @@ def main() -> int:
     diffs = [diff_map(seq, name, idx) for seq, name in spine]
 
     if args.format == "summary":
-        print(json.dumps(summary_dict(diffs), indent=2))
+        content = [d for d in diffs if not is_chamber(d.map)]
+        chambers = [d for d in diffs if is_chamber(d.map)]
+        print(json.dumps({
+            "content": summary_dict(content),
+            "chambers": summary_dict(chambers),
+            "all": summary_dict(diffs),
+        }, indent=2))
     elif args.format == "json":
         out = {
-            "summary": summary_dict(diffs),
-            "maps": [asdict(d) for d in diffs],
+            "summary_all": summary_dict(diffs),
+            "summary_content": summary_dict([d for d in diffs if not is_chamber(d.map)]),
+            "summary_chambers": summary_dict([d for d in diffs if is_chamber(d.map)]),
+            "maps": [dict(asdict(d), is_chamber=is_chamber(d.map)) for d in diffs],
         }
         print(json.dumps(out, indent=2))
     else:

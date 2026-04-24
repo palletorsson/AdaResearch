@@ -1,25 +1,27 @@
 # Tutorial ↔ Code Divergence Report
 
-- Maps scanned: **179**
-- Symbols declared in tutorials: **1677**
-- Symbols not found in code: **1410**
-- Match ratio: **15.9%**
+Chambers (Chamber_*) are test harnesses, not shipped content — their
+mechanics will migrate into regular sequence maps. They appear in a
+separate section below; the primary ranking covers content maps only.
 
-## Top divergences (worst first)
+## Overall summary
+
+| Set | Maps | Declared | Missing | Match |
+|---|---:|---:|---:|---:|
+| **Content** | 163 | 1493 | 1255 | **15.9%** |
+| Chambers | 16 | 184 | 155 | 15.8% |
+| All | 179 | 1677 | 1410 | 15.9% |
+
+## Content maps — top divergences (worst first)
 
 | Map | Declared | Missing | class_name | func | @export | preload |
 |---|---:|---:|---:|---:|---:|---:|
-| Chamber_Waves | 14 | 14 | 1 | 9 | 3 | 1 |
 | Random_Mushrooms | 14 | 14 | 1 | 8 | 3 | 2 |
 | Random_Space | 14 | 14 | 1 | 7 | 3 | 3 |
-| Chamber_Fractals | 16 | 14 | 3 | 6 | 5 | 0 |
 | Trans_Rotation | 12 | 12 | 0 | 12 | 0 | 0 |
-| Chamber_Random | 12 | 12 | 1 | 8 | 2 | 1 |
-| Chamber_LSystems | 16 | 12 | 3 | 6 | 3 | 0 |
 | QFEP_F_Term | 12 | 12 | 1 | 9 | 2 | 0 |
 | QFEP_Edge_Of_Chaos | 12 | 12 | 1 | 7 | 3 | 1 |
 | Trans_AxisDecomposition | 11 | 11 | 0 | 11 | 0 | 0 |
-| Chamber_Color | 13 | 11 | 1 | 8 | 1 | 1 |
 | Randomness_Examples_of_Randomness | 11 | 11 | 1 | 7 | 1 | 2 |
 | Random_Game | 12 | 11 | 1 | 7 | 1 | 2 |
 | Lab_Path | 12 | 11 | 1 | 7 | 2 | 1 |
@@ -49,8 +51,32 @@
 | SwarmIntelligence_Particle_Swarm_Optimization | 11 | 10 | 1 | 7 | 2 | 0 |
 | SwarmIntelligence_Swarm_Intelligence_Algorithms | 12 | 10 | 4 | 6 | 0 | 0 |
 | ML_Gradient_Landscape | 10 | 10 | 0 | 7 | 3 | 0 |
+| Florensky_Paraconsistent | 10 | 10 | 1 | 6 | 3 | 0 |
+| GT_Spanning_Trees | 11 | 10 | 2 | 8 | 0 | 0 |
+| Trans_RotationSpectacle | 10 | 9 | 0 | 9 | 0 | 0 |
+| Trans_Scale | 10 | 9 | 0 | 9 | 0 | 0 |
+| Color_Flashlight | 11 | 9 | 2 | 6 | 1 | 0 |
 
-## Maps with zero divergence
+## Content maps with zero divergence (0)
 
-**0 maps** — tutorial declarations all found in code.
 
+## Chambers (informational — not a worklist)
+
+| Map | Declared | Missing | class_name | func | @export | preload |
+|---|---:|---:|---:|---:|---:|---:|
+| Chamber_Waves | 14 | 14 | 1 | 9 | 3 | 1 |
+| Chamber_Fractals | 16 | 14 | 3 | 6 | 5 | 0 |
+| Chamber_Random | 12 | 12 | 1 | 8 | 2 | 1 |
+| Chamber_LSystems | 16 | 12 | 3 | 6 | 3 | 0 |
+| Chamber_Color | 13 | 11 | 1 | 8 | 1 | 1 |
+| Chamber_Foundations | 10 | 10 | 1 | 7 | 2 | 0 |
+| Chamber_Transformation | 11 | 9 | 1 | 6 | 2 | 0 |
+| Chamber_Arrays | 10 | 9 | 1 | 8 | 0 | 0 |
+| Chamber_Noise | 13 | 9 | 2 | 5 | 2 | 0 |
+| Chamber_ProcGen | 11 | 9 | 0 | 7 | 2 | 0 |
+| Chamber_QFEP | 10 | 9 | 1 | 6 | 2 | 0 |
+| Chamber_CA | 10 | 8 | 1 | 4 | 3 | 0 |
+| Chamber_SoftBodies | 9 | 8 | 0 | 7 | 1 | 0 |
+| Chamber_Swarm | 10 | 8 | 1 | 5 | 1 | 1 |
+| Chamber_Forces | 11 | 7 | 1 | 5 | 1 | 0 |
+| Chamber_ML | 8 | 6 | 0 | 4 | 2 | 0 |
