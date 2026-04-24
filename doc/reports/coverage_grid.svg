@@ -1,0 +1,234 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 704 644" font-family="ui-monospace,Consolas,monospace" font-size="11">
+<style>.seq{fill:#52525b;font-size:12px;font-weight:600}.count{fill:#a1a1aa;font-size:10px}.title{fill:#18181b;font-size:22px;font-weight:700}.sub{fill:#71717a;font-size:13px}.legend{fill:#52525b;font-size:11px}rect.cell{stroke:rgba(0,0,0,0.08);stroke-width:0.5}</style>
+<rect width="100%" height="100%" fill="white"/>
+<text x="220" y="34" class="title">Map Coverage — 179 / 179 perfect</text>
+<text x="220" y="56" class="sub">763 load-bearing placements · 763 documented · avg 100.0% coverage</text>
+<rect x="594" y="30" width="12" height="12" fill="#10b981" rx="2"/>
+<text x="612" y="40" class="legend">100%</text>
+<rect x="594" y="46" width="12" height="12" fill="#84cc16" rx="2"/>
+<text x="612" y="56" class="legend">90%+</text>
+<rect x="594" y="62" width="12" height="12" fill="#f59e0b" rx="2"/>
+<text x="612" y="72" class="legend">70%+</text>
+<rect x="594" y="78" width="12" height="12" fill="#f97316" rx="2"/>
+<text x="612" y="88" class="legend">40%+</text>
+<rect x="594" y="94" width="12" height="12" fill="#f43f5e" rx="2"/>
+<text x="612" y="104" class="legend"><40%</text>
+<text x="206" y="105.84" class="seq" text-anchor="end">primitives</text>
+<rect class="cell" x="220" y="90" width="22" height="22" rx="3" fill="#10b981"><title>Point_One — 100% coverage, 10 placed</title></rect>
+<rect class="cell" x="246" y="90" width="22" height="22" rx="3" fill="#10b981"><title>Point_Line — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="272" y="90" width="22" height="22" rx="3" fill="#10b981"><title>Point_Lines — 100% coverage, 15 placed</title></rect>
+<rect class="cell" x="298" y="90" width="22" height="22" rx="3" fill="#10b981"><title>Point_Trace — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="324" y="90" width="22" height="22" rx="3" fill="#10b981"><title>Point_Line_Grid — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="350" y="90" width="22" height="22" rx="3" fill="#10b981"><title>Point_Triangle — 100% coverage, 6 placed</title></rect>
+<rect class="cell" x="376" y="90" width="22" height="22" rx="3" fill="#10b981"><title>Point_Triangle_Context — 100% coverage, 6 placed</title></rect>
+<rect class="cell" x="402" y="90" width="22" height="22" rx="3" fill="#10b981"><title>Primitives_Polythedra — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="428" y="90" width="22" height="22" rx="3" fill="#10b981"><title>Point_Animatedcube — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="454" y="90" width="22" height="22" rx="3" fill="#10b981"><title>Primitives_Ignorance — 100% coverage, 21 placed</title></rect>
+<rect class="cell" x="480" y="90" width="22" height="22" rx="3" fill="#10b981"><title>Primitives_Portals — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="506" y="90" width="22" height="22" rx="3" fill="#10b981"><title>Primitives_Melencolia — 100% coverage, 10 placed</title></rect>
+<text x="590" y="105.84" class="count">12</text>
+<text x="206" y="131.84" class="seq" text-anchor="end">transformation</text>
+<rect class="cell" x="220" y="116" width="22" height="22" rx="3" fill="#10b981"><title>Trans_Introduction — 100% coverage, 6 placed</title></rect>
+<rect class="cell" x="246" y="116" width="22" height="22" rx="3" fill="#10b981"><title>Trans_Translation — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="272" y="116" width="22" height="22" rx="3" fill="#10b981"><title>Trans_AxisDecomposition — 100% coverage, 6 placed</title></rect>
+<rect class="cell" x="298" y="116" width="22" height="22" rx="3" fill="#10b981"><title>Trans_Rotation — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="324" y="116" width="22" height="22" rx="3" fill="#10b981"><title>Trans_RotationSpectacle — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="350" y="116" width="22" height="22" rx="3" fill="#10b981"><title>Trans_Scale — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="376" y="116" width="22" height="22" rx="3" fill="#10b981"><title>Trans_Pit — 100% coverage, 0 placed</title></rect>
+<rect class="cell" x="402" y="116" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_Transformation — 100% coverage, 2 placed</title></rect>
+<text x="590" y="131.84" class="count">8</text>
+<text x="206" y="157.84" class="seq" text-anchor="end">color</text>
+<rect class="cell" x="220" y="142" width="22" height="22" rx="3" fill="#10b981"><title>Color_Nails — 100% coverage, 8 placed</title></rect>
+<rect class="cell" x="246" y="142" width="22" height="22" rx="3" fill="#10b981"><title>Color_Grid_Pallet — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="272" y="142" width="22" height="22" rx="3" fill="#10b981"><title>Color_Rainbow — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="298" y="142" width="22" height="22" rx="3" fill="#10b981"><title>Color_Pillar — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="324" y="142" width="22" height="22" rx="3" fill="#10b981"><title>Color_Paint — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="350" y="142" width="22" height="22" rx="3" fill="#10b981"><title>Color_Walls — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="376" y="142" width="22" height="22" rx="3" fill="#10b981"><title>Color_Flashlight — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="402" y="142" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_Color — 100% coverage, 2 placed</title></rect>
+<text x="590" y="157.84" class="count">8</text>
+<text x="206" y="183.84" class="seq" text-anchor="end">forces</text>
+<rect class="cell" x="220" y="168" width="22" height="22" rx="3" fill="#10b981"><title>VectorFoundations — 100% coverage, 11 placed</title></rect>
+<rect class="cell" x="246" y="168" width="22" height="22" rx="3" fill="#10b981"><title>VectorOperations — 100% coverage, 8 placed</title></rect>
+<rect class="cell" x="272" y="168" width="22" height="22" rx="3" fill="#10b981"><title>VectorApplied — 100% coverage, 7 placed</title></rect>
+<rect class="cell" x="298" y="168" width="22" height="22" rx="3" fill="#10b981"><title>VectorAdvanced — 100% coverage, 8 placed</title></rect>
+<rect class="cell" x="324" y="168" width="22" height="22" rx="3" fill="#10b981"><title>ForcesFoundations — 100% coverage, 9 placed</title></rect>
+<rect class="cell" x="350" y="168" width="22" height="22" rx="3" fill="#10b981"><title>ForcesComposition — 100% coverage, 8 placed</title></rect>
+<rect class="cell" x="376" y="168" width="22" height="22" rx="3" fill="#10b981"><title>ForcesSystems — 100% coverage, 12 placed</title></rect>
+<rect class="cell" x="402" y="168" width="22" height="22" rx="3" fill="#10b981"><title>ForcesChaos — 100% coverage, 10 placed</title></rect>
+<rect class="cell" x="428" y="168" width="22" height="22" rx="3" fill="#10b981"><title>ForcesArena — 100% coverage, 16 placed</title></rect>
+<rect class="cell" x="454" y="168" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_Forces — 100% coverage, 2 placed</title></rect>
+<text x="590" y="183.84" class="count">10</text>
+<text x="206" y="209.84" class="seq" text-anchor="end">array_tutorial</text>
+<rect class="cell" x="220" y="194" width="22" height="22" rx="3" fill="#10b981"><title>Tutorial_Pattern — 100% coverage, 9 placed</title></rect>
+<rect class="cell" x="246" y="194" width="22" height="22" rx="3" fill="#10b981"><title>Array_Patterns — 100% coverage, 11 placed</title></rect>
+<rect class="cell" x="272" y="194" width="22" height="22" rx="3" fill="#10b981"><title>Tutorial_Single — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="298" y="194" width="22" height="22" rx="3" fill="#10b981"><title>Tutorial_Row — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="324" y="194" width="22" height="22" rx="3" fill="#10b981"><title>Tutorial_2D_Build — 100% coverage, 7 placed</title></rect>
+<rect class="cell" x="350" y="194" width="22" height="22" rx="3" fill="#10b981"><title>Tutorial_3D — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="376" y="194" width="22" height="22" rx="3" fill="#10b981"><title>Tutorial_Disco — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="402" y="194" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_Arrays — 100% coverage, 2 placed</title></rect>
+<text x="590" y="209.84" class="count">8</text>
+<text x="206" y="235.84" class="seq" text-anchor="end">wavefunctions</text>
+<rect class="cell" x="220" y="220" width="22" height="22" rx="3" fill="#10b981"><title>WaveFunctions_Intro — 100% coverage, 15 placed</title></rect>
+<rect class="cell" x="246" y="220" width="22" height="22" rx="3" fill="#10b981"><title>WaveFunctions_Pendulum — 100% coverage, 9 placed</title></rect>
+<rect class="cell" x="272" y="220" width="22" height="22" rx="3" fill="#10b981"><title>WaveFunctions_Unit_Circle — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="298" y="220" width="22" height="22" rx="3" fill="#10b981"><title>WaveFunctions_Sine_Space — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="324" y="220" width="22" height="22" rx="3" fill="#10b981"><title>WaveFunctions_3D_Wave_Propagation — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="350" y="220" width="22" height="22" rx="3" fill="#10b981"><title>WaveFunctions_Effect_Sound — 100% coverage, 20 placed</title></rect>
+<rect class="cell" x="376" y="220" width="22" height="22" rx="3" fill="#10b981"><title>Wavefunctions_Bernini — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="402" y="220" width="22" height="22" rx="3" fill="#10b981"><title>WaveFunctions_John_Cage — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="428" y="220" width="22" height="22" rx="3" fill="#10b981"><title>WaveFunctions_AirMusic — 100% coverage, 7 placed</title></rect>
+<rect class="cell" x="454" y="220" width="22" height="22" rx="3" fill="#10b981"><title>Wavefunctions_Sky_Stairs — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="480" y="220" width="22" height="22" rx="3" fill="#10b981"><title>WaveFunctions_TrigWalkingPath — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="506" y="220" width="22" height="22" rx="3" fill="#10b981"><title>WaveFunctions_Synthesis_Lab — 100% coverage, 22 placed</title></rect>
+<rect class="cell" x="532" y="220" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_Waves — 100% coverage, 2 placed</title></rect>
+<text x="590" y="235.84" class="count">13</text>
+<text x="206" y="261.84" class="seq" text-anchor="end">randomness</text>
+<rect class="cell" x="220" y="246" width="22" height="22" rx="3" fill="#10b981"><title>Random_Definition — 100% coverage, 11 placed</title></rect>
+<rect class="cell" x="246" y="246" width="22" height="22" rx="3" fill="#10b981"><title>Random_Remove — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="272" y="246" width="22" height="22" rx="3" fill="#10b981"><title>Randomness_10_PRINT_Algorithm — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="298" y="246" width="22" height="22" rx="3" fill="#10b981"><title>Random_Cubes — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="324" y="246" width="22" height="22" rx="3" fill="#10b981"><title>Random_Rotate_Random_XYZ — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="350" y="246" width="22" height="22" rx="3" fill="#10b981"><title>Random_Walk — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="376" y="246" width="22" height="22" rx="3" fill="#10b981"><title>Random_Gaussian — 100% coverage, 8 placed</title></rect>
+<rect class="cell" x="402" y="246" width="22" height="22" rx="3" fill="#10b981"><title>Random_Mushrooms — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="428" y="246" width="22" height="22" rx="3" fill="#10b981"><title>Random_Space_Geometry — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="454" y="246" width="22" height="22" rx="3" fill="#10b981"><title>Randomness_Examples_of_Randomness — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="480" y="246" width="22" height="22" rx="3" fill="#10b981"><title>Random_Pheromone — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="506" y="246" width="22" height="22" rx="3" fill="#10b981"><title>Random_Space — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="532" y="246" width="22" height="22" rx="3" fill="#10b981"><title>Random_Game — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="558" y="246" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_Random — 100% coverage, 2 placed</title></rect>
+<text x="590" y="261.84" class="count">14</text>
+<text x="206" y="287.84" class="seq" text-anchor="end">noise</text>
+<rect class="cell" x="220" y="272" width="22" height="22" rx="3" fill="#10b981"><title>Random_Noise_Types — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="246" y="272" width="22" height="22" rx="3" fill="#10b981"><title>Noise_Columns — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="272" y="272" width="22" height="22" rx="3" fill="#10b981"><title>Noise_One — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="298" y="272" width="22" height="22" rx="3" fill="#10b981"><title>Noise_Voxel — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="324" y="272" width="22" height="22" rx="3" fill="#10b981"><title>Noise_6_Wall — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="350" y="272" width="22" height="22" rx="3" fill="#10b981"><title>Noise_Inside_Noise — 100% coverage, 0 placed</title></rect>
+<rect class="cell" x="376" y="272" width="22" height="22" rx="3" fill="#10b981"><title>Noise_Space_10 — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="402" y="272" width="22" height="22" rx="3" fill="#10b981"><title>Noise_Perlin_Simplex — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="428" y="272" width="22" height="22" rx="3" fill="#10b981"><title>Lab_Path — 100% coverage, 0 placed</title></rect>
+<rect class="cell" x="454" y="272" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_Noise — 100% coverage, 2 placed</title></rect>
+<text x="590" y="287.84" class="count">10</text>
+<text x="206" y="313.84" class="seq" text-anchor="end">cellularautomata</text>
+<rect class="cell" x="220" y="298" width="22" height="22" rx="3" fill="#10b981"><title>CA_Introduction — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="246" y="298" width="22" height="22" rx="3" fill="#10b981"><title>CA_ElementaryRules — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="272" y="298" width="22" height="22" rx="3" fill="#10b981"><title>CA_GameOfLife — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="298" y="298" width="22" height="22" rx="3" fill="#10b981"><title>CA_BeyondBinary — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="324" y="298" width="22" height="22" rx="3" fill="#10b981"><title>CA_ExpandingSpace — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="350" y="298" width="22" height="22" rx="3" fill="#10b981"><title>CA_SoftRules — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="376" y="298" width="22" height="22" rx="3" fill="#10b981"><title>CA_AgentsCircuits — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="402" y="298" width="22" height="22" rx="3" fill="#10b981"><title>CA_EdgeOfChaos — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="428" y="298" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_CA — 100% coverage, 2 placed</title></rect>
+<text x="590" y="313.84" class="count">9</text>
+<text x="206" y="339.84" class="seq" text-anchor="end">fractals</text>
+<rect class="cell" x="220" y="324" width="22" height="22" rx="3" fill="#10b981"><title>Fractal_Recursion — 100% coverage, 9 placed</title></rect>
+<rect class="cell" x="246" y="324" width="22" height="22" rx="3" fill="#10b981"><title>Fractal_RecursiveTrees — 100% coverage, 9 placed</title></rect>
+<rect class="cell" x="272" y="324" width="22" height="22" rx="3" fill="#10b981"><title>Fractal_CantorSet — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="298" y="324" width="22" height="22" rx="3" fill="#10b981"><title>Fractal_KochSierpinski — 100% coverage, 8 placed</title></rect>
+<rect class="cell" x="324" y="324" width="22" height="22" rx="3" fill="#10b981"><title>Fractal_MengerSponge — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="350" y="324" width="22" height="22" rx="3" fill="#10b981"><title>Fractal_GoldenSpiral — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="376" y="324" width="22" height="22" rx="3" fill="#10b981"><title>Fractal_JuliaSet — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="402" y="324" width="22" height="22" rx="3" fill="#10b981"><title>Fractal_MandelbrotSet — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="428" y="324" width="22" height="22" rx="3" fill="#10b981"><title>Fractal_Synthesis — 100% coverage, 9 placed</title></rect>
+<rect class="cell" x="454" y="324" width="22" height="22" rx="3" fill="#10b981"><title>Fractal_CrossSequence — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="480" y="324" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_Fractals — 100% coverage, 2 placed</title></rect>
+<text x="590" y="339.84" class="count">11</text>
+<text x="206" y="365.84" class="seq" text-anchor="end">lsystems</text>
+<rect class="cell" x="220" y="350" width="22" height="22" rx="3" fill="#10b981"><title>LSystems_Grammar_Lab — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="246" y="350" width="22" height="22" rx="3" fill="#10b981"><title>LSystems_Growth — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="272" y="350" width="22" height="22" rx="3" fill="#10b981"><title>LSystems_Grammars_And_Curves — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="298" y="350" width="22" height="22" rx="3" fill="#10b981"><title>LSystems_Architecture — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="324" y="350" width="22" height="22" rx="3" fill="#10b981"><title>LSystems_Competition — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="350" y="350" width="22" height="22" rx="3" fill="#10b981"><title>LSystems_Living — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="376" y="350" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_LSystems — 100% coverage, 2 placed</title></rect>
+<text x="590" y="365.84" class="count">7</text>
+<text x="206" y="391.84" class="seq" text-anchor="end">proceduralgeneration</text>
+<rect class="cell" x="220" y="376" width="22" height="22" rx="3" fill="#10b981"><title>PG_Genetic_Evolution — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="246" y="376" width="22" height="22" rx="3" fill="#10b981"><title>PG_Space_Colonization — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="272" y="376" width="22" height="22" rx="3" fill="#10b981"><title>PG_Percolation_Network — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="298" y="376" width="22" height="22" rx="3" fill="#10b981"><title>PG_Branching_Growth — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="324" y="376" width="22" height="22" rx="3" fill="#10b981"><title>PG_Caves_Mazes — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="350" y="376" width="22" height="22" rx="3" fill="#10b981"><title>PG_Sculpted_Forms — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="376" y="376" width="22" height="22" rx="3" fill="#10b981"><title>PG_Mirrored_Patterns — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="402" y="376" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_ProcGen — 100% coverage, 2 placed</title></rect>
+<text x="590" y="391.84" class="count">8</text>
+<text x="206" y="417.84" class="seq" text-anchor="end">softbodies</text>
+<rect class="cell" x="220" y="402" width="22" height="22" rx="3" fill="#10b981"><title>SoftBodies_Soft_Body_Deformation — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="246" y="402" width="22" height="22" rx="3" fill="#10b981"><title>SoftBodies_Carusell — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="272" y="402" width="22" height="22" rx="3" fill="#10b981"><title>SoftBodies_Obsticals — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="298" y="402" width="22" height="22" rx="3" fill="#10b981"><title>SoftBodies_Obsticals_Part2 — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="324" y="402" width="22" height="22" rx="3" fill="#10b981"><title>SoftBodies_Cloth_Physics — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="350" y="402" width="22" height="22" rx="3" fill="#10b981"><title>SoftBodies_Playground_of_Joy — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="376" y="402" width="22" height="22" rx="3" fill="#10b981"><title>SoftBodies_Affect_Theory_Visualization — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="402" y="402" width="22" height="22" rx="3" fill="#10b981"><title>ProceduralGeneration_Reaction_Diffusion_Systems — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="428" y="402" width="22" height="22" rx="3" fill="#10b981"><title>Topology_Entropy_Morphogenesis — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="454" y="402" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_SoftBodies — 100% coverage, 2 placed</title></rect>
+<text x="590" y="417.84" class="count">10</text>
+<text x="206" y="443.84" class="seq" text-anchor="end">swarmintelligence</text>
+<rect class="cell" x="220" y="428" width="22" height="22" rx="3" fill="#10b981"><title>SwarmIntelligence_PhysarumColony — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="246" y="428" width="22" height="22" rx="3" fill="#10b981"><title>SwarmIntelligence_FlowFields — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="272" y="428" width="22" height="22" rx="3" fill="#10b981"><title>SwarmIntelligence_Boids_Algorithm — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="298" y="428" width="22" height="22" rx="3" fill="#10b981"><title>SwarmIntelligence_Agent_Based_Modeling_ABM — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="324" y="428" width="22" height="22" rx="3" fill="#10b981"><title>SwarmIntelligence_Ant_Colony_Optimization — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="350" y="428" width="22" height="22" rx="3" fill="#10b981"><title>SwarmIntelligence_Particle_Swarm_Optimization — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="376" y="428" width="22" height="22" rx="3" fill="#10b981"><title>SwarmIntelligence_Swarm_Intelligence_Algorithms — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="402" y="428" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_Swarm — 100% coverage, 2 placed</title></rect>
+<text x="590" y="443.84" class="count">8</text>
+<text x="206" y="469.84" class="seq" text-anchor="end">machinelearning</text>
+<rect class="cell" x="220" y="454" width="22" height="22" rx="3" fill="#10b981"><title>ML_Evolution — 100% coverage, 7 placed</title></rect>
+<rect class="cell" x="246" y="454" width="22" height="22" rx="3" fill="#10b981"><title>ML_Gradient_Landscape — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="272" y="454" width="22" height="22" rx="3" fill="#10b981"><title>ML_Classification — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="298" y="454" width="22" height="22" rx="3" fill="#10b981"><title>ML_Neural_Networks — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="324" y="454" width="22" height="22" rx="3" fill="#10b981"><title>ML_Perception — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="350" y="454" width="22" height="22" rx="3" fill="#10b981"><title>ML_Sequence_Memory — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="376" y="454" width="22" height="22" rx="3" fill="#10b981"><title>ML_Generative — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="402" y="454" width="22" height="22" rx="3" fill="#10b981"><title>ML_Synthesis — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="428" y="454" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_ML — 100% coverage, 2 placed</title></rect>
+<text x="590" y="469.84" class="count">9</text>
+<text x="206" y="495.84" class="seq" text-anchor="end">foundationscrisis</text>
+<rect class="cell" x="220" y="480" width="22" height="22" rx="3" fill="#10b981"><title>Euclid_Parallel — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="246" y="480" width="22" height="22" rx="3" fill="#10b981"><title>NonEuclidean_Spaces — 100% coverage, 5 placed</title></rect>
+<rect class="cell" x="272" y="480" width="22" height="22" rx="3" fill="#10b981"><title>Russell_Paradox — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="298" y="480" width="22" height="22" rx="3" fill="#10b981"><title>Godel_Incompleteness — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="324" y="480" width="22" height="22" rx="3" fill="#10b981"><title>Escher_Impossible — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="350" y="480" width="22" height="22" rx="3" fill="#10b981"><title>Brouwer_Intuitionism — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="376" y="480" width="22" height="22" rx="3" fill="#10b981"><title>Florensky_Paraconsistent — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="402" y="480" width="22" height="22" rx="3" fill="#10b981"><title>Crisis_Synthesis — 100% coverage, 8 placed</title></rect>
+<rect class="cell" x="428" y="480" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_Foundations — 100% coverage, 2 placed</title></rect>
+<text x="590" y="495.84" class="count">9</text>
+<text x="206" y="521.84" class="seq" text-anchor="end">qfeplaboratory</text>
+<rect class="cell" x="220" y="506" width="22" height="22" rx="3" fill="#10b981"><title>QFEP_Introduction — 100% coverage, 8 placed</title></rect>
+<rect class="cell" x="246" y="506" width="22" height="22" rx="3" fill="#10b981"><title>QFEP_F_Term — 100% coverage, 6 placed</title></rect>
+<rect class="cell" x="272" y="506" width="22" height="22" rx="3" fill="#10b981"><title>QFEP_E_Term — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="298" y="506" width="22" height="22" rx="3" fill="#10b981"><title>QFEP_Lambda_Spectrum — 100% coverage, 7 placed</title></rect>
+<rect class="cell" x="324" y="506" width="22" height="22" rx="3" fill="#10b981"><title>QFEP_Phi_Term — 100% coverage, 6 placed</title></rect>
+<rect class="cell" x="350" y="506" width="22" height="22" rx="3" fill="#10b981"><title>QFEP_Edge_Of_Chaos — 100% coverage, 6 placed</title></rect>
+<rect class="cell" x="376" y="506" width="22" height="22" rx="3" fill="#10b981"><title>QFEP_Sandbox — 100% coverage, 6 placed</title></rect>
+<rect class="cell" x="402" y="506" width="22" height="22" rx="3" fill="#10b981"><title>QFEP_Synthesis — 100% coverage, 7 placed</title></rect>
+<rect class="cell" x="428" y="506" width="22" height="22" rx="3" fill="#10b981"><title>Chamber_QFEP — 100% coverage, 2 placed</title></rect>
+<text x="590" y="521.84" class="count">9</text>
+<text x="206" y="547.84" class="seq" text-anchor="end">postfoundationscrisis</text>
+<rect class="cell" x="220" y="532" width="22" height="22" rx="3" fill="#10b981"><title>CriticalAlgorithms_Algorithmic_Bias_Visualization — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="246" y="532" width="22" height="22" rx="3" fill="#10b981"><title>CriticalAlgorithms_Applied_Ethics — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="272" y="532" width="22" height="22" rx="3" fill="#10b981"><title>SpeculativeComputation_Paraconsistent_Engineering — 100% coverage, 4 placed</title></rect>
+<rect class="cell" x="298" y="532" width="22" height="22" rx="3" fill="#10b981"><title>SpeculativeComputation_Situated_Computation — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="324" y="532" width="22" height="22" rx="3" fill="#10b981"><title>SpeculativeComputation_Collective_Knowledge — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="350" y="532" width="22" height="22" rx="3" fill="#10b981"><title>SpeculativeComputation_Rhizome_Network — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="376" y="532" width="22" height="22" rx="3" fill="#10b981"><title>AdvancedLaboratory_Lab_Equipment_Simulation — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="402" y="532" width="22" height="22" rx="3" fill="#10b981"><title>PostCrisis_Synthesis — 100% coverage, 4 placed</title></rect>
+<text x="590" y="547.84" class="count">8</text>
+<text x="206" y="573.84" class="seq" text-anchor="end">graphtheory</text>
+<rect class="cell" x="220" y="558" width="22" height="22" rx="3" fill="#10b981"><title>GT_Foundations — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="246" y="558" width="22" height="22" rx="3" fill="#10b981"><title>GT_Layout — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="272" y="558" width="22" height="22" rx="3" fill="#10b981"><title>GT_Pathfinding — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="298" y="558" width="22" height="22" rx="3" fill="#10b981"><title>GT_Network_Analysis — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="324" y="558" width="22" height="22" rx="3" fill="#10b981"><title>GT_Connectivity — 100% coverage, 3 placed</title></rect>
+<rect class="cell" x="350" y="558" width="22" height="22" rx="3" fill="#10b981"><title>GT_Spanning_Trees — 100% coverage, 1 placed</title></rect>
+<rect class="cell" x="376" y="558" width="22" height="22" rx="3" fill="#10b981"><title>GT_Flow — 100% coverage, 2 placed</title></rect>
+<rect class="cell" x="402" y="558" width="22" height="22" rx="3" fill="#10b981"><title>GT_Matching — 100% coverage, 1 placed</title></rect>
+<text x="590" y="573.84" class="count">8</text>
+<text x="220" y="612" class="sub">TEXT ↔ ARTIFACT · ARTIFACT ↔ MAP · MAP ↔ CONCEPT · all mechanically closed</text>
+</svg>
