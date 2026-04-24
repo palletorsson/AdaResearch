@@ -11,7 +11,7 @@
     },
     "identity_adoption": 0.405,
     "documented_rate": 0.813,
-    "atmospheric_count": 13,
+    "atmospheric_count": 2,
     "wrapped_count": 2,
     "by_registry": {
       "algorithms_misc.json": {
@@ -1079,8 +1079,8 @@
         "relationships": "foundation of graph theory sequence \u2014 introduces what a graph IS as a walkable space; extends into KonigsbergBridge which constrains the topology to a specific historical problem",
         "truth": "a graph is not a diagram \u2014 it is a set of relationships, and force-directed layout reveals that structure has a natural shape if you let physics find it"
       },
-      "is_atmospheric": true,
-      "atmospheric_reason": "keyword: 'atmospheric' in header"
+      "is_atmospheric": false,
+      "atmospheric_reason": ""
     },
     {
       "token": "graphspace3d",
@@ -1490,8 +1490,8 @@
         "relationships": "echoes mario_cube (reveals rainbow); contrasts with dark_side_prism (arc vs linear); precedes rainbow_hallway (static vs immersive)",
         "truth": "a rainbow has no location \u2014 it exists only in the geometry between sun, water, and eye"
       },
-      "is_atmospheric": true,
-      "atmospheric_reason": "keyword: 'atmospheric' in header"
+      "is_atmospheric": false,
+      "atmospheric_reason": ""
     },
     {
       "token": "remains_to_be_seen",
@@ -2013,8 +2013,8 @@
         "relationships": "paired with branching_growth_algorithm in PG_Branching_Growth; contrasts deterministic growth with noise-sculpted space",
         "truth": "an organic space is not designed from outside \u2014 it is what remains after noise has eaten away at geometry from within"
       },
-      "is_atmospheric": true,
-      "atmospheric_reason": "keyword: 'atmospheric' in header"
+      "is_atmospheric": false,
+      "atmospheric_reason": ""
     },
     {
       "token": "rhizomatic_maze_space",
@@ -3239,8 +3239,8 @@
         "relationships": "pompeii_mosaic_floor (sibling pattern), diamonds_squares_floor (single-diamond cousin)",
         "truth": "every diamond holds a smaller copy of itself \u2014 the Romans knew about self-similarity"
       },
-      "is_atmospheric": true,
-      "atmospheric_reason": "keyword: 'decorative' in header"
+      "is_atmospheric": false,
+      "atmospheric_reason": ""
     },
     {
       "token": "swastika_meander_floor",
@@ -3285,8 +3285,8 @@
         "relationships": "pompeii_mosaic_floor (sibling truchet), swastika_meander_floor (sibling bitmap)",
         "truth": "the knot of Solomon appears on Roman floors, Jewish synagogues, and Christian basilicas alike"
       },
-      "is_atmospheric": true,
-      "atmospheric_reason": "keyword: 'decorative' in header"
+      "is_atmospheric": false,
+      "atmospheric_reason": ""
     },
     {
       "token": "stepped_zigzag_floor",
@@ -3515,8 +3515,8 @@
         "relationships": "double_snake_meander (dual-walk approach), exact_meander_floor (bitmap approach)",
         "truth": "the meander is a braid with crossing number 1"
       },
-      "is_atmospheric": true,
-      "atmospheric_reason": "keyword: 'decorative' in header"
+      "is_atmospheric": false,
+      "atmospheric_reason": ""
     },
     {
       "token": "star_rosette_floor",
@@ -3630,8 +3630,8 @@
         "relationships": "pattern_maker_station (web editor), mosaic_editor (composition)",
         "truth": "the hexagonal lattice is the most efficient partition of the plane"
       },
-      "is_atmospheric": true,
-      "atmospheric_reason": "keyword: 'decorative' in header"
+      "is_atmospheric": false,
+      "atmospheric_reason": ""
     },
     {
       "token": "diamond_lattice_floor",
@@ -11067,8 +11067,8 @@
         "relationships": "embodies meshes sequence; contrasts with bricoleur_golem (fixed topologies vs improvised)",
         "truth": "genus is not cosmetic -- sphere, cube, torus, cylinder each encode different threats."
       },
-      "is_atmospheric": true,
-      "atmospheric_reason": "keyword: 'cosmetic' in header"
+      "is_atmospheric": false,
+      "atmospheric_reason": ""
     },
     {
       "token": "miura_crawler",
@@ -18451,8 +18451,8 @@
         "relationships": "prerequisite for all spatial reasoning; every other artifact measures itself from here",
         "truth": "the origin is a convention, not a place \u2014 but every space must agree on one"
       },
-      "is_atmospheric": true,
-      "atmospheric_reason": "keyword: 'atmospheric' in header"
+      "is_atmospheric": false,
+      "atmospheric_reason": ""
     },
     {
       "token": "oscillation_cube",
@@ -21522,8 +21522,8 @@
         "relationships": "First artifact in BodyProg_Hands alongside color_picker. Sets the stage for the entire body progression sequence.",
         "truth": "The mirror does not create the reflection \u2014 it reveals what is already there, including what is missing."
       },
-      "is_atmospheric": true,
-      "atmospheric_reason": "keyword: 'decorative' in header"
+      "is_atmospheric": false,
+      "atmospheric_reason": ""
     },
     {
       "token": "mirror_cellular_texture_for_3d",
@@ -29918,7 +29918,7 @@
         "truth": "The atmosphere is a superposition of slow oscillations that instruments make legible."
       },
       "is_atmospheric": true,
-      "atmospheric_reason": "keyword: 'atmospheric' in header"
+      "atmospheric_reason": "marker: 'atmospheric ' in opening lines"
     },
     {
       "token": "bernini_columns",
@@ -29940,8 +29940,8 @@
         "relationships": "depends on procedural spiral mesh generation; contrasts with sine_cylinder_staircase (decorative vs functional spirals); unlocks wave-as-architecture",
         "truth": "A spiral column is a sine wave wrapped around a vertical axis."
       },
-      "is_atmospheric": true,
-      "atmospheric_reason": "keyword: 'decorative' in header"
+      "is_atmospheric": false,
+      "atmospheric_reason": ""
     },
     {
       "token": "biomagneticresonator",

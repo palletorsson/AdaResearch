@@ -54,12 +54,18 @@ ATMOSPHERIC_TOKENS = {
     "dark_sphere",
 }
 
-ATMOSPHERIC_KEYWORDS = (
-    "atmospheric",
-    "decorative",
+# Only treat the keyword as atmospheric when it clearly describes the
+# artifact's *role* in the opening description — not when it appears
+# incidentally in needs/relationships/essence of a load-bearing artifact.
+# Require the marker within the first few comment lines (file-level
+# description), not anywhere in the @identity body.
+ATMOSPHERIC_FIRST_LINE_MARKERS = (
+    "atmospheric ",
+    "decorative artifact",
     "ambient decor",
     "purely visual",
-    "cosmetic",
+    "purely decorative",
+    "cosmetic prop",
     "skybox",
 )
 
@@ -239,10 +245,12 @@ def extract_header(script_path: Path) -> HeaderInfo:
 def is_atmospheric(token: str, header: HeaderInfo) -> tuple[bool, str]:
     if token in ATMOSPHERIC_TOKENS:
         return True, "curated list"
-    text = " ".join(header.lines).lower()
-    for kw in ATMOSPHERIC_KEYWORDS:
-        if kw in text:
-            return True, f"keyword: {kw!r} in header"
+    # Only check the first few header lines (file-level description),
+    # not the @identity body which may use the word incidentally.
+    head_text = " ".join(header.lines[:4]).lower()
+    for kw in ATMOSPHERIC_FIRST_LINE_MARKERS:
+        if kw in head_text:
+            return True, f"marker: {kw!r} in opening lines"
     return False, ""
 
 

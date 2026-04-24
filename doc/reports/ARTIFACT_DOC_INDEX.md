@@ -8,7 +8,7 @@
 - Placeholder headers: **12**
 - No header at all: **318**
 - Documented rate (identity + prose): **81.3%**
-- Atmospheric (filtered from coverage): **13**
+- Atmospheric (filtered from coverage): **2**
 - Reached via wrapper chain: **2**
 
 ## By registry
