@@ -111,3 +111,16 @@ func clamp_noise(value: float, low: float = -1.0, high: float = 1.0) -> float:
 ```
 
 Guarantees output stays in the expected range. Useful before writing to textures.
+
+Log state each frame for later replay.
+
+```gdscript
+var state_log: Array = []
+
+func log_state() -> void:
+    state_log.append(current_snapshot())
+    if state_log.size() > 600:
+        state_log.pop_front()
+```
+
+Ring buffer of ten seconds at 60 Hz. Useful for replay or debugging.
