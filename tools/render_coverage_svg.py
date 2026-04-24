@@ -22,6 +22,16 @@ except Exception:
     pass
 
 
+def xml_escape(text: str) -> str:
+    return (
+        text.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+        .replace("'", "&apos;")
+    )
+
+
 def score_fill(score: float) -> str:
     if score >= 0.999: return "#10b981"  # emerald-500
     if score >= 0.9:   return "#84cc16"  # lime-500
@@ -102,13 +112,13 @@ def main() -> int:
     for i, (label, color) in enumerate(legend):
         y = legend_y + i * 16
         out.append(f'<rect x="{legend_x}" y="{y}" width="12" height="12" fill="{color}" rx="2"/>')
-        out.append(f'<text x="{legend_x + 18}" y="{y + 10}" class="legend">{label}</text>')
+        out.append(f'<text x="{legend_x + 18}" y="{y + 10}" class="legend">{xml_escape(label)}</text>')
 
     # Rows
     for i, seq in enumerate(seq_order):
         row_y = pad_top + i * (cell + gap)
         label_y = row_y + cell * 0.72
-        out.append(f'<text x="{pad_left - 14}" y="{label_y}" class="seq" text-anchor="end">{seq}</text>')
+        out.append(f'<text x="{pad_left - 14}" y="{label_y}" class="seq" text-anchor="end">{xml_escape(seq)}</text>')
         rows = by_seq[seq]
         for j, m in enumerate(rows):
             s = compute_score(m)
@@ -116,7 +126,7 @@ def main() -> int:
             fill = score_fill(s)
             title = f"{m['map']} — {int(s * 100)}% coverage, {len(m['load_bearing'])} placed"
             out.append(f'<rect class="cell" x="{x}" y="{row_y}" width="{cell}" height="{cell}" rx="3" fill="{fill}">'
-                       f'<title>{title}</title></rect>')
+                       f'<title>{xml_escape(title)}</title></rect>')
         count_x = pad_left + max_maps_in_seq * (cell + gap) + 6
         out.append(f'<text x="{count_x}" y="{label_y}" class="count">{len(rows)}</text>')
 
