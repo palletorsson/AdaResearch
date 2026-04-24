@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 360" font-family="ui-monospace,Consolas,monospace">
+<rect width="100%" height="100%" fill="white"/>
+<text x="30" y="32" font-size="19" font-weight="700" fill="#18181b">The iteration loop — what's there, what's missing</text>
+<rect x="30" y="60" width="170" height="80" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/><text x="115.0" y="86" text-anchor="middle" font-size="16" font-weight="700" fill="#064e3b">READ</text><text x="115.0" y="108" text-anchor="middle" font-size="11" fill="#475569">six text files + captures + docs</text>
+<rect x="240" y="60" width="170" height="80" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/><text x="325.0" y="86" text-anchor="middle" font-size="16" font-weight="700" fill="#064e3b">EDIT</text><text x="325.0" y="108" text-anchor="middle" font-size="11" fill="#475569">text or placements</text>
+<rect x="450" y="60" width="170" height="80" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/><text x="535.0" y="86" text-anchor="middle" font-size="16" font-weight="700" fill="#064e3b">WALK</text><text x="535.0" y="108" text-anchor="middle" font-size="11" fill="#475569">VR or capture review</text>
+<rect x="660" y="60" width="170" height="80" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/><text x="745.0" y="86" text-anchor="middle" font-size="16" font-weight="700" fill="#064e3b">LOG</text><text x="745.0" y="108" text-anchor="middle" font-size="11" fill="#475569">feedback bridge</text>
+<line x1="204" y1="100.0" x2="230" y2="100.0" stroke="#94a3b8" stroke-width="2"/><polygon points="236,100.0 228,95.0 228,105.0" fill="#94a3b8"/>
+<line x1="414" y1="100.0" x2="440" y2="100.0" stroke="#94a3b8" stroke-width="2"/><polygon points="446,100.0 438,95.0 438,105.0" fill="#94a3b8"/>
+<line x1="624" y1="100.0" x2="650" y2="100.0" stroke="#94a3b8" stroke-width="2"/><polygon points="656,100.0 648,95.0 648,105.0" fill="#94a3b8"/>
+<path d="M745.0 142 C745.0 262, 115.0 262, 115.0 142" fill="none" stroke="#94a3b8" stroke-width="2"/><polygon points="115.0,142 123.0,147 123.0,137" fill="#94a3b8"/>
+<rect x="90.0" y="280" width="260" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2" stroke-dasharray="6,4"/><text x="220.0" y="302" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">reading surface</text><text x="220.0" y="320" text-anchor="middle" font-size="10" fill="#92400e">/map/[name] — six texts + captures in one place</text>
+<rect x="510.0" y="280" width="260" height="60" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2" stroke-dasharray="6,4"/><text x="640.0" y="302" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">walked marker + drift</text><text x="640.0" y="320" text-anchor="middle" font-size="10" fill="#92400e">last_walked_at, text_hash, placement_hash</text>
+<rect x="30" y="365" width="860" height="40" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2" stroke-dasharray="6,4"/><text x="460.0" y="387" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">LLM claim review  (spans the loop)</text><text x="460.0" y="405" text-anchor="middle" font-size="10" fill="#92400e">does the blurb&apos;s claim get enacted by the placed artifacts?</text>
+<line x1="220.0" y1="280" x2="220.0" y2="144" stroke="#d97706" stroke-width="1" stroke-dasharray="3,3"/>
+<line x1="640.0" y1="280" x2="640.0" y2="144" stroke="#d97706" stroke-width="1" stroke-dasharray="3,3"/>
+</svg>
