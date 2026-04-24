@@ -219,7 +219,7 @@ def diff_map(sequence: str, map_name: str, index: dict[str, IndexEntry]) -> MapC
             cov.atmospheric_placed.append(t)
             continue
         cov.load_bearing.append(t)
-        if idx.header_kind in ("identity", "prose"):
+        if idx.header_kind in ("identity", "prose", "registry"):
             cov.documented.append(t)
             if idx.header_kind == "identity":
                 cov.identity_docs.append(t)

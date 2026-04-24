@@ -1,17 +1,17 @@
 {
   "summary": {
     "maps": 179,
-    "perfect_coverage": 145,
-    "maps_with_no_placements": 2,
-    "avg_coverage_score": 0.941,
-    "avg_doc_coverage": 0.909,
+    "perfect_coverage": 179,
+    "maps_with_no_placements": 3,
+    "avg_coverage_score": 1.0,
+    "avg_doc_coverage": 1.0,
     "totals": {
-      "load_bearing_placements": 764,
-      "documented_placements": 695,
-      "undocumented_placements": 69,
-      "mentioned_in_text": 301,
-      "silent_reinforcement": 417,
-      "silent_undocumented": 46,
+      "load_bearing_placements": 763,
+      "documented_placements": 763,
+      "undocumented_placements": 0,
+      "mentioned_in_text": 300,
+      "silent_reinforcement": 463,
+      "silent_undocumented": 0,
       "text_orphans": 22,
       "unregistered_tokens": 63
     }
@@ -131,16 +131,15 @@
       "documented": [
         "line",
         "line_demo",
-        "science_screen"
+        "science_screen",
+        "vectorline"
       ],
       "identity_docs": [
         "line",
         "line_demo",
         "science_screen"
       ],
-      "undocumented": [
-        "vectorline"
-      ],
+      "undocumented": [],
       "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [
@@ -234,6 +233,7 @@
         "scale_lines"
       ],
       "documented": [
+        "cube_scene",
         "dgrid",
         "grabbable_line",
         "laser_exploding_sphere",
@@ -241,7 +241,9 @@
         "laser_sword",
         "lightrod",
         "line",
+        "line_builder_3d",
         "line_demo",
+        "modulor_man_demo",
         "parallel_line_puzzle",
         "perspective_lines",
         "plus_line_puzzle",
@@ -258,11 +260,7 @@
         "plus_line_puzzle",
         "scale_lines"
       ],
-      "undocumented": [
-        "cube_scene",
-        "line_builder_3d",
-        "modulor_man_demo"
-      ],
+      "undocumented": [],
       "missing_script": [
         "cube_scene",
         "modulor_man_demo"
@@ -283,12 +281,11 @@
         "laser_sword",
         "lightrod",
         "line_demo",
+        "modulor_man_demo",
         "parallel_line_puzzle",
         "plus_line_puzzle"
       ],
-      "silent_undocumented": [
-        "modulor_man_demo"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "summary.md": [
@@ -328,6 +325,7 @@
         "science_screen"
       ],
       "documented": [
+        "cube_scene",
         "draw_dot",
         "science_screen"
       ],
@@ -335,9 +333,7 @@
         "draw_dot",
         "science_screen"
       ],
-      "undocumented": [
-        "cube_scene"
-      ],
+      "undocumented": [],
       "missing_script": [
         "cube_scene"
       ],
@@ -449,6 +445,7 @@
         "triangleprofiles"
       ],
       "documented": [
+        "cube_scene",
         "parasol_triangle",
         "science_screen",
         "triangle",
@@ -462,9 +459,7 @@
         "triangle_line_puzzle",
         "triangleprofiles"
       ],
-      "undocumented": [
-        "cube_scene"
-      ],
+      "undocumented": [],
       "missing_script": [
         "cube_scene"
       ],
@@ -475,12 +470,11 @@
         "triangleprofiles"
       ],
       "silent_reinforcement": [
+        "cube_scene",
         "parasol_triangle",
         "science_screen"
       ],
-      "silent_undocumented": [
-        "cube_scene"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "blurb.md": [
@@ -529,6 +523,7 @@
         "quad"
       ],
       "documented": [
+        "cube_scene",
         "draw_triangle_faces",
         "folded_strip",
         "interactivetriangle",
@@ -542,9 +537,7 @@
         "pythagorean_triangle_angles",
         "quad"
       ],
-      "undocumented": [
-        "cube_scene"
-      ],
+      "undocumented": [],
       "missing_script": [
         "cube_scene"
       ],
@@ -620,6 +613,7 @@
         "snap_tetrahedron_puzzle"
       ],
       "documented": [
+        "cube_scene",
         "grab_trihedron",
         "pyramid_edit",
         "snap_tetrahedron_puzzle"
@@ -629,9 +623,7 @@
         "pyramid_edit",
         "snap_tetrahedron_puzzle"
       ],
-      "undocumented": [
-        "cube_scene"
-      ],
+      "undocumented": [],
       "missing_script": [
         "cube_scene"
       ],
@@ -640,12 +632,11 @@
         "snap_tetrahedron_puzzle"
       ],
       "silent_reinforcement": [
+        "cube_scene",
         "grab_trihedron",
         "pyramid_edit"
       ],
-      "silent_undocumented": [
-        "cube_scene"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "summary.md": [
@@ -788,16 +779,21 @@
         "truncatedtetrahedron"
       ],
       "documented": [
+        "capsule",
         "capsule_radials_rings",
+        "cube_scene",
         "diamonds",
         "grab_octahedron",
         "hole_with_cones",
         "library_rack",
         "lshape",
+        "platonic_grabbables",
         "plus",
+        "prism_block",
         "righttriangle",
         "roughrock",
         "snap_octahedron_puzzle",
+        "sphere",
         "sphere_high",
         "sphere_low",
         "sphere_mid",
@@ -822,13 +818,7 @@
         "torus_radials_rings",
         "truncatedtetrahedron"
       ],
-      "undocumented": [
-        "capsule",
-        "cube_scene",
-        "platonic_grabbables",
-        "prism_block",
-        "sphere"
-      ],
+      "undocumented": [],
       "missing_script": [
         "cube_scene",
         "platonic_grabbables",
@@ -852,17 +842,16 @@
       ],
       "silent_reinforcement": [
         "capsule_radials_rings",
+        "cube_scene",
         "hole_with_cones",
         "library_rack",
         "lshape",
         "plus",
         "righttriangle",
-        "roughrock"
-      ],
-      "silent_undocumented": [
-        "cube_scene",
+        "roughrock",
         "sphere"
       ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "summary.md": [
@@ -928,26 +917,24 @@
       ],
       "documented": [
         "achilles_tortoise",
+        "capsule",
         "combine_portals"
       ],
       "identity_docs": [
         "achilles_tortoise",
         "combine_portals"
       ],
-      "undocumented": [
-        "capsule"
-      ],
+      "undocumented": [],
       "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [
         "combine_portals"
       ],
       "silent_reinforcement": [
-        "achilles_tortoise"
-      ],
-      "silent_undocumented": [
+        "achilles_tortoise",
         "capsule"
       ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "summary.md": [
@@ -1007,9 +994,11 @@
       "documented": [
         "bigframe",
         "code_display",
+        "cube_scene",
         "diamondtoruscollection",
         "durer_scene",
         "library_rack",
+        "prism_block",
         "pyramid",
         "pyramidlong",
         "snap_pyramid_puzzle"
@@ -1020,10 +1009,7 @@
         "pyramidlong",
         "snap_pyramid_puzzle"
       ],
-      "undocumented": [
-        "cube_scene",
-        "prism_block"
-      ],
+      "undocumented": [],
       "missing_script": [
         "cube_scene",
         "prism_block"
@@ -1040,11 +1026,10 @@
         "snap_pyramid_puzzle"
       ],
       "silent_reinforcement": [
-        "library_rack"
-      ],
-      "silent_undocumented": [
+        "library_rack",
         "prism_block"
       ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "summary.md": [
@@ -1275,6 +1260,7 @@
         "z_translation_cube"
       ],
       "documented": [
+        "cube_scene",
         "pick_up_cube",
         "toruscylinder",
         "translation_cube_demo",
@@ -1287,24 +1273,21 @@
         "x_translation_cube",
         "z_translation_cube"
       ],
-      "undocumented": [
-        "cube_scene"
-      ],
+      "undocumented": [],
       "missing_script": [
         "cube_scene"
       ],
       "missing_scene": [],
       "mentioned_in_text": [],
       "silent_reinforcement": [
+        "cube_scene",
         "pick_up_cube",
         "toruscylinder",
         "translation_cube_demo",
         "x_translation_cube",
         "z_translation_cube"
       ],
-      "silent_undocumented": [
-        "cube_scene"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -1427,6 +1410,8 @@
       ],
       "documented": [
         "chair_assembly_puzzle",
+        "cube_scene",
+        "prism_block",
         "scale_me",
         "science_screen"
       ],
@@ -1435,10 +1420,7 @@
         "scale_me",
         "science_screen"
       ],
-      "undocumented": [
-        "cube_scene",
-        "prism_block"
-      ],
+      "undocumented": [],
       "missing_script": [
         "cube_scene",
         "prism_block"
@@ -1447,13 +1429,12 @@
       "mentioned_in_text": [],
       "silent_reinforcement": [
         "chair_assembly_puzzle",
+        "cube_scene",
+        "prism_block",
         "scale_me",
         "science_screen"
       ],
-      "silent_undocumented": [
-        "cube_scene",
-        "prism_block"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -1557,7 +1538,9 @@
         "brick_wall_factory",
         "colorballs",
         "dark_side_prism",
+        "grab_stick_scanner",
         "hand_color_controller",
+        "hand_model",
         "nail_color_controller",
         "science_screen"
       ],
@@ -1569,10 +1552,7 @@
         "nail_color_controller",
         "science_screen"
       ],
-      "undocumented": [
-        "grab_stick_scanner",
-        "hand_model"
-      ],
+      "undocumented": [],
       "missing_script": [
         "hand_model"
       ],
@@ -1582,14 +1562,13 @@
         "brick_wall_factory",
         "colorballs",
         "dark_side_prism",
+        "grab_stick_scanner",
         "hand_color_controller",
+        "hand_model",
         "nail_color_controller",
         "science_screen"
       ],
-      "silent_undocumented": [
-        "grab_stick_scanner",
-        "hand_model"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -1826,14 +1805,13 @@
         "prism"
       ],
       "documented": [
-        "flashlight_demo"
+        "flashlight_demo",
+        "prism"
       ],
       "identity_docs": [
         "flashlight_demo"
       ],
-      "undocumented": [
-        "prism"
-      ],
+      "undocumented": [],
       "missing_script": [
         "prism"
       ],
@@ -2316,6 +2294,7 @@
         "work_energy_demo"
       ],
       "documented": [
+        "3t",
         "VectorBasics",
         "basis_vectors_rig",
         "combined_forces_demo",
@@ -2333,15 +2312,14 @@
         "vector_addition_walk",
         "work_energy_demo"
       ],
-      "undocumented": [
-        "3t"
-      ],
+      "undocumented": [],
       "missing_script": [
         "3t"
       ],
       "missing_scene": [],
       "mentioned_in_text": [],
       "silent_reinforcement": [
+        "3t",
         "VectorBasics",
         "basis_vectors_rig",
         "combined_forces_demo",
@@ -2350,9 +2328,7 @@
         "vector_addition_walk",
         "work_energy_demo"
       ],
-      "silent_undocumented": [
-        "3t"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "technical.md": [
@@ -2583,6 +2559,8 @@
         "destructibles_test_scene",
         "grab_sphere_point",
         "gravity_gun_test_scene",
+        "health_display",
+        "hits_reset_display",
         "queer_cylinder_target",
         "sphere_splitting_showcase",
         "throw_ball",
@@ -2601,10 +2579,7 @@
         "vector_drone",
         "vector_magnitude_demo"
       ],
-      "undocumented": [
-        "health_display",
-        "hits_reset_display"
-      ],
+      "undocumented": [],
       "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [],
@@ -2617,6 +2592,8 @@
         "destructibles_test_scene",
         "grab_sphere_point",
         "gravity_gun_test_scene",
+        "health_display",
+        "hits_reset_display",
         "queer_cylinder_target",
         "sphere_splitting_showcase",
         "throw_ball",
@@ -2624,10 +2601,7 @@
         "vector_magnitude_demo",
         "vector_normalize_demo"
       ],
-      "silent_undocumented": [
-        "health_display",
-        "hits_reset_display"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -3173,9 +3147,13 @@
       "documented": [
         "SphericalHarmonics",
         "control_pendulum",
+        "cube_scene",
         "mario_cube_time_trace",
         "oscillation_controlled_cube",
         "pick_up_cube",
+        "pickup_cube_rotating",
+        "pickup_cube_static",
+        "pickup_cube_transforming",
         "rotatescalecubes",
         "rotating_cube",
         "rotating_cube_demo",
@@ -3193,12 +3171,7 @@
         "science_screen",
         "y_oscillation_cube"
       ],
-      "undocumented": [
-        "cube_scene",
-        "pickup_cube_rotating",
-        "pickup_cube_static",
-        "pickup_cube_transforming"
-      ],
+      "undocumented": [],
       "missing_script": [
         "cube_scene"
       ],
@@ -3212,18 +3185,17 @@
       ],
       "silent_reinforcement": [
         "SphericalHarmonics",
+        "cube_scene",
         "pick_up_cube",
+        "pickup_cube_rotating",
+        "pickup_cube_static",
+        "pickup_cube_transforming",
         "rotatescalecubes",
         "rotating_cube",
         "science_screen",
         "transformation_cube"
       ],
-      "silent_undocumented": [
-        "cube_scene",
-        "pickup_cube_rotating",
-        "pickup_cube_static",
-        "pickup_cube_transforming"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "technical.md": [
@@ -3277,7 +3249,8 @@
         "WavePaintings",
         "draw_dot_time_domain",
         "foucault_pendulum",
-        "lab_table"
+        "lab_table",
+        "seismograph"
       ],
       "identity_docs": [
         "PendulumWave",
@@ -3287,9 +3260,7 @@
         "foucault_pendulum",
         "lab_table"
       ],
-      "undocumented": [
-        "seismograph"
-      ],
+      "undocumented": [],
       "missing_script": [
         "seismograph"
       ],
@@ -3353,6 +3324,7 @@
         "OscillationCurve",
         "SimpleOscillatingBridge",
         "colorballs",
+        "cube_scene",
         "unit_circle_advanced"
       ],
       "identity_docs": [
@@ -3361,9 +3333,7 @@
         "colorballs",
         "unit_circle_advanced"
       ],
-      "undocumented": [
-        "cube_scene"
-      ],
+      "undocumented": [],
       "missing_script": [
         "cube_scene"
       ],
@@ -3374,11 +3344,10 @@
         "unit_circle_advanced"
       ],
       "silent_reinforcement": [
-        "colorballs"
-      ],
-      "silent_undocumented": [
+        "colorballs",
         "cube_scene"
       ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "blurb.md": [
@@ -3429,6 +3398,7 @@
         "colorballs",
         "sine_space",
         "sine_space_explanation",
+        "sine_wall_corridor",
         "sine_wall_explanation"
       ],
       "identity_docs": [
@@ -3437,9 +3407,7 @@
         "sine_space_explanation",
         "sine_wall_explanation"
       ],
-      "undocumented": [
-        "sine_wall_corridor"
-      ],
+      "undocumented": [],
       "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [
@@ -3591,7 +3559,9 @@
         "cable_builder",
         "chord_tension_spring",
         "harmonic_distance_table",
+        "interactable_demo",
         "lab_table",
+        "mario_test_sound_ui",
         "pick_up_cube",
         "timbre_sculptor",
         "wave_interference_3d"
@@ -3608,10 +3578,7 @@
         "timbre_sculptor",
         "wave_interference_3d"
       ],
-      "undocumented": [
-        "interactable_demo",
-        "mario_test_sound_ui"
-      ],
+      "undocumented": [],
       "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [
@@ -3631,15 +3598,14 @@
         "MelodyChaser3D",
         "audio_catalog_tablet",
         "harmonic_distance_table",
+        "interactable_demo",
         "lab_table",
+        "mario_test_sound_ui",
         "pick_up_cube",
         "timbre_sculptor",
         "wave_interference_3d"
       ],
-      "silent_undocumented": [
-        "interactable_demo",
-        "mario_test_sound_ui"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "blurb.md": [
@@ -3722,6 +3688,7 @@
         "ruth_asawa_sculpture"
       ],
       "documented": [
+        "dual_display_test",
         "john_cage_tech_noir",
         "ruth_asawa_sculpture"
       ],
@@ -3729,21 +3696,18 @@
         "john_cage_tech_noir",
         "ruth_asawa_sculpture"
       ],
-      "undocumented": [
-        "dual_display_test"
-      ],
+      "undocumented": [],
       "missing_script": [
         "dual_display_test"
       ],
       "missing_scene": [],
       "mentioned_in_text": [],
       "silent_reinforcement": [
+        "dual_display_test",
         "john_cage_tech_noir",
         "ruth_asawa_sculpture"
       ],
-      "silent_undocumented": [
-        "dual_display_test"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -3823,6 +3787,7 @@
         "sine_cylinder_staircase"
       ],
       "documented": [
+        "cube_scene",
         "math_objects",
         "sine_cylinder_staircase"
       ],
@@ -3830,9 +3795,7 @@
         "math_objects",
         "sine_cylinder_staircase"
       ],
-      "undocumented": [
-        "cube_scene"
-      ],
+      "undocumented": [],
       "missing_script": [
         "cube_scene"
       ],
@@ -3879,16 +3842,15 @@
         "TrigWalkingPath",
         "beat_frequency_demo",
         "lissajous_curves",
-        "sine_oscillation"
+        "sine_oscillation",
+        "wave_interference"
       ],
       "identity_docs": [
         "TrigWalkingPath",
         "beat_frequency_demo",
         "lissajous_curves"
       ],
-      "undocumented": [
-        "wave_interference"
-      ],
+      "undocumented": [],
       "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [],
@@ -3896,11 +3858,10 @@
         "TrigWalkingPath",
         "beat_frequency_demo",
         "lissajous_curves",
-        "sine_oscillation"
-      ],
-      "silent_undocumented": [
+        "sine_oscillation",
         "wave_interference"
       ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -3973,6 +3934,7 @@
         "chladni_plate",
         "coloredlines",
         "dna_specimen",
+        "double_helix_scene",
         "electronicscales",
         "hallway_scene",
         "holographicdisplay",
@@ -3982,6 +3944,7 @@
         "oscilloscope",
         "petri_dish_worms",
         "samplevialrack",
+        "seismograph",
         "spring_demo"
       ],
       "identity_docs": [
@@ -4003,10 +3966,7 @@
         "samplevialrack",
         "spring_demo"
       ],
-      "undocumented": [
-        "double_helix_scene",
-        "seismograph"
-      ],
+      "undocumented": [],
       "missing_script": [
         "double_helix_scene",
         "seismograph"
@@ -4030,6 +3990,7 @@
         "air_music_display_case",
         "chemicalapparatus",
         "coloredlines",
+        "double_helix_scene",
         "electronicscales",
         "hallway_scene",
         "holographicdisplay",
@@ -4037,9 +3998,7 @@
         "multimeter",
         "oscilloscope"
       ],
-      "silent_undocumented": [
-        "double_helix_scene"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "technical.md": [
@@ -4397,6 +4356,7 @@
       ],
       "documented": [
         "Random_Rotate_Random_XYZ",
+        "RotateGridCubes",
         "hardware_entropy_decay",
         "random_decay_multimesh"
       ],
@@ -4405,9 +4365,7 @@
         "hardware_entropy_decay",
         "random_decay_multimesh"
       ],
-      "undocumented": [
-        "RotateGridCubes"
-      ],
+      "undocumented": [],
       "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [
@@ -4415,10 +4373,10 @@
         "hardware_entropy_decay",
         "random_decay_multimesh"
       ],
-      "silent_reinforcement": [],
-      "silent_undocumented": [
+      "silent_reinforcement": [
         "RotateGridCubes"
       ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "blurb.md": [
@@ -4457,6 +4415,7 @@
       "documented": [
         "pixel_cloud",
         "random_walk_128",
+        "random_walk_collection",
         "random_walk_leash",
         "random_walk_terrarium"
       ],
@@ -4465,9 +4424,7 @@
         "random_walk_leash",
         "random_walk_terrarium"
       ],
-      "undocumented": [
-        "random_walk_collection"
-      ],
+      "undocumented": [],
       "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [
@@ -4476,10 +4433,10 @@
         "random_walk_leash",
         "random_walk_terrarium"
       ],
-      "silent_reinforcement": [],
-      "silent_undocumented": [
+      "silent_reinforcement": [
         "random_walk_collection"
       ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "blurb.md": [
@@ -4523,6 +4480,8 @@
         "random_bell_curve"
       ],
       "documented": [
+        "GaussianBlurCircle",
+        "GaussianBlurShader",
         "GaussianPaintSplatter",
         "distribution_comparator",
         "distribution_sampler",
@@ -4535,10 +4494,7 @@
         "distribution_sampler",
         "galton_board"
       ],
-      "undocumented": [
-        "GaussianBlurCircle",
-        "GaussianBlurShader"
-      ],
+      "undocumented": [],
       "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [
@@ -4549,12 +4505,11 @@
         "gaussian_random"
       ],
       "silent_reinforcement": [
+        "GaussianBlurCircle",
         "distribution_comparator",
         "random_bell_curve"
       ],
-      "silent_undocumented": [
-        "GaussianBlurCircle"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "blurb.md": [
@@ -4863,6 +4818,7 @@
         "kaleidocycle_enemy",
         "kresling_spire",
         "miura_crawler",
+        "r_c",
         "scissor_stalker"
       ],
       "identity_docs": [
@@ -4871,9 +4827,7 @@
         "miura_crawler",
         "scissor_stalker"
       ],
-      "undocumented": [
-        "r_c"
-      ],
+      "undocumented": [],
       "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [
@@ -5048,14 +5002,13 @@
         "noisetorus"
       ],
       "documented": [
-        "noiselayers"
+        "noiselayers",
+        "noisetorus"
       ],
       "identity_docs": [
         "noiselayers"
       ],
-      "undocumented": [
-        "noisetorus"
-      ],
+      "undocumented": [],
       "missing_script": [
         "noisetorus"
       ],
@@ -5191,23 +5144,18 @@
       ],
       "unregistered_tokens": [],
       "atmospheric_placed": [
-        "dark_sphere"
-      ],
-      "load_bearing": [
+        "dark_sphere",
         "noisesphere"
       ],
+      "load_bearing": [],
       "documented": [],
       "identity_docs": [],
-      "undocumented": [
-        "noisesphere"
-      ],
+      "undocumented": [],
       "missing_script": [
         "noisesphere"
       ],
       "missing_scene": [],
-      "mentioned_in_text": [
-        "noisesphere"
-      ],
+      "mentioned_in_text": [],
       "silent_reinforcement": [],
       "silent_undocumented": [],
       "text_orphans": [],
@@ -5485,15 +5433,14 @@
       ],
       "documented": [
         "ca_bridge",
-        "ca_columns"
+        "ca_columns",
+        "mirrored_cellular_automata"
       ],
       "identity_docs": [
         "ca_bridge",
         "ca_columns"
       ],
-      "undocumented": [
-        "mirrored_cellular_automata"
-      ],
+      "undocumented": [],
       "missing_script": [
         "mirrored_cellular_automata"
       ],
@@ -5739,6 +5686,7 @@
         "volumetric_fog_ca"
       ],
       "documented": [
+        "ca_screen",
         "disease_spread_ca",
         "self_organization_ca",
         "volumetric_fog_ca"
@@ -5748,9 +5696,7 @@
         "self_organization_ca",
         "volumetric_fog_ca"
       ],
-      "undocumented": [
-        "ca_screen"
-      ],
+      "undocumented": [],
       "missing_script": [
         "ca_screen"
       ],
@@ -6175,25 +6121,22 @@
         "romanesco"
       ],
       "documented": [
+        "fibonacci_sequences",
         "romanesco"
       ],
       "identity_docs": [
+        "fibonacci_sequences",
         "romanesco"
       ],
-      "undocumented": [
-        "fibonacci_sequences"
-      ],
-      "missing_script": [
-        "fibonacci_sequences"
-      ],
+      "undocumented": [],
+      "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [],
       "silent_reinforcement": [
+        "fibonacci_sequences",
         "romanesco"
       ],
-      "silent_undocumented": [
-        "fibonacci_sequences"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -6216,28 +6159,25 @@
         "lyapunov_fractal"
       ],
       "documented": [
+        "julia_set",
         "julia_set_explorer",
         "lyapunov_fractal"
       ],
       "identity_docs": [
+        "julia_set",
         "julia_set_explorer",
         "lyapunov_fractal"
       ],
-      "undocumented": [
-        "julia_set"
-      ],
-      "missing_script": [
-        "julia_set"
-      ],
+      "undocumented": [],
+      "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [],
       "silent_reinforcement": [
+        "julia_set",
         "julia_set_explorer",
         "lyapunov_fractal"
       ],
-      "silent_undocumented": [
-        "julia_set"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -6309,6 +6249,7 @@
       ],
       "documented": [
         "cantor_set",
+        "fibonacci_sequences",
         "fractal_clouds",
         "fractal_recursion_1",
         "koch_curve",
@@ -6319,6 +6260,7 @@
       ],
       "identity_docs": [
         "cantor_set",
+        "fibonacci_sequences",
         "fractal_clouds",
         "fractal_recursion_1",
         "koch_curve",
@@ -6326,16 +6268,13 @@
         "romanesco",
         "sierpinski_triangle"
       ],
-      "undocumented": [
-        "fibonacci_sequences"
-      ],
-      "missing_script": [
-        "fibonacci_sequences"
-      ],
+      "undocumented": [],
+      "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [],
       "silent_reinforcement": [
         "cantor_set",
+        "fibonacci_sequences",
         "fractal_clouds",
         "fractal_recursion_1",
         "koch_curve",
@@ -6344,9 +6283,7 @@
         "sierpinski_triangle",
         "strange_attractors"
       ],
-      "silent_undocumented": [
-        "fibonacci_sequences"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -6373,34 +6310,31 @@
         "space_filling_curve_gallery"
       ],
       "documented": [
+        "Hilbert3D",
         "cellular_automata_3d_stacked",
         "evolutionary_algorithms",
         "fractal_stochastic_tree",
         "space_filling_curve_gallery"
       ],
       "identity_docs": [
+        "Hilbert3D",
         "cellular_automata_3d_stacked",
         "evolutionary_algorithms",
         "fractal_stochastic_tree",
         "space_filling_curve_gallery"
       ],
-      "undocumented": [
-        "Hilbert3D"
-      ],
-      "missing_script": [
-        "Hilbert3D"
-      ],
+      "undocumented": [],
+      "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [],
       "silent_reinforcement": [
+        "Hilbert3D",
         "cellular_automata_3d_stacked",
         "evolutionary_algorithms",
         "fractal_stochastic_tree",
         "space_filling_curve_gallery"
       ],
-      "silent_undocumented": [
-        "Hilbert3D"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -6546,21 +6480,19 @@
         "parametric_lsystem"
       ],
       "documented": [
+        "AnimatedTree",
         "ContextSensitiveTree",
         "lsystem_tree",
         "parametric_lsystem"
       ],
       "identity_docs": [
+        "AnimatedTree",
         "ContextSensitiveTree",
         "lsystem_tree",
         "parametric_lsystem"
       ],
-      "undocumented": [
-        "AnimatedTree"
-      ],
-      "missing_script": [
-        "AnimatedTree"
-      ],
+      "undocumented": [],
+      "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [
         "AnimatedTree",
@@ -6610,17 +6542,15 @@
       ],
       "documented": [
         "ContextFreeGrammars",
+        "Hilbert3D",
         "space_filling_curve_gallery"
       ],
       "identity_docs": [
+        "Hilbert3D",
         "space_filling_curve_gallery"
       ],
-      "undocumented": [
-        "Hilbert3D"
-      ],
-      "missing_script": [
-        "Hilbert3D"
-      ],
+      "undocumented": [],
+      "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [
         "Hilbert3D",
@@ -6874,25 +6804,22 @@
         "science_screen"
       ],
       "documented": [
+        "GeneticProgramming",
         "science_screen"
       ],
       "identity_docs": [
+        "GeneticProgramming",
         "science_screen"
       ],
-      "undocumented": [
-        "GeneticProgramming"
-      ],
-      "missing_script": [
-        "GeneticProgramming"
-      ],
+      "undocumented": [],
+      "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [],
       "silent_reinforcement": [
+        "GeneticProgramming",
         "science_screen"
       ],
-      "silent_undocumented": [
-        "GeneticProgramming"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -6907,20 +6834,20 @@
       "load_bearing": [
         "space_colonization_algorithm"
       ],
-      "documented": [],
-      "identity_docs": [],
-      "undocumented": [
+      "documented": [
         "space_colonization_algorithm"
       ],
-      "missing_script": [
+      "identity_docs": [
         "space_colonization_algorithm"
       ],
+      "undocumented": [],
+      "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [],
-      "silent_reinforcement": [],
-      "silent_undocumented": [
+      "silent_reinforcement": [
         "space_colonization_algorithm"
       ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -6969,25 +6896,22 @@
         "organic_space"
       ],
       "documented": [
+        "branching_growth_algorithm",
         "organic_space"
       ],
       "identity_docs": [
+        "branching_growth_algorithm",
         "organic_space"
       ],
-      "undocumented": [
-        "branching_growth_algorithm"
-      ],
-      "missing_script": [
-        "branching_growth_algorithm"
-      ],
+      "undocumented": [],
+      "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [],
       "silent_reinforcement": [
+        "branching_growth_algorithm",
         "organic_space"
       ],
-      "silent_undocumented": [
-        "branching_growth_algorithm"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -7005,25 +6929,21 @@
         "maze_generation"
       ],
       "documented": [
-        "caverandomwalk"
+        "caverandomwalk",
+        "maze_generation"
       ],
       "identity_docs": [
         "caverandomwalk"
       ],
-      "undocumented": [
-        "maze_generation"
-      ],
-      "missing_script": [
-        "maze_generation"
-      ],
+      "undocumented": [],
+      "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [],
       "silent_reinforcement": [
-        "caverandomwalk"
-      ],
-      "silent_undocumented": [
+        "caverandomwalk",
         "maze_generation"
       ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -7042,26 +6962,27 @@
         "dome",
         "layered_membrane"
       ],
-      "documented": [],
-      "identity_docs": [],
-      "undocumented": [
+      "documented": [
         "cube_mound_scene",
         "dome",
         "layered_membrane"
       ],
-      "missing_script": [
+      "identity_docs": [
         "cube_mound_scene",
-        "dome",
         "layered_membrane"
+      ],
+      "undocumented": [],
+      "missing_script": [
+        "dome"
       ],
       "missing_scene": [],
       "mentioned_in_text": [],
-      "silent_reinforcement": [],
-      "silent_undocumented": [
+      "silent_reinforcement": [
         "cube_mound_scene",
         "dome",
         "layered_membrane"
       ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -7079,25 +7000,23 @@
         "rhizomatic_maze_space"
       ],
       "documented": [
+        "mirror_cellular_texture_for_3d",
         "rhizomatic_maze_space"
       ],
       "identity_docs": [
         "rhizomatic_maze_space"
       ],
-      "undocumented": [
-        "mirror_cellular_texture_for_3d"
-      ],
+      "undocumented": [],
       "missing_script": [
         "mirror_cellular_texture_for_3d"
       ],
       "missing_scene": [],
       "mentioned_in_text": [],
       "silent_reinforcement": [
+        "mirror_cellular_texture_for_3d",
         "rhizomatic_maze_space"
       ],
-      "silent_undocumented": [
-        "mirror_cellular_texture_for_3d"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -7258,6 +7177,7 @@
         "pick_up_cube"
       ],
       "documented": [
+        "breathing_room",
         "flagdancer",
         "grab_long_stick",
         "pick_up_cube"
@@ -7265,22 +7185,19 @@
       "identity_docs": [
         "flagdancer"
       ],
-      "undocumented": [
-        "breathing_room"
-      ],
+      "undocumented": [],
       "missing_script": [
         "breathing_room"
       ],
       "missing_scene": [],
       "mentioned_in_text": [],
       "silent_reinforcement": [
+        "breathing_room",
         "flagdancer",
         "grab_long_stick",
         "pick_up_cube"
       ],
-      "silent_undocumented": [
-        "breathing_room"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "technical.md": [
@@ -7379,28 +7296,26 @@
         "rounded_softbody_test"
       ],
       "documented": [
-        "gridagent"
-      ],
-      "identity_docs": [
-        "gridagent"
-      ],
-      "undocumented": [
         "branching_growth_algorithm",
+        "gridagent",
         "rounded_softbody_test"
       ],
-      "missing_script": [
+      "identity_docs": [
         "branching_growth_algorithm",
+        "gridagent"
+      ],
+      "undocumented": [],
+      "missing_script": [
         "rounded_softbody_test"
       ],
       "missing_scene": [],
       "mentioned_in_text": [],
       "silent_reinforcement": [
-        "gridagent"
-      ],
-      "silent_undocumented": [
         "branching_growth_algorithm",
+        "gridagent",
         "rounded_softbody_test"
       ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {}
     },
@@ -7451,25 +7366,23 @@
         "turing_pattern_generator"
       ],
       "documented": [
+        "reaction_diffusion",
         "turing_pattern_generator"
       ],
       "identity_docs": [
         "turing_pattern_generator"
       ],
-      "undocumented": [
-        "reaction_diffusion"
-      ],
+      "undocumented": [],
       "missing_script": [
         "reaction_diffusion"
       ],
       "missing_scene": [],
       "mentioned_in_text": [],
       "silent_reinforcement": [
+        "reaction_diffusion",
         "turing_pattern_generator"
       ],
-      "silent_undocumented": [
-        "reaction_diffusion"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "technical.md": [
@@ -7930,6 +7843,8 @@
         "science_screen"
       ],
       "documented": [
+        "9_3_smart_rockets_vr",
+        "9_5_evolving_bloops_vr",
         "evolved_creatures",
         "evolvingflowers",
         "gradient_descent_visualization",
@@ -7942,24 +7857,20 @@
         "non_teleological_evolution",
         "science_screen"
       ],
-      "undocumented": [
-        "9_3_smart_rockets_vr",
-        "9_5_evolving_bloops_vr"
-      ],
+      "undocumented": [],
       "missing_script": [],
       "missing_scene": [],
       "mentioned_in_text": [],
       "silent_reinforcement": [
+        "9_3_smart_rockets_vr",
+        "9_5_evolving_bloops_vr",
         "evolved_creatures",
         "evolvingflowers",
         "gradient_descent_visualization",
         "non_teleological_evolution",
         "science_screen"
       ],
-      "silent_undocumented": [
-        "9_3_smart_rockets_vr",
-        "9_5_evolving_bloops_vr"
-      ],
+      "silent_undocumented": [],
       "text_orphans": [],
       "text_mentions_by_role": {
         "critical.md": [
@@ -8290,6 +8201,7 @@
       "documented": [
         "angle_sum_triangle",
         "euclid_postulates_plaque",
+        "parallel_lines",
         "science_screen"
       ],
       "identity_docs": [
@@ -8297,9 +8209,7 @@
         "euclid_postulates_plaque",
         "science_screen"
       ],
-      "undocumented": [
-        "parallel_lines"
-      ],
+      "undocumented": [],
       "missing_script": [
         "parallel_lines"
       ],

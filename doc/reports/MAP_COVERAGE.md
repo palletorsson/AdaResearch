@@ -3,61 +3,23 @@
 Joining spine map placements against `ARTIFACT_DOC_INDEX.json`.
 
 - Maps scanned: **179**
-- Maps with perfect coverage (score = 1.0): **145**
-- Maps with no load-bearing placements: **2**
-- Average coverage score: **94.1%**
+- Maps with perfect coverage (score = 1.0): **179**
+- Maps with no load-bearing placements: **3**
+- Average coverage score: **100.0%**
   (documented-or-mentioned / load-bearing)
-- Average doc-only coverage: **90.9%**
+- Average doc-only coverage: **100.0%**
 
 ## Placement totals
 
-- Load-bearing placements across all maps: **764**
-- Documented placements: **695**
-- Undocumented placements (placeholder / none): **69**
-- Placements mentioned by backtick in any text: **301**
-- Silent reinforcement (documented, not mentioned): **417**
-- Silent undocumented (not documented, not mentioned — concerning): **46**
+- Load-bearing placements across all maps: **763**
+- Documented placements: **763**
+- Undocumented placements (placeholder / none): **0**
+- Placements mentioned by backtick in any text: **300**
+- Silent reinforcement (documented, not mentioned): **463**
+- Silent undocumented (not documented, not mentioned — concerning): **0**
 - Text orphans (backticked but not placed): **22**
 - Unregistered placed tokens: **63**
 
-## Maps with incomplete coverage (worst first)
-
-| Map | Placed | Documented | Mentioned | Silent-undoc | Score |
-|---|---:|---:|---:|---:|---:|
-| PG_Sculpted_Forms | 3 | 0 | 0 | 3 | 0% |
-| PG_Space_Colonization | 1 | 0 | 0 | 1 | 0% |
-| SoftBodies_Playground_of_Joy | 3 | 1 | 0 | 2 | 33% |
-| Fractal_GoldenSpiral | 2 | 1 | 0 | 1 | 50% |
-| PG_Genetic_Evolution | 2 | 1 | 0 | 1 | 50% |
-| PG_Branching_Growth | 2 | 1 | 0 | 1 | 50% |
-| PG_Caves_Mazes | 2 | 1 | 0 | 1 | 50% |
-| PG_Mirrored_Patterns | 2 | 1 | 0 | 1 | 50% |
-| ProceduralGeneration_Reaction_Diffusion_Systems | 2 | 1 | 0 | 1 | 50% |
-| Trans_Scale | 5 | 3 | 0 | 2 | 60% |
-| Primitives_Portals | 3 | 2 | 1 | 1 | 67% |
-| WaveFunctions_John_Cage | 3 | 2 | 0 | 1 | 67% |
-| Fractal_JuliaSet | 3 | 2 | 0 | 1 | 67% |
-| ML_Evolution | 7 | 5 | 0 | 2 | 71% |
-| WaveFunctions_Intro | 15 | 11 | 5 | 4 | 73% |
-| Color_Nails | 8 | 6 | 0 | 2 | 75% |
-| Primitives_Polythedra | 4 | 3 | 1 | 1 | 75% |
-| Random_Rotate_Random_XYZ | 4 | 3 | 3 | 1 | 75% |
-| SoftBodies_Obsticals | 4 | 3 | 0 | 1 | 75% |
-| WaveFunctions_Unit_Circle | 5 | 4 | 3 | 1 | 80% |
-| WaveFunctions_TrigWalkingPath | 5 | 4 | 0 | 1 | 80% |
-| Random_Walk | 5 | 4 | 4 | 1 | 80% |
-| Fractal_CrossSequence | 5 | 4 | 0 | 1 | 80% |
-| Point_Triangle | 6 | 5 | 3 | 1 | 83% |
-| Trans_AxisDecomposition | 6 | 5 | 0 | 1 | 83% |
-| ForcesArena | 16 | 14 | 0 | 2 | 88% |
-| ForcesComposition | 8 | 7 | 0 | 1 | 88% |
-| Random_Gaussian | 8 | 6 | 5 | 1 | 88% |
-| Fractal_Synthesis | 9 | 8 | 0 | 1 | 89% |
-| WaveFunctions_Effect_Sound | 20 | 18 | 7 | 2 | 90% |
-| Primitives_Melencolia | 10 | 8 | 8 | 1 | 90% |
-| Primitives_Ignorance | 21 | 16 | 12 | 2 | 90% |
-| Point_Lines | 15 | 12 | 8 | 1 | 93% |
-| WaveFunctions_Synthesis_Lab | 22 | 20 | 10 | 1 | 96% |
 
 ## Maps with text orphans — text backticks artifacts not placed (22)
 

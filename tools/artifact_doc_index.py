@@ -111,10 +111,30 @@ def parse_tscn(tscn_path: Path) -> dict[str, Any]:
     }
 
 
+def _find_script_by_basename(scene_dir: Path, basename: str) -> Path | None:
+    """Fallback: look for a same-named .gd in the scene's directory."""
+    candidate = scene_dir / basename
+    if candidate.exists():
+        return candidate
+    # Case-insensitive match in the same dir
+    low = basename.lower()
+    for p in scene_dir.glob("*.gd"):
+        if p.name.lower() == low:
+            return p
+    return None
+
+
 def resolve_script_for_scene(
     scene_path: Path, max_depth: int = 2
 ) -> tuple[Path | None, list[str]]:
-    """Follow wrapper chains; return (script_path, wrapper_chain)."""
+    """Follow wrapper chains; return (script_path, wrapper_chain).
+
+    If the declared script path is stale (file moved/renamed) but the
+    scene's own directory contains a .gd with the same basename, that
+    fallback is used. This catches the common case where scripts have
+    been relocated but scene .tscn files still carry stale paths
+    (Godot resolves these via UID at runtime; our parser reads text).
+    """
     chain: list[str] = []
     current = scene_path
     for _ in range(max_depth):
@@ -130,6 +150,11 @@ def resolve_script_for_scene(
             inner = info["inner_scenes"][0].replace("res://", "")
             current = REPO / inner
             continue
+        # If the declared script is missing, try the scene's own dir
+        if not script_path.exists():
+            fallback = _find_script_by_basename(current.parent, script_name)
+            if fallback is not None:
+                return fallback, chain
         return script_path, chain
     return None, chain
 
@@ -265,8 +290,10 @@ class ArtifactEntry:
     script_path: str = ""
     script_exists: bool = False
     wrapper_chain: list[str] = field(default_factory=list)
-    header_kind: str = "none"
+    header_kind: str = "none"  # identity | prose | registry | placeholder | none
     header_text: str = ""
+    header_source: str = ""  # 'script' or 'registry'
+    registry_description: str = ""
     identity_fields: dict[str, str] = field(default_factory=dict)
     is_atmospheric: bool = False
     atmospheric_reason: str = ""
@@ -300,18 +327,33 @@ def load_registry() -> list[tuple[str, str, dict[str, Any]]]:
 
 def build_entry(registry_file: str, token: str, raw: dict[str, Any]) -> ArtifactEntry:
     entry = ArtifactEntry(token=token, registry=registry_file)
+    # Capture registry-level description early — used as a fallback
+    # documentation source when the scene has no script or the script
+    # has no header comment. Scriptless scenes are legitimate for
+    # pure-visual/prop artifacts whose behaviour is declared at the
+    # registry level.
+    desc = raw.get("description") or raw.get("summary") or raw.get("blurb") or ""
+    if isinstance(desc, str):
+        entry.registry_description = desc.strip()
+
     scene_rel = raw.get("scene_path") or raw.get("scene") or ""
     if not scene_rel:
+        _apply_registry_fallback(entry)
         return entry
     scene_rel = scene_rel.replace("res://", "")
     entry.scene_path = scene_rel
     scene_path = REPO / scene_rel
     entry.scene_exists = scene_path.exists()
     if not entry.scene_exists:
+        _apply_registry_fallback(entry)
         return entry
     script_path, chain = resolve_script_for_scene(scene_path)
     entry.wrapper_chain = chain
     if script_path is None:
+        _apply_registry_fallback(entry)
+        entry.is_atmospheric, entry.atmospheric_reason = is_atmospheric(
+            token, HeaderInfo(lines=[entry.header_text])
+        )
         return entry
     try:
         entry.script_path = str(script_path.relative_to(REPO)).replace("\\", "/")
@@ -319,18 +361,38 @@ def build_entry(registry_file: str, token: str, raw: dict[str, Any]) -> Artifact
         entry.script_path = str(script_path)
     entry.script_exists = script_path.exists()
     if not entry.script_exists:
+        _apply_registry_fallback(entry)
+        entry.is_atmospheric, entry.atmospheric_reason = is_atmospheric(
+            token, HeaderInfo(lines=[entry.header_text])
+        )
         return entry
     header = extract_header(script_path)
-    entry.header_kind = header.kind
-    entry.header_text = "\n".join(header.lines)
+    # If the script header is missing or thin, fall back to the registry
+    # description. Script docs still take precedence when they exist.
+    if header.kind in ("none", "placeholder") and len(entry.registry_description) >= 30:
+        entry.header_kind = "registry"
+        entry.header_text = entry.registry_description
+        entry.header_source = "registry"
+    else:
+        entry.header_kind = header.kind
+        entry.header_text = "\n".join(header.lines)
+        entry.header_source = "script" if header.lines else ""
     entry.identity_fields = header.identity_fields
     entry.is_atmospheric, entry.atmospheric_reason = is_atmospheric(token, header)
     return entry
 
 
+def _apply_registry_fallback(entry: ArtifactEntry) -> None:
+    """Populate header from registry description when script is unreachable."""
+    if len(entry.registry_description) >= 30:
+        entry.header_kind = "registry"
+        entry.header_text = entry.registry_description
+        entry.header_source = "registry"
+
+
 def summarize(entries: list[ArtifactEntry]) -> dict[str, Any]:
     total = len(entries)
-    kinds = {"identity": 0, "prose": 0, "placeholder": 0, "none": 0}
+    kinds = {"identity": 0, "prose": 0, "registry": 0, "placeholder": 0, "none": 0}
     scene_missing = 0
     script_missing = 0
     atmospheric = 0
@@ -347,11 +409,14 @@ def summarize(entries: list[ArtifactEntry]) -> dict[str, Any]:
         if e.wrapper_chain:
             wrapped += 1
         reg = e.registry
-        by_registry.setdefault(reg, {"total": 0, "identity": 0, "prose": 0, "placeholder": 0, "none": 0})
+        by_registry.setdefault(
+            reg,
+            {"total": 0, "identity": 0, "prose": 0, "registry": 0, "placeholder": 0, "none": 0},
+        )
         by_registry[reg]["total"] += 1
         by_registry[reg][e.header_kind] = by_registry[reg].get(e.header_kind, 0) + 1
     identity_rate = kinds["identity"] / total if total else 0.0
-    documented = kinds["identity"] + kinds["prose"]
+    documented = kinds["identity"] + kinds["prose"] + kinds["registry"]
     documented_rate = documented / total if total else 0.0
     return {
         "total": total,
@@ -376,9 +441,10 @@ def print_markdown(entries: list[ArtifactEntry], summary: dict[str, Any]) -> Non
     print(f"- Script file missing (scene exists): **{summary['script_missing']}**")
     print(f"- `@identity` headers: **{k['identity']}** ({summary['identity_adoption'] * 100:.1f}%)")
     print(f"- Prose headers: **{k['prose']}**")
+    print(f"- Registry-description fallback: **{k.get('registry', 0)}**")
     print(f"- Placeholder headers: **{k['placeholder']}**")
-    print(f"- No header at all: **{k['none']}**")
-    print(f"- Documented rate (identity + prose): **{summary['documented_rate'] * 100:.1f}%**")
+    print(f"- No header or registry description: **{k['none']}**")
+    print(f"- Documented rate (identity + prose + registry): **{summary['documented_rate'] * 100:.1f}%**")
     print(f"- Atmospheric (filtered from coverage): **{summary['atmospheric_count']}**")
     print(f"- Reached via wrapper chain: **{summary['wrapped_count']}**\n")
 
