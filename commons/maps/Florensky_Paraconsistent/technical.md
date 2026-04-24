@@ -144,3 +144,45 @@ The map is the direct QFEP analog within the foundationscrisis sequence. The for
 The phi term (sensitivity to change) appears in the Florensky sphere's return to superposition. After collapse (observation forces a definite state), the sphere drifts back to BOTH. This drift is the phi term: the system's tendency to return to productive tension rather than remaining in a definite state. phi > 0 means the system embraces becoming. The sphere enacts phi > 0 by refusing to stay collapsed.
 
 The paraconsistent claim, in QFEP terms: life, adaptation, and computation do not occur in the F regime (pure order) or the E regime (pure entropy) but in the overlap — at the edge where both are present. The foundationscrisis sequence has spent six maps demonstrating that the F regime (pure formalization, complete certainty) is impossible. This map shows the alternative: hold the tension, refuse to resolve, and the contradiction becomes generative.
+
+## Antinomic Reasoning
+
+```gdscript
+# Florensky: mathematical and theological reasoning both require embracing antinomies.
+# Paraconsistent logic models antinomy without explosion.
+class_name Antinomy
+
+@export var thesis: String
+@export var antithesis: String
+
+func hold_both() -> Dictionary:
+    return {
+        "thesis": thesis,
+        "antithesis": antithesis,
+        "status": "BOTH_ASSERTED",  # Belnap: BOTH
+        "classical_conclusion": "EXPLOSION",
+        "paraconsistent_conclusion": "CONTINUE",
+    }
+```
+
+## Belnap Four-Valued Logic
+
+```gdscript
+# Florensky's antinomic reasoning finds a home in four-valued logic.
+enum BelnapValue { NEITHER = 0, TRUE = 1, FALSE = 2, BOTH = 3 }
+
+static func conjunction(a: int, b: int) -> int:
+    const TABLE := [
+        [0, 0, 2, 2],
+        [0, 1, 2, 3],
+        [2, 2, 2, 2],
+        [2, 3, 2, 3],
+    ]
+    return TABLE[a][b]
+
+static func information_order(a: int, b: int) -> int:
+    # NEITHER < TRUE, FALSE < BOTH in the information ordering
+    # Return -1 if a < b, 0 if equal, 1 if a > b
+    var order := {0: 0, 1: 1, 2: 1, 3: 2}
+    return sign(order[a] - order[b])
+```

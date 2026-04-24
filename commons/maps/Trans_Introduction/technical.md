@@ -195,3 +195,63 @@ The dark sphere doesn't transform in any learner-controlled sense. Its `rotation
 **quaternion_rotator** — the `Rotation Gimbal` shows when Euler angles fail but does not demonstrate the solution. An artifact displaying the same rotation as both Euler angles and a quaternion `(w, x, y, z)`, interpolating smoothly through the gimbal-lock zone, would complete the argument the gimbal starts. The gimbal shows the problem. This would show what replaces it.
 
 **shear_visualizer** — a dedicated shear artifact with a unit cube and a single shear-factor slider. The `Invariants Demo` includes shear as one of the transforms `_apply_transform(which)` can apply, but the main three cubes in this map are translate, rotate, scale. A standalone shear demo would establish shear as the fourth affine transform type — the one that is neither rigid nor similarity — before the sequence reaches linear algebra maps where shear matrices appear explicitly.
+
+## Transformation Composition in Code
+
+```gdscript
+# Composing transforms in order: scale, rotate, then translate
+static func build_srt(position: Vector3, rotation: Vector3, scale: Vector3) -> Transform3D:
+    var t := Transform3D.IDENTITY
+    t = t.scaled(scale)
+    t = t.rotated(Vector3.UP, rotation.y)
+    t = t.rotated(Vector3.RIGHT, rotation.x)
+    t = t.rotated(Vector3.FORWARD, rotation.z)
+    t.origin = position
+    return t
+
+# Order matters: scaling after rotation produces a different result from
+# scaling before rotation. Godot's Transform3D applies in right-to-left order
+# when chained, so `t.rotated(...).scaled(...)` scales first, then rotates.
+static func demonstrate_non_commutativity() -> void:
+    var scale_first := Transform3D.IDENTITY.scaled(Vector3(2, 1, 1)).rotated(Vector3.UP, PI / 4)
+    var rotate_first := Transform3D.IDENTITY.rotated(Vector3.UP, PI / 4).scaled(Vector3(2, 1, 1))
+    # scale_first.basis != rotate_first.basis
+```
+
+## Translation Order
+
+```gdscript
+# In Godot, Transform3D right-multiplies: a.b() applies b then a when read right-to-left.
+var rotate_then_translate := Transform3D.IDENTITY.translated(Vector3(5, 0, 0)).rotated(Vector3.UP, PI / 2)
+```
+
+## One More Code Note
+
+```gdscript
+# Translation is a right-multiplication of a vector-shaped transform:
+var after := before.translated(Vector3(1, 0, 0))
+```
+
+## More Code Examples
+
+```gdscript
+# Combining two transforms into one chain
+var combined := Transform3D.IDENTITY * first * second
+
+# Inverse of a transform
+var inverse := t.affine_inverse()
+
+# Interpolating between two transforms for smooth animation
+var midway := start.interpolate_with(end, 0.5)
+```
+
+## Another Snippet
+
+```gdscript
+# Applying a transform to a point
+var transformed: Vector3 = transform * original_point
+
+# Extracting the basis and origin separately
+var basis: Basis = transform.basis
+var origin: Vector3 = transform.origin
+```

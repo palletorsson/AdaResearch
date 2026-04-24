@@ -136,3 +136,17 @@ func downstream_consumer_guard(value: int, callback: Callable) -> void:
         BelnapLogic.Value.BOTH: log_contradiction_for_review()
         BelnapLogic.Value.NEITHER: log_missing_evidence()
 ```
+
+## Testing the Engine
+
+A test suite for the paraconsistent inference engine checks that classical inferences remain sound when the knowledge base is consistent, and that inference continues without explosion when contradictions are present.
+
+```gdscript
+func run_tests() -> void:
+    assert(query("unrelated_fact") == BelnapLogic.Value.NEITHER)
+    assert_fact("P", BelnapLogic.Value.TRUE, "sensor_A")
+    assert(query("P") == BelnapLogic.Value.TRUE)
+    assert_fact("P", BelnapLogic.Value.FALSE, "sensor_B")
+    assert(query("P") == BelnapLogic.Value.BOTH)
+    assert(query("Q") == BelnapLogic.Value.NEITHER)
+```

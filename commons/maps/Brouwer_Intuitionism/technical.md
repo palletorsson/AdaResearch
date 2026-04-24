@@ -124,3 +124,64 @@ Brouwer's intuitionism, once considered a fringe position that crippled mathemat
 The auto-reveal mechanic is the map's deepest technical feature. In a standard map, all tiles exist from the start — the player reveals what was always there. In Brouwer_Intuitionism, tiles are created by the player's approach. The space does not preexist the traversal. This is the BHK interpretation made spatial: a proposition (tile) exists only when there is a proof (the player's presence) that constructs it.
 
 The stepping-stone layout means the player must plan their path — some platforms are reachable only via specific routes. There is no omniscient view of the full map. You build the ground as you walk, and the ground you build determines what ground you can build next. This is constructive mathematics as lived experience: each theorem enables further theorems, and the ones you cannot reach from here are not "false" — they are simply unconstructed.
+
+## Intuitionistic Logic
+
+```gdscript
+# Brouwer-Heyting-Kolmogorov interpretation:
+# To assert P, provide a construction.
+# To assert NOT P, provide a construction that transforms any proof of P into a contradiction.
+class_name IntuitionisticJudgment
+
+enum Status { CONSTRUCTED, REFUTED, UNKNOWN }
+
+var status: int = Status.UNKNOWN
+var construction: Callable
+
+static func law_of_excluded_middle_fails() -> String:
+    # P OR NOT P is not a theorem in intuitionistic logic.
+    # A witness is required: either a construction of P, or a refutation.
+    return "No construction of (P OR NOT P) without a witness for P or NOT P."
+```
+
+## Constructive Proof Scaffold
+
+```gdscript
+# A constructive proof provides a witness.
+# For existential claims: give an example.
+# For universal claims: give an algorithm that constructs the witness for any input.
+class_name ConstructiveProof
+
+func exists_even_number_greater_than(n: int) -> int:
+    # Constructive proof: return an even number > n
+    return n + 2 if (n + 2) % 2 == 0 else n + 3
+
+func all_naturals_have_successor(n: int) -> int:
+    # The successor construction
+    return n + 1
+
+func classical_fallback_rejected(p: bool) -> String:
+    # Classical logic: (NOT NOT P) -> P
+    # Intuitionistic: cannot conclude P from NOT NOT P without a construction
+    return "construction_required"
+```
+
+## Kripke Semantics Sketch
+
+```gdscript
+# Intuitionistic logic has Kripke semantics: truth is relative to a stage of knowledge.
+# Each stage may add knowledge but never remove it.
+class_name KripkeStage
+
+var known_truths: Array = []
+
+func knows(statement: String) -> bool:
+    return statement in known_truths
+
+func extend(new_truth: String) -> KripkeStage:
+    var next := KripkeStage.new()
+    next.known_truths = known_truths.duplicate()
+    if not new_truth in next.known_truths:
+        next.known_truths.append(new_truth)
+    return next
+```

@@ -267,3 +267,22 @@ The E-term map makes that search meaningful by establishing what too-much-entrop
 **crystal_to_chaos_morph** — A single geometric object that interpolates between a perfect lattice (low entropy configuration) and a scattered cloud (high entropy configuration) driven by a parameter t from 0 to 1. At t=0, vertices lock to grid positions. At t=1, each vertex drifts to a random position within the spawn volume. The morph makes the transition continuous rather than binary — the learner sees exactly where structure gives way to noise, and how gradually it happens.
 
 **entropy_histogram** — A bar chart artifact that samples the positions of all random_cubes across the four map instances and plots their spatial distribution in real time. Uniform tall bars mean high entropy (cubes spread evenly). Uneven bars with one dominant peak mean low entropy (cubes clustered). The histogram updates every frame, flickering as cubes drift and bounce, making the statistical definition of entropy visually immediate.
+
+## Entropy Term Sampler
+
+```gdscript
+# E(S) in the QFEP formula samples the system's entropy.
+# Different state spaces provide different entropy functions.
+class_name QFEPEntropyProbe
+
+static func shannon_entropy(probabilities: Array) -> float:
+    var h: float = 0.0
+    for p in probabilities:
+        if p > 0.0:
+            h -= p * log(p) / log(2.0)
+    return h
+
+static func configuration_entropy(configurations: Array) -> float:
+    # Boltzmann: k * ln(microstates)
+    return log(configurations.size())
+```

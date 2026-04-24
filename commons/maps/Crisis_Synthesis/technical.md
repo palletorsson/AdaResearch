@@ -154,3 +154,49 @@ The summit platform uses a transport cube (`tc:y:1` at row 3, col 8) to elevate 
 The map's `sub:map` spawn point (row 2, col 8) places the player at the top of the arena, looking down at the summit. The initial view is panoramic: all four wings visible, the summit in the center, the formula glowing at the peak. After seven maps of constrained, compressed spaces, this opening vista is the sequence's first breath of open air.
 
 The exit teleporter (row 16, col 8) leads to the QFEP Laboratory — the next sequence in the curriculum, where the formula becomes interactive and the edge is explored systematically.
+
+## Crisis Timeline
+
+```gdscript
+# The early 20th century foundations crisis at a glance.
+class_name FoundationsCrisisTimeline
+
+const EVENTS := [
+    {"year": 1902, "event": "Russell's paradox (Frege receives letter)"},
+    {"year": 1908, "event": "Zermelo's axiomatisation"},
+    {"year": 1922, "event": "ZF set theory"},
+    {"year": 1931, "event": "Gödel's incompleteness theorems"},
+    {"year": 1936, "event": "Church-Turing computability"},
+    {"year": 1963, "event": "Cohen: continuum hypothesis independent of ZFC"},
+]
+
+static func events_per_decade() -> Dictionary:
+    var by_decade: Dictionary = {}
+    for event in EVENTS:
+        var decade: int = (event.year / 10) * 10
+        by_decade[decade] = by_decade.get(decade, 0) + 1
+    return by_decade
+```
+
+## Post-Crisis Toolkit
+
+```gdscript
+# The curriculum's post-crisis toolkit: a set of design principles for
+# computational practice that admits its own limits.
+class_name PostCrisisPractice
+
+const PRINCIPLES := [
+    "Acknowledge the classifier's outside",
+    "Carry contradictions rather than eliminate them",
+    "Name your standpoint",
+    "Build commons from incomplete agents",
+    "Grow rhizomatically rather than hierarchically",
+    "Use formal systems with awareness of their limits",
+]
+
+static func applies_to_project(description: String) -> Dictionary:
+    var checks: Dictionary = {}
+    for principle in PRINCIPLES:
+        checks[principle] = "REQUIRED"
+    return checks
+```

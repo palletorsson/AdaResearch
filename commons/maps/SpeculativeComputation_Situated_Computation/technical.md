@@ -148,3 +148,24 @@ class_name StandpointPicker extends Control
 func _on_standpoint_selected(name: String) -> void:
     emit_signal("standpoint_chosen", name, standpoints[name])
 ```
+
+## Testing Against Standpoints
+
+A classifier trained under a specific standpoint can be evaluated against held-out data from that standpoint's population. Metrics like calibration error help detect when a standpoint's training data is not representative of the population the classifier is deployed on.
+
+```gdscript
+func evaluate_calibration(predictions: Array, outcomes: Array) -> float:
+    var bins: Array = [0, 0, 0, 0, 0]
+    var outcome_per_bin: Array = [0, 0, 0, 0, 0]
+    for i in range(predictions.size()):
+        var bin_idx: int = clamp(int(predictions[i] * 5), 0, 4)
+        bins[bin_idx] += 1
+        outcome_per_bin[bin_idx] += outcomes[i]
+    var calibration_error: float = 0.0
+    for b in range(5):
+        if bins[b] > 0:
+            var avg_outcome: float = float(outcome_per_bin[b]) / bins[b]
+            var expected_outcome: float = (b + 0.5) / 5.0
+            calibration_error += abs(avg_outcome - expected_outcome)
+    return calibration_error / 5.0
+```

@@ -249,3 +249,18 @@ The ambient preset `edge_of_chaos_alive` and the lighting — ambient color `(0.
 **bifurcation_ring** — A circular track surrounding the edge_core where the learner walks to continuously vary lambda from 0.0 through 0.4 to 1.0 and back. The floor tiles under the learner's feet display the cellular automaton behavior class corresponding to their angular position — frozen tiles at 0 degrees, periodic blinkers at 90, chaotic noise at 180, Class IV complexity at the two points where the ring crosses lambda 0.4. The learner physically traces the phase transition by walking a circle, feeling the behavioral regimes change underfoot.
 
 **dual_diffusion_tank** — A transparent tank containing two visible fluids with different diffusion rates, simulating the Gray-Scott reaction-diffusion system in three dimensions rather than on a flat display. The learner watches spots form as volumetric spheres, stripes as tubular structures, labyrinths as folded membranes — the same Turing patterns rendered as spatial objects rather than textures. Feed and kill rate dials on the tank rim let the learner explore the parameter space, connecting the flat shader patterns on the turing_pattern displays to their three-dimensional physical analogs.
+
+## Edge-of-Chaos Detector
+
+```gdscript
+# Class IV rules live between ordered and chaotic regimes.
+# Detecting the edge: measure how small perturbations propagate over time.
+class_name EdgeOfChaosDetector
+
+static func lyapunov_estimate(trajectory_a: Array, trajectory_b: Array) -> float:
+    # Two nearby trajectories; measure exponential divergence rate
+    if trajectory_a.size() < 10: return 0.0
+    var initial_sep: float = trajectory_a[0].distance_to(trajectory_b[0])
+    var final_sep: float = trajectory_a[-1].distance_to(trajectory_b[-1])
+    return log(final_sep / max(initial_sep, 1e-10)) / trajectory_a.size()
+```

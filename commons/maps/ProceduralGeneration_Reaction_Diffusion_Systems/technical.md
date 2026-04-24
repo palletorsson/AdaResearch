@@ -67,3 +67,35 @@ The per-frame cost of the map scales with the number of instanced artifacts and 
 Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map's controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
 
 The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map's concrete contribution to the curriculum.
+
+## Gray-Scott Shader Kernel
+
+```glsl
+// Compute shader fragment for a single Gray-Scott step
+uniform sampler2D u_tex;  // current U concentrations
+uniform sampler2D v_tex;  // current V concentrations
+uniform float du;         // diffusion rate U
+uniform float dv;         // diffusion rate V
+uniform float feed;       // feed rate
+uniform float kill;       // kill rate
+uniform vec2 pixel_size;
+
+void fragment() {
+    vec2 uv = UV;
+    float u = texture(u_tex, uv).r;
+    float v = texture(v_tex, uv).r;
+    // Laplacian via 5-point stencil
+    float u_lap = texture(u_tex, uv + vec2(pixel_size.x, 0)).r
+                + texture(u_tex, uv - vec2(pixel_size.x, 0)).r
+                + texture(u_tex, uv + vec2(0, pixel_size.y)).r
+                + texture(u_tex, uv - vec2(0, pixel_size.y)).r
+                - 4.0 * u;
+    float v_lap = texture(v_tex, uv + vec2(pixel_size.x, 0)).r
+                + texture(v_tex, uv - vec2(pixel_size.x, 0)).r
+                + texture(v_tex, uv + vec2(0, pixel_size.y)).r
+                - 4.0 * v;
+    float new_u = u + du * u_lap - u * v * v + feed * (1.0 - u);
+    float new_v = v + dv * v_lap + u * v * v - (feed + kill) * v;
+    COLOR = vec4(new_u, new_v, 0.0, 1.0);
+}
+```

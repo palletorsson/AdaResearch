@@ -125,3 +125,49 @@ The map makes this visible: the border walls (F at maximum — the system's comp
 Godel's theorem is not a puzzle that cleverer mathematicians will solve. It is a theorem about the structure of all sufficiently powerful formal systems. "Sufficiently powerful" means: capable of expressing basic arithmetic (addition and multiplication of natural numbers). This threshold is remarkably low. Any system that can count can encounter its own limits.
 
 The map places this result at position 4 of 8 in the foundationscrisis sequence — the climax. After this, the remaining maps explore responses: Escher makes incompleteness visual, Brouwer proposes a constructive alternative, Florensky embraces contradiction, and Crisis_Synthesis converts the limit into a generative principle. But the limit itself, established here, is permanent. No subsequent map revokes it.
+
+## Gödel Numbering
+
+```gdscript
+# Simplified Gödel numbering: assign primes to symbols, encode sequences as products.
+class_name GodelNumbering
+
+const PRIMES := [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
+var symbol_codes := {"(": 1, ")": 2, "=": 3, "0": 4, "S": 5, "+": 6, "*": 7, "x": 8}
+
+func encode(formula_symbols: Array) -> int:
+    var result: int = 1
+    for i in range(formula_symbols.size()):
+        var code: int = symbol_codes[formula_symbols[i]]
+        result *= int(pow(PRIMES[i], code))
+    return result
+
+func diagonal_sentence(formula_code: int) -> int:
+    # Conceptually: construct G such that G = "this sentence is not provable"
+    # The actual construction uses substitution and is lengthier; this is a sketch.
+    return formula_code
+```
+
+## Provability vs Truth
+
+```gdscript
+# Gödel's theorem relates provability in a formal system to truth.
+# For any consistent system F strong enough for arithmetic:
+# - There exist true statements F cannot prove.
+# - F cannot prove its own consistency.
+class_name FormalSystem
+
+var axioms: Array = []
+var proved: Array = []
+
+func prove(statement: String) -> bool:
+    return statement in proved
+
+func can_prove_self_consistent() -> bool:
+    # Gödel's second theorem: no.
+    return false
+
+func list_unprovable_truths() -> Array:
+    # Gödel's first theorem: this list is non-empty for any sufficiently strong F.
+    return ["G_F"]  # the Gödel sentence for F
+```

@@ -109,3 +109,59 @@ alpha + beta + gamma = pi + integral(K dA)
 where K is Gaussian curvature and the integral is over the triangle's area. When K = 0, the integral vanishes and the sum is exactly pi. When K is nonzero, the angle sum depends on both curvature and area — larger triangles on a curved surface show more deviation.
 
 This map presents the K = 0 case and lets it feel like the only case. That feeling — of geometric necessity — is what the next six maps systematically dismantle.
+
+## Parallel Axiom in Code
+
+```gdscript
+# The parallel postulate (Euclid's 5th): given a line and a point not on it,
+# exactly one line through the point is parallel to the given line.
+class_name EuclideanGeometry
+
+static func parallel_through_point(line_direction: Vector2, through_point: Vector2, point_on_line: Vector2) -> Array:
+    # A line through `through_point` parallel to the given line
+    return [through_point, through_point + line_direction]
+
+static func lines_meet(a_origin: Vector2, a_dir: Vector2, b_origin: Vector2, b_dir: Vector2) -> Vector2:
+    # Intersection of two lines by solving a linear system
+    var det: float = a_dir.x * b_dir.y - a_dir.y * b_dir.x
+    if abs(det) < 0.0001: return Vector2.INF  # parallel
+    var diff: Vector2 = b_origin - a_origin
+    var t: float = (diff.x * b_dir.y - diff.y * b_dir.x) / det
+    return a_origin + a_dir * t
+```
+
+## Testing Parallelism
+
+```gdscript
+static func are_parallel(a_dir: Vector2, b_dir: Vector2) -> bool:
+    var det: float = a_dir.x * b_dir.y - a_dir.y * b_dir.x
+    return abs(det) < 0.0001
+```
+
+## Sum of Angles in a Triangle
+
+```gdscript
+# Euclid's 5th postulate implies the triangle angle sum is 180°.
+# In non-Euclidean geometries this fails.
+static func triangle_angle_sum_euclidean(a: Vector2, b: Vector2, c: Vector2) -> float:
+    var ab: Vector2 = b - a
+    var ac: Vector2 = c - a
+    var ba: Vector2 = a - b
+    var bc: Vector2 = c - b
+    var ca: Vector2 = a - c
+    var cb: Vector2 = b - c
+    var angle_a: float = ab.angle_to(ac)
+    var angle_b: float = ba.angle_to(bc)
+    var angle_c: float = ca.angle_to(cb)
+    return abs(angle_a) + abs(angle_b) + abs(angle_c)  # always PI
+```
+
+## Playfair's Axiom Restated
+
+```gdscript
+# Playfair's axiom (equivalent to Euclid's 5th):
+# Given a line and a point not on it, exactly one line through the point is parallel to the given line.
+static func playfair_check(given_line: Array, point: Vector2) -> bool:
+    # Returns true if exactly one parallel exists (always true in Euclidean plane).
+    return true
+```

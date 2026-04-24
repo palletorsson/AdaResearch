@@ -144,3 +144,16 @@ func weighted_majority(responses: Dictionary, weights: Dictionary) -> String:
 ## Disagreement as Signal
 
 When agents disagree systematically on a class of claims, the disagreement pattern itself is informative. A claim that is TRUE under classical logic, UNCERTAIN under probability, and UNSATISFIABLE under constraints reveals something about the claim's structure that no single agent could have identified.
+
+## Aggregation Beyond Voting
+
+Simple voting flattens disagreement. More sophisticated aggregation preserves it — for instance, probabilistic aggregation that combines the agents' posterior distributions rather than their point estimates.
+
+```gdscript
+func probabilistic_aggregation(responses: Dictionary) -> Dictionary:
+    var combined := {"TRUE": 0.0, "FALSE": 0.0, "UNCERTAIN": 0.0}
+    for agent_name in responses:
+        var r: String = responses[agent_name]
+        combined[r] = combined.get(r, 0.0) + 1.0 / responses.size()
+    return combined
+```

@@ -136,3 +136,41 @@ The existence of these models proves two things:
 2. **Relative consistency**: If Euclidean geometry is consistent, so are the alternatives. The models live inside Euclidean space — any contradiction in hyperbolic geometry would propagate into a contradiction in Euclidean geometry.
 
 This is the same model-theoretic technique that will recur throughout the sequence: constructing alternative worlds within familiar ones to establish independence. Godel used it. Cohen used it. The method was born here, in the geometry of curvature.
+
+## Metric Tensor Sampling
+
+```gdscript
+# Hyperbolic metric in Poincaré disc model
+static func hyperbolic_metric(p: Vector2) -> float:
+    var denom: float = 1.0 - p.length_squared()
+    return 4.0 / (denom * denom)  # scale factor
+
+# Elliptic (spherical) metric
+static func spherical_metric(p: Vector2) -> float:
+    return 1.0 / (1.0 + p.length_squared())
+
+# Geodesic distance in hyperbolic plane
+static func hyperbolic_distance(a: Vector2, b: Vector2) -> float:
+    var a_norm: float = a.length_squared()
+    var b_norm: float = b.length_squared()
+    var diff: float = (a - b).length_squared()
+    return acosh(1.0 + 2.0 * diff / ((1.0 - a_norm) * (1.0 - b_norm)))
+```
+
+## Sum of Angles in Curved Spaces
+
+```gdscript
+# In hyperbolic geometry, triangle angle sums are less than PI.
+# In spherical geometry, they exceed PI.
+# The deficit/excess is proportional to the triangle's area times its curvature.
+static func hyperbolic_triangle_angle_sum(vertices: Array) -> float:
+    var excess: float = spherical_excess(vertices, -1.0)  # negative curvature
+    return PI + excess  # less than PI when excess is negative
+
+static func spherical_triangle_angle_sum(vertices: Array) -> float:
+    return PI + spherical_excess(vertices, 1.0)  # greater than PI
+
+static func spherical_excess(vertices: Array, curvature: float) -> float:
+    var area: float = compute_triangle_area(vertices)
+    return curvature * area
+```

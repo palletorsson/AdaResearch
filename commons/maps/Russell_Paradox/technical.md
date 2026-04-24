@@ -108,3 +108,51 @@ The map's concentric structure is not merely decorative. Set membership IS conta
 The height gradient (3 to 2 to 1, outside to inside) inverts the expected relationship between height and importance. In most maps, the highest point is the climax. Here, the center is the lowest, the most enclosed, the most trapped. The paradox does not expand outward — it collapses inward, into a question that has no stable answer.
 
 The exit teleporter sits below the rings, after the learner has spiraled out of the nesting. Its prompt: "To Godel's theorem." The connection is direct: Russell discovered that self-reference breaks set theory. Godel will discover that self-reference breaks provability.
+
+## Encoding the Paradox
+
+```gdscript
+# Russell's paradox: R = { x : x not in x }
+# If R in R, then R not in R (by definition of R).
+# If R not in R, then R in R (by definition of R).
+class_name RussellSet
+
+var members: Array = []
+
+static func paradoxical_set() -> Dictionary:
+    # A classical set system cannot represent R consistently.
+    # This function models the detection of the paradox.
+    return {
+        "definition": "R = { x : x not in x }",
+        "test_self_membership": func(): return "UNDECIDABLE",
+    }
+
+static func type_stratification(level: int) -> Dictionary:
+    # Russell's fix: stratified types
+    return {
+        "level": level,
+        "can_contain": "objects at level " + str(level - 1),
+        "cannot_contain": "itself (level " + str(level) + ")",
+    }
+```
+
+## ZFC Axioms (Skeleton)
+
+```gdscript
+# ZFC resolves Russell's paradox by restricting set formation.
+# The Axiom of Separation: only subsets of existing sets can be formed,
+# not arbitrary collections described by predicates.
+class_name ZFCAxioms
+
+static func separation(parent_set: Array, predicate: Callable) -> Array:
+    # Instead of { x : predicate(x) }, we can only form { x in parent_set : predicate(x) }.
+    var subset: Array = []
+    for x in parent_set:
+        if predicate.call(x):
+            subset.append(x)
+    return subset
+
+static func extensionality(a: Array, b: Array) -> bool:
+    # Two sets are equal iff they have the same members.
+    return a.sort() == b.sort()
+```

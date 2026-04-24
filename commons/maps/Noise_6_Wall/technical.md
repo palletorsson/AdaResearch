@@ -253,3 +253,43 @@ Noise_Inside_Noise takes this further, using the output of one stateless functio
 **hash_visualizer** — A grid overlay on the wall showing integer cell boundaries with the raw hash output at each corner rendered as a colored dot. The interpolated noise field fills the cells between dots. Makes the lattice structure visible beneath the smooth noise — the hidden scaffolding that the interpolation conceals. Toggling between different hash functions (polynomial, bitwise, sine-based) shows how the choice of hash affects the character of the output while preserving its statistical properties.
 
 **gpu_vs_cpu_timer** — A split-screen wall where the left half renders noise via the fragment shader and the right half renders identical noise via CPU computation uploaded as a texture. A frame-time counter above each half displays the cost difference. At low resolutions the gap is negligible. As resolution increases, the GPU side holds steady while the CPU side degrades. The artifact does not argue that GPU noise is better — it demonstrates where and why the performance curves diverge, making the architectural advantage of parallel computation measurable rather than asserted.
+
+## Fragment Shader — Six Octaves of fBm
+
+```glsl
+// Simplified fragment shader for six-octave fBm rendered to a full-screen wall
+shader_type canvas_item;
+
+uniform float time;
+
+float hash(vec2 p) {
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+}
+
+float noise(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    return mix(
+        mix(hash(i), hash(i + vec2(1, 0)), f.x),
+        mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x),
+        f.y
+    );
+}
+
+float fbm(vec2 p) {
+    float total = 0.0;
+    float amplitude = 0.5;
+    for (int i = 0; i < 6; i++) {
+        total += noise(p) * amplitude;
+        p *= 2.0;
+        amplitude *= 0.5;
+    }
+    return total;
+}
+
+void fragment() {
+    float n = fbm(UV * 8.0 + vec2(time * 0.1, 0.0));
+    COLOR = vec4(n, n, n, 1.0);
+}
+```

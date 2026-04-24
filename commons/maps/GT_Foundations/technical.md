@@ -66,3 +66,21 @@ print(g.eulerian_walk_possible())     # true
 ```
 
 Three vertices in a triangle form the simplest Eulerian graph: every vertex has even degree, so every edge can be traversed exactly once in a single walk. Adding a fourth vertex connected to only two of the triangle's vertices introduces two odd-degree vertices, which is still Eulerian but now requires starting and ending at those odd-degree vertices.
+
+## Parsing a Graph From Input
+
+```gdscript
+class_name GraphParser
+
+static func parse_edge_list(text: String) -> GraphSpace:
+    var g := GraphSpace.new()
+    for line in text.split("\n"):
+        line = line.strip_edges()
+        if line.is_empty() or line.begins_with("#"): continue
+        var parts := line.split_whitespace()
+        if parts.size() >= 2:
+            var u: int = int(parts[0])
+            var v: int = int(parts[1])
+            g.add_edge(u, v)
+    return g
+```

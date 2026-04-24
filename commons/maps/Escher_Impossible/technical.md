@@ -104,3 +104,44 @@ While the map's interactable layer shows `escher_staircase`, `penrose_triangle`,
 Impossible objects relate to constraint satisfaction problems. Each local constraint (corner, joint, depth relation) is individually satisfiable. The set of all constraints simultaneously is not. This is the structure of NP-hard problems: easy pieces, hard wholes. The Penrose triangle has exactly three constraints and no global solution — it is a minimal unsatisfiable constraint system.
 
 In computer graphics, impossible objects can be rendered because rendering is a local operation: each pixel's color depends only on nearby geometry. The impossibility is invisible to the renderer. It is only visible to a viewer who integrates information across the entire image. This distinction — between local computation and global interpretation — runs through the entire foundations crisis.
+
+## Impossible Figure Rendering
+
+```gdscript
+# The Penrose triangle — an impossible figure that appears consistent locally.
+class_name PenroseTriangle extends MeshInstance3D
+
+func build_triangle() -> ArrayMesh:
+    var vertices: PackedVector3Array = []
+    # Three bars arranged so each appears to connect to the others,
+    # but the 3D positions are deliberately inconsistent with what the 2D
+    # projection suggests.
+    var bars: Array = [
+        [Vector3(0, 0, 0), Vector3(2, 0, 0)],
+        [Vector3(2, 0, 0), Vector3(1, sqrt(3), 0)],
+        [Vector3(1, sqrt(3), 0), Vector3(0, 0, 0)],
+    ]
+    # ... mesh construction
+    return ArrayMesh.new()
+
+static func is_locally_consistent(bar_a: Array, bar_b: Array) -> bool:
+    return bar_a[1].distance_to(bar_b[0]) < 0.01
+```
+
+## Projection vs Depth
+
+```gdscript
+# Impossible figures exploit the gap between 2D projection and 3D depth.
+# Two line segments can share a pixel in the projection while being far apart in 3D.
+class_name ImpossibleProjection
+
+static func project_to_2d(point_3d: Vector3, view_matrix: Transform3D) -> Vector2:
+    var local: Vector3 = view_matrix * point_3d
+    return Vector2(local.x / local.z, local.y / local.z)
+
+static func distance_in_projection(a_3d: Vector3, b_3d: Vector3, view: Transform3D) -> float:
+    return project_to_2d(a_3d, view).distance_to(project_to_2d(b_3d, view))
+
+static func distance_in_3d(a_3d: Vector3, b_3d: Vector3) -> float:
+    return a_3d.distance_to(b_3d)
+```
