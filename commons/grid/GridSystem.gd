@@ -634,6 +634,12 @@ func _handle_audio_start():
 
 ## Generate a biome ring around the grid if vegetation density > 0.
 func _handle_biome_ring():
+	# Runtime flag — let the encyclopedia /shortcuts surface flip this
+	# off for clean map captures and architecture debugging.
+	if not _runtime_flag_enabled("biome_enabled", true):
+		print("GridSystem: biome_enabled=false in ada_run/runtime_flags.json — skipping biome")
+		return
+
 	var eco = get_node_or_null("/root/EcosystemManager")
 	if not eco:
 		print("GridSystem: No EcosystemManager — no biome ring")
@@ -651,6 +657,7 @@ func _handle_biome_ring():
 	# Accrual stack runs regardless of density — the old density gate is
 	# a property of BiomeRingComponent, not the curriculum. Abstract layers
 	# (floating_primitives) must render even at density 0.
+	# (Gated by the runtime flag above — early return already handled.)
 	var accrual_early = get_node_or_null("/root/BiomeAccrualManager")
 	if accrual_early and accrual_early.has_method("apply"):
 		var dims_early: Vector3i = data_component.get_grid_dimensions()
@@ -1090,3 +1097,24 @@ func _are_components_initialized() -> bool:
 			interactables_component != null and
 			spawn_component != null and
 			ceiling_component != null)
+
+
+# ─── Runtime flags ───────────────────────────────────────────────
+# Read from ada_run/runtime_flags.json — flipped by the encyclopedia
+# /shortcuts page. Used for capture/debug scenarios where the live
+# behaviour (biome, etc.) interferes with what the user is doing.
+
+func _runtime_flag_enabled(flag_name: String, default_value: bool) -> bool:
+	var path := "res://ada_run/runtime_flags.json"
+	var fa := FileAccess.open(path, FileAccess.READ)
+	if not fa:
+		return default_value
+	var raw := fa.get_as_text()
+	fa.close()
+	var data = JSON.parse_string(raw)
+	if typeof(data) != TYPE_DICTIONARY:
+		return default_value
+	if not data.has(flag_name):
+		return default_value
+	return bool(data[flag_name])
+
