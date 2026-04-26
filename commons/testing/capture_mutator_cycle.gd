@@ -22,6 +22,8 @@ const PALETTES_PATH := "res://algorithms/color/color_palettes.tres"
 const GRID_COLOR_MUTATOR_PATH := "res://commons/grid/mutators/grid_color_mutator.gd"
 const GRID_VISIBILITY_MUTATOR_PATH := "res://commons/grid/mutators/grid_visibility_mutator.gd"
 const GRID_VISIBILITY_EXPRESSIONS_PATH := "res://commons/grid/mutators/grid_visibility_expressions.gd"
+const GRID_TRANSFORM_MUTATOR_PATH := "res://commons/grid/mutators/grid_transform_mutator.gd"
+const GRID_TRANSFORM_EXPRESSIONS_PATH := "res://commons/grid/mutators/grid_transform_expressions.gd"
 
 var _grid_size: int = 16
 var _outdir: String = "user://mutator_shots"
@@ -33,6 +35,7 @@ var _multimesh_instance: MultiMeshInstance3D = null
 var _multimesh: MultiMesh = null
 var _color_mutator: Node = null
 var _visibility_mutator: Node = null
+var _transform_mutator: Node = null
 var _viewport: Viewport = null
 
 var _report := {
@@ -111,20 +114,49 @@ func _run() -> void:
 		await create_timer(_per_pattern_settle).timeout
 		_capture("visibility/%s" % name2)
 
-	# Combined sweep — proves both mutators write to the same MultiMesh
-	# without interference.
+	# Capture each transform pattern alone (visibility = all shown, color = white).
+	_show_all_cubes()
+	_apply_solid_white()
+	for k in range(_transform_mutator.get_pattern_count()):
+		# Transforms compose onto cached transforms; refresh so each pattern starts
+		# from the original authored grid layout, not from the previous pattern's output.
+		_reset_multimesh_transforms()
+		_transform_mutator.refresh_cached_transforms()
+		_transform_mutator.set_pattern_by_index(k)
+		var name3: String = _transform_mutator.get_current_pattern_name()
+		await create_timer(_per_pattern_settle).timeout
+		_capture("transform/%s" % name3)
+
+	# Combined sweep — proves all three mutators write to the same MultiMesh
+	# without interference. Color × visibility × one transform.
 	if _capture_combined:
 		var palette_names: Array = ["mondrian_grid", "neon_cyberpunk"]
 		var vis_names: Array = []
-		for k in range(_visibility_mutator.get_pattern_count()):
-			_visibility_mutator.set_pattern_by_index(k)
+		for kk in range(_visibility_mutator.get_pattern_count()):
+			_visibility_mutator.set_pattern_by_index(kk)
 			vis_names.append(_visibility_mutator.get_current_pattern_name())
 		for pname in palette_names:
 			for vname in vis_names:
+				_reset_multimesh_transforms()
+				_visibility_mutator.refresh_cached_transforms()
 				_set_color_pattern_by_name(pname)
 				_set_visibility_pattern_by_name(vname)
 				await create_timer(_per_pattern_settle).timeout
 				_capture("combined/%s__%s" % [pname, vname])
+
+		# Triple-channel: color × visibility × rotate_by_distance, on a small subset
+		# to keep the matrix manageable.
+		for pname2 in ["frida_kahlo"]:
+			for vname2 in ["sierpinski", "rings"]:
+				for tname in ["rotate_by_distance", "scale_pulse"]:
+					_reset_multimesh_transforms()
+					_visibility_mutator.refresh_cached_transforms()
+					_transform_mutator.refresh_cached_transforms()
+					_set_color_pattern_by_name(pname2)
+					_set_visibility_pattern_by_name(vname2)
+					_set_transform_pattern_by_name(tname)
+					await create_timer(_per_pattern_settle).timeout
+					_capture("triple/%s__%s__%s" % [pname2, vname2, tname])
 
 	# Let the last async _capture finish saving before we quit.
 	await create_timer(0.5).timeout
@@ -208,8 +240,10 @@ func _build_scene() -> void:
 	var color_script: GDScript = load(GRID_COLOR_MUTATOR_PATH)
 	var vis_script: GDScript = load(GRID_VISIBILITY_MUTATOR_PATH)
 	var vis_expr_script: GDScript = load(GRID_VISIBILITY_EXPRESSIONS_PATH)
-	if color_script == null or vis_script == null or vis_expr_script == null:
-		_fail("could not load mutator scripts (color=%s vis=%s expr=%s)" % [color_script, vis_script, vis_expr_script])
+	var xform_script: GDScript = load(GRID_TRANSFORM_MUTATOR_PATH)
+	var xform_expr_script: GDScript = load(GRID_TRANSFORM_EXPRESSIONS_PATH)
+	if color_script == null or vis_script == null or vis_expr_script == null or xform_script == null or xform_expr_script == null:
+		_fail("could not load mutator scripts")
 		return
 
 	_color_mutator = color_script.new()
@@ -226,11 +260,24 @@ func _build_scene() -> void:
 	_visibility_mutator.debug_logs = false
 	scene_root.add_child(_visibility_mutator)
 
+	_transform_mutator = xform_script.new()
+	_transform_mutator.name = "GridTransformMutator"
+	_transform_mutator.multimesh_path = NodePath("../GridMultiMesh")
+	_transform_mutator.auto_cycle_enabled = false
+	_transform_mutator.debug_logs = false
+	scene_root.add_child(_transform_mutator)
+
 	# Visibility expression registry
 	var vis_expressions: Node = vis_expr_script.new()
 	vis_expressions.name = "GridVisibilityExpressions"
 	scene_root.add_child(vis_expressions)
 	vis_expressions.register_for(_visibility_mutator)
+
+	# Transform expression registry
+	var xform_expressions: Node = xform_expr_script.new()
+	xform_expressions.name = "GridTransformExpressions"
+	scene_root.add_child(xform_expressions)
+	xform_expressions.register_for(_transform_mutator)
 	# Re-init the mutator's pattern list now that expressions exist
 	_visibility_mutator.start_pattern_cycling()
 	_visibility_mutator.disable_auto_cycle()
@@ -267,6 +314,25 @@ func _set_visibility_pattern_by_name(name: String) -> void:
 		_visibility_mutator.set_pattern_by_index(i)
 		if _visibility_mutator.get_current_pattern_name() == name:
 			return
+
+
+func _set_transform_pattern_by_name(name: String) -> void:
+	for i in range(_transform_mutator.get_pattern_count()):
+		_transform_mutator.set_pattern_by_index(i)
+		if _transform_mutator.get_current_pattern_name() == name:
+			return
+
+
+# Reset all instance transforms to authored grid layout — no rotation, no
+# offset, scale 1. Used between transform-pattern captures so each starts
+# from a clean slate.
+func _reset_multimesh_transforms() -> void:
+	for i in range(_multimesh.instance_count):
+		var r: int = i / _grid_size
+		var c: int = i % _grid_size
+		var xf := Transform3D()
+		xf.origin = Vector3(float(c), 0.0, float(r))
+		_multimesh.set_instance_transform(i, xf)
 
 
 func _capture(label: String) -> void:

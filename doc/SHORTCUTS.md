@@ -164,6 +164,28 @@ ada_run/desktop_feedback.md     VR feedback bridge from Godot
 
 ---
 
+## Capture all grid mutator patterns
+
+**Kind:** command
+**Tags:** mutators, capture, grid, debug, screenshot
+
+```
+godot_console --path . --xr-mode off --no-window \
+  --script res://commons/testing/capture_mutator_cycle.gd \
+  -- --grid_size=16 --outdir=user://mutator_shots
+```
+
+Builds a self-contained 16×16 MultiMesh, mounts `GridColorMutator` and
+`GridVisibilityMutator`, captures one PNG per named pattern and a combined
+color×visibility matrix. Output: `%APPDATA%/Godot/app_userdata/Ada Research
+Zero One/mutator_shots/<channel>_<pattern>.png` plus `capture_report.json`.
+
+Use this to verify any change to the mutator substrate (`commons/grid/mutators/`)
+hasn't regressed visuals. Add a new expression file → re-run → visually diff
+the new shots against the previous run.
+
+---
+
 ## VR-mode quick reset
 
 **Kind:** note
