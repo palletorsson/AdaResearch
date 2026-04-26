@@ -66,19 +66,27 @@ enum FloorPlanMode {
 	SPAWN_LARGEST,
 	AUTO_STITCH,
 	ALGORITHM_PATH,
+	# PATH_GUARANTEE: the inverse of AUTO_STITCH for floor-walking maps.
+	# Treats visible cubes as the walkable surface (player walks on cube tops),
+	# runs pathfinding from path_seed to path_target through visible cubes,
+	# and FILLS empty cells along the cheapest connecting route so the player
+	# can always traverse from spawn to teleporter regardless of which CA
+	# pattern is active. Use for floor-as-CA maps where holes break the game.
+	PATH_GUARANTEE,
 }
 
 @export_enum("disabled", "spawn_largest", "auto_stitch", "algorithm_path")
 var floor_plan_mode: int = 0
 @export var floor_plan_layers: int = 2
 
-# Optional override start / end for ALGORITHM_PATH. (-1, -1, -1) = use the
-# defaults the registry provides (typically corner seed → far corner target).
+# Optional override start / end for ALGORITHM_PATH and PATH_GUARANTEE.
+# (-1, -1, -1) = use the defaults the registry/runner provides.
 @export var floor_plan_seed: Vector3i = Vector3i(-1, -1, -1)
 @export var floor_plan_target: Vector3i = Vector3i(-1, -1, -1)
 
 # State filled by _compute_floor_plan and exposed for downstream use.
-var _floor_plan_mask: PackedByteArray = PackedByteArray()  # 1 = stitched-open
+var _floor_plan_mask: PackedByteArray = PackedByteArray()  # 1 = stitched-open (carved)
+var _floor_plan_fill_mask: PackedByteArray = PackedByteArray()  # 1 = force-visible (filled)
 var _floor_plan_walkable_cells: Array = []  # cells in the largest component
 var _floor_plan_recommended_spawn: Vector3i = Vector3i.ZERO
 
@@ -164,12 +172,18 @@ func _apply_named_pattern(pattern_name: String) -> void:
 		_compute_floor_plan(dims, pattern_visible)
 	else:
 		_floor_plan_mask = PackedByteArray()
+		_floor_plan_fill_mask = PackedByteArray()
 		_floor_plan_walkable_cells.clear()
 
-	# Pass 3: apply final visibility = pattern AND NOT walk_path AND NOT floor_plan.
+	# Pass 3: apply final visibility:
+	#   visible = (pattern OR fill) AND NOT walk_path AND NOT floor_plan_carve
+	# fill_mask wins over the original pattern's "hidden" decision (used by
+	# PATH_GUARANTEE to put cubes back in so the player has a floor).
 	var visible_count: int = 0
 	for i in range(instance_count):
 		var is_visible: bool = pattern_visible[i] != 0
+		if i < _floor_plan_fill_mask.size() and _floor_plan_fill_mask[i] != 0:
+			is_visible = true
 		if walk_path_enabled and i < _walk_path_mask.size() and _walk_path_mask[i] != 0:
 			is_visible = false
 		if i < _floor_plan_mask.size() and _floor_plan_mask[i] != 0:
@@ -319,7 +333,18 @@ func _compute_floor_plan(dims: Vector3i, pattern_visible: PackedByteArray) -> vo
 	_floor_plan_mask.resize(total)
 	for k in range(total):
 		_floor_plan_mask[k] = 0
+	_floor_plan_fill_mask = PackedByteArray()
+	_floor_plan_fill_mask.resize(total)
+	for k in range(total):
+		_floor_plan_fill_mask[k] = 0
 	_floor_plan_walkable_cells.clear()
+
+	# PATH_GUARANTEE inverts the empty-cell analysis: the player walks on
+	# visible cubes, so we BFS through visible cubes from seed to target and
+	# fill the cheapest cubes needed to make them connected.
+	if floor_plan_mode == FloorPlanMode.PATH_GUARANTEE:
+		_carve_walkable_path(dims, pattern_visible)
+		return
 
 	# Flood-fill empty cells in the floor strata.
 	var visited := PackedByteArray()
@@ -497,6 +522,93 @@ func _carve_algorithm_path(dims: Vector3i, pattern_visible: PackedByteArray) -> 
 	var seed_idx: int = seed.y * (w * d) + seed.z * w + seed.x
 	if seed_idx >= 0 and seed_idx < pattern_visible.size() and pattern_visible[seed_idx] != 0:
 		_floor_plan_mask[seed_idx] = 1
+
+
+# PATH_GUARANTEE: BFS from path_seed to path_target through VISIBLE cubes
+# (cost 0) and EMPTY cubes (cost 1). The cheapest path's cost-1 cubes get
+# marked in _floor_plan_fill_mask — they'll be force-rendered visible at
+# Pass 3 so the player has an unbroken walkable surface from spawn to goal.
+# Restricted to the floor strata so the route stays at floor level.
+func _carve_walkable_path(dims: Vector3i, pattern_visible: PackedByteArray) -> void:
+	var w: int = max(dims.x, 1)
+	var h: int = max(dims.y, 1)
+	var d: int = max(dims.z, 1)
+	var total: int = w * h * d
+	var n_layers: int = clamp(floor_plan_layers, 1, h)
+
+	# Resolve seed/target. Default to corners on the floor if unset.
+	var seed: Vector3i = floor_plan_seed
+	var target: Vector3i = floor_plan_target
+	if seed.x < 0:
+		seed = Vector3i(0, 0, 0)
+	if target.x < 0:
+		target = Vector3i(w - 1, 0, d - 1)
+	# Clamp into the floor strata.
+	seed = Vector3i(clamp(seed.x, 0, w - 1), clamp(seed.y, 0, n_layers - 1), clamp(seed.z, 0, d - 1))
+	target = Vector3i(clamp(target.x, 0, w - 1), clamp(target.y, 0, n_layers - 1), clamp(target.z, 0, d - 1))
+
+	const INF: int = 0x7FFFFFFF
+	var dist: PackedInt32Array = PackedInt32Array()
+	dist.resize(total)
+	for k in range(total):
+		dist[k] = INF
+	var prev: PackedInt32Array = PackedInt32Array()
+	prev.resize(total)
+	for k in range(total):
+		prev[k] = -1
+
+	var seed_idx: int = seed.y * (w * d) + seed.z * w + seed.x
+	var target_idx: int = target.y * (w * d) + target.z * w + target.x
+	dist[seed_idx] = 0
+	var deque: Array = [seed_idx]
+	const DIRS: Array = [
+		Vector3i(1, 0, 0), Vector3i(-1, 0, 0),
+		Vector3i(0, 0, 1), Vector3i(0, 0, -1),
+	]
+
+	while not deque.is_empty():
+		var u: int = deque.pop_front()
+		if u == target_idx:
+			break
+		if dist[u] == INF:
+			continue
+		var uy: int = u / (w * d)
+		var uz: int = (u / w) % d
+		var ux: int = u % w
+		for dir in DIRS:
+			var nx: int = ux + dir.x
+			var ny: int = uy + dir.y
+			var nz: int = uz + dir.z
+			if nx < 0 or nx >= w or ny < 0 or ny >= n_layers or nz < 0 or nz >= d:
+				continue
+			var ni: int = ny * (w * d) + nz * w + nx
+			# Cost: 0 if cell already has a visible cube (player can walk on it),
+			# 1 if empty (we'd need to fill the cell to make it walkable).
+			var cost: int = 0 if pattern_visible[ni] != 0 else 1
+			var nd: int = dist[u] + cost
+			if nd < dist[ni]:
+				dist[ni] = nd
+				prev[ni] = u
+				if cost == 0:
+					deque.push_front(ni)
+				else:
+					deque.push_back(ni)
+
+	if dist[target_idx] == INF:
+		return  # nothing we can do; no route within the floor strata
+
+	# Walk back from target → seed; mark every empty cell on the path for fill.
+	var cur: int = target_idx
+	while cur != -1:
+		if pattern_visible[cur] == 0:
+			_floor_plan_fill_mask[cur] = 1
+		if cur == seed_idx:
+			break
+		cur = prev[cur]
+
+	# Record walkable component for downstream queries.
+	_floor_plan_recommended_spawn = seed
+	_floor_plan_walkable_cells = [seed, target]
 
 
 # After stitching/path-carving, re-flood the floor strata to capture the now-

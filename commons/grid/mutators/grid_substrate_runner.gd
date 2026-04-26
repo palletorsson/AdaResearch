@@ -47,12 +47,17 @@ const GRID_COLOR_MUTATOR_PATH := "res://commons/grid/mutators/grid_color_mutator
 @export var visibility_cycle_seconds: float = 8.0
 @export var color_cycle_seconds: float = 12.0
 
-# Floor-plan mode for visibility — keeps the player able to walk regardless
-# of which CA pattern is active. SPAWN_LARGEST identifies the largest
-# walkable component without modifying the pattern; AUTO_STITCH adds doors.
-@export_enum("disabled", "spawn_largest", "auto_stitch", "algorithm_path")
-var floor_plan_mode: int = 1  # default: SPAWN_LARGEST
+# Floor-plan mode for visibility. PATH_GUARANTEE is the right choice for
+# floor-CA maps: it BFS-fills the cheapest cubes needed so the player can
+# walk from spawn to teleporter regardless of which pattern is active.
+@export_enum("disabled", "spawn_largest", "auto_stitch", "algorithm_path", "path_guarantee")
+var floor_plan_mode: int = 4  # default: PATH_GUARANTEE
 @export var floor_plan_layers: int = 2
+
+# Override start/goal cells. When (-1,-1,-1), the runner auto-discovers from
+# the map's utilities layer (spawn marker = "sp", teleporter marker = "t").
+@export var path_seed: Vector3i = Vector3i(-1, -1, -1)
+@export var path_target: Vector3i = Vector3i(-1, -1, -1)
 
 @export var debug_logs: bool = false
 
@@ -90,6 +95,22 @@ func _mount_visibility() -> void:
 	_vis_mutator.debug_logs = debug_logs
 	_vis_mutator.floor_plan_mode = floor_plan_mode
 	_vis_mutator.floor_plan_layers = floor_plan_layers
+
+	# Resolve spawn/teleporter for PATH_GUARANTEE.
+	var seed: Vector3i = path_seed
+	var target: Vector3i = path_target
+	if seed.x < 0 or target.x < 0:
+		var auto: Dictionary = _discover_spawn_and_teleporter()
+		if seed.x < 0 and auto.has("seed"):
+			seed = auto["seed"]
+		if target.x < 0 and auto.has("target"):
+			target = auto["target"]
+	if seed.x >= 0:
+		_vis_mutator.floor_plan_seed = seed
+	if target.x >= 0:
+		_vis_mutator.floor_plan_target = target
+	if debug_logs:
+		print("GridSubstrateRunner: path seed=%s target=%s" % [seed, target])
 	add_child(_vis_mutator)
 
 	# 2D expressions always (rule_30, sierpinski, checkerboard, rings).
@@ -131,6 +152,38 @@ func _mount_color() -> void:
 	_color_mutator.auto_cycle_enabled = true
 	_color_mutator.debug_logs = debug_logs
 	add_child(_color_mutator)
+
+
+# Walk the loaded scene for "sp" (spawn) and "t" (teleporter) utility cells.
+# GridSystem instantiates utility nodes with predictable name/group conventions;
+# we look for them and convert their grid positions to cube coords.
+func _discover_spawn_and_teleporter() -> Dictionary:
+	var out: Dictionary = {}
+	var scene: Node = get_tree().current_scene if get_tree() else null
+	if not scene:
+		return out
+	# Common conventions: nodes in the "spawn_points" group, "teleporters" group,
+	# or with names containing those tokens.
+	var candidates: Array = []
+	for n in scene.find_children("*", "", true, false):
+		candidates.append(n)
+	for n in candidates:
+		var lname: String = String(n.name).to_lower()
+		if not out.has("seed") and (n.is_in_group("spawn_points") or "spawn" in lname):
+			out["seed"] = _node_to_cell(n)
+		if not out.has("target") and (n.is_in_group("teleporters") or "teleport" in lname):
+			out["target"] = _node_to_cell(n)
+		if out.has("seed") and out.has("target"):
+			break
+	return out
+
+
+func _node_to_cell(node: Node) -> Vector3i:
+	if node is Node3D:
+		var p: Vector3 = (node as Node3D).global_position
+		# Cube coordinates assume unit cells aligned at integer origins.
+		return Vector3i(int(round(p.x)), 0, int(round(p.z)))
+	return Vector3i(0, 0, 0)
 
 
 # Standard hook called by GridSystem after instantiating the artifact.
