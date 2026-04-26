@@ -76,23 +76,26 @@ func _apply_named_pattern(pattern_name: String) -> void:
 		return
 
 	var instance_count: int = multimesh.instance_count
-	var grid_size: int = int(sqrt(float(instance_count)))
-	if grid_size * grid_size < instance_count:
-		grid_size += 1
-	grid_size = max(grid_size, 1)
+	var dims: Vector3i = resolve_dims()
+	var grid_size: int = legacy_grid_size(dims)
 
 	var t: float = Time.get_ticks_msec() / 1000.0
 	var ctx: Dictionary = {
 		"structure": grid_structure,
 		"grid_size": grid_size,
+		"dims": dims,
 		"instance_count": instance_count,
 	}
 
 	var visible_count: int = 0
 	for i in range(instance_count):
-		var row: int = i / grid_size
-		var col: int = i % grid_size
-		var is_visible: bool = bool(fn.call(i, row, col, grid_size, t, ctx))
+		var xyz: Vector3i = cell_xyz(i, dims)
+		ctx["xyz"] = xyz
+		ctx["x"] = xyz.x
+		ctx["y"] = xyz.y
+		ctx["z"] = xyz.z
+		# Legacy 2D mapping: row = z, col = x. Old expressions read these.
+		var is_visible: bool = bool(fn.call(i, xyz.z, xyz.x, grid_size, t, ctx))
 		_apply_visibility(i, is_visible)
 		if is_visible:
 			visible_count += 1

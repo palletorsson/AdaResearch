@@ -37,6 +37,12 @@ extends Node
 @export var auto_cycle_enabled: bool = true
 @export var cycle_interval_seconds: float = 10.0
 
+# Volume dimensions (width, height, depth) in cube units. Vector3i.ZERO means
+# "auto-detect a square 2D grid from MultiMesh.instance_count" — the legacy
+# behaviour. Set explicitly for 3D volumes (e.g. Vector3i(12, 8, 12) for the
+# canonical VR mutation box).
+@export var grid_dims: Vector3i = Vector3i.ZERO
+
 var pattern_names: Array = []
 var current_pattern_index: int = 0
 
@@ -249,3 +255,35 @@ func disable_auto_cycle() -> void:
 
 func _exit_tree() -> void:
 	_cycle_active = false
+
+
+# --- volumetric helpers ---------------------------------------------------
+
+# Resolve effective grid dimensions. Returns the explicit `grid_dims` if set
+# (non-zero), else auto-detects a square 2D grid from instance_count.
+func resolve_dims() -> Vector3i:
+	if grid_dims != Vector3i.ZERO:
+		return grid_dims
+	if not multimesh or multimesh.instance_count == 0:
+		return Vector3i(1, 1, 1)
+	var n: int = multimesh.instance_count
+	var s: int = int(ceil(sqrt(float(n))))
+	return Vector3i(s, 1, s)
+
+
+# Convert a flat instance index into a 3D cell coordinate (x, y, z) for the
+# given dims. Layout: i = y * (W * D) + z * W + x.
+static func cell_xyz(i: int, dims: Vector3i) -> Vector3i:
+	var w: int = max(dims.x, 1)
+	var d: int = max(dims.z, 1)
+	var x: int = i % w
+	var z: int = (i / w) % d
+	var y: int = i / (w * d)
+	return Vector3i(x, y, z)
+
+
+# Backward-compat: derive a single "grid_size" int for 2D expressions whose
+# signature is (i, row, col, grid_size, t, ctx). Use the larger of width/depth
+# so wrap-modulo math in old expressions stays correct on rectangular grids.
+static func legacy_grid_size(dims: Vector3i) -> int:
+	return max(max(dims.x, dims.z), 1)

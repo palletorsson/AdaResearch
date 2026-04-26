@@ -106,21 +106,18 @@ func apply_pattern_to_multimesh(palette_colors: Array, pattern_name: String) -> 
 		return
 
 	var instance_count: int = multimesh.instance_count
-	var grid_size: int = int(sqrt(float(instance_count)))
-	if grid_size * grid_size < instance_count:
-		grid_size += 1
-	grid_size = max(grid_size, 1)
+	var dims: Vector3i = resolve_dims()
 
 	for i in range(instance_count):
-		var row: int = i / grid_size
-		var col: int = i % grid_size
-		var color_index: int = (row + col) % palette_colors.size()
+		var xyz: Vector3i = cell_xyz(i, dims)
+		# Color is 2D by default: ignore y so every horizontal slice is identical.
+		var color_index: int = (xyz.z + xyz.x) % palette_colors.size()
 		var color_value = palette_colors[color_index]
 		if color_value is Color:
 			multimesh.set_instance_color(i, color_value)
 
 	_adjust_material_for_colors()
-	_log("GridColorMutator: applied palette '%s' to %d instances" % [pattern_name, instance_count])
+	_log("GridColorMutator: applied palette '%s' to %d instances (dims=%s)" % [pattern_name, instance_count, dims])
 
 
 func _adjust_material_for_colors() -> void:
@@ -140,14 +137,13 @@ func apply_gradient_pattern(gradient_name: String) -> void:
 	if not multimesh:
 		return
 	var instance_count: int = multimesh.instance_count
-	var grid_size: int = int(sqrt(float(instance_count)))
-	if grid_size * grid_size < instance_count:
-		grid_size += 1
+	var dims: Vector3i = resolve_dims()
+	var grid_size: int = legacy_grid_size(dims)
 	var gradient_colors: Array = GameManager.get_gradient_palette(gradient_name)
 	for i in range(instance_count):
-		var row: int = i / grid_size
-		var col: int = i % grid_size
-		multimesh.set_instance_color(i, calculate_gradient_color(row, col, grid_size, gradient_colors, gradient_name))
+		var xyz: Vector3i = cell_xyz(i, dims)
+		# 2D gradient on the (x, z) plane; replicated across y.
+		multimesh.set_instance_color(i, calculate_gradient_color(xyz.z, xyz.x, grid_size, gradient_colors, gradient_name))
 	_adjust_material_for_colors()
 
 
@@ -184,14 +180,14 @@ func apply_sphere_reflection(_pattern_name: String) -> void:
 	if not multimesh:
 		return
 	var instance_count: int = multimesh.instance_count
-	var grid_size: int = int(sqrt(float(instance_count)))
-	if grid_size * grid_size < instance_count:
-		grid_size += 1
-	var center := Vector2(grid_size / 2.0, grid_size / 2.0)
+	var dims: Vector3i = resolve_dims()
+	var grid_size: int = legacy_grid_size(dims)
+	var center := Vector2(dims.x / 2.0, dims.z / 2.0)
 	for i in range(instance_count):
-		var row: int = i / grid_size
-		var col: int = i % grid_size
-		multimesh.set_instance_color(i, calculate_sphere_reflection_color(row, col, center, grid_size))
+		var xyz: Vector3i = cell_xyz(i, dims)
+		# Sphere illusion is 2D — same colour across the y stack so each slice
+		# shows the painted sphere from above.
+		multimesh.set_instance_color(i, calculate_sphere_reflection_color(xyz.z, xyz.x, center, grid_size))
 	_adjust_material_for_colors()
 
 
