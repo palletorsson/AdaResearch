@@ -3368,6 +3368,44 @@
         "preferred_zone": "end"
       }
     },
+    "substrate_box": {
+      "category": "emergence",
+      "complexity": "beginner",
+      "description": "Tabletop 8x7x8 substrate-driven cube box. Visibility mutator cycles through Wolfram Rule 30, Sierpinski, Menger sponge, sphere shell, and BFS-frontier expressions; color mutator cycles through palettes on a different rhythm. First spine artifact built natively on the grid-mutator substrate.",
+      "dev_themes": [
+        "cellular_automata",
+        "substrate",
+        "emergence"
+      ],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "substrate_box",
+      "map_ready": true,
+      "map_sequences": [
+        "cellularautomata"
+      ],
+      "name": "Substrate Box",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "small"
+      },
+      "scene": "res://algorithms/cellularautomata/substrate_box/substrate_box.tscn",
+      "sequence": "cellularautomata",
+      "size_group": "small",
+      "tags": [
+        "3d",
+        "substrate",
+        "emergence"
+      ]
+    },
     "structure_growth": {
       "category": "emergence",
       "complexity": "beginner",
