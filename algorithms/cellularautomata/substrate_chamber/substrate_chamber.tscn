@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3]
-
-[ext_resource type="Script" path="res://algorithms/cellularautomata/substrate_chamber/substrate_chamber.gd" id="1_sub_chamber"]
-
-[node name="SubstrateChamber" type="Node3D"]
-script = ExtResource("1_sub_chamber")

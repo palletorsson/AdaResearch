@@ -3368,50 +3368,10 @@
         "preferred_zone": "end"
       }
     },
-    "substrate_chamber": {
-      "category": "emergence",
-      "complexity": "intermediate",
-      "description": "Architectural-scale 12x8x12 substrate chamber. Same mutator stack as substrate_box but at 0.5m cube size (~6m total span, 4m head-room) with floor-plan AUTO_STITCH enabled — the bottom 2 layers always have a walkable connected empty component, so the player can step inside while CA + fractal patterns cycle around them.",
-      "dev_themes": [
-        "cellular_automata",
-        "substrate",
-        "emergence",
-        "architecture"
-      ],
-      "footprint": [
-        3,
-        3,
-        3
-      ],
-      "include_in_map_data": true,
-      "lookup_name": "substrate_chamber",
-      "map_ready": true,
-      "map_sequences": [
-        "cellularautomata"
-      ],
-      "name": "Substrate Chamber",
-      "parameters": {
-        "footprint": [
-          3,
-          3,
-          3
-        ],
-        "size_group": "large"
-      },
-      "scene": "res://algorithms/cellularautomata/substrate_chamber/substrate_chamber.tscn",
-      "sequence": "cellularautomata",
-      "size_group": "large",
-      "tags": [
-        "3d",
-        "substrate",
-        "emergence",
-        "walkable"
-      ]
-    },
-    "substrate_box": {
+    "grid_substrate_runner": {
       "category": "emergence",
       "complexity": "beginner",
-      "description": "Tabletop 8x7x8 substrate-driven cube box. Visibility mutator cycles through Wolfram Rule 30, Sierpinski, Menger sponge, sphere shell, and BFS-frontier expressions; color mutator cycles through palettes on a different rhythm. First spine artifact built natively on the grid-mutator substrate.",
+      "description": "Integrated substrate component — single-cell artifact that mounts visibility (and optionally colour) mutators on the MAP'S existing GridMultiMesh. Same integration shape as gridcolorizer: doesn't build its own multimesh, finds the floor that's already there. Cycles Wolfram CA, fractal, and BFS-frontier expressions on the actual cubes the player walks. Floor-plan SPAWN_LARGEST keeps reachability honest.",
       "dev_themes": [
         "cellular_automata",
         "substrate",
@@ -3423,12 +3383,12 @@
         1
       ],
       "include_in_map_data": true,
-      "lookup_name": "substrate_box",
+      "lookup_name": "grid_substrate_runner",
       "map_ready": true,
       "map_sequences": [
         "cellularautomata"
       ],
-      "name": "Substrate Box",
+      "name": "Grid Substrate Runner",
       "parameters": {
         "footprint": [
           1,
@@ -3437,13 +3397,13 @@
         ],
         "size_group": "small"
       },
-      "scene": "res://algorithms/cellularautomata/substrate_box/substrate_box.tscn",
+      "scene": "res://commons/grid/mutators/grid_substrate_runner.tscn",
       "sequence": "cellularautomata",
       "size_group": "small",
       "tags": [
-        "3d",
         "substrate",
-        "emergence"
+        "emergence",
+        "integrated"
       ]
     },
     "structure_growth": {
