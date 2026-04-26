@@ -582,6 +582,8 @@ func _carve_walkable_path(dims: Vector3i, pattern_visible: PackedByteArray) -> v
 			if nx < 0 or nx >= w or ny < 0 or ny >= n_layers or nz < 0 or nz >= d:
 				continue
 			var ni: int = ny * (w * d) + nz * w + nx
+			if ni < 0 or ni >= pattern_visible.size():
+				continue
 			# Cost: 0 if cell already has a visible cube (player can walk on it),
 			# 1 if empty (we'd need to fill the cell to make it walkable).
 			var cost: int = 0 if pattern_visible[ni] != 0 else 1

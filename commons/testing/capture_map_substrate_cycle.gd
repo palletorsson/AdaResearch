@@ -123,7 +123,7 @@ func _run() -> void:
 		catalog.call("set_camera_mode", 0)  # STATIC
 	_position_camera(catalog, camera)
 
-	# Walk through every named pattern.
+	# Walk through every named pattern, validating walkability per pattern.
 	var pattern_count: int = vis_mutator.get_pattern_count()
 	for i in range(pattern_count):
 		vis_mutator.set_pattern_by_index(i)
@@ -131,7 +131,8 @@ func _run() -> void:
 		await create_timer(_settle_seconds).timeout
 		await process_frame
 		await process_frame
-		_save_shot(pname)
+		var walk: Dictionary = _validate_walkability(vis_mutator)
+		_save_shot(pname, walk)
 
 	# Final settle so the last save flushes before quit.
 	await create_timer(0.5).timeout
@@ -194,7 +195,7 @@ func _position_camera(catalog: Node, camera: Camera3D) -> void:
 	camera.look_at(orbit_center, Vector3.UP)
 
 
-func _save_shot(pattern: String) -> void:
+func _save_shot(pattern: String, walk: Dictionary = {}) -> void:
 	var safe: String = pattern.replace("/", "_").replace(" ", "_")
 	var path: String = "%s/%s__%s.png" % [_output_dir, _target, safe]
 	var img: Image = root.get_viewport().get_texture().get_image()
@@ -205,8 +206,108 @@ func _save_shot(pattern: String) -> void:
 	if err != OK:
 		_report.errors.append({"pattern": pattern, "reason": "save_png err=%d" % err})
 		return
-	_report.shots.append({"pattern": pattern, "path": path})
-	print("  [shot] %s -> %s" % [pattern, path])
+	var entry: Dictionary = {"pattern": pattern, "path": path}
+	if not walk.is_empty():
+		entry["walk"] = walk
+	_report.shots.append(entry)
+	var walk_str: String = ""
+	if not walk.is_empty():
+		walk_str = " · path %s (steps=%s, fill=%d)" % [
+			"OK" if walk.get("connected", false) else "BROKEN",
+			str(walk.get("path_steps", "—")),
+			int(walk.get("fill_count", 0)),
+		]
+	print("  [shot] %s -> %s%s" % [pattern, path, walk_str])
+
+
+# Run BFS over the FINAL visibility state (pattern + fill - carves) from
+# the mutator's path_seed to path_target through 4-connected visible cubes.
+# Returns connected/path_steps/fill_count for the report.
+func _validate_walkability(vis_mutator: Node) -> Dictionary:
+	var dims: Vector3i = vis_mutator.resolve_dims()
+	var w: int = max(dims.x, 1)
+	var h: int = max(dims.y, 1)
+	var d: int = max(dims.z, 1)
+	var n_layers: int = clamp(int(vis_mutator.floor_plan_layers), 1, h)
+	var multimesh: MultiMesh = vis_mutator.multimesh
+	if not multimesh:
+		return {"connected": false, "reason": "no multimesh"}
+	var seed: Vector3i = vis_mutator.floor_plan_seed
+	var target: Vector3i = vis_mutator.floor_plan_target
+	if seed.x < 0:
+		seed = Vector3i(0, 0, 0)
+	if target.x < 0:
+		target = Vector3i(w - 1, 0, d - 1)
+	seed = Vector3i(clamp(seed.x, 0, w - 1), clamp(seed.y, 0, n_layers - 1), clamp(seed.z, 0, d - 1))
+	target = Vector3i(clamp(target.x, 0, w - 1), clamp(target.y, 0, n_layers - 1), clamp(target.z, 0, d - 1))
+
+	# Read the actual visibility from each instance's transform — basis with
+	# zero scale = hidden cube; non-zero = visible.
+	var visible: PackedByteArray = PackedByteArray()
+	visible.resize(multimesh.instance_count)
+	for i in range(multimesh.instance_count):
+		var xf: Transform3D = multimesh.get_instance_transform(i)
+		var sc: Vector3 = xf.basis.get_scale()
+		visible[i] = 1 if sc.length() > 0.01 else 0
+
+	var seed_idx: int = seed.y * (w * d) + seed.z * w + seed.x
+	var target_idx: int = target.y * (w * d) + target.z * w + target.x
+	if seed_idx >= visible.size() or target_idx >= visible.size():
+		return {"connected": false, "reason": "out of bounds"}
+	if visible[seed_idx] == 0 or visible[target_idx] == 0:
+		return {
+			"connected": false,
+			"reason": "endpoint not visible",
+			"seed_visible": visible[seed_idx] != 0,
+			"target_visible": visible[target_idx] != 0,
+		}
+
+	# 4-connected BFS through visible cubes in the floor strata.
+	const DIRS: Array = [
+		Vector3i(1, 0, 0), Vector3i(-1, 0, 0),
+		Vector3i(0, 0, 1), Vector3i(0, 0, -1),
+	]
+	var dist: PackedInt32Array = PackedInt32Array()
+	dist.resize(w * h * d)
+	for k in range(dist.size()):
+		dist[k] = -1
+	dist[seed_idx] = 0
+	var queue: Array = [seed_idx]
+	var head: int = 0
+	while head < queue.size():
+		var u: int = queue[head]
+		head += 1
+		if u == target_idx:
+			break
+		var uy: int = u / (w * d)
+		var uz: int = (u / w) % d
+		var ux: int = u % w
+		for dir in DIRS:
+			var nx: int = ux + dir.x
+			var ny: int = uy + dir.y
+			var nz: int = uz + dir.z
+			if nx < 0 or nx >= w or ny < 0 or ny >= n_layers or nz < 0 or nz >= d:
+				continue
+			var ni: int = ny * (w * d) + nz * w + nx
+			if visible[ni] == 0 or dist[ni] != -1:
+				continue
+			dist[ni] = dist[u] + 1
+			queue.append(ni)
+
+	var fill_count: int = 0
+	if vis_mutator.has_method("get") and "_floor_plan_fill_mask" in vis_mutator:
+		var fm: PackedByteArray = vis_mutator._floor_plan_fill_mask
+		for k in range(fm.size()):
+			if fm[k] != 0:
+				fill_count += 1
+
+	return {
+		"connected": dist[target_idx] != -1,
+		"path_steps": dist[target_idx] if dist[target_idx] != -1 else null,
+		"fill_count": fill_count,
+		"seed": "%d,%d,%d" % [seed.x, seed.y, seed.z],
+		"target": "%d,%d,%d" % [target.x, target.y, target.z],
+	}
 
 
 func _save_report() -> void:

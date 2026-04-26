@@ -90,6 +90,13 @@ func _mount_visibility() -> void:
 	# Empty multimesh_path triggers the auto-search for "GridMultiMesh" in
 	# the scene tree (parent → scene root). Same as GridColorizer.
 	_vis_mutator.multimesh_path = NodePath("")
+	# Set grid_dims to match the actual map. resolve_dims() can't auto-detect
+	# rectangular maps from instance_count alone — it'd default to a square.
+	var map_dims: Vector3i = _read_map_dimensions()
+	if map_dims != Vector3i.ZERO:
+		_vis_mutator.grid_dims = map_dims
+		if debug_logs:
+			print("GridSubstrateRunner: grid_dims=%s from map" % map_dims)
 	_vis_mutator.cycle_interval_seconds = visibility_cycle_seconds
 	_vis_mutator.auto_cycle_enabled = true
 	_vis_mutator.debug_logs = debug_logs
@@ -152,6 +159,25 @@ func _mount_color() -> void:
 	_color_mutator.auto_cycle_enabled = true
 	_color_mutator.debug_logs = debug_logs
 	add_child(_color_mutator)
+
+
+# Try to read the map's actual W/D/H dimensions from GridSystem or its
+# data component. Returns Vector3i.ZERO if we can't determine.
+func _read_map_dimensions() -> Vector3i:
+	var scene: Node = get_tree().current_scene if get_tree() else null
+	if not scene:
+		return Vector3i.ZERO
+	for n in scene.find_children("*", "", true, false):
+		# GridDataComponent or GridSystem typically expose width/depth/max_height
+		var w_ok: bool = "width" in n
+		var d_ok: bool = "depth" in n
+		if w_ok and d_ok:
+			var w: int = int(n.get("width"))
+			var d: int = int(n.get("depth"))
+			var h: int = int(n.get("max_height")) if "max_height" in n else 1
+			# Floor strata only — visibility mutator iterates h-deep stack.
+			return Vector3i(w, max(h, 1), d)
+	return Vector3i.ZERO
 
 
 # Walk the loaded scene for "sp" (spawn) and "t" (teleporter) utility cells.
