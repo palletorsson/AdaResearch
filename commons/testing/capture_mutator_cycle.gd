@@ -22,6 +22,7 @@ const PALETTES_PATH := "res://algorithms/color/color_palettes.tres"
 const GRID_COLOR_MUTATOR_PATH := "res://commons/grid/mutators/grid_color_mutator.gd"
 const GRID_VISIBILITY_MUTATOR_PATH := "res://commons/grid/mutators/grid_visibility_mutator.gd"
 const GRID_VISIBILITY_EXPRESSIONS_PATH := "res://commons/grid/mutators/grid_visibility_expressions.gd"
+const GRID_VISIBILITY_EXPRESSIONS_3D_PATH := "res://commons/grid/mutators/grid_visibility_expressions_3d.gd"
 const GRID_TRANSFORM_MUTATOR_PATH := "res://commons/grid/mutators/grid_transform_mutator.gd"
 const GRID_TRANSFORM_EXPRESSIONS_PATH := "res://commons/grid/mutators/grid_transform_expressions.gd"
 
@@ -291,11 +292,22 @@ func _build_scene() -> void:
 	_transform_mutator.grid_dims = _grid_dims
 	scene_root.add_child(_transform_mutator)
 
-	# Visibility expression registry
+	# Visibility expression registry — 2D (always) and 3D (only when volumetric)
 	var vis_expressions: Node = vis_expr_script.new()
 	vis_expressions.name = "GridVisibilityExpressions"
 	scene_root.add_child(vis_expressions)
 	vis_expressions.register_for(_visibility_mutator)
+
+	if _grid_dims.y > 1:
+		var vis3d_script: GDScript = load(GRID_VISIBILITY_EXPRESSIONS_3D_PATH)
+		if vis3d_script:
+			var vis3d: Node = vis3d_script.new()
+			vis3d.name = "GridVisibilityExpressions3D"
+			# Seed BFS at one corner so the frontier sweeps the box across the 8 steps.
+			vis3d.bfs_seed = Vector3i(0, 0, 0)
+			vis3d.bfs_steps = 8
+			scene_root.add_child(vis3d)
+			vis3d.register_for(_visibility_mutator)
 
 	# Transform expression registry
 	var xform_expressions: Node = xform_expr_script.new()
