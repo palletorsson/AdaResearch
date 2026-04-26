@@ -94,7 +94,9 @@ func find_multimesh() -> bool:
 	if not multimesh_instance:
 		multimesh_instance = _find_multimesh_recursive(get_parent())
 	if not multimesh_instance:
-		multimesh_instance = _find_multimesh_recursive(get_tree().current_scene)
+		var scene: Node = get_tree().current_scene if get_tree() else null
+		if scene:
+			multimesh_instance = _find_multimesh_recursive(scene)
 
 	if not multimesh_instance:
 		_log("GridMutator: ERROR - No MultiMeshInstance3D found")
@@ -107,12 +109,16 @@ func find_multimesh() -> bool:
 
 	grid_structure = _find_grid_structure(get_parent())
 	if not grid_structure:
-		grid_structure = _find_grid_structure(get_tree().current_scene)
+		var scene2: Node = get_tree().current_scene if get_tree() else null
+		if scene2:
+			grid_structure = _find_grid_structure(scene2)
 
 	return _post_find_multimesh_setup()
 
 
 func _find_multimesh_recursive(node: Node) -> MultiMeshInstance3D:
+	if node == null:
+		return null
 	if node is MultiMeshInstance3D and node.name == "GridMultiMesh":
 		return node
 	for child in node.get_children():
@@ -123,6 +129,8 @@ func _find_multimesh_recursive(node: Node) -> MultiMeshInstance3D:
 
 
 func _find_grid_structure(node: Node) -> GridStructureComponent:
+	if node == null:
+		return null
 	if node is GridStructureComponent:
 		return node
 	for child in node.get_children():
@@ -177,11 +185,15 @@ func connect_to_next_cubes() -> void:
 
 func find_next_cubes() -> Array:
 	var next_cubes: Array = []
-	_find_next_cubes_recursive(get_tree().current_scene, next_cubes)
+	var scene: Node = get_tree().current_scene if get_tree() else null
+	if scene:
+		_find_next_cubes_recursive(scene, next_cubes)
 	return next_cubes
 
 
 func _find_next_cubes_recursive(node: Node, next_cubes: Array) -> void:
+	if node == null:
+		return
 	if node.get_script() and node.get_script().get_global_name() == "NextCube":
 		next_cubes.append(node)
 	for child in node.get_children():

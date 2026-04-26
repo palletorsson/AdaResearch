@@ -23,7 +23,7 @@
 # truth: color is a function of position, not a property of the cube
 
 class_name GridColorMutator
-extends GridMutatorBase
+extends "res://commons/grid/mutators/grid_mutator_base.gd"
 
 @export var color_palette_resource: Resource = preload("res://algorithms/color/color_palettes.tres")
 
