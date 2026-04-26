@@ -16,7 +16,7 @@
       "estimated_time": "4-6 minutes",
       "learning_objectives": [
         "String rewriting as generative process",
-        "Axiom → rules → generations → shape",
+        "Axiom \u2192 rules \u2192 generations \u2192 shape",
         "Turtle graphics interpretation",
         "L-system presets: Koch, Sierpinski, Dragon, Plant"
       ]
@@ -39,14 +39,14 @@
     }
   },
   "documentation": {
-    "summary": "LSystems_Grammar_Lab — The whole concept in one room",
+    "summary": "LSystems_Grammar_Lab \u2014 The whole concept in one room",
     "layout": "8x10 compact lab. Raised teaching platform (h2) at north, demonstration floor at south.",
-    "objective": "Understand the L-system pipeline: axiom string → production rules → iterated rewriting → turtle graphics → tree/curve.",
+    "objective": "Understand the L-system pipeline: axiom string \u2192 production rules \u2192 iterated rewriting \u2192 turtle graphics \u2192 tree/curve.",
     "key_elements": [
-      "`lsystem_editor` at (4,3) — interactive editor with 7 presets",
-      "`lsystem_tree` at (2,5) — generated tree to observe",
-      "`fractal_lsystem_string` at (6,5) — the string itself, visible",
-      "`dark_sphere` at (4,7) — visual anchor"
+      "`lsystem_editor` at (4,3) \u2014 interactive editor with 7 presets",
+      "`lsystem_tree` at (2,5) \u2014 generated tree to observe",
+      "`fractal_lsystem_string` at (6,5) \u2014 the string itself, visible",
+      "`dark_sphere` at (4,7) \u2014 visual anchor"
     ]
   },
   "lighting": {
@@ -89,40 +89,310 @@
   },
   "layers": {
     "structure": [
-      ["2","2","2","2","2","2","2","2"],
-      ["2","2","2","2","2","2","2","2"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","0","1","1","1"],
-      ["1","1","1","1","1","1","1","1"]
+      [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ],
+      [
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
     ],
     "utilities": [
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," ","an"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," ","t"," "," "," "],
-      [" "," "," "," "," ","s"," "," "]
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "an",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "t",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "s",
+        " ",
+        " "
+      ]
     ],
     "interactables": [
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," ","science_screen:180:1.5#mode:trace"],
-      [" "," "," "," ","lsystem_editor:0:0.5"," "," "," "],
-      [" ","grammar_provenance"," "," "," "," "," "," "],
-      [" "," ","lsystem_tree"," "," "," ","fractal_lsystem_string"," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," ","dark_sphere"," "," "," "],
-      [" "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "]
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        "grid_substrate_runner",
+        " ",
+        " ",
+        " ",
+        "science_screen:180:1.5#mode:trace"
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "lsystem_editor:0:0.5",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        "grammar_provenance",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "lsystem_tree",
+        " ",
+        " ",
+        " ",
+        "fractal_lsystem_string",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "dark_sphere",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
     ]
   }
 }
