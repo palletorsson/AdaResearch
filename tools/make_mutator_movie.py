@@ -33,14 +33,16 @@ SECTIONS = [
     ("transform",  "transform_",  0.80),
     ("combined",   "combined_",   0.55),
     ("triple",     "triple_",     1.00),
+    ("floorplan",  "floorplan_",  1.00),
 ]
 
 SECTION_TITLES = {
     "color":      ("color channel", "10 palette + gradient + sphere expressions"),
-    "visibility": ("visibility channel", "rule_30 · sierpinski · checkerboard · rings"),
+    "visibility": ("visibility channel", "rule_30 · sierpinski · checkerboard · rings · menger · shell · BFS"),
     "transform":  ("transform channel", "rotate · lift · scale · force_field"),
     "combined":   ("two channels at once", "color × visibility on one MultiMesh"),
     "triple":     ("three channels at once", "color × visibility × transform"),
+    "floorplan":  ("pattern as floor plan", "spawn_largest · auto_stitch · algorithm_path"),
 }
 
 
@@ -94,14 +96,15 @@ def make_title_card(title: str, subtitle: str, out_path: Path) -> None:
     img.save(out_path)
 
 
-def make_intro_card(out_path: Path) -> None:
+def make_intro_card(out_path: Path, total_shots: int, is_3d: bool) -> None:
     img = Image.new("RGB", (W, H), (24, 26, 30))
     draw = ImageDraw.Draw(img)
     big = load_font(96)
     sub = load_font(40)
 
-    title = "Grid mutators"
-    subtitle = "one substrate · three channels · 31 shots"
+    title = "Grid mutators · 3D" if is_3d else "Grid mutators"
+    subtitle_base = "one substrate · four channels" if is_3d else "one substrate · three channels"
+    subtitle = "%s · %d shots" % (subtitle_base, total_shots)
 
     tw, th = draw.textbbox((0, 0), title, font=big)[2:]
     draw.text(((W - tw) / 2, H / 2 - th - 30), title, font=big, fill=(238, 238, 240))
@@ -184,7 +187,8 @@ def main() -> int:
     cards_root = Path(tempfile.mkdtemp(prefix="mutator_cards_"))
     try:
         intro = cards_root / "intro.png"
-        make_intro_card(intro)
+        is_3d = any(p.name.startswith("floorplan_") for p in pngs)
+        make_intro_card(intro, len(pngs), is_3d)
         plan = build_concat_list(shots_dir, cards_root, intro)
         print(f"plan: {len(plan)} entries, total {sum(d for _, d in plan):.1f}s")
 
