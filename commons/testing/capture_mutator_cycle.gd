@@ -127,35 +127,40 @@ func _run() -> void:
 		await create_timer(_per_pattern_settle).timeout
 		_capture("visibility/%s" % name2)
 
-	# WALK-PATH carve: re-render the four most pattern-dense visibility expressions
-	# with a 2×2×2 L-shaped corridor cut through the volume. Proves the player can
-	# walk through the substrate regardless of what the pattern produced.
-	if _grid_dims.y > 1 and _visibility_mutator.has_method("set"):
+	# FLOOR-PLAN: pattern-driven walkable strata. Capture three connectivity
+	# modes (SPAWN_LARGEST, AUTO_STITCH, ALGORITHM_PATH) against representative
+	# patterns. The bottom 2 layers of each pattern become the player's
+	# stratum; the modes differ in how they ensure connectivity.
+	if _grid_dims.y > 1:
 		_show_all_cubes()
 		_apply_solid_white()
-		# L-path through the volume at mid-height so the corridor is visible from
-		# the capture camera (which looks down at the front-facing cubes). The
-		# path enters one wall, turns at the centre, exits the perpendicular wall.
-		# Coordinates are cube indices.
-		var px: int = _grid_dims.x / 2
-		var pz: int = _grid_dims.z / 2
-		var py: int = _grid_dims.y / 3  # lift one third of the way up so it's not on the floor
-		_visibility_mutator.walk_path_points = [
-			Vector3i(0, py, pz),
-			Vector3i(px, py, pz),
-			Vector3i(px, py, _grid_dims.z - 1),
-		] as Array[Vector3i]
-		_visibility_mutator.walk_path_width = 3
-		_visibility_mutator.walk_path_height = 3
-		_visibility_mutator.walk_path_enabled = true
-		_visibility_mutator.refresh_walk_path()
-		var carve_targets: Array = ["menger_sponge", "sphere_shell", "rule_30", "bfs_frontier_t6"]
-		for vname in carve_targets:
-			_set_visibility_pattern_by_name(vname)
-			await create_timer(_per_pattern_settle).timeout
-			_capture("walkpath/%s" % vname)
-		_visibility_mutator.walk_path_enabled = false
-		_visibility_mutator.refresh_walk_path()
+		var floor_targets: Array = ["menger_sponge", "rule_30", "sierpinski"]
+		var modes: Array = [
+			{"id": 1, "name": "spawn_largest"},   # SPAWN_LARGEST
+			{"id": 2, "name": "auto_stitch"},     # AUTO_STITCH
+			{"id": 3, "name": "algorithm_path"},  # ALGORITHM_PATH
+		]
+		# For ALGORITHM_PATH, prime the BFS state by dispatching bfs_frontier
+		# once, then push the route to the mutator. The 3D registry node lives
+		# under scene_root as "GridVisibilityExpressions3D".
+		var vis3d := root.get_node_or_null("MutatorCaptureRoot/GridVisibilityExpressions3D")
+		_set_visibility_pattern_by_name("bfs_frontier_t8")
+		await create_timer(_per_pattern_settle).timeout
+		if vis3d and vis3d.has_method("push_bfs_route_to"):
+			# Target the far-far corner so the route sweeps the whole box.
+			vis3d.push_bfs_route_to(_visibility_mutator, Vector3i(_grid_dims.x - 1, 0, _grid_dims.z - 1))
+
+		_visibility_mutator.floor_plan_layers = 2
+		for mode in modes:
+			_visibility_mutator.floor_plan_mode = mode.id
+			for vname in floor_targets:
+				_set_visibility_pattern_by_name(vname)
+				# After the mutator finishes, force-hide everything above the
+				# floor strata so the iso camera can see the floor plan.
+				_hide_cubes_above_floor(2)
+				await create_timer(_per_pattern_settle).timeout
+				_capture("floorplan/%s__%s" % [vname, mode.name])
+		_visibility_mutator.floor_plan_mode = 0  # back to DISABLED
 
 	# Capture each transform pattern alone (visibility = all shown, color = white).
 	_show_all_cubes()
@@ -382,6 +387,18 @@ func _set_transform_pattern_by_name(name: String) -> void:
 		_transform_mutator.set_pattern_by_index(i)
 		if _transform_mutator.get_current_pattern_name() == name:
 			return
+
+
+# Force-hide all cubes whose y coordinate is at or above `floor_layers`. Done
+# AFTER the visibility mutator has applied, so we can see the floor plan
+# without the architecture occluding it. Restored on the next pattern apply.
+func _hide_cubes_above_floor(floor_layers: int) -> void:
+	for i in range(_multimesh.instance_count):
+		var y: int = i / (_grid_dims.x * _grid_dims.z)
+		if y >= floor_layers:
+			var xf := _multimesh.get_instance_transform(i)
+			var hidden_basis := Basis().scaled(Vector3.ZERO)
+			_multimesh.set_instance_transform(i, Transform3D(hidden_basis, xf.origin))
 
 
 # Reset all instance transforms to authored grid layout — no rotation, no

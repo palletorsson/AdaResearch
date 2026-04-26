@@ -54,6 +54,32 @@ func register_for(mutator: Node) -> void:
 		mutator.register_expression(name, _bfs_at(n))
 
 
+# Push the current BFS step grid + seed/target into the mutator so its
+# ALGORITHM_PATH floor-plan mode can carve along the same route the BFS
+# computed. Call after the BFS state has been populated (i.e. after at least
+# one bfs_frontier_t* dispatch).
+func push_bfs_route_to(mutator: Node, target: Vector3i = Vector3i(-1, -1, -1)) -> void:
+	if _bfs_steps.size() == 0:
+		return
+	var t: Vector3i = target
+	if t.x < 0:
+		# Default target: opposite corner of the volume.
+		var d: Vector3i = _bfs_dims
+		t = Vector3i(d.x - 1, d.y - 1, d.z - 1)
+	if mutator.has_method("set_algorithm_steps"):
+		mutator.set_algorithm_steps(_bfs_steps, _bfs_seed_cached, t)
+
+
+# Public getters in case external code (e.g. capture scripts) wants to
+# inspect the BFS grid directly.
+func get_bfs_steps() -> PackedInt32Array:
+	return _bfs_steps
+
+
+func get_bfs_seed() -> Vector3i:
+	return _bfs_seed_cached
+
+
 func _resolve_target() -> Node:
 	if not target_mutator_path.is_empty():
 		var n: Node = get_node_or_null(target_mutator_path)
