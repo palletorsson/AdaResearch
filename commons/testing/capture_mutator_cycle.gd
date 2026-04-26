@@ -5,17 +5,17 @@ extends SceneTree
 ## that the substrate split (GridMutatorBase + GridColorMutator + GridVisibilityMutator)
 ## still produces the expected per-pattern frames.
 ##
-## Usage:
+## Usage (2D, default):
 ##   godot_console --path . --xr-mode off --no-window \
 ##     --script res://commons/testing/capture_mutator_cycle.gd \
 ##     -- --grid_size=16 --outdir=user://mutator_shots
 ##
-## Output: user://mutator_shots/<channel>_<pattern>.png + capture_report.json
+## Usage (3D volume — 12 wide × 8 tall × 12 deep):
+##   godot_console --path . --xr-mode off --no-window \
+##     --script res://commons/testing/capture_mutator_cycle.gd \
+##     -- --grid_dims=12,8,12 --outdir=user://mutator_shots_3d
 ##
-## Combinations captured:
-##   color/<palette>           — color cycling alone, all cubes visible
-##   visibility/<expression>   — visibility cycling alone, color = solid white
-##   combined/<color>__<vis>   — both at once (matrix of color × visibility)
+## Output: <outdir>/<channel>_<pattern>.png + capture_report.json
 
 const SHADER_PATH := "res://commons/resourses/shaders/SimpleGrid.gdshader"
 const PALETTES_PATH := "res://algorithms/color/color_palettes.tres"
@@ -26,6 +26,7 @@ const GRID_TRANSFORM_MUTATOR_PATH := "res://commons/grid/mutators/grid_transform
 const GRID_TRANSFORM_EXPRESSIONS_PATH := "res://commons/grid/mutators/grid_transform_expressions.gd"
 
 var _grid_size: int = 16
+var _grid_dims: Vector3i = Vector3i.ZERO  # explicit 3D dims; ZERO falls back to (grid_size, 1, grid_size)
 var _outdir: String = "user://mutator_shots"
 var _wait_seconds: float = 1.5
 var _per_pattern_settle: float = 0.25
@@ -48,8 +49,12 @@ var _report := {
 
 func _initialize() -> void:
 	_parse_args()
+	# If --grid_dims wasn't passed, fall back to a square 2D grid from --grid_size.
+	if _grid_dims == Vector3i.ZERO:
+		_grid_dims = Vector3i(_grid_size, 1, _grid_size)
 	_report.started_at_ms = Time.get_ticks_msec()
 	_report.grid_size = _grid_size
+	_report["grid_dims"] = "%d,%d,%d" % [_grid_dims.x, _grid_dims.y, _grid_dims.z]
 	call_deferred("_run")
 
 
@@ -67,6 +72,13 @@ func _parse_args() -> void:
 			"grid_size":
 				if value.is_valid_int():
 					_grid_size = max(int(value), 4)
+			"grid_dims":
+				# format: W,H,D  (e.g. 12,8,12)
+				var parts: PackedStringArray = value.split(",")
+				if parts.size() == 3 and parts[0].is_valid_int() and parts[1].is_valid_int() and parts[2].is_valid_int():
+					_grid_dims = Vector3i(max(int(parts[0]), 1), max(int(parts[1]), 1), max(int(parts[2]), 1))
+				else:
+					push_warning("capture_mutator_cycle: invalid --grid_dims=%s (expected W,H,D)" % value)
 			"outdir":
 				_outdir = value
 			"wait":
@@ -80,7 +92,7 @@ func _parse_args() -> void:
 
 
 func _run() -> void:
-	print("capture_mutator_cycle: grid_size=%d outdir=%s" % [_grid_size, _outdir])
+	print("capture_mutator_cycle: grid_dims=%d×%d×%d outdir=%s" % [_grid_dims.x, _grid_dims.y, _grid_dims.z, _outdir])
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(_outdir))
 
 	_build_scene()
@@ -190,17 +202,25 @@ func _build_scene() -> void:
 	light.light_energy = 1.2
 	scene_root.add_child(light)
 
-	# Camera — top-down isometric of the grid
+	# Camera — orthographic isometric. For 3D volumes, lift and orbit so y is visible.
 	var camera := Camera3D.new()
 	camera.current = true
 	camera.projection = Camera3D.PROJECTION_ORTHOGONAL
-	camera.size = float(_grid_size) * 1.4
-	var center: Vector3 = Vector3(_grid_size * 0.5, 0, _grid_size * 0.5)
-	camera.position = center + Vector3(_grid_size * 0.7, _grid_size * 1.2, _grid_size * 0.7)
+	var w: float = float(_grid_dims.x)
+	var h: float = float(_grid_dims.y)
+	var d: float = float(_grid_dims.z)
+	# Frame on the largest horizontal extent plus a head-room factor for height.
+	var frame_extent: float = max(w, d) + h * 0.35
+	camera.size = frame_extent * 1.4
+	var center: Vector3 = Vector3(w * 0.5, h * 0.5, d * 0.5)
+	# View angle: 30° down from the side, far enough out that the box fits.
+	var radius: float = max(w, d) * 1.6 + h * 0.6
+	camera.position = center + Vector3(radius * 0.65, radius * 0.85, radius * 0.65)
 	scene_root.add_child(camera)
 	camera.look_at(center, Vector3.UP)
 
-	# MultiMesh — N×N grid of unit cubes
+	# MultiMesh — W × H × D box of unit cubes. Layout: i = y*(W*D) + z*W + x
+	# matching GridMutatorBase.cell_xyz so mutator iteration aligns with our layout.
 	_multimesh_instance = MultiMeshInstance3D.new()
 	_multimesh_instance.name = "GridMultiMesh"
 	scene_root.add_child(_multimesh_instance)
@@ -209,15 +229,16 @@ func _build_scene() -> void:
 	_multimesh.transform_format = MultiMesh.TRANSFORM_3D
 	_multimesh.use_colors = true
 	_multimesh.mesh = BoxMesh.new()
-	_multimesh.instance_count = _grid_size * _grid_size
+	_multimesh.instance_count = _grid_dims.x * _grid_dims.y * _grid_dims.z
 
-	for r in range(_grid_size):
-		for c in range(_grid_size):
-			var idx: int = r * _grid_size + c
-			var xf := Transform3D()
-			xf.origin = Vector3(float(c), 0.0, float(r))
-			_multimesh.set_instance_transform(idx, xf)
-			_multimesh.set_instance_color(idx, Color.WHITE)
+	for y in range(_grid_dims.y):
+		for z in range(_grid_dims.z):
+			for x in range(_grid_dims.x):
+				var idx: int = y * (_grid_dims.x * _grid_dims.z) + z * _grid_dims.x + x
+				var xf := Transform3D()
+				xf.origin = Vector3(float(x), float(y), float(z))
+				_multimesh.set_instance_transform(idx, xf)
+				_multimesh.set_instance_color(idx, Color.WHITE)
 	_multimesh_instance.multimesh = _multimesh
 
 	# Material — SimpleGrid shader so per-instance colors show
@@ -251,6 +272,7 @@ func _build_scene() -> void:
 	_color_mutator.multimesh_path = NodePath("../GridMultiMesh")
 	_color_mutator.auto_cycle_enabled = false
 	_color_mutator.debug_logs = false
+	_color_mutator.grid_dims = _grid_dims
 	scene_root.add_child(_color_mutator)
 
 	_visibility_mutator = vis_script.new()
@@ -258,6 +280,7 @@ func _build_scene() -> void:
 	_visibility_mutator.multimesh_path = NodePath("../GridMultiMesh")
 	_visibility_mutator.auto_cycle_enabled = false
 	_visibility_mutator.debug_logs = false
+	_visibility_mutator.grid_dims = _grid_dims
 	scene_root.add_child(_visibility_mutator)
 
 	_transform_mutator = xform_script.new()
@@ -265,6 +288,7 @@ func _build_scene() -> void:
 	_transform_mutator.multimesh_path = NodePath("../GridMultiMesh")
 	_transform_mutator.auto_cycle_enabled = false
 	_transform_mutator.debug_logs = false
+	_transform_mutator.grid_dims = _grid_dims
 	scene_root.add_child(_transform_mutator)
 
 	# Visibility expression registry
@@ -288,12 +312,7 @@ func _build_scene() -> void:
 # --- helpers ---------------------------------------------------------------
 
 func _show_all_cubes() -> void:
-	for i in range(_multimesh.instance_count):
-		var r: int = i / _grid_size
-		var c: int = i % _grid_size
-		var xf := Transform3D()
-		xf.origin = Vector3(float(c), 0.0, float(r))
-		_multimesh.set_instance_transform(i, xf)
+	_reset_multimesh_transforms()
 	_visibility_mutator.refresh_cached_transforms()
 
 
@@ -325,14 +344,15 @@ func _set_transform_pattern_by_name(name: String) -> void:
 
 # Reset all instance transforms to authored grid layout — no rotation, no
 # offset, scale 1. Used between transform-pattern captures so each starts
-# from a clean slate.
+# from a clean slate. Iteration matches the layout used in _build_scene.
 func _reset_multimesh_transforms() -> void:
-	for i in range(_multimesh.instance_count):
-		var r: int = i / _grid_size
-		var c: int = i % _grid_size
-		var xf := Transform3D()
-		xf.origin = Vector3(float(c), 0.0, float(r))
-		_multimesh.set_instance_transform(i, xf)
+	for y in range(_grid_dims.y):
+		for z in range(_grid_dims.z):
+			for x in range(_grid_dims.x):
+				var idx: int = y * (_grid_dims.x * _grid_dims.z) + z * _grid_dims.x + x
+				var xf := Transform3D()
+				xf.origin = Vector3(float(x), float(y), float(z))
+				_multimesh.set_instance_transform(idx, xf)
 
 
 func _capture(label: String) -> void:
