@@ -32,6 +32,21 @@ var _expressions: Dictionary = {}
 var _original_transforms: Array = []
 var _transforms_cached: bool = false
 
+# --- walk-path carving -----------------------------------------------------
+# When walk_path_enabled, every cube that sits inside the swept corridor along
+# the waypoint polyline is forced HIDDEN regardless of what the active
+# expression decided. Lets the player walk through any pattern without
+# phasing through cubes. Path is in cube coordinates (Vector3i grid cells).
+@export var walk_path_enabled: bool = false
+@export var walk_path_points: Array[Vector3i] = []
+@export var walk_path_width: int = 2  # corridor cross-section, in cubes (horizontal)
+@export var walk_path_height: int = 2  # corridor vertical extent, in cubes (head-room)
+
+# Computed once per (dims, path) and reused — 1 byte per instance.
+var _walk_path_mask: PackedByteArray = PackedByteArray()
+var _walk_path_cached_dims: Vector3i = Vector3i.ZERO
+var _walk_path_cached_signature: String = ""
+
 
 # --- public registration ---------------------------------------------------
 
@@ -87,6 +102,10 @@ func _apply_named_pattern(pattern_name: String) -> void:
 		"instance_count": instance_count,
 	}
 
+	# Recompute the walk-path corridor mask if enabled and the path/dims changed.
+	if walk_path_enabled:
+		_ensure_walk_path_mask(dims)
+
 	var visible_count: int = 0
 	for i in range(instance_count):
 		var xyz: Vector3i = cell_xyz(i, dims)
@@ -96,6 +115,9 @@ func _apply_named_pattern(pattern_name: String) -> void:
 		ctx["z"] = xyz.z
 		# Legacy 2D mapping: row = z, col = x. Old expressions read these.
 		var is_visible: bool = bool(fn.call(i, xyz.z, xyz.x, grid_size, t, ctx))
+		# Walk-path carve: corridor cubes are forced hidden so the player can pass.
+		if walk_path_enabled and i < _walk_path_mask.size() and _walk_path_mask[i] != 0:
+			is_visible = false
 		_apply_visibility(i, is_visible)
 		if is_visible:
 			visible_count += 1
@@ -132,3 +154,78 @@ func _apply_visibility(i: int, is_visible: bool) -> void:
 func refresh_cached_transforms() -> void:
 	_transforms_cached = false
 	_cache_original_transforms()
+
+
+# --- walk-path mask --------------------------------------------------------
+
+func _walk_path_signature() -> String:
+	# Build a short signature so we can detect when the path/width/height changed.
+	var parts: Array = []
+	for p in walk_path_points:
+		parts.append("%d,%d,%d" % [p.x, p.y, p.z])
+	return "%dx%d|%s" % [walk_path_width, walk_path_height, ";".join(parts)]
+
+
+func _ensure_walk_path_mask(dims: Vector3i) -> void:
+	var sig: String = _walk_path_signature()
+	if dims == _walk_path_cached_dims and sig == _walk_path_cached_signature and _walk_path_mask.size() == dims.x * dims.y * dims.z:
+		return
+	_walk_path_cached_dims = dims
+	_walk_path_cached_signature = sig
+
+	var w: int = max(dims.x, 1)
+	var h: int = max(dims.y, 1)
+	var d: int = max(dims.z, 1)
+	_walk_path_mask = PackedByteArray()
+	_walk_path_mask.resize(w * h * d)
+	for k in range(_walk_path_mask.size()):
+		_walk_path_mask[k] = 0
+
+	if walk_path_points.size() < 2:
+		return
+
+	var width: int = max(walk_path_width, 1)
+	var height: int = max(walk_path_height, 1)
+	# Asymmetric half-extents so a width=2 corridor carves exactly 2 cubes
+	# (offsets 0..1), width=3 carves 3 (-1..1), width=4 carves 4 (-1..2).
+	var left_x: int = -((width - 1) / 2)
+	var right_x: int = width / 2
+	var left_z: int = -((width - 1) / 2)
+	var right_z: int = width / 2
+
+	for seg in range(walk_path_points.size() - 1):
+		var a: Vector3i = walk_path_points[seg]
+		var b: Vector3i = walk_path_points[seg + 1]
+		_carve_segment(a, b, left_x, right_x, left_z, right_z, height, dims)
+
+
+func _carve_segment(a: Vector3i, b: Vector3i, left_x: int, right_x: int, left_z: int, right_z: int, height: int, dims: Vector3i) -> void:
+	# Sample the segment at unit-step density and flood the cross-section at each step.
+	var diff: Vector3 = Vector3(b - a)
+	var length: float = diff.length()
+	var steps: int = max(int(ceil(length)), 1)
+	for s in range(steps + 1):
+		var ft: float = 0.0 if steps == 0 else float(s) / float(steps)
+		var p: Vector3 = Vector3(a) + diff * ft
+		var cx: int = int(round(p.x))
+		var cy: int = int(round(p.y))
+		var cz: int = int(round(p.z))
+		# Carve a width × height × width box centred (horizontally) on (cx, cy, cz),
+		# rising upward by `height` cubes (vertical headroom for the player).
+		for dy in range(height):
+			for dz in range(left_z, right_z + 1):
+				for dx in range(left_x, right_x + 1):
+					var nx: int = cx + dx
+					var ny: int = cy + dy
+					var nz: int = cz + dz
+					if nx < 0 or nx >= dims.x or ny < 0 or ny >= dims.y or nz < 0 or nz >= dims.z:
+						continue
+					var idx: int = ny * (dims.x * dims.z) + nz * dims.x + nx
+					_walk_path_mask[idx] = 1
+
+
+# Public: clear walk-path cache so it's recomputed on the next apply. Call after
+# changing walk_path_points / walk_path_width / walk_path_height at runtime.
+func refresh_walk_path() -> void:
+	_walk_path_cached_signature = ""
+	_walk_path_mask = PackedByteArray()

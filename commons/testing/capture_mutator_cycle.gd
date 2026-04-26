@@ -127,6 +127,36 @@ func _run() -> void:
 		await create_timer(_per_pattern_settle).timeout
 		_capture("visibility/%s" % name2)
 
+	# WALK-PATH carve: re-render the four most pattern-dense visibility expressions
+	# with a 2×2×2 L-shaped corridor cut through the volume. Proves the player can
+	# walk through the substrate regardless of what the pattern produced.
+	if _grid_dims.y > 1 and _visibility_mutator.has_method("set"):
+		_show_all_cubes()
+		_apply_solid_white()
+		# L-path through the volume at mid-height so the corridor is visible from
+		# the capture camera (which looks down at the front-facing cubes). The
+		# path enters one wall, turns at the centre, exits the perpendicular wall.
+		# Coordinates are cube indices.
+		var px: int = _grid_dims.x / 2
+		var pz: int = _grid_dims.z / 2
+		var py: int = _grid_dims.y / 3  # lift one third of the way up so it's not on the floor
+		_visibility_mutator.walk_path_points = [
+			Vector3i(0, py, pz),
+			Vector3i(px, py, pz),
+			Vector3i(px, py, _grid_dims.z - 1),
+		] as Array[Vector3i]
+		_visibility_mutator.walk_path_width = 3
+		_visibility_mutator.walk_path_height = 3
+		_visibility_mutator.walk_path_enabled = true
+		_visibility_mutator.refresh_walk_path()
+		var carve_targets: Array = ["menger_sponge", "sphere_shell", "rule_30", "bfs_frontier_t6"]
+		for vname in carve_targets:
+			_set_visibility_pattern_by_name(vname)
+			await create_timer(_per_pattern_settle).timeout
+			_capture("walkpath/%s" % vname)
+		_visibility_mutator.walk_path_enabled = false
+		_visibility_mutator.refresh_walk_path()
+
 	# Capture each transform pattern alone (visibility = all shown, color = white).
 	_show_all_cubes()
 	_apply_solid_white()
