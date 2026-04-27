@@ -3422,6 +3422,185 @@
           }
         }
       ]
+    },
+    {
+      "id": "gen01_unified_flower_balanced",
+      "notes": "GEN01 from 'fix colour balance' hint: cylinder seed (flat top reads from above), more splits, tightened flower bands so all 4 colours are visible. Should show concentric anatomy clearly.",
+      "seed": "cylinder",
+      "seed_scale": 1.4,
+      "generations": 4,
+      "rules": [
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "tag_by_grammar",
+          "selector": "all",
+          "params": {
+            "grammar": "flower",
+            "flower_bands": {
+              "pistil": 0.2,
+              "stamen": 0.4,
+              "petal": 0.72
+            }
+          }
+        },
+        {
+          "op": "paint_by_tag",
+          "selector": "all",
+          "params": {
+            "palette": {
+              "flower_pistil": [
+                1.0,
+                0.85,
+                0.2
+              ],
+              "flower_stamen": [
+                0.95,
+                0.55,
+                0.85
+              ],
+              "flower_petal": [
+                0.65,
+                0.2,
+                0.5
+              ],
+              "flower_sepal": [
+                0.35,
+                0.6,
+                0.35
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen01_unified_flower_morph_balanced",
+      "notes": "GEN01 morph: cylinder seed + balanced bands + extrude_by_role + bulge_by_role. Petals splay outward and round, stamens spike with rounded tips, pistil domes, sepals slight curve. Real flower morphology with all anatomical bands visible.",
+      "seed": "cylinder",
+      "seed_scale": 1.4,
+      "generations": 5,
+      "rules": [
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "tag_by_grammar",
+          "selector": "all",
+          "params": {
+            "grammar": "flower",
+            "flower_bands": {
+              "pistil": 0.18,
+              "stamen": 0.38,
+              "petal": 0.72
+            }
+          }
+        },
+        {
+          "op": "extrude_by_role",
+          "selector": "all",
+          "params": {
+            "role_params": {
+              "flower_pistil": {
+                "distance": 0.35,
+                "scale": 0.85
+              },
+              "flower_stamen": {
+                "distance": 0.85,
+                "scale": 0.3
+              },
+              "flower_petal": {
+                "distance": 0.45,
+                "scale": 1.1
+              },
+              "flower_sepal": {
+                "distance": 0.1,
+                "scale": 0.95
+              }
+            }
+          }
+        },
+        {
+          "op": "bulge_by_role",
+          "selector": "all",
+          "params": {
+            "role_params": {
+              "flower_pistil_top": {
+                "amount": 0.15,
+                "direction": [
+                  0,
+                  1,
+                  0
+                ]
+              },
+              "flower_stamen_top": {
+                "amount": 0.08
+              },
+              "flower_petal_top": {
+                "amount": 0.2,
+                "direction": [
+                  0,
+                  0.3,
+                  0.7
+                ]
+              }
+            }
+          }
+        },
+        {
+          "op": "paint_by_tag",
+          "selector": "all",
+          "params": {
+            "palette": {
+              "flower_pistil": [
+                1.0,
+                0.85,
+                0.2
+              ],
+              "flower_stamen": [
+                0.95,
+                0.55,
+                0.85
+              ],
+              "flower_petal": [
+                0.65,
+                0.2,
+                0.5
+              ],
+              "flower_sepal": [
+                0.35,
+                0.6,
+                0.35
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }

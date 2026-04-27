@@ -30,6 +30,7 @@ const TagByGrammarOp    = preload("res://commons/mesh_grammar/operations/tag_by_
 const PaintByTagOp      = preload("res://commons/mesh_grammar/operations/paint_by_tag_op.gd")
 const HideByRuleOp      = preload("res://commons/mesh_grammar/operations/hide_by_rule_op.gd")
 const ExtrudeByRoleOp   = preload("res://commons/mesh_grammar/operations/extrude_by_role_op.gd")
+const BulgeByRoleOp     = preload("res://commons/mesh_grammar/operations/bulge_by_role_op.gd")
 const RDSimScriptMG      = preload("res://commons/rd_grammar/rd_sim.gd")
 const MeshDataClass      = preload("res://commons/mesh_grammar/mesh_data.gd")
 
@@ -286,6 +287,7 @@ func _build_rule(rdef: Dictionary):
 		"paint_by_tag":   return PaintByTagOp.new(sel, params)
 		"hide_by_rule":   return HideByRuleOp.new(sel, params)
 		"extrude_by_role": return ExtrudeByRoleOp.new(sel, params)
+		"bulge_by_role":   return BulgeByRoleOp.new(sel, params)
 	push_warning("Unknown op: %s" % op)
 	return null
 

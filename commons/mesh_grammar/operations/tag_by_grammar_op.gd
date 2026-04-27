@@ -20,6 +20,8 @@ class_name TagByGrammarOp
 func _execute(mesh: MeshData, selected: PackedInt32Array) -> void:
 	var grammar: String = String(params.get("grammar", "flower")).to_lower()
 	var prefix: String = String(params.get("prefix", ""))
+	# Optional band-threshold overrides per grammar.
+	var flower_bands: Dictionary = params.get("flower_bands", {})
 
 	# Compute the AABB of selected faces' centroids so the grammar bands
 	# scale to the actual extent of what's tagged.
@@ -48,7 +50,7 @@ func _execute(mesh: MeshData, selected: PackedInt32Array) -> void:
 		if fi >= mesh.faces.size():
 			continue
 		var c: Vector3 = centroids[i]
-		var role: String = _role_for(grammar, c, centre, size)
+		var role: String = _role_for(grammar, c, centre, size, flower_bands)
 		if role.is_empty():
 			continue
 		var tag := prefix + grammar + "_" + role
@@ -56,19 +58,24 @@ func _execute(mesh: MeshData, selected: PackedInt32Array) -> void:
 		mesh.face_tags[fi].append(tag)
 
 
-func _role_for(grammar: String, c: Vector3, centre: Vector3, size: Vector3) -> String:
+func _role_for(grammar: String, c: Vector3, centre: Vector3, size: Vector3, flower_bands: Dictionary = {}) -> String:
 	match grammar:
 		"flower":
 			# Concentric rings on the xz plane, centre = pistil.
+			# Default bands (pistil 0.25, stamen 0.45, petal 0.75) better
+			# spread across uniform meshes than the original 0.18 / 0.42 / 0.78.
 			var dx: float = c.x - centre.x
 			var dz: float = c.z - centre.z
 			var r: float = max(size.x, size.z) * 0.5
 			if r < 0.001:
 				r = 1.0
 			var nd: float = sqrt(dx * dx + dz * dz) / r
-			if nd <= 0.18: return "pistil"
-			if nd <= 0.42: return "stamen"
-			if nd <= 0.78: return "petal"
+			var b_pistil: float = float(flower_bands.get("pistil", 0.25))
+			var b_stamen: float = float(flower_bands.get("stamen", 0.45))
+			var b_petal: float = float(flower_bands.get("petal", 0.75))
+			if nd <= b_pistil: return "pistil"
+			if nd <= b_stamen: return "stamen"
+			if nd <= b_petal: return "petal"
 			return "sepal"
 		"insect":
 			var sz_h: float = max(size.z * 0.5, 0.001)
