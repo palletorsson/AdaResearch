@@ -3368,6 +3368,46 @@
         "preferred_zone": "end"
       }
     },
+    "fold_theatre_runner": {
+      "category": "emergence",
+      "complexity": "advanced",
+      "description": "F-edge first cycle. Substrate runner subclass with all four channels enabled — visibility cycles rule_30 / sierpinski / menger_sponge (the fold vocabulary), glyph runs subdivide_by_attention, part tags via flower_grammar, color-by-role paints concentric flower anatomy. PATH_GUARANTEE keeps spawn-to-teleporter walkable across every visibility pattern. Used by Fold_Theatre in qfeplaboratory.",
+      "dev_themes": [
+        "qfep",
+        "substrate",
+        "fold_system",
+        "edges_of_algorithm"
+      ],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "fold_theatre_runner",
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "name": "Fold Theatre Runner",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "small"
+      },
+      "scene": "res://algorithms/qfeplaboratory/fold_theatre_runner/fold_theatre_runner.tscn",
+      "sequence": "qfeplaboratory",
+      "size_group": "small",
+      "tags": [
+        "substrate",
+        "fold",
+        "f_edge",
+        "qfep"
+      ]
+    },
     "grid_substrate_runner": {
       "category": "emergence",
       "complexity": "beginner",

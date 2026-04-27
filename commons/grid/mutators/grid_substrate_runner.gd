@@ -34,6 +34,10 @@ const GRID_VIS_MUTATOR_PATH := "res://commons/grid/mutators/grid_visibility_muta
 const GRID_VIS_EXPR_PATH := "res://commons/grid/mutators/grid_visibility_expressions.gd"
 const GRID_VIS_EXPR_3D_PATH := "res://commons/grid/mutators/grid_visibility_expressions_3d.gd"
 const GRID_COLOR_MUTATOR_PATH := "res://commons/grid/mutators/grid_color_mutator.gd"
+const GRID_GLYPH_MUTATOR_PATH := "res://commons/grid/mutators/grid_glyph_mutator.gd"
+const GRID_GLYPH_EXPR_PATH := "res://commons/grid/mutators/grid_glyph_expressions.gd"
+const GRID_PART_MUTATOR_PATH := "res://commons/grid/mutators/grid_part_mutator.gd"
+const GRID_PART_EXPR_PATH := "res://commons/grid/mutators/grid_part_expressions.gd"
 
 # Which expressions to enable. Empty arrays = "use the registry's default
 # (all of them)". Specific names = filter to just those.
@@ -61,8 +65,35 @@ var floor_plan_mode: int = 4  # default: PATH_GUARANTEE
 
 @export var debug_logs: bool = false
 
+# --- glyph (subdivision) channel ------------------------------------------
+@export var enable_glyph: bool = false
+@export var glyph_policy: String = "subdivide_by_attention"
+@export var glyph_max_subdivided_cells: int = 96
+@export var glyph_viewer_radius: float = 4.0
+@export var glyph_cycle_seconds: float = 9.0
+
+# --- part (role-tagging) channel ------------------------------------------
+@export var enable_part: bool = false
+@export var part_grammar: String = "flower_grammar"
+
+# When part + color-by-role both on, the runner paints the multimesh per-role
+# using this palette after each visibility cycle. Keys are role-StringNames
+# (cast from the dictionary's Node-side strings).
+@export var enable_color_by_role: bool = false
+@export var color_by_role_palette: Dictionary = {
+	"pistil": Color(1.0, 0.85, 0.2),
+	"stamen": Color(0.95, 0.55, 0.85),
+	"petal":  Color(0.65, 0.2, 0.5),
+	"sepal":  Color(0.3, 0.6, 0.35),
+	"head":    Color(0.85, 0.3, 0.25),
+	"thorax":  Color(0.95, 0.75, 0.2),
+	"abdomen": Color(0.35, 0.4, 0.7),
+}
+
 var _vis_mutator: Node = null
 var _color_mutator: Node = null
+var _glyph_mutator: Node = null
+var _part_mutator: Node = null
 
 
 func _ready() -> void:
@@ -76,6 +107,22 @@ func _mount_mutators() -> void:
 		_mount_visibility()
 	if enable_color:
 		_mount_color()
+	if enable_part:
+		_mount_part()
+	if enable_glyph:
+		_mount_glyph()  # mount last so it sees visibility's final per-cube state
+	if enable_color_by_role and _part_mutator:
+		# Hook a per-frame poll so role-painting follows part-grammar updates.
+		# Simplest reliable scheme: a Timer that paints periodically.
+		var paint_timer := Timer.new()
+		paint_timer.wait_time = 1.5
+		paint_timer.autostart = true
+		paint_timer.one_shot = false
+		paint_timer.timeout.connect(_paint_by_role)
+		add_child(paint_timer)
+		# First paint immediately after the part mutator has had a chance to apply.
+		await get_tree().create_timer(2.0).timeout
+		_paint_by_role()
 
 
 func _mount_visibility() -> void:
@@ -159,6 +206,77 @@ func _mount_color() -> void:
 	_color_mutator.auto_cycle_enabled = true
 	_color_mutator.debug_logs = debug_logs
 	add_child(_color_mutator)
+
+
+func _mount_part() -> void:
+	var script: GDScript = load(GRID_PART_MUTATOR_PATH)
+	var expr_script: GDScript = load(GRID_PART_EXPR_PATH)
+	if not (script and expr_script):
+		return
+	_part_mutator = script.new()
+	_part_mutator.name = "GridPartMutator"
+	_part_mutator.multimesh_path = NodePath("")
+	var map_dims: Vector3i = _read_map_dimensions()
+	if map_dims != Vector3i.ZERO:
+		_part_mutator.grid_dims = map_dims
+	_part_mutator.auto_cycle_enabled = false  # part runs once at start, not on a cycle
+	_part_mutator.debug_logs = debug_logs
+	add_child(_part_mutator)
+	var expr: Node = expr_script.new()
+	expr.name = "GridPartExpressions"
+	add_child(expr)
+	expr.register_for(_part_mutator)
+	# Apply the configured grammar once.
+	for j in range(_part_mutator.get_pattern_count()):
+		_part_mutator.set_pattern_by_index(j)
+		if _part_mutator.get_current_pattern_name() == part_grammar:
+			break
+
+
+func _mount_glyph() -> void:
+	var script: GDScript = load(GRID_GLYPH_MUTATOR_PATH)
+	var expr_script: GDScript = load(GRID_GLYPH_EXPR_PATH)
+	if not (script and expr_script):
+		return
+	_glyph_mutator = script.new()
+	_glyph_mutator.name = "GridGlyphMutator"
+	_glyph_mutator.multimesh_path = NodePath("")
+	var map_dims: Vector3i = _read_map_dimensions()
+	if map_dims != Vector3i.ZERO:
+		_glyph_mutator.grid_dims = map_dims
+	_glyph_mutator.cycle_interval_seconds = glyph_cycle_seconds
+	_glyph_mutator.auto_cycle_enabled = true
+	_glyph_mutator.max_subdivided_cells = glyph_max_subdivided_cells
+	_glyph_mutator.viewer_radius = glyph_viewer_radius
+	_glyph_mutator.debug_logs = debug_logs
+	add_child(_glyph_mutator)
+	var expr: Node = expr_script.new()
+	expr.name = "GridGlyphExpressions"
+	add_child(expr)
+	expr.register_for(_glyph_mutator)
+	# Set the configured policy.
+	for j in range(_glyph_mutator.get_pattern_count()):
+		_glyph_mutator.set_pattern_by_index(j)
+		if _glyph_mutator.get_current_pattern_name() == glyph_policy:
+			break
+
+
+# Paint the multimesh per-role using the configured palette. Reads the part
+# mutator's role table; cubes without a role-match in the palette stay white.
+func _paint_by_role() -> void:
+	if not _part_mutator or not _vis_mutator:
+		return
+	var multimesh = _vis_mutator.multimesh
+	if not multimesh or not multimesh.use_colors:
+		return
+	# Build a StringName-keyed palette so the dict lookup matches part roles.
+	var palette: Dictionary = {}
+	for k in color_by_role_palette.keys():
+		palette[StringName(str(k))] = color_by_role_palette[k]
+	for i in range(multimesh.instance_count):
+		var role: StringName = _part_mutator.get_role(i)
+		var color: Color = palette.get(role, Color.WHITE)
+		multimesh.set_instance_color(i, color)
 
 
 # Try to read the map's actual W/D/H dimensions from GridSystem or its
