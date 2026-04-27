@@ -3275,6 +3275,153 @@
           }
         }
       ]
+    },
+    {
+      "id": "gen00_unified_flower_morph",
+      "notes": "MORPHOLOGY: tag_by_grammar(flower) + extrude_by_role drives different parts to different shapes. Petals splay outward (positive dist, scale>1), stamens spike up (large dist, narrow scale), pistil dome (small dist, scale<1), sepals curl in (negative dist). Real anatomy from one op driven by tags. + paint to colour the result.",
+      "seed": "icosahedron",
+      "seed_scale": 1.2,
+      "generations": 4,
+      "rules": [
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "tag_by_grammar",
+          "selector": "all",
+          "params": {
+            "grammar": "flower"
+          }
+        },
+        {
+          "op": "extrude_by_role",
+          "selector": "all",
+          "params": {
+            "role_params": {
+              "flower_pistil": {
+                "distance": 0.45,
+                "scale": 0.85
+              },
+              "flower_stamen": {
+                "distance": 0.95,
+                "scale": 0.3
+              },
+              "flower_petal": {
+                "distance": 0.35,
+                "scale": 1.15
+              },
+              "flower_sepal": {
+                "distance": 0.15,
+                "scale": 0.92
+              }
+            }
+          }
+        },
+        {
+          "op": "paint_by_tag",
+          "selector": "all",
+          "params": {
+            "palette": {
+              "flower_pistil": [
+                1.0,
+                0.85,
+                0.2
+              ],
+              "flower_stamen": [
+                0.95,
+                0.55,
+                0.85
+              ],
+              "flower_petal": [
+                0.65,
+                0.2,
+                0.5
+              ],
+              "flower_sepal": [
+                0.35,
+                0.6,
+                0.35
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen00_unified_insect_morph",
+      "notes": "MORPHOLOGY for insect grammar: head extrudes a rounded bump, thorax stays flat, abdomen elongates outward.",
+      "seed": "icosahedron",
+      "seed_scale": 1.2,
+      "generations": 4,
+      "rules": [
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "tag_by_grammar",
+          "selector": "all",
+          "params": {
+            "grammar": "insect"
+          }
+        },
+        {
+          "op": "extrude_by_role",
+          "selector": "all",
+          "params": {
+            "role_params": {
+              "insect_head": {
+                "distance": 0.6,
+                "scale": 0.7
+              },
+              "insect_thorax": {
+                "distance": 0.15,
+                "scale": 1.0
+              },
+              "insect_abdomen": {
+                "distance": 0.85,
+                "scale": 0.5
+              }
+            }
+          }
+        },
+        {
+          "op": "paint_by_tag",
+          "selector": "all",
+          "params": {
+            "palette": {
+              "insect_head": [
+                0.85,
+                0.3,
+                0.25
+              ],
+              "insect_thorax": [
+                0.95,
+                0.75,
+                0.2
+              ],
+              "insect_abdomen": [
+                0.35,
+                0.4,
+                0.7
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }
