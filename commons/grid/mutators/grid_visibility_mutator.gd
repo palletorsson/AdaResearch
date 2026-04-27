@@ -344,6 +344,13 @@ func _compute_floor_plan(dims: Vector3i, pattern_visible: PackedByteArray) -> vo
 	# fill the cheapest cubes needed to make them connected.
 	if floor_plan_mode == FloorPlanMode.PATH_GUARANTEE:
 		_carve_walkable_path(dims, pattern_visible)
+		var fc: int = 0
+		for k in range(_floor_plan_fill_mask.size()):
+			if _floor_plan_fill_mask[k] != 0:
+				fc += 1
+		_log("GridVisibilityMutator: PATH_GUARANTEE filled %d cubes (seed=%s target=%s dims=%s)" % [
+			fc, floor_plan_seed, floor_plan_target, dims
+		])
 		return
 
 	# Flood-fill empty cells in the floor strata.

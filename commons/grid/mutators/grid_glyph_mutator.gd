@@ -170,9 +170,18 @@ func _apply_named_pattern(pattern_name: String) -> void:
 
 	# Pass 2: gather candidates (visible AND desired >= 1), score by
 	# distance-to-viewer (closer = higher priority), enforce budget.
+	# CRITICAL: skip cubes that PATH_GUARANTEE force-filled — subdividing
+	# them would hide the parent, breaking the player's walk route.
+	var sibling_vis: Node = _find_sibling_visibility_mutator()
+	var protected_fills: PackedByteArray = PackedByteArray()
+	if sibling_vis and "_floor_plan_fill_mask" in sibling_vis:
+		protected_fills = sibling_vis._floor_plan_fill_mask
 	var candidates: Array = []
 	for i in range(instance_count):
 		if desired[i] >= 1 and visible[i] != 0:
+			# Skip path-fill cubes so PATH_GUARANTEE's route stays walkable.
+			if i < protected_fills.size() and protected_fills[i] != 0:
+				continue
 			candidates.append(i)
 	if candidates.size() > max_subdivided_cells:
 		# Sort by distance-to-viewer ascending; keep the closest budget worth.
@@ -232,6 +241,22 @@ func _apply_named_pattern(pattern_name: String) -> void:
 
 
 # --- sub-mesh setup --------------------------------------------------------
+
+func _find_sibling_visibility_mutator() -> Node:
+	# Glyph runs after visibility; both are mounted as children of the same
+	# runner Node. Find the sibling whose script's class chain contains
+	# GridVisibilityMutator.
+	var parent: Node = get_parent()
+	if not parent:
+		return null
+	for sibling in parent.get_children():
+		var s: Script = sibling.get_script()
+		while s:
+			if s.get_global_name() == "GridVisibilityMutator":
+				return sibling
+			s = s.get_base_script()
+	return null
+
 
 func _ensure_sub_mesh() -> void:
 	if _sub_instance and _sub_mesh:

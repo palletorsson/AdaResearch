@@ -163,8 +163,11 @@ func _mount_visibility() -> void:
 		_vis_mutator.floor_plan_seed = seed
 	if target.x >= 0:
 		_vis_mutator.floor_plan_target = target
-	if debug_logs:
-		print("GridSubstrateRunner: path seed=%s target=%s" % [seed, target])
+	# Diagnostic so we can see in capture logs whether discovery worked.
+	print("GridSubstrateRunner: floor_plan_mode=%d layers=%d seed=%s target=%s (discovery=%s)" % [
+		floor_plan_mode, floor_plan_layers, seed, target,
+		"OK" if (seed.x >= 0 and target.x >= 0) else "DEFAULTED-TO-CORNERS",
+	])
 	add_child(_vis_mutator)
 
 	# 2D expressions always (rule_30, sierpinski, checkerboard, rings).
@@ -279,53 +282,84 @@ func _paint_by_role() -> void:
 		multimesh.set_instance_color(i, color)
 
 
-# Try to read the map's actual W/D/H dimensions from GridSystem or its
-# data component. Returns Vector3i.ZERO if we can't determine.
+# Read the map's actual W/D/H dimensions directly from GridDataComponent
+# (the same component the spawn / interactables / structure systems read
+# from). Falls back to a generic property search if the component isn't
+# found, then to ZERO.
 func _read_map_dimensions() -> Vector3i:
+	var data_comp: Node = _find_grid_data_component()
+	if data_comp and data_comp.has_method("get_grid_dimensions"):
+		var dims: Variant = data_comp.call("get_grid_dimensions")
+		if dims is Vector3i and dims != Vector3i.ZERO:
+			return dims
+	# Fallback heuristic — first node with width/depth/max_height. Less
+	# reliable because preview / catalog components can match.
 	var scene: Node = get_tree().current_scene if get_tree() else null
 	if not scene:
 		return Vector3i.ZERO
 	for n in scene.find_children("*", "", true, false):
-		# GridDataComponent or GridSystem typically expose width/depth/max_height
-		var w_ok: bool = "width" in n
-		var d_ok: bool = "depth" in n
-		if w_ok and d_ok:
+		if "width" in n and "depth" in n:
 			var w: int = int(n.get("width"))
 			var d: int = int(n.get("depth"))
 			var h: int = int(n.get("max_height")) if "max_height" in n else 1
-			# Floor strata only — visibility mutator iterates h-deep stack.
 			return Vector3i(w, max(h, 1), d)
 	return Vector3i.ZERO
 
 
-# Walk the loaded scene for "sp" (spawn) and "t" (teleporter) utility cells.
-# GridSystem instantiates utility nodes with predictable name/group conventions;
-# we look for them and convert their grid positions to cube coords.
+# Find the map's spawn ("sp") and teleporter ("t") cells directly from the
+# map data — the utilities layer holds them. This is more reliable than
+# walking the scene tree for nodes named "spawn"/"teleport".
 func _discover_spawn_and_teleporter() -> Dictionary:
 	var out: Dictionary = {}
+	var data_comp: Node = _find_grid_data_component()
+	if not data_comp:
+		print("GridSubstrateRunner: discovery — no GridDataComponent in scene")
+		return out
+	# Get the raw 2D Array of utility-cell strings via the data component's
+	# json_loader (matches GridSpawnComponent's _find_teleporter_position).
+	var utilities: Variant = null
+	if "json_loader" in data_comp and data_comp.json_loader:
+		var loader = data_comp.json_loader
+		if loader.has_method("get_utilities_layer"):
+			utilities = loader.get_utilities_layer()
+	if not (utilities is Array):
+		print("GridSubstrateRunner: discovery — utilities layer not Array (got %s)" % str(typeof(utilities)))
+		return out
+	for z in range(utilities.size()):
+		var row = utilities[z]
+		if typeof(row) != TYPE_ARRAY:
+			continue
+		for x in range(row.size()):
+			var cell: String = str(row[x]).strip_edges()
+			if cell.is_empty():
+				continue
+			if not out.has("seed") and (cell == "sp" or cell.begins_with("sp:")):
+				out["seed"] = Vector3i(x, 0, z)
+			if not out.has("target") and (cell == "t" or cell.begins_with("t:")):
+				out["target"] = Vector3i(x, 0, z)
+			if out.has("seed") and out.has("target"):
+				return out
+	return out
+
+
+# Walk the loaded scene for a GridDataComponent (where the map's utilities
+# layer lives).
+func _find_grid_data_component() -> Node:
 	var scene: Node = get_tree().current_scene if get_tree() else null
 	if not scene:
-		return out
-	# Common conventions: nodes in the "spawn_points" group, "teleporters" group,
-	# or with names containing those tokens.
-	var candidates: Array = []
+		return null
 	for n in scene.find_children("*", "", true, false):
-		candidates.append(n)
-	for n in candidates:
-		var lname: String = String(n.name).to_lower()
-		if not out.has("seed") and (n.is_in_group("spawn_points") or "spawn" in lname):
-			out["seed"] = _node_to_cell(n)
-		if not out.has("target") and (n.is_in_group("teleporters") or "teleport" in lname):
-			out["target"] = _node_to_cell(n)
-		if out.has("seed") and out.has("target"):
-			break
-	return out
+		var s: Script = n.get_script()
+		while s:
+			if s.get_global_name() == "GridDataComponent":
+				return n
+			s = s.get_base_script()
+	return null
 
 
 func _node_to_cell(node: Node) -> Vector3i:
 	if node is Node3D:
 		var p: Vector3 = (node as Node3D).global_position
-		# Cube coordinates assume unit cells aligned at integer origins.
 		return Vector3i(int(round(p.x)), 0, int(round(p.z)))
 	return Vector3i(0, 0, 0)
 

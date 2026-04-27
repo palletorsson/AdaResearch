@@ -36,6 +36,7 @@ func _init() -> void:
 	# Override parent defaults BEFORE _ready fires.
 
 	# Visibility — the fold vocabulary.
+	debug_logs = true  # so PATH_GUARANTEE diagnostics print
 	enable_visibility = true
 	visibility_expressions = ["rule_30", "sierpinski", "menger_sponge"]
 	visibility_cycle_seconds = 6.0

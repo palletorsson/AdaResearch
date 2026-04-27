@@ -165,11 +165,15 @@ func _wait_for_map_ready(catalog: Node, timeout: float) -> bool:
 
 
 func _find_substrate_runner(node: Node) -> Node:
-	# Search the loaded scene graph for a Node that has class_name GridSubstrateRunner.
+	# Search the loaded scene graph for a Node whose script is GridSubstrateRunner
+	# OR any subclass thereof (FoldTheatreRunner, etc.). Walk the script's base
+	# chain to detect subclasses.
 	for n in node.find_children("*", "", true, false):
 		var s: Script = n.get_script()
-		if s and s.get_global_name() == "GridSubstrateRunner":
-			return n
+		while s:
+			if s.get_global_name() == "GridSubstrateRunner":
+				return n
+			s = s.get_base_script()
 	return null
 
 
