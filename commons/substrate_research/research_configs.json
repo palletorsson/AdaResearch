@@ -4,40 +4,76 @@
   "configs": [
     {
       "id": "gen00_visibility_rule_30",
-      "notes": "Baseline — visibility=rule_30 on a 12x1x12 floor. The substrate's simplest reading.",
-      "grid_dims": [12, 1, 12],
+      "notes": "Baseline \u00e2\u20ac\u201d visibility=rule_30 on a 12x1x12 floor. The substrate's simplest reading.",
+      "grid_dims": [
+        12,
+        1,
+        12
+      ],
       "visibility": "rule_30"
     },
     {
       "id": "gen00_visibility_sierpinski",
       "notes": "Visibility=sierpinski. Pascal's triangle mod 2 read as floor mask.",
-      "grid_dims": [12, 1, 12],
+      "grid_dims": [
+        12,
+        1,
+        12
+      ],
       "visibility": "sierpinski"
     },
     {
       "id": "gen00_visibility_rings",
       "notes": "Visibility=rings. Concentric Chebyshev bands.",
-      "grid_dims": [12, 1, 12],
+      "grid_dims": [
+        12,
+        1,
+        12
+      ],
       "visibility": "rings"
     },
     {
       "id": "gen00_flower_tabletop",
       "notes": "Part=flower_grammar painted with concentric anatomy palette over rule_30.",
-      "grid_dims": [13, 1, 13],
+      "grid_dims": [
+        13,
+        1,
+        13
+      ],
       "visibility": "rule_30",
       "enable_part": true,
       "part_grammar": "flower_grammar",
       "color_by_role": {
-        "pistil": [1.0, 0.85, 0.2],
-        "stamen": [0.95, 0.55, 0.85],
-        "petal":  [0.65, 0.2, 0.5],
-        "sepal":  [0.35, 0.6, 0.35]
+        "pistil": [
+          1.0,
+          0.85,
+          0.2
+        ],
+        "stamen": [
+          0.95,
+          0.55,
+          0.85
+        ],
+        "petal": [
+          0.65,
+          0.2,
+          0.5
+        ],
+        "sepal": [
+          0.35,
+          0.6,
+          0.35
+        ]
       }
     },
     {
       "id": "gen00_glyph_attention",
       "notes": "Glyph=subdivide_by_attention with viewer at centre. Detail emerges where attention is.",
-      "grid_dims": [12, 1, 12],
+      "grid_dims": [
+        12,
+        1,
+        12
+      ],
       "visibility": "rule_30",
       "enable_glyph": true,
       "glyph_policy": "subdivide_by_attention",
@@ -46,8 +82,12 @@
     },
     {
       "id": "gen00_glyph_uniform",
-      "notes": "Glyph=subdivide_uniform on small box — every visible cube subdivides, budget caps.",
-      "grid_dims": [10, 1, 10],
+      "notes": "Glyph=subdivide_uniform on small box \u00e2\u20ac\u201d every visible cube subdivides, budget caps.",
+      "grid_dims": [
+        10,
+        1,
+        10
+      ],
       "visibility": "checkerboard",
       "enable_glyph": true,
       "glyph_policy": "subdivide_uniform",
@@ -56,43 +96,214 @@
     {
       "id": "gen00_volumetric_menger",
       "notes": "3D Menger sponge. Tests the 3d expression registry on a 12x8x12 volume.",
-      "grid_dims": [12, 8, 12],
+      "grid_dims": [
+        12,
+        8,
+        12
+      ],
       "visibility": "menger_sponge",
       "enable_3d_expressions": true
     },
     {
       "id": "gen00_volumetric_bfs_t6",
       "notes": "BFS frontier at step 6 from corner seed. Pathfinding-as-visibility.",
-      "grid_dims": [12, 8, 12],
+      "grid_dims": [
+        12,
+        8,
+        12
+      ],
       "visibility": "bfs_frontier_t6",
       "enable_3d_expressions": true
     },
     {
       "id": "gen00_fold_theatre_proxy",
-      "notes": "Synthetic-scene proxy of FoldTheatreRunner — visibility=menger_sponge with flower grammar painted on top.",
-      "grid_dims": [13, 4, 17],
+      "notes": "Synthetic-scene proxy of FoldTheatreRunner \u00e2\u20ac\u201d visibility=menger_sponge with flower grammar painted on top.",
+      "grid_dims": [
+        13,
+        4,
+        17
+      ],
       "visibility": "menger_sponge",
       "enable_3d_expressions": true,
       "enable_part": true,
       "part_grammar": "flower_grammar",
       "color_by_role": {
-        "pistil": [1.0, 0.85, 0.2],
-        "stamen": [0.95, 0.55, 0.85],
-        "petal":  [0.65, 0.2, 0.5],
-        "sepal":  [0.35, 0.6, 0.35]
+        "pistil": [
+          1.0,
+          0.85,
+          0.2
+        ],
+        "stamen": [
+          0.95,
+          0.55,
+          0.85
+        ],
+        "petal": [
+          0.65,
+          0.2,
+          0.5
+        ],
+        "sepal": [
+          0.35,
+          0.6,
+          0.35
+        ]
       }
     },
     {
       "id": "gen00_insect_grammar_painted",
-      "notes": "Insect grammar — head/thorax/abdomen — over rule_30 with longitudinal palette.",
-      "grid_dims": [12, 1, 14],
+      "notes": "Insect grammar \u00e2\u20ac\u201d head/thorax/abdomen \u00e2\u20ac\u201d over rule_30 with longitudinal palette.",
+      "grid_dims": [
+        12,
+        1,
+        14
+      ],
       "visibility": "rule_30",
       "enable_part": true,
       "part_grammar": "insect_grammar",
       "color_by_role": {
-        "head":    [0.85, 0.3, 0.25],
-        "thorax":  [0.95, 0.75, 0.2],
-        "abdomen": [0.35, 0.4, 0.7]
+        "head": [
+          0.85,
+          0.3,
+          0.25
+        ],
+        "thorax": [
+          0.95,
+          0.75,
+          0.2
+        ],
+        "abdomen": [
+          0.35,
+          0.4,
+          0.7
+        ]
+      }
+    },
+    {
+      "id": "gen01_visibility_sierpinski_grammar_flower",
+      "notes": "From hint on gen00_visibility_sierpinski: part_grammar->flower_grammar",
+      "grid_dims": [
+        12,
+        1,
+        12
+      ],
+      "visibility": "sierpinski",
+      "enable_part": true,
+      "part_grammar": "flower_grammar",
+      "color_by_role": {
+        "pistil": [
+          1.0,
+          0.85,
+          0.2
+        ],
+        "stamen": [
+          0.95,
+          0.55,
+          0.85
+        ],
+        "petal": [
+          0.65,
+          0.2,
+          0.5
+        ],
+        "sepal": [
+          0.35,
+          0.6,
+          0.35
+        ]
+      }
+    },
+    {
+      "id": "gen01_flower_tabletop_vis_menger_sponge",
+      "notes": "From hint on gen00_flower_tabletop: visibility->menger_sponge",
+      "grid_dims": [
+        13,
+        1,
+        13
+      ],
+      "visibility": "menger_sponge",
+      "enable_part": true,
+      "part_grammar": "flower_grammar",
+      "color_by_role": {
+        "pistil": [
+          1.0,
+          0.85,
+          0.2
+        ],
+        "stamen": [
+          0.95,
+          0.55,
+          0.85
+        ],
+        "petal": [
+          0.65,
+          0.2,
+          0.5
+        ],
+        "sepal": [
+          0.35,
+          0.6,
+          0.35
+        ]
+      }
+    },
+    {
+      "id": "gen01_insect_grammar_painted_grammar_bird",
+      "notes": "From hint on gen00_insect_grammar_painted: part_grammar->bird_grammar",
+      "grid_dims": [
+        12,
+        1,
+        14
+      ],
+      "visibility": "rule_30",
+      "enable_part": true,
+      "part_grammar": "bird_grammar",
+      "color_by_role": {
+        "head": [
+          0.85,
+          0.3,
+          0.25
+        ],
+        "throat": [
+          0.95,
+          0.55,
+          0.4
+        ],
+        "breast": [
+          0.95,
+          0.75,
+          0.2
+        ],
+        "belly": [
+          0.92,
+          0.92,
+          0.85
+        ],
+        "back": [
+          0.45,
+          0.5,
+          0.6
+        ],
+        "flanks": [
+          0.7,
+          0.7,
+          0.55
+        ],
+        "wing": [
+          0.25,
+          0.3,
+          0.45
+        ],
+        "tail": [
+          0.35,
+          0.45,
+          0.5
+        ],
+        "vent": [
+          0.6,
+          0.55,
+          0.45
+        ]
       }
     }
   ]
