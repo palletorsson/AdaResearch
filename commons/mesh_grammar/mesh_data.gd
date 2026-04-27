@@ -140,10 +140,15 @@ func to_arrays() -> Dictionary:
 # ---------------------------------------------------------------------------
 func to_array_mesh(options: Dictionary = {}) -> ArrayMesh:
 	var double_sided: bool = options.get("double_sided", false)
+	# When face_colors is true, read per-face Color from face_metadata[i]["color"]
+	# (set by PaintByTagOp) and bake it as SurfaceTool vertex colour. Material
+	# must use vertex_color_use_as_albedo to display.
+	var face_colors: bool = options.get("face_colors", false)
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
-	for face in faces:
+	for fi in range(faces.size()):
+		var face: PackedInt32Array = faces[fi]
 		if face.size() != 3:
 			continue
 		var v0: Vector3 = vertices[face[0]]
@@ -154,20 +159,32 @@ func to_array_mesh(options: Dictionary = {}) -> ArrayMesh:
 			continue
 		normal = normal.normalized()
 
+		var face_color: Color = Color.WHITE
+		if face_colors and fi < face_metadata.size():
+			var md: Dictionary = face_metadata[fi]
+			if md.has("color"):
+				face_color = md["color"]
+
 		st.set_normal(normal)
+		if face_colors: st.set_color(face_color)
 		st.add_vertex(v0)
 		st.set_normal(normal)
+		if face_colors: st.set_color(face_color)
 		st.add_vertex(v1)
 		st.set_normal(normal)
+		if face_colors: st.set_color(face_color)
 		st.add_vertex(v2)
 
 		if double_sided:
 			var back := -normal
 			st.set_normal(back)
+			if face_colors: st.set_color(face_color)
 			st.add_vertex(v0)
 			st.set_normal(back)
+			if face_colors: st.set_color(face_color)
 			st.add_vertex(v2)
 			st.set_normal(back)
+			if face_colors: st.set_color(face_color)
 			st.add_vertex(v1)
 
 	if options.get("generate_normals", false):

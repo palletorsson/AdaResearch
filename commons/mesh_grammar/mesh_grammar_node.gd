@@ -142,8 +142,27 @@ func _create_seed() -> void:
 
 func _update_display(mesh_data: MeshData) -> void:
 	if _mesh_instance and mesh_data:
-		_mesh_instance.mesh = mesh_data.to_array_mesh({"double_sided": double_sided})
-		if _material:
+		# Detect if PaintByTagOp has written per-face colours; if so, bake
+		# them into vertex colours and use a vertex-colour material.
+		var has_face_colors: bool = false
+		for md in mesh_data.face_metadata:
+			if md is Dictionary and md.has("painted"):
+				has_face_colors = true
+				break
+		_mesh_instance.mesh = mesh_data.to_array_mesh({
+			"double_sided": double_sided,
+			"face_colors": has_face_colors,
+		})
+		if has_face_colors:
+			# Override with a vertex-colour-aware material so paint shows.
+			var vmat := StandardMaterial3D.new()
+			vmat.vertex_color_use_as_albedo = true
+			vmat.metallic = 0.0
+			vmat.roughness = 0.85
+			if double_sided:
+				vmat.cull_mode = BaseMaterial3D.CULL_DISABLED
+			_mesh_instance.material_override = vmat
+		elif _material:
 			_mesh_instance.material_override = _material
 
 func _setup_material() -> void:

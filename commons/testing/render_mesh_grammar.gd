@@ -26,6 +26,8 @@ const EdgeDecorateOp = preload("res://commons/mesh_grammar/operations/edge_decor
 const SurfaceScatterOp = preload("res://commons/mesh_grammar/operations/surface_scatter_op.gd")
 const LSystemBranchOp = preload("res://commons/mesh_grammar/operations/lsystem_branch_op.gd")
 const CellularSurfaceOp = preload("res://commons/mesh_grammar/operations/cellular_surface_op.gd")
+const TagByGrammarOp    = preload("res://commons/mesh_grammar/operations/tag_by_grammar_op.gd")
+const PaintByTagOp      = preload("res://commons/mesh_grammar/operations/paint_by_tag_op.gd")
 const RDSimScriptMG      = preload("res://commons/rd_grammar/rd_sim.gd")
 const MeshDataClass      = preload("res://commons/mesh_grammar/mesh_data.gd")
 
@@ -278,6 +280,8 @@ func _build_rule(rdef: Dictionary):
 		"scatter":       return SurfaceScatterOp.new(sel, params)
 		"lsystem_branch":return LSystemBranchOp.new(sel, params)
 		"cellular":      return CellularSurfaceOp.new(sel, params)
+		"tag_by_grammar": return TagByGrammarOp.new(sel, params)
+		"paint_by_tag":   return PaintByTagOp.new(sel, params)
 	push_warning("Unknown op: %s" % op)
 	return null
 
