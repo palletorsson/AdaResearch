@@ -3071,6 +3071,210 @@
           }
         }
       ]
+    },
+    {
+      "id": "gen00_unified_fold_sierpinski",
+      "notes": "F-edge first cycle in pure mesh-grammar: tag flower + paint + carve sierpinski. Same flower-anatomy, sierpinski pattern carving the floor. Substrate's part+color+visibility encoded as three mesh-grammar ops.",
+      "seed": "icosahedron",
+      "seed_scale": 1.4,
+      "generations": 3,
+      "rules": [
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "tag_by_grammar",
+          "selector": "all",
+          "params": {
+            "grammar": "flower"
+          }
+        },
+        {
+          "op": "paint_by_tag",
+          "selector": "all",
+          "params": {
+            "palette": {
+              "flower_pistil": [
+                1.0,
+                0.85,
+                0.2
+              ],
+              "flower_stamen": [
+                0.95,
+                0.55,
+                0.85
+              ],
+              "flower_petal": [
+                0.65,
+                0.2,
+                0.5
+              ],
+              "flower_sepal": [
+                0.35,
+                0.6,
+                0.35
+              ]
+            }
+          }
+        },
+        {
+          "op": "hide_by_rule",
+          "selector": "all",
+          "params": {
+            "rule": "sierpinski",
+            "cols": 16,
+            "rows": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen00_unified_fold_rule30",
+      "notes": "F-edge variant: same flower, Rule 30 carving instead of Sierpinski. The CA's chaotic pattern carves through the painted anatomy.",
+      "seed": "icosahedron",
+      "seed_scale": 1.4,
+      "generations": 3,
+      "rules": [
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "tag_by_grammar",
+          "selector": "all",
+          "params": {
+            "grammar": "flower"
+          }
+        },
+        {
+          "op": "paint_by_tag",
+          "selector": "all",
+          "params": {
+            "palette": {
+              "flower_pistil": [
+                1.0,
+                0.85,
+                0.2
+              ],
+              "flower_stamen": [
+                0.95,
+                0.55,
+                0.85
+              ],
+              "flower_petal": [
+                0.65,
+                0.2,
+                0.5
+              ],
+              "flower_sepal": [
+                0.35,
+                0.6,
+                0.35
+              ]
+            }
+          }
+        },
+        {
+          "op": "hide_by_rule",
+          "selector": "all",
+          "params": {
+            "rule": "rule_30",
+            "cols": 16,
+            "rows": 16
+          }
+        }
+      ]
+    },
+    {
+      "id": "gen00_unified_fold_rings",
+      "notes": "F-edge variant: same flower, concentric rings carving. Algorithm AND anatomy both concentric \u2014 they reinforce each other.",
+      "seed": "icosahedron",
+      "seed_scale": 1.4,
+      "generations": 3,
+      "rules": [
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "split",
+          "selector": "all",
+          "params": {}
+        },
+        {
+          "op": "tag_by_grammar",
+          "selector": "all",
+          "params": {
+            "grammar": "flower"
+          }
+        },
+        {
+          "op": "paint_by_tag",
+          "selector": "all",
+          "params": {
+            "palette": {
+              "flower_pistil": [
+                1.0,
+                0.85,
+                0.2
+              ],
+              "flower_stamen": [
+                0.95,
+                0.55,
+                0.85
+              ],
+              "flower_petal": [
+                0.65,
+                0.2,
+                0.5
+              ],
+              "flower_sepal": [
+                0.35,
+                0.6,
+                0.35
+              ]
+            }
+          }
+        },
+        {
+          "op": "hide_by_rule",
+          "selector": "all",
+          "params": {
+            "rule": "rings",
+            "cols": 16,
+            "rows": 16
+          }
+        }
+      ]
     }
   ]
 }
