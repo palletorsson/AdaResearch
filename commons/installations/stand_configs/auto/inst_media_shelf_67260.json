@@ -1,0 +1,183 @@
+{
+  "installation_info": {
+    "name": "Media shelf 67260",
+    "description": "1m frame wall with 0.5m shelves, centered display, and speaker/utility mix.",
+    "family": "media_shelf",
+    "auto_generated": true,
+    "auto_score": 120.68,
+    "selection_rank": 2
+  },
+  "layout": {
+    "unit_m": 1.0,
+    "metal_color": [
+      0.78,
+      0.8,
+      0.84,
+      1.0
+    ],
+    "dark_color": [
+      0.07,
+      0.08,
+      0.1,
+      1.0
+    ],
+    "accent_color": [
+      0.98,
+      0.6,
+      0.18,
+      1.0
+    ],
+    "screen_color": [
+      0.05,
+      0.16,
+      0.18,
+      1.0
+    ],
+    "light_color": [
+      1.0,
+      0.92,
+      0.78,
+      1.0
+    ],
+    "floor_color": [
+      0.13,
+      0.14,
+      0.16,
+      1.0
+    ]
+  },
+  "platform": {
+    "width": 4.6,
+    "depth": 1.2,
+    "height": 0.12
+  },
+  "frame": {
+    "uprights": [
+      {
+        "x": -2.0,
+        "y": 1.5,
+        "z": 0.0,
+        "height": 3.0,
+        "thickness": 0.12
+      },
+      {
+        "x": 0.0,
+        "y": 1.5,
+        "z": 0.0,
+        "height": 3.0,
+        "thickness": 0.12
+      },
+      {
+        "x": 2.0,
+        "y": 1.5,
+        "z": 0.0,
+        "height": 3.0,
+        "thickness": 0.12
+      }
+    ],
+    "beams": [
+      {
+        "x": 0.0,
+        "y": 3.0,
+        "z": 0.0,
+        "width": 4.2,
+        "depth": 0.12,
+        "thickness": 0.12
+      },
+      {
+        "x": 0.0,
+        "y": 0.9,
+        "z": 0.0,
+        "width": 4.2,
+        "depth": 0.12,
+        "thickness": 0.12
+      },
+      {
+        "x": 0.0,
+        "y": 1.7,
+        "z": 0.0,
+        "width": 4.2,
+        "depth": 0.12,
+        "thickness": 0.12
+      }
+    ]
+  },
+  "shelves": [
+    {
+      "x": 0.0,
+      "y": 0.9,
+      "z": 0.15,
+      "width": 4.0,
+      "depth": 0.5,
+      "thickness": 0.06
+    },
+    {
+      "x": 0.0,
+      "y": 1.7,
+      "z": 0.15,
+      "width": 4.0,
+      "depth": 0.5,
+      "thickness": 0.06
+    }
+  ],
+  "screens": [
+    {
+      "x": 0.0,
+      "y": 1.35,
+      "z": 0.0,
+      "width": 1.0,
+      "height": 1.0,
+      "depth": 0.08,
+      "frame": 0.06
+    }
+  ],
+  "speakers": [
+    {
+      "x": -1.1,
+      "y": 1.1,
+      "z": 0.18,
+      "width": 0.42,
+      "height": 0.36,
+      "depth": 0.38,
+      "modules": 1,
+      "gap": 0.03
+    },
+    {
+      "x": 1.1,
+      "y": 1.1,
+      "z": 0.18,
+      "width": 0.42,
+      "height": 0.36,
+      "depth": 0.38,
+      "modules": 1,
+      "gap": 0.03
+    }
+  ],
+  "lights": [
+    {
+      "x": 0.0,
+      "y": 2.85,
+      "z": 0.02,
+      "width": 4.0,
+      "count": 8
+    }
+  ],
+  "boxes": [
+    {
+      "x": -1.0,
+      "y": 0.35,
+      "z": 0.2,
+      "width": 0.5,
+      "height": 0.28,
+      "depth": 0.28
+    },
+    {
+      "x": 1.0,
+      "y": 0.35,
+      "z": 0.2,
+      "width": 0.5,
+      "height": 0.28,
+      "depth": 0.28
+    }
+  ]
+}

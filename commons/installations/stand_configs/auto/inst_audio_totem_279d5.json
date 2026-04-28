@@ -1,0 +1,143 @@
+{
+  "installation_info": {
+    "name": "Audio totem 279d5",
+    "description": "1m column with stacked speakers, half-meter service shelves, and signal boxes.",
+    "family": "audio_totem",
+    "auto_generated": true,
+    "auto_score": 117.12,
+    "selection_rank": 1
+  },
+  "layout": {
+    "unit_m": 1.0,
+    "metal_color": [
+      0.72,
+      0.73,
+      0.76,
+      1.0
+    ],
+    "dark_color": [
+      0.1,
+      0.1,
+      0.11,
+      1.0
+    ],
+    "accent_color": [
+      0.9,
+      0.36,
+      0.28,
+      1.0
+    ],
+    "screen_color": [
+      0.1,
+      0.11,
+      0.13,
+      1.0
+    ],
+    "light_color": [
+      1.0,
+      0.88,
+      0.7,
+      1.0
+    ],
+    "floor_color": [
+      0.16,
+      0.16,
+      0.18,
+      1.0
+    ]
+  },
+  "platform": {
+    "width": 1.6,
+    "depth": 1.2,
+    "height": 0.12
+  },
+  "frame": {
+    "uprights": [
+      {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0,
+        "height": 2.0,
+        "thickness": 0.16
+      }
+    ],
+    "beams": [
+      {
+        "x": 0.0,
+        "y": 0.8,
+        "z": 0.0,
+        "width": 0.9,
+        "depth": 0.26,
+        "thickness": 0.08
+      },
+      {
+        "x": 0.0,
+        "y": 1.6,
+        "z": 0.0,
+        "width": 0.9,
+        "depth": 0.26,
+        "thickness": 0.08
+      }
+    ]
+  },
+  "shelves": [
+    {
+      "x": 0.0,
+      "y": 0.8,
+      "z": 0.18,
+      "width": 1.0,
+      "depth": 0.5,
+      "thickness": 0.06
+    },
+    {
+      "x": 0.0,
+      "y": 1.6,
+      "z": 0.18,
+      "width": 0.5,
+      "depth": 0.5,
+      "thickness": 0.06
+    }
+  ],
+  "screens": [
+    {
+      "x": 0.0,
+      "y": 2.1,
+      "z": 0.0,
+      "width": 0.5,
+      "height": 0.5,
+      "depth": 0.08,
+      "frame": 0.05
+    }
+  ],
+  "speakers": [
+    {
+      "x": 0.0,
+      "y": 1.3,
+      "z": 0.18,
+      "width": 0.55,
+      "height": 0.45,
+      "depth": 0.4,
+      "modules": 3,
+      "gap": 0.02
+    }
+  ],
+  "lights": [
+    {
+      "x": 0.0,
+      "y": 2.0,
+      "z": 0.0,
+      "width": 0.6,
+      "count": 3
+    }
+  ],
+  "boxes": [
+    {
+      "x": 0.0,
+      "y": 0.3,
+      "z": 0.2,
+      "width": 0.8,
+      "height": 0.25,
+      "depth": 0.32
+    }
+  ]
+}

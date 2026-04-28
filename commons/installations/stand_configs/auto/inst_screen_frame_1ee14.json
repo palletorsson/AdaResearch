@@ -1,0 +1,152 @@
+{
+  "installation_info": {
+    "name": "Screen frame 1ee14",
+    "description": "1m-bay frame with large screen, lower shelf, side speakers, and top light bar.",
+    "family": "screen_frame",
+    "auto_generated": true,
+    "auto_score": 120.79,
+    "selection_rank": 1
+  },
+  "layout": {
+    "unit_m": 1.0,
+    "metal_color": [
+      0.66,
+      0.69,
+      0.74,
+      1.0
+    ],
+    "dark_color": [
+      0.06,
+      0.07,
+      0.08,
+      1.0
+    ],
+    "accent_color": [
+      0.35,
+      0.82,
+      1.0,
+      1.0
+    ],
+    "screen_color": [
+      0.04,
+      0.11,
+      0.17,
+      1.0
+    ],
+    "light_color": [
+      0.96,
+      0.97,
+      1.0,
+      1.0
+    ],
+    "floor_color": [
+      0.11,
+      0.12,
+      0.14,
+      1.0
+    ]
+  },
+  "platform": {
+    "width": 3.3,
+    "depth": 1.0,
+    "height": 0.14
+  },
+  "frame": {
+    "uprights": [
+      {
+        "x": -1.25,
+        "y": 1.5,
+        "z": 0.0,
+        "height": 3.0,
+        "thickness": 0.12
+      },
+      {
+        "x": 1.25,
+        "y": 1.5,
+        "z": 0.0,
+        "height": 3.0,
+        "thickness": 0.12
+      }
+    ],
+    "beams": [
+      {
+        "x": 0.0,
+        "y": 3.0,
+        "z": 0.0,
+        "width": 2.7,
+        "depth": 0.12,
+        "thickness": 0.12
+      },
+      {
+        "x": 0.0,
+        "y": 0.9,
+        "z": 0.1,
+        "width": 1.75,
+        "depth": 0.18,
+        "thickness": 0.08
+      }
+    ]
+  },
+  "shelves": [
+    {
+      "x": 0.0,
+      "y": 0.9,
+      "z": 0.18,
+      "width": 2.0,
+      "depth": 0.5,
+      "thickness": 0.06
+    }
+  ],
+  "screens": [
+    {
+      "x": 0.0,
+      "y": 1.85,
+      "z": 0.0,
+      "width": 2.0,
+      "height": 1.0,
+      "depth": 0.08,
+      "frame": 0.06
+    }
+  ],
+  "speakers": [
+    {
+      "x": -1.6,
+      "y": 1.1,
+      "z": 0.18,
+      "width": 0.42,
+      "height": 0.36,
+      "depth": 0.38,
+      "modules": 2,
+      "gap": 0.03
+    },
+    {
+      "x": 1.6,
+      "y": 1.1,
+      "z": 0.18,
+      "width": 0.42,
+      "height": 0.36,
+      "depth": 0.38,
+      "modules": 2,
+      "gap": 0.03
+    }
+  ],
+  "lights": [
+    {
+      "x": 0.0,
+      "y": 2.85,
+      "z": 0.05,
+      "width": 2.5,
+      "count": 5
+    }
+  ],
+  "boxes": [
+    {
+      "x": 0.0,
+      "y": 0.32,
+      "z": 0.22,
+      "width": 0.6,
+      "height": 0.24,
+      "depth": 0.28
+    }
+  ]
+}

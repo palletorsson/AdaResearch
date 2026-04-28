@@ -148,6 +148,14 @@ MODULES: dict[str, dict] = {
         "stage_dir":    "interactable_layouts_gallery",
         "description":  "Auto-generated composite InteractableDemo boards. Same controls/passives/compounds/prototypes as interactable_demo.tscn, reorganized via JSON configs.",
     },
+    "installation-stands-auto": {
+        "config_glob":  "commons/installations/stand_configs/auto/*.json",
+        "godot_script": "res://commons/testing/capture_installation_config.gd",
+        "gallery":      "installation-stands-gallery",
+        "arg_scheme":   "config_out",
+        "stage_dir":    "installation_stands_gallery",
+        "description":  "Auto-generated 1m modular installation stands. Screen frames, audio totems, light stages, telecom masts, media shelves, and roof frames built from 1m bays, 2m frames, and 0.5m shelves.",
+    },
     "pipes-auto": {
         # Unified turtle-graphics pipe system — covers both GlassRackController
         # (lab glass, pipe_radius=0.02) and BigPipeSystem (drain pipes,

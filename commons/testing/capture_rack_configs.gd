@@ -83,7 +83,10 @@ func _process(_delta):
 			_setup_viewport()
 			_load_specific_config(_single_config_path, _single_config_name)
 			return
-		if _frame_count == 20:
+		if _frame_count == 18:
+			_frame_current_rack()
+			return
+		if _frame_count == 22:
 			_capture_single()
 			quit()
 		return
@@ -100,6 +103,10 @@ func _process(_delta):
 		return
 
 	# After loading, wait 10 frames for render, then capture
+	if (_frame_count - 5) % 15 == 11:
+		_frame_current_rack()
+		return
+
 	if (_frame_count - 5) % 15 == 14:
 		_capture_current()
 		_current_idx += 1
@@ -198,6 +205,44 @@ func _load_next_config():
 	# Adjust camera distance based on config
 	# Wider racks need camera further back
 	_camera.transform.origin = Vector3(0, 0, 1.0)
+
+
+func _frame_current_rack() -> void:
+	if not _uvac_instance or not _camera:
+		return
+	var aabb := _combined_aabb(_uvac_instance)
+	var center := aabb.get_center()
+	var width := maxf(aabb.size.x, 0.2)
+	var height := maxf(aabb.size.y, 0.2)
+	var aspect := float(_viewport.size.x) / float(maxi(1, _viewport.size.y))
+	var vfov := deg_to_rad(_camera.fov)
+	var hfov := 2.0 * atan(tan(vfov * 0.5) * aspect)
+	var dist_h := height / (2.0 * tan(vfov * 0.5))
+	var dist_w := width / (2.0 * tan(hfov * 0.5))
+	var distance := maxf(dist_h, dist_w) * 1.28 + maxf(aabb.size.z, 0.08)
+	_camera.global_position = center + Vector3(0, 0, distance)
+	_camera.look_at(center, Vector3.UP)
+
+
+func _combined_aabb(node: Node3D) -> AABB:
+	var total := AABB()
+	var first := true
+	var stack: Array = [node]
+	while not stack.is_empty():
+		var current = stack.pop_back()
+		if current is MeshInstance3D and current.mesh:
+			var mesh_aabb: AABB = current.global_transform * current.get_aabb()
+			if first:
+				total = mesh_aabb
+				first = false
+			else:
+				total = total.merge(mesh_aabb)
+		for child in current.get_children():
+			if child is Node3D:
+				stack.append(child)
+	if first:
+		return AABB(Vector3(-0.5, -0.4, -0.05), Vector3(1.0, 0.8, 0.1))
+	return total
 
 
 func _capture_current():
