@@ -1,6 +1,16 @@
 {
-  "count": 55,
+  "count": 21,
   "items": [
+    {
+      "artifact": "necklace_anchor",
+      "artifact_edge": "H",
+      "map": "BodyProg_Necklace",
+      "sequence": "bodyprogression",
+      "sequence_edges": [
+        "E",
+        "I"
+      ]
+    },
     {
       "artifact": "filter_bubble_demo",
       "artifact_edge": "F",
@@ -16,19 +26,7 @@
     },
     {
       "artifact": "parallel_lines",
-      "artifact_edge": "G",
-      "map": "Euclid_Parallel",
-      "sequence": "foundationscrisis",
-      "sequence_edges": [
-        "A",
-        "D",
-        "I",
-        "K"
-      ]
-    },
-    {
-      "artifact": "science_screen",
-      "artifact_edge": "F",
+      "artifact_edge": "L",
       "map": "Euclid_Parallel",
       "sequence": "foundationscrisis",
       "sequence_edges": [
@@ -51,9 +49,9 @@
       ]
     },
     {
-      "artifact": "catalyst_target",
+      "artifact": "constructive_proof",
       "artifact_edge": "F",
-      "map": "Chamber_Foundations",
+      "map": "Brouwer_Intuitionism",
       "sequence": "foundationscrisis",
       "sequence_edges": [
         "A",
@@ -63,9 +61,9 @@
       ]
     },
     {
-      "artifact": "science_screen",
-      "artifact_edge": "F",
-      "map": "Chamber_Foundations",
+      "artifact": "phi_slider",
+      "artifact_edge": "L",
+      "map": "Crisis_Synthesis",
       "sequence": "foundationscrisis",
       "sequence_edges": [
         "A",
@@ -75,86 +73,15 @@
       ]
     },
     {
-      "artifact": "PendulumPin",
-      "artifact_edge": "H",
-      "map": "Joints_ConstrainedMotion",
-      "sequence": "joints",
+      "artifact": "qfep_formula_3d",
+      "artifact_edge": "L",
+      "map": "Crisis_Synthesis",
+      "sequence": "foundationscrisis",
       "sequence_edges": [
-        "E"
-      ]
-    },
-    {
-      "artifact": "science_screen",
-      "artifact_edge": "F",
-      "map": "Joints_ConstrainedMotion",
-      "sequence": "joints",
-      "sequence_edges": [
-        "E"
-      ]
-    },
-    {
-      "artifact": "DrawbridgeHinge",
-      "artifact_edge": "K",
-      "map": "Joints_HingeAxis",
-      "sequence": "joints",
-      "sequence_edges": [
-        "E"
-      ]
-    },
-    {
-      "artifact": "SpringSuspension",
-      "artifact_edge": "M",
-      "map": "Joints_SliderRail",
-      "sequence": "joints",
-      "sequence_edges": [
-        "E"
-      ]
-    },
-    {
-      "artifact": "CharacterRagdoll",
-      "artifact_edge": "I",
-      "map": "Joints_BallSocket",
-      "sequence": "joints",
-      "sequence_edges": [
-        "E"
-      ]
-    },
-    {
-      "artifact": "ConeTwistBag",
-      "artifact_edge": "H",
-      "map": "Joints_BallSocket",
-      "sequence": "joints",
-      "sequence_edges": [
-        "E"
-      ]
-    },
-    {
-      "artifact": "constraints",
-      "artifact_edge": "H",
-      "map": "Joints_SoftConstraints",
-      "sequence": "joints",
-      "sequence_edges": [
-        "E"
-      ]
-    },
-    {
-      "artifact": "GimbalStabilizer",
-      "artifact_edge": "M",
-      "map": "Joints_Kinematics",
-      "sequence": "joints",
-      "sequence_edges": [
-        "E"
-      ]
-    },
-    {
-      "artifact": "science_screen",
-      "artifact_edge": "F",
-      "map": "ML_Evolution",
-      "sequence": "machinelearning",
-      "sequence_edges": [
-        "C",
-        "J",
-        "L"
+        "A",
+        "D",
+        "I",
+        "K"
       ]
     },
     {
@@ -180,40 +107,6 @@
       ]
     },
     {
-      "artifact": "catalyst_target",
-      "artifact_edge": "F",
-      "map": "Chamber_ML",
-      "sequence": "machinelearning",
-      "sequence_edges": [
-        "C",
-        "J",
-        "L"
-      ]
-    },
-    {
-      "artifact": "science_screen",
-      "artifact_edge": "F",
-      "map": "Chamber_ML",
-      "sequence": "machinelearning",
-      "sequence_edges": [
-        "C",
-        "J",
-        "L"
-      ]
-    },
-    {
-      "artifact": "science_screen",
-      "artifact_edge": "F",
-      "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
-      "sequence": "postfoundationscrisis",
-      "sequence_edges": [
-        "D",
-        "I",
-        "J",
-        "M"
-      ]
-    },
-    {
       "artifact": "situated_readout",
       "artifact_edge": "B",
       "map": "SpeculativeComputation_Situated_Computation",
@@ -222,6 +115,7 @@
         "D",
         "I",
         "J",
+        "L",
         "M"
       ]
     },
@@ -234,6 +128,7 @@
         "D",
         "I",
         "J",
+        "L",
         "M"
       ]
     },
@@ -246,195 +141,44 @@
         "D",
         "I",
         "J",
+        "L",
         "M"
       ]
     },
     {
-      "artifact": "qfep_formula_3d",
-      "artifact_edge": "K",
-      "map": "PostCrisis_Synthesis",
-      "sequence": "postfoundationscrisis",
-      "sequence_edges": [
-        "D",
-        "I",
-        "J",
-        "M"
-      ]
-    },
-    {
-      "artifact": "grab_sphere_E",
-      "artifact_edge": "B",
-      "map": "QFEP_Introduction",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "grab_sphere_lambda",
-      "artifact_edge": "B",
-      "map": "QFEP_Introduction",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "qfep_formula_3d",
-      "artifact_edge": "K",
-      "map": "QFEP_Introduction",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "tt",
-      "artifact_edge": "M",
-      "map": "QFEP_Introduction",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "crystal_cluster",
-      "artifact_edge": "L",
-      "map": "QFEP_F_Term",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "dark_sphere",
-      "artifact_edge": "G",
-      "map": "QFEP_F_Term",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "tt",
-      "artifact_edge": "M",
-      "map": "QFEP_F_Term",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "random_cubes",
+      "artifact": "snap_cube_puzzle",
       "artifact_edge": "C",
-      "map": "QFEP_E_Term",
+      "map": "QFEP_F_Term",
       "sequence": "qfeplaboratory",
       "sequence_edges": [
         "F",
         "H",
-        "I"
+        "I",
+        "L"
       ]
     },
     {
-      "artifact": "tt",
+      "artifact": "edge_particles",
       "artifact_edge": "M",
-      "map": "QFEP_E_Term",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "crystal_formation",
-      "artifact_edge": "L",
       "map": "QFEP_Lambda_Spectrum",
       "sequence": "qfeplaboratory",
       "sequence_edges": [
         "F",
         "H",
-        "I"
+        "I",
+        "L"
       ]
     },
     {
-      "artifact": "dissolving_form",
-      "artifact_edge": "L",
-      "map": "QFEP_Lambda_Spectrum",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "ordered_grid",
-      "artifact_edge": "L",
-      "map": "QFEP_Lambda_Spectrum",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "fluid_form",
-      "artifact_edge": "B",
-      "map": "QFEP_Phi_Term",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "rigid_sculpture",
-      "artifact_edge": "L",
-      "map": "QFEP_Phi_Term",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "transforming_pattern",
-      "artifact_edge": "L",
-      "map": "QFEP_Phi_Term",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "tt",
+      "artifact": "edge_core",
       "artifact_edge": "M",
-      "map": "QFEP_Phi_Term",
+      "map": "QFEP_Edge_Of_Chaos",
       "sequence": "qfeplaboratory",
       "sequence_edges": [
         "F",
         "H",
-        "I"
+        "I",
+        "L"
       ]
     },
     {
@@ -445,18 +189,8 @@
       "sequence_edges": [
         "F",
         "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "tt",
-      "artifact_edge": "M",
-      "map": "QFEP_Edge_Of_Chaos",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
+        "I",
+        "L"
       ]
     },
     {
@@ -467,106 +201,20 @@
       "sequence_edges": [
         "F",
         "H",
-        "I"
+        "I",
+        "L"
       ]
     },
     {
-      "artifact": "qfep_formula_3d",
-      "artifact_edge": "K",
+      "artifact": "qfep_reactor",
+      "artifact_edge": "C",
       "map": "QFEP_Sandbox",
       "sequence": "qfeplaboratory",
       "sequence_edges": [
         "F",
         "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "reactive_particles",
-      "artifact_edge": "B",
-      "map": "QFEP_Sandbox",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "tt",
-      "artifact_edge": "M",
-      "map": "QFEP_Sandbox",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "grab_sphere_E",
-      "artifact_edge": "B",
-      "map": "QFEP_Synthesis",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "grab_sphere_lambda",
-      "artifact_edge": "B",
-      "map": "QFEP_Synthesis",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "grab_sphere_phi",
-      "artifact_edge": "L",
-      "map": "QFEP_Synthesis",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "qfep_formula_3d",
-      "artifact_edge": "K",
-      "map": "QFEP_Synthesis",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "queer_morphology_specimen",
-      "artifact_edge": "L",
-      "map": "QFEP_Synthesis",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
-      ]
-    },
-    {
-      "artifact": "tt",
-      "artifact_edge": "M",
-      "map": "QFEP_Synthesis",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I"
+        "I",
+        "L"
       ]
     },
     {

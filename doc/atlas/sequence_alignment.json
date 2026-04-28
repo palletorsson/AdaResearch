@@ -7,7 +7,7 @@
       ],
       "n_maps": 5,
       "n_maps_evaluated": 5,
-      "alignment_pct": 100.0,
+      "alignment_pct": 80.0,
       "sequence_centroid_edge": "I",
       "centroid_in_target": true,
       "maps": [
@@ -16,7 +16,7 @@
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "I",
-          "centroid_sim": 0.244,
+          "centroid_sim": 0.236,
           "aligned": true,
           "declared_edges": [
             "E",
@@ -34,9 +34,9 @@
           "map": "BodyProg_Necklace",
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
-          "centroid_edge": "I",
-          "centroid_sim": 0.166,
-          "aligned": true,
+          "centroid_edge": "H",
+          "centroid_sim": 0.169,
+          "aligned": false,
           "declared_edges": [
             "E",
             "I"
@@ -44,8 +44,8 @@
           "artifact_edges": [
             {
               "id": "necklace_anchor",
-              "edge": "I",
-              "in_target": true
+              "edge": "H",
+              "in_target": false
             }
           ]
         },
@@ -54,7 +54,7 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "I",
-          "centroid_sim": 0.168,
+          "centroid_sim": 0.164,
           "aligned": true,
           "declared_edges": [
             "E",
@@ -73,7 +73,7 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "I",
-          "centroid_sim": 0.13,
+          "centroid_sim": 0.127,
           "aligned": true,
           "declared_edges": [
             "E",
@@ -92,7 +92,7 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "I",
-          "centroid_sim": 0.188,
+          "centroid_sim": 0.189,
           "aligned": true,
           "declared_edges": [
             "E",
@@ -127,7 +127,7 @@
           "n_artifacts_total": 5,
           "n_artifacts_in_atlas": 5,
           "centroid_edge": "M",
-          "centroid_sim": 0.145,
+          "centroid_sim": 0.142,
           "aligned": true,
           "declared_edges": [
             "D",
@@ -174,18 +174,18 @@
         "K"
       ],
       "n_maps": 9,
-      "n_maps_evaluated": 9,
-      "alignment_pct": 66.7,
+      "n_maps_evaluated": 8,
+      "alignment_pct": 75.0,
       "sequence_centroid_edge": "D",
       "centroid_in_target": true,
       "maps": [
         {
           "map": "Euclid_Parallel",
           "n_artifacts_total": 4,
-          "n_artifacts_in_atlas": 4,
-          "centroid_edge": "F",
-          "centroid_sim": 0.148,
-          "aligned": false,
+          "n_artifacts_in_atlas": 3,
+          "centroid_edge": "D",
+          "centroid_sim": 0.086,
+          "aligned": true,
           "declared_edges": [
             "A",
             "D",
@@ -205,12 +205,7 @@
             },
             {
               "id": "parallel_lines",
-              "edge": "G",
-              "in_target": false
-            },
-            {
-              "id": "science_screen",
-              "edge": "F",
+              "edge": "L",
               "in_target": false
             }
           ]
@@ -220,7 +215,7 @@
           "n_artifacts_total": 5,
           "n_artifacts_in_atlas": 5,
           "centroid_edge": "K",
-          "centroid_sim": 0.063,
+          "centroid_sim": 0.064,
           "aligned": true,
           "declared_edges": [
             "A",
@@ -261,7 +256,7 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "D",
-          "centroid_sim": 0.09,
+          "centroid_sim": 0.091,
           "aligned": true,
           "declared_edges": [
             "A",
@@ -282,7 +277,7 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "D",
-          "centroid_sim": 0.093,
+          "centroid_sim": 0.096,
           "aligned": true,
           "declared_edges": [
             "A",
@@ -350,8 +345,8 @@
             },
             {
               "id": "constructive_proof",
-              "edge": "D",
-              "in_target": true
+              "edge": "F",
+              "in_target": false
             },
             {
               "id": "excluded_middle_demo",
@@ -365,7 +360,7 @@
           "n_artifacts_total": 3,
           "n_artifacts_in_atlas": 3,
           "centroid_edge": "I",
-          "centroid_sim": 0.067,
+          "centroid_sim": 0.065,
           "aligned": true,
           "declared_edges": [
             "A",
@@ -395,9 +390,9 @@
           "map": "Crisis_Synthesis",
           "n_artifacts_total": 8,
           "n_artifacts_in_atlas": 8,
-          "centroid_edge": "I",
-          "centroid_sim": 0.175,
-          "aligned": true,
+          "centroid_edge": "L",
+          "centroid_sim": 0.191,
+          "aligned": false,
           "declared_edges": [
             "A",
             "D",
@@ -432,13 +427,13 @@
             },
             {
               "id": "phi_slider",
-              "edge": "I",
-              "in_target": true
+              "edge": "L",
+              "in_target": false
             },
             {
               "id": "qfep_formula_3d",
-              "edge": "K",
-              "in_target": true
+              "edge": "L",
+              "in_target": false
             },
             {
               "id": "russell_set_box",
@@ -449,51 +444,39 @@
         },
         {
           "map": "Chamber_Foundations",
-          "n_artifacts_total": 3,
-          "n_artifacts_in_atlas": 2,
-          "centroid_edge": "F",
-          "centroid_sim": 0.38,
-          "aligned": false,
-          "declared_edges": [
-            "A",
-            "D",
-            "I",
-            "K"
+          "artifacts": [
+            "catalyst_target",
+            "proximity_spawner#type",
+            "science_screen"
           ],
-          "artifact_edges": [
-            {
-              "id": "catalyst_target",
-              "edge": "F",
-              "in_target": false
-            },
-            {
-              "id": "science_screen",
-              "edge": "F",
-              "in_target": false
-            }
-          ]
+          "in_atlas": 0,
+          "centroid_edge": null,
+          "aligned": false,
+          "note": "no artifacts found in atlas embeddings"
         }
       ]
     },
     "joints": {
       "declared_edges": [
-        "E"
+        "E",
+        "H"
       ],
       "n_maps": 6,
       "n_maps_evaluated": 6,
-      "alignment_pct": 66.7,
-      "sequence_centroid_edge": "E",
+      "alignment_pct": 100.0,
+      "sequence_centroid_edge": "H",
       "centroid_in_target": true,
       "maps": [
         {
           "map": "Joints_ConstrainedMotion",
           "n_artifacts_total": 3,
-          "n_artifacts_in_atlas": 3,
-          "centroid_edge": "F",
-          "centroid_sim": 0.294,
-          "aligned": false,
+          "n_artifacts_in_atlas": 2,
+          "centroid_edge": "H",
+          "centroid_sim": 0.315,
+          "aligned": true,
           "declared_edges": [
-            "E"
+            "E",
+            "H"
           ],
           "artifact_edges": [
             {
@@ -504,12 +487,7 @@
             {
               "id": "PendulumPin",
               "edge": "H",
-              "in_target": false
-            },
-            {
-              "id": "science_screen",
-              "edge": "F",
-              "in_target": false
+              "in_target": true
             }
           ]
         },
@@ -517,21 +495,22 @@
           "map": "Joints_HingeAxis",
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 2,
-          "centroid_edge": "E",
-          "centroid_sim": 0.159,
+          "centroid_edge": "H",
+          "centroid_sim": 0.284,
           "aligned": true,
           "declared_edges": [
-            "E"
+            "E",
+            "H"
           ],
           "artifact_edges": [
             {
               "id": "DrawbridgeHinge",
-              "edge": "K",
-              "in_target": false
+              "edge": "H",
+              "in_target": true
             },
             {
               "id": "HingeCrank",
-              "edge": "E",
+              "edge": "H",
               "in_target": true
             }
           ]
@@ -540,22 +519,23 @@
           "map": "Joints_SliderRail",
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 2,
-          "centroid_edge": "E",
-          "centroid_sim": 0.168,
+          "centroid_edge": "H",
+          "centroid_sim": 0.264,
           "aligned": true,
           "declared_edges": [
-            "E"
+            "E",
+            "H"
           ],
           "artifact_edges": [
             {
               "id": "SliderPress",
-              "edge": "E",
+              "edge": "H",
               "in_target": true
             },
             {
               "id": "SpringSuspension",
-              "edge": "M",
-              "in_target": false
+              "edge": "H",
+              "in_target": true
             }
           ]
         },
@@ -563,22 +543,23 @@
           "map": "Joints_BallSocket",
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 2,
-          "centroid_edge": "I",
-          "centroid_sim": 0.156,
-          "aligned": false,
+          "centroid_edge": "H",
+          "centroid_sim": 0.301,
+          "aligned": true,
           "declared_edges": [
-            "E"
+            "E",
+            "H"
           ],
           "artifact_edges": [
             {
               "id": "CharacterRagdoll",
-              "edge": "I",
-              "in_target": false
+              "edge": "H",
+              "in_target": true
             },
             {
               "id": "ConeTwistBag",
               "edge": "H",
-              "in_target": false
+              "in_target": true
             }
           ]
         },
@@ -586,22 +567,23 @@
           "map": "Joints_SoftConstraints",
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 2,
-          "centroid_edge": "E",
-          "centroid_sim": 0.142,
+          "centroid_edge": "H",
+          "centroid_sim": 0.277,
           "aligned": true,
           "declared_edges": [
-            "E"
+            "E",
+            "H"
           ],
           "artifact_edges": [
             {
               "id": "ChainSwing",
-              "edge": "E",
+              "edge": "H",
               "in_target": true
             },
             {
               "id": "constraints",
               "edge": "H",
-              "in_target": false
+              "in_target": true
             }
           ]
         },
@@ -609,21 +591,22 @@
           "map": "Joints_Kinematics",
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 2,
-          "centroid_edge": "E",
-          "centroid_sim": 0.189,
+          "centroid_edge": "H",
+          "centroid_sim": 0.236,
           "aligned": true,
           "declared_edges": [
-            "E"
+            "E",
+            "H"
           ],
           "artifact_edges": [
             {
               "id": "GimbalStabilizer",
-              "edge": "M",
-              "in_target": false
+              "edge": "H",
+              "in_target": true
             },
             {
               "id": "IKArm",
-              "edge": "E",
+              "edge": "H",
               "in_target": true
             }
           ]
@@ -637,17 +620,17 @@
         "L"
       ],
       "n_maps": 9,
-      "n_maps_evaluated": 9,
-      "alignment_pct": 88.9,
+      "n_maps_evaluated": 8,
+      "alignment_pct": 100.0,
       "sequence_centroid_edge": "J",
       "centroid_in_target": true,
       "maps": [
         {
           "map": "ML_Evolution",
           "n_artifacts_total": 7,
-          "n_artifacts_in_atlas": 7,
+          "n_artifacts_in_atlas": 6,
           "centroid_edge": "C",
-          "centroid_sim": 0.236,
+          "centroid_sim": 0.21,
           "aligned": true,
           "declared_edges": [
             "C",
@@ -684,11 +667,6 @@
               "id": "non_teleological_evolution",
               "edge": "C",
               "in_target": true
-            },
-            {
-              "id": "science_screen",
-              "edge": "F",
-              "in_target": false
             }
           ]
         },
@@ -697,7 +675,7 @@
           "n_artifacts_total": 3,
           "n_artifacts_in_atlas": 3,
           "centroid_edge": "C",
-          "centroid_sim": 0.334,
+          "centroid_sim": 0.335,
           "aligned": true,
           "declared_edges": [
             "C",
@@ -727,7 +705,7 @@
           "n_artifacts_total": 3,
           "n_artifacts_in_atlas": 3,
           "centroid_edge": "J",
-          "centroid_sim": 0.146,
+          "centroid_sim": 0.147,
           "aligned": true,
           "declared_edges": [
             "C",
@@ -757,7 +735,7 @@
           "n_artifacts_total": 3,
           "n_artifacts_in_atlas": 3,
           "centroid_edge": "C",
-          "centroid_sim": 0.082,
+          "centroid_sim": 0.084,
           "aligned": true,
           "declared_edges": [
             "C",
@@ -787,7 +765,7 @@
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 2,
           "centroid_edge": "J",
-          "centroid_sim": 0.074,
+          "centroid_sim": 0.072,
           "aligned": true,
           "declared_edges": [
             "C",
@@ -812,7 +790,7 @@
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 2,
           "centroid_edge": "J",
-          "centroid_sim": 0.103,
+          "centroid_sim": 0.101,
           "aligned": true,
           "declared_edges": [
             "C",
@@ -837,7 +815,7 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "J",
-          "centroid_sim": 0.087,
+          "centroid_sim": 0.083,
           "aligned": true,
           "declared_edges": [
             "C",
@@ -884,28 +862,15 @@
         },
         {
           "map": "Chamber_ML",
-          "n_artifacts_total": 3,
-          "n_artifacts_in_atlas": 2,
-          "centroid_edge": "F",
-          "centroid_sim": 0.38,
-          "aligned": false,
-          "declared_edges": [
-            "C",
-            "J",
-            "L"
+          "artifacts": [
+            "catalyst_target",
+            "proximity_spawner#type",
+            "science_screen"
           ],
-          "artifact_edges": [
-            {
-              "id": "catalyst_target",
-              "edge": "F",
-              "in_target": false
-            },
-            {
-              "id": "science_screen",
-              "edge": "F",
-              "in_target": false
-            }
-          ]
+          "in_atlas": 0,
+          "centroid_edge": null,
+          "aligned": false,
+          "note": "no artifacts found in atlas embeddings"
         }
       ]
     },
@@ -914,6 +879,7 @@
         "D",
         "I",
         "J",
+        "L",
         "M"
       ],
       "n_maps": 8,
@@ -925,14 +891,15 @@
         {
           "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
           "n_artifacts_total": 3,
-          "n_artifacts_in_atlas": 3,
-          "centroid_edge": "J",
-          "centroid_sim": 0.247,
+          "n_artifacts_in_atlas": 2,
+          "centroid_edge": "M",
+          "centroid_sim": 0.232,
           "aligned": true,
           "declared_edges": [
             "D",
             "I",
             "J",
+            "L",
             "M"
           ],
           "artifact_edges": [
@@ -945,25 +912,21 @@
               "id": "bias_visualizer",
               "edge": "M",
               "in_target": true
-            },
-            {
-              "id": "science_screen",
-              "edge": "F",
-              "in_target": false
             }
           ]
         },
         {
           "map": "CriticalAlgorithms_Applied_Ethics",
           "n_artifacts_total": 3,
-          "n_artifacts_in_atlas": 3,
-          "centroid_edge": "M",
-          "centroid_sim": 0.211,
+          "n_artifacts_in_atlas": 2,
+          "centroid_edge": "L",
+          "centroid_sim": 0.203,
           "aligned": true,
           "declared_edges": [
             "D",
             "I",
             "J",
+            "L",
             "M"
           ],
           "artifact_edges": [
@@ -976,25 +939,21 @@
               "id": "godel_statement_plaque",
               "edge": "D",
               "in_target": true
-            },
-            {
-              "id": "tt",
-              "edge": "M",
-              "in_target": true
             }
           ]
         },
         {
           "map": "SpeculativeComputation_Paraconsistent_Engineering",
           "n_artifacts_total": 4,
-          "n_artifacts_in_atlas": 4,
+          "n_artifacts_in_atlas": 3,
           "centroid_edge": "I",
-          "centroid_sim": 0.09,
+          "centroid_sim": 0.065,
           "aligned": true,
           "declared_edges": [
             "D",
             "I",
             "J",
+            "L",
             "M"
           ],
           "artifact_edges": [
@@ -1012,11 +971,6 @@
               "id": "superposition_display",
               "edge": "I",
               "in_target": true
-            },
-            {
-              "id": "tt",
-              "edge": "M",
-              "in_target": true
             }
           ]
         },
@@ -1025,12 +979,13 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "B",
-          "centroid_sim": 0.372,
+          "centroid_sim": 0.375,
           "aligned": false,
           "declared_edges": [
             "D",
             "I",
             "J",
+            "L",
             "M"
           ],
           "artifact_edges": [
@@ -1046,12 +1001,13 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "M",
-          "centroid_sim": 0.513,
+          "centroid_sim": 0.503,
           "aligned": true,
           "declared_edges": [
             "D",
             "I",
             "J",
+            "L",
             "M"
           ],
           "artifact_edges": [
@@ -1067,12 +1023,13 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "C",
-          "centroid_sim": 0.016,
+          "centroid_sim": 0.015,
           "aligned": false,
           "declared_edges": [
             "D",
             "I",
             "J",
+            "L",
             "M"
           ],
           "artifact_edges": [
@@ -1088,12 +1045,13 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "G",
-          "centroid_sim": 0.071,
+          "centroid_sim": 0.069,
           "aligned": false,
           "declared_edges": [
             "D",
             "I",
             "J",
+            "L",
             "M"
           ],
           "artifact_edges": [
@@ -1107,14 +1065,15 @@
         {
           "map": "PostCrisis_Synthesis",
           "n_artifacts_total": 4,
-          "n_artifacts_in_atlas": 4,
-          "centroid_edge": "M",
-          "centroid_sim": 0.253,
+          "n_artifacts_in_atlas": 3,
+          "centroid_edge": "L",
+          "centroid_sim": 0.262,
           "aligned": true,
           "declared_edges": [
             "D",
             "I",
             "J",
+            "L",
             "M"
           ],
           "artifact_edges": [
@@ -1130,12 +1089,7 @@
             },
             {
               "id": "qfep_formula_3d",
-              "edge": "K",
-              "in_target": false
-            },
-            {
-              "id": "tt",
-              "edge": "M",
+              "edge": "L",
               "in_target": true
             }
           ]
@@ -1146,41 +1100,43 @@
       "declared_edges": [
         "F",
         "H",
-        "I"
+        "I",
+        "L"
       ],
       "n_maps": 9,
-      "n_maps_evaluated": 9,
-      "alignment_pct": 88.9,
-      "sequence_centroid_edge": "I",
+      "n_maps_evaluated": 8,
+      "alignment_pct": 87.5,
+      "sequence_centroid_edge": "L",
       "centroid_in_target": true,
       "maps": [
         {
           "map": "QFEP_Introduction",
           "n_artifacts_total": 8,
-          "n_artifacts_in_atlas": 8,
-          "centroid_edge": "I",
-          "centroid_sim": 0.218,
+          "n_artifacts_in_atlas": 6,
+          "centroid_edge": "L",
+          "centroid_sim": 0.195,
           "aligned": true,
           "declared_edges": [
             "F",
             "H",
-            "I"
+            "I",
+            "L"
           ],
           "artifact_edges": [
             {
               "id": "grab_sphere_E",
-              "edge": "B",
-              "in_target": false
+              "edge": "L",
+              "in_target": true
             },
             {
               "id": "grab_sphere_F",
-              "edge": "I",
+              "edge": "L",
               "in_target": true
             },
             {
               "id": "grab_sphere_lambda",
-              "edge": "B",
-              "in_target": false
+              "edge": "L",
+              "in_target": true
             },
             {
               "id": "lambda_slider",
@@ -1189,48 +1145,39 @@
             },
             {
               "id": "phi_slider",
-              "edge": "I",
+              "edge": "L",
               "in_target": true
             },
             {
               "id": "qfep_formula_3d",
-              "edge": "K",
-              "in_target": false
-            },
-            {
-              "id": "science_screen",
-              "edge": "F",
+              "edge": "L",
               "in_target": true
-            },
-            {
-              "id": "tt",
-              "edge": "M",
-              "in_target": false
             }
           ]
         },
         {
           "map": "QFEP_F_Term",
           "n_artifacts_total": 7,
-          "n_artifacts_in_atlas": 7,
-          "centroid_edge": "I",
-          "centroid_sim": 0.237,
+          "n_artifacts_in_atlas": 5,
+          "centroid_edge": "L",
+          "centroid_sim": 0.206,
           "aligned": true,
           "declared_edges": [
             "F",
             "H",
-            "I"
+            "I",
+            "L"
           ],
           "artifact_edges": [
             {
               "id": "crystal_cluster",
               "edge": "L",
-              "in_target": false
+              "in_target": true
             },
             {
               "id": "dark_sphere",
-              "edge": "G",
-              "in_target": false
+              "edge": "H",
+              "in_target": true
             },
             {
               "id": "lambda_slider",
@@ -1238,38 +1185,29 @@
               "in_target": true
             },
             {
-              "id": "science_screen",
-              "edge": "F",
-              "in_target": true
-            },
-            {
               "id": "snap_cube_puzzle",
-              "edge": "H",
-              "in_target": true
+              "edge": "C",
+              "in_target": false
             },
             {
               "id": "snap_tetra_puzzle",
               "edge": "H",
               "in_target": true
-            },
-            {
-              "id": "tt",
-              "edge": "M",
-              "in_target": false
             }
           ]
         },
         {
           "map": "QFEP_E_Term",
           "n_artifacts_total": 4,
-          "n_artifacts_in_atlas": 4,
-          "centroid_edge": "I",
-          "centroid_sim": 0.164,
+          "n_artifacts_in_atlas": 3,
+          "centroid_edge": "L",
+          "centroid_sim": 0.158,
           "aligned": true,
           "declared_edges": [
             "F",
             "H",
-            "I"
+            "I",
+            "L"
           ],
           "artifact_edges": [
             {
@@ -1279,18 +1217,13 @@
             },
             {
               "id": "particle_chaos",
-              "edge": "H",
+              "edge": "L",
               "in_target": true
             },
             {
               "id": "random_cubes",
-              "edge": "C",
-              "in_target": false
-            },
-            {
-              "id": "tt",
-              "edge": "M",
-              "in_target": false
+              "edge": "L",
+              "in_target": true
             }
           ]
         },
@@ -1298,13 +1231,14 @@
           "map": "QFEP_Lambda_Spectrum",
           "n_artifacts_total": 7,
           "n_artifacts_in_atlas": 7,
-          "centroid_edge": "I",
-          "centroid_sim": 0.145,
+          "centroid_edge": "L",
+          "centroid_sim": 0.152,
           "aligned": true,
           "declared_edges": [
             "F",
             "H",
-            "I"
+            "I",
+            "L"
           ],
           "artifact_edges": [
             {
@@ -1314,7 +1248,7 @@
             },
             {
               "id": "chaos_particles",
-              "edge": "I",
+              "edge": "L",
               "in_target": true
             },
             {
@@ -1325,87 +1259,84 @@
             {
               "id": "crystal_formation",
               "edge": "L",
-              "in_target": false
+              "in_target": true
             },
             {
               "id": "dissolving_form",
               "edge": "L",
-              "in_target": false
+              "in_target": true
             },
             {
               "id": "edge_particles",
-              "edge": "I",
-              "in_target": true
+              "edge": "M",
+              "in_target": false
             },
             {
               "id": "ordered_grid",
               "edge": "L",
-              "in_target": false
+              "in_target": true
             }
           ]
         },
         {
           "map": "QFEP_Phi_Term",
           "n_artifacts_total": 6,
-          "n_artifacts_in_atlas": 6,
-          "centroid_edge": "B",
-          "centroid_sim": 0.135,
-          "aligned": false,
+          "n_artifacts_in_atlas": 5,
+          "centroid_edge": "L",
+          "centroid_sim": 0.157,
+          "aligned": true,
           "declared_edges": [
             "F",
             "H",
-            "I"
+            "I",
+            "L"
           ],
           "artifact_edges": [
             {
               "id": "fluid_form",
-              "edge": "B",
-              "in_target": false
+              "edge": "L",
+              "in_target": true
             },
             {
               "id": "phi_slider",
-              "edge": "I",
+              "edge": "L",
               "in_target": true
             },
             {
               "id": "preserved_pattern",
-              "edge": "F",
+              "edge": "L",
               "in_target": true
             },
             {
               "id": "rigid_sculpture",
               "edge": "L",
-              "in_target": false
+              "in_target": true
             },
             {
               "id": "transforming_pattern",
               "edge": "L",
-              "in_target": false
-            },
-            {
-              "id": "tt",
-              "edge": "M",
-              "in_target": false
+              "in_target": true
             }
           ]
         },
         {
           "map": "QFEP_Edge_Of_Chaos",
           "n_artifacts_total": 6,
-          "n_artifacts_in_atlas": 6,
-          "centroid_edge": "I",
-          "centroid_sim": 0.218,
-          "aligned": true,
+          "n_artifacts_in_atlas": 5,
+          "centroid_edge": "K",
+          "centroid_sim": 0.207,
+          "aligned": false,
           "declared_edges": [
             "F",
             "H",
-            "I"
+            "I",
+            "L"
           ],
           "artifact_edges": [
             {
               "id": "edge_core",
-              "edge": "I",
-              "in_target": true
+              "edge": "M",
+              "in_target": false
             },
             {
               "id": "edge_of_chaos_unlocked",
@@ -1423,11 +1354,6 @@
               "in_target": true
             },
             {
-              "id": "tt",
-              "edge": "M",
-              "in_target": false
-            },
-            {
               "id": "turing_pattern",
               "edge": "K",
               "in_target": false
@@ -1437,14 +1363,15 @@
         {
           "map": "QFEP_Sandbox",
           "n_artifacts_total": 6,
-          "n_artifacts_in_atlas": 6,
-          "centroid_edge": "I",
-          "centroid_sim": 0.245,
+          "n_artifacts_in_atlas": 5,
+          "centroid_edge": "L",
+          "centroid_sim": 0.236,
           "aligned": true,
           "declared_edges": [
             "F",
             "H",
-            "I"
+            "I",
+            "L"
           ],
           "artifact_edges": [
             {
@@ -1454,105 +1381,83 @@
             },
             {
               "id": "phi_slider",
-              "edge": "I",
+              "edge": "L",
               "in_target": true
             },
             {
               "id": "qfep_formula_3d",
-              "edge": "K",
-              "in_target": false
-            },
-            {
-              "id": "qfep_reactor",
-              "edge": "I",
+              "edge": "L",
               "in_target": true
             },
             {
-              "id": "reactive_particles",
-              "edge": "B",
+              "id": "qfep_reactor",
+              "edge": "C",
               "in_target": false
             },
             {
-              "id": "tt",
-              "edge": "M",
-              "in_target": false
+              "id": "reactive_particles",
+              "edge": "L",
+              "in_target": true
             }
           ]
         },
         {
           "map": "QFEP_Synthesis",
           "n_artifacts_total": 7,
-          "n_artifacts_in_atlas": 7,
-          "centroid_edge": "I",
-          "centroid_sim": 0.149,
+          "n_artifacts_in_atlas": 6,
+          "centroid_edge": "L",
+          "centroid_sim": 0.186,
           "aligned": true,
           "declared_edges": [
             "F",
             "H",
-            "I"
+            "I",
+            "L"
           ],
           "artifact_edges": [
             {
               "id": "grab_sphere_E",
-              "edge": "B",
-              "in_target": false
+              "edge": "L",
+              "in_target": true
             },
             {
               "id": "grab_sphere_F",
-              "edge": "I",
+              "edge": "L",
               "in_target": true
             },
             {
               "id": "grab_sphere_lambda",
-              "edge": "B",
-              "in_target": false
+              "edge": "L",
+              "in_target": true
             },
             {
               "id": "grab_sphere_phi",
               "edge": "L",
-              "in_target": false
+              "in_target": true
             },
             {
               "id": "qfep_formula_3d",
-              "edge": "K",
-              "in_target": false
+              "edge": "L",
+              "in_target": true
             },
             {
               "id": "queer_morphology_specimen",
               "edge": "L",
-              "in_target": false
-            },
-            {
-              "id": "tt",
-              "edge": "M",
-              "in_target": false
+              "in_target": true
             }
           ]
         },
         {
           "map": "Chamber_QFEP",
-          "n_artifacts_total": 3,
-          "n_artifacts_in_atlas": 2,
-          "centroid_edge": "F",
-          "centroid_sim": 0.38,
-          "aligned": true,
-          "declared_edges": [
-            "F",
-            "H",
-            "I"
+          "artifacts": [
+            "catalyst_target",
+            "proximity_spawner#type",
+            "science_screen"
           ],
-          "artifact_edges": [
-            {
-              "id": "catalyst_target",
-              "edge": "F",
-              "in_target": true
-            },
-            {
-              "id": "science_screen",
-              "edge": "F",
-              "in_target": true
-            }
-          ]
+          "in_atlas": 0,
+          "centroid_edge": null,
+          "aligned": false,
+          "note": "no artifacts found in atlas embeddings"
         }
       ]
     },
@@ -1571,7 +1476,7 @@
           "n_artifacts_total": 3,
           "n_artifacts_in_atlas": 3,
           "centroid_edge": "F",
-          "centroid_sim": 0.158,
+          "centroid_sim": 0.159,
           "aligned": false,
           "declared_edges": [
             "B"

@@ -134,7 +134,7 @@ The catalyst introduced in `qfeplaboratory` is the *fold catalyst* — the playe
 
 **Map sketch.** A phenomenon-room. There is an "object" in the centre. Walk one path: it reads as a wave. Walk another path: it reads as a particle. The path is the apparatus. The object is what the apparatus made of itself.
 
-**Sequence home.** `qfeplaboratory`, paired with F.
+**Sequence home.** `qfeplaboratory`, paired with F. **Also lives in `joints`** — a joint is an apparatus made literal: the cone-twist, pendulum-pin, gimbal, suspension constrain motion in ways the body becomes; the joint reads as the apparatus that makes the joint-as-phenomenon.
 
 ---
 
@@ -198,7 +198,7 @@ The catalyst introduced in `qfeplaboratory` is the *fold catalyst* — the playe
 
 **Map sketch.** A no-converge map. The hill-climber in the middle of the room is rewarded for reaching the top. There are objects on the *non-summit* terraces — better art, slower jokes, weirder gardens — that only stay there if no one is climbing. The map ends not when you reach the top but when you decide not to.
 
-**Sequence home.** `machinelearning` / `criticalalgorithms`, paired with C.
+**Sequence home.** `machinelearning` / `criticalalgorithms`, paired with C. **Also lives in `qfeplaboratory`** — the λ-spectrum's dissolving_form, transforming_pattern, queer_morphology_specimen, and the φ-zone artifacts are L-edge content made visible: forms that defy binary classification, refuse to settle into stable identity. The QFEP lab teaches L through morphology, not through optimisation. **Also lives in `postfoundationscrisis`** — the SpeculativeComputation maps (Paraconsistent_Engineering, Situated_Computation, Rhizome_Network) ARE failure-as-method: refusing convergence as a methodology, not a bug.
 
 ---
 

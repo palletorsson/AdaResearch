@@ -45,6 +45,27 @@ OUT_MISHOMED = EMBED_DIR / "mishomed_artifacts.json"
 
 EDGE_LETTERS = list("ABCDEFGHIJKLM")
 
+# Cross-cutting UI / infrastructure artifacts that appear in many maps
+# regardless of edge intent. They pollute alignment scoring because they
+# carry vocabulary about "panel", "display", "tutorial", etc. that lands
+# on edges (often M for tutorial text) unrelated to the map's teaching.
+# Excluded from per-map centroid + mis-home counts but still kept in the
+# atlas projection.
+INFRASTRUCTURE_ARTIFACTS = {
+    "tt",                       # tutorial-text panel
+    "code_display",
+    "science_screen",
+    "ca_screen",
+    "clipboard",
+    "vr_map_loader_kiosk",
+    "monitorsystem",
+    "catalyst_target",
+    "catalyst_pedestal",
+    "spawn_marker",
+    "fps_counter",
+    "menu_panel",
+}
+
 
 def load_edge_sequence_homes() -> dict[str, list[str]]:
     """Parse EDGES_OF_ALGORITHM.md → {edge_letter: [sequence_name, ...]}."""
@@ -205,8 +226,12 @@ def main():
             if not map_dir.exists():
                 continue
             arts = extract_artifacts_from_map(map_dir)
-            # Keep only artifacts we have embeddings for.
-            arts_in_atlas = [a for a in arts if a in art_index]
+            # Keep only artifacts we have embeddings for AND that aren't
+            # cross-cutting infrastructure (UI / scaffold).
+            arts_in_atlas = [
+                a for a in arts
+                if a in art_index and a not in INFRASTRUCTURE_ARTIFACTS
+            ]
             if not arts_in_atlas:
                 map_results.append({
                     "map": map_name, "artifacts": arts,
