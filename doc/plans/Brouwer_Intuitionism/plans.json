@@ -1,0 +1,38 @@
+{
+  "name": "Brouwer_Intuitionism",
+  "title": "Only What You Can Construct",
+  "description": "What if we can't use proof by contradiction? Brouwer rejected the law of excluded middle. Math must be constructed, not just proven to exist.",
+  "dimensions": {
+    "rows": 14,
+    "cols": 11
+  },
+  "n_artifacts": 3,
+  "spawn": [
+    0,
+    0
+  ],
+  "teleport": [
+    12,
+    5
+  ],
+  "artifacts": [
+    {
+      "name": "excluded_middle_demo",
+      "row": 4,
+      "col": 2,
+      "family": "foundations"
+    },
+    {
+      "name": "constructive_proof",
+      "row": 4,
+      "col": 9,
+      "family": "foundations"
+    },
+    {
+      "name": "brouwer_choice_sequence",
+      "row": 7,
+      "col": 5,
+      "family": "foundations"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "ML_Sequence_Memory",
+  "title": "Gates and Attention Over Time",
+  "description": "Time flows forward through this corridor \u00e2\u20ac\u201d LSTMs remember, transformers attend, time series predicts. Each step is a timestep in the sequence.",
+  "dimensions": {
+    "rows": 12,
+    "cols": 4
+  },
+  "n_artifacts": 2,
+  "spawn": [
+    11,
+    2
+  ],
+  "teleport": [
+    10,
+    2
+  ],
+  "artifacts": [
+    {
+      "name": "lstms_vr",
+      "row": 2,
+      "col": 1,
+      "family": "machinelearning"
+    },
+    {
+      "name": "transformers_vr",
+      "row": 6,
+      "col": 1,
+      "family": "machinelearning"
+    }
+  ]
+}

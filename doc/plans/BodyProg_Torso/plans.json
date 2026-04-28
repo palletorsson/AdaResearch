@@ -1,0 +1,26 @@
+{
+  "name": "BodyProg_Torso",
+  "title": "Taking Shape",
+  "description": "Torso mesh appears via 3-point estimation. QFEP: the body as estimated, not given.",
+  "dimensions": {
+    "rows": 10,
+    "cols": 10
+  },
+  "n_artifacts": 1,
+  "spawn": [
+    8,
+    8
+  ],
+  "teleport": [
+    8,
+    1
+  ],
+  "artifacts": [
+    {
+      "name": "torso_estimation_vis",
+      "row": 5,
+      "col": 4,
+      "family": "procgen_extra"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "ML_Synthesis",
+  "title": "Agents That Question Themselves",
+  "description": "Everything comes together \u00e2\u20ac\u201d joint learning, explainability, and anomaly detection on floating platforms in an open arena. The synthesis of machine learning.",
+  "dimensions": {
+    "rows": 10,
+    "cols": 10
+  },
+  "n_artifacts": 3,
+  "spawn": [
+    9,
+    8
+  ],
+  "teleport": [
+    8,
+    8
+  ],
+  "artifacts": [
+    {
+      "name": "joint_learn_walk",
+      "row": 1,
+      "col": 7,
+      "family": "machinelearning"
+    },
+    {
+      "name": "explainable_ai_xai_vr",
+      "row": 5,
+      "col": 5,
+      "family": "machinelearning"
+    },
+    {
+      "name": "anomaly_detection",
+      "row": 9,
+      "col": 0,
+      "family": "machinelearning"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "name": "Chamber_ML",
+  "title": "Chamber_ML",
+  "description": "The hunter learns your patterns. Move predictably and it finds you. Move randomly and it loses the gradient.",
+  "dimensions": {
+    "rows": 7,
+    "cols": 11
+  },
+  "n_artifacts": 6,
+  "spawn": [
+    0,
+    0
+  ],
+  "teleport": [
+    6,
+    10
+  ],
+  "artifacts": [
+    {
+      "name": "science_screen",
+      "row": 0,
+      "col": 8,
+      "family": "shaders"
+    },
+    {
+      "name": "catalyst_target",
+      "row": 2,
+      "col": 1,
+      "family": "hazards"
+    },
+    {
+      "name": "catalyst_target",
+      "row": 2,
+      "col": 3,
+      "family": "hazards"
+    },
+    {
+      "name": "catalyst_target",
+      "row": 2,
+      "col": 7,
+      "family": "hazards"
+    },
+    {
+      "name": "catalyst_target",
+      "row": 2,
+      "col": 9,
+      "family": "hazards"
+    },
+    {
+      "name": "proximity_spawner#type",
+      "row": 3,
+      "col": 5,
+      "family": "unknown"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "NonEuclidean_Spaces",
+  "title": "Curvature as Choice",
+  "description": "What happens when parallel lines meet? Or diverge infinitely? Walk through hyperbolic and elliptic geometries where the sum of angles in a triangle isn't 180\u00b0.",
+  "dimensions": {
+    "rows": 13,
+    "cols": 15
+  },
+  "n_artifacts": 5,
+  "spawn": [
+    0,
+    0
+  ],
+  "teleport": [
+    11,
+    7
+  ],
+  "artifacts": [
+    {
+      "name": "hyperbolic_surface",
+      "row": 4,
+      "col": 4,
+      "family": "alternative_geometries"
+    },
+    {
+      "name": "elliptic_surface",
+      "row": 4,
+      "col": 10,
+      "family": "alternative_geometries"
+    },
+    {
+      "name": "curvature_slider",
+      "row": 6,
+      "col": 7,
+      "family": "alternative_geometries"
+    },
+    {
+      "name": "poincare_disk",
+      "row": 8,
+      "col": 3,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "riemann_sphere",
+      "row": 8,
+      "col": 11,
+      "family": "alternative_geometries"
+    }
+  ]
+}

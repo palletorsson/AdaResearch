@@ -1,0 +1,62 @@
+{
+  "name": "QFEP_F_Term",
+  "title": "Free Energy and Order",
+  "description": "F is Free Energy \u2014 the prediction error. Systems minimize F by finding patterns, reducing surprise. But pure order is a trap.",
+  "dimensions": {
+    "rows": 12,
+    "cols": 10
+  },
+  "n_artifacts": 7,
+  "spawn": [
+    1,
+    1
+  ],
+  "teleport": [
+    11,
+    4
+  ],
+  "artifacts": [
+    {
+      "name": "snap_cube_puzzle",
+      "row": 2,
+      "col": 2,
+      "family": "qfep"
+    },
+    {
+      "name": "snap_tetra_puzzle",
+      "row": 2,
+      "col": 7,
+      "family": "qfep"
+    },
+    {
+      "name": "science_screen",
+      "row": 2,
+      "col": 8,
+      "family": "shaders"
+    },
+    {
+      "name": "crystal_cluster",
+      "row": 4,
+      "col": 4,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "lambda_slider",
+      "row": 7,
+      "col": 1,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "tt",
+      "row": 7,
+      "col": 8,
+      "family": "commons_artifacts"
+    },
+    {
+      "name": "dark_sphere",
+      "row": 10,
+      "col": 4,
+      "family": "lsystems"
+    }
+  ]
+}

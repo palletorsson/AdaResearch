@@ -1,0 +1,26 @@
+{
+  "name": "Godel_Incompleteness",
+  "title": "True But Unprovable",
+  "description": "This statement cannot be proven within this system. G\u00f6del showed that any consistent formal system powerful enough to describe arithmetic contains true statements it cannot prove.",
+  "dimensions": {
+    "rows": 14,
+    "cols": 13
+  },
+  "n_artifacts": 1,
+  "spawn": [
+    0,
+    0
+  ],
+  "teleport": [
+    12,
+    7
+  ],
+  "artifacts": [
+    {
+      "name": "godel_statement_plaque",
+      "row": 9,
+      "col": 3,
+      "family": "substrate_vectors"
+    }
+  ]
+}

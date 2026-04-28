@@ -1,0 +1,26 @@
+{
+  "name": "ML_Generative",
+  "title": "Adversarial Creation from Noise",
+  "description": "Generator vs discriminator \u00e2\u20ac\u201d two mirrored halves face each other across a central divide. GANs and VAEs create from noise.",
+  "dimensions": {
+    "rows": 8,
+    "cols": 8
+  },
+  "n_artifacts": 1,
+  "spawn": [
+    7,
+    6
+  ],
+  "teleport": [
+    6,
+    6
+  ],
+  "artifacts": [
+    {
+      "name": "generative_adversarial_networks_gans_vr",
+      "row": 2,
+      "col": 1,
+      "family": "machinelearning"
+    }
+  ]
+}

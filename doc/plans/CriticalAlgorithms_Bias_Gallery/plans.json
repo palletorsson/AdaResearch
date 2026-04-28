@@ -1,0 +1,50 @@
+{
+  "name": "CriticalAlgorithms_Bias_Gallery",
+  "title": "Algorithmic Bias Gallery",
+  "description": "Walk through algorithmic bias, surveillance, attention economies, and filter bubbles \u2014 the politics encoded in code.",
+  "dimensions": {
+    "rows": 5,
+    "cols": 5
+  },
+  "n_artifacts": 5,
+  "spawn": [
+    0,
+    0
+  ],
+  "teleport": [
+    4,
+    4
+  ],
+  "artifacts": [
+    {
+      "name": "bias_from_inside",
+      "row": 1,
+      "col": 1,
+      "family": "algorithms_misc"
+    },
+    {
+      "name": "surveillance_panopticon",
+      "row": 1,
+      "col": 3,
+      "family": "commons_artifacts"
+    },
+    {
+      "name": "data_labor_counter",
+      "row": 2,
+      "col": 2,
+      "family": "commons_artifacts"
+    },
+    {
+      "name": "attention_economy_sim",
+      "row": 3,
+      "col": 1,
+      "family": "commons_artifacts"
+    },
+    {
+      "name": "filter_bubble_demo",
+      "row": 3,
+      "col": 3,
+      "family": "commons_artifacts"
+    }
+  ]
+}

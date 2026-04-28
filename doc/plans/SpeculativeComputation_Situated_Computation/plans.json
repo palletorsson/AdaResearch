@@ -1,0 +1,41 @@
+{
+  "name": "SpeculativeComputation_Situated_Computation",
+  "title": "Knowledge With a Body",
+  "description": "The view from nowhere was always a view from somewhere. Haraway's situated knowledge, wired into the machine: every computation has a body, a place, a time.",
+  "dimensions": {
+    "rows": 10,
+    "cols": 10
+  },
+  "n_artifacts": 4,
+  "spawn": null,
+  "teleport": [
+    9,
+    4
+  ],
+  "artifacts": [
+    {
+      "name": "situated_readout",
+      "row": 2,
+      "col": 2,
+      "family": "algorithms_misc"
+    },
+    {
+      "name": "situated_readout",
+      "row": 2,
+      "col": 7,
+      "family": "algorithms_misc"
+    },
+    {
+      "name": "situated_readout",
+      "row": 7,
+      "col": 2,
+      "family": "algorithms_misc"
+    },
+    {
+      "name": "situated_readout",
+      "row": 7,
+      "col": 7,
+      "family": "algorithms_misc"
+    }
+  ]
+}

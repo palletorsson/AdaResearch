@@ -1,0 +1,26 @@
+{
+  "name": "Russell_Paradox",
+  "title": "The Self-Containing Set",
+  "description": "The set of all sets that don't contain themselves. Does it contain itself? If yes, then no. If no, then yes. Self-reference breaks logic.",
+  "dimensions": {
+    "rows": 12,
+    "cols": 11
+  },
+  "n_artifacts": 1,
+  "spawn": [
+    0,
+    0
+  ],
+  "teleport": [
+    10,
+    5
+  ],
+  "artifacts": [
+    {
+      "name": "russell_set_box",
+      "row": 5,
+      "col": 5,
+      "family": "substrate_vectors"
+    }
+  ]
+}

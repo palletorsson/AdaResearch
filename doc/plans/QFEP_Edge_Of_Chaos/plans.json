@@ -1,0 +1,68 @@
+{
+  "name": "QFEP_Edge_Of_Chaos",
+  "title": "Where Complexity Emerges",
+  "description": "\u03bb \u2248 0.3-0.5. The sweet spot. Not frozen order, not dissolved chaos. Here, at the edge, complexity emerges. Life happens.",
+  "dimensions": {
+    "rows": 13,
+    "cols": 14
+  },
+  "n_artifacts": 8,
+  "spawn": [
+    1,
+    1
+  ],
+  "teleport": [
+    12,
+    6
+  ],
+  "artifacts": [
+    {
+      "name": "turing_pattern",
+      "row": 3,
+      "col": 4,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "turing_pattern",
+      "row": 3,
+      "col": 8,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "edge_core",
+      "row": 6,
+      "col": 6,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "edge_of_chaos_unlocked",
+      "row": 8,
+      "col": 3,
+      "family": "qfep"
+    },
+    {
+      "name": "emergence_zone",
+      "row": 9,
+      "col": 4,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "emergence_zone",
+      "row": 9,
+      "col": 8,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "lambda_slider",
+      "row": 11,
+      "col": 2,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "tt",
+      "row": 11,
+      "col": 9,
+      "family": "commons_artifacts"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "AdvancedLaboratory_Lab_Equipment_Simulation",
+  "title": "Molecular Design After Crisis",
+  "description": "A clean laboratory with raised work surfaces and a void pit revealing something underneath. Orderly but with one surprise.",
+  "dimensions": {
+    "rows": 8,
+    "cols": 9
+  },
+  "n_artifacts": 1,
+  "spawn": [
+    7,
+    7
+  ],
+  "teleport": [
+    6,
+    7
+  ],
+  "artifacts": [
+    {
+      "name": "MolecularDesigner",
+      "row": 3,
+      "col": 4,
+      "family": "computational_biology"
+    }
+  ]
+}

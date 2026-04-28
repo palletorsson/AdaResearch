@@ -1,0 +1,35 @@
+{
+  "name": "Joints_ConstrainedMotion",
+  "title": "Constrained Motion",
+  "description": "Introduction to Joints - explore pendulum and double pendulum physics",
+  "dimensions": {
+    "rows": 8,
+    "cols": 7
+  },
+  "n_artifacts": 3,
+  "spawn": null,
+  "teleport": [
+    6,
+    5
+  ],
+  "artifacts": [
+    {
+      "name": "science_screen",
+      "row": 0,
+      "col": 5,
+      "family": "shaders"
+    },
+    {
+      "name": "PendulumPin",
+      "row": 1,
+      "col": 2,
+      "family": "physics_simulation"
+    },
+    {
+      "name": "DoublePendulum",
+      "row": 4,
+      "col": 4,
+      "family": "wavefunctions"
+    }
+  ]
+}

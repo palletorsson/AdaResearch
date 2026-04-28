@@ -1,0 +1,41 @@
+{
+  "name": "SpeculativeComputation_Paraconsistent_Engineering",
+  "title": "Holding Contradiction in Production",
+  "description": "What Florensky observed, the engineer applies: systems that hold A and not-A without collapsing. Version control. Eventual consistency. Schr\u00f6dinger's build.",
+  "dimensions": {
+    "rows": 10,
+    "cols": 10
+  },
+  "n_artifacts": 4,
+  "spawn": null,
+  "teleport": [
+    9,
+    4
+  ],
+  "artifacts": [
+    {
+      "name": "florensky_sphere",
+      "row": 2,
+      "col": 5,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "superposition_display",
+      "row": 5,
+      "col": 3,
+      "family": "quantumalgorithms"
+    },
+    {
+      "name": "schrodinger_box",
+      "row": 5,
+      "col": 7,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "tt",
+      "row": 8,
+      "col": 5,
+      "family": "commons_artifacts"
+    }
+  ]
+}

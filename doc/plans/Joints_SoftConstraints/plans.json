@@ -1,0 +1,29 @@
+{
+  "name": "Joints_SoftConstraints",
+  "title": "Soft Constraints",
+  "description": "Springs, chains, and constraint solvers",
+  "dimensions": {
+    "rows": 8,
+    "cols": 7
+  },
+  "n_artifacts": 2,
+  "spawn": null,
+  "teleport": [
+    6,
+    5
+  ],
+  "artifacts": [
+    {
+      "name": "ChainSwing",
+      "row": 1,
+      "col": 2,
+      "family": "physics_simulation"
+    },
+    {
+      "name": "constraints",
+      "row": 4,
+      "col": 4,
+      "family": "physics_simulation"
+    }
+  ]
+}
