@@ -1,11 +1,24 @@
 #!/usr/bin/env python
-"""atlas_stub_proposer.py — for each stub map (≤N artifacts), use the
-embedding atlas to propose nearest-cousin artifacts that would anchor it.
+"""atlas_stub_proposer.py — for each focused map (≤N artifacts), use the
+embedding atlas to propose nearest-cousin artifacts.
 
-The map has 1-2 artifacts. The atlas has 1709 artifacts in semantic space.
-For each existing artifact in the stub, find its top-K nearest neighbours
-that aren't already in the map. The union of those neighbours = the
-suggested anchoring queue.
+NOTE — the project's design pattern is focused maps. The median map in
+the project has 2 artifacts; 52% of all maps have ≤2. So a "low artifact
+count" is *not* a defect. Treat this tool's output as **a list of cousins
+that exist somewhere in the project, ranked by semantic proximity to
+each focused map's primary artifact** — useful for:
+
+  1. Knowing which other maps a map's primary artifact is closest to
+     (sequence-design hints).
+  2. Spotting genuinely under-anchored maps (compare to similar ones).
+  3. Discovering forgotten artifacts that *might* fit somewhere — but
+     each placement decision is curatorial, not automatic.
+
+DO NOT use this tool's output to bulk-fill maps. Each proposal is a
+question to a human, not a JSON patch.
+
+Output:
+  doc/atlas/stub_proposals.json — per-map proposed artifact additions
 
 Output:
   doc/atlas/stub_proposals.json — per-stub-map proposed artifact additions
