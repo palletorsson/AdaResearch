@@ -1,0 +1,144 @@
+{
+  "demo_info": {
+    "name": "Passive Matrix c9913",
+    "description": "Auto-generated passive_matrix board composed from the InteractableDemo vocabulary.",
+    "family": "passive_matrix",
+    "auto_generated": true,
+    "auto_score": 53.67,
+    "selection_rank": 2
+  },
+  "titles": {
+    "main": "PASSIVE MATRIX",
+    "row2": "PASSIVE + MONITORS",
+    "row3": "COMPOUND ARRANGEMENTS",
+    "row4": "PROTOTYPE MODULES"
+  },
+  "layout": {
+    "panel_color": [
+      0.78,
+      0.75,
+      0.67,
+      1.0
+    ],
+    "frame_color": [
+      0.25,
+      0.23,
+      0.2,
+      1.0
+    ],
+    "accent_color": [
+      0.75,
+      0.38,
+      0.13,
+      1.0
+    ],
+    "dark_color": [
+      0.1,
+      0.1,
+      0.1,
+      1.0
+    ],
+    "cream_color": [
+      0.78,
+      0.75,
+      0.67,
+      1.0
+    ],
+    "spacing": 0.242,
+    "control_z": 0.02,
+    "label_y_offset": -0.18,
+    "row_y": 1.081,
+    "row2_y": 0.592,
+    "row3_y": 0.196,
+    "row4_y": -0.27,
+    "show_hand_scale_guides": false
+  },
+  "controls": [
+    {
+      "scene": "res://commons/interactables/slider_plane.tscn",
+      "label": "XY PAD",
+      "y": -0.05
+    },
+    {
+      "scene": "res://commons/interactables/wheel_smooth.tscn",
+      "label": "WHEEL",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_horizontal.tscn",
+      "label": "SLIDER H",
+      "y": 0.0
+    }
+  ],
+  "extra_buttons": [
+    {
+      "type": "rect_tall",
+      "label": "RECT TALL"
+    }
+  ],
+  "passive_elements": [
+    {
+      "builder": "build_vu_meter_v",
+      "label": "VU METER V",
+      "width": 1
+    },
+    {
+      "builder": "build_speaker_dots",
+      "label": "SPEAKER DOTS",
+      "width": 1
+    },
+    {
+      "builder": "build_vu_meter_h",
+      "label": "VU METER H",
+      "width": 1
+    },
+    {
+      "monitor": "scope",
+      "slots": 2,
+      "label": "SCOPE",
+      "width": 2
+    },
+    {
+      "monitor": "spectrum",
+      "slots": 2,
+      "label": "SPECTRUM",
+      "width": 2
+    },
+    {
+      "builder": "build_speaker_grid",
+      "label": "SPEAKER GRID",
+      "width": 1
+    }
+  ],
+  "compounds": [
+    {
+      "type": "sliders_v",
+      "count": 4,
+      "label": "4x SLIDER V",
+      "width": 2
+    },
+    {
+      "type": "meters_v",
+      "count": 3,
+      "label": "3x METERS",
+      "width": 1
+    }
+  ],
+  "new_modules": [
+    {
+      "type": "text_static_1",
+      "label": "TEXT 1",
+      "width": 1
+    },
+    {
+      "type": "text_scroll_1",
+      "label": "SCROLL 1",
+      "width": 1
+    },
+    {
+      "type": "text_static_3",
+      "label": "TEXT 3",
+      "width": 3
+    }
+  ]
+}

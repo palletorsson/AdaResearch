@@ -4,19 +4,20 @@
 [ext_resource type="Script" uid="uid://brek2sn82cmcf" path="res://commons/audio/audio_controller_cable_case.gd" id="2_cable"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rack"]
-size = Vector3(0.5, 0.5, 0.05)
+size = Vector3(1, 0.82, 0.05)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_metal"]
-albedo_color = Color(0.04, 0.04, 0.05, 1)
-metallic = 1.0
-roughness = 0.1
+albedo_color = Color(0.18, 0.19, 0.2, 1)
+metallic = 0.35
+roughness = 0.55
 
 [sub_resource type="BoxMesh" id="BoxMesh_panel"]
-size = Vector3(0.48, 0.48, 0.01)
+size = Vector3(0.94, 0.76, 0.01)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_panel"]
-albedo_color = Color(0.07, 0.07, 0.09, 1)
-roughness = 0.3
+albedo_color = Color(0.66, 0.69, 0.72, 1)
+metallic = 0.15
+roughness = 0.72
 
 [node name="UniversalVRAudioController" type="Node3D" unique_id=165801534]
 script = ExtResource("1_v4m4")

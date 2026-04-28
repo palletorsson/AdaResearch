@@ -1,10 +1,10 @@
 {
   "demo_info": {
-    "name": "Prototype Wall 6ce6d",
+    "name": "Prototype Wall 9eac4",
     "description": "Auto-generated prototype_wall board composed from the InteractableDemo vocabulary.",
     "family": "prototype_wall",
     "auto_generated": true,
-    "auto_score": 63.02,
+    "auto_score": 41.22,
     "selection_rank": 2
   },
   "titles": {
@@ -15,52 +15,48 @@
   },
   "layout": {
     "panel_color": [
-      0.64,
-      0.6,
-      0.56,
+      0.78,
+      0.75,
+      0.67,
       1.0
     ],
     "frame_color": [
+      0.25,
+      0.23,
       0.2,
-      0.16,
-      0.15,
       1.0
     ],
     "accent_color": [
-      0.86,
-      0.25,
-      0.48,
+      0.75,
+      0.38,
+      0.13,
       1.0
     ],
     "dark_color": [
-      0.12,
       0.1,
-      0.11,
+      0.1,
+      0.1,
       1.0
     ],
     "cream_color": [
-      0.8,
-      0.76,
-      0.7,
+      0.78,
+      0.75,
+      0.67,
       1.0
     ],
-    "spacing": 0.247,
+    "spacing": 0.273,
     "control_z": 0.02,
     "label_y_offset": -0.18,
-    "row_y": 1.032,
-    "row2_y": 0.576,
-    "row3_y": 0.13,
-    "row4_y": -0.311
+    "row_y": 1.092,
+    "row2_y": 0.609,
+    "row3_y": 0.223,
+    "row4_y": -0.257,
+    "show_hand_scale_guides": false
   },
   "controls": [
     {
-      "scene": "res://commons/interactables/slider_smooth.tscn",
-      "label": "SLIDER V",
-      "y": 0.0
-    },
-    {
-      "scene": "res://commons/interactables/lever_smooth.tscn",
-      "label": "LEVER",
+      "scene": "res://commons/interactables/push_button.tscn",
+      "label": "BUTTON",
       "y": 0.0
     },
     {
@@ -71,30 +67,54 @@
   ],
   "extra_buttons": [
     {
-      "type": "toggle",
-      "label": "TOGGLE"
+      "type": "rect_sm",
+      "label": "RECT SM"
+    },
+    {
+      "type": "rect_tall",
+      "label": "RECT TALL"
     }
   ],
   "passive_elements": [
     {
+      "monitor": "scope",
+      "slots": 3,
+      "label": "SCOPE WIDE",
+      "width": 3
+    },
+    {
       "monitor": "lissajous",
       "slots": 2,
       "label": "LISSAJOUS",
-      "width": 2
-    },
-    {
-      "monitor": "spectrum",
-      "slots": 2,
-      "label": "SPECTRUM",
       "width": 2
     }
   ],
   "compounds": [],
   "new_modules": [
     {
+      "type": "text_scroll_1",
+      "label": "SCROLL 1",
+      "width": 1
+    },
+    {
+      "type": "needle_meter",
+      "label": "NEEDLE\nMETER",
+      "width": 1
+    },
+    {
       "type": "text_static_1",
       "label": "TEXT 1",
       "width": 1
+    },
+    {
+      "type": "touch_grid",
+      "label": "TOUCH\nGRID",
+      "width": 1
+    },
+    {
+      "type": "text_static_3",
+      "label": "TEXT 3",
+      "width": 3
     },
     {
       "type": "patch_matrix",
@@ -104,21 +124,6 @@
     {
       "type": "text_scroll_2",
       "label": "SCROLL 2",
-      "width": 2
-    },
-    {
-      "type": "text_scroll_1",
-      "label": "SCROLL 1",
-      "width": 1
-    },
-    {
-      "type": "touch_grid",
-      "label": "TOUCH\nGRID",
-      "width": 1
-    },
-    {
-      "type": "text_static_2",
-      "label": "TEXT 2",
       "width": 2
     }
   ]

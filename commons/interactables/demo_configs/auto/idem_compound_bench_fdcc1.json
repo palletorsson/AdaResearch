@@ -1,10 +1,10 @@
 {
   "demo_info": {
-    "name": "Compound Bench 45cc7",
+    "name": "Compound Bench fdcc1",
     "description": "Auto-generated compound_bench board composed from the InteractableDemo vocabulary.",
     "family": "compound_bench",
     "auto_generated": true,
-    "auto_score": 62.38,
+    "auto_score": 46.23,
     "selection_rank": 1
   },
   "titles": {
@@ -15,68 +15,63 @@
   },
   "layout": {
     "panel_color": [
-      0.56,
       0.64,
-      0.61,
+      0.6,
+      0.56,
       1.0
     ],
     "frame_color": [
-      0.16,
       0.2,
-      0.19,
+      0.16,
+      0.15,
       1.0
     ],
     "accent_color": [
-      0.27,
-      0.73,
-      0.9,
+      0.86,
+      0.25,
+      0.48,
       1.0
     ],
     "dark_color": [
-      0.06,
-      0.08,
-      0.08,
+      0.12,
+      0.1,
+      0.11,
       1.0
     ],
     "cream_color": [
-      0.77,
-      0.81,
-      0.79,
+      0.8,
+      0.76,
+      0.7,
       1.0
     ],
-    "spacing": 0.263,
+    "spacing": 0.262,
     "control_z": 0.02,
     "label_y_offset": -0.18,
-    "row_y": 1.06,
-    "row2_y": 0.587,
-    "row3_y": 0.11,
-    "row4_y": -0.292
+    "row_y": 1.035,
+    "row2_y": 0.558,
+    "row3_y": 0.104,
+    "row4_y": -0.299,
+    "show_hand_scale_guides": true
   },
   "controls": [
-    {
-      "scene": "res://commons/interactables/dial_smooth.tscn",
-      "label": "KNOB",
-      "y": 0.0
-    },
     {
       "scene": "res://commons/interactables/joystick_smooth.tscn",
       "label": "JOYSTICK",
       "y": -0.05
     },
     {
-      "scene": "res://commons/interactables/push_button_front.tscn",
-      "label": "BUTTON\nFRONT",
-      "y": 0.0,
-      "rot_y": 180.0
+      "scene": "res://commons/interactables/wheel_smooth.tscn",
+      "label": "WHEEL",
+      "y": 0.0
     },
     {
-      "scene": "res://commons/interactables/slider_plane.tscn",
-      "label": "XY PAD",
-      "y": -0.05
+      "scene": "res://commons/interactables/slider_zero.tscn",
+      "label": "ZERO",
+      "y": 0.0
     },
     {
-      "scene": "res://commons/interactables/push_button.tscn",
-      "label": "BUTTON",
+      "scene": "res://commons/interactables/slider_snap.tscn",
+      "label": "SNAP",
       "y": 0.0
     }
   ],
@@ -88,17 +83,17 @@
       "width": 1
     },
     {
-      "monitor": "lissajous",
+      "monitor": "scope",
       "slots": 2,
-      "label": "LISSAJOUS",
+      "label": "SCOPE",
       "width": 2
     }
   ],
   "compounds": [
     {
-      "type": "sliders_h",
+      "type": "sliders_v",
       "count": 2,
-      "label": "2x SLIDER H",
+      "label": "2x SLIDER V",
       "width": 2
     },
     {
@@ -108,28 +103,28 @@
       "width": 2
     },
     {
-      "type": "meters_v",
+      "type": "monitor_sliders",
       "count": 3,
-      "label": "3x METERS",
-      "width": 1
+      "label": "MONITOR+SLIDERS",
+      "width": 2
     },
     {
-      "type": "sliders_v",
-      "count": 3,
-      "label": "3x SLIDER V",
+      "type": "sliders_h",
+      "count": 4,
+      "label": "4x SLIDER H",
       "width": 2
     }
   ],
   "new_modules": [
     {
-      "type": "text_scroll_3",
-      "label": "SCROLL 3",
-      "width": 3
+      "type": "needle_meter",
+      "label": "NEEDLE\nMETER",
+      "width": 1
     },
     {
-      "type": "text_static_1",
-      "label": "TEXT 1",
-      "width": 1
+      "type": "text_scroll_2",
+      "label": "SCROLL 2",
+      "width": 2
     }
   ]
 }

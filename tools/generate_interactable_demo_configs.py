@@ -88,6 +88,141 @@ NEW_MODULES = [
     {"type": "text_scroll_3", "label": "SCROLL 3", "width": 3},
 ]
 
+AUDIO_CONTROLLER_MODULES = [
+    {
+        "type": "audio_controller_preset",
+        "preset": "basic_mono",
+        "token": "AudioContr:-90#preset:basic_mono",
+        "label": "BASIC\nMONO",
+        "width": 3,
+        "knobs": 2,
+        "sliders": 2,
+    },
+    {
+        "type": "audio_controller_preset",
+        "preset": "interface_prototypes",
+        "token": "AudioContr#preset:interface_prototypes#hide_selection:true",
+        "label": "INTERFACE\nPRESET",
+        "width": 3,
+        "knobs": 4,
+        "sliders": 1,
+    },
+    {
+        "type": "audio_controller_preset",
+        "preset": "full_studio",
+        "token": "AudioContr:180#preset:full_studio",
+        "label": "FULL\nSTUDIO",
+        "width": 3,
+        "knobs": 4,
+        "sliders": 3,
+    },
+    {
+        "type": "audio_controller_preset",
+        "preset": "template_showcase",
+        "token": "AudioContr:90:0.1:0.9#preset:template_showcase",
+        "label": "TEMPLATE\nSHOW",
+        "width": 3,
+        "knobs": 3,
+        "sliders": 2,
+    },
+    {
+        "type": "audio_token_strip",
+        "token": "AudioContr#config:synth_rack#sound:pickup_mario#autoplay:true",
+        "label": "MAP TOKEN",
+        "width": 3,
+    },
+    {
+        "type": "audio_token_strip",
+        "token": "AudioContr:90:0.2:1.1#config:slider_rack#col_spacing:0.26",
+        "label": "SPACING\nTOKEN",
+        "width": 3,
+    },
+]
+
+RACK_SCENE_MODULES = [
+    {
+        "type": "rack_scene_preset",
+        "config": "rack_303_acid",
+        "scene": "res://commons/audio/rack_presets/rack_303_acid.tscn",
+        "sound": "TB-303 ACID",
+        "label": "303\nACID",
+        "width": 3,
+        "modules": 5,
+    },
+    {
+        "type": "rack_scene_preset",
+        "config": "rack_808_drums",
+        "scene": "res://commons/audio/rack_presets/rack_808_drums.tscn",
+        "sound": "808 DRUMS",
+        "label": "808\nDRUMS",
+        "width": 3,
+        "modules": 4,
+    },
+    {
+        "type": "rack_scene_preset",
+        "config": "rack_ambient_drone",
+        "scene": "res://commons/audio/rack_presets/rack_ambient_drone.tscn",
+        "sound": "AMBIENT DRONE",
+        "label": "AMBIENT\nDRONE",
+        "width": 3,
+        "modules": 6,
+    },
+    {
+        "type": "rack_scene_preset",
+        "config": "rack_dx7_piano",
+        "scene": "res://commons/audio/rack_presets/rack_dx7_piano.tscn",
+        "sound": "DX7 PIANO",
+        "label": "DX7\nPIANO",
+        "width": 3,
+        "modules": 5,
+    },
+    {
+        "type": "rack_scene_preset",
+        "config": "rack_moog_bass",
+        "scene": "res://commons/audio/rack_presets/rack_moog_bass.tscn",
+        "sound": "MOOG BASS",
+        "label": "MOOG\nBASS",
+        "width": 3,
+        "modules": 5,
+    },
+    {
+        "type": "rack_scene_preset",
+        "config": "rack_sine_basic",
+        "scene": "res://commons/audio/rack_presets/rack_sine_basic.tscn",
+        "sound": "SINE BASIC",
+        "label": "SINE\nBASIC",
+        "width": 3,
+        "modules": 3,
+    },
+]
+
+LIVE_AUDIO_MODULES = [
+    {
+        "type": "live_audio_controller",
+        "preset": "basic_mono",
+        "token": "AudioContr:-90#preset:basic_mono",
+        "label": "LIVE\nBASIC",
+        "width": 4,
+        "live_scale": 0.34,
+    },
+    {
+        "type": "live_audio_controller",
+        "preset": "interface_prototypes",
+        "token": "AudioContr#preset:interface_prototypes#hide_selection:true",
+        "label": "LIVE\nINTERFACE",
+        "width": 4,
+        "live_scale": 0.32,
+    },
+    {
+        "type": "live_audio_controller",
+        "preset": "full_studio",
+        "token": "AudioContr:180#preset:full_studio",
+        "label": "LIVE\nSTUDIO",
+        "width": 4,
+        "live_scale": 0.30,
+    },
+]
+
 PALETTES = [
     {
         "panel_color": [0.78, 0.75, 0.67, 1.0],
@@ -168,6 +303,36 @@ FAMILIES = {
         "new_modules": (4, 6),
         "spacing": (0.24, 0.30),
     },
+    "audio_preset_wall": {
+        "controls": (2, 4),
+        "extra_buttons": (0, 1),
+        "passive": (2, 3),
+        "compounds": (1, 2),
+        "new_modules": (1, 2),
+        "audio_modules": (4, 6),
+        "live_audio": (1, 1),
+        "spacing": (0.25, 0.31),
+    },
+    "rack_scene_browser": {
+        "controls": (1, 3),
+        "extra_buttons": (0, 1),
+        "passive": (1, 3),
+        "compounds": (1, 2),
+        "new_modules": (1, 2),
+        "audio_modules": (5, 7),
+        "live_audio": (0, 1),
+        "spacing": (0.26, 0.32),
+    },
+    "audio_install_console": {
+        "controls": (4, 7),
+        "extra_buttons": (1, 3),
+        "passive": (2, 4),
+        "compounds": (2, 4),
+        "new_modules": (1, 3),
+        "audio_modules": (3, 5),
+        "live_audio": (1, 1),
+        "spacing": (0.25, 0.31),
+    },
 }
 
 ROW_TARGETS = {
@@ -210,14 +375,25 @@ def _score_config(family: str, cfg: dict) -> float:
     if len(active_rows) < 2:
         score -= 25.0
 
+    row_targets = dict(ROW_TARGETS)
+    if family in {"audio_preset_wall", "rack_scene_browser", "audio_install_console"}:
+        row_targets["new_modules"] = 14.0
+    max_slots_by_row = {
+        "controls": 8.5,
+        "passive_elements": 8.5,
+        "compounds": 8.5,
+        "new_modules": 16.0 if family in {"audio_preset_wall", "rack_scene_browser", "audio_install_console"} else 8.5,
+    }
+
     for name, slots in slot_counts.items():
         if slots <= 0.0:
             continue
-        score -= abs(slots - ROW_TARGETS[name]) * 5.0
+        score -= abs(slots - row_targets[name]) * 5.0
         if slots < 2.0:
             score -= 10.0
-        if slots > 8.5:
-            score -= (slots - 8.5) * 8.0
+        max_slots = max_slots_by_row[name]
+        if slots > max_slots:
+            score -= (slots - max_slots) * 8.0
 
     nonzero_slots = [slot_counts[name] for name in active_rows]
     if nonzero_slots:
@@ -251,12 +427,58 @@ def _score_config(family: str, cfg: dict) -> float:
     elif family == "text_signal_lab":
         textish = sum(1 for item in cfg.get("new_modules", []) if str(item.get("type", "")).startswith("text_"))
         score += textish * 3.0
+    elif family == "audio_preset_wall":
+        audio_modules = [item for item in cfg.get("new_modules", []) if _is_audio_module(item)]
+        live_count = sum(1 for item in audio_modules if item.get("type") == "live_audio_controller")
+        preset_count = sum(1 for item in audio_modules if item.get("type") == "audio_controller_preset")
+        scene_count = sum(1 for item in audio_modules if item.get("type") == "rack_scene_preset")
+        token_count = sum(1 for item in audio_modules if item.get("type") == "audio_token_strip")
+        score += live_count * 8.0 + preset_count * 4.0 + scene_count * 2.0 + token_count * 3.0
+        if preset_count < 3:
+            score -= 14.0
+        if live_count != 1:
+            score -= 12.0
+        if token_count < 1:
+            score -= 6.0
+    elif family == "rack_scene_browser":
+        audio_modules = [item for item in cfg.get("new_modules", []) if _is_audio_module(item)]
+        live_count = sum(1 for item in audio_modules if item.get("type") == "live_audio_controller")
+        scene_count = sum(1 for item in audio_modules if item.get("type") == "rack_scene_preset")
+        score += live_count * 4.0 + scene_count * 4.0
+        if live_count > 1:
+            score -= 10.0
+        if scene_count < 4:
+            score -= 16.0
+    elif family == "audio_install_console":
+        audio_modules = [item for item in cfg.get("new_modules", []) if _is_audio_module(item)]
+        live_count = sum(1 for item in audio_modules if item.get("type") == "live_audio_controller")
+        has_preset = any(item.get("type") == "audio_controller_preset" for item in audio_modules)
+        has_scene = any(item.get("type") == "rack_scene_preset" for item in audio_modules)
+        has_token = any(item.get("type") == "audio_token_strip" for item in audio_modules)
+        score += len(audio_modules) * 2.5 + live_count * 8.0
+        if has_preset and has_scene and has_token:
+            score += 12.0
+        if live_count != 1:
+            score -= 14.0
+        if slot_counts["controls"] < 5:
+            score -= 7.0
 
     return score
 
 
+def _is_audio_module(item: dict) -> bool:
+    return str(item.get("type", "")) in {"audio_controller_preset", "rack_scene_preset", "audio_token_strip", "live_audio_controller"}
+
+
 def _family_titles(family: str) -> dict:
     pretty = family.replace("_", " ").title()
+    if family in {"audio_preset_wall", "rack_scene_browser", "audio_install_console"}:
+        return {
+            "main": pretty.upper(),
+            "row2": "SIGNAL METERS + MONITORS",
+            "row3": "CONTROL BANKS",
+            "row4": "AUDIO MAP TOKENS + RACK PRESETS",
+        }
     return {
         "main": pretty.upper(),
         "row2": "PASSIVE + MONITORS",
@@ -272,6 +494,12 @@ def _build_config(family: str, rng: random.Random) -> tuple[str, dict]:
     passive = _sample(PASSIVE_ELEMENTS, spec["passive"], rng)
     compounds = _sample(COMPOUNDS, spec["compounds"], rng)
     new_modules = _sample(NEW_MODULES, spec["new_modules"], rng)
+    if "audio_modules" in spec:
+        audio_pool = AUDIO_CONTROLLER_MODULES + RACK_SCENE_MODULES
+        new_modules = new_modules + _sample(audio_pool, spec["audio_modules"], rng)
+        if "live_audio" in spec:
+            new_modules = new_modules + _sample(LIVE_AUDIO_MODULES, spec["live_audio"], rng)
+        rng.shuffle(new_modules)
     palette = dict(rng.choice(PALETTES))
     spacing = round(rng.uniform(*spec["spacing"]), 3)
     row_y = round(rng.uniform(1.00, 1.15), 3)
@@ -298,6 +526,7 @@ def _build_config(family: str, rng: random.Random) -> tuple[str, dict]:
             "row2_y": row2_y,
             "row3_y": row3_y,
             "row4_y": row4_y,
+            "show_hand_scale_guides": family in {"control_survey", "compound_bench"},
         },
         "controls": controls,
         "extra_buttons": extra_buttons,

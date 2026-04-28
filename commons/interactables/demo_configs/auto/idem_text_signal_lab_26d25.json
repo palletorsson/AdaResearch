@@ -1,11 +1,11 @@
 {
   "demo_info": {
-    "name": "Text Signal Lab 3ab49",
+    "name": "Text Signal Lab 26d25",
     "description": "Auto-generated text_signal_lab board composed from the InteractableDemo vocabulary.",
     "family": "text_signal_lab",
     "auto_generated": true,
-    "auto_score": 80.59,
-    "selection_rank": 2
+    "auto_score": 67.94,
+    "selection_rank": 1
   },
   "titles": {
     "main": "TEXT SIGNAL LAB",
@@ -44,25 +44,20 @@
       0.79,
       1.0
     ],
-    "spacing": 0.3,
+    "spacing": 0.265,
     "control_z": 0.02,
     "label_y_offset": -0.18,
-    "row_y": 1.122,
-    "row2_y": 0.701,
-    "row3_y": 0.303,
-    "row4_y": -0.094
+    "row_y": 1.05,
+    "row2_y": 0.623,
+    "row3_y": 0.158,
+    "row4_y": -0.289,
+    "show_hand_scale_guides": false
   },
   "controls": [
     {
-      "scene": "res://commons/interactables/slider_snap.tscn",
-      "label": "SNAP",
-      "y": 0.0
-    },
-    {
-      "scene": "res://commons/interactables/push_button_front.tscn",
-      "label": "BUTTON\nFRONT",
-      "y": 0.0,
-      "rot_y": 180.0
+      "scene": "res://commons/interactables/joystick_smooth.tscn",
+      "label": "JOYSTICK",
+      "y": -0.05
     },
     {
       "scene": "res://commons/interactables/lever_smooth.tscn",
@@ -70,64 +65,64 @@
       "y": 0.0
     },
     {
-      "scene": "res://commons/interactables/dial_smooth.tscn",
-      "label": "KNOB",
+      "scene": "res://commons/interactables/push_button.tscn",
+      "label": "BUTTON",
       "y": 0.0
     }
   ],
-  "extra_buttons": [],
+  "extra_buttons": [
+    {
+      "type": "rect_sm",
+      "label": "RECT SM"
+    }
+  ],
   "passive_elements": [
-    {
-      "monitor": "scope",
-      "slots": 2,
-      "label": "SCOPE",
-      "width": 2
-    },
-    {
-      "builder": "build_speaker_grid",
-      "label": "SPEAKER GRID",
-      "width": 1
-    },
     {
       "monitor": "lissajous",
       "slots": 2,
       "label": "LISSAJOUS",
       "width": 2
+    },
+    {
+      "monitor": "scope",
+      "slots": 2,
+      "label": "SCOPE",
+      "width": 2
     }
   ],
   "compounds": [
     {
-      "type": "sliders_v",
+      "type": "meters_v",
       "count": 3,
-      "label": "3x SLIDER V",
-      "width": 2
+      "label": "3x METERS",
+      "width": 1
     },
     {
       "type": "sliders_h",
-      "count": 3,
-      "label": "3x SLIDER H",
+      "count": 2,
+      "label": "2x SLIDER H",
       "width": 2
     }
   ],
   "new_modules": [
     {
-      "type": "touch_grid",
-      "label": "TOUCH\nGRID",
+      "type": "text_static_1",
+      "label": "TEXT 1",
       "width": 1
+    },
+    {
+      "type": "patch_matrix",
+      "label": "PATCH\nMATRIX",
+      "width": 1
+    },
+    {
+      "type": "text_scroll_2",
+      "label": "SCROLL 2",
+      "width": 2
     },
     {
       "type": "needle_meter",
       "label": "NEEDLE\nMETER",
-      "width": 1
-    },
-    {
-      "type": "text_static_2",
-      "label": "TEXT 2",
-      "width": 2
-    },
-    {
-      "type": "text_scroll_1",
-      "label": "SCROLL 1",
       "width": 1
     }
   ]

@@ -1,0 +1,147 @@
+{
+  "demo_info": {
+    "name": "Rack Scene Browser c81c7",
+    "description": "Auto-generated rack_scene_browser board composed from the InteractableDemo vocabulary.",
+    "family": "rack_scene_browser",
+    "auto_generated": true,
+    "auto_score": -10.42,
+    "selection_rank": 3
+  },
+  "titles": {
+    "main": "RACK SCENE BROWSER",
+    "row2": "SIGNAL METERS + MONITORS",
+    "row3": "CONTROL BANKS",
+    "row4": "AUDIO MAP TOKENS + RACK PRESETS"
+  },
+  "layout": {
+    "panel_color": [
+      0.66,
+      0.69,
+      0.72,
+      1.0
+    ],
+    "frame_color": [
+      0.18,
+      0.22,
+      0.27,
+      1.0
+    ],
+    "accent_color": [
+      0.94,
+      0.48,
+      0.19,
+      1.0
+    ],
+    "dark_color": [
+      0.07,
+      0.08,
+      0.1,
+      1.0
+    ],
+    "cream_color": [
+      0.82,
+      0.84,
+      0.88,
+      1.0
+    ],
+    "spacing": 0.281,
+    "control_z": 0.02,
+    "label_y_offset": -0.18,
+    "row_y": 1.055,
+    "row2_y": 0.562,
+    "row3_y": 0.075,
+    "row4_y": -0.337,
+    "show_hand_scale_guides": false
+  },
+  "controls": [
+    {
+      "scene": "res://commons/interactables/lever_smooth.tscn",
+      "label": "LEVER",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_horizontal.tscn",
+      "label": "SLIDER H",
+      "y": 0.0
+    }
+  ],
+  "extra_buttons": [
+    {
+      "type": "toggle",
+      "label": "TOGGLE"
+    }
+  ],
+  "passive_elements": [
+    {
+      "monitor": "lissajous",
+      "slots": 2,
+      "label": "LISSAJOUS",
+      "width": 2
+    }
+  ],
+  "compounds": [
+    {
+      "type": "sliders_v",
+      "count": 3,
+      "label": "3x SLIDER V",
+      "width": 2
+    }
+  ],
+  "new_modules": [
+    {
+      "type": "audio_controller_preset",
+      "preset": "interface_prototypes",
+      "token": "AudioContr#preset:interface_prototypes#hide_selection:true",
+      "label": "INTERFACE\nPRESET",
+      "width": 3,
+      "knobs": 4,
+      "sliders": 1
+    },
+    {
+      "type": "rack_scene_preset",
+      "config": "rack_moog_bass",
+      "scene": "res://commons/audio/rack_presets/rack_moog_bass.tscn",
+      "sound": "MOOG BASS",
+      "label": "MOOG\nBASS",
+      "width": 3,
+      "modules": 5
+    },
+    {
+      "type": "patch_matrix",
+      "label": "PATCH\nMATRIX",
+      "width": 1
+    },
+    {
+      "type": "rack_scene_preset",
+      "config": "rack_303_acid",
+      "scene": "res://commons/audio/rack_presets/rack_303_acid.tscn",
+      "sound": "TB-303 ACID",
+      "label": "303\nACID",
+      "width": 3,
+      "modules": 5
+    },
+    {
+      "type": "rack_scene_preset",
+      "config": "rack_dx7_piano",
+      "scene": "res://commons/audio/rack_presets/rack_dx7_piano.tscn",
+      "sound": "DX7 PIANO",
+      "label": "DX7\nPIANO",
+      "width": 3,
+      "modules": 5
+    },
+    {
+      "type": "touch_grid",
+      "label": "TOUCH\nGRID",
+      "width": 1
+    },
+    {
+      "type": "rack_scene_preset",
+      "config": "rack_ambient_drone",
+      "scene": "res://commons/audio/rack_presets/rack_ambient_drone.tscn",
+      "sound": "AMBIENT DRONE",
+      "label": "AMBIENT\nDRONE",
+      "width": 3,
+      "modules": 6
+    }
+  ]
+}

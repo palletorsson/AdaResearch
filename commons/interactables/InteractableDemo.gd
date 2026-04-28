@@ -61,6 +61,10 @@ const VERTICAL_SLIDER_GAP := 0.04
 const HORIZONTAL_SLIDER_GAP := 0.008
 const SLIDER_VERTICAL_SCENE := "res://commons/interactables/slider_smooth.tscn"
 const SLIDER_HORIZONTAL_SCENE := "res://commons/interactables/slider_horizontal.tscn"
+const RIGHT_HAND_SCENE := "res://commons/body/hands/right_hand.tscn"
+const LEFT_HAND_SCENE := "res://commons/body/hands/left_hand.tscn"
+const HAND_REFERENCE_LENGTH_M := 0.21
+const HAND_REFERENCE_WIDTH_M := 0.07
 
 
 ## Row 2: Passive elements — speakers, meters, working monitors (use real scenes)
@@ -119,6 +123,7 @@ var row2_title_text: String = "PASSIVE ELEMENTS & MONITORS"
 var row3_title_text: String = "COMPOUND LAYOUTS"
 var row4_title_text: String = "NEW MODULES + TEXT DISPLAYS"
 var demo_info: Dictionary = {}
+var show_hand_scale_guides: bool = false
 
 
 func _init() -> void:
@@ -148,6 +153,7 @@ func _restore_defaults() -> void:
 	row3_title_text = "COMPOUND LAYOUTS"
 	row4_title_text = "NEW MODULES + TEXT DISPLAYS"
 	demo_info = {}
+	show_hand_scale_guides = false
 
 
 func _ready():
@@ -201,6 +207,8 @@ func _apply_layout_dict(layout: Dictionary) -> void:
 		row3_y = float(layout["row3_y"])
 	if layout.has("row4_y"):
 		row4_y = float(layout["row4_y"])
+	if layout.has("show_hand_scale_guides"):
+		show_hand_scale_guides = bool(layout["show_hand_scale_guides"])
 	panel_color = _color_from_value(layout.get("panel_color", panel_color), panel_color)
 	frame_color = _color_from_value(layout.get("frame_color", frame_color), frame_color)
 	accent_color = _color_from_value(layout.get("accent_color", accent_color), accent_color)
@@ -426,6 +434,9 @@ func _spawn_controls():
 		idx_lbl.transform.origin = Vector3(x_pos, row_y + 0.20, control_z + 0.01)
 		add_child(idx_lbl)
 
+	if show_hand_scale_guides:
+		_add_hand_scale_guides(start_x)
+
 	# Extra procedural buttons after the scene-loaded controls
 	for j in extra_buttons.size():
 		var bdef: Dictionary = extra_buttons[j]
@@ -445,6 +456,111 @@ func _spawn_controls():
 		blbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		blbl.transform.origin = Vector3(bx, row_y + label_y_offset, control_z + 0.01)
 		add_child(blbl)
+
+
+func _add_hand_scale_guides(start_x: float) -> void:
+	var vertical_idx := _find_slider_control_index(false)
+	var horizontal_idx := _find_slider_control_index(true)
+	if vertical_idx >= 0:
+		var x_pos := start_x + float(vertical_idx) * spacing
+		_add_hand_scale_probe(RIGHT_HAND_SCENE, Vector3(x_pos + 0.095, row_y, control_z + 0.055), "hand 21cm", HAND_REFERENCE_LENGTH_M, false)
+	if horizontal_idx >= 0:
+		var x_pos := start_x + float(horizontal_idx) * spacing
+		_add_hand_scale_probe(LEFT_HAND_SCENE, Vector3(x_pos, row_y + 0.120, control_z + 0.055), "palm 7cm", HAND_REFERENCE_WIDTH_M, true)
+
+
+func _find_slider_control_index(horizontal: bool) -> int:
+	for i in controls.size():
+		var def: Dictionary = controls[i]
+		var scene_path := str(def.get("scene", ""))
+		if horizontal and "slider_horizontal" in scene_path:
+			return i
+		if not horizontal and "slider_" in scene_path and not "slider_horizontal" in scene_path and not "slider_plane" in scene_path:
+			return i
+	return -1
+
+
+func _add_hand_scale_probe(scene_path: String, pos: Vector3, label_text: String, tick_length: float, rotate_flat: bool) -> void:
+	var scene := load(scene_path) as PackedScene
+	if not scene:
+		push_warning("InteractableDemo: Failed to load hand scale scene %s" % scene_path)
+		return
+	var hand := scene.instantiate() as Node3D
+	if not hand:
+		return
+	hand.name = "HandScaleProbe"
+	hand.transform.origin = pos
+	if rotate_flat:
+		hand.rotation_degrees.z = -90.0
+	hand.scale = Vector3.ONE
+	_strip_hand_runtime_scripts(hand)
+	_apply_hand_probe_material(hand)
+	add_child(hand)
+
+	_add_scale_tick(pos + Vector3(0.0, -0.125, -0.006), tick_length, label_text)
+
+
+func _strip_hand_runtime_scripts(root_node: Node3D) -> void:
+	var stack: Array = [root_node]
+	while not stack.is_empty():
+		var current = stack.pop_back()
+		if current is AnimationTree:
+			current.active = false
+		if current.get_script() != null:
+			current.set_script(null)
+		for child in current.get_children():
+			if child is Node:
+				stack.append(child)
+
+
+func _apply_hand_probe_material(root_node: Node3D) -> void:
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.2, 0.75, 0.95, 0.32)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.metallic = 0.0
+	mat.roughness = 0.35
+	mat.no_depth_test = true
+	var stack: Array = [root_node]
+	while not stack.is_empty():
+		var current = stack.pop_back()
+		if current is MeshInstance3D:
+			current.material_override = mat
+		for child in current.get_children():
+			if child is Node3D:
+				stack.append(child)
+
+
+func _add_scale_tick(center: Vector3, length: float, label_text: String) -> void:
+	var tick_root := Node3D.new()
+	tick_root.name = "HandScaleTick"
+	tick_root.transform.origin = center
+	add_child(tick_root)
+
+	var mat := _make_mat(accent_color, 0.35)
+	var bar := MeshInstance3D.new()
+	bar.mesh = BoxMesh.new()
+	bar.mesh.size = Vector3(length, 0.004, 0.002)
+	bar.material_override = mat
+	tick_root.add_child(bar)
+
+	for x in [-length * 0.5, length * 0.5]:
+		var end_tick := MeshInstance3D.new()
+		end_tick.mesh = BoxMesh.new()
+		end_tick.mesh.size = Vector3(0.004, 0.020, 0.002)
+		end_tick.material_override = mat
+		end_tick.transform.origin = Vector3(x, 0, 0)
+		tick_root.add_child(end_tick)
+
+	var lbl := Label3D.new()
+	lbl.text = label_text
+	lbl.font_size = 14
+	lbl.pixel_size = 0.0005
+	lbl.modulate = Color(1, 1, 1)
+	lbl.outline_size = 4
+	lbl.outline_modulate = Color(0, 0, 0, 0.9)
+	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	lbl.transform.origin = Vector3(0, -0.024, 0.004)
+	tick_root.add_child(lbl)
 
 
 func _build_extra_button(c: Node3D, t: String, copper: Color, dark: Color) -> void:
@@ -835,7 +951,7 @@ func _spawn_new_modules():
 		container.transform.origin = Vector3(x_pos, row4_y, control_z)
 		add_child(container)
 
-		_build_new_module(container, mod_type, accent_color, dark_color, cream_color)
+		_build_new_module(container, mod_type, accent_color, dark_color, cream_color, def)
 		_frame_container_content("NewFrame_%d" % i, container, Vector2(0.06, 0.06), Vector2(0.01, 0.01))
 
 		var lbl := Label3D.new()
@@ -854,7 +970,7 @@ func _spawn_new_modules():
 		x_cursor += elem_width * spacing
 
 
-func _build_new_module(c: Node3D, t: String, copper: Color, dark: Color, cream: Color) -> void:
+func _build_new_module(c: Node3D, t: String, copper: Color, dark: Color, cream: Color, def: Dictionary = {}) -> void:
 	match t:
 		"touch_grid":
 			# XY touch surface — dark pad with grid lines + copper cursor
@@ -1140,6 +1256,202 @@ func _build_new_module(c: Node3D, t: String, copper: Color, dark: Color, cream: 
 			RackPassiveElementsScript.build_text_display_scroll(c, 2, "FREQUENCY MODULATION — CARRIER 440Hz — DEPTH 0.5")
 		"text_scroll_3":
 			RackPassiveElementsScript.build_text_display_scroll(c, 3, "ADA RESEARCH — ALGORITHMS THROUGH ARCHITECTURE — DIETER RAMS EURORACK INTERFACE")
+		"audio_controller_preset":
+			_build_audio_controller_preset_module(c, def, copper, dark, cream)
+		"rack_scene_preset":
+			_build_rack_scene_preset_module(c, def, copper, dark, cream)
+		"audio_token_strip":
+			_build_audio_token_strip(c, def, copper, dark, cream)
+		"live_audio_controller":
+			_build_live_audio_controller_module(c, def, copper, dark, cream)
+
+
+func _build_audio_controller_preset_module(c: Node3D, def: Dictionary, copper: Color, dark: Color, cream: Color) -> void:
+	var preset := str(def.get("preset", "basic_mono"))
+	var token := str(def.get("token", "AudioContr#preset:%s" % preset))
+	var width := 0.48
+	var height := 0.20
+	var face := _make_box(Vector3(width, height, 0.006), cream, 0.0)
+	c.add_child(face)
+
+	var header := _make_box(Vector3(width, 0.028, 0.004), dark, 0.0)
+	header.transform.origin = Vector3(0.0, height * 0.5 - 0.014, 0.006)
+	c.add_child(header)
+	_add_small_label(c, "AudioContr", Vector3(-width * 0.32, height * 0.5 - 0.014, 0.011), 13, copper)
+	_add_small_label(c, preset.to_upper(), Vector3(width * 0.18, height * 0.5 - 0.014, 0.011), 11, Color(1, 1, 1))
+
+	var knob_count := int(def.get("knobs", 3))
+	var slider_count := int(def.get("sliders", 2))
+	var start_x := -0.155
+	for i in knob_count:
+		var x := start_x + float(i) * 0.060
+		_add_embedded_control(c, "res://commons/interactables/dial_smooth.tscn", Vector3(x, 0.030, 0.016), 0.42, Vector2(0.060, 0.060))
+
+	for i in slider_count:
+		var x := 0.105 + float(i) * 0.060
+		var slider_scene := "res://commons/interactables/slider_smooth.tscn" if i % 2 == 0 else "res://commons/interactables/slider_horizontal.tscn"
+		var slider_scale := 0.42 if i % 2 == 0 else 0.36
+		var frame_size := Vector2(0.060, 0.120) if i % 2 == 0 else Vector2(0.105, 0.050)
+		_add_embedded_control(c, slider_scene, Vector3(x, -0.020, 0.016), slider_scale, frame_size)
+
+	_add_small_label(c, token, Vector3(0.0, -height * 0.5 + 0.022, 0.012), 9, dark)
+
+
+func _build_rack_scene_preset_module(c: Node3D, def: Dictionary, copper: Color, dark: Color, cream: Color) -> void:
+	var config := str(def.get("config", "rack_303_acid"))
+	var sound := str(def.get("sound", "ACID"))
+	var width := 0.52
+	var height := 0.21
+	var face := _make_box(Vector3(width, height, 0.006), Color(0.08, 0.09, 0.10), 0.0)
+	c.add_child(face)
+
+	var rail_top := _make_box(Vector3(width, 0.010, 0.004), cream, 0.0)
+	rail_top.transform.origin = Vector3(0.0, height * 0.5 - 0.010, 0.007)
+	c.add_child(rail_top)
+	var rail_bottom := _make_box(Vector3(width, 0.010, 0.004), cream, 0.0)
+	rail_bottom.transform.origin = Vector3(0.0, -height * 0.5 + 0.010, 0.007)
+	c.add_child(rail_bottom)
+
+	var modules := int(def.get("modules", 5))
+	var usable_w := width - 0.04
+	var slot_w := usable_w / float(maxi(1, modules))
+	var left := -usable_w * 0.5 + slot_w * 0.5
+	for i in modules:
+		var h := 0.09 + 0.025 * float((i + modules) % 3) / 2.0
+		var module_color := cream if i % 2 == 0 else Color(0.72, 0.75, 0.78)
+		var module := _make_box(Vector3(slot_w * 0.74, h, 0.005), module_color, 0.0)
+		module.transform.origin = Vector3(left + float(i) * slot_w, -0.004, 0.010)
+		c.add_child(module)
+		if i % 3 == 0:
+			_add_embedded_control(c, "res://commons/interactables/dial_smooth.tscn", module.transform.origin + Vector3(0, 0.020, 0.010), 0.32, Vector2(0.046, 0.046))
+		elif i % 3 == 1:
+			_add_embedded_control(c, "res://commons/interactables/slider_horizontal.tscn", module.transform.origin + Vector3(0, 0.018, 0.010), 0.27, Vector2(0.080, 0.040))
+		else:
+			_add_embedded_control(c, "res://commons/interactables/push_button.tscn", module.transform.origin + Vector3(0, 0.020, 0.010), 0.36, Vector2(0.044, 0.044))
+
+	_add_small_label(c, "RackPreset#config:%s" % config, Vector3(0.0, -height * 0.5 + 0.024, 0.012), 9, copper)
+	_add_small_label(c, sound.to_upper(), Vector3(0.0, height * 0.5 - 0.028, 0.012), 10, Color(1, 1, 1))
+
+
+func _build_audio_token_strip(c: Node3D, def: Dictionary, copper: Color, dark: Color, cream: Color) -> void:
+	var token := str(def.get("token", "AudioContr:-90#preset:basic_mono"))
+	var width := 0.58
+	var height := 0.070
+	var base := _make_box(Vector3(width, height, 0.006), dark, 0.0)
+	c.add_child(base)
+	var line := _make_box(Vector3(width - 0.04, 0.004, 0.002), copper, 0.65)
+	line.transform.origin = Vector3(0.0, 0.020, 0.009)
+	c.add_child(line)
+	_add_small_label(c, token, Vector3(0.0, -0.008, 0.012), 10, Color(1, 1, 1))
+
+
+func _build_live_audio_controller_module(c: Node3D, def: Dictionary, copper: Color, dark: Color, cream: Color) -> void:
+	var preset := str(def.get("preset", "basic_mono"))
+	var token := str(def.get("token", "AudioContr#preset:%s" % preset))
+	var width := 0.74
+	var height := 0.46
+	var back := _make_box(Vector3(width, height, 0.008), cream, 0.0)
+	c.add_child(back)
+
+	var header := _make_box(Vector3(width, 0.032, 0.004), dark, 0.0)
+	header.transform.origin = Vector3(0.0, height * 0.5 - 0.016, 0.007)
+	c.add_child(header)
+	_add_small_label(c, "LIVE AudioContr", Vector3(-width * 0.30, height * 0.5 - 0.016, 0.013), 13, copper)
+	_add_small_label(c, preset.to_upper(), Vector3(width * 0.23, height * 0.5 - 0.016, 0.013), 11, Color(1, 1, 1))
+	_add_local_outline_frame(c, "LiveAudioFrame", Vector3(0, -0.015, 0.010), width - 0.06, height - 0.070)
+
+	var uvac_scene := load("res://commons/audio/UniversalVRAudioController.tscn") as PackedScene
+	if uvac_scene:
+		var uvac := uvac_scene.instantiate() as Node3D
+		if uvac:
+			uvac.name = "LiveAudioContr"
+			uvac.set("eurorack_preset_name", preset)
+			if def.has("config"):
+				uvac.set("rack_config_path", "res://commons/audio/rack_configs/%s.json" % str(def["config"]))
+			uvac.scale = Vector3.ONE * float(def.get("live_scale", 0.34))
+			uvac.transform.origin = Vector3(0.0, -0.020, 0.035)
+			c.add_child(uvac)
+
+	_add_small_label(c, token, Vector3(0.0, -height * 0.5 + 0.024, 0.013), 9, dark)
+
+
+func _make_box(size: Vector3, color: Color, emission: float = 0.0) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	mi.mesh = bm
+	mi.material_override = _make_mat(color, emission)
+	return mi
+
+
+func _add_mini_knob(c: Node3D, pos: Vector3, dark: Color, copper: Color) -> void:
+	var knob := MeshInstance3D.new()
+	var km := CylinderMesh.new()
+	km.top_radius = 0.009
+	km.bottom_radius = 0.010
+	km.height = 0.005
+	km.radial_segments = 16
+	knob.mesh = km
+	knob.rotation_degrees.x = 90
+	knob.material_override = _make_mat(dark, 0.0)
+	knob.transform.origin = pos
+	c.add_child(knob)
+	var marker := _make_box(Vector3(0.002, 0.008, 0.001), copper, 0.35)
+	marker.transform.origin = pos + Vector3(0.002, 0.003, 0.004)
+	marker.rotation.z = 0.7
+	c.add_child(marker)
+
+
+func _add_embedded_control(c: Node3D, scene_path: String, pos: Vector3, scale_value: float, frame_size: Vector2 = Vector2.ZERO) -> void:
+	if frame_size != Vector2.ZERO:
+		_add_local_outline_frame(c, "EmbeddedFrame", pos - Vector3(0, 0, 0.006), frame_size.x, frame_size.y)
+	var control := _instantiate_compound_control(scene_path)
+	if not control:
+		return
+	control.transform.origin = pos
+	control.scale = Vector3.ONE * scale_value
+	c.add_child(control)
+
+
+func _add_local_outline_frame(parent: Node3D, frame_name: String, center: Vector3, width: float, height: float) -> void:
+	var frame_root := Node3D.new()
+	frame_root.name = frame_name
+	frame_root.transform.origin = center + Vector3(0, 0, FRAME_Z_OFFSET)
+	parent.add_child(frame_root)
+
+	var frame_mat := _make_frame_material()
+	var horizontal_width: float = maxf(width, FRAME_BAR_THICKNESS)
+	var vertical_height: float = maxf(height - FRAME_BAR_THICKNESS * 2.0, FRAME_BAR_THICKNESS)
+	var segments := [
+		{ "size": Vector3(horizontal_width, FRAME_BAR_THICKNESS, FRAME_BAR_DEPTH), "pos": Vector3(0, height * 0.5 - FRAME_BAR_THICKNESS * 0.5, 0) },
+		{ "size": Vector3(horizontal_width, FRAME_BAR_THICKNESS, FRAME_BAR_DEPTH), "pos": Vector3(0, -height * 0.5 + FRAME_BAR_THICKNESS * 0.5, 0) },
+		{ "size": Vector3(FRAME_BAR_THICKNESS, vertical_height, FRAME_BAR_DEPTH), "pos": Vector3(-width * 0.5 + FRAME_BAR_THICKNESS * 0.5, 0, 0) },
+		{ "size": Vector3(FRAME_BAR_THICKNESS, vertical_height, FRAME_BAR_DEPTH), "pos": Vector3(width * 0.5 - FRAME_BAR_THICKNESS * 0.5, 0, 0) },
+	]
+	for i in segments.size():
+		var mesh_instance := MeshInstance3D.new()
+		mesh_instance.name = "%s_%d" % [frame_name, i]
+		var box := BoxMesh.new()
+		box.size = segments[i]["size"]
+		mesh_instance.mesh = box
+		mesh_instance.material_override = frame_mat
+		mesh_instance.transform.origin = segments[i]["pos"]
+		frame_root.add_child(mesh_instance)
+
+
+func _add_small_label(c: Node3D, text_value: String, pos: Vector3, size: int, color_value: Color) -> void:
+	var lbl := Label3D.new()
+	lbl.text = text_value
+	lbl.font_size = size
+	lbl.pixel_size = 0.00045
+	lbl.width = 1200
+	lbl.modulate = color_value
+	lbl.outline_size = 3
+	lbl.outline_modulate = Color(0, 0, 0, 0.9)
+	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	lbl.transform.origin = pos
+	c.add_child(lbl)
 
 
 func _add_title():

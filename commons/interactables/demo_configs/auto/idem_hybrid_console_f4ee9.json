@@ -1,61 +1,67 @@
 {
   "demo_info": {
-    "name": "Passive Matrix c23ea",
-    "description": "Auto-generated passive_matrix board composed from the InteractableDemo vocabulary.",
-    "family": "passive_matrix",
+    "name": "Hybrid Console f4ee9",
+    "description": "Auto-generated hybrid_console board composed from the InteractableDemo vocabulary.",
+    "family": "hybrid_console",
     "auto_generated": true,
-    "auto_score": 59.53,
+    "auto_score": 89.75,
     "selection_rank": 1
   },
   "titles": {
-    "main": "PASSIVE MATRIX",
+    "main": "HYBRID CONSOLE",
     "row2": "PASSIVE + MONITORS",
     "row3": "COMPOUND ARRANGEMENTS",
     "row4": "PROTOTYPE MODULES"
   },
   "layout": {
     "panel_color": [
-      0.56,
-      0.64,
-      0.61,
+      0.66,
+      0.69,
+      0.72,
       1.0
     ],
     "frame_color": [
-      0.16,
-      0.2,
-      0.19,
+      0.18,
+      0.22,
+      0.27,
       1.0
     ],
     "accent_color": [
-      0.27,
-      0.73,
-      0.9,
+      0.94,
+      0.48,
+      0.19,
       1.0
     ],
     "dark_color": [
-      0.06,
+      0.07,
       0.08,
-      0.08,
+      0.1,
       1.0
     ],
     "cream_color": [
-      0.77,
-      0.81,
-      0.79,
+      0.82,
+      0.84,
+      0.88,
       1.0
     ],
-    "spacing": 0.26,
+    "spacing": 0.291,
     "control_z": 0.02,
     "label_y_offset": -0.18,
-    "row_y": 1.07,
-    "row2_y": 0.674,
-    "row3_y": 0.257,
-    "row4_y": -0.155
+    "row_y": 1.11,
+    "row2_y": 0.651,
+    "row3_y": 0.183,
+    "row4_y": -0.298,
+    "show_hand_scale_guides": false
   },
   "controls": [
     {
-      "scene": "res://commons/interactables/lever_smooth.tscn",
-      "label": "LEVER",
+      "scene": "res://commons/interactables/slider_plane.tscn",
+      "label": "XY PAD",
+      "y": -0.05
+    },
+    {
+      "scene": "res://commons/interactables/dial_smooth.tscn",
+      "label": "KNOB",
       "y": 0.0
     },
     {
@@ -76,16 +82,15 @@
   ],
   "extra_buttons": [
     {
+      "type": "rect_sm",
+      "label": "RECT SM"
+    },
+    {
       "type": "rect_tall",
       "label": "RECT TALL"
     }
   ],
   "passive_elements": [
-    {
-      "builder": "build_speaker_dots",
-      "label": "SPEAKER DOTS",
-      "width": 1
-    },
     {
       "monitor": "lissajous",
       "slots": 2,
@@ -93,46 +98,51 @@
       "width": 2
     },
     {
-      "builder": "build_vu_meter_h",
-      "label": "VU METER H",
-      "width": 1
+      "monitor": "spectrum",
+      "slots": 2,
+      "label": "SPECTRUM",
+      "width": 2
     },
     {
       "builder": "build_vu_meter_v",
       "label": "VU METER V",
       "width": 1
-    },
-    {
-      "monitor": "scope",
-      "slots": 3,
-      "label": "SCOPE WIDE",
-      "width": 3
     }
   ],
   "compounds": [
-    {
-      "type": "monitor_sliders",
-      "count": 3,
-      "label": "MONITOR+SLIDERS",
-      "width": 2
-    },
     {
       "type": "sliders_v",
       "count": 3,
       "label": "3x SLIDER V",
       "width": 2
+    },
+    {
+      "type": "sliders_v",
+      "count": 2,
+      "label": "2x SLIDER V",
+      "width": 2
     }
   ],
   "new_modules": [
+    {
+      "type": "text_static_2",
+      "label": "TEXT 2",
+      "width": 2
+    },
     {
       "type": "rotary_selector",
       "label": "ROTARY\nSELECTOR",
       "width": 1
     },
     {
-      "type": "text_static_2",
-      "label": "TEXT 2",
-      "width": 2
+      "type": "text_static_1",
+      "label": "TEXT 1",
+      "width": 1
+    },
+    {
+      "type": "text_scroll_1",
+      "label": "SCROLL 1",
+      "width": 1
     }
   ]
 }

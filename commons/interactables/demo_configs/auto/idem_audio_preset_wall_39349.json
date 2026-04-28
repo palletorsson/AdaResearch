@@ -1,0 +1,163 @@
+{
+  "demo_info": {
+    "name": "Audio Preset Wall 39349",
+    "description": "Auto-generated audio_preset_wall board composed from the InteractableDemo vocabulary.",
+    "family": "audio_preset_wall",
+    "auto_generated": true,
+    "auto_score": 32.69,
+    "selection_rank": 1
+  },
+  "titles": {
+    "main": "AUDIO PRESET WALL",
+    "row2": "SIGNAL METERS + MONITORS",
+    "row3": "CONTROL BANKS",
+    "row4": "AUDIO MAP TOKENS + RACK PRESETS"
+  },
+  "layout": {
+    "panel_color": [
+      0.78,
+      0.75,
+      0.67,
+      1.0
+    ],
+    "frame_color": [
+      0.25,
+      0.23,
+      0.2,
+      1.0
+    ],
+    "accent_color": [
+      0.75,
+      0.38,
+      0.13,
+      1.0
+    ],
+    "dark_color": [
+      0.1,
+      0.1,
+      0.1,
+      1.0
+    ],
+    "cream_color": [
+      0.78,
+      0.75,
+      0.67,
+      1.0
+    ],
+    "spacing": 0.299,
+    "control_z": 0.02,
+    "label_y_offset": -0.18,
+    "row_y": 1.085,
+    "row2_y": 0.692,
+    "row3_y": 0.238,
+    "row4_y": -0.212,
+    "show_hand_scale_guides": false
+  },
+  "controls": [
+    {
+      "scene": "res://commons/interactables/slider_smooth.tscn",
+      "label": "SLIDER V",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_zero.tscn",
+      "label": "ZERO",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_snap.tscn",
+      "label": "SNAP",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_plane.tscn",
+      "label": "XY PAD",
+      "y": -0.05
+    }
+  ],
+  "extra_buttons": [
+    {
+      "type": "rect_sm",
+      "label": "RECT SM"
+    }
+  ],
+  "passive_elements": [
+    {
+      "monitor": "scope",
+      "slots": 3,
+      "label": "SCOPE WIDE",
+      "width": 3
+    },
+    {
+      "monitor": "scope",
+      "slots": 2,
+      "label": "SCOPE",
+      "width": 2
+    }
+  ],
+  "compounds": [
+    {
+      "type": "sliders_h",
+      "count": 3,
+      "label": "3x SLIDER H",
+      "width": 2
+    },
+    {
+      "type": "sliders_v",
+      "count": 2,
+      "label": "2x SLIDER V",
+      "width": 2
+    }
+  ],
+  "new_modules": [
+    {
+      "type": "touch_grid",
+      "label": "TOUCH\nGRID",
+      "width": 1
+    },
+    {
+      "type": "rack_scene_preset",
+      "config": "rack_ambient_drone",
+      "scene": "res://commons/audio/rack_presets/rack_ambient_drone.tscn",
+      "sound": "AMBIENT DRONE",
+      "label": "AMBIENT\nDRONE",
+      "width": 3,
+      "modules": 6
+    },
+    {
+      "type": "live_audio_controller",
+      "preset": "full_studio",
+      "token": "AudioContr:180#preset:full_studio",
+      "label": "LIVE\nSTUDIO",
+      "width": 4,
+      "live_scale": 0.3
+    },
+    {
+      "type": "audio_controller_preset",
+      "preset": "template_showcase",
+      "token": "AudioContr:90:0.1:0.9#preset:template_showcase",
+      "label": "TEMPLATE\nSHOW",
+      "width": 3,
+      "knobs": 3,
+      "sliders": 2
+    },
+    {
+      "type": "audio_controller_preset",
+      "preset": "basic_mono",
+      "token": "AudioContr:-90#preset:basic_mono",
+      "label": "BASIC\nMONO",
+      "width": 3,
+      "knobs": 2,
+      "sliders": 2
+    },
+    {
+      "type": "audio_controller_preset",
+      "preset": "interface_prototypes",
+      "token": "AudioContr#preset:interface_prototypes#hide_selection:true",
+      "label": "INTERFACE\nPRESET",
+      "width": 3,
+      "knobs": 4,
+      "sliders": 1
+    }
+  ]
+}

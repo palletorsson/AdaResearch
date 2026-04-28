@@ -1,0 +1,191 @@
+{
+  "demo_info": {
+    "name": "Audio Install Console ad6ca",
+    "description": "Auto-generated audio_install_console board composed from the InteractableDemo vocabulary.",
+    "family": "audio_install_console",
+    "auto_generated": true,
+    "auto_score": 37.18,
+    "selection_rank": 1
+  },
+  "titles": {
+    "main": "AUDIO INSTALL CONSOLE",
+    "row2": "SIGNAL METERS + MONITORS",
+    "row3": "CONTROL BANKS",
+    "row4": "AUDIO MAP TOKENS + RACK PRESETS"
+  },
+  "layout": {
+    "panel_color": [
+      0.66,
+      0.69,
+      0.72,
+      1.0
+    ],
+    "frame_color": [
+      0.18,
+      0.22,
+      0.27,
+      1.0
+    ],
+    "accent_color": [
+      0.94,
+      0.48,
+      0.19,
+      1.0
+    ],
+    "dark_color": [
+      0.07,
+      0.08,
+      0.1,
+      1.0
+    ],
+    "cream_color": [
+      0.82,
+      0.84,
+      0.88,
+      1.0
+    ],
+    "spacing": 0.259,
+    "control_z": 0.02,
+    "label_y_offset": -0.18,
+    "row_y": 1.076,
+    "row2_y": 0.625,
+    "row3_y": 0.221,
+    "row4_y": -0.217,
+    "show_hand_scale_guides": false
+  },
+  "controls": [
+    {
+      "scene": "res://commons/interactables/slider_horizontal.tscn",
+      "label": "SLIDER H",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/joystick_smooth.tscn",
+      "label": "JOYSTICK",
+      "y": -0.05
+    },
+    {
+      "scene": "res://commons/interactables/slider_zero.tscn",
+      "label": "ZERO",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/push_button_front.tscn",
+      "label": "BUTTON\nFRONT",
+      "y": 0.0,
+      "rot_y": 180.0
+    },
+    {
+      "scene": "res://commons/interactables/push_button.tscn",
+      "label": "BUTTON",
+      "y": 0.0
+    },
+    {
+      "scene": "res://commons/interactables/slider_plane.tscn",
+      "label": "XY PAD",
+      "y": -0.05
+    },
+    {
+      "scene": "res://commons/interactables/wheel_smooth.tscn",
+      "label": "WHEEL",
+      "y": 0.0
+    }
+  ],
+  "extra_buttons": [
+    {
+      "type": "toggle",
+      "label": "TOGGLE"
+    },
+    {
+      "type": "rect_sm",
+      "label": "RECT SM"
+    },
+    {
+      "type": "rect_wide",
+      "label": "RECT WIDE"
+    }
+  ],
+  "passive_elements": [
+    {
+      "builder": "build_speaker_lines",
+      "label": "SPEAKER LINES",
+      "width": 1
+    },
+    {
+      "monitor": "scope",
+      "slots": 2,
+      "label": "SCOPE",
+      "width": 2
+    },
+    {
+      "monitor": "lissajous",
+      "slots": 2,
+      "label": "LISSAJOUS",
+      "width": 2
+    },
+    {
+      "monitor": "spectrum",
+      "slots": 2,
+      "label": "SPECTRUM",
+      "width": 2
+    }
+  ],
+  "compounds": [
+    {
+      "type": "meters_v",
+      "count": 3,
+      "label": "3x METERS",
+      "width": 1
+    },
+    {
+      "type": "speaker_meters",
+      "count": 2,
+      "label": "SPEAKER+METERS",
+      "width": 2
+    }
+  ],
+  "new_modules": [
+    {
+      "type": "audio_controller_preset",
+      "preset": "full_studio",
+      "token": "AudioContr:180#preset:full_studio",
+      "label": "FULL\nSTUDIO",
+      "width": 3,
+      "knobs": 4,
+      "sliders": 3
+    },
+    {
+      "type": "needle_meter",
+      "label": "NEEDLE\nMETER",
+      "width": 1
+    },
+    {
+      "type": "rack_scene_preset",
+      "config": "rack_sine_basic",
+      "scene": "res://commons/audio/rack_presets/rack_sine_basic.tscn",
+      "sound": "SINE BASIC",
+      "label": "SINE\nBASIC",
+      "width": 3,
+      "modules": 3
+    },
+    {
+      "type": "rotary_selector",
+      "label": "ROTARY\nSELECTOR",
+      "width": 1
+    },
+    {
+      "type": "live_audio_controller",
+      "preset": "interface_prototypes",
+      "token": "AudioContr#preset:interface_prototypes#hide_selection:true",
+      "label": "LIVE\nINTERFACE",
+      "width": 4,
+      "live_scale": 0.32
+    },
+    {
+      "type": "audio_token_strip",
+      "token": "AudioContr#config:synth_rack#sound:pickup_mario#autoplay:true",
+      "label": "MAP TOKEN",
+      "width": 3
+    }
+  ]
+}

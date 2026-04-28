@@ -108,6 +108,10 @@ var _auto_save_timer: Timer
 var _auto_save_interval: float = 2.0
 
 const RACK_CONFIG_BASE_PATH = "res://commons/audio/rack_configs/"
+const MIN_AUDIO_BOARD_WIDTH := 1.0
+const MIN_AUDIO_BOARD_HEIGHT := 0.82
+const CELL_FRAME_THICKNESS := 0.006
+const CELL_FRAME_DEPTH := 0.004
 
 func _ready():
 	# Setup dedicated audio bus for this rack
@@ -619,6 +623,7 @@ func _spawn_controls_from_json():
 			cell_mesh.material_override = cell_bg_mat
 			cell_mesh.transform.origin = Vector3(cell_pos.x, cell_pos.y, 0.003)
 			parameter_container.add_child(cell_mesh)
+			_add_control_cell_frame(parameter_container, cell_pos, cell_size)
 
 		var control = _instantiate_control(control_type, control_id)
 		if not control:
@@ -674,8 +679,8 @@ func _build_eurorack_frame(content_w: float, content_h: float) -> void:
 	var side_w := 0.016
 	var pad := 0.015  # padding around content
 
-	var total_w := content_w + pad * 2
-	var total_h := content_h + pad * 2
+	var total_w: float = maxf(content_w + pad * 2, MIN_AUDIO_BOARD_WIDTH)
+	var total_h: float = maxf(content_h + pad * 2, MIN_AUDIO_BOARD_HEIGHT)
 
 	# ── Chrome rails (top and bottom) ──
 	var rail_mat := StandardMaterial3D.new()
@@ -754,8 +759,8 @@ func _build_eurorack_frame(content_w: float, content_h: float) -> void:
 ## Build dark metallic module panel behind all controls with accent stripe.
 func _build_module_panel(content_w: float, content_h: float) -> void:
 	var pad := 0.012
-	var panel_w := content_w + pad * 2
-	var panel_h := content_h + pad * 2
+	var panel_w: float = maxf(content_w + pad * 2, MIN_AUDIO_BOARD_WIDTH - 0.04)
+	var panel_h: float = maxf(content_h + pad * 2, MIN_AUDIO_BOARD_HEIGHT - 0.06)
 
 	# Dark panel face
 	var panel_mat := StandardMaterial3D.new()
@@ -823,6 +828,37 @@ func _build_module_panel(content_w: float, content_h: float) -> void:
 		mi.transform.origin = Vector3(pos.x, pos.y, 0.005)
 		mi.rotation_degrees.x = 90
 		parameter_container.add_child(mi)
+
+
+func _add_control_cell_frame(parent: Node3D, cell_pos: Vector3, cell_size: Vector2) -> void:
+	var frame := Node3D.new()
+	frame.name = "CellFrame"
+	frame.transform.origin = Vector3(cell_pos.x, cell_pos.y, 0.008)
+	parent.add_child(frame)
+
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.18, 0.20, 0.23)
+	mat.metallic = 0.3
+	mat.roughness = 0.68
+
+	var width: float = cell_size.x + 0.016
+	var height: float = cell_size.y + 0.016
+	var vertical_height: float = maxf(height - CELL_FRAME_THICKNESS * 2.0, CELL_FRAME_THICKNESS)
+	var segments := [
+		{ "size": Vector3(width, CELL_FRAME_THICKNESS, CELL_FRAME_DEPTH), "pos": Vector3(0, height * 0.5 - CELL_FRAME_THICKNESS * 0.5, 0) },
+		{ "size": Vector3(width, CELL_FRAME_THICKNESS, CELL_FRAME_DEPTH), "pos": Vector3(0, -height * 0.5 + CELL_FRAME_THICKNESS * 0.5, 0) },
+		{ "size": Vector3(CELL_FRAME_THICKNESS, vertical_height, CELL_FRAME_DEPTH), "pos": Vector3(-width * 0.5 + CELL_FRAME_THICKNESS * 0.5, 0, 0) },
+		{ "size": Vector3(CELL_FRAME_THICKNESS, vertical_height, CELL_FRAME_DEPTH), "pos": Vector3(width * 0.5 - CELL_FRAME_THICKNESS * 0.5, 0, 0) },
+	]
+	for i in segments.size():
+		var mi := MeshInstance3D.new()
+		mi.name = "CellFrame_%d" % i
+		var box := BoxMesh.new()
+		box.size = segments[i]["size"]
+		mi.mesh = box
+		mi.material_override = mat
+		mi.transform.origin = segments[i]["pos"]
+		frame.add_child(mi)
 
 
 ## Get accent color from rack config sound type
