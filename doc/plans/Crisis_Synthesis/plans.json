@@ -1,0 +1,68 @@
+{
+  "name": "Crisis_Synthesis",
+  "title": "The Edge Is the Engine",
+  "description": "The foundations crisis revealed: every formal system has limits. Self-reference creates edges. Contradictions can coexist. The territory exceeds any map.",
+  "dimensions": {
+    "rows": 18,
+    "cols": 17
+  },
+  "n_artifacts": 8,
+  "spawn": [
+    0,
+    0
+  ],
+  "teleport": [
+    16,
+    8
+  ],
+  "artifacts": [
+    {
+      "name": "godel_statement_plaque",
+      "row": 3,
+      "col": 4,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "russell_set_box",
+      "row": 3,
+      "col": 12,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "qfep_formula_3d",
+      "row": 8,
+      "col": 8,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "lambda_slider",
+      "row": 11,
+      "col": 6,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "phi_slider",
+      "row": 11,
+      "col": 10,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "escher_staircase",
+      "row": 13,
+      "col": 4,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "bifurcation_diagram",
+      "row": 13,
+      "col": 8,
+      "family": "substrate_vectors"
+    },
+    {
+      "name": "florensky_sphere",
+      "row": 13,
+      "col": 12,
+      "family": "substrate_vectors"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Fold_Theatre",
+  "title": "The Fold Theatre",
+  "description": "The F-edge first cycle. Substrate cycles between Wolfram Rule 30, Sierpinski, and Menger sponge expressions on the same floor; subdivision intensifies where the player looks; flower-grammar paints concentric anatomy in petal/sepal/stamen/pistil colour bands; the path from spawn to teleporter is guaranteed by PATH_GUARANTEE. Same map, three foldings of the same algorithm, the same body walking through.",
+  "dimensions": {
+    "rows": 17,
+    "cols": 13
+  },
+  "n_artifacts": 1,
+  "spawn": [
+    0,
+    2
+  ],
+  "teleport": [
+    15,
+    10
+  ],
+  "artifacts": [
+    {
+      "name": "fold_theatre_runner",
+      "row": 7,
+      "col": 6,
+      "family": "cellular_automata"
+    }
+  ]
+}

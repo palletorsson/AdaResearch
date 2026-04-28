@@ -1,0 +1,43 @@
+{
+  "map": "QFEP_Synthesis",
+  "edge": "F",
+  "shots": {
+    "above": "plate_critique_shots\\QFEP_Synthesis\\above.png",
+    "front": "plate_critique_shots\\QFEP_Synthesis\\front.png",
+    "left": "plate_critique_shots\\QFEP_Synthesis\\left.png",
+    "right": "plate_critique_shots\\QFEP_Synthesis\\right.png",
+    "back": "plate_critique_shots\\QFEP_Synthesis\\back.png"
+  },
+  "result": {
+    "model": "claude-sonnet-4-5",
+    "critique": {
+      "score": 2,
+      "verdict": "misreads as integration",
+      "paragraph": "This plate reads as synthesis/integration (Edge K or L) rather than folding (Edge F). The four spheres distributed around a central specimen argue for 'bringing components together,' not 'one algorithm becoming another.' The queer_morphology_specimen is visually striking but appears as a single static form, not as a lifecycle strip showing egg \u2192 larva \u2192 imago transformation. The spatial grammar is symmetric and geometric \u2014 collect four terms, assemble at center \u2014 which is classic integration logic. Edge F requires visible metamorphosis: the same substrate at multiple stages, with the fold moment legible in space or time.",
+      "strengths": [
+        "The queer_morphology_specimen has organic, transformational visual character",
+        "Text 'THE EARTH OF BECOMING' signals metamorphosis linguistically",
+        "The four spheres create a clear spatial collection task",
+        "The central specimen is visually distinctive and draws the eye"
+      ],
+      "weaknesses": [
+        "No visible lifecycle strip \u2014 the specimen appears once, not as three stages of transformation",
+        "Spatial arrangement is symmetric/radial, not sequential/temporal as Merian's lifecycle plates are",
+        "The four spheres suggest assembly (gather terms, build formula) not folding (one principle becomes another)",
+        "Missing the algorithmic fold \u2014 no Rule 30 \u2192 Sierpinski \u2192 BFS floor transformation as the edge sketch proposes",
+        "The formula and specimen are static; folding requires visible process or stages",
+        "The map reads as 'mastery through integration' not 'transformation through folding'"
+      ],
+      "next_gen_hints": [
+        "Replace the single morphology specimen with three versions along a linear path \u2014 egg (simple), larva (intermediate), imago (complex) \u2014 same form family, graduated stages",
+        "Make the floor pattern fold algorithmically as you walk: Rule 30 cells near spawn, Sierpinski triangles mid-path, BFS frontier near exit",
+        "Position the four spheres along the lifecycle strip, not in symmetric corners \u2014 collect F at egg stage, E at larva, \u03bb and \u03c6 at imago",
+        "Change platform layout from radial (integration) to linear strip (transformation) \u2014 carousel or Merian-style horizontal lifecycle band",
+        "Add visual continuity between the three stages: same color gradient, same wireframe style, but increasing complexity",
+        "Make the formula appear/transform progressively as you walk the strip, not sit complete at the center \u2014 the equation itself should fold"
+      ],
+      "edge_reads_as": "K (Integration)"
+    },
+    "raw": "```json\n{\n  \"score\": 2,\n  \"verdict\": \"misreads as integration\",\n  \"paragraph\": \"This plate reads as synthesis/integration (Edge K or L) rather than folding (Edge F). The four spheres distributed around a central specimen argue for 'bringing components together,' not 'one algorithm becoming another.' The queer_morphology_specimen is visually striking but appears as a single static form, not as a lifecycle strip showing egg \u2192 larva \u2192 imago transformation. The spatial grammar is symmetric and geometric \u2014 collect four terms, assemble at center \u2014 which is classic integration logic. Edge F requires visible metamorphosis: the same substrate at multiple stages, with the fold moment legible in space or time.\",\n  \"strengths\": [\n    \"The queer_morphology_specimen has organic, transformational visual character\",\n    \"Text 'THE EARTH OF BECOMING' signals metamorphosis linguistically\",\n    \"The four spheres create a clear spatial collection task\",\n    \"The central specimen is visually distinctive and draws the eye\"\n  ],\n  \"weaknesses\": [\n    \"No visible lifecycle strip \u2014 the specimen appears once, not as three stages of transformation\",\n    \"Spatial arrangement is symmetric/radial, not sequential/temporal as Merian's lifecycle plates are\",\n    \"The four spheres suggest assembly (gather terms, build formula) not folding (one principle becomes another)\",\n    \"Missing the algorithmic fold \u2014 no Rule 30 \u2192 Sierpinski \u2192 BFS floor transformation as the edge sketch proposes\",\n    \"The formula and specimen are static; folding requires visible process or stages\",\n    \"The map reads as 'mastery through integration' not 'transformation through folding'\"\n  ],\n  \"next_gen_hints\": [\n    \"Replace the single morphology specimen with three versions along a linear path \u2014 egg (simple), larva (intermediate), imago (complex) \u2014 same form family, graduated stages\",\n    \"Make the floor pattern fold algorithmically as you walk: Rule 30 cells near spawn, Sierpinski triangles mid-path, BFS frontier near exit"
+  }
+}

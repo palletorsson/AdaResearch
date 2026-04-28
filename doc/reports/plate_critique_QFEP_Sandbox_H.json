@@ -1,0 +1,40 @@
+{
+  "map": "QFEP_Sandbox",
+  "edge": "H",
+  "shots": {
+    "above": "plate_critique_shots\\QFEP_Sandbox\\above.png",
+    "front": "plate_critique_shots\\QFEP_Sandbox\\front.png",
+    "left": "plate_critique_shots\\QFEP_Sandbox\\left.png",
+    "right": "plate_critique_shots\\QFEP_Sandbox\\right.png",
+    "back": "plate_critique_shots\\QFEP_Sandbox\\back.png"
+  },
+  "result": {
+    "model": "claude-sonnet-4-5",
+    "critique": {
+      "score": 2,
+      "verdict": "reads as parameterization, not apparatus-as-phenomenon",
+      "paragraph": "The map reads as an interactive control panel operating on a separate simulation, not as an apparatus that constitutively makes the phenomenon it measures. Edge H requires the apparatus and the phenomenon to be visibly the same thing \u2014 'the path is the apparatus' \u2014 but here the sliders (apparatus) and reactor (phenomenon) are spatially and conceptually separate objects. From any angle, the wireframe reactor appears as static geometry being controlled, not as something being enacted by the act of observation. The visual grammar says 'parameter \u2192 response' (Edge C) rather than 'measurement makes the measured' (Edge H).",
+      "strengths": [
+        "Central reactor is visually prominent and reads clearly from all angles",
+        "Particle systems provide visible responsive behavior",
+        "Spatial separation of control elements from simulation creates clear legibility"
+      ],
+      "weaknesses": [
+        "Apparatus (sliders) and phenomenon (reactor/particles) are separate objects, not constitutively entangled",
+        "No pathway-dependent reading \u2014 all elements visible simultaneously from above; no 'walk one path: wave, walk another: particle' grammar",
+        "Reactor appears as static wireframe geometry rather than something being made by measurement",
+        "Visual grammar reads as external control (sliders affect reactor) rather than observer-observed co-constitution",
+        "No visible indication that the learner's position or path enacts the apparatus cut"
+      ],
+      "next_gen_hints": [
+        "Make reactor form morph based on viewer position \u2014 west approach crystallizes it, east approach dissolves it; the path literally is the apparatus",
+        "Remove sliders entirely; let learner's spatial position (x,y on floor) implicitly set \u03bb and \u03c6 \u2014 standing becomes measuring",
+        "Add three 'measurement stations' at different grid positions; standing at each station produces a different visual reading of the same central phenomenon (wave/particle/field)",
+        "Make particles trace visible beams from learner position to reactor \u2014 the observation ray is part of the diagram",
+        "Split reactor into two overlaid forms (crystalline + chaotic) with position-dependent opacity \u2014 apparatus-cut makes one real and other virtual"
+      ],
+      "edge_reads_as": "C (Parameterization)"
+    },
+    "raw": "```json\n{\n  \"score\": 2,\n  \"verdict\": \"reads as parameterization, not apparatus-as-phenomenon\",\n  \"paragraph\": \"The map reads as an interactive control panel operating on a separate simulation, not as an apparatus that constitutively makes the phenomenon it measures. Edge H requires the apparatus and the phenomenon to be visibly the same thing \u2014 'the path is the apparatus' \u2014 but here the sliders (apparatus) and reactor (phenomenon) are spatially and conceptually separate objects. From any angle, the wireframe reactor appears as static geometry being controlled, not as something being enacted by the act of observation. The visual grammar says 'parameter \u2192 response' (Edge C) rather than 'measurement makes the measured' (Edge H).\",\n  \"strengths\": [\n    \"Central reactor is visually prominent and reads clearly from all angles\",\n    \"Particle systems provide visible responsive behavior\",\n    \"Spatial separation of control elements from simulation creates clear legibility\"\n  ],\n  \"weaknesses\": [\n    \"Apparatus (sliders) and phenomenon (reactor/particles) are separate objects, not constitutively entangled\",\n    \"No pathway-dependent reading \u2014 all elements visible simultaneously from above; no 'walk one path: wave, walk another: particle' grammar\",\n    \"Reactor appears as static wireframe geometry rather than something being made by measurement\",\n    \"Visual grammar reads as external control (sliders affect reactor) rather than observer-observed co-constitution\",\n    \"No visible indication that the learner's position or path enacts the apparatus cut\"\n  ],\n  \"next_gen_hints\": [\n    \"Make reactor form morph based on viewer position \u2014 west approach crystallizes it, east approach dissolves it; the path literally is the apparatus\",\n    \"Remove sliders entirely; let learner's spatial position (x,y on floor) implicitly set \u03bb and \u03c6 \u2014 standing becomes measuring\",\n    \"Add three 'measurement stations' at different grid positions; standing at each station produces a different visual rea"
+  }
+}

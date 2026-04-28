@@ -1,0 +1,43 @@
+{
+  "map": "PostCrisis_Synthesis",
+  "edge": "M",
+  "shots": {
+    "above": "plate_critique_shots\\PostCrisis_Synthesis\\above.png",
+    "front": "plate_critique_shots\\PostCrisis_Synthesis\\front.png",
+    "left": "plate_critique_shots\\PostCrisis_Synthesis\\left.png",
+    "right": "plate_critique_shots\\PostCrisis_Synthesis\\right.png",
+    "back": "plate_critique_shots\\PostCrisis_Synthesis\\back.png"
+  },
+  "result": {
+    "model": "claude-sonnet-4-5",
+    "critique": {
+      "score": 1,
+      "verdict": "misreads",
+      "paragraph": "This map teaches synthesis and retrospective organization, not authenticity collapse. It presents a clean museum of labeled methodologies \u2014 rhizome, commons, molecular design \u2014 with explicit categorization and no ambiguity. Edge M requires specimens of indeterminate provenance, forensic investigation, and the experience of not being able to tell (or of the question itself dissolving). Instead, this plate offers clarity, labels, and categorical organization. The visual grammar reads as 'gallery of approaches' not 'collapse of distinction.' The map may be an excellent capstone for its sequence, but it does not engage the real/synthetic edge at all.",
+      "strengths": [
+        "Clear spatial organization with distinct stations creates navigable conceptual space",
+        "Miniature displays of prior maps provide effective retrospective framing",
+        "Central plinth establishes focal hierarchy",
+        "Surrounding darkness isolates and emphasizes the conceptual architecture"
+      ],
+      "weaknesses": [
+        "Zero engagement with provenance, authenticity, or real/synthetic distinction",
+        "Everything is explicitly labeled and categorized \u2014 opposite of Edge M's ambiguity requirement",
+        "No specimens to examine, no forensic tools, no investigative mechanics",
+        "No moment where the player cannot tell or where the question itself shifts",
+        "Reads as a foundations-crisis synthesis map, not an authenticity-collapse teaching"
+      ],
+      "next_gen_hints": [
+        "Replace all labeled stations with five unlabeled specimens (text fragments, visual works, code samples, recipes, sounds)",
+        "Provide forensic investigation tools: pattern analyzer, authorship detector, training-data tracer",
+        "Remove explicit labels entirely \u2014 make provenance the investigation, not the given",
+        "Design 2-3 specimens to be genuinely indeterminate: model-assisted human work, human-curated model output, mixed provenance",
+        "End with a reflection panel asking: 'Did wanting to know change how you read? Does the answer matter?'",
+        "Consider moving this map to Edge K (Incompleteness) or F (Transformation) where synthesis/retrospective fits better",
+        "If keeping for Edge M: introduce the Steyerl/Paglen framing \u2014 show works where the question of authenticity has already collapsed"
+      ],
+      "edge_reads_as": "unclear"
+    },
+    "raw": "```json\n{\n  \"score\": 1,\n  \"verdict\": \"misreads\",\n  \"paragraph\": \"This map teaches synthesis and retrospective organization, not authenticity collapse. It presents a clean museum of labeled methodologies \u2014 rhizome, commons, molecular design \u2014 with explicit categorization and no ambiguity. Edge M requires specimens of indeterminate provenance, forensic investigation, and the experience of not being able to tell (or of the question itself dissolving). Instead, this plate offers clarity, labels, and categorical organization. The visual grammar reads as 'gallery of approaches' not 'collapse of distinction.' The map may be an excellent capstone for its sequence, but it does not engage the real/synthetic edge at all.\",\n  \"strengths\": [\n    \"Clear spatial organization with distinct stations creates navigable conceptual space\",\n    \"Miniature displays of prior maps provide effective retrospective framing\",\n    \"Central plinth establishes focal hierarchy\",\n    \"Surrounding darkness isolates and emphasizes the conceptual architecture\"\n  ],\n  \"weaknesses\": [\n    \"Zero engagement with provenance, authenticity, or real/synthetic distinction\",\n    \"Everything is explicitly labeled and categorized \u2014 opposite of Edge M's ambiguity requirement\",\n    \"No specimens to examine, no forensic tools, no investigative mechanics\",\n    \"No moment where the player cannot tell or where the question itself shifts\",\n    \"Reads as a foundations-crisis synthesis map, not an authenticity-collapse teaching\"\n  ],\n  \"next_gen_hints\": [\n    \"Replace all labeled stations with five unlabeled specimens (text fragments, visual works, code samples, recipes, sounds)\",\n    \"Provide forensic investigation tools: pattern analyzer, authorship detector, training-data tracer\",\n    \"Remove explicit labels entirely \u2014 make provenance the investigation, not the given\",\n    \"Design 2-3 specimens to be genuinely indeterminate: model-assisted human work, human-curated model output, mixed provenance\",\n    \"End with a reflec"
+  }
+}
