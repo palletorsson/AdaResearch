@@ -1,0 +1,1097 @@
+{
+  "sequences": {
+    "bodyprogression": [
+      {
+        "map": "BodyProg_Hands",
+        "existing": [
+          "color_picker",
+          "mirror_artifact"
+        ],
+        "proposals": [
+          {
+            "id": "necklace_anchor",
+            "family": "procgen_extra",
+            "sim": 0.747,
+            "anchor": "mirror_artifact"
+          },
+          {
+            "id": "dress_selector",
+            "family": "procgen_extra",
+            "sim": 0.694,
+            "anchor": "mirror_artifact"
+          },
+          {
+            "id": "implicit_surface_modeling",
+            "family": "procgen_extra",
+            "sim": 0.535,
+            "anchor": "mirror_artifact"
+          },
+          {
+            "id": "modernistchairgallery",
+            "family": "procgen_extra",
+            "sim": 0.533,
+            "anchor": "mirror_artifact"
+          },
+          {
+            "id": "torso_estimation_vis",
+            "family": "procgen_extra",
+            "sim": 0.531,
+            "anchor": "mirror_artifact"
+          },
+          {
+            "id": "ik_arm_demo",
+            "family": "procgen_extra",
+            "sim": 0.51,
+            "anchor": "mirror_artifact"
+          }
+        ]
+      },
+      {
+        "map": "BodyProg_Necklace",
+        "existing": [
+          "necklace_anchor"
+        ],
+        "proposals": [
+          {
+            "id": "dress_selector",
+            "family": "procgen_extra",
+            "sim": 0.836,
+            "anchor": "necklace_anchor"
+          },
+          {
+            "id": "mirror_artifact",
+            "family": "procgen_extra",
+            "sim": 0.747,
+            "anchor": "necklace_anchor"
+          },
+          {
+            "id": "torso_estimation_vis",
+            "family": "procgen_extra",
+            "sim": 0.681,
+            "anchor": "necklace_anchor"
+          },
+          {
+            "id": "ik_arm_demo",
+            "family": "procgen_extra",
+            "sim": 0.598,
+            "anchor": "necklace_anchor"
+          },
+          {
+            "id": "romanesco",
+            "family": "procgen_extra",
+            "sim": 0.571,
+            "anchor": "necklace_anchor"
+          },
+          {
+            "id": "GeneticProgramming",
+            "family": "procgen_extra",
+            "sim": 0.565,
+            "anchor": "necklace_anchor"
+          }
+        ]
+      },
+      {
+        "map": "BodyProg_Arms",
+        "existing": [
+          "ik_arm_demo"
+        ],
+        "proposals": [
+          {
+            "id": "torso_estimation_vis",
+            "family": "procgen_extra",
+            "sim": 0.858,
+            "anchor": "ik_arm_demo"
+          },
+          {
+            "id": "dress_selector",
+            "family": "procgen_extra",
+            "sim": 0.683,
+            "anchor": "ik_arm_demo"
+          },
+          {
+            "id": "necklace_anchor",
+            "family": "procgen_extra",
+            "sim": 0.598,
+            "anchor": "ik_arm_demo"
+          },
+          {
+            "id": "fatwireframe",
+            "family": "procgen_extra",
+            "sim": 0.529,
+            "anchor": "ik_arm_demo"
+          },
+          {
+            "id": "layered_membrane",
+            "family": "procgen_extra",
+            "sim": 0.523,
+            "anchor": "ik_arm_demo"
+          },
+          {
+            "id": "mirror_artifact",
+            "family": "procgen_extra",
+            "sim": 0.51,
+            "anchor": "ik_arm_demo"
+          }
+        ]
+      },
+      {
+        "map": "BodyProg_Torso",
+        "existing": [
+          "torso_estimation_vis"
+        ],
+        "proposals": [
+          {
+            "id": "ik_arm_demo",
+            "family": "procgen_extra",
+            "sim": 0.858,
+            "anchor": "torso_estimation_vis"
+          },
+          {
+            "id": "dress_selector",
+            "family": "procgen_extra",
+            "sim": 0.719,
+            "anchor": "torso_estimation_vis"
+          },
+          {
+            "id": "necklace_anchor",
+            "family": "procgen_extra",
+            "sim": 0.681,
+            "anchor": "torso_estimation_vis"
+          },
+          {
+            "id": "fatwireframe",
+            "family": "procgen_extra",
+            "sim": 0.537,
+            "anchor": "torso_estimation_vis"
+          },
+          {
+            "id": "mirror_artifact",
+            "family": "procgen_extra",
+            "sim": 0.531,
+            "anchor": "torso_estimation_vis"
+          },
+          {
+            "id": "room_grammar",
+            "family": "procgen_extra",
+            "sim": 0.518,
+            "anchor": "torso_estimation_vis"
+          }
+        ]
+      },
+      {
+        "map": "BodyProg_Dress",
+        "existing": [
+          "dress_selector"
+        ],
+        "proposals": [
+          {
+            "id": "necklace_anchor",
+            "family": "procgen_extra",
+            "sim": 0.836,
+            "anchor": "dress_selector"
+          },
+          {
+            "id": "torso_estimation_vis",
+            "family": "procgen_extra",
+            "sim": 0.719,
+            "anchor": "dress_selector"
+          },
+          {
+            "id": "mirror_artifact",
+            "family": "procgen_extra",
+            "sim": 0.694,
+            "anchor": "dress_selector"
+          },
+          {
+            "id": "ik_arm_demo",
+            "family": "procgen_extra",
+            "sim": 0.683,
+            "anchor": "dress_selector"
+          },
+          {
+            "id": "GeneticProgramming",
+            "family": "procgen_extra",
+            "sim": 0.642,
+            "anchor": "dress_selector"
+          },
+          {
+            "id": "romanesco",
+            "family": "procgen_extra",
+            "sim": 0.601,
+            "anchor": "dress_selector"
+          }
+        ]
+      }
+    ],
+    "foundationscrisis": [
+      {
+        "map": "Russell_Paradox",
+        "existing": [
+          "russell_set_box"
+        ],
+        "proposals": [
+          {
+            "id": "godel_statement_plaque",
+            "family": "foundations",
+            "sim": 0.928,
+            "anchor": "russell_set_box"
+          },
+          {
+            "id": "hilbert_hotel",
+            "family": "foundations",
+            "sim": 0.869,
+            "anchor": "russell_set_box"
+          },
+          {
+            "id": "constructive_proof",
+            "family": "foundations",
+            "sim": 0.855,
+            "anchor": "russell_set_box"
+          },
+          {
+            "id": "magritte_pipe",
+            "family": "foundations",
+            "sim": 0.848,
+            "anchor": "russell_set_box"
+          },
+          {
+            "id": "euclid_postulates_plaque",
+            "family": "foundations",
+            "sim": 0.843,
+            "anchor": "russell_set_box"
+          },
+          {
+            "id": "schrodinger_box",
+            "family": "foundations",
+            "sim": 0.841,
+            "anchor": "russell_set_box"
+          }
+        ]
+      },
+      {
+        "map": "Godel_Incompleteness",
+        "existing": [
+          "godel_statement_plaque"
+        ],
+        "proposals": [
+          {
+            "id": "russell_set_box",
+            "family": "foundations",
+            "sim": 0.928,
+            "anchor": "godel_statement_plaque"
+          },
+          {
+            "id": "euclid_postulates_plaque",
+            "family": "foundations",
+            "sim": 0.884,
+            "anchor": "godel_statement_plaque"
+          },
+          {
+            "id": "constructive_proof",
+            "family": "foundations",
+            "sim": 0.869,
+            "anchor": "godel_statement_plaque"
+          },
+          {
+            "id": "magritte_pipe",
+            "family": "foundations",
+            "sim": 0.864,
+            "anchor": "godel_statement_plaque"
+          },
+          {
+            "id": "schrodinger_box",
+            "family": "foundations",
+            "sim": 0.863,
+            "anchor": "godel_statement_plaque"
+          },
+          {
+            "id": "escher_staircase",
+            "family": "foundations",
+            "sim": 0.862,
+            "anchor": "godel_statement_plaque"
+          }
+        ]
+      },
+      {
+        "map": "Chamber_Foundations",
+        "existing": [
+          "proximity_spawner#type"
+        ],
+        "note": "no existing artifacts in atlas \u2014 cannot propose neighbours",
+        "proposals": []
+      }
+    ],
+    "joints": [
+      {
+        "map": "Joints_ConstrainedMotion",
+        "existing": [
+          "DoublePendulum",
+          "PendulumPin"
+        ],
+        "proposals": [
+          {
+            "id": "ConeTwistBag",
+            "family": "physics_simulation",
+            "sim": 0.923,
+            "anchor": "PendulumPin"
+          },
+          {
+            "id": "CharacterRagdoll",
+            "family": "physics_simulation",
+            "sim": 0.906,
+            "anchor": "PendulumPin"
+          },
+          {
+            "id": "DrawbridgeHinge",
+            "family": "physics_simulation",
+            "sim": 0.896,
+            "anchor": "PendulumPin"
+          },
+          {
+            "id": "HingeCrank",
+            "family": "physics_simulation",
+            "sim": 0.875,
+            "anchor": "PendulumPin"
+          },
+          {
+            "id": "tscn_joint",
+            "family": "physics_simulation",
+            "sim": 0.845,
+            "anchor": "PendulumPin"
+          },
+          {
+            "id": "constraints",
+            "family": "physics_simulation",
+            "sim": 0.831,
+            "anchor": "PendulumPin"
+          },
+          {
+            "id": "ElphabaDress",
+            "family": "wavefunctions",
+            "sim": 0.784,
+            "anchor": "DoublePendulum"
+          },
+          {
+            "id": "WavePaintings",
+            "family": "wavefunctions",
+            "sim": 0.737,
+            "anchor": "DoublePendulum"
+          }
+        ]
+      },
+      {
+        "map": "Joints_HingeAxis",
+        "existing": [
+          "DrawbridgeHinge",
+          "HingeCrank"
+        ],
+        "proposals": [
+          {
+            "id": "SliderPress",
+            "family": "physics_simulation",
+            "sim": 0.927,
+            "anchor": "DrawbridgeHinge"
+          },
+          {
+            "id": "ConeTwistBag",
+            "family": "physics_simulation",
+            "sim": 0.917,
+            "anchor": "DrawbridgeHinge"
+          },
+          {
+            "id": "CharacterRagdoll",
+            "family": "physics_simulation",
+            "sim": 0.907,
+            "anchor": "DrawbridgeHinge"
+          },
+          {
+            "id": "PendulumPin",
+            "family": "physics_simulation",
+            "sim": 0.896,
+            "anchor": "DrawbridgeHinge"
+          },
+          {
+            "id": "tscn_joint",
+            "family": "physics_simulation",
+            "sim": 0.859,
+            "anchor": "HingeCrank"
+          },
+          {
+            "id": "GimbalStabilizer",
+            "family": "physics_simulation",
+            "sim": 0.857,
+            "anchor": "DrawbridgeHinge"
+          },
+          {
+            "id": "constraints",
+            "family": "physics_simulation",
+            "sim": 0.851,
+            "anchor": "DrawbridgeHinge"
+          }
+        ]
+      },
+      {
+        "map": "Joints_SliderRail",
+        "existing": [
+          "SliderPress",
+          "SpringSuspension"
+        ],
+        "proposals": [
+          {
+            "id": "HingeCrank",
+            "family": "physics_simulation",
+            "sim": 0.927,
+            "anchor": "SliderPress"
+          },
+          {
+            "id": "DrawbridgeHinge",
+            "family": "physics_simulation",
+            "sim": 0.899,
+            "anchor": "SliderPress"
+          },
+          {
+            "id": "ConeTwistBag",
+            "family": "physics_simulation",
+            "sim": 0.84,
+            "anchor": "SliderPress"
+          },
+          {
+            "id": "CharacterRagdoll",
+            "family": "physics_simulation",
+            "sim": 0.836,
+            "anchor": "SliderPress"
+          },
+          {
+            "id": "constraints",
+            "family": "physics_simulation",
+            "sim": 0.814,
+            "anchor": "SliderPress"
+          },
+          {
+            "id": "GimbalStabilizer",
+            "family": "physics_simulation",
+            "sim": 0.813,
+            "anchor": "SliderPress"
+          },
+          {
+            "id": "PendulumPin",
+            "family": "physics_simulation",
+            "sim": 0.747,
+            "anchor": "SpringSuspension"
+          }
+        ]
+      },
+      {
+        "map": "Joints_BallSocket",
+        "existing": [
+          "CharacterRagdoll",
+          "ConeTwistBag"
+        ],
+        "proposals": [
+          {
+            "id": "PendulumPin",
+            "family": "physics_simulation",
+            "sim": 0.923,
+            "anchor": "CharacterRagdoll"
+          },
+          {
+            "id": "DrawbridgeHinge",
+            "family": "physics_simulation",
+            "sim": 0.917,
+            "anchor": "CharacterRagdoll"
+          },
+          {
+            "id": "HingeCrank",
+            "family": "physics_simulation",
+            "sim": 0.907,
+            "anchor": "CharacterRagdoll"
+          },
+          {
+            "id": "ChainSwing",
+            "family": "physics_simulation",
+            "sim": 0.86,
+            "anchor": "CharacterRagdoll"
+          },
+          {
+            "id": "constraints",
+            "family": "physics_simulation",
+            "sim": 0.854,
+            "anchor": "ConeTwistBag"
+          },
+          {
+            "id": "tscn_joint",
+            "family": "physics_simulation",
+            "sim": 0.847,
+            "anchor": "CharacterRagdoll"
+          },
+          {
+            "id": "GimbalStabilizer",
+            "family": "physics_simulation",
+            "sim": 0.844,
+            "anchor": "CharacterRagdoll"
+          },
+          {
+            "id": "SliderPress",
+            "family": "physics_simulation",
+            "sim": 0.84,
+            "anchor": "ConeTwistBag"
+          }
+        ]
+      },
+      {
+        "map": "Joints_SoftConstraints",
+        "existing": [
+          "ChainSwing",
+          "constraints"
+        ],
+        "proposals": [
+          {
+            "id": "ConeTwistBag",
+            "family": "physics_simulation",
+            "sim": 0.86,
+            "anchor": "ChainSwing"
+          },
+          {
+            "id": "DrawbridgeHinge",
+            "family": "physics_simulation",
+            "sim": 0.851,
+            "anchor": "ChainSwing"
+          },
+          {
+            "id": "CharacterRagdoll",
+            "family": "physics_simulation",
+            "sim": 0.848,
+            "anchor": "ChainSwing"
+          },
+          {
+            "id": "PendulumPin",
+            "family": "physics_simulation",
+            "sim": 0.831,
+            "anchor": "ChainSwing"
+          },
+          {
+            "id": "HingeCrank",
+            "family": "physics_simulation",
+            "sim": 0.824,
+            "anchor": "ChainSwing"
+          },
+          {
+            "id": "SliderPress",
+            "family": "physics_simulation",
+            "sim": 0.814,
+            "anchor": "constraints"
+          },
+          {
+            "id": "GimbalStabilizer",
+            "family": "physics_simulation",
+            "sim": 0.807,
+            "anchor": "ChainSwing"
+          }
+        ]
+      },
+      {
+        "map": "Joints_Kinematics",
+        "existing": [
+          "GimbalStabilizer",
+          "IKArm"
+        ],
+        "proposals": [
+          {
+            "id": "HingeCrank",
+            "family": "physics_simulation",
+            "sim": 0.857,
+            "anchor": "GimbalStabilizer"
+          },
+          {
+            "id": "DrawbridgeHinge",
+            "family": "physics_simulation",
+            "sim": 0.844,
+            "anchor": "GimbalStabilizer"
+          },
+          {
+            "id": "CharacterRagdoll",
+            "family": "physics_simulation",
+            "sim": 0.844,
+            "anchor": "GimbalStabilizer"
+          },
+          {
+            "id": "ConeTwistBag",
+            "family": "physics_simulation",
+            "sim": 0.819,
+            "anchor": "GimbalStabilizer"
+          },
+          {
+            "id": "SliderPress",
+            "family": "physics_simulation",
+            "sim": 0.813,
+            "anchor": "GimbalStabilizer"
+          },
+          {
+            "id": "ChainSwing",
+            "family": "physics_simulation",
+            "sim": 0.807,
+            "anchor": "GimbalStabilizer"
+          },
+          {
+            "id": "tscn_joint",
+            "family": "physics_simulation",
+            "sim": 0.705,
+            "anchor": "IKArm"
+          },
+          {
+            "id": "simulation_instability",
+            "family": "physics_simulation",
+            "sim": 0.686,
+            "anchor": "IKArm"
+          }
+        ]
+      }
+    ],
+    "machinelearning": [
+      {
+        "map": "ML_Perception",
+        "existing": [
+          "computer_vision_vr",
+          "convolutional_neural_networks_cnns_vr"
+        ],
+        "proposals": [
+          {
+            "id": "explainable_ai_xai_vr",
+            "family": "machinelearning",
+            "sim": 0.979,
+            "anchor": "computer_vision_vr"
+          },
+          {
+            "id": "generative_adversarial_networks_gans_vr",
+            "family": "machinelearning",
+            "sim": 0.947,
+            "anchor": "computer_vision_vr"
+          },
+          {
+            "id": "evolvingflowers",
+            "family": "machinelearning",
+            "sim": 0.931,
+            "anchor": "computer_vision_vr"
+          },
+          {
+            "id": "lstms_vr",
+            "family": "machinelearning",
+            "sim": 0.929,
+            "anchor": "computer_vision_vr"
+          },
+          {
+            "id": "variational_autoencoders_vaes_vr",
+            "family": "machinelearning",
+            "sim": 0.915,
+            "anchor": "computer_vision_vr"
+          },
+          {
+            "id": "fine_tuning_vr",
+            "family": "machinelearning",
+            "sim": 0.893,
+            "anchor": "computer_vision_vr"
+          }
+        ]
+      },
+      {
+        "map": "ML_Sequence_Memory",
+        "existing": [
+          "lstms_vr",
+          "transformers_vr"
+        ],
+        "proposals": [
+          {
+            "id": "computer_vision_vr",
+            "family": "machinelearning",
+            "sim": 0.929,
+            "anchor": "lstms_vr"
+          },
+          {
+            "id": "explainable_ai_xai_vr",
+            "family": "machinelearning",
+            "sim": 0.924,
+            "anchor": "lstms_vr"
+          },
+          {
+            "id": "convolutional_neural_networks_cnns_vr",
+            "family": "machinelearning",
+            "sim": 0.906,
+            "anchor": "lstms_vr"
+          },
+          {
+            "id": "evolvingflowers",
+            "family": "machinelearning",
+            "sim": 0.884,
+            "anchor": "lstms_vr"
+          },
+          {
+            "id": "generative_adversarial_networks_gans_vr",
+            "family": "machinelearning",
+            "sim": 0.877,
+            "anchor": "lstms_vr"
+          },
+          {
+            "id": "variational_autoencoders_vaes_vr",
+            "family": "machinelearning",
+            "sim": 0.86,
+            "anchor": "lstms_vr"
+          }
+        ]
+      },
+      {
+        "map": "ML_Generative",
+        "existing": [
+          "generative_adversarial_networks_gans_vr"
+        ],
+        "proposals": [
+          {
+            "id": "computer_vision_vr",
+            "family": "machinelearning",
+            "sim": 0.947,
+            "anchor": "generative_adversarial_networks_gans_vr"
+          },
+          {
+            "id": "explainable_ai_xai_vr",
+            "family": "machinelearning",
+            "sim": 0.938,
+            "anchor": "generative_adversarial_networks_gans_vr"
+          },
+          {
+            "id": "evolvingflowers",
+            "family": "machinelearning",
+            "sim": 0.936,
+            "anchor": "generative_adversarial_networks_gans_vr"
+          },
+          {
+            "id": "convolutional_neural_networks_cnns_vr",
+            "family": "machinelearning",
+            "sim": 0.928,
+            "anchor": "generative_adversarial_networks_gans_vr"
+          },
+          {
+            "id": "variational_autoencoders_vaes_vr",
+            "family": "machinelearning",
+            "sim": 0.912,
+            "anchor": "generative_adversarial_networks_gans_vr"
+          },
+          {
+            "id": "fine_tuning_vr",
+            "family": "machinelearning",
+            "sim": 0.896,
+            "anchor": "generative_adversarial_networks_gans_vr"
+          }
+        ]
+      },
+      {
+        "map": "Chamber_ML",
+        "existing": [
+          "proximity_spawner#type"
+        ],
+        "note": "no existing artifacts in atlas \u2014 cannot propose neighbours",
+        "proposals": []
+      }
+    ],
+    "postfoundationscrisis": [
+      {
+        "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+        "existing": [
+          "bias_from_inside",
+          "bias_visualizer"
+        ],
+        "proposals": [
+          {
+            "id": "algorithmic_bias",
+            "family": "algorithms_misc",
+            "sim": 0.857,
+            "anchor": "bias_from_inside"
+          },
+          {
+            "id": "algorithmic_bias_visualization",
+            "family": "algorithms_misc",
+            "sim": 0.812,
+            "anchor": "bias_from_inside"
+          },
+          {
+            "id": "remains_to_be_seen",
+            "family": "algorithms_misc",
+            "sim": 0.791,
+            "anchor": "bias_from_inside"
+          },
+          {
+            "id": "affect_theory_visualization",
+            "family": "algorithms_misc",
+            "sim": 0.755,
+            "anchor": "bias_from_inside"
+          },
+          {
+            "id": "wiki_fragment",
+            "family": "algorithms_misc",
+            "sim": 0.732,
+            "anchor": "bias_from_inside"
+          },
+          {
+            "id": "situated_readout",
+            "family": "algorithms_misc",
+            "sim": 0.728,
+            "anchor": "bias_from_inside"
+          },
+          {
+            "id": "queer_morphology_specimen",
+            "family": "commons_artifacts",
+            "sim": 0.66,
+            "anchor": "bias_visualizer"
+          },
+          {
+            "id": "data_labor_counter",
+            "family": "commons_artifacts",
+            "sim": 0.562,
+            "anchor": "bias_visualizer"
+          }
+        ]
+      },
+      {
+        "map": "CriticalAlgorithms_Applied_Ethics",
+        "existing": [
+          "bias_from_inside",
+          "godel_statement_plaque"
+        ],
+        "proposals": [
+          {
+            "id": "russell_set_box",
+            "family": "foundations",
+            "sim": 0.928,
+            "anchor": "godel_statement_plaque"
+          },
+          {
+            "id": "euclid_postulates_plaque",
+            "family": "foundations",
+            "sim": 0.884,
+            "anchor": "godel_statement_plaque"
+          },
+          {
+            "id": "constructive_proof",
+            "family": "foundations",
+            "sim": 0.869,
+            "anchor": "godel_statement_plaque"
+          },
+          {
+            "id": "magritte_pipe",
+            "family": "foundations",
+            "sim": 0.864,
+            "anchor": "godel_statement_plaque"
+          },
+          {
+            "id": "schrodinger_box",
+            "family": "foundations",
+            "sim": 0.863,
+            "anchor": "godel_statement_plaque"
+          },
+          {
+            "id": "escher_staircase",
+            "family": "foundations",
+            "sim": 0.862,
+            "anchor": "godel_statement_plaque"
+          },
+          {
+            "id": "algorithmic_bias",
+            "family": "algorithms_misc",
+            "sim": 0.857,
+            "anchor": "bias_from_inside"
+          },
+          {
+            "id": "algorithmic_bias_visualization",
+            "family": "algorithms_misc",
+            "sim": 0.812,
+            "anchor": "bias_from_inside"
+          }
+        ]
+      },
+      {
+        "map": "SpeculativeComputation_Situated_Computation",
+        "existing": [
+          "situated_readout"
+        ],
+        "proposals": [
+          {
+            "id": "wiki_fragment",
+            "family": "algorithms_misc",
+            "sim": 0.867,
+            "anchor": "situated_readout"
+          },
+          {
+            "id": "bias_from_inside",
+            "family": "algorithms_misc",
+            "sim": 0.728,
+            "anchor": "situated_readout"
+          },
+          {
+            "id": "remains_to_be_seen",
+            "family": "algorithms_misc",
+            "sim": 0.727,
+            "anchor": "situated_readout"
+          },
+          {
+            "id": "algorithmic_bias",
+            "family": "algorithms_misc",
+            "sim": 0.622,
+            "anchor": "situated_readout"
+          },
+          {
+            "id": "algorithmic_bias_visualization",
+            "family": "algorithms_misc",
+            "sim": 0.614,
+            "anchor": "situated_readout"
+          },
+          {
+            "id": "running_text_display",
+            "family": "algorithms_misc",
+            "sim": 0.603,
+            "anchor": "situated_readout"
+          }
+        ]
+      },
+      {
+        "map": "SpeculativeComputation_Collective_Knowledge",
+        "existing": [
+          "wiki_fragment"
+        ],
+        "proposals": [
+          {
+            "id": "situated_readout",
+            "family": "algorithms_misc",
+            "sim": 0.867,
+            "anchor": "wiki_fragment"
+          },
+          {
+            "id": "remains_to_be_seen",
+            "family": "algorithms_misc",
+            "sim": 0.777,
+            "anchor": "wiki_fragment"
+          },
+          {
+            "id": "bias_from_inside",
+            "family": "algorithms_misc",
+            "sim": 0.732,
+            "anchor": "wiki_fragment"
+          },
+          {
+            "id": "algorithmic_bias_visualization",
+            "family": "algorithms_misc",
+            "sim": 0.668,
+            "anchor": "wiki_fragment"
+          },
+          {
+            "id": "algorithmic_bias",
+            "family": "algorithms_misc",
+            "sim": 0.659,
+            "anchor": "wiki_fragment"
+          },
+          {
+            "id": "affect_theory_visualization",
+            "family": "algorithms_misc",
+            "sim": 0.626,
+            "anchor": "wiki_fragment"
+          }
+        ]
+      },
+      {
+        "map": "SpeculativeComputation_Rhizome_Network",
+        "existing": [
+          "rhizome_cave_demo"
+        ],
+        "proposals": [
+          {
+            "id": "rhizome_cave_system",
+            "family": "isosurfaces",
+            "sim": 0.895,
+            "anchor": "rhizome_cave_demo"
+          },
+          {
+            "id": "mc_cave",
+            "family": "isosurfaces",
+            "sim": 0.86,
+            "anchor": "rhizome_cave_demo"
+          },
+          {
+            "id": "mc_inside_cave",
+            "family": "isosurfaces",
+            "sim": 0.86,
+            "anchor": "rhizome_cave_demo"
+          },
+          {
+            "id": "voxel_noise_demo",
+            "family": "isosurfaces",
+            "sim": 0.837,
+            "anchor": "rhizome_cave_demo"
+          },
+          {
+            "id": "queer_marching_cave",
+            "family": "isosurfaces",
+            "sim": 0.824,
+            "anchor": "rhizome_cave_demo"
+          },
+          {
+            "id": "fountain_demo",
+            "family": "isosurfaces",
+            "sim": 0.816,
+            "anchor": "rhizome_cave_demo"
+          }
+        ]
+      },
+      {
+        "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+        "existing": [
+          "MolecularDesigner"
+        ],
+        "proposals": [
+          {
+            "id": "morphobody",
+            "family": "computational_biology",
+            "sim": 0.85,
+            "anchor": "MolecularDesigner"
+          },
+          {
+            "id": "limbgrowth",
+            "family": "computational_biology",
+            "sim": 0.846,
+            "anchor": "MolecularDesigner"
+          },
+          {
+            "id": "monte_carlo_protein",
+            "family": "computational_biology",
+            "sim": 0.821,
+            "anchor": "MolecularDesigner"
+          },
+          {
+            "id": "growslimbs",
+            "family": "computational_biology",
+            "sim": 0.812,
+            "anchor": "MolecularDesigner"
+          },
+          {
+            "id": "radiolaria",
+            "family": "computational_biology",
+            "sim": 0.801,
+            "anchor": "MolecularDesigner"
+          },
+          {
+            "id": "ten_tulip_buckets",
+            "family": "computational_biology",
+            "sim": 0.783,
+            "anchor": "MolecularDesigner"
+          }
+        ]
+      }
+    ],
+    "qfeplaboratory": [
+      {
+        "map": "Chamber_QFEP",
+        "existing": [
+          "proximity_spawner#type"
+        ],
+        "note": "no existing artifacts in atlas \u2014 cannot propose neighbours",
+        "proposals": []
+      }
+    ]
+  }
+}
