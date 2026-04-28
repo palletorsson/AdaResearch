@@ -1,0 +1,1449 @@
+{
+  "summary": {
+    "total": 179,
+    "clean": 71,
+    "warnings_only": 9,
+    "with_errors": 99,
+    "api_errors": 0
+  },
+  "issue_types": {
+    "no-spawn": 6,
+    "unreachable-artifact": 444,
+    "disconnected-region": 63,
+    "unreachable-teleporter": 32
+  },
+  "per_map": {
+    "Point_One": {
+      "errors": 1,
+      "warnings": 1,
+      "collected": 10,
+      "total": 11,
+      "events": 14,
+      "success": false
+    },
+    "Point_Trace": {
+      "errors": 0,
+      "warnings": 1,
+      "collected": 4,
+      "total": 4,
+      "events": 7,
+      "success": true
+    },
+    "Point_Lines": {
+      "errors": 1,
+      "warnings": 1,
+      "collected": 27,
+      "total": 28,
+      "events": 32,
+      "success": false
+    },
+    "Point_Line_Grid": {
+      "errors": 2,
+      "warnings": 0,
+      "collected": 2,
+      "total": 4,
+      "events": 5,
+      "success": false
+    },
+    "Point_Triangle": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 7,
+      "total": 7,
+      "events": 12,
+      "success": true
+    },
+    "Primitives_Polythedra": {
+      "errors": 6,
+      "warnings": 1,
+      "collected": 2,
+      "total": 7,
+      "events": 4,
+      "success": false
+    },
+    "Point_Triangle_Context": {
+      "errors": 5,
+      "warnings": 1,
+      "collected": 3,
+      "total": 8,
+      "events": 6,
+      "success": false
+    },
+    "Point_Line": {
+      "errors": 1,
+      "warnings": 1,
+      "collected": 3,
+      "total": 4,
+      "events": 8,
+      "success": false
+    },
+    "Primitives_Ignorance": {
+      "errors": 19,
+      "warnings": 0,
+      "collected": 20,
+      "total": 39,
+      "events": 28,
+      "success": false
+    },
+    "Point_Animatedcube": {
+      "errors": 4,
+      "warnings": 1,
+      "collected": 3,
+      "total": 7,
+      "events": 6,
+      "success": false
+    },
+    "Trans_Introduction": {
+      "errors": 7,
+      "warnings": 1,
+      "collected": 1,
+      "total": 7,
+      "events": 3,
+      "success": false
+    },
+    "Primitives_Melencolia": {
+      "errors": 2,
+      "warnings": 1,
+      "collected": 16,
+      "total": 18,
+      "events": 24,
+      "success": false
+    },
+    "Trans_Translation": {
+      "errors": 8,
+      "warnings": 1,
+      "collected": 3,
+      "total": 11,
+      "events": 7,
+      "success": false
+    },
+    "Trans_Rotation": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 7,
+      "total": 7,
+      "events": 11,
+      "success": true
+    },
+    "Trans_AxisDecomposition": {
+      "errors": 15,
+      "warnings": 1,
+      "collected": 1,
+      "total": 16,
+      "events": 4,
+      "success": false
+    },
+    "Primitives_Portals": {
+      "errors": 1,
+      "warnings": 1,
+      "collected": 3,
+      "total": 4,
+      "events": 12,
+      "success": false
+    },
+    "Trans_Scale": {
+      "errors": 2,
+      "warnings": 1,
+      "collected": 13,
+      "total": 15,
+      "events": 17,
+      "success": false
+    },
+    "Trans_RotationSpectacle": {
+      "errors": 4,
+      "warnings": 1,
+      "collected": 1,
+      "total": 5,
+      "events": 5,
+      "success": false
+    },
+    "Chamber_Transformation": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 7,
+      "total": 7,
+      "events": 11,
+      "success": true
+    },
+    "Color_Nails": {
+      "errors": 4,
+      "warnings": 0,
+      "collected": 6,
+      "total": 10,
+      "events": 12,
+      "success": false
+    },
+    "Trans_Pit": {
+      "errors": 7,
+      "warnings": 1,
+      "collected": 0,
+      "total": 6,
+      "events": 2,
+      "success": false
+    },
+    "Color_Rainbow": {
+      "errors": 2,
+      "warnings": 1,
+      "collected": 12,
+      "total": 13,
+      "events": 15,
+      "success": false
+    },
+    "Color_Pillar": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 6,
+      "total": 7,
+      "events": 11,
+      "success": false
+    },
+    "Color_Grid_Pallet": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 4,
+      "total": 4,
+      "events": 8,
+      "success": true
+    },
+    "Color_Paint": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 3,
+      "total": 3,
+      "events": 7,
+      "success": true
+    },
+    "VectorFoundations": {
+      "errors": 3,
+      "warnings": 0,
+      "collected": 13,
+      "total": 16,
+      "events": 18,
+      "success": false
+    },
+    "Color_Flashlight": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 2,
+      "total": 3,
+      "events": 5,
+      "success": false
+    },
+    "Chamber_Color": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 7,
+      "total": 7,
+      "events": 11,
+      "success": true
+    },
+    "VectorApplied": {
+      "errors": 4,
+      "warnings": 0,
+      "collected": 8,
+      "total": 12,
+      "events": 12,
+      "success": false
+    },
+    "Color_Walls": {
+      "errors": 7,
+      "warnings": 1,
+      "collected": 0,
+      "total": 6,
+      "events": 2,
+      "success": false
+    },
+    "VectorOperations": {
+      "errors": 6,
+      "warnings": 0,
+      "collected": 9,
+      "total": 15,
+      "events": 13,
+      "success": false
+    },
+    "VectorAdvanced": {
+      "errors": 4,
+      "warnings": 1,
+      "collected": 13,
+      "total": 17,
+      "events": 19,
+      "success": false
+    },
+    "ForcesFoundations": {
+      "errors": 11,
+      "warnings": 1,
+      "collected": 9,
+      "total": 19,
+      "events": 13,
+      "success": false
+    },
+    "ForcesComposition": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 12,
+      "total": 12,
+      "events": 16,
+      "success": true
+    },
+    "ForcesArena": {
+      "errors": 21,
+      "warnings": 1,
+      "collected": 7,
+      "total": 27,
+      "events": 10,
+      "success": false
+    },
+    "Array_Patterns": {
+      "errors": 3,
+      "warnings": 0,
+      "collected": 9,
+      "total": 12,
+      "events": 15,
+      "success": false
+    },
+    "ForcesChaos": {
+      "errors": 12,
+      "warnings": 1,
+      "collected": 6,
+      "total": 17,
+      "events": 9,
+      "success": false
+    },
+    "ForcesSystems": {
+      "errors": 21,
+      "warnings": 1,
+      "collected": 1,
+      "total": 21,
+      "events": 3,
+      "success": false
+    },
+    "Tutorial_Pattern": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 12,
+      "total": 12,
+      "events": 17,
+      "success": true
+    },
+    "Chamber_Forces": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 7,
+      "total": 7,
+      "events": 11,
+      "success": true
+    },
+    "Tutorial_Disco": {
+      "errors": 1,
+      "warnings": 1,
+      "collected": 2,
+      "total": 3,
+      "events": 5,
+      "success": false
+    },
+    "Tutorial_3D": {
+      "errors": 7,
+      "warnings": 1,
+      "collected": 0,
+      "total": 6,
+      "events": 2,
+      "success": false
+    },
+    "Chamber_Arrays": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 6,
+      "total": 6,
+      "events": 10,
+      "success": true
+    },
+    "Tutorial_Single": {
+      "errors": 3,
+      "warnings": 0,
+      "collected": 1,
+      "total": 4,
+      "events": 7,
+      "success": false
+    },
+    "Tutorial_Row": {
+      "errors": 4,
+      "warnings": 1,
+      "collected": 0,
+      "total": 3,
+      "events": 2,
+      "success": false
+    },
+    "WaveFunctions_Intro": {
+      "errors": 6,
+      "warnings": 1,
+      "collected": 15,
+      "total": 21,
+      "events": 21,
+      "success": false
+    },
+    "WaveFunctions_Pendulum": {
+      "errors": 2,
+      "warnings": 0,
+      "collected": 12,
+      "total": 14,
+      "events": 18,
+      "success": false
+    },
+    "Tutorial_2D_Build": {
+      "errors": 9,
+      "warnings": 1,
+      "collected": 0,
+      "total": 8,
+      "events": 2,
+      "success": false
+    },
+    "WaveFunctions_Effect_Sound": {
+      "errors": 23,
+      "warnings": 1,
+      "collected": 11,
+      "total": 34,
+      "events": 17,
+      "success": false
+    },
+    "WaveFunctions_Unit_Circle": {
+      "errors": 7,
+      "warnings": 1,
+      "collected": 9,
+      "total": 16,
+      "events": 19,
+      "success": false
+    },
+    "WaveFunctions_Sine_Space": {
+      "errors": 8,
+      "warnings": 1,
+      "collected": 1,
+      "total": 8,
+      "events": 3,
+      "success": false
+    },
+    "WaveFunctions_John_Cage": {
+      "errors": 2,
+      "warnings": 0,
+      "collected": 2,
+      "total": 4,
+      "events": 5,
+      "success": false
+    },
+    "Wavefunctions_Bernini": {
+      "errors": 5,
+      "warnings": 1,
+      "collected": 0,
+      "total": 4,
+      "events": 2,
+      "success": false
+    },
+    "WaveFunctions_3D_Wave_Propagation": {
+      "errors": 5,
+      "warnings": 1,
+      "collected": 0,
+      "total": 4,
+      "events": 3,
+      "success": false
+    },
+    "WaveFunctions_AirMusic": {
+      "errors": 11,
+      "warnings": 1,
+      "collected": 0,
+      "total": 10,
+      "events": 2,
+      "success": false
+    },
+    "Wavefunctions_Sky_Stairs": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 16,
+      "total": 17,
+      "events": 19,
+      "success": false
+    },
+    "WaveFunctions_TrigWalkingPath": {
+      "errors": 7,
+      "warnings": 1,
+      "collected": 0,
+      "total": 6,
+      "events": 2,
+      "success": false
+    },
+    "Random_Definition": {
+      "errors": 3,
+      "warnings": 0,
+      "collected": 10,
+      "total": 13,
+      "events": 14,
+      "success": false
+    },
+    "WaveFunctions_Synthesis_Lab": {
+      "errors": 17,
+      "warnings": 1,
+      "collected": 9,
+      "total": 26,
+      "events": 15,
+      "success": false
+    },
+    "Random_Remove": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 3,
+      "total": 3,
+      "events": 6,
+      "success": true
+    },
+    "Random_Rotate_Random_XYZ": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 5,
+      "total": 5,
+      "events": 8,
+      "success": true
+    },
+    "Randomness_10_PRINT_Algorithm": {
+      "errors": 9,
+      "warnings": 1,
+      "collected": 1,
+      "total": 9,
+      "events": 3,
+      "success": false
+    },
+    "Chamber_Waves": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 7,
+      "total": 7,
+      "events": 11,
+      "success": true
+    },
+    "Random_Cubes": {
+      "errors": 2,
+      "warnings": 0,
+      "collected": 51,
+      "total": 53,
+      "events": 56,
+      "success": false
+    },
+    "Random_Mushrooms": {
+      "errors": 7,
+      "warnings": 1,
+      "collected": 0,
+      "total": 6,
+      "events": 2,
+      "success": false
+    },
+    "Randomness_Examples_of_Randomness": {
+      "errors": 6,
+      "warnings": 1,
+      "collected": 0,
+      "total": 5,
+      "events": 2,
+      "success": false
+    },
+    "Random_Space_Geometry": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 6,
+      "total": 6,
+      "events": 9,
+      "success": true
+    },
+    "Random_Walk": {
+      "errors": 9,
+      "warnings": 1,
+      "collected": 0,
+      "total": 8,
+      "events": 2,
+      "success": false
+    },
+    "Random_Gaussian": {
+      "errors": 11,
+      "warnings": 1,
+      "collected": 0,
+      "total": 10,
+      "events": 2,
+      "success": false
+    },
+    "Random_Space": {
+      "errors": 6,
+      "warnings": 1,
+      "collected": 0,
+      "total": 5,
+      "events": 2,
+      "success": false
+    },
+    "Random_Game": {
+      "errors": 18,
+      "warnings": 1,
+      "collected": 0,
+      "total": 17,
+      "events": 2,
+      "success": false
+    },
+    "Random_Pheromone": {
+      "errors": 4,
+      "warnings": 1,
+      "collected": 0,
+      "total": 4,
+      "events": 4,
+      "success": false
+    },
+    "Noise_Columns": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 2,
+      "total": 2,
+      "events": 5,
+      "success": true
+    },
+    "Chamber_Random": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 7,
+      "total": 7,
+      "events": 11,
+      "success": true
+    },
+    "Random_Noise_Types": {
+      "errors": 3,
+      "warnings": 0,
+      "collected": 2,
+      "total": 5,
+      "events": 6,
+      "success": false
+    },
+    "Noise_Voxel": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 4,
+      "total": 4,
+      "events": 7,
+      "success": true
+    },
+    "Noise_Space_10": {
+      "errors": 3,
+      "warnings": 1,
+      "collected": 0,
+      "total": 2,
+      "events": 2,
+      "success": false
+    },
+    "Noise_One": {
+      "errors": 3,
+      "warnings": 0,
+      "collected": 0,
+      "total": 3,
+      "events": 3,
+      "success": false
+    },
+    "Noise_6_Wall": {
+      "errors": 2,
+      "warnings": 0,
+      "collected": 0,
+      "total": 2,
+      "events": 3,
+      "success": false
+    },
+    "Noise_Inside_Noise": {
+      "errors": 2,
+      "warnings": 1,
+      "collected": 0,
+      "total": 2,
+      "events": 4,
+      "success": false
+    },
+    "CA_ElementaryRules": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 2,
+      "total": 2,
+      "events": 7,
+      "success": true
+    },
+    "Noise_Perlin_Simplex": {
+      "errors": 7,
+      "warnings": 1,
+      "collected": 0,
+      "total": 6,
+      "events": 2,
+      "success": false
+    },
+    "Lab_Path": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 1,
+      "total": 1,
+      "events": 4,
+      "success": true
+    },
+    "CA_Introduction": {
+      "errors": 0,
+      "warnings": 1,
+      "collected": 3,
+      "total": 3,
+      "events": 6,
+      "success": true
+    },
+    "Chamber_Noise": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 5,
+      "total": 5,
+      "events": 9,
+      "success": true
+    },
+    "CA_BeyondBinary": {
+      "errors": 6,
+      "warnings": 1,
+      "collected": 1,
+      "total": 6,
+      "events": 3,
+      "success": false
+    },
+    "CA_GameOfLife": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 4,
+      "total": 4,
+      "events": 8,
+      "success": true
+    },
+    "CA_ExpandingSpace": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 5,
+      "total": 5,
+      "events": 11,
+      "success": true
+    },
+    "CA_AgentsCircuits": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 3,
+      "total": 3,
+      "events": 7,
+      "success": true
+    },
+    "Chamber_CA": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 7,
+      "total": 7,
+      "events": 11,
+      "success": true
+    },
+    "CA_EdgeOfChaos": {
+      "errors": 5,
+      "warnings": 1,
+      "collected": 0,
+      "total": 4,
+      "events": 2,
+      "success": false
+    },
+    "CA_SoftRules": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 2,
+      "total": 2,
+      "events": 6,
+      "success": true
+    },
+    "Fractal_CantorSet": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 7,
+      "total": 7,
+      "events": 11,
+      "success": true
+    },
+    "Fractal_KochSierpinski": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 8,
+      "total": 9,
+      "events": 13,
+      "success": false
+    },
+    "Fractal_Recursion": {
+      "errors": 5,
+      "warnings": 0,
+      "collected": 8,
+      "total": 13,
+      "events": 14,
+      "success": false
+    },
+    "Fractal_RecursiveTrees": {
+      "errors": 5,
+      "warnings": 1,
+      "collected": 7,
+      "total": 12,
+      "events": 12,
+      "success": false
+    },
+    "Fractal_MengerSponge": {
+      "errors": 2,
+      "warnings": 1,
+      "collected": 1,
+      "total": 3,
+      "events": 4,
+      "success": false
+    },
+    "Fractal_CrossSequence": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 5,
+      "total": 6,
+      "events": 9,
+      "success": false
+    },
+    "Chamber_Fractals": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 7,
+      "total": 7,
+      "events": 11,
+      "success": true
+    },
+    "Fractal_MandelbrotSet": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 2,
+      "total": 3,
+      "events": 5,
+      "success": false
+    },
+    "Fractal_Synthesis": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 9,
+      "total": 10,
+      "events": 14,
+      "success": false
+    },
+    "LSystems_Grammar_Lab": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 6,
+      "total": 6,
+      "events": 10,
+      "success": true
+    },
+    "Fractal_GoldenSpiral": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 4,
+      "total": 5,
+      "events": 7,
+      "success": false
+    },
+    "Fractal_JuliaSet": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 3,
+      "total": 4,
+      "events": 7,
+      "success": false
+    },
+    "LSystems_Grammars_And_Curves": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 2,
+      "total": 3,
+      "events": 5,
+      "success": false
+    },
+    "LSystems_Growth": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 4,
+      "total": 4,
+      "events": 8,
+      "success": true
+    },
+    "LSystems_Architecture": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 3,
+      "total": 3,
+      "events": 7,
+      "success": true
+    },
+    "LSystems_Competition": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 3,
+      "total": 3,
+      "events": 6,
+      "success": true
+    },
+    "PG_Genetic_Evolution": {
+      "errors": 3,
+      "warnings": 1,
+      "collected": 0,
+      "total": 2,
+      "events": 2,
+      "success": false
+    },
+    "LSystems_Living": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 2,
+      "total": 3,
+      "events": 7,
+      "success": false
+    },
+    "Chamber_LSystems": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 7,
+      "total": 7,
+      "events": 11,
+      "success": true
+    },
+    "PG_Sculpted_Forms": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 2,
+      "total": 3,
+      "events": 5,
+      "success": false
+    },
+    "PG_Branching_Growth": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 2,
+      "total": 2,
+      "events": 5,
+      "success": true
+    },
+    "PG_Mirrored_Patterns": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 2,
+      "total": 2,
+      "events": 6,
+      "success": true
+    },
+    "PG_Caves_Mazes": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 2,
+      "total": 2,
+      "events": 6,
+      "success": true
+    },
+    "Chamber_ProcGen": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 6,
+      "total": 6,
+      "events": 10,
+      "success": true
+    },
+    "PG_Space_Colonization": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 1,
+      "total": 1,
+      "events": 4,
+      "success": true
+    },
+    "PG_Percolation_Network": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 2,
+      "total": 2,
+      "events": 6,
+      "success": true
+    },
+    "SoftBodies_Soft_Body_Deformation": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 2,
+      "total": 3,
+      "events": 5,
+      "success": false
+    },
+    "SoftBodies_Obsticals_Part2": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 6,
+      "total": 6,
+      "events": 9,
+      "success": true
+    },
+    "SoftBodies_Carusell": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 9,
+      "total": 9,
+      "events": 14,
+      "success": true
+    },
+    "SoftBodies_Cloth_Physics": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 0,
+      "total": 1,
+      "events": 3,
+      "success": false
+    },
+    "ProceduralGeneration_Reaction_Diffusion_Systems": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 2,
+      "total": 2,
+      "events": 5,
+      "success": true
+    },
+    "SoftBodies_Playground_of_Joy": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 7,
+      "total": 7,
+      "events": 11,
+      "success": true
+    },
+    "SoftBodies_Obsticals": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 7,
+      "total": 7,
+      "events": 11,
+      "success": true
+    },
+    "Topology_Entropy_Morphogenesis": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 1,
+      "total": 1,
+      "events": 4,
+      "success": true
+    },
+    "SoftBodies_Affect_Theory_Visualization": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 1,
+      "total": 1,
+      "events": 4,
+      "success": true
+    },
+    "Chamber_SoftBodies": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 6,
+      "total": 6,
+      "events": 10,
+      "success": true
+    },
+    "SwarmIntelligence_Boids_Algorithm": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 5,
+      "total": 5,
+      "events": 9,
+      "success": true
+    },
+    "SwarmIntelligence_FlowFields": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 1,
+      "total": 1,
+      "events": 4,
+      "success": true
+    },
+    "SwarmIntelligence_Agent_Based_Modeling_ABM": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 1,
+      "total": 1,
+      "events": 4,
+      "success": true
+    },
+    "SwarmIntelligence_PhysarumColony": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 2,
+      "total": 2,
+      "events": 5,
+      "success": true
+    },
+    "SwarmIntelligence_Ant_Colony_Optimization": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 1,
+      "total": 1,
+      "events": 4,
+      "success": true
+    },
+    "SwarmIntelligence_Particle_Swarm_Optimization": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 2,
+      "total": 2,
+      "events": 5,
+      "success": true
+    },
+    "SwarmIntelligence_Swarm_Intelligence_Algorithms": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 1,
+      "total": 1,
+      "events": 4,
+      "success": true
+    },
+    "ML_Evolution": {
+      "errors": 2,
+      "warnings": 1,
+      "collected": 6,
+      "total": 7,
+      "events": 9,
+      "success": false
+    },
+    "ML_Perception": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 2,
+      "total": 2,
+      "events": 6,
+      "success": true
+    },
+    "ML_Gradient_Landscape": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 3,
+      "total": 3,
+      "events": 6,
+      "success": true
+    },
+    "ML_Sequence_Memory": {
+      "errors": 0,
+      "warnings": 1,
+      "collected": 2,
+      "total": 2,
+      "events": 5,
+      "success": true
+    },
+    "Chamber_Swarm": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 7,
+      "total": 7,
+      "events": 11,
+      "success": true
+    },
+    "ML_Neural_Networks": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 3,
+      "total": 3,
+      "events": 6,
+      "success": true
+    },
+    "ML_Generative": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 1,
+      "total": 1,
+      "events": 5,
+      "success": true
+    },
+    "ML_Classification": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 3,
+      "total": 3,
+      "events": 6,
+      "success": true
+    },
+    "ML_Synthesis": {
+      "errors": 4,
+      "warnings": 1,
+      "collected": 0,
+      "total": 3,
+      "events": 2,
+      "success": false
+    },
+    "Russell_Paradox": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 1,
+      "total": 1,
+      "events": 5,
+      "success": true
+    },
+    "Escher_Impossible": {
+      "errors": 2,
+      "warnings": 1,
+      "collected": 1,
+      "total": 3,
+      "events": 4,
+      "success": false
+    },
+    "NonEuclidean_Spaces": {
+      "errors": 2,
+      "warnings": 1,
+      "collected": 3,
+      "total": 5,
+      "events": 8,
+      "success": false
+    },
+    "Chamber_ML": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 6,
+      "total": 6,
+      "events": 10,
+      "success": true
+    },
+    "Brouwer_Intuitionism": {
+      "errors": 1,
+      "warnings": 1,
+      "collected": 2,
+      "total": 3,
+      "events": 7,
+      "success": false
+    },
+    "Godel_Incompleteness": {
+      "errors": 0,
+      "warnings": 1,
+      "collected": 1,
+      "total": 1,
+      "events": 4,
+      "success": true
+    },
+    "Euclid_Parallel": {
+      "errors": 1,
+      "warnings": 1,
+      "collected": 3,
+      "total": 4,
+      "events": 7,
+      "success": false
+    },
+    "QFEP_F_Term": {
+      "errors": 2,
+      "warnings": 0,
+      "collected": 5,
+      "total": 7,
+      "events": 9,
+      "success": false
+    },
+    "Florensky_Paraconsistent": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 2,
+      "total": 3,
+      "events": 6,
+      "success": false
+    },
+    "QFEP_Lambda_Spectrum": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 6,
+      "total": 7,
+      "events": 10,
+      "success": false
+    },
+    "QFEP_Introduction": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 9,
+      "total": 9,
+      "events": 14,
+      "success": true
+    },
+    "Crisis_Synthesis": {
+      "errors": 3,
+      "warnings": 1,
+      "collected": 5,
+      "total": 8,
+      "events": 9,
+      "success": false
+    },
+    "QFEP_Phi_Term": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 6,
+      "total": 7,
+      "events": 11,
+      "success": false
+    },
+    "Chamber_Foundations": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 6,
+      "total": 6,
+      "events": 10,
+      "success": true
+    },
+    "QFEP_E_Term": {
+      "errors": 5,
+      "warnings": 0,
+      "collected": 2,
+      "total": 7,
+      "events": 6,
+      "success": false
+    },
+    "QFEP_Sandbox": {
+      "errors": 3,
+      "warnings": 0,
+      "collected": 5,
+      "total": 8,
+      "events": 10,
+      "success": false
+    },
+    "QFEP_Edge_Of_Chaos": {
+      "errors": 7,
+      "warnings": 0,
+      "collected": 1,
+      "total": 8,
+      "events": 5,
+      "success": false
+    },
+    "Chamber_QFEP": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 6,
+      "total": 6,
+      "events": 10,
+      "success": true
+    },
+    "CriticalAlgorithms_Algorithmic_Bias_Visualization": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 3,
+      "total": 3,
+      "events": 8,
+      "success": true
+    },
+    "CriticalAlgorithms_Applied_Ethics": {
+      "errors": 0,
+      "warnings": 1,
+      "collected": 3,
+      "total": 3,
+      "events": 6,
+      "success": true
+    },
+    "SpeculativeComputation_Situated_Computation": {
+      "errors": 0,
+      "warnings": 1,
+      "collected": 4,
+      "total": 4,
+      "events": 7,
+      "success": true
+    },
+    "SpeculativeComputation_Paraconsistent_Engineering": {
+      "errors": 0,
+      "warnings": 1,
+      "collected": 4,
+      "total": 4,
+      "events": 8,
+      "success": true
+    },
+    "QFEP_Synthesis": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 7,
+      "total": 8,
+      "events": 11,
+      "success": false
+    },
+    "SpeculativeComputation_Collective_Knowledge": {
+      "errors": 0,
+      "warnings": 1,
+      "collected": 4,
+      "total": 4,
+      "events": 8,
+      "success": true
+    },
+    "GT_Foundations": {
+      "errors": 0,
+      "warnings": 1,
+      "collected": 2,
+      "total": 2,
+      "events": 6,
+      "success": true
+    },
+    "SpeculativeComputation_Rhizome_Network": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 1,
+      "total": 1,
+      "events": 4,
+      "success": true
+    },
+    "GT_Pathfinding": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 1,
+      "total": 1,
+      "events": 4,
+      "success": true
+    },
+    "PostCrisis_Synthesis": {
+      "errors": 1,
+      "warnings": 1,
+      "collected": 4,
+      "total": 5,
+      "events": 7,
+      "success": false
+    },
+    "AdvancedLaboratory_Lab_Equipment_Simulation": {
+      "errors": 1,
+      "warnings": 0,
+      "collected": 0,
+      "total": 1,
+      "events": 4,
+      "success": false
+    },
+    "GT_Layout": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 1,
+      "total": 1,
+      "events": 4,
+      "success": true
+    },
+    "GT_Network_Analysis": {
+      "errors": 1,
+      "warnings": 1,
+      "collected": 2,
+      "total": 3,
+      "events": 5,
+      "success": false
+    },
+    "GT_Spanning_Trees": {
+      "errors": 2,
+      "warnings": 1,
+      "collected": 0,
+      "total": 1,
+      "events": 2,
+      "success": false
+    },
+    "GT_Connectivity": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 3,
+      "total": 3,
+      "events": 8,
+      "success": true
+    },
+    "GT_Flow": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 2,
+      "total": 2,
+      "events": 5,
+      "success": true
+    },
+    "GT_Matching": {
+      "errors": 0,
+      "warnings": 0,
+      "collected": 1,
+      "total": 1,
+      "events": 4,
+      "success": true
+    }
+  }
+}

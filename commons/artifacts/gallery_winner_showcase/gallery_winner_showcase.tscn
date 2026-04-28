@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c5c6n1de7ssbs"]
+
+[ext_resource type="Script" uid="uid://bnqaojq4x3t1k" path="res://commons/artifacts/gallery_winner_showcase/gallery_winner_showcase.gd" id="1"]
+
+[node name="GalleryWinnerShowcase" type="Node3D" unique_id=1170714640]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1494031465]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.333117)
