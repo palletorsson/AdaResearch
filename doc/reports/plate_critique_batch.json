@@ -1,0 +1,131 @@
+{
+  "jobs": [
+    {
+      "map": "Godel_Incompleteness",
+      "edge": "A",
+      "score": 3,
+      "verdict": "reads as the edge if you know what to look for",
+      "edge_reads_as": "A (formal impossibility) with strong K (inaccessible state) overlap",
+      "paragraph": "The plate establishes a clear bounded formal system (wireframe walls) containing provable truths (walkable floor) and unreachable truths (elevated islands across void gaps). The spatial grammar is sound: the void is structural, not bridgeable. However, the teaching moment is dilu",
+      "hints": [
+        "Move godel_statement_plaque onto one of the unreachable islands\u2014the self-referential statement should physically occupy the unprovable space",
+        "Rotate spawn to face directly toward islands so player immediately confronts unreachable truth",
+        "Replace full wireframe with solid walls and wireframe only on islands to make them visually pop",
+        "Add a broken bridge or ladder stopping mid-void\u2014showing attempted connection structurally fails",
+        "Echo plaque text across the void: statement visible on main floor, truth on unreachable island\u2014spatial encoding of 'expressible but unprovable'",
+        "Make teleporter appear only after player reads plaque and confronts the gap\u2014exit becomes acknowledgment of incompleteness"
+      ],
+      "report": "doc\\reports\\plate_critique_Godel_Incompleteness_A.json"
+    },
+    {
+      "map": "SearchPathfinding_Intro",
+      "edge": "B",
+      "score": 2,
+      "verdict": "intro, not cliff",
+      "edge_reads_as": "A or D\u2014search algorithms in general, not tractability limits",
+      "paragraph": "This plate reads as an introduction to search algorithms\u2014BFS, DFS, Dijkstra\u2014not as a demonstration of tractability collapse. All three artifacts appear at similar, comfortable scales (a small grid, a simple maze, a ~15-node graph), with no visual progression from 'solvable' to 'i",
+      "hints": [
+        "Replace three distinct algorithms with one problem (e.g., traveling salesperson) at three scales: N=5, N=8, N=12",
+        "Use vertical stacking or spatial volume to encode search tree growth\u2014N=12 should be visibly denser or taller than N=5",
+        "Make the largest instance overflow its grid bounds or spawn geometry that reaches toward the ceiling",
+        "Position the player path to walk past N=5 (instant solution), N=8 (slower), N=12 (visibly struggling or incomplete)",
+        "Consider a bespoke 'search tree visualizer' artifact that grows branches in real-time\u2014player watches N=5 finish, then N=12 fills the room before timing out",
+        "Use artifact density as the teaching variable: same footprint, exponentially more geometry per step in N"
+      ],
+      "report": "doc\\reports\\plate_critique_SearchPathfinding_Intro_B.json"
+    },
+    {
+      "map": "ML_Gradient_Landscape",
+      "edge": "C",
+      "score": 3,
+      "verdict": "partial",
+      "edge_reads_as": "unclear \u2014 reads as 'optimization landscape in general' rather than specifically Edge C's local-versus-global trap; could also read as Edge E (dimensionality reduction) due to the 3D projection",
+      "paragraph": "The map establishes the loss landscape as physical terrain \u2014 the fundamental metaphor is present and walkable. The purple gradient surface with wireframe mesh reads clearly as a mathematical function made spatial. However, the plate fails to make the trap visceral: multiple minim",
+      "hints": [
+        "Make 3-4 distinct valleys visible from spawn, each a different depth and with distinct color-coding (e.g., green for shallow local minima, deep blue for the global minimum)",
+        "Place the teleporter visibly in a valley separated from spawn by a ridge \u2014 the 'you can see it but can't walk there' moment must be unmistakable",
+        "Remove or drastically reduce the particle clouds \u2014 they obscure the surface and read as noise rather than structure",
+        "Add a visible descent trail or animated walker showing a path that converges into a local minimum while the teleporter glows in a different valley",
+        "Simplify or remove the perimeter terraced structures \u2014 they compete for attention without teaching the edge",
+        "Consider height-coding the valleys with labels or floating markers: 'local minimum' vs. 'global minimum' to make the hierarchy explicit without text-on-walls"
+      ],
+      "report": "doc\\reports\\plate_critique_ML_Gradient_Landscape_C.json"
+    },
+    {
+      "map": "CriticalAlgorithms_Bias_Gallery",
+      "edge": "D",
+      "score": 2,
+      "verdict": "empty gallery",
+      "edge_reads_as": "unclear",
+      "paragraph": "The map reads as a sparse exhibition floor rather than a teaching plate. Edge D requires visible sorting, categorization, and exclusion\u2014a Vesalius-cousin diagram where the unlabeled region becomes the argument. This space has the grid infrastructure (pink lines suggesting measure",
+      "hints": [
+        "Add central sorting artifact: a classifier with labeled bins where the player category is conspicuously absent",
+        "Use Vesalius pattern: place a detailed anatomical/typological diagram with one region deliberately unlabeled or greyed out",
+        "Show feature extraction visually: pedestals measuring height, color, shape\u2014with visible gaps in what's measured",
+        "Position unlabeled silhouette or data point at path center, surrounded by fully-labeled examples",
+        "Consider boolean-cut vocabulary: show the positive space of categories, make the excluded region a literal void",
+        "Add weight: the plate should be dense enough to read as diagram, not empty stage"
+      ],
+      "report": "doc\\reports\\plate_critique_CriticalAlgorithms_Bias_Gallery_D.json"
+    },
+    {
+      "map": "BodyProg_Hands",
+      "edge": "E",
+      "score": 2,
+      "verdict": "broken prototype",
+      "edge_reads_as": "unclear",
+      "paragraph": "The map's spatial grammar\u2014discrete purple wireframe grid suspended in black void\u2014sets up the continuous-discrete tension, but the plate fails because its teaching artifacts are missing or non-functional. The blurb promises floating hands in a mirror with nail customization, yet t",
+      "hints": [
+        "Fix color_picker artifact reference\u2014ensure it spawns and is reachable from spawn point",
+        "Add VR hand models at spawn or as ghost poses frozen in mid-gesture\u2014make the 'fragments in void' literal",
+        "Position mirror at eye level, 2-3 cells from spawn, facing player\u2014reflection should be unavoidable first sight",
+        "Mirror surface should show hands clearly, possibly with grid overlay or wireframe skin to emphasize quantization",
+        "Replace placeholder cubes with the actual teaching artifacts or remove them entirely",
+        "Consider dual mirrors: one showing continuous hand tracking, one showing grid-snapped positions\u2014the mismatch IS the plate"
+      ],
+      "report": "doc\\reports\\plate_critique_BodyProg_Hands_E.json"
+    },
+    {
+      "map": "Fold_Theatre",
+      "edge": "F",
+      "score": 2,
+      "verdict": "misreads as pattern emergence",
+      "cached": true,
+      "report": "doc\\reports\\plate_critique_Fold_Theatre_F.json"
+    },
+    {
+      "map": "QFEP_Lambda_Spectrum",
+      "edge": "H",
+      "score": 2,
+      "verdict": "teaches different edge",
+      "edge_reads_as": "G (parameter space as landscape) or E (emergence at threshold)",
+      "paragraph": "This map teaches parameter-space-as-landscape (Edge G) or emergence-at-threshold (Edge E), not apparatus-as-phenomenon (Edge H). The \u03bb gradient is visually clear\u2014order to edge to chaos\u2014and the corridor makes it walkable, but the phenomenon appears pre-existing rather than enacted",
+      "hints": [
+        "Add a central phenomenon that reads as 'ordered crystal' when approached from the \u03bb=0 end, 'chaotic particle cloud' when approached from the \u03bb=1 end\u2014same object, different apparatus-cuts",
+        "Split the corridor into two parallel paths (one ordered-frame, one chaotic-frame) that yield contradictory measurements of the same centerline phenomenon",
+        "Make the gradient visibly responsive to player attention: the phenomenon at position X changes when you look at it vs when you turn away",
+        "Place measurement apparatus artifacts (frames, lenses, grids) along the path that are visibly part of what they're measuring\u2014the frame and the framed as one system",
+        "Show the 'cut' that produces observer and observed: a bifurcation point where the path's choice determines which phenomenon appears ahead"
+      ],
+      "report": "doc\\reports\\plate_critique_QFEP_Lambda_Spectrum_H.json"
+    },
+    {
+      "map": "ML_Synthesis",
+      "edge": "L",
+      "score": 1,
+      "verdict": "complete mismatch",
+      "edge_reads_as": "C",
+      "paragraph": "The plate teaches synthesis and convergence across multiple optimization regimes, which is the antithesis of Edge L. Where L demands visible refusal to converge, this map shows three parallel islands each running optimization pipelines (RL walker, generative model, classifier) wi",
+      "hints": [
+        "Replace the central optimization tracker with a hill that agents visibly ignore or walk away from",
+        "Place 'failed' artifacts (Twombly scribbles, non-converging patterns, Darger cosmologies) on lower terraces with richer visual detail than anything at the peak",
+        "Show one agent thrashing indefinitely while beautiful complexity accrues in its wake \u2014 make the thrashing itself the artifact",
+        "Add a teleporter that unlocks only when player stops trying to reach the summit",
+        "Include a gradient descent path that deliberately leads to a 'worse' loss value where something unexpected blooms",
+        "Replace loss-tracking graphs with Hokusai manga pages \u2014 studies that never arrive at final form",
+        "Stage a Q-learning table that refuses to converge, with the non-convergence generating a fractal pattern"
+      ],
+      "report": "doc\\reports\\plate_critique_ML_Synthesis_L.json"
+    }
+  ]
+}

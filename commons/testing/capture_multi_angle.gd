@@ -31,6 +31,7 @@ const MAP_ANGLES: Array[Dictionary] = [
 	{ "name": "front",  "yaw": 0.0,           "pitch_factor": 0.35 },  # 3/4 front-down
 	{ "name": "left",   "yaw": PI * 0.5,      "pitch_factor": 0.35 },  # 3/4 from left
 	{ "name": "right",  "yaw": PI * -0.5,     "pitch_factor": 0.35 },  # 3/4 from right
+	{ "name": "back",   "yaw": PI,            "pitch_factor": 0.35 },  # 3/4 from back — full iso coverage for plate critique
 ]
 
 ## Artifact angles: yaw, pitch (orbit around artifact center)

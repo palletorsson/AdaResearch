@@ -1,0 +1,513 @@
+{
+  "n_artifacts": 1709,
+  "n_families": 45,
+  "n_edges": 13,
+  "edge_counts": {
+    "A": 28,
+    "B": 86,
+    "C": 158,
+    "D": 75,
+    "E": 101,
+    "F": 332,
+    "G": 111,
+    "H": 142,
+    "I": 220,
+    "J": 105,
+    "K": 109,
+    "L": 65,
+    "M": 177
+  },
+  "missing_edges": [],
+  "thin_edges": [],
+  "edge_top_artifacts": {
+    "A": [
+      {
+        "id": "world_map_tablet",
+        "sim": 0.327
+      },
+      {
+        "id": "hits_reset_display",
+        "sim": 0.188
+      },
+      {
+        "id": "static_point",
+        "sim": 0.181
+      },
+      {
+        "id": "rotating_cube_demo",
+        "sim": 0.16
+      },
+      {
+        "id": "markov_chains",
+        "sim": 0.116
+      },
+      {
+        "id": "gridagent",
+        "sim": 0.114
+      },
+      {
+        "id": "script_runner",
+        "sim": 0.1
+      },
+      {
+        "id": "grammar_markov",
+        "sim": 0.098
+      }
+    ],
+    "B": [
+      {
+        "id": "tree_gen",
+        "sim": 0.475
+      },
+      {
+        "id": "situated_readout",
+        "sim": 0.372
+      },
+      {
+        "id": "becoming_catalyst",
+        "sim": 0.258
+      },
+      {
+        "id": "wedge_skill_pickup",
+        "sim": 0.254
+      },
+      {
+        "id": "markov_chains_tree",
+        "sim": 0.199
+      },
+      {
+        "id": "lindenmayer_tube_tree",
+        "sim": 0.192
+      },
+      {
+        "id": "dna_workstation",
+        "sim": 0.185
+      },
+      {
+        "id": "catalyst_pedestal",
+        "sim": 0.178
+      }
+    ],
+    "C": [
+      {
+        "id": "edmonds_algorithm",
+        "sim": 0.493
+      },
+      {
+        "id": "loss_function_comparator",
+        "sim": 0.423
+      },
+      {
+        "id": "gradient_descent",
+        "sim": 0.377
+      },
+      {
+        "id": "gradient_descent_landscape",
+        "sim": 0.332
+      },
+      {
+        "id": "gradient_descent_visualization",
+        "sim": 0.319
+      },
+      {
+        "id": "sorting_algorithm_race",
+        "sim": 0.269
+      },
+      {
+        "id": "gradient_hunter",
+        "sim": 0.246
+      },
+      {
+        "id": "perceptron_playground",
+        "sim": 0.245
+      }
+    ],
+    "D": [
+      {
+        "id": "GeneticProgramming",
+        "sim": 0.229
+      },
+      {
+        "id": "karger_algorithm",
+        "sim": 0.169
+      },
+      {
+        "id": "parasol_triangle",
+        "sim": 0.153
+      },
+      {
+        "id": "r_c",
+        "sim": 0.144
+      },
+      {
+        "id": "topological_sort_algorithm",
+        "sim": 0.139
+      },
+      {
+        "id": "box_counting_dimension",
+        "sim": 0.133
+      },
+      {
+        "id": "penrose_triangle",
+        "sim": 0.121
+      },
+      {
+        "id": "angle_sum_triangle",
+        "sim": 0.121
+      }
+    ],
+    "E": [
+      {
+        "id": "clipboard",
+        "sim": 0.47
+      },
+      {
+        "id": "vr_map_loader_kiosk",
+        "sim": 0.325
+      },
+      {
+        "id": "ChainSwing",
+        "sim": 0.18
+      },
+      {
+        "id": "PendulumGrid3x3",
+        "sim": 0.172
+      },
+      {
+        "id": "progression_driver",
+        "sim": 0.167
+      },
+      {
+        "id": "SliderPress",
+        "sim": 0.161
+      },
+      {
+        "id": "HingeCrank",
+        "sim": 0.157
+      },
+      {
+        "id": "IKArm",
+        "sim": 0.148
+      }
+    ],
+    "F": [
+      {
+        "id": "grid_substrate_runner",
+        "sim": 0.477
+      },
+      {
+        "id": "fold_theatre_runner",
+        "sim": 0.471
+      },
+      {
+        "id": "tarjan_algorithm",
+        "sim": 0.427
+      },
+      {
+        "id": "pick_up_cube",
+        "sim": 0.415
+      },
+      {
+        "id": "KonigsbergBridge",
+        "sim": 0.412
+      },
+      {
+        "id": "push_relabel_algorithm",
+        "sim": 0.396
+      },
+      {
+        "id": "pickup_gate",
+        "sim": 0.39
+      },
+      {
+        "id": "scale_me",
+        "sim": 0.374
+      }
+    ],
+    "G": [
+      {
+        "id": "remains_to_be_seen",
+        "sim": 0.449
+      },
+      {
+        "id": "dark_sphere",
+        "sim": 0.279
+      },
+      {
+        "id": "frozen_glass_vessel",
+        "sim": 0.198
+      },
+      {
+        "id": "perception_altering",
+        "sim": 0.197
+      },
+      {
+        "id": "resonance_frequencies_visualizer",
+        "sim": 0.186
+      },
+      {
+        "id": "newton_raphson_visualization",
+        "sim": 0.183
+      },
+      {
+        "id": "grid2d_life",
+        "sim": 0.176
+      },
+      {
+        "id": "grid2d",
+        "sim": 0.175
+      }
+    ],
+    "H": [
+      {
+        "id": "example_3_3_pointing_in_the_direction_of_motion_vr",
+        "sim": 0.335
+      },
+      {
+        "id": "translation_cube_demo",
+        "sim": 0.229
+      },
+      {
+        "id": "PendulumPin",
+        "sim": 0.211
+      },
+      {
+        "id": "SimpleOscillatingBridge",
+        "sim": 0.2
+      },
+      {
+        "id": "ElphabaDress",
+        "sim": 0.196
+      },
+      {
+        "id": "Rack808Drums",
+        "sim": 0.171
+      },
+      {
+        "id": "sine_wall_corridor",
+        "sim": 0.17
+      },
+      {
+        "id": "particle_systems",
+        "sim": 0.151
+      }
+    ],
+    "I": [
+      {
+        "id": "bifurcation_walkway",
+        "sim": 0.283
+      },
+      {
+        "id": "lambda_slider",
+        "sim": 0.255
+      },
+      {
+        "id": "mirror_artifact",
+        "sim": 0.244
+      },
+      {
+        "id": "phi_slider",
+        "sim": 0.243
+      },
+      {
+        "id": "glitch_body",
+        "sim": 0.234
+      },
+      {
+        "id": "puls_markov",
+        "sim": 0.227
+      },
+      {
+        "id": "three_body_problem",
+        "sim": 0.219
+      },
+      {
+        "id": "nbody_simulation",
+        "sim": 0.213
+      }
+    ],
+    "J": [
+      {
+        "id": "explainable_ai",
+        "sim": 0.388
+      },
+      {
+        "id": "recommendation_systems",
+        "sim": 0.33
+      },
+      {
+        "id": "adaboost",
+        "sim": 0.325
+      },
+      {
+        "id": "attention_mechanisms",
+        "sim": 0.31
+      },
+      {
+        "id": "feature_engineering",
+        "sim": 0.257
+      },
+      {
+        "id": "gans",
+        "sim": 0.254
+      },
+      {
+        "id": "spotlight_attention",
+        "sim": 0.238
+      },
+      {
+        "id": "achilles_tortoise",
+        "sim": 0.234
+      }
+    ],
+    "K": [
+      {
+        "id": "edge_of_chaos_unlocked",
+        "sim": 0.378
+      },
+      {
+        "id": "random_forest",
+        "sim": 0.26
+      },
+      {
+        "id": "gray_scott_comparison",
+        "sim": 0.259
+      },
+      {
+        "id": "HarmonicBuilder",
+        "sim": 0.233
+      },
+      {
+        "id": "qfep_formula_3d",
+        "sim": 0.217
+      },
+      {
+        "id": "penteract_double_projection",
+        "sim": 0.2
+      },
+      {
+        "id": "turing_pattern_generator",
+        "sim": 0.193
+      },
+      {
+        "id": "force_field",
+        "sim": 0.193
+      }
+    ],
+    "L": [
+      {
+        "id": "mobius_strip_parametric",
+        "sim": 0.289
+      },
+      {
+        "id": "queer_morphology_specimen",
+        "sim": 0.195
+      },
+      {
+        "id": "random_number_book_page_collection",
+        "sim": 0.151
+      },
+      {
+        "id": "k_means_color",
+        "sim": 0.134
+      },
+      {
+        "id": "carpet_cove_gallery",
+        "sim": 0.109
+      },
+      {
+        "id": "radiolaria",
+        "sim": 0.108
+      },
+      {
+        "id": "WhiteNoiseGallery",
+        "sim": 0.105
+      },
+      {
+        "id": "line_builder_3d",
+        "sim": 0.1
+      }
+    ],
+    "M": [
+      {
+        "id": "wiki_fragment",
+        "sim": 0.513
+      },
+      {
+        "id": "bias_from_inside",
+        "sim": 0.228
+      },
+      {
+        "id": "GimbalStabilizer",
+        "sim": 0.225
+      },
+      {
+        "id": "3t",
+        "sim": 0.224
+      },
+      {
+        "id": "SoundscapeRadioRack",
+        "sim": 0.19
+      },
+      {
+        "id": "bias_visualizer",
+        "sim": 0.174
+      },
+      {
+        "id": "BeatFrequencies",
+        "sim": 0.17
+      },
+      {
+        "id": "SpringSuspension",
+        "sim": 0.166
+      }
+    ]
+  },
+  "family_counts": {
+    "algorithms_misc": 79,
+    "alternative_geometries": 16,
+    "arrays": 98,
+    "bar_array": 10,
+    "cellular_automata": 53,
+    "chaos": 5,
+    "color": 34,
+    "commons_artifacts": 156,
+    "computational_biology": 8,
+    "datastructures": 15,
+    "foundations": 15,
+    "furniture": 27,
+    "grammar_systems": 2,
+    "grid2d": 11,
+    "grid3d": 9,
+    "hazards": 85,
+    "isosurfaces": 22,
+    "lab": 15,
+    "living_paper": 34,
+    "lsystems": 17,
+    "machinelearning": 63,
+    "mesh_grammar": 21,
+    "nature_system": 3,
+    "neuroscience": 2,
+    "parametric": 15,
+    "physics_simulation": 91,
+    "primitives": 214,
+    "procgen_extra": 128,
+    "profile": 17,
+    "progression_debug": 2,
+    "qfep": 42,
+    "quantumalgorithms": 2,
+    "random_cubes": 1,
+    "randomness": 116,
+    "script_runner": 1,
+    "sdf_gallery": 10,
+    "shaders": 40,
+    "soft_bodies": 18,
+    "speech": 4,
+    "statistics": 10,
+    "steering": 16,
+    "swarmintelligence": 12,
+    "transforms": 21,
+    "wavefunctions": 140,
+    "wavefunctions_extra": 9
+  }
+}

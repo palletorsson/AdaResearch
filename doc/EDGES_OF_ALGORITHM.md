@@ -70,7 +70,7 @@ The catalyst introduced in `qfeplaboratory` is the *fold catalyst* — the playe
 
 **Map sketch.** A sorting room. The classifier sorts you into a box that does not apply. The player has a property the algorithm does not have a column for. The room will not let you out until you fit. You do not fit.
 
-**Sequence home.** `criticalalgorithms` / `postfoundationscrisis`.
+**Sequence home.** `criticalalgorithms` / `postfoundationscrisis`. **Also lives in `foundationscrisis`** — the Magritte pipe, Penrose triangle, Brouwer choice-sequence, constructive-proof artifacts in the foundation maps are D-edge content: the diagram that cannot say what it points at.
 
 ---
 
@@ -150,7 +150,7 @@ The catalyst introduced in `qfeplaboratory` is the *fold catalyst* — the playe
 
 **Map sketch.** A "where does the heat go" map. You watch a small algorithm run. Behind a wall, you find what it ran on — coal, a worker's hand, a river's flow rate, your own attention. You return to the algorithm carrying that knowledge. The algorithm has not changed. You have.
 
-**Sequence home.** `criticalalgorithms` / `postfoundationscrisis`, paired with B.
+**Sequence home.** `criticalalgorithms` / `postfoundationscrisis`, paired with B. **Also lives in `qfeplaboratory`** — λ × E(S) is the entropy term made literal as a dial; the bifurcation-walkway, edge-of-chaos, and order-vs-chaos artifacts teach this edge directly even though their wrapper sequence's headline is F+H. **Also lives in `bodyprogression`** — the dress / IK arm / mirror / torso-estimation artifacts teach the entropy of bodies; the body-substrate is its own thermodynamic cost. **Also surfaces in `foundationscrisis`** — Crisis_Synthesis re-visits QFEP, so bifurcation_diagram and the lambda/phi sliders appear in the synthesis maps.
 
 ---
 
@@ -166,7 +166,7 @@ The catalyst introduced in `qfeplaboratory` is the *fold catalyst* — the playe
 
 **Map sketch.** A fossil-bed map. You are standing on a training set. You can *see* who is in there — labellers, scrapers, source authors, deduplicated faces, removed slurs and the people who removed them. The model in the next room speaks fluently; you hear, in its voice, the people who taught it.
 
-**Sequence home.** `postfoundationscrisis`, paired with D.
+**Sequence home.** `postfoundationscrisis`, paired with D. **Also lives in `machinelearning`** — XAI, PCA, SVM, transformer, anomaly-detection artifacts teach the dataset-as-fossil edge directly; what was trained on, in what conditions, with what missing classes.
 
 ---
 
@@ -214,7 +214,7 @@ The catalyst introduced in `qfeplaboratory` is the *fold catalyst* — the playe
 
 **Map sketch.** A forensics map. You are presented with five works — text, images, sound, recipes, code. Three are human-made, two are model-made. The map gives you tools to investigate. You investigate. At the end the map asks: *what did the question feel like to be asked? what did wanting to know change in how you read?*
 
-**Sequence home.** `postfoundationscrisis`, paired with F.
+**Sequence home.** `postfoundationscrisis`, paired with F. **Also lives in `criticalalgorithms`** — the bias_from_inside, attention_economy_sim, surveillance_panopticon, data_labor_counter artifacts teach M directly, not just D/G.
 
 ---
 
