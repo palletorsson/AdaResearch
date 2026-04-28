@@ -482,9 +482,15 @@ func duplicate_mesh() -> MeshData:
 	md._adjacency_dirty = true
 	return md
 
-func merge(other: MeshData) -> void:
+## Append another MeshData into this one. With translate != Vector3.ZERO,
+## the appended vertices are shifted in space. Vertex indices are remapped.
+func merge(other: MeshData, translate: Vector3 = Vector3.ZERO) -> void:
 	var offset: int = vertices.size()
-	vertices.append_array(other.vertices)
+	if translate == Vector3.ZERO:
+		vertices.append_array(other.vertices)
+	else:
+		for v in other.vertices:
+			vertices.append(v + translate)
 	vertex_tags.append_array(other.vertex_tags)
 
 	for f in other.faces:
@@ -657,6 +663,537 @@ static func create_sphere(radius: float = 1.0, rings: int = 12, segments: int = 
 
 	md._init_metadata()
 	return md
+
+## Flat disk in the XZ plane — fan-triangulated from a centre vertex.
+## Ideal seed for flower morphology: paired with tag_by_grammar's
+## concentric flower bands and a top-down camera, this produces a
+## recognisable flower-from-above before any extrusion.
+static func create_disk(radius: float = 1.0, segments: int = 24) -> MeshData:
+	var md := MeshData.new()
+	md.vertices.append(Vector3.ZERO)
+	for i in range(segments):
+		var theta: float = TAU * float(i) / float(segments)
+		md.vertices.append(Vector3(cos(theta) * radius, 0.0, sin(theta) * radius))
+	for i in range(segments):
+		var next_idx: int = ((i + 1) % segments) + 1
+		md.faces.append(PackedInt32Array([0, i + 1, next_idx]))
+	md._init_metadata()
+	return md
+
+## Annular ring of concentric disks — gives more centroids in each band
+## (pistil/stamen/petal/sepal) so role tagging spreads evenly. Each ring
+## becomes a band of quads (two triangles each).
+static func create_flower_disk(radius: float = 1.0, rings: int = 5, segments: int = 24) -> MeshData:
+	var md := MeshData.new()
+	md.vertices.append(Vector3.ZERO)
+	for r in range(1, rings + 1):
+		var rr: float = radius * float(r) / float(rings)
+		for i in range(segments):
+			var theta: float = TAU * float(i) / float(segments)
+			md.vertices.append(Vector3(cos(theta) * rr, 0.0, sin(theta) * rr))
+	# Innermost ring: fan from centre.
+	for i in range(segments):
+		var a: int = 1 + i
+		var b: int = 1 + ((i + 1) % segments)
+		md.faces.append(PackedInt32Array([0, a, b]))
+	# Outer rings: quads between ring r and ring r+1.
+	for r in range(0, rings - 1):
+		var base_in: int = 1 + r * segments
+		var base_out: int = 1 + (r + 1) * segments
+		for i in range(segments):
+			var ni: int = (i + 1) % segments
+			var a := base_in + i
+			var b := base_in + ni
+			var c := base_out + ni
+			var d := base_out + i
+			md.faces.append(PackedInt32Array([a, b, c]))
+			md.faces.append(PackedInt32Array([a, c, d]))
+	md._init_metadata()
+	return md
+
+## Skin a graph (vertices + edges + per-vertex radii) into a tagged
+## tube mesh — the bridge from graph_grammar / lsystem_grammar into the
+## mesh-grammar's face/tag vocabulary.
+##
+## Each edge becomes an N-sided tube between parent and child, closed
+## at leaf and root ends. Faces inherit the child node's tags plus an
+## edge tag "edge_<i>" so downstream ops can select per-branch.
+##
+## Inputs:
+##   nodes: Array of Vector3 positions
+##   radii: Array of float (matched to nodes by index)
+##   edges: Array of [parent_idx, child_idx] pairs
+##   node_tags: Array of PackedStringArray (matched to nodes by index)
+##   segments: int — sides around the tube (8 = octagonal, 12 = smoother)
+##
+## Joint handling modes (param `mode`):
+##   "tubes"        — independent tubes per edge. Cheapest, gaps visible.
+##   "node_caps"    — same plus a small low-poly sphere at every node, so
+##                    joints are filled. Visually clean, no topology fix.
+##   "shared_rings" — TODO: emit one ring per node and reuse it for every
+##                    incident edge. Eliminates seams along straight chains
+##                    but leaves branching nodes still capped. Stub falls
+##                    back to "node_caps" for now.
+##   "metaball"     — march the SDF union of all capsules into a smooth
+##                    organic surface (B-Mesh-style). Tags are propagated
+##                    to each generated triangle by nearest-segment lookup.
+static func skin_graph(nodes: Array, radii: Array, edges: Array,
+		node_tags: Array = [], segments: int = 8,
+		mode: String = "node_caps") -> MeshData:
+	if mode == "metaball":
+		return _skin_graph_metaball(nodes, radii, edges, node_tags)
+	if mode == "shared_rings":
+		return _skin_graph_shared_rings(nodes, radii, edges, node_tags, segments)
+	if mode == "shared_rings_capped":
+		# Seamless chains + sphere caps only at branch nodes (degree > 2).
+		var rings_md: MeshData = _skin_graph_shared_rings(nodes, radii, edges, node_tags, segments)
+		_skin_graph_add_branch_caps(rings_md, nodes, radii, edges, node_tags, segments)
+		return rings_md
+	var md := MeshData.new()
+	if nodes.is_empty() or edges.is_empty():
+		md._init_metadata()
+		return md
+	# Track which nodes are referenced as children — only those need leaf caps.
+	var has_children: Dictionary = {}
+	for e in edges:
+		has_children[int(e[0])] = true  # parents are "internal"
+	for ei in range(edges.size()):
+		var e: Array = edges[ei]
+		var pi: int = int(e[0])
+		var ci: int = int(e[1])
+		if pi < 0 or pi >= nodes.size() or ci < 0 or ci >= nodes.size():
+			continue
+		var a: Vector3 = nodes[pi]
+		var b: Vector3 = nodes[ci]
+		var ra: float = float(radii[pi]) if pi < radii.size() else 0.1
+		var rb: float = float(radii[ci]) if ci < radii.size() else 0.1
+		var dir: Vector3 = b - a
+		var length: float = dir.length()
+		if length < 1e-6:
+			continue
+		var axis: Vector3 = dir / length
+		# Build orthonormal basis for the ring.
+		var up: Vector3 = Vector3.UP if absf(axis.dot(Vector3.UP)) < 0.95 else Vector3.RIGHT
+		var u: Vector3 = axis.cross(up).normalized()
+		var v: Vector3 = axis.cross(u).normalized()
+		# Ring of `segments` vertices at each end.
+		var ring_a: PackedInt32Array = PackedInt32Array()
+		var ring_b: PackedInt32Array = PackedInt32Array()
+		for s in range(segments):
+			var theta: float = TAU * float(s) / float(segments)
+			var off: Vector3 = u * cos(theta) + v * sin(theta)
+			ring_a.append(md.add_vertex(a + off * ra))
+			ring_b.append(md.add_vertex(b + off * rb))
+		# Tags applied to every face of this edge: child's node_tags + edge_i.
+		var face_tag_set: PackedStringArray = PackedStringArray()
+		face_tag_set.append("edge_%d" % ei)
+		if ci < node_tags.size():
+			for t in node_tags[ci]:
+				face_tag_set.append(String(t))
+		# Side quads.
+		for s in range(segments):
+			var s2: int = (s + 1) % segments
+			var t0: int = md.faces.size()
+			md.faces.append(PackedInt32Array([ring_a[s], ring_a[s2], ring_b[s2]]))
+			while md.face_tags.size() <= t0:
+				md.face_tags.append(PackedStringArray())
+				md.face_metadata.append({})
+				md.face_depth.append(0)
+			for ft in face_tag_set:
+				md.face_tags[t0].append(ft)
+			var t1: int = md.faces.size()
+			md.faces.append(PackedInt32Array([ring_a[s], ring_b[s2], ring_b[s]]))
+			while md.face_tags.size() <= t1:
+				md.face_tags.append(PackedStringArray())
+				md.face_metadata.append({})
+				md.face_depth.append(0)
+			for ft in face_tag_set:
+				md.face_tags[t1].append(ft)
+		# Cap leaf end (child node has no further children).
+		if not has_children.has(ci):
+			var cap_centre: int = md.add_vertex(b + axis * rb * 0.4)  # rounded cap
+			for s in range(segments):
+				var s2: int = (s + 1) % segments
+				var ti: int = md.faces.size()
+				md.faces.append(PackedInt32Array([ring_b[s], ring_b[s2], cap_centre]))
+				while md.face_tags.size() <= ti:
+					md.face_tags.append(PackedStringArray())
+					md.face_metadata.append({})
+					md.face_depth.append(0)
+				for ft in face_tag_set:
+					md.face_tags[ti].append(ft)
+				md.face_tags[ti].append("tip")
+	# Optionally cap every node with a small sphere — hides tube-end
+	# gaps at joints with minimal extra geometry. Enabled by default
+	# unless mode == "tubes".
+	if mode == "node_caps" or mode == "shared_rings":
+		_skin_graph_add_node_caps(md, nodes, radii, node_tags, segments)
+	# Fill in any remaining metadata for vertex_tags.
+	while md.vertex_tags.size() < md.vertices.size():
+		md.vertex_tags.append(PackedStringArray())
+	md._adjacency_dirty = true
+	return md
+
+
+# Add a low-poly sphere at each node. Sphere radius matches the node's
+# radius. Faces are tagged with the node's tags + "joint" so paint /
+# selectors can address them. Sphere tessellation reuses the same
+# `segments` count for ring resolution and uses 4 latitude rings.
+static func _skin_graph_add_node_caps(md: MeshData, nodes: Array,
+		radii: Array, node_tags: Array, segments: int) -> void:
+	var rings: int = 4  # latitude rings (poles + 3 mid bands)
+	for ni in range(nodes.size()):
+		var c: Vector3 = nodes[ni]
+		var r: float = float(radii[ni]) if ni < radii.size() else 0.05
+		var node_face_tags: PackedStringArray = PackedStringArray()
+		node_face_tags.append("joint")
+		if ni < node_tags.size():
+			for t in node_tags[ni]:
+				node_face_tags.append(String(t))
+		# Build sphere vertices: rings × segments grid, plus two pole verts.
+		var ring_verts: Array = []  # Array of PackedInt32Array
+		for ri in range(rings):
+			var phi: float = PI * float(ri + 1) / float(rings + 1)
+			var y: float = cos(phi) * r
+			var ring_r: float = sin(phi) * r
+			var ring: PackedInt32Array = PackedInt32Array()
+			for s in range(segments):
+				var theta: float = TAU * float(s) / float(segments)
+				var x: float = cos(theta) * ring_r
+				var z: float = sin(theta) * ring_r
+				ring.append(md.add_vertex(c + Vector3(x, y, z)))
+			ring_verts.append(ring)
+		var north: int = md.add_vertex(c + Vector3(0, r, 0))
+		var south: int = md.add_vertex(c + Vector3(0, -r, 0))
+		# North fan.
+		var top_ring: PackedInt32Array = ring_verts[0]
+		for s in range(segments):
+			var s2: int = (s + 1) % segments
+			_skin_append_face(md, north, top_ring[s2], top_ring[s], node_face_tags)
+		# Mid quads.
+		for ri in range(rings - 1):
+			var r0: PackedInt32Array = ring_verts[ri]
+			var r1: PackedInt32Array = ring_verts[ri + 1]
+			for s in range(segments):
+				var s2: int = (s + 1) % segments
+				_skin_append_face(md, r0[s], r0[s2], r1[s2], node_face_tags)
+				_skin_append_face(md, r0[s], r1[s2], r1[s], node_face_tags)
+		# South fan.
+		var bot_ring: PackedInt32Array = ring_verts[rings - 1]
+		for s in range(segments):
+			var s2: int = (s + 1) % segments
+			_skin_append_face(md, south, bot_ring[s], bot_ring[s2], node_face_tags)
+
+
+# Apply node-cap spheres ONLY at branch nodes (degree > 2). Used by
+# shared_rings_capped to close the small star opening at branchings
+# while preserving the seamless chain geometry from shared_rings.
+static func _skin_graph_add_branch_caps(md: MeshData, nodes: Array,
+		radii: Array, edges: Array, node_tags: Array, segments: int) -> void:
+	var n: int = nodes.size()
+	var degree: PackedInt32Array = PackedInt32Array()
+	degree.resize(n)
+	for i in range(n):
+		degree[i] = 0
+	for e in edges:
+		var pi: int = int(e[0])
+		var ci: int = int(e[1])
+		if pi >= 0 and pi < n: degree[pi] += 1
+		if ci >= 0 and ci < n: degree[ci] += 1
+	var rings: int = 4
+	for ni in range(n):
+		if degree[ni] <= 2:
+			continue
+		var c: Vector3 = nodes[ni]
+		var r: float = float(radii[ni]) if ni < radii.size() else 0.05
+		var node_face_tags: PackedStringArray = PackedStringArray()
+		node_face_tags.append("joint")
+		if ni < node_tags.size():
+			for t in node_tags[ni]:
+				node_face_tags.append(String(t))
+		var ring_verts: Array = []
+		for ri in range(rings):
+			var phi: float = PI * float(ri + 1) / float(rings + 1)
+			var y: float = cos(phi) * r
+			var ring_r: float = sin(phi) * r
+			var ring: PackedInt32Array = PackedInt32Array()
+			for s in range(segments):
+				var theta: float = TAU * float(s) / float(segments)
+				var x: float = cos(theta) * ring_r
+				var z: float = sin(theta) * ring_r
+				ring.append(md.add_vertex(c + Vector3(x, y, z)))
+			ring_verts.append(ring)
+		var north: int = md.add_vertex(c + Vector3(0, r, 0))
+		var south: int = md.add_vertex(c + Vector3(0, -r, 0))
+		var top_ring: PackedInt32Array = ring_verts[0]
+		for s in range(segments):
+			var s2: int = (s + 1) % segments
+			_skin_append_face(md, north, top_ring[s2], top_ring[s], node_face_tags)
+		for ri in range(rings - 1):
+			var r0: PackedInt32Array = ring_verts[ri]
+			var r1: PackedInt32Array = ring_verts[ri + 1]
+			for s in range(segments):
+				var s2: int = (s + 1) % segments
+				_skin_append_face(md, r0[s], r0[s2], r1[s2], node_face_tags)
+				_skin_append_face(md, r0[s], r1[s2], r1[s], node_face_tags)
+		var bot_ring: PackedInt32Array = ring_verts[rings - 1]
+		for s in range(segments):
+			var s2: int = (s + 1) % segments
+			_skin_append_face(md, south, bot_ring[s], bot_ring[s2], node_face_tags)
+
+
+# Helper: append a triangle and propagate face tags.
+static func _skin_append_face(md: MeshData, a: int, b: int, c: int,
+		tags: PackedStringArray) -> void:
+	var fi: int = md.faces.size()
+	md.faces.append(PackedInt32Array([a, b, c]))
+	while md.face_tags.size() <= fi:
+		md.face_tags.append(PackedStringArray())
+		md.face_metadata.append({})
+		md.face_depth.append(0)
+	for t in tags:
+		md.face_tags[fi].append(t)
+
+
+# Shared-rings mode — emit ONE ring of vertices per node, oriented to
+# the average direction of incident edges. Each edge connects its
+# parent's ring to its child's ring directly, so straight chains have
+# zero seams. At branch nodes, all child tubes still share the parent's
+# ring (the ring becomes a "tee" hub) — gaps don't open inside chains
+# but a small star-shaped opening can appear around branchings, which
+# we close with the existing node-cap fan if cap_branches is true.
+static func _skin_graph_shared_rings(nodes: Array, radii: Array,
+		edges: Array, node_tags: Array, segments: int) -> MeshData:
+	var md := MeshData.new()
+	if nodes.is_empty() or edges.is_empty():
+		md._init_metadata()
+		return md
+	var n: int = nodes.size()
+	# Compute per-node "axis" = average of (incident edge directions),
+	# weighted equally. For chain nodes this aligns the ring perpendicular
+	# to the through-line. For tips we fall back to the single edge.
+	var node_axis: Array = []
+	node_axis.resize(n)
+	for i in range(n):
+		node_axis[i] = Vector3.UP
+	# Track in/out edges per node.
+	var node_outgoing: Array = []
+	var node_incoming: Array = []
+	node_outgoing.resize(n); node_incoming.resize(n)
+	for i in range(n):
+		node_outgoing[i] = []
+		node_incoming[i] = []
+	for ei in range(edges.size()):
+		var e: Array = edges[ei]
+		var pi: int = int(e[0])
+		var ci: int = int(e[1])
+		if pi < 0 or pi >= n or ci < 0 or ci >= n:
+			continue
+		(node_outgoing[pi] as Array).append(ei)
+		(node_incoming[ci] as Array).append(ei)
+	for i in range(n):
+		var axis_sum := Vector3.ZERO
+		var count: int = 0
+		for ei in node_outgoing[i]:
+			var ec: int = int(edges[ei][1])
+			var d: Vector3 = (nodes[ec] as Vector3) - (nodes[i] as Vector3)
+			if d.length_squared() > 1e-10:
+				axis_sum += d.normalized()
+				count += 1
+		for ei in node_incoming[i]:
+			var ep: int = int(edges[ei][0])
+			var d2: Vector3 = (nodes[i] as Vector3) - (nodes[ep] as Vector3)
+			if d2.length_squared() > 1e-10:
+				axis_sum += d2.normalized()
+				count += 1
+		if count > 0 and axis_sum.length_squared() > 1e-8:
+			node_axis[i] = axis_sum.normalized()
+		else:
+			node_axis[i] = Vector3.UP
+
+	# Build one ring per node.
+	var node_rings: Array = []
+	node_rings.resize(n)
+	for i in range(n):
+		var c: Vector3 = nodes[i]
+		var r: float = float(radii[i]) if i < radii.size() else 0.05
+		var axis: Vector3 = node_axis[i]
+		var up: Vector3 = Vector3.UP if absf(axis.dot(Vector3.UP)) < 0.95 else Vector3.RIGHT
+		var u: Vector3 = axis.cross(up).normalized()
+		var v: Vector3 = axis.cross(u).normalized()
+		var ring: PackedInt32Array = PackedInt32Array()
+		for s in range(segments):
+			var theta: float = TAU * float(s) / float(segments)
+			var off: Vector3 = u * cos(theta) + v * sin(theta)
+			ring.append(md.add_vertex(c + off * r))
+		node_rings[i] = ring
+
+	# Connect each edge with side quads between parent's ring and child's ring.
+	# To avoid twisting along chains we re-index the child's ring so seg 0
+	# lies closest to parent's seg 0.
+	for ei in range(edges.size()):
+		var e: Array = edges[ei]
+		var pi: int = int(e[0])
+		var ci: int = int(e[1])
+		if pi < 0 or pi >= n or ci < 0 or ci >= n:
+			continue
+		var ring_a: PackedInt32Array = node_rings[pi]
+		var ring_b: PackedInt32Array = node_rings[ci]
+		# Anti-twist: rotate child ring so vertex 0 is closest to parent vertex 0.
+		var p0: Vector3 = md.vertices[ring_a[0]]
+		var best_off: int = 0
+		var best_d: float = INF
+		for s in range(segments):
+			var d: float = md.vertices[ring_b[s]].distance_squared_to(p0)
+			if d < best_d:
+				best_d = d
+				best_off = s
+		# Tags from the child node + edge index.
+		var face_tag_set: PackedStringArray = PackedStringArray()
+		face_tag_set.append("edge_%d" % ei)
+		if ci < node_tags.size():
+			for t in node_tags[ci]:
+				face_tag_set.append(String(t))
+		for s in range(segments):
+			var s2: int = (s + 1) % segments
+			var bs: int = (s + best_off) % segments
+			var bs2: int = (s2 + best_off) % segments
+			_skin_append_face(md, ring_a[s], ring_a[s2], ring_b[bs2], face_tag_set)
+			_skin_append_face(md, ring_a[s], ring_b[bs2], ring_b[bs], face_tag_set)
+
+	# Cap leaf nodes (no outgoing edges) with a single tip vertex + fan.
+	for i in range(n):
+		var outgoing: Array = node_outgoing[i]
+		var incoming: Array = node_incoming[i]
+		if outgoing.is_empty() and not incoming.is_empty():
+			# Leaf — cap with a tip dome.
+			var c: Vector3 = nodes[i]
+			var r: float = float(radii[i]) if i < radii.size() else 0.05
+			var axis: Vector3 = node_axis[i]
+			var tip_idx: int = md.add_vertex(c + axis * r * 0.5)
+			var ring: PackedInt32Array = node_rings[i]
+			var tip_tags: PackedStringArray = PackedStringArray()
+			tip_tags.append("tip")
+			if i < node_tags.size():
+				for t in node_tags[i]:
+					tip_tags.append(String(t))
+			for s in range(segments):
+				var s2: int = (s + 1) % segments
+				_skin_append_face(md, ring[s], ring[s2], tip_idx, tip_tags)
+		elif incoming.is_empty() and not outgoing.is_empty():
+			# Root — cap base.
+			var c2: Vector3 = nodes[i]
+			var r2: float = float(radii[i]) if i < radii.size() else 0.05
+			var axis2: Vector3 = node_axis[i]
+			var base_idx: int = md.add_vertex(c2 - axis2 * r2 * 0.5)
+			var ring2: PackedInt32Array = node_rings[i]
+			var base_tags: PackedStringArray = PackedStringArray()
+			base_tags.append("base")
+			if i < node_tags.size():
+				for t in node_tags[i]:
+					base_tags.append(String(t))
+			for s in range(segments):
+				var s2: int = (s + 1) % segments
+				_skin_append_face(md, ring2[s2], ring2[s], base_idx, base_tags)
+
+	while md.vertex_tags.size() < md.vertices.size():
+		md.vertex_tags.append(PackedStringArray())
+	md._adjacency_dirty = true
+	return md
+
+
+# Metaball mode — march the smooth-union SDF of all capsule segments
+# into a single tagged surface. Each emitted triangle gets its tags by
+# nearest-segment lookup, so per-edge / per-node painting still works.
+static func _skin_graph_metaball(nodes: Array, radii: Array, edges: Array,
+		node_tags: Array) -> MeshData:
+	var md := MeshData.new()
+	if nodes.is_empty() or edges.is_empty():
+		md._init_metadata()
+		return md
+	# Build a temporary GraphState-like resource so existing code paths work.
+	var GraphState = load("res://commons/graph_grammar/graph_state.gd")
+	var GraphMetaballSDF = load("res://commons/graph_grammar/graph_metaball_sdf.gd")
+	var SDFMarchingCubes = load("res://commons/morphology/sdf/sdf_marching_cubes.gd")
+	var g = GraphState.new()
+	for i in range(nodes.size()):
+		var p: Vector3 = nodes[i]
+		var r: float = float(radii[i]) if i < radii.size() else 0.05
+		var tags := PackedStringArray()
+		if i < node_tags.size():
+			for t in node_tags[i]:
+				tags.append(String(t))
+		g.add_node(p, r, -1, tags)
+	g.edges = []
+	for e in edges:
+		g.edges.append([int(e[0]), int(e[1])])
+	var sdf = GraphMetaballSDF.from_graph(g, 0.18)
+	var array_mesh: ArrayMesh = SDFMarchingCubes.bake(sdf, Vector3i(72, 72, 72))
+	if array_mesh == null or array_mesh.get_surface_count() == 0:
+		md._init_metadata()
+		return md
+	var surface: Array = array_mesh.surface_get_arrays(0)
+	var verts: PackedVector3Array = surface[Mesh.ARRAY_VERTEX]
+	var idx: PackedInt32Array = surface[Mesh.ARRAY_INDEX] if surface[Mesh.ARRAY_INDEX] != null else PackedInt32Array()
+	# Append vertices.
+	for v in verts:
+		md.add_vertex(v)
+	# Marching cubes commonly emits triangle soup without index buffer.
+	if idx.size() == 0:
+		for tri_i in range(verts.size() / 3):
+			var fi: int = md.faces.size()
+			md.faces.append(PackedInt32Array([tri_i * 3, tri_i * 3 + 1, tri_i * 3 + 2]))
+			_metaball_tag_face(md, fi, nodes, edges, node_tags)
+	else:
+		for tri_i in range(idx.size() / 3):
+			var fi: int = md.faces.size()
+			md.faces.append(PackedInt32Array([idx[tri_i * 3], idx[tri_i * 3 + 1], idx[tri_i * 3 + 2]]))
+			_metaball_tag_face(md, fi, nodes, edges, node_tags)
+	while md.vertex_tags.size() < md.vertices.size():
+		md.vertex_tags.append(PackedStringArray())
+	md._adjacency_dirty = true
+	return md
+
+
+# Tag a metaball face by finding the nearest edge to its centroid and
+# inheriting that edge's child node tags + "edge_<i>".
+static func _metaball_tag_face(md: MeshData, fi: int, nodes: Array,
+		edges: Array, node_tags: Array) -> void:
+	while md.face_tags.size() <= fi:
+		md.face_tags.append(PackedStringArray())
+		md.face_metadata.append({})
+		md.face_depth.append(0)
+	var f := md.faces[fi]
+	var c: Vector3 = (md.vertices[f[0]] + md.vertices[f[1]] + md.vertices[f[2]]) / 3.0
+	var best_ei: int = 0
+	var best_d: float = INF
+	for ei in range(edges.size()):
+		var e: Array = edges[ei]
+		var pi: int = int(e[0])
+		var ci: int = int(e[1])
+		if pi >= nodes.size() or ci >= nodes.size():
+			continue
+		var a: Vector3 = nodes[pi]
+		var b: Vector3 = nodes[ci]
+		var d: float = _point_segment_distance_squared(c, a, b)
+		if d < best_d:
+			best_d = d
+			best_ei = ei
+	md.face_tags[fi].append("edge_%d" % best_ei)
+	if best_ei < edges.size():
+		var ci2: int = int(edges[best_ei][1])
+		if ci2 < node_tags.size():
+			for t in node_tags[ci2]:
+				md.face_tags[fi].append(String(t))
+
+
+static func _point_segment_distance_squared(p: Vector3, a: Vector3, b: Vector3) -> float:
+	var ab: Vector3 = b - a
+	var len2: float = ab.length_squared()
+	if len2 < 1e-10:
+		return p.distance_squared_to(a)
+	var t: float = clamp((p - a).dot(ab) / len2, 0.0, 1.0)
+	return p.distance_squared_to(a + ab * t)
 
 # ---------------------------------------------------------------------------
 # Private

@@ -31,6 +31,10 @@ const PaintByTagOp      = preload("res://commons/mesh_grammar/operations/paint_b
 const HideByRuleOp      = preload("res://commons/mesh_grammar/operations/hide_by_rule_op.gd")
 const ExtrudeByRoleOp   = preload("res://commons/mesh_grammar/operations/extrude_by_role_op.gd")
 const BulgeByRoleOp     = preload("res://commons/mesh_grammar/operations/bulge_by_role_op.gd")
+const ClusterByRoleOp   = preload("res://commons/mesh_grammar/operations/cluster_by_role_op.gd")
+const ReplaceWithMeshByRoleOp = preload("res://commons/mesh_grammar/operations/replace_with_mesh_by_role_op.gd")
+const SmoothSubdivideOp = preload("res://commons/mesh_grammar/operations/smooth_subdivide_op.gd")
+const MarkBillboardAnchorsOp = preload("res://commons/mesh_grammar/operations/mark_billboard_anchors_op.gd")
 const RDSimScriptMG      = preload("res://commons/rd_grammar/rd_sim.gd")
 const MeshDataClass      = preload("res://commons/mesh_grammar/mesh_data.gd")
 
@@ -164,6 +168,15 @@ func _run() -> void:
 		elif seed_val.has("ca") and seed_val["ca"] is Dictionary:
 			custom_seed_mesh = _build_ca_seed_mesh(seed_val["ca"])
 			mg_node.seed_type = "custom"
+		elif seed_val.has("graph") and seed_val["graph"] is Dictionary:
+			custom_seed_mesh = _build_graph_seed_mesh(seed_val["graph"])
+			mg_node.seed_type = "custom"
+		elif seed_val.has("graph_grammar") and seed_val["graph_grammar"] is Dictionary:
+			custom_seed_mesh = _build_graph_grammar_seed_mesh(seed_val["graph_grammar"])
+			mg_node.seed_type = "custom"
+		elif seed_val.has("compose") and seed_val["compose"] is Array:
+			custom_seed_mesh = await _build_composed_seed_mesh(seed_val["compose"])
+			mg_node.seed_type = "custom"
 		elif seed_val.has("scene"):
 			custom_seed_mesh = await _load_scene_seed_mesh(str(seed_val["scene"]))
 			if custom_seed_mesh != null:
@@ -191,6 +204,11 @@ func _run() -> void:
 	mg_node.generations = int(config.get("generations", 2))
 	mg_node.auto_generate = false
 	mg_node.base_color = Color(0.82, 0.76, 0.6)
+	# Forward material sub-dict so configs can drive surface qualities
+	# (metallic/roughness/iridescence/transparency/emission). These also
+	# match CritterDNA's surface fields one-for-one for round-trip parity.
+	if config.has("material") or config.has("roughness") or config.has("metallic"):
+		mg_node.configure(config)
 
 	var rules_arr: Array = config.get("rules", [])
 	for rdef in rules_arr:
@@ -213,6 +231,22 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 
+	# Foliage billboards — collect any face_metadata billboard markers
+	# emitted by mark_billboard_anchors_op into one MultiMesh per atlas.
+	# This is the cheap-foliage path: alpha-tested quads instead of
+	# stamped solid primitives. Counts get logged so configs can verify
+	# the budget savings.
+	var BillboardCollector = load("res://commons/foliage/billboard_collector.gd")
+	if BillboardCollector != null and mg_node.grammar != null \
+			and mg_node.grammar.current_mesh != null:
+		var n_atlases: int = BillboardCollector.collect_into(
+			mg_node, mg_node.grammar.current_mesh)
+		if n_atlases > 0:
+			# Re-bake the main mesh now that billboard faces were removed.
+			mg_node._update_display(mg_node.grammar.current_mesh)
+			print("[render_mesh_grammar] billboards: %d MultiMesh batch(es) installed" % n_atlases)
+		await process_frame
+
 	# Seat the generated form on the floor plane so the ground does not cut through it.
 	var prelift_aabb := _combined_aabb(mg_node)
 	var floor_clearance: float = float(config.get("floor_clearance", 0.05))
@@ -229,6 +263,13 @@ func _run() -> void:
 	var focus: Vector3 = center + Vector3(0.0, aabb.size.y * focus_y_bias, 0.0)
 	var yaw: float = float(config.get("camera_yaw", 0.55))
 	var pitch: float = float(config.get("camera_pitch", 0.35))   # positive = looking down from above
+	# Convenience preset: camera_angle = "top" | "iso" | "side" | "front"
+	var cam_angle: String = String(config.get("camera_angle", "")).to_lower()
+	match cam_angle:
+		"top":   yaw = 0.0;  pitch = 1.45   # near-vertical, looking down — flowers from above
+		"iso":   yaw = 0.55; pitch = 0.55
+		"side":  yaw = 1.5708; pitch = 0.0
+		"front": yaw = 0.0;  pitch = 0.0
 	var orbit_dir := Vector3(sin(yaw) * cos(pitch), sin(pitch), cos(yaw) * cos(pitch)).normalized()
 	var forward := -orbit_dir
 	var basis := _camera_basis_from_forward(forward)
@@ -288,6 +329,10 @@ func _build_rule(rdef: Dictionary):
 		"hide_by_rule":   return HideByRuleOp.new(sel, params)
 		"extrude_by_role": return ExtrudeByRoleOp.new(sel, params)
 		"bulge_by_role":   return BulgeByRoleOp.new(sel, params)
+		"cluster_by_role": return ClusterByRoleOp.new(sel, params)
+		"replace_with_mesh_by_role": return ReplaceWithMeshByRoleOp.new(sel, params)
+		"smooth_subdivide": return SmoothSubdivideOp.new(sel, params)
+		"mark_billboard_anchors": return MarkBillboardAnchorsOp.new(sel, params)
 	push_warning("Unknown op: %s" % op)
 	return null
 
@@ -540,6 +585,331 @@ func _build_ca_seed_mesh(ca_cfg: Dictionary):
 	print("render_mesh_grammar: CA seed mesh %s %dx%d -> %d verts, %d faces" % [
 		rule_name, N, N, verts.size(), faces.size()])
 	return MeshDataClass.from_arrays(verts, faces)
+
+
+## DNA BRIDGE — evolve a graph_grammar from rules, then skin it.
+## This is the moment graph_grammar becomes a first-class mesh-grammar
+## seed. Spec:
+##   seed_node: {"pos":[x,y,z], "radius":r, "tags":["..."]}
+##   rules: [{"op":"spawn_branch"|"subdivide_edge"|"noise_radii"|"noise_displace"|"sine_radii",
+##            "selector":"all"|"leaves"|"roots"|"tag:foo", "params":{...}}, ...]
+##   generations: int
+##   skin_segments: int (passed to skin_graph)
+func _build_graph_grammar_seed_mesh(gg_cfg: Dictionary):
+	var GraphState = load("res://commons/graph_grammar/graph_state.gd")
+	var GraphGrammar = load("res://commons/graph_grammar/graph_grammar.gd")
+	var GraphSelector = load("res://commons/graph_grammar/graph_selector.gd")
+	var SpawnBranchOp = load("res://commons/graph_grammar/operations/spawn_branch_op.gd")
+	var SubdivideEdgeOp = load("res://commons/graph_grammar/operations/subdivide_edge_op.gd")
+	var NoiseRadiiOp = load("res://commons/graph_grammar/operations/noise_radii_op.gd")
+	var NoiseDisplaceOpGG = load("res://commons/graph_grammar/operations/noise_displace_op.gd")
+	var SineRadiiOp = load("res://commons/graph_grammar/operations/sine_radii_op.gd")
+
+	var state = GraphState.new()
+	# Seed node.
+	var seed_pos := Vector3.ZERO
+	var seed_radius: float = 0.15
+	var seed_tags := PackedStringArray(["leaf"])
+	if gg_cfg.has("seed_node") and gg_cfg["seed_node"] is Dictionary:
+		var sn: Dictionary = gg_cfg["seed_node"]
+		if sn.has("pos") and sn["pos"] is Array:
+			var pa: Array = sn["pos"]
+			if pa.size() >= 3:
+				seed_pos = Vector3(float(pa[0]), float(pa[1]), float(pa[2]))
+		seed_radius = float(sn.get("radius", seed_radius))
+		var tags_in = sn.get("tags", null)
+		if tags_in is Array:
+			seed_tags = PackedStringArray()
+			for t in tags_in:
+				seed_tags.append(String(t))
+	state.add_node(seed_pos, seed_radius, -1, seed_tags)
+
+	var grammar = GraphGrammar.new()
+	grammar.set_seed(state)
+	grammar.max_nodes = int(gg_cfg.get("max_nodes", 1500))
+
+	for rdef in gg_cfg.get("rules", []):
+		if not (rdef is Dictionary): continue
+		var op_name: String = String(rdef.get("op", ""))
+		var sel_str: String = String(rdef.get("selector", "leaves"))
+		var p: Dictionary = rdef.get("params", {})
+		var sel = null
+		match sel_str:
+			"all": sel = GraphSelector.all_nodes()
+			"leaves": sel = GraphSelector.leaves()
+			"roots": sel = GraphSelector.roots()
+			_:
+				if sel_str.begins_with("tag:"):
+					sel = GraphSelector.by_tag(sel_str.substr(4))
+				else:
+					sel = GraphSelector.leaves()
+		var rule = null
+		match op_name:
+			"spawn_branch":   rule = SpawnBranchOp.new(sel, p)
+			"subdivide_edge": rule = SubdivideEdgeOp.new(sel, p)
+			"noise_radii":    rule = NoiseRadiiOp.new(sel, p)
+			"noise_displace": rule = NoiseDisplaceOpGG.new(sel, p)
+			"sine_radii":     rule = SineRadiiOp.new(sel, p)
+			_: push_warning("graph_grammar: unknown op %s" % op_name)
+		if rule != null:
+			grammar.add_rule(rule)
+
+	grammar.apply_n(int(gg_cfg.get("generations", 3)))
+	var final_state = grammar.state
+	# Convert to skin_graph inputs.
+	var nodes: Array = []
+	var radii: Array = []
+	for i in range(final_state.nodes.size()):
+		nodes.append(final_state.nodes[i])
+		radii.append(final_state.radii[i])
+	var edges: Array = []
+	for e in final_state.edges:
+		edges.append([int(e[0]), int(e[1])])
+	var packed_tags: Array = []
+	for t in final_state.node_tags:
+		var p2 := PackedStringArray()
+		for s in t:
+			p2.append(String(s))
+		packed_tags.append(p2)
+	var segments: int = int(gg_cfg.get("skin_segments", 6))
+	var skin_mode: String = String(gg_cfg.get("skin_mode", "node_caps"))
+	print("[render_mesh_grammar] graph_grammar evolved: %d nodes, %d edges -> skin segments=%d, mode=%s" % [
+		nodes.size(), edges.size(), segments, skin_mode])
+	return MeshDataClass.skin_graph(nodes, radii, edges, packed_tags, segments, skin_mode)
+
+
+## DNA BRIDGE — compose multiple seeds into a single tagged mesh.
+## Each entry is itself a seed spec (any of the seed dispatcher branches:
+## flower_disk shorthand, graph, lsystem, scene, primitive name, ...) with
+## an optional "offset": [x,y,z]. The first seed becomes the base; each
+## subsequent seed is merged in via MeshData.merge.
+##
+## Enables a complete flower in one config: a flower_disk for petals/sepals
+## merged with a stamen-ring graph for filaments, all tag-labelled.
+func _build_composed_seed_mesh(compose_arr: Array):
+	var base = null
+	for entry in compose_arr:
+		if not (entry is Dictionary):
+			continue
+		var entry_dict: Dictionary = entry
+		var offset := Vector3.ZERO
+		if entry_dict.has("offset") and entry_dict["offset"] is Array \
+				and (entry_dict["offset"] as Array).size() >= 3:
+			var oa: Array = entry_dict["offset"]
+			offset = Vector3(float(oa[0]), float(oa[1]), float(oa[2]))
+		var sub = null
+		if entry_dict.has("graph") and entry_dict["graph"] is Dictionary:
+			sub = _build_graph_seed_mesh(entry_dict["graph"])
+		elif entry_dict.has("rd") and entry_dict["rd"] is Dictionary:
+			sub = _build_rd_seed_mesh(entry_dict["rd"])
+		elif entry_dict.has("lsystem") and entry_dict["lsystem"] is Dictionary:
+			sub = _build_lsystem_seed_mesh(entry_dict["lsystem"])
+		elif entry_dict.has("ca") and entry_dict["ca"] is Dictionary:
+			sub = _build_ca_seed_mesh(entry_dict["ca"])
+		elif entry_dict.has("scene"):
+			sub = await _load_scene_seed_mesh(str(entry_dict["scene"]))
+		elif entry_dict.has("primitive"):
+			# Built-in named primitive at given scale.
+			var name := String(entry_dict["primitive"])
+			var sc := float(entry_dict.get("scale", 0.6))
+			match name:
+				"disk": sub = MeshDataClass.create_disk(sc, int(entry_dict.get("segments", 24)))
+				"flower_disk": sub = MeshDataClass.create_flower_disk(
+					sc, int(entry_dict.get("rings", 5)), int(entry_dict.get("segments", 24)))
+				"cube": sub = MeshDataClass.create_cube(sc)
+				"sphere": sub = MeshDataClass.create_sphere(sc, 12, 16)
+				"icosahedron": sub = MeshDataClass.create_icosahedron(sc)
+		if sub == null:
+			continue
+		# Apply per-seed extra tags so downstream paint_by_tag can address
+		# this composite section even if the seed didn't tag itself.
+		if entry_dict.has("tag"):
+			var t := String(entry_dict["tag"])
+			for fi in range(sub.face_tags.size()):
+				sub.face_tags[fi].append(t)
+		if base == null:
+			# Translate base too if offset was given.
+			if offset != Vector3.ZERO:
+				for vi in range(sub.vertices.size()):
+					sub.vertices[vi] = sub.vertices[vi] + offset
+			base = sub
+		else:
+			base.merge(sub, offset)
+	print("[render_mesh_grammar] composed seed: %d verts / %d faces from %d entries" % [
+		(base.vertices.size() if base else 0),
+		(base.faces.size() if base else 0),
+		compose_arr.size()])
+	return base
+
+
+## DNA BRIDGE — skin a literal graph spec into a tagged tube mesh.
+## Spec keys:
+##   nodes: Array[Vector3 | [x,y,z]]
+##   radii: Array[float] (matched to nodes)
+##   edges: Array[[parent_idx, child_idx]]
+##   node_tags: Array[Array[String]] (matched to nodes)
+##   segments: int (default 8)
+##   preset: String — convenience presets (e.g. "stamen_ring", "insect_legs")
+func _build_graph_seed_mesh(g_cfg: Dictionary):
+	# Allow named presets to bootstrap common topologies without hand-writing
+	# 24 nodes for an insect.
+	var preset: String = String(g_cfg.get("preset", "")).to_lower()
+	var nodes_arr: Array = []
+	var radii_arr: Array = []
+	var edges_arr: Array = []
+	var tags_arr: Array = []
+	if preset == "stamen_ring":
+		# Centre pistil + N stamen stalks rising at slight outward tilt.
+		var n: int = int(g_cfg.get("count", 12))
+		var ring_r: float = float(g_cfg.get("ring_radius", 0.5))
+		var height: float = float(g_cfg.get("height", 0.7))
+		var tilt: float = float(g_cfg.get("tilt", 0.15))
+		nodes_arr.append(Vector3.ZERO)
+		radii_arr.append(0.06); tags_arr.append(["base"])
+		for i in range(n):
+			var theta: float = TAU * float(i) / float(n)
+			var bx: float = cos(theta) * ring_r * 0.25
+			var bz: float = sin(theta) * ring_r * 0.25
+			var tx: float = cos(theta) * (ring_r + tilt)
+			var tz: float = sin(theta) * (ring_r + tilt)
+			var base_idx: int = nodes_arr.size()
+			nodes_arr.append(Vector3(bx, 0.0, bz))
+			radii_arr.append(0.04); tags_arr.append(["stalk_base"])
+			edges_arr.append([0, base_idx])
+			var tip_idx: int = nodes_arr.size()
+			nodes_arr.append(Vector3(tx, height, tz))
+			radii_arr.append(0.06); tags_arr.append(["anther"])
+			edges_arr.append([base_idx, tip_idx])
+	elif preset == "spider":
+		# Round abdomen + small thorax + 8 legs in 4 pairs, all branching from thorax.
+		var leg_len: float = float(g_cfg.get("leg_length", 0.55))
+		nodes_arr.append(Vector3(0, 0.18, -0.25))     # head
+		radii_arr.append(0.06); tags_arr.append(["head"])
+		nodes_arr.append(Vector3(0, 0.18, 0))          # thorax (idx 1)
+		radii_arr.append(0.13); tags_arr.append(["thorax"])
+		edges_arr.append([0, 1])
+		nodes_arr.append(Vector3(0, 0.16, 0.35))       # abdomen (idx 2)
+		radii_arr.append(0.22); tags_arr.append(["abdomen"])
+		edges_arr.append([1, 2])
+		# Eight legs in 4 pairs, each two segments.
+		var z_offsets: Array = [-0.10, -0.03, 0.04, 0.11]
+		for zi in range(z_offsets.size()):
+			for side in [-1.0, 1.0]:
+				var anchor_idx: int = nodes_arr.size()
+				nodes_arr.append(Vector3(0.10 * side, 0.18, z_offsets[zi]))
+				radii_arr.append(0.04); tags_arr.append(["coxa"])
+				edges_arr.append([1, anchor_idx])
+				var knee_idx: int = nodes_arr.size()
+				nodes_arr.append(Vector3(0.42 * side, 0.30, z_offsets[zi] + 0.08 * side))
+				radii_arr.append(0.03); tags_arr.append(["femur"])
+				edges_arr.append([anchor_idx, knee_idx])
+				var foot_idx: int = nodes_arr.size()
+				nodes_arr.append(Vector3(0.55 * side, -0.05, z_offsets[zi] + 0.20 * side))
+				radii_arr.append(0.018); tags_arr.append(["tibia"])
+				edges_arr.append([knee_idx, foot_idx])
+	elif preset == "bee":
+		# Plump body + antennae + 6 legs + 2 wing stubs.
+		nodes_arr.append(Vector3(0, 0.18, -0.45))      # head
+		radii_arr.append(0.12); tags_arr.append(["head"])
+		nodes_arr.append(Vector3(0, 0.18, -0.15))      # thorax (idx 1)
+		radii_arr.append(0.16); tags_arr.append(["thorax"])
+		edges_arr.append([0, 1])
+		nodes_arr.append(Vector3(0, 0.18, 0.25))       # abdomen
+		radii_arr.append(0.20); tags_arr.append(["abdomen"])
+		edges_arr.append([1, 2])
+		nodes_arr.append(Vector3(0, 0.16, 0.55))       # stinger
+		radii_arr.append(0.04); tags_arr.append(["abdomen"])
+		edges_arr.append([2, 3])
+		# Antennae from head.
+		nodes_arr.append(Vector3(-0.08, 0.32, -0.55))
+		radii_arr.append(0.02); tags_arr.append(["antenna"])
+		edges_arr.append([0, 4])
+		nodes_arr.append(Vector3(0.08, 0.32, -0.55))
+		radii_arr.append(0.02); tags_arr.append(["antenna"])
+		edges_arr.append([0, 5])
+		# Wings (short stub each side).
+		nodes_arr.append(Vector3(-0.45, 0.32, -0.05))
+		radii_arr.append(0.05); tags_arr.append(["wing"])
+		edges_arr.append([1, 6])
+		nodes_arr.append(Vector3(0.45, 0.32, -0.05))
+		radii_arr.append(0.05); tags_arr.append(["wing"])
+		edges_arr.append([1, 7])
+		# Six legs in 3 pairs.
+		for zi in range(3):
+			var z: float = -0.10 + 0.10 * float(zi)
+			for side in [-1.0, 1.0]:
+				var aix: int = nodes_arr.size()
+				nodes_arr.append(Vector3(0.12 * side, 0.18, z))
+				radii_arr.append(0.04); tags_arr.append(["coxa"])
+				edges_arr.append([1, aix])
+				var kix: int = nodes_arr.size()
+				nodes_arr.append(Vector3(0.30 * side, 0.05, z + 0.04))
+				radii_arr.append(0.03); tags_arr.append(["femur"])
+				edges_arr.append([aix, kix])
+				var fix: int = nodes_arr.size()
+				nodes_arr.append(Vector3(0.36 * side, -0.10, z + 0.08))
+				radii_arr.append(0.02); tags_arr.append(["tibia"])
+				edges_arr.append([kix, fix])
+	elif preset == "insect_legs":
+		# Body axis + 6 three-segment legs (coxa-femur-tibia).
+		var body_len: float = float(g_cfg.get("body_length", 0.9))
+		var leg_len: float = float(g_cfg.get("leg_length", 0.45))
+		var head_idx: int = nodes_arr.size()
+		nodes_arr.append(Vector3(0, 0.18, -body_len * 0.5))
+		radii_arr.append(0.10); tags_arr.append(["head"])
+		var thorax_idx: int = nodes_arr.size()
+		nodes_arr.append(Vector3(0, 0.18, 0))
+		radii_arr.append(0.13); tags_arr.append(["thorax"])
+		edges_arr.append([head_idx, thorax_idx])
+		var abdomen_idx: int = nodes_arr.size()
+		nodes_arr.append(Vector3(0, 0.18, body_len * 0.6))
+		radii_arr.append(0.14); tags_arr.append(["abdomen"])
+		edges_arr.append([thorax_idx, abdomen_idx])
+		# Six legs anchored to thorax at three z-offsets.
+		var z_offsets: Array = [-0.18, 0.0, 0.18]
+		for zi in range(z_offsets.size()):
+			for side in [-1.0, 1.0]:
+				var anchor_idx: int = nodes_arr.size()
+				nodes_arr.append(Vector3(0.10 * side, 0.18, z_offsets[zi]))
+				radii_arr.append(0.05); tags_arr.append(["coxa"])
+				edges_arr.append([thorax_idx, anchor_idx])
+				var knee_idx: int = nodes_arr.size()
+				nodes_arr.append(Vector3(0.32 * side, 0.10, z_offsets[zi] + 0.05))
+				radii_arr.append(0.04); tags_arr.append(["femur"])
+				edges_arr.append([anchor_idx, knee_idx])
+				var foot_idx: int = nodes_arr.size()
+				nodes_arr.append(Vector3(0.42 * side, -0.05, z_offsets[zi] + 0.10))
+				radii_arr.append(0.025); tags_arr.append(["tibia"])
+				edges_arr.append([knee_idx, foot_idx])
+	else:
+		# Literal graph from JSON.
+		for n in g_cfg.get("nodes", []):
+			if n is Array and n.size() >= 3:
+				nodes_arr.append(Vector3(float(n[0]), float(n[1]), float(n[2])))
+			elif n is Vector3:
+				nodes_arr.append(n)
+		for r in g_cfg.get("radii", []):
+			radii_arr.append(float(r))
+		for e in g_cfg.get("edges", []):
+			if e is Array and e.size() >= 2:
+				edges_arr.append([int(e[0]), int(e[1])])
+		for t in g_cfg.get("node_tags", []):
+			tags_arr.append(t if t is Array else [])
+	var segments: int = int(g_cfg.get("segments", 8))
+	var skin_mode: String = String(g_cfg.get("skin_mode", "node_caps"))
+	# Pad missing tag slots so skin_graph indexing is safe.
+	while tags_arr.size() < nodes_arr.size():
+		tags_arr.append([])
+	# Convert tag entries to PackedStringArray for skin_graph.
+	var packed_tags: Array = []
+	for t in tags_arr:
+		var p := PackedStringArray()
+		for s in t:
+			p.append(String(s))
+		packed_tags.append(p)
+	print("[render_mesh_grammar] graph seed: %d nodes, %d edges, segments=%d, mode=%s" % [
+		nodes_arr.size(), edges_arr.size(), segments, skin_mode])
+	return MeshDataClass.skin_graph(nodes_arr, radii_arr, edges_arr, packed_tags, segments, skin_mode)
 
 
 ## Scene-path seed — load any scene from Ada's primitive library (or anywhere),

@@ -8,7 +8,7 @@ class_name MeshGrammarNode
 const GridMaterialFactory = preload("res://commons/primitives/shared/grid_material_factory.gd")
 
 @export_group("Seed")
-@export_enum("cube", "icosahedron", "sphere", "custom") var seed_type: String = "icosahedron"
+@export_enum("cube", "icosahedron", "sphere", "disk", "flower_disk", "custom") var seed_type: String = "icosahedron"
 @export var seed_scale: float = 0.5
 
 @export_group("Grammar")
@@ -25,6 +25,15 @@ const GridMaterialFactory = preload("res://commons/primitives/shared/grid_materi
 @export var base_color: Color = Color(0.6, 0.75, 0.85)
 @export var use_grid_material: bool = true
 @export var double_sided: bool = true
+# Surface qualities — read by _update_display when face colours are baked.
+# Drive these directly from CritterDNA fields for design-time previews
+# that match runtime appearance.
+@export_range(0.0, 1.0) var roughness: float = 0.85
+@export_range(0.0, 1.0) var metallic: float = 0.0
+@export_range(0.0, 1.0) var iridescence: float = 0.0
+@export_range(0.0, 1.0) var transparency: float = 0.0
+@export var emission_color: Color = Color(0, 0, 0, 0)
+@export_range(0.0, 4.0) var emission_energy: float = 0.0
 
 # Public
 var grammar: MeshGrammar = null
@@ -107,6 +116,21 @@ func configure(config: Dictionary) -> void:
 	if config.has("max_faces"):
 		max_faces = int(config["max_faces"])
 		grammar.max_faces = max_faces
+	# Surface qualities — accept either flat keys or a "material" sub-dict.
+	var mat_cfg: Dictionary = config.get("material", {})
+	if config.has("roughness"): roughness = float(config["roughness"])
+	elif mat_cfg.has("roughness"): roughness = float(mat_cfg["roughness"])
+	if config.has("metallic"): metallic = float(config["metallic"])
+	elif mat_cfg.has("metallic"): metallic = float(mat_cfg["metallic"])
+	if mat_cfg.has("iridescence"): iridescence = float(mat_cfg["iridescence"])
+	if mat_cfg.has("transparency"): transparency = float(mat_cfg["transparency"])
+	if mat_cfg.has("emission"):
+		var em = mat_cfg["emission"]
+		if em is Array and em.size() >= 3:
+			emission_color = Color(float(em[0]), float(em[1]), float(em[2]))
+		elif em is Color:
+			emission_color = em
+	if mat_cfg.has("emission_energy"): emission_energy = float(mat_cfg["emission_energy"])
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	configure(config_data)
@@ -130,6 +154,10 @@ func _create_seed() -> void:
 			mesh_data = MeshData.create_sphere(seed_scale, 12, 16)
 		"icosahedron":
 			mesh_data = MeshData.create_icosahedron(seed_scale)
+		"disk":
+			mesh_data = MeshData.create_disk(seed_scale, 24)
+		"flower_disk":
+			mesh_data = MeshData.create_flower_disk(seed_scale, 5, 24)
 		"custom":
 			# Seed should already be set via set_seed_mesh()
 			if grammar.current_mesh != null:
@@ -155,10 +183,23 @@ func _update_display(mesh_data: MeshData) -> void:
 		})
 		if has_face_colors:
 			# Override with a vertex-colour-aware material so paint shows.
+			# Surface qualities (metallic / roughness / iridescence /
+			# transparency / emission) come from this node's @exports so
+			# they can mirror CritterDNA values one-for-one.
 			var vmat := StandardMaterial3D.new()
 			vmat.vertex_color_use_as_albedo = true
-			vmat.metallic = 0.0
-			vmat.roughness = 0.85
+			vmat.metallic = metallic
+			vmat.roughness = roughness
+			if iridescence > 0.0:
+				vmat.iridescence_enabled = true
+				vmat.iridescence = iridescence
+			if transparency > 0.01:
+				vmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+				vmat.albedo_color = Color(1, 1, 1, 1.0 - transparency)
+			if emission_energy > 0.0:
+				vmat.emission_enabled = true
+				vmat.emission = emission_color
+				vmat.emission_energy_multiplier = emission_energy
 			if double_sided:
 				vmat.cull_mode = BaseMaterial3D.CULL_DISABLED
 			_mesh_instance.material_override = vmat

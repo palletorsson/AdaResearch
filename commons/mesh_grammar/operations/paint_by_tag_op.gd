@@ -55,9 +55,15 @@ func _execute(mesh: MeshData, selected: PackedInt32Array) -> void:
 					break
 		_ensure_metadata_size(mesh, fi)
 		mesh.face_metadata[fi]["color"] = color
+		# Always set the "painted" flag — the renderer uses it to detect
+		# that this mesh wants vertex-color material, regardless of whether
+		# the per-face colour came from a palette match or the default.
+		# Without this, meshes whose faces all hit the default (e.g. a
+		# metaball blob with tags that miss the palette) silently fall back
+		# to grid material, which looks like the colour was never applied.
+		mesh.face_metadata[fi]["painted"] = true
 		if matched:
-			# Mark presence so the renderer can detect "this mesh has paint_by_tag".
-			mesh.face_metadata[fi]["painted"] = true
+			mesh.face_metadata[fi]["paint_matched"] = true
 
 
 func _to_color(raw) -> Color:
