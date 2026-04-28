@@ -564,15 +564,155 @@ def list_sequence_maps(seq_name: str) -> list[str]:
     return [m if isinstance(m, str) else m.get("lookup_name", m.get("name", "")) for m in maps if m]
 
 
+def render_dressing_room(room_path: Path, out_dir: Path) -> bool:
+    """Render plan + elevation for a single artifact's dressing room."""
+    try:
+        room = json.loads(room_path.read_text(encoding="utf-8"))
+    except Exception as e:
+        print(f"  ! could not parse {room_path}: {e}")
+        return False
+    name = room.get("lookup_name") or room_path.stem
+    footing = room.get("footing", {})
+    tiles = footing.get("tiles", [[1]])
+    anchor = footing.get("anchor", [0, 0])
+    extras = room.get("extras", [])
+    fp = room.get("footprint", [1, 1, 1])
+    rows = len(tiles)
+    cols = max(len(r) for r in tiles) if tiles else 0
+    margin = 50
+
+    # Plan view of the room.
+    width = margin * 2 + cols * CELL + 200  # extra for legend / extras list
+    height = margin * 2 + rows * CELL + 60
+    parts = svg_open(width, height,
+                     f"{name} — dressing room (plan)",
+                     f"{cols}×{rows} footing, anchor=[{anchor[0]},{anchor[1]}]")
+    for r in range(rows):
+        for c in range(cols):
+            v = tiles[r][c] if c < len(tiles[r]) else 0
+            x = margin + c * CELL
+            y = margin + r * CELL
+            parts.append(
+                f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" '
+                f'fill="{height_color(float(v))}" stroke="#0d0d12" stroke-width="0.4"/>'
+            )
+    # Anchor (where the artifact sits) — bright pin.
+    ax, ay = anchor[1], anchor[0]
+    cx = margin + ax * CELL + CELL / 2
+    cy = margin + ay * CELL + CELL / 2
+    parts.append(
+        f'<rect x="{cx - CELL*0.35:.1f}" y="{cy - CELL*0.35:.1f}" '
+        f'width="{CELL*0.7:.1f}" height="{CELL*0.7:.1f}" '
+        f'fill="#d23b6e" stroke="#fff" stroke-width="1" rx="2"/>'
+    )
+    parts.append(f'<text x="{cx:.1f}" y="{cy + CELL*0.55:.1f}" class="label">{name[:18]}</text>')
+
+    # Extras.
+    extras_x = margin + cols * CELL + 24
+    extras_y = margin
+    parts.append(f'<text class="subtitle" x="{extras_x}" y="{extras_y}">approach: '
+                 f'{room.get("approach", "?")}  exit: {room.get("exit", "?")}</text>')
+    parts.append(f'<text class="subtitle" x="{extras_x}" y="{extras_y + 14}">'
+                 f'rotations: {", ".join(room.get("rotations", ["0"]))}</text>')
+    parts.append(f'<text class="subtitle" x="{extras_x}" y="{extras_y + 28}">'
+                 f'footprint: {fp}</text>')
+    parts.append(f'<text class="subtitle" x="{extras_x}" y="{extras_y + 50}">extras:</text>')
+    for i, e in enumerate(extras):
+        line = f'  {e.get("type", "?")} @ {tuple(e.get("offset", [0,0,0]))}'
+        if e.get("text"): line += f' "{e["text"][:18]}"'
+        if e.get("key"): line += f' [{e["key"][:14]}]'
+        parts.append(f'<text class="legend" x="{extras_x}" y="{extras_y + 64 + i*12}">{line}</text>')
+    # Render extras as small dots on the plan.
+    for e in extras:
+        off = e.get("offset", [0, 0, 0])
+        ex = ax + off[1]
+        ey = ay + off[0]
+        if 0 <= ex < cols and 0 <= ey < rows:
+            cx2 = margin + ex * CELL + CELL / 2
+            cy2 = margin + ey * CELL + CELL / 2
+            t = e.get("type", "?")
+            color = {"3t": "#d8a04b", "tt": "#3b6cb0", "el": "#d23b6e", "sub": "#888"}.get(t, "#bbb")
+            parts.append(f'<circle cx="{cx2}" cy="{cy2}" r="3.5" fill="{color}" stroke="#fff" stroke-width="0.5"/>')
+            parts.append(f'<text x="{cx2}" y="{cy2 - 6}" class="label">{t}</text>')
+
+    parts.append(svg_close())
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "plan.svg").write_text("\n".join(parts), encoding="utf-8")
+
+    # Elevation: max-height-per-column silhouette + the artifact.
+    if cols > 0 and rows > 0:
+        col_max = []
+        for c in range(cols):
+            mx = 1
+            for r in range(rows):
+                v = tiles[r][c] if c < len(tiles[r]) else 0
+                try:
+                    mx = max(mx, int(round(float(v))))
+                except Exception:
+                    pass
+            col_max.append(mx)
+        overall_max = max(col_max + [int(round(fp[2] + 2))])
+        e_w = margin * 2 + cols * CELL
+        e_h = margin * 2 + overall_max * CELL + 30
+        ep = svg_open(e_w, e_h, f"{name} — dressing room (elevation)",
+                      f"facade silhouette, artifact stands at column {anchor[1]}")
+        base_y = margin + overall_max * CELL
+        for c in range(cols):
+            h = col_max[c]
+            x = margin + c * CELL
+            for level in range(h):
+                y = base_y - (level + 1) * CELL
+                ep.append(
+                    f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" '
+                    f'fill="{height_color(level + 1)}" stroke="#0d0d12" stroke-width="0.4"/>'
+                )
+        # Artifact on top of anchor's column.
+        ac = anchor[1]
+        col_h = col_max[ac]
+        cx3 = margin + ac * CELL + CELL / 2
+        rect_h = max(0.4, fp[2]) * CELL * 0.9
+        rect_y = base_y - col_h * CELL - rect_h
+        ep.append(
+            f'<rect x="{cx3 - CELL*0.32:.1f}" y="{rect_y:.1f}" '
+            f'width="{CELL*0.64:.1f}" height="{rect_h:.1f}" '
+            f'fill="#d23b6e" stroke="#fff" stroke-width="0.8" rx="1.5">'
+            f'<title>{name}\nfootprint: {fp}</title></rect>'
+        )
+        ep.append(svg_close())
+        (out_dir / "elevation.svg").write_text("\n".join(ep), encoding="utf-8")
+    print(f"  ✓ {name}: {cols}×{rows} footing, {len(extras)} extras")
+    return True
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--map", help="single map name")
     ap.add_argument("--batch", nargs="+", help="one or more sequence names; render all their maps")
+    ap.add_argument("--dressing-room", help="single artifact dressing-room file (or lookup_name)")
+    ap.add_argument("--all-dressing-rooms", action="store_true",
+                    help="render every dressing room in commons/artifacts/dressing_rooms/")
     ap.add_argument("--out-dir", type=Path, default=OUT_DIR_DEFAULT)
     args = ap.parse_args()
 
+    # Dressing-room mode (separate from map mode).
+    if args.dressing_room or args.all_dressing_rooms:
+        rooms_dir = REPO / "commons" / "artifacts" / "dressing_rooms"
+        out_root = REPO / "doc" / "dressing_rooms"
+        if args.dressing_room:
+            cand = Path(args.dressing_room)
+            if not cand.exists():
+                cand = rooms_dir / f"{args.dressing_room}.json"
+            if not cand.exists():
+                print(f"dressing room not found: {args.dressing_room}")
+                sys.exit(1)
+            render_dressing_room(cand, out_root / cand.stem)
+        else:
+            for room_path in sorted(rooms_dir.glob("*.json")):
+                render_dressing_room(room_path, out_root / room_path.stem)
+        sys.exit(0)
+
     if not args.map and not args.batch:
-        print("specify --map=<name> or --batch <seq1> <seq2> ...")
+        print("specify --map=<name> or --batch <seq1> <seq2> ... or --dressing-room=<name>")
         sys.exit(2)
 
     print("[plans] loading artifact registry...")

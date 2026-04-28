@@ -1,0 +1,19 @@
+{
+  "lookup_name": "russell_set_box",
+  "footprint": [1, 1, 1.5],
+  "rotations": ["0", "90", "180", "270"],
+  "approach": "south",
+  "exit": "north",
+  "footing": {
+    "anchor": [1, 1],
+    "tiles": [
+      [1, 1, 1],
+      [1, 1, 1],
+      [1, 1, 1]
+    ]
+  },
+  "extras": [
+    {"type": "tt", "key": "russell_paradox", "offset": [-1, 0, 0]}
+  ],
+  "clearance": [3, 3, 2]
+}
