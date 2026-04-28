@@ -309,3 +309,12 @@ tools/claude_http_context.json
 
 # Next.js build artifacts (nested encyclopedia clone)
 ada_encyclopedia/
+
+# Scratch + per-render staging dirs (auto-generated config outputs of
+# mesh_grammar / substrate / artifact research pipelines)
+_tmp_*
+tmp_*
+**/_staging/
+
+# Auto-regenerated report — changes on every analysis run
+doc/HEAT_MAP.json
