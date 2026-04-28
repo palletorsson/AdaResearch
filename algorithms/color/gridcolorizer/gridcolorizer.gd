@@ -21,4 +21,4 @@
 # truth: the name moved, the behaviour didn't
 
 class_name GridColorizer
-extends GridColorMutator
+extends "res://commons/grid/mutators/grid_color_mutator.gd"
