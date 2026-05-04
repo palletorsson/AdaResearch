@@ -1,4 +1,5 @@
 {
   "biome_enabled": true,
-  "_doc": "Runtime feature flags read by GridSystem and other components at map-load time. Edit via the encyclopedia /shortcuts page or directly. Defaults match production behaviour; flip flags off for clean captures, debugging, or focused work."
+  "artifacts_enabled": true,
+  "_capture_active": true
 }
