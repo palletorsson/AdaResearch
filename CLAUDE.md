@@ -16,6 +16,37 @@
 
 - **Do not change core behavior like the grid system without deep consideration and notifying the user first.**
 
+## Session Bootstrap — Fold first, file-walk second
+
+> *Five-minute rule: don't grep, don't glob, don't read 14 files when one fold answers the question. The fractal database is the project's compressed self-image.*
+
+Before file exploration, query the encyclopedia's fractal API. It returns a compressed view of the entire project (1,500+ nodes) at any depth, through any of six lenses. One call replaces dozens of file reads.
+
+```bash
+# Project shape — start here on every session (~140 tokens)
+curl -s "http://localhost:3003/api/fractal?strategy=structural&depth=1" | jq
+
+# Drill into a domain
+curl -s "http://localhost:3003/api/fractal/fractals?strategy=structural&depth=1"
+
+# Search across the whole tree
+curl -s "http://localhost:3003/api/fractal?strategy=semantic&search=koch&depth=2"
+```
+
+**Strategies (each compresses differently):**
+- `structural` — counts, types, file paths. For navigation. *Best default for "what's in the project?"*
+- `semantic` — descriptions, tags. For search by meaning.
+- `pedagogical` — teaching path, complexity, sequences. For curriculum questions.
+- `code` — class names, signals, scenes. For implementation work.
+- `critical` — QFEP connections, theory. For analysis.
+- `biome` — kingdom × substrate × sequence routing. For ecology / biome dispatcher work. *(2026-05-04, validation in progress — keyword detection over-fires "creature".)*
+
+**The `/fractal` page** at `localhost:3003/fractal` is the same data with a UI. Click strategy pills, drill nodes, see token counts. Use it to scout before writing code.
+
+**Hybrid pattern** (proven by `/blog/fractal-database`): fold-first navigation, source unfolds at depth 4 only when precision is needed. 5.9× fewer tokens than file-walking on benchmarked tasks. If you find yourself running grep for the third time in a session, you're agent-B. Switch to fold queries.
+
+**For local CLI access** without the web server, `tools/lod_query.py <topic>` is the same idea — fractal-depth context lookup against the codebase. Works offline.
+
 ## Project Layout
 
 Godot 4 VR/desktop project. Algorithms taught through maps and interactable artifacts.
