@@ -322,3 +322,14 @@ doc/HEAT_MAP.json
 # Auto-generated gallery / research outputs (per-render outputs of
 # build_gallery_best_of_manifest and similar tools)
 commons/generated/
+
+# Generated capture images — these are written by Godot capture scripts
+# and Python research tools, then served by the ada_encyclopedia
+# (see tools/move_uncommitted_images.py for the one-time migration).
+# Never commit them to this repo.
+ada_run/captures/
+commons/maps/*/map_iso.png
+commons/maps/*/map_top.png
+commons/maps/*/*.jpg
+doc/reports/map_comparisons/
+doc/reports/map_strategies/
