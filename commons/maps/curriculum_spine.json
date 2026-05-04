@@ -1,9 +1,9 @@
 {
 	"_meta": {
 		"description": "Explicit curriculum spine - recommended progression through QFEP",
-		"version": "1.2",
-		"last_updated": "2026-02-16",
-		"note": "Vectors integrated into primitives, transformations, forces, and noise"
+		"version": "1.4",
+		"last_updated": "2026-04-29",
+		"note": "v1.3: array_tutorial moved before color; color absorbs composition (sourced from primitive-stack, pattern, and facade galleries). v1.4: reactivated isosurfaces + boolean_surfaces as spine sequences (orders 12.5 and 12.7) on the lambda_edge phase between proceduralgeneration and softbodies."
 	},
 	"navigation": {
 		"description": "How the player moves through the game",
@@ -38,23 +38,30 @@
 				"order": 2
 			},
 			{
-				"name": "color",
+				"name": "array_tutorial",
 				"phase": "F_order",
 				"order": 3,
-				"description": "After transformation, before forces/array_tutorial/wavefunctions"
+				"description": "Array fundamentals - grid structures and indexing. Moved before color so its repetition primitives feed the composition vocabulary.",
+				"qfep_role": "Foundation - the grid, indexing, addressable repetition"
+			},
+			{
+				"name": "color",
+				"phase": "F_order",
+				"order": 4,
+				"description": "Color and composition. Hue/value/saturation lead into pattern, stack, and facade composition (gallery-sourced). Absorbed the standalone composition study.",
+				"qfep_role": "Foundation - color systems become composition systems",
+				"composition_sources": [
+					{ "gallery": "primitive-stack-gallery", "role": "vertical stacking compositions" },
+					{ "gallery": "pattern-gallery",         "role": "wallpaper-group plane compositions" },
+					{ "gallery": "facade-gallery",          "role": "architectural-facade compositions" }
+				]
 			},
 			{
 				"name": "forces",
 				"phase": "oscillation",
 				"qfep_role": "Newton's laws - vectors become physics",
 				"lab_post": "Lab/map_data_post_forces",
-				"order": 4
-			},
-			{
-				"name": "array_tutorial",
-				"phase": "F_order",
-				"order": 5,
-				"description": "Array fundamentals - grid structures and indexing"
+				"order": 5
 			},
 			{
 				"name": "wavefunctions",
@@ -112,6 +119,22 @@
 				"lab_post": "Lab/map_data_post_softbodies",
 				"order": 13,
 				"note": "Absorbed morphogenesis (2 maps). Turing's reaction-diffusion as soft matter finding form."
+			},
+			{
+				"name": "isosurfaces",
+				"phase": "lambda_edge",
+				"qfep_role": "Implicit fields → explicit surfaces. Marching cubes as the bridge from continuous fields to walkable mesh.",
+				"lab_post": "Lab/map_data_post_isosurfaces",
+				"order": 12.5,
+				"note": "v1.4: reactivated from deferred. Sits between proceduralgeneration and softbodies on the lambda edge."
+			},
+			{
+				"name": "boolean_surfaces",
+				"phase": "lambda_edge",
+				"qfep_role": "CSG operations as composition logic — union, intersection, difference of solids.",
+				"lab_post": "Lab/map_data_post_boolean_surfaces",
+				"order": 12.7,
+				"note": "v1.4: reactivated from deferred. After isosurfaces, before softbodies."
 			},
 			{
 				"name": "swarmintelligence",
@@ -202,9 +225,9 @@
 				"unlocks": [
 					"meshes",
 					"datastructures",
-					"color"
+					"array_tutorial"
 				],
-				"note": "Foundation tools for building"
+				"note": "Foundation tools for building (v1.3: array_tutorial replaces color here; color now follows array)"
 			},
 			"transformation": {
 				"unlocks": [
@@ -262,11 +285,11 @@
 		},
 		"branch_chains": {
 			"description": "Branch completions that unlock further branches",
-			"color": {
+			"array_tutorial": {
 				"unlocks": [
-					"array_tutorial"
+					"color"
 				],
-				"note": "Color patterns lead to structured repetition"
+				"note": "Array fundamentals lead into color/composition (v1.3 reversal: array now precedes color in the spine)"
 			},
 			"datastructures": {
 				"unlocks": [
@@ -294,9 +317,9 @@
 				"added": [
 					"primitives",
 					"transformation",
-					"color"
+					"array_tutorial"
 				],
-				"note": "Starting lab state with first three teleporters"
+				"note": "Starting lab state with first three teleporters (v1.3: array before color)"
 			},
 			{
 				"stage": "post_primitives",
@@ -311,14 +334,21 @@
 				"note": "No new teleporters, added tc:2:y transport cube"
 			},
 			{
+				"stage": "post_array_tutorial",
+				"map": "Lab/map_data_post_array_tutorial",
+				"added": [
+					"color"
+				],
+				"note": "Gate: array fundamentals open the color/composition study (v1.3 reorder)"
+			},
+			{
 				"stage": "post_color",
 				"map": "Lab/map_data_post_color",
 				"added": [
-					"array_tutorial",
 					"forces",
 					"wavefunctions"
 				],
-				"note": "Gate: opens three branches"
+				"note": "Gate: color/composition opens the oscillation phase (forces, wavefunctions)"
 			},
 			{
 				"stage": "post_forces",
@@ -328,12 +358,6 @@
 					"randomness"
 				],
 				"note": "Gate: opens entropy branch"
-			},
-			{
-				"stage": "post_array_tutorial",
-				"map": "Lab/map_data_post_array_tutorial",
-				"added": [],
-				"note": "Neutral - same as post_forces"
 			},
 			{
 				"stage": "post_wavefunctions",

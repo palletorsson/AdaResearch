@@ -1,0 +1,520 @@
+{
+  "map_info": {
+    "name": "PG Genetic Evolution p1",
+    "lookup_name": "PG_Genetic_Evolution_p1",
+    "description": "Evolutionary algorithms \u2014 creatures evolve through selection pressure. Watch genetic programming shape 3D forms without explicit design.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 10,
+      "depth": 12,
+      "max_height": 4
+    },
+    "metadata": {
+      "difficulty": "advanced",
+      "category": "proceduralgeneration",
+      "estimated_time": "5-8 minutes",
+      "spatial_temperature": 0.6,
+      "design_notes": "Amphitheater \u2014 raised observation ring around central evolution arena. Heavy compute solo map. Player watches from above, creatures evolve below in the void.",
+      "spine_research": true,
+      "placement_only": true,
+      "derived_from": "PG_Genetic_Evolution",
+      "scores": {
+        "walk_pct": 0.525,
+        "n_heights": 2,
+        "util_count": 8,
+        "has_spawn": true,
+        "has_teleporter": true,
+        "verdict": "exemplary",
+        "artifacts_placed": 2,
+        "artifacts_original": 2,
+        "reachability_fixes": {
+          "wp_added": 0,
+          "tc_added": 0,
+          "cubes_added": 0,
+          "fixed_artifacts": 0,
+          "still_orphan": 0
+        }
+      },
+      "placement_seed": 17,
+      "rows": 12,
+      "cols": 10,
+      "saved_at": "2026-04-29T08:06:24.889683Z",
+      "composite_score": {
+        "score": 100,
+        "breakdown": {
+          "verdict": 30,
+          "reachable": 20,
+          "artifacts": 15,
+          "density": 10,
+          "heights": 10,
+          "budget": 10,
+          "path_budget": 5
+        },
+        "reasons": [
+          "verdict=exemplary (30/30)",
+          "BFS path=1 steps (20/20)",
+          "artifacts 2/2 (15/15)",
+          "walk_pct=0.53 (10/10)",
+          "n_heights=2 (10/10)",
+          "interior 80 vs cells_max 220 (10/10)",
+          "path_budget=32 (5/5)"
+        ],
+        "bfs_steps": 1,
+        "phase": "lambda_edge"
+      },
+      "evaluated_at": "2026-04-29T08:41:18.590933Z"
+    },
+    "title": "Evolving Creatures Through Selection"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "layers": {
+    "structure": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "0",
+        "0",
+        "0",
+        "0",
+        "3"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "0",
+        "0",
+        "0",
+        "0",
+        "3"
+      ],
+      [
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "0",
+        "0",
+        "0",
+        "0",
+        "3"
+      ],
+      [
+        "3",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "3"
+      ],
+      [
+        "3",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "3"
+      ],
+      [
+        "3",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "3"
+      ],
+      [
+        "3",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "3"
+      ],
+      [
+        "3",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "3"
+      ],
+      [
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "0",
+        "0",
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utilities": [
+      [
+        "s",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        "an",
+        " ",
+        "wp",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        "wp:180",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "t",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "wp:270",
+        " ",
+        " ",
+        "wp",
+        "sp",
+        " "
+      ]
+    ],
+    "interactables": [
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "science_screen:180:1.5#mode:grid",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "GeneticProgramming:0:2:0.6",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ]
+  }
+}

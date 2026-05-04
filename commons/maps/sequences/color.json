@@ -1,7 +1,25 @@
 {
 	"sequences": {
 		"color": {
-			"name": "Color: Perception, Not Physics",
+			"name": "Color and Composition",
+			"v1_3_note": "Renamed from 'Color: Perception, Not Physics'. As of spine v1.3, this sequence absorbs the composition study and is sourced from three auto-research galleries: primitive-stack, pattern, and facade.",
+			"composition_sources": [
+				{
+					"gallery": "primitive-stack-gallery",
+					"path": "ada_encyclopedia/public/primitive-stack-gallery/manifest.json",
+					"role": "vertical compositions — stacks of primitives as raw composition vocabulary"
+				},
+				{
+					"gallery": "pattern-gallery",
+					"path": "ada_encyclopedia/public/pattern-gallery/manifest.json",
+					"role": "plane compositions — wallpaper-group repetitions across the grid"
+				},
+				{
+					"gallery": "facade-gallery",
+					"path": "ada_encyclopedia/public/facade-gallery/manifest.json",
+					"role": "architectural compositions — facades as composed parts within a frame"
+				}
+			],
 			"truth": "Color is perception, not physics. RGB is a lie we agree on. What you see depends on context, not wavelength alone.",
 			"qfep_term": "S",
 			"qfep_connection": "Color is a system stateâ€”part of the S term in QFEP. But unlike vectors, color is fundamentally perceptual: the same wavelength can appear different colors depending on surrounding context. Color reveals the gap between ontology (photons) and experience (qualia).",

@@ -1,0 +1,439 @@
+{
+  "map_info": {
+    "name": "PG Mirrored Patterns p3",
+    "lookup_name": "PG_Mirrored_Patterns_p3",
+    "description": "Pattern from reflection and branching: mirrored cellular automata creates kaleidoscopic textures, while rhizomatic mazes branch without hierarchy.",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 11,
+      "depth": 9,
+      "max_height": 3
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "proceduralgeneration",
+      "estimated_time": "4-6 minutes",
+      "spatial_temperature": 0.5,
+      "design_notes": "Symmetric room \u2014 mirror symmetry echoes the content. Two exhibit pits flanking a raised central walkway. Light artifacts, both one-shot generators.",
+      "spine_research": true,
+      "placement_only": true,
+      "derived_from": "PG_Mirrored_Patterns",
+      "scores": {
+        "walk_pct": 0.657,
+        "n_heights": 2,
+        "util_count": 4,
+        "has_spawn": true,
+        "has_teleporter": true,
+        "verdict": "exemplary",
+        "artifacts_placed": 2,
+        "artifacts_original": 2,
+        "reachability_fixes": {
+          "wp_added": 0,
+          "tc_added": 0,
+          "cubes_added": 0,
+          "fixed_artifacts": 0,
+          "still_orphan": 0
+        }
+      },
+      "placement_seed": 439,
+      "rows": 9,
+      "cols": 11,
+      "saved_at": "2026-04-29T08:06:25.016542Z",
+      "composite_score": {
+        "score": 100,
+        "breakdown": {
+          "verdict": 30,
+          "reachable": 20,
+          "artifacts": 15,
+          "density": 10,
+          "heights": 10,
+          "budget": 10,
+          "path_budget": 5
+        },
+        "reasons": [
+          "verdict=exemplary (30/30)",
+          "BFS path=1 steps (20/20)",
+          "artifacts 2/2 (15/15)",
+          "walk_pct=0.66 (10/10)",
+          "n_heights=2 (10/10)",
+          "interior 63 vs cells_max 220 (10/10)",
+          "path_budget=32 (5/5)"
+        ],
+        "bfs_steps": 1,
+        "phase": "lambda_edge"
+      },
+      "evaluated_at": "2026-04-29T08:41:18.743266Z"
+    },
+    "title": "Reflection and Rhizomatic Branching"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Next",
+      "description": "Continue to next step",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "layers": {
+    "structure": [
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "0",
+        "0",
+        "1",
+        "2",
+        "1",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "2",
+        "1",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "2",
+        "1",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "2",
+        "1",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "1",
+        "2",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    ],
+    "utilities": [
+      [
+        "s",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "an",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "t",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        "sp",
+        " "
+      ]
+    ],
+    "interactables": [
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        "mirror_cellular_texture_for_3d:0:2",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        "rhizomatic_maze_space:0:2",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ],
+      [
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " ",
+        " "
+      ]
+    ]
+  }
+}

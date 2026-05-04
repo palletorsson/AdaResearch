@@ -1,0 +1,140 @@
+{
+  "variant_id": "Color_Pillar_compare_nearest_role",
+  "derived_from": "Color_Pillar",
+  "sequence": null,
+  "budget": {
+    "label": "F_order tight g1/1",
+    "cells_max": 64,
+    "voxels_max": 110,
+    "artifacts_required": 3,
+    "path_budget": 14,
+    "util_density": 0.05,
+    "grid_max": [
+      10,
+      10
+    ],
+    "grid_min": [
+      6,
+      6
+    ]
+  },
+  "scores": {
+    "walk_pct": 0.99,
+    "n_heights": 3,
+    "util_count": 4,
+    "has_spawn": true,
+    "has_teleporter": true,
+    "verdict": "exemplary",
+    "artifacts_placed": 7,
+    "artifacts_original": 7,
+    "reachability_fixes": {
+      "wp_added": 2,
+      "tc_added": 0,
+      "cubes_added": 0,
+      "fixed_artifacts": 2,
+      "still_orphan": 0
+    }
+  },
+  "composite_score": null,
+  "rows": 10,
+  "cols": 10,
+  "generated_at": "2026-04-29T14:35:40.234708Z",
+  "steps": [
+    {
+      "index": 0,
+      "name": "init",
+      "description": "Empty grid, all cells h=0.",
+      "image": "/map-trace/Color_Pillar_compare_nearest_role/00_init.png",
+      "stats": {
+        "walkable": 0,
+        "n_heights": 0,
+        "artifacts": 0,
+        "utilities": 0
+      }
+    },
+    {
+      "index": 1,
+      "name": "room",
+      "description": "room({\"rows\": 10, \"cols\": 10, \"h\": 1})",
+      "image": "/map-trace/Color_Pillar_compare_nearest_role/01_room.png",
+      "stats": {
+        "walkable": 4,
+        "n_heights": 1,
+        "artifacts": 0,
+        "utilities": 0
+      }
+    },
+    {
+      "index": 2,
+      "name": "terraced",
+      "description": "terraced({\"steps\": 5})",
+      "image": "/map-trace/Color_Pillar_compare_nearest_role/02_terraced.png",
+      "stats": {
+        "walkable": 100,
+        "n_heights": 3,
+        "artifacts": 0,
+        "utilities": 0
+      }
+    },
+    {
+      "index": 3,
+      "name": "noise_perturb",
+      "description": "noise_perturb({\"bumps\": 5, \"dips\": 1, \"pillars\": 3, \"avoid_edge\": 1})",
+      "image": "/map-trace/Color_Pillar_compare_nearest_role/03_noise_perturb.png",
+      "stats": {
+        "walkable": 99,
+        "n_heights": 3,
+        "artifacts": 0,
+        "utilities": 0
+      }
+    },
+    {
+      "index": 4,
+      "name": "widen_paths",
+      "description": "widen_paths({\"ratio\": 0.9, \"avoid_edge\": 1})",
+      "image": "/map-trace/Color_Pillar_compare_nearest_role/04_widen_paths.png",
+      "stats": {
+        "walkable": 99,
+        "n_heights": 3,
+        "artifacts": 0,
+        "utilities": 0
+      }
+    },
+    {
+      "index": 5,
+      "name": "apply_finish",
+      "description": "Spawn at (1,1), corridor to nearest walkable cell, teleporter on void.",
+      "image": "/map-trace/Color_Pillar_compare_nearest_role/05_apply_finish.png",
+      "stats": {
+        "walkable": 99,
+        "n_heights": 3,
+        "artifacts": 0,
+        "utilities": 2
+      }
+    },
+    {
+      "index": 6,
+      "name": "place_artifacts",
+      "description": "Placed 7 of 7 artifacts (AABB-aware).",
+      "image": "/map-trace/Color_Pillar_compare_nearest_role/06_place_artifacts.png",
+      "stats": {
+        "walkable": 99,
+        "n_heights": 3,
+        "artifacts": 7,
+        "utilities": 2
+      }
+    },
+    {
+      "index": 7,
+      "name": "reachability_fix",
+      "description": "Fixes: 1 artifacts rescued, 1 wp + 0 tc + 0 cubes added.",
+      "image": "/map-trace/Color_Pillar_compare_nearest_role/07_reachability_fix.png",
+      "stats": {
+        "walkable": 99,
+        "n_heights": 3,
+        "artifacts": 7,
+        "utilities": 3
+      }
+    }
+  ]
+}

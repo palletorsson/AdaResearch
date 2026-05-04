@@ -1,0 +1,31 @@
+{
+	"sequences": {
+		"boolean_surfaces": {
+			"name": "Boolean Surfaces: CSG as Composition",
+			"v1_4_note": "Reactivated as a spine sequence (order 12.7). Constructive Solid Geometry — union, intersection, difference of primitives — as the algebra of composed solid form. Sits between isosurfaces and softbodies.",
+			"truth": "Composition is not addition. Boolean ops give us a lawful way to compose solids: A∪B, A∩B, A−B. Every architectural cavity is a difference; every joint is an intersection.",
+			"qfep_term": "lambda_edge",
+			"qfep_connection": "On the edge of chaos: rule-set is small (3 ops), composition space is unbounded. Boolean operations are the smallest non-trivial calculus on solids.",
+			"layer": "form",
+			"prerequisites": [
+				"isosurfaces"
+			],
+			"unlocks": [
+				"softbodies"
+			],
+			"difficulty": "intermediate",
+			"estimated_time": "20-25 minutes",
+			"learning_objectives": [
+				"Union: A∪B as filled volume",
+				"Intersection: A∩B as shared volume",
+				"Difference: A−B as carved volume",
+				"Order matters: (A−B)−C ≠ A−(B−C) in general",
+				"CSG trees as expressions",
+				"Boolean composition vs. mesh assembly"
+			],
+			"content": [],
+			"maps": [],
+			"note": "Empty maps[] is a placeholder — populate via tools/spine_auto_research.py boolean_surfaces or import from /galleries/csg-cases."
+		}
+	}
+}

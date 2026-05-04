@@ -99,10 +99,60 @@ func _ready() -> void:
 	_mark_clean_keep(_layer_editor_panel)
 	_layer_editor_panel.brush_selected.connect(_on_layer_brush_selected)
 
-	# Default to spin camera
+	# Default to spin camera (suppressed in capture mode — see below).
 	call_deferred("_start_default_spin")
 
+	# Capture-mode environment override: clean studio backdrop with no
+	# sun glare or sky gradient so spine-research thumbnails focus on
+	# the cube grid. Triggered via ada_run/runtime_flags.json (set by
+	# the Python capture wrapper).
+	_apply_capture_environment_if_active()
+
 	_set_status("Loaded sequence registry catalog")
+
+
+## Read runtime flag for capture-active. Mirrors GridSystem's helper.
+func _runtime_flag_active() -> bool:
+	var path := "res://ada_run/runtime_flags.json"
+	if not FileAccess.file_exists(path): return false
+	var f := FileAccess.open(path, FileAccess.READ)
+	if not f: return false
+	var json := JSON.new()
+	if json.parse(f.get_as_text()) != OK: f.close(); return false
+	f.close()
+	var data = json.data
+	return data is Dictionary and bool(data.get("_capture_active", false))
+
+
+## Replace the catalog's default WorldEnvironment with a capture-friendly
+## one: dark solid background, no sun, no fog. Lights become flat fill
+## so cubes read by colour, not by lit/shadowed sides. Cleanest possible
+## structural backdrop for the spine-research gallery.
+func _apply_capture_environment_if_active() -> void:
+	if not _runtime_flag_active(): return
+	if _world_environment:
+		var env := Environment.new()
+		env.background_mode = Environment.BG_COLOR
+		env.background_color = Color(0.06, 0.07, 0.10)        # near-black
+		env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+		env.ambient_light_color = Color(0.55, 0.58, 0.65)
+		env.ambient_light_energy = 1.0
+		env.ssao_enabled = false
+		env.glow_enabled = false
+		env.fog_enabled = false
+		_world_environment.environment = env
+	# Drop sun intensity so the lens-flare ribbon goes away.
+	if _key_light:
+		_key_light.light_energy = 0.4
+		_key_light.shadow_enabled = false
+	if _fill_light:
+		_fill_light.light_energy = 0.7
+	# Hide the catalog's grey "Floor" plate — its size dominates the
+	# orthographic frame even though the cube grid is the subject.
+	var floor_node := get_node_or_null("Floor")
+	if floor_node:
+		floor_node.visible = false
+	print("MapCatalogDesktop3D: capture environment applied (floor hidden, lights damped)")
 
 func _start_default_spin() -> void:
 	set_camera_mode(CameraMode.SPIN)
