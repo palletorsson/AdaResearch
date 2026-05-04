@@ -1,0 +1,24 @@
+{
+  "sequences": {
+    "catalyst_test": {
+      "name": "Catalyst Tests: 10 modes vs. one foe",
+      "truth": "the catalyst doesn't kill — it phase-shifts",
+      "description": "10 small arenas, one per catalyst projectile mode. Mirrors the auto-research matrix lab. Walk through each to feel how every mode lands on a fresh foe.",
+      "layer": "test",
+      "maps": [
+        "Catalyst_01_Primitives",
+        "Catalyst_02_Transformation",
+        "Catalyst_03_Chromatic",
+        "Catalyst_04_Forces",
+        "Catalyst_05_Waveform",
+        "Catalyst_06_Chaos",
+        "Catalyst_07_Cellular",
+        "Catalyst_08_Fractal",
+        "Catalyst_09_Branching",
+        "Catalyst_10_Swarm"
+      ],
+      "prerequisites": [],
+      "unlocks": []
+    }
+  }
+}

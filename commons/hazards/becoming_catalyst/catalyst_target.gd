@@ -100,9 +100,20 @@ func hit_by_projectile(_projectile_color: Color = Color.WHITE) -> void:
 	if _destroyed:
 		return
 
+	# Hit logging silenced — fires too often during normal play. Re-enable
+	# locally if diagnosing why a mode doesn't visibly land on the target.
 	_hit_count += 1
 	_flash_timer = 0.3
 	_set_emission_boost(4.0)
+	# Tint the body to the projectile's color so the user can SEE which
+	# mode landed (transformation = purple, primitives = white, etc.).
+	var visual_root: Node3D = _visual if is_instance_valid(_visual) else null
+	if visual_root:
+		for child in visual_root.get_children():
+			if child is MeshInstance3D and (child as MeshInstance3D).material_override is StandardMaterial3D:
+				var m: StandardMaterial3D = (child as MeshInstance3D).material_override
+				m.albedo_color = _projectile_color
+				m.emission = _projectile_color
 
 	if _hit_count >= _hits_to_destroy:
 		_explode()

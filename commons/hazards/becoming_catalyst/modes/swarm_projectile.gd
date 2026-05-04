@@ -163,8 +163,7 @@ func _update_trajectory(delta: float) -> void:
 		if best_dist < 0.2:
 			for target in _target_cache:
 				if is_instance_valid(target) and world_pos.distance_to(target.global_position) < 0.3:
-					if target.has_method("hit_by_projectile"):
-						target.hit_by_projectile(color_primary)
+					_dispatch_transformation(target)
 					_boid_alive[i] = false
 					_multimesh.set_instance_color(i, Color(0, 0, 0, 0))
 					var t := Transform3D()
@@ -186,16 +185,18 @@ func _scan_targets() -> void:
 	_target_cache.clear()
 	if not is_inside_tree():
 		return
-	var targets := get_tree().get_nodes_in_group("catalyst_target")
+	# Scan BOTH legacy practice targets and biome-borne foes.
+	var targets: Array = get_tree().get_nodes_in_group("catalyst_target")
+	targets.append_array(get_tree().get_nodes_in_group("catalyst_foe"))
 	for t in targets:
 		if t is Node3D and is_instance_valid(t):
 			if t.global_position.distance_to(global_position) < SEEK_RANGE:
 				_target_cache.append(t)
 
 func _on_hit(body: Node3D) -> void:
+	# Base class _on_body_entered already dispatched the transformation
+	# (_dispatch_transformation runs first). Just emit signal + decorative work.
 	projectile_hit.emit(body, global_position)
-	if body.has_method("hit_by_projectile"):
-		body.hit_by_projectile(color_primary)
 	# Kill nearby boids on collision
 	for i in BOID_COUNT:
 		if _boid_alive[i]:

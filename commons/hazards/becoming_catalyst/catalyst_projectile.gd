@@ -8,6 +8,10 @@
 extends RigidBody3D
 class_name CatalystProjectile
 
+# Verbose hit logging. Off by default — matrix lab + smoke tests can flip
+# this on if they want to trace dispatch.
+const DEBUG_LOG: bool = false
+
 # ── Configuration ─────────────────────────────────────────────────────────
 var speed: float = 10.0
 var lifetime: float = 5.0
@@ -38,7 +42,11 @@ func _ready() -> void:
 	max_contacts_reported = 4
 	body_entered.connect(_on_body_entered)
 	collision_layer = 16    # Hazard layer
-	collision_mask = 1 | 2  # World + player
+	# Mask = 2 (hit-receivers only). Layer 1 is the GridStructureComponent
+	# MultiMesh world cubes — including layer 1 caused projectiles to hit
+	# floor/wall cubes before reaching the foe (which lives in the open
+	# air at chest height). Targets + foes are all on layer 2.
+	collision_mask = 2
 	gravity_scale = 0.0     # Override per-mode
 
 	_build_visual()
@@ -83,11 +91,40 @@ func _update_trajectory(_delta: float) -> void:
 	pass
 
 ## Called when projectile hits something — override for mode-specific effects.
+## Subclasses do whatever decorative thing they want here (shrink, fractal-
+## split, branch, etc.). They DO NOT need to call hit_by_catalyst_mode —
+## the base _on_body_entered already did that BEFORE this method runs, so
+## transformation dispatch is guaranteed regardless of subclass behavior.
 func _on_hit(body: Node3D) -> void:
 	projectile_hit.emit(body, global_position)
-	# Notify targets they've been hit
-	if body.has_method("hit_by_projectile"):
+
+
+## Centralised transformation dispatch. Called from _on_body_entered so it
+## ALWAYS fires once per hit, before any subclass _on_hit decoration. This
+## guarantees every catalyst mode converts foes/targets, even if the mode's
+## subclass overrides _on_hit for visual flair (which most of them do).
+func _dispatch_transformation(body: Node3D) -> void:
+	if body.has_method("hit_by_catalyst_mode"):
+		body.hit_by_catalyst_mode(color_primary, _infer_mode_id())
+	elif body.has_method("hit_by_projectile"):
 		body.hit_by_projectile(color_primary)
+
+## Returns the projectile's mode id ("transformation", "swarm", …) by
+## inspecting the script that was set on it. Each mode's create_projectile
+## sets the script to res://.../modes/<mode>_projectile.gd; we extract the
+## leading slug. Defaults to "primitives" if inference fails.
+func _infer_mode_id() -> String:
+	var s: Script = get_script()
+	if s == null:
+		return "primitives"
+	var p: String = s.resource_path
+	if p.is_empty():
+		return "primitives"
+	var fname: String = p.get_file().get_basename()
+	# fname looks like "transformation_projectile" or "swarm_projectile".
+	if fname.ends_with("_projectile"):
+		return fname.substr(0, fname.length() - 11)
+	return fname
 
 ## Called when projectile expires by lifetime.
 func _expire() -> void:
@@ -100,12 +137,18 @@ func _expire() -> void:
 # ═════════════════════════════════════════════════════════════════════════
 
 func _on_body_entered(body: Node3D) -> void:
+	if DEBUG_LOG:
+		print("[Projectile] body_entered fired with body='%s' (class=%s) at pos=%s" % [
+			body.name, body.get_class(), global_position])
 	if has_hit:
 		return
 	# Don't hit the catalyst itself
 	if body.is_in_group("catalyst"):
 		return
 	has_hit = true
+	# Always dispatch transformation FIRST so subclasses can't accidentally
+	# skip it by overriding _on_hit for their own visuals.
+	_dispatch_transformation(body)
 	_on_hit(body)
 	_impact_effect()
 	_cleanup()
