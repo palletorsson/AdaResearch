@@ -88,6 +88,13 @@ def score_sequence(seq_id, maps, registry_scenes):
     }
 
     if not maps:
+        # Empty sequence: populate all stages with zero so display loop and
+        # JSON consumers see the expected schema. HEAD stays at structure.
+        for key in (
+            "2_documentation", "3_artifacts", "4_maps",
+            "5_validation", "6_vr_testing", "7_polish",
+        ):
+            result["stages"][key] = {"done": 0, "total": 0, "pct": 0}
         result["head"] = 1
         result["head_label"] = "structure"
         return result

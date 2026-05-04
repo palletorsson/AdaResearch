@@ -1,0 +1,862 @@
+{
+  "version": 1,
+  "description": "Seed library for map-grammar auto-research. Each entry is a config of operations applied in order to an empty grid. The runner emits commons/maps/<id>/map_data.json plus a gallery thumbnail. Vary one knob at a time and watch what falls out.",
+  "configs": [
+    {
+      "id": "mg_room_simple",
+      "notes": "Single rectangular room, 6x6, no border.",
+      "rows": 12, "cols": 12,
+      "ops": [
+        { "op": "room", "params": { "r": 3, "c": 3, "h": 6, "w": 6 } }
+      ]
+    },
+    {
+      "id": "mg_room_walled",
+      "notes": "Same room with wall border h=2.",
+      "rows": 12, "cols": 12,
+      "ops": [
+        { "op": "room", "params": { "r": 3, "c": 3, "h": 6, "w": 6, "border": 2 } }
+      ]
+    },
+    {
+      "id": "mg_two_rooms",
+      "notes": "Two rooms connected via L-corridor.",
+      "rows": 14, "cols": 18,
+      "ops": [
+        { "op": "room", "params": { "r": 2, "c": 2, "h": 5, "w": 5 } },
+        { "op": "room", "params": { "r": 7, "c": 11, "h": 5, "w": 5 } },
+        { "op": "lsystem_walk", "params": {
+            "axiom": "FFFFFFFFFF+FFFFF",
+            "rules": {}, "iterations": 1, "angle": 90,
+            "start_r": 4, "start_c": 6
+          } }
+      ]
+    },
+    {
+      "id": "mg_drunkard",
+      "notes": "Drunkard's-walk cave at 30% density, thickened to 2-wide so the player never falls off a path.",
+      "rows": 18, "cols": 18,
+      "ops": [
+        { "op": "drunkard_walk", "params": { "fraction": 0.3 } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_drunkard_plinths",
+      "notes": "Drunkard's walk + scattered plinths (h=2) every 3 cells.",
+      "rows": 18, "cols": 18,
+      "ops": [
+        { "op": "drunkard_walk", "params": { "fraction": 0.4 } },
+        { "op": "plinth_field", "params": { "spacing": 3, "plinth_h": 2 } }
+      ]
+    },
+    {
+      "id": "mg_bsp_classic",
+      "notes": "BSP rooms + L-corridors. Doom-style architecture.",
+      "rows": 20, "cols": 24,
+      "ops": [
+        { "op": "bsp", "params": { "min_size": 3, "pad": 1 } }
+      ]
+    },
+    {
+      "id": "mg_bsp_mirror",
+      "notes": "BSP + horizontal mirror — half-the-rooms-twice symmetry.",
+      "rows": 18, "cols": 24,
+      "ops": [
+        { "op": "bsp", "params": { "min_size": 4, "pad": 1 } },
+        { "op": "mirror", "params": { "axis": "horizontal" } }
+      ]
+    },
+    {
+      "id": "mg_lsystem_koch",
+      "notes": "Koch-island L-system path: 4 iterations, 90° turns.",
+      "rows": 22, "cols": 22,
+      "ops": [
+        { "op": "lsystem_walk", "params": {
+            "axiom": "F+F+F+F",
+            "rules": { "F": "F+F-F-FF+F+F-F" },
+            "iterations": 2, "angle": 90,
+            "start_r": 2, "start_c": 2
+          } }
+      ]
+    },
+    {
+      "id": "mg_lsystem_dragon",
+      "notes": "Dragon curve — 8 iterations of F → F+G, G → F-G. Thickened to 2-wide for safe walking.",
+      "rows": 24, "cols": 24,
+      "ops": [
+        { "op": "lsystem_walk", "params": {
+            "axiom": "F",
+            "rules": { "F": "F+G", "G": "F-G" },
+            "iterations": 8, "angle": 90,
+            "start_r": 12, "start_c": 8
+          } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_tile_courtyard",
+      "notes": "9 small courtyards in a 3x3 grid (tile_motif step=6).",
+      "rows": 20, "cols": 20,
+      "ops": [
+        { "op": "tile_motif", "params": {
+            "motif": [[2, 2, 2, 2, 2],
+                      [2, 1, 1, 1, 2],
+                      [2, 1, 3, 1, 2],
+                      [2, 1, 1, 1, 2],
+                      [2, 2, 2, 2, 2]],
+            "step": 6, "offset_r": 1, "offset_c": 1
+          } }
+      ]
+    },
+    {
+      "id": "mg_frame_walk",
+      "notes": "Wall-framed canvas + drunkard-walk cave inside.",
+      "rows": 18, "cols": 22,
+      "ops": [
+        { "op": "frame", "params": { "h": 4 } },
+        { "op": "drunkard_walk", "params": { "fraction": 0.5 } }
+      ]
+    },
+    {
+      "id": "mg_ca_smooth",
+      "notes": "Drunkard fill, then 4 CA smoothing iterations.",
+      "rows": 22, "cols": 22,
+      "ops": [
+        { "op": "drunkard_walk", "params": { "fraction": 0.6 } },
+        { "op": "ca_evolve", "params": { "iterations": 4, "birth": 5 } }
+      ]
+    },
+    {
+      "id": "mg_symmetric_chambers",
+      "notes": "Tile a chamber motif then mirror both axes — wallpaper-y.",
+      "rows": 18, "cols": 18,
+      "ops": [
+        { "op": "tile_motif", "params": {
+            "motif": [[1, 1, 1], [1, 2, 1], [1, 1, 1]],
+            "step": 4, "offset_r": 2, "offset_c": 2
+          } },
+        { "op": "mirror", "params": { "axis": "both" } }
+      ]
+    },
+    {
+      "id": "mg_keystone_room",
+      "notes": "Walled room + central plinth (h=3).",
+      "rows": 14, "cols": 14,
+      "ops": [
+        { "op": "room", "params": { "r": 2, "c": 2, "h": 10, "w": 10, "border": 4 } },
+        { "op": "tile_motif", "params": {
+            "motif": [[3]], "step": 1, "offset_r": 7, "offset_c": 7
+          } }
+      ]
+    },
+    {
+      "id": "mg_lsystem_koch_thick",
+      "notes": "Koch-island rewrite, thickened so it's a 2-wide promenade.",
+      "rows": 22, "cols": 22,
+      "ops": [
+        { "op": "lsystem_walk", "params": {
+            "axiom": "F+F+F+F",
+            "rules": { "F": "F+F-F-FF+F+F-F" },
+            "iterations": 2, "angle": 90,
+            "start_r": 2, "start_c": 2
+          } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_circle_courtyard",
+      "notes": "Round walled courtyard with a centre plinth.",
+      "rows": 16, "cols": 16,
+      "ops": [
+        { "op": "circle_room", "params": { "r": 8, "c": 8, "radius": 6, "border": 3 } },
+        { "op": "tile_motif", "params": {
+            "motif": [[2, 2, 2], [2, 3, 2], [2, 2, 2]],
+            "step": 100, "offset_r": 7, "offset_c": 7
+          } }
+      ]
+    },
+    {
+      "id": "mg_circle_chain",
+      "notes": "Three round rooms connected by 2-wide corridors.",
+      "rows": 16, "cols": 28,
+      "ops": [
+        { "op": "circle_room", "params": { "r": 8, "c": 4, "radius": 3 } },
+        { "op": "circle_room", "params": { "r": 8, "c": 14, "radius": 3 } },
+        { "op": "circle_room", "params": { "r": 8, "c": 24, "radius": 3 } },
+        { "op": "corridor", "params": { "from_r": 8, "from_c": 4, "to_r": 8, "to_c": 24, "width": 2 } }
+      ]
+    },
+    {
+      "id": "mg_staircase_axis",
+      "notes": "Two staircases climbing 1→5 along east+south axes from a central plinth.",
+      "rows": 14, "cols": 14,
+      "ops": [
+        { "op": "room", "params": { "r": 2, "c": 2, "h": 10, "w": 10, "fill": 1 } },
+        { "op": "staircase", "params": {
+            "r": 7, "c": 7, "direction": "east", "length": 5, "start": 1, "step": 1
+          } },
+        { "op": "staircase", "params": {
+            "r": 7, "c": 7, "direction": "south", "length": 5, "start": 1, "step": 1
+          } }
+      ]
+    },
+    {
+      "id": "mg_walk_safe",
+      "notes": "Drunkard walk + safe borders + thicken — never lose a foot off the edge.",
+      "rows": 18, "cols": 22,
+      "ops": [
+        { "op": "drunkard_walk", "params": { "fraction": 0.45 } },
+        { "op": "thicken", "params": { "radius": 1 } },
+        { "op": "safe_borders", "params": { "edge_h": 2 } }
+      ]
+    },
+    {
+      "id": "mg_two_circles_ramp",
+      "notes": "Two round rooms at different heights joined by a staircase.",
+      "rows": 14, "cols": 22,
+      "ops": [
+        { "op": "circle_room", "params": { "r": 7, "c": 4, "radius": 3 } },
+        { "op": "circle_room", "params": { "r": 7, "c": 18, "radius": 3, "fill": 2 } },
+        { "op": "corridor", "params": { "from_r": 7, "from_c": 4, "to_r": 7, "to_c": 18, "width": 2 } },
+        { "op": "staircase", "params": {
+            "r": 7, "c": 11, "direction": "east", "length": 4, "start": 1, "step": 1
+          } }
+      ]
+    },
+    {
+      "id": "mg_corridor_grid",
+      "notes": "Plus-sign corridor — two perpendicular 2-wide passages crossing the centre.",
+      "rows": 16, "cols": 22,
+      "ops": [
+        { "op": "corridor", "params": { "from_r": 8, "from_c": 1, "to_r": 8, "to_c": 20, "width": 2 } },
+        { "op": "corridor", "params": { "from_r": 1, "from_c": 11, "to_r": 14, "to_c": 11, "width": 2 } }
+      ]
+    },
+    {
+      "id": "mg_noise_blob",
+      "notes": "Smoothed value-noise — organic blob shapes with no rigid geometry.",
+      "rows": 22, "cols": 22,
+      "ops": [
+        { "op": "noise_field", "params": { "threshold": 0.55, "blur": 4 } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_voronoi_district",
+      "notes": "Voronoi cells — each district a different walkable height with wall borders.",
+      "rows": 18, "cols": 22,
+      "ops": [
+        { "op": "voronoi_cells", "params": { "n_seeds": 6, "border": 3 } }
+      ]
+    },
+    {
+      "id": "mg_fractal_split",
+      "notes": "Fractal subdivision (depth 4) producing varied rectangular leaf heights.",
+      "rows": 16, "cols": 24,
+      "ops": [
+        { "op": "subdivide", "params": { "depth": 4, "heights": [0, 1, 1, 1, 2, 3] } }
+      ]
+    },
+    {
+      "id": "mg_checker_floor",
+      "notes": "Checker pattern of floor + plinth — a chess-board of low platforms.",
+      "rows": 14, "cols": 14,
+      "ops": [
+        { "op": "checker", "params": { "h_a": 1, "h_b": 2, "period": 1 } }
+      ]
+    },
+    {
+      "id": "mg_chequer_big",
+      "notes": "Larger checker tiles — quadrant-sized.",
+      "rows": 16, "cols": 16,
+      "ops": [
+        { "op": "checker", "params": { "h_a": 1, "h_b": 3, "period": 4 } }
+      ]
+    },
+    {
+      "id": "mg_perimeter_plinths",
+      "notes": "Walled box with plinths punctuating the perimeter every 3 cells.",
+      "rows": 14, "cols": 18,
+      "ops": [
+        { "op": "frame", "params": { "h": 2 } },
+        { "op": "room", "params": { "r": 1, "c": 1, "h": 12, "w": 16, "fill": 1 } },
+        { "op": "border_plinths", "params": { "period": 3, "h": 3 } }
+      ]
+    },
+    {
+      "id": "mg_voronoi_thick",
+      "notes": "Voronoi cells then thicken so corridors are walkable between districts.",
+      "rows": 20, "cols": 24,
+      "ops": [
+        { "op": "voronoi_cells", "params": { "n_seeds": 5, "border": 0 } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_rotated_lsystem",
+      "notes": "L-system path then 90° rotated — same trace approached from a different cardinal.",
+      "rows": 18, "cols": 18,
+      "ops": [
+        { "op": "lsystem_walk", "params": {
+            "axiom": "F+F+F+F",
+            "rules": { "F": "FF+F-F+F+FF" },
+            "iterations": 2, "angle": 90,
+            "start_r": 3, "start_c": 3
+          } },
+        { "op": "thicken", "params": { "radius": 1 } },
+        { "op": "rotate90", "params": {} }
+      ]
+    },
+    {
+      "id": "mg_subdivide_mirror",
+      "notes": "Fractal subdivide then mirror horizontally — one half generated, both halves drawn.",
+      "rows": 16, "cols": 24,
+      "ops": [
+        { "op": "subdivide", "params": { "depth": 3, "heights": [0, 1, 1, 2] } },
+        { "op": "mirror", "params": { "axis": "horizontal" } }
+      ]
+    },
+    {
+      "id": "mg_noise_with_circles",
+      "notes": "Noise blob with two circular plazas punched through it.",
+      "rows": 22, "cols": 28,
+      "ops": [
+        { "op": "noise_field", "params": { "threshold": 0.5, "blur": 4 } },
+        { "op": "circle_room", "params": { "r": 11, "c": 7, "radius": 4, "fill": 1 } },
+        { "op": "circle_room", "params": { "r": 11, "c": 21, "radius": 4, "fill": 2 } }
+      ]
+    },
+    {
+      "id": "mg_atrium",
+      "notes": "Frame + circle courtyard + four staircases at the cardinals — stepped atrium.",
+      "rows": 18, "cols": 18,
+      "ops": [
+        { "op": "room", "params": { "r": 2, "c": 2, "h": 14, "w": 14, "fill": 1 } },
+        { "op": "frame", "params": { "h": 4 } },
+        { "op": "circle_room", "params": { "r": 9, "c": 9, "radius": 4, "fill": 1, "border": 2 } },
+        { "op": "staircase", "params": { "r": 9, "c": 5, "direction": "east", "length": 4, "start": 1, "step": 0 } },
+        { "op": "staircase", "params": { "r": 9, "c": 9, "direction": "south", "length": 4, "start": 2, "step": 1 } }
+      ]
+    },
+    {
+      "id": "mg_full_grammar",
+      "notes": "Multiple operations stacked — drunkard walk + thicken + circle plaza + plinth field + safe borders. The grammar composing.",
+      "rows": 22, "cols": 28,
+      "ops": [
+        { "op": "drunkard_walk", "params": { "fraction": 0.45 } },
+        { "op": "thicken", "params": { "radius": 1 } },
+        { "op": "circle_room", "params": { "r": 11, "c": 14, "radius": 5, "fill": 1, "border": 2 } },
+        { "op": "plinth_field", "params": { "spacing": 4, "plinth_h": 2 } },
+        { "op": "safe_borders", "params": { "edge_h": 2 } }
+      ]
+    },
+    {
+      "id": "mg_petal_six",
+      "notes": "Six-petal flower from above — Haeckel-plate composition. From the-flower-from-above + the-flower-has-petals.",
+      "rows": 18, "cols": 18,
+      "ops": [
+        { "op": "petal_ring", "params": { "n": 6, "inner_radius": 1.5, "outer_radius": 6, "petal_h": 2, "centre_h": 3 } }
+      ]
+    },
+    {
+      "id": "mg_petal_twelve",
+      "notes": "Twelve petals like the gen13_petals_snap_12 — a denser blossom.",
+      "rows": 22, "cols": 22,
+      "ops": [
+        { "op": "petal_ring", "params": { "n": 12, "inner_radius": 1, "outer_radius": 8, "petal_h": 2, "centre_h": 3 } }
+      ]
+    },
+    {
+      "id": "mg_haeckel_specimen",
+      "notes": "Single specimen on a framed plate — the Codex Seraphinianus aesthetic.",
+      "rows": 14, "cols": 14,
+      "ops": [
+        { "op": "vignette_room", "params": { "border": 4, "centre_h": 3, "margin": 2 } }
+      ]
+    },
+    {
+      "id": "mg_qfep_banner",
+      "notes": "QFEP-formula-banner — long entry strip with a tall feature wall + openings. From curriculum-shaped-templates.",
+      "rows": 14, "cols": 24,
+      "ops": [
+        { "op": "sequence_banner", "params": { "row": 6, "h": 4, "pillar_every": 4 } },
+        { "op": "safe_borders", "params": { "edge_h": 2 } }
+      ]
+    },
+    {
+      "id": "mg_spine_4",
+      "notes": "Vertebrate spine — central axis with 4 alternating chambers. Plan view.",
+      "rows": 14, "cols": 22,
+      "ops": [
+        { "op": "axis_with_branches", "params": { "row": 7, "chambers": 4, "size": 3, "side": "alternate" } }
+      ]
+    },
+    {
+      "id": "mg_spine_north",
+      "notes": "Same spine but all branches on the north side — asymmetric vertebrae.",
+      "rows": 14, "cols": 22,
+      "ops": [
+        { "op": "axis_with_branches", "params": { "row": 9, "chambers": 5, "size": 2, "side": "north" } }
+      ]
+    },
+    {
+      "id": "mg_ca_rule90",
+      "notes": "Wolfram Rule 90 over the floor — Sierpinski-like CA mask. From grid-mutators (substrate-as-CA-channel).",
+      "rows": 22, "cols": 26,
+      "ops": [
+        { "op": "ca_mask", "params": { "rule": 90 } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_ca_rule30",
+      "notes": "Wolfram Rule 30 — same engine, different walk-shape. The substrate reads chaos.",
+      "rows": 22, "cols": 26,
+      "ops": [
+        { "op": "ca_mask", "params": { "rule": 30 } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_sierpinski",
+      "notes": "Pure Sierpinski mask: floor where (row & col) == 0. Self-similar fractal.",
+      "rows": 16, "cols": 16,
+      "ops": [
+        { "op": "sierpinski", "params": { "fill": 1 } }
+      ]
+    },
+    {
+      "id": "mg_petal_in_frame",
+      "notes": "Six-petal flower inside a Haeckel frame — composition of two ops. From the-substrate-reads-a-codex.",
+      "rows": 18, "cols": 18,
+      "ops": [
+        { "op": "vignette_room", "params": { "border": 3, "centre_h": 1, "margin": 2 } },
+        { "op": "petal_ring", "params": { "n": 6, "inner_radius": 1, "outer_radius": 4.5, "petal_h": 2, "centre_h": 3 } }
+      ]
+    },
+    {
+      "id": "mg_spine_ca",
+      "notes": "Vertebrate spine + CA Rule 90 overlay — biology meets cellular automaton.",
+      "rows": 16, "cols": 26,
+      "ops": [
+        { "op": "ca_mask", "params": { "rule": 90 } },
+        { "op": "axis_with_branches", "params": { "row": 8, "chambers": 4, "size": 2, "side": "alternate" } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_petal_with_axis",
+      "notes": "Spine entering a flower — corridor approach to a centred specimen.",
+      "rows": 18, "cols": 30,
+      "ops": [
+        { "op": "axis_with_branches", "params": { "row": 9, "chambers": 0, "size": 0 } },
+        { "op": "petal_ring", "params": { "r": 9, "c": 22, "n": 8, "inner_radius": 1.5, "outer_radius": 5, "petal_h": 2, "centre_h": 3 } }
+      ]
+    },
+    {
+      "id": "mg_mies_universal",
+      "notes": "Mies van der Rohe — Universal Space. Open hall with regular columns at 4-cell rhythm.",
+      "rows": 16, "cols": 24,
+      "ops": [
+        { "op": "column_grid", "params": { "period": 4, "column_h": 4 } }
+      ]
+    },
+    {
+      "id": "mg_mies_dense",
+      "notes": "Same Universal Space at tighter column rhythm — rhythmic forest.",
+      "rows": 18, "cols": 26,
+      "ops": [
+        { "op": "column_grid", "params": { "period": 3, "column_h": 5 } }
+      ]
+    },
+    {
+      "id": "mg_ulam_primes",
+      "notes": "Ulam (1963) — primes plotted on a square spiral, walked from the centre outward.",
+      "rows": 24, "cols": 24,
+      "ops": [
+        { "op": "ulam_spiral", "params": { "mode": "primes" } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_ulam_fib",
+      "notes": "Same spiral, Fibonacci numbers instead — sparser, wider intervals.",
+      "rows": 24, "cols": 24,
+      "ops": [
+        { "op": "ulam_spiral", "params": { "mode": "fibonacci" } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_zelda_overworld",
+      "notes": "Zelda-1 (1986) overworld — 3×4 grid of rooms, single-cell doorways. Screen-by-screen movement.",
+      "rows": 18, "cols": 26,
+      "ops": [
+        { "op": "screen_grid", "params": { "rows_n": 3, "cols_n": 4, "wall_h": 4 } }
+      ]
+    },
+    {
+      "id": "mg_zelda_dense",
+      "notes": "5×5 dense grid of small rooms — late-game dungeon density.",
+      "rows": 22, "cols": 22,
+      "ops": [
+        { "op": "screen_grid", "params": { "rows_n": 5, "cols_n": 5, "wall_h": 4 } }
+      ]
+    },
+    {
+      "id": "mg_resident_evil",
+      "notes": "Resident Evil 1 mansion — central hall with 4 wings + satellite rooms.",
+      "rows": 22, "cols": 22,
+      "ops": [
+        { "op": "mansion_hub", "params": { "hub_radius": 3, "n_rooms": 4, "arm_length": 4, "room_size": 3 } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_mansion_six",
+      "notes": "Six-armed mansion — Soane-Museum-density of satellite specimens.",
+      "rows": 22, "cols": 22,
+      "ops": [
+        { "op": "mansion_hub", "params": { "hub_radius": 3, "n_rooms": 6, "arm_length": 5, "room_size": 3 } }
+      ]
+    },
+    {
+      "id": "mg_brown_serpentine",
+      "notes": "Capability Brown picturesque meander — sinusoidal walking path with reveals.",
+      "rows": 16, "cols": 30,
+      "ops": [
+        { "op": "serpentine_path", "params": { "amplitude": 5, "frequency": 1.5, "width": 2, "reveal_chance": 0.6 } }
+      ]
+    },
+    {
+      "id": "mg_serpentine_dense",
+      "notes": "Two-period serpentine — landscape with more turns, more reveals.",
+      "rows": 18, "cols": 30,
+      "ops": [
+        { "op": "serpentine_path", "params": { "amplitude": 6, "frequency": 2.5, "width": 2, "reveal_chance": 0.8 } }
+      ]
+    },
+    {
+      "id": "mg_mies_with_centerpiece",
+      "notes": "Mies hall + central petal flower — specimen on architectural ground.",
+      "rows": 18, "cols": 24,
+      "ops": [
+        { "op": "column_grid", "params": { "period": 4, "column_h": 3 } },
+        { "op": "petal_ring", "params": { "n": 6, "inner_radius": 1, "outer_radius": 3, "petal_h": 2, "centre_h": 3 } }
+      ]
+    },
+    {
+      "id": "mg_loos_raumplan_h",
+      "notes": "Adolf Loos — Raumplan, horizontal half-level interlock. Lower half h=1, upper half h=2 — single-step climb.",
+      "rows": 14, "cols": 18,
+      "ops": [
+        { "op": "raumplan", "params": { "split": "horizontal", "low": 1, "high": 2, "border": 4 } }
+      ]
+    },
+    {
+      "id": "mg_loos_raumplan_quad",
+      "notes": "Raumplan with diagonal quadrant split — four interlocking half-levels.",
+      "rows": 14, "cols": 14,
+      "ops": [
+        { "op": "raumplan", "params": { "split": "quadrant", "low": 1, "high": 2 } }
+      ]
+    },
+    {
+      "id": "mg_terraced_bowl",
+      "notes": "Stepped amphitheatre — concentric square rings descending to a centre stage.",
+      "rows": 14, "cols": 14,
+      "ops": [
+        { "op": "terraced", "params": { "max_h": 4, "center_h": 1 } }
+      ]
+    },
+    {
+      "id": "mg_safdie_habitat",
+      "notes": "Habitat 67 — additive cube modules at varying heights via random walk.",
+      "rows": 18, "cols": 22,
+      "ops": [
+        { "op": "safdie_cluster", "params": { "n_modules": 40, "max_h": 4 } }
+      ]
+    },
+    {
+      "id": "mg_dark_souls",
+      "notes": "Dark Souls — two-path topology with a midway shortcut connecting them.",
+      "rows": 18, "cols": 22,
+      "ops": [
+        { "op": "dark_souls_loop", "params": {} }
+      ]
+    },
+    {
+      "id": "mg_hollow_knight",
+      "notes": "Hollow Knight — three biome bands at different heights with single-cell thresholds.",
+      "rows": 18, "cols": 22,
+      "ops": [
+        { "op": "hk_biomes", "params": { "h_a": 1, "h_b": 2, "h_c": 1, "border": 4 } }
+      ]
+    },
+    {
+      "id": "mg_animal_crossing",
+      "notes": "Animal Crossing island — radial heights with eroded coastline.",
+      "rows": 18, "cols": 22,
+      "ops": [
+        { "op": "island_shore", "params": { "radius": 9, "erosion": 2.0 } }
+      ]
+    },
+    {
+      "id": "mg_two_floor",
+      "notes": "Multi-floor: lower hall h=1 + upper mezzanine h=3, joined by a single-step ramp.",
+      "rows": 14, "cols": 22,
+      "ops": [
+        { "op": "multi_floor", "params": {} }
+      ]
+    },
+    {
+      "id": "mg_terraced_with_specimen",
+      "notes": "Stepped amphitheatre with a flower specimen on the lowest stage — performance-in-the-bowl.",
+      "rows": 16, "cols": 16,
+      "ops": [
+        { "op": "terraced", "params": { "max_h": 4, "center_h": 1 } },
+        { "op": "petal_ring", "params": { "n": 6, "inner_radius": 0, "outer_radius": 1.5, "petal_h": 2, "centre_h": 3 } }
+      ]
+    },
+    {
+      "id": "mg_island_with_axis",
+      "notes": "Island shore + central spine — landscape-with-pier composition.",
+      "rows": 18, "cols": 22,
+      "ops": [
+        { "op": "island_shore", "params": { "radius": 9, "erosion": 1.5 } },
+        { "op": "axis_with_branches", "params": { "row": 9, "chambers": 3, "size": 2, "side": "alternate" } }
+      ]
+    },
+    {
+      "id": "mg_flw_prairie",
+      "notes": "Frank Lloyd Wright Prairie — long horizontal axis with central hearth + cantilevered side rooms.",
+      "rows": 14, "cols": 24,
+      "ops": [
+        { "op": "prairie_axis", "params": { "width": 3 } }
+      ]
+    },
+    {
+      "id": "mg_metroid_4",
+      "notes": "Metroidvania — 4 tall gates blocking direct routes; player must find detours.",
+      "rows": 18, "cols": 24,
+      "ops": [
+        { "op": "metroid_gates", "params": { "n_gates": 4 } }
+      ]
+    },
+    {
+      "id": "mg_antichamber_break",
+      "notes": "Mirror-with-deviation — looks symmetric until you spot the breaks. Antichamber-flavoured.",
+      "rows": 18, "cols": 18,
+      "ops": [
+        { "op": "bsp", "params": { "min_size": 4, "pad": 1 } },
+        { "op": "mirror_break", "params": { "axis": "horizontal", "breaks": 6 } }
+      ]
+    },
+    {
+      "id": "mg_soane_collection",
+      "notes": "Soane Museum — densely packed plinths leaving narrow walkways. Cabinet-from-above.",
+      "rows": 16, "cols": 22,
+      "ops": [
+        { "op": "soane_dense", "params": { "period": 2, "plinth_h": 3 } }
+      ]
+    },
+    {
+      "id": "mg_borges_paths",
+      "notes": "Borges' Garden of Forking Paths — 4-level binary branching tree.",
+      "rows": 22, "cols": 26,
+      "ops": [
+        { "op": "borges_garden", "params": { "levels": 3, "branch_len": 3, "width": 2 } }
+      ]
+    },
+    {
+      "id": "mg_terraced_with_columns",
+      "notes": "Stepped amphitheatre + ring of columns — Pantheon-style.",
+      "rows": 16, "cols": 16,
+      "ops": [
+        { "op": "terraced", "params": { "max_h": 4, "center_h": 1 } },
+        { "op": "petal_ring", "params": { "n": 8, "inner_radius": 4, "outer_radius": 4.5, "petal_h": 4, "centre_h": 1 } }
+      ]
+    },
+    {
+      "id": "mg_dark_souls_with_terr",
+      "notes": "Souls-loop + terraced descent at the convergence — multi-path culminating in a sunken area.",
+      "rows": 20, "cols": 24,
+      "ops": [
+        { "op": "dark_souls_loop", "params": {} },
+        { "op": "terraced", "params": { "max_h": 3, "center_h": 1 } }
+      ]
+    },
+    {
+      "id": "mg_safdie_with_void",
+      "notes": "Habitat 67 cluster + void-slot — modular cubes with a slim memorial gap cutting through.",
+      "rows": 20, "cols": 22,
+      "ops": [
+        { "op": "safdie_cluster", "params": { "n_modules": 35, "max_h": 4 } },
+        { "op": "tile_motif", "params": { "motif": [[0]], "step": 1, "offset_r": 9, "offset_c": 11 } }
+      ]
+    },
+    {
+      "id": "mg_island_with_petal",
+      "notes": "Island + central petal flower — botanical garden on a small island.",
+      "rows": 20, "cols": 20,
+      "ops": [
+        { "op": "island_shore", "params": { "radius": 8, "erosion": 1.0 } },
+        { "op": "petal_ring", "params": { "n": 8, "inner_radius": 1, "outer_radius": 3, "petal_h": 3, "centre_h": 4 } }
+      ]
+    },
+    {
+      "id": "mg_zelda_with_specimen",
+      "notes": "Zelda screen-grid + a centre-specimen room. The map of dungeon-with-prize.",
+      "rows": 18, "cols": 22,
+      "ops": [
+        { "op": "screen_grid", "params": { "rows_n": 3, "cols_n": 3 } },
+        { "op": "petal_ring", "params": { "r": 9, "c": 11, "n": 4, "inner_radius": 0, "outer_radius": 1.2, "petal_h": 2, "centre_h": 3 } }
+      ]
+    },
+    {
+      "id": "mg_flw_with_garden",
+      "notes": "Prairie axis terminating in a Capability Brown serpentine garden — house-and-grounds.",
+      "rows": 18, "cols": 30,
+      "ops": [
+        { "op": "prairie_axis", "params": {} },
+        { "op": "serpentine_path", "params": { "amplitude": 4, "frequency": 1, "width": 2, "base_row": 4, "reveal_chance": 0.5 } }
+      ]
+    },
+    {
+      "id": "mg_hilbert_o3",
+      "notes": "Hilbert space-filling curve, order 3 — every cell visited exactly once. The map IS the curve. From algorithms/lsystems/Hilbert3D.",
+      "rows": 16, "cols": 16,
+      "ops": [
+        { "op": "hilbert_curve", "params": { "order": 3 } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_hilbert_o4",
+      "notes": "Hilbert curve, order 4 — denser, on a 16×16 grid.",
+      "rows": 22, "cols": 22,
+      "ops": [
+        { "op": "hilbert_curve", "params": { "order": 4 } }
+      ]
+    },
+    {
+      "id": "mg_turing_pattern",
+      "notes": "Reaction-diffusion Turing pattern — activator/inhibitor produces spots/labyrinths. From algorithms/proceduralgeneration/ReactionDiffusion.",
+      "rows": 22, "cols": 26,
+      "ops": [
+        { "op": "reaction_diffusion", "params": { "iterations": 80, "feed": 0.055, "kill": 0.062, "threshold": 0.4 } }
+      ]
+    },
+    {
+      "id": "mg_turing_stripes",
+      "notes": "Same RD but tuned for stripes — different feed/kill rates produce zebra-like patterns.",
+      "rows": 22, "cols": 26,
+      "ops": [
+        { "op": "reaction_diffusion", "params": { "iterations": 100, "feed": 0.04, "kill": 0.06, "threshold": 0.35 } }
+      ]
+    },
+    {
+      "id": "mg_gyroid",
+      "notes": "Gyroid triply-periodic minimal surface, 2D slice. From algorithms/spacetopology/marchingcubes.",
+      "rows": 22, "cols": 26,
+      "ops": [
+        { "op": "gyroid_pattern", "params": { "scale": 0.45, "z": 1.0 } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_gyroid_dense",
+      "notes": "Gyroid at higher frequency — denser pattern.",
+      "rows": 22, "cols": 26,
+      "ops": [
+        { "op": "gyroid_pattern", "params": { "scale": 0.7, "z": 0.5 } }
+      ]
+    },
+    {
+      "id": "mg_lorenz_butterfly",
+      "notes": "Lorenz strange attractor projected onto the grid — the butterfly trace. From algorithms/chaos/strangeattractors.",
+      "rows": 22, "cols": 28,
+      "ops": [
+        { "op": "lorenz_trail", "params": { "iterations": 6000, "scale": 0.3 } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_physarum",
+      "notes": "Physarum slime-mold trails between food points — emergent transit network. From algorithms/swarmintelligence/physarum.",
+      "rows": 18, "cols": 24,
+      "ops": [
+        { "op": "physarum_trail", "params": { "n_food": 8, "n_trails": 30 } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_renaissance",
+      "notes": "Renaissance pavement — concentric rings + radial spokes + centre rosette. From algorithms/computationalgeometry/renaissancepaintingfloorrattern.",
+      "rows": 18, "cols": 18,
+      "ops": [
+        { "op": "renaissance_floor", "params": { "n_petals": 8 } }
+      ]
+    },
+    {
+      "id": "mg_cantor_dust",
+      "notes": "Cantor dust — recursive 1/3 erasure in 2D. From algorithms/fractals/cantorset.",
+      "rows": 27, "cols": 27,
+      "ops": [
+        { "op": "cantor_dust", "params": { "depth": 3 } }
+      ]
+    },
+    {
+      "id": "mg_hilbert_with_specimen",
+      "notes": "Hilbert curve + central plinth — algorithmic floor with a centrepiece.",
+      "rows": 18, "cols": 18,
+      "ops": [
+        { "op": "hilbert_curve", "params": { "order": 3 } },
+        { "op": "petal_ring", "params": { "n": 4, "inner_radius": 0, "outer_radius": 1.5, "petal_h": 2, "centre_h": 3 } }
+      ]
+    },
+    {
+      "id": "mg_physarum_with_columns",
+      "notes": "Slime trails + Mies columns — algorithmic emergence under regular structure.",
+      "rows": 18, "cols": 24,
+      "ops": [
+        { "op": "physarum_trail", "params": { "n_food": 6, "n_trails": 22 } },
+        { "op": "column_grid", "params": { "period": 5, "column_h": 4 } },
+        { "op": "thicken", "params": { "radius": 1 } }
+      ]
+    },
+    {
+      "id": "mg_archipelago",
+      "notes": "Multiple islands at varying heights, joined by tc transport cubes across void. Uses utility layer for traversal.",
+      "rows": 18, "cols": 24,
+      "ops": [
+        { "op": "archipelago", "params": { "n_islands": 5, "island_radius": 3 } }
+      ]
+    },
+    {
+      "id": "mg_ramped_terraces",
+      "notes": "Stepped terraces 1→4 high with wp ramps between levels. Architectural relief, structurally walkable.",
+      "rows": 14, "cols": 22,
+      "ops": [
+        { "op": "ramped_terraces", "params": { "levels": 4 } }
+      ]
+    },
+    {
+      "id": "mg_floating_platforms",
+      "notes": "Several 2×2 platforms at varying heights, joined by tc cubes. Vertical labyrinth.",
+      "rows": 18, "cols": 22,
+      "ops": [
+        { "op": "floating_platforms", "params": { "n_platforms": 6 } }
+      ]
+    },
+    {
+      "id": "mg_zigzag_levels",
+      "notes": "Alternating high-low strips with wp ramps between — cross-section wave.",
+      "rows": 14, "cols": 18,
+      "ops": [
+        { "op": "zigzag_levels", "params": { "strip_h": 3, "low": 1, "high": 3 } }
+      ]
+    }
+  ]
+}

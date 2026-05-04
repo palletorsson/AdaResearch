@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "generated_from": "manifest.json",
+  "configs": [
+    {
+      "id": "mg_symmetric_chambers_g1_0",
+      "notes": "gen1: add corridor between disconnected regions (parent=mg_symmetric_chambers)",
+      "rows": 18,
+      "cols": 18,
+      "ops": [
+        {
+          "op": "tile_motif",
+          "params": {
+            "motif": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                1
+              ]
+            ],
+            "step": 4,
+            "offset_r": 2,
+            "offset_c": 2
+          }
+        },
+        {
+          "op": "mirror",
+          "params": {
+            "axis": "both"
+          }
+        },
+        {
+          "op": "corridor",
+          "params": {
+            "from_r": 1,
+            "from_c": 1,
+            "to_r": 16,
+            "to_c": 16,
+            "width": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_symmetric_chambers_g1_1",
+      "notes": "gen1: lower CA birth threshold so chambers join (parent=mg_symmetric_chambers)",
+      "rows": 18,
+      "cols": 18,
+      "ops": [
+        {
+          "op": "tile_motif",
+          "params": {
+            "motif": [
+              [
+                1,
+                1,
+                1
+              ],
+              [
+                1,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                1
+              ]
+            ],
+            "step": 4,
+            "offset_r": 2,
+            "offset_c": 2
+          }
+        },
+        {
+          "op": "mirror",
+          "params": {
+            "axis": "both"
+          }
+        },
+        {
+          "op": "thicken",
+          "params": {
+            "radius": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_brown_serpentine_g1_0",
+      "notes": "gen1: add corridor op linking spawn region to the rest (parent=mg_brown_serpentine)",
+      "rows": 16,
+      "cols": 30,
+      "ops": [
+        {
+          "op": "serpentine_path",
+          "params": {
+            "amplitude": 5,
+            "frequency": 1.5,
+            "width": 2,
+            "reveal_chance": 0.6
+          }
+        },
+        {
+          "op": "corridor",
+          "params": {
+            "from_r": 1,
+            "from_c": 1,
+            "to_r": 14,
+            "to_c": 28,
+            "width": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "mg_serpentine_dense_g1_0",
+      "notes": "gen1: add corridor op linking spawn region to the rest (parent=mg_serpentine_dense)",
+      "rows": 18,
+      "cols": 30,
+      "ops": [
+        {
+          "op": "serpentine_path",
+          "params": {
+            "amplitude": 6,
+            "frequency": 2.5,
+            "width": 2,
+            "reveal_chance": 0.8
+          }
+        },
+        {
+          "op": "corridor",
+          "params": {
+            "from_r": 1,
+            "from_c": 1,
+            "to_r": 16,
+            "to_c": 28,
+            "width": 2
+          }
+        }
+      ]
+    }
+  ]
+}
