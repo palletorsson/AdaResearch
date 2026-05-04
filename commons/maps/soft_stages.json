@@ -855,6 +855,52 @@
 				"kind": "transport",
 				"comment": "Catalyst foe variant for the graphtheory sequence."
 			}
+		},
+		"biome_lab": {
+			"order": 99,
+			"comment": "Lab sequence — Biome_Spine and Biome_Zoo. All kingdoms unlocked, max density. Lets the dispatcher work test code through every substrate.",
+			"ecosystem": {
+				"allow_flags": [
+					"all_kingdoms",
+					"all_substrates",
+					"auto_research"
+				],
+				"nature_kingdoms": [
+					"flower",
+					"tree",
+					"fungus",
+					"creature"
+				],
+				"vegetation_density": 1.0,
+				"terrain_mode": "self_generating",
+				"ambient_preset": "lush_lab"
+			},
+			"hazards": {
+				"unlock_types": [],
+				"spawner_behavior": "dormant",
+				"personality_shift": {},
+				"max_concurrent": 0
+			},
+			"capability": {
+				"capacity_level": 5,
+				"hand_verbs": [
+					"observe",
+					"grab",
+					"snap",
+					"paint",
+					"dispatch"
+				],
+				"catalyst_mode": "all",
+				"movement_abilities": [
+					"teleport",
+					"walk",
+					"fly"
+				]
+			},
+			"enemies": {
+				"kind": "none",
+				"comment": "No combat — these are visualization labs."
+			}
 		}
 	}
 }
