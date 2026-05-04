@@ -1,0 +1,73 @@
+{
+  "spec_version": "0.1",
+  "artifact": {
+    "id": "bulging_tunnel",
+    "name": "Bulging Tunnel",
+    "qfep": "lambda_edge",
+    "category": "alternative_geometry",
+    "essence": "a cylinder that refuses regularity — CSG spheres bulge the walls at intervals, making geometry breathe",
+    "truth": "a corridor is just a cave with its chaos removed"
+  },
+  "parameters": [
+    { "id": "tunnel_length",  "type": "float", "default": 10.0, "range": [1.0, 50.0],  "unit": "m" },
+    { "id": "tunnel_radius",  "type": "float", "default": 1.0,  "range": [0.2, 5.0],   "unit": "m" },
+    { "id": "num_bulges",     "type": "int",   "default": 5,    "range": [0, 30],
+      "doc": "controls the lambda between hallway (low) and cave (high)" },
+    { "id": "bulge_max_radius","type":"float", "default": 2.0,  "range": [0.5, 5.0],   "unit": "m" },
+    { "id": "tunnel_segments","type": "int",   "default": 32,   "range": [8, 128] },
+    { "id": "use_random_bulges","type":"bool", "default": true },
+    { "id": "bulge_seed",     "type": "int",   "default": 42 },
+    { "id": "tunnel_color",   "type": "color", "default": [0.6, 0.4, 0.3] },
+    { "id": "metallic",       "type": "float", "default": 0.1,  "range": [0, 1] },
+    { "id": "roughness",      "type": "float", "default": 0.7,  "range": [0, 1] }
+  ],
+  "geometry": {
+    "kind": "csg_combiner",
+    "ops": [
+      {
+        "primitive": "csg_cylinder",
+        "operation": "base",
+        "params": {
+          "radius":  "$tunnel_radius",
+          "height":  "$tunnel_length",
+          "sides":   "$tunnel_segments"
+        },
+        "transform": {
+          "translate": [0, 0, "$tunnel_length / 2"],
+          "rotate_deg": [90, 0, 0]
+        }
+      },
+      {
+        "kind": "for_each",
+        "iterator": "i in range($num_bulges)",
+        "let": {
+          "spacing": "$tunnel_length / ($num_bulges + 1)",
+          "z":       "spacing * (i + 1)",
+          "radius":  "$use_random_bulges ? rng.range($tunnel_radius * 1.2, $bulge_max_radius) : lerp($tunnel_radius * 1.2, $bulge_max_radius, sin((z / $tunnel_length) * PI))"
+        },
+        "emit": {
+          "primitive": "csg_sphere",
+          "operation": "union",
+          "params": {
+            "radius": "$radius",
+            "radial_segments": "$tunnel_segments",
+            "rings": "$tunnel_segments / 2"
+          },
+          "transform": { "translate": [0, 0, "$z"] }
+        }
+      }
+    ]
+  },
+  "material": {
+    "kind": "pbr_standard",
+    "albedo": "$tunnel_color",
+    "metallic": "$metallic",
+    "roughness": "$roughness"
+  },
+  "rng": { "seeded_when": "$use_random_bulges", "seed": "$bulge_seed" },
+  "behavior": {
+    "on_ready": ["build_geometry", "apply_material"],
+    "on_parameter_change": ["rebuild"]
+  },
+  "interaction": []
+}

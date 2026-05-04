@@ -157,6 +157,36 @@
       "topic": "duplicate artifact files",
       "insight": "branching_growth_algorithm exists in two dirs (branchinggrowthalgorithm/ and branchinggrowthalgorithmcontinued/). garden_listener cache last-write-wins — the latter file shadows the former. Always check for duplicate .gd filenames when a file has @identity but garden still shows it as voiceless.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-04-28T07:13:15.766769+00:00",
+      "topic": "garden_embodiment_cache_cascade",
+      "insight": "Voicing artifacts with 'apply_grid_config [has]' in @identity 'needs' field reveals previously-invisible embodied artifacts. Forces sequence jumped from 0 to 68 embodied after voicing 14 artifacts that declared apply_grid_config — the embodiment was already there in code, just not declared in @identity. Pattern: SCATTERED sequences with low embodiment may actually be heavily embodied but voiceless. Voice + declare to surface existing work.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-04-30T05:30:16.778824+00:00",
+      "topic": "pipeline_scorer_token_parsing",
+      "insight": "Pipeline scorer's artifact stage parses cell tokens as cell.split(':')[0] - so map_data references like 'mc:sphere:0:1:0.04' parse to bare 'mc' (unregistered) rather than 'mc:sphere'. Colon-prefixed namespace tokens cannot be saved by adding a registry alias; they must be renamed to use underscores in the map_data. Found in ISO_ShapesGallery during the 2026-04-30 breath.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-05-03T06:48:32.860062+00:00",
+      "topic": "pipeline_scorer empty sequence schema",
+      "insight": "score_sequence early-return on empty maps left stages 2-7 unpopulated, crashing main() display loop with KeyError. Fix: when maps==[] populate all 7 stage keys with done=0 total=0 pct=0 before return. Schema invariant matters for downstream JSON consumers too.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-05-03T06:48:32.989986+00:00",
+      "topic": "tscn uid path drift",
+      "insight": "branchinggrowthalgorithmcontinued/.tscn had a stale path (missing growth_systems/) AND a uid pointing to the OTHER folder's script — Godot resolved by uid and silently loaded the wrong .gd. Pattern: when two files share a name across folders, check that each .tscn references its sibling's uid not the other folder's. Two distinct symbols (uid + path) must agree.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-05-03T17:07:58.501423+00:00",
+      "topic": "catalyst_foe_system",
+      "insight": "Unified enemy: vent emits cube foes; catalyst projectile flips them to friend; friend converts peers. 4 kinds (goo/transport/swarm/drainfriend) dispatch on projectile mode_id. Editor /editor + VR commons/hazards/catalyst_foe/. 10 test maps Catalyst_01..10 chained. Save through /api/voxel-editor for compact-rows JSON.",
+      "lod": 2
     }
   ]
 }

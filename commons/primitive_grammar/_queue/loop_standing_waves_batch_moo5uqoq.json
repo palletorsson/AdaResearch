@@ -1,0 +1,107 @@
+{
+  "map": "GraphTheory_Force_Directed_Graph_Layout",
+  "wait": 6,
+  "auto_frame": true,
+  "anchor": [
+    5,
+    6
+  ],
+  "shots": [
+    {
+      "name": "orbit_front",
+      "out": "user://research_loop/loop_standing_waves_batch_moo5uqoq_orbit_front.png",
+      "camera": {
+        "direction": [
+          2,
+          1.4,
+          2
+        ],
+        "padding": 1.15,
+        "min_distance": 1.5,
+        "position": [
+          7,
+          1.4,
+          8
+        ],
+        "look_at": [
+          5,
+          0.5,
+          6
+        ],
+        "fov": 55
+      }
+    },
+    {
+      "name": "orbit_side",
+      "out": "user://research_loop/loop_standing_waves_batch_moo5uqoq_orbit_side.png",
+      "camera": {
+        "direction": [
+          2.5,
+          0.6,
+          0
+        ],
+        "padding": 1.15,
+        "min_distance": 1.5,
+        "position": [
+          7.5,
+          0.6,
+          6
+        ],
+        "look_at": [
+          5,
+          0.4,
+          6
+        ],
+        "fov": 55
+      }
+    },
+    {
+      "name": "top",
+      "out": "user://research_loop/loop_standing_waves_batch_moo5uqoq_top.png",
+      "camera": {
+        "direction": [
+          0,
+          3,
+          0
+        ],
+        "padding": 1.15,
+        "min_distance": 1.5,
+        "position": [
+          5,
+          3,
+          6
+        ],
+        "look_at": [
+          5,
+          0,
+          6
+        ],
+        "fov": 55
+      }
+    },
+    {
+      "name": "close_detail",
+      "out": "user://research_loop/loop_standing_waves_batch_moo5uqoq_close_detail.png",
+      "camera": {
+        "direction": [
+          1,
+          0.5,
+          1
+        ],
+        "padding": 1.15,
+        "min_distance": 1.5,
+        "position": [
+          6,
+          0.5,
+          7
+        ],
+        "look_at": [
+          5,
+          0.4,
+          6
+        ],
+        "fov": 55
+      }
+    }
+  ]
+}

@@ -1,0 +1,574 @@
+{
+  "sequence": "proceduralgeneration",
+  "generated_at": "2026-04-29T11:23:41.725526Z",
+  "runs": [
+    {
+      "base": "PG_Genetic_Evolution",
+      "variants": [
+        {
+          "id": "PG_Genetic_Evolution_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.613,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "PG_Genetic_Evolution_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.991,
+            "n_heights": 4,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "PG_Genetic_Evolution_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.564,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "PG_Space_Colonization",
+      "variants": [
+        {
+          "id": "PG_Space_Colonization_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.649,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "PG_Space_Colonization_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.991,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "PG_Space_Colonization_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.56,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "PG_Percolation_Network",
+      "variants": [
+        {
+          "id": "PG_Percolation_Network_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.566,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "PG_Percolation_Network_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 4,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "PG_Percolation_Network_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.523,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "PG_Branching_Growth",
+      "variants": [
+        {
+          "id": "PG_Branching_Growth_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.578,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "PG_Branching_Growth_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 4,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "PG_Branching_Growth_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.523,
+            "n_heights": 2,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "PG_Caves_Mazes",
+      "variants": [
+        {
+          "id": "PG_Caves_Mazes_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.598,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "PG_Caves_Mazes_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "PG_Caves_Mazes_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.527,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "PG_Sculpted_Forms",
+      "variants": [
+        {
+          "id": "PG_Sculpted_Forms_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.54,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "PG_Sculpted_Forms_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.993,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "PG_Sculpted_Forms_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.993,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "PG_Mirrored_Patterns",
+      "variants": [
+        {
+          "id": "PG_Mirrored_Patterns_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.564,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "PG_Mirrored_Patterns_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.993,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "PG_Mirrored_Patterns_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.993,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 2,
+            "artifacts_original": 2,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Chamber_ProcGen",
+      "variants": [
+        {
+          "id": "Chamber_ProcGen_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.59,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Chamber_ProcGen_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 4,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "Chamber_ProcGen_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.997,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,503 @@
+{
+  "sequence": "lsystems",
+  "generated_at": "2026-04-29T11:23:40.870071Z",
+  "runs": [
+    {
+      "base": "LSystems_Grammar_Lab",
+      "variants": [
+        {
+          "id": "LSystems_Grammar_Lab_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.991,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "LSystems_Grammar_Lab_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.996,
+            "n_heights": 4,
+            "util_count": 7,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "LSystems_Grammar_Lab_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.564,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 1,
+              "cubes_added": 1,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "LSystems_Growth",
+      "variants": [
+        {
+          "id": "LSystems_Growth_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "LSystems_Growth_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 4,
+            "util_count": 7,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "LSystems_Growth_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.523,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "LSystems_Grammars_And_Curves",
+      "variants": [
+        {
+          "id": "LSystems_Grammars_And_Curves_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "LSystems_Grammars_And_Curves_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 4,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "LSystems_Grammars_And_Curves_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.523,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "LSystems_Architecture",
+      "variants": [
+        {
+          "id": "LSystems_Architecture_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "LSystems_Architecture_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 4,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "LSystems_Architecture_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.523,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "LSystems_Competition",
+      "variants": [
+        {
+          "id": "LSystems_Competition_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.993,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "LSystems_Competition_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.997,
+            "n_heights": 4,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "LSystems_Competition_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.993,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "LSystems_Living",
+      "variants": [
+        {
+          "id": "LSystems_Living_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.993,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "LSystems_Living_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.993,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "LSystems_Living_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.993,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    },
+    {
+      "base": "Chamber_LSystems",
+      "variants": [
+        {
+          "id": "Chamber_LSystems_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Chamber_LSystems_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 4,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "Chamber_LSystems_v7_curve",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Hilbert filling curve \u2014 one continuous path"
+        }
+      ]
+    }
+  ]
+}

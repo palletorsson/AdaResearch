@@ -1,0 +1,574 @@
+{
+  "sequence": "transformation",
+  "generated_at": "2026-04-29T11:23:28.589259Z",
+  "runs": [
+    {
+      "base": "Trans_Introduction",
+      "variants": [
+        {
+          "id": "Trans_Introduction_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Trans_Introduction_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Trans_Introduction_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        }
+      ]
+    },
+    {
+      "base": "Trans_Translation",
+      "variants": [
+        {
+          "id": "Trans_Translation_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 11,
+            "artifacts_original": 11,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Trans_Translation_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 11,
+            "artifacts_original": 11,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Trans_Translation_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 11,
+            "artifacts_original": 11,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        }
+      ]
+    },
+    {
+      "base": "Trans_AxisDecomposition",
+      "variants": [
+        {
+          "id": "Trans_AxisDecomposition_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 16,
+            "artifacts_original": 16,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Trans_AxisDecomposition_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 3,
+            "util_count": 9,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 16,
+            "artifacts_original": 16,
+            "reachability_fixes": {
+              "wp_added": 5,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 5,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Trans_AxisDecomposition_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.984,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 16,
+            "artifacts_original": 16,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 3-cell period"
+        }
+      ]
+    },
+    {
+      "base": "Trans_Rotation",
+      "variants": [
+        {
+          "id": "Trans_Rotation_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Trans_Rotation_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 7,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Trans_Rotation_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        }
+      ]
+    },
+    {
+      "base": "Trans_RotationSpectacle",
+      "variants": [
+        {
+          "id": "Trans_RotationSpectacle_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Trans_RotationSpectacle_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Trans_RotationSpectacle_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        }
+      ]
+    },
+    {
+      "base": "Trans_Scale",
+      "variants": [
+        {
+          "id": "Trans_Scale_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 15,
+            "artifacts_original": 15,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Trans_Scale_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 15,
+            "artifacts_original": 15,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Trans_Scale_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 15,
+            "artifacts_original": 15,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        }
+      ]
+    },
+    {
+      "base": "Trans_Pit",
+      "variants": [
+        {
+          "id": "Trans_Pit_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Trans_Pit_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Trans_Pit_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        }
+      ]
+    },
+    {
+      "base": "Chamber_Transformation",
+      "variants": [
+        {
+          "id": "Chamber_Transformation_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Chamber_Transformation_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.97,
+            "n_heights": 3,
+            "util_count": 7,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        },
+        {
+          "id": "Chamber_Transformation_v6_column_grid",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Column grid (Mies bay) \u2014 pillars on a 4-cell period"
+        }
+      ]
+    }
+  ]
+}

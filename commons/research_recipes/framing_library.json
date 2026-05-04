@@ -1,0 +1,98 @@
+{
+  "_comment": "Framing-recipe library — what camera angles legibly show each (principle, scale) pair. Coordinates are RELATIVE to the artifact's anchor cell in world space (cell of size 1). The research-loop multiplies relative offsets by an estimated AABB scale for the artifact (small specimens stay tight; rooms get pulled back).",
+  "schema_version": 1,
+
+  "boolean__specimen": {
+    "shots": [
+      {"name": "orbit_front",  "rel_pos": [2.0, 1.4, 2.0], "rel_look_at": [0, 0.5, 0], "fov": 38},
+      {"name": "orbit_side",   "rel_pos": [2.5, 0.6, 0.0], "rel_look_at": [0, 0.4, 0], "fov": 38},
+      {"name": "top",          "rel_pos": [0.0, 3.0, 0.0], "rel_look_at": [0, 0, 0],   "fov": 42},
+      {"name": "close_detail", "rel_pos": [1.0, 0.5, 1.0], "rel_look_at": [0, 0.4, 0], "fov": 28}
+    ],
+    "essence_hint": "CSG specimen — orbit + top to show the Boolean composition. Close-detail catches the hub/joint geometry."
+  },
+
+  "boolean__room": {
+    "shots": [
+      {"name": "interior_entry",  "rel_pos": [0.0, 1.7, 2.5], "rel_look_at": [0, 1.7, -2.5], "fov": 70},
+      {"name": "interior_corner", "rel_pos": [1.5, 1.4, 1.5], "rel_look_at": [-0.6, 1.4, -0.6], "fov": 70},
+      {"name": "interior_apex",   "rel_pos": [0.0, 0.6, 0.0], "rel_look_at": [0, 4.0, 0],   "fov": 80},
+      {"name": "exterior",        "rel_pos": [4.0, 3.0, 4.0], "rel_look_at": [0, 1.5, 0],   "fov": 50}
+    ],
+    "essence_hint": "Boolean room — Turrell-class interior. Camera goes INSIDE; exterior is secondary context."
+  },
+
+  "iterative__surface": {
+    "shots": [
+      {"name": "wide_overview",   "rel_pos": [0.5, 4.0, 4.5], "rel_look_at": [0, 0, 0], "fov": 50},
+      {"name": "close_one_cell",  "rel_pos": [0.6, 1.0, 1.0], "rel_look_at": [0, 0.3, 0], "fov": 28},
+      {"name": "long_wall",       "rel_pos": [3.5, 1.5, 0.5], "rel_look_at": [0, 0.8, 0], "fov": 42},
+      {"name": "top",             "rel_pos": [0, 4.0, 0],     "rel_look_at": [0, 0, 0], "fov": 50}
+    ],
+    "essence_hint": "Iterative pattern — wide-shot to show many generations + close-up of one cell to show the local rule."
+  },
+
+  "stochastic__specimen": {
+    "shots": [
+      {"name": "orbit_a", "rel_pos": [2.5, 1.0, 2.5], "rel_look_at": [0, 0.5, 0], "fov": 38},
+      {"name": "orbit_b", "rel_pos": [-2.5, 1.0, 2.5], "rel_look_at": [0, 0.5, 0], "fov": 38},
+      {"name": "top",     "rel_pos": [0, 3.5, 0],      "rel_look_at": [0, 0, 0], "fov": 45},
+      {"name": "ground",  "rel_pos": [3.0, 0.4, 0.5],  "rel_look_at": [0, 0.3, 0], "fov": 42}
+    ],
+    "essence_hint": "Stochastic specimen — multi-angle orbit shows the random structure from different sides; ground angle catches detail."
+  },
+
+  "grammatical__specimen": {
+    "shots": [
+      {"name": "front_clean", "rel_pos": [0.0, 1.4, 3.0], "rel_look_at": [0, 1.0, 0], "fov": 38},
+      {"name": "orbit_side",  "rel_pos": [3.0, 1.0, 0.0], "rel_look_at": [0, 1.0, 0], "fov": 38},
+      {"name": "top",         "rel_pos": [0, 4.0, 0],     "rel_look_at": [0, 0, 0], "fov": 50},
+      {"name": "branch_close","rel_pos": [1.5, 1.8, 0.5], "rel_look_at": [0, 1.5, 0], "fov": 32}
+    ],
+    "essence_hint": "L-system / grammar — front view shows the recursive form; close-up catches one branching production."
+  },
+
+  "field__surface": {
+    "shots": [
+      {"name": "top",            "rel_pos": [0, 4.5, 0.001],  "rel_look_at": [0, 0, 0], "fov": 38},
+      {"name": "oblique_low",    "rel_pos": [1.5, 1.8, 1.5],  "rel_look_at": [0, 0.2, 0], "fov": 42},
+      {"name": "wide_wallon",    "rel_pos": [0, 1.5, 4.0],    "rel_look_at": [0, 1.0, 0], "fov": 50}
+    ],
+    "essence_hint": "Field/surface shader — top-down primary; oblique reveals 3D extent. Wall-on if the field is vertical."
+  },
+
+  "field__field": {
+    "shots": [
+      {"name": "top",            "rel_pos": [0, 6.0, 0.001],  "rel_look_at": [0, 0, 0], "fov": 50},
+      {"name": "oblique",        "rel_pos": [3.0, 3.0, 3.0],  "rel_look_at": [0, 0, 0], "fov": 42},
+      {"name": "ground_axis",    "rel_pos": [0, 0.5, 4.0],    "rel_look_at": [0, 0.5, -2.0], "fov": 60}
+    ],
+    "essence_hint": "Tile/field — top + oblique catches the repeat. Ground axis shows infinite recede (when applicable)."
+  },
+
+  "geometric__specimen": {
+    "shots": [
+      {"name": "orbit_front", "rel_pos": [2.0, 1.0, 2.0], "rel_look_at": [0, 0.5, 0], "fov": 38},
+      {"name": "orbit_back",  "rel_pos": [-2.0, 1.0, -2.0], "rel_look_at": [0, 0.5, 0], "fov": 38},
+      {"name": "top",         "rel_pos": [0, 3.0, 0],      "rel_look_at": [0, 0, 0], "fov": 42}
+    ],
+    "essence_hint": "Generic geometric specimen — three orthogonal views."
+  },
+
+  "composition__specimen": {
+    "shots": [
+      {"name": "front_high",   "rel_pos": [0, 2.0, 2.5], "rel_look_at": [0, 0.5, 0], "fov": 38},
+      {"name": "orbit_quarter","rel_pos": [2.0, 1.5, 1.5], "rel_look_at": [0, 0.5, 0], "fov": 38},
+      {"name": "ground_pickup","rel_pos": [1.5, 0.4, 1.5], "rel_look_at": [0, 0.6, 0], "fov": 42}
+    ],
+    "essence_hint": "Compositional totem — show the stack from front; ground pickup catches what's near base."
+  },
+
+  "_default": {
+    "shots": [
+      {"name": "orbit_front", "rel_pos": [2.0, 1.2, 2.0], "rel_look_at": [0, 0.5, 0], "fov": 38},
+      {"name": "top",         "rel_pos": [0, 3.0, 0],      "rel_look_at": [0, 0, 0], "fov": 42}
+    ],
+    "essence_hint": "Fallback when (principle, scale) pair has no specific recipe."
+  }
+}

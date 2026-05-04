@@ -94,6 +94,14 @@ a dressing-room file fall back to a 1×1 default room in the composer.
     { "type": "el",  "params": "3:1",             "offset": [0,  0, 0] }
   ],
 
+  // Fine-positioning of the artifact relative to its anchor cell, in
+  // metres. The anchor still chooses the tile; this offsets the artifact
+  // within / above / beside that cell. (dx_east, dy_up, dz_north).
+  // Default [0, 0, 0] means the artifact sits exactly on the anchor's
+  // top surface. Editable via the in-Godot inspector or by dragging
+  // the artifact in the 3D viewport.
+  "artifact_offset": [0.0, 0.0, 0.0],
+
   // Total volumetric envelope including extras (max width, max depth,
   // max height). Used by the composer for clearance checks before
   // placement is finalised.

@@ -1,0 +1,574 @@
+{
+  "sequence": "postfoundationscrisis",
+  "generated_at": "2026-04-29T11:23:52.944578Z",
+  "runs": [
+    {
+      "base": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "variants": [
+        {
+          "id": "CriticalAlgorithms_Algorithmic_Bias_Visualization_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.525,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "CriticalAlgorithms_Algorithmic_Bias_Visualization_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.996,
+            "n_heights": 4,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "CriticalAlgorithms_Algorithmic_Bias_Visualization_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.339,
+            "n_heights": 3,
+            "util_count": 31,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    },
+    {
+      "base": "CriticalAlgorithms_Applied_Ethics",
+      "variants": [
+        {
+          "id": "CriticalAlgorithms_Applied_Ethics_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.56,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "CriticalAlgorithms_Applied_Ethics_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.998,
+            "n_heights": 4,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "CriticalAlgorithms_Applied_Ethics_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.339,
+            "n_heights": 3,
+            "util_count": 29,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    },
+    {
+      "base": "SpeculativeComputation_Paraconsistent_Engineering",
+      "variants": [
+        {
+          "id": "SpeculativeComputation_Paraconsistent_Engineering_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.543,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "SpeculativeComputation_Paraconsistent_Engineering_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.996,
+            "n_heights": 4,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "SpeculativeComputation_Paraconsistent_Engineering_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.31,
+            "n_heights": 3,
+            "util_count": 29,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    },
+    {
+      "base": "SpeculativeComputation_Situated_Computation",
+      "variants": [
+        {
+          "id": "SpeculativeComputation_Situated_Computation_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.527,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "SpeculativeComputation_Situated_Computation_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.996,
+            "n_heights": 4,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "SpeculativeComputation_Situated_Computation_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.31,
+            "n_heights": 3,
+            "util_count": 29,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "strong",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    },
+    {
+      "base": "SpeculativeComputation_Collective_Knowledge",
+      "variants": [
+        {
+          "id": "SpeculativeComputation_Collective_Knowledge_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.578,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "SpeculativeComputation_Collective_Knowledge_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.997,
+            "n_heights": 4,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "SpeculativeComputation_Collective_Knowledge_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.295,
+            "n_heights": 3,
+            "util_count": 33,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "weak",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    },
+    {
+      "base": "SpeculativeComputation_Rhizome_Network",
+      "variants": [
+        {
+          "id": "SpeculativeComputation_Rhizome_Network_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.491,
+            "n_heights": 2,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "SpeculativeComputation_Rhizome_Network_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.997,
+            "n_heights": 4,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "SpeculativeComputation_Rhizome_Network_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.295,
+            "n_heights": 3,
+            "util_count": 31,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "weak",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    },
+    {
+      "base": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "variants": [
+        {
+          "id": "AdvancedLaboratory_Lab_Equipment_Simulation_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.49,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "AdvancedLaboratory_Lab_Equipment_Simulation_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.997,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "AdvancedLaboratory_Lab_Equipment_Simulation_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.272,
+            "n_heights": 3,
+            "util_count": 31,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "weak",
+            "artifacts_placed": 1,
+            "artifacts_original": 1,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    },
+    {
+      "base": "PostCrisis_Synthesis",
+      "variants": [
+        {
+          "id": "PostCrisis_Synthesis_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.519,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "PostCrisis_Synthesis_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.997,
+            "n_heights": 4,
+            "util_count": 7,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        },
+        {
+          "id": "PostCrisis_Synthesis_v5_symmetric",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.26,
+            "n_heights": 3,
+            "util_count": 33,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "weak",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Mirror-symmetric variant \u2014 readable spine + side chambers"
+        }
+      ]
+    }
+  ]
+}

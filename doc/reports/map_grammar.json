@@ -1,0 +1,611 @@
+{
+  "n_maps": 797,
+  "height_use_total": {
+    "1": 105255,
+    "0": 15398,
+    "2": 14313,
+    "3": 2118,
+    "6": 252,
+    "4": 1480,
+    "5": 1602,
+    "7": 141,
+    "8": 239,
+    "9": 516,
+    "10": 4
+  },
+  "symmetry_avg": {
+    "horizontal_flip": 0.897,
+    "vertical_flip": 0.854,
+    "rotate_180": 0.849
+  },
+  "form_type_counts": {
+    "solid": 431,
+    "lattice": 668,
+    "pattern": 676,
+    "terrain": 103
+  },
+  "top_3x3_patterns": [
+    {
+      "pattern": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "count": 64919
+    },
+    {
+      "pattern": [
+        2,
+        1,
+        1,
+        2,
+        1,
+        1,
+        2,
+        1,
+        1
+      ],
+      "count": 1611
+    },
+    {
+      "pattern": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        2,
+        1,
+        1,
+        2
+      ],
+      "count": 1567
+    },
+    {
+      "pattern": [
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "count": 1470
+    },
+    {
+      "pattern": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "count": 1247
+    },
+    {
+      "pattern": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2
+      ],
+      "count": 1104
+    },
+    {
+      "pattern": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "count": 538
+    },
+    {
+      "pattern": [
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "count": 426
+    },
+    {
+      "pattern": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1
+      ],
+      "count": 400
+    },
+    {
+      "pattern": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "count": 361
+    },
+    {
+      "pattern": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1
+      ],
+      "count": 356
+    },
+    {
+      "pattern": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "count": 350
+    },
+    {
+      "pattern": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "count": 348
+    },
+    {
+      "pattern": [
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "count": 341
+    },
+    {
+      "pattern": [
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "count": 315
+    },
+    {
+      "pattern": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        1
+      ],
+      "count": 312
+    },
+    {
+      "pattern": [
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "count": 299
+    },
+    {
+      "pattern": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "count": 280
+    },
+    {
+      "pattern": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "count": 263
+    },
+    {
+      "pattern": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "count": 250
+    }
+  ],
+  "formal_grammar_form_types": [
+    "atom",
+    "segment",
+    "polygon",
+    "surface",
+    "solid",
+    "lattice",
+    "pattern",
+    "wave",
+    "field",
+    "terrain",
+    "automaton",
+    "fractal",
+    "growth",
+    "generated",
+    "softbody",
+    "swarm",
+    "adaptive",
+    "paradoxical",
+    "tunable"
+  ],
+  "formal_grammar_sequences": [
+    {
+      "order": 1,
+      "id": "primitives",
+      "ops": [
+        "materialize",
+        "extrude",
+        "close",
+        "revolve",
+        "sweep",
+        "mirror"
+      ],
+      "outputs": [
+        "atom",
+        "polygon",
+        "same",
+        "segment",
+        "solid",
+        "surface|solid"
+      ]
+    },
+    {
+      "order": 2,
+      "id": "transformation",
+      "ops": [
+        "translate",
+        "rotate",
+        "scale",
+        "compose",
+        "invert"
+      ],
+      "outputs": [
+        "same",
+        "transform"
+      ]
+    },
+    {
+      "order": 3,
+      "id": "color",
+      "ops": [
+        "paint",
+        "emit",
+        "mix",
+        "palette_sample",
+        "contrast"
+      ],
+      "outputs": [
+        "color",
+        "perceived_color",
+        "same"
+      ]
+    },
+    {
+      "order": 4,
+      "id": "forces",
+      "ops": [
+        "push",
+        "fall",
+        "friction",
+        "attract",
+        "spring"
+      ],
+      "outputs": [
+        "bound_orbit",
+        "damped_trajectory",
+        "oscillation",
+        "trajectory"
+      ]
+    },
+    {
+      "order": 5,
+      "id": "arrays",
+      "ops": [
+        "repeat",
+        "grid",
+        "tile",
+        "index"
+      ],
+      "outputs": [
+        "any",
+        "lattice",
+        "pattern"
+      ]
+    },
+    {
+      "order": 6,
+      "id": "wavefunctions",
+      "ops": [
+        "oscillate",
+        "interfere",
+        "resonate",
+        "propagate",
+        "fourier_compose"
+      ],
+      "outputs": [
+        "wave",
+        "wave_field"
+      ]
+    },
+    {
+      "order": 7,
+      "id": "randomness",
+      "ops": [
+        "sample",
+        "jitter",
+        "scatter",
+        "walk"
+      ],
+      "outputs": [
+        "any*",
+        "same",
+        "trajectory",
+        "value"
+      ]
+    },
+    {
+      "order": 8,
+      "id": "noise",
+      "ops": [
+        "perturb",
+        "warp",
+        "terrain",
+        "octaves"
+      ],
+      "outputs": [
+        "field",
+        "same",
+        "terrain"
+      ]
+    },
+    {
+      "order": 9,
+      "id": "cellularautomata",
+      "ops": [
+        "step",
+        "rule",
+        "seed",
+        "evolve"
+      ],
+      "outputs": [
+        "automaton",
+        "automaton_history",
+        "cell_state"
+      ]
+    },
+    {
+      "order": 10,
+      "id": "fractals",
+      "ops": [
+        "recurse",
+        "subdivide",
+        "delete",
+        "iterate_complex",
+        "measure_dimension"
+      ],
+      "outputs": [
+        "dimension",
+        "fractal"
+      ]
+    },
+    {
+      "order": 11,
+      "id": "lsystems",
+      "ops": [
+        "rewrite",
+        "turtle_interpret",
+        "branch",
+        "parametric_rewrite"
+      ],
+      "outputs": [
+        "growth",
+        "string"
+      ]
+    },
+    {
+      "order": 12,
+      "id": "proceduralgeneration",
+      "ops": [
+        "generate",
+        "percolate",
+        "colonize",
+        "wfc"
+      ],
+      "outputs": [
+        "generated",
+        "growth",
+        "pattern"
+      ]
+    },
+    {
+      "order": 13,
+      "id": "softbodies",
+      "ops": [
+        "deform",
+        "spring_mass",
+        "cloth",
+        "reaction_diffusion"
+      ],
+      "outputs": [
+        "pattern",
+        "softbody"
+      ]
+    },
+    {
+      "order": 14,
+      "id": "swarmintelligence",
+      "ops": [
+        "flock",
+        "stigmergy",
+        "physarum",
+        "optimize_swarm"
+      ],
+      "outputs": [
+        "best_params",
+        "network",
+        "swarm",
+        "swarm trail"
+      ]
+    },
+    {
+      "order": 15,
+      "id": "machinelearning",
+      "ops": [
+        "classify",
+        "optimize_gradient",
+        "evolve",
+        "remember",
+        "generate_learned"
+      ],
+      "outputs": [
+        "adaptive",
+        "generated",
+        "label",
+        "memory",
+        "parameters"
+      ]
+    },
+    {
+      "order": 16,
+      "id": "foundationscrisis",
+      "ops": [
+        "non_euclidean",
+        "paradox",
+        "self_reference",
+        "impossible"
+      ],
+      "outputs": [
+        "paradoxical",
+        "space"
+      ]
+    },
+    {
+      "order": 17,
+      "id": "qfeplaboratory",
+      "ops": [
+        "tune_lambda",
+        "tune_phi",
+        "dissolve",
+        "re_become"
+      ],
+      "outputs": [
+        "parameters",
+        "tunable"
+      ]
+    },
+    {
+      "order": 19,
+      "id": "graphtheory",
+      "ops": [
+        "connect",
+        "traverse",
+        "layout",
+        "flow"
+      ],
+      "outputs": [
+        "flow",
+        "graph",
+        "path"
+      ]
+    }
+  ]
+}

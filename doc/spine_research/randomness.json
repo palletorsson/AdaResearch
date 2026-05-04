@@ -1,0 +1,1000 @@
+{
+  "sequence": "randomness",
+  "generated_at": "2026-04-29T11:23:36.431443Z",
+  "runs": [
+    {
+      "base": "Random_Definition",
+      "variants": [
+        {
+          "id": "Random_Definition_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.71,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 13,
+            "artifacts_original": 13,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Random_Definition_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.651,
+            "n_heights": 2,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 13,
+            "artifacts_original": 13,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 1,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Random_Definition_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 4,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 13,
+            "artifacts_original": 13,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Random_Remove",
+      "variants": [
+        {
+          "id": "Random_Remove_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.675,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Random_Remove_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.574,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 1,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Random_Remove_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 4,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 3,
+            "artifacts_original": 3,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Randomness_10_PRINT_Algorithm",
+      "variants": [
+        {
+          "id": "Randomness_10_PRINT_Algorithm_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.669,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 9,
+            "artifacts_original": 9,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Randomness_10_PRINT_Algorithm_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.627,
+            "n_heights": 2,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 9,
+            "artifacts_original": 9,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Randomness_10_PRINT_Algorithm_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 7,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 9,
+            "artifacts_original": 9,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Random_Cubes",
+      "variants": [
+        {
+          "id": "Random_Cubes_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.698,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 53,
+            "artifacts_original": 53,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Random_Cubes_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.627,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 53,
+            "artifacts_original": 53,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Random_Cubes_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 4,
+            "util_count": 8,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 53,
+            "artifacts_original": 53,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 2,
+              "cubes_added": 0,
+              "fixed_artifacts": 4,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Random_Rotate_Random_XYZ",
+      "variants": [
+        {
+          "id": "Random_Rotate_Random_XYZ_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.704,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Random_Rotate_Random_XYZ_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.663,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Random_Rotate_Random_XYZ_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 4,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Random_Walk",
+      "variants": [
+        {
+          "id": "Random_Walk_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.675,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 8,
+            "artifacts_original": 8,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Random_Walk_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.639,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 8,
+            "artifacts_original": 8,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 2,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Random_Walk_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.994,
+            "n_heights": 4,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 8,
+            "artifacts_original": 8,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Random_Gaussian",
+      "variants": [
+        {
+          "id": "Random_Gaussian_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.71,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 10,
+            "artifacts_original": 10,
+            "reachability_fixes": {
+              "wp_added": 4,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 4,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Random_Gaussian_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.586,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 10,
+            "artifacts_original": 10,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 1,
+              "cubes_added": 2,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Random_Gaussian_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 4,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 10,
+            "artifacts_original": 10,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Random_Mushrooms",
+      "variants": [
+        {
+          "id": "Random_Mushrooms_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.791,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Random_Mushrooms_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.587,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Random_Mushrooms_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 4,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Random_Space_Geometry",
+      "variants": [
+        {
+          "id": "Random_Space_Geometry_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.673,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Random_Space_Geometry_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.582,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Random_Space_Geometry_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 4,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 6,
+            "artifacts_original": 6,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Randomness_Examples_of_Randomness",
+      "variants": [
+        {
+          "id": "Randomness_Examples_of_Randomness_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.684,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Randomness_Examples_of_Randomness_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.735,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Randomness_Examples_of_Randomness_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 4,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Random_Pheromone",
+      "variants": [
+        {
+          "id": "Random_Pheromone_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.673,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Random_Pheromone_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.566,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Random_Pheromone_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 4,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 4,
+            "artifacts_original": 4,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Random_Space",
+      "variants": [
+        {
+          "id": "Random_Space_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.668,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Random_Space_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.577,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 0,
+              "cubes_added": 1,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Random_Space_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 4,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 5,
+            "artifacts_original": 5,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Random_Game",
+      "variants": [
+        {
+          "id": "Random_Game_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.653,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 17,
+            "artifacts_original": 17,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Random_Game_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.592,
+            "n_heights": 2,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 17,
+            "artifacts_original": 17,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Random_Game_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.99,
+            "n_heights": 4,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 17,
+            "artifacts_original": 17,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Chamber_Random",
+      "variants": [
+        {
+          "id": "Chamber_Random_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.667,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 1,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Chamber_Random_v2_bsp",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.582,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "BSP-partitioned variant \u2014 rooms with corridors, mixed heights"
+        },
+        {
+          "id": "Chamber_Random_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.991,
+            "n_heights": 4,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    }
+  ]
+}

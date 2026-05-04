@@ -1,0 +1,716 @@
+{
+  "sequence": "forces",
+  "generated_at": "2026-04-29T11:23:33.412776Z",
+  "runs": [
+    {
+      "base": "VectorFoundations",
+      "variants": [
+        {
+          "id": "VectorFoundations_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.752,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 16,
+            "artifacts_original": 16,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "VectorFoundations_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 16,
+            "artifacts_original": 16,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "VectorFoundations_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 4,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 16,
+            "artifacts_original": 16,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "VectorOperations",
+      "variants": [
+        {
+          "id": "VectorOperations_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.752,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 15,
+            "artifacts_original": 15,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "VectorOperations_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 15,
+            "artifacts_original": 15,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "VectorOperations_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 4,
+            "util_count": 7,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 15,
+            "artifacts_original": 15,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "VectorApplied",
+      "variants": [
+        {
+          "id": "VectorApplied_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.744,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 12,
+            "artifacts_original": 12,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "VectorApplied_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 12,
+            "artifacts_original": 12,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "VectorApplied_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 4,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 12,
+            "artifacts_original": 12,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "VectorAdvanced",
+      "variants": [
+        {
+          "id": "VectorAdvanced_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.76,
+            "n_heights": 2,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 17,
+            "artifacts_original": 17,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "VectorAdvanced_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 17,
+            "artifacts_original": 17,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "VectorAdvanced_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.992,
+            "n_heights": 4,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 17,
+            "artifacts_original": 17,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "ForcesFoundations",
+      "variants": [
+        {
+          "id": "ForcesFoundations_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.76,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 19,
+            "artifacts_original": 19,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "ForcesFoundations_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.983,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 19,
+            "artifacts_original": 19,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "ForcesFoundations_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.983,
+            "n_heights": 4,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 19,
+            "artifacts_original": 19,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "ForcesComposition",
+      "variants": [
+        {
+          "id": "ForcesComposition_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.743,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 12,
+            "artifacts_original": 12,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "ForcesComposition_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 12,
+            "artifacts_original": 12,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "ForcesComposition_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 12,
+            "artifacts_original": 12,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "ForcesSystems",
+      "variants": [
+        {
+          "id": "ForcesSystems_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.701,
+            "n_heights": 3,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 21,
+            "artifacts_original": 21,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 2,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "ForcesSystems_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 21,
+            "artifacts_original": 21,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 4,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "ForcesSystems_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 21,
+            "artifacts_original": 21,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "ForcesChaos",
+      "variants": [
+        {
+          "id": "ForcesChaos_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.715,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 17,
+            "artifacts_original": 17,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "ForcesChaos_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 17,
+            "artifacts_original": 17,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "ForcesChaos_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 4,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 17,
+            "artifacts_original": 17,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "ForcesArena",
+      "variants": [
+        {
+          "id": "ForcesArena_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.694,
+            "n_heights": 3,
+            "util_count": 4,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 27,
+            "artifacts_original": 27,
+            "reachability_fixes": {
+              "wp_added": 2,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 2,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "ForcesArena_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 3,
+            "util_count": 6,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 27,
+            "artifacts_original": 27,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 1,
+              "cubes_added": 0,
+              "fixed_artifacts": 4,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "ForcesArena_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.986,
+            "n_heights": 4,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 27,
+            "artifacts_original": 27,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    },
+    {
+      "base": "Chamber_Forces",
+      "variants": [
+        {
+          "id": "Chamber_Forces_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.698,
+            "n_heights": 3,
+            "util_count": 3,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        },
+        {
+          "id": "Chamber_Forces_v3_terraced",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 3,
+            "util_count": 2,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 0,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 0,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Terraced variant \u2014 multiple heights with wp ramps to climb"
+        },
+        {
+          "id": "Chamber_Forces_v4_islands",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.988,
+            "n_heights": 4,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 7,
+            "artifacts_original": 7,
+            "reachability_fixes": {
+              "wp_added": 1,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 1,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Floating islands \u2014 tc transports bridge voids"
+        }
+      ]
+    }
+  ]
+}

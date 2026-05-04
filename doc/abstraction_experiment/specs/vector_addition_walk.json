@@ -1,0 +1,89 @@
+{
+  "spec_version": "0.1",
+  "artifact": {
+    "id": "vector_addition_walk",
+    "name": "Vector Addition Walk",
+    "qfep": "S",
+    "category": "vector_basics",
+    "essence": "A + B = C at body scale. You ARE inside the vector space.",
+    "truth": "you don't observe vector addition. you stand inside it."
+  },
+  "parameters": [
+    { "id": "grid_size",        "type": "float", "default": 3.0, "unit": "m" },
+    { "id": "grid_divisions",   "type": "int",   "default": 6 },
+    { "id": "max_vector_length","type": "float", "default": 2.5, "unit": "m" },
+    { "id": "arrow_thickness",  "type": "float", "default": 0.025, "unit": "m" },
+    { "id": "vector_a",         "type": "vec3",  "default": [1.5, 0.5, 0.0],
+      "constraint": "length <= $max_vector_length" },
+    { "id": "vector_b",         "type": "vec3",  "default": [0.3, 1.2, 0.8],
+      "constraint": "length <= $max_vector_length" }
+  ],
+  "derived": [
+    { "id": "vector_result", "expr": "$vector_a + $vector_b" }
+  ],
+  "geometry": {
+    "kind": "compound",
+    "children": [
+      {
+        "id": "grid_3d",
+        "primitive": "immediate_mesh_lines",
+        "spec": {
+          "floor_xz_grid": {
+            "size": "$grid_size", "divisions": "$grid_divisions",
+            "color_minor": [0.3, 0.35, 0.4, 0.3],
+            "color_major": [0.4, 0.45, 0.5, 0.45],
+            "major_every": 2
+          },
+          "back_wall_xy_grid": { "color": [0.25, 0.3, 0.35, 0.12] }
+        },
+        "material": { "kind": "unshaded", "vertex_color": true, "transparent": true }
+      },
+      { "id": "axes", "primitive": "axis_triad", "length": "$grid_size / 2",
+        "colors": { "x": [1, 0.3, 0.3], "y": [0.3, 1, 0.3], "z": [0.3, 0.5, 1] } },
+      { "id": "arrow_a", "primitive": "arrow", "from": "origin", "to": "$vector_a",
+        "thickness": "$arrow_thickness", "color": [1, 0.3, 0.3] },
+      { "id": "arrow_b", "primitive": "arrow", "from": "origin", "to": "$vector_b",
+        "thickness": "$arrow_thickness", "color": [0.3, 0.5, 1] },
+      { "id": "arrow_result", "primitive": "arrow", "from": "origin", "to": "$vector_result",
+        "thickness": "$arrow_thickness * 1.2", "color": [0.9, 0.9, 0.3] },
+      { "id": "arrow_a_ghost", "primitive": "arrow", "from": "$vector_b", "to": "$vector_result",
+        "thickness": "$arrow_thickness * 0.7", "color": [1, 0.3, 0.3], "alpha": 0.5 },
+      { "id": "arrow_b_ghost", "primitive": "arrow", "from": "$vector_a", "to": "$vector_result",
+        "thickness": "$arrow_thickness * 0.7", "color": [0.3, 0.5, 1], "alpha": 0.5 },
+      { "id": "projection_mesh", "primitive": "procedural_mesh",
+        "kind": "component_projections_to_axes" },
+      { "id": "handle_a", "primitive": "grab_sphere", "binding": "vector_a",
+        "color": [1, 0.3, 0.3] },
+      { "id": "handle_b", "primitive": "grab_sphere", "binding": "vector_b",
+        "color": [0.3, 0.5, 1] },
+      { "id": "label_a", "primitive": "label_3d", "billboard": true,
+        "text": "format('A = (%.2f, %.2f, %.2f)', $vector_a)",
+        "transform": { "translate": "$vector_a + vec3(0, 0.1, 0)" } },
+      { "id": "label_b", "primitive": "label_3d", "billboard": true,
+        "text": "format('B = (%.2f, %.2f, %.2f)', $vector_b)",
+        "transform": { "translate": "$vector_b + vec3(0, 0.1, 0)" } },
+      { "id": "label_result", "primitive": "label_3d", "billboard": true,
+        "text": "format('A + B = (%.2f, %.2f, %.2f)', $vector_result)",
+        "transform": { "translate": "$vector_result + vec3(0, 0.15, 0)" } },
+      { "id": "control_panel", "primitive": "panel",
+        "rows": [
+          { "type": "button", "label": "Reset",       "action": "reset_vectors" },
+          { "type": "button", "label": "Orthogonal",  "action": "preset(a=[1.5,0,0], b=[0,1.5,0])" },
+          { "type": "button", "label": "Parallel",    "action": "preset(a=[1.0,0,0], b=[1.0,0,0])" },
+          { "type": "button", "label": "3D",          "action": "preset(a=[1,0.5,0.5], b=[0.5,1,-0.5])" }
+        ] }
+    ]
+  },
+  "behavior": {
+    "on_ready": ["build_geometry"],
+    "on_parameter_change_for": ["vector_a", "vector_b"],
+    "on_change": ["update_arrows", "update_ghost_arrows", "update_projection_mesh", "update_labels"]
+  },
+  "interaction": [
+    { "kind": "grab_3d", "handle": "handle_a", "binding": "vector_a",
+      "constraint": "clamp inside grid_size cube, length <= max_vector_length" },
+    { "kind": "grab_3d", "handle": "handle_b", "binding": "vector_b",
+      "constraint": "clamp inside grid_size cube, length <= max_vector_length" },
+    { "kind": "button_press", "panel": "control_panel" }
+  ]
+}

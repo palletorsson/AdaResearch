@@ -1,0 +1,83 @@
+{
+  "map": "Wavefunctions_Sky_Stairs",
+  "wait": 6,
+  "auto_frame": true,
+  "anchor": [
+    5,
+    6
+  ],
+  "shots": [
+    {
+      "name": "orbit_front",
+      "out": "user://research_loop/loop_sine_cylinder_staircase_batch_moo5tl6x_orbit_front.png",
+      "camera": {
+        "direction": [
+          2,
+          1,
+          2
+        ],
+        "padding": 1.15,
+        "min_distance": 1.5,
+        "position": [
+          7,
+          1,
+          8
+        ],
+        "look_at": [
+          5,
+          0.5,
+          6
+        ],
+        "fov": 55
+      }
+    },
+    {
+      "name": "orbit_back",
+      "out": "user://research_loop/loop_sine_cylinder_staircase_batch_moo5tl6x_orbit_back.png",
+      "camera": {
+        "direction": [
+          -2,
+          1,
+          -2
+        ],
+        "padding": 1.15,
+        "min_distance": 1.5,
+        "position": [
+          3,
+          1,
+          4
+        ],
+        "look_at": [
+          5,
+          0.5,
+          6
+        ],
+        "fov": 55
+      }
+    },
+    {
+      "name": "top",
+      "out": "user://research_loop/loop_sine_cylinder_staircase_batch_moo5tl6x_top.png",
+      "camera": {
+        "direction": [
+          0.05,
+          3,
+          0.05
+        ],
+        "padding": 1.15,
+        "min_distance": 1.5,
+        "position": [
+          5.05,
+          3,
+          6.05
+        ],
+        "look_at": [
+          5,
+          0,
+          6
+        ],
+        "fov": 55
+      }
+    }
+  ]
+}

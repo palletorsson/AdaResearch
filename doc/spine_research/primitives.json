@@ -1,0 +1,33 @@
+{
+  "sequence": "primitives",
+  "generated_at": "2026-04-29T14:38:34.105860Z",
+  "runs": [
+    {
+      "base": "Point_One",
+      "variants": [
+        {
+          "id": "Point_One_v1_corridor",
+          "status": "written",
+          "scores": {
+            "walk_pct": 0.76,
+            "n_heights": 2,
+            "util_count": 5,
+            "has_spawn": true,
+            "has_teleporter": true,
+            "verdict": "exemplary",
+            "artifacts_placed": 11,
+            "artifacts_original": 11,
+            "reachability_fixes": {
+              "wp_added": 3,
+              "tc_added": 0,
+              "cubes_added": 0,
+              "fixed_artifacts": 3,
+              "still_orphan": 0
+            }
+          },
+          "notes": "Straight corridor remix \u2014 minimal floor, single wp ramp midway"
+        }
+      ]
+    }
+  ]
+}

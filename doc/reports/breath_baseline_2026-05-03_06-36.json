@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-05-03T06:36:50Z",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "scoring_blocked": true,
+    "blocker": "KeyError: '2_documentation' on empty sequences (boolean_surfaces, resourcemanagement) — display loop in main() assumes all stages populated",
+    "partial_observed": {
+      "all_19_spine_at_least_stage_5": true,
+      "randomness": "stage 7 (polish, 0%)",
+      "18_other_spine": "stage 6 (vr_testing, 0%)",
+      "array_tutorial": "stage 2 (documentation 18%, art 60%)",
+      "softbodies": "stage 2 (documentation 29%, art 64%)"
+    }
+  },
+  "heat_map_top_5": [
+    {"item": "duplicate artifact files", "temp": 60, "reason": "branching_growth_algorithm exists in two dirs"},
+    {"item": "garden_embodiment_cache_cascade", "temp": 60, "reason": "voicing apply_grid_config artifacts reveals embodiment"},
+    {"item": "pipeline_scorer_token_parsing", "temp": 60, "reason": "colon-prefixed cells parse to bare prefix"},
+    {"item": "sequence:boolean_surfaces", "temp": 50, "reason": "empty sequence (Boolean Surfaces: CSG as Composition)"},
+    {"item": "sequence:resourcemanagement", "temp": 50, "reason": "empty sequence (Resource Management)"}
+  ],
+  "garden_health": {
+    "total_artifacts": 2082,
+    "voiced": 903,
+    "embodied": 313,
+    "reaching": 480,
+    "phantom": 709,
+    "voice_coverage_pct": 43,
+    "embodiment_rate_pct": 34,
+    "scattered_sequences": ["wavefunctions", "randomness", "qfeplaboratory", "physicssimulation", "transformation", "color", "noise", "swarmintelligence", "proceduralgeneration", "particles", "structure", "facades", "annotations", "biological_growth"],
+    "color_pct": 66.7,
+    "color_state": "SCATTERED"
+  },
+  "release_gates": {
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry_integrity": "FAIL (missing_scene_path: 2, missing_map_ready: 1, missing_include_in_map_data: 1)",
+    "C_map_validation": "PASS",
+    "D_lab_progression_continuity": "PASS",
+    "passing_count": 3
+  }
+}

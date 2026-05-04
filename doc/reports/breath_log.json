@@ -589,8 +589,8 @@
       },
       "discoveries": [
         "floor_plan_space is a cross-sequence ultra-high-leverage artifact: it appears in museum maps belonging to both patterngeneration AND mosaicanalysis. One @identity write voiced it in 28+ artifact-map appearances across two sequences simultaneously.",
-        "mosaicanalysis jumped SCATTERED->REACHING (17->40 voiced = 93%) without being a planned target — collateral from floor_plan_space. Garden improvements cascade across sequence boundaries when shared infrastructure artifacts are voiced.",
-        "patterngeneration crossed 70% threshold: 32->38/53 voiced = REACHING (71.7%). But embodiment rate is 3/53 (5.7%) — GROWING requires >=20% embodied, which needs VR work, not just @identity.",
+        "mosaicanalysis jumped SCATTERED->REACHING (17->40 voiced = 93%) without being a planned target \u2014 collateral from floor_plan_space. Garden improvements cascade across sequence boundaries when shared infrastructure artifacts are voiced.",
+        "patterngeneration crossed 70% threshold: 32->38/53 voiced = REACHING (71.7%). But embodiment rate is 3/53 (5.7%) \u2014 GROWING requires >=20% embodied, which needs VR work, not just @identity.",
         "Infrastructure artifacts (floor_plan_space, array_carpet) that serve as spatial containers for multiple maps have dramatically higher @identity leverage than algorithm-specific artifacts. Prioritize by map-appearance multiplier.",
         "Pattern: REACHING state is the new ceiling for AI-only work. SCATTERED->REACHING = add @identity. REACHING->GROWING = add VR controls (apply_grid_config enhancements). GROWING->LIVING = VR test + embody. The three transitions require different interventions."
       ],
@@ -655,11 +655,11 @@
         }
       },
       "discoveries": [
-        "primitives.json had a trailing comma after the last maps[] entry — invalid JSON causing Gate A to return -1 for all metrics AND garden_listener to crash on sequence scan. One-line fix restored Gate A to PASS.",
-        "garden_listener cache keyed by gd.stem.lower() — PascalCase filenames like NeuralNetworks_VR.gd produce key 'neuralnetworks_vr', but map lookups use snake_case 'neural_networks_vr'. The _ between 'Neural' and 'Networks' is absent in the cache key. Fix: register normalized key (lowercase, underscores stripped) as fallback. This revealed 25 previously-invisible voiced ML artifacts in one fix.",
-        "catalyst_target is in SKIP_ARTS in garden_listener.py — voicing it does not improve garden counts but still provides pedagogical documentation value.",
-        "All 7 'missing' machinelearning artifacts (neural_networks_vr, learn_world_stacked, computer_vision_vr, etc.) already had @identity blocks — they were invisible only because of the cache key mismatch. The cache fix, not @identity writing, was the breakthrough.",
-        "PascalCase → snake_case lookup mismatch is systemic: machinelearning, cellularautomata, grammar_systems, proceduralaudio, spatial_partitioning all benefited from the normalization fix. Pattern: when garden shows a sequence 'stuck' with no obvious unvoiced files, check if filenames use PascalCase while map lookups use snake_case.",
+        "primitives.json had a trailing comma after the last maps[] entry \u2014 invalid JSON causing Gate A to return -1 for all metrics AND garden_listener to crash on sequence scan. One-line fix restored Gate A to PASS.",
+        "garden_listener cache keyed by gd.stem.lower() \u2014 PascalCase filenames like NeuralNetworks_VR.gd produce key 'neuralnetworks_vr', but map lookups use snake_case 'neural_networks_vr'. The _ between 'Neural' and 'Networks' is absent in the cache key. Fix: register normalized key (lowercase, underscores stripped) as fallback. This revealed 25 previously-invisible voiced ML artifacts in one fix.",
+        "catalyst_target is in SKIP_ARTS in garden_listener.py \u2014 voicing it does not improve garden counts but still provides pedagogical documentation value.",
+        "All 7 'missing' machinelearning artifacts (neural_networks_vr, learn_world_stacked, computer_vision_vr, etc.) already had @identity blocks \u2014 they were invisible only because of the cache key mismatch. The cache fix, not @identity writing, was the breakthrough.",
+        "PascalCase \u2192 snake_case lookup mismatch is systemic: machinelearning, cellularautomata, grammar_systems, proceduralaudio, spatial_partitioning all benefited from the normalization fix. Pattern: when garden shows a sequence 'stuck' with no obvious unvoiced files, check if filenames use PascalCase while map lookups use snake_case.",
         "Garden cascade from single tool fix: 98 voices unlocked, 6 sequences advanced states. Infrastructure bugs hide progress more than missing content does."
       ],
       "files_changed": [
@@ -761,6 +761,198 @@
       },
       "release_gates_passing": 4,
       "duration_minutes": 50
+    },
+    {
+      "breath_id": "2026-04-28T09:04",
+      "mode": "full",
+      "baseline_avg": 5.05,
+      "post_avg": 5.05,
+      "delta": 0.0,
+      "items_attempted": [
+        "forces_voicing_cache_cascade",
+        "flowers_botanical_dual_file"
+      ],
+      "items_succeeded": [
+        "forces_voicing_cache_cascade",
+        "flowers_botanical_dual_file"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "identity_writing",
+        "registry_repair"
+      ],
+      "skill_effectiveness": {
+        "identity_writing": {
+          "calls": 5,
+          "succeeded": 5,
+          "failed": 0
+        },
+        "registry_repair": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "forces sequence advanced SCATTERED -> LIVING in one breath - voicing artifacts that declare apply_grid_config in @identity revealed 68 already-embodied artifacts hidden by garden cache.",
+        "flowers sequence advanced SCATTERED -> LIVING via botanical_flower dual-file fix.",
+        "Two-state advancement in one breath is possible when the cache cascades."
+      ],
+      "files_changed": [],
+      "duration_minutes": 25,
+      "garden_voiced": 901,
+      "note": "Reconstructed from improvement_trajectory after breath_log truncation on 2026-04-30."
+    },
+    {
+      "breath_id": "2026-04-30T07:18",
+      "mode": "full",
+      "baseline_avg": 5.1,
+      "post_avg": 5.43,
+      "delta": 0.33,
+      "items_attempted": [
+        "isosurfaces_missing_artifact",
+        "color_chamber_docs",
+        "branching_growth_duplicate_identity",
+        "isosurfaces_voicing"
+      ],
+      "items_succeeded": [
+        "isosurfaces_missing_artifact",
+        "color_chamber_docs",
+        "branching_growth_duplicate_identity",
+        "isosurfaces_voicing"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "registry_repair",
+        "documentation_writing",
+        "identity_writing",
+        "direct_file_edit"
+      ],
+      "skill_effectiveness": {
+        "registry_repair": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        },
+        "documentation_writing": {
+          "calls": 2,
+          "succeeded": 2,
+          "failed": 0
+        },
+        "identity_writing": {
+          "calls": 4,
+          "succeeded": 4,
+          "failed": 0
+        },
+        "direct_file_edit": {
+          "calls": 4,
+          "succeeded": 4,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "Pipeline scorer parses cell tokens with split(colon)[0], so map_data cells like mc:sphere:0:1:0.04 parse to mc (unregistered). Colon-prefixed namespace tokens cannot be made to count by adding a registry entry - they must be renamed to use underscores. Pattern: search for cells matching [a-z]+:[a-z]+: to find this class of misregistration.",
+        "Two near-duplicate .gd files (branching_growth_algorithm in branchinggrowthalgorithm/ and branchinggrowthalgorithmcontinued/) had identical @identity blocks. The continued version adds aging/phases/seasons but the identity narrative did not reflect this. Differentiating identities for code variants is a cheap fix that resolves heat-map flags without code changes.",
+        "isosurfaces sequence had 1/26 voiced - voicing the 3 directly-registered scenes (metaballs, nakama_metaballs, queer_marching_cave) advanced voiced count by 2 in the registry-bound listener. The other 23 unvoiced .gd files in algorithms/proceduralgeneration/isosurfaces/ are unregistered helper scripts (TerrainGenerator*, voxel_*); they do not appear in the garden listener cache because no registry entry points to them.",
+        "Color sequence had Chamber_Color as the only undocumented map (7/8 = 88%). Catalyst chambers have a stable structure (becoming_catalyst#start_mode + catalyst_target + proximity_spawner + science_screen) that makes their docs writable from interactables alone.",
+        "Process discovery: appending entries to breath_log.json must use ensure_ascii=True to avoid surrogate-pair encode errors from older entries that contain corrupted unicode. A failed write while the file is open truncates it - always read fully into memory before opening for write."
+      ],
+      "files_changed": [
+        "commons/maps/ISO_ShapesGallery/map_data.json",
+        "commons/maps/Chamber_Color/blurb.md",
+        "commons/maps/Chamber_Color/intent.md",
+        "commons/artifacts/registry/procgen_extra.json",
+        "algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithmcontinued/branching_growth_algorithm.gd",
+        "algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.gd",
+        "algorithms/proceduralgeneration/isosurfaces/metaballs/nakama_metaballs.gd",
+        "algorithms/spacetopology/marchingcubes/longcave/QueerMarchingCave.gd",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/reports/breath_baseline_2026-04-30_07-18.json"
+      ],
+      "duration_minutes": 25,
+      "pipeline_advance": {
+        "isosurfaces": "stage 3 -> stage 6",
+        "color": "stage 2 -> stage 6"
+      },
+      "release_gates_after": {
+        "A": true,
+        "B": true,
+        "C": true,
+        "D": true,
+        "passing": 4
+      },
+      "garden_after": {
+        "voice_coverage_pct": 43,
+        "embodiment_rate_pct": 34,
+        "voiced_total": 904,
+        "isosurfaces_voiced": 3,
+        "isosurfaces_state": "DORMANT"
+      }
+    },
+    {
+      "breath_id": "2026-05-03T06:36",
+      "mode": "full",
+      "baseline_avg": 5.43,
+      "post_avg": 5.43,
+      "delta": 0.0,
+      "items_attempted": [
+        "pipeline_scorer_empty_sequence_keyerror",
+        "branching_growth_continued_tscn_uid_path",
+        "wavefunctions_voicing_batch",
+        "randomness_voicing_remove_random"
+      ],
+      "items_succeeded": [
+        "pipeline_scorer_empty_sequence_keyerror",
+        "branching_growth_continued_tscn_uid_path",
+        "wavefunctions_voicing_batch",
+        "randomness_voicing_remove_random"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "tool_bug_fix",
+        "scene_repair",
+        "identity_writing"
+      ],
+      "skill_effectiveness": {
+        "tool_bug_fix": {"calls": 1, "succeeded": 1, "failed": 0},
+        "scene_repair": {"calls": 1, "succeeded": 1, "failed": 0},
+        "identity_writing": {"calls": 4, "succeeded": 4, "failed": 0}
+      },
+      "discoveries": [
+        "Pipeline scorer KeyError on empty sequences: score_sequence early-returned with only stages.1_structure populated. main() display loop unconditionally indexed stages 2-7. boolean_surfaces (0 maps) crashed the daily baseline. Fix: when maps==[], populate stages 2-7 with done=0 total=0 pct=0 before returning. Schema invariant restored.",
+        "branchinggrowthalgorithmcontinued/.tscn had a stale script path (missing 'growth_systems/' subdir) AND its uid pointed to the OTHER branchinggrowthalgorithm/.gd's uid (cdswj66fc5evr). Net effect: the 'continued' scene was silently loading the regular branching script, leaving the continued .gd (24987 bytes with aging/phases/seasons code) orphaned. Fix: rewrite ext_resource line with correct path + the file's own uid (6n96tsdpij6bc).",
+        "Wavefunctions voicing cascade: BigPipeSystem (3 maps) + seismograph (2 maps) + coupled_oscillator_lattice (1 wf + 1 advlab map) = 7 voices from 3 @identity adds. Cross-sequence leverage: coupled_oscillator_lattice voicing helps both wavefunctions AND advancedlaboratory.",
+        "Garden total voiced 903 -> 912 (+9) from 4 @identity additions. wavefunctions: SCATTERED 58/105 (55%) -> SCATTERED 64/105 (61%). randomness: SCATTERED 34/73 (47%) -> SCATTERED 36/73 (49%). advancedlaboratory: 0/4 -> 1/4 voiced.",
+        "Pattern: heat-map-flagged 'duplicate artifact files' for branching_growth_algorithm was actually a stale-uid + stale-path bug masquerading as a filename collision. The duplicate filename concerns garden cache (still present), but the runtime bug was the .tscn pointing to the wrong script. Two distinct bugs, similar surface symptoms."
+      ],
+      "files_changed": [
+        "tools/sequence_pipeline_scorer.py",
+        "algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithmcontinued/BranchingGrowthAlgorithm.tscn",
+        "algorithms/wavefunctions/big_pipe_system/big_pipe_system.gd",
+        "commons/artifacts/seismograph/seismograph.gd",
+        "algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd",
+        "algorithms/randomness/RemoveRandom.gd"
+      ],
+      "duration_minutes": 30,
+      "garden_before": {
+        "total_voiced": 903,
+        "wavefunctions": "SCATTERED (58/105 = 55.2%)",
+        "randomness": "SCATTERED (34/73 = 46.6%)",
+        "advancedlaboratory": "DORMANT (0/4 = 0%)"
+      },
+      "garden_after": {
+        "total_voiced": 912,
+        "wavefunctions": "SCATTERED (64/105 = 61.0%)",
+        "randomness": "SCATTERED (36/73 = 49.3%)",
+        "advancedlaboratory": "DORMANT (1/4 = 25%)"
+      },
+      "release_gates_before": {"A": true, "B": false, "C": true, "D": true, "passing": 3},
+      "release_gates_after": {"A": true, "B": false, "C": true, "D": true, "passing": 3},
+      "note": "Pipeline avg flat at 5.43 (VR-testing bottleneck). Real wins: scorer crash fixed (daily baseline restored), one runtime correctness bug fixed (continued/.tscn now loads its own .gd), +9 voices. Color sequence inactionable for AI - all unvoiced have no .gd file."
     }
   ]
 }
