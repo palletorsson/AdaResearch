@@ -299,6 +299,12 @@ func _apply_structure_data(structure_data):
 
 # Generate cubes immediately without animation
 func _generate_cubes_immediate(positions: Array, total_size: float):
+	# Capture mode: tint cubes by their Y level so heights are visually
+	# distinguishable in screenshots. The shared multimesh material is
+	# white, so without per-instance colors all heights merge into one
+	# flat slab. Reads the runtime flag every call (cheap; only matters
+	# during capture sweeps).
+	var capture_mode := _capture_active()
 	for i in range(positions.size()):
 		var pos = positions[i]
 		var world_pos = Vector3(pos.x, pos.y, pos.z) * total_size
@@ -308,8 +314,42 @@ func _generate_cubes_immediate(positions: Array, total_size: float):
 		transform.origin = world_pos
 		multimesh.set_instance_transform(i, transform)
 
+		# Per-instance color in capture mode — match the iso renderer's
+		# HEIGHT_COLORS palette so Godot screenshots and iso PNGs agree.
+		if capture_mode and multimesh.use_colors:
+			multimesh.set_instance_color(i, _height_color_for(int(pos.y)))
+
 		# Create collision shape
 		_create_collision_at(world_pos, cube_size)
+
+
+# Read runtime flag once per generation pass — keeps the rendering
+# path consistent throughout the capture.
+func _capture_active() -> bool:
+	var path := "res://ada_run/runtime_flags.json"
+	if not FileAccess.file_exists(path): return false
+	var f := FileAccess.open(path, FileAccess.READ)
+	if not f: return false
+	var json := JSON.new()
+	if json.parse(f.get_as_text()) != OK: f.close(); return false
+	f.close()
+	var data = json.data
+	return data is Dictionary and bool(data.get("_capture_active", false))
+
+
+# Match the iso renderer's HEIGHT_COLORS palette — same colors as the
+# tools/iso_voxel_render.py / Three.js viewer.
+func _height_color_for(level: int) -> Color:
+	# level here is the cube's Y index (0..max_height-1). Display
+	# height starts at 1, so we map level→display_height = level + 1.
+	var h := level + 1
+	match h:
+		1: return Color8(0x6e, 0x82, 0x94)
+		2: return Color8(0x9b, 0xaf, 0xc4)
+		3: return Color8(0xbe, 0xd0, 0xe2)
+		4: return Color8(0x3a, 0x42, 0x50)
+		5: return Color8(0x2a, 0x30, 0x40)
+		_: return Color8(0x6e, 0x82, 0x94)
 
 # Prepare and start animated cube generation
 func _prepare_animated_generation(positions: Array, total_size: float):

@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: ray-marched metaball field — a fragment shader walks the camera ray through a box volume, sums radial-falloff contributions from N moving spheres, and renders where the field crosses an iso-threshold
+# desire: to make the iso-surface visible without ever building a mesh — the surface is computed per-pixel, defined as the level set of a sum, and exists only on the screen
+# critical_parameter: blend_factor — at low values metaballs stay distinct, at high values they merge into one organic mass; this is the smoothness of the implicit gluing
+# triggers: animate_strength=true cycles each metaball's strength on its own phase; world_offset shifts the rendering volume in local space while the grid system handles world placement
+# emerges: discrete spheres become a single continuous surface as their fields overlap — no mesh stitching, no marching cubes, just a function evaluated everywhere
+# needs: ShaderMaterial [resolved], BoxMesh [resolved], DirectionalLight3D [resolved]
+# relationships: implicit-surface counterpart to marching cubes — same iso level threshold concept but rendered (raymarching) rather than meshed (marching cubes); contrast with nakama_metaballs which is mesh-based
+# truth: a surface does not need vertices to exist — a function plus a threshold is already a shape, and rendering is just asking that function where it equals zero
+
 # Editable parameters
 @export var metaball_count: int = 9
 @export var min_strength: float = 0.8

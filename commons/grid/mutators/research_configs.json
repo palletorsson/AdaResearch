@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "description": "Configs for grid_substrate_runner research. Each config = (host_shell, expression). Renders one in-game screenshot of the runner mounted on the host shell with that single expression active.",
+  "configs": [
+    {
+      "id": "atop_plinths_on_soane",
+      "host_shell": "mg_soane_collection",
+      "expression": "atop_plinths",
+      "notes": "Buren-on-Soane: visible only on plinth tops. The plinth field becomes a striped column array via height-aware visibility."
+    },
+    {
+      "id": "walkable_floor_on_soane",
+      "host_shell": "mg_soane_collection",
+      "expression": "walkable_floor",
+      "notes": "Inverse of atop_plinths — the plaza, the path. Plinths vanish, the walkable space lights up."
+    },
+    {
+      "id": "array_stride_on_soane",
+      "host_shell": "mg_soane_collection",
+      "expression": "array_stride",
+      "notes": "Every 3rd walkable cell. Array indexing made visible through visibility, restricted to floor only."
+    },
+    {
+      "id": "perimeter_of_mass_on_soane",
+      "host_shell": "mg_soane_collection",
+      "expression": "perimeter_of_mass",
+      "notes": "The skirt around the plinth field — walkable cells that touch a plinth. The boundary the player navigates."
+    },
+    {
+      "id": "array_filled_on_soane",
+      "host_shell": "mg_soane_collection",
+      "expression": "array_filled",
+      "notes": "Every walkable cell visible. The dense cartridge — sets up contrast against stride/perimeter."
+    },
+    {
+      "id": "atop_plinths_on_drunkard",
+      "host_shell": "mg_drunkard_plinths",
+      "expression": "atop_plinths",
+      "notes": "Same expression on an organic shell — the same code reads as a totally different pattern when the host changes."
+    },
+    {
+      "id": "walkable_floor_on_walled",
+      "host_shell": "mg_room_walled",
+      "expression": "walkable_floor",
+      "notes": "Same expression on the simplest possible shell. Establishes the baseline."
+    },
+    {
+      "id": "plinths_first_on_soane",
+      "host_shell": "mg_soane_collection",
+      "expression": "plinths_first",
+      "notes": "Index [0] only — one plinth lit. The array's first element. The minimal pattern that proves the array is indexed at all."
+    },
+    {
+      "id": "plinths_every_2nd_on_soane",
+      "host_shell": "mg_soane_collection",
+      "expression": "plinths_every_2nd",
+      "notes": "Indices 0, 2, 4, … — alternating plinths in row-major order. The simplest rhythm. Same plinth array, every other one selected."
+    },
+    {
+      "id": "plinths_every_3rd_on_soane",
+      "host_shell": "mg_soane_collection",
+      "expression": "plinths_every_3rd",
+      "notes": "Indices 0, 3, 6, … — slower disco beat. Stride three across the plinth list."
+    },
+    {
+      "id": "plinths_odd_indices_on_soane",
+      "host_shell": "mg_soane_collection",
+      "expression": "plinths_odd_indices",
+      "notes": "Indices 1, 3, 5, … — the offbeat. Pair with every_2nd to see the complement."
+    },
+    {
+      "id": "plinths_powers_of_2_on_soane",
+      "host_shell": "mg_soane_collection",
+      "expression": "plinths_powers_of_2",
+      "notes": "Indices 1, 2, 4, 8, 16, … — exponential indexing. Computational thinking rendered as a sparse array."
+    },
+    {
+      "id": "plinths_primes_on_soane",
+      "host_shell": "mg_soane_collection",
+      "expression": "plinths_primes",
+      "notes": "Indices that are prime (2, 3, 5, 7, 11, …). Number theory as spatial pattern."
+    },
+    {
+      "id": "plinths_disco_on_soane",
+      "host_shell": "mg_soane_collection",
+      "expression": "plinths_disco",
+      "notes": "Disco beat: plinths where (row + col) mod 4 == 0. Diagonal phase bands across the field — the now-playing beat of the array."
+    },
+    {
+      "id": "plinths_disco_offbeat_on_soane",
+      "host_shell": "mg_soane_collection",
+      "expression": "plinths_disco_offbeat",
+      "notes": "Disco offbeat: (row + col) mod 4 == 2. Complement of disco — together they tile the plinths in two interleaved phases. Two clocks, one face."
+    }
+  ]
+}

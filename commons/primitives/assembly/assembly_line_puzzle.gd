@@ -18,7 +18,10 @@ signal product_completed(product_number: int)
 signal all_products_completed()
 
 ## Shape type enum for internal use
-enum ShapeType { CUBE, PYRAMID, CYLINDER, DISC }
+## CUBE/CUBOID share scene; CUBOID is just CUBE with non-uniform scale.
+## PYRAMID/WEDGE share the pyramid scene; visual difference is the slot scale.
+## SPHERE swaps the mesh on a grab_cube body (no dedicated grab_sphere yet).
+enum ShapeType { CUBE, PYRAMID, CYLINDER, DISC, SPHERE, WEDGE, CUBOID }
 
 ## Configuration - loaded from JSON or set via export
 @export var category: String = "houses"
@@ -39,6 +42,23 @@ enum ShapeType { CUBE, PYRAMID, CYLINDER, DISC }
 @export var slot_match_distance: float = 0.08
 @export var snap_duration: float = 0.25
 @export var shape_scale: float = 0.07
+## When true, snap requires both shape AND color (within tolerance) to match.
+## Set false for the legacy houses/lab products which don't carry colors.
+@export var require_color_match: bool = false
+@export var color_match_tolerance: float = 0.18
+
+@export_group("Sandbox")
+## When true: no target ghost, no snap, no completion. The conveyor becomes
+## a vocabulary feeder — colored primitives drawn from `palette_source` flow
+## down the input belt and the player picks them up and combines them
+## however they want. The output belt is unused unless a build platform
+## artifact is placed in the world to receive composed stacks.
+@export var sandbox_mode: bool = false
+## Where to draw shape+color samples from when sandbox_mode is on.
+##   "compositions" — all slots from all products in category "compositions"
+##   "<category>"   — all slots from a specific category in products.json
+##   "rainbow"      — fall back to a built-in saturated palette
+@export var palette_source: String = "compositions"
 
 @export_group("Visuals")
 @export var conveyor_color: Color = Color(0.9, 0.9, 0.95)
@@ -63,24 +83,108 @@ var _spawn_timer: float = 0.0
 var _products_completed: int = 0
 
 
+## Sandbox palette: array of {"shape": ShapeType, "color": Color, "scale": Vector3}
+var _palette: Array = []
+
+
 func _ready() -> void:
 	_load_products_data()
 	_build_product_sequence()
 	_create_conveyors()
 	_create_production_station()
 	_spawn_timer = spawn_interval * 0.5
-	_setup_current_product_ghost()
+	if sandbox_mode:
+		_build_palette()
+	else:
+		_setup_current_product_ghost()
+	_update_label()
 
 
 func _process(delta: float) -> void:
 	_spawn_timer += delta
 	if _spawn_timer >= spawn_interval:
 		_spawn_timer = 0.0
-		_spawn_shape_for_current_product()
+		if sandbox_mode:
+			_spawn_palette_piece()
+		else:
+			_spawn_shape_for_current_product()
 
 	_update_input_conveyor(delta)
 	_update_output_conveyor(delta)
-	_check_slot_matches()
+	if not sandbox_mode:
+		_check_slot_matches()
+
+
+## Build the sandbox palette by aggregating slot data from products.json.
+## Sandbox spawns are random draws from this list.
+func _build_palette() -> void:
+	_palette.clear()
+	if palette_source == "rainbow":
+		_palette = _rainbow_palette()
+		return
+
+	if not _products_data.has("categories"):
+		_palette = _rainbow_palette(); return
+
+	var cats = _products_data["categories"]
+	var keys: Array = []
+	if palette_source == "compositions":
+		keys = ["compositions"] if cats.has("compositions") else cats.keys()
+	elif cats.has(palette_source):
+		keys = [palette_source]
+	else:
+		keys = cats.keys()
+
+	for cat_key in keys:
+		var cat = cats[cat_key]
+		var products = cat.get("products", {})
+		for prod_key in products.keys():
+			for slot in products[prod_key].get("slots", []):
+				var shape = _parse_shape_type(slot.get("type", "cube"))
+				var col = _slot_color(slot)
+				var sc = _array_to_vector3(slot.get("scale", [1, 1, 1]))
+				_palette.append({"shape": shape, "color": col, "scale": sc})
+
+	if _palette.is_empty():
+		_palette = _rainbow_palette()
+
+
+func _rainbow_palette() -> Array:
+	var shapes := [ShapeType.CUBE, ShapeType.SPHERE, ShapeType.CYLINDER, ShapeType.PYRAMID, ShapeType.WEDGE]
+	var colors := [
+		Color("#cc1f1f"), Color("#1f4ecc"), Color("#f0c020"),
+		Color("#1a8848"), Color("#6a30a0"), Color("#e87018"),
+		Color("#1a1a1a"), Color("#f4f2ec"),
+	]
+	var out: Array = []
+	for s in shapes:
+		for c in colors:
+			out.append({"shape": s, "color": c, "scale": Vector3.ONE})
+	return out
+
+
+## Sandbox: spawn a single random palette draw onto the input belt.
+func _spawn_palette_piece() -> void:
+	if _palette.is_empty():
+		return
+	var pick = _palette[randi() % _palette.size()]
+	var piece = _create_shape_piece(pick["shape"])
+	_apply_piece_color(piece, pick["color"])
+	piece.set_meta("piece_color", pick["color"])
+	piece.set_meta("piece_origin", "sandbox_palette")
+
+	# Slight scatter along z so consecutive pieces don't pile.
+	piece.position = input_start + Vector3(0, 0.08, randf_range(-0.06, 0.06))
+	# Honor the slot's per-axis scale on the piece so totem-tall vs cube
+	# proportions survive into the spawned object.
+	var s: Vector3 = pick.get("scale", Vector3.ONE)
+	piece.scale = Vector3(shape_scale * s.x, shape_scale * s.y, shape_scale * s.z)
+
+	if "freeze" in piece:
+		piece.freeze = false
+
+	add_child(piece)
+	_input_pieces.append(piece)
 
 
 ## Load product definitions from JSON
@@ -278,14 +382,26 @@ func _setup_current_product_ghost() -> void:
 	if product.is_empty():
 		return
 
+	# If product is in "stack mode" (no offsets, just sequence), compute
+	# cumulative y offsets from each slot's vertical extent. This lets a
+	# primitive_stack composition import directly: shape + color + scale.
 	var slots = product.get("slots", [])
+	var stack_mode := bool(product.get("stack_mode", false))
+	var y_cursor := 0.0
 	for i in slots.size():
 		var slot = slots[i]
 		var slot_type = _parse_shape_type(slot.get("type", "cube"))
-		var offset = _array_to_vector3(slot.get("offset", [0, 0, 0]))
 		var custom_scale = _array_to_vector3(slot.get("scale", [1, 1, 1]))
-
-		var ghost = _create_ghost_mesh(slot_type, custom_scale)
+		var offset: Vector3
+		if stack_mode:
+			# Each primitive contributes ~base_size*scale.y to the column.
+			var step = shape_scale * 2.0 * custom_scale.y * 1.05
+			offset = Vector3(0, y_cursor + step * 0.5, 0)
+			y_cursor += step
+		else:
+			offset = _array_to_vector3(slot.get("offset", [0, 0, 0]))
+		var col := _slot_color(slot)
+		var ghost = _create_ghost_mesh(slot_type, custom_scale, col)
 		ghost.position = offset
 		_ghost_container.add_child(ghost)
 		_ghost_meshes.append(ghost)
@@ -295,16 +411,28 @@ func _setup_current_product_ghost() -> void:
 	_update_label()
 
 
-func _create_ghost_mesh(shape_type: ShapeType, custom_scale: Vector3 = Vector3.ONE) -> MeshInstance3D:
+## Resolve a slot's color hint (or default ghost_color when not specified).
+func _slot_color(slot: Dictionary) -> Color:
+	if slot.has("color"):
+		var v = slot["color"]
+		if v is String:
+			return Color(v)
+		elif v is Array and v.size() >= 3:
+			return Color(float(v[0]), float(v[1]), float(v[2]),
+				float(v[3]) if v.size() >= 4 else 1.0)
+	return ghost_color
+
+
+func _create_ghost_mesh(shape_type: ShapeType, custom_scale: Vector3 = Vector3.ONE, tint: Color = Color(0,0,0,0)) -> MeshInstance3D:
 	var mesh_instance = MeshInstance3D.new()
 	var base_size = shape_scale * 2
 
 	match shape_type:
-		ShapeType.CUBE:
+		ShapeType.CUBE, ShapeType.CUBOID:
 			var box = BoxMesh.new()
 			box.size = Vector3(base_size * custom_scale.x, base_size * custom_scale.y, base_size * custom_scale.z)
 			mesh_instance.mesh = box
-		ShapeType.PYRAMID:
+		ShapeType.PYRAMID, ShapeType.WEDGE:
 			mesh_instance.mesh = _build_pyramid_mesh(base_size * custom_scale.x)
 		ShapeType.CYLINDER:
 			var cyl = CylinderMesh.new()
@@ -318,13 +446,22 @@ func _create_ghost_mesh(shape_type: ShapeType, custom_scale: Vector3 = Vector3.O
 			disc.bottom_radius = base_size * 0.6 * custom_scale.x
 			disc.height = base_size * 0.15 * custom_scale.y
 			mesh_instance.mesh = disc
+		ShapeType.SPHERE:
+			var sph = SphereMesh.new()
+			sph.radius = base_size * 0.5 * custom_scale.x
+			sph.height = base_size * custom_scale.y
+			mesh_instance.mesh = sph
+
+	# Ghost is the slot's target color (if given) at low alpha, else the default.
+	var col := tint if tint.a > 0.0 else ghost_color
+	col.a = 0.45
 
 	var mat = StandardMaterial3D.new()
-	mat.albedo_color = ghost_color
+	mat.albedo_color = col
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mat.emission_enabled = true
-	mat.emission = ghost_color
-	mat.emission_energy_multiplier = 0.6
+	mat.emission = col
+	mat.emission_energy_multiplier = 0.5
 	mesh_instance.material_override = mat
 
 	return mesh_instance
@@ -359,24 +496,36 @@ func _spawn_shape_for_current_product() -> void:
 	if product.is_empty():
 		return
 
-	# Find needed shapes
-	var needed_shapes: Array[ShapeType] = []
+	# Collect (shape, color) needed pairs from unfilled slots.
+	var needed: Array = []
 	var slots = product.get("slots", [])
 	for i in slots.size():
 		if not _slot_filled[i]:
-			needed_shapes.append(_parse_shape_type(slots[i].get("type", "cube")))
+			needed.append({
+				"shape": _parse_shape_type(slots[i].get("type", "cube")),
+				"color": _slot_color(slots[i]),
+			})
 
-	if needed_shapes.is_empty():
+	if needed.is_empty():
 		return
 
-	# 70% spawn needed shape, 30% random
 	var shape_type: ShapeType
-	if randf() < 0.7:
-		shape_type = needed_shapes[randi() % needed_shapes.size()]
+	var piece_color: Color
+	if randf() < 0.75:
+		var pick = needed[randi() % needed.size()]
+		shape_type = pick["shape"]
+		piece_color = pick["color"]
 	else:
-		shape_type = ShapeType.CUBE if randf() > 0.5 else ShapeType.PYRAMID
+		# Decoy piece — random shape, random hue from the product's palette.
+		var palette: Array = []
+		for s in slots:
+			palette.append(_slot_color(s))
+		shape_type = needed[randi() % needed.size()]["shape"]
+		piece_color = palette[randi() % palette.size()] if palette.size() > 0 else Color(0.7, 0.7, 0.75)
 
 	var piece = _create_shape_piece(shape_type)
+	_apply_piece_color(piece, piece_color)
+	piece.set_meta("piece_color", piece_color)
 	piece.position = input_start + Vector3(0, 0.08, randf_range(-0.04, 0.04))
 	piece.scale = Vector3.ONE * shape_scale
 
@@ -387,22 +536,86 @@ func _spawn_shape_for_current_product() -> void:
 	_input_pieces.append(piece)
 
 
+func _apply_piece_color(piece: Node, col: Color) -> void:
+	# Walk children, override the PRIMARY MeshInstance3D's albedo. Skip
+	# auxiliary meshes like highlight rings (Torus/non-Box meshes) so the
+	# pickup feedback geometry stays its own color.
+	var primary_done := false
+	for child in _flatten(piece):
+		if not (child is MeshInstance3D): continue
+		var m: Mesh = child.mesh
+		if m == null: continue
+		# First Box/Sphere/Cylinder/Pyramid we hit — that's the visual.
+		var is_primary := (m is BoxMesh) or (m is SphereMesh) or (m is CylinderMesh) or (m is PrismMesh)
+		if is_primary and not primary_done:
+			var mat := StandardMaterial3D.new()
+			mat.albedo_color = col
+			mat.roughness = 0.6
+			child.material_override = mat
+			primary_done = true
+
+
+func _flatten(n: Node) -> Array:
+	var out: Array = [n]
+	for c in n.get_children():
+		out.append_array(_flatten(c))
+	return out
+
+
 func _create_shape_piece(shape_type: ShapeType) -> Node3D:
 	var piece: Node3D
 	match shape_type:
-		ShapeType.CUBE:
+		ShapeType.CUBE, ShapeType.CUBOID:
 			piece = CUBE_SCENE.instantiate()
-			piece.set_meta("shape_type", "cube")
-		ShapeType.PYRAMID:
+			piece.set_meta("shape_type", "cube" if shape_type == ShapeType.CUBE else "cuboid")
+		ShapeType.PYRAMID, ShapeType.WEDGE:
 			piece = PYRAMID_SCENE.instantiate()
-			piece.set_meta("shape_type", "pyramid")
+			piece.set_meta("shape_type", "pyramid" if shape_type == ShapeType.PYRAMID else "wedge")
 		ShapeType.CYLINDER:
 			piece = CYLINDER_SCENE.instantiate()
 			piece.set_meta("shape_type", "cylinder")
 		ShapeType.DISC:
 			piece = DISC_SCENE.instantiate()
 			piece.set_meta("shape_type", "disc")
+		ShapeType.SPHERE:
+			# No grab_sphere yet — instantiate a cube body and swap ONLY the
+			# main visual mesh to a sphere. Skip auxiliary meshes (e.g.
+			# highlight_ring's torus) so we don't accidentally render them
+			# as giant spheres at the cube's natural size.
+			piece = CUBE_SCENE.instantiate()
+			piece.set_meta("shape_type", "sphere")
+			var swapped := false
+			for child in _flatten(piece):
+				if swapped: break
+				if not (child is MeshInstance3D): continue
+				# The grab_cube's main visual is a BoxMesh sized (0.1,0.1,0.1).
+				# Only swap that one; leave torus/highlight rings alone.
+				if child.mesh is BoxMesh:
+					var sph := SphereMesh.new()
+					var box_size: Vector3 = (child.mesh as BoxMesh).size
+					sph.radius = box_size.x * 0.5
+					sph.height = box_size.y
+					child.mesh = sph
+					swapped = true
 	return piece
+
+
+## Compatibility: shapes that share a base scene also match each other on snap
+## (cube↔cuboid, pyramid↔wedge). Color match is enforced separately.
+func _shapes_compatible(a: ShapeType, b: ShapeType) -> bool:
+	if a == b: return true
+	if (a == ShapeType.CUBE and b == ShapeType.CUBOID) or (a == ShapeType.CUBOID and b == ShapeType.CUBE):
+		return true
+	if (a == ShapeType.PYRAMID and b == ShapeType.WEDGE) or (a == ShapeType.WEDGE and b == ShapeType.PYRAMID):
+		return true
+	return false
+
+
+func _colors_close(a: Color, b: Color) -> bool:
+	var dr = abs(a.r - b.r)
+	var dg = abs(a.g - b.g)
+	var db = abs(a.b - b.b)
+	return (dr + dg + db) <= color_match_tolerance * 3.0
 
 
 func _update_input_conveyor(delta: float) -> void:
@@ -495,6 +708,7 @@ func _check_slot_matches() -> void:
 			continue
 
 		var piece_type = _parse_shape_type(piece.get_meta("shape_type", "cube"))
+		var piece_color: Color = piece.get_meta("piece_color", Color(0,0,0,0))
 
 		for i in slots.size():
 			if _slot_filled[i]:
@@ -502,11 +716,18 @@ func _check_slot_matches() -> void:
 
 			var slot = slots[i]
 			var slot_type = _parse_shape_type(slot.get("type", "cube"))
-			if slot_type != piece_type:
+			if not _shapes_compatible(slot_type, piece_type):
 				continue
+			if require_color_match and slot.has("color"):
+				if not _colors_close(piece_color, _slot_color(slot)):
+					continue
 
-			var offset = _array_to_vector3(slot.get("offset", [0, 0, 0]))
-			var slot_world_pos = _ghost_container.global_position + offset
+			# Use the ghost mesh's actual position (handles stack_mode autostacking).
+			var slot_world_pos: Vector3
+			if i < _ghost_meshes.size() and is_instance_valid(_ghost_meshes[i]):
+				slot_world_pos = _ghost_meshes[i].global_position
+			else:
+				slot_world_pos = _ghost_container.global_position + _array_to_vector3(slot.get("offset", [0, 0, 0]))
 			var distance = piece.global_position.distance_to(slot_world_pos)
 
 			if distance < slot_match_distance:
@@ -533,7 +754,11 @@ func _snap_piece_to_slot(piece: Node3D, slot_index: int) -> void:
 	if piece is RigidBody3D:
 		piece.freeze = true
 
-	var target_pos = _ghost_container.global_position + offset
+	var target_pos: Vector3
+	if slot_index < _ghost_meshes.size() and is_instance_valid(_ghost_meshes[slot_index]):
+		target_pos = _ghost_meshes[slot_index].global_position
+	else:
+		target_pos = _ghost_container.global_position + offset
 	var tween = create_tween()
 	tween.tween_property(piece, "global_position", target_pos, snap_duration)
 	tween.tween_property(piece, "rotation", Vector3.ZERO, snap_duration)
@@ -695,10 +920,14 @@ func _create_generic_mesh() -> Node3D:
 
 func _update_label() -> void:
 	var label = get_node_or_null("ProductLabel")
-	if label:
-		var product = _get_current_product()
-		var product_name = product.get("name", "Product") if not product.is_empty() else "Product"
-		label.text = "%s | Built: %d" % [product_name, _products_completed]
+	if not label:
+		return
+	if sandbox_mode:
+		label.text = "Sandbox · palette: %s" % palette_source
+		return
+	var product = _get_current_product()
+	var product_name = product.get("name", "Product") if not product.is_empty() else "Product"
+	label.text = "%s | Built: %d" % [product_name, _products_completed]
 
 
 ## Utility functions
@@ -707,9 +936,12 @@ func _parse_shape_type(type_str) -> ShapeType:
 		return type_str as ShapeType
 	match str(type_str).to_lower():
 		"cube": return ShapeType.CUBE
+		"cuboid": return ShapeType.CUBOID
 		"pyramid": return ShapeType.PYRAMID
+		"wedge": return ShapeType.WEDGE
 		"cylinder": return ShapeType.CYLINDER
 		"disc": return ShapeType.DISC
+		"sphere": return ShapeType.SPHERE
 		_: return ShapeType.CUBE
 
 
@@ -783,6 +1015,27 @@ func apply_grid_config(config_data: Dictionary) -> void:
 				product_filter = resolved["product"]
 			needs_rebuild = true
 
+	# Composition products carry color per slot — enable color-match snap.
+	if category == "compositions":
+		require_color_match = true
+
+	# Sandbox toggle (truthy: true / "true" / "1" / 1).
+	if config_data.has("sandbox") or config_data.has("mode"):
+		var raw = config_data.get("sandbox", config_data.get("mode", false))
+		var on := false
+		if raw is bool: on = raw
+		elif raw is int: on = raw != 0
+		elif raw is String: on = raw.to_lower() in ["true", "1", "sandbox", "free", "yes"]
+		if on != sandbox_mode:
+			sandbox_mode = on
+			needs_rebuild = true
+
+	if config_data.has("palette") or config_data.has("palette_source"):
+		var p = str(config_data.get("palette", config_data.get("palette_source", "")))
+		if p != "" and p != palette_source:
+			palette_source = p
+			needs_rebuild = true
+
 	if needs_rebuild:
 		_rebuild()
 
@@ -818,6 +1071,9 @@ func _rebuild() -> void:
 		for child in _ghost_container.get_children():
 			child.queue_free()
 
-	_build_product_sequence()
-	_setup_current_product_ghost()
+	if sandbox_mode:
+		_build_palette()
+	else:
+		_build_product_sequence()
+		_setup_current_product_ghost()
 	_update_label()

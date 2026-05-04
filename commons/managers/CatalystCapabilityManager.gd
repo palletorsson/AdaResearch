@@ -132,19 +132,34 @@ func spawn_bracelet_on_controller(controller: XRController3D) -> void:
 	_bracelet.position = Vector3(0.02, -0.05, 0.18)  # Out from palm, down toward forearm, back toward wrist
 	_bracelet.rotation_degrees = Vector3(90, 0, 0)   # Rotate so torus hole faces along arm
 
-	# Use the current catalyst's own unlocked modes — not the accumulated history.
-	# This way the bracelet reflects what THIS catalyst can do.
+	# Use the modes of the catalyst that's NOW a child of the controller —
+	# i.e., the one the player just picked up. Falling back to "first
+	# catalyst in scene" was the bug: ghost auto-absorbed catalysts
+	# could come first and bring voxel_editor along with them.
 	var bracelet_modes: Array = []
-	var catalysts = get_tree().get_nodes_in_group("catalyst")
-	for cat in catalysts:
-		if "unlocked_modes" in cat:
-			for m in cat.unlocked_modes:
-				var id := str(m)
-				if id not in bracelet_modes:
-					bracelet_modes.append(id)
-			break  # Use the first catalyst found
+	var active_cat: Node = null
+	for child in controller.get_children():
+		if child.is_in_group("catalyst"):
+			active_cat = child
+			break
+	if active_cat and "unlocked_modes" in active_cat:
+		for m in active_cat.unlocked_modes:
+			var id := str(m)
+			if id not in bracelet_modes:
+				bracelet_modes.append(id)
+		print("[BraceletMgr] Using active catalyst '%s' with %d modes" % [active_cat.name, bracelet_modes.size()])
+	else:
+		# Fallback: any catalyst in scene (legacy path)
+		for cat in get_tree().get_nodes_in_group("catalyst"):
+			if "unlocked_modes" in cat:
+				for m in cat.unlocked_modes:
+					var id := str(m)
+					if id not in bracelet_modes:
+						bracelet_modes.append(id)
+				break
+		print("[BraceletMgr] No active catalyst on controller, fell back to scene scan")
 
-	# Fallback: use manager's accumulated modes if no catalyst in scene
+	# Final fallback: use manager's accumulated modes if no catalyst in scene
 	if bracelet_modes.is_empty():
 		bracelet_modes = _catalyst_modes.duplicate()
 
@@ -161,11 +176,9 @@ func spawn_bracelet_on_controller(controller: XRController3D) -> void:
 	else:
 		push_error("[BraceletMgr] Bracelet has NO activate() method — script not attached?")
 
-	# Link to the first catalyst in the scene for bidirectional sync
-	for cat in catalysts:
-		if _bracelet.has_method("link_catalyst"):
-			_bracelet.link_catalyst(cat)
-		break
+	# Link to the active catalyst (the one on the controller) for sync.
+	if active_cat and _bracelet.has_method("link_catalyst"):
+		_bracelet.link_catalyst(active_cat)
 
 	_bracelet_controller = controller
 	_bracelet_activated = true

@@ -33,6 +33,7 @@ class_name GridSubstrateRunner
 const GRID_VIS_MUTATOR_PATH := "res://commons/grid/mutators/grid_visibility_mutator.gd"
 const GRID_VIS_EXPR_PATH := "res://commons/grid/mutators/grid_visibility_expressions.gd"
 const GRID_VIS_EXPR_3D_PATH := "res://commons/grid/mutators/grid_visibility_expressions_3d.gd"
+const GRID_VIS_EXPR_MAP_PATH := "res://commons/grid/mutators/grid_map_aware_expressions.gd"
 const GRID_COLOR_MUTATOR_PATH := "res://commons/grid/mutators/grid_color_mutator.gd"
 const GRID_GLYPH_MUTATOR_PATH := "res://commons/grid/mutators/grid_glyph_mutator.gd"
 const GRID_GLYPH_EXPR_PATH := "res://commons/grid/mutators/grid_glyph_expressions.gd"
@@ -175,6 +176,15 @@ func _mount_visibility() -> void:
 	vis_expr.name = "GridVisibilityExpressions"
 	add_child(vis_expr)
 	vis_expr.register_for(_vis_mutator)
+
+	# Map-aware expressions: read host structure heights via ctx["structure"].
+	# atop_plinths, walkable_floor, array_stride, perimeter_of_mass, array_filled.
+	var map_expr_script: GDScript = load(GRID_VIS_EXPR_MAP_PATH)
+	if map_expr_script:
+		var map_expr: Node = map_expr_script.new()
+		map_expr.name = "GridMapAwareExpressions"
+		add_child(map_expr)
+		map_expr.register_for(_vis_mutator)
 
 	# 3D expressions only when explicitly enabled and the multimesh is volumetric.
 	if enable_3d_expressions:
@@ -379,3 +389,34 @@ func apply_grid_config(config: Dictionary) -> void:
 		enable_3d_expressions = bool(config["enable_3d_expressions"])
 	if config.has("floor_plan_mode"):
 		floor_plan_mode = int(config["floor_plan_mode"])
+	# Cycle controls — used by research renders that want a STABLE static
+	# image (no animation) instead of the live-cycling experience.
+	if config.has("visibility_cycle_seconds"):
+		visibility_cycle_seconds = float(config["visibility_cycle_seconds"])
+	if config.has("color_cycle_seconds"):
+		color_cycle_seconds = float(config["color_cycle_seconds"])
+	# Static-mode helper: if set, propagate to the mutator after it's
+	# mounted so the cycle stops firing in research/capture contexts.
+	if config.has("static_mode") and bool(config["static_mode"]):
+		call_deferred("_force_static_mode")
+
+
+func _force_static_mode() -> void:
+	# Called via call_deferred so the mutators have time to mount first
+	# (mount itself is call_deferred from _ready).
+	# We need a couple of frames so the mount + first-apply finishes,
+	# then we kill the cycle and re-apply to lock the static frame.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if _vis_mutator:
+		_vis_mutator.auto_cycle_enabled = false
+		_vis_mutator.cycle_interval_seconds = 999999.0
+		# Force a re-apply of the (now-filtered, single) pattern so the
+		# visible frame is exactly the expression's t=0 state.
+		if _vis_mutator.pattern_names.size() > 0:
+			_vis_mutator.current_pattern_index = 0
+			if _vis_mutator.has_method("_apply_named_pattern"):
+				_vis_mutator._apply_named_pattern(_vis_mutator.pattern_names[0])
+	if _color_mutator:
+		_color_mutator.auto_cycle_enabled = false
+		_color_mutator.cycle_interval_seconds = 999999.0

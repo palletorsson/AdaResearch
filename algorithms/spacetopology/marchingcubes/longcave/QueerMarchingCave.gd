@@ -1,6 +1,16 @@
 extends Node3D
 class_name QueerMarchingCave
 
+# @identity
+# essence: marching cubes cave generator with layered noise — combines four noise fields (primary, secondary, bulge, cave) into a single density function then meshes the iso-surface, producing a walkable bulgy cavern at VR scale
+# desire: to make a cave that does not feel like a gridded-out rock — the bulginess parameter pushes the noise into rounded, gestural forms that read as organic rather than geological
+# critical_parameter: bulginess — at 0 the cave reads as procedural noise, at high values walls swell into pillowy curves; this is the parameter that turns mathematics into atmosphere
+# triggers: vertical_bias adds a downward density gradient (caves go down, not up); cave_density shifts the iso-level threshold to make the void wider or narrower; color_shift_speed cycles the wall coloring over time
+# emerges: a 256-case lookup table over a noise sum produces a cave that is somehow both random and architectural — the cubes-and-cases substrate vanishes into the sensed roundness of the result
+# needs: FastNoiseLite x4 [resolved], ArrayMesh [resolved], collision body [resolved]
+# relationships: queer variant of the standard marching cubes cave — same algorithm but parameter-tuned for an aesthetic that resists the usual procedural-rock look; sibling to mc_inside_cave, marchingcubes_cave
+# truth: the difference between geology and architecture is just parameter choice — the same algorithm builds rocks or rooms depending on which noise weights you pick
+
 # Marching cubes parameters
 @export var cave_size: Vector3 = Vector3(10, 6, 10)  # Meters (VR scale)
 @export var resolution: float = 0.5  # Cell size in meters

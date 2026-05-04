@@ -3,6 +3,16 @@
 # Based on Swedish plant morphology (Växternas byggnad):
 # stem shapes, phyllotaxis, leaf forms, flower anatomy, inflorescence patterns.
 #
+# @identity
+# essence: Procedural botanical generator — stem, leaves, sepals, petals, stamens, pistil assembled in correct anatomical order
+# desire: To make flower form a parameter space rather than a fixed mesh, so morphology becomes legible as decisions
+# critical_parameter: phyllotaxis_angle and inflorescence_pattern — they organize how parts arrange in space
+# triggers: Changing petal_count produces tulip→daisy→chrysanthemum; switching inflorescence shifts single bloom to raceme to umbel
+# emerges: Eight inflorescence patterns and six flower forms compose a small botanical vocabulary that yields infinite plausible flowers
+# needs: configure() API [has], rebuild on parameter change [has], grid wrapper for VR [has via BotanicalFlowerArtifact]
+# relationships: Core engine consumed by botanical_flower (artifact wrapper), evolving_flowers (phenotype), Flower_* maps in flowers sequence
+# truth: A flower is the parameter set that decided how to repeat — petals are the trace of phyllotaxis, not the flower itself.
+#
 # Each flower is built from anatomically correct parts in botanical order:
 #   Stem → Leaves (via phyllotaxis) → Flower head(s)
 #     └─ Sepals (foderblad) → Petals (kronblad) → Stamens (ståndare) → Pistil (pistill)

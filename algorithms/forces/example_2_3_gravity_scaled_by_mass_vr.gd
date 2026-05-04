@@ -5,6 +5,16 @@
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
+#
+# @identity
+# essence: Gravity computed as a force scaled by each body's mass, revealing that all masses fall at the same acceleration
+# desire: To enact Galileo's experiment — drop different masses, watch them stay together, see why F=mg cancels in the equation of motion
+# critical_parameter: gravity_strength — the constant that proves itself constant by producing equal acceleration regardless of mass
+# triggers: Default gravity reproduces Galileo's result; reducing gravity slows the fall but masses still descend together; reversing gravity inverts the demonstration
+# emerges: The equivalence principle as visible event — heavy and light reach the floor together, the algebra confirmed by the eye
+# needs: per-body mass [has], gravity force application [has], visible arrow comparison [has], VR sliders [has]
+# relationships: NOC Ch.2 trilogy with example_2_1 and example_2_2. Anchor artifact in forces/Newton's_Laws map
+# truth: Gravity treats mass as both source and target — and so cancels itself in motion, leaving acceleration alone to fall.
 # ===========================================================================
 
 extends Node3D

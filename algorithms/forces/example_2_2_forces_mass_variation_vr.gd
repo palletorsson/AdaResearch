@@ -5,6 +5,16 @@
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
+#
+# @identity
+# essence: Wind and drag applied to many balls of different masses — F=ma made visible as different responses to identical force
+# desire: To turn the equation F=ma into a perceptual event — same wind pushes large and small differently, mass becomes legible as motion
+# critical_parameter: wind_strength and drag_coefficient — together they decide whether mass differences read as separation or noise
+# triggers: Zero wind makes mass invisible; strong wind separates masses by acceleration; high drag erases the differences over time
+# emerges: A row of objects of varying mass under one wind becomes a histogram of inertia, sorted by acceleration response
+# needs: per-ball mass [has], wind force application [has], drag force [has], VR sliders [has]
+# relationships: Direct successor to example_2_1_forces_vr (adds mass). Anchor artifact in forces/Newton's_Laws map
+# truth: Mass is not a number on a scale — it is the resistance that makes one body's response to a force differ from another's.
 # ===========================================================================
 
 extends Node3D

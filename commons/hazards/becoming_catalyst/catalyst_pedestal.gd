@@ -190,6 +190,12 @@ func _spawn_crystal() -> void:
 	if _crystal.has_signal("picked_up"):
 		_crystal.picked_up.connect(_on_crystal_taken)
 
+	# If apply_grid_config landed before _ready, forward the stashed
+	# crystal config now that the crystal exists.
+	if not _pending_crystal_cfg.is_empty() and _crystal.has_method("apply_grid_config"):
+		_crystal.call_deferred("apply_grid_config", _pending_crystal_cfg)
+		_pending_crystal_cfg = {}
+
 	print("[CatalystPedestal] Crystal spawned at center of cage")
 
 
@@ -205,9 +211,81 @@ func _on_crystal_taken(_pickable) -> void:
 # GRID INTEGRATION
 # ═══════════════════════════════════════════════════════════════════════════
 
+# Stash for crystal config when apply_grid_config arrives before _ready.
+var _pending_crystal_cfg: Dictionary = {}
+
+# Token grammar: catalyst_pedestal:0:0#key:value#key:value...
+# Forwarded keys (handled by becoming_catalyst.configure):
+#   all_modes      — unlock every mode (debug)
+#   start_mode     — unlock one specific mode
+#   unlock_to      — unlock all modes up to a given order
+#   shooting_only  — unlock only order >= 1 (skip voxel/wedge placement)
+#   active_mode    — set current_mode_index to point at this mode_id
+# Pedestal-handled keys:
+#   cage_color     — RGBA wireframe tint
+#   clear_modes    — call CatalystCapabilityManager.reset_progression() first
+const _CATALYST_FORWARD_KEYS = [
+	"all_modes", "start_mode", "unlock_to",
+	"shooting_only", "active_mode",
+]
+
+
 func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("cage_color"):
 		var c: Color = Color(config_data["cage_color"])
 		for mat in _edge_materials:
 			mat.albedo_color = c
 			mat.emission = c
+
+	# clear_modes: only free GHOST catalysts (auto-absorbed onto an
+	# XRController by the manager from save state). Don't touch the
+	# pedestal's own crystal or the bracelet. Most maps will only have
+	# our pedestal's crystal in the scene, so this is a no-op there.
+	if _is_truthy(config_data.get("clear_modes", false)):
+		var freed: int = 0
+		for cat in get_tree().get_nodes_in_group("catalyst"):
+			# Skip our pedestal's own crystal (and any descendant of it).
+			if cat == _crystal or self.is_ancestor_of(cat):
+				continue
+			# Only free if parented to an XRController3D — that's what
+			# auto_absorb does. Anything else (pedestals in other maps,
+			# sibling catalysts, etc.) leave alone.
+			var p := cat.get_parent()
+			if p and p.get_class() == "XRController3D":
+				cat.queue_free()
+				freed += 1
+
+		var cap_mgr := get_tree().root.get_node_or_null("CatalystCapabilityManager")
+		if cap_mgr == null:
+			cap_mgr = get_tree().root.get_node_or_null("CatalystCapability")
+		if cap_mgr and "_catalyst_modes" in cap_mgr:
+			cap_mgr._catalyst_modes.clear()
+			if cap_mgr.has_method("save_state"):
+				cap_mgr.call("save_state")
+		print("[CatalystPedestal] clear_modes ran — freed %d ghost catalysts; bracelet preserved" % freed)
+
+	# Forward catalyst-related keys to the spawned crystal.
+	var crystal_cfg: Dictionary = {}
+	for k in _CATALYST_FORWARD_KEYS:
+		if config_data.has(k):
+			crystal_cfg[k] = config_data[k]
+	if crystal_cfg.is_empty():
+		return
+	if is_instance_valid(_crystal) and _crystal.has_method("apply_grid_config"):
+		_crystal.call("apply_grid_config", crystal_cfg)
+		_pending_crystal_cfg = {}
+	else:
+		# Crystal not yet spawned — defer until _spawn_crystal runs.
+		_pending_crystal_cfg = crystal_cfg
+
+
+# Truthy check — accepts native bool, "true"/"yes"/"1" strings, non-zero numbers.
+# GDScript has no bool() constructor; tokens arrive as strings via the parser.
+func _is_truthy(value) -> bool:
+	if typeof(value) == TYPE_BOOL:
+		return value
+	if typeof(value) == TYPE_STRING:
+		return value.to_lower() in ["true", "1", "yes"]
+	if typeof(value) == TYPE_INT or typeof(value) == TYPE_FLOAT:
+		return value != 0
+	return false

@@ -88,6 +88,13 @@ func get_utilities_layer() -> Array:
 func get_interactables_layer() -> Array:
 	return map_data.get("layers", {}).get("interactables", [])
 
+## Optional 4th layer for authorial biome-density hints. See
+## algorithms/nature_system/systems/biome_paint_tokens.gd for the token
+## language (f1..f5, t1..t5, u1..u5, c1..c5, m1..m5, x1..x5, "-").
+## Returns [] if absent — fully backward-compatible with existing maps.
+func get_biome_paint_layer() -> Array:
+	return map_data.get("layers", {}).get("biome_paint", [])
+
 # Get definitions
 func get_utility_definitions() -> Dictionary:
 	return map_data.get("utility_definitions", {})

@@ -1,3 +1,13 @@
+# @identity
+# essence: a deterministic-by-mode grid cube remover — Range, Column, Row, or All — that dissolves volumes via subtraction with configurable highlight duration and per-cube removal speed
+# desire: to make subtraction visible as authorship — the player watches which cubes leave and in what order, and learns that removal is a creative act, not the absence of one
+# critical_parameter: selection_mode — Range, Column, Row, All — each mode tells a different story about how randomness can be bounded and what shape its bound takes
+# triggers: removal coroutine animates highlight_duration per cube and paces via removal_speed; selection_mode determines which cells enter the queue based on x/y/z bounds or target_column/target_row
+# emerges: a cleared volume with the rhythm of its departure — negative space carries the order of removal, not just the result; the lattice remembers which cubes left first
+# needs: VR pointing at cubes to add to removal queue [missing]; live mode switching [missing]; undo/repeat [missing]; apply_grid_config [missing]
+# relationships: paired with random_object_spawner (the painter) and entropy_axiom (the principle) in randomness — the eraser to their accumulation; appears in Subtraction as Authorship and One Line Infinite Maze
+# truth: subtraction is composition — what you remove writes the space as much as what you place; the randomness sequence's quietest authorship lesson lives on this slider
+
 extends Node3D
 
 # Grid selection mode

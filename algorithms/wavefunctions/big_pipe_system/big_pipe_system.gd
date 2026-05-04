@@ -1,3 +1,13 @@
+# @identity
+# essence: a turtle-graphics pipe network grown from string commands — `f` adds anchors, `r`/`l` bend bezier handles, `t`/`x` branch into independent curves; SurfaceTool extrudes one continuous mesh along the path
+# desire: to make pipe-as-composition feel like writing a sentence — type "f r f l f" and the system turns where you said it would; the pipe IS the score
+# critical_parameter: config_file or turtle command string — every junction, elbow, and branch lives in the string; geometry is just rendered grammar
+# triggers: _ready() runs the auto_build pass; build_pipe_system() walks turtle commands, sets bezier IN/OUT handles per anchor, extrudes circular cross-sections via sample_baked tangent frames
+# emerges: cathedral-organ topology from text — branching drain networks the player can walk through, with smooth corners that cost two lines of bezier instead of a hundred lines of arc math
+# needs: VR walking inside pipes [has]; per-segment audio routing [missing]; runtime turtle editing [missing]; apply_grid_config [missing]
+# relationships: pairs with seismograph (the readout) and coupled_oscillator_lattice (the medium) to form the wavefunctions plumbing-as-resonance arc; appears in Gravity Creates Rhythm, Sound as Waveform, Spatial Sound Laboratory
+# truth: a pipe is a path with mass — when you bend a command string, you bend the air column, and the geometry becomes the instrument
+
 @tool
 extends Node3D
 class_name BigPipeSystem

@@ -62,9 +62,48 @@ func _run() -> void:
 	var lookup_names: Array = artifacts.keys()
 	lookup_names.sort()
 
+	# Resume support: if we have a partial report, skip everything up to
+	# and including the last entry it contains.
+	var checkpoint_path: String = _outdir.path_join("artifact_measurements.checkpoint.json")
+	var skip_list_path: String = _outdir.path_join("artifact_measurements.skip_list.txt")
+	var done_set: Dictionary = {}
+	if FileAccess.file_exists(checkpoint_path):
+		var prior := _load_json(checkpoint_path)
+		var prior_arts: Array = prior.get("artifacts", []) as Array
+		for r in prior_arts:
+			if r is Dictionary and r.has("lookup_name"):
+				done_set[r["lookup_name"]] = true
+				results.append(r)
+		print("measure_artifacts: resuming, %d previously measured" % done_set.size())
+	# Skip list: artifacts known to crash Godot. One lookup_name per line.
+	var skip_set: Dictionary = {}
+	if FileAccess.file_exists(skip_list_path):
+		var sf := FileAccess.open(skip_list_path, FileAccess.READ)
+		while sf and not sf.eof_reached():
+			var line: String = sf.get_line().strip_edges()
+			if not line.is_empty() and not line.begins_with("#"):
+				skip_set[line] = true
+		if sf: sf.close()
+		print("measure_artifacts: skip-list loaded, %d names" % skip_set.size())
+
 	for lookup_name in lookup_names:
+		if done_set.has(lookup_name):
+			continue
+		if skip_set.has(lookup_name):
+			results.append({
+				"lookup_name": lookup_name,
+				"scene": (artifacts[lookup_name] as Dictionary).get("scene", ""),
+				"registry": (artifacts[lookup_name] as Dictionary).get("_registry_source", ""),
+				"error": "skipped_crashes_godot",
+			})
+			skipped += 1
+			continue
 		var entry: Dictionary = artifacts[lookup_name]
 		var scene_path: String = entry.get("scene", "")
+
+		# Write progress marker so we know who was being processed if Godot crashes.
+		_write_progress(_outdir.path_join("artifact_measurements.progress.txt"),
+			"%s\n%s\n" % [lookup_name, scene_path])
 
 		if scene_path.is_empty() or not ResourceLoader.exists(scene_path):
 			skipped += 1
@@ -147,9 +186,14 @@ func _run() -> void:
 		await process_frame
 
 		measured += 1
-		if measured % 50 == 0:
+		if measured % 25 == 0:
 			var elapsed: float = (Time.get_ticks_msec() - _start_time) / 1000.0
 			print("measure_artifacts: %d / %d measured (%.1fs)" % [measured, lookup_names.size(), elapsed])
+			# Flush checkpoint every 25 artifacts so crashes don't lose much.
+			_write_json(checkpoint_path, {
+				"generated": Time.get_datetime_string_from_system(true),
+				"artifacts": results,
+			})
 
 	# 3. Build report
 	var report := {
@@ -317,6 +361,15 @@ func _disable_processing_recursive(node: Node) -> void:
 	node.set_physics_process_internal(false)
 	for child in node.get_children():
 		_disable_processing_recursive(child)
+
+func _write_progress(path: String, body: String) -> void:
+	var abs_path: String = ProjectSettings.globalize_path(path)
+	DirAccess.make_dir_recursive_absolute(abs_path.get_base_dir())
+	var file := FileAccess.open(path, FileAccess.WRITE)
+	if file:
+		file.store_string(body)
+		file.close()
+
 
 func _write_json(path: String, data: Dictionary) -> void:
 	var abs_path: String = ProjectSettings.globalize_path(path)

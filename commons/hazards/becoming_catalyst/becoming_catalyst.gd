@@ -1056,3 +1056,26 @@ func configure(config_data: Dictionary) -> void:
 		for mode_def in MODE_DEFS:
 			if mode_def["order"] <= target_order:
 				_unlock_mode(mode_def["id"], false)
+	# Unlock only the SHOOTING modes (skip voxel_editor + wedge_placer
+	# which are at order 0 and consume A/X for placement). Used by the
+	# catalyst test maps so the bracelet starts on a projectile mode.
+	# CRITICAL: also REMOVE the seeded voxel/wedge/off modes from
+	# unlocked_modes — otherwise the bracelet still gets them in its
+	# rotation and shows voxel as the active gem at index 0.
+	if config_data.has("shooting_only"):
+		unlocked_modes = unlocked_modes.filter(
+			func(id: String) -> bool:
+				return id not in ["voxel_editor", "wedge_placer", "off"]
+		)
+		for mode_def in MODE_DEFS:
+			if int(mode_def.get("order", 0)) >= 1:
+				_unlock_mode(mode_def["id"], false)
+		# Reset index since the array shifted under us.
+		current_mode_index = 0
+	# Set the active mode index to point at a specific mode_id, AFTER
+	# any unlocks above. This is what controls which mode A/X fires in.
+	if config_data.has("active_mode"):
+		var target_id: String = str(config_data["active_mode"])
+		var idx: int = unlocked_modes.find(target_id)
+		if idx >= 0:
+			current_mode_index = idx

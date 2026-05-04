@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://catfoe000001"]
+
+[ext_resource type="Script" path="res://commons/hazards/catalyst_foe/catalyst_foe.gd" id="1_foe"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_foe"]
+size = Vector3(0.3, 0.3, 0.3)
+
+[node name="CatalystFoe" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_foe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_foe")

@@ -23,6 +23,8 @@ enum Algorithm {
 	BFS_FLOOD, DFS_MAZE,
 	WIRE_WORLD,
 	LANGTONS_ANT,
+	# array_tutorial sequence cartridges — same array, three cadences
+	DISCO, SLOW, RANDOM,
 }
 
 @export var algorithm: Algorithm = Algorithm.GAME_OF_LIFE:
@@ -271,6 +273,12 @@ func _create_cartridge(algo: Algorithm) -> Grid2DCartridge:
 			return preload("res://commons/substrates/grid2d/cartridges/cartridge_wireworld.gd").new()
 		Algorithm.LANGTONS_ANT:
 			return preload("res://commons/substrates/grid2d/cartridges/cartridge_langtons_ant.gd").new()
+		Algorithm.DISCO:
+			return preload("res://commons/substrates/grid2d/cartridges/cartridge_disco.gd").new()
+		Algorithm.SLOW:
+			return preload("res://commons/substrates/grid2d/cartridges/cartridge_slow.gd").new()
+		Algorithm.RANDOM:
+			return preload("res://commons/substrates/grid2d/cartridges/cartridge_random.gd").new()
 
 	# Fallback
 	return preload("res://commons/substrates/grid2d/cartridges/cartridge_game_of_life.gd").new()
@@ -282,7 +290,7 @@ func _resolve_algorithm_from_lookup_name() -> void:
 	var lookup = get_meta("artifact_lookup_name", "")
 	if lookup == "" or lookup == "grid2d":
 		return
-	var key = lookup.replace("grid2d_", "")
+	var key = lookup.replace("grid2d_", "").replace("array_", "").replace("_substrate", "")
 	var algo_map = {
 		"life": Algorithm.GAME_OF_LIFE,
 		"game_of_life": Algorithm.GAME_OF_LIFE,
@@ -295,6 +303,9 @@ func _resolve_algorithm_from_lookup_name() -> void:
 		"dfs_maze": Algorithm.DFS_MAZE,
 		"wireworld": Algorithm.WIRE_WORLD,
 		"langtons_ant": Algorithm.LANGTONS_ANT,
+		"disco": Algorithm.DISCO,
+		"slow": Algorithm.SLOW,
+		"random": Algorithm.RANDOM,
 	}
 	if key in algo_map:
 		algorithm = algo_map[key]
@@ -331,6 +342,9 @@ func apply_grid_config(config: Dictionary) -> void:
 			"dfs_maze": Algorithm.DFS_MAZE,
 			"wireworld": Algorithm.WIRE_WORLD,
 			"langtons_ant": Algorithm.LANGTONS_ANT,
+			"disco": Algorithm.DISCO,
+			"slow": Algorithm.SLOW,
+			"random": Algorithm.RANDOM,
 		}
 		if algo_name in algo_map:
 			algorithm = algo_map[algo_name]

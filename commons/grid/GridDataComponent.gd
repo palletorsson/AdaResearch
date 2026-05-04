@@ -160,6 +160,14 @@ func get_utility_definitions() -> Dictionary:
 		return json_loader.get_utility_definitions()
 	return {}
 
+## Optional 4th layer for biome-density hints. See
+## algorithms/nature_system/systems/biome_paint_tokens.gd for the token
+## language. Returns [] when the map has no biome_paint layer.
+func get_biome_paint_layer() -> Array:
+	if json_loader:
+		return json_loader.get_biome_paint_layer()
+	return []
+
 # Get lighting settings from loaded data
 func get_lighting_settings() -> Dictionary:
 	if json_loader:

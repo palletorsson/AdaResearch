@@ -1117,4 +1117,3 @@ func _runtime_flag_enabled(flag_name: String, default_value: bool) -> bool:
 	if not data.has(flag_name):
 		return default_value
 	return bool(data[flag_name])
-

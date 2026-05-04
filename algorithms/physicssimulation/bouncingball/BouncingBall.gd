@@ -1,6 +1,16 @@
 ## Bouncing Ball — RigidBody3D balls with PhysicsMaterial bounce
 ## Godot handles ALL physics: gravity, collision, bouncing
 ## Visible wireframe cube containment so you can see the box
+##
+## @identity
+## essence: Bounded chamber of bouncing balls — physics engine handles gravity, collision, restitution; we only set initial conditions
+## desire: To let the player watch deterministic physics produce apparent randomness through accumulating collision micro-differences
+## critical_parameter: ball_count and PhysicsMaterial.bounce — together they decide whether the box becomes still, periodic, or chaotic
+## triggers: Low count and low bounce settles to floor; high count with high bounce becomes a pseudo-gas inside the cube
+## emerges: Newton's laws as the engine, visible cube as the stage — the chamber's regularity reveals each ball's path as deviation
+## needs: RigidBody3D physics [has], wireframe cube containment [has], spawn height tuning [has]
+## relationships: Companion to NewtonsLaws — same physics, different demonstration. Both anchor forces/Newton's_Laws map
+## truth: A bounce is not random — it is the moment when constraint becomes visible, when geometry refuses to let the ball pass.
 extends Node3D
 
 @export var ball_count: int = 6

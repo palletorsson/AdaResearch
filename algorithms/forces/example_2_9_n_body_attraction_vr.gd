@@ -5,6 +5,16 @@
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
+#
+# @identity
+# essence: N bodies each attracting every other — O(n²) gravitational sum, classic chaotic dynamics with no closed-form solution
+# desire: To show that two-body solvability vanishes the moment a third body enters — chaos arrives at n=3, not n=∞
+# critical_parameter: body count and gravitational_constant — count gates whether the system can be reasoned about; G scales how fast collapse comes
+# triggers: Three bodies near-equal mass produce sensitive-dependence chaos; one heavy body recovers near-Keplerian orbits for the rest; high G collapses everything to a singular cluster
+# emerges: Self-organization without design — clusters form, eject members, stabilize into binaries; Poincaré's three-body insight lived as motion
+# needs: per-body mass [has], pairwise force computation [has], trails [has], stability tuning [has]
+# relationships: Direct successor to example_2_8_two_body. Anchor in forces/N-Body_and_Chaos. Companion to vector_field_visualizer (field view)
+# truth: Three bodies cannot be solved — they can only be watched. The future is a fact computed forward, not predicted from the past.
 # ===========================================================================
 
 extends Node3D

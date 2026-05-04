@@ -1,4 +1,14 @@
-﻿@tool
+﻿# @identity
+# essence: a 2D grid of mass-spring oscillators where each cell nudges its neighbors via configurable coupling — independent at coupling=0, lattice-locked at high values, with central excitation driving the spectrum
+# desire: to make the player feel that "wave" is not a thing but a relationship — when one oscillator moves, the lattice answers, and standing modes are simply patterns of agreement
+# critical_parameter: coupling_strength — at 0 the grid is independent oscillators; at high values it locks into collective Chladni-like modes; the entire wave spectrum lives on this slider
+# triggers: _physics_process() integrates each cell with its neighbors using natural_frequency and damping_coefficient; excitation_amplitude × excitation_frequency drives the central pulse outward through coupling_range
+# emerges: standing waves on a grid — synchronization fronts, breathing modes, traveling pulses; the lattice becomes a tunable resonance instrument the player can walk into
+# needs: VR walking through the lattice [has]; live coupling-strength slider [missing]; mode-visualization toggle [missing]; apply_grid_config [missing]
+# relationships: pairs with wave_interference, sine_space, and seismograph in wavefunctions as the medium that the others measure or excite; reappears in advancedlaboratory's Systems Theory Laboratory as the keystone artifact
+# truth: a wave is not a particle traveling — it is a pattern of agreement across coupled cells; the lattice IS the medium
+
+@tool
 extends Node3D
 
 # Coupled Oscillator Lattice

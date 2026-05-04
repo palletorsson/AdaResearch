@@ -3,6 +3,16 @@
 # Queer Cylinder Target
 # A dynamic, responsive target practice object celebrating queer aesthetics
 # Features concentric rings in Pride colors arranged like a traditional target face
+#
+# @identity
+# essence: Concentric Pride-color rings on a cylindrical target — hit registration with rippling response and point scoring
+# desire: To turn the target — usually a violent object — into a celebratory and responsive surface; aim becomes greeting
+# critical_parameter: ring count and points_per_hit — they decide how the target reads as flag and as game
+# triggers: Hits anywhere produce ripple feedback; ring stacking reads as Pride flag at rest, target face under aim
+# emerges: The same geometry is two cultural objects depending on intent — flag when still, target when sighted
+# needs: hit detection [has], rippling visual response [has], score signal [has]
+# relationships: Anchor object in forces/Combat_Arena map alongside gravity_gun and vector_normalize_demo
+# truth: A target does not have an inside and an outside — it has a surface that records intentions arriving from elsewhere.
 
 class_name QueerCylinderTarget
 

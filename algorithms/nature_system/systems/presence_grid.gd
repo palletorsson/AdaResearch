@@ -138,6 +138,41 @@ func deposit_from_entity(entity_pos: Vector3, dna_kingdom: int,
 	deposit(entity_pos, dna_kingdom, strength, radius)
 
 
+## Carve presence at a world position — sterilises a region.
+##
+## The opposite of `deposit`. Multiplies every channel at affected cells
+## by (1 - strength * falloff), so strength=1 fully clears at the centre
+## and tapers to no effect at the radius. Used by the biome_paint layer's
+## "-" token (and any future dynamic sterilisation effect).
+##
+## Falloff is quadratic, same shape as deposit, so a paint cell that
+## carves and a paint cell that deposits cancel cleanly when overlapped.
+func carve(world_pos: Vector3, strength: float, radius: float = 2.0) -> void:
+	var grid_pos: Vector2i = _world_to_grid(Vector2(world_pos.x, world_pos.z))
+	var grid_radius: int = ceili(radius / (world_size.x / float(resolution)))
+	if grid_radius <= 0:
+		grid_radius = 1
+	for dy in range(-grid_radius, grid_radius + 1):
+		for dx in range(-grid_radius, grid_radius + 1):
+			var gx: int = grid_pos.x + dx
+			var gy: int = grid_pos.y + dy
+			if gx < 0 or gx >= resolution or gy < 0 or gy >= resolution:
+				continue
+			var dist: float = Vector2(float(dx), float(dy)).length()
+			if dist > float(grid_radius):
+				continue
+			var falloff: float = 1.0 - (dist / float(grid_radius))
+			falloff *= falloff
+			var keep: float = 1.0 - clampf(strength * falloff, 0.0, 1.0)
+			var idx: int = gy * resolution + gx
+			var c: Color = _data[idx]
+			c.r *= keep
+			c.g *= keep
+			c.b *= keep
+			c.a *= keep
+			_data[idx] = c
+
+
 # ═══════════════════════════════════════════════════════════════
 # DECAY — Presence fades over time
 # ═══════════════════════════════════════════════════════════════

@@ -16,6 +16,7 @@ var _particle_mat: ParticleProcessMaterial = null
 # -- Living ground (presence-driven terrain) --
 const _PresenceGridScript = preload("res://algorithms/nature_system/systems/presence_grid.gd")
 const _GroundSpawnerScript = preload("res://algorithms/nature_system/systems/ground_spawner.gd")
+const _BiomePaintTokens = preload("res://algorithms/nature_system/systems/biome_paint_tokens.gd")
 var _living_ground_mesh: MeshInstance3D = null
 var _presence_grid = null  # PresenceGrid instance
 var _ground_spawner = null  # GroundSpawner instance
@@ -329,6 +330,14 @@ func _activate_living_ground(terrain_mode: String, density: float, kingdoms: Arr
 
 	_presence_grid = _PresenceGridScript.new(128, map_size)
 
+	# Seed PresenceGrid from the map's biome_paint layer (if any).
+	# This is the authorial-control half of the biome system: cells the
+	# author painted with f3 / t2 / u4 / etc. become initial deposits.
+	# Diffusion (in PresenceGrid.process) softens the edges over the
+	# next few frames, so blocky cell painting → soft watercolour.
+	if grid_data:
+		_seed_from_biome_paint(grid_data, map_size)
+
 	# Create ground spawner + evolution system for self_generating mode
 	if terrain_mode == "self_generating":
 		var scene_root: Node3D = get_tree().current_scene as Node3D
@@ -393,6 +402,60 @@ func _activate_living_ground(terrain_mode: String, density: float, kingdoms: Arr
 			current.add_child(_living_ground_mesh)
 
 	_living_ground_active = true
+
+
+## Seed PresenceGrid from map_data.layers.biome_paint, if present.
+##
+## Reads the biome_paint 2D string array, parses each cell with
+## BiomePaintTokens, and calls _presence_grid.deposit() at the cell's
+## world centre. The cube_size determines world coords; deposit radius
+## is one cube so blobs fit in their cell, and PresenceGrid's diffusion
+## softens edges over the next few frames.
+##
+## Called once at activation. Future paint changes (live editing) would
+## need a separate "re-seed" call — out of scope for v1.
+func _seed_from_biome_paint(grid_data: GridDataComponent, _map_size: Vector2) -> void:
+	if not _presence_grid:
+		return
+	if not grid_data.has_method("get_biome_paint_layer"):
+		return
+	var paint: Array = grid_data.get_biome_paint_layer()
+	if paint.is_empty():
+		return  # no paint layer — keep stage default behaviour
+
+	var cube_size: float = float(grid_data.get_settings().get("cube_size", 1.0))
+	# Map origin: GridStructure centres each cell at (x*cube, _, z*cube)
+	# with the *whole* grid centred on world origin via NatureRenderer's
+	# living-ground mesh. The map_size = (W*cube, D*cube). Each cell
+	# (x, z) in grid coords maps to world ( (x - W/2 + 0.5)*cube,
+	# 0, (z - D/2 + 0.5)*cube ).
+	var dims: Vector3i = grid_data.get_grid_dimensions()
+	var W: int = dims.x
+	var D: int = dims.z
+	var x0: float = -float(W) * cube_size * 0.5 + cube_size * 0.5
+	var z0: float = -float(D) * cube_size * 0.5 + cube_size * 0.5
+
+	var painted := _BiomePaintTokens.iter_painted_cells(paint)
+	var deposit_count: int = 0
+	var carve_count: int = 0
+	for cell in painted:
+		var cx: int = int(cell.get("x", 0))
+		var cz: int = int(cell.get("z", 0))
+		var world_pos := Vector3(x0 + cx * cube_size, 0.0, z0 + cz * cube_size)
+		if cell.get("sterile", false):
+			# "-" token: clear all kingdoms at this cell with full strength.
+			_presence_grid.carve(world_pos, 1.0, cube_size)
+			carve_count += 1
+			continue
+		var k: int = int(cell.get("kingdom", -1))
+		var s: float = float(cell.get("strength", 0.0))
+		if k < 0 or s <= 0.0:
+			continue
+		_presence_grid.deposit(world_pos, k, s, cube_size)
+		deposit_count += 1
+	if deposit_count + carve_count > 0:
+		print("NatureRenderer: seeded biome_paint — %d deposits, %d carves across %dx%d"
+			% [deposit_count, carve_count, W, D])
 
 
 func _deactivate_living_ground() -> void:

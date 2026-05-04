@@ -5,6 +5,16 @@
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
+#
+# @identity
+# essence: Two bodies pulling each other via inverse-square gravitation, producing closed orbits, escapes, or collisions
+# desire: To make the two-body problem visible — Kepler's elliptical solution emerges from F = G·m₁·m₂/r² applied symmetrically
+# critical_parameter: gravitational_constant and initial tangential velocity — together they decide circular, elliptical, parabolic, or hyperbolic
+# triggers: Low velocity collapses bodies into each other; tuned velocity yields stable ellipse; high velocity becomes escape trajectory
+# emerges: Conic sections appear without being coded — the orbit shape is not chosen, it is what the algebra of mutual attraction does
+# needs: per-body mass [has], inverse-square attraction force [has], trail visualization [has]
+# relationships: Bridge between forces/Newton's_Laws (single-body) and example_2_9_n_body (chaotic many-body). Anchor in forces/N-Body_and_Chaos
+# truth: An orbit is not a path drawn around a center — it is the trajectory two bodies negotiate when neither wants to let the other go.
 # ===========================================================================
 
 extends Node3D

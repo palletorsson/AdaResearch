@@ -1,5 +1,15 @@
 # gravity_gun_test_scene.gd
 # Test scene with 10 shootable spheres for gravity gun testing
+#
+# @identity
+# essence: An arrangement of shootable spheres — grid, circle, or pyramid — providing physics targets for the gravity gun
+# desire: To give the player something to push, throw, knock — to make the abstract gravity gun palpable through impact and rearrangement
+# critical_parameter: spawn_pattern and spawn_count — pattern decides whether the arrangement reads as wall, ring, or stack; count decides intensity
+# triggers: Grid pattern produces brick wall feel; circle gives ring-toss-like target; pyramid stacks for cascade physics
+# emerges: A simple arrangement of physics objects becomes a stage for vector practice — every shot is a vector being applied at a point
+# needs: configurable spawn patterns [has], physics-active spheres [has], reset on map enter [has]
+# relationships: Stage for gravity_gun in forces/Combat_Arena. Companion to queer_cylinder_target (the named goal among the spheres)
+# truth: A test scene is not a placeholder — it is the rehearsal where physics learns its part before the player arrives.
 extends Node3D
 
 const SHOOTABLE_SPHERE = preload("res://algorithms/vectors/08_vector_throwing/destructibles/shootable_sphere.tscn")

@@ -1,5 +1,15 @@
 ## Newton's Laws — Three balls under different force conditions
 ## Uses Godot's built-in RigidBody3D physics. No manual gravity or collision.
+##
+## @identity
+## essence: Side-by-side comparison of three rigid bodies under different applied forces — gravity-only, lateral push, oscillating force
+## desire: To make Newton's three laws visible at once: inertia, F=ma, equal-and-opposite reactions arriving as visible motion
+## critical_parameter: applied_force_strength — the magnitude knob that decides whether differences are subtle or dramatic
+## triggers: Low force shows all three balls behaving similarly under gravity; high force separates inertial from forced behavior visibly
+## emerges: Watching three balls together reveals laws as relations, not isolated rules — the third ball moves only because the others do not
+## needs: RigidBody3D physics [has], force/velocity arrows [has], grid config for force tuning [has]
+## relationships: Anchor artifact for forces/Newton's_Laws map. Companion to bouncingball, friction_ramp, and the example_2_* NOC ports
+## truth: A law is not a rule about one body — it is a constraint on what relations between bodies are allowed.
 extends Node3D
 
 @export var applied_force_strength: float = 5.0

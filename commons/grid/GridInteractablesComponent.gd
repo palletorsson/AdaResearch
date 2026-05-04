@@ -223,12 +223,20 @@ func _load_single_artifact_registry(registry_path: String, validation_errors: Ar
 
 		var raw_scene_path := str(normalized_artifact_data.get("scene", "")).strip_edges()
 		var scene_path := _normalize_artifact_scene_path(raw_scene_path)
+		# delegate_to: entries without `scene` are still valid if they
+		# delegate to another registered artifact. The actual scene is
+		# resolved at instantiation time via _resolve_artifact_scene_for_loading.
+		var has_delegate := str(normalized_artifact_data.get("delegate_to", "")).strip_edges() != ""
 		if scene_path.is_empty():
-			scene_path = ARTIFACT_PLACEHOLDER_SCENE_PATH
-			normalized_artifact_data["scene"] = scene_path
-			normalized_artifact_data["artifact_type"] = "placeholder"
-			normalized_artifact_data["placeholder_reason"] = "missing_scene_path"
-			validation_warnings.append("Artifact '%s' missing scene in %s (using placeholder)" % [lookup_name, registry_path])
+			if has_delegate:
+				# Skip the placeholder substitution — keep delegate_to in the entry.
+				pass
+			else:
+				scene_path = ARTIFACT_PLACEHOLDER_SCENE_PATH
+				normalized_artifact_data["scene"] = scene_path
+				normalized_artifact_data["artifact_type"] = "placeholder"
+				normalized_artifact_data["placeholder_reason"] = "missing_scene_path"
+				validation_warnings.append("Artifact '%s' missing scene in %s (using placeholder)" % [lookup_name, registry_path])
 		else:
 			normalized_artifact_data["scene"] = scene_path
 			if scene_path != raw_scene_path:
@@ -310,6 +318,34 @@ func _get_artifact_info_or_placeholder(lookup_name: String) -> Dictionary:
 
 func _resolve_artifact_scene_for_loading(lookup_name: String, artifact_info: Dictionary) -> Dictionary:
 	var resolved_info: Dictionary = artifact_info.duplicate(true)
+
+	# delegate_to support: when an artifact entry has delegate_to set, it
+	# means "instantiate this OTHER artifact and pass me's delegate_params
+	# as config." Used by /dna-promoted findings: a registry entry that
+	# names an existing builder and supplies the per-instance parameters
+	# without requiring per-finding scenes or central dispatchers.
+	#
+	# Example registry entry:
+	#   "dna_facade_classical": {
+	#     "delegate_to": "facade_builder",
+	#     "delegate_params": { "preset": "classical" },
+	#     ...
+	#   }
+	if resolved_info.has("delegate_to"):
+		var target_lookup: String = String(resolved_info.get("delegate_to", "")).strip_edges()
+		if not target_lookup.is_empty() and grid_artifact_registry.has(target_lookup):
+			var target_info: Dictionary = grid_artifact_registry[target_lookup].duplicate(true)
+			# Capture the delegated params for downstream config-data merge.
+			var delegate_params: Variant = resolved_info.get("delegate_params", {})
+			if delegate_params is Dictionary:
+				target_info["__delegate_params__"] = delegate_params
+			# Preserve identity from the original entry (so labels still read
+			# right in the inspector / catalog), but use the target's scene.
+			target_info["__delegated_from__"] = lookup_name
+			if resolved_info.has("name"):
+				target_info["name"] = resolved_info["name"]
+			resolved_info = target_info
+
 	var scene_path := _normalize_artifact_scene_path(str(resolved_info.get("scene", "")).strip_edges())
 	
 	if scene_path.is_empty():
@@ -370,8 +406,34 @@ func initialize(grid_parent: Node3D, struct_component: GridStructureComponent, u
 	
 	print("GridInteractablesComponent: Initialized with cube_size=%f, gutter=%f" % [cube_size, gutter])
 
+## Read a runtime flag from ada_run/runtime_flags.json. Mirrors GridSystem's
+## helper so we can suppress interactable spawning during clean captures
+## without depending on GridSystem's lifetime.
+func _runtime_flag_enabled(flag_name: String, default_value: bool) -> bool:
+	var path := "res://ada_run/runtime_flags.json"
+	if not FileAccess.file_exists(path):
+		return default_value
+	var f := FileAccess.open(path, FileAccess.READ)
+	if not f: return default_value
+	var raw := f.get_as_text()
+	f.close()
+	var json := JSON.new()
+	if json.parse(raw) != OK: return default_value
+	var data = json.data
+	if data is Dictionary and data.has(flag_name):
+		return bool(data[flag_name])
+	return default_value
+
+
 # Generate interactables from data using lookup_name system
 func generate_interactables(interactable_data):
+	# Capture-mode bypass: skip spawning entire artifact layer when the
+	# encyclopedia capture wrapper sets artifacts_enabled=false. This
+	# leaves the cube grid visible without huge artifacts (pillar carpets,
+	# rainbow arcs, etc.) flooding the frame.
+	if not _runtime_flag_enabled("artifacts_enabled", true):
+		print("GridInteractablesComponent: artifacts_enabled=false — skipping interactable spawn")
+		return
 	if not interactable_data:
 		print("GridInteractablesComponent: No interactable data provided")
 		return
@@ -804,9 +866,17 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	# Connect signals if artifact has them
 	_connect_artifact_signals(artifact_object, lookup_name)
 	
-	if not config_data.is_empty():
-		_apply_artifact_config(artifact_object, config_data, lookup_name)
-	
+	# Merge delegated params (from delegate_to entries) into config_data —
+	# delegate_params first, then any per-token overrides win.
+	var delegate_params: Variant = artifact_info.get("__delegate_params__", null)
+	var merged_config: Dictionary = {}
+	if delegate_params is Dictionary:
+		merged_config = (delegate_params as Dictionary).duplicate(true)
+	for k in config_data.keys():
+		merged_config[k] = config_data[k]
+	if not merged_config.is_empty():
+		_apply_artifact_config(artifact_object, merged_config, lookup_name)
+
 	# Apply map-wide palette if available
 	if current_palette != "":
 		_try_set_property(artifact_object, "default_palette", current_palette)
@@ -836,11 +906,16 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	if parent_node.get_tree() and parent_node.get_tree().edited_scene_root:
 		artifact_object.owner = parent_node.get_tree().edited_scene_root
 
-	# Auto-ground: shift artifact up so geometry sits at/above grid surface.
-	# Uses call_deferred so _ready() has fired and procedural geometry exists.
+	# Auto-ground DISABLED (2026-05-03): the feature was silently lifting
+	# artifacts whose AABB extended below origin (particle systems with
+	# large visibility radii, lights with negative-Y direction, etc.) by
+	# meters at runtime — a 4m lift on becoming_catalyst was the trigger.
+	# Artifacts now use whatever position the grid composer + their own
+	# _ready() agreed on. If a specific artifact needs lifting, opt IN
+	# explicitly with `auto_ground: true` in its registry entry.
 	if artifact_object is Node3D:
-		var skip_ground: bool = artifact_info.get("no_auto_ground", false)
-		if not skip_ground:
+		var want_ground: bool = artifact_info.get("auto_ground", false)
+		if want_ground:
 			call_deferred("_auto_ground_artifact", artifact_object, lookup_name)
 
 # Handle successful placement
@@ -1475,6 +1550,13 @@ func print_artifact_registry_status():
 # After an artifact is added to the scene tree (and _ready() has fired), compute
 # its AABB and shift it up so the bottom of its geometry sits at the grid surface
 # rather than clipping below.
+#
+# (Reverted the brief 2026-05-03 symmetric-grounding experiment — GPU particle
+# systems on procedural artifacts like the catalyst have arbitrary visibility
+# AABBs that confused the "shift down" logic and pushed artifacts meters into
+# the air. The conservative "only ever lift up" behavior is the documented
+# convention; floating-look issues should be solved with plinth structure
+# cubes, not with grid-side auto-correction.)
 
 ## Deferred callback: computes AABB, shifts artifact up if min_y < 0.
 func _auto_ground_artifact(artifact: Node3D, lookup_name: String) -> void:

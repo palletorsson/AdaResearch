@@ -10,6 +10,16 @@
 #   - VR slider controls and apply_grid_config()
 #
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
+#
+# @identity
+# essence: Forces as accumulating vectors — wind pushes, drag opposes, orbits emerge from radial attraction plus tangent velocity
+# desire: To translate Shiffman's 2D Processing forces sketch into VR space, preserving the algorithm while making vectors graspable
+# critical_parameter: drag and orbital_radius — drag chooses whether forces accumulate or settle; radius shifts orbit shape from circle to ellipse
+# triggers: Zero drag gives runaway acceleration; high drag stalls motion into terminal velocity; orbit radius too small produces capture, too large produces escape
+# emerges: A small set of independent force functions composes into trajectories that feel intentional, like physics knows what it wants
+# needs: vector force accumulation [has], drag and gravity [has], orbital mechanics [has], VR sliders [has]
+# relationships: NOC Ch.2 anchor artifact in forces/Newton's_Laws map. Companion to example_2_2_forces_mass_variation_vr (mass added)
+# truth: A force is not a thing that pushes — it is a vector you decide to add. The motion is what the addition becomes over time.
 # ===========================================================================
 
 extends Node3D

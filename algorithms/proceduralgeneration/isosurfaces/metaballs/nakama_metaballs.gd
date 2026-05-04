@@ -3,6 +3,16 @@
 
 extends Node3D
 
+# @identity
+# essence: Kouhei-Nakama-inspired organic metaball field — 60 spheres arranged in a circular distribution drift through Perlin-driven motion, their summed radial falloffs producing a clustered creature-like surface
+# desire: to render the soft-body aesthetic of organic clusters — not a tree, not a crowd, but a single moving organism made of many bodies that have not quite separated from each other
+# critical_parameter: surface_threshold — controls where the iso-level is read; lower thresholds make the field bleed wider (one creature), higher thresholds reveal individual spheres (many creatures)
+# triggers: time advancement moves each metaball along its noise-driven trajectory; new metaball positions push the iso-surface into different shapes each frame; movement_speed scales the temporal evolution
+# emerges: 60 independent moving spheres look like one breathing creature — the metaball summation hides the discrete origins, producing the visual signature of organic-but-artificial that defines the Nakama aesthetic
+# needs: FastNoiseLite [resolved], ShaderMaterial [resolved], DirectionalLight3D [resolved]
+# relationships: artistic counterpart to raymarched_metaballs — same metaball math, but the parameter choices target an organic aesthetic rather than a clean mathematical demonstration; sibling to metaball_world and metaball_generator
+# truth: a single organism is what a crowd looks like when the field between bodies is dense enough — bodies stop being separate things and become one thing made of many positions
+
 # Configuration
 @export var num_metaballs = 60
 @export var container_size = Vector3(5.0, 5.0, 5.0)
