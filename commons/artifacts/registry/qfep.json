@@ -3,13 +3,13 @@
 		"lambda_slider": {
 			"name": "Lambda Slider",
 			"lookup_name": "lambda_slider",
-			"description": "QFEP λ parameter controller. The entropy drive dial: λ=0 (pure order) → λ=0.4 (edge of chaos) → λ=1 (dissolution). Grab and slide to tune how much a system values disorder vs order. Life exists at λ ≈ 0.3-0.5.",
+			"description": "QFEP \u03bb parameter controller. The entropy drive dial: \u03bb=0 (pure order) \u2192 \u03bb=0.4 (edge of chaos) \u2192 \u03bb=1 (dissolution). Grab and slide to tune how much a system values disorder vs order. Life exists at \u03bb \u2248 0.3-0.5.",
 			"scene": "res://commons/interfaces/qfep/lambda_slider.tscn",
 			"category": "qfep",
 			"interaction": "grab_slide",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_controller",
-			"qfep_term": "λ",
+			"qfep_term": "\u03bb",
 			"capacity": "TUNE entropy drive",
 			"dev_themes": [
 				"qfep",
@@ -90,18 +90,51 @@
 					"paired"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"aabb_center": [
+					0.25,
+					0.12,
+					0.0
+				],
+				"grid_cells": [
+					8.0,
+					8.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				8.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"phi_slider": {
 			"name": "Phi Slider",
 			"lookup_name": "phi_slider",
-			"description": "QFEP φ parameter controller. Rate of entropy change sensitivity: φ<0 (resists change) → φ=0 (neutral) → φ>0 (embraces change). Positive φ is the queer signature—valuing becoming over being.",
+			"description": "QFEP \u03c6 parameter controller. Rate of entropy change sensitivity: \u03c6<0 (resists change) \u2192 \u03c6=0 (neutral) \u2192 \u03c6>0 (embraces change). Positive \u03c6 is the queer signature\u2014valuing becoming over being.",
 			"scene": "res://commons/interfaces/qfep/phi_slider.tscn",
 			"category": "qfep",
 			"interaction": "grab_slide",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_controller",
-			"qfep_term": "φΔE(S,t)",
+			"qfep_term": "\u03c6\u0394E(S,t)",
 			"capacity": "TUNE rate sensitivity",
 			"dev_themes": [
 				"qfep",
@@ -183,12 +216,45 @@
 					"paired"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"aabb_center": [
+					0.25,
+					0.12,
+					0.0
+				],
+				"grid_cells": [
+					8.0,
+					8.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				8.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"qfep_formula_3d": {
 			"name": "QFEP Formula 3D",
 			"lookup_name": "qfep_formula_3d",
-			"description": "3D visualization of the complete QFEP formula: QFE = F − λE(S) + φΔE(S,t). Each term glows with its signature color. Responds to lambda and phi slider changes. The theoretical anchor.",
+			"description": "3D visualization of the complete QFEP formula: QFE = F \u2212 \u03bbE(S) + \u03c6\u0394E(S,t). Each term glows with its signature color. Responds to lambda and phi slider changes. The theoretical anchor.",
 			"scene": "res://commons/interfaces/qfep/formula_display/qfep_formula_3d.tscn",
 			"category": "qfep",
 			"interaction": "observe",
@@ -271,6 +337,39 @@
 					"phi_slider"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.09,
+					0.14,
+					0.02
+				],
+				"aabb_center": [
+					-0.25,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 2.09,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"qfep_sandbox_console": {
@@ -355,18 +454,51 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"aabb_center": [
+					0.0,
+					0.38,
+					0.06
+				],
+				"grid_cells": [
+					8.0,
+					8.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				8.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"bifurcation_walkway": {
 			"name": "Bifurcation Walkway",
 			"lookup_name": "bifurcation_walkway",
-			"description": "A corridor where your position = r parameter in the logistic map. Walk through the phase transition: stable → period doubling → chaos → windows of order. The bifurcation diagram made walkable.",
+			"description": "A corridor where your position = r parameter in the logistic map. Walk through the phase transition: stable \u2192 period doubling \u2192 chaos \u2192 windows of order. The bifurcation diagram made walkable.",
 			"scene": "res://commons/interfaces/qfep/bifurcation_walkway.tscn",
 			"category": "qfep",
 			"interaction": "walk_through",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "λ",
+			"qfep_term": "\u03bb",
 			"capacity": "WALK phase transition",
 			"status": "planned",
 			"dev_themes": [
@@ -397,7 +529,7 @@
 				],
 				"size_group": "environment"
 			},
-			"qfep_connection": "The logistic map's r parameter IS the Î» drive. At râ‰ˆ3.57, chaos begins â€” this is Î»_edge, where life exists. You walk through the phase space of orderâ†’chaos.",
+			"qfep_connection": "The logistic map's r parameter IS the \u00ce\u00bb drive. At r\u00e2\u2030\u02c63.57, chaos begins \u00e2\u20ac\u201d this is \u00ce\u00bb_edge, where life exists. You walk through the phase space of order\u00e2\u2020\u2019chaos.",
 			"geometry_spec": {
 				"mesh_type": "instanced_particles",
 				"topology": "scattered",
@@ -454,12 +586,45 @@
 					"depends"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					12.07,
+					3.05,
+					2.02
+				],
+				"aabb_center": [
+					6.0,
+					1.48,
+					0.0
+				],
+				"grid_cells": [
+					13.0,
+					3.0
+				],
+				"max_dimension_m": 12.07,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				13.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"edge_of_chaos_orb": {
 			"name": "Edge of Chaos Orb",
 			"lookup_name": "edge_of_chaos_orb",
-			"description": "A sphere that visualizes the current QFEP state. Color and behavior shift based on global λ and φ values. Green and dancing when at the edge of chaos (λ≈0.4, φ>0).",
+			"description": "A sphere that visualizes the current QFEP state. Color and behavior shift based on global \u03bb and \u03c6 values. Green and dancing when at the edge of chaos (\u03bb\u22480.4, \u03c6>0).",
 			"scene": "res://commons/interfaces/qfep/edge_of_chaos_orb.tscn",
 			"category": "qfep",
 			"interaction": "observe",
@@ -536,6 +701,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"aabb_center": [
+					0.0,
+					0.7,
+					0.0
+				],
+				"grid_cells": [
+					8.0,
+					8.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				8.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"grab_sphere_F": {
@@ -617,6 +815,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.02,
+					0.02,
+					0.02
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"grab_sphere_E": {
@@ -698,12 +929,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.02,
+					0.02,
+					0.02
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"grab_sphere_lambda": {
 			"name": "Lambda Term Sphere",
 			"lookup_name": "grab_sphere_lambda",
-			"description": "Grabbable sphere representing λ (lambda) - the entropy drive parameter. Green glow.",
+			"description": "Grabbable sphere representing \u03bb (lambda) - the entropy drive parameter. Green glow.",
 			"scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
 			"category": "qfep",
 			"default_params": {
@@ -712,7 +976,7 @@
 			"interaction": "grab",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_term",
-			"qfep_term": "λ",
+			"qfep_term": "\u03bb",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
@@ -779,12 +1043,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.02,
+					0.02,
+					0.02
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"grab_sphere_phi": {
 			"name": "Phi Term Sphere",
 			"lookup_name": "grab_sphere_phi",
-			"description": "Grabbable sphere representing φ (phi) - the rate sensitivity, the queer signature. Magenta glow.",
+			"description": "Grabbable sphere representing \u03c6 (phi) - the rate sensitivity, the queer signature. Magenta glow.",
 			"scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
 			"category": "qfep",
 			"default_params": {
@@ -793,7 +1090,7 @@
 			"interaction": "grab",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_term",
-			"qfep_term": "φ",
+			"qfep_term": "\u03c6",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
@@ -859,6 +1156,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.02,
+					0.02,
+					0.02
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"qfep_reactor": {
@@ -951,6 +1281,39 @@
 					"connects"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					8.0,
+					8.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				8.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"entropy_meter": {
@@ -1037,6 +1400,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.18,
+					0.6,
+					0.16
+				],
+				"aabb_center": [
+					0.01,
+					0.3,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"edge_detector": {
@@ -1048,7 +1444,7 @@
 			"interaction": "grab",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_tool",
-			"qfep_term": "λ",
+			"qfep_term": "\u03bb",
 			"capacity": "DETECT edge of chaos",
 			"include_in_map_data": true,
 			"map_ready": true,
@@ -1122,18 +1518,51 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.06,
+					0.29,
+					0.04
+				],
+				"aabb_center": [
+					0.0,
+					0.07,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.29,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"phase_cube": {
 			"name": "Phase Cube",
 			"lookup_name": "phase_cube",
-			"description": "A cube that shows phase transitions. SOLID (crystal, λ<0.25) → COMPLEX (edge, 0.25<λ<0.55) → GAS (dissolution, λ>0.55). Visual metaphor for matter states as QFEP states.",
+			"description": "A cube that shows phase transitions. SOLID (crystal, \u03bb<0.25) \u2192 COMPLEX (edge, 0.25<\u03bb<0.55) \u2192 GAS (dissolution, \u03bb>0.55). Visual metaphor for matter states as QFEP states.",
 			"scene": "res://commons/interfaces/qfep/phase_cube.tscn",
 			"category": "qfep",
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "λ",
+			"qfep_term": "\u03bb",
 			"capacity": "SEE phase transitions",
 			"include_in_map_data": true,
 			"map_ready": true,
@@ -1210,6 +1639,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					8.0,
+					8.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				8.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"qfep_oscilloscope": {
@@ -1295,12 +1757,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.84,
+					0.44,
+					0.06
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.01
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.84,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"reactive_particle_field": {
 			"name": "Reactive Particle Field",
 			"lookup_name": "reactive_particle_field",
-			"description": "A field of 100 particles that respond to lambda and phi. Low λ: ordered grid. Edge λ: swirling dance. High λ: chaotic swarm. Phi affects dynamics. The formula made physical.",
+			"description": "A field of 100 particles that respond to lambda and phi. Low \u03bb: ordered grid. Edge \u03bb: swirling dance. High \u03bb: chaotic swarm. Phi affects dynamics. The formula made physical.",
 			"scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
 			"category": "qfep",
 			"interaction": "observe",
@@ -1372,12 +1867,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.96,
+					1.53,
+					2.02
+				],
+				"aabb_center": [
+					0.01,
+					0.0,
+					-0.02
+				],
+				"grid_cells": [
+					2.0,
+					3.0
+				],
+				"max_dimension_m": 2.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"crystal_cluster": {
 			"name": "Crystal Cluster",
 			"lookup_name": "crystal_cluster",
-			"description": "Ordered crystalline formation representing λ=0 (pure order). Alias for crystalcluster primitive.",
+			"description": "Ordered crystalline formation representing \u03bb=0 (pure order). Alias for crystalcluster primitive.",
 			"scene": "res://commons/primitives/crystalcluster/crystalcluster.tscn",
 			"category": "qfep",
 			"interaction": "observe",
@@ -1442,12 +1970,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.9,
+					0.69,
+					0.7
+				],
+				"aabb_center": [
+					-0.01,
+					-0.01,
+					-0.04
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"reactive_particles": {
 			"name": "Reactive Particles",
 			"lookup_name": "reactive_particles",
-			"description": "Alias for reactive_particle_field. Particles that respond to λ and φ parameters.",
+			"description": "Alias for reactive_particle_field. Particles that respond to \u03bb and \u03c6 parameters.",
 			"scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
 			"category": "qfep",
 			"interaction": "observe",
@@ -1513,12 +2074,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.03,
+					1.55,
+					2.02
+				],
+				"aabb_center": [
+					0.01,
+					0.01,
+					-0.01
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.03,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"crystal_formation": {
 			"name": "Crystal Formation",
 			"lookup_name": "crystal_formation",
-			"description": "Ordered crystal cluster for λ=0 zone. Pure order, frozen pattern.",
+			"description": "Ordered crystal cluster for \u03bb=0 zone. Pure order, frozen pattern.",
 			"scene": "res://commons/primitives/crystalcluster/crystalcluster.tscn",
 			"category": "qfep",
 			"default_params": {
@@ -1586,12 +2180,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.74,
+					0.67,
+					0.8
+				],
+				"aabb_center": [
+					-0.08,
+					-0.06,
+					0.02
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"edge_particles": {
 			"name": "Edge Particles",
 			"lookup_name": "edge_particles",
-			"description": "Particles at the edge of chaos (λ≈0.4). Dancing, self-organizing, alive.",
+			"description": "Particles at the edge of chaos (\u03bb\u22480.4). Dancing, self-organizing, alive.",
 			"scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
 			"category": "qfep",
 			"default_params": {
@@ -1600,7 +2227,7 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "λ",
+			"qfep_term": "\u03bb",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
@@ -1662,6 +2289,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.04,
+					1.54,
+					2.02
+				],
+				"aabb_center": [
+					-0.01,
+					0.0,
+					-0.02
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.04,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"emergence_zone": {
@@ -1739,6 +2399,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.05,
+					1.53,
+					2.05
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.05,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"random_cubes": {
@@ -1820,6 +2513,39 @@
 					"paired"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.03,
+					0.99,
+					1.98
+				],
+				"aabb_center": [
+					0.04,
+					0.51,
+					0.02
+				],
+				"grid_cells": [
+					3.0,
+					2.0
+				],
+				"max_dimension_m": 2.03,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"particle_chaos": {
@@ -1903,12 +2629,45 @@
 					"random_cubes"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					8.0,
+					8.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				8.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"ordered_grid": {
 			"name": "Ordered Grid",
 			"lookup_name": "ordered_grid",
-			"description": "Perfectly aligned cube grid representing low λ. Order, predictability, rigidity.",
+			"description": "Perfectly aligned cube grid representing low \u03bb. Order, predictability, rigidity.",
 			"scene": "res://commons/interfaces/qfep/ordered_grid.tscn",
 			"category": "qfep",
 			"interaction": "observe",
@@ -1983,12 +2742,45 @@
 					"random_cubes"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.44,
+					0.2,
+					0.44
+				],
+				"aabb_center": [
+					0.0,
+					0.06,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.44,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.233795Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"chaos_particles": {
 			"name": "Chaos Particles",
 			"lookup_name": "chaos_particles",
-			"description": "λ=1 dissolution zone. Particles exploding outward, no coherence, pure entropy.",
+			"description": "\u03bb=1 dissolution zone. Particles exploding outward, no coherence, pure entropy.",
 			"scene": "res://commons/interfaces/qfep/chaos_particles.tscn",
 			"category": "qfep",
 			"interaction": "observe",
@@ -2061,12 +2853,45 @@
 					"paired"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					8.0,
+					8.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				8.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"dissolving_form": {
 			"name": "Dissolving Form",
 			"lookup_name": "dissolving_form",
-			"description": "A mesh that appears to dissolve/disintegrate. High λ territory.",
+			"description": "A mesh that appears to dissolve/disintegrate. High \u03bb territory.",
 			"scene": "res://commons/interfaces/qfep/dissolving_form.tscn",
 			"category": "qfep",
 			"interaction": "observe",
@@ -2142,6 +2967,39 @@
 					"paired"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.6,
+					0.6,
+					0.6
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"complexity_pattern": {
@@ -2153,7 +3011,7 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "λ",
+			"qfep_term": "\u03bb",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
@@ -2224,6 +3082,39 @@
 					"cellular"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.64,
+					0.03,
+					0.64
+				],
+				"aabb_center": [
+					-0.02,
+					0.0,
+					-0.02
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.64,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"turing_pattern": {
@@ -2235,7 +3126,7 @@
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "λ",
+			"qfep_term": "\u03bb",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
@@ -2305,12 +3196,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.8,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 2,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"edge_core": {
 			"name": "Edge Core",
 			"lookup_name": "edge_core",
-			"description": "Central orb for edge of chaos. Pulsing, alive, responsive to λ.",
+			"description": "Central orb for edge of chaos. Pulsing, alive, responsive to \u03bb.",
 			"scene": "res://commons/interfaces/qfep/edge_core.tscn",
 			"category": "qfep",
 			"interaction": "observe",
@@ -2389,18 +3313,51 @@
 					"ordered_grid"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					8.0,
+					8.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				8.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"rigid_sculpture": {
 			"name": "Rigid Sculpture",
 			"lookup_name": "rigid_sculpture",
-			"description": "Static crystalline form for φ<0 zone. Resists change.",
+			"description": "Static crystalline form for \u03c6<0 zone. Resists change.",
 			"scene": "res://commons/interfaces/qfep/rigid_sculpture.tscn",
 			"category": "qfep",
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "φ",
+			"qfep_term": "\u03c6",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
@@ -2468,18 +3425,51 @@
 					"represents"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.54,
+					0.56,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.56,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"fluid_form": {
 			"name": "Fluid Form",
 			"lookup_name": "fluid_form",
-			"description": "Morphing iridescent form for φ>0 zone. Embraces becoming.",
+			"description": "Morphing iridescent form for \u03c6>0 zone. Embraces becoming.",
 			"scene": "res://commons/interfaces/qfep/fluid_form.tscn",
 			"category": "qfep",
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "φ",
+			"qfep_term": "\u03c6",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
@@ -2546,18 +3536,51 @@
 					"paired"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.8,
+					0.8
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"preserved_pattern": {
 			"name": "Preserved Pattern",
 			"lookup_name": "preserved_pattern",
-			"description": "Static checkerboard that never changes. Conservative φ<0.",
+			"description": "Static checkerboard that never changes. Conservative \u03c6<0.",
 			"scene": "res://commons/interfaces/qfep/preserved_pattern.tscn",
 			"category": "qfep",
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "φ",
+			"qfep_term": "\u03c6",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
@@ -2622,18 +3645,51 @@
 					"represents"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.35,
+					0.03,
+					0.35
+				],
+				"aabb_center": [
+					-0.03,
+					0.0,
+					-0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.35,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"transforming_pattern": {
 			"name": "Transforming Pattern",
 			"lookup_name": "transforming_pattern",
-			"description": "Constantly evolving wave pattern. Queer φ>0 signature.",
+			"description": "Constantly evolving wave pattern. Queer \u03c6>0 signature.",
 			"scene": "res://commons/interfaces/qfep/transforming_pattern.tscn",
 			"category": "qfep",
 			"interaction": "observe",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "qfep_visualization",
-			"qfep_term": "φ",
+			"qfep_term": "\u03c6",
 			"include_in_map_data": true,
 			"map_ready": true,
 			"map_sequences": [
@@ -2701,6 +3757,39 @@
 					"paired"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.35,
+					0.02,
+					0.35
+				],
+				"aabb_center": [
+					-0.03,
+					0.0,
+					-0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.35,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"earths_delight": {
@@ -2785,6 +3874,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					60.56,
+					29.09,
+					59.51
+				],
+				"aabb_center": [
+					-0.44,
+					1.25,
+					0.56
+				],
+				"grid_cells": [
+					61.0,
+					60.0
+				],
+				"max_dimension_m": 60.56,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 90,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"PipilottiRistWorld": {
@@ -2871,6 +3988,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.59,
+					10.0,
+					13.23
+				],
+				"aabb_center": [
+					-0.06,
+					0.01,
+					-0.04
+				],
+				"grid_cells": [
+					11.0,
+					14.0
+				],
+				"max_dimension_m": 13.23,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"science_desk": {
@@ -2950,6 +4095,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.6,
+					1.45,
+					0.9
+				],
+				"aabb_center": [
+					0.0,
+					0.18,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 2.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"science_glasses": {
@@ -3031,6 +4204,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.9,
+					1.04,
+					1.24
+				],
+				"aabb_center": [
+					-0.01,
+					0.5,
+					0.3
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"fuzzy_cloud": {
@@ -3110,6 +4311,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					21.0,
+					14.04,
+					23.13
+				],
+				"aabb_center": [
+					0.0,
+					4.53,
+					-1.07
+				],
+				"grid_cells": [
+					21.0,
+					24.0
+				],
+				"max_dimension_m": 23.13,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"edge_of_chaos_unlocked": {
@@ -3204,6 +4433,39 @@
 					"withholds"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.09,
+					1.57,
+					0.39
+				],
+				"aabb_center": [
+					0.25,
+					0.79,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 2.09,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 6,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"AnickaYiLab": {
@@ -3286,12 +4548,40 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.0,
+					3.0,
+					4.0
+				],
+				"aabb_center": [
+					0.0,
+					1.4,
+					0.0
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 4.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"snap_tetra_puzzle": {
 			"name": "Snap Tetra Puzzle",
 			"lookup_name": "snap_tetra_puzzle",
-			"description": "Snap-point tetrahedron assembly puzzle. Represents constraint satisfaction and ordered structure — how Free Energy minimization drives systems toward specific geometric configurations.",
+			"description": "Snap-point tetrahedron assembly puzzle. Represents constraint satisfaction and ordered structure \u2014 how Free Energy minimization drives systems toward specific geometric configurations.",
 			"scene": "res://commons/primitives/snappoint/puzzles/snap_tetrahedron_puzzle.tscn",
 			"category": "qfep",
 			"interaction": "grab_snap",
@@ -3321,19 +4611,52 @@
 					"triangle_line_puzzle"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.41,
+					0.21
+				],
+				"aabb_center": [
+					0.0,
+					0.55,
+					0.04
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.41,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"snap_cube_puzzle": {
 			"name": "Snap Cube Puzzle",
 			"lookup_name": "snap_cube_puzzle",
-			"description": "Snap-point octahedral assembly puzzle. Represents ordered structure and constraint — the crystalline end state of a system minimizing free energy.",
+			"description": "Snap-point octahedral assembly puzzle. Represents ordered structure and constraint \u2014 the crystalline end state of a system minimizing free energy.",
 			"scene": "res://commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.tscn",
 			"category": "qfep",
 			"interaction": "grab_snap",
 			"sequence": "qfeplaboratory",
 			"artifact_type": "interactive",
 			"qfep_term": "F",
-			"qfep_connection": "The rigid, ordered form that emerges when a system fully minimizes its free energy (F → minimum, S → low).",
+			"qfep_connection": "The rigid, ordered form that emerges when a system fully minimizes its free energy (F \u2192 minimum, S \u2192 low).",
 			"map_ready": false,
 			"include_in_map_data": false,
 			"spatial_needs": {
@@ -3357,6 +4680,39 @@
 					"version"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.51,
+					0.8
+				],
+				"aabb_center": [
+					0.0,
+					0.6,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.51,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.234319Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	}

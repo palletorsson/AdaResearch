@@ -1,5 +1,5 @@
 {
-	"_comment": "Profile substrate — 1D continuous curve renderer. Ribbon-strip ImmediateMesh.",
+	"_comment": "Profile substrate \u2014 1D continuous curve renderer. Ribbon-strip ImmediateMesh.",
 	"artifacts": {
 		"profile": {
 			"name": "Profile Substrate",
@@ -68,10 +68,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_sine": {
-			"name": "Profile — Sine Wave",
+			"name": "Profile \u2014 Sine Wave",
 			"lookup_name": "profile_sine",
 			"description": "Pure sine wave. The fundamental waveform. Phosphor green on grid.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
@@ -134,12 +167,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_square": {
-			"name": "Profile — Square Wave",
+			"name": "Profile \u2014 Square Wave",
 			"lookup_name": "profile_square",
-			"description": "Square wave — digital on/off. Only odd harmonics.",
+			"description": "Square wave \u2014 digital on/off. Only odd harmonics.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -200,12 +266,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_saw": {
-			"name": "Profile — Sawtooth Wave",
+			"name": "Profile \u2014 Sawtooth Wave",
 			"lookup_name": "profile_saw",
-			"description": "Sawtooth wave — ramp up, instant drop. All harmonics present.",
+			"description": "Sawtooth wave \u2014 ramp up, instant drop. All harmonics present.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -266,12 +365,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_triangle": {
-			"name": "Profile — Triangle Wave",
+			"name": "Profile \u2014 Triangle Wave",
 			"lookup_name": "profile_triangle",
-			"description": "Triangle wave — linear up and down. Odd harmonics, 1/n² decay.",
+			"description": "Triangle wave \u2014 linear up and down. Odd harmonics, 1/n\u00b2 decay.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -332,10 +464,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_fourier": {
-			"name": "Profile — Fourier Series",
+			"name": "Profile \u2014 Fourier Series",
 			"lookup_name": "profile_fourier",
 			"description": "Watch harmonics sum into a square wave. Each step adds one more harmonic.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
@@ -398,10 +563,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_beat": {
-			"name": "Profile — Beat Frequencies",
+			"name": "Profile \u2014 Beat Frequencies",
 			"lookup_name": "profile_beat",
 			"description": "Two close frequencies creating amplitude modulation. See the beat envelope.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
@@ -464,10 +662,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_lissajous": {
-			"name": "Profile — Lissajous Components",
+			"name": "Profile \u2014 Lissajous Components",
 			"lookup_name": "profile_lissajous",
 			"description": "X and Y components of a Lissajous figure shown as separate 1D traces.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
@@ -530,10 +761,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_noise": {
-			"name": "Profile — 1D Noise",
+			"name": "Profile \u2014 1D Noise",
 			"lookup_name": "profile_noise",
 			"description": "Scrolling 1D Perlin noise. Smooth organic randomness.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
@@ -597,10 +861,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_noise_octaves": {
-			"name": "Profile — Noise Octaves",
+			"name": "Profile \u2014 Noise Octaves",
 			"lookup_name": "profile_noise_octaves",
 			"description": "Watch detail build up as noise octaves layer. Each trace = one frequency band.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
@@ -665,10 +962,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_random_walk": {
-			"name": "Profile — Random Walk (1D)",
+			"name": "Profile \u2014 Random Walk (1D)",
 			"lookup_name": "profile_random_walk",
 			"description": "1D random walk displacement over time. Scrolling trace.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
@@ -730,10 +1060,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_brownian": {
-			"name": "Profile — Brownian Bridge",
+			"name": "Profile \u2014 Brownian Bridge",
 			"lookup_name": "profile_brownian",
 			"description": "Random walk constrained to return to zero. Constraint shapes randomness.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
@@ -796,10 +1159,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_bell_curve": {
-			"name": "Profile — Bell Curve (CLT)",
+			"name": "Profile \u2014 Bell Curve (CLT)",
 			"lookup_name": "profile_bell_curve",
 			"description": "Watch a Gaussian form as samples accumulate. Central Limit Theorem in action.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
@@ -863,10 +1259,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_damped": {
-			"name": "Profile — Damped Oscillation",
+			"name": "Profile \u2014 Damped Oscillation",
 			"lookup_name": "profile_damped",
 			"description": "Exponentially decaying oscillation with envelope trace.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
@@ -930,10 +1359,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_spring": {
-			"name": "Profile — Spring-Mass System",
+			"name": "Profile \u2014 Spring-Mass System",
 			"lookup_name": "profile_spring",
 			"description": "Real-time spring physics. Touch to perturb. Watch energy dissipate.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
@@ -997,10 +1459,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_gradient_descent": {
-			"name": "Profile — Gradient Descent",
+			"name": "Profile \u2014 Gradient Descent",
 			"lookup_name": "profile_gradient_descent",
 			"description": "Ball rolling downhill on a loss landscape. Momentum, local minima. Touch to reposition.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
@@ -1064,12 +1559,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"profile_logistic": {
-			"name": "Profile — Logistic Map",
+			"name": "Profile \u2014 Logistic Map",
 			"lookup_name": "profile_logistic",
-			"description": "Bifurcation diagram. Order → period doubling → chaos as r increases.",
+			"description": "Bifurcation diagram. Order \u2192 period doubling \u2192 chaos as r increases.",
 			"scene": "res://commons/substrates/profile/profile_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -1131,6 +1659,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.4,
+					0.25,
+					0.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.228732Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	}

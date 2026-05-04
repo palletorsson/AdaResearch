@@ -71,6 +71,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.31,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.16,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.31,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.242943Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	}

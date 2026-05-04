@@ -1,19 +1,59 @@
 {
-  "lookup_name": "russell_set_box",
-  "footprint": [1, 1, 1.5],
-  "rotations": ["0", "90", "180", "270"],
-  "approach": "south",
-  "exit": "north",
-  "footing": {
-    "anchor": [1, 1],
-    "tiles": [
-      [1, 1, 1],
-      [1, 1, 1],
-      [1, 1, 1]
-    ]
-  },
-  "extras": [
-    {"type": "tt", "key": "russell_paradox", "offset": [-1, 0, 0]}
-  ],
-  "clearance": [3, 3, 2]
+	"approach": "south",
+	"artifact_offset": [
+		0.0,
+		0.1,
+		0.0
+	],
+	"clearance": [
+		3.0,
+		3.0,
+		2.0
+	],
+	"exit": "north",
+	"extras": [
+		{
+			"key": "russell_paradox",
+			"offset": [
+				-1.0,
+				0.0,
+				0.0
+			],
+			"type": "tt"
+		}
+	],
+	"footing": {
+		"anchor": [
+			1.0,
+			1.0
+		],
+		"tiles": [
+			[
+				1.0,
+				1.0,
+				1.0
+			],
+			[
+				1.0,
+				2,
+				1
+			],
+			[
+				1.0,
+				1.0,
+				1.0
+			]
+		]
+	},
+	"footprint": [
+		1.0,
+		1.0,
+		1.5
+	],
+	"lookup_name": "russell_set_box",
+	"rotations": ["0", "90", "180", "270"],
+	"sub_anchors": [
+		{ "lookup": "russell_set_box", "offset": [0.0, 0.0], "scale": 0.18 }
+	],
+	"_note": "mise en abyme — a tiny copy of the set lives at sub-cell scale inside itself."
 }

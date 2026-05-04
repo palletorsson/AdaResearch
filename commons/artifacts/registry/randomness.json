@@ -74,6 +74,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.0,
+					2.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					1.15,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 3.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 6,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"GaussianBlurCircle": {
@@ -147,6 +180,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.0,
+					0.0,
+					20.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					10.0,
+					20.0
+				],
+				"max_dimension_m": 20.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				20.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"GaussianBlurShader": {
@@ -226,6 +292,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.32,
+					2.32,
+					0.02
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					-0.02
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 2.32,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 6,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"GaussianPaintSplatter": {
@@ -307,6 +401,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.4,
+					3.4,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					4.0,
+					1.0
+				],
+				"max_dimension_m": 3.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"MeltingBerniniScene": {
@@ -390,6 +512,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					12.67,
+					7.07,
+					12.11
+				],
+				"aabb_center": [
+					0.22,
+					3.26,
+					0.11
+				],
+				"grid_cells": [
+					13.0,
+					13.0
+				],
+				"max_dimension_m": 12.67,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"NoiseColors3D": {
@@ -477,6 +627,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					9.97,
+					6.0,
+					10.28
+				],
+				"aabb_center": [
+					-0.03,
+					3.0,
+					1.13
+				],
+				"grid_cells": [
+					10.0,
+					11.0
+				],
+				"max_dimension_m": 10.28,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"RandomGaussianTexture": {
@@ -554,6 +732,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.0,
+					0.0,
+					2.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 2.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"Random_Rotate_Random_XYZ": {
@@ -621,7 +832,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"RotateGridCubes": {
 			"category": "procedural",
@@ -686,12 +920,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					7.0,
+					1.0,
+					30.0
+				],
+				"aabb_center": [
+					-0.5,
+					0.0,
+					14.5
+				],
+				"grid_cells": [
+					7.0,
+					30.0
+				],
+				"max_dimension_m": 30.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				7.0,
+				1,
+				30.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"VoxelNoiseROIs": {
 			"category": "procedural",
 			"complexity": "intermediate",
-			"description": "Voxel noise with regions of interest (ROIs) — isolated volumes where different noise parameters or thresholds apply, useful for terrain biomes.",
+			"description": "Voxel noise with regions of interest (ROIs) \u2014 isolated volumes where different noise parameters or thresholds apply, useful for terrain biomes.",
 			"dev_themes": [
 				"probability",
 				"procedural",
@@ -758,12 +1025,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.33,
+					1.14,
+					1.24
+				],
+				"aabb_center": [
+					6.33,
+					-12.43,
+					10.29
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"WhiteNoiseGallery": {
 			"category": "procedural",
 			"complexity": "intermediate",
-			"description": "A gallery showcasing pure white noise — uniform random values with no correlation between samples. The baseline for understanding structured noise types.",
+			"description": "A gallery showcasing pure white noise \u2014 uniform random values with no correlation between samples. The baseline for understanding structured noise types.",
 			"dev_themes": [
 				"art",
 				"probability",
@@ -844,6 +1144,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					19.82,
+					3.0,
+					21.28
+				],
+				"aabb_center": [
+					-0.1,
+					1.5,
+					0.63
+				],
+				"grid_cells": [
+					20.0,
+					22.0
+				],
+				"max_dimension_m": 21.28,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"bell_alley": {
@@ -910,6 +1238,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					29.0,
+					2.0,
+					60.0
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					29.5
+				],
+				"grid_cells": [
+					29.0,
+					60.0
+				],
+				"max_dimension_m": 60.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				29.0,
+				1,
+				60.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 90,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"blue_noise": {
@@ -991,12 +1352,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.9,
+					9.54,
+					1.52
+				],
+				"aabb_center": [
+					-0.05,
+					-0.25,
+					-0.26
+				],
+				"grid_cells": [
+					17.0,
+					2.0
+				],
+				"max_dimension_m": 16.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				17.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"bubble_particles": {
 			"category": "procedural",
 			"complexity": "intermediate",
-			"description": "Movement-based procedural bubble system — bubbles spawn in a configurable area, rise with randomized speeds and sizes, fade over time, and pop with synthesized audio. Concurrent sound limiting and pitch variation create an organic underwater soundscape.",
+			"description": "Movement-based procedural bubble system \u2014 bubbles spawn in a configurable area, rise with randomized speeds and sizes, fade over time, and pop with synthesized audio. Concurrent sound limiting and pitch variation create an organic underwater soundscape.",
 			"dev_themes": [
 				"music",
 				"probability",
@@ -1066,7 +1460,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"bubbles_random": {
 			"category": "procedural",
@@ -1155,6 +1572,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					7.0,
+					0.29,
+					7.0
+				],
+				"aabb_center": [
+					0.0,
+					0.1,
+					0.0
+				],
+				"grid_cells": [
+					7.0,
+					7.0
+				],
+				"max_dimension_m": 7.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"cloudvolume": {
@@ -1229,6 +1674,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.0,
+					4.0,
+					4.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 4.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				4.0,
+				1,
+				4.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"coin_toss": {
@@ -1247,7 +1725,7 @@
 				"randomness"
 			],
 			"name": "Coin Toss",
-			"qfep_connection": "Bernoulli trial — the atom of probability. p = 0.5 as perfect symmetry.",
+			"qfep_connection": "Bernoulli trial \u2014 the atom of probability. p = 0.5 as perfect symmetry.",
 			"scene": "res://algorithms/randomness/coin_toss/coin_toss.tscn",
 			"sequence": "randomness",
 			"tags": [
@@ -1312,6 +1790,39 @@
 					"galton_board"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.78,
+					1.02,
+					0.4
+				],
+				"aabb_center": [
+					0.16,
+					0.51,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"crystal_random_walk_demo": {
@@ -1382,6 +1893,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.81,
+					4.77,
+					4.57
+				],
+				"aabb_center": [
+					0.08,
+					0.13,
+					0.04
+				],
+				"grid_cells": [
+					4.0,
+					5.0
+				],
+				"max_dimension_m": 4.77,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				4.0,
+				1,
+				5.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"curl_noise_particles": {
@@ -1458,12 +2002,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.7,
+					0.5,
+					0.7
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.7,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246444Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"dice_throw": {
 			"category": "randomness",
 			"complexity": "beginner",
-			"description": "A VR dice on a felt table. Grab and throw the dice — roll a 6 and 100 balls rain from the sky, roll a 1 and just 1 ball falls. Tracks roll statistics showing convergence to discrete uniform distribution with expected value 3.5.",
+			"description": "A VR dice on a felt table. Grab and throw the dice \u2014 roll a 6 and 100 balls rain from the sky, roll a 1 and just 1 ball falls. Tracks roll statistics showing convergence to discrete uniform distribution with expected value 3.5.",
 			"dev_themes": [
 				"probability",
 				"randomness"
@@ -1476,7 +2053,7 @@
 				"randomness"
 			],
 			"name": "Dice Throw",
-			"qfep_connection": "Equiprobability — each face equally likely. Fairness as geometric symmetry.",
+			"qfep_connection": "Equiprobability \u2014 each face equally likely. Fairness as geometric symmetry.",
 			"scene": "res://algorithms/randomness/dice_throw/dice_throw.tscn",
 			"sequence": "randomness",
 			"tags": [
@@ -1542,6 +2119,39 @@
 					"slot_machine"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.81,
+					0.97,
+					0.88
+				],
+				"aabb_center": [
+					0.0,
+					0.49,
+					0.13
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.97,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"digital_materiality_glitch": {
@@ -1626,6 +2236,24 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"distribution_visualization": {
@@ -1705,6 +2333,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					17.0,
+					8.0,
+					5.15
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.48
+				],
+				"grid_cells": [
+					17.0,
+					6.0
+				],
+				"max_dimension_m": 17.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				17.0,
+				1,
+				6.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"entropy_axiom": {
@@ -1793,12 +2454,40 @@
 					"entropy_jar"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.95,
+					2.95,
+					7.95
+				],
+				"aabb_center": [
+					-0.1,
+					-0.1,
+					3.9
+				],
+				"grid_cells": [
+					3.0,
+					8.0
+				],
+				"max_dimension_m": 7.95,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"entropy_jar": {
 			"category": "randomness",
 			"complexity": "beginner",
-			"description": "A glass jar of red and blue particles on a pedestal. Grab and shake to mix them — they never unmix. Live Shannon entropy readout tracks disorder. The second law of thermodynamics felt physically through VR interaction.",
+			"description": "A glass jar of red and blue particles on a pedestal. Grab and shake to mix them \u2014 they never unmix. Live Shannon entropy readout tracks disorder. The second law of thermodynamics felt physically through VR interaction.",
 			"dev_themes": [
 				"probability",
 				"randomness"
@@ -1811,7 +2500,7 @@
 				"randomness"
 			],
 			"name": "Entropy Jar",
-			"qfep_connection": "Irreversibility — mixing is easy, unmixing is impossible. The arrow of time made tangible through embodied interaction.",
+			"qfep_connection": "Irreversibility \u2014 mixing is easy, unmixing is impossible. The arrow of time made tangible through embodied interaction.",
 			"scene": "res://algorithms/randomness/entropy_jar/entropy_jar.tscn",
 			"sequence": "randomness",
 			"tags": [
@@ -1881,6 +2570,39 @@
 					"contrasts"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.34,
+					1.19,
+					0.41
+				],
+				"aabb_center": [
+					-0.01,
+					0.59,
+					0.05
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.19,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"env_one": {
@@ -1964,6 +2686,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					60.32,
+					30.07,
+					59.67
+				],
+				"aabb_center": [
+					-0.09,
+					-0.08,
+					0.34
+				],
+				"grid_cells": [
+					61.0,
+					60.0
+				],
+				"max_dimension_m": 60.32,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 90,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"evolutionary_algorithms": {
@@ -2031,6 +2781,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.08,
+					0.1,
+					0.1
+				],
+				"aabb_center": [
+					-4.01,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 2.08,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"extreme_randomness": {
@@ -2101,6 +2884,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					9.63,
+					9.48,
+					9.71
+				],
+				"aabb_center": [
+					0.06,
+					0.19,
+					0.03
+				],
+				"grid_cells": [
+					10.0,
+					10.0
+				],
+				"max_dimension_m": 9.71,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				10.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"galton_board": {
@@ -2119,7 +2935,7 @@
 				"randomness"
 			],
 			"name": "Galton Board",
-			"qfep_connection": "CLT as convergence — many independent binary choices accumulate into Gaussian structure. Order from repetition.",
+			"qfep_connection": "CLT as convergence \u2014 many independent binary choices accumulate into Gaussian structure. Order from repetition.",
 			"scene": "res://algorithms/randomness/galton_board/galton_board.tscn",
 			"sequence": "randomness",
 			"tags": [
@@ -2185,6 +3001,39 @@
 					"gaussian_random"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.52,
+					0.89,
+					0.29
+				],
+				"aabb_center": [
+					0.0,
+					0.29,
+					0.11
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.89,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"gaussian_random": {
@@ -2249,7 +3098,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"hardware_entropy_decay": {
 			"category": "randomness",
@@ -2272,7 +3144,7 @@
 				"randomness"
 			],
 			"name": "Hardware Entropy Decay",
-			"qfep_connection": "Entropy from embodiment — the observer's physical presence is the source of randomness that degrades order.",
+			"qfep_connection": "Entropy from embodiment \u2014 the observer's physical presence is the source of randomness that degrades order.",
 			"scene": "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn",
 			"sequence": "randomness",
 			"size_group": "xlarge",
@@ -2345,6 +3217,34 @@
 					"entropy_jar"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					6.22,
+					1.8,
+					1.8
+				],
+				"aabb_center": [
+					0.12,
+					0.9,
+					0.0
+				],
+				"grid_cells": [
+					7.0,
+					2.0
+				],
+				"max_dimension_m": 6.22,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"height_random": {
@@ -2413,7 +3313,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"instancingscatter": {
 			"category": "procedural",
@@ -2479,6 +3402,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					40.64,
+					5.15,
+					43.1
+				],
+				"aabb_center": [
+					0.04,
+					0.51,
+					0.11
+				],
+				"grid_cells": [
+					41.0,
+					44.0
+				],
+				"max_dimension_m": 43.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				41.0,
+				1,
+				44.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 64,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"marchingcubes_voxel_noise_demo": {
@@ -2556,6 +3512,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					32.0,
+					32.0,
+					32.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					32.0,
+					32.0
+				],
+				"max_dimension_m": 32.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				32.0,
+				1,
+				32.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"monte_carlo_dartboard": {
@@ -2574,7 +3563,7 @@
 				"randomness"
 			],
 			"name": "Monte Carlo Dart Board",
-			"qfep_connection": "Computation through accumulation — random sampling converges to mathematical truth.",
+			"qfep_connection": "Computation through accumulation \u2014 random sampling converges to mathematical truth.",
 			"scene": "res://algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn",
 			"sequence": "randomness",
 			"tags": [
@@ -2638,6 +3627,39 @@
 					"feeds"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.63,
+					0.85,
+					0.19
+				],
+				"aabb_center": [
+					0.0,
+					1.19,
+					0.08
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.85,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"neon_wave_grid": {
@@ -2715,12 +3737,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					14.0,
+					14.0,
+					8.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					14.0,
+					8.0
+				],
+				"max_dimension_m": 14.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				14.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"noise_mixer": {
 			"category": "procedural",
 			"complexity": "intermediate",
-			"description": "Fractal Brownian Motion noise mixer — layers multiple sin-based noise octaves with controllable lacunarity and persistence. 128x128 floor texture with earth-tone color ramp. VR sliders adjust octaves (1–8), lacunarity (1.5–3.0), and persistence (0.3–0.7) to explore how complexity emerges from layered simple functions.",
+			"description": "Fractal Brownian Motion noise mixer \u2014 layers multiple sin-based noise octaves with controllable lacunarity and persistence. 128x128 floor texture with earth-tone color ramp. VR sliders adjust octaves (1\u20138), lacunarity (1.5\u20133.0), and persistence (0.3\u20130.7) to explore how complexity emerges from layered simple functions.",
 			"dev_themes": [
 				"music",
 				"probability",
@@ -2792,6 +3847,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.2,
+					1.03
+				],
+				"aabb_center": [
+					0.0,
+					0.03,
+					0.12
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.03,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"noise_space": {
@@ -2872,6 +3960,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.0,
+					3.05,
+					10.0
+				],
+				"aabb_center": [
+					0.0,
+					-0.04,
+					0.0
+				],
+				"grid_cells": [
+					10.0,
+					10.0
+				],
+				"max_dimension_m": 10.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"noise_terrain": {
@@ -2962,6 +4078,24 @@
 					"domain"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"noise_terrain_with_blobs": {
@@ -3012,7 +4146,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"noiselayers": {
 			"category": "procedural",
@@ -3099,6 +4256,24 @@
 					"precedes"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"noisesphere": {
@@ -3144,6 +4319,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					31.05,
+					31.05,
+					29.99
+				],
+				"aabb_center": [
+					-17.73,
+					0.85,
+					0.07
+				],
+				"grid_cells": [
+					32.0,
+					30.0
+				],
+				"max_dimension_m": 31.05,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"noisetext": {
@@ -3193,6 +4396,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.17,
+					0.55,
+					0.38
+				],
+				"aabb_center": [
+					-0.02,
+					-0.22,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.17,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"noisetorus": {
@@ -3250,6 +4486,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.14,
+					7.91,
+					4.14
+				],
+				"aabb_center": [
+					0.0,
+					3.84,
+					0.0
+				],
+				"grid_cells": [
+					5.0,
+					5.0
+				],
+				"max_dimension_m": 7.91,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"omoss": {
@@ -3322,6 +4586,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.84,
+					3.65,
+					4.7
+				],
+				"aabb_center": [
+					-0.02,
+					0.65,
+					0.19
+				],
+				"grid_cells": [
+					5.0,
+					5.0
+				],
+				"max_dimension_m": 4.84,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				5.0,
+				1,
+				5.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"particle_randomness_emergent": {
@@ -3394,6 +4691,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.09,
+					2.09,
+					2.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					-0.01
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.09,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"particle_randomness_evolutionary": {
@@ -3458,6 +4788,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.08,
+					0.1,
+					0.1
+				],
+				"aabb_center": [
+					-4.01,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 2.08,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"particle_randomness_patterns": {
@@ -3532,6 +4895,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					9.12,
+					9.24,
+					3.99
+				],
+				"aabb_center": [
+					-0.12,
+					0.16,
+					0.04
+				],
+				"grid_cells": [
+					10.0,
+					4.0
+				],
+				"max_dimension_m": 9.24,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				4.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"particle_randomness_perlin": {
@@ -3606,6 +5002,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					9.6,
+					2.1,
+					0.1
+				],
+				"aabb_center": [
+					-0.25,
+					-4.0,
+					-5.0
+				],
+				"grid_cells": [
+					10.0,
+					1.0
+				],
+				"max_dimension_m": 9.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"particle_randomness_pure": {
@@ -3681,6 +5110,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					9.94,
+					9.87,
+					9.75
+				],
+				"aabb_center": [
+					0.07,
+					0.04,
+					-0.01
+				],
+				"grid_cells": [
+					10.0,
+					10.0
+				],
+				"max_dimension_m": 9.94,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				10.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"perlin_noise": {
@@ -3764,6 +5226,34 @@
 					"shares"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.0,
+					1.8,
+					10.0
+				],
+				"aabb_center": [
+					-0.25,
+					0.08,
+					-0.25
+				],
+				"grid_cells": [
+					10.0,
+					10.0
+				],
+				"max_dimension_m": 10.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"perlin_noise_clouds": {
@@ -3846,7 +5336,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"perlin_noise_terrain": {
 			"category": "procedural",
@@ -3925,6 +5438,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.06,
+					0.4,
+					1.07
+				],
+				"aabb_center": [
+					0.13,
+					0.1,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.07,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"perlinvolume": {
@@ -3972,6 +5513,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.0,
+					4.0,
+					4.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 4.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				4.0,
+				1,
+				4.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"pheromone_terrain": {
@@ -4054,6 +5628,34 @@
 					"contrasts"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					20.0,
+					0.0,
+					20.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					20.0,
+					20.0
+				],
+				"max_dimension_m": 20.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"pickup_cube_placer": {
@@ -4119,7 +5721,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"pipe_dream": {
 			"category": "procedural",
@@ -4197,6 +5822,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.24,
+					0.24,
+					0.95
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					-0.47
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.95,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"pixel_cloud": {
@@ -4284,6 +5937,34 @@
 					"avoiding"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.0,
+					11.0,
+					4.0
+				],
+				"aabb_center": [
+					1.5,
+					5.0,
+					-0.5
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 11.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"plane_manipulator": {
@@ -4353,6 +6034,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					2.0,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 2.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.246941Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"plane_random": {
@@ -4424,6 +6138,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					20.0,
+					1.46,
+					20.0
+				],
+				"aabb_center": [
+					0.0,
+					-0.02,
+					0.0
+				],
+				"grid_cells": [
+					20.0,
+					20.0
+				],
+				"max_dimension_m": 20.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				20.0,
+				1,
+				20.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"pollock_3d": {
@@ -4494,6 +6241,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.0,
+					6.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					10.0,
+					1.0
+				],
+				"max_dimension_m": 10.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"pollock_painting_in_3d": {
@@ -4573,6 +6353,39 @@
 					"computational"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.34,
+					0.12,
+					2.94
+				],
+				"aabb_center": [
+					0.0,
+					0.06,
+					0.0
+				],
+				"grid_cells": [
+					5.0,
+					3.0
+				],
+				"max_dimension_m": 4.34,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				5.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 10,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"pool_hole_noise": {
@@ -4648,6 +6461,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					5.0,
+					0.6,
+					5.0
+				],
+				"aabb_center": [
+					2.5,
+					-0.17,
+					2.5
+				],
+				"grid_cells": [
+					5.0,
+					5.0
+				],
+				"max_dimension_m": 5.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				5.0,
+				1,
+				5.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 10,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"prng_crank_machine": {
@@ -4666,7 +6512,7 @@
 				"randomness"
 			],
 			"name": "PRNG Crank Machine",
-			"qfep_connection": "Determinism masquerading as randomness — structure hidden in apparent chaos.",
+			"qfep_connection": "Determinism masquerading as randomness \u2014 structure hidden in apparent chaos.",
 			"scene": "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.tscn",
 			"sequence": "randomness",
 			"tags": [
@@ -4731,6 +6577,39 @@
 					"understanding"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.42,
+					1.2,
+					0.39
+				],
+				"aabb_center": [
+					0.0,
+					0.6,
+					0.08
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"probability_distributions_3d": {
@@ -4803,6 +6682,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					20.02,
+					10.03,
+					20.02
+				],
+				"aabb_center": [
+					0.0,
+					4.98,
+					0.0
+				],
+				"grid_cells": [
+					21.0,
+					21.0
+				],
+				"max_dimension_m": 20.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				21.0,
+				1,
+				21.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"random_bell_curve": {
@@ -4881,6 +6793,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					20.0,
+					4.65,
+					20.1
+				],
+				"aabb_center": [
+					0.0,
+					2.32,
+					0.0
+				],
+				"grid_cells": [
+					20.0,
+					21.0
+				],
+				"max_dimension_m": 20.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"random_butterflies": {
@@ -4953,6 +6893,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.57,
+					0.28,
+					1.45
+				],
+				"aabb_center": [
+					-0.19,
+					0.06,
+					-0.64
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.45,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"random_color_book_page_collection": {
@@ -5001,6 +6974,39 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					12.37,
+					6.0,
+					0.02
+				],
+				"aabb_center": [
+					-0.56,
+					-2.38,
+					-0.01
+				],
+				"grid_cells": [
+					13.0,
+					1.0
+				],
+				"max_dimension_m": 12.37,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				13.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"random_decay_multimesh": {
@@ -5092,6 +7098,39 @@
 					"feeds"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.48,
+					10.18,
+					1.75
+				],
+				"aabb_center": [
+					1.58,
+					4.59,
+					0.38
+				],
+				"grid_cells": [
+					17.0,
+					2.0
+				],
+				"max_dimension_m": 16.48,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				17.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"random_decay_objects": {
@@ -5166,6 +7205,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.42,
+					1.05,
+					1.43
+				],
+				"aabb_center": [
+					0.19,
+					0.0,
+					0.2
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.43,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"random_edge_profile": {
@@ -5238,6 +7310,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.11,
+					0.1
+				],
+				"aabb_center": [
+					0.0,
+					0.56,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.11,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"random_edge_profile_collection": {
@@ -5278,7 +7378,30 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"random_gaussian_texture": {
 			"category": "emergence",
@@ -5353,12 +7476,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.0,
+					0.0,
+					2.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 2.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"random_number_book_page_1955": {
 			"category": "procedural",
 			"complexity": "beginner",
-			"description": "A single page from the RAND Corporation 1955 random digit table. Numbers cascade live top-to-bottom. Touch any 5-digit number to freeze it in amber — the rest keep flowing.",
+			"description": "A single page from the RAND Corporation 1955 random digit table. Numbers cascade live top-to-bottom. Touch any 5-digit number to freeze it in amber \u2014 the rest keep flowing.",
 			"dev_themes": [
 				"probability",
 				"procedural",
@@ -5430,12 +7586,45 @@
 				"isolation": 2,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.0,
+					6.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					4.0,
+					1.0
+				],
+				"max_dimension_m": 6.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				4.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"random_number_book_page_collection": {
 			"category": "procedural",
 			"complexity": "beginner",
-			"description": "RAND Corporation 1955 random digit table brought to life. Numbers cascade top-to-bottom like a stock ticker. Touch any number in VR to freeze it — frozen numbers glow amber while the rest keep flowing. Demonstrates that randomness is a process, not a snapshot.",
+			"description": "RAND Corporation 1955 random digit table brought to life. Numbers cascade top-to-bottom like a stock ticker. Touch any number in VR to freeze it \u2014 frozen numbers glow amber while the rest keep flowing. Demonstrates that randomness is a process, not a snapshot.",
 			"dev_themes": [
 				"probability",
 				"procedural",
@@ -5448,8 +7637,8 @@
 			"map_sequences": [
 				"randomness"
 			],
-			"name": "Random Number Book — Live Cascade",
-			"qfep_connection": "Randomness as flow — freezing a number is an act of observation that collapses possibility into fixed value.",
+			"name": "Random Number Book \u2014 Live Cascade",
+			"qfep_connection": "Randomness as flow \u2014 freezing a number is an act of observation that collapses possibility into fixed value.",
 			"scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_collection.tscn",
 			"sequence": "randomness",
 			"tags": [
@@ -5476,7 +7665,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"random_plants": {
 			"category": "procedural",
@@ -5544,6 +7756,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					20.42,
+					6.91,
+					21.1
+				],
+				"aabb_center": [
+					-0.2,
+					2.45,
+					0.02
+				],
+				"grid_cells": [
+					21.0,
+					22.0
+				],
+				"max_dimension_m": 21.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				21.0,
+				1,
+				22.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"random_transformations": {
@@ -5624,7 +7869,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"random_transformations_geometric": {
 			"artifact_type": "interactive_algorithm",
@@ -5706,7 +7974,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"random_transformations_matrices": {
 			"artifact_type": "interactive_algorithm",
@@ -5789,7 +8080,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"random_transformations_noise": {
 			"artifact_type": "interactive_algorithm",
@@ -5874,7 +8188,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"random_transformations_stochastic": {
 			"artifact_type": "interactive_algorithm",
@@ -5957,7 +8294,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"random_walk_128": {
 			"category": "primitives",
@@ -6024,6 +8384,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.88,
+					1.11,
+					1.88
+				],
+				"aabb_center": [
+					0.31,
+					0.41,
+					0.31
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.88,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"random_walk_collection": {
@@ -6104,6 +8497,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.24,
+					3.24,
+					2.41
+				],
+				"aabb_center": [
+					-0.12,
+					0.93,
+					0.76
+				],
+				"grid_cells": [
+					4.0,
+					3.0
+				],
+				"max_dimension_m": 3.24,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"random_walk_grab_paper": {
@@ -6172,6 +8593,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"random_walk_leash": {
@@ -6190,7 +8644,7 @@
 				"randomness"
 			],
 			"name": "Random Walk Leash",
-			"qfep_connection": "Embodied randomness — the walk isn't watched, it's felt. Your arm becomes the accumulator of stochastic impulses.",
+			"qfep_connection": "Embodied randomness \u2014 the walk isn't watched, it's felt. Your arm becomes the accumulator of stochastic impulses.",
 			"scene": "res://algorithms/randomness/random_walk_leash/random_walk_leash.tscn",
 			"sequence": "randomness",
 			"tags": [
@@ -6256,6 +8710,39 @@
 					"depends"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.28,
+					1.1,
+					0.37
+				],
+				"aabb_center": [
+					0.0,
+					0.55,
+					0.04
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"randomize_cubes_over_Z": {
@@ -6318,7 +8805,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"randomlines": {
 			"category": "procedural",
@@ -6401,6 +8911,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 2.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"randompoint": {
@@ -6477,13 +9015,41 @@
 					"spacing"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.56,
+					1.56,
+					0.06
+				],
+				"aabb_center": [
+					0.03,
+					0.03,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.56,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"randompoints": {
 			"capacity": "DISTINGUISH structured randomness from uniform randomness by seeing how a single constraint (minimum distance) transforms a point cloud from chaos to jazz",
 			"category": "emergence",
 			"complexity": "beginner",
-			"description": "Three distributions reveal three relationships with space. Uniform scatters without memory — each point ignores every other. Gaussian clusters around a center — proximity is destiny. Blue noise enforces minimum distance via dart-throwing rejection, structured randomness where emptiness is forbidden. The critical parameter is blue_noise_min_dist: the exclusion radius that converts white noise into jazz. Contrasts with randompoint (single white noise); prepares for Perlin noise (structured randomness with continuity).",
+			"description": "Three distributions reveal three relationships with space. Uniform scatters without memory \u2014 each point ignores every other. Gaussian clusters around a center \u2014 proximity is destiny. Blue noise enforces minimum distance via dart-throwing rejection, structured randomness where emptiness is forbidden. The critical parameter is blue_noise_min_dist: the exclusion radius that converts white noise into jazz. Contrasts with randompoint (single white noise); prepares for Perlin noise (structured randomness with continuity).",
 			"dev_themes": [
 				"emergence",
 				"probability",
@@ -6519,7 +9085,7 @@
 				"num_points": "Number of points to spawn (default: 30)",
 				"size_group": "compact"
 			},
-			"qfep_connection": "Pure E(S) — three distributions at three lambda values. Uniform is maximum entropy (lambda=0). Gaussian introduces spatial bias (lambda rising). Blue noise enforces a minimum-distance constraint that converts raw entropy into structured randomness — lambda at full strength, where constraint produces beauty, not order.",
+			"qfep_connection": "Pure E(S) \u2014 three distributions at three lambda values. Uniform is maximum entropy (lambda=0). Gaussian introduces spatial bias (lambda rising). Blue noise enforces a minimum-distance constraint that converts raw entropy into structured randomness \u2014 lambda at full strength, where constraint produces beauty, not order.",
 			"scene": "res://algorithms/randomness/randompoints/randompoints.tscn",
 			"sequence": "randomness",
 			"size_group": "compact",
@@ -6581,6 +9147,34 @@
 					"noise"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.98,
+					0.97,
+					1.01
+				],
+				"aabb_center": [
+					-0.01,
+					0.02,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"randompoints_gaussian": {
@@ -6648,6 +9242,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.74,
+					0.42,
+					0.44
+				],
+				"aabb_center": [
+					-0.09,
+					0.01,
+					-0.01
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.74,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"randompoints_uniform": {
@@ -6713,6 +9340,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.95,
+					0.99,
+					0.99
+				],
+				"aabb_center": [
+					-0.02,
+					-0.01,
+					0.02
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.99,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"randomup": {
@@ -6777,12 +9437,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					12.0,
+					20.0,
+					16.0
+				],
+				"aabb_center": [
+					2.5,
+					9.5,
+					-0.5
+				],
+				"grid_cells": [
+					12.0,
+					16.0
+				],
+				"max_dimension_m": 20.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				12.0,
+				1,
+				16.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"rejection_sampling_demo": {
 			"category": "randomness",
 			"complexity": "beginner",
-			"description": "Visual scatter plot of the accept/reject method for sampling arbitrary distributions. 2000 uniform random points plotted against a Gaussian target curve — green dots accepted (below curve), red dots rejected (above). Shows acceptance ratio.",
+			"description": "Visual scatter plot of the accept/reject method for sampling arbitrary distributions. 2000 uniform random points plotted against a Gaussian target curve \u2014 green dots accepted (below curve), red dots rejected (above). Shows acceptance ratio.",
 			"dev_themes": [
 				"probability",
 				"randomness"
@@ -6849,6 +9542,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.0,
+					0.8
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"remove_random": {
@@ -6916,7 +9642,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"rotate_grid_cubes": {
 			"category": "procedural",
@@ -6995,7 +9744,30 @@
 				"isolation": 2,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"rotate_random_y": {
 			"category": "primitives",
@@ -7062,7 +9834,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"sculpt_one": {
 			"category": "procedural",
@@ -7134,12 +9929,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.3,
+					2.79,
+					3.88
+				],
+				"aabb_center": [
+					-0.12,
+					0.97,
+					0.44
+				],
+				"grid_cells": [
+					5.0,
+					4.0
+				],
+				"max_dimension_m": 4.3,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				5.0,
+				1,
+				4.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_07_noise": {
 			"category": "procedural",
 			"complexity": "advanced",
-			"description": "Book of Shaders chapter 7 — value noise, gradient noise, simplex noise implemented as GPU shaders on a quad display.",
+			"description": "Book of Shaders chapter 7 \u2014 value noise, gradient noise, simplex noise implemented as GPU shaders on a quad display.",
 			"dev_themes": [
 				"probability",
 				"procedural",
@@ -7193,7 +10021,7 @@
 		"shader_08_cellularnoise": {
 			"category": "procedural",
 			"complexity": "advanced",
-			"description": "Book of Shaders chapter 8 — Voronoi and Worley noise patterns rendered as GPU shaders. Shows distance fields and cell boundaries.",
+			"description": "Book of Shaders chapter 8 \u2014 Voronoi and Worley noise patterns rendered as GPU shaders. Shows distance fields and cell boundaries.",
 			"dev_themes": [
 				"biology",
 				"probability",
@@ -7328,12 +10156,40 @@
 					"noiselayers"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					18.1,
+					13.6,
+					27.1
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					19.0,
+					28.0
+				],
+				"max_dimension_m": 27.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shannon_entropy_meter": {
 			"category": "randomness",
 			"complexity": "beginner",
-			"description": "Wall-mounted Shannon entropy gauge — generates a random sequence, computes symbol frequencies, and displays H = -Σ p(x) log₂ p(x). Bar gauge fills from 0 to max entropy (~3.32 bits for 10 symbols). Frequency histogram shows symbol distribution.",
+			"description": "Wall-mounted Shannon entropy gauge \u2014 generates a random sequence, computes symbol frequencies, and displays H = -\u03a3 p(x) log\u2082 p(x). Bar gauge fills from 0 to max entropy (~3.32 bits for 10 symbols). Frequency histogram shows symbol distribution.",
 			"dev_themes": [
 				"probability",
 				"randomness"
@@ -7401,6 +10257,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.72,
+					0.52,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.72,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 2,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.247436Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"simplex_noise": {
@@ -7484,12 +10373,40 @@
 					"algorithm"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.0,
+					2.19,
+					10.0
+				],
+				"aabb_center": [
+					-0.25,
+					0.12,
+					-0.25
+				],
+				"grid_cells": [
+					10.0,
+					10.0
+				],
+				"max_dimension_m": 10.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247932Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"slot_machine": {
 			"category": "randomness",
 			"complexity": "beginner",
-			"description": "A classic slot machine with 3 spinning reels. Pull the VR lever to spin — reels stop one by one, left to right. Tracks a histogram of symbol frequencies showing convergence to uniform distribution. Triple matches flash gold. AUTO mode for rapid sampling.",
+			"description": "A classic slot machine with 3 spinning reels. Pull the VR lever to spin \u2014 reels stop one by one, left to right. Tracks a histogram of symbol frequencies showing convergence to uniform distribution. Triple matches flash gold. AUTO mode for rapid sampling.",
 			"dev_themes": [
 				"probability",
 				"randomness"
@@ -7502,7 +10419,7 @@
 				"randomness"
 			],
 			"name": "Slot Machine",
-			"qfep_connection": "Independence — each reel is an independent uniform trial. The combination space grows multiplicatively (6^3 = 216 outcomes).",
+			"qfep_connection": "Independence \u2014 each reel is an independent uniform trial. The combination space grows multiplicatively (6^3 = 216 outcomes).",
 			"scene": "res://algorithms/randomness/slot_machine/slot_machine.tscn",
 			"sequence": "randomness",
 			"tags": [
@@ -7567,6 +10484,39 @@
 					"unlocks"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.51,
+					1.52,
+					0.45
+				],
+				"aabb_center": [
+					0.0,
+					0.76,
+					0.05
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.52,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247932Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"spawn_randomcubes": {
@@ -7644,6 +10594,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247932Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"ten_print": {
@@ -7723,6 +10706,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.9,
+					8.53,
+					1.0
+				],
+				"aabb_center": [
+					-0.05,
+					-0.23,
+					0.0
+				],
+				"grid_cells": [
+					17.0,
+					1.0
+				],
+				"max_dimension_m": 16.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				17.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.247932Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"ten_print_maze_3d": {
@@ -7804,6 +10820,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.6,
+					10.0,
+					10.3
+				],
+				"aabb_center": [
+					0.3,
+					5.0,
+					4.85
+				],
+				"grid_cells": [
+					1.0,
+					11.0
+				],
+				"max_dimension_m": 10.3,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.247932Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"tessellation_lattice_demo": {
@@ -7878,7 +10922,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"trng_vs_prng": {
 			"category": "primitives",
@@ -7961,6 +11028,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					22.2,
+					6.8,
+					0.03
+				],
+				"aabb_center": [
+					-0.1,
+					-0.4,
+					-0.18
+				],
+				"grid_cells": [
+					23.0,
+					1.0
+				],
+				"max_dimension_m": 22.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				23.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.247932Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"value_noise": {
@@ -8033,12 +11133,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					20.05,
+					2.62,
+					20.05
+				],
+				"aabb_center": [
+					0.0,
+					-0.01,
+					0.0
+				],
+				"grid_cells": [
+					21.0,
+					21.0
+				],
+				"max_dimension_m": 20.05,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				21.0,
+				1,
+				21.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247932Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"voxelnoise": {
 			"category": "procedural",
 			"complexity": "intermediate",
-			"description": "3D noise visualized as voxels — cubes appear or disappear based on noise threshold, revealing the underlying scalar field as solid geometry.",
+			"description": "3D noise visualized as voxels \u2014 cubes appear or disappear based on noise threshold, revealing the underlying scalar field as solid geometry.",
 			"dev_themes": [
 				"probability",
 				"procedural",
@@ -8112,6 +11245,34 @@
 					"discretizes"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					32.0,
+					32.0,
+					32.0
+				],
+				"aabb_center": [
+					18.5,
+					16.5,
+					18.5
+				],
+				"grid_cells": [
+					32.0,
+					32.0
+				],
+				"max_dimension_m": 32.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247932Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"walk_random": {
@@ -8176,7 +11337,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"walkingsphere": {
 			"category": "emergence",
@@ -8251,6 +11435,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.0,
+					2.0,
+					2.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 2.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247932Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"worley_noise": {
@@ -8325,107 +11542,348 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.0,
+					0.8
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247932Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"seed_replay_demo": {
 			"name": "Seed Replay Demo",
 			"lookup_name": "seed_replay_demo",
-			"description": "Demonstrates seed reproducibility — an 8x8 grid of colored cubes generated from a seed. Same seed always produces the same pattern. Slider changes seed, Replay regenerates identically, Random picks a new seed.",
+			"description": "Demonstrates seed reproducibility \u2014 an 8x8 grid of colored cubes generated from a seed. Same seed always produces the same pattern. Slider changes seed, Replay regenerates identically, Random picks a new seed.",
 			"scene": "res://algorithms/randomness/seed_replay/seed_replay_demo.tscn",
 			"category": "randomness",
 			"complexity": "beginner",
-			"tags": ["seed", "prng", "reproducibility", "determinism"],
+			"tags": [
+				"seed",
+				"prng",
+				"reproducibility",
+				"determinism"
+			],
 			"map_ready": true,
 			"include_in_map_data": true,
 			"spatial_needs": {
 				"platform": "pedestal",
 				"footprint_cells": 2,
-				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
 				"wall_backing": false,
 				"isolation": 0,
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.28,
+					0.59,
+					0.14
+				],
+				"aabb_center": [
+					-0.02,
+					0.32,
+					0.06
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.59,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247932Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"distribution_comparator": {
 			"name": "Distribution Comparator",
 			"lookup_name": "distribution_comparator",
-			"description": "Side-by-side comparison of 3 probability distributions — Uniform (blue), Gaussian (green), Exponential (orange). Three columns of 16 histogram bars generated from the same sample count. Slider scales samples from 100 to 10000; resample button regenerates all three.",
+			"description": "Side-by-side comparison of 3 probability distributions \u2014 Uniform (blue), Gaussian (green), Exponential (orange). Three columns of 16 histogram bars generated from the same sample count. Slider scales samples from 100 to 10000; resample button regenerates all three.",
 			"scene": "res://algorithms/randomness/distribution_comparator/distribution_comparator.tscn",
 			"category": "randomness",
 			"complexity": "intermediate",
-			"tags": ["distribution", "probability", "histogram", "gaussian", "exponential", "uniform", "sampling"],
-			"dev_themes": ["probability", "randomness", "statistics"],
+			"tags": [
+				"distribution",
+				"probability",
+				"histogram",
+				"gaussian",
+				"exponential",
+				"uniform",
+				"sampling"
+			],
+			"dev_themes": [
+				"probability",
+				"randomness",
+				"statistics"
+			],
 			"map_ready": true,
 			"include_in_map_data": true,
-			"qfep_connection": "Three distributions from one random source — the channeling rule (F) determines shape. Uniform is maximum entropy; Gaussian is the attractor of summation; Exponential is memoryless decay. Same randomness, different constraints, different forms.",
+			"qfep_connection": "Three distributions from one random source \u2014 the channeling rule (F) determines shape. Uniform is maximum entropy; Gaussian is the attractor of summation; Exponential is memoryless decay. Same randomness, different constraints, different forms.",
 			"spatial_needs": {
 				"platform": "pedestal",
 				"footprint_cells": 2,
-				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
 				"player_position": "front",
 				"wall_backing": false,
 				"orientation": "face_approach",
 				"isolation": 0,
-				"cluster_with": ["seed_replay_demo", "monte_carlo_dartboard"],
+				"cluster_with": [
+					"seed_replay_demo",
+					"monte_carlo_dartboard"
+				],
 				"preferred_zone": "teaching"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.88,
+					0.58,
+					0.13
+				],
+				"aabb_center": [
+					-0.01,
+					0.31,
+					0.06
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.88,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 2,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.247932Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"perlin_noise_bridge": {
 			"category": "procedural",
 			"complexity": "beginner",
 			"description": "Side-by-side 16x16 heightfield grids comparing white noise (chaotic) and Perlin noise (terrain-like). Shows how gradient noise transforms raw randomness into coherent structure through spatial memory.",
-			"dev_themes": ["noise", "procedural", "terrain"],
+			"dev_themes": [
+				"noise",
+				"procedural",
+				"terrain"
+			],
 			"include_in_map_data": true,
 			"lookup_name": "perlin_noise_bridge",
 			"map_ready": true,
-			"map_sequences": ["randomness"],
+			"map_sequences": [
+				"randomness"
+			],
 			"name": "Perlin Noise Bridge",
 			"parameters": {
-				"footprint": [4, 3, 2],
+				"footprint": [
+					4,
+					3,
+					2
+				],
 				"size_group": "room_scale"
 			},
 			"scene": "res://algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.tscn",
 			"sequence": "randomness",
-			"tags": ["noise", "perlin", "heightfield", "comparison"],
+			"tags": [
+				"noise",
+				"perlin",
+				"heightfield",
+				"comparison"
+			],
 			"spatial_needs": {
 				"platform": "pedestal",
 				"footprint_cells": 3,
-				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
 				"player_position": "front",
 				"wall_backing": false,
 				"orientation": "face_approach",
 				"isolation": 0,
-				"cluster_with": ["white_noise_spectrum", "noise_spectrum_3d"],
+				"cluster_with": [
+					"white_noise_spectrum",
+					"noise_spectrum_3d"
+				],
 				"preferred_zone": "teaching"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.59,
+					0.49,
+					0.4
+				],
+				"aabb_center": [
+					-0.01,
+					0.9,
+					0.07
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.59,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247932Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"reaction_diffusion_intro": {
 			"category": "emergence",
 			"complexity": "intermediate",
-			"description": "A 32x32 Gray-Scott reaction-diffusion simulation rendered as an ImageTexture. Two chemicals U and V interact to produce spots, stripes, or coral patterns from random initial conditions — Turing morphogenesis made visible.",
-			"dev_themes": ["emergence", "morphogenesis", "simulation"],
+			"description": "A 32x32 Gray-Scott reaction-diffusion simulation rendered as an ImageTexture. Two chemicals U and V interact to produce spots, stripes, or coral patterns from random initial conditions \u2014 Turing morphogenesis made visible.",
+			"dev_themes": [
+				"emergence",
+				"morphogenesis",
+				"simulation"
+			],
 			"include_in_map_data": true,
 			"lookup_name": "reaction_diffusion_intro",
 			"map_ready": true,
-			"map_sequences": ["randomness"],
+			"map_sequences": [
+				"randomness"
+			],
 			"name": "Reaction-Diffusion Intro",
 			"parameters": {
-				"footprint": [3, 3, 2],
+				"footprint": [
+					3,
+					3,
+					2
+				],
 				"size_group": "room_scale"
 			},
 			"scene": "res://algorithms/randomness/reaction_diffusion_intro/reaction_diffusion_intro.tscn",
 			"sequence": "randomness",
-			"tags": ["reaction-diffusion", "gray-scott", "turing", "morphogenesis", "emergence"],
+			"tags": [
+				"reaction-diffusion",
+				"gray-scott",
+				"turing",
+				"morphogenesis",
+				"emergence"
+			],
 			"spatial_needs": {
 				"platform": "pedestal",
 				"footprint_cells": 2,
-				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
 				"player_position": "front",
 				"wall_backing": true,
 				"orientation": "face_approach",
 				"isolation": 0,
-				"cluster_with": ["perlin_noise_bridge"],
+				"cluster_with": [
+					"perlin_noise_bridge"
+				],
 				"preferred_zone": "exploration"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.56,
+					0.87,
+					0.23
+				],
+				"aabb_center": [
+					0.0,
+					1.04,
+					0.11
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.87,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.247932Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	}

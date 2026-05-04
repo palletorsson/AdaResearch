@@ -1,7 +1,7 @@
 {
 	"registry_info": {
 		"name": "datastructures",
-		"description": "3D visualizations of fundamental and advanced data structures — from linked lists and binary trees through B-trees, tries, and spatial partitioning. Each artifact makes abstract memory layouts tangible and traversal algorithms visible.",
+		"description": "3D visualizations of fundamental and advanced data structures \u2014 from linked lists and binary trees through B-trees, tries, and spatial partitioning. Each artifact makes abstract memory layouts tangible and traversal algorithms visible.",
 		"category": "datastructures",
 		"theoretical_grounding": "Abstract data types, algorithmic complexity (Big-O), tree balancing invariants, hashing theory, spatial indexing, graph representations"
 	},
@@ -11,7 +11,7 @@
 			"scene": "res://algorithms/datastructures/binary_trees/binary_trees.tscn",
 			"name": "Binary Trees",
 			"description": "Interactive binary tree visualization showing insertion, deletion, and traversal orders (in-order, pre-order, post-order). Nodes light up as each traversal algorithm visits them, making the recursive structure visible.",
-			"qfep_connection": "Trees as hierarchical F-structures — each node's position encodes a decision, each traversal order reveals different information. The tree IS a compressed representation of sorted data: O(log n) access through recursive bisection.",
+			"qfep_connection": "Trees as hierarchical F-structures \u2014 each node's position encodes a decision, each traversal order reveals different information. The tree IS a compressed representation of sorted data: O(log n) access through recursive bisection.",
 			"category": "datastructures",
 			"complexity": "beginner",
 			"tags": [
@@ -87,6 +87,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.75,
+					7.8,
+					1.0
+				],
+				"aabb_center": [
+					0.13,
+					-0.6,
+					0.0
+				],
+				"grid_cells": [
+					17.0,
+					1.0
+				],
+				"max_dimension_m": 16.75,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				17.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.102951Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"bst_visualization": {
@@ -160,13 +193,36 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"bsp_trees": {
 			"lookup_name": "bsp_trees",
 			"scene": "res://algorithms/datastructures/bsp_trees/bsp_trees.tscn",
 			"name": "BSP Trees",
-			"description": "Binary Space Partitioning tree visualization — recursive halfplane splits dividing space into convex regions. The algorithm behind Doom's rendering and modern collision detection.",
+			"description": "Binary Space Partitioning tree visualization \u2014 recursive halfplane splits dividing space into convex regions. The algorithm behind Doom's rendering and modern collision detection.",
 			"category": "datastructures",
 			"complexity": "advanced",
 			"tags": [
@@ -243,13 +299,46 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.0,
+					10.0,
+					10.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					10.0,
+					10.0
+				],
+				"max_dimension_m": 10.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				10.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.102951Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"btree_visualization": {
 			"lookup_name": "btree_visualization",
 			"scene": "res://algorithms/datastructures/btree/btree_visualization.tscn",
 			"name": "B-Tree",
-			"description": "B-tree visualization showing multi-key nodes that split and merge to maintain balance. The data structure behind databases and filesystems — every query you've ever run touched one.",
+			"description": "B-tree visualization showing multi-key nodes that split and merge to maintain balance. The data structure behind databases and filesystems \u2014 every query you've ever run touched one.",
 			"category": "datastructures",
 			"complexity": "advanced",
 			"tags": [
@@ -321,13 +410,46 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					30.0,
+					5.2,
+					20.0
+				],
+				"aabb_center": [
+					0.0,
+					-2.4,
+					0.0
+				],
+				"grid_cells": [
+					30.0,
+					20.0
+				],
+				"max_dimension_m": 30.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				30.0,
+				1,
+				20.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.102951Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"fenwick_tree": {
 			"lookup_name": "fenwick_tree",
 			"scene": "res://algorithms/datastructures/fenwick_tree/fenwick_tree.tscn",
 			"name": "Fenwick Tree",
-			"description": "Binary Indexed Tree for efficient prefix sum queries. Shows how clever bit manipulation enables O(log n) range queries and updates — compact elegance in a tree that isn't really a tree.",
+			"description": "Binary Indexed Tree for efficient prefix sum queries. Shows how clever bit manipulation enables O(log n) range queries and updates \u2014 compact elegance in a tree that isn't really a tree.",
 			"category": "datastructures",
 			"complexity": "advanced",
 			"tags": [
@@ -398,14 +520,47 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.49,
+					0.15,
+					0.04
+				],
+				"aabb_center": [
+					-0.13,
+					-0.33,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.49,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.102951Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"graph_structures": {
 			"lookup_name": "graph_structures",
 			"scene": "res://algorithms/datastructures/graph_structures/graph_structures.tscn",
 			"name": "Graph Structures",
-			"description": "Side-by-side comparison of directed and undirected graphs with adjacency visualization. Nodes and edges as the universal language for relationships — from social networks to circuit diagrams.",
-			"qfep_connection": "Graphs are the most general F-structure — any relationship between any entities. Directed edges encode asymmetric information flow; undirected edges encode mutual coupling. The graph IS the topology of E(S) propagation.",
+			"description": "Side-by-side comparison of directed and undirected graphs with adjacency visualization. Nodes and edges as the universal language for relationships \u2014 from social networks to circuit diagrams.",
+			"qfep_connection": "Graphs are the most general F-structure \u2014 any relationship between any entities. Directed edges encode asymmetric information flow; undirected edges encode mutual coupling. The graph IS the topology of E(S) propagation.",
 			"category": "datastructures",
 			"complexity": "beginner",
 			"tags": [
@@ -482,6 +637,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					22.6,
+					22.6,
+					0.6
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					23.0,
+					1.0
+				],
+				"max_dimension_m": 22.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				23.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.102951Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"hash_maps": {
@@ -489,7 +677,7 @@
 			"scene": "res://algorithms/datastructures/hash_maps/hash_maps.tscn",
 			"name": "Hash Maps",
 			"description": "Hash table visualization with buckets, collision chains, and hash function mapping. Watch keys distribute across buckets and see why a good hash function means O(1) lookup while a bad one degrades to O(n).",
-			"qfep_connection": "Hash maps trade space-entropy for time-order — using a hash function to scatter keys uniformly across buckets achieves O(1) access at the cost of memory overhead. A good hash maximizes E(S) in the bucket distribution to minimize F in the lookup.",
+			"qfep_connection": "Hash maps trade space-entropy for time-order \u2014 using a hash function to scatter keys uniformly across buckets achieves O(1) access at the cost of memory overhead. A good hash maximizes E(S) in the bucket distribution to minimize F in the lookup.",
 			"category": "datastructures",
 			"complexity": "intermediate",
 			"tags": [
@@ -562,14 +750,47 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.74,
+					0.17,
+					0.04
+				],
+				"aabb_center": [
+					0.0,
+					-0.5,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.74,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.102951Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"heap_operations": {
 			"lookup_name": "heap_operations",
 			"scene": "res://algorithms/datastructures/heap_operations/heap_operations.tscn",
 			"name": "Heap Operations",
-			"description": "Min-heap and max-heap with sift-up and sift-down operations animated. The structure behind priority queues — always know your most important element in O(1), insert and extract in O(log n).",
-			"qfep_connection": "Heaps maintain partial order at the edge of chaos — not fully sorted (low λ), not random (high λ), but just ordered enough to know the extremum in O(1). The minimum viable F-structure for priority access.",
+			"description": "Min-heap and max-heap with sift-up and sift-down operations animated. The structure behind priority queues \u2014 always know your most important element in O(1), insert and extract in O(log n).",
+			"qfep_connection": "Heaps maintain partial order at the edge of chaos \u2014 not fully sorted (low \u03bb), not random (high \u03bb), but just ordered enough to know the extremum in O(1). The minimum viable F-structure for priority access.",
 			"category": "datastructures",
 			"complexity": "intermediate",
 			"tags": [
@@ -644,13 +865,46 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					17.0,
+					7.55,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					-0.53,
+					0.0
+				],
+				"grid_cells": [
+					17.0,
+					1.0
+				],
+				"max_dimension_m": 17.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				17.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.102951Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"linked_lists": {
 			"lookup_name": "linked_lists",
 			"scene": "res://algorithms/datastructures/linked_lists/linked_lists.tscn",
 			"name": "Linked Lists",
-			"description": "Singly and doubly linked list visualization with node insertion, deletion, and pointer traversal. The simplest dynamic data structure — nodes connected by references, not memory layout.",
+			"description": "Singly and doubly linked list visualization with node insertion, deletion, and pointer traversal. The simplest dynamic data structure \u2014 nodes connected by references, not memory layout.",
 			"category": "datastructures",
 			"complexity": "beginner",
 			"tags": [
@@ -726,14 +980,47 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.75,
+					3.9,
+					1.0
+				],
+				"aabb_center": [
+					0.13,
+					-1.55,
+					0.0
+				],
+				"grid_cells": [
+					17.0,
+					1.0
+				],
+				"max_dimension_m": 16.75,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				17.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.102951Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"quadtrees_octrees": {
 			"lookup_name": "quadtrees_octrees",
 			"scene": "res://algorithms/datastructures/quadtrees_octrees/quadtrees_octrees.tscn",
 			"name": "Quadtrees & Octrees",
-			"description": "Side-by-side spatial partitioning: quadtree subdivides 2D space, octree subdivides 3D. Watch regions split as points accumulate — the backbone of collision detection, LOD systems, and spatial databases.",
-			"qfep_connection": "Adaptive spatial partitioning — subdivide only where complexity accumulates. Dense regions get finer cells (higher F resolution), sparse regions stay coarse (lower F cost). The structure adapts its own resolution to match local E(S) density.",
+			"description": "Side-by-side spatial partitioning: quadtree subdivides 2D space, octree subdivides 3D. Watch regions split as points accumulate \u2014 the backbone of collision detection, LOD systems, and spatial databases.",
+			"qfep_connection": "Adaptive spatial partitioning \u2014 subdivide only where complexity accumulates. Dense regions get finer cells (higher F resolution), sparse regions stay coarse (lower F cost). The structure adapts its own resolution to match local E(S) density.",
 			"category": "datastructures",
 			"complexity": "intermediate",
 			"tags": [
@@ -808,14 +1095,37 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"redblack_visualization": {
 			"lookup_name": "redblack_visualization",
 			"scene": "res://algorithms/datastructures/redblacktree/redblack_visualization.tscn",
 			"name": "Red-Black Tree",
-			"description": "Self-balancing BST with red-black coloring invariants. Rotations and recolorings maintain O(log n) height — the tree behind Java's TreeMap and Linux's scheduler.",
-			"qfep_connection": "Self-balancing as continuous F-minimization — rotations and recolorings restore balance after every insertion, keeping the tree at its F-optimal O(log n) height. The invariants ARE the F-model: constraints that prevent entropy accumulation.",
+			"description": "Self-balancing BST with red-black coloring invariants. Rotations and recolorings maintain O(log n) height \u2014 the tree behind Java's TreeMap and Linux's scheduler.",
+			"qfep_connection": "Self-balancing as continuous F-minimization \u2014 rotations and recolorings restore balance after every insertion, keeping the tree at its F-optimal O(log n) height. The invariants ARE the F-model: constraints that prevent entropy accumulation.",
 			"category": "datastructures",
 			"complexity": "advanced",
 			"tags": [
@@ -887,13 +1197,46 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					35.0,
+					6.05,
+					25.0
+				],
+				"aabb_center": [
+					0.0,
+					-4.97,
+					0.0
+				],
+				"grid_cells": [
+					35.0,
+					25.0
+				],
+				"max_dimension_m": 35.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				35.0,
+				1,
+				25.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.102951Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"segment_tree": {
 			"lookup_name": "segment_tree",
 			"scene": "res://algorithms/datastructures/segment_tree/segment_tree.tscn",
 			"name": "Segment Tree",
-			"description": "Segment tree for range queries (min, max, sum) with lazy propagation. Each node stores an aggregate of its interval — answer any range query in O(log n) after O(n) construction.",
+			"description": "Segment tree for range queries (min, max, sum) with lazy propagation. Each node stores an aggregate of its interval \u2014 answer any range query in O(log n) after O(n) construction.",
 			"category": "datastructures",
 			"complexity": "advanced",
 			"tags": [
@@ -970,13 +1313,36 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"suffix_array_tree": {
 			"lookup_name": "suffix_array_tree",
 			"scene": "res://algorithms/datastructures/suffix_array_tree/suffix_array_tree.tscn",
 			"name": "Suffix Array & Tree",
-			"description": "Side-by-side suffix array and suffix tree for string indexing. The structures that make text search instantaneous — every substring query answered in O(m) regardless of text length.",
+			"description": "Side-by-side suffix array and suffix tree for string indexing. The structures that make text search instantaneous \u2014 every substring query answered in O(m) regardless of text length.",
 			"category": "datastructures",
 			"complexity": "advanced",
 			"tags": [
@@ -1053,14 +1419,37 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"trie_operations": {
 			"lookup_name": "trie_operations",
 			"scene": "res://algorithms/datastructures/trie_operations/trie_operations.tscn",
 			"name": "Trie Operations",
-			"description": "Prefix tree (trie) with insertion and search animated character-by-character. The structure behind autocomplete and spell checkers — shared prefixes become shared paths.",
-			"qfep_connection": "Tries achieve F-minimization through prefix sharing — common beginnings are stored once, branching only where strings diverge. The trie IS a compression of the string set: minimum redundancy, maximum structural reuse.",
+			"description": "Prefix tree (trie) with insertion and search animated character-by-character. The structure behind autocomplete and spell checkers \u2014 shared prefixes become shared paths.",
+			"qfep_connection": "Tries achieve F-minimization through prefix sharing \u2014 common beginnings are stored once, branching only where strings diverge. The trie IS a compression of the string set: minimum redundancy, maximum structural reuse.",
 			"category": "datastructures",
 			"complexity": "intermediate",
 			"tags": [
@@ -1135,14 +1524,47 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.75,
+					9.0,
+					1.0
+				],
+				"aabb_center": [
+					0.13,
+					-1.1,
+					0.0
+				],
+				"grid_cells": [
+					17.0,
+					1.0
+				],
+				"max_dimension_m": 16.75,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				17.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.102951Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"union_find": {
 			"lookup_name": "union_find",
 			"scene": "res://algorithms/datastructures/union_find/union_find.tscn",
 			"name": "Union-Find",
-			"description": "Disjoint set union with path compression and union by rank. Watch components merge in near-constant time — the algorithm that makes Kruskal's MST efficient and connected component detection trivial.",
-			"qfep_connection": "Path compression as F-minimization in real-time — every find operation flattens the tree, making future operations faster. The structure optimizes itself through use, reducing its own entropy cost with each query.",
+			"description": "Disjoint set union with path compression and union by rank. Watch components merge in near-constant time \u2014 the algorithm that makes Kruskal's MST efficient and connected component detection trivial.",
+			"qfep_connection": "Path compression as F-minimization in real-time \u2014 every find operation flattens the tree, making future operations faster. The structure optimizes itself through use, reducing its own entropy cost with each query.",
 			"category": "datastructures",
 			"complexity": "intermediate",
 			"tags": [
@@ -1216,6 +1638,39 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.75,
+					8.8,
+					1.0
+				],
+				"aabb_center": [
+					0.13,
+					-0.1,
+					0.0
+				],
+				"grid_cells": [
+					17.0,
+					1.0
+				],
+				"max_dimension_m": 16.75,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				17.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.102951Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	}

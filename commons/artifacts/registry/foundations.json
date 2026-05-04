@@ -1,7 +1,7 @@
 {
 	"registry_info": {
 		"name": "foundations",
-		"description": "Artifacts for the Foundations Crisis sequence - Gödel, Russell, Escher, Magritte, Florensky",
+		"description": "Artifacts for the Foundations Crisis sequence - G\u00f6del, Russell, Escher, Magritte, Florensky",
 		"category": "integration",
 		"theoretical_grounding": "Gamwell 'Mathematics and Art' Chapters 3-6, 9, 13"
 	},
@@ -10,8 +10,8 @@
 			"lookup_name": "godel_statement_plaque",
 			"scene": "res://commons/interfaces/foundations/godel_statement_plaque.tscn",
 			"class_name": "GodelStatementPlaque",
-			"description": "Self-referential plaque cycling through increasingly paradoxical statements, culminating in Gödel's incompleteness",
-			"gamwell_reference": "Chapter 9: Gödel's Incompleteness Theorem",
+			"description": "Self-referential plaque cycling through increasingly paradoxical statements, culminating in G\u00f6del's incompleteness",
+			"gamwell_reference": "Chapter 9: G\u00f6del's Incompleteness Theorem",
 			"qfep_connection": "Proves pure F-minimization is impossible - every formal system has an outside",
 			"signals": [
 				"statement_changed",
@@ -51,7 +51,7 @@
 				"foundationscrisis"
 			],
 			"sequence": "foundationscrisis",
-			"name": "GÃ¶del Statement Plaque",
+			"name": "G\u00c3\u00b6del Statement Plaque",
 			"geometry_spec": {
 				"mesh_type": "composed_primitives",
 				"topology": "manifold_closed",
@@ -103,6 +103,39 @@
 					"russell_set_box"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.64,
+					0.44,
+					0.05
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.64,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"russell_set_box": {
@@ -203,6 +236,39 @@
 					"reference"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.3,
+					0.19,
+					0.3
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.3,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"magritte_pipe": {
@@ -211,7 +277,7 @@
 			"class_name": "MagrittePipe",
 			"description": "'Ceci n'est pas une pipe' - The gap between representation and reality",
 			"gamwell_reference": "Chapter 9: Magritte's 'The Treachery of Images' (1929)",
-			"qfep_connection": "F (predictive model) ≠ reality. The map is not the territory.",
+			"qfep_connection": "F (predictive model) \u2260 reality. The map is not the territory.",
 			"signals": [
 				"representation_questioned",
 				"layer_revealed"
@@ -302,13 +368,46 @@
 					"extends"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.6,
+					0.12
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 2,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"escher_staircase": {
 			"lookup_name": "escher_staircase",
 			"scene": "res://commons/interfaces/foundations/escher_staircase.tscn",
 			"class_name": "EscherStaircase",
-			"description": "Impossible staircase - locally coherent, globally impossible. Visual Gödel.",
+			"description": "Impossible staircase - locally coherent, globally impossible. Visual G\u00f6del.",
 			"gamwell_reference": "Chapter 9: Escher's impossible objects",
 			"qfep_connection": "Local validity does not guarantee global consistency",
 			"signals": [
@@ -403,6 +502,39 @@
 					"steps"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.0,
+					1.98,
+					2.0
+				],
+				"aabb_center": [
+					0.0,
+					0.91,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 2.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"florensky_sphere": {
@@ -411,7 +543,7 @@
 			"class_name": "FlorenskySphere",
 			"description": "Paraconsistent logic sphere - holds A and not-A simultaneously without collapse",
 			"gamwell_reference": "Chapter 3: Florensky's 'Pillar and Ground of the Truth' - supralogic",
-			"qfep_connection": "QFEP allows holding order (F) and disorder (-λE) without triviality",
+			"qfep_connection": "QFEP allows holding order (F) and disorder (-\u03bbE) without triviality",
 			"signals": [
 				"state_observed",
 				"superposition_entered",
@@ -505,6 +637,39 @@
 					"superposition"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.6,
+					0.6,
+					0.6
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"bifurcation_diagram": {
@@ -513,7 +678,7 @@
 			"class_name": "BifurcationDiagram",
 			"description": "Interactive 3D bifurcation diagram from logistic map - walk through the edge of chaos",
 			"gamwell_reference": "Chapter 12: Chaos Theory, Fractals",
-			"qfep_connection": "The λ parameter IS Langton's λ - tunes between order and chaos",
+			"qfep_connection": "The \u03bb parameter IS Langton's \u03bb - tunes between order and chaos",
 			"signals": [
 				"r_changed",
 				"regime_changed"
@@ -608,6 +773,39 @@
 					"florensky_sphere"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.2,
+					2.4,
+					0.7
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					5.0,
+					1.0
+				],
+				"max_dimension_m": 4.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				5.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"euclid_postulates_plaque": {
@@ -705,13 +903,46 @@
 					"fifth"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.84,
+					1.04,
+					0.06
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.04,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"penrose_triangle": {
 			"lookup_name": "penrose_triangle",
 			"scene": "res://commons/artifacts/penrose_triangle/penrose_triangle.tscn",
 			"class_name": "PenroseTriangle",
-			"description": "The impossible triangle - locally coherent, globally impossible. Visual Gödel.",
+			"description": "The impossible triangle - locally coherent, globally impossible. Visual G\u00f6del.",
 			"gamwell_reference": "Chapter 9: Penrose and Escher collaboration",
 			"qfep_connection": "Local validity does not guarantee global consistency",
 			"signals": [
@@ -806,13 +1037,46 @@
 					"family"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.58,
+					0.49,
+					1.46
+				],
+				"aabb_center": [
+					0.01,
+					0.06,
+					0.55
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.46,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"poincare_disk": {
 			"lookup_name": "poincare_disk",
 			"scene": "res://commons/artifacts/poincare_disk/poincare_disk.tscn",
 			"class_name": "PoincareDisk",
-			"description": "Poincaré disk model of hyperbolic geometry - where parallel lines diverge and triangles have angle sum < 180°",
+			"description": "Poincar\u00e9 disk model of hyperbolic geometry - where parallel lines diverge and triangles have angle sum < 180\u00b0",
 			"gamwell_reference": "Chapter 2: Non-Euclidean Geometry",
 			"qfep_connection": "The parallel postulate is independent - geometry is a choice",
 			"signals": [
@@ -906,13 +1170,46 @@
 					"representation"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.81,
+					0.81,
+					0.03
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.01
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.81,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 2,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"schrodinger_box": {
 			"lookup_name": "schrodinger_box",
 			"scene": "res://commons/artifacts/schrodinger_box/schrodinger_box.tscn",
 			"class_name": "SchrodingerBox",
-			"description": "Schrödinger's cat thought experiment - superposition collapses upon observation",
+			"description": "Schr\u00f6dinger's cat thought experiment - superposition collapses upon observation",
 			"gamwell_reference": "Quantum mechanics and measurement problem",
 			"qfep_connection": "Observation collapses possibility - connects to Florensky's paraconsistent holding of A and not-A",
 			"signals": [
@@ -1008,15 +1305,48 @@
 					"superposition"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.42,
+					0.32,
+					0.31
+				],
+				"aabb_center": [
+					0.0,
+					0.01,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.42,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"angle_sum_triangle": {
 			"lookup_name": "angle_sum_triangle",
 			"scene": "res://commons/artifacts/angle_sum_triangle/angle_sum_triangle.tscn",
 			"class_name": "AngleSumTriangle",
-			"description": "Demonstrates that triangle angles sum to 180° in Euclidean space — a fact that fails in non-Euclidean geometries",
+			"description": "Demonstrates that triangle angles sum to 180\u00b0 in Euclidean space \u2014 a fact that fails in non-Euclidean geometries",
 			"gamwell_reference": "Chapter 1-2: Euclidean Geometry",
-			"qfep_connection": "The angle sum property is axiomatic — it holds only when the parallel postulate is assumed",
+			"qfep_connection": "The angle sum property is axiomatic \u2014 it holds only when the parallel postulate is assumed",
 			"signals": [],
 			"interactions": [
 				"observe angle labels and sum"
@@ -1097,6 +1427,39 @@
 					"angle"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.32,
+					0.32,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.04,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.32,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"hilbert_hotel": {
@@ -1184,6 +1547,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.87,
+					0.1,
+					0.09
+				],
+				"aabb_center": [
+					-0.03,
+					0.03,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.87,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"constructive_proof": {
@@ -1272,6 +1668,39 @@
 					"constructive"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.3,
+					0.3,
+					0.3
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.3,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"brouwer_choice_sequence": {
@@ -1363,6 +1792,39 @@
 					"choice"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.76,
+					0.06,
+					0.06
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.76,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"excluded_middle_demo": {
@@ -1456,6 +1918,39 @@
 					"proofs"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.6,
+					0.67,
+					0.76
+				],
+				"aabb_center": [
+					0.0,
+					0.24,
+					0.28
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.76,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.106998Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	},

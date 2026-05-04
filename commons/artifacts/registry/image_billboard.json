@@ -1,0 +1,32 @@
+{
+	"id": "image_billboard",
+	"name": "Image Billboard",
+	"description": "Placement-side fallback for DNA-gallery findings whose grammar doesn't have a live builder yet. Renders any PNG as a billboarded plane. Used by the promote-to-artifact pipeline when a gallery has no registered builder artifact.",
+	"category": "meta",
+	"theoreticalGrounding": "A snapshot of a finding is still a finding — image_billboard makes uncurated grammars placeable while their live builders catch up.",
+	"artifacts": {
+		"image_billboard": {
+			"lookup_name": "image_billboard",
+			"name": "Image Billboard",
+			"description": "Renders a PNG (typically a curated DNA-gallery screenshot) as a billboarded plane in 3D. Parameters: image_path (required), plane_size, y_offset, billboard_enabled.",
+			"category": "meta",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/image_billboard/image_billboard.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [1, 1, 2],
+			"tags": ["image", "billboard", "fallback", "dna", "gallery"],
+			"qfep_connection": "S: a placed reference to a system state — the finding rendered as snapshot rather than recomputed.",
+			"parameters": {
+				"image_path": "",
+				"plane_size": 1.5,
+				"y_offset": 0.8,
+				"billboard_enabled": true,
+				"footprint": [1, 1, 2],
+				"size_group": "compact"
+			},
+			"size_group": "compact"
+		}
+	}
+}

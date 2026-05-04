@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://lsystem_artifact_root"]
+
+[ext_resource type="Script" path="res://commons/artifacts/lsystem_artifact/lsystem_artifact.gd" id="1_lsa"]
+
+[node name="LSystemArtifact" type="Node3D"]
+script = ExtResource("1_lsa")

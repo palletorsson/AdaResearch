@@ -4,7 +4,7 @@
 			"capacity": "FEEL orientation as embodied direction by standing inside the coordinate frame",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Stand inside the coordinate system. Three meter-long axes — X red, Y green, Z blue — establish the right-handed frame that every 3D operation assumes. A gyroscope gadget shows your orientation relative to the axes. The arbitrary nature of axis conventions becomes visible: right-handed vs left-handed, Y-up vs Z-up are choices, not laws.",
+			"description": "Stand inside the coordinate system. Three meter-long axes \u2014 X red, Y green, Z blue \u2014 establish the right-handed frame that every 3D operation assumes. A gyroscope gadget shows your orientation relative to the axes. The arbitrary nature of axis conventions becomes visible: right-handed vs left-handed, Y-up vs Z-up are choices, not laws.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -37,7 +37,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Pure F — the coordinate system is the most fundamental structure, the frame from which all measurement begins. Without agreed axes, no vector has components, no transform has a matrix.",
+			"qfep_connection": "Pure F \u2014 the coordinate system is the most fundamental structure, the frame from which all measurement begins. Without agreed axes, no vector has components, no transform has a matrix.",
 			"scene": "res://algorithms/vectors/00_coordinates/CoordinateSystem3M.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -100,13 +100,41 @@
 					"interactive"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.76,
+					3.22,
+					3.27
+				],
+				"aabb_center": [
+					0.72,
+					1.49,
+					1.47
+				],
+				"grid_cells": [
+					5.0,
+					4.0
+				],
+				"max_dimension_m": 4.76,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"ForceMagnitudeDemo": {
 			"capacity": "FEEL that force and acceleration are the same shape by dragging an arrow and watching the ball respond proportionally",
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Drag the force arrow longer and the ball accelerates harder. F = ma made visceral — magnitude is felt, not read. The ball's trajectory traces the force's history. Reset with R, freeze with Space. Contrasts with WorkEnergyDemo (same force, different measure); feeds into CombinedForcesDemo (multiple forces).",
+			"description": "Drag the force arrow longer and the ball accelerates harder. F = ma made visceral \u2014 magnitude is felt, not read. The ball's trajectory traces the force's history. Reset with R, freeze with Space. Contrasts with WorkEnergyDemo (same force, different measure); feeds into CombinedForcesDemo (multiple forces).",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -138,7 +166,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Classical F — force as deterministic law. Drag the arrow, the ball obeys. No randomness, no emergence. Pure Newtonian causality where every input produces a proportional output.",
+			"qfep_connection": "Classical F \u2014 force as deterministic law. Drag the arrow, the ball obeys. No randomness, no emergence. Pure Newtonian causality where every input produces a proportional output.",
 			"scene": "res://algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -196,13 +224,41 @@
 					"multiple"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.86,
+					0.33,
+					0.35
+				],
+				"aabb_center": [
+					0.26,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.86,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"VectorAddition": {
 			"capacity": "SEE that the ball knows only the sum of all forces, not the individual forces themselves",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Two force arrows, one ball, one truth: nature does not apply forces one at a time. Drag F1 and F2 independently — the yellow net force arrow updates as their vector sum, and the ball accelerates along it. Cancellation when forces oppose. Diagonal trajectories from perpendicular forces. Superposition as felt experience.",
+			"description": "Two force arrows, one ball, one truth: nature does not apply forces one at a time. Drag F1 and F2 independently \u2014 the yellow net force arrow updates as their vector sum, and the ball accelerates along it. Cancellation when forces oppose. Diagonal trajectories from perpendicular forces. Superposition as felt experience.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -237,7 +293,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "F-composition — two deterministic forces combine into one deterministic result. Superposition is linearity made visible. The net force IS the sum, no approximation, no loss.",
+			"qfep_connection": "F-composition \u2014 two deterministic forces combine into one deterministic result. Superposition is linearity made visible. The net force IS the sum, no approximation, no loss.",
 			"scene": "res://algorithms/vectors/02_vector_addition/VectorAddition.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -296,13 +352,41 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.24,
+					1.02,
+					0.82
+				],
+				"aabb_center": [
+					0.0,
+					0.48,
+					0.14
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.24,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"VectorBasics": {
-			"capacity": "UNDERSTAND that a vector is not a number and not a point — it is a displacement carrying both how far and which way",
+			"capacity": "UNDERSTAND that a vector is not a number and not a point \u2014 it is a displacement carrying both how far and which way",
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Grab an arrow and stretch it. Watch magnitude, unit vector, and components all update as one system. v = |v| * v-hat — a vector is magnitude times direction, decomposed into (x,y,z) components along the axes. The magnitude arc sweeps from the x-axis. The spring scale responds to vector length like a physical instrument.",
+			"description": "Grab an arrow and stretch it. Watch magnitude, unit vector, and components all update as one system. v = |v| * v-hat \u2014 a vector is magnitude times direction, decomposed into (x,y,z) components along the axes. The magnitude arc sweeps from the x-axis. The spring scale responds to vector length like a physical instrument.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -336,7 +420,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Pure F-decomposition — breaking a single quantity into orthogonal components. The vector IS its components, and the components ARE the vector. No information lost, no approximation.",
+			"qfep_connection": "Pure F-decomposition \u2014 breaking a single quantity into orthogonal components. The vector IS its components, and the components ARE the vector. No information lost, no approximation.",
 			"scene": "res://algorithms/vectors/01_vector_basics/VectorBasics.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -402,13 +486,41 @@
 					"decomposition"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.22,
+					1.02,
+					0.82
+				],
+				"aabb_center": [
+					-0.05,
+					0.48,
+					0.14
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.22,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"VectorCrossProduct": {
 			"capacity": "FEEL that torque is not a force but the force's opinion about rotation, measured by how far off-center and how perpendicular it acts",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Drag the force and its application point. The purple torque vector pops out perpendicular to both, spinning the ball via the right-hand rule. tau = r x F — the cross product. Zero torque when force passes through center (r parallel to F). Maximum torque when perpendicular to the lever arm.",
+			"description": "Drag the force and its application point. The purple torque vector pops out perpendicular to both, spinning the ball via the right-hand rule. tau = r x F \u2014 the cross product. Zero torque when force passes through center (r parallel to F). Maximum torque when perpendicular to the lever arm.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -442,7 +554,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "F-perpendicularity — the cross product extracts the component of interaction that is orthogonal to both inputs. It measures not agreement (that is dot product) but the capacity for rotation.",
+			"qfep_connection": "F-perpendicularity \u2014 the cross product extracts the component of interaction that is orthogonal to both inputs. It measures not agreement (that is dot product) but the capacity for rotation.",
 			"scene": "res://algorithms/vectors/06_vector_cross_product/VectorCrossProduct.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -501,13 +613,41 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.27,
+					1.02,
+					0.82
+				],
+				"aabb_center": [
+					-0.08,
+					0.48,
+					0.14
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.27,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"VectorDotProduct": {
-			"capacity": "SEE that pushing sideways does nothing — work is the component of force that agrees with motion",
+			"capacity": "SEE that pushing sideways does nothing \u2014 work is the component of force that agrees with motion",
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Push a ball and watch the work meter tick up. Push perpendicular and it stays at zero. W = F . d = |F||d|cos(theta) — the dot product made visceral. The meter turns green for positive work, red for negative, yellow for zero. Total work accumulates as a running dot-product integrator over the path.",
+			"description": "Push a ball and watch the work meter tick up. Push perpendicular and it stays at zero. W = F . d = |F||d|cos(theta) \u2014 the dot product made visceral. The meter turns green for positive work, red for negative, yellow for zero. Total work accumulates as a running dot-product integrator over the path.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -540,7 +680,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "F-projection — the dot product extracts the component of one vector that agrees with another. It measures alignment. Perpendicular forces do zero work because they have zero agreement with the direction of motion.",
+			"qfep_connection": "F-projection \u2014 the dot product extracts the component of one vector that agrees with another. It measures alignment. Perpendicular forces do zero work because they have zero agreement with the direction of motion.",
 			"scene": "res://algorithms/vectors/03_dot_product/VectorDotProduct.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -601,6 +741,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.02,
+					1.05,
+					0.66
+				],
+				"aabb_center": [
+					-0.11,
+					0.47,
+					0.06
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.05,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"VectorFieldFlow": {
@@ -692,6 +860,34 @@
 					"rendering"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.1,
+					1.6,
+					1.6
+				],
+				"aabb_center": [
+					0.0,
+					0.74,
+					0.74
+				],
+				"grid_cells": [
+					4.0,
+					2.0
+				],
+				"max_dimension_m": 3.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"VectorForces": {
@@ -769,6 +965,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.49,
+					3.0,
+					0.82
+				],
+				"aabb_center": [
+					0.11,
+					-0.51,
+					0.14
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 3.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"VectorMotion": {
@@ -847,6 +1071,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.95,
+					1.02,
+					0.82
+				],
+				"aabb_center": [
+					0.08,
+					0.48,
+					0.14
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"VectorProjectionReflection": {
@@ -927,6 +1179,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.98,
+					1.02,
+					1.98
+				],
+				"aabb_center": [
+					0.0,
+					0.48,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.98,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"VectorSubtraction": {
@@ -1011,6 +1291,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.34,
+					1.03,
+					0.82
+				],
+				"aabb_center": [
+					-0.11,
+					0.48,
+					0.14
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.34,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"VectorThrowing": {
@@ -1097,6 +1405,34 @@
 					"hl_turret_vectors"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.3,
+					3.3,
+					1.43
+				],
+				"aabb_center": [
+					0.0,
+					-0.02,
+					0.69
+				],
+				"grid_cells": [
+					4.0,
+					2.0
+				],
+				"max_dimension_m": 3.3,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"VectorTorque": {
@@ -1174,6 +1510,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.95,
+					1.02,
+					0.82
+				],
+				"aabb_center": [
+					0.08,
+					0.48,
+					0.14
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"VectorWorkbench": {
@@ -1267,6 +1631,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.0,
+					1.94,
+					0.75
+				],
+				"aabb_center": [
+					-0.54,
+					0.29,
+					0.35
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 3.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"ball_dropper": {
@@ -1363,13 +1755,46 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.3,
+					0.3,
+					0.3
+				],
+				"aabb_center": [
+					0.0,
+					-0.03,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.3,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"basis_vectors_rig": {
 			"category": "mathematics",
 			"class_name": "BasisVectorsRig",
 			"complexity": "intermediate",
-			"description": "Interactive basis vectors (î, ĵ, k̂) showing how any 3D point is a linear combination: P = xî + yĵ + zk̂.",
+			"description": "Interactive basis vectors (\u00ee, \u0135, k\u0302) showing how any 3D point is a linear combination: P = x\u00ee + y\u0135 + zk\u0302.",
 			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors",
@@ -1463,13 +1888,46 @@
 					"components"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.8,
+					1.03,
+					1.92
+				],
+				"aabb_center": [
+					0.0,
+					0.48,
+					0.06
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.92,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"coordinate_system_switcher": {
 			"category": "mathematics",
 			"class_name": "CoordinateSystemSwitcher",
 			"complexity": "intermediate",
-			"description": "Shows the same 3D point in Cartesian (x,y,z), Cylindrical (r,θ,z), and Spherical (ρ,θ,φ) coordinates simultaneously. ImmediateMesh axes and arcs with projection lines showing how each system maps. Color-coded: Cartesian=RGB, Cylindrical=yellow, Spherical=magenta.",
+			"description": "Shows the same 3D point in Cartesian (x,y,z), Cylindrical (r,\u03b8,z), and Spherical (\u03c1,\u03b8,\u03c6) coordinates simultaneously. ImmediateMesh axes and arcs with projection lines showing how each system maps. Color-coded: Cartesian=RGB, Cylindrical=yellow, Spherical=magenta.",
 			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors",
@@ -1483,7 +1941,7 @@
 				"vectors"
 			],
 			"name": "Coordinate System Switcher",
-			"qfep_connection": "Multiple coordinate systems as multiple perspectives on the same reality — the point doesn't change, only the language describing it.",
+			"qfep_connection": "Multiple coordinate systems as multiple perspectives on the same reality \u2014 the point doesn't change, only the language describing it.",
 			"scene": "res://commons/artifacts/coordinate_system_switcher/coordinate_system_switcher.tscn",
 			"tags": [
 				"vectors",
@@ -1547,6 +2005,39 @@
 					"dependent"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.46,
+					0.45,
+					0.46
+				],
+				"aabb_center": [
+					0.22,
+					0.22,
+					0.22
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.46,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"coordinates": {
@@ -1620,13 +2111,41 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.54,
+					0.54,
+					0.53
+				],
+				"aabb_center": [
+					0.25,
+					0.25,
+					0.25
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.54,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"cross_product_demo": {
 			"category": "mathematics",
 			"class_name": "CrossProductDemo",
 			"complexity": "intermediate",
-			"description": "Interactive cross product: A × B produces a vector perpendicular to both. Shows parallelogram area and right-hand rule.",
+			"description": "Interactive cross product: A \u00d7 B produces a vector perpendicular to both. Shows parallelogram area and right-hand rule.",
 			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors"
@@ -1713,6 +2232,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.37,
+					2.94,
+					3.37
+				],
+				"aabb_center": [
+					0.0,
+					0.68,
+					0.01
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 3.37,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				4.0,
+				1,
+				4.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"destructible_marching_cube": {
@@ -1791,12 +2343,40 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.27,
+					3.72,
+					3.73
+				],
+				"aabb_center": [
+					-0.24,
+					0.01,
+					-0.04
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 3.73,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"destructibles_test_scene": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "impact → destroy(method). Eight destruction methods: instant, health-based, face-peel, Cantor recursion, Voronoi fracture, planar crack, prism shatter. Topology of breaking.",
+			"description": "impact \u2192 destroy(method). Eight destruction methods: instant, health-based, face-peel, Cantor recursion, Voronoi fracture, planar crack, prism shatter. Topology of breaking.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -1873,13 +2453,41 @@
 					"subsystems"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					5.0,
+					2.07,
+					7.61
+				],
+				"aabb_center": [
+					0.0,
+					1.02,
+					3.79
+				],
+				"grid_cells": [
+					5.0,
+					8.0
+				],
+				"max_dimension_m": 7.61,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"dot_product_projector": {
 			"category": "mathematics",
 			"class_name": "DotProductProjector",
 			"complexity": "intermediate",
-			"description": "Interactive dot product visualizer showing A · B = |A||B|cos(θ). Demonstrates projection and alignment measurement.",
+			"description": "Interactive dot product visualizer showing A \u00b7 B = |A||B|cos(\u03b8). Demonstrates projection and alignment measurement.",
 			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors"
@@ -1971,6 +2579,39 @@
 					"product"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.07,
+					2.19,
+					3.17
+				],
+				"aabb_center": [
+					0.03,
+					0.61,
+					0.08
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 3.17,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				4.0,
+				1,
+				4.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_1_1_bouncing_ball_with_no_vectors_vr": {
@@ -2053,6 +2694,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.81,
+					0.52,
+					0.29
+				],
+				"aabb_center": [
+					0.37,
+					0.22,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.81,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_1_2_bouncing_ball_with_vectors_vr": {
@@ -2133,6 +2802,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.81,
+					0.53,
+					0.29
+				],
+				"aabb_center": [
+					0.37,
+					0.21,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.81,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_1_3_vector_subtraction_vr": {
@@ -2215,6 +2912,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.78,
+					0.58,
+					0.29
+				],
+				"aabb_center": [
+					0.38,
+					0.24,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.78,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_1_4_vector_multiplication_vr": {
@@ -2297,6 +3022,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.78,
+					0.53,
+					0.29
+				],
+				"aabb_center": [
+					0.38,
+					0.21,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.78,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_1_5_vector_magnitude_vr": {
@@ -2379,6 +3132,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.23,
+					0.6,
+					0.29
+				],
+				"aabb_center": [
+					0.16,
+					0.25,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.23,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_1_6_vector_normalize_vr": {
@@ -2461,6 +3242,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.78,
+					0.58,
+					0.29
+				],
+				"aabb_center": [
+					0.38,
+					0.24,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.78,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_1_7_motion_101_velocity_vr": {
@@ -2542,6 +3351,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.06,
+					0.06,
+					0.06
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.06,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_1_8_motion_101_velocity_and_constant_acceleration_vr": {
@@ -2624,6 +3461,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.56,
+					0.29
+				],
+				"aabb_center": [
+					0.37,
+					0.25,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_1_9_motion_101_velocity_and_random_acceleration_vr": {
@@ -2708,10 +3573,38 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.06,
+					0.06,
+					0.06
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.06,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"exercise_1_3_solution_3_d_bouncing_ball_vr": {
-			"capacity": "WATCH a bouncing ball as a clock that runs down — each bounce measures how much the universe forgot",
+			"capacity": "WATCH a bouncing ball as a clock that runs down \u2014 each bounce measures how much the universe forgot",
 			"category": "physics",
 			"complexity": "beginner",
 			"description": "A ball trapped in a box, slowly dying. Position accumulates velocity, velocity accumulates gravity, walls reverse and damp. Each bounce lower than the last as elasticity drains energy. A trail draws the ball's parabolic history as a fading line. The simplest dynamics: one force, one constraint, and the slow settling as the universe forgets.",
@@ -2747,7 +3640,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Pure F with dissipation — gravity is constant F, the wall's elasticity coefficient IS lambda. At e=1.0 energy is conserved forever. Below 1.0, each bounce leaks energy into the wall. Lambda controls how fast the system forgets its initial conditions.",
+			"qfep_connection": "Pure F with dissipation \u2014 gravity is constant F, the wall's elasticity coefficient IS lambda. At e=1.0 energy is conserved forever. Below 1.0, each bounce leaks energy into the wall. Lambda controls how fast the system forgets its initial conditions.",
 			"scene": "res://algorithms/vectors/noc_ch01/exercise_1_3_solution_3_d_bouncing_ball_vr.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -2815,13 +3708,41 @@
 					"attraction"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.91,
+					1.01,
+					0.91
+				],
+				"aabb_center": [
+					0.0,
+					0.45,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"exercise_1_5_solution_accelerate_and_decelerate_vr": {
-			"capacity": "SEE that smooth deceleration emerges from scaling desired speed by distance — arrival is a feedback loop, not a decision",
+			"capacity": "SEE that smooth deceleration emerges from scaling desired speed by distance \u2014 arrival is a feedback loop, not a decision",
 			"category": "physics",
 			"complexity": "beginner",
-			"description": "A ball chases a moving target, steering with arrival behavior — accelerating toward the target and decelerating as it approaches. The target traces sinusoidal curves through 3D space. When far, the ball applies maximum force. When close, force scales down proportionally, producing smooth deceleration. Seek behavior with distance-based speed ramping.",
+			"description": "A ball chases a moving target, steering with arrival behavior \u2014 accelerating toward the target and decelerating as it approaches. The target traces sinusoidal curves through 3D space. When far, the ball applies maximum force. When close, force scales down proportionally, producing smooth deceleration. Seek behavior with distance-based speed ramping.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -2854,7 +3775,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "F-feedback — the steering force depends on the gap between current and desired velocity. Close to the target, F diminishes. This is a self-regulating system: the closer you get, the gentler the approach. Negative feedback as navigation strategy.",
+			"qfep_connection": "F-feedback \u2014 the steering force depends on the gap between current and desired velocity. Close to the target, F diminishes. This is a self-regulating system: the closer you get, the gentler the approach. Negative feedback as navigation strategy.",
 			"scene": "res://algorithms/vectors/noc_ch01/exercise_1_5_solution_accelerate_and_decelerate_vr.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -2920,13 +3841,41 @@
 					"bouncing"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.39,
+					0.59,
+					0.1
+				],
+				"aabb_center": [
+					0.15,
+					0.25,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.59,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"exercise_1_8_solution_attraction_magnitude_vr": {
-			"capacity": "FEEL that an orbit is a perpetual fall that always misses the ground — attraction creates structure from distance and direction",
+			"capacity": "FEEL that an orbit is a perpetual fall that always misses the ground \u2014 attraction creates structure from distance and direction",
 			"category": "physics",
 			"complexity": "beginner",
-			"description": "Inverse-square attraction. Closer means stronger. A ball orbits a grabbable attractor — drag it in VR and the orbit reshapes in real time. Elliptical paths emerge from the interplay of tangential velocity and radial pull. F = strength * dir / r-squared. An orbit is a perpetual fall that always misses the ground.",
+			"description": "Inverse-square attraction. Closer means stronger. A ball orbits a grabbable attractor \u2014 drag it in VR and the orbit reshapes in real time. Elliptical paths emerge from the interplay of tangential velocity and radial pull. F = strength * dir / r-squared. An orbit is a perpetual fall that always misses the ground.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -2960,7 +3909,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "F as geometry — inverse-square means force IS a function of distance. The orbit shape encodes the relationship between speed and attraction. Move the attractor mid-orbit and watch deterministic chaos: same law, different trajectory.",
+			"qfep_connection": "F as geometry \u2014 inverse-square means force IS a function of distance. The orbit shape encodes the relationship between speed and attraction. Move the attractor mid-orbit and watch deterministic chaos: same law, different trajectory.",
 			"scene": "res://algorithms/vectors/noc_ch01/exercise_1_8_solution_attraction_magnitude_vr.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -3024,6 +3973,34 @@
 					"attractors"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.81,
+					0.57,
+					0.29
+				],
+				"aabb_center": [
+					0.37,
+					0.25,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.81,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"gravity_gun_test_scene": {
@@ -3100,6 +4077,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.1,
+					0.6,
+					0.1
+				],
+				"aabb_center": [
+					0.0,
+					0.25,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 2.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"hl_turret_vectors": {
@@ -3234,6 +4239,34 @@
 					"weather_vector_field"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.01,
+					5.0,
+					20.0
+				],
+				"aabb_center": [
+					0.0,
+					0.4,
+					0.0
+				],
+				"grid_cells": [
+					11.0,
+					20.0
+				],
+				"max_dimension_m": 20.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"laser_turret": {
@@ -3332,6 +4365,39 @@
 				"isolation": 3,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					8.0,
+					8.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				8.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"sentry_turret": {
@@ -3428,12 +4494,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					1.01,
+					0.6
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.05
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"sphere_splitting_showcase": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "sphere → fragments(method). Five fracture algorithms: planar cut, octree division, orange-peel sectors, CSG boolean, pre-segmented mesh. One sphere, five deaths.",
+			"description": "sphere \u2192 fragments(method). Five fracture algorithms: planar cut, octree division, orange-peel sectors, CSG boolean, pre-segmented mesh. One sphere, five deaths.",
 			"dev_themes": [
 				"linear_algebra",
 				"math",
@@ -3512,6 +4611,34 @@
 					"computational"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					6.6,
+					2.07,
+					3.82
+				],
+				"aabb_center": [
+					0.75,
+					1.02,
+					1.89
+				],
+				"grid_cells": [
+					7.0,
+					4.0
+				],
+				"max_dimension_m": 6.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"throw_ball": {
@@ -3594,13 +4721,41 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.05,
+					1.05,
+					0.03
+				],
+				"aabb_center": [
+					0.0,
+					0.02,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.05,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"turret_boll_infoboard": {
 			"category": "mathematics",
 			"class_name": "TurretBollInfoBoard",
 			"complexity": "beginner",
-			"description": "3m × 6m semi-transparent infoboard showing ALL vector operations in one static diagram: subtraction (direction), magnitude (range), normalization (aim), dot product (lock), projection (prediction). Visual reference for turret targeting math.",
+			"description": "3m \u00d7 6m semi-transparent infoboard showing ALL vector operations in one static diagram: subtraction (direction), magnitude (range), normalization (aim), dot product (lock), projection (prediction). Visual reference for turret targeting math.",
 			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors",
@@ -3678,6 +4833,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.0,
+					2.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.6,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 3.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 6,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"turret_targeting": {
@@ -3871,6 +5059,34 @@
 					"addition"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.07,
+					2.53,
+					3.2
+				],
+				"aabb_center": [
+					0.03,
+					0.31,
+					0.1
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 3.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"vector_addition_walk": {
@@ -3979,6 +5195,34 @@
 					"basis_vectors_rig"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.73,
+					4.96,
+					3.76
+				],
+				"aabb_center": [
+					-0.07,
+					0.52,
+					0.38
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 4.96,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"vector_drone": {
@@ -4065,13 +5309,41 @@
 					"targeting"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.52,
+					1.52,
+					1.49
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.52,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"vector_field_visualizer": {
 			"category": "mathematics",
 			"class_name": "VectorFieldVisualizer",
 			"complexity": "intermediate",
-			"description": "3D arrow field showing flow — vortex, source, sink, or dipole fields. An 8x8x4 grid of arrow glyphs colored by magnitude (blue=slow, red=fast). Each arrow drawn with ImmediateMesh lines for shaft and arrowhead.",
+			"description": "3D arrow field showing flow \u2014 vortex, source, sink, or dipole fields. An 8x8x4 grid of arrow glyphs colored by magnitude (blue=slow, red=fast). Each arrow drawn with ImmediateMesh lines for shaft and arrowhead.",
 			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors",
@@ -4085,7 +5357,7 @@
 				"forces"
 			],
 			"name": "Vector Field Visualizer",
-			"qfep_connection": "Vector fields as continuous flow — every point in space carries a direction, the field as a living topology of force and movement.",
+			"qfep_connection": "Vector fields as continuous flow \u2014 every point in space carries a direction, the field as a living topology of force and movement.",
 			"scene": "res://commons/artifacts/vector_field_visualizer/vector_field_visualizer.tscn",
 			"tags": [
 				"vectors",
@@ -4141,6 +5413,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.9,
+					0.36,
+					0.9
+				],
+				"aabb_center": [
+					0.0,
+					0.28,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"vector_joint_playground": {
@@ -4174,7 +5479,7 @@
 				],
 				"size_group": "world_scale"
 			},
-			"qfep_connection": "Vectors as embodied forces — abstract math becomes physical machinery that moves, tilts, spins, and bounces at human scale",
+			"qfep_connection": "Vectors as embodied forces \u2014 abstract math becomes physical machinery that moves, tilts, spins, and bounces at human scale",
 			"scene": "res://algorithms/vectors/playground/vector_joint_playground.tscn",
 			"sequence": "vectors",
 			"signals": [],
@@ -4239,13 +5544,46 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					18.0,
+					5.67,
+					18.0
+				],
+				"aabb_center": [
+					0.0,
+					2.68,
+					0.0
+				],
+				"grid_cells": [
+					18.0,
+					18.0
+				],
+				"max_dimension_m": 18.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				18.0,
+				1,
+				18.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"vector_magnitude_demo": {
 			"category": "mathematics",
 			"class_name": "VectorMagnitudeDemo",
 			"complexity": "beginner",
-			"description": "Visualizes vector magnitude (length) using Pythagorean theorem. Shows |V| = √(x² + y² + z²).",
+			"description": "Visualizes vector magnitude (length) using Pythagorean theorem. Shows |V| = \u221a(x\u00b2 + y\u00b2 + z\u00b2).",
 			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors"
@@ -4328,13 +5666,41 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.73,
+					0.6,
+					0.68
+				],
+				"aabb_center": [
+					0.2,
+					0.27,
+					0.32
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.73,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"vector_normalize_demo": {
 			"category": "mathematics",
 			"class_name": "VectorNormalizeDemo",
 			"complexity": "beginner",
-			"description": "Shows normalization: V̂ = V/|V|. Converts any vector to unit length while preserving direction.",
+			"description": "Shows normalization: V\u0302 = V/|V|. Converts any vector to unit length while preserving direction.",
 			"dev_category": "vector_operations",
 			"dev_themes": [
 				"vectors"
@@ -4420,6 +5786,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.9,
+					0.9,
+					0.99
+				],
+				"aabb_center": [
+					0.12,
+					0.12,
+					0.16
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.99,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"vector_projection_demo": {
@@ -4514,6 +5913,34 @@
 					"force"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.19,
+					2.56,
+					2.41
+				],
+				"aabb_center": [
+					-0.31,
+					0.28,
+					0.43
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.56,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"vector_subtraction_demo": {
@@ -4608,6 +6035,34 @@
 					"turret"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.0,
+					2.35,
+					3.07
+				],
+				"aabb_center": [
+					0.0,
+					0.39,
+					0.04
+				],
+				"grid_cells": [
+					3.0,
+					4.0
+				],
+				"max_dimension_m": 3.07,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"vector_translation_demo": {
@@ -4688,6 +6143,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.56,
+					0.79,
+					0.68
+				],
+				"aabb_center": [
+					0.37,
+					0.24,
+					0.19
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 2.56,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"vectorline": {
@@ -4768,6 +6256,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.12,
+					0.12,
+					0.12
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.12,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"vectorpoint": {
@@ -4846,6 +6362,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.04,
+					1.04,
+					1.04
+				],
+				"aabb_center": [
+					0.49,
+					0.49,
+					0.49
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.04,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.292842Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	},

@@ -1,3 +1,13 @@
+# @identity
+# essence: a rotating drum + pen arm that draws sine + noise traces onto a continuously scrolling paper surface — Half-Life-2-lab instrument made of cylindrical paper, an articulated pen, and a quietly turning shaft
+# desire: to make signal visible as ink — the trace is not a graph, it is a memory in cylindrical space, written in real time by a pen the player can lean in to watch
+# critical_parameter: trace_frequency × noise_intensity × trace_amplitude — the three dials that turn signal from clean sine into seismic chaos
+# triggers: _process() advances drum rotation, samples the signal each frame, and rebuilds a SurfaceTool mesh strip every TRACE_UPDATE_INTERVAL frames; SPIKE_CHANCE injects rare jolts
+# emerges: the cylindrical history of a wave — older samples spiral away beneath newer ones, and the player walks around the drum to read time as angle
+# needs: VR walking around the drum [has]; live audio-signal coupling [missing]; spike-event capture [has]; apply_grid_config [missing]
+# relationships: paired with sine_oscillation, wave_interference, and big_pipe_system across the wavefunctions sequence as the readout instrument that records what the others emit; appears in Gravity Creates Rhythm and Fourier Decomposition Lab
+# truth: every signal becomes a line if you give it ink and motion — the seismograph proves that drawing IS recording, and that any wave is just time made visible
+
 # seismograph.gd
 # Drum-type chart recorder / seismograph
 # Classic scientific instrument with rotating drum and pen arm

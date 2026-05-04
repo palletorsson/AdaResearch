@@ -1,0 +1,56 @@
+{
+	"approach": "south",
+	"artifact_offset": [
+		0.0,
+		0.75,
+		0.0
+	],
+	"clearance": [
+		3.0,
+		3.0,
+		3.0
+	],
+	"exit": "north",
+	"extras": [],
+	"footing": {
+		"anchor": [
+			1.0,
+			1.0
+		],
+		"tiles": [
+			[
+				1.0,
+				1.0,
+				1.0
+			],
+			[
+				1.0,
+				3.0,
+				1.0
+			],
+			[
+				1.0,
+				1.0,
+				1.0
+			]
+		]
+	},
+	"footprint": [
+		2,
+		1,
+		2
+	],
+	"lookup_name": "glass_planes_2_5d",
+	"notes": {
+		"tags": [
+			"artifact-needs-fix"
+		],
+		"text": "[auto] AABB.y min = -0.75 — body sinks into / floats above floor"
+	},
+	"rotations": [
+		"0",
+		"90",
+		"180",
+		"270"
+	]
+}

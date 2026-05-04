@@ -1,15 +1,15 @@
 {
 	"registry_name": "grammar_systems",
-	"description": "Formal grammars as generative systems — Markov chains, N-grams, stochastic grammars",
+	"description": "Formal grammars as generative systems \u2014 Markov chains, N-grams, stochastic grammars",
 	"artifacts": {
 		"markov_chains": {
 			"lookup_name": "markov_chains",
 			"name": "Markov Chains",
 			"scene": "res://algorithms/proceduralgeneration/grammar_systems/markov_chains/markov_chains.tscn",
 			"class_name": "MarkovChains",
-			"description": "Interactive Markov chain visualization — states as 3D nodes, transitions as probability arcs, dice-roll selection animation, stationary distribution bars. Watch how history-free memory generates structure from chance.",
+			"description": "Interactive Markov chain visualization \u2014 states as 3D nodes, transitions as probability arcs, dice-roll selection animation, stationary distribution bars. Watch how history-free memory generates structure from chance.",
 			"gamwell_reference": "Chapter 7: Probability and Stochastic Processes",
-			"qfep_connection": "Markov chains are pure F: deterministic transition rules applied to stochastic states. The stationary distribution IS the free energy minimum — the system finds its own equilibrium.",
+			"qfep_connection": "Markov chains are pure F: deterministic transition rules applied to stochastic states. The stationary distribution IS the free energy minimum \u2014 the system finds its own equilibrium.",
 			"sequence": "grammar_systems",
 			"category": "procedural_generation",
 			"interaction": "observe_interactive",
@@ -94,6 +94,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					19.5,
+					16.6,
+					4.49
+				],
+				"aabb_center": [
+					0.25,
+					0.3,
+					0.0
+				],
+				"grid_cells": [
+					20.0,
+					5.0
+				],
+				"max_dimension_m": 19.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				20.0,
+				1,
+				5.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.115671Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"markov_chains_tree": {
@@ -101,9 +134,9 @@
 			"name": "Markov Chains Tree",
 			"scene": "res://algorithms/proceduralgeneration/grammar_systems/markov_chains_tree/MarkovChainsTree.tscn",
 			"class_name": "MarkovChainsTree",
-			"description": "A tree grown by Markov chain decisions — each branch point is a state transition. Branch/terminate/grow probabilities shape the form. Randomness parameter tunes order vs chaos. Bark, leaves, animated growth.",
+			"description": "A tree grown by Markov chain decisions \u2014 each branch point is a state transition. Branch/terminate/grow probabilities shape the form. Randomness parameter tunes order vs chaos. Bark, leaves, animated growth.",
 			"gamwell_reference": "Chapter 12: Fractals and Self-Similarity, Chapter 7: Probability",
-			"qfep_connection": "The randomness parameter IS λ — low randomness produces rigid, symmetrical trees (order), high randomness produces wild tangles (chaos). The sweet spot grows the most lifelike forms.",
+			"qfep_connection": "The randomness parameter IS \u03bb \u2014 low randomness produces rigid, symmetrical trees (order), high randomness produces wild tangles (chaos). The sweet spot grows the most lifelike forms.",
 			"sequence": "grammar_systems",
 			"category": "procedural_generation",
 			"interaction": "configurable",
@@ -191,6 +224,39 @@
 					"trees"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					9.6,
+					12.12,
+					2.42
+				],
+				"aabb_center": [
+					4.5,
+					5.06,
+					0.21
+				],
+				"grid_cells": [
+					10.0,
+					3.0
+				],
+				"max_dimension_m": 12.12,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.115671Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	},

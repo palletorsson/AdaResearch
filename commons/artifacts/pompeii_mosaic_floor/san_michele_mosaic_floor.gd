@@ -217,13 +217,19 @@ func _build() -> void:
 
 
 	# ── Z-fighting fix: offset each surface to a distinct Y layer ──
-	# Hierarchy: grout(-0.001) < dark(0.0) < light(0.001) < accent/terra(0.002) < border(0.003)
+	# Hierarchy: grout(-0.001) < light(0.0) < dark(0.001) < terra/accent(0.002)
+	#
+	# IMPORTANT — different from pompeii's hierarchy! San Michele draws
+	# a FULL circular LIGHT base (Section 0), so light must sit below
+	# everything else; otherwise it occludes dark/terra patterns. In
+	# pompeii light is only half of each truchet cell (non-overlapping
+	# with dark), so the order doesn't matter the same way.
 	var _offset_y := func(verts: PackedVector3Array, y_off: float) -> PackedVector3Array:
 		for i in verts.size():
 			verts[i].y = y_off
 		return verts
-	dark_verts = _offset_y.call(dark_verts, 0.0)
-	light_verts = _offset_y.call(light_verts, 0.001)
+	light_verts = _offset_y.call(light_verts, 0.0)
+	dark_verts = _offset_y.call(dark_verts, 0.001)
 	terra_verts = _offset_y.call(terra_verts, 0.002)
 	grout_verts = _offset_y.call(grout_verts, -0.001)
 

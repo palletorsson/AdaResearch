@@ -1,0 +1,56 @@
+{
+	"approach": "south",
+	"artifact_offset": [
+		-1.73485350608826,
+		1.51364994049072,
+		0.0
+	],
+	"clearance": [
+		3.0,
+		3.0,
+		3.0
+	],
+	"exit": "north",
+	"extras": [],
+	"footing": {
+		"anchor": [
+			1.0,
+			1.0
+		],
+		"tiles": [
+			[
+				1.0,
+				1.0,
+				1.0
+			],
+			[
+				1.0,
+				3.0,
+				1.0
+			],
+			[
+				1.0,
+				1.0,
+				1.0
+			]
+		]
+	},
+	"footprint": [
+		6,
+		2,
+		4
+	],
+	"lookup_name": "magnifying_glass_tool",
+	"notes": {
+		"tags": [
+			"artifact-needs-fix"
+		],
+		"text": "[auto] AABB centre offset on X by 1.73 m — recentre mesh in artifact"
+	},
+	"rotations": [
+		"0",
+		"90",
+		"180",
+		"270"
+	]
+}

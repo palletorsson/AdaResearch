@@ -3,7 +3,7 @@
 		"axis_translation_cube": {
 			"category": "transforms",
 			"complexity": "advanced",
-			"description": "Configurable axis translation demonstration. Set axis export to 0 (X), 1 (Y), or 2 (Z) to change which axis the cube translates along. Shows start → wait → end → wait pattern with trail ghosts and live labels.",
+			"description": "Configurable axis translation demonstration. Set axis export to 0 (X), 1 (Y), or 2 (Z) to change which axis the cube translates along. Shows start \u2192 wait \u2192 end \u2192 wait pattern with trail ghosts and live labels.",
 			"dev_themes": [
 				"geometry",
 				"math",
@@ -14,7 +14,7 @@
 			"map_ready": true,
 			"map_sequences": [],
 			"name": "Axis Translation Cube",
-			"qfep_connection": "Translation preserves everything except position — entropy-neutral transformation. The object's internal F remains constant; only its relationship to the coordinate frame changes.",
+			"qfep_connection": "Translation preserves everything except position \u2014 entropy-neutral transformation. The object's internal F remains constant; only its relationship to the coordinate frame changes.",
 			"scene": "res://commons/artifacts/axis_translation_cube/axis_translation_cube.tscn",
 			"tags": [
 				"pattern",
@@ -73,6 +73,39 @@
 					"z_translation_cube"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.29,
+					0.97,
+					0.66
+				],
+				"aabb_center": [
+					0.06,
+					0.09,
+					0.33
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.97,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.287878Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"boolean_tunnel": {
@@ -172,6 +205,24 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"carousel_cake": {
@@ -274,6 +325,34 @@
 					"visually"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.0,
+					5.65,
+					10.0
+				],
+				"aabb_center": [
+					0.0,
+					2.83,
+					0.0
+				],
+				"grid_cells": [
+					10.0,
+					10.0
+				],
+				"max_dimension_m": 10.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.287878Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"floor_tiles": {
@@ -350,12 +429,40 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					11.79,
+					0.01,
+					6.13
+				],
+				"aabb_center": [
+					5.61,
+					0.0,
+					2.78
+				],
+				"grid_cells": [
+					12.0,
+					7.0
+				],
+				"max_dimension_m": 11.79,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.287878Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"homogeneous_coordinates": {
 			"category": "transforms",
 			"complexity": "advanced",
-			"description": "Wall panel explaining why 4x4 matrices are used in 3D. Shows a color-coded 4x4 homogeneous transformation matrix: rotation/scale (blue), translation (green), projection (red), homogeneous row (gray). Demonstrates [x,y,z,1] → [x',y',z',1] via matrix multiplication with a 3D coordinate frame.",
+			"description": "Wall panel explaining why 4x4 matrices are used in 3D. Shows a color-coded 4x4 homogeneous transformation matrix: rotation/scale (blue), translation (green), projection (red), homogeneous row (gray). Demonstrates [x,y,z,1] \u2192 [x',y',z',1] via matrix multiplication with a 3D coordinate frame.",
 			"dev_themes": [
 				"geometry",
 				"math",
@@ -368,7 +475,7 @@
 				"transformation"
 			],
 			"name": "Homogeneous Coordinates",
-			"qfep_connection": "4x4 matrices unify all affine transforms into one representation — the most compressed (F-minimal) description of spatial change. Adding a dimension to reduce complexity: higher-dimensional embedding as F-minimization strategy.",
+			"qfep_connection": "4x4 matrices unify all affine transforms into one representation \u2014 the most compressed (F-minimal) description of spatial change. Adding a dimension to reduce complexity: higher-dimensional embedding as F-minimization strategy.",
 			"scene": "res://commons/artifacts/homogeneous_coordinates/homogeneous_coordinates.tscn",
 			"sequence": "transformation",
 			"tags": [
@@ -421,12 +528,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.1,
+					0.85,
+					0.1
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.05
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.287878Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"quantum_field": {
 			"category": "transforms",
 			"complexity": "advanced",
-			"description": "Quantum field theory visualization with three modes: scalar field dynamics (φ⁴ theory with Klein-Gordon equation on lattice), particle creation/annihilation (pair production, worldlines, charge conservation), and Feynman diagram rendering (QED scatter, pair production, gluon loop, Compton). VR controls for coupling strength and mass parameter.",
+			"description": "Quantum field theory visualization with three modes: scalar field dynamics (\u03c6\u2074 theory with Klein-Gordon equation on lattice), particle creation/annihilation (pair production, worldlines, charge conservation), and Feynman diagram rendering (QED scatter, pair production, gluon loop, Compton). VR controls for coupling strength and mass parameter.",
 			"dev_themes": [
 				"physics",
 				"quantum",
@@ -493,6 +633,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.33,
+					0.2,
+					0.12
+				],
+				"aabb_center": [
+					0.0,
+					-0.99,
+					0.01
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.287878Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"rotatescalecubes": {
@@ -561,7 +734,7 @@
 		"rotation_gimbal": {
 			"category": "transforms",
 			"complexity": "advanced",
-			"description": "Gimbal lock demonstrator with 3 nested rotation rings (X=red, Y=green, Z=blue). VR sliders control each Euler angle (0-360 degrees). When Y approaches 90 degrees, X and Z rings align and 'GIMBAL LOCK!' flashes — showing why Euler angles lose a degree of freedom and why quaternions matter. Displays live rotation matrix decomposition.",
+			"description": "Gimbal lock demonstrator with 3 nested rotation rings (X=red, Y=green, Z=blue). VR sliders control each Euler angle (0-360 degrees). When Y approaches 90 degrees, X and Z rings align and 'GIMBAL LOCK!' flashes \u2014 showing why Euler angles lose a degree of freedom and why quaternions matter. Displays live rotation matrix decomposition.",
 			"dev_themes": [
 				"geometry",
 				"math",
@@ -574,7 +747,7 @@
 				"transformation"
 			],
 			"name": "Rotation Gimbal",
-			"qfep_connection": "Gimbal lock as a singularity where the system loses a degree of freedom — entropy collapse. Three rotations reduced to two. The representation's F-model fails at a specific configuration, requiring quaternions to restore full expressiveness.",
+			"qfep_connection": "Gimbal lock as a singularity where the system loses a degree of freedom \u2014 entropy collapse. Three rotations reduced to two. The representation's F-model fails at a specific configuration, requiring quaternions to restore full expressiveness.",
 			"scene": "res://commons/artifacts/rotation_gimbal/rotation_gimbal.tscn",
 			"sequence": "transformation",
 			"tags": [
@@ -632,6 +805,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.62,
+					0.81,
+					0.72
+				],
+				"aabb_center": [
+					0.0,
+					0.2,
+					0.07
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.81,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.287878Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"scaleme": {
@@ -707,6 +913,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					25.6,
+					51.0,
+					25.6
+				],
+				"aabb_center": [
+					0.0,
+					25.5,
+					0.0
+				],
+				"grid_cells": [
+					26.0,
+					26.0
+				],
+				"max_dimension_m": 51.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 76,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.287878Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shear_matrix_demo": {
@@ -725,7 +959,7 @@
 				"transformation"
 			],
 			"name": "Shear Matrix Demo",
-			"qfep_connection": "Shear breaks symmetry without changing area — a λ-shift that preserves measure but distorts form. The determinant stays 1 (no information lost), but the shape's F-structure is altered.",
+			"qfep_connection": "Shear breaks symmetry without changing area \u2014 a \u03bb-shift that preserves measure but distorts form. The determinant stays 1 (no information lost), but the shape's F-structure is altered.",
 			"scene": "res://commons/artifacts/shear_matrix_demo/shear_matrix_demo.tscn",
 			"sequence": "transformation",
 			"tags": [
@@ -777,6 +1011,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					0.7,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 2,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"spin": {
@@ -872,6 +1139,34 @@
 					"carousel_cake"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					6.0,
+					0.25,
+					0.15
+				],
+				"aabb_center": [
+					0.0,
+					3.0,
+					0.03
+				],
+				"grid_cells": [
+					6.0,
+					1.0
+				],
+				"max_dimension_m": 6.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"toruscylinder": {
@@ -976,12 +1271,40 @@
 					"carousel_cake"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.7,
+					1.2,
+					2.8
+				],
+				"aabb_center": [
+					0.45,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					4.0,
+					3.0
+				],
+				"max_dimension_m": 3.7,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"transform_composition": {
 			"category": "transforms",
 			"complexity": "advanced",
-			"description": "Transform composition demonstrator showing that matrix multiplication order matters. A simple house shape undergoes Rotate-then-Translate (blue) vs Translate-then-Rotate (red) — landing in different places. Displays R·T ≠ T·R with live 4x4 matrices. VR sliders control rotation angle and translation distance. Buttons toggle order A, order B, or both. Animated step-through shows intermediate states.",
+			"description": "Transform composition demonstrator showing that matrix multiplication order matters. A simple house shape undergoes Rotate-then-Translate (blue) vs Translate-then-Rotate (red) \u2014 landing in different places. Displays R\u00b7T \u2260 T\u00b7R with live 4x4 matrices. VR sliders control rotation angle and translation distance. Buttons toggle order A, order B, or both. Animated step-through shows intermediate states.",
 			"dev_themes": [
 				"geometry",
 				"math",
@@ -994,7 +1317,7 @@
 				"transformation"
 			],
 			"name": "Transform Composition",
-			"qfep_connection": "Non-commutativity as path-dependence — R·T ≠ T·R means the order of entropy-operations matters. Composing transforms into one matrix IS F-minimization: simplifying a sequence of changes into a single description.",
+			"qfep_connection": "Non-commutativity as path-dependence \u2014 R\u00b7T \u2260 T\u00b7R means the order of entropy-operations matters. Composing transforms into one matrix IS F-minimization: simplifying a sequence of changes into a single description.",
 			"scene": "res://commons/artifacts/transform_composition/transform_composition.tscn",
 			"sequence": "transformation",
 			"tags": [
@@ -1049,12 +1372,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					0.86,
+					0.47
+				],
+				"aabb_center": [
+					0.0,
+					0.32,
+					0.19
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"transformation_workbench": {
 			"category": "transforms",
 			"complexity": "advanced",
-			"description": "Interactive VR learning tool for understanding transformations. Grabbable cube shows live 4x4 matrix updates, ghost position for comparison, and mode buttons to switch between Translate (T), Rotate (R), and Scale (S). Rotation snaps to 90° increments and shows coordinate swap notation. Matrix cells highlight based on current transformation mode.",
+			"description": "Interactive VR learning tool for understanding transformations. Grabbable cube shows live 4x4 matrix updates, ghost position for comparison, and mode buttons to switch between Translate (T), Rotate (R), and Scale (S). Rotation snaps to 90\u00b0 increments and shows coordinate swap notation. Matrix cells highlight based on current transformation mode.",
 			"dev_themes": [
 				"biology",
 				"education",
@@ -1077,9 +1433,9 @@
 				"show_matrix": "bool - Show the 4x4 matrix display (default true)",
 				"show_vectors": "bool - Show transformation vector/info (default true)",
 				"size_group": "compact",
-				"snap_rotation_to_90": "bool - Snap rotations to 90° increments (default true)"
+				"snap_rotation_to_90": "bool - Snap rotations to 90\u00b0 increments (default true)"
 			},
-			"qfep_connection": "Making the F-model visible — the matrix IS the system's internal representation of spatial state. Grabbing and moving the cube while watching numbers change demonstrates how physical action maps to formal description.",
+			"qfep_connection": "Making the F-model visible \u2014 the matrix IS the system's internal representation of spatial state. Grabbing and moving the cube while watching numbers change demonstrates how physical action maps to formal description.",
 			"scene": "res://algorithms/transformation/transformation_workbench/transformation_workbench.tscn",
 			"tags": [
 				"linear_algebra",
@@ -1129,6 +1485,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.39,
+					0.7,
+					0.4
+				],
+				"aabb_center": [
+					0.15,
+					0.2,
+					0.05
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.39,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"translation_cube_demo": {
@@ -1233,6 +1622,34 @@
 					"translation"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.57,
+					1.5,
+					1.5
+				],
+				"aabb_center": [
+					0.0,
+					0.75,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.57,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"vector_field": {
@@ -1315,6 +1732,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					14.42,
+					14.55,
+					14.42
+				],
+				"aabb_center": [
+					-0.5,
+					-0.5,
+					-0.5
+				],
+				"grid_cells": [
+					15.0,
+					15.0
+				],
+				"max_dimension_m": 14.55,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"x_translation_cube": {
@@ -1401,6 +1846,39 @@
 				"isolation": 2,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.95,
+					0.57,
+					0.66
+				],
+				"aabb_center": [
+					0.08,
+					0.29,
+					0.33
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.95,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"y_translation_cube": {
@@ -1488,6 +1966,39 @@
 				"isolation": 3,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.29,
+					0.97,
+					0.66
+				],
+				"aabb_center": [
+					0.06,
+					0.09,
+					0.33
+				],
+				"grid_cells": [
+					1,
+					1
+				],
+				"max_dimension_m": 0.97,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				1
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"z_translation_cube": {
@@ -1575,62 +2086,169 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.24,
+					0.57,
+					1.06
+				],
+				"aabb_center": [
+					0.03,
+					0.29,
+					0.13
+				],
+				"grid_cells": [
+					1,
+					2
+				],
+				"max_dimension_m": 1.06,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1,
+				1,
+				2
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"matrix_4x4_viewer": {
 			"name": "Matrix 4x4 Viewer",
 			"lookup_name": "matrix_4x4_viewer",
-			"description": "Interactive 4x4 transformation matrix viewer. A wireframe cube is transformed live by sliders controlling translate X/Y/Z, rotate Y, and uniform scale. The 4x4 matrix values update in real time as a color-coded Label3D grid — rotation/scale in cyan, translation in green, homogeneous row in gray.",
+			"description": "Interactive 4x4 transformation matrix viewer. A wireframe cube is transformed live by sliders controlling translate X/Y/Z, rotate Y, and uniform scale. The 4x4 matrix values update in real time as a color-coded Label3D grid \u2014 rotation/scale in cyan, translation in green, homogeneous row in gray.",
 			"scene": "res://algorithms/transforms/matrix_viewer/matrix_4x4_viewer.tscn",
 			"category": "transforms",
 			"complexity": "intermediate",
-			"tags": ["linear_algebra", "matrix", "transforms", "interactive", "4x4", "visualization"],
-			"dev_themes": ["geometry", "math", "transforms"],
+			"tags": [
+				"linear_algebra",
+				"matrix",
+				"transforms",
+				"interactive",
+				"4x4",
+				"visualization"
+			],
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms"
+			],
 			"map_ready": true,
 			"include_in_map_data": true,
-			"qfep_connection": "The matrix IS the F-model of spatial state — 16 numbers encode every possible affine transformation. Watching cells change as you slide makes the invisible scaffolding of geometry visible and manipulable.",
+			"qfep_connection": "The matrix IS the F-model of spatial state \u2014 16 numbers encode every possible affine transformation. Watching cells change as you slide makes the invisible scaffolding of geometry visible and manipulable.",
 			"spatial_needs": {
 				"platform": "pedestal",
 				"footprint_cells": 2,
-				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
 				"player_position": "front",
 				"wall_backing": false,
 				"orientation": "face_approach",
 				"isolation": 0,
-				"cluster_with": ["homogeneous_coordinates", "transform_composition"],
+				"cluster_with": [
+					"homogeneous_coordinates",
+					"transform_composition"
+				],
 				"preferred_zone": "teaching"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.51,
+					0.68,
+					0.26
+				],
+				"aabb_center": [
+					0.0,
+					0.22,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.68,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"invariants_demo": {
 			"category": "transforms",
 			"complexity": "intermediate",
-			"description": "A triangle with labeled measurements — side lengths, angles, area. Apply translation, rotation, scale, or shear and watch which properties survive. Preserved measurements glow green; changed ones glow red. Each transform has a signature: what it cannot touch defines it.",
-			"dev_themes": ["geometry", "math", "transforms", "invariance"],
+			"description": "A triangle with labeled measurements \u2014 side lengths, angles, area. Apply translation, rotation, scale, or shear and watch which properties survive. Preserved measurements glow green; changed ones glow red. Each transform has a signature: what it cannot touch defines it.",
+			"dev_themes": [
+				"geometry",
+				"math",
+				"transforms",
+				"invariance"
+			],
 			"include_in_map_data": true,
 			"lookup_name": "invariants_demo",
 			"map_ready": true,
 			"map_sequences": [],
 			"name": "Invariants Demo",
-			"qfep_connection": "Invariance is the core of identity under transformation — what remains when everything else changes is the essence. Translation preserves all F; shear destroys it. The invariant set IS the transformation's character.",
+			"qfep_connection": "Invariance is the core of identity under transformation \u2014 what remains when everything else changes is the essence. Translation preserves all F; shear destroys it. The invariant set IS the transformation's character.",
 			"scene": "res://algorithms/transforms/invariants/invariants_demo.tscn",
-			"tags": ["transforms", "invariance", "geometry", "linear_algebra"],
+			"tags": [
+				"transforms",
+				"invariance",
+				"geometry",
+				"linear_algebra"
+			],
 			"geometry_spec": {
 				"mesh_type": "hybrid",
 				"topology": "manifold_open",
 				"construction": {
 					"method": "procedural_scripted",
-					"primitives": ["cylinder", "sphere"],
-					"operations": ["orient_between_points", "recolor_by_invariance"]
+					"primitives": [
+						"cylinder",
+						"sphere"
+					],
+					"operations": [
+						"orient_between_points",
+						"recolor_by_invariance"
+					]
 				},
 				"material": {
 					"type": "standard",
 					"shading_model": "emissive",
-					"key_properties": ["emission", "albedo_color"]
+					"key_properties": [
+						"emission",
+						"albedo_color"
+					]
 				},
 				"animation": {
 					"type": "triggered",
 					"driven_by": "button_press",
-					"affects": ["transform", "color"]
+					"affects": [
+						"transform",
+						"color"
+					]
 				},
 				"instance_strategy": "direct",
 				"vertex_estimate": "low"
@@ -1638,13 +2256,54 @@
 			"spatial_needs": {
 				"platform": "none",
 				"footprint_cells": 2,
-				"clearance": {"front": 2, "back": 1, "left": 1, "right": 1},
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
 				"player_position": "front",
 				"wall_backing": false,
 				"orientation": "face_approach",
 				"isolation": 1,
-				"cluster_with": ["matrix_4x4_viewer", "homogeneous_coordinates"],
+				"cluster_with": [
+					"matrix_4x4_viewer",
+					"homogeneous_coordinates"
+				],
 				"preferred_zone": "teaching"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.32,
+					0.7,
+					0.21
+				],
+				"aabb_center": [
+					0.0,
+					0.27,
+					0.1
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.7,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.288797Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	}

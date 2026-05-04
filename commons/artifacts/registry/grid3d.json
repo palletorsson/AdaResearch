@@ -1,5 +1,5 @@
 {
-	"_comment": "Grid3D substrate — dual MultiMesh (nodes + edges) for 3D graph algorithms.",
+	"_comment": "Grid3D substrate \u2014 dual MultiMesh (nodes + edges) for 3D graph algorithms.",
 	"artifacts": {
 		"grid3d": {
 			"name": "Grid3D Substrate",
@@ -71,10 +71,33 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"grid3d_bfs": {
-			"name": "Grid3D — BFS",
+			"name": "Grid3D \u2014 BFS",
 			"lookup_name": "grid3d_bfs",
 			"description": "Breadth-first search on a 3D graph. Watch the wavefront expand uniformly from the source. Yellow frontier, green visited.",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
@@ -141,10 +164,33 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"grid3d_dfs": {
-			"name": "Grid3D — DFS",
+			"name": "Grid3D \u2014 DFS",
 			"lookup_name": "grid3d_dfs",
 			"description": "Depth-first search with backtracking. Watch the explorer plunge deep, then retreat. Orange stack, green visited.",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
@@ -212,10 +258,33 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"grid3d_dijkstra": {
-			"name": "Grid3D — Dijkstra",
+			"name": "Grid3D \u2014 Dijkstra",
 			"lookup_name": "grid3d_dijkstra",
 			"description": "Dijkstra's shortest path algorithm. Greedy expansion by distance. Cyan frontier settles to green.",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
@@ -283,10 +352,33 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"grid3d_kruskal": {
-			"name": "Grid3D — Kruskal's MST",
+			"name": "Grid3D \u2014 Kruskal's MST",
 			"lookup_name": "grid3d_kruskal",
 			"description": "Kruskal's minimum spanning tree. Sorted edges, Union-Find. Green edges accepted, red edges rejected (would form cycle).",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
@@ -355,10 +447,33 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"grid3d_prim": {
-			"name": "Grid3D — Prim's MST",
+			"name": "Grid3D \u2014 Prim's MST",
 			"lookup_name": "grid3d_prim",
 			"description": "Prim's minimum spanning tree. Grows from source, always adding cheapest edge to frontier. Cyan frontier, green tree.",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
@@ -426,10 +541,33 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"grid3d_force_directed": {
-			"name": "Grid3D — Force-Directed Layout",
+			"name": "Grid3D \u2014 Force-Directed Layout",
 			"lookup_name": "grid3d_force_directed",
 			"description": "Force-directed graph layout. Nodes repel, edges attract. Watch the graph self-organize into readable structure.",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
@@ -497,12 +635,35 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"grid3d_random_graph": {
-			"name": "Grid3D — Random Graph",
+			"name": "Grid3D \u2014 Random Graph",
 			"lookup_name": "grid3d_random_graph",
-			"description": "Erdős–Rényi random graph. Edges appear one at a time, nodes color by accumulated degree. Hubs emerge from randomness.",
+			"description": "Erd\u0151s\u2013R\u00e9nyi random graph. Edges appear one at a time, nodes color by accumulated degree. Hubs emerge from randomness.",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -567,12 +728,35 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"grid3d_entropy": {
-			"name": "Grid3D — Entropy Field",
+			"name": "Grid3D \u2014 Entropy Field",
 			"lookup_name": "grid3d_entropy",
-			"description": "Order-to-chaos point cloud. Grid nodes displaced by increasing randomness along Z. Blue order → red chaos. No edges.",
+			"description": "Order-to-chaos point cloud. Grid nodes displaced by increasing randomness along Z. Blue order \u2192 red chaos. No edges.",
 			"scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -637,7 +821,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		}
 	}
 }

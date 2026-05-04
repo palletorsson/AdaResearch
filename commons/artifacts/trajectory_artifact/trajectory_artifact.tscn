@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://trajectory_artifact_root"]
+
+[ext_resource type="Script" path="res://commons/artifacts/trajectory_artifact/trajectory_artifact.gd" id="1_tra"]
+
+[node name="TrajectoryArtifact" type="Node3D"]
+script = ExtResource("1_tra")

@@ -3,7 +3,7 @@
 		"creature_gallery": {
 			"category": "nature_system",
 			"complexity": "advanced",
-			"description": "DNA organism gallery — 12 preset pedestals in a ring + 5 kingdom clusters. Every organism spawned from CritterDNA at full detail. The proof that the nature system works.",
+			"description": "DNA organism gallery \u2014 12 preset pedestals in a ring + 5 kingdom clusters. Every organism spawned from CritterDNA at full detail. The proof that the nature system works.",
 			"include_in_map_data": true,
 			"lookup_name": "creature_gallery",
 			"map_ready": true,
@@ -70,6 +70,39 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					30.0,
+					3.9,
+					30.0
+				],
+				"aabb_center": [
+					0.0,
+					1.18,
+					0.0
+				],
+				"grid_cells": [
+					30.0,
+					30.0
+				],
+				"max_dimension_m": 30.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				30.0,
+				1,
+				30.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.165480Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"critter_placer": {
@@ -145,6 +178,39 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.23,
+					0.7,
+					0.39
+				],
+				"aabb_center": [
+					0.03,
+					0.21,
+					0.06
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.7,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.165480Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"nature_system_demo": {
@@ -178,7 +244,7 @@
 				],
 				"size_group": "xlarge"
 			},
-			"qfep_connection": "Transmutation as free energy minimization — every critter is an algorithm exploring possibility space under constraints. Bonding with a critter changes the relationship, not the critter. The poison was always medicine. Donna Haraway meets Q-FEP.",
+			"qfep_connection": "Transmutation as free energy minimization \u2014 every critter is an algorithm exploring possibility space under constraints. Bonding with a critter changes the relationship, not the critter. The poison was always medicine. Donna Haraway meets Q-FEP.",
 			"scene": "res://algorithms/nature_system/demo/nature_system_demo.tscn",
 			"sequence": "nature_system",
 			"size_group": "xlarge",
@@ -246,6 +312,34 @@
 					"growth"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					14.75,
+					7.96,
+					52.95
+				],
+				"aabb_center": [
+					4.71,
+					0.75,
+					24.95
+				],
+				"grid_cells": [
+					15.0,
+					53.0
+				],
+				"max_dimension_m": 52.95,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 79,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.165480Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	}

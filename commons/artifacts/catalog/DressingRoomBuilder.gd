@@ -155,10 +155,25 @@ static func build(data: Dictionary, rotation_deg: int = 0,
 	var artifact_root := Node3D.new()
 	artifact_root.name = "Artifact"
 	root.add_child(artifact_root)
+	# Fine offset (metres). Rotates with the dressing room so the offset
+	# is "intrinsic" to the staging — e.g., a slider that always sits 30cm
+	# in front of its plinth keeps that relationship at every rotation.
+	var offset_raw = data.get("artifact_offset", [0.0, 0.0, 0.0])
+	var off_x: float = 0.0
+	var off_y: float = 0.0
+	var off_z: float = 0.0
+	if offset_raw is Array and offset_raw.size() >= 3:
+		off_x = float(offset_raw[0])
+		off_y = float(offset_raw[1])
+		off_z = float(offset_raw[2])
+	# Rotate (off_x, off_z) by rotation_deg around Y. Y is unchanged.
+	var rot_rad: float = deg_to_rad(rotation_deg)
+	var rot_off_x: float = off_x * cos(rot_rad) + off_z * sin(rot_rad)
+	var rot_off_z: float = -off_x * sin(rot_rad) + off_z * cos(rot_rad)
 	artifact_root.position = Vector3(
-		origin_x + rotated_anchor[1] * CELL_SIZE,
-		anchor_height,
-		origin_z + rotated_anchor[0] * CELL_SIZE
+		origin_x + rotated_anchor[1] * CELL_SIZE + rot_off_x,
+		anchor_height + off_y,
+		origin_z + rotated_anchor[0] * CELL_SIZE + rot_off_z
 	)
 	var lookup: String = String(data.get("lookup_name", ""))
 	var loaded_artifact: Node = null

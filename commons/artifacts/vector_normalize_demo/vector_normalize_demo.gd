@@ -2,7 +2,17 @@
 # Interactive vector normalization visualization
 # Same style as VectorBasics - uses vector_scene_base
 #
-# Shows: VÌ‚ = V / |V| (unit vector in same direction)
+# Shows: V̂ = V / |V| (unit vector in same direction)
+#
+# @identity
+# essence: Side-by-side display of a vector V and its normalized form V̂ = V/|V|, sharing direction but with unit length
+# desire: To make the difference between direction and magnitude visible — same arrow, two scales, one geometric purpose
+# critical_parameter: input vector magnitude — large input compresses to unit, tiny input expands; both arrive at length 1
+# triggers: Any direction reads, only magnitude is removed; zero vector is the singular case where normalization fails
+# emerges: Direction as a separable property of vectors — a vector is a magnitude and a unit, and unit vectors compose direction-only spaces
+# needs: vector input controls [has], live normalization computation [has], unit-circle/sphere reference [has]
+# relationships: Companion to vector_magnitude_demo (already voiced) in forces/Combat_Arena. Foundation for aim and direction artifacts
+# truth: Normalization is the act of forgetting how far — keeping only which way. It is direction extracted from the vector.
 
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 

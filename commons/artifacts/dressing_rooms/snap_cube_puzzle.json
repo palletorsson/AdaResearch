@@ -1,0 +1,56 @@
+{
+	"approach": "south",
+	"artifact_offset": [
+		0.0,
+		0.400000005960464,
+		0.0
+	],
+	"clearance": [
+		3.0,
+		3.0,
+		3.0
+	],
+	"exit": "north",
+	"extras": [],
+	"footing": {
+		"anchor": [
+			1.0,
+			1.0
+		],
+		"tiles": [
+			[
+				1.0,
+				1.0,
+				1.0
+			],
+			[
+				1.0,
+				3.0,
+				1.0
+			],
+			[
+				1.0,
+				1.0,
+				1.0
+			]
+		]
+	},
+	"footprint": [
+		1,
+		1,
+		1
+	],
+	"lookup_name": "snap_cube_puzzle",
+	"notes": {
+		"tags": [
+			"artifact-needs-fix"
+		],
+		"text": "[auto] AABB.y min = -0.40 — body sinks into / floats above floor"
+	},
+	"rotations": [
+		"0",
+		"90",
+		"180",
+		"270"
+	]
+}

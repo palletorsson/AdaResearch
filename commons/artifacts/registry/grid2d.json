@@ -1,5 +1,5 @@
 {
-	"_comment": "Grid2D substrate — MultiMesh cell grid with algorithm cartridges. Use #algorithm:<name> or named variants.",
+	"_comment": "Grid2D substrate \u2014 MultiMesh cell grid with algorithm cartridges. Use #algorithm:<name> or named variants.",
 	"artifacts": {
 		"grid2d": {
 			"name": "Grid2D Substrate",
@@ -75,12 +75,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.01,
+					0.02,
+					2.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.116681Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"grid2d_life": {
-			"name": "Grid2D — Game of Life",
+			"name": "Grid2D \u2014 Game of Life",
 			"lookup_name": "grid2d_life",
-			"description": "Conway's Game of Life on a MultiMesh petri dish. B3/S23 — the canonical cellular automaton. Warm amber cells on dark glass.",
+			"description": "Conway's Game of Life on a MultiMesh petri dish. B3/S23 \u2014 the canonical cellular automaton. Warm amber cells on dark glass.",
 			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -155,12 +188,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.01,
+					0.02,
+					2.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.116681Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"grid2d_seeds": {
-			"name": "Grid2D — Seeds",
+			"name": "Grid2D \u2014 Seeds",
 			"lookup_name": "grid2d_seeds",
-			"description": "Seeds automaton — explosive, ephemeral. Every cell lives one generation then dies. Electric cyan explosions from minimal seeds.",
+			"description": "Seeds automaton \u2014 explosive, ephemeral. Every cell lives one generation then dies. Electric cyan explosions from minimal seeds.",
 			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -234,12 +300,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.01,
+					0.02,
+					2.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.116681Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"grid2d_brians_brain": {
-			"name": "Grid2D — Brian's Brain",
+			"name": "Grid2D \u2014 Brian's Brain",
 			"lookup_name": "grid2d_brians_brain",
-			"description": "Brian's Brain 3-state automaton. Self-sustaining oscillators and spaceships in hot pink. Off → On → Dying → Off.",
+			"description": "Brian's Brain 3-state automaton. Self-sustaining oscillators and spaceships in hot pink. Off \u2192 On \u2192 Dying \u2192 Off.",
 			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -312,12 +411,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.01,
+					0.02,
+					2.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.116681Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"grid2d_rule30": {
-			"name": "Grid2D — Rule 30",
+			"name": "Grid2D \u2014 Rule 30",
 			"lookup_name": "grid2d_rule30",
-			"description": "Wolfram Rule 30 — generates chaos from order. 1D elementary CA scrolling row by row in warm gold.",
+			"description": "Wolfram Rule 30 \u2014 generates chaos from order. 1D elementary CA scrolling row by row in warm gold.",
 			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -391,12 +523,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.01,
+					0.02,
+					2.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.116681Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"grid2d_rule110": {
-			"name": "Grid2D — Rule 110",
+			"name": "Grid2D \u2014 Rule 110",
 			"lookup_name": "grid2d_rule110",
-			"description": "Wolfram Rule 110 — Turing-complete elementary CA. Complex structures emerge from a single cell.",
+			"description": "Wolfram Rule 110 \u2014 Turing-complete elementary CA. Complex structures emerge from a single cell.",
 			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -472,12 +637,45 @@
 				"isolation": 2,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.01,
+					0.02,
+					2.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.116681Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"grid2d_rule90": {
-			"name": "Grid2D — Rule 90",
+			"name": "Grid2D \u2014 Rule 90",
 			"lookup_name": "grid2d_rule90",
-			"description": "Wolfram Rule 90 — generates Sierpinski triangle pattern. Fractal from a 1D CA rule.",
+			"description": "Wolfram Rule 90 \u2014 generates Sierpinski triangle pattern. Fractal from a 1D CA rule.",
 			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -552,10 +750,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.01,
+					0.02,
+					2.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.116681Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"grid2d_bfs": {
-			"name": "Grid2D — BFS Flood Fill",
+			"name": "Grid2D \u2014 BFS Flood Fill",
 			"lookup_name": "grid2d_bfs",
 			"description": "Breadth-first search flood fill. Watch the uniform wavefront expand through a walled grid. Blue frontier, orange source.",
 			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
@@ -632,10 +863,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.01,
+					0.02,
+					2.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.116681Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"grid2d_dfs_maze": {
-			"name": "Grid2D — DFS Maze Generator",
+			"name": "Grid2D \u2014 DFS Maze Generator",
 			"lookup_name": "grid2d_dfs_maze",
 			"description": "Depth-first search recursive backtracker maze. Watch the carver drill, backtrack, and explore. Green head, amber retreat.",
 			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
@@ -712,12 +976,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.01,
+					0.02,
+					2.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.116681Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"grid2d_wireworld": {
-			"name": "Grid2D — Wireworld",
+			"name": "Grid2D \u2014 Wireworld",
 			"lookup_name": "grid2d_wireworld",
-			"description": "Wireworld — 4-state CA for digital circuits. Copper wire, electric blue electrons, orange afterglow. Build logic gates from simple rules.",
+			"description": "Wireworld \u2014 4-state CA for digital circuits. Copper wire, electric blue electrons, orange afterglow. Build logic gates from simple rules.",
 			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -791,12 +1088,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.01,
+					0.02,
+					2.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.116681Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"grid2d_langtons_ant": {
-			"name": "Grid2D — Langton's Ant",
+			"name": "Grid2D \u2014 Langton's Ant",
 			"lookup_name": "grid2d_langtons_ant",
-			"description": "Langton's Ant — deterministic but emergent. Chaotic scribbling that spontaneously produces a highway. Purple trail, red ant.",
+			"description": "Langton's Ant \u2014 deterministic but emergent. Chaotic scribbling that spontaneously produces a highway. Purple trail, red ant.",
 			"scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -870,6 +1200,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.01,
+					0.02,
+					2.01
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.01,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.116681Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	}

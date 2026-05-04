@@ -65,6 +65,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.15,
+					0.52,
+					0.29
+				],
+				"aabb_center": [
+					0.2,
+					0.5,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.15,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"noc_5_02_arrive": {
@@ -133,6 +166,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.15,
+					0.47,
+					0.5
+				],
+				"aabb_center": [
+					0.2,
+					0.48,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.15,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"noc_5_03_stay_within_walls": {
@@ -200,6 +266,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.23,
+					0.91,
+					0.29
+				],
+				"aabb_center": [
+					0.16,
+					0.5,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.23,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"noc_5_04_flow_field": {
@@ -266,6 +365,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.19,
+					0.13,
+					0.29
+				],
+				"aabb_center": [
+					0.18,
+					0.49,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.19,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"noc_5_05_path_following_simple": {
@@ -332,6 +464,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.27,
+					0.64,
+					0.29
+				],
+				"aabb_center": [
+					0.14,
+					0.45,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.27,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"noc_5_07_separation": {
@@ -399,6 +564,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.18,
+					0.85,
+					0.29
+				],
+				"aabb_center": [
+					0.18,
+					0.5,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.18,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"noc_5_08_path_following": {
@@ -466,6 +664,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.2,
+					0.79,
+					0.29
+				],
+				"aabb_center": [
+					0.17,
+					0.51,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"noc_5_08_separation_and_seek": {
@@ -534,6 +765,39 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.22,
+					0.75,
+					0.29
+				],
+				"aabb_center": [
+					0.16,
+					0.48,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.22,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_5_9_flocking": {
@@ -602,6 +866,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.89,
+					0.05,
+					0.04
+				],
+				"aabb_center": [
+					0.0,
+					-0.6,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.89,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_5_9_flocking_with_binning": {
@@ -670,6 +967,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.21,
+					0.84,
+					0.29
+				],
+				"aabb_center": [
+					0.17,
+					0.5,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.21,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_5_12_sine_cosine_lookup": {
@@ -735,6 +1065,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.04,
+					0.23,
+					0.29
+				],
+				"aabb_center": [
+					0.75,
+					0.36,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.29,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"exercise_5_2_pursuit": {
@@ -802,6 +1165,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.25,
+					0.42,
+					0.29
+				],
+				"aabb_center": [
+					0.15,
+					0.45,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.25,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"exercise_5_4_wander": {
@@ -871,6 +1267,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.89,
+					0.64,
+					0.05
+				],
+				"aabb_center": [
+					0.0,
+					-0.29,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.89,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 2,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"exercise_5_9_angle_between": {
@@ -938,6 +1367,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.78,
+					0.48,
+					0.29
+				],
+				"aabb_center": [
+					0.38,
+					0.48,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.78,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"exercise_5_13_crowd_path_following": {
@@ -1006,6 +1468,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.18,
+					0.83,
+					0.29
+				],
+				"aabb_center": [
+					0.18,
+					0.51,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.18,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"flocking_controls": {
@@ -1078,6 +1573,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.74,
+					1.02
+				],
+				"aabb_center": [
+					0.0,
+					-0.07,
+					0.11
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.280749Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	}

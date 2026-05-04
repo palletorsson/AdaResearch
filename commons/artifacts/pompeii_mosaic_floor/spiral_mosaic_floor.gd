@@ -257,8 +257,12 @@ func _build() -> void:
 		for i in verts.size():
 			verts[i].y = y_off
 		return verts
-	dark_verts = _offset_y.call(dark_verts, 0.0)
-	light_verts = _offset_y.call(light_verts, 0.001)
+	# Light is the FULL background disc here (same as san_michele) — must
+	# sit at the BOTTOM of the y-stack or it occludes the dark spiral
+	# bands above it. Order: grout(-0.001) < light(0.0) < dark(0.001) <
+	# accent(0.002).
+	light_verts = _offset_y.call(light_verts, 0.0)
+	dark_verts = _offset_y.call(dark_verts, 0.001)
 	accent_verts = _offset_y.call(accent_verts, 0.002)
 	grout_verts = _offset_y.call(grout_verts, -0.001)
 

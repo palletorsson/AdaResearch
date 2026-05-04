@@ -48,12 +48,40 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.5,
+					0.58,
+					1.5
+				],
+				"aabb_center": [
+					0.0,
+					0.11,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035053Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"FlowFieldMain": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "v_i(t+1) = field[grid(pos_i)] — each agent reads one arrow and moves; the entire \"decision\" is a lookup",
+			"description": "v_i(t+1) = field[grid(pos_i)] \u2014 each agent reads one arrow and moves; the entire \"decision\" is a lookup",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -131,6 +159,34 @@
 					"boid_flocking"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					50.0,
+					1.1,
+					50.0
+				],
+				"aabb_center": [
+					0.0,
+					0.45,
+					0.0
+				],
+				"grid_cells": [
+					50.0,
+					50.0
+				],
+				"max_dimension_m": 50.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 75,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035053Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"KonigsbergBridge": {
@@ -234,6 +290,34 @@
 					"general"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					50.0,
+					4.9,
+					32.0
+				],
+				"aabb_center": [
+					0.0,
+					1.2,
+					0.0
+				],
+				"grid_cells": [
+					50.0,
+					32.0
+				],
+				"max_dimension_m": 50.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 75,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035053Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"additive_synthesis": {
@@ -317,12 +401,40 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.9,
+					6.15,
+					1.0
+				],
+				"aabb_center": [
+					-0.05,
+					-0.43,
+					0.0
+				],
+				"grid_cells": [
+					17.0,
+					1.0
+				],
+				"max_dimension_m": 16.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.035053Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"affect_theory_visualization": {
 			"category": "critical",
 			"complexity": "intermediate",
-			"description": "Physics simulation meets affect theory — forces as emotional intensities, bodies as sites of felt experience. Where Deleuze meets Newton.",
+			"description": "Physics simulation meets affect theory \u2014 forces as emotional intensities, bodies as sites of felt experience. Where Deleuze meets Newton.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -398,7 +510,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"albers_wall_gallery": {
 			"category": "unknown",
@@ -485,6 +620,34 @@
 					"color"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					7.76,
+					4.54,
+					0.18
+				],
+				"aabb_center": [
+					0.0,
+					2.27,
+					0.03
+				],
+				"grid_cells": [
+					8.0,
+					1.0
+				],
+				"max_dimension_m": 7.76,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.035053Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"algorithm_overview": {
@@ -536,12 +699,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"algorithmic_bias": {
 			"category": "critical",
 			"complexity": "intermediate",
-			"description": "Visualization of how algorithms encode and amplify social biases. Training data reflects existing inequalities, models learn to reproduce them — making structural discrimination computational.",
+			"description": "Visualization of how algorithms encode and amplify social biases. Training data reflects existing inequalities, models learn to reproduce them \u2014 making structural discrimination computational.",
 			"dev_themes": [
 				"algorithms",
 				"education",
@@ -614,6 +795,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.9,
+					6.5,
+					1.0
+				],
+				"aabb_center": [
+					-0.05,
+					-0.25,
+					0.0
+				],
+				"grid_cells": [
+					17.0,
+					1.0
+				],
+				"max_dimension_m": 16.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				17.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"algorithmic_bias_visualization": {
@@ -692,12 +906,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					19.9,
+					10.6,
+					16.2
+				],
+				"aabb_center": [
+					-0.1,
+					3.3,
+					0.0
+				],
+				"grid_cells": [
+					20.0,
+					17.0
+				],
+				"max_dimension_m": 19.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				20.0,
+				1,
+				17.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"astar": {
 			"category": "algorithms",
 			"complexity": "intermediate",
-			"description": "Advanced pathfinding comparison — Jump Point Search (pruned A* with symmetry breaking), Theta* (any-angle line-of-sight paths), and side-by-side algorithm comparison on the same randomized grid. ImmediateMesh visualization of open/closed sets, jump points, line-of-sight checks, and final paths with per-algorithm statistics.",
+			"description": "Advanced pathfinding comparison \u2014 Jump Point Search (pruned A* with symmetry breaking), Theta* (any-angle line-of-sight paths), and side-by-side algorithm comparison on the same randomized grid. ImmediateMesh visualization of open/closed sets, jump points, line-of-sight checks, and final paths with per-algorithm statistics.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -772,6 +1019,39 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.48,
+					0.2,
+					0.12
+				],
+				"aabb_center": [
+					0.0,
+					-0.79,
+					4.01
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.48,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"audio_effects": {
@@ -855,6 +1135,24 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"bias_from_inside": {
@@ -940,6 +1238,39 @@
 					"sibling"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.19,
+					0.24,
+					1.36
+				],
+				"aabb_center": [
+					-0.04,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.36,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"boid_flocking": {
@@ -1022,7 +1353,7 @@
 		"boid_manager": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "f_i = Σ(neighbor_j)[separate(i,j) + align(vel_j) + cohere(pos_j)] — three weighted averages over a local neighborhood",
+			"description": "f_i = \u03a3(neighbor_j)[separate(i,j) + align(vel_j) + cohere(pos_j)] \u2014 three weighted averages over a local neighborhood",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -1100,6 +1431,34 @@
 					"glass"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					20.11,
+					10.28,
+					19.96
+				],
+				"aabb_center": [
+					0.08,
+					0.0,
+					0.16
+				],
+				"grid_cells": [
+					21.0,
+					20.0
+				],
+				"max_dimension_m": 20.11,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"boids_2d_in_3d": {
@@ -1178,6 +1537,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.0,
+					2.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 3.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 6,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"booleans": {
@@ -1226,6 +1613,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					12.0,
+					3.55,
+					5.0
+				],
+				"aabb_center": [
+					0.0,
+					1.22,
+					0.0
+				],
+				"grid_cells": [
+					12.0,
+					5.0
+				],
+				"max_dimension_m": 12.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"booleanvariations": {
@@ -1306,12 +1721,40 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					5.16,
+					8.74,
+					8.98
+				],
+				"aabb_center": [
+					0.75,
+					1.3,
+					1.2
+				],
+				"grid_cells": [
+					6.0,
+					9.0
+				],
+				"max_dimension_m": 8.98,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"boyer_moore": {
 			"category": "algorithms",
 			"complexity": "intermediate",
-			"description": "Boyer-Moore string search — the algorithm that searches backwards, skipping ahead when mismatches reveal the pattern can't possibly match. Sublinear average time for text search.",
+			"description": "Boyer-Moore string search \u2014 the algorithm that searches backwards, skipping ahead when mismatches reveal the pattern can't possibly match. Sublinear average time for text search.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -1375,12 +1818,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					19.8,
+					9.3,
+					0.2
+				],
+				"aabb_center": [
+					-0.5,
+					-3.75,
+					0.05
+				],
+				"grid_cells": [
+					20.0,
+					1.0
+				],
+				"max_dimension_m": 19.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				20.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"cave_system": {
 			"category": "randomness",
 			"complexity": "intermediate",
-			"description": "Procedural cave generation using noise-based geometry. Random seeds produce unique underground networks — exploration of how controlled randomness creates believable natural spaces.",
+			"description": "Procedural cave generation using noise-based geometry. Random seeds produce unique underground networks \u2014 exploration of how controlled randomness creates believable natural spaces.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -1441,6 +1917,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					24.79,
+					18.86,
+					23.35
+				],
+				"aabb_center": [
+					-1.41,
+					1.23,
+					-1.16
+				],
+				"grid_cells": [
+					25.0,
+					24.0
+				],
+				"max_dimension_m": 24.79,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				25.0,
+				1,
+				24.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"closest_pair": {
@@ -1533,6 +2042,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.33,
+					0.2,
+					0.12
+				],
+				"aabb_center": [
+					0.0,
+					-3.49,
+					0.31
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"context_free_grammars": {
@@ -1586,6 +2123,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.28,
+					0.0,
+					0.96
+				],
+				"aabb_center": [
+					0.0,
+					-0.44,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.28,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"diamondtoruscollection": {
@@ -1677,12 +2242,40 @@
 					"geometry"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.3,
+					1.35,
+					4.4
+				],
+				"aabb_center": [
+					0.1,
+					-0.58,
+					0.0
+				],
+				"grid_cells": [
+					5.0,
+					5.0
+				],
+				"max_dimension_m": 4.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"dijkstra_algorithm": {
 			"category": "algorithms",
 			"complexity": "intermediate",
-			"description": "Dijkstra's shortest path algorithm — greedy exploration from source, relaxing edges, building the shortest path tree. The foundation of GPS routing and network packet delivery.",
+			"description": "Dijkstra's shortest path algorithm \u2014 greedy exploration from source, relaxing edges, building the shortest path tree. The foundation of GPS routing and network packet delivery.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -1759,6 +2352,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.9,
+					5.8,
+					1.0
+				],
+				"aabb_center": [
+					-0.05,
+					-0.6,
+					0.0
+				],
+				"grid_cells": [
+					17.0,
+					1.0
+				],
+				"max_dimension_m": 16.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				17.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"distance_fields_sdf": {
@@ -1838,6 +2464,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.33,
+					0.2,
+					0.12
+				],
+				"aabb_center": [
+					0.0,
+					-4.49,
+					0.31
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"ecosystem_simulation": {
@@ -1924,6 +2578,24 @@
 					"combines"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"ecosystem_simulation_2": {
@@ -1998,6 +2670,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					50.72,
+					11.45,
+					50.0
+				],
+				"aabb_center": [
+					-0.36,
+					4.33,
+					0.0
+				],
+				"grid_cells": [
+					51.0,
+					50.0
+				],
+				"max_dimension_m": 50.72,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 76,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"edmonds_algorithm": {
@@ -2101,12 +2801,40 @@
 					"matching"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					6.39,
+					0.4,
+					6.1
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					7.0,
+					7.0
+				],
+				"max_dimension_m": 6.39,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"entropy_axiom": {
 			"category": "randomness",
 			"complexity": "intermediate",
-			"description": "Shannon entropy as foundational axiom — information content measured by surprise. The mathematical bedrock of information theory: uncertainty is quantifiable.",
+			"description": "Shannon entropy as foundational axiom \u2014 information content measured by surprise. The mathematical bedrock of information theory: uncertainty is quantifiable.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -2234,6 +2962,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.8,
+					2.91,
+					2.8
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.91,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"fibonacci_sequences": {
@@ -2288,12 +3044,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"fluid_simulation": {
 			"category": "physics",
 			"complexity": "advanced",
-			"description": "Navier-Stokes fluid dynamics visualization — velocity fields, pressure, viscosity, and vorticity. The equations that describe everything from ocean currents to blood flow.",
+			"description": "Navier-Stokes fluid dynamics visualization \u2014 velocity fields, pressure, viscosity, and vorticity. The equations that describe everything from ocean currents to blood flow.",
 			"dev_themes": [
 				"algorithms",
 				"misc",
@@ -2405,6 +3179,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					14.9,
+					5.9,
+					2.6
+				],
+				"aabb_center": [
+					0.95,
+					-0.55,
+					0.8
+				],
+				"grid_cells": [
+					15.0,
+					3.0
+				],
+				"max_dimension_m": 14.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"force_directed_layout": {
@@ -2503,6 +3305,34 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.9,
+					6.79,
+					1.0
+				],
+				"aabb_center": [
+					-0.05,
+					-0.1,
+					0.0
+				],
+				"grid_cells": [
+					17.0,
+					1.0
+				],
+				"max_dimension_m": 16.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"forcedirected3d": {
@@ -2594,6 +3424,34 @@
 					"forces"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					15.69,
+					20.12,
+					17.64
+				],
+				"aabb_center": [
+					0.12,
+					0.35,
+					-0.43
+				],
+				"grid_cells": [
+					16.0,
+					18.0
+				],
+				"max_dimension_m": 20.12,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"generative_music": {
@@ -2677,6 +3535,24 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"geometric_transformations": {
@@ -2763,12 +3639,40 @@
 					"geometry"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					12.65,
+					4.75,
+					2.0
+				],
+				"aabb_center": [
+					0.17,
+					-0.87,
+					0.0
+				],
+				"grid_cells": [
+					13.0,
+					2.0
+				],
+				"max_dimension_m": 12.65,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"gradient_descent_visualization": {
 			"category": "algorithms",
 			"complexity": "intermediate",
-			"description": "Gradient descent optimization on a loss landscape — watch the optimizer slide downhill following the steepest direction. The engine behind all neural network training, with learning rate and momentum visible.",
+			"description": "Gradient descent optimization on a loss landscape \u2014 watch the optimizer slide downhill following the steepest direction. The engine behind all neural network training, with learning rate and momentum visible.",
 			"dev_themes": [
 				"algorithms",
 				"education",
@@ -2855,6 +3759,34 @@
 					"training"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.33,
+					0.27,
+					0.15
+				],
+				"aabb_center": [
+					0.0,
+					-0.99,
+					0.01
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"granular_synthesis": {
@@ -2939,12 +3871,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"graph_coloring": {
 			"category": "algorithms",
 			"complexity": "intermediate",
-			"description": "Greedy chromatic number exploration on a Petersen graph — 10 nodes colored step-by-step with the lowest available color not used by any neighbor. The four color theorem made visible.",
+			"description": "Greedy chromatic number exploration on a Petersen graph \u2014 10 nodes colored step-by-step with the lowest available color not used by any neighbor. The four color theorem made visible.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -3009,6 +3959,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.57,
+					0.54,
+					0.04
+				],
+				"aabb_center": [
+					0.0,
+					-0.03,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.57,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 2,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"graphspace": {
@@ -3108,6 +4091,24 @@
 					"introduces"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"graphspace3d": {
@@ -3188,6 +4189,24 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"homagetothesquare": {
@@ -3276,6 +4295,34 @@
 					"rainbow"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.65,
+					2.65,
+					0.11
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					-0.05
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 2.65,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 6,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"karger_algorithm": {
@@ -3359,12 +4406,40 @@
 					"randomized"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.84,
+					0.05,
+					0.04
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.35
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.84,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"kitbashing": {
 			"category": "randomness",
 			"complexity": "intermediate",
-			"description": "Procedural kitbashing — assembling complex forms from randomized geometric primitives. The digital equivalent of the model-making technique used in Star Wars and Blade Runner.",
+			"description": "Procedural kitbashing \u2014 assembling complex forms from randomized geometric primitives. The digital equivalent of the model-making technique used in Star Wars and Blade Runner.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -3430,6 +4505,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					59.93,
+					29.71,
+					58.4
+				],
+				"aabb_center": [
+					0.06,
+					-0.01,
+					0.45
+				],
+				"grid_cells": [
+					60.0,
+					59.0
+				],
+				"max_dimension_m": 59.93,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				60.0,
+				1,
+				59.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 89,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"koch_curve": {
@@ -3482,12 +4590,40 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					40.69,
+					35.24,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					5.67,
+					0.0
+				],
+				"grid_cells": [
+					41.0,
+					1.0
+				],
+				"max_dimension_m": 40.69,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 61,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"konigsberg_bridge": {
 			"category": "algorithms",
 			"complexity": "beginner",
-			"description": "Euler's Königsberg bridge problem — can you cross every bridge exactly once? The question that birthed graph theory, proving that some problems are about structure, not calculation.",
+			"description": "Euler's K\u00f6nigsberg bridge problem \u2014 can you cross every bridge exactly once? The question that birthed graph theory, proving that some problems are about structure, not calculation.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -3498,7 +4634,7 @@
 			"map_sequences": [
 				"testmaps"
 			],
-			"name": "Königsberg Bridge Problem",
+			"name": "K\u00f6nigsberg Bridge Problem",
 			"parameters": {
 				"footprint": [
 					21.0,
@@ -3566,6 +4702,39 @@
 					"first"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					19.92,
+					0.12,
+					15.36
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					20.0,
+					16.0
+				],
+				"max_dimension_m": 19.92,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				20.0,
+				1,
+				16.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"kosaraju_algorithm": {
@@ -3666,12 +4835,40 @@
 					"strategy"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.3,
+					1.29,
+					4.1
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					5.0,
+					5.0
+				],
+				"max_dimension_m": 4.3,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"levenshtein_distance": {
 			"category": "algorithms",
 			"complexity": "intermediate",
-			"description": "Edit distance visualization — minimum insertions, deletions, and substitutions to transform one string into another. The dynamic programming matrix that powers spell checkers and DNA sequence alignment.",
+			"description": "Edit distance visualization \u2014 minimum insertions, deletions, and substitutions to transform one string into another. The dynamic programming matrix that powers spell checkers and DNA sequence alignment.",
 			"dev_themes": [
 				"algorithms",
 				"biology",
@@ -3738,6 +4935,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					27.5,
+					13.2,
+					0.8
+				],
+				"aabb_center": [
+					8.35,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					28.0,
+					1.0
+				],
+				"max_dimension_m": 27.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				28.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.035559Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"mst_visualization": {
@@ -3838,6 +5068,34 @@
 					"which"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					30.0,
+					20.0,
+					35.0
+				],
+				"aabb_center": [
+					0.0,
+					-3.8,
+					2.5
+				],
+				"grid_cells": [
+					30.0,
+					35.0
+				],
+				"max_dimension_m": 35.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"network_analysis": {
@@ -3938,12 +5196,40 @@
 				"isolation": 3,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					19.5,
+					13.48,
+					4.0
+				],
+				"aabb_center": [
+					0.25,
+					1.86,
+					0.0
+				],
+				"grid_cells": [
+					20.0,
+					4.0
+				],
+				"max_dimension_m": 19.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"network_flow_visualization": {
 			"category": "algorithms",
 			"complexity": "advanced",
-			"description": "Max-flow/min-cut visualization — capacity constraints, augmenting paths, and the duality between maximum flow and minimum cut. The algorithm behind airline scheduling and internet routing.",
+			"description": "Max-flow/min-cut visualization \u2014 capacity constraints, augmenting paths, and the duality between maximum flow and minimum cut. The algorithm behind airline scheduling and internet routing.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -4017,6 +5303,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					20.0,
+					14.47,
+					20.0
+				],
+				"aabb_center": [
+					0.0,
+					0.4,
+					0.0
+				],
+				"grid_cells": [
+					20.0,
+					20.0
+				],
+				"max_dimension_m": 20.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				20.0,
+				1,
+				20.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"networkflow3d": {
@@ -4120,12 +5439,40 @@
 					"duality"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					31.2,
+					16.2,
+					31.2
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					32.0,
+					32.0
+				],
+				"max_dimension_m": 31.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"newton_raphson_visualization": {
 			"category": "algorithms",
 			"complexity": "intermediate",
-			"description": "Root-finding by tangent line iteration — each step uses the derivative to leap closer to where the function crosses zero. Quadratic convergence when it works, spectacular chaos when it doesn't.",
+			"description": "Root-finding by tangent line iteration \u2014 each step uses the derivative to leap closer to where the function crosses zero. Quadratic convergence when it works, spectacular chaos when it doesn't.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -4192,6 +5539,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.0,
+					16.0,
+					0.3
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					16.0,
+					1.0
+				],
+				"max_dimension_m": 16.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				16.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"pathfinding3d": {
@@ -4296,6 +5676,34 @@
 					"paths"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					9.9,
+					14.9,
+					9.9
+				],
+				"aabb_center": [
+					4.5,
+					7.0,
+					4.5
+				],
+				"grid_cells": [
+					10.0,
+					10.0
+				],
+				"max_dimension_m": 14.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"pathfinding_visualization": {
@@ -4376,6 +5784,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					19.9,
+					0.1,
+					19.9
+				],
+				"aabb_center": [
+					9.5,
+					0.0,
+					9.5
+				],
+				"grid_cells": [
+					20.0,
+					20.0
+				],
+				"max_dimension_m": 19.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"platonicsolids": {
@@ -4467,12 +5903,40 @@
 					"alongside"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.0,
+					3.5,
+					10.0
+				],
+				"aabb_center": [
+					0.0,
+					0.75,
+					0.0
+				],
+				"grid_cells": [
+					10.0,
+					10.0
+				],
+				"max_dimension_m": 10.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"playground_of_joy": {
 			"category": "physics",
 			"complexity": "beginner",
-			"description": "Playful physics sandbox — interact with bouncy, joyful objects. Physics as play, simulation as delight.",
+			"description": "Playful physics sandbox \u2014 interact with bouncy, joyful objects. Physics as play, simulation as delight.",
 			"dev_themes": [
 				"algorithms",
 				"misc",
@@ -4549,7 +6013,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"pokemon_studio": {
 			"category": "nature_system",
@@ -4557,7 +6044,7 @@
 			"default_rotation": 0.0,
 			"default_y_offset": 0.0,
 			"dependencies": [],
-			"description": "Breeding, growth, and evolution laboratory — grow life from DNA, cross-breed across kingdoms, release into a shared ecosystem",
+			"description": "Breeding, growth, and evolution laboratory \u2014 grow life from DNA, cross-breed across kingdoms, release into a shared ecosystem",
 			"dev_themes": [
 				"algorithms",
 				"nature",
@@ -4626,6 +6113,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					61.6,
+					11.6,
+					50.0
+				],
+				"aabb_center": [
+					18.2,
+					1.12,
+					12.0
+				],
+				"grid_cells": [
+					62.0,
+					50.0
+				],
+				"max_dimension_m": 61.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				62.0,
+				1,
+				50.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 92,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"psychoacoustics": {
@@ -4715,6 +6235,24 @@
 					"between"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"push_relabel_algorithm": {
@@ -4815,6 +6353,34 @@
 					"through"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.4,
+					0.4,
+					3.86
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					5.0,
+					4.0
+				],
+				"max_dimension_m": 4.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 10,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"rainbow": {
@@ -4908,6 +6474,24 @@
 					"dark_side_prism"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"remains_to_be_seen": {
@@ -4982,6 +6566,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					18.08,
+					6.27,
+					20.62
+				],
+				"aabb_center": [
+					0.06,
+					2.14,
+					0.08
+				],
+				"grid_cells": [
+					19.0,
+					21.0
+				],
+				"max_dimension_m": 20.62,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				19.0,
+				1,
+				21.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"rorschach_monitor": {
@@ -5030,6 +6647,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.11,
+					1.11,
+					0.09
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.01
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.11,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"rorschach_scan": {
@@ -5078,12 +6723,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"rsa_visualization": {
 			"category": "algorithms",
 			"complexity": "advanced",
-			"description": "RSA public-key cryptography visualization — prime factorization, modular exponentiation, and the one-way trapdoor that makes secure communication possible. Easy to multiply primes, nearly impossible to factor back.",
+			"description": "RSA public-key cryptography visualization \u2014 prime factorization, modular exponentiation, and the one-way trapdoor that makes secure communication possible. Easy to multiply primes, nearly impossible to factor back.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -5154,12 +6817,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.64,
+					0.05,
+					0.04
+				],
+				"aabb_center": [
+					0.0,
+					-0.38,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.64,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"running_text_display": {
 			"category": "critical",
 			"complexity": "beginner",
-			"description": "Scrolling text display for critical theory — words flowing through space, text as material, reading as embodied spatial practice.",
+			"description": "Scrolling text display for critical theory \u2014 words flowing through space, text as material, reading as embodied spatial practice.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -5222,6 +6918,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.0,
+					0.2,
+					0.02
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 2.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"scale_me": {
@@ -5317,12 +7046,40 @@
 					"player"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.12,
+					0.12,
+					0.12
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.12,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"self_organizing_patterns": {
 			"category": "emergence",
 			"complexity": "intermediate",
-			"description": "Stigmergy, phase transitions, and attractor basin visualization — 3 modes: stigmergy field with deposit/evaporation heatmap, Ising-like phase transition with order parameter sweep, Voronoi-colored attractor basins with flow field arrows",
+			"description": "Stigmergy, phase transitions, and attractor basin visualization \u2014 3 modes: stigmergy field with deposit/evaporation heatmap, Ising-like phase transition with order parameter sweep, Voronoi-colored attractor basins with flow field arrows",
 			"dev_themes": [
 				"algorithms",
 				"emergent_systems"
@@ -5409,12 +7166,40 @@
 					"abstract"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.33,
+					0.2,
+					0.12
+				],
+				"aabb_center": [
+					0.0,
+					-3.99,
+					0.01
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"simulated_annealing": {
 			"category": "algorithms",
 			"complexity": "intermediate",
-			"description": "Adaptive thermal optimization with basin-hopping — ImmediateMesh energy landscape, acceptance probability distribution, adaptive cooling rate targeting optimal acceptance, and basin-hopping to escape local minima.",
+			"description": "Adaptive thermal optimization with basin-hopping \u2014 ImmediateMesh energy landscape, acceptance probability distribution, adaptive cooling rate targeting optimal acceptance, and basin-hopping to escape local minima.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -5502,12 +7287,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.37,
+					0.28,
+					1.68
+				],
+				"aabb_center": [
+					-0.02,
+					-0.01,
+					0.14
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.68,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"small_world_network": {
 			"category": "algorithms",
 			"complexity": "intermediate",
-			"description": "Watts-Strogatz small-world model — 20 nodes in a ring lattice with k=4 neighbors. VR slider controls rewiring probability p: regular lattice at p=0, random graph at p=1. Watch how random shortcuts collapse average path length while clustering stays high. Gray edges are original, yellow edges are rewired shortcuts.",
+			"description": "Watts-Strogatz small-world model \u2014 20 nodes in a ring lattice with k=4 neighbors. VR slider controls rewiring probability p: regular lattice at p=0, random graph at p=1. Watch how random shortcuts collapse average path length while clustering stays high. Gray edges are original, yellow edges are rewired shortcuts.",
 			"dev_themes": [
 				"algorithms",
 				"misc"
@@ -5575,6 +7393,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.63,
+					0.83,
+					0.22
+				],
+				"aabb_center": [
+					0.0,
+					-0.1,
+					0.09
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.83,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"subtractive_synthesis": {
@@ -5657,6 +7508,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.9,
+					5.6,
+					4.16
+				],
+				"aabb_center": [
+					-0.05,
+					-0.7,
+					0.02
+				],
+				"grid_cells": [
+					17.0,
+					5.0
+				],
+				"max_dimension_m": 16.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"tarjan_algorithm": {
@@ -5759,6 +7638,34 @@
 					"strategies"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					6.39,
+					1.39,
+					6.39
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					7.0,
+					7.0
+				],
+				"max_dimension_m": 6.39,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"tartan_demo": {
@@ -5809,6 +7716,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					11.8,
+					1.0,
+					11.8
+				],
+				"aabb_center": [
+					5.4,
+					0.0,
+					5.4
+				],
+				"grid_cells": [
+					12.0,
+					12.0
+				],
+				"max_dimension_m": 11.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"topological_sort_algorithm": {
@@ -5887,6 +7822,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.75,
+					6.3,
+					1.0
+				],
+				"aabb_center": [
+					-0.07,
+					3.0,
+					0.0
+				],
+				"grid_cells": [
+					4.0,
+					1.0
+				],
+				"max_dimension_m": 6.3,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"tree_generation": {
@@ -5940,6 +7903,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.4,
+					1.7,
+					0.48
+				],
+				"aabb_center": [
+					0.05,
+					-2.35,
+					0.0
+				],
+				"grid_cells": [
+					11.0,
+					1.0
+				],
+				"max_dimension_m": 10.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"voronoi_visualization": {
@@ -6017,24 +8008,85 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.33,
+					0.2,
+					0.04
+				],
+				"aabb_center": [
+					-1.8,
+					-3.0,
+					0.07
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"topological_sort": {
 			"category": "graphtheory",
 			"complexity": "intermediate",
-			"description": "Topological sort — linear ordering of vertices in a directed acyclic graph",
+			"description": "Topological sort \u2014 linear ordering of vertices in a directed acyclic graph",
 			"include_in_map_data": true,
 			"lookup_name": "topological_sort",
 			"map_ready": true,
 			"map_sequences": [
 				"graphtheory"
 			],
-			"scene": "res://algorithms/graphtheory/topological_sort/topological_sort.tscn"
+			"scene": "res://algorithms/graphtheory/topological_sort/topological_sort.tscn",
+			"measurements": {
+				"aabb_size": [
+					3.75,
+					4.8,
+					1.0
+				],
+				"aabb_center": [
+					-0.07,
+					2.25,
+					0.0
+				],
+				"grid_cells": [
+					4.0,
+					1.0
+				],
+				"max_dimension_m": 4.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				4.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
+			}
 		},
 		"wiki_fragment": {
 			"category": "critical",
 			"complexity": "basic",
-			"description": "A deliberately incomplete reading panel. Each fragment ends with a cross-reference to another fragment elsewhere in the room — and the chain cycles. No one panel carries the thesis. Walking the four of them does. Enacts the commons as response to incompleteness: what one editor cannot hold, the ledger can.",
+			"description": "A deliberately incomplete reading panel. Each fragment ends with a cross-reference to another fragment elsewhere in the room \u2014 and the chain cycles. No one panel carries the thesis. Walking the four of them does. Enacts the commons as response to incompleteness: what one editor cannot hold, the ledger can.",
 			"include_in_map_data": true,
 			"interaction": "read",
 			"lookup_name": "wiki_fragment",
@@ -6064,13 +8116,46 @@
 			"identity": {
 				"essence": "A claim that admits it needs the others",
 				"desire": "To be read as one of four, never alone",
-				"truth": "No node is true alone. A wiki is not consistent; it is corrigible — which is more honest."
+				"truth": "No node is true alone. A wiki is not consistent; it is corrigible \u2014 which is more honest."
+			},
+			"measurements": {
+				"aabb_size": [
+					1.4,
+					1.1,
+					0.04
+				],
+				"aabb_center": [
+					0.0,
+					1.0,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"situated_readout": {
 			"category": "critical",
 			"complexity": "basic",
-			"description": "A flat display panel showing a classification verdict for the same SUBJECT #4729. The verdict is determined by the panel's own world position — place four instances in four quadrants and the player sees four incompatible 'objective' answers to the same query. Haraway's situated knowledge, enacted spatially: the view always comes from somewhere.",
+			"description": "A flat display panel showing a classification verdict for the same SUBJECT #4729. The verdict is determined by the panel's own world position \u2014 place four instances in four quadrants and the player sees four incompatible 'objective' answers to the same query. Haraway's situated knowledge, enacted spatially: the view always comes from somewhere.",
 			"include_in_map_data": true,
 			"interaction": "read",
 			"lookup_name": "situated_readout",
@@ -6100,7 +8185,40 @@
 			"identity": {
 				"essence": "A verdict that changes with where it speaks from",
 				"desire": "To be read alongside three siblings showing incompatible answers to the same input",
-				"truth": "There is no view from nowhere — the classification belongs to the location, not the subject"
+				"truth": "There is no view from nowhere \u2014 the classification belongs to the location, not the subject"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.2,
+					0.9,
+					0.04
+				],
+				"aabb_center": [
+					0.0,
+					0.85,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 4,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.036080Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	},

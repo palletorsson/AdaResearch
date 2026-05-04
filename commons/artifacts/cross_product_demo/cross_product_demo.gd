@@ -7,6 +7,16 @@
 # QFEP: Cross product as "emergence" - a third direction from two
 #
 # UPGRADED VISUALS - Sleek modern look with glow effects
+#
+# @identity
+# essence: Two grabbable vectors A and B yield a third vector A×B perpendicular to both, with magnitude equal to the parallelogram's area
+# desire: To make the right-hand rule kinaesthetic — the player rotates A and B and watches a third direction emerge as their geometric consequence
+# critical_parameter: angle between A and B — when parallel, cross product is zero; when perpendicular, magnitude is maximal
+# triggers: Aligning A and B collapses the result; opening them out grows the parallelogram and the perpendicular arrow; flipping order reverses sign
+# emerges: A third dimension appears not as input but as result — the cross product reveals that two vectors imply a plane and its normal
+# needs: VR grabbable endpoints [has], live cross-product computation [has], parallelogram render [has], glow effects [has]
+# relationships: Companion to vector_addition_walk and vector_dot_product in forces/Components_and_Addition. QFEP emergence demonstrator
+# truth: A cross product is not a third vector found among the others — it is the witness that two vectors together specify a plane and a way out of it.
 
 extends Node3D
 

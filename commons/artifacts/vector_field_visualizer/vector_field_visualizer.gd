@@ -4,6 +4,16 @@ class_name VectorFieldVisualizer
 ## 3D vector field visualizer — grid of arrow glyphs showing flow direction and magnitude.
 ## Supports vortex, source, sink, and dipole field modes.
 ## Each arrow = shaft + 2 arrowhead lines drawn with ImmediateMesh PRIMITIVE_LINES.
+##
+## @identity
+## essence: A 3D grid of arrow glyphs sampling a vector field — vortex, source, sink, or dipole — making invisible field structure visible
+## desire: To reveal that "field" is not metaphor but a function from space to vectors, sampled and rendered at lattice points
+## critical_parameter: field_mode and grid resolution — mode picks the topology, resolution decides whether the structure reads or aliases
+## triggers: Coarse grids miss sinks; fine grids reveal dipole fall-off; switching modes shows the same lattice can host very different topologies
+## emerges: Singular points (sources, sinks, saddles) become visible as places where arrows organize, even though the rendering is just sampling
+## needs: ImmediateMesh arrow rendering [has], multiple field modes [has], grid config for mode/resolution [has]
+## relationships: Companion to example_2_9_n_body in forces/N-Body_and_Chaos — field view of attraction. Echo of forces themselves as space-valued functions
+## truth: A vector field is the rule that decides which way to go from where you are — and the visualization is the shape of that rule made standing-still.
 
 # --- Configuration ---
 

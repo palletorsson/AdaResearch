@@ -3,7 +3,7 @@
 		"singing_board": {
 			"category": "speech",
 			"complexity": "beginner",
-			"description": "Interactive singing surface — touch points map to pitch and timbre, creating a spatial instrument where position becomes sound.",
+			"description": "Interactive singing surface \u2014 touch points map to pitch and timbre, creating a spatial instrument where position becomes sound.",
 			"dev_themes": [
 				"audio",
 				"language",
@@ -65,12 +65,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.58,
+					0.61,
+					0.58
+				],
+				"aabb_center": [
+					0.27,
+					0.25,
+					0.27
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.61,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.276843Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"vowel_instrument": {
 			"category": "speech",
 			"complexity": "intermediate",
-			"description": "Vowel space as musical instrument — navigate the formant plane to produce vowel sounds. Front/back, open/close become coordinates in phonemic space.",
+			"description": "Vowel space as musical instrument \u2014 navigate the formant plane to produce vowel sounds. Front/back, open/close become coordinates in phonemic space.",
 			"dev_themes": [
 				"audio",
 				"language",
@@ -132,7 +165,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"vowel_sound_board": {
 			"category": "unknown",
@@ -214,12 +270,40 @@
 					"contrasts"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.58,
+					0.61,
+					0.58
+				],
+				"aabb_center": [
+					0.27,
+					0.25,
+					0.27
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.61,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.276843Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"vowel_synth": {
 			"category": "speech",
 			"complexity": "intermediate",
-			"description": "Real-time vowel synthesis from formant parameters — adjust F1 and F2 frequencies to morph between vowel sounds. Hear the geometry of the vowel triangle.",
+			"description": "Real-time vowel synthesis from formant parameters \u2014 adjust F1 and F2 frequencies to morph between vowel sounds. Hear the geometry of the vowel triangle.",
 			"dev_themes": [
 				"audio",
 				"language",
@@ -280,12 +364,35 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		}
 	},
 	"registry_info": {
 		"category": "speech",
-		"description": "Speech and phoneme artifacts — vowel synthesis, singing boards, and phonemic space exploration. Sound as computational material.",
+		"description": "Speech and phoneme artifacts \u2014 vowel synthesis, singing boards, and phonemic space exploration. Sound as computational material.",
 		"name": "speech",
 		"theoretical_grounding": "Phonetics, formant theory, vowel space geometry, sound synthesis, speech perception"
 	}

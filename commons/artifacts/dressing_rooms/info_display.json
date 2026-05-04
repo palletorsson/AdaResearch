@@ -1,0 +1,56 @@
+{
+	"approach": "south",
+	"artifact_offset": [
+		0.0,
+		1.0,
+		0.0
+	],
+	"clearance": [
+		3.0,
+		3.0,
+		3.0
+	],
+	"exit": "north",
+	"extras": [],
+	"footing": {
+		"anchor": [
+			1.0,
+			1.0
+		],
+		"tiles": [
+			[
+				1.0,
+				1.0,
+				1.0
+			],
+			[
+				1.0,
+				3.0,
+				1.0
+			],
+			[
+				1.0,
+				1.0,
+				1.0
+			]
+		]
+	},
+	"footprint": [
+		3,
+		1,
+		2
+	],
+	"lookup_name": "info_display",
+	"notes": {
+		"tags": [
+			"artifact-needs-fix"
+		],
+		"text": "[auto] AABB.y min = -1.00 — body sinks into / floats above floor"
+	},
+	"rotations": [
+		"0",
+		"90",
+		"180",
+		"270"
+	]
+}

@@ -4,7 +4,7 @@
 			"capacity": "FEEL how parametric distortion transforms a predictable corridor into an unpredictable cave",
 			"category": "geometry",
 			"complexity": "intermediate",
-			"description": "Walk into a cylinder that refuses to stay regular. CSG spheres bulge outward at irregular intervals, warping your sense of depth — the tunnel breathes. The num_bulges and bulge_max_radius parameters control how much chaos enters the geometry: low values produce a hallway, high values produce a cave. Contrasts with Klein bottle (closed non-orientable) and Möbius strip (twisted surface); prepares for hyperbolic spaces where distortion becomes the rule.",
+			"description": "Walk into a cylinder that refuses to stay regular. CSG spheres bulge outward at irregular intervals, warping your sense of depth \u2014 the tunnel breathes. The num_bulges and bulge_max_radius parameters control how much chaos enters the geometry: low values produce a hallway, high values produce a cave. Contrasts with Klein bottle (closed non-orientable) and M\u00f6bius strip (twisted surface); prepares for hyperbolic spaces where distortion becomes the rule.",
 			"dev_themes": [
 				"geometry",
 				"non_euclidean"
@@ -40,7 +40,7 @@
 				"tunnel_radius": "Base radius (default: 1.0)",
 				"use_random_bulges": "Stochastic vs sinusoidal bulge sizing (default: true)"
 			},
-			"qfep_connection": "Lambda applied to architecture — a regular cylinder is pure F (uniform, predictable). Each bulge introduces E (variation, surprise). The num_bulges parameter IS lambda: how much chaos do you let into your structure? At zero bulges the tunnel is Euclidean. At maximum, geometry becomes landscape.",
+			"qfep_connection": "Lambda applied to architecture \u2014 a regular cylinder is pure F (uniform, predictable). Each bulge introduces E (variation, surprise). The num_bulges parameter IS lambda: how much chaos do you let into your structure? At zero bulges the tunnel is Euclidean. At maximum, geometry becomes landscape.",
 			"scene": "res://algorithms/alternativegeometries/bulgingtunnel/bulging_tunnel.tscn",
 			"size_group": "xlarge",
 			"tags": [
@@ -107,6 +107,34 @@
 					"pairs"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.9,
+					3.9,
+					10.28
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					5.14
+				],
+				"grid_cells": [
+					4.0,
+					11.0
+				],
+				"max_dimension_m": 10.28,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"curvature_slider": {
@@ -187,12 +215,45 @@
 					"euclid_postulates_plaque"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.18,
+					0.2,
+					0.04
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.02
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"elliptic_surface": {
 			"category": "geometry",
 			"complexity": "intermediate",
-			"description": "Dome/sphere-like surface demonstrating positive Gaussian curvature (K > 0) — where parallel lines converge and triangle angles sum to more than 180 degrees.",
+			"description": "Dome/sphere-like surface demonstrating positive Gaussian curvature (K > 0) \u2014 where parallel lines converge and triangle angles sum to more than 180 degrees.",
 			"dev_themes": [
 				"geometry",
 				"non_euclidean"
@@ -269,6 +330,39 @@
 					"depends"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.79,
+					0.8,
+					0.79
+				],
+				"aabb_center": [
+					0.0,
+					-0.12,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"entropy_morphogenesis": {
@@ -353,6 +447,34 @@
 					"becoming"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					5.0,
+					5.0,
+					5.0
+				],
+				"aabb_center": [
+					0.0,
+					-2.5,
+					0.0
+				],
+				"grid_cells": [
+					5.0,
+					5.0
+				],
+				"max_dimension_m": 5.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"gyroid_cheese": {
@@ -429,12 +551,40 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					16.0,
+					16.0,
+					16.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					16.0,
+					16.0
+				],
+				"max_dimension_m": 16.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"hyperbolic_surface": {
 			"category": "geometry",
 			"complexity": "intermediate",
-			"description": "Saddle-shaped surface demonstrating negative Gaussian curvature (K < 0) — where parallel lines diverge and triangle angles sum to less than 180 degrees.",
+			"description": "Saddle-shaped surface demonstrating negative Gaussian curvature (K < 0) \u2014 where parallel lines diverge and triangle angles sum to less than 180 degrees.",
 			"dev_themes": [
 				"geometry",
 				"non_euclidean"
@@ -511,6 +661,39 @@
 					"depends"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					0.25,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"marching_cubes": {
@@ -591,12 +774,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"mobius_strip_altgeo": {
 			"category": "geometry",
 			"complexity": "beginner",
-			"description": "A walkable Möbius strip environment — traverse the one-sided surface and experience the topological twist firsthand. Non-orientability as lived experience.",
+			"description": "A walkable M\u00f6bius strip environment \u2014 traverse the one-sided surface and experience the topological twist firsthand. Non-orientability as lived experience.",
 			"dev_themes": [
 				"geometry",
 				"non_euclidean"
@@ -605,7 +806,7 @@
 			"lookup_name": "mobius_strip_altgeo",
 			"map_ready": true,
 			"map_sequences": [],
-			"name": "Möbius Strip (Walkable)",
+			"name": "M\u00f6bius Strip (Walkable)",
 			"scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_strip.tscn",
 			"tags": [
 				"mobius",
@@ -673,12 +874,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.2,
+					0.4,
+					2.29
+				],
+				"aabb_center": [
+					0.1,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 2.29,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"mobius_world": {
 			"category": "unknown",
 			"complexity": "intermediate",
-			"description": "Walkable MÃ¶bius strip - non-orientable surface. Requires MovementWallWalk on player (collision layer 4).",
+			"description": "Walkable M\u00c3\u00b6bius strip - non-orientable surface. Requires MovementWallWalk on player (collision layer 4).",
 			"dev_themes": [
 				"geometry",
 				"non_euclidean"
@@ -694,7 +928,7 @@
 			"map_sequences": [
 				"fractals"
 			],
-			"name": "MÃ¶bius World",
+			"name": "M\u00c3\u00b6bius World",
 			"parameters": {
 				"footprint": [
 					69,
@@ -760,12 +994,30 @@
 					"other"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"non_euclidean_space": {
 			"category": "geometry",
 			"complexity": "advanced",
-			"description": "A space where Euclid's parallel postulate fails — rooms that are bigger inside than outside, corridors that loop impossibly. Hyperbolic and elliptic geometry made navigable.",
+			"description": "A space where Euclid's parallel postulate fails \u2014 rooms that are bigger inside than outside, corridors that loop impossibly. Hyperbolic and elliptic geometry made navigable.",
 			"dev_themes": [
 				"geometry",
 				"non_euclidean"
@@ -832,6 +1084,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					18.48,
+					3.95,
+					21.95
+				],
+				"aabb_center": [
+					-0.15,
+					1.32,
+					2.77
+				],
+				"grid_cells": [
+					19.0,
+					22.0
+				],
+				"max_dimension_m": 21.95,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				19.0,
+				1,
+				22.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"organic_space": {
@@ -918,6 +1203,34 @@
 					"growth"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					25.0,
+					25.0,
+					25.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					25.0,
+					25.0
+				],
+				"max_dimension_m": 25.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"rhizomatic_maze_space": {
@@ -999,6 +1312,24 @@
 					"structured"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"rhizomatic_structure": {
@@ -1090,6 +1421,34 @@
 					"graph"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					14.64,
+					15.02,
+					17.47
+				],
+				"aabb_center": [
+					-1.93,
+					-2.04,
+					-1.01
+				],
+				"grid_cells": [
+					15.0,
+					18.0
+				],
+				"max_dimension_m": 17.47,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"riemann_pi": {
@@ -1173,12 +1532,40 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					25.5,
+					15.65,
+					8.0
+				],
+				"aabb_center": [
+					10.75,
+					7.32,
+					0.0
+				],
+				"grid_cells": [
+					26.0,
+					8.0
+				],
+				"max_dimension_m": 25.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045261Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"riemann_sphere": {
 			"category": "geometry",
 			"complexity": "advanced",
-			"description": "The Riemann sphere — compactified complex plane with stereographic projection lines, north pole at infinity, equator, and projection plane visible.",
+			"description": "The Riemann sphere \u2014 compactified complex plane with stereographic projection lines, north pole at infinity, equator, and projection plane visible.",
 			"dev_themes": [
 				"geometry",
 				"non_euclidean"
@@ -1260,6 +1647,39 @@
 					"complex"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.9,
+					0.63,
+					0.9
+				],
+				"aabb_center": [
+					0.0,
+					0.01,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045762Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"riemann_torus": {
@@ -1340,12 +1760,40 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					25.73,
+					0.65,
+					12.0
+				],
+				"aabb_center": [
+					6.87,
+					-0.09,
+					0.0
+				],
+				"grid_cells": [
+					26.0,
+					12.0
+				],
+				"max_dimension_m": 25.73,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.045762Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	},
 	"registry_info": {
 		"category": "geometry",
-		"description": "Non-Euclidean and alternative geometry artifacts — Möbius strips, bulging tunnels, rhizomatic structures, and spaces where parallel lines meet or diverge. Geometry beyond the textbook.",
+		"description": "Non-Euclidean and alternative geometry artifacts \u2014 M\u00f6bius strips, bulging tunnels, rhizomatic structures, and spaces where parallel lines meet or diverge. Geometry beyond the textbook.",
 		"name": "alternative_geometries",
 		"theoretical_grounding": "Non-Euclidean geometry, Riemannian manifolds, topology, rhizome theory (Deleuze & Guattari), spatial perception"
 	}

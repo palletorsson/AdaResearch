@@ -3,7 +3,7 @@
 		"ChainSwing": {
 			"category": "forces",
 			"complexity": "intermediate",
-			"description": "A double-pendulum swing built from pin joints and rigid links. Two chain segments hang from an anchor beam, ending in a glowing seat that receives periodic sinusoidal force. The trail draws the seat's arc through space, revealing how constraints propagate force through a chain — each link amplifying or dampening the one above. Arrow keys let you push the swing manually, hunting for resonance where small inputs produce large arcs.",
+			"description": "A double-pendulum swing built from pin joints and rigid links. Two chain segments hang from an anchor beam, ending in a glowing seat that receives periodic sinusoidal force. The trail draws the seat's arc through space, revealing how constraints propagate force through a chain \u2014 each link amplifying or dampening the one above. Arrow keys let you push the swing manually, hunting for resonance where small inputs produce large arcs.",
 			"dev_themes": [
 				"physics",
 				"simulation"
@@ -42,7 +42,7 @@
 				"resonance",
 				"forces"
 			],
-			"qfep_connection": "Classical F — force as law transmitted through constraint chains. Each pin joint is a rule that permits rotation but forbids translation, and the emergent swing pattern is the system's negotiation between gravity and those rules.",
+			"qfep_connection": "Classical F \u2014 force as law transmitted through constraint chains. Each pin joint is a rule that permits rotation but forbids translation, and the emergent swing pattern is the system's negotiation between gravity and those rules.",
 			"gamwell_reference": "Mechanics of constrained motion, Lagrangian dynamics, coupled oscillators, double pendulum chaos",
 			"interactions": [
 				"watch the periodic drive swing the seat automatically",
@@ -105,12 +105,40 @@
 					"single"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.5,
+					4.2,
+					0.6
+				],
+				"aabb_center": [
+					0.0,
+					3.1,
+					-1.5
+				],
+				"grid_cells": [
+					5.0,
+					1.0
+				],
+				"max_dimension_m": 4.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"CharacterRagdoll": {
 			"category": "forces",
 			"complexity": "intermediate",
-			"description": "A minimal ragdoll — one torso and one leg connected by a cone-twist joint at the hip. The joint limits swing to 35 degrees and twist to 25 degrees, mimicking the biomechanical range of a human hip. Press space to impulse the leg and watch how the cone-twist constraint channels the force into naturalistic swinging. This is the seed of character physics: from this single hip joint, the full ragdoll grows by adding more limbs and joints.",
+			"description": "A minimal ragdoll \u2014 one torso and one leg connected by a cone-twist joint at the hip. The joint limits swing to 35 degrees and twist to 25 degrees, mimicking the biomechanical range of a human hip. Press space to impulse the leg and watch how the cone-twist constraint channels the force into naturalistic swinging. This is the seed of character physics: from this single hip joint, the full ragdoll grows by adding more limbs and joints.",
 			"dev_themes": [
 				"physics",
 				"simulation"
@@ -147,7 +175,7 @@
 				"hip-joint",
 				"multi-body"
 			],
-			"qfep_connection": "Classical F moving toward phi — the cone-twist constraint at the hip is Form, but the emergent ragdoll motion hints at Entity. A body built from constraints begins to look like it has intention, even though it's purely mechanical.",
+			"qfep_connection": "Classical F moving toward phi \u2014 the cone-twist constraint at the hip is Form, but the emergent ragdoll motion hints at Entity. A body built from constraints begins to look like it has intention, even though it's purely mechanical.",
 			"gamwell_reference": "Ragdoll physics, biomechanical joint modeling, character simulation, constrained multi-body dynamics, hip joint kinematics",
 			"interactions": [
 				"press space to impulse the leg and watch hip-joint dynamics",
@@ -210,12 +238,40 @@
 					"systems"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					4.2,
+					0.5
+				],
+				"aabb_center": [
+					0.0,
+					2.9,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 4.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"ConeTwistBag": {
 			"category": "forces",
 			"complexity": "intermediate",
-			"description": "A punching bag hanging from a fixed anchor via a cone-twist joint. The cone-twist constraint limits the bag's swing to a 45-degree cone while allowing only 15 degrees of twist — like a ball-and-socket joint with angular limits. Nudge the bag and watch it swing within its invisible cone boundary, then slowly settle as damping absorbs the energy. The joint's bias and softness parameters control how sharply the limits are enforced.",
+			"description": "A punching bag hanging from a fixed anchor via a cone-twist joint. The cone-twist constraint limits the bag's swing to a 45-degree cone while allowing only 15 degrees of twist \u2014 like a ball-and-socket joint with angular limits. Nudge the bag and watch it swing within its invisible cone boundary, then slowly settle as damping absorbs the energy. The joint's bias and softness parameters control how sharply the limits are enforced.",
 			"dev_themes": [
 				"physics",
 				"simulation"
@@ -252,7 +308,7 @@
 				"biomechanics",
 				"damping"
 			],
-			"qfep_connection": "Classical F — the cone-twist joint as an angular constraint that defines a region of permitted motion. The swing span and twist span are the Form parameters; the emergent pendular motion within that cone is the system's behavior.",
+			"qfep_connection": "Classical F \u2014 the cone-twist joint as an angular constraint that defines a region of permitted motion. The swing span and twist span are the Form parameters; the emergent pendular motion within that cone is the system's behavior.",
 			"gamwell_reference": "Ball-and-socket joints, angular constraints, cone-twist mechanics, biomechanical joint limits, pendular dynamics",
 			"interactions": [
 				"press space to apply an impulse and watch the bag swing",
@@ -314,12 +370,40 @@
 					"control"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					6.0,
+					5.23,
+					0.81
+				],
+				"aabb_center": [
+					0.0,
+					2.54,
+					0.02
+				],
+				"grid_cells": [
+					6.0,
+					1.0
+				],
+				"max_dimension_m": 6.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"DrawbridgeHinge": {
 			"category": "forces",
 			"complexity": "beginner",
-			"description": "A motorized drawbridge attached to a stone tower via a hinge joint. The motor rotates the bridge up and down within an 85-degree arc. Arrow keys control the motor velocity; when idle, the bridge gently oscillates with a sinusoidal drive. The hinge joint is the workhorse of mechanical constraint — one rotational degree of freedom, producing everything from doors to engines. Here it lifts a bridge, making the constraint visible as architecture.",
+			"description": "A motorized drawbridge attached to a stone tower via a hinge joint. The motor rotates the bridge up and down within an 85-degree arc. Arrow keys control the motor velocity; when idle, the bridge gently oscillates with a sinusoidal drive. The hinge joint is the workhorse of mechanical constraint \u2014 one rotational degree of freedom, producing everything from doors to engines. Here it lifts a bridge, making the constraint visible as architecture.",
 			"dev_themes": [
 				"physics",
 				"simulation"
@@ -357,7 +441,7 @@
 				"angular-limit",
 				"architecture"
 			],
-			"qfep_connection": "Pure F — the hinge joint as the most intuitive constraint: one axis of rotation, everything else locked. The motor adds controllable energy, turning the constraint into a machine.",
+			"qfep_connection": "Pure F \u2014 the hinge joint as the most intuitive constraint: one axis of rotation, everything else locked. The motor adds controllable energy, turning the constraint into a machine.",
 			"gamwell_reference": "Hinge mechanics, motorized joints, drawbridge engineering, single-axis rotation, torque and angular velocity",
 			"interactions": [
 				"press up/down arrow keys to control bridge motor velocity",
@@ -418,6 +502,34 @@
 					"composed"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.5,
+					6.0,
+					3.0
+				],
+				"aabb_center": [
+					0.25,
+					3.0,
+					0.0
+				],
+				"grid_cells": [
+					9.0,
+					3.0
+				],
+				"max_dimension_m": 8.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"GimbalStabilizer": {
@@ -462,7 +574,7 @@
 				"multi-axis",
 				"robotics"
 			],
-			"qfep_connection": "Composed F — two hinge constraints stacked orthogonally, each removing one degree of freedom while their composition allows two-axis aiming. The gimbal is Form squared: constraint upon constraint yielding expressive control.",
+			"qfep_connection": "Composed F \u2014 two hinge constraints stacked orthogonally, each removing one degree of freedom while their composition allows two-axis aiming. The gimbal is Form squared: constraint upon constraint yielding expressive control.",
 			"gamwell_reference": "Gimbal systems, multi-axis rotation, Euler angles and gimbal lock, camera stabilization, robotic actuators, Lissajous figures",
 			"interactions": [
 				"press arrow keys to override yaw and pitch motors",
@@ -523,12 +635,40 @@
 					"kinematics"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.5,
+					4.05,
+					2.5
+				],
+				"aabb_center": [
+					0.0,
+					2.03,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 4.05,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"HingeCrank": {
 			"category": "forces",
 			"complexity": "intermediate",
-			"description": "A motorized crank mechanism combining three joint types into one machine. A hinge joint spins a wheel at constant velocity, a pin joint connects the wheel to a sliding rod, and a slider joint guides the rod along a rail. The result is rotary-to-linear conversion — the fundamental mechanism behind pistons, steam engines, and sewing machines. Watch how continuous rotation becomes reciprocating translation through the geometry of constraint.",
+			"description": "A motorized crank mechanism combining three joint types into one machine. A hinge joint spins a wheel at constant velocity, a pin joint connects the wheel to a sliding rod, and a slider joint guides the rod along a rail. The result is rotary-to-linear conversion \u2014 the fundamental mechanism behind pistons, steam engines, and sewing machines. Watch how continuous rotation becomes reciprocating translation through the geometry of constraint.",
 			"dev_themes": [
 				"physics",
 				"simulation"
@@ -567,7 +707,7 @@
 				"piston",
 				"kinematics"
 			],
-			"qfep_connection": "Classical F — three constraint rules (hinge, pin, slider) composed into a mechanism. Each joint removes degrees of freedom; together they channel rotary energy into linear work.",
+			"qfep_connection": "Classical F \u2014 three constraint rules (hinge, pin, slider) composed into a mechanism. Each joint removes degrees of freedom; together they channel rotary energy into linear work.",
 			"gamwell_reference": "Crank-slider mechanism, rotary-to-linear conversion, Watt linkage, mechanical advantage, kinematics of machines",
 			"interactions": [
 				"watch the motor-driven wheel spin and push the rod",
@@ -630,10 +770,38 @@
 					"slider"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.6,
+					0.6,
+					1.8
+				],
+				"aabb_center": [
+					0.9,
+					2.0,
+					0.0
+				],
+				"grid_cells": [
+					4.0,
+					2.0
+				],
+				"max_dimension_m": 3.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 10,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"IKArm": {
-			"description": "FABRIK inverse kinematics on a 4-segment arm — target orbits, arm solves backward and forward",
+			"description": "FABRIK inverse kinematics on a 4-segment arm \u2014 target orbits, arm solves backward and forward",
 			"scene_path": "res://algorithms/joint/11_ik_arm/IKArm.tscn",
 			"tags": [
 				"physics",
@@ -663,12 +831,45 @@
 					"concept"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.6,
+					8.7,
+					0.6
+				],
+				"aabb_center": [
+					0.0,
+					3.85,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 8.7,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"PendulumPin": {
 			"category": "forces",
 			"complexity": "beginner",
-			"description": "The simplest joint demo — a single sphere suspended from a fixed anchor by a pin joint. Gravity pulls the bob down; the pin constraint keeps it tethered, converting potential energy into angular motion. The bob swings freely in 3D, slowly decaying as linear damping bleeds energy. This is the atom of the joints sequence: one constraint, one body, one degree of freedom worth watching.",
+			"description": "The simplest joint demo \u2014 a single sphere suspended from a fixed anchor by a pin joint. Gravity pulls the bob down; the pin constraint keeps it tethered, converting potential energy into angular motion. The bob swings freely in 3D, slowly decaying as linear damping bleeds energy. This is the atom of the joints sequence: one constraint, one body, one degree of freedom worth watching.",
 			"dev_themes": [
 				"physics",
 				"simulation"
@@ -705,7 +906,7 @@
 				"constraint",
 				"simple"
 			],
-			"qfep_connection": "Pure F — a single constraint rule (the pin) producing predictable periodic motion. The pendulum is Form at its most elementary: structure yields behavior.",
+			"qfep_connection": "Pure F \u2014 a single constraint rule (the pin) producing predictable periodic motion. The pendulum is Form at its most elementary: structure yields behavior.",
 			"gamwell_reference": "Simple pendulum mechanics, Galileo's isochronism, harmonic motion, single degree-of-freedom systems",
 			"interactions": [
 				"watch the bob swing from its initial nudge",
@@ -767,12 +968,40 @@
 					"motor"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.91,
+					3.51,
+					0.9
+				],
+				"aabb_center": [
+					0.02,
+					3.75,
+					0.01
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 3.51,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"SliderPress": {
 			"category": "forces",
 			"complexity": "intermediate",
-			"description": "A piston and rail system demonstrating the slider joint — one translational degree of freedom. The piston oscillates along a Z-axis track with controllable motor speed and force via VR sliders. Real-time labels show position and velocity, making the relationship between motor parameters and motion directly readable. The slider joint is the opposite of a hinge: where hinges permit rotation and forbid translation, sliders permit translation and forbid rotation.",
+			"description": "A piston and rail system demonstrating the slider joint \u2014 one translational degree of freedom. The piston oscillates along a Z-axis track with controllable motor speed and force via VR sliders. Real-time labels show position and velocity, making the relationship between motor parameters and motion directly readable. The slider joint is the opposite of a hinge: where hinges permit rotation and forbid translation, sliders permit translation and forbid rotation.",
 			"dev_themes": [
 				"physics",
 				"joints"
@@ -811,7 +1040,7 @@
 				"interactive",
 				"VR-controls"
 			],
-			"qfep_connection": "Classical F — the slider joint as a constraint that channels energy into exactly one translational axis. Motor speed and force become controllable parameters that the learner tunes to feel the difference between velocity and impulse.",
+			"qfep_connection": "Classical F \u2014 the slider joint as a constraint that channels energy into exactly one translational axis. Motor speed and force become controllable parameters that the learner tunes to feel the difference between velocity and impulse.",
 			"gamwell_reference": "Linear actuators, prismatic joints, piston mechanics, controllable force systems, degrees of freedom in mechanisms",
 			"interactions": [
 				"adjust the speed slider to control oscillation frequency",
@@ -873,12 +1102,40 @@
 					"artifact"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.91,
+					1.5,
+					4.0
+				],
+				"aabb_center": [
+					1.05,
+					1.5,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					4.0
+				],
+				"max_dimension_m": 4.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"SpringSuspension": {
 			"category": "forces",
 			"complexity": "intermediate",
-			"description": "A car-like suspension system using a Generic6DOF joint configured as a vertical spring. A wheel hangs below a chassis, free to bounce vertically but locked in all other axes. The spring stiffness and damping create the characteristic suspension feel — press space to drop the wheel and watch it oscillate to rest. This demonstrates how a single 6DOF joint with carefully chosen axis locks and spring parameters can simulate complex mechanical behavior.",
+			"description": "A car-like suspension system using a Generic6DOF joint configured as a vertical spring. A wheel hangs below a chassis, free to bounce vertically but locked in all other axes. The spring stiffness and damping create the characteristic suspension feel \u2014 press space to drop the wheel and watch it oscillate to rest. This demonstrates how a single 6DOF joint with carefully chosen axis locks and spring parameters can simulate complex mechanical behavior.",
 			"dev_themes": [
 				"physics",
 				"simulation"
@@ -916,7 +1173,7 @@
 				"oscillation",
 				"hooke"
 			],
-			"qfep_connection": "Classical F with lambda-tuning — the 6DOF joint's spring stiffness and damping are the lambda parameters that tune between rigid constraint (high stiffness) and free motion (low stiffness). The sweet spot produces naturalistic suspension.",
+			"qfep_connection": "Classical F with lambda-tuning \u2014 the 6DOF joint's spring stiffness and damping are the lambda parameters that tune between rigid constraint (high stiffness) and free motion (low stiffness). The sweet spot produces naturalistic suspension.",
 			"gamwell_reference": "Spring-damper systems, suspension mechanics, Generic6DOF joints, Hooke's law in constrained systems, shock absorber dynamics",
 			"interactions": [
 				"press space to bounce the wheel and watch it oscillate",
@@ -977,6 +1234,34 @@
 					"motion"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.0,
+					2.32,
+					2.0
+				],
+				"aabb_center": [
+					0.0,
+					2.04,
+					0.0
+				],
+				"grid_cells": [
+					4.0,
+					2.0
+				],
+				"max_dimension_m": 4.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"algo_gun": {
@@ -1058,13 +1343,41 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.15,
+					0.06,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"bouncing_ball": {
 			"capacity": "SEE that the bounce coefficient controls how much chaos (energy) survives each collision",
 			"category": "physics",
 			"complexity": "beginner",
-			"description": "The quintessential physics demo: a ball bouncing under gravity with configurable coefficient of restitution. At e=1.0, perfectly elastic — energy conserved, bounces forever. Below 1.0, each impact dissipates energy as heat and sound, and the ball gradually dies. A complete parabolic trajectory with collision response in the simplest possible package.",
+			"description": "The quintessential physics demo: a ball bouncing under gravity with configurable coefficient of restitution. At e=1.0, perfectly elastic \u2014 energy conserved, bounces forever. Below 1.0, each impact dissipates energy as heat and sound, and the ball gradually dies. A complete parabolic trajectory with collision response in the simplest possible package.",
 			"dev_category": "physics_bodies",
 			"dev_themes": [
 				"collision",
@@ -1098,7 +1411,7 @@
 				],
 				"size_group": "xlarge"
 			},
-			"qfep_connection": "Pure F — gravity pulls, floor reflects. The simplest possible physics: one force, one constraint. The bounce coefficient IS lambda: 1.0 = perfect (no energy loss), 0.0 = dead stop.",
+			"qfep_connection": "Pure F \u2014 gravity pulls, floor reflects. The simplest possible physics: one force, one constraint. The bounce coefficient IS lambda: 1.0 = perfect (no energy loss), 0.0 = dead stop.",
 			"scene": "res://algorithms/physicssimulation/bouncingball/bouncingball.tscn",
 			"sequence": "forces",
 			"size_group": "xlarge",
@@ -1160,6 +1473,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.06,
+					9.35,
+					8.06
+				],
+				"aabb_center": [
+					0.0,
+					4.64,
+					0.0
+				],
+				"grid_cells": [
+					9.0,
+					9.0
+				],
+				"max_dimension_m": 9.35,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"cloth_simulation": {
@@ -1188,7 +1529,7 @@
 				],
 				"size_group": "world_scale"
 			},
-			"qfep_connection": "Cloth as emergent softness — rigid spring rules at the micro level produce flowing, organic behavior at the macro level. The visual gap between the grid topology and the draped result is emergence made visible.",
+			"qfep_connection": "Cloth as emergent softness \u2014 rigid spring rules at the micro level produce flowing, organic behavior at the macro level. The visual gap between the grid topology and the draped result is emergence made visible.",
 			"scene": "res://algorithms/physicssimulation/clothsimulation/clothsimulation.tscn",
 			"sequence": "physicssimulation",
 			"tags": [
@@ -1237,7 +1578,7 @@
 		"collision_detection": {
 			"category": "physics",
 			"complexity": "advanced",
-			"description": "Two-phase collision detection pipeline: broad phase (spatial hashing, bounding boxes) rapidly culls impossible pairs, then narrow phase (GJK/SAT algorithms) computes exact contact points, penetration depth, and collision normals. Visualizes the acceleration structures that make real-time physics possible — without them, checking every pair is O(n²) death.",
+			"description": "Two-phase collision detection pipeline: broad phase (spatial hashing, bounding boxes) rapidly culls impossible pairs, then narrow phase (GJK/SAT algorithms) computes exact contact points, penetration depth, and collision normals. Visualizes the acceleration structures that make real-time physics possible \u2014 without them, checking every pair is O(n\u00b2) death.",
 			"dev_category": "physics_bodies",
 			"dev_themes": [
 				"collision",
@@ -1261,7 +1602,7 @@
 				],
 				"size_group": "environment"
 			},
-			"qfep_connection": "Collision detection as the boundary between order and disorder — the moment two objects meet is a phase transition where kinetic energy redistributes. The algorithm itself is a lambda that converts spatial proximity into contact events.",
+			"qfep_connection": "Collision detection as the boundary between order and disorder \u2014 the moment two objects meet is a phase transition where kinetic energy redistributes. The algorithm itself is a lambda that converts spatial proximity into contact events.",
 			"scene": "res://algorithms/physicssimulation/collisiondetection/collisiondetection.tscn",
 			"sequence": "physicssimulation",
 			"tags": [
@@ -1322,10 +1663,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					5.26,
+					4.89,
+					4.62
+				],
+				"aabb_center": [
+					0.02,
+					4.07,
+					0.47
+				],
+				"grid_cells": [
+					6.0,
+					5.0
+				],
+				"max_dimension_m": 5.26,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				6.0,
+				1,
+				5.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"constraints": {
-			"capacity": "SEE that each constraint removes a degree of freedom — freedom is defined by what is forbidden",
+			"capacity": "SEE that each constraint removes a degree of freedom \u2014 freedom is defined by what is forbidden",
 			"category": "physics",
 			"complexity": "advanced",
 			"description": "Joint constraints that restrict rigid body degrees of freedom: hinges (1 rotational DOF), sliders (1 translational DOF), ball-and-socket (3 rotational DOF), and fixed joints. Watch how iterative constraint solvers project invalid states back onto the constraint manifold, enforcing physical laws as geometric relationships.",
@@ -1357,7 +1731,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "F-limitation — joints restrict degrees of freedom. Each constraint removes a possibility. A hinge allows rotation but forbids translation. Freedom is defined by what is forbidden.",
+			"qfep_connection": "F-limitation \u2014 joints restrict degrees of freedom. Each constraint removes a possibility. A hinge allows rotation but forbids translation. Freedom is defined by what is forbidden.",
 			"scene": "res://algorithms/physicssimulation/constraints/constraints.tscn",
 			"sequence": "physicssimulation",
 			"tags": [
@@ -1420,6 +1794,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.28,
+					3.84,
+					7.77
+				],
+				"aabb_center": [
+					0.89,
+					1.18,
+					0.76
+				],
+				"grid_cells": [
+					11.0,
+					8.0
+				],
+				"max_dimension_m": 10.28,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				11.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_1_10_accelerating_towards_the_mouse_vr": {
@@ -1497,23 +1904,101 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.81,
+					0.23,
+					0.29
+				],
+				"aabb_center": [
+					0.37,
+					0.54,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.81,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_2_1_forces_vr": {
 			"category": "forces",
 			"complexity": "beginner",
-			"description": "Force application demo — applying a force vector to a body and watching F=ma unfold. Nature of Code chapter 2.1.",
-			"dev_themes": ["physics", "simulation", "newton"],
-			"footprint": [1.0, 1.0, 1.0],
+			"description": "Force application demo \u2014 applying a force vector to a body and watching F=ma unfold. Nature of Code chapter 2.1.",
+			"dev_themes": [
+				"physics",
+				"simulation",
+				"newton"
+			],
+			"footprint": [
+				1.0,
+				1.0,
+				1.0
+			],
 			"include_in_map_data": true,
 			"lookup_name": "example_2_1_forces_vr",
 			"map_ready": true,
-			"map_sequences": ["forces"],
+			"map_sequences": [
+				"forces"
+			],
 			"name": "Forces (2.1)",
-			"parameters": {"footprint": [1.0, 1.0, 1.0], "size_group": "compact"},
+			"parameters": {
+				"footprint": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"size_group": "compact"
+			},
 			"scene": "res://algorithms/forces/example_2_1_forces_vr.tscn",
 			"size_group": "compact",
-			"tags": ["physics", "newton", "force", "acceleration"]
+			"tags": [
+				"physics",
+				"newton",
+				"force",
+				"acceleration"
+			],
+			"measurements": {
+				"aabb_size": [
+					1.02,
+					1.0,
+					1.0
+				],
+				"aabb_center": [
+					-0.01,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
+			}
 		},
 		"example_2_2_forces_mass_variation_vr": {
 			"category": "unknown",
@@ -1594,6 +2079,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.0,
+					1.33
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.17
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_2_3_gravity_scaled_by_mass_vr": {
@@ -1675,6 +2188,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.0,
+					1.33
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					-0.17
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_2_4_friction_vr": {
@@ -1756,10 +2297,38 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.0,
+					1.33
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					-0.17
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_2_5_fluid_resistance_vr": {
-			"capacity": "FEEL that drag is the medium's memory of your velocity — the faster you move, the harder the world pushes back",
+			"capacity": "FEEL that drag is the medium's memory of your velocity \u2014 the faster you move, the harder the world pushes back",
 			"category": "unknown",
 			"complexity": "beginner",
 			"description": "Drag opposes motion and scales with speed squared. Heavier objects fall faster through the same fluid. F_drag = -C * |v|^2 * v-hat. The faster you move, the harder the world pushes back.",
@@ -1793,7 +2362,7 @@
 				],
 				"size_group": "standard"
 			},
-			"qfep_connection": "F-resistance — drag is the medium's memory of your velocity. A feedback loop: speed creates resistance, resistance limits speed. Equilibrium is negotiation.",
+			"qfep_connection": "F-resistance \u2014 drag is the medium's memory of your velocity. A feedback loop: speed creates resistance, resistance limits speed. Equilibrium is negotiation.",
 			"scene": "res://algorithms/forces/example_2_5_fluid_resistance_vr.tscn",
 			"size_group": "standard",
 			"tags": [
@@ -1861,6 +2430,34 @@
 					"force_fields"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.05,
+					1.0,
+					1.33
+				],
+				"aabb_center": [
+					-0.02,
+					0.0,
+					-0.17
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_2_6_single_attractor_vr": {
@@ -1941,6 +2538,34 @@
 				"isolation": 2,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.02,
+					1.0,
+					1.0
+				],
+				"aabb_center": [
+					-0.01,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_2_7_multiple_attractors_vr": {
@@ -2023,6 +2648,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.0,
+					1.33
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.17
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_2_8_two_body_attraction_vr": {
@@ -2105,6 +2758,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.0,
+					1.33
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.17
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174107Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_2_9_n_body_attraction_vr": {
@@ -2187,6 +2868,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.0,
+					1.33
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.17
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_3_10_swinging_pendulum_vr": {
@@ -2267,6 +2976,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					0.94,
+					0.22
+				],
+				"aabb_center": [
+					0.21,
+					0.58,
+					0.07
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.94,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_3_11_a_spring_connection_vr": {
@@ -2346,6 +3083,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.5,
+					0.52,
+					0.23
+				],
+				"aabb_center": [
+					0.21,
+					0.28,
+					0.08
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.52,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_3_1_angular_motion_using_rotate_vr": {
@@ -2425,13 +3190,41 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.97,
+					0.09,
+					0.29
+				],
+				"aabb_center": [
+					0.29,
+					0.47,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.97,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_3_2_forces_with_arbitrary_angular_motion_vr": {
 			"capacity": "SEE that rotation and translation are independent stories told by the same body",
 			"category": "physics",
 			"complexity": "intermediate",
-			"description": "Eight boxes orbit an attractor while spinning at their own rate — rotation and translation coexisting as independent freedoms. Linear attraction pulls them inward while random angular impulses accumulate, making each box spin differently. Movers wrap at boundaries creating toroidal space. Rotation does not need a force — it needs a torque, or random impulses.",
+			"description": "Eight boxes orbit an attractor while spinning at their own rate \u2014 rotation and translation coexisting as independent freedoms. Linear attraction pulls them inward while random angular impulses accumulate, making each box spin differently. Movers wrap at boundaries creating toroidal space. Rotation does not need a force \u2014 it needs a torque, or random impulses.",
 			"dev_themes": [
 				"physics",
 				"simulation"
@@ -2463,7 +3256,7 @@
 				],
 				"size_group": "standard"
 			},
-			"qfep_connection": "Two independent F channels — linear attraction is one deterministic force, angular impulses are another. Lambda is the angular damping: high damping kills spin (pure orbital F), low damping lets chaos into rotation while translation stays ordered.",
+			"qfep_connection": "Two independent F channels \u2014 linear attraction is one deterministic force, angular impulses are another. Lambda is the angular damping: high damping kills spin (pure orbital F), low damping lets chaos into rotation while translation stays ordered.",
 			"scene": "res://algorithms/oscillation/noc_ch03/example_3_2_forces_with_arbitrary_angular_motion_vr.tscn",
 			"size_group": "standard",
 			"tags": [
@@ -2526,13 +3319,41 @@
 					"forces"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.11,
+					0.32,
+					0.64
+				],
+				"aabb_center": [
+					0.22,
+					0.4,
+					-0.01
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.11,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_3_3_pointing_in_the_direction_of_motion_vr": {
-			"capacity": "FEEL that heading is not chosen but inherited from motion — direction of motion IS orientation",
+			"capacity": "FEEL that heading is not chosen but inherited from motion \u2014 direction of motion IS orientation",
 			"category": "physics",
 			"complexity": "intermediate",
-			"description": "A cone that always points where it is going — orientation derived from velocity, not set independently. Sinusoidal thrust drives the mover in Lissajous-like 3D curves. The cone's nose traces the velocity vector, making heading a consequence of movement. A thing that points where it moves has surrendered its identity to its velocity.",
+			"description": "A cone that always points where it is going \u2014 orientation derived from velocity, not set independently. Sinusoidal thrust drives the mover in Lissajous-like 3D curves. The cone's nose traces the velocity vector, making heading a consequence of movement. A thing that points where it moves has surrendered its identity to its velocity.",
 			"dev_themes": [
 				"physics",
 				"simulation"
@@ -2564,7 +3385,7 @@
 				],
 				"size_group": "standard"
 			},
-			"qfep_connection": "F-alignment — the cone's orientation IS its velocity direction. No independent rotation. Identity (heading) is fully determined by dynamics (velocity). Pure F: given the state, the orientation is computable.",
+			"qfep_connection": "F-alignment \u2014 the cone's orientation IS its velocity direction. No independent rotation. Identity (heading) is fully determined by dynamics (velocity). Pure F: given the state, the orientation is computable.",
 			"scene": "res://algorithms/oscillation/noc_ch03/example_3_3_pointing_in_the_direction_of_motion_vr.tscn",
 			"size_group": "standard",
 			"tags": [
@@ -2627,6 +3448,34 @@
 					"velocity"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.81,
+					0.15,
+					0.29
+				],
+				"aabb_center": [
+					0.37,
+					0.5,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.81,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_3_4_polar_to_cartesian_vr": {
@@ -2703,6 +3552,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.51,
+					0.29
+				],
+				"aabb_center": [
+					0.37,
+					0.22,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_3_5_simple_harmonic_motion_vr": {
@@ -2797,6 +3674,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.73,
+					0.5,
+					0.38
+				],
+				"aabb_center": [
+					0.32,
+					0.21,
+					0.15
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.73,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_3_6_simple_harmonic_motion_ii_vr": {
@@ -2876,6 +3781,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.81,
+					0.57,
+					0.29
+				],
+				"aabb_center": [
+					0.37,
+					0.24,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.81,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_3_7_oscillator_objects_vr": {
@@ -2955,6 +3888,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.78,
+					0.58,
+					0.29
+				],
+				"aabb_center": [
+					0.38,
+					0.19,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.78,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_3_8_static_wave_vr": {
@@ -3047,6 +4008,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.24,
+					0.41,
+					0.24
+				],
+				"aabb_center": [
+					0.47,
+					0.36,
+					0.19
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.41,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_3_9_the_wave_vr": {
@@ -3123,6 +4112,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.33,
+					0.2,
+					0.12
+				],
+				"aabb_center": [
+					0.4,
+					0.16,
+					0.21
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_4_1_single_particle_vr": {
@@ -3206,6 +4223,34 @@
 				"isolation": 2,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.74,
+					0.62,
+					0.04
+				],
+				"aabb_center": [
+					0.0,
+					-0.29,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.74,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 2,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_4_2_array_particles_vr": {
@@ -3284,6 +4329,24 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"example_4_3_particle_emitter_vr": {
@@ -3367,6 +4430,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.06,
+					0.06,
+					0.06
+				],
+				"aabb_center": [
+					0.0,
+					0.3,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.06,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_4_4_multiple_emitters_vr": {
@@ -3447,6 +4538,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.56,
+					0.06,
+					0.56
+				],
+				"aabb_center": [
+					0.0,
+					0.3,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.56,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_4_5_inheritance_polymorphism_vr": {
@@ -3523,6 +4642,24 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"example_4_6_particle_repeller_vr": {
@@ -3603,6 +4740,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.74,
+					0.98,
+					0.18
+				],
+				"aabb_center": [
+					0.0,
+					-0.12,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.98,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 2,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_6_1_basic_rigidbody_vr": {
@@ -3677,6 +4842,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.76,
+					0.8
+				],
+				"aabb_center": [
+					0.0,
+					-0.03,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_6_2_falling_boxes_vr": {
@@ -3753,6 +4946,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.9,
+					0.95,
+					0.9
+				],
+				"aabb_center": [
+					0.0,
+					0.02,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.95,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_6_3_compound_bodies_vr": {
@@ -3831,6 +5052,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.9,
+					1.16,
+					0.9
+				],
+				"aabb_center": [
+					0.0,
+					0.12,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.16,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_6_4_windmill_vr": {
@@ -3910,6 +5159,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"aabb_center": [
+					-0.4,
+					0.05,
+					0.0
+				],
+				"grid_cells": [
+					8.0,
+					8.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_6_5_chain_vr": {
@@ -3989,6 +5266,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.06,
+					0.48,
+					0.06
+				],
+				"aabb_center": [
+					0.0,
+					0.09,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.48,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_6_6_grab_vr": {
@@ -4071,6 +5376,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.9,
+					0.7,
+					0.9
+				],
+				"aabb_center": [
+					0.0,
+					-0.11,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_6_7_bridge_vr": {
@@ -4150,6 +5483,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.5,
+					0.1,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.24,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_6_8_collision_layers_vr": {
@@ -4230,6 +5591,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.9,
+					0.84,
+					0.9
+				],
+				"aabb_center": [
+					0.0,
+					-0.04,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.9,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"example_particle_body": {
@@ -4308,6 +5697,24 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"exercise_3_11_oop_wave_vr": {
@@ -4384,6 +5791,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.04,
+					0.23,
+					0.29
+				],
+				"aabb_center": [
+					0.75,
+					0.36,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.29,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"exercise_3_12_additive_wave_vr": {
@@ -4460,6 +5895,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.33,
+					0.13,
+					0.09
+				],
+				"aabb_center": [
+					0.3,
+					0.16,
+					0.11
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.33,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"exercise_3_15_double_pendulum_vr": {
@@ -4540,6 +6003,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.49,
+					0.93,
+					0.22
+				],
+				"aabb_center": [
+					0.22,
+					0.54,
+					0.08
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.93,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"exercise_3_1_baton_vr": {
@@ -4619,6 +6110,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.95,
+					0.1,
+					0.29
+				],
+				"aabb_center": [
+					0.3,
+					0.47,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.95,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"exercise_3_5_spiral_vr": {
@@ -4695,6 +6214,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.04,
+					0.23,
+					0.29
+				],
+				"aabb_center": [
+					0.75,
+					0.36,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.29,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"exercise_3_6_asteroids_vr": {
@@ -4774,12 +6321,40 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.83,
+					0.3,
+					0.29
+				],
+				"aabb_center": [
+					0.36,
+					0.39,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.83,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"fem_simulation": {
 			"category": "physics",
 			"complexity": "advanced",
-			"description": "Finite Element Method (FEM) for deformable solid mechanics. A continuous body is discretized into tetrahedral or hexahedral elements, each computing stress and strain from local deformation gradients. Assemble the global stiffness matrix, solve the linear system, and watch beams bend, bridges sag, and materials yield under load — engineering simulation made visible.",
+			"description": "Finite Element Method (FEM) for deformable solid mechanics. A continuous body is discretized into tetrahedral or hexahedral elements, each computing stress and strain from local deformation gradients. Assemble the global stiffness matrix, solve the linear system, and watch beams bend, bridges sag, and materials yield under load \u2014 engineering simulation made visible.",
 			"dev_category": "physics_continuum",
 			"dev_themes": [
 				"fem",
@@ -4803,7 +6378,7 @@
 				],
 				"size_group": "environment"
 			},
-			"qfep_connection": "FEM as discretized order — the continuous stress field (infinite-dimensional) projected onto a finite basis of shape functions. Each element is a local lambda mapping displacement to force; the assembled system is emergent global behavior from local constitutive laws.",
+			"qfep_connection": "FEM as discretized order \u2014 the continuous stress field (infinite-dimensional) projected onto a finite basis of shape functions. Each element is a local lambda mapping displacement to force; the assembled system is emergent global behavior from local constitutive laws.",
 			"scene": "res://algorithms/physicssimulation/fem/fem.tscn",
 			"sequence": "physicssimulation",
 			"tags": [
@@ -4862,13 +6437,46 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.0,
+					3.6,
+					2.0
+				],
+				"aabb_center": [
+					0.0,
+					1.5,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 3.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"firework_launcher": {
-			"capacity": "SEE that a firework is a population explosion — one event becomes many independent paths, each obeying the same law",
+			"capacity": "SEE that a firework is a population explosion \u2014 one event becomes many independent paths, each obeying the same law",
 			"category": "physics",
 			"complexity": "intermediate",
-			"description": "Launch rockets that climb, then explode into showers of glowing particles — each one a tiny body under gravity, drag, and fading lifetime. Four color presets (classic, ocean, garden, ring pattern) create distinct particle distributions. Shows particle emission, statistical spread, force application to many bodies, and emergent visual patterns from simple rules.",
+			"description": "Launch rockets that climb, then explode into showers of glowing particles \u2014 each one a tiny body under gravity, drag, and fading lifetime. Four color presets (classic, ocean, garden, ring pattern) create distinct particle distributions. Shows particle emission, statistical spread, force application to many bodies, and emergent visual patterns from simple rules.",
 			"dev_category": "physics_particles",
 			"dev_themes": [
 				"particles",
@@ -4889,7 +6497,7 @@
 				"forces"
 			],
 			"name": "Firework Launcher",
-			"qfep_connection": "phi-dE — one launch event becomes sixty independent trajectories. The explosion is a burst of dE, each particle's drag coefficient is phi damping the change. One cause, many effects.",
+			"qfep_connection": "phi-dE \u2014 one launch event becomes sixty independent trajectories. The explosion is a burst of dE, each particle's drag coefficient is phi damping the change. One cause, many effects.",
 			"scene": "res://algorithms/physicssimulation/fireworklauncher/fireworklauncher.tscn",
 			"sequence": "forces",
 			"tags": [
@@ -4957,12 +6565,45 @@
 					"using"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.31,
+					0.27,
+					0.51
+				],
+				"aabb_center": [
+					0.0,
+					0.06,
+					0.13
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.51,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"fluid_simulation": {
 			"category": "physics",
 			"complexity": "advanced",
-			"description": "Smoothed Particle Hydrodynamics (SPH) fluid simulation — the Navier-Stokes equations approximated by a cloud of particles carrying mass, velocity, and pressure. Kernel functions smooth physical quantities over neighbor particles, producing viscous flow, surface tension, and splashing. The Lagrangian approach to fluid dynamics where the fluid carries its own computational grid.",
+			"description": "Smoothed Particle Hydrodynamics (SPH) fluid simulation \u2014 the Navier-Stokes equations approximated by a cloud of particles carrying mass, velocity, and pressure. Kernel functions smooth physical quantities over neighbor particles, producing viscous flow, surface tension, and splashing. The Lagrangian approach to fluid dynamics where the fluid carries its own computational grid.",
 			"dev_category": "physics_continuum",
 			"dev_themes": [
 				"fluid",
@@ -4985,7 +6626,7 @@
 				],
 				"size_group": "world_scale"
 			},
-			"qfep_connection": "Fluid as the continuum limit of particle interactions — pressure enforces incompressibility (order), viscosity dissipates vortices (entropy), and turbulence is the perpetual negotiation between them. SPH kernels are the lambda functions that interpolate local physics.",
+			"qfep_connection": "Fluid as the continuum limit of particle interactions \u2014 pressure enforces incompressibility (order), viscosity dissipates vortices (entropy), and turbulence is the perpetual negotiation between them. SPH kernels are the lambda functions that interpolate local physics.",
 			"scene": "res://algorithms/physicssimulation/fluidsimulation/fluidsimulation.tscn",
 			"sequence": "physicssimulation",
 			"tags": [
@@ -5050,13 +6691,46 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					15.1,
+					4.22,
+					15.1
+				],
+				"aabb_center": [
+					0.0,
+					0.89,
+					0.0
+				],
+				"grid_cells": [
+					16.0,
+					16.0
+				],
+				"max_dimension_m": 15.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				16.0,
+				1,
+				16.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"force_fields": {
-			"capacity": "FEEL that a force field is a region with different rules — cross the boundary and the laws change",
+			"capacity": "FEEL that a force field is a region with different rules \u2014 cross the boundary and the laws change",
 			"category": "physics",
 			"complexity": "intermediate",
-			"description": "Configurable force fields — uniform gravity, directional wind, radial attraction/repulsion, and vortex fields — applied to populations of particles. Combine multiple fields to create complex flow patterns. Each field type is a spatial function mapping position to force: F(x) defines the landscape that particles navigate.",
+			"description": "Configurable force fields \u2014 uniform gravity, directional wind, radial attraction/repulsion, and vortex fields \u2014 applied to populations of particles. Combine multiple fields to create complex flow patterns. Each field type is a spatial function mapping position to force: F(x) defines the landscape that particles navigate.",
 			"dev_category": "physics_fields",
 			"dev_themes": [
 				"fields",
@@ -5090,7 +6764,7 @@
 				],
 				"size_group": "xlarge"
 			},
-			"qfep_connection": "Regional F — three zones with three different force laws. Cross a boundary and physics changes. Lambda is spatial: the same object experiences different forces depending on where it is.",
+			"qfep_connection": "Regional F \u2014 three zones with three different force laws. Cross a boundary and physics changes. Lambda is spatial: the same object experiences different forces depending on where it is.",
 			"scene": "res://algorithms/physicssimulation/forcefields/forcefields.tscn",
 			"scene_path": "res://algorithms/physicssimulation/forcefields/forcefields.tscn",
 			"sequence": "forces",
@@ -5161,13 +6835,41 @@
 					"computes"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.75,
+					6.36,
+					3.6
+				],
+				"aabb_center": [
+					0.12,
+					2.88,
+					0.0
+				],
+				"grid_cells": [
+					9.0,
+					4.0
+				],
+				"max_dimension_m": 8.75,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"friction_ramp": {
 			"capacity": "FEEL how friction coefficient controls the balance between motion and resistance on an inclined plane",
 			"category": "physics",
 			"complexity": "beginner",
-			"description": "Inclined plane with adjustable friction coefficient and slope angle. A block slides or sticks based on whether mg·sin(θ) exceeds μ·mg·cos(θ). Force arrows show gravity, normal force, and friction in real time. VR sliders control μ (0–1.5) and angle (5°–60°).",
+			"description": "Inclined plane with adjustable friction coefficient and slope angle. A block slides or sticks based on whether mg\u00b7sin(\u03b8) exceeds \u03bc\u00b7mg\u00b7cos(\u03b8). Force arrows show gravity, normal force, and friction in real time. VR sliders control \u03bc (0\u20131.5) and angle (5\u00b0\u201360\u00b0).",
 			"dev_category": "physics_foundations",
 			"dev_themes": [
 				"friction",
@@ -5188,7 +6890,7 @@
 				"forces"
 			],
 			"name": "Friction Ramp",
-			"qfep_connection": "F-resistance on a surface — friction converts kinetic energy to heat. The coefficient of friction is lambda: zero means frictionless (pure F), high means the surface dominates.",
+			"qfep_connection": "F-resistance on a surface \u2014 friction converts kinetic energy to heat. The coefficient of friction is lambda: zero means frictionless (pure F), high means the surface dominates.",
 			"scene": "res://commons/artifacts/friction_ramp/friction_ramp.tscn",
 			"sequence": "forces",
 			"tags": [
@@ -5248,10 +6950,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.33,
+					0.39,
+					0.72
+				],
+				"aabb_center": [
+					0.0,
+					0.06,
+					-0.08
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.72,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"gravity_well": {
-			"capacity": "FEEL that gravity is not a force but a curvature — objects follow the shape of warped space",
+			"capacity": "FEEL that gravity is not a force but a curvature \u2014 objects follow the shape of warped space",
 			"category": "physics",
 			"complexity": "intermediate",
 			"description": "The rubber-sheet metaphor made real: a deformable grid mesh warps around a movable mass, creating a visible gravitational well. Colored test particles roll along the curved surface, orbiting, spiraling inward, or escaping depending on their velocity. Adjustable mass strength deepens or flattens the well in real time.",
@@ -5275,7 +7010,7 @@
 				"forces"
 			],
 			"name": "Gravity Well",
-			"qfep_connection": "F as geometry — the rubber sheet metaphor. Mass warps space, and objects follow the curvature. Force is not a push — it is the shape of the world.",
+			"qfep_connection": "F as geometry \u2014 the rubber sheet metaphor. Mass warps space, and objects follow the curvature. Force is not a push \u2014 it is the shape of the world.",
 			"scene": "res://algorithms/physicssimulation/gravitywell/gravitywell.tscn",
 			"sequence": "forces",
 			"tags": [
@@ -5336,6 +7071,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					0.4,
+					1.28
+				],
+				"aabb_center": [
+					0.0,
+					-0.18,
+					0.14
+				],
+				"grid_cells": [
+					1.0,
+					2.0
+				],
+				"max_dimension_m": 1.28,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.174608Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"lifetime_curves": {
@@ -5370,6 +7138,39 @@
 					"sub_emitters"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.0,
+					1.95,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					5.97,
+					-1.0
+				],
+				"grid_cells": [
+					10.0,
+					1.0
+				],
+				"max_dimension_m": 10.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"magnetic_simulation": {
@@ -5398,7 +7199,7 @@
 				],
 				"size_group": "environment"
 			},
-			"qfep_connection": "Magnetism as invisible order — field lines are the hidden structure that organizes matter at a distance. The Lorentz force is the lambda coupling charge velocity to magnetic field, producing the perpendicular deflection that makes electric motors and particle accelerators possible.",
+			"qfep_connection": "Magnetism as invisible order \u2014 field lines are the hidden structure that organizes matter at a distance. The Lorentz force is the lambda coupling charge velocity to magnetic field, producing the perpendicular deflection that makes electric motors and particle accelerators possible.",
 			"scene": "res://algorithms/physicssimulation/magneticsimulation/magnetic_simulation.tscn",
 			"sequence": "physicssimulation",
 			"tags": [
@@ -5460,10 +7261,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					8.0,
+					8.0
+				],
+				"aabb_center": [
+					0.0,
+					1.0,
+					0.0
+				],
+				"grid_cells": [
+					8.0,
+					8.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				8.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"mass_spring_damper": {
-			"capacity": "UNDERSTAND that every vibrating system is a mass-spring-damper in disguise — the damping ratio is the system's temperament",
+			"capacity": "UNDERSTAND that every vibrating system is a mass-spring-damper in disguise \u2014 the damping ratio is the system's temperament",
 			"category": "physics",
 			"complexity": "beginner",
 			"description": "The canonical second-order system: a mass on a spring with viscous damping. Hooke's law (F = -kx) provides the restoring force, damping (F = -cv) dissipates energy. Explore underdamped oscillation, critical damping, and overdamped decay by tweaking spring stiffness k and damping coefficient c. The foundation of every vibration analysis ever performed.",
@@ -5502,7 +7336,7 @@
 				],
 				"size_group": "xlarge"
 			},
-			"qfep_connection": "Classical F with damping — the spring IS F (restoring order), the damper IS lambda (how fast chaos dissipates). Three regimes at three damping ratios: underdamped, critical, overdamped.",
+			"qfep_connection": "Classical F with damping \u2014 the spring IS F (restoring order), the damper IS lambda (how fast chaos dissipates). Three regimes at three damping ratios: underdamped, critical, overdamped.",
 			"scene": "res://algorithms/physicssimulation/massspringdamper/massspringdamper.tscn",
 			"sequence": "forces",
 			"size_group": "xlarge",
@@ -5571,18 +7405,46 @@
 					"cloth"
 				],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					5.82,
+					5.3,
+					2.42
+				],
+				"aabb_center": [
+					-1.19,
+					0.45,
+					0.99
+				],
+				"grid_cells": [
+					6.0,
+					3.0
+				],
+				"max_dimension_m": 5.82,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"momentum_collision": {
 			"name": "Momentum Collision",
 			"lookup_name": "momentum_collision",
-			"description": "Physical momentum and collision demonstration. Objects collide with realistic mass transfer — shows conservation of momentum and the invisible forces governing motion.",
+			"description": "Physical momentum and collision demonstration. Objects collide with realistic mass transfer \u2014 shows conservation of momentum and the invisible forces governing motion.",
 			"scene": "res://algorithms/physicssimulation/momentum_collision/momentum_collision.tscn",
 			"category": "physics",
 			"interaction": "observe_interact",
 			"sequence": "forces",
 			"artifact_type": "demonstration",
-			"qfep_connection": "Force (F) as momentum transfer — the measurable push that changes system state.",
+			"qfep_connection": "Force (F) as momentum transfer \u2014 the measurable push that changes system state.",
 			"map_ready": false,
 			"include_in_map_data": false,
 			"spatial_needs": {
@@ -5605,13 +7467,46 @@
 					"single"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.0,
+					1.05,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.47,
+					0.0
+				],
+				"grid_cells": [
+					10.0,
+					1.0
+				],
+				"max_dimension_m": 10.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"nbody_simulation": {
 			"capacity": "WATCH emergent orbital structure arise from nothing but pairwise gravity",
 			"category": "physics",
 			"complexity": "advanced",
-			"description": "N-body gravitational simulation where every mass attracts every other mass via Newton's law of gravitation (F = Gm₁m₂/r²). Watch galaxies form, binary stars orbit, and clusters scatter. The O(n²) pairwise force computation is the computational bottleneck that drove the invention of Barnes-Hut trees and fast multipole methods.",
+			"description": "N-body gravitational simulation where every mass attracts every other mass via Newton's law of gravitation (F = Gm\u2081m\u2082/r\u00b2). Watch galaxies form, binary stars orbit, and clusters scatter. The O(n\u00b2) pairwise force computation is the computational bottleneck that drove the invention of Barnes-Hut trees and fast multipole methods.",
 			"dev_category": "physics_fields",
 			"dev_themes": [
 				"gravity",
@@ -5641,7 +7536,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "N-body F scaling — as N grows, pairwise interactions create emergent structure (orbits, clusters, ejections) that no single force law predicts. Complexity from simple rules.",
+			"qfep_connection": "N-body F scaling \u2014 as N grows, pairwise interactions create emergent structure (orbits, clusters, ejections) that no single force law predicts. Complexity from simple rules.",
 			"scene": "res://algorithms/physicssimulation/nbodysimulation/nbody_problem.tscn",
 			"sequence": "forces",
 			"tags": [
@@ -5705,13 +7600,46 @@
 					"preview"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.63,
+					0.7,
+					0.64
+				],
+				"aabb_center": [
+					-0.04,
+					-0.02,
+					0.02
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.7,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"newton_cradle": {
-			"capacity": "SEE that momentum transfers through a chain — the middle balls are messengers, not movers",
+			"capacity": "SEE that momentum transfers through a chain \u2014 the middle balls are messengers, not movers",
 			"category": "physics",
 			"complexity": "beginner",
-			"description": "The iconic desktop physics demo: 5 pendulum balls suspended from a frame. Pull one back and release — momentum transfers through elastic collisions, ball-by-ball. Shows conservation of momentum and energy, elastic collision mechanics, and the satisfying click-clack of F=ma made tangible.",
+			"description": "The iconic desktop physics demo: 5 pendulum balls suspended from a frame. Pull one back and release \u2014 momentum transfers through elastic collisions, ball-by-ball. Shows conservation of momentum and energy, elastic collision mechanics, and the satisfying click-clack of F=ma made tangible.",
 			"dev_category": "physics_foundations",
 			"dev_themes": [
 				"classical_mechanics",
@@ -5732,7 +7660,7 @@
 				"forces"
 			],
 			"name": "Newton's Cradle",
-			"qfep_connection": "F-conservation — momentum and energy transfer through a chain of collisions. What enters on one side exits on the other. The middle balls appear still but carry the signal.",
+			"qfep_connection": "F-conservation \u2014 momentum and energy transfer through a chain of collisions. What enters on one side exits on the other. The middle balls appear still but carry the signal.",
 			"scene": "res://algorithms/physicssimulation/newtoncradle/newtoncradle.tscn",
 			"sequence": "forces",
 			"tags": [
@@ -5791,6 +7719,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.6,
+					0.98,
+					0.54
+				],
+				"aabb_center": [
+					0.0,
+					0.35,
+					0.15
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"newtons_laws": {
@@ -5824,7 +7785,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Newton's laws as the foundational grammar of physical order — F=ma is the simplest lambda mapping force to motion, the irreducible rule from which all mechanical complexity emerges.",
+			"qfep_connection": "Newton's laws as the foundational grammar of physical order \u2014 F=ma is the simplest lambda mapping force to motion, the irreducible rule from which all mechanical complexity emerges.",
 			"scene": "res://algorithms/physicssimulation/newtonslaws/newtonslaws.tscn",
 			"sequence": "forces",
 			"size_group": "compact",
@@ -5886,6 +7847,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.12,
+					1.15,
+					0.12
+				],
+				"aabb_center": [
+					0.0,
+					0.58,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.15,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"numerical_integration": {
@@ -5914,7 +7903,7 @@
 				],
 				"size_group": "environment"
 			},
-			"qfep_connection": "Integration methods as different lambda functions approximating the same continuous truth — discretization introduces entropy (numerical error), and the choice of method determines how much order is preserved across time steps.",
+			"qfep_connection": "Integration methods as different lambda functions approximating the same continuous truth \u2014 discretization introduces entropy (numerical error), and the choice of method determines how much order is preserved across time steps.",
 			"scene": "res://algorithms/physicssimulation/numericalintegration/numericalintegration.tscn",
 			"sequence": "physicssimulation",
 			"tags": [
@@ -5973,6 +7962,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.37,
+					0.38,
+					0.37
+				],
+				"aabb_center": [
+					-2.81,
+					4.29,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.38,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"particle_campfire": {
@@ -6008,13 +8030,46 @@
 					"sub_emitter"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.0,
+					0.46,
+					3.0
+				],
+				"aabb_center": [
+					0.0,
+					0.1,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					3.0
+				],
+				"max_dimension_m": 3.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 6,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"particle_systems": {
 			"capacity": "SEE how thousands of deterministic particles produce statistical, entropic behavior",
 			"category": "physics",
 			"complexity": "intermediate",
-			"description": "Particle emitters spawning thousands of particles with configurable lifetimes, initial velocities, forces, and visual properties. Particles are born, live under physics, and die — creating fire, smoke, sparks, and rain from simple statistical rules. Each particle is independent, yet the ensemble produces coherent visual phenomena.",
+			"description": "Particle emitters spawning thousands of particles with configurable lifetimes, initial velocities, forces, and visual properties. Particles are born, live under physics, and die \u2014 creating fire, smoke, sparks, and rain from simple statistical rules. Each particle is independent, yet the ensemble produces coherent visual phenomena.",
 			"dev_category": "physics_fields",
 			"dev_themes": [
 				"particles",
@@ -6049,7 +8104,7 @@
 				],
 				"size_group": "xlarge"
 			},
-			"qfep_connection": "E(S) from F — each particle obeys deterministic forces, but thousands of them produce statistical behavior. Individual determinism creates collective entropy.",
+			"qfep_connection": "E(S) from F \u2014 each particle obeys deterministic forces, but thousands of them produce statistical behavior. Individual determinism creates collective entropy.",
 			"scene": "res://algorithms/physicssimulation/particlesystems/particlesystems.tscn",
 			"scene_path": "res://algorithms/physicssimulation/particlesystems/particlesystems.tscn",
 			"sequence": "forces",
@@ -6116,6 +8171,34 @@
 					"effects"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					12.0,
+					9.0,
+					11.0
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.5
+				],
+				"grid_cells": [
+					12.0,
+					11.0
+				],
+				"max_dimension_m": 12.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "low",
+				"min_clearance": 0,
+				"stack_priority": 0.1,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"raycastingpoints": {
@@ -6199,6 +8282,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					15.7,
+					12.02,
+					10.42
+				],
+				"aabb_center": [
+					2.86,
+					2.01,
+					0.01
+				],
+				"grid_cells": [
+					16.0,
+					11.0
+				],
+				"max_dimension_m": 15.7,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"rigid_body": {
@@ -6227,7 +8338,7 @@
 				],
 				"size_group": "world_scale"
 			},
-			"qfep_connection": "Rigid bodies as the emergence of rotational complexity from simple force rules — angular momentum conservation as a deep symmetry (Noether's theorem), where rotational order persists even as translational chaos increases.",
+			"qfep_connection": "Rigid bodies as the emergence of rotational complexity from simple force rules \u2014 angular momentum conservation as a deep symmetry (Noether's theorem), where rotational order persists even as translational chaos increases.",
 			"scene": "res://algorithms/physicssimulation/rigidbody/rigidbody.tscn",
 			"sequence": "physicssimulation",
 			"tags": [
@@ -6288,10 +8399,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					20.2,
+					5.0,
+					20.2
+				],
+				"aabb_center": [
+					0.0,
+					2.0,
+					0.0
+				],
+				"grid_cells": [
+					21.0,
+					21.0
+				],
+				"max_dimension_m": 20.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				21.0,
+				1,
+				21.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"simulation_instability": {
-			"description": "Spring system with ramping timestep — watch stable oscillation drift, then explode as dt grows too large",
+			"description": "Spring system with ramping timestep \u2014 watch stable oscillation drift, then explode as dt grows too large",
 			"scene_path": "res://algorithms/physicssimulation/simulation_instability/simulation_instability.tscn",
 			"tags": [
 				"physics",
@@ -6323,6 +8467,39 @@
 					"fluid_simulation"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.14,
+					0.32,
+					0.14
+				],
+				"aabb_center": [
+					4.0,
+					2.87,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.32,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"slingshot_launcher": {
@@ -6343,7 +8520,7 @@
 				"forces"
 			],
 			"name": "Slingshot Launcher",
-			"qfep_connection": "Impulse — a short burst of force that changes everything. The launcher is a delta function: infinite force for zero time, producing finite momentum.",
+			"qfep_connection": "Impulse \u2014 a short burst of force that changes everything. The launcher is a delta function: infinite force for zero time, producing finite momentum.",
 			"scene": "res://algorithms/physicssimulation/slingshotlauncher/slingshotlauncher.tscn",
 			"sequence": "forces",
 			"tags": [
@@ -6404,12 +8581,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.23,
+					14.1,
+					27.05
+				],
+				"aabb_center": [
+					0.09,
+					7.05,
+					-13.02
+				],
+				"grid_cells": [
+					2.0,
+					28.0
+				],
+				"max_dimension_m": 27.05,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				28.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"soft_bodies": {
 			"category": "physics",
 			"complexity": "advanced",
-			"description": "Soft body deformation using pressure-volume models and shape matching. Objects squish, stretch, and jiggle while maintaining approximate volume — like jelly, rubber, or biological tissue. Combines ideas from spring networks, FEM, and position-based dynamics into satisfying, tactile deformation that you want to poke.",
+			"description": "Soft body deformation using pressure-volume models and shape matching. Objects squish, stretch, and jiggle while maintaining approximate volume \u2014 like jelly, rubber, or biological tissue. Combines ideas from spring networks, FEM, and position-based dynamics into satisfying, tactile deformation that you want to poke.",
 			"dev_category": "physics_continuum",
 			"dev_themes": [
 				"soft_body",
@@ -6432,7 +8642,7 @@
 				],
 				"size_group": "environment"
 			},
-			"qfep_connection": "Soft bodies as elastic memory — deformed states always remember and seek their rest shape (order), while external forces and collisions continuously perturb them (entropy). The wobble is the visible oscillation between imposed disorder and intrinsic structure.",
+			"qfep_connection": "Soft bodies as elastic memory \u2014 deformed states always remember and seek their rest shape (order), while external forces and collisions continuously perturb them (entropy). The wobble is the visible oscillation between imposed disorder and intrinsic structure.",
 			"scene": "res://algorithms/physicssimulation/softbodies/softbodies.tscn",
 			"sequence": "physicssimulation",
 			"tags": [
@@ -6493,6 +8703,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.17,
+					1.2,
+					1.17
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 1.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"softmill": {
@@ -6570,6 +8813,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.0,
+					3.62,
+					3.27
+				],
+				"aabb_center": [
+					0.06,
+					1.31,
+					-0.54
+				],
+				"grid_cells": [
+					3.0,
+					4.0
+				],
+				"max_dimension_m": 3.62,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"softstopscene": {
@@ -6651,12 +8922,40 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.0,
+					1.0,
+					4.0
+				],
+				"aabb_center": [
+					1.5,
+					3.0,
+					1.5
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 4.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 10,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"spring_mass_system": {
 			"category": "physics",
 			"complexity": "intermediate",
-			"description": "A network of point masses connected by springs, forming a deformable mesh. Energy propagates as waves through the lattice — pluck one node and watch the disturbance ripple outward. The discrete analog of a continuous elastic medium, and the building block for cloth, soft bodies, and lattice dynamics.",
+			"description": "A network of point masses connected by springs, forming a deformable mesh. Energy propagates as waves through the lattice \u2014 pluck one node and watch the disturbance ripple outward. The discrete analog of a continuous elastic medium, and the building block for cloth, soft bodies, and lattice dynamics.",
 			"dev_category": "physics_springs",
 			"dev_themes": [
 				"springs",
@@ -6679,7 +8978,7 @@
 				],
 				"size_group": "room_scale"
 			},
-			"qfep_connection": "Emergence of wave behavior from purely local spring interactions — no node knows about the global pattern, yet coherent waves arise. Individual springs are simple lambdas; their network produces emergent order.",
+			"qfep_connection": "Emergence of wave behavior from purely local spring interactions \u2014 no node knows about the global pattern, yet coherent waves arise. Individual springs are simple lambdas; their network produces emergent order.",
 			"scene": "res://algorithms/physicssimulation/springmass/springmass.tscn",
 			"sequence": "physicssimulation",
 			"tags": [
@@ -6739,10 +9038,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					6.2,
+					3.2,
+					6.2
+				],
+				"aabb_center": [
+					0.0,
+					1.5,
+					0.0
+				],
+				"grid_cells": [
+					7.0,
+					7.0
+				],
+				"max_dimension_m": 6.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				7.0,
+				1,
+				7.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"spring_system": {
-			"capacity": "SEE that a spring network is a medium — perturbation at one point travels through connections",
+			"capacity": "SEE that a spring network is a medium \u2014 perturbation at one point travels through connections",
 			"category": "physics",
 			"complexity": "intermediate",
 			"description": "System-level spring behavior exploring coupled oscillators, resonance, and energy transfer between connected springs. When natural frequencies align, energy sloshes back and forth between modes in beautiful beat patterns. Demonstrates normal modes and the spectral decomposition of complex vibrations into simple harmonic components.",
@@ -6780,7 +9112,7 @@
 				],
 				"size_group": "xlarge"
 			},
-			"qfep_connection": "F as network — each spring enforces Hooke's law locally, but the network produces wave propagation globally. Structure creates communication.",
+			"qfep_connection": "F as network \u2014 each spring enforces Hooke's law locally, but the network produces wave propagation globally. Structure creates communication.",
 			"scene": "res://algorithms/physicssimulation/springsystem/spring_system.tscn",
 			"sequence": "forces",
 			"size_group": "xlarge",
@@ -6849,6 +9181,34 @@
 					"cloth"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.49,
+					2.25,
+					10.27
+				],
+				"aabb_center": [
+					-1.16,
+					4.98,
+					0.2
+				],
+				"grid_cells": [
+					9.0,
+					11.0
+				],
+				"max_dimension_m": 10.27,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"sub_emitters": {
@@ -6883,12 +9243,35 @@
 					"embers"
 				],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"surreal_kinetic_sculpture": {
 			"category": "physics",
 			"complexity": "advanced",
-			"description": "An art installation that weaves together multiple physics systems — springs, rigid bodies, constraints, particles, and forces — into a mesmerizing, perpetually-moving kinetic sculpture. Gears drive pendulums that scatter particles through force fields while cloth banners ripple in simulated wind. Not a tutorial but a celebration: physics as aesthetic experience, computation as art.",
+			"description": "An art installation that weaves together multiple physics systems \u2014 springs, rigid bodies, constraints, particles, and forces \u2014 into a mesmerizing, perpetually-moving kinetic sculpture. Gears drive pendulums that scatter particles through force fields while cloth banners ripple in simulated wind. Not a tutorial but a celebration: physics as aesthetic experience, computation as art.",
 			"dev_category": "physics_special",
 			"dev_themes": [
 				"art",
@@ -6911,7 +9294,7 @@
 				],
 				"size_group": "world_scale"
 			},
-			"qfep_connection": "The sculpture as physics made beautiful — all the individual simulation techniques unified into a single emergent artwork. Each subsystem contributes its lambda; the whole is irreducible to its parts. The QFEP synthesis: order (structure), entropy (motion), lambda (physics rules), emergence (art).",
+			"qfep_connection": "The sculpture as physics made beautiful \u2014 all the individual simulation techniques unified into a single emergent artwork. Each subsystem contributes its lambda; the whole is irreducible to its parts. The QFEP synthesis: order (structure), entropy (motion), lambda (physics rules), emergence (art).",
 			"scene": "res://algorithms/physicssimulation/surrealkineticsculpture/SurrealKineticSculpture.tscn",
 			"sequence": "physicssimulation",
 			"tags": [
@@ -6975,13 +9358,46 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					22.71,
+					12.55,
+					23.85
+				],
+				"aabb_center": [
+					-0.56,
+					5.02,
+					-1.12
+				],
+				"grid_cells": [
+					23.0,
+					24.0
+				],
+				"max_dimension_m": 23.85,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				23.0,
+				1,
+				24.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"three_body_problem": {
-			"capacity": "WITNESS that three bodies under gravity have no formula — determinism and predictability are not the same thing",
+			"capacity": "WITNESS that three bodies under gravity have no formula \u2014 determinism and predictability are not the same thing",
 			"category": "physics",
 			"complexity": "advanced",
-			"description": "The infamous three-body problem: three gravitationally interacting masses with no closed-form solution. Tiny changes in initial conditions lead to wildly divergent trajectories — the original exemplar of deterministic chaos. Explore stable figure-eight orbits, Lagrange points, and the chaotic regime where prediction becomes impossible.",
+			"description": "The infamous three-body problem: three gravitationally interacting masses with no closed-form solution. Tiny changes in initial conditions lead to wildly divergent trajectories \u2014 the original exemplar of deterministic chaos. Explore stable figure-eight orbits, Lagrange points, and the chaotic regime where prediction becomes impossible.",
 			"dev_category": "physics_fields",
 			"dev_themes": [
 				"chaos",
@@ -7016,7 +9432,7 @@
 				],
 				"size_group": "xlarge"
 			},
-			"qfep_connection": "Deterministic chaos — pure F (gravity), no randomness, yet unpredictable. Lambda emerges from sensitivity to initial conditions. Three bodies prove that determinism and predictability are not the same.",
+			"qfep_connection": "Deterministic chaos \u2014 pure F (gravity), no randomness, yet unpredictable. Lambda emerges from sensitivity to initial conditions. Three bodies prove that determinism and predictability are not the same.",
 			"scene": "res://algorithms/physicssimulation/threebodyproblem/threebodyproblem.tscn",
 			"sequence": "forces",
 			"size_group": "xlarge",
@@ -7083,6 +9499,24 @@
 					"nbody_simulation"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"tscn_joint": {
@@ -7127,7 +9561,7 @@
 				"6dof-joint",
 				"reference"
 			],
-			"qfep_connection": "Pure F — a taxonomy of constraints. Each joint type removes different degrees of freedom; seeing them together reveals the design space of mechanical connection.",
+			"qfep_connection": "Pure F \u2014 a taxonomy of constraints. Each joint type removes different degrees of freedom; seeing them together reveals the design space of mechanical connection.",
 			"gamwell_reference": "Joint taxonomy, degrees of freedom comparison, constraint classification, mechanical connection types",
 			"interactions": [
 				"walk between joint exhibits to compare constraint types",
@@ -7176,13 +9610,41 @@
 				"isolation": 2,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.87,
+					0.14,
+					0.28
+				],
+				"aabb_center": [
+					-0.07,
+					-0.01,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.87,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 4,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"vector_fields": {
-			"capacity": "SEE the force before the object arrives — the field exists everywhere, waiting",
+			"capacity": "SEE the force before the object arrives \u2014 the field exists everywhere, waiting",
 			"category": "physics",
 			"complexity": "intermediate",
-			"description": "3D vector field visualization with arrow glyphs showing direction and magnitude at grid points. Particles advected through the field trace streamlines, revealing the flow structure — sources, sinks, saddle points, and vortices. Includes curl, divergence, and gradient field types with real-time parameter control.",
+			"description": "3D vector field visualization with arrow glyphs showing direction and magnitude at grid points. Particles advected through the field trace streamlines, revealing the flow structure \u2014 sources, sinks, saddle points, and vortices. Includes curl, divergence, and gradient field types with real-time parameter control.",
 			"dev_category": "physics_fields",
 			"dev_themes": [
 				"fields",
@@ -7209,7 +9671,7 @@
 				"physicssimulation"
 			],
 			"name": "Vector Fields",
-			"qfep_connection": "F made visible — every point in space has an arrow. The field IS the force before any object arrives to feel it. Potential becomes actual only at the point of contact.",
+			"qfep_connection": "F made visible \u2014 every point in space has an arrow. The field IS the force before any object arrives to feel it. Potential becomes actual only at the point of contact.",
 			"scene": "res://algorithms/physicssimulation/vectorfields/vectorfields.tscn",
 			"sequence": "forces",
 			"size_group": "xlarge",
@@ -7278,13 +9740,41 @@
 					"computes"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.5,
+					3.97,
+					3.24
+				],
+				"aabb_center": [
+					0.0,
+					1.69,
+					0.0
+				],
+				"grid_cells": [
+					4.0,
+					4.0
+				],
+				"max_dimension_m": 3.97,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"verlet_integration": {
-			"capacity": "UNDERSTAND that the most stable integration method forgot to track velocity — positions remember",
+			"capacity": "UNDERSTAND that the most stable integration method forgot to track velocity \u2014 positions remember",
 			"category": "physics",
 			"complexity": "intermediate",
-			"description": "Position-based Verlet integration — the workhorse of game physics and molecular dynamics. Instead of tracking velocity explicitly, it infers motion from the difference between current and previous positions. This makes it naturally stable, time-reversible, and beautifully simple: x_new = 2x_current - x_old + a·dt².",
+			"description": "Position-based Verlet integration \u2014 the workhorse of game physics and molecular dynamics. Instead of tracking velocity explicitly, it infers motion from the difference between current and previous positions. This makes it naturally stable, time-reversible, and beautifully simple: x_new = 2x_current - x_old + a\u00b7dt\u00b2.",
 			"dev_category": "physics_foundations",
 			"dev_themes": [
 				"numerical_methods",
@@ -7305,7 +9795,7 @@
 				"physicssimulation"
 			],
 			"name": "Verlet Integration",
-			"qfep_connection": "F-computation — the most stable integration method works by forgetting velocity. Position history encodes all the information. Simpler representation, better stability.",
+			"qfep_connection": "F-computation \u2014 the most stable integration method works by forgetting velocity. Position history encodes all the information. Simpler representation, better stability.",
 			"scene": "res://algorithms/physicssimulation/verletintegration/verlet_integration.tscn",
 			"sequence": "physicssimulation",
 			"tags": [
@@ -7369,12 +9859,45 @@
 					"cloth"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.6,
+					2.45,
+					0.6
+				],
+				"aabb_center": [
+					0.0,
+					1.08,
+					0.0
+				],
+				"grid_cells": [
+					9.0,
+					1.0
+				],
+				"max_dimension_m": 8.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				9.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"viscosity_layers": {
 			"category": "physics",
 			"complexity": "beginner",
-			"description": "Three transparent columns side by side — air, water, and honey. Drop identical balls into all three simultaneously and watch them descend at wildly different rates. Quadratic drag makes the honey ball crawl while the air ball plummets. Real-time speed readouts let you compare terminal velocities directly.",
+			"description": "Three transparent columns side by side \u2014 air, water, and honey. Drop identical balls into all three simultaneously and watch them descend at wildly different rates. Quadratic drag makes the honey ball crawl while the air ball plummets. Real-time speed readouts let you compare terminal velocities directly.",
 			"dev_category": "physics_foundations",
 			"dev_themes": [
 				"drag",
@@ -7389,7 +9912,7 @@
 				"forces"
 			],
 			"name": "Viscosity Layers",
-			"qfep_connection": "Resistance as information — the medium tells you what it's made of. Drag is the environment's signature, entropy in the friction between motion and medium.",
+			"qfep_connection": "Resistance as information \u2014 the medium tells you what it's made of. Drag is the environment's signature, entropy in the friction between motion and medium.",
 			"scene": "res://algorithms/physicssimulation/viscositylayers/viscositylayers.tscn",
 			"sequence": "forces",
 			"tags": [
@@ -7450,6 +9973,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.55,
+					1.31,
+					0.58
+				],
+				"aabb_center": [
+					0.0,
+					0.55,
+					0.11
+				],
+				"grid_cells": [
+					2.0,
+					1.0
+				],
+				"max_dimension_m": 1.55,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"waterflowers": {
@@ -7536,6 +10092,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					30.0,
+					5.5,
+					30.0
+				],
+				"aabb_center": [
+					0.0,
+					2.75,
+					0.0
+				],
+				"grid_cells": [
+					30.0,
+					30.0
+				],
+				"max_dimension_m": 30.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"waterone": {
@@ -7618,12 +10202,40 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					50.0,
+					0.0,
+					50.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					50.0,
+					50.0
+				],
+				"max_dimension_m": 50.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 75,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.175158Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	},
 	"registry_info": {
 		"category": "physics",
-		"description": "Physics simulation artifacts — from Newton's laws and numerical integration through rigid bodies, spring systems, fluid dynamics, and beyond. A comprehensive tour of classical mechanics rendered interactive.",
+		"description": "Physics simulation artifacts \u2014 from Newton's laws and numerical integration through rigid bodies, spring systems, fluid dynamics, and beyond. A comprehensive tour of classical mechanics rendered interactive.",
 		"name": "physics_simulation",
 		"theoretical_grounding": "Classical mechanics, Newtonian dynamics, numerical methods (Euler/Verlet/RK4), continuum mechanics, Lagrangian and Hamiltonian frameworks, computational physics"
 	},

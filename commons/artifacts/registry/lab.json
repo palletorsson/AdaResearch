@@ -14,7 +14,45 @@
 			"description": "Step into this pillar of light to enter the spine-runner corridor mode. Loads vr_spine_runner.tscn via VRStaging's standard scene transition.",
 			"category": "navigation",
 			"complexity": "advanced",
-			"tags": ["portal", "navigation", "spine", "corridor"]
+			"tags": [
+				"portal",
+				"navigation",
+				"spine",
+				"corridor"
+			],
+			"measurements": {
+				"aabb_size": [
+					1.3,
+					3.02,
+					1.3
+				],
+				"aabb_center": [
+					0.0,
+					1.49,
+					0.0
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 3.02,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "medium",
+				"min_clearance": 2,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
+			}
 		},
 		"control_board": {
 			"lookup_name": "control_board",
@@ -105,6 +143,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.43,
+					1.4,
+					0.15
+				],
+				"aabb_center": [
+					0.0,
+					0.7,
+					0.0
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 2.43,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 6,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"pipettedispenser": {
@@ -170,6 +241,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.08,
+					0.17,
+					0.07
+				],
+				"aabb_center": [
+					0.0,
+					0.09,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.17,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"quantumentanglementmeter": {
@@ -234,6 +338,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.16,
+					0.1,
+					0.09
+				],
+				"aabb_center": [
+					0.0,
+					0.05,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.16,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"resonancechamber": {
@@ -306,6 +443,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					5.99,
+					6.0,
+					5.99
+				],
+				"aabb_center": [
+					0.0,
+					2.0,
+					0.0
+				],
+				"grid_cells": [
+					6.0,
+					6.0
+				],
+				"max_dimension_m": 6.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				6.0,
+				1,
+				6.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"fluxdetector": {
@@ -378,6 +548,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.23,
+					0.19,
+					0.23
+				],
+				"aabb_center": [
+					0.0,
+					0.1,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.23,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"cryogenicpreservation": {
@@ -450,6 +653,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.62,
+					4.05,
+					2.55
+				],
+				"aabb_center": [
+					0.0,
+					0.97,
+					0.07
+				],
+				"grid_cells": [
+					4.0,
+					3.0
+				],
+				"max_dimension_m": 4.05,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				4.0,
+				1,
+				3.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"robotarm": {
@@ -521,6 +757,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					1.73,
+					0.8
+				],
+				"aabb_center": [
+					0.0,
+					0.86,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.73,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"circularradarmonitor": {
@@ -583,6 +852,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.8,
+					0.4,
+					0.8
+				],
+				"aabb_center": [
+					0.0,
+					0.2,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.8,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"datatablet": {
@@ -647,6 +949,39 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.12,
+					0.18,
+					0.02
+				],
+				"aabb_center": [
+					0.0,
+					0.09,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.18,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"electromagneticfieldgenerator": {
@@ -721,6 +1056,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.5,
+					8.0,
+					7.99
+				],
+				"aabb_center": [
+					-0.25,
+					1.0,
+					0.0
+				],
+				"grid_cells": [
+					9.0,
+					8.0
+				],
+				"max_dimension_m": 8.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				9.0,
+				1,
+				8.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"terminal": {
@@ -785,6 +1153,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.6,
+					0.57,
+					0.55
+				],
+				"aabb_center": [
+					0.0,
+					0.29,
+					0.08
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"smallcontainment": {
@@ -861,6 +1262,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.29,
+					0.2
+				],
+				"aabb_center": [
+					0.0,
+					0.04,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.29,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"chair2": {
@@ -909,6 +1338,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.78,
+					1.24,
+					0.8
+				],
+				"aabb_center": [
+					0.0,
+					0.59,
+					-0.13
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.24,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.137147Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"entropy_visualization": {
@@ -957,6 +1414,24 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		}
 	}

@@ -1,0 +1,147 @@
+{
+	"id": "dna_grammar_artifacts",
+	"name": "DNA Grammar Artifacts",
+	"description": "Placeable wrappers for the live-renderable grammars in /dna. Each one packages a research-render's build code as a registered artifact: the same Sim.build(cfg) call, wrapped in a Node3D scene. Promotes lsystem, pattern, rd, trajectory findings from gallery-only to placeable in any map.",
+	"category": "dna_grammar",
+	"theoreticalGrounding": "Federated rendering: each grammar's existing build function becomes a placeable artifact. The 'wrapper' is per-grammar, not central — same architectural commitment as facade_builder.",
+	"artifacts": {
+		"lsystem_artifact": {
+			"lookup_name": "lsystem_artifact",
+			"name": "L-System Artifact",
+			"description": "Placeable lsystem-grammar wrapper. Reads a JSON config (axiom, rules, iterations, walk params, colors) and renders branching tubes via LSystemSim.rewrite + LSystemTurtle.walk + LSystemTurtle.to_tubes. Same build path as render_lsystem.gd and dna_workstation.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"scene": "res://commons/artifacts/lsystem_artifact/lsystem_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [3, 3, 5],
+			"tags": ["lsystem", "dna", "branching", "tubes", "grammar", "placeable"],
+			"qfep_connection": "F_order: the rewrite rule applied iteratively until structure emerges.",
+			"parameters": {
+				"config_path": "",
+				"footprint": [3, 3, 5],
+				"size_group": "large"
+			},
+			"size_group": "large",
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 8,
+				"density": "high",
+				"reading_radius": 4,
+				"derived_from": "manual"
+			}
+		},
+		"pattern_artifact": {
+			"lookup_name": "pattern_artifact",
+			"name": "Pattern Artifact",
+			"description": "Placeable wallpaper-pattern wrapper. Reads a JSON config (group, motif_seed, palette, tile_size) and renders the resulting pattern as a textured quad facing up — readable as floor tile, banner, or table-top.",
+			"category": "dna_grammar",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/pattern_artifact/pattern_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [2, 2, 1],
+			"tags": ["pattern", "wallpaper", "dna", "tile", "grammar", "placeable"],
+			"qfep_connection": "F_order: 17 wallpaper groups as the algebraic vocabulary of repetition.",
+			"parameters": {
+				"config_path": "",
+				"quad_size": 2.0,
+				"face_up": true,
+				"footprint": [2, 2, 1],
+				"size_group": "medium"
+			},
+			"size_group": "medium",
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 4,
+				"density": "medium",
+				"reading_radius": 2,
+				"derived_from": "manual"
+			}
+		},
+		"rd_artifact": {
+			"lookup_name": "rd_artifact",
+			"name": "Reaction-Diffusion Artifact",
+			"description": "Placeable Gray-Scott reaction-diffusion wrapper. Simulates the chemical field per config (F, K, iterations, grid_size, seed) and renders the result as a colored heightmap mesh. Spots, stripes, mazes, coral, mitosis, chaos — the full Turing zoo.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"scene": "res://commons/artifacts/rd_artifact/rd_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [3, 3, 2],
+			"tags": ["reaction_diffusion", "rd", "turing", "dna", "grammar", "placeable"],
+			"qfep_connection": "lambda_edge: two chemicals at the boundary of reaction and diffusion produce all of pattern emergence.",
+			"parameters": {
+				"config_path": "",
+				"world_size": 1.0,
+				"footprint": [3, 3, 2],
+				"size_group": "medium"
+			},
+			"size_group": "medium",
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "high",
+				"reading_radius": 3,
+				"derived_from": "manual"
+			}
+		},
+		"mesh_grammar_artifact": {
+			"lookup_name": "mesh_grammar_artifact",
+			"name": "Mesh Grammar Artifact",
+			"description": "Placeable mesh-grammar wrapper. Reads a JSON config (seed type, generations, list of rules with selectors and params) and builds the resulting procedural mesh via MeshGrammarNode. Supports basic seeds (cube/sphere/icosahedron) and the standard ops (extrude, inset, bulge, scallop, petal_splay, scatter, etc.). DNA-bridged seeds (CA/RD/L-system) are skipped — those configs fall back to image_billboard.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"scene": "res://commons/artifacts/mesh_grammar_artifact/mesh_grammar_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [2, 2, 3],
+			"tags": ["mesh_grammar", "dna", "face_rewriting", "grammar", "placeable"],
+			"qfep_connection": "F_order: face-rewriting rules applied iteratively until form emerges from a primitive seed.",
+			"parameters": {
+				"config_path": "",
+				"footprint": [2, 2, 3],
+				"size_group": "medium"
+			},
+			"size_group": "medium",
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 5,
+				"density": "high",
+				"reading_radius": 2,
+				"derived_from": "manual"
+			}
+		},
+		"trajectory_artifact": {
+			"lookup_name": "trajectory_artifact",
+			"name": "Trajectory Artifact",
+			"description": "Placeable force-trajectory wrapper. Integrates the configured force system (Lorenz, three-body, double pendulum, etc.) and renders the resulting trails as a single MultiMesh of cylinder segments, colored start→end. Time becomes a spatial axis; chaos becomes sculptural.",
+			"category": "dna_grammar",
+			"complexity": "intermediate",
+			"scene": "res://commons/artifacts/trajectory_artifact/trajectory_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [3, 3, 4],
+			"tags": ["trajectory", "force", "lorenz", "dna", "grammar", "placeable"],
+			"qfep_connection": "F_order + E_entropy: deterministic forces integrated produce structures that read as chaos.",
+			"parameters": {
+				"config_path": "",
+				"footprint": [3, 3, 4],
+				"size_group": "large"
+			},
+			"size_group": "large",
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 7,
+				"density": "high",
+				"reading_radius": 3,
+				"derived_from": "manual"
+			}
+		}
+	}
+}

@@ -49,6 +49,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.5,
+					1.0,
+					1.0
+				],
+				"aabb_center": [
+					0.75,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					9.0,
+					1.0
+				],
+				"max_dimension_m": 8.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268381Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"alphahash": {
@@ -130,6 +158,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					22.61,
+					9.22,
+					21.38
+				],
+				"aabb_center": [
+					-0.07,
+					-0.43,
+					-1.4
+				],
+				"grid_cells": [
+					23.0,
+					22.0
+				],
+				"max_dimension_m": 22.61,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268381Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"art_history_gallery": {
@@ -203,6 +259,39 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					31.69,
+					0.0,
+					18.79
+				],
+				"aabb_center": [
+					11.95,
+					0.01,
+					7.4
+				],
+				"grid_cells": [
+					32.0,
+					19.0
+				],
+				"max_dimension_m": 31.69,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				32.0,
+				1,
+				19.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268381Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"buffer_geometry_particles": {
@@ -271,6 +360,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					50.62,
+					13.5,
+					48.87
+				],
+				"aabb_center": [
+					0.02,
+					0.0,
+					-0.08
+				],
+				"grid_cells": [
+					51.0,
+					49.0
+				],
+				"max_dimension_m": 50.62,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				51.0,
+				1,
+				49.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 75,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268381Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"buffergeometryparticles": {
@@ -351,6 +473,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					50.24,
+					13.49,
+					49.6
+				],
+				"aabb_center": [
+					0.05,
+					0.0,
+					-0.05
+				],
+				"grid_cells": [
+					51.0,
+					50.0
+				],
+				"max_dimension_m": 50.24,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 75,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268381Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"carpet_cove_gallery": {
@@ -422,6 +572,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					12.1,
+					4.01,
+					30.0
+				],
+				"aabb_center": [
+					0.0,
+					2.0,
+					0.0
+				],
+				"grid_cells": [
+					13.0,
+					30.0
+				],
+				"max_dimension_m": 30.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				13.0,
+				1,
+				30.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268381Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"clippingplanes": {
@@ -472,12 +655,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
 			}
 		},
 		"cove_display": {
 			"category": "shaders",
 			"complexity": "advanced",
-			"description": "Cyclorama/infinity cove surface — curved floor-to-wall form built with SurfaceTool. Accepts any shader via grid config. Continuous UV mapping for seamless tiling.",
+			"description": "Cyclorama/infinity cove surface \u2014 curved floor-to-wall form built with SurfaceTool. Accepts any shader via grid config. Continuous UV mapping for seamless tiling.",
 			"dev_themes": [
 				"shaders",
 				"visual"
@@ -537,6 +738,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.0,
+					2.4,
+					1.5
+				],
+				"aabb_center": [
+					0.0,
+					1.2,
+					0.75
+				],
+				"grid_cells": [
+					2.0,
+					2.0
+				],
+				"max_dimension_m": 2.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				2.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 6,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268381Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"degrading_shader_demo": {
@@ -585,6 +819,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					1.0,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 2,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268381Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"dynamic_cubemap": {
@@ -655,6 +922,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					28.06,
+					9.74,
+					36.46
+				],
+				"aabb_center": [
+					1.51,
+					1.88,
+					-0.17
+				],
+				"grid_cells": [
+					29.0,
+					37.0
+				],
+				"max_dimension_m": 36.46,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				29.0,
+				1,
+				37.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"dynamiccubemap": {
@@ -735,12 +1035,40 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					28.04,
+					9.74,
+					36.46
+				],
+				"aabb_center": [
+					1.49,
+					1.87,
+					-0.19
+				],
+				"grid_cells": [
+					29.0,
+					37.0
+				],
+				"max_dimension_m": 36.46,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"filter_screen": {
 			"category": "shaders",
 			"complexity": "intermediate",
-			"description": "A 3D-to-2D projection surface using a real Camera3D inside a SubViewport. Unlike the ScienceScreen (grid data), the FilterScreen projects the live 3D scene onto a flat monitor — teaching projection itself as a primitive. Filter modes: normal, wireframe, depth, normals, silhouette, grid overlay. Points foreshorten, lines lose depth, triangles change area based on viewing angle.",
+			"description": "A 3D-to-2D projection surface using a real Camera3D inside a SubViewport. Unlike the ScienceScreen (grid data), the FilterScreen projects the live 3D scene onto a flat monitor \u2014 teaching projection itself as a primitive. Filter modes: normal, wireframe, depth, normals, silhouette, grid overlay. Points foreshorten, lines lose depth, triangles change area based on viewing angle.",
 			"dev_themes": [
 				"shaders",
 				"visual",
@@ -819,6 +1147,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.08,
+					1.59,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.8,
+					-0.02
+				],
+				"grid_cells": [
+					3.0,
+					1.0
+				],
+				"max_dimension_m": 2.08,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				3.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 6,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"flashlight_demo": {
@@ -869,6 +1230,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					6.0,
+					4.0,
+					5.23
+				],
+				"aabb_center": [
+					0.0,
+					0.5,
+					0.57
+				],
+				"grid_cells": [
+					6.0,
+					6.0
+				],
+				"max_dimension_m": 6.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"materials_transmission": {
@@ -942,6 +1331,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					14.22,
+					4.48,
+					13.63
+				],
+				"aabb_center": [
+					-0.22,
+					0.54,
+					1.69
+				],
+				"grid_cells": [
+					15.0,
+					14.0
+				],
+				"max_dimension_m": 14.22,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				15.0,
+				1,
+				14.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"materialstransmission": {
@@ -1025,6 +1447,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					14.53,
+					4.47,
+					13.81
+				],
+				"aabb_center": [
+					-0.21,
+					0.72,
+					1.73
+				],
+				"grid_cells": [
+					15.0,
+					14.0
+				],
+				"max_dimension_m": 14.53,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 35,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"pattern_compositor": {
@@ -1099,6 +1549,39 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					9.99,
+					0.0,
+					9.99
+				],
+				"aabb_center": [
+					0.0,
+					0.01,
+					0.0
+				],
+				"grid_cells": [
+					10.0,
+					10.0
+				],
+				"max_dimension_m": 9.99,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				10.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"pixel_carpet_gallery": {
@@ -1170,6 +1653,39 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.99,
+					7.99,
+					31.5
+				],
+				"aabb_center": [
+					0.0,
+					2.0,
+					0.25
+				],
+				"grid_cells": [
+					9.0,
+					32.0
+				],
+				"max_dimension_m": 31.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				9.0,
+				1,
+				32.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"postprocessing_bloom": {
@@ -1258,6 +1774,34 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					30.0,
+					20.0,
+					30.0
+				],
+				"aabb_center": [
+					0.0,
+					3.0,
+					0.0
+				],
+				"grid_cells": [
+					30.0,
+					30.0
+				],
+				"max_dimension_m": 30.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 60,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"queer_collection_gallery_a": {
@@ -1306,6 +1850,39 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					9.0,
+					1.0,
+					1.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					9.0,
+					1.0
+				],
+				"max_dimension_m": 9.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				9.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"science_screen": {
@@ -1406,6 +1983,34 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					3.14,
+					2.34,
+					0.2
+				],
+				"aabb_center": [
+					0.0,
+					1.15,
+					-0.08
+				],
+				"grid_cells": [
+					4.0,
+					1.0
+				],
+				"max_dimension_m": 3.14,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_01_shaping": {
@@ -1422,7 +2027,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 01 — Shaping Functions",
+			"name": "Shader 01 \u2014 Shaping Functions",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_01_shaping.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -1482,6 +2087,39 @@
 					"shapes"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					13.2,
+					2.25,
+					1.32
+				],
+				"aabb_center": [
+					0.0,
+					1.38,
+					0.64
+				],
+				"grid_cells": [
+					14.0,
+					2.0
+				],
+				"max_dimension_m": 13.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				14.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_02_colors": {
@@ -1498,7 +2136,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 02 — Colors",
+			"name": "Shader 02 \u2014 Colors",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_02_colors.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -1557,6 +2195,39 @@
 					"shader_03_shapes"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.4,
+					2.25,
+					1.32
+				],
+				"aabb_center": [
+					0.0,
+					1.38,
+					0.64
+				],
+				"grid_cells": [
+					11.0,
+					2.0
+				],
+				"max_dimension_m": 10.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				11.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_03_shapes": {
@@ -1573,7 +2244,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 03 — Shapes",
+			"name": "Shader 03 \u2014 Shapes",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_03_shapes.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -1632,6 +2303,39 @@
 					"feeds"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.4,
+					2.25,
+					1.32
+				],
+				"aabb_center": [
+					0.0,
+					1.38,
+					0.64
+				],
+				"grid_cells": [
+					11.0,
+					2.0
+				],
+				"max_dimension_m": 10.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				11.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_04_matrices": {
@@ -1648,7 +2352,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 04 — Matrices",
+			"name": "Shader 04 \u2014 Matrices",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_04_matrices.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -1707,12 +2411,45 @@
 					"shapes"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.4,
+					2.37,
+					1.35
+				],
+				"aabb_center": [
+					0.0,
+					1.31,
+					0.65
+				],
+				"grid_cells": [
+					11.0,
+					2.0
+				],
+				"max_dimension_m": 10.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				11.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_05_patterns": {
 			"category": "shaders",
 			"complexity": "advanced",
-			"description": "Book of Shaders patterns — 3 modes: classic tiling/truchet/brick, Wang tiles + Voronoi texture generation, procedural noise synthesis (simplex FBM, Worley cells, domain warp). VR slider controls per shader.",
+			"description": "Book of Shaders patterns \u2014 3 modes: classic tiling/truchet/brick, Wang tiles + Voronoi texture generation, procedural noise synthesis (simplex FBM, Worley cells, domain warp). VR slider controls per shader.",
 			"dev_themes": [
 				"shaders",
 				"visual"
@@ -1723,7 +2460,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 05 — Patterns",
+			"name": "Shader 05 \u2014 Patterns",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_05_patterns.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -1788,6 +2525,39 @@
 					"gateway"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.4,
+					2.26,
+					1.32
+				],
+				"aabb_center": [
+					0.0,
+					1.37,
+					0.64
+				],
+				"grid_cells": [
+					11.0,
+					2.0
+				],
+				"max_dimension_m": 10.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				11.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_06_random": {
@@ -1804,7 +2574,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 06 — Random",
+			"name": "Shader 06 \u2014 Random",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_06_random.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -1865,6 +2635,39 @@
 					"procedural"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					2.25,
+					1.32
+				],
+				"aabb_center": [
+					0.0,
+					1.38,
+					0.64
+				],
+				"grid_cells": [
+					8.0,
+					2.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				8.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_07_noise": {
@@ -1881,7 +2684,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 07 — Noise",
+			"name": "Shader 07 \u2014 Noise",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_07_noise.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -1940,6 +2743,39 @@
 					"shader_09_fbm"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.4,
+					2.25,
+					1.32
+				],
+				"aabb_center": [
+					0.0,
+					1.38,
+					0.64
+				],
+				"grid_cells": [
+					11.0,
+					2.0
+				],
+				"max_dimension_m": 10.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				11.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_08_cellularnoise": {
@@ -1957,7 +2793,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 08 — Cellular Noise",
+			"name": "Shader 08 \u2014 Cellular Noise",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_08_cellularnoise.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -2016,6 +2852,39 @@
 					"connects"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.0,
+					2.25,
+					1.32
+				],
+				"aabb_center": [
+					0.0,
+					1.38,
+					0.64
+				],
+				"grid_cells": [
+					8.0,
+					2.0
+				],
+				"max_dimension_m": 8.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				8.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_09_fbm": {
@@ -2032,7 +2901,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 09 — Fractal Brownian Motion",
+			"name": "Shader 09 \u2014 Fractal Brownian Motion",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_09_fbm.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -2092,6 +2961,39 @@
 					"procedural"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.4,
+					2.25,
+					1.32
+				],
+				"aabb_center": [
+					0.0,
+					1.38,
+					0.64
+				],
+				"grid_cells": [
+					11.0,
+					2.0
+				],
+				"max_dimension_m": 10.4,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				11.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_10_reactiondiffusion": {
@@ -2108,7 +3010,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 10 — Reaction Diffusion",
+			"name": "Shader 10 \u2014 Reaction Diffusion",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_10_reactiondiffusion.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -2167,6 +3069,39 @@
 					"noise"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					6.0,
+					2.6,
+					1.62
+				],
+				"aabb_center": [
+					0.0,
+					1.45,
+					0.79
+				],
+				"grid_cells": [
+					6.0,
+					2.0
+				],
+				"max_dimension_m": 6.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				6.0,
+				1,
+				2.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_11_queerrubber": {
@@ -2184,7 +3119,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 11 — Queer Rubber",
+			"name": "Shader 11 \u2014 Queer Rubber",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_11_queerrubber.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -2248,6 +3183,39 @@
 					"surface"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					10.13,
+					1.44,
+					4.11
+				],
+				"aabb_center": [
+					-0.11,
+					1.5,
+					-2.11
+				],
+				"grid_cells": [
+					11.0,
+					5.0
+				],
+				"max_dimension_m": 10.13,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				11.0,
+				1,
+				5.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_12_pinkextravaganza": {
@@ -2264,7 +3232,7 @@
 			"map_sequences": [
 				"patterngeneration"
 			],
-			"name": "Shader 12 — Pink Extravaganza",
+			"name": "Shader 12 \u2014 Pink Extravaganza",
 			"scene": "res://algorithms/shaders/book_of_shaders/shader_12_pinkextravaganza.tscn",
 			"sequence": "shaders",
 			"tags": [
@@ -2327,6 +3295,39 @@
 					"stacks"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					9.28,
+					6.0,
+					9.6
+				],
+				"aabb_center": [
+					-0.64,
+					2.6,
+					1.2
+				],
+				"grid_cells": [
+					10.0,
+					10.0
+				],
+				"max_dimension_m": 9.6,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				10.0,
+				1,
+				10.0
+			],
+			"spatial_profile": {
+				"dir_group": "floor",
+				"range": 18,
+				"density": "high",
+				"min_clearance": 2,
+				"stack_priority": 0.85,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_arch_gallery": {
@@ -2405,12 +3406,45 @@
 					"wallpaper"
 				],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					7.0,
+					5.0,
+					25.0
+				],
+				"aabb_center": [
+					0.0,
+					2.0,
+					12.0
+				],
+				"grid_cells": [
+					7.0,
+					25.0
+				],
+				"max_dimension_m": 25.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				7.0,
+				1,
+				25.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 60,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_bibliotek": {
 			"category": "shaders",
 			"complexity": "intermediate",
-			"description": "Freestanding wall of cubes — each cube showcases a different shader from across the project. A physical library catalog of computational substrates.",
+			"description": "Freestanding wall of cubes \u2014 each cube showcases a different shader from across the project. A physical library catalog of computational substrates.",
 			"dev_themes": [
 				"shaders",
 				"visual",
@@ -2495,6 +3529,39 @@
 					"indexes"
 				],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					4.1,
+					3.15,
+					0.86
+				],
+				"aabb_center": [
+					0.0,
+					1.42,
+					-0.03
+				],
+				"grid_cells": [
+					5.0,
+					1.0
+				],
+				"max_dimension_m": 4.1,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				5.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "panel",
+				"range": 10,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.85,
+				"approach_dir": "front",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"shader_gallery": {
@@ -2541,6 +3608,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					8.5,
+					1.0,
+					1.0
+				],
+				"aabb_center": [
+					0.75,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					9.0,
+					1.0
+				],
+				"max_dimension_m": 8.5,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				9.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 18,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"tiles_explained": {
@@ -2616,12 +3716,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					14.0,
+					2.0,
+					0.2
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					14.0,
+					1.0
+				],
+				"max_dimension_m": 14.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				14.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 35,
+				"density": "field",
+				"min_clearance": 0,
+				"stack_priority": 0.3,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"wall_cove": {
 			"category": "shaders",
 			"complexity": "advanced",
-			"description": "Half-cove slope artifact — curved floor-to-wall transition built with SurfaceTool. High-res quarter-circle curve with continuous UVs for shader tiling. Place at wall base for smooth architectural transition.",
+			"description": "Half-cove slope artifact \u2014 curved floor-to-wall transition built with SurfaceTool. High-res quarter-circle curve with continuous UVs for shader tiling. Place at wall base for smooth architectural transition.",
 			"dev_themes": [
 				"art",
 				"shaders",
@@ -2683,6 +3816,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					1.0,
+					0.28,
+					0.3
+				],
+				"aabb_center": [
+					0.0,
+					0.14,
+					0.15
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 1.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "plane",
+				"range": 2,
+				"density": "high",
+				"min_clearance": 1,
+				"stack_priority": 0.7,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.268877Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"wall_pattern_colorizer": {
@@ -2753,7 +3919,30 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "any"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"wall_pattern_gallery": {
 			"category": "shaders",
@@ -2832,12 +4021,35 @@
 					"interactive"
 				],
 				"preferred_zone": "end"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		},
 		"wall_shader_showcase": {
 			"category": "shaders",
 			"complexity": "advanced",
-			"description": "Replaces GridMultiMesh material with GPU shaders from the shader library. Cycles through different shaders on wall cubes — voronoi, tartan, rothko, truchet, etc.",
+			"description": "Replaces GridMultiMesh material with GPU shaders from the shader library. Cycles through different shaders on wall cubes \u2014 voronoi, tartan, rothko, truchet, etc.",
 			"dev_themes": [
 				"shaders",
 				"visual"
@@ -2902,7 +4114,30 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
-			}
+			},
+			"measurements": {
+				"aabb_size": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.0
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.0,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			]
 		}
 	}
 }

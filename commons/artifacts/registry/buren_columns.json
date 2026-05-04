@@ -1,0 +1,617 @@
+{
+	"id": "buren_columns",
+	"name": "Buren Columns",
+	"description": "Per-cell registry entries for the Array_Buren_Courtyard hero map. Each entry references the composition_artifact scene with a per-column primitive_stack config.",
+	"category": "composition",
+	"theoreticalGrounding": "Buren's Les Deux Plateaux as embodied array — repetition with parametric variation makes indexing legible.",
+	"artifacts": {
+		"buren_col_01_01": {
+			"lookup_name": "buren_col_01_01",
+			"name": "Buren Column (1,1)",
+			"description": "Striped vertical_stack column at (1,1) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_01_01.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		},
+		"buren_col_01_04": {
+			"lookup_name": "buren_col_01_04",
+			"name": "Buren Column (1,4)",
+			"description": "Striped vertical_stack column at (1,4) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_01_04.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		},
+		"buren_col_01_07": {
+			"lookup_name": "buren_col_01_07",
+			"name": "Buren Column (1,7)",
+			"description": "Striped vertical_stack column at (1,7) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_01_07.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		},
+		"buren_col_01_10": {
+			"lookup_name": "buren_col_01_10",
+			"name": "Buren Column (1,10)",
+			"description": "Striped vertical_stack column at (1,10) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_01_10.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		},
+		"buren_col_04_01": {
+			"lookup_name": "buren_col_04_01",
+			"name": "Buren Column (4,1)",
+			"description": "Striped vertical_stack column at (4,1) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_04_01.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		},
+		"buren_col_04_04": {
+			"lookup_name": "buren_col_04_04",
+			"name": "Buren Column (4,4)",
+			"description": "Striped vertical_stack column at (4,4) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_04_04.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		},
+		"buren_col_04_07": {
+			"lookup_name": "buren_col_04_07",
+			"name": "Buren Column (4,7)",
+			"description": "Striped vertical_stack column at (4,7) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_04_07.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		},
+		"buren_col_04_10": {
+			"lookup_name": "buren_col_04_10",
+			"name": "Buren Column (4,10)",
+			"description": "Striped vertical_stack column at (4,10) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_04_10.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		},
+		"buren_col_07_01": {
+			"lookup_name": "buren_col_07_01",
+			"name": "Buren Column (7,1)",
+			"description": "Striped vertical_stack column at (7,1) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_07_01.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		},
+		"buren_col_07_04": {
+			"lookup_name": "buren_col_07_04",
+			"name": "Buren Column (7,4)",
+			"description": "Striped vertical_stack column at (7,4) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_07_04.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		},
+		"buren_col_07_07": {
+			"lookup_name": "buren_col_07_07",
+			"name": "Buren Column (7,7)",
+			"description": "Striped vertical_stack column at (7,7) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_07_07.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		},
+		"buren_col_07_10": {
+			"lookup_name": "buren_col_07_10",
+			"name": "Buren Column (7,10)",
+			"description": "Striped vertical_stack column at (7,10) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_07_10.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		},
+		"buren_col_10_01": {
+			"lookup_name": "buren_col_10_01",
+			"name": "Buren Column (10,1)",
+			"description": "Striped vertical_stack column at (10,1) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_10_01.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		},
+		"buren_col_10_04": {
+			"lookup_name": "buren_col_10_04",
+			"name": "Buren Column (10,4)",
+			"description": "Striped vertical_stack column at (10,4) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_10_04.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		},
+		"buren_col_10_07": {
+			"lookup_name": "buren_col_10_07",
+			"name": "Buren Column (10,7)",
+			"description": "Striped vertical_stack column at (10,7) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_10_07.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		},
+		"buren_col_10_10": {
+			"lookup_name": "buren_col_10_10",
+			"name": "Buren Column (10,10)",
+			"description": "Striped vertical_stack column at (10,10) in Array_Buren_Courtyard. Loaded via composition_artifact + primitive_stack.build().",
+			"category": "composition",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"footprint": [
+				1,
+				1,
+				6
+			],
+			"tags": [
+				"composition",
+				"array",
+				"buren",
+				"stripes",
+				"vertical_stack",
+				"primitive_stack"
+			],
+			"qfep_connection": "F_order: a member of a regular array. Its identity is partly the index (r,c); its appearance differs from siblings only in tier height.",
+			"parameters": {
+				"config_path": "res://commons/maps/Array_Buren_Courtyard/configs/buren_col_10_10.json",
+				"grammar": "primitive_stack",
+				"footprint": [
+					1,
+					1,
+					6
+				],
+				"size_group": "tall"
+			},
+			"size_group": "tall"
+		}
+	}
+}

@@ -1,20 +1,69 @@
 {
-  "lookup_name": "lambda_slider",
-  "footprint": [1, 1, 2.5],
-  "rotations": ["0", "90", "180", "270"],
-  "approach": "south",
-  "exit": "north",
-  "footing": {
-    "anchor": [1, 1],
-    "tiles": [
-      [1, 1, 1],
-      [1, 3, 1],
-      [1, 1, 1]
-    ]
-  },
-  "extras": [
-    {"type": "3t", "text": "λ", "offset": [-1, 0, 0]},
-    {"type": "tt", "key": "lambda_explainer", "offset": [0, 1, 0]}
-  ],
-  "clearance": [3, 3, 4]
+	"approach": "south",
+	"artifact_offset": [
+		-0.25,
+		0.4,
+		0.0
+	],
+	"clearance": [
+		3.0,
+		3.0,
+		4.0
+	],
+	"exit": "north",
+	"extras": [
+		{
+			"offset": [
+				-1.0,
+				0.0,
+				0.0
+			],
+			"text": "λ",
+			"type": "3t"
+		},
+		{
+			"key": "lambda_explainer",
+			"offset": [
+				0.0,
+				1.0,
+				0.0
+			],
+			"type": "tt"
+		}
+	],
+	"footing": {
+		"anchor": [
+			1.0,
+			1.0
+		],
+		"tiles": [
+			[
+				1.0,
+				1.0,
+				1.0
+			],
+			[
+				1.0,
+				2,
+				1.0
+			],
+			[
+				1.0,
+				1.0,
+				1
+			]
+		]
+	},
+	"footprint": [
+		1.0,
+		1.0,
+		2.5
+	],
+	"lookup_name": "lambda_slider",
+	"rotations": [
+		"0",
+		"90",
+		"180",
+		"270"
+	]
 }

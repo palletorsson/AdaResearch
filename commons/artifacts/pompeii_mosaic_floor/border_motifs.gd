@@ -151,39 +151,42 @@ static func _sawtooth_strip(
 
 		if direction == DIR_RIGHT or direction == DIR_LEFT:
 			var tx: float = ox + i * tooth_w
-			# Triangle pointing up
+			# Each tooth's bounding rect [tx, tx+tooth_w] × [oz, oz+width] is
+			# tiled by exactly 3 triangles: the up-tooth (bottom half-+-tip)
+			# plus an upper-left and an upper-right fill (the negative space
+			# above the diagonals). All three are needed for every tooth —
+			# the corner squares at the strip ends do NOT overlap the strip
+			# (they end flush at the strip's start/end), so skipping the end
+			# fills leaves visible holes at the corners.
+			# Up-tooth (covered by `v`):
 			v.append(Vector3(tx, 0, oz + width))
 			v.append(Vector3(tx + tooth_w, 0, oz + width))
 			v.append(Vector3(tx + tooth_w * 0.5, 0, oz))
-			# Fill triangle pointing down (background)
+			# Upper-left fill (covered by `v2`):
 			v2.append(Vector3(tx, 0, oz + width))
 			v2.append(Vector3(tx + tooth_w * 0.5, 0, oz))
-			if i > 0:
-				v2.append(Vector3(tx, 0, oz))
-			else:
-				v2.append(Vector3(tx, 0, oz + width))  # degenerate for first tooth
-			# Right fill
-			if i < n_teeth - 1:
-				v2.append(Vector3(tx + tooth_w * 0.5, 0, oz))
-				v2.append(Vector3(tx + tooth_w, 0, oz + width))
-				v2.append(Vector3(tx + tooth_w, 0, oz))
+			v2.append(Vector3(tx, 0, oz))
+			# Upper-right fill (covered by `v2`):
+			v2.append(Vector3(tx + tooth_w * 0.5, 0, oz))
+			v2.append(Vector3(tx + tooth_w, 0, oz + width))
+			v2.append(Vector3(tx + tooth_w, 0, oz))
 		else:  # DIR_DOWN or DIR_UP
 			var tz: float = oz + i * tooth_w
-			# Triangle pointing right
+			# Same structure rotated 90°: each tooth's bounding rect
+			# [ox, ox+width] × [tz, tz+tooth_w] tiles into the right-tooth
+			# plus left-upper + left-lower fills.
+			# Right-tooth (covered by `v`):
 			v.append(Vector3(ox, 0, tz))
 			v.append(Vector3(ox, 0, tz + tooth_w))
 			v.append(Vector3(ox + width, 0, tz + tooth_w * 0.5))
-			# Fill triangles
+			# Upper fill (covered by `v2`):
 			v2.append(Vector3(ox, 0, tz))
 			v2.append(Vector3(ox + width, 0, tz + tooth_w * 0.5))
-			if i > 0:
-				v2.append(Vector3(ox + width, 0, tz))
-			else:
-				v2.append(Vector3(ox, 0, tz))
-			if i < n_teeth - 1:
-				v2.append(Vector3(ox + width, 0, tz + tooth_w * 0.5))
-				v2.append(Vector3(ox, 0, tz + tooth_w))
-				v2.append(Vector3(ox + width, 0, tz + tooth_w))
+			v2.append(Vector3(ox + width, 0, tz))
+			# Lower fill (covered by `v2`):
+			v2.append(Vector3(ox + width, 0, tz + tooth_w * 0.5))
+			v2.append(Vector3(ox, 0, tz + tooth_w))
+			v2.append(Vector3(ox + width, 0, tz + tooth_w))
 
 
 # ── MEANDER (pixel-grid Greek key) ───────────────────────────────

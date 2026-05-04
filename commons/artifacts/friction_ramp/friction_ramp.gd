@@ -1,6 +1,16 @@
 # friction_ramp.gd
 # Inclined plane with adjustable friction coefficient
 # Block slides or sticks based on μ vs angle — mg·sin(θ) vs μ·mg·cos(θ)
+#
+# @identity
+# essence: An inclined plane with tunable angle and friction — block slides when tan(θ) > μ, sticks when tan(θ) ≤ μ
+# desire: To make the static-friction inequality visible as a threshold event — the slope where motion suddenly begins
+# critical_parameter: friction_mu and ramp_angle_deg — their ratio decides whether the block holds or releases
+# triggers: Low μ on any slope releases the block; high μ on shallow slope holds; the transition angle is arctan(μ)
+# emerges: Friction reveals itself as a binary boundary — hold or slide — emerging from continuous parameters at a sharp threshold
+# needs: angle and μ exposed as VR sliders [has], block placement and physics [has], grid config wiring [has]
+# relationships: Companion to NewtonsLaws and bouncingball in forces/Newton's_Laws map. Tied to example_2_1 (drag) as resistance counterparts
+# truth: Friction is not a force that always opposes motion — it is the contract surfaces sign before they decide whether to let go.
 extends Node3D
 
 class_name FrictionRamp

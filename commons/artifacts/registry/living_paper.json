@@ -1,5 +1,5 @@
 {
-	"_comment": "Living Paper — universal 2D algorithm substrate. Use #algorithm:<name> to select cartridge.",
+	"_comment": "Living Paper \u2014 universal 2D algorithm substrate. Use #algorithm:<name> to select cartridge.",
 	"artifacts": {
 		"living_paper": {
 			"name": "Living Paper",
@@ -71,10 +71,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.141633Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_random_walk": {
-			"name": "Living Paper — Random Walk",
+			"name": "Living Paper \u2014 Random Walk",
 			"lookup_name": "living_paper_random_walk",
 			"description": "Simple random walk on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -141,10 +174,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.141633Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_brownian": {
-			"name": "Living Paper — Brownian Motion",
+			"name": "Living Paper \u2014 Brownian Motion",
 			"lookup_name": "living_paper_brownian",
 			"description": "Brownian random walk on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -212,12 +278,45 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.141633Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_levy": {
-			"name": "Living Paper — Lévy Flight",
+			"name": "Living Paper \u2014 L\u00e9vy Flight",
 			"lookup_name": "living_paper_levy",
-			"description": "Lévy flight random walk on a grabbable 2D canvas.",
+			"description": "L\u00e9vy flight random walk on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
 			"category": "substrate",
 			"artifact_type": "interactive_algorithm",
@@ -283,10 +382,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.141633Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_self_avoiding": {
-			"name": "Living Paper — Self-Avoiding Walk",
+			"name": "Living Paper \u2014 Self-Avoiding Walk",
 			"lookup_name": "living_paper_self_avoiding",
 			"description": "Self-avoiding random walk on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -354,10 +486,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.141633Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_rule30": {
-			"name": "Living Paper — Rule 30",
+			"name": "Living Paper \u2014 Rule 30",
 			"lookup_name": "living_paper_rule30",
 			"description": "Wolfram Rule 30 elementary cellular automaton on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -426,10 +591,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.141633Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_rule110": {
-			"name": "Living Paper — Rule 110",
+			"name": "Living Paper \u2014 Rule 110",
 			"lookup_name": "living_paper_rule110",
 			"description": "Wolfram Rule 110 (Turing-complete) elementary CA on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -498,10 +696,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.141633Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_life": {
-			"name": "Living Paper — Game of Life",
+			"name": "Living Paper \u2014 Game of Life",
 			"lookup_name": "living_paper_life",
 			"description": "Conway's Game of Life on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -570,10 +801,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.141633Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_seeds": {
-			"name": "Living Paper — Seeds",
+			"name": "Living Paper \u2014 Seeds",
 			"lookup_name": "living_paper_seeds",
 			"description": "Seeds cellular automaton (explosive growth) on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -641,10 +905,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.141633Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_brians_brain": {
-			"name": "Living Paper — Brian's Brain",
+			"name": "Living Paper \u2014 Brian's Brain",
 			"lookup_name": "living_paper_brians_brain",
 			"description": "Brian's Brain 3-state cellular automaton on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -712,10 +1009,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.141633Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_bubble_sort": {
-			"name": "Living Paper — Bubble Sort",
+			"name": "Living Paper \u2014 Bubble Sort",
 			"lookup_name": "living_paper_bubble_sort",
 			"description": "Bubble sort visualized as a bar chart on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -783,10 +1113,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.141633Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_insertion_sort": {
-			"name": "Living Paper — Insertion Sort",
+			"name": "Living Paper \u2014 Insertion Sort",
 			"lookup_name": "living_paper_insertion_sort",
 			"description": "Insertion sort visualized as a bar chart on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -854,10 +1217,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.141633Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_merge_sort": {
-			"name": "Living Paper — Merge Sort",
+			"name": "Living Paper \u2014 Merge Sort",
 			"lookup_name": "living_paper_merge_sort",
 			"description": "Merge sort visualized as a bar chart on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -925,10 +1321,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.141633Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_quick_sort": {
-			"name": "Living Paper — Quick Sort",
+			"name": "Living Paper \u2014 Quick Sort",
 			"lookup_name": "living_paper_quick_sort",
 			"description": "Quick sort visualized as a bar chart on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -996,10 +1425,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.141633Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_sine": {
-			"name": "Living Paper — Sine Wave",
+			"name": "Living Paper \u2014 Sine Wave",
 			"lookup_name": "living_paper_sine",
 			"description": "Sine wave drawing itself on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -1067,10 +1529,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_fourier": {
-			"name": "Living Paper — Fourier Series",
+			"name": "Living Paper \u2014 Fourier Series",
 			"lookup_name": "living_paper_fourier",
 			"description": "Fourier series building up harmonics on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -1139,10 +1634,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_lissajous": {
-			"name": "Living Paper — Lissajous Figures",
+			"name": "Living Paper \u2014 Lissajous Figures",
 			"lookup_name": "living_paper_lissajous",
 			"description": "Lissajous curves drawn on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -1210,10 +1738,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_mandelbrot": {
-			"name": "Living Paper — Mandelbrot Set",
+			"name": "Living Paper \u2014 Mandelbrot Set",
 			"lookup_name": "living_paper_mandelbrot",
 			"description": "Mandelbrot set rendering scanline by scanline on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -1281,10 +1842,43 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_julia": {
-			"name": "Living Paper — Julia Set",
+			"name": "Living Paper \u2014 Julia Set",
 			"lookup_name": "living_paper_julia",
 			"description": "Julia set rendering on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -1352,10 +1946,43 @@
 				"isolation": 1,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_sierpinski": {
-			"name": "Living Paper — Sierpinski Triangle",
+			"name": "Living Paper \u2014 Sierpinski Triangle",
 			"lookup_name": "living_paper_sierpinski",
 			"description": "Sierpinski triangle via chaos game on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -1424,10 +2051,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "entry"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_koch": {
-			"name": "Living Paper — Koch Snowflake",
+			"name": "Living Paper \u2014 Koch Snowflake",
 			"lookup_name": "living_paper_koch",
 			"description": "Koch snowflake fractal on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -1496,10 +2156,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_tree": {
-			"name": "Living Paper — L-System Tree",
+			"name": "Living Paper \u2014 L-System Tree",
 			"lookup_name": "living_paper_tree",
 			"description": "L-system tree drawn stroke by stroke on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -1567,10 +2260,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_fern": {
-			"name": "Living Paper — L-System Fern",
+			"name": "Living Paper \u2014 L-System Fern",
 			"lookup_name": "living_paper_fern",
 			"description": "Barnsley fern via L-system on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -1639,10 +2365,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_dragon": {
-			"name": "Living Paper — Dragon Curve",
+			"name": "Living Paper \u2014 Dragon Curve",
 			"lookup_name": "living_paper_dragon",
 			"description": "Dragon curve via L-system on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -1710,10 +2469,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_perlin": {
-			"name": "Living Paper — Perlin Noise",
+			"name": "Living Paper \u2014 Perlin Noise",
 			"lookup_name": "living_paper_perlin",
 			"description": "Perlin noise rendered row by row on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -1782,10 +2574,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_noise_octaves": {
-			"name": "Living Paper — Noise Octaves",
+			"name": "Living Paper \u2014 Noise Octaves",
 			"lookup_name": "living_paper_noise_octaves",
 			"description": "Fractal noise (octave layering) on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -1855,10 +2680,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_bfs": {
-			"name": "Living Paper — BFS Flood Fill",
+			"name": "Living Paper \u2014 BFS Flood Fill",
 			"lookup_name": "living_paper_bfs",
 			"description": "Breadth-first search flood fill on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -1927,10 +2785,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_dfs_maze": {
-			"name": "Living Paper — DFS Maze",
+			"name": "Living Paper \u2014 DFS Maze",
 			"lookup_name": "living_paper_dfs_maze",
 			"description": "Depth-first search maze generation on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -1999,10 +2890,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_reaction_diffusion": {
-			"name": "Living Paper — Reaction-Diffusion",
+			"name": "Living Paper \u2014 Reaction-Diffusion",
 			"lookup_name": "living_paper_reaction_diffusion",
 			"description": "Turing reaction-diffusion patterns on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -2071,10 +2995,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "end"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_dla": {
-			"name": "Living Paper — DLA Crystal",
+			"name": "Living Paper \u2014 DLA Crystal",
 			"lookup_name": "living_paper_dla",
 			"description": "Diffusion-limited aggregation crystal growth on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -2143,10 +3100,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142129Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_voronoi": {
-			"name": "Living Paper — Voronoi Diagram",
+			"name": "Living Paper \u2014 Voronoi Diagram",
 			"lookup_name": "living_paper_voronoi",
 			"description": "Voronoi diagram built from random seeds on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -2216,10 +3206,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142625Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_kmeans": {
-			"name": "Living Paper — K-Means Clustering",
+			"name": "Living Paper \u2014 K-Means Clustering",
 			"lookup_name": "living_paper_kmeans",
 			"description": "K-means clustering algorithm on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -2288,10 +3311,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142625Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_heat": {
-			"name": "Living Paper — Heat Diffusion",
+			"name": "Living Paper \u2014 Heat Diffusion",
 			"lookup_name": "living_paper_heat",
 			"description": "Heat equation diffusion on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -2360,10 +3416,43 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142625Z",
+				"derived_from": "aabb_size + category"
 			}
 		},
 		"living_paper_quadtree": {
-			"name": "Living Paper — Quadtree",
+			"name": "Living Paper \u2014 Quadtree",
 			"lookup_name": "living_paper_quadtree",
 			"description": "Quadtree spatial subdivision on a grabbable 2D canvas.",
 			"scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -2432,6 +3521,39 @@
 				"isolation": 0,
 				"cluster_with": [],
 				"preferred_zone": "any"
+			},
+			"measurements": {
+				"aabb_size": [
+					0.2,
+					0.2,
+					0.08
+				],
+				"aabb_center": [
+					0.0,
+					0.0,
+					0.03
+				],
+				"grid_cells": [
+					1.0,
+					1.0
+				],
+				"max_dimension_m": 0.2,
+				"measured_at": "2026-04-29T07:09:56.762620Z"
+			},
+			"footprint_measured": [
+				1.0,
+				1,
+				1.0
+			],
+			"spatial_profile": {
+				"dir_group": "omni",
+				"range": 1,
+				"density": "medium",
+				"min_clearance": 1,
+				"stack_priority": 0.5,
+				"approach_dir": "any",
+				"derived_at": "2026-04-29T09:39:46.142625Z",
+				"derived_from": "aabb_size + category"
 			}
 		}
 	}
