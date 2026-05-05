@@ -661,12 +661,25 @@ func _handle_biome_ring():
 	var accrual_early = get_node_or_null("/root/BiomeAccrualManager")
 	if accrual_early and accrual_early.has_method("apply"):
 		var dims_early: Vector3i = data_component.get_grid_dimensions()
+		# Thread biome_paint + stage_order into the layer context. The
+		# biome_paint_dispatcher layer reads both: the painted layer for
+		# the deposit list, the stage_order for kingdom-unlock guard.
+		# Other layers (floating_primitives, lsystem_trees, …) ignore
+		# them — they only consume their own params.
+		var painted_layer: Array = []
+		if data_component.has_method("get_biome_paint_layer"):
+			painted_layer = data_component.get_biome_paint_layer()
+		var stage_order: int = 0
+		if eco and eco.has_method("get_current_stage_order"):
+			stage_order = int(eco.get_current_stage_order())
 		accrual_early.apply(self, {
 			"grid_dims": dims_early,
 			"grid_center": Vector3(float(dims_early.x) * cube_size * 0.5, 0.0, float(dims_early.z) * cube_size * 0.5),
 			"cube_size": cube_size,
 			"rng_seed": hash(map_name),
 			"map_name": map_name,
+			"biome_paint": painted_layer,
+			"stage_order": stage_order,
 		})
 
 	if density < 0.05:

@@ -8,26 +8,23 @@
 # rendering substrates (lsystem_trees, ca_surface, dna_creatures, etc.).
 #
 # The painted cell is a SEED, not a render unit. The dispatcher's job:
-#   1. Walk the painted layer cell-by-cell.
-#   2. For each deposit, look up (kingdom, stage_order) in the dispatch
-#      table. The table answers: which substrate, with which gallery
-#      config, at which tier?
-#   3. Forward the deposit to that substrate's apply(ctx) — same
-#      contract every other biome_layers/*.gd file uses.
+#   1. Walk the painted layer cell-by-cell (BiomePaintTokens parses it).
+#   2. For each deposit, check the kingdom is curriculum-honest at the
+#      current stage_order; if not, emit a primitive fallback.
+#   3. Look up (kingdom, stage_order) in the dispatch table for the
+#      crown-jewel substrate config; forward to that substrate's API.
+#   4. If no dispatch entry exists, primitive fallback.
 #
-# When fully populated, this replaces the placeholder primitive output of
-# BiomeRingComponent with kingdom-correct, sequence-correct, gallery-
-# rated rendering.
-#
-# Status 2026-05-04: SKELETON. Public surface stable, internals TODO.
-# Tracks the audit's "Q5 Dispatch Table" (~50 explicit cells). Each cell
-# resolved by:
-#   - encyclopedia gallery manifest (config payload)
-#   - per-substrate apply() implementation (already exist as siblings)
-#   - kingdom unlock guard (curriculum honesty)
+# Status 2026-05-05: Foundation alive — TODOs 3.a (unlock guard),
+# 3.g (primitive fallback), 3.h (cell-to-world) filled. Painted cells
+# now spawn cube primitives at the right positions, kingdom-color tinted.
+# TODOs 3.b–3.f (substrate lookup + dispatch) are next session — they
+# upgrade individual kingdoms from primitive to crown-jewel substrate.
 
 extends Node3D
 class_name BiomePaintDispatcher
+
+const BiomePaintTokensClass = preload("res://algorithms/nature_system/systems/biome_paint_tokens.gd")
 
 # ── Constants ─────────────────────────────────────────────────────────────
 
@@ -46,84 +43,123 @@ const KINGDOM_UNLOCK_ORDER := {
 	KINGDOM_CREATURE: 11, # lsystems — recognisable forms first appear
 }
 
+# Primitive fallback colors, one per kingdom. Picked to match the
+# encyclopedia's KINGDOM_COLORS palette (rose / emerald / violet / amber).
+# Used when a substrate dispatch is unavailable — preserves painted
+# intent visually so the cell still reads as "flower here, tree there"
+# even before the proper substrate lands.
+const KINGDOM_COLOR := {
+	KINGDOM_FLOWER:   Color(0.957, 0.247, 0.369),  # rose-500
+	KINGDOM_TREE:     Color(0.063, 0.725, 0.506),  # emerald-500
+	KINGDOM_FUNGUS:   Color(0.545, 0.361, 0.965),  # violet-500
+	KINGDOM_CREATURE: Color(0.961, 0.620, 0.043),  # amber-500
+}
+
 # ── Public API ────────────────────────────────────────────────────────────
 
 # Standard biome layer contract. ctx must contain:
-#   biome_paint: string[][]      — the painted layer
-#   stage_order: int             — current sequence order
-#   parent: Node3D               — where to add spawned content
-#   grid_center, grid_dims, cube_size — spatial info (same as siblings)
+#   biome_paint: Array[Array[String]]   — the painted layer
+#   stage_order: int                    — current sequence order
+#   parent: Node3D                      — where to add spawned content
+#   grid_center: Vector3                — world centre of the floor grid
+#   grid_dims: Vector3i                 — width × height × depth in cells
+#   cube_size: float                    — metres per cell
 func apply(ctx: Dictionary) -> void:
 	var paint: Array = ctx.get("biome_paint", [])
 	if paint.is_empty():
-		return  # No paint, nothing to dispatch.
+		return
 
 	var stage_order: int = int(ctx.get("stage_order", 0))
 	var parent: Node3D = ctx.get("parent", self)
 
-	# Iterate painted cells. The token parser exists at
-	# algorithms/nature_system/systems/biome_paint_tokens.gd — reuse it.
-	# TODO: var deposits := BiomePaintTokens.iter_painted_cells(paint)
-	#       for deposit in deposits:
-	#           _spawn_for_deposit(deposit, stage_order, ctx, parent)
-	pass
+	# Walk every painted cell. Each call produces 0+ deposits (painted
+	# tokens like 'm5' or 'x4' fan out to multiple kingdom deposits).
+	var deposits: Array = BiomePaintTokensClass.iter_painted_cells(paint)
+	for deposit in deposits:
+		_spawn_for_deposit(deposit, stage_order, ctx, parent)
 
 
-# ── Internals (TODO) ──────────────────────────────────────────────────────
+# ── Internals ─────────────────────────────────────────────────────────────
 
 # Resolve a single painted deposit to a substrate spawn.
 # deposit shape (per BiomePaintTokens):
-#   { row: int, col: int, kingdom: int, intensity: int, sterile: bool }
-func _spawn_for_deposit(_deposit: Dictionary, _stage_order: int,
-		_ctx: Dictionary, _parent: Node3D) -> void:
-	# TODO Step 3.a — kingdom unlock guard:
-	#   if stage_order < KINGDOM_UNLOCK_ORDER[deposit.kingdom]:
-	#       return _spawn_primitive_fallback(deposit, ctx, parent)
-	#
-	# TODO Step 3.b — substrate lookup:
-	#   var entry := _lookup_dispatch(deposit.kingdom, stage_order)
-	#   # entry := { gallery, entry_id, api, config_url }
-	#
-	# TODO Step 3.c — config fetch:
-	#   var cfg := _fetch_config(entry.gallery, entry.entry_id)
-	#
-	# TODO Step 3.d — substrate dispatch:
-	#   match entry.api:
-	#       "PrimitiveStack.build":   PrimitiveStack.build(cfg)
-	#       "LSystemSim":             LSystemSim.new().run(cfg)
-	#       "MorphologySim.simulate": MorphologySim.simulate(cfg)
-	#       "SoftBodySim.simulate":   SoftBodySim.new().simulate(cfg)
-	#       "CritterSpawner.spawn":   CritterSpawner.spawn(cfg)
-	#       "ReactionDiffusionSim":   ReactionDiffusionSim.simulate(cfg)
-	#       _: _spawn_primitive_fallback(deposit, ctx, parent)
-	#
-	# TODO Step 3.e — place at cell position:
-	#   var node := <result>
-	#   node.global_position = _cell_to_world(deposit, ctx)
-	#   parent.add_child(node)
-	pass
+#   { x: int, z: int, kingdom: int, strength: float, sterile: bool, raw: String }
+func _spawn_for_deposit(deposit: Dictionary, stage_order: int,
+		ctx: Dictionary, parent: Node3D) -> void:
+	# Sterile cells carve presence — for now just skip rendering.
+	# (Future: emit a debug marker so authors can see sterile placement.)
+	if bool(deposit.get("sterile", false)):
+		return
+
+	var kingdom: int = int(deposit.get("kingdom", -1))
+	if kingdom < 0:
+		return
+
+	# 3.a — kingdom unlock guard: a flower painted on a sequence-1
+	# (primitives) map shouldn't render as a flower yet because the
+	# curriculum hasn't unlocked flowers. Fall back to a small kingdom-
+	# coloured primitive so the painted intent is still visible without
+	# breaking curriculum honesty.
+	var unlock_at: int = int(KINGDOM_UNLOCK_ORDER.get(kingdom, 0))
+	if stage_order < unlock_at:
+		_spawn_primitive_fallback(deposit, ctx, parent)
+		return
+
+	# 3.b–3.f — substrate lookup + dispatch.
+	# TODO next session: read biome_dispatch_table.json or query the
+	# encyclopedia's foldBiome strategy to pick the right substrate +
+	# crown-jewel config for (kingdom, stage_order). Then forward to
+	# that substrate's API. For now, every unlocked deposit also goes
+	# through the primitive fallback — kingdom-correct colour, but
+	# placeholder geometry until the substrate path lands.
+	_spawn_primitive_fallback(deposit, ctx, parent)
 
 
-# Lookup the (substrate, config, api) triple for a (kingdom, stage_order)
-# pair. Cascade-back inheritance: if the exact cell isn't populated, walk
-# backwards in stage_order until we find a populated one for that kingdom.
-# TODO Step 3.f — read from biome_dispatch_table.json (sibling file).
-func _lookup_dispatch(_kingdom: int, _stage_order: int) -> Dictionary:
-	# Returns Dictionary with keys: gallery, entry_id, api, config_url
-	# Empty dict means "no dispatch — use primitive fallback".
-	return {}
+# When no substrate dispatch is available (kingdom locked, table miss,
+# or path not yet implemented), spawn a small kingdom-coloured cube at
+# the cell position. Keeps the painted intent visible — every painted
+# cell becomes SOMETHING in VR, even before per-kingdom upgrades land.
+func _spawn_primitive_fallback(deposit: Dictionary, ctx: Dictionary,
+		parent: Node3D) -> void:
+	var kingdom: int = int(deposit.get("kingdom", -1))
+	var strength: float = float(deposit.get("strength", 0.5))
+
+	# Mesh: a small cube, scaled by intensity. Intensity 5 = full cube,
+	# intensity 1 = 30% cube. Matches the editor's 2D paint overlay.
+	var mesh_inst := MeshInstance3D.new()
+	var mesh := BoxMesh.new()
+	var cube_size: float = float(ctx.get("cube_size", 1.0))
+	var s: float = cube_size * 0.20 * (0.4 + 0.6 * strength)
+	mesh.size = Vector3(s, s, s)
+	mesh_inst.mesh = mesh
+
+	var mat := StandardMaterial3D.new()
+	var color: Color = KINGDOM_COLOR.get(kingdom, Color.WHITE)
+	mat.albedo_color = color
+	mat.emission_enabled = true
+	mat.emission = color
+	mat.emission_energy_multiplier = 0.4 + 0.4 * strength
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_PER_VERTEX
+	mesh_inst.material_override = mat
+
+	mesh_inst.global_position = _cell_to_world(deposit, ctx)
+	parent.add_child(mesh_inst)
 
 
-# When no substrate is available (kingdom locked, or table miss), emit
-# the same primitive output that floating_primitives.gd uses. Keeps the
-# painted intent visible even at sterile-curriculum stages.
-# TODO Step 3.g — call into floating_primitives directly with a small cfg.
-func _spawn_primitive_fallback(_deposit: Dictionary, _ctx: Dictionary,
-		_parent: Node3D) -> void:
-	pass
-
-
-# Convert a (row, col) cell address into a world Vector3 for placement.
-# TODO Step 3.h — same math as the other biome_layers, factored out.
-func _cell_to_world(_deposit: Dictionary, _ctx: Dictionary) -> Vector3:
-	return Vector3.ZERO
+# Convert a painted cell's (x, z) grid address into a world Vector3.
+# Same math as floating_primitives.gd:33-35 — origin is grid_center,
+# cells are cube_size apart, y sits one cube above the floor so the
+# primitive perches on the cube top instead of clipping into it.
+func _cell_to_world(deposit: Dictionary, ctx: Dictionary) -> Vector3:
+	var grid_center: Vector3 = ctx.get("grid_center", Vector3.ZERO)
+	var grid_dims: Vector3i = ctx.get("grid_dims", Vector3i(10, 1, 10))
+	var cube_size: float = float(ctx.get("cube_size", 1.0))
+	var x_cell: int = int(deposit.get("x", 0))
+	var z_cell: int = int(deposit.get("z", 0))
+	# Offset so cell (0,0) is at the grid's bottom-left corner, matching
+	# the layered grid's origin convention.
+	var wx: float = grid_center.x + (float(x_cell) - float(grid_dims.x) * 0.5 + 0.5) * cube_size
+	var wz: float = grid_center.z + (float(z_cell) - float(grid_dims.z) * 0.5 + 0.5) * cube_size
+	# Sit on top of the floor cube (height 1 = cube_size in world units).
+	var wy: float = grid_center.y + cube_size * 0.6
+	return Vector3(wx, wy, wz)

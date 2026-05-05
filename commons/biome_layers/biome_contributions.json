@@ -21,7 +21,8 @@
     "paradox_zones": "Escher-like impossible geometries. Seq 16.",
     "tunable_field": "QFEP parameters as live sliders modulate all prior layers. Seq 17.",
     "critical_overlay": "Bias visualizations overlay the living world. Seq 18.",
-    "graph_connections": "Edges drawn between related forms/creatures. Seq 19."
+    "graph_connections": "Edges drawn between related forms/creatures. Seq 19.",
+    "biome_paint_dispatcher": "Reads the map's biome_paint layer and spawns one substrate per painted cell. Curriculum-honest: each kingdom only renders past its unlock_order. Falls back to kingdom-coloured primitives when a substrate path isn't yet wired. Used by the biome_lab sequence (Biome_Spine, Biome_Zoo) and any future map that paints cells."
   },
   "sequences": [
     { "order": 1,  "seq": "primitives",            "kind": "floating_primitives",
@@ -80,6 +81,9 @@
       "truth": "critical overlay — the bias of the system becomes visible on the living world" },
     { "order": 19, "seq": "graphtheory",           "kind": "graph_connections",
       "params": { "edge_width": 0.03, "edge_color": "#4da6ff", "connect_within": 6.0 },
-      "truth": "everything connects — edges drawn between related creatures and forms" }
+      "truth": "everything connects — edges drawn between related creatures and forms" },
+    { "order": 99, "seq": "biome_lab",              "kind": "biome_paint_dispatcher",
+      "params": {},
+      "truth": "the painted cell is a seed, not a render unit — every brush stroke becomes substrate at the right curriculum tier" }
   ]
 }
