@@ -61,6 +61,17 @@ func _run() -> void:
 	await create_timer(_wait_seconds).timeout
 	await process_frame; await process_frame
 
+	# Strip ALL biome content except the dispatcher's output. The user
+	# wants per-cell isolation — anything not produced by
+	# Layer_99_biome_paint_dispatcher gets removed:
+	#   - BiomeRingComponent (perimeter foliage circle)
+	#   - Other accrual layers if any leaked through lab_only
+	#   - Any prior NatureRenderer-spawned ambient stuff
+	# What remains: bare floor + the painted cells' substrates.
+	_strip_general_biome(catalog)
+	await process_frame
+	await process_frame
+
 	# Make our preview camera the only active one.
 	if catalog.has_method("set_camera_mode"):
 		catalog.call("set_camera_mode", 0)
@@ -192,3 +203,52 @@ func _disable_cameras_recursive(node: Node) -> void:
 		(node as Camera3D).current = false
 	for child in node.get_children():
 		_disable_cameras_recursive(child)
+
+
+# Strip everything biome-related except the dispatcher's output. The
+# matrix exists to show isolated per-cell substrates; ambient foliage
+# from BiomeRingComponent or other accrual layers drowns the signal.
+#
+# Walk the scene tree, find every node whose name suggests biome
+# perimeter / nature spawn, queue_free unless it lives under
+# Layer_99_biome_paint_dispatcher (the dispatcher's own subtree —
+# that's exactly what we want to keep).
+func _strip_general_biome(root_node: Node) -> void:
+	var to_free: Array[Node] = []
+	_collect_biome_noise(root_node, to_free)
+	for n in to_free:
+		print("[biome_matrix] strip noise: %s" % n.get_path())
+		n.queue_free()
+
+
+# Names that indicate "general biome" content the matrix should hide.
+# Layer_99_biome_paint_dispatcher is the layer we want to keep — its
+# children are the per-cell substrates.
+const _NOISE_NAME_FRAGMENTS := [
+	"BiomeRing",
+	"NatureRenderer",
+	"EcosystemNature",
+	"ChunkManager",
+	"FoliageBatch",
+	"AmbientFoliage",
+]
+
+
+func _collect_biome_noise(node: Node, out: Array[Node]) -> void:
+	# Don't descend into the dispatcher's subtree — those are the
+	# substrates we want to keep visible.
+	if node.name.begins_with("Layer_99"):
+		return
+	# Also keep any other accrual layer that might be running, but the
+	# lab_only flag should already keep them dormant; leave them as-is.
+	if node.name.begins_with("Layer_") and not node.name.begins_with("Layer_99"):
+		# Belt-and-braces: if a non-dispatcher layer spawned anything,
+		# free it. lab_only should prevent this but we double-check.
+		out.append(node)
+		return
+	for fragment in _NOISE_NAME_FRAGMENTS:
+		if String(node.name).contains(fragment):
+			out.append(node)
+			return
+	for child in node.get_children():
+		_collect_biome_noise(child, out)
