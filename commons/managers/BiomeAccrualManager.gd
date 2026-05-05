@@ -66,11 +66,30 @@ func apply(grid_root: Node, context: Dictionary) -> Node:
 	var applied: Array[String] = []
 	var skipped: Array[String] = []
 
+	# Lab-mode detection: if any reachable entry has "lab_only": true,
+	# the stack is replaced rather than accrued. The biome_lab sequence
+	# (order 99) uses this so Biome_Spine and Biome_Zoo show only the
+	# painted-cell dispatcher's output, not all 19 spine layers stacked
+	# on top. Without this, painting on a stage_order=99 map would
+	# render every prior accrual layer as well, drowning the dispatcher.
+	var lab_only_active: bool = false
+	for entry in _contributions:
+		var entry_order: int = int(entry.get("order", 0))
+		if entry_order > target_order:
+			break
+		if bool(entry.get("lab_only", false)):
+			lab_only_active = true
+			break
+
 	for entry in _contributions:
 		var order: int = int(entry.get("order", 0))
 		if order > target_order:
 			break
 		var kind: String = str(entry.get("kind", ""))
+		# In lab mode, only apply the lab_only-flagged entries themselves.
+		if lab_only_active and not bool(entry.get("lab_only", false)):
+			skipped.append(kind + "(lab_only_active)")
+			continue
 		if _disabled_kinds.has(kind):
 			skipped.append(kind + "(disabled)")
 			continue

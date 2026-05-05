@@ -84,6 +84,7 @@
       "truth": "everything connects — edges drawn between related creatures and forms" },
     { "order": 99, "seq": "biome_lab",              "kind": "biome_paint_dispatcher",
       "params": {},
+      "lab_only": true,
       "truth": "the painted cell is a seed, not a render unit — every brush stroke becomes substrate at the right curriculum tier" }
   ]
 }
