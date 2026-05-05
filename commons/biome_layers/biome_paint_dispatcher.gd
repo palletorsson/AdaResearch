@@ -31,6 +31,13 @@ const BotanicalFlowerScene = preload("res://commons/flora/botanical_flower.tscn"
 # We instantiate it per painted u-cell and downsize the grid so each
 # CA cluster fits a single biome cell (~0.5–1.0m).
 const MoldNetworkScene = preload("res://algorithms/cellularautomata/cellular_automata_3d/MoldNetwork.tscn")
+# TreeMorphology.build takes a CritterDNA + CritterTraitMapper and
+# produces a real DNA-driven L-system tree. Both are RefCounteds we
+# construct on demand. The mapper is shared (one per dispatcher),
+# the DNA is per-cell (parameterised by intensity / position).
+const CritterDNAClass = preload("res://algorithms/nature_system/dna/critter_dna.gd")
+const CritterTraitMapperClass = preload("res://algorithms/nature_system/dna/critter_trait_mapper.gd")
+const TreeMorphologyClass = preload("res://algorithms/nature_system/morphology/tree_morphology.gd")
 
 # Per-kingdom substrate scenes / classes. The dispatcher matches on
 # kingdom and forwards to one of these. Intensity influences the
@@ -48,6 +55,19 @@ const FLOWER_PRESET_BY_INTENSITY := {
 	4: "daisy",
 	5: "daisy",
 }
+
+# ── Cached refs ───────────────────────────────────────────────────────────
+
+# CritterTraitMapper is shared across all DNA-driven spawns this layer
+# does in one apply() pass. Constructed lazily because constructing it
+# loads the shader, which we don't want on the first apply if the map
+# has no DNA-routed cells.
+var _trait_mapper: CritterTraitMapper = null
+
+func _get_trait_mapper() -> CritterTraitMapper:
+	if _trait_mapper == null:
+		_trait_mapper = CritterTraitMapperClass.new()
+	return _trait_mapper
 
 # ── Constants ─────────────────────────────────────────────────────────────
 
@@ -141,6 +161,8 @@ func _spawn_for_deposit(deposit: Dictionary, stage_order: int,
 			_spawn_flower(deposit, ctx, parent)
 		KINGDOM_FUNGUS:
 			_spawn_fungus(deposit, ctx, parent)
+		KINGDOM_TREE:
+			_spawn_tree(deposit, ctx, parent)
 		_:
 			_spawn_primitive_fallback(deposit, ctx, parent)
 
@@ -196,6 +218,57 @@ func _spawn_fungus(deposit: Dictionary, ctx: Dictionary,
 	mold.max_generations = 30
 	mold.global_position = _cell_to_world(deposit, ctx)
 	parent.add_child(mold)
+
+
+# Tree kingdom — wraps TreeMorphology.build (production DNA-driven
+# L-system tree builder, 753 LOC). Constructs a tree-tuned CritterDNA
+# from intensity + cell position, calls TreeMorphology with the
+# shared trait mapper. The build returns a Node3D containing trunk,
+# branches, leaves (MultiMesh-batched).
+#
+# DNA defaults are already tree-friendly (body_type=0). We tune:
+#   - segments: branch depth — scales with intensity (3..7)
+#   - scale:    overall size — scales with intensity (0.4..1.0)
+#   - branch_angle: L-system rotation — varies with cell position so
+#                   neighbouring trees don't look identical
+#   - primary_color: bark — earth tones (brown/grey)
+#   - secondary_color / tertiary_color: leaves — sequence-tinted green
+#
+# LOD scales with intensity too: t1 → lod 0 (3-sided tubes, ≤30
+# branches), t5 → lod 2 (6-sided, ≤200 branches). Keeps low-intensity
+# trees cheap.
+func _spawn_tree(deposit: Dictionary, ctx: Dictionary,
+		parent: Node3D) -> void:
+	var strength: float = float(deposit.get("strength", 1.0))
+	var intensity: int = clampi(int(round(strength * 5.0)), 1, 5)
+	var x: int = int(deposit.get("x", 0))
+	var z: int = int(deposit.get("z", 0))
+	var seed: int = (x * 31 + z * 17) & 0xFFFF
+
+	var dna: CritterDNA = CritterDNAClass.new()
+	dna.body_type = 0.0  # Tree
+	dna.segments = 2.0 + float(intensity)  # 3..7 levels of branching
+	dna.scale = 0.4 + 0.15 * float(intensity)  # 0.55..1.0
+	# Vary branch angle by position so neighbours don't look identical.
+	dna.branch_angle = 18.0 + float(seed % 16)  # 18..33 degrees
+	dna.branch_decay = 0.65 + 0.05 * (float(seed >> 4 & 7) / 7.0)
+	dna.leaf_density = 0.4 + 0.15 * float(intensity)  # denser at high intensity
+	# Earth-bark trunk + leaf-green crown.
+	dna.primary_color = Color(0.32 + 0.05 * (seed & 3) * 0.1, 0.22, 0.12)
+	dna.secondary_color = Color(0.14, 0.45 + 0.1 * float(intensity) / 5.0, 0.12)
+	dna.tertiary_color = Color(0.20, 0.55, 0.15)
+	dna.symmetry = 3.0 + float(seed % 3)  # 3..5 branch fans
+	dna.roughness = 0.85
+	dna.metallic = 0.0
+
+	# Build under a small wrapper Node3D so we can position it.
+	var tree_root := Node3D.new()
+	tree_root.name = "PaintedTree_%d_%d" % [x, z]
+	parent.add_child(tree_root)
+	tree_root.global_position = _cell_to_world(deposit, ctx)
+
+	var lod: int = clampi(intensity - 2, 0, 3)  # 0,0,1,2,3 for i=1..5
+	TreeMorphologyClass.build(dna, tree_root, _get_trait_mapper(), lod)
 
 
 # When no substrate dispatch is available (kingdom locked, table miss,
