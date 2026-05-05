@@ -25,6 +25,24 @@ extends Node3D
 class_name BiomePaintDispatcher
 
 const BiomePaintTokensClass = preload("res://algorithms/nature_system/systems/biome_paint_tokens.gd")
+const BotanicalFlowerScene = preload("res://commons/flora/botanical_flower.tscn")
+
+# Per-kingdom substrate scenes / classes. The dispatcher matches on
+# kingdom and forwards to one of these. Intensity influences the
+# preset/config inside each substrate. Adding a new substrate = one
+# preload, one branch in _spawn_for_kingdom.
+
+# Intensity → BotanicalFlower preset. Maps the painted token's 1..5
+# intensity to a flower variant: low intensity = small/delicate, high
+# intensity = larger/showier. The presets are defined in
+# commons/flora/botanical_flower.gd PRESETS const.
+const FLOWER_PRESET_BY_INTENSITY := {
+	1: "bluebell",
+	2: "bluebell",
+	3: "orchid",
+	4: "daisy",
+	5: "daisy",
+}
 
 # ── Constants ─────────────────────────────────────────────────────────────
 
@@ -105,14 +123,46 @@ func _spawn_for_deposit(deposit: Dictionary, stage_order: int,
 		_spawn_primitive_fallback(deposit, ctx, parent)
 		return
 
-	# 3.b–3.f — substrate lookup + dispatch.
-	# TODO next session: read biome_dispatch_table.json or query the
-	# encyclopedia's foldBiome strategy to pick the right substrate +
-	# crown-jewel config for (kingdom, stage_order). Then forward to
-	# that substrate's API. For now, every unlocked deposit also goes
-	# through the primitive fallback — kingdom-correct colour, but
-	# placeholder geometry until the substrate path lands.
-	_spawn_primitive_fallback(deposit, ctx, parent)
+	# 3.b–3.e — substrate dispatch by kingdom. Each branch wraps a
+	# production builder from elsewhere in the project: BotanicalFlower
+	# (commons/flora) for flower, TreeMorphology + CritterSpawner for
+	# tree/creature when DNA paths are wired (later session),
+	# CellularAutomata3D_Flexible for fungus mycelium (later). Branches
+	# without a wired substrate fall through to primitive_fallback.
+	# This match is the dispatcher's seam — adding a per-kingdom
+	# substrate = one new branch.
+	match kingdom:
+		KINGDOM_FLOWER:
+			_spawn_flower(deposit, ctx, parent)
+		_:
+			_spawn_primitive_fallback(deposit, ctx, parent)
+
+
+# Flower kingdom — wraps commons/flora/BotanicalFlower. Anatomically-
+# correct Swedish-plant generator with stem, leaves, phyllotaxis,
+# inflorescence, petals. Three presets (bluebell / orchid / daisy)
+# selected by intensity so a painted f1 produces a small bluebell and
+# a painted f5 produces a full daisy. The flower scales by intensity
+# too, so even within a preset the higher-intensity cells feel bigger.
+func _spawn_flower(deposit: Dictionary, ctx: Dictionary,
+		parent: Node3D) -> void:
+	var strength: float = float(deposit.get("strength", 1.0))
+	# Recover the original painted intensity (1-5) from the strength
+	# (which is intensity / 5.0 — see BiomePaintTokens.parse).
+	var intensity: int = clampi(int(round(strength * 5.0)), 1, 5)
+	var preset_name: String = String(FLOWER_PRESET_BY_INTENSITY.get(intensity, "bluebell"))
+
+	var flower := BotanicalFlowerScene.instantiate()
+	flower.preset = preset_name
+	# Slight extra scale via configure() — gives intensity a continuous
+	# influence on top of the discrete preset choice. Strength 0.2 → 0.7×,
+	# strength 1.0 → 1.4×.
+	flower.configure({
+		"overall_scale": 0.7 + 0.7 * strength,
+		"seed": int(deposit.get("x", 0)) * 31 + int(deposit.get("z", 0)),
+	})
+	flower.global_position = _cell_to_world(deposit, ctx)
+	parent.add_child(flower)
 
 
 # When no substrate dispatch is available (kingdom locked, table miss,
