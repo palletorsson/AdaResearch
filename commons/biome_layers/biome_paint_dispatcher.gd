@@ -38,6 +38,11 @@ const MoldNetworkScene = preload("res://algorithms/cellularautomata/cellular_aut
 const CritterDNAClass = preload("res://algorithms/nature_system/dna/critter_dna.gd")
 const CritterTraitMapperClass = preload("res://algorithms/nature_system/dna/critter_trait_mapper.gd")
 const TreeMorphologyClass = preload("res://algorithms/nature_system/morphology/tree_morphology.gd")
+# CritterSpawner takes a world_root + DNA and produces a full DNA-driven
+# CritterEntity (mesh + shader + bond/age/breed lifecycle). Pokemon Studio
+# uses this directly. We share one spawner across all creature deposits
+# so its trait_mapper is loaded once.
+const CritterSpawnerClass = preload("res://algorithms/nature_system/systems/spawner.gd")
 
 # Per-kingdom substrate scenes / classes. The dispatcher matches on
 # kingdom and forwards to one of these. Intensity influences the
@@ -63,11 +68,23 @@ const FLOWER_PRESET_BY_INTENSITY := {
 # loads the shader, which we don't want on the first apply if the map
 # has no DNA-routed cells.
 var _trait_mapper: CritterTraitMapper = null
+var _critter_spawner: CritterSpawner = null  # Shared across creature deposits.
 
 func _get_trait_mapper() -> CritterTraitMapper:
 	if _trait_mapper == null:
 		_trait_mapper = CritterTraitMapperClass.new()
 	return _trait_mapper
+
+func _get_critter_spawner(parent: Node3D) -> CritterSpawner:
+	# Spawner needs a Node3D world_root. We use the dispatch parent.
+	# Reuse across deposits in this apply() pass — a fresh apply() on
+	# a different map will rebuild because parent changes.
+	if _critter_spawner == null or _critter_spawner.world_root != parent:
+		_critter_spawner = CritterSpawnerClass.new(parent)
+		_critter_spawner.trait_mapper = _get_trait_mapper()
+		_critter_spawner.max_population = 500  # Biome_Spine has ~150 c-cells
+		_critter_spawner.default_lod = 2
+	return _critter_spawner
 
 # ── Constants ─────────────────────────────────────────────────────────────
 
@@ -163,6 +180,8 @@ func _spawn_for_deposit(deposit: Dictionary, stage_order: int,
 			_spawn_fungus(deposit, ctx, parent)
 		KINGDOM_TREE:
 			_spawn_tree(deposit, ctx, parent)
+		KINGDOM_CREATURE:
+			_spawn_creature(deposit, ctx, parent)
 		_:
 			_spawn_primitive_fallback(deposit, ctx, parent)
 
@@ -269,6 +288,50 @@ func _spawn_tree(deposit: Dictionary, ctx: Dictionary,
 
 	var lod: int = clampi(intensity - 2, 0, 3)  # 0,0,1,2,3 for i=1..5
 	TreeMorphologyClass.build(dna, tree_root, _get_trait_mapper(), lod)
+
+
+# Creature kingdom — wraps CritterSpawner.spawn (production
+# DNA-driven critter pipeline used by Pokemon Studio). Constructs a
+# walker-tuned CritterDNA per cell, hands off to the cached spawner
+# which builds the CritterEntity (mesh + shader + bond/age/breed
+# lifecycle).
+#
+# Per-cell DNA tuning:
+#   - body_type   = 1.0 (walker)
+#   - segments    = 3 + intensity   (4..8 body parts)
+#   - scale       = 0.3 + 0.12*intensity  (0.42..0.9 — smaller than trees)
+#   - mobility    = 0.4 + 0.1*intensity   (more active at high intensity)
+#   - sociality   = 0.5..0.9 by position  (mix of solitary + flock)
+#   - aggression  = 0.05..0.20  (passive, reads as friendly)
+#   - colors      = bright per-cell variation (creatures should pop)
+func _spawn_creature(deposit: Dictionary, ctx: Dictionary,
+		parent: Node3D) -> void:
+	var strength: float = float(deposit.get("strength", 1.0))
+	var intensity: int = clampi(int(round(strength * 5.0)), 1, 5)
+	var x: int = int(deposit.get("x", 0))
+	var z: int = int(deposit.get("z", 0))
+	var seed: int = (x * 41 + z * 23) & 0xFFFF
+
+	var dna: CritterDNA = CritterDNAClass.new()
+	dna.body_type = 1.0  # walker
+	dna.segments = 3.0 + float(intensity)
+	dna.symmetry = 2.0 + float(seed % 4)  # 2..5
+	dna.scale = 0.3 + 0.12 * float(intensity)
+	dna.mobility = 0.4 + 0.1 * float(intensity)
+	dna.aggression = 0.05 + 0.03 * float(seed & 7) / 7.0
+	dna.sociality = 0.5 + 0.4 * (float(seed >> 4 & 7) / 7.0)
+	dna.curiosity = 0.6
+	# Bright per-cell creature colours — read against grass/biome.
+	var hue_base: float = float(seed % 360) / 360.0
+	dna.primary_color = Color.from_hsv(hue_base, 0.65, 0.85)
+	dna.secondary_color = Color.from_hsv(fposmod(hue_base + 0.15, 1.0), 0.5, 0.7)
+	dna.tertiary_color = Color.from_hsv(fposmod(hue_base + 0.45, 1.0), 0.7, 0.9)
+	dna.iridescence = 0.1 + 0.1 * float(intensity) / 5.0
+	dna.roughness = 0.5
+	dna.metallic = 0.05
+
+	var spawner: CritterSpawner = _get_critter_spawner(parent)
+	spawner.spawn(dna, _cell_to_world(deposit, ctx))
 
 
 # When no substrate dispatch is available (kingdom locked, table miss,
