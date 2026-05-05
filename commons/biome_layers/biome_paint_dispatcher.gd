@@ -180,13 +180,17 @@ func _spawn_flower(deposit: Dictionary, ctx: Dictionary,
 	if preset_name.is_empty():
 		preset_name = "bluebell"
 
+	# Scale params from biome_config.json:intensity_scaling.flower —
+	# tunable from /biome-control. Defaults Alice-scale.
+	var s := BiomeConfigLoaderClass.get_intensity_scaling("flower")
+	var scale_base: float = float(s.get("overall_scale_base", 1.5))
+	var scale_per: float = float(s.get("overall_scale_per_intensity", 0.20))
+	var overall_scale: float = scale_base + scale_per * float(intensity)
+
 	var flower := BotanicalFlowerScene.instantiate()
 	flower.preset = preset_name
-	# Slight extra scale via configure() — gives intensity a continuous
-	# influence on top of the discrete preset choice. Strength 0.2 → 0.7×,
-	# strength 1.0 → 1.4×.
 	flower.configure({
-		"overall_scale": 0.7 + 0.7 * strength,
+		"overall_scale": overall_scale,
 		"seed": int(deposit.get("x", 0)) * 31 + int(deposit.get("z", 0)),
 	})
 	flower.global_position = _cell_to_world(deposit, ctx)
@@ -207,14 +211,23 @@ func _spawn_fungus(deposit: Dictionary, ctx: Dictionary,
 		parent: Node3D) -> void:
 	var strength: float = float(deposit.get("strength", 1.0))
 	var intensity: int = clampi(int(round(strength * 5.0)), 1, 5)
-	# Grid grows with intensity. Even at u5 it's a 12³ × 0.05m = 0.6m
-	# cluster — one biome cell.
-	var dim: int = 4 + intensity * 2  # 6, 8, 10, 12, 14
+	# Scale params from biome_config.json:intensity_scaling.fungus —
+	# Alice-scale defaults: u5 ≈ 2m mycelium cluster.
+	var s := BiomeConfigLoaderClass.get_intensity_scaling("fungus")
+	var dim_base: int = int(s.get("grid_dim_base", 6))
+	var dim_per: int = int(s.get("grid_dim_per_intensity", 3))
+	var cell_size: float = float(s.get("cell_size", 0.10))
+	var max_gens: int = int(s.get("max_generations", 30))
+	var dim: int = dim_base + intensity * dim_per
+
 	var mold := MoldNetworkScene.instantiate()
 	mold.grid_size = Vector3i(dim, dim, dim)
-	mold.cell_size = 0.05
-	# Let the CA grow then freeze — biomes shouldn't churn forever.
-	mold.max_generations = 30
+	mold.cell_size = cell_size
+	mold.max_generations = max_gens
+	# Tint to the fungus kingdom's color so CA clusters read as fungus,
+	# not generic white. Pulled from biome_config.json:kingdoms.fungus.
+	mold.color_alive = BiomeConfigLoaderClass.get_kingdom_color(KINGDOM_FUNGUS)
+	mold.use_gradient = false  # solid kingdom-color is more legible at biome scale
 	mold.global_position = _cell_to_world(deposit, ctx)
 	parent.add_child(mold)
 
@@ -244,14 +257,24 @@ func _spawn_tree(deposit: Dictionary, ctx: Dictionary,
 	var z: int = int(deposit.get("z", 0))
 	var seed: int = (x * 31 + z * 17) & 0xFFFF
 
+	# Scale params from biome_config.json:intensity_scaling.tree.
+	var s := BiomeConfigLoaderClass.get_intensity_scaling("tree")
+	var seg_base: float = float(s.get("segments_base", 2.0))
+	var seg_per: float = float(s.get("segments_per_intensity", 1.0))
+	var scale_base: float = float(s.get("scale_base", 0.8))
+	var scale_per: float = float(s.get("scale_per_intensity", 0.30))
+	var leaf_base: float = float(s.get("leaf_density_base", 0.4))
+	var leaf_per: float = float(s.get("leaf_density_per_intensity", 0.03))
+	var ang_base: float = float(s.get("branch_angle_base", 18.0))
+	var ang_jit: float = float(s.get("branch_angle_jitter", 16.0))
+
 	var dna: CritterDNA = CritterDNAClass.new()
 	dna.body_type = 0.0  # Tree
-	dna.segments = 2.0 + float(intensity)  # 3..7 levels of branching
-	dna.scale = 0.4 + 0.15 * float(intensity)  # 0.55..1.0
-	# Vary branch angle by position so neighbours don't look identical.
-	dna.branch_angle = 18.0 + float(seed % 16)  # 18..33 degrees
+	dna.segments = seg_base + seg_per * float(intensity)
+	dna.scale = scale_base + scale_per * float(intensity)
+	dna.branch_angle = ang_base + float(seed % int(max(ang_jit, 1.0)))
 	dna.branch_decay = 0.65 + 0.05 * (float(seed >> 4 & 7) / 7.0)
-	dna.leaf_density = 0.4 + 0.15 * float(intensity)  # denser at high intensity
+	dna.leaf_density = leaf_base + leaf_per * float(intensity)
 	# Earth-bark trunk + leaf-green crown.
 	dna.primary_color = Color(0.32 + 0.05 * (seed & 3) * 0.1, 0.22, 0.12)
 	dna.secondary_color = Color(0.14, 0.45 + 0.1 * float(intensity) / 5.0, 0.12)
@@ -292,12 +315,21 @@ func _spawn_creature(deposit: Dictionary, ctx: Dictionary,
 	var z: int = int(deposit.get("z", 0))
 	var seed: int = (x * 41 + z * 23) & 0xFFFF
 
+	# Scale params from biome_config.json:intensity_scaling.creature.
+	var s := BiomeConfigLoaderClass.get_intensity_scaling("creature")
+	var seg_base: float = float(s.get("segments_base", 3.0))
+	var seg_per: float = float(s.get("segments_per_intensity", 1.0))
+	var scale_base: float = float(s.get("scale_base", 0.6))
+	var scale_per: float = float(s.get("scale_per_intensity", 0.25))
+	var mob_base: float = float(s.get("mobility_base", 0.4))
+	var mob_per: float = float(s.get("mobility_per_intensity", 0.1))
+
 	var dna: CritterDNA = CritterDNAClass.new()
 	dna.body_type = 1.0  # walker
-	dna.segments = 3.0 + float(intensity)
+	dna.segments = seg_base + seg_per * float(intensity)
 	dna.symmetry = 2.0 + float(seed % 4)  # 2..5
-	dna.scale = 0.3 + 0.12 * float(intensity)
-	dna.mobility = 0.4 + 0.1 * float(intensity)
+	dna.scale = scale_base + scale_per * float(intensity)
+	dna.mobility = mob_base + mob_per * float(intensity)
 	dna.aggression = 0.05 + 0.03 * float(seed & 7) / 7.0
 	dna.sociality = 0.5 + 0.4 * (float(seed >> 4 & 7) / 7.0)
 	dna.curiosity = 0.6

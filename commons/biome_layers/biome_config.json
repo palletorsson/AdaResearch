@@ -106,32 +106,32 @@
 	},
 
 	"intensity_scaling": {
-		"_note": "How painted intensity 1..5 maps to per-kingdom render parameters. Each kingdom's _spawn_<kingdom> helper reads from here.",
+		"_note": "How painted intensity 1..5 maps to per-kingdom render parameters. Each kingdom's _spawn_<kingdom> helper reads from here. Tuned 2026-05-05 toward Alice-scale — biome reads as surreal/dreamlike rather than miniature-realistic. f5 = ~2.5x baseline flower, t5 = ~2.3x baseline tree, u5 = ~2m mycelium, c5 = ~1.9x baseline creature.",
 		"flower": {
-			"overall_scale_base": 0.7,
-			"overall_scale_per_intensity": 0.14
+			"overall_scale_base": 1.5,
+			"overall_scale_per_intensity": 0.20
 		},
 		"tree": {
 			"segments_base": 2.0,
-			"segments_per_intensity": 1.0,
-			"scale_base": 0.4,
-			"scale_per_intensity": 0.15,
+			"segments_per_intensity": 0.8,
+			"scale_base": 0.6,
+			"scale_per_intensity": 0.20,
 			"leaf_density_base": 0.4,
 			"leaf_density_per_intensity": 0.03,
 			"branch_angle_base": 18.0,
 			"branch_angle_jitter": 16.0
 		},
 		"fungus": {
-			"grid_dim_base": 4,
-			"grid_dim_per_intensity": 2,
-			"cell_size": 0.05,
+			"grid_dim_base": 6,
+			"grid_dim_per_intensity": 3,
+			"cell_size": 0.10,
 			"max_generations": 30
 		},
 		"creature": {
 			"segments_base": 3.0,
 			"segments_per_intensity": 1.0,
-			"scale_base": 0.3,
-			"scale_per_intensity": 0.12,
+			"scale_base": 0.6,
+			"scale_per_intensity": 0.25,
 			"mobility_base": 0.4,
 			"mobility_per_intensity": 0.1
 		}
