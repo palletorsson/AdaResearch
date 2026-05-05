@@ -1,0 +1,178 @@
+{
+	"schema": "adaresearch.biome_config.v1",
+	"description": "Single source of truth for biome system parameters. Both consumers read from this file (Godot via biome_config_loader.gd, encyclopedia via /api/biome-config). Changing a value here propagates to both. Pre-this-file the same constants lived in 3+ places (biome_paint_dispatcher.gd, encyclopedia folds.ts, DESIGN.md) and silently drifted. Now there is one place.",
+	"updated": "2026-05-05",
+
+	"kingdoms": {
+		"tree": {
+			"id": 0,
+			"token": "t",
+			"unlock_order": 5,
+			"color_hex": "#10b981",
+			"color_rgb": [0.063, 0.725, 0.506],
+			"keywords": ["lsystem", "trunk", "canopy", "fern", "branching", "branch", "tree"],
+			"keywords_priority": "low",
+			"substrate_candidates": ["lsystem", "graph-grammar", "morphology", "mesh-grammar"],
+			"primary_substrate": "tree_morphology",
+			"icon": "TreePine",
+			"description": "L-system trees, branching forms; production builder TreeMorphology.build()"
+		},
+		"creature": {
+			"id": 1,
+			"token": "c",
+			"unlock_order": 11,
+			"color_hex": "#f59e0b",
+			"color_rgb": [0.961, 0.620, 0.043],
+			"keywords": ["critter", "boid", "flock", "fauna", "creature", "animal", "swarm"],
+			"keywords_priority": "medium",
+			"substrate_candidates": ["critter", "soft-body", "graph-grammar", "trajectory"],
+			"primary_substrate": "critter_spawner",
+			"icon": "Bug",
+			"description": "DNA-driven critters via CritterSpawner; walker body_type"
+		},
+		"flower": {
+			"id": 2,
+			"token": "f",
+			"unlock_order": 4,
+			"color_hex": "#f43f5e",
+			"color_rgb": [0.957, 0.247, 0.369],
+			"keywords": ["blossom", "petal", "bloom", "botanic", "rose", "iris", "flower"],
+			"keywords_priority": "medium",
+			"substrate_candidates": ["lsystem", "form", "primitive-stack", "rd"],
+			"primary_substrate": "botanical_flower",
+			"icon": "Flower",
+			"description": "Anatomically-correct Swedish-plant generator (commons/flora/BotanicalFlower)"
+		},
+		"fungus": {
+			"id": 3,
+			"token": "u",
+			"unlock_order": 7,
+			"color_hex": "#8b5cf6",
+			"color_rgb": [0.545, 0.361, 0.965],
+			"keywords": ["mushroom", "mycelium", "spore", "coral", "lichen", "fungus"],
+			"keywords_priority": "high",
+			"substrate_candidates": ["rd", "form", "mesh-grammar", "morphology"],
+			"primary_substrate": "mold_network_ca",
+			"icon": "Asterisk",
+			"description": "Cellular automata mycelial growth via MoldNetwork.tscn"
+		},
+		"moss": {
+			"id": 4,
+			"token": "m",
+			"unlock_order": 6,
+			"color_hex": "#84cc16",
+			"color_rgb": [0.518, 0.800, 0.086],
+			"keywords": ["ground-cover", "substrate-cover", "moss"],
+			"keywords_priority": "high",
+			"substrate_candidates": ["rd", "pattern", "primitive-stack"],
+			"primary_substrate": "expand_to_flower_fungus",
+			"icon": "Leaf",
+			"description": "Token expands to flower+fungus deposits at 0.7× strength (BiomePaintTokens.parse). No dedicated dispatcher arm needed.",
+			"expand_to": [
+				{"kingdom": "flower", "strength_multiplier": 0.7},
+				{"kingdom": "fungus", "strength_multiplier": 0.7}
+			]
+		},
+		"cross": {
+			"id": 5,
+			"token": "x",
+			"unlock_order": 17,
+			"color_hex": "#06b6d4",
+			"color_rgb": [0.024, 0.714, 0.831],
+			"keywords": ["cross-kingdom", "hybrid"],
+			"keywords_priority": "high",
+			"substrate_candidates": ["graph-grammar", "stacked-bridges"],
+			"primary_substrate": "expand_to_all_kingdoms",
+			"icon": "Sparkles",
+			"description": "Token expands to all four base kingdoms at 0.5× strength. QFEP-late hybrid expression.",
+			"expand_to": [
+				{"kingdom": "tree", "strength_multiplier": 0.5},
+				{"kingdom": "creature", "strength_multiplier": 0.5},
+				{"kingdom": "flower", "strength_multiplier": 0.5},
+				{"kingdom": "fungus", "strength_multiplier": 0.5}
+			]
+		}
+	},
+
+	"keyword_priority_order": ["high", "medium", "low"],
+	"_keyword_priority_note": "When detecting a kingdom from text (encyclopedia foldBiome / dispatcher classification), check kingdoms in order of keywords_priority — high first. 'branching_coral' matches both fungus's 'coral' (high priority) and tree's 'branch' (low priority); fungus wins because high beats low. This replaced the iteration-order hack in folds.ts.",
+
+	"flower_presets_by_intensity": {
+		"1": "bluebell",
+		"2": "bluebell",
+		"3": "orchid",
+		"4": "daisy",
+		"5": "daisy"
+	},
+
+	"intensity_scaling": {
+		"_note": "How painted intensity 1..5 maps to per-kingdom render parameters. Each kingdom's _spawn_<kingdom> helper reads from here.",
+		"flower": {
+			"overall_scale_base": 0.7,
+			"overall_scale_per_intensity": 0.14
+		},
+		"tree": {
+			"segments_base": 2.0,
+			"segments_per_intensity": 1.0,
+			"scale_base": 0.4,
+			"scale_per_intensity": 0.15,
+			"leaf_density_base": 0.4,
+			"leaf_density_per_intensity": 0.03,
+			"branch_angle_base": 18.0,
+			"branch_angle_jitter": 16.0
+		},
+		"fungus": {
+			"grid_dim_base": 4,
+			"grid_dim_per_intensity": 2,
+			"cell_size": 0.05,
+			"max_generations": 30
+		},
+		"creature": {
+			"segments_base": 3.0,
+			"segments_per_intensity": 1.0,
+			"scale_base": 0.3,
+			"scale_per_intensity": 0.12,
+			"mobility_base": 0.4,
+			"mobility_per_intensity": 0.1
+		}
+	},
+
+	"sequences_with_biome": {
+		"_note": "Per-spine-sequence density target + active kingdoms. Mirrors commons/maps/soft_stages.json:nature_kingdoms but normalized for the dispatcher's curriculum-honesty guard. Kept here too because soft_stages.json is the runtime config (read by EcosystemManager) and this file is the static spec — they should be checked against each other on every change.",
+		"primitives":         {"order": 1,  "density": 0.0,  "kingdoms": []},
+		"transformation":     {"order": 2,  "density": 0.0,  "kingdoms": []},
+		"color":              {"order": 4,  "density": 0.05, "kingdoms": ["flower"]},
+		"vectors":            {"order": 4,  "density": 0.10, "kingdoms": ["flower"]},
+		"forces":             {"order": 5,  "density": 0.18, "kingdoms": ["flower", "tree"]},
+		"oscillation":        {"order": 6,  "density": 0.26, "kingdoms": ["flower", "tree"]},
+		"particles":          {"order": 7,  "density": 0.34, "kingdoms": ["flower", "tree", "fungus"]},
+		"randomness":         {"order": 8,  "density": 0.42, "kingdoms": ["flower", "tree", "fungus"]},
+		"mathematics":        {"order": 9,  "density": 0.50, "kingdoms": ["flower", "tree", "fungus"]},
+		"fractals":           {"order": 10, "density": 0.58, "kingdoms": ["flower", "tree", "fungus"]},
+		"lsystems":           {"order": 11, "density": 0.65, "kingdoms": ["flower", "tree", "fungus", "creature"]},
+		"proceduralgen":      {"order": 12, "density": 0.72, "kingdoms": ["flower", "tree", "fungus", "creature"]},
+		"softbodies":         {"order": 13, "density": 0.78, "kingdoms": ["flower", "tree", "fungus", "creature"]},
+		"swarm":              {"order": 14, "density": 0.84, "kingdoms": ["flower", "tree", "fungus", "creature"]},
+		"ml":                 {"order": 15, "density": 0.88, "kingdoms": ["flower", "tree", "fungus", "creature"]},
+		"foundationscrisis":  {"order": 16, "density": 0.92, "kingdoms": ["flower", "tree", "fungus", "creature"]},
+		"qfeplaboratory":     {"order": 17, "density": 0.95, "kingdoms": ["flower", "tree", "fungus", "creature", "cross"]},
+		"postfoundations":    {"order": 18, "density": 0.97, "kingdoms": ["flower", "tree", "fungus", "creature", "cross"]},
+		"graphtheory":        {"order": 19, "density": 0.99, "kingdoms": ["flower", "tree", "fungus", "creature", "cross"]},
+		"biome_lab":          {"order": 99, "density": 1.0,  "kingdoms": ["flower", "tree", "fungus", "creature"], "lab_only": true}
+	},
+
+	"presence_grid": {
+		"_note": "PresenceGrid diffusion params. PresenceGrid lives at algorithms/nature_system/systems/presence_grid.gd but is gated off in NatureRenderer:296. When re-enabled (DESIGN.md step 1), these are its parameters.",
+		"diffusion_rate": 0.15,
+		"decay_rate": 0.02,
+		"max_distance": 5,
+		"falloff_base": 0.55
+	},
+
+	"control_panel_hint": {
+		"_note": "Helper metadata for the future /biome-control page. Tells the UI which fields are tunable, with what ranges.",
+		"unlock_order_range": [1, 19],
+		"density_range": [0.0, 1.0],
+		"intensity_scaling_recommended_range": [0.0, 2.0]
+	}
+}

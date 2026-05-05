@@ -25,6 +25,7 @@ extends Node3D
 class_name BiomePaintDispatcher
 
 const BiomePaintTokensClass = preload("res://algorithms/nature_system/systems/biome_paint_tokens.gd")
+const BiomeConfigLoaderClass = preload("res://commons/biome_layers/biome_config_loader.gd")
 const BotanicalFlowerScene = preload("res://commons/flora/botanical_flower.tscn")
 # MoldNetwork.tscn is a pre-configured CellularAutomata3D_Flexible scene
 # whose rule string ("4-6/5-7/10/M") produces mycelial-network growth.
@@ -49,17 +50,8 @@ const CritterSpawnerClass = preload("res://algorithms/nature_system/systems/spaw
 # preset/config inside each substrate. Adding a new substrate = one
 # preload, one branch in _spawn_for_kingdom.
 
-# Intensity → BotanicalFlower preset. Maps the painted token's 1..5
-# intensity to a flower variant: low intensity = small/delicate, high
-# intensity = larger/showier. The presets are defined in
-# commons/flora/botanical_flower.gd PRESETS const.
-const FLOWER_PRESET_BY_INTENSITY := {
-	1: "bluebell",
-	2: "bluebell",
-	3: "orchid",
-	4: "daisy",
-	5: "daisy",
-}
+# Flower preset map moved to biome_config.json's flower_presets_by_intensity.
+# Read at spawn time via BiomeConfigLoaderClass.get_flower_preset(intensity).
 
 # ── Cached refs ───────────────────────────────────────────────────────────
 
@@ -93,27 +85,11 @@ const KINGDOM_CREATURE := 1
 const KINGDOM_FLOWER := 2
 const KINGDOM_FUNGUS := 3
 
-# Lowest spine sequence order at which each kingdom is allowed to render.
-# Mirrors KINGDOM_UNLOCK_ORDER in the encyclopedia's foldBiome strategy.
-# Painted cells for a locked kingdom fall back to primitive rendering.
-const KINGDOM_UNLOCK_ORDER := {
-	KINGDOM_FLOWER: 4,    # color sequence
-	KINGDOM_TREE: 5,      # forces — first vertical primitives
-	KINGDOM_FUNGUS: 7,    # randomness — RD requires randf()
-	KINGDOM_CREATURE: 11, # lsystems — recognisable forms first appear
-}
-
-# Primitive fallback colors, one per kingdom. Picked to match the
-# encyclopedia's KINGDOM_COLORS palette (rose / emerald / violet / amber).
-# Used when a substrate dispatch is unavailable — preserves painted
-# intent visually so the cell still reads as "flower here, tree there"
-# even before the proper substrate lands.
-const KINGDOM_COLOR := {
-	KINGDOM_FLOWER:   Color(0.957, 0.247, 0.369),  # rose-500
-	KINGDOM_TREE:     Color(0.063, 0.725, 0.506),  # emerald-500
-	KINGDOM_FUNGUS:   Color(0.545, 0.361, 0.965),  # violet-500
-	KINGDOM_CREATURE: Color(0.961, 0.620, 0.043),  # amber-500
-}
+# Per-kingdom values now live in commons/biome_layers/biome_config.json
+# and load via BiomeConfigLoaderClass. The dispatcher used to hardcode
+# unlock_order, primitive-fallback colors, and the flower preset map —
+# all of which also lived in encyclopedia/folds.ts and DESIGN.md and
+# silently drifted between sessions. One JSON, two readers, no drift.
 
 # ── Public API ────────────────────────────────────────────────────────────
 
@@ -159,8 +135,9 @@ func _spawn_for_deposit(deposit: Dictionary, stage_order: int,
 	# (primitives) map shouldn't render as a flower yet because the
 	# curriculum hasn't unlocked flowers. Fall back to a small kingdom-
 	# coloured primitive so the painted intent is still visible without
-	# breaking curriculum honesty.
-	var unlock_at: int = int(KINGDOM_UNLOCK_ORDER.get(kingdom, 0))
+	# breaking curriculum honesty. Unlock_order read from
+	# biome_config.json — same value the encyclopedia's foldBiome reads.
+	var unlock_at: int = BiomeConfigLoaderClass.get_unlock_order(kingdom)
 	if stage_order < unlock_at:
 		_spawn_primitive_fallback(deposit, ctx, parent)
 		return
@@ -198,7 +175,10 @@ func _spawn_flower(deposit: Dictionary, ctx: Dictionary,
 	# Recover the original painted intensity (1-5) from the strength
 	# (which is intensity / 5.0 — see BiomePaintTokens.parse).
 	var intensity: int = clampi(int(round(strength * 5.0)), 1, 5)
-	var preset_name: String = String(FLOWER_PRESET_BY_INTENSITY.get(intensity, "bluebell"))
+	# Preset read from biome_config.json:flower_presets_by_intensity.
+	var preset_name: String = BiomeConfigLoaderClass.get_flower_preset(intensity)
+	if preset_name.is_empty():
+		preset_name = "bluebell"
 
 	var flower := BotanicalFlowerScene.instantiate()
 	flower.preset = preset_name
@@ -353,7 +333,9 @@ func _spawn_primitive_fallback(deposit: Dictionary, ctx: Dictionary,
 	mesh_inst.mesh = mesh
 
 	var mat := StandardMaterial3D.new()
-	var color: Color = KINGDOM_COLOR.get(kingdom, Color.WHITE)
+	# Color read from biome_config.json:kingdoms.<name>.color_rgb —
+	# same hex as the encyclopedia's biome-paint.ts palette.
+	var color: Color = BiomeConfigLoaderClass.get_kingdom_color(kingdom)
 	mat.albedo_color = color
 	mat.emission_enabled = true
 	mat.emission = color
