@@ -26,6 +26,11 @@ class_name BiomePaintDispatcher
 
 const BiomePaintTokensClass = preload("res://algorithms/nature_system/systems/biome_paint_tokens.gd")
 const BotanicalFlowerScene = preload("res://commons/flora/botanical_flower.tscn")
+# MoldNetwork.tscn is a pre-configured CellularAutomata3D_Flexible scene
+# whose rule string ("4-6/5-7/10/M") produces mycelial-network growth.
+# We instantiate it per painted u-cell and downsize the grid so each
+# CA cluster fits a single biome cell (~0.5–1.0m).
+const MoldNetworkScene = preload("res://algorithms/cellularautomata/cellular_automata_3d/MoldNetwork.tscn")
 
 # Per-kingdom substrate scenes / classes. The dispatcher matches on
 # kingdom and forwards to one of these. Intensity influences the
@@ -134,6 +139,8 @@ func _spawn_for_deposit(deposit: Dictionary, stage_order: int,
 	match kingdom:
 		KINGDOM_FLOWER:
 			_spawn_flower(deposit, ctx, parent)
+		KINGDOM_FUNGUS:
+			_spawn_fungus(deposit, ctx, parent)
 		_:
 			_spawn_primitive_fallback(deposit, ctx, parent)
 
@@ -163,6 +170,32 @@ func _spawn_flower(deposit: Dictionary, ctx: Dictionary,
 	})
 	flower.global_position = _cell_to_world(deposit, ctx)
 	parent.add_child(flower)
+
+
+# Fungus kingdom — wraps MoldNetwork (a CellularAutomata3D_Flexible
+# scene). The CA rule "4-6/5-7/10/M" produces mycelial-network growth:
+# cells survive with 4-6 neighbours, are born with 5-7, decay through
+# 10 states, Moore neighbourhood. Visually reads as a fungal hyphae
+# spreading.
+#
+# We downsize the default 30×30×30 grid because that's a 6m cube, way
+# too big for one biome cell. Intensity scales the grid: u1 → 4³
+# cluster, u5 → 12³ cluster. cell_size shrunk to 0.05m so even u5
+# stays sub-meter.
+func _spawn_fungus(deposit: Dictionary, ctx: Dictionary,
+		parent: Node3D) -> void:
+	var strength: float = float(deposit.get("strength", 1.0))
+	var intensity: int = clampi(int(round(strength * 5.0)), 1, 5)
+	# Grid grows with intensity. Even at u5 it's a 12³ × 0.05m = 0.6m
+	# cluster — one biome cell.
+	var dim: int = 4 + intensity * 2  # 6, 8, 10, 12, 14
+	var mold := MoldNetworkScene.instantiate()
+	mold.grid_size = Vector3i(dim, dim, dim)
+	mold.cell_size = 0.05
+	# Let the CA grow then freeze — biomes shouldn't churn forever.
+	mold.max_generations = 30
+	mold.global_position = _cell_to_world(deposit, ctx)
+	parent.add_child(mold)
 
 
 # When no substrate dispatch is available (kingdom locked, table miss,
