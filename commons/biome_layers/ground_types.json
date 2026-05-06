@@ -1,0 +1,125 @@
+{
+  "version": 2,
+  "description": "Catalog of ground TYPES for the biome ground layer (G3). Each type drives the living_ground shader's base earth + displacement + emission. Per-cell explicit override via map_data.json's `ground_paint` layer; otherwise inferred from biome_paint kingdom (kingdom_to_ground) or stage terrain_mode (terrain_mode_to_ground). v2 adds the inference tables.",
+
+  "kingdom_to_ground": {
+    "_note": "When a cell has biome_paint but no explicit ground_paint, infer ground type from the kingdom. Keys match biome_paint_tokens.gd KINGDOM constants and short tokens.",
+    "f": "soil",
+    "flower": "soil",
+    "t": "moss",
+    "tree": "moss",
+    "u": "wood",
+    "fungus": "wood",
+    "c": "soil",
+    "creature": "soil",
+    "m": "moss",
+    "moss": "moss",
+    "x": "soil",
+    "cross": "soil",
+    "-": "stone",
+    "sterile": "stone"
+  },
+
+  "terrain_mode_to_ground": {
+    "_note": "Last-resort fallback for cells with neither ground_paint nor biome_paint. Reads soft_stages.json's terrain_mode for the current sequence.",
+    "flat": null,
+    "noise": "soil",
+    "growth": "moss",
+    "self_generating": "soil",
+    "stone_floor": "stone",
+    "underground": "void",
+    "ash_fall": "ash",
+    "snow_field": "snow",
+    "tide": "sand"
+  },
+
+
+  "types": {
+    "soil": {
+      "label": "Soil",
+      "token": "so",
+      "notes": "Default warm earth — neutral organic ground.",
+      "base_color_warm": [0.32, 0.24, 0.16],
+      "base_color_cool": [0.22, 0.20, 0.14],
+      "displacement_strength": 0.04,
+      "base_texture_scale": 8.0,
+      "walkable": true
+    },
+    "moss": {
+      "label": "Moss",
+      "token": "mo",
+      "notes": "Living forest floor — green-on-dark, slight breathing.",
+      "base_color_warm": [0.18, 0.32, 0.10],
+      "base_color_cool": [0.12, 0.22, 0.10],
+      "displacement_strength": 0.05,
+      "base_texture_scale": 7.0,
+      "walkable": true
+    },
+    "stone": {
+      "label": "Stone",
+      "token": "st",
+      "notes": "Hard cool grey — no displacement, mineral tones.",
+      "base_color_warm": [0.42, 0.40, 0.38],
+      "base_color_cool": [0.30, 0.30, 0.32],
+      "displacement_strength": 0.0,
+      "base_texture_scale": 5.0,
+      "walkable": true
+    },
+    "sand": {
+      "label": "Sand",
+      "token": "sd",
+      "notes": "Warm pale grain — gentle ripples in displacement.",
+      "base_color_warm": [0.78, 0.65, 0.42],
+      "base_color_cool": [0.62, 0.55, 0.38],
+      "displacement_strength": 0.08,
+      "base_texture_scale": 12.0,
+      "walkable": true
+    },
+    "snow": {
+      "label": "Snow",
+      "token": "sn",
+      "notes": "Cold blue-white — drifts in displacement, faint emission.",
+      "base_color_warm": [0.88, 0.90, 0.95],
+      "base_color_cool": [0.78, 0.82, 0.92],
+      "displacement_strength": 0.10,
+      "base_texture_scale": 6.0,
+      "emission_color": [0.55, 0.65, 0.78],
+      "emission_strength": 0.05,
+      "walkable": true
+    },
+    "ash": {
+      "label": "Ash",
+      "token": "as",
+      "notes": "Burnt earth — dark with faint warm embers, dry crack pattern.",
+      "base_color_warm": [0.20, 0.16, 0.14],
+      "base_color_cool": [0.12, 0.10, 0.10],
+      "displacement_strength": 0.02,
+      "base_texture_scale": 10.0,
+      "emission_color": [0.85, 0.40, 0.15],
+      "emission_strength": 0.10,
+      "walkable": true
+    },
+    "wood": {
+      "label": "Wood",
+      "token": "wd",
+      "notes": "Forest detritus / fallen logs — rich brown with bark grain.",
+      "base_color_warm": [0.35, 0.22, 0.12],
+      "base_color_cool": [0.25, 0.18, 0.10],
+      "displacement_strength": 0.03,
+      "base_texture_scale": 14.0,
+      "walkable": true
+    },
+    "void": {
+      "label": "Void",
+      "token": "vd",
+      "notes": "Cavern entrance / underground hint — dark with subtle blue glow. Future: triggers marching-cube cave generator (G5).",
+      "base_color_warm": [0.05, 0.05, 0.08],
+      "base_color_cool": [0.02, 0.02, 0.05],
+      "displacement_strength": 0.0,
+      "base_texture_scale": 4.0,
+      "emission_color": [0.20, 0.30, 0.55],
+      "emission_strength": 0.20,
+      "walkable": false
+    }
+  }
+}

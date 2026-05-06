@@ -16,6 +16,15 @@
 class_name BiomeRingComponent
 extends Node3D
 
+# Production DNA-driven tree builder — same path as biome_paint_dispatcher
+# and lsystem_trees. Lazy-loaded; avoid the shader cost on barren maps that
+# never spawn a tree.
+const CritterDNAClass = preload("res://algorithms/nature_system/dna/critter_dna.gd")
+const CritterTraitMapperClass = preload("res://algorithms/nature_system/dna/critter_trait_mapper.gd")
+const TreeMorphologyClass = preload("res://algorithms/nature_system/morphology/tree_morphology.gd")
+# Walker-creature builder — same path as Pokemon Studio. Lazy-loaded.
+const CritterSpawnerClass = preload("res://algorithms/nature_system/systems/spawner.gd")
+
 
 # ─────────────────────────────────────────────────────────────
 #  Configuration
@@ -59,6 +68,25 @@ var _chunk_manager: ChunkManager = null
 var _rng: RandomNumberGenerator = null
 var _grid_w: float = 0.0
 var _grid_d: float = 0.0
+# Shared trait mapper for DNA tree + creature builds. Lazy: only
+# constructed if the ring actually spawns DNA-driven content this map.
+var _trait_mapper: CritterTraitMapper = null
+var _critter_spawner: CritterSpawner = null
+
+
+func _get_trait_mapper() -> CritterTraitMapper:
+	if _trait_mapper == null:
+		_trait_mapper = CritterTraitMapperClass.new()
+	return _trait_mapper
+
+
+func _get_critter_spawner() -> CritterSpawner:
+	if _critter_spawner == null:
+		_critter_spawner = CritterSpawnerClass.new(self)
+		_critter_spawner.trait_mapper = _get_trait_mapper()
+		_critter_spawner.max_population = 40   # ring count caps below this
+		_critter_spawner.default_lod = 1       # ring critters are decorative
+	return _critter_spawner
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -274,6 +302,24 @@ func _place_foliage(grid_w: float, grid_d: float, grid_center: Vector3,
 	var half_gw: float = grid_w * 0.5
 	var half_gd: float = grid_d * 0.5
 
+	# Special-case "tree" — divert to DNA-driven TreeMorphology builds
+	# instead of the MultiMesh cylinder placeholder. Each tree is a unique
+	# Node3D hierarchy (trunk + branches + leaves), so we cap the count
+	# much lower than the MultiMesh path (which can support 500). The
+	# remaining foliage types continue through the MultiMesh loop below.
+	if "tree" in types:
+		types.erase("tree")
+		_spawn_dna_trees(grid_w, grid_d, grid_center, density)
+
+	# Special-case "creature" — divert to CritterSpawner.spawn (the
+	# Pokemon Studio production critter pipeline) instead of the MultiMesh
+	# capsule placeholder. Same reasoning: each critter is a unique
+	# CritterEntity (DNA-driven mesh + shader + lifecycle), can't be
+	# MultiMesh-batched. Cap at 8..18 per ring.
+	if "creature" in types:
+		types.erase("creature")
+		_spawn_dna_creatures(grid_w, grid_d, grid_center, density)
+
 	# For each foliage type, create a MultiMesh
 	for flora_type in types:
 		var mesh: Mesh = _get_foliage_mesh(flora_type)
@@ -432,6 +478,146 @@ func _get_foliage_mesh(flora_type: String) -> Mesh:
 			return mesh
 		_:
 			return null
+
+
+# ═══════════════════════════════════════════════════════════════
+# DNA TREES — Real TreeMorphology trees in the ring (replaces the
+#             tapered-cylinder MultiMesh placeholder)
+# ═══════════════════════════════════════════════════════════════
+
+# Scatter N real DNA-driven trees around the grid in the ring zone.
+# Each tree is a unique CritterDNA → TreeMorphology.build() result, with
+# DNA params (segments / scale / branch_angle / colors) seeded by world
+# position so neighbours don't look identical and the layout is stable
+# across reloads.
+#
+# Cost: each tree is hundreds of MultiMesh-batched leaf instances + a
+# branch hierarchy. We cap at 6..14 trees (density-scaled) which keeps
+# total branch count under TreeMorphology's internal LOD-1 limit.
+func _spawn_dna_trees(grid_w: float, grid_d: float, grid_center: Vector3,
+		density: float) -> void:
+	# Density-scaled count. Late maps (density >= 0.8) get up to ~14
+	# trees in the ring; early maps that pass the density>0.05 gate
+	# in generate() get a minimum of 6.
+	var tree_count: int = clampi(int(round(density * 16.0)), 6, 14)
+
+	var half_gw: float = grid_w * 0.5
+	var half_gd: float = grid_d * 0.5
+
+	for i in tree_count:
+		# Pick a position somewhere in the ring annulus. Try a few
+		# samples and skip any that land inside the grid footprint or
+		# in the fog fade beyond the ring.
+		var world_pos: Vector3 = Vector3.ZERO
+		var ok: bool = false
+		for _attempt in 8:
+			var wx: float = _rng.randf_range(-(half_gw + ring_width), half_gw + ring_width)
+			var wz: float = _rng.randf_range(-(half_gd + ring_width), half_gd + ring_width)
+			# Skip if inside the floor footprint.
+			if absf(wx) < half_gw and absf(wz) < half_gd:
+				continue
+			# Skip if in the fog zone.
+			var dx: float = maxf(absf(wx) - half_gw, 0.0)
+			var dz: float = maxf(absf(wz) - half_gd, 0.0)
+			var edge_dist: float = maxf(dx, dz)
+			if edge_dist > ring_width:
+				continue
+			world_pos = grid_center + Vector3(wx, 0.0, wz)
+			world_pos.y = _simple_noise(wx * 0.5, wz * 0.5) * height_variation
+			ok = true
+			break
+		if not ok:
+			continue
+
+		# DNA seeded by world position — neighbours look related but
+		# distinct. Same shape as biome_paint_dispatcher's _spawn_tree.
+		var seed: int = (int(world_pos.x * 13.0) * 31 + int(world_pos.z * 13.0) * 17) & 0xFFFF
+
+		var dna: CritterDNA = CritterDNAClass.new()
+		dna.body_type = 0.0  # 0 = tree
+		# Medium-tier tree, varied per seed.
+		dna.segments = 4.0 + float(seed % 3)               # 4..6
+		dna.scale = 0.85 + 0.30 * (float(seed >> 3 & 7) / 7.0)  # ~0.85..1.15
+		dna.branch_angle = 18.0 + float(seed % 16)          # 18..33 deg
+		dna.branch_decay = 0.65 + 0.05 * (float(seed >> 4 & 7) / 7.0)
+		dna.leaf_density = 0.55
+		dna.primary_color = Color(0.32 + 0.05 * float(seed & 3) * 0.1, 0.22, 0.12)
+		dna.secondary_color = Color(0.14, 0.45 + 0.10 * (float(seed >> 5 & 7) / 7.0), 0.12)
+		dna.tertiary_color = Color(0.20, 0.55, 0.15)
+		dna.symmetry = 3.0 + float(seed % 3)                # 3..5 branch fans
+		dna.roughness = 0.85
+		dna.metallic = 0.0
+
+		var tree_root := Node3D.new()
+		tree_root.name = "RingDNATree_%d" % i
+		add_child(tree_root)
+		tree_root.global_position = world_pos
+		# Slight rotation for variety.
+		tree_root.rotate_y(_rng.randf_range(0.0, TAU))
+
+		# LOD 1: ~80 branches max, 4-sided tubes. Cheap enough for ~14 trees.
+		TreeMorphologyClass.build(dna, tree_root, _get_trait_mapper(), 1)
+
+
+# Scatter N real DNA-driven walker critters around the grid in the ring
+# zone. Each is a CritterEntity built via CritterSpawner — full DNA chain,
+# bond/age/breed lifecycle, shader-driven. World-position seed gives
+# deterministic per-spot variation.
+#
+# Cost: each critter is a heavy node hierarchy (mesh + shader + scripts).
+# Cap at 8..18 trees (density-scaled), LOD 1 so the shader cost stays
+# bounded. Tighter cap than trees because critters animate every frame.
+func _spawn_dna_creatures(grid_w: float, grid_d: float, grid_center: Vector3,
+		density: float) -> void:
+	var creature_count: int = clampi(int(round(density * 20.0)), 8, 18)
+
+	var half_gw: float = grid_w * 0.5
+	var half_gd: float = grid_d * 0.5
+
+	for i in creature_count:
+		# Pick a position in the ring annulus (same sampling logic as
+		# _spawn_dna_trees — a few attempts to land in the valid zone).
+		var world_pos: Vector3 = Vector3.ZERO
+		var ok: bool = false
+		for _attempt in 8:
+			var wx: float = _rng.randf_range(-(half_gw + ring_width), half_gw + ring_width)
+			var wz: float = _rng.randf_range(-(half_gd + ring_width), half_gd + ring_width)
+			if absf(wx) < half_gw and absf(wz) < half_gd:
+				continue
+			var dx: float = maxf(absf(wx) - half_gw, 0.0)
+			var dz: float = maxf(absf(wz) - half_gd, 0.0)
+			var edge_dist: float = maxf(dx, dz)
+			if edge_dist > ring_width:
+				continue
+			world_pos = grid_center + Vector3(wx, 0.0, wz)
+			# Critters sit slightly off the ground.
+			world_pos.y = _simple_noise(wx * 0.5, wz * 0.5) * height_variation + 0.05
+			ok = true
+			break
+		if not ok:
+			continue
+
+		var seed: int = (int(world_pos.x * 13.0) * 41 + int(world_pos.z * 13.0) * 23) & 0xFFFF
+
+		var dna: CritterDNA = CritterDNAClass.new()
+		dna.body_type = 1.0  # walker
+		dna.segments = 4.0 + float(seed % 4)               # 4..7
+		dna.symmetry = 2.0 + float(seed % 4)               # 2..5
+		dna.scale = 0.4 + 0.20 * (float(seed >> 3 & 7) / 7.0)
+		dna.mobility = 0.4 + 0.10 * (float(seed >> 5 & 7) / 7.0)
+		dna.aggression = 0.05 + 0.03 * float(seed & 7) / 7.0
+		dna.sociality = 0.5 + 0.4 * (float(seed >> 4 & 7) / 7.0)
+		dna.curiosity = 0.6
+		# Bright per-creature colours so they read against tree/grass biome.
+		var hue_base: float = float(seed % 360) / 360.0
+		dna.primary_color = Color.from_hsv(hue_base, 0.65, 0.85)
+		dna.secondary_color = Color.from_hsv(fposmod(hue_base + 0.15, 1.0), 0.5, 0.7)
+		dna.tertiary_color = Color.from_hsv(fposmod(hue_base + 0.45, 1.0), 0.7, 0.9)
+		dna.iridescence = 0.10
+		dna.roughness = 0.5
+		dna.metallic = 0.05
+
+		_get_critter_spawner().spawn(dna, world_pos)
 
 
 # ═══════════════════════════════════════════════════════════════
