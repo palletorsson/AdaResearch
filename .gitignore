@@ -19,6 +19,22 @@
 /assets/
 /android/
 
+# Out-of-project archive — auto-research maps, captures, narrations, and
+# other artifacts the Godot project produces but doesn't load. Files stay
+# on disk for tooling (preset clusterer, etc.) but never enter the repo.
+# See _archive/README.md for layout. Per-subdir .gdignore files tell
+# Godot's importer to skip them as well.
+/_archive/
+/ada_run/captures/
+/ada_run/narrations/
+/ada_run/*.checkpoint.json
+/ada_run/*.progress.txt
+/ada_run/*.skip_list.txt
+/ada_run/capture_daemon.pid
+
+# Claude Code worktree leftovers — disposable session dirs.
+/commons/maps/tmpclaude-*
+
 
 # Godot Export & Build Files
 # =============================================================================
