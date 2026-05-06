@@ -332,7 +332,37 @@ def cmd_init(args) -> int:
         json.dumps(bundle, indent=2), encoding="utf-8"
     )
 
-    # 5. Worktree
+    # 5. Capture BEFORE from main (artifact unchanged, auto-AABB framing).
+    #    The framing it picks gets persisted in capture_report.json and
+    #    reused by `finalize` so before & after share identical camera params.
+    if gd_path and Path(GODOT_EXE).exists():
+        before_user_dir = f"chamber_before_{lookup}_{timestamp.replace('-', '').replace('T', '_')}"
+        cmd = [
+            GODOT_EXE, "--path", str(REPO),
+            "--xr-mode", "off", "--no-window",
+            "--script", CAPTURE_SCRIPT, "--",
+            "--mode=artifact", f"--target={lookup}",
+            f"--out=user://{before_user_dir}",
+        ]
+        print("  before:   capturing from main (auto-AABB)...")
+        try:
+            subprocess.run(cmd, check=False, capture_output=True, timeout=180)
+            # Copy results into draft/before/
+            user_data = Path(os.environ.get("APPDATA", "")) / "Godot/app_userdata/Ada Research Zero One" / before_user_dir / lookup
+            for angle in ["front", "left", "right", "top"]:
+                src = user_data / f"{angle}.png"
+                if src.exists():
+                    shutil.copy(str(src), str(draft_dir / "before" / f"{angle}.png"))
+            # Also copy the report so finalize can read framing from it
+            report_src = user_data / "capture_report.json"
+            if report_src.exists():
+                shutil.copy(str(report_src), str(draft_dir / "before" / "capture_report.json"))
+            n_pngs = len(list((draft_dir / "before").glob("*.png")))
+            print(f"            -> {n_pngs} PNGs + capture_report.json")
+        except Exception as e:
+            print(f"    !! before capture failed: {e}", file=sys.stderr)
+
+    # 6. Worktree
     worktree_path = WORKTREES / f"chamber-{lookup}-{timestamp}"
     worktree_branch = f"chamber/{lookup}-{timestamp}"
     print(f"  worktree: {worktree_path.relative_to(REPO).as_posix()}")
@@ -411,11 +441,14 @@ def cmd_finalize(args) -> int:
     if n_lines == 0:
         print("  ⚠ patch is empty — no changes detected in worktree")
 
-    # 2. Capture after/ (best-effort; user may run capture separately)
+    # 2. Capture after/ — locked to BEFORE's framing so visual diff is valid.
+    #    Reads draft/before/capture_report.json (written by chamber.py init)
+    #    and passes its focus + distance back via --fixed-focus / --fixed-distance.
+    #    Without this, AABB-driven auto-framing diverges between captures
+    #    when the proposed change adds geometry (e.g. entrance animations).
     bundle = json.loads((draft_dir / "context_bundle.json").read_text(encoding="utf-8"))
     code_path = bundle.get("artifact", {}).get("code_path", "")
     if code_path and Path(GODOT_EXE).exists():
-        # Capture from the worktree project root
         cmd = [
             GODOT_EXE, "--path", str(worktree),
             "--xr-mode", "off", "--no-window",
@@ -423,9 +456,43 @@ def cmd_finalize(args) -> int:
             "--mode=artifact", f"--target={lookup}",
             f"--out=user://chamber_after_{lookup}",
         ]
-        print("  capture:  godot (after/)")
+        # Read framing from the BEFORE capture's report and pass it back.
+        before_report_path = draft_dir / "before" / "capture_report.json"
+        if before_report_path.exists():
+            try:
+                before_report = json.loads(
+                    before_report_path.read_text(encoding="utf-8")
+                )
+                framing = before_report.get("framing", {})
+                focus = framing.get("focus")
+                distance = framing.get("distance", -1.0)
+                if focus and len(focus) == 3 and float(distance) > 0.0:
+                    cmd.extend([
+                        f"--fixed-focus={focus[0]:.4f},{focus[1]:.4f},{focus[2]:.4f}",
+                        f"--fixed-distance={float(distance):.4f}",
+                    ])
+                    print("  capture:  godot (after/) — locked to BEFORE framing "
+                          f"(focus={focus}, dist={distance:.2f})")
+                else:
+                    print("  capture:  godot (after/) — BEFORE report has no "
+                          "framing; using auto-AABB (visual diff may be invalid)")
+            except Exception as e:
+                print(f"    !! could not read before framing: {e}", file=sys.stderr)
+        else:
+            print("  capture:  godot (after/) — no BEFORE report; auto-AABB "
+                  "(may produce mismatched framing)")
         try:
-            subprocess.run(cmd, check=False, capture_output=True, timeout=120)
+            subprocess.run(cmd, check=False, capture_output=True, timeout=180)
+            # Copy the after PNGs into the draft
+            user_data = Path(os.environ.get("APPDATA", "")) / "Godot/app_userdata/Ada Research Zero One" / f"chamber_after_{lookup}" / lookup
+            for angle in ["front", "left", "right", "top"]:
+                src = user_data / f"{angle}.png"
+                if src.exists():
+                    shutil.copy(str(src), str(draft_dir / "after" / f"{angle}.png"))
+            after_report_src = user_data / "capture_report.json"
+            if after_report_src.exists():
+                shutil.copy(str(after_report_src),
+                            str(draft_dir / "after" / "capture_report.json"))
         except Exception as e:
             print(f"    !! capture failed: {e}", file=sys.stderr)
     else:

@@ -21,6 +21,17 @@ var _target: String = ""         # map name or artifact lookup_name
 var _output_dir: String = "user://multi_shots"
 var _wait_seconds: float = 4.0   # wait before first capture
 var _settle_seconds: float = 0.5 # settle between angle switches
+# Optional framing override — set both to lock the camera to specific
+# focus + distance instead of auto-AABB. Used by the chamber to keep
+# before/after captures at identical framing (any AABB change from
+# entrance animations or proposed new geometry would otherwise cause
+# the camera to pull back, making visual diff invalid).
+var _fixed_distance: float = -1.0                # -1 sentinel: not set
+var _fixed_focus: Vector3 = Vector3(NAN, NAN, NAN)  # NAN sentinel: not set
+# Framing actually used (filled in during run, written to capture_report.json
+# so consumers can read it back to lock subsequent captures to the same view).
+var _used_distance: float = -1.0
+var _used_focus: Vector3 = Vector3.ZERO
 
 # ── Angle presets ─────────────────────────────────────────────────
 
@@ -94,6 +105,19 @@ func _parse_args() -> void:
 			"settle":
 				if value.is_valid_float():
 					_settle_seconds = maxf(0.1, float(value))
+			"fixed-distance":
+				if value.is_valid_float():
+					_fixed_distance = float(value)
+			"fixed-focus":
+				# Format: x,y,z (no spaces)
+				var parts: PackedStringArray = value.split(",")
+				if parts.size() == 3 and \
+						parts[0].is_valid_float() and \
+						parts[1].is_valid_float() and \
+						parts[2].is_valid_float():
+					_fixed_focus = Vector3(
+						float(parts[0]), float(parts[1]), float(parts[2])
+					)
 
 # ── Main runner ───────────────────────────────────────────────────
 
@@ -408,7 +432,7 @@ func _run_artifact_capture() -> void:
 			break
 	# Ground plane removed — was clipping interactive panels at low Y positions
 
-	# Compute AABB for framing
+	# Compute AABB for framing (default — auto-fit camera to artifact bounds)
 	var aabb: AABB = _get_combined_aabb(artifact as Node3D)
 	var orbit_focus: Vector3 = Vector3(0, 1.0, 0)
 	var base_distance: float = 5.0
@@ -420,6 +444,20 @@ func _run_artifact_capture() -> void:
 		print("capture_multi_angle [artifact]: AABB size=%s center=%s base_dist=%.1f" % [
 			aabb.size, orbit_focus, base_distance
 		])
+
+	# CLI overrides take precedence — used by the chamber to lock framing
+	# across before/after captures so visual diff stays valid.
+	if not is_nan(_fixed_focus.x):
+		orbit_focus = _fixed_focus
+		print("capture_multi_angle [artifact]: --fixed-focus -> %s" % orbit_focus)
+	if _fixed_distance > 0.0:
+		base_distance = _fixed_distance
+		print("capture_multi_angle [artifact]: --fixed-distance -> %.3f" % base_distance)
+
+	# Record the framing actually used so the chamber can read it back and
+	# lock subsequent captures to identical params.
+	_used_focus = orbit_focus
+	_used_distance = base_distance
 
 	# Wait for rendering (trails need time to build)
 	await create_timer(_wait_seconds).timeout
@@ -537,6 +575,15 @@ func _save_report(saved_count: int) -> void:
 		"output_dir": _output_dir,
 		"saved_count": saved_count,
 		"angles": MAP_ANGLES.size() if _mode == "map" else ARTIFACT_ANGLES.size(),
+		# Framing actually used. Consumers (chamber.py) can pass these back
+		# as --fixed-focus / --fixed-distance to lock subsequent captures
+		# to the same view — essential for valid before/after comparison.
+		"framing": {
+			"focus": [_used_focus.x, _used_focus.y, _used_focus.z],
+			"distance": _used_distance,
+			"focus_was_overridden": not is_nan(_fixed_focus.x),
+			"distance_was_overridden": _fixed_distance > 0.0,
+		},
 	}
 
 	var folder: String = _output_dir.path_join(_target)
