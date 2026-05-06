@@ -56,6 +56,10 @@ CHAMBER = ENCYCLOPEDIA / "public" / "chamber-runs"
 DRAFT = CHAMBER / "draft"
 APPROVED = CHAMBER / "approved"
 REJECTED = CHAMBER / "rejected"
+# Competitive auto-research: when an iteration explores N candidate approaches
+# in parallel, the runners-up land here as comparative training data. The
+# winner is also copied to approved/ for normal-flow consumers.
+ALTERNATIVES = CHAMBER / "alternatives"
 
 WORKTREES = REPO / ".claude" / "worktrees"
 REGISTRY_DIR = REPO / "commons" / "artifacts" / "registry"
@@ -600,10 +604,472 @@ def cmd_reject(args) -> int:
     return 0
 
 
-def cmd_list(args) -> int:
-    print("Chamber state:")
+# ─────────────────────────────────────────────────────────────────
+# Competitive auto-research — N candidates per iteration
+# ─────────────────────────────────────────────────────────────────
+#
+# Pattern: explore (seeds N drafts in parallel worktrees) → Claude fills
+# each with a different direction → finalize-explore (captures all, writes
+# patches, scaffolds comparison.md + score.json templates) → promote
+# (moves chosen winner to approved/, keeps full set in alternatives/ as
+# comparative training data).
+#
+# Layout for an in-flight explore (under draft/<artifact>/<ts>/):
+#   shared_context_bundle.json   one bundle, all candidates read it
+#   shared_meta.json             status="exploring", candidate count, directions
+#   before/                      shared BEFORE capture (auto-AABB)
+#   candidate_1/
+#     direction.md               brief: this candidate's distinct approach
+#     proposal.md                Claude fills before finalize-explore
+#     meta.json                  worktree path, label
+#     [after finalize-explore]
+#     changes.patch              git diff in the candidate's worktree
+#     after/                     captures locked to BEFORE's framing
+#     score.json                 rubric template for Claude to fill
+#   candidate_2/  ...
+#   candidate_3/  ...
+#   comparison.md                [after finalize-explore] verdict scaffold
+#
+# After promote, the directory moves to alternatives/<artifact>/<ts>/
+# and the winner is also flat-copied to approved/<artifact>/<ts>/ so
+# the normal-flow apply path doesn't have to know about candidates.
+
+DEFAULT_DIRECTIONS = ["behavior", "visual", "narrative"]
+
+
+def cmd_explore(args) -> int:
+    """Seed N candidate drafts for one artifact.
+
+    Each candidate gets its own git worktree on its own branch. All share
+    a single context_bundle and a single BEFORE capture (consistent across
+    candidates so visual comparison is fair).
+    """
+    lookup = args.artifact
+    n = max(1, min(int(args.candidates), 5))  # 1..5 per practical limit
+    if args.directions:
+        directions = [d.strip() for d in args.directions.split(",") if d.strip()]
+    else:
+        directions = DEFAULT_DIRECTIONS[:n]
+    while len(directions) < n:
+        directions.append(f"variant_{len(directions) + 1}")
+
+    print(f"chamber explore: {lookup} ({n} candidates)")
+    print("=" * 60)
+
+    # 1. Find artifact + build context (same as init).
+    entry = find_artifact_in_registry(lookup)
+    if entry is None:
+        print(f"  !! could not find '{lookup}' in any registry under {REGISTRY_DIR}",
+              file=sys.stderr)
+        return 1
+    print(f"  registry: {entry.get('_registry_file')}")
+    scene_path = entry.get("scene_path") or entry.get("scene") or ""
+    gd_path = gd_path_for_scene(scene_path)
+    gd_rel = gd_path.relative_to(REPO).as_posix() if gd_path else ""
+    print(f"  code:     {gd_rel or '(not found)'}")
+    identity = extract_identity(gd_path) if gd_path else {}
+    maps = find_maps_using(lookup)
+    sequences = []
+    seen_seqs: set = set()
+    for m in maps:
+        for s in find_sequences_for_map(m["name"]):
+            if s["id"] not in seen_seqs:
+                seen_seqs.add(s["id"])
+                sequences.append(s)
+
+    # 2. Create explore dir (lives under draft/ until promoted).
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%dT%H-%M")
+    explore_dir = DRAFT / lookup / timestamp
+    explore_dir.mkdir(parents=True, exist_ok=True)
+    (explore_dir / "before").mkdir(exist_ok=True)
+
+    bundle = {
+        "artifact": {
+            "lookup_name": lookup,
+            "code_path":   gd_rel,
+            "scene_path":  scene_path,
+            "category":    entry.get("_registry_category"),
+            "registry_entry": {k: v for k, v in entry.items()
+                               if not k.startswith("_")},
+            "identity":    identity,
+        },
+        "placement": {
+            "sequences": sequences,
+            "maps":      maps,
+        },
+        "constraints": {
+            "curriculum_honesty": [
+                "no random before seq 7",
+                "no noise before seq 8",
+                "no cellular automata before seq 9",
+                "no fractals before seq 10",
+                "no L-systems before seq 11",
+                "no DNA-driven procgen before seq 12",
+                "no soft bodies before seq 13",
+                "no flocking before seq 14",
+            ]
+        },
+        "exploration": {
+            "candidate_count": n,
+            "directions": directions,
+        },
+        "_meta": {"generated_by": "chamber.py explore", "timestamp": timestamp},
+    }
+    (explore_dir / "shared_context_bundle.json").write_text(
+        json.dumps(bundle, indent=2), encoding="utf-8"
+    )
+
+    # 3. Shared BEFORE capture from main (auto-AABB framing).
+    if gd_path and Path(GODOT_EXE).exists():
+        before_user_dir = f"chamber_explore_{lookup}_{timestamp.replace('-', '').replace('T', '_')}"
+        cmd = [
+            GODOT_EXE, "--path", str(REPO),
+            "--xr-mode", "off", "--no-window",
+            "--script", CAPTURE_SCRIPT, "--",
+            "--mode=artifact", f"--target={lookup}",
+            f"--out=user://{before_user_dir}",
+        ]
+        print("  before:   capturing shared BEFORE from main (auto-AABB)...")
+        try:
+            subprocess.run(cmd, check=False, capture_output=True, timeout=180)
+            user_data = Path(os.environ.get("APPDATA", "")) / "Godot/app_userdata/Ada Research Zero One" / before_user_dir / lookup
+            for angle in ["front", "left", "right", "top"]:
+                src = user_data / f"{angle}.png"
+                if src.exists():
+                    shutil.copy(str(src), str(explore_dir / "before" / f"{angle}.png"))
+            report_src = user_data / "capture_report.json"
+            if report_src.exists():
+                shutil.copy(str(report_src), str(explore_dir / "before" / "capture_report.json"))
+            n_pngs = len(list((explore_dir / "before").glob("*.png")))
+            print(f"            -> {n_pngs} PNGs + capture_report.json")
+        except Exception as e:
+            print(f"    !! before capture failed: {e}", file=sys.stderr)
+
+    # 4. Per-candidate worktree + scaffold dir.
+    candidate_paths: list[Path] = []
+    for i in range(1, n + 1):
+        cand_dir = explore_dir / f"candidate_{i}"
+        cand_dir.mkdir(exist_ok=True)
+        (cand_dir / "after").mkdir(exist_ok=True)
+        wt_path = WORKTREES / f"chamber-{lookup}-{timestamp}-c{i}"
+        wt_branch = f"chamber/{lookup}-{timestamp}-c{i}"
+        if wt_path.exists():
+            print(f"  candidate_{i}: worktree exists, reusing {_short_path(wt_path)}")
+        else:
+            try:
+                subprocess.run(
+                    ["git", "worktree", "add", str(wt_path), "-b", wt_branch],
+                    cwd=REPO, check=True, capture_output=True, text=True
+                )
+                print(f"  candidate_{i}: worktree {_short_path(wt_path)}")
+            except subprocess.CalledProcessError as e:
+                print(f"    !! git worktree add failed: {e.stderr}", file=sys.stderr)
+                continue
+
+        direction = directions[i - 1] if i - 1 < len(directions) else ""
+        (cand_dir / "direction.md").write_text(
+            f"# Candidate {i} — direction: {direction}\n\n"
+            f"This candidate explores `{direction}` as its distinct approach.\n"
+            f"Edit the artifact in:\n  {wt_path.as_posix()}/{gd_rel}\n\n"
+            f"Curriculum-honest at seq 1: zero randomness, only position/scale\n"
+            f"/translation/easing math.\n\n"
+            f"Differentiate from sibling candidates — pick a genuinely different\n"
+            f"angle, not three flavours of the same idea.\n",
+            encoding="utf-8",
+        )
+        meta = {
+            "candidate": i,
+            "direction": direction,
+            "lookup_name": lookup,
+            "timestamp": timestamp,
+            "status": "exploring",
+            "worktree": wt_path.relative_to(REPO).as_posix(),
+            "created_at": datetime.datetime.now().isoformat(timespec="seconds"),
+        }
+        (cand_dir / "meta.json").write_text(json.dumps(meta, indent=2), encoding="utf-8")
+        candidate_paths.append(cand_dir)
+
+    # Shared meta (the umbrella for the explore).
+    shared_meta = {
+        "lookup_name": lookup,
+        "timestamp":   timestamp,
+        "status":      "exploring",
+        "candidate_count": n,
+        "directions":  directions,
+        "created_at":  datetime.datetime.now().isoformat(timespec="seconds"),
+    }
+    (explore_dir / "shared_meta.json").write_text(
+        json.dumps(shared_meta, indent=2), encoding="utf-8"
+    )
+
     print()
-    for label, root in [("draft", DRAFT), ("approved", APPROVED), ("rejected", REJECTED)]:
+    print(f"  explore root: {_short_path(explore_dir)}")
+    print()
+    print("Next steps for Claude:")
+    print(f"  1. Read {_short_path(explore_dir)}/shared_context_bundle.json")
+    print(f"  2. For each candidate i in 1..{n}:")
+    print(f"       Read candidate_<i>/direction.md, edit the worktree")
+    print(f"       printed above with that candidate's distinct approach.")
+    print(f"  3. python tools/chamber.py finalize-explore {lookup}")
+    return 0
+
+
+def cmd_finalize_explore(args) -> int:
+    """Capture all candidates with locked framing, generate patches,
+    scaffold comparison.md and per-candidate score.json."""
+    lookup = args.artifact
+    explore_dir = _latest_draft(lookup)
+    if explore_dir is None:
+        print(f"  !! no draft for '{lookup}'", file=sys.stderr)
+        return 1
+    shared_meta_path = explore_dir / "shared_meta.json"
+    if not shared_meta_path.exists():
+        print(f"  !! '{_short_path(explore_dir)}' is not an exploration "
+              f"(missing shared_meta.json). Use `chamber finalize` for "
+              f"single-candidate drafts.", file=sys.stderr)
+        return 1
+
+    shared_meta = json.loads(shared_meta_path.read_text(encoding="utf-8"))
+    print(f"chamber finalize-explore: {_short_path(explore_dir)}")
+
+    # Read shared BEFORE framing (mirrors single-candidate finalize).
+    framing = None
+    before_report = explore_dir / "before" / "capture_report.json"
+    if before_report.exists():
+        try:
+            framing = json.loads(before_report.read_text(encoding="utf-8")).get("framing")
+        except Exception:
+            pass
+
+    bundle = json.loads((explore_dir / "shared_context_bundle.json").read_text(encoding="utf-8"))
+    code_path = bundle.get("artifact", {}).get("code_path", "")
+
+    candidate_dirs = sorted([p for p in explore_dir.iterdir()
+                             if p.is_dir() and p.name.startswith("candidate_")])
+    if not candidate_dirs:
+        print(f"  !! no candidate_* directories found", file=sys.stderr)
+        return 1
+
+    for cand_dir in candidate_dirs:
+        cand_meta = json.loads((cand_dir / "meta.json").read_text(encoding="utf-8"))
+        wt = REPO / cand_meta["worktree"]
+        if not wt.exists():
+            print(f"  {cand_dir.name}: !! worktree missing ({cand_meta['worktree']})")
+            continue
+
+        # Patch
+        try:
+            patch = subprocess.run(
+                ["git", "diff", "--no-color"],
+                cwd=wt, check=True, capture_output=True, text=True
+            ).stdout
+        except subprocess.CalledProcessError as e:
+            print(f"  {cand_dir.name}: !! git diff failed: {e.stderr}", file=sys.stderr)
+            continue
+        (cand_dir / "changes.patch").write_text(patch, encoding="utf-8")
+        n_lines = patch.count("\n")
+        print(f"  {cand_dir.name}: patch {n_lines} lines", end="")
+
+        # Capture AFTER with locked framing.
+        if code_path and Path(GODOT_EXE).exists():
+            cmd = [
+                GODOT_EXE, "--path", str(wt),
+                "--xr-mode", "off", "--no-window",
+                "--script", CAPTURE_SCRIPT, "--",
+                "--mode=artifact", f"--target={lookup}",
+                f"--out=user://chamber_explore_after_{lookup}_{cand_dir.name}",
+            ]
+            if framing and framing.get("focus") and framing.get("distance", 0) > 0:
+                f_xyz = framing["focus"]
+                cmd.extend([
+                    f"--fixed-focus={f_xyz[0]:.4f},{f_xyz[1]:.4f},{f_xyz[2]:.4f}",
+                    f"--fixed-distance={float(framing['distance']):.4f}",
+                ])
+            try:
+                subprocess.run(cmd, check=False, capture_output=True, timeout=180)
+                user_data = Path(os.environ.get("APPDATA", "")) / "Godot/app_userdata/Ada Research Zero One" / f"chamber_explore_after_{lookup}_{cand_dir.name}" / lookup
+                for angle in ["front", "left", "right", "top"]:
+                    src = user_data / f"{angle}.png"
+                    if src.exists():
+                        shutil.copy(str(src), str(cand_dir / "after" / f"{angle}.png"))
+                n_pngs = len(list((cand_dir / "after").glob("*.png")))
+                print(f", {n_pngs} after captures")
+            except Exception as e:
+                print(f", capture failed: {e}")
+        else:
+            print()
+
+        # Scaffold proposal.md if missing
+        prop_path = cand_dir / "proposal.md"
+        if not prop_path.exists():
+            prop_path.write_text(
+                f"# Candidate {cand_meta['candidate']} — direction: {cand_meta.get('direction','')}\n"
+                f"artifact: {code_path}\n"
+                f"date:     {datetime.datetime.now().isoformat(timespec='minutes')}\n\n"
+                f"## What this candidate explores\n<2-5 sentences describing this candidate's specific approach.>\n\n"
+                f"## Why this direction\n<connect to the @identity essence and the curriculum stage.>\n\n"
+                f"## Trade-offs\n<what this candidate gains, what it costs, what it forecloses.>\n",
+                encoding="utf-8",
+            )
+
+        # Scaffold score.json (template Claude fills with rubric reasoning)
+        score_path = cand_dir / "score.json"
+        if not score_path.exists():
+            score_path.write_text(json.dumps({
+                "candidate": cand_meta["candidate"],
+                "direction": cand_meta.get("direction", ""),
+                "rubrics": {
+                    "visual_clarity":      {"score": None, "note": "<does it read in 4-angle captures?>"},
+                    "curriculum_honesty":  {"score": None, "note": "<uses only what's unlocked at this seq?>"},
+                    "narrative_fit":       {"score": None, "note": "<deepens or contradicts the @identity?>"},
+                    "novelty_vs_project":  {"score": None, "note": "<echoes existing patterns or duplicates them?>"},
+                    "performance_cost":    {"score": None, "note": "<draw calls / LOD / frame-time impact>"},
+                    "reversibility":       {"score": None, "note": "<patch size; can future iterations undo cleanly?>"},
+                },
+                "weighted_total": None,
+                "context_sources_read": [],
+                "context_token_estimate": None,
+            }, indent=2), encoding="utf-8")
+
+    # Scaffold comparison.md (umbrella verdict)
+    comp_path = explore_dir / "comparison.md"
+    if not comp_path.exists():
+        rows = "\n".join(
+            f"| candidate_{i+1} | {shared_meta.get('directions',['?']*5)[i] if i < len(shared_meta.get('directions',[])) else '?'} | _filled by Claude_ | _filled_ |"
+            for i in range(shared_meta["candidate_count"])
+        )
+        comp_path.write_text(
+            f"# Comparison: {lookup} — {shared_meta['timestamp']}\n\n"
+            f"## Candidates explored\n\n"
+            f"| Candidate | Direction | Weighted score | One-line verdict |\n"
+            f"|---|---|---|---|\n{rows}\n\n"
+            f"## Visual comparison\n\n"
+            f"For each angle (front/left/right/top), the candidate captures sit\n"
+            f"side-by-side with the shared BEFORE in the encyclopedia at\n"
+            f"`/chamber-runs/draft/{lookup}/{shared_meta['timestamp']}/...`.\n\n"
+            f"## Verdict\n\n"
+            f"<Claude fills: which candidate wins, why, what the runners-up\n"
+            f"contributed that the winner couldn't, what's worth carrying forward\n"
+            f"as a future iteration even though it didn't win this round.>\n\n"
+            f"## Promote with\n\n"
+            f"```bash\n"
+            f"python tools/chamber.py promote {lookup} --winner=<i>\n"
+            f"```\n",
+            encoding="utf-8",
+        )
+
+    print()
+    print(f"Review:  {_short_path(explore_dir)}")
+    print(f"Verdict: fill in candidate_*/score.json + comparison.md")
+    print(f"Promote: python tools/chamber.py promote {lookup} --winner=<i>")
+    return 0
+
+
+def cmd_promote(args) -> int:
+    """Pick a candidate as the winner. Copy its bits into approved/ (flat
+    layout, normal-flow consumers see no candidate structure) and move the
+    whole exploration into alternatives/ (full comparative record kept)."""
+    lookup = args.artifact
+    winner = int(args.winner)
+    explore_dir = _latest_draft(lookup)
+    if explore_dir is None:
+        print(f"  !! no draft for '{lookup}'", file=sys.stderr)
+        return 1
+    shared_meta_path = explore_dir / "shared_meta.json"
+    if not shared_meta_path.exists():
+        print(f"  !! '{_short_path(explore_dir)}' is not an exploration",
+              file=sys.stderr)
+        return 1
+
+    winner_dir = explore_dir / f"candidate_{winner}"
+    if not winner_dir.is_dir():
+        print(f"  !! candidate_{winner} not found", file=sys.stderr)
+        return 1
+
+    shared_meta = json.loads(shared_meta_path.read_text(encoding="utf-8"))
+    timestamp = shared_meta["timestamp"]
+
+    # 1. Flat-copy winner into approved/<lookup>/<ts>/
+    approved_target = APPROVED / lookup / timestamp
+    approved_target.parent.mkdir(parents=True, exist_ok=True)
+    approved_target.mkdir(exist_ok=True)
+    for fname in ["proposal.md", "changes.patch"]:
+        src = winner_dir / fname
+        if src.exists():
+            shutil.copy(str(src), str(approved_target / fname))
+    if (winner_dir / "after").is_dir():
+        if (approved_target / "after").exists():
+            shutil.rmtree(approved_target / "after")
+        shutil.copytree(str(winner_dir / "after"), str(approved_target / "after"))
+    if (explore_dir / "before").is_dir():
+        if (approved_target / "before").exists():
+            shutil.rmtree(approved_target / "before")
+        shutil.copytree(str(explore_dir / "before"), str(approved_target / "before"))
+    # Context bundle + meta — adapt to single-iteration shape so the API
+    # serves it like any other approved entry.
+    if (explore_dir / "shared_context_bundle.json").exists():
+        shutil.copy(str(explore_dir / "shared_context_bundle.json"),
+                    str(approved_target / "context_bundle.json"))
+    approved_meta = {
+        "lookup_name": lookup,
+        "timestamp":   timestamp,
+        "status":      "approved",
+        "rating":      args.rating,
+        "decision":    "approve",
+        "decided_at":  datetime.datetime.now().isoformat(timespec="seconds"),
+        "promoted_from": f"alternatives/{lookup}/{timestamp}/candidate_{winner}",
+        "candidates_considered": shared_meta["candidate_count"],
+    }
+    (approved_target / "meta.json").write_text(
+        json.dumps(approved_meta, indent=2), encoding="utf-8"
+    )
+    # alt_summary linkback so future readers know alternatives exist
+    (approved_target / "alt_summary.md").write_text(
+        f"# Winner: candidate_{winner}\n\n"
+        f"This proposal won an exploration of {shared_meta['candidate_count']} "
+        f"candidates on {timestamp}.\n\n"
+        f"Full comparison + runners-up:\n"
+        f"  alternatives/{lookup}/{timestamp}/comparison.md\n",
+        encoding="utf-8",
+    )
+
+    # 2. Move the entire explore_dir into alternatives/
+    alt_target = ALTERNATIVES / lookup / timestamp
+    alt_target.parent.mkdir(parents=True, exist_ok=True)
+    if alt_target.exists():
+        shutil.rmtree(alt_target)
+    shutil.move(str(explore_dir), str(alt_target))
+    # Mark which candidate won inside the alternatives record
+    (alt_target / "winner.txt").write_text(
+        f"candidate_{winner}\n", encoding="utf-8"
+    )
+
+    # 3. Cleanup all candidate worktrees (they're committed history now)
+    for cand_dir in sorted(alt_target.glob("candidate_*")):
+        try:
+            cand_meta = json.loads((cand_dir / "meta.json").read_text(encoding="utf-8"))
+            wt = REPO / cand_meta["worktree"]
+            if wt.exists():
+                subprocess.run(
+                    ["git", "worktree", "remove", "--force", str(wt)],
+                    cwd=REPO, check=False, capture_output=True
+                )
+        except Exception:
+            pass
+
+    print(f"  approved -> {_short_path(approved_target)}  (winner: candidate_{winner})")
+    print(f"  alternatives -> {_short_path(alt_target)}  (full comparison record)")
+    return 0
+
+
+def cmd_list(args) -> int:
+    print()
+    for label, root in [
+        ("draft", DRAFT),
+        ("approved", APPROVED),
+        ("rejected", REJECTED),
+        ("alternatives", ALTERNATIVES),
+    ]:
         if not root.is_dir():
             print(f"  {label:9s}: 0")
             continue
@@ -690,7 +1156,32 @@ def main() -> int:
     p.add_argument("--tag", default="", help="visual-cluttered | curriculum-broken | ...")
     p.set_defaults(func=cmd_reject)
 
-    p = sub.add_parser("list", help="show drafts/approved/rejected counts")
+    p = sub.add_parser("explore",
+                       help="seed N candidate drafts in parallel worktrees")
+    p.add_argument("artifact")
+    p.add_argument("--candidates", "-n", type=int, default=3,
+                   help="number of candidate approaches (1..5, default 3)")
+    p.add_argument("--directions",
+                   help="comma-separated list of distinct directions per "
+                        "candidate (default: behavior,visual,narrative)")
+    p.set_defaults(func=cmd_explore)
+
+    p = sub.add_parser("finalize-explore",
+                       help="capture all candidates with locked framing, "
+                            "write patches + comparison.md scaffold")
+    p.add_argument("artifact")
+    p.set_defaults(func=cmd_finalize_explore)
+
+    p = sub.add_parser("promote",
+                       help="pick a candidate as winner — flat-copy to "
+                            "approved/, move full set to alternatives/")
+    p.add_argument("artifact")
+    p.add_argument("--winner", "-w", required=True, type=int,
+                   help="candidate number (1-indexed)")
+    p.add_argument("--rating", choices=["gold", "silver", "bronze"], default=None)
+    p.set_defaults(func=cmd_promote)
+
+    p = sub.add_parser("list", help="show drafts/approved/rejected/alternatives counts")
     p.set_defaults(func=cmd_list)
 
     args = parser.parse_args()

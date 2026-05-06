@@ -180,6 +180,82 @@ The rejected dir is **negative training data** — preserved precisely because t
 attempt didn't work. Patterns in rejection reasons surface what categories of
 proposal don't fit this project.
 
+## Competitive auto-research — N candidates per iteration
+
+A single iteration can explore *multiple* approaches in parallel. Three
+extra commands plus a new `alternatives/` state run the loop:
+
+```
+explore <artifact> [-n 3] [--directions=behavior,visual,narrative]
+                                                 │
+                                                 ▼
+   draft/<artifact>/<ts>/                        ← scaffold
+     shared_context_bundle.json                  one bundle, all candidates read it
+     shared_meta.json                            status="exploring", candidate_count, directions
+     before/                                     shared BEFORE capture (auto-AABB)
+     candidate_1/   direction.md, meta.json      ← worktree per candidate
+     candidate_2/   direction.md, meta.json
+     candidate_3/   direction.md, meta.json
+                                                 │
+   [Claude edits each worktree differently]      │
+                                                 ▼
+finalize-explore <artifact>
+                                                 │
+                                                 ▼
+   each candidate_*/                             ← captures + patches written
+     changes.patch                                  (with locked framing — fair diff)
+     after/{4 angles}.png
+     proposal.md  (scaffold; Claude fills)
+     score.json   (rubric template; Claude fills)
+   comparison.md                                 ← umbrella verdict scaffold
+                                                 │
+   [Claude fills score.json + comparison.md      │
+    with rubric reasoning + verdict]             │
+                                                 ▼
+promote <artifact> --winner=<i> [--rating=gold]
+                                                 │
+                                                 ▼
+   approved/<artifact>/<ts>/                     ← winner flat-copied (normal flow)
+     proposal.md, changes.patch, before/, after/
+     meta.json   (status=approved, promoted_from=alternatives/.../candidate_<i>)
+     alt_summary.md  (linkback to full comparison)
+
+   alternatives/<artifact>/<ts>/                 ← whole set kept as comparative record
+     comparison.md
+     before/, candidate_1/, candidate_2/, candidate_3/
+     winner.txt   (just "candidate_<i>")
+```
+
+The winner appears in `approved/` so existing apply paths and the `/chamber`
+page see it as any other approval. The full record (winning + losing
+candidates, side-by-side captures, rubric scores, the verdict) lives in
+`alternatives/` as comparative training data — far more valuable in
+aggregate than a single approved proposal alone.
+
+### Score rubric (per candidate)
+
+| Rubric | What it weights |
+|---|---|
+| visual_clarity | does it read in 4-angle captures? is the artifact's *what-it-is* legible? |
+| curriculum_honesty | uses only what's unlocked at this sequence |
+| narrative_fit | deepens or contradicts the @identity essence |
+| novelty_vs_project | echoes existing patterns (good — composability) or duplicates them (bad — drift) |
+| performance_cost | draw calls, LOD, frame-time impact |
+| reversibility | patch size + file count; future iterations can undo cleanly? |
+
+Each candidate's `score.json` records both the per-rubric scores and the
+list of context sources Claude read while generating that candidate. Over
+time the corpus answers: *which kinds of context produced winners?*
+
+### When to use explore vs init
+
+- **`init`** — single-approach iteration. Use for clear small fixes,
+  refactors with one obvious shape, or when the design is already decided.
+- **`explore`** — multi-candidate iteration. Use for high-stakes artifacts
+  (canonical primitives, on-spine artifacts, anything referenced widely),
+  when the design space is open, or when previous iterations on the
+  artifact have left genuine alternatives unresolved.
+
 ## Lifecycle
 
 ```
