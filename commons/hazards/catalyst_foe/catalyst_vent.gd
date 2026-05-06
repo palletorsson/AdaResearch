@@ -13,11 +13,11 @@
 # bodies up to wave_size, then goes quiet. The visual is a tall grey
 # pillar so authors can see vent placement from any camera angle.
 extends Node3D
+class_name CatalystVent
 
 # Verbose emit logging. Off by default — flip on locally when diagnosing
 # vent rate / wave size / spawn position issues.
 const DEBUG_LOG: bool = false
-class_name CatalystVent
 
 const FOE_SCENE := preload("res://commons/hazards/catalyst_foe/catalyst_foe.tscn")
 
