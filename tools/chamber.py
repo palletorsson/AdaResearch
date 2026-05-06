@@ -44,10 +44,19 @@ from pathlib import Path
 # ─────────────────────────────────────────────────────────────────
 
 REPO = Path(__file__).resolve().parent.parent
-CHAMBER = REPO / "data" / "chamber"
+
+# Chamber research material (proposals, patches, captures) lives in the
+# encyclopedia, NOT in this Godot project. Override via env var if your
+# encyclopedia clone is somewhere else.
+ENCYCLOPEDIA = Path(os.environ.get(
+    "ADA_ENCYCLOPEDIA_PATH",
+    r"C:\Users\palle\Documents\GitHub\ada_encyclopedia",
+))
+CHAMBER = ENCYCLOPEDIA / "public" / "chamber-runs"
 DRAFT = CHAMBER / "draft"
 APPROVED = CHAMBER / "approved"
 REJECTED = CHAMBER / "rejected"
+
 WORKTREES = REPO / ".claude" / "worktrees"
 REGISTRY_DIR = REPO / "commons" / "artifacts" / "registry"
 SEQUENCES_DIR = REPO / "commons" / "maps" / "sequences"
@@ -260,7 +269,7 @@ def cmd_init(args) -> int:
     print(f"  scene:    {scene_path}")
     gd_path = gd_path_for_scene(scene_path)
     if gd_path:
-        gd_rel = gd_path.relative_to(REPO).as_posix()
+        gd_rel = _short_path(gd_path)
         print(f"  code:     {gd_rel}")
     else:
         gd_rel = ""
@@ -365,7 +374,7 @@ def cmd_init(args) -> int:
     # 6. Worktree
     worktree_path = WORKTREES / f"chamber-{lookup}-{timestamp}"
     worktree_branch = f"chamber/{lookup}-{timestamp}"
-    print(f"  worktree: {worktree_path.relative_to(REPO).as_posix()}")
+    print(f"  worktree: {_short_path(worktree_path)}")
     if worktree_path.exists():
         print("    (already exists — reusing)")
     else:
@@ -385,7 +394,7 @@ def cmd_init(args) -> int:
         "timestamp":   timestamp,
         "status":      "draft",
         "created_at":  datetime.datetime.now().isoformat(timespec="seconds"),
-        "worktree":    worktree_path.relative_to(REPO).as_posix() \
+        "worktree":    _short_path(worktree_path) \
                        if worktree_path.exists() else None,
         "rating":      None,
         "decision":    None,
@@ -395,10 +404,10 @@ def cmd_init(args) -> int:
 
     # 7. Print next steps
     print()
-    print(f"  draft:    {draft_dir.relative_to(REPO).as_posix()}")
+    print(f"  draft:    {_short_path(draft_dir)}")
     print()
     print("Next steps for Claude:")
-    print(f"  1. Read {draft_dir.relative_to(REPO).as_posix()}/context_bundle.json")
+    print(f"  1. Read {_short_path(draft_dir)}/context_bundle.json")
     print(f"  2. Edit the artifact in the worktree:")
     if gd_rel:
         print(f"     {worktree_path.as_posix()}/{gd_rel}")
@@ -417,7 +426,7 @@ def cmd_finalize(args) -> int:
     if draft_dir is None:
         print(f"  !! no draft for '{lookup}' under {DRAFT}", file=sys.stderr)
         return 1
-    print(f"chamber finalize: {draft_dir.relative_to(REPO).as_posix()}")
+    print(f"chamber finalize: {_short_path(draft_dir)}")
 
     meta = _read_meta(draft_dir)
     worktree = REPO / meta.get("worktree", "") if meta.get("worktree") else None
@@ -519,20 +528,20 @@ def cmd_finalize(args) -> int:
             + "## Captures\nbefore/{front,left,right,top}.png\n"
             + "after/{front,left,right,top}.png\n\n"
             + "## Apply with\n"
-            + "git apply data/chamber/draft/%s/%s/changes.patch\n"
+            + "git apply ${ADA_ENCYCLOPEDIA_PATH}/public/chamber-runs/draft/%s/%s/changes.patch\n"
             % (lookup, draft_dir.name)
             + "  OR\n"
             + "/ada-artifact-improver %s --proposal=<path>\n" % lookup,
             encoding="utf-8",
         )
-        print(f"  proposal: scaffolded {prop_path.relative_to(REPO).as_posix()} "
+        print(f"  proposal: scaffolded {_short_path(prop_path)} "
               "— Claude should fill in the body")
     else:
-        print(f"  proposal: {prop_path.relative_to(REPO).as_posix()} (already present)")
+        print(f"  proposal: {_short_path(prop_path)} (already present)")
 
     print()
     print("Review:")
-    print(f"  {draft_dir.relative_to(REPO).as_posix()}")
+    print(f"  {_short_path(draft_dir)}")
     print(f"Approve: python tools/chamber.py approve {lookup}")
     print(f"Reject:  python tools/chamber.py reject  {lookup} --reason=\"...\"")
     return 0
@@ -550,7 +559,7 @@ def cmd_approve(args) -> int:
     _update_meta(target, status="approved", decision="approve",
                  decided_at=datetime.datetime.now().isoformat(timespec="seconds"),
                  rating=args.rating)
-    print(f"  approved -> {target.relative_to(REPO).as_posix()}")
+    print(f"  approved -> {_short_path(target)}")
     return 0
 
 
@@ -587,7 +596,7 @@ def cmd_reject(args) -> int:
                 print(f"  worktree removed: {wt_rel}")
             except subprocess.CalledProcessError:
                 print(f"  ⚠ worktree remove failed; rm manually: {wt_rel}")
-    print(f"  rejected -> {target.relative_to(REPO).as_posix()}")
+    print(f"  rejected -> {_short_path(target)}")
     return 0
 
 
@@ -614,6 +623,20 @@ def cmd_list(args) -> int:
 # ─────────────────────────────────────────────────────────────────
 # Internals
 # ─────────────────────────────────────────────────────────────────
+
+def _short_path(p: Path) -> str:
+    """Display a path relative to whichever known root contains it.
+    Chamber paths land under ENCYCLOPEDIA; worktrees under REPO; everything
+    else falls back to the absolute path."""
+    p = Path(p).resolve()
+    for root, prefix in [(ENCYCLOPEDIA, "encyclopedia"), (REPO, "godot")]:
+        try:
+            rel = p.relative_to(root.resolve())
+            return f"{prefix}/{rel.as_posix()}"
+        except ValueError:
+            continue
+    return str(p)
+
 
 def _latest_draft(lookup: str) -> Path | None:
     art_dir = DRAFT / lookup

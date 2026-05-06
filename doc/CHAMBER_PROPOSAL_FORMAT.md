@@ -4,6 +4,12 @@
 > without polluting*. Each iteration produces a self-contained, portable,
 > replayable record. The repo's `dev` branch never sees rejected ideas.
 
+> **Storage:** chamber research material (proposals, patches, captures) lives
+> in `ada_encyclopedia/public/chamber-runs/`, NOT in this Godot project. The
+> Godot project stays lean; the encyclopedia owns research output. The
+> chamber CLI (`tools/chamber.py`) resolves the encyclopedia path from
+> `$ADA_ENCYCLOPEDIA_PATH` (defaults to `~/Documents/GitHub/ada_encyclopedia`).
+
 ## Concept
 
 Each chamber iteration generates **three artifacts** stored together:
@@ -35,7 +41,7 @@ The combination supports three reapply modes:
 ## Directory layout
 
 ```
-data/chamber/
+ada_encyclopedia/public/chamber-runs/
 ├── README.md
 ├── draft/            ← in-progress, not yet judged
 │   └── <artifact>/
@@ -89,7 +95,7 @@ before/{front,left,right,top}.png
 after/{front,left,right,top}.png
 
 ## Apply with
-git apply data/chamber/<status>/<artifact>/<timestamp>/changes.patch
+git apply ada_encyclopedia/public/chamber-runs/<status>/<artifact>/<timestamp>/changes.patch
   OR
 /ada-artifact-improver <artifact> --proposal=<path-to-proposal.md>
 ```
@@ -177,7 +183,7 @@ proposal don't fit this project.
 ## Lifecycle
 
 ```
-init        ──► data/chamber/draft/<artifact>/<ts>/
+init        ──► ada_encyclopedia/public/chamber-runs/draft/<artifact>/<ts>/
               + worktree at .claude/worktrees/chamber-<artifact>-<ts>/
               + before/ captures
               + context_bundle.json
@@ -226,7 +232,7 @@ A proposal that uses noise at seq 4 should be auto-rejected before captures.
 python tools/chamber.py init point
 
 # 2. Read context_bundle.json — understand what the artifact does and where it sits
-cat data/chamber/draft/point/2026-05-06T14-23/context_bundle.json
+cat ada_encyclopedia/public/chamber-runs/draft/point/2026-05-06T14-23/context_bundle.json
 
 # 3. (As Claude in a session) edit point.gd in the worktree
 #    .claude/worktrees/chamber-point-2026-05-06T14-23/algorithms/.../point.gd

@@ -351,3 +351,9 @@ commons/maps/*/map_top.png
 commons/maps/*/*.jpg
 doc/reports/map_comparisons/
 doc/reports/map_strategies/
+
+# Chamber research material (proposals, patches, captures) lives in
+# ada_encyclopedia/public/chamber-runs/, NOT here. This guard catches
+# accidental writes to the Godot repo in case chamber.py is run with a
+# misconfigured ADA_ENCYCLOPEDIA_PATH.
+/data/chamber/
