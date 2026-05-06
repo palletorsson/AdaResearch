@@ -1,0 +1,160 @@
+{
+  "artifact": {
+    "lookup_name": "point",
+    "code_path": "commons/primitives/point/point.gd",
+    "scene_path": "res://commons/primitives/point/point.tscn",
+    "category": "primitives",
+    "registry_entry": {
+      "category": "unknown",
+      "complexity": "beginner",
+      "description": "Pickable point sphere that continuously displays its world coordinates with a floating label.",
+      "dev_themes": [
+        "core",
+        "primitives"
+      ],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "point",
+      "map_ready": true,
+      "map_sequences": [],
+      "name": "1.0 A Point",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "scene": "res://commons/primitives/point/point.tscn",
+      "size_group": "compact",
+      "tags": [
+        "geometry"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "unlit",
+          "shading_model": "unshaded",
+          "key_properties": [
+            "emission"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "pedestal",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": true,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry"
+      },
+      "measurements": {
+        "aabb_size": [
+          0.05,
+          0.05,
+          0.02
+        ],
+        "aabb_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "grid_cells": [
+          1.0,
+          1.0
+        ],
+        "max_dimension_m": 0.05,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "spatial_profile": {
+        "dir_group": "omni",
+        "range": 1,
+        "density": "medium",
+        "min_clearance": 1,
+        "stack_priority": 0.5,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.189285Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "identity": {}
+  },
+  "placement": {
+    "sequences": [
+      {
+        "id": "gallery",
+        "file": "gallery.json"
+      }
+    ],
+    "maps": [
+      {
+        "name": "Gallery_Primitives_3",
+        "positions": [
+          [
+            6,
+            0,
+            4
+          ]
+        ]
+      }
+    ],
+    "scenes_before": [],
+    "scenes_after": []
+  },
+  "neighbors": {
+    "siblings_in_scene": [],
+    "siblings_in_sequence": [],
+    "related_by_essence": []
+  },
+  "constraints": {
+    "curriculum_honesty": [
+      "no random before seq 7",
+      "no noise before seq 8",
+      "no cellular automata before seq 9",
+      "no fractals before seq 10",
+      "no L-systems before seq 11",
+      "no DNA-driven procgen before seq 12",
+      "no soft bodies before seq 13",
+      "no flocking before seq 14"
+    ]
+  },
+  "history": {
+    "recent_changes": [],
+    "open_questions": []
+  },
+  "_meta": {
+    "generated_by": "chamber.py init",
+    "timestamp": "2026-05-06T13-21"
+  }
+}

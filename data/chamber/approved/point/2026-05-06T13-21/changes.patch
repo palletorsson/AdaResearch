@@ -1,0 +1,245 @@
+diff --git a/commons/maps/Gallery_Primitives_3/map_data.json b/commons/maps/Gallery_Primitives_3/map_data.json
+index e7752425d..8f8b6eb0e 100644
+--- a/commons/maps/Gallery_Primitives_3/map_data.json
++++ b/commons/maps/Gallery_Primitives_3/map_data.json
+@@ -124,7 +124,7 @@
+       [" "," ","request_note:0:1.5#text:parametric surface"," ","request_note:0:1.5#text:pickup cube combo"," ","request_note:0:1.5#text:pickup cube scaling"," ","request_note:0:1.5#text:plane"," "," "],
+       [" "," ","parametric_surface:0:-0.5"," ","pickup_cube_combo:0:-0.5"," ","pickup_cube_scaling:0:-0.5"," ","plane:0:-0.5"," "," "],
+       [" "," ","request_note:0:1.5#text:platonic demo"," ","request_note:0:1.5#text:plus lines"," ","request_note:0:1.5#text:point"," ","request_note:0:1.5#text:point collection"," "," "],
+-      [" "," ","platonic_demo:0:-0.5"," ","plus_lines:0:-0.5"," ","point:0:-0.5"," ","point_collection:0:-0.5"," "," "],
++      [" "," ","platonic_demo:0:-0.5"," ","plus_lines:0:-0.5"," ","point:0:-0.5#entrance:gravity"," ","point_collection:0:-0.5"," "," "],
+       [" "," ","request_note:0:1.5#text:portal frame"," ","request_note:0:1.5#text:prismblock"," ","request_note:0:1.5#text:proceduralrock"," ","request_note:0:1.5#text:profile chair"," "," "],
+       [" "," ","portal_frame:0:-0.5"," ","prismblock:0:-0.5"," ","proceduralrock:0:-0.5"," ","profile_chair:0:-0.5"," "," "],
+       [" "," ","request_note:0:1.5#text:pythagorean proof"," ","request_note:0:1.5#text:pythagorean triangle"," ","request_note:0:1.5#text:quantum dice"," ","request_note:0:1.5#text:quest controller"," "," "],
+diff --git a/commons/primitives/point/point.gd b/commons/primitives/point/point.gd
+index f6ec00bab..cd489691f 100644
+--- a/commons/primitives/point/point.gd
++++ b/commons/primitives/point/point.gd
+@@ -1,52 +1,163 @@
+-﻿# PointScene.gd - Pickable point with position display
+-# Label follows the point and appears underneath it in the scene tree
++# @identity
++# essence: a 0-dimensional position primitive — a point in Euclidean space, the smallest geometry teaches abstraction
++# desire: to be the player's first encounter with "everything reduces to a position" — the curriculum's atomic unit
++# critical_parameter: global_position; entrance_flag — whether the gravity-of-reduction welcome plays for this placement
++# triggers: _ready() builds the static point; apply_grid_config() reads the per-cell entrance flag and conditionally spawns the entrance fragments; _process() runs the animation if active
++# emerges: a position with a name — the player learns that a point IS its coordinate (no shape, no size, only place)
++# needs: GrabSphere child for pickability [has]; SphereMesh visual proxy for VR readability [has]; Label3D for live coords [has]
++# relationships: Fibonacci-on-sphere placement mirrors algorithms/computationalbiology/attractorsphere/attractorsphere.gd::_fibonacci_on_unit_sphere; the gravity-toward-center metaphor is the curriculum-honest seq-1 echo of algorithms/forces/example_2_1_forces_vr.gd's central-body attraction (which uses real F=ma, locked behind the forces sequence)
++# truth: a point is not a small object — it is a position made visible. Seven fragments converge slowly to the center over eight seconds — gravity made into a duration the player can feel — but only when the map asks for it. Most points are silent.
++
++# PointScene.gd — Pickable point with position display.
++#
++# Optional gravity-of-reduction entrance animation. The map author opts in
++# per cell via the existing #config syntax:
++#
++#   "point:0:-0.5"                   → silent point (default; backwards compat)
++#   "point:0:-0.5#entrance:gravity"  → entrance plays — seven fragments
++#                                       converge over 8s with cubic ease-in
++#
++# Curriculum honesty (seq 1, primitives): zero randomness; deterministic
++# Fibonacci-on-sphere placement plus easing math. The flag mechanism
++# defers the play decision to map-data — most points stay quiet, only
++# specifically marked ones perform the welcome.
++
+ extends Node3D
+ 
++# ── Entrance animation tunables ────────────────────────────────────────
++const FRAGMENT_COUNT: int = 7
++const FRAGMENT_RADIUS: float = 0.07
++const FRAGMENT_SPAWN_RADIUS: float = 1.0
++const ANIMATION_DURATION: float = 8.0
++const PHI: float = 1.61803398875
++const FRAGMENT_COLOR: Color = Color(1.0, 0.9, 0.4)
++
++# Set per-cell from map_data via apply_grid_config(). Default off.
++@export var entrance_flag: String = ""
++
+ var position_label: Label3D
+ var grab_sphere: Node3D
+ var point_sphere: MeshInstance3D
+ 
++# Entrance animation state
++var _fragments: Array = []
++var _entrance_timer: float = 0.0
++var _entrance_active: bool = false
++
++
+ func _ready():
+ 	setup_point_scene()
++	# Defer the entrance check by one frame so apply_grid_config (which the
++	# grid system calls via call_deferred) lands BEFORE we inspect the flag.
++	call_deferred("_maybe_play_entrance")
++
+ 
+ func setup_point_scene():
+-	# Get references to the pickable sphere from scene
+ 	grab_sphere = get_node("GrabSphere")
+ 	point_sphere = grab_sphere.get_node("MeshInstance3D")
+-
+-	# Create main position label
+ 	position_label = Label3D.new()
+ 	position_label.name = "PositionLabel"
+-	position_label.position = Vector3(0, 0.1, 0)  # Over the sphere
++	position_label.position = Vector3(0, 0.1, 0)
+ 	position_label.font_size = 14
+-	position_label.modulate = Color.YELLOW  # Yellow for better visibility
++	position_label.modulate = Color.YELLOW
+ 	position_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+ 	position_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+ 	position_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+ 	position_label.text = get_position_text()
+-
+-	# Add outline for better readability
+ 	position_label.outline_size = 2
+ 	position_label.outline_modulate = Color.BLACK
+-
+-	# Add label as child of the grab sphere so it follows the point
+ 	grab_sphere.add_child(position_label)
+ 
++
++# Map-data → artifact wiring point. The grid system calls this per cell
++# with the parsed config_data (see GridInteractablesComponent._parse_config_token).
++# We accept any flag here; future entrances ("bloom", "pulse", etc.) plug
++# into the same dispatch.
++func apply_grid_config(config: Dictionary) -> void:
++	if config.has("entrance"):
++		entrance_flag = String(config["entrance"])
++
++
++func _maybe_play_entrance() -> void:
++	if entrance_flag == "gravity":
++		_spawn_entrance_fragments()
++
++
++# ── Gravity-of-reduction entrance animation ────────────────────────────
++func _spawn_entrance_fragments() -> void:
++	for i in FRAGMENT_COUNT:
++		var sphere := MeshInstance3D.new()
++		sphere.name = "EntranceFragment_%d" % i
++		var mesh := SphereMesh.new()
++		mesh.radius = FRAGMENT_RADIUS
++		mesh.height = FRAGMENT_RADIUS * 2.0
++		mesh.radial_segments = 12
++		mesh.rings = 8
++		sphere.mesh = mesh
++
++		# Fibonacci-on-sphere distribution (same math as
++		# algorithms/computationalbiology/attractorsphere/attractorsphere.gd
++		# ::_fibonacci_on_unit_sphere — deterministic, curriculum-honest at seq 1).
++		var theta: float = float(i) * TAU / PHI
++		var phi: float = acos(1.0 - 2.0 * (float(i) + 0.5) / float(FRAGMENT_COUNT))
++		var dir := Vector3(
++			sin(phi) * cos(theta),
++			cos(phi),
++			sin(phi) * sin(theta)
++		)
++		sphere.position = dir * FRAGMENT_SPAWN_RADIUS
++
++		var mat := StandardMaterial3D.new()
++		mat.albedo_color = FRAGMENT_COLOR
++		mat.emission_enabled = true
++		mat.emission = FRAGMENT_COLOR
++		mat.emission_energy_multiplier = 2.0
++		sphere.material_override = mat
++
++		add_child(sphere)
++		_fragments.append({"node": sphere, "start": sphere.position})
++
++	_entrance_timer = 0.0
++	_entrance_active = true
++
++
++func _step_entrance_animation(delta: float) -> void:
++	if not _entrance_active:
++		return
++	_entrance_timer += delta
++	var t: float = clampf(_entrance_timer / ANIMATION_DURATION, 0.0, 1.0)
++	# Cubic ease-in: ~5s drift, ~3s rapid collapse — gravity-like acceleration.
++	var ease_t: float = t * t * t
++
++	for f in _fragments:
++		var node: MeshInstance3D = f.node
++		if not is_instance_valid(node):
++			continue
++		node.position = (f.start as Vector3).lerp(Vector3.ZERO, ease_t)
++		var s: float = 1.0 - ease_t
++		node.scale = Vector3.ONE * maxf(s, 0.001)
++
++	if t >= 1.0:
++		_entrance_active = false
++		for f in _fragments:
++			if is_instance_valid(f.node):
++				f.node.queue_free()
++		_fragments.clear()
++
++
+ func get_position_text() -> String:
+-	# Use the grab sphere's global position since the label is now a child of it
+ 	var pos = global_position
+ 	if grab_sphere:
+ 		pos = grab_sphere.global_position
+-
+-	# Format numbers to always show exactly one decimal place
+ 	return "local position: (%.1f, %.1f, %.1f)" % [pos.x, pos.y, pos.z]
+ 
+-func _process(_delta):
+-	# Update position text continuously
++
++func _process(delta):
+ 	if position_label:
+ 		position_label.text = get_position_text()
++	_step_entrance_animation(delta)
++
+ 
+-# Public method to set position and update display
+ func set_point_position(new_position: Vector3):
+ 	global_position = new_position
+ 	if grab_sphere:
+@@ -54,12 +165,10 @@ func set_point_position(new_position: Vector3):
+ 	if position_label:
+ 		position_label.text = get_position_text()
+ 
+-# Public method to change color (delegates to point_color if available)
++
+ func set_point_color(color: Color):
+-	# Find or create point_color node
+ 	var point_color = get_node_or_null("PointColor")
+ 	if not point_color:
+-		# Legacy fallback if point_color module not added
+ 		if point_sphere:
+ 			var material: StandardMaterial3D
+ 			if point_sphere.material_override and point_sphere.material_override is StandardMaterial3D:
+@@ -74,27 +183,27 @@ func set_point_color(color: Color):
+ 	else:
+ 		point_color.set_color(color)
+ 
+-# Public method to get the pickable sphere (for external scripts)
++
+ func get_pickable_sphere() -> Node3D:
+ 	return grab_sphere
+ 
+-# Public method to check if sphere is being grabbed
++
+ func is_grabbed() -> bool:
+ 	if grab_sphere and grab_sphere.has_method("is_picked_up"):
+ 		return grab_sphere.is_picked_up()
+ 	return false
+ 
+-# Public method to toggle label visibility
++
+ func set_label_visible(visible: bool):
+ 	if position_label:
+ 		position_label.visible = visible
+ 
+-# Public method to adjust label offset from the point
++
+ func set_label_offset(offset: Vector3):
+ 	if position_label:
+ 		position_label.position = offset
+ 
+-# Public method to set label color
++
+ func set_label_color(color: Color):
+ 	if position_label:
+ 		position_label.modulate = color
